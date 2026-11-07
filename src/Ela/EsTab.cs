@@ -35,6 +35,7 @@ namespace ELA
         EsPath sel;
         double clickLat = double.NaN, clickLon = double.NaN;
         bool dirty = true;
+        int short144, held144;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
         class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf; public int N; public List<string> Calls = new List<string>(); }
 
@@ -184,6 +185,14 @@ namespace ELA
                 EsPath p = EsModel.Build(s, H);
                 if (p != null && p.Hops > 0) paths.Add(p);
             }
+            // regola dell'autore per i 144 MHz (EsModel.Apply144Rule): conferma con un secondo spot o con un salto corto in 50 MHz
+            List<EsPath> six = new List<EsPath>();
+            foreach (Spot s in SpotStore.Recent(minutes + EsModel.Near50Min, x => x.HasBoth && x.Band == "6m" && x.EsCandidate))
+            {
+                EsPath p = EsModel.Build(s, H);
+                if (p != null && p.Hops == 1) six.Add(p);
+            }
+            paths = EsModel.Apply144Rule(paths, six, out short144, out held144);
             BuildClouds();
             FillTables();
             Draw();
@@ -266,6 +275,7 @@ namespace ELA
             int multi = 0; foreach (EsPath p in paths) if (p.Hops >= 2) multi++;
             Cloud best = clouds.Count > 0 && !double.IsNaN(clouds[0].Muf) ? clouds[0] : null;
             lblSummary.Text = Lang.F("{0} spot Es ({1} multi-salto), {2} quadrati con nubi stimate.", paths.Count, multi, clouds.Count)
+                + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }
 
@@ -394,6 +404,7 @@ namespace ELA
             sb.AppendLine();
             sb.AppendLine(Lang.T("Tabella IK3XTV: singolo salto 500-650 / 1500-2000 / 2200-2400 km (minima / ottimale / massima); doppio 2800-3000 / 3200-4000 / 4400-5000 km; triplo ottimale 4800-6400, massima 6900 km."));
             sb.AppendLine(Lang.T("Multi-salto: l'autore (IC8TEM) ha esperienza di primo salto corto, entro i 1200 km dal proprio QTH."));
+            sb.AppendLine(Lang.T("Regola dell'autore (IC8TEM) per i 144 MHz: distanza minima dell'E-sporadico sopra i 900 km; uno spot da solo non si disegna; si disegna se entro 5 minuti arriva un secondo spot con la nube nello stesso posto (punti di riflessione entro 300 km) o se nei dintorni c'è uno spot in 50 MHz di salto corto (entro 1200 km, nei 15 minuti)."));
             sb.AppendLine(Lang.T("L'E-sporadico non si applica ai 432 MHz: non esistono collegamenti Es documentati in 70 cm (record ARRL: Es solo su 50 e 144 MHz; MUF dell'Es fino a circa 150-200 MHz). Gli spot in 432 MHz non vengono analizzati qui."));
             txtDet.Text = sb.ToString();
         }
@@ -409,7 +420,9 @@ namespace ELA
                 new[] { "144174.0", "EA5DF", "IK8XYZ", "IM98", "JN70", "ES" },
                 new[] { "50313.0", "W1JJ", "G4ABC", "FN42", "IO91", "ES" },
                 new[] { "70154.0", "SV1DH", "DL1ABC", "KM18", "JO50", "ES" },
-                new[] { "50313.0", "5B4AHJ", "F5XYZ", "KM64", "JN18", "ES" }
+                new[] { "50313.0", "5B4AHJ", "F5XYZ", "KM64", "JN18", "ES" },
+                new[] { "144174.0", "EA5XX", "IW0ABC", "IM99", "JN61", "ES" },
+                new[] { "50313.0", "EA6SX", "IK7ABC", "JM19", "JN80", "ES" }
             };
             foreach (string[] d in demo)
             {

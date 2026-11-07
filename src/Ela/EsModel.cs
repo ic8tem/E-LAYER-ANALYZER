@@ -88,6 +88,67 @@ namespace ELA
             return p;
         }
 
+        // ---- Regola dell'autore (IC8TEM) per i 144 MHz ----
+        // 1) in 144 MHz la distanza minima dell'E-sporadico e' sopra i 900 km: gli spot piu' corti non sono Es;
+        // 2) uno spot in 144 MHz da solo non si disegna;
+        // 3) si disegna se entro 5 minuti arriva un secondo spot in 144 MHz (altra coppia di stazioni) con la nube
+        //    nello stesso posto, oppure 4) se nei dintorni c'e' almeno uno spot in 50 MHz di salto corto.
+        // Scelte del programma per "stesso posto", "dintorni" e "salto corto": punti di riflessione entro 300 km,
+        // spot a 50 MHz in singolo salto entro ShortHopKm (1200 km) e entro 15 minuti dallo spot in 144 MHz.
+        public const double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15;
+
+        static IEnumerable<EsHop> RefPoints(EsPath p)
+        {
+            foreach (EsHop h in p.Points) yield return h;
+            if (p.ShortA != null) { yield return p.ShortA; yield return p.ShortB; }
+        }
+
+        // distanza minima tra i punti di riflessione di due tratte (km)
+        public static double RefDistKm(EsPath a, EsPath b)
+        {
+            double best = double.MaxValue;
+            foreach (EsHop x in RefPoints(a))
+                foreach (EsHop y in RefPoints(b))
+                    best = Math.Min(best, Geo.DistanceKm(x.Lat, x.Lon, y.Lat, y.Lon));
+            return best;
+        }
+
+        static bool SamePair(Spot a, Spot b)
+        {
+            return (a.DxCall == b.DxCall && a.Spotter == b.Spotter) || (a.DxCall == b.Spotter && a.Spotter == b.DxCall);
+        }
+
+        // Applica la regola dei 144 MHz. paths: tratte da disegnare (tutte le bande); six: tratte a 50 MHz per la conferma.
+        // Restituisce le tratte da disegnare; short = spot sotto i 900 km scartati, held = spot in attesa di conferma.
+        public static List<EsPath> Apply144Rule(List<EsPath> paths, List<EsPath> six, out int shortCount, out int held)
+        {
+            shortCount = 0; held = 0;
+            List<EsPath> two = new List<EsPath>();
+            foreach (EsPath p in paths) if (p.Spot.Band == "2m" && p.DistKm >= MinKm144) two.Add(p);
+            List<EsPath> res = new List<EsPath>();
+            foreach (EsPath p in paths)
+            {
+                if (p.Spot.Band != "2m") { res.Add(p); continue; }
+                if (p.DistKm < MinKm144) { shortCount++; continue; }
+                bool ok = false;
+                foreach (EsPath q in two)
+                {
+                    if (q == p || SamePair(p.Spot, q.Spot)) continue;
+                    if (Math.Abs((q.Spot.Utc - p.Spot.Utc).TotalMinutes) > Confirm144Min) continue;
+                    if (RefDistKm(p, q) <= CloudMatchKm) { ok = true; break; }
+                }
+                if (!ok && six != null)
+                    foreach (EsPath r in six)
+                    {
+                        if (r.Hops != 1 || r.DistKm > Math.Max(ShortHopKm, 1200)) continue;
+                        if (Math.Abs((r.Spot.Utc - p.Spot.Utc).TotalMinutes) > Near50Min) continue;
+                        if (RefDistKm(p, r) <= CloudMatchKm) { ok = true; break; }
+                    }
+                if (ok) res.Add(p); else held++;
+            }
+            return res;
+        }
+
         // lunghezza del primo salto corto (km); 0 = ipotesi spenta
         public static double ShortHopKm = 1200;
 
