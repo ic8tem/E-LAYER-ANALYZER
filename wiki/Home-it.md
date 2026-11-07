@@ -18,7 +18,7 @@
 | [AURORA](Aurora-it) | Ovale aurorale, Kp e vento solare NOAA, scatter trail e iso-riflessione aurorale, puntamento consigliato |
 | [DATA COLLECTION](Data-Collection-it) | Tre sessioni telnet (DX cluster, RBN, DM4X con PSKReporter), spot raccolti, archivio CALL3 |
 | [LOG ADIF](Log-ADIF-it) | Quadrati lavorati e confermati banda per banda dai 28 MHz in su, dal tuo ADIF o da LoTW |
-| [FONTI e DOCUMENTO TECNICO](Fonti-e-Documento-Tecnico-it) | Tutte le fonti e tutte le formule, esportabili in Word |
+| [FONTI, SINTESI DELLE SCELTE DI CALCOLO, MANUALE D'USO, RELAZIONE TECNICA](Fonti-e-Documento-Tecnico-it) | Fonti, formule e scelte di calcolo, manuale d'uso approfondito, relazione tecnica: esportabili in Word |
 
 ## Per iniziare
 

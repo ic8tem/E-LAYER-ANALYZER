@@ -35,7 +35,7 @@
 - [LOG ADIF](Log-ADIF-it)
 - [Colorazioni e lingue](Colorazioni-e-Lingue-it)
 - [Cartella dei dati](Cartella-dei-Dati-it)
-- [Fonti e Documento tecnico](Fonti-e-Documento-Tecnico-it)
+- [Fonti e documenti](Fonti-e-Documento-Tecnico-it)
 - [Domande frequenti](FAQ-it)
 
 </details>

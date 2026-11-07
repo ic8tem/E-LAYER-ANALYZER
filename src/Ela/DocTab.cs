@@ -1,5 +1,5 @@
-// E-LAYER ANALYZER - linguette FONTI e DOCUMENTO TECNICO: foglio chiaro come in YA-MS (stesso formato di testo),
-// con esportazione in Word del documento tecnico.
+// E-LAYER ANALYZER - linguette FONTI, SINTESI DELLE SCELTE DI CALCOLO, MANUALE D'USO e RELAZIONE TECNICA: foglio chiaro
+// come in YA-MS (stesso formato di testo), con esportazione in Word.
 using System;
 using System.IO;
 using Avalonia;

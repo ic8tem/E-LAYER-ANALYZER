@@ -14,7 +14,8 @@ Nessun dato in AppData: tutto sta nella cartella `data` accanto al programma.
 | AURORA | ovale OVATION, Kp, vento solare (NOAA SWPC), Scatter trail e iso-riflessione aurorale, spot <AU>/<AUR> con il calcolo |
 | DATA COLLECTION | 3 sessioni telnet (cluster a scelta, RBN, cluster DM4X con PSKReporter), filtro locale sotto 27990 kHz, spot raccolti, archivio CALL3 |
 | LOG ADIF | quadrati lavorati e confermati, banda per banda dai 28 MHz in su |
-| FONTI / DOCUMENTO TECNICO | fonti e formule del programma |
+| FONTI | fonti citate dal programma |
+| SINTESI DELLE SCELTE DI CALCOLO / MANUALE D'USO / RELAZIONE TECNICA | formule e scelte di calcolo, manuale d'uso approfondito, relazione tecnica sulle scelte (esportabili in Word) |
 
 Fonti principali: G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico" (2011);
 https://qsl.net/ic8fax/page4.html; tabella dei salti Es di F. Egano IK3XTV.

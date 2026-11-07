@@ -1,5 +1,6 @@
 // E-LAYER ANALYZER - finestra principale: stazione, lingua, linguette generali
-// SPORADIC-E | F.A.I. | METEOR SCATTER (YA-MS) | AURORA | DATA COLLECTION | FONTI | DOCUMENTO TECNICO
+// SPORADIC-E | BENCHMARK Es | BENCHMARK 50 MHz | F.A.I. | METEOR SCATTER (YA-MS) | AURORA | DATA COLLECTION | LOG ADIF | FONTI |
+// SINTESI DELLE SCELTE DI CALCOLO | MANUALE D'USO | RELAZIONE TECNICA
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -20,7 +21,7 @@ namespace ELA
     public class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.4.2";
+        public const string Version = "0.4.3";
 
         readonly PillTabs tabs = new PillTabs(true);
         readonly TextBox txtCall, txtLoc;
@@ -104,8 +105,12 @@ namespace ELA
             tabs.Add(Lang.T("DATA COLLECTION"), dc.Root);
             tabs.Add(Lang.T("LOG ADIF"), log.Root);
             tabs.Add(Lang.T("FONTI"), DocTab.Build(LocFile(dataDir, "ela_fonti", ".txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
-            tabs.Add(Lang.T("DOCUMENTO TECNICO"), DocTab.Build(LocFile(dataDir, "ela_documento_tecnico", ".txt"), LocFile(dataDir, "ela_documento_tecnico", ".docx"),
-                "E-LAYER ANALYZER - documento tecnico.docx", Lang.T("Come il programma calcola: formule e fonti a ogni passo")));
+            tabs.Add(Lang.T("SINTESI DELLE SCELTE DI CALCOLO"), DocTab.Build(LocFile(dataDir, "ela_documento_tecnico", ".txt"), LocFile(dataDir, "ela_documento_tecnico", ".docx"),
+                "E-LAYER ANALYZER - sintesi delle scelte di calcolo.docx", Lang.T("Come il programma calcola: formule e fonti a ogni passo")));
+            tabs.Add(Lang.T("MANUALE D'USO"), DocTab.Build(LocFile(dataDir, "ela_manuale", ".txt"), LocFile(dataDir, "ela_manuale", ".docx"),
+                "E-LAYER ANALYZER - manuale d'uso.docx", Lang.T("Come si usa il programma, linguetta per linguetta")));
+            tabs.Add(Lang.T("RELAZIONE TECNICA"), DocTab.Build(LocFile(dataDir, "ela_relazione", ".txt"), LocFile(dataDir, "ela_relazione", ".docx"),
+                "E-LAYER ANALYZER - relazione tecnica.docx", Lang.T("Le scelte che hanno portato alla realizzazione del programma")));
             tabs.SelectionChanged += i =>
             {
                 if (i == 0) es.Refresh();
@@ -311,7 +316,7 @@ namespace ELA
                 string b50demo2 = Path.Combine(LogStore.Dir, "benchmark50_prova2.adi");
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
-                string[] names = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico" };
+                string[] names = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     tabs.Select(i);

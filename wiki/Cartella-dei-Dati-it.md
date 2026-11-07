@@ -15,4 +15,4 @@ Tutto sta nella cartella `data` accanto al programma (`C:\E-LAYER-ANALYZER\data`
 | `mappa/` | Coste e confini Natural Earth |
 | `igrf14.csv` | Coefficienti del modello magnetico IGRF-14 |
 | `lingue/` | Traduzioni |
-| `ela_documento_tecnico*.txt/.docx`, `ela_fonti*.txt` | Documento tecnico e fonti in ogni lingua |
+| `ela_documento_tecnico*`, `ela_manuale*`, `ela_relazione*` (.txt/.docx), `ela_fonti*.txt` | Sintesi delle scelte di calcolo, manuale d'uso, relazione tecnica e fonti in ogni lingua |

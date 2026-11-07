@@ -1,0 +1,87 @@
+TITLE|Manuale d'uso di E-LAYER ANALYZER
+SUB|Manuale d'uso approfondito - a cura di Costantino IC8TEM - versione 0.4.3, novembre 2026. I numeri tra parentesi quadre rimandano alla linguetta FONTI; le formule e le scelte di calcolo sono nella linguetta SINTESI DELLE SCELTE DI CALCOLO.
+H1|1. Prima di cominciare
+H2|1.1 Che cosa fa il programma
+P|E-LAYER ANALYZER raccoglie in un solo programma gli strumenti per studiare i modi di propagazione VHF che passano per lo strato E della ionosfera: l'E-sporadico, anche multi-salto e extracontinentale, il F.A.I. (irregolarità allineate al campo magnetico), il meteor scatter, con il programma YA-MS integrato, e l'aurora radio. Lavora sugli spot dei DX cluster in tempo reale e sui log ADIF, e mostra ogni risultato su una mappa che occupa i due terzi della finestra, con i dati e i calcoli nel terzo destro.
+H2|1.2 Installazione e cartella dei dati
+P|Il programma funziona su Windows (64 e 32 bit), Linux, Raspberry Pi (ARM64) e Mac (Apple Silicon e Intel). Si scarica dalla pagina Releases del repository GitHub: per Windows c'è un installatore e una versione portatile in un file .zip; per Linux e Raspberry Pi un archivio .tar.gz con lo script di installazione; per Mac un'immagine .dmg.
+LI|Tutti i dati del programma stanno nella cartella data accanto al programma: impostazioni (config.ini), archivio CALL3, coefficienti del campo magnetico, log, dati NOAA scaricati, spot raccolti. Nulla viene scritto in AppData o in altre cartelle di sistema.
+LI|Per spostare il programma su un altro computer basta copiare la sua cartella; per tornare alle impostazioni iniziali basta cancellare data/config.ini.
+LI|La password di LoTW non viene mai salvata; si può ricordare solo il nome utente.
+H2|1.3 La barra in alto
+P|In alto a sinistra si scrivono il proprio nominativo, il locator (4, 6 o 8 caratteri) e la quota dell'antenna in metri; il pulsante Applica li conferma e tutte le linguette si aggiornano. In alto a destra si trovano l'ora UTC, la scelta della colorazione (tutti gli schemi di YAEC: Chiaro, Notte, Nero, otto pastelli e Scia meteorica) e la scelta della lingua (28 lingue). Cambiando colorazione o lingua la finestra si ricostruisce subito, senza perdere i dati raccolti.
+H2|1.4 La barra di stato
+P|In basso la barra di stato indica quanti nominativi contiene l'archivio CALL3, quanti spot sono in memoria e il modello magnetico in uso (IGRF-14 con la sua epoca). Gli spot in memoria si cancellano a ogni chiusura del programma: ogni sessione riparte senza spot vecchi.
+H2|1.5 Le mappe
+P|Tutte le mappe si usano allo stesso modo: la rotella del mouse ingrandisce o rimpicciolisce, trascinando con il tasto sinistro si sposta la vista, il clic sinistro sceglie un punto, uno spot o una tratta secondo la linguetta. In alto a destra compaiono le coordinate e il locator a 6 caratteri sotto il cursore; nelle mappe azimutali anche la distanza e l'azimut dal centro. Il reticolo dei campi e dei quadrati Maidenhead si infittisce con lo zoom.
+H1|2. Raccolta dei dati (DATA COLLECTION)
+H2|2.1 Le tre sessioni telnet
+P|La linguetta DATA COLLECTION apre fino a tre collegamenti telnet contemporanei: un DX cluster a scelta (di partenza ON0DXK con i filtri VHF), la Reverse Beacon Network (porta 7001 per FT8, 7000 per CW e RTTY) e il cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500).
+LI|Host e Porta: indirizzo del cluster. Login: nominativo per l'accesso (se vuoto si usa quello della barra in alto). Comandi: comandi da inviare dopo il login, separati da punto e virgola (per esempio i filtri di banda).
+LI|Connetti e Disconnetti aprono e chiudono la sessione; Riconnetti la riapre da sola dopo una caduta; Connetti all'avvio la apre all'avvio del programma.
+LI|La console mostra le righe ricevute; nella casella sotto si possono scrivere comandi da inviare al cluster (per esempio sh/dx 20) e confermarli con Invia o con il tasto Invio.
+H2|2.2 Il filtro locale
+P|La casella in alto, accesa di partenza, attiva il filtro locale: le righe "DX de" con frequenza sotto 27990,0 kHz o sopra 145 MHz vengono scartate, non compaiono nella console e non si memorizzano. È utile soprattutto con RBN e PSKReporter, che inviano moltissimi spot in HF. Spegnendo la casella passa tutto.
+H2|2.3 Come il programma legge gli spot
+P|Da ogni riga "DX de" il programma ricava spotter, frequenza, DX, commento, ora e, quando ci sono, i locator e il modo di propagazione scritti nel commento nella forma JN70CN<ES>JO62QM (il primo locator è dello spotter, il secondo del DX; sono accettate anche le forme con <>, > e parentesi).
+LI|I locator mancanti si cercano nell'archivio CALL3; i locator non precisi (meno di 6 caratteri) si sostituiscono con il locator a 6 caratteri di CALL3, quando c'è.
+LI|Gli spot con <MS>, <AU>, <AUR>, <TR>, <AS> o <ACS> nel testo non vengono usati per l'E-sporadico: servono al meteor scatter, all'aurora, al tropo o all'aircraft scatter.
+LI|Come in YA-MS, sono spot di meteor scatter quelli nelle finestre di frequenza tipiche del MS (50190-50300, 70100-70400, 144290-144399 kHz) senza scritte di altra propagazione, e quelli con i modi MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M o con <MS>.
+LI|Gli spot con <AU> o <AUR> vanno nella linguetta AURORA, quelli con FAI nella linguetta F.A.I.
+H2|2.4 Spot raccolti e archivio CALL3
+P|La pagina Spot raccolti elenca gli ultimi spot con il filtro per banda e per fonte; il pulsante Apri la cartella degli spot apre data/spot. La pagina CALL3 mostra l'archivio nominativo -> locator (formato JTDX/WSJT): si può cercare un nominativo, ricaricare l'archivio o importare un nuovo file CALL3.TXT, che sostituisce quello in uso (il vecchio resta come copia di sicurezza).
+H1|3. E-sporadico (SPORADIC-E)
+H2|3.1 La mappa
+P|Il menu Mappa sceglie tra tre viste. Azimutale - singolo salto: mappa centrata sulla propria stazione con raggio fisso di 2500 km e le zone della tabella IK3XTV [3] (500 km minima, 1500-2000 km ottimale, 2400 km massima). Azimutale - distanza massima (multi-salto): la stessa mappa con il cursore Distanza massima, da 300 a 20000 km, e i limiti del doppio (5000 km) e del triplo salto (6900 km), per seguire l'evoluzione del multi-salto. Rettangolare: la mappa del mondo con i pulsanti Europa e Mondo.
+P|Nelle viste azimutali gli anelli tratteggiati riportano i km dal centro; il passo degli anelli cambia con lo zoom e il bordo esterno indica la distanza massima mostrata.
+H2|3.2 I comandi
+LI|Bande: 10, 6, 4 e 2 m (i 432 MHz non si analizzano: l'E-sporadico non si applica [22]-[24]); finestra di tempo degli spot da 15 minuti a 12 ore.
+LI|Quota Es (di partenza 105 km) ed elevazione minima delle antenne.
+LI|Primi salti (salti uguali): mostra il primo salto di entrambe le stazioni; Primo salto corto entro…: mostra l'ipotesi dell'autore del primo salto corto (di partenza 1200 km) [4].
+LI|Nubi Es sui quadrati Maidenhead: colora i quadrati dei punti di riflessione con la foEs minima stimata.
+H2|3.3 Tabelle e dettagli
+P|La tabella Spot Es elenca gli spot validi con distanza, numero di salti e foEs minima; la tabella Nubi Es (quadrati) elenca i quadrati con le nubi stimate e la MUF che darebbero per la propria stazione (rosso 144 MHz, arancio 70 MHz, giallo 50 MHz). Con uno zoom impostato le tabelle mostrano solo ciò che si vede sulla mappa.
+LI|Clic su uno spot nella tabella o sulla mappa: la tratta si illumina con un alone giallo, la mappa la porta in vista se serve e il riquadro Dettagli riporta salti, punti di riflessione, foEs e azimut. Lo spot resta scelto anche quando arrivano spot nuovi.
+LI|Clic su un punto libero della mappa: il punto si tratta come possibile nube Es, con la foEs necessaria per 28, 50, 70 e 144 MHz.
+H2|3.4 Le regole dell'autore
+LI|144 MHz: l'E-sporadico parte da oltre 900 km; uno spot da solo non si disegna; si disegna se entro 5 minuti arriva un secondo spot sulla stessa nube o se nei dintorni c'è uno spot in 50 MHz di salto corto. La riga verde in alto dice quanti spot sono in attesa di conferma.
+LI|Transequatoriale: verso l'Africa continentale (con il Madagascar) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -20° e +20°, il collegamento è transequatoriale e non E-sporadico, salvo che lo spot dichiari <ES>. Canarie, Madeira, Capo Verde e penisola arabica restano fuori dalla regola.
+H1|4. BENCHMARK Es
+H2|4.1 Caricare un log
+P|La linguetta BENCHMARK Es è un banco di prova dell'E-sporadico su un log ADIF intero, anche di un'altra stazione. Carica ADIF apre il file (il programma lo ricorda e lo ricarica all'avvio), Scarica ADIF lo toglie. Stazione al centro propone il nominativo e il locator più frequenti del log; si possono cambiare e confermare con Applica.
+LI|La posizione di trasmissione è il MY_GRIDSQUARE di ogni QSO; le posizioni di ricezione sono i GRIDSQUARE (i locator mancanti o a 4 caratteri si prendono da CALL3).
+LI|Si possono escludere i QSO con un altro PROP_MODE e quelli sotto i 500 km (900 km in 144 MHz); i transequatoriali si escludono sempre, salvo PROP_MODE=ES.
+H2|4.2 Giornate, orari e calcoli
+P|La tabella QSO per giornata elenca le giornate con numero di QSO, bande, distanza massima e multi-salti; il clic su una giornata riempie la tabella Orari della giornata, con una riga per ogni ora UTC e la riga Tutta la giornata. La mappa azimutale, con il cursore della distanza massima, disegna lo skip per settori di 10° (arco arancio = QSO più vicino, settore verde = distanze raggiunte), le nubi sui quadrati e, sulla giornata intera, lo spostamento orario delle nubi (linea rossa).
+P|La pagina Calcoli proposti riporta lo skip per settori, la foEs stimata con la MUF attesa a 1000, 1500, 2000 e 2400 km, le nubi stimate, la verifica del multi-salto (salti uguali contro primo salto corto, confrontati con le nubi viste in singolo salto entro ±30 minuti) e lo spostamento delle nubi ora per ora.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Una o due stazioni
+P|La linguetta BENCHMARK 50 MHz è dedicata all'E-sporadico multi-salto in 50 MHz. Nella riga Stazione 1 si carica e si scarica il log della propria stazione; nella riga Stazione 2 il log di una seconda stazione, che si mostra o si nasconde con la casella Stazione 2. Le tratte della stazione 1 sono azzurre, quelle della stazione 2 viola.
+LI|Si mostrano i QSO in 50 MHz multi-salto, cioè oltre i 3100 km (regola dell'autore); il numero dei salti segue la tabella IK3XTV.
+LI|Giorno, dalle… alle… UTC: la giornata (all'apertura quella con più QSO multi-salto) e l'orario, a passi di 15 minuti.
+LI|foEs (facoltativa): colora le tratte con la foEs minima e la riporta in tabella. Quota Es e Primo salto corto entro 1200 km come nelle altre linguette.
+H2|5.2 La mappa di Mercatore
+P|La mappa è di Mercatore a centro libero. Avvicinando il mouse a una tratta, linea e icone si ingrandiscono e compare il quadrato WWL a 6 caratteri del corrispondente. Con il clic sinistro su quella tratta un popup chiede se mostrare tutti i QSO del file, di tutte le giornate, con la posizione terminale entro 150 km: Sì svuota la mappa e mostra quei QSO dentro il cerchio arancio, No lascia la mappa com'è. Il pulsante Torna a giorno e orario riporta alla scelta precedente.
+H1|6. F.A.I.
+H2|6.1 Le due viste
+P|La linguetta F.A.I. studia lo scatter da irregolarità allineate al campo magnetico (fonte principale [1], [2]). La vista Scatter trail (coppia A-B) calcola, per due stazioni, il luogo degli scatter point possibili, colorato secondo la deviazione dalla condizione di riflessione, propone lo scatter point più probabile e disegna in alto a destra il riquadro dei QTF ed elevazioni di entrambe le stazioni (rosso = A, verde = B). La vista Iso-riflessione (punto) disegna, per un punto di riflessione scelto, le linee di iso-riflessione come AuroReflex e SE-PROP di K9SE: fasce colorate negli schemi scuri, linee spesse negli schemi chiari.
+H2|6.2 I comandi
+LI|Stazione A e Stazione B: nominativo (cercato in CALL3) e/o locator; A vuota = la propria stazione. Il menu Verifiche… carica le coppie di prova (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); il menu Scatter noti… sceglie uno scatter point documentato (Ginevra, Bruxelles, Budapest, JN92, JN41/42).
+LI|Quota (di partenza 110 km), elevazione minima e Rifrazione (raggio terrestre 4/3), accesa di partenza.
+LI|Clic sinistro sulla mappa: punto di riflessione da verificare (passa alla vista Iso-riflessione); clic destro: posizione della stazione B.
+LI|Verifica il punto consigliato: calcola la scia, prende lo scatter point proposto e ne mostra le linee di iso-riflessione con il verdetto: SODDISFACENTE (entro 1°), ACCETTABILE (entro 2,5°), NON SODDISFACENTE (oltre).
+P|Se per il modello il calcolo non è possibile compare il messaggio Calcolo non possibile e non viene mostrato nessun altro risultato. In basso la tabella Spot F.A.I. elenca gli spot dichiarati FAI; il clic su uno spot ne carica la coppia di stazioni.
+H1|7. METEOR SCATTER
+P|La linguetta contiene il programma YA-MS completo, con le sue linguette (volta celeste, flusso radar, sciami in diretta, calcolo dell'efficienza, radar GRAVES, attuazione sperimentale delle previsioni, geometria e attenuazione, sciami, fonti, mappa delle fonti, raccolta dati, efficienza - spiegazione, mappa quadrati) e il suo manuale dei calcoli. Lingua e colorazione sono quelle scelte in alto. La Raccolta dati di YA-MS, dentro E-LAYER ANALYZER, non apre sessioni telnet proprie: riceve le righe dalle sessioni di DATA COLLECTION e ne filtra gli spot meteor scatter.
+H1|8. AURORA
+P|La linguetta AURORA usa le stesse viste del F.A.I. (quota di partenza 105 km) con i dati di meteorologia spaziale della NOAA [15]: ovale aurorale OVATION (sfumato sulla mappa), indice Kp degli ultimi tre giorni e vento solare, scaricati ogni 5 minuti in data/swpc o subito con Scarica NOAA adesso. Il programma consiglia il puntamento per entrambe le stazioni.
+LI|Gli spot con <AU> o <AUR> delle ultime 2 ore (al massimo 30) si disegnano sulla mappa con lo scatter point calcolato (cerchio arancio) se è accesa la casella Spot <AU>/<AUR> sulla mappa con il calcolo; nei risultati compaiono QTF ed elevazione delle due stazioni.
+H1|9. LOG ADIF
+P|La linguetta LOG ADIF mostra i quadrati lavorati e confermati, banda per banda dai 28 MHz in su, senza aggregare le bande. Apri file ADIF… aggiunge i file del log; Scarica da LoTW… scarica il report delle conferme (si può ricordare il nome utente, la password non viene mai salvata); Cancella memoria toglie file e report. I quadrati sono arancio se lavorati, colorati diversamente se confermati con QSL o via LoTW; il clic su un quadrato mostra i nominativi e il modo di propagazione.
+H1|10. Documenti
+P|La linguetta FONTI elenca le fonti citate dal programma, linguetta per linguetta. La linguetta SINTESI DELLE SCELTE DI CALCOLO riporta le formule e le scelte di calcolo con le fonti a ogni passo; questo MANUALE D'USO spiega come usare il programma; la RELAZIONE TECNICA espone le ragioni che hanno guidato la realizzazione del programma. I tre documenti si possono esportare in Word.
+H1|11. Consigli pratici
+LI|Prima di tutto scrivere nominativo e locator in alto e premere Applica: tutte le distanze, le MUF e le elevazioni partono da lì.
+LI|Con RBN e PSKReporter tenere acceso il filtro locale, per non riempire la memoria di spot HF.
+LI|Per un'analisi di una stagione passata usare i due BENCHMARK con il proprio log; per l'aurora e il F.A.I. verificare sempre il punto proposto con la vista Iso-riflessione.
+LI|I calcoli sono indicativi: uno spot o un QSO dice che la tratta era aperta, non dove stava esattamente la nube.

@@ -182,7 +182,7 @@ namespace ELA
             lblStats.Text = Lang.F("{0}: {1} QSO, {2} quadrati lavorati, {3} confermati ({4} via LoTW). File aperti: {5}; report LoTW: {6}.",
                 idx >= 0 ? LogBands.Labels[idx] : band, nQso, squares.Count, nConf, nLotw, LogStore.Files.Count, File.Exists(LogStore.LotwFile) ? Lang.T("sì") : Lang.T("no"))
                 + (LogStore.LastError.Length > 0 ? "\n" + LogStore.LastError : "")
-                + (band == "70cm" ? "\n" + Lang.T("Nota: l'E-sporadico non si applica ai 432 MHz (vedi Documento tecnico).") : "");
+                + (band == "70cm" ? "\n" + Lang.T("Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).") : "");
             Draw(); Detail();
         }
 

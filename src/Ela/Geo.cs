@@ -1,5 +1,5 @@
 // E-LAYER ANALYZER - geometria: locator Maidenhead, cerchio massimo, salti nello strato E, campo geomagnetico (dipolo)
-// Tutte le formule sono descritte nel Documento tecnico (data/ela_documento_tecnico.txt).
+// Tutte le formule sono descritte nella Sintesi delle scelte di calcolo (data/ela_documento_tecnico.txt).
 using System;
 using System.Globalization;
 
