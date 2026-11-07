@@ -51,7 +51,7 @@ namespace YAMS
         WriteableBitmap heat; PathModel heatFor; bool heatTop;
 
         // colori di sistema usati dal vecchio programma
-        static readonly Color Gainsboro = Color.FromRgb(220, 220, 220);
+        static Color Gainsboro { get { return Pal.Fore; } }   // solo la legenda (riquadro Pal.Panel)
         static readonly Color White = Color.FromRgb(255, 255, 255);
         static readonly Color Wheat = Color.FromRgb(245, 222, 179);
         static readonly Color Cyan = Color.FromRgb(0, 255, 255);

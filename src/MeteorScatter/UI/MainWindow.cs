@@ -386,7 +386,7 @@ namespace YAMS
             cmbBand.SelectionChanged += (s, e) => { if (model != null) { ApplyAntenna(); UpdateSky(); UpdateFluxTab(); UpdateGeometry(); } };
 
             // l'antenna e' sempre puntata verso il corrispondente (azimut della tratta)
-            Color wheat = Pal.Rgb(245, 222, 179);
+            Color wheat = Pal.Light ? Pal.OrangeText : Pal.Rgb(245, 222, 179);
             lblAntAz = L(Lang.T("Antenna az: -")); lblAntAz.Foreground = Pal.B(wheat);
             numBoom = N(0.5m, 30, Dm(cfg.GetD("boom_m", 4.6)), 2, 0.1m, 60);
             lblAnt = L(""); lblAnt.Foreground = Pal.B(wheat);
@@ -583,7 +583,7 @@ namespace YAMS
             DockTop(p2, glance);
             lblAB = new TextBlock
             {
-                Foreground = Brushes.White, FontSize = 13, TextWrapping = TextWrapping.Wrap,
+                Foreground = Pal.B(Pal.Fore), FontSize = 13, TextWrapping = TextWrapping.Wrap,
                 Text = Lang.T("Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. " +
                        "A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). " +
                        "Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. " +
@@ -626,7 +626,7 @@ namespace YAMS
             numSens.ValueChanged += (s, e) => UpdateGeometry();
             numQ.ValueChanged += (s, e) => UpdateGeometry();
             Grid sg = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*") };
-            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Rgb(225, 230, 240)), TextWrapping = TextWrapping.Wrap };
+            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
             ScrollViewer geoScroll = new ScrollViewer
             {
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
@@ -670,7 +670,7 @@ namespace YAMS
         {
             IBrush head = Pal.B(Pal.Rgb(255, 190, 90));
             IBrush lab = Pal.B(Pal.Rgb(130, 180, 235));
-            IBrush val = Pal.B(Pal.Rgb(235, 238, 245));
+            IBrush val = Pal.B(Pal.Fore);
             InlineCollection inl = new InlineCollection();
             string[] lines = text.Replace("\r\n", "\n").Split('\n');
             bool first = true;

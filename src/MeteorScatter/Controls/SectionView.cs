@@ -37,7 +37,7 @@ namespace YAMS
         double VLobe { get { return HpbwVDeg > 0 ? HpbwVDeg : HpbwDeg; } }
         public string Note = "";
 
-        static readonly Color Gainsboro = Color.FromRgb(220, 220, 220);
+        static Color Gainsboro { get { return Pal.ChartText; } }
 
         public SectionView()
         {
