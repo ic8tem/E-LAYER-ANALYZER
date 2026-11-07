@@ -1,0 +1,88 @@
+TITLE|Kaip skaičiuoja E-LAYER ANALYZER
+SUB|Techninis dokumentas - parengė Costantino IC8TEM - 0.3.0 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
+H1|1. Įvadas
+H2|1.1 Paskirtis
+P|E-LAYER ANALYZER analizuoja VHF sklidimo būdus, susijusius su E sluoksniu: sporadinį E (taip pat tarpžemyninį kelių šuolių), F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter (su programa YA-MS) ir radijo pašvaistę. Šiame dokumente aprašytas kiekvienas skaičiavimas ir jo kilmė.
+H2|1.2 Žymos
+TAG|FONTE|žingsnis remiasi cituojamu šaltiniu.
+TAG|RILIEVO|patikra, atlikta programa, arba palyginimas su realiu atveju.
+TAG|SCELTA|programos pasirinkimas, kurį reikia patvirtinti patirtimi eteryje.
+H1|2. Bendroji geometrija
+H2|2.1 Žemė, lokatorius, didysis apskritimas
+TAG|FONTE|Sferinė Žemė, kurios spindulys r = 6372,7955 km, kaip F.A.I. straipsnyje [1] ir YA-MS [5].
+TAG|SCELTA|Stotys dedamos lokatoriaus kvadrato (4, 6 arba 8 simbolių) centre. Atstumas, azimutas, tarpiniai taškai ir apskritimai skaičiuojami didžiojo apskritimo formulėmis:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevacija į E sluoksnio tašką
+TAG|FONTE|F.A.I. straipsnio [1] (2) formulė, kur x = d / r, H – taško aukštis, h – stoties aukštis. Programa naudoja lygiavertę dviejų argumentų formą, tikslią sferinei Žemei:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Kai H = 110 km, programa duoda 35,3° ties 150 km, kaip IW1AZJ (35°) IC8FAX puslapyje [2]; ties 800 km ji duoda 4,2°, palyginti su IC8CQF nurodytais 6° (atstumas puslapyje apytikslis: 6° atitinka maždaug 680 km).
+H2|2.3 Šuolis sluoksnyje ir sekanto dėsnis
+P|Spinduliui, išeinančiam elevacija e ir pasiekiančiam sluoksnį aukštyje H, kritimo kampas φ (nuo vertikalės) ir atspindžio taško atstumas žeme yra:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [radianais]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Programos nurodoma foEs yra minimali riba: spotas tik rodo, kad dažnis f praėjo. Daugiklis sec φ įvertina Žemės kreivumą.
+TAG|RILIEVO|IK3XTV [3] aprašyta patirtis rodo 12-15 MHz foEs 144 MHz juostai: grynasis sekanto dėsnis duoda didesnes vertes (apie 25-28 MHz 2000 km atstumu). Šį dydį reikia skaityti kaip santykinį debesų palyginimą, o ne kaip absoliučią vertę.
+H1|3. Sporadinis E
+H2|3.1 Šuolių skaičius
+TAG|FONTE|IK3XTV lentelė [3]: vienas šuolis 500-650 / 1500-2000 / 2200-2400 km (minimalus / optimalus / maksimalus); dvigubas šuolis 2800-3000 / 3200-4000 / 4400-5000 km; trigubas šuolis optimalus 4800-6400 km, maksimalus 6900 km.
+TAG|SCELTA|Šuolių skaičius n imamas iš lentelės: n = 1 iki 2400 km, n = 2 iki 5000 km, n = 3 iki 6900 km, toliau n = D / 2300 km, suapvalinta į didesnę pusę. Mažesniu nei 500 km atstumu spotas nelaikomas sporadiniu E. Tarp 2400 ir 2800 km programa žymi „pereinamąją zoną“.
+H2|3.2 Abiejų stočių pirmas šuolis
+TAG|SCELTA|Vienodų šuolių hipotezė: atspindžio taškai yra didžiajame apskritime ties trasos dalimis (2k − 1) / (2n). Spoterio pirmas šuolis yra taškas k = 1 (oranžinis), DX pirmas šuolis – taškas k = n (violetinis); esant vienam šuoliui jie sutampa vidurio taške (geltonas).
+TAG|FONTE|Trumpo pirmo šuolio hipotezė: autorius (IC8TEM) turi kelių šuolių ryšių su trumpu pirmu šuoliu iki 1200 km nuo savo QTH patirties [4]. Programa (tuščiaviduriais apskritimais) piešia atspindžio tašką kiekvienos stoties trumpo šuolio viduryje; trumpo šuolio ilgis pasirenkamas kortelėje (pradžioje 1200 km).
+H2|3.3 Es debesys Maidenhead kvadratuose
+TAG|SCELTA|Atspindžio taškai (vidurio taškas vienam šuoliui, pirmieji šuoliai keliems šuoliams) surenkami į 4 simbolių Maidenhead kvadratus (2° × 1°). Kiekvienam kvadratui išsaugoma didžiausia minimali foEs iš į jį patenkančių spotų; spalva kinta nuo mėlynos (< 5 MHz) iki raudonos (> 20 MHz).
+P|Savo stočiai programa skaičiuoja MUF per kiekvieną debesį, esantį atstumu d, kai šuolio ilgis 2d, tik jei debesis yra vieno šuolio nuotolyje:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Lentelė „Es debesys“: raudonai – debesys, kurie duotų MUF ≥ 144 MHz, oranžiškai – ≥ 70 MHz, geltonai – ≥ 50 MHz.
+H2|3.4 Sporadinis E netaikomas 432 MHz
+TAG|FONTE|Vidutinių platumų sporadinio E MUF siekia 150 MHz ir daugiau (Whitehead [23]); norint palenkti glaudžiuosius spindulius iki 200 MHz, reikia labai tankių debesų (IK3XTV [22]). ARRL rekordai [24] nurodo sporadinio E ryšius tik 50 ir 144 MHz, nė vieno 222 ir 432 MHz.
+TAG|SCELTA|Todėl kortelė SPORADIC-E analizuoja tik 28, 50, 70 ir 144 MHz: 432 MHz spotai niekada nelaikomi sporadiniu E (kai kurie bendro pobūdžio šaltiniai, taip pat sukurti dirbtinio intelekto, tai teigia be dokumentų).
+H1|4. F.A.I. ir pašvaistė: išilgai magnetinio lauko vykstanti sklaida
+H2|4.1 Magnetinis laukas
+TAG|FONTE|Laukas skaičiuojamas IGRF-14 modeliu [16] (sferinės harmonikos iki 13 laipsnio, 2025-2030 m. koeficientai, interpoliuoti datai). K9SE SE-PROP [9] taip pat naudojo sferinių harmonikų modelį (WMM).
+TAG|RILIEVO|Skaičiavimas sutampa su ppigrf 1 nT tikslumu. Su paprastu dipoliu patikra IC8FAX - G4LOH neranda jokio sklaidos taško; su IGRF-14 randa: pilnas modelis būtinas.
+TAG|RILIEVO|Pašvaistė IO70VJ - JO59BC (1331 km, aukštis 105 km, refrakcija 4/3): labiausiai tikėtinas sklaidos taškas JP01AK (61,4° Š 0,1° R, prie Šetlando salų), nuokrypis 0,97°, QTF 11° (el. 0,5°) iš IO70VJ ir 299° (el. 7,6°) iš JO59BC. Be refrakcijos: IP70RP, nuokrypis 1,86°, QTF 359° ir 288°.
+H2|4.2 Atspindžio sąlyga
+TAG|FONTE|Išilgai lauko išsidėsčiusio netolygumo išsklaidytas signalas sklinda kūgiu, kurio ašis nukreipta išilgai B; stotys, esančios ant papildomų kontūrų, gali užmegzti ryšį (a1 + a2 = 180° [1], K9SE/K4GFG kontūrai ±c [2] [9] [10]).
+P|Kiekvienai stočiai X skaičiuojamas c(X) – kampas (su ženklu) tarp matymo linijos X → SP ir plokštumos, statmenos B sklaidos taške SP. Nuokrypis nuo atspindžio sąlygos ryšiui A-B yra:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Aidui į tą pačią stotį (atgalinė sklaida) sąlyga tampa: spindulys statmenas B, tolerancija ±2-3° (Lange-Hesse [12]); intensyvumas krenta maždaug 3-5 dB kiekvienam nuokrypio laipsniui (Jackel ir kt. [13]).
+H2|4.3 Vaizdas „Scatter trail“ (pora A-B)
+TAG|SCELTA|0,2° tinklelyje aukštyje H ieškoma taškų, kuriuos abi stotys mato ne mažesne nei minimali elevacija ir kai dev ≤ 2,5°. Spalvų klasės: 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (Aurora QTF stiliumi [11]). Langelyje viršuje dešinėje rodomi A (raudona) ir B (žalia) QTF ir elevacija į kiekvieną Scatter trail tašką.
+TAG|SCELTA|Labiausiai tikėtinas sklaidos taškas: nuokrypis ≤ 1° ir mažiausia atstumų kvadratų suma (mažiausias slopinimas); pašvaistės atveju teikiama pirmenybė taškams ovalo viduje.
+TAG|RILIEVO|Autoriaus prašytos patikros (IGRF-14, H = 110 km, refrakcija 4/3, programos rezultatai): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail nuo Biskajos įlankos iki Adrijos jūros išilgai 44-osios lygiagretės, labiausiai tikėtinas sklaidos taškas JN44GH (44,3° Š 8,6° R, virš Genujos), nuokrypis 0,97°, QTF 314° (el. 7,8°) iš Kaprio ir 77° (el. 9°) iš F6DRO; Scatter trail eina 143 km nuo Ženevos. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail virš pietvakarių Vokietijos ir Belgijos, labiausiai tikėtinas sklaidos taškas JN49FR (49,7° Š 8,5° R), nuokrypis 0,88°, QTF 338° (el. 1,9°) iš Kaprio ir 87° (el. 3°) iš G4LOH; Scatter trail eina 28 km nuo žinomo Briuselio sklaidos taško. Be refrakcijos Scatter trail sutrumpėja (G4LOH: elevacijos 0,5° ir 2,1°). IC8FAX - FA1MXE (JN05GQ, pirmasis F.A.I. QSO 1990 m. per Ženevą ties 330°): Scatter trail eina netoli Ženevos.
+TAG|RILIEVO|DL5MCG atvejis [6]: švyturys DB0FAI (JN58IC) - Drezdenas per Šefildą, nuokrypis 0,3° ties 110 km.
+TAG|SCELTA|Refrakcija: F.A.I. ir AURORA vaizdų elevacijoms ir horizontams pagal nutylėjimą naudojamas ekvivalentinis Žemės spindulys k · r, kai k = 4/3 (standartinė atmosfera); jį galima išjungti žymimuoju langeliu „Refrakcija“. Atstumai žeme ir atspindžio sąlyga vis tiek skaičiuojami pagal tikrąją geometriją.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Skaičiuoti negalima: jei pagal modelį joks taškas netenkina sąlygos 2,5° ribose (vaizdas Scatter trail) arba atspindžio taškas yra žemiau stoties horizonto (vaizdas Izoatspindys), programa parodo iškylantįjį langą „Skaičiuoti negalima“ ir jokių kitų rezultatų nerodo.
+H2|4.4 Vaizdas „Izoatspindys“ (isoflection loci): atspindžio taško patikra
+TAG|FONTE|Tai tipinė F.A.I. ir pašvaistės geometrinė konstrukcija, skirta patikrinti, ar pasirinktas atspindžio taškas teisingas (SE-PROP izoatspindžio linijos [9], AuroReflex [11], K9SE/K4GFG papildomi kontūrai [2] [10]).
+P|Atspindžio taškui SP ir kiekvienam žemės taškui G, esančiam SP horizonto ribose, programa skaičiuoja kontūrų sumą; linija S = 0 yra stočių, priimančių A per SP, geometrinė vieta:
+EQ|S(G) = c(A) + c(G)        brėžiami lygiai: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Tamsaus fono schemose klasės yra spalvotos juostos (raudona 0°, oranžinė 1°, geltona 2°, žalia 4°, žydra 8°, mėlyna 16°); šviesiose schemose – storos linijos (izolinijos, gautos žygiuojančių kvadratų metodu), storesnės lygiams, artimesniems 0°.
+TAG|SCELTA|Programa siūlo labiausiai tikėtiną sklaidos tašką (mygtukas „Patikrinti rekomenduojamą tašką“), tačiau naudotojas gali pasirinkti bet kurį kitą tašką kairiuoju spustelėjimu žemėlapyje; dešinysis spustelėjimas perkelia stotį B. Poros A-B įvertinimas: tenkina iki 1°, priimtina iki 2,5° (Lange-Hesse tolerancija [12]), daugiau – netenkina. Jei taškas yra žemiau bent vienos stoties horizonto, parodomas iškylantysis langas „Skaičiuoti negalima“.
+TAG|SCELTA|Viršuje: A ir B azimutas ir elevacija į tašką; žalias apskritimas = stočių horizontas sluoksnio aukštyje, raudonas apskritimas = zona, iš kurios taškas matomas.
+H2|4.5 Pašvaistė
+TAG|FONTE|OVATION Prime pašvaistės ovalas, Kp ir saulės vėjas iš NOAA SWPC [15], atnaujinami kas 5 minutes ir saugomi aplanke data/swpc. 1° tinklelis išlyginamas bitiesine interpoliacija 0,5° langeliais.
+TAG|SCELTA|Rekomenduojamas nukreipimas abiem stotims: išilgai kiekvienos stoties statmenumo linijos (aidas statmenas B, tolerancija 1,5°, aukštis 105 km) pasirenkamas taškas su didžiausia ovalo tikimybe. 105 km aukštis yra tarp Jackel 104 km [13] ir Lange-Hesse 110 km [12].
+TAG|FONTE|Darbo taisyklės: nukreipti tarp šiaurės ir rytų, pradedant nuo maždaug 45°; Doplerio poslinkis iki ~2 kHz ties 144 MHz, tipinis nuotolis ~1300 km, maksimalus ~2000 km (G3WPO [14]).
+H1|5. Duomenų rinkimas
+H2|5.1 Telnet seansai
+TAG|SCELTA|Trys seansai: pasirinktas klasteris, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], klasteris su PSKReporter spotais (pvz., DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatinis prisijungimas su šaukiniu, pradinės komandos atskirtos kabliataškiais, pakartotinis prisijungimas po 30 s.
+H2|5.2 Spotų skaitymas
+TAG|SCELTA|Eilutė „DX de SPOTTER: FREQ DXCALL komentaras HHMMZ [LOC]“ skaitoma reguliariuoju reiškiniu (ne pagal fiksuotus stulpelius). Iš komentaro skaitomi lokatoriai ir būdas forma „JN70CN<ES>JO62QM“ (pirmas lokatorius = spoteris, antras = DX), sklidimo būdas (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N santykis ir spinduliuotės rūšis. Trūkstami lokatoriai ieškomi CALL3 [21]; komentaruose rasti 6 simbolių lokatoriai įrašomi į data/call3_nuovi.txt.
+TAG|SCELTA|Archyvas: vienas CSV failas per dieną aplanke data/spot; atmintyje laikomi paskutiniai spotai (daugiausia 50000). Su RBN ir PSKReporter paprastai saugomi tik spotai nuo 28 MHz ir aukščiau.
+H1|6. Log ADIF
+TAG|FONTE|LoTW Grid Map v2 [25] perkėlimas: LoTW ataskaita (atsisiunčiama su naudotojo vardu ir slaptažodžiu, kuris niekada nesaugomas) ir žurnalo ADIF failai sujungiami pagal šaukinį, juostą, datą ir laiką; patvirtinimai sumuojami.
+TAG|SCELTA|Tik juostos nuo 28 MHz ir aukščiau, kiekviena kaip atskira juosta, be grupavimo. Spalvos: oranžinė = dirbta, mėlyna = patvirtinta QSL, žalia = patvirtinta per LoTW. Filtras pagal sklidimo būdą (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Spalvų schemos
+TAG|FONTE|Spalvų schemos yra YA-MS 1.3.0 schemos, perimtos iš YAEC [26]: Šviesi, Naktis, Juoda, aštuonios pastelinės ir Meteoro pėdsakas. Schema pasirenkama viršuje dešinėje, o langas iškart perkuriamas; vaizde Izoatspindys tamsios schemos naudoja spalvotas juostas, o šviesios – storas linijas (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) ir kalbos
+TAG|FONTE|Kortelėje METEOR SCATTER yra visa YA-MS 1.3.0 [5] su savo dokumentu „Efektyvumas - paaiškinimas“ ir savo šaltiniais. Scenarijus tools/sync_yams.py nukopijuoja kiekvieną naują YA-MS versiją ir paverčia ją skydeliu nekeisdamas jos skaičiavimų.
+TAG|SCELTA|Kalbos: italų, anglų, rusų, japonų, vokiečių ir olandų – sąsajai (data/lingue/ela-<kodas>.txt), Techniniam dokumentui ir Šaltiniams. F.A.I./pašvaistės vaizde sklaidos taškų juosta visuose vertimuose vadinama „Scatter trail“. Būsenos juostoje rodomas naudojamas magnetinis modelis (IAGA IGRF-14 [16]).
+H1|9. Ribos
+LI|Stotys lokatoriaus kvadrato centre: su 4 simbolių lokatoriumi paklaida siekia ~80 km.
+LI|Iš spotų gaunama foEs yra minimali riba, o sekanto dėsnis VHF ruože pervertina reikalingą foEs (žr. 2.3).
+LI|„Labiausiai tikėtinas“ sklaidos taškas yra programos kriterijus: fizinis rezultatas yra visa Scatter trail.
+LI|OVATION ovalas yra optinės pašvaistės tikimybės modelis, naudojamas kaip radijo pašvaistės rodiklis.

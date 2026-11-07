@@ -1,0 +1,88 @@
+TITLE|Hvernig E-LAYER ANALYZER reiknar
+SUB|Tæknileg lýsing - umsjón: Costantino IC8TEM - útgáfa 0.3.0, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR.
+H1|1. Inngangur
+H2|1.1 Tilgangur
+P|E-LAYER ANALYZER greinir þær útbreiðsluaðferðir á VHF sem tengjast E-laginu: sporadic-E (einnig fjölstökk milli heimsálfa), F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter (með forritinu YA-MS) og radíónorðurljós. Þetta skjal lýsir hverjum útreikningi og hvaðan hann kemur.
+H2|1.2 Merki
+TAG|FONTE|skrefið byggir á tilvitnaðri heimild.
+TAG|RILIEVO|prófun gerð á forritinu eða samanburður við raunverulegt dæmi.
+TAG|SCELTA|val forritsins, sem staðfesta þarf með reynslu á tíðnisviðinu.
+H1|2. Sameiginleg rúmfræði
+H2|2.1 Jörðin, locator, stórbaugur
+TAG|FONTE|Kúlulaga jörð með radíus r = 6372,7955 km, eins og í F.A.I.-greininni [1] og í YA-MS [5].
+TAG|SCELTA|Stöðvarnar eru settar í miðju locator-reitsins (4, 6 eða 8 stafir). Fjarlægð, áttarhorn, millipunktar og hringir eru reiknaðir með stórbaugsjöfnum:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Hæðarhorn að punkti í E-laginu
+TAG|FONTE|Jafna (2) í F.A.I.-greininni [1], með x = d / r, H hæð punktsins, h hæð stöðvarinnar. Forritið notar jafngilda tveggja breytna mynd, nákvæma á kúlulaga jörð:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Með H = 110 km gefur forritið 35,3° við 150 km, eins og IW1AZJ (35°) á síðu IC8FAX [2]; við 800 km gefur það 4,2° á móti þeim 6° sem gefnar eru upp fyrir IC8CQF (fjarlægðin á síðunni er nálgun: 6° svara til um 680 km).
+H2|2.3 Stökk í laginu og sekantlögmálið
+P|Fyrir geisla sem leggur af stað með hæðarhorni e og mætir laginu í hæð H eru innfallshornið φ (frá lóðréttu) og fjarlægð endurvarpspunktsins á jörðu:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [í radíönum]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|foEs sem forritið sýnir er lágmarksþröskuldur: spotið segir aðeins að tíðnin f hafi komist í gegn. Stuðullinn sec φ tekur tillit til sveigju jarðar.
+TAG|RILIEVO|Reynsla sem IK3XTV [3] greinir frá bendir til foEs 12-15 MHz fyrir 144 MHz: hreint sekantlögmál gefur hærri gildi (um 25-28 MHz á 2000 km). Gildið ber að lesa sem hlutfallslegan samanburð milli skýja, ekki sem algilt gildi.
+H1|3. Sporadic-E
+H2|3.1 Fjöldi stökka
+TAG|FONTE|Tafla IK3XTV [3]: eitt stökk 500-650 / 1500-2000 / 2200-2400 km (lágmark / best / hámark); tvöfalt stökk 2800-3000 / 3200-4000 / 4400-5000 km; þrefalt stökk best 4800-6400 km, hámark 6900 km.
+TAG|SCELTA|Fjöldi stökka n er samkvæmt töflunni: n = 1 upp í 2400 km, n = 2 upp í 5000 km, n = 3 upp í 6900 km, þar fyrir ofan n = D / 2300 km námundað upp. Undir 500 km telst spotið ekki sporadic-E. Milli 2400 og 2800 km sýnir forritið „umskiptasvæði“.
+H2|3.2 Fyrsta stökk beggja stöðva
+TAG|SCELTA|Tilgáta um jöfn stökk: endurvarpspunktarnir liggja á stórbaugnum við hlutföllin (2k − 1) / (2n) af leiðinni. Fyrsta stökk spottarans er punkturinn k = 1 (appelsínugulur), fyrsta stökk DX er punkturinn k = n (fjólublár); með einu stökki falla þeir saman í miðpunktinum (gulur).
+TAG|FONTE|Tilgáta um stutt fyrsta stökk: höfundurinn (IC8TEM) hefur reynslu, í fjölstökki, af stuttu fyrsta stökki innan 1200 km frá eigin QTH [4]. Forritið teiknar (tómir hringir) endurvarpspunktinn í miðju stutta stökksins hjá hvorri stöð; lengd stutta stökksins er valin á flipanum (1200 km sjálfgefið).
+H2|3.3 Es-ský á Maidenhead-reitum
+TAG|SCELTA|Endurvarpspunktunum (miðpunkti fyrir eitt stökk, fyrstu stökkum fyrir fjölstökk) er safnað í 4 stafa Maidenhead-reiti (2° × 1°). Fyrir hvern reit er geymd hæsta lágmarks-foEs meðal þeirra spota sem lenda í honum; liturinn nær frá bláu (< 5 MHz) til rauðs (> 20 MHz).
+P|Fyrir eigin stöð reiknar forritið MUF um hvert ský í fjarlægð d, með stökki af lengd 2d, aðeins ef skýið er innan drægis eins stökks:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Taflan „Es-ský“: rauð eru ský sem gæfu MUF ≥ 144 MHz, appelsínugul ≥ 70 MHz, gul ≥ 50 MHz.
+H2|3.4 Sporadic-E á ekki við um 432 MHz
+TAG|FONTE|MUF sporadic-E á miðlægum breiddargráðum nær 150 MHz og þar yfir (Whitehead [23]); mjög þétt ský þarf til að beygja lágreista geisla allt að 200 MHz (IK3XTV [22]). Met ARRL [24] skrá sporadic-E sambönd aðeins á 50 og 144 MHz, engin á 222 og 432 MHz.
+TAG|SCELTA|Þess vegna greinir flipinn SPORADIC-E aðeins 28, 50, 70 og 144 MHz: spot á 432 MHz eru aldrei meðhöndluð sem sporadic-E (sumar almennar heimildir, einnig efni búið til af gervigreind, halda því fram án gagna).
+H1|4. F.A.I. og norðurljós: scatter sem raðast eftir segulsviðinu
+H2|4.1 Segulsviðið
+TAG|FONTE|Sviðið er reiknað með líkaninu IGRF-14 [16] (kúlufallaliðun upp að stigi 13, stuðlar 2025-2030 brúaðir að dagsetningunni). SE-PROP eftir K9SE [9] notaði á sama hátt kúlufallalíkan (WMM).
+TAG|RILIEVO|Útreikningurinn ber saman við ppigrf innan 1 nT. Með einföldum tvípól finnur prófunin IC8FAX - G4LOH engan scatter point; með IGRF-14 finnst hann: fullt líkan er ómissandi.
+TAG|RILIEVO|Norðurljós IO70VJ - JO59BC (1331 km, hæð 105 km, ljósbrot 4/3): líklegasti scatter JP01AK (61,4° N 0,1° E, undan Hjaltlandi), frávik 0,97°, QTF 11° (el. 0,5°) frá IO70VJ og 299° (el. 7,6°) frá JO59BC. Án ljósbrots: IP70RP, frávik 1,86°, QTF 359° og 288°.
+H2|4.2 Endurvarpsskilyrðið
+TAG|FONTE|Merkið sem dreifist frá óreglu sem raðast eftir sviðinu fer út á keilu með ás eftir B; stöðvar á viðbótarútlínum geta haft samband (a1 + a2 = 180° [1], útlínur ±c eftir K9SE/K4GFG [2] [9] [10]).
+P|Fyrir hverja stöð X er reiknað c(X), hornið (með formerki) milli sjónlínunnar X → SP og plansins hornrétt á B í scatter point SP. Frávikið frá endurvarpsskilyrðinu fyrir sambandið A-B er:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Fyrir bergmál til sömu stöðvar (backscatter) verður skilyrðið að geislinn sé hornréttur á B, með vikmörkum ±2-3° (Lange-Hesse [12]); styrkurinn fellur um 3-5 dB á hverja gráðu fráviks (Jackel o.fl. [13]).
+H2|4.3 Sýnin „Scatter trail“ (par A-B)
+TAG|SCELTA|Á 0,2° neti í hæð H er leitað að punktum sem báðar stöðvar sjá með hæðarhorni ≥ lágmarki og með dev ≤ 2,5°. Litaflokkarnir eru 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (að hætti Aurora QTF [11]). Ramminn efst til hægri sýnir QTF og hæðarhorn A (rautt) og B (grænt) að hverjum punkti Scatter trail.
+TAG|SCELTA|Líklegasti scatter point: frávik ≤ 1° og minnsta summa ferninga fjarlægðanna (minnst deyfing); í norðurljósum eru punktar innan sporbaugsins teknir fram yfir.
+TAG|RILIEVO|Prófanir sem höfundurinn bað um (IGRF-14, H = 110 km, ljósbrot 4/3, niðurstöður forritsins): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail frá Biskajaflóa til Adríahafs eftir 44. breiddarbaug, líklegasti scatter JN44GH (44,3° N 8,6° E, yfir Genúa), frávik 0,97°, QTF 314° (el. 7,8°) frá Capri og 77° (el. 9°) frá F6DRO; Scatter trail liggur 143 km frá Genf. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail yfir suðvestur-Þýskalandi og Belgíu, líklegasti scatter JN49FR (49,7° N 8,5° E), frávik 0,88°, QTF 338° (el. 1,9°) frá Capri og 87° (el. 3°) frá G4LOH; Scatter trail liggur 28 km frá þekktum scatter í Brussel. Án ljósbrots styttast Scatter trail (G4LOH: hæðarhorn 0,5° og 2,1°). IC8FAX - FA1MXE (JN05GQ, fyrsta F.A.I.-QSO árið 1990 um Genf á 330°): Scatter trail liggur nálægt Genf.
+TAG|RILIEVO|Dæmi DL5MCG [6]: viti DB0FAI (JN58IC) - Dresden um Sheffield, frávik 0,3° í 110 km.
+TAG|SCELTA|Ljósbrot: fyrir hæðarhorn og sjóndeildarhringi í sýnunum F.A.I. og AURORA er sjálfgefið notaður jafngildur jarðarradíus k · r með k = 4/3 (staðalloftslag), sem slökkva má á með reitnum „Ljósbrot“. Fjarlægðir á jörðu og endurvarpsskilyrðið eru áfram reiknuð út frá raunverulegri rúmfræði.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Útreikningur ekki mögulegur: ef enginn punktur uppfyllir skilyrðið innan 2,5° samkvæmt líkaninu (sýnin Scatter trail) eða endurvarpspunkturinn er undir sjóndeildarhring stöðvarinnar (sýnin Jafnendurvarp), birtir forritið sprettigluggann „Útreikningur ekki mögulegur“ og sýnir engar aðrar niðurstöður.
+H2|4.4 Sýnin „Jafnendurvarp“ (isoflection loci): prófun endurvarpspunktsins
+TAG|FONTE|Þetta er hin dæmigerða rúmfræðilega smíð F.A.I. og norðurljósa til að prófa hvort valinn endurvarpspunktur sé réttur (jafnendurvarpslínur SE-PROP [9], AuroReflex [11], viðbótarútlínur K9SE/K4GFG [2] [10]).
+P|Fyrir endurvarpspunktinn SP og hvern punkt G á jörðu innan sjóndeildarhrings SP reiknar forritið summu útlínanna; línan S = 0 er ferill þeirra stöðva sem taka á móti A um SP:
+EQ|S(G) = c(A) + c(G)        teiknuð stig: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Í dökkum litastefjum eru flokkarnir litaðar ræmur (rautt 0°, appelsínugult 1°, gult 2°, grænt 4°, ljósblátt 8°, blátt 16°); í ljósum stefjum eru þeir þykkar línur (jafngildislínur fengnar með marching squares-aðferðinni), þykkari fyrir stig nær 0°.
+TAG|SCELTA|Forritið stingur upp á líklegasta scatter point (hnappurinn „Prófa ráðlagðan punkt“), en notandinn getur valið hvaða annan punkt sem er með vinstri smelli á kortið; hægri smellur færir stöð B. Úrskurður um parið A-B: fullnægjandi innan 1°, ásættanlegt innan 2,5° (vikmörk Lange-Hesse [12]), ófullnægjandi þar yfir. Ef punkturinn er undir sjóndeildarhring annarrar stöðvarinnar birtist sprettiglugginn „Útreikningur ekki mögulegur“.
+TAG|SCELTA|Efst: áttarhorn og hæðarhorn A og B að punktinum; grænn hringur = sjóndeildarhringur stöðvanna í hæð lagsins, rauður hringur = svæði sem punkturinn sést frá.
+H2|4.5 Norðurljós
+TAG|FONTE|Norðurljósasporbaugurinn OVATION Prime, Kp og sólvindur frá NOAA SWPC [15], uppfært á 5 mínútna fresti og vistað í data/swpc. 1° netið er mýkt með tvílínulegri brúun á 0,5° reitum.
+TAG|SCELTA|Ráðlögð stefna, fyrir báðar stöðvar: eftir hornréttulínu hvorrar stöðvar (bergmál hornrétt á B, vikmörk 1,5°, hæð 105 km) er valinn punkturinn með hæstu líkur sporbaugsins. Hæðin 105 km er milli 104 km hjá Jackel [13] og 110 km hjá Lange-Hesse [12].
+TAG|FONTE|Vinnureglur: beina milli norðurs og austurs, byrja við um 45°; Doppler allt að ~2 kHz við 144 MHz, dæmigert drægi ~1300 km, hámark ~2000 km (G3WPO [14]).
+H1|5. Gagnasöfnun
+H2|5.1 Telnet-lotur
+TAG|SCELTA|Þrjár lotur: klasi að eigin vali, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], klasi með spotum frá PSKReporter (t.d. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Sjálfvirk innskráning með kallmerki, upphafsskipanir aðskildar með semíkommu, endurtenging eftir 30 s.
+H2|5.2 Lestur spota
+TAG|SCELTA|Línan „DX de SPOTTER: FREQ DXCALL athugasemd HHMMZ [LOC]“ er lesin með reglulegri segð (ekki föstum dálkum). Úr athugasemdinni eru lesnir locator og aðferð á forminu „JN70CN<ES>JO62QM“ (fyrri locator = spotter, seinni = DX), útbreiðsluaðferðin (ES, FAI, AU, MS, TR, EME, F2, TEP), hlutfallið S/N og sendingarhátturinn. Locatorar sem vantar eru sóttir í CALL3 [21]; 6 stafa locatorar sem lesnir eru úr athugasemdum bætast í data/call3_nuovi.txt.
+TAG|SCELTA|Safn: ein CSV-skrá á dag í data/spot; í minni eru síðustu spotin (mest 50000). Með RBN og PSKReporter eru að jafnaði aðeins vistuð spot frá 28 MHz og upp úr.
+H1|6. Log ADIF
+TAG|FONTE|Yfirfærsla á LoTW Grid Map v2 [25]: LoTW-skýrslan (sótt með notandanafni og lykilorði, sem aldrei er vistað) og ADIF-skrár dagbókarinnar eru sameinaðar eftir kallmerki, tíðnisviði, dagsetningu og tíma; staðfestingarnar leggjast saman.
+TAG|SCELTA|Aðeins tíðnisvið frá 28 MHz og upp úr, hvert sem stakt tíðnisvið, án samsöfnunar. Litir: appelsínugult = unnið, blátt = staðfest með QSL, grænt = staðfest um LoTW. Sía eftir útbreiðsluaðferð (PROP_MODE í ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Litastef
+TAG|FONTE|Litastefin eru þau sömu og í YA-MS 1.3.0, sem byggja á YAEC [26]: Ljóst, Nótt, Svart, átta pastelstef og Loftsteinaslóð. Stefið er valið efst til hægri og glugginn endurteiknast strax; í sýninni Jafnendurvarp nota dökku stefin litaðar ræmur og þau ljósu þykkar línur (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) og tungumál
+TAG|FONTE|Flipinn METEOR SCATTER inniheldur YA-MS 1.3.0 í heild sinni [5], með skjalinu „Nýtni - skýringar“ og heimildum þess. Skriftan tools/sync_yams.py afritar hverja nýja útgáfu YA-MS og breytir henni í spjald án þess að breyta útreikningunum.
+TAG|SCELTA|Tungumál: ítalska, enska, rússneska, japanska, þýska og hollenska, fyrir viðmótið (data/lingue/ela-<kóði>.txt), Tæknilega lýsingu og Heimildir. Í sýninni F.A.I./norðurljós heitir slóð scatter point „Scatter trail“ í öllum þýðingum. Stöðustikan sýnir segulsviðslíkanið sem er í notkun (IGRF-14 frá IAGA [16]).
+H1|9. Takmarkanir
+LI|Stöðvar í miðju locator-reitsins: með 4 stafa locator getur skekkjan numið ~80 km.
+LI|foEs úr spotum er lágmarksþröskuldur og sekantlögmálið ofmetur nauðsynlega foEs á VHF (sjá 2.3).
+LI|„Líklegasti“ scatter point er viðmið forritsins: öll Scatter trail er hin eðlisfræðilega niðurstaða.
+LI|OVATION-sporbaugurinn er líkindalíkan fyrir sjáanleg norðurljós, notað sem vísbending um radíónorðurljós.
