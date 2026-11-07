@@ -256,7 +256,7 @@ namespace ELA
             txtSend.KeyUp += (s, e) => { if (e.Key == Avalonia.Input.Key.Enter) { Session.Send(txtSend.Text ?? ""); txtSend.Text = ""; } };
 
             StackPanel sp = new StackPanel();
-            sp.Children.Add(Ui.Row(Ui.L(Lang.T("Host")), txtHost, Ui.L(Lang.T("Porta")), numPort, Ui.L(Lang.T("Login")), txtLogin, Ui.L(Lang.T("Comandi")), txtCmds));
+            sp.Children.Add(Ui.Row(Ui.L(Lang.T("Host")), txtHost, Ui.L(Lang.T("Porta")), numPort, Ui.L(Lang.T("Login")), txtLogin, Ui.L(Lang.T("Comandi dopo il login")), txtCmds));
             sp.Children.Add(Ui.Row(bConn, bDisc, chkAuto, chkStart, lblState, lblCounts));
             sp.Children.Add(new TextBlock { Text = Lang.T(def[4]), Foreground = Pal.B(Pal.Muted), FontSize = 11.5, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) });
             sp.Children.Add(sv);

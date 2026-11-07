@@ -1,0 +1,87 @@
+TITLE|Notendahandbók E-LAYER ANALYZER
+SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.4.3, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
+H1|1. Áður en hafist er handa
+H2|1.1 Hvað forritið gerir
+P|E-LAYER ANALYZER sameinar í einu forriti verkfærin til að rannsaka þær útbreiðsluaðferðir á VHF sem fara um E-lag jónhvolfsins: sporadic-E, einnig fjölstökk og milli heimsálfa, F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter, með innbyggða forritinu YA-MS, og radíónorðurljós. Það vinnur með spot frá DX-klösum í rauntíma og með ADIF-dagbækur, og sýnir hverja niðurstöðu á korti sem tekur tvo þriðju gluggans, með gögnum og útreikningum í hægri þriðjungnum.
+H2|1.2 Uppsetning og gagnamappa
+P|Forritið keyrir á Windows (64 og 32 bita), Linux, Raspberry Pi (ARM64) og Mac (Apple Silicon og Intel). Það er sótt af síðunni Releases í GitHub-geymslunni: fyrir Windows er uppsetningarforrit og ferðaútgáfa í .zip-skrá; fyrir Linux og Raspberry Pi .tar.gz-safn með uppsetningarskriftu; fyrir Mac .dmg-diskmynd.
+LI|Öll gögn forritsins eru í möppunni data við hlið forritsins: stillingar (config.ini), CALL3-safnið, stuðlar segulsviðsins, dagbækur, sótt NOAA-gögn, söfnuð spot. Ekkert er skrifað í AppData eða aðrar kerfismöppur.
+LI|Til að flytja forritið á aðra tölvu nægir að afrita möppu þess; til að endurheimta upphafsstillingar nægir að eyða data/config.ini.
+LI|Lykilorð LoTW er aldrei vistað; aðeins notandanafnið má muna.
+H2|1.3 Efri stikan
+P|Efst til vinstri eru skráð eigið kallmerki, locator (4, 6 eða 8 stafir) og hæð loftnetsins í metrum; hnappurinn Nota staðfestir þau og allir flipar uppfærast. Efst til hægri eru UTC-tími, val litastefs (öll stef YAEC: Ljóst, Nótt, Svart, átta pastelstef og Loftsteinaslóð) og val tungumáls (28 tungumál). Þegar skipt er um litastef eða tungumál endurbyggist glugginn strax, án þess að söfnuð gögn tapist.
+H2|1.4 Stöðustikan
+P|Neðst sýnir stöðustikan hve mörg kallmerki eru í CALL3-safninu, hve mörg spot eru í minni og segulsviðslíkanið sem er í notkun (IGRF-14 með tímabili sínu). Spotin í minni eru hreinsuð í hvert sinn sem forritinu er lokað: hver lota hefst án gamalla spota.
+H2|1.5 Kortin
+P|Öll kortin eru notuð á sama hátt: músarhjólið stækkar eða minnkar, dráttur með vinstri hnappi færir sýnina, vinstri smellur velur punkt, spot eða leið eftir flipanum. Efst til hægri birtast hnit og 6 stafa locator undir bendlinum; á áttarhornskortunum einnig fjarlægð og áttarhorn frá miðju. Net Maidenhead-svæða og -reita þéttist með aðdrætti.
+H1|2. Gagnasöfnun (DATA COLLECTION)
+H2|2.1 Telnet-loturnar þrjár
+P|Flipinn DATA COLLECTION opnar allt að þrjár samtímis telnet-tengingar: DX-klasa að eigin vali (sjálfgefið ON0DXK með VHF-síum), Reverse Beacon Network (gátt 7001 fyrir FT8, 7000 fyrir CW og RTTY) og klasa DM4X með spotum frá PSKReporter (dm4x.ddns.net, gátt 8500).
+LI|Hýsill og Gátt: vistfang klasans. Innskráning: kallmerki til innskráningar (ef autt er kallmerkið í efri stikunni notað). Stýringar: skipanir sem sendar eru eftir innskráningu, aðskildar með semíkommu (t.d. tíðnisviðssíur).
+LI|Tengja og Aftengja opna og loka lotunni; Tengja aftur opnar hana sjálfkrafa aftur eftir rof; Tengja við ræsingu opnar hana þegar forritið ræsist.
+LI|Stjórnborðið sýnir mótteknar línur; í reitnum fyrir neðan má skrifa skipanir til klasans (t.d. sh/dx 20) og staðfesta þær með Senda eða Enter-lyklinum.
+H2|2.2 Staðbundna sían
+P|Gátreiturinn efst, sem er sjálfgefið virkur, kveikir á staðbundnu síunni: "DX de"-línum með tíðni undir 27990,0 kHz eða yfir 145 MHz er hent, þær birtast ekki í stjórnborðinu og eru ekki vistaðar. Þetta er einkum gagnlegt með RBN og PSKReporter, sem senda gríðarmörg spot á HF. Ef slökkt er á reitnum fer allt í gegn.
+H2|2.3 Hvernig forritið les spotin
+P|Úr hverri "DX de"-línu les forritið spotter, tíðni, DX, athugasemd, tíma og, þegar þau eru til staðar, locatora og útbreiðsluaðferð sem skrifuð eru í athugasemdina á forminu JN70CN<ES>JO62QM (fyrri locatorinn er spotterans, sá seinni DX; einnig eru samþykkt form með <>, > og svigum).
+LI|Locatorar sem vantar eru sóttir í CALL3-safnið; ónákvæmum locatorum (færri en 6 stafir) er skipt út fyrir 6 stafa locator úr CALL3 þegar hann er til.
+LI|Spot með <MS>, <AU>, <AUR>, <TR>, <AS> eða <ACS> í textanum eru ekki notuð fyrir sporadic-E: þau nýtast fyrir meteor scatter, norðurljós, tropo eða aircraft scatter.
+LI|Eins og í YA-MS eru meteor scatter-spot þau sem eru í tíðnigluggum dæmigerðum fyrir MS (50190-50300, 70100-70400, 144290-144399 kHz) án merkinga um aðra útbreiðslu, og þau með aðferðunum MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M eða með <MS>.
+LI|Spot með <AU> eða <AUR> fara á flipann AURORA, þau með FAI á flipann F.A.I.
+H2|2.4 Söfnuð spot og CALL3-safnið
+P|Síðan Söfnuð spot sýnir nýjustu spotin með síu eftir tíðnisviði og uppruna; hnappurinn Opna möppu spotanna opnar data/spot. Síðan CALL3 sýnir safnið kallmerki -> locator (JTDX/WSJT-snið): þar má leita að kallmerki, endurhlaða safninu eða flytja inn nýja CALL3.TXT-skrá, sem kemur í stað þeirrar sem er í notkun (sú gamla er geymd sem öryggisafrit).
+H1|3. Sporadic-E (SPORADIC-E)
+H2|3.1 Kortið
+P|Valmyndin Kort velur á milli þriggja sýna. Áttarhornskort - eitt stökk: kort með eigin stöð í miðju, föstum radíus 2500 km og svæðum töflu IK3XTV [3] (500 km lágmark, 1500-2000 km best, 2400 km hámark). Áttarhornskort - hámarksfjarlægð (fjölstökk): sama kort með sleðanum Hámarksfjarlægð, frá 300 til 20000 km, og mörkum tvöfalds (5000 km) og þrefalds stökks (6900 km), til að fylgjast með þróun fjölstökks. Rétthyrnt kort: heimskortið með hnöppunum Evrópa og Heimurinn.
+P|Á áttarhornskortunum sýna strikuðu hringirnir km frá miðju; bilið milli hringjanna breytist með aðdrætti og ytri brúnin sýnir mestu fjarlægð sem birt er.
+H2|3.2 Stjórntækin
+LI|Tíðnisvið: 10, 6, 4 og 2 m (432 MHz eru ekki greind: sporadic-E á þar ekki við [22]-[24]); tímagluggi spotanna frá 15 mínútum upp í 12 klukkustundir.
+LI|Es-hæð (sjálfgefið 105 km) og lágmarkshæðarhorn loftnetanna.
+LI|Fyrstu stökk (jöfn stökk): sýnir fyrsta stökk beggja stöðva; Stutt fyrsta stökk innan…: sýnir tilgátu höfundar um stutt fyrsta stökk (sjálfgefið 1200 km) [4].
+LI|Es-ský á Maidenhead-reitum: litar reiti endurvarpspunktanna eftir áætlaðri lágmarks-foEs.
+H2|3.3 Töflur og upplýsingar
+P|Taflan Es-spot sýnir gild spot með fjarlægð, fjölda stökka og lágmarks-foEs; taflan Es-ský (reitir) sýnir reitina með áætluðum skýjum og þá MUF sem þau gæfu eigin stöð (rautt 144 MHz, appelsínugult 70 MHz, gult 50 MHz). Þegar aðdráttur er stilltur sýna töflurnar aðeins það sem sést á kortinu.
+LI|Smellur á spot í töflunni eða á kortinu: leiðin lýsist upp með gulum geislabaug, kortið færir hana í sýn ef þarf og ramminn Nánar sýnir stökk, endurvarpspunkta, foEs og áttarhorn. Spotið helst valið einnig þegar ný spot berast.
+LI|Smellur á auðan punkt á kortinu: punkturinn er meðhöndlaður sem hugsanlegt Es-ský, með nauðsynlegri foEs fyrir 28, 50, 70 og 144 MHz.
+H2|3.4 Reglur höfundar
+LI|144 MHz: sporadic-E byrjar yfir 900 km; stakt spot er ekki teiknað; það er teiknað ef annað spot á sama ský berst innan 5 mínútna eða ef spot með stuttu stökki á 50 MHz er í nágrenninu. Græna línan efst segir hve mörg spot bíða staðfestingar.
+LI|Þvermiðbaugsútbreiðsla: til meginlands Afríku (ásamt Madagaskar) og Suður-Ameríku, ef miðpunkturinn fellur í beltið þar sem segulhallinn er milli -20° og +20°, er sambandið þvermiðbaugssamband en ekki sporadic-E, nema spotið tilgreini <ES>. Kanaríeyjar, Madeira, Grænhöfðaeyjar og Arabíuskagi falla utan reglunnar.
+H1|4. BENCHMARK Es
+H2|4.1 Að hlaða dagbók
+P|Flipinn BENCHMARK Es er prófunarbekkur fyrir sporadic-E á heilli ADIF-dagbók, einnig frá annarri stöð. Hlaða ADIF opnar skrána (forritið man hana og hleður henni við ræsingu), Fjarlægja ADIF tekur hana burt. Stöð í miðju leggur til algengasta kallmerki og locator dagbókarinnar; þeim má breyta og staðfesta með Nota.
+LI|Sendistaðsetningin er MY_GRIDSQUARE hvers QSO; móttökustaðsetningarnar eru GRIDSQUARE (locatorar sem vantar eða eru 4 stafir eru sóttir í CALL3).
+LI|Hægt er að útiloka QSO með annað PROP_MODE og þau undir 500 km (900 km á 144 MHz); þvermiðbaugssambönd eru alltaf útilokuð, nema PROP_MODE=ES.
+H2|4.2 Dagar, tímar og útreikningar
+P|Taflan QSO eftir dögum sýnir dagana með fjölda QSO, tíðnisviðum, mestu fjarlægð og fjölstökkum; smellur á dag fyllir töfluna Tímar dagsins, með einni línu fyrir hverja UTC-klukkustund og línunni Allur dagurinn. Áttarhornskortið, með sleða hámarksfjarlægðar, teiknar skip eftir 10° geirum (appelsínugulur bogi = næsta QSO, grænn geiri = fjarlægðir sem náðust), skýin á reitunum og, fyrir allan daginn, færslu skýjanna klukkustund fyrir klukkustund (rauð lína).
+P|Síðan Tillögur að útreikningum sýnir skip eftir geirum, áætlaða foEs með væntri MUF við 1000, 1500, 2000 og 2400 km, áætluð ský, prófun fjölstökks (jöfn stökk á móti stuttu fyrsta stökki, borin saman við ský sem sáust í stöku stökki innan ±30 mínútna) og færslu skýjanna klukkustund fyrir klukkustund.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Ein eða tvær stöðvar
+P|Flipinn BENCHMARK 50 MHz er helgaður fjölstökks-sporadic-E á 50 MHz. Í línunni Stöð 1 er dagbók eigin stöðvar hlaðin og fjarlægð; í línunni Stöð 2 dagbók annarrar stöðvar, sem er sýnd eða falin með reitnum Stöð 2. Leiðir stöðvar 1 eru ljósbláar, leiðir stöðvar 2 fjólubláar.
+LI|Sýnd eru fjölstökks-QSO á 50 MHz, þ.e. yfir 3100 km (regla höfundar); fjöldi stökka fylgir töflu IK3XTV.
+LI|Dagur, frá… til… UTC: dagurinn (við opnun sá með flest fjölstökks-QSO) og tíminn, í 15 mínútna skrefum.
+LI|foEs (valfrjáls): litar leiðirnar eftir lágmarks-foEs og sýnir hana í töflunni. Es-hæð og Stutt fyrsta stökk innan 1200 km eins og á hinum flipunum.
+H2|5.2 Mercator-kortið
+P|Kortið er Mercator-kort með frjálsri miðju. Þegar músin nálgast leið stækka lína og tákn og 6 stafa WWL-reitur mótstöðvarinnar birtist. Með vinstri smelli á þá leið spyr sprettigluggi hvort sýna eigi öll QSO í skránni, frá öllum dögum, með endastaðsetningu innan 150 km: Já tæmir kortið og sýnir þau QSO innan appelsínugula hringsins, Nei skilur kortið eftir óbreytt. Hnappurinn Aftur í dag og tíma færir aftur í fyrra val.
+H1|6. F.A.I.
+H2|6.1 Sýnirnar tvær
+P|Flipinn F.A.I. rannsakar scatter frá óreglum sem raðast eftir segulsviðinu (aðalheimild [1], [2]). Sýnin Scatter trail (par A-B) reiknar, fyrir tvær stöðvar, feril mögulegra scatter point, litaðan eftir fráviki frá endurvarpsskilyrðinu, leggur til líklegasta scatter point og teiknar efst til hægri ramma með QTF og hæðarhornum beggja stöðva (rautt = A, grænt = B). Sýnin Jafnendurvarp (punktur) teiknar, fyrir valinn endurvarpspunkt, jafnendurvarpslínur eins og AuroReflex og SE-PROP eftir K9SE: litaðar ræmur í dökkum stefjum, þykkar línur í ljósum stefjum.
+H2|6.2 Stjórntækin
+LI|Stöð A og Stöð B: kallmerki (leitað í CALL3) og/eða locator; A autt = eigin stöð. Valmyndin Prófanir... hleður prófunarpörunum (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); valmyndin Þekktir scatter point... velur skjalfestan scatter point (Genf, Brussel, Búdapest, JN92, JN41/42).
+LI|Hæð (sjálfgefið 110 km), lágmarkshæðarhorn og Ljósbrot (jarðarradíus 4/3), sjálfgefið virkt.
+LI|Vinstri smellur á kortið: endurvarpspunktur til prófunar (skiptir yfir í sýnina Jafnendurvarp); hægri smellur: staðsetning stöðvar B.
+LI|Prófa ráðlagðan punkt: reiknar slóðina, tekur tillögu að scatter point og sýnir jafnendurvarpslínur hans með úrskurðinum: FULLNÆGJANDI (innan 1°), ÁSÆTTANLEGT (innan 2,5°), ÓFULLNÆGJANDI (þar yfir).
+P|Ef útreikningurinn er ekki mögulegur samkvæmt líkaninu birtast skilaboðin Útreikningur ekki mögulegur og engar aðrar niðurstöður eru sýndar. Neðst sýnir taflan F.A.I.-spot þau spot sem merkt eru FAI; smellur á spot hleður stöðvapari þess.
+H1|7. METEOR SCATTER
+P|Flipinn inniheldur forritið YA-MS í heild sinni, með flipum þess (himinhvelfing, ratsjárflæði, drífur í beinni, útreikningur nýtni, GRAVES-ratsjá, tilraunabeiting spánna, rúmfræði og deyfing, drífur, heimildir, heimildakort, gagnasöfnun, nýtni - skýringar, reitakort) og handbók þess um útreikninga. Tungumál og litastef eru þau sem valin eru efst. Gagnasöfnun YA-MS, innan E-LAYER ANALYZER, opnar ekki eigin telnet-lotur: hún tekur við línum frá lotum DATA COLLECTION og síar úr þeim meteor scatter-spotin.
+H1|8. AURORA
+P|Flipinn AURORA notar sömu sýnir og F.A.I. (sjálfgefin hæð 105 km) með geimveðursgögnum frá NOAA [15]: norðurljósasporbaugurinn OVATION (mjúklega skyggður á kortinu), Kp-vísitala síðustu þriggja daga og sólvindur, sótt á 5 mínútna fresti í data/swpc eða strax með Sækja NOAA núna. Forritið mælir með stefnu fyrir báðar stöðvar.
+LI|Spot með <AU> eða <AUR> frá síðustu 2 klukkustundum (mest 30) eru teiknuð á kortið með reiknuðum scatter point (appelsínugulur hringur) ef reiturinn <AU>/<AUR>-spot á kortinu með útreikningi er virkur; í niðurstöðunum birtast QTF og hæðarhorn beggja stöðva.
+H1|9. LOG ADIF
+P|Flipinn LOG ADIF sýnir unna og staðfesta reiti, tíðnisvið fyrir tíðnisvið frá 28 MHz og upp úr, án þess að sameina tíðnisviðin. Opna ADIF-skrá... bætir við skrám dagbókarinnar; Sækja frá LoTW... sækir staðfestingaskýrsluna (notandanafnið má muna, lykilorðið er aldrei vistað); Hreinsa minni fjarlægir skrár og skýrslu. Reitirnir eru appelsínugulir ef þeir eru unnir, í öðrum lit ef þeir eru staðfestir með QSL eða um LoTW; smellur á reit sýnir kallmerkin og útbreiðsluaðferðina.
+H1|10. Skjöl
+P|Flipinn HEIMILDIR sýnir heimildirnar sem forritið vísar til, flipa fyrir flipa. Flipinn YFIRLIT YFIR VAL ÚTREIKNINGA sýnir jöfnurnar og val útreikninga með heimildum í hverju skrefi; þessi NOTENDAHANDBÓK útskýrir hvernig forritið er notað; TÆKNISKÝRSLA gerir grein fyrir þeim ástæðum sem stýrðu smíði forritsins. Skjölin þrjú má flytja út í Word.
+H1|11. Hagnýt ráð
+LI|Fyrst af öllu skal skrá kallmerki og locator efst og ýta á Nota: allar fjarlægðir, MUF og hæðarhorn miðast við það.
+LI|Með RBN og PSKReporter skal hafa staðbundnu síuna virka, svo minnið fyllist ekki af HF-spotum.
+LI|Til að greina liðið tímabil skal nota BENCHMARK-flipana tvo með eigin dagbók; fyrir norðurljós og F.A.I. skal alltaf prófa tillögupunktinn með sýninni Jafnendurvarp.
+LI|Útreikningarnir eru leiðbeinandi: spot eða QSO segir að leiðin hafi verið opin, ekki nákvæmlega hvar skýið var.
