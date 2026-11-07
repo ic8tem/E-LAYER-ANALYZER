@@ -1,0 +1,88 @@
+TITLE|Hoe E-LAYER ANALYZER bereken
+SUB|Tegniese dokument - deur Costantino IC8TEM - weergawe 0.3.0, November 2026. Die getalle tussen vierkantige hakies verwys na die oortjie BRONNE.
+H1|1. Inleiding
+H2|1.1 Doel
+P|E-LAYER ANALYZER ontleed die VHF-voortplantingsmodusse waarby die E-laag betrokke is: sporadiese E (ook interkontinentale multi-sprong), F.A.I. (onreëlmatighede in lyn met die magneetveld), meteor scatter (met die program YA-MS) en radio-aurora. Hierdie dokument beskryf elke berekening en waar dit vandaan kom.
+H2|1.2 Etikette
+TAG|FONTE|die stap volg 'n aangehaalde bron.
+TAG|RILIEVO|kontrole op die program of vergelyking met 'n werklike geval.
+TAG|SCELTA|keuse van die program, te bevestig deur ervaring op die band.
+H1|2. Gemeenskaplike geometrie
+H2|2.1 Aarde, lokator, grootsirkel
+TAG|FONTE|Sferiese Aarde met radius r = 6372,7955 km, soos in die F.A.I.-artikel [1] en in YA-MS [5].
+TAG|SCELTA|Die stasies word in die middel van die lokatorvierkant geplaas (4, 6 of 8 karakters). Afstand, azimut, tussenpunte en sirkels met die grootsirkelformules:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevasie na 'n punt in die E-laag
+TAG|FONTE|Formule (2) van die F.A.I.-artikel [1], met x = d / r, H die hoogte van die punt, h die hoogte van die stasie. Die program gebruik die ekwivalente vorm met twee argumente, eksak op die sferiese Aarde:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Met H = 110 km gee die program 35,3° op 150 km, soos IW1AZJ (35°) op die bladsy van IC8FAX [2]; op 800 km gee dit 4,2° teenoor die 6° wat vir IC8CQF aangegee word (die afstand op die bladsy is benaderd: 6° stem ooreen met ongeveer 680 km).
+H2|2.3 Sprong in die laag en die sekanswet
+P|Vir 'n straal wat met elevasie e vertrek en die laag op hoogte H tref, is die invalshoek φ (vanaf die vertikaal) en die grondafstand van die refleksiepunt:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [in radiale]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Die foEs wat die program aangee, is 'n minimum drempel: die spot sê slegs dat frekwensie f deurgekom het. Die faktor sec φ verreken die kromming van die Aarde.
+TAG|RILIEVO|Die ervarings wat IK3XTV [3] rapporteer, dui op foEs van 12-15 MHz vir 144 MHz: die suiwer sekanswet gee hoër waardes (ongeveer 25-28 MHz oor 2000 km). Die waarde moet gelees word as 'n relatiewe vergelyking tussen wolke, nie as 'n absolute waarde nie.
+H1|3. Sporadiese E
+H2|3.1 Aantal spronge
+TAG|FONTE|Tabel van IK3XTV [3]: enkele sprong 500-650 / 1500-2000 / 2200-2400 km (minimum / optimaal / maksimum); dubbele sprong 2800-3000 / 3200-4000 / 4400-5000 km; drievoudige sprong optimaal 4800-6400 km, maksimum 6900 km.
+TAG|SCELTA|Die aantal spronge n is dié van die tabel: n = 1 tot 2400 km, n = 2 tot 5000 km, n = 3 tot 6900 km, daarbo n = D / 2300 km opwaarts afgerond. Onder 500 km word die spot nie as sporadiese E beskou nie. Tussen 2400 en 2800 km dui die program die "oorgangsone" aan.
+H2|3.2 Eerste sprong van albei stasies
+TAG|SCELTA|Hipotese van gelyke spronge: die refleksiepunte lê langs die grootsirkel by die breuke (2k − 1) / (2n) van die pad. Die spotter se eerste sprong is punt k = 1 (oranje), die DX se eerste sprong is punt k = n (pers); met een enkele sprong val hulle saam in die middelpunt (geel).
+TAG|FONTE|Hipotese van die kort eerste sprong: die outeur (IC8TEM) het ervaring, by multi-sprong, van 'n kort eerste sprong binne 1200 km van sy QTH [4]. Die program teken (oop sirkels) die refleksiepunt halfpad in die kort sprong van elke stasie; die lengte van die kort sprong word in die oortjie gekies (1200 km as beginwaarde).
+H2|3.3 Es-wolke op Maidenhead-vierkante
+TAG|SCELTA|Die refleksiepunte (middelpunt vir die enkele sprong, eerste spronge vir multi-sprong) word in Maidenhead-vierkante van 4 karakters (2° × 1°) versamel. Vir elke vierkant word die hoogste minimum foEs van die spots wat daarin val, gehou; die kleur loop van blou (< 5 MHz) tot rooi (> 20 MHz).
+P|Vir die eie stasie bereken die program die MUF deur elke wolk op afstand d, met 'n sprong van lengte 2d, slegs as die wolk binne die bereik van die enkele sprong is:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Tabel "Es-wolke": in rooi die wolke wat MUF ≥ 144 MHz sou gee, in oranje ≥ 70 MHz, in geel ≥ 50 MHz.
+H2|3.4 Sporadiese E is nie op 432 MHz van toepassing nie
+TAG|FONTE|Die MUF van sporadiese E op middelbreedtes bereik 150 MHz en meer (Whitehead [23]); baie digte wolke is nodig om skerende strale tot 200 MHz af te buig (IK3XTV [22]). Die ARRL-rekords [24] rapporteer sporadiese-E-verbindings slegs op 50 en 144 MHz, geen op 222 en 432 MHz nie.
+TAG|SCELTA|Daarom ontleed die oortjie SPORADIC-E slegs 28, 50, 70 en 144 MHz: spots op 432 MHz word nooit as sporadiese E behandel nie (sommige algemene bronne, ook dié wat deur kunsmatige intelligensie geskep is, beweer dit sonder dokumentasie).
+H1|4. F.A.I. en aurora: verstrooiing in lyn met die magneetveld
+H2|4.1 Die magneetveld
+TAG|FONTE|Die veld word met die IGRF-14-model [16] bereken (sferiese harmonieke tot graad 13, koëffisiënte 2025-2030 na die datum geïnterpoleer). SE-PROP van K9SE [9] het op dieselfde manier 'n model met sferiese harmonieke (WMM) gebruik.
+TAG|RILIEVO|Die berekening stem binne 1 nT met ppigrf ooreen. Met die eenvoudige dipool vind die kontrole IC8FAX - G4LOH geen scatter point nie; met IGRF-14 wel: die volledige model is onontbeerlik.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, hoogte 105 km, refraksie 4/3): mees waarskynlike scatter JP01AK (61,4° N 0,1° O, buite die kus van Shetland), afwyking 0,97°, QTF 11° (el. 0,5°) vanaf IO70VJ en 299° (el. 7,6°) vanaf JO59BC. Sonder refraksie: IP70RP, afwyking 1,86°, QTF 359° en 288°.
+H2|4.2 Die refleksievoorwaarde
+TAG|FONTE|Die sein wat deur 'n veldgerigte onreëlmatigheid verstrooi word, verlaat dit op 'n keël met sy as langs B; stasies op aanvullende kontoere kan met mekaar verbinding maak (a1 + a2 = 180° [1], kontoere ±c van K9SE/K4GFG [2] [9] [10]).
+P|Vir elke stasie X word c(X) bereken, die hoek (met teken) tussen die siglyn X → SP en die vlak loodreg op B in die scatter point SP. Die afwyking van die refleksievoorwaarde vir die verbinding A-B is:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Vir die eggo na dieselfde stasie (backscatter) word die voorwaarde 'n straal loodreg op B, met 'n toleransie van ±2-3° (Lange-Hesse [12]); die intensiteit daal met ongeveer 3-5 dB per graad afwyking (Jackel en ander [13]).
+H2|4.3 Aansig "Scatter trail" (A-B-paar)
+TAG|SCELTA|Op 'n rooster van 0,2° op hoogte H word die punte gesoek wat deur albei stasies gesien word met elevasie ≥ minimum en met dev ≤ 2,5°. Die kleurklasse is 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (styl van Aurora QTF [11]). Die blokkie regs bo toon QTF en elevasie van A (rooi) en B (groen) na elke punt van die Scatter trail.
+TAG|SCELTA|Mees waarskynlike scatter point: afwyking ≤ 1° en kleinste som van die kwadrate van die afstande (minste verlies); by aurora word punte binne die ovaal verkies.
+TAG|RILIEVO|Kontroles wat die outeur gevra het (IGRF-14, H = 110 km, refraksie 4/3, resultate van die program): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail van die Golf van Biskaje tot die Adriatiese See langs die 44ste breedtegraad, mees waarskynlike scatter JN44GH (44,3° N 8,6° O, bo Genua), afwyking 0,97°, QTF 314° (el. 7,8°) vanaf Capri en 77° (el. 9°) vanaf F6DRO; die Scatter trail loop 143 km vanaf Genève. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail oor suidwes-Duitsland en België, mees waarskynlike scatter JN49FR (49,7° N 8,5° O), afwyking 0,88°, QTF 338° (el. 1,9°) vanaf Capri en 87° (el. 3°) vanaf G4LOH; die Scatter trail loop 28 km vanaf die bekende scatter point by Brussel. Sonder refraksie word die Scatter trails korter (G4LOH: elevasies 0,5° en 2,1°). IC8FAX - FA1MXE (JN05GQ, eerste F.A.I.-QSO van 1990 via Genève op 330°): die Scatter trail loop naby Genève.
+TAG|RILIEVO|Geval DL5MCG [6]: baken DB0FAI (JN58IC) - Dresden via Sheffield, afwyking 0,3° op 110 km.
+TAG|SCELTA|Refraksie: vir elevasies en horisonne in die F.A.I.- en AURORA-aansigte word by verstek die ekwivalente aardradius k · r met k = 4/3 (standaardatmosfeer) gebruik, wat met die blokkie "Refraksie" afgeskakel kan word. Grondafstande en die refleksievoorwaarde word steeds op die ware geometrie bereken.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Berekening nie moontlik nie: as volgens die model geen punt binne 2,5° aan die voorwaarde voldoen nie (aansig Scatter trail) of die refleksiepunt onder die stasie se horison is (aansig Iso-refleksie), wys die program die opspringer "Berekening nie moontlik nie" en geen ander resultaat nie.
+H2|4.4 Aansig "Iso-refleksie" (isoflection loci): kontrole van die refleksiepunt
+TAG|FONTE|Dit is die tipiese geometriese konstruksie vir F.A.I. en aurora om te kontroleer of die gekose refleksiepunt korrek is (iso-refleksielyne van SE-PROP [9], AuroReflex [11], aanvullende kontoere van K9SE/K4GFG [2] [10]).
+P|Vir die refleksiepunt SP en vir elke grondpunt G binne die horison van SP bereken die program die som van die kontoere; die lyn S = 0 is die lokus van die stasies wat A deur SP ontvang:
+EQ|S(G) = c(A) + c(G)        getekende vlakke: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|In die skemas met donker agtergrond is die klasse gekleurde bande (rooi 0°, oranje 1°, geel 2°, groen 4°, ligblou 8°, blou 16°); in die ligte skemas is dit dik lyne (kontoerlyne verkry met die marching squares-metode), dikker vir die vlakke naaste aan 0°.
+TAG|SCELTA|Die program stel die mees waarskynlike scatter point voor (knoppie "Kontroleer die aanbevole punt"), maar die gebruiker kan enige ander punt met 'n linksklik op die kaart kies; die regsklik skuif stasie B. Uitspraak oor die paar A-B: bevredigend binne 1°, aanvaarbaar binne 2,5° (toleransie van Lange-Hesse [12]), nie bevredigend nie daarbo. As die punt onder die horison van een van die twee stasies is, verskyn die opspringer "Berekening nie moontlik nie".
+TAG|SCELTA|Bo: azimut en elevasie van A en B na die punt; groen sirkel = horison van die stasies op die hoogte van die laag, rooi sirkel = gebied waarvandaan die punt sigbaar is.
+H2|4.5 Aurora
+TAG|FONTE|Aurorale ovaal OVATION Prime, Kp en sonwind van die NOAA SWPC [15], elke 5 minute bygewerk en in data/swpc gestoor. Die rooster van 1° word met bilineêre interpolasie op selle van 0,5° gladgemaak.
+TAG|SCELTA|Aanbevole rigting, vir albei stasies: langs die loodreglyn van elke stasie (eggo loodreg op B, toleransie 1,5°, hoogte 105 km) word die punt met die hoogste ovaalwaarskynlikheid gekies. Die hoogte van 105 km lê tussen die 104 km van Jackel [13] en die 110 km van Lange-Hesse [12].
+TAG|FONTE|Bedryfsreëls: rig tussen noord en oos, begin by ongeveer 45°; Doppler tot ~2 kHz op 144 MHz, tipiese bereik ~1300 km, maksimum ~2000 km (G3WPO [14]).
+H1|5. Data-insameling
+H2|5.1 Telnet-sessies
+TAG|SCELTA|Drie sessies: cluster na keuse, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster met die spots van PSKReporter (bv. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Outomatiese aanmelding met die roepnaam, aanvanklike opdragte geskei deur kommapunt, herkoppeling na 30 s.
+H2|5.2 Lees van die spots
+TAG|SCELTA|Reël "DX de SPOTTER: FREQ DXCALL kommentaar HHMMZ [LOC]" gelees met 'n gewone uitdrukking (regex, nie vaste kolomme nie). Uit die kommentaar word lokators en modus in die vorm "JN70CN<ES>JO62QM" gelees (eerste lokator = spotter, tweede = DX), die voortplantingsmodus (ES, FAI, AU, MS, TR, EME, F2, TEP), die S/N-verhouding en die emissiemodus. Ontbrekende lokators word in CALL3 [21] opgesoek; dié van 6 karakters wat in kommentare gelees word, word by data/call3_nuovi.txt gevoeg.
+TAG|SCELTA|Argief: een CSV-lêer per dag in data/spot; in die geheue die laaste spots (hoogstens 50000). Met RBN en PSKReporter word normaalweg slegs spots vanaf 28 MHz en hoër gestoor.
+H1|6. Log ADIF
+TAG|FONTE|Oordrag van LoTW Grid Map v2 [25]: die LoTW-verslag (afgelaai met gebruikersnaam en wagwoord, wat nooit gestoor word nie) en die ADIF-lêers van die log word volgens roepnaam, band, datum en tyd saamgevoeg; die bevestigings word bymekaargetel.
+TAG|SCELTA|Slegs die bande vanaf 28 MHz en hoër, elkeen as 'n afsonderlike band, sonder samevoegings. Kleure: oranje = gewerk, blou = bevestig met QSL, groen = bevestig via LoTW. Filter op die voortplantingsmodus (PROP_MODE van die ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Kleurskemas
+TAG|FONTE|Die kleurskemas is dié van YA-MS 1.3.0, wat YAEC [26] volg: Lig, Nag, Swart, agt pastelle en Meteoorspoor. Die skema word regs bo gekies en die venster word dadelik herbou; in die aansig Iso-refleksie gebruik die donker skemas gekleurde bande en die ligte skemas dik lyne (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) en tale
+TAG|FONTE|Die oortjie METEOR SCATTER bevat die volledige YA-MS 1.3.0 [5], met sy dokument "Doeltreffendheid - verduideliking" en sy bronne. Die skrip tools/sync_yams.py kopieer elke nuwe weergawe van YA-MS en omskep dit in 'n paneel sonder om die berekeninge te verander.
+TAG|SCELTA|Tale: Italiaans, Engels, Russies, Japannees, Duits en Nederlands, vir die koppelvlak (data/lingue/ela-<kode>.txt), vir die Tegniese dokument en vir die Bronne. In die F.A.I./aurora-aansig heet die spoor van die scatter points "Scatter trail" in alle vertalings. Die statusbalk wys die magnetiese model wat gebruik word (IGRF-14 van die IAGA [16]).
+H1|9. Beperkings
+LI|Stasies in die middel van die lokatorvierkant: met 'n lokator van 4 karakters kan die fout ~80 km bereik.
+LI|Die foEs uit die spots is 'n minimum drempel en die sekanswet oorskat die benodigde foEs op VHF (sien 2.3).
+LI|Die "mees waarskynlike" scatter point is 'n kriterium van die program: die hele Scatter trail is die fisiese resultaat.
+LI|Die OVATION-ovaal is 'n waarskynlikheidsmodel vir optiese aurora, gebruik as aanwyser vir radio-aurora.

@@ -1,0 +1,88 @@
+TITLE|Kuidas E-LAYER ANALYZER arvutab
+SUB|Tehniline dokument - koostanud Costantino IC8TEM - versioon 0.3.0, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD.
+H1|1. Sissejuhatus
+H2|1.1 Eesmärk
+P|E-LAYER ANALYZER analüüsib E-kihti kaasavaid VHF leviviise: sporaadiline E (ka mitmehüppeline mandritevaheline), F.A.I. (magnetväljaga joondunud ebaühtlused), meteoorhajumine (programmiga YA-MS) ja raadioaurora. See dokument kirjeldab iga arvutust ja selle päritolu.
+H2|1.2 Sildid
+TAG|FONTE|samm põhineb viidatud allikal.
+TAG|RILIEVO|programmis tehtud kontroll või võrdlus reaalse juhtumiga.
+TAG|SCELTA|programmi valik, mida tuleb sagedusala kogemusega kinnitada.
+H1|2. Ühine geomeetria
+H2|2.1 Maa, lokaator, suurring
+TAG|FONTE|Sfääriline Maa raadiusega r = 6372,7955 km, nagu F.A.I. artiklis [1] ja YA-MS-is [5].
+TAG|SCELTA|Jaamad paigutatakse lokaatori ruudu keskele (4, 6 või 8 märki). Kaugus, asimuut, vahepunktid ja ringid arvutatakse suurringi valemitega:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevatsioon E-kihi punkti suunas
+TAG|FONTE|F.A.I. artikli [1] valem (2), kus x = d / r, H on punkti kõrgus, h jaama kõrgus. Programm kasutab samaväärset kahe argumendiga kuju, mis on sfäärilisel Maal täpne:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|H = 110 km korral annab programm 150 km juures 35,3°, nagu IW1AZJ (35°) IC8FAX-i lehel [2]; 800 km juures annab 4,2° võrreldes IC8CQF jaoks märgitud 6°-ga (lehel toodud kaugus on ligikaudne: 6° vastab umbes 680 km-le).
+H2|2.3 Hüpe kihis ja sekansi seadus
+P|Kiire puhul, mis lähtub elevatsiooniga e ja kohtub kihiga kõrgusel H, on langemisnurk φ (vertikaalist) ja peegelduspunkti kaugus maapinnal:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [radiaanides]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Programmi näidatud foEs on minimaalne lävi: spot ütleb vaid, et sagedus f läbis. Tegur sec φ arvestab Maa kõverust.
+TAG|RILIEVO|IK3XTV [3] kogemused näitavad 144 MHz jaoks foEs 12-15 MHz: puhas sekansi seadus annab kõrgemaid väärtusi (umbes 25-28 MHz 2000 km kohta). Väärtust tuleb lugeda pilvede suhtelise võrdlusena, mitte absoluutväärtusena.
+H1|3. Sporaadiline E
+H2|3.1 Hüpete arv
+TAG|FONTE|IK3XTV tabel [3]: üks hüpe 500-650 / 1500-2000 / 2200-2400 km (minimaalne / optimaalne / maksimaalne); kaks hüpet 2800-3000 / 3200-4000 / 4400-5000 km; kolm hüpet optimaalne 4800-6400 km, maksimaalne 6900 km.
+TAG|SCELTA|Hüpete arv n võetakse tabelist: n = 1 kuni 2400 km, n = 2 kuni 5000 km, n = 3 kuni 6900 km, sellest edasi n = D / 2300 km ümardatuna üles. Alla 500 km spotti sporaadiliseks E-ks ei loeta. 2400 ja 2800 km vahel märgib programm "üleminekuala".
+H2|3.2 Mõlema jaama esimene hüpe
+TAG|SCELTA|Võrdsete hüpete hüpotees: peegelduspunktid asuvad suurringil trassi murdosades (2k − 1) / (2n). Spotteri esimene hüpe on punkt k = 1 (oranž), DX-i esimene hüpe on punkt k = n (lilla); ühe hüppe korral langevad need kokku keskpunktis (kollane).
+TAG|FONTE|Lühikese esimese hüppe hüpotees: autoril (IC8TEM) on mitmehüppelise levi korral kogemusi lühikese esimese hüppega kuni 1200 km oma QTH-st [4]. Programm joonistab (tühjad ringid) peegelduspunkti iga jaama lühikese hüppe keskele; lühikese hüppe pikkus valitakse sakil (algväärtus 1200 km).
+H2|3.3 Es-pilved Maidenheadi ruutudel
+TAG|SCELTA|Peegelduspunktid (ühe hüppe korral keskpunkt, mitmehüppelise korral esimesed hüpped) kogutakse 4-märgilistesse Maidenheadi ruutudesse (2° × 1°). Iga ruudu kohta säilitatakse sinna langevate spotide kõrgeim minimaalne foEs; värv ulatub sinisest (< 5 MHz) punaseni (> 20 MHz).
+P|Oma jaama jaoks arvutab programm MUF-i läbi iga kaugusel d asuva pilve hüppega pikkusega 2d, ainult siis, kui pilv on ühe hüppe ulatuses:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Tabel "Es-pilved": punasega pilved, mis annaksid MUF ≥ 144 MHz, oranžiga ≥ 70 MHz, kollasega ≥ 50 MHz.
+H2|3.4 Sporaadiline E ei kehti 432 MHz kohta
+TAG|FONTE|Sporaadilise E MUF ulatub keskmistel laiustel 150 MHz-ni ja kõrgemale (Whitehead [23]); lauge kiire kõrvale juhtimiseks kuni 200 MHz-ni on vaja väga tihedaid pilvi (IK3XTV [22]). ARRL-i rekordid [24] toovad sporaadilise E sidesid ainult 50 ja 144 MHz-l, mitte ühtegi 222 ja 432 MHz-l.
+TAG|SCELTA|Seetõttu analüüsib sakk SPORADIC-E ainult 28, 50, 70 ja 144 MHz sagedusi: 432 MHz spotte ei käsitleta kunagi sporaadilise E-na (mõned üldised allikad, ka tehisintellekti loodud, väidavad seda ilma dokumentatsioonita).
+H1|4. F.A.I. ja aurora: magnetväljaga joondunud hajumine
+H2|4.1 Magnetväli
+TAG|FONTE|Väli arvutatakse mudeliga IGRF-14 [16] (sfäärilised harmoonikud kuni astmeni 13, kordajad 2025-2030 interpoleeritud kuupäevale). K9SE SE-PROP [9] kasutas samamoodi sfääriliste harmoonikute mudelit (WMM).
+TAG|RILIEVO|Arvutus ühtib ppigrf-iga 1 nT täpsusega. Lihtsa dipooliga ei leia kontroll IC8FAX - G4LOH ühtegi hajumispunkti; IGRF-14-ga leiab: täielik mudel on hädavajalik.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, kõrgus 105 km, refraktsioon 4/3): tõenäolisim hajumine JP01AK (61,4° N 0,1° E, Shetlandi saarte lähedal merel), hälve 0,97°, QTF 11° (el. 0,5°) jaamast IO70VJ ja 299° (el. 7,6°) jaamast JO59BC. Refraktsioonita: IP70RP, hälve 1,86°, QTF 359° ja 288°.
+H2|4.2 Peegeldustingimus
+TAG|FONTE|Väljaga joondunud ebaühtluselt hajunud signaal väljub koonusel, mille telg on piki B-d; täiendavatel kontuuridel asuvad jaamad saavad omavahel sidet pidada (a1 + a2 = 180° [1], K9SE/K4GFG kontuurid ±c [2] [9] [10]).
+P|Iga jaama X jaoks arvutatakse c(X), (märgiga) nurk vaatejoone X → SP ja hajumispunktis SP B-ga risti oleva tasandi vahel. Hälve peegeldustingimusest side A-B jaoks on:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Kaja puhul samasse jaama (tagasihajumine) on tingimuseks B-ga risti olev kiir, tolerantsiga ±2-3° (Lange-Hesse [12]); intensiivsus väheneb umbes 3-5 dB hälbekraadi kohta (Jackel jt [13]).
+H2|4.3 Vaade "Scatter trail" (paar A-B)
+TAG|SCELTA|Kõrgusel H asuval 0,2° võrgustikul otsitakse punkte, mida mõlemad jaamad näevad vähemalt minimaalse elevatsiooniga ja mille dev ≤ 2,5°. Värviklassid on 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (Aurora QTF stiil [11]). Ülemine parem kast näitab A (punane) ja B (roheline) QTF-i ja elevatsiooni Scatter traili iga punkti suunas.
+TAG|SCELTA|Tõenäolisim hajumispunkt: hälve ≤ 1° ja kauguste ruutude minimaalne summa (väikseim sumbumine); aurora korral eelistatakse ovaali sees olevaid punkte.
+TAG|RILIEVO|Autori palutud kontrollid (IGRF-14, H = 110 km, refraktsioon 4/3, programmi tulemused): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail Biskaia lahest Aadria mereni piki 44. paralleeli, tõenäolisim hajumine JN44GH (44,3° N 8,6° E, Genova kohal), hälve 0,97°, QTF 314° (el. 7,8°) Caprilt ja 77° (el. 9°) jaamast F6DRO; Scatter trail möödub Genfist 143 km kauguselt. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail üle Edela-Saksamaa ja Belgia, tõenäolisim hajumine JN49FR (49,7° N 8,5° E), hälve 0,88°, QTF 338° (el. 1,9°) Caprilt ja 87° (el. 3°) jaamast G4LOH; Scatter trail möödub Brüsseli teadaolevast hajumispunktist 28 km kauguselt. Refraktsioonita Scatter trailid lühenevad (G4LOH: elevatsioonid 0,5° ja 2,1°). IC8FAX - FA1MXE (JN05GQ, esimene F.A.I. QSO 1990. aastal läbi Genfi suunal 330°): Scatter trail möödub Genfi lähedalt.
+TAG|RILIEVO|Juhtum DL5MCG [6]: majakas DB0FAI (JN58IC) - Dresden läbi Sheffieldi, hälve 0,3° 110 km kõrgusel.
+TAG|SCELTA|Refraktsioon: vaadete F.A.I. ja AURORA elevatsioonide ja horisontide jaoks kasutatakse vaikimisi Maa ekvivalentraadiust k · r, kus k = 4/3 (standardatmosfäär); selle saab välja lülitada märkeruuduga "Refraktsioon". Kaugused maapinnal ja peegeldustingimus arvutatakse endiselt tegeliku geomeetria järgi.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Arvutus pole võimalik: kui mudeli järgi ei rahulda ükski punkt tingimust 2,5° piires (vaade Scatter trail) või peegelduspunkt on jaama horisondi all (vaade Isopeegeldus), näitab programm hüpikakent "Arvutus pole võimalik" ega näita muid tulemusi.
+H2|4.4 Vaade "Isopeegeldus" (isoflection loci): peegelduspunkti kontroll
+TAG|FONTE|See on F.A.I. ja aurora tüüpiline geomeetriline konstruktsioon, millega kontrollitakse, kas valitud peegelduspunkt on õige (SE-PROP isopeegelduse jooned [9], AuroReflex [11], K9SE/K4GFG täiendavad kontuurid [2] [10]).
+P|Peegelduspunkti SP ja iga SP horisondi piires oleva maapinnapunkti G jaoks arvutab programm kontuuride summa; joon S = 0 on nende jaamade asukoht, mis võtavad A vastu läbi SP:
+EQ|S(G) = c(A) + c(G)        joonistatud tasemed: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Tumeda taustaga skeemides on klassid värvilised ribad (punane 0°, oranž 1°, kollane 2°, roheline 4°, helesinine 8°, sinine 16°); heledates skeemides on need paksud jooned (samajooned, leitud marssivate ruutude meetodiga), 0°-le lähemate tasemete puhul paksemad.
+TAG|SCELTA|Programm pakub välja tõenäolisima hajumispunkti (nupp "Kontrolli soovitatud punkti"), kuid kasutaja võib vasakklõpsuga kaardil valida mis tahes muu punkti; paremklõps nihutab jaama B. Otsus paari A-B kohta: rahuldav 1° piires, vastuvõetav 2,5° piires (Lange-Hesse tolerants [12]), sellest suurema korral mitterahuldav. Kui punkt on kummagi jaama horisondi all, ilmub hüpikaken "Arvutus pole võimalik".
+TAG|SCELTA|Üleval: A ja B asimuut ning elevatsioon punkti suunas; roheline ring = jaamade horisont kihi kõrgusel, punane ring = ala, kust punkt on nähtav.
+H2|4.5 Aurora
+TAG|FONTE|Aurora ovaal OVATION Prime, Kp ja päikesetuul NOAA SWPC-lt [15], uuendatakse iga 5 minuti järel ja salvestatakse kausta data/swpc. 1° võrgustikku silutakse bilineaarse interpolatsiooniga 0,5° lahtritele.
+TAG|SCELTA|Soovitatud suund mõlemale jaamale: iga jaama ristsuunalisel joonel (kaja B-ga risti, tolerants 1,5°, kõrgus 105 km) valitakse kõrgeima ovaali tõenäosusega punkt. Kõrgus 105 km jääb Jackeli [13] 104 km ja Lange-Hesse [12] 110 km vahele.
+TAG|FONTE|Praktilised reeglid: suuna põhja ja ida vahele, alustades umbes 45°-st; Doppleri nihe kuni ~2 kHz 144 MHz-l, tüüpiline ulatus ~1300 km, maksimaalne ~2000 km (G3WPO [14]).
+H1|5. Andmete kogumine
+H2|5.1 Telneti seansid
+TAG|SCELTA|Kolm seanssi: vabalt valitav klaster, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], PSKReporteri spotidega klaster (nt DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automaatne sisselogimine kutsungiga, algkäsud semikooloniga eraldatud, uuesti ühendamine 30 s järel.
+H2|5.2 Spotide lugemine
+TAG|SCELTA|Rida "DX de SPOTTER: FREQ DXCALL kommentaar HHMMZ [LOC]" loetakse regulaaravaldisega (mitte fikseeritud veergudena). Kommentaarist loetakse lokaatorid ja leviviis kujul "JN70CN<ES>JO62QM" (esimene lokaator = spotter, teine = DX), leviviis (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N suhe ja emissiooniliik. Puuduvaid lokaatoreid otsitakse CALL3-st [21]; kommentaaridest loetud 6-märgilised lokaatorid lisatakse faili data/call3_nuovi.txt.
+TAG|SCELTA|Arhiiv: üks CSV-fail päevas kaustas data/spot; mälus viimased spotid (kuni 50000). RBN-i ja PSKReporteri puhul salvestatakse tavaliselt ainult spotid alates 28 MHz-st.
+H1|6. Log ADIF
+TAG|FONTE|LoTW Grid Map v2 [25] port: LoTW aruanne (alla laaditud kasutajanime ja parooliga, mida kunagi ei salvestata) ja logi ADIF-failid ühendatakse kutsungi, sagedusala, kuupäeva ja kellaaja järgi; kinnitused liidetakse.
+TAG|SCELTA|Ainult sagedusalad alates 28 MHz-st, igaüks eraldi sagedusalana, ilma koondamiseta. Värvid: oranž = töötatud, sinine = kinnitatud QSL-iga, roheline = kinnitatud LoTW kaudu. Filter leviviisi järgi (ADIF-i PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Värvilahendused
+TAG|FONTE|Värviskeemid on YA-MS 1.3.0 omad, mis omakorda põhinevad YAEC-il [26]: Hele, Öö, Must, kaheksa pastelset ja Meteoorijälg. Skeem valitakse üleval paremal ja aken luuakse kohe uuesti; vaates Isopeegeldus kasutavad tumedad skeemid värvilisi ribasid ja heledad paksu jooni (4.4).
+H1|8. Meteoorhajumine (YA-MS 1.3.0) ja keeled
+TAG|FONTE|Sakk METEOR SCATTER sisaldab täielikku YA-MS 1.3.0 [5] koos selle dokumendi "Efektiivsus - selgitus" ja allikatega. Skript tools/sync_yams.py kopeerib iga YA-MS-i uue versiooni ja muudab selle paneeliks ilma arvutusi muutmata.
+TAG|SCELTA|Keeled: itaalia, inglise, vene, jaapani, saksa ja hollandi, kasutajaliidese (data/lingue/ela-<kood>.txt), Tehnilise dokumendi ja Allikate jaoks. F.A.I./aurora vaates nimetatakse hajumispunktide jälge kõigis tõlgetes "Scatter trail". Olekuribal on näidatud kasutatav magnetmudel (IAGA IGRF-14 [16]).
+H1|9. Piirangud
+LI|Jaamad on lokaatori ruudu keskel: 4-märgilise lokaatori korral ulatub viga ~80 km-ni.
+LI|Spotidest saadud foEs on minimaalne lävi ja sekansi seadus hindab VHF-is vajalikku foEs-i üle (vt 2.3).
+LI|"Tõenäolisim" hajumispunkt on programmi kriteerium: füüsikaline tulemus on kogu Scatter trail.
+LI|OVATION ovaal on optilise aurora tõenäosuse mudel, mida kasutatakse raadioaurora indikaatorina.
