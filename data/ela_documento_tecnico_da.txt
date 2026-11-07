@@ -90,7 +90,7 @@ TAG|SCELTA|Linjen "DX de SPOTTER: FREQ DXCALL kommentar HHMMZ [LOC]" læses med 
 TAG|SCELTA|Forfatterens regel (IC8TEM): hvis <MS>, <AU> eller <TR> (også AUE, AURORA, TROPO) forekommer i spottets tekst, drejer spottet sig ikke om sporadisk E, og fanen SPORADIC-E kasserer det; det er stadig nyttigt til meteor scatter og nordlys. I BENCHMARK Es har logfilens felt PROP_MODE samme rolle.
 TAG|SCELTA|Arkiv: én CSV-fil pr. dag i data/spot; i hukommelsen de seneste spots (højst 50000). Med RBN og PSKReporter gemmes normalt kun spots fra 28 MHz og op.
 TAG|FONTE|Forfatterens regel (IC8TEM): hver gang programmet lukkes, tømmes spotdatabasen, både i hukommelsen og i filerne i data/spot; hver session starter forfra uden gamle spots.
-TAG|SCELTA|Valgfrit lokalt filter (afkrydsningsfelt i DATA COLLECTION, ønsket af forfatteren): "DX de"-linjer med frekvens under 27990,0 kHz kasseres, vises ikke i konsollen og gemmes ikke.
+TAG|SCELTA|Valgfrit lokalt filter (afkrydsningsfelt i DATA COLLECTION, ønsket af forfatteren): "DX de"-linjer med frekvens under 27990,0 kHz eller over 145 MHz (maksimal frekvens angivet af forfatteren) kasseres, vises ikke i konsollen og gemmes ikke. Dataindsamling i YA-MS modtager alligevel alle linjer og anvender sine egne filtre.
 TAG|FONTE|Regel fra YA-MS, som også anvendes her: spots er meteor scatter, og ikke sporadisk E, når de bruger entydige MS-modes (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) eller har <MS> i teksten, uanset store og små bogstaver.
 TAG|FONTE|Forfatterens regel (IC8TEM), den samme som i YA-MS: upræcise lokatorer (færre end 6 tegn) hentes fra CALL3; har CALL3 en lokator på 6 tegn for det kaldesignal, har den altid forrang (i spottene og, i BENCHMARK Es, i logfilens lokatorer).
 H1|6. Log ADIF

@@ -90,7 +90,7 @@ TAG|SCELTA|Rida "DX de SPOTTER: FREQ DXCALL kommentaar HHMMZ [LOC]" loetakse reg
 TAG|SCELTA|Autori reegel (IC8TEM): kui spoti tekstis esineb <MS>, <AU> või <TR> (ka AUE, AURORA, TROPO), ei puuduta spot sporaadilist E-d ja vahekaart SPORADIC-E jätab selle välja; see jääb kasulikuks meteoorhajumise ja aurora jaoks. BENCHMARK Es puhul täidab sama rolli logi väli PROP_MODE.
 TAG|SCELTA|Arhiiv: üks CSV-fail päevas kaustas data/spot; mälus viimased spotid (kuni 50000). RBN-i ja PSKReporteri puhul salvestatakse tavaliselt ainult spotid alates 28 MHz-st.
 TAG|FONTE|Autori reegel (IC8TEM): iga kord, kui programm suletakse, tühjendatakse spottide andmebaas nii mälus kui ka kausta data/spot failides; iga seanss algab uuesti ilma vanade spottideta.
-TAG|SCELTA|Valikuline kohalik filter (märkeruut jaotises DATA COLLECTION, autori soovil): "DX de" read, mille sagedus on alla 27990,0 kHz, jäetakse kõrvale, neid ei kuvata konsoolis ega salvestata.
+TAG|SCELTA|Valikuline kohalik filter (märkeruut jaotises DATA COLLECTION, autori soovil): "DX de" read, mille sagedus on alla 27990,0 kHz või üle 145 MHz (autori määratud suurim sagedus), jäetakse kõrvale, neid ei kuvata konsoolis ega salvestata. YA-MS-i Andmete kogumine saab sellegipoolest kõik read ja rakendab oma filtreid.
 TAG|FONTE|YA-MS reegel, mida rakendatakse ka siin: spotid on meteoorhajumine, mitte sporaadiline E, kui nad kasutavad üheselt MS-režiime (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) või tekstis on <MS>, suur- ja väiketähti eristamata.
 TAG|FONTE|Autori reegel (IC8TEM), sama mis YA-MS-is: ebatäpsed lokaatorid (alla 6 märgi) võetakse CALL3-st; kui CALL3-l on selle kutsungi jaoks 6-märgiline lokaator, on see alati ülimuslik (spottides ja BENCHMARK Es puhul logi lokaatorites).
 H1|6. Log ADIF

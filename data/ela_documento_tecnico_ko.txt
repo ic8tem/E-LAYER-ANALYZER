@@ -90,7 +90,7 @@ TAG|SCELTA|"DX de SPOTTER: FREQ DXCALL 코멘트 HHMMZ [LOC]" 행을 (고정 열
 TAG|SCELTA|작성자 규칙(IC8TEM): 스폿 텍스트에 <MS>, <AU> 또는 <TR>(AUE, AURORA, TROPO 포함)이 나타나면 해당 스폿은 스포라딕 E와 관련이 없으며 SPORADIC-E 탭에서 제외됩니다. 유성 산란과 오로라에는 여전히 유용합니다. BENCHMARK Es에서는 로그의 PROP_MODE 필드가 같은 역할을 합니다.
 TAG|SCELTA|보관: data/spot에 하루 하나의 CSV 파일; 메모리에는 최근 스폿(최대 50000개). RBN과 PSKReporter의 경우 보통 28 MHz 이상의 스폿만 저장합니다.
 TAG|FONTE|작성자 규칙 (IC8TEM): 프로그램을 닫을 때마다 스팟 데이터베이스는 메모리와 data/spot의 파일 모두에서 비워집니다; 각 세션은 이전 스팟 없이 새로 시작됩니다.
-TAG|SCELTA|선택적 로컬 필터(DATA COLLECTION의 체크박스, 작성자 요청): 주파수가 27990.0 kHz 미만인 "DX de" 줄은 버려지며, 콘솔에 나타나지 않고 저장되지 않습니다.
+TAG|SCELTA|선택적 로컬 필터(DATA COLLECTION의 체크박스, 작성자 요청): 주파수가 27990.0 kHz 미만이거나 145 MHz 초과(작성자가 지정한 최대 주파수)인 "DX de" 줄은 버려지며, 콘솔에 나타나지 않고 저장되지 않습니다. YA-MS의 데이터 수집은 그래도 모든 줄을 수신하고 자체 필터를 적용합니다.
 TAG|FONTE|여기에도 적용되는 YA-MS 규칙: 명확한 MS 모드(MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M)를 사용하거나 텍스트에 <MS>가 있는(대소문자 구분 없음) 스팟은 스포라딕 E가 아니라 유성 산란 스팟입니다.
 TAG|FONTE|작성자 규칙(IC8TEM), YA-MS와 동일: 정확하지 않은 로케이터(6자 미만)는 CALL3에서 가져옵니다. CALL3에 해당 호출부호의 6자 로케이터가 있으면 항상 그것이 우선합니다(스폿에서, 그리고 BENCHMARK Es에서는 로그의 로케이터에서).
 H1|6. Log ADIF

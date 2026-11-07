@@ -90,7 +90,7 @@ TAG|SCELTA|"DX de SPOTTER: FREQ DXCALL yorum HHMMZ [LOC]" satırı düzenli ifad
 TAG|SCELTA|Yazarın kuralı (IC8TEM): spot metninde <MS>, <AU> veya <TR> (ayrıca AUE, AURORA, TROPO) geçiyorsa spot sporadik E ile ilgili değildir ve SPORADIC-E sekmesi onu eler; meteor scatter ve aurora için yararlı olmaya devam eder. BENCHMARK Es'te aynı rolü logdaki PROP_MODE alanı üstlenir.
 TAG|SCELTA|Arşiv: data/spot içinde günde bir CSV dosyası; bellekte son spot'lar (en çok 50000). RBN ve PSKReporter ile normalde yalnızca 28 MHz ve üstü spot'lar kaydedilir.
 TAG|FONTE|Yazarın kuralı (IC8TEM): program her kapatıldığında spot veritabanı hem bellekte hem de data/spot içindeki dosyalarda boşaltılır; her oturum eski spot'lar olmadan yeniden başlar.
-TAG|SCELTA|İsteğe bağlı yerel filtre (DATA COLLECTION içinde onay kutusu, yazarın isteği): frekansı 27990,0 kHz altında olan "DX de" satırları atılır, konsolda görünmez ve saklanmaz.
+TAG|SCELTA|İsteğe bağlı yerel filtre (DATA COLLECTION içinde onay kutusu, yazarın isteği): frekansı 27990,0 kHz altında veya 145 MHz üstünde (yazarın belirttiği en yüksek frekans) olan "DX de" satırları atılır, konsolda görünmez ve saklanmaz. YA-MS Veri toplama yine de tüm satırları alır ve kendi filtrelerini uygular.
 TAG|FONTE|Burada da uygulanan YA-MS kuralı: kesin olarak MS modlarını (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) kullanan veya metninde <MS> bulunan spotlar, büyük/küçük harf ayrımı yapılmadan, sporadik E değil meteor scatter spotlarıdır.
 TAG|FONTE|Yazarın kuralı (IC8TEM), YA-MS'teki ile aynı: kesin olmayan lokatörler (6 karakterden az) CALL3'ten alınır; CALL3'te o çağrı işareti için 6 karakterli bir lokatör varsa her zaman o geçerli olur (spot'larda ve BENCHMARK Es'te log lokatörlerinde).
 H1|6. Log ADIF
