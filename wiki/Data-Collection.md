@@ -20,6 +20,20 @@ The last 2000 spots, with band and source filters. Archive: one CSV file per day
 
 **Local filter** (optional box): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. As in YA-MS, meteor scatter (not Sporadic-E) spots are those in the typical MS frequency windows (50190-50300, 70100-70400, 144290-144399 kHz) without tags of another propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), and those with MS-only modes (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) or with `<MS>`. Spots with `<AS>`/`<ACS>` (aircraft scatter) are not used for Sporadic-E.
 
+## Filter column (right 40%)
+
+Data collection is **one for the whole program**: every spot goes through these filters and on to the tab of each propagation mode (inside E-LAYER ANALYZER the YA-MS Data collection tab is not shown). At the top the **local filter** checkbox; below, five sub-tabs:
+
+| Sub-tab | What you set | Defaults (author's rules) |
+|---|---|---|
+| Meteor scatter | the YA-MS filter: MS frequency windows, other-propagation tags, MS modes and `<MS>`, bands | as in YA-MS |
+| Sporadic-E | `< >` tags that exclude the spot, 144 MHz rule, trans-equatorial rule | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, 50 MHz short hop 1200 km/15 min; ±20° |
+| F.A.I. | F.A.I. words, bands, period on the map | FAI, all bands, 24 hours |
+| Aurora | aurora `< >` tags, bands, period on the map | `<AU> <AUR> <AUE> <AURORA>`, all bands, 2 hours |
+| Filter test | paste a cluster line and see how all filters classify it | |
+
+The **Restore the author's rules** button brings back the defaults.
+
 ## CALL3
 
 JTDX **callsign → locator** database (over a million callsigns) in `data/call3.txt`. Buttons **Reload** and **Import a new CALL3.TXT**. 6-character locators read in spot comments are added to `data/call3_nuovi.txt`.
