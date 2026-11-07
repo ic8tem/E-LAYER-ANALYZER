@@ -546,10 +546,8 @@ Raccolta dati	ডেটা সংগ্রহ
 Reverse Beacon Network	Reverse Beacon Network
 Riconnetti	পুনঃসংযোগ করুন
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	বাতিল: "{0}" পাওয়া গেছে, কিন্তু ফ্রিকোয়েন্সি {1:F1} kHz কোনো নির্বাচিত ব্যান্ডে নেই।
-SCARTATO: nessuna parola del filtro.	বাতিল: ফিল্টারের কোনো শব্দ নেই।
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	27990.0 kHz-এর নিচের ক্লাস্টার লাইন সঙ্গে সঙ্গে বাদ দিন (কনসোলে দেখা যায় না এবং সংরক্ষিত হয় না)
 Scrivi il nominativo per il login prima di connettere.	সংযোগের আগে লগইনের কলসাইন লিখুন।
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	কেবল সেই স্পটগুলো রাখা হয় যাতে চালু শব্দগুলোর কোনো একটি আছে, বড়, ছোট বা মিশ্র হাতের অক্ষরে। MSK144, FSK441, PSK2K, JTMS ও JT6M ডিজিটাল মোড কেবল মিটিওর স্ক্যাটারের জন্য ব্যবহৃত হয়: স্পটটি নিশ্চিতভাবে MS। <MS> সাধারণভাবে বোঝায় যে সংযোগটি মিটিওর স্ক্যাটারের মাধ্যমে হয়েছে।
 Spot meteor scatter raccolti (i più recenti in alto)	সংগৃহীত মিটিওর স্ক্যাটার স্পট (সবচেয়ে নতুনগুলো ওপরে)
 Svuota la tabella	টেবিল খালি করুন
 collegamento via meteor scatter	মিটিওর স্ক্যাটারের মাধ্যমে সংযোগ
@@ -563,3 +561,14 @@ righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscart
 righe sotto 27990 kHz scartate: {0}	27990 kHz-এর নিচে বাদ দেওয়া লাইন: {0}
 righe {0}, spot letti {1}, MS {2}	লাইন {0}, পড়া স্পট {1}, MS {2}
 {0} spot MS in memoria	মেমরিতে {0}টি MS স্পট
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	প্রথম মানদণ্ড: মিটিওর স্ক্যাটার স্পটের সাধারণ ফ্রিকোয়েন্সি (kHz)
+2° criterio: modi digitali MS e <MS>	দ্বিতীয় মানদণ্ড: MS ডিজিটাল মোড ও <MS>
+La riga non è uno spot "DX de ..." valido.	লাইনটি বৈধ "DX de ..." স্পট নয়।
+SCARTATO: frequenza sotto 27990,0 kHz.	বাতিল: ফ্রিকোয়েন্সি 27990.0 kHz-এর নিচে।
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	বাতিল: MS উইন্ডোর বাইরে এবং ফিল্টারের কোনো শব্দ নেই।
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	বাতিল: মন্তব্যে অন্য প্রোপাগেশন ({0}) ঘোষিত এবং কোনো MS মোড নেই।
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	এই উইন্ডোগুলোর মধ্যে থাকা স্পট মোডের নাম ছাড়াও গৃহীত হয়, তবে মন্তব্যে এই ট্যাগগুলোর কোনো একটি দিয়ে অন্য প্রোপাগেশন ঘোষিত হলে নয়:
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	উইন্ডোর বাইরের স্পট এবং অন্য প্রোপাগেশনের ট্যাগযুক্ত স্পটের ক্ষেত্রে প্রযোজ্য: চালু শব্দগুলোর কোনো একটি থাকলে সেগুলো রাখা হয়, বড়, ছোট বা মিশ্র হাতের অক্ষরে। MSK144, FSK441, PSK2K, JTMS ও JT6M ডিজিটাল মোড কেবল মিটিওর স্ক্যাটারের জন্য ব্যবহৃত হয়: স্পটটি নিশ্চিতভাবে MS। <MS> সাধারণভাবে নির্দেশ করে যে যোগাযোগটি মিটিওর স্ক্যাটারের মাধ্যমে হয়েছে।
+accettati per finestra di frequenza: {0}	ফ্রিকোয়েন্সি উইন্ডো অনুযায়ী গৃহীত: {0}
+finestra {0} kHz	উইন্ডো {0} kHz
+scartati per altra propagazione: {0}	অন্য প্রোপাগেশনের কারণে বাতিল: {0}

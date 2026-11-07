@@ -547,10 +547,8 @@ Raccolta dati	数据收集
 Reverse Beacon Network	Reverse Beacon Network
 Riconnetti	重新连接
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	已丢弃："{0}" 已找到，但频率 {1:F1} kHz 不在所选频段内。
-SCARTATO: nessuna parola del filtro.	已丢弃：无过滤词。
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	立即丢弃低于 27990.0 kHz 的 cluster 行（不在控制台显示，也不保存）
 Scrivi il nominativo per il login prima di connettere.	连接前请输入登录呼号。
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	只保留包含任一已启用词的 spot，大写、小写或混合均可。MSK144、FSK441、PSK2K、JTMS 和 JT6M 是仅用于流星散射的数字模式：该 spot 必定是 MS。<MS> 泛指该通联是通过流星散射完成的。
 Spot meteor scatter raccolti (i più recenti in alto)	已收集的流星散射 spot（最新的在上方）
 Svuota la tabella	清空表格
 collegamento via meteor scatter	通过流星散射通联
@@ -564,3 +562,14 @@ righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscart
 righe sotto 27990 kHz scartate: {0}	已丢弃低于 27990 kHz 的行：{0}
 righe {0}, spot letti {1}, MS {2}	行数 {0}，读取 spot {1}，MS {2}
 {0} spot MS in memoria	内存中 {0} 条 MS spot
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	第 1 条标准：流星散射 spot 的典型频率 (kHz)
+2° criterio: modi digitali MS e <MS>	第 2 条标准：MS 数字模式和 <MS>
+La riga non è uno spot "DX de ..." valido.	该行不是有效的 "DX de ..." spot。
+SCARTATO: frequenza sotto 27990,0 kHz.	已丢弃：频率低于 27990.0 kHz。
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	已丢弃：不在 MS 窗口内，且无过滤词。
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	已丢弃：注释声明了其他传播方式（{0}），且没有 MS 模式。
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	落在这些窗口内的 spot 即使没有模式名称也会被接受，除非注释用以下标签之一声明了其他传播方式：
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	适用于窗口外的 spot 以及带有其他传播方式标签的 spot：如果包含任一已启用词（大写、小写或混合均可）则保留。MSK144、FSK441、PSK2K、JTMS 和 JT6M 是仅用于流星散射的数字模式：该 spot 必定是 MS。<MS> 泛指该通联是通过流星散射完成的。
+accettati per finestra di frequenza: {0}	按频率窗口接受：{0}
+finestra {0} kHz	窗口 {0} kHz
+scartati per altra propagazione: {0}	因其他传播方式丢弃：{0}

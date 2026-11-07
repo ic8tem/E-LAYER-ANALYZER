@@ -91,7 +91,7 @@ TAG|SCELTA|作者规则（IC8TEM）：如果 spot 文本中出现 <MS>、<AU> �
 TAG|SCELTA|存档：data/spot 中每天一个 CSV 文件；内存中保存最近的 spot（最多 50000 条）。使用 RBN 和 PSKReporter 时，通常只保存 28 MHz 及以上的 spot。
 TAG|FONTE|作者规则（IC8TEM）：每次关闭程序时，spot 数据库都会被清空，包括内存中的数据和 data/spot 中的文件；每次会话都重新开始，不保留旧的 spot。
 TAG|SCELTA|可选本地过滤（DATA COLLECTION 中的复选框，应作者要求）：频率低于 27990.0 kHz 或高于 145 MHz（作者指定的最高频率）的 "DX de" 行被丢弃，不在控制台显示，也不保存。YA-MS 的数据收集仍会接收所有行并应用其自身的过滤。
-TAG|FONTE|此处同样采用 YA-MS 的规则：使用明确的 MS 模式（MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M）或文本中含有 <MS>（不区分大小写）的 spot 属于流星散射，而非偶发 E 层。
+TAG|FONTE|此处同样采用 YA-MS 的规则：落在 MS 典型频率窗口内（50190-50300, 70100-70400, 144290-144399 kHz，可在 YA-MS 的数据收集中设置）且没有其他传播方式标签（<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>）的 spot，或者含有明确 MS 模式（MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M）或 <MS>（不区分大小写）的 spot，属于流星散射，而非偶发 E 层。带有 <AS> 或 <ACS>（aircraft scatter）的 spot 不用于偶发 E 层。
 TAG|FONTE|作者规则（IC8TEM），与 YA-MS 相同：不精确的网格坐标（少于 6 个字符）取自 CALL3；如果 CALL3 中该呼号有 6 个字符的网格坐标，则始终以其为准（在 spot 中，以及在 BENCHMARK Es 的日志网格坐标中）。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。

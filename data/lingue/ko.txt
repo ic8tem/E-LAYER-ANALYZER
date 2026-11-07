@@ -546,10 +546,8 @@ Raccolta dati	데이터 수집
 Reverse Beacon Network	Reverse Beacon Network
 Riconnetti	재연결
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	거부: "{0}"을(를) 찾았지만 주파수 {1:F1} kHz가 선택한 밴드에 없습니다.
-SCARTATO: nessuna parola del filtro.	거부: 필터 단어 없음.
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	27990.0 kHz 미만의 클러스터 줄을 즉시 버리기(콘솔에 표시되지 않고 저장되지 않음)
 Scrivi il nominativo per il login prima di connettere.	연결하기 전에 로그인 호출부호를 입력하세요.
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	활성화된 단어 중 하나를 포함하는 스폿만 남깁니다(대문자, 소문자, 혼합 모두 가능). MSK144, FSK441, PSK2K, JTMS, JT6M은 유성 산란에만 쓰이는 디지털 모드이므로 해당 스폿은 확실히 MS입니다. <MS>는 일반적으로 교신이 유성 산란으로 이루어졌음을 나타냅니다.
 Spot meteor scatter raccolti (i più recenti in alto)	수집된 유성 산란 스폿 (최신 항목이 위)
 Svuota la tabella	표 비우기
 collegamento via meteor scatter	유성 산란 교신
@@ -563,3 +561,14 @@ righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscart
 righe sotto 27990 kHz scartate: {0}	27990 kHz 미만으로 버린 줄: {0}
 righe {0}, spot letti {1}, MS {2}	줄 {0}, 읽은 스폿 {1}, MS {2}
 {0} spot MS in memoria	메모리의 MS 스폿 {0}개
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1차 기준: 유성 산란 스폿의 대표 주파수 (kHz)
+2° criterio: modi digitali MS e <MS>	2차 기준: MS 디지털 모드와 <MS>
+La riga non è uno spot "DX de ..." valido.	이 줄은 올바른 "DX de ..." 스폿이 아닙니다.
+SCARTATO: frequenza sotto 27990,0 kHz.	거부: 주파수가 27990.0 kHz 미만입니다.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	거부: MS 창 밖이며 필터 단어 없음.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	거부: 코멘트에 다른 전파 모드({0})가 표시되어 있고 MS 모드가 없습니다.
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	이 창 안의 스폿은 모드 이름이 없어도 수락됩니다. 단, 코멘트에 다음 태그 중 하나로 다른 전파 모드가 표시된 경우는 제외합니다:
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	창 밖의 스폿과 다른 전파 모드 태그가 있는 스폿에 적용됩니다: 활성화된 단어 중 하나를 포함하면 남깁니다(대문자, 소문자, 혼합 모두 가능). MSK144, FSK441, PSK2K, JTMS, JT6M은 유성 산란에만 쓰이는 디지털 모드이므로 해당 스폿은 확실히 MS입니다. <MS>는 일반적으로 교신이 유성 산란으로 이루어졌음을 나타냅니다.
+accettati per finestra di frequenza: {0}	주파수 창으로 수락: {0}
+finestra {0} kHz	창 {0} kHz
+scartati per altra propagazione: {0}	다른 전파 모드로 거부: {0}

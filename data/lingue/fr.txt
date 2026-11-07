@@ -546,10 +546,8 @@ Raccolta dati	Collecte de données
 Reverse Beacon Network	Reverse Beacon Network
 Riconnetti	Reconnecter
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	ÉCARTÉ : « {0} » trouvé, mais la fréquence {1:F1} kHz n'est dans aucune bande choisie.
-SCARTATO: nessuna parola del filtro.	ÉCARTÉ : aucun mot du filtre.
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Écarter immédiatement les lignes du cluster sous 27990,0 kHz (elles n'apparaissent pas dans la console et ne sont pas enregistrées)
 Scrivi il nominativo per il login prima di connettere.	Saisissez l'indicatif pour le login avant de vous connecter.
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Seuls les spots contenant un des mots activés sont conservés, écrits en majuscules, minuscules ou mélangés. MSK144, FSK441, PSK2K, JTMS et JT6M sont des modes numériques utilisés uniquement pour le meteor scatter : le spot est MS à coup sûr. <MS> indique de façon générique que la liaison a été faite par meteor scatter.
 Spot meteor scatter raccolti (i più recenti in alto)	Spots meteor scatter collectés (les plus récents en haut)
 Svuota la tabella	Vider le tableau
 collegamento via meteor scatter	liaison par meteor scatter
@@ -563,3 +561,14 @@ righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscart
 righe sotto 27990 kHz scartate: {0}	lignes sous 27990 kHz écartées : {0}
 righe {0}, spot letti {1}, MS {2}	lignes {0}, spots lus {1}, MS {2}
 {0} spot MS in memoria	{0} spots MS en mémoire
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1er critère : fréquences typiques des spots meteor scatter (kHz)
+2° criterio: modi digitali MS e <MS>	2e critère : modes numériques MS et <MS>
+La riga non è uno spot "DX de ..." valido.	La ligne n'est pas un spot « DX de ... » valide.
+SCARTATO: frequenza sotto 27990,0 kHz.	ÉCARTÉ : fréquence inférieure à 27990,0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	ÉCARTÉ : hors des fenêtres MS et aucun mot du filtre.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	ÉCARTÉ : le commentaire déclare une autre propagation ({0}) et il n'y a pas de mode MS.
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	Un spot dans ces fenêtres est accepté même sans le nom du mode, sauf quand le commentaire déclare une autre propagation avec l'une de ces mentions :
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	S'applique aux spots hors des fenêtres et à ceux qui portent une mention d'une autre propagation : ils sont conservés s'ils contiennent un des mots activés, écrit en majuscules, minuscules ou mélangés. MSK144, FSK441, PSK2K, JTMS et JT6M sont des modes numériques utilisés uniquement pour le meteor scatter : le spot est MS à coup sûr. <MS> indique de façon générique que la liaison a été faite par meteor scatter.
+accettati per finestra di frequenza: {0}	acceptés par fenêtre de fréquence : {0}
+finestra {0} kHz	fenêtre {0} kHz
+scartati per altra propagazione: {0}	écartés pour autre propagation : {0}
