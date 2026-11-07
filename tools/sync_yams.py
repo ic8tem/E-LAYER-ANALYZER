@@ -117,6 +117,7 @@ for f in os.listdir(ui):
 
 p = os.path.join(ui, 'MainWindow.Spiegazione.cs'); s = rd(p)
 s = rep(s, '        static void FillExplain(StackPanel doc, string file)', '        internal static void FillExplain(StackPanel doc, string file)', 'FillExplain')
+s = rep(s, '                                    Text = tag,\n', '                                    Text = Lang.T(tag),\n', 'etichette FONTE/RILIEVO/SCELTA')
 wr(p, s)
 
 p = os.path.join(ui, 'MainWindow.Screenshot.cs'); s = rd(p)

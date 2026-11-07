@@ -6,6 +6,12 @@ from docx.shared import Pt, RGBColor, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 src, out = sys.argv[1], sys.argv[2]
+import os, re as _re
+_m = _re.search(r'_([a-z]{2})\.txt$', os.path.basename(src))
+_lang = _m.group(1) if _m else 'it'
+TAGNAME = {'en': {'FONTE': 'SOURCE', 'RILIEVO': 'CHECK', 'SCELTA': 'CHOICE'}, 'de': {'FONTE': 'QUELLE', 'RILIEVO': 'PRÜFUNG', 'SCELTA': 'WAHL'},
+           'ja': {'FONTE': '出典', 'RILIEVO': '検証', 'SCELTA': '選択'}, 'ru': {'FONTE': 'ИСТОЧНИК', 'RILIEVO': 'ПРОВЕРКА', 'SCELTA': 'ВЫБОР'},
+           'nl': {'FONTE': 'BRON', 'RILIEVO': 'CONTROLE', 'SCELTA': 'KEUZE'}}.get(_lang, {})
 d = Document()
 for s in d.sections:
     s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2)
@@ -26,7 +32,7 @@ for raw in open(src, encoding='utf-8'):
         d.add_heading(text, level=2)
     elif kind == 'TAG':
         t, _, body = text.partition('|')
-        p = d.add_paragraph(); r = p.add_run(t.strip().upper() + '  '); r.bold = True; r.font.size = Pt(9); r.font.color.rgb = COL.get(t.strip().upper(), COL['FONTE'])
+        p = d.add_paragraph(); r = p.add_run(TAGNAME.get(t.strip().upper(), t.strip().upper()) + '  '); r.bold = True; r.font.size = Pt(9); r.font.color.rgb = COL.get(t.strip().upper(), COL['FONTE'])
         p.add_run(body)
     elif kind == 'EQ':
         p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER; r = p.add_run(text); r.italic = True; r.font.name = 'Cambria Math'; r.font.size = Pt(12)

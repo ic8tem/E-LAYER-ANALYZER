@@ -17,13 +17,16 @@ namespace ELA
         static double[,] g = new double[N + 1, N + 1], h = new double[N + 1, N + 1];
         public static bool Loaded;
         public static double Epoch;
-        public static string Info = "";
+        static string info = "";
+        static double epochYear;
+        // descrizione per la barra di stato e le mappe, nella lingua scelta
+        public static string Info { get { return Loaded ? YAMS.Lang.F("IGRF-14, epoca {0}", epochYear.ToString("F2", CultureInfo.InvariantCulture)) : YAMS.Lang.T(info); } }
 
         public static void Load(string dataDir, DateTime date)
         {
             Loaded = false;
             string f = Path.Combine(dataDir, "igrf14.csv");
-            if (!File.Exists(f)) { Info = "igrf14.csv mancante: uso il dipolo"; return; }
+            if (!File.Exists(f)) { info = "igrf14.csv mancante: uso il dipolo"; return; }
             double year = date.Year + (date.DayOfYear - 0.5) / (DateTime.IsLeapYear(date.Year) ? 366.0 : 365.0);
             double t = Math.Max(0, Math.Min(1, (year - 2025.0) / 5.0));
             double[,] gg = new double[N + 1, N + 1], hh = new double[N + 1, N + 1];
@@ -40,9 +43,9 @@ namespace ELA
                 if (m >= 0) gg[n, m] = v; else hh[n, -m] = v;
                 cnt++;
             }
-            if (cnt < 195) { Info = "igrf14.csv incompleto: uso il dipolo"; return; }
+            if (cnt < 195) { info = "igrf14.csv incompleto: uso il dipolo"; return; }
             g = gg; h = hh; Epoch = year; Loaded = true;
-            Info = "IGRF-14, epoca " + year.ToString("F2", CultureInfo.InvariantCulture);
+            epochYear = year;
         }
 
         // Campo in coordinate geocentriche (lat, lon in gradi; r in km): componenti Nord, Est, Giu' (nT)

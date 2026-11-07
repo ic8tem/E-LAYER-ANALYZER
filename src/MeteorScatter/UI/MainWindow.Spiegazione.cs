@@ -153,7 +153,7 @@ namespace YAMS
                                 VerticalAlignment = VerticalAlignment.Top,
                                 Child = new TextBlock
                                 {
-                                    Text = tag,
+                                    Text = Lang.T(tag),
                                     Foreground = Brushes.White,
                                     FontWeight = FontWeight.Bold,
                                     FontSize = 10.5,
