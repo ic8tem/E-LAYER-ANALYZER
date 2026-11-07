@@ -1,5 +1,5 @@
 // E-LAYER ANALYZER - linguetta BENCHMARK 50 MHz: banco di prova dell'E-sporadico multi-salto in 50 MHz su un log ADIF
-// (per ora una stazione e un log). Mappa di Mercatore a centro libero (rotella = zoom, trascina = sposta). Si sceglie il
+// (una stazione, piu' una seconda facoltativa). Multi-salto = oltre 3100 km (regola dell'autore). Mappa di Mercatore a centro libero (rotella = zoom, trascina = sposta). Si sceglie il
 // giorno e l'orario di inizio e fine; la foEs e' facoltativa (casella). Avvicinando il mouse a una tratta, icone e linea
 // si ingrandiscono e compare il quadrato WWL a 6 caratteri del corrispondente; il clic sinistro su quella tratta apre
 // un popup che chiede se vedere tutti i QSO del file con la posizione terminale entro 150 km da quel punto.
@@ -35,6 +35,8 @@ namespace ELA
         readonly TableView tQso;
         readonly SelectableTextBlock txtDet;
         public const double AreaKm = 150;
+        public const double MultiKm = 3100;   // regola dell'autore (IC8TEM): nel benchmark il multi-salto si tratta oltre i 3100 km
+        static bool IsMulti(BenchQso q) { return q.Path.DistKm > MultiKm; }
         static readonly string[] Times = BuildTimes();
 
         // due stazioni, due log: indice 0 = prima stazione, 1 = seconda stazione (facoltativa)
@@ -168,7 +170,7 @@ namespace ELA
             for (int k = 0; k < 2; k++) lblFile[k].Text = file[k].Length > 0 ? info[k] : Lang.T("Nessun log caricato");
             busyFill = true; cmbDay.ItemsSource = new string[0]; busyFill = false;
             tQso.Rows.Clear(); tQso.Refresh(); lblSel.Text = ""; lblArea.Text = ""; bAll.IsVisible = false;
-            txtDet.Text = Lang.T("Carica il log ADIF di una stazione: la linguetta mostra i QSO in 50 MHz oltre il singolo salto (più di 2400 km, tabella IK3XTV), giorno per giorno e nell'orario scelto, sulla mappa di Mercatore.");
+            txtDet.Text = Lang.T("Carica il log ADIF di una stazione: la linguetta mostra i QSO in 50 MHz multi-salto (oltre 3100 km, regola dell'autore), giorno per giorno e nell'orario scelto, sulla mappa di Mercatore.");
             Draw();
         }
 
@@ -194,7 +196,7 @@ namespace ELA
                 geo[q] = l.Pts;
             }
             // giornate con multi-salto in 50 MHz delle stazioni mostrate (proposta: quella con piu' QSO)
-            List<BenchQso> shown = all.Where(q => q.Path.Hops >= 2 && Shown(q)).ToList();
+            List<BenchQso> shown = all.Where(q => IsMulti(q) && Shown(q)).ToList();
             List<string> days = shown.Select(q => q.Day).Distinct().OrderBy(d => d).ToList();
             string keep = cmbDay.SelectedItem as string;
             busyFill = true;
@@ -243,7 +245,7 @@ namespace ELA
                     q.Path = EsModel.Build(new Spot { Utc = dt, FreqKHz = mhz * 1000, DxCall = call, Spotter = mca, LocSpotter = mg, LocDx = grid, LatS = tla, LonS = tlo, LatD = la, LonD = lo, Prop = "ES" }, Ui.V(numH));
                     if (q.Path == null) continue;
                     if (prop != "ES" && EsModel.IsTransEquatorial(tla, tlo, la, lo)) { tep++; continue; }   // transequatoriale (regola IC8TEM)
-                    list.Add(q); n++; if (q.Path.Hops >= 2) multi++;
+                    list.Add(q); n++; if (IsMulti(q)) multi++;
                 }
             }
             finally { EsModel.ShortHopKm = old; }
@@ -263,7 +265,7 @@ namespace ELA
             {
                 string day = cmbDay.SelectedItem as string;
                 int a = Minutes(cmbFrom.SelectedItem as string, 0), b = Minutes(cmbTo.SelectedItem as string, 24 * 60);
-                cur = all.Where(q => Shown(q) && q.Path.Hops >= 2 && q.Day == day && Mins(q) >= a && Mins(q) <= b).ToList();
+                cur = all.Where(q => Shown(q) && IsMulti(q) && q.Day == day && Mins(q) >= a && Mins(q) <= b).ToList();
             }
             if (sel != null && !cur.Contains(sel)) sel = null;
             if (hover != null && !cur.Contains(hover)) hover = sel;
