@@ -8,7 +8,7 @@
 
 **Popup "Calcolo non possibile".** Per il modello non esiste un punto che soddisfi la condizione di riflessione visto da entrambe le stazioni, oppure il punto scelto è sotto l'orizzonte. Prova un'altra quota o attiva la rifrazione.
 
-**Lo sporadico E in 432 MHz?** Non si applica: vedi [SPORADIC-E](Sporadic-E-it).
+**L'E-sporadico in 432 MHz?** Non si applica: vedi [SPORADIC-E](Sporadic-E-it).
 
 **Su Mac il programma non si apre.** Usa **Installa E-LAYER-ANALYZER.command** (clic destro > Apri): toglie il blocco di "scaricato da Internet".
 

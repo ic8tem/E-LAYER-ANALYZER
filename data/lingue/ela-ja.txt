@@ -106,7 +106,7 @@ Clic su uno spot della tabella, su una nube o su un punto della mappa.	表のス
 Gli spot arrivano dalle sessioni telnet della linguetta DATA COLLECTION; i locator mancanti si cercano in CALL3.	スポットは DATA COLLECTION タブの Telnet セッションから取得します。不足しているロケーターは CALL3 で検索します。
 Tabella IK3XTV: singolo salto 500-650 / 1500-2000 / 2200-2400 km (minima / ottimale / massima); doppio 2800-3000 / 3200-4000 / 4400-5000 km; triplo ottimale 4800-6400, massima 6900 km.	IK3XTV の表: 1 ホップ 500-650 / 1500-2000 / 2200-2400 km (最小 / 最適 / 最大); 2 ホップ 2800-3000 / 3200-4000 / 4400-5000 km; 3 ホップ 最適 4800-6400、最大 6900 km。
 Multi-salto: l'autore (IC8TEM) ha esperienza di primo salto corto, entro i 1200 km dal proprio QTH.	マルチホップ: 作者 (IC8TEM) は、自局 QTH から 1200 km 以内の短い第 1 ホップを経験しています。
-Lo sporadico E non si applica ai 432 MHz: non esistono collegamenti Es documentati in 70 cm (record ARRL: Es solo su 50 e 144 MHz; MUF dell'Es fino a circa 150-200 MHz). Gli spot in 432 MHz non vengono analizzati qui.	スポラディックE は 432 MHz には当てはまりません: 70 cm で記録された Es 交信はありません (ARRL 記録: Es は 50 と 144 MHz のみ; Es の MUF は最大約 150-200 MHz)。432 MHz のスポットはここでは解析しません。
+L'E-sporadico non si applica ai 432 MHz: non esistono collegamenti Es documentati in 70 cm (record ARRL: Es solo su 50 e 144 MHz; MUF dell'Es fino a circa 150-200 MHz). Gli spot in 432 MHz non vengono analizzati qui.	スポラディックE は 432 MHz には当てはまりません: 70 cm で記録された Es 交信はありません (ARRL 記録: Es は 50 と 144 MHz のみ; Es の MUF は最大約 150-200 MHz)。432 MHz のスポットはここでは解析しません。
 Apri file ADIF...	ADIF ファイルを開く...
 Scarica da LoTW...	LoTW からダウンロード...
 Togliere tutti i file ADIF aperti e il report LoTW scaricato?	開いている ADIF ファイルとダウンロードした LoTW レポートをすべて閉じますか?
@@ -117,7 +117,7 @@ Quadrato scelto (clic sulla mappa o sulla tabella)	選択したグリッド (地
 Quadrati della banda	バンドのグリッド
 {0}: {1} QSO, {2} quadrati lavorati, {3} confermati ({4} via LoTW). File aperti: {5}; report LoTW: {6}.	{0}: {1} QSO、交信済グリッド {2}、確認済 {3} (LoTW {4})。開いたファイル: {5}; LoTW レポート: {6}。
 no	なし
-Nota: lo sporadico E non si applica ai 432 MHz (vedi Documento tecnico).	注: スポラディックE は 432 MHz には当てはまりません (技術文書を参照)。
+Nota: l'E-sporadico non si applica ai 432 MHz (vedi Documento tecnico).	注: スポラディックE は 432 MHz には当てはまりません (技術文書を参照)。
 lavorato, non confermato	交信済、未確認
 confermato con QSL	QSL で確認済
 confermato via LoTW	LoTW で確認済
@@ -218,7 +218,7 @@ RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo.	RBN
 Cluster con PSKReporter	PSKReporter 対応クラスター
 Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500). In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	PSKReporter のスポットを配信する DM4X クラスター (dm4x.ddns.net、ポート 8500)。代わりに HamAlert (hamalert.org 7300、トリガー付きアカウントが必要)。
 Tutti i modi di propagazione	全伝搬モード
-ES - sporadico E	ES - スポラディックE
+ES - E-sporadico	ES - スポラディックE
 FAI	FAI
 AUR / AUE - aurora	AUR / AUE - オーロラ
 MS - meteor scatter	MS - メテオスキャッター
@@ -269,8 +269,8 @@ Stazione al centro	中心の局
 Log ADIF da analizzare (anche di un'altra stazione)	解析する ADIF ログ (他局のものも可)
 Leggo {0}...	{0} を読込中...
 Nessun log caricato	ログ未読込
-Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	ADIF ログ (他局のものも可) を読み込みます: プログラムは送信位置 (MY_GRIDSQUARE、または上で入力したロケーター) と受信位置 (GRIDSQUARE) を求め、QSO を日別・時刻別に分け、スポラディックE とマルチホップの計算を提案します。
-{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} レコード、解析した QSO {2}; 除外: ロケーターなし {3}、他バンド {4} (432 MHz を含む: スポラディックE は当てはまりません)、別の PROP_MODE {5}、500 km 未満 {6}。
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dell'E-sporadico e del multi-salto.	ADIF ログ (他局のものも可) を読み込みます: プログラムは送信位置 (MY_GRIDSQUARE、または上で入力したロケーター) と受信位置 (GRIDSQUARE) を求め、QSO を日別・時刻別に分け、スポラディックE とマルチホップの計算を提案します。
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: l'E-sporadico non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} レコード、解析した QSO {2}; 除外: ロケーターなし {3}、他バンド {4} (432 MHz を含む: スポラディックE は当てはまりません)、別の PROP_MODE {5}、500 km 未満 {6}。
 Tutta la giornata	終日
 BENCHMARK Es	BENCHMARK Es
 ■ primo salto della stazione / ○ primo salto corto	■ 局の第 1 ホップ / ○ 短い第 1 ホップ

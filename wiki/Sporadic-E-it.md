@@ -19,7 +19,7 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 ## Cosa mostra
 
 - Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
-- Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano lo sporadico E ma servono al meteor scatter, all'aurora o al tropo.
+- Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano l'E-sporadico ma servono al meteor scatter, all'aurora o al tropo.
 - Per ogni spot: distanza, **numero di salti** secondo la tabella di **IK3XTV**, elevazione, **foEs minima** (legge della secante).
 - **Primo salto di entrambe le stazioni**: quadratino arancio = primo salto dello spotter, viola = primo salto del DX (salti uguali); giallo = punto medio del singolo salto.
 - **Primo salto corto** (cerchi vuoti): l'autore ha esperienza, nel multi-salto, di un primo salto corto entro i **1200 km** dal proprio QTH; la lunghezza si imposta.
@@ -41,4 +41,4 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 
 ## Nota sui 432 MHz
 
-Lo sporadico E **non si applica ai 432 MHz**: la MUF dell'Es arriva a circa 150-200 MHz e i record ARRL riportano collegamenti in Es solo su 50 e 144 MHz. Gli spot in 70 cm non vengono analizzati qui.
+L'E-sporadico **non si applica ai 432 MHz**: la MUF dell'Es arriva a circa 150-200 MHz e i record ARRL riportano collegamenti in Es solo su 50 e 144 MHz. Gli spot in 70 cm non vengono analizzati qui.

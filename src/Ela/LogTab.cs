@@ -33,7 +33,7 @@ namespace ELA
         string selGrid;
         Dictionary<string, SquareInfo> squares = new Dictionary<string, SquareInfo>();
         static readonly string[] PropKeys = { "", "ES", "FAI", "AU", "MS", "TR", "EME", "F2", "-" };
-        static readonly string[] PropNames = { "Tutti i modi di propagazione", "ES - sporadico E", "FAI", "AUR / AUE - aurora", "MS - meteor scatter", "TR - tropo", "EME", "F2", "senza PROP_MODE" };
+        static readonly string[] PropNames = { "Tutti i modi di propagazione", "ES - E-sporadico", "FAI", "AUR / AUE - aurora", "MS - meteor scatter", "TR - tropo", "EME", "F2", "senza PROP_MODE" };
         public static readonly Color ColWorked = Color.FromArgb(150, 255, 140, 0), ColQsl = Color.FromArgb(150, 30, 90, 255), ColLotw = Color.FromArgb(150, 0, 175, 0);
 
         public LogTab()
@@ -182,7 +182,7 @@ namespace ELA
             lblStats.Text = Lang.F("{0}: {1} QSO, {2} quadrati lavorati, {3} confermati ({4} via LoTW). File aperti: {5}; report LoTW: {6}.",
                 idx >= 0 ? LogBands.Labels[idx] : band, nQso, squares.Count, nConf, nLotw, LogStore.Files.Count, File.Exists(LogStore.LotwFile) ? Lang.T("sì") : Lang.T("no"))
                 + (LogStore.LastError.Length > 0 ? "\n" + LogStore.LastError : "")
-                + (band == "70cm" ? "\n" + Lang.T("Nota: lo sporadico E non si applica ai 432 MHz (vedi Documento tecnico).") : "");
+                + (band == "70cm" ? "\n" + Lang.T("Nota: l'E-sporadico non si applica ai 432 MHz (vedi Documento tecnico).") : "");
             Draw(); Detail();
         }
 

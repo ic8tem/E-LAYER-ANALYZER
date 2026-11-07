@@ -106,7 +106,7 @@ Clic su uno spot della tabella, su una nube o su un punto della mappa.	표의 �
 Gli spot arrivano dalle sessioni telnet della linguetta DATA COLLECTION; i locator mancanti si cercano in CALL3.	스폿은 DATA COLLECTION 탭의 텔넷 세션에서 들어오며, 없는 로케이터는 CALL3에서 찾습니다.
 Tabella IK3XTV: singolo salto 500-650 / 1500-2000 / 2200-2400 km (minima / ottimale / massima); doppio 2800-3000 / 3200-4000 / 4400-5000 km; triplo ottimale 4800-6400, massima 6900 km.	IK3XTV 표: 단일 홉 500-650 / 1500-2000 / 2200-2400 km (최소 / 최적 / 최대); 2홉 2800-3000 / 3200-4000 / 4400-5000 km; 3홉 최적 4800-6400, 최대 6900 km.
 Multi-salto: l'autore (IC8TEM) ha esperienza di primo salto corto, entro i 1200 km dal proprio QTH.	멀티홉: 저자(IC8TEM)는 자신의 QTH에서 1200 km 이내의 짧은 첫 홉을 경험했습니다.
-Lo sporadico E non si applica ai 432 MHz: non esistono collegamenti Es documentati in 70 cm (record ARRL: Es solo su 50 e 144 MHz; MUF dell'Es fino a circa 150-200 MHz). Gli spot in 432 MHz non vengono analizzati qui.	스포라딕 E는 432 MHz에 해당하지 않습니다: 70 cm에서 문서로 확인된 Es 교신은 없습니다 (ARRL 기록: Es는 50 및 144 MHz에서만; Es MUF는 약 150-200 MHz까지). 432 MHz 스폿은 여기서 분석하지 않습니다.
+L'E-sporadico non si applica ai 432 MHz: non esistono collegamenti Es documentati in 70 cm (record ARRL: Es solo su 50 e 144 MHz; MUF dell'Es fino a circa 150-200 MHz). Gli spot in 432 MHz non vengono analizzati qui.	스포라딕 E는 432 MHz에 해당하지 않습니다: 70 cm에서 문서로 확인된 Es 교신은 없습니다 (ARRL 기록: Es는 50 및 144 MHz에서만; Es MUF는 약 150-200 MHz까지). 432 MHz 스폿은 여기서 분석하지 않습니다.
 Apri file ADIF...	ADIF 파일 열기...
 Scarica da LoTW...	LoTW에서 다운로드...
 Togliere tutti i file ADIF aperti e il report LoTW scaricato?	열린 ADIF 파일과 다운로드한 LoTW 리포트를 모두 제거할까요?
@@ -117,7 +117,7 @@ Quadrato scelto (clic sulla mappa o sulla tabella)	선택한 그리드 (지도 �
 Quadrati della banda	밴드별 그리드
 {0}: {1} QSO, {2} quadrati lavorati, {3} confermati ({4} via LoTW). File aperti: {5}; report LoTW: {6}.	{0}: QSO {1}개, 교신한 그리드 {2}개, 확인 {3}개 (LoTW {4}개). 열린 파일: {5}; LoTW 리포트: {6}.
 no	없음
-Nota: lo sporadico E non si applica ai 432 MHz (vedi Documento tecnico).	참고: 스포라딕 E는 432 MHz에 해당하지 않습니다 (기술 문서 참조).
+Nota: l'E-sporadico non si applica ai 432 MHz (vedi Documento tecnico).	참고: 스포라딕 E는 432 MHz에 해당하지 않습니다 (기술 문서 참조).
 lavorato, non confermato	교신함, 미확인
 confermato con QSL	QSL로 확인됨
 confermato via LoTW	LoTW로 확인됨
@@ -218,7 +218,7 @@ RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo.	RBN
 Cluster con PSKReporter	PSKReporter 클러스터
 Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500). In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	PSKReporter 스폿을 제공하는 DM4X 클러스터 (dm4x.ddns.net, 포트 8500). 대안으로 HamAlert (hamalert.org 7300, 트리거가 설정된 계정 필요).
 Tutti i modi di propagazione	모든 전파 모드
-ES - sporadico E	ES - 스포라딕 E
+ES - E-sporadico	ES - 스포라딕 E
 FAI	FAI
 AUR / AUE - aurora	AUR / AUE - 오로라
 MS - meteor scatter	MS - 유성 산란
@@ -269,8 +269,8 @@ Stazione al centro	중심 국
 Log ADIF da analizzare (anche di un'altra stazione)	분석할 ADIF 로그 (다른 국의 로그도 가능)
 Leggo {0}...	{0} 읽는 중...
 Nessun log caricato	불러온 로그 없음
-Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	ADIF 로그를 불러오세요 (다른 국의 로그도 가능): 프로그램이 송신 위치(MY_GRIDSQUARE, 또는 위에 입력한 로케이터)와 수신 위치(GRIDSQUARE)를 찾아 QSO를 날짜별, 시간별로 나누고 스포라딕 E와 멀티홉 계산을 제안합니다.
-{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: 레코드 {1}개, 분석한 QSO {2}개; 제외: 로케이터 없음 {3}개, 다른 밴드 {4}개 (432 MHz 포함: 스포라딕 E 해당 없음), 다른 PROP_MODE {5}개, 500 km 미만 {6}개.
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dell'E-sporadico e del multi-salto.	ADIF 로그를 불러오세요 (다른 국의 로그도 가능): 프로그램이 송신 위치(MY_GRIDSQUARE, 또는 위에 입력한 로케이터)와 수신 위치(GRIDSQUARE)를 찾아 QSO를 날짜별, 시간별로 나누고 스포라딕 E와 멀티홉 계산을 제안합니다.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: l'E-sporadico non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: 레코드 {1}개, 분석한 QSO {2}개; 제외: 로케이터 없음 {3}개, 다른 밴드 {4}개 (432 MHz 포함: 스포라딕 E 해당 없음), 다른 PROP_MODE {5}개, 500 km 미만 {6}개.
 Tutta la giornata	하루 전체
 BENCHMARK Es	BENCHMARK Es
 ■ primo salto della stazione / ○ primo salto corto	■ 국의 첫 홉 / ○ 짧은 첫 홉

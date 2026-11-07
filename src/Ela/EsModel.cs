@@ -1,4 +1,4 @@
-// E-LAYER ANALYZER - modello dei salti di sporadico E
+// E-LAYER ANALYZER - modello dei salti di E-sporadico
 // Numero di salti e giudizio sulla distanza: tabella di Flavio Egano IK3XTV (singolo, doppio, triplo salto).
 // Punti di riflessione: salti uguali lungo il cerchio massimo; primo salto di ciascuna stazione a D/(2n) da essa.
 // Ipotesi "primo salto corto" (esperienza dell'autore IC8TEM): nel multi-salto il primo salto di una stazione puo'
@@ -15,7 +15,7 @@ namespace ELA
     {
         public Spot Spot;
         public double DistKm;
-        public int Hops;            // 0 = troppo corto per lo sporadico E
+        public int Hops;            // 0 = troppo corto per l'E-sporadico
         public double HopKm, SecPhi, FoEsMin, ElevDeg;
         public string Judgement = "";
         public List<EsHop> Points = new List<EsHop>();

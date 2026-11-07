@@ -2,7 +2,7 @@
 
 [← Home](Home-it)
 
-Il F.A.I. (Field Aligned Irregularities) è lo scatter da irregolarità allineate al campo geomagnetico, tipico delle sere d'estate dopo lo sporadico E. Il segnale diffuso esce su un **cono** con asse lungo il campo: due stazioni si collegano se stanno su **contorni supplementari** (a1 + a2 = 180°, articolo IC8FAX-IC8TEM; contorni ±c di K9SE). Il campo magnetico è calcolato con il modello **IGRF-14**.
+Il F.A.I. (Field Aligned Irregularities) è lo scatter da irregolarità allineate al campo geomagnetico, tipico delle sere d'estate dopo l'E-sporadico. Il segnale diffuso esce su un **cono** con asse lungo il campo: due stazioni si collegano se stanno su **contorni supplementari** (a1 + a2 = 180°, articolo IC8FAX-IC8TEM; contorni ±c di K9SE). Il campo magnetico è calcolato con il modello **IGRF-14**.
 
 ## Vista Scatter trail (coppia A-B)
 

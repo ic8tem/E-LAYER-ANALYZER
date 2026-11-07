@@ -2,7 +2,7 @@
 
 *a cura di Costantino IC8TEM* — [English](Home) · **Italiano** · [日本語](Home-ja) · [Русский](Home-ru)
 
-**E-LAYER ANALYZER** è un programma gratuito per radioamatori che analizza tutti i modi di propagazione VHF che coinvolgono lo **strato E** della ionosfera: **sporadico E** (anche multi-salto extracontinentale), **F.A.I.** (irregolarità allineate al campo magnetico), **meteor scatter** (con il programma YA-MS integrato) e **aurora radio**. Funziona su **Windows (64 e 32 bit), Linux, Raspberry Pi e Mac**, in **28 lingue**, e non scrive nulla fuori dalla propria cartella.
+**E-LAYER ANALYZER** è un programma gratuito per radioamatori che analizza tutti i modi di propagazione VHF che coinvolgono lo **strato E** della ionosfera: **E-sporadico** (anche multi-salto extracontinentale), **F.A.I.** (irregolarità allineate al campo magnetico), **meteor scatter** (con il programma YA-MS integrato) e **aurora radio**. Funziona su **Windows (64 e 32 bit), Linux, Raspberry Pi e Mac**, in **28 lingue**, e non scrive nulla fuori dalla propria cartella.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 
@@ -31,7 +31,7 @@
 
 - G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, *IL F.A.I., quello strano fenomeno del dopo E-sporadico*, Capri, 2011.
 - G. Cerrotta IC8FAX, [Field Aligned Irregularities](https://qsl.net/ic8fax/page4.html).
-- F. Egano IK3XTV, tabella delle distanze dello sporadico E ([qsl.net/ik3xtv](https://www.qsl.net/ik3xtv/)).
+- F. Egano IK3XTV, tabella delle distanze dell'E-sporadico ([qsl.net/ik3xtv](https://www.qsl.net/ik3xtv/)).
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (fonte di YA-MS).
 
 L'elenco completo è nella linguetta FONTI del programma.

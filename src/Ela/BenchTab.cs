@@ -1,4 +1,4 @@
-// E-LAYER ANALYZER - linguetta BENCHMARK Es: banco di prova dello sporadico E e del multi-salto su un log ADIF intero,
+// E-LAYER ANALYZER - linguetta BENCHMARK Es: banco di prova dell'E-sporadico e del multi-salto su un log ADIF intero,
 // anche di un'altra stazione. Dal log: posizione di trasmissione (MY_GRIDSQUARE, o il locator scritto nel riquadro),
 // posizioni di ricezione (GRIDSQUARE), QSO per giornata e per ora. Per la selezione: skip abbozzato per settori di
 // azimut (distanza minima e massima raggiunte), nubi Es sui quadrati Maidenhead, foEs stimata con la legge della
@@ -204,7 +204,7 @@ namespace ELA
             lblFile.Text = Lang.T("Nessun log caricato");
             tDays.Rows.Clear(); tDays.Refresh(); tHours.Rows.Clear(); tHours.Refresh(); tQso.Rows.Clear(); tQso.Refresh();
             if (Station.Valid && double.IsNaN(cLat)) { txtCall.Text = Station.Call; txtLoc.Text = Station.Loc; SetCentre(); }
-            txtCalc.Text = Lang.T("Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.");
+            txtCalc.Text = Lang.T("Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dell'E-sporadico e del multi-salto.");
             Draw();
         }
 
@@ -272,7 +272,7 @@ namespace ELA
             list.Sort((a, b) => a.Utc.CompareTo(b.Utc));
             all = list;
             ignored += noGrid + otherBand + otherProp + tooShort;
-            lblFile.Text = Lang.F("{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.",
+            lblFile.Text = Lang.F("{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: l'E-sporadico non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.",
                 Path.GetFileName(file), raw.Count, all.Count, noGrid, otherBand, otherProp, tooShort);
             FillDays();
             if (selDay == null || !all.Any(q => q.Day == selDay))
@@ -642,7 +642,7 @@ namespace ELA
             FillDays(); FillHours(); Analyze();
         }
 
-        // log di prova (una giornata di sporadico E da JN70CN con singoli e multi-salti)
+        // log di prova (una giornata di E-sporadico da JN70CN con singoli e multi-salti)
         public static string DemoAdif()
         {
             string[][] q =
