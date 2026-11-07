@@ -1,0 +1,57 @@
+TITLE|E-LAYER ANALYZERi tehniline aruanne
+SUB|Valikud, mis viisid programmi loomiseni - koostanud Costantino IC8TEM - versioon 0.4.3, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD.
+H1|1. Eessõna
+P|E-LAYER ANALYZER sündis VHF-operaatori selgest vajadusest: omada ühes tööriistas kõike, mis on vajalik ionosfääri E-kihti kaasavate leviviiside tõlgendamiseks. Seni uuriti sporaadilist E-d, F.A.I.-d, meteoorhajumist ja raadioaurorat erinevate programmidega, mis olid sageli loodud ühe operatsioonisüsteemi jaoks, mõnikord enam hooldamata, ning millest igaühel oli oma geomeetriline mudel ja omad kokkulepped. Käesolev aruanne esitab tehtud valikute põhjused, eristades seda, mis tuleneb kirjandusest, seda, mis tuleneb autori kogemusest eetris, ning seda, mis on programmi valik, mida tuleb kasutamisega kinnitada.
+H2|1.1 Eesmärgid
+LI|Koondada ühte programmi sporaadilise E (ka mitmehüppelise ja mandritevahelise), F.A.I., meteoorhajumise ja raadioaurora analüüs.
+LI|Töötada tegelike andmetega: DX-klastrite reaalajas spotid ja jaamade ADIF-logid.
+LI|Muuta iga arvutus kontrollitavaks: valemid ja allikad samm-sammult esitatud ning võrdluseks tegelikud juhtumid.
+LI|Töötada kõikjal, kus operaatoril on oma jaama arvuti, Windowsi arvutist kuni Raspberry Pi-ni.
+H2|1.2 Meetod
+P|Töö edenes järjestikuste katsetuste kaudu: iga sakk visandati esmalt, seejärel kontrolliti dokumenteeritud juhtumitel ja parandati siis autori juhiste järgi, mis põhinevad aastatepikkusel VHF-tegevusel Caprilt (JN70CN). Sellest tulenenud reeglid on arvutusvalikute kokkuvõttes märgitud autori reeglitena, et lugeja saaks neid kirjanduse tulemustest eristada.
+H1|2. Programmi arhitektuur
+H2|2.1 Üks platvorm kõigile süsteemidele
+TAG|SCELTA|Programm on kirjutatud C#-s .NET 8 platvormil graafilise liidesega Avalonia. Seda eelistati Windowsiga seotud lahendustele, sest üks lähtekood annab paketid Windowsile (64 ja 32 bitti), Linuxile, Raspberry Pi-le (ARM64) ja Macile sama graafika ja samade funktsioonidega; kompileerimine ja paketid valmivad automaatselt, koos iga saki testkuvatõmmistega mitmes värviskeemis ja keeles.
+TAG|SCELTA|Kõik andmed jäävad programmi kõrval asuvasse kausta data ning ühtegi faili ei kirjutata AppData-sse ega süsteemikaustadesse: programmi saab teisaldada ühe kausta kopeerimisega, lähtestada ühe faili kustutamisega ning jaam jääb oma andmete peremeheks. Samal põhjusel ei salvestata kunagi LoTW parooli.
+H2|2.2 Programmide perekond
+P|E-LAYER ANALYZER jagab graafikat, värviskeeme ja kokkuleppeid YA-MS-i ja YAEC-iga, autori teiste programmidega. Meteoorhajumisele pühendatud YA-MS sisaldub täielikult sakis METEOR SCATTER: joondusskript muudab selle aknast paneeliks ilma selle arvutusi muutmata, nii et iga YA-MS-i uus versioon jõuab E-LAYER ANALYZERisse ilma ümberkirjutamiseta. Kui kahel programmil on ühiseid funktsioone, nagu spotide kogumine, kehtib üksainus reegel: E-LAYER ANALYZERi sees saab YA-MS-i andmete kogumine read DATA COLLECTION telneti seanssidelt, vältides sama kutsungiga topeltühendusi.
+H2|2.3 Liides
+TAG|SCELTA|Iga analüüsisakk eraldab kaardile vähemalt 65% aknast ning andmetele ja arvutustele 35%: levi on geograafiline nähtus ja kaart peab jääma lugemise keskmeks. Kaarte on kolme tüüpi, igaüks valitud oma ülesande järgi: jaamakeskne asimuutne võrdkaugusprojektsioon sporaadilise E jaoks (tõesed kaugused ja asimuudid, võrdse kauguse ringid), vaba keskpunktiga Mercatori projektsioon 50 MHz mitmehüppelise levi jaoks ülemaailmses mastaabis ning ekvirektangulaarne projektsioon F.A.I. ja aurora jaoks, kus olulised on lokaatorite võrgustik ja väljajooned.
+TAG|SCELTA|Kõik tekstid, dokumendid ja wiki on tõlgitud: 28 keelt, kõik YAEC-i keeled pluss taani ja tagalogi. F.A.I. ja aurora vaates nimetatakse hajumispunktide asukohta kõigis keeltes Scatter trail, et vältida segiajamist meteoorijäljega.
+H1|3. Füüsikalised valikud
+H2|3.1 Ühine geomeetria
+TAG|FONTE|Maa on kera raadiusega 6372,7955 km, nagu F.A.I. artiklis [1] ja YA-MS-is [5]; elevatsioon kihi punkti suunas ja sekansi seadus on võetud klassikalisest kirjandusest. Kera, mitte ellipsoidi valik on kooskõlas 6-märgiliste lokaatorite täpsusega, mis on mõni kilomeeter.
+TAG|SCELTA|F.A.I. ja aurora puhul rakendatakse troposfäärilist refraktsiooni Maa ekvivalentraadiusega 4/3, mis nihutab raadiohorisonti mõnekümne kilomeetri võrra; sporaadilise E puhul, kus on olulised eelkõige jaamadevahelised kaugused, jääb kehtima tegeliku kera geomeetria.
+H2|3.2 Sporaadiline E
+TAG|FONTE|Hüpete arv järgib Flavio Egano IK3XTV tabelit [3]: üks hüpe kuni 2200-2400 km, kaks kuni 4400-5000 km, kolm kuni 6900 km. Tegemist on empiirilise tabeliga, mis on saadud tegelikest sidedest, ning seetõttu eelistati seda puhtalt geomeetrilisele arvutusele, mis annaks täheldatust suuremad teoreetilised ulatused.
+TAG|FONTE|Mitmehüppelise levi puhul seab programm võrdsete hüpete hüpoteesi kõrvale lühikese esimese hüppe hüpoteesi – kuni 1200 km oma QTH-st –, mis tuleneb autori kogemusest [4]. Kaht hüpoteesi võrreldakse BENCHMARK-sakkides samal tunnil ühe hüppega nähtud pilvedega: see on kõige ausam viis lasta andmetel otsustada.
+TAG|SCELTA|foEs hinnatakse sekansi seaduse abil ja see on alati minimaalne lävi: spot ütleb, et sagedus läbis, mitte seda, kui kõrge oli kriitiline sagedus. Pilved koondatakse 4-märgilistesse Maidenheadi ruutudesse – mastaapi, milles operaatorid levi loevad ja võrdlevad.
+TAG|FONTE|Sporaadiline E ei kehti 432 MHz kohta: selle MUF ulatub umbes 150-200 MHz-ni [22], [23] ja ARRL-i rekordid näitavad Es-sidesid ainult 50 ja 144 MHz-l [24]. Programm ütleb seda selgesõnaliselt, sest mõned üldised allikad, ka tehisintellekti loodud, väidavad vastupidist.
+H2|3.3 F.A.I. ja aurora
+TAG|FONTE|F.A.I. tugineb IC8FAX-i ja IC8TEM-i 2011. aasta artiklile [1] ning IC8FAX-i lehele [2]: hajumine toimub seal, kus kiir kohtub magnetväljaga joondunud ebaühtlustega sellise nurga all, et see suunatakse korrespondendi poole. Jaamapaari puhul ei ole õige tingimus lihtne väljaga ristseis, vaid bistaatiline Braggi tingimus (peegelduskoonus), mida programm rakendab.
+TAG|RILIEVO|Magnetväli arvutatakse rahvusvahelise mudeliga IGRF-14 [16] kuni astmeni 13, mida on kontrollitud 1 nT täpsusega võrdlusrakenduse vastu. Lihtsa dipooliga osutus side IC8FAX-G4LOH võimatuks; IGRF-14-ga langeb hajumispunkt 28 km kaugusele Brüsselist, mis on üks dokumenteeritud hajumispunktidest. Just see kontroll otsustas täieliku mudeli kasutuselevõtu.
+TAG|SCELTA|Kaks vaadet, Scatter trail ja Isopeegeldus, järgivad Aurora QTF-i, AuroReflexi ja K9SE SE-PROP-i graafikat [9], [11]: esimene pakub välja tõenäolisima punkti, teine võimaldab operaatoril kontrollida mis tahes klõpsuga valitud punkti. Kui mudel lahendust ei leia, ütleb programm seda teatega Arvutus pole võimalik ega näita osalisi tulemusi, mis oleksid eksitavad.
+TAG|FONTE|Aurora jaoks lisab programm NOAA andmed (OVATION-ovaal, Kp, päikesetuul) [15], mida kasutatakse ebaühtluste olemasolu indikaatorina, ning raadioaurora kirjanduse kriteeriumid [12]-[14] mõlema jaama soovitatud suuna jaoks.
+H2|3.4 Meteoorhajumine
+P|Meteoorhajumine on usaldatud YA-MS-ile [5], mis arvutab meteoorivoolude efektiivsuse, loeb meteoorradarite voogu ja integreerib otsevaatlusi. Valik integreerida see täielikult, selle asemel et osa sellest ümber kirjutada, tagab, et kaks programmi annavad alati sama tulemuse.
+H1|4. Andmete tuvastamine
+H2|4.1 Spotid
+P|Iga analüüsi kvaliteet sõltub andmete tuvastamise kvaliteedist: kui skip on tuletatud kindlatest spotidest, saab seejärel rekonstrueerida teised hüpped ja otsida teisi pilvi. Seepärast rakendab programm rida reegleid, millest peaaegu kõik on autor välja pakkunud pärast kontrolli tegelikel spotidel.
+LI|Spotid märgetega <MS>, <AU>, <AUR>, <TR>, <AS> või <ACS> kuuluvad teistele leviviisidele ega lähe sporaadilise E alla; need, mis asuvad meteoorhajumisele tüüpilistes sagedusakendes või kasutavad MS-i digitaalseid viise, on meteoorhajumine, nagu YA-MS-is.
+LI|144 MHz-l algab sporaadiline E üle 900 km ja üksikut spotti ei joonistata enne, kui seda kinnitab teine spot samalt pilvelt või lähedal asuv 50 MHz lühike hüpe: üksik spot 2 m-l on liiga sageli tropo või lokaatori viga.
+LI|Mandri-Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb ±20° magnetilise kalde vööndisse, on side transekvatoriaalne, mitte sporaadiline E, välja arvatud selgesõnalise märke korral.
+LI|Puuduvad või ebatäpsed lokaatorid võetakse CALL3 arhiivist; programm õpib uusi lokaatoreid ainult täielikust kujust LOC<viis>LOC, mis ei jäta kahtlust, milline lokaator millisele jaamale kuulub.
+LI|Kohalik filter jätab kõrvale klastri read väljaspool vahemikku 27990 kHz - 145 MHz ning iga kord, kui programm suletakse, tühjendatakse spotide andmebaas: iga seanss algab värskete andmetega.
+H2|4.2 Logid
+P|Mõlemad BENCHMARK-sakid rakendavad ADIF-logidele samu kriteeriume: saatmiskoht iga QSO MY_GRIDSQUARE-ist, vastuvõtukohad GRIDSQUARE-idest, teisiti märgitud leviviiside ja transekvatoriaalsete sidede väljajätmine. BENCHMARK 50 MHz puhul käsitletakse mitmehüppelist levi üle 3100 km – autori määratud lävi, mis eristab kindlalt mitmehüppelised sided pikkadest ühe hüppe sidedest.
+H1|5. Kontrollid
+TAG|RILIEVO|F.A.I. IC8FAX-F6DRO: hajumispunkt JN44GH, hälve 0,97°. IC8FAX-G4LOH: JN49FR, hälve 0,88°, 28 km Brüsselist. IC8FAX-FA1MXE hajumispunktiga Genfis: hälve 3,82°, hinnatud mitterahuldavaks, mis on kooskõlas asjaoluga, et see side nõuab teist punkti.
+TAG|RILIEVO|Aurora IO70VJ-JO59BC refraktsiooniga: hajumispunkt JP01AK, Shetlandi saarte lähedal merel, hälve 0,97°, QTF 11° ja 299°, kooskõlas täheldatud põhjasuunaliste aurora suundadega.
+TAG|RILIEVO|Autori 50 MHz logis (9876 QSO-d aastatest 2017 kuni 2026) tuvastab programm 1738 QSO-d üle 2400 km 386 päeval ning transekvatoriaalne reegel omistab neist 62 transekvatoriaalsele levile, peaaegu kõik Lõuna-Aafrika, Brasiilia ja Ida-Aafrika suunas.
+H1|6. Piirangud ja edasiarendused
+LI|Jaamad paigutatakse lokaatori ruudu keskele: 4 märgi korral ulatub viga umbes 80 km-ni.
+LI|foEs on minimaalne lävi ja sekansi seadus hindab VHF-is vajalikku foEs-i üle; väärtust tuleb lugeda pilvede suhtelise võrdlusena.
+LI|Aafrika ja Lõuna-Ameerika geograafilised ristkülikud on ligikaudsed; piirjuhtumeid saab parandada operaatorite juhiste järgi.
+LI|Kavandatud edasiarendused: kahe eri jaama logi võrdlus kõigis mitmehüppelise levi analüüsides, üha täpsem spotide tuvastamine, reeglite süstemaatiline kontroll tervetel hooaegadel.
+H1|7. Kokkuvõte
+P|E-LAYER ANALYZER ei asenda operaatori kogemust: see muudab selle mõõdetavaks. Iga programmi valik on välja öeldud, igal valemil on oma allikas, iga kogemusest sündinud reegel on sellisena märgitud ja seda saab logidel proovile panna. Just selles tasakaalus kirjanduse, eetrikogemuse ja andmetel põhineva kontrolli vahel leiab programm oma olemasolu mõtte.

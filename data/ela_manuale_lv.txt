@@ -1,0 +1,87 @@
+TITLE|E-LAYER ANALYZER lietošanas rokasgrāmata
+SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.4.3, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
+H1|1. Pirms sākt
+H2|1.1 Ko programma dara
+P|E-LAYER ANALYZER apvieno vienā programmā rīkus to VHF izplatīšanās veidu izpētei, kas norit caur jonosfēras E slāni: sporādisko E, arī vairāklēcienu un starpkontinentālo, F.A.I. (ar magnētisko lauku saskaņotās nehomogenitātes), meteor scatter ar iebūvēto programmu YA-MS un radio auroru. Tā strādā ar DX klasteru spotiem reāllaikā un ar ADIF žurnāliem un parāda katru rezultātu kartē, kas aizņem divas trešdaļas loga, bet dati un aprēķini ir labajā trešdaļā.
+H2|1.2 Instalēšana un datu mape
+P|Programma darbojas Windows (64 un 32 bitu), Linux, Raspberry Pi (ARM64) un Mac (Apple Silicon un Intel). To lejupielādē no GitHub repozitorija lapas Releases: Windows ir instalētājs un portatīvā versija .zip failā; Linux un Raspberry Pi – .tar.gz arhīvs ar instalēšanas skriptu; Mac – .dmg attēls.
+LI|Visi programmas dati atrodas mapē data blakus programmai: iestatījumi (config.ini), CALL3 arhīvs, magnētiskā lauka koeficienti, žurnāli, lejupielādētie NOAA dati, savāktie spoti. Nekas netiek rakstīts AppData vai citās sistēmas mapēs.
+LI|Lai pārvietotu programmu uz citu datoru, pietiek nokopēt tās mapi; lai atgrieztos pie sākotnējiem iestatījumiem, pietiek izdzēst data/config.ini.
+LI|LoTW parole nekad netiek saglabāta; var atcerēties tikai lietotājvārdu.
+H2|1.3 Augšējā josla
+P|Augšā pa kreisi ieraksta savu izsaukuma signālu, lokatoru (4, 6 vai 8 rakstzīmes) un antenas augstumu metros; poga Lietot tos apstiprina, un visas cilnes atjaunojas. Augšā pa labi ir UTC laiks, krāsojuma izvēle (visas YAEC shēmas: Gaišs, Nakts, Melns, astoņas pasteļkrāsas un Meteora sliede) un valodas izvēle (28 valodas). Mainot krāsojumu vai valodu, logs uzreiz tiek pārbūvēts, nezaudējot savāktos datus.
+H2|1.4 Statusa josla
+P|Apakšā statusa josla rāda, cik izsaukuma signālu ir CALL3 arhīvā, cik spotu ir atmiņā un izmantoto magnētisko modeli (IGRF-14 ar tā epohu). Atmiņā esošie spoti tiek dzēsti katru reizi, kad programma tiek aizvērta: katra sesija sākas bez veciem spotiem.
+H2|1.5 Kartes
+P|Visas kartes lieto vienādi: peles ritenītis tuvina vai attālina, vilkšana ar kreiso pogu pārvieto skatu, kreisais klikšķis atkarībā no cilnes izvēlas punktu, spotu vai trasi. Augšā pa labi parādās koordinātas un 6 rakstzīmju lokators zem kursora; azimutālajās kartēs arī attālums un azimuts no centra. Maidenhead lauku un kvadrātu režģis kļūst blīvāks, tuvinot karti.
+H1|2. Datu vākšana (DATA COLLECTION)
+H2|2.1 Trīs telnet sesijas
+P|Cilne DATA COLLECTION atver līdz trim vienlaicīgiem telnet savienojumiem: DX klasteri pēc izvēles (sākotnēji ON0DXK ar VHF filtriem), Reverse Beacon Network (ports 7001 FT8, 7000 CW un RTTY) un DM4X klasteri ar PSKReporter spotiem (dm4x.ddns.net, ports 8500).
+LI|Resursdators un Ports: klastera adrese. Login: izsaukuma signāls pieteikšanās vajadzībām (ja lauks ir tukšs, izmanto augšējās joslas signālu). Vadība: komandas, ko sūtīt pēc pieteikšanās, atdalītas ar semikolu (piemēram, joslu filtri).
+LI|Savienot un Atvienot atver un aizver sesiju; Savienot vēlreiz pēc pārtraukuma to automātiski atver no jauna; Savienot startējot to atver, startējot programmu.
+LI|Konsole rāda saņemtās rindas; lodziņā zem tās var rakstīt komandas klasterim (piemēram, sh/dx 20) un apstiprināt tās ar Sūtīt vai taustiņu Enter.
+H2|2.2 Lokālais filtrs
+P|Augšējā izvēles rūtiņa, sākotnēji ieslēgta, aktivizē lokālo filtru: "DX de" rindas ar frekvenci zem 27990,0 kHz vai virs 145 MHz tiek atmestas, neparādās konsolē un netiek saglabātas. Tas īpaši noder ar RBN un PSKReporter, kas sūta ļoti daudz HF spotu. Izslēdzot rūtiņu, iziet viss.
+H2|2.3 Kā programma nolasa spotus
+P|No katras "DX de" rindas programma iegūst spoteri, frekvenci, DX, komentāru, laiku un, ja tādi ir, komentārā ierakstītos lokatorus un izplatīšanās veidu formā JN70CN<ES>JO62QM (pirmais lokators ir spoterim, otrais – DX; pieņem arī formas ar <>, > un iekavām).
+LI|Trūkstošos lokatorus meklē CALL3 arhīvā; neprecīzos lokatorus (mazāk par 6 rakstzīmēm) aizstāj ar CALL3 6 rakstzīmju lokatoru, ja tāds ir.
+LI|Spotus ar <MS>, <AU>, <AUR>, <TR>, <AS> vai <ACS> tekstā neizmanto sporādiskajam E: tie noder meteor scatter, aurorai, tropo vai aircraft scatter.
+LI|Tāpat kā YA-MS, meteor scatter spoti ir tie, kas atrodas MS tipiskajos frekvenču logos (50190-50300, 70100-70400, 144290-144399 kHz) bez citas izplatīšanās norādēm, un tie ar veidiem MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M vai ar <MS>.
+LI|Spoti ar <AU> vai <AUR> nonāk cilnē AURORA, spoti ar FAI – cilnē F.A.I.
+H2|2.4 Savāktie spoti un CALL3 arhīvs
+P|Lapa Savāktie spoti uzskaita pēdējos spotus ar filtru pēc joslas un avota; poga Atvērt spotu mapi atver data/spot. Lapa CALL3 rāda arhīvu izsaukuma signāls -> lokators (JTDX/WSJT formāts): var meklēt izsaukuma signālu, pārlādēt arhīvu vai importēt jaunu CALL3.TXT failu, kas aizstāj lietoto (vecais paliek kā rezerves kopija).
+H1|3. Sporādiskais E (SPORADIC-E)
+H2|3.1 Karte
+P|Izvēlne Karte ļauj izvēlēties vienu no trim skatiem. Azimutālā - viens lēciens: karte ar savu staciju centrā, fiksētu 2500 km rādiusu un IK3XTV tabulas [3] zonām (500 km minimālā, 1500-2000 km optimālā, 2400 km maksimālā). Azimutālā - maksimālais attālums (vairāklēcienu): tā pati karte ar slīdni Maksimālais attālums no 300 līdz 20000 km un dubultā (5000 km) un trīskāršā lēciena (6900 km) robežām, lai sekotu vairāklēcienu attīstībai. Taisnstūra: pasaules karte ar pogām Eiropa un Pasaule.
+P|Azimutālajos skatos raustītie apļi rāda km no centra; apļu solis mainās līdz ar tālummaiņu, un ārējā mala norāda maksimālo parādīto attālumu.
+H2|3.2 Vadīklas
+LI|Joslas: 10, 6, 4 un 2 m (432 MHz netiek analizēti: sporādiskais E uz tiem neattiecas [22]-[24]); spotu laika logs no 15 minūtēm līdz 12 stundām.
+LI|Es augstums (sākotnēji 105 km) un antenu minimālā elevācija.
+LI|Pirmie lēcieni (vienādi lēcieni): rāda abu staciju pirmo lēcienu; Īss pirmais lēciens līdz…: rāda autora hipotēzi par īsu pirmo lēcienu (sākotnēji 1200 km) [4].
+LI|Es mākoņi Maidenhead kvadrātos: iekrāso atstarošanas punktu kvadrātus pēc novērtētās minimālās foEs.
+H2|3.3 Tabulas un detaļas
+P|Tabula Es spoti uzskaita derīgos spotus ar attālumu, lēcienu skaitu un minimālo foEs; tabula Es mākoņi (kvadrāti) uzskaita kvadrātus ar novērtētajiem mākoņiem un MUF, ko tie dotu savai stacijai (sarkans 144 MHz, oranžs 70 MHz, dzeltens 50 MHz). Ja iestatīta tālummaiņa, tabulas rāda tikai to, kas redzams kartē.
+LI|Klikšķis uz spota tabulā vai kartē: trase izceļas ar dzeltenu oreolu, karte vajadzības gadījumā to parāda, un lodziņš Detaļas norāda lēcienus, atstarošanas punktus, foEs un azimutu. Spots paliek izvēlēts arī tad, kad pienāk jauni spoti.
+LI|Klikšķis uz brīva kartes punkta: punktu uzskata par iespējamu Es mākoni, ar nepieciešamo foEs 28, 50, 70 un 144 MHz.
+H2|3.4 Autora noteikumi
+LI|144 MHz: sporādiskais E sākas virs 900 km; viens pats spots netiek zīmēts; to zīmē, ja 5 minūšu laikā pienāk otrs spots no tā paša mākoņa vai ja tuvumā ir īsa lēciena 50 MHz spots. Zaļā rinda augšā rāda, cik spotu gaida apstiprinājumu.
+LI|Transekvatoriālā izplatīšanās: virzienā uz kontinentālo Āfriku (ar Madagaskaru) un Dienvidameriku, ja viduspunkts atrodas magnētiskās inklinācijas joslā no -20° līdz +20°, sakars ir transekvatoriāls, nevis sporādiskais E, ja vien spots nenorāda <ES>. Kanāriju salas, Madeira, Kaboverde un Arābijas pussala paliek ārpus noteikuma.
+H1|4. BENCHMARK Es
+H2|4.1 Žurnāla ielāde
+P|Cilne BENCHMARK Es ir sporādiskā E pārbaudes stends veselam ADIF žurnālam, arī citas stacijas. Ielādēt ADIF atver failu (programma to atceras un startējot ielādē no jauna), Izņemt ADIF to noņem. Stacija centrā piedāvā žurnālā biežāko izsaukuma signālu un lokatoru; tos var mainīt un apstiprināt ar Lietot.
+LI|Raidīšanas vieta ir katra QSO MY_GRIDSQUARE; uztveršanas vietas ir GRIDSQUARE (trūkstošos vai 4 rakstzīmju lokatorus ņem no CALL3).
+LI|Var izslēgt QSO ar citu PROP_MODE un tos, kas ir zem 500 km (144 MHz joslā – zem 900 km); transekvatoriālos izslēdz vienmēr, izņemot PROP_MODE=ES.
+H2|4.2 Dienas, stundas un aprēķini
+P|Tabula QSO pa dienām uzskaita dienas ar QSO skaitu, joslām, maksimālo attālumu un vairāklēcienu sakariem; klikšķis uz dienas aizpilda tabulu Dienas stundas ar rindu katrai UTC stundai un rindu Visa diena. Azimutālā karte ar maksimālā attāluma slīdni zīmē skip pa 10° sektoriem (oranžs loks = tuvākais QSO, zaļš sektors = sasniegtie attālumi), mākoņus kvadrātos un, visai dienai, mākoņu pārvietošanos pa stundām (sarkana līnija).
+P|Lapa Ieteiktie aprēķini rāda skip pa sektoriem, novērtēto foEs ar sagaidāmo MUF pie 1000, 1500, 2000 un 2400 km, novērtētos mākoņus, vairāklēcienu pārbaudi (vienādi lēcieni pret īsu pirmo lēcienu, salīdzinot ar viena lēciena mākoņiem ±30 minūšu robežās) un mākoņu pārvietošanos stundu pēc stundas.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Viena vai divas stacijas
+P|Cilne BENCHMARK 50 MHz ir veltīta vairāklēcienu sporādiskajam E 50 MHz joslā. Rindā Stacija 1 ielādē un izņem savas stacijas žurnālu; rindā Stacija 2 – otras stacijas žurnālu, ko parāda vai paslēpj ar izvēles rūtiņu Stacija 2. Stacijas 1 trases ir gaiši zilas, stacijas 2 – violetas.
+LI|Rāda 50 MHz vairāklēcienu QSO, t.i., virs 3100 km (autora noteikums); lēcienu skaits atbilst IK3XTV tabulai.
+LI|Diena, no… līdz… UTC: diena (atverot – tā, kurā ir visvairāk vairāklēcienu QSO) un laiks ar 15 minūšu soli.
+LI|foEs (pēc izvēles): iekrāso trases pēc minimālās foEs un parāda to tabulā. Es augstums un Īss pirmais lēciens līdz 1200 km – kā citās cilnēs.
+H2|5.2 Merkatora karte
+P|Karte ir Merkatora projekcijā ar brīvu centru. Kad pele tuvojas trasei, līnija un ikonas palielinās un parādās korespondenta 6 rakstzīmju WWL kvadrāts. Ar kreiso klikšķi uz šīs trases uznirstošais logs jautā, vai rādīt visus faila QSO no visām dienām, kuru gala atrašanās vieta ir 150 km robežās: Jā iztīra karti un rāda šos QSO oranžajā aplī, Nē atstāj karti nemainītu. Poga Atpakaļ uz dienu un laiku atgriež iepriekšējo izvēli.
+H1|6. F.A.I.
+H2|6.1 Divi skati
+P|Cilne F.A.I. pēta izkliedi no ar magnētisko lauku saskaņotām nehomogenitātēm (galvenie avoti [1], [2]). Skats Scatter trail (pāris A-B) divām stacijām aprēķina iespējamo scatter point ģeometrisko vietu, iekrāsotu pēc novirzes no atstarošanas nosacījuma, piedāvā varbūtīgāko scatter point un augšā pa labi zīmē lodziņu ar abu staciju QTF un elevācijām (sarkans = A, zaļš = B). Skats Izoatstarošana (punkts) izvēlētam atstarošanas punktam zīmē izoatstarošanas līnijas kā AuroReflex un K9SE SE-PROP: krāsainas joslas tumšajās shēmās, biezas līnijas gaišajās shēmās.
+H2|6.2 Vadīklas
+LI|Stacija A un Stacija B: izsaukuma signāls (meklē CALL3) un/vai lokators; tukša A = sava stacija. Izvēlne Pārbaudes... ielādē testa pārus (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); izvēlne Zināmie scatter point... izvēlas dokumentētu scatter point (Ženēva, Brisele, Budapešta, JN92, JN41/42).
+LI|Augstums (sākotnēji 110 km), minimālā elevācija un Refrakcija (4/3 Zemes rādiuss), sākotnēji ieslēgta.
+LI|Kreisais klikšķis kartē: pārbaudāmais atstarošanas punkts (pāriet uz skatu Izoatstarošana); labais klikšķis: stacijas B atrašanās vieta.
+LI|Pārbaudīt ieteikto punktu: aprēķina sliedi, ņem piedāvāto scatter point un parāda tā izoatstarošanas līnijas ar vērtējumu: APMIERINOŠS (līdz 1°), PIEŅEMAMS (līdz 2,5°), NEAPMIERINOŠS (virs tā).
+P|Ja pēc modeļa aprēķins nav iespējams, parādās ziņojums Aprēķins nav iespējams un citi rezultāti netiek rādīti. Apakšā tabula F.A.I. spoti uzskaita spotus, kas atzīmēti kā FAI; klikšķis uz spota ielādē tā staciju pāri.
+H1|7. METEOR SCATTER
+P|Cilne satur pilnu programmu YA-MS ar tās cilnēm (debess sfēra, radara plūsma, plūsmas tiešsaistē, efektivitātes aprēķins, GRAVES radars, prognožu eksperimentāla īstenošana, ģeometrija un vājinājums, plūsmas, avoti, avotu karte, datu vākšana, efektivitāte - skaidrojums, kvadrātu karte) un tās aprēķinu rokasgrāmatu. Valoda un krāsojums ir tie, kas izvēlēti augšā. YA-MS Datu vākšana E-LAYER ANALYZER iekšienē neatver savas telnet sesijas: tā saņem rindas no DATA COLLECTION sesijām un atlasa no tām meteor scatter spotus.
+H1|8. AURORA
+P|Cilne AURORA izmanto tos pašus skatus kā F.A.I. (sākotnējais augstums 105 km) ar NOAA kosmosa laikapstākļu datiem [15]: aurorālais ovāls OVATION (kartē izplūdināts), pēdējo trīs dienu Kp indekss un Saules vējš, kas tiek lejupielādēti ik pēc 5 minūtēm mapē data/swpc vai uzreiz ar Lejupielādēt NOAA tagad. Programma iesaka virzienu abām stacijām.
+LI|Spoti ar <AU> vai <AUR> no pēdējām 2 stundām (ne vairāk kā 30) tiek zīmēti kartē ar aprēķināto scatter point (oranžs aplis), ja ieslēgta izvēles rūtiņa <AU>/<AUR> spoti kartē ar aprēķinu; rezultātos parādās abu staciju QTF un elevācija.
+H1|9. LOG ADIF
+P|Cilne LOG ADIF rāda strādātos un apstiprinātos kvadrātus pa joslām no 28 MHz uz augšu, neapvienojot joslas. Atvērt ADIF failu... pievieno žurnāla failus; Lejupielādēt no LoTW... lejupielādē apstiprinājumu atskaiti (lietotājvārdu var atcerēties, parole nekad netiek saglabāta); Notīrīt atmiņu noņem failus un atskaiti. Kvadrāti ir oranži, ja strādāti, un citā krāsā, ja apstiprināti ar QSL vai caur LoTW; klikšķis uz kvadrāta parāda izsaukuma signālus un izplatīšanās veidu.
+H1|10. Dokumenti
+P|Cilne AVOTI uzskaita programmā citētos avotus, cilni pa cilnei. Cilne APRĒĶINU IZVĒĻU KOPSAVILKUMS sniedz formulas un aprēķinu izvēles ar avotiem katrā solī; šī LIETOŠANAS ROKASGRĀMATA paskaidro, kā lietot programmu; TEHNISKAIS ZIŅOJUMS izklāsta iemeslus, kas vadīja programmas izstrādi. Visus trīs dokumentus var eksportēt uz Word.
+H1|11. Praktiski padomi
+LI|Vispirms ierakstiet augšā izsaukuma signālu un lokatoru un nospiediet Lietot: visi attālumi, MUF un elevācijas tiek rēķināti no turienes.
+LI|Ar RBN un PSKReporter turiet lokālo filtru ieslēgtu, lai atmiņa nepiepildītos ar HF spotiem.
+LI|Pagājušas sezonas analīzei izmantojiet abas BENCHMARK cilnes ar savu žurnālu; aurorai un F.A.I. vienmēr pārbaudiet piedāvāto punktu ar skatu Izoatstarošana.
+LI|Aprēķini ir orientējoši: spots vai QSO parāda, ka trase bija atvērta, nevis to, kur tieši atradās mākonis.
