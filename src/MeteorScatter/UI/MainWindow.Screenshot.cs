@@ -30,6 +30,7 @@ namespace YAMS
                 UpdateSky();
                 // attende la mappa (Natural Earth) e i dati dei radar, al massimo 60 s
                 for (int k = 0; k < 60 && (sky.MapLines == null || sky.MapLines.Count == 0); k++) await Task.Delay(1000);
+                for (int k = 0; k < 60 && liveFetching; k++) await Task.Delay(1000);   // GMN e CMOR
                 await Task.Delay(3000);
                 for (int i = 0; i < tabs.Count; i++)   // tutte le linguette, qualunque sia il loro numero
                 {

@@ -20,14 +20,14 @@ namespace ELA
     public class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.3.0";
+        public const string Version = "0.4.0";
 
         readonly PillTabs tabs = new PillTabs(true);
         readonly TextBox txtCall, txtLoc;
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; ScatterTab fai, au; DataTab dc; LogTab log;
+        EsTab es; BenchTab bench; ScatterTab fai, au; DataTab dc; LogTab log;
         readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
@@ -86,6 +86,7 @@ namespace ELA
 
             // --- linguette
             es = new EsTab();
+            bench = new BenchTab();
             fai = new ScatterTab(false);
             YAMS.MainWindow.LanguageRequested = code => Dispatcher.UIThread.Post(() => SwitchLanguage(code));
             YAMS.MainWindow.ThemeRequested = th => Dispatcher.UIThread.Post(() => SwitchTheme(th));
@@ -94,6 +95,7 @@ namespace ELA
             dc = new DataTab();
             log = new LogTab();
             tabs.Add(Lang.T("SPORADIC-E"), es.Root);
+            tabs.Add(Lang.T("BENCHMARK Es"), bench.Root);
             tabs.Add(Lang.T("F.A.I."), fai.Root);
             tabs.Add(Lang.T("METEOR SCATTER"), ms);
             tabs.Add(Lang.T("AURORA"), au.Root);
@@ -105,9 +107,9 @@ namespace ELA
             tabs.SelectionChanged += i =>
             {
                 if (i == 0) es.Refresh();
-                else if (i == 1) fai.Recalc();
-                else if (i == 3) au.Recalc();
-                else if (i == 5) log.Refresh();
+                else if (i == 2) fai.Recalc();
+                else if (i == 4) au.Recalc();
+                else if (i == 6) log.Refresh();
             };
             int sel = (int)Station.Cfg.GetD("linguetta", 0);
 
@@ -162,7 +164,7 @@ namespace ELA
             try
             {
                 Station.Cfg.Set("linguetta", Math.Max(0, tabs.Selected));
-                es.Save(); fai.Save(); au.Save(); dc.Save(); log.Save();
+                es.Save(); bench.Save(); fai.Save(); au.Save(); dc.Save(); log.Save();
                 Station.Set(Ui.Up(txtCall), Ui.Up(txtLoc), Ui.V(numAlt), false);
                 Station.Save();
             }
@@ -269,7 +271,7 @@ namespace ELA
                 if (Program.AuroraA != null)
                 {
                     // bozzetto del calcolo aurora per una coppia di locator (--aurora A B)
-                    tabs.Select(3);
+                    tabs.Select(4);
                     au.StartFetch();
                     await Task.Delay(12000);
                     au.View(-25, 35, 45, 75);
@@ -297,7 +299,11 @@ namespace ELA
                 LogTab.StartReload();
                 au.StartFetch();
                 await Task.Delay(8000);
-                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico" };
+                // log di prova per la linguetta BENCHMARK Es
+                string bdemo = Path.Combine(LogStore.Dir, "benchmark_prova.adi");
+                File.WriteAllText(bdemo, BenchTab.DemoAdif());
+                await bench.LoadFile(bdemo);
+                string[] names = { "1_sporadic_e", "1b_benchmark_es", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico" };
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     tabs.Select(i);
@@ -305,16 +311,25 @@ namespace ELA
                     await Task.Delay(2500);
                     Shot(Path.Combine(dir, names[i] + ".png"));
                 }
-                // F.A.I.: le verifiche richieste (scia) e l'iso-riflessione su Ginevra
+                // SPORADIC-E: mappa azimutale con la distanza massima (multi-salto) e rettangolare
+                tabs.Select(0);
+                es.ShotMap(1, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
+                es.ShotMap(2, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_rettangolare.png"));
+                es.ShotMap(0, 0);
+                // BENCHMARK Es: un'ora della giornata e lo zoom
                 tabs.Select(1);
+                bench.ShotSelect("2025-06-15", 11, 9000); await Task.Delay(2500); Shot(Path.Combine(dir, "1e_benchmark_es_ora.png"));
+                bench.ShotSelect("2025-06-15", -1, 1500); await Task.Delay(2500); Shot(Path.Combine(dir, "1f_benchmark_es_zoom.png"));
+                // F.A.I.: le verifiche richieste (scia) e l'iso-riflessione su Ginevra
+                tabs.Select(2);
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));
                 fai.ShotPreset(2); await Task.Delay(2500); Shot(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.png"));
                 fai.ShotIso(46.2, 6.15); await Task.Delay(2500); Shot(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.png"));
                 fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
-                tabs.Select(4);
+                tabs.Select(5);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
                 // tutte le linguette di YA-MS
-                tabs.Select(2);
+                tabs.Select(3);
                 await Task.Delay(1500);
                 await ms.RunScreenshots(Path.Combine(dir, "ya-ms"), "IN78UO", 0, this);
             }

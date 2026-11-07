@@ -1,5 +1,5 @@
 TITLE|Slik regner E-LAYER ANALYZER
-SUB|Teknisk dokument - ved Costantino IC8TEM - versjon 0.3.0, november 2026. Tallene i hakeparentes viser til fanen KILDER.
+SUB|Teknisk dokument - ved Costantino IC8TEM - versjon 0.4.0, november 2026. Tallene i hakeparentes viser til fanen KILDER.
 H1|1. Innledning
 H2|1.1 Formål
 P|E-LAYER ANALYZER analyserer VHF-utbredelsesmåtene som involverer E-laget: sporadisk E (også interkontinental multihopp), F.A.I. (feltorienterte irregulariteter), meteor scatter (med programmet YA-MS) og radionordlys. Dette dokumentet beskriver hver beregning og hvor den kommer fra.
@@ -77,9 +77,9 @@ H1|6. ADIF-logg
 TAG|FONTE|Portering av LoTW Grid Map v2 [25]: LoTW-rapporten (lastet ned med brukernavn og passord, som aldri lagres) og loggens ADIF-filer slås sammen etter kallesignal, bånd, dato og tid; bekreftelsene legges sammen.
 TAG|SCELTA|Bare båndene fra 28 MHz og oppover, hvert som eget bånd, uten sammenslåing. Farger: oransje = kjørt, blå = bekreftet med QSL, grønn = bekreftet via LoTW. Filter på utbredelsesmåte (PROP_MODE i ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Fargeskjemaer
-TAG|FONTE|Fargeskjemaene er de samme som i YA-MS 1.3.0, som bygger på YAEC [26]: Lys, Natt, Svart, åtte pastellfarger og Meteorspor. Skjemaet velges øverst til høyre, og vinduet bygges opp på nytt med en gang; i visningen Isorefleksjon bruker de mørke skjemaene fargede bånd og de lyse tykke linjer (4.4).
-H1|8. Meteor scatter (YA-MS 1.3.0) og språk
-TAG|FONTE|Fanen METEOR SCATTER inneholder hele YA-MS 1.3.0 [5], med dokumentet «Effektivitet - forklaring» og kildene. Skriptet tools/sync_yams.py kopierer hver nye versjon av YA-MS og gjør den om til et panel uten å endre beregningene.
+TAG|FONTE|Fargeskjemaene er de samme som i YA-MS 1.4.0, som bygger på YAEC [26]: Lys, Natt, Svart, åtte pastellfarger og Meteorspor. Skjemaet velges øverst til høyre, og vinduet bygges opp på nytt med en gang; i visningen Isorefleksjon bruker de mørke skjemaene fargede bånd og de lyse tykke linjer (4.4).
+H1|8. Meteor scatter (YA-MS 1.4.0) og språk
+TAG|FONTE|Fanen METEOR SCATTER inneholder hele YA-MS 1.4.0 [5], med dokumentet «Effektivitet - forklaring» og kildene. Skriptet tools/sync_yams.py kopierer hver nye versjon av YA-MS og gjør den om til et panel uten å endre beregningene.
 TAG|SCELTA|Språk: 28, alle som finnes i YAEC pluss dansk og tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for grensesnittet (data/lingue/ela-<kode>.txt), for Teknisk dokument og for Kilder. I visningen F.A.I./nordlys heter sporet av scatter-punkter «Scatter trail» i alle oversettelser. Statuslinjen viser den magnetiske modellen som er i bruk (IGRF-14 fra IAGA [16]).
 H1|9. Begrensninger
 LI|Stasjonene plasseres i midten av lokatorruten: med 4-tegns lokator kan feilen bli ~80 km.

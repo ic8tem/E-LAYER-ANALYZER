@@ -61,7 +61,10 @@ namespace YAMS
 
         [ThreadStatic] static bool world;
 
-        public static List<PointF[]> Load(string file)
+        public static List<PointF[]> Load(string file) { return Load(file, -50, 75); }
+
+        // come Load, con i limiti di longitudine scelti (la mappa delle fonti arriva fino al Canada)
+        public static List<PointF[]> Load(string file, double lonMin, double lonMax)
         {
             List<PointF[]> res = new List<PointF[]>();
             if (!File.Exists(file)) return res;
@@ -74,13 +77,13 @@ namespace YAMS
                 int b = s.IndexOf('[', k);
                 if (b < 0) break;
                 pos = b;
-                ParseArray(s, ref pos, res);
+                ParseArray(s, ref pos, res, lonMin, lonMax);
             }
             return res;
         }
 
         // Analizza un array annidato; ogni array di coppie [lon, lat] diventa una polilinea
-        static void ParseArray(string s, ref int pos, List<PointF[]> res)
+        static void ParseArray(string s, ref int pos, List<PointF[]> res, double lonMin, double lonMax)
         {
             // pos punta a '['
             int depth = 0;
@@ -104,10 +107,10 @@ namespace YAMS
                     }
                     else if (cur != null)
                     {
-                        Flush(cur, res); cur = null;
+                        Flush(cur, res, lonMin, lonMax); cur = null;
                     }
                     depth--; pos++;
-                    if (depth == 0) { if (cur != null) Flush(cur, res); return; }
+                    if (depth == 0) { if (cur != null) Flush(cur, res, lonMin, lonMax); return; }
                     continue;
                 }
                 if (c == '-' || c == '.' || char.IsDigit(c))
@@ -122,13 +125,13 @@ namespace YAMS
             }
         }
 
-        static void Flush(List<PointF> cur, List<PointF[]> res)
+        static void Flush(List<PointF> cur, List<PointF[]> res, double lonMin, double lonMax)
         {
-            // tiene solo i tratti nella zona d'interesse (lat 15..82, lon -50..75)
+            // tiene solo i tratti nella zona d'interesse (lat 15..82, lon lonMin..lonMax)
             List<PointF> seg = new List<PointF>();
             foreach (PointF p in cur)
             {
-                bool inside = world || (p.Y >= 15 && p.Y <= 82 && p.X >= -50 && p.X <= 75);
+                bool inside = world || (p.Y >= 15 && p.Y <= 82 && p.X >= lonMin && p.X <= lonMax);
                 if (inside) seg.Add(p);
                 else { if (seg.Count > 1) res.Add(seg.ToArray()); seg.Clear(); }
             }

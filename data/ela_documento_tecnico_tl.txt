@@ -1,5 +1,5 @@
 TITLE|Paano nagkakalkula ang E-LAYER ANALYZER
-SUB|Teknikal na dokumento - inihanda ni Costantino IC8TEM - bersiyon 0.3.0, Nobyembre 2026. Ang mga numero sa loob ng square bracket ay tumutukoy sa tab na MGA SANGGUNIAN.
+SUB|Teknikal na dokumento - inihanda ni Costantino IC8TEM - bersiyon 0.4.0, Nobyembre 2026. Ang mga numero sa loob ng square bracket ay tumutukoy sa tab na MGA SANGGUNIAN.
 H1|1. Panimula
 H2|1.1 Layunin
 P|Sinusuri ng E-LAYER ANALYZER ang mga mode ng propagasyon sa VHF na may kinalaman sa E layer: sporadic-E (kasama ang multi-hop na lampas sa kontinente), F.A.I. (mga iregularidad na nakahanay sa magnetic field), meteor scatter (gamit ang programang YA-MS) at radio aurora. Inilalarawan ng dokumentong ito ang bawat kalkulasyon at kung saan ito nagmula.
@@ -77,9 +77,9 @@ H1|6. Log ADIF
 TAG|FONTE|Port ng LoTW Grid Map v2 [25]: ang ulat ng LoTW (na-download gamit ang username at password, na hindi kailanman sine-save) at ang mga ADIF file ng log ay pinagsasama ayon sa callsign, banda, petsa at oras; pinagsasama ang mga kumpirmasyon.
 TAG|SCELTA|Mga banda lamang mula 28 MHz pataas, bawat isa bilang hiwalay na banda, walang pagsasama-sama. Mga kulay: kahel = nakontak, asul = kumpirmado sa QSL, berde = kumpirmado via LoTW. Filter ayon sa mode ng propagasyon (PROP_MODE ng ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Mga kulay
-TAG|FONTE|Ang mga color scheme ay ang sa YA-MS 1.3.0, na hango sa YAEC [26]: Maliwanag, Gabi, Itim, walong pastel at Bakas ng meteor. Pinipili ang scheme sa kanang itaas at agad na binubuo muli ang window; sa tanaw na Iso-repleksiyon, gumagamit ng may-kulay na banda ang madidilim na scheme at makakapal na linya ang maliliwanag (4.4).
-H1|8. Meteor scatter (YA-MS 1.3.0) at mga wika
-TAG|FONTE|Naglalaman ang tab na METEOR SCATTER ng kumpletong YA-MS 1.3.0 [5], kasama ang dokumento nitong "Episyensya - paliwanag" at ang mga sanggunian nito. Kinokopya ng script na tools/sync_yams.py ang bawat bagong bersiyon ng YA-MS at ginagawa itong panel nang hindi binabago ang mga kalkulasyon nito.
+TAG|FONTE|Ang mga color scheme ay ang sa YA-MS 1.4.0, na hango sa YAEC [26]: Maliwanag, Gabi, Itim, walong pastel at Bakas ng meteor. Pinipili ang scheme sa kanang itaas at agad na binubuo muli ang window; sa tanaw na Iso-repleksiyon, gumagamit ng may-kulay na banda ang madidilim na scheme at makakapal na linya ang maliliwanag (4.4).
+H1|8. Meteor scatter (YA-MS 1.4.0) at mga wika
+TAG|FONTE|Naglalaman ang tab na METEOR SCATTER ng kumpletong YA-MS 1.4.0 [5], kasama ang dokumento nitong "Episyensya - paliwanag" at ang mga sanggunian nito. Kinokopya ng script na tools/sync_yams.py ang bawat bagong bersiyon ng YA-MS at ginagawa itong panel nang hindi binabago ang mga kalkulasyon nito.
 TAG|SCELTA|Mga wika: 28, lahat ng nasa YAEC kasama ang Danish at Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), para sa interface (data/lingue/ela-<kodigo>.txt), para sa Teknikal na dokumento at para sa Mga sanggunian. Sa tanaw na F.A.I./aurora, ang bakas ng mga scatter point ay tinatawag na "Scatter trail" sa lahat ng salin. Ipinapakita ng status bar ang magnetic model na ginagamit (IGRF-14 ng IAGA [16]).
 H1|9. Mga limitasyon
 LI|Mga istasyon sa gitna ng grid square ng locator: sa 4-character na locator, umaabot ang error sa ~80 km.

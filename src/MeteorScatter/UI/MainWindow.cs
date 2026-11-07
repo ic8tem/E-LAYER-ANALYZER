@@ -595,6 +595,9 @@ namespace YAMS
             tl.Children.Add(chartFlux); tl.Children.Add(fCollm); tl.Children.Add(chartHeight); tl.Children.Add(fSoda);
             p3.Children.Add(tl);
 
+            // --- Sciami in diretta: GMN e CMOR (MainWindow.Diretta.cs)
+            BuildLiveTab();
+
             // --- Calcolo dell'efficienza (ex "Efficienza 24 h")
             DockPanel p2 = Page(Lang.T("Calcolo dell'efficienza"));
             // colpo d'occhio: quattro riquadri riassuntivi sopra il grafico
@@ -687,6 +690,9 @@ namespace YAMS
                 Content = new Border { Padding = new Thickness(14, 10), Child = txtSources }
             });
 
+            // --- Mappa delle fonti (MainWindow.MappaFonti.cs)
+            BuildSourcesMapTab();
+
             // --- Efficienza - spiegazione (MainWindow.Spiegazione.cs)
             BuildExplainTab();
 
@@ -759,7 +765,7 @@ namespace YAMS
                 ? Lang.F("Tratta calcolata: {0:F0} km, {1} punti di riflessione campionati in {2:F1} s. {3}",
                     model.DistKm, model.SamplePoints, (DateTime.Now - t0).TotalSeconds, model.Message)
                 : Lang.F("Calcolo non riuscito: {0}", model.Message);
-            UpdateSky(); Update24h(); UpdateGeometry(); UpdateShowerGrid(); UpdateFluxTab(); RefreshGrids();
+            UpdateSky(); Update24h(); UpdateGeometry(); UpdateShowerGrid(); UpdateFluxTab(); RefreshGrids(); UpdateSourcesMap();
             SaveConfig();
         }
 
@@ -1333,6 +1339,7 @@ namespace YAMS
         void StartFetch(bool forceRmob)
         {
             if (fetching) return;
+            StartLiveFetch(forceRmob);   // GMN e CMOR: al massimo ogni 30 minuti, o subito con "Scarica adesso"
             fetching = true;
             lastFetchUtc = DateTime.UtcNow;
             btnFetch.IsEnabled = false;
@@ -1583,6 +1590,8 @@ Lang.T("DATI DEGLI SCIAMI") + "\n" +
 Lang.T("DATI RADAR IN DIRETTA") + "\n" +
 "  " + Lang.T("Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php") + "\n" +
 "  Sodankyla Geophysical Observatory - sgo.fi/Data/RealTime/meteorRadar.php\n" +
+"  " + Lang.T("Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)") + "\n" +
+"  " + Lang.T("CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti") + "\n" +
 "  " + Lang.T("Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)") + "\n" +
 "  " + Lang.T("Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)") + "\n" +
 "  " + Lang.T("Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)") + "\n" +

@@ -136,8 +136,7 @@ wr(p, s)
 
 # --- MapData: mappa del mondo intero e scaricamento con un solo thread
 p = os.path.join(DST, 'Core', 'MapData.cs'); s = rd(p)
-s = rep(s, '''        public static List<PointF[]> Load(string file)
-        {''', '''        // Mondo intero (E-LAYER ANALYZER: mappe di sporadico E, F.A.I. e aurora)
+LOADALL = '''        // Mondo intero (E-LAYER ANALYZER: mappe di sporadico E, F.A.I. e aurora)
         public static List<PointF[]> LoadAll(string file)
         {
             world = true;
@@ -147,9 +146,17 @@ s = rep(s, '''        public static List<PointF[]> Load(string file)
 
         [ThreadStatic] static bool world;
 
-        public static List<PointF[]> Load(string file)
+'''
+if 'public static List<PointF[]> Load(string file) { return Load(file, -50, 75); }' in s:   # YA-MS 1.4.0 e successive
+    s = rep(s, '        public static List<PointF[]> Load(string file) { return Load(file, -50, 75); }',
+            LOADALL + '        public static List<PointF[]> Load(string file) { return Load(file, -50, 75); }', 'MapData.Load')
+    s = rep(s, 'bool inside = p.Y >= 15 && p.Y <= 82 && p.X >= lonMin && p.X <= lonMax;',
+            'bool inside = world || (p.Y >= 15 && p.Y <= 82 && p.X >= lonMin && p.X <= lonMax);', 'inside')
+else:
+    s = rep(s, '''        public static List<PointF[]> Load(string file)
+        {''', LOADALL + '''        public static List<PointF[]> Load(string file)
         {''', 'MapData.Load')
-s = rep(s, 'bool inside = p.Y >= 15 && p.Y <= 82 && p.X >= -50 && p.X <= 75;', 'bool inside = world || (p.Y >= 15 && p.Y <= 82 && p.X >= -50 && p.X <= 75);', 'inside')
+    s = rep(s, 'bool inside = p.Y >= 15 && p.Y <= 82 && p.X >= -50 && p.X <= 75;', 'bool inside = world || (p.Y >= 15 && p.Y <= 82 && p.X >= -50 && p.X <= 75);', 'inside')
 s = rep(s, '        public static bool EnsureFiles(string dataDir, out string msg)\n        {\n',
         '        public static bool EnsureFiles(string dataDir, out string msg)\n        {\n            lock (fileLock) return EnsureFilesLocked(dataDir, out msg);\n        }\n\n        static readonly object fileLock = new object();\n\n        static bool EnsureFilesLocked(string dataDir, out string msg)\n        {\n', 'EnsureFiles')
 wr(p, s)

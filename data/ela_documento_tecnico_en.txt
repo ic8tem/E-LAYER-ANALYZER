@@ -1,5 +1,5 @@
 TITLE|How E-LAYER ANALYZER calculates
-SUB|Technical document - by Costantino IC8TEM - version 0.3.0, November 2026. Numbers in square brackets refer to the SOURCES tab.
+SUB|Technical document - by Costantino IC8TEM - version 0.4.0, November 2026. Numbers in square brackets refer to the SOURCES tab.
 H1|1. Introduction
 H2|1.1 Purpose
 P|E-LAYER ANALYZER analyses the VHF propagation modes involving the E layer: sporadic-E (including extra-continental multi-hop), F.A.I. (field-aligned irregularities), meteor scatter (with the YA-MS program) and radio aurora. This document describes each calculation and where it comes from.
@@ -77,9 +77,9 @@ H1|6. Log ADIF
 TAG|FONTE|Port of LoTW Grid Map v2 [25]: the LoTW report (downloaded with username and password, which is never saved) and the log's ADIF files are merged by callsign, band, date and time; confirmations are combined.
 TAG|SCELTA|Only bands from 28 MHz up, each as a single band, with no grouping. Colours: orange = worked, blue = confirmed by QSL, green = confirmed via LoTW. Filter on the propagation mode (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Colour schemes
-TAG|FONTE|The colour schemes are those of YA-MS 1.3.0, which follow YAEC [26]: Light, Night, Black, eight pastels and Meteor trail. The scheme is chosen at the top right and the window is rebuilt at once; in the Isoflection view dark schemes use coloured bands and light schemes thick lines (4.4).
-H1|8. Meteor scatter (YA-MS 1.3.0) and languages
-TAG|FONTE|The METEOR SCATTER tab contains the complete YA-MS 1.3.0 [5], with its own "Efficiency - explanation" document and sources. The script tools/sync_yams.py copies every new YA-MS version and turns it into a panel without changing its calculations.
+TAG|FONTE|The colour schemes are those of YA-MS 1.4.0, which follow YAEC [26]: Light, Night, Black, eight pastels and Meteor trail. The scheme is chosen at the top right and the window is rebuilt at once; in the Isoflection view dark schemes use coloured bands and light schemes thick lines (4.4).
+H1|8. Meteor scatter (YA-MS 1.4.0) and languages
+TAG|FONTE|The METEOR SCATTER tab contains the complete YA-MS 1.4.0 [5], with its own "Efficiency - explanation" document and sources. The script tools/sync_yams.py copies every new YA-MS version and turns it into a panel without changing its calculations.
 TAG|SCELTA|Languages: 28, all those of YAEC plus Danish and Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for the interface (data/lingue/ela-<code>.txt), the Technical document and the Sources. In the F.A.I./aurora view the trail of scatter points is called "Scatter trail" in every translation. The status bar shows the magnetic model in use (IAGA IGRF-14 [16]).
 H1|9. Limits
 LI|Stations at the centre of the locator square: with 4-character locators the error reaches ~80 km.

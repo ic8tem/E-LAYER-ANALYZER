@@ -1,5 +1,7 @@
 // E-LAYER ANALYZER - linguetta SPORADIC-E: mappa (65 %) degli spot con i punti di riflessione e i quadrati Maidenhead
 // delle nubi Es stimate; a destra (35 %) i comandi, gli spot, le nubi e i dettagli.
+// La mappa e' azimutale centrata sulla propria stazione: per il singolo salto (raggio fisso 2500 km, zone della tabella
+// IK3XTV) oppure con il cursore della distanza massima, per seguire l'evoluzione del multi-salto; resta la mappa rettangolare.
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +26,9 @@ namespace ELA
         readonly TableView tSpots, tClouds;
         readonly SelectableTextBlock txtDet;
         readonly PillTabs inner = new PillTabs();
+        readonly ComboBox cmbMap;
+        readonly RangeBar range;
+        public const double SingleHopRangeKm = 2500;
         static readonly int[] Windows = { 15, 30, 60, 120, 240, 720 };
         List<EsPath> paths = new List<EsPath>();
         List<Cloud> clouds = new List<Cloud>();
@@ -48,9 +53,14 @@ namespace ELA
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("es_salto_corto_km", 1200)), 0, 50, 55);
             chkCells = Ui.C(Lang.T("Nubi Es sui quadrati Maidenhead"), cf.GetB("es_celle", true));
             Button bView = Ui.B(Lang.T("Europa"));
-            bView.Click += (s, e) => map.SetView(-30, 60, 20, 72);
+            bView.Click += (s, e) => { cmbMap.SelectedIndex = 2; map.SetView(-30, 60, 20, 72); };
             Button bWorld = Ui.B(Lang.T("Mondo"));
-            bWorld.Click += (s, e) => map.SetView(-180, 180, -60, 80);
+            bWorld.Click += (s, e) => { cmbMap.SelectedIndex = 2; map.SetView(-180, 180, -60, 80); };
+            cmbMap = Ui.Combo(new[] { Lang.T("Azimutale - singolo salto"), Lang.T("Azimutale - distanza massima (multi-salto)"), Lang.T("Rettangolare") },
+                Math.Max(0, Math.Min(2, (int)cf.GetD("es_mappa", 0))), 250);
+            range = new RangeBar(map, cf.GetD("es_raggio_km", 6000));
+            range.Changed += km => { if (cmbMap.SelectedIndex == 1) { multiRange = km; Draw(); } };
+            cmbMap.SelectionChanged += (s, e) => { MapMode(); Draw(); };
             foreach (CheckBox c in new[] { c10, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
             foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { dirty = true; Refresh(); };
@@ -87,10 +97,14 @@ namespace ELA
 
             map.SetView(-30, 60, 20, 72);
             map.Clicked += (la, lo, rightBtn) => { clickLat = la; clickLon = lo; sel = null; Draw(); Details(); };
-            Root = Ui.MapAndData(map, right);
+            DockPanel mapHost = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(mapHost, Ui.Row(Ui.L(Lang.T("Mappa")), cmbMap, range.Root), Dock.Top);
+            mapHost.Children.Add(map);
+            MapMode();
+            Root = Ui.MapAndData(mapHost, right);
 
             SpotStore.Added += s => dirty = true;
-            Station.Changed += () => { dirty = true; Refresh(); };
+            Station.Changed += () => { MapMode(); dirty = true; Refresh(); };
             DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             t.Tick += (s, e) => { if (dirty && Root.IsEffectivelyVisible) Refresh(); };
             t.Start();
@@ -104,6 +118,23 @@ namespace ELA
             cf.Set("es_quota_km", Ui.V(numH)); cf.Set("es_elev_min", Ui.V(numElev));
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
             cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true);
+            cf.Set("es_mappa", Math.Max(0, cmbMap.SelectedIndex));
+            if (!double.IsNaN(multiRange)) cf.Set("es_raggio_km", multiRange);
+        }
+
+        // 0 = azimutale per il singolo salto (raggio fisso), 1 = azimutale con il cursore della distanza massima, 2 = rettangolare
+        double multiRange = double.NaN;   // raggio scelto con il cursore (vista 1)
+        void MapMode()
+        {
+            int m = Math.Max(0, cmbMap.SelectedIndex);
+            if (double.IsNaN(multiRange)) multiRange = range.Km;
+            if (m == 1) range.Apply(multiRange, true);
+            map.Azimuthal = m < 2;
+            map.WheelZoom = m == 1;
+            range.Root.IsVisible = m == 1;
+            if (Station.Valid) { map.AzLat = Station.Lat; map.AzLon = Station.Lon; }
+            if (m == 0) map.RangeKm = SingleHopRangeKm;
+            map.InvalidateVisual();
         }
 
         bool BandOn(Spot s)
@@ -277,6 +308,7 @@ namespace ELA
                 map.Lines.Add(MapView.Circle(Station.Lat, Station.Lon, Geo.HalfHopKm(Ui.V(numElev), H), Pal.A(150, Pal.Green), 1));
                 map.Markers.Add(new MapMarker { Lat = Station.Lat, Lon = Station.Lon, Radius = 5, Fill = Pal.Green, Square = true, Label = Station.Call.Length > 0 ? Station.Call : Station.Loc, LabelColor = Pal.Green });
             }
+            if (map.Azimuthal) AddHopZones(map, map.AzLat, map.AzLon, cmbMap.SelectedIndex == 1);
             if (!double.IsNaN(clickLat))
             {
                 map.Markers.Add(new MapMarker { Lat = clickLat, Lon = clickLon, Radius = 8, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(clickLat, clickLon, 6) });
@@ -290,6 +322,28 @@ namespace ELA
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("cerchio verde: portata del singolo salto dalla mia stazione"), Pal.Green));
             map.LegendTitle = Lang.T("Nubi: foEs minima <5 / 7 / 10 / 14 / 20 / >20 MHz = blu, azzurro, verde, giallo, arancio, rosso");
             map.InvalidateVisual();
+        }
+
+        // zone della tabella IK3XTV attorno alla stazione al centro della mappa azimutale (distanza del corrispondente):
+        // singolo salto minima / ottimale / massima; con multi=true anche il limite del doppio e del triplo salto
+        public static void AddHopZones(MapView map, double lat, double lon, bool multi)
+        {
+            Color zc = Pal.A(200, Pal.Yellow);
+            Action<double, string, Color, double> ring = (km, label, c, w) =>
+            {
+                MapLine l = MapView.Circle(lat, lon, km, c, w); l.Dashed = true; map.Lines.Add(l);
+                double la, lo; Geo.Destination(lat, lon, 200, km, out la, out lo);
+                map.Markers.Add(new MapMarker { Lat = la, Lon = lo, Radius = 0, Fill = c, Stroke = c, Label = label, LabelColor = c });
+            };
+            ring(EsModel.SingleMin[0], Lang.F("{0:N0} km: minima del singolo salto", EsModel.SingleMin[0]), zc, 1.2);
+            ring(EsModel.SingleOpt[0], Lang.F("{0:N0}-{1:N0} km: ottimale", EsModel.SingleOpt[0], EsModel.SingleOpt[1]), Pal.A(220, Pal.Green), 1.2);
+            ring(EsModel.SingleOpt[1], "", Pal.A(220, Pal.Green), 1.2);
+            ring(EsModel.SingleMax[1], Lang.F("{0:N0} km: massima del singolo salto", EsModel.SingleMax[1]), Pal.A(220, Pal.Orange), 1.6);
+            if (multi)
+            {
+                ring(EsModel.DoubleMax[1], Lang.F("{0:N0} km: massima del doppio salto", EsModel.DoubleMax[1]), Pal.A(220, Pal.Violet), 1.6);
+                ring(EsModel.TripleMax, Lang.F("{0:N0} km: massima del triplo salto", EsModel.TripleMax), Pal.A(220, Pal.Red), 1.6);
+            }
         }
 
         void Details()
@@ -369,6 +423,14 @@ namespace ELA
                 Geo.LocToLatLon(s.LocDx, out la, out lo); s.LatD = la; s.LonD = lo;
                 SpotStore.Add(s);
             }
+        }
+
+        public void ShotMap(int mode, double km)
+        {
+            if (km > 0) multiRange = km;
+            cmbMap.SelectedIndex = mode;
+            MapMode(); Draw();
+            if (mode == 2) map.SetView(-30, 60, 20, 72);
         }
 
         public void SelectFirst() { if (paths.Count > 0) { sel = paths[0]; Draw(); Details(); } }

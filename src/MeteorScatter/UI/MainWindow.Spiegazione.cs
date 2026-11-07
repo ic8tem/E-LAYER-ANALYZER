@@ -247,7 +247,7 @@ namespace YAMS
                 string m2 = msg;
                 Dispatcher.UIThread.Post(() =>
                 {
-                    sky.MapLines = coast; sky.MapBorders = border; sky.InvalidateMap();
+                    sky.MapLines = coast; sky.MapBorders = border; sky.InvalidateMap(); UpdateSourcesMap();
                     RefreshGrids();
                     if (coast.Count == 0) status.Text = Lang.T("Mappa d'Europa non disponibile (serve la rete al primo avvio).") + " " + m2;
                 });

@@ -1,5 +1,5 @@
 TITLE|Hoe E-LAYER ANALYZER rekent
-SUB|Technisch document - door Costantino IC8TEM - versie 0.3.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
+SUB|Technisch document - door Costantino IC8TEM - versie 0.4.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
 H1|1. Inleiding
 H2|1.1 Doel
 P|E-LAYER ANALYZER analyseert de VHF-propagatiemodi waarbij de E-laag betrokken is: sporadische E (ook intercontinentaal met meervoudige sprong), F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter (met het programma YA-MS) en radio-aurora. Dit document beschrijft elke berekening en waar die vandaan komt.
@@ -77,9 +77,9 @@ H1|6. ADIF-log
 TAG|FONTE|Port van LoTW Grid Map v2 [25]: het LoTW-rapport (gedownload met gebruikersnaam en wachtwoord, dat nooit wordt opgeslagen) en de ADIF-bestanden van het log worden samengevoegd op roepnaam, band, datum en tijd; de bevestigingen worden opgeteld.
 TAG|SCELTA|Alleen de banden vanaf 28 MHz, elk als afzonderlijke band, zonder samenvoegingen. Kleuren: oranje = gewerkt, blauw = bevestigd met QSL, groen = bevestigd via LoTW. Filter op propagatiemodus (PROP_MODE van ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Kleurenschema's
-TAG|FONTE|De kleurenschema's zijn die van YA-MS 1.3.0, die YAEC [26] volgen: Licht, Nacht, Zwart, acht pasteltinten en Meteorenspoor. Het schema kies je rechtsboven en het venster wordt meteen opnieuw opgebouwd; in de weergave Iso-reflectie gebruiken donkere schema's gekleurde banden en lichte schema's dikke lijnen (4.4).
-H1|8. Meteorscatter (YA-MS 1.3.0) en talen
-TAG|FONTE|Het tabblad METEOR SCATTER bevat het volledige YA-MS 1.3.0 [5], met een eigen document "Efficiëntie - uitleg" en eigen bronnen. Het script tools/sync_yams.py neemt elke nieuwe YA-MS-versie over en maakt er een paneel van zonder de berekeningen te wijzigen.
+TAG|FONTE|De kleurenschema's zijn die van YA-MS 1.4.0, die YAEC [26] volgen: Licht, Nacht, Zwart, acht pasteltinten en Meteorenspoor. Het schema kies je rechtsboven en het venster wordt meteen opnieuw opgebouwd; in de weergave Iso-reflectie gebruiken donkere schema's gekleurde banden en lichte schema's dikke lijnen (4.4).
+H1|8. Meteorscatter (YA-MS 1.4.0) en talen
+TAG|FONTE|Het tabblad METEOR SCATTER bevat het volledige YA-MS 1.4.0 [5], met een eigen document "Efficiëntie - uitleg" en eigen bronnen. Het script tools/sync_yams.py neemt elke nieuwe YA-MS-versie over en maakt er een paneel van zonder de berekeningen te wijzigen.
 TAG|SCELTA|Talen: 28, alle talen van YAEC plus Deens en Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), voor de interface (data/lingue/ela-<code>.txt), het Technisch document en de Bronnen. In de weergave F.A.I./aurora heet het spoor van scatterpunten in alle vertalingen "Scatter trail". De statusbalk toont het gebruikte magnetisch veldmodel (IGRF-14 van de IAGA [16]).
 H1|9. Beperkingen
 LI|Stations in het midden van het locatorvak: met locators van 4 tekens loopt de fout op tot ~80 km.
