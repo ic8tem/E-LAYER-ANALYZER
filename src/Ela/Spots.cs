@@ -25,13 +25,23 @@ namespace ELA
 
         // Regola dell'autore (IC8TEM): se nel testo dello spot compare <MS>, <AU> o <TR> lo spot non riguarda l'E-sporadico
         // (serve invece al meteor scatter, all'aurora o al tropo) e la linguetta SPORADIC-E lo scarta.
-        static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AURORA|AUR|AUE|AU|TR|TROPO)\s*>",
+        static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AURORA|AUR|AUE|AU|TR|TROPO|AS|ACS)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         // Regola di YA-MS (IC8TEM), valida anche qui: spot di meteor scatter = modi univocamente MS (MSK144, FSK441/FSK41, PSK2K,
         // JTMS, JT6M) oppure <MS> nel testo, senza distinzione tra maiuscole e minuscole. Non sono spot di E-sporadico.
         static readonly System.Text.RegularExpressions.Regex rxMsMode = new System.Text.RegularExpressions.Regex(@"MSK144|FSK441|FSK41|PSK2K|JTMS|JT6M",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsMeteorScatter { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
+        // Primo criterio di YA-MS (regola dell'autore): frequenza in una finestra tipica del MS (50190-50300, 70100-70400,
+        // 144290-144399 kHz, impostabili nella Raccolta dati di YA-MS) senza scritte di altra propagazione (<TR> <AS> <ACS>
+        // <AU> <ES> <FAI> <F2>); secondo criterio: modi MS o <MS>.
+        public bool IsMeteorScatter
+        {
+            get
+            {
+                if (Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? ""))) return true;
+                return YAMS.MsCollector.UseWindows && YAMS.MsCollector.OtherTag(Comment) == null && YAMS.MsCollector.WindowOf(FreqKHz) != null;
+            }
+        }
         // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);

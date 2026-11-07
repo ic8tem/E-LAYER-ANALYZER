@@ -18,7 +18,7 @@
 
 The last 2000 spots, with band and source filters. Archive: one CSV file per day in `data/spot`. Every time the program closes, the spot database is emptied (memory and the files in `data/spot`): each session starts from scratch.
 
-**Local filter** (optional box): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. Spots with MS-only modes (MSK144, FSK441, PSK2K, JTMS, JT6M) or with `<MS>` are meteor scatter, as in YA-MS.
+**Local filter** (optional box): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. As in YA-MS, meteor scatter (not Sporadic-E) spots are those in the typical MS frequency windows (50190-50300, 70100-70400, 144290-144399 kHz) without tags of another propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), and those with MS-only modes (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) or with `<MS>`. Spots with `<AS>`/`<ACS>` (aircraft scatter) are not used for Sporadic-E.
 
 ## CALL3
 

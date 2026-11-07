@@ -546,9 +546,7 @@ Raccolta dati	データ収集
 Reverse Beacon Network	Reverse Beacon Network
 Riconnetti	再接続
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	不採用: 「{0}」はありますが、周波数 {1:F1} kHz は選択したバンドにありません。
-SCARTATO: nessuna parola del filtro.	不採用: フィルターの語がありません。
 Scrivi il nominativo per il login prima di connettere.	接続する前にログイン用コールサインを入力してください。
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	有効な語のいずれかを含むスポットだけを残します (大文字・小文字・混在を問いません)。MSK144、FSK441、PSK2K、JTMS、JT6M は流星散乱専用のデジタルモードなので、そのスポットは確実に MS です。<MS> は交信が流星散乱で行われたことを一般的に示します。
 Spot meteor scatter raccolti (i più recenti in alto)	収集した流星散乱スポット (新しいものが上)
 Svuota la tabella	表をクリア
 collegamento via meteor scatter	流星散乱による交信
@@ -564,3 +562,14 @@ righe {0}, spot letti {1}, MS {2}	行 {0}、スポット {1}、MS {2}
 righe sotto 27990 kHz scartate: {0}	27990 kHz 未満で破棄した行: {0}
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	27990.0 kHz 未満のクラスター行をすぐに破棄する (コンソールに表示せず、保存もしない)
 Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	不正確なロケーター (4 文字のみ) も、CALL3 に 6 文字のロケーターがあれば CALL3 から取得します。
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	第1基準: 流星散乱スポットの典型的な周波数 (kHz)
+2° criterio: modi digitali MS e <MS>	第2基準: MS デジタルモードと <MS>
+La riga non è uno spot "DX de ..." valido.	行は正しい「DX de ...」スポットではありません。
+SCARTATO: frequenza sotto 27990,0 kHz.	不採用: 周波数が 27990.0 kHz 未満です。
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	不採用: MS ウィンドウ外で、フィルターの語もありません。
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	不採用: コメントが別の伝搬 ({0}) を示しており、MS モードがありません。
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	これらのウィンドウ内のスポットは、モード名がなくても採用します。ただし、コメントが次のいずれかの表記で別の伝搬を示す場合は除きます:
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	ウィンドウ外のスポットと、別の伝搬の表記があるスポットに適用します: 有効な語のいずれかを含めば残します (大文字・小文字・混在を問いません)。MSK144、FSK441、PSK2K、JTMS、JT6M は流星散乱専用のデジタルモードなので、そのスポットは確実に MS です。<MS> は交信が流星散乱で行われたことを一般的に示します。
+accettati per finestra di frequenza: {0}	周波数ウィンドウで採用: {0}
+finestra {0} kHz	ウィンドウ {0} kHz
+scartati per altra propagazione: {0}	別の伝搬のため不採用: {0}

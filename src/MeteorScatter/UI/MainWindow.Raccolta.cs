@@ -75,10 +75,31 @@ namespace YAMS
             // ---------------- destra (40 %): filtro
             StackPanel fp = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
             fp.Children.Add(new TextBlock { Text = Lang.T("Filtro degli spot meteor scatter"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
+            // 1° criterio: finestre di frequenza tipiche del MS
+            CheckBox chkWin = C(Lang.T("1° criterio: frequenze tipiche degli spot meteor scatter (kHz)"), MsCollector.UseWindows);
+            chkWin.FontWeight = FontWeight.Bold; chkWin.Margin = new Thickness(0, 2, 0, 0);
+            chkWin.IsCheckedChanged += (s, e) => { MsCollector.UseWindows = chkWin.IsChecked == true; TestFilter(); };
+            fp.Children.Add(chkWin);
+            TextBox txtWin = T(MsCollector.WindowsText, 300, false);
+            txtWin.HorizontalAlignment = HorizontalAlignment.Stretch; txtWin.Width = double.NaN;
+            txtWin.TextChanged += (s, e) => { MsCollector.SetWindows(txtWin.Text); TestFilter(); };
+            fp.Children.Add(txtWin);
             fp.Children.Add(new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 13,
-                Text = Lang.T("Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. " +
+                Text = Lang.T("Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:")
+            });
+            TextBox txtOther = T(MsCollector.OtherTagsText, 300, false);
+            txtOther.HorizontalAlignment = HorizontalAlignment.Stretch; txtOther.Width = double.NaN;
+            txtOther.TextChanged += (s, e) => { MsCollector.SetOtherTags(txtOther.Text); TestFilter(); };
+            fp.Children.Add(txtOther);
+
+            // 2° criterio: modi digitali MS e <MS>
+            fp.Children.Add(new TextBlock { Text = Lang.T("2° criterio: modi digitali MS e <MS>"), FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 8, 0, 0) });
+            fp.Children.Add(new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 13,
+                Text = Lang.T("Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. " +
                               "MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. " +
                               "<MS> indica genericamente che il collegamento è avvenuto via meteor scatter.")
             });
@@ -118,7 +139,7 @@ namespace YAMS
             fp.Children.Add(chkLow);
 
             fp.Children.Add(new TextBlock { Text = Lang.T("Prova del filtro"), FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 6, 0, 0) });
-            txtRdTest = T("DX de DK5EW-#:  144360.0  IC8TEM   MSK144 +2 dB JN48<MS>JN70   2133Z", 420, false);
+            txtRdTest = T("DX de DK5EW-#:  144360.0  IC8TEM   JN48<>JN70 -12 dB   2133Z", 420, false);
             txtRdTest.FontSize = 12;
             txtRdTest.HorizontalAlignment = HorizontalAlignment.Stretch; txtRdTest.Width = double.NaN;
             lblRdTest = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13 };
@@ -242,26 +263,37 @@ namespace YAMS
             if (lblRdTest == null) return;
             string line = txtRdTest.Text ?? "";
             MsSpot s = MsCollector.Parse(line, 0, DateTime.UtcNow);
-            MsFilterWord w = MsCollector.FindWord(s != null ? s.Comment + " " + s.DxCall : line);
-            if (w == null)
+            if (s == null)
             {
-                lblRdTest.Text = Lang.T("SCARTATO: nessuna parola del filtro.");
+                MsFilterWord w0 = MsCollector.FindWord(line);
+                lblRdTest.Text = w0 != null ? Lang.F("La parola \"{0}\" c'è, ma la riga non è uno spot \"DX de ...\" valido.", w0.Text)
+                                            : Lang.T("La riga non è uno spot \"DX de ...\" valido.");
+                lblRdTest.Foreground = Pal.B(Pal.Orange);
+                return;
+            }
+            MsFilterWord w; string other;
+            string why = MsCollector.Decide(s, out w, out other);
+            if (MsCollector.DropLow && s.FreqKHz < MsCollector.MinKHz)
+            {
+                lblRdTest.Text = Lang.T("SCARTATO: frequenza sotto 27990,0 kHz.");
                 lblRdTest.Foreground = Pal.B(Pal.Red);
             }
-            else if (s == null)
+            else if (why == null)
             {
-                lblRdTest.Text = Lang.F("La parola \"{0}\" c'è, ma la riga non è uno spot \"DX de ...\" valido.", w.Text);
-                lblRdTest.Foreground = Pal.B(Pal.Orange);
+                lblRdTest.Text = other != null ? Lang.F("SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.", other)
+                                               : Lang.T("SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.");
+                lblRdTest.Foreground = Pal.B(Pal.Red);
             }
             else if (s.Band.Length == 0 || !MsCollector.Bands.Contains(s.Band))
             {
-                lblRdTest.Text = Lang.F("SCARTATO: \"{0}\" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.", w.Text, s.FreqKHz);
+                lblRdTest.Text = Lang.F("SCARTATO: \"{0}\" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.", why, s.FreqKHz);
                 lblRdTest.Foreground = Pal.B(Pal.Orange);
             }
             else
             {
                 s.LocSpotter = MsCollector.Refine(s.LocSpotter, s.Spotter); s.LocDx = MsCollector.Refine(s.LocDx, s.DxCall);
-                lblRdTest.Text = Lang.F("ACCETTATO per \"{0}\": {1} da {2}, {3} MHz", w.Text, s.DxCall, s.Spotter, s.Band) +
+                string crit = w == null ? Lang.F("finestra {0} kHz", why) : why;
+                lblRdTest.Text = Lang.F("ACCETTATO per \"{0}\": {1} da {2}, {3} MHz", crit, s.DxCall, s.Spotter, s.Band) +
                     (s.LocSpotter.Length > 0 || s.LocDx.Length > 0 ? "  (" + s.LocSpotter + " → " + s.LocDx + ")" : "");
                 lblRdTest.Foreground = Pal.B(Pal.Green);
             }
@@ -316,7 +348,9 @@ namespace YAMS
             foreach (MsSpot s in MsCollector.Spots) if (s.Utc >= lim) lastHour++;
             lblRdStats.Text = Lang.F("righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}",
                 lines, parsed, acc, MsCollector.RejectedNoWord, MsCollector.RejectedBand, lastHour)
-                + "\n" + Lang.F("righe sotto 27990 kHz scartate: {0}", MsCollector.DroppedLow);
+                + "\n" + Lang.F("righe sotto 27990 kHz scartate: {0}", MsCollector.DroppedLow)
+                + "\n" + Lang.F("accettati per finestra di frequenza: {0}", MsCollector.AcceptedWindow)
+                + "\n" + Lang.F("scartati per altra propagazione: {0}", MsCollector.RejectedOther);
             foreach (Control c in rdWordList.Children)
                 if (c is Grid gr) foreach (Control x in gr.Children) if (x is TextBlock tb && tb.Tag is MsFilterWord fw) tb.Text = fw.Count.ToString(CultureInfo.CurrentCulture);
             if (rdDirty) FillRdTable();

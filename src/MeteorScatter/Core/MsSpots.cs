@@ -96,6 +96,72 @@ namespace YAMS
         // (opzionale: casella nella linguetta, accesa di partenza)
         public const double MinKHz = 27990.0;
         public static bool DropLow = true;
+        // PRIMO criterio (regola dell'autore, IC8TEM): le frequenze tipiche degli spot MS. Uno spot che cade in una di
+        // queste finestre si accetta anche senza parole del modo, a meno che il commento dichiari un'altra propagazione
+        // (<TR> tropo, <AS>/<ACS> aircraft scatter, <AU> aurora, <ES> sporadico E, <FAI>, <F2>): in quel caso, e per
+        // tutto cio' che sta fuori dalle finestre, decide il secondo criterio (modi digitali MS e <MS>).
+        public const string DefaultWindows = "50190-50300; 70100-70400; 144290-144399";
+        public const string DefaultOtherTags = "<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>";
+        public static bool UseWindows = true;
+        public static string WindowsText = DefaultWindows, OtherTagsText = DefaultOtherTags;
+        public static int AcceptedWindow, RejectedOther;
+        static List<double[]> windows = ParseWindows(DefaultWindows);
+        static Regex rxOther = BuildOther(DefaultOtherTags);
+
+        public static List<double[]> ParseWindows(string t)
+        {
+            List<double[]> l = new List<double[]>();
+            foreach (Match m in Regex.Matches(t ?? "", @"(\d+(?:[.,]\d+)?)\s*-\s*(\d+(?:[.,]\d+)?)"))
+            {
+                double a = double.Parse(m.Groups[1].Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+                double b = double.Parse(m.Groups[2].Value.Replace(',', '.'), CultureInfo.InvariantCulture);
+                if (b < a) { double x = a; a = b; b = x; }
+                l.Add(new[] { a, b });
+            }
+            return l;
+        }
+
+        static Regex BuildOther(string t)
+        {
+            List<string> tags = new List<string>();
+            foreach (Match m in Regex.Matches(t ?? "", @"<\s*([A-Za-z0-9]+)\s*>")) tags.Add(Regex.Escape(m.Groups[1].Value));
+            if (tags.Count == 0) return null;
+            return new Regex(@"<\s*(" + string.Join("|", tags) + @")\s*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        }
+
+        public static void SetWindows(string t) { WindowsText = t ?? ""; windows = ParseWindows(WindowsText); }
+        public static void SetOtherTags(string t) { OtherTagsText = t ?? ""; rxOther = BuildOther(OtherTagsText); }
+
+        // finestra MS che contiene la frequenza ("144290-144399"), null se nessuna
+        public static string WindowOf(double kHz)
+        {
+            foreach (double[] w in windows)
+                if (kHz >= w[0] && kHz <= w[1] + 0.999) return w[0].ToString("0.###", CultureInfo.InvariantCulture) + "-" + w[1].ToString("0.###", CultureInfo.InvariantCulture);
+            return null;
+        }
+
+        // scritta di altra propagazione nel commento (<ES>, <TR>...), null se nessuna
+        public static string OtherTag(string comment)
+        {
+            if (rxOther == null) return null;
+            Match m = rxOther.Match(comment ?? "");
+            return m.Success ? "<" + m.Groups[1].Value.ToUpperInvariant() + ">" : null;
+        }
+
+        // decisione sullo spot: etichetta del criterio che lo accetta (finestra o parola), null se scartato.
+        // word = parola del secondo criterio (null se accettato per finestra); other = scritta di altra propagazione trovata
+        public static string Decide(MsSpot s, out MsFilterWord word, out string other)
+        {
+            word = FindWord(s.Comment + " " + s.DxCall);
+            other = OtherTag(s.Comment);
+            if (UseWindows && other == null)
+            {
+                string win = WindowOf(s.FreqKHz);
+                if (win != null) { word = null; return win; }
+            }
+            return word != null ? word.Text : null;
+        }
+
         public static string Dir;
         public static bool Started;        // connessione automatica gia' eseguita (una sola volta per avvio del programma)
         public static string[] StateText = { "Non connesso", "Non connesso", "Non connesso" };
@@ -120,6 +186,9 @@ namespace YAMS
                 }
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
+                UseWindows = cfg.GetB("rd_finestre_attive", true);
+                SetWindows(cfg.Get("rd_finestre", DefaultWindows));
+                SetOtherTags(cfg.Get("rd_altre_propagazioni", DefaultOtherTags));
                 string b = cfg.Get("rd_bande", "");
                 if (b.Length > 0) { Bands.Clear(); foreach (string x in b.Split(',')) if (x.Trim().Length > 0) Bands.Add(x.Trim()); }
                 LoadRecent();
@@ -151,6 +220,9 @@ namespace YAMS
             cfg.Set("rd_filtri", sb.ToString());
             cfg.Set("rd_bande", string.Join(",", Bands));
             cfg.Set("rd_scarta_sotto_28", DropLow);
+            cfg.Set("rd_finestre_attive", UseWindows);
+            cfg.Set("rd_finestre", WindowsText);
+            cfg.Set("rd_altre_propagazioni", OtherTagsText);
         }
 
         public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }
@@ -185,12 +257,13 @@ namespace YAMS
                 while (ConsoleLines[i].Count > 200) ConsoleLines[i].Dequeue();
                 if (s == null) continue;
                 Parsed[i]++;
-                MsFilterWord w = FindWord(s.Comment + " " + s.DxCall);
-                if (w == null) { RejectedNoWord++; continue; }
+                MsFilterWord w; string other;
+                string why = Decide(s, out w, out other);
+                if (why == null) { if (other != null) RejectedOther++; else RejectedNoWord++; continue; }
                 if (s.Band.Length == 0 || !Bands.Contains(s.Band)) { RejectedBand++; continue; }
-                s.Match = w.Text;
+                s.Match = why;
                 if (!keys.Add(s.Key)) continue;
-                w.Count++;
+                if (w != null) w.Count++; else AcceptedWindow++;
                 Accepted[i]++;
                 Locate(s);
                 Spots.Add(s);

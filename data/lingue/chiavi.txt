@@ -11,6 +11,8 @@
 (stima poco precisa sotto 2 λ)
 -> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)
+2° criterio: modi digitali MS e <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}
@@ -198,6 +200,7 @@ Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTF
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)
 La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.
+La riga non è uno spot "DX de ..." valido.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).
 La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).
@@ -333,7 +336,9 @@ Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/200
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO
 S
 SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.
-SCARTATO: nessuna parola del filtro.
+SCARTATO: frequenza sotto 27990,0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.
 SCIAME PIÙ FAVOREVOLE
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)
 SGO, Finlandia
@@ -352,7 +357,6 @@ Sequenza del fascio
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.
 Sextantidi diurne
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)
-Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.
 Sigla
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.
 Sorge
@@ -382,7 +386,9 @@ Troppe poche ore in comune ({0}) tra Collm e il file RMOB.
 Tutti i file
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz
 Univ. Lipsia / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:
 Ursidi
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione
 Vista dall'alto (E a destra)
 Volta celeste
@@ -397,6 +403,7 @@ ZONA UTILE NEL FASCIO DI GRAVES
 a DESTRA guardando verso il corrispondente
 a SINISTRA guardando verso il corrispondente
 a cura di Costantino IC8TEM
+accettati per finestra di frequenza: {0}
 adesso {0}
 adesso · ancora {0:F1} s
 aggiornamento una volta al giorno
@@ -439,6 +446,7 @@ errore: {0}
 eta-Aquaridi
 eta-Eridanidi
 eta-Liridi
+finestra {0} kHz
 fuori dal lobo
 gamma-Draconidi di luglio
 gamma-Ursae Minoridi
@@ -517,6 +525,7 @@ scala non letta
 scala tarata 0-1200 meteore/ora
 scarso
 scartati
+scartati per altra propagazione: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %
 scorrimento sciame
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili
