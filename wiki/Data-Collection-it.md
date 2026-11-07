@@ -18,7 +18,7 @@
 
 Ultimi 2000 spot con filtro per banda e fonte. Archivio: un file CSV al giorno in `data/spot`. A ogni chiusura del programma il database degli spot si svuota (memoria e file di `data/spot`): ogni sessione riparte da zero.
 
-**Filtro locale** (casella, facoltativo): le righe "DX de" sotto 27990,0 kHz si scartano, non compaiono nella console e non si memorizzano. I **locator non precisi** (meno di 6 caratteri) si prendono da CALL3: se CALL3 ha un locator a 6 caratteri, prevale sempre quello. Gli spot con modi solo MS (MSK144, FSK441, PSK2K, JTMS, JT6M) o con `<MS>` sono di meteor scatter, come in YA-MS.
+**Filtro locale** (casella, facoltativo): le righe "DX de" sotto 27990,0 kHz o sopra 145 MHz si scartano, non compaiono nella console e non si memorizzano. I **locator non precisi** (meno di 6 caratteri) si prendono da CALL3: se CALL3 ha un locator a 6 caratteri, prevale sempre quello. Gli spot con modi solo MS (MSK144, FSK441, PSK2K, JTMS, JT6M) o con `<MS>` sono di meteor scatter, come in YA-MS.
 
 ## CALL3
 

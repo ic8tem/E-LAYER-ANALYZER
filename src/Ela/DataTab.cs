@@ -28,7 +28,7 @@ namespace ELA
         readonly TextBlock lblSearch;
         bool dirty = true;
         public static bool VhfOnly = true;
-        public const double MinKHz = 27990.0;   // soglia del filtro locale delle righe del cluster (kHz)
+        public const double MinKHz = 27990.0, MaxKHz = 145000.0;   // limiti del filtro locale delle righe del cluster (kHz; massimo 145 MHz, regola dell'autore)
         static readonly System.Text.RegularExpressions.Regex rxDxFreq = new System.Text.RegularExpressions.Regex(@"DX de\s+\S+?:?\s+(\d+(?:\.\d+)?)",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         // frequenza (kHz) di una riga "DX de ..."; NaN se la riga non e' uno spot
@@ -61,7 +61,7 @@ namespace ELA
                 sessions.Add(p);
                 sp.Children.Add(p.Root);
             }
-            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz (non mostrate e non memorizzate)"), VhfOnly);
+            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate)"), VhfOnly);
             chkVhfOnly.IsCheckedChanged += (s, e) => VhfOnly = chkVhfOnly.IsChecked == true;
             DockPanel sessPage = new DockPanel();
             Ui.Dock(sessPage, Ui.Row(chkVhfOnly), Dock.Top);
@@ -295,12 +295,12 @@ namespace ELA
             foreach (string l in got) YAMS.MsCollector.Feed(index, l);   // la Raccolta dati di YA-MS filtra da queste righe gli spot meteor scatter
             foreach (string l in got)
             {
-                // filtro locale (facoltativo): le righe "DX de" sotto 27990,0 kHz si scartano, non vanno in console ne' in memoria
+                // filtro locale (facoltativo): le righe "DX de" sotto 27990,0 kHz o sopra 145 MHz si scartano, non vanno in console ne' in memoria
                 double fk = DataTab.LineFreqKHz(l);
-                if (DataTab.VhfOnly && !double.IsNaN(fk) && fk < DataTab.MinKHz) { dropped++; continue; }
+                if (DataTab.VhfOnly && !double.IsNaN(fk) && (fk < DataTab.MinKHz || fk > DataTab.MaxKHz)) { dropped++; continue; }
                 lines.Enqueue(l);
                 Spot s = SpotParser.Parse(l, index, now);
-                if (s != null && (!DataTab.VhfOnly || s.FreqKHz >= DataTab.MinKHz))
+                if (s != null && (!DataTab.VhfOnly || (s.FreqKHz >= DataTab.MinKHz && s.FreqKHz <= DataTab.MaxKHz)))
                 {
                     if (SpotStore.Add(s)) spots++;
                 }
@@ -308,7 +308,7 @@ namespace ELA
             while (lines.Count > 300) lines.Dequeue();
             console.Text = string.Join("\n", lines);
             sv.ScrollToEnd();
-            lblCounts.Text = Lang.F("righe {0}, spot salvati {1}", Session.LinesIn, spots) + (dropped > 0 ? ", " + Lang.F("scartate sotto 27990 kHz: {0}", dropped) : "");
+            lblCounts.Text = Lang.F("righe {0}, spot salvati {1}", Session.LinesIn, spots) + (dropped > 0 ? ", " + Lang.F("scartate fuori da 27990 kHz - 145 MHz: {0}", dropped) : "");
             if (SpotArrived != null) SpotArrived();
         }
 
