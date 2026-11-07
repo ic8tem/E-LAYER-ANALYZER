@@ -2,7 +2,8 @@
 
 **E-LAYER ANALYZER** - analisi dei modi di propagazione VHF che coinvolgono lo strato E: sporadico E (anche multi-salto
 extracontinentale), F.A.I., meteor scatter (programma YA-MS integrato) e aurora radio.
-A cura di Costantino Cerrotta IC8TEM. Windows, Linux e Mac (.NET 8 + Avalonia), stessa grafica di YA-MS.
+A cura di Costantino Cerrotta IC8TEM. Windows (64 e 32 bit), Linux, Raspberry Pi (ARM64) e Mac (.NET 8 + Avalonia), stessa grafica di YA-MS.
+Nessun dato in AppData: tutto sta nella cartella `data` accanto al programma.
 
 | Linguetta | Contenuto |
 |---|---|

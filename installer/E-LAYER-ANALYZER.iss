@@ -1,7 +1,12 @@
 ; E-LAYER ANALYZER - installatore per Windows (Inno Setup 6)
 ; Installa nella cartella personale C:\E-LAYER-ANALYZER (programma e cartella data insieme), senza permessi di amministratore.
+; Nessun file in C:\Users\...\AppData: niente collegamento nel menu Start (che Windows mette in AppData\Roaming),
+; solo l'icona facoltativa sul desktop. Versioni a 64 bit (x64) e 32 bit (x86).
 #ifndef AppVersion
-  #define AppVersion "0.2.0"
+  #define AppVersion "0.3.0"
+#endif
+#ifndef Arch
+  #define Arch "x64"
 #endif
 #ifndef SourceDir
   #define SourceDir "..\publish\win-x64"
@@ -17,10 +22,12 @@ AppComments=Analisi dei modi di propagazione dello strato E: sporadico E, F.A.I.
 DefaultDirName={sd}\E-LAYER-ANALYZER
 DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
+#if Arch == "x64"
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
+#endif
 OutputDir=..\dist
-OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-windows-x64-setup
+OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-windows-{#Arch}-setup
 SetupIconFile=..\src\Assets\ela.ico
 UninstallDisplayIcon={app}\E-LAYER-ANALYZER.exe
 Compression=lzma2
@@ -31,7 +38,7 @@ WizardStyle=modern
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 
 [Tasks]
-Name: "desktopicon"; Description: "Crea un'icona sul desktop"; GroupDescription: "Icone:"
+Name: "desktopicon"; Description: "Crea un'icona sul desktop"; GroupDescription: "Icone:"; Flags: checkedonce
 
 [Files]
 Source: "{#SourceDir}\*"; DestDir: "{app}"; Excludes: "data\*,doc\*"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -41,7 +48,6 @@ Source: "{#SourceDir}\data\call3.txt"; DestDir: "{app}\data"; Flags: onlyifdoesn
 Source: "{#SourceDir}\doc\*"; DestDir: "{app}\doc"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{userprograms}\E-LAYER ANALYZER"; Filename: "{app}\E-LAYER-ANALYZER.exe"
 Name: "{userdesktop}\E-LAYER ANALYZER"; Filename: "{app}\E-LAYER-ANALYZER.exe"; Tasks: desktopicon
 
 [Run]
