@@ -245,6 +245,23 @@ namespace ELA
                 if (!string.IsNullOrEmpty(Program.ScreenshotLoc)) { txtLoc.Text = Program.ScreenshotLoc; txtCall.Text = "IC8TEM"; ApplyStation(); }
                 for (int k = 0; k < 60 && (MapView.Coast == null || MapView.Coast.Count == 0); k++) await Task.Delay(1000);
                 for (int k = 0; k < 30 && CallDb.Loading; k++) await Task.Delay(1000);
+                if (Program.AuroraA != null)
+                {
+                    // bozzetto del calcolo aurora per una coppia di locator (--aurora A B)
+                    tabs.Select(3);
+                    au.StartFetch();
+                    await Task.Delay(12000);
+                    au.View(-25, 35, 45, 75);
+                    au.ShotPair(Program.AuroraA, Program.AuroraB); await Task.Delay(3000);
+                    Shot(Path.Combine(dir, "aurora_scia_" + Program.AuroraA + "_" + Program.AuroraB + ".png"));
+                    if (au.LastBest != null)
+                    {
+                        au.ShotIsoA(Program.AuroraA, au.LastBest.Lat, au.LastBest.Lon); await Task.Delay(3000);
+                        Shot(Path.Combine(dir, "aurora_isoriflessione_" + Program.AuroraA + ".png"));
+                    }
+                    Close();
+                    return;
+                }
                 EsTab.AddDemoSpots();
                 // log di prova per la linguetta LOG ADIF
                 string demo = Path.Combine(LogStore.Dir, "prova.adi");

@@ -106,6 +106,7 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb fonts-dejavu-core fonts-noto-cjk >/dev/null
           cp -R publish/linux-x64 run
+          timeout 200 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/aurora" --loc JN70CN --aurora IO70VJ JO59BC || true
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots" --loc JN70CN || true
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/chiaro" --loc JN70CN --colori chiaro || true
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/notte" --loc JN70CN --colori scuro || true

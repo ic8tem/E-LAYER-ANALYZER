@@ -169,6 +169,10 @@ namespace ELA
 
         // per le fotografie automatiche
         public void ShotPreset(int i) { cmbPreset.SelectedIndex = i; }
+        public PerpPoint LastBest;
+        public void ShotPair(string a, string b) { txtA.Text = a; txtB.Text = b; cmbMode.SelectedIndex = 0; Recalc(); }
+        public void ShotIsoA(string a, double lat, double lon) { txtA.Text = a; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
+        public void View(double w, double e, double s, double n) { map.SetView(w, e, s, n); }
         public void ShotIso(double lat, double lon) { txtA.Text = "IC8FAX JN70CN"; txtB.Text = ""; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
 
         void DefaultView()
@@ -257,6 +261,7 @@ namespace ELA
             Func<double, double, double> w = null;
             if (aurora && chkOval.IsChecked == true && SpaceWeather.Oval != null) w = (la, lo) => SpaceWeather.OvalAt(la, lo) / 30.0;
             PerpPoint best = null; double bestScore = double.MaxValue;
+            LastBest = null;
             foreach (PerpPoint p in loc)
             {
                 map.Cells.Add(new MapCell { Lat0 = p.Lat - step / 2, Lon0 = p.Lon - step / 2, DLat = step, DLon = step, Fill = Dev(p.Off, false) });
@@ -281,6 +286,7 @@ namespace ELA
                 sb.AppendLine(Lang.T("Nessun punto soddisfa la condizione di riflessione: collegamento F.A.I. improbabile con questa geometria e questa quota."));
                 return;
             }
+            LastBest = best;
             double dBb = Geo.DistanceKm(bLat, bLon, best.Lat, best.Lon);
             sb.AppendLine();
             sb.AppendLine(Lang.T("Scatter point più probabile (deviazione minima e tratta più corta):"));
