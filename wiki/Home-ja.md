@@ -11,6 +11,7 @@
 | タブ | 用途 |
 |---|---|
 | [SPORADIC-E](Sporadic-E-ja) | 地図上の Es スポット、両局の第 1 ホップ、マイデンヘッドグリッド上の Es 雲、自局の MUF |
+| [BENCHMARK Es](Benchmark-Es-ja) | ADIF ログ全体 (他局のログでも可) を使った検証台: 日別・時間別の QSO、セクター別スキップ、推定 foEs、マルチホップの検証、雲の移動 |
 | [F.A.I.](FAI-ja) | 2 局間の散乱点の Scatter trail と、地点検証付きの等反射線 (isoflection loci) |
 | [METEOR SCATTER](Meteor-Scatter-ja) | YA-MS プログラムのフル機能 (流星群の効率、レーダー、予報) |
 | [AURORA](Aurora-ja) | NOAA のオーロラオーバル、Kp、太陽風、オーロラの Scatter trail と等反射線、推奨方向 |
