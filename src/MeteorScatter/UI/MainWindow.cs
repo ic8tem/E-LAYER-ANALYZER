@@ -231,20 +231,30 @@ namespace YAMS
             public readonly DockPanel Line = new DockPanel();
             readonly List<ToggleButton> buttons = new List<ToggleButton>();
             readonly List<Control> pages = new List<Control>();
+            public readonly List<PillTabs> Subs = new List<PillTabs>();   // sottolinguette della pagina (null = pagina semplice)
             public int Selected = -1;
             public int Count { get { return buttons.Count; } }   // numero di linguette
 
-            public PillTabs()
+            public PillTabs() : this(false) { }
+
+            // sub = true: barra delle sottolinguette, piu' chiara e sottile, sotto quella principale
+            public PillTabs(bool sub)
             {
                 Line.Children.Add(strip);
-                Bar = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 5), Child = Line };
+                Bar = sub ? new Border { Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(0, 0, 0, 1), Padding = new Thickness(8, 3), Child = Line }
+                          : new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 5), Child = Line };
+                IsSub = sub;
             }
+            public readonly bool IsSub;
 
-            public void Add(string title, Control page)
+            public void Add(string title, Control page) { Add(title, page, null); }
+
+            public void Add(string title, Control page, PillTabs sub)
             {
                 int idx = buttons.Count;
+                Subs.Add(sub);
                 ToggleButton b = new ToggleButton { Content = title, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 1, 4, 1) };
-                b.Classes.Add("tab");
+                b.Classes.Add(IsSub ? "subtab" : "tab");
                 b.Click += (s, e) => Select(idx);
                 buttons.Add(b);
                 strip.Children.Add(b);
@@ -495,17 +505,72 @@ namespace YAMS
             UpdateGeometry();   // il resoconto usa caratteri ricavati da quello della casella
         }
 
+        // linguetta principale con sottolinguette: le Page() seguenti vanno nel gruppo finche' non si chiama EndGroup()
+        PillTabs curGroup;
+
         DockPanel Page(string t)
         {
             DockPanel p = new DockPanel { Background = Pal.B(Pal.Back) };
-            tabs.Add(t, p);
+            (curGroup ?? tabs).Add(t, p);
             return p;
         }
 
+        void Group(string t)
+        {
+            PillTabs g = new PillTabs(true);
+            DockPanel p = new DockPanel { Background = Pal.B(Pal.Back) };
+            DockTop(p, g.Bar);
+            p.Children.Add(g.Host);
+            tabs.Add(t, p, g);
+            curGroup = g;
+        }
+
+        void EndGroup() { curGroup = null; }
+
         void BuildTabs()
         {
-            // --- Volta celeste
-            DockPanel p1 = Page(Lang.T("Volta celeste"));
+            // ===== 1. Live e dati real-time: traffico in diretta, flusso radar, radar GRAVES, raccolta dati
+            Group(Lang.T("Live e dati real-time"));
+
+            // --- Traffico in diretta: spot MS della raccolta dati sulla mappa azimutale (MainWindow.Traffico.cs)
+            BuildTrafficTab();
+
+            // --- Flusso radar
+            DockPanel p3 = Page(Lang.T("Flusso radar"));
+            btnFetch = B(Lang.T("Scarica adesso")); btnFetch.Click += (s, e) => StartFetch();
+            chkAuto = C(Lang.T("Aggiornamento automatico di tutte le fonti ogni 5 minuti"), cfg.GetB("aggiornamento_automatico", true));
+            numExp = N(1, 4, Dm(cfg.GetD("esponente_lambda", 3)), 1, 0.1m, 50);
+            numExp.ValueChanged += (s, e) => UpdateFluxTab();
+            lblRadar = L("");
+            DockTop(p3, Row(btnFetch, chkAuto, L(Lang.T("Esponente λ (SM6FHZ)")), numExp, lblRadar));
+            lblScaleNote = new TextBlock { Foreground = Pal.B(Pal.OrangeText), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 4, 6, 4) };
+            DockTop(p3, lblScaleNote);
+            Grid tl = new Grid { ColumnDefinitions = new ColumnDefinitions("62*,38*"), RowDefinitions = new RowDefinitions("50*,50*") };
+            chartFlux = new SimpleChart();
+            chartHeight = new SimpleChart();
+            picCollm = MakePicture(); picSoda = MakePicture();
+            Border fCollm = Framed(picCollm, Pal.ChartBg), fSoda = Framed(picSoda, Pal.ChartBg);
+            Grid.SetColumn(chartFlux, 0); Grid.SetRow(chartFlux, 0);
+            Grid.SetColumn(fCollm, 1); Grid.SetRow(fCollm, 0);
+            Grid.SetColumn(chartHeight, 0); Grid.SetRow(chartHeight, 1);
+            Grid.SetColumn(fSoda, 1); Grid.SetRow(fSoda, 1);
+            tl.Children.Add(chartFlux); tl.Children.Add(fCollm); tl.Children.Add(chartHeight); tl.Children.Add(fSoda);
+            p3.Children.Add(tl);
+
+            // --- Radar GRAVES (MainWindow.Graves.cs)
+            BuildGravesTab();
+
+            // --- Raccolta dati: spot MS da cluster, RBN e PSKReporter (MainWindow.Raccolta.cs)
+            BuildCollectTab();
+
+            EndGroup();
+
+            // ===== 2. Calcolo previsionale: volta celeste e calcolo, geometria e attenuazione, calcolo dell'efficienza,
+            //          attuazione sperimentale previsioni
+            Group(Lang.T("Calcolo previsionale"));
+
+            // --- Calcolo previsionale (ex "Volta celeste")
+            DockPanel p1 = Page(Lang.T("Calcolo previsionale"));   // ex linguetta "Volta celeste"
             Grid sc = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*") };
             p1.Children.Add(sc);
             // pianta: mappa con tratta, Hot, lobo, zone PREV, linea di scorrimento dello sciame e scala dei gradi
@@ -575,30 +640,31 @@ namespace YAMS
             Grid.SetColumn(rt, 1);
             sc.Children.Add(rt);
 
-            // --- Flusso radar (subito dopo "Volta celeste")
-            DockPanel p3 = Page(Lang.T("Flusso radar"));
-            btnFetch = B(Lang.T("Scarica adesso")); btnFetch.Click += (s, e) => StartFetch();
-            chkAuto = C(Lang.T("Aggiornamento automatico di tutte le fonti ogni 5 minuti"), cfg.GetB("aggiornamento_automatico", true));
-            numExp = N(1, 4, Dm(cfg.GetD("esponente_lambda", 3)), 1, 0.1m, 50);
-            numExp.ValueChanged += (s, e) => UpdateFluxTab();
-            lblRadar = L("");
-            DockTop(p3, Row(btnFetch, chkAuto, L(Lang.T("Esponente λ (SM6FHZ)")), numExp, lblRadar));
-            lblScaleNote = new TextBlock { Foreground = Pal.B(Pal.OrangeText), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 4, 6, 4) };
-            DockTop(p3, lblScaleNote);
-            Grid tl = new Grid { ColumnDefinitions = new ColumnDefinitions("62*,38*"), RowDefinitions = new RowDefinitions("50*,50*") };
-            chartFlux = new SimpleChart();
-            chartHeight = new SimpleChart();
-            picCollm = MakePicture(); picSoda = MakePicture();
-            Border fCollm = Framed(picCollm, Pal.ChartBg), fSoda = Framed(picSoda, Pal.ChartBg);
-            Grid.SetColumn(chartFlux, 0); Grid.SetRow(chartFlux, 0);
-            Grid.SetColumn(fCollm, 1); Grid.SetRow(fCollm, 0);
-            Grid.SetColumn(chartHeight, 0); Grid.SetRow(chartHeight, 1);
-            Grid.SetColumn(fSoda, 1); Grid.SetRow(fSoda, 1);
-            tl.Children.Add(chartFlux); tl.Children.Add(fCollm); tl.Children.Add(chartHeight); tl.Children.Add(fSoda);
-            p3.Children.Add(tl);
-
-            // --- Sciami in diretta: GMN e CMOR (MainWindow.Diretta.cs)
-            BuildLiveTab();
+            // --- Geometria e attenuazione
+            DockPanel p4 = Page(Lang.T("Geometria e attenuazione"));
+            numPower = N(1, 2000, Dm(cfg.GetD("potenza_W", 400)), 0, 10, 65);
+            numGain = N(0, 40, Dm(cfg.GetD("guadagno_dBi", 14)), 1, 0.5m, 55);
+            numSens = N(-160, -90, Dm(cfg.GetD("sensibilita_dBm", -130)), 0, 1, 60);
+            numQ = N(12, 16, Dm(cfg.GetD("densita_esponente_q", 14)), 1, 0.5m, 50);
+            DockTop(p4, Row(L(Lang.T("Potenza W")), numPower, L(Lang.T("Guadagno antenna dBi (tx = rx)")), numGain,
+                            L(Lang.T("Segnale minimo dBm")), numSens, L(Lang.T("Densita' scia q = 10^")), numQ, L(Lang.T("elettroni/m"))));
+            numPower.ValueChanged += (s, e) => UpdateGeometry();
+            numGain.ValueChanged += (s, e) => UpdateGeometry();
+            numSens.ValueChanged += (s, e) => UpdateGeometry();
+            numQ.ValueChanged += (s, e) => UpdateGeometry();
+            Grid sg = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*") };
+            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.Wrap };
+            ScrollViewer geoScroll = new ScrollViewer
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Content = new Border { Padding = new Thickness(12), Child = txtGeo }
+            };
+            Border geoBox = Framed(geoScroll, Pal.CodeBack);
+            chartElev = new SimpleChart();
+            Grid.SetColumn(geoBox, 0); Grid.SetColumn(chartElev, 1);
+            sg.Children.Add(geoBox); sg.Children.Add(chartElev);
+            p4.Children.Add(sg);
 
             // --- Calcolo dell'efficienza (ex "Efficienza 24 h")
             DockPanel p2 = Page(Lang.T("Calcolo dell'efficienza"));
@@ -641,46 +707,13 @@ namespace YAMS
             grid24.ColumnAlign = al24;
             p2.Children.Add(grid24);   // nessuno scorrimento orizzontale: la tabella e' giustificata
 
-            // --- Radar GRAVES (MainWindow.Graves.cs), subito dopo "Calcolo dell'efficienza"
-            BuildGravesTab();
-
             // --- Attuazione sperimentale previsioni (MainWindow.Previsioni.cs)
             BuildPrevTab();
 
-            // --- Geometria e attenuazione
-            DockPanel p4 = Page(Lang.T("Geometria e attenuazione"));
-            numPower = N(1, 2000, Dm(cfg.GetD("potenza_W", 400)), 0, 10, 65);
-            numGain = N(0, 40, Dm(cfg.GetD("guadagno_dBi", 14)), 1, 0.5m, 55);
-            numSens = N(-160, -90, Dm(cfg.GetD("sensibilita_dBm", -130)), 0, 1, 60);
-            numQ = N(12, 16, Dm(cfg.GetD("densita_esponente_q", 14)), 1, 0.5m, 50);
-            DockTop(p4, Row(L(Lang.T("Potenza W")), numPower, L(Lang.T("Guadagno antenna dBi (tx = rx)")), numGain,
-                            L(Lang.T("Segnale minimo dBm")), numSens, L(Lang.T("Densita' scia q = 10^")), numQ, L(Lang.T("elettroni/m"))));
-            numPower.ValueChanged += (s, e) => UpdateGeometry();
-            numGain.ValueChanged += (s, e) => UpdateGeometry();
-            numSens.ValueChanged += (s, e) => UpdateGeometry();
-            numQ.ValueChanged += (s, e) => UpdateGeometry();
-            Grid sg = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*") };
-            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.Wrap };
-            ScrollViewer geoScroll = new ScrollViewer
-            {
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                Content = new Border { Padding = new Thickness(12), Child = txtGeo }
-            };
-            Border geoBox = Framed(geoScroll, Pal.CodeBack);
-            chartElev = new SimpleChart();
-            Grid.SetColumn(geoBox, 0); Grid.SetColumn(chartElev, 1);
-            sg.Children.Add(geoBox); sg.Children.Add(chartElev);
-            p4.Children.Add(sg);
+            EndGroup();
 
-            // --- Sciami
-            DockPanel p5 = Page(Lang.T("Sciami"));
-            // giustificata sulla larghezza: larghezze di base compatte, caratteri e righe crescono con la finestra
-            gridShowers = MakeTable(new[] { Lang.T("Sigla"), Lang.T("Sciame"), Lang.T("Attività"), "λ max", Lang.T("Prossimo massimo (UTC)"), Lang.T("Fonte del massimo"), Lang.T("A.R."), Lang.T("Decl."), "v km/s", "r", "ZHR", Lang.T("Tipo"), Lang.T("Attivo oggi") },
-                                    new double[] { 44, 170, 96, 56, 170, 130, 50, 50, 44, 36, 40, 90, 70 });
-            gridShowers.Selectable = false;
-            gridShowers.FitWidth = true;
-            p5.Children.Add(gridShowers);
+            // ===== 3. Documenti tecnici: fonti, mappa dei radar europei, efficienza - spiegazione
+            Group(Lang.T("Documenti tecnici"));
 
             // --- Fonti
             DockPanel p6 = Page(Lang.T("Fonti"));
@@ -692,17 +725,30 @@ namespace YAMS
                 Content = new Border { Padding = new Thickness(14, 10), Child = txtSources }
             });
 
-            // --- Mappa delle fonti (MainWindow.MappaFonti.cs)
+            // --- Mappa dei radar europei (ex "Mappa delle fonti", MainWindow.MappaFonti.cs)
             BuildSourcesMapTab();
-
-            // --- Raccolta dati: spot MS da cluster, RBN e PSKReporter (MainWindow.Raccolta.cs)
-            BuildCollectTab();
 
             // --- Efficienza - spiegazione (MainWindow.Spiegazione.cs)
             BuildExplainTab();
 
+            EndGroup();
+
+            // ===== le altre linguette, nell'ordine di prima
+            // --- Sciami in diretta: GMN e CMOR (MainWindow.Diretta.cs)
+            BuildLiveTab();
+
+            // --- Sciami
+            DockPanel p5 = Page(Lang.T("Sciami"));
+            // giustificata sulla larghezza: larghezze di base compatte, caratteri e righe crescono con la finestra
+            gridShowers = MakeTable(new[] { Lang.T("Sigla"), Lang.T("Sciame"), Lang.T("Attività"), "λ max", Lang.T("Prossimo massimo (UTC)"), Lang.T("Fonte del massimo"), Lang.T("A.R."), Lang.T("Decl."), "v km/s", "r", "ZHR", Lang.T("Tipo"), Lang.T("Attivo oggi") },
+                                    new double[] { 44, 170, 96, 56, 170, 130, 50, 50, 44, 36, 40, 90, 70 });
+            gridShowers.Selectable = false;
+            gridShowers.FitWidth = true;
+            p5.Children.Add(gridShowers);
+
             // --- Mappa quadrati da ADIF (MainWindow.Grid.cs)
             BuildGridTab();
+
         }
 
         // Titoli delle sezioni (le righe elencate in heads) in evidenza, etichette in azzurro tenue, valori in chiaro
@@ -1177,7 +1223,7 @@ namespace YAMS
             double f1 = ForecastAt(hNow);
             double f2 = ForecastAt(hNow.AddHours(1));
             double f3 = ForecastAt(hNow.AddHours(2));
-            glFore.Text = f1 < 0 ? Lang.T("nessun dato radar: vedi Flusso radar")
+            glFore.Text = f1 < 0 ? Lang.T("nessun dato radar: vedi Live e dati real-time › Flusso radar")
                 : Lang.F("{0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)", PrevFreqMHz, f1,
                     f2 < 0 ? "-" : f2.ToString("F0"), f3 < 0 ? "-" : f3.ToString("F0"));
             ChartSeries ix = new ChartSeries(); ix.Name = Lang.T("indice tratta"); ix.Color = Pal.Ink(Pal.Rgb(90, 110, 200)); ix.Values = index; ix.Bars = true; ix.RightAxis = true;
@@ -1540,6 +1586,7 @@ namespace YAMS
         void SaveConfig()
         {
             SaveCollectConfig();
+            if (traffic != null) { cfg.Set("traffico_raggio", traffic.RadiusKm); cfg.Set("traffico_minuti", TrafficMinutes[Math.Max(0, cmbTrafficWindow.SelectedIndex)]); }
             cfg.Set("mio_locator", Up(txtHome));
             cfg.Set("mia_quota_m", V(numHomeAlt));
             cfg.Set("dx_locator", Up(txtDx));

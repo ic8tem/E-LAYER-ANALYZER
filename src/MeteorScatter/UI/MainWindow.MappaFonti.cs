@@ -17,7 +17,7 @@ namespace YAMS
 
         void BuildSourcesMapTab()
         {
-            DockPanel p = Page(Lang.T("Mappa delle fonti"));
+            DockPanel p = Page(Lang.T("Mappa dei radar europei"));
             TextBlock head = new TextBlock
             {
                 Foreground = Pal.B(Pal.OrangeText), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(8, 6, 8, 4),
@@ -56,9 +56,9 @@ namespace YAMS
             p.Children.Add(g);
 
             Color cCollm = Color.FromRgb(10, 165, 201), cSoda = Color.FromRgb(46, 158, 68), cGraves = Color.FromRgb(232, 89, 12), cCmor = Color.FromRgb(112, 72, 232);
-            MapSource collmM = new MapSource { Name = "Collm", Lat = 51.31, Lon = 13.00, Color = cCollm, Line1 = Lang.T("radar SKiYMET 36,2 MHz"), Line2 = Lang.T("Univ. Lipsia / IAP Kühlungsborn"), Tab = Lang.T("Flusso radar") };
-            MapSource sodaM = new MapSource { Name = "Sodankylä", Lat = 67.37, Lon = 26.63, Color = cSoda, Line1 = Lang.T("radar meteorico 36,9 MHz"), Line2 = Lang.T("SGO, Finlandia"), Tab = Lang.T("Flusso radar") };
-            MapSource gravM = new MapSource { Name = "GRAVES", Lat = GravesBeam.Lat, Lon = GravesBeam.Lon, Color = cGraves, Line1 = Lang.T("trasmettitore 143,050 MHz"), Line2 = "Broye-lès-Pesmes", Tab = Lang.T("Radar GRAVES"), LabelLeft = true };
+            MapSource collmM = new MapSource { Name = "Collm", Lat = 51.31, Lon = 13.00, Color = cCollm, Line1 = Lang.T("radar SKiYMET 36,2 MHz"), Line2 = Lang.T("Univ. Lipsia / IAP Kühlungsborn"), Tab = Lang.T("Live e dati real-time") + " › " + Lang.T("Flusso radar") };
+            MapSource sodaM = new MapSource { Name = "Sodankylä", Lat = 67.37, Lon = 26.63, Color = cSoda, Line1 = Lang.T("radar meteorico 36,9 MHz"), Line2 = Lang.T("SGO, Finlandia"), Tab = Lang.T("Live e dati real-time") + " › " + Lang.T("Flusso radar") };
+            MapSource gravM = new MapSource { Name = "GRAVES", Lat = GravesBeam.Lat, Lon = GravesBeam.Lon, Color = cGraves, Line1 = Lang.T("trasmettitore 143,050 MHz"), Line2 = "Broye-lès-Pesmes", Tab = Lang.T("Live e dati real-time") + " › " + Lang.T("Radar GRAVES"), LabelLeft = true };
             MapSource cmorM = new MapSource { Name = "CMOR", Lat = 43.26, Lon = -80.77, Color = cCmor, CoverKm = 600, Line1 = Lang.T("radar meteorico 17-38 MHz, orbite"), Line2 = Lang.T("Tavistock, Ontario (Canada)"), Tab = Lang.T("Sciami in diretta") };
             srcEurope.Sources = new List<MapSource> { collmM, sodaM, gravM };
             srcEurope.Minor = new List<MapSource>

@@ -1,0 +1,284 @@
+// YA-MS - mappa azimutale del traffico meteor scatter in diretta (sottolinguetta "Traffico in diretta").
+// Proiezione azimutale equidistante centrata sulla stazione: la distanza dal centro e' quella vera (km), l'angolo
+// e' l'azimut. Per ogni spot raccolto: tratta tra le due stazioni (colore della banda), stazioni agli estremi e la
+// "nuvola" dove si concentrano le scie piu' probabili per quella tratta e quell'ora (calcolata in MainWindow.Traffico.cs
+// con lo stesso modello di riflessione speculare della volta celeste). Gli spot con una stazione fuori dalla mappa
+// non si disegnano. Gli spot arrivati da meno di un minuto (e non piu' vecchi di 3 minuti) lampeggiano.
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Media;
+using Avalonia.Media.Immutable;
+using Avalonia.Threading;
+
+namespace YAMS
+{
+    public class TrafficCloud
+    {
+        public LatLon Centre;
+        public double MajorKm, MinorKm, AngleDeg;   // semiassi e azimut dell'asse maggiore
+        public double Share = 1;                    // frazione delle riflessioni (0..1)
+        public bool Sporadic;                       // nessuno sciame utile: hot spot classici
+    }
+
+    public class TrafficSpot
+    {
+        public LatLon A, B;
+        public string CallA = "", CallB = "", Band = "", Info = "";
+        public Color Color;
+        public bool Blink;
+        public List<TrafficCloud> Clouds = new List<TrafficCloud>();
+        public object Tag;
+    }
+
+    public class TrafficView : Control
+    {
+        public LatLon Home;
+        public string HomeLabel = "";
+        public double RadiusKm = 2500;
+        public List<System.Drawing.PointF[]> MapLines, MapBorders;
+        public List<TrafficSpot> Spots = new List<TrafficSpot>();
+        public TrafficSpot Selected;
+        public string Caption = "";
+        public List<KeyValuePair<string, Color>> Legend = new List<KeyValuePair<string, Color>>();
+        public event Action<TrafficSpot> SpotClicked;
+
+        readonly DispatcherTimer blink = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+        bool phase = true;
+        double cx, cy, rad;
+
+        public TrafficView()
+        {
+            ClipToBounds = true;
+            blink.Tick += (s, e) =>
+            {
+                bool any = false; foreach (TrafficSpot t in Spots) if (t.Blink) { any = true; break; }
+                if (!any) { phase = true; return; }
+                phase = !phase;
+                if (IsEffectivelyVisible) InvalidateVisual();
+            };
+            PointerPressed += (s, e) =>
+            {
+                Point p = e.GetPosition(this);
+                TrafficSpot best = null; double bd = 14;
+                foreach (TrafficSpot t in Spots)
+                {
+                    double d = SegDist(p, P(t.A), P(t.B));
+                    if (d < bd) { bd = d; best = t; }
+                }
+                Selected = best;
+                InvalidateVisual();
+                Action<TrafficSpot> a = SpotClicked; if (a != null) a(best);
+            };
+        }
+
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+            blink.Start();
+            UiScale.Changed += InvalidateVisual;
+        }
+
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnDetachedFromVisualTree(e);
+            blink.Stop();
+            UiScale.Changed -= InvalidateVisual;
+        }
+
+        public bool Inside(LatLon p) { return Astro.DistanceKm(Home, p) <= RadiusKm; }
+
+        Point P(LatLon p)
+        {
+            double d = Astro.DistanceKm(Home, p), b = Astro.Bearing(Home, p) * Math.PI / 180;
+            double r = d / RadiusKm * rad;
+            return new Point(cx + r * Math.Sin(b), cy - r * Math.Cos(b));
+        }
+
+        static double SegDist(Point p, Point a, Point b)
+        {
+            double vx = b.X - a.X, vy = b.Y - a.Y, l2 = vx * vx + vy * vy;
+            double t = l2 <= 0 ? 0 : Math.Max(0, Math.Min(1, ((p.X - a.X) * vx + (p.Y - a.Y) * vy) / l2));
+            double dx = a.X + t * vx - p.X, dy = a.Y + t * vy - p.Y;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
+        static FormattedText Ft(string s, double size, Color c, FontWeight w = FontWeight.Normal)
+        {
+            return new FormattedText(s ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                new Typeface(FontFamily.Default, FontStyle.Normal, w), size * UiScale.Font, new ImmutableSolidColorBrush(c));
+        }
+
+        public override void Render(DrawingContext ctx)
+        {
+            double W = Bounds.Width, H = Bounds.Height;
+            bool dark = Tema.Scuro;
+            Color page = dark ? Color.FromRgb(16, 22, 36) : Color.FromRgb(244, 246, 250);
+            Color sea = dark ? Color.FromRgb(20, 30, 52) : Color.FromRgb(228, 236, 246);
+            Color coast = dark ? Color.FromRgb(130, 146, 175) : Color.FromRgb(105, 115, 132);
+            Color border = dark ? Color.FromRgb(70, 82, 110) : Color.FromRgb(180, 188, 200);
+            Color ring = dark ? Color.FromArgb(120, 160, 175, 200) : Color.FromArgb(140, 140, 150, 170);
+            Color ink = dark ? Color.FromRgb(225, 230, 240) : Color.FromRgb(31, 41, 55);
+            Color box = dark ? Color.FromArgb(215, 12, 18, 32) : Color.FromArgb(225, 255, 255, 255);
+            ctx.DrawRectangle(new ImmutableSolidColorBrush(page), null, new Rect(0, 0, W, H));
+            if (W < 80 || H < 80) return;
+            double fs = 12;
+            double margin = 28 + 10 * UiScale.Font;
+            rad = Math.Max(20, Math.Min(W, H) / 2 - margin);
+            cx = W / 2; cy = H / 2;
+            Point c0 = new Point(cx, cy);
+            ctx.DrawEllipse(new ImmutableSolidColorBrush(sea), null, c0, rad, rad);
+            using (ctx.PushGeometryClip(new EllipseGeometry(new Rect(cx - rad, cy - rad, 2 * rad, 2 * rad))))
+            {
+                DrawLines(ctx, MapBorders, new Pen(new ImmutableSolidColorBrush(border), 0.6));
+                DrawLines(ctx, MapLines, new Pen(new ImmutableSolidColorBrush(coast), 0.9));
+                // cerchi di distanza ogni 500 km
+                IPen rp = new Pen(new ImmutableSolidColorBrush(ring), 1, new ImmutableDashStyle(new double[] { 4, 4 }, 0));
+                double step = RadiusKm > 3000 ? 1000 : 500;
+                for (double r = step; r < RadiusKm; r += step)
+                {
+                    double rr = r / RadiusKm * rad;
+                    ctx.DrawEllipse(null, rp, c0, rr, rr);
+                    FormattedText t = Ft(r.ToString("F0", CultureInfo.InvariantCulture) + " km", fs * 0.8, ring);
+                    ctx.DrawText(t, new Point(cx + rr * 0.707 + 2, cy - rr * 0.707 - t.Height));
+                }
+                // nuvole, poi tratte e stazioni (gli spot selezionati e lampeggianti sopra gli altri)
+                foreach (TrafficSpot s in Spots) DrawClouds(ctx, s, false);
+                foreach (TrafficSpot s in Spots) DrawPath(ctx, s, box);
+                if (Selected != null && Spots.Contains(Selected)) { DrawClouds(ctx, Selected, true); DrawPath(ctx, Selected, box); }
+            }
+            // bordo e scala dei gradi (come il rotore d'antenna)
+            IPen rim = new Pen(new ImmutableSolidColorBrush(coast), 1.5);
+            ctx.DrawEllipse(null, rim, c0, rad, rad);
+            for (int a = 0; a < 360; a += 10)
+            {
+                double ar = a * Math.PI / 180, l = a % 30 == 0 ? 8 : 4;
+                ctx.DrawLine(rim, new Point(cx + rad * Math.Sin(ar), cy - rad * Math.Cos(ar)), new Point(cx + (rad + l) * Math.Sin(ar), cy - (rad + l) * Math.Cos(ar)));
+                if (a % 30 == 0)
+                {
+                    FormattedText t = Ft(a.ToString(CultureInfo.InvariantCulture) + "°", fs * 0.85, Color.FromRgb(234, 88, 12));
+                    double lr = rad + 12 + t.Height * 0.6;
+                    ctx.DrawText(t, new Point(cx + lr * Math.Sin(ar) - t.Width / 2, cy - lr * Math.Cos(ar) - t.Height / 2));
+                }
+            }
+            // stazione al centro
+            Star(ctx, c0, 10, Color.FromRgb(225, 29, 72));
+            FormattedText hl = Ft(HomeLabel, fs, Color.FromRgb(225, 29, 72), FontWeight.Bold);
+            Label(ctx, hl, cx + 12, cy + 4, box);
+            // didascalia e legenda
+            if (!string.IsNullOrEmpty(Caption))
+            {
+                FormattedText t = Ft(Caption, fs * 1.05, ink, FontWeight.Bold);
+                Label(ctx, t, 8, 6, box);
+            }
+            double ly = H - 8;
+            for (int i = Legend.Count - 1; i >= 0; i--)
+            {
+                FormattedText t = Ft(Legend[i].Key, fs * 0.9, ink);
+                ly -= t.Height + 3;
+                ctx.DrawRectangle(new ImmutableSolidColorBrush(box), null, new Rect(6, ly - 1, t.Width + 26, t.Height + 2), 3, 3);
+                ctx.DrawRectangle(new ImmutableSolidColorBrush(Legend[i].Value), null, new Rect(10, ly + t.Height / 2 - 4, 12, 8), 2, 2);
+                ctx.DrawText(t, new Point(28, ly));
+            }
+        }
+
+        void DrawClouds(DrawingContext ctx, TrafficSpot s, bool sel)
+        {
+            if (s.Blink && !phase && !sel) return;
+            foreach (TrafficCloud cl in s.Clouds)
+            {
+                StreamGeometry g = new StreamGeometry();
+                using (StreamGeometryContext c = g.Open())
+                {
+                    double ang = cl.AngleDeg * Math.PI / 180;
+                    for (int k = 0; k <= 36; k++)
+                    {
+                        double t = k * Math.PI / 18;
+                        double u = cl.MajorKm * Math.Cos(t), v = cl.MinorKm * Math.Sin(t);
+                        // u lungo l'asse maggiore (azimut AngleDeg), v ortogonale
+                        double north = u * Math.Cos(ang) - v * Math.Sin(ang), east = u * Math.Sin(ang) + v * Math.Cos(ang);
+                        double d = Math.Sqrt(north * north + east * east), b = Math.Atan2(east, north) * 180 / Math.PI;
+                        Point p = P(Astro.Destination(cl.Centre, b, d));
+                        if (k == 0) c.BeginFigure(p, true); else c.LineTo(p);
+                    }
+                    c.EndFigure(true);
+                }
+                byte fa = (byte)Math.Max(25, Math.Min(110, (sel ? 110 : 70) * (0.35 + 0.65 * cl.Share)));
+                IPen pen = cl.Sporadic ? new Pen(new ImmutableSolidColorBrush(Color.FromArgb(170, s.Color.R, s.Color.G, s.Color.B)), sel ? 2 : 1, new ImmutableDashStyle(new double[] { 3, 3 }, 0))
+                                       : new Pen(new ImmutableSolidColorBrush(Color.FromArgb(200, s.Color.R, s.Color.G, s.Color.B)), sel ? 2.2 : 1.2);
+                ctx.DrawGeometry(new ImmutableSolidColorBrush(Color.FromArgb(fa, s.Color.R, s.Color.G, s.Color.B)), pen, g);
+            }
+        }
+
+        void DrawPath(DrawingContext ctx, TrafficSpot s, Color box)
+        {
+            bool sel = s == Selected;
+            if (s.Blink && !phase && !sel) return;
+            Point a = P(s.A), b = P(s.B);
+            if (sel) ctx.DrawLine(new Pen(new ImmutableSolidColorBrush(Color.FromArgb(120, 255, 255, 255)), 7), a, b);
+            ctx.DrawLine(new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : (s.Blink ? 3 : 1.8)), a, b);
+            foreach (Point p in new[] { a, b }) ctx.DrawEllipse(new ImmutableSolidColorBrush(s.Color), new Pen(Brushes.White, 1.5), p, sel ? 5.5 : 4, sel ? 5.5 : 4);
+            if (s.Blink)
+            {
+                ctx.DrawEllipse(null, new Pen(new ImmutableSolidColorBrush(s.Color), 2), b, 10, 10);
+                ctx.DrawEllipse(null, new Pen(new ImmutableSolidColorBrush(s.Color), 2), a, 10, 10);
+            }
+            if (sel || s.Blink || Spots.Count <= 25)
+            {
+                Color ink = Tema.Scuro ? Color.FromRgb(225, 230, 240) : Color.FromRgb(31, 41, 55);
+                FormattedText t = Ft(s.CallB, 10.5, ink, sel ? FontWeight.Bold : FontWeight.Normal);
+                Label(ctx, t, b.X + 6, b.Y - t.Height - 2, box);
+            }
+        }
+
+        static void Label(DrawingContext ctx, FormattedText t, double x, double y, Color box)
+        {
+            ctx.DrawRectangle(new ImmutableSolidColorBrush(box), null, new Rect(x - 3, y - 1, t.Width + 6, t.Height + 2), 3, 3);
+            ctx.DrawText(t, new Point(x, y));
+        }
+
+        static void Star(DrawingContext ctx, Point c, double r, Color col)
+        {
+            StreamGeometry g = new StreamGeometry();
+            using (StreamGeometryContext s = g.Open())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    double a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 == 0 ? r : r * 0.45;
+                    Point p = new Point(c.X + rr * Math.Cos(a), c.Y + rr * Math.Sin(a));
+                    if (i == 0) s.BeginFigure(p, true); else s.LineTo(p);
+                }
+                s.EndFigure(true);
+            }
+            ctx.DrawGeometry(new ImmutableSolidColorBrush(col), new Pen(Brushes.White, 1.5), g);
+        }
+
+        void DrawLines(DrawingContext ctx, List<System.Drawing.PointF[]> lines, IPen pen)
+        {
+            if (lines == null) return;
+            double lim = RadiusKm * 1.08;
+            foreach (System.Drawing.PointF[] l in lines)
+            {
+                if (l == null || l.Length < 2) continue;
+                StreamGeometry g = new StreamGeometry();
+                bool any = false;
+                using (StreamGeometryContext c = g.Open())
+                {
+                    bool open = false;
+                    foreach (System.Drawing.PointF q in l)
+                    {
+                        LatLon ll = new LatLon(q.Y, q.X);
+                        if (Astro.DistanceKm(Home, ll) > lim) { if (open) { c.EndFigure(false); open = false; } continue; }
+                        Point p = P(ll);
+                        if (!open) { c.BeginFigure(p, false); open = true; any = true; } else c.LineTo(p);
+                    }
+                    if (open) c.EndFigure(false);
+                }
+                if (any) ctx.DrawGeometry(null, pen, g);
+            }
+        }
+    }
+}

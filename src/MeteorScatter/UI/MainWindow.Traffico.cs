@@ -1,0 +1,285 @@
+// YA-MS - sottolinguetta "Traffico in diretta" (in "Live e volta celeste"): tutto il traffico meteor scatter raccolto
+// dalla linguetta "Raccolta dati" su una mappa azimutale centrata sulla stazione.
+// Per ogni contatto la "nuvola" della maggiore concentrazione di scie probabili: per la tratta tra le due stazioni e
+// l'ora dello spot si sommano i contributi di riflessione speculare di tutti gli sciami attivi (ZHR x contributo,
+// stesso calcolo delle zone PREV della volta celeste) e per ciascun lato della tratta si disegna l'ellisse con centro
+// e assi dati dalla media e dalla dispersione pesata dei punti di riflessione (1,5 deviazioni standard).
+// Senza sciami utili (solo sporadiche) le nuvole sono gli hot spot classici, tratteggiate.
+// Colori per banda; spot con una stazione fuori dalla mappa scartati; spot arrivati da meno di un minuto e
+// non piu' vecchi di 3 minuti lampeggiano.
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Layout;
+using Avalonia.Media;
+
+namespace YAMS
+{
+    public partial class MainWindow
+    {
+        TrafficView traffic;
+        TableView tTraffic;
+        TextBlock lblTrafficInfo, lblTrafficCount, lblTrafficRadius;
+        Slider sldTrafficRadius;
+        ComboBox cmbTrafficWindow;
+        static readonly int[] TrafficMinutes = { 15, 30, 60, 180, 1440 };
+        readonly Dictionary<MsSpot, List<TrafficCloud>> cloudCache = new Dictionary<MsSpot, List<TrafficCloud>>();
+        int trafficSpotCount = -1;
+
+        public static Color BandColor(string band)
+        {
+            switch (band)
+            {
+                case "28": return Color.FromRgb(161, 98, 7);
+                case "50": return Color.FromRgb(22, 163, 74);
+                case "70": return Color.FromRgb(8, 145, 178);
+                case "144": return Color.FromRgb(234, 88, 12);
+                case "222": return Color.FromRgb(219, 39, 119);
+                case "432": return Color.FromRgb(124, 58, 237);
+                default: return Color.FromRgb(100, 116, 139);
+            }
+        }
+
+        void BuildTrafficTab()
+        {
+            DockPanel p = Page(Lang.T("Traffico in diretta"));
+            Grid g = new Grid { ColumnDefinitions = new ColumnDefinitions("68*,32*") };
+            p.Children.Add(g);
+            traffic = new TrafficView { RadiusKm = Math.Max(600, Math.Min(3500, cfg.GetD("traffico_raggio", 2500))) };
+            traffic.SpotClicked += t => ShowTrafficInfo(t);
+            Grid.SetColumn(traffic, 0); g.Children.Add(traffic);
+
+            StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
+            side.Children.Add(new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
+            side.Children.Add(new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
+                Text = Lang.T("Spot MS della linguetta \"Raccolta dati\". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
+            });
+            sldTrafficRadius = new Slider { Minimum = 600, Maximum = 3500, Value = traffic.RadiusKm, Width = 220, VerticalAlignment = VerticalAlignment.Center };
+            lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
+            sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
+            side.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
+            List<string> wn = new List<string>();
+            foreach (int m in TrafficMinutes) wn.Add(m < 60 ? Lang.F("ultimi {0} minuti", m) : m == 60 ? Lang.T("ultima ora") : m < 1440 ? Lang.F("ultime {0} ore", m / 60) : Lang.T("ultime 24 ore"));
+            cmbTrafficWindow = new ComboBox { ItemsSource = wn, MinWidth = 170, VerticalAlignment = VerticalAlignment.Center };
+            int wi = Array.IndexOf(TrafficMinutes, (int)cfg.GetD("traffico_minuti", 60));
+            cmbTrafficWindow.SelectedIndex = wi < 0 ? 2 : wi;
+            cmbTrafficWindow.SelectionChanged += (s, e) => RefreshTraffic(true);
+            side.Children.Add(Row(L(Lang.T("Spot da mostrare")), cmbTrafficWindow));
+            lblTrafficCount = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap };
+            side.Children.Add(lblTrafficCount);
+            lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
+            side.Children.Add(new Border { Background = Pal.B(Pal.Panel2), CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Child = lblTrafficInfo });
+
+            tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("Nuvola") }, new double[] { 46, 64, 82, 82, 50, 90 });
+            tTraffic.FitWidth = true;
+            tTraffic.RowClicked += i =>
+            {
+                if (i < 0 || i >= tTraffic.Rows.Count) return;
+                TrafficSpot t = tTraffic.Rows[i].Tag as TrafficSpot;
+                traffic.Selected = t; traffic.InvalidateVisual(); ShowTrafficInfo(t);
+            };
+            DockPanel right = new DockPanel();
+            DockTop(right, side);
+            right.Children.Add(tTraffic);
+            Border rb = new Border { Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1, 0, 0, 0), Child = right };
+            Grid.SetColumn(rb, 1); g.Children.Add(rb);
+            ShowTrafficInfo(null);
+        }
+
+        void ShowTrafficInfo(TrafficSpot t)
+        {
+            if (lblTrafficInfo == null) return;
+            lblTrafficInfo.Text = t == null ? Lang.T("Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.") : t.Info;
+        }
+
+        // nuvole della concentrazione di scie per la tratta A-B all'ora t (in cache per ogni spot)
+        List<TrafficCloud> CloudsFor(MsSpot s, LatLon a, LatLon b)
+        {
+            List<TrafficCloud> res;
+            if (cloudCache.TryGetValue(s, out res)) return res;
+            res = new List<TrafficCloud>();
+            try
+            {
+                PathModel pm = PathModel.Build(a, 0.05, b, 0.05, numLayer != null ? V(numLayer) : 90, 0);
+                if (pm != null && pm.Valid && pm.SamplePoints > 0)
+                {
+                    double[] acc = new double[pm.SamplePoints];
+                    double tot = 0;
+                    foreach (Shower sh in ActiveShowers(s.Utc))
+                    {
+                        double zhr;
+                        Vec3 v = RadiantVec(sh, s.Utc, out zhr);
+                        if (zhr < 0.1) continue;
+                        double[] c = pm.Contributions(v);
+                        for (int i = 0; i < c.Length && i < acc.Length; i++) { acc[i] += zhr * c[i]; tot += zhr * c[i]; }
+                    }
+                    if (tot > 1e-6)
+                    {
+                        foreach (bool left in new[] { true, false })
+                        {
+                            double sw = 0, la = 0, lo = 0;
+                            for (int i = 0; i < acc.Length; i++)
+                            {
+                                if (pm.SampleLeft(i) != left || acc[i] <= 0) continue;
+                                LatLon q = pm.SampleLatLon(i);
+                                sw += acc[i]; la += acc[i] * q.Lat; lo += acc[i] * q.Lon;
+                            }
+                            if (sw < 0.15 * tot) continue;
+                            la /= sw; lo /= sw;
+                            double k = Math.Cos(la * Math.PI / 180) * 111.2, sxx = 0, syy = 0, sxy = 0;
+                            for (int i = 0; i < acc.Length; i++)
+                            {
+                                if (pm.SampleLeft(i) != left || acc[i] <= 0) continue;
+                                LatLon q = pm.SampleLatLon(i);
+                                double e = (q.Lon - lo) * k, n = (q.Lat - la) * 111.2;
+                                sxx += acc[i] * e * e; syy += acc[i] * n * n; sxy += acc[i] * e * n;
+                            }
+                            sxx /= sw; syy /= sw; sxy /= sw;
+                            double tr = sxx + syy, det = sxx * syy - sxy * sxy, disc = Math.Sqrt(Math.Max(0, tr * tr / 4 - det));
+                            double l1 = tr / 2 + disc, l2 = Math.Max(0, tr / 2 - disc);
+                            // direzione dell'asse maggiore (x = est, y = nord) e suo azimut
+                            double ang = 0.5 * Math.Atan2(2 * sxy, sxx - syy);
+                            double az = Astro.Norm360(90 - ang * 180 / Math.PI);
+                            res.Add(new TrafficCloud
+                            {
+                                Centre = new LatLon(la, lo), MajorKm = Math.Max(30, 1.5 * Math.Sqrt(l1)), MinorKm = Math.Max(20, 1.5 * Math.Sqrt(l2)),
+                                AngleDeg = az, Share = sw / tot
+                            });
+                        }
+                    }
+                    else
+                        foreach (HotPoint h in new[] { pm.HotA, pm.HotB })
+                            if (h != null) res.Add(new TrafficCloud { Centre = h.Pos, MajorKm = 70, MinorKm = 70, Share = 0.5, Sporadic = true });
+                }
+            }
+            catch { }
+            if (cloudCache.Count > 3000) cloudCache.Clear();
+            cloudCache[s] = res;
+            return res;
+        }
+
+        // ogni 2 s dalla raccolta dati (e subito quando cambiano raggio o finestra di tempo)
+        void RefreshTraffic(bool force)
+        {
+            if (traffic == null) return;
+            if (lblTrafficRadius != null) lblTrafficRadius.Text = Lang.F("{0:F0} km", traffic.RadiusKm);
+            bool visible = traffic.IsEffectivelyVisible;
+            if (!force && !visible) return;
+            LatLon home;
+            if (!Astro.TryLocator(Up(txtHome), out home)) return;
+            traffic.Home = home;
+            traffic.HomeLabel = (txtRdLogin != null && Up(txtRdLogin).Length > 0 ? Up(txtRdLogin) + " " : "") + Up(txtHome);
+            if (sky != null) { traffic.MapLines = sky.MapLines; traffic.MapBorders = sky.MapBorders; }
+            DateTime now = DateTime.UtcNow;
+            int mins = TrafficMinutes[Math.Max(0, cmbTrafficWindow.SelectedIndex)];
+            DateTime lim = now.AddMinutes(-mins);
+            List<TrafficSpot> list = new List<TrafficSpot>();
+            int outside = 0, noLoc = 0;
+            Dictionary<string, int> perBand = new Dictionary<string, int>();
+            for (int i = MsCollector.Spots.Count - 1; i >= 0 && list.Count < 400; i--)
+            {
+                MsSpot s = MsCollector.Spots[i];
+                if (s.Utc < lim) continue;
+                LatLon a, b;
+                if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) { noLoc++; continue; }
+                if (!traffic.Inside(a) || !traffic.Inside(b)) { outside++; continue; }
+                TrafficSpot t = new TrafficSpot
+                {
+                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = BandColor(s.Band), Tag = s,
+                    Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60
+                };
+                t.Clouds = CloudsFor(s, a, b);
+                string cl = "";
+                foreach (TrafficCloud c in t.Clouds)
+                {
+                    if (cl.Length > 0) cl += "\n";
+                    cl += c.Sporadic ? Lang.F("hot spot (solo sporadiche) {0}", Astro.ToLocator(c.Centre))
+                                     : Lang.F("nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°", Astro.ToLocator(c.Centre), 100 * c.Share, 2 * c.MajorKm, 2 * c.MinorKm, c.AngleDeg);
+                }
+                t.Info = s.DxCall + " " + s.LocDx + "  ⇄  " + s.Spotter + " " + s.LocSpotter + "\n" +
+                         Lang.F("{0} UTC · {1:F1} kHz · {2:F0} km", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.FreqKHz, Astro.DistanceKm(a, b)) + "\n" +
+                         (cl.Length > 0 ? cl : Lang.T("nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
+                         (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment);
+                list.Add(t);
+                int nb; perBand.TryGetValue(s.Band, out nb); perBand[s.Band] = nb + 1;
+            }
+            list.Sort((x, y) => ((MsSpot)x.Tag).Utc.CompareTo(((MsSpot)y.Tag).Utc));   // i piu' recenti disegnati sopra (e in cima alla tabella)
+            if (traffic.Selected != null && !list.Contains(traffic.Selected))
+            {
+                TrafficSpot keep = null;
+                foreach (TrafficSpot t in list) if (t.Tag == traffic.Selected.Tag) keep = t;
+                traffic.Selected = keep;
+            }
+            traffic.Spots = list;
+            traffic.Caption = Lang.F("Traffico MS in diretta · {0}", cmbTrafficWindow.SelectedItem as string);
+            traffic.Legend.Clear();
+            foreach (string bn in MsBands.Names)
+            {
+                int n; perBand.TryGetValue(bn, out n);
+                traffic.Legend.Add(new KeyValuePair<string, Color>(Lang.F("{0} MHz: {1}", bn, n), BandColor(bn)));
+            }
+            traffic.InvalidateVisual();
+            lblTrafficCount.Text = Lang.F("{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator", list.Count, outside, noLoc);
+            if (list.Count != trafficSpotCount || force)
+            {
+                trafficSpotCount = list.Count;
+                List<TableRow> rows = new List<TableRow>();
+                for (int i = list.Count - 1; i >= 0; i--)
+                {
+                    TrafficSpot t = list[i]; MsSpot s = (MsSpot)t.Tag;
+                    string side = "";
+                    foreach (TrafficCloud c in t.Clouds) if (!c.Sporadic && c.Share >= 0.5) side = (100 * c.Share).ToString("F0") + " %";
+                    if (t.Clouds.Count > 0 && t.Clouds[0].Sporadic) side = Lang.T("sporadiche");
+                    rows.Add(new TableRow
+                    {
+                        Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), (s.FreqKHz / 1000).ToString("F3", CultureInfo.CurrentCulture), s.Spotter, s.DxCall,
+                                        Astro.DistanceKm(t.A, t.B).ToString("F0", CultureInfo.CurrentCulture), side },
+                        Fore = t.Color, Tag = t
+                    });
+                }
+                tTraffic.Rows = rows;
+                tTraffic.Refresh();
+            }
+            if (traffic.Selected != null) ShowTrafficInfo(traffic.Selected);
+        }
+
+        // spot di esempio per le fotografie di controllo (solo con --screenshot)
+        void AddDemoTraffic()
+        {
+            DateTime now = DateTime.UtcNow;
+            string[][] d =
+            {
+                new[] { "IK7XXX", "JN80QK", "DK5EW", "JN48MB", "144360", "2", "1" },
+                new[] { "IC8TEM", "JN70CN", "OK1TEH", "JO70KA", "144361", "6", "0" },
+                new[] { "IZ7ZZZ", "JN81EK", "G4LOH", "IO70OJ", "144362", "11", "0" },
+                new[] { "9A2AA", "JN75OS", "EA3XU", "JN11CK", "50280", "14", "0" },
+                new[] { "S51ZZ", "JN76HD", "F6DRO", "JN03RQ", "144370", "19", "0" },
+                new[] { "SV1BTR", "KM17VX", "OK2KKW", "JN99CL", "144360", "24", "0" },
+                new[] { "YO2IS", "KN05PS", "I4XCC", "JN54QR", "144363", "29", "0" },
+                new[] { "HB9COF", "JN47PH", "SV2DCD", "KN10LO", "50290", "33", "0" },
+                new[] { "LZ1ZP", "KN12PQ", "DL7APV", "JO62QM", "144365", "38", "0" },
+                new[] { "OE5JFL", "JN78DK", "EA6VQ", "JM19HN", "70174", "44", "0" },
+                new[] { "IT9BLB", "JM78SB", "PA2M", "JO21FM", "144360", "51", "0" },
+                new[] { "SP6GZ", "JO81LB", "IW0HK", "JN61FV", "144362", "1", "1" },
+            };
+            foreach (string[] r in d)
+            {
+                MsSpot s = new MsSpot
+                {
+                    Spotter = r[0], LocSpotter = r[1], DxCall = r[2], LocDx = r[3], FreqKHz = double.Parse(r[4], CultureInfo.InvariantCulture),
+                    Utc = now.AddMinutes(-int.Parse(r[5], CultureInfo.InvariantCulture)), Source = 2, Match = "MSK144", Comment = "MSK144 (esempio)"
+                };
+                if (r[6] == "1") s.Received = now;
+                LatLon a, b;
+                if (Astro.TryLocator(s.LocSpotter, out a) && Astro.TryLocator(s.LocDx, out b)) s.DistKm = Astro.DistanceKm(a, b);
+                MsCollector.AddDemo(s);
+            }
+            rdDirty = true;
+        }
+    }
+}

@@ -50,11 +50,7 @@ namespace YAMS
             bImp.Click += async (s, e) => await ImportCall3();
             DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));
 
-            StackPanel sp = new StackPanel();
             Color[] cols = { Pal.Azure, Pal.Violet, Pal.Orange };
-            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); sbx.IsVisible = !Hosted; sp.Children.Add(sbx); }
-            if (Hosted) sp.Children.Add(new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });
-            ScrollViewer ssv = new ScrollViewer { Content = sp, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
 
             DockPanel spotPane = new DockPanel { Margin = new Thickness(4, 4, 4, 0) };
             lblRdCount = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
@@ -77,8 +73,11 @@ namespace YAMS
                 rdStrip.Children.Add(rdDot[i]);
             }
             DockTop(left, rdStrip);
-            PillTabs inner = new PillTabs();
-            inner.Add(Lang.T("Sessioni telnet"), ssv);
+            // una sottolinguetta per ciascuno dei tre flussi di cluster (richiesta IC8TEM), poi gli spot raccolti
+            PillTabs inner = new PillTabs(true);
+            string[] shortName = { Lang.T("DX cluster"), "RBN", Lang.T("DM4X (PSKReporter)") };
+            if (!Hosted) for (int i = 0; i < 3; i++) inner.Add((i + 1) + ". " + shortName[i], SessionBox(i, cols[i]));
+            else inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);
@@ -199,7 +198,7 @@ namespace YAMS
             rdState[i] = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             rdCounts[i] = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             rdConsole[i] = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.NoWrap };
-            rdSv[i] = new ScrollViewer { Content = rdConsole[i], Height = 78, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+            rdSv[i] = new ScrollViewer { Content = rdConsole[i], Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
             rdSend[i] = T("", 260, false);
             rdSend[i].Watermark = Lang.T("comando da inviare (es. sh/dx 20)");
             Button bs = B(Lang.T("Invia"));
@@ -207,19 +206,21 @@ namespace YAMS
             bs.Click += (s, e) => send();
             rdSend[i].KeyUp += (s, e) => { if (e.Key == Avalonia.Input.Key.Enter) send(); };
 
-            StackPanel sp = new StackPanel();
-            // compatta, perche' le tre sessioni stiano tutte nella linguetta: titolo e invio comandi sulla stessa riga,
-            // la nota sulla sessione nel fumetto del titolo (ⓘ)
-            TextBlock title = new TextBlock { Text = (i + 1) + ". " + Lang.T(def[0]) + "  ⓘ", FontWeight = FontWeight.Bold, FontSize = 14, Foreground = Pal.B(tc), Margin = new Thickness(4, 0, 12, 0), VerticalAlignment = VerticalAlignment.Center };
-            ToolTip.SetTip(title, Lang.T(def[4]));
-            sp.Children.Add(Row(title, rdSend[i], bs));
-            sp.Children.Add(Row(L(Lang.T("Host")), rdHost[i], L(Lang.T("Porta")), rdPort[i], L(Lang.T("Comandi")), rdCmds[i]));
-            sp.Children.Add(Row(bc, bd, rdAuto[i], rdStart[i], rdState[i], rdCounts[i]));
+            // ogni flusso ha la sua sottolinguetta: comandi in alto, console che riempie lo spazio
+            DockPanel sp = new DockPanel();
+            TextBlock title = new TextBlock { Text = (i + 1) + ". " + Lang.T(def[0]), FontWeight = FontWeight.Bold, FontSize = 15, Foreground = Pal.B(tc), Margin = new Thickness(4, 2, 12, 2) };
+            DockTop(sp, title);
+            DockTop(sp, new TextBlock { Text = Lang.T(def[4]), Foreground = Pal.B(Pal.Muted), FontSize = 12, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 0, 6, 4) });
+            DockTop(sp, Row(L(Lang.T("Host")), rdHost[i], L(Lang.T("Porta")), rdPort[i], L(Lang.T("Comandi")), rdCmds[i]));
+            DockTop(sp, Row(bc, bd, rdAuto[i], rdStart[i], rdState[i], rdCounts[i]));
+            Border sendRow = Row(rdSend[i], bs);
+            DockPanel.SetDock(sendRow, Dock.Bottom);
+            sp.Children.Add(sendRow);
             sp.Children.Add(rdSv[i]);
             return new Border
             {
                 Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(10), Padding = new Thickness(6, 3), Margin = new Thickness(4, 2), Child = sp
+                CornerRadius = new CornerRadius(10), Padding = new Thickness(6, 3), Margin = new Thickness(4), Child = sp
             };
         }
 
@@ -352,7 +353,7 @@ namespace YAMS
                 rdDot[i].Foreground = Pal.B(s.Connected ? Pal.Green : Pal.Muted);
                 ToolTip.SetTip(rdDot[i], rdState[i].Text);
                 rdCounts[i].Text = Lang.F("righe {0}, spot letti {1}, MS {2}", MsCollector.Lines[i], MsCollector.Parsed[i], MsCollector.Accepted[i]);
-                if (pages_visible_collect())
+                if (rdSv[i].IsEffectivelyVisible)   // console aggiornata solo se la sua sottolinguetta e' aperta
                 {
                     string txt = string.Join("\n", MsCollector.ConsoleLines[i]);
                     if (rdConsole[i].Text != txt) { rdConsole[i].Text = txt; rdSv[i].ScrollToEnd(); }
@@ -370,6 +371,7 @@ namespace YAMS
             foreach (Control c in rdWordList.Children)
                 if (c is Grid gr) foreach (Control x in gr.Children) if (x is TextBlock tb && tb.Tag is MsFilterWord fw) tb.Text = fw.Count.ToString(CultureInfo.CurrentCulture);
             if (rdDirty) FillRdTable();
+            RefreshTraffic(false);   // traffico in diretta (solo se la sottolinguetta e' aperta)
         }
 
         bool pages_visible_collect() { return tRd != null && tRd.IsEffectivelyVisible; }
