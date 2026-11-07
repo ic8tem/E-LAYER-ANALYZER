@@ -568,9 +568,21 @@ namespace YAMS
         // Miglior puntamento: ortogonale alla direzione di arrivo dello sciame selezionato
         void DrawBestPointing(DrawingContext ctx, double cx, double cy, double rad)
         {
-            RadiantMark m = null;
-            if (Marks != null) foreach (RadiantMark x in Marks) if (x.Code == Selected) m = x;
+            // sciame selezionato, altrimenti il piu' favorevole (ZHR x efficienza): le direzioni giuste dell'antenna sono
+            // ortogonali alla direzione di scorrimento dello sciame, cioe' azimut del radiante +-90° (richiesta IC8TEM)
+            RadiantMark m = FlowMark();
             if (m == null || m.El <= 0) return;
+            // gli altri sciami sopra l'orizzonte con efficienza utile: tacche sottili sul bordo alle loro direzioni ortogonali
+            if (Marks != null)
+                foreach (RadiantMark o in Marks)
+                {
+                    if (o == m || o.El <= 0 || o.Eff < 0.05) continue;
+                    foreach (double off in new double[] { 90, -90 })
+                    {
+                        Point q1 = SkyXY(o.Az + off, 0, cx, cy, rad), q0 = PA(ScreenDir(o.Az + off), rad * 0.9, cx, cy);
+                        ctx.DrawLine(Pal.P(Pal.A(150, SkyPal.Orange), 1.5), q0, q1);
+                    }
+                }
             Point a = SkyXY(m.Az + 90, 0, cx, cy, rad), b = SkyXY(m.Az - 90, 0, cx, cy, rad);
             IPen p = Pal.P(Pal.A(230, SkyPal.Orange), 2.5);
             IPen w = Pal.P(Pal.A(70, SkyPal.Orange), 1);
@@ -583,8 +595,10 @@ namespace YAMS
                 Point a2 = SkyXY(m.Az + 90 + off, 0, cx, cy, rad), b2 = SkyXY(m.Az - 90 + off, 0, cx, cy, rad);
                 ctx.DrawLine(w, a2, b2);
             }
-            AddLab(1, Astro.Norm360(m.Az + 90).ToString("F0") + "°", F85, tc, true, a, ScreenDir(m.Az + 90));
-            AddLab(1, Astro.Norm360(m.Az - 90).ToString("F0") + "°", F85, tc, true, b, ScreenDir(m.Az - 90));
+            ctx.DrawEllipse(Pal.B(SkyPal.Orange), null, a, 4.5, 4.5);
+            ctx.DrawEllipse(Pal.B(SkyPal.Orange), null, b, 4.5, 4.5);
+            AddLab(1, Lang.F("antenna {0}°", Astro.Norm360(m.Az + 90).ToString("F0")), F85, tc, true, a, ScreenDir(m.Az + 90));
+            AddLab(1, Lang.F("antenna {0}°", Astro.Norm360(m.Az - 90).ToString("F0")) + " (⊥ " + m.Code + ")", F85, tc, true, b, ScreenDir(m.Az - 90));
             // direzione di arrivo dello sciame: linea a puntini con freccia verso il centro
             Point r = SkyXY(m.Az, 0, cx, cy, rad);
             Color dc = Pal.A(150, SkyPal.Orange);
