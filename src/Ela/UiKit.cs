@@ -36,8 +36,8 @@ namespace ELA
                 Width = width + 80,
                 Margin = new Thickness(2, 3),
                 VerticalAlignment = VerticalAlignment.Center,
-                Background = Pal.B(Pal.Back),
-                Foreground = Pal.B(Pal.Fore),
+                Background = Pal.B(Pal.Field),
+                Foreground = Pal.B(Pal.FieldFore),
                 CornerRadius = new CornerRadius(12)
             };
             n.Value = Math.Max(min, Math.Min(max, val));
@@ -55,8 +55,8 @@ namespace ELA
                 FontFamily = Pal.Mono, FontSize = 14,
                 Margin = new Thickness(2, 3),
                 VerticalAlignment = VerticalAlignment.Center,
-                Background = Pal.B(Pal.Back),
-                Foreground = Pal.B(Pal.Fore),
+                Background = Pal.B(Pal.Field),
+                Foreground = Pal.B(Pal.FieldFore),
                 CornerRadius = new CornerRadius(12)
             };
             if (upper)

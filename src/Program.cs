@@ -43,7 +43,7 @@ namespace YAMS
     // opzioni di YA-MS (fotografie automatiche) usate dal pannello METEOR SCATTER
     public static class Program
     {
-        public static string ScreenshotDir, ScreenshotDx, ScreenshotLang;
+        public static string ScreenshotDir, ScreenshotDx, ScreenshotLang, ScreenshotTheme;
         public static double ScreenshotHours;
         public static double ScreenshotFontPct;
     }

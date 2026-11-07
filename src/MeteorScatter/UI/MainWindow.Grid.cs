@@ -20,7 +20,7 @@ namespace YAMS
             DockPanel p = Page(Lang.T("Mappa quadrati"));
             Button bLoad = B(Lang.T("Carica file ADIF..."));
             Button bClear = B(Lang.T("Cancella memoria"));
-            bClear.Background = Pal.B(Pal.Rgb(127, 29, 29));
+            bClear.Background = Pal.B(Pal.Rgb(127, 29, 29)); bClear.Foreground = Pal.B(Pal.Rgb(255, 255, 255));   // rosso scuro con testo bianco in tutti gli schemi
             lblAdif = L("");
             bLoad.Click += async (s, e) => await LoadAdifFile();
             bClear.Click += async (s, e) =>

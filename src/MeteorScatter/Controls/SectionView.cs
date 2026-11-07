@@ -37,7 +37,6 @@ namespace YAMS
         double VLobe { get { return HpbwVDeg > 0 ? HpbwVDeg : HpbwDeg; } }
         public string Note = "";
 
-        static Color Gainsboro { get { return Pal.ChartText; } }
 
         public SectionView()
         {
@@ -85,13 +84,13 @@ namespace YAMS
             double Wd = Bounds.Width, Ht = Bounds.Height;
             ctx.DrawRectangle(Pal.B(Pal.Back), null, new Rect(0, 0, Wd, Ht));
             FormattedText title = Ft(Lang.F("SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)", AntennaAz.ToString("F0")),
-                12.7, Gainsboro, FontWeight.SemiBold);
+                12.7, Pal.Fore, FontWeight.SemiBold);
             title.MaxTextWidth = Math.Max(50, Wd - 12);   // va a capo se lo spazio non basta
             ctx.DrawText(title, new Point(6, 4));
             if (Model == null || !Model.Valid) return;
 
             const double fs = 10;   // 7.5 pt
-            Color tb = Pal.Argb(200, 225, 225, 235);
+            Color tb = Tema.Scuro ? Pal.Argb(200, 225, 225, 235) : Pal.Muted;   // scritte degli assi, fuori dal cielo
             // margini che crescono con il carattere: a sinistra le elevazioni, sotto due righe di scritte
             FormattedText probe = Ft("+60°", fs, tb);
             double left = Math.Max(44, Ft("55°", fs, tb).Width + 14), top = Math.Max(28, title.Height + 10), bottom = Math.Max(40, 2 * probe.Height + 14);
@@ -187,16 +186,16 @@ namespace YAMS
                     }
                 }
                 else
-                    ctx.DrawText(Ft(Lang.T("Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta."), 12, Pal.Silver),
+                    ctx.DrawText(Ft(Lang.T("Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta."), 12, SkyPal.Silver),
                         new Point(pr.Left + 10, pr.Top + 10));
 
             }
-            ctx.DrawRectangle(null, Pal.P(Pal.Argb(120, 200, 200, 220), 1), pr);
+            ctx.DrawRectangle(null, Pal.P(Tema.Scuro ? Pal.Argb(120, 200, 200, 220) : Pal.Border, 1), pr);
             // etichette senza sovrapposizioni (con alone): prima i punti e la nota come ostacoli
             LabelPlacer lp = new LabelPlacer(pr);
             if (!string.IsNullOrEmpty(Note))
             {
-                FormattedText ft = Ft(Note, 10, Pal.Silver);
+                FormattedText ft = Ft(Note, 10, SkyPal.Silver);
                 ft.MaxTextWidth = Math.Max(50, pr.Width - 8);
                 Point np = new Point(Math.Max(pr.Left + 4, pr.Right - ft.Width - 4), pr.Top + 3);
                 ctx.DrawText(ft, np);
@@ -207,19 +206,19 @@ namespace YAMS
             using (ctx.PushClip(pr))
             {
                 Point pd = new Point(X(0), Y(Model.ElevToMidDeg));
-                ctx.DrawEllipse(Pal.B(Pal.Green), null, pd, 4, 4);
+                ctx.DrawEllipse(Pal.B(SkyPal.Green), null, pd, 4, 4);
                 lp.BlockPoint(pd, 6);
                 List<HotPoint> hl = new List<HotPoint>(); List<Point> hp = new List<Point>(); List<Color> hcs = new List<Color>();
                 foreach (HotPoint h in new HotPoint[] { Model.HotA, Model.HotB })
                 {
                     if (h == null) continue;
-                    Color hc = h.Recommended ? Pal.Red : h.InLobe ? Pal.HotGrey : Pal.HotPink;
+                    Color hc = h.Recommended ? SkyPal.Red : h.InLobe ? Pal.HotGrey : Pal.HotPink;
                     Point p = new Point(X(Astro.Norm180(h.BearingFromHome - AntennaAz)), Y(h.ElevFromHome));
                     ctx.DrawEllipse(Pal.B(hc), null, p, 5, 5);
                     lp.BlockPoint(p, 6);
                     hl.Add(h); hp.Add(p); hcs.Add(hc);
                 }
-                lp.Place(ctx, Ft("DX", fb, Pal.Green, FontWeight.Bold), pd, 0, false, false, Pal.Green);
+                lp.Place(ctx, Ft("DX", fb, SkyPal.Green, FontWeight.Bold), pd, 0, false, false, SkyPal.Green);
                 for (int i = 0; i < hl.Count; i++)
                     lp.Place(ctx, Ft(hl[i].Label, fb, hcs[i], FontWeight.Bold), hp[i], hl[i] == Model.HotA ? -45 : 45, false, false, hcs[i]);
             }

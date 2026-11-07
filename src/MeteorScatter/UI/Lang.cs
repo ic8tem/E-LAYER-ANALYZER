@@ -66,7 +66,7 @@ namespace YAMS
             Dictionary<string, string> m = new Dictionary<string, string>(StringComparer.Ordinal);
             if (code != "it")
             {
-                string file = FindFile(code);
+                foreach (string file in new[] { FindFile(code), FindFile("ela-" + code) })   // YA-MS + E-LAYER ANALYZER
                 if (file != null)
                 {
                     try

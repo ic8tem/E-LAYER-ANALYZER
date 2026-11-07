@@ -18,7 +18,8 @@ namespace YAMS
     {
         public readonly List<Rect> Occ = new List<Rect>();
         public Rect Area;   // l'etichetta deve stare tutta qui dentro
-        public static readonly Color Halo = Pal.Argb(184, 14, 11, 34);
+        // alone scuro fisso: le etichette stanno sui "cieli" scuri (SkyPal), uguali in tutti gli schemi di colori
+        public static readonly Color Halo = SkyPal.Halo;
         static readonly double[] Rings = { 0.6, 1.4, 2.6, 4.0, 5.6, 7.5, 10 };
 
         public LabelPlacer(Rect area) { Area = area; }

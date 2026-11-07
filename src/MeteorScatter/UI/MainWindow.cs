@@ -1,5 +1,4 @@
-// YA-MS - pannello principale (porting di MainForm.cs da WinForms ad Avalonia; interfaccia costruita in codice).
-// In E-LAYER ANALYZER e' un pannello (UserControl) ospitato nella linguetta METEOR SCATTER.
+// YA-MS - finestra principale (porting di MainForm.cs da WinForms ad Avalonia; interfaccia costruita in codice)
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,12 +22,20 @@ namespace YAMS
 {
     public partial class MainWindow : UserControl
     {
-        // finestra che ospita il pannello (per i messaggi e la scelta dei file)
+        // E-LAYER ANALYZER: YA-MS e' un pannello (UserControl) nella linguetta METEOR SCATTER (tools/sync_yams.py)
         Window Win { get { return TopLevel.GetTopLevel(this) as Window; } }
         IStorageProvider StorageProvider { get { TopLevel t = TopLevel.GetTopLevel(this); return t != null ? t.StorageProvider : null; } }
-        // cambio di lingua chiesto dal pannello: lo esegue la finestra di E-LAYER ANALYZER
-        public static Action<string> LanguageRequested;
+        public static Action<string> LanguageRequested;   // cambio di lingua: lo esegue la finestra di E-LAYER ANALYZER
+        public static Action<int> ThemeRequested;         // cambio dello schema di colori: idem
         bool openedOnce;
+        public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
+        public void SaveSettings() { SaveConfig(); }
+        public void Shutdown(bool save)
+        {
+            if (timer != null) timer.Stop();
+            if (save && !replaced) SaveConfig();
+            replaced = true;
+        }
 
         string dataDir;
         Config cfg;
@@ -128,9 +135,28 @@ namespace YAMS
             };
             DockPanel.SetDock(cmbLang, Dock.Right);
             tabs.Line.Children.Insert(0, cmbLang);
+            cmbLang.IsVisible = false;
+            // scelta dello schema di colori, subito a sinistra della lingua
+            List<string> themeNames = new List<string>();
+            foreach (string tn in Tema.Names) themeNames.Add(Lang.T(tn));
+            cmbTheme = new ComboBox { ItemsSource = themeNames, MinWidth = 150, Margin = new Thickness(6, 1, 0, 1), VerticalAlignment = VerticalAlignment.Center };
+            cmbTheme.SelectedIndex = Tema.Schema;
+            ToolTip.SetTip(cmbTheme, Lang.T("Tema"));
+            cmbTheme.SelectionChanged += (s, e) =>
+            {
+                int ti = cmbTheme.SelectedIndex;
+                if (ti < 0 || ti >= Tema.Count || ti == Tema.Schema) return;
+                Dispatcher.UIThread.Post(() => SwitchTheme(ti));   // fuori dall'evento della casella
+            };
+            DockPanel.SetDock(cmbTheme, Dock.Right);
+            tabs.Line.Children.Insert(1, cmbTheme);
+            TextBlock lblTheme = new TextBlock { Text = Lang.T("Tema"), Foreground = Pal.B(Pal.BarMuted), VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
+            DockPanel.SetDock(lblTheme, Dock.Right);
+            tabs.Line.Children.Insert(2, lblTheme);
+            cmbTheme.IsVisible = false; lblTheme.IsVisible = false;
             DockTop(root, tabs.Bar);
             SetRowsVisible(cfg.GetD("comandi_visibili", 1) != 0, false);
-            status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.Muted), TextTrimming = TextTrimming.CharacterEllipsis };
+            status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
             Border sb = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 3), Child = status };
             DockPanel.SetDock(sb, Dock.Bottom);
             root.Children.Add(sb);
@@ -150,18 +176,8 @@ namespace YAMS
             };
         }
 
-        // chiusura del programma o cambio di lingua: ferma il timer e salva le impostazioni
-        public void Shutdown(bool save)
-        {
-            timer.Stop();
-            if (save && !replaced) SaveConfig();
-            replaced = true;
-        }
-
-        public void SaveSettings() { SaveConfig(); }
-
-        ComboBox cmbLang;
-        bool replaced;                 // finestra sostituita da una nuova (cambio di lingua)
+        ComboBox cmbLang, cmbTheme;
+        bool replaced;                 // finestra sostituita da una nuova (cambio di lingua o di schema di colori)
         static bool catalogShown;      // avviso del catalogo degli sciami mostrato una sola volta
 
         // Cambio di lingua: salva le impostazioni, carica la lingua e ricostruisce l'interfaccia in una nuova finestra
@@ -172,8 +188,16 @@ namespace YAMS
             if (LanguageRequested != null) LanguageRequested(code);
         }
 
-        public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
-        public int SelectedTab { get { return tabs != null ? tabs.Selected : 0; } }
+        // Cambio dello schema di colori: stessa strada del cambio di lingua (tutti i colori sono letti
+        // da Pal quando i controlli vengono creati, quindi si ricostruisce la finestra)
+        void SwitchTheme(int schema)
+        {
+            if (replaced || schema == Tema.Schema) return;
+            if (ThemeRequested != null) ThemeRequested(schema);
+        }
+
+        // nuova finestra con la stessa posizione, dimensione, stato e linguetta; poi chiude questa
+
 
         async void OnOpened(object sender, EventArgs e)
         {
@@ -206,6 +230,7 @@ namespace YAMS
             readonly List<ToggleButton> buttons = new List<ToggleButton>();
             readonly List<Control> pages = new List<Control>();
             public int Selected = -1;
+            public int Count { get { return buttons.Count; } }   // numero di linguette
 
             public PillTabs()
             {
@@ -275,8 +300,8 @@ namespace YAMS
                 Width = width + 80,   // spazio per i due pulsanti su/giu'
                 Margin = new Thickness(2, 3),
                 VerticalAlignment = VerticalAlignment.Center,
-                Background = Pal.B(Pal.Back),
-                Foreground = Pal.B(Pal.Fore),
+                Background = Pal.B(Pal.Field),
+                Foreground = Pal.B(Pal.FieldFore),
                 CornerRadius = new CornerRadius(12)
             };
             n.Value = Math.Max(min, Math.Min(max, val));
@@ -291,8 +316,8 @@ namespace YAMS
                 FontFamily = Pal.Mono, FontSize = 14,
                 Margin = new Thickness(2, 3),
                 VerticalAlignment = VerticalAlignment.Center,
-                Background = Pal.B(Pal.Back),
-                Foreground = Pal.B(Pal.Fore),
+                Background = Pal.B(Pal.Field),
+                Foreground = Pal.B(Pal.FieldFore),
                 CornerRadius = new CornerRadius(12)
             };
             if (upper)
@@ -344,7 +369,7 @@ namespace YAMS
             g.Children.Add(bar); g.Children.Add(sp);
             return new Border
             {
-                Background = Pal.B(Pal.Panel3), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                Background = Pal.B(Pal.Card), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Margin = new Thickness(4), Child = g
             };
         }
@@ -386,7 +411,7 @@ namespace YAMS
             cmbBand.SelectionChanged += (s, e) => { if (model != null) { ApplyAntenna(); UpdateSky(); UpdateFluxTab(); UpdateGeometry(); } };
 
             // l'antenna e' sempre puntata verso il corrispondente (azimut della tratta)
-            Color wheat = Pal.Light ? Pal.OrangeText : Pal.Rgb(245, 222, 179);
+            Color wheat = Pal.Ink(Pal.Rgb(245, 222, 179));   // color grano: scurito negli schemi chiari
             lblAntAz = L(Lang.T("Antenna az: -")); lblAntAz.Foreground = Pal.B(wheat);
             numBoom = N(0.5m, 30, Dm(cfg.GetD("boom_m", 4.6)), 2, 0.1m, 60);
             lblAnt = L(""); lblAnt.Foreground = Pal.B(wheat);
@@ -464,6 +489,7 @@ namespace YAMS
             UiScale.Apply(this);
             if (chart24 != null) chart24.Height = Chart24Height * (0.5 + 0.5 * UiScale.Font);   // spazio per scritte piu' grandi
             if (explainSheet != null) explainSheet.MaxWidth = 860 * Math.Min(2.0, UiScale.Font);
+            GravesFontScale();
             UpdateGeometry();   // il resoconto usa caratteri ricavati da quello della casella
         }
 
@@ -485,7 +511,7 @@ namespace YAMS
             EventHandler<PointerReleasedEventArgs> onSky = (s, e) => OnSkyClick(e);
             sky.AddHandler(InputElement.PointerReleasedEvent, onSky, RoutingStrategies.Bubble, true);
             // didascalia sotto la pianta (non piu' disegnata dentro la mappa), va a capo
-            lblMapCaption = new TextBlock { Foreground = Pal.B(Pal.Silver), FontSize = 11.3, TextWrapping = TextWrapping.Wrap };
+            lblMapCaption = new TextBlock { Foreground = Pal.B(Pal.Muted), FontSize = 11.3, TextWrapping = TextWrapping.Wrap };
             Border capBox = new Border { Background = Pal.B(Pal.Panel), Padding = new Thickness(8, 5), Child = lblMapCaption };
             DockPanel skyCol = new DockPanel();
             DockPanel.SetDock(capBox, Dock.Bottom);
@@ -561,7 +587,7 @@ namespace YAMS
             chartFlux = new SimpleChart();
             chartHeight = new SimpleChart();
             picCollm = MakePicture(); picSoda = MakePicture();
-            Border fCollm = Framed(picCollm, Pal.Rgb(0, 0, 0)), fSoda = Framed(picSoda, Pal.Rgb(0, 0, 0));
+            Border fCollm = Framed(picCollm, Pal.ChartBg), fSoda = Framed(picSoda, Pal.ChartBg);
             Grid.SetColumn(chartFlux, 0); Grid.SetRow(chartFlux, 0);
             Grid.SetColumn(fCollm, 1); Grid.SetRow(fCollm, 0);
             Grid.SetColumn(chartHeight, 0); Grid.SetRow(chartHeight, 1);
@@ -610,6 +636,9 @@ namespace YAMS
             grid24.ColumnAlign = al24;
             p2.Children.Add(grid24);   // nessuno scorrimento orizzontale: la tabella e' giustificata
 
+            // --- Radar GRAVES (MainWindow.Graves.cs), subito dopo "Calcolo dell'efficienza"
+            BuildGravesTab();
+
             // --- Attuazione sperimentale previsioni (MainWindow.Previsioni.cs)
             BuildPrevTab();
 
@@ -626,14 +655,14 @@ namespace YAMS
             numSens.ValueChanged += (s, e) => UpdateGeometry();
             numQ.ValueChanged += (s, e) => UpdateGeometry();
             Grid sg = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*") };
-            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
+            txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.Wrap };
             ScrollViewer geoScroll = new ScrollViewer
             {
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 Content = new Border { Padding = new Thickness(12), Child = txtGeo }
             };
-            Border geoBox = Framed(geoScroll, Pal.Rgb(16, 20, 32));
+            Border geoBox = Framed(geoScroll, Pal.CodeBack);
             chartElev = new SimpleChart();
             Grid.SetColumn(geoBox, 0); Grid.SetColumn(chartElev, 1);
             sg.Children.Add(geoBox); sg.Children.Add(chartElev);
@@ -668,9 +697,9 @@ namespace YAMS
         // Titoli delle sezioni (le righe elencate in heads) in evidenza, etichette in azzurro tenue, valori in chiaro
         static void StyleReport(SelectableTextBlock rt, string text, HashSet<string> heads)
         {
-            IBrush head = Pal.B(Pal.Rgb(255, 190, 90));
-            IBrush lab = Pal.B(Pal.Rgb(130, 180, 235));
-            IBrush val = Pal.B(Pal.Fore);
+            IBrush head = Pal.B(Pal.CodeHead);
+            IBrush lab = Pal.B(Pal.CodeLabel);
+            IBrush val = Pal.B(Pal.CodeText);
             InlineCollection inl = new InlineCollection();
             string[] lines = text.Replace("\r\n", "\n").Split('\n');
             bool first = true;
@@ -722,6 +751,7 @@ namespace YAMS
             if (!Astro.TryLocator(Up(txtDx), out dx)) { status.Text = Lang.T("Locator del corrispondente non valido"); return; }
             DateTime t0 = DateTime.Now;
             model = PathModel.Build(home, V(numHomeAlt) / 1000.0, dx, V(numDxAlt) / 1000.0, V(numLayer), V(numElev));
+            StartGravesModel();   // tratta GRAVES -> stazione, in un thread secondario
             sky.Model = model; sky.Station = home; sky.InvalidateHeat();
             skySmall.Model = model; skySmall.Station = home; section.Model = model;
             ApplyAntenna();
@@ -958,6 +988,7 @@ namespace YAMS
                 lblPathInfo.Text = sb.ToString();
             }
             if (sky.Selected != null) SelectInList(sky.Selected);
+            UpdateGravesSky();
         }
 
         // Contributo di uno sciame alle zone PREV (pianta) e alle scie della sezione:
@@ -1021,6 +1052,7 @@ namespace YAMS
 
         void Update24h()
         {
+            UpdateGraves24h();   // cronologia della linguetta Radar GRAVES (non dipende dalla tratta principale)
             if (model == null || !model.Valid || grid24 == null) return;
             DateTime day = SelectedDayUtc;
             List<Shower> act = new List<Shower>();
@@ -1038,7 +1070,7 @@ namespace YAMS
             double[] index = new double[24], wA = new double[24], wB = new double[24];
             double bestScore = 0; string bestShower = "-";
             chart24.Series.Clear();
-            Color[] pal = { Pal.Rgb(255, 210, 40), Pal.Rgb(0, 220, 255), Pal.Rgb(240, 110, 230), Pal.Rgb(120, 230, 120), Pal.Rgb(255, 140, 60) };
+            Color[] pal = { Pal.Ink(Pal.Rgb(255, 210, 40)), Pal.Ink(Pal.Rgb(0, 220, 255)), Pal.Ink(Pal.Rgb(240, 110, 230)), Pal.Ink(Pal.Rgb(120, 230, 120)), Pal.Ink(Pal.Rgb(255, 140, 60)) };
             int ns = 0;
             foreach (Shower s in act)
             {
@@ -1049,6 +1081,7 @@ namespace YAMS
                 double[] dh = new double[24];
                 bool[] tooHigh = new bool[24];
                 string[] sides = new string[24];
+                string[] tips = new string[27];
                 for (int h = 0; h < 24; h++)
                 {
                     DateTime t = day.AddHours(h + 0.5);
@@ -1069,15 +1102,15 @@ namespace YAMS
                             "\n" + Lang.F("puntamento migliore {0}° / {1}°", Astro.Norm360(raz + 90).ToString("F0"), Astro.Norm360(raz - 90).ToString("F0"));
                     }
                     row[3 + h] = (e < 1 ? "" : e.ToString("F0") + (e >= 5 ? sides[h] : "")) + (tooHigh[h] ? "↑" : "");
+                    if (e >= 5) tips[3 + h] = HotTip(s, t, e, lf);
                 }
                 row[2] = zmax.ToString("F0");
-                TableRow tr = new TableRow { Cells = row, CellBack = new Color?[27], CellFore = new Color?[27], Tag = s.Code, FontSize = 12 * Grid24Scale };
+                TableRow tr = new TableRow { Cells = row, CellBack = new Color?[27], CellFore = new Color?[27], Tag = s.Code, FontSize = 12 * Grid24Scale, CellTips = tips };
                 for (int h = 0; h < 24; h++)
                 {
                     double e = effs[h];
-                    int a = (int)(e * 1.6);
-                    tr.CellBack[3 + h] = Pal.Rgb(30 + a / 2, 30 + a / 3, 34);
-                    if (e >= 50) tr.CellFore[3 + h] = Pal.Yellow;
+                    tr.CellBack[3 + h] = Pal.HeatBack(e);
+                    tr.CellFore[3 + h] = Pal.HeatFore(e);
                 }
                 rows.Add(tr);
                 // riga di confronto: formula di DH9GCD (riportata da DF5HC, 2018), in % del suo massimo
@@ -1136,12 +1169,13 @@ namespace YAMS
             glFore.Text = f1 < 0 ? Lang.T("nessun dato radar: vedi Flusso radar")
                 : Lang.F("{0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)", PrevFreqMHz, f1,
                     f2 < 0 ? "-" : f2.ToString("F0"), f3 < 0 ? "-" : f3.ToString("F0"));
-            ChartSeries ix = new ChartSeries(); ix.Name = Lang.T("indice tratta"); ix.Color = Pal.Rgb(90, 110, 200); ix.Values = index; ix.Bars = true; ix.RightAxis = true;
+            ChartSeries ix = new ChartSeries(); ix.Name = Lang.T("indice tratta"); ix.Color = Pal.Ink(Pal.Rgb(90, 110, 200)); ix.Values = index; ix.Bars = true; ix.RightAxis = true;
             chart24.Series.Insert(0, ix);
             chart24.Title = Lang.F("Efficienza oraria per {0} del {1} (UTC, valori a metà ora)", PathLabel(), day.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
             chart24.YLabel = Lang.T("efficienza %"); chart24.Y2Label = Lang.T("indice"); chart24.YMaxFixed = 100;
             string[] xl = new string[24]; for (int h = 0; h < 24; h++) xl[h] = h.ToString("00");
             chart24.XLabels = xl;
+            SetLocalRow(chart24, day.Date, 24);
             chart24.MarkIndex = day.Date == DateTime.UtcNow.Date ? DateTime.UtcNow.Hour : -1;
             chart24.InvalidateVisual();
         }
@@ -1231,7 +1265,7 @@ namespace YAMS
             chartElev.Series.Clear();
             int n = 27; string[] xl = new string[n];
             double[] hs = { model.LayerKm, 100, 120 };
-            Color[] cs = { Pal.Rgb(255, 210, 40), Pal.Rgb(0, 200, 255), Pal.Rgb(240, 110, 230) };
+            Color[] cs = { Pal.Ink(Pal.Rgb(255, 210, 40)), Pal.Ink(Pal.Rgb(0, 200, 255)), Pal.Ink(Pal.Rgb(240, 110, 230)) };
             for (int k = 0; k < 3; k++)
             {
                 double[] v = new double[n];
@@ -1368,7 +1402,7 @@ namespace YAMS
             if (offline)
             {
                 status.Text = Lang.T("CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)");
-                status.Foreground = Pal.B(Pal.Red);
+                status.Foreground = Pal.B(Tema.Scuro ? Pal.Red : SkyPal.Red);   // sulla barra scura
                 if (!offlineNotified)
                 {
                     offlineNotified = true;
@@ -1377,7 +1411,7 @@ namespace YAMS
                 }
                 return;
             }
-            status.Foreground = Pal.B(Pal.Muted);
+            status.Foreground = Pal.B(Pal.BarMuted);
             status.Text = (offlineNotified ? Lang.T("Connessione ripristinata.") + " " : "") + msg;
             offlineNotified = false;
             bool changed = ApplyRadarLayer();
@@ -1394,6 +1428,40 @@ namespace YAMS
             if (numLayer.Value == v) return false;
             numLayer.Value = v;
             return true;
+        }
+
+        // ore locali (fuso orario del computer, con l'ora legale) delle ore UTC che iniziano a startUtc
+        // fumetto delle celle della tabella oraria: quale hot spot (A o B) e' indicato dalla lettera e dove puntare
+        string HotTip(Shower s, DateTime tUtc, double eff, double lf)
+        {
+            bool left = lf >= 0.5;
+            HotPoint hp = left ? model.HotA : model.HotB;
+            string loc = TimeZoneInfo.ConvertTimeFromUtc(DateTime.SpecifyKind(tUtc, DateTimeKind.Utc), TimeZoneInfo.Local).ToString("HH:mm", CultureInfo.InvariantCulture);
+            string head = Lang.F("{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)", s.Code, Lang.T(s.Name), eff,
+                tUtc.ToString("HH:mm", CultureInfo.InvariantCulture), loc);
+            string side = left ? Lang.T("Hot A") + " - " + Lang.T("a SINISTRA guardando verso il corrispondente")
+                               : Lang.T("Hot B") + " - " + Lang.T("a DESTRA guardando verso il corrispondente");
+            string pct = Lang.F("{0:F0} % delle riflessioni arriva da questo lato", 100 * Math.Max(lf, 1 - lf));
+            if (hp == null) return head + "\n" + side + "\n" + pct;
+            string where = Lang.F("puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km",
+                hp.BearingFromHome, Astro.Norm180(hp.BearingFromHome - model.BearingHomeToDx), hp.ElevFromHome, hp.DistFromHome);
+            return head + "\n" + side + "\n" + pct + "\n" + where;
+        }
+
+        static string[] LocalHours(DateTime startUtc, int n)
+        {
+            string[] r = new string[n];
+            DateTime s = DateTime.SpecifyKind(startUtc, DateTimeKind.Utc);
+            for (int i = 0; i < n; i++)
+                r[i] = TimeZoneInfo.ConvertTimeFromUtc(s.AddHours(i), TimeZoneInfo.Local).ToString("HH:mm", CultureInfo.InvariantCulture).Replace(":00", "");
+            return r;
+        }
+
+        static void SetLocalRow(SimpleChart c, DateTime startUtc, int n)
+        {
+            c.XLabels2 = LocalHours(startUtc, n);
+            c.XRow1Name = "UTC";
+            c.XRow2Name = Lang.T("locale");
         }
 
         void UpdateFluxTab()
@@ -1419,11 +1487,12 @@ namespace YAMS
             for (int i = 0; i < 48; i++) xl[i] = (i % 24).ToString("00");
             double[] est = new double[48];
             for (int i = 0; i < 48; i++) est[i] = collm.Valid[i] < 0 ? -1 : collm.Valid[i] * scale;
-            ChartSeries a = new ChartSeries(); a.Name = Lang.F("Collm {0} MHz (validi)", fr.ToString("F1")); a.Color = Pal.Rgb(0, 230, 255); a.Values = collm.Valid; a.Bars = true;
-            ChartSeries r = new ChartSeries(); r.Name = Lang.T("scartati"); r.Color = Pal.Rgb(230, 40, 40); r.Values = collm.Rejected; r.Bars = true;
-            ChartSeries b = new ChartSeries(); b.Name = Lang.F("stima a {0} MHz (scala a destra)", f.ToString("F0")); b.Color = Pal.Rgb(255, 170, 40); b.Values = est; b.RightAxis = true; b.LineWidth = 6f;   // spessore triplo
+            ChartSeries a = new ChartSeries(); a.Name = Lang.F("Collm {0} MHz (validi)", fr.ToString("F1")); a.Color = Pal.Ink(Pal.Rgb(0, 230, 255)); a.Values = collm.Valid; a.Bars = true;
+            ChartSeries r = new ChartSeries(); r.Name = Lang.T("scartati"); r.Color = Pal.Ink(Pal.Rgb(230, 40, 40)); r.Values = collm.Rejected; r.Bars = true;
+            ChartSeries b = new ChartSeries(); b.Name = Lang.F("stima a {0} MHz (scala a destra)", f.ToString("F0")); b.Color = Pal.Ink(Pal.Rgb(255, 170, 40)); b.Values = est; b.RightAxis = true; b.LineWidth = 6f;   // spessore triplo
             chartFlux.Series.Add(a); chartFlux.Series.Add(r); chartFlux.Series.Add(b);
             chartFlux.XLabels = xl; chartFlux.XLabelEvery = 3;
+            SetLocalRow(chartFlux, collm.DayToday.AddDays(-1), 48);
             chartFlux.Title = Lang.F("Meteore/ora - ieri {0} e oggi {1} (UTC)", collm.DayToday.AddDays(-1).ToString("dd/MM", CultureInfo.InvariantCulture), collm.DayToday.ToString("dd/MM", CultureInfo.InvariantCulture));
             chartFlux.YLabel = Lang.T("meteore/ora radar"); chartFlux.Y2Label = Lang.T("meteore/ora stimate");
             int nowIdx = (int)Math.Floor((DateTime.UtcNow - collm.DayToday.AddDays(-1)).TotalHours);
@@ -1431,7 +1500,7 @@ namespace YAMS
             chartFlux.InvalidateVisual();
 
             string[] hl = new string[40]; for (int i = 0; i < 40; i++) hl[i] = (70 + i).ToString();
-            ChartSeries h = new ChartSeries(); h.Name = Lang.T("meteore per km di quota"); h.Color = Pal.Rgb(255, 230, 0); h.Values = collm.HeightCounts; h.Bars = true;
+            ChartSeries h = new ChartSeries(); h.Name = Lang.T("meteore per km di quota"); h.Color = Pal.Ink(Pal.Rgb(255, 230, 0)); h.Values = collm.HeightCounts; h.Bars = true;
             chartHeight.Series.Add(h); chartHeight.XLabels = hl; chartHeight.XLabelEvery = 5;
             chartHeight.Title = Lang.F("Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km",
                 collm.HeightMode, collm.HeightMean, collm.HeightMedian, collm.HeightSd);
@@ -1444,6 +1513,7 @@ namespace YAMS
         {
             DateTime now = DateTime.UtcNow;
             lblClock.Text = now.ToString("HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
+            UpdateGravesTick();   // fascio di GRAVES: passo attivo e prossimi passaggi
             if (now.Second == 0)
             {
                 if (TrackValue == 0) UpdateSky();
@@ -1476,7 +1546,9 @@ namespace YAMS
             cfg.Set("hot_spot_km", V(numHotKm));
             cfg.Set("carattere_pct", Math.Round(sldFont.Value / 10) * 10);
             cfg.Set("lingua", Lang.Code);
+            cfg.Set("tema", Tema.Chiave);
             SavePrevConfig();
+            SaveGravesConfig();
             cfg.Save();
         }
 
@@ -1515,6 +1587,10 @@ Lang.T("DATI RADAR IN DIRETTA") + "\n" +
 "  " + Lang.T("Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)") + "\n" +
 "  " + Lang.T("Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)") + "\n" +
 "  " + Lang.T("RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)") + "\n\n" +
+Lang.T("RADAR GRAVES (linguetta Radar GRAVES)") + "\n" +
+"  " + Lang.T("Rob Hardenberg PE1ITR, \"The 143.050 MHz Graves Radar, a VHF Beacon\" (DUBUS 4/2007) e \"Graves Radar Update April 2021\" – pe1itr.com/graves") + "\n" +
+"  " + Lang.T("Bolidozor wiki, \"Graves\" – schiere, settori e tempi del fascio") + "\n" +
+"  " + Lang.T("Wikipedia, \"GRAVES (system)\" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)") + "\n\n" +
 Lang.T("ALTRI RIFERIMENTI DELL'ARTICOLO") + "\n" +
 "  " + Lang.T("G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook") + "\n\n" +
 Lang.T("Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.") + "\n";

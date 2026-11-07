@@ -1,55 +1,71 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ELA.App"
-             RequestedThemeVariant="Dark">
+             RequestedThemeVariant="Light">
+  <!-- Colori degli stili: valori di partenza (schema Chiaro), sostituiti da Tema.ApplicaStili() a ogni cambio di schema -->
+  <Application.Resources>
+    <SolidColorBrush x:Key="YamsBack" Color="#F0F0F0"/>
+    <SolidColorBrush x:Key="YamsFore" Color="#000000"/>
+    <SolidColorBrush x:Key="YamsMuted" Color="#6D6D6D"/>
+    <SolidColorBrush x:Key="YamsPill" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="YamsPillFore" Color="#2554A0"/>
+    <SolidColorBrush x:Key="YamsPillBorder" Color="#D5DCEA"/>
+    <SolidColorBrush x:Key="YamsPillHover" Color="#EBF5FF"/>
+    <SolidColorBrush x:Key="YamsAccent" Color="#1F6FD1"/>
+    <SolidColorBrush x:Key="YamsAccentFore" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="YamsAccentHover" Color="#3B86E2"/>
+    <SolidColorBrush x:Key="YamsTabFore" Color="#E2E8F0"/>
+    <SolidColorBrush x:Key="YamsTabHover" Color="#2C384E"/>
+  </Application.Resources>
   <Application.Styles>
     <FluentTheme />
-    <!-- Stile "Scia meteorica" di YA-MS; i colori vengono dallo schema scelto (Themes.cs, colorazioni di YAEC) -->
+    <!-- Bottoni arrotondati e linguette a pillola; colori dallo schema scelto (Theme.cs, classe Tema) -->
     <Style Selector="Window">
-      <Setter Property="Background" Value="{DynamicResource ElaBack}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsBack}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsFore}"/>
     </Style>
     <Style Selector="Button.pill">
       <Setter Property="CornerRadius" Value="14"/>
       <Setter Property="Padding" Value="12,4"/>
-      <Setter Property="Background" Value="{DynamicResource ElaPill}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource ElaPillBorder}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsPill}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsPillFore}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource YamsPillBorder}"/>
       <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Button.pill:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ElaPillOver}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsPillHover}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsPillFore}"/>
     </Style>
     <Style Selector="Button.accent">
-      <Setter Property="Background" Value="{DynamicResource ElaAccent}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsAccent}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsAccentFore}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource YamsAccent}"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ElaAccentOver}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsAccentHover}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsAccentFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab">
       <Setter Property="CornerRadius" Value="14"/>
       <Setter Property="Padding" Value="14,4"/>
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsTabFore}"/>
       <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style Selector="ToggleButton.tab:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ElaPill}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsTabHover}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsTabFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab:checked /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ElaAccent}"/>
-      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
+      <Setter Property="Background" Value="{DynamicResource YamsAccent}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsAccentFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab:checked">
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="TextBlock.label">
-      <Setter Property="Foreground" Value="{DynamicResource ElaMuted}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsMuted}"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
       <Setter Property="Margin" Value="8,0,4,0"/>
     </Style>

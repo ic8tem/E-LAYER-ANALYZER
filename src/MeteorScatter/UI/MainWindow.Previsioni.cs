@@ -142,15 +142,16 @@ namespace YAMS
                 double c;
                 if (rmobCounts != null && rmobCounts.TryGetValue(start.AddHours(i), out c)) { rm[i] = c; anyRmob = true; }
             }
-            ChartSeries a = new ChartSeries(); a.Name = "Collm " + fr.ToString("F1") + " MHz"; a.Color = Pal.Rgb(0, 230, 255); a.Values = collm.Valid; a.Bars = true;
-            ChartSeries b = new ChartSeries(); b.Name = Lang.F("traslato a {0} MHz (scala a destra)", f.ToString("F0")); b.Color = Pal.Rgb(255, 170, 40); b.Values = tr; b.RightAxis = true;
+            ChartSeries a = new ChartSeries(); a.Name = "Collm " + fr.ToString("F1") + " MHz"; a.Color = Pal.Ink(Pal.Rgb(0, 230, 255)); a.Values = collm.Valid; a.Bars = true;
+            ChartSeries b = new ChartSeries(); b.Name = Lang.F("traslato a {0} MHz (scala a destra)", f.ToString("F0")); b.Color = Pal.Ink(Pal.Rgb(255, 170, 40)); b.Values = tr; b.RightAxis = true;
             chartPrev48.Series.Add(a); chartPrev48.Series.Add(b);
             if (anyRmob)
             {
-                ChartSeries r = new ChartSeries(); r.Name = Lang.F("RMOB {0} (scala a destra)", rmobName); r.Color = Pal.Rgb(120, 230, 120); r.Values = rm; r.RightAxis = true;
+                ChartSeries r = new ChartSeries(); r.Name = Lang.F("RMOB {0} (scala a destra)", rmobName); r.Color = Pal.Ink(Pal.Rgb(120, 230, 120)); r.Values = rm; r.RightAxis = true;
                 chartPrev48.Series.Add(r);
             }
             chartPrev48.XLabels = xl; chartPrev48.XLabelEvery = 3;
+            SetLocalRow(chartPrev48, start, 48);
             chartPrev48.Title = Lang.F("Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)", f.ToString("F0"),
                                 start.ToString("dd/MM", CultureInfo.InvariantCulture), collm.DayToday.ToString("dd/MM", CultureInfo.InvariantCulture));
             chartPrev48.YLabel = Lang.T("meteore/ora radar"); chartPrev48.Y2Label = Lang.F("riflessioni/ora a {0} MHz", f.ToString("F0"));
@@ -205,10 +206,11 @@ namespace YAMS
             }
             gridPrev.Rows = rows;
             gridPrev.Refresh();
-            ChartSeries pf = new ChartSeries(); pf.Name = Lang.F("previsione {0} MHz /ora", f.ToString("F0")); pf.Color = Pal.Rgb(255, 170, 40); pf.Values = fc; pf.Bars = true;
-            ChartSeries pi = new ChartSeries(); pi.Name = Lang.T("indice sciami tratta (scala a destra)"); pi.Color = Pal.Rgb(240, 110, 230); pi.Values = idx; pi.RightAxis = true;
+            ChartSeries pf = new ChartSeries(); pf.Name = Lang.F("previsione {0} MHz /ora", f.ToString("F0")); pf.Color = Pal.Ink(Pal.Rgb(255, 170, 40)); pf.Values = fc; pf.Bars = true;
+            ChartSeries pi = new ChartSeries(); pi.Name = Lang.T("indice sciami tratta (scala a destra)"); pi.Color = Pal.Ink(Pal.Rgb(240, 110, 230)); pi.Values = idx; pi.RightAxis = true;
             chartPrev24.Series.Add(pf); chartPrev24.Series.Add(pi);
             chartPrev24.XLabels = xf; chartPrev24.XLabelEvery = 2;
+            SetLocalRow(chartPrev24, h0, 24);
             chartPrev24.Title = Lang.F("Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}", f.ToString("F0"), PathLabel());
             chartPrev24.YLabel = Lang.T("riflessioni/ora"); chartPrev24.Y2Label = Lang.T("Σ ZHR x effic.");
             chartPrev24.MarkIndex = -1;

@@ -237,8 +237,8 @@ namespace ELA
             bDisc.Click += (s, e) => Session.Disconnect();
             lblState = new TextBlock { Text = Lang.T("Non connesso"), Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             lblCounts = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
-            console = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.NoWrap };
-            sv = new ScrollViewer { Content = console, Height = 170, Background = Pal.B(Pal.Track), HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            console = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.NoWrap };
+            sv = new ScrollViewer { Content = console, Height = 170, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
             txtSend = Ui.T("", 300, false);
             txtSend.Watermark = Lang.T("comando da inviare (es. sh/dx 20)");
             Button bSend = Ui.B(Lang.T("Invia"));

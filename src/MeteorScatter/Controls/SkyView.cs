@@ -50,8 +50,7 @@ namespace YAMS
 
         WriteableBitmap heat; PathModel heatFor; bool heatTop;
 
-        // colori di sistema usati dal vecchio programma
-        static Color Gainsboro { get { return Pal.Fore; } }   // solo la legenda (riquadro Pal.Panel)
+        // colori di sistema usati dal vecchio programma (dentro la volta, scura in tutti gli schemi)
         static readonly Color White = Color.FromRgb(255, 255, 255);
         static readonly Color Wheat = Color.FromRgb(245, 222, 179);
         static readonly Color Cyan = Color.FromRgb(0, 255, 255);
@@ -332,7 +331,7 @@ namespace YAMS
             ctx.DrawLine(dash, new Point(cx, cy - rad), new Point(cx, cy + rad));
             if (map && DrawCaption)
             {
-                FormattedText mt = Ft(Lang.F("mappa: bordo = {0} km dalla stazione", MapRadiusKm.ToString("F0")), F8, tc);
+                FormattedText mt = Ft(Lang.F("mappa: bordo = {0} km dalla stazione", MapRadiusKm.ToString("F0")), F8, Pal.Muted);   // fuori dalla volta: colore dello schema
                 ctx.DrawText(mt, new Point(6, 6));   // in alto a sinistra: non copre la didascalia
                 lp.Block(new Rect(4, 4, mt.Width + 4, mt.Height + 4));
             }
@@ -340,7 +339,7 @@ namespace YAMS
             if (!(map && ShowDial))
             {
                 double fs = ShowLegend || map ? F12 : F9;
-                Color oc = Color.FromRgb(240, 90, 40);
+                Color oc = Pal.Ink(Color.FromRgb(240, 90, 40));   // lettere fuori dalla volta: leggibili anche sui fondi chiari
                 FormattedText n = Ft("N", fs, oc), s = Ft("S", fs, oc);
                 FormattedText w = Ft(TopView ? "W" : "E", fs, oc), e = Ft(TopView ? "E" : "W", fs, oc);
                 Point pn = new Point(cx - n.Width / 2, cy - rad - n.Height - 4), ps = new Point(cx - s.Width / 2, cy + rad + 4);
@@ -359,7 +358,7 @@ namespace YAMS
             if (ShowLegend) DrawSymbolLegend(ctx, W, H);
             if (DrawCaption && !string.IsNullOrEmpty(Caption))
             {
-                FormattedText ft = Ft(Caption, F85, Pal.Silver);
+                FormattedText ft = Ft(Caption, F85, Pal.Muted);
                 ft.MaxTextWidth = Math.Max(100, Bounds.Width - 12);   // va a capo se la finestra e' stretta
                 ctx.DrawText(ft, new Point(6, H - ft.Height - 4));
             }
@@ -452,13 +451,13 @@ namespace YAMS
         static Color HotColor(HotPoint h)
         {
             // rosso = consigliato dall'efficienza, grigio = gia' nel lobo, rosa = fuori dal lobo
-            return h.Recommended ? Pal.Red : h.InLobe ? Pal.HotGrey : Pal.HotPink;
+            return h.Recommended ? SkyPal.Red : h.InLobe ? Pal.HotGrey : Pal.HotPink;
         }
 
         void DrawPath(DrawingContext ctx, double cx, double cy, double rad, bool map)
         {
-            IPen pp = Pal.P(Pal.A(230, Pal.Green), 2);
-            IBrush gb = Pal.B(Pal.Green);
+            IPen pp = Pal.P(Pal.A(230, SkyPal.Green), 2);
+            IBrush gb = Pal.B(SkyPal.Green);
             double left = ScreenDir(Model.BearingHomeToDx - 90);   // a sinistra della tratta (lato A)
             if (map)
             {
@@ -467,9 +466,9 @@ namespace YAMS
                 ctx.DrawEllipse(gb, null, pd, 4, 4);
                 lp.BlockLine(new Point(cx, cy), pd);
                 lp.BlockPoint(pd, 6);
-                AddLab(0, "DX", F9, Pal.Green, true, pd, left);
+                AddLab(0, "DX", F9, SkyPal.Green, true, pd, left);
                 Point pm = MapXY(Model.Mid, cx, cy, rad);
-                ctx.DrawEllipse(null, Pal.P(Pal.Green, 1), pm, 3, 3);
+                ctx.DrawEllipse(null, Pal.P(SkyPal.Green, 1), pm, 3, 3);
                 DrawCommonZone(ctx, cx, cy, rad, left);
             }
             else
@@ -573,8 +572,8 @@ namespace YAMS
             if (Marks != null) foreach (RadiantMark x in Marks) if (x.Code == Selected) m = x;
             if (m == null || m.El <= 0) return;
             Point a = SkyXY(m.Az + 90, 0, cx, cy, rad), b = SkyXY(m.Az - 90, 0, cx, cy, rad);
-            IPen p = Pal.P(Pal.A(230, Pal.Orange), 2.5);
-            IPen w = Pal.P(Pal.A(70, Pal.Orange), 1);
+            IPen p = Pal.P(Pal.A(230, SkyPal.Orange), 2.5);
+            IPen w = Pal.P(Pal.A(70, SkyPal.Orange), 1);
             Color tc = Color.FromRgb(255, 170, 60);
             ctx.DrawLine(p, a, b);
             lp.BlockLine(a, b);
@@ -588,7 +587,7 @@ namespace YAMS
             AddLab(1, Astro.Norm360(m.Az - 90).ToString("F0") + "°", F85, tc, true, b, ScreenDir(m.Az - 90));
             // direzione di arrivo dello sciame: linea a puntini con freccia verso il centro
             Point r = SkyXY(m.Az, 0, cx, cy, rad);
-            Color dc = Pal.A(150, Pal.Orange);
+            Color dc = Pal.A(150, SkyPal.Orange);
             ctx.DrawLine(Pal.P(dc, 1, Pal.Dot), r, new Point(cx, cy));
             double vx = cx - r.X, vy = cy - r.Y, len = Math.Sqrt(vx * vx + vy * vy);
             if (len > 1)
@@ -609,9 +608,10 @@ namespace YAMS
         // Scala dei gradi attorno al bordo della mappa (come il rotore d'antenna)
         void DrawDial(DrawingContext ctx, double cx, double cy, double rad)
         {
-            IPen tk = Pal.P(Pal.Argb(150, 200, 200, 210), 1);
-            IPen rim = Pal.P(Pal.Argb(170, 200, 200, 210), 1.5);
-            Color oc = Color.FromRgb(240, 120, 60);
+            // scala dei gradi fuori dalla volta, sul fondo dello schema
+            IPen tk = Pal.P(Pal.A(150, Tema.Scuro ? Pal.Rgb(200, 200, 210) : Pal.Muted), 1);
+            IPen rim = Pal.P(Pal.A(170, Tema.Scuro ? Pal.Rgb(200, 200, 210) : Pal.Muted), 1.5);
+            Color oc = Pal.Ink(Color.FromRgb(240, 120, 60));
             int every = LS <= 2 ? 30 : 60;   // caratteri grandi: meno scritte
             double lr = rad + 14 + 0.75 * F9 * LS;
             ctx.DrawEllipse(null, rim, new Point(cx, cy), rad + 3, rad + 3);
@@ -685,13 +685,13 @@ namespace YAMS
             Color fc = Color.FromRgb(255, 220, 110);
             Lab fl = AddLab(5, Lang.F("{0} (dal radiante, az. {1}°)", m.Code, m.Az.ToString("F0")), F9, fc, true, PA(ScreenDir(m.Az), rad * 0.80, cx, cy), ScreenDir(m.Az + 90));
             fl.Flow = true; fl.FlowAz = m.Az;
-            IBrush ob = Pal.B(Pal.Orange);
+            IBrush ob = Pal.B(SkyPal.Orange);
             foreach (double off in new double[] { 90, -90 })
             {
                 Point q = SkyXY(m.Az + off, 0, cx, cy, rad);
                 ctx.DrawEllipse(ob, null, q, 5, 5);
                 lp.BlockPoint(q, 6);
-                AddLab(6, Astro.Norm360(m.Az + off).ToString("F0") + "°", F9, Pal.Orange, true, q, ScreenDir(m.Az + off + 180));
+                AddLab(6, Astro.Norm360(m.Az + off).ToString("F0") + "°", F9, SkyPal.Orange, true, q, ScreenDir(m.Az + off + 180));
             }
         }
 
@@ -718,7 +718,7 @@ namespace YAMS
             {
                 if (m.Track == null) continue;
                 bool sel = m.Code == Selected;
-                IPen tp = RoundPen(sel ? Pal.A(240, Pal.Azure) : Pal.A(140, Pal.Azure), sel ? 2.2 : 1.3);
+                IPen tp = RoundPen(sel ? Pal.A(240, SkyPal.Azure) : Pal.A(140, SkyPal.Azure), sel ? 2.2 : 1.3);
                 StreamGeometry g = new StreamGeometry();
                 List<Point> hours = new List<Point>(); List<int> hv = new List<int>();
                 using (StreamGeometryContext gc = g.Open())
@@ -755,8 +755,8 @@ namespace YAMS
                 Point p = SkyXY(m.Az, m.El, cx, cy, rad);
                 Color c;
                 if (m.Zhr < 1) c = Color.FromRgb(130, 130, 130);
-                else if (m.Eff >= 50 && m.Zhr >= 2) c = Pal.Yellow;
-                else if (m.Eff >= 20) c = Pal.Orange;
+                else if (m.Eff >= 50 && m.Zhr >= 2) c = SkyPal.Yellow;
+                else if (m.Eff >= 20) c = SkyPal.Orange;
                 else c = Color.FromRgb(194, 65, 12);
                 ctx.DrawEllipse(Pal.B(c), null, p, 7, 7);
                 if (m.Code == Selected) ctx.DrawEllipse(null, selPen, p, 9, 9);
@@ -790,23 +790,23 @@ namespace YAMS
             double x = x0 + 12, yy = 14 + hf.Height + 10;
             using (ctx.PushClip(panel))
             {
-                Item(ctx, x, ref yy, Pal.Green, Lang.T("tratta / DX"));
-                Item(ctx, x, ref yy, Pal.Red, Lang.T("Hot consigliato"));
+                Item(ctx, x, ref yy, SkyPal.Green, Lang.T("tratta / DX"));
+                Item(ctx, x, ref yy, SkyPal.Red, Lang.T("Hot consigliato"));
                 Item(ctx, x, ref yy, Pal.HotPink, Lang.T("Hot fuori lobo"));
                 Item(ctx, x, ref yy, Color.FromRgb(150, 150, 210), Lang.T("limiti zona comune"));
                 Item(ctx, x, ref yy, Pal.HotGrey, Lang.T("Hot nel lobo"));
                 Item(ctx, x, ref yy, Color.FromRgb(255, 240, 200), Lang.T("lobo antenna"));
                 Item(ctx, x, ref yy, Color.FromRgb(255, 210, 90), Lang.T("scorrimento sciame"));
-                Item(ctx, x, ref yy, Pal.Orange, Lang.T("miglior punt."));
+                Item(ctx, x, ref yy, SkyPal.Orange, Lang.T("miglior punt."));
                 Item(ctx, x, ref yy, Color.FromRgb(235, 225, 190), Lang.T("zona PREV"));
                 if (ShowRadiants || !(ShowMap && TopView))
                 {
-                    Item(ctx, x, ref yy, Pal.Azure, Lang.T("percorso rad."));
+                    Item(ctx, x, ref yy, SkyPal.Azure, Lang.T("percorso rad."));
                     yy += 8;
-                    FormattedText rt = Ft(Lang.T("Radiante:"), F75, Gainsboro, FontWeight.Bold);
+                    FormattedText rt = Ft(Lang.T("Radiante:"), F75, Pal.Fore, FontWeight.Bold);
                     ctx.DrawText(rt, new Point(x, yy)); yy += rt.Height + 6;
-                    Item(ctx, x, ref yy, Pal.Yellow, Lang.T("effic. >= 50%"));
-                    Item(ctx, x, ref yy, Pal.Orange, Lang.T("effic. >= 20%"));
+                    Item(ctx, x, ref yy, SkyPal.Yellow, Lang.T("effic. >= 50%"));
+                    Item(ctx, x, ref yy, SkyPal.Orange, Lang.T("effic. >= 20%"));
                     Item(ctx, x, ref yy, Color.FromRgb(194, 65, 12), Lang.T("effic. < 20%"));
                     Item(ctx, x, ref yy, Color.FromRgb(130, 130, 130), Lang.T("quasi inattivo"));
                 }
@@ -814,7 +814,7 @@ namespace YAMS
                 string[] note = { Lang.T("Mappa:"), Lang.T("clic sinistro ="), Lang.T("corrispondente"), Lang.T("clic destro ="), Lang.T("la mia stazione") };
                 foreach (string n in note)
                 {
-                    FormattedText nt = Ft(n, F75, Pal.Silver);
+                    FormattedText nt = Ft(n, F75, Pal.Muted);
                     ctx.DrawText(nt, new Point(x, yy)); yy += Math.Max(16, nt.Height + 3);
                 }
             }
@@ -822,8 +822,9 @@ namespace YAMS
 
         static void Item(DrawingContext ctx, double x, ref double y, Color c, string text)
         {
-            FormattedText ft = Ft(text, F75, Gainsboro);
-            ctx.DrawEllipse(Pal.B(c), null, new Point(x + 4.5, y + ft.Height / 2), 4.5, 4.5);
+            FormattedText ft = Ft(text, F75, Pal.Fore);
+            // colori del cielo (fissi): sui fondi chiari un bordino li tiene visibili
+            ctx.DrawEllipse(Pal.B(c), Tema.Scuro ? null : Pal.P(Pal.A(110, Pal.Fore), 0.7), new Point(x + 4.5, y + ft.Height / 2), 4.5, 4.5);
             ctx.DrawText(ft, new Point(x + 13, y));
             y += Math.Max(18, ft.Height + 5);
         }

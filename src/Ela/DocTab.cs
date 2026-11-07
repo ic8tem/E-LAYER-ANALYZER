@@ -63,7 +63,7 @@ namespace ELA
             };
             p.Children.Add(new ScrollViewer
             {
-                Background = Pal.B(Pal.Track),
+                Background = Pal.B(Pal.Desk),
                 HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
                 Content = sheet

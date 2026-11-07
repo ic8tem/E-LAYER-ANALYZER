@@ -22,6 +22,7 @@ namespace YAMS
         public bool Bold;
         public double FontSize = 12;
         public object Tag;
+        public string[] CellTips;    // fumetto per cella al passaggio del mouse (null o "" = nessuno)
     }
 
     public class TableView : Control
@@ -49,9 +50,10 @@ namespace YAMS
         const double DefaultColumnWidth = 80;
         const double CellPad = 5;
 
-        static readonly Color HeaderBack = Color.FromRgb(244, 243, 250);
-        static readonly Color HeaderLine = Color.FromRgb(200, 198, 215);
-        static readonly Color HeaderFore = Color.FromRgb(0, 0, 0);
+        // intestazione: colori dello schema scelto (Pal.TableHead*), letti a ogni disegno
+        static Color HeaderBack { get { return Pal.TableHead; } }
+        static Color HeaderLine { get { return Pal.TableHeadLine; } }
+        static Color HeaderFore { get { return Pal.TableHeadFore; } }
 
         public TableView()
         {
@@ -209,7 +211,7 @@ namespace YAMS
                     int first = Math.Max(0, (int)Math.Floor(scrollY / rh));
                     int last = Math.Min(Rows.Count - 1, (int)Math.Ceiling((scrollY + bodyH) / rh));
                     IBrush odd = Pal.B(Pal.Panel);
-                    IBrush selB = Pal.B(Pal.Panel3);
+                    IBrush selB = Pal.B(Pal.Select);
                     IPen selP = Pal.P(Pal.Azure, 1);
                     for (int r = first; r <= last; r++)
                     {
@@ -274,6 +276,47 @@ namespace YAMS
             scrollY -= e.Delta.Y * RH * 3;
             ClampScroll();
             if (scrollY != old) { e.Handled = true; InvalidateVisual(); }
+        }
+
+        // fumetto della cella sotto il mouse (TableRow.CellTips)
+        string shownTip;
+
+        string TipAt(Point p)
+        {
+            double hh = HH;
+            if (p.Y < hh || Rows == null) return null;
+            int idx = (int)Math.Floor((p.Y - hh + scrollY) / RH);
+            if (idx < 0 || idx >= Rows.Count || Rows[idx] == null || Rows[idx].CellTips == null) return null;
+            double[] w = Widths(Bounds.Width, Factor());
+            double x = 0;
+            for (int c = 0; c < w.Length; c++)
+            {
+                if (p.X >= x && p.X < x + w[c])
+                    return c < Rows[idx].CellTips.Length && !string.IsNullOrEmpty(Rows[idx].CellTips[c]) ? Rows[idx].CellTips[c] : null;
+                x += w[c];
+            }
+            return null;
+        }
+
+        void SetTip(string tip)
+        {
+            if (tip == shownTip) return;
+            shownTip = tip;
+            ToolTip.SetIsOpen(this, false);
+            ToolTip.SetTip(this, tip);
+            if (tip != null) ToolTip.SetIsOpen(this, true);
+        }
+
+        protected override void OnPointerMoved(PointerEventArgs e)
+        {
+            base.OnPointerMoved(e);
+            SetTip(TipAt(e.GetPosition(this)));
+        }
+
+        protected override void OnPointerExited(PointerEventArgs e)
+        {
+            base.OnPointerExited(e);
+            SetTip(null);
         }
 
         protected override void OnPointerPressed(PointerPressedEventArgs e)

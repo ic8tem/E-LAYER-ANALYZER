@@ -407,7 +407,7 @@ namespace ELA
                     if (la > 89 || la < -89 || Geo.DistanceKm(spLat, spLon, la, lo) > hr) { S[i, j] = double.NaN; continue; }
                     S[i, j] = cA + Contour(sp, b, Geo.Ecef(la, lo, 0));
                 }
-            bool light = Pal.Light;
+            bool light = Themes.Light;
             if (!light)
             {
                 // fasce colorate

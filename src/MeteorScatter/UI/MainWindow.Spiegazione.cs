@@ -49,7 +49,7 @@ namespace YAMS
             DockTop(p, Row(bExport, bOpen,
                 L(Lang.T("Capitoli: introduzione, strato E, geometria, radiante, riflessione, efficienza, lettura dei risultati, frequenza, limiti, fonti"))));
 
-            // aspetto "pagina": foglio chiaro centrato, larghezza massima 860 px, ombra, su fondo scuro
+            // aspetto "pagina": foglio chiaro centrato, larghezza massima 860 px, ombra, sul fondo dello schema (Pal.Desk)
             StackPanel doc = new StackPanel();
             FillExplain(doc, Path.Combine(dataDir, "efficienza_spiegazione.txt"));
             Border sheet = new Border
@@ -66,7 +66,7 @@ namespace YAMS
             };
             ScrollViewer sv = new ScrollViewer
             {
-                Background = Pal.B(Pal.Track),
+                Background = Pal.B(Pal.Desk),   // il foglio resta chiaro (carta) in tutti gli schemi
                 HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
                 Content = sheet

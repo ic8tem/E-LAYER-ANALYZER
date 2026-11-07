@@ -66,15 +66,15 @@ namespace ELA
             };
             cmbTheme = new ComboBox { MinWidth = 170, Margin = new Thickness(6, 1, 0, 1), VerticalAlignment = VerticalAlignment.Center };
             List<string> tn = new List<string>();
-            foreach (string t in Themes.Names) tn.Add(Lang.T(t));
+            foreach (string t in Tema.Names) tn.Add(Lang.T(t));
             cmbTheme.ItemsSource = tn;
-            cmbTheme.SelectedIndex = Themes.Current;
-            ToolTip.SetTip(cmbTheme, Lang.T("Colorazione dell'interfaccia (YA-MS e YAEC): il programma si riavvia"));
+            cmbTheme.SelectedIndex = Tema.Schema;
+            ToolTip.SetTip(cmbTheme, Lang.T("Tema"));
             cmbTheme.SelectionChanged += (s, e) =>
             {
-                if (cmbTheme.SelectedIndex < 0 || cmbTheme.SelectedIndex == Themes.Current) return;
+                if (cmbTheme.SelectedIndex < 0 || cmbTheme.SelectedIndex == Tema.Schema) return;
                 int ti = cmbTheme.SelectedIndex;
-                Dispatcher.UIThread.Post(() => Restart(ti));
+                Dispatcher.UIThread.Post(() => SwitchTheme(ti));
             };
             TextBlock brand = new TextBlock { Text = "E-LAYER ANALYZER", Foreground = Pal.B(Pal.Azure), FontWeight = FontWeight.Bold, FontSize = 17, Margin = new Thickness(6, 0, 14, 0), VerticalAlignment = VerticalAlignment.Center };
             DockPanel top = new DockPanel();
@@ -88,18 +88,19 @@ namespace ELA
             es = new EsTab();
             fai = new ScatterTab(false);
             YAMS.MainWindow.LanguageRequested = code => Dispatcher.UIThread.Post(() => SwitchLanguage(code));
+            YAMS.MainWindow.ThemeRequested = th => Dispatcher.UIThread.Post(() => SwitchTheme(th));
             ms = new YAMS.MainWindow();
             au = new ScatterTab(true);
             dc = new DataTab();
             log = new LogTab();
-            tabs.Add("SPORADIC-E", es.Root);
-            tabs.Add("F.A.I.", fai.Root);
-            tabs.Add("METEOR SCATTER", ms);
-            tabs.Add("AURORA", au.Root);
-            tabs.Add("DATA COLLECTION", dc.Root);
-            tabs.Add("LOG ADIF", log.Root);
-            tabs.Add(Lang.T("FONTI"), DocTab.Build(Path.Combine(dataDir, "ela_fonti.txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
-            tabs.Add(Lang.T("DOCUMENTO TECNICO"), DocTab.Build(Path.Combine(dataDir, "ela_documento_tecnico.txt"), Path.Combine(dataDir, "ela_documento_tecnico.docx"),
+            tabs.Add(Lang.T("SPORADIC-E"), es.Root);
+            tabs.Add(Lang.T("F.A.I."), fai.Root);
+            tabs.Add(Lang.T("METEOR SCATTER"), ms);
+            tabs.Add(Lang.T("AURORA"), au.Root);
+            tabs.Add(Lang.T("DATA COLLECTION"), dc.Root);
+            tabs.Add(Lang.T("LOG ADIF"), log.Root);
+            tabs.Add(Lang.T("FONTI"), DocTab.Build(LocFile(dataDir, "ela_fonti", ".txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
+            tabs.Add(Lang.T("DOCUMENTO TECNICO"), DocTab.Build(LocFile(dataDir, "ela_documento_tecnico", ".txt"), LocFile(dataDir, "ela_documento_tecnico", ".docx"),
                 "E-LAYER ANALYZER - documento tecnico.docx", Lang.T("Come il programma calcola: formule e fonti a ogni passo")));
             tabs.SelectionChanged += i =>
             {
@@ -110,7 +111,7 @@ namespace ELA
             };
             int sel = (int)Station.Cfg.GetD("linguetta", 0);
 
-            status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.Muted), TextTrimming = TextTrimming.CharacterEllipsis };
+            status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
             Border sb = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 3), Child = status };
 
             DockPanel root = new DockPanel();
@@ -137,6 +138,19 @@ namespace ELA
             };
         }
 
+        // documento nella lingua scelta (data/<nome>_<codice>.txt), altrimenti quello italiano
+        static string LocFile(string dataDir, string name, string ext)
+        {
+            if (Lang.Code != "it")
+            {
+                string f = Path.Combine(dataDir, name + "_" + Lang.Code + ext);
+                if (File.Exists(f)) return f;
+                string g = Path.Combine(AppContext.BaseDirectory, "data", name + "_" + Lang.Code + ext);
+                if (File.Exists(g)) return g;
+            }
+            return Path.Combine(dataDir, name + ext);
+        }
+
         void ApplyStation()
         {
             Station.Set(Ui.Up(txtCall), Ui.Up(txtLoc), Ui.V(numAlt));
@@ -149,7 +163,6 @@ namespace ELA
             {
                 Station.Cfg.Set("linguetta", Math.Max(0, tabs.Selected));
                 es.Save(); fai.Save(); au.Save(); dc.Save(); log.Save();
-                Station.Cfg.Set("schema_colori", Themes.Keys[Themes.Current]);
                 Station.Set(Ui.Up(txtCall), Ui.Up(txtLoc), Ui.V(numAlt), false);
                 Station.Save();
             }
@@ -193,21 +206,38 @@ namespace ELA
             });
         }
 
-        // Cambio di colorazione: salva e riavvia il programma (i colori valgono dall'avvio)
-        void Restart(int theme)
+        // Cambio dello schema di colori (Tema di YA-MS): salva e ricostruisce la finestra come per la lingua
+        void SwitchTheme(int schema)
         {
+            if (replaced || schema == Tema.Schema) return;
+            int old = Tema.Schema;
             try
             {
-                Themes.Current = theme;
                 SaveAll();
-                ms.Shutdown(true); dc.Shutdown();
-                replaced = true;
-                string exe = Environment.ProcessPath;
-                if (!string.IsNullOrEmpty(exe)) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(exe) { UseShellExecute = false, WorkingDirectory = AppPaths.AppDir });
-                if (Application.Current != null && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) desktop.Shutdown();
-                else Close();
+                ms.Shutdown(true);
+                dc.Shutdown();
+                Tema.Imposta(schema);
+                Themes.FromPal();
+                try { Config c = new Config(Path.Combine(AppPaths.DataDir, "config.ini")); c.Set("tema", Tema.Chiave); c.Save(); } catch { }
+                Rebuild();
             }
-            catch (Exception ex) { replaced = false; status.Text = ex.Message; }
+            catch (Exception ex) { replaced = false; Tema.Imposta(old); Themes.FromPal(); status.Text = ex.Message; }
+        }
+
+        void Rebuild()
+        {
+            replaced = true;
+            int sel = tabs.Selected;
+            ElaWindow w = new ElaWindow();
+            w.WindowStartupLocation = WindowStartupLocation.Manual;
+            w.Position = Position;
+            if (WindowState == WindowState.Normal) { w.Width = Width; w.Height = Height; }
+            w.WindowState = WindowState == WindowState.Minimized ? WindowState.Normal : WindowState;
+            if (sel >= 0) w.tabs.Select(sel);
+            if (Application.Current != null && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                desktop.MainWindow = w;
+            w.Show();
+            Close();
         }
 
         // Cambio di lingua: salva tutto e ricostruisce la finestra (anche il pannello YA-MS)
@@ -222,16 +252,7 @@ namespace ELA
                 Lang.Load(code);
                 Lang.ApplyCulture();
                 try { Config c = new Config(Path.Combine(AppPaths.DataDir, "config.ini")); c.Set("lingua", code); c.Save(); } catch { }
-                replaced = true;
-                ElaWindow w = new ElaWindow();
-                w.WindowStartupLocation = WindowStartupLocation.Manual;
-                w.Position = Position;
-                if (WindowState == WindowState.Normal) { w.Width = Width; w.Height = Height; }
-                w.WindowState = WindowState == WindowState.Minimized ? WindowState.Normal : WindowState;
-                if (Application.Current != null && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                    desktop.MainWindow = w;
-                w.Show();
-                Close();
+                Rebuild();
             }
             catch (Exception ex) { replaced = false; status.Text = ex.Message; }
         }

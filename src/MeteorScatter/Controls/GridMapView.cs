@@ -114,7 +114,7 @@ namespace YAMS
         public override void Render(DrawingContext ctx)
         {
             double Wd = Bounds.Width, Ht = Bounds.Height;
-            ctx.DrawRectangle(Pal.B(Pal.Track), null, new Rect(0, 0, Wd, Ht));
+            ctx.DrawRectangle(Pal.B(SkyPal.Deep), null, new Rect(0, 0, Wd, Ht));   // mappa scura fissa (come i cieli), scritte chiare
             if (Wd < 4 || Ht < 4) return;
             SyncAspect();
             Dictionary<string, List<GridQso>> d = ByGrid();

@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Styling;
 using YAMS;
 
 namespace ELA
@@ -11,21 +10,18 @@ namespace ELA
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
-            // colorazione scelta (data/ela.ini, chiave schema_colori), applicata prima di costruire le finestre
-            string key = "scia";
-            try { key = new Config(System.IO.Path.Combine(AppPaths.DataDir, "ela.ini")).Get("schema_colori", "scia"); } catch { }
-            if (Program.ThemeArg != null) key = Program.ThemeArg;
-            Themes.Apply(Themes.IndexOf(key));
-            Themes.FillResources(Resources);
-            RequestedThemeVariant = Pal.Light ? ThemeVariant.Light : ThemeVariant.Dark;
         }
 
         public override void OnFrameworkInitializationCompleted()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // lingua dell'interfaccia (chiave "lingua" di config.ini, condivisa con YA-MS)
-                try { Lang.Init(YAMS.Program.ScreenshotLang ?? new Config(System.IO.Path.Combine(AppPaths.DataDir, "config.ini")).Get("lingua", "")); } catch { }
+                // lingua e schema di colori (chiavi "lingua" e "tema" di config.ini, condivise con YA-MS)
+                Config cfg = null;
+                try { cfg = new Config(System.IO.Path.Combine(AppPaths.DataDir, "config.ini")); } catch { }
+                try { Lang.Init(YAMS.Program.ScreenshotLang ?? (cfg != null ? cfg.Get("lingua", "") : "")); } catch { }
+                try { Tema.Imposta(Tema.DaChiave(Program.ThemeArg ?? (cfg != null ? cfg.Get("tema", "scia") : "scia"))); } catch { }
+                Themes.FromPal();
                 desktop.MainWindow = new ElaWindow();
             }
             base.OnFrameworkInitializationCompleted();

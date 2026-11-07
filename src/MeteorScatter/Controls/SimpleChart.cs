@@ -34,11 +34,15 @@ namespace YAMS
         public string Title = "", YLabel = "", Y2Label = "";
         public string[] XLabels = new string[0];
         public int XLabelEvery = 1;
+        // seconda riga sotto l'asse x (es. ora locale) con le didascalie delle due righe a sinistra
+        public string[] XLabels2 = null;
+        public string XRow1Name = "", XRow2Name = "";
         public List<ChartSeries> Series = new List<ChartSeries>();
         public double YMaxFixed = 0, Y2MaxFixed = 0;
         public int MarkIndex = -1;   // linea verticale (es. ora attuale)
 
-        static Color Gainsboro { get { return Pal.ChartText; } }
+        // scritte degli assi e della legenda: colore dello schema scelto
+        static Color TextCol { get { return Pal.ChartText; } }
         const double F8 = 10.7, F10 = 13.3;
 
         public SimpleChart()
@@ -86,7 +90,7 @@ namespace YAMS
         public override void Render(DrawingContext ctx)
         {
             double Wd = Bounds.Width, Ht = Bounds.Height;
-            ctx.DrawRectangle(Pal.B(Pal.Back), null, new Rect(0, 0, Wd, Ht));
+            ctx.DrawRectangle(Pal.B(Pal.ChartBg), null, new Rect(0, 0, Wd, Ht));
             int n = XLabels != null ? XLabels.Length : 0;
             string[] xl = XLabels ?? new string[0];
             List<ChartSeries> series = Series ?? new List<ChartSeries>();
@@ -102,50 +106,51 @@ namespace YAMS
             ymax = YMaxFixed > 0 ? YMaxFixed : NiceMax(ymax);
             y2max = Y2MaxFixed > 0 ? Y2MaxFixed : NiceMax(y2max);
             // margini che si allargano con il carattere: titolo, scritte degli assi, etichette ruotate
-            FormattedText titleFt = Ft(Title, F10, Gainsboro, FontWeight.SemiBold);
-            double lh = Ft("0", F8, Gainsboro).Height;
+            FormattedText titleFt = Ft(Title, F10, Tema.Schema == Tema.SchemaScia ? Pal.ChartText : Pal.Fore, FontWeight.SemiBold);
+            double lh = Ft("0", F8, TextCol).Height;
             double yw = 0, y2w = 0;
             for (int i = 0; i <= 5; i++)
             {
-                yw = Math.Max(yw, Ft(Fmt(ymax * i / 5), F8, Gainsboro).Width);
-                if (any2) y2w = Math.Max(y2w, Ft(Fmt(y2max * i / 5), F8, Gainsboro).Width);
+                yw = Math.Max(yw, Ft(Fmt(ymax * i / 5), F8, TextCol).Width);
+                if (any2) y2w = Math.Max(y2w, Ft(Fmt(y2max * i / 5), F8, TextCol).Width);
             }
             double ml = Math.Max(58, 4 + (string.IsNullOrEmpty(YLabel) ? 0 : lh + 4) + yw + 8);
             double mr = Math.Max(58, 4 + (string.IsNullOrEmpty(Y2Label) ? 0 : lh + 4) + y2w + 8);
             double mt = Math.Max(30, titleFt.Height + 12);
-            double mb = Math.Max(42, lh + 28);
+            bool row2 = XLabels2 != null && XLabels2.Length > 0;
+            double mb = Math.Max(42, lh + 28) + (row2 ? lh + 2 : 0);
             double pw = Wd - ml - mr, ph = Ht - mt - mb;
             if (pw < 50 || ph < 30) return;
             Rect pr = new Rect(ml, mt, pw, ph);
 
-            IPen grid = Pal.P(Pal.Border, 1);
+            IPen grid = Pal.P(Pal.ChartGrid, 1);
             IPen axis = Pal.P(Color.FromRgb(150, 150, 150), 1);
             ctx.DrawText(titleFt, new Point(pr.Left, 6));
             for (int i = 0; i <= 5; i++)
             {
                 double y = pr.Bottom - pr.Height * i / 5.0;
                 ctx.DrawLine(grid, new Point(pr.Left, y), new Point(pr.Right, y));
-                FormattedText lab = Ft(Fmt(ymax * i / 5), F8, Gainsboro);
+                FormattedText lab = Ft(Fmt(ymax * i / 5), F8, TextCol);
                 ctx.DrawText(lab, new Point(pr.Left - lab.Width - 6, y - lab.Height / 2));
                 if (any2)
                 {
-                    FormattedText l2 = Ft(Fmt(y2max * i / 5), F8, Gainsboro);
+                    FormattedText l2 = Ft(Fmt(y2max * i / 5), F8, TextCol);
                     ctx.DrawText(l2, new Point(pr.Right + 6, y - l2.Height / 2));
                 }
             }
             // etichette degli assi verticali, ruotate
             if (!string.IsNullOrEmpty(YLabel))
-                VText(ctx, Ft(YLabel, F8, Gainsboro), 4, pr.Top + pr.Height / 2);
+                VText(ctx, Ft(YLabel, F8, TextCol), 4, pr.Top + pr.Height / 2);
             if (!string.IsNullOrEmpty(Y2Label))
             {
-                FormattedText l2 = Ft(Y2Label, F8, Gainsboro);
+                FormattedText l2 = Ft(Y2Label, F8, TextCol);
                 VText(ctx, l2, Wd - l2.Height - 4, pr.Top + pr.Height / 2);
             }
             if (n == 0) { ctx.DrawRectangle(null, axis, pr); return; }
             double bw = pr.Width / n;
             // meno scritte sull'asse x se si sovrapporrebbero (caratteri grandi o grafico stretto)
             double xw = 0;
-            foreach (string t in xl) if (t != null) xw = Math.Max(xw, Ft(t, F8, Gainsboro).Width);
+            foreach (string t in xl) if (t != null) xw = Math.Max(xw, Ft(t, F8, TextCol).Width);
             int every = Math.Max(1, XLabelEvery);
             while (every < n && bw * every < xw + 6) every += Math.Max(1, XLabelEvery);
             for (int i = 0; i < n; i++)
@@ -153,9 +158,28 @@ namespace YAMS
                 {
                     double x = pr.Left + bw * (i + 0.5);
                     ctx.DrawLine(grid, new Point(x, pr.Top), new Point(x, pr.Bottom));
-                    FormattedText lab = Ft(xl[i], F8, Gainsboro);
+                    FormattedText lab = Ft(xl[i], F8, TextCol);
                     ctx.DrawText(lab, new Point(x - lab.Width / 2, pr.Bottom + 6));
+                    if (row2 && i < XLabels2.Length && !string.IsNullOrEmpty(XLabels2[i]))
+                    {
+                        FormattedText l2 = Ft(XLabels2[i], F8, Pal.OrangeText, FontWeight.SemiBold);
+                        ctx.DrawText(l2, new Point(x - l2.Width / 2, pr.Bottom + 8 + lh));
+                    }
                 }
+            if (row2)
+            {
+                // didascalie delle due righe, allineate a destra subito prima dell'asse
+                if (!string.IsNullOrEmpty(XRow1Name))
+                {
+                    FormattedText c1 = Ft(XRow1Name, F8, TextCol);
+                    ctx.DrawText(c1, new Point(pr.Left - c1.Width - 10, pr.Bottom + 6));
+                }
+                if (!string.IsNullOrEmpty(XRow2Name))
+                {
+                    FormattedText c2 = Ft(XRow2Name, F8, Pal.OrangeText, FontWeight.SemiBold);
+                    ctx.DrawText(c2, new Point(pr.Left - c2.Width - 10, pr.Bottom + 8 + lh));
+                }
+            }
 
             using (ctx.PushClip(pr.Inflate(1)))
             {
@@ -198,7 +222,7 @@ namespace YAMS
             if (MarkIndex >= 0 && MarkIndex < n)
             {
                 double x = pr.Left + bw * (MarkIndex + 0.5);
-                ctx.DrawLine(Pal.P(Pal.Argb(200, 255, 255, 255), 1, Pal.Dot), new Point(x, pr.Top), new Point(x, pr.Bottom));
+                ctx.DrawLine(Pal.P(Pal.A(200, Pal.Fore), 1, Pal.Dot), new Point(x, pr.Top), new Point(x, pr.Bottom));
             }
             DrawLegend(ctx, series, pr);
         }
@@ -217,7 +241,7 @@ namespace YAMS
             foreach (ChartSeries s in series) if (s.Values != null && !string.IsNullOrEmpty(s.Name)) items.Add(s);
             if (items.Count == 0) return;
             double S = UiScale.Font;
-            double sample = 22 * S, gap = 18 * S, pad = 6, rowH = Math.Max(18, Ft("Ag", F8, Gainsboro).Height + 4);
+            double sample = 22 * S, gap = 18 * S, pad = 6, rowH = Math.Max(18, Ft("Ag", F8, TextCol).Height + 4);
             double maxW = pr.Width - 8;
             // disposizione su una o piu' righe
             List<FormattedText> fts = new List<FormattedText>();
@@ -225,7 +249,7 @@ namespace YAMS
             double x = 0, y = 0, boxW = 0;
             foreach (ChartSeries s in items)
             {
-                FormattedText ft = Ft(s.Name, F8, Gainsboro);
+                FormattedText ft = Ft(s.Name, F8, TextCol);
                 double w = sample + 6 + ft.Width;
                 if (x > 0 && x + w > maxW - 2 * pad) { x = 0; y += rowH; }
                 fts.Add(ft); pos.Add(new Point(x, y));
@@ -234,7 +258,7 @@ namespace YAMS
             }
             double bx = pr.Left + 4, by = pr.Top + 4;
             Rect box = new Rect(bx, by, boxW + 2 * pad, y + rowH + 2 * pad - 4);
-            ctx.DrawRectangle(Pal.B(Pal.A(235, Pal.Panel3)), Pal.P(Pal.Border, 1), box, 3, 3);
+            ctx.DrawRectangle(Pal.B(Pal.A(235, Pal.Card)), Pal.P(Pal.Border, 1), box, 3, 3);
             for (int i = 0; i < items.Count; i++)
             {
                 ChartSeries s = items[i];
