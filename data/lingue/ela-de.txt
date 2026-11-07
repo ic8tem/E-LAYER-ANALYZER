@@ -370,3 +370,48 @@ RELAZIONE TECNICA	TECHNISCHER BERICHT
 Le scelte che hanno portato alla realizzazione del programma	Die Entscheidungen, die zur Entwicklung des Programms geführt haben
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	Hinweis: Sporadic-E gilt nicht für 432 MHz (siehe Zusammenfassung der Berechnungsentscheidungen).
 Comandi dopo il login	Befehle nach dem Login
+Filtri degli spot	Spot-Filter
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Die Datenerfassung ist eine einzige für das ganze Programm: Jeder von den Telnet-Sitzungen empfangene Spot durchläuft diese Filter und geht an die Reiter der einzelnen Ausbreitungsarten.
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	Der Meteorscatter-Filter befindet sich im Reiter METEOR SCATTER.
+Meteor scatter	Meteorscatter
+E-sporadico	Sporadic-E
+Aurora	Aurora
+Prova dei filtri	Filtertest
+Filtro degli spot di E-sporadico	Filter für Sporadic-E-Spots
+Scritte di altra propagazione	Kennungen anderer Ausbreitung
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	Spots, die eine dieser Kennungen zwischen < > enthalten, gehen nicht in Sporadic-E ein: Sie dienen Meteorscatter, Aurora oder Tropo.
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	Ausgeschlossen sind auch Spots, die der Filter des Unterreiters Meteorscatter als Meteorscatter erkennt, sowie solche mit angegebener Betriebsart MS, FAI, AU, TR, EME oder TEP.
+Regola dei 144 MHz (regola dell'autore)	144-MHz-Regel (Regel des Autors)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	Regel anwenden: Auf 144 MHz gilt Sporadic-E erst ab der Mindestentfernung, und ein einzelner Spot wird erst nach Bestätigung gezeichnet
+Distanza minima in 144 MHz (km)	Mindestentfernung auf 144 MHz (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	Bestätigung durch einen zweiten 144-MHz-Spot über dieselbe Wolke:
+entro (minuti)	innerhalb von (Minuten)
+nube entro (km)	Wolke innerhalb von (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	Oder durch einen 50-MHz-Spot mit kurzem Sprung in der Nähe:
+salto corto fino a (km)	kurzer Sprung bis (km)
+Regola transequatoriale (regola dell'autore)	Transäquatoriale Regel (Regel des Autors)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	In Richtung Afrika (mit Madagaskar; ohne Kanaren, Madeira, Kap Verde und Arabische Halbinsel) und Südamerika ist die Verbindung transäquatorial, wenn der Mittelpunkt im angegebenen Inklinationsband liegt, außer der Spot gibt ES an
+fascia di inclinazione ± (gradi)	Inklinationsband ± (Grad)
+Ripristina le regole dell'autore	Regeln des Autors wiederherstellen
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	Die Filter gelten für den Reiter SPORADIC-E und für beide BENCHMARK; die Werte werden in den Einstellungen gespeichert.
+Filtro degli spot di F.A.I.	Filter für F.A.I.-Spots
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	Ein Spot ist F.A.I., wenn die angegebene Betriebsart FAI ist oder der Text eines dieser Wörter enthält (auch ohne < >, in Groß- oder Kleinschreibung):
+Spot sulla mappa degli ultimi (minuti)	Spots auf der Karte der letzten (Minuten)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I.-Spots werden im Reiter F.A.I. zusammen mit der Berechnung des Scatter-Points gezeichnet.
+Filtro degli spot di aurora	Filter für Aurora-Spots
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	Ein Spot ist Aurora, wenn die angegebene Betriebsart AU ist oder der Text eine dieser Kennungen zwischen < > enthält (Regel des Autors: <AU> und <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	Aurora-Spots gehen nicht in Sporadic-E ein und werden im Reiter AURORA mit der Berechnung des Scatter-Points und der Antennenrichtung beider Stationen gezeichnet.
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	Cluster-Zeile eingeben oder einfügen: Das Programm zeigt, wie die Filter sie einordnen.
+La riga non è uno spot (deve iniziare con DX de).	Die Zeile ist kein Spot (sie muss mit DX de beginnen).
+Banda: {0}   frequenza: {1:F1} kHz	Band: {0}   Frequenz: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	Lokaler Filter: Zeile verworfen (außerhalb des Bereichs 27990 kHz - 145 MHz)
+Locator: {0} - {1}	Locator: {0} - {1}
+Distanza: {0:F0} km	Entfernung: {0:F0} km
+Propagazione dichiarata: {0}	Angegebene Ausbreitung: {0}
+Meteor scatter: {0}	Meteorscatter: {0}
+Aurora: {0}	Aurora: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	Transäquatorial: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(verworfen: unter {0:F0} km auf 144 MHz)
+(in 144 MHz si disegna solo con una conferma)	(auf 144 MHz nur mit Bestätigung gezeichnet)
+E-sporadico: {0}	Sporadic-E: {0}

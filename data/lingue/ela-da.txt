@@ -370,3 +370,48 @@ RELAZIONE TECNICA	TEKNISK RAPPORT
 Le scelte che hanno portato alla realizzazione del programma	De valg, der førte frem til programmet
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	Bemærk: sporadisk E gælder ikke for 432 MHz (se Resumé af beregningsvalgene).
 Comandi dopo il login	Kommandoer efter login
+Filtri degli spot	Spotfiltre
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Dataindsamlingen er fælles for hele programmet: hvert spot, der modtages fra telnet-sessionerne, går gennem disse filtre og videre til fanerne for hver udbredelsesform.
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	Meteor scatter-filteret ligger i fanen METEOR SCATTER.
+Meteor scatter	Meteor scatter
+E-sporadico	Sporadisk E
+Aurora	Nordlys
+Prova dei filtri	Test af filtre
+Filtro degli spot di E-sporadico	Filter for sporadisk E-spots
+Scritte di altra propagazione	Mærker for anden udbredelse
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	Spots, der indeholder et af disse mærker mellem < >, går ikke til sporadisk E: de bruges til meteor scatter, nordlys eller tropo.
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	Udelukket er også spots, som filteret i underfanen Meteor scatter genkender som meteor scatter, samt spots med angivet mode MS, FAI, AU, TR, EME eller TEP.
+Regola dei 144 MHz (regola dell'autore)	144 MHz-regel (forfatterens regel)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	Anvend reglen: på 144 MHz gælder sporadisk E kun over minimumsafstanden, og et enkelt spot tegnes først, når det er bekræftet
+Distanza minima in 144 MHz (km)	Minimumsafstand på 144 MHz (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	Bekræftelse med et andet 144 MHz-spot på samme sky:
+entro (minuti)	inden for (minutter)
+nube entro (km)	sky inden for (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	Eller med et 50 MHz-spot med kort hop i nærheden:
+salto corto fino a (km)	kort hop op til (km)
+Regola transequatoriale (regola dell'autore)	Transækvatorial regel (forfatterens regel)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	Mod Afrika (inkl. Madagaskar; uden De Kanariske Øer, Madeira, Kap Verde og Den Arabiske Halvø) og Sydamerika er forbindelsen transækvatorial, hvis midtpunktet ligger i det angivne inklinationsbånd, medmindre spottet angiver ES
+fascia di inclinazione ± (gradi)	inklinationsbånd ± (grader)
+Ripristina le regole dell'autore	Gendan forfatterens regler
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	Filtrene gælder for fanen SPORADIC-E og for begge BENCHMARK; værdierne gemmes i indstillingerne.
+Filtro degli spot di F.A.I.	Filter for F.A.I.-spots
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	Et spot er F.A.I., hvis den angivne mode er FAI, eller hvis teksten indeholder et af disse ord (også uden < >, med store eller små bogstaver):
+Spot sulla mappa degli ultimi (minuti)	Spots på kortet fra de sidste (minutter)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I.-spots tegnes i fanen F.A.I. sammen med beregningen af scatter point.
+Filtro degli spot di aurora	Filter for nordlys-spots
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	Et spot er nordlys, hvis den angivne mode er AU, eller hvis teksten indeholder et af disse mærker mellem < > (forfatterens regel: <AU> og <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	Nordlys-spots går ikke til sporadisk E og tegnes i fanen AURORA med beregningen af scatter point og antenneretningen for begge stationer.
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	Skriv eller indsæt en clusterlinje: programmet viser, hvordan filtrene klassificerer den.
+La riga non è uno spot (deve iniziare con DX de).	Linjen er ikke et spot (den skal begynde med DX de).
+Banda: {0}   frequenza: {1:F1} kHz	Bånd: {0}   frekvens: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	Lokalt filter: linje kasseret (uden for området 27990 kHz - 145 MHz)
+Locator: {0} - {1}	Lokator: {0} - {1}
+Distanza: {0:F0} km	Afstand: {0:F0} km
+Propagazione dichiarata: {0}	Angivet udbredelse: {0}
+Meteor scatter: {0}	Meteor scatter: {0}
+Aurora: {0}	Nordlys: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	Transækvatorial: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(kasseret: under {0:F0} km på 144 MHz)
+(in 144 MHz si disegna solo con una conferma)	(på 144 MHz tegnes kun med en bekræftelse)
+E-sporadico: {0}	Sporadisk E: {0}
