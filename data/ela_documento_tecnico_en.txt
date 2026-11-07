@@ -1,0 +1,85 @@
+TITLE|How E-LAYER ANALYZER calculates
+SUB|Technical document - by Costantino IC8TEM - version 0.1.0, November 2026. Numbers in square brackets refer to the SOURCES tab.
+H1|1. Introduction
+H2|1.1 Purpose
+P|E-LAYER ANALYZER analyses the VHF propagation modes involving the E layer: sporadic-E (including extra-continental multi-hop), F.A.I. (field-aligned irregularities), meteor scatter (with the YA-MS program) and radio aurora. This document describes each calculation and where it comes from.
+H2|1.2 Labels
+TAG|FONTE|the step follows a cited source.
+TAG|RILIEVO|check made on the program or comparison with a real case.
+TAG|SCELTA|choice made by the program, to be confirmed by on-air experience.
+H1|2. Common geometry
+H2|2.1 Earth, locator, great circle
+TAG|FONTE|Spherical Earth with radius r = 6372.7955 km, as in the F.A.I. article [1] and in YA-MS [5].
+TAG|SCELTA|Stations are placed at the centre of the locator square (4, 6 or 8 characters). Distance, azimuth, intermediate points and circles use the great-circle formulas:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevation towards a point in the E layer
+TAG|FONTE|Formula (2) of the F.A.I. article [1], with x = d / r, H height of the point, h height of the station. The program uses the equivalent two-argument form, exact on the spherical Earth:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|With H = 110 km the program gives 35.3° at 150 km, like IW1AZJ (35°) on IC8FAX's page [2]; at 800 km it gives 4.2° against the 6° stated for IC8CQF (the distance on the page is approximate: 6° corresponds to about 680 km).
+H2|2.3 Hop in the layer and secant law
+P|For a ray leaving at elevation e and meeting the layer at height H, the angle of incidence φ (from the vertical) and the ground distance of the reflection point are:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [in radians]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|The foEs given by the program is a minimum threshold: the spot only says that frequency f got through. The sec φ factor takes the Earth's curvature into account.
+TAG|RILIEVO|The experience reported by IK3XTV [3] indicates foEs of 12-15 MHz for 144 MHz: the pure secant law gives higher values (about 25-28 MHz over 2000 km). The figure should be read as a relative comparison between clouds, not as an absolute value.
+H1|3. Sporadic-E
+H2|3.1 Number of hops
+TAG|FONTE|IK3XTV table [3]: single hop 500-650 / 1500-2000 / 2200-2400 km (minimum / optimum / maximum); double hop 2800-3000 / 3200-4000 / 4400-5000 km; triple hop optimum 4800-6400 km, maximum 6900 km.
+TAG|SCELTA|The number of hops n is taken from the table: n = 1 up to 2400 km, n = 2 up to 5000 km, n = 3 up to 6900 km, beyond that n = D / 2300 km rounded up. Below 500 km the spot is not considered sporadic-E. Between 2400 and 2800 km the program flags the "transition zone".
+H2|3.2 First hop of both stations
+TAG|SCELTA|Equal-hop hypothesis: the reflection points lie along the great circle at fractions (2k − 1) / (2n) of the path. The spotter's first hop is point k = 1 (orange), the DX's first hop is point k = n (purple); with a single hop they coincide at the midpoint (yellow).
+TAG|FONTE|Short first hop hypothesis: in multi-hop, the author (IC8TEM) has experience of a short first hop within 1200 km of his QTH [4]. The program draws (open circles) the reflection point halfway along each station's short hop; the length of the short hop is chosen in the tab (1200 km by default).
+H2|3.3 Es clouds on Maidenhead squares
+TAG|SCELTA|The reflection points (midpoint for a single hop, first hops for multi-hop) are collected in 4-character Maidenhead squares (2° × 1°). For each square the highest minimum foEs among the spots falling in it is kept; the colour goes from blue (< 5 MHz) to red (> 20 MHz).
+P|For the user's own station the program computes the MUF through each cloud at distance d, with a hop of length 2d, only if the cloud is within single-hop range:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|"Es clouds" table: in red the clouds that would give MUF ≥ 144 MHz, in orange ≥ 70 MHz, in yellow ≥ 50 MHz.
+H2|3.4 Sporadic-E does not apply to 432 MHz
+TAG|FONTE|The MUF of mid-latitude sporadic-E reaches 150 MHz and higher (Whitehead [23]); very dense clouds are needed to bend grazing rays up to 200 MHz (IK3XTV [22]). The ARRL records [24] list sporadic-E contacts only on 50 and 144 MHz, none on 222 and 432 MHz.
+TAG|SCELTA|For this reason the SPORADIC-E tab analyses only 28, 50, 70 and 144 MHz: 432 MHz spots are never treated as sporadic-E (some generic sources, including ones produced by artificial intelligence, claim otherwise without documentation).
+H1|4. F.A.I. and aurora: field-aligned scatter
+H2|4.1 The magnetic field
+TAG|FONTE|The field is computed with the IGRF-14 model [16] (spherical harmonics up to degree 13, 2025-2030 coefficients interpolated to the date). K9SE's SE-PROP [9] likewise used a spherical-harmonic model (WMM).
+TAG|RILIEVO|The calculation agrees with ppigrf within 1 nT. With the simple dipole the IC8FAX - G4LOH check finds no scatter point at all; with IGRF-14 it does: the full model is essential.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, height 105 km, 4/3 refraction): most likely scatter point JP01AK (61.4° N 0.1° E, off the Shetlands), deviation 0.97°, QTF 11° (el. 0.5°) from IO70VJ and 299° (el. 7.6°) from JO59BC. Without refraction: IP70RP, deviation 1.86°, QTF 359° and 288°.
+H2|4.2 The reflection condition
+TAG|FONTE|The signal scattered by a field-aligned irregularity leaves on a cone with its axis along B; stations on supplementary contours can make contact (a1 + a2 = 180° [1], ±c contours of K9SE/K4GFG [2] [9] [10]).
+P|For each station X, c(X) is computed: the signed angle between the line of sight X → SP and the plane perpendicular to B at the scatter point SP. The deviation from the reflection condition for the A-B contact is:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|For the echo back to the same station (backscatter) the condition becomes ray perpendicular to B, with a tolerance of ±2-3° (Lange-Hesse [12]); intensity drops by about 3-5 dB per degree of offset (Jackel et al. [13]).
+H2|4.3 "Trail" view (A-B pair)
+TAG|SCELTA|On a 0.2° grid at height H the program looks for points seen by both stations with elevation ≥ minimum and with dev ≤ 2.5°. The colour classes are 0-1°, 1-1.5°, 1.5-2°, 2-2.5° (Aurora QTF style [11]). The top-right box shows QTF and elevation of A (red) and B (green) towards each point of the trail.
+TAG|SCELTA|Most likely scatter point: deviation ≤ 1° and minimum sum of the squared distances (lowest path loss); in aurora, points inside the oval are preferred.
+TAG|RILIEVO|Checks requested by the author (IGRF-14, H = 110 km, 4/3 refraction, program results): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: trail from the Bay of Biscay to the Adriatic along the 44th parallel, most likely scatter point JN44GH (44.3° N 8.6° E, above Genoa), deviation 0.97°, QTF 314° (el. 7.8°) from Capri and 77° (el. 9°) from F6DRO; the trail passes 143 km from Geneva. IC8FAX - G4LOH (IO70JC), 1843 km: trail over south-western Germany and Belgium, most likely scatter point JN49FR (49.7° N 8.5° E), deviation 0.88°, QTF 338° (el. 1.9°) from Capri and 87° (el. 3°) from G4LOH; the trail passes 28 km from the known Brussels scatter point. Without refraction the trails get shorter (G4LOH: elevations 0.5° and 2.1°). IC8FAX - FA1MXE (JN05GQ, first F.A.I. QSO in 1990 via Geneva at 330°): the trail passes near Geneva.
+TAG|RILIEVO|DL5MCG case [6]: beacon DB0FAI (JN58IC) - Dresden via Sheffield, deviation 0.3° at 110 km.
+TAG|SCELTA|Refraction: for elevations and horizons in the F.A.I. and AURORA views the equivalent Earth radius k · r with k = 4/3 (standard atmosphere) is used by default; it can be turned off with the "Refraction" checkbox. Ground distances and the reflection condition are still computed on the true geometry.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Calculation not possible: if according to the model no point meets the condition within 2.5° (Trail view) or the reflection point is below the station's horizon (Isoflection view), the program shows the "Calculation not possible" popup and no other result.
+H2|4.4 "Isoflection" view (isoflection loci): checking the reflection point
+TAG|FONTE|This is the typical geometric construction of F.A.I. and aurora for checking whether the chosen reflection point is right (isoflection lines of SE-PROP [9], AuroReflex [11], supplementary contours of K9SE/K4GFG [2] [10]).
+P|For the reflection point SP and for every ground point G within the horizon of SP the program computes the sum of the contours; the line S = 0 is the locus of the stations that receive A through SP:
+EQ|S(G) = c(A) + c(G)        plotted levels: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|In the dark-background schemes the classes are coloured bands (red 0°, orange 1°, yellow 2°, green 4°, light blue 8°, blue 16°); in the light schemes they are thick lines (contour lines obtained with the marching squares method), thicker for the levels closer to 0°.
+TAG|SCELTA|The program proposes the most likely scatter point ("Check the recommended point" button), but the user can choose any other point with a left click on the map; a right click moves station B. Verdict on the A-B pair: satisfactory within 1°, acceptable within 2.5° (Lange-Hesse tolerance [12]), not satisfactory beyond. If the point is below the horizon of either station the "Calculation not possible" popup appears.
+TAG|SCELTA|At the top: azimuth and elevation of A and B towards the point; green circle = horizon of the stations at the layer height, red circle = area from which the point is visible.
+H2|4.5 Aurora
+TAG|FONTE|OVATION Prime auroral oval, Kp and solar wind from NOAA SWPC [15], updated every 5 minutes and saved in data/swpc. The 1° grid is smoothed with bilinear interpolation on 0.5° cells.
+TAG|SCELTA|Recommended heading, for both stations: along each station's perpendicularity line (echo perpendicular to B, tolerance 1.5°, height 105 km) the point with the highest oval probability is chosen. The 105 km height lies between Jackel's 104 km [13] and Lange-Hesse's 110 km [12].
+TAG|FONTE|Operating rules: point between north and east, starting from about 45°; Doppler up to ~2 kHz at 144 MHz, typical range ~1300 km, maximum ~2000 km (G3WPO [14]).
+H1|5. Data collection
+H2|5.1 Telnet sessions
+TAG|SCELTA|Three sessions: DX cluster of your choice, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster with PSKReporter spots (e.g. HamAlert [19]). Automatic login with the callsign, initial commands separated by semicolons, reconnection after 30 s.
+H2|5.2 Reading the spots
+TAG|SCELTA|The line "DX de SPOTTER: FREQ DXCALL comment HHMMZ [LOC]" is read with a regular expression (not by fixed columns). From the comment the program reads locators and mode in the form "JN70CN<ES>JO62QM" (first locator = spotter, second = DX), the propagation mode (ES, FAI, AU, MS, TR, EME, F2, TEP), the S/N ratio and the emission mode. Missing locators are looked up in CALL3 [21]; 6-character locators read in comments are added to data/call3_nuovi.txt.
+TAG|SCELTA|Archive: one CSV file per day in data/spot; the latest spots are kept in memory (at most 50000). With RBN and PSKReporter normally only spots from 28 MHz up are saved.
+H1|6. Log ADIF
+TAG|FONTE|Port of LoTW Grid Map v2 [25]: the LoTW report (downloaded with username and password, which is never saved) and the log's ADIF files are merged by callsign, band, date and time; confirmations are combined.
+TAG|SCELTA|Only bands from 28 MHz up, each as a single band, with no grouping. Colours: orange = worked, blue = confirmed by QSL, green = confirmed via LoTW. Filter on the propagation mode (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Colour schemes
+TAG|FONTE|Besides YA-MS's "Meteor trail", the program offers all the YAEC schemes [26]: light, blue night, black and eight pastels. The scheme is chosen at the top right and the program restarts.
+H1|8. Limits
+LI|Stations at the centre of the locator square: with 4-character locators the error reaches ~80 km.
+LI|The foEs from spots is a minimum threshold, and the secant law overestimates the foEs required at VHF (see 2.3).
+LI|The "most likely" scatter point is a criterion of the program: the whole trail is the physical result.
+LI|The OVATION oval is a probability model for optical aurora, used as an indicator for radio aurora.
