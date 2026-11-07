@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER의 계산 방법
-SUB|기술 문서 - Costantino IC8TEM 작성 - 버전 0.4.3, 2026년 11월. 대괄호 안의 번호는 출처(FONTI) 탭을 가리킵니다.
+SUB|계산 선택 요약 - Costantino IC8TEM 작성 - 버전 0.4.3, 2026년 11월. 대괄호 안의 번호는 출처(FONTI) 탭을 가리킵니다.
 H1|1. 소개
 H2|1.1 목적
 P|E-LAYER ANALYZER는 E층이 관여하는 VHF 전파 모드를 분석합니다: 스포라딕 E(대륙 간 멀티홉 포함), F.A.I.(자기력선 정렬 불규칙체), 유성 산란(YA-MS 프로그램 사용), 전파 오로라. 이 문서는 각 계산과 그 근거를 설명합니다.
@@ -108,7 +108,7 @@ TAG|FONTE|색 테마는 YAEC [26]를 따르는 YA-MS 1.5.0의 것입니다: 밝�
 H1|8. 유성 산란 (YA-MS 1.5.1)과 언어
 TAG|FONTE|METEOR SCATTER 탭에는 YA-MS 1.5.1 전체 [5]가 그 문서 "효율 - 설명" 및 출처와 함께 들어 있습니다. tools/sync_yams.py 스크립트는 YA-MS의 새 버전을 복사하여 계산은 바꾸지 않고 패널로 변환합니다.
 TAG|FONTE|YA-MS 1.4.0은 실시간 유성우 탭(Global Meteor Network가 측정한 ZHR과 CMOR 레이더의 복사점 지도)과 데이터 소스 지도 탭(국을 기준으로 한 Collm, Sodankylä, GRAVES, CMOR의 위치)을 추가했고, YA-MS 1.5.0은 데이터 수집(DX cluster, RBN, PSKReporter의 유성 산란 스팟, 필터 MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>)을 추가합니다. E-LAYER ANALYZER 안에서 데이터 수집 탭은 자체 telnet 세션을 열지 않습니다. DATA COLLECTION 세션의 줄을 받으므로 같은 호출부호로 이중 로그인이 일어나지 않습니다. YA-MS의 출처는 YA-MS 안에 인용되어 있습니다.
-TAG|SCELTA|언어: 28개, YAEC의 모든 언어에 덴마크어와 타갈로그어 추가 (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어) - 인터페이스(data/lingue/ela-<코드>.txt), 기술 문서, 출처에 적용. F.A.I./오로라 보기에서 스캐터 포인트의 궤적은 모든 번역에서 "Scatter trail"이라고 부릅니다. 상태 표시줄에는 사용 중인 자기장 모델(IAGA의 IGRF-14 [16])이 표시됩니다.
+TAG|SCELTA|언어: 28개, YAEC의 모든 언어에 덴마크어와 타갈로그어 추가 (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어) - 인터페이스(data/lingue/ela-<코드>.txt), 문서(계산 선택 요약, 사용 설명서, 기술 보고서), 출처에 적용. F.A.I./오로라 보기에서 스캐터 포인트의 궤적은 모든 번역에서 "Scatter trail"이라고 부릅니다. 상태 표시줄에는 사용 중인 자기장 모델(IAGA의 IGRF-14 [16])이 표시됩니다.
 H1|9. 한계
 LI|국은 로케이터 그리드의 중심에 놓습니다: 4자리 로케이터에서는 오차가 ~80 km에 이릅니다.
 LI|스폿에서 구한 foEs는 최소 문턱값이며, 시컨트 법칙은 VHF에서 필요한 foEs를 과대평가합니다(2.3 참조).

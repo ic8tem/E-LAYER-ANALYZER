@@ -18,7 +18,7 @@
 | [AURORA](Aurora-ja) | NOAA のオーロラオーバル、Kp、太陽風、オーロラの Scatter trail と等反射線、推奨方向 |
 | [DATA COLLECTION](Data-Collection-ja) | 3 つの Telnet セッション (DX クラスター、RBN、PSKReporter 対応の DM4X)、収集スポット、CALL3 アーカイブ |
 | [LOG ADIF](Log-ADIF-ja) | 28 MHz 以上のバンドごとの交信済・確認済グリッド (自分の ADIF または LoTW から) |
-| [出典と技術文書](Sources-and-Technical-Document-ja) | すべての出典とすべての式 (Word にエクスポート可能) |
+| [出典、計算上の選択の概要、ユーザーマニュアル、技術報告書](Sources-and-Technical-Document-ja) | 出典、式と計算上の選択、詳細なユーザーマニュアル、技術報告書 (Word にエクスポート可能) |
 
 ## はじめに
 

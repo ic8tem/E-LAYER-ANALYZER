@@ -1,5 +1,5 @@
 TITLE|How E-LAYER ANALYZER calculates
-SUB|Technical document - by Costantino IC8TEM - version 0.4.3, November 2026. Numbers in square brackets refer to the SOURCES tab.
+SUB|Summary of the calculation choices - by Costantino IC8TEM - version 0.4.3, November 2026. Numbers in square brackets refer to the SOURCES tab.
 H1|1. Introduction
 H2|1.1 Purpose
 P|E-LAYER ANALYZER analyses the VHF propagation modes involving the E layer: sporadic-E (including extra-continental multi-hop), F.A.I. (field-aligned irregularities), meteor scatter (with the YA-MS program) and radio aurora. This document describes each calculation and where it comes from.
@@ -108,7 +108,7 @@ TAG|FONTE|The colour schemes are those of YA-MS 1.5.0, which follow YAEC [26]: L
 H1|8. Meteor scatter (YA-MS 1.5.1) and languages
 TAG|FONTE|The METEOR SCATTER tab contains the complete YA-MS 1.5.1 [5], with its own "Efficiency - explanation" document and sources. The script tools/sync_yams.py copies every new YA-MS version and turns it into a panel without changing its calculations.
 TAG|FONTE|YA-MS 1.4.0 added the tabs Live showers (ZHR measured by the Global Meteor Network and radiant maps from the CMOR radar) and Sources map (where Collm, Sodankylä, GRAVES and CMOR are relative to the station); YA-MS 1.5.0 adds Data collection (meteor scatter spots from DX cluster, RBN and PSKReporter with the filter MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). Inside E-LAYER ANALYZER, Data collection does not open telnet sessions of its own: it receives the lines from the DATA COLLECTION sessions, so there are no double logins with the same callsign. The sources of YA-MS are cited inside YA-MS.
-TAG|SCELTA|Languages: 28, all those of YAEC plus Danish and Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for the interface (data/lingue/ela-<code>.txt), the Technical document and the Sources. In the F.A.I./aurora view the trail of scatter points is called "Scatter trail" in every translation. The status bar shows the magnetic model in use (IAGA IGRF-14 [16]).
+TAG|SCELTA|Languages: 28, all those of YAEC plus Danish and Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for the interface (data/lingue/ela-<code>.txt), for the documents (Summary of the calculation choices, User manual, Technical report) and for the Sources. In the F.A.I./aurora view the trail of scatter points is called "Scatter trail" in every translation. The status bar shows the magnetic model in use (IAGA IGRF-14 [16]).
 H1|9. Limits
 LI|Stations at the centre of the locator square: with 4-character locators the error reaches ~80 km.
 LI|The foEs from spots is a minimum threshold, and the secant law overestimates the foEs required at VHF (see 2.3).

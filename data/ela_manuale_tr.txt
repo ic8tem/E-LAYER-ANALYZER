@@ -1,0 +1,87 @@
+TITLE|E-LAYER ANALYZER kullanım kılavuzu
+SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.4.3, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
+H1|1. Başlamadan önce
+H2|1.1 Program ne yapar
+P|E-LAYER ANALYZER, iyonosferin E katmanından geçen VHF yayılım modlarını incelemek için gereken araçları tek bir programda toplar: çok atlamalı ve kıtalararası olanlar dahil sporadik E, F.A.I. (manyetik alana hizalı düzensizlikler), entegre YA-MS programıyla meteor scatter ve radyo aurorası. Gerçek zamanlı DX cluster spot'ları ve ADIF logları üzerinde çalışır ve her sonucu pencerenin üçte ikisini kaplayan bir haritada gösterir; veriler ve hesaplar sağdaki üçte birlik bölümdedir.
+H2|1.2 Kurulum ve veri klasörü
+P|Program Windows (64 ve 32 bit), Linux, Raspberry Pi (ARM64) ve Mac (Apple Silicon ve Intel) üzerinde çalışır. GitHub deposunun Releases sayfasından indirilir: Windows için bir kurulum programı ve .zip dosyasında taşınabilir bir sürüm; Linux ve Raspberry Pi için kurulum betiğiyle birlikte bir .tar.gz arşivi; Mac için bir .dmg kalıbı vardır.
+LI|Programın tüm verileri programın yanındaki data klasöründe durur: ayarlar (config.ini), CALL3 arşivi, manyetik alan katsayıları, loglar, indirilen NOAA verileri, toplanan spot'lar. AppData'ya ya da diğer sistem klasörlerine hiçbir şey yazılmaz.
+LI|Programı başka bir bilgisayara taşımak için klasörünü kopyalamak yeterlidir; başlangıç ayarlarına dönmek için data/config.ini dosyasını silmek yeterlidir.
+LI|LoTW parolası hiçbir zaman kaydedilmez; yalnızca kullanıcı adı hatırlanabilir.
+H2|1.3 Üst çubuk
+P|Sol üstte kendi çağrı işaretiniz, lokatörünüz (4, 6 ya da 8 karakter) ve anten yüksekliği metre olarak yazılır; Uygula düğmesi bunları onaylar ve tüm sekmeler güncellenir. Sağ üstte UTC saati, renklendirme seçimi (YAEC'nin tüm şemaları: Açık, Gece, Siyah, sekiz pastel ve Meteor izi) ve dil seçimi (28 dil) bulunur. Renklendirme ya da dil değiştirildiğinde pencere toplanan veriler kaybolmadan hemen yeniden oluşturulur.
+H2|1.4 Durum çubuğu
+P|Altta durum çubuğu CALL3 arşivinde kaç çağrı işareti bulunduğunu, bellekte kaç spot olduğunu ve kullanılan manyetik modeli (dönemiyle birlikte IGRF-14) gösterir. Bellekteki spot'lar program her kapatıldığında silinir: her oturum eski spot'lar olmadan yeniden başlar.
+H2|1.5 Haritalar
+P|Tüm haritalar aynı şekilde kullanılır: fare tekerleği yakınlaştırır ya da uzaklaştırır, sol tuşla sürüklemek görünümü kaydırır, sol tık sekmeye göre bir nokta, bir spot ya da bir yol seçer. Sağ üstte imlecin altındaki koordinatlar ve 6 karakterlik lokatör görünür; azimutal haritalarda ayrıca merkezden mesafe ve azimut da görünür. Maidenhead alanları ve kareleri ızgarası yakınlaştırdıkça sıklaşır.
+H1|2. Veri toplama (DATA COLLECTION)
+H2|2.1 Üç telnet oturumu
+P|DATA COLLECTION sekmesi aynı anda en fazla üç telnet bağlantısı açar: seçilen bir DX cluster (başlangıçta VHF filtreleriyle ON0DXK), Reverse Beacon Network (FT8 için port 7001, CW ve RTTY için 7000) ve PSKReporter spot'larını veren DM4X kümesi (dm4x.ddns.net, port 8500).
+LI|Sunucu ve Port: kümenin adresi. Giriş: erişim için çağrı işareti (boşsa üst çubuktaki kullanılır). Kontroller: oturum açtıktan sonra gönderilecek komutlar, noktalı virgülle ayrılmış (örneğin bant filtreleri).
+LI|Bağlan ve Bağlantıyı kes oturumu açar ve kapatır; Yeniden bağlan bir kopmadan sonra oturumu kendiliğinden yeniden açar; Açılışta bağlan oturumu program başlarken açar.
+LI|Konsol alınan satırları gösterir; alttaki kutuya kümeye gönderilecek komutlar yazılabilir (örneğin sh/dx 20) ve Gönder ile ya da Enter tuşuyla onaylanır.
+H2|2.2 Yerel filtre
+P|Başlangıçta işaretli olan üstteki kutu yerel filtreyi etkinleştirir: frekansı 27990,0 kHz'in altında ya da 145 MHz'in üstünde olan "DX de" satırları atılır, konsolda görünmez ve saklanmaz. Özellikle HF'de çok sayıda spot gönderen RBN ve PSKReporter ile kullanışlıdır. Kutunun işareti kaldırılırsa her şey geçer.
+H2|2.3 Program spot'ları nasıl okur
+P|Program her "DX de" satırından spotter'ı, frekansı, DX'i, yorumu, saati ve, varsa, yorumda JN70CN<ES>JO62QM biçiminde yazılmış lokatörleri ve yayılım modunu çıkarır (ilk lokatör spotter'ın, ikincisi DX'indir; <>, > ve parantezli biçimler de kabul edilir).
+LI|Eksik lokatörler CALL3 arşivinde aranır; kesin olmayan lokatörler (6 karakterden az) varsa CALL3'teki 6 karakterlik lokatörle değiştirilir.
+LI|Metninde <MS>, <AU>, <AUR>, <TR>, <AS> ya da <ACS> bulunan spot'lar sporadik E için kullanılmaz: meteor scatter, aurora, tropo ya da aircraft scatter içindir.
+LI|YA-MS'te olduğu gibi, MS'e özgü frekans pencerelerinde (50190-50300, 70100-70400, 144290-144399 kHz) başka bir yayılım ibaresi taşımayan spot'lar ile MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M modlarındaki ya da <MS> içeren spot'lar meteor scatter spot'udur.
+LI|<AU> ya da <AUR> içeren spot'lar AURORA sekmesine, FAI içerenler F.A.I. sekmesine gider.
+H2|2.4 Toplanan spot'lar ve CALL3 arşivi
+P|Toplanan spot'lar sayfası son spot'ları bant ve kaynak filtresiyle listeler; Spot klasörünü aç düğmesi data/spot klasörünü açar. CALL3 sayfası çağrı işareti -> lokatör arşivini (JTDX/WSJT biçimi) gösterir: bir çağrı işareti aranabilir, arşiv yeniden yüklenebilir ya da kullanılanın yerine geçen yeni bir CALL3.TXT dosyası içe aktarılabilir (eskisi yedek kopya olarak kalır).
+H1|3. Sporadik E (SPORADIC-E)
+H2|3.1 Harita
+P|Harita menüsü üç görünüm arasında seçim yapar. Azimutal - tek atlama: kendi istasyonunuzu merkez alan, 2500 km sabit yarıçaplı ve IK3XTV tablosunun [3] bölgelerini (en az 500 km, en uygun 1500-2000 km, en çok 2400 km) gösteren harita. Azimutal - en büyük mesafe (çok atlama): çok atlamanın gelişimini izlemek için 300 ile 20000 km arasında En büyük mesafe kaydırıcısı ve ikili (5000 km) ile üçlü atlama (6900 km) sınırlarıyla aynı harita. Dikdörtgen: Avrupa ve Dünya düğmeleriyle dünya haritası.
+P|Azimutal görünümlerde kesikli halkalar merkezden km'yi gösterir; halkaların aralığı yakınlaştırmayla değişir ve dış kenar gösterilen en büyük mesafeyi belirtir.
+H2|3.2 Kontroller
+LI|Bantlar: 10, 6, 4 ve 2 m (432 MHz incelenmez: sporadik E bu bantta geçerli değildir [22]-[24]); spot'ların zaman penceresi 15 dakikadan 12 saate kadar.
+LI|Es yüksekliği (başlangıçta 105 km) ve antenlerin en küçük elevasyonu.
+LI|İlk atlamalar (eşit atlamalar): her iki istasyonun ilk atlamasını gösterir; Kısa ilk atlama sınırı…: yazarın kısa ilk atlama varsayımını (başlangıçta 1200 km) gösterir [4].
+LI|Maidenhead kareleri üzerinde Es bulutları: yansıma noktalarının bulunduğu kareleri tahmini en küçük foEs ile renklendirir.
+H2|3.3 Tablolar ve ayrıntılar
+P|Es spot'ları tablosu geçerli spot'ları mesafe, atlama sayısı ve en küçük foEs ile listeler; Es bulutları (kareler) tablosu tahmini bulutların bulunduğu kareleri ve bunların kendi istasyonunuz için vereceği MUF'u listeler (kırmızı 144 MHz, turuncu 70 MHz, sarı 50 MHz). Bir yakınlaştırma ayarlıyken tablolar yalnızca haritada görüneni gösterir.
+LI|Tabloda ya da haritada bir spot'a tıklama: yol sarı bir haleyle aydınlanır, gerekirse harita onu görünür alana getirir ve Ayrıntılar kutusu atlamaları, yansıma noktalarını, foEs'i ve azimutu gösterir. Yeni spot'lar geldiğinde de spot seçili kalır.
+LI|Haritada boş bir noktaya tıklama: nokta olası bir Es bulutu olarak ele alınır ve 28, 50, 70 ve 144 MHz için gereken foEs gösterilir.
+H2|3.4 Yazarın kuralları
+LI|144 MHz: sporadik E 900 km'nin ötesinde başlar; tek başına bir spot çizilmez; 5 dakika içinde aynı buluta ikinci bir spot gelirse ya da çevrede 50 MHz'de kısa atlamalı bir spot varsa çizilir. Üstteki yeşil satır kaç spot'un onay beklediğini söyler.
+LI|Transekvatoryal: kıtasal Afrika (Madagaskar dahil) ve Güney Amerika yönünde, orta nokta -20° ile +20° arasındaki manyetik eğim kuşağına düşerse, spot <ES> bildirmedikçe bağlantı sporadik E değil transekvatoryaldir. Kanarya Adaları, Madeira, Yeşil Burun ve Arap Yarımadası kuralın dışında kalır.
+H1|4. BENCHMARK Es
+H2|4.1 Log yükleme
+P|BENCHMARK Es sekmesi, başka bir istasyona ait olsa bile tam bir ADIF logu üzerinde sporadik E için bir test tezgâhıdır. ADIF yükle dosyayı açar (program onu hatırlar ve açılışta yeniden yükler), ADIF'i kaldır onu çıkarır. Merkezdeki istasyon logdaki en sık çağrı işaretini ve lokatörü önerir; bunlar değiştirilip Uygula ile onaylanabilir.
+LI|Gönderme konumu her QSO'nun MY_GRIDSQUARE alanıdır; alma konumları GRIDSQUARE alanlarıdır (eksik ya da 4 karakterlik lokatörler CALL3'ten alınır).
+LI|Başka bir PROP_MODE'a sahip QSO'lar ve 500 km'nin (144 MHz'de 900 km) altındakiler hariç tutulabilir; transekvatoryaller, PROP_MODE=ES olmadıkça her zaman hariç tutulur.
+H2|4.2 Günler, saatler ve hesaplar
+P|Günlere göre QSO'lar tablosu günleri QSO sayısı, bantlar, en büyük mesafe ve çok atlamalarla listeler; bir güne tıklamak Günün saatleri tablosunu her UTC saati için bir satır ve Bütün gün satırıyla doldurur. En büyük mesafe kaydırıcılı azimutal harita, 10°'lik sektörler hâlinde skip'i (turuncu yay = en yakın QSO, yeşil sektör = ulaşılan mesafeler), kareler üzerindeki bulutları ve bütün gün seçiliyken bulutların saatlik kaymasını (kırmızı çizgi) çizer.
+P|Önerilen hesaplar sayfası sektörlere göre skip'i, 1000, 1500, 2000 ve 2400 km'de beklenen MUF ile tahmini foEs'i, tahmini bulutları, çok atlama doğrulamasını (eşit atlamalar ile kısa ilk atlamanın karşılaştırılması, ±30 dakika içinde tek atlamada görülen bulutlarla kıyaslanarak) ve bulutların saat saat kaymasını gösterir.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Bir ya da iki istasyon
+P|BENCHMARK 50 MHz sekmesi 50 MHz'de çok atlamalı sporadik E'ye ayrılmıştır. İstasyon 1 satırında kendi istasyonunuzun logu yüklenir ve kaldırılır; İstasyon 2 satırında ikinci bir istasyonun logu yüklenir; bu log İstasyon 2 kutusuyla gösterilir ya da gizlenir. İstasyon 1'in yolları açık mavi, İstasyon 2'ninkiler mor renktedir.
+LI|50 MHz'de çok atlamalı, yani 3100 km'nin ötesindeki QSO'lar gösterilir (yazarın kuralı); atlama sayısı IK3XTV tablosunu izler.
+LI|Gün, başlangıç… bitiş… UTC: gün (açılışta en çok çok atlamalı QSO'ya sahip gün) ve 15 dakikalık adımlarla saat aralığı.
+LI|foEs (isteğe bağlı): yolları en küçük foEs ile renklendirir ve tabloda gösterir. Es yüksekliği ve 1200 km içinde kısa ilk atlama diğer sekmelerdeki gibidir.
+H2|5.2 Mercator haritası
+P|Harita serbest merkezli bir Mercator haritasıdır. Fare bir yola yaklaştığında çizgi ve simgeler büyür ve karşı istasyonun 6 karakterlik WWL karesi görünür. O yola sol tıklandığında bir açılır pencere, dosyadaki tüm günlerden uç konumu 150 km içinde olan tüm QSO'ların gösterilip gösterilmeyeceğini sorar: Evet haritayı boşaltır ve bu QSO'ları turuncu çemberin içinde gösterir, Hayır haritayı olduğu gibi bırakır. Gün ve saate dön düğmesi önceki seçime geri döner.
+H1|6. F.A.I.
+H2|6.1 İki görünüm
+P|F.A.I. sekmesi manyetik alana hizalı düzensizliklerden saçılmayı inceler (ana kaynak [1], [2]). Scatter trail (A-B çifti) görünümü iki istasyon için olası scatter point'lerin yerini hesaplar, bunu yansıma koşulundan sapmaya göre renklendirir, en olası scatter point'i önerir ve sağ üstte iki istasyonun QTF ve elevasyonlarını gösteren kutuyu çizer (kırmızı = A, yeşil = B). İzo-yansıma (nokta) görünümü seçilen bir yansıma noktası için AuroReflex ve K9SE'nin SE-PROP programındaki gibi izo-yansıma çizgilerini çizer: koyu şemalarda renkli kuşaklar, açık şemalarda kalın çizgiler.
+H2|6.2 Kontroller
+LI|A istasyonu ve B istasyonu: çağrı işareti (CALL3'te aranır) ve/veya lokatör; A boş = kendi istasyonunuz. Doğrulamalar… menüsü test çiftlerini yükler (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); Bilinen scatter point'ler… menüsü belgelenmiş bir scatter point seçer (Cenevre, Brüksel, Budapeşte, JN92, JN41/42).
+LI|Yükseklik (başlangıçta 110 km), en küçük elevasyon ve başlangıçta işaretli olan Kırılma (4/3 Dünya yarıçapı).
+LI|Haritada sol tık: doğrulanacak yansıma noktası (İzo-yansıma görünümüne geçer); sağ tık: B istasyonunun konumu.
+LI|Önerilen noktayı doğrula: izi hesaplar, önerilen scatter point'i alır ve onun izo-yansıma çizgilerini kararla birlikte gösterir: TATMİN EDİCİ (1° içinde), KABUL EDİLEBİLİR (2,5° içinde), TATMİN EDİCİ DEĞİL (ötesinde).
+P|Model için hesaplama mümkün değilse Hesaplama yapılamıyor iletisi görünür ve başka hiçbir sonuç gösterilmez. Alttaki F.A.I. spot'ları tablosu FAI olarak bildirilen spot'ları listeler; bir spot'a tıklamak onun istasyon çiftini yükler.
+H1|7. METEOR SCATTER
+P|Bu sekme, kendi sekmeleriyle (gök küresi, radar akısı, canlı yağmurlar, verim hesabı, GRAVES radarı, tahminlerin deneysel uygulaması, geometri ve zayıflama, yağmurlar, kaynaklar, kaynak haritası, veri toplama, verim - açıklama, kare haritası) ve hesap kılavuzuyla eksiksiz YA-MS programını içerir. Dil ve renklendirme üstte seçilenlerdir. YA-MS'in Veri toplama bölümü, E-LAYER ANALYZER içinde kendi telnet oturumlarını açmaz: satırları DATA COLLECTION oturumlarından alır ve meteor scatter spot'larını süzer.
+H1|8. AURORA
+P|AURORA sekmesi F.A.I. ile aynı görünümleri (başlangıç yüksekliği 105 km) NOAA'nın uzay hava durumu verileriyle [15] kullanır: OVATION aurora ovali (haritada gölgeli), son üç günün Kp indeksi ve güneş rüzgârı; bunlar her 5 dakikada bir data/swpc klasörüne ya da NOAA'yı şimdi indir ile hemen indirilir. Program iki istasyon için de yönlendirme önerir.
+LI|Son 2 saatin <AU> ya da <AUR> içeren spot'ları (en fazla 30), Haritada hesaplamalı <AU>/<AUR> spot'ları kutusu işaretliyse hesaplanan scatter point (turuncu çember) ile haritada çizilir; sonuçlarda iki istasyonun QTF ve elevasyonu görünür.
+H1|9. LOG ADIF
+P|LOG ADIF sekmesi, bantları birleştirmeden 28 MHz'den yukarıya bant bant çalışılan ve onaylanan kareleri gösterir. ADIF dosyası aç… log dosyalarını ekler; LoTW'den indir… onay raporunu indirir (kullanıcı adı hatırlanabilir, parola hiçbir zaman kaydedilmez); Belleği temizle dosyaları ve raporu kaldırır. Kareler çalışılmışsa turuncu, QSL ya da LoTW ile onaylanmışsa farklı renktedir; bir kareye tıklamak çağrı işaretlerini ve yayılım modunu gösterir.
+H1|10. Belgeler
+P|KAYNAKLAR sekmesi programın andığı kaynakları sekme sekme listeler. HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesi formülleri ve hesaplama seçimlerini her adımda kaynaklarıyla birlikte verir; bu KULLANIM KILAVUZU programın nasıl kullanılacağını açıklar; TEKNİK RAPOR programın geliştirilmesine yön veren gerekçeleri ortaya koyar. Üç belge de Word'e aktarılabilir.
+H1|11. Pratik öneriler
+LI|Her şeyden önce üstte çağrı işaretini ve lokatörü yazın ve Uygula'ya basın: tüm mesafeler, MUF'lar ve elevasyonlar oradan hesaplanır.
+LI|RBN ve PSKReporter ile, belleği HF spot'larıyla doldurmamak için yerel filtreyi açık tutun.
+LI|Geçmiş bir sezonun analizi için kendi logunuzla iki BENCHMARK sekmesini kullanın; aurora ve F.A.I. için önerilen noktayı her zaman İzo-yansıma görünümüyle doğrulayın.
+LI|Hesaplar yol göstericidir: bir spot ya da bir QSO yolun açık olduğunu söyler, bulutun tam olarak nerede olduğunu söylemez.

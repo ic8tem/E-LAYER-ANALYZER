@@ -15,4 +15,4 @@ Everything is in the `data` folder next to the program (`C:\E-LAYER-ANALYZER\dat
 | `mappa/` | Natural Earth coastlines and borders |
 | `igrf14.csv` | Coefficients of the IGRF-14 magnetic model |
 | `lingue/` | Translations |
-| `ela_documento_tecnico*.txt/.docx`, `ela_fonti*.txt` | Technical document and sources in every language |
+| `ela_documento_tecnico*`, `ela_manuale*`, `ela_relazione*` (.txt/.docx), `ela_fonti*.txt` | Summary of the calculation choices, user manual, technical report and sources in every language |

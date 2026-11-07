@@ -1,5 +1,5 @@
 TITLE|Cara E-LAYER ANALYZER menghitung
-SUB|Dokumen teknis - disusun oleh Costantino IC8TEM - versi 0.4.3, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER.
+SUB|Ringkasan pilihan perhitungan - disusun oleh Costantino IC8TEM - versi 0.4.3, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER.
 H1|1. Pendahuluan
 H2|1.1 Tujuan
 P|E-LAYER ANALYZER menganalisis mode propagasi VHF yang melibatkan lapisan E: sporadic-E (termasuk multi-lompatan antarbenua), F.A.I. (ketidakteraturan yang searah dengan medan magnet), meteor scatter (dengan program YA-MS) dan aurora radio. Dokumen ini menjelaskan setiap perhitungan dan asal-usulnya.
@@ -108,7 +108,7 @@ TAG|FONTE|Skema warna adalah milik YA-MS 1.5.0, yang mengikuti YAEC [26]: Terang
 H1|8. Meteor scatter (YA-MS 1.5.1) dan bahasa
 TAG|FONTE|Tab METEOR SCATTER berisi YA-MS 1.5.1 lengkap [5], dengan dokumen "Efisiensi - penjelasan" dan sumber-sumbernya. Skrip tools/sync_yams.py menyalin setiap versi baru YA-MS dan mengubahnya menjadi panel tanpa mengubah perhitungannya.
 TAG|FONTE|YA-MS 1.4.0 menambahkan tab Hujan meteor langsung (ZHR terukur dari Global Meteor Network dan peta radian radar CMOR) dan Peta sumber (lokasi Collm, Sodankylä, GRAVES dan CMOR relatif terhadap stasiun); YA-MS 1.5.0 menambahkan Pengumpulan data (spot meteor scatter dari DX cluster, RBN dan PSKReporter dengan filter MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). Di dalam E-LAYER ANALYZER, Pengumpulan data tidak membuka sesi telnet sendiri: ia menerima baris dari sesi DATA COLLECTION, sehingga tidak ada login ganda dengan callsign yang sama. Sumber YA-MS dikutip di dalam YA-MS.
-TAG|SCELTA|Bahasa: 28, semua bahasa YAEC ditambah bahasa Denmark dan Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), untuk antarmuka (data/lingue/ela-<kode>.txt), untuk Dokumen teknis dan untuk Sumber. Pada tampilan F.A.I./aurora, jejak scatter point disebut "Scatter trail" di semua terjemahan. Bilah status menunjukkan model magnetik yang dipakai (IGRF-14 dari IAGA [16]).
+TAG|SCELTA|Bahasa: 28, semua bahasa YAEC ditambah bahasa Denmark dan Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), untuk antarmuka (data/lingue/ela-<kode>.txt), untuk dokumen (Ringkasan pilihan perhitungan, Panduan penggunaan, Laporan teknis) dan untuk Sumber. Pada tampilan F.A.I./aurora, jejak scatter point disebut "Scatter trail" di semua terjemahan. Bilah status menunjukkan model magnetik yang dipakai (IGRF-14 dari IAGA [16]).
 H1|9. Batasan
 LI|Stasiun di tengah kotak locator: dengan locator 4 karakter kesalahannya mencapai ~80 km.
 LI|foEs dari spot adalah ambang minimum dan hukum sekan melebih-lebihkan foEs yang diperlukan di VHF (lihat 2.3).

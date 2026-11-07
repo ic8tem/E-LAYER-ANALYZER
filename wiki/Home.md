@@ -18,7 +18,7 @@
 | [AURORA](Aurora) | Auroral oval, NOAA Kp and solar wind, auroral scatter trail and isoflection, recommended beam heading |
 | [DATA COLLECTION](Data-Collection) | Three telnet sessions (DX cluster, RBN, DM4X with PSKReporter), collected spots, CALL3 database |
 | [LOG ADIF](Log-ADIF) | Squares worked and confirmed band by band from 28 MHz up, from your ADIF or from LoTW |
-| [SOURCES and TECHNICAL DOCUMENT](Sources-and-Technical-Document) | All the sources and all the formulas, exportable to Word |
+| [SOURCES, SUMMARY OF THE CALCULATION CHOICES, USER MANUAL, TECHNICAL REPORT](Sources-and-Technical-Document) | Sources, formulas and calculation choices, in-depth user manual, technical report: exportable to Word |
 
 ## Getting started
 

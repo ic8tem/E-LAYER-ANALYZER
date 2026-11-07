@@ -15,4 +15,4 @@
 | `mappa/` | Береговые линии и границы Natural Earth |
 | `igrf14.csv` | Коэффициенты магнитной модели IGRF-14 |
 | `lingue/` | Переводы |
-| `ela_documento_tecnico*.txt/.docx`, `ela_fonti*.txt` | Технический документ и источники на всех языках |
+| `ela_documento_tecnico*`, `ela_manuale*`, `ela_relazione*` (.txt/.docx), `ela_fonti*.txt` | Сводка расчётных решений, руководство пользователя, технический отчёт и источники на всех языках |

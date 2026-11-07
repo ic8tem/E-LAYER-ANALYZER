@@ -1,0 +1,87 @@
+TITLE|Användarhandbok för E-LAYER ANALYZER
+SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.4.3, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
+H1|1. Innan du börjar
+H2|1.1 Vad programmet gör
+P|E-LAYER ANALYZER samlar i ett enda program verktygen för att studera de VHF-utbredningssätt som går via jonosfärens E-skikt: sporadiskt E, även multihopp och interkontinentalt, F.A.I. (fältlinjeorienterade irreguljäriteter), meteor scatter, med det integrerade programmet YA-MS, och radioaurora. Programmet arbetar med spots från DX-kluster i realtid och med ADIF-loggar, och visar varje resultat på en karta som upptar två tredjedelar av fönstret, med data och beräkningar i den högra tredjedelen.
+H2|1.2 Installation och datamapp
+P|Programmet fungerar på Windows (64 och 32 bitar), Linux, Raspberry Pi (ARM64) och Mac (Apple Silicon och Intel). Det hämtas från sidan Releases i GitHub-arkivet: för Windows finns ett installationsprogram och en portabel version i en .zip-fil; för Linux och Raspberry Pi ett .tar.gz-arkiv med installationsskript; för Mac en .dmg-avbild.
+LI|Alla programmets data ligger i mappen data bredvid programmet: inställningar (config.ini), CALL3-databasen, magnetfältskoefficienter, loggar, hämtade NOAA-data och insamlade spots. Ingenting skrivs till AppData eller till andra systemmappar.
+LI|För att flytta programmet till en annan dator räcker det att kopiera dess mapp; för att återgå till grundinställningarna räcker det att radera data/config.ini.
+LI|Lösenordet till LoTW sparas aldrig; endast användarnamnet kan kommas ihåg.
+H2|1.3 Fältet högst upp
+P|Uppe till vänster anger du din anropssignal, din lokator (4, 6 eller 8 tecken) och antennens höjd i meter; knappen Verkställ bekräftar dem och alla flikar uppdateras. Uppe till höger finns UTC-tiden, valet av färgschema (alla scheman från YAEC: Ljust, Natt, Svart, åtta pasteller och Meteorspår) och valet av språk (28 språk). När färgschema eller språk ändras byggs fönstret om direkt, utan att insamlade data går förlorade.
+H2|1.4 Statusfältet
+P|Längst ned visar statusfältet hur många anropssignaler CALL3-databasen innehåller, hur många spots som finns i minnet och vilken magnetisk modell som används (IGRF-14 med dess epok). Spots i minnet raderas varje gång programmet stängs: varje session börjar om utan gamla spots.
+H2|1.5 Kartorna
+P|Alla kartor används på samma sätt: mushjulet zoomar in eller ut, att dra med vänster knapp flyttar vyn, och vänsterklick väljer en punkt, en spot eller en sträcka beroende på flik. Uppe till höger visas koordinaterna och 6-teckens lokatorn under markören; i de azimutala kartorna även avstånd och azimut från centrum. Rutnätet med Maidenhead-fält och -rutor blir tätare när du zoomar in.
+H1|2. Datainsamling (DATA COLLECTION)
+H2|2.1 De tre telnetsessionerna
+P|Fliken DATA COLLECTION öppnar upp till tre samtidiga telnetförbindelser: ett valfritt DX-kluster (som standard ON0DXK med VHF-filter), Reverse Beacon Network (port 7001 för FT8, 7000 för CW och RTTY) och DM4X:s kluster med spots från PSKReporter (dm4x.ddns.net, port 8500).
+LI|Värd och Port: klustrets adress. Inloggning: anropssignal för åtkomst (om fältet är tomt används den i fältet högst upp). Reglage: kommandon som skickas efter inloggningen, åtskilda med semikolon (till exempel bandfilter).
+LI|Anslut och Koppla från öppnar och stänger sessionen; Återanslut öppnar den automatiskt igen efter ett avbrott; Anslut vid start öppnar den när programmet startar.
+LI|Konsolen visar de mottagna raderna; i rutan nedanför kan du skriva kommandon som ska skickas till klustret (till exempel sh/dx 20) och bekräfta dem med Skicka eller med Enter-tangenten.
+H2|2.2 Det lokala filtret
+P|Kryssrutan högst upp, som är ikryssad från början, aktiverar det lokala filtret: "DX de"-rader med frekvens under 27990,0 kHz eller över 145 MHz kasseras, visas inte i konsolen och sparas inte. Det är särskilt användbart med RBN och PSKReporter, som skickar väldigt många spots på HF. Om rutan avmarkeras släpps allt igenom.
+H2|2.3 Hur programmet läser spots
+P|Ur varje "DX de"-rad hämtar programmet spotter, frekvens, DX, kommentar, tid och, när de finns, lokatorerna och utbredningssättet som skrivits i kommentaren i formen JN70CN<ES>JO62QM (den första lokatorn är spotterns, den andra DX-stationens; även formerna med <>, > och parenteser accepteras).
+LI|Saknade lokatorer söks i CALL3-databasen; oprecisa lokatorer (färre än 6 tecken) ersätts med 6-teckens lokatorn från CALL3, när en sådan finns.
+LI|Spots med <MS>, <AU>, <AUR>, <TR>, <AS> eller <ACS> i texten används inte för sporadiskt E: de hör till meteor scatter, aurora, tropo eller aircraft scatter.
+LI|Liksom i YA-MS räknas som meteor scatter-spots de som ligger i de typiska MS-frekvensfönstren (50190-50300, 70100-70400, 144290-144399 kHz) utan angivelse om annan utbredning, samt de med moderna MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M eller med <MS>.
+LI|Spots med <AU> eller <AUR> går till fliken AURORA, de med FAI till fliken F.A.I.
+H2|2.4 Insamlade spots och CALL3-databasen
+P|Sidan Insamlade spots listar de senaste spotsen med filter för band och källa; knappen Öppna spotmappen öppnar data/spot. Sidan CALL3 visar databasen anropssignal -> lokator (JTDX/WSJT-format): du kan söka efter en anropssignal, läsa in databasen på nytt eller importera en ny CALL3.TXT-fil, som ersätter den som används (den gamla sparas som säkerhetskopia).
+H1|3. Sporadiskt E (SPORADIC-E)
+H2|3.1 Kartan
+P|Menyn Karta väljer mellan tre vyer. Azimutal - enkelt hopp: karta centrerad på den egna stationen med fast radie 2500 km och zonerna från IK3XTV:s tabell [3] (minst 500 km, optimalt 1500-2000 km, högst 2400 km). Azimutal - största avstånd (multihopp): samma karta med reglaget Största avstånd, från 300 till 20000 km, och gränserna för dubbelhopp (5000 km) och trippelhopp (6900 km), för att följa hur multihoppet utvecklas. Rektangulär: världskartan med knapparna Europa och Världen.
+P|I de azimutala vyerna anger de streckade ringarna antal km från centrum; avståndet mellan ringarna ändras med zoomen och ytterkanten anger det största avstånd som visas.
+H2|3.2 Reglagen
+LI|Band: 10, 6, 4 och 2 m (432 MHz analyseras inte: sporadiskt E gäller inte där [22]-[24]); tidsfönster för spots från 15 minuter till 12 timmar.
+LI|Es-höjd (som standard 105 km) och antennernas minsta elevation.
+LI|Första hopp (lika hopp): visar båda stationernas första hopp; Kort första hopp inom…: visar författarens hypotes om ett kort första hopp (som standard 1200 km) [4].
+LI|Es-moln på Maidenhead-rutor: färgar reflexionspunkternas rutor med den uppskattade minsta foEs.
+H2|3.3 Tabeller och detaljer
+P|Tabellen Es-spots listar giltiga spots med avstånd, antal hopp och minsta foEs; tabellen Es-moln (rutor) listar rutorna med uppskattade moln och den MUF de skulle ge för den egna stationen (röd 144 MHz, orange 70 MHz, gul 50 MHz). När en zoom är inställd visar tabellerna bara det som syns på kartan.
+LI|Klick på en spot i tabellen eller på kartan: sträckan lyses upp med en gul gloria, kartan flyttar den till synligt område om det behövs och rutan Detaljer visar hopp, reflexionspunkter, foEs och azimut. Spoten förblir vald även när nya spots kommer in.
+LI|Klick på en tom punkt på kartan: punkten behandlas som ett möjligt Es-moln, med den foEs som krävs för 28, 50, 70 och 144 MHz.
+H2|3.4 Författarens regler
+LI|144 MHz: sporadiskt E börjar över 900 km; en ensam spot ritas inte; den ritas om en andra spot på samma moln kommer inom 5 minuter eller om det i närheten finns en 50 MHz-spot med kort hopp. Den gröna raden högst upp anger hur många spots som väntar på bekräftelse.
+LI|Transekvatoriell: mot det afrikanska fastlandet (inklusive Madagaskar) och Sydamerika är förbindelsen transekvatoriell och inte sporadiskt E om mittpunkten faller inom bandet med magnetisk inklination mellan -20° och +20°, utom när spoten anger <ES>. Kanarieöarna, Madeira, Kap Verde och Arabiska halvön omfattas inte av regeln.
+H1|4. BENCHMARK Es
+H2|4.1 Läsa in en logg
+P|Fliken BENCHMARK Es är en provbänk för sporadiskt E på en hel ADIF-logg, även från en annan station. Läs in ADIF öppnar filen (programmet kommer ihåg den och läser in den igen vid start), Ta bort ADIF tar bort den. Station i mitten föreslår loggens vanligaste anropssignal och lokator; de kan ändras och bekräftas med Verkställ.
+LI|Sändarpositionen är MY_GRIDSQUARE för varje QSO; mottagarpositionerna är GRIDSQUARE (saknade lokatorer eller lokatorer med 4 tecken hämtas från CALL3).
+LI|Det går att utesluta QSO med ett annat PROP_MODE och de under 500 km (900 km på 144 MHz); transekvatoriella QSO utesluts alltid, utom vid PROP_MODE=ES.
+H2|4.2 Dagar, tider och beräkningar
+P|Tabellen QSO per dag listar dagarna med antal QSO, band, största avstånd och multihopp; ett klick på en dag fyller tabellen Dagens timmar, med en rad för varje UTC-timme och raden Hela dagen. Den azimutala kartan, med reglaget för största avstånd, ritar skip per 10°-sektor (orange båge = närmaste QSO, grön sektor = uppnådda avstånd), molnen på rutorna och, för hela dagen, molnens förflyttning timme för timme (röd linje).
+P|Sidan Föreslagna beräkningar visar skip per sektor, uppskattad foEs med förväntad MUF vid 1000, 1500, 2000 och 2400 km, de uppskattade molnen, kontrollen av multihoppet (lika hopp mot kort första hopp, jämförda med de moln som setts i enkelt hopp inom ±30 minuter) och molnens förflyttning timme för timme.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 En eller två stationer
+P|Fliken BENCHMARK 50 MHz är ägnad åt sporadiskt E med multihopp på 50 MHz. På raden Station 1 läser du in och tar bort den egna stationens logg; på raden Station 2 loggen från en andra station, som visas eller döljs med kryssrutan Station 2. Station 1:s sträckor är ljusblå, station 2:s violetta.
+LI|De QSO på 50 MHz som visas är multihopp, det vill säga över 3100 km (författarens regel); antalet hopp följer IK3XTV:s tabell.
+LI|Dag, från… till… UTC: dagen (vid start den med flest multihopp-QSO) och tidsintervallet, i steg om 15 minuter.
+LI|foEs (valfri): färgar sträckorna med minsta foEs och visar den i tabellen. Es-höjd och Kort första hopp inom 1200 km fungerar som i de andra flikarna.
+H2|5.2 Mercatorkartan
+P|Kartan är en Mercatorkarta med fritt centrum. När musen närmar sig en sträcka förstoras linjen och ikonerna, och motstationens WWL-ruta med 6 tecken visas. Vid vänsterklick på sträckan frågar en dialogruta om alla QSO i filen, från alla dagar, med slutposition inom 150 km ska visas: Ja tömmer kartan och visar dessa QSO inom den orange cirkeln, Nej lämnar kartan som den är. Knappen Tillbaka till dag och tid återgår till det tidigare valet.
+H1|6. F.A.I.
+H2|6.1 De två vyerna
+P|Fliken F.A.I. studerar scatter från fältlinjeorienterade irreguljäriteter (huvudkällor [1], [2]). Vyn Scatter trail (paret A-B) beräknar, för två stationer, orten för möjliga scatterpunkter, färgad efter avvikelsen från reflexionsvillkoret, föreslår den mest sannolika scatterpunkten och ritar uppe till höger rutan med QTF och elevation för båda stationerna (röd = A, grön = B). Vyn Isoreflexion (punkt) ritar, för en vald reflexionspunkt, isoreflexionslinjerna i likhet med AuroReflex och K9SE:s SE-PROP: färgade band i de mörka schemana, tjocka linjer i de ljusa.
+H2|6.2 Reglagen
+LI|Station A och Station B: anropssignal (som söks i CALL3) och/eller lokator; tom A = den egna stationen. Menyn Kontroller... läser in testparen (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); menyn Kända scatterpunkter... väljer en dokumenterad scatterpunkt (Genève, Bryssel, Budapest, JN92, JN41/42).
+LI|Höjd (som standard 110 km), minsta elevation och Refraktion (4/3 jordradie), ikryssad från början.
+LI|Vänsterklick på kartan: reflexionspunkt som ska kontrolleras (växlar till vyn Isoreflexion); högerklick: station B:s position.
+LI|Kontrollera den rekommenderade punkten: beräknar spåret, tar den föreslagna scatterpunkten och visar dess isoreflexionslinjer med bedömningen: TILLFREDSSTÄLLANDE (inom 1°), GODTAGBAR (inom 2,5°), INTE TILLFREDSSTÄLLANDE (därutöver).
+P|Om beräkningen inte är möjlig enligt modellen visas meddelandet Beräkning inte möjlig och inga andra resultat visas. Längst ned listar tabellen F.A.I.-spots de spots som angetts som FAI; ett klick på en spot läser in dess stationspar.
+H1|7. METEOR SCATTER
+P|Fliken innehåller hela programmet YA-MS, med dess flikar (himlavalvet, radarflöde, svärmar i realtid, effektivitetsberäkning, GRAVES-radarn, experimentell tillämpning av prognoserna, geometri och dämpning, svärmar, källor, källkarta, datainsamling, effektivitet - förklaring, rutkarta) och dess beräkningshandbok. Språk och färgschema är de som valts högst upp. YA-MS:s Datainsamling öppnar inne i E-LAYER ANALYZER inga egna telnetsessioner: den tar emot raderna från sessionerna i DATA COLLECTION och filtrerar ut meteor scatter-spotsen.
+H1|8. AURORA
+P|Fliken AURORA använder samma vyer som F.A.I. (standardhöjd 105 km) med rymdvädersdata från NOAA [15]: norrskensovalen OVATION (skuggad på kartan), Kp-index för de senaste tre dygnen och solvind, som hämtas var 5:e minut till data/swpc eller direkt med Hämta NOAA nu. Programmet föreslår riktning för båda stationerna.
+LI|Spots med <AU> eller <AUR> från de senaste 2 timmarna (högst 30) ritas på kartan med den beräknade scatterpunkten (orange cirkel) om kryssrutan <AU>/<AUR>-spots på kartan med beräkningen är ikryssad; i resultaten visas QTF och elevation för de två stationerna.
+H1|9. LOG ADIF
+P|Fliken LOG ADIF visar körda och bekräftade rutor, band för band från 28 MHz och uppåt, utan att slå samman banden. Öppna ADIF-fil... lägger till loggfilerna; Hämta från LoTW... hämtar rapporten över bekräftelser (användarnamnet kan kommas ihåg, lösenordet sparas aldrig); Rensa minnet tar bort filer och rapport. Rutorna är orange om de är körda och färgas annorlunda om de är bekräftade med QSL eller via LoTW; ett klick på en ruta visar anropssignalerna och utbredningssättet.
+H1|10. Dokument
+P|Fliken KÄLLOR listar de källor programmet citerar, flik för flik. Fliken SAMMANFATTNING AV BERÄKNINGSVALEN redovisar formlerna och beräkningsvalen med källorna i varje steg; denna ANVÄNDARHANDBOK förklarar hur programmet används; den TEKNISKA RAPPORTEN redogör för de skäl som styrt programmets utformning. De tre dokumenten kan exporteras till Word.
+H1|11. Praktiska råd
+LI|Skriv först av allt in anropssignal och lokator högst upp och tryck på Verkställ: alla avstånd, MUF-värden och elevationer utgår därifrån.
+LI|Med RBN och PSKReporter bör det lokala filtret vara aktiverat, så att minnet inte fylls med HF-spots.
+LI|För en analys av en gången säsong används de två BENCHMARK-flikarna med den egna loggen; för aurora och F.A.I. bör den föreslagna punkten alltid kontrolleras med vyn Isoreflexion.
+LI|Beräkningarna är vägledande: en spot eller ett QSO visar att sträckan var öppen, inte exakt var molnet befann sig.

@@ -15,4 +15,4 @@
 | `mappa/` | Natural Earth の海岸線と国境 |
 | `igrf14.csv` | 地磁気モデル IGRF-14 の係数 |
 | `lingue/` | 翻訳 |
-| `ela_documento_tecnico*.txt/.docx`, `ela_fonti*.txt` | 各言語の技術文書と出典 |
+| `ela_documento_tecnico*`, `ela_manuale*`, `ela_relazione*` (.txt/.docx), `ela_fonti*.txt` | 各言語の計算上の選択の概要、ユーザーマニュアル、技術報告書、出典 |

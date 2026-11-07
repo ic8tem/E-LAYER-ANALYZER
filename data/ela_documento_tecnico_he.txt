@@ -1,5 +1,5 @@
 TITLE|איך E-LAYER ANALYZER מחשב
-SUB|מסמך טכני - מאת Costantino IC8TEM - גרסה 0.4.3, נובמבר 2026. המספרים בסוגריים מרובעים מפנים ללשונית המקורות.
+SUB|סיכום בחירות החישוב - מאת Costantino IC8TEM - גרסה 0.4.3, נובמבר 2026. המספרים בסוגריים מרובעים מפנים ללשונית המקורות.
 H1|1. מבוא
 H2|1.1 מטרה
 P|E-LAYER ANALYZER מנתח את אופני ההתפשטות ב-VHF המערבים את שכבת E: E ספורדי (כולל רב-קפיצה בין-יבשתי), F.A.I. (אי-סדירויות המיושרות לאורך השדה המגנטי), meteor scatter (עם התוכנה YA-MS) ואורורה רדיו. מסמך זה מתאר כל חישוב ומאין הוא נלקח.
@@ -108,7 +108,7 @@ TAG|FONTE|ערכות הצבעים הן אלה של YA-MS 1.5.0, המבוססות
 H1|8. Meteor scatter (YA-MS 1.5.1) ושפות
 TAG|FONTE|הלשונית METEOR SCATTER מכילה את YA-MS 1.5.1 המלא [5], עם המסמך שלו "יעילות - הסבר" והמקורות שלו. הסקריפט tools/sync_yams.py מעתיק כל גרסה חדשה של YA-MS והופך אותה ללוח בלי לשנות את חישוביה.
 TAG|FONTE|YA-MS 1.4.0 הוסיף את הלשוניות "מטרים בזמן אמת" (ZHR שנמדדו על ידי Global Meteor Network ומפות רדיאנטים של מכ״ם CMOR) ו"מפת המקורות" (היכן נמצאים Collm, Sodankylä, GRAVES ו-CMOR ביחס לתחנה); YA-MS 1.5.0 מוסיף את "איסוף נתונים" (ספוטים של meteor scatter מ-DX cluster, RBN ו-PSKReporter עם המסנן MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). בתוך E-LAYER ANALYZER, "איסוף נתונים" אינו פותח הפעלות telnet משלו: הוא מקבל את השורות מההפעלות של DATA COLLECTION, כך שאין כניסות כפולות עם אותו אות קריאה. המקורות של YA-MS מצוטטים בתוך YA-MS.
-TAG|SCELTA|שפות: 28, כל השפות של YAEC ובנוסף דנית וטגלוג (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), לממשק (data/lingue/ela-<codice>.txt), למסמך הטכני ולמקורות. בתצוגת F.A.I./אורורה השובל של נקודות הפיזור נקרא "Scatter trail" בכל התרגומים. שורת המצב מציינת את המודל המגנטי שבשימוש (IGRF-14 של IAGA [16]).
+TAG|SCELTA|שפות: 28, כל השפות של YAEC ובנוסף דנית וטגלוג (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), לממשק (data/lingue/ela-<codice>.txt), למסמכים (סיכום בחירות החישוב, מדריך למשתמש, דוח טכני) ולמקורות. בתצוגת F.A.I./אורורה השובל של נקודות הפיזור נקרא "Scatter trail" בכל התרגומים. שורת המצב מציינת את המודל המגנטי שבשימוש (IGRF-14 של IAGA [16]).
 H1|9. מגבלות
 LI|תחנות במרכז ריבוע הלוקייטור: עם לוקייטור בן 4 תווים השגיאה מגיעה ל-~80 km.
 LI|ה-foEs מהספוטים היא סף מינימלי, וחוק הסקאנס מעריך ביתר את ה-foEs הנדרשת ב-VHF (ראה 2.3).

@@ -1,5 +1,5 @@
 TITLE|Sådan regner E-LAYER ANALYZER
-SUB|Teknisk dokument - af Costantino IC8TEM - version 0.4.3, november 2026. Tallene i firkantede parenteser henviser til fanen KILDER.
+SUB|Resumé af beregningsvalgene - af Costantino IC8TEM - version 0.4.3, november 2026. Tallene i firkantede parenteser henviser til fanen KILDER.
 H1|1. Indledning
 H2|1.1 Formål
 P|E-LAYER ANALYZER analyserer de VHF-udbredelsesformer, der involverer E-laget: sporadisk E (også interkontinentalt multi-hop), F.A.I. (feltorienterede irregulariteter), meteor scatter (med programmet YA-MS) og radionordlys. Dette dokument beskriver hver beregning, og hvor den stammer fra.
@@ -108,7 +108,7 @@ TAG|FONTE|Farveskemaerne er dem fra YA-MS 1.5.0, som følger YAEC [26]: Lys, Nat
 H1|8. Meteor scatter (YA-MS 1.5.1) og sprog
 TAG|FONTE|Fanen METEOR SCATTER indeholder hele YA-MS 1.5.1 [5] med sit eget dokument "Effektivitet - forklaring" og sine egne kilder. Scriptet tools/sync_yams.py kopierer hver ny version af YA-MS og gør den til et panel uden at ændre dens beregninger.
 TAG|FONTE|YA-MS 1.4.0 tilføjede fanerne Live-sværme (ZHR målt af Global Meteor Network og radiantkort fra CMOR-radaren) og Kildekort (hvor Collm, Sodankylä, GRAVES og CMOR ligger i forhold til stationen); YA-MS 1.5.0 tilføjer Dataindsamling (meteor scatter-spots fra DX cluster, RBN og PSKReporter med filteret MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). Inde i E-LAYER ANALYZER åbner Dataindsamling ingen egne telnet-sessioner: den modtager linjerne fra sessionerne i DATA COLLECTION, så der er ingen dobbelte logins med samme kaldesignal. Kilderne til YA-MS er citeret i YA-MS.
-TAG|SCELTA|Sprog: 28, alle dem fra YAEC plus dansk og tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for brugerfladen (data/lingue/ela-<kode>.txt), for Teknisk dokument og for Kilder. I visningen F.A.I./nordlys hedder sporet af scatterpunkter "Scatter trail" i alle oversættelser. Statuslinjen viser den magnetiske model i brug (IAGA's IGRF-14 [16]).
+TAG|SCELTA|Sprog: 28, alle dem fra YAEC plus dansk og tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), for brugerfladen (data/lingue/ela-<kode>.txt), for dokumenterne (Resumé af beregningsvalgene, Brugervejledning, Teknisk rapport) og for Kilder. I visningen F.A.I./nordlys hedder sporet af scatterpunkter "Scatter trail" i alle oversættelser. Statuslinjen viser den magnetiske model i brug (IAGA's IGRF-14 [16]).
 H1|9. Begrænsninger
 LI|Stationerne placeres i midten af lokatorfeltet: med 4-tegns lokatorer når fejlen op på ~80 km.
 LI|foEs fra spots er en minimumstærskel, og sekansloven overvurderer den nødvendige foEs på VHF (se 2.3).

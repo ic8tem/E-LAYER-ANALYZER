@@ -1,0 +1,87 @@
+TITLE|Panduan penggunaan E-LAYER ANALYZER
+SUB|Panduan penggunaan lengkap - disusun oleh Costantino IC8TEM - versi 0.4.3, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER; rumus dan pilihan perhitungan ada di tab RINGKASAN PILIHAN PERHITUNGAN.
+H1|1. Sebelum memulai
+H2|1.1 Apa yang dilakukan program ini
+P|E-LAYER ANALYZER menghimpun dalam satu program alat-alat untuk mempelajari mode propagasi VHF yang melewati lapisan E ionosfer: sporadic-E, termasuk multi-lompatan dan antarbenua, F.A.I. (ketidakteraturan yang searah dengan medan magnet), meteor scatter, dengan program YA-MS yang terintegrasi, dan aurora radio. Program bekerja dengan spot DX cluster secara langsung dan dengan log ADIF, dan menampilkan setiap hasil pada peta yang menempati dua pertiga jendela, dengan data dan perhitungan di sepertiga bagian kanan.
+H2|1.2 Instalasi dan folder data
+P|Program berjalan di Windows (64 dan 32 bit), Linux, Raspberry Pi (ARM64) dan Mac (Apple Silicon dan Intel). Program diunduh dari halaman Releases repositori GitHub: untuk Windows tersedia installer dan versi portabel dalam file .zip; untuk Linux dan Raspberry Pi arsip .tar.gz dengan skrip instalasi; untuk Mac image .dmg.
+LI|Semua data program disimpan di folder data di samping program: pengaturan (config.ini), basis data CALL3, koefisien medan magnet, log, data NOAA yang diunduh, spot yang terkumpul. Tidak ada yang ditulis ke AppData atau ke folder sistem lainnya.
+LI|Untuk memindahkan program ke komputer lain cukup salin foldernya; untuk kembali ke pengaturan awal cukup hapus data/config.ini.
+LI|Kata sandi LoTW tidak pernah disimpan; hanya nama pengguna yang dapat diingat.
+H2|1.3 Bilah atas
+P|Di kiri atas diisi callsign Anda, locator (4, 6 atau 8 karakter) dan ketinggian antena dalam meter; tombol Terapkan mengonfirmasinya dan semua tab diperbarui. Di kanan atas terdapat jam UTC, pilihan skema warna (semua skema YAEC: Terang, Malam, Hitam, delapan warna pastel dan Jejak meteor) dan pilihan bahasa (28 bahasa). Saat skema warna atau bahasa diganti, jendela langsung dibangun ulang tanpa kehilangan data yang sudah terkumpul.
+H2|1.4 Bilah status
+P|Di bagian bawah, bilah status menunjukkan berapa callsign yang ada di basis data CALL3, berapa spot yang ada di memori dan model magnetik yang dipakai (IGRF-14 beserta epoknya). Spot di memori dihapus setiap kali program ditutup: setiap sesi dimulai tanpa spot lama.
+H2|1.5 Peta
+P|Semua peta digunakan dengan cara yang sama: roda mouse memperbesar atau memperkecil, menyeret dengan tombol kiri menggeser tampilan, klik kiri memilih titik, spot atau lintasan sesuai tab. Di kanan atas muncul koordinat dan locator 6 karakter di bawah kursor; pada peta azimutal juga jarak dan azimut dari pusat. Kisi field dan kotak Maidenhead makin rapat saat diperbesar.
+H1|2. Pengumpulan data (DATA COLLECTION)
+H2|2.1 Tiga sesi telnet
+P|Tab DATA COLLECTION membuka hingga tiga koneksi telnet sekaligus: satu DX cluster pilihan (bawaan ON0DXK dengan filter VHF), Reverse Beacon Network (port 7001 untuk FT8, 7000 untuk CW dan RTTY) dan cluster DM4X dengan spot PSKReporter (dm4x.ddns.net, port 8500).
+LI|Host dan Port: alamat cluster. Login: callsign untuk masuk (jika kosong dipakai callsign dari bilah atas). Perintah: perintah yang dikirim setelah login, dipisahkan dengan titik koma (misalnya filter band).
+LI|Sambung dan Putuskan membuka dan menutup sesi; Sambung ulang membukanya kembali secara otomatis setelah terputus; Sambung saat mulai membukanya saat program dijalankan.
+LI|Konsol menampilkan baris yang diterima; di kotak di bawahnya dapat ditulis perintah untuk dikirim ke cluster (misalnya sh/dx 20) dan dikonfirmasi dengan Kirim atau tombol Enter.
+H2|2.2 Filter lokal
+P|Kotak centang di atas, aktif secara bawaan, menyalakan filter lokal: baris "DX de" dengan frekuensi di bawah 27990,0 kHz atau di atas 145 MHz dibuang, tidak muncul di konsol dan tidak disimpan. Ini terutama berguna dengan RBN dan PSKReporter, yang mengirim sangat banyak spot HF. Jika kotak dimatikan, semua baris diteruskan.
+H2|2.3 Cara program membaca spot
+P|Dari setiap baris "DX de" program mengambil spotter, frekuensi, DX, komentar, jam dan, bila ada, locator serta mode propagasi yang ditulis di komentar dalam bentuk JN70CN<ES>JO62QM (locator pertama milik spotter, yang kedua milik DX; bentuk dengan <>, > dan tanda kurung juga diterima).
+LI|Locator yang tidak ada dicari di basis data CALL3; locator yang kurang presisi (kurang dari 6 karakter) diganti dengan locator 6 karakter dari CALL3, bila tersedia.
+LI|Spot dengan <MS>, <AU>, <AUR>, <TR>, <AS> atau <ACS> dalam teks tidak dipakai untuk sporadic-E: spot tersebut untuk meteor scatter, aurora, tropo atau aircraft scatter.
+LI|Seperti di YA-MS, spot meteor scatter adalah spot dalam jendela frekuensi khas MS (50190-50300, 70100-70400, 144290-144399 kHz) tanpa keterangan propagasi lain, serta spot dengan mode MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M atau dengan <MS>.
+LI|Spot dengan <AU> atau <AUR> masuk ke tab AURORA, spot dengan FAI ke tab F.A.I.
+H2|2.4 Spot terkumpul dan basis data CALL3
+P|Halaman Spot terkumpul menampilkan spot terakhir dengan filter per band dan per sumber; tombol Buka folder spot membuka data/spot. Halaman CALL3 menampilkan basis data callsign -> locator (format JTDX/WSJT): Anda dapat mencari callsign, memuat ulang basis data atau mengimpor file CALL3.TXT baru, yang menggantikan file yang sedang dipakai (file lama disimpan sebagai cadangan).
+H1|3. Sporadic-E (SPORADIC-E)
+H2|3.1 Peta
+P|Menu Peta memilih salah satu dari tiga tampilan. Azimutal - satu lompatan: peta berpusat pada stasiun Anda dengan radius tetap 2500 km dan zona tabel IK3XTV [3] (500 km minimum, 1500-2000 km optimal, 2400 km maksimum). Azimutal - jarak maksimum (multi-lompatan): peta yang sama dengan penggeser Jarak maksimum, dari 300 hingga 20000 km, dan batas dua lompatan (5000 km) dan tiga lompatan (6900 km), untuk mengikuti perkembangan multi-lompatan. Persegi panjang: peta dunia dengan tombol Eropa dan Dunia.
+P|Pada tampilan azimutal, lingkaran putus-putus menunjukkan km dari pusat; jarak antarlingkaran berubah sesuai perbesaran dan tepi luar menunjukkan jarak maksimum yang ditampilkan.
+H2|3.2 Kontrol
+LI|Band: 10, 6, 4 dan 2 m (432 MHz tidak dianalisis: sporadic-E tidak berlaku [22]-[24]); jendela waktu spot dari 15 menit hingga 12 jam.
+LI|Ketinggian Es (bawaan 105 km) dan elevasi minimum antena.
+LI|Lompatan pertama (lompatan sama): menampilkan lompatan pertama kedua stasiun; Lompatan pertama pendek dalam…: menampilkan hipotesis penulis tentang lompatan pertama pendek (bawaan 1200 km) [4].
+LI|Awan Es pada kotak Maidenhead: mewarnai kotak titik pantul dengan perkiraan foEs minimum.
+H2|3.3 Tabel dan rincian
+P|Tabel Spot Es menampilkan spot yang valid dengan jarak, jumlah lompatan dan foEs minimum; tabel Awan Es (kotak) menampilkan kotak dengan perkiraan awan dan MUF yang akan dihasilkannya untuk stasiun Anda (merah 144 MHz, oranye 70 MHz, kuning 50 MHz). Bila perbesaran diatur, tabel hanya menampilkan apa yang terlihat di peta.
+LI|Klik spot di tabel atau di peta: lintasan menyala dengan pendar kuning, peta menggesernya ke tampilan bila perlu dan panel Rincian menampilkan lompatan, titik pantul, foEs dan azimut. Spot tetap terpilih meskipun spot baru berdatangan.
+LI|Klik titik kosong di peta: titik itu diperlakukan sebagai kemungkinan awan Es, dengan foEs yang diperlukan untuk 28, 50, 70 dan 144 MHz.
+H2|3.4 Aturan penulis
+LI|144 MHz: sporadic-E dimulai dari lebih dari 900 km; satu spot saja tidak digambar; spot digambar jika dalam 5 menit datang spot kedua pada awan yang sama atau jika di sekitarnya ada spot 50 MHz lompatan pendek. Baris hijau di atas menunjukkan berapa spot yang menunggu konfirmasi.
+LI|Transekuatorial: ke arah Afrika daratan (termasuk Madagaskar) dan Amerika Selatan, jika titik tengah jatuh pada pita inklinasi magnetik antara -20° dan +20°, hubungan tersebut transekuatorial dan bukan sporadic-E, kecuali spot menyatakan <ES>. Kepulauan Canaria, Madeira, Tanjung Verde dan Jazirah Arab tidak termasuk dalam aturan ini.
+H1|4. BENCHMARK Es
+H2|4.1 Memuat log
+P|Tab BENCHMARK Es adalah bangku uji sporadic-E pada satu log ADIF utuh, termasuk log stasiun lain. Muat ADIF membuka file (program mengingatnya dan memuatnya lagi saat dijalankan), Lepas ADIF melepaskannya. Stasiun di tengah mengusulkan callsign dan locator yang paling sering muncul di log; keduanya dapat diubah dan dikonfirmasi dengan Terapkan.
+LI|Posisi pemancar adalah MY_GRIDSQUARE setiap QSO; posisi penerima adalah GRIDSQUARE (locator yang tidak ada atau 4 karakter diambil dari CALL3).
+LI|QSO dengan PROP_MODE lain dan QSO di bawah 500 km (900 km di 144 MHz) dapat dikecualikan; QSO transekuatorial selalu dikecualikan, kecuali PROP_MODE=ES.
+H2|4.2 Hari, jam dan perhitungan
+P|Tabel QSO per hari menampilkan hari-hari dengan jumlah QSO, band, jarak maksimum dan multi-lompatan; klik pada satu hari mengisi tabel Jam dalam sehari, dengan satu baris untuk setiap jam UTC dan baris Sepanjang hari. Peta azimutal, dengan penggeser jarak maksimum, menggambar skip per sektor 10° (busur oranye = QSO terdekat, sektor hijau = jarak yang tercapai), awan pada kotak dan, untuk satu hari penuh, pergeseran awan per jam (garis merah).
+P|Halaman Perhitungan yang diusulkan menampilkan skip per sektor, perkiraan foEs dengan MUF yang diharapkan pada 1000, 1500, 2000 dan 2400 km, perkiraan awan, verifikasi multi-lompatan (lompatan sama dibandingkan lompatan pertama pendek, dicocokkan dengan awan yang terlihat dalam satu lompatan dalam ±30 menit) dan pergeseran awan jam demi jam.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Satu atau dua stasiun
+P|Tab BENCHMARK 50 MHz dikhususkan untuk sporadic-E multi-lompatan di 50 MHz. Pada baris Stasiun 1 dimuat dan dilepas log stasiun Anda; pada baris Stasiun 2 log stasiun kedua, yang ditampilkan atau disembunyikan dengan kotak centang Stasiun 2. Lintasan stasiun 1 berwarna biru muda, lintasan stasiun 2 ungu.
+LI|Yang ditampilkan adalah QSO 50 MHz multi-lompatan, yaitu di atas 3100 km (aturan penulis); jumlah lompatan mengikuti tabel IK3XTV.
+LI|Hari, dari… sampai… UTC: hari (saat dibuka, hari dengan QSO multi-lompatan terbanyak) dan rentang jam, dalam langkah 15 menit.
+LI|foEs (opsional): mewarnai lintasan dengan foEs minimum dan mencantumkannya di tabel. Ketinggian Es dan Lompatan pertama pendek dalam 1200 km seperti di tab lainnya.
+H2|5.2 Peta Mercator
+P|Peta ini berproyeksi Mercator dengan pusat bebas. Saat mouse didekatkan ke sebuah lintasan, garis dan ikon membesar dan muncul kotak WWL 6 karakter stasiun lawan. Dengan klik kiri pada lintasan itu, sebuah popup menanyakan apakah akan menampilkan semua QSO dalam file, dari semua hari, yang posisi ujungnya berada dalam 150 km: Ya mengosongkan peta dan menampilkan QSO tersebut di dalam lingkaran oranye, Tidak membiarkan peta apa adanya. Tombol Kembali ke hari dan jam mengembalikan ke pilihan sebelumnya.
+H1|6. F.A.I.
+H2|6.1 Dua tampilan
+P|Tab F.A.I. mempelajari scatter dari ketidakteraturan yang searah dengan medan magnet (sumber utama [1], [2]). Tampilan Scatter trail (pasangan A-B) menghitung, untuk dua stasiun, tempat kedudukan scatter point yang mungkin, diwarnai menurut deviasi dari kondisi pantulan, mengusulkan scatter point yang paling mungkin dan menggambar di kanan atas panel QTF dan elevasi kedua stasiun (merah = A, hijau = B). Tampilan Iso-refleksi (titik) menggambar, untuk titik pantul yang dipilih, garis-garis iso-refleksi seperti AuroReflex dan SE-PROP karya K9SE: pita berwarna pada skema gelap, garis tebal pada skema terang.
+H2|6.2 Kontrol
+LI|Stasiun A dan Stasiun B: callsign (dicari di CALL3) dan/atau locator; A kosong = stasiun Anda. Menu Verifikasi… memuat pasangan uji (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); menu Scatter point dikenal… memilih scatter point yang terdokumentasi (Jenewa, Brussel, Budapest, JN92, JN41/42).
+LI|Ketinggian (bawaan 110 km), elevasi minimum dan Refraksi (jari-jari Bumi 4/3), aktif secara bawaan.
+LI|Klik kiri pada peta: titik pantul yang akan diverifikasi (beralih ke tampilan Iso-refleksi); klik kanan: posisi stasiun B.
+LI|Verifikasi titik yang disarankan: menghitung jejak, mengambil scatter point yang diusulkan dan menampilkan garis iso-refleksinya beserta penilaiannya: MEMUASKAN (dalam 1°), DAPAT DITERIMA (dalam 2,5°), TIDAK MEMUASKAN (lebih dari itu).
+P|Jika menurut model perhitungan tidak dapat dilakukan, muncul pesan Perhitungan tidak mungkin dan tidak ada hasil lain yang ditampilkan. Di bagian bawah, tabel Spot F.A.I. menampilkan spot yang dinyatakan FAI; klik pada sebuah spot memuat pasangan stasiunnya.
+H1|7. METEOR SCATTER
+P|Tab ini berisi program YA-MS lengkap, dengan tab-tabnya (bola langit, fluks radar, hujan meteor secara langsung, perhitungan efisiensi, radar GRAVES, penerapan eksperimental prakiraan, geometri dan atenuasi, hujan meteor, sumber, peta sumber, pengumpulan data, efisiensi - penjelasan, peta kotak) dan manual perhitungannya. Bahasa dan skema warna mengikuti pilihan di bagian atas. Pengumpulan data YA-MS, di dalam E-LAYER ANALYZER, tidak membuka sesi telnet sendiri: ia menerima baris dari sesi DATA COLLECTION dan menyaring spot meteor scatter darinya.
+H1|8. AURORA
+P|Tab AURORA memakai tampilan yang sama dengan F.A.I. (ketinggian bawaan 105 km) dengan data cuaca antariksa dari NOAA [15]: oval aurora OVATION (diarsir di peta), indeks Kp tiga hari terakhir dan angin surya, diunduh setiap 5 menit ke data/swpc atau segera dengan Unduh NOAA sekarang. Program menyarankan arah antena untuk kedua stasiun.
+LI|Spot dengan <AU> atau <AUR> dari 2 jam terakhir (paling banyak 30) digambar di peta dengan scatter point yang dihitung (lingkaran oranye) jika kotak centang Spot <AU>/<AUR> di peta dengan perhitungan aktif; hasilnya menampilkan QTF dan elevasi kedua stasiun.
+H1|9. LOG ADIF
+P|Tab LOG ADIF menampilkan kotak yang dikerjakan dan dikonfirmasi, band demi band mulai dari 28 MHz ke atas, tanpa menggabungkan band. Buka file ADIF… menambahkan file log; Unduh dari LoTW… mengunduh laporan konfirmasi (nama pengguna dapat diingat, kata sandi tidak pernah disimpan); Hapus memori melepaskan file dan laporan. Kotak berwarna oranye bila dikerjakan, dengan warna lain bila dikonfirmasi dengan QSL atau via LoTW; klik pada sebuah kotak menampilkan callsign dan mode propagasinya.
+H1|10. Dokumen
+P|Tab SUMBER menampilkan sumber yang dikutip oleh program, tab demi tab. Tab RINGKASAN PILIHAN PERHITUNGAN memuat rumus dan pilihan perhitungan dengan sumber di setiap langkah; PANDUAN PENGGUNAAN ini menjelaskan cara menggunakan program; LAPORAN TEKNIS memaparkan alasan-alasan yang memandu pembuatan program. Ketiga dokumen dapat diekspor ke Word.
+H1|11. Saran praktis
+LI|Pertama-tama tulis callsign dan locator di bagian atas lalu tekan Terapkan: semua jarak, MUF dan elevasi dihitung dari sana.
+LI|Dengan RBN dan PSKReporter biarkan filter lokal tetap aktif, agar memori tidak penuh dengan spot HF.
+LI|Untuk menganalisis musim yang telah lalu gunakan kedua BENCHMARK dengan log Anda sendiri; untuk aurora dan F.A.I. selalu verifikasi titik yang diusulkan dengan tampilan Iso-refleksi.
+LI|Perhitungan bersifat indikatif: sebuah spot atau QSO menunjukkan bahwa lintasan terbuka, bukan di mana tepatnya awan berada.

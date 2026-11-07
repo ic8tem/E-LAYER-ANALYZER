@@ -10,4 +10,4 @@
 
 Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어.
 
-E-LAYER ANALYZER と YA-MS の画面、技術文書、出典が翻訳されています。F.A.I./オーロラ表示の用語 **Scatter trail** は、すべての言語で同じです。
+E-LAYER ANALYZER と YA-MS の画面、計算上の選択の概要、ユーザーマニュアル、技術報告書、出典が翻訳されています。F.A.I./オーロラ表示の用語 **Scatter trail** は、すべての言語で同じです。

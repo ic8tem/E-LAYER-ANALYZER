@@ -1,5 +1,5 @@
 TITLE|Kaip skaičiuoja E-LAYER ANALYZER
-SUB|Techninis dokumentas - parengė Costantino IC8TEM - 0.4.3 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
+SUB|Skaičiavimo sprendimų santrauka - parengė Costantino IC8TEM - 0.4.3 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
 H1|1. Įvadas
 H2|1.1 Paskirtis
 P|E-LAYER ANALYZER analizuoja VHF sklidimo būdus, susijusius su E sluoksniu: sporadinį E (taip pat tarpžemyninį kelių šuolių), F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter (su programa YA-MS) ir radijo pašvaistę. Šiame dokumente aprašytas kiekvienas skaičiavimas ir jo kilmė.
@@ -108,7 +108,7 @@ TAG|FONTE|Spalvų schemos yra YA-MS 1.5.0 schemos, perimtos iš YAEC [26]: Švie
 H1|8. Meteor scatter (YA-MS 1.5.1) ir kalbos
 TAG|FONTE|Kortelėje METEOR SCATTER yra visa YA-MS 1.5.1 [5] su savo dokumentu „Efektyvumas - paaiškinimas“ ir savo šaltiniais. Scenarijus tools/sync_yams.py nukopijuoja kiekvieną naują YA-MS versiją ir paverčia ją skydeliu nekeisdamas jos skaičiavimų.
 TAG|FONTE|YA-MS 1.4.0 pridėjo korteles Srautai realiuoju laiku (Global Meteor Network išmatuoti ZHR ir CMOR radaro radiantų žemėlapiai) ir Šaltinių žemėlapis (kur yra Collm, Sodankylä, GRAVES ir CMOR stoties atžvilgiu); YA-MS 1.5.0 prideda kortelę Duomenų rinkimas (meteor scatter spotai iš DX cluster, RBN ir PSKReporter su filtru MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). E-LAYER ANALYZER viduje kortelė Duomenų rinkimas neatidaro savų telnet seansų: ji gauna eilutes iš DATA COLLECTION seansų, todėl nėra dvigubų prisijungimų tuo pačiu šaukiniu. YA-MS šaltiniai cituojami YA-MS.
-TAG|SCELTA|Kalbos: 28, visos YAEC kalbos ir dar danų bei tagalų (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어) – sąsajai (data/lingue/ela-<kodas>.txt), Techniniam dokumentui ir Šaltiniams. F.A.I./pašvaistės vaizde sklaidos taškų juosta visuose vertimuose vadinama „Scatter trail“. Būsenos juostoje rodomas naudojamas magnetinis modelis (IAGA IGRF-14 [16]).
+TAG|SCELTA|Kalbos: 28, visos YAEC kalbos ir dar danų bei tagalų (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어) – sąsajai (data/lingue/ela-<kodas>.txt), dokumentams (Skaičiavimo sprendimų santrauka, Naudotojo vadovas, Techninė ataskaita) ir Šaltiniams. F.A.I./pašvaistės vaizde sklaidos taškų juosta visuose vertimuose vadinama „Scatter trail“. Būsenos juostoje rodomas naudojamas magnetinis modelis (IAGA IGRF-14 [16]).
 H1|9. Ribos
 LI|Stotys lokatoriaus kvadrato centre: su 4 simbolių lokatoriumi paklaida siekia ~80 km.
 LI|Iš spotų gaunama foEs yra minimali riba, o sekanto dėsnis VHF ruože pervertina reikalingą foEs (žr. 2.3).

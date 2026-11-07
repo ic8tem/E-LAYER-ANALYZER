@@ -10,4 +10,4 @@
 
 Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어.
 
-Переведены интерфейс E-LAYER ANALYZER и YA-MS, Технический документ и Источники. В виде F.A.I./аврора термин **Scatter trail** одинаков на всех языках.
+Переведены интерфейс E-LAYER ANALYZER и YA-MS, Сводка расчётных решений, Руководство пользователя, Технический отчёт и Источники. В виде F.A.I./аврора термин **Scatter trail** одинаков на всех языках.

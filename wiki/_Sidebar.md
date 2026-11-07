@@ -15,7 +15,7 @@
 - [LOG ADIF](Log-ADIF)
 - [Colours and languages](Colours-and-Languages)
 - [Data folder](Data-Folder)
-- [Sources and Technical document](Sources-and-Technical-Document)
+- [Sources and documents](Sources-and-Technical-Document)
 - [Frequently asked questions](FAQ)
 
 </details>
@@ -55,7 +55,7 @@
 - [LOG ADIF](Log-ADIF-ja)
 - [配色と言語](Colours-and-Languages-ja)
 - [データフォルダー](Data-Folder-ja)
-- [出典と技術文書](Sources-and-Technical-Document-ja)
+- [出典と文書](Sources-and-Technical-Document-ja)
 - [よくある質問](FAQ-ja)
 
 </details>
@@ -75,7 +75,7 @@
 - [LOG ADIF](Log-ADIF-ru)
 - [Цветовые схемы и языки](Colours-and-Languages-ru)
 - [Папка данных](Data-Folder-ru)
-- [Источники и Технический документ](Sources-and-Technical-Document-ru)
+- [Источники и документы](Sources-and-Technical-Document-ru)
 - [Часто задаваемые вопросы](FAQ-ru)
 
 </details>
