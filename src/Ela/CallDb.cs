@@ -122,9 +122,8 @@ namespace ELA
         }
 
         // Locator imparato da uno spot (solo 6 caratteri, per non peggiorare un dato piu' preciso)
-        // Regola dell'autore: i locator non precisi (meno di 6 caratteri) si prendono da CALL3. Se CALL3 ha per quel
-        // nominativo un locator a 6 o piu' caratteri nello stesso quadrato si usa quello;
-        // se CALL3 indica un altro quadrato (stazione portatile o spostata) resta il locator dello spot.
+        // Regola dell'autore (come in YA-MS): i locator non precisi (meno di 6 caratteri) si prendono da CALL3: se CALL3 ha
+        // per quel nominativo un locator a 6 o piu' caratteri, prevale sempre quello.
         public static string Refine(string call, string loc)
         {
             if (loc == null) return null;
@@ -133,7 +132,7 @@ namespace ELA
             string c = Lookup(call);
             if (c == null || c.Length < 6) return loc;
             c = c.ToUpperInvariant();
-            return c.StartsWith(loc, StringComparison.Ordinal) ? c : loc;
+            return c;
         }
 
         public static void Learn(string call, string loc)
