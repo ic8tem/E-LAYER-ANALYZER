@@ -1,0 +1,88 @@
+TITLE|Paano nagkakalkula ang E-LAYER ANALYZER
+SUB|Teknikal na dokumento - inihanda ni Costantino IC8TEM - bersiyon 0.3.0, Nobyembre 2026. Ang mga numero sa loob ng square bracket ay tumutukoy sa tab na MGA SANGGUNIAN.
+H1|1. Panimula
+H2|1.1 Layunin
+P|Sinusuri ng E-LAYER ANALYZER ang mga mode ng propagasyon sa VHF na may kinalaman sa E layer: sporadic-E (kasama ang multi-hop na lampas sa kontinente), F.A.I. (mga iregularidad na nakahanay sa magnetic field), meteor scatter (gamit ang programang YA-MS) at radio aurora. Inilalarawan ng dokumentong ito ang bawat kalkulasyon at kung saan ito nagmula.
+H2|1.2 Mga label
+TAG|FONTE|ang hakbang ay batay sa isang binanggit na sanggunian.
+TAG|RILIEVO|pagsusuring ginawa sa programa o paghahambing sa isang totoong kaso.
+TAG|SCELTA|pagpili ng programa, na dapat kumpirmahin sa karanasan sa banda.
+H1|2. Karaniwang heometriya
+H2|2.1 Daigdig, locator, great circle
+TAG|FONTE|Pabilog na Daigdig na may radius r = 6372.7955 km, gaya ng sa artikulo tungkol sa F.A.I. [1] at sa YA-MS [5].
+TAG|SCELTA|Inilalagay ang mga istasyon sa gitna ng grid square ng locator (4, 6 o 8 character). Distansiya, azimuth, mga pagitang punto at mga bilog gamit ang mga pormula ng great circle:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elebasyon patungo sa isang punto ng E layer
+TAG|FONTE|Pormula (2) ng artikulo tungkol sa F.A.I. [1], na may x = d / r, H na taas ng punto, h na taas ng istasyon. Ginagamit ng programa ang katumbas na anyo na may dalawang argumento, eksakto sa pabilog na Daigdig:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Sa H = 110 km, nagbibigay ang programa ng 35.3° sa 150 km, gaya ni IW1AZJ (35°) sa pahina ni IC8FAX [2]; sa 800 km nagbibigay ito ng 4.2° kumpara sa 6° na nakasaad para kay IC8CQF (tinatayang lamang ang distansiya sa pahina: ang 6° ay katumbas ng mga 680 km).
+H2|2.3 Hop sa layer at batas ng secant
+P|Para sa isang sinag na umaalis sa elebasyon e at sumasalubong sa layer sa taas na H, ang anggulo ng insidensiya φ (mula sa patayo) at ang distansiya sa lupa ng punto ng repleksiyon ay:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [sa radian]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Ang foEs na ipinapakita ng programa ay isang pinakamababang threshold: sinasabi lamang ng spot na nakadaan ang frequency f. Isinasaalang-alang ng factor na sec φ ang kurbada ng Daigdig.
+TAG|RILIEVO|Ang mga karanasang iniulat ni IK3XTV [3] ay nagpapakita ng foEs na 12-15 MHz para sa 144 MHz: mas mataas ang halagang ibinibigay ng purong batas ng secant (mga 25-28 MHz sa 2000 km). Dapat basahin ang datos bilang relatibong paghahambing ng mga ulap, hindi bilang absolutong halaga.
+H1|3. Sporadic-E
+H2|3.1 Bilang ng hop
+TAG|FONTE|Talahanayan ni IK3XTV [3]: iisang hop 500-650 / 1500-2000 / 2200-2400 km (pinakamababa / pinakamainam / pinakamataas); dobleng hop 2800-3000 / 3200-4000 / 4400-5000 km; triple hop pinakamainam 4800-6400 km, pinakamataas 6900 km.
+TAG|SCELTA|Ang bilang ng hop n ay ayon sa talahanayan: n = 1 hanggang 2400 km, n = 2 hanggang 5000 km, n = 3 hanggang 6900 km, lampas dito n = pag-round up ng D / 2300 km. Sa ilalim ng 500 km, hindi itinuturing na sporadic-E ang spot. Sa pagitan ng 2400 at 2800 km, ipinapahiwatig ng programa ang "transition zone".
+H2|3.2 Unang hop ng dalawang istasyon
+TAG|SCELTA|Hinuha ng pantay na hop: ang mga punto ng repleksiyon ay nasa great circle sa mga fraction na (2k − 1) / (2n) ng landas. Ang unang hop ng spotter ay ang puntong k = 1 (kahel), ang unang hop ng DX ay ang puntong k = n (lila); kung iisa lamang ang hop, nagtatagpo sila sa gitnang punto (dilaw).
+TAG|FONTE|Hinuha ng maikling unang hop: may karanasan ang may-akda (IC8TEM), sa multi-hop, sa maikling unang hop sa loob ng 1200 km mula sa kanyang QTH [4]. Iginuguhit ng programa (mga bilog na walang laman) ang punto ng repleksiyon sa gitna ng maikling hop ng bawat istasyon; pinipili sa tab ang haba ng maikling hop (1200 km bilang simula).
+H2|3.3 Mga ulap ng Es sa mga Maidenhead grid square
+TAG|SCELTA|Ang mga punto ng repleksiyon (gitnang punto para sa iisang hop, unang hop para sa multi-hop) ay tinitipon sa mga 4-character na Maidenhead grid square (2° × 1°). Para sa bawat grid square, pinananatili ang pinakamataas na pinakamababang foEs sa mga spot na nasa loob nito; ang kulay ay mula asul (< 5 MHz) hanggang pula (> 20 MHz).
+P|Para sa sariling istasyon, kinakalkula ng programa ang MUF sa bawat ulap na nasa distansiyang d, na may hop na 2d ang haba, kung ang ulap ay nasa abot lamang ng iisang hop:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Talahanayang "Mga ulap ng Es": pula ang mga ulap na magbibigay ng MUF ≥ 144 MHz, kahel ≥ 70 MHz, dilaw ≥ 50 MHz.
+H2|3.4 Hindi umiiral ang sporadic-E sa 432 MHz
+TAG|FONTE|Ang MUF ng sporadic-E sa gitnang latitude ay umaabot sa 150 MHz at higit pa (Whitehead [23]); kailangan ng napakasiksik na ulap upang ilihis ang mga sinag na halos pahalang hanggang 200 MHz (IK3XTV [22]). Ang mga rekord ng ARRL [24] ay nag-uulat ng mga contact sa sporadic-E sa 50 at 144 MHz lamang, wala sa 222 at 432 MHz.
+TAG|SCELTA|Dahil dito, sinusuri lamang ng tab na SPORADIC-E ang 28, 50, 70 at 144 MHz: hindi kailanman itinuturing na sporadic-E ang mga spot sa 432 MHz (may ilang pangkalahatang sanggunian, kasama ang mga gawa ng artificial intelligence, na nagsasabi nito nang walang dokumentasyon).
+H1|4. F.A.I. at aurora: scatter na nakahanay sa magnetic field
+H2|4.1 Ang magnetic field
+TAG|FONTE|Kinakalkula ang field gamit ang modelong IGRF-14 [16] (spherical harmonics hanggang degree 13, mga coefficient ng 2025-2030 na in-interpolate sa petsa). Ang SE-PROP ni K9SE [9] ay gumamit din ng modelong spherical harmonics (WMM).
+TAG|RILIEVO|Tumutugma ang kalkulasyon sa ppigrf sa loob ng 1 nT. Sa simpleng dipole, walang nahahanap na scatter point ang pagsusuring IC8FAX - G4LOH; sa IGRF-14 ay mayroon: kailangang-kailangan ang kumpletong modelo.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, taas 105 km, repraksiyon 4/3): pinakamalamang na scatter JP01AK (61.4° N 0.1° E, sa laot ng Shetland), paglihis 0.97°, QTF 11° (el. 0.5°) mula sa IO70VJ at 299° (el. 7.6°) mula sa JO59BC. Walang repraksiyon: IP70RP, paglihis 1.86°, QTF 359° at 288°.
+H2|4.2 Ang kondisyon ng repleksiyon
+TAG|FONTE|Ang signal na ikinakalat ng isang iregularidad na nakahanay sa field ay lumalabas sa isang kono na ang axis ay kahanay ng B; maaaring magkonekta ang mga istasyong nasa mga supplementary contour (a1 + a2 = 180° [1], mga contour na ±c ni K9SE/K4GFG [2] [9] [10]).
+P|Para sa bawat istasyong X, kinakalkula ang c(X), ang anggulo (may sign) sa pagitan ng line of sight X → SP at ng planong patayo sa B sa scatter point SP. Ang paglihis mula sa kondisyon ng repleksiyon para sa contact na A-B ay:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Para sa echo pabalik sa parehong istasyon (backscatter), ang kondisyon ay nagiging sinag na patayo sa B, na may tolerance na ±2-3° (Lange-Hesse [12]); bumababa ang lakas nang mga 3-5 dB bawat digri ng paglihis (Jackel at iba pa [13]).
+H2|4.3 Tanaw na "Scatter trail" (pares A-B)
+TAG|SCELTA|Sa isang grid na 0.2° sa taas na H, hinahanap ang mga puntong nakikita ng dalawang istasyon na may elebasyong ≥ pinakamababa at may dev ≤ 2.5°. Ang mga klase ng kulay ay 0-1°, 1-1.5°, 1.5-2°, 2-2.5° (estilo ng Aurora QTF [11]). Ipinapakita ng kahon sa kanang itaas ang QTF at elebasyon ng A (pula) at B (berde) patungo sa bawat punto ng scatter trail.
+TAG|SCELTA|Pinakamalamang na scatter point: paglihis ≤ 1° at pinakamaliit na kabuuan ng mga square ng distansiya (pinakamaliit na path loss); sa aurora, mas pinipili ang mga punto sa loob ng oval.
+TAG|RILIEVO|Mga pagsusuring hiniling ng may-akda (IGRF-14, H = 110 km, repraksiyon 4/3, resulta ng programa): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: scatter trail mula sa Bay of Biscay hanggang Adriatic sa kahabaan ng ika-44 na parallel, pinakamalamang na scatter JN44GH (44.3° N 8.6° E, sa ibabaw ng Genoa), paglihis 0.97°, QTF 314° (el. 7.8°) mula sa Capri at 77° (el. 9°) mula sa F6DRO; dumadaan ang scatter trail sa 143 km mula sa Geneva. IC8FAX - G4LOH (IO70JC), 1843 km: scatter trail sa timog-kanlurang Germany at Belgium, pinakamalamang na scatter JN49FR (49.7° N 8.5° E), paglihis 0.88°, QTF 338° (el. 1.9°) mula sa Capri at 87° (el. 3°) mula sa G4LOH; dumadaan ang scatter trail sa 28 km mula sa kilalang scatter point ng Brussels. Kung walang repraksiyon, umiikli ang mga scatter trail (G4LOH: elebasyon 0.5° at 2.1°). IC8FAX - FA1MXE (JN05GQ, unang F.A.I. QSO noong 1990 via Geneva sa 330°): dumadaan ang scatter trail malapit sa Geneva.
+TAG|RILIEVO|Kaso ni DL5MCG [6]: beacon DB0FAI (JN58IC) - Dresden via Sheffield, paglihis 0.3° sa 110 km.
+TAG|SCELTA|Repraksiyon: para sa mga elebasyon at horizon ng mga tanaw na F.A.I. at AURORA, ginagamit bilang default ang katumbas na radius ng Daigdig na k · r na may k = 4/3 (standard na atmospera), na maaaring i-off gamit ang kahon na "Repraksiyon". Ang mga distansiya sa lupa at ang kondisyon ng repleksiyon ay kinakalkula pa rin sa tunay na heometriya.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Hindi posible ang kalkulasyon: kung ayon sa modelo ay walang puntong tumutugon sa kondisyon sa loob ng 2.5° (tanaw na Scatter trail) o kung ang punto ng repleksiyon ay nasa ilalim ng horizon ng istasyon (tanaw na Iso-repleksiyon), ipinapakita ng programa ang popup na "Hindi posible ang kalkulasyon" at wala nang ibang resultang ipinapakita.
+H2|4.4 Tanaw na "Iso-repleksiyon" (isoflection loci): pagsusuri ng punto ng repleksiyon
+TAG|FONTE|Ito ang karaniwang heometrikong konstruksiyon sa F.A.I. at aurora upang suriin kung tama ang napiling punto ng repleksiyon (mga linya ng iso-repleksiyon ng SE-PROP [9], AuroReflex [11], mga supplementary contour ni K9SE/K4GFG [2] [10]).
+P|Para sa punto ng repleksiyon SP at sa bawat punto sa lupa G sa loob ng horizon ng SP, kinakalkula ng programa ang kabuuan ng mga contour; ang linyang S = 0 ay ang lokasyon ng mga istasyong tumatanggap sa A sa pamamagitan ng SP:
+EQ|S(G) = c(A) + c(G)        mga antas na iginuhit: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Sa mga scheme na madilim ang background, ang mga klase ay mga may-kulay na banda (pula 0°, kahel 1°, dilaw 2°, berde 4°, mapusyaw na asul 8°, asul 16°); sa maliliwanag na scheme, makakapal na linya ang mga ito (mga contour line na nakuha sa paraang marching squares), mas makapal para sa mga antas na mas malapit sa 0°.
+TAG|SCELTA|Iminumungkahi ng programa ang pinakamalamang na scatter point (button na "Suriin ang inirerekomendang punto"), ngunit maaaring pumili ang user ng anumang ibang punto sa pamamagitan ng kaliwang click sa mapa; inililipat ng kanang click ang istasyon B. Hatol sa pares A-B: kasiya-siya sa loob ng 1°, katanggap-tanggap sa loob ng 2.5° (tolerance ni Lange-Hesse [12]), hindi kasiya-siya kung lampas. Kung ang punto ay nasa ilalim ng horizon ng isa sa dalawang istasyon, lilitaw ang popup na "Hindi posible ang kalkulasyon".
+TAG|SCELTA|Sa itaas: azimuth at elebasyon ng A at B patungo sa punto; berdeng bilog = horizon ng mga istasyon sa taas ng layer, pulang bilog = lugar kung saan nakikita ang punto.
+H2|4.5 Aurora
+TAG|FONTE|Auroral oval na OVATION Prime, Kp at solar wind mula sa NOAA SWPC [15], ina-update bawat 5 minuto at sine-save sa data/swpc. Pinapakinis ang 1° na grid gamit ang bilinear interpolation sa mga cell na 0.5°.
+TAG|SCELTA|Inirerekomendang tutok, para sa dalawang istasyon: sa kahabaan ng linya ng perpendicularity ng bawat istasyon (echo na patayo sa B, tolerance 1.5°, taas 105 km), pinipili ang punto na may pinakamataas na probabilidad ng oval. Ang taas na 105 km ay nasa pagitan ng 104 km ni Jackel [13] at 110 km ni Lange-Hesse [12].
+TAG|FONTE|Mga praktikal na patakaran: tumutok sa pagitan ng hilaga at silangan, simula sa mga 45°; Doppler hanggang ~2 kHz sa 144 MHz, karaniwang abot ~1300 km, pinakamataas ~2000 km (G3WPO [14]).
+H1|5. Pagkolekta ng datos
+H2|5.1 Mga telnet session
+TAG|SCELTA|Tatlong session: cluster na iyong pinili, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster na may mga spot ng PSKReporter (hal. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Awtomatikong login gamit ang callsign, mga panimulang command na hinihiwalay ng semicolon, muling pagkonekta pagkalipas ng 30 s.
+H2|5.2 Pagbasa ng mga spot
+TAG|SCELTA|Ang linyang "DX de SPOTTER: FREQ DXCALL komento HHMMZ [LOC]" ay binabasa gamit ang regular expression (hindi nakapirming column). Mula sa komento binabasa ang mga locator at mode sa anyong "JN70CN<ES>JO62QM" (unang locator = spotter, pangalawa = DX), ang mode ng propagasyon (ES, FAI, AU, MS, TR, EME, F2, TEP), ang S/N ratio at ang mode ng emisyon. Hinahanap sa CALL3 [21] ang nawawalang locator; ang mga 6-character na nabasa sa mga komento ay idinaragdag sa data/call3_nuovi.txt.
+TAG|SCELTA|Archive: isang CSV file bawat araw sa data/spot; sa memorya ang mga pinakahuling spot (hanggang 50000). Sa RBN at PSKReporter, karaniwang ang mga spot lamang mula 28 MHz pataas ang sine-save.
+H1|6. Log ADIF
+TAG|FONTE|Port ng LoTW Grid Map v2 [25]: ang ulat ng LoTW (na-download gamit ang username at password, na hindi kailanman sine-save) at ang mga ADIF file ng log ay pinagsasama ayon sa callsign, banda, petsa at oras; pinagsasama ang mga kumpirmasyon.
+TAG|SCELTA|Mga banda lamang mula 28 MHz pataas, bawat isa bilang hiwalay na banda, walang pagsasama-sama. Mga kulay: kahel = nakontak, asul = kumpirmado sa QSL, berde = kumpirmado via LoTW. Filter ayon sa mode ng propagasyon (PROP_MODE ng ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Mga kulay
+TAG|FONTE|Ang mga color scheme ay ang sa YA-MS 1.3.0, na hango sa YAEC [26]: Maliwanag, Gabi, Itim, walong pastel at Bakas ng meteor. Pinipili ang scheme sa kanang itaas at agad na binubuo muli ang window; sa tanaw na Iso-repleksiyon, gumagamit ng may-kulay na banda ang madidilim na scheme at makakapal na linya ang maliliwanag (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) at mga wika
+TAG|FONTE|Naglalaman ang tab na METEOR SCATTER ng kumpletong YA-MS 1.3.0 [5], kasama ang dokumento nitong "Episyensya - paliwanag" at ang mga sanggunian nito. Kinokopya ng script na tools/sync_yams.py ang bawat bagong bersiyon ng YA-MS at ginagawa itong panel nang hindi binabago ang mga kalkulasyon nito.
+TAG|SCELTA|Mga wika: Italyano, Ingles, Ruso, Hapon, Aleman at Olandes, para sa interface (data/lingue/ela-<kodigo>.txt), para sa Teknikal na dokumento at para sa Mga sanggunian. Sa tanaw na F.A.I./aurora, ang bakas ng mga scatter point ay tinatawag na "Scatter trail" sa lahat ng salin. Ipinapakita ng status bar ang magnetic model na ginagamit (IGRF-14 ng IAGA [16]).
+H1|9. Mga limitasyon
+LI|Mga istasyon sa gitna ng grid square ng locator: sa 4-character na locator, umaabot ang error sa ~80 km.
+LI|Ang foEs mula sa mga spot ay isang pinakamababang threshold at sobra ang tantiya ng batas ng secant sa kailangang foEs sa VHF (tingnan ang 2.3).
+LI|Ang "pinakamalamang" na scatter point ay pamantayan ng programa: ang buong scatter trail ang pisikal na resulta.
+LI|Ang OVATION oval ay modelo ng probabilidad ng optical aurora, na ginagamit bilang tagapagpahiwatig para sa radio aurora.
