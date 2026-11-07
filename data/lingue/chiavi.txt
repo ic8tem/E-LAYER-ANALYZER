@@ -16,6 +16,7 @@
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}
 A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.
 A.R.
+ACCETTATO per "{0}": {1} da {2}, {3} MHz
 ADESSO
 ADIF: {0} ({1} quadrati-QSO)
 ALTRI RIFERIMENTI DELL'ARTICOLO
@@ -25,6 +26,8 @@ ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.
 Adesso
 Aggiornamento automatico di tutte le fonti ogni 5 minuti
+Aggiungi
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.
 Andromedidi
 Antenna
 Antenna Yagi: boom m
@@ -32,6 +35,7 @@ Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi 
 Antenna az: -
 Antenna az: {0}° (verso il DX)
 Apri in Word
+Apri la cartella degli spot
 Arietidi di maggio Sud diurne
 Arietidi diurne
 Assi del flusso non trovati nella posizione attesa.
@@ -43,9 +47,13 @@ Aurigidi
 Azimut
 BILANCIO A {0:F0} MHz (punto medio)
 Banda MHz
+Bande (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio
 Bootidi di giugno
 CALCOLO E TEORIA DELL'EFFICIENZA
+CALL3: caricamento...
+CALL3: nessun archivio (data/call3.txt)
+CALL3: {0:N0} nominativi
 CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti
 COME ASCOLTARE I PING DI GRAVES
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)
@@ -62,13 +70,21 @@ Carica file RMOB dal disco...
 Catalogo sciami
 Che cosa fare
 Chiaro
+Chiuso
+Cluster con PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.
 Collm stessa ora
 Collm {0} MHz (validi)
 Comae Berenicidi
 Comandi
+Commento
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.
 Connessione ripristinata.
+Connetti
+Connetti all'avvio
+Contatori
 Conteggio
 Controllo le fonti di dati esterne...
 Corrispondente
@@ -78,6 +94,7 @@ D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sot
 DATI DEGLI SCIAMI
 DATI RADAR IN DIRETTA
 DENTRO il lobo
+DX cluster a scelta
 Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.
 Decl.
 Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)
@@ -85,6 +102,8 @@ Densita' scia q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile
 Direzioni Hot A / Hot B
+Disconnesso
+Disconnetti
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)
 Documento Word
 Documento esportato: {0}
@@ -118,9 +137,12 @@ File ADIF del log
 File RMOB
 File RMOB (conteggi orari del mese)
 File mancante: {0}
+Filtro
+Filtro degli spot meteor scatter
 Finestra utile
 Flusso radar
 Flusso radar: nessun dato. Premi "Scarica adesso".
+Fonte
 Fonte del massimo
 Fonti
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.
@@ -136,11 +158,13 @@ Geminidi
 Geometria e attenuazione
 Giorno per la tabella 24 h (UTC)
 Giudizio
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).
 Global Meteor Network (GMN)
 Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)
+Host
 Hot A
 Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}
@@ -157,12 +181,15 @@ Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale vi
 Il file scelto non e' un file locale.
 Il mio locator
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)
+Importa CALL3.TXT...
 Impossibile leggere {0}: {1}
 Indice sciami tratta
 Indice tratta (ZHR×eff.)
+Indirizzo mancante
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)
+Invia
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV
@@ -170,6 +197,7 @@ John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).
 La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).
@@ -185,8 +213,11 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)
 Lincidi di settembre
 Lingua dell'interfaccia
 Liridi
+Loc DX
+Loc spotter
 Locator del corrispondente non valido
 Locator della stazione non valido
+Manca il nominativo per il login
 Mappa d'Europa
 Mappa d'Europa non disponibile (serve la rete al primo avvio).
 Mappa delle fonti
@@ -214,6 +245,8 @@ No
 No: fuori dai settori
 No: sopra il fascio (circa 25°)
 No: sotto l'orizzonte di GRAVES
+Nominativo per il login
+Non connesso
 Non ho riconosciuto il formato del file.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.
 Non riesco ad aprire il documento: {0}
@@ -222,6 +255,7 @@ Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il 
 Notte
 Nuovo locator del corrispondente dalla mappa: {0}
 Nuovo locator della stazione dalla mappa: {0}
+Nuovo tentativo tra 30 s
 O
 ORA MIGLIORE DEL GIORNO
 Ora
@@ -248,6 +282,7 @@ Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)
 Phoenicidi
 Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.
 Piscidi di aprile diurne
+Porta
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km
 Potenza W
 Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)
@@ -257,6 +292,7 @@ Previsione {0} /ora
 Previsione {0} MHz (rifl./ora)
 Pronto
 Prossimo massimo (UTC)
+Prova del filtro
 Punt. migliore
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}
 Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)
@@ -272,6 +308,7 @@ Quota scie km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz
@@ -279,11 +316,14 @@ RMOB {0} (scala a destra)
 RMOB {0}: {1} ore lette alle {2} UTC
 RMOB – osservatori su 143,050 MHz
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)
+Raccolta dati
 Radar GRAVES
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:
+Reverse Beacon Network
 Ricava l'esponente dal file RMOB
 Ricevitore
+Riconnetti
 Riepilogo dell'anno (ZHR misurati, GMN)
 Riga {0} ignorata (colonne insufficienti)
 Riga {0}: {1}
@@ -292,28 +332,35 @@ Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO
 S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.
+SCARTATO: nessuna parola del filtro.
 SCIAME PIÙ FAVOREVOLE
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)
 SGO, Finlandia
 Scarica RMOB adesso
 Scarica adesso
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)
 Scia meteorica
 Sciame
 Sciame più favorevole
 Sciami
 Sciami in diretta
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).
+Scrivi il nominativo per il login prima di connettere.
 Segnale minimo dBm
 Sequenza del fascio
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.
 Sextantidi diurne
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)
+Si tengono solo gli spot che contengono una delle parole accese, scritta in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.
 Sigla
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.
 Sorge
 Sorgente Antielio
+Spot meteor scatter raccolti (i più recenti in alto)
 Stazione        {0}   quota {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}
+Svuota la tabella
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)
 Sì
 Sì · settore {0}
@@ -366,6 +413,9 @@ calcolo della tratta GRAVES → te in corso...
 circumpolare
 clic destro =
 clic sinistro =
+collegamento via meteor scatter
+comandi dopo il login, separati da ;
+comando da inviare (es. sh/dx 20)
 confermato (QSL o LoTW)
 copia locale del {0} UTC
 corrispondente
@@ -423,6 +473,7 @@ meteore/ora stimate
 miglior punt.
 misura il flusso e lo ZHR di ogni sciame attivo
 mobile
+modo digitale MS
 nessun ADIF caricato
 nessun dato radar: vedi Flusso radar
 nessun file RMOB caricato
@@ -431,6 +482,8 @@ nessuna rete attiva
 nessuno sciame utile adesso: hot spot più adatto al fascio
 nessuno sciame utile in questo giorno
 nessuno sciame utile in questo momento
+nominativo
+nuova parola
 nuovo dato
 nuovo dato alle {0} UTC
 omega-Cetidi Nord diurne
@@ -438,6 +491,7 @@ omega-Cetidi Sud diurne
 orizzonte del fascio
 orologio del PC sincronizzato
 osservatori RMOB che ascoltano GRAVES
+parola aggiunta
 passi
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.
@@ -455,6 +509,9 @@ radio, diurno
 rete assente: {0}
 riflessioni/ora
 riflessioni/ora a {0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}
+righe sotto 27990 kHz scartate: {0}
+righe {0}, spot letti {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora
 scala non letta
 scala tarata 0-1200 meteore/ora
@@ -496,6 +553,7 @@ zona PREV
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)
 {0} h
 {0} km dalla tua stazione
+{0} spot MS in memoria
 {0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)
 {0} · zona
 {0}: non lavorato

@@ -27,6 +27,7 @@ namespace YAMS
         IStorageProvider StorageProvider { get { TopLevel t = TopLevel.GetTopLevel(this); return t != null ? t.StorageProvider : null; } }
         public static Action<string> LanguageRequested;   // cambio di lingua: lo esegue la finestra di E-LAYER ANALYZER
         public static Action<int> ThemeRequested;         // cambio dello schema di colori: idem
+        public static bool Hosted = true;                 // dentro E-LAYER ANALYZER: le righe telnet arrivano da DATA COLLECTION
         bool openedOnce;
         public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
         public void SaveSettings() { SaveConfig(); }
@@ -209,6 +210,7 @@ namespace YAMS
                 LoadCachedRadar();
                 Recalc();
                 StartMapLoad();
+                RdAutoStart();
                 if (chkAuto.IsChecked == true) StartFetch(); else lastFetchUtc = DateTime.UtcNow;
                 if (!string.IsNullOrEmpty(Catalog.LoadMessage) && !catalogShown)
                 {
@@ -692,6 +694,9 @@ namespace YAMS
 
             // --- Mappa delle fonti (MainWindow.MappaFonti.cs)
             BuildSourcesMapTab();
+
+            // --- Raccolta dati: spot MS da cluster, RBN e PSKReporter (MainWindow.Raccolta.cs)
+            BuildCollectTab();
 
             // --- Efficienza - spiegazione (MainWindow.Spiegazione.cs)
             BuildExplainTab();
@@ -1521,6 +1526,7 @@ namespace YAMS
             DateTime now = DateTime.UtcNow;
             lblClock.Text = now.ToString("HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
             UpdateGravesTick();   // fascio di GRAVES: passo attivo e prossimi passaggi
+            RefreshCollect(false);   // raccolta dati: righe telnet nuove, contatori, tabella
             if (now.Second == 0)
             {
                 if (TrackValue == 0) UpdateSky();
@@ -1533,6 +1539,7 @@ namespace YAMS
 
         void SaveConfig()
         {
+            SaveCollectConfig();
             cfg.Set("mio_locator", Up(txtHome));
             cfg.Set("mia_quota_m", V(numHomeAlt));
             cfg.Set("dx_locator", Up(txtDx));
