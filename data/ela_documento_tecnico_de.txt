@@ -1,0 +1,85 @@
+TITLE|Wie E-LAYER ANALYZER rechnet
+SUB|Technisches Dokument - von Costantino IC8TEM - Version 0.1.0, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN.
+H1|1. Einleitung
+H2|1.1 Zweck
+P|E-LAYER ANALYZER analysiert die VHF-Ausbreitungsarten, an denen die E-Schicht beteiligt ist: Sporadic-E (auch interkontinentaler Mehrfachsprung), F.A.I. (am Magnetfeld ausgerichtete Irregularitäten), Meteorscatter (mit dem Programm YA-MS) und Radio-Aurora. Dieses Dokument beschreibt jede Berechnung und ihre Herkunft.
+H2|1.2 Kennzeichnungen
+TAG|FONTE|der Schritt übernimmt eine zitierte Quelle.
+TAG|RILIEVO|Prüfung am Programm oder Vergleich mit einem realen Fall.
+TAG|SCELTA|Festlegung des Programms, durch die Praxis auf dem Band zu bestätigen.
+H1|2. Gemeinsame Geometrie
+H2|2.1 Erde, Locator, Großkreis
+TAG|FONTE|Kugelerde mit Radius r = 6372,7955 km, wie im F.A.I.-Artikel [1] und in YA-MS [5].
+TAG|SCELTA|Die Stationen werden in die Mitte des Locator-Feldes gesetzt (4, 6 oder 8 Zeichen). Entfernung, Azimut, Zwischenpunkte und Kreise mit den Großkreisformeln:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevation zu einem Punkt der E-Schicht
+TAG|FONTE|Formel (2) des F.A.I.-Artikels [1], mit x = d / r, H Höhe des Punktes, h Höhe der Station. Das Programm verwendet die gleichwertige Form mit zwei Argumenten, exakt auf der Kugelerde:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Mit H = 110 km liefert das Programm 35,3° bei 150 km, wie IW1AZJ (35°) auf der Seite von IC8FAX [2]; bei 800 km liefert es 4,2° gegenüber den für IC8CQF angegebenen 6° (die Entfernung auf der Seite ist gerundet: 6° entsprechen etwa 680 km).
+H2|2.3 Sprung in der Schicht und Sekantengesetz
+P|Für einen Strahl, der mit der Elevation e startet und die Schicht in der Höhe H trifft, gelten für den Einfallswinkel φ (gegen die Senkrechte) und die Bodenentfernung des Reflexionspunktes:
+EQ|sin φ = r · cos e / (r + H)        d_refl = r · (90° − e − φ) [im Bogenmaß]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Die vom Programm angegebene foEs ist eine Mindestschwelle: der Spot sagt nur, dass die Frequenz f durchgekommen ist. Der Faktor sec φ berücksichtigt die Erdkrümmung.
+TAG|RILIEVO|Die von IK3XTV [3] berichteten Erfahrungen nennen foEs von 12-15 MHz für 144 MHz: das reine Sekantengesetz ergibt höhere Werte (etwa 25-28 MHz auf 2000 km). Der Wert ist als relativer Vergleich zwischen Wolken zu lesen, nicht als Absolutwert.
+H1|3. Sporadic-E
+H2|3.1 Anzahl der Sprünge
+TAG|FONTE|Tabelle von IK3XTV [3]: Einzelsprung 500-650 / 1500-2000 / 2200-2400 km (minimal / optimal / maximal); Doppelsprung 2800-3000 / 3200-4000 / 4400-5000 km; Dreifachsprung optimal 4800-6400 km, maximal 6900 km.
+TAG|SCELTA|Die Anzahl der Sprünge n entspricht der Tabelle: n = 1 bis 2400 km, n = 2 bis 5000 km, n = 3 bis 6900 km, darüber n = D / 2300 km aufgerundet. Unter 500 km gilt der Spot nicht als Sporadic-E. Zwischen 2400 und 2800 km meldet das Programm die „Übergangszone“.
+H2|3.2 Erster Sprung beider Stationen
+TAG|SCELTA|Hypothese gleicher Sprünge: die Reflexionspunkte liegen auf dem Großkreis bei den Anteilen (2k − 1) / (2n) der Strecke. Der erste Sprung des Spotters ist der Punkt k = 1 (orange), der erste Sprung des DX ist der Punkt k = n (violett); bei nur einem Sprung fallen sie im Mittelpunkt zusammen (gelb).
+TAG|FONTE|Hypothese des kurzen ersten Sprungs: der Autor (IC8TEM) hat beim Mehrfachsprung Erfahrung mit einem kurzen ersten Sprung bis 1200 km vom eigenen QTH [4]. Das Programm zeichnet (leere Kreise) den Reflexionspunkt in der Mitte des kurzen Sprungs jeder Station; die Länge des kurzen Sprungs wird im Reiter eingestellt (Vorgabe 1200 km).
+H2|3.3 Es-Wolken auf Maidenhead-Feldern
+TAG|SCELTA|Die Reflexionspunkte (Mittelpunkt beim Einzelsprung, erste Sprünge beim Mehrfachsprung) werden in 4-stelligen Maidenhead-Feldern (2° × 1°) gesammelt. Für jedes Feld wird die höchste Mindest-foEs der darin liegenden Spots gespeichert; die Farbe reicht von blau (< 5 MHz) bis rot (> 20 MHz).
+P|Für die eigene Station berechnet das Programm die MUF über jede Wolke in der Entfernung d, mit einem Sprung der Länge 2d, nur wenn die Wolke in Einzelsprung-Reichweite liegt:
+EQ|MUF_meine = foEs_Wolke · sec φ(2d)
+TAG|SCELTA|Tabelle „Es-Wolken“: rot die Wolken, die eine MUF ≥ 144 MHz ergäben, orange ≥ 70 MHz, gelb ≥ 50 MHz.
+H2|3.4 Sporadic-E gilt nicht für 432 MHz
+TAG|FONTE|Die MUF des Sporadic-E in mittleren Breiten erreicht 150 MHz und mehr (Whitehead [23]); sehr dichte Wolken sind nötig, um flach einfallende Strahlen bis 200 MHz abzulenken (IK3XTV [22]). Die ARRL-Rekorde [24] führen Sporadic-E-Verbindungen nur auf 50 und 144 MHz, keine auf 222 und 432 MHz.
+TAG|SCELTA|Deshalb analysiert der Reiter SPORADIC-E nur 28, 50, 70 und 144 MHz: Spots auf 432 MHz werden nie als Sporadic-E behandelt (einige allgemeine Quellen, auch von künstlicher Intelligenz erzeugte, behaupten es ohne Belege).
+H1|4. F.A.I. und Aurora: am Magnetfeld ausgerichtete Streuung
+H2|4.1 Das Magnetfeld
+TAG|FONTE|Das Feld wird mit dem Modell IGRF-14 [16] berechnet (Kugelfunktionen bis Grad 13, Koeffizienten 2025-2030 auf das Datum interpoliert). SE-PROP von K9SE [9] verwendete ebenso ein Kugelfunktionsmodell (WMM).
+TAG|RILIEVO|Die Berechnung stimmt mit ppigrf auf 1 nT überein. Mit dem einfachen Dipol findet die Prüfung IC8FAX - G4LOH keinen Streupunkt, mit IGRF-14 schon: das vollständige Modell ist unverzichtbar.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, Höhe 105 km, Refraktion 4/3): wahrscheinlichster Streupunkt JP01AK (61,4° N 0,1° O, vor den Shetlandinseln), Abweichung 0,97°, QTF 11° (El. 0,5°) von IO70VJ und 299° (El. 7,6°) von JO59BC. Ohne Refraktion: IP70RP, Abweichung 1,86°, QTF 359° und 288°.
+H2|4.2 Die Reflexionsbedingung
+TAG|FONTE|Das von einer feldausgerichteten Irregularität gestreute Signal tritt auf einem Kegel mit der Achse entlang B aus; Stationen auf ergänzenden Konturen können miteinander arbeiten (a1 + a2 = 180° [1], Konturen ±c von K9SE/K4GFG [2] [9] [10]).
+P|Für jede Station X wird c(X) berechnet, der (vorzeichenbehaftete) Winkel zwischen der Sichtlinie X → SP und der Ebene senkrecht zu B im Streupunkt SP. Die Abweichung von der Reflexionsbedingung für die Verbindung A-B ist:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Für das Echo zur selben Station (Rückstreuung) wird die Bedingung zu Strahl senkrecht zu B, mit einer Toleranz von ±2-3° (Lange-Hesse [12]); die Intensität fällt um etwa 3-5 dB pro Grad Abweichung (Jackel u. a. [13]).
+H2|4.3 Ansicht „Spur“ (Paar A-B)
+TAG|SCELTA|Auf einem Raster von 0,2° in der Höhe H werden die Punkte gesucht, die beide Stationen mit Elevation ≥ Minimum sehen und für die dev ≤ 2,5° gilt. Die Farbklassen sind 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (Stil Aurora QTF [11]). Der Kasten oben rechts zeigt QTF und Elevation von A (rot) und B (grün) zu jedem Punkt der Spur.
+TAG|SCELTA|Wahrscheinlichster Streupunkt: Abweichung ≤ 1° und kleinste Summe der Entfernungsquadrate (geringste Dämpfung); bei Aurora werden Punkte innerhalb des Ovals bevorzugt.
+TAG|RILIEVO|Vom Autor gewünschte Prüfungen (IGRF-14, H = 110 km, Refraktion 4/3, Ergebnisse des Programms): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Spur vom Golf von Biskaya bis zur Adria entlang des 44. Breitengrads, wahrscheinlichster Streupunkt JN44GH (44,3° N 8,6° O, über Genua), Abweichung 0,97°, QTF 314° (El. 7,8°) von Capri und 77° (El. 9°) von F6DRO; die Spur verläuft 143 km von Genf entfernt. IC8FAX - G4LOH (IO70JC), 1843 km: Spur über Südwestdeutschland und Belgien, wahrscheinlichster Streupunkt JN49FR (49,7° N 8,5° O), Abweichung 0,88°, QTF 338° (El. 1,9°) von Capri und 87° (El. 3°) von G4LOH; die Spur verläuft 28 km vom bekannten Streupunkt Brüssel entfernt. Ohne Refraktion werden die Spuren kürzer (G4LOH: Elevationen 0,5° und 2,1°). IC8FAX - FA1MXE (JN05GQ, erstes F.A.I.-QSO 1990 über Genf bei 330°): die Spur verläuft nahe Genf.
+TAG|RILIEVO|Fall DL5MCG [6]: Bake DB0FAI (JN58IC) - Dresden über Sheffield, Abweichung 0,3° bei 110 km.
+TAG|SCELTA|Refraktion: für Elevationen und Horizonte der Ansichten F.A.I. und AURORA wird standardmäßig der äquivalente Erdradius k · r mit k = 4/3 (Standardatmosphäre) verwendet, abschaltbar über das Kästchen „Refraktion“. Bodenentfernungen und Reflexionsbedingung werden weiterhin mit der wahren Geometrie berechnet.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Berechnung nicht möglich: erfüllt laut Modell kein Punkt die Bedingung innerhalb 2,5° (Ansicht Spur) oder liegt der Reflexionspunkt unter dem Horizont der Station (Ansicht Iso-Reflexion), zeigt das Programm das Popup „Berechnung nicht möglich“ und kein weiteres Ergebnis.
+H2|4.4 Ansicht „Iso-Reflexion“ (isoflection loci): Prüfung des Reflexionspunktes
+TAG|FONTE|Dies ist die typische geometrische Konstruktion bei F.A.I. und Aurora, um zu prüfen, ob der gewählte Reflexionspunkt stimmt (Iso-Reflexionslinien von SE-PROP [9], AuroReflex [11], ergänzende Konturen von K9SE/K4GFG [2] [10]).
+P|Für den Reflexionspunkt SP und für jeden Bodenpunkt G innerhalb des Horizonts von SP berechnet das Programm die Summe der Konturen; die Linie S = 0 ist der Ort der Stationen, die A über SP empfangen:
+EQ|S(G) = c(A) + c(G)        gezeichnete Stufen: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Bei dunklen Farbschemata sind die Klassen farbige Bänder (rot 0°, orange 1°, gelb 2°, grün 4°, hellblau 8°, blau 16°); bei hellen Schemata sind es dicke Linien (Höhenlinien nach dem Marching-Squares-Verfahren), umso dicker, je näher die Stufe an 0° liegt.
+TAG|SCELTA|Das Programm schlägt den wahrscheinlichsten Streupunkt vor (Schaltfläche „Empfohlenen Punkt prüfen“), der Benutzer kann aber mit einem Linksklick auf die Karte jeden anderen Punkt wählen; der Rechtsklick versetzt Station B. Bewertung des Paares A-B: zufriedenstellend innerhalb 1°, akzeptabel innerhalb 2,5° (Toleranz nach Lange-Hesse [12]), darüber nicht zufriedenstellend. Liegt der Punkt unter dem Horizont einer der beiden Stationen, erscheint das Popup „Berechnung nicht möglich“.
+TAG|SCELTA|Oben: Azimut und Elevation von A und B zum Punkt; grüner Kreis = Horizont der Stationen in Schichthöhe, roter Kreis = Zone, von der aus der Punkt sichtbar ist.
+H2|4.5 Aurora
+TAG|FONTE|Auroraoval OVATION Prime, Kp und Sonnenwind vom NOAA SWPC [15], alle 5 Minuten aktualisiert und in data/swpc gespeichert. Das 1°-Raster wird durch bilineare Interpolation auf 0,5°-Zellen geglättet.
+TAG|SCELTA|Empfohlene Ausrichtung für beide Stationen: entlang der Senkrechtlinie jeder Station (Echo senkrecht zu B, Toleranz 1,5°, Höhe 105 km) wird der Punkt mit der höchsten Oval-Wahrscheinlichkeit gewählt. Die Höhe von 105 km liegt zwischen den 104 km von Jackel [13] und den 110 km von Lange-Hesse [12].
+TAG|FONTE|Betriebsregeln: zwischen Nord und Ost ausrichten, beginnend bei etwa 45°; Doppler bis ~2 kHz bei 144 MHz, typische Reichweite ~1300 km, maximal ~2000 km (G3WPO [14]).
+H1|5. Datenerfassung
+H2|5.1 Telnet-Sitzungen
+TAG|SCELTA|Drei Sitzungen: Cluster nach Wahl, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], Cluster mit den Spots von PSKReporter (z. B. HamAlert [19]). Automatischer Login mit dem Rufzeichen, Startbefehle durch Semikolon getrennt, Neuverbindung nach 30 s.
+H2|5.2 Lesen der Spots
+TAG|SCELTA|Zeile „DX de SPOTTER: FREQ DXCALL Kommentar HHMMZ [LOC]“, mit einem regulären Ausdruck gelesen (nicht nach festen Spalten). Aus dem Kommentar werden Locator und Modus in der Form „JN70CN<ES>JO62QM“ gelesen (erster Locator = Spotter, zweiter = DX), die Ausbreitungsart (ES, FAI, AU, MS, TR, EME, F2, TEP), das S/N-Verhältnis und die Sendeart. Fehlende Locator werden in CALL3 [21] gesucht; 6-stellige Locator aus den Kommentaren werden zu data/call3_nuovi.txt hinzugefügt.
+TAG|SCELTA|Archiv: eine CSV-Datei pro Tag in data/spot; im Speicher die letzten Spots (höchstens 50000). Bei RBN und PSKReporter werden in der Regel nur Spots ab 28 MHz gespeichert.
+H1|6. ADIF-Log
+TAG|FONTE|Portierung von LoTW Grid Map v2 [25]: der LoTW-Report (geladen mit Benutzername und Passwort, das nie gespeichert wird) und die ADIF-Dateien des Logs werden nach Rufzeichen, Band, Datum und Uhrzeit zusammengeführt; die Bestätigungen werden addiert.
+TAG|SCELTA|Nur Bänder ab 28 MHz, jedes als Einzelband, ohne Zusammenfassung. Farben: orange = gearbeitet, blau = per QSL bestätigt, grün = über LoTW bestätigt. Filter nach Ausbreitungsart (PROP_MODE des ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Farbschemata
+TAG|FONTE|Neben der „Meteorspur“ von YA-MS bietet das Programm alle Schemata von YAEC [26]: hell, Nacht blau, schwarz und acht Pastelltöne. Das Schema wird oben rechts gewählt, danach startet das Programm neu.
+H1|8. Grenzen
+LI|Stationen in der Mitte des Locator-Feldes: bei 4-stelligen Locatorn beträgt der Fehler bis zu ~80 km.
+LI|Die foEs aus den Spots ist eine Mindestschwelle, und das Sekantengesetz überschätzt die in VHF benötigte foEs (siehe 2.3).
+LI|Der „wahrscheinlichste“ Streupunkt ist ein Kriterium des Programms: die gesamte Spur ist das physikalische Ergebnis.
+LI|Das OVATION-Oval ist ein Wahrscheinlichkeitsmodell für optische Polarlichter und dient als Indikator für Radio-Aurora.
