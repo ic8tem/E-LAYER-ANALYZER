@@ -80,6 +80,7 @@ H2|4.5 Nordlys
 TAG|FONTE|Nordlysovalen OVATION Prime, Kp og solvind fra NOAA SWPC [15], oppdatert hvert 5. minutt og lagret i data/swpc. Rutenettet på 1° glattes med bilineær interpolasjon på celler på 0,5°.
 TAG|SCELTA|Anbefalt retning, for begge stasjonene: langs hver stasjons vinkelretthetslinje (ekko vinkelrett på B, toleranse 1,5°, høyde 105 km) velges punktet med høyest ovalsannsynlighet. Høyden 105 km ligger mellom Jackels 104 km [13] og Lange-Hesses 110 km [12].
 TAG|FONTE|Driftsregler: rett antennen mellom nord og øst, start fra ca. 45°; doppler opp til ~2 kHz på 144 MHz, typisk rekkevidde ~1300 km, maksimum ~2000 km (G3WPO [14]).
+TAG|FONTE|Forfatterens regel (IC8TEM): spot med <AU> eller <AUR> i teksten (også AUE, AURORA) er nordlys-spot. Fanen AURORA tegner dem på kartet med beregningen: for hver spot fra de siste 2 timene (høyst 30) sporet av scatter-punkter for paret spotter-DX, med samme modell som visningen Scatter trail (steg 0,5°, avvik innenfor 2,5°, OVATION-ovalen som vekt), og det mest sannsynlige scatter-punktet med QTF og elevasjon for begge stasjonene.
 H1|5. Datainnsamling
 H2|5.1 Telnet-økter
 TAG|SCELTA|Tre økter: valgfri cluster, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster med spot fra PSKReporter (f.eks. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisk innlogging med kallesignalet, startkommandoer skilt med semikolon, ny tilkobling etter 30 s.

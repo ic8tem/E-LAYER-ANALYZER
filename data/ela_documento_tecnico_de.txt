@@ -80,6 +80,7 @@ H2|4.5 Aurora
 TAG|FONTE|Auroraoval OVATION Prime, Kp und Sonnenwind vom NOAA SWPC [15], alle 5 Minuten aktualisiert und in data/swpc gespeichert. Das 1°-Raster wird durch bilineare Interpolation auf 0,5°-Zellen geglättet.
 TAG|SCELTA|Empfohlene Ausrichtung für beide Stationen: entlang der Senkrechtlinie jeder Station (Echo senkrecht zu B, Toleranz 1,5°, Höhe 105 km) wird der Punkt mit der höchsten Oval-Wahrscheinlichkeit gewählt. Die Höhe von 105 km liegt zwischen den 104 km von Jackel [13] und den 110 km von Lange-Hesse [12].
 TAG|FONTE|Betriebsregeln: zwischen Nord und Ost ausrichten, beginnend bei etwa 45°; Doppler bis ~2 kHz bei 144 MHz, typische Reichweite ~1300 km, maximal ~2000 km (G3WPO [14]).
+TAG|FONTE|Regel des Autors (IC8TEM): Spots mit <AU> oder <AUR> im Text (auch AUE, AURORA) sind Aurora-Spots. Der Reiter AURORA zeichnet sie mit Berechnung auf die Karte: für jeden Spot der letzten 2 Stunden (höchstens 30) die Spur der Streupunkte des Paares Spotter-DX, mit demselben Modell wie die Ansicht Scatter trail (Schritt 0,5°, Abweichung innerhalb 2,5°, OVATION-Oval als Gewicht), und den wahrscheinlichsten Streupunkt mit QTF und Elevation beider Stationen.
 H1|5. Datenerfassung
 H2|5.1 Telnet-Sitzungen
 TAG|SCELTA|Drei Sitzungen: Cluster nach Wahl, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], Cluster mit den Spots von PSKReporter (z. B. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatischer Login mit dem Rufzeichen, Startbefehle durch Semikolon getrennt, Neuverbindung nach 30 s.

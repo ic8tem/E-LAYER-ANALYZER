@@ -80,6 +80,7 @@ H2|4.5 Aurora
 TAG|FONTE|Norrskensovalen OVATION Prime, Kp och solvind från NOAA SWPC [15], uppdaterade var 5:e minut och sparade i data/swpc. Rutnätet på 1° jämnas ut med bilinjär interpolation på celler om 0,5°.
 TAG|SCELTA|Rekommenderad riktning, för båda stationerna: längs varje stations vinkelräthetslinje (eko vinkelrätt mot B, tolerans 1,5°, höjd 105 km) väljs punkten med högst ovalsannolikhet. Höjden 105 km ligger mellan Jackels 104 km [13] och Lange-Hesses 110 km [12].
 TAG|FONTE|Praktiska regler: rikta mellan norr och öster, med start kring 45°; doppler upp till ~2 kHz på 144 MHz, typisk räckvidd ~1300 km, maximal ~2000 km (G3WPO [14]).
+TAG|FONTE|Författarens regel (IC8TEM): spots med <AU> eller <AUR> i texten (även AUE, AURORA) är aurora-spots. Fliken AURORA ritar dem på kartan med beräkningen: för varje spot från de senaste 2 timmarna (högst 30) spåret av scatterpunkter för paret spotter-DX, med samma modell som vyn Scatter trail (steg 0,5°, avvikelse inom 2,5°, OVATION-ovalen som vikt), och den mest sannolika scatterpunkten med QTF och elevation för båda stationerna.
 H1|5. Datainsamling
 H2|5.1 Telnetsessioner
 TAG|SCELTA|Tre sessioner: valfritt kluster, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], kluster med spots från PSKReporter (t.ex. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisk inloggning med anropssignalen, startkommandon åtskilda med semikolon, återanslutning efter 30 s.

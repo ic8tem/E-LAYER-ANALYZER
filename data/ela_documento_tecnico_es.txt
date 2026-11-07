@@ -80,6 +80,7 @@ H2|4.5 Aurora
 TAG|FONTE|Óvalo auroral OVATION Prime, Kp y viento solar del NOAA SWPC [15], actualizados cada 5 minutos y guardados en data/swpc. La malla de 1° se suaviza con una interpolación bilineal sobre celdas de 0,5°.
 TAG|SCELTA|Apuntamiento recomendado, para ambas estaciones: a lo largo de la línea de perpendicularidad de cada estación (eco perpendicular a B, tolerancia 1,5°, altura 105 km) se elige el punto con la probabilidad de óvalo más alta. La altura de 105 km está entre los 104 km de Jackel [13] y los 110 km de Lange-Hesse [12].
 TAG|FONTE|Reglas operativas: apuntar entre norte y este, empezando por unos 45°; Doppler de hasta ~2 kHz en 144 MHz, alcance típico ~1300 km, máximo ~2000 km (G3WPO [14]).
+TAG|FONTE|Regla del autor (IC8TEM): los spots con <AU> o <AUR> en el texto (también AUE, AURORA) son de aurora. La pestaña AURORA los dibuja en el mapa con el cálculo: para cada spot de las últimas 2 horas (como máximo 30) la estela de scatter points del par spotter-DX, con el mismo modelo de la vista Scatter trail (paso 0,5°, desviación dentro de 2,5°, óvalo OVATION como peso), y el scatter point más probable con QTF y elevación de las dos estaciones.
 H1|5. Recogida de datos
 H2|5.1 Sesiones telnet
 TAG|SCELTA|Tres sesiones: cluster a elección, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster con los spots de PSKReporter (p. ej. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Login automático con el indicativo, comandos iniciales separados por punto y coma, reconexión tras 30 s.

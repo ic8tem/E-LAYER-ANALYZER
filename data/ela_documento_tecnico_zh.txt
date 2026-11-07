@@ -80,6 +80,7 @@ H2|4.5 极光
 TAG|FONTE|OVATION Prime 极光椭圆、Kp 和太阳风数据来自 NOAA SWPC [15]，每 5 分钟更新一次并保存在 data/swpc 中。1° 网格通过双线性插值平滑到 0.5° 单元。
 TAG|SCELTA|两个台站的推荐指向：沿每个台站的垂直线（回波垂直于 B，容差 1.5°，高度 105 km）选择椭圆概率最高的点。105 km 的高度介于 Jackel [13] 的 104 km 与 Lange-Hesse [12] 的 110 km 之间。
 TAG|FONTE|操作规则：指向北与东之间，从约 45° 开始；144 MHz 时多普勒可达 ~2 kHz，典型距离 ~1300 km，最大 ~2000 km（G3WPO [14]）。
+TAG|FONTE|作者规则（IC8TEM）：文本中含有 <AU> 或 <AUR>（以及 AUE、AURORA）的 spot 为极光 spot。AURORA 标签页在地图上绘制它们并进行计算：对最近 2 小时内的每个 spot（最多 30 个），绘制 spotter-DX 这对电台的散射点轨迹，所用模型与 Scatter trail 视图相同（步长 0.5°，偏差在 2.5° 以内，以 OVATION 椭圆为权重），以及最可能的散射点及两台站的 QTF 和仰角。
 H1|5. 数据收集
 H2|5.1 Telnet 会话
 TAG|SCELTA|三个会话：自选 cluster、Reverse Beacon Network（7000 CW/RTTY，7001 FT8）[18]、含 PSKReporter spot 的 cluster（例如 DM4X dm4x.ddns.net:8500 [27]，HamAlert [19]）。使用呼号自动登录，初始命令以分号分隔，30 s 后重新连接。

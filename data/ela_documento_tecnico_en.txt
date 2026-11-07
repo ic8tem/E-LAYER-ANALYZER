@@ -80,6 +80,7 @@ H2|4.5 Aurora
 TAG|FONTE|OVATION Prime auroral oval, Kp and solar wind from NOAA SWPC [15], updated every 5 minutes and saved in data/swpc. The 1° grid is smoothed with bilinear interpolation on 0.5° cells.
 TAG|SCELTA|Recommended heading, for both stations: along each station's perpendicularity line (echo perpendicular to B, tolerance 1.5°, height 105 km) the point with the highest oval probability is chosen. The 105 km height lies between Jackel's 104 km [13] and Lange-Hesse's 110 km [12].
 TAG|FONTE|Operating rules: point between north and east, starting from about 45°; Doppler up to ~2 kHz at 144 MHz, typical range ~1300 km, maximum ~2000 km (G3WPO [14]).
+TAG|FONTE|Author's rule (IC8TEM): spots with <AU> or <AUR> in the text (also AUE, AURORA) are aurora spots. The AURORA tab draws them on the map with the calculation: for each spot of the last 2 hours (at most 30) the trail of scatter points of the spotter-DX pair, with the same model as the Scatter trail view (step 0.5°, deviation within 2.5°, OVATION oval as weight), and the most likely scatter point with QTF and elevation of both stations.
 H1|5. Data collection
 H2|5.1 Telnet sessions
 TAG|SCELTA|Three sessions: DX cluster of your choice, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster with PSKReporter spots (e.g. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatic login with the callsign, initial commands separated by semicolons, reconnection after 30 s.

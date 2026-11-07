@@ -80,6 +80,7 @@ H2|4.5 Aurora
 TAG|FONTE|Aurora-ovaal OVATION Prime, Kp en zonnewind van NOAA SWPC [15], elke 5 minuten bijgewerkt en opgeslagen in data/swpc. Het raster van 1° wordt verzacht met een bilineaire interpolatie op cellen van 0,5°.
 TAG|SCELTA|Aanbevolen richting, voor beide stations: langs de loodlijn van elk station (echo loodrecht op B, tolerantie 1,5°, hoogte 105 km) wordt het punt met de hoogste ovaalkans gekozen. De hoogte van 105 km ligt tussen de 104 km van Jackel [13] en de 110 km van Lange-Hesse [12].
 TAG|FONTE|Operationele regels: richten tussen noord en oost, beginnend bij ongeveer 45°; Doppler tot ~2 kHz op 144 MHz, typisch bereik ~1300 km, maximaal ~2000 km (G3WPO [14]).
+TAG|FONTE|Regel van de auteur (IC8TEM): spots met <AU> of <AUR> in de tekst (ook AUE, AURORA) zijn aurora-spots. Het tabblad AURORA tekent ze op de kaart met de berekening: voor elke spot van de laatste 2 uur (hoogstens 30) het spoor van scatterpunten van het paar spotter-DX, met hetzelfde model als de weergave Scatter trail (stap 0,5°, afwijking binnen 2,5°, OVATION-ovaal als gewicht), en het meest waarschijnlijke scatterpunt met QTF en elevatie van beide stations.
 H1|5. Gegevensverzameling
 H2|5.1 Telnet-sessies
 TAG|SCELTA|Drie sessies: cluster naar keuze, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster met de spots van PSKReporter (bijv. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisch inloggen met de roepnaam, begincommando's gescheiden door puntkomma's, opnieuw verbinden na 30 s.
