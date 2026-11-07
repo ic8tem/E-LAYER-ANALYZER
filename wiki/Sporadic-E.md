@@ -20,6 +20,7 @@ In the azimuthal views the dashed rings show the **km from the centre** (the ste
 
 - The **spots** of the last few minutes (15 min - 12 h) on the **28, 50, 70 and 144 MHz** bands, taken from the telnet sessions. Locators come from the spot comment (e.g. `JN70CN<ES>JO62QM`) or from the CALL3 database.
 - Spots with **<MS>**, **<AU>** or **<TR>** in the text are **discarded**: they do not concern sporadic-E but are useful for meteor scatter, aurora or tropo.
+- **Transequatorial, author's rule (IC8TEM)**: towards Africa and South America, if the midpoint falls in the magnetic dip band between -20° and +20°, the contact is transequatorial (TEP) and not sporadic-E, unless the spot states `<ES>`.
 - **144 MHz, author's rule (IC8TEM)**: sporadic-E on 2 m starts **beyond 900 km** (shorter spots are discarded). A single 144 MHz spot **is not plotted on its own**: it appears when within **5 minutes** a second 144 MHz spot arrives with the cloud in the same place (reflection points within 300 km), or when there is a **short-hop 50 MHz** spot nearby (within 1200 km, in the last 15 minutes). The bar at the top shows how many 144 MHz spots are waiting for confirmation.
 - For each spot: distance, **number of hops** according to the **IK3XTV** table, elevation, **minimum foEs** (secant law).
 - **First hop of both stations**: orange square = the spotter's first hop, purple = the DX's first hop (equal hops); yellow = midpoint of a single hop.

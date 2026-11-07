@@ -12,6 +12,7 @@
 |---|---|
 | [SPORADIC-E](Sporadic-E) | Es spots on the map, first hop of both stations, Es clouds on Maidenhead squares, MUF for your station |
 | [BENCHMARK Es](Benchmark-Es) | Test bench on a whole ADIF log (even from another station): QSOs per day and per hour, skip by sector, estimated foEs, multi-hop check, cloud drift |
+| [BENCHMARK 50 MHz](Benchmark-50) | Multi-hop sporadic-E on 50 MHz from one or two ADIF logs: Mercator map, day and time, optional foEs, enlarged path with the WWL, QSOs within 150 km |
 | [F.A.I.](FAI) | Scatter trail of the scatter points for a pair of stations, and isoflection loci to check a point |
 | [METEOR SCATTER](Meteor-Scatter) | The complete YA-MS program (shower efficiency, radars, forecasts) |
 | [AURORA](Aurora) | Auroral oval, NOAA Kp and solar wind, auroral scatter trail and isoflection, recommended beam heading |
