@@ -130,6 +130,7 @@ namespace ELA
             DockPanel.SetDock(sb, Dock.Bottom); root.Children.Add(sb);
             root.Children.Add(tabs.Host);
             Content = root;
+            Tips.Apply(root);   // fumetti esplicativi su linguette, pulsanti, caselle ed etichette
             tabs.Select(Math.Max(0, Math.Min(tabs.Count - 1, sel)));
 
             DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
