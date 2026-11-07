@@ -1,0 +1,88 @@
+TITLE|Cara E-LAYER ANALYZER menghitung
+SUB|Dokumen teknis - disusun oleh Costantino IC8TEM - versi 0.3.0, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER.
+H1|1. Pendahuluan
+H2|1.1 Tujuan
+P|E-LAYER ANALYZER menganalisis mode propagasi VHF yang melibatkan lapisan E: sporadic-E (termasuk multi-lompatan antarbenua), F.A.I. (ketidakteraturan yang searah dengan medan magnet), meteor scatter (dengan program YA-MS) dan aurora radio. Dokumen ini menjelaskan setiap perhitungan dan asal-usulnya.
+H2|1.2 Label
+TAG|FONTE|langkah ini mengikuti sumber yang dikutip.
+TAG|RILIEVO|verifikasi yang dilakukan pada program atau perbandingan dengan kasus nyata.
+TAG|SCELTA|pilihan program, perlu dikonfirmasi dengan pengalaman di band.
+H1|2. Geometri umum
+H2|2.1 Bumi, locator, lingkaran besar
+TAG|FONTE|Bumi bulat dengan jari-jari r = 6372,7955 km, seperti dalam artikel F.A.I. [1] dan dalam YA-MS [5].
+TAG|SCELTA|Stasiun ditempatkan di tengah kotak locator (4, 6 atau 8 karakter). Jarak, azimut, titik antara dan lingkaran dihitung dengan rumus lingkaran besar:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevasi ke sebuah titik di lapisan E
+TAG|FONTE|Rumus (2) artikel F.A.I. [1], dengan x = d / r, H ketinggian titik, h ketinggian stasiun. Program memakai bentuk ekuivalen dengan dua argumen, yang eksak pada Bumi bulat:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Dengan H = 110 km program memberikan 35,3° pada 150 km, seperti IW1AZJ (35°) di halaman IC8FAX [2]; pada 800 km memberikan 4,2° dibandingkan 6° yang disebut untuk IC8CQF (jarak di halaman itu merupakan perkiraan: 6° sesuai dengan sekitar 680 km).
+H2|2.3 Lompatan di lapisan dan hukum sekan
+P|Untuk sinar yang berangkat dengan elevasi e dan bertemu lapisan pada ketinggian H, sudut datang φ (dari vertikal) dan jarak permukaan titik pantul adalah:
+EQ|sin φ = r · cos e / (r + H)        d_pantul = r · (90° − e − φ) [dalam radian]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|foEs yang ditampilkan program adalah ambang minimum: spot hanya menyatakan bahwa frekuensi f telah lolos. Faktor sec φ memperhitungkan kelengkungan Bumi.
+TAG|RILIEVO|Pengalaman yang dilaporkan IK3XTV [3] menunjukkan foEs 12-15 MHz untuk 144 MHz: hukum sekan murni memberikan nilai lebih tinggi (sekitar 25-28 MHz pada 2000 km). Nilai ini harus dibaca sebagai perbandingan relatif antarawan, bukan sebagai nilai mutlak.
+H1|3. Sporadic-E
+H2|3.1 Jumlah lompatan
+TAG|FONTE|Tabel IK3XTV [3]: satu lompatan 500-650 / 1500-2000 / 2200-2400 km (minimum / optimal / maksimum); dua lompatan 2800-3000 / 3200-4000 / 4400-5000 km; tiga lompatan optimal 4800-6400 km, maksimum 6900 km.
+TAG|SCELTA|Jumlah lompatan n diambil dari tabel: n = 1 hingga 2400 km, n = 2 hingga 5000 km, n = 3 hingga 6900 km, di atasnya n = pembulatan ke atas dari D / 2300 km. Di bawah 500 km spot tidak dianggap sporadic-E. Antara 2400 dan 2800 km program menandai "zona peralihan".
+H2|3.2 Lompatan pertama kedua stasiun
+TAG|SCELTA|Hipotesis lompatan sama: titik-titik pantul terletak di sepanjang lingkaran besar pada pecahan (2k − 1) / (2n) dari lintasan. Lompatan pertama spotter adalah titik k = 1 (oranye), lompatan pertama DX adalah titik k = n (ungu); dengan satu lompatan keduanya berimpit di titik tengah (kuning).
+TAG|FONTE|Hipotesis lompatan pertama pendek: penulis (IC8TEM) berpengalaman, dalam multi-lompatan, dengan lompatan pertama pendek dalam 1200 km dari QTH-nya [4]. Program menggambar (lingkaran kosong) titik pantul di tengah lompatan pendek setiap stasiun; panjang lompatan pendek dipilih di tab (awal 1200 km).
+H2|3.3 Awan Es pada kotak Maidenhead
+TAG|SCELTA|Titik-titik pantul (titik tengah untuk satu lompatan, lompatan pertama untuk multi-lompatan) dikumpulkan dalam kotak Maidenhead 4 karakter (2° × 1°). Untuk setiap kotak disimpan foEs minimum tertinggi di antara spot yang jatuh di dalamnya; warna berkisar dari biru (< 5 MHz) hingga merah (> 20 MHz).
+P|Untuk stasiun sendiri program menghitung MUF melalui setiap awan yang berada pada jarak d, dengan lompatan sepanjang 2d, hanya jika awan berada dalam jangkauan satu lompatan:
+EQ|MUF_saya = foEs_awan · sec φ(2d)
+TAG|SCELTA|Tabel "Awan Es": merah untuk awan yang akan memberi MUF ≥ 144 MHz, oranye ≥ 70 MHz, kuning ≥ 50 MHz.
+H2|3.4 Sporadic-E tidak berlaku untuk 432 MHz
+TAG|FONTE|MUF sporadic-E di lintang menengah mencapai 150 MHz dan lebih (Whitehead [23]); diperlukan awan yang sangat padat untuk membelokkan sinar landai hingga 200 MHz (IK3XTV [22]). Rekor ARRL [24] mencatat QSO sporadic-E hanya di 50 dan 144 MHz, tidak ada di 222 dan 432 MHz.
+TAG|SCELTA|Karena itu tab SPORADIC-E hanya menganalisis 28, 50, 70 dan 144 MHz: spot 432 MHz tidak pernah diperlakukan sebagai sporadic-E (beberapa sumber umum, termasuk yang dihasilkan kecerdasan buatan, menyatakannya tanpa dokumentasi).
+H1|4. F.A.I. dan aurora: scatter yang searah dengan medan magnet
+H2|4.1 Medan magnet
+TAG|FONTE|Medan dihitung dengan model IGRF-14 [16] (harmonik sferis hingga derajat 13, koefisien 2025-2030 diinterpolasi ke tanggal). SE-PROP dari K9SE [9] juga memakai model harmonik sferis (WMM) dengan cara yang sama.
+TAG|RILIEVO|Perhitungan sesuai dengan ppigrf dalam 1 nT. Dengan dipol sederhana, verifikasi IC8FAX - G4LOH tidak menemukan scatter point apa pun; dengan IGRF-14 ditemukan: model lengkap mutlak diperlukan.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, ketinggian 105 km, refraksi 4/3): scatter paling mungkin JP01AK (61,4° LU 0,1° BT, lepas pantai Shetland), deviasi 0,97°, QTF 11° (el. 0,5°) dari IO70VJ dan 299° (el. 7,6°) dari JO59BC. Tanpa refraksi: IP70RP, deviasi 1,86°, QTF 359° dan 288°.
+H2|4.2 Kondisi pantulan
+TAG|FONTE|Sinyal yang dihamburkan oleh ketidakteraturan yang searah dengan medan keluar pada sebuah kerucut dengan sumbu sepanjang B; stasiun pada kontur suplementer dapat saling terhubung (a1 + a2 = 180° [1], kontur ±c dari K9SE/K4GFG [2] [9] [10]).
+P|Untuk setiap stasiun X dihitung c(X), sudut (bertanda) antara garis pandang X → SP dan bidang yang tegak lurus B di scatter point SP. Deviasi dari kondisi pantulan untuk hubungan A-B adalah:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Untuk gema ke stasiun yang sama (backscatter) kondisinya menjadi sinar tegak lurus B, dengan toleransi ±2-3° (Lange-Hesse [12]); intensitas turun sekitar 3-5 dB per derajat penyimpangan (Jackel dkk. [13]).
+H2|4.3 Tampilan "Scatter trail" (pasangan A-B)
+TAG|SCELTA|Pada grid 0,2° di ketinggian H dicari titik-titik yang terlihat oleh kedua stasiun dengan elevasi ≥ minimum dan dev ≤ 2,5°. Kelas warnanya 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (gaya Aurora QTF [11]). Kotak kanan atas menampilkan QTF dan elevasi A (merah) dan B (hijau) ke setiap titik Scatter trail.
+TAG|SCELTA|Scatter point paling mungkin: deviasi ≤ 1° dan jumlah kuadrat jarak terkecil (redaman lebih rendah); untuk aurora diutamakan titik di dalam oval.
+TAG|RILIEVO|Verifikasi yang diminta penulis (IGRF-14, H = 110 km, refraksi 4/3, hasil program): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail dari Teluk Biscay ke Laut Adriatik di sepanjang paralel 44°, scatter paling mungkin JN44GH (44,3° LU 8,6° BT, di atas Genova), deviasi 0,97°, QTF 314° (el. 7,8°) dari Capri dan 77° (el. 9°) dari F6DRO; Scatter trail melintas 143 km dari Jenewa. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail di atas Jerman barat daya dan Belgia, scatter paling mungkin JN49FR (49,7° LU 8,5° BT), deviasi 0,88°, QTF 338° (el. 1,9°) dari Capri dan 87° (el. 3°) dari G4LOH; Scatter trail melintas 28 km dari scatter point dikenal Brussel. Tanpa refraksi Scatter trail memendek (G4LOH: elevasi 0,5° dan 2,1°). IC8FAX - FA1MXE (JN05GQ, QSO F.A.I. pertama tahun 1990 via Jenewa pada 330°): Scatter trail melintas dekat Jenewa.
+TAG|RILIEVO|Kasus DL5MCG [6]: beacon DB0FAI (JN58IC) - Dresden via Sheffield, deviasi 0,3° pada 110 km.
+TAG|SCELTA|Refraksi: untuk elevasi dan cakrawala pada tampilan F.A.I. dan AURORA, secara bawaan dipakai jari-jari Bumi ekuivalen k · r dengan k = 4/3 (atmosfer standar), dapat dinonaktifkan dengan kotak centang "Refraksi". Jarak permukaan dan kondisi pantulan tetap dihitung dengan geometri sebenarnya.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Perhitungan tidak mungkin: jika menurut model tidak ada titik yang memenuhi kondisi dalam 2,5° (tampilan Scatter trail) atau titik pantul berada di bawah cakrawala stasiun (tampilan Iso-refleksi), program menampilkan popup "Perhitungan tidak mungkin" dan tidak menampilkan hasil lain.
+H2|4.4 Tampilan "Iso-refleksi" (isoflection loci): verifikasi titik pantul
+TAG|FONTE|Ini adalah konstruksi geometris khas F.A.I. dan aurora untuk memverifikasi apakah titik pantul yang dipilih sudah benar (garis iso-refleksi SE-PROP [9], AuroReflex [11], kontur suplementer K9SE/K4GFG [2] [10]).
+P|Untuk titik pantul SP dan setiap titik permukaan G di dalam cakrawala SP, program menghitung jumlah kontur; garis S = 0 adalah tempat kedudukan stasiun yang menerima A melalui SP:
+EQ|S(G) = c(A) + c(G)        level yang digambar: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Pada skema berlatar gelap kelas-kelasnya berupa pita berwarna (merah 0°, oranye 1°, kuning 2°, hijau 4°, biru muda 8°, biru 16°); pada skema terang berupa garis tebal (kontur yang diperoleh dengan metode marching squares), lebih tebal untuk level yang lebih dekat ke 0°.
+TAG|SCELTA|Program mengusulkan scatter point paling mungkin (tombol "Verifikasi titik yang disarankan"), tetapi pengguna dapat memilih titik lain dengan klik kiri di peta; klik kanan memindahkan stasiun B. Penilaian pasangan A-B: memuaskan dalam 1°, dapat diterima dalam 2,5° (toleransi Lange-Hesse [12]), tidak memuaskan di atasnya. Jika titik berada di bawah cakrawala salah satu stasiun, muncul popup "Perhitungan tidak mungkin".
+TAG|SCELTA|Di atas: azimut dan elevasi A dan B ke titik; lingkaran hijau = cakrawala stasiun pada ketinggian lapisan, lingkaran merah = area tempat titik terlihat.
+H2|4.5 Aurora
+TAG|FONTE|Oval aurora OVATION Prime, Kp dan angin surya dari NOAA SWPC [15], diperbarui setiap 5 menit dan disimpan di data/swpc. Grid 1° dihaluskan dengan interpolasi bilinear pada sel 0,5°.
+TAG|SCELTA|Arah yang disarankan, untuk kedua stasiun: di sepanjang garis tegak lurus masing-masing stasiun (gema tegak lurus B, toleransi 1,5°, ketinggian 105 km) dipilih titik dengan probabilitas oval tertinggi. Ketinggian 105 km berada di antara 104 km dari Jackel [13] dan 110 km dari Lange-Hesse [12].
+TAG|FONTE|Aturan operasional: arahkan antara utara dan timur, mulai dari sekitar 45°; Doppler hingga ~2 kHz pada 144 MHz, jangkauan khas ~1300 km, maksimum ~2000 km (G3WPO [14]).
+H1|5. Pengumpulan data
+H2|5.1 Sesi telnet
+TAG|SCELTA|Tiga sesi: cluster pilihan, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster dengan spot PSKReporter (mis. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Login otomatis dengan callsign, perintah awal dipisah titik koma, sambung ulang setelah 30 s.
+H2|5.2 Membaca spot
+TAG|SCELTA|Baris "DX de SPOTTER: FREQ DXCALL komentar HHMMZ [LOC]" dibaca dengan ekspresi reguler (bukan kolom tetap). Dari komentar dibaca locator dan mode dalam bentuk "JN70CN<ES>JO62QM" (locator pertama = spotter, kedua = DX), mode propagasi (ES, FAI, AU, MS, TR, EME, F2, TEP), rasio S/N dan mode emisi. Locator yang hilang dicari di CALL3 [21]; locator 6 karakter yang terbaca di komentar ditambahkan ke data/call3_nuovi.txt.
+TAG|SCELTA|Arsip: satu file CSV per hari di data/spot; di memori disimpan spot terakhir (maksimum 50000). Dengan RBN dan PSKReporter biasanya hanya spot dari 28 MHz ke atas yang disimpan.
+H1|6. Log ADIF
+TAG|FONTE|Porting dari LoTW Grid Map v2 [25]: laporan LoTW (diunduh dengan nama pengguna dan kata sandi, yang tidak pernah disimpan) dan file ADIF log digabungkan berdasarkan callsign, band, tanggal dan jam; konfirmasi dijumlahkan.
+TAG|SCELTA|Hanya band dari 28 MHz ke atas, masing-masing sebagai band tunggal, tanpa penggabungan. Warna: oranye = dikerjakan, biru = terkonfirmasi dengan QSL, hijau = terkonfirmasi via LoTW. Filter mode propagasi (PROP_MODE di ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Skema warna
+TAG|FONTE|Skema warna adalah milik YA-MS 1.3.0, yang mengikuti YAEC [26]: Terang, Malam, Hitam, delapan pastel dan Jejak meteor. Skema dipilih di kanan atas dan jendela langsung dibangun ulang; pada tampilan Iso-refleksi skema gelap memakai pita berwarna dan skema terang memakai garis tebal (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) dan bahasa
+TAG|FONTE|Tab METEOR SCATTER berisi YA-MS 1.3.0 lengkap [5], dengan dokumen "Efisiensi - penjelasan" dan sumber-sumbernya. Skrip tools/sync_yams.py menyalin setiap versi baru YA-MS dan mengubahnya menjadi panel tanpa mengubah perhitungannya.
+TAG|SCELTA|Bahasa: Italia, Inggris, Rusia, Jepang, Jerman dan Belanda, untuk antarmuka (data/lingue/ela-<kode>.txt), untuk Dokumen teknis dan untuk Sumber. Pada tampilan F.A.I./aurora, jejak scatter point disebut "Scatter trail" di semua terjemahan. Bilah status menunjukkan model magnetik yang dipakai (IGRF-14 dari IAGA [16]).
+H1|9. Batasan
+LI|Stasiun di tengah kotak locator: dengan locator 4 karakter kesalahannya mencapai ~80 km.
+LI|foEs dari spot adalah ambang minimum dan hukum sekan melebih-lebihkan foEs yang diperlukan di VHF (lihat 2.3).
+LI|Scatter point "paling mungkin" adalah kriteria program: Scatter trail secara utuh adalah hasil fisiknya.
+LI|Oval OVATION adalah model probabilitas aurora optik, dipakai sebagai indikator untuk aurora radio.
