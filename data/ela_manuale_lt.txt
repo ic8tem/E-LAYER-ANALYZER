@@ -1,0 +1,87 @@
+TITLE|E-LAYER ANALYZER naudotojo vadovas
+SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.4.3 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
+H1|1. Prieš pradedant
+H2|1.1 Ką daro programa
+P|E-LAYER ANALYZER vienoje programoje sujungia priemones VHF sklidimo būdams, vykstantiems per jonosferos E sluoksnį, tirti: sporadinį E, taip pat kelių šuolių ir tarpžemyninį, F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter su integruota programa YA-MS ir radijo pašvaistę. Ji dirba su DX klasterių spotais realiuoju laiku ir su ADIF žurnalais, o kiekvieną rezultatą rodo žemėlapyje, užimančiame du trečdalius lango; duomenys ir skaičiavimai pateikiami dešiniajame trečdalyje.
+H2|1.2 Diegimas ir duomenų aplankas
+P|Programa veikia Windows (64 ir 32 bitų), Linux, Raspberry Pi (ARM64) ir Mac (Apple Silicon ir Intel) sistemose. Ji atsisiunčiama iš GitHub saugyklos puslapio Releases: Windows sistemai yra diegimo programa ir nešiojamoji versija .zip faile; Linux ir Raspberry Pi – .tar.gz archyvas su diegimo scenarijumi; Mac – .dmg atvaizdas.
+LI|Visi programos duomenys saugomi aplanke data šalia programos: nustatymai (config.ini), CALL3 archyvas, magnetinio lauko koeficientai, žurnalai, atsisiųsti NOAA duomenys, surinkti spotai. Niekas nerašoma į AppData ar kitus sisteminius aplankus.
+LI|Norint perkelti programą į kitą kompiuterį, pakanka nukopijuoti jos aplanką; norint grąžinti pradinius nustatymus, pakanka ištrinti data/config.ini.
+LI|LoTW slaptažodis niekada neįrašomas; galima įsiminti tik naudotojo vardą.
+H2|1.3 Viršutinė juosta
+P|Viršuje kairėje įrašomas savo šaukinys, lokatorius (4, 6 arba 8 simboliai) ir antenos aukštis metrais; mygtukas Taikyti juos patvirtina ir visos kortelės atnaujinamos. Viršuje dešinėje yra UTC laikas, spalvų schemos pasirinkimas (visos YAEC schemos: Šviesi, Naktis, Juoda, aštuonios pastelinės ir Meteoro pėdsakas) ir kalbos pasirinkimas (28 kalbos). Pakeitus spalvų schemą ar kalbą, langas iš karto perkuriamas, surinkti duomenys neprarandami.
+H2|1.4 Būsenos juosta
+P|Apačioje esanti būsenos juosta rodo, kiek šaukinių yra CALL3 archyve, kiek spotų laikoma atmintyje ir kuris magnetinis modelis naudojamas (IGRF-14 su jo epocha). Atmintyje esantys spotai ištrinami kaskart uždarius programą: kiekviena sesija pradedama be senų spotų.
+H2|1.5 Žemėlapiai
+P|Visi žemėlapiai naudojami vienodai: pelės ratukas didina arba mažina, tempiant kairiuoju mygtuku perkeliamas vaizdas, kairysis spustelėjimas pasirenka tašką, spotą arba trasą, priklausomai nuo kortelės. Viršuje dešinėje rodomos koordinatės ir 6 simbolių lokatorius po žymekliu; azimutiniuose žemėlapiuose – ir atstumas bei azimutas nuo centro. Maidenhead laukų ir kvadratų tinklelis tankėja didinant mastelį.
+H1|2. Duomenų rinkimas (DATA COLLECTION)
+H2|2.1 Trys telnet sesijos
+P|Kortelė DATA COLLECTION atveria iki trijų vienu metu veikiančių telnet ryšių: pasirinktą DX klasterį (pagal nutylėjimą ON0DXK su VHF filtrais), Reverse Beacon Network (prievadas 7001 – FT8, 7000 – CW ir RTTY) ir DM4X klasterį su PSKReporter spotais (dm4x.ddns.net, prievadas 8500).
+LI|Serveris ir Prievadas: klasterio adresas. Prisijungimas: prisijungimo šaukinys (jei tuščias, naudojamas viršutinės juostos šaukinys). Valdymas: po prisijungimo siunčiamos komandos, atskirtos kabliataškiu (pavyzdžiui, juostų filtrai).
+LI|Prisijungti ir Atsijungti atveria ir uždaro sesiją; Prisijungti iš naujo savaime ją atkuria nutrūkus ryšiui; Prisijungti paleidžiant ją atveria paleidus programą.
+LI|Konsolė rodo gautas eilutes; apačioje esančiame laukelyje galima įrašyti klasteriui siunčiamas komandas (pavyzdžiui, sh/dx 20) ir patvirtinti jas mygtuku Siųsti arba klavišu Enter.
+H2|2.2 Vietinis filtras
+P|Viršutinis žymimasis langelis, pagal nutylėjimą įjungtas, įjungia vietinį filtrą: „DX de“ eilutės, kurių dažnis žemiau 27990,0 kHz arba aukščiau 145 MHz, atmetamos, nerodomos konsolėje ir neįsimenamos. Tai ypač naudinga su RBN ir PSKReporter, kurie siunčia labai daug HF spotų. Išjungus langelį, praleidžiama viskas.
+H2|2.3 Kaip programa skaito spotus
+P|Iš kiekvienos „DX de“ eilutės programa išgauna spoterį, dažnį, DX, komentarą, laiką ir, jei yra, lokatorius bei sklidimo būdą, įrašytus komentare forma JN70CN<ES>JO62QM (pirmasis lokatorius – spoterio, antrasis – DX; priimamos ir formos su <>, > bei skliaustais).
+LI|Trūkstami lokatoriai ieškomi CALL3 archyve; netikslūs lokatoriai (mažiau nei 6 simboliai) pakeičiami 6 simbolių CALL3 lokatoriumi, jei jis yra.
+LI|Spotai, kurių tekste yra <MS>, <AU>, <AUR>, <TR>, <AS> arba <ACS>, sporadiniam E nenaudojami: jie skirti meteor scatter, pašvaistei, troposferiniam sklidimui arba aircraft scatter.
+LI|Kaip ir YA-MS, meteor scatter spotais laikomi tie, kurie patenka į MS būdingus dažnių langus (50190-50300, 70100-70400, 144290-144399 kHz) ir neturi kito sklidimo žymų, taip pat tie, kurių būdas MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M arba kuriuose yra <MS>.
+LI|Spotai su <AU> arba <AUR> patenka į kortelę AURORA, spotai su FAI – į kortelę F.A.I.
+H2|2.4 Surinkti spotai ir CALL3 archyvas
+P|Puslapyje Surinkti spotai pateikiami paskutiniai spotai su filtru pagal juostą ir šaltinį; mygtukas Atverti spotų aplanką atveria data/spot. Puslapyje CALL3 rodomas archyvas šaukinys -> lokatorius (JTDX/WSJT formatas): galima ieškoti šaukinio, iš naujo įkelti archyvą arba importuoti naują CALL3.TXT failą, kuris pakeičia naudojamąjį (senasis lieka kaip atsarginė kopija).
+H1|3. Sporadinis E (SPORADIC-E)
+H2|3.1 Žemėlapis
+P|Meniu Žemėlapis leidžia rinktis vieną iš trijų vaizdų. Azimutinis - vienas šuolis: žemėlapis, centruotas į savo stotį, su fiksuotu 2500 km spinduliu ir IK3XTV lentelės zonomis [3] (500 km mažiausia, 1500-2000 km optimali, 2400 km didžiausia). Azimutinis - maksimalus atstumas (keli šuoliai): tas pats žemėlapis su slankikliu Maksimalus atstumas nuo 300 iki 20000 km ir dvigubo (5000 km) bei trigubo šuolio (6900 km) ribomis, kad būtų galima sekti kelių šuolių raidą. Stačiakampis: pasaulio žemėlapis su mygtukais Europa ir Pasaulis.
+P|Azimutiniuose vaizduose punktyriniai žiedai rodo kilometrus nuo centro; žiedų žingsnis keičiasi su masteliu, o išorinis kraštas rodo didžiausią vaizduojamą atstumą.
+H2|3.2 Valdikliai
+LI|Juostos: 10, 6, 4 ir 2 m (432 MHz neanalizuojama: sporadinis E netaikomas [22]-[24]); spotų laiko langas nuo 15 minučių iki 12 valandų.
+LI|Es aukštis (pagal nutylėjimą 105 km) ir minimali antenų elevacija.
+LI|Pirmieji šuoliai (vienodi šuoliai): rodo abiejų stočių pirmąjį šuolį; Trumpas pirmas šuolis iki…: rodo autoriaus hipotezę apie trumpą pirmąjį šuolį (pagal nutylėjimą 1200 km) [4].
+LI|Es debesys Maidenhead kvadratuose: nuspalvina atspindžio taškų kvadratus pagal įvertintą minimalią foEs.
+H2|3.3 Lentelės ir detalės
+P|Lentelėje Es spotai pateikiami galiojantys spotai su atstumu, šuolių skaičiumi ir minimalia foEs; lentelėje Es debesys (kvadratai) pateikiami kvadratai su įvertintais debesimis ir MUF, kurią jie duotų savo stočiai (raudona – 144 MHz, oranžinė – 70 MHz, geltona – 50 MHz). Nustačius mastelį, lentelės rodo tik tai, kas matoma žemėlapyje.
+LI|Spustelėjus spotą lentelėje arba žemėlapyje: trasa paryškinama geltonu švytėjimu, prireikus žemėlapis ją parodo, o skydelyje Detalės pateikiami šuoliai, atspindžio taškai, foEs ir azimutas. Spotas lieka pasirinktas ir atėjus naujiems spotams.
+LI|Spustelėjus laisvą žemėlapio tašką: taškas laikomas galimu Es debesiu ir pateikiama foEs, reikalinga 28, 50, 70 ir 144 MHz.
+H2|3.4 Autoriaus taisyklės
+LI|144 MHz: sporadinis E prasideda nuo daugiau nei 900 km; pavienis spotas nebraižomas; jis braižomas, jei per 5 minutes ateina antras spotas per tą patį debesį arba jei netoliese yra trumpo šuolio 50 MHz spotas. Žalia eilutė viršuje rodo, kiek spotų laukia patvirtinimo.
+LI|Transekvatorinis: ryšiams su žemynine Afrika (su Madagaskaru) ir Pietų Amerika, jei vidurio taškas patenka į magnetinės inklinacijos juostą nuo -20° iki +20°, ryšys laikomas transekvatoriniu, o ne sporadiniu E, nebent spote nurodyta <ES>. Kanarų salos, Madeira, Žaliasis Kyšulys ir Arabijos pusiasalis į taisyklę neįtraukiami.
+H1|4. BENCHMARK Es
+H2|4.1 Žurnalo įkėlimas
+P|Kortelė BENCHMARK Es yra sporadinio E bandymų stendas visam ADIF žurnalui, taip pat ir kitos stoties. Įkelti ADIF atveria failą (programa jį įsimena ir įkelia paleidžiant), Pašalinti ADIF jį pašalina. Stotis centre siūlo dažniausią žurnalo šaukinį ir lokatorių; juos galima pakeisti ir patvirtinti mygtuku Taikyti.
+LI|Siuntimo vieta yra kiekvieno QSO MY_GRIDSQUARE; priėmimo vietos – GRIDSQUARE (trūkstami arba 4 simbolių lokatoriai imami iš CALL3).
+LI|Galima atmesti QSO su kitu PROP_MODE ir trumpesnius nei 500 km (900 km – 144 MHz); transekvatoriniai visada atmetami, išskyrus PROP_MODE=ES.
+H2|4.2 Dienos, valandos ir skaičiavimai
+P|Lentelėje QSO pagal dienas pateikiamos dienos su QSO skaičiumi, juostomis, didžiausiu atstumu ir keliais šuoliais; spustelėjus dieną užpildoma lentelė Dienos valandos – po eilutę kiekvienai UTC valandai ir eilutė Visa diena. Azimutinis žemėlapis su didžiausio atstumo slankikliu braižo skip 10° sektoriais (oranžinis lankas = artimiausias QSO, žalias sektorius = pasiekti atstumai), debesis kvadratuose ir, visai dienai, valandinį debesų poslinkį (raudona linija).
+P|Puslapyje Siūlomi skaičiavimai pateikiamas skip pagal sektorius, įvertinta foEs su laukiama MUF 1000, 1500, 2000 ir 2400 km atstumu, įvertinti debesys, kelių šuolių patikra (vienodi šuoliai ir trumpas pirmas šuolis, palyginti su debesimis, matytais vieno šuolio režimu per ±30 minučių) ir debesų poslinkis valanda po valandos.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Viena ar dvi stotys
+P|Kortelė BENCHMARK 50 MHz skirta kelių šuolių sporadiniam E 50 MHz juostoje. Eilutėje Stotis 1 įkeliamas ir pašalinamas savo stoties žurnalas; eilutėje Stotis 2 – antrosios stoties žurnalas, kuris rodomas arba slepiamas žymimuoju langeliu Stotis 2. 1 stoties trasos yra žydros, 2 stoties – violetinės.
+LI|Rodomi kelių šuolių 50 MHz QSO, t. y. ilgesni nei 3100 km (autoriaus taisyklė); šuolių skaičius nustatomas pagal IK3XTV lentelę.
+LI|Diena, nuo… iki… UTC: diena (atvėrus – ta, kurioje daugiausia kelių šuolių QSO) ir laikas, 15 minučių žingsniu.
+LI|foEs (nebūtina): nuspalvina trasas pagal minimalią foEs ir pateikia ją lentelėje. Es aukštis ir Trumpas pirmas šuolis iki 1200 km – kaip kitose kortelėse.
+H2|5.2 Merkatoriaus žemėlapis
+P|Žemėlapis yra Merkatoriaus projekcijos su laisvai pasirenkamu centru. Priartinus pelę prie trasos, linija ir piktogramos padidėja ir parodomas korespondento 6 simbolių WWL kvadratas. Kairiuoju pelės mygtuku spustelėjus tą trasą, iškylantis langas klausia, ar parodyti visus failo QSO iš visų dienų, kurių galinis taškas yra ne toliau kaip 150 km: Taip išvalo žemėlapį ir parodo tuos QSO oranžiniame apskritime, Ne palieka žemėlapį nepakeistą. Mygtukas Grįžti į dieną ir laiką grąžina ankstesnį pasirinkimą.
+H1|6. F.A.I.
+H2|6.1 Du vaizdai
+P|Kortelėje F.A.I. tiriama sklaida nuo išilgai magnetinio lauko išsidėsčiusių netolygumų (pagrindinis šaltinis [1], [2]). Vaizdas Scatter trail (pora A-B) dviem stotims apskaičiuoja galimų sklaidos taškų (scatter point) vietą, nuspalvintą pagal nuokrypį nuo atspindžio sąlygos, siūlo labiausiai tikėtiną sklaidos tašką ir viršuje dešinėje braižo abiejų stočių QTF ir elevacijų skydelį (raudona = A, žalia = B). Vaizdas Izoatspindys (taškas) pasirinktam atspindžio taškui braižo izoatspindžio linijas, kaip AuroReflex ir K9SE SE-PROP: spalvotos juostos tamsiose schemose, storos linijos šviesiose schemose.
+H2|6.2 Valdikliai
+LI|Stotis A ir Stotis B: šaukinys (ieškomas CALL3) ir (arba) lokatorius; tuščia A = savo stotis. Meniu Patikros… įkelia bandomąsias poras (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); meniu Žinomi sklaidos taškai… pasirenka dokumentuotą sklaidos tašką (Ženeva, Briuselis, Budapeštas, JN92, JN41/42).
+LI|Aukštis (pagal nutylėjimą 110 km), minimali elevacija ir Refrakcija (4/3 Žemės spindulio), pagal nutylėjimą įjungta.
+LI|Kairysis spustelėjimas žemėlapyje: tikrinamas atspindžio taškas (pereinama į vaizdą Izoatspindys); dešinysis spustelėjimas: stoties B vieta.
+LI|Patikrinti rekomenduojamą tašką: apskaičiuoja pėdsaką, paima siūlomą sklaidos tašką ir parodo jo izoatspindžio linijas su verdiktu: TENKINA (iki 1°), PRIIMTINA (iki 2,5°), NETENKINA (daugiau).
+P|Jei modeliui skaičiavimas neįmanomas, rodomas pranešimas Skaičiuoti negalima ir jokie kiti rezultatai nerodomi. Apačioje lentelėje F.A.I. spotai pateikiami spotai, pažymėti FAI; spustelėjus spotą įkeliama jo stočių pora.
+H1|7. METEOR SCATTER
+P|Šioje kortelėje yra visa programa YA-MS su savo kortelėmis (dangaus skliautas, radarų srautas, srautai tiesiogiai, efektyvumo skaičiavimas, radaras GRAVES, eksperimentinis prognozių taikymas, geometrija ir slopinimas, meteorų srautai, šaltiniai, šaltinių žemėlapis, duomenų rinkimas, efektyvumas – paaiškinimas, kvadratų žemėlapis) ir jos skaičiavimų vadovu. Kalba ir spalvų schema yra tos, kurios pasirinktos viršuje. YA-MS Duomenų rinkimas, veikdamas E-LAYER ANALYZER viduje, neatveria savų telnet sesijų: jis gauna eilutes iš DATA COLLECTION sesijų ir atrenka iš jų meteor scatter spotus.
+H1|8. AURORA
+P|Kortelėje AURORA naudojami tie patys vaizdai kaip F.A.I. (pradinis aukštis 105 km) su NOAA kosminių orų duomenimis [15]: OVATION pašvaistės ovalu (žemėlapyje rodomas šešėliuotai), paskutinių trijų dienų Kp indeksu ir Saulės vėju, atsisiunčiamais kas 5 minutes į data/swpc arba iš karto mygtuku Atsisiųsti NOAA dabar. Programa rekomenduoja nukreipimą abiem stotims.
+LI|Paskutinių 2 valandų spotai su <AU> arba <AUR> (ne daugiau kaip 30) braižomi žemėlapyje su apskaičiuotu sklaidos tašku (oranžinis apskritimas), jei įjungtas žymimasis langelis <AU>/<AUR> spotai žemėlapyje su skaičiavimu; rezultatuose pateikiami abiejų stočių QTF ir elevacija.
+H1|9. LOG ADIF
+P|Kortelėje LOG ADIF rodomi dirbti ir patvirtinti kvadratai kiekvienai juostai nuo 28 MHz ir aukščiau, juostų nesujungiant. Atverti ADIF failą… prideda žurnalo failus; Atsisiųsti iš LoTW… atsisiunčia patvirtinimų ataskaitą (galima įsiminti naudotojo vardą, slaptažodis niekada neįrašomas); Išvalyti atmintį pašalina failus ir ataskaitą. Dirbti kvadratai yra oranžiniai, o patvirtinti QSL kortele arba per LoTW nuspalvinami kitaip; spustelėjus kvadratą rodomi šaukiniai ir sklidimo būdas.
+H1|10. Dokumentai
+P|Kortelėje ŠALTINIAI pateikiami programoje cituojami šaltiniai, kortelė po kortelės. Kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA pateikiamos formulės ir skaičiavimo sprendimai su šaltiniais kiekviename žingsnyje; šis NAUDOTOJO VADOVAS paaiškina, kaip naudotis programa; TECHNINĖ ATASKAITA išdėsto priežastis, kuriomis vadovautasi kuriant programą. Visus tris dokumentus galima eksportuoti į Word.
+H1|11. Praktiniai patarimai
+LI|Pirmiausia viršuje įrašykite šaukinį ir lokatorių ir paspauskite Taikyti: nuo jų skaičiuojami visi atstumai, MUF ir elevacijos.
+LI|Su RBN ir PSKReporter laikykite vietinį filtrą įjungtą, kad atmintis neprisipildytų HF spotų.
+LI|Praėjusio sezono analizei naudokite abu BENCHMARK su savo žurnalu; pašvaistės ir F.A.I. atveju siūlomą tašką visada patikrinkite vaizdu Izoatspindys.
+LI|Skaičiavimai yra orientaciniai: spotas ar QSO rodo, kad trasa buvo atvira, bet ne tai, kur tiksliai buvo debesis.

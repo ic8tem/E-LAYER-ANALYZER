@@ -1,0 +1,57 @@
+TITLE|Teknisk rapport om E-LAYER ANALYZER
+SUB|De val som ledde fram till programmet - av Costantino IC8TEM - version 0.4.3, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR.
+H1|1. Inledning
+P|E-LAYER ANALYZER har sitt ursprung i ett tydligt behov hos VHF-operatören: att i ett enda verktyg förfoga över allt som krävs för att tolka de utbredningssätt som involverar jonosfärens E-skikt. Hittills har sporadiskt E, F.A.I., meteor scatter och radioaurora studerats med skilda program, ofta skapade för ett enda operativsystem, ibland inte längre underhållna, vart och ett med sin egen geometriska modell och sina egna konventioner. Denna rapport redogör för skälen bakom de val som gjorts och skiljer mellan det som härrör från litteraturen, det som härrör från författarens erfarenhet på banden och det som är ett val i programmet, att bekräftas genom användning.
+H2|1.1 Mål
+LI|Att i ett enda program förena analysen av sporadiskt E, även multihopp och interkontinentalt, av F.A.I., av meteor scatter och av radioaurora.
+LI|Att arbeta med verkliga data: spots från DX-kluster i realtid och stationernas ADIF-loggar.
+LI|Att göra varje beräkning kontrollerbar: formler och källor redovisade steg för steg, samt verkliga fall för jämförelse.
+LI|Att fungera överallt där operatören har sin stationsdator, från Windows-datorn till Raspberry Pi.
+H2|1.2 Metod
+P|Arbetet har fortskridit genom successiva försök: varje flik har först skissats, sedan kontrollerats mot dokumenterade fall och därefter korrigerats enligt anvisningar från författaren, frukten av många års VHF-verksamhet från Capri (JN70CN). De regler som följt av detta anges som författarens regler i sammanfattningen av beräkningsvalen, så att läsaren kan skilja dem från litteraturens resultat.
+H1|2. Programmets arkitektur
+H2|2.1 En plattform för alla system
+TAG|SCELTA|Programmet är skrivet i C# på .NET 8 med det grafiska gränssnittet Avalonia. Det har föredragits framför Windows-bundna lösningar eftersom en enda kodbas ger paketen för Windows 64 och 32 bitar, Linux, Raspberry Pi (ARM64) och Mac, med samma grafik och samma funktioner; kompileringen och paketen tas fram automatiskt, med testskärmbilder av varje flik i flera färgscheman och språk.
+TAG|SCELTA|Alla data stannar i mappen data bredvid programmet, och ingen fil skrivs till AppData eller till systemmappar: programmet flyttas genom att en mapp kopieras, återställs genom att en fil raderas, och stationen förblir herre över sina egna data. Av samma skäl sparas lösenordet till LoTW aldrig.
+H2|2.2 En familj av program
+P|E-LAYER ANALYZER delar grafik, färgscheman och konventioner med YA-MS och YAEC, författarens övriga program. YA-MS, som är ägnat åt meteor scatter, ingår i sin helhet i fliken METEOR SCATTER: ett anpassningsskript omvandlar det från fönster till panel utan att ändra dess beräkningar, så att varje ny version av YA-MS går in i E-LAYER ANALYZER utan att behöva skrivas om. När de två programmen har gemensamma funktioner, som insamlingen av spots, gäller en enda regel: inne i E-LAYER ANALYZER tar YA-MS:s datainsamling emot raderna från telnetsessionerna i DATA COLLECTION, så att dubbla förbindelser med samma anropssignal undviks.
+H2|2.3 Gränssnittet
+TAG|SCELTA|Varje analysflik ägnar minst 65 % av fönstret åt kartan och 35 % åt data och beräkningar: utbredning är ett geografiskt fenomen, och kartan måste förbli tolkningens centrum. Kartorna är av tre slag, vart och ett valt för sin funktion: azimutal ekvidistant, centrerad på stationen, för sporadiskt E (sanna avstånd och azimut, cirklar med lika avstånd), Mercator med fritt centrum för multihopp på 50 MHz i global skala, ekvirektangulär för F.A.I. och aurora, där lokatorrutnätet och fältlinjerna är det väsentliga.
+TAG|SCELTA|Alla texter, dokument och wikin är översatta: 28 språk, alla som finns i YAEC samt danska och tagalog. I vyn F.A.I. och aurora kallas orten för scatterpunkterna Scatter trail på alla språk, för att inte skapa förväxling med meteorspåret.
+H1|3. De fysikaliska valen
+H2|3.1 Gemensam geometri
+TAG|FONTE|Jorden är en sfär med radien 6372,7955 km, som i artikeln om F.A.I. [1] och i YA-MS [5]; elevationen mot en punkt i skiktet och sekantlagen är den klassiska litteraturens. Valet av sfär i stället för ellipsoid är förenligt med precisionen hos 6-teckens lokatorer, som är några kilometer.
+TAG|SCELTA|För F.A.I. och aurora tillämpas troposfärisk refraktion med den ekvivalenta jordradien 4/3, som flyttar radiohorisonten några tiotal kilometer; för sporadiskt E, där det främst är avstånden mellan stationerna som räknas, förblir geometrin den sanna sfärens.
+H2|3.2 Sporadiskt E
+TAG|FONTE|Antalet hopp följer Flavio Eganos (IK3XTV) tabell [3]: enkelt hopp upp till 2200-2400 km, dubbelt upp till 4400-5000 km, trippelt upp till 6900 km. Det är en empirisk tabell, härledd ur verkliga förbindelser, och den har därför föredragits framför en rent geometrisk beräkning, som skulle ge större teoretiska räckvidder än de observerade.
+TAG|FONTE|För multihopp ställer programmet hypotesen om lika hopp sida vid sida med hypotesen om ett kort första hopp, inom 1200 km från det egna QTH:t, som bygger på författarens erfarenhet [4]. De två hypoteserna jämförs i BENCHMARK-flikarna med de moln som setts i enkelt hopp under samma timme: det är det ärligaste sättet att låta data avgöra.
+TAG|SCELTA|foEs uppskattas med sekantlagen och är alltid en nedre gräns: en spot visar att frekvensen gick igenom, inte hur hög den kritiska frekvensen var. Molnen samlas på Maidenhead-rutor med 4 tecken, den skala på vilken operatörer läser av och jämför utbredningen.
+TAG|FONTE|Sporadiskt E gäller inte 432 MHz: dess MUF når omkring 150-200 MHz [22], [23] och ARRL:s rekord redovisar Es-förbindelser endast på 50 och 144 MHz [24]. Programmet anger detta uttryckligen, eftersom vissa allmänna källor, även sådana som tagits fram av artificiell intelligens, hävdar motsatsen.
+H2|3.3 F.A.I. och aurora
+TAG|FONTE|F.A.I. bygger på artikeln av IC8FAX och IC8TEM från 2011 [1] och på IC8FAX:s webbsida [2]: scatter uppstår där strålen möter de fältlinjeorienterade irreguljäriteterna under en sådan vinkel att den skickas tillbaka mot motstationen. För ett stationspar är det korrekta villkoret inte enkel vinkelräthet mot fältet, utan det bistatiska Braggvillkoret (reflexionskonen), som programmet tillämpar.
+TAG|RILIEVO|Magnetfältet beräknas med den internationella modellen IGRF-14 [16] upp till grad 13, kontrollerad inom 1 nT mot en referensimplementering. Med den enkla dipolen framstod förbindelsen IC8FAX-G4LOH som omöjlig; med IGRF-14 hamnar scatterpunkten 28 km från Bryssel, en av de dokumenterade scatterpunkterna. Det var denna kontroll som avgjorde valet av den fullständiga modellen.
+TAG|SCELTA|De två vyerna, Scatter trail och Isoreflexion, tar upp grafiken från Aurora QTF, AuroReflex och K9SE:s SE-PROP [9], [11]: den första föreslår den mest sannolika punkten, den andra låter operatören kontrollera vilken punkt som helst som valts med ett klick. Om modellen inte finner någon lösning säger programmet det med meddelandet Beräkning inte möjlig och visar inga delresultat, som skulle vara vilseledande.
+TAG|FONTE|För aurora lägger programmet till data från NOAA (ovalen OVATION, Kp, solvind) [15], som används som indikator på att irreguljäriteterna förekommer, samt litteraturens kriterier för radioaurora [12]-[14] för den rekommenderade riktningen för båda stationerna.
+H2|3.4 Meteor scatter
+P|Meteor scatter har anförtrotts YA-MS [5], som beräknar svärmarnas effektivitet, läser meteorradarernas flöde och integrerar observationer i realtid. Valet att integrera programmet i sin helhet, i stället för att skriva om en del av det, garanterar att de två programmen alltid ger samma resultat.
+H1|4. Igenkänningen av data
+H2|4.1 Spots
+P|Kvaliteten på varje analys beror på kvaliteten i igenkänningen av data: om skip härleds ur säkra spots kan de övriga hoppen därefter rekonstrueras och de övriga molnen sökas. Därför tillämpar programmet en rad regler, nästan alla angivna av författaren efter kontroll mot verkliga spots.
+LI|Spots med <MS>, <AU>, <AUR>, <TR>, <AS> eller <ACS> hör till andra utbredningssätt och ingår inte i sporadiskt E; de som ligger i de typiska frekvensfönstren för meteor scatter eller har de digitala MS-moderna räknas som meteor scatter, som i YA-MS.
+LI|På 144 MHz börjar sporadiskt E över 900 km, och en isolerad spot ritas inte förrän den bekräftats av en andra spot på samma moln eller av ett kort hopp på 50 MHz i närheten: en enda spot på 2 m är alltför ofta tropo eller ett lokatorfel.
+LI|Mot det afrikanska fastlandet och Sydamerika är förbindelsen transekvatoriell och inte sporadiskt E när mittpunkten faller inom bandet ±20° magnetisk inklination, utom vid uttrycklig angivelse.
+LI|Saknade eller oprecisa lokatorer hämtas från CALL3-databasen; programmet lär sig nya lokatorer endast från den fullständiga formen LOC<mod>LOC, som inte lämnar något tvivel om vilken lokator som hör till vilken station.
+LI|Det lokala filtret kasserar klusterrader utanför området 27990 kHz - 145 MHz, och varje gång programmet stängs töms spotdatabasen: varje session börjar om med färska data.
+H2|4.2 Loggarna
+P|De två BENCHMARK-flikarna tillämpar samma kriterier på ADIF-loggarna: sändarposition från MY_GRIDSQUARE för varje QSO, mottagarpositioner från GRIDSQUARE, uteslutning av QSO med annat angivet utbredningssätt och av transekvatoriella QSO. I BENCHMARK 50 MHz behandlas multihopp över 3100 km, en gräns angiven av författaren som säkert skiljer multihoppförbindelser från långa enkelhopp.
+H1|5. Kontroller
+TAG|RILIEVO|F.A.I. IC8FAX-F6DRO: scatterpunkt JN44GH, avvikelse 0,97°. IC8FAX-G4LOH: JN49FR, avvikelse 0,88°, 28 km från Bryssel. IC8FAX-FA1MXE med scatterpunkt i Genève: avvikelse 3,82°, bedömd som inte tillfredsställande, vilket stämmer med att den förbindelsen kräver en annan punkt.
+TAG|RILIEVO|Aurora IO70VJ-JO59BC med refraktion: scatterpunkt JP01AK, utanför Shetlandsöarna, avvikelse 0,97°, QTF 11° och 299°, förenliga med de norrgående aurorariktningar som observerats.
+TAG|RILIEVO|I författarens 50 MHz-logg (9876 QSO från 2017 till 2026) känner programmet igen 1738 QSO över 2400 km under 386 dagar, och den transekvatoriella regeln tillskriver 62 av dem transekvatoriell utbredning, nästan alla mot Sydafrika, Brasilien och Östafrika.
+H1|6. Begränsningar och vidareutveckling
+LI|Stationerna placeras i mitten av lokatorrutan: med 4 tecken uppgår felet till omkring 80 km.
+LI|foEs är en nedre gräns och sekantlagen överskattar den foEs som krävs på VHF; värdet bör läsas som en relativ jämförelse mellan moln.
+LI|De geografiska rutorna för Afrika och Sydamerika är approximativa; gränsfall kan korrigeras med hjälp av operatörernas uppgifter.
+LI|Planerad vidareutveckling: jämförelse av två loggar från olika stationer i alla multihoppsanalyser, allt finare igenkänning av spots, systematisk kontroll av reglerna över hela säsonger.
+H1|7. Slutsatser
+P|E-LAYER ANALYZER ersätter inte operatörens erfarenhet: det gör den mätbar. Varje val i programmet är redovisat, varje formel har sin källa, varje regel som vuxit fram ur erfarenheten anges som sådan och kan prövas mot loggarna. Det är i denna balans mellan litteratur, erfarenhet på banden och kontroll mot data som programmet finner sitt existensberättigande.

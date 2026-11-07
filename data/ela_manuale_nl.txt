@@ -1,0 +1,87 @@
+TITLE|Handleiding van E-LAYER ANALYZER
+SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.4.3, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
+H1|1. Voordat je begint
+H2|1.1 Wat het programma doet
+P|E-LAYER ANALYZER brengt in één programma de hulpmiddelen samen om de VHF-propagatiemodi te bestuderen die via de E-laag van de ionosfeer verlopen: sporadische E, ook met meervoudige sprong en intercontinentaal, F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter, met het ingebouwde programma YA-MS, en radio-aurora. Het werkt met de spots van de DX-clusters in realtime en met ADIF-logs, en toont elk resultaat op een kaart die twee derde van het venster beslaat, met de gegevens en berekeningen in het rechterderde.
+H2|1.2 Installatie en gegevensmap
+P|Het programma werkt op Windows (64 en 32 bit), Linux, Raspberry Pi (ARM64) en Mac (Apple Silicon en Intel). Het wordt gedownload van de pagina Releases van de GitHub-repository: voor Windows is er een installatieprogramma en een draagbare versie in een .zip-bestand; voor Linux en Raspberry Pi een .tar.gz-archief met het installatiescript; voor Mac een .dmg-image.
+LI|Alle gegevens van het programma staan in de map data naast het programma: instellingen (config.ini), het CALL3-archief, coëfficiënten van het magnetisch veld, logs, gedownloade NOAA-gegevens en verzamelde spots. Er wordt niets geschreven in AppData of in andere systeemmappen.
+LI|Om het programma naar een andere computer te verplaatsen volstaat het de map te kopiëren; om terug te keren naar de begininstellingen volstaat het data/config.ini te verwijderen.
+LI|Het LoTW-wachtwoord wordt nooit opgeslagen; alleen de gebruikersnaam kan worden onthouden.
+H2|1.3 De bovenste balk
+P|Linksboven vul je je eigen roepnaam, de locator (4, 6 of 8 tekens) en de antennehoogte in meters in; de knop Toepassen bevestigt ze en alle tabs worden bijgewerkt. Rechtsboven staan de UTC-tijd, de keuze van het kleurenschema (alle schema's van YAEC: Licht, Nacht, Zwart, acht pasteltinten en Meteorenspoor) en de taalkeuze (28 talen). Bij het wisselen van kleurenschema of taal wordt het venster meteen opnieuw opgebouwd, zonder de verzamelde gegevens te verliezen.
+H2|1.4 De statusbalk
+P|Onderaan geeft de statusbalk aan hoeveel roepnamen het CALL3-archief bevat, hoeveel spots in het geheugen staan en welk magnetisch veldmodel wordt gebruikt (IGRF-14 met zijn epoche). De spots in het geheugen worden bij elke afsluiting van het programma gewist: elke sessie begint zonder oude spots.
+H2|1.5 De kaarten
+P|Alle kaarten werken op dezelfde manier: met het muiswiel zoom je in of uit, slepen met de linkermuisknop verschuift het beeld en een linksklik kiest een punt, een spot of een traject, afhankelijk van de tab. Rechtsboven verschijnen de coördinaten en de 6-tekens-locator onder de cursor; op de azimutale kaarten ook de afstand en het azimut vanaf het midden. Het raster van de Maidenhead-velden en -vakken wordt fijner naarmate je inzoomt.
+H1|2. Gegevensverzameling (DATA COLLECTION)
+H2|2.1 De drie telnetsessies
+P|De tab DATA COLLECTION opent tot drie gelijktijdige telnetverbindingen: een DX-cluster naar keuze (standaard ON0DXK met de VHF-filters), het Reverse Beacon Network (poort 7001 voor FT8, 7000 voor CW en RTTY) en het cluster van DM4X met de spots van PSKReporter (dm4x.ddns.net, poort 8500).
+LI|Host en Poort: adres van het cluster. Login: roepnaam om in te loggen (indien leeg wordt die uit de bovenste balk gebruikt). Bediening: commando's die na het inloggen worden verzonden, gescheiden door puntkomma's (bijvoorbeeld de bandfilters).
+LI|Verbinden en Verbreken openen en sluiten de sessie; Opnieuw verbinden opent haar vanzelf opnieuw na een onderbreking; Verbinden bij opstarten opent haar bij het starten van het programma.
+LI|De console toont de ontvangen regels; in het vak eronder kun je commando's voor het cluster typen (bijvoorbeeld sh/dx 20) en ze bevestigen met Verzenden of met de Enter-toets.
+H2|2.2 Het lokale filter
+P|Het vakje bovenaan, standaard aangevinkt, schakelt het lokale filter in: "DX de"-regels met een frequentie onder 27990,0 kHz of boven 145 MHz worden verworpen, verschijnen niet in de console en worden niet opgeslagen. Dat is vooral nuttig bij RBN en PSKReporter, die enorm veel HF-spots sturen. Met het vakje uitgevinkt komt alles door.
+H2|2.3 Hoe het programma de spots leest
+P|Uit elke "DX de"-regel haalt het programma spotter, frequentie, DX, commentaar, tijd en, waar aanwezig, de locators en de propagatiemodus die in het commentaar staan in de vorm JN70CN<ES>JO62QM (de eerste locator is die van de spotter, de tweede die van het DX-station; ook de vormen met <>, > en haakjes worden geaccepteerd).
+LI|Ontbrekende locators worden in het CALL3-archief opgezocht; onnauwkeurige locators (minder dan 6 tekens) worden vervangen door de 6-tekens-locator uit CALL3, als die er is.
+LI|Spots met <MS>, <AU>, <AUR>, <TR>, <AS> of <ACS> in de tekst worden niet voor sporadische E gebruikt: ze dienen voor meteorscatter, aurora, tropo of aircraft scatter.
+LI|Net als in YA-MS zijn meteorscatter-spots de spots in de typische MS-frequentievensters (50190-50300, 70100-70400, 144290-144399 kHz) zonder vermelding van een andere propagatie, en de spots met de modi MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M of met <MS>.
+LI|Spots met <AU> of <AUR> gaan naar de tab AURORA, die met FAI naar de tab F.A.I.
+H2|2.4 Verzamelde spots en CALL3-archief
+P|De pagina Verzamelde spots toont de laatste spots met een filter per band en per bron; de knop Spotmap openen opent data/spot. De pagina CALL3 toont het archief roepnaam -> locator (JTDX/WSJT-formaat): je kunt een roepnaam zoeken, het archief herladen of een nieuw CALL3.TXT-bestand importeren, dat het gebruikte bestand vervangt (het oude blijft als reservekopie bewaard).
+H1|3. Sporadische E (SPORADIC-E)
+H2|3.1 De kaart
+P|Het menu Kaart kiest tussen drie weergaven. Azimutaal - enkele sprong: kaart gecentreerd op het eigen station met een vaste straal van 2500 km en de zones van de tabel IK3XTV [3] (500 km minimum, 1500-2000 km optimaal, 2400 km maximum). Azimutaal - maximale afstand (meervoudige sprong): dezelfde kaart met de schuifregelaar Maximale afstand, van 300 tot 20000 km, en de grenzen van de dubbele (5000 km) en drievoudige sprong (6900 km), om de ontwikkeling van de meervoudige sprong te volgen. Rechthoekig: de wereldkaart met de knoppen Europa en Wereld.
+P|In de azimutale weergaven geven de gestreepte ringen de km vanaf het midden aan; de stap van de ringen verandert met de zoom en de buitenrand geeft de getoonde maximale afstand aan.
+H2|3.2 De bediening
+LI|Banden: 10, 6, 4 en 2 m (432 MHz wordt niet geanalyseerd: sporadische E is daar niet van toepassing [22]-[24]); tijdvenster van de spots van 15 minuten tot 12 uur.
+LI|Es-hoogte (standaard 105 km) en minimale elevatie van de antennes.
+LI|Eerste sprongen (gelijke sprongen): toont de eerste sprong van beide stations; Korte eerste sprong binnen…: toont de hypothese van de auteur van de korte eerste sprong (standaard 1200 km) [4].
+LI|Es-wolken op de Maidenhead-vakken: kleurt de vakken van de reflectiepunten met de geschatte minimale foEs.
+H2|3.3 Tabellen en details
+P|De tabel Es-spots toont de geldige spots met afstand, aantal sprongen en minimale foEs; de tabel Es-wolken (vakken) toont de vakken met de geschatte wolken en de MUF die ze voor het eigen station zouden geven (rood 144 MHz, oranje 70 MHz, geel 50 MHz). Als er is ingezoomd, tonen de tabellen alleen wat op de kaart zichtbaar is.
+LI|Klik op een spot in de tabel of op de kaart: het traject licht op met een gele gloed, de kaart brengt het zo nodig in beeld en het vak Details toont sprongen, reflectiepunten, foEs en azimut. De spot blijft geselecteerd, ook als er nieuwe spots binnenkomen.
+LI|Klik op een vrij punt van de kaart: het punt wordt behandeld als mogelijke Es-wolk, met de benodigde foEs voor 28, 50, 70 en 144 MHz.
+H2|3.4 De regels van de auteur
+LI|144 MHz: sporadische E begint boven 900 km; een losse spot wordt niet getekend; hij wordt getekend als binnen 5 minuten een tweede spot op dezelfde wolk binnenkomt of als er in de buurt een 50 MHz-spot met korte sprong is. De groene regel bovenaan geeft aan hoeveel spots op bevestiging wachten.
+LI|Transequatoriaal: naar continentaal Afrika (met Madagaskar) en Zuid-Amerika is de verbinding transequatoriaal en geen sporadische E als het middelpunt in de band van magnetische inclinatie tussen -20° en +20° valt, tenzij de spot <ES> vermeldt. De Canarische Eilanden, Madeira, Kaapverdië en het Arabisch Schiereiland vallen buiten de regel.
+H1|4. BENCHMARK Es
+H2|4.1 Een log laden
+P|De tab BENCHMARK Es is een testbank voor sporadische E op een volledig ADIF-log, ook van een ander station. ADIF laden opent het bestand (het programma onthoudt het en laadt het bij het opstarten opnieuw), ADIF verwijderen haalt het weg. Station in het midden stelt de vaakst voorkomende roepnaam en locator uit het log voor; je kunt ze wijzigen en bevestigen met Toepassen.
+LI|De zendpositie is de MY_GRIDSQUARE van elk QSO; de ontvangstposities zijn de GRIDSQUARE's (ontbrekende locators of locators van 4 tekens worden uit CALL3 gehaald).
+LI|QSO's met een andere PROP_MODE en die onder 500 km (900 km op 144 MHz) kunnen worden uitgesloten; transequatoriale QSO's worden altijd uitgesloten, behalve bij PROP_MODE=ES.
+H2|4.2 Dagen, uren en berekeningen
+P|De tabel QSO's per dag toont de dagen met aantal QSO's, banden, maximale afstand en meervoudige sprongen; een klik op een dag vult de tabel Uren van de dag, met een regel voor elk UTC-uur en de regel Hele dag. De azimutale kaart tekent, met de schuifregelaar voor de maximale afstand, de skip per sector van 10° (oranje boog = dichtstbijzijnde QSO, groene sector = bereikte afstanden), de wolken op de vakken en, voor de hele dag, de verplaatsing van de wolken per uur (rode lijn).
+P|De pagina Voorgestelde berekeningen toont de skip per sector, de geschatte foEs met de verwachte MUF op 1000, 1500, 2000 en 2400 km, de geschatte wolken, de controle van de meervoudige sprong (gelijke sprongen tegenover korte eerste sprong, vergeleken met de wolken die binnen ±30 minuten met een enkele sprong zijn waargenomen) en de verplaatsing van de wolken uur na uur.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Eén of twee stations
+P|De tab BENCHMARK 50 MHz is gewijd aan sporadische E met meervoudige sprong op 50 MHz. Op de regel Station 1 laad en verwijder je het log van het eigen station; op de regel Station 2 het log van een tweede station, dat je met het vakje Station 2 toont of verbergt. De trajecten van station 1 zijn lichtblauw, die van station 2 paars.
+LI|Getoond worden de QSO's op 50 MHz met meervoudige sprong, d.w.z. verder dan 3100 km (regel van de auteur); het aantal sprongen volgt de tabel IK3XTV.
+LI|Dag, van… tot… UTC: de dag (bij het openen die met de meeste QSO's met meervoudige sprong) en de tijd, in stappen van 15 minuten.
+LI|foEs (optioneel): kleurt de trajecten met de minimale foEs en toont die in de tabel. Es-hoogte en Korte eerste sprong binnen 1200 km werken zoals in de andere tabs.
+H2|5.2 De Mercatorkaart
+P|De kaart is een Mercatorkaart met vrij midden. Als de muis bij een traject komt, worden lijn en pictogrammen vergroot en verschijnt het WWL-vak van 6 tekens van het tegenstation. Met een linksklik op dat traject vraagt een pop-up of alle QSO's in het bestand, van alle dagen, met het eindpunt binnen 150 km getoond moeten worden: Ja maakt de kaart leeg en toont die QSO's binnen de oranje cirkel, Nee laat de kaart zoals ze is. De knop Terug naar dag en tijd keert terug naar de vorige keuze.
+H1|6. F.A.I.
+H2|6.1 De twee weergaven
+P|De tab F.A.I. bestudeert de scatter op veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld (hoofdbron [1], [2]). De weergave Scatter trail (paar A-B) berekent voor twee stations de verzameling mogelijke scatterpunten, gekleurd naar de afwijking van de reflectievoorwaarde, stelt het meest waarschijnlijke scatterpunt voor en tekent rechtsboven het kader met de QTF's en elevaties van beide stations (rood = A, groen = B). De weergave Iso-reflectie (punt) tekent voor een gekozen reflectiepunt de iso-reflectielijnen, zoals AuroReflex en SE-PROP van K9SE: gekleurde banden in de donkere schema's, dikke lijnen in de lichte schema's.
+H2|6.2 De bediening
+LI|Station A en Station B: roepnaam (opgezocht in CALL3) en/of locator; A leeg = het eigen station. Het menu Controles... laadt de testparen (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); het menu Bekende scatterpunten... kiest een gedocumenteerd scatterpunt (Genève, Brussel, Boedapest, JN92, JN41/42).
+LI|Hoogte (standaard 110 km), minimale elevatie en Refractie (aardstraal 4/3), standaard ingeschakeld.
+LI|Linksklik op de kaart: te controleren reflectiepunt (schakelt naar de weergave Iso-reflectie); rechtsklik: positie van station B.
+LI|Aanbevolen punt controleren: berekent de Scatter trail, neemt het voorgestelde scatterpunt en toont de iso-reflectielijnen ervan met het oordeel: VOLDOENDE (binnen 1°), AANVAARDBAAR (binnen 2,5°), ONVOLDOENDE (daarboven).
+P|Als de berekening voor het model niet mogelijk is, verschijnt de melding Berekening niet mogelijk en wordt geen enkel ander resultaat getoond. Onderaan toont de tabel F.A.I.-spots de als FAI gemelde spots; een klik op een spot laadt het bijbehorende stationspaar.
+H1|7. METEOR SCATTER
+P|De tab bevat het volledige programma YA-MS, met zijn tabs (hemelkoepel, radarflux, zwermen live, efficiëntieberekening, radar GRAVES, experimentele voorspelling, geometrie en demping, zwermen, bronnen, kaart van de bronnen, gegevensverzameling, efficiëntie - uitleg, vakkenkaart) en zijn rekenhandleiding. Taal en kleurenschema zijn de bovenaan gekozen. De Gegevensverzameling van YA-MS opent binnen E-LAYER ANALYZER geen eigen telnetsessies: ze ontvangt de regels van de sessies van DATA COLLECTION en filtert daaruit de meteorscatter-spots.
+H1|8. AURORA
+P|De tab AURORA gebruikt dezelfde weergaven als F.A.I. (standaardhoogte 105 km) met de ruimteweergegevens van de NOAA [15]: het aurora-ovaal OVATION (vervaagd op de kaart), de Kp-index van de laatste drie dagen en de zonnewind, elke 5 minuten gedownload naar data/swpc of meteen met NOAA nu downloaden. Het programma adviseert de richting voor beide stations.
+LI|Spots met <AU> of <AUR> van de laatste 2 uur (hoogstens 30) worden op de kaart getekend met het berekende scatterpunt (oranje cirkel) als het vakje <AU>/<AUR>-spots op de kaart met de berekening is aangevinkt; in de resultaten verschijnen QTF en elevatie van de twee stations.
+H1|9. LOG ADIF
+P|De tab LOG ADIF toont de gewerkte en bevestigde vakken, band per band vanaf 28 MHz, zonder de banden samen te voegen. ADIF-bestand openen... voegt de logbestanden toe; Downloaden van LoTW... downloadt het rapport van de bevestigingen (de gebruikersnaam kan worden onthouden, het wachtwoord wordt nooit opgeslagen); Geheugen wissen verwijdert bestanden en rapport. De vakken zijn oranje als ze gewerkt zijn en anders gekleurd als ze per QSL of via LoTW bevestigd zijn; een klik op een vak toont de roepnamen en de propagatiemodus.
+H1|10. Documenten
+P|De tab BRONNEN toont de door het programma geciteerde bronnen, tab per tab. De tab SAMENVATTING VAN DE REKENKEUZES geeft de formules en de rekenkeuzes met de bronnen bij elke stap; deze HANDLEIDING legt uit hoe je het programma gebruikt; het TECHNISCH VERSLAG zet de overwegingen uiteen die de realisatie van het programma hebben gestuurd. De drie documenten kunnen naar Word worden geëxporteerd.
+H1|11. Praktische tips
+LI|Vul allereerst roepnaam en locator bovenaan in en druk op Toepassen: alle afstanden, MUF's en elevaties gaan daarvan uit.
+LI|Laat bij RBN en PSKReporter het lokale filter aan staan, om het geheugen niet met HF-spots te vullen.
+LI|Gebruik voor de analyse van een voorbij seizoen de twee BENCHMARK-tabs met het eigen log; controleer bij aurora en F.A.I. het voorgestelde punt altijd met de weergave Iso-reflectie.
+LI|De berekeningen zijn indicatief: een spot of een QSO zegt dat het traject open was, niet waar de wolk precies lag.

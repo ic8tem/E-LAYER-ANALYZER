@@ -1,0 +1,57 @@
+TITLE|E-LAYER ANALYZER techninė ataskaita
+SUB|Sprendimai, lėmę programos sukūrimą - parengė Costantino IC8TEM - 0.4.3 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
+H1|1. Įžanga
+P|E-LAYER ANALYZER atsirado iš konkretaus VHF operatoriaus poreikio – turėti vienoje priemonėje viską, ko reikia sklidimo būdams, susijusiems su jonosferos E sluoksniu, interpretuoti. Iki šiol sporadinis E, F.A.I., meteor scatter ir radijo pašvaistė buvo tiriami skirtingomis programomis, dažnai sukurtomis tik vienai operacinei sistemai, kartais nebeprižiūrimomis, kiekviena su savo geometriniu modeliu ir savo konvencijomis. Šioje ataskaitoje išdėstomos priimtų sprendimų priežastys, atskiriant tai, kas kyla iš literatūros, tai, kas kyla iš autoriaus patirties eteryje, ir tai, kas yra programos sprendimas, tikrintinas praktikoje.
+H2|1.1 Tikslai
+LI|Sujungti vienoje programoje sporadinio E, taip pat kelių šuolių ir tarpžemyninio, F.A.I., meteor scatter ir radijo pašvaistės analizę.
+LI|Dirbti su tikrais duomenimis: DX klasterių spotais realiuoju laiku ir stočių ADIF žurnalais.
+LI|Padaryti kiekvieną skaičiavimą patikrinamą: formulės ir šaltiniai pateikiami žingsnis po žingsnio, kartu su tikrais palyginamaisiais atvejais.
+LI|Veikti visur, kur operatorius turi savo stoties kompiuterį – nuo Windows asmeninio kompiuterio iki Raspberry Pi.
+H2|1.2 Metodas
+P|Darbas vyko nuoseklių bandymų keliu: kiekviena kortelė pirmiausia buvo apmatyta, paskui patikrinta dokumentuotais atvejais, tada pataisyta pagal autoriaus nurodymus, sukauptus per ilgus VHF veiklos metus iš Kaprio (JN70CN). Iš to kilusios taisyklės skaičiavimo sprendimų santraukoje nurodytos kaip autoriaus taisyklės, kad skaitytojas galėtų jas atskirti nuo literatūros rezultatų.
+H1|2. Programos architektūra
+H2|2.1 Viena platforma visoms sistemoms
+TAG|SCELTA|Programa parašyta C# kalba .NET 8 platformoje su Avalonia grafine sąsaja. Ji pasirinkta vietoj su Windows susietų sprendimų, nes vienas kodas sukuria paketus Windows 64 ir 32 bitų, Linux, Raspberry Pi (ARM64) ir Mac sistemoms, su ta pačia grafika ir tomis pačiomis funkcijomis; kompiliavimas ir paketai sukuriami automatiškai, kartu su kiekvienos kortelės bandomosiomis nuotraukomis keliomis spalvų schemomis ir kalbomis.
+TAG|SCELTA|Visi duomenys lieka aplanke data šalia programos, ir joks failas nerašomas į AppData ar sisteminius aplankus: programa perkeliama nukopijuojant aplanką, atkuriama ištrinant failą, o stotis lieka savo duomenų šeimininkė. Dėl tos pačios priežasties LoTW slaptažodis niekada neįrašomas.
+H2|2.2 Programų šeima
+P|E-LAYER ANALYZER dalijasi grafika, spalvų schemomis ir konvencijomis su YA-MS ir YAEC – kitomis autoriaus programomis. YA-MS, skirta meteor scatter, visa integruota į kortelę METEOR SCATTER: išdėstymo scenarijus paverčia ją iš lango skydeliu nekeisdamas jos skaičiavimų, todėl kiekviena nauja YA-MS versija patenka į E-LAYER ANALYZER jos neperrašant. Kai abi programos turi bendrų funkcijų, pavyzdžiui, spotų rinkimą, taisyklė yra viena: E-LAYER ANALYZER viduje YA-MS duomenų rinkimas gauna DATA COLLECTION telnet sesijų eilutes, taip išvengiant dvigubų prisijungimų tuo pačiu šaukiniu.
+H2|2.3 Sąsaja
+TAG|SCELTA|Kiekviena analizės kortelė skiria bent 65% lango žemėlapiui ir 35% duomenims bei skaičiavimams: sklidimas yra geografinis reiškinys, todėl žemėlapis turi likti skaitymo centre. Žemėlapiai yra trijų tipų, kiekvienas pasirinktas pagal savo paskirtį: azimutinis vienodų atstumų, centruotas į stotį, sporadiniam E (tikri atstumai ir azimutai, vienodo atstumo apskritimai), Merkatoriaus su laisvai pasirenkamu centru – kelių šuolių 50 MHz sklidimui pasauliniu mastu, lygiakraštis stačiakampis – F.A.I. ir pašvaistei, kur svarbūs lokatorių tinklelis ir lauko linijos.
+TAG|SCELTA|Visi užrašai, dokumentai ir wiki yra išversti: 28 kalbos – visos YAEC kalbos ir dar danų bei tagalų. F.A.I. ir pašvaistės vaizde sklaidos taškų vieta visomis kalbomis vadinama Scatter trail, kad nekiltų painiavos su meteoro pėdsaku.
+H1|3. Fizikiniai sprendimai
+H2|3.1 Bendroji geometrija
+TAG|FONTE|Žemė yra 6372,7955 km spindulio sfera, kaip straipsnyje apie F.A.I. [1] ir YA-MS [5]; elevacija į sluoksnio tašką ir sekanso dėsnis yra klasikinės literatūros. Sferos, o ne elipsoido, pasirinkimas dera su 6 simbolių lokatorių tikslumu, kuris siekia kelis kilometrus.
+TAG|SCELTA|F.A.I. ir pašvaistės atveju taikoma troposferinė refrakcija su 4/3 ekvivalentiniu Žemės spinduliu, kuri radijo horizontą paslenka keliomis dešimtimis kilometrų; sporadinio E atveju, kur svarbiausi yra atstumai tarp stočių, geometrija lieka tikrosios sferos.
+H2|3.2 Sporadinis E
+TAG|FONTE|Šuolių skaičius nustatomas pagal Flavio Egano IK3XTV lentelę [3]: vienas šuolis iki 2200-2400 km, dvigubas iki 4400-5000 km, trigubas iki 6900 km. Tai empirinė lentelė, sudaryta iš tikrų ryšių, todėl ji pasirinkta vietoj grynai geometrinio skaičiavimo, kuris duotų platesnes teorines ribas nei stebimos.
+TAG|FONTE|Kelių šuolių atveju programa greta vienodų šuolių hipotezės pateikia trumpo pirmojo šuolio hipotezę – iki 1200 km nuo savo QTH, kilusią iš autoriaus patirties [4]. Abi hipotezės BENCHMARK kortelėse lyginamos su debesimis, matytais vieno šuolio režimu tą pačią valandą: tai sąžiningiausias būdas leisti spręsti duomenims.
+TAG|SCELTA|foEs įvertinama pagal sekanso dėsnį ir visada yra minimali riba: spotas rodo, kad dažnis praėjo, bet ne tai, kokio aukščio buvo kritinis dažnis. Debesys grupuojami 4 simbolių Maidenhead kvadratuose – tuo mastu, kuriuo operatoriai skaito ir lygina sklidimą.
+TAG|FONTE|Sporadinis E netaikomas 432 MHz: jo MUF siekia apie 150-200 MHz [22], [23], o ARRL rekordai nurodo Es ryšius tik 50 ir 144 MHz juostose [24]. Programa tai pareiškia aiškiai, nes kai kurie bendro pobūdžio šaltiniai, taip pat sukurti dirbtinio intelekto, teigia priešingai.
+H2|3.3 F.A.I. ir pašvaistė
+TAG|FONTE|F.A.I. remiasi 2011 m. IC8FAX ir IC8TEM straipsniu [1] ir IC8FAX puslapiu [2]: sklaida vyksta ten, kur spindulys susitinka su išilgai magnetinio lauko išsidėsčiusiais netolygumais tokiu kampu, kad būtų nukreiptas korespondento link. Stočių porai teisinga sąlyga yra ne paprastas statmenumas laukui, o bistatinė Brego sąlyga (atspindžio kūgis), kurią programa ir taiko.
+TAG|RILIEVO|Magnetinis laukas skaičiuojamas pagal tarptautinį modelį IGRF-14 [16] iki 13 laipsnio, patikrintas 1 nT tikslumu su etaloniniu įgyvendinimu. Su paprastu dipoliu ryšys IC8FAX-G4LOH atrodė neįmanomas; su IGRF-14 sklaidos taškas atsiduria 28 km nuo Briuselio – vieno iš dokumentuotų sklaidos taškų. Būtent ši patikra nulėmė pilno modelio pasirinkimą.
+TAG|SCELTA|Du vaizdai, Scatter trail ir Izoatspindys, perima Aurora QTF, AuroReflex ir K9SE SE-PROP grafiką [9], [11]: pirmasis siūlo labiausiai tikėtiną tašką, antrasis leidžia operatoriui vienu spustelėjimu patikrinti bet kurį pasirinktą tašką. Jei modelis neranda sprendinio, programa tai praneša pranešimu Skaičiuoti negalima ir nerodo dalinių rezultatų, kurie būtų klaidinantys.
+TAG|FONTE|Pašvaistei programa prideda NOAA duomenis (OVATION ovalą, Kp, Saulės vėją) [15], naudojamus kaip netolygumų buvimo rodiklis, ir radijo pašvaistės literatūros kriterijus [12]-[14] abiejų stočių rekomenduojamam nukreipimui.
+H2|3.4 Meteor scatter
+P|Meteor scatter patikėtas YA-MS [5], kuri skaičiuoja meteorų srautų efektyvumą, skaito meteorinių radarų srautą ir integruoja tiesioginius stebėjimus. Sprendimas integruoti ją visą, užuot perrašius dalį, užtikrina, kad abi programos visada duotų tą patį rezultatą.
+H1|4. Duomenų atpažinimas
+H2|4.1 Spotai
+P|Kiekvienos analizės kokybė priklauso nuo duomenų atpažinimo kokybės: jei skip nustatomas iš patikimų spotų, galima paskui atkurti kitus šuolius ir ieškoti kitų debesų. Todėl programa taiko taisyklių rinkinį, beveik visas jas nurodė autorius, patikrinęs tikrus spotus.
+LI|Spotai su <MS>, <AU>, <AUR>, <TR>, <AS> arba <ACS> priklauso kitiems sklidimo būdams ir į sporadinį E nepatenka; spotai, esantys meteor scatter būdinguose dažnių languose arba su skaitmeniniais MS būdais, yra meteor scatter, kaip ir YA-MS.
+LI|144 MHz juostoje sporadinis E prasideda nuo daugiau nei 900 km, o pavienis spotas nebraižomas, kol jo nepatvirtina antras spotas per tą patį debesį arba netoliese esantis trumpas 50 MHz šuolis: pavienis 2 m spotas pernelyg dažnai būna troposferinis arba lokatoriaus klaida.
+LI|Ryšiams su žemynine Afrika ir Pietų Amerika, kai vidurio taškas patenka į ±20° magnetinės inklinacijos juostą, ryšys laikomas transekvatoriniu, o ne sporadiniu E, nebent aiškiai nurodyta kitaip.
+LI|Trūkstami arba netikslūs lokatoriai imami iš CALL3 archyvo; programa naujus lokatorius išmoksta tik iš pilnos formos LOC<būdas>LOC, kuri nepalieka abejonių, kuris lokatorius priklauso kuriai stočiai.
+LI|Vietinis filtras atmeta klasterio eilutes už 27990 kHz - 145 MHz intervalo ribų, o kaskart uždarius programą spotų duomenų bazė ištuštinama: kiekviena sesija pradedama nuo šviežių duomenų.
+H2|4.2 Žurnalai
+P|Abi BENCHMARK kortelės ADIF žurnalams taiko tuos pačius kriterijus: siuntimo vieta – iš kiekvieno QSO MY_GRIDSQUARE, priėmimo vietos – iš GRIDSQUARE, atmetami kitaip pažymėti būdai ir transekvatoriniai ryšiai. Kortelėje BENCHMARK 50 MHz keli šuoliai nagrinėjami nuo 3100 km – tai autoriaus nurodyta riba, patikimai atskirianti kelių šuolių ryšius nuo ilgų vieno šuolio ryšių.
+H1|5. Patikros
+TAG|RILIEVO|F.A.I. IC8FAX-F6DRO: sklaidos taškas JN44GH, nuokrypis 0,97°. IC8FAX-G4LOH: JN49FR, nuokrypis 0,88°, 28 km nuo Briuselio. IC8FAX-FA1MXE su sklaidos tašku Ženevoje: nuokrypis 3,82°, įvertintas kaip netenkinantis, o tai dera su tuo, kad šiam ryšiui reikia kito taško.
+TAG|RILIEVO|Pašvaistė IO70VJ-JO59BC su refrakcija: sklaidos taškas JP01AK, prie Šetlando salų, nuokrypis 0,97°, QTF 11° ir 299°, atitinkantys stebėtus pašvaistės nukreipimus į šiaurę.
+TAG|RILIEVO|Autoriaus 50 MHz žurnale (9876 QSO nuo 2017 iki 2026 m.) programa atpažįsta 1738 QSO, ilgesnius nei 2400 km, per 386 dienas, o transekvatorinė taisyklė 62 iš jų priskiria transekvatoriniam sklidimui – beveik visus su Pietų Afrika, Brazilija ir Rytų Afrika.
+H1|6. Ribos ir plėtra
+LI|Stotys dedamos lokatoriaus kvadrato centre: esant 4 simboliams, paklaida siekia apie 80 km.
+LI|foEs yra minimali riba, o sekanso dėsnis VHF juostose pervertina reikalingą foEs; šį dydį reikia vertinti kaip santykinį debesų palyginimą.
+LI|Afrikos ir Pietų Amerikos geografiniai stačiakampiai yra apytiksliai; ribinius atvejus galima pataisyti pagal operatorių pastabas.
+LI|Numatoma plėtra: dviejų skirtingų stočių žurnalų palyginimas visose kelių šuolių analizėse, vis tikslesnis spotų atpažinimas, sistemingas taisyklių tikrinimas ištisuose sezonuose.
+H1|7. Išvados
+P|E-LAYER ANALYZER nepakeičia operatoriaus patirties: jis padaro ją išmatuojamą. Kiekvienas programos sprendimas yra deklaruotas, kiekviena formulė turi savo šaltinį, kiekviena iš patirties kilusi taisyklė nurodyta kaip tokia ir gali būti patikrinta žurnaluose. Būtent šioje literatūros, patirties eteryje ir duomenų patikros pusiausvyroje programa randa savo prasmę.
