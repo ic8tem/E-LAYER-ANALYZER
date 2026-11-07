@@ -3,6 +3,7 @@
 // giorno e l'orario di inizio e fine; la foEs e' facoltativa (casella). Avvicinando il mouse a una tratta, icone e linea
 // si ingrandiscono e compare il quadrato WWL a 6 caratteri del corrispondente; il clic sinistro su quella tratta apre
 // un popup che chiede se vedere tutti i QSO del file con la posizione terminale entro 150 km da quel punto.
+// Seconda stazione facoltativa: un secondo log, mostrato (in viola) solo con la casella "Stazione 2".
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,9 @@ namespace ELA
     {
         public readonly Control Root;
         readonly MapView map = new MapView { Mercator = true };
-        readonly TextBlock lblFile, lblSel, lblArea;
+        readonly TextBlock lblSel, lblArea;
+        readonly TextBlock[] lblFile = new TextBlock[2];
+        readonly CheckBox chk2;
         readonly ComboBox cmbDay, cmbFrom, cmbTo;
         readonly CheckBox chkFoEs, chkShort;
         readonly NumericUpDown numH;
@@ -34,10 +37,13 @@ namespace ELA
         public const double AreaKm = 150;
         static readonly string[] Times = BuildTimes();
 
-        List<Dictionary<string, string>> raw = new List<Dictionary<string, string>>();
-        List<BenchQso> all = new List<BenchQso>();     // QSO in 50 MHz del log (tutte le giornate)
+        // due stazioni, due log: indice 0 = prima stazione, 1 = seconda stazione (facoltativa)
+        readonly List<Dictionary<string, string>>[] raw = { new List<Dictionary<string, string>>(), new List<Dictionary<string, string>>() };
+        readonly string[] file = { "", "" }, myCall = { "", "" }, myGrid = { "", "" }, info = { "", "" };
+        List<BenchQso> all = new List<BenchQso>();     // QSO in 50 MHz dei log (tutte le giornate)
         List<BenchQso> cur = new List<BenchQso>();     // QSO mostrati
-        string file = "", myCall = "", myGrid = "";
+        static Color SetColor(int k) { return k == 0 ? Pal.Azure : Pal.Violet; }
+        bool Shown(BenchQso q) { return q.Set == 0 || chk2.IsChecked == true; }
         BenchQso hover, sel;
         bool areaMode; double areaLat, areaLon; string areaName = "";
         readonly Dictionary<BenchQso, List<Point>> geo = new Dictionary<BenchQso, List<Point>>();
@@ -53,11 +59,18 @@ namespace ELA
         public BenchMultiTab()
         {
             Config cf = Station.Cfg;
-            Button bLoad = Ui.B(Lang.T("Carica ADIF"), true);
-            bLoad.Click += async (s, e) => await PickFile();
-            Button bUnload = Ui.B(Lang.T("Scarica ADIF"));
-            bUnload.Click += (s, e) => Unload();
-            lblFile = new TextBlock { Foreground = Pal.B(Pal.Muted), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap, MaxWidth = 380 };
+            Button[] bLoad = new Button[2], bUnload = new Button[2];
+            for (int k = 0; k < 2; k++)
+            {
+                int kk = k;
+                bLoad[k] = Ui.B(Lang.T("Carica ADIF"), k == 0);
+                bLoad[k].Click += async (s, e) => await PickFile(kk);
+                bUnload[k] = Ui.B(Lang.T("Scarica ADIF"));
+                bUnload[k].Click += (s, e) => Unload(kk);
+                lblFile[k] = new TextBlock { Foreground = Pal.B(Pal.Muted), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap, MaxWidth = 330 };
+            }
+            chk2 = Ui.C(Lang.T("Stazione 2"), cf.GetB("b50_st2", false));
+            chk2.IsCheckedChanged += (s, e) => Rebuild();
             cmbDay = Ui.Combo(new string[0], -1, 120);
             cmbFrom = Ui.Combo(Times, 0, 80);
             cmbTo = Ui.Combo(Times, Times.Length - 1, 80);
@@ -74,14 +87,16 @@ namespace ELA
             bAll.Click += (s, e) => { areaMode = false; Fill(); };
 
             tQso = new TableView();
-            tQso.Columns.AddRange(new[] { Lang.T("Giornata"), "UTC", Lang.T("Nominativo"), "WWL", "km", Lang.T("Salti"), "foEs≥" });
-            tQso.ColumnWidths.AddRange(new double[] { 84, 46, 84, 70, 54, 40, 52 });
+            tQso.Columns.AddRange(new[] { "St.", Lang.T("Giornata"), "UTC", Lang.T("Nominativo"), "WWL", "km", Lang.T("Salti"), "foEs≥" });
+            tQso.ColumnWidths.AddRange(new double[] { 28, 84, 46, 84, 70, 54, 40, 52 });
             tQso.RowClicked += i => { if (i >= 0 && i < tQso.Rows.Count) { sel = tQso.Rows[i].Tag as BenchQso; hover = sel; Draw(); Details(); } };
             txtDet = Ui.Text(12.5);
             ScrollViewer svDet = new ScrollViewer { Content = txtDet, Height = 230, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
-            Ui.Dock(right, Ui.Row(bLoad, bUnload, lblFile), Dock.Top);
+            TextBlock st1 = Ui.L(Lang.T("Stazione 1")); st1.Foreground = Pal.B(SetColor(0)); chk2.Foreground = Pal.B(SetColor(1));
+            Ui.Dock(right, Ui.Row(st1, bLoad[0], bUnload[0], lblFile[0]), Dock.Top);
+            Ui.Dock(right, Ui.Row(chk2, bLoad[1], bUnload[1], lblFile[1]), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Giorno")), cmbDay, Ui.L(Lang.T("dalle")), cmbFrom, Ui.L(Lang.T("alle")), cmbTo, Ui.L("UTC")), Dock.Top);
             Ui.Dock(right, Ui.Row(chkFoEs, Ui.L(Lang.T("Quota Es km")), numH, chkShort), Dock.Top);
             Ui.Dock(right, lblSel, Dock.Top);
@@ -97,21 +112,24 @@ namespace ELA
             map.Clicked += async (la, lo, rb) => { if (!rb && hover != null) await AskArea(hover); };
             Root = Ui.MapAndData(map, right);
 
-            string f = cf.Get("b50_file", "");
-            if (f.Length > 0 && File.Exists(f)) _ = LoadFile(f);
-            else Empty();
+            Empty();
+            for (int k = 0; k < 2; k++)
+            {
+                string f = cf.Get(k == 0 ? "b50_file" : "b50_file2", "");
+                if (f.Length > 0 && File.Exists(f)) _ = LoadFile(k, f);
+            }
         }
 
         public void Save()
         {
             Config cf = Station.Cfg;
             cf.Set("b50_foes", chkFoEs.IsChecked == true); cf.Set("b50_corto", chkShort.IsChecked == true);
-            cf.Set("b50_quota_km", Ui.V(numH)); cf.Set("b50_file", file);
+            cf.Set("b50_quota_km", Ui.V(numH)); cf.Set("b50_file", file[0]); cf.Set("b50_file2", file[1]); cf.Set("b50_st2", chk2.IsChecked == true);
         }
 
         // ---------------------------------------------------------------- caricamento del log
 
-        async Task PickFile()
+        async Task PickFile(int k)
         {
             TopLevel tl = TopLevel.GetTopLevel(Root);
             if (tl == null) return;
@@ -123,29 +141,31 @@ namespace ELA
             });
             if (files == null || files.Count == 0) return;
             string p = files[0].TryGetLocalPath();
-            if (p != null) await LoadFile(p);
+            if (p != null) await LoadFile(k, p);
         }
 
-        public async Task LoadFile(string path)
+        public async Task LoadFile(int k, string path)
         {
-            lblFile.Text = Lang.F("Leggo {0}...", Path.GetFileName(path));
+            lblFile[k].Text = Lang.F("Leggo {0}...", Path.GetFileName(path));
             List<Dictionary<string, string>> recs = null; string err = null;
             await Task.Run(() => { try { recs = Adif.Parse(File.ReadAllBytes(path)); } catch (Exception ex) { err = ex.Message; } });
-            if (recs == null) { lblFile.Text = Lang.F("Errore: {0}", err ?? ""); return; }
-            file = path; raw = recs; areaMode = false; hover = sel = null;
-            Rebuild();
+            if (recs == null) { lblFile[k].Text = Lang.F("Errore: {0}", err ?? ""); return; }
+            file[k] = path; raw[k] = recs; areaMode = false; hover = sel = null;
+            if (k == 1 && chk2.IsChecked != true) chk2.IsChecked = true;   // caricato il secondo log: si mostra
+            else Rebuild();
         }
 
-        void Unload()
+        void Unload(int k)
         {
-            file = ""; raw = new List<Dictionary<string, string>>(); all = new List<BenchQso>(); cur = new List<BenchQso>();
-            hover = sel = null; areaMode = false; geo.Clear();
-            Empty();
+            file[k] = ""; raw[k] = new List<Dictionary<string, string>>(); info[k] = "";
+            hover = sel = null; areaMode = false;
+            Rebuild();
         }
 
         void Empty()
         {
-            lblFile.Text = Lang.T("Nessun log caricato");
+            all = new List<BenchQso>(); cur = new List<BenchQso>(); geo.Clear();
+            for (int k = 0; k < 2; k++) lblFile[k].Text = file[k].Length > 0 ? info[k] : Lang.T("Nessun log caricato");
             busyFill = true; cmbDay.ItemsSource = new string[0]; busyFill = false;
             tQso.Rows.Clear(); tQso.Refresh(); lblSel.Text = ""; lblArea.Text = ""; bAll.IsVisible = false;
             txtDet.Text = Lang.T("Carica il log ADIF di una stazione: la linguetta mostra i QSO in 50 MHz oltre il singolo salto (più di 2400 km, tabella IK3XTV), giorno per giorno e nell'orario scelto, sulla mappa di Mercatore.");
@@ -162,18 +182,43 @@ namespace ELA
         // QSO in 50 MHz con locator, salti secondo la tabella IK3XTV
         void Rebuild()
         {
-            if (raw.Count == 0) { if (file.Length == 0) Empty(); return; }
-            myGrid = Most(raw.Select(r => F(r, "MY_GRIDSQUARE")));
-            myCall = Most(raw.Select(r => F(r, "STATION_CALLSIGN"))); if (myCall.Length == 0) myCall = Most(raw.Select(r => F(r, "OPERATOR")));
-            if (myGrid.Length < 4) myGrid = Station.Loc;
-            if (myCall.Length == 0) myCall = Station.Call;
+            if (raw[0].Count == 0 && raw[1].Count == 0) { Empty(); return; }
+            List<BenchQso> list = new List<BenchQso>();
+            for (int k = 0; k < 2; k++) if (raw[k].Count > 0) BuildSet(k, list); else { info[k] = ""; lblFile[k].Text = Lang.T("Nessun log caricato"); }
+            list.Sort((a, b) => a.Utc.CompareTo(b.Utc));
+            all = list;
+            geo.Clear();
+            foreach (BenchQso q in all)
+            {
+                MapLine l = MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, Pal.Azure, 1);
+                geo[q] = l.Pts;
+            }
+            // giornate con multi-salto in 50 MHz delle stazioni mostrate (proposta: quella con piu' QSO)
+            List<BenchQso> shown = all.Where(q => q.Path.Hops >= 2 && Shown(q)).ToList();
+            List<string> days = shown.Select(q => q.Day).Distinct().OrderBy(d => d).ToList();
+            string keep = cmbDay.SelectedItem as string;
+            busyFill = true;
+            cmbDay.ItemsSource = days;
+            string best = shown.GroupBy(q => q.Day).OrderByDescending(g => g.Count()).Select(g => g.Key).FirstOrDefault();
+            cmbDay.SelectedIndex = keep != null && days.Contains(keep) ? days.IndexOf(keep) : best != null ? days.IndexOf(best) : -1;
+            busyFill = false;
+            Fill();
+        }
+
+        void BuildSet(int k, List<BenchQso> list)
+        {
+            List<Dictionary<string, string>> rr = raw[k];
+            string mgr = Most(rr.Select(r => F(r, "MY_GRIDSQUARE")));
+            string mca = Most(rr.Select(r => F(r, "STATION_CALLSIGN"))); if (mca.Length == 0) mca = Most(rr.Select(r => F(r, "OPERATOR")));
+            if (mgr.Length < 4 && k == 0) mgr = Station.Loc;
+            if (mca.Length == 0 && k == 0) mca = Station.Call;
+            myGrid[k] = mgr; myCall[k] = mca;
             double old = EsModel.ShortHopKm;
             EsModel.ShortHopKm = chkShort.IsChecked == true ? 1200 : 0;
-            List<BenchQso> list = new List<BenchQso>();
-            int noGrid = 0, other = 0;
+            int noGrid = 0, other = 0, n = 0, multi = 0;
             try
             {
-                foreach (Dictionary<string, string> r in raw)
+                foreach (Dictionary<string, string> r in rr)
                 {
                     if (LogBands.Normalize(F(r, "BAND").ToLowerInvariant(), F(r, "FREQ")) != "6m") { other++; continue; }
                     string prop = F(r, "PROP_MODE");
@@ -185,7 +230,7 @@ namespace ELA
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
                     double la, lo;
                     if (grid.Length < 4 || !Geo.IsLocator(grid.Substring(0, 4)) || !Geo.LocToLatLon(grid, out la, out lo)) { noGrid++; continue; }
-                    string mg = F(r, "MY_GRIDSQUARE"); if (mg.Length > 6) mg = mg.Substring(0, 6); if (mg.Length < 4) mg = myGrid;
+                    string mg = F(r, "MY_GRIDSQUARE"); if (mg.Length > 6) mg = mg.Substring(0, 6); if (mg.Length < 4) mg = mgr;
                     double tla, tlo;
                     if (!Geo.LocToLatLon(mg, out tla, out tlo)) { noGrid++; continue; }
                     string t = F(r, "TIME_ON"); if (t.Length == 4) t += "00";
@@ -193,32 +238,15 @@ namespace ELA
                     if (!DateTime.TryParseExact(F(r, "QSO_DATE") + t, "yyyyMMddHHmmss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out dt)) continue;
                     double f; string fs = F(r, "FREQ").Replace(',', '.');
                     double mhz = double.TryParse(fs, NumberStyles.Float, CultureInfo.InvariantCulture, out f) && f >= 50 && f <= 54 ? f : 50.15;
-                    BenchQso q = new BenchQso { Utc = dt, Call = call, Grid = grid, MyCall = myCall, MyGrid = mg, Band = "6m", FreqMHz = mhz, LatTx = tla, LonTx = tlo, LatRx = la, LonRx = lo, Prop = prop };
-                    q.Path = EsModel.Build(new Spot { Utc = dt, FreqKHz = mhz * 1000, DxCall = call, Spotter = myCall, LocSpotter = mg, LocDx = grid, LatS = tla, LonS = tlo, LatD = la, LonD = lo, Prop = "ES" }, Ui.V(numH));
-                    if (q.Path != null) list.Add(q);
+                    BenchQso q = new BenchQso { Utc = dt, Call = call, Grid = grid, MyCall = mca, MyGrid = mg, Band = "6m", FreqMHz = mhz, LatTx = tla, LonTx = tlo, LatRx = la, LonRx = lo, Prop = prop, Set = k };
+                    q.Path = EsModel.Build(new Spot { Utc = dt, FreqKHz = mhz * 1000, DxCall = call, Spotter = mca, LocSpotter = mg, LocDx = grid, LatS = tla, LonS = tlo, LatD = la, LonD = lo, Prop = "ES" }, Ui.V(numH));
+                    if (q.Path != null) { list.Add(q); n++; if (q.Path.Hops >= 2) multi++; }
                 }
             }
             finally { EsModel.ShortHopKm = old; }
-            list.Sort((a, b) => a.Utc.CompareTo(b.Utc));
-            all = list;
-            geo.Clear();
-            foreach (BenchQso q in all)
-            {
-                MapLine l = MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, Pal.Azure, 1);
-                geo[q] = l.Pts;
-            }
-            int multi = all.Count(q => q.Path.Hops >= 2);
-            lblFile.Text = Lang.F("{0}: {1} ({2}), {3} QSO in 50 MHz, {4} multi-salto; esclusi: {5} senza locator, {6} di altre bande o con altro PROP_MODE.",
-                Path.GetFileName(file), myCall, myGrid, all.Count, multi, noGrid, other);
-            // giornate con multi-salto in 50 MHz (proposta: quella con piu' QSO)
-            List<string> days = all.Where(q => q.Path.Hops >= 2).Select(q => q.Day).Distinct().OrderBy(d => d).ToList();
-            string keep = cmbDay.SelectedItem as string;
-            busyFill = true;
-            cmbDay.ItemsSource = days;
-            string best = all.Where(q => q.Path.Hops >= 2).GroupBy(q => q.Day).OrderByDescending(g => g.Count()).Select(g => g.Key).FirstOrDefault();
-            cmbDay.SelectedIndex = keep != null && days.Contains(keep) ? days.IndexOf(keep) : best != null ? days.IndexOf(best) : -1;
-            busyFill = false;
-            Fill();
+            info[k] = Lang.F("{0}: {1} ({2}), {3} QSO in 50 MHz, {4} multi-salto; esclusi: {5} senza locator, {6} di altre bande o con altro PROP_MODE.",
+                Path.GetFileName(file[k]), mca, mgr, n, multi, noGrid, other);
+            lblFile[k].Text = info[k];
         }
 
         // QSO da mostrare: giornata e orario scelti, oppure (dopo il popup) tutti quelli con il corrispondente entro 150 km
@@ -227,12 +255,12 @@ namespace ELA
         void Fill(bool frame)
         {
             if (areaMode)
-                cur = all.Where(q => Geo.DistanceKm(areaLat, areaLon, q.LatRx, q.LonRx) <= AreaKm).ToList();
+                cur = all.Where(q => Shown(q) && Geo.DistanceKm(areaLat, areaLon, q.LatRx, q.LonRx) <= AreaKm).ToList();
             else
             {
                 string day = cmbDay.SelectedItem as string;
                 int a = Minutes(cmbFrom.SelectedItem as string, 0), b = Minutes(cmbTo.SelectedItem as string, 24 * 60);
-                cur = all.Where(q => q.Path.Hops >= 2 && q.Day == day && Mins(q) >= a && Mins(q) <= b).ToList();
+                cur = all.Where(q => Shown(q) && q.Path.Hops >= 2 && q.Day == day && Mins(q) >= a && Mins(q) <= b).ToList();
             }
             if (sel != null && !cur.Contains(sel)) sel = null;
             if (hover != null && !cur.Contains(hover)) hover = sel;
@@ -241,7 +269,8 @@ namespace ELA
             foreach (BenchQso q in cur)
                 tQso.Rows.Add(new TableRow
                 {
-                    Cells = new[] { q.Day, q.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), q.Call, q.Grid, q.Path.DistKm.ToString("F0", CultureInfo.CurrentCulture),
+                    Fore = SetColor(q.Set),
+                    Cells = new[] { (q.Set + 1).ToString(CultureInfo.InvariantCulture), q.Day, q.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), q.Call, q.Grid, q.Path.DistKm.ToString("F0", CultureInfo.CurrentCulture),
                         q.Path.Hops.ToString(CultureInfo.InvariantCulture), fo ? q.Path.FoEsMin.ToString("F1", CultureInfo.CurrentCulture) : "" },
                     Tag = q
                 });
@@ -330,7 +359,7 @@ namespace ELA
             foreach (BenchQso q in cur)
             {
                 if (q == hover) continue;
-                Color c = fo ? EsTab.FoEsColor(q.Path.FoEsMin) : Pal.Azure;
+                Color c = fo ? EsTab.FoEsColor(q.Path.FoEsMin) : SetColor(q.Set);
                 MapLine l = new MapLine { Color = Pal.A(fo ? 230 : 170, c), Width = 1.4 }; l.Pts.AddRange(geo[q]); map.Lines.Add(l);
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = 3, Fill = c });
                 if (q.Path.FirstA != null) map.Markers.Add(new MapMarker { Lat = q.Path.FirstA.Lat, Lon = q.Path.FirstA.Lon, Radius = 2.5, Fill = Pal.Orange, Square = true });
@@ -353,10 +382,19 @@ namespace ELA
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = 9, Fill = Pal.Yellow, Stroke = Pal.Fore, Label = q.Call + "  " + wwl, LabelColor = Pal.Yellow });
                 map.Info.Add(Lang.F("{0}  {1}  {2:F0} km, {3} salti", q.Utc.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + "Z", q.Call + " " + wwl, q.Path.DistKm, q.Path.Hops));
             }
-            double tla, tlo;
-            if (myGrid.Length >= 4 && Geo.LocToLatLon(myGrid, out tla, out tlo))
-                map.Markers.Add(new MapMarker { Lat = tla, Lon = tlo, Radius = 6, Fill = Pal.Green, Square = true, Label = myCall + " " + myGrid, LabelColor = Pal.Green });
-            map.Legend.Add(new KeyValuePair<string, Color>(fo ? Lang.T("tratte colorate dalla foEs minima") : Lang.T("tratte multi-salto in 50 MHz"), fo ? Pal.Yellow : Pal.Azure));
+            for (int k = 0; k < 2; k++)
+            {
+                double tla, tlo;
+                if (raw[k].Count == 0 || (k == 1 && chk2.IsChecked != true)) continue;
+                if (myGrid[k].Length >= 4 && Geo.LocToLatLon(myGrid[k], out tla, out tlo))
+                    map.Markers.Add(new MapMarker { Lat = tla, Lon = tlo, Radius = 6, Fill = Pal.Green, Square = true, Label = myCall[k] + " " + myGrid[k], LabelColor = SetColor(k) });
+            }
+            if (fo) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("tratte colorate dalla foEs minima"), Pal.Yellow));
+            else
+            {
+                map.Legend.Add(new KeyValuePair<string, Color>(Lang.F("stazione 1: {0}", myCall[0]), SetColor(0)));
+                if (chk2.IsChecked == true && raw[1].Count > 0) map.Legend.Add(new KeyValuePair<string, Color>(Lang.F("stazione 2: {0}", myCall[1]), SetColor(1)));
+            }
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto della stazione / ○ primo salto corto"), Pal.Orange));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("mouse vicino a una tratta: ingrandita con il WWL; clic sinistro: QSO entro 150 km"), Pal.Yellow));
             if (areaMode) map.Legend.Add(new KeyValuePair<string, Color>(Lang.F("cerchio arancio: {0:F0} km attorno al punto scelto", AreaKm), Pal.Orange));
@@ -395,7 +433,10 @@ namespace ELA
         public void ShotFoEs(bool on) { chkFoEs.IsChecked = on; }
 
         // log di prova: due giornate di multi-salto in 50 MHz da JN70CN (Nord America, Caraibi, Sud America, Giappone)
-        public static string DemoAdif()
+        public static string DemoAdif() { return DemoAdif("IC8TEM", "JN70CN", 0); }
+
+        // log di prova; variant 1 = seconda stazione (altri corrispondenti, stesse giornate)
+        public static string DemoAdif(string call, string grid, int variant)
         {
             string[][] q =
             {
@@ -407,8 +448,14 @@ namespace ELA
                 new[] { "20250622", "1820", "9Y4ABC", "FK90" }, new[] { "20250621", "1100", "EA8DO", "IL18QI" }, new[] { "20250621", "1210", "TF3ABC", "HP94" }
             };
             StringBuilder sb = new StringBuilder("<adif_ver:5>3.1.4<eoh>\n");
+            if (variant == 1)
+                q = new[]
+                {
+                    new[] { "20250621", "1620", "W1XX", "FN42" }, new[] { "20250621", "1633", "K1ABC", "FN41" }, new[] { "20250621", "1650", "VE2ABC", "FN35" },
+                    new[] { "20250621", "1705", "KP4ABC", "FK68" }, new[] { "20250621", "1820", "PY5ABC", "GG54" }, new[] { "20250621", "0550", "JA2ABC", "PM85" }
+                };
             foreach (string[] r in q)
-                sb.Append("<station_callsign:6>IC8TEM<my_gridsquare:6>JN70CN<call:" + r[2].Length + ">" + r[2] + "<gridsquare:" + r[3].Length + ">" + r[3]
+                sb.Append("<station_callsign:" + call.Length + ">" + call + "<my_gridsquare:" + grid.Length + ">" + grid + "<call:" + r[2].Length + ">" + r[2] + "<gridsquare:" + r[3].Length + ">" + r[3]
                     + "<band:2>6m<freq:6>50.313<mode:3>FT8<qso_date:8>" + r[0] + "<time_on:4>" + r[1] + "<eor>\n");
             return sb.ToString();
         }

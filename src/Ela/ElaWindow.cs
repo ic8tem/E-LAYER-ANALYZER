@@ -307,7 +307,10 @@ namespace ELA
                 await bench.LoadFile(bdemo);
                 string b50demo = Path.Combine(LogStore.Dir, "benchmark50_prova.adi");
                 File.WriteAllText(b50demo, BenchMultiTab.DemoAdif());
-                await bench50.LoadFile(b50demo);
+                await bench50.LoadFile(0, b50demo);
+                string b50demo2 = Path.Combine(LogStore.Dir, "benchmark50_prova2.adi");
+                File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
+                await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
                 string[] names = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico" };
                 for (int i = 0; i < tabs.Count; i++)
                 {

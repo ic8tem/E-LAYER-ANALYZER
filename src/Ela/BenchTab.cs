@@ -28,6 +28,7 @@ namespace ELA
         public double FreqMHz, LatTx = double.NaN, LonTx = double.NaN, LatRx, LonRx;
         public EsPath Path;          // salti secondo la tabella IK3XTV (e primo salto corto)
         public string Day { get { return Utc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture); } }
+        public int Set;              // BENCHMARK 50 MHz: 0 = prima stazione, 1 = seconda stazione
     }
 
     public class BenchTab
