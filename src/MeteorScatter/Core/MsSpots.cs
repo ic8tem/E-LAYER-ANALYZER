@@ -28,6 +28,7 @@ namespace YAMS
         public string Match = "";          // parola del filtro trovata (MSK144, <MS>, ...)
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
+        public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: lampeggio nel traffico in diretta
         public string Band { get { return MsBands.Name(FreqKHz); } }
         public string Key { get { return DxCall + "|" + Spotter + "|" + Math.Round(FreqKHz) + "|" + Utc.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture); } }
     }
@@ -233,6 +234,9 @@ namespace YAMS
         // svuota la tabella degli spot e l'elenco dei doppioni (uno spot uguale arrivato dopo torna a comparire)
         public static void ClearSpots() { Spots.Clear(); keys.Clear(); }
 
+        // solo per le fotografie di controllo (--screenshot): spot di esempio, non salvati su disco
+        public static void AddDemo(MsSpot s) { if (keys.Add(s.Key)) Spots.Add(s); }
+
         // parola del filtro trovata nella riga (null = nessuna)
         public static MsFilterWord FindWord(string text)
         {
@@ -266,6 +270,7 @@ namespace YAMS
                 if (w != null) w.Count++; else AcceptedWindow++;
                 Accepted[i]++;
                 Locate(s);
+                s.Received = DateTime.UtcNow;
                 Spots.Add(s);
                 if (Spots.Count > 5000) { for (int k = 0; k < 500; k++) keys.Remove(Spots[k].Key); Spots.RemoveRange(0, 500); }
                 Append(s);

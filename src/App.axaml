@@ -64,6 +64,27 @@
     <Style Selector="ToggleButton.tab:checked">
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
+    <!-- sottolinguette (barra chiara sotto quella principale) -->
+    <Style Selector="ToggleButton.subtab">
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Padding" Value="12,3"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsFore}"/>
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="ToggleButton.subtab:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource YamsPillHover}"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsFore}"/>
+    </Style>
+    <Style Selector="ToggleButton.subtab:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource YamsPill}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource YamsAccent}"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+      <Setter Property="Foreground" Value="{DynamicResource YamsAccent}"/>
+    </Style>
+    <Style Selector="ToggleButton.subtab:checked">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
     <Style Selector="TextBlock.label">
       <Setter Property="Foreground" Value="{DynamicResource YamsMuted}"/>
       <Setter Property="VerticalAlignment" Value="Center"/>

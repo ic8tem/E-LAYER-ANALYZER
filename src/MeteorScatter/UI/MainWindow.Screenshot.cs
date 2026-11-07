@@ -16,6 +16,22 @@ namespace YAMS
             try
             {
                 Directory.CreateDirectory(dir);
+                // schermata di avvio: fotografata a meta' della barra
+                try
+                {
+                    SplashWindow sp = new SplashWindow();
+                    sp.Show();
+                    await Task.Delay(2600);
+                    PixelSize sps = new PixelSize((int)sp.Width, (int)sp.Height);
+                    using (RenderTargetBitmap rtb = new RenderTargetBitmap(sps, new Vector(96, 96)))
+                    {
+                        rtb.Render(sp);
+                        rtb.Save(Path.Combine(dir, "avvio.png"));
+                    }
+                    sp.Close();
+                }
+                catch (Exception ex) { try { File.WriteAllText(Path.Combine(dir, "errore_avvio_schermata.txt"), ex.ToString()); } catch { } }
+                AddDemoTraffic();
                 await Task.Delay(4000);
                 if (Program.ScreenshotFontPct > 0)
                 {
@@ -32,17 +48,26 @@ namespace YAMS
                 for (int k = 0; k < 60 && (sky.MapLines == null || sky.MapLines.Count == 0); k++) await Task.Delay(1000);
                 for (int k = 0; k < 60 && liveFetching; k++) await Task.Delay(1000);   // GMN e CMOR
                 await Task.Delay(3000);
-                for (int i = 0; i < tabs.Count; i++)   // tutte le linguette, qualunque sia il loro numero
+                for (int i = 0; i < tabs.Count; i++)   // tutte le linguette e sottolinguette, qualunque sia il loro numero
                 {
                     tabs.Select(i);
-                    await Task.Delay(1500);
-                    Rect bb = (target ?? this).Bounds;
-                    PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));
-                    using (RenderTargetBitmap rtb = new RenderTargetBitmap(ps, new Vector(96, 96)))
+                    PillTabs sub = tabs.Subs[i];
+                    int nsub = sub == null ? 1 : sub.Count;
+                    for (int k = 0; k < nsub; k++)
                     {
-                        rtb.Render(target ?? this);
-                        rtb.Save(Path.Combine(dir, "linguetta_" + (i + 1) + ".png"));
+                        if (sub != null) sub.Select(k);
+                        // traffico in diretta: ridisegno subito (di solito ogni 2 s)
+                        RefreshTraffic(true);
+                        await Task.Delay(1500);
+                        Rect bb = (target ?? this).Bounds;
+                    PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));
+                        using (RenderTargetBitmap rtb = new RenderTargetBitmap(ps, new Vector(96, 96)))
+                        {
+                            rtb.Render(target ?? this);
+                            rtb.Save(Path.Combine(dir, "linguetta_" + (i + 1) + (sub == null ? "" : "_" + (k + 1)) + ".png"));
+                        }
                     }
+                    if (sub != null) sub.Select(0);
                 }
             }
             catch (Exception ex)

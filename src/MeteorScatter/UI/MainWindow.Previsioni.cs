@@ -127,7 +127,7 @@ namespace YAMS
             gridPrev.Rows = new List<TableRow>();
             if (collm == null)
             {
-                chartPrev48.Title = Lang.T("Nessun dato del radar: scaricalo dalla linguetta Flusso radar.");
+                chartPrev48.Title = Lang.T("Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.");
                 chartPrev48.InvalidateVisual(); chartPrev24.InvalidateVisual(); gridPrev.Refresh(); return;
             }
             DateTime start = collm.DayToday.AddDays(-1);
