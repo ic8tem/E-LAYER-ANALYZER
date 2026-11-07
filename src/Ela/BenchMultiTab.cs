@@ -226,6 +226,7 @@ namespace ELA
                     string call = F(r, "CALL"), grid = F(r, "GRIDSQUARE");
                     int cm = grid.IndexOfAny(new[] { ',', ' ', ';' }); if (cm > 0) grid = grid.Substring(0, cm);
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
+                    if (grid.Length < 4) grid = CallDb.Lookup(call) ?? "";   // locator mancante nel log: da CALL3
                     grid = CallDb.Refine(call, grid) ?? grid;
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
                     double la, lo;

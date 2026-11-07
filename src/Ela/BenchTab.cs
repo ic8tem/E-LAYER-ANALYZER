@@ -258,7 +258,8 @@ namespace ELA
                     string grid = Field(r, "GRIDSQUARE");
                     int cm = grid.IndexOfAny(new[] { ',', ' ', ';' }); if (cm > 0) grid = grid.Substring(0, cm);   // piu' quadrati (VUCC): il primo
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
-                    grid = CallDb.Refine(Field(r, "CALL"), grid) ?? grid;   // locator non preciso: da CALL3 (stesso quadrato)
+                    if (grid.Length < 4) grid = CallDb.Lookup(Field(r, "CALL")) ?? "";   // locator mancante nel log: da CALL3
+                    grid = CallDb.Refine(Field(r, "CALL"), grid) ?? grid;   // locator non preciso: da CALL3
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
                     double la, lo;
                     if (grid.Length < 4 || !Geo.IsLocator(grid.Substring(0, 4)) || !Geo.LocToLatLon(grid, out la, out lo)) { noGrid++; continue; }
