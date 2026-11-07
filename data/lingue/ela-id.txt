@@ -371,3 +371,48 @@ RELAZIONE TECNICA	LAPORAN TEKNIS
 Le scelte che hanno portato alla realizzazione del programma	Pilihan-pilihan yang mengarah pada pembuatan program
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	Catatan: sporadic-E tidak berlaku untuk 432 MHz (lihat Ringkasan pilihan perhitungan).
 Comandi dopo il login	Perintah setelah login
+Filtri degli spot	Filter spot
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Pengumpulan data hanya satu untuk seluruh program: setiap spot yang diterima dari sesi telnet melewati filter ini dan diteruskan ke tab setiap mode propagasi.
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	Filter meteor scatter ada di tab METEOR SCATTER.
+Meteor scatter	Meteor scatter
+E-sporadico	Sporadic-E
+Aurora	Aurora
+Prova dei filtri	Uji filter
+Filtro degli spot di E-sporadico	Filter spot sporadic-E
+Scritte di altra propagazione	Tanda propagasi lain
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	Spot yang berisi salah satu tanda ini di antara < > tidak masuk ke sporadic-E: spot tersebut untuk meteor scatter, aurora, atau tropo.
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	Juga dikecualikan spot yang dikenali sebagai meteor scatter oleh filter subtab Meteor scatter, dan spot dengan mode yang dinyatakan MS, FAI, AU, TR, EME, atau TEP.
+Regola dei 144 MHz (regola dell'autore)	Aturan 144 MHz (aturan penulis)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	Terapkan aturan: di 144 MHz sporadic-E berlaku di atas jarak minimum, dan satu spot saja tidak digambar sampai dikonfirmasi
+Distanza minima in 144 MHz (km)	Jarak minimum di 144 MHz (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	Konfirmasi dengan spot 144 MHz kedua pada awan yang sama:
+entro (minuti)	dalam (menit)
+nube entro (km)	awan dalam (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	Atau dengan spot 50 MHz lompatan pendek di sekitarnya:
+salto corto fino a (km)	lompatan pendek hingga (km)
+Regola transequatoriale (regola dell'autore)	Aturan transekuatorial (aturan penulis)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	Ke arah Afrika (termasuk Madagaskar; tanpa Kepulauan Canaria, Madeira, Tanjung Verde, dan Jazirah Arab) dan Amerika Selatan: jika titik tengah jatuh dalam pita inklinasi magnetik yang ditentukan, hubungan bersifat transekuatorial, kecuali spot menyatakan ES
+fascia di inclinazione ± (gradi)	pita inklinasi ± (derajat)
+Ripristina le regole dell'autore	Pulihkan aturan penulis
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	Filter berlaku untuk tab SPORADIC-E dan kedua BENCHMARK; nilai disimpan di pengaturan.
+Filtro degli spot di F.A.I.	Filter spot F.A.I.
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	Spot adalah F.A.I. jika mode yang dinyatakan adalah FAI atau jika teks berisi salah satu kata ini (juga tanpa < >, huruf besar atau kecil):
+Spot sulla mappa degli ultimi (minuti)	Spot di peta selama terakhir (menit)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	Spot F.A.I. digambar di tab F.A.I. bersama perhitungan scatter point.
+Filtro degli spot di aurora	Filter spot aurora
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	Spot adalah aurora jika mode yang dinyatakan adalah AU atau jika teks berisi salah satu tanda ini di antara < > (aturan penulis: <AU> dan <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	Spot aurora tidak masuk ke sporadic-E dan digambar di tab AURORA dengan perhitungan scatter point dan arah antena kedua stasiun.
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	Ketik atau tempel satu baris kluster: program menunjukkan bagaimana filter mengklasifikasikannya.
+La riga non è uno spot (deve iniziare con DX de).	Baris ini bukan spot (harus diawali DX de).
+Banda: {0}   frequenza: {1:F1} kHz	Band: {0}   frekuensi: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	Filter lokal: baris dibuang (di luar rentang 27990 kHz - 145 MHz)
+Locator: {0} - {1}	Locator: {0} - {1}
+Distanza: {0:F0} km	Jarak: {0:F0} km
+Propagazione dichiarata: {0}	Propagasi yang dinyatakan: {0}
+Meteor scatter: {0}	Meteor scatter: {0}
+Aurora: {0}	Aurora: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	Transekuatorial: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(dibuang: di bawah {0:F0} km di 144 MHz)
+(in 144 MHz si disegna solo con una conferma)	(di 144 MHz hanya digambar dengan konfirmasi)
+E-sporadico: {0}	Sporadic-E: {0}

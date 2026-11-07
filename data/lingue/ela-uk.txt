@@ -371,3 +371,48 @@ RELAZIONE TECNICA	ТЕХНІЧНИЙ ЗВІТ
 Le scelte che hanno portato alla realizzazione del programma	Рішення, що лягли в основу створення програми
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	Примітка: спорадичне E не застосовується до 432 MHz (див. Зведення розрахункових рішень).
 Comandi dopo il login	Команди після входу
+Filtri degli spot	Фільтри спотів
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Збір даних один для всієї програми: кожен спот, отриманий із сесій telnet, проходить через ці фільтри й потрапляє на вкладки кожного виду поширення.
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	Фільтр meteor scatter розташований на вкладці METEOR SCATTER.
+Meteor scatter	Meteor scatter
+E-sporadico	Спорадичне E
+Aurora	Аврора
+Prova dei filtri	Перевірка фільтрів
+Filtro degli spot di E-sporadico	Фільтр спотів спорадичного E
+Scritte di altra propagazione	Позначки іншого поширення
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	Споти, що містять одну з цих позначок між < >, не потрапляють до спорадичного E: вони призначені для meteor scatter, аврори або тропо.
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	Виключаються також споти, які фільтр підвкладки Meteor scatter розпізнає як meteor scatter, і споти із заявленим видом MS, FAI, AU, TR, EME або TEP.
+Regola dei 144 MHz (regola dell'autore)	Правило 144 MHz (правило автора)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	Застосувати правило: на 144 MHz спорадичне E діє понад мінімальну відстань, а поодинокий спот не відображається, доки не підтверджений
+Distanza minima in 144 MHz (km)	Мінімальна відстань на 144 MHz (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	Підтвердження другим спотом 144 MHz на тій самій хмарі:
+entro (minuti)	протягом (хвилин)
+nube entro (km)	хмара в межах (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	Або спотом 50 MHz короткого стрибка поблизу:
+salto corto fino a (km)	короткий стрибок до (km)
+Regola transequatoriale (regola dell'autore)	Трансекваторіальне правило (правило автора)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	У напрямку Африки (включно з Мадагаскаром; без Канарських островів, Мадейри, Кабо-Верде та Аравійського півострова) і Південної Америки: якщо середня точка потрапляє в зазначену смугу магнітного нахилу, зв'язок трансекваторіальний, якщо тільки спот не заявляє ES
+fascia di inclinazione ± (gradi)	смуга нахилу ± (градуси)
+Ripristina le regole dell'autore	Відновити правила автора
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	Фільтри діють для вкладки SPORADIC-E і для обох BENCHMARK; значення зберігаються в налаштуваннях.
+Filtro degli spot di F.A.I.	Фільтр спотів F.A.I.
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	Спот належить до F.A.I., якщо заявлений вид — FAI або якщо текст містить одне з цих слів (також без < >, великими чи малими літерами):
+Spot sulla mappa degli ultimi (minuti)	Споти на мапі за останні (хвилин)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	Споти F.A.I. відображаються на вкладці F.A.I. разом із розрахунком scatter point.
+Filtro degli spot di aurora	Фільтр спотів аврори
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	Спот належить до аврори, якщо заявлений вид — AU або якщо текст містить одну з цих позначок між < > (правило автора: <AU> і <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	Споти аврори не потрапляють до спорадичного E і відображаються на вкладці AURORA з розрахунком scatter point і напрямком антен обох станцій.
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	Введіть або вставте рядок кластера: програма покаже, як його класифікують фільтри.
+La riga non è uno spot (deve iniziare con DX de).	Рядок не є спотом (має починатися з DX de).
+Banda: {0}   frequenza: {1:F1} kHz	Діапазон: {0}   частота: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	Локальний фільтр: рядок відкинуто (поза діапазоном 27990 kHz - 145 MHz)
+Locator: {0} - {1}	Локатор: {0} - {1}
+Distanza: {0:F0} km	Відстань: {0:F0} km
+Propagazione dichiarata: {0}	Заявлене поширення: {0}
+Meteor scatter: {0}	Meteor scatter: {0}
+Aurora: {0}	Аврора: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	Трансекваторіальне: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(відкинуто: менше {0:F0} km на 144 MHz)
+(in 144 MHz si disegna solo con una conferma)	(на 144 MHz відображається лише з підтвердженням)
+E-sporadico: {0}	Спорадичне E: {0}

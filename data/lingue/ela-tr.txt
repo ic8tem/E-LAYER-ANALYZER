@@ -371,3 +371,48 @@ RELAZIONE TECNICA	TEKNİK RAPOR
 Le scelte che hanno portato alla realizzazione del programma	Programın geliştirilmesine yol açan seçimler
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	Not: sporadik E 432 MHz'de geçerli değildir (bkz. Hesaplama seçimlerinin özeti).
 Comandi dopo il login	Girişten sonraki komutlar
+Filtri degli spot	Spot filtreleri
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Veri toplama tüm program için tektir: telnet oturumlarından alınan her spot bu filtrelerden geçer ve her yayılım türünün sekmelerine gider.
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	Meteor scatter filtresi METEOR SCATTER sekmesindedir.
+Meteor scatter	Meteor scatter
+E-sporadico	Sporadik E
+Aurora	Aurora
+Prova dei filtri	Filtre testi
+Filtro degli spot di E-sporadico	Sporadik E spot filtresi
+Scritte di altra propagazione	Diğer yayılım etiketleri
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	< > arasında bu etiketlerden birini içeren spot'lar sporadik E'ye girmez: meteor scatter, aurora ya da tropo içindir.
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	Meteor scatter alt sekmesinin filtresince meteor scatter olarak tanınan spot'lar ve bildirilen modu MS, FAI, AU, TR, EME ya da TEP olan spot'lar da hariç tutulur.
+Regola dei 144 MHz (regola dell'autore)	144 MHz kuralı (yazarın kuralı)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	Kuralı uygula: 144 MHz'de sporadik E en kısa mesafenin üstünde geçerlidir ve tek bir spot doğrulanana kadar çizilmez
+Distanza minima in 144 MHz (km)	144 MHz'de en kısa mesafe (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	Aynı bulut üzerinde ikinci bir 144 MHz spot'u ile doğrulama:
+entro (minuti)	içinde (dakika)
+nube entro (km)	bulut içinde (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	Ya da yakındaki kısa atlamalı bir 50 MHz spot'u ile:
+salto corto fino a (km)	kısa atlama en fazla (km)
+Regola transequatoriale (regola dell'autore)	Transekvatoryal kural (yazarın kuralı)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	Afrika (Madagaskar dahil; Kanarya Adaları, Madeira, Yeşil Burun ve Arap Yarımadası hariç) ve Güney Amerika yönünde: orta nokta belirtilen manyetik eğim bandına düşerse, spot ES bildirmedikçe bağlantı transekvatoryaldir
+fascia di inclinazione ± (gradi)	eğim bandı ± (derece)
+Ripristina le regole dell'autore	Yazarın kurallarını geri yükle
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	Filtreler SPORADIC-E sekmesi ve iki BENCHMARK için geçerlidir; değerler ayarlarda saklanır.
+Filtro degli spot di F.A.I.	F.A.I. spot filtresi
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	Bildirilen mod FAI ise ya da metin bu sözcüklerden birini içeriyorsa (< > olmadan da, büyük ya da küçük harfle) spot F.A.I.'dir:
+Spot sulla mappa degli ultimi (minuti)	Haritadaki spot'lar, son (dakika)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I. spot'ları F.A.I. sekmesinde scatter point hesabıyla birlikte çizilir.
+Filtro degli spot di aurora	Aurora spot filtresi
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	Bildirilen mod AU ise ya da metin < > arasında bu etiketlerden birini içeriyorsa spot aurora'dır (yazarın kuralı: <AU> ve <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	Aurora spot'ları sporadik E'ye girmez ve AURORA sekmesinde scatter point hesabı ve iki istasyonun anten yönüyle çizilir.
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	Bir küme satırı yazın ya da yapıştırın: program filtrelerin onu nasıl sınıflandırdığını gösterir.
+La riga non è uno spot (deve iniziare con DX de).	Satır bir spot değil (DX de ile başlamalı).
+Banda: {0}   frequenza: {1:F1} kHz	Bant: {0}   frekans: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	Yerel filtre: satır atıldı (27990 kHz - 145 MHz aralığı dışında)
+Locator: {0} - {1}	Lokatör: {0} - {1}
+Distanza: {0:F0} km	Mesafe: {0:F0} km
+Propagazione dichiarata: {0}	Bildirilen yayılım: {0}
+Meteor scatter: {0}	Meteor scatter: {0}
+Aurora: {0}	Aurora: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	Transekvatoryal: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(atıldı: 144 MHz'de {0:F0} km altında)
+(in 144 MHz si disegna solo con una conferma)	(144 MHz'de yalnızca doğrulamayla çizilir)
+E-sporadico: {0}	Sporadik E: {0}
