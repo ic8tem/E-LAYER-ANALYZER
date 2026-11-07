@@ -91,6 +91,7 @@ TAG|SCELTA|Archivio: un file CSV al giorno in data/spot; in memoria gli ultimi s
 TAG|FONTE|Regola dell'autore (IC8TEM): a ogni chiusura del programma il database degli spot si svuota, sia in memoria sia nei file di data/spot; ogni sessione riparte senza spot vecchi.
 TAG|SCELTA|Filtro locale facoltativo (casella in DATA COLLECTION, richiesto dall'autore): le righe "DX de" con frequenza sotto 27990,0 kHz si scartano, non compaiono nella console e non si memorizzano.
 TAG|FONTE|Regola di YA-MS applicata anche qui: sono spot di meteor scatter, e non di E-sporadico, quelli con modi univocamente MS (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) o con <MS> nel testo, senza distinzione tra maiuscole e minuscole.
+TAG|FONTE|Regola dell'autore (IC8TEM): i locator non precisi (meno di 6 caratteri) si prendono da CALL3. Il programma usa il locator di CALL3 quando cade nello stesso quadrato di quello dello spot (o del log, nel BENCHMARK Es); se CALL3 indica un quadrato diverso (stazione portatile o spostata) resta il locator dello spot.
 H1|6. Log ADIF
 TAG|FONTE|Porting di LoTW Grid Map v2 [25]: il report LoTW (scaricato con nome utente e password, che non viene mai salvata) e i file ADIF del log si uniscono per nominativo, banda, data e ora; le conferme si sommano.
 TAG|SCELTA|Solo le bande dai 28 MHz in su, ognuna come banda singola, senza aggregazioni. Colori: arancione = lavorato, blu = confermato con QSL, verde = confermato via LoTW. Filtro sul modo di propagazione (PROP_MODE dell'ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).

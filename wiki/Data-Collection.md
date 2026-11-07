@@ -18,6 +18,8 @@
 
 The last 2000 spots, with band and source filters. Archive: one CSV file per day in `data/spot`. Every time the program closes, the spot database is emptied (memory and the files in `data/spot`): each session starts from scratch.
 
+**Local filter** (optional box): "DX de" lines below 27990.0 kHz are dropped, not shown in the console and not stored. **Imprecise locators** (fewer than 6 characters) are taken from CALL3 when it falls in the same square. Spots with MS-only modes (MSK144, FSK441, PSK2K, JTMS, JT6M) or with `<MS>` are meteor scatter, as in YA-MS.
+
 ## CALL3
 
 JTDX **callsign → locator** database (over a million callsigns) in `data/call3.txt`. Buttons **Reload** and **Import a new CALL3.TXT**. 6-character locators read in spot comments are added to `data/call3_nuovi.txt`.
