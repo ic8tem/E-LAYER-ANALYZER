@@ -76,8 +76,9 @@ namespace YAMS
             // una sottolinguetta per ciascuno dei tre flussi di cluster (richiesta IC8TEM), poi gli spot raccolti
             PillTabs inner = new PillTabs(true);
             string[] shortName = { Lang.T("DX cluster"), "RBN", Lang.T("DM4X (PSKReporter)") };
-            if (!Hosted) for (int i = 0; i < 3; i++) inner.Add((i + 1) + ". " + shortName[i], SessionBox(i, cols[i]));
-            else inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });
+            // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio anche quando sono nascosti
+            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }
+            if (Hosted) inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);

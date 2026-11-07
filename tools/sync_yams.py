@@ -136,8 +136,9 @@ p = os.path.join(ui, 'MainWindow.Raccolta.cs')
 if os.path.exists(p):
     s = rd(p)
     s = rep(s, '            for (int i = 0; i < 3; i++) inner.Add((i + 1) + ". " + shortName[i], SessionBox(i, cols[i]));',
-            '            if (!Hosted) for (int i = 0; i < 3; i++) inner.Add((i + 1) + ". " + shortName[i], SessionBox(i, cols[i]));\n'
-            '            else inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });',
+            '            // i riquadri si creano sempre: i loro campi servono all\'aggiornamento e al salvataggio anche quando sono nascosti\n'
+            '            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }\n'
+            '            if (Hosted) inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });',
             'sessioni della Raccolta dati')
     s = rep(s, '            if (MsCollector.Started) return;', '            if (Hosted || MsCollector.Started) return;', 'RdAutoStart')
     wr(p, s)
