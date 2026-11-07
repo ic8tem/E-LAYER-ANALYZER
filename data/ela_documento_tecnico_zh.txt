@@ -38,6 +38,7 @@ TAG|SCELTA|“Es 云”表：红色表示可提供 MUF ≥ 144 MHz 的云，橙�
 H2|3.4 偶发 E 层不适用于 432 MHz
 TAG|FONTE|中纬度偶发 E 层的 MUF 可达 150 MHz 甚至更高（Whitehead [23]）；要将掠射射线偏折到 200 MHz 需要非常密的云（IK3XTV [22]）。ARRL 纪录 [24] 只报告了 50 和 144 MHz 上的偶发 E 层通联，222 和 432 MHz 上没有。
 TAG|SCELTA|因此 SPORADIC-E 选项卡只分析 28、50、70 和 144 MHz：432 MHz 的 spot 从不按偶发 E 层处理（一些泛泛的来源，包括人工智能生成的内容，在没有文献依据的情况下声称如此）。
+H2|3.5 作者的 144 MHz 规则
 TAG|FONTE|作者（IC8TEM）为 144 MHz 规定的规则：偶发 E 层的最小距离在 900 km 以上（更短的 spot 被舍弃）；只收到一个 spot 时程序不绘制任何内容；如果 5 分钟内收到第二个 144 MHz 的 spot 且云的位置吻合，则两者都绘制；当附近至少有一个 50 MHz 短跳的 spot 时，也绘制 900 km 以上的 144 MHz spot。在 BENCHMARK Es 中，900 km 以内的 144 MHz QSO 被排除。
 TAG|SCELTA|为执行该规则，当两个 spot 的反射点（中点、首跳、短首跳）相距不超过 300 km 时，程序认为云“吻合”；“50 MHz 短跳”指 1200 km 以内的单跳，与 144 MHz 的 spot 相隔不超过 15 分钟，且中点在 300 km 以内。第二个 spot 必须来自另一对电台。顶部的状态栏显示有多少 144 MHz 的 spot 已被舍弃或正在等待确认。
 H2|3.6 方位等距地图
@@ -91,7 +92,7 @@ TAG|SCELTA|存档：data/spot 中每天一个 CSV 文件；内存中保存最近
 TAG|FONTE|作者规则（IC8TEM）：每次关闭程序时，spot 数据库都会被清空，包括内存中的数据和 data/spot 中的文件；每次会话都重新开始，不保留旧的 spot。
 TAG|SCELTA|可选本地过滤（DATA COLLECTION 中的复选框，应作者要求）：频率低于 27990.0 kHz 的 "DX de" 行被丢弃，不在控制台显示，也不保存。
 TAG|FONTE|此处同样采用 YA-MS 的规则：使用明确的 MS 模式（MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M）或文本中含有 <MS>（不区分大小写）的 spot 属于流星散射，而非偶发 E 层。
-TAG|FONTE|作者规则（IC8TEM）：不精确的网格坐标（少于 6 个字符）取自 CALL3。当 CALL3 的网格坐标与 spot（在 BENCHMARK Es 中为日志）的网格坐标落在同一方格内时，程序使用 CALL3 的网格坐标；如果 CALL3 给出的是不同的方格（便携或迁移的电台），则保留 spot 的网格坐标。
+TAG|FONTE|作者规则（IC8TEM），与 YA-MS 相同：不精确的网格坐标（少于 6 个字符）取自 CALL3；如果 CALL3 中该呼号有 6 个字符的网格坐标，则始终以其为准（在 spot 中，以及在 BENCHMARK Es 的日志网格坐标中）。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
 TAG|SCELTA|只包括 28 MHz 及以上的频段，每个频段单独列出，不做合并。颜色：橙色 = 已通联，蓝色 = 已通过 QSL 确认，绿色 = 已通过 LoTW 确认。可按传播模式过滤（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。

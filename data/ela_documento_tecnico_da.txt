@@ -38,6 +38,7 @@ TAG|SCELTA|Tabellen "Es-skyer": med rødt de skyer, der ville give MUF ≥ 144 M
 H2|3.4 Sporadisk E gælder ikke for 432 MHz
 TAG|FONTE|MUF'en for sporadisk E på mellembredder når 150 MHz og derover (Whitehead [23]); der kræves meget tætte skyer for at afbøje strejfende stråler op til 200 MHz (IK3XTV [22]). ARRL's rekorder [24] angiver forbindelser via sporadisk E kun på 50 og 144 MHz, ingen på 222 og 432 MHz.
 TAG|SCELTA|Derfor analyserer fanen SPORADIC-E kun 28, 50, 70 og 144 MHz: spots på 432 MHz behandles aldrig som sporadisk E (nogle generelle kilder, også nogle frembragt af kunstig intelligens, påstår det uden dokumentation).
+H2|3.5 Forfatterens regel for 144 MHz
 TAG|FONTE|Regel fastsat af forfatteren (IC8TEM) for 144 MHz: minimumsafstanden for sporadisk E ligger over 900 km (kortere spots kasseres); ved kun ét modtaget spot tegner programmet intet; ankommer et andet spot på 144 MHz inden for 5 minutter, og skyen passer, tegner det begge; det tegner spottet på 144 MHz over 900 km også, når der i nærheden er mindst ét 50 MHz-spot med kort hop. I BENCHMARK Es udelades QSO'er på 144 MHz under 900 km.
 TAG|SCELTA|For at anvende reglen anser programmet skyen for at "passe", når refleksionspunkterne for de to spots (midtpunkt, første hop, kort første hop) ligger højst 300 km fra hinanden; ved "kort hop på 50 MHz" forstås et enkelt hop inden for 1200 km, modtaget inden for 15 minutter efter spottet på 144 MHz, med midtpunktet inden for 300 km. Det andet spot skal komme fra et andet stationspar. Linjen øverst viser, hvor mange spots på 144 MHz der er kasseret eller afventer bekræftelse.
 H2|3.6 Azimutalt kort
@@ -91,7 +92,7 @@ TAG|SCELTA|Arkiv: én CSV-fil pr. dag i data/spot; i hukommelsen de seneste spot
 TAG|FONTE|Forfatterens regel (IC8TEM): hver gang programmet lukkes, tømmes spotdatabasen, både i hukommelsen og i filerne i data/spot; hver session starter forfra uden gamle spots.
 TAG|SCELTA|Valgfrit lokalt filter (afkrydsningsfelt i DATA COLLECTION, ønsket af forfatteren): "DX de"-linjer med frekvens under 27990,0 kHz kasseres, vises ikke i konsollen og gemmes ikke.
 TAG|FONTE|Regel fra YA-MS, som også anvendes her: spots er meteor scatter, og ikke sporadisk E, når de bruger entydige MS-modes (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) eller har <MS> i teksten, uanset store og små bogstaver.
-TAG|FONTE|Forfatterens regel (IC8TEM): upræcise lokatorer (færre end 6 tegn) hentes fra CALL3. Programmet bruger lokatoren fra CALL3, når den ligger i samme felt som spottets (eller logfilens, i BENCHMARK Es); hvis CALL3 angiver et andet felt (portabel eller flyttet station), bevares spottets lokator.
+TAG|FONTE|Forfatterens regel (IC8TEM), den samme som i YA-MS: upræcise lokatorer (færre end 6 tegn) hentes fra CALL3; har CALL3 en lokator på 6 tegn for det kaldesignal, har den altid forrang (i spottene og, i BENCHMARK Es, i logfilens lokatorer).
 H1|6. Log ADIF
 TAG|FONTE|Portering af LoTW Grid Map v2 [25]: LoTW-rapporten (hentet med brugernavn og adgangskode, som aldrig gemmes) og loggens ADIF-filer flettes efter kaldesignal, bånd, dato og tid; bekræftelserne lægges sammen.
 TAG|SCELTA|Kun båndene fra 28 MHz og op, hvert som et enkelt bånd, uden sammenlægning. Farver: orange = kørt, blå = bekræftet med QSL, grøn = bekræftet via LoTW. Filter på udbredelsesform (ADIF-feltet PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).

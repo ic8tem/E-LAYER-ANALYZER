@@ -38,6 +38,7 @@ TAG|SCELTA|"Es clouds" table: in red the clouds that would give MUF ≥ 144 MHz,
 H2|3.4 Sporadic-E does not apply to 432 MHz
 TAG|FONTE|The MUF of mid-latitude sporadic-E reaches 150 MHz and higher (Whitehead [23]); very dense clouds are needed to bend grazing rays up to 200 MHz (IK3XTV [22]). The ARRL records [24] list sporadic-E contacts only on 50 and 144 MHz, none on 222 and 432 MHz.
 TAG|SCELTA|For this reason the SPORADIC-E tab analyses only 28, 50, 70 and 144 MHz: 432 MHz spots are never treated as sporadic-E (some generic sources, including ones produced by artificial intelligence, claim otherwise without documentation).
+H2|3.5 Author's rule for 144 MHz
 TAG|FONTE|Rule set by the author (IC8TEM) for 144 MHz: the minimum sporadic-E distance is above 900 km (shorter spots are discarded); when only one spot has been received the program draws nothing; if a second 144 MHz spot arrives within 5 minutes and the cloud matches, it draws both; it also draws a 144 MHz spot above 900 km when there is at least one 50 MHz short-hop spot nearby. In the BENCHMARK Es, 144 MHz QSOs under 900 km are excluded.
 TAG|SCELTA|To apply the rule the program considers the cloud a "match" when the reflection points of the two spots (midpoint, first hops, short first hop) are at most 300 km apart; by "short hop on 50 MHz" it means a single hop within 1200 km, received within 15 minutes of the 144 MHz spot, with its midpoint within 300 km. The second spot must come from a different pair of stations. The top bar shows how many 144 MHz spots have been discarded or are awaiting confirmation.
 H2|3.6 Azimuthal map
@@ -91,7 +92,7 @@ TAG|SCELTA|Archive: one CSV file per day in data/spot; the latest spots are kept
 TAG|FONTE|Author's rule (IC8TEM): every time the program closes, the spot database is emptied, both in memory and in the files in data/spot; each session starts again with no old spots.
 TAG|SCELTA|Optional local filter (checkbox in DATA COLLECTION, requested by the author): "DX de" lines with a frequency below 27990.0 kHz are dropped; they do not appear in the console and are not stored.
 TAG|FONTE|YA-MS rule applied here too: spots are meteor scatter, not sporadic-E, when they use unambiguously MS modes (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) or have <MS> in the text, case-insensitive.
-TAG|FONTE|Author's rule (IC8TEM): imprecise locators (fewer than 6 characters) are taken from CALL3. The program uses the CALL3 locator when it falls in the same square as the spot's one (or the log's, in the BENCHMARK Es); if CALL3 gives a different square (portable or relocated station), the spot's locator is kept.
+TAG|FONTE|Author's rule (IC8TEM), the same as in YA-MS: imprecise locators (fewer than 6 characters) are taken from CALL3; if CALL3 has a 6-character locator for that callsign, it always prevails (in the spots and, in the BENCHMARK Es, in the log locators).
 H1|6. Log ADIF
 TAG|FONTE|Port of LoTW Grid Map v2 [25]: the LoTW report (downloaded with username and password, which is never saved) and the log's ADIF files are merged by callsign, band, date and time; confirmations are combined.
 TAG|SCELTA|Only bands from 28 MHz up, each as a single band, with no grouping. Colours: orange = worked, blue = confirmed by QSL, green = confirmed via LoTW. Filter on the propagation mode (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).

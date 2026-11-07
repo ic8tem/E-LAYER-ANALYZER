@@ -38,6 +38,7 @@ TAG|SCELTA|Tabula "Es mākoņi": sarkanā krāsā mākoņi, kas dotu MUF ≥ 144
 H2|3.4 Sporādiskais E neattiecas uz 432 MHz
 TAG|FONTE|Sporādiskā E MUF vidējos platumos sasniedz 150 MHz un vairāk (Whitehead [23]); lai noliektu slīdošus starus līdz 200 MHz, vajadzīgi ļoti blīvi mākoņi (IK3XTV [22]). ARRL rekordi [24] uzrāda sporādiskā E sakarus tikai 50 un 144 MHz, nevienu 222 un 432 MHz.
 TAG|SCELTA|Tāpēc cilne SPORADIC-E analizē tikai 28, 50, 70 un 144 MHz: 432 MHz spoti nekad netiek uzskatīti par sporādisko E (daži vispārīgi avoti, arī mākslīgā intelekta radīti, to apgalvo bez dokumentācijas).
+H2|3.5 Autora noteikums 144 MHz
 TAG|FONTE|Autora (IC8TEM) noteiktais noteikums 144 MHz: sporādiskā E minimālais attālums ir virs 900 km (īsāki spoti tiek atmesti); ja saņemts tikai viens spots, programma neko nezīmē; ja 5 minūšu laikā pienāk otrs 144 MHz spots un mākonis ir pareizs, tā zīmē abus; 144 MHz spotu virs 900 km tā zīmē arī tad, ja tuvumā ir vismaz viens 50 MHz īsa lēciena spots. BENCHMARK Es izslēdz 144 MHz QSO, kas īsāki par 900 km.
 TAG|SCELTA|Lai piemērotu noteikumu, programma uzskata mākoni par "pareizu", ja abu spotu atstarošanas punkti (viduspunkts, pirmie lēcieni, īsais pirmais lēciens) ir ne vairāk kā 300 km viens no otra; ar "īsu lēcienu 50 MHz" saprot vienu lēcienu līdz 1200 km, kas pienācis 15 minūšu laikā no 144 MHz spota un kura viduspunkts ir 300 km robežās. Otrajam spotam jānāk no cita staciju pāra. Augšējā josla rāda, cik 144 MHz spotu ir atmesti vai gaida apstiprinājumu.
 H2|3.6 Azimutālā karte
@@ -91,7 +92,7 @@ TAG|SCELTA|Arhīvs: viens CSV fails dienā mapē data/spot; atmiņā pēdējie s
 TAG|FONTE|Autora noteikums (IC8TEM): katru reizi, kad programma tiek aizvērta, spotu datubāze tiek iztukšota gan atmiņā, gan mapes data/spot failos; katra sesija sākas no jauna bez veciem spotiem.
 TAG|SCELTA|Neobligāts lokālais filtrs (izvēles rūtiņa sadaļā DATA COLLECTION, pēc autora pieprasījuma): "DX de" rindas ar frekvenci zem 27990,0 kHz tiek atmestas, neparādās konsolē un netiek saglabātas.
 TAG|FONTE|YA-MS noteikums, kas piemērots arī šeit: spoti ir meteor scatter, nevis sporādiskais E, ja tie izmanto viennozīmīgi MS režīmus (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) vai tekstā ir <MS>, neatkarīgi no lielajiem un mazajiem burtiem.
-TAG|FONTE|Autora noteikums (IC8TEM): neprecīzos lokatorus (mazāk par 6 rakstzīmēm) ņem no CALL3. Programma izmanto CALL3 lokatoru, ja tas atrodas tajā pašā kvadrātā kā spota (vai žurnāla, BENCHMARK Es) lokators; ja CALL3 norāda citu kvadrātu (portatīva vai pārvietota stacija), paliek spota lokators.
+TAG|FONTE|Autora noteikums (IC8TEM), tāds pats kā YA-MS: neprecīzos lokatorus (mazāk par 6 rakstzīmēm) ņem no CALL3; ja CALL3 šim izsaukuma signālam ir 6 rakstzīmju lokators, tas vienmēr ir noteicošais (spotos un, BENCHMARK Es, žurnāla lokatoros).
 H1|6. Log ADIF
 TAG|FONTE|LoTW Grid Map v2 [25] pārnese: LoTW atskaite (lejupielādēta ar lietotājvārdu un paroli, kas nekad netiek saglabāta) un žurnāla ADIF faili tiek apvienoti pēc izsaukuma signāla, joslas, datuma un laika; apstiprinājumi tiek summēti.
 TAG|SCELTA|Tikai joslas no 28 MHz uz augšu, katra kā atsevišķa josla, bez apvienošanas. Krāsas: oranža = strādāts, zila = apstiprināts ar QSL, zaļa = apstiprināts caur LoTW. Filtrs pēc izplatīšanās veida (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
