@@ -292,6 +292,7 @@ namespace ELA
             lock (plk) { while (pending.Count > 0) got.Add(pending.Dequeue()); }
             if (got.Count == 0) return;
             DateTime now = DateTime.UtcNow;
+            foreach (string l in got) YAMS.MsCollector.Feed(index, l);   // la Raccolta dati di YA-MS filtra da queste righe gli spot meteor scatter
             foreach (string l in got)
             {
                 // filtro locale (facoltativo): le righe "DX de" sotto 27990,0 kHz si scartano, non vanno in console ne' in memoria

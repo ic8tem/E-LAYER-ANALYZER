@@ -64,6 +64,7 @@ s = rep(s, 'public partial class MainWindow : Window\n    {', '''public partial 
         IStorageProvider StorageProvider { get { TopLevel t = TopLevel.GetTopLevel(this); return t != null ? t.StorageProvider : null; } }
         public static Action<string> LanguageRequested;   // cambio di lingua: lo esegue la finestra di E-LAYER ANALYZER
         public static Action<int> ThemeRequested;         // cambio dello schema di colori: idem
+        public static bool Hosted = true;                 // dentro E-LAYER ANALYZER: le righe telnet arrivano da DATA COLLECTION
         bool openedOnce;
         public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
         public void SaveSettings() { SaveConfig(); }
@@ -127,6 +128,26 @@ s = rep(s, 'PixelSize ps = new PixelSize(Math.Max(100, (int)Bounds.Width), Math.
         'Rect bb = (target ?? this).Bounds;\n                    PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));', 'Bounds')
 s = s.replace('            Close();\n', '')
 wr(p, s)
+
+# --- Raccolta dati di YA-MS (versioni successive alla 1.4.0): dentro E-LAYER ANALYZER non apre sessioni telnet
+#     proprie (sarebbero doppioni con lo stesso nominativo sugli stessi cluster): riceve le righe delle sessioni di
+#     DATA COLLECTION (MsCollector.Feed) e ne filtra gli spot meteor scatter.
+p = os.path.join(ui, 'MainWindow.Raccolta.cs')
+if os.path.exists(p):
+    s = rd(p)
+    s = rep(s, '            for (int i = 0; i < 3; i++) sp.Children.Add(SessionBox(i, cols[i]));',
+            '            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); sbx.IsVisible = !Hosted; sp.Children.Add(sbx); }\n'
+            '            if (Hosted) sp.Children.Add(new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });',
+            'sessioni della Raccolta dati')
+    s = rep(s, '            if (MsCollector.Started) return;', '            if (Hosted || MsCollector.Started) return;', 'RdAutoStart')
+    wr(p, s)
+    p = os.path.join(DST, 'Core', 'MsSpots.cs'); s = rd(p)
+    s = rep(s, '        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }',
+            '        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }\n\n'
+            '        // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)\n'
+            '        public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }',
+            'MsCollector.Feed')
+    wr(p, s)
 
 # --- Lang: anche le voci di E-LAYER ANALYZER (data/lingue/ela-<codice>.txt)
 p = os.path.join(ui, 'Lang.cs'); s = rd(p)
