@@ -16,7 +16,7 @@
 
 ## Spot raccolti
 
-Ultimi 2000 spot con filtro per banda e fonte. Archivio: un file CSV al giorno in `data/spot`.
+Ultimi 2000 spot con filtro per banda e fonte. Archivio: un file CSV al giorno in `data/spot`. A ogni chiusura del programma il database degli spot si svuota (memoria e file di `data/spot`): ogni sessione riparte da zero.
 
 ## CALL3
 

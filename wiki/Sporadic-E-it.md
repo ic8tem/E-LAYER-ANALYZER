@@ -38,6 +38,8 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 ## Uso
 
 - **Clic su uno spot**: tratta evidenziata, punti di riflessione con locator e azimut nei dettagli.
+- **Clic su uno spot** nella tabella: la tratta si illumina sulla mappa (alone giallo) e, se è fuori dalla vista, la mappa si sposta o allarga il raggio per mostrarla. Lo spot resta scelto anche quando arrivano spot nuovi.
+- **La tabella segue la mappa**: con uno zoom impostato, la tabella degli spot e quella delle nubi mostrano solo ciò che si vede sulla mappa.
 - **Clic sulla mappa**: il punto come possibile nube Es, con la foEs necessaria per 28, 50, 70 e 144 MHz.
 
 ## Nota sui 432 MHz

@@ -206,6 +206,18 @@ namespace ELA
             catch { }
         }
 
+        // svuota il database degli spot: memoria e file CSV di data/spot (alla chiusura del programma, regola dell'autore)
+        public static void ClearAll()
+        {
+            All.Clear(); keys.Clear();
+            try
+            {
+                if (Dir != null && Directory.Exists(Dir))
+                    foreach (string f in Directory.GetFiles(Dir, "*.csv")) { try { File.Delete(f); } catch { } }
+            }
+            catch { }
+        }
+
         // ricarica gli spot di oggi e di ieri dall'archivio (all'avvio)
         public static void LoadRecent()
         {

@@ -40,6 +40,18 @@ namespace ELA
         public double AzLat = 45, AzLon = 12, RangeKm = 2500, MinRangeKm = 300, MaxRangeKm = 20000;
         public bool WheelZoom = true;               // nella vista azimutale la rotella cambia il raggio
         public event Action<double> RangeChanged;   // raggio cambiato con la rotella
+        public event Action ViewChanged;            // zoom, spostamento o raggio cambiati (per filtrare le tabelle sulla parte visibile)
+        public void NotifyView() { Action a = ViewChanged; if (a != null) a(); }
+
+        // il punto e' nella parte di mappa visibile?
+        public bool InView(double lat, double lon)
+        {
+            if (double.IsNaN(lat) || double.IsNaN(lon)) return false;
+            if (Azimuthal) return Geo.DistanceKm(AzLat, AzLon, lat, lon) <= RangeKm * 1.02;
+            if (Bounds.Width < 10) return true;
+            Point q = ToScreen(lat, lon);
+            return q.X >= 0 && q.X <= Bounds.Width && q.Y >= 0 && q.Y <= Bounds.Height;
+        }
         double Rpx { get { return Math.Max(20, Math.Min(Bounds.Width, Bounds.Height) / 2 - 16); } }
         double Kpx { get { return Rpx / Math.Max(1, RangeKm); } }   // pixel per km
 
@@ -76,6 +88,7 @@ namespace ELA
             Zoom = Math.Max(0.8, Math.Min(zx, zy));
             pendingView = new double[] { lonW, lonE, latS, latN };
             InvalidateVisual();
+            NotifyView();
         }
         double[] pendingView;
 
@@ -126,6 +139,7 @@ namespace ELA
                     RangeKm = Math.Max(MinRangeKm, Math.Min(MaxRangeKm, RangeKm * (e.Delta.Y > 0 ? 0.85 : 1 / 0.85)));
                     Action<double> rc = RangeChanged; if (rc != null) rc(RangeKm);
                     InvalidateVisual();
+                    NotifyView();
                 }
                 e.Handled = true;
                 return;
@@ -138,6 +152,7 @@ namespace ELA
             CenterLon = Geo.Norm180(lon - (pos.X - Bounds.Width / 2) / p);
             CenterLat = Math.Max(-85, Math.Min(85, lat + (pos.Y - Bounds.Height / 2) / p));
             InvalidateVisual();
+            NotifyView();
             e.Handled = true;
         }
 
@@ -170,6 +185,7 @@ namespace ELA
         {
             base.OnPointerReleased(e);
             e.Pointer.Capture(null);
+            if (dragStart.HasValue && dragged && !Azimuthal) NotifyView();
             if (dragStart.HasValue && !dragged)
             {
                 double lat, lon; ToLatLon(e.GetPosition(this), out lat, out lon);

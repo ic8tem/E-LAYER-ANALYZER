@@ -33,6 +33,8 @@ namespace ELA
         List<EsPath> paths = new List<EsPath>();
         List<Cloud> clouds = new List<Cloud>();
         EsPath sel;
+        string selKey;            // lo spot scelto resta scelto anche quando la lista si ricostruisce con gli spot nuovi
+        List<EsPath> shown = new List<EsPath>();
         double clickLat = double.NaN, clickLon = double.NaN;
         bool dirty = true;
         int short144, held144;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
@@ -71,7 +73,15 @@ namespace ELA
             tSpots = new TableView();
             tSpots.Columns.AddRange(new[] { "UTC", "MHz", "DX", "Spotter", "km", Lang.T("Salti"), "foEs≥", "Prop" });
             tSpots.ColumnWidths.AddRange(new double[] { 46, 66, 82, 82, 52, 40, 52, 40 });
-            tSpots.RowClicked += i => { if (i >= 0 && i < tSpots.Rows.Count) { sel = tSpots.Rows[i].Tag as EsPath; Draw(); Details(); } };
+            tSpots.RowClicked += i =>
+            {
+                if (i < 0 || i >= tSpots.Rows.Count) return;
+                sel = tSpots.Rows[i].Tag as EsPath;
+                selKey = sel != null ? sel.Spot.Key : null;
+                clickLat = clickLon = double.NaN;
+                FocusOn(sel);
+                Draw(); Details();
+            };
             tClouds = new TableView();
             tClouds.Columns.AddRange(new[] { Lang.T("Quadrato"), "foEs≥", "Spot", "Az°", "km", Lang.T("MUF mia") });
             tClouds.ColumnWidths.AddRange(new double[] { 70, 56, 44, 44, 56, 70 });
@@ -79,7 +89,7 @@ namespace ELA
             {
                 if (i < 0 || i >= tClouds.Rows.Count) return;
                 Cloud c = tClouds.Rows[i].Tag as Cloud;
-                if (c != null) { clickLat = c.Lat; clickLon = c.Lon; sel = null; Draw(); Details(); }
+                if (c != null) { clickLat = c.Lat; clickLon = c.Lon; sel = null; selKey = null; Draw(); Details(); }
             };
             inner.Add(Lang.T("Spot Es"), tSpots);
             inner.Add(Lang.T("Nubi Es (quadrati)"), tClouds);
@@ -97,7 +107,11 @@ namespace ELA
             right.Children.Add(inner.Host);
 
             map.SetView(-30, 60, 20, 72);
-            map.Clicked += (la, lo, rightBtn) => { clickLat = la; clickLon = lo; sel = null; Draw(); Details(); };
+            map.Clicked += (la, lo, rightBtn) => { clickLat = la; clickLon = lo; sel = null; selKey = null; Draw(); Details(); };
+            // la tabella mostra solo gli spot che si vedono sulla mappa: si aggiorna dopo zoom, spostamento o cambio del raggio
+            DispatcherTimer viewTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            viewTimer.Tick += (s, e) => { viewTimer.Stop(); FillTables(); };
+            map.ViewChanged += () => { viewTimer.Stop(); viewTimer.Start(); };
             DockPanel mapHost = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(mapHost, Ui.Row(Ui.L(Lang.T("Mappa")), cmbMap, range.Root), Dock.Top);
             mapHost.Children.Add(map);
@@ -193,6 +207,8 @@ namespace ELA
                 if (p != null && p.Hops == 1) six.Add(p);
             }
             paths = EsModel.Apply144Rule(paths, six, out short144, out held144);
+            sel = null;
+            if (selKey != null) foreach (EsPath p in paths) if (p.Spot.Key == selKey) { sel = p; break; }
             BuildClouds();
             FillTables();
             Draw();
@@ -246,7 +262,9 @@ namespace ELA
         void FillTables()
         {
             tSpots.Rows.Clear();
-            foreach (EsPath p in paths)
+            shown = new List<EsPath>();
+            foreach (EsPath p in paths) if (p == sel || Visible(p)) shown.Add(p);
+            foreach (EsPath p in shown)
             {
                 Spot s = p.Spot;
                 TableRow r = new TableRow
@@ -258,11 +276,12 @@ namespace ELA
                 };
                 tSpots.Rows.Add(r);
             }
-            tSpots.SelectedIndex = sel != null ? paths.IndexOf(sel) : -1;
+            tSpots.SelectedIndex = sel != null ? shown.IndexOf(sel) : -1;
             tSpots.Refresh();
             tClouds.Rows.Clear();
             foreach (Cloud c in clouds)
             {
+                if (!map.InView(c.Lat, c.Lon)) continue;
                 Color fore = !double.IsNaN(c.Muf) && c.Muf >= 144 ? Pal.Red : !double.IsNaN(c.Muf) && c.Muf >= 70 ? Pal.Orange : !double.IsNaN(c.Muf) && c.Muf >= 50 ? Pal.Yellow : Pal.Fore;
                 tClouds.Rows.Add(new TableRow
                 {
@@ -275,6 +294,7 @@ namespace ELA
             int multi = 0; foreach (EsPath p in paths) if (p.Hops >= 2) multi++;
             Cloud best = clouds.Count > 0 && !double.IsNaN(clouds[0].Muf) ? clouds[0] : null;
             lblSummary.Text = Lang.F("{0} spot Es ({1} multi-salto), {2} quadrati con nubi stimate.", paths.Count, multi, clouds.Count)
+                + (shown.Count < paths.Count ? " " + Lang.F("In tabella i {0} visibili sulla mappa.", shown.Count) : "")
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }
@@ -294,7 +314,8 @@ namespace ELA
                 Spot s = p.Spot;
                 bool isSel = p == sel;
                 Color bc = BandColor(s.Band);
-                map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, isSel ? Pal.Yellow : Pal.A(isSel ? 255 : 140, bc), isSel ? 3 : 1.2));
+                if (isSel) map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, Pal.A(90, Pal.Yellow), 10));   // alone dello spot scelto
+                map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, isSel ? Pal.Yellow : Pal.A(isSel ? 255 : 140, bc), isSel ? 3.5 : 1.2));
                 map.Markers.Add(new MapMarker { Lat = s.LatS, Lon = s.LonS, Radius = isSel ? 4 : 2.5, Fill = bc, Label = isSel ? s.Spotter : null });
                 map.Markers.Add(new MapMarker { Lat = s.LatD, Lon = s.LonD, Radius = isSel ? 4 : 2.5, Fill = bc, Label = isSel ? s.DxCall : null });
                 if (chkFirst.IsChecked == true || isSel)
@@ -332,6 +353,34 @@ namespace ELA
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("cerchio verde: portata del singolo salto dalla mia stazione"), Pal.Green));
             map.LegendTitle = Lang.T("Nubi: foEs minima <5 / 7 / 10 / 14 / 20 / >20 MHz = blu, azzurro, verde, giallo, arancio, rosso");
             map.InvalidateVisual();
+        }
+
+        // lo spot e' visibile sulla mappa? (una delle due stazioni o un punto di riflessione)
+        bool Visible(EsPath p)
+        {
+            Spot s = p.Spot;
+            if (map.InView(s.LatS, s.LonS) || map.InView(s.LatD, s.LonD)) return true;
+            foreach (EsHop h in p.Points) if (map.InView(h.Lat, h.Lon)) return true;
+            return false;
+        }
+
+        // porta in vista lo spot scelto in tabella: nella vista azimutale allarga il raggio, in quella rettangolare inquadra la tratta
+        void FocusOn(EsPath p)
+        {
+            if (p == null) return;
+            Spot s = p.Spot;
+            if (map.InView(s.LatS, s.LonS) && map.InView(s.LatD, s.LonD)) return;
+            if (map.Azimuthal)
+            {
+                double need = Math.Max(Geo.DistanceKm(map.AzLat, map.AzLon, s.LatS, s.LonS), Geo.DistanceKm(map.AzLat, map.AzLon, s.LatD, s.LonD)) * 1.12 + 100;
+                if (cmbMap.SelectedIndex == 0) { multiRange = Math.Max(need, SingleHopRangeKm); cmbMap.SelectedIndex = 1; }   // il singolo salto ha raggio fisso: passa alla distanza massima
+                else range.Apply(Math.Max(need, map.RangeKm), true);
+                return;
+            }
+            double lw = Math.Min(s.LonS, s.LonD), le = Math.Max(s.LonS, s.LonD), ls = Math.Min(s.LatS, s.LatD), ln = Math.Max(s.LatS, s.LatD);
+            if (le - lw > 180) { map.SetView(-180, 180, -60, 80); return; }
+            double padLon = Math.Max(8, (le - lw) * 0.25), padLat = Math.Max(5, (ln - ls) * 0.25);
+            map.SetView(lw - padLon, le + padLon, Math.Max(-80, ls - padLat), Math.Min(84, ln + padLat));
         }
 
         // zone della tabella IK3XTV attorno alla stazione al centro della mappa azimutale (distanza del corrispondente):
@@ -446,6 +495,6 @@ namespace ELA
             if (mode == 2) map.SetView(-30, 60, 20, 72);
         }
 
-        public void SelectFirst() { if (paths.Count > 0) { sel = paths[0]; Draw(); Details(); } }
+        public void SelectFirst() { if (paths.Count > 0) { sel = paths[0]; selKey = sel.Spot.Key; FocusOn(sel); FillTables(); Draw(); Details(); } }
     }
 }

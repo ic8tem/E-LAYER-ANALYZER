@@ -92,7 +92,14 @@ namespace ELA
             tQso = new TableView();
             tQso.Columns.AddRange(new[] { "UTC", Lang.T("Nominativo"), "Locator", "MHz", "km", Lang.T("Salti"), "foEs≥" });
             tQso.ColumnWidths.AddRange(new double[] { 46, 84, 64, 62, 52, 40, 52 });
-            tQso.RowClicked += i => { if (i >= 0 && i < tQso.Rows.Count) { selQso = tQso.Rows[i].Tag as BenchQso; Draw(); Calc(); inner.Select(0); } };
+            tQso.RowClicked += i =>
+            {
+                if (i < 0 || i >= tQso.Rows.Count) return;
+                selQso = tQso.Rows[i].Tag as BenchQso;
+                if (selQso != null && !map.InView(selQso.LatRx, selQso.LonRx))   // porta in vista il QSO scelto
+                    range.Apply(Geo.DistanceKm(cLat, cLon, selQso.LatRx, selQso.LonRx) * 1.12 + 100, true);
+                Draw(); Calc(); inner.Select(0);
+            };
 
             txtCalc = Ui.Text(12.5);
             ScrollViewer svCalc = new ScrollViewer { Content = txtCalc, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
@@ -115,6 +122,9 @@ namespace ELA
 
             range = new RangeBar(map, cf.GetD("bench_raggio_km", 3000));
             range.Changed += km => Draw();
+            DispatcherTimer viewTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
+            viewTimer.Tick += (s, e) => { viewTimer.Stop(); FillQso(); };
+            map.ViewChanged += () => { viewTimer.Stop(); viewTimer.Start(); };
             map.Clicked += (la, lo, rb) => ClickMap(la, lo);
             DockPanel mapHost = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(mapHost, Ui.Row(range.Root, chkSkip, chkPaths), Dock.Top);
@@ -354,8 +364,17 @@ namespace ELA
             cur = all.Where(q => q.Day == selDay && (selHour < 0 || q.Utc.Hour == selHour)).ToList();
             tHours.SelectedIndex = tHours.Rows.FindIndex(r => (int)r.Tag == selHour);
             tHours.Refresh();
+            FillQso();
+            AnalyzeRest();
+        }
+
+        // elenco dei QSO della selezione: solo quelli che si vedono sulla mappa (raggio dello zoom)
+        List<BenchQso> shownQso = new List<BenchQso>();
+        void FillQso()
+        {
             tQso.Rows.Clear();
-            foreach (BenchQso q in cur)
+            shownQso = cur.Where(q => q == selQso || map.InView(q.LatRx, q.LonRx)).ToList();
+            foreach (BenchQso q in shownQso)
                 tQso.Rows.Add(new TableRow
                 {
                     Cells = new[] { q.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), q.Call, q.Grid, q.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), q.Path.DistKm.ToString("F0", CultureInfo.CurrentCulture),
@@ -363,8 +382,13 @@ namespace ELA
                     Fore = EsTab.BandColor(q.Band),
                     Tag = q
                 });
-            tQso.SelectedIndex = selQso != null ? cur.IndexOf(selQso) : -1;
+            tQso.SelectedIndex = selQso != null ? shownQso.IndexOf(selQso) : -1;
             tQso.Refresh();
+            inner.SetTitle(1, shownQso.Count < cur.Count ? Lang.F("QSO ({0} di {1} visibili)", shownQso.Count, cur.Count) : "QSO");
+        }
+
+        void AnalyzeRest()
+        {
 
             // skip per settori di azimut dal centro: distanza minima e massima raggiunte
             Dictionary<int, Sector> sec = new Dictionary<int, Sector>();
@@ -453,6 +477,7 @@ namespace ELA
             {
                 bool isSel = q == selQso;
                 Color bc = EsTab.BandColor(q.Band);
+                if (isSel) map.Lines.Add(MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, Pal.A(90, Pal.Yellow), 10));
                 if (chkPaths.IsChecked == true || isSel)
                     map.Lines.Add(MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, isSel ? Pal.Yellow : Pal.A(150, bc), isSel ? 3 : 1.2));
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = isSel ? 5 : 3, Fill = bc, Label = isSel || cur.Count <= 25 ? q.Call : null });
@@ -522,7 +547,7 @@ namespace ELA
                 double d = Math.Min(Geo.DistanceKm(la, lo, q.LatRx, q.LonRx), Geo.DistanceKm(la, lo, q.Path.FirstA.Lat, q.Path.FirstA.Lon));
                 if (d < bd) { bd = d; best = q; }
             }
-            if (best != null && bd < Math.Max(150, range.Km / 15)) { selQso = best; tQso.SelectedIndex = cur.IndexOf(best); tQso.Refresh(); Draw(); Calc(); inner.Select(0); }
+            if (best != null && bd < Math.Max(150, range.Km / 15)) { selQso = best; FillQso(); Draw(); Calc(); inner.Select(0); }
         }
 
         // ---------------------------------------------------------------- calcoli proposti

@@ -16,7 +16,7 @@
 
 ## Collected spots
 
-The last 2000 spots, with band and source filters. Archive: one CSV file per day in `data/spot`.
+The last 2000 spots, with band and source filters. Archive: one CSV file per day in `data/spot`. Every time the program closes, the spot database is emptied (memory and the files in `data/spot`): each session starts from scratch.
 
 ## CALL3
 

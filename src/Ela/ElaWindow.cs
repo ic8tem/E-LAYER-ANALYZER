@@ -136,7 +136,7 @@ namespace ELA
             Closing += (s, e) =>
             {
                 timer.Stop();
-                if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); }
+                if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); SpotStore.ClearAll(); }   // a ogni chiusura il database degli spot si svuota
             };
         }
 

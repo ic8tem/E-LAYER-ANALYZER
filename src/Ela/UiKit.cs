@@ -168,6 +168,8 @@ namespace ELA
             if (idx == 0) Select(0);
         }
 
+        public void SetTitle(int i, string title) { if (i >= 0 && i < buttons.Count) buttons[i].Content = title; }
+
         public void Select(int i)
         {
             if (i < 0 || i >= pages.Count) return;

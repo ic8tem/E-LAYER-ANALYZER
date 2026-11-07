@@ -38,6 +38,8 @@ In the azimuthal views the dashed rings show the **km from the centre** (the ste
 ## How to use it
 
 - **Click a spot**: the path is highlighted, with reflection points, locators and azimuths in the details.
+- **Click a spot** in the table: the path lights up on the map (yellow glow) and, if it is out of view, the map moves or widens its radius to show it. The spot stays selected when new spots arrive.
+- **The table follows the map**: with a zoom set, the spot table and the cloud table show only what is visible on the map.
 - **Click the map**: the point is treated as a possible Es cloud, with the foEs needed for 28, 50, 70 and 144 MHz.
 
 ## Note on 432 MHz

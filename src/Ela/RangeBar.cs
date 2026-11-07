@@ -48,6 +48,7 @@ namespace ELA
             if (moveSlider) { busy = true; sld.Value = Math.Max(0, Math.Min(1000, ToSlider(km))); busy = false; }
             lbl.Text = Lang.F("{0:N0} km dal centro", km);
             map.InvalidateVisual();
+            map.NotifyView();
             Action<double> c = Changed; if (c != null) c(km);
         }
     }
