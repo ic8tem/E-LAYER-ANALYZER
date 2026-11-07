@@ -156,12 +156,15 @@ namespace ELA
         // spot (o il PROP_MODE del log) dichiari esplicitamente ES.
         public const double TepInclinationDeg = 20;
 
-        // Africa (con Madagascar e Canarie) e Sud America: riquadri geografici approssimati
+        // Africa (con il Madagascar, senza le Canarie e senza la penisola arabica) e Sud America: riquadri geografici approssimati
+        public static bool InCanarie(double lat, double lon) { return lat >= 27.4 && lat <= 29.6 && lon >= -18.4 && lon <= -13.2; }
+
         public static bool InAfrica(double lat, double lon)
         {
+            if (InCanarie(lat, lon)) return false;   // Canarie escluse (regola dell'autore)
             if (lat >= -35 && lat <= 37.5 && lon >= -18.5 && lon <= 11) return true;
-            if (lat >= -35 && lat <= 32 && lon > 11 && lon <= 35) return true;
-            if (lat >= -27 && lat <= 12.5 && lon > 35 && lon <= 52) return true;   // Corno d'Africa, Africa orientale, Madagascar
+            if (lat >= -35 && lat <= 32 && lon > 11 && lon <= 35) return !(lon > 34 && lat > 27.5);   // fino al Sinai, senza la costa arabica del golfo di Aqaba
+            if (lat >= -27 && lat <= 12.5 && lon > 35 && lon <= 52) return !(lat > 11.8 && lon > 43.3);   // Corno d'Africa, Africa orientale, Madagascar; penisola arabica esclusa (Aden)
             return false;
         }
 
