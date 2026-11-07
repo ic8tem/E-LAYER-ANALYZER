@@ -27,7 +27,12 @@ namespace ELA
         // (serve invece al meteor scatter, all'aurora o al tropo) e la linguetta SPORADIC-E lo scarta.
         static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AU|AUE|AURORA|TR|TROPO)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? ""); } }
+        // Regola di YA-MS (IC8TEM), valida anche qui: spot di meteor scatter = modi univocamente MS (MSK144, FSK441/FSK41, PSK2K,
+        // JTMS, JT6M) oppure <MS> nel testo, senza distinzione tra maiuscole e minuscole. Non sono spot di E-sporadico.
+        static readonly System.Text.RegularExpressions.Regex rxMsMode = new System.Text.RegularExpressions.Regex(@"MSK144|FSK441|FSK41|PSK2K|JTMS|JT6M",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool IsMeteorScatter { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
+        public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? "") || IsMeteorScatter; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && !TaggedNotEs; } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
