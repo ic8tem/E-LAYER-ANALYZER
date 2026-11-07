@@ -1,0 +1,88 @@
+TITLE|E-LAYER ANALYZER 如何计算
+SUB|技术文档 - 作者 Costantino IC8TEM - 版本 0.3.0，2026 年 11 月。方括号中的数字指向“来源”选项卡。
+H1|1. 引言
+H2|1.1 目的
+P|E-LAYER ANALYZER 分析涉及 E 层的 VHF 传播模式：偶发 E 层（包括洲际多跳）、F.A.I.（沿磁场排列的不规则体）、流星散射（使用 YA-MS 程序）和无线电极光。本文档说明每一项计算及其出处。
+H2|1.2 标签
+TAG|FONTE|该步骤引自所列来源。
+TAG|RILIEVO|在程序上进行的验证，或与实际案例的比较。
+TAG|SCELTA|程序所作的选择，有待通过实际上机经验确认。
+H1|2. 通用几何
+H2|2.1 地球、网格坐标、大圆
+TAG|FONTE|球形地球，半径 r = 6372.7955 km，与 F.A.I. 文章 [1] 及 YA-MS [5] 相同。
+TAG|SCELTA|台站置于网格坐标方格（4、6 或 8 位）的中心。距离、方位角、中间点和圆均采用大圆公式计算：
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 指向 E 层某点的仰角
+TAG|FONTE|F.A.I. 文章 [1] 的公式 (2)，其中 x = d / r，H 为该点高度，h 为台站高度。程序使用等价的双参数形式，在球形地球上是精确的：
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|当 H = 110 km 时，程序在 150 km 处给出 35.3°，与 IC8FAX 网页 [2] 中 IW1AZJ 的 35° 一致；在 800 km 处给出 4.2°，而网页中 IC8CQF 为 6°（网页中的距离是近似值：6° 约对应 680 km）。
+H2|2.3 层中的跳跃与正割定律
+P|对于以仰角 e 出发、在高度 H 处到达该层的射线，入射角 φ（从垂直方向起算）和反射点的地面距离为：
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [弧度]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|程序给出的 foEs 是最低门限：spot 只说明频率 f 已经通过。sec φ 因子考虑了地球曲率。
+TAG|RILIEVO|IK3XTV [3] 报告的经验表明，144 MHz 对应的 foEs 为 12-15 MHz：纯正割定律给出的数值更高（2000 km 时约 25-28 MHz）。该数据应作为云之间的相对比较来解读，而不是绝对值。
+H1|3. 偶发 E 层
+H2|3.1 跳数
+TAG|FONTE|IK3XTV 的表 [3]：单跳 500-650 / 1500-2000 / 2200-2400 km（最小 / 最佳 / 最大）；双跳 2800-3000 / 3200-4000 / 4400-5000 km；三跳最佳 4800-6400 km，最大 6900 km。
+TAG|SCELTA|跳数 n 取自该表：2400 km 以内 n = 1，5000 km 以内 n = 2，6900 km 以内 n = 3，更远则 n = D / 2300 km 向上取整。500 km 以下的 spot 不视为偶发 E 层。在 2400 至 2800 km 之间，程序标示为“过渡区”。
+H2|3.2 两个台站的首跳
+TAG|SCELTA|等长跳假设：反射点沿大圆位于路径的 (2k − 1) / (2n) 处。报告者的首跳是 k = 1 的点（橙色），DX 的首跳是 k = n 的点（紫色）；单跳时两者重合于中点（黄色）。
+TAG|FONTE|短首跳假设：作者（IC8TEM）在多跳中有短首跳的经验，在距其 QTH 1200 km 以内 [4]。程序在每个台站短跳的一半处绘制反射点（空心圆）；短跳长度可在选项卡中选择（初始值 1200 km）。
+H2|3.3 Maidenhead 方格上的 Es 云
+TAG|SCELTA|反射点（单跳为中点，多跳为各首跳）归入 4 位 Maidenhead 方格（2° × 1°）。每个方格保留落入其中的 spot 中最高的最低 foEs；颜色从蓝色（< 5 MHz）到红色（> 20 MHz）。
+P|对于本台，仅当云位于单跳覆盖范围内时，程序才计算经由距离为 d 的每块云、跳距为 2d 的 MUF：
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|“Es 云”表：红色表示可提供 MUF ≥ 144 MHz 的云，橙色 ≥ 70 MHz，黄色 ≥ 50 MHz。
+H2|3.4 偶发 E 层不适用于 432 MHz
+TAG|FONTE|中纬度偶发 E 层的 MUF 可达 150 MHz 甚至更高（Whitehead [23]）；要将掠射射线偏折到 200 MHz 需要非常密的云（IK3XTV [22]）。ARRL 纪录 [24] 只报告了 50 和 144 MHz 上的偶发 E 层通联，222 和 432 MHz 上没有。
+TAG|SCELTA|因此 SPORADIC-E 选项卡只分析 28、50、70 和 144 MHz：432 MHz 的 spot 从不按偶发 E 层处理（一些泛泛的来源，包括人工智能生成的内容，在没有文献依据的情况下声称如此）。
+H1|4. F.A.I. 与极光：沿磁场排列的散射
+H2|4.1 磁场
+TAG|FONTE|磁场用 IGRF-14 模型 [16] 计算（球谐函数至 13 阶，2025-2030 系数按日期插值）。K9SE 的 SE-PROP [9] 同样使用了球谐模型（WMM）。
+TAG|RILIEVO|计算结果与 ppigrf 的差异在 1 nT 以内。使用简单偶极子时，IC8FAX - G4LOH 的验证找不到任何散射点；使用 IGRF-14 则能找到：完整模型必不可少。
+TAG|RILIEVO|极光 IO70VJ - JO59BC（1331 km，高度 105 km，折射 4/3）：最可能的散射点 JP01AK（61.4° N 0.1° E，设得兰群岛外海），偏差 0.97°，从 IO70VJ 的 QTF 为 11°（仰角 0.5°），从 JO59BC 为 299°（仰角 7.6°）。不计折射时：IP70RP，偏差 1.86°，QTF 359° 和 288°。
+H2|4.2 反射条件
+TAG|FONTE|由沿磁场排列的不规则体散射的信号分布在以 B 为轴的锥面上；位于互补等值线上的台站之间可以通联（a1 + a2 = 180° [1]，K9SE/K4GFG 的 ±c 等值线 [2] [9] [10]）。
+P|对每个台站 X 计算 c(X)，即视线 X → SP 与散射点 SP 处垂直于 B 的平面之间的夹角（带符号）。A-B 通联偏离反射条件的偏差为：
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|对于返回同一台站的回波（后向散射），条件变为射线垂直于 B，容差 ±2-3°（Lange-Hesse [12]）；每偏离一度强度下降约 3-5 dB（Jackel 等 [13]）。
+H2|4.3 “Scatter trail”视图（A-B 对）
+TAG|SCELTA|在高度 H 上以 0.2° 的网格，搜索两台站均以不低于最低仰角看到、且 dev ≤ 2.5° 的点。颜色分级为 0-1°、1-1.5°、1.5-2°、2-2.5°（Aurora QTF 风格 [11]）。右上框给出 A（红色）和 B（绿色）到 Scatter trail 各点的 QTF 和仰角。
+TAG|SCELTA|最可能的散射点：偏差 ≤ 1° 且距离平方和最小（损耗最小）；极光情况下优先选择椭圆内的点。
+TAG|RILIEVO|作者要求的验证（IGRF-14，H = 110 km，折射 4/3，程序结果）：IC8FAX (JN70CN) - F6DRO (JN03TJ)，1086 km：Scatter trail 沿北纬 44° 从比斯开湾延伸到亚得里亚海，最可能的散射点 JN44GH（44.3° N 8.6° E，热那亚上空），偏差 0.97°，从卡普里的 QTF 为 314°（仰角 7.8°），从 F6DRO 为 77°（仰角 9°）；Scatter trail 经过距日内瓦 143 km 处。IC8FAX - G4LOH (IO70JC)，1843 km：Scatter trail 位于德国西南部和比利时上空，最可能的散射点 JN49FR（49.7° N 8.5° E），偏差 0.88°，从卡普里的 QTF 为 338°（仰角 1.9°），从 G4LOH 为 87°（仰角 3°）；Scatter trail 经过距布鲁塞尔已知散射点 28 km 处。不计折射时 Scatter trail 变短（G4LOH：仰角 0.5° 和 2.1°）。IC8FAX - FA1MXE（JN05GQ，1990 年首次经日内瓦、方向 330° 的 F.A.I. QSO）：Scatter trail 经过日内瓦附近。
+TAG|RILIEVO|DL5MCG 案例 [6]：信标 DB0FAI (JN58IC) - 德累斯顿，经由谢菲尔德，110 km 处偏差 0.3°。
+TAG|SCELTA|折射：F.A.I. 和 AURORA 视图中的仰角和地平线默认采用等效地球半径 k · r，k = 4/3（标准大气），可用“折射”复选框关闭。地面距离和反射条件仍按真实几何计算。
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|无法计算：如果按模型没有任何点在 2.5° 以内满足条件（Scatter trail 视图），或反射点位于台站地平线以下（等反射线视图），程序会弹出“无法计算”窗口，并且不显示任何其他结果。
+H2|4.4 “等反射线”视图（isoflection loci）：验证反射点
+TAG|FONTE|这是 F.A.I. 和极光中用于验证所选反射点是否正确的典型几何作图（SE-PROP 的等反射线 [9]、AuroReflex [11]、K9SE/K4GFG 的互补等值线 [2] [10]）。
+P|对于反射点 SP 以及 SP 地平线内的每个地面点 G，程序计算等值线之和；S = 0 的线是经 SP 接收 A 的台站的轨迹：
+EQ|S(G) = c(A) + c(G)        绘制等级：0、±1、±2、±4、±8、±16°
+TAG|SCELTA|在深色背景配色方案中，各级为彩色带（红 0°、橙 1°、黄 2°、绿 4°、浅蓝 8°、蓝 16°）；在浅色方案中为粗线（用行进方格法得到的等值线），越接近 0° 的等级线越粗。
+TAG|SCELTA|程序会给出最可能的散射点（“验证推荐点”按钮），但用户可以在地图上左键选择任何其他点；右键移动台站 B。对 A-B 的判定：1° 以内为满意，2.5° 以内为可接受（Lange-Hesse 容差 [12]），超出则不满意。如果该点位于任一台站的地平线以下，会弹出“无法计算”窗口。
+TAG|SCELTA|顶部：A 和 B 指向该点的方位角和仰角；绿圈 = 各台站在该层高度的地平线，红圈 = 可看到该点的区域。
+H2|4.5 极光
+TAG|FONTE|OVATION Prime 极光椭圆、Kp 和太阳风数据来自 NOAA SWPC [15]，每 5 分钟更新一次并保存在 data/swpc 中。1° 网格通过双线性插值平滑到 0.5° 单元。
+TAG|SCELTA|两个台站的推荐指向：沿每个台站的垂直线（回波垂直于 B，容差 1.5°，高度 105 km）选择椭圆概率最高的点。105 km 的高度介于 Jackel [13] 的 104 km 与 Lange-Hesse [12] 的 110 km 之间。
+TAG|FONTE|操作规则：指向北与东之间，从约 45° 开始；144 MHz 时多普勒可达 ~2 kHz，典型距离 ~1300 km，最大 ~2000 km（G3WPO [14]）。
+H1|5. 数据收集
+H2|5.1 Telnet 会话
+TAG|SCELTA|三个会话：自选 cluster、Reverse Beacon Network（7000 CW/RTTY，7001 FT8）[18]、含 PSKReporter spot 的 cluster（例如 DM4X dm4x.ddns.net:8500 [27]，HamAlert [19]）。使用呼号自动登录，初始命令以分号分隔，30 s 后重新连接。
+H2|5.2 spot 的解析
+TAG|SCELTA|"DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" 行用正则表达式解析（而非固定列）。从注释中读取 "JN70CN<ES>JO62QM" 形式的网格坐标和模式（第一个网格坐标 = 报告者，第二个 = DX）、传播模式（ES、FAI、AU、MS、TR、EME、F2、TEP）、S/N 比和发射模式。缺失的网格坐标在 CALL3 [21] 中查找；注释中读到的 6 位网格坐标添加到 data/call3_nuovi.txt。
+TAG|SCELTA|存档：data/spot 中每天一个 CSV 文件；内存中保存最近的 spot（最多 50000 条）。使用 RBN 和 PSKReporter 时，通常只保存 28 MHz 及以上的 spot。
+H1|6. ADIF 日志
+TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
+TAG|SCELTA|只包括 28 MHz 及以上的频段，每个频段单独列出，不做合并。颜色：橙色 = 已通联，蓝色 = 已通过 QSL 确认，绿色 = 已通过 LoTW 确认。可按传播模式过滤（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。
+H1|7. 配色
+TAG|FONTE|配色方案与 YA-MS 1.3.0 相同，后者沿用 YAEC [26]：浅色、夜间、黑色、八种粉彩和流星余迹。配色方案在右上角选择，窗口立即重建；在等反射线视图中，深色方案使用彩色带，浅色方案使用粗线（4.4）。
+H1|8. 流星散射（YA-MS 1.3.0）与语言
+TAG|FONTE|METEOR SCATTER 选项卡包含完整的 YA-MS 1.3.0 [5]，以及它的“效率 - 说明”文档和它的来源。脚本 tools/sync_yams.py 复制 YA-MS 的每个新版本并将其转换为面板，不改动其计算。
+TAG|SCELTA|语言：意大利语、英语、俄语、日语、德语和荷兰语，用于界面（data/lingue/ela-<代码>.txt）、技术文档和来源。在 F.A.I./极光视图中，散射点的轨迹在所有译本中都称为“Scatter trail”。状态栏显示所用的磁场模型（IAGA 的 IGRF-14 [16]）。
+H1|9. 局限
+LI|台站位于网格坐标方格的中心：使用 4 位网格坐标时误差可达 ~80 km。
+LI|由 spot 得出的 foEs 是最低门限，而正割定律会高估 VHF 所需的 foEs（见 2.3）。
+LI|“最可能”的散射点是程序的判据：完整的 Scatter trail 才是物理结果。
+LI|OVATION 椭圆是光学极光的概率模型，在此用作无线电极光的指标。

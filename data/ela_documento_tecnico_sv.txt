@@ -1,0 +1,88 @@
+TITLE|Så räknar E-LAYER ANALYZER
+SUB|Tekniskt dokument - av Costantino IC8TEM - version 0.3.0, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR.
+H1|1. Inledning
+H2|1.1 Syfte
+P|E-LAYER ANALYZER analyserar de VHF-utbredningssätt som involverar E-skiktet: sporadiskt E (även interkontinentalt multihopp), F.A.I. (fältlinjeorienterade irregulariteter), meteorscatter (med programmet YA-MS) och radioaurora. Detta dokument beskriver varje beräkning och var den kommer ifrån.
+H2|1.2 Etiketter
+TAG|FONTE|steget bygger på en citerad källa.
+TAG|RILIEVO|kontroll gjord i programmet eller jämförelse med ett verkligt fall.
+TAG|SCELTA|programmets val, att bekräfta med erfarenhet på bandet.
+H1|2. Gemensam geometri
+H2|2.1 Jorden, lokator, storcirkel
+TAG|FONTE|Sfärisk jord med radien r = 6372,7955 km, som i F.A.I.-artikeln [1] och i YA-MS [5].
+TAG|SCELTA|Stationerna placeras i mitten av lokatorrutan (4, 6 eller 8 tecken). Avstånd, azimut, mellanliggande punkter och cirklar beräknas med storcirkelformlerna:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevation mot en punkt i E-skiktet
+TAG|FONTE|Formel (2) i F.A.I.-artikeln [1], med x = d / r, H punktens höjd, h stationens höjd. Programmet använder den likvärdiga formen med två argument, exakt på en sfärisk jord:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Med H = 110 km ger programmet 35,3° på 150 km, som IW1AZJ (35°) på IC8FAX:s sida [2]; på 800 km ger det 4,2° mot de 6° som anges för IC8CQF (avståndet på sidan är ungefärligt: 6° motsvarar cirka 680 km).
+H2|2.3 Hopp i skiktet och sekantlagen
+P|För en stråle som startar med elevationen e och möter skiktet på höjden H blir infallsvinkeln φ (från lodlinjen) och reflexionspunktens markavstånd:
+EQ|sin φ = r · cos e / (r + H)        d_refl = r · (90° − e − φ) [i radianer]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Den foEs som programmet anger är en undre gräns: spoten säger bara att frekvensen f har gått igenom. Faktorn sec φ tar hänsyn till jordens krökning.
+TAG|RILIEVO|De erfarenheter som IK3XTV [3] redovisar anger foEs på 12-15 MHz för 144 MHz: den rena sekantlagen ger högre värden (cirka 25-28 MHz på 2000 km). Värdet ska läsas som en relativ jämförelse mellan moln, inte som ett absolut värde.
+H1|3. Sporadiskt E
+H2|3.1 Antal hopp
+TAG|FONTE|IK3XTV:s tabell [3]: enkelt hopp 500-650 / 1500-2000 / 2200-2400 km (minimum / optimum / maximum); dubbelt hopp 2800-3000 / 3200-4000 / 4400-5000 km; trippelhopp optimum 4800-6400 km, maximum 6900 km.
+TAG|SCELTA|Antalet hopp n tas från tabellen: n = 1 upp till 2400 km, n = 2 upp till 5000 km, n = 3 upp till 6900 km, därutöver n = D / 2300 km avrundat uppåt. Under 500 km räknas spoten inte som sporadiskt E. Mellan 2400 och 2800 km anger programmet "övergångszon".
+H2|3.2 Båda stationernas första hopp
+TAG|SCELTA|Hypotes med lika hopp: reflexionspunkterna ligger längs storcirkeln vid andelarna (2k − 1) / (2n) av sträckan. Spotterns första hopp är punkten k = 1 (orange), DX-stationens första hopp är punkten k = n (lila); med ett enda hopp sammanfaller de i mittpunkten (gul).
+TAG|FONTE|Hypotesen om kort första hopp: författaren (IC8TEM) har erfarenhet, vid multihopp, av ett kort första hopp inom 1200 km från sitt QTH [4]. Programmet ritar (ofyllda cirklar) reflexionspunkten mitt på varje stations korta hopp; längden på det korta hoppet väljs i fliken (1200 km som utgångsvärde).
+H2|3.3 Es-moln på Maidenhead-rutor
+TAG|SCELTA|Reflexionspunkterna (mittpunkten vid enkelt hopp, de första hoppen vid multihopp) samlas i Maidenhead-rutor med 4 tecken (2° × 1°). För varje ruta behålls den högsta minsta foEs bland de spots som hamnar där; färgen går från blått (< 5 MHz) till rött (> 20 MHz).
+P|För den egna stationen beräknar programmet MUF via varje moln på avståndet d, med ett hopp av längden 2d, bara om molnet ligger inom räckvidden för ett enkelt hopp:
+EQ|MUF_egen = foEs_moln · sec φ(2d)
+TAG|SCELTA|Tabellen "Es-moln": i rött de moln som skulle ge MUF ≥ 144 MHz, i orange ≥ 70 MHz, i gult ≥ 50 MHz.
+H2|3.4 Sporadiskt E gäller inte 432 MHz
+TAG|FONTE|MUF för sporadiskt E på mellanbreddgrader når 150 MHz och mer (Whitehead [23]); det krävs mycket täta moln för att böja av flacka strålar upp till 200 MHz (IK3XTV [22]). ARRL:s rekord [24] redovisar förbindelser via sporadiskt E endast på 50 och 144 MHz, inga på 222 och 432 MHz.
+TAG|SCELTA|Därför analyserar fliken SPORADIC-E endast 28, 50, 70 och 144 MHz: spots på 432 MHz behandlas aldrig som sporadiskt E (vissa allmänna källor, även sådana som tagits fram av artificiell intelligens, påstår det utan dokumentation).
+H1|4. F.A.I. och aurora: scatter längs magnetfältet
+H2|4.1 Magnetfältet
+TAG|FONTE|Fältet beräknas med modellen IGRF-14 [16] (sfäriska harmoniska funktioner upp till grad 13, koefficienter 2025-2030 interpolerade till datumet). K9SE:s SE-PROP [9] använde på samma sätt en modell med sfäriska harmoniska funktioner (WMM).
+TAG|RILIEVO|Beräkningen stämmer med ppigrf inom 1 nT. Med en enkel dipol hittar kontrollen IC8FAX - G4LOH ingen scatterpunkt; med IGRF-14 hittar den en: den fullständiga modellen är nödvändig.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, höjd 105 km, refraktion 4/3): mest sannolika scatter JP01AK (61,4° N 0,1° E, utanför Shetland), avvikelse 0,97°, QTF 11° (el. 0,5°) från IO70VJ och 299° (el. 7,6°) från JO59BC. Utan refraktion: IP70RP, avvikelse 1,86°, QTF 359° och 288°.
+H2|4.2 Reflexionsvillkoret
+TAG|FONTE|Signalen som sprids av en fältorienterad irregularitet går ut längs en kon med axeln längs B; stationer på kompletterande konturer kan få förbindelse (a1 + a2 = 180° [1], konturer ±c enligt K9SE/K4GFG [2] [9] [10]).
+P|För varje station X beräknas c(X), vinkeln (med tecken) mellan siktlinjen X → SP och planet vinkelrätt mot B i scatterpunkten SP. Avvikelsen från reflexionsvillkoret för förbindelsen A-B är:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        avv = | c(A) + c(B) |
+TAG|FONTE|För eko tillbaka till samma station (backscatter) blir villkoret att strålen är vinkelrät mot B, med en tolerans på ±2-3° (Lange-Hesse [12]); intensiteten sjunker med cirka 3-5 dB per grads avvikelse (Jackel m.fl. [13]).
+H2|4.3 Vyn "Scatter trail" (par A-B)
+TAG|SCELTA|På ett rutnät med 0,2° på höjden H söks de punkter som syns från båda stationerna med elevation ≥ minimum och med avv ≤ 2,5°. Färgklasserna är 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (i stil med Aurora QTF [11]). Rutan uppe till höger visar QTF och elevation för A (röd) och B (grön) mot varje punkt i scatter trail.
+TAG|SCELTA|Mest sannolika scatterpunkt: avvikelse ≤ 1° och minsta summan av kvadraterna på avstånden (minst dämpning); vid aurora föredras punkter inne i ovalen.
+TAG|RILIEVO|Kontroller som författaren begärt (IGRF-14, H = 110 km, refraktion 4/3, programmets resultat): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: scatter trail från Biscayabukten till Adriatiska havet längs 44:e breddgraden, mest sannolika scatter JN44GH (44,3° N 8,6° E, ovanför Genua), avvikelse 0,97°, QTF 314° (el. 7,8°) från Capri och 77° (el. 9°) från F6DRO; scatter trail passerar 143 km från Genève. IC8FAX - G4LOH (IO70JC), 1843 km: scatter trail över sydvästra Tyskland och Belgien, mest sannolika scatter JN49FR (49,7° N 8,5° E), avvikelse 0,88°, QTF 338° (el. 1,9°) från Capri och 87° (el. 3°) från G4LOH; scatter trail passerar 28 km från den kända scatterpunkten Bryssel. Utan refraktion blir scatter trail kortare (G4LOH: elevationer 0,5° och 2,1°). IC8FAX - FA1MXE (JN05GQ, första F.A.I.-QSO:t 1990 via Genève på 330°): scatter trail passerar nära Genève.
+TAG|RILIEVO|Fallet DL5MCG [6]: fyren DB0FAI (JN58IC) - Dresden via Sheffield, avvikelse 0,3° på 110 km.
+TAG|SCELTA|Refraktion: för elevationer och horisonter i vyerna F.A.I. och AURORA används som utgångsvärde den ekvivalenta jordradien k · r med k = 4/3 (standardatmosfär), som kan stängas av med kryssrutan "Refraktion". Markavstånd och reflexionsvillkoret beräknas fortfarande på den verkliga geometrin.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Beräkning inte möjlig: om ingen punkt enligt modellen uppfyller villkoret inom 2,5° (vyn Scatter trail) eller om reflexionspunkten ligger under stationens horisont (vyn Isoreflexion), visar programmet popup-fönstret "Beräkning inte möjlig" och inga andra resultat.
+H2|4.4 Vyn "Isoreflexion" (isoflection loci): kontroll av reflexionspunkten
+TAG|FONTE|Det är den geometriska konstruktion som är typisk för F.A.I. och aurora för att kontrollera om den valda reflexionspunkten är rätt (isoreflexionslinjer i SE-PROP [9], AuroReflex [11], kompletterande konturer enligt K9SE/K4GFG [2] [10]).
+P|För reflexionspunkten SP och för varje markpunkt G inom SP:s horisont beräknar programmet summan av konturerna; linjen S = 0 är orten för de stationer som tar emot A via SP:
+EQ|S(G) = c(A) + c(G)        ritade nivåer: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|I färgscheman med mörk bakgrund är klasserna färgade band (rött 0°, orange 1°, gult 2°, grönt 4°, ljusblått 8°, blått 16°); i ljusa scheman är de tjocka linjer (nivåkurvor framtagna med marching squares-metoden), tjockare för nivåer närmare 0°.
+TAG|SCELTA|Programmet föreslår den mest sannolika scatterpunkten (knappen "Kontrollera den rekommenderade punkten"), men användaren kan välja vilken annan punkt som helst med ett vänsterklick på kartan; högerklick flyttar station B. Utlåtande om paret A-B: tillfredsställande inom 1°, godtagbart inom 2,5° (Lange-Hesses tolerans [12]), inte tillfredsställande därutöver. Om punkten ligger under horisonten för någon av stationerna visas popup-fönstret "Beräkning inte möjlig".
+TAG|SCELTA|Överst: azimut och elevation för A och B mot punkten; grön cirkel = stationernas horisont på skiktets höjd, röd cirkel = område från vilket punkten är synlig.
+H2|4.5 Aurora
+TAG|FONTE|Norrskensovalen OVATION Prime, Kp och solvind från NOAA SWPC [15], uppdaterade var 5:e minut och sparade i data/swpc. Rutnätet på 1° jämnas ut med bilinjär interpolation på celler om 0,5°.
+TAG|SCELTA|Rekommenderad riktning, för båda stationerna: längs varje stations vinkelräthetslinje (eko vinkelrätt mot B, tolerans 1,5°, höjd 105 km) väljs punkten med högst ovalsannolikhet. Höjden 105 km ligger mellan Jackels 104 km [13] och Lange-Hesses 110 km [12].
+TAG|FONTE|Praktiska regler: rikta mellan norr och öster, med start kring 45°; doppler upp till ~2 kHz på 144 MHz, typisk räckvidd ~1300 km, maximal ~2000 km (G3WPO [14]).
+H1|5. Datainsamling
+H2|5.1 Telnetsessioner
+TAG|SCELTA|Tre sessioner: valfritt kluster, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], kluster med spots från PSKReporter (t.ex. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisk inloggning med anropssignalen, startkommandon åtskilda med semikolon, återanslutning efter 30 s.
+H2|5.2 Läsning av spots
+TAG|SCELTA|Raden "DX de SPOTTER: FREQ DXCALL kommentar HHMMZ [LOC]" läses med ett reguljärt uttryck (inte med fasta kolumner). Ur kommentaren läses lokatorer och utbredningssätt i formen "JN70CN<ES>JO62QM" (första lokatorn = spotter, andra = DX), utbredningssättet (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N-förhållandet och sändningsslaget. Saknade lokatorer söks i CALL3 [21]; 6-teckens lokatorer som läses i kommentarerna läggs till i data/call3_nuovi.txt.
+TAG|SCELTA|Arkiv: en CSV-fil per dag i data/spot; i minnet de senaste spotsen (högst 50000). Med RBN och PSKReporter sparas normalt bara spots från 28 MHz och uppåt.
+H1|6. Log ADIF
+TAG|FONTE|Portering av LoTW Grid Map v2 [25]: LoTW-rapporten (hämtad med användarnamn och lösenord, som aldrig sparas) och loggens ADIF-filer slås samman efter anropssignal, band, datum och tid; bekräftelserna läggs ihop.
+TAG|SCELTA|Endast banden från 28 MHz och uppåt, vart och ett som separat band, utan sammanslagningar. Färger: orange = körd, blå = bekräftad med QSL, grön = bekräftad via LoTW. Filter på utbredningssätt (ADIF:s PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Färgsättning
+TAG|FONTE|Färgschemana är desamma som i YA-MS 1.3.0, som i sin tur bygger på YAEC [26]: Ljust, Natt, Svart, åtta pasteller och Meteorspår. Schemat väljs uppe till höger och fönstret byggs om direkt; i vyn Isoreflexion använder de mörka schemana färgade band och de ljusa tjocka linjer (4.4).
+H1|8. Meteorscatter (YA-MS 1.3.0) och språk
+TAG|FONTE|Fliken METEOR SCATTER innehåller hela YA-MS 1.3.0 [5], med dess dokument "Effektivitet - förklaring" och dess källor. Skriptet tools/sync_yams.py kopierar varje ny version av YA-MS och gör om den till en panel utan att ändra beräkningarna.
+TAG|SCELTA|Språk: italienska, engelska, ryska, japanska, tyska och nederländska, för gränssnittet (data/lingue/ela-<kod>.txt), för det tekniska dokumentet och för källorna. I vyn F.A.I./aurora kallas scatterpunkternas spår "Scatter trail" i alla översättningar. Statusfältet visar vilken magnetisk modell som används (IAGA:s IGRF-14 [16]).
+H1|9. Begränsningar
+LI|Stationerna i mitten av lokatorrutan: med 4-teckens lokator kan felet bli ~80 km.
+LI|foEs från spots är en undre gräns, och sekantlagen överskattar den foEs som krävs på VHF (se 2.3).
+LI|Den "mest sannolika" scatterpunkten är ett kriterium i programmet: hela scatter trail är det fysiska resultatet.
+LI|OVATION-ovalen är en sannolikhetsmodell för optiskt norrsken, som används som indikator för radioaurora.

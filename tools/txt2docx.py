@@ -9,9 +9,13 @@ src, out = sys.argv[1], sys.argv[2]
 import os, re as _re
 _m = _re.search(r'_([a-z]{2})\.txt$', os.path.basename(src))
 _lang = _m.group(1) if _m else 'it'
-TAGNAME = {'en': {'FONTE': 'SOURCE', 'RILIEVO': 'CHECK', 'SCELTA': 'CHOICE'}, 'de': {'FONTE': 'QUELLE', 'RILIEVO': 'PRÜFUNG', 'SCELTA': 'WAHL'},
-           'ja': {'FONTE': '出典', 'RILIEVO': '検証', 'SCELTA': '選択'}, 'ru': {'FONTE': 'ИСТОЧНИК', 'RILIEVO': 'ПРОВЕРКА', 'SCELTA': 'ВЫБОР'},
-           'nl': {'FONTE': 'BRON', 'RILIEVO': 'CONTROLE', 'SCELTA': 'KEUZE'}}.get(_lang, {})
+# etichette FONTE/RILIEVO/SCELTA tradotte: dal file data/lingue/ela-<codice>.txt della lingua del documento
+TAGNAME = {}
+_lf = os.path.join(os.path.dirname(os.path.abspath(src)), 'lingue', 'ela-' + _lang + '.txt')
+if os.path.isfile(_lf):
+    for _l in open(_lf, encoding='utf-8-sig'):
+        _k, _t, _v = _l.rstrip('\n').partition('\t')
+        if _t and _k in ('FONTE', 'RILIEVO', 'SCELTA'): TAGNAME[_k] = _v.strip()
 d = Document()
 for s in d.sections:
     s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2)

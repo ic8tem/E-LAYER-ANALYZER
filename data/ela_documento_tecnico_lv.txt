@@ -1,0 +1,88 @@
+TITLE|Kā E-LAYER ANALYZER rēķina
+SUB|Tehniskais dokuments - sagatavoja Costantino IC8TEM - versija 0.3.0, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI.
+H1|1. Ievads
+H2|1.1 Mērķis
+P|E-LAYER ANALYZER analizē VHF izplatīšanās veidus, kuros piedalās E slānis: sporādisko E (arī vairāklēcienu starpkontinentālo), F.A.I. (ar magnētisko lauku saskaņotās nehomogenitātes), meteor scatter (ar programmu YA-MS) un radio auroru. Šis dokuments apraksta katru aprēķinu un tā izcelsmi.
+H2|1.2 Atzīmes
+TAG|FONTE|solis balstās uz citētu avotu.
+TAG|RILIEVO|pārbaude programmā vai salīdzinājums ar reālu gadījumu.
+TAG|SCELTA|programmas izvēle, kas jāapstiprina ar pieredzi ēterā.
+H1|2. Kopējā ģeometrija
+H2|2.1 Zeme, lokators, lielais riņķis
+TAG|FONTE|Sfēriska Zeme ar rādiusu r = 6372,7955 km, kā F.A.I. rakstā [1] un YA-MS [5].
+TAG|SCELTA|Stacijas tiek novietotas lokatora kvadrāta centrā (4, 6 vai 8 rakstzīmes). Attālums, azimuts, starppunkti un apļi pēc lielā riņķa formulām:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevācija uz E slāņa punktu
+TAG|FONTE|F.A.I. raksta [1] formula (2), kur x = d / r, H ir punkta augstums, h ir stacijas augstums. Programma izmanto līdzvērtīgu divu argumentu formu, kas uz sfēriskas Zemes ir precīza:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Ar H = 110 km programma dod 35,3° pie 150 km, kā IW1AZJ (35°) IC8FAX lapā [2]; pie 800 km tā dod 4,2° pret IC8CQF norādītajiem 6° (lapas attālums ir aptuvens: 6° atbilst aptuveni 680 km).
+H2|2.3 Lēciens slānī un sekansa likums
+P|Staram, kas iziet ar elevāciju e un sastop slāni augstumā H, krišanas leņķis φ (no vertikāles) un atstarošanas punkta attālums pa zemi ir:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [radiānos]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|Programmas norādītā foEs ir minimālais slieksnis: spots pasaka tikai to, ka frekvence f ir izgājusi cauri. Koeficients sec φ ņem vērā Zemes izliekumu.
+TAG|RILIEVO|IK3XTV [3] aprakstītā pieredze norāda foEs 12-15 MHz 144 MHz joslai: tīrais sekansa likums dod augstākas vērtības (aptuveni 25-28 MHz pie 2000 km). Rezultāts jālasa kā relatīvs mākoņu salīdzinājums, nevis kā absolūta vērtība.
+H1|3. Sporādiskais E
+H2|3.1 Lēcienu skaits
+TAG|FONTE|IK3XTV tabula [3]: viens lēciens 500-650 / 1500-2000 / 2200-2400 km (minimālais / optimālais / maksimālais); dubults lēciens 2800-3000 / 3200-4000 / 4400-5000 km; trīskāršs lēciens optimālais 4800-6400 km, maksimālais 6900 km.
+TAG|SCELTA|Lēcienu skaits n ir pēc tabulas: n = 1 līdz 2400 km, n = 2 līdz 5000 km, n = 3 līdz 6900 km, tālāk n = D / 2300 km, noapaļots uz augšu. Zem 500 km spotu neuzskata par sporādisko E. No 2400 līdz 2800 km programma norāda "pārejas zonu".
+H2|3.2 Abu staciju pirmais lēciens
+TAG|SCELTA|Vienādu lēcienu hipotēze: atstarošanas punkti atrodas uz lielā riņķa trases daļās (2k − 1) / (2n). Spotera pirmais lēciens ir punkts k = 1 (oranžs), DX pirmais lēciens ir punkts k = n (violets); ar vienu lēcienu tie sakrīt viduspunktā (dzeltens).
+TAG|FONTE|Īsa pirmā lēciena hipotēze: autoram (IC8TEM) vairāklēcienu sakaros ir pieredze ar īsu pirmo lēcienu, līdz 1200 km no sava QTH [4]. Programma zīmē (tukši apļi) atstarošanas punktu katras stacijas īsā lēciena vidū; īsā lēciena garumu izvēlas cilnē (sākotnēji 1200 km).
+H2|3.3 Es mākoņi Maidenhead kvadrātos
+TAG|SCELTA|Atstarošanas punkti (viduspunkts vienam lēcienam, pirmie lēcieni vairāklēcienu gadījumā) tiek grupēti 4 rakstzīmju Maidenhead kvadrātos (2° × 1°). Katram kvadrātam saglabā augstāko minimālo foEs no tajā krītošajiem spotiem; krāsa ir no zilas (< 5 MHz) līdz sarkanai (> 20 MHz).
+P|Savai stacijai programma aprēķina MUF caur katru mākoni attālumā d ar lēcienu 2d garumā, tikai tad, ja mākonis ir viena lēciena sniedzamībā:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Tabula "Es mākoņi": sarkanā krāsā mākoņi, kas dotu MUF ≥ 144 MHz, oranžā ≥ 70 MHz, dzeltenā ≥ 50 MHz.
+H2|3.4 Sporādiskais E neattiecas uz 432 MHz
+TAG|FONTE|Sporādiskā E MUF vidējos platumos sasniedz 150 MHz un vairāk (Whitehead [23]); lai noliektu slīdošus starus līdz 200 MHz, vajadzīgi ļoti blīvi mākoņi (IK3XTV [22]). ARRL rekordi [24] uzrāda sporādiskā E sakarus tikai 50 un 144 MHz, nevienu 222 un 432 MHz.
+TAG|SCELTA|Tāpēc cilne SPORADIC-E analizē tikai 28, 50, 70 un 144 MHz: 432 MHz spoti nekad netiek uzskatīti par sporādisko E (daži vispārīgi avoti, arī mākslīgā intelekta radīti, to apgalvo bez dokumentācijas).
+H1|4. F.A.I. un aurora: ar magnētisko lauku saskaņota izkliede
+H2|4.1 Magnētiskais lauks
+TAG|FONTE|Lauku aprēķina ar modeli IGRF-14 [16] (sfēriskās harmonikas līdz 13. pakāpei, 2025-2030 koeficienti interpolēti uz datumu). K9SE SE-PROP [9] tāpat izmantoja sfērisko harmoniku modeli (WMM).
+TAG|RILIEVO|Aprēķins sakrīt ar ppigrf 1 nT robežās. Ar vienkāršu dipolu pārbaude IC8FAX - G4LOH neatrod nevienu scatter point; ar IGRF-14 atrod: pilnais modelis ir nepieciešams.
+TAG|RILIEVO|Aurora IO70VJ - JO59BC (1331 km, augstums 105 km, refrakcija 4/3): varbūtīgākais scatter JP01AK (61,4° N 0,1° E, pie Šetlendas salām), novirze 0,97°, QTF 11° (el. 0,5°) no IO70VJ un 299° (el. 7,6°) no JO59BC. Bez refrakcijas: IP70RP, novirze 1,86°, QTF 359° un 288°.
+H2|4.2 Atstarošanas nosacījums
+TAG|FONTE|Signāls, ko izkliedē ar lauku saskaņota nehomogenitāte, iziet pa konusu ar asi gar B; stacijas uz papildinošām kontūrām var savienoties (a1 + a2 = 180° [1], K9SE/K4GFG kontūras ±c [2] [9] [10]).
+P|Katrai stacijai X aprēķina c(X) – leņķi (ar zīmi) starp redzes līniju X → SP un plakni, kas perpendikulāra B scatter point SP. Novirze no atstarošanas nosacījuma sakaram A-B ir:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Atbalsij uz to pašu staciju (backscatter) nosacījums kļūst: stars perpendikulārs B, ar pielaidi ±2-3° (Lange-Hesse [12]); intensitāte samazinās par aptuveni 3-5 dB uz katru novirzes grādu (Jackel u.c. [13]).
+H2|4.3 Skats "Scatter trail" (pāris A-B)
+TAG|SCELTA|0,2° režģī augstumā H meklē punktus, ko redz abas stacijas ar elevāciju ≥ minimālajai un ar dev ≤ 2,5°. Krāsu klases ir 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (Aurora QTF stilā [11]). Lauciņš augšā pa labi rāda A (sarkans) un B (zaļš) QTF un elevāciju uz katru Scatter trail punktu.
+TAG|SCELTA|Varbūtīgākais scatter point: novirze ≤ 1° un minimālā attālumu kvadrātu summa (mazāks vājinājums); aurorā priekšroka punktiem ovāla iekšpusē.
+TAG|RILIEVO|Autora pieprasītās pārbaudes (IGRF-14, H = 110 km, refrakcija 4/3, programmas rezultāti): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: Scatter trail no Biskajas līča līdz Adrijas jūrai gar 44. paralēli, varbūtīgākais scatter JN44GH (44,3° N 8,6° E, virs Dženovas), novirze 0,97°, QTF 314° (el. 7,8°) no Kapri un 77° (el. 9°) no F6DRO; Scatter trail iet 143 km attālumā no Ženēvas. IC8FAX - G4LOH (IO70JC), 1843 km: Scatter trail virs Vācijas dienvidrietumiem un Beļģijas, varbūtīgākais scatter JN49FR (49,7° N 8,5° E), novirze 0,88°, QTF 338° (el. 1,9°) no Kapri un 87° (el. 3°) no G4LOH; Scatter trail iet 28 km attālumā no zināmā Briseles scatter. Bez refrakcijas Scatter trail saīsinās (G4LOH: elevācijas 0,5° un 2,1°). IC8FAX - FA1MXE (JN05GQ, pirmais F.A.I. QSO 1990. gadā caur Ženēvu 330° virzienā): Scatter trail iet tuvu Ženēvai.
+TAG|RILIEVO|DL5MCG gadījums [6]: bāka DB0FAI (JN58IC) - Drēzdene caur Šefīldu, novirze 0,3° pie 110 km.
+TAG|SCELTA|Refrakcija: F.A.I. un AURORA skatu elevācijām un horizontiem pēc noklusējuma izmanto ekvivalento Zemes rādiusu k · r ar k = 4/3 (standarta atmosfēra), ko var izslēgt ar izvēles rūtiņu "Refrakcija". Attālumi pa zemi un atstarošanas nosacījums tiek rēķināti pēc patiesās ģeometrijas.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Aprēķins nav iespējams: ja pēc modeļa neviens punkts neapmierina nosacījumu 2,5° robežās (skats Scatter trail) vai atstarošanas punkts ir zem stacijas horizonta (skats Izoatstarošana), programma parāda uznirstošo logu "Aprēķins nav iespējams" un nerāda nekādus citus rezultātus.
+H2|4.4 Skats "Izoatstarošana" (isoflection loci): atstarošanas punkta pārbaude
+TAG|FONTE|Tā ir F.A.I. un auroras tipiskā ģeometriskā konstrukcija, lai pārbaudītu, vai izvēlētais atstarošanas punkts ir pareizs (SE-PROP izoatstarošanas līnijas [9], AuroReflex [11], K9SE/K4GFG papildinošās kontūras [2] [10]).
+P|Atstarošanas punktam SP un katram zemes punktam G SP horizonta robežās programma aprēķina kontūru summu; līnija S = 0 ir to staciju ģeometriskā vieta, kas uztver A caur SP:
+EQ|S(G) = c(A) + c(G)        attēlotie līmeņi: 0, ±1, ±2, ±4, ±8, ±16°
+TAG|SCELTA|Tumša fona shēmās klases ir krāsainas joslas (sarkana 0°, oranža 1°, dzeltena 2°, zaļa 4°, gaiši zila 8°, zila 16°); gaišajās shēmās tās ir biezas līnijas (līmeņlīnijas, iegūtas ar marching squares metodi), jo biezākas, jo tuvāk 0° ir līmenis.
+TAG|SCELTA|Programma piedāvā varbūtīgāko scatter point (poga "Pārbaudīt ieteikto punktu"), bet lietotājs var izvēlēties jebkuru citu punktu ar kreiso klikšķi kartē; labais klikšķis pārvieto staciju B. Pāra A-B vērtējums: apmierinošs līdz 1°, pieņemams līdz 2,5° (Lange-Hesse pielaide [12]), neapmierinošs virs tā. Ja punkts ir zem vienas no abām stacijām horizonta, parādās uznirstošais logs "Aprēķins nav iespējams".
+TAG|SCELTA|Augšā: A un B azimuts un elevācija uz punktu; zaļš aplis = staciju horizonts slāņa augstumā, sarkans aplis = zona, no kuras punkts ir redzams.
+H2|4.5 Aurora
+TAG|FONTE|Aurorālais ovāls OVATION Prime, Kp un Saules vējš no NOAA SWPC [15], atjaunināti ik pēc 5 minūtēm un saglabāti data/swpc. 1° režģis tiek nogludināts ar bilineāru interpolāciju 0,5° šūnās.
+TAG|SCELTA|Ieteicamais virziens abām stacijām: gar katras stacijas perpendikularitātes līniju (atbalss perpendikulāra B, pielaide 1,5°, augstums 105 km) izvēlas punktu ar augstāko ovāla varbūtību. 105 km augstums ir starp Jackel 104 km [13] un Lange-Hesse 110 km [12].
+TAG|FONTE|Praktiskie noteikumi: tēmēt starp ziemeļiem un austrumiem, sākot no aptuveni 45°; Doplera nobīde līdz ~2 kHz pie 144 MHz, tipiskā sniedzamība ~1300 km, maksimālā ~2000 km (G3WPO [14]).
+H1|5. Datu vākšana
+H2|5.1 Telnet sesijas
+TAG|SCELTA|Trīs sesijas: klasteris pēc izvēles, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], klasteris ar PSKReporter spotiem (piem. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automātiska pieteikšanās ar izsaukuma signālu, sākotnējās komandas atdalītas ar semikolu, atkārtota savienošanās pēc 30 s.
+H2|5.2 Spotu nolasīšana
+TAG|SCELTA|Rinda "DX de SPOTTER: FREQ DXCALL komentārs HHMMZ [LOC]" tiek nolasīta ar regulāro izteiksmi (nevis pēc fiksētām kolonnām). No komentāra nolasa lokatorus un veidu formā "JN70CN<ES>JO62QM" (pirmais lokators = spoteris, otrais = DX), izplatīšanās veidu (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N attiecību un emisijas veidu. Trūkstošos lokatorus meklē CALL3 [21]; komentāros nolasītos 6 rakstzīmju lokatorus pievieno data/call3_nuovi.txt.
+TAG|SCELTA|Arhīvs: viens CSV fails dienā mapē data/spot; atmiņā pēdējie spoti (ne vairāk kā 50000). Ar RBN un PSKReporter parasti saglabā tikai spotus no 28 MHz uz augšu.
+H1|6. Log ADIF
+TAG|FONTE|LoTW Grid Map v2 [25] pārnese: LoTW atskaite (lejupielādēta ar lietotājvārdu un paroli, kas nekad netiek saglabāta) un žurnāla ADIF faili tiek apvienoti pēc izsaukuma signāla, joslas, datuma un laika; apstiprinājumi tiek summēti.
+TAG|SCELTA|Tikai joslas no 28 MHz uz augšu, katra kā atsevišķa josla, bez apvienošanas. Krāsas: oranža = strādāts, zila = apstiprināts ar QSL, zaļa = apstiprināts caur LoTW. Filtrs pēc izplatīšanās veida (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Krāsojums
+TAG|FONTE|Krāsu shēmas ir no YA-MS 1.3.0, kas tās pārņem no YAEC [26]: Gaišs, Nakts, Melns, astoņas pasteļkrāsas un Meteora sliede. Shēmu izvēlas augšā pa labi, un logs tiek uzreiz pārzīmēts; skatā Izoatstarošana tumšās shēmas izmanto krāsainas joslas, bet gaišās – biezas līnijas (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) un valodas
+TAG|FONTE|Cilne METEOR SCATTER satur pilnu YA-MS 1.3.0 [5] ar tā dokumentu "Efektivitāte - skaidrojums" un tā avotiem. Skripts tools/sync_yams.py kopē katru jauno YA-MS versiju un pārveido to par paneli, nemainot aprēķinus.
+TAG|SCELTA|Valodas: itāļu, angļu, krievu, japāņu, vācu un nīderlandiešu – saskarnei (data/lingue/ela-<kods>.txt), Tehniskajam dokumentam un Avotiem. F.A.I./auroras skatā scatter point sliedi visos tulkojumos sauc par "Scatter trail". Statusa joslā redzams izmantotais magnētiskais modelis (IAGA IGRF-14 [16]).
+H1|9. Ierobežojumi
+LI|Stacijas lokatora kvadrāta centrā: ar 4 rakstzīmju lokatoru kļūda sasniedz ~80 km.
+LI|No spotiem iegūtā foEs ir minimālais slieksnis, un sekansa likums VHF diapazonā pārvērtē nepieciešamo foEs (sk. 2.3).
+LI|"Varbūtīgākais" scatter point ir programmas kritērijs: fizikālais rezultāts ir visa Scatter trail.
+LI|OVATION ovāls ir optiskās auroras varbūtības modelis, ko izmanto kā radio auroras indikatoru.

@@ -1,0 +1,1 @@
+E-LAYER ANALYZER · Costantino Cerrotta IC8TEM, Capri JN70CN · [ic8tem@gmail.com](mailto:ic8tem@gmail.com) · [QRZ](https://www.qrz.com/db/ic8tem) · [Releases](https://github.com/ic8tem/E-LAYER-ANALYZER/releases)
