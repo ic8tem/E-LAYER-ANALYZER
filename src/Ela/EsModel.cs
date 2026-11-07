@@ -149,6 +149,34 @@ namespace ELA
             return res;
         }
 
+        // ---- Regola dell'autore (IC8TEM): propagazione transequatoriale (TEP) ----
+        // Per le tratte verso l'Africa e il Sud America, se il punto medio del collegamento cade nella fascia di
+        // inclinazione magnetica tra -20° e +20° (equatore magnetico; carta dell'inclinazione WMM 2015 fornita
+        // dall'autore, calcolo con IGRF-14), il collegamento non e' E-sporadico ma transequatoriale, salvo che lo
+        // spot (o il PROP_MODE del log) dichiari esplicitamente ES.
+        public const double TepInclinationDeg = 20;
+
+        // Africa (con Madagascar e Canarie) e Sud America: riquadri geografici approssimati
+        public static bool InAfrica(double lat, double lon)
+        {
+            if (lat >= -35 && lat <= 37.5 && lon >= -18.5 && lon <= 11) return true;
+            if (lat >= -35 && lat <= 32 && lon > 11 && lon <= 35) return true;
+            if (lat >= -27 && lat <= 12.5 && lon > 35 && lon <= 52) return true;   // Corno d'Africa, Africa orientale, Madagascar
+            return false;
+        }
+
+        public static bool InSouthAmerica(double lat, double lon) { return lat >= -56 && lat <= 13 && lon >= -82 && lon <= -34; }
+
+        // vero se la tratta va verso l'Africa o il Sud America e il punto medio sta nella fascia |inclinazione| <= 20°
+        public static bool IsTransEquatorial(double latA, double lonA, double latB, double lonB)
+        {
+            bool south = InAfrica(latA, lonA) || InAfrica(latB, lonB) || InSouthAmerica(latA, lonA) || InSouthAmerica(latB, lonB);
+            if (!south) return false;
+            double la, lo;
+            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            return Math.Abs(Geo.InclinationDeg(la, lo)) <= TepInclinationDeg;
+        }
+
         // lunghezza del primo salto corto (km); 0 = ipotesi spenta
         public static double ShortHopKm = 1200;
 

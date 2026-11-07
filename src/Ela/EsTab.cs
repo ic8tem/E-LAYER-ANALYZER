@@ -37,7 +37,7 @@ namespace ELA
         List<EsPath> shown = new List<EsPath>();
         double clickLat = double.NaN, clickLon = double.NaN;
         bool dirty = true;
-        int short144, held144;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
+        int short144, held144, tep;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
         class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf; public int N; public List<string> Calls = new List<string>(); }
 
@@ -195,6 +195,8 @@ namespace ELA
             EsModel.ShortHopKm = chkShort.IsChecked == true ? Ui.V(numShort) : 0;
             int minutes = Windows[Math.Max(0, cmbWin.SelectedIndex)];
             List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate);
+            tep = 0;
+            sp = sp.FindAll(s => { if (s.IsTep) { tep++; return false; } return true; });   // transequatoriali: non E-sporadico (regola IC8TEM)
             paths = new List<EsPath>();
             HashSet<string> seen = new HashSet<string>();
             foreach (Spot s in sp)
@@ -301,6 +303,7 @@ namespace ELA
             Cloud best = clouds.Count > 0 && !double.IsNaN(clouds[0].Muf) ? clouds[0] : null;
             lblSummary.Text = Lang.F("{0} spot Es ({1} multi-salto), {2} quadrati con nubi stimate.", paths.Count, multi, clouds.Count)
                 + (shown.Count < paths.Count ? " " + Lang.F("In tabella i {0} visibili sulla mappa.", shown.Count) : "")
+                + (tep > 0 ? " " + Lang.F("{0} spot transequatoriali (TEP) esclusi.", tep) : "")
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }

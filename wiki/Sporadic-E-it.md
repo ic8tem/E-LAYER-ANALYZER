@@ -20,6 +20,7 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 
 - Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
 - Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano l'E-sporadico ma servono al meteor scatter, all'aurora o al tropo.
+- **Transequatoriale, regola dell'autore (IC8TEM)**: verso l'Africa e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -20° e +20°, il collegamento è transequatoriale (TEP) e non E-sporadico, salvo che lo spot dichiari `<ES>`.
 - **144 MHz, regola dell'autore (IC8TEM)**: l'E-sporadico in 2 m parte da **oltre 900 km** (gli spot più corti si scartano). Uno spot in 144 MHz **da solo non si disegna**: compare quando entro **5 minuti** arriva un secondo spot in 144 MHz con la nube nello stesso posto (punti di riflessione entro 300 km), oppure quando nei dintorni c'è uno spot in **50 MHz di salto corto** (entro 1200 km, nei 15 minuti). La barra in alto dice quanti spot in 144 MHz sono in attesa di conferma.
 - Per ogni spot: distanza, **numero di salti** secondo la tabella di **IK3XTV**, elevazione, **foEs minima** (legge della secante).
 - **Primo salto di entrambe le stazioni**: quadratino arancio = primo salto dello spotter, viola = primo salto del DX (salti uguali); giallo = punto medio del singolo salto.

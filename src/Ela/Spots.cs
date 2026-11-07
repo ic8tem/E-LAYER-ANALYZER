@@ -48,7 +48,9 @@ namespace ELA
         public bool IsAurora { get { return Prop == "AU" || rxAu.IsMatch(Comment ?? ""); } }
         public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? "") || IsMeteorScatter; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && !TaggedNotEs; } }
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs; } }
+        // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
+        public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD)); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
         public double DistanceKm { get { return HasBoth ? Geo.DistanceKm(LatS, LonS, LatD, LonD) : double.NaN; } }
         public string Band { get { return Bands.Name(FreqKHz); } }

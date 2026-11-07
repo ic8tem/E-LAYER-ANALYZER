@@ -12,6 +12,7 @@
 |---|---|
 | [SPORADIC-E](Sporadic-E-it) | Spot Es sulla mappa, primo salto di entrambe le stazioni, nubi Es sui quadrati Maidenhead, MUF per la tua stazione |
 | [BENCHMARK Es](Benchmark-Es-it) | Banco di prova su un log ADIF intero (anche di un'altra stazione): QSO per giornata e per ora, skip per settori, foEs stimata, verifica del multi-salto, spostamento delle nubi |
+| [BENCHMARK 50 MHz](Benchmark-50-it) | E-sporadico multi-salto in 50 MHz su uno o due log ADIF: mappa di Mercatore, giorno e orario, foEs facoltativa, tratta ingrandita con il WWL, QSO nei dintorni di 150 km |
 | [F.A.I.](FAI-it) | Scatter trail degli scatter point per una coppia di stazioni e linee di iso-riflessione (isoflection loci) con verifica del punto |
 | [METEOR SCATTER](Meteor-Scatter-it) | Il programma YA-MS completo (efficienza degli sciami, radar, previsioni) |
 | [AURORA](Aurora-it) | Ovale aurorale, Kp e vento solare NOAA, scatter trail e iso-riflessione aurorale, puntamento consigliato |

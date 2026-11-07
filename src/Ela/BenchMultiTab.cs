@@ -215,7 +215,7 @@ namespace ELA
             myGrid[k] = mgr; myCall[k] = mca;
             double old = EsModel.ShortHopKm;
             EsModel.ShortHopKm = chkShort.IsChecked == true ? 1200 : 0;
-            int noGrid = 0, other = 0, n = 0, multi = 0;
+            int noGrid = 0, other = 0, n = 0, multi = 0, tep = 0;
             try
             {
                 foreach (Dictionary<string, string> r in rr)
@@ -241,12 +241,14 @@ namespace ELA
                     double mhz = double.TryParse(fs, NumberStyles.Float, CultureInfo.InvariantCulture, out f) && f >= 50 && f <= 54 ? f : 50.15;
                     BenchQso q = new BenchQso { Utc = dt, Call = call, Grid = grid, MyCall = mca, MyGrid = mg, Band = "6m", FreqMHz = mhz, LatTx = tla, LonTx = tlo, LatRx = la, LonRx = lo, Prop = prop, Set = k };
                     q.Path = EsModel.Build(new Spot { Utc = dt, FreqKHz = mhz * 1000, DxCall = call, Spotter = mca, LocSpotter = mg, LocDx = grid, LatS = tla, LonS = tlo, LatD = la, LonD = lo, Prop = "ES" }, Ui.V(numH));
-                    if (q.Path != null) { list.Add(q); n++; if (q.Path.Hops >= 2) multi++; }
+                    if (q.Path == null) continue;
+                    if (prop != "ES" && EsModel.IsTransEquatorial(tla, tlo, la, lo)) { tep++; continue; }   // transequatoriale (regola IC8TEM)
+                    list.Add(q); n++; if (q.Path.Hops >= 2) multi++;
                 }
             }
             finally { EsModel.ShortHopKm = old; }
             info[k] = Lang.F("{0}: {1} ({2}), {3} QSO in 50 MHz, {4} multi-salto; esclusi: {5} senza locator, {6} di altre bande o con altro PROP_MODE.",
-                Path.GetFileName(file[k]), mca, mgr, n, multi, noGrid, other);
+                Path.GetFileName(file[k]), mca, mgr, n, multi, noGrid, other) + (tep > 0 ? " " + Lang.F("Transequatoriali (TEP) esclusi: {0}.", tep) : "");
             lblFile[k].Text = info[k];
         }
 

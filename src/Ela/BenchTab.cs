@@ -246,7 +246,7 @@ namespace ELA
             EsModel.ShortHopKm = chkShort.IsChecked == true ? Ui.V(numShort) : 0;
             List<BenchQso> list = new List<BenchQso>();
             ignored = 0;
-            int noGrid = 0, otherBand = 0, otherProp = 0, tooShort = 0;
+            int noGrid = 0, otherBand = 0, otherProp = 0, tooShort = 0, tepN = 0;
             try
             {
                 foreach (Dictionary<string, string> r in raw)
@@ -281,6 +281,7 @@ namespace ELA
                     Spot s = new Spot { Utc = dt, FreqKHz = q.FreqMHz * 1000, DxCall = q.Call, Spotter = q.MyCall, LocSpotter = q.MyGrid, LocDx = q.Grid, LatS = q.LatTx, LonS = q.LonTx, LatD = la, LonD = lo, Prop = "ES" };
                     q.Path = EsModel.Build(s, H);
                     if (q.Path == null) { ignored++; continue; }
+                    if (prop != "ES" && EsModel.IsTransEquatorial(q.LatTx, q.LonTx, q.LatRx, q.LonRx)) { tepN++; continue; }   // transequatoriale (regola IC8TEM)
                     if (chkMin.IsChecked == true && (q.Path.Hops == 0 || (band == "2m" && q.Path.DistKm < EsModel.MinKm144))) { tooShort++; continue; }   // 144 MHz: Es sopra i 900 km (regola IC8TEM)
                     list.Add(q);
                 }
@@ -288,9 +289,10 @@ namespace ELA
             finally { EsModel.ShortHopKm = oldShort; }
             list.Sort((a, b) => a.Utc.CompareTo(b.Utc));
             all = list;
-            ignored += noGrid + otherBand + otherProp + tooShort;
+            ignored += noGrid + otherBand + otherProp + tooShort + tepN;
             lblFile.Text = Lang.F("{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: l'E-sporadico non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km (900 km in 144 MHz).",
-                Path.GetFileName(file), raw.Count, all.Count, noGrid, otherBand, otherProp, tooShort);
+                Path.GetFileName(file), raw.Count, all.Count, noGrid, otherBand, otherProp, tooShort)
+                + (tepN > 0 ? " " + Lang.F("Transequatoriali (TEP) esclusi: {0}.", tepN) : "");
             FillDays();
             if (selDay == null || !all.Any(q => q.Day == selDay))
             {
