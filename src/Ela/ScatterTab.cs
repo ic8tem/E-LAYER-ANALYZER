@@ -1,0 +1,518 @@
+// E-LAYER ANALYZER - linguette F.A.I. e AURORA: scatter da irregolarita' allineate al campo geomagnetico (IGRF-14).
+// Due viste sulla stessa mappa (65 %):
+//  - "Scia": luogo degli scatter point possibili per la coppia di stazioni A-B alla quota H (stile del programma
+//    Aurora QTF mostrato dall'utente), con il riquadro dei QTF/elevazioni di A (rosso) e B (verde);
+//  - "Iso-riflessione": clic sul punto di riflessione, curve di deviazione dalla condizione di riflessione per la stazione A
+//    (stile AuroReflex / isoflection lines di SE-PROP K9SE).
+// Condizione: c(A) + c(G) = 0, con c(X) = angolo (con segno) tra la linea di vista X -> SP e il piano perpendicolare a B in SP
+// (contorni supplementari di K9SE/K4GFG; a1 + a2 = 180 gradi nell'articolo IC8FAX-IC8TEM).
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Layout;
+using Avalonia.Media;
+using Avalonia.Threading;
+using YAMS;
+
+namespace ELA
+{
+    public class ScatterTab
+    {
+        public readonly Control Root;
+        readonly bool aurora;
+        readonly string pfx;
+        readonly MapView map = new MapView();
+        readonly QtfChart qtf = new QtfChart();
+        readonly ComboBox cmbMode, cmbPreset, cmbSp;
+        readonly TextBox txtA, txtB;
+        readonly NumericUpDown numH, numElev;
+        readonly CheckBox chkOval;
+        readonly SelectableTextBlock txtRes;
+        readonly TableView tSpots;
+        readonly TextBlock lblSw;
+        readonly SimpleChart kpChart;
+        double aLat = double.NaN, aLon, bLat = double.NaN, bLon, spLat = double.NaN, spLon;
+        string aName = "", bName = "";
+
+        // stazioni di verifica (IC8FAX: pagina F.A.I. e articolo 2011)
+        static readonly string[][] FaiPresets =
+        {
+            new[] { "IC8FAX - F6DRO", "IC8FAX", "JN70CN", "F6DRO", "JN03TJ" },
+            new[] { "IC8FAX - G4LOH", "IC8FAX", "JN70CN", "G4LOH", "IO70JC" },
+            new[] { "IC8FAX - FA1MXE (1° QSO F.A.I., 1990)", "IC8FAX", "JN70CN", "FA1MXE", "JN05GQ" }
+        };
+        // scatter point noti (pagina F.A.I. di IC8FAX, articolo IC8FAX-IC8TEM, DL5MCG)
+        static readonly string[][] KnownSp =
+        {
+            new[] { "Ginevra (JN36)", "46.20", "6.15" },
+            new[] { "Bruxelles (JO20)", "50.85", "4.35" },
+            new[] { "Budapest (JN97)", "47.50", "19.04" },
+            new[] { "JN92", "42.50", "19.00" },
+            new[] { "JN41/JN42", "42.00", "9.00" }
+        };
+
+        public ScatterTab(bool aurora)
+        {
+            this.aurora = aurora;
+            pfx = aurora ? "au_" : "fai_";
+            Config cf = Station.Cfg;
+            cmbMode = Ui.Combo(new[] { Lang.T("Scia (coppia A-B)"), Lang.T("Iso-riflessione (punto)") }, (int)cf.GetD(pfx + "modo", 0), 170);
+            List<string> pr = new List<string> { Lang.T("Verifiche...") };
+            if (!aurora) foreach (string[] p in FaiPresets) pr.Add(p[0]);
+            cmbPreset = Ui.Combo(pr, 0, 150);
+            List<string> sps = new List<string> { Lang.T("Scatter noti...") };
+            foreach (string[] k in KnownSp) sps.Add(k[0]);
+            cmbSp = Ui.Combo(sps, 0, 140);
+            txtA = Ui.T(cf.Get(pfx + "a", ""), 120, true);
+            txtB = Ui.T(cf.Get(pfx + "b", aurora ? "" : "F6DRO"), 120, true);
+            numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", aurora ? 105 : 110)), 0, 1, 45);
+            numElev = Ui.N(0, 10, Ui.Dm(cf.GetD(pfx + "elev_min", 0)), 1, 0.5m, 45);
+            chkOval = Ui.C(Lang.T("Ovale aurorale (NOAA OVATION)"), cf.GetB(pfx + "ovale", true));
+            Button bCalc = Ui.B(Lang.T("Calcola"), true);
+            bCalc.Click += (s, e) => Recalc();
+            Button bEu = Ui.B(Lang.T("Europa"));
+            bEu.Click += (s, e) => DefaultView();
+            txtA.LostFocus += (s, e) => Recalc();
+            txtB.LostFocus += (s, e) => Recalc();
+            numH.ValueChanged += (s, e) => Recalc();
+            numElev.ValueChanged += (s, e) => Recalc();
+            cmbMode.SelectionChanged += (s, e) => Recalc();
+            chkOval.IsCheckedChanged += (s, e) => Recalc();
+            cmbPreset.SelectionChanged += (s, e) =>
+            {
+                int i = cmbPreset.SelectedIndex - 1;
+                if (i < 0 || i >= FaiPresets.Length) return;
+                txtA.Text = FaiPresets[i][1] + " " + FaiPresets[i][2];
+                txtB.Text = FaiPresets[i][3] + " " + FaiPresets[i][4];
+                cmbMode.SelectedIndex = 0;
+                Recalc();
+            };
+            cmbSp.SelectionChanged += (s, e) =>
+            {
+                int i = cmbSp.SelectedIndex - 1;
+                if (i < 0 || i >= KnownSp.Length) return;
+                spLat = double.Parse(KnownSp[i][1], CultureInfo.InvariantCulture); spLon = double.Parse(KnownSp[i][2], CultureInfo.InvariantCulture);
+                cmbMode.SelectedIndex = 1;
+                Recalc();
+            };
+
+            txtRes = Ui.Text(12.5);
+            tSpots = new TableView();
+            tSpots.Columns.AddRange(new[] { "UTC", "MHz", "DX", "Spotter", "km", Lang.T("Commento") });
+            tSpots.ColumnWidths.AddRange(new double[] { 46, 70, 80, 80, 50, 160 });
+            tSpots.RowClicked += i =>
+            {
+                if (i < 0 || i >= tSpots.Rows.Count) return;
+                Spot s = tSpots.Rows[i].Tag as Spot;
+                if (s == null) return;
+                txtA.Text = s.Spotter + " " + s.LocSpotter; txtB.Text = s.DxCall + " " + s.LocDx;
+                cmbMode.SelectedIndex = 0;
+                Recalc();
+            };
+
+            DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Vista")), cmbMode, bCalc, bEu), Dock.Top);
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Stazione A")), txtA, Ui.L(Lang.T("Stazione B")), txtB), Dock.Top);
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, aurora ? (Control)chkOval : cmbPreset, cmbSp), Dock.Top);
+            TextBlock help = new TextBlock
+            {
+                Text = Lang.T("A e B: nominativo (cercato in CALL3) e/o locator; A vuoto = la mia stazione. Scia: clic sulla mappa = posizione di B. Iso-riflessione: clic = punto di riflessione."),
+                Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3), FontSize = 11.5
+            };
+            Ui.Dock(right, help, Dock.Top);
+            if (aurora)
+            {
+                lblSw = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3) };
+                kpChart = new SimpleChart { Height = 120, Title = "Kp" };
+                Button bFetch = Ui.B(Lang.T("Scarica NOAA adesso"));
+                bFetch.Click += (s, e) => StartFetch();
+                StackPanel sw = new StackPanel();
+                sw.Children.Add(lblSw); sw.Children.Add(kpChart); sw.Children.Add(bFetch);
+                Ui.Dock(right, Ui.Box(Lang.T("Meteorologia spaziale (NOAA SWPC)"), Pal.Green, sw), Dock.Top);
+            }
+            ScrollViewer svRes = new ScrollViewer { Content = txtRes, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            Border spotBox = Ui.Box(aurora ? Lang.T("Spot aurora (AU)") : Lang.T("Spot F.A.I."), Pal.Orange, tSpots);
+            spotBox.Height = 190;
+            Ui.Dock(right, spotBox, Dock.Bottom);
+            right.Children.Add(Ui.Box(Lang.T("Risultati"), Pal.Azure, svRes));
+
+            // mappa con il riquadro dei QTF in alto a destra
+            Grid mg = new Grid();
+            mg.Children.Add(map);
+            qtf.Width = 330; qtf.Height = 170; qtf.HorizontalAlignment = HorizontalAlignment.Right; qtf.VerticalAlignment = VerticalAlignment.Top; qtf.Margin = new Thickness(0, 34, 8, 0);
+            mg.Children.Add(qtf);
+            map.Clicked += (la, lo, rb) =>
+            {
+                if (cmbMode.SelectedIndex == 1 || rb) { spLat = la; spLon = lo; if (cmbMode.SelectedIndex != 1) cmbMode.SelectedIndex = 1; }
+                else { txtB.Text = Geo.LatLonToLoc(la, lo, 6); }
+                Recalc();
+            };
+            Root = Ui.MapAndData(mg, right);
+            DefaultView();
+
+            SpotStore.Added += s => spotsDirty = true;
+            Station.Changed += () => Recalc();
+            DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+            t.Tick += (s, e) =>
+            {
+                if (spotsDirty && Root.IsEffectivelyVisible) FillSpots();
+                if (aurora && autoFetch && (DateTime.UtcNow - SpaceWeather.LastFetch).TotalMinutes >= 5 && !fetching) StartFetch();
+            };
+            t.Start();
+        }
+
+        bool spotsDirty = true, fetching;
+        public static bool autoFetch = true;
+
+        // per le fotografie automatiche
+        public void ShotPreset(int i) { cmbPreset.SelectedIndex = i; }
+        public void ShotIso(double lat, double lon) { txtA.Text = "IC8FAX JN70CN"; txtB.Text = ""; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
+
+        void DefaultView()
+        {
+            if (aurora) map.SetView(-35, 55, 38, 80);
+            else map.SetView(-15, 35, 34, 60);
+        }
+
+        public void Save()
+        {
+            Config cf = Station.Cfg;
+            cf.Set(pfx + "modo", Math.Max(0, cmbMode.SelectedIndex));
+            cf.Set(pfx + "a", txtA.Text ?? ""); cf.Set(pfx + "b", txtB.Text ?? "");
+            cf.Set(pfx + "quota_km", Ui.V(numH)); cf.Set(pfx + "elev_min", Ui.V(numElev));
+            cf.Set(pfx + "ovale", chkOval.IsChecked == true);
+        }
+
+        // "NOMINATIVO LOCATOR", "LOCATOR" o "NOMINATIVO" -> coordinate
+        static bool Parse(string text, out double lat, out double lon, out string name)
+        {
+            lat = lon = double.NaN; name = "";
+            string[] parts = (text ?? "").Trim().ToUpperInvariant().Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+            string loc = null;
+            foreach (string p in parts) { if (Geo.IsLocator(p) && loc == null) loc = p; else if (name.Length == 0) name = p; }
+            if (loc == null && name.Length > 0) loc = CallDb.Lookup(name);
+            if (loc == null) return false;
+            if (name.Length == 0) name = loc;
+            return Geo.LocToLatLon(loc, out lat, out lon);
+        }
+
+        double H { get { return Ui.V(numH); } }
+
+        public void Recalc()
+        {
+            string n;
+            if (!Parse(txtA.Text, out aLat, out aLon, out n))
+            {
+                aLat = Station.Lat; aLon = Station.Lon; n = Station.Call.Length > 0 ? Station.Call : Station.Loc;
+            }
+            aName = n;
+            if (!Parse(txtB.Text, out bLat, out bLon, out n)) { bLat = double.NaN; n = ""; }
+            bName = n;
+            map.Cells.Clear(); map.Lines.Clear(); map.Markers.Clear(); map.Legend.Clear(); map.Info.Clear(); map.LegendTitle = "";
+            qtf.Clear();
+            map.Caption = (aurora ? "AURORA" : "F.A.I.") + " - " + Igrf.Info + " - " + Lang.F("quota {0:F0} km", H);
+            if (aurora && chkOval.IsChecked == true) DrawOval();
+            StringBuilder sb = new StringBuilder();
+            if (double.IsNaN(aLat)) sb.AppendLine(Lang.T("Manca la stazione A (imposta il locator della stazione in alto o scrivilo qui)."));
+            else if (cmbMode.SelectedIndex == 1) Iso(sb);
+            else Scia(sb);
+            if (aurora) AuroraInfo(sb);
+            txtRes.Text = sb.ToString();
+            qtf.IsVisible = cmbMode.SelectedIndex == 0 && qtf.HasData;
+            qtf.InvalidateVisual();
+            map.InvalidateVisual();
+            if (aurora) UpdateSw();
+        }
+
+        static Color Dev(double d, bool green)
+        {
+            // classi di deviazione come Aurora QTF / AuroReflex
+            byte a = d <= 1 ? (byte)230 : d <= 1.5 ? (byte)190 : d <= 2 ? (byte)140 : d <= 2.5 ? (byte)95 : d <= 4 ? (byte)70 : d <= 8 ? (byte)45 : (byte)25;
+            return green ? Color.FromArgb(a, 40, 220, 60) : Color.FromArgb(a, 255, 30, 30);
+        }
+
+        void StationMarks()
+        {
+            double hr = Geo.HalfHopKm(0, H);
+            map.Lines.Add(MapView.Circle(aLat, aLon, hr, Pal.Green, 1.5));
+            map.Markers.Add(new MapMarker { Lat = aLat, Lon = aLon, Radius = 6, Fill = Color.FromRgb(30, 200, 60), Stroke = Colors.DarkRed, Label = aName });
+            if (!double.IsNaN(bLat))
+            {
+                map.Lines.Add(MapView.Circle(bLat, bLon, hr, Pal.Green, 1.5));
+                map.Markers.Add(new MapMarker { Lat = bLat, Lon = bLon, Radius = 6, Fill = Color.FromRgb(30, 200, 60), Label = bName });
+            }
+        }
+
+        // ---------------------------------------------------------------- Scia: luogo degli scatter point per A-B
+        void Scia(StringBuilder sb)
+        {
+            StationMarks();
+            if (double.IsNaN(bLat)) { sb.AppendLine(Lang.T("Imposta la stazione B (nominativo, locator o clic sulla mappa).")); return; }
+            double h = H, maxD = Geo.HalfHopKm(Ui.V(numElev), h);
+            double step = 0.2;
+            List<PerpPoint> loc = FieldAligned.PairLocus(aLat, aLon, bLat, bLon, h, 2.5, Ui.V(numElev), maxD, step);
+            Func<double, double, double> w = null;
+            if (aurora && chkOval.IsChecked == true && SpaceWeather.Oval != null) w = (la, lo) => SpaceWeather.OvalAt(la, lo) / 30.0;
+            PerpPoint best = null; double bestScore = double.MaxValue;
+            foreach (PerpPoint p in loc)
+            {
+                map.Cells.Add(new MapCell { Lat0 = p.Lat - step / 2, Lon0 = p.Lon - step / 2, DLat = step, DLon = step, Fill = Dev(p.Off, false) });
+                double dB = Geo.DistanceKm(bLat, bLon, p.Lat, p.Lon);
+                double eB = Geo.ElevationDeg(dB, h, 0);
+                double azB = Geo.Bearing(bLat, bLon, p.Lat, p.Lon);
+                qtf.Add(p.Az, p.Elev, azB, eB, p.Off);
+                double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
+                if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
+                if (score < bestScore) { bestScore = score; best = p; }
+            }
+            map.Legend.Add(new KeyValuePair<string, Color>("0° - 1°", Dev(0.5, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("1° - 1,5°", Dev(1.2, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("1,5° - 2°", Dev(1.8, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("2° - 2,5°", Dev(2.2, false)));
+            map.LegendTitle = Lang.T("Deviazione dalla condizione di riflessione");
+            double dAB = Geo.DistanceKm(aLat, aLon, bLat, bLon);
+            sb.AppendLine(Lang.F("Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km", aName, bName, dAB, h));
+            sb.AppendLine(Lang.F("Celle del luogo entro 2,5°: {0} (passo {1}°); entrambe le stazioni vedono il punto sopra {2:F1}° di elevazione.", loc.Count, step.ToString(CultureInfo.CurrentCulture), Ui.V(numElev)));
+            if (best == null)
+            {
+                sb.AppendLine(Lang.T("Nessun punto soddisfa la condizione di riflessione: collegamento F.A.I. improbabile con questa geometria e questa quota."));
+                return;
+            }
+            double dBb = Geo.DistanceKm(bLat, bLon, best.Lat, best.Lon);
+            sb.AppendLine();
+            sb.AppendLine(Lang.T("Scatter point più probabile (deviazione minima e tratta più corta):"));
+            sb.AppendLine(Lang.F("  {0}  ({1:F2}°, {2:F2}°)  deviazione {3:F2}°", Geo.LatLonToLoc(best.Lat, best.Lon, 6), best.Lat, best.Lon, best.Off));
+            sb.AppendLine(Lang.F("  {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", aName, best.Az, best.Elev, best.DistKm));
+            sb.AppendLine(Lang.F("  {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0), dBb));
+            sb.AppendLine(Lang.F("  Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(best.Lat, best.Lon)));
+            map.Markers.Add(new MapMarker { Lat = best.Lat, Lon = best.Lon, Radius = 9, Fill = Pal.Yellow, Ring = true, Label = Geo.LatLonToLoc(best.Lat, best.Lon, 4), LabelColor = Pal.Yellow });
+            map.Lines.Add(MapView.GreatCircle(aLat, aLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
+            map.Lines.Add(MapView.GreatCircle(bLat, bLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
+            map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", aName, best.Az, best.Elev));
+            map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0)));
+            // scatter noti vicini alla scia
+            foreach (string[] k in KnownSp)
+            {
+                double la = double.Parse(k[1], CultureInfo.InvariantCulture), lo = double.Parse(k[2], CultureInfo.InvariantCulture);
+                double bestD = double.MaxValue;
+                foreach (PerpPoint p in loc) if (p.Off <= 1.5) bestD = Math.Min(bestD, Geo.DistanceKm(la, lo, p.Lat, p.Lon));
+                if (bestD < 150) sb.AppendLine(Lang.F("  La scia passa a {0:F0} km dallo scatter noto {1}.", bestD, k[0]));
+            }
+            sb.AppendLine();
+            sb.AppendLine(Lang.T("Riquadro in alto a destra: QTF ed elevazione verso ogni punto della scia, rosso = A, verde = B (più intenso = deviazione minore)."));
+        }
+
+        // ---------------------------------------------------------------- Iso-riflessione per un punto di riflessione
+        void Iso(StringBuilder sb)
+        {
+            StationMarks();
+            double h = H;
+            if (double.IsNaN(spLat))
+            {
+                sb.AppendLine(Lang.T("Clic sulla mappa per scegliere il punto di riflessione (o scegli uno scatter noto)."));
+                return;
+            }
+            Geo.V3 sp = Geo.Ecef(spLat, spLon, h);
+            Geo.V3 b = Geo.FieldDir(sp);
+            Geo.V3 a = Geo.Ecef(aLat, aLon, Station.AltKm);
+            double cA = Math.Asin(Math.Max(-1, Math.Min(1, (sp - a).Unit.Dot(b)))) * Geo.R2D;   // contorno di A (K9SE)
+            double hr = Geo.HalfHopKm(0, h);
+            map.Lines.Add(MapView.Circle(spLat, spLon, hr, Pal.Red, 1.5));
+            double dA = Geo.DistanceKm(aLat, aLon, spLat, spLon), eA = Geo.ElevationDeg(dA, h, Station.AltKm), azA = Geo.Bearing(aLat, aLon, spLat, spLon);
+            // griglia al suolo entro l'orizzonte del punto
+            double dl = hr / 111.0, cl = Math.Max(0.15, Math.Cos(spLat * Geo.D2R)), dlo = dl / cl;
+            double stLa = 0.15, stLo = 0.15 / Math.Max(0.3, cl);
+            int n0 = 0;
+            for (double la = spLat - dl; la <= spLat + dl; la += stLa)
+                for (double lo = spLon - dlo; lo <= spLon + dlo; lo += stLo)
+                {
+                    double d = Geo.DistanceKm(spLat, spLon, la, lo);
+                    if (d > hr) continue;
+                    Geo.V3 g = Geo.Ecef(la, lo, 0);
+                    double cG = Math.Asin(Math.Max(-1, Math.Min(1, (sp - g).Unit.Dot(b)))) * Geo.R2D;
+                    double dev = Math.Abs(cA + cG);
+                    if (dev > 16) continue;
+                    map.Cells.Add(new MapCell { Lat0 = la - stLa / 2, Lon0 = lo - stLo / 2, DLat = stLa, DLon = stLo, Fill = Dev(dev <= 0.5 ? 0.5 : dev <= 1 ? 1.2 : dev <= 2 ? 1.8 : dev <= 4 ? 3 : dev <= 8 ? 6 : 12, false) });
+                    n0++;
+                }
+            map.Markers.Add(new MapMarker { Lat = spLat, Lon = spLon, Radius = 10, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(spLat, spLon, 4), LabelColor = Pal.Red });
+            map.Lines.Add(MapView.GreatCircle(aLat, aLon, spLat, spLon, Pal.Yellow, 1.2, true));
+            map.Info.Add(Lang.F("Azimut = {0:F0}°", azA));
+            map.Info.Add(Lang.F("Elevazione = {0:F0}°", eA));
+            map.Legend.Add(new KeyValuePair<string, Color>("0°", Dev(0.5, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("1°", Dev(1.2, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("2°", Dev(1.8, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("4°", Dev(3, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("8°", Dev(6, false)));
+            map.Legend.Add(new KeyValuePair<string, Color>("16°", Dev(12, false)));
+            map.LegendTitle = Lang.T("Deviazione dalla condizione di riflessione");
+            sb.AppendLine(Lang.F("Punto di riflessione {0} ({1:F2}°, {2:F2}°) a {3:F0} km di quota", Geo.LatLonToLoc(spLat, spLon, 6), spLat, spLon, h));
+            sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", aName, azA, eA, dA));
+            sb.AppendLine(Lang.F("Contorno di {0} (K9SE): {1:+0.0;-0.0}°  ->  ricevono le stazioni sul contorno {2:+0.0;-0.0}° (zona rossa piena)", aName, cA, -cA));
+            sb.AppendLine(Lang.F("Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(spLat, spLon)));
+            if (eA < 0) sb.AppendLine(Lang.T("Attenzione: il punto è sotto l'orizzonte della stazione A a questa quota."));
+            if (!double.IsNaN(bLat))
+            {
+                Geo.V3 g = Geo.Ecef(bLat, bLon, 0);
+                double cB = Math.Asin(Math.Max(-1, Math.Min(1, (sp - g).Unit.Dot(b)))) * Geo.R2D;
+                double dB = Geo.DistanceKm(bLat, bLon, spLat, spLon);
+                sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, deviazione {3:F1}°", bName, Geo.Bearing(bLat, bLon, spLat, spLon), Geo.ElevationDeg(dB, h, 0), Math.Abs(cA + cB)));
+            }
+            sb.AppendLine();
+            sb.AppendLine(Lang.T("Cerchio verde: orizzonte della stazione A alla quota dello strato; cerchio rosso: zona da cui il punto di riflessione è visibile."));
+        }
+
+        // ---------------------------------------------------------------- aurora
+        void DrawOval()
+        {
+            if (SpaceWeather.Oval == null) return;
+            for (int lon = -180; lon < 180; lon++)
+                for (int lat = 35; lat <= 89; lat++)
+                {
+                    double v = SpaceWeather.OvalAt(lat, lon);
+                    if (v < 3) continue;
+                    byte a = (byte)Math.Min(150, 30 + v * 3);
+                    Color c = v >= 50 ? Color.FromArgb(a, 250, 80, 80) : v >= 20 ? Color.FromArgb(a, 253, 224, 71) : Color.FromArgb(a, 80, 230, 120);
+                    map.Cells.Add(new MapCell { Lat0 = lat - 0.5, Lon0 = lon - 0.5, DLat = 1, DLon = 1, Fill = c });
+                }
+        }
+
+        void AuroraInfo(StringBuilder sb)
+        {
+            if (double.IsNaN(aLat)) return;
+            sb.AppendLine();
+            sb.AppendLine(Lang.F("Latitudine geomagnetica (dipolo) di {0}: {1:F1}°", aName, Geo.GeomagLat(aLat, aLon)));
+            double bnd = SpaceWeather.EquatorBoundary(aLon, 10);
+            if (!double.IsNaN(bnd)) sb.AppendLine(Lang.F("Confine equatoriale dell'ovale (≥10 %) alla longitudine della stazione: {0:F0}° N", bnd));
+            // linea di backscatter (raggio perpendicolare a B) dentro l'ovale: puntamento consigliato
+            List<PerpPoint> line = FieldAligned.PerpLine(aLat, aLon, Station.AltKm, H, 1.5, Ui.V(numElev), 1500, 2);
+            PerpPoint best = null; double bv = 0;
+            foreach (PerpPoint p in line)
+            {
+                map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = 2, Fill = Pal.Azure, Stroke = Pal.Azure });
+                double v = SpaceWeather.OvalAt(p.Lat, p.Lon);
+                if (v > bv) { bv = v; best = p; }
+            }
+            if (best != null && bv >= 5)
+            {
+                sb.AppendLine(Lang.F("Puntamento consigliato (eco perpendicolare a B dentro l'ovale): azimut {0:F0}°, elevazione {1:F1}°, distanza {2:F0} km, probabilità ovale {3:F0} %", best.Az, best.Elev, best.DistKm, bv));
+                map.Markers.Add(new MapMarker { Lat = best.Lat, Lon = best.Lon, Radius = 8, Fill = Pal.Azure, Ring = true, Label = Lang.F("QTF {0:F0}°", best.Az), LabelColor = Pal.Azure });
+            }
+            else sb.AppendLine(Lang.T("La linea di perpendicolarità della stazione (puntini azzurri) non entra nell'ovale: aurora radio improbabile adesso."));
+        }
+
+        void UpdateSw()
+        {
+            if (lblSw == null) return;
+            double kp = SpaceWeather.LatestKp;
+            lblSw.Text = Lang.F("Kp {0}   Bz {1} nT   vento {2} km/s   densità {3} p/cm³", Geo.Fmt(kp, 1), Geo.Fmt(SpaceWeather.Bz, 1), Geo.Fmt(SpaceWeather.Speed, 0), Geo.Fmt(SpaceWeather.Density, 1))
+                + "\n" + Lang.F("Ovale: {0}   ultimo scaricamento: {1}", SpaceWeather.OvalTime, SpaceWeather.LastFetch == DateTime.MinValue ? "-" : SpaceWeather.LastFetch.ToString("HH:mm", CultureInfo.InvariantCulture) + " UTC")
+                + (SpaceWeather.LastError.Length > 0 ? "\n" + SpaceWeather.LastError : "");
+            List<KeyValuePair<DateTime, double>> kps;
+            lock (SpaceWeather.Kp) kps = new List<KeyValuePair<DateTime, double>>(SpaceWeather.Kp);
+            int n = Math.Min(24, kps.Count);
+            double[] v = new double[n]; string[] x = new string[n];
+            for (int i = 0; i < n; i++) { KeyValuePair<DateTime, double> k = kps[kps.Count - n + i]; v[i] = k.Value; x[i] = k.Key.ToString("dd HH", CultureInfo.InvariantCulture); }
+            kpChart.Series.Clear();
+            kpChart.Series.Add(new ChartSeries { Name = "Kp", Color = Pal.Green, Values = v, Bars = true });
+            kpChart.XLabels = x; kpChart.XLabelEvery = 4; kpChart.YMaxFixed = 9;
+            kpChart.Title = Lang.T("Kp planetario (ultimi 3 giorni, ogni 3 ore)");
+            kpChart.InvalidateVisual();
+        }
+
+        public void StartFetch()
+        {
+            if (fetching) return;
+            fetching = true;
+            string dd = AppPaths.DataDir;
+            System.Threading.Tasks.Task.Run(async () =>
+            {
+                try { await SpaceWeather.FetchAsync(dd); } catch { }
+                Dispatcher.UIThread.Post(() => { fetching = false; if (SpaceWeather.LastFetch == DateTime.MinValue) SpaceWeather.LastFetch = DateTime.UtcNow; Recalc(); });
+            });
+        }
+
+        void FillSpots()
+        {
+            spotsDirty = false;
+            List<Spot> l = SpotStore.Recent(24 * 60, s => s.HasBoth && (aurora ? s.Prop == "AU" : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))));
+            tSpots.Rows.Clear();
+            foreach (Spot s in l)
+                tSpots.Rows.Add(new TableRow
+                {
+                    Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), s.DxCall, s.Spotter, Geo.Fmt(s.DistanceKm, 0), s.Comment },
+                    Fore = EsTab.BandColor(s.Band), Tag = s
+                });
+            tSpots.Refresh();
+        }
+    }
+
+    // Riquadro dei QTF (stile Aurora QTF): ascissa = azimut centrato sulla direzione media, ordinata = elevazione
+    public class QtfChart : Control
+    {
+        readonly List<double[]> pts = new List<double[]>();   // azA, elA, azB, elB, dev
+        public bool HasData { get { return pts.Count > 0; } }
+        public void Clear() { pts.Clear(); }
+        public void Add(double azA, double elA, double azB, double elB, double dev) { pts.Add(new[] { azA, elA, azB, elB, dev }); }
+
+        static double Mean(List<double[]> p, int k)
+        {
+            double sx = 0, sy = 0;
+            foreach (double[] v in p) { sx += Math.Sin(v[k] * Geo.D2R); sy += Math.Cos(v[k] * Geo.D2R); }
+            return Geo.Norm360(Math.Atan2(sx, sy) * Geo.R2D);
+        }
+
+        public override void Render(DrawingContext ctx)
+        {
+            double W = Bounds.Width, H = Bounds.Height;
+            ctx.FillRectangle(Pal.B(Color.FromArgb(225, 248, 248, 252)), new Rect(0, 0, W, H));
+            ctx.DrawRectangle(null, Pal.P(Colors.Gray, 1), new Rect(0, 0, W, H));
+            if (pts.Count == 0) return;
+            double cA = Mean(pts, 0), cB = Mean(pts, 2);
+            double c = Geo.Norm360(Math.Atan2(Math.Sin(cA * Geo.D2R) + Math.Sin(cB * Geo.D2R), Math.Cos(cA * Geo.D2R) + Math.Cos(cB * Geo.D2R)) * Geo.R2D);
+            c = Math.Round(c / 30) * 30;
+            double maxEl = 10;
+            foreach (double[] v in pts) maxEl = Math.Max(maxEl, Math.Max(v[1], v[3]));
+            maxEl = Math.Min(90, Math.Ceiling(maxEl / 5) * 5);
+            double l = 28, r = W - 8, t = 22, b = H - 20;
+            Func<double, double> X = az => { double d = az - c; while (d > 180) d -= 360; while (d < -180) d += 360; return l + (d + 90) / 180 * (r - l); };
+            Func<double, double> Y = el => b - Math.Max(0, el) / maxEl * (b - t);
+            IPen gp = Pal.P(Color.FromArgb(70, 0, 0, 0), 0.6, Pal.Dot);
+            Typeface tf = new Typeface(FontFamily.Default);
+            for (int k = -90; k <= 90; k += 30)
+            {
+                double x = l + (k + 90) / 180.0 * (r - l);
+                ctx.DrawLine(gp, new Point(x, t), new Point(x, b));
+                FormattedText ft = new FormattedText(Geo.Norm360(c + k).ToString("F0", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture, FlowDirection.LeftToRight, tf, 10, Brushes.Black);
+                ctx.DrawText(ft, new Point(x - ft.Width / 2, b + 3));
+            }
+            for (double e = 0; e <= maxEl; e += 5)
+            {
+                ctx.DrawLine(gp, new Point(l, Y(e)), new Point(r, Y(e)));
+                FormattedText ft = new FormattedText(e.ToString("F0", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture, FlowDirection.LeftToRight, tf, 10, Brushes.Black);
+                ctx.DrawText(ft, new Point(l - ft.Width - 3, Y(e) - ft.Height / 2));
+            }
+            ctx.DrawRectangle(null, Pal.P(Colors.Black, 0.8), new Rect(l, t, r - l, b - t));
+            List<double[]> sorted = new List<double[]>(pts);
+            sorted.Sort((p, q) => q[4].CompareTo(p[4]));   // prima i peggiori, sopra i migliori
+            foreach (double[] v in sorted)
+            {
+                ctx.DrawEllipse(Pal.B(Dev(v[4], true)), null, new Point(X(v[2]), Y(v[3])), 3.5, 3.5);
+                ctx.DrawEllipse(Pal.B(Dev(v[4], false)), null, new Point(X(v[0]), Y(v[1])), 4.5, 4.5);
+            }
+            FormattedText ta = new FormattedText(Lang.T("QTF A: rosso"), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily.Default, FontStyle.Normal, FontWeight.Bold), 11, Brushes.Red);
+            ctx.DrawText(ta, new Point(l + 4, 4));
+            FormattedText tb = new FormattedText(Lang.T("QTF B: verde"), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily.Default, FontStyle.Normal, FontWeight.Bold), 11, new SolidColorBrush(Color.FromRgb(20, 160, 40)));
+            ctx.DrawText(tb, new Point(r - tb.Width - 4, 4));
+        }
+
+        static Color Dev(double d, bool green)
+        {
+            byte a = d <= 1 ? (byte)235 : d <= 1.5 ? (byte)170 : d <= 2 ? (byte)110 : (byte)60;
+            return green ? Color.FromArgb(a, 30, 200, 50) : Color.FromArgb(a, 240, 20, 20);
+        }
+    }
+}

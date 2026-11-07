@@ -1,0 +1,29 @@
+E-LAYER ANALYZER 0.1.0 - a cura di Costantino IC8TEM
+Analisi dei modi di propagazione VHF dello strato E: sporadico E, F.A.I., meteor scatter (YA-MS), aurora.
+Windows, Linux e Mac.
+
+INSTALLAZIONE
+  Il programma e la sua cartella "data" stanno sempre insieme nella cartella personale E-LAYER-ANALYZER.
+  Windows  E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe: installa in C:\E-LAYER-ANALYZER, senza permessi
+           di amministratore. In alternativa lo zip portatile.
+  Linux    E-LAYER-ANALYZER-x.y.z-linux-x64.tar.gz: estrarre e lanciare ./installa.sh (installa in ~/E-LAYER-ANALYZER).
+  Mac      E-LAYER-ANALYZER-x.y.z-mac-apple-silicon.dmg (M1/M2/M3/M4) oppure -mac-intel.dmg; aprire il .dmg,
+           clic destro su "Installa E-LAYER-ANALYZER.command" > Apri.
+  Le versioni nuove si installano sopra la precedente: impostazioni, spot raccolti e call3.txt restano.
+
+PRIMO AVVIO
+  1. In alto scrivere nominativo, locator e quota, poi "Applica".
+  2. DATA COLLECTION > Sessioni telnet: controllare host, porta e comandi e premere "Connetti"
+     (con "Connetti all'avvio" le sessioni si aprono da sole).
+  3. Al primo avvio servono la rete per la mappa (Natural Earth) e per i dati NOAA dell'aurora.
+
+LINGUETTE
+  SPORADIC-E       mappa degli spot Es con i primi salti di entrambe le stazioni (salti uguali e ipotesi del
+                   primo salto corto entro 1200 km), nubi Es sui quadrati Maidenhead, MUF per la propria stazione.
+  F.A.I.           "Scia": luogo degli scatter point per una coppia di stazioni (con i QTF di entrambe);
+                   "Iso-riflessione": curve di deviazione dalla condizione di riflessione per un punto cliccato.
+                   Campo geomagnetico IGRF-14.
+  METEOR SCATTER   il programma YA-MS completo.
+  AURORA           ovale OVATION, Kp e vento solare NOAA, scia e iso-riflessione per l'aurora radio.
+  DATA COLLECTION  tre sessioni telnet (cluster a scelta, RBN, cluster con PSKReporter), spot raccolti, CALL3.
+  FONTI, DOCUMENTO TECNICO  fonti citate e formule (esportabile in Word).

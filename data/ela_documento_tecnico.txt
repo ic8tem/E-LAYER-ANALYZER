@@ -1,0 +1,68 @@
+TITLE|Come E-LAYER ANALYZER calcola
+SUB|Documento tecnico - a cura di Costantino IC8TEM - versione 0.1.0, novembre 2026. I numeri tra parentesi quadre rimandano alla linguetta FONTI.
+H1|1. Introduzione
+H2|1.1 Scopo
+P|E-LAYER ANALYZER analizza i modi di propagazione VHF che coinvolgono lo strato E: sporadico E (anche multi-salto extracontinentale), F.A.I. (irregolarità allineate al campo magnetico), meteor scatter (con il programma YA-MS) e aurora radio. Questo documento descrive ogni calcolo e da dove viene.
+H2|1.2 Etichette
+TAG|FONTE|il passo riprende una fonte citata.
+TAG|RILIEVO|verifica fatta sul programma o confronto con un caso reale.
+TAG|SCELTA|scelta del programma, da confermare con l'esperienza in banda.
+H1|2. Geometria comune
+H2|2.1 Terra, locator, cerchio massimo
+TAG|FONTE|Terra sferica di raggio r = 6372,7955 km, come nell'articolo F.A.I. [1] e in YA-MS [5].
+TAG|SCELTA|Le stazioni sono poste al centro del quadrato del locator (4, 6 o 8 caratteri). Distanza, azimut, punti intermedi e cerchi con le formule del cerchio massimo:
+EQ|d = 2r · arcsin √[ sin²(Δφ/2) + cos φ₁ · cos φ₂ · sin²(Δλ/2) ]
+EQ|Az = atan2( sin Δλ · cos φ₂ ,  cos φ₁ · sin φ₂ − sin φ₁ · cos φ₂ · cos Δλ )
+H2|2.2 Elevazione verso un punto dello strato E
+TAG|FONTE|Formula (2) dell'articolo F.A.I. [1], con x = d / r, H quota del punto, h quota della stazione. Il programma usa la forma equivalente a due argomenti, esatta sulla Terra sferica:
+EQ|e = atan2( (r + H) · cos x − (r + h) ,  (r + H) · sin x )
+TAG|RILIEVO|Con H = 110 km il programma dà 35,3° a 150 km, come IW1AZJ (35°) nella pagina di IC8FAX [2]; a 800 km dà 4,2° contro i 6° indicati per IC8CQF (la distanza della pagina è approssimata: 6° corrispondono a circa 680 km).
+H2|2.3 Salto nello strato e legge della secante
+P|Per un raggio che parte con elevazione e e incontra lo strato alla quota H, l'angolo di incidenza φ (dalla verticale) e la distanza al suolo del punto di riflessione valgono:
+EQ|sin φ = r · cos e / (r + H)        d_rifl = r · (90° − e − φ) [in radianti]
+EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
+TAG|SCELTA|La foEs indicata dal programma è una soglia minima: lo spot dice solo che la frequenza f è passata. Il fattore sec φ tiene conto della curvatura terrestre.
+TAG|RILIEVO|Le esperienze riportate da IK3XTV [3] indicano foEs di 12-15 MHz per i 144 MHz: la legge della secante pura dà valori più alti (circa 25-28 MHz su 2000 km). Il dato va letto come confronto relativo tra nubi, non come valore assoluto.
+H1|3. Sporadico E
+H2|3.1 Numero di salti
+TAG|FONTE|Tabella di IK3XTV [3]: singolo salto 500-650 / 1500-2000 / 2200-2400 km (minima / ottimale / massima); doppio salto 2800-3000 / 3200-4000 / 4400-5000 km; triplo salto ottimale 4800-6400 km, massima 6900 km.
+TAG|SCELTA|Il numero di salti n è quello della tabella: n = 1 fino a 2400 km, n = 2 fino a 5000 km, n = 3 fino a 6900 km, oltre n = arrotondamento per eccesso di D / 2300 km. Sotto i 500 km lo spot non si considera sporadico E. Tra 2400 e 2800 km il programma segnala la "zona di passaggio".
+H2|3.2 Primo salto di entrambe le stazioni
+TAG|SCELTA|Ipotesi a salti uguali: i punti di riflessione stanno lungo il cerchio massimo alle frazioni (2k − 1) / (2n) della tratta. Il primo salto dello spotter è il punto k = 1 (arancio), il primo salto del DX è il punto k = n (viola); con un solo salto coincidono nel punto medio (giallo).
+TAG|FONTE|Ipotesi del primo salto corto: l'autore (IC8TEM) ha esperienza, nel multi-salto, di primo salto corto entro i 1200 km dal proprio QTH [4]. Il programma disegna (cerchi vuoti) il punto di riflessione a metà del salto corto di ciascuna stazione; la lunghezza del salto corto si sceglie nella linguetta (1200 km di partenza).
+H2|3.3 Nubi Es sui quadrati Maidenhead
+TAG|SCELTA|I punti di riflessione (punto medio per il singolo salto, primi salti per il multi-salto) si raccolgono nei quadrati Maidenhead di 4 caratteri (2° × 1°). Per ogni quadrato si tiene la foEs minima più alta tra gli spot che vi cadono; il colore va dal blu (< 5 MHz) al rosso (> 20 MHz).
+P|Per la propria stazione il programma calcola la MUF attraverso ogni nube posta a distanza d, con un salto di lunghezza 2d, solo se la nube è nella portata del singolo salto:
+EQ|MUF_mia = foEs_nube · sec φ(2d)
+TAG|SCELTA|Tabella "Nubi Es": in rosso le nubi che darebbero MUF ≥ 144 MHz, in arancio ≥ 70 MHz, in giallo ≥ 50 MHz.
+H1|4. F.A.I. e aurora: scatter allineato al campo magnetico
+H2|4.1 Il campo magnetico
+TAG|FONTE|Il campo è calcolato con il modello IGRF-14 [16] (armoniche sferiche fino al grado 13, coefficienti 2025-2030 interpolati alla data). SE-PROP di K9SE [9] usava allo stesso modo un modello a armoniche sferiche (WMM).
+TAG|RILIEVO|Il calcolo coincide con ppigrf entro 1 nT. Con il dipolo semplice la verifica IC8FAX - G4LOH non trova alcuno scatter point; con IGRF-14 sì: il modello completo è indispensabile.
+H2|4.2 La condizione di riflessione
+TAG|FONTE|Il segnale diffuso da un'irregolarità allineata al campo esce su un cono con asse lungo B; stazioni su contorni supplementari possono collegarsi (a1 + a2 = 180° [1], contorni ±c di K9SE/K4GFG [2] [9] [10]).
+P|Per ogni stazione X si calcola c(X), l'angolo (con segno) tra la linea di vista X → SP e il piano perpendicolare a B nello scatter point SP. La deviazione dalla condizione di riflessione per il collegamento A-B è:
+EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
+TAG|FONTE|Per l'eco verso la stessa stazione (backscatter) la condizione diventa raggio perpendicolare a B, con una tolleranza di ±2-3° (Lange-Hesse [12]); l'intensità cala di circa 3-5 dB per grado di scarto (Jackel e altri [13]).
+H2|4.3 Vista "Scia" (coppia A-B)
+TAG|SCELTA|Su una griglia di 0,2° alla quota H si cercano i punti visti da entrambe le stazioni con elevazione ≥ minima e con dev ≤ 2,5°. Le classi di colore sono 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (stile Aurora QTF [11]). Il riquadro in alto a destra riporta QTF ed elevazione di A (rosso) e B (verde) verso ogni punto della scia.
+TAG|SCELTA|Scatter point più probabile: deviazione ≤ 1° e minima somma dei quadrati delle distanze (minore attenuazione); in aurora si preferiscono i punti dentro l'ovale.
+TAG|RILIEVO|Verifiche richieste dall'autore (IGRF-14, H = 110 km): IC8FAX (JN70CN) - F6DRO (JN03TJ): scia sull'Italia nord-occidentale, scatter più probabile vicino a 44,3° N 9,3° E, QTF circa 317° da Capri e 79° da F6DRO. IC8FAX - G4LOH (IO70JC): scia sulla Germania sud-occidentale, intorno a 49,5-50° N 8,5-9° E, QTF circa 338° da Capri e 87° da G4LOH. IC8FAX - FA1MXE (JN05GQ, primo QSO F.A.I. del 1990 via Ginevra a 330°): la scia passa vicino a Ginevra (deviazione minima a 46,5° N 7° E).
+TAG|RILIEVO|Caso DL5MCG [6]: beacon DB0FAI (JN58IC) - Dresda via Sheffield, deviazione 0,3° a 110 km.
+H2|4.4 Vista "Iso-riflessione" (punto di riflessione)
+TAG|SCELTA|Con un clic si sceglie il punto di riflessione SP. Per ogni punto al suolo G entro l'orizzonte di SP si calcola dev = | c(A) + c(G) | e si colorano le classi 0°, 1°, 2°, 4°, 8°, 16° (stile AuroReflex [11], linee di iso-riflessione di SE-PROP [9]). In alto: azimut ed elevazione dalla stazione A verso SP; cerchio verde = orizzonte di A alla quota dello strato, cerchio rosso = zona da cui SP è visibile.
+H2|4.5 Aurora
+TAG|FONTE|Ovale aurorale OVATION Prime, Kp e vento solare dal NOAA SWPC [15], aggiornati ogni 5 minuti e salvati in data/swpc.
+TAG|SCELTA|Puntamento consigliato: lungo la linea di perpendicolarità della stazione (eco perpendicolare a B, tolleranza 1,5°, quota 105 km) si sceglie il punto con la probabilità d'ovale più alta. La quota di 105 km è tra i 104 km di Jackel [13] e i 110 km di Lange-Hesse [12].
+TAG|FONTE|Regole operative: puntare tra nord e est, partendo da circa 45°; Doppler fino a ~2 kHz a 144 MHz, portata tipica ~1300 km, massima ~2000 km (G3WPO [14]).
+H1|5. Raccolta dei dati
+H2|5.1 Sessioni telnet
+TAG|SCELTA|Tre sessioni: cluster a scelta, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster con gli spot di PSKReporter (es. HamAlert [19]). Login automatico con il nominativo, comandi iniziali separati da punto e virgola, riconnessione dopo 30 s.
+H2|5.2 Lettura degli spot
+TAG|SCELTA|Riga "DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" letta con un'espressione regolare (non a colonne fisse). Dal commento si leggono locator e modo nella forma "JN70CN<ES>JO62QM" (primo locator = spotter, secondo = DX), il modo di propagazione (ES, FAI, AU, MS, TR, EME, F2, TEP), il rapporto S/N e il modo di emissione. I locator mancanti si cercano in CALL3 [21]; quelli a 6 caratteri letti nei commenti si aggiungono a data/call3_nuovi.txt.
+TAG|SCELTA|Archivio: un file CSV al giorno in data/spot; in memoria gli ultimi spot (al massimo 50000). Con RBN e PSKReporter si salvano di norma solo gli spot da 28 MHz in su.
+H1|6. Limiti
+LI|Stazioni al centro del quadrato del locator: con locator a 4 caratteri l'errore arriva a ~80 km.
+LI|La foEs dagli spot è una soglia minima e la legge della secante sovrastima la foEs necessaria in VHF (vedi 2.3).
+LI|Lo scatter point "più probabile" è un criterio del programma: la scia intera è il risultato fisico.
+LI|L'ovale OVATION è un modello di probabilità di aurora ottica, usato come indicatore per l'aurora radio.

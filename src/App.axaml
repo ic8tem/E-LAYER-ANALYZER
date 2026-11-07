@@ -1,0 +1,57 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ELA.App"
+             RequestedThemeVariant="Dark">
+  <Application.Styles>
+    <FluentTheme />
+    <!-- Stile "Scia meteorica": bottoni arrotondati e linguette a pillola -->
+    <Style Selector="Window">
+      <Setter Property="Background" Value="#161230"/>
+      <Setter Property="Foreground" Value="#EEEBFA"/>
+    </Style>
+    <Style Selector="Button.pill">
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="12,4"/>
+      <Setter Property="Background" Value="#2B2160"/>
+      <Setter Property="Foreground" Value="#EEEBFA"/>
+      <Setter Property="BorderBrush" Value="#3A3270"/>
+      <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style Selector="Button.pill:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#3B2F86"/>
+      <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+    <Style Selector="Button.accent">
+      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Foreground" Value="#0E0B22"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#7DD3FC"/>
+      <Setter Property="Foreground" Value="#0E0B22"/>
+    </Style>
+    <Style Selector="ToggleButton.tab">
+      <Setter Property="CornerRadius" Value="14"/>
+      <Setter Property="Padding" Value="14,4"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#EEEBFA"/>
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="ToggleButton.tab:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#2B2160"/>
+      <Setter Property="Foreground" Value="#FFFFFF"/>
+    </Style>
+    <Style Selector="ToggleButton.tab:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="#38BDF8"/>
+      <Setter Property="Foreground" Value="#0E0B22"/>
+    </Style>
+    <Style Selector="ToggleButton.tab:checked">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style Selector="TextBlock.label">
+      <Setter Property="Foreground" Value="#B3ADD6"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="8,0,4,0"/>
+    </Style>
+  </Application.Styles>
+</Application>

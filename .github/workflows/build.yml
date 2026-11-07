@@ -1,0 +1,170 @@
+# E-LAYER ANALYZER - compilazione e installatori per Windows, Linux e Mac.
+# A ogni push sul ramo main: solo compilazione di controllo su Linux (i minuti Mac costano 10 volte, Windows 2 volte).
+# Con un push sul ramo release (o un tag vX.Y.Z, o avviandolo a mano): installatori per Windows, Linux e Mac;
+# con il ramo release o il tag crea anche la Release vX.Y.Z (versione letta dal file VERSION).
+name: build
+
+on:
+  push:
+    branches: [ main, release ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Versione
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
+          echo "VER=$V" >> $GITHUB_ENV
+      - name: Compila
+        run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r win-x64 --self-contained true -p:Version=${{ env.VER }} -p:DebugType=none -o publish/win-x64
+      - name: Installatore (Inno Setup)
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup --no-progress -y; }
+          & $iscc "/DAppVersion=${{ env.VER }}" "/DSourceDir=..\publish\win-x64" installer\E-LAYER-ANALYZER.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Zip portatile
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path publish\win-x64\* -DestinationPath dist\E-LAYER-ANALYZER-${{ env.VER }}-windows-x64-portatile.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/*
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Versione
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
+          echo "VER=$V" >> $GITHUB_ENV
+      - name: Compila
+        run: |
+          set -o pipefail
+          dotnet publish E-LAYER-ANALYZER.csproj -c Release -r linux-x64 --self-contained true -p:Version=$VER -p:DebugType=none -o publish/linux-x64 2>&1 | tee build.log
+      - name: Registro della compilazione sul ramo ci-log
+        if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p cilog && cp build.log cilog/ 2>/dev/null || echo "nessun registro" > cilog/build.log
+          grep -E "error|warning CS" build.log | sort -u > cilog/errori.txt || true
+          cd cilog
+          git init -q -b ci-log
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A && git commit -q -m "registro ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" ci-log
+      - name: Pacchetto
+        run: |
+          mkdir -p dist pkg
+          cp -R publish/linux-x64 pkg/E-LAYER-ANALYZER
+          cp installer/linux-install.sh pkg/E-LAYER-ANALYZER/installa.sh
+          cp src/Assets/ela-256.png pkg/E-LAYER-ANALYZER/ela.png
+          chmod +x pkg/E-LAYER-ANALYZER/installa.sh pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER
+          tar -C pkg -czf dist/E-LAYER-ANALYZER-$VER-linux-x64.tar.gz E-LAYER-ANALYZER
+      - name: Fotografie delle linguette (schermo virtuale)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb fonts-dejavu-core fonts-noto-cjk >/dev/null
+          cp -R publish/linux-x64 run
+          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots" --loc JN70CN || true
+          ls -la shots shots/ya-ms || true
+          cp run/data/errore_avvio.txt shots/ 2>/dev/null || true
+          ls run/data/mappa run/data/swpc > shots/dati.txt 2>&1 || true
+      - name: Pubblica le fotografie sul ramo ci-screenshots
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          [ -d shots ] || exit 0
+          cd shots
+          git init -q -b ci-screenshots
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A && git commit -q -m "fotografie ${GITHUB_SHA::7}"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: dist/*
+
+  macos:
+    runs-on: macos-latest
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release' || github.event_name == 'workflow_dispatch'
+    strategy:
+      matrix:
+        rid: [ osx-arm64, osx-x64 ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Versione
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
+          echo "VER=$V" >> $GITHUB_ENV
+      - name: Compila
+        run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Version=$VER -p:DebugType=none -o publish/${{ matrix.rid }}
+      - name: Pacchetto YA-MS.app e immagine disco
+        run: |
+          APP=pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER.app
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" dist
+          cp -R publish/${{ matrix.rid }}/. "$APP/Contents/MacOS/"
+          cp -R data "$APP/Contents/Resources/data"
+          cp src/Assets/ela.icns "$APP/Contents/Resources/"
+          sed "s/__VERSION__/$VER/g" installer/Info.plist > "$APP/Contents/Info.plist"
+          chmod +x "$APP/Contents/MacOS/E-LAYER-ANALYZER"
+          codesign --force --deep -s - "$APP"
+          cp "installer/macos-install.command" "pkg/E-LAYER-ANALYZER/Installa E-LAYER-ANALYZER.command"
+          chmod +x "pkg/E-LAYER-ANALYZER/Installa E-LAYER-ANALYZER.command"
+          cp LEGGIMI.txt pkg/E-LAYER-ANALYZER/
+          ARCH=$([ "${{ matrix.rid }}" = "osx-arm64" ] && echo "apple-silicon" || echo "intel")
+          hdiutil create -volname "E-LAYER ANALYZER" -srcfolder pkg/E-LAYER-ANALYZER -ov -format UDZO "dist/E-LAYER-ANALYZER-$VER-mac-$ARCH.dmg"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.rid }}
+          path: dist/*
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release'
+    needs: [ windows, linux, macos ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Versione
+        run: echo "VER=$(tr -d ' \r\n' < VERSION)" >> $GITHUB_ENV
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: E-LAYER ANALYZER ${{ env.VER }}
+          tag_name: v${{ env.VER }}
+          target_commitish: ${{ github.sha }}
+          body: |
+            E-LAYER ANALYZER - analisi dei modi di propagazione dello strato E (sporadico E, F.A.I., meteor scatter con YA-MS, aurora).
+            A cura di Costantino IC8TEM.
+
+            - Windows: E-LAYER-ANALYZER-...-windows-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure lo zip portatile.
+            - Linux: E-LAYER-ANALYZER-...-linux-x64.tar.gz, estrarre e lanciare ./installa.sh (installa in ~/E-LAYER-ANALYZER).
+            - Mac: E-LAYER-ANALYZER-...-mac-apple-silicon.dmg (M1/M2/M3/M4) o -mac-intel.dmg; aprire il .dmg, clic destro su "Installa E-LAYER-ANALYZER.command" > Apri.
+          files: dist/*
