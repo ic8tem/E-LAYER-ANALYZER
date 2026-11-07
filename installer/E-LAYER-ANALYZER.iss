@@ -1,7 +1,7 @@
 ; E-LAYER ANALYZER - installatore per Windows (Inno Setup 6)
 ; Installa nella cartella personale C:\E-LAYER-ANALYZER (programma e cartella data insieme), senza permessi di amministratore.
 #ifndef AppVersion
-  #define AppVersion "0.1.0"
+  #define AppVersion "0.2.0"
 #endif
 #ifndef SourceDir
   #define SourceDir "..\publish\win-x64"

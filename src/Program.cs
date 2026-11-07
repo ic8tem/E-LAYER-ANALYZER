@@ -7,7 +7,7 @@ namespace ELA
 {
     internal static class Program
     {
-        public static string ScreenshotDir, ScreenshotLoc;
+        public static string ScreenshotDir, ScreenshotLoc, ThemeArg;
 
         [STAThread]
         public static void Main(string[] args)
@@ -16,6 +16,7 @@ namespace ELA
             {
                 if (args[i] == "--screenshot") { ScreenshotDir = args[i + 1]; YAMS.Program.ScreenshotDir = args[i + 1]; }
                 if (args[i] == "--loc") ScreenshotLoc = args[i + 1];
+                if (args[i] == "--colori") ThemeArg = args[i + 1];
                 if (args[i] == "--lingua") YAMS.Program.ScreenshotLang = args[i + 1];
             }
             try

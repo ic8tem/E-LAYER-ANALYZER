@@ -12,27 +12,29 @@ namespace YAMS
 {
     public static class Pal
     {
-        public static readonly Color Back = Color.FromRgb(22, 18, 48);       // sfondo
-        public static readonly Color Panel = Color.FromRgb(28, 23, 64);      // riquadri
-        public static readonly Color Panel2 = Color.FromRgb(34, 28, 71);     // righe dei comandi
-        public static readonly Color Panel3 = Color.FromRgb(43, 33, 96);     // bottoni secondari, etichette a pillola
-        public static readonly Color Track = Color.FromRgb(14, 11, 34);      // fondo della barra delle linguette
-        public static readonly Color Border = Color.FromRgb(58, 50, 112);
-        public static readonly Color Fore = Color.FromRgb(238, 235, 250);
-        public static readonly Color Muted = Color.FromRgb(179, 173, 214);
-        public static readonly Color Azure = Color.FromRgb(56, 189, 248);
-        public static readonly Color AzureDark = Color.FromRgb(11, 34, 51);
-        public static readonly Color Violet = Color.FromRgb(167, 139, 250);
-        public static readonly Color Green = Color.FromRgb(134, 239, 172);
-        public static readonly Color Yellow = Color.FromRgb(253, 224, 71);
-        public static readonly Color Orange = Color.FromRgb(251, 146, 60);
-        public static readonly Color OrangeDark = Color.FromRgb(58, 35, 18);
-        public static readonly Color OrangeText = Color.FromRgb(254, 215, 170);
-        public static readonly Color Pink = Color.FromRgb(240, 171, 252);
-        public static readonly Color Red = Color.FromRgb(248, 113, 113);
-        public static readonly Color HotPink = Color.FromRgb(240, 120, 240);     // Hot fuori dal lobo
-        public static readonly Color HotGrey = Color.FromRgb(150, 150, 150);     // Hot dentro il lobo
-        public static readonly Color Silver = Color.FromRgb(192, 192, 192);
+        public static Color Back = Color.FromRgb(22, 18, 48);       // sfondo
+        public static Color Panel = Color.FromRgb(28, 23, 64);      // riquadri
+        public static Color Panel2 = Color.FromRgb(34, 28, 71);     // righe dei comandi
+        public static Color Panel3 = Color.FromRgb(43, 33, 96);     // bottoni secondari, etichette a pillola
+        public static Color Track = Color.FromRgb(14, 11, 34);      // fondo della barra delle linguette
+        public static Color Border = Color.FromRgb(58, 50, 112);
+        public static Color Fore = Color.FromRgb(238, 235, 250);
+        public static Color Muted = Color.FromRgb(179, 173, 214);
+        public static Color Azure = Color.FromRgb(56, 189, 248);
+        public static Color AzureDark = Color.FromRgb(11, 34, 51);
+        public static Color Violet = Color.FromRgb(167, 139, 250);
+        public static Color Green = Color.FromRgb(134, 239, 172);
+        public static Color Yellow = Color.FromRgb(253, 224, 71);
+        public static Color Orange = Color.FromRgb(251, 146, 60);
+        public static Color OrangeDark = Color.FromRgb(58, 35, 18);
+        public static Color OrangeText = Color.FromRgb(254, 215, 170);
+        public static Color Pink = Color.FromRgb(240, 171, 252);
+        public static Color Red = Color.FromRgb(248, 113, 113);
+        public static Color HotPink = Color.FromRgb(240, 120, 240);     // Hot fuori dal lobo
+        public static Color HotGrey = Color.FromRgb(150, 150, 150);     // Hot dentro il lobo
+        public static Color Silver = Color.FromRgb(192, 192, 192);
+        public static bool Light;   // schema chiaro (E-LAYER ANALYZER: colorazioni di YAEC)
+        public static Color ChartText = Color.FromRgb(220, 220, 220);   // scritte dei grafici
 
         public static Color A(int alpha, Color c) { return Color.FromArgb((byte)alpha, c.R, c.G, c.B); }
         public static Color Rgb(int r, int g, int b) { return Color.FromRgb((byte)r, (byte)g, (byte)b); }

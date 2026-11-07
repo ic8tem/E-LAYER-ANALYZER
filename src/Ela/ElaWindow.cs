@@ -20,14 +20,15 @@ namespace ELA
     public class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.1.0";
+        public const string Version = "0.2.0";
 
         readonly PillTabs tabs = new PillTabs(true);
         readonly TextBox txtCall, txtLoc;
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; ScatterTab fai, au; DataTab dc;
+        EsTab es; ScatterTab fai, au; DataTab dc; LogTab log;
+        readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
         static bool startedOnce;
@@ -63,9 +64,22 @@ namespace ELA
                 string code = Lang.Languages[li][0];
                 Dispatcher.UIThread.Post(() => SwitchLanguage(code));
             };
+            cmbTheme = new ComboBox { MinWidth = 170, Margin = new Thickness(6, 1, 0, 1), VerticalAlignment = VerticalAlignment.Center };
+            List<string> tn = new List<string>();
+            foreach (string t in Themes.Names) tn.Add(Lang.T(t));
+            cmbTheme.ItemsSource = tn;
+            cmbTheme.SelectedIndex = Themes.Current;
+            ToolTip.SetTip(cmbTheme, Lang.T("Colorazione dell'interfaccia (YA-MS e YAEC): il programma si riavvia"));
+            cmbTheme.SelectionChanged += (s, e) =>
+            {
+                if (cmbTheme.SelectedIndex < 0 || cmbTheme.SelectedIndex == Themes.Current) return;
+                int ti = cmbTheme.SelectedIndex;
+                Dispatcher.UIThread.Post(() => Restart(ti));
+            };
             TextBlock brand = new TextBlock { Text = "E-LAYER ANALYZER", Foreground = Pal.B(Pal.Azure), FontWeight = FontWeight.Bold, FontSize = 17, Margin = new Thickness(6, 0, 14, 0), VerticalAlignment = VerticalAlignment.Center };
             DockPanel top = new DockPanel();
             DockPanel.SetDock(cmbLang, Dock.Right); top.Children.Add(cmbLang);
+            DockPanel.SetDock(cmbTheme, Dock.Right); top.Children.Add(cmbTheme);
             DockPanel.SetDock(lblClock, Dock.Right); top.Children.Add(lblClock);
             top.Children.Add(Ui.Row(brand, Ui.L(Lang.T("Nominativo")), txtCall, Ui.L(Lang.T("Locator")), txtLoc, Ui.L(Lang.T("Quota m")), numAlt, bApply));
             Border topB = new Border { Background = Pal.B(Pal.Panel2), Child = top };
@@ -77,11 +91,13 @@ namespace ELA
             ms = new YAMS.MainWindow();
             au = new ScatterTab(true);
             dc = new DataTab();
+            log = new LogTab();
             tabs.Add("SPORADIC-E", es.Root);
             tabs.Add("F.A.I.", fai.Root);
             tabs.Add("METEOR SCATTER", ms);
             tabs.Add("AURORA", au.Root);
             tabs.Add("DATA COLLECTION", dc.Root);
+            tabs.Add("LOG ADIF", log.Root);
             tabs.Add(Lang.T("FONTI"), DocTab.Build(Path.Combine(dataDir, "ela_fonti.txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
             tabs.Add(Lang.T("DOCUMENTO TECNICO"), DocTab.Build(Path.Combine(dataDir, "ela_documento_tecnico.txt"), Path.Combine(dataDir, "ela_documento_tecnico.docx"),
                 "E-LAYER ANALYZER - documento tecnico.docx", Lang.T("Come il programma calcola: formule e fonti a ogni passo")));
@@ -90,6 +106,7 @@ namespace ELA
                 if (i == 0) es.Refresh();
                 else if (i == 1) fai.Recalc();
                 else if (i == 3) au.Recalc();
+                else if (i == 5) log.Refresh();
             };
             int sel = (int)Station.Cfg.GetD("linguetta", 0);
 
@@ -131,7 +148,8 @@ namespace ELA
             try
             {
                 Station.Cfg.Set("linguetta", Math.Max(0, tabs.Selected));
-                es.Save(); fai.Save(); au.Save(); dc.Save();
+                es.Save(); fai.Save(); au.Save(); dc.Save(); log.Save();
+                Station.Cfg.Set("schema_colori", Themes.Keys[Themes.Current]);
                 Station.Set(Ui.Up(txtCall), Ui.Up(txtLoc), Ui.V(numAlt), false);
                 Station.Save();
             }
@@ -150,6 +168,8 @@ namespace ELA
                 SpotStore.LoadRecent();
                 CallDb.StartLoad(dataDir);
                 SpaceWeather.LoadCached(dataDir);
+                LogStore.Init(dataDir);
+                LogTab.StartReload();
                 StartMapLoad(dataDir);
             }
             if (Program.ScreenshotDir == null) dc.ConnectSaved();
@@ -171,6 +191,23 @@ namespace ELA
                 catch { }
                 MapView.NotifyMapLoaded();
             });
+        }
+
+        // Cambio di colorazione: salva e riavvia il programma (i colori valgono dall'avvio)
+        void Restart(int theme)
+        {
+            try
+            {
+                Themes.Current = theme;
+                SaveAll();
+                ms.Shutdown(true); dc.Shutdown();
+                replaced = true;
+                string exe = Environment.ProcessPath;
+                if (!string.IsNullOrEmpty(exe)) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(exe) { UseShellExecute = false, WorkingDirectory = AppPaths.AppDir });
+                if (Application.Current != null && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) desktop.Shutdown();
+                else Close();
+            }
+            catch (Exception ex) { replaced = false; status.Text = ex.Message; }
         }
 
         // Cambio di lingua: salva tutto e ricostruisce la finestra (anche il pannello YA-MS)
@@ -209,9 +246,20 @@ namespace ELA
                 for (int k = 0; k < 60 && (MapView.Coast == null || MapView.Coast.Count == 0); k++) await Task.Delay(1000);
                 for (int k = 0; k < 30 && CallDb.Loading; k++) await Task.Delay(1000);
                 EsTab.AddDemoSpots();
+                // log di prova per la linguetta LOG ADIF
+                string demo = Path.Combine(LogStore.Dir, "prova.adi");
+                File.WriteAllText(demo, "<eoh>\n" +
+                    "<call:5>EA8DO<band:2>6m<mode:3>FT8<qso_date:8>20250612<time_on:4>1012<gridsquare:6>IL18QI<prop_mode:2>ES<lotw_qsl_rcvd:1>Y<eor>\n" +
+                    "<call:6>F5XYZ1<band:2>2m<mode:2>CW<qso_date:8>20240620<time_on:4>1930<gridsquare:4>JN18<prop_mode:3>FAI<qsl_rcvd:1>Y<eor>\n" +
+                    "<call:5>G4LOH<band:2>2m<mode:3>SSB<qso_date:8>20230615<time_on:4>2012<gridsquare:6>IO70JC<prop_mode:3>FAI<eor>\n" +
+                    "<call:5>SV1DH<band:2>4m<mode:3>FT8<qso_date:8>20250701<time_on:4>1100<gridsquare:4>KM17<prop_mode:2>ES<lotw_qsl_rcvd:1>Y<eor>\n" +
+                    "<call:4>W1JJ<band:2>6m<mode:3>FT8<qso_date:8>20250618<time_on:4>1730<gridsquare:4>FN42<prop_mode:2>ES<eor>\n" +
+                    "<call:5>OH5IY<band:2>2m<mode:6>MSK144<qso_date:8>20251213<time_on:4>0230<gridsquare:4>KP30<prop_mode:2>MS<lotw_qsl_rcvd:1>Y<eor>\n");
+                lock (LogStore.Files) if (!LogStore.Files.Contains(demo)) LogStore.Files.Add(demo);
+                LogTab.StartReload();
                 au.StartFetch();
                 await Task.Delay(8000);
-                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_fonti", "7_documento_tecnico" };
+                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico" };
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     tabs.Select(i);

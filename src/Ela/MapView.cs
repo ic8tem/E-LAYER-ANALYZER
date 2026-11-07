@@ -13,7 +13,7 @@ namespace ELA
 {
     public class MapCell { public double Lat0, Lon0, DLat, DLon; public Color Fill; public string Tip; }
     public class MapLine { public List<Point> Pts = new List<Point>(); public Color Color; public double Width = 1.5; public bool Dashed; }   // Point(X=lon, Y=lat)
-    public class MapMarker { public double Lat, Lon, Radius = 4; public Color Fill, Stroke = Colors.Black; public string Label; public bool Square, Ring; public Color LabelColor = Colors.White; }
+    public class MapMarker { public double Lat, Lon, Radius = 4; public Color Fill, Stroke = Colors.Black; public string Label; public bool Square, Ring; public Color LabelColor = Pal.Fore; }
 
     public class MapView : Control
     {
@@ -37,10 +37,11 @@ namespace ELA
         Point? dragStart; double dragLon0, dragLat0; bool dragged;
         Point hover = new Point(-1, -1);
 
-        static readonly Color Sea = Color.FromRgb(13, 16, 44);
-        static readonly Color Land = Color.FromRgb(126, 116, 190);
-        static readonly Color Border = Color.FromRgb(70, 62, 120);
-        static readonly Color GridC = Color.FromArgb(70, 120, 110, 190);
+        static Color Sea { get { return Themes.MapSea; } }
+        static Color Land { get { return Themes.MapLand; } }
+        static Color Border { get { return Themes.MapBorder; } }
+        static Color GridC { get { return Themes.MapGrid; } }
+        static Color Ov { get { return Themes.Overlay; } }
 
         public MapView()
         {
@@ -191,7 +192,7 @@ namespace ELA
             {
                 IPen gp = Pal.P(GridC, 1.2);
                 bool squares = p * 2 > 26;
-                IPen sp = Pal.P(Color.FromArgb(55, 150, 140, 210), 0.7);
+                IPen sp = Pal.P(Themes.MapGrid, 0.7);
                 double lonL, latT, lonR, latB;
                 ToLatLon(new Point(0, 0), out latT, out lonL); ToLatLon(new Point(W, H), out latB, out lonR);
                 if (squares)
@@ -205,7 +206,7 @@ namespace ELA
                                 string loc = Geo.LatLonToLoc(lat + 0.5, lon + 1, 4);
                                 Point c = ToScreen(lat + 0.5, lon + 1);
                                 if (c.X < 0 || c.X > W || c.Y < 0 || c.Y > H) continue;
-                                FormattedText t = Ft(loc.Substring(2, 2), 8.5, Color.FromArgb(110, 170, 165, 230));
+                                FormattedText t = Ft(loc.Substring(2, 2), 8.5, Themes.MapSquare);
                                 ctx.DrawText(t, new Point(c.X - t.Width / 2, c.Y - t.Height / 2));
                             }
                 }
@@ -217,7 +218,7 @@ namespace ELA
                     {
                         Point c = ToScreen(-90 + fy * 10 + 5, -180 + fx * 20 + 10);
                         if (c.X < -60 || c.X > W + 60 || c.Y < -60 || c.Y > H + 60) continue;
-                        FormattedText t = Ft("" + (char)('A' + fx) + (char)('A' + fy), fs, Color.FromArgb(70, 90, 230, 250), FontWeight.Bold);
+                        FormattedText t = Ft("" + (char)('A' + fx) + (char)('A' + fy), fs, Themes.MapField, FontWeight.Bold);
                         ctx.DrawText(t, new Point(c.X - t.Width / 2, c.Y - t.Height / 2));
                     }
             }
@@ -261,7 +262,7 @@ namespace ELA
                 {
                     FormattedText t = Ft(m.Label, 11, m.LabelColor, FontWeight.SemiBold);
                     Rect tr = new Rect(c.X + r + 3, c.Y - t.Height / 2, t.Width + 4, t.Height);
-                    ctx.FillRectangle(Pal.B(Color.FromArgb(150, 10, 8, 30)), tr);
+                    ctx.FillRectangle(Pal.B(Ov), tr);
                     ctx.DrawText(t, new Point(tr.X + 2, tr.Y));
                 }
             }
@@ -272,7 +273,7 @@ namespace ELA
             {
                 FormattedText t = Ft(Legend[i].Key, 11.5, Pal.Fore);
                 y -= t.Height + 3;
-                ctx.FillRectangle(Pal.B(Color.FromArgb(190, 14, 11, 34)), new Rect(6, y - 1, t.Width + 30, t.Height + 2));
+                ctx.FillRectangle(Pal.B(Ov), new Rect(6, y - 1, t.Width + 30, t.Height + 2));
                 ctx.FillRectangle(Pal.B(Legend[i].Value), new Rect(10, y + t.Height / 2 - 5, 12, 10));
                 ctx.DrawText(t, new Point(28, y));
             }
@@ -280,21 +281,21 @@ namespace ELA
             {
                 FormattedText t = Ft(LegendTitle, 11.5, Pal.Yellow, FontWeight.SemiBold);
                 y -= t.Height + 3;
-                ctx.FillRectangle(Pal.B(Color.FromArgb(190, 14, 11, 34)), new Rect(6, y - 1, t.Width + 12, t.Height + 2));
+                ctx.FillRectangle(Pal.B(Ov), new Rect(6, y - 1, t.Width + 12, t.Height + 2));
                 ctx.DrawText(t, new Point(10, y));
             }
             double iy = string.IsNullOrEmpty(Caption) ? 8 : 34;
             foreach (string line in Info)
             {
                 FormattedText t = Ft(line, 16, Pal.Fore, FontWeight.SemiBold);
-                ctx.FillRectangle(Pal.B(Color.FromArgb(170, 14, 11, 34)), new Rect(6, iy - 2, t.Width + 12, t.Height + 4));
+                ctx.FillRectangle(Pal.B(Ov), new Rect(6, iy - 2, t.Width + 12, t.Height + 4));
                 ctx.DrawText(t, new Point(12, iy));
                 iy += t.Height + 4;
             }
             if (!string.IsNullOrEmpty(Caption))
             {
                 FormattedText t = Ft(Caption, 12, Pal.Yellow, FontWeight.SemiBold);
-                ctx.FillRectangle(Pal.B(Color.FromArgb(190, 14, 11, 34)), new Rect(6, 6, t.Width + 12, t.Height + 6));
+                ctx.FillRectangle(Pal.B(Ov), new Rect(6, 6, t.Width + 12, t.Height + 6));
                 ctx.DrawText(t, new Point(12, 9));
             }
 
@@ -304,7 +305,7 @@ namespace ELA
                 double la, lo; ToLatLon(hover, out la, out lo);
                 string s = la.ToString("F2", CultureInfo.CurrentCulture) + "°  " + lo.ToString("F2", CultureInfo.CurrentCulture) + "°  " + Geo.LatLonToLoc(la, lo, 6);
                 FormattedText t = Ft(s, 12, Pal.Azure, FontWeight.SemiBold);
-                ctx.FillRectangle(Pal.B(Color.FromArgb(200, 14, 11, 34)), new Rect(W - t.Width - 18, 6, t.Width + 12, t.Height + 6));
+                ctx.FillRectangle(Pal.B(Ov), new Rect(W - t.Width - 18, 6, t.Width + 12, t.Height + 6));
                 ctx.DrawText(t, new Point(W - t.Width - 12, 9));
             }
             if (Coast == null || Coast.Count == 0)

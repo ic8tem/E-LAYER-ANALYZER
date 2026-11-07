@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 using YAMS;
 
 namespace ELA
@@ -10,6 +11,13 @@ namespace ELA
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+            // colorazione scelta (data/ela.ini, chiave schema_colori), applicata prima di costruire le finestre
+            string key = "scia";
+            try { key = new Config(System.IO.Path.Combine(AppPaths.DataDir, "ela.ini")).Get("schema_colori", "scia"); } catch { }
+            if (Program.ThemeArg != null) key = Program.ThemeArg;
+            Themes.Apply(Themes.IndexOf(key));
+            Themes.FillResources(Resources);
+            RequestedThemeVariant = Pal.Light ? ThemeVariant.Light : ThemeVariant.Dark;
         }
 
         public override void OnFrameworkInitializationCompleted()

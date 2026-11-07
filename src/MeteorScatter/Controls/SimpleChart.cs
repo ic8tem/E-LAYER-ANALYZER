@@ -38,7 +38,7 @@ namespace YAMS
         public double YMaxFixed = 0, Y2MaxFixed = 0;
         public int MarkIndex = -1;   // linea verticale (es. ora attuale)
 
-        static readonly Color Gainsboro = Color.FromRgb(220, 220, 220);
+        static Color Gainsboro { get { return Pal.ChartText; } }
         const double F8 = 10.7, F10 = 13.3;
 
         public SimpleChart()

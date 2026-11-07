@@ -4,52 +4,52 @@
              RequestedThemeVariant="Dark">
   <Application.Styles>
     <FluentTheme />
-    <!-- Stile "Scia meteorica": bottoni arrotondati e linguette a pillola -->
+    <!-- Stile "Scia meteorica" di YA-MS; i colori vengono dallo schema scelto (Themes.cs, colorazioni di YAEC) -->
     <Style Selector="Window">
-      <Setter Property="Background" Value="#161230"/>
-      <Setter Property="Foreground" Value="#EEEBFA"/>
+      <Setter Property="Background" Value="{DynamicResource ElaBack}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
     </Style>
     <Style Selector="Button.pill">
       <Setter Property="CornerRadius" Value="14"/>
       <Setter Property="Padding" Value="12,4"/>
-      <Setter Property="Background" Value="#2B2160"/>
-      <Setter Property="Foreground" Value="#EEEBFA"/>
-      <Setter Property="BorderBrush" Value="#3A3270"/>
+      <Setter Property="Background" Value="{DynamicResource ElaPill}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ElaPillBorder}"/>
       <Setter Property="BorderThickness" Value="1"/>
     </Style>
     <Style Selector="Button.pill:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="#3B2F86"/>
-      <Setter Property="Foreground" Value="#FFFFFF"/>
+      <Setter Property="Background" Value="{DynamicResource ElaPillOver}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
     </Style>
     <Style Selector="Button.accent">
-      <Setter Property="Background" Value="#38BDF8"/>
-      <Setter Property="Foreground" Value="#0E0B22"/>
+      <Setter Property="Background" Value="{DynamicResource ElaAccent}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="Button.accent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="#7DD3FC"/>
-      <Setter Property="Foreground" Value="#0E0B22"/>
+      <Setter Property="Background" Value="{DynamicResource ElaAccentOver}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab">
       <Setter Property="CornerRadius" Value="14"/>
       <Setter Property="Padding" Value="14,4"/>
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#EEEBFA"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
       <Setter Property="BorderThickness" Value="0"/>
     </Style>
     <Style Selector="ToggleButton.tab:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="#2B2160"/>
-      <Setter Property="Foreground" Value="#FFFFFF"/>
+      <Setter Property="Background" Value="{DynamicResource ElaPill}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab:checked /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="#38BDF8"/>
-      <Setter Property="Foreground" Value="#0E0B22"/>
+      <Setter Property="Background" Value="{DynamicResource ElaAccent}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaAccentFore}"/>
     </Style>
     <Style Selector="ToggleButton.tab:checked">
       <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
     <Style Selector="TextBlock.label">
-      <Setter Property="Foreground" Value="#B3ADD6"/>
+      <Setter Property="Foreground" Value="{DynamicResource ElaMuted}"/>
       <Setter Property="VerticalAlignment" Value="Center"/>
       <Setter Property="Margin" Value="8,0,4,0"/>
     </Style>

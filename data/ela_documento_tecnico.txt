@@ -35,6 +35,9 @@ TAG|SCELTA|I punti di riflessione (punto medio per il singolo salto, primi salti
 P|Per la propria stazione il programma calcola la MUF attraverso ogni nube posta a distanza d, con un salto di lunghezza 2d, solo se la nube è nella portata del singolo salto:
 EQ|MUF_mia = foEs_nube · sec φ(2d)
 TAG|SCELTA|Tabella "Nubi Es": in rosso le nubi che darebbero MUF ≥ 144 MHz, in arancio ≥ 70 MHz, in giallo ≥ 50 MHz.
+H2|3.4 Lo sporadico E non si applica ai 432 MHz
+TAG|FONTE|La MUF dello sporadico E alle medie latitudini arriva a 150 MHz e oltre (Whitehead [23]); servono nubi molto dense per deviare raggi radenti fino a 200 MHz (IK3XTV [22]). I record ARRL [24] riportano collegamenti in sporadico E solo su 50 e 144 MHz, nessuno su 222 e 432 MHz.
+TAG|SCELTA|Per questo la linguetta SPORADIC-E analizza solo 28, 50, 70 e 144 MHz: gli spot in 432 MHz non vengono mai trattati come sporadico E (alcune fonti generiche, anche prodotte da intelligenze artificiali, lo affermano senza documentazione).
 H1|4. F.A.I. e aurora: scatter allineato al campo magnetico
 H2|4.1 Il campo magnetico
 TAG|FONTE|Il campo è calcolato con il modello IGRF-14 [16] (armoniche sferiche fino al grado 13, coefficienti 2025-2030 interpolati alla data). SE-PROP di K9SE [9] usava allo stesso modo un modello a armoniche sferiche (WMM).
@@ -61,7 +64,12 @@ TAG|SCELTA|Tre sessioni: cluster a scelta, Reverse Beacon Network (7000 CW/RTTY,
 H2|5.2 Lettura degli spot
 TAG|SCELTA|Riga "DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" letta con un'espressione regolare (non a colonne fisse). Dal commento si leggono locator e modo nella forma "JN70CN<ES>JO62QM" (primo locator = spotter, secondo = DX), il modo di propagazione (ES, FAI, AU, MS, TR, EME, F2, TEP), il rapporto S/N e il modo di emissione. I locator mancanti si cercano in CALL3 [21]; quelli a 6 caratteri letti nei commenti si aggiungono a data/call3_nuovi.txt.
 TAG|SCELTA|Archivio: un file CSV al giorno in data/spot; in memoria gli ultimi spot (al massimo 50000). Con RBN e PSKReporter si salvano di norma solo gli spot da 28 MHz in su.
-H1|6. Limiti
+H1|6. Log ADIF
+TAG|FONTE|Porting di LoTW Grid Map v2 [25]: il report LoTW (scaricato con nome utente e password, che non viene mai salvata) e i file ADIF del log si uniscono per nominativo, banda, data e ora; le conferme si sommano.
+TAG|SCELTA|Solo le bande dai 28 MHz in su, ognuna come banda singola, senza aggregazioni. Colori: arancione = lavorato, blu = confermato con QSL, verde = confermato via LoTW. Filtro sul modo di propagazione (PROP_MODE dell'ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
+H1|7. Colorazioni
+TAG|FONTE|Oltre alla "Scia meteorica" di YA-MS, il programma offre tutti gli schemi di YAEC [26]: chiaro, notte blu, nero e otto pastelli. Lo schema si sceglie in alto a destra e il programma si riavvia.
+H1|8. Limiti
 LI|Stazioni al centro del quadrato del locator: con locator a 4 caratteri l'errore arriva a ~80 km.
 LI|La foEs dagli spot è una soglia minima e la legge della secante sovrastima la foEs necessaria in VHF (vedi 2.3).
 LI|Lo scatter point "più probabile" è un criterio del programma: la scia intera è il risultato fisico.
