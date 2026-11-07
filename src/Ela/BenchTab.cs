@@ -255,11 +255,14 @@ namespace ELA
                     if (chkProp.IsChecked == true && prop.Length > 0 && prop != "ES" && Array.IndexOf(OtherProp, prop) >= 0) { otherProp++; continue; }
                     string grid = Field(r, "GRIDSQUARE");
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
+                    grid = CallDb.Refine(Field(r, "CALL"), grid) ?? grid;   // locator non preciso: da CALL3 (stesso quadrato)
+                    if (grid.Length > 6) grid = grid.Substring(0, 6);
                     double la, lo;
                     if (grid.Length < 4 || !Geo.IsLocator(grid.Substring(0, 4)) || !Geo.LocToLatLon(grid, out la, out lo)) { noGrid++; continue; }
                     BenchQso q = new BenchQso { Call = Field(r, "CALL"), Grid = grid, Band = band, Mode = Field(r, "MODE"), Prop = prop, LatRx = la, LonRx = lo };
                     q.MyGrid = Field(r, "MY_GRIDSQUARE"); if (q.MyGrid.Length > 6) q.MyGrid = q.MyGrid.Substring(0, 6);
                     q.MyCall = Field(r, "STATION_CALLSIGN"); if (q.MyCall.Length == 0) q.MyCall = Field(r, "OPERATOR"); if (q.MyCall.Length == 0) q.MyCall = Ui.Up(txtCall);
+                    if (q.MyGrid.Length >= 4 && q.MyGrid.Length < 6) { q.MyGrid = CallDb.Refine(q.MyCall, q.MyGrid) ?? q.MyGrid; if (q.MyGrid.Length > 6) q.MyGrid = q.MyGrid.Substring(0, 6); }
                     double mla, mlo;
                     if (q.MyGrid.Length >= 4 && Geo.LocToLatLon(q.MyGrid, out mla, out mlo)) { q.LatTx = mla; q.LonTx = mlo; }
                     else { q.LatTx = cLat; q.LonTx = cLon; q.MyGrid = Ui.Up(txtLoc); }

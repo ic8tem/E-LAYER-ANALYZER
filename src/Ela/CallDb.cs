@@ -121,6 +121,20 @@ namespace ELA
         }
 
         // Locator imparato da uno spot (solo 6 caratteri, per non peggiorare un dato piu' preciso)
+        // Regola dell'autore: i locator non precisi (meno di 6 caratteri) si prendono da CALL3. Se CALL3 ha per quel
+        // nominativo un locator a 6 o piu' caratteri nello stesso quadrato (o campo, per un locator a 2) si usa quello;
+        // se CALL3 indica un altro quadrato (stazione portatile o spostata) resta il locator dello spot.
+        public static string Refine(string call, string loc)
+        {
+            if (loc == null) return null;
+            loc = loc.Trim().ToUpperInvariant();
+            if (!Geo.IsLocator(loc) || loc.Length >= 6) return loc;
+            string c = Lookup(call);
+            if (c == null || c.Length < 6) return loc;
+            c = c.ToUpperInvariant();
+            return c.StartsWith(loc, StringComparison.Ordinal) ? c : loc;
+        }
+
         public static void Learn(string call, string loc)
         {
             if (string.IsNullOrEmpty(call) || !Geo.IsLocator(loc) || loc.Length < 6) return;

@@ -152,9 +152,9 @@ namespace ELA
         public static void Locate(Spot s)
         {
             if (!Geo.IsLocator(s.LocSpotter)) { string l = CallDb.Lookup(s.Spotter); s.LocSpotter = l ?? ""; }
-            else if (s.LocFromComment) CallDb.Learn(s.Spotter, s.LocSpotter);
+            else { if (s.LocFromComment) CallDb.Learn(s.Spotter, s.LocSpotter); s.LocSpotter = CallDb.Refine(s.Spotter, s.LocSpotter); }   // locator non preciso: da CALL3
             if (!Geo.IsLocator(s.LocDx)) { string l = CallDb.Lookup(s.DxCall); s.LocDx = l ?? ""; }
-            else if (s.LocFromComment) CallDb.Learn(s.DxCall, s.LocDx);
+            else { if (s.LocFromComment) CallDb.Learn(s.DxCall, s.LocDx); s.LocDx = CallDb.Refine(s.DxCall, s.LocDx); }
             double la, lo;
             if (Geo.LocToLatLon(s.LocSpotter, out la, out lo)) { s.LatS = la; s.LonS = lo; } else { s.LatS = s.LonS = double.NaN; }
             if (Geo.LocToLatLon(s.LocDx, out la, out lo)) { s.LatD = la; s.LonD = lo; } else { s.LatD = s.LonD = double.NaN; }
