@@ -91,6 +91,7 @@ TAG|SCELTA|보관: data/spot에 하루 하나의 CSV 파일; 메모리에는 최
 TAG|FONTE|작성자 규칙 (IC8TEM): 프로그램을 닫을 때마다 스팟 데이터베이스는 메모리와 data/spot의 파일 모두에서 비워집니다; 각 세션은 이전 스팟 없이 새로 시작됩니다.
 TAG|SCELTA|선택적 로컬 필터(DATA COLLECTION의 체크박스, 작성자 요청): 주파수가 27990.0 kHz 미만인 "DX de" 줄은 버려지며, 콘솔에 나타나지 않고 저장되지 않습니다.
 TAG|FONTE|여기에도 적용되는 YA-MS 규칙: 명확한 MS 모드(MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M)를 사용하거나 텍스트에 <MS>가 있는(대소문자 구분 없음) 스팟은 스포라딕 E가 아니라 유성 산란 스팟입니다.
+TAG|FONTE|작성자 규칙(IC8TEM): 정확하지 않은 로케이터(6자 미만)는 CALL3에서 가져옵니다. CALL3의 로케이터가 스폿(BENCHMARK Es에서는 로그)의 로케이터와 같은 사각형에 있으면 프로그램은 CALL3의 로케이터를 사용합니다. CALL3이 다른 사각형을 가리키면(이동 운용 또는 이전한 국) 스폿의 로케이터를 유지합니다.
 H1|6. Log ADIF
 TAG|FONTE|LoTW Grid Map v2 [25]의 이식: LoTW 리포트(사용자 이름과 비밀번호로 다운로드하며 비밀번호는 저장하지 않음)와 로그의 ADIF 파일을 호출부호, 밴드, 날짜, 시각으로 결합하고 확인 정보를 합칩니다.
 TAG|SCELTA|28 MHz 이상의 밴드만, 각각 개별 밴드로 표시하며 묶지 않습니다. 색: 주황 = 교신함, 파랑 = QSL로 확인, 초록 = LoTW로 확인. 전파 모드 필터 (ADIF의 PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).

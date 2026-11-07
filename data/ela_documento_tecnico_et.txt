@@ -91,6 +91,7 @@ TAG|SCELTA|Arhiiv: üks CSV-fail päevas kaustas data/spot; mälus viimased spot
 TAG|FONTE|Autori reegel (IC8TEM): iga kord, kui programm suletakse, tühjendatakse spottide andmebaas nii mälus kui ka kausta data/spot failides; iga seanss algab uuesti ilma vanade spottideta.
 TAG|SCELTA|Valikuline kohalik filter (märkeruut jaotises DATA COLLECTION, autori soovil): "DX de" read, mille sagedus on alla 27990,0 kHz, jäetakse kõrvale, neid ei kuvata konsoolis ega salvestata.
 TAG|FONTE|YA-MS reegel, mida rakendatakse ka siin: spotid on meteoorhajumine, mitte sporaadiline E, kui nad kasutavad üheselt MS-režiime (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) või tekstis on <MS>, suur- ja väiketähti eristamata.
+TAG|FONTE|Autori reegel (IC8TEM): ebatäpsed lokaatorid (alla 6 märgi) võetakse CALL3-st. Programm kasutab CALL3 lokaatorit, kui see jääb samasse ruutu kui spoti (või BENCHMARK Es puhul logi) lokaator; kui CALL3 näitab teist ruutu (portatiivne või ümberpaigutatud jaam), jääb alles spoti lokaator.
 H1|6. Log ADIF
 TAG|FONTE|LoTW Grid Map v2 [25] port: LoTW aruanne (alla laaditud kasutajanime ja parooliga, mida kunagi ei salvestata) ja logi ADIF-failid ühendatakse kutsungi, sagedusala, kuupäeva ja kellaaja järgi; kinnitused liidetakse.
 TAG|SCELTA|Ainult sagedusalad alates 28 MHz-st, igaüks eraldi sagedusalana, ilma koondamiseta. Värvid: oranž = töötatud, sinine = kinnitatud QSL-iga, roheline = kinnitatud LoTW kaudu. Filter leviviisi järgi (ADIF-i PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).

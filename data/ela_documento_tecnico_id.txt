@@ -91,6 +91,7 @@ TAG|SCELTA|Arsip: satu file CSV per hari di data/spot; di memori disimpan spot t
 TAG|FONTE|Aturan penulis (IC8TEM): setiap kali program ditutup, basis data spot dikosongkan, baik di memori maupun di file dalam data/spot; setiap sesi dimulai lagi tanpa spot lama.
 TAG|SCELTA|Filter lokal opsional (kotak centang di DATA COLLECTION, atas permintaan penulis): baris "DX de" dengan frekuensi di bawah 27990,0 kHz dibuang, tidak muncul di konsol dan tidak disimpan.
 TAG|FONTE|Aturan YA-MS yang juga diterapkan di sini: spot adalah meteor scatter, bukan sporadic-E, bila memakai mode yang jelas MS (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) atau memuat <MS> dalam teks, tanpa membedakan huruf besar dan kecil.
+TAG|FONTE|Aturan penulis (IC8TEM): locator yang tidak presisi (kurang dari 6 karakter) diambil dari CALL3. Program memakai locator dari CALL3 bila jatuh di kotak yang sama dengan locator spot (atau log, dalam BENCHMARK Es); jika CALL3 menunjukkan kotak yang berbeda (stasiun portabel atau pindah), locator spot tetap dipakai.
 H1|6. Log ADIF
 TAG|FONTE|Porting dari LoTW Grid Map v2 [25]: laporan LoTW (diunduh dengan nama pengguna dan kata sandi, yang tidak pernah disimpan) dan file ADIF log digabungkan berdasarkan callsign, band, tanggal dan jam; konfirmasi dijumlahkan.
 TAG|SCELTA|Hanya band dari 28 MHz ke atas, masing-masing sebagai band tunggal, tanpa penggabungan. Warna: oranye = dikerjakan, biru = terkonfirmasi dengan QSL, hijau = terkonfirmasi via LoTW. Filter mode propagasi (PROP_MODE di ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).

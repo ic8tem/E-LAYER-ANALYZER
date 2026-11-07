@@ -91,6 +91,7 @@ TAG|SCELTA|Arkiv: én CSV-fil per dag i data/spot; i minnet de siste spotene (h�
 TAG|FONTE|Forfatterens regel (IC8TEM): hver gang programmet lukkes, tømmes spotdatabasen, både i minnet og i filene i data/spot; hver økt starter på nytt uten gamle spoter.
 TAG|SCELTA|Valgfritt lokalt filter (avkrysningsboks i DATA COLLECTION, ønsket av forfatteren): "DX de"-linjer med frekvens under 27990,0 kHz forkastes, vises ikke i konsollen og lagres ikke.
 TAG|FONTE|Regel fra YA-MS som brukes også her: spotter er meteor scatter, og ikke sporadisk E, når de bruker entydige MS-moduser (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) eller har <MS> i teksten, uavhengig av store og små bokstaver.
+TAG|FONTE|Forfatterens regel (IC8TEM): upresise lokatorer (færre enn 6 tegn) hentes fra CALL3. Programmet bruker lokatoren fra CALL3 når den ligger i samme rute som spottens (eller loggens, i BENCHMARK Es); hvis CALL3 oppgir en annen rute (portabel eller flyttet stasjon), beholdes spottens lokator.
 H1|6. ADIF-logg
 TAG|FONTE|Portering av LoTW Grid Map v2 [25]: LoTW-rapporten (lastet ned med brukernavn og passord, som aldri lagres) og loggens ADIF-filer slås sammen etter kallesignal, bånd, dato og tid; bekreftelsene legges sammen.
 TAG|SCELTA|Bare båndene fra 28 MHz og oppover, hvert som eget bånd, uten sammenslåing. Farger: oransje = kjørt, blå = bekreftet med QSL, grønn = bekreftet via LoTW. Filter på utbredelsesmåte (PROP_MODE i ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
