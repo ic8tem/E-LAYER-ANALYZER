@@ -1,5 +1,5 @@
 TITLE|Wie E-LAYER ANALYZER rechnet
-SUB|Technisches Dokument - von Costantino IC8TEM - Version 0.4.0, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN.
+SUB|Technisches Dokument - von Costantino IC8TEM - Version 0.4.1, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN.
 H1|1. Einleitung
 H2|1.1 Zweck
 P|E-LAYER ANALYZER analysiert die VHF-Ausbreitungsarten, an denen die E-Schicht beteiligt ist: Sporadic-E (auch interkontinentaler Mehrfachsprung), F.A.I. (am Magnetfeld ausgerichtete Irregularitäten), Meteorscatter (mit dem Programm YA-MS) und Radio-Aurora. Dieses Dokument beschreibt jede Berechnung und ihre Herkunft.
@@ -98,8 +98,8 @@ TAG|FONTE|Portierung von LoTW Grid Map v2 [25]: der LoTW-Report (geladen mit Ben
 TAG|SCELTA|Nur Bänder ab 28 MHz, jedes als Einzelband, ohne Zusammenfassung. Farben: orange = gearbeitet, blau = per QSL bestätigt, grün = über LoTW bestätigt. Filter nach Ausbreitungsart (PROP_MODE des ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Farbschemata
 TAG|FONTE|Die Farbschemata sind die von YA-MS 1.5.0, die YAEC [26] folgen: Hell, Nacht, Schwarz, acht Pastelltöne und Meteorspur. Das Schema wird oben rechts gewählt und das Fenster sofort neu aufgebaut; in der Ansicht Iso-Reflexion verwenden dunkle Schemata farbige Bänder, helle Schemata dicke Linien (4.4).
-H1|8. Meteor Scatter (YA-MS 1.5.0) und Sprachen
-TAG|FONTE|Der Reiter METEOR SCATTER enthält das vollständige YA-MS 1.5.0 [5] mit seinem eigenen Dokument „Effizienz - Erklärung“ und seinen Quellen. Das Skript tools/sync_yams.py übernimmt jede neue YA-MS-Version und macht daraus ein Bedienfeld, ohne die Berechnungen zu ändern.
+H1|8. Meteor Scatter (YA-MS 1.5.1) und Sprachen
+TAG|FONTE|Der Reiter METEOR SCATTER enthält das vollständige YA-MS 1.5.1 [5] mit seinem eigenen Dokument „Effizienz - Erklärung“ und seinen Quellen. Das Skript tools/sync_yams.py übernimmt jede neue YA-MS-Version und macht daraus ein Bedienfeld, ohne die Berechnungen zu ändern.
 TAG|FONTE|YA-MS 1.4.0 hat die Reiter Ströme live (vom Global Meteor Network gemessene ZHR und Radiantenkarten des Radars CMOR) und Karte der Quellen (wo Collm, Sodankylä, GRAVES und CMOR im Verhältnis zur Station liegen) hinzugefügt; YA-MS 1.5.0 fügt Datensammlung hinzu (Meteorscatter-Spots aus DX cluster, RBN und PSKReporter mit dem Filter MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>). Innerhalb von E-LAYER ANALYZER öffnet Datensammlung keine eigenen Telnet-Sitzungen: sie erhält die Zeilen der Sitzungen von DATA COLLECTION, sodass es keine doppelten Logins mit demselben Rufzeichen gibt. Die Quellen von YA-MS werden in YA-MS genannt.
 TAG|SCELTA|Sprachen: 28, alle von YAEC sowie Dänisch und Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), für die Oberfläche (data/lingue/ela-<Code>.txt), das Technische Dokument und die Quellen. In der Ansicht F.A.I./Aurora heißt die Spur der Streupunkte in allen Übersetzungen „Scatter trail“. Die Statusleiste zeigt das verwendete Magnetfeldmodell (IGRF-14 der IAGA [16]).
 H1|9. Grenzen

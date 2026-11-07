@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER nasıl hesaplar
-SUB|Teknik belge - hazırlayan: Costantino IC8TEM - sürüm 0.4.0, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar.
+SUB|Teknik belge - hazırlayan: Costantino IC8TEM - sürüm 0.4.1, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar.
 H1|1. Giriş
 H2|1.1 Amaç
 P|E-LAYER ANALYZER, E katmanını içeren VHF yayılım modlarını inceler: sporadik E (kıtalar arası çok atlamalı dahil), F.A.I. (manyetik alana hizalı düzensizlikler), meteor scatter (YA-MS programıyla) ve radyo aurorası. Bu belge her hesabı ve kaynağını açıklar.
@@ -98,8 +98,8 @@ TAG|FONTE|LoTW Grid Map v2'nin [25] aktarımı: LoTW raporu (kullanıcı adı ve
 TAG|SCELTA|Yalnızca 28 MHz ve üstü bantlar, her biri ayrı bant olarak, birleştirme yapılmadan. Renkler: turuncu = çalışıldı, mavi = QSL ile onaylandı, yeşil = LoTW ile onaylandı. Yayılım moduna göre filtre (ADIF'in PROP_MODE alanı: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Renk şemaları
 TAG|FONTE|Renk şemaları, YAEC'i [26] temel alan YA-MS 1.5.0'ınkilerdir: Açık, Gece, Siyah, sekiz pastel ve Meteor izi. Şema sağ üstten seçilir ve pencere hemen yeniden oluşturulur; İzo-yansıma görünümünde koyu şemalar renkli bantlar, açık şemalar kalın çizgiler kullanır (4.4).
-H1|8. Meteor scatter (YA-MS 1.5.0) ve diller
-TAG|FONTE|METEOR SCATTER sekmesi, "Verim - açıklama" belgesi ve kaynaklarıyla birlikte YA-MS 1.5.0'ın tamamını [5] içerir. tools/sync_yams.py betiği YA-MS'in her yeni sürümünü kopyalar ve hesaplarını değiştirmeden bir panele dönüştürür.
+H1|8. Meteor scatter (YA-MS 1.5.1) ve diller
+TAG|FONTE|METEOR SCATTER sekmesi, "Verim - açıklama" belgesi ve kaynaklarıyla birlikte YA-MS 1.5.1'ın tamamını [5] içerir. tools/sync_yams.py betiği YA-MS'in her yeni sürümünü kopyalar ve hesaplarını değiştirmeden bir panele dönüştürür.
 TAG|FONTE|YA-MS 1.4.0, Canlı yağmurlar (Global Meteor Network'ün ölçtüğü ZHR'ler ve CMOR radarının radyant haritaları) ve Kaynak haritası (Collm, Sodankylä, GRAVES ve CMOR'un istasyona göre nerede olduğu) sekmelerini ekledi; YA-MS 1.5.0, Veri toplama sekmesini ekler (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS> filtresiyle DX cluster, RBN ve PSKReporter'dan meteor scatter spotları). E-LAYER ANALYZER içinde Veri toplama kendi telnet oturumlarını açmaz: DATA COLLECTION oturumlarının satırlarını alır, böylece aynı çağrı işaretiyle çift oturum açma olmaz. YA-MS'in kaynakları YA-MS içinde verilmiştir.
 TAG|SCELTA|Diller: arayüz (data/lingue/ela-<kod>.txt), Teknik belge ve Kaynaklar için 28 dil: YAEC'nin tüm dilleri artı Danca ve Tagalogca (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어). F.A.I./aurora görünümünde scatter point'lerin izi tüm çevirilerde "Scatter trail" olarak adlandırılır. Durum çubuğu kullanılan manyetik modeli gösterir (IAGA'nın IGRF-14'ü [16]).
 H1|9. Sınırlar
