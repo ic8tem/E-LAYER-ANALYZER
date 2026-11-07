@@ -87,6 +87,7 @@ H2|5.2 spot 的解析
 TAG|SCELTA|"DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" 行用正则表达式解析（而非固定列）。从注释中读取 "JN70CN<ES>JO62QM" 形式的网格坐标和模式（第一个网格坐标 = 报告者，第二个 = DX）、传播模式（ES、FAI、AU、MS、TR、EME、F2、TEP）、S/N 比和发射模式。缺失的网格坐标在 CALL3 [21] 中查找；注释中读到的 6 位网格坐标添加到 data/call3_nuovi.txt。
 TAG|SCELTA|作者规则（IC8TEM）：如果 spot 文本中出现 <MS>、<AU> 或 <TR>（以及 AUE、AURORA、TROPO），该 spot 与偶发 E 层无关，SPORADIC-E 标签页将其舍弃；它对流星散射和极光仍然有用。在 BENCHMARK Es 中，日志的 PROP_MODE 字段起同样的作用。
 TAG|SCELTA|存档：data/spot 中每天一个 CSV 文件；内存中保存最近的 spot（最多 50000 条）。使用 RBN 和 PSKReporter 时，通常只保存 28 MHz 及以上的 spot。
+TAG|FONTE|作者规则（IC8TEM）：每次关闭程序时，spot 数据库都会被清空，包括内存中的数据和 data/spot 中的文件；每次会话都重新开始，不保留旧的 spot。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
 TAG|SCELTA|只包括 28 MHz 及以上的频段，每个频段单独列出，不做合并。颜色：橙色 = 已通联，蓝色 = 已通过 QSL 确认，绿色 = 已通过 LoTW 确认。可按传播模式过滤（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。

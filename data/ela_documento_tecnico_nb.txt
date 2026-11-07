@@ -87,6 +87,7 @@ H2|5.2 Lesing av spot
 TAG|SCELTA|Linjen «DX de SPOTTER: FREQ DXCALL kommentar HHMMZ [LOC]» leses med et regulært uttrykk (ikke faste kolonner). Fra kommentaren leses lokatorer og modus i formen «JN70CN<ES>JO62QM» (første lokator = spotter, andre = DX), utbredelsesmåten (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N-forholdet og sendemodusen. Manglende lokatorer slås opp i CALL3 [21]; 6-tegns lokatorer lest i kommentarer legges til i data/call3_nuovi.txt.
 TAG|SCELTA|Forfatterens regel (IC8TEM): hvis <MS>, <AU> eller <TR> (også AUE, AURORA, TROPO) står i spotteksten, gjelder spotten ikke sporadisk E, og fanen SPORADIC-E forkaster den; den er fortsatt nyttig for meteor scatter og nordlys. I BENCHMARK Es har loggens felt PROP_MODE den samme rollen.
 TAG|SCELTA|Arkiv: én CSV-fil per dag i data/spot; i minnet de siste spotene (høyst 50000). Med RBN og PSKReporter lagres normalt bare spot fra 28 MHz og oppover.
+TAG|FONTE|Forfatterens regel (IC8TEM): hver gang programmet lukkes, tømmes spotdatabasen, både i minnet og i filene i data/spot; hver økt starter på nytt uten gamle spoter.
 H1|6. ADIF-logg
 TAG|FONTE|Portering av LoTW Grid Map v2 [25]: LoTW-rapporten (lastet ned med brukernavn og passord, som aldri lagres) og loggens ADIF-filer slås sammen etter kallesignal, bånd, dato og tid; bekreftelsene legges sammen.
 TAG|SCELTA|Bare båndene fra 28 MHz og oppover, hvert som eget bånd, uten sammenslåing. Farger: oransje = kjørt, blå = bekreftet med QSL, grønn = bekreftet via LoTW. Filter på utbredelsesmåte (PROP_MODE i ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
