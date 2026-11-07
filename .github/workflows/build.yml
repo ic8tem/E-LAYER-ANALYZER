@@ -107,13 +107,13 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb fonts-dejavu-core fonts-noto-cjk fonts-noto-core >/dev/null
           cp -R publish/linux-x64 run
           timeout 200 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/aurora" --loc JN70CN --aurora IO70VJ JO59BC || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots" --loc JN70CN || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/chiaro" --loc JN70CN --colori chiaro || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/notte" --loc JN70CN --colori scuro || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/en" --loc JN70CN --lingua en || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/ja" --loc JN70CN --lingua ja --colori chiaro || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/ar" --loc JN70CN --lingua ar --colori nero || true
-          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/hi" --loc JN70CN --lingua hi --colori pastello-verde || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots" --loc JN70CN || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/chiaro" --loc JN70CN --colori chiaro || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/notte" --loc JN70CN --colori scuro || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/en" --loc JN70CN --lingua en || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/ja" --loc JN70CN --lingua ja --colori chiaro || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/ar" --loc JN70CN --lingua ar --colori nero || true
+          timeout 520 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/hi" --loc JN70CN --lingua hi --colori pastello-verde || true
           ls -la shots shots/ya-ms || true
           cp run/data/errore_avvio.txt shots/ 2>/dev/null || true
           ls run/data/mappa run/data/swpc > shots/dati.txt 2>&1 || true

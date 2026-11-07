@@ -37,6 +37,19 @@ namespace ELA
 
         // proiezione azimutale equidistante: centro (stazione) e raggio del cerchio esterno in km
         public bool Azimuthal;
+        public bool Mercator;                       // proiezione di Mercatore (al posto dell'equirettangolare)
+        // ordinata della proiezione in "gradi": latitudine (equirettangolare) o ln(tan(45° + lat/2)) in gradi (Mercatore)
+        double Y(double lat)
+        {
+            if (!Mercator) return lat;
+            double f = Math.Max(-85, Math.Min(85, lat)) * Geo.D2R;
+            return Math.Log(Math.Tan(Math.PI / 4 + f / 2)) * Geo.R2D;
+        }
+        double InvY(double y)
+        {
+            if (!Mercator) return y;
+            return (2 * Math.Atan(Math.Exp(y * Geo.D2R)) - Math.PI / 2) * Geo.R2D;
+        }
         public double AzLat = 45, AzLon = 12, RangeKm = 2500, MinRangeKm = 300, MaxRangeKm = 20000;
         public bool WheelZoom = true;               // nella vista azimutale la rotella cambia il raggio
         public event Action<double> RangeChanged;   // raggio cambiato con la rotella
@@ -81,10 +94,10 @@ namespace ELA
 
         public void SetView(double lonW, double lonE, double latS, double latN)
         {
-            CenterLon = (lonW + lonE) / 2; CenterLat = (latS + latN) / 2;
+            CenterLon = (lonW + lonE) / 2; CenterLat = InvY((Y(latS) + Y(latN)) / 2);
             double w = Math.Max(1, Bounds.Width > 1 ? Bounds.Width : 900), h = Math.Max(1, Bounds.Height > 1 ? Bounds.Height : 600);
             double zx = 360.0 / Math.Max(1, lonE - lonW);
-            double zy = (h / w) * 360.0 / Math.Max(1, latN - latS);
+            double zy = (h / w) * 360.0 / Math.Max(1, Y(latN) - Y(latS));
             Zoom = Math.Max(0.8, Math.Min(zx, zy));
             pendingView = Bounds.Width > 10 ? null : new double[] { lonW, lonE, latS, latN };   // solo se la mappa non e' ancora disposta
             InvalidateVisual();
@@ -111,7 +124,7 @@ namespace ELA
             double p = Ppd;
             double dl = lon - CenterLon;
             if (dl > 180) dl -= 360; else if (dl < -180) dl += 360;
-            return new Point(Bounds.Width / 2 + dl * p, Bounds.Height / 2 - (lat - CenterLat) * p);
+            return new Point(Bounds.Width / 2 + dl * p, Bounds.Height / 2 - (Y(lat) - Y(CenterLat)) * p);
         }
 
         public void ToLatLon(Point s, out double lat, out double lon)
@@ -125,7 +138,7 @@ namespace ELA
             }
             double p = Ppd;
             lon = Geo.Norm180(CenterLon + (s.X - Bounds.Width / 2) / p);
-            lat = CenterLat - (s.Y - Bounds.Height / 2) / p;
+            lat = InvY(Y(CenterLat) - (s.Y - Bounds.Height / 2) / p);
         }
 
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
@@ -150,7 +163,7 @@ namespace ELA
             // il punto sotto il cursore resta fermo
             double p = Ppd;
             CenterLon = Geo.Norm180(lon - (pos.X - Bounds.Width / 2) / p);
-            CenterLat = Math.Max(-85, Math.Min(85, lat + (pos.Y - Bounds.Height / 2) / p));
+            CenterLat = Math.Max(-85, Math.Min(85, InvY(Y(lat) + (pos.Y - Bounds.Height / 2) / p)));
             InvalidateVisual();
             NotifyView();
             e.Handled = true;
@@ -175,7 +188,7 @@ namespace ELA
                 if (dragged && !Azimuthal)
                 {
                     CenterLon = Geo.Norm180(dragLon0 - d.X / Ppd);
-                    CenterLat = Math.Max(-85, Math.Min(85, dragLat0 + d.Y / Ppd));
+                    CenterLat = Math.Max(-85, Math.Min(85, InvY(Y(dragLat0) + d.Y / Ppd)));
                 }
             }
             InvalidateVisual();
