@@ -29,7 +29,7 @@ namespace ELA
         readonly ComboBox cmbMode, cmbPreset, cmbSp;
         readonly TextBox txtA, txtB;
         readonly NumericUpDown numH, numElev;
-        readonly CheckBox chkOval;
+        readonly CheckBox chkOval, chkRefr;
         readonly SelectableTextBlock txtRes;
         readonly TableView tSpots;
         readonly TextBlock lblSw;
@@ -71,8 +71,10 @@ namespace ELA
             numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", aurora ? 105 : 110)), 0, 1, 45);
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD(pfx + "elev_min", 0)), 1, 0.5m, 45);
             chkOval = Ui.C(Lang.T("Ovale aurorale (NOAA OVATION)"), cf.GetB(pfx + "ovale", true));
+            chkRefr = Ui.C(Lang.T("Rifrazione (raggio terrestre 4/3)"), cf.GetB(pfx + "rifrazione", true));
+            chkRefr.IsCheckedChanged += (s, e) => Recalc();
             Button bCalc = Ui.B(Lang.T("Calcola"), true);
-            bCalc.Click += (s, e) => Recalc();
+            bCalc.Click += (s, e) => Recalc(true);
             Button bEu = Ui.B(Lang.T("Europa"));
             bEu.Click += (s, e) => DefaultView();
             txtA.LostFocus += (s, e) => Recalc();
@@ -88,7 +90,7 @@ namespace ELA
                 txtA.Text = FaiPresets[i][1] + " " + FaiPresets[i][2];
                 txtB.Text = FaiPresets[i][3] + " " + FaiPresets[i][4];
                 cmbMode.SelectedIndex = 0;
-                Recalc();
+                Recalc(true);
             };
             cmbSp.SelectionChanged += (s, e) =>
             {
@@ -96,7 +98,7 @@ namespace ELA
                 if (i < 0 || i >= KnownSp.Length) return;
                 spLat = double.Parse(KnownSp[i][1], CultureInfo.InvariantCulture); spLon = double.Parse(KnownSp[i][2], CultureInfo.InvariantCulture);
                 cmbMode.SelectedIndex = 1;
-                Recalc();
+                Recalc(true);
             };
 
             txtRes = Ui.Text(12.5);
@@ -110,13 +112,13 @@ namespace ELA
                 if (s == null) return;
                 txtA.Text = s.Spotter + " " + s.LocSpotter; txtB.Text = s.DxCall + " " + s.LocDx;
                 cmbMode.SelectedIndex = 0;
-                Recalc();
+                Recalc(true);
             };
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Vista")), cmbMode, bCalc, bEu), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Stazione A")), txtA, Ui.L(Lang.T("Stazione B")), txtB), Dock.Top);
-            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, aurora ? (Control)chkOval : cmbPreset, cmbSp), Dock.Top);
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, aurora ? (Control)chkOval : cmbPreset, cmbSp, chkRefr), Dock.Top);
             TextBlock help = new TextBlock
             {
                 Text = Lang.T("A e B: nominativo (cercato in CALL3) e/o locator; A vuoto = la mia stazione. Scia: clic sulla mappa = posizione di B. Iso-riflessione: clic = punto di riflessione."),
@@ -148,7 +150,7 @@ namespace ELA
             {
                 if (cmbMode.SelectedIndex == 1 || rb) { spLat = la; spLon = lo; if (cmbMode.SelectedIndex != 1) cmbMode.SelectedIndex = 1; }
                 else { txtB.Text = Geo.LatLonToLoc(la, lo, 6); }
-                Recalc();
+                Recalc(true);
             };
             Root = Ui.MapAndData(mg, right);
             DefaultView();
@@ -188,6 +190,7 @@ namespace ELA
             cf.Set(pfx + "a", txtA.Text ?? ""); cf.Set(pfx + "b", txtB.Text ?? "");
             cf.Set(pfx + "quota_km", Ui.V(numH)); cf.Set(pfx + "elev_min", Ui.V(numElev));
             cf.Set(pfx + "ovale", chkOval.IsChecked == true);
+            cf.Set(pfx + "rifrazione", chkRefr.IsChecked == true);
         }
 
         // "NOMINATIVO LOCATOR", "LOCATOR" o "NOMINATIVO" -> coordinate
@@ -205,8 +208,22 @@ namespace ELA
 
         double H { get { return Ui.V(numH); } }
 
-        public void Recalc()
+        // Calcolo. user = chiesto dall'utente (pulsante, clic, scelta da elenco): se il modello non da' soluzione
+        // compare il popup "Calcolo non possibile" e non si mostra nessun altro risultato.
+        string impossible;
+
+        public void Recalc() { Recalc(false); }
+
+        public void Recalc(bool user)
         {
+            Geo.K = chkRefr.IsChecked == true ? 4.0 / 3.0 : 1.0;
+            try { RecalcCore(user); }
+            finally { Geo.K = 1.0; }
+        }
+
+        void RecalcCore(bool user)
+        {
+            impossible = null;
             string n;
             if (!Parse(txtA.Text, out aLat, out aLon, out n))
             {
@@ -220,12 +237,25 @@ namespace ELA
             map.Caption = (aurora ? "AURORA" : "F.A.I.") + " - " + Igrf.Info + " - " + Lang.F("quota {0:F0} km", H);
             if (aurora && chkOval.IsChecked == true) DrawOval();
             StringBuilder sb = new StringBuilder();
-            if (double.IsNaN(aLat)) sb.AppendLine(Lang.T("Manca la stazione A (imposta il locator della stazione in alto o scrivilo qui)."));
+            if (double.IsNaN(aLat)) impossible = Lang.T("Manca la stazione A: imposta il locator della stazione in alto o scrivilo nella casella Stazione A.");
             else if (cmbMode.SelectedIndex == 1) Iso(sb);
             else Scia(sb);
-            if (aurora) AuroraInfo(sb);
-            txtRes.Text = sb.ToString();
-            qtf.IsVisible = cmbMode.SelectedIndex == 0 && qtf.HasData;
+            if (aurora && impossible == null) AuroraInfo(sb);
+            if (impossible != null)
+            {
+                // nessun altro risultato: mappa pulita, nessun testo
+                map.Cells.Clear(); map.Lines.Clear(); map.Markers.Clear(); map.Legend.Clear(); map.Info.Clear(); map.LegendTitle = "";
+                qtf.Clear();
+                LastBest = null;
+                txtRes.Text = "";
+                if (user && Program.ScreenshotDir == null)
+                {
+                    string msg = impossible;
+                    Dispatcher.UIThread.Post(async () => await Dialogs.Message(TopLevel.GetTopLevel(Root) as Window, Lang.T("Calcolo non possibile"), msg));
+                }
+            }
+            else txtRes.Text = sb.ToString();
+            qtf.IsVisible = cmbMode.SelectedIndex == 0 && qtf.HasData && impossible == null;
             qtf.InvalidateVisual();
             map.InvalidateVisual();
             if (aurora) UpdateSw();
@@ -280,10 +310,10 @@ namespace ELA
             map.LegendTitle = Lang.T("Deviazione dalla condizione di riflessione");
             double dAB = Geo.DistanceKm(aLat, aLon, bLat, bLon);
             sb.AppendLine(Lang.F("Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km", aName, bName, dAB, h));
-            sb.AppendLine(Lang.F("Celle del luogo entro 2,5°: {0} (passo {1}°); entrambe le stazioni vedono il punto sopra {2:F1}° di elevazione.", loc.Count, step.ToString(CultureInfo.CurrentCulture), Ui.V(numElev)));
+            sb.AppendLine(Lang.F("Celle del luogo entro 2,5°: {0} (passo {1}°); entrambe le stazioni vedono il punto sopra {2:F1}° di elevazione{3}.", loc.Count, step.ToString(CultureInfo.CurrentCulture), Ui.V(numElev), Geo.K > 1 ? Lang.T(", con la rifrazione (4/3)") : ""));
             if (best == null)
             {
-                sb.AppendLine(Lang.T("Nessun punto soddisfa la condizione di riflessione: collegamento F.A.I. improbabile con questa geometria e questa quota."));
+                impossible = Lang.F("Per il modello nessun punto alla quota di {0:F0} km, visto da entrambe le stazioni ({1} e {2}), soddisfa la condizione di riflessione entro 2,5°.", h, aName, bName);
                 return;
             }
             LastBest = best;
@@ -359,7 +389,7 @@ namespace ELA
             sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", aName, azA, eA, dA));
             sb.AppendLine(Lang.F("Contorno di {0} (K9SE): {1:+0.0;-0.0}°  ->  ricevono le stazioni sul contorno {2:+0.0;-0.0}° (zona rossa piena)", aName, cA, -cA));
             sb.AppendLine(Lang.F("Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(spLat, spLon)));
-            if (eA < 0) sb.AppendLine(Lang.T("Attenzione: il punto è sotto l'orizzonte della stazione A a questa quota."));
+            if (eA < Ui.V(numElev)) { impossible = Lang.F("Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).", Geo.LatLonToLoc(spLat, spLon, 6), aName, h, eA); return; }
             if (!double.IsNaN(bLat))
             {
                 Geo.V3 g = Geo.Ecef(bLat, bLon, 0);
@@ -372,42 +402,61 @@ namespace ELA
         }
 
         // ---------------------------------------------------------------- aurora
+        // ovale OVATION sfumato: interpolazione bilineare su celle di 0,5 gradi
         void DrawOval()
         {
             if (SpaceWeather.Oval == null) return;
-            for (int lon = -180; lon < 180; lon++)
-                for (int lat = 35; lat <= 89; lat++)
+            for (double lon = -180; lon < 180; lon += 0.5)
+                for (double lat = 35; lat <= 89; lat += 0.5)
                 {
-                    double v = SpaceWeather.OvalAt(lat, lon);
-                    if (v < 3) continue;
-                    byte a = (byte)Math.Min(150, 30 + v * 3);
-                    Color c = v >= 50 ? Color.FromArgb(a, 250, 80, 80) : v >= 20 ? Color.FromArgb(a, 253, 224, 71) : Color.FromArgb(a, 80, 230, 120);
-                    map.Cells.Add(new MapCell { Lat0 = lat - 0.5, Lon0 = lon - 0.5, DLat = 1, DLon = 1, Fill = c });
+                    double v = OvalSmooth(lat + 0.25, lon + 0.25);
+                    if (v < 2) continue;
+                    byte a = (byte)Math.Min(160, 20 + v * 3);
+                    double t = Math.Min(1, v / 60.0);
+                    // verde -> giallo -> rosso al crescere della probabilita'
+                    byte r = (byte)(t < 0.5 ? 80 + 346 * t : 253);
+                    byte g = (byte)(t < 0.5 ? 230 : 230 - 300 * (t - 0.5));
+                    byte bl = (byte)(t < 0.5 ? 120 - 100 * t : 70);
+                    map.Cells.Add(new MapCell { Lat0 = lat, Lon0 = lon, DLat = 0.5, DLon = 0.5, Fill = Color.FromArgb(a, r, g, bl) });
                 }
+        }
+
+        static double OvalSmooth(double lat, double lon)
+        {
+            double la0 = Math.Floor(lat), lo0 = Math.Floor(lon), fa = lat - la0, fo = lon - lo0;
+            double v00 = SpaceWeather.OvalAt(la0, lo0), v01 = SpaceWeather.OvalAt(la0, lo0 + 1), v10 = SpaceWeather.OvalAt(la0 + 1, lo0), v11 = SpaceWeather.OvalAt(la0 + 1, lo0 + 1);
+            return v00 * (1 - fa) * (1 - fo) + v01 * (1 - fa) * fo + v10 * fa * (1 - fo) + v11 * fa * fo;
         }
 
         void AuroraInfo(StringBuilder sb)
         {
             if (double.IsNaN(aLat)) return;
             sb.AppendLine();
-            sb.AppendLine(Lang.F("Latitudine geomagnetica (dipolo) di {0}: {1:F1}°", aName, Geo.GeomagLat(aLat, aLon)));
-            double bnd = SpaceWeather.EquatorBoundary(aLon, 10);
-            if (!double.IsNaN(bnd)) sb.AppendLine(Lang.F("Confine equatoriale dell'ovale (≥10 %) alla longitudine della stazione: {0:F0}° N", bnd));
-            // linea di backscatter (raggio perpendicolare a B) dentro l'ovale: puntamento consigliato
-            List<PerpPoint> line = FieldAligned.PerpLine(aLat, aLon, Station.AltKm, H, 1.5, Ui.V(numElev), 1500, 2);
+            AuroraStation(sb, aLat, aLon, Station.AltKm, aName, Pal.Azure);
+            if (!double.IsNaN(bLat)) AuroraStation(sb, bLat, bLon, 0, bName, Pal.Violet);
+        }
+
+        // Puntamento consigliato di una stazione: lungo la sua linea di perpendicolarita' (eco con raggio perpendicolare a B)
+        // il punto con la probabilita' d'ovale piu' alta; regola pratica di partenza (G3WPO): circa 45 gradi, tra nord ed est.
+        void AuroraStation(StringBuilder sb, double lat, double lon, double hKm, string name, Color c)
+        {
+            sb.AppendLine(Lang.F("{0}: latitudine geomagnetica (dipolo) {1:F1}°", name, Geo.GeomagLat(lat, lon)));
+            double bnd = SpaceWeather.EquatorBoundary(lon, 10);
+            if (!double.IsNaN(bnd)) sb.AppendLine(Lang.F("  confine equatoriale dell'ovale (≥10 %) alla sua longitudine: {0:F0}° N", bnd));
+            List<PerpPoint> line = FieldAligned.PerpLine(lat, lon, hKm, H, 1.5, Ui.V(numElev), 1800, 2);
             PerpPoint best = null; double bv = 0;
             foreach (PerpPoint p in line)
             {
-                map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = 2, Fill = Pal.Azure, Stroke = Pal.Azure });
-                double v = SpaceWeather.OvalAt(p.Lat, p.Lon);
+                map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = 2, Fill = c, Stroke = c });
+                double v = OvalSmooth(p.Lat, p.Lon);
                 if (v > bv) { bv = v; best = p; }
             }
             if (best != null && bv >= 5)
             {
-                sb.AppendLine(Lang.F("Puntamento consigliato (eco perpendicolare a B dentro l'ovale): azimut {0:F0}°, elevazione {1:F1}°, distanza {2:F0} km, probabilità ovale {3:F0} %", best.Az, best.Elev, best.DistKm, bv));
-                map.Markers.Add(new MapMarker { Lat = best.Lat, Lon = best.Lon, Radius = 8, Fill = Pal.Azure, Ring = true, Label = Lang.F("QTF {0:F0}°", best.Az), LabelColor = Pal.Azure });
+                sb.AppendLine(Lang.F("  puntamento consigliato: azimut {0:F0}°, elevazione {1:F1}°, distanza {2:F0} km, probabilità ovale {3:F0} %", best.Az, best.Elev, best.DistKm, bv));
+                map.Markers.Add(new MapMarker { Lat = best.Lat, Lon = best.Lon, Radius = 8, Fill = c, Ring = true, Label = Lang.F("{0} QTF {1:F0}°", name, best.Az), LabelColor = c });
             }
-            else sb.AppendLine(Lang.T("La linea di perpendicolarità della stazione (puntini azzurri) non entra nell'ovale: aurora radio improbabile adesso."));
+            else sb.AppendLine(Lang.F("  la linea di perpendicolarità (puntini) non entra nell'ovale: aurora radio improbabile adesso (regola pratica: partire da circa 45°, tra nord ed est)."));
         }
 
         void UpdateSw()

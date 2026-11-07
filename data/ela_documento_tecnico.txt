@@ -52,11 +52,14 @@ TAG|SCELTA|Su una griglia di 0,2° alla quota H si cercano i punti visti da entr
 TAG|SCELTA|Scatter point più probabile: deviazione ≤ 1° e minima somma dei quadrati delle distanze (minore attenuazione); in aurora si preferiscono i punti dentro l'ovale.
 TAG|RILIEVO|Verifiche richieste dall'autore (IGRF-14, H = 110 km, risultati del programma): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: scia sull'Italia nord-occidentale e il golfo di Genova, scatter più probabile JN44CI (44,4° N 8,3° E), QTF 313° (el. 6,7°) da Capri e 76° (el. 8,9°) da F6DRO; la scia passa a 137 km da Ginevra. IC8FAX - G4LOH (IO70JC), 1843 km: scia breve sulla Germania sud-occidentale, scatter più probabile JN49DS (49,8° N 8,3° E), QTF 338° (el. 0,5°) da Capri e 87° (el. 2,1°) da G4LOH: collegamento al limite dell'orizzonte di entrambe. IC8FAX - FA1MXE (JN05GQ, primo QSO F.A.I. del 1990 via Ginevra a 330°): la scia passa vicino a Ginevra.
 TAG|RILIEVO|Caso DL5MCG [6]: beacon DB0FAI (JN58IC) - Dresda via Sheffield, deviazione 0,3° a 110 km.
+TAG|SCELTA|Rifrazione: per elevazioni e orizzonti delle viste F.A.I. e AURORA si usa di partenza il raggio terrestre equivalente k · r con k = 4/3 (atmosfera standard), disattivabile con la casella "Rifrazione". Le distanze al suolo e la condizione di riflessione restano calcolate sulla geometria vera.
+EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
+TAG|SCELTA|Calcolo non possibile: se per il modello nessun punto soddisfa la condizione entro 2,5° (vista Scia) o il punto di riflessione è sotto l'orizzonte della stazione (vista Iso-riflessione), il programma mostra il popup "Calcolo non possibile" e non mostra nessun altro risultato.
 H2|4.4 Vista "Iso-riflessione" (punto di riflessione)
 TAG|SCELTA|Con un clic si sceglie il punto di riflessione SP. Per ogni punto al suolo G entro l'orizzonte di SP si calcola dev = | c(A) + c(G) | e si colorano le classi 0°, 1°, 2°, 4°, 8°, 16° (stile AuroReflex [11], linee di iso-riflessione di SE-PROP [9]). In alto: azimut ed elevazione dalla stazione A verso SP; cerchio verde = orizzonte di A alla quota dello strato, cerchio rosso = zona da cui SP è visibile.
 H2|4.5 Aurora
-TAG|FONTE|Ovale aurorale OVATION Prime, Kp e vento solare dal NOAA SWPC [15], aggiornati ogni 5 minuti e salvati in data/swpc.
-TAG|SCELTA|Puntamento consigliato: lungo la linea di perpendicolarità della stazione (eco perpendicolare a B, tolleranza 1,5°, quota 105 km) si sceglie il punto con la probabilità d'ovale più alta. La quota di 105 km è tra i 104 km di Jackel [13] e i 110 km di Lange-Hesse [12].
+TAG|FONTE|Ovale aurorale OVATION Prime, Kp e vento solare dal NOAA SWPC [15], aggiornati ogni 5 minuti e salvati in data/swpc. La griglia di 1° è sfumata con un'interpolazione bilineare su celle di 0,5°.
+TAG|SCELTA|Puntamento consigliato, per entrambe le stazioni: lungo la linea di perpendicolarità di ciascuna stazione (eco perpendicolare a B, tolleranza 1,5°, quota 105 km) si sceglie il punto con la probabilità d'ovale più alta. La quota di 105 km è tra i 104 km di Jackel [13] e i 110 km di Lange-Hesse [12].
 TAG|FONTE|Regole operative: puntare tra nord e est, partendo da circa 45°; Doppler fino a ~2 kHz a 144 MHz, portata tipica ~1300 km, massima ~2000 km (G3WPO [14]).
 H1|5. Raccolta dei dati
 H2|5.1 Sessioni telnet

@@ -8,6 +8,9 @@ namespace ELA
     public static class Geo
     {
         public const double R = 6372.7955;          // raggio terrestre medio (km), come nell'articolo F.A.I. [1] e in YA-MS
+        // Fattore del raggio terrestre equivalente per la rifrazione (1 = nessuna; 4/3 = atmosfera standard).
+        // Vale solo per elevazioni e orizzonti (F.A.I. e aurora); le distanze al suolo restano quelle vere.
+        public static double K = 1.0;
         public const double D2R = Math.PI / 180.0;
         public const double R2D = 180.0 / Math.PI;
 
@@ -133,7 +136,7 @@ namespace ELA
         // Geometria sferica esatta, equivalente alla formula (2) dell'articolo F.A.I. [1] e alla formula di YA-MS.
         public static double ElevationDeg(double dKm, double Hkm, double hKm)
         {
-            double x = dKm / R, a = R + hKm, b = R + Hkm;
+            double Re = R * K, x = dKm / Re, a = Re + hKm, b = Re + Hkm;
             return Math.Atan2(b * Math.Cos(x) - a, b * Math.Sin(x)) * R2D;
         }
 
@@ -141,10 +144,10 @@ namespace ELA
         // = meta' della lunghezza del salto.
         public static double HalfHopKm(double elevDeg, double Hkm)
         {
-            double e = elevDeg * D2R;
-            double phi = Math.Asin(R * Math.Cos(e) / (R + Hkm));   // angolo di incidenza sullo strato
-            double theta = Math.PI / 2 - e - phi;                  // angolo al centro tra stazione e punto di riflessione
-            return R * theta;
+            double e = elevDeg * D2R, Re = R * K;
+            double phi = Math.Asin(Re * Math.Cos(e) / (Re + Hkm));   // angolo di incidenza sullo strato
+            double theta = Math.PI / 2 - e - phi;                    // angolo al centro tra stazione e punto di riflessione
+            return Re * theta;
         }
 
         // lunghezza massima di un salto (km) con elevazione minima e0
