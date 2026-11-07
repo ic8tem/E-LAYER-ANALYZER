@@ -58,7 +58,7 @@ LOG ADIF	LOG ADIF
 Fonti citate dal programma, linguetta per linguetta	Door het programma geciteerde bronnen, tab per tab
 DOCUMENTO TECNICO	TECHNISCH DOCUMENT
 Come il programma calcola: formule e fonti a ogni passo	Hoe het programma rekent: formules en bronnen bij elke stap
-CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Campo: {3}	CALL3: {0:N0} roepnamen{1}   Spots in geheugen: {2}   Aardmagnetisch veld: {3}
+CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Modello magnetico: {3}	CALL3: {0:N0} roepnamen{1}   Spots in geheugen: {2}   Magnetisch veldmodel: {3}
 caricamento	laden
 Locator non valido (4, 6 o 8 caratteri, es. JN70CN).	Ongeldige locator (4, 6 of 8 tekens, bijv. JN70CN).
 ultimi {0} min	laatste {0} min
@@ -139,7 +139,7 @@ LoTW ha rifiutato l'accesso: controlla nome utente e password.	LoTW heeft de toe
 Risposta inattesa da LoTW (non è un file ADIF). Riprova più tardi.	Onverwacht antwoord van LoTW (geen ADIF-bestand). Probeer het later opnieuw.
 Errore di collegamento: {0}	Verbindingsfout: {0}
 Carico la mappa (Natural Earth)...	Kaart laden (Natural Earth)...
-Scia (coppia A-B)	Spoor (paar A-B)
+Scia (coppia A-B)	Scatter trail (paar A-B)
 Iso-riflessione (punto)	Iso-reflectie (punt)
 Verifiche...	Controles...
 Scatter noti...	Bekende scatterpunten...
@@ -161,7 +161,7 @@ Manca la stazione A: imposta il locator della stazione in alto o scrivilo nella 
 Calcolo non possibile	Berekening niet mogelijk
 Imposta la stazione B (nominativo, locator o clic sulla mappa).	Stel station B in (roepnaam, locator of klik op de kaart).
 Deviazione dalla condizione di riflessione	Afwijking van de reflectievoorwaarde
-Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km	Spoor van mogelijke scatterpunten {0} - {1} ({2:F0} km), hoogte {3:F0} km
+Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km	Scatter trail van mogelijke scatterpunten {0} - {1} ({2:F0} km), hoogte {3:F0} km
 Celle del luogo entro 2,5°: {0} (passo {1}°); entrambe le stazioni vedono il punto sopra {2:F1}° di elevazione{3}.	Cellen van de meetkundige plaats binnen 2,5°: {0} (stap {1}°); beide stations zien het punt boven {2:F1}° elevatie{3}.
 , con la rifrazione (4/3)	, met refractie (4/3)
 Per il modello nessun punto alla quota di {0:F0} km, visto da entrambe le stazioni ({1} e {2}), soddisfa la condizione di riflessione entro 2,5°.	Volgens het model voldoet geen enkel punt op {0:F0} km hoogte, gezien door beide stations ({1} en {2}), aan de reflectievoorwaarde binnen 2,5°.
@@ -170,8 +170,8 @@ Scatter point più probabile (deviazione minima e tratta più corta):	Meest waar
   {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km	  {0}: QTF {1:F0}°, elevatie {2:F1}°, afstand {3:F0} km
   Inclinazione magnetica nel punto: {0:F1}°	  Magnetische inclinatie in het punt: {0:F1}°
 {0}: QTF {1:F0}°  el {2:F0}°	{0}: QTF {1:F0}°  el {2:F0}°
-  La scia passa a {0:F0} km dallo scatter noto {1}.	  Het spoor passeert op {0:F0} km van het bekende scatterpunt {1}.
-Riquadro in alto a destra: QTF ed elevazione verso ogni punto della scia, rosso = A, verde = B (più intenso = deviazione minore).	Kader rechtsboven: QTF en elevatie naar elk punt van het spoor, rood = A, groen = B (feller = kleinere afwijking).
+  La scia passa a {0:F0} km dallo scatter noto {1}.	  De scatter trail passeert op {0:F0} km van het bekende scatterpunt {1}.
+Riquadro in alto a destra: QTF ed elevazione verso ogni punto della scia, rosso = A, verde = B (più intenso = deviazione minore).	Kader rechtsboven: QTF en elevatie naar elk punt van de scatter trail, rood = A, groen = B (feller = kleinere afwijking).
 Clic sinistro sulla mappa per scegliere il punto di riflessione da verificare, oppure "Verifica il punto consigliato".	Linksklik op de kaart om het te controleren reflectiepunt te kiezen, of "Aanbevolen punt controleren".
 Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).	Het reflectiepunt {0} ligt onder de horizon van {1} op {2:F0} km hoogte (elevatie {3:F1}°).
 {0}: azimut {1:F0}°  elevazione {2:F0}°	{0}: azimut {1:F0}°  elevatie {2:F0}°
@@ -216,7 +216,7 @@ Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: abilitale con 
 Reverse Beacon Network	Reverse Beacon Network
 RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo.	RBN: poort 7000 = CW en RTTY, poort 7001 = FT8. Inloggen met alleen de roepnaam.
 Cluster con PSKReporter	Cluster met PSKReporter
-Cluster che riceve gli spot di PSKReporter (es. HamAlert, serve un account con i trigger; o il cluster di DM4X se ne conosci l'indirizzo).	Cluster dat de spots van PSKReporter ontvangt (bijv. HamAlert, vereist een account met triggers; of het cluster van DM4X als je het adres kent).
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500). In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X-cluster met PSKReporter-spots (dm4x.ddns.net, poort 8500). Als alternatief HamAlert (hamalert.org 7300, account met triggers nodig).
 Tutti i modi di propagazione	Alle propagatiemodi
 ES - sporadico E	ES - sporadische E
 FAI	FAI

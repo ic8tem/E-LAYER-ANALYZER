@@ -126,7 +126,7 @@ namespace ELA
             timer.Tick += (s, e) =>
             {
                 lblClock.Text = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
-                status.Text = Lang.F("CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Campo: {3}", CallDb.Count, CallDb.Loading ? " (" + Lang.T("caricamento") + ")" : "", SpotStore.All.Count, Igrf.Info);
+                status.Text = Lang.F("CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Modello magnetico: {3}", CallDb.Count, CallDb.Loading ? " (" + Lang.T("caricamento") + ")" : "", SpotStore.All.Count, Igrf.Info);
             };
             timer.Start();
 

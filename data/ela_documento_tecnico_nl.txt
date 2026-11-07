@@ -1,5 +1,5 @@
 TITLE|Hoe E-LAYER ANALYZER rekent
-SUB|Technisch document - door Costantino IC8TEM - versie 0.1.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
+SUB|Technisch document - door Costantino IC8TEM - versie 0.3.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
 H1|1. Inleiding
 H2|1.1 Doel
 P|E-LAYER ANALYZER analyseert de VHF-propagatiemodi waarbij de E-laag betrokken is: sporadische E (ook intercontinentaal met meervoudige sprong), F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter (met het programma YA-MS) en radio-aurora. Dit document beschrijft elke berekening en waar die vandaan komt.
@@ -48,14 +48,14 @@ TAG|FONTE|Het signaal dat door een met het veld uitgelijnde onregelmatigheid wor
 P|Voor elk station X wordt c(X) berekend, de hoek (met teken) tussen de zichtlijn X → SP en het vlak loodrecht op B in het scatterpunt SP. De afwijking van de reflectievoorwaarde voor de verbinding A-B is:
 EQ|c(X) = arcsin( û(SP − X) · b̂ )        dev = | c(A) + c(B) |
 TAG|FONTE|Voor de echo naar hetzelfde station (backscatter) wordt de voorwaarde: straal loodrecht op B, met een tolerantie van ±2-3° (Lange-Hesse [12]); de intensiteit neemt af met ongeveer 3-5 dB per graad afwijking (Jackel e.a. [13]).
-H2|4.3 Weergave "Spoor" (paar A-B)
+H2|4.3 Weergave "Scatter trail" (paar A-B)
 TAG|SCELTA|Op een raster van 0,2° op hoogte H worden de punten gezocht die door beide stations worden gezien met elevatie ≥ minimum en met dev ≤ 2,5°. De kleurklassen zijn 0-1°, 1-1,5°, 1,5-2°, 2-2,5° (stijl Aurora QTF [11]). Het kader rechtsboven toont QTF en elevatie van A (rood) en B (groen) naar elk punt van het spoor.
 TAG|SCELTA|Meest waarschijnlijk scatterpunt: afwijking ≤ 1° en minimale som van de kwadraten van de afstanden (minste demping); bij aurora hebben punten binnen het ovaal de voorkeur.
 TAG|RILIEVO|Door de auteur gevraagde controles (IGRF-14, H = 110 km, refractie 4/3, resultaten van het programma): IC8FAX (JN70CN) - F6DRO (JN03TJ), 1086 km: spoor van de Golf van Biskaje tot de Adriatische Zee langs de 44e breedtegraad, meest waarschijnlijk scatterpunt JN44GH (44,3° N 8,6° O, boven Genua), afwijking 0,97°, QTF 314° (el. 7,8°) vanaf Capri en 77° (el. 9°) vanaf F6DRO; het spoor passeert op 143 km van Genève. IC8FAX - G4LOH (IO70JC), 1843 km: spoor over Zuidwest-Duitsland en België, meest waarschijnlijk scatterpunt JN49FR (49,7° N 8,5° O), afwijking 0,88°, QTF 338° (el. 1,9°) vanaf Capri en 87° (el. 3°) vanaf G4LOH; het spoor passeert op 28 km van het bekende scatterpunt Brussel. Zonder refractie worden de sporen korter (G4LOH: elevaties 0,5° en 2,1°). IC8FAX - FA1MXE (JN05GQ, eerste F.A.I.-QSO van 1990 via Genève op 330°): het spoor passeert dicht bij Genève.
 TAG|RILIEVO|Geval DL5MCG [6]: baken DB0FAI (JN58IC) - Dresden via Sheffield, afwijking 0,3° op 110 km.
 TAG|SCELTA|Refractie: voor elevaties en horizonnen van de weergaven F.A.I. en AURORA wordt standaard de equivalente aardstraal k · r gebruikt met k = 4/3 (standaardatmosfeer), uit te schakelen met het selectievakje "Refractie". Grondafstanden en reflectievoorwaarde blijven berekend op de werkelijke geometrie.
 EQ|e = atan2( (k·r + H) · cos(d / k·r) − (k·r + h) ,  (k·r + H) · sin(d / k·r) )
-TAG|SCELTA|Berekening niet mogelijk: als volgens het model geen enkel punt binnen 2,5° aan de voorwaarde voldoet (weergave Spoor) of het reflectiepunt onder de horizon van het station ligt (weergave Iso-reflectie), toont het programma de pop-up "Berekening niet mogelijk" en geen andere resultaten.
+TAG|SCELTA|Berekening niet mogelijk: als volgens het model geen enkel punt binnen 2,5° aan de voorwaarde voldoet (weergave Scatter trail) of het reflectiepunt onder de horizon van het station ligt (weergave Iso-reflectie), toont het programma de pop-up "Berekening niet mogelijk" en geen andere resultaten.
 H2|4.4 Weergave "Iso-reflectie" (isoflection loci): controle van het reflectiepunt
 TAG|FONTE|Dit is de typische geometrische constructie bij F.A.I. en aurora om te controleren of het gekozen reflectiepunt juist is (iso-reflectielijnen van SE-PROP [9], AuroReflex [11], supplementaire contouren van K9SE/K4GFG [2] [10]).
 P|Voor het reflectiepunt SP en voor elk grondpunt G binnen de horizon van SP berekent het programma de som van de contouren; de lijn S = 0 is de meetkundige plaats van de stations die A via SP ontvangen:
@@ -69,7 +69,7 @@ TAG|SCELTA|Aanbevolen richting, voor beide stations: langs de loodlijn van elk s
 TAG|FONTE|Operationele regels: richten tussen noord en oost, beginnend bij ongeveer 45°; Doppler tot ~2 kHz op 144 MHz, typisch bereik ~1300 km, maximaal ~2000 km (G3WPO [14]).
 H1|5. Gegevensverzameling
 H2|5.1 Telnet-sessies
-TAG|SCELTA|Drie sessies: cluster naar keuze, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster met de spots van PSKReporter (bijv. HamAlert [19]). Automatisch inloggen met de roepnaam, begincommando's gescheiden door puntkomma's, opnieuw verbinden na 30 s.
+TAG|SCELTA|Drie sessies: cluster naar keuze, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster met de spots van PSKReporter (bijv. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisch inloggen met de roepnaam, begincommando's gescheiden door puntkomma's, opnieuw verbinden na 30 s.
 H2|5.2 Inlezen van de spots
 TAG|SCELTA|Regel "DX de SPOTTER: FREQ DXCALL commentaar HHMMZ [LOC]" ingelezen met een reguliere expressie (niet met vaste kolommen). Uit het commentaar worden gelezen: locators en modus in de vorm "JN70CN<ES>JO62QM" (eerste locator = spotter, tweede = DX), de propagatiemodus (ES, FAI, AU, MS, TR, EME, F2, TEP), de S/N-verhouding en de zendsoort. Ontbrekende locators worden in CALL3 [21] opgezocht; locators van 6 tekens uit de commentaren worden aan data/call3_nuovi.txt toegevoegd.
 TAG|SCELTA|Archief: één CSV-bestand per dag in data/spot; in het geheugen de laatste spots (maximaal 50000). Met RBN en PSKReporter worden normaal alleen spots vanaf 28 MHz opgeslagen.
@@ -77,9 +77,12 @@ H1|6. ADIF-log
 TAG|FONTE|Port van LoTW Grid Map v2 [25]: het LoTW-rapport (gedownload met gebruikersnaam en wachtwoord, dat nooit wordt opgeslagen) en de ADIF-bestanden van het log worden samengevoegd op roepnaam, band, datum en tijd; de bevestigingen worden opgeteld.
 TAG|SCELTA|Alleen de banden vanaf 28 MHz, elk als afzonderlijke band, zonder samenvoegingen. Kleuren: oranje = gewerkt, blauw = bevestigd met QSL, groen = bevestigd via LoTW. Filter op propagatiemodus (PROP_MODE van ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Kleurenschema's
-TAG|FONTE|Naast "Meteorenspoor" van YA-MS biedt het programma alle schema's van YAEC [26]: licht, nachtblauw, zwart en acht pastelkleuren. Het schema kies je rechtsboven, waarna het programma opnieuw start.
-H1|8. Beperkingen
+TAG|FONTE|De kleurenschema's zijn die van YA-MS 1.3.0, die YAEC [26] volgen: Licht, Nacht, Zwart, acht pasteltinten en Meteorenspoor. Het schema kies je rechtsboven en het venster wordt meteen opnieuw opgebouwd; in de weergave Iso-reflectie gebruiken donkere schema's gekleurde banden en lichte schema's dikke lijnen (4.4).
+H1|8. Meteorscatter (YA-MS 1.3.0) en talen
+TAG|FONTE|Het tabblad METEOR SCATTER bevat het volledige YA-MS 1.3.0 [5], met een eigen document "Efficiëntie - uitleg" en eigen bronnen. Het script tools/sync_yams.py neemt elke nieuwe YA-MS-versie over en maakt er een paneel van zonder de berekeningen te wijzigen.
+TAG|SCELTA|Talen: Italiaans, Engels, Russisch, Japans, Duits en Nederlands, voor de interface (data/lingue/ela-<code>.txt), het Technisch document en de Bronnen. In de weergave F.A.I./aurora heet het spoor van scatterpunten in alle vertalingen "Scatter trail". De statusbalk toont het gebruikte magnetisch veldmodel (IGRF-14 van de IAGA [16]).
+H1|9. Beperkingen
 LI|Stations in het midden van het locatorvak: met locators van 4 tekens loopt de fout op tot ~80 km.
 LI|De foEs uit de spots is een minimumdrempel en de secanswet overschat de benodigde foEs op VHF (zie 2.3).
-LI|Het "meest waarschijnlijke" scatterpunt is een criterium van het programma: het volledige spoor is het fysische resultaat.
+LI|Het "meest waarschijnlijke" scatterpunt is een criterium van het programma: de volledige scatter trail is het fysische resultaat.
 LI|Het OVATION-ovaal is een kansmodel voor optische aurora, gebruikt als indicator voor radio-aurora.

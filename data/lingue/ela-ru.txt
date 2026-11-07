@@ -58,7 +58,7 @@ LOG ADIF	LOG ADIF
 Fonti citate dal programma, linguetta per linguetta	Источники, на которые ссылается программа, по вкладкам
 DOCUMENTO TECNICO	ТЕХНИЧЕСКИЙ ДОКУМЕНТ
 Come il programma calcola: formule e fonti a ogni passo	Как считает программа: формулы и источники на каждом шаге
-CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Campo: {3}	CALL3: {0:N0} позывных{1}   Спотов в памяти: {2}   Геомагнитное поле: {3}
+CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Modello magnetico: {3}	CALL3: {0:N0} позывных{1}   Спотов в памяти: {2}   Модель магнитного поля: {3}
 caricamento	загрузка
 Locator non valido (4, 6 o 8 caratteri, es. JN70CN).	Неверный локатор (4, 6 или 8 символов, напр. JN70CN).
 ultimi {0} min	последние {0} мин
@@ -139,7 +139,7 @@ LoTW ha rifiutato l'accesso: controlla nome utente e password.	LoTW отказа
 Risposta inattesa da LoTW (non è un file ADIF). Riprova più tardi.	Неожиданный ответ LoTW (не файл ADIF). Повторите попытку позже.
 Errore di collegamento: {0}	Ошибка подключения: {0}
 Carico la mappa (Natural Earth)...	Загрузка карты (Natural Earth)...
-Scia (coppia A-B)	Полоса (пара A-B)
+Scia (coppia A-B)	Scatter trail (пара A-B)
 Iso-riflessione (punto)	Изоотражение (точка)
 Verifiche...	Проверки...
 Scatter noti...	Известные точки рассеяния...
@@ -161,7 +161,7 @@ Manca la stazione A: imposta il locator della stazione in alto o scrivilo nella 
 Calcolo non possibile	Расчёт невозможен
 Imposta la stazione B (nominativo, locator o clic sulla mappa).	Задайте станцию B (позывной, локатор или щелчок по карте).
 Deviazione dalla condizione di riflessione	Отклонение от условия отражения
-Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km	Полоса возможных точек рассеяния {0} - {1} ({2:F0} km), высота {3:F0} km
+Scia degli scatter point possibili {0} - {1} ({2:F0} km), quota {3:F0} km	Scatter trail возможных точек рассеяния {0} - {1} ({2:F0} km), высота {3:F0} km
 Celle del luogo entro 2,5°: {0} (passo {1}°); entrambe le stazioni vedono il punto sopra {2:F1}° di elevazione{3}.	Ячеек в пределах 2,5°: {0} (шаг {1}°); обе станции видят точку под углом места выше {2:F1}°{3}.
 , con la rifrazione (4/3)	, с учётом рефракции (4/3)
 Per il modello nessun punto alla quota di {0:F0} km, visto da entrambe le stazioni ({1} e {2}), soddisfa la condizione di riflessione entro 2,5°.	По модели ни одна точка на высоте {0:F0} km, видимая обеими станциями ({1} и {2}), не удовлетворяет условию отражения в пределах 2,5°.
@@ -170,8 +170,8 @@ Scatter point più probabile (deviazione minima e tratta più corta):	Наибо
   {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km	  {0}: QTF {1:F0}°, угол места {2:F1}°, расстояние {3:F0} km
   Inclinazione magnetica nel punto: {0:F1}°	  Магнитное наклонение в точке: {0:F1}°
 {0}: QTF {1:F0}°  el {2:F0}°	{0}: QTF {1:F0}°  УМ {2:F0}°
-  La scia passa a {0:F0} km dallo scatter noto {1}.	  Полоса проходит в {0:F0} km от известной точки рассеяния {1}.
-Riquadro in alto a destra: QTF ed elevazione verso ogni punto della scia, rosso = A, verde = B (più intenso = deviazione minore).	Панель вверху справа: QTF и угол места на каждую точку полосы, красный = A, зелёный = B (ярче = меньше отклонение).
+  La scia passa a {0:F0} km dallo scatter noto {1}.	  Scatter trail проходит в {0:F0} km от известной точки рассеяния {1}.
+Riquadro in alto a destra: QTF ed elevazione verso ogni punto della scia, rosso = A, verde = B (più intenso = deviazione minore).	Панель вверху справа: QTF и угол места на каждую точку Scatter trail, красный = A, зелёный = B (ярче = меньше отклонение).
 Clic sinistro sulla mappa per scegliere il punto di riflessione da verificare, oppure "Verifica il punto consigliato".	Щёлкните левой кнопкой по карте, чтобы выбрать точку отражения для проверки, или нажмите «Проверить рекомендуемую точку».
 Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).	Точка отражения {0} ниже горизонта {1} на высоте {2:F0} km (угол места {3:F1}°).
 {0}: azimut {1:F0}°  elevazione {2:F0}°	{0}: азимут {1:F0}°  угол места {2:F0}°
@@ -216,7 +216,7 @@ Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: abilitale con 
 Reverse Beacon Network	Reverse Beacon Network
 RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo.	RBN: порт 7000 = CW и RTTY, порт 7001 = FT8. Вход только с позывным.
 Cluster con PSKReporter	Кластер с PSKReporter
-Cluster che riceve gli spot di PSKReporter (es. HamAlert, serve un account con i trigger; o il cluster di DM4X se ne conosci l'indirizzo).	Кластер, получающий споты PSKReporter (напр. HamAlert — нужна учётная запись с триггерами; или кластер DM4X, если вы знаете его адрес).
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500). In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	Кластер DM4X со спотами PSKReporter (dm4x.ddns.net, порт 8500). Как альтернатива — HamAlert (hamalert.org 7300, нужна учётная запись с триггерами).
 Tutti i modi di propagazione	Все виды прохождения
 ES - sporadico E	ES - спорадический E
 FAI	FAI

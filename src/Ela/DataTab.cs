@@ -34,7 +34,7 @@ namespace ELA
         {
             new[] { "DX cluster a scelta", "on0dxk.dyndns.org", "8000", "set/filter dxbm/pass 6", "Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: abilitale con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300." },
             new[] { "Reverse Beacon Network", "telnet.reversebeacon.net", "7001", "", "RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo." },
-            new[] { "Cluster con PSKReporter", "hamalert.org", "7300", "", "Cluster che riceve gli spot di PSKReporter (es. HamAlert, serve un account con i trigger; o il cluster di DM4X se ne conosci l'indirizzo)." }
+            new[] { "Cluster con PSKReporter", "dm4x.ddns.net", "8500", "", "Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500). In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger)." }
         };
 
         public DataTab()

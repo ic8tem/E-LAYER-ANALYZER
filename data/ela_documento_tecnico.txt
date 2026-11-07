@@ -1,5 +1,5 @@
 TITLE|Come E-LAYER ANALYZER calcola
-SUB|Documento tecnico - a cura di Costantino IC8TEM - versione 0.1.0, novembre 2026. I numeri tra parentesi quadre rimandano alla linguetta FONTI.
+SUB|Documento tecnico - a cura di Costantino IC8TEM - versione 0.3.0, novembre 2026. I numeri tra parentesi quadre rimandano alla linguetta FONTI.
 H1|1. Introduzione
 H2|1.1 Scopo
 P|E-LAYER ANALYZER analizza i modi di propagazione VHF che coinvolgono lo strato E: sporadico E (anche multi-salto extracontinentale), F.A.I. (irregolarità allineate al campo magnetico), meteor scatter (con il programma YA-MS) e aurora radio. Questo documento descrive ogni calcolo e da dove viene.
@@ -69,7 +69,7 @@ TAG|SCELTA|Puntamento consigliato, per entrambe le stazioni: lungo la linea di p
 TAG|FONTE|Regole operative: puntare tra nord e est, partendo da circa 45°; Doppler fino a ~2 kHz a 144 MHz, portata tipica ~1300 km, massima ~2000 km (G3WPO [14]).
 H1|5. Raccolta dei dati
 H2|5.1 Sessioni telnet
-TAG|SCELTA|Tre sessioni: cluster a scelta, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster con gli spot di PSKReporter (es. HamAlert [19]). Login automatico con il nominativo, comandi iniziali separati da punto e virgola, riconnessione dopo 30 s.
+TAG|SCELTA|Tre sessioni: cluster a scelta, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster con gli spot di PSKReporter (es. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Login automatico con il nominativo, comandi iniziali separati da punto e virgola, riconnessione dopo 30 s.
 H2|5.2 Lettura degli spot
 TAG|SCELTA|Riga "DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" letta con un'espressione regolare (non a colonne fisse). Dal commento si leggono locator e modo nella forma "JN70CN<ES>JO62QM" (primo locator = spotter, secondo = DX), il modo di propagazione (ES, FAI, AU, MS, TR, EME, F2, TEP), il rapporto S/N e il modo di emissione. I locator mancanti si cercano in CALL3 [21]; quelli a 6 caratteri letti nei commenti si aggiungono a data/call3_nuovi.txt.
 TAG|SCELTA|Archivio: un file CSV al giorno in data/spot; in memoria gli ultimi spot (al massimo 50000). Con RBN e PSKReporter si salvano di norma solo gli spot da 28 MHz in su.
@@ -77,8 +77,11 @@ H1|6. Log ADIF
 TAG|FONTE|Porting di LoTW Grid Map v2 [25]: il report LoTW (scaricato con nome utente e password, che non viene mai salvata) e i file ADIF del log si uniscono per nominativo, banda, data e ora; le conferme si sommano.
 TAG|SCELTA|Solo le bande dai 28 MHz in su, ognuna come banda singola, senza aggregazioni. Colori: arancione = lavorato, blu = confermato con QSL, verde = confermato via LoTW. Filtro sul modo di propagazione (PROP_MODE dell'ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
 H1|7. Colorazioni
-TAG|FONTE|Oltre alla "Scia meteorica" di YA-MS, il programma offre tutti gli schemi di YAEC [26]: chiaro, notte blu, nero e otto pastelli. Lo schema si sceglie in alto a destra e il programma si riavvia.
-H1|8. Limiti
+TAG|FONTE|Gli schemi di colore sono quelli di YA-MS 1.3.0, che riprendono YAEC [26]: Chiaro, Notte, Nero, otto pastelli e Scia meteorica. Lo schema si sceglie in alto a destra e la finestra si ricostruisce subito; nella vista Iso-riflessione gli schemi scuri usano fasce colorate e quelli chiari linee spesse (4.4).
+H1|8. Meteor scatter (YA-MS 1.3.0) e lingue
+TAG|FONTE|La linguetta METEOR SCATTER contiene YA-MS 1.3.0 completo [5], con il suo documento "Efficienza - spiegazione" e le sue fonti. Lo script tools/sync_yams.py copia ogni nuova versione di YA-MS e la trasforma in pannello senza modificarne i calcoli.
+TAG|SCELTA|Lingue: italiano, inglese, russo, giapponese, tedesco e olandese, per l'interfaccia (data/lingue/ela-<codice>.txt), per il Documento tecnico e per le Fonti. Nella vista F.A.I./aurora la scia degli scatter point si chiama "Scatter trail" in tutte le traduzioni. La barra di stato indica il modello magnetico in uso (IGRF-14 dell'IAGA [16]).
+H1|9. Limiti
 LI|Stazioni al centro del quadrato del locator: con locator a 4 caratteri l'errore arriva a ~80 km.
 LI|La foEs dagli spot è una soglia minima e la legge della secante sovrastima la foEs necessaria in VHF (vedi 2.3).
 LI|Lo scatter point "più probabile" è un criterio del programma: la scia intera è il risultato fisico.
