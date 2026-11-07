@@ -86,7 +86,7 @@ namespace ELA
             double zx = 360.0 / Math.Max(1, lonE - lonW);
             double zy = (h / w) * 360.0 / Math.Max(1, latN - latS);
             Zoom = Math.Max(0.8, Math.Min(zx, zy));
-            pendingView = new double[] { lonW, lonE, latS, latN };
+            pendingView = Bounds.Width > 10 ? null : new double[] { lonW, lonE, latS, latN };   // solo se la mappa non e' ancora disposta
             InvalidateVisual();
             NotifyView();
         }
@@ -202,10 +202,17 @@ namespace ELA
             return new FormattedText(s ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily.Default, FontStyle.Normal, w), size * UiScale.Font, new SolidColorBrush(c));
         }
 
+        // coste e confini proiettati: si ricalcolano solo quando cambiano vista, centro, raggio o dimensioni
+        // (il movimento del mouse ridisegna la mappa senza riproiettare migliaia di punti)
+        readonly Dictionary<object, KeyValuePair<string, StreamGeometry>> geoCache = new Dictionary<object, KeyValuePair<string, StreamGeometry>>();
+
         void DrawPolyLines(DrawingContext ctx, List<System.Drawing.PointF[]> lines, IPen pen, bool fillLand)
         {
             if (lines == null) return;
             double W = Bounds.Width, H = Bounds.Height;
+            string key = string.Join("|", Azimuthal, AzLat, AzLon, RangeKm, CenterLon, CenterLat, Zoom, W, H, lines.Count);
+            KeyValuePair<string, StreamGeometry> cached;
+            if (geoCache.TryGetValue(lines, out cached) && cached.Key == key) { ctx.DrawGeometry(null, pen, cached.Value); return; }
             StreamGeometry g = new StreamGeometry();
             using (StreamGeometryContext gc = g.Open())
             {
@@ -228,6 +235,7 @@ namespace ELA
                     if (open) gc.EndFigure(false);
                 }
             }
+            geoCache[lines] = new KeyValuePair<string, StreamGeometry>(key, g);
             ctx.DrawGeometry(null, pen, g);
         }
 

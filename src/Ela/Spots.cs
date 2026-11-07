@@ -16,7 +16,7 @@ namespace ELA
         public int Source;            // 0 = cluster a scelta, 1 = RBN, 2 = cluster con PSKReporter, 9 = prova
         public string Prop = "";      // modo di propagazione dichiarato: ES, FAI, AU, MS, TR, EME, F2, TEP
         public string LocSpotter = "", LocDx = "";
-        public bool LocFromComment;   // locator letti nel commento (non da CALL3)
+        public bool LocFromComment;   // due locator letti nel commento nella forma LOC<modo>LOC (si imparano per CALL3)
         public double LatS = double.NaN, LonS = double.NaN, LatD = double.NaN, LonD = double.NaN;
         public double Snr = double.NaN;
         public string DigiMode = "";  // CW, FT8, FT4, ... (RBN e PSKReporter)
@@ -125,7 +125,7 @@ namespace ELA
             {
                 // un solo locator nel commento: di solito e' quello del DX
                 Match l = rxLoc.Match(c);
-                if (l.Success && Geo.IsLocator(l.Groups[1].Value)) { s.LocDx = l.Groups[1].Value.ToUpperInvariant(); s.LocFromComment = true; }
+                if (l.Success && Geo.IsLocator(l.Groups[1].Value)) { s.LocDx = l.Groups[1].Value.ToUpperInvariant(); }   // un solo locator: non si impara (potrebbe essere dello spotter)
             }
             if (s.Prop.Length == 0)
             {

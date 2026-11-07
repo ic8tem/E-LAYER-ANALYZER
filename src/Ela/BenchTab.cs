@@ -65,7 +65,7 @@ namespace ELA
             txtCall = Ui.T("", 95, true);
             txtLoc = Ui.T("", 80, true);
             Button bCentre = Ui.B(Lang.T("Applica"));
-            bCentre.Click += (s, e) => { SetCentre(); Analyze(); };
+            bCentre.Click += (s, e) => { SetCentre(); Rebuild(); };   // ricostruisce i QSO: chi non ha MY_GRIDSQUARE parte dal nuovo centro
 
             c10 = Ui.C("10 m", cf.GetB("bench_10m", true)); c6 = Ui.C("6 m", cf.GetB("bench_6m", true));
             c4 = Ui.C("4 m", cf.GetB("bench_4m", true)); c2 = Ui.C("2 m", cf.GetB("bench_2m", true));
@@ -205,6 +205,7 @@ namespace ELA
         void Unload()
         {
             file = ""; raw = new List<Dictionary<string, string>>(); all = new List<BenchQso>(); cur = new List<BenchQso>();
+            sectors = new List<Sector>(); clouds = new List<Cloud>();
             selDay = null; selHour = -1; selQso = null;
             ShowEmpty();
         }
@@ -254,6 +255,7 @@ namespace ELA
                     string prop = Field(r, "PROP_MODE");
                     if (chkProp.IsChecked == true && prop.Length > 0 && prop != "ES" && Array.IndexOf(OtherProp, prop) >= 0) { otherProp++; continue; }
                     string grid = Field(r, "GRIDSQUARE");
+                    int cm = grid.IndexOfAny(new[] { ',', ' ', ';' }); if (cm > 0) grid = grid.Substring(0, cm);   // piu' quadrati (VUCC): il primo
                     if (grid.Length > 6) grid = grid.Substring(0, 6);
                     grid = CallDb.Refine(Field(r, "CALL"), grid) ?? grid;   // locator non preciso: da CALL3 (stesso quadrato)
                     if (grid.Length > 6) grid = grid.Substring(0, 6);

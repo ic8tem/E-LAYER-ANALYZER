@@ -107,7 +107,13 @@ namespace ELA
             right.Children.Add(inner.Host);
 
             map.SetView(-30, 60, 20, 72);
-            map.Clicked += (la, lo, rightBtn) => { clickLat = la; clickLon = lo; sel = null; selKey = null; Draw(); Details(); };
+            map.Clicked += (la, lo, rightBtn) =>
+            {
+                // clic vicino a uno spot (stazioni o punti di riflessione, entro 12 pixel): si sceglie lo spot; altrimenti il punto
+                EsPath hit = Nearest(la, lo);
+                if (hit != null) { sel = hit; selKey = hit.Spot.Key; clickLat = clickLon = double.NaN; FillTables(); Draw(); Details(); return; }
+                clickLat = la; clickLon = lo; sel = null; selKey = null; Draw(); Details();
+            };
             // la tabella mostra solo gli spot che si vedono sulla mappa: si aggiorna dopo zoom, spostamento o cambio del raggio
             DispatcherTimer viewTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(250) };
             viewTimer.Tick += (s, e) => { viewTimer.Stop(); FillTables(); };
@@ -194,7 +200,7 @@ namespace ELA
             foreach (Spot s in sp)
             {
                 // un solo spot per coppia di stazioni e banda (il piu' recente)
-                string k = s.DxCall + "|" + s.LocSpotter + "|" + s.Band;
+                string k = s.DxCall + "|" + s.Spotter + "|" + s.Band;
                 if (!seen.Add(k)) continue;
                 EsPath p = EsModel.Build(s, H);
                 if (p != null && p.Hops > 0) paths.Add(p);
@@ -353,6 +359,23 @@ namespace ELA
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("cerchio verde: portata del singolo salto dalla mia stazione"), Pal.Green));
             map.LegendTitle = Lang.T("Nubi: foEs minima <5 / 7 / 10 / 14 / 20 / >20 MHz = blu, azzurro, verde, giallo, arancio, rosso");
             map.InvalidateVisual();
+        }
+
+        EsPath Nearest(double la, double lo)
+        {
+            Point c = map.ToScreen(la, lo);
+            EsPath best = null; double bd = 12;
+            foreach (EsPath p in paths)
+            {
+                List<Point> pts = new List<Point> { map.ToScreen(p.Spot.LatS, p.Spot.LonS), map.ToScreen(p.Spot.LatD, p.Spot.LonD) };
+                foreach (EsHop h in p.Points) pts.Add(map.ToScreen(h.Lat, h.Lon));
+                foreach (Point q in pts)
+                {
+                    double d = Math.Sqrt((q.X - c.X) * (q.X - c.X) + (q.Y - c.Y) * (q.Y - c.Y));
+                    if (d < bd) { bd = d; best = p; }
+                }
+            }
+            return best;
         }
 
         // lo spot e' visibile sulla mappa? (una delle due stazioni o un punto di riflessione)

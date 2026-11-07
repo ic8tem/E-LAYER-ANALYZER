@@ -95,7 +95,7 @@ namespace ELA
         //    nello stesso posto, oppure 4) se nei dintorni c'e' almeno uno spot in 50 MHz di salto corto.
         // Scelte del programma per "stesso posto", "dintorni" e "salto corto": punti di riflessione entro 300 km,
         // spot a 50 MHz in singolo salto entro ShortHopKm (1200 km) e entro 15 minuti dallo spot in 144 MHz.
-        public const double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15;
+        public const double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15, Short50Km = 1200;
 
         static IEnumerable<EsHop> RefPoints(EsPath p)
         {
@@ -140,7 +140,7 @@ namespace ELA
                 if (!ok && six != null)
                     foreach (EsPath r in six)
                     {
-                        if (r.Hops != 1 || r.DistKm > Math.Max(ShortHopKm, 1200)) continue;
+                        if (r.Hops != 1 || r.DistKm > Short50Km) continue;
                         if (Math.Abs((r.Spot.Utc - p.Spot.Utc).TotalMinutes) > Near50Min) continue;
                         if (RefDistKm(p, r) <= CloudMatchKm) { ok = true; break; }
                     }

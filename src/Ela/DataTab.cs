@@ -29,7 +29,7 @@ namespace ELA
         bool dirty = true;
         public static bool VhfOnly = true;
         public const double MinKHz = 27990.0;   // soglia del filtro locale delle righe del cluster (kHz)
-        static readonly System.Text.RegularExpressions.Regex rxDxFreq = new System.Text.RegularExpressions.Regex(@"^\s*DX de\s+\S+?:?\s+(\d+(?:\.\d+)?)",
+        static readonly System.Text.RegularExpressions.Regex rxDxFreq = new System.Text.RegularExpressions.Regex(@"DX de\s+\S+?:?\s+(\d+(?:\.\d+)?)",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         // frequenza (kHz) di una riga "DX de ..."; NaN se la riga non e' uno spot
         public static double LineFreqKHz(string l)

@@ -17,7 +17,7 @@ cat > "$HOME/.local/share/applications/e-layer-analyzer.desktop" <<DESK
 [Desktop Entry]
 Type=Application
 Name=E-LAYER ANALYZER
-Comment=Propagazione dello strato E: sporadico E, F.A.I., meteor scatter, aurora
+Comment=Propagazione dello strato E: E-sporadico, F.A.I., meteor scatter, aurora
 Exec="$DEST/E-LAYER-ANALYZER"
 Path=$DEST
 Icon=e-layer-analyzer

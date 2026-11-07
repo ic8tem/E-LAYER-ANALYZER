@@ -11,13 +11,13 @@ namespace ELA
 {
     public static class CallDb
     {
-        static string[] calls = new string[0];
-        static string[] locs = new string[0];
+        sealed class Table { public string[] Calls = new string[0], Locs = new string[0]; }
+        static volatile Table table = new Table();
         static readonly Dictionary<string, string> learned = new Dictionary<string, string>(StringComparer.Ordinal);
         static readonly object lk = new object();
 
         public static volatile bool Loading;
-        public static int Count { get { return calls.Length; } }
+        public static int Count { get { return table.Calls.Length; } }
         public static int LearnedCount { get { lock (lk) return learned.Count; } }
         public static string FilePath, LearnedPath, Header = "";
         public static DateTime FileDate;
@@ -73,7 +73,7 @@ namespace ELA
             list.Sort((a, b) => string.CompareOrdinal(a.Key, b.Key));
             string[] c = new string[list.Count], l = new string[list.Count];
             for (int i = 0; i < list.Count; i++) { c[i] = list[i].Key; l[i] = list[i].Value; }
-            calls = c; locs = l;
+            table = new Table { Calls = c, Locs = l };   // una sola assegnazione: chi legge vede sempre una coppia coerente
             Header = head.ToString();
             lock (lk)
             {
@@ -90,13 +90,14 @@ namespace ELA
         static string Exact(string call)
         {
             lock (lk) { string l; if (learned.TryGetValue(call, out l)) return l; }
-            string[] c = calls;
+            Table t = table;
+            string[] c = t.Calls;
             int lo = 0, hi = c.Length - 1;
             while (lo <= hi)
             {
                 int mid = (lo + hi) >> 1;
                 int k = string.CompareOrdinal(c[mid], call);
-                if (k == 0) return locs[mid];
+                if (k == 0) return t.Locs[mid];
                 if (k < 0) lo = mid + 1; else hi = mid - 1;
             }
             return null;
@@ -122,7 +123,7 @@ namespace ELA
 
         // Locator imparato da uno spot (solo 6 caratteri, per non peggiorare un dato piu' preciso)
         // Regola dell'autore: i locator non precisi (meno di 6 caratteri) si prendono da CALL3. Se CALL3 ha per quel
-        // nominativo un locator a 6 o piu' caratteri nello stesso quadrato (o campo, per un locator a 2) si usa quello;
+        // nominativo un locator a 6 o piu' caratteri nello stesso quadrato si usa quello;
         // se CALL3 indica un altro quadrato (stazione portatile o spostata) resta il locator dello spot.
         public static string Refine(string call, string loc)
         {

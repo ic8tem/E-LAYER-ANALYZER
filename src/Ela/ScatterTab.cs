@@ -168,7 +168,8 @@ namespace ELA
             Root = Ui.MapAndData(mg, right);
             DefaultView();
 
-            SpotStore.Added += s => spotsDirty = true;
+            // si ridisegna solo per gli spot che riguardano questa linguetta (aurora: <AU>/<AUR>; F.A.I.: FAI)
+            SpotStore.Added += s => { if (aurora ? s.IsAurora : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))) spotsDirty = true; };
             Station.Changed += () => Recalc();
             DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
             t.Tick += (s, e) =>
@@ -179,7 +180,8 @@ namespace ELA
             t.Start();
         }
 
-        bool spotsDirty = true, fetching;
+        bool spotsDirty = true;
+        static bool fetching;   // condiviso: una sola richiesta NOAA anche con piu' finestre (cambio di lingua o di tema)
         public static bool autoFetch = true;
 
         // per le fotografie automatiche
