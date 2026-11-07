@@ -1,0 +1,57 @@
+TITLE|Tækniskýrsla um E-LAYER ANALYZER
+SUB|Valið sem leiddi til smíði forritsins - umsjón: Costantino IC8TEM - útgáfa 0.4.3, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR.
+H1|1. Formáli
+P|E-LAYER ANALYZER sprettur af skýrri þörf VHF-radíóamatörsins: að hafa í einu verkfæri allt sem þarf til að túlka þær útbreiðsluaðferðir sem tengjast E-lagi jónhvolfsins. Fram til þessa hafa sporadic-E, F.A.I., meteor scatter og radíónorðurljós verið rannsökuð með ólíkum forritum, oft gerðum fyrir eitt stýrikerfi, stundum ekki lengur viðhaldið, hvert með sitt rúmfræðilíkan og sínar venjur. Í skýrslu þessari er gerð grein fyrir ástæðum þess vals sem gert var, og greint á milli þess sem á rætur í fræðunum, þess sem á rætur í reynslu höfundar á tíðnisviðunum og þess sem er val forritsins og staðfesta þarf með notkun.
+H2|1.1 Markmið
+LI|Að sameina í einu forriti greiningu á sporadic-E, einnig fjölstökki og milli heimsálfa, á F.A.I., meteor scatter og radíónorðurljósum.
+LI|Að vinna með raunveruleg gögn: spot frá DX-klösum í rauntíma og ADIF-dagbækur stöðvanna.
+LI|Að gera hvern útreikning sannreynanlegan: jöfnur og heimildir settar fram skref fyrir skref, ásamt raunverulegum samanburðardæmum.
+LI|Að virka hvar sem radíóamatörinn hefur stöðvartölvu sína, frá Windows-tölvu til Raspberry Pi.
+H2|1.2 Aðferð
+P|Verkið gekk fram með endurteknum prófunum: hver flipi var fyrst gerður í drögum, síðan sannreyndur á skjalfestum dæmum og loks leiðréttur samkvæmt ábendingum höfundar, sem byggja á margra ára starfi á VHF frá Capri (JN70CN). Þær reglur sem af þessu leiddu eru tilgreindar sem reglur höfundar í yfirlitinu yfir val útreikninga, svo að lesandinn geti greint þær frá niðurstöðum fræðanna.
+H1|2. Uppbygging forritsins
+H2|2.1 Einn grunnur fyrir öll kerfi
+TAG|SCELTA|Forritið er skrifað í C# á .NET 8 með myndræna viðmótinu Avalonia. Það var tekið fram yfir lausnir bundnar við Windows vegna þess að einn kóði gefur af sér pakka fyrir Windows 64 og 32 bita, Linux, Raspberry Pi (ARM64) og Mac, með sama útliti og sömu virkni; þýðing og pakkar eru unnin sjálfvirkt, með prófunarmyndum af hverjum flipa í mörgum litastefjum og tungumálum.
+TAG|SCELTA|Öll gögn haldast í möppunni data við hlið forritsins og engin skrá er skrifuð í AppData eða kerfismöppur: forritið er flutt með því að afrita eina möppu, endurstillt með því að eyða einni skrá, og stöðin ræður sjálf yfir eigin gögnum. Af sömu ástæðu er lykilorð LoTW aldrei vistað.
+H2|2.2 Fjölskylda forrita
+P|E-LAYER ANALYZER deilir útliti, litastefjum og venjum með YA-MS og YAEC, hinum forritum höfundar. YA-MS, sem helgað er meteor scatter, er í heild sinni innan flipans METEOR SCATTER: samræmingarskrifta breytir því úr glugga í spjald án þess að hrófla við útreikningum þess, svo að hver ný útgáfa YA-MS kemst inn í E-LAYER ANALYZER án þess að vera endurskrifuð. Þegar forritin tvö hafa sameiginlega virkni, svo sem söfnun spota, gildir ein regla: innan E-LAYER ANALYZER tekur gagnasöfnun YA-MS við línum úr telnet-lotum DATA COLLECTION, svo að komist sé hjá tvöföldum tengingum með sama kallmerki.
+H2|2.3 Viðmótið
+TAG|SCELTA|Hver greiningarflipi ætlar kortinu að minnsta kosti 65% gluggans og gögnum og útreikningum 35%: útbreiðsla er landfræðilegt fyrirbæri og kortið á að vera þungamiðja lestursins. Kortin eru af þremur gerðum, hver valin eftir hlutverki sínu: jafnfjarlægt áttarhornskort með stöðina í miðju fyrir sporadic-E (réttar fjarlægðir og áttarhorn, hringir jafnrar fjarlægðar), Mercator-kort með frjálsri miðju fyrir fjölstökk á 50 MHz á heimsvísu, og ferhyrnt lengdar- og breiddarbaugakort (equirectangular) fyrir F.A.I. og norðurljós, þar sem net locatora og sviðslínur skipta máli.
+TAG|SCELTA|Allur texti, skjöl og wiki eru þýdd: 28 tungumál, öll tungumál YAEC auk dönsku og tagalog. Í sýn F.A.I. og norðurljósa heitir ferill scatter point Scatter trail á öllum tungumálum, til að forðast rugling við loftsteinaslóð.
+H1|3. Eðlisfræðilegt val
+H2|3.1 Sameiginleg rúmfræði
+TAG|FONTE|Jörðin er kúla með radíus 6372,7955 km, eins og í greininni um F.A.I. [1] og í YA-MS [5]; hæðarhorn að punkti í laginu og sekantlögmálið eru samkvæmt sígildum fræðum. Val kúlunnar fremur en sporvölunnar samræmist nákvæmni 6 stafa locatora, sem er nokkrir kílómetrar.
+TAG|SCELTA|Í F.A.I. og norðurljósum er beitt ljósbroti í veðrahvolfi með jafngildum jarðarradíus 4/3, sem færir radíósjóndeildarhringinn um nokkra tugi kílómetra; í sporadic-E, þar sem fjarlægðir milli stöðva skipta mestu, helst rúmfræði hinnar raunverulegu kúlu.
+H2|3.2 Sporadic-E
+TAG|FONTE|Fjöldi stökka fylgir töflu Flavio Egano IK3XTV [3]: eitt stökk upp í 2200-2400 km, tvöfalt upp í 4400-5000 km, þrefalt upp í 6900 km. Taflan er reynslubundin, unnin úr raunverulegum samböndum, og var þess vegna tekin fram yfir hreinan rúmfræðilegan útreikning, sem gæfi meira fræðilegt drægi en það sem sést.
+TAG|FONTE|Í fjölstökki setur forritið við hlið tilgátunnar um jöfn stökk tilgátuna um stutt fyrsta stökk, innan 1200 km frá eigin QTH, sem sprettur af reynslu höfundar [4]. Tilgáturnar tvær eru bornar saman í BENCHMARK-flipunum við ský sem sáust í stöku stökki á sömu klukkustund: það er heiðarlegasta leiðin til að láta gögnin skera úr.
+TAG|SCELTA|foEs er metin með sekantlögmálinu og er ávallt lágmarksþröskuldur: spot segir að tíðnin hafi komist í gegn, ekki hve há markatíðnin var. Skýjunum er safnað á 4 stafa Maidenhead-reiti, þann kvarða sem radíóamatörar lesa og bera saman útbreiðslu á.
+TAG|FONTE|Sporadic-E á ekki við um 432 MHz: MUF þess nær um 150-200 MHz [22], [23] og met ARRL skrá Es-sambönd aðeins á 50 og 144 MHz [24]. Forritið tekur þetta skýrt fram, vegna þess að sumar almennar heimildir, einnig efni búið til af gervigreind, halda hinu gagnstæða fram.
+H2|3.3 F.A.I. og norðurljós
+TAG|FONTE|F.A.I. byggir á grein IC8FAX og IC8TEM frá 2011 [1] og á síðu IC8FAX [2]: scatter verður þar sem geislinn mætir óreglum sem raðast eftir segulsviðinu með slíku horni að hann endurvarpast til mótstöðvarinnar. Fyrir stöðvapar er rétta skilyrðið ekki einföld hornrétt staða á sviðið, heldur tvístöðva Bragg-skilyrðið (endurvarpskeilan), sem forritið beitir.
+TAG|RILIEVO|Segulsviðið er reiknað með alþjóðlega líkaninu IGRF-14 [16] upp að stigi 13, sannreynt innan 1 nT gagnvart viðmiðunarútfærslu. Með einföldum tvípól reyndist sambandið IC8FAX-G4LOH ómögulegt; með IGRF-14 lendir scatter point 28 km frá Brussel, einum af hinum skjalfestu scatter point. Það var þessi prófun sem réð því að fullt líkan var tekið upp.
+TAG|SCELTA|Sýnirnar tvær, Scatter trail og Jafnendurvarp, byggja á myndrænni framsetningu Aurora QTF, AuroReflex og SE-PROP eftir K9SE [9], [11]: sú fyrri leggur til líklegasta punktinn, sú seinni gerir radíóamatörnum kleift að prófa hvaða punkt sem er sem valinn er með smelli. Ef líkanið finnur enga lausn segir forritið það með skilaboðunum Útreikningur ekki mögulegur og sýnir ekki hlutaniðurstöður, sem væru villandi.
+TAG|FONTE|Fyrir norðurljós bætir forritið við gögnum NOAA (OVATION-sporbaugur, Kp, sólvindur) [15], sem notuð eru sem vísbending um tilvist óreglnanna, og viðmiðum fræðanna um radíónorðurljós [12]-[14] fyrir ráðlagða stefnu beggja stöðva.
+H2|3.4 Meteor scatter
+P|Meteor scatter er falið YA-MS [5], sem reiknar nýtni loftsteinadrífa, les flæði loftsteinaratsjáa og samþættir athuganir í beinni. Valið að samþætta það í heild, fremur en að endurskrifa hluta þess, tryggir að forritin tvö gefi ávallt sömu niðurstöðu.
+H1|4. Greining gagnanna
+H2|4.1 Spotin
+P|Gæði hverrar greiningar ráðast af gæðum gagnagreiningarinnar: ef skip er fengið úr öruggum spotum má síðan endurgera hin stökkin og leita annarra skýja. Þess vegna beitir forritið röð reglna, sem nær allar eru tilgreindar af höfundi eftir prófun á raunverulegum spotum.
+LI|Spot með <MS>, <AU>, <AUR>, <TR>, <AS> eða <ACS> tilheyra öðrum útbreiðsluaðferðum og fara ekki í sporadic-E; þau sem eru í tíðnigluggum dæmigerðum fyrir meteor scatter eða með stafrænum MS-aðferðum eru meteor scatter, eins og í YA-MS.
+LI|Á 144 MHz byrjar sporadic-E yfir 900 km og stakt spot er ekki teiknað fyrr en það er staðfest af öðru spoti á sama ský eða af stuttu stökki á 50 MHz í nágrenninu: eitt spot á 2 m er of oft tropo eða villa í locator.
+LI|Til meginlands Afríku og Suður-Ameríku, þegar miðpunkturinn fellur í beltið ±20° segulhalla, er sambandið þvermiðbaugssamband en ekki sporadic-E, nema það sé sérstaklega tekið fram.
+LI|Locatorar sem vantar eða eru ónákvæmir eru sóttir í CALL3-safnið; forritið lærir nýja locatora aðeins af fullu forminu LOC<aðferð>LOC, sem skilur engan vafa eftir um hvaða locator tilheyrir hvaða stöð.
+LI|Staðbundna sían hendir klasalínum utan sviðsins 27990 kHz - 145 MHz, og í hvert sinn sem forritinu er lokað er spotgagnagrunnurinn tæmdur: hver lota hefst með nýjum gögnum.
+H2|4.2 Dagbækurnar
+P|BENCHMARK-fliparnir tveir beita sömu viðmiðum á ADIF-dagbækur: sendistaðsetning úr MY_GRIDSQUARE hvers QSO, móttökustaðsetningar úr GRIDSQUARE, útilokun sambanda með aðra tilgreinda aðferð og þvermiðbaugssambanda. Í BENCHMARK 50 MHz er fjölstökk meðhöndlað yfir 3100 km, þröskuldur sem höfundur tilgreinir og aðgreinir með öryggi fjölstökkssambönd frá löngum stökum stökkum.
+H1|5. Prófanir
+TAG|RILIEVO|F.A.I. IC8FAX-F6DRO: scatter point JN44GH, frávik 0,97°. IC8FAX-G4LOH: JN49FR, frávik 0,88°, 28 km frá Brussel. IC8FAX-FA1MXE með scatter point í Genf: frávik 3,82°, metið ófullnægjandi, sem samræmist því að það samband krefst annars punkts.
+TAG|RILIEVO|Norðurljós IO70VJ-JO59BC með ljósbroti: scatter point JP01AK, undan Hjaltlandi, frávik 0,97°, QTF 11° og 299°, sem samræmist þeim norðurljósastefnum til norðurs sem sést hafa.
+TAG|RILIEVO|Í 50 MHz-dagbók höfundar (9876 QSO frá 2017 til 2026) greinir forritið 1738 QSO yfir 2400 km á 386 dögum, og þvermiðbaugsreglan eignar 62 þeirra þvermiðbaugsútbreiðslu, nær öll til Suður-Afríku, Brasilíu og Austur-Afríku.
+H1|6. Takmarkanir og þróun
+LI|Stöðvarnar eru settar í miðju locator-reitsins: með 4 stöfum nær skekkjan um 80 km.
+LI|foEs er lágmarksþröskuldur og sekantlögmálið ofmetur nauðsynlega foEs á VHF; gildið ber að lesa sem hlutfallslegan samanburð milli skýja.
+LI|Landfræðilegir rammar Afríku og Suður-Ameríku eru nálganir; jaðartilvik má leiðrétta eftir ábendingum radíóamatöra.
+LI|Fyrirhuguð þróun: samanburður tveggja dagbóka frá ólíkum stöðvum í öllum fjölstökksgreiningum, sífellt fínni greining spota og kerfisbundin prófun reglnanna á heilum tímabilum.
+H1|7. Niðurlag
+P|E-LAYER ANALYZER kemur ekki í stað reynslu radíóamatörsins: það gerir hana mælanlega. Hvert val forritsins er tilgreint, hver jafna á sér heimild, hver regla sem sprottin er af reynslu er merkt sem slík og má reyna á dagbókunum. Það er í þessu jafnvægi milli fræða, reynslu á tíðnisviðunum og prófunar á gögnum sem forritið finnur tilverurétt sinn.

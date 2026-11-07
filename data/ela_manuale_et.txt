@@ -1,0 +1,87 @@
+TITLE|E-LAYER ANALYZERi kasutusjuhend
+SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.4.3, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
+H1|1. Enne alustamist
+H2|1.1 Mida programm teeb
+P|E-LAYER ANALYZER koondab ühte programmi tööriistad nende VHF leviviiside uurimiseks, mis kulgevad läbi ionosfääri E-kihi: sporaadiline E, ka mitmehüppeline ja mandritevaheline, F.A.I. (magnetväljaga joondunud ebaühtlused), meteoorhajumine koos integreeritud programmiga YA-MS ning raadioaurora. Programm töötab DX-klastrite reaalajas spotide ja ADIF-logidega ning näitab iga tulemust kaardil, mis võtab enda alla kaks kolmandikku aknast; andmed ja arvutused on paremas kolmandikus.
+H2|1.2 Paigaldamine ja andmekaust
+P|Programm töötab Windowsis (64 ja 32 bitti), Linuxis, Raspberry Pi-s (ARM64) ja Macis (Apple Silicon ja Intel). See laaditakse alla GitHubi hoidla lehelt Releases: Windowsi jaoks on paigaldaja ja kaasaskantav versioon .zip-failis; Linuxi ja Raspberry Pi jaoks .tar.gz-arhiiv koos paigaldusskriptiga; Maci jaoks .dmg-kettatõmmis.
+LI|Kõik programmi andmed asuvad programmi kõrval kaustas data: seaded (config.ini), CALL3 arhiiv, magnetvälja kordajad, logid, allalaaditud NOAA andmed, kogutud spotid. Midagi ei kirjutata AppData-sse ega teistesse süsteemikaustadesse.
+LI|Programmi teisele arvutile viimiseks piisab selle kausta kopeerimisest; algseadete taastamiseks piisab faili data/config.ini kustutamisest.
+LI|LoTW parooli ei salvestata kunagi; meelde saab jätta ainult kasutajanime.
+H2|1.3 Ülemine riba
+P|Üleval vasakul sisestatakse oma kutsung, lokaator (4, 6 või 8 märki) ja antenni kõrgus meetrites; nupp Rakenda kinnitab need ja kõik sakid uuenevad. Üleval paremal on UTC-aeg, värviskeemi valik (kõik YAEC-i skeemid: Hele, Öö, Must, kaheksa pastelset ja Meteoorijälg) ja keele valik (28 keelt). Värviskeemi või keele vahetamisel ehitatakse aken kohe uuesti üles, kogutud andmeid kaotamata.
+H2|1.4 Olekuriba
+P|All näitab olekuriba, mitu kutsungit on CALL3 arhiivis, mitu spotti on mälus ja kasutatavat magnetmudelit (IGRF-14 koos epohhiga). Mälus olevad spotid kustutatakse iga kord, kui programm suletakse: iga seanss algab ilma vanade spotideta.
+H2|1.5 Kaardid
+P|Kõiki kaarte kasutatakse ühtemoodi: hiireratas suurendab või vähendab, vasaku nupuga lohistamine nihutab vaadet, vasak klõps valib saki järgi punkti, spoti või trassi. Üleval paremal kuvatakse kursori all olevad koordinaadid ja 6-märgiline lokaator; asimuutsetel kaartidel ka kaugus ja asimuut keskpunktist. Maidenheadi väljade ja ruutude võrgustik tiheneb suumimisel.
+H1|2. Andmete kogumine (DATA COLLECTION)
+H2|2.1 Kolm telneti seanssi
+P|Sakk DATA COLLECTION avab kuni kolm samaaegset telneti ühendust: vabalt valitud DX-klaster (vaikimisi ON0DXK VHF-filtritega), Reverse Beacon Network (port 7001 FT8 jaoks, 7000 CW ja RTTY jaoks) ning DM4X klaster PSKReporteri spotidega (dm4x.ddns.net, port 8500).
+LI|Host ja Port: klastri aadress. Login: sisselogimiseks kasutatav kutsung (kui väli on tühi, kasutatakse ülemise riba kutsungit). Juhtnupud: pärast sisselogimist saadetavad käsud, semikooloniga eraldatud (näiteks sagedusalade filtrid).
+LI|Ühenda ja Katkesta ühendus avavad ja sulgevad seansi; Ühenda uuesti avab selle pärast katkestust ise uuesti; Ühenda käivitamisel avab selle programmi käivitamisel.
+LI|Konsool näitab vastuvõetud ridu; allolevasse kasti saab kirjutada klastrile saadetavaid käske (näiteks sh/dx 20) ja kinnitada need nupuga Saada või klahviga Enter.
+H2|2.2 Kohalik filter
+P|Ülemine märkeruut, vaikimisi sees, lülitab sisse kohaliku filtri: "DX de" read, mille sagedus on alla 27990,0 kHz või üle 145 MHz, jäetakse kõrvale, neid ei kuvata konsoolis ega salvestata. See on eriti kasulik RBN-i ja PSKReporteriga, mis saadavad väga palju HF-spotte. Märkeruudu väljalülitamisel läheb kõik läbi.
+H2|2.3 Kuidas programm spotte loeb
+P|Igast "DX de" reast võtab programm spotteri, sageduse, DX-i, kommentaari, kellaaja ja, kui need on olemas, kommentaari kirjutatud lokaatorid ja leviviisi kujul JN70CN<ES>JO62QM (esimene lokaator on spotteri, teine DX-i oma; aktsepteeritakse ka kujusid <>, > ja sulgudega).
+LI|Puuduvaid lokaatoreid otsitakse CALL3 arhiivist; ebatäpsed lokaatorid (alla 6 märgi) asendatakse CALL3 6-märgilise lokaatoriga, kui see on olemas.
+LI|Spotte, mille tekstis on <MS>, <AU>, <AUR>, <TR>, <AS> või <ACS>, sporaadilise E jaoks ei kasutata: need on mõeldud meteoorhajumise, aurora, tropo või lennukihajumise (aircraft scatter) jaoks.
+LI|Nagu YA-MS-is, on meteoorhajumise spotid need, mis asuvad MS-ile tüüpilistes sagedusakendes (50190-50300, 70100-70400, 144290-144399 kHz) ilma muu levi märgeteta, ning need, mille viis on MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M või millel on märge <MS>.
+LI|Spotid märkega <AU> või <AUR> lähevad sakile AURORA, FAI märkega spotid sakile F.A.I.
+H2|2.4 Kogutud spotid ja CALL3 arhiiv
+P|Leht Kogutud spotid loetleb viimased spotid koos sagedusala- ja allikafiltriga; nupp Ava spotide kaust avab kausta data/spot. Leht CALL3 näitab arhiivi kutsung -> lokaator (JTDX/WSJT vorming): saab otsida kutsungit, arhiivi uuesti laadida või importida uue CALL3.TXT faili, mis asendab kasutusel oleva (vana jääb varukoopiaks).
+H1|3. Sporaadiline E (SPORADIC-E)
+H2|3.1 Kaart
+P|Menüü Kaart valib kolme vaate vahel. Asimuutne - üks hüpe: oma jaama keskmega kaart fikseeritud raadiusega 2500 km ja IK3XTV tabeli [3] tsoonidega (500 km minimaalne, 1500-2000 km optimaalne, 2400 km maksimaalne). Asimuutne - maksimaalne kaugus (mitmehüppeline): sama kaart liuguriga Maksimaalne kaugus, 300 kuni 20000 km, ning kahe hüppe (5000 km) ja kolme hüppe (6900 km) piiridega, et jälgida mitmehüppelise levi arengut. Ristkülikuline: maailmakaart nuppudega Euroopa ja Maailm.
+P|Asimuutsetes vaadetes näitavad katkendlikud ringid kilomeetreid keskpunktist; ringide samm muutub koos suumiga ja välisserv näitab suurimat kuvatud kaugust.
+H2|3.2 Juhtelemendid
+LI|Sagedusalad: 10, 6, 4 ja 2 m (432 MHz ei analüüsita: sporaadiline E seal ei kehti [22]-[24]); spotide ajaaken 15 minutist 12 tunnini.
+LI|Es kõrgus (vaikimisi 105 km) ja antennide minimaalne elevatsioon.
+LI|Esimesed hüpped (võrdsed hüpped): näitab mõlema jaama esimest hüpet; Lühike esimene hüpe kuni…: näitab autori hüpoteesi lühikesest esimesest hüppest (vaikimisi 1200 km) [4].
+LI|Es-pilved Maidenheadi ruutudel: värvib peegelduspunktide ruudud hinnangulise minimaalse foEs-i järgi.
+H2|3.3 Tabelid ja üksikasjad
+P|Tabel Es-spotid loetleb kehtivad spotid koos kauguse, hüpete arvu ja minimaalse foEs-iga; tabel Es-pilved (ruudud) loetleb ruudud hinnanguliste pilvedega ja MUF-i, mida need annaksid oma jaamale (punane 144 MHz, oranž 70 MHz, kollane 50 MHz). Kui suum on seatud, näitavad tabelid ainult seda, mis on kaardil nähtav.
+LI|Klõps spotil tabelis või kaardil: trass süttib kollase halona, kaart toob selle vajadusel nähtavale ja kast Üksikasjad näitab hüppeid, peegelduspunkte, foEs-i ja asimuuti. Spot jääb valituks ka uute spotide saabumisel.
+LI|Klõps kaardi vabal punktil: punkti käsitletakse võimaliku Es-pilvena koos vajaliku foEs-iga 28, 50, 70 ja 144 MHz jaoks.
+H2|3.4 Autori reeglid
+LI|144 MHz: sporaadiline E algab üle 900 km; üksikut spotti ei joonistata; see joonistatakse, kui 5 minuti jooksul saabub teine spot samalt pilvelt või kui läheduses on 50 MHz lühikese hüppe spot. Ülemine roheline rida ütleb, mitu spotti ootab kinnitust.
+LI|Transekvatoriaalne levi: mandri-Aafrika (koos Madagaskariga) ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise kalde vööndisse -20° kuni +20°, on side transekvatoriaalne, mitte sporaadiline E, välja arvatud juhul, kui spot märgib <ES>. Kanaari saared, Madeira, Roheneemesaared ja Araabia poolsaar jäävad reeglist välja.
+H1|4. BENCHMARK Es
+H2|4.1 Logi laadimine
+P|Sakk BENCHMARK Es on sporaadilise E katsestend tervel ADIF-logil, ka teise jaama omal. Laadi ADIF avab faili (programm jätab selle meelde ja laadib käivitamisel uuesti), Eemalda ADIF eemaldab selle. Jaam keskel pakub logi kõige sagedasemat kutsungit ja lokaatorit; neid saab muuta ja kinnitada nupuga Rakenda.
+LI|Saatmiskoht on iga QSO MY_GRIDSQUARE; vastuvõtukohad on GRIDSQUARE-id (puuduvad või 4-märgilised lokaatorid võetakse CALL3-st).
+LI|Välja saab jätta muu PROP_MODE-iga QSO-d ja need, mis on alla 500 km (144 MHz-l alla 900 km); transekvatoriaalsed jäetakse alati välja, välja arvatud PROP_MODE=ES.
+H2|4.2 Päevad, kellaajad ja arvutused
+P|Tabel QSO-d päevade kaupa loetleb päevad koos QSO-de arvu, sagedusalade, suurima kauguse ja mitmehüppeliste sidetega; klõps päeval täidab tabeli Päeva tunnid, kus on rida iga UTC-tunni kohta ja rida Kogu päev. Asimuutne kaart koos maksimaalse kauguse liuguriga joonistab skipi 10° sektorite kaupa (oranž kaar = lähim QSO, roheline sektor = saavutatud kaugused), pilved ruutudel ja kogu päeva puhul pilvede tunnise nihkumise (punane joon).
+P|Leht Pakutud arvutused näitab skipi sektorite kaupa, hinnangulist foEs-i koos oodatava MUF-iga 1000, 1500, 2000 ja 2400 km juures, hinnangulisi pilvi, mitmehüppelise levi kontrolli (võrdsed hüpped versus lühike esimene hüpe, võrrelduna ±30 minuti jooksul ühe hüppega nähtud pilvedega) ning pilvede nihkumist tund-tunnilt.
+H1|5. BENCHMARK 50 MHz
+H2|5.1 Üks või kaks jaama
+P|Sakk BENCHMARK 50 MHz on pühendatud 50 MHz mitmehüppelisele sporaadilisele E-le. Real Jaam 1 laaditakse ja eemaldatakse oma jaama logi; real Jaam 2 teise jaama logi, mida näidatakse või peidetakse märkeruuduga Jaam 2. Jaama 1 trassid on helesinised, jaama 2 omad lillad.
+LI|Näidatakse 50 MHz mitmehüppelisi QSO-sid ehk üle 3100 km (autori reegel); hüpete arv järgib IK3XTV tabelit.
+LI|Päev, alates… kuni… UTC: päev (avamisel see, kus on kõige rohkem mitmehüppelisi QSO-sid) ja kellaaeg 15-minutiliste sammudega.
+LI|foEs (valikuline): värvib trassid minimaalse foEs-i järgi ja näitab seda tabelis. Es kõrgus ja Lühike esimene hüpe kuni 1200 km nagu teistel sakkidel.
+H2|5.2 Mercatori kaart
+P|Kaart on vaba keskpunktiga Mercatori projektsioonis. Kui hiir läheneb trassile, suurenevad joon ja ikoonid ning ilmub korrespondendi 6-märgiline WWL-ruut. Vasaku klõpsuga sellel trassil küsib hüpikaken, kas näidata kõiki faili QSO-sid kõigist päevadest, mille lõpp-punkt on kuni 150 km kaugusel: Jah tühjendab kaardi ja näitab neid QSO-sid oranži ringi sees, Ei jätab kaardi samaks. Nupp Tagasi päeva ja kellaaja juurde taastab eelmise valiku.
+H1|6. F.A.I.
+H2|6.1 Kaks vaadet
+P|Sakk F.A.I. uurib magnetväljaga joondunud ebaühtlustelt toimuvat hajumist (peamised allikad [1], [2]). Vaade Scatter trail (paar A-B) arvutab kahe jaama jaoks võimalike hajumispunktide asukoha, värvituna hälbe järgi peegeldustingimusest, pakub välja tõenäolisima hajumispunkti ja joonistab üles paremale mõlema jaama QTF-ide ja elevatsioonide kasti (punane = A, roheline = B). Vaade Isopeegeldus (punkt) joonistab valitud peegelduspunkti jaoks isopeegelduse jooned nagu AuroReflex ja K9SE SE-PROP: värvilised ribad tumedates skeemides, paksud jooned heledates skeemides.
+H2|6.2 Juhtelemendid
+LI|Jaam A ja Jaam B: kutsung (otsitakse CALL3-st) ja/või lokaator; tühi A = oma jaam. Menüü Kontrollid... laadib testpaarid (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); menüü Teadaolevad hajumispunktid... valib dokumenteeritud hajumispunkti (Genf, Brüssel, Budapest, JN92, JN41/42).
+LI|Kõrgus (vaikimisi 110 km), minimaalne elevatsioon ja Refraktsioon (Maa raadius 4/3), vaikimisi sees.
+LI|Vasak klõps kaardil: kontrollitav peegelduspunkt (lülitub vaatele Isopeegeldus); parem klõps: jaama B asukoht.
+LI|Kontrolli soovitatud punkti: arvutab jälje, võtab pakutud hajumispunkti ja näitab selle isopeegelduse jooni koos otsusega: RAHULDAV (1° piires), VASTUVÕETAV (2,5° piires), MITTERAHULDAV (üle selle).
+P|Kui mudeli järgi pole arvutus võimalik, ilmub teade Arvutus pole võimalik ja muid tulemusi ei näidata. All loetleb tabel F.A.I. spotid FAI-ks märgitud spotid; klõps spotil laadib selle jaamapaari.
+H1|7. METEOR SCATTER
+P|Sakk sisaldab täielikku programmi YA-MS koos selle sakkidega (taevavõlv, radarivoog, meteoorivoolud otse, efektiivsuse arvutus, GRAVES radar, prognooside eksperimentaalne rakendamine, geomeetria ja sumbumine, meteoorivoolud, allikad, allikate kaart, andmete kogumine, efektiivsus - selgitus, ruutude kaart) ja selle arvutuste juhendiga. Keel ja värviskeem on need, mis on valitud üleval. YA-MS-i Andmete kogumine ei ava E-LAYER ANALYZERi sees oma telneti seansse: see saab read DATA COLLECTION seanssidelt ja filtreerib neist meteoorhajumise spotid.
+H1|8. AURORA
+P|Sakk AURORA kasutab samu vaateid nagu F.A.I. (vaikimisi kõrgus 105 km) koos NOAA kosmoseilma andmetega [15]: aurora ovaal OVATION (kaardil hajusalt varjutatud), viimase kolme päeva Kp-indeks ja päikesetuul, mis laaditakse iga 5 minuti järel kausta data/swpc või kohe nupuga Laadi NOAA kohe alla. Programm soovitab suunda mõlemale jaamale.
+LI|Viimase 2 tunni spotid märkega <AU> või <AUR> (kõige rohkem 30) joonistatakse kaardile koos arvutatud hajumispunktiga (oranž ring), kui märkeruut <AU>/<AUR> spotid kaardil koos arvutusega on sees; tulemustes kuvatakse mõlema jaama QTF ja elevatsioon.
+H1|9. LOG ADIF
+P|Sakk LOG ADIF näitab töötatud ja kinnitatud ruute sagedusala kaupa alates 28 MHz-st, sagedusalasid koondamata. Ava ADIF-fail... lisab logifailid; Laadi alla LoTW-st... laadib alla kinnituste aruande (kasutajanime saab meelde jätta, parooli ei salvestata kunagi); Tühjenda mälu eemaldab failid ja aruande. Ruudud on oranžid, kui need on töötatud, ja teist värvi, kui need on kinnitatud QSL-iga või LoTW kaudu; klõps ruudul näitab kutsungeid ja leviviisi.
+H1|10. Dokumendid
+P|Sakk ALLIKAD loetleb programmis viidatud allikad sakkide kaupa. Sakk ARVUTUSVALIKUTE KOKKUVÕTE esitab valemid ja arvutusvalikud koos allikatega igal sammul; see KASUTUSJUHEND selgitab, kuidas programmi kasutada; TEHNILINE ARUANNE esitab põhjused, mis juhtisid programmi loomist. Kõiki kolme dokumenti saab eksportida Wordi.
+H1|11. Praktilised nõuanded
+LI|Kõigepealt sisesta üleval kutsung ja lokaator ning vajuta Rakenda: kõik kaugused, MUF-id ja elevatsioonid lähtuvad sealt.
+LI|RBN-i ja PSKReporteriga hoia kohalik filter sees, et mälu ei täituks HF-spotidega.
+LI|Möödunud hooaja analüüsiks kasuta mõlemat BENCHMARK-sakki oma logiga; aurora ja F.A.I. puhul kontrolli pakutud punkti alati vaatega Isopeegeldus.
+LI|Arvutused on ligikaudsed: spot või QSO näitab, et trass oli avatud, mitte seda, kus pilv täpselt asus.
