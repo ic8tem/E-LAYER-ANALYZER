@@ -416,3 +416,80 @@ Transequatoriale: {0}	赤道横断: {0}
 (scartato: sotto {0:F0} km in 144 MHz)	(破棄: 144 MHz で {0:F0} km 未満)
 (in 144 MHz si disegna solo con una conferma)	(144 MHz では確認がある場合のみ描画)
 E-sporadico: {0}	スポラディックE: {0}
+Il proprio nominativo: si usa per il login ai cluster e per riconoscere i propri spot.	自局のコールサイン: クラスターへのログインと自局スポットの識別に使います。
+Locator della stazione (4, 6 o 8 caratteri): è il centro delle mappe e il punto di partenza dei calcoli.	局のロケーター (4、6 または 8 文字): 地図の中心で、計算の起点です。
+Quota dell'antenna sul livello del mare, in metri: serve al calcolo dell'orizzonte radio.	アンテナの海抜高 (m): 電波見通し距離の計算に使います。
+Conferma nominativo, locator e quota e aggiorna tutte le linguette.	コールサイン、ロケーター、高度を確定し、すべてのタブを更新します。
+E-sporadico in diretta dagli spot dei cluster: salti, nubi e foEs su mappa azimutale centrata sulla stazione.	クラスターのスポットによるリアルタイムのスポラディックE: ホップ、雲、foEs を自局中心の正距方位図に表示。
+Analisi di un log ADIF (anche di altre stazioni) per giornate e ore: salti, settori e nubi dell'E-sporadico.	ADIF ログ (他局のものも可) を日別・時刻別に解析: スポラディックE のホップ、セクター、雲。
+Multi-salto in 50 MHz (oltre 3100 km) dai log ADIF di una o due stazioni, su mappa di Mercatore a centro libero.	1 局または 2 局の ADIF ログから 50 MHz のマルチホップ (3100 km 超) を、中心を自由に選べるメルカトル図に表示。
+Field Aligned Irregularities: scatter point di una coppia di stazioni con il campo magnetico IGRF-14.	Field Aligned Irregularities: IGRF-14 地磁気モデルによる 2 局間の散乱点。
+Il programma YA-MS completo: efficienza degli sciami, radar meteorici, traffico MS in diretta.	完全版 YA-MS: 流星群の効率、流星レーダー、リアルタイムの MS トラフィック。
+Aurora radio: ovale NOAA, indice Kp, scatter point e puntamento delle due stazioni.	オーロラ伝搬: NOAA のオーバル、Kp 指数、散乱点と 2 局のアンテナ方向。
+Sessioni telnet con i DX cluster, spot raccolti, archivio CALL3 e filtri degli spot di tutti i modi.	DX クラスターとの Telnet セッション、収集スポット、CALL3 アーカイブ、全モードのスポットフィルター。
+Quadrati lavorati e confermati per banda, da un file ADIF o dal report di LoTW.	バンド別の交信済み・確認済みグリッド (ADIF ファイルまたは LoTW のレポートから)。
+Articoli, pagine, modelli e dati usati dal programma, con i rimandi numerati.	プログラムが使う記事、ページ、モデル、データと番号付きの参照。
+Formule e scelte di calcolo, con le fonti e le regole dell'autore.	計算式と計算上の選択、出典と作者のルール。
+Come si usa il programma, linguetta per linguetta.	プログラムの使い方をタブごとに説明。
+Le scelte che hanno portato alla realizzazione del programma.	プログラム作成に至った選択。
+Ipotesi dei salti tutti uguali: i punti di riflessione dividono la tratta in parti uguali.	等ホップの仮定: 反射点がパスを等分します。
+Ipotesi dell'autore: nel multi-salto il primo salto si chiude entro la distanza indicata dal proprio QTH.	作者の仮説: マルチホップでは、第 1 ホップが自局 QTH から指定距離以内で終わります。
+Raccoglie i punti di riflessione in nubi sui quadrati di 4 caratteri e ne stima la foEs minima.	反射点を 4 文字グリッドごとの雲にまとめ、最小 foEs を推定します。
+Quota dello strato E sporadico usata nella geometria dei salti (di partenza 105 km).	ホップの幾何計算に使うスポラディックE 層の高度 (初期値 105 km)。
+Elevazione minima dell'antenna: limita la lunghezza massima di un salto.	アンテナの最小仰角: 1 ホップの最大長を制限します。
+Vista della mappa: azimutale per il singolo salto, azimutale con distanza massima regolabile per il multi-salto, oppure rettangolare.	地図表示: 1 ホップ用の正距方位、マルチホップ用の最大距離可変の正距方位、または矩形。
+Riporta la mappa sull'Europa.	地図をヨーロッパに戻します。
+Mostra tutto il mondo.	全世界を表示します。
+Raggio della mappa azimutale: chilometri dal centro fino al bordo.	正距方位図の半径: 中心から縁までの km。
+Legge un log ADIF: il centro della mappa si ricava dal MY_GRIDSQUARE dei QSO.	ADIF ログを読み込みます: 地図の中心は QSO の MY_GRIDSQUARE から求めます。
+Toglie il log caricato e pulisce la mappa.	読み込んだログを外し、地図を消去します。
+Sotto queste distanze il collegamento è più probabilmente tropo o aircraft scatter.	この距離未満の交信は、トロポまたは航空機散乱の可能性が高くなります。
+Raggruppa i QSO per direzione e mostra lo skip di ogni settore.	QSO を方向別にまとめ、セクターごとのスキップを表示します。
+Disegna le linee dei collegamenti.	交信のラインを描きます。
+Stazione del log: il centro della mappa.	ログの局: 地図の中心。
+Giornata del log da mostrare.	表示するログの日付。
+Ora UTC di inizio.	開始時刻 (UTC)。
+Ora UTC di fine.	終了時刻 (UTC)。
+Mostra la foEs minima stimata nei punti di riflessione.	反射点で推定した最小 foEs を表示します。
+Primo log ADIF (colore azzurro).	1 つ目の ADIF ログ (水色)。
+Secondo log ADIF, da confrontare con il primo (colore viola).	2 つ目の ADIF ログ、1 つ目と比較 (紫)。
+Esce dalla vista dei dintorni e torna alla giornata e all'orario scelti.	周辺表示を終了し、選択した日付と時間帯に戻ります。
+Ipotesi dell'autore: nel multi-salto il primo salto si chiude entro 1200 km dal QTH.	作者の仮説: マルチホップでは、第 1 ホップが QTH から 1200 km 以内で終わります。
+Prima stazione: nominativo e locator.	1 局目: コールサインとロケーター。
+Seconda stazione: nominativo e locator.	2 局目: コールサインとロケーター。
+Quota delle irregolarità (F.A.I. circa 110 km, aurora circa 105 km).	不規則構造の高度 (F.A.I. 約 110 km、オーロラ 約 105 km)。
+Scatter trail: il punto più probabile; Iso-riflessione: verifica di un punto scelto con un clic.	Scatter trail: 最も可能性の高い地点; 等反射線: クリックで選んだ地点を検証。
+Calcola lo scatter point per le due stazioni.	2 局の散乱点を計算します。
+Applica la rifrazione troposferica con il raggio terrestre equivalente di 4/3.	等価地球半径 4/3 で対流圏屈折を適用します。
+Controlla la condizione di riflessione nel punto proposto.	提案された地点で反射条件を確認します。
+Sfuma sulla mappa la probabilità di aurora secondo la NOAA.	NOAA によるオーロラ確率を地図上にぼかして表示します。
+Scarica subito ovale aurorale, indice Kp e vento solare (di norma ogni 5 minuti).	オーロラ・オーバル、Kp 指数、太陽風を今すぐダウンロード (通常は 5 分ごと)。
+Disegna gli spot di aurora recenti con il loro scatter point calcolato.	最近のオーロラスポットを、計算した散乱点とともに描きます。
+Indirizzo del cluster telnet.	Telnet クラスターのアドレス。
+Porta telnet del cluster.	クラスターの Telnet ポート。
+Nominativo per l'accesso; se vuoto si usa quello della barra in alto.	ログイン用コールサイン。空欄なら上部バーのものを使います。
+Comandi inviati al cluster dopo l'accesso, separati da punto e virgola (per esempio i filtri di banda).	ログイン後にクラスターへ送るコマンド、セミコロン区切り (例: バンドフィルター)。
+Apre la sessione telnet.	Telnet セッションを開きます。
+Chiude la sessione telnet.	Telnet セッションを閉じます。
+Riapre da sola la sessione dopo una caduta della linea.	回線が切れた後、セッションを自動で開き直します。
+Apre la sessione all'avvio del programma.	プログラム起動時にセッションを開きます。
+Invia al cluster il comando scritto nella casella.	ボックスに入力したコマンドをクラスターへ送信します。
+Apre la cartella con gli spot salvati (un file CSV al giorno).	保存したスポットのフォルダーを開きます (1 日 1 つの CSV ファイル)。
+Rilegge l'archivio CALL3.	CALL3 アーカイブを再読込します。
+Sostituisce l'archivio nominativo-locator con un file CALL3.TXT più recente.	コールサイン-ロケーターのアーカイブを新しい CALL3.TXT ファイルに置き換えます。
+Cerca il nominativo nell'archivio CALL3.	CALL3 アーカイブでコールサインを検索します。
+Sessione da cui arriva lo spot: cluster, RBN o PSKReporter.	スポットの取得元セッション: クラスター、RBN または PSKReporter。
+Mostra solo gli spot di questa banda.	このバンドのスポットのみ表示します。
+Riporta i valori di partenza, cioè le regole dell'autore.	初期値 (作者のルール) に戻します。
+In 144 MHz l'E-sporadico vale solo oltre questa distanza (regola dell'autore: 900 km).	144 MHz ではこの距離を超える場合のみスポラディックE とします (作者のルール: 900 km)。
+Tempo massimo tra lo spot e la sua conferma.	スポットとその確認の間の最大時間。
+Distanza massima tra i punti di riflessione perché due spot siano sulla stessa nube.	2 つのスポットを同じ雲とみなす反射点間の最大距離。
+Lunghezza massima di un salto corto in 50 MHz che conferma lo spot in 144 MHz.	144 MHz のスポットを確認する 50 MHz の短いホップの最大長。
+Fascia attorno all'equatore magnetico in cui il punto medio rende la tratta transequatoriale.	中間点がこの範囲内にあるとパスを赤道横断とみなす、磁気赤道周辺の帯。
+Periodo degli spot disegnati sulla mappa.	地図に描くスポットの期間。
+Legge un file ADIF dal computer.	コンピューターから ADIF ファイルを読み込みます。
+Scarica il report dei QSO da LoTW (servono nome utente e password, che non viene salvata).	LoTW から QSO レポートをダウンロードします (ユーザー名とパスワードが必要。パスワードは保存しません)。
+Nome utente di Logbook of The World.	Logbook of The World のユーザー名。
+Password di LoTW: si usa solo per questo scaricamento e non viene mai salvata.	LoTW のパスワード: このダウンロードにのみ使い、保存されることはありません。
+Salva il documento in formato Word nella lingua scelta.	選択した言語で文書を Word 形式で保存します。
+Apre il documento in Word o nel programma predefinito.	Word または既定のプログラムで文書を開きます。
