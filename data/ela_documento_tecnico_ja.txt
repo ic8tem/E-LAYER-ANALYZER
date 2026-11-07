@@ -88,6 +88,8 @@ TAG|SCELTA|「DX de SPOTTER: FREQ DXCALL comment HHMMZ [LOC]」の行を (固定
 TAG|SCELTA|作者のルール (IC8TEM): スポットのテキストに <MS>、<AU>、<TR> (AUE、AURORA、TROPO も) が含まれる場合、そのスポットはスポラディックE に関するものではなく、SPORADIC-E タブはそれを除外します。メテオスキャッターとオーロラには引き続き有用です。BENCHMARK Es では、ログの PROP_MODE フィールドが同じ役割を果たします。
 TAG|SCELTA|保存: data/spot に 1 日 1 つの CSV ファイル; メモリには最新のスポット (最大 50000)。RBN と PSKReporter では、通常 28 MHz 以上のスポットのみを保存します。
 TAG|FONTE|作者のルール (IC8TEM): プログラムを終了するたびに、スポットのデータベースはメモリ上と data/spot 内のファイルの両方で空になります; 各セッションは古いスポットなしで新たに始まります。
+TAG|SCELTA|任意のローカルフィルター (DATA COLLECTION のチェックボックス、作者の要望による): 周波数が 27990.0 kHz 未満の "DX de" 行は破棄され、コンソールに表示されず、保存もされません。
+TAG|FONTE|ここでも YA-MS のルールを適用: 明確に MS のモード (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) を使うスポット、またはテキストに <MS> を含むスポット (大文字・小文字を区別しない) は、スポラディックE ではなくメテオスキャッターのスポットです。
 H1|6. ADIF ログ
 TAG|FONTE|LoTW Grid Map v2 [25] の移植: LoTW レポート (ユーザー名とパスワードでダウンロード。パスワードは保存されません) とログの ADIF ファイルを、コールサイン、バンド、日付、時刻で突き合わせます; 確認は合算されます。
 TAG|SCELTA|28 MHz 以上のバンドのみ。各バンドを個別に扱い、まとめません。色: 橙 = 交信済、青 = QSL で確認済、緑 = LoTW で確認済。伝搬モードでのフィルター (ADIF の PROP_MODE: ES、FAI、AUR/AUE、MS、TR、EME、F2)。

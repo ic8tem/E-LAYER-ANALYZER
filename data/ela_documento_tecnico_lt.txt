@@ -88,6 +88,8 @@ TAG|SCELTA|Eilutė „DX de SPOTTER: FREQ DXCALL komentaras HHMMZ [LOC]“ skait
 TAG|SCELTA|Autoriaus taisyklė (IC8TEM): jei spoto tekste yra <MS>, <AU> arba <TR> (taip pat AUE, AURORA, TROPO), spotas nesusijęs su sporadiniu E ir kortelė SPORADIC-E jį atmeta; jis lieka naudingas meteor scatter ir pašvaistei. BENCHMARK Es tą patį vaidmenį atlieka žurnalo laukas PROP_MODE.
 TAG|SCELTA|Archyvas: vienas CSV failas per dieną aplanke data/spot; atmintyje laikomi paskutiniai spotai (daugiausia 50000). Su RBN ir PSKReporter paprastai saugomi tik spotai nuo 28 MHz ir aukščiau.
 TAG|FONTE|Autoriaus taisyklė (IC8TEM): kiekvieną kartą uždarius programą, spotų duomenų bazė išvaloma tiek atmintyje, tiek aplanko data/spot failuose; kiekviena sesija prasideda iš naujo be senų spotų.
+TAG|SCELTA|Neprivalomas vietinis filtras (žymimasis langelis DATA COLLECTION, autoriaus prašymu): "DX de" eilutės, kurių dažnis žemiau 27990,0 kHz, atmetamos, nerodomos konsolėje ir nesaugomos.
+TAG|FONTE|YA-MS taisyklė, taikoma ir čia: spotai yra meteor scatter, o ne sporadinis E, jei naudoja vienareikšmiškai MS režimus (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) arba tekste yra <MS>, neskiriant didžiųjų ir mažųjų raidžių.
 H1|6. Log ADIF
 TAG|FONTE|LoTW Grid Map v2 [25] perkėlimas: LoTW ataskaita (atsisiunčiama su naudotojo vardu ir slaptažodžiu, kuris niekada nesaugomas) ir žurnalo ADIF failai sujungiami pagal šaukinį, juostą, datą ir laiką; patvirtinimai sumuojami.
 TAG|SCELTA|Tik juostos nuo 28 MHz ir aukščiau, kiekviena kaip atskira juosta, be grupavimo. Spalvos: oranžinė = dirbta, mėlyna = patvirtinta QSL, žalia = patvirtinta per LoTW. Filtras pagal sklidimo būdą (ADIF PROP_MODE: ES, FAI, AUR/AUE, MS, TR, EME, F2).

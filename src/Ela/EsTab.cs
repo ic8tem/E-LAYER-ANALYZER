@@ -471,7 +471,9 @@ namespace ELA
                 new[] { "70154.0", "SV1DH", "DL1ABC", "KM18", "JO50", "ES" },
                 new[] { "50313.0", "5B4AHJ", "F5XYZ", "KM64", "JN18", "ES" },
                 new[] { "144174.0", "EA5XX", "IW0ABC", "IM99", "JN61", "ES" },
-                new[] { "50313.0", "EA6SX", "IK7ABC", "JM19", "JN80", "ES" }
+                new[] { "50313.0", "EA6SX", "IK7ABC", "JM19", "JN80", "ES" },
+                new[] { "144300.0", "LA9ABC", "G4XYZ", "JO59", "IO70", "AU" },
+                new[] { "144050.0", "OZ1ABC", "GM4XYZ", "JO65", "IO85", "AUR" }
             };
             foreach (string[] d in demo)
             {

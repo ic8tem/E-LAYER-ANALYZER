@@ -25,13 +25,17 @@ namespace ELA
 
         // Regola dell'autore (IC8TEM): se nel testo dello spot compare <MS>, <AU> o <TR> lo spot non riguarda l'E-sporadico
         // (serve invece al meteor scatter, all'aurora o al tropo) e la linguetta SPORADIC-E lo scarta.
-        static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AU|AUE|AURORA|TR|TROPO)\s*>",
+        static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AURORA|AUR|AUE|AU|TR|TROPO)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         // Regola di YA-MS (IC8TEM), valida anche qui: spot di meteor scatter = modi univocamente MS (MSK144, FSK441/FSK41, PSK2K,
         // JTMS, JT6M) oppure <MS> nel testo, senza distinzione tra maiuscole e minuscole. Non sono spot di E-sporadico.
         static readonly System.Text.RegularExpressions.Regex rxMsMode = new System.Text.RegularExpressions.Regex(@"MSK144|FSK441|FSK41|PSK2K|JTMS|JT6M",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         public bool IsMeteorScatter { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
+        // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
+        static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool IsAurora { get { return Prop == "AU" || rxAu.IsMatch(Comment ?? ""); } }
         public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? "") || IsMeteorScatter; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && !TaggedNotEs; } }
@@ -66,10 +70,10 @@ namespace ELA
         static readonly Regex rxDx = new Regex(@"^DX de\s+([A-Z0-9/\-#_]+)[:>]?\s+(\d+(?:\.\d+)?)\s+([A-Z0-9/]+)\s+(.*?)\s*(\d{4})Z(?:\s+([A-R]{2}\d{2}(?:[A-X]{2})?))?\s*$",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
         // locator <modo> locator, es. "JN70CN<ES>JO62QM", "JN61 <FAI> JO40", "IO81(TR)JN18"
-        static readonly Regex rxLocProp = new Regex(@"\b([A-R]{2}\d{2}(?:[A-X]{2})?)\s*[<\(\[]?\s*(ES|FAI|AU|AUE|AURORA|MS|TR|TROPO|EME|F2|TEP|SS|RS)?\s*[>\)\]]\s*([A-R]{2}\d{2}(?:[A-X]{2})?)\b|\b([A-R]{2}\d{2}(?:[A-X]{2})?)\s*<\s*(ES|FAI|AU|AUE|AURORA|MS|TR|TROPO|EME|F2|TEP|SS|RS)\s*>\s*([A-R]{2}\d{2}(?:[A-X]{2})?)\b",
+        static readonly Regex rxLocProp = new Regex(@"\b([A-R]{2}\d{2}(?:[A-X]{2})?)\s*[<\(\[]?\s*(ES|FAI|AURORA|AUR|AUE|AU|MS|TR|TROPO|EME|F2|TEP|SS|RS)?\s*[>\)\]]\s*([A-R]{2}\d{2}(?:[A-X]{2})?)\b|\b([A-R]{2}\d{2}(?:[A-X]{2})?)\s*<\s*(ES|FAI|AURORA|AUR|AUE|AU|MS|TR|TROPO|EME|F2|TEP|SS|RS)\s*>\s*([A-R]{2}\d{2}(?:[A-X]{2})?)\b",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
         static readonly Regex rxLoc = new Regex(@"\b([A-R]{2}\d{2}(?:[A-X]{2})?)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        static readonly Regex rxProp = new Regex(@"(?:^|[\s<\(\[/])(ES|E-?SKIP|SPORADIC|FAI|AU|AUE|AURORA|MS|METEOR|TR|TROPO|EME|F2|TEP)(?:$|[\s>\)\]/!.,])", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        static readonly Regex rxProp = new Regex(@"(?:^|[\s<\(\[/])(ES|E-?SKIP|SPORADIC|FAI|AURORA|AUR|AUE|AU|MS|METEOR|TR|TROPO|EME|F2|TEP)(?:$|[\s>\)\]/!.,])", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         static readonly Regex rxSnr = new Regex(@"(-?\d+)\s*dB", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         static readonly Regex rxMode = new Regex(@"\b(CW|FT8|FT4|RTTY|PSK31|JT65|MSK144|Q65|FSK441|SSB|USB|BCN|NCDXF|JS8)\b", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -138,7 +142,7 @@ namespace ELA
         {
             p = p.ToUpperInvariant();
             if (p.StartsWith("E-") || p == "ESKIP" || p == "SPORADIC") return "ES";
-            if (p == "AURORA" || p == "AUE") return "AU";
+            if (p == "AURORA" || p == "AUE" || p == "AUR") return "AU";
             if (p == "METEOR") return "MS";
             if (p == "TROPO") return "TR";
             return p;

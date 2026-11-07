@@ -29,7 +29,7 @@ namespace ELA
         readonly ComboBox cmbMode, cmbPreset, cmbSp;
         readonly TextBox txtA, txtB;
         readonly NumericUpDown numH, numElev;
-        readonly CheckBox chkOval, chkRefr;
+        readonly CheckBox chkOval, chkRefr, chkAuSpots;
         readonly SelectableTextBlock txtRes;
         readonly TableView tSpots;
         readonly TextBlock lblSw;
@@ -72,6 +72,8 @@ namespace ELA
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD(pfx + "elev_min", 0)), 1, 0.5m, 45);
             chkOval = Ui.C(Lang.T("Ovale aurorale (NOAA OVATION)"), cf.GetB(pfx + "ovale", true));
             chkRefr = Ui.C(Lang.T("Rifrazione (raggio terrestre 4/3)"), cf.GetB(pfx + "rifrazione", true));
+            chkAuSpots = Ui.C(Lang.T("Spot <AU>/<AUR> sulla mappa con il calcolo"), cf.GetB(pfx + "spot_mappa", true));
+            chkAuSpots.IsCheckedChanged += (s, e) => Recalc();
             chkRefr.IsCheckedChanged += (s, e) => Recalc();
             Button bCalc = Ui.B(Lang.T("Calcola"), true);
             bCalc.Click += (s, e) => Recalc(true);
@@ -143,6 +145,7 @@ namespace ELA
                 StackPanel sw = new StackPanel();
                 sw.Children.Add(lblSw); sw.Children.Add(kpChart); sw.Children.Add(bFetch);
                 Ui.Dock(right, Ui.Box(Lang.T("Meteorologia spaziale (NOAA SWPC)"), Pal.Green, sw), Dock.Top);
+                Ui.Dock(right, Ui.Row(chkAuSpots), Dock.Top);
             }
             ScrollViewer svRes = new ScrollViewer { Content = txtRes, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
             Border spotBox = Ui.Box(aurora ? Lang.T("Spot aurora (AU)") : Lang.T("Spot F.A.I."), Pal.Orange, tSpots);
@@ -202,6 +205,7 @@ namespace ELA
             cf.Set(pfx + "quota_km", Ui.V(numH)); cf.Set(pfx + "elev_min", Ui.V(numElev));
             cf.Set(pfx + "ovale", chkOval.IsChecked == true);
             cf.Set(pfx + "rifrazione", chkRefr.IsChecked == true);
+            cf.Set(pfx + "spot_mappa", chkAuSpots.IsChecked == true);
         }
 
         // "NOMINATIVO LOCATOR", "LOCATOR" o "NOMINATIVO" -> coordinate
@@ -255,6 +259,7 @@ namespace ELA
             else if (cmbMode.SelectedIndex == 1) Iso(sb);
             else Scia(sb);
             if (aurora && impossible == null) AuroraInfo(sb);
+            if (aurora && impossible == null && chkAuSpots.IsChecked == true) AuroraSpots(sb);
             if (impossible != null)
             {
                 // nessun altro risultato: mappa pulita, nessun testo
@@ -573,7 +578,7 @@ namespace ELA
         void FillSpots()
         {
             spotsDirty = false;
-            List<Spot> l = SpotStore.Recent(24 * 60, s => s.HasBoth && (aurora ? s.Prop == "AU" : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))));
+            List<Spot> l = SpotStore.Recent(24 * 60, s => s.HasBoth && (aurora ? s.IsAurora : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))));
             tSpots.Rows.Clear();
             foreach (Spot s in l)
                 tSpots.Rows.Add(new TableRow
@@ -582,6 +587,74 @@ namespace ELA
                     Fore = EsTab.BandColor(s.Band), Tag = s
                 });
             tSpots.Refresh();
+            if (aurora && chkAuSpots.IsChecked == true) Recalc();   // nuovi spot di aurora: si ridisegnano con il calcolo
+        }
+
+        // ---------------------------------------------------------------- spot di aurora sulla mappa, con il calcolo
+        // Regola dell'autore: gli spot con <AU> o <AUR> nel testo sono di aurora. Per ogni spot (ultime 2 ore, al massimo 30)
+        // si calcola la scia degli scatter point della coppia spotter-DX (stesso modello della vista Scatter trail, passo 0,5°)
+        // e si disegna lo scatter point piu' probabile, con le direzioni di puntamento delle due stazioni.
+        class AuSol { public PerpPoint Best; public double QtfB, ElB; }
+        readonly Dictionary<string, AuSol> auCache = new Dictionary<string, AuSol>();
+        public const int AuSpotMinutes = 120;
+
+        void AuroraSpots(StringBuilder sb)
+        {
+            List<Spot> l = SpotStore.Recent(AuSpotMinutes, s => s.HasBoth && s.IsAurora);
+            if (l.Count > 30) l = l.GetRange(0, 30);
+            if (l.Count == 0) return;
+            double h = H, minEl = Ui.V(numElev), maxD = Geo.HalfHopKm(minEl, h);
+            bool oval = chkOval.IsChecked == true && SpaceWeather.Oval != null;
+            Func<double, double, double> w = null;
+            if (oval) w = (la, lo) => SpaceWeather.OvalAt(la, lo) / 30.0;
+            if (auCache.Count > 500) auCache.Clear();
+            int ok = 0;
+            sb.AppendLine();
+            sb.AppendLine(Lang.F("Spot di aurora delle ultime {0} ore sulla mappa ({1}):", AuSpotMinutes / 60, l.Count));
+            HashSet<string> seen = new HashSet<string>();
+            foreach (Spot s in l)
+            {
+                if (!seen.Add(s.Spotter + "|" + s.DxCall)) continue;
+                string key = s.Key + "|" + h + "|" + minEl + "|" + Geo.K + "|" + oval;
+                AuSol sol;
+                if (!auCache.TryGetValue(key, out sol))
+                {
+                    sol = new AuSol();
+                    List<PerpPoint> loc = FieldAligned.PairLocus(s.LatS, s.LonS, s.LatD, s.LonD, h, 2.5, minEl, maxD, 0.5);
+                    double bestScore = double.MaxValue;
+                    foreach (PerpPoint p in loc)
+                    {
+                        double dB = Geo.DistanceKm(s.LatD, s.LonD, p.Lat, p.Lon);
+                        double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
+                        if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
+                        if (score < bestScore) { bestScore = score; sol.Best = p; }
+                    }
+                    if (sol.Best != null)
+                    {
+                        double dB = Geo.DistanceKm(s.LatD, s.LonD, sol.Best.Lat, sol.Best.Lon);
+                        sol.QtfB = Geo.Bearing(s.LatD, s.LonD, sol.Best.Lat, sol.Best.Lon); sol.ElB = Geo.ElevationDeg(dB, h, 0);
+                    }
+                    auCache[key] = sol;
+                }
+                Color bc = EsTab.BandColor(s.Band);
+                map.Markers.Add(new MapMarker { Lat = s.LatS, Lon = s.LonS, Radius = 3.5, Fill = bc, Label = s.Spotter });
+                map.Markers.Add(new MapMarker { Lat = s.LatD, Lon = s.LonD, Radius = 3.5, Fill = bc, Label = s.DxCall });
+                if (sol.Best == null)
+                {
+                    map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, Pal.A(110, Pal.Silver), 1, true));
+                    sb.AppendLine(Lang.F("  {0} {1} - {2}: nessuno scatter point entro 2,5° per il modello", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture) + "Z", s.Spotter, s.DxCall));
+                    continue;
+                }
+                ok++;
+                PerpPoint b = sol.Best;
+                map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, b.Lat, b.Lon, Pal.A(200, bc), 1.4, true));
+                map.Lines.Add(MapView.GreatCircle(s.LatD, s.LonD, b.Lat, b.Lon, Pal.A(200, bc), 1.4, true));
+                map.Markers.Add(new MapMarker { Lat = b.Lat, Lon = b.Lon, Radius = 6, Fill = Pal.Orange, Ring = true, Label = Geo.LatLonToLoc(b.Lat, b.Lon, 4), LabelColor = Pal.Orange });
+                sb.AppendLine(Lang.F("  {0} {1} - {2} {3} MHz: scatter {4} (dev. {5:F1}°), {1} QTF {6:F0}° el {7:F0}°, {2} QTF {8:F0}° el {9:F0}°",
+                    s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture) + "Z", s.Spotter, s.DxCall, s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture),
+                    Geo.LatLonToLoc(b.Lat, b.Lon, 6), b.Off, b.Az, b.Elev, sol.QtfB, sol.ElB));
+            }
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("○ arancio: scatter point calcolato per uno spot <AU>/<AUR>"), Pal.Orange));
         }
     }
 

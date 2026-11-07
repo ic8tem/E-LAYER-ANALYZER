@@ -88,6 +88,8 @@ TAG|SCELTA|Linha "DX de SPOTTER: FREQ DXCALL comentário HHMMZ [LOC]" lida com u
 TAG|SCELTA|Regra do autor (IC8TEM): se no texto do spot aparecer <MS>, <AU> ou <TR> (também AUE, AURORA, TROPO), o spot não se refere à esporádica E e o separador SPORADIC-E descarta-o; continua útil para o meteor scatter e para a aurora. No BENCHMARK Es, o mesmo papel é desempenhado pelo campo PROP_MODE do log.
 TAG|SCELTA|Arquivo: um ficheiro CSV por dia em data/spot; em memória os últimos spots (no máximo 50000). Com RBN e PSKReporter guardam-se normalmente só os spots a partir de 28 MHz.
 TAG|FONTE|Regra do autor (IC8TEM): sempre que o programa é fechado, a base de dados de spots é esvaziada, tanto em memória como nos ficheiros de data/spot; cada sessão recomeça sem spots antigos.
+TAG|SCELTA|Filtro local opcional (caixa em DATA COLLECTION, pedido pelo autor): as linhas "DX de" com frequência abaixo de 27990,0 kHz são descartadas, não aparecem na consola e não são guardadas.
+TAG|FONTE|Regra do YA-MS aplicada também aqui: são spots de meteor scatter, e não de esporádica E, os que usam modos inequivocamente MS (MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M) ou têm <MS> no texto, sem distinção entre maiúsculas e minúsculas.
 H1|6. Log ADIF
 TAG|FONTE|Adaptação do LoTW Grid Map v2 [25]: o relatório LoTW (descarregado com nome de utilizador e palavra-passe, que nunca é guardada) e os ficheiros ADIF do log juntam-se por indicativo, banda, data e hora; as confirmações somam-se.
 TAG|SCELTA|Só as bandas a partir de 28 MHz, cada uma como banda individual, sem agregações. Cores: laranja = trabalhado, azul = confirmado por QSL, verde = confirmado via LoTW. Filtro pelo modo de propagação (PROP_MODE do ADIF: ES, FAI, AUR/AUE, MS, TR, EME, F2).
