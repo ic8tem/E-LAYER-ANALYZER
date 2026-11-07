@@ -86,6 +86,7 @@ namespace ELA
             Border topB = new Border { Background = Pal.B(Pal.Panel2), Child = top };
 
             // --- linguette
+            Filters.Load(Station.Cfg);   // filtri degli spot (colonna destra di DATA COLLECTION)
             es = new EsTab();
             bench = new BenchTab();
             bench50 = new BenchMultiTab();
@@ -346,6 +347,10 @@ namespace ELA
                 fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
                 tabs.Select(6);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
+                dc.Inner.Select(0);
+                string[] fn = { "ms", "es", "fai", "aurora", "prova" };
+                for (int j = 1; j < dc.FilterTabs.Count; j++) { dc.FilterTabs.Select(j); await Task.Delay(1200); Shot(Path.Combine(dir, "5f_filtri_" + fn[Math.Min(j, fn.Length - 1)] + ".png")); }
+                dc.FilterTabs.Select(0);
                 // tutte le linguette di YA-MS
                 tabs.Select(4);
                 await Task.Delay(1500);

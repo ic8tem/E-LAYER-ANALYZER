@@ -95,7 +95,9 @@ namespace ELA
         //    nello stesso posto, oppure 4) se nei dintorni c'e' almeno uno spot in 50 MHz di salto corto.
         // Scelte del programma per "stesso posto", "dintorni" e "salto corto": punti di riflessione entro 300 km,
         // spot a 50 MHz in singolo salto entro ShortHopKm (1200 km) e entro 15 minuti dallo spot in 144 MHz.
-        public const double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15, Short50Km = 1200;
+        // valori di partenza = regola dell'autore; si regolano nei filtri di DATA COLLECTION (Filters.cs)
+        public static double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15, Short50Km = 1200;
+        public static bool Use144Rule = true;
 
         static IEnumerable<EsHop> RefPoints(EsPath p)
         {
@@ -123,6 +125,7 @@ namespace ELA
         public static List<EsPath> Apply144Rule(List<EsPath> paths, List<EsPath> six, out int shortCount, out int held)
         {
             shortCount = 0; held = 0;
+            if (!Use144Rule) return new List<EsPath>(paths);   // regola spenta nei filtri
             List<EsPath> two = new List<EsPath>();
             foreach (EsPath p in paths) if (p.Spot.Band == "2m" && p.DistKm >= MinKm144) two.Add(p);
             List<EsPath> res = new List<EsPath>();
@@ -154,7 +157,8 @@ namespace ELA
         // inclinazione magnetica tra -20° e +20° (equatore magnetico; carta dell'inclinazione WMM 2015 fornita
         // dall'autore, calcolo con IGRF-14), il collegamento non e' E-sporadico ma transequatoriale, salvo che lo
         // spot (o il PROP_MODE del log) dichiari esplicitamente ES.
-        public const double TepInclinationDeg = 20;
+        public static double TepInclinationDeg = 20;
+        public static bool UseTepRule = true;
 
         // Africa (con il Madagascar; senza Canarie, Madeira, Capo Verde e penisola arabica) e Sud America: riquadri geografici approssimati
         public static bool InCanarie(double lat, double lon) { return lat >= 27.4 && lat <= 29.6 && lon >= -18.4 && lon <= -13.2; }
@@ -174,6 +178,7 @@ namespace ELA
         // vero se la tratta va verso l'Africa o il Sud America e il punto medio sta nella fascia |inclinazione| <= 20°
         public static bool IsTransEquatorial(double latA, double lonA, double latB, double lonB)
         {
+            if (!UseTepRule) return false;
             bool south = InAfrica(latA, lonA) || InAfrica(latB, lonB) || InSouthAmerica(latA, lonA) || InSouthAmerica(latB, lonB);
             if (!south) return false;
             double la, lo;

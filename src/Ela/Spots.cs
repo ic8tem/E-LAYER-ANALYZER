@@ -45,8 +45,8 @@ namespace ELA
         // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsAurora { get { return Prop == "AU" || rxAu.IsMatch(Comment ?? ""); } }
-        public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? "") || IsMeteorScatter; } }
+        public bool IsAurora { get { return Prop == "AU" || Filters.AuTag(Comment); } }
+        public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || IsMeteorScatter; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs; } }
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES

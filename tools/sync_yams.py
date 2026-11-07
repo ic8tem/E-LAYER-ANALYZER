@@ -135,11 +135,26 @@ wr(p, s)
 p = os.path.join(ui, 'MainWindow.Raccolta.cs')
 if os.path.exists(p):
     s = rd(p)
+    # In E-LAYER ANALYZER la raccolta dei dati e' una sola (linguetta DATA COLLECTION): la sottolinguetta "Raccolta dati"
+    # di YA-MS non si mostra, ma si costruisce lo stesso (tabella, contatori, filtro) e il suo filtro va nella
+    # colonna dei filtri di DATA COLLECTION (MainWindow.MsFilterPanel).
+    s = rep(s, '        TextBox txtRdLogin, txtRdTest;',
+            '        public static Control MsFilterPanel;   // E-LAYER ANALYZER: filtro MS mostrato in DATA COLLECTION\n        TextBox txtRdLogin, txtRdTest;',
+            'MsFilterPanel')
+    s = rep(s, '            DockPanel p = Page(Lang.T("Raccolta dati"));',
+            '            DockPanel p = Hosted ? new DockPanel() : Page(Lang.T("Raccolta dati"));   // dentro E-LAYER ANALYZER: raccolta unica in DATA COLLECTION',
+            'Raccolta nascosta')
     s = rep(s, '            for (int i = 0; i < 3; i++) inner.Add((i + 1) + ". " + shortName[i], SessionBox(i, cols[i]));',
-            '            // i riquadri si creano sempre: i loro campi servono all\'aggiornamento e al salvataggio anche quando sono nascosti\n'
-            '            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }\n'
-            '            if (Hosted) inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });',
+            '            // i riquadri si creano sempre: i loro campi servono all\'aggiornamento e al salvataggio\n'
+            '            for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }',
             'sessioni della Raccolta dati')
+    s = rep(s, '            fp.Children.Add(chkLow);',
+            '            chkLow.IsVisible = !Hosted;   // in E-LAYER ANALYZER c\'e\' gia\' il filtro locale di DATA COLLECTION\n            fp.Children.Add(chkLow);',
+            'chkLow')
+    s = rep(s, '            Grid.SetColumn(right, 1); g.Children.Add(right);',
+            '            Grid.SetColumn(right, 1); g.Children.Add(right);\n'
+            '            if (Hosted) { ((ScrollViewer)right.Child).Content = null; MsFilterPanel = fp; }',
+            'filtro in DATA COLLECTION')
     s = rep(s, '            if (MsCollector.Started) return;', '            if (Hosted || MsCollector.Started) return;', 'RdAutoStart')
     wr(p, s)
     p = os.path.join(DST, 'Core', 'MsSpots.cs'); s = rd(p)

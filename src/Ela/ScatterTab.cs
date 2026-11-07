@@ -169,7 +169,7 @@ namespace ELA
             DefaultView();
 
             // si ridisegna solo per gli spot che riguardano questa linguetta (aurora: <AU>/<AUR>; F.A.I.: FAI)
-            SpotStore.Added += s => { if (aurora ? s.IsAurora : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))) spotsDirty = true; };
+            SpotStore.Added += s => { if (aurora ? Filters.IsAuroraSpot(s) : Filters.IsFaiSpot(s)) spotsDirty = true; };
             Station.Changed += () => Recalc();
             DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
             t.Tick += (s, e) =>
@@ -580,7 +580,7 @@ namespace ELA
         void FillSpots()
         {
             spotsDirty = false;
-            List<Spot> l = SpotStore.Recent(24 * 60, s => s.HasBoth && (aurora ? s.IsAurora : (s.Prop == "FAI" || (s.Comment ?? "").ToUpperInvariant().Contains("FAI"))));
+            List<Spot> l = SpotStore.Recent(aurora ? Filters.AuMinutes : Filters.FaiMinutes, s => s.HasBoth && (aurora ? Filters.IsAuroraSpot(s) : Filters.IsFaiSpot(s)));
             tSpots.Rows.Clear();
             foreach (Spot s in l)
                 tSpots.Rows.Add(new TableRow
@@ -598,11 +598,10 @@ namespace ELA
         // e si disegna lo scatter point piu' probabile, con le direzioni di puntamento delle due stazioni.
         class AuSol { public PerpPoint Best; public double QtfB, ElB; }
         readonly Dictionary<string, AuSol> auCache = new Dictionary<string, AuSol>();
-        public const int AuSpotMinutes = 120;
 
         void AuroraSpots(StringBuilder sb)
         {
-            List<Spot> l = SpotStore.Recent(AuSpotMinutes, s => s.HasBoth && s.IsAurora);
+            List<Spot> l = SpotStore.Recent(Filters.AuMinutes, s => s.HasBoth && Filters.IsAuroraSpot(s));
             if (l.Count > 30) l = l.GetRange(0, 30);
             if (l.Count == 0) return;
             double h = H, minEl = Ui.V(numElev), maxD = Geo.HalfHopKm(minEl, h);
@@ -612,7 +611,7 @@ namespace ELA
             if (auCache.Count > 500) auCache.Clear();
             int ok = 0;
             sb.AppendLine();
-            sb.AppendLine(Lang.F("Spot di aurora delle ultime {0} ore sulla mappa ({1}):", AuSpotMinutes / 60, l.Count));
+            sb.AppendLine(Lang.F("Spot di aurora delle ultime {0} ore sulla mappa ({1}):", Math.Round(Filters.AuMinutes / 60.0, 1), l.Count));
             HashSet<string> seen = new HashSet<string>();
             foreach (Spot s in l)
             {

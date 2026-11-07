@@ -63,8 +63,7 @@ namespace ELA
             }
             chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate)"), VhfOnly);
             chkVhfOnly.IsCheckedChanged += (s, e) => VhfOnly = chkVhfOnly.IsChecked == true;
-            DockPanel sessPage = new DockPanel();
-            Ui.Dock(sessPage, Ui.Row(chkVhfOnly), Dock.Top);
+            DockPanel sessPage = new DockPanel();   // il filtro locale delle righe sta nella colonna dei filtri (40 %)
             sessPage.Children.Add(new ScrollViewer { Content = sp, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto });
             Inner.Add(Lang.T("Sessioni telnet"), sessPage);
 
@@ -101,9 +100,15 @@ namespace ELA
             callPage.Children.Add(new ScrollViewer { Content = lblCall3 });
             Inner.Add("CALL3", callPage);
 
-            DockPanel root = new DockPanel { Background = Pal.B(Pal.Back) };
-            Ui.Dock(root, Inner.Bar, Dock.Top);
-            root.Children.Add(Inner.Host);
+            // 60 % a sinistra: sessioni, spot raccolti, CALL3; 40 % a destra: i filtri di tutti i modi di propagazione.
+            // La raccolta dei dati e' una sola per tutto il programma: anche YA-MS (METEOR SCATTER) riceve le righe da qui.
+            DockPanel left = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(left, Inner.Bar, Dock.Top);
+            left.Children.Add(Inner.Host);
+            Grid root = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*"), Background = Pal.B(Pal.Back) };
+            Grid.SetColumn(left, 0); root.Children.Add(left);
+            Control right = BuildFilters();
+            Grid.SetColumn(right, 1); root.Children.Add(right);
             Root = root;
 
             CallDb.Loaded += () => Dispatcher.UIThread.Post(UpdateCall3);
@@ -117,6 +122,227 @@ namespace ELA
             t.Start();
         }
 
+        // ---------------- colonna dei filtri (40 %)
+        public readonly PillTabs FilterTabs = new PillTabs();
+        TextBox txtProva;
+        TextBlock lblProva;
+
+        static StackPanel FPanel(string title, Color c)
+        {
+            StackPanel fp = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
+            fp.Children.Add(new TextBlock { Text = title, FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(c), TextWrapping = TextWrapping.Wrap });
+            return fp;
+        }
+        static TextBlock FText(string t, bool muted = false)
+        {
+            return new TextBlock { Text = t, TextWrapping = TextWrapping.Wrap, FontSize = 13, Foreground = Pal.B(muted ? Pal.Muted : Pal.Fore) };
+        }
+        static TextBlock FHead(string t)
+        {
+            return new TextBlock { Text = t, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 8, 0, 0), TextWrapping = TextWrapping.Wrap };
+        }
+        static CheckBox FCheck(string t, bool v)
+        {
+            CheckBox c = Ui.C("", v);
+            c.Content = new TextBlock { Text = t, TextWrapping = TextWrapping.Wrap };
+            return c;
+        }
+        static TextBox FBox(string v)
+        {
+            TextBox t = Ui.T(v, 300, false);
+            t.HorizontalAlignment = HorizontalAlignment.Stretch; t.Width = double.NaN;
+            return t;
+        }
+        static Control Scroll(Control c)
+        {
+            return new ScrollViewer { Content = c, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto,
+                                      HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled };
+        }
+        void Changed() { Filters.NotifyChanged(); TestFilters(); }
+
+        Control BuildFilters()
+        {
+            // filtro generale delle righe del cluster (vale per tutto il programma)
+            StackPanel head = new StackPanel { Spacing = 4, Margin = new Thickness(10, 8, 10, 4) };
+            head.Children.Add(new TextBlock { Text = Lang.T("Filtri degli spot"), FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
+            head.Children.Add(FText(Lang.T("La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione."), true));
+            if (chkVhfOnly.Content is string cs) chkVhfOnly.Content = new TextBlock { Text = cs, TextWrapping = TextWrapping.Wrap };
+            head.Children.Add(chkVhfOnly);
+
+            // 1. meteor scatter: il filtro di YA-MS
+            Control ms = YAMS.MainWindow.MsFilterPanel;
+            if (ms == null) ms = FText(Lang.T("Il filtro del meteor scatter è nella linguetta METEOR SCATTER."), true);
+            FilterTabs.Add(Lang.T("Meteor scatter"), Scroll(ms));
+            FilterTabs.Add(Lang.T("E-sporadico"), Scroll(BuildEsFilter()));
+            FilterTabs.Add("F.A.I.", Scroll(BuildFaiFilter()));
+            FilterTabs.Add(Lang.T("Aurora"), Scroll(BuildAuFilter()));
+            FilterTabs.Add(Lang.T("Prova dei filtri"), Scroll(BuildTestPanel()));
+
+            DockPanel dp = new DockPanel();
+            Ui.Dock(dp, head, Dock.Top);
+            Ui.Dock(dp, FilterTabs.Bar, Dock.Top);
+            dp.Children.Add(FilterTabs.Host);
+            return new Border { Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1, 0, 0, 0), Child = dp };
+        }
+
+        Control BuildEsFilter()
+        {
+            StackPanel fp = FPanel(Lang.T("Filtro degli spot di E-sporadico"), Pal.Azure);
+            fp.Children.Add(FHead(Lang.T("Scritte di altra propagazione")));
+            fp.Children.Add(FText(Lang.T("Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.")));
+            TextBox tags = FBox(Filters.EsTags);
+            tags.TextChanged += (s, e) => { Filters.SetEsTags(tags.Text); Changed(); };
+            fp.Children.Add(tags);
+            fp.Children.Add(FText(Lang.T("Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP."), true));
+
+            fp.Children.Add(FHead(Lang.T("Regola dei 144 MHz (regola dell'autore)")));
+            CheckBox c144 = FCheck(Lang.T("Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato"), EsModel.Use144Rule);
+            fp.Children.Add(c144);
+            NumericUpDown nMin = Ui.N(300, 3000, Ui.Dm(EsModel.MinKm144), 0, 50, 90);
+            NumericUpDown nConf = Ui.N(1, 60, Ui.Dm(EsModel.Confirm144Min), 0, 1, 70);
+            NumericUpDown nCloud = Ui.N(50, 1500, Ui.Dm(EsModel.CloudMatchKm), 0, 50, 90);
+            NumericUpDown nShort = Ui.N(300, 2400, Ui.Dm(EsModel.Short50Km), 0, 100, 90);
+            NumericUpDown nNear = Ui.N(1, 120, Ui.Dm(EsModel.Near50Min), 0, 1, 70);
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 144 MHz (km)")), nMin));
+            fp.Children.Add(FText(Lang.T("Conferma con un secondo spot in 144 MHz sulla stessa nube:")));
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("entro (minuti)")), nConf, Ui.L(Lang.T("nube entro (km)")), nCloud));
+            fp.Children.Add(FText(Lang.T("Oppure con uno spot in 50 MHz di salto corto nei dintorni:")));
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("salto corto fino a (km)")), nShort, Ui.L(Lang.T("entro (minuti)")), nNear));
+
+            fp.Children.Add(FHead(Lang.T("Regola transequatoriale (regola dell'autore)")));
+            CheckBox cTep = FCheck(Lang.T("Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES"), EsModel.UseTepRule);
+            fp.Children.Add(cTep);
+            NumericUpDown nTep = Ui.N(5, 45, Ui.Dm(EsModel.TepInclinationDeg), 0, 1, 70);
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("fascia di inclinazione ± (gradi)")), nTep));
+
+            Action read = () =>
+            {
+                EsModel.Use144Rule = c144.IsChecked == true; EsModel.MinKm144 = Ui.V(nMin); EsModel.Confirm144Min = Ui.V(nConf);
+                EsModel.CloudMatchKm = Ui.V(nCloud); EsModel.Short50Km = Ui.V(nShort); EsModel.Near50Min = Ui.V(nNear);
+                EsModel.UseTepRule = cTep.IsChecked == true; EsModel.TepInclinationDeg = Ui.V(nTep);
+                Changed();
+            };
+            c144.IsCheckedChanged += (s, e) => read(); cTep.IsCheckedChanged += (s, e) => read();
+            foreach (NumericUpDown n in new[] { nMin, nConf, nCloud, nShort, nNear, nTep }) n.ValueChanged += (s, e) => read();
+            Button bReset = Ui.B(Lang.T("Ripristina le regole dell'autore"));
+            bReset.Click += (s, e) =>
+            {
+                Filters.ResetEs();
+                tags.Text = Filters.EsTags; c144.IsChecked = EsModel.Use144Rule; cTep.IsChecked = EsModel.UseTepRule;
+                nMin.Value = Ui.Dm(EsModel.MinKm144); nConf.Value = Ui.Dm(EsModel.Confirm144Min); nCloud.Value = Ui.Dm(EsModel.CloudMatchKm);
+                nShort.Value = Ui.Dm(EsModel.Short50Km); nNear.Value = Ui.Dm(EsModel.Near50Min); nTep.Value = Ui.Dm(EsModel.TepInclinationDeg);
+                Changed();
+            };
+            fp.Children.Add(Ui.Row(bReset));
+            fp.Children.Add(FText(Lang.T("I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni."), true));
+            return fp;
+        }
+
+        static WrapPanel BandChecks(HashSet<string> set, Action changed, List<CheckBox> list)
+        {
+            WrapPanel w = new WrapPanel();
+            foreach (string b in Filters.BandNames)
+            {
+                string bn = b;
+                CheckBox c = Ui.C(bn, set.Contains(bn));
+                c.IsCheckedChanged += (s, e) => { if (c.IsChecked == true) set.Add(bn); else set.Remove(bn); changed(); };
+                w.Children.Add(c); list.Add(c);
+            }
+            return w;
+        }
+
+        Control BuildFaiFilter()
+        {
+            StackPanel fp = FPanel(Lang.T("Filtro degli spot di F.A.I."), Pal.Violet);
+            fp.Children.Add(FText(Lang.T("Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):")));
+            TextBox tags = FBox(Filters.FaiTags);
+            tags.TextChanged += (s, e) => { Filters.SetFaiTags(tags.Text); Changed(); };
+            fp.Children.Add(tags);
+            fp.Children.Add(FHead(Lang.T("Bande")));
+            List<CheckBox> bl = new List<CheckBox>();
+            fp.Children.Add(BandChecks(Filters.FaiBands, Changed, bl));
+            NumericUpDown nMin = Ui.N(15, 2880, Ui.Dm(Filters.FaiMinutes), 0, 15, 90);
+            nMin.ValueChanged += (s, e) => { Filters.FaiMinutes = Ui.V(nMin); Changed(); };
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Spot sulla mappa degli ultimi (minuti)")), nMin));
+            Button bReset = Ui.B(Lang.T("Ripristina le regole dell'autore"));
+            bReset.Click += (s, e) =>
+            {
+                Filters.ResetFai(); tags.Text = Filters.FaiTags; nMin.Value = Ui.Dm(Filters.FaiMinutes);
+                foreach (CheckBox c in bl) c.IsChecked = true;
+                Changed();
+            };
+            fp.Children.Add(Ui.Row(bReset));
+            fp.Children.Add(FText(Lang.T("Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point."), true));
+            return fp;
+        }
+
+        Control BuildAuFilter()
+        {
+            StackPanel fp = FPanel(Lang.T("Filtro degli spot di aurora"), Pal.Green);
+            fp.Children.Add(FText(Lang.T("Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):")));
+            TextBox tags = FBox(Filters.AuTags);
+            tags.TextChanged += (s, e) => { Filters.SetAuTags(tags.Text); Changed(); };
+            fp.Children.Add(tags);
+            fp.Children.Add(FHead(Lang.T("Bande")));
+            List<CheckBox> bl = new List<CheckBox>();
+            fp.Children.Add(BandChecks(Filters.AuBands, Changed, bl));
+            NumericUpDown nMin = Ui.N(15, 1440, Ui.Dm(Filters.AuMinutes), 0, 15, 90);
+            nMin.ValueChanged += (s, e) => { Filters.AuMinutes = Ui.V(nMin); Changed(); };
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Spot sulla mappa degli ultimi (minuti)")), nMin));
+            Button bReset = Ui.B(Lang.T("Ripristina le regole dell'autore"));
+            bReset.Click += (s, e) =>
+            {
+                Filters.ResetAu(); tags.Text = Filters.AuTags; nMin.Value = Ui.Dm(Filters.AuMinutes);
+                foreach (CheckBox c in bl) c.IsChecked = true;
+                Changed();
+            };
+            fp.Children.Add(Ui.Row(bReset));
+            fp.Children.Add(FText(Lang.T("Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni."), true));
+            return fp;
+        }
+
+        Control BuildTestPanel()
+        {
+            StackPanel fp = FPanel(Lang.T("Prova dei filtri"), Pal.Orange);
+            fp.Children.Add(FText(Lang.T("Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.")));
+            txtProva = FBox("DX de IK0XYZ:     50313.0  EA8ABC       JN61<ES>IL18 FT8 -12 dB    1532Z");
+            txtProva.FontSize = 12;
+            lblProva = new TextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
+            txtProva.TextChanged += (s, e) => TestFilters();
+            fp.Children.Add(txtProva);
+            fp.Children.Add(lblProva);
+            TestFilters();
+            return fp;
+        }
+
+        void TestFilters()
+        {
+            if (lblProva == null) return;
+            Spot s = SpotParser.Parse(txtProva.Text ?? "", 9, DateTime.UtcNow);
+            if (s == null) { lblProva.Text = Lang.T("La riga non è uno spot (deve iniziare con DX de)."); return; }
+            Func<bool, string> yn = b => b ? Lang.T("sì") : Lang.T("no");
+            double f = s.FreqKHz;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Lang.F("Banda: {0}   frequenza: {1:F1} kHz", s.Band, f));
+            if (VhfOnly && (f < MinKHz || f > MaxKHz)) sb.AppendLine(Lang.T("Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)"));
+            sb.AppendLine(Lang.F("Locator: {0} - {1}", s.LocSpotter.Length > 0 ? s.LocSpotter : "?", s.LocDx.Length > 0 ? s.LocDx : "?"));
+            if (s.HasBoth) sb.AppendLine(Lang.F("Distanza: {0:F0} km", s.DistanceKm));
+            sb.AppendLine(Lang.F("Propagazione dichiarata: {0}", s.Prop.Length > 0 ? s.Prop : "-"));
+            sb.AppendLine();
+            sb.AppendLine(Lang.F("Meteor scatter: {0}", yn(s.IsMeteorScatter)));
+            sb.AppendLine(Lang.F("Aurora: {0}", yn(Filters.IsAuroraSpot(s))));
+            sb.AppendLine(Lang.F("F.A.I.: {0}", yn(Filters.IsFaiSpot(s))));
+            bool tep = s.IsTep;
+            sb.AppendLine(Lang.F("Transequatoriale: {0}", yn(tep)));
+            bool es = s.EsCandidate && !tep;
+            string esNote = "";
+            if (es && s.Band == "2m" && EsModel.Use144Rule)
+                esNote = s.HasBoth && s.DistanceKm < EsModel.MinKm144 ? " " + Lang.F("(scartato: sotto {0:F0} km in 144 MHz)", EsModel.MinKm144)
+                                                                      : " " + Lang.T("(in 144 MHz si disegna solo con una conferma)");
+            sb.AppendLine(Lang.F("E-sporadico: {0}", yn(es)) + esNote);
+            lblProva.Text = sb.ToString().TrimEnd();
+        }
+
         public void ConnectSaved()
         {
             foreach (SessionPanel p in sessions) if (p.ConnectAtStart) p.Connect();
@@ -125,6 +351,7 @@ namespace ELA
         public void Save()
         {
             Station.Cfg.Set("dc_solo_vhf", VhfOnly);
+            Filters.Save(Station.Cfg);
             foreach (SessionPanel p in sessions) p.Save();
         }
 

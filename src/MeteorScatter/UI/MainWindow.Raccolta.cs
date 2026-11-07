@@ -15,6 +15,7 @@ namespace YAMS
 {
     public partial class MainWindow
     {
+        public static Control MsFilterPanel;   // E-LAYER ANALYZER: filtro MS mostrato in DATA COLLECTION
         TextBox txtRdLogin, txtRdTest;
         TextBlock lblRdStats, lblRdTest, lblRdCall3, lblRdCount;
         TableView tRd;
@@ -37,7 +38,7 @@ namespace YAMS
             if (CallDb.Count == 0 && !CallDb.Loading) CallDb.StartLoad(dataDir);
             CallDb.Loaded += () => Avalonia.Threading.Dispatcher.UIThread.Post(UpdateCall3Label);
 
-            DockPanel p = Page(Lang.T("Raccolta dati"));
+            DockPanel p = Hosted ? new DockPanel() : Page(Lang.T("Raccolta dati"));   // dentro E-LAYER ANALYZER: raccolta unica in DATA COLLECTION
             Grid g = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*") };
             p.Children.Add(g);
 
@@ -76,9 +77,8 @@ namespace YAMS
             // una sottolinguetta per ciascuno dei tre flussi di cluster (richiesta IC8TEM), poi gli spot raccolti
             PillTabs inner = new PillTabs(true);
             string[] shortName = { Lang.T("DX cluster"), "RBN", Lang.T("DM4X (PSKReporter)") };
-            // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio anche quando sono nascosti
+            // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio
             for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }
-            if (Hosted) inner.Add(Lang.T("Sessioni"), new TextBlock { Text = Lang.T("In E-LAYER ANALYZER le righe del cluster arrivano dalle sessioni della linguetta DATA COLLECTION: qui si filtrano gli spot meteor scatter."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 6) });
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);
@@ -148,6 +148,7 @@ namespace YAMS
             ((Control)chkLow).Margin = new Thickness(0, 4, 0, 0);
             if (chkLow.Content is string cs) chkLow.Content = new TextBlock { Text = cs, TextWrapping = TextWrapping.Wrap };
             chkLow.IsCheckedChanged += (s, e) => MsCollector.DropLow = chkLow.IsChecked == true;
+            chkLow.IsVisible = !Hosted;   // in E-LAYER ANALYZER c'e' gia' il filtro locale di DATA COLLECTION
             fp.Children.Add(chkLow);
 
             fp.Children.Add(new TextBlock { Text = Lang.T("Prova del filtro"), FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 6, 0, 0) });
@@ -174,6 +175,7 @@ namespace YAMS
                 Child = new ScrollViewer { Content = fp, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled }
             };
             Grid.SetColumn(right, 1); g.Children.Add(right);
+            if (Hosted) { ((ScrollViewer)right.Child).Content = null; MsFilterPanel = fp; }
 
             FillWordList();
             TestFilter();
