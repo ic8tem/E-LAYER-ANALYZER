@@ -371,3 +371,48 @@ RELAZIONE TECNICA	تکنیکی رپورٹ
 Le scelte che hanno portato alla realizzazione del programma	وہ انتخاب جن کے نتیجے میں یہ پروگرام بنا
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	نوٹ: sporadic-E کا اطلاق 432 MHz پر نہیں ہوتا (دیکھیں حسابی انتخاب کا خلاصہ)۔
 Comandi dopo il login	لاگ اِن کے بعد کے احکامات
+Filtri degli spot	اسپاٹ فلٹر
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	ڈیٹا کلیکشن پورے پروگرام کے لیے ایک ہی ہے: telnet سیشنز سے موصول ہونے والا ہر اسپاٹ ان فلٹرز سے گزر کر ہر propagation موڈ کے ٹیب میں جاتا ہے۔
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	meteor scatter کا فلٹر METEOR SCATTER ٹیب میں ہے۔
+Meteor scatter	meteor scatter
+E-sporadico	sporadic-E
+Aurora	aurora
+Prova dei filtri	فلٹرز کی جانچ
+Filtro degli spot di E-sporadico	sporadic-E اسپاٹس کا فلٹر
+Scritte di altra propagazione	دوسری propagation کے اندراجات
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	جن اسپاٹس میں < > کے درمیان ان میں سے کوئی اندراج ہو وہ sporadic-E میں شامل نہیں ہوتے: وہ meteor scatter، aurora یا tropo کے لیے ہیں۔
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	وہ اسپاٹس بھی خارج ہیں جنہیں Meteor scatter ذیلی ٹیب کا فلٹر meteor scatter پہچانے، اور وہ جن کا اعلان کردہ موڈ MS، FAI، AU، TR، EME یا TEP ہو۔
+Regola dei 144 MHz (regola dell'autore)	144 MHz کا اصول (مصنف کا اصول)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	اصول لاگو کریں: 144 MHz میں sporadic-E صرف کم از کم فاصلے سے آگے مانا جاتا ہے، اور اکیلا اسپاٹ تصدیق ہونے تک نہیں بنایا جاتا
+Distanza minima in 144 MHz (km)	144 MHz میں کم از کم فاصلہ (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	اسی بادل پر 144 MHz کے دوسرے اسپاٹ سے تصدیق:
+entro (minuti)	کے اندر (منٹ)
+nube entro (km)	بادل کے اندر (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	یا آس پاس کے 50 MHz مختصر ہاپ اسپاٹ سے:
+salto corto fino a (km)	مختصر ہاپ تک (km)
+Regola transequatoriale (regola dell'autore)	ٹرانس ایکویٹوریل اصول (مصنف کا اصول)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	افریقہ (مڈغاسکر سمیت؛ کینری، ماڈیرا، کیپ ورڈ اور جزیرہ نمائے عرب کے بغیر) اور جنوبی امریکہ کی طرف، اگر وسطی نقطہ دیے گئے مقناطیسی جھکاؤ کی پٹی میں ہو تو رابطہ ٹرانس ایکویٹوریل ہے، الا یہ کہ اسپاٹ ES کا اعلان کرے
+fascia di inclinazione ± (gradi)	جھکاؤ کی پٹی ± (ڈگری)
+Ripristina le regole dell'autore	مصنف کے اصول بحال کریں
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	فلٹر SPORADIC-E ٹیب اور دونوں BENCHMARK پر لاگو ہوتے ہیں؛ قدریں سیٹنگز میں محفوظ ہوتی ہیں۔
+Filtro degli spot di F.A.I.	F.A.I. اسپاٹس کا فلٹر
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	اسپاٹ F.A.I. ہے اگر اعلان کردہ موڈ FAI ہو یا متن میں ان میں سے کوئی لفظ ہو (< > کے بغیر بھی، بڑے یا چھوٹے حروف میں):
+Spot sulla mappa degli ultimi (minuti)	نقشے پر آخری (منٹ) کے اسپاٹ
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I. اسپاٹس F.A.I. ٹیب میں scatter point کے حساب کے ساتھ بنائے جاتے ہیں۔
+Filtro degli spot di aurora	aurora اسپاٹس کا فلٹر
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	اسپاٹ aurora ہے اگر اعلان کردہ موڈ AU ہو یا متن میں < > کے درمیان ان میں سے کوئی اندراج ہو (مصنف کا اصول: <AU> اور <AUR>):
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	aurora اسپاٹس sporadic-E میں شامل نہیں ہوتے اور AURORA ٹیب میں scatter point کے حساب اور دونوں اسٹیشنوں کی اینٹینا سمت کے ساتھ بنائے جاتے ہیں۔
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	کلسٹر کی ایک لائن لکھیں یا چسپاں کریں: پروگرام دکھاتا ہے کہ فلٹر اسے کیسے درجہ بند کرتے ہیں۔
+La riga non è uno spot (deve iniziare con DX de).	یہ لائن اسپاٹ نہیں ہے (اسے DX de سے شروع ہونا چاہیے)۔
+Banda: {0}   frequenza: {1:F1} kHz	بینڈ: {0}   فریکوئنسی: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	مقامی فلٹر: لائن رد (27990 kHz - 145 MHz کی حد سے باہر)
+Locator: {0} - {1}	لوکیٹر: {0} - {1}
+Distanza: {0:F0} km	فاصلہ: {0:F0} km
+Propagazione dichiarata: {0}	اعلان کردہ propagation: {0}
+Meteor scatter: {0}	meteor scatter: {0}
+Aurora: {0}	aurora: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	ٹرانس ایکویٹوریل: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(رد: 144 MHz میں {0:F0} km سے کم)
+(in 144 MHz si disegna solo con una conferma)	(144 MHz میں صرف تصدیق کے ساتھ بنایا جاتا ہے)
+E-sporadico: {0}	sporadic-E: {0}

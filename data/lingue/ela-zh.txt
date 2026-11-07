@@ -371,3 +371,48 @@ RELAZIONE TECNICA	技术报告
 Le scelte che hanno portato alla realizzazione del programma	促成本程序实现的各项选择
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	注意：偶发 E 层不适用于 432 MHz（参见“计算选择摘要”）。
 Comandi dopo il login	登录后命令
+Filtri degli spot	spot 过滤器
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	整个程序只有一个数据采集：telnet 会话收到的每条 spot 都经过这些过滤器，再送到各传播模式的选项卡。
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	流星散射过滤器位于 METEOR SCATTER 选项卡。
+Meteor scatter	流星散射
+E-sporadico	偶发 E 层
+Aurora	极光
+Prova dei filtri	过滤器测试
+Filtro degli spot di E-sporadico	偶发 E 层 spot 过滤器
+Scritte di altra propagazione	其他传播的标记
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	包含 < > 内任一标记的 spot 不计入偶发 E 层：它们用于流星散射、极光或对流层。
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	同样排除被“流星散射”子选项卡过滤器识别为流星散射的 spot，以及声明模式为 MS、FAI、AU、TR、EME 或 TEP 的 spot。
+Regola dei 144 MHz (regola dell'autore)	144 MHz 规则（作者规则）
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	应用规则：在 144 MHz，偶发 E 层仅在超过最小距离时有效，单条 spot 在确认前不绘制
+Distanza minima in 144 MHz (km)	144 MHz 最小距离 (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	用同一云上的第二条 144 MHz spot 确认：
+entro (minuti)	时间范围（分钟）
+nube entro (km)	云范围 (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	或用附近的 50 MHz 短跳 spot 确认：
+salto corto fino a (km)	短跳上限 (km)
+Regola transequatoriale (regola dell'autore)	跨赤道规则（作者规则）
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	朝向非洲（含马达加斯加；不含加那利群岛、马德拉、佛得角和阿拉伯半岛）和南美洲时，若中点落在指定的磁倾角带内，则该通联为跨赤道传播，除非 spot 声明为 ES
+fascia di inclinazione ± (gradi)	倾角带 ±（度）
+Ripristina le regole dell'autore	恢复作者规则
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	过滤器适用于 SPORADIC-E 选项卡和两个 BENCHMARK；数值保存在设置中。
+Filtro degli spot di F.A.I.	F.A.I. spot 过滤器
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	如果声明模式为 FAI，或文本包含以下任一单词（可不带 < >，不区分大小写），则该 spot 属于 F.A.I.：
+Spot sulla mappa degli ultimi (minuti)	地图显示最近的 spot（分钟）
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I. spot 与散射点计算一起绘制在 F.A.I. 选项卡中。
+Filtro degli spot di aurora	极光 spot 过滤器
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	如果声明模式为 AU，或文本包含以下任一 < > 内的标记（作者规则：<AU> 和 <AUR>），则该 spot 属于极光：
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	极光 spot 不计入偶发 E 层，而是与散射点计算及两站天线指向一起绘制在 AURORA 选项卡中。
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	输入或粘贴一行集群信息：程序将显示过滤器如何对其分类。
+La riga non è uno spot (deve iniziare con DX de).	该行不是 spot（必须以 DX de 开头）。
+Banda: {0}   frequenza: {1:F1} kHz	频段：{0}   频率：{1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	本地过滤：已丢弃该行（超出 27990 kHz - 145 MHz 范围）
+Locator: {0} - {1}	网格坐标：{0} - {1}
+Distanza: {0:F0} km	距离：{0:F0} km
+Propagazione dichiarata: {0}	声明的传播：{0}
+Meteor scatter: {0}	流星散射：{0}
+Aurora: {0}	极光：{0}
+F.A.I.: {0}	F.A.I.：{0}
+Transequatoriale: {0}	跨赤道：{0}
+(scartato: sotto {0:F0} km in 144 MHz)	（已舍弃：144 MHz 下小于 {0:F0} km）
+(in 144 MHz si disegna solo con una conferma)	（144 MHz 下仅在确认后绘制）
+E-sporadico: {0}	偶发 E 层：{0}

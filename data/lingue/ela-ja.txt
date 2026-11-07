@@ -371,3 +371,48 @@ RELAZIONE TECNICA	技術報告書
 Le scelte che hanno portato alla realizzazione del programma	プログラムの実現に至った選択
 Nota: l'E-sporadico non si applica ai 432 MHz (vedi Sintesi delle scelte di calcolo).	注: スポラディックE は 432 MHz には適用されません (「計算上の選択の概要」を参照)。
 Comandi dopo il login	ログイン後のコマンド
+Filtri degli spot	スポットフィルター
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione.	データ収集はプログラム全体で 1 つだけです。telnet セッションで受信した各スポットはこれらのフィルターを通り、各伝搬モードのタブに送られます。
+Il filtro del meteor scatter è nella linguetta METEOR SCATTER.	メテオスキャッターのフィルターは METEOR SCATTER タブにあります。
+Meteor scatter	メテオスキャッター
+E-sporadico	スポラディックE
+Aurora	オーロラ
+Prova dei filtri	フィルターのテスト
+Filtro degli spot di E-sporadico	スポラディックE スポットのフィルター
+Scritte di altra propagazione	他の伝搬を示す記述
+Gli spot che contengono una di queste scritte tra < > non entrano nell'E-sporadico: servono al meteor scatter, all'aurora o al tropo.	< > で囲まれたこれらの記述のいずれかを含むスポットはスポラディックE に含めません。メテオスキャッター、オーロラ、または対流圏用です。
+Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP.	「メテオスキャッター」サブタブのフィルターでメテオスキャッターと判定されたスポット、および申告モードが MS、FAI、AU、TR、EME、TEP のスポットも除外されます。
+Regola dei 144 MHz (regola dell'autore)	144 MHz ルール (作者のルール)
+Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato	ルールを適用: 144 MHz ではスポラディックE は最小距離を超える場合のみ有効とし、単独のスポットは確認されるまで描画しない
+Distanza minima in 144 MHz (km)	144 MHz の最小距離 (km)
+Conferma con un secondo spot in 144 MHz sulla stessa nube:	同じ雲上の 144 MHz の 2 つ目のスポットで確認:
+entro (minuti)	以内 (分)
+nube entro (km)	雲の範囲 (km)
+Oppure con uno spot in 50 MHz di salto corto nei dintorni:	または近隣の 50 MHz の短いホップのスポットで確認:
+salto corto fino a (km)	短いホップの上限 (km)
+Regola transequatoriale (regola dell'autore)	赤道横断ルール (作者のルール)
+Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES	アフリカ (マダガスカルを含む。カナリア諸島、マデイラ、カーボベルデ、アラビア半島を除く) および南米方面で、中間点が指定の磁気伏角帯に入る場合、スポットが ES と申告していない限り、その交信は赤道横断伝搬とみなす
+fascia di inclinazione ± (gradi)	伏角帯 ± (度)
+Ripristina le regole dell'autore	作者のルールに戻す
+I filtri valgono per la linguetta SPORADIC-E e per i due BENCHMARK; i valori si salvano nelle impostazioni.	フィルターは SPORADIC-E タブと 2 つの BENCHMARK に適用されます。値は設定に保存されます。
+Filtro degli spot di F.A.I.	F.A.I. スポットのフィルター
+Uno spot è di F.A.I. se il modo dichiarato è FAI oppure se il testo contiene una di queste parole (anche senza < >, in maiuscolo o minuscolo):	申告モードが FAI であるか、本文に次の語のいずれかを含む場合 (< > がなくても、大文字・小文字を問わず)、スポットを F.A.I. とみなします:
+Spot sulla mappa degli ultimi (minuti)	地図に表示するスポットの期間 (分)
+Gli spot di F.A.I. si disegnano nella linguetta F.A.I. insieme al calcolo dello scatter point.	F.A.I. スポットは散乱点の計算とともに F.A.I. タブに描画されます。
+Filtro degli spot di aurora	オーロラスポットのフィルター
+Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):	申告モードが AU であるか、本文に < > で囲まれた次の記述のいずれかを含む場合 (作者のルール: <AU> と <AUR>)、スポットをオーロラとみなします:
+Gli spot di aurora non entrano nell'E-sporadico e si disegnano nella linguetta AURORA con il calcolo dello scatter point e il puntamento delle due stazioni.	オーロラスポットはスポラディックE に含めず、散乱点の計算と両局のアンテナ方向とともに AURORA タブに描画されます。
+Scrivi o incolla una riga del cluster: il programma mostra come la classificano i filtri.	クラスターの行を入力または貼り付けてください。フィルターによる分類が表示されます。
+La riga non è uno spot (deve iniziare con DX de).	この行はスポットではありません (DX de で始まる必要があります)。
+Banda: {0}   frequenza: {1:F1} kHz	バンド: {0}   周波数: {1:F1} kHz
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)	ローカルフィルター: 行を破棄 (27990 kHz - 145 MHz の範囲外)
+Locator: {0} - {1}	ロケーター: {0} - {1}
+Distanza: {0:F0} km	距離: {0:F0} km
+Propagazione dichiarata: {0}	申告された伝搬: {0}
+Meteor scatter: {0}	メテオスキャッター: {0}
+Aurora: {0}	オーロラ: {0}
+F.A.I.: {0}	F.A.I.: {0}
+Transequatoriale: {0}	赤道横断: {0}
+(scartato: sotto {0:F0} km in 144 MHz)	(破棄: 144 MHz で {0:F0} km 未満)
+(in 144 MHz si disegna solo con una conferma)	(144 MHz では確認がある場合のみ描画)
+E-sporadico: {0}	スポラディックE: {0}
