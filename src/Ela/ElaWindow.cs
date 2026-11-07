@@ -289,6 +289,7 @@ namespace ELA
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));
                 fai.ShotPreset(2); await Task.Delay(2500); Shot(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.png"));
                 fai.ShotIso(46.2, 6.15); await Task.Delay(2500); Shot(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.png"));
+                fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
                 tabs.Select(4);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
                 // tutte le linguette di YA-MS

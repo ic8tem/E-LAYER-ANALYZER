@@ -116,12 +116,21 @@ namespace ELA
             };
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
-            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Vista")), cmbMode, bCalc, bEu), Dock.Top);
+            Button bVerify = Ui.B(Lang.T("Verifica il punto consigliato"));
+            bVerify.Click += (s, e) =>
+            {
+                // calcola la scia, prende lo scatter point consigliato e ne mostra le linee di iso-riflessione
+                cmbMode.SelectedIndex = 0; Recalc(false);
+                if (LastBest == null) { Recalc(true); return; }
+                spLat = LastBest.Lat; spLon = LastBest.Lon;
+                cmbMode.SelectedIndex = 1; Recalc(true);
+            };
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Vista")), cmbMode, bCalc, bEu, bVerify), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Stazione A")), txtA, Ui.L(Lang.T("Stazione B")), txtB), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, aurora ? (Control)chkOval : cmbPreset, cmbSp, chkRefr), Dock.Top);
             TextBlock help = new TextBlock
             {
-                Text = Lang.T("A e B: nominativo (cercato in CALL3) e/o locator; A vuoto = la mia stazione. Scia: clic sulla mappa = posizione di B. Iso-riflessione: clic = punto di riflessione."),
+                Text = Lang.T("A e B: nominativo (cercato in CALL3) e/o locator; A vuoto = la mia stazione. Clic sinistro sulla mappa = punto di riflessione da verificare (iso-riflessione); clic destro = posizione di B. \"Verifica il punto consigliato\" mostra le linee di iso-riflessione sullo scatter point proposto dal programma."),
                 Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3), FontSize = 11.5
             };
             Ui.Dock(right, help, Dock.Top);
@@ -146,10 +155,11 @@ namespace ELA
             mg.Children.Add(map);
             qtf.Width = 330; qtf.Height = 170; qtf.HorizontalAlignment = HorizontalAlignment.Right; qtf.VerticalAlignment = VerticalAlignment.Top; qtf.Margin = new Thickness(0, 34, 8, 0);
             mg.Children.Add(qtf);
+            // clic sinistro = punto di riflessione da verificare (iso-riflessione); clic destro = posizione della stazione B
             map.Clicked += (la, lo, rb) =>
             {
-                if (cmbMode.SelectedIndex == 1 || rb) { spLat = la; spLon = lo; if (cmbMode.SelectedIndex != 1) cmbMode.SelectedIndex = 1; }
-                else { txtB.Text = Geo.LatLonToLoc(la, lo, 6); }
+                if (rb) txtB.Text = Geo.LatLonToLoc(la, lo, 6);
+                else { spLat = la; spLon = lo; if (cmbMode.SelectedIndex != 1) cmbMode.SelectedIndex = 1; }
                 Recalc(true);
             };
             Root = Ui.MapAndData(mg, right);
@@ -175,7 +185,8 @@ namespace ELA
         public void ShotPair(string a, string b) { txtA.Text = a; txtB.Text = b; cmbMode.SelectedIndex = 0; Recalc(); }
         public void ShotIsoA(string a, double lat, double lon) { txtA.Text = a; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
         public void View(double w, double e, double s, double n) { map.SetView(w, e, s, n); }
-        public void ShotIso(double lat, double lon) { txtA.Text = "IC8FAX JN70CN"; txtB.Text = ""; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
+        public void ShotVerify() { if (LastBest == null) return; spLat = LastBest.Lat; spLon = LastBest.Lon; cmbMode.SelectedIndex = 1; Recalc(); }
+        public void ShotIso(double lat, double lon) { txtA.Text = "IC8FAX JN70CN"; txtB.Text = "FA1MXE JN05GQ"; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
 
         void DefaultView()
         {
@@ -211,6 +222,7 @@ namespace ELA
         // Calcolo. user = chiesto dall'utente (pulsante, clic, scelta da elenco): se il modello non da' soluzione
         // compare il popup "Calcolo non possibile" e non si mostra nessun altro risultato.
         string impossible;
+        string pairKey = "";
 
         public void Recalc() { Recalc(false); }
 
@@ -232,6 +244,8 @@ namespace ELA
             aName = n;
             if (!Parse(txtB.Text, out bLat, out bLon, out n)) { bLat = double.NaN; n = ""; }
             bName = n;
+            string pk = aLat + "|" + aLon + "|" + bLat + "|" + bLon + "|" + H;
+            if (pk != pairKey) { pairKey = pk; LastBest = null; }   // lo scatter consigliato vale solo per la coppia con cui e' stato calcolato
             map.Cells.Clear(); map.Lines.Clear(); map.Markers.Clear(); map.Legend.Clear(); map.Info.Clear(); map.LegendTitle = "";
             qtf.Clear();
             map.Caption = (aurora ? "AURORA" : "F.A.I.") + " - " + Igrf.Info + " - " + Lang.F("quota {0:F0} km", H);
@@ -342,63 +356,129 @@ namespace ELA
         }
 
         // ---------------------------------------------------------------- Iso-riflessione per un punto di riflessione
+        // Linee di iso-riflessione (isoflection loci, K9SE / AuroReflex): per ogni punto al suolo G la somma
+        // S = c(A) + c(G) dei contorni; S = 0 = condizione di riflessione esatta. Schemi scuri: fasce colorate;
+        // schemi chiari: linee spesse (curve di livello 0, ±1, ±2, ±4, ±8, ±16 gradi).
+        static readonly double[] IsoLevels = { 0, 1, 2, 4, 8, 16 };
+        static Color IsoColor(int k, bool light)
+        {
+            Color[] dark = { Color.FromRgb(255, 40, 40), Color.FromRgb(255, 140, 30), Color.FromRgb(250, 225, 60), Color.FromRgb(90, 220, 90), Color.FromRgb(60, 200, 230), Color.FromRgb(110, 120, 255) };
+            Color[] lite = { Color.FromRgb(190, 0, 0), Color.FromRgb(230, 90, 0), Color.FromRgb(170, 130, 0), Color.FromRgb(20, 140, 40), Color.FromRgb(0, 120, 160), Color.FromRgb(50, 60, 190) };
+            return (light ? lite : dark)[Math.Max(0, Math.Min(5, k))];
+        }
+        static double IsoWidth(int k) { double[] w = { 5, 4, 3.2, 2.6, 2.1, 1.7 }; return w[Math.Max(0, Math.Min(5, k))]; }
+
+        static double Contour(Geo.V3 sp, Geo.V3 b, Geo.V3 x) { return Math.Asin(Math.Max(-1, Math.Min(1, (sp - x).Unit.Dot(b)))) * Geo.R2D; }
+
         void Iso(StringBuilder sb)
         {
             StationMarks();
             double h = H;
             if (double.IsNaN(spLat))
             {
-                sb.AppendLine(Lang.T("Clic sulla mappa per scegliere il punto di riflessione (o scegli uno scatter noto)."));
+                sb.AppendLine(Lang.T("Clic sinistro sulla mappa per scegliere il punto di riflessione da verificare, oppure \"Verifica il punto consigliato\"."));
                 return;
             }
             Geo.V3 sp = Geo.Ecef(spLat, spLon, h);
             Geo.V3 b = Geo.FieldDir(sp);
-            Geo.V3 a = Geo.Ecef(aLat, aLon, Station.AltKm);
-            double cA = Math.Asin(Math.Max(-1, Math.Min(1, (sp - a).Unit.Dot(b)))) * Geo.R2D;   // contorno di A (K9SE)
-            double hr = Geo.HalfHopKm(0, h);
-            map.Lines.Add(MapView.Circle(spLat, spLon, hr, Pal.Red, 1.5));
+            double cA = Contour(sp, b, Geo.Ecef(aLat, aLon, Station.AltKm));   // contorno di A (K9SE)
             double dA = Geo.DistanceKm(aLat, aLon, spLat, spLon), eA = Geo.ElevationDeg(dA, h, Station.AltKm), azA = Geo.Bearing(aLat, aLon, spLat, spLon);
-            // griglia al suolo entro l'orizzonte del punto
-            double dl = hr / 111.0, cl = Math.Max(0.15, Math.Cos(spLat * Geo.D2R)), dlo = dl / cl;
-            double stLa = 0.15, stLo = 0.15 / Math.Max(0.3, cl);
-            int n0 = 0;
-            for (double la = spLat - dl; la <= spLat + dl; la += stLa)
-                for (double lo = spLon - dlo; lo <= spLon + dlo; lo += stLo)
-                {
-                    double d = Geo.DistanceKm(spLat, spLon, la, lo);
-                    if (d > hr) continue;
-                    Geo.V3 g = Geo.Ecef(la, lo, 0);
-                    double cG = Math.Asin(Math.Max(-1, Math.Min(1, (sp - g).Unit.Dot(b)))) * Geo.R2D;
-                    double dev = Math.Abs(cA + cG);
-                    if (dev > 16) continue;
-                    map.Cells.Add(new MapCell { Lat0 = la - stLa / 2, Lon0 = lo - stLo / 2, DLat = stLa, DLon = stLo, Fill = Dev(dev <= 0.5 ? 0.5 : dev <= 1 ? 1.2 : dev <= 2 ? 1.8 : dev <= 4 ? 3 : dev <= 8 ? 6 : 12, false) });
-                    n0++;
-                }
-            map.Markers.Add(new MapMarker { Lat = spLat, Lon = spLon, Radius = 10, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(spLat, spLon, 4), LabelColor = Pal.Red });
-            map.Lines.Add(MapView.GreatCircle(aLat, aLon, spLat, spLon, Pal.Yellow, 1.2, true));
-            map.Info.Add(Lang.F("Azimut = {0:F0}°", azA));
-            map.Info.Add(Lang.F("Elevazione = {0:F0}°", eA));
-            map.Legend.Add(new KeyValuePair<string, Color>("0°", Dev(0.5, false)));
-            map.Legend.Add(new KeyValuePair<string, Color>("1°", Dev(1.2, false)));
-            map.Legend.Add(new KeyValuePair<string, Color>("2°", Dev(1.8, false)));
-            map.Legend.Add(new KeyValuePair<string, Color>("4°", Dev(3, false)));
-            map.Legend.Add(new KeyValuePair<string, Color>("8°", Dev(6, false)));
-            map.Legend.Add(new KeyValuePair<string, Color>("16°", Dev(12, false)));
-            map.LegendTitle = Lang.T("Deviazione dalla condizione di riflessione");
-            sb.AppendLine(Lang.F("Punto di riflessione {0} ({1:F2}°, {2:F2}°) a {3:F0} km di quota", Geo.LatLonToLoc(spLat, spLon, 6), spLat, spLon, h));
-            sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", aName, azA, eA, dA));
-            sb.AppendLine(Lang.F("Contorno di {0} (K9SE): {1:+0.0;-0.0}°  ->  ricevono le stazioni sul contorno {2:+0.0;-0.0}° (zona rossa piena)", aName, cA, -cA));
-            sb.AppendLine(Lang.F("Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(spLat, spLon)));
             if (eA < Ui.V(numElev)) { impossible = Lang.F("Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).", Geo.LatLonToLoc(spLat, spLon, 6), aName, h, eA); return; }
+            double dB = double.NaN, eB = double.NaN, azB = double.NaN, devB = double.NaN;
             if (!double.IsNaN(bLat))
             {
-                Geo.V3 g = Geo.Ecef(bLat, bLon, 0);
-                double cB = Math.Asin(Math.Max(-1, Math.Min(1, (sp - g).Unit.Dot(b)))) * Geo.R2D;
-                double dB = Geo.DistanceKm(bLat, bLon, spLat, spLon);
-                sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, deviazione {3:F1}°", bName, Geo.Bearing(bLat, bLon, spLat, spLon), Geo.ElevationDeg(dB, h, 0), Math.Abs(cA + cB)));
+                dB = Geo.DistanceKm(bLat, bLon, spLat, spLon); eB = Geo.ElevationDeg(dB, h, 0); azB = Geo.Bearing(bLat, bLon, spLat, spLon);
+                devB = Math.Abs(cA + Contour(sp, b, Geo.Ecef(bLat, bLon, 0)));
+                if (eB < Ui.V(numElev)) { impossible = Lang.F("Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).", Geo.LatLonToLoc(spLat, spLon, 6), bName, h, eB); return; }
             }
+            double hr = Geo.HalfHopKm(0, h);
+            map.Lines.Add(MapView.Circle(spLat, spLon, hr, Pal.Red, 1.5));
+
+            // griglia al suolo entro l'orizzonte del punto: valore con segno S = c(A) + c(G)
+            double dl = hr / 111.0, cl = Math.Max(0.15, Math.Cos(spLat * Geo.D2R)), dlo = dl / cl;
+            double stLa = 0.15, stLo = 0.15 / Math.Max(0.3, cl);
+            int nLa = (int)(2 * dl / stLa) + 2, nLo = (int)(2 * dlo / stLo) + 2;
+            double la0 = spLat - dl, lo0 = spLon - dlo;
+            double[,] S = new double[nLa, nLo];
+            for (int i = 0; i < nLa; i++)
+                for (int j = 0; j < nLo; j++)
+                {
+                    double la = la0 + i * stLa, lo = lo0 + j * stLo;
+                    if (la > 89 || la < -89 || Geo.DistanceKm(spLat, spLon, la, lo) > hr) { S[i, j] = double.NaN; continue; }
+                    S[i, j] = cA + Contour(sp, b, Geo.Ecef(la, lo, 0));
+                }
+            bool light = Pal.Light;
+            if (!light)
+            {
+                // fasce colorate
+                for (int i = 0; i < nLa; i++)
+                    for (int j = 0; j < nLo; j++)
+                    {
+                        double v = Math.Abs(S[i, j]);
+                        if (double.IsNaN(v) || v > 16) continue;
+                        int k = v <= 0.5 ? 0 : v <= 1 ? 1 : v <= 2 ? 2 : v <= 4 ? 3 : v <= 8 ? 4 : 5;
+                        Color c = IsoColor(k, false);
+                        byte a = (byte)(k == 0 ? 230 : k == 1 ? 190 : k == 2 ? 150 : k == 3 ? 115 : k == 4 ? 85 : 60);
+                        map.Cells.Add(new MapCell { Lat0 = la0 + i * stLa - stLa / 2, Lon0 = lo0 + j * stLo - stLo / 2, DLat = stLa, DLon = stLo, Fill = Color.FromArgb(a, c.R, c.G, c.B) });
+                    }
+            }
+            else
+            {
+                // linee spesse: curve di livello con il metodo dei quadrati marcianti
+                for (int k = 0; k < IsoLevels.Length; k++)
+                    foreach (double lev in k == 0 ? new[] { 0.0 } : new[] { IsoLevels[k], -IsoLevels[k] })
+                    {
+                        Color c = IsoColor(k, true); double w = IsoWidth(k);
+                        bool labelled = false;
+                        for (int i = 0; i < nLa - 1; i++)
+                            for (int j = 0; j < nLo - 1; j++)
+                            {
+                                double v00 = S[i, j] - lev, v01 = S[i, j + 1] - lev, v10 = S[i + 1, j] - lev, v11 = S[i + 1, j + 1] - lev;
+                                if (double.IsNaN(v00) || double.IsNaN(v01) || double.IsNaN(v10) || double.IsNaN(v11)) continue;
+                                List<Point> pts = new List<Point>(4);
+                                double y0 = la0 + i * stLa, x0 = lo0 + j * stLo;
+                                if ((v00 < 0) != (v01 < 0)) pts.Add(new Point(x0 + stLo * v00 / (v00 - v01), y0));
+                                if ((v10 < 0) != (v11 < 0)) pts.Add(new Point(x0 + stLo * v10 / (v10 - v11), y0 + stLa));
+                                if ((v00 < 0) != (v10 < 0)) pts.Add(new Point(x0, y0 + stLa * v00 / (v00 - v10)));
+                                if ((v01 < 0) != (v11 < 0)) pts.Add(new Point(x0 + stLo, y0 + stLa * v01 / (v01 - v11)));
+                                for (int q = 0; q + 1 < pts.Count; q += 2)
+                                {
+                                    MapLine l = new MapLine { Color = c, Width = w };
+                                    l.Pts.Add(pts[q]); l.Pts.Add(pts[q + 1]);
+                                    map.Lines.Add(l);
+                                }
+                                if (!labelled && pts.Count >= 2 && (i + j) % 7 == 0)
+                                {
+                                    labelled = true;
+                                    map.Markers.Add(new MapMarker { Lat = pts[0].Y, Lon = pts[0].X, Radius = 0.1, Fill = c, Stroke = c, Label = lev.ToString("+0;-0;0", CultureInfo.InvariantCulture) + "°", LabelColor = c });
+                                }
+                            }
+                    }
+            }
+            map.Markers.Add(new MapMarker { Lat = spLat, Lon = spLon, Radius = 10, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(spLat, spLon, 6), LabelColor = Pal.Red });
+            map.Lines.Add(MapView.GreatCircle(aLat, aLon, spLat, spLon, Pal.Yellow, 1.4, true));
+            if (!double.IsNaN(bLat)) map.Lines.Add(MapView.GreatCircle(bLat, bLon, spLat, spLon, Pal.Yellow, 1.4, true));
+            map.Info.Add(Lang.F("{0}: azimut {1:F0}°  elevazione {2:F0}°", aName, azA, eA));
+            if (!double.IsNaN(bLat)) map.Info.Add(Lang.F("{0}: azimut {1:F0}°  elevazione {2:F0}°", bName, azB, eB));
+            for (int k = 0; k < IsoLevels.Length; k++)
+                map.Legend.Add(new KeyValuePair<string, Color>((k == 0 ? "0°" : "±" + IsoLevels[k].ToString(CultureInfo.InvariantCulture) + "°"), IsoColor(k, light)));
+            map.LegendTitle = Lang.T("Iso-riflessione: deviazione dalla condizione di riflessione");
+
+            // verdetto sul punto scelto
+            sb.AppendLine(Lang.F("Punto di riflessione {0} ({1:F2}°, {2:F2}°) a {3:F0} km di quota", Geo.LatLonToLoc(spLat, spLon, 6), spLat, spLon, h));
+            sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km, contorno K9SE {4:+0.0;-0.0}°", aName, azA, eA, dA, cA));
+            if (!double.IsNaN(bLat))
+            {
+                sb.AppendLine(Lang.F("{0}: azimut {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", bName, azB, eB, dB));
+                string verdict = devB <= 1 ? Lang.T("SODDISFACENTE (entro 1°)") : devB <= 2.5 ? Lang.T("ACCETTABILE (entro 2,5°, tolleranza di Lange-Hesse ±2-3°)") : Lang.T("NON SODDISFACENTE (oltre 2,5°)");
+                sb.AppendLine(Lang.F("Deviazione della coppia {0} - {1}: {2:F2}°  ->  {3}", aName, bName, devB, verdict));
+                if (LastBest != null) sb.AppendLine(Lang.F("Scatter point consigliato dal programma: {0} (deviazione {1:F2}°), a {2:F0} km da questo punto.", Geo.LatLonToLoc(LastBest.Lat, LastBest.Lon, 6), LastBest.Off, Geo.DistanceKm(LastBest.Lat, LastBest.Lon, spLat, spLon)));
+            }
+            else sb.AppendLine(Lang.T("Imposta la stazione B (o clic destro sulla mappa) per il verdetto sulla coppia."));
+            sb.AppendLine(Lang.F("Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(spLat, spLon)));
             sb.AppendLine();
-            sb.AppendLine(Lang.T("Cerchio verde: orizzonte della stazione A alla quota dello strato; cerchio rosso: zona da cui il punto di riflessione è visibile."));
+            sb.AppendLine(Lang.T("Ricevono la stazione A attraverso questo punto le stazioni sulla linea 0° (rossa); le linee ±1, ±2, ±4, ±8, ±16° dicono di quanto si scostano le altre. Clic sinistro su un altro punto per verificarlo."));
+            sb.AppendLine(Lang.T("Cerchio verde: orizzonte delle stazioni alla quota dello strato; cerchio rosso: zona da cui il punto di riflessione è visibile."));
         }
 
         // ---------------------------------------------------------------- aurora
