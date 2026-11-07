@@ -38,6 +38,17 @@ TAG|SCELTA|Lentelė „Es debesys“: raudonai – debesys, kurie duotų MUF ≥
 H2|3.4 Sporadinis E netaikomas 432 MHz
 TAG|FONTE|Vidutinių platumų sporadinio E MUF siekia 150 MHz ir daugiau (Whitehead [23]); norint palenkti glaudžiuosius spindulius iki 200 MHz, reikia labai tankių debesų (IK3XTV [22]). ARRL rekordai [24] nurodo sporadinio E ryšius tik 50 ir 144 MHz, nė vieno 222 ir 432 MHz.
 TAG|SCELTA|Todėl kortelė SPORADIC-E analizuoja tik 28, 50, 70 ir 144 MHz: 432 MHz spotai niekada nelaikomi sporadiniu E (kai kurie bendro pobūdžio šaltiniai, taip pat sukurti dirbtinio intelekto, tai teigia be dokumentų).
+H2|3.5 Azimutinis žemėlapis
+TAG|SCELTA|Kortelės SPORADIC-E žemėlapis yra azimutinė lygiatolė projekcija, kurios centre yra savo stotis: atstumai nuo centro ir azimutai yra tikri, apskritimai aplink centrą yra vienodo atstumo apskritimai. Mygtuku pasirenkamas vieno šuolio vaizdas (fiksuotas 2500 km spindulys su IK3XTV lentelės [3] zonomis: 500, 1500-2000 ir 2400 km) arba vaizdas su maksimalaus atstumo slankikliu (nuo 300 iki 20000 km, taip pat pelės ratuku), kuris prideda dvigubo (5000 km) ir trigubo šuolio (6900 km) ribas, kad būtų galima sekti kelių šuolių raidą. Lieka ir stačiakampis žemėlapis.
+EQ|ρ = d(centras, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = disko spindulys pikseliais / maksimalus atstumas km
+TAG|SCELTA|Brūkšniniai žiedai rodo kilometrus nuo centro apvaliu žingsniu (50, 100, 200, 250, 500, 1000, 2000, 2500 arba 5000 km), parenkamu pagal mastelį; išorinis apskritimas rodo didžiausią rodomą atstumą, o pelės žymeklis rodo atstumą ir azimutą nuo centro.
+H2|3.6 BENCHMARK Es: bandymų stendas su ADIF žurnalu
+P|Kortelė BENCHMARK Es įkelia visą ADIF žurnalą, taip pat ir kitos stoties. Siuntimo vieta yra kiekvieno QSO MY_GRIDSQUARE (žemėlapio centre dedama dažniausia, ją galima pakeisti ranka); priėmimo vietos yra GRIDSQUARE. Naudojami QSO 28, 50, 70 ir 144 MHz juostose su lokatoriumi, išskyrus QSO su kitu PROP_MODE ir trumpesnius nei 500 km; QSO suskirstomi pagal dienas, o dienos viduje pagal valandas.
+TAG|SCELTA|Skip pagal sektorius: kiekviename 10° azimuto sektoriuje nuo centro artimiausias QSO žymi tylos zonos kraštą (oranžinis lankas), o tolimiausias nuotolį (žalias lankas); tarp jų yra pasiektas sektorius.
+TAG|SCELTA|Pasirinkimo foEs: kiekvienoje juostoje trumpiausias vieno šuolio QSO duoda aukščiausią įvertį, foEs ≥ f / sec φ (2.3); su šia foEs programa apskaičiuoja tikėtiną MUF ties 1000, 1500, 2000 ir 2400 km bei atstumą, nuo kurio atsidarytų 144 MHz.
+TAG|SCELTA|Keli šuoliai: stoties pirmas šuolis pagal abi hipotezes (vienodi šuoliai, 3.2, ir trumpas pirmas šuolis [4]) lyginamas su tos pačios dienos vieno šuolio vidurio taškais ±30 minučių ribose: iki 300 km hipotezę patvirtina tikrai matytas debesis. Programa suskaičiuoja kiekvienos hipotezės patvirtinimus.
+EQ|debesies greitis = d(svorio centras valandą h, svorio centras valandą h+1) / 1 h
+TAG|RILIEVO|Vieno šuolio vidurio taškų svorio centras kas valandą rodo debesų poslinkį (raudona linija). Skaičiavimai yra orientaciniai: QSO rodo, kad trasa buvo atvira, bet ne tai, kur tiksliai buvo debesis.
 H1|4. F.A.I. ir pašvaistė: išilgai magnetinio lauko vykstanti sklaida
 H2|4.1 Magnetinis laukas
 TAG|FONTE|Laukas skaičiuojamas IGRF-14 modeliu [16] (sferinės harmonikos iki 13 laipsnio, 2025-2030 m. koeficientai, interpoliuoti datai). K9SE SE-PROP [9] taip pat naudojo sferinių harmonikų modelį (WMM).
@@ -72,6 +83,7 @@ H2|5.1 Telnet seansai
 TAG|SCELTA|Trys seansai: pasirinktas klasteris, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], klasteris su PSKReporter spotais (pvz., DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatinis prisijungimas su šaukiniu, pradinės komandos atskirtos kabliataškiais, pakartotinis prisijungimas po 30 s.
 H2|5.2 Spotų skaitymas
 TAG|SCELTA|Eilutė „DX de SPOTTER: FREQ DXCALL komentaras HHMMZ [LOC]“ skaitoma reguliariuoju reiškiniu (ne pagal fiksuotus stulpelius). Iš komentaro skaitomi lokatoriai ir būdas forma „JN70CN<ES>JO62QM“ (pirmas lokatorius = spoteris, antras = DX), sklidimo būdas (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N santykis ir spinduliuotės rūšis. Trūkstami lokatoriai ieškomi CALL3 [21]; komentaruose rasti 6 simbolių lokatoriai įrašomi į data/call3_nuovi.txt.
+TAG|SCELTA|Autoriaus taisyklė (IC8TEM): jei spoto tekste yra <MS>, <AU> arba <TR> (taip pat AUE, AURORA, TROPO), spotas nesusijęs su sporadiniu E ir kortelė SPORADIC-E jį atmeta; jis lieka naudingas meteor scatter ir pašvaistei. BENCHMARK Es tą patį vaidmenį atlieka žurnalo laukas PROP_MODE.
 TAG|SCELTA|Archyvas: vienas CSV failas per dieną aplanke data/spot; atmintyje laikomi paskutiniai spotai (daugiausia 50000). Su RBN ir PSKReporter paprastai saugomi tik spotai nuo 28 MHz ir aukščiau.
 H1|6. Log ADIF
 TAG|FONTE|LoTW Grid Map v2 [25] perkėlimas: LoTW ataskaita (atsisiunčiama su naudotojo vardu ir slaptažodžiu, kuris niekada nesaugomas) ir žurnalo ADIF failai sujungiami pagal šaukinį, juostą, datą ir laiką; patvirtinimai sumuojami.
@@ -80,9 +92,11 @@ H1|7. Spalvų schemos
 TAG|FONTE|Spalvų schemos yra YA-MS 1.4.0 schemos, perimtos iš YAEC [26]: Šviesi, Naktis, Juoda, aštuonios pastelinės ir Meteoro pėdsakas. Schema pasirenkama viršuje dešinėje, o langas iškart perkuriamas; vaizde Izoatspindys tamsios schemos naudoja spalvotas juostas, o šviesios – storas linijas (4.4).
 H1|8. Meteor scatter (YA-MS 1.4.0) ir kalbos
 TAG|FONTE|Kortelėje METEOR SCATTER yra visa YA-MS 1.4.0 [5] su savo dokumentu „Efektyvumas - paaiškinimas“ ir savo šaltiniais. Scenarijus tools/sync_yams.py nukopijuoja kiekvieną naują YA-MS versiją ir paverčia ją skydeliu nekeisdamas jos skaičiavimų.
+TAG|FONTE|YA-MS 1.4.0 prideda korteles Srautai realiuoju laiku (Global Meteor Network išmatuoti ZHR ir CMOR radaro radiantų žemėlapiai) ir Šaltinių žemėlapis (kur yra Collm, Sodankylä, GRAVES ir CMOR stoties atžvilgiu); jų šaltiniai cituojami YA-MS.
 TAG|SCELTA|Kalbos: 28, visos YAEC kalbos ir dar danų bei tagalų (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어) – sąsajai (data/lingue/ela-<kodas>.txt), Techniniam dokumentui ir Šaltiniams. F.A.I./pašvaistės vaizde sklaidos taškų juosta visuose vertimuose vadinama „Scatter trail“. Būsenos juostoje rodomas naudojamas magnetinis modelis (IAGA IGRF-14 [16]).
 H1|9. Ribos
 LI|Stotys lokatoriaus kvadrato centre: su 4 simbolių lokatoriumi paklaida siekia ~80 km.
 LI|Iš spotų gaunama foEs yra minimali riba, o sekanto dėsnis VHF ruože pervertina reikalingą foEs (žr. 2.3).
 LI|„Labiausiai tikėtinas“ sklaidos taškas yra programos kriterijus: fizinis rezultatas yra visa Scatter trail.
 LI|OVATION ovalas yra optinės pašvaistės tikimybės modelis, naudojamas kaip radijo pašvaistės rodiklis.
+LI|BENCHMARK Es remiasi žurnalo lokatoriais: esant 4 simbolių lokatoriams ir kelių šimtų km QSO, skip ir įvertinta foEs yra apytiksliai.

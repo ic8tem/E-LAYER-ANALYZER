@@ -252,3 +252,67 @@ SCELTA	IZVĒLE
 IGRF-14, epoca {0}	IGRF-14, epoha {0}
 igrf14.csv mancante: uso il dipolo	trūkst igrf14.csv: izmantoju dipolu
 igrf14.csv incompleto: uso il dipolo	igrf14.csv nepilnīgs: izmantoju dipolu
+Carica ADIF	Ielādēt ADIF
+Scarica ADIF	Izņemt ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Izslēgt QSO ar citu PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Izslēgt QSO, kas īsāki par 500 km
+Skip per settori	Skip pa sektoriem
+Tratte	Trases
+Giornata	Diena
+km max	km max
+Multi-salto	Vairāklēcienu
+km min - max	km min - max
+Calcoli proposti	Ieteiktie aprēķini
+QSO per giornata	QSO pa dienām
+Orari della giornata (clic: QSO di quell'ora)	Dienas stundas (klikšķis: tās stundas QSO)
+Stazione al centro	Stacija centrā
+Log ADIF da analizzare (anche di un'altra stazione)	Analizējamais ADIF žurnāls (arī citas stacijas)
+Leggo {0}...	Lasa {0}...
+Nessun log caricato	Nav ielādēts neviens žurnāls
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Ielādē ADIF žurnālu (arī citas stacijas): programma atrod raidīšanas vietu (MY_GRIDSQUARE vai augstāk ierakstīto lokatoru) un uztveršanas vietas (GRIDSQUARE), sadala QSO pa dienām un stundām un piedāvā sporādiskā E un vairāklēcienu aprēķinus.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} ieraksti, {2} QSO analizēti; izslēgti: {3} bez lokatora, {4} citās joslās (ieskaitot 432 MHz: sporādiskais E neattiecas), {5} ar citu PROP_MODE, {6} īsāki par 500 km.
+Tutta la giornata	Visa diena
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ stacijas pirmais lēciens / ○ īss pirmais lēciens
+■ primo salto del corrispondente	■ korespondenta pirmais lēciens
+arco arancio: skip (QSO più vicino del settore)	oranžs loks: skip (sektora tuvākais QSO)
+settore verde: distanze raggiunte	zaļš sektors: sasniegtie attālumi
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	sarkans: mākoņu pārvietošanās pa stundām (viduspunktu smaguma centrs)
+Nessun QSO nella selezione.	Atlasē nav QSO.
+{0} da {1} ({2}), quota Es {3:F0} km	{0}, no {1} ({2}), Es augstums {3:F0} km
+Giornata {0}	Diena {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Diena {0}, plkst. {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} viens lēciens, {2} dubults, {3} trīskāršs, {4} vairāk (IK3XTV tabula). Joslas: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Izvēlētais QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip pa azimuta sektoriem (10°): tuvākais QSO = klusuma zonas mala, tālākais = sniedzamība
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Novērtētā foEs (sekansa likums, foEs ≥ f / sec φ): katras joslas īsākais viena lēciena QSO dod augstāko novērtējumu
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} {2:F0} km attālumā, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Novērtējums atlasei: foEs ≥ {0:F1} MHz ({1}). Sagaidāmā MUF ar šo foEs: {2:F0} MHz pie 1000 km, {3:F0} MHz pie 1500 km, {4:F0} MHz pie 2000 km, {5:F0} MHz pie 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Ar šo foEs 144 MHz ar vienu lēcienu neatveras.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Ar šo foEs 144 MHz ar vienu lēcienu atveras virs aptuveni {0:F0} km (skip 2 m joslā).
+  Nessun QSO in singolo salto nella selezione.	  Atlasē nav viena lēciena QSO.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Novērtētie Es mākoņi (atstarošanas punktu Maidenhead kvadrāti)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Vairāklēcienu: stacijas pirmais lēciens salīdzināts ar viena lēciena mākoņiem ±30 min robežās (līdz 300 km = apstiprināts)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} lēcieni: vienādi lēcieni {4} ({5}), īss pirmais lēciens {6} ({7})
+nessuna nube vicina	tuvumā nav mākoņa
+nube a {0:F0} km	mākonis {0:F0} km attālumā
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Apstiprināti: vienādi lēcieni {0} no {1}, īss pirmais lēciens {2} no {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Mākoņu pārvietošanās pa stundām (viena lēciena viduspunktu smaguma centrs)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km virzienā {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Aprēķini ir orientējoši: QSO parāda, ka trase bija atvērta, nevis to, kur tieši atradās mākonis.
+Azimutale - singolo salto	Azimutālā - viens lēciens
+Azimutale - distanza massima (multi-salto)	Azimutālā - maksimālais attālums (vairāklēcienu)
+Rettangolare	Taisnstūra
+Mappa	Karte
+{0:N0} km: minima del singolo salto	{0:N0} km: viena lēciena minimālais
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimālais
+{0:N0} km: massima del singolo salto	{0:N0} km: viena lēciena maksimālais
+{0:N0} km: massima del doppio salto	{0:N0} km: dubulta lēciena maksimālais
+{0:N0} km: massima del triplo salto	{0:N0} km: trīskārša lēciena maksimālais
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° no centra
+Raggio {0:N0} km dal centro ({1})	Rādiuss {0:N0} km no centra ({1})
+Distanza massima	Maksimālais attālums
+{0:N0} km dal centro	{0:N0} km no centra

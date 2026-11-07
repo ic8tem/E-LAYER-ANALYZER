@@ -252,3 +252,67 @@ SCELTA	PILIHAN
 IGRF-14, epoca {0}	IGRF-14, epoch {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv tidak ada: memakai dipol
 igrf14.csv incompleto: uso il dipolo	igrf14.csv tidak lengkap: memakai dipol
+Carica ADIF	Muat ADIF
+Scarica ADIF	Lepas ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Kecualikan QSO dengan PROP_MODE lain (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Kecualikan QSO di bawah 500 km
+Skip per settori	Skip per sektor
+Tratte	Lintasan
+Giornata	Hari
+km max	km maks
+Multi-salto	Multi-lompatan
+km min - max	km min - maks
+Calcoli proposti	Perhitungan yang diusulkan
+QSO per giornata	QSO per hari
+Orari della giornata (clic: QSO di quell'ora)	Jam dalam sehari (klik: QSO pada jam itu)
+Stazione al centro	Stasiun di tengah
+Log ADIF da analizzare (anche di un'altra stazione)	Log ADIF untuk dianalisis (juga dari stasiun lain)
+Leggo {0}...	Membaca {0}...
+Nessun log caricato	Tidak ada log yang dimuat
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Muat log ADIF (juga dari stasiun lain): program menemukan posisi pemancar (MY_GRIDSQUARE, atau locator yang ditulis di atas) dan posisi penerima (GRIDSQUARE), membagi QSO per hari dan per jam, lalu mengusulkan perhitungan sporadic E dan multi-lompatan.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} record, {2} QSO dianalisis; dikecualikan: {3} tanpa locator, {4} dari band lain (termasuk 432 MHz: sporadic E tidak berlaku), {5} dengan PROP_MODE lain, {6} di bawah 500 km.
+Tutta la giornata	Sepanjang hari
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ lompatan pertama stasiun / ○ lompatan pertama pendek
+■ primo salto del corrispondente	■ lompatan pertama stasiun DX
+arco arancio: skip (QSO più vicino del settore)	busur oranye: skip (QSO terdekat di sektor)
+settore verde: distanze raggiunte	sektor hijau: jarak yang tercapai
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	merah: pergeseran awan per jam (titik berat titik tengah)
+Nessun QSO nella selezione.	Tidak ada QSO dalam pilihan.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} dari {1} ({2}), ketinggian Es {3:F0} km
+Giornata {0}	Hari {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Hari {0}, pukul {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} satu lompatan, {2} dua, {3} tiga, {4} lebih (tabel IK3XTV). Band: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	QSO terpilih: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip per sektor azimut (10°): QSO terdekat = tepi zona senyap, terjauh = jangkauan
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   maks {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Perkiraan foEs (hukum sekan, foEs ≥ f / sec φ): satu lompatan terpendek di setiap band memberi perkiraan tertinggi
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} pada {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Perkiraan untuk pilihan: foEs ≥ {0:F1} MHz ({1}). MUF yang diharapkan dengan foEs ini: {2:F0} MHz pada 1000 km, {3:F0} MHz pada 1500 km, {4:F0} MHz pada 2000 km, {5:F0} MHz pada 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Dengan foEs ini 144 MHz tidak terbuka dengan satu lompatan.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Dengan foEs ini 144 MHz terbuka dengan satu lompatan di atas sekitar {0:F0} km (skip di 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Tidak ada QSO satu lompatan dalam pilihan.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Perkiraan awan Es (kotak Maidenhead titik pantul)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multi-lompatan: lompatan pertama stasiun dibandingkan dengan awan yang terlihat dalam satu lompatan dalam ±30 menit (dalam 300 km = terkonfirmasi)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} lompatan: lompatan sama {4} ({5}), lompatan pertama pendek {6} ({7})
+nessuna nube vicina	tidak ada awan di dekatnya
+nube a {0:F0} km	awan pada {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Terkonfirmasi: lompatan sama {0} dari {1}, lompatan pertama pendek {2} dari {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Pergeseran awan jam demi jam (titik berat titik tengah satu lompatan)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km ke arah {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Perhitungan ini bersifat indikatif: QSO menunjukkan bahwa lintasan terbuka, bukan di mana tepatnya awan berada.
+Azimutale - singolo salto	Azimutal - satu lompatan
+Azimutale - distanza massima (multi-salto)	Azimutal - jarak maksimum (multi-lompatan)
+Rettangolare	Persegi panjang
+Mappa	Peta
+{0:N0} km: minima del singolo salto	{0:N0} km: minimum satu lompatan
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimal
+{0:N0} km: massima del singolo salto	{0:N0} km: maksimum satu lompatan
+{0:N0} km: massima del doppio salto	{0:N0} km: maksimum dua lompatan
+{0:N0} km: massima del triplo salto	{0:N0} km: maksimum tiga lompatan
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° dari tengah
+Raggio {0:N0} km dal centro ({1})	Radius {0:N0} km dari tengah ({1})
+Distanza massima	Jarak maksimum
+{0:N0} km dal centro	{0:N0} km dari tengah

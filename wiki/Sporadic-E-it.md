@@ -4,9 +4,22 @@
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 
+## La mappa
+
+Un pulsante sopra la mappa sceglie la vista:
+
+- **Azimutale - singolo salto**: mappa azimutale equidistante centrata sulla tua stazione, raggio fisso 2500 km, con le zone della tabella IK3XTV (500 km minima, 1500-2000 km ottimale, 2400 km massima del singolo salto).
+- **Azimutale - distanza massima (multi-salto)**: la stessa mappa con il cursore **Distanza massima** (da 300 a 20000 km, anche con la rotella del mouse); compaiono anche i limiti del doppio (5000 km) e del triplo salto (6900 km), così si segue l'evoluzione del multi-salto.
+- **Rettangolare**: la mappa del mondo di prima, con i pulsanti Europa e Mondo.
+
+Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il passo cambia con lo zoom), il bordo indica la distanza massima mostrata e il cursore del mouse dà distanza e azimut dal centro.
+
+![Multi-salto](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1c_sporadic_e_multisalto.png)
+
 ## Cosa mostra
 
 - Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
+- Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano lo sporadico E ma servono al meteor scatter, all'aurora o al tropo.
 - Per ogni spot: distanza, **numero di salti** secondo la tabella di **IK3XTV**, elevazione, **foEs minima** (legge della secante).
 - **Primo salto di entrambe le stazioni**: quadratino arancio = primo salto dello spotter, viola = primo salto del DX (salti uguali); giallo = punto medio del singolo salto.
 - **Primo salto corto** (cerchi vuoti): l'autore ha esperienza, nel multi-salto, di un primo salto corto entro i **1200 km** dal proprio QTH; la lunghezza si imposta.

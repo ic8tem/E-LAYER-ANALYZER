@@ -38,6 +38,17 @@ TAG|SCELTA|Tabel "Awan Es": merah untuk awan yang akan memberi MUF ≥ 144 MHz, 
 H2|3.4 Sporadic-E tidak berlaku untuk 432 MHz
 TAG|FONTE|MUF sporadic-E di lintang menengah mencapai 150 MHz dan lebih (Whitehead [23]); diperlukan awan yang sangat padat untuk membelokkan sinar landai hingga 200 MHz (IK3XTV [22]). Rekor ARRL [24] mencatat QSO sporadic-E hanya di 50 dan 144 MHz, tidak ada di 222 dan 432 MHz.
 TAG|SCELTA|Karena itu tab SPORADIC-E hanya menganalisis 28, 50, 70 dan 144 MHz: spot 432 MHz tidak pernah diperlakukan sebagai sporadic-E (beberapa sumber umum, termasuk yang dihasilkan kecerdasan buatan, menyatakannya tanpa dokumentasi).
+H2|3.5 Peta azimutal
+TAG|SCELTA|Peta tab SPORADIC-E adalah azimutal ekuidistan, berpusat pada stasiun sendiri: jarak dari pusat dan azimut adalah benar, lingkaran di sekitar pusat adalah lingkaran berjarak sama. Sebuah tombol memilih antara tampilan satu lompatan (radius tetap 2500 km, dengan zona tabel IK3XTV [3]: 500, 1500-2000 dan 2400 km) dan tampilan dengan penggeser jarak maksimum (dari 300 hingga 20000 km, juga dengan roda mouse), yang menambahkan batas dua lompatan (5000 km) dan tiga lompatan (6900 km) untuk mengikuti perkembangan multi-lompatan. Peta persegi panjang tetap tersedia.
+EQ|ρ = d(pusat, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = radius cakram dalam piksel / jarak maksimum dalam km
+TAG|SCELTA|Cincin putus-putus menunjukkan km dari pusat dengan langkah bulat (50, 100, 200, 250, 500, 1000, 2000, 2500 atau 5000 km) yang dipilih sesuai zoom; lingkaran luar menunjukkan jarak maksimum yang ditampilkan dan kursor mouse memberi jarak dan azimut dari pusat.
+H2|3.6 BENCHMARK Es: uji pada log ADIF
+P|Tab BENCHMARK Es memuat seluruh log ADIF, juga dari stasiun lain. Posisi pemancar adalah MY_GRIDSQUARE dari setiap QSO (yang paling sering ditempatkan di tengah peta, dapat diubah secara manual); posisi penerima adalah GRIDSQUARE. Yang dipakai adalah QSO di 28, 50, 70 dan 144 MHz yang memiliki locator, kecuali yang memiliki PROP_MODE lain dan yang di bawah 500 km; QSO dibagi per hari dan, dalam satu hari, per jam.
+TAG|SCELTA|Skip per sektor: untuk setiap sektor azimut 10° dari pusat, QSO terdekat menandai tepi zona senyap (busur oranye) dan yang terjauh menandai jangkauan (busur hijau); di antaranya adalah sektor yang tercapai.
+TAG|SCELTA|foEs pilihan: untuk setiap band, satu lompatan terpendek memberi perkiraan tertinggi, foEs ≥ f / sec φ (2.3); dengan foEs ini program menghitung MUF yang diharapkan pada 1000, 1500, 2000 dan 2400 km serta jarak yang di atasnya 144 MHz akan terbuka.
+TAG|SCELTA|Multi-lompatan: lompatan pertama stasiun, dalam kedua hipotesis (lompatan sama, 3.2, dan lompatan pertama pendek [4]), dibandingkan dengan titik tengah satu lompatan pada hari yang sama dalam ±30 menit: dalam 300 km hipotesis dikonfirmasi oleh awan yang benar-benar terlihat. Program menghitung konfirmasi setiap hipotesis.
+EQ|kecepatan awan = d(titik berat jam h, titik berat jam h+1) / 1 h
+TAG|RILIEVO|Titik berat titik tengah satu lompatan, jam demi jam, menunjukkan pergeseran awan (garis merah). Perhitungan ini bersifat indikatif: QSO menunjukkan bahwa lintasan terbuka, bukan di mana tepatnya awan berada.
 H1|4. F.A.I. dan aurora: scatter yang searah dengan medan magnet
 H2|4.1 Medan magnet
 TAG|FONTE|Medan dihitung dengan model IGRF-14 [16] (harmonik sferis hingga derajat 13, koefisien 2025-2030 diinterpolasi ke tanggal). SE-PROP dari K9SE [9] juga memakai model harmonik sferis (WMM) dengan cara yang sama.
@@ -72,6 +83,7 @@ H2|5.1 Sesi telnet
 TAG|SCELTA|Tiga sesi: cluster pilihan, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster dengan spot PSKReporter (mis. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Login otomatis dengan callsign, perintah awal dipisah titik koma, sambung ulang setelah 30 s.
 H2|5.2 Membaca spot
 TAG|SCELTA|Baris "DX de SPOTTER: FREQ DXCALL komentar HHMMZ [LOC]" dibaca dengan ekspresi reguler (bukan kolom tetap). Dari komentar dibaca locator dan mode dalam bentuk "JN70CN<ES>JO62QM" (locator pertama = spotter, kedua = DX), mode propagasi (ES, FAI, AU, MS, TR, EME, F2, TEP), rasio S/N dan mode emisi. Locator yang hilang dicari di CALL3 [21]; locator 6 karakter yang terbaca di komentar ditambahkan ke data/call3_nuovi.txt.
+TAG|SCELTA|Aturan penulis (IC8TEM): jika dalam teks spot muncul <MS>, <AU> atau <TR> (juga AUE, AURORA, TROPO), spot tersebut bukan tentang sporadic-E dan tab SPORADIC-E membuangnya; spot tetap berguna untuk meteor scatter dan aurora. Dalam BENCHMARK Es, peran yang sama dijalankan oleh kolom PROP_MODE pada log.
 TAG|SCELTA|Arsip: satu file CSV per hari di data/spot; di memori disimpan spot terakhir (maksimum 50000). Dengan RBN dan PSKReporter biasanya hanya spot dari 28 MHz ke atas yang disimpan.
 H1|6. Log ADIF
 TAG|FONTE|Porting dari LoTW Grid Map v2 [25]: laporan LoTW (diunduh dengan nama pengguna dan kata sandi, yang tidak pernah disimpan) dan file ADIF log digabungkan berdasarkan callsign, band, tanggal dan jam; konfirmasi dijumlahkan.
@@ -80,9 +92,11 @@ H1|7. Skema warna
 TAG|FONTE|Skema warna adalah milik YA-MS 1.4.0, yang mengikuti YAEC [26]: Terang, Malam, Hitam, delapan pastel dan Jejak meteor. Skema dipilih di kanan atas dan jendela langsung dibangun ulang; pada tampilan Iso-refleksi skema gelap memakai pita berwarna dan skema terang memakai garis tebal (4.4).
 H1|8. Meteor scatter (YA-MS 1.4.0) dan bahasa
 TAG|FONTE|Tab METEOR SCATTER berisi YA-MS 1.4.0 lengkap [5], dengan dokumen "Efisiensi - penjelasan" dan sumber-sumbernya. Skrip tools/sync_yams.py menyalin setiap versi baru YA-MS dan mengubahnya menjadi panel tanpa mengubah perhitungannya.
+TAG|FONTE|YA-MS 1.4.0 menambahkan tab Hujan meteor langsung (ZHR terukur dari Global Meteor Network dan peta radian radar CMOR) dan Peta sumber (lokasi Collm, Sodankylä, GRAVES dan CMOR relatif terhadap stasiun); sumbernya dikutip di dalam YA-MS.
 TAG|SCELTA|Bahasa: 28, semua bahasa YAEC ditambah bahasa Denmark dan Tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), untuk antarmuka (data/lingue/ela-<kode>.txt), untuk Dokumen teknis dan untuk Sumber. Pada tampilan F.A.I./aurora, jejak scatter point disebut "Scatter trail" di semua terjemahan. Bilah status menunjukkan model magnetik yang dipakai (IGRF-14 dari IAGA [16]).
 H1|9. Batasan
 LI|Stasiun di tengah kotak locator: dengan locator 4 karakter kesalahannya mencapai ~80 km.
 LI|foEs dari spot adalah ambang minimum dan hukum sekan melebih-lebihkan foEs yang diperlukan di VHF (lihat 2.3).
 LI|Scatter point "paling mungkin" adalah kriteria program: Scatter trail secara utuh adalah hasil fisiknya.
 LI|Oval OVATION adalah model probabilitas aurora optik, dipakai sebagai indikator untuk aurora radio.
+LI|BENCHMARK Es berangkat dari locator di log: dengan locator 4 karakter dan QSO beberapa ratus km, skip dan foEs yang diperkirakan hanya bersifat aproksimatif.

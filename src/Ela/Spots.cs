@@ -22,6 +22,14 @@ namespace ELA
         public string DigiMode = "";  // CW, FT8, FT4, ... (RBN e PSKReporter)
 
         public double FreqMHz { get { return FreqKHz / 1000.0; } }
+
+        // Regola dell'autore (IC8TEM): se nel testo dello spot compare <MS>, <AU> o <TR> lo spot non riguarda lo sporadico E
+        // (serve invece al meteor scatter, all'aurora o al tropo) e la linguetta SPORADIC-E lo scarta.
+        static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AU|AUE|AURORA|TR|TROPO)\s*>",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool TaggedNotEs { get { return rxNotEs.IsMatch(Comment ?? ""); } }
+        // utile per lo sporadico E: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && !TaggedNotEs; } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
         public double DistanceKm { get { return HasBoth ? Geo.DistanceKm(LatS, LonS, LatD, LonD) : double.NaN; } }
         public string Band { get { return Bands.Name(FreqKHz); } }

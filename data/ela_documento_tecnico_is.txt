@@ -38,6 +38,17 @@ TAG|SCELTA|Taflan „Es-ský“: rauð eru ský sem gæfu MUF ≥ 144 MHz, appel
 H2|3.4 Sporadic-E á ekki við um 432 MHz
 TAG|FONTE|MUF sporadic-E á miðlægum breiddargráðum nær 150 MHz og þar yfir (Whitehead [23]); mjög þétt ský þarf til að beygja lágreista geisla allt að 200 MHz (IK3XTV [22]). Met ARRL [24] skrá sporadic-E sambönd aðeins á 50 og 144 MHz, engin á 222 og 432 MHz.
 TAG|SCELTA|Þess vegna greinir flipinn SPORADIC-E aðeins 28, 50, 70 og 144 MHz: spot á 432 MHz eru aldrei meðhöndluð sem sporadic-E (sumar almennar heimildir, einnig efni búið til af gervigreind, halda því fram án gagna).
+H2|3.5 Áttarhornskort
+TAG|SCELTA|Kortið á flipanum SPORADIC-E er jafnfjarlægt áttarhornskort með eigin stöð í miðju: fjarlægðir frá miðju og áttarhorn eru rétt og hringirnir umhverfis miðjuna eru hringir jafnrar fjarlægðar. Hnappur velur á milli sýnar fyrir eitt stökk (fastur geisli 2500 km, með svæðum töflu IK3XTV [3]: 500, 1500-2000 og 2400 km) og sýnar með sleða fyrir hámarksfjarlægð (frá 300 til 20000 km, einnig með músarhjólinu), sem bætir við mörkum tvöfalds (5000 km) og þrefalds stökks (6900 km) til að fylgjast með þróun fjölstökks. Rétthyrnda kortið er enn til staðar.
+EQ|ρ = d(miðja, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = geisli skífunnar í dílum / hámarksfjarlægð í km
+TAG|SCELTA|Strikuðu hringirnir sýna km frá miðju með sléttu bili (50, 100, 200, 250, 500, 1000, 2000, 2500 eða 5000 km) sem valið er eftir aðdrætti; ytri hringurinn sýnir mestu fjarlægð sem birt er og músarbendillinn gefur fjarlægð og áttarhorn frá miðju.
+H2|3.6 BENCHMARK Es: prófunarbekkur á ADIF-dagbók
+P|Flipinn BENCHMARK Es hleður heilli ADIF-dagbók, einnig frá annarri stöð. Sendistaðsetningin er MY_GRIDSQUARE hvers QSO (í miðju kortsins fer sú algengasta, sem má breyta handvirkt); móttökustaðsetningarnar eru GRIDSQUARE. Notuð eru QSO á 28, 50, 70 og 144 MHz með locator, nema þau sem hafa annan PROP_MODE og þau undir 500 km; QSO er skipt eftir dögum og, innan dagsins, eftir klukkustundum.
+TAG|SCELTA|Skip eftir geirum: fyrir hvern 10° áttarhornsgeira frá miðju markar næsta QSO jaðar dauða svæðisins (appelsínugulur bogi) og það fjarlægasta drægið (grænn bogi); þar á milli er geirinn sem náðist.
+TAG|SCELTA|foEs valsins: fyrir hvert tíðnisvið gefur stysta staka stökkið hæsta matið, foEs ≥ f / sec φ (2.3); með þessari foEs reiknar forritið vænta MUF við 1000, 1500, 2000 og 2400 km og fjarlægðina handan hverrar 144 MHz myndu opnast.
+TAG|SCELTA|Fjölstökk: fyrsta stökk stöðvarinnar, samkvæmt báðum tilgátum (jöfn stökk, 3.2, og stutt fyrsta stökk [4]), er borið saman við miðpunkta stakra stökka sama dags innan ±30 mínútna: innan 300 km er tilgátan staðfest af skýi sem raunverulega sást. Forritið telur staðfestingar hvorrar tilgátu.
+EQ|hraði skýsins = d(þyngdarmiðja kl. h, þyngdarmiðja kl. h+1) / 1 h
+TAG|RILIEVO|Þyngdarmiðja miðpunkta stakra stökka, klukkustund fyrir klukkustund, sýnir færslu skýjanna (rauð lína). Útreikningarnir eru leiðbeinandi: QSO segir að leiðin hafi verið opin, ekki nákvæmlega hvar skýið var.
 H1|4. F.A.I. og norðurljós: scatter sem raðast eftir segulsviðinu
 H2|4.1 Segulsviðið
 TAG|FONTE|Sviðið er reiknað með líkaninu IGRF-14 [16] (kúlufallaliðun upp að stigi 13, stuðlar 2025-2030 brúaðir að dagsetningunni). SE-PROP eftir K9SE [9] notaði á sama hátt kúlufallalíkan (WMM).
@@ -72,6 +83,7 @@ H2|5.1 Telnet-lotur
 TAG|SCELTA|Þrjár lotur: klasi að eigin vali, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], klasi með spotum frá PSKReporter (t.d. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Sjálfvirk innskráning með kallmerki, upphafsskipanir aðskildar með semíkommu, endurtenging eftir 30 s.
 H2|5.2 Lestur spota
 TAG|SCELTA|Línan „DX de SPOTTER: FREQ DXCALL athugasemd HHMMZ [LOC]“ er lesin með reglulegri segð (ekki föstum dálkum). Úr athugasemdinni eru lesnir locator og aðferð á forminu „JN70CN<ES>JO62QM“ (fyrri locator = spotter, seinni = DX), útbreiðsluaðferðin (ES, FAI, AU, MS, TR, EME, F2, TEP), hlutfallið S/N og sendingarhátturinn. Locatorar sem vantar eru sóttir í CALL3 [21]; 6 stafa locatorar sem lesnir eru úr athugasemdum bætast í data/call3_nuovi.txt.
+TAG|SCELTA|Regla höfundar (IC8TEM): ef <MS>, <AU> eða <TR> (einnig AUE, AURORA, TROPO) kemur fyrir í texta spotsins varðar spotið ekki sporadic-E og flipinn SPORADIC-E hafnar því; það nýtist áfram fyrir meteor scatter og norðurljós. Í BENCHMARK Es gegnir reiturinn PROP_MODE í loggnum sama hlutverki.
 TAG|SCELTA|Safn: ein CSV-skrá á dag í data/spot; í minni eru síðustu spotin (mest 50000). Með RBN og PSKReporter eru að jafnaði aðeins vistuð spot frá 28 MHz og upp úr.
 H1|6. Log ADIF
 TAG|FONTE|Yfirfærsla á LoTW Grid Map v2 [25]: LoTW-skýrslan (sótt með notandanafni og lykilorði, sem aldrei er vistað) og ADIF-skrár dagbókarinnar eru sameinaðar eftir kallmerki, tíðnisviði, dagsetningu og tíma; staðfestingarnar leggjast saman.
@@ -80,9 +92,11 @@ H1|7. Litastef
 TAG|FONTE|Litastefin eru þau sömu og í YA-MS 1.4.0, sem byggja á YAEC [26]: Ljóst, Nótt, Svart, átta pastelstef og Loftsteinaslóð. Stefið er valið efst til hægri og glugginn endurteiknast strax; í sýninni Jafnendurvarp nota dökku stefin litaðar ræmur og þau ljósu þykkar línur (4.4).
 H1|8. Meteor scatter (YA-MS 1.4.0) og tungumál
 TAG|FONTE|Flipinn METEOR SCATTER inniheldur YA-MS 1.4.0 í heild sinni [5], með skjalinu „Nýtni - skýringar“ og heimildum þess. Skriftan tools/sync_yams.py afritar hverja nýja útgáfu YA-MS og breytir henni í spjald án þess að breyta útreikningunum.
+TAG|FONTE|YA-MS 1.4.0 bætir við flipunum Drífur í beinni (ZHR mælt af Global Meteor Network og kort af geislapunktum CMOR-ratsjárinnar) og Heimildakort (hvar Collm, Sodankylä, GRAVES og CMOR eru miðað við stöðina); heimildir þeirra eru tilgreindar í YA-MS.
 TAG|SCELTA|Tungumál: 28, öll tungumál YAEC auk dönsku og tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), fyrir viðmótið (data/lingue/ela-<kóði>.txt), Tæknilega lýsingu og Heimildir. Í sýninni F.A.I./norðurljós heitir slóð scatter point „Scatter trail“ í öllum þýðingum. Stöðustikan sýnir segulsviðslíkanið sem er í notkun (IGRF-14 frá IAGA [16]).
 H1|9. Takmarkanir
 LI|Stöðvar í miðju locator-reitsins: með 4 stafa locator getur skekkjan numið ~80 km.
 LI|foEs úr spotum er lágmarksþröskuldur og sekantlögmálið ofmetur nauðsynlega foEs á VHF (sjá 2.3).
 LI|„Líklegasti“ scatter point er viðmið forritsins: öll Scatter trail er hin eðlisfræðilega niðurstaða.
 LI|OVATION-sporbaugurinn er líkindalíkan fyrir sjáanleg norðurljós, notað sem vísbending um radíónorðurljós.
+LI|BENCHMARK Es byggir á locatorum dagbókarinnar: með 4 stafa locatorum og QSO upp á nokkur hundruð km eru skip og áætluð foEs nálgun.

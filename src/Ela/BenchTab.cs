@@ -70,7 +70,8 @@ namespace ELA
             c10 = Ui.C("10 m", cf.GetB("bench_10m", true)); c6 = Ui.C("6 m", cf.GetB("bench_6m", true));
             c4 = Ui.C("4 m", cf.GetB("bench_4m", true)); c2 = Ui.C("2 m", cf.GetB("bench_2m", true));
             numH = Ui.N(90, 130, Ui.Dm(cf.GetD("bench_quota_km", 105)), 0, 1, 45);
-            chkProp = Ui.C(Lang.T("Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)"), cf.GetB("bench_prop", true));
+            chkProp = Ui.C("", cf.GetB("bench_prop", true));
+            chkProp.Content = new TextBlock { Text = Lang.T("Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)"), TextWrapping = TextWrapping.Wrap };   // testo semplice: "_" non e' un tasto di scelta rapida
             chkMin = Ui.C(Lang.T("Escludi i QSO sotto i 500 km"), cf.GetB("bench_min", true));
             chkShort = Ui.C(Lang.T("Primo salto corto entro"), cf.GetB("bench_corto", true));
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("bench_corto_km", 1200)), 0, 50, 55);
@@ -86,7 +87,7 @@ namespace ELA
             tDays.RowClicked += i => { if (i >= 0 && i < tDays.Rows.Count) { selDay = tDays.Rows[i].Tag as string; selHour = -1; selQso = null; FillHours(); Analyze(); } };
             tHours = new TableView();
             tHours.Columns.AddRange(new[] { Lang.T("Ora UTC"), "QSO", Lang.T("km min - max"), Lang.T("Multi-salto"), Lang.T("Bande") });
-            tHours.ColumnWidths.AddRange(new double[] { 100, 46, 100, 70, 100 });
+            tHours.ColumnWidths.AddRange(new double[] { 130, 46, 100, 70, 100 });
             tHours.RowClicked += i => { if (i >= 0 && i < tHours.Rows.Count) { selHour = (int)tHours.Rows[i].Tag; selQso = null; Analyze(); } };
             tQso = new TableView();
             tQso.Columns.AddRange(new[] { "UTC", Lang.T("Nominativo"), "Locator", "MHz", "km", Lang.T("Salti"), "foEs≥" });
@@ -412,8 +413,12 @@ namespace ELA
         MapPoly SectorPoly(double a1, double a2, double d1, double d2, Color fill)
         {
             MapPoly pg = new MapPoly { Fill = fill };
+            d1 = Math.Max(1, d1);
+            int nr = Math.Max(1, (int)Math.Ceiling((d2 - d1) / 150.0));   // lati radiali in piu' punti (la mappa spezza i salti lunghi)
             for (double a = a1; a <= a2 + 0.01; a += 1) { double la, lo; Geo.Destination(cLat, cLon, a, d2, out la, out lo); pg.Pts.Add(new Point(lo, la)); }
-            for (double a = a2; a >= a1 - 0.01; a -= 1) { double la, lo; Geo.Destination(cLat, cLon, a, Math.Max(1, d1), out la, out lo); pg.Pts.Add(new Point(lo, la)); }
+            for (int k = 1; k < nr; k++) { double la, lo; Geo.Destination(cLat, cLon, a2, d2 - (d2 - d1) * k / nr, out la, out lo); pg.Pts.Add(new Point(lo, la)); }
+            for (double a = a2; a >= a1 - 0.01; a -= 1) { double la, lo; Geo.Destination(cLat, cLon, a, d1, out la, out lo); pg.Pts.Add(new Point(lo, la)); }
+            for (int k = 1; k < nr; k++) { double la, lo; Geo.Destination(cLat, cLon, a1, d1 + (d2 - d1) * k / nr, out la, out lo); pg.Pts.Add(new Point(lo, la)); }
             return pg;
         }
 

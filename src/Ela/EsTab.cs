@@ -173,7 +173,7 @@ namespace ELA
             dirty = false;
             EsModel.ShortHopKm = chkShort.IsChecked == true ? Ui.V(numShort) : 0;
             int minutes = Windows[Math.Max(0, cmbWin.SelectedIndex)];
-            List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.Prop != "TR" && s.Prop != "MS" && s.Prop != "AU" && s.Prop != "FAI" && s.Prop != "EME");
+            List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate);
             paths = new List<EsPath>();
             HashSet<string> seen = new HashSet<string>();
             foreach (Spot s in sp)

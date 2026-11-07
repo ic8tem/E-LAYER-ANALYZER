@@ -252,3 +252,67 @@ SCELTA	VALIK
 IGRF-14, epoca {0}	IGRF-14, epohh {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv puudub: kasutan dipooli
 igrf14.csv incompleto: uso il dipolo	igrf14.csv on puudulik: kasutan dipooli
+Carica ADIF	Laadi ADIF
+Scarica ADIF	Eemalda ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Jäta välja muu PROP_MODE-ga QSO-d (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Jäta välja alla 500 km QSO-d
+Skip per settori	Skip sektorite kaupa
+Tratte	Trassid
+Giornata	Päev
+km max	km max
+Multi-salto	Mitmehüppeline
+km min - max	km min - max
+Calcoli proposti	Pakutud arvutused
+QSO per giornata	QSO-d päevade kaupa
+Orari della giornata (clic: QSO di quell'ora)	Päeva tunnid (klõps: selle tunni QSO-d)
+Stazione al centro	Jaam keskel
+Log ADIF da analizzare (anche di un'altra stazione)	Analüüsitav ADIF-logi (ka teise jaama oma)
+Leggo {0}...	Loen {0}...
+Nessun log caricato	Logi pole laaditud
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Laadi ADIF-logi (ka teise jaama oma): programm leiab saatmiskoha (MY_GRIDSQUARE või ülal kirjutatud lokaator) ja vastuvõtukohad (GRIDSQUARE), jagab QSO-d päevade ja tundide kaupa ning pakub sporaadilise E ja mitmehüppelise levi arvutusi.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} kirjet, {2} QSO-d analüüsitud; välja jäetud: {3} ilma lokaatorita, {4} muudel sagedusaladel (sh 432 MHz: sporaadiline E ei kehti), {5} muu PROP_MODE-ga, {6} alla 500 km.
+Tutta la giornata	Kogu päev
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ jaama esimene hüpe / ○ lühike esimene hüpe
+■ primo salto del corrispondente	■ korrespondendi esimene hüpe
+arco arancio: skip (QSO più vicino del settore)	oranž kaar: skip (sektori lähim QSO)
+settore verde: distanze raggiunte	roheline sektor: saavutatud kaugused
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	punane: pilvede nihkumine tunniti (keskpunktide raskuskese)
+Nessun QSO nella selezione.	Valikus pole QSO-sid.
+{0} da {1} ({2}), quota Es {3:F0} km	{0}, jaamast {1} ({2}), Es-i kõrgus {3:F0} km
+Giornata {0}	Päev {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Päev {0}, kell {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO-d: {1} ühe hüppega, {2} kahe, {3} kolme, {4} enama (IK3XTV tabel). Sagedusalad: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Valitud QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip asimuudisektorite kaupa (10°): lähim QSO = vaikusetsooni serv, kaugeim = ulatus
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Hinnanguline foEs (sekansi seadus, foEs ≥ f / sec φ): iga sagedusala lühim ühe hüppe QSO annab kõrgeima hinnangu
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} {2:F0} km kaugusel, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Valiku hinnang: foEs ≥ {0:F1} MHz ({1}). Selle foEs-iga oodatav MUF: {2:F0} MHz 1000 km juures, {3:F0} MHz 1500 km juures, {4:F0} MHz 2000 km juures, {5:F0} MHz 2400 km juures.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Selle foEs-iga 144 MHz ühe hüppega ei avane.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Selle foEs-iga avaneb 144 MHz ühe hüppega üle umbes {0:F0} km (skip 2 m-l).
+  Nessun QSO in singolo salto nella selezione.	  Valikus pole ühe hüppega QSO-sid.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Hinnangulised Es-pilved (peegelduspunktide Maidenheadi ruudud)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Mitmehüppeline: jaama esimest hüpet võrreldakse ühe hüppega nähtud pilvedega ±30 min piires (kuni 300 km = kinnitatud)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} hüpet: võrdsed hüpped {4} ({5}), lühike esimene hüpe {6} ({7})
+nessuna nube vicina	lähedal pilve pole
+nube a {0:F0} km	pilv {0:F0} km kaugusel
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Kinnitatud: võrdsed hüpped {0}/{1}, lühike esimene hüpe {2}/{1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Pilvede nihkumine tund-tunnilt (ühe hüppe keskpunktide raskuskese)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km suunas {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Arvutused on ligikaudsed: QSO näitab, et trass oli avatud, mitte seda, kus pilv täpselt asus.
+Azimutale - singolo salto	Asimuutne - üks hüpe
+Azimutale - distanza massima (multi-salto)	Asimuutne - maksimaalne kaugus (mitmehüppeline)
+Rettangolare	Ristkülikuline
+Mappa	Kaart
+{0:N0} km: minima del singolo salto	{0:N0} km: ühe hüppe minimaalne
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimaalne
+{0:N0} km: massima del singolo salto	{0:N0} km: ühe hüppe maksimaalne
+{0:N0} km: massima del doppio salto	{0:N0} km: kahe hüppe maksimaalne
+{0:N0} km: massima del triplo salto	{0:N0} km: kolme hüppe maksimaalne
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° keskpunktist
+Raggio {0:N0} km dal centro ({1})	Raadius {0:N0} km keskpunktist ({1})
+Distanza massima	Maksimaalne kaugus
+{0:N0} km dal centro	{0:N0} km keskpunktist

@@ -252,3 +252,67 @@ SCELTA	CHOIX
 IGRF-14, epoca {0}	IGRF-14, époque {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv manquant : utilisation du dipôle
 igrf14.csv incompleto: uso il dipolo	igrf14.csv incomplet : utilisation du dipôle
+Carica ADIF	Charger l'ADIF
+Scarica ADIF	Retirer l'ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Exclure les QSO avec un autre PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Exclure les QSO de moins de 500 km
+Skip per settori	Skip par secteurs
+Tratte	Trajets
+Giornata	Journée
+km max	km max
+Multi-salto	Multi-bond
+km min - max	km min - max
+Calcoli proposti	Calculs proposés
+QSO per giornata	QSO par journée
+Orari della giornata (clic: QSO di quell'ora)	Heures de la journée (clic : QSO de cette heure)
+Stazione al centro	Station au centre
+Log ADIF da analizzare (anche di un'altra stazione)	Log ADIF à analyser (même d'une autre station)
+Leggo {0}...	Lecture de {0}...
+Nessun log caricato	Aucun log chargé
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Chargez un log ADIF (même d'une autre station) : le programme trouve la position d'émission (MY_GRIDSQUARE, ou le locator saisi ci-dessus) et celles de réception (GRIDSQUARE), répartit les QSO par journée et par heure et propose les calculs de l'E sporadique et du multi-bond.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0} : {1} enregistrements, {2} QSO analysés ; exclus : {3} sans locator, {4} d'autres bandes (432 MHz compris : l'E sporadique ne s'y applique pas), {5} avec un autre PROP_MODE, {6} de moins de 500 km.
+Tutta la giornata	Toute la journée
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ premier bond de la station / ○ premier bond court
+■ primo salto del corrispondente	■ premier bond du correspondant
+arco arancio: skip (QSO più vicino del settore)	arc orange : skip (QSO le plus proche du secteur)
+settore verde: distanze raggiunte	secteur vert : distances atteintes
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rouge : déplacement horaire des nuages (barycentre des points milieux)
+Nessun QSO nella selezione.	Aucun QSO dans la sélection.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} depuis {1} ({2}), altitude Es {3:F0} km
+Giornata {0}	Journée {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Journée {0}, {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO : {1} bond unique, {2} double, {3} triple, {4} au-delà (tableau IK3XTV). Bandes : {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	QSO choisi : {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip par secteurs d'azimut (10°) : QSO le plus proche = bord de la zone de silence, le plus lointain = portée
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}° : skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. foEs estimée (loi de la sécante, foEs ≥ f / sec φ) : le bond unique le plus court de chaque bande donne l'estimation la plus élevée
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0} : {1} à {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Estimation pour la sélection : foEs ≥ {0:F1} MHz ({1}). MUF attendue avec cette foEs : {2:F0} MHz à 1000 km, {3:F0} MHz à 1500 km, {4:F0} MHz à 2000 km, {5:F0} MHz à 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Avec cette foEs, le 144 MHz ne s'ouvre pas en bond unique.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Avec cette foEs, le 144 MHz s'ouvre en bond unique au-delà d'environ {0:F0} km (skip sur 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Aucun QSO en bond unique dans la sélection.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Nuages Es estimés (carrés Maidenhead des points de réflexion)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0} : {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multi-bond : premier bond de la station comparé aux nuages vus en bond unique à ±30 min (à moins de 300 km = confirmé)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} bonds : bonds égaux {4} ({5}), premier bond court {6} ({7})
+nessuna nube vicina	aucun nuage proche
+nube a {0:F0} km	nuage à {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Confirmés : bonds égaux {0} sur {1}, premier bond court {2} sur {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Déplacement des nuages heure par heure (barycentre des points milieux des bonds uniques)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z : {2} -> {3}, {4:F0} km vers {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Les calculs sont indicatifs : un QSO indique que le trajet était ouvert, pas où se trouvait exactement le nuage.
+Azimutale - singolo salto	Azimutale - bond unique
+Azimutale - distanza massima (multi-salto)	Azimutale - distance maximale (multi-bond)
+Rettangolare	Rectangulaire
+Mappa	Carte
+{0:N0} km: minima del singolo salto	{0:N0} km : minimum du bond unique
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km : optimal
+{0:N0} km: massima del singolo salto	{0:N0} km : maximum du bond unique
+{0:N0} km: massima del doppio salto	{0:N0} km : maximum du double bond
+{0:N0} km: massima del triplo salto	{0:N0} km : maximum du triple bond
+  {0}: {1}   {2}: {3}	  {0} : {1}   {2} : {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° depuis le centre
+Raggio {0:N0} km dal centro ({1})	Rayon {0:N0} km depuis le centre ({1})
+Distanza massima	Distance maximale
+{0:N0} km dal centro	{0:N0} km du centre

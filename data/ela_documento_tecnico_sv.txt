@@ -38,6 +38,17 @@ TAG|SCELTA|Tabellen "Es-moln": i rött de moln som skulle ge MUF ≥ 144 MHz, i 
 H2|3.4 Sporadiskt E gäller inte 432 MHz
 TAG|FONTE|MUF för sporadiskt E på mellanbreddgrader når 150 MHz och mer (Whitehead [23]); det krävs mycket täta moln för att böja av flacka strålar upp till 200 MHz (IK3XTV [22]). ARRL:s rekord [24] redovisar förbindelser via sporadiskt E endast på 50 och 144 MHz, inga på 222 och 432 MHz.
 TAG|SCELTA|Därför analyserar fliken SPORADIC-E endast 28, 50, 70 och 144 MHz: spots på 432 MHz behandlas aldrig som sporadiskt E (vissa allmänna källor, även sådana som tagits fram av artificiell intelligens, påstår det utan dokumentation).
+H2|3.5 Azimutal karta
+TAG|SCELTA|Kartan i fliken SPORADIC-E är azimutal ekvidistant, centrerad på den egna stationen: avstånd från mitten och azimut är korrekta, och cirklarna runt mitten är cirklar med lika avstånd. En knapp väljer mellan vyn för enkelt hopp (fast radie 2500 km, med zonerna från IK3XTV-tabellen [3]: 500, 1500-2000 och 2400 km) och vyn med reglaget för största avstånd (från 300 till 20000 km, även med mushjulet), som lägger till gränserna för dubbelt (5000 km) och trippelhopp (6900 km) för att följa hur multihoppet utvecklas. Den rektangulära kartan finns kvar.
+EQ|ρ = d(mitten, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = skivans radie i pixlar / största avstånd i km
+TAG|SCELTA|De streckade ringarna visar km från mitten med ett jämnt steg (50, 100, 200, 250, 500, 1000, 2000, 2500 eller 5000 km) som väljs efter zoomnivån; den yttre cirkeln visar det största avstånd som visas, och muspekaren ger avstånd och azimut från mitten.
+H2|3.6 BENCHMARK Es: provbänk på en ADIF-logg
+P|Fliken BENCHMARK Es läser in en hel ADIF-logg, även från en annan station. Sändarpositionen är MY_GRIDSQUARE för varje QSO (i kartans mitt hamnar den vanligaste, som kan ändras för hand); mottagarpositionerna är GRIDSQUARE. QSO på 28, 50, 70 och 144 MHz med lokator används, utom de med annat PROP_MODE och de under 500 km; QSO delas upp per dag och, inom dagen, per timme.
+TAG|SCELTA|Skip per sektor: för varje azimutsektor på 10° från mitten markerar det närmaste QSO:t kanten på den döda zonen (orange båge) och det längsta räckvidden (grön båge); däremellan den uppnådda sektorn.
+TAG|SCELTA|Urvalets foEs: på varje band ger det kortaste enkla hoppet den högsta uppskattningen, foEs ≥ f / sec φ (2.3); med denna foEs beräknar programmet väntad MUF på 1000, 1500, 2000 och 2400 km samt avståndet bortom vilket 144 MHz skulle öppna.
+TAG|SCELTA|Multihopp: stationens första hopp, i de två hypoteserna (lika hopp, 3.2, och kort första hopp [4]), jämförs med mittpunkterna för de enkla hoppen samma dag inom ±30 minuter: inom 300 km bekräftas hypotesen av ett moln som verkligen har observerats. Programmet räknar bekräftelserna för varje hypotes.
+EQ|molnets hastighet = d(tyngdpunkt timme h, tyngdpunkt timme h+1) / 1 h
+TAG|RILIEVO|Tyngdpunkten för de enkla hoppens mittpunkter, timme för timme, visar molnens förflyttning (röd linje). Beräkningarna är ungefärliga: ett QSO visar att sträckan var öppen, inte exakt var molnet låg.
 H1|4. F.A.I. och aurora: scatter längs magnetfältet
 H2|4.1 Magnetfältet
 TAG|FONTE|Fältet beräknas med modellen IGRF-14 [16] (sfäriska harmoniska funktioner upp till grad 13, koefficienter 2025-2030 interpolerade till datumet). K9SE:s SE-PROP [9] använde på samma sätt en modell med sfäriska harmoniska funktioner (WMM).
@@ -72,6 +83,7 @@ H2|5.1 Telnetsessioner
 TAG|SCELTA|Tre sessioner: valfritt kluster, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], kluster med spots från PSKReporter (t.ex. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Automatisk inloggning med anropssignalen, startkommandon åtskilda med semikolon, återanslutning efter 30 s.
 H2|5.2 Läsning av spots
 TAG|SCELTA|Raden "DX de SPOTTER: FREQ DXCALL kommentar HHMMZ [LOC]" läses med ett reguljärt uttryck (inte med fasta kolumner). Ur kommentaren läses lokatorer och utbredningssätt i formen "JN70CN<ES>JO62QM" (första lokatorn = spotter, andra = DX), utbredningssättet (ES, FAI, AU, MS, TR, EME, F2, TEP), S/N-förhållandet och sändningsslaget. Saknade lokatorer söks i CALL3 [21]; 6-teckens lokatorer som läses i kommentarerna läggs till i data/call3_nuovi.txt.
+TAG|SCELTA|Författarens regel (IC8TEM): om <MS>, <AU> eller <TR> (även AUE, AURORA, TROPO) förekommer i spotens text gäller spoten inte sporadiskt E och fliken SPORADIC-E förkastar den; den är fortfarande användbar för meteorscatter och aurora. I BENCHMARK Es fyller loggens fält PROP_MODE samma funktion.
 TAG|SCELTA|Arkiv: en CSV-fil per dag i data/spot; i minnet de senaste spotsen (högst 50000). Med RBN och PSKReporter sparas normalt bara spots från 28 MHz och uppåt.
 H1|6. Log ADIF
 TAG|FONTE|Portering av LoTW Grid Map v2 [25]: LoTW-rapporten (hämtad med användarnamn och lösenord, som aldrig sparas) och loggens ADIF-filer slås samman efter anropssignal, band, datum och tid; bekräftelserna läggs ihop.
@@ -80,9 +92,11 @@ H1|7. Färgsättning
 TAG|FONTE|Färgschemana är desamma som i YA-MS 1.4.0, som i sin tur bygger på YAEC [26]: Ljust, Natt, Svart, åtta pasteller och Meteorspår. Schemat väljs uppe till höger och fönstret byggs om direkt; i vyn Isoreflexion använder de mörka schemana färgade band och de ljusa tjocka linjer (4.4).
 H1|8. Meteorscatter (YA-MS 1.4.0) och språk
 TAG|FONTE|Fliken METEOR SCATTER innehåller hela YA-MS 1.4.0 [5], med dess dokument "Effektivitet - förklaring" och dess källor. Skriptet tools/sync_yams.py kopierar varje ny version av YA-MS och gör om den till en panel utan att ändra beräkningarna.
+TAG|FONTE|YA-MS 1.4.0 lägger till flikarna Svärmar live (uppmätt ZHR från Global Meteor Network och radiantkartor från CMOR-radarn) och Källkarta (var Collm, Sodankylä, GRAVES och CMOR ligger i förhållande till stationen); deras källor anges i YA-MS.
 TAG|SCELTA|Språk: 28, alla som finns i YAEC samt danska och tagalog (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), för gränssnittet (data/lingue/ela-<kod>.txt), för det tekniska dokumentet och för källorna. I vyn F.A.I./aurora kallas scatterpunkternas spår "Scatter trail" i alla översättningar. Statusfältet visar vilken magnetisk modell som används (IAGA:s IGRF-14 [16]).
 H1|9. Begränsningar
 LI|Stationerna i mitten av lokatorrutan: med 4-teckens lokator kan felet bli ~80 km.
 LI|foEs från spots är en undre gräns, och sekantlagen överskattar den foEs som krävs på VHF (se 2.3).
 LI|Den "mest sannolika" scatterpunkten är ett kriterium i programmet: hela scatter trail är det fysiska resultatet.
 LI|OVATION-ovalen är en sannolikhetsmodell för optiskt norrsken, som används som indikator för radioaurora.
+LI|BENCHMARK Es utgår från loggens lokatorer: med 4-teckens lokator och QSO på några hundra km är skip och uppskattad foEs ungefärliga.

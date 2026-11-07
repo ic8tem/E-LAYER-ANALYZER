@@ -227,8 +227,8 @@ namespace ELA
             double W = Bounds.Width, H = Bounds.Height;
             if (Azimuthal) { RenderAzimuthal(ctx); return; }
             ctx.FillRectangle(Pal.B(Sea), new Rect(0, 0, W, H));
-            double p = Ppd;
             RenderBody(ctx);
+            RenderOverlays(ctx);
         }
 
         void RenderBody(DrawingContext ctx)
@@ -349,6 +349,12 @@ namespace ELA
                 }
             }
 
+        }
+
+        // legenda, didascalia, righe informative e coordinate del cursore (fuori dal disco della vista azimutale)
+        void RenderOverlays(DrawingContext ctx)
+        {
+            double W = Bounds.Width, H = Bounds.Height;
             // legenda in basso a sinistra
             double y = H - 8;
             for (int i = Legend.Count - 1; i >= 0; i--)
@@ -519,6 +525,7 @@ namespace ELA
             Rect rr = new Rect(W - rt.Width - 18, H - rt.Height - 12, rt.Width + 12, rt.Height + 6);
             ctx.FillRectangle(Pal.B(Ov), rr);
             ctx.DrawText(rt, new Point(rr.X + 6, rr.Y + 3));
+            RenderOverlays(ctx);
         }
 
         // cerchio di raggio rKm attorno a un punto (es. orizzonte radio alla quota dello strato)

@@ -252,3 +252,67 @@ SCELTA	चयन
 IGRF-14, epoca {0}	IGRF-14, युग {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv अनुपस्थित: द्विध्रुव उपयोग हो रहा है
 igrf14.csv incompleto: uso il dipolo	igrf14.csv अपूर्ण: द्विध्रुव उपयोग हो रहा है
+Carica ADIF	ADIF लोड करें
+Scarica ADIF	ADIF हटाएँ
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	किसी अन्य PROP_MODE वाले QSO बाहर रखें (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	500 km से कम के QSO बाहर रखें
+Skip per settori	सेक्टर अनुसार स्किप
+Tratte	पथ
+Giornata	दिन
+km max	अधिकतम km
+Multi-salto	बहु-हॉप
+km min - max	न्यूनतम - अधिकतम km
+Calcoli proposti	प्रस्तावित गणनाएँ
+QSO per giornata	दिन के अनुसार QSO
+Orari della giornata (clic: QSO di quell'ora)	दिन के घंटे (क्लिक: उस घंटे के QSO)
+Stazione al centro	केंद्र में स्टेशन
+Log ADIF da analizzare (anche di un'altra stazione)	विश्लेषण के लिए ADIF लॉग (किसी अन्य स्टेशन का भी)
+Leggo {0}...	{0} पढ़ा जा रहा है...
+Nessun log caricato	कोई लॉग लोड नहीं है
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	एक ADIF लॉग लोड करें (किसी अन्य स्टेशन का भी): प्रोग्राम प्रेषण स्थिति (MY_GRIDSQUARE, या ऊपर लिखा लोकेटर) और प्राप्ति स्थितियाँ (GRIDSQUARE) ढूँढता है, QSO को दिन और घंटे के अनुसार बाँटता है और स्पोरैडिक E तथा बहु-हॉप की गणनाएँ प्रस्तावित करता है।
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} रिकॉर्ड, {2} QSO विश्लेषित; बाहर रखे गए: {3} बिना लोकेटर, {4} अन्य बैंडों के (432 MHz सहित: स्पोरैडिक E लागू नहीं होता), {5} अन्य PROP_MODE वाले, {6} 500 km से कम।
+Tutta la giornata	पूरा दिन
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ स्टेशन का पहला हॉप / ○ छोटा पहला हॉप
+■ primo salto del corrispondente	■ DX स्टेशन का पहला हॉप
+arco arancio: skip (QSO più vicino del settore)	नारंगी चाप: स्किप (सेक्टर का निकटतम QSO)
+settore verde: distanze raggiunte	हरा सेक्टर: पहुँची गई दूरियाँ
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	लाल: बादलों का प्रति घंटा विस्थापन (मध्य बिंदुओं का केंद्रक)
+Nessun QSO nella selezione.	चयन में कोई QSO नहीं।
+{0} da {1} ({2}), quota Es {3:F0} km	{0}, {1} ({2}) से, Es ऊँचाई {3:F0} km
+Giornata {0}	दिन {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	दिन {0}, {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} एकल हॉप, {2} दोहरा, {3} तिहरा, {4} अधिक (IK3XTV तालिका)। बैंड: {5}।
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	चुना गया QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. दिगंश सेक्टरों (10°) के अनुसार स्किप: निकटतम QSO = मौन क्षेत्र की सीमा, सबसे दूर = पहुँच
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  दिगंश {0:000}-{1:000}°: स्किप {2,5:F0} km ({3}, {4} MHz)   अधिकतम {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. अनुमानित foEs (सेकेंट नियम, foEs ≥ f / sec φ): हर बैंड का सबसे छोटा एकल हॉप सबसे ऊँचा अनुमान देता है
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1}, {2:F0} km पर, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  चयन के लिए अनुमान: foEs ≥ {0:F1} MHz ({1})। इस foEs के साथ अपेक्षित MUF: 1000 km पर {2:F0} MHz, 1500 km पर {3:F0} MHz, 2000 km पर {4:F0} MHz, 2400 km पर {5:F0} MHz।
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  इस foEs के साथ 144 MHz एकल हॉप में नहीं खुलता।
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  इस foEs के साथ 144 MHz लगभग {0:F0} km से आगे एकल हॉप में खुलता है (2 m में स्किप)।
+  Nessun QSO in singolo salto nella selezione.	  चयन में कोई एकल हॉप QSO नहीं।
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. अनुमानित Es बादल (परावर्तन बिंदुओं के Maidenhead वर्ग)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, दिगंश {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. बहु-हॉप: स्टेशन के पहले हॉप की तुलना ±30 मिनट के भीतर एकल हॉप में देखे गए बादलों से (300 km के भीतर = पुष्ट)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} हॉप: समान हॉप {4} ({5}), छोटा पहला हॉप {6} ({7})
+nessuna nube vicina	कोई निकट बादल नहीं
+nube a {0:F0} km	{0:F0} km पर बादल
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  पुष्ट: समान हॉप {1} में से {0}, छोटा पहला हॉप {1} में से {2}।
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. घंटे-दर-घंटे बादलों का विस्थापन (एकल हॉप के मध्य बिंदुओं का केंद्रक)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {5:F0}° की ओर {4:F0} km, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	गणनाएँ सांकेतिक हैं: एक QSO बताता है कि पथ खुला था, यह नहीं कि बादल ठीक कहाँ था।
+Azimutale - singolo salto	दिगंशीय - एकल हॉप
+Azimutale - distanza massima (multi-salto)	दिगंशीय - अधिकतम दूरी (बहु-हॉप)
+Rettangolare	आयताकार
+Mappa	मानचित्र
+{0:N0} km: minima del singolo salto	{0:N0} km: एकल हॉप की न्यूनतम दूरी
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: इष्टतम
+{0:N0} km: massima del singolo salto	{0:N0} km: एकल हॉप की अधिकतम दूरी
+{0:N0} km: massima del doppio salto	{0:N0} km: दोहरे हॉप की अधिकतम दूरी
+{0:N0} km: massima del triplo salto	{0:N0} km: तिहरे हॉप की अधिकतम दूरी
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, केंद्र से दिगंश {1:F0}°
+Raggio {0:N0} km dal centro ({1})	केंद्र से {0:N0} km त्रिज्या ({1})
+Distanza massima	अधिकतम दूरी
+{0:N0} km dal centro	केंद्र से {0:N0} km

@@ -38,6 +38,17 @@ TAG|SCELTA|“Es 云”表：红色表示可提供 MUF ≥ 144 MHz 的云，橙�
 H2|3.4 偶发 E 层不适用于 432 MHz
 TAG|FONTE|中纬度偶发 E 层的 MUF 可达 150 MHz 甚至更高（Whitehead [23]）；要将掠射射线偏折到 200 MHz 需要非常密的云（IK3XTV [22]）。ARRL 纪录 [24] 只报告了 50 和 144 MHz 上的偶发 E 层通联，222 和 432 MHz 上没有。
 TAG|SCELTA|因此 SPORADIC-E 选项卡只分析 28、50、70 和 144 MHz：432 MHz 的 spot 从不按偶发 E 层处理（一些泛泛的来源，包括人工智能生成的内容，在没有文献依据的情况下声称如此）。
+H2|3.5 方位等距地图
+TAG|SCELTA|SPORADIC-E 选项卡的地图为方位等距投影，以本台为中心：到中心的距离和方位角都是真实的，围绕中心的圆是等距离圆。一个按钮用于在单跳视图（固定半径 2500 km，带 IK3XTV 表 [3] 的区域：500、1500-2000 和 2400 km）和带最大距离滑块的视图（300 至 20000 km，也可用滚轮调节）之间切换，后者加上双跳（5000 km）和三跳（6900 km）的界限，以便跟踪多跳的发展。矩形地图仍然保留。
+EQ|ρ = d(中心, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = 圆盘半径（像素）/ 最大距离（km）
+TAG|SCELTA|虚线环按随缩放选择的整数间隔（50、100、200、250、500、1000、2000、2500 或 5000 km）标出到中心的 km 数；外圆表示显示的最大距离，鼠标光标给出到中心的距离和方位角。
+H2|3.6 BENCHMARK Es：基于 ADIF 日志的测试平台
+P|BENCHMARK Es 选项卡载入整个 ADIF 日志，也可以是其他台站的。发射位置是每个 QSO 的 MY_GRIDSQUARE（出现最多的放在地图中心，可手动修改）；接收位置是 GRIDSQUARE。使用 28、50、70 和 144 MHz 上带网格坐标的 QSO，排除其他 PROP_MODE 的和 500 km 以内的；QSO 按日期划分，同一天内再按小时划分。
+TAG|SCELTA|按扇区统计静区（skip）：在从中心出发的每个 10° 方位扇区中，最近的 QSO 标出静区边缘（橙色弧），最远的标出覆盖范围（绿色弧）；两者之间为已到达的扇区。
+TAG|SCELTA|所选范围的 foEs：每个频段最短的单跳给出最高估值，foEs ≥ f / sec φ（2.3）；程序用此 foEs 计算 1000、1500、2000 和 2400 km 处的预期 MUF，以及 144 MHz 开通所需超过的距离。
+TAG|SCELTA|多跳：在两种假设（等长跳，3.2；短首跳 [4]）下，将台站首跳与同一天 ±30 分钟内各单跳的中点比较：在 300 km 以内，该假设即被一个真实看到的云所确认。程序统计每种假设的确认次数。
+EQ|云的速度 = d(h 时重心, h+1 时重心) / 1 h
+TAG|RILIEVO|单跳中点的逐时重心显示云的移动（红线）。计算仅供参考：QSO 说明路径曾经开通，但不说明云的确切位置。
 H1|4. F.A.I. 与极光：沿磁场排列的散射
 H2|4.1 磁场
 TAG|FONTE|磁场用 IGRF-14 模型 [16] 计算（球谐函数至 13 阶，2025-2030 系数按日期插值）。K9SE 的 SE-PROP [9] 同样使用了球谐模型（WMM）。
@@ -72,6 +83,7 @@ H2|5.1 Telnet 会话
 TAG|SCELTA|三个会话：自选 cluster、Reverse Beacon Network（7000 CW/RTTY，7001 FT8）[18]、含 PSKReporter spot 的 cluster（例如 DM4X dm4x.ddns.net:8500 [27]，HamAlert [19]）。使用呼号自动登录，初始命令以分号分隔，30 s 后重新连接。
 H2|5.2 spot 的解析
 TAG|SCELTA|"DX de SPOTTER: FREQ DXCALL commento HHMMZ [LOC]" 行用正则表达式解析（而非固定列）。从注释中读取 "JN70CN<ES>JO62QM" 形式的网格坐标和模式（第一个网格坐标 = 报告者，第二个 = DX）、传播模式（ES、FAI、AU、MS、TR、EME、F2、TEP）、S/N 比和发射模式。缺失的网格坐标在 CALL3 [21] 中查找；注释中读到的 6 位网格坐标添加到 data/call3_nuovi.txt。
+TAG|SCELTA|作者规则（IC8TEM）：如果 spot 文本中出现 <MS>、<AU> 或 <TR>（以及 AUE、AURORA、TROPO），该 spot 与偶发 E 层无关，SPORADIC-E 标签页将其舍弃；它对流星散射和极光仍然有用。在 BENCHMARK Es 中，日志的 PROP_MODE 字段起同样的作用。
 TAG|SCELTA|存档：data/spot 中每天一个 CSV 文件；内存中保存最近的 spot（最多 50000 条）。使用 RBN 和 PSKReporter 时，通常只保存 28 MHz 及以上的 spot。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
@@ -80,9 +92,11 @@ H1|7. 配色
 TAG|FONTE|配色方案与 YA-MS 1.4.0 相同，后者沿用 YAEC [26]：浅色、夜间、黑色、八种粉彩和流星余迹。配色方案在右上角选择，窗口立即重建；在等反射线视图中，深色方案使用彩色带，浅色方案使用粗线（4.4）。
 H1|8. 流星散射（YA-MS 1.4.0）与语言
 TAG|FONTE|METEOR SCATTER 选项卡包含完整的 YA-MS 1.4.0 [5]，以及它的“效率 - 说明”文档和它的来源。脚本 tools/sync_yams.py 复制 YA-MS 的每个新版本并将其转换为面板，不改动其计算。
+TAG|FONTE|YA-MS 1.4.0 新增了“实时流星雨”选项卡（Global Meteor Network 实测的 ZHR 和 CMOR 雷达的辐射点地图）和“数据源地图”选项卡（Collm、Sodankylä、GRAVES 和 CMOR 相对于本台的位置）；它们的来源在 YA-MS 中注明。
 TAG|SCELTA|语言：28 种，即 YAEC 的全部语言加上丹麦语和他加禄语（Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어），用于界面（data/lingue/ela-<代码>.txt）、技术文档和来源。在 F.A.I./极光视图中，散射点的轨迹在所有译本中都称为“Scatter trail”。状态栏显示所用的磁场模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 局限
 LI|台站位于网格坐标方格的中心：使用 4 位网格坐标时误差可达 ~80 km。
 LI|由 spot 得出的 foEs 是最低门限，而正割定律会高估 VHF 所需的 foEs（见 2.3）。
 LI|“最可能”的散射点是程序的判据：完整的 Scatter trail 才是物理结果。
 LI|OVATION 椭圆是光学极光的概率模型，在此用作无线电极光的指标。
+LI|BENCHMARK Es 以日志中的网格坐标为基础：对于 4 位网格坐标和仅数百 km 的 QSO，静区和估算的 foEs 都只是近似值。

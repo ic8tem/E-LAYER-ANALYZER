@@ -252,3 +252,67 @@ SCELTA	ВЫБОР
 IGRF-14, epoca {0}	IGRF-14, эпоха {0}
 igrf14.csv mancante: uso il dipolo	нет igrf14.csv: используется диполь
 igrf14.csv incompleto: uso il dipolo	igrf14.csv неполный: используется диполь
+Carica ADIF	Загрузить ADIF
+Scarica ADIF	Убрать ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Исключить QSO с другим PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Исключить QSO короче 500 km
+Skip per settori	Мёртвая зона по секторам
+Tratte	Трассы
+Giornata	День
+km max	km макс.
+Multi-salto	Многоскачковое
+km min - max	km мин. - макс.
+Calcoli proposti	Предлагаемые расчёты
+QSO per giornata	QSO по дням
+Orari della giornata (clic: QSO di quell'ora)	Часы дня (щелчок: QSO этого часа)
+Stazione al centro	Станция в центре
+Log ADIF da analizzare (anche di un'altra stazione)	Лог ADIF для анализа (в том числе другой станции)
+Leggo {0}...	Читаю {0}...
+Nessun log caricato	Лог не загружен
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Загрузите лог ADIF (в том числе другой станции): программа находит место передачи (MY_GRIDSQUARE или локатор, введённый выше) и места приёма (GRIDSQUARE), делит QSO по дням и по часам и предлагает расчёты спорадического E и многоскачкового прохождения.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} записей, {2} QSO проанализировано; исключено: {3} без локатора, {4} на других диапазонах (включая 432 MHz: спорадический E к нему не применим), {5} с другим PROP_MODE, {6} короче 500 km.
+Tutta la giornata	Весь день
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ первый скачок станции / ○ короткий первый скачок
+■ primo salto del corrispondente	■ первый скачок корреспондента
+arco arancio: skip (QSO più vicino del settore)	оранжевая дуга: мёртвая зона (ближайшее QSO сектора)
+settore verde: distanze raggiunte	зелёный сектор: достигнутые расстояния
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	красный: почасовое смещение облаков (центр тяжести средних точек)
+Nessun QSO nella selezione.	В выборке нет QSO.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} от {1} ({2}), высота Es {3:F0} km
+Giornata {0}	День {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	День {0}, {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} один скачок, {2} два, {3} три, {4} больше (таблица IK3XTV). Диапазоны: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Выбранное QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Мёртвая зона по азимутальным секторам (10°): ближайшее QSO = граница зоны молчания, самое дальнее = дальность
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  аз {0:000}-{1:000}°: мёртв. зона {2,5:F0} km ({3}, {4} MHz)   макс {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Оценка foEs (закон секанса, foEs ≥ f / sec φ): самый короткий одиночный скачок каждого диапазона даёт наибольшую оценку
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} на {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Оценка для выборки: foEs ≥ {0:F1} MHz ({1}). Ожидаемая MUF при этой foEs: {2:F0} MHz на 1000 km, {3:F0} MHz на 1500 km, {4:F0} MHz на 2000 km, {5:F0} MHz на 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  При этой foEs диапазон 144 MHz одним скачком не открывается.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  При этой foEs диапазон 144 MHz открывается одним скачком дальше примерно {0:F0} km (мёртвая зона на 2 m).
+  Nessun QSO in singolo salto nella selezione.	  В выборке нет QSO одним скачком.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Оценённые облака Es (квадраты Maidenhead точек отражения)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, аз {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Многоскачковое: первый скачок станции в сравнении с облаками, видимыми одним скачком в пределах ±30 мин (в пределах 300 km = подтверждено)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, скачков {3}: равные скачки {4} ({5}), короткий первый скачок {6} ({7})
+nessuna nube vicina	рядом нет облака
+nube a {0:F0} km	облако в {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Подтверждено: равные скачки {0} из {1}, короткий первый скачок {2} из {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Смещение облаков по часам (центр тяжести средних точек одиночных скачков)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km в направлении {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Расчёты ориентировочные: QSO говорит о том, что трасса была открыта, но не о том, где именно находилось облако.
+Azimutale - singolo salto	Азимутальная - один скачок
+Azimutale - distanza massima (multi-salto)	Азимутальная - максимальное расстояние (многоскачковое)
+Rettangolare	Прямоугольная
+Mappa	Карта
+{0:N0} km: minima del singolo salto	{0:N0} km: минимум одного скачка
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: оптимум
+{0:N0} km: massima del singolo salto	{0:N0} km: максимум одного скачка
+{0:N0} km: massima del doppio salto	{0:N0} km: максимум двух скачков
+{0:N0} km: massima del triplo salto	{0:N0} km: максимум трёх скачков
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, аз {1:F0}° от центра
+Raggio {0:N0} km dal centro ({1})	Радиус {0:N0} km от центра ({1})
+Distanza massima	Максимальное расстояние
+{0:N0} km dal centro	{0:N0} km от центра

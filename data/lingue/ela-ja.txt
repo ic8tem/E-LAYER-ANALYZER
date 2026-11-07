@@ -252,3 +252,67 @@ SCELTA	選択
 IGRF-14, epoca {0}	IGRF-14、元期 {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv がありません: 双極子を使用
 igrf14.csv incompleto: uso il dipolo	igrf14.csv が不完全: 双極子を使用
+Carica ADIF	ADIF を読込
+Scarica ADIF	ADIF を閉じる
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	別の PROP_MODE の QSO を除外 (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	500 km 未満の QSO を除外
+Skip per settori	セクター別スキップ
+Tratte	パス
+Giornata	日付
+km max	km max
+Multi-salto	マルチホップ
+km min - max	km min - max
+Calcoli proposti	提案する計算
+QSO per giornata	日別 QSO
+Orari della giornata (clic: QSO di quell'ora)	その日の時刻 (クリック: その時刻の QSO)
+Stazione al centro	中心の局
+Log ADIF da analizzare (anche di un'altra stazione)	解析する ADIF ログ (他局のものも可)
+Leggo {0}...	{0} を読込中...
+Nessun log caricato	ログ未読込
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	ADIF ログ (他局のものも可) を読み込みます: プログラムは送信位置 (MY_GRIDSQUARE、または上で入力したロケーター) と受信位置 (GRIDSQUARE) を求め、QSO を日別・時刻別に分け、スポラディックE とマルチホップの計算を提案します。
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} レコード、解析した QSO {2}; 除外: ロケーターなし {3}、他バンド {4} (432 MHz を含む: スポラディックE は当てはまりません)、別の PROP_MODE {5}、500 km 未満 {6}。
+Tutta la giornata	終日
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ 局の第 1 ホップ / ○ 短い第 1 ホップ
+■ primo salto del corrispondente	■ 相手局の第 1 ホップ
+arco arancio: skip (QSO più vicino del settore)	橙の弧: スキップ (セクター内で最も近い QSO)
+settore verde: distanze raggiunte	緑のセクター: 到達した距離
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	赤: 雲の時間ごとの移動 (中間点の重心)
+Nessun QSO nella selezione.	選択範囲に QSO はありません。
+{0} da {1} ({2}), quota Es {3:F0} km	{0}、{1} ({2}) から、Es 高度 {3:F0} km
+Giornata {0}	日付 {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	日付 {0}、{1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: 1 ホップ {1}、2 ホップ {2}、3 ホップ {3}、それ以上 {4} (IK3XTV の表)。バンド: {5}。
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	選択した QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. 方位セクター (10°) 別スキップ: 最も近い QSO = スキップゾーンの境界、最も遠い QSO = 到達範囲
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: スキップ {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. 推定 foEs (セカント則、foEs ≈ f / sec φ): 各バンドで最も短い 1 ホップが最も高い推定値を与えます
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} {2:F0} km、sec(φ) = {3:F2} -> foEs ≈ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  選択範囲の推定: foEs ≈ {0:F1} MHz ({1})。この foEs で予想される MUF: 1000 km で {2:F0} MHz、1500 km で {3:F0} MHz、2000 km で {4:F0} MHz、2400 km で {5:F0} MHz。
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  この foEs では 144 MHz は 1 ホップで開けません。
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  この foEs では 144 MHz は約 {0:F0} km 以遠で 1 ホップで開けます (2 m のスキップ)。
+  Nessun QSO in singolo salto nella selezione.	  選択範囲に 1 ホップの QSO はありません。
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. 推定 Es 雲 (反射点のマイデンヘッドグリッド)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO、foEs ≈ {2:F1} MHz、az {3:F0}°、{4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. マルチホップ: 局の第 1 ホップを ±30 分以内に 1 ホップで見られた雲と比較 (300 km 以内 = 確認)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km、{3} ホップ: 等ホップ {4} ({5})、短い第 1 ホップ {6} ({7})
+nessuna nube vicina	近くに雲なし
+nube a {0:F0} km	雲まで {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  確認済: 等ホップ {0}/{1}、短い第 1 ホップ {2}/{1}。
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. 時間ごとの雲の移動 (1 ホップの中間点の重心)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}、{5:F0}° 方向へ {4:F0} km、{6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	計算は目安です: QSO はパスが開いていたことを示しますが、雲の正確な位置は示しません。
+Azimutale - singolo salto	正距方位 - 1 ホップ
+Azimutale - distanza massima (multi-salto)	正距方位 - 最大距離 (マルチホップ)
+Rettangolare	矩形
+Mappa	地図
+{0:N0} km: minima del singolo salto	{0:N0} km: 1 ホップの最小
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: 最適
+{0:N0} km: massima del singolo salto	{0:N0} km: 1 ホップの最大
+{0:N0} km: massima del doppio salto	{0:N0} km: 2 ホップの最大
+{0:N0} km: massima del triplo salto	{0:N0} km: 3 ホップの最大
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	中心から {0:F0} km、az {1:F0}°
+Raggio {0:N0} km dal centro ({1})	中心から半径 {0:N0} km ({1})
+Distanza massima	最大距離
+{0:N0} km dal centro	中心から {0:N0} km

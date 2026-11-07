@@ -251,3 +251,67 @@ SCELTA	WAHL
 IGRF-14, epoca {0}	IGRF-14, Epoche {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv fehlt: Dipol wird verwendet
 igrf14.csv incompleto: uso il dipolo	igrf14.csv unvollständig: Dipol wird verwendet
+Carica ADIF	ADIF laden
+Scarica ADIF	ADIF entladen
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	QSOs mit anderem PROP_MODE ausschließen (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	QSOs unter 500 km ausschließen
+Skip per settori	Skip nach Sektoren
+Tratte	Strecken
+Giornata	Tag
+km max	km max
+Multi-salto	Mehrfachsprung
+km min - max	km min - max
+Calcoli proposti	Vorgeschlagene Berechnungen
+QSO per giornata	QSOs pro Tag
+Orari della giornata (clic: QSO di quell'ora)	Stunden des Tages (Klick: QSOs dieser Stunde)
+Stazione al centro	Station in der Mitte
+Log ADIF da analizzare (anche di un'altra stazione)	Zu analysierendes ADIF-Log (auch einer anderen Station)
+Leggo {0}...	Lese {0}...
+Nessun log caricato	Kein Log geladen
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Ein ADIF-Log laden (auch einer anderen Station): das Programm ermittelt die Sendeposition (MY_GRIDSQUARE oder den oben eingegebenen Locator) und die Empfangspositionen (GRIDSQUARE), teilt die QSOs nach Tag und Stunde auf und schlägt die Berechnungen für Sporadic-E und Mehrfachsprung vor.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} Datensätze, {2} QSOs analysiert; ausgeschlossen: {3} ohne Locator, {4} auf anderen Bändern (einschließlich 432 MHz: Sporadic-E gilt dort nicht), {5} mit anderem PROP_MODE, {6} unter 500 km.
+Tutta la giornata	Ganzer Tag
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ erster Sprung der Station / ○ kurzer erster Sprung
+■ primo salto del corrispondente	■ erster Sprung der Gegenstation
+arco arancio: skip (QSO più vicino del settore)	oranger Bogen: Skip (nächstes QSO des Sektors)
+settore verde: distanze raggiunte	grüner Sektor: erreichte Entfernungen
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rot: stündliche Verlagerung der Wolken (Schwerpunkt der Mittelpunkte)
+Nessun QSO nella selezione.	Keine QSOs in der Auswahl.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} von {1} ({2}), Es-Höhe {3:F0} km
+Giornata {0}	Tag {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Tag {0}, Stunde {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSOs: {1} Einzelsprung, {2} Doppelsprung, {3} Dreifachsprung, {4} darüber (Tabelle IK3XTV). Bänder: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Gewähltes QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip nach Azimutsektoren (10°): nächstes QSO = Rand der toten Zone, entferntestes = Reichweite
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: Skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSOs
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Geschätzte foEs (Sekantengesetz, foEs ≈ f / sec φ): der kürzeste Einzelsprung jedes Bandes liefert die höchste Schätzung
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} in {2:F0} km, sec(φ) = {3:F2} -> foEs ≈ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Schätzung für die Auswahl: foEs ≈ {0:F1} MHz ({1}). Erwartete MUF mit dieser foEs: {2:F0} MHz bei 1000 km, {3:F0} MHz bei 1500 km, {4:F0} MHz bei 2000 km, {5:F0} MHz bei 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Mit dieser foEs öffnet 144 MHz nicht im Einzelsprung.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Mit dieser foEs öffnet 144 MHz im Einzelsprung ab etwa {0:F0} km (Skip auf 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Keine Einzelsprung-QSOs in der Auswahl.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Geschätzte Es-Wolken (Maidenhead-Felder der Reflexionspunkte)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSOs, foEs ≈ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Mehrfachsprung: erster Sprung der Station verglichen mit den im Einzelsprung gesehenen Wolken innerhalb ±30 min (bis 300 km = bestätigt)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} Sprünge: gleiche Sprünge {4} ({5}), kurzer erster Sprung {6} ({7})
+nessuna nube vicina	keine Wolke in der Nähe
+nube a {0:F0} km	Wolke in {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Bestätigt: gleiche Sprünge {0} von {1}, kurzer erster Sprung {2} von {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Verlagerung der Wolken Stunde für Stunde (Schwerpunkt der Mittelpunkte der Einzelsprünge)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km Richtung {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Die Berechnungen sind Richtwerte: ein QSO zeigt, dass die Strecke offen war, nicht wo genau die Wolke lag.
+Azimutale - singolo salto	Azimutal - Einzelsprung
+Azimutale - distanza massima (multi-salto)	Azimutal - maximale Entfernung (Mehrfachsprung)
+Rettangolare	Rechteckig
+Mappa	Karte
+{0:N0} km: minima del singolo salto	{0:N0} km: Minimum des Einzelsprungs
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimal
+{0:N0} km: massima del singolo salto	{0:N0} km: Maximum des Einzelsprungs
+{0:N0} km: massima del doppio salto	{0:N0} km: Maximum des Doppelsprungs
+{0:N0} km: massima del triplo salto	{0:N0} km: Maximum des Dreifachsprungs
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° von der Mitte
+Raggio {0:N0} km dal centro ({1})	Radius {0:N0} km von der Mitte ({1})
+Distanza massima	Maximale Entfernung
+{0:N0} km dal centro	{0:N0} km von der Mitte

@@ -38,6 +38,17 @@ TAG|SCELTA|Tabla "Nubes Es": en rojo las nubes que darían MUF ≥ 144 MHz, en n
 H2|3.4 La esporádica E no se aplica a 432 MHz
 TAG|FONTE|La MUF de la esporádica E en latitudes medias llega a 150 MHz y más (Whitehead [23]); se necesitan nubes muy densas para desviar rayos rasantes hasta 200 MHz (IK3XTV [22]). Los récords ARRL [24] recogen comunicados en esporádica E solo en 50 y 144 MHz, ninguno en 222 y 432 MHz.
 TAG|SCELTA|Por eso la pestaña SPORADIC-E analiza solo 28, 50, 70 y 144 MHz: los spots en 432 MHz nunca se tratan como esporádica E (algunas fuentes genéricas, incluso producidas por inteligencias artificiales, lo afirman sin documentación).
+H2|3.5 Mapa azimutal
+TAG|SCELTA|El mapa de la pestaña SPORADIC-E es azimutal equidistante, centrado en la propia estación: las distancias desde el centro y los azimuts son reales, y los círculos alrededor del centro son círculos de igual distancia. Un botón elige entre la vista para el salto único (radio fijo de 2500 km, con las zonas de la tabla IK3XTV [3]: 500, 1500-2000 y 2400 km) y la vista con el cursor de la distancia máxima (de 300 a 20000 km, también con la rueda del ratón), que añade los límites del doble (5000 km) y del triple salto (6900 km) para seguir la evolución del multisalto. Se mantiene también el mapa rectangular.
+EQ|ρ = d(centro, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = radio del disco en píxeles / distancia máxima en km
+TAG|SCELTA|Los anillos discontinuos indican los km desde el centro con un paso redondo (50, 100, 200, 250, 500, 1000, 2000, 2500 o 5000 km) elegido según el zoom; el círculo exterior indica la distancia máxima mostrada y el puntero del ratón da distancia y azimut desde el centro.
+H2|3.6 BENCHMARK Es: banco de pruebas sobre un log ADIF
+P|La pestaña BENCHMARK Es carga un log ADIF completo, también de otra estación. La posición de transmisión es el MY_GRIDSQUARE de cada QSO (en el centro del mapa va el más frecuente, modificable a mano); las posiciones de recepción son los GRIDSQUARE. Se usan los QSO en 28, 50, 70 y 144 MHz con locator, excluidos los que tienen otro PROP_MODE y los de menos de 500 km; los QSO se dividen por día y, dentro del día, por hora.
+TAG|SCELTA|Skip por sectores: para cada sector de 10° de azimut desde el centro, el QSO más cercano marca el borde de la zona de silencio (arco naranja) y el más lejano el alcance (arco verde); entre ambos, el sector alcanzado.
+TAG|SCELTA|foEs de la selección: para cada banda el salto único más corto da la estimación más alta, foEs ≥ f / sec φ (2.3); con esta foEs el programa calcula la MUF esperada a 1000, 1500, 2000 y 2400 km y la distancia más allá de la cual se abrirían los 144 MHz.
+TAG|SCELTA|Multisalto: el primer salto de la estación, en las dos hipótesis (saltos iguales, 3.2, y primer salto corto [4]), se compara con los puntos medios de los saltos únicos del mismo día dentro de ±30 minutos: dentro de 300 km la hipótesis queda confirmada por una nube realmente observada. El programa cuenta las confirmaciones de cada hipótesis.
+EQ|velocidad de la nube = d(baricentro hora h, baricentro hora h+1) / 1 h
+TAG|RILIEVO|El baricentro de los puntos medios de los saltos únicos, hora a hora, muestra el desplazamiento de las nubes (línea roja). Los cálculos son orientativos: un QSO dice que el trayecto estaba abierto, no dónde estaba exactamente la nube.
 H1|4. F.A.I. y aurora: scatter alineado con el campo magnético
 H2|4.1 El campo magnético
 TAG|FONTE|El campo se calcula con el modelo IGRF-14 [16] (armónicos esféricos hasta el grado 13, coeficientes 2025-2030 interpolados a la fecha). SE-PROP de K9SE [9] usaba del mismo modo un modelo de armónicos esféricos (WMM).
@@ -72,6 +83,7 @@ H2|5.1 Sesiones telnet
 TAG|SCELTA|Tres sesiones: cluster a elección, Reverse Beacon Network (7000 CW/RTTY, 7001 FT8) [18], cluster con los spots de PSKReporter (p. ej. DM4X dm4x.ddns.net:8500 [27], HamAlert [19]). Login automático con el indicativo, comandos iniciales separados por punto y coma, reconexión tras 30 s.
 H2|5.2 Lectura de los spots
 TAG|SCELTA|Línea "DX de SPOTTER: FREQ DXCALL comentario HHMMZ [LOC]" leída con una expresión regular (no por columnas fijas). Del comentario se leen locator y modo en la forma "JN70CN<ES>JO62QM" (primer locator = spotter, segundo = DX), el modo de propagación (ES, FAI, AU, MS, TR, EME, F2, TEP), la relación S/N y el modo de emisión. Los locators que faltan se buscan en CALL3 [21]; los de 6 caracteres leídos en los comentarios se añaden a data/call3_nuovi.txt.
+TAG|SCELTA|Regla del autor (IC8TEM): si en el texto del spot aparece <MS>, <AU> o <TR> (también AUE, AURORA, TROPO), el spot no se refiere a la esporádica E y la pestaña SPORADIC-E lo descarta; sigue siendo útil para el meteor scatter y para la aurora. En el BENCHMARK Es el mismo papel lo cumple el campo PROP_MODE del log.
 TAG|SCELTA|Archivo: un fichero CSV por día en data/spot; en memoria los últimos spots (50000 como máximo). Con RBN y PSKReporter normalmente solo se guardan los spots de 28 MHz en adelante.
 H1|6. Log ADIF
 TAG|FONTE|Adaptación de LoTW Grid Map v2 [25]: el informe LoTW (descargado con nombre de usuario y contraseña, que nunca se guarda) y los archivos ADIF del log se combinan por indicativo, banda, fecha y hora; las confirmaciones se suman.
@@ -80,9 +92,11 @@ H1|7. Esquemas de color
 TAG|FONTE|Los esquemas de color son los de YA-MS 1.4.0, que retoman YAEC [26]: Claro, Noche, Negro, ocho pasteles y Estela meteórica. El esquema se elige arriba a la derecha y la ventana se reconstruye en el acto; en la vista Isorreflexión los esquemas oscuros usan franjas de color y los claros líneas gruesas (4.4).
 H1|8. Meteor scatter (YA-MS 1.4.0) e idiomas
 TAG|FONTE|La pestaña METEOR SCATTER contiene YA-MS 1.4.0 completo [5], con su documento "Eficiencia - explicación" y sus fuentes. El script tools/sync_yams.py copia cada nueva versión de YA-MS y la convierte en panel sin modificar sus cálculos.
+TAG|FONTE|YA-MS 1.4.0 añade las pestañas Lluvias en directo (ZHR medidos por el Global Meteor Network y mapas de los radiantes del radar CMOR) y Mapa de las fuentes (dónde están Collm, Sodankylä, GRAVES y CMOR respecto a la estación); sus fuentes se citan dentro de YA-MS.
 TAG|SCELTA|Idiomas: 28, todos los de YAEC más el danés y el tagalo (Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어), para la interfaz (data/lingue/ela-<código>.txt), para el Documento técnico y para las Fuentes. En la vista F.A.I./aurora la estela de los scatter points se llama "Scatter trail" en todas las traducciones. La barra de estado indica el modelo magnético en uso (IGRF-14 de la IAGA [16]).
 H1|9. Límites
 LI|Estaciones en el centro de la cuadrícula del locator: con locators de 4 caracteres el error llega a ~80 km.
 LI|La foEs obtenida de los spots es un umbral mínimo y la ley de la secante sobrestima la foEs necesaria en VHF (ver 2.3).
 LI|El scatter point "más probable" es un criterio del programa: la Scatter trail completa es el resultado físico.
 LI|El óvalo OVATION es un modelo de probabilidad de aurora óptica, usado como indicador para la aurora radio.
+LI|El BENCHMARK Es parte de los locators del log: con locators de 4 caracteres y QSO de pocos cientos de km, el skip y la foEs estimada son aproximados.

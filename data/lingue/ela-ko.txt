@@ -252,3 +252,67 @@ SCELTA	선택
 IGRF-14, epoca {0}	IGRF-14, 에포크 {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv 없음: 쌍극자 사용
 igrf14.csv incompleto: uso il dipolo	igrf14.csv 불완전: 쌍극자 사용
+Carica ADIF	ADIF 불러오기
+Scarica ADIF	ADIF 제거
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	다른 PROP_MODE의 QSO 제외 (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	500 km 미만 QSO 제외
+Skip per settori	섹터별 스킵
+Tratte	경로
+Giornata	날짜
+km max	최대 km
+Multi-salto	멀티홉
+km min - max	최소 - 최대 km
+Calcoli proposti	제안된 계산
+QSO per giornata	날짜별 QSO
+Orari della giornata (clic: QSO di quell'ora)	하루 중 시간대 (클릭: 해당 시간의 QSO)
+Stazione al centro	중심 국
+Log ADIF da analizzare (anche di un'altra stazione)	분석할 ADIF 로그 (다른 국의 로그도 가능)
+Leggo {0}...	{0} 읽는 중...
+Nessun log caricato	불러온 로그 없음
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	ADIF 로그를 불러오세요 (다른 국의 로그도 가능): 프로그램이 송신 위치(MY_GRIDSQUARE, 또는 위에 입력한 로케이터)와 수신 위치(GRIDSQUARE)를 찾아 QSO를 날짜별, 시간별로 나누고 스포라딕 E와 멀티홉 계산을 제안합니다.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: 레코드 {1}개, 분석한 QSO {2}개; 제외: 로케이터 없음 {3}개, 다른 밴드 {4}개 (432 MHz 포함: 스포라딕 E 해당 없음), 다른 PROP_MODE {5}개, 500 km 미만 {6}개.
+Tutta la giornata	하루 전체
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ 국의 첫 홉 / ○ 짧은 첫 홉
+■ primo salto del corrispondente	■ 상대국의 첫 홉
+arco arancio: skip (QSO più vicino del settore)	주황 호: 스킵 (섹터에서 가장 가까운 QSO)
+settore verde: distanze raggiunte	초록 섹터: 도달한 거리
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	빨강: 구름의 시간별 이동 (중간점의 무게중심)
+Nessun QSO nella selezione.	선택 범위에 QSO가 없습니다.
+{0} da {1} ({2}), quota Es {3:F0} km	{0}, {1}({2})에서, Es 고도 {3:F0} km
+Giornata {0}	날짜 {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	날짜 {0}, {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	QSO {0}개: 단일 홉 {1}, 2홉 {2}, 3홉 {3}, 그 이상 {4} (IK3XTV 표). 밴드: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	선택한 QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. 방위 섹터(10°)별 스킵: 가장 가까운 QSO = 스킵 존의 경계, 가장 먼 QSO = 도달 거리
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  방위 {0:000}-{1:000}°: 스킵 {2,5:F0} km ({3}, {4} MHz)   최대 {5,5:F0} km ({6})   QSO {7}개
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. 추정 foEs (시컨트 법칙, foEs ≥ f / sec φ): 각 밴드에서 가장 짧은 단일 홉이 가장 높은 추정값을 줍니다
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1}, {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  선택 범위의 추정값: foEs ≥ {0:F1} MHz ({1}). 이 foEs에서 예상 MUF: 1000 km에서 {2:F0} MHz, 1500 km에서 {3:F0} MHz, 2000 km에서 {4:F0} MHz, 2400 km에서 {5:F0} MHz.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  이 foEs에서는 144 MHz가 단일 홉으로 열리지 않습니다.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  이 foEs에서는 144 MHz가 약 {0:F0} km 이상에서 단일 홉으로 열립니다 (2 m 스킵).
+  Nessun QSO in singolo salto nella selezione.	  선택 범위에 단일 홉 QSO가 없습니다.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. 추정 Es 구름 (반사점의 Maidenhead 그리드)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: QSO {1}개, foEs ≥ {2:F1} MHz, 방위 {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. 멀티홉: 국의 첫 홉을 ±30 min 이내에 단일 홉으로 관측된 구름과 비교 (300 km 이내 = 확인)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3}홉: 균등 홉 {4} ({5}), 짧은 첫 홉 {6} ({7})
+nessuna nube vicina	가까운 구름 없음
+nube a {0:F0} km	{0:F0} km 거리의 구름
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  확인됨: 균등 홉 {0}/{1}, 짧은 첫 홉 {2}/{1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. 시간별 구름 이동 (단일 홉 중간점의 무게중심)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {5:F0}° 방향으로 {4:F0} km, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	계산은 참고용입니다: QSO는 경로가 열려 있었다는 것을 알려 줄 뿐, 구름이 정확히 어디에 있었는지는 알려 주지 않습니다.
+Azimutale - singolo salto	방위 등거리 - 단일 홉
+Azimutale - distanza massima (multi-salto)	방위 등거리 - 최대 거리 (멀티홉)
+Rettangolare	직사각형
+Mappa	지도
+{0:N0} km: minima del singolo salto	{0:N0} km: 단일 홉 최소
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: 최적
+{0:N0} km: massima del singolo salto	{0:N0} km: 단일 홉 최대
+{0:N0} km: massima del doppio salto	{0:N0} km: 2홉 최대
+{0:N0} km: massima del triplo salto	{0:N0} km: 3홉 최대
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	중심에서 {0:F0} km, 방위 {1:F0}°
+Raggio {0:N0} km dal centro ({1})	중심에서 반경 {0:N0} km ({1})
+Distanza massima	최대 거리
+{0:N0} km dal centro	중심에서 {0:N0} km

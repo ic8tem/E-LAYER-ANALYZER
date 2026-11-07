@@ -251,3 +251,67 @@ SCELTA	KEUSE
 IGRF-14, epoca {0}	IGRF-14, epog {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv ontbreek: gebruik die dipool
 igrf14.csv incompleto: uso il dipolo	igrf14.csv onvolledig: gebruik die dipool
+Carica ADIF	Laai ADIF
+Scarica ADIF	Verwyder ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Sluit QSO's met 'n ander PROP_MODE uit (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Sluit QSO's onder 500 km uit
+Skip per settori	Skip per sektor
+Tratte	Paaie
+Giornata	Dag
+km max	maks. km
+Multi-salto	Multi-sprong
+km min - max	min. - maks. km
+Calcoli proposti	Voorgestelde berekeninge
+QSO per giornata	QSO's per dag
+Orari della giornata (clic: QSO di quell'ora)	Ure van die dag (klik: QSO's van daardie uur)
+Stazione al centro	Stasie in die middel
+Log ADIF da analizzare (anche di un'altra stazione)	ADIF-log om te ontleed (ook van 'n ander stasie)
+Leggo {0}...	Lees {0}...
+Nessun log caricato	Geen log gelaai nie
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Laai 'n ADIF-log (ook van 'n ander stasie): die program vind die sendposisie (MY_GRIDSQUARE, of die lokator hierbo ingetik) en die ontvangposisies (GRIDSQUARE), verdeel die QSO's per dag en per uur en stel die berekeninge vir sporadiese E en multi-sprong voor.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} rekords, {2} QSO's ontleed; uitgesluit: {3} sonder lokator, {4} op ander bande (432 MHz ingesluit: sporadiese E is nie van toepassing nie), {5} met 'n ander PROP_MODE, {6} onder 500 km.
+Tutta la giornata	Die hele dag
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ stasie se eerste sprong / ○ kort eerste sprong
+■ primo salto del corrispondente	■ DX-stasie se eerste sprong
+arco arancio: skip (QSO più vicino del settore)	oranje boog: skip (naaste QSO van die sektor)
+settore verde: distanze raggiunte	groen sektor: afstande bereik
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rooi: uurlikse verskuiwing van die wolke (swaartepunt van die middelpunte)
+Nessun QSO nella selezione.	Geen QSO's in die keuse nie.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} vanaf {1} ({2}), Es-hoogte {3:F0} km
+Giornata {0}	Dag {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Dag {0}, ure {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO's: {1} enkele sprong, {2} dubbel, {3} drievoudig, {4} meer (IK3XTV-tabel). Bande: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Gekose QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip per azimutsektor (10°): naaste QSO = rand van die stiltesone, verste = bereik
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   maks. {5,5:F0} km ({6})   {7} QSO's
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Geskatte foEs (sekanswet, foEs ≥ f / sec φ): die kortste enkele sprong van elke band gee die hoogste skatting
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} op {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Skatting vir die keuse: foEs ≥ {0:F1} MHz ({1}). Verwagte MUF met hierdie foEs: {2:F0} MHz op 1000 km, {3:F0} MHz op 1500 km, {4:F0} MHz op 2000 km, {5:F0} MHz op 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Met hierdie foEs gaan 144 MHz nie in 'n enkele sprong oop nie.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Met hierdie foEs gaan 144 MHz in 'n enkele sprong oop verder as ongeveer {0:F0} km (skip op 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Geen QSO's met 'n enkele sprong in die keuse nie.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Geskatte Es-wolke (Maidenhead-vierkante van die refleksiepunte)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO's, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multi-sprong: die stasie se eerste sprong vergelyk met die wolke wat binne ±30 min in 'n enkele sprong gesien is (binne 300 km = bevestig)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} spronge: gelyke spronge {4} ({5}), kort eerste sprong {6} ({7})
+nessuna nube vicina	geen wolk naby nie
+nube a {0:F0} km	wolk op {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Bevestig: gelyke spronge {0} uit {1}, kort eerste sprong {2} uit {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Verskuiwing van die wolke uur vir uur (swaartepunt van die middelpunte van die enkele spronge)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km in rigting {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Die berekeninge is aanduidend: 'n QSO sê dat die pad oop was, nie presies waar die wolk was nie.
+Azimutale - singolo salto	Azimutaal - enkele sprong
+Azimutale - distanza massima (multi-salto)	Azimutaal - maksimum afstand (multi-sprong)
+Rettangolare	Reghoekig
+Mappa	Kaart
+{0:N0} km: minima del singolo salto	{0:N0} km: minimum van die enkele sprong
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimaal
+{0:N0} km: massima del singolo salto	{0:N0} km: maksimum van die enkele sprong
+{0:N0} km: massima del doppio salto	{0:N0} km: maksimum van die dubbele sprong
+{0:N0} km: massima del triplo salto	{0:N0} km: maksimum van die drievoudige sprong
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° vanaf die middel
+Raggio {0:N0} km dal centro ({1})	Radius {0:N0} km vanaf die middel ({1})
+Distanza massima	Maksimum afstand
+{0:N0} km dal centro	{0:N0} km vanaf die middel

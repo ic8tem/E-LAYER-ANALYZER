@@ -252,3 +252,67 @@ SCELTA	选择
 IGRF-14, epoca {0}	IGRF-14，历元 {0}
 igrf14.csv mancante: uso il dipolo	缺少 igrf14.csv：使用偶极子模型
 igrf14.csv incompleto: uso il dipolo	igrf14.csv 不完整：使用偶极子模型
+Carica ADIF	载入 ADIF
+Scarica ADIF	移除 ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	排除其他 PROP_MODE 的 QSO（TR, MS, FAI, AUR, EME...）
+Escludi i QSO sotto i 500 km	排除 500 km 以内的 QSO
+Skip per settori	按扇区统计静区（skip）
+Tratte	路径
+Giornata	日期
+km max	最大 km
+Multi-salto	多跳
+km min - max	km 最小 - 最大
+Calcoli proposti	建议的计算
+QSO per giornata	每日 QSO
+Orari della giornata (clic: QSO di quell'ora)	当日各小时（点击：查看该小时的 QSO）
+Stazione al centro	中心台站
+Log ADIF da analizzare (anche di un'altra stazione)	待分析的 ADIF 日志（也可以是其他台站的）
+Leggo {0}...	正在读取 {0}...
+Nessun log caricato	未载入日志
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	载入 ADIF 日志（也可以是其他台站的）：程序找出发射位置（MY_GRIDSQUARE，或上方填写的网格坐标）和接收位置（GRIDSQUARE），按日期和小时划分 QSO，并给出偶发 E 层和多跳的计算。
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}：{1} 条记录，分析了 {2} 个 QSO；已排除：{3} 个无网格坐标，{4} 个其他频段（包括 432 MHz：偶发 E 层不适用），{5} 个为其他 PROP_MODE，{6} 个在 500 km 以内。
+Tutta la giornata	全天
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ 台站首跳 / ○ 短首跳
+■ primo salto del corrispondente	■ 对方电台首跳
+arco arancio: skip (QSO più vicino del settore)	橙色弧：静区（skip，扇区内最近的 QSO）
+settore verde: distanze raggiunte	绿色扇区：已到达的距离
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	红色：云的逐时移动（中点的重心）
+Nessun QSO nella selezione.	所选范围内没有 QSO。
+{0} da {1} ({2}), quota Es {3:F0} km	{0}，来自 {1}（{2}），Es 高度 {3:F0} km
+Giornata {0}	日期 {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	日期 {0}，{1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} 个 QSO：单跳 {1}，双跳 {2}，三跳 {3}，更多跳 {4}（IK3XTV 表）。频段：{5}。
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	所选 QSO：{0} {1} - {2}（{3}）{4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. 按方位扇区（10°）统计静区（skip）：最近的 QSO = 静区边缘，最远的 = 覆盖范围
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  方位 {0:000}-{1:000}°：静区 {2,5:F0} km（{3}，{4} MHz）   最大 {5,5:F0} km（{6}）   {7} 个 QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. 估算的 foEs（正割定律，foEs ≥ f / sec φ）：每个频段最短的单跳给出最高估值
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}：{1}，{2:F0} km，sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  所选范围的估值：foEs ≥ {0:F1} MHz（{1}）。此 foEs 下的预期 MUF：1000 km 处 {2:F0} MHz，1500 km 处 {3:F0} MHz，2000 km 处 {4:F0} MHz，2400 km 处 {5:F0} MHz。
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  在此 foEs 下，144 MHz 不会以单跳开通。
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  在此 foEs 下，144 MHz 在约 {0:F0} km 以外以单跳开通（2 m 静区）。
+  Nessun QSO in singolo salto nella selezione.	  所选范围内没有单跳 QSO。
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. 估算的 Es 云（反射点所在的 Maidenhead 方格）
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}：{1} 个 QSO，foEs ≥ {2:F1} MHz，方位 {3:F0}°，{4:F0} km（{5}）
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. 多跳：将台站首跳与 ±30 min 内单跳所见的云比较（300 km 以内 = 确认）
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km，{3} 跳：等长跳 {4}（{5}），短首跳 {6}（{7}）
+nessuna nube vicina	附近无云
+nube a {0:F0} km	云在 {0:F0} km 处
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  已确认：等长跳 {0}/{1}，短首跳 {2}/{1}。
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. 云的逐时移动（单跳中点的重心）
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z：{2} -> {3}，向 {5:F0}° 移动 {4:F0} km，{6:F0} km/h（{7:F0} m/s）
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	计算仅供参考：QSO 说明路径曾经开通，但不说明云的确切位置。
+Azimutale - singolo salto	方位等距 - 单跳
+Azimutale - distanza massima (multi-salto)	方位等距 - 最大距离（多跳）
+Rettangolare	矩形
+Mappa	地图
+{0:N0} km: minima del singolo salto	{0:N0} km：单跳最小距离
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km：最佳
+{0:N0} km: massima del singolo salto	{0:N0} km：单跳最大距离
+{0:N0} km: massima del doppio salto	{0:N0} km：双跳最大距离
+{0:N0} km: massima del triplo salto	{0:N0} km：三跳最大距离
+  {0}: {1}   {2}: {3}	  {0}：{1}   {2}：{3}
+{0:F0} km, az {1:F0}° dal centro	距中心 {0:F0} km，方位 {1:F0}°
+Raggio {0:N0} km dal centro ({1})	距中心半径 {0:N0} km（{1}）
+Distanza massima	最大距离
+{0:N0} km dal centro	距中心 {0:N0} km

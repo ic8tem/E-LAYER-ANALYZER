@@ -251,3 +251,67 @@ SCELTA	VALG
 IGRF-14, epoca {0}	IGRF-14, epoke {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv mangler: bruker dipolen
 igrf14.csv incompleto: uso il dipolo	igrf14.csv ufullstendig: bruker dipolen
+Carica ADIF	Last inn ADIF
+Scarica ADIF	Fjern ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Utelat QSO-er med en annen PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Utelat QSO-er under 500 km
+Skip per settori	Skip per sektor
+Tratte	Strekninger
+Giornata	Dag
+km max	km maks
+Multi-salto	Multihopp
+km min - max	km min - maks
+Calcoli proposti	Foreslåtte beregninger
+QSO per giornata	QSO-er per dag
+Orari della giornata (clic: QSO di quell'ora)	Timer på dagen (klikk: QSO-er i den timen)
+Stazione al centro	Stasjon i sentrum
+Log ADIF da analizzare (anche di un'altra stazione)	ADIF-logg som skal analyseres (også fra en annen stasjon)
+Leggo {0}...	Leser {0}...
+Nessun log caricato	Ingen logg lastet inn
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Last inn en ADIF-logg (også fra en annen stasjon): programmet finner sendeposisjonen (MY_GRIDSQUARE, eller lokatoren skrevet ovenfor) og mottaksposisjonene (GRIDSQUARE), deler QSO-ene etter dag og time og foreslår beregninger for sporadisk E og multihopp.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} poster, {2} QSO-er analysert; utelatt: {3} uten lokator, {4} på andre bånd (inkludert 432 MHz: sporadisk E gjelder ikke), {5} med annen PROP_MODE, {6} under 500 km.
+Tutta la giornata	Hele dagen
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ stasjonens første hopp / ○ kort første hopp
+■ primo salto del corrispondente	■ motstasjonens første hopp
+arco arancio: skip (QSO più vicino del settore)	oransje bue: skip (nærmeste QSO i sektoren)
+settore verde: distanze raggiunte	grønn sektor: oppnådde avstander
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rødt: skyenes forflytning time for time (tyngdepunktet for midtpunktene)
+Nessun QSO nella selezione.	Ingen QSO-er i utvalget.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} fra {1} ({2}), Es-høyde {3:F0} km
+Giornata {0}	Dag {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Dag {0}, kl. {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO-er: {1} enkelthopp, {2} dobbelthopp, {3} trippelhopp, {4} lengre (IK3XTV-tabell). Bånd: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Valgt QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip per asimutsektor (10°): nærmeste QSO = kanten av den døde sonen, fjerneste = rekkevidde
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   maks {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Estimert foEs (sekantloven, foEs ≥ f / sec φ): det korteste enkelthoppet på hvert bånd gir det høyeste estimatet
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} på {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Estimat for utvalget: foEs ≥ {0:F1} MHz ({1}). Forventet MUF med denne foEs: {2:F0} MHz på 1000 km, {3:F0} MHz på 1500 km, {4:F0} MHz på 2000 km, {5:F0} MHz på 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Med denne foEs åpner ikke 144 MHz for enkelthopp.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Med denne foEs åpner 144 MHz for enkelthopp utover ca. {0:F0} km (skip på 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Ingen QSO-er med enkelthopp i utvalget.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Estimerte Es-skyer (Maidenhead-ruter for refleksjonspunktene)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multihopp: stasjonens første hopp sammenlignet med skyene sett ved enkelthopp innenfor ±30 min (innenfor 300 km = bekreftet)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} hopp: like hopp {4} ({5}), kort første hopp {6} ({7})
+nessuna nube vicina	ingen sky i nærheten
+nube a {0:F0} km	sky på {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Bekreftet: like hopp {0} av {1}, kort første hopp {2} av {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Skyenes forflytning time for time (tyngdepunktet for midtpunktene ved enkelthopp)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km mot {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Beregningene er veiledende: en QSO viser at strekningen var åpen, ikke nøyaktig hvor skyen var.
+Azimutale - singolo salto	Asimutal - enkelthopp
+Azimutale - distanza massima (multi-salto)	Asimutal - maksimal avstand (multihopp)
+Rettangolare	Rektangulær
+Mappa	Kart
+{0:N0} km: minima del singolo salto	{0:N0} km: minimum for enkelthopp
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: optimal
+{0:N0} km: massima del singolo salto	{0:N0} km: maksimum for enkelthopp
+{0:N0} km: massima del doppio salto	{0:N0} km: maksimum for dobbelthopp
+{0:N0} km: massima del triplo salto	{0:N0} km: maksimum for trippelhopp
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° fra sentrum
+Raggio {0:N0} km dal centro ({1})	Radius {0:N0} km fra sentrum ({1})
+Distanza massima	Maksimal avstand
+{0:N0} km dal centro	{0:N0} km fra sentrum

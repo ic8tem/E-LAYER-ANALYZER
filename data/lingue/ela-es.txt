@@ -252,3 +252,67 @@ SCELTA	ELECCIÓN
 IGRF-14, epoca {0}	IGRF-14, época {0}
 igrf14.csv mancante: uso il dipolo	falta igrf14.csv: uso el dipolo
 igrf14.csv incompleto: uso il dipolo	igrf14.csv incompleto: uso el dipolo
+Carica ADIF	Cargar ADIF
+Scarica ADIF	Quitar ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Excluir los QSO con otro PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Excluir los QSO por debajo de 500 km
+Skip per settori	Skip por sectores
+Tratte	Trayectos
+Giornata	Día
+km max	km máx
+Multi-salto	Multisalto
+km min - max	km mín - máx
+Calcoli proposti	Cálculos propuestos
+QSO per giornata	QSO por día
+Orari della giornata (clic: QSO di quell'ora)	Horas del día (clic: QSO de esa hora)
+Stazione al centro	Estación en el centro
+Log ADIF da analizzare (anche di un'altra stazione)	Log ADIF a analizar (también de otra estación)
+Leggo {0}...	Leyendo {0}...
+Nessun log caricato	Ningún log cargado
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Cargue un log ADIF (también de otra estación): el programa encuentra la posición de transmisión (MY_GRIDSQUARE, o el locator escrito arriba) y las de recepción (GRIDSQUARE), divide los QSO por día y por hora y propone los cálculos de la esporádica E y del multisalto.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} registros, {2} QSO analizados; excluidos: {3} sin locator, {4} de otras bandas (incluidos 432 MHz: la esporádica E no se aplica), {5} con otro PROP_MODE, {6} por debajo de 500 km.
+Tutta la giornata	Todo el día
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ primer salto de la estación / ○ primer salto corto
+■ primo salto del corrispondente	■ primer salto del corresponsal
+arco arancio: skip (QSO più vicino del settore)	arco naranja: skip (QSO más cercano del sector)
+settore verde: distanze raggiunte	sector verde: distancias alcanzadas
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rojo: desplazamiento horario de las nubes (baricentro de los puntos medios)
+Nessun QSO nella selezione.	Ningún QSO en la selección.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} desde {1} ({2}), altura Es {3:F0} km
+Giornata {0}	Día {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Día {0}, horas {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} salto único, {2} doble, {3} triple, {4} más (tabla IK3XTV). Bandas: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	QSO elegido: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip por sectores de azimut (10°): QSO más cercano = borde de la zona de silencio, más lejano = alcance
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   máx {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. foEs estimada (ley de la secante, foEs ≥ f / sec φ): el salto único más corto de cada banda da la estimación más alta
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Estimación para la selección: foEs ≥ {0:F1} MHz ({1}). MUF esperada con esta foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Con esta foEs los 144 MHz no se abren en salto único.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Con esta foEs los 144 MHz se abren en salto único más allá de unos {0:F0} km (skip en 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Ningún QSO en salto único en la selección.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Nubes Es estimadas (cuadrículas Maidenhead de los puntos de reflexión)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multisalto: primer salto de la estación comparado con las nubes vistas en salto único dentro de ±30 min (dentro de 300 km = confirmado)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} saltos: saltos iguales {4} ({5}), primer salto corto {6} ({7})
+nessuna nube vicina	ninguna nube cercana
+nube a {0:F0} km	nube a {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Confirmados: saltos iguales {0} de {1}, primer salto corto {2} de {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Desplazamiento de las nubes hora a hora (baricentro de los puntos medios de los saltos únicos)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km hacia {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Los cálculos son orientativos: un QSO dice que el trayecto estaba abierto, no dónde estaba exactamente la nube.
+Azimutale - singolo salto	Azimutal - salto único
+Azimutale - distanza massima (multi-salto)	Azimutal - distancia máxima (multisalto)
+Rettangolare	Rectangular
+Mappa	Mapa
+{0:N0} km: minima del singolo salto	{0:N0} km: mínima del salto único
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: óptima
+{0:N0} km: massima del singolo salto	{0:N0} km: máxima del salto único
+{0:N0} km: massima del doppio salto	{0:N0} km: máxima del doble salto
+{0:N0} km: massima del triplo salto	{0:N0} km: máxima del triple salto
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° desde el centro
+Raggio {0:N0} km dal centro ({1})	Radio {0:N0} km desde el centro ({1})
+Distanza massima	Distancia máxima
+{0:N0} km dal centro	{0:N0} km desde el centro

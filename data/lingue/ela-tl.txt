@@ -251,3 +251,67 @@ SCELTA	PAGPILI
 IGRF-14, epoca {0}	IGRF-14, epoch {0}
 igrf14.csv mancante: uso il dipolo	Walang igrf14.csv: ginagamit ang dipole
 igrf14.csv incompleto: uso il dipolo	Hindi kumpleto ang igrf14.csv: ginagamit ang dipole
+Carica ADIF	Ikarga ang ADIF
+Scarica ADIF	Alisin ang ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Huwag isama ang mga QSO na may ibang PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Huwag isama ang mga QSO na mas maikli sa 500 km
+Skip per settori	Skip ayon sa sektor
+Tratte	Mga landas
+Giornata	Araw
+km max	km max
+Multi-salto	Multi-hop
+km min - max	km min - max
+Calcoli proposti	Mga mungkahing kalkulasyon
+QSO per giornata	QSO bawat araw
+Orari della giornata (clic: QSO di quell'ora)	Mga oras ng araw (click: mga QSO sa oras na iyon)
+Stazione al centro	Istasyon sa gitna
+Log ADIF da analizzare (anche di un'altra stazione)	ADIF log na susuriin (maaari ring sa ibang istasyon)
+Leggo {0}...	Binabasa ang {0}...
+Nessun log caricato	Walang naikargang log
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Magkarga ng ADIF log (maaari ring sa ibang istasyon): hinahanap ng programa ang posisyon ng pagpapadala (MY_GRIDSQUARE, o ang locator na nakasulat sa itaas) at ang mga posisyon ng pagtanggap (GRIDSQUARE), hinahati ang mga QSO ayon sa araw at oras at nagmumungkahi ng mga kalkulasyon ng sporadic-E at multi-hop.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} record, {2} QSO ang nasuri; hindi isinama: {3} walang locator, {4} sa ibang banda (kasama ang 432 MHz: hindi umiiral doon ang sporadic-E), {5} may ibang PROP_MODE, {6} mas maikli sa 500 km.
+Tutta la giornata	Buong araw
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ unang hop ng istasyon / ○ maikling unang hop
+■ primo salto del corrispondente	■ unang hop ng DX station
+arco arancio: skip (QSO più vicino del settore)	kahel na arko: skip (pinakamalapit na QSO sa sektor)
+settore verde: distanze raggiunte	berdeng sektor: mga naabot na distansiya
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	pula: paggalaw ng mga ulap bawat oras (sentroid ng mga gitnang punto)
+Nessun QSO nella selezione.	Walang QSO sa pinili.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} mula sa {1} ({2}), taas ng Es {3:F0} km
+Giornata {0}	Araw {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Araw {0}, oras {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} iisang hop, {2} doble, {3} triple, {4} lampas pa (talahanayan ni IK3XTV). Mga banda: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Napiling QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip ayon sa sektor ng azimuth (10°): pinakamalapit na QSO = gilid ng skip zone, pinakamalayo = abot
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Tinatayang foEs (batas ng secant, foEs ≥ f / sec φ): ang pinakamaikling iisang hop sa bawat banda ang nagbibigay ng pinakamataas na tantiya
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} sa {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Tantiya para sa pinili: foEs ≥ {0:F1} MHz ({1}). Inaasahang MUF sa foEs na ito: {2:F0} MHz sa 1000 km, {3:F0} MHz sa 1500 km, {4:F0} MHz sa 2000 km, {5:F0} MHz sa 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Sa foEs na ito, hindi nagbubukas ang 144 MHz sa iisang hop.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Sa foEs na ito, nagbubukas ang 144 MHz sa iisang hop lampas sa mga {0:F0} km (skip sa 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Walang QSO na iisang hop sa pinili.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Mga tinatayang ulap ng Es (Maidenhead grid square ng mga punto ng repleksiyon)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Multi-hop: inihahambing ang unang hop ng istasyon sa mga ulap na nakita sa iisang hop sa loob ng ±30 min (sa loob ng 300 km = kumpirmado)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} hop: pantay na hop {4} ({5}), maikling unang hop {6} ({7})
+nessuna nube vicina	walang malapit na ulap
+nube a {0:F0} km	ulap sa {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Kumpirmado: pantay na hop {0} sa {1}, maikling unang hop {2} sa {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Paggalaw ng mga ulap bawat oras (sentroid ng mga gitnang punto ng iisang hop)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km patungong {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Pahiwatig lamang ang mga kalkulasyon: sinasabi ng isang QSO na bukas ang landas, hindi kung saan eksaktong naroon ang ulap.
+Azimutale - singolo salto	Azimuthal - iisang hop
+Azimutale - distanza massima (multi-salto)	Azimuthal - pinakamalayong distansiya (multi-hop)
+Rettangolare	Parihaba
+Mappa	Mapa
+{0:N0} km: minima del singolo salto	{0:N0} km: pinakamababa ng iisang hop
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: pinakamainam
+{0:N0} km: massima del singolo salto	{0:N0} km: pinakamataas ng iisang hop
+{0:N0} km: massima del doppio salto	{0:N0} km: pinakamataas ng dobleng hop
+{0:N0} km: massima del triplo salto	{0:N0} km: pinakamataas ng triple hop
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° mula sa gitna
+Raggio {0:N0} km dal centro ({1})	Radius na {0:N0} km mula sa gitna ({1})
+Distanza massima	Pinakamalayong distansiya
+{0:N0} km dal centro	{0:N0} km mula sa gitna

@@ -252,3 +252,67 @@ SCELTA	VAL
 IGRF-14, epoca {0}	IGRF-14, tímabil {0}
 igrf14.csv mancante: uso il dipolo	igrf14.csv vantar: nota tvípól
 igrf14.csv incompleto: uso il dipolo	igrf14.csv ófullgerð: nota tvípól
+Carica ADIF	Hlaða ADIF
+Scarica ADIF	Fjarlægja ADIF
+Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)	Sleppa QSO með annan PROP_MODE (TR, MS, FAI, AUR, EME...)
+Escludi i QSO sotto i 500 km	Sleppa QSO undir 500 km
+Skip per settori	Skip eftir geirum
+Tratte	Leiðir
+Giornata	Dagur
+km max	km hám.
+Multi-salto	Fjölstökk
+km min - max	km lágm. - hám.
+Calcoli proposti	Tillögur að útreikningum
+QSO per giornata	QSO eftir dögum
+Orari della giornata (clic: QSO di quell'ora)	Tímar dagsins (smelltu: QSO þeirrar klukkustundar)
+Stazione al centro	Stöð í miðju
+Log ADIF da analizzare (anche di un'altra stazione)	ADIF-dagbók til greiningar (einnig frá annarri stöð)
+Leggo {0}...	Les {0}...
+Nessun log caricato	Engin dagbók hlaðin
+Carica un log ADIF (anche di un'altra stazione): il programma trova la posizione di trasmissione (MY_GRIDSQUARE, oppure il locator scritto qui sopra) e quelle di ricezione (GRIDSQUARE), divide i QSO per giornata e per ora e propone i calcoli dello sporadico E e del multi-salto.	Hladdu inn ADIF-dagbók (einnig frá annarri stöð): forritið finnur sendistaðsetninguna (MY_GRIDSQUARE, eða locatorinn sem skrifaður er hér fyrir ofan) og móttökustaðsetningarnar (GRIDSQUARE), skiptir QSO eftir dögum og klukkustundum og leggur til útreikninga fyrir sporadic-E og fjölstökk.
+{0}: {1} record, {2} QSO analizzati; esclusi: {3} senza locator, {4} di altre bande (432 MHz compreso: lo sporadico E non si applica), {5} con altro PROP_MODE, {6} sotto i 500 km.	{0}: {1} færslur, {2} QSO greind; sleppt: {3} án locators, {4} á öðrum tíðnisviðum (432 MHz meðtalið: sporadic-E á ekki við), {5} með annan PROP_MODE, {6} undir 500 km.
+Tutta la giornata	Allur dagurinn
+BENCHMARK Es	BENCHMARK Es
+■ primo salto della stazione / ○ primo salto corto	■ fyrsta stökk stöðvarinnar / ○ stutt fyrsta stökk
+■ primo salto del corrispondente	■ fyrsta stökk mótstöðvarinnar
+arco arancio: skip (QSO più vicino del settore)	appelsínugulur bogi: skip (næsta QSO geirans)
+settore verde: distanze raggiunte	grænn geiri: fjarlægðir sem náðust
+rosso: spostamento orario delle nubi (baricentro dei punti medi)	rautt: færsla skýjanna eftir klukkustundum (þyngdarmiðja miðpunktanna)
+Nessun QSO nella selezione.	Engin QSO í valinu.
+{0} da {1} ({2}), quota Es {3:F0} km	{0} frá {1} ({2}), Es-hæð {3:F0} km
+Giornata {0}	Dagur {0}
+Giornata {0}, ore {1:00}:00-{1:00}:59 UTC	Dagur {0}, kl. {1:00}:00-{1:00}:59 UTC
+{0} QSO: {1} singolo salto, {2} doppio, {3} triplo, {4} oltre (tabella IK3XTV). Bande: {5}.	{0} QSO: {1} eitt stökk, {2} tvöfalt, {3} þrefalt, {4} lengra (tafla IK3XTV). Tíðnisvið: {5}.
+QSO scelto: {0} {1} - {2} ({3}) {4} MHz	Valið QSO: {0} {1} - {2} ({3}) {4} MHz
+1. Skip per settori di azimut (10°): QSO più vicino = bordo della zona di silenzio, più lontano = portata	1. Skip eftir áttarhornsgeirum (10°): næsta QSO = jaðar dauða svæðisins, fjarlægasta = drægi
+  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   max {5,5:F0} km ({6})   {7} QSO	  az {0:000}-{1:000}°: skip {2,5:F0} km ({3}, {4} MHz)   hám. {5,5:F0} km ({6})   {7} QSO
+2. foEs stimata (legge della secante, foEs ≥ f / sec φ): il singolo salto più corto di ogni banda dà la stima più alta	2. Áætluð foEs (sekantlögmálið, foEs ≥ f / sec φ): stysta staka stökkið á hverju tíðnisviði gefur hæsta matið
+  {0}: {1} a {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz	  {0}: {1} í {2:F0} km, sec(φ) = {3:F2} -> foEs ≥ {4:F1} MHz
+  Stima per la selezione: foEs ≥ {0:F1} MHz ({1}). MUF attesa con questa foEs: {2:F0} MHz a 1000 km, {3:F0} MHz a 1500 km, {4:F0} MHz a 2000 km, {5:F0} MHz a 2400 km.	  Mat fyrir valið: foEs ≥ {0:F1} MHz ({1}). Vænt MUF með þessari foEs: {2:F0} MHz við 1000 km, {3:F0} MHz við 1500 km, {4:F0} MHz við 2000 km, {5:F0} MHz við 2400 km.
+  Con questa foEs i 144 MHz non si aprono in singolo salto.	  Með þessari foEs opnast 144 MHz ekki í einu stökki.
+  Con questa foEs i 144 MHz si aprono in singolo salto oltre circa {0:F0} km (skip in 2 m).	  Með þessari foEs opnast 144 MHz í einu stökki handan um {0:F0} km (skip á 2 m).
+  Nessun QSO in singolo salto nella selezione.	  Engin QSO í einu stökki í valinu.
+3. Nubi Es stimate (quadrati Maidenhead dei punti di riflessione)	3. Áætluð Es-ský (Maidenhead-reitir endurvarpspunktanna)
+  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})	  {0}: {1} QSO, foEs ≥ {2:F1} MHz, az {3:F0}°, {4:F0} km ({5})
+4. Multi-salto: primo salto della stazione confrontato con le nubi viste in singolo salto entro ±30 min (entro 300 km = confermato)	4. Fjölstökk: fyrsta stökk stöðvarinnar borið saman við skýin sem sáust í einu stökki innan ±30 mín (innan 300 km = staðfest)
+  {0} {1} {2:F0} km, {3} salti: salti uguali {4} ({5}), primo salto corto {6} ({7})	  {0} {1} {2:F0} km, {3} stökk: jöfn stökk {4} ({5}), stutt fyrsta stökk {6} ({7})
+nessuna nube vicina	ekkert ský nálægt
+nube a {0:F0} km	ský í {0:F0} km
+  Confermati: salti uguali {0} su {1}, primo salto corto {2} su {1}.	  Staðfest: jöfn stökk {0} af {1}, stutt fyrsta stökk {2} af {1}.
+5. Spostamento delle nubi ora per ora (baricentro dei punti medi dei singoli salti)	5. Færsla skýjanna klukkustund fyrir klukkustund (þyngdarmiðja miðpunkta stakra stökka)
+  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km verso {5:F0}°, {6:F0} km/h ({7:F0} m/s)	  {0:00}Z -> {1:00}Z: {2} -> {3}, {4:F0} km í stefnu {5:F0}°, {6:F0} km/h ({7:F0} m/s)
+I calcoli sono indicativi: un QSO dice che la tratta era aperta, non dove stava esattamente la nube.	Útreikningarnir eru leiðbeinandi: QSO segir að leiðin hafi verið opin, ekki nákvæmlega hvar skýið var.
+Azimutale - singolo salto	Áttarhornskort - eitt stökk
+Azimutale - distanza massima (multi-salto)	Áttarhornskort - hámarksfjarlægð (fjölstökk)
+Rettangolare	Rétthyrnt kort
+Mappa	Kort
+{0:N0} km: minima del singolo salto	{0:N0} km: lágmark eins stökks
+{0:N0}-{1:N0} km: ottimale	{0:N0}-{1:N0} km: best
+{0:N0} km: massima del singolo salto	{0:N0} km: hámark eins stökks
+{0:N0} km: massima del doppio salto	{0:N0} km: hámark tvöfalds stökks
+{0:N0} km: massima del triplo salto	{0:N0} km: hámark þrefalds stökks
+  {0}: {1}   {2}: {3}	  {0}: {1}   {2}: {3}
+{0:F0} km, az {1:F0}° dal centro	{0:F0} km, az {1:F0}° frá miðju
+Raggio {0:N0} km dal centro ({1})	Geisli {0:N0} km frá miðju ({1})
+Distanza massima	Hámarksfjarlægð
+{0:N0} km dal centro	{0:N0} km frá miðju
