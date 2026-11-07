@@ -110,6 +110,8 @@ jobs:
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots" --loc JN70CN || true
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/chiaro" --loc JN70CN --colori chiaro || true
           timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/notte" --loc JN70CN --colori scuro || true
+          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/en" --loc JN70CN --lingua en || true
+          timeout 400 xvfb-run -a -s "-screen 0 1600x1000x24" ./run/E-LAYER-ANALYZER --screenshot "$PWD/shots/ja" --loc JN70CN --lingua ja --colori chiaro || true
           ls -la shots shots/ya-ms || true
           cp run/data/errore_avvio.txt shots/ 2>/dev/null || true
           ls run/data/mappa run/data/swpc > shots/dati.txt 2>&1 || true
