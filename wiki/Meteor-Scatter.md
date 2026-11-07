@@ -2,7 +2,7 @@
 
 [← Home](Home)
 
-This tab contains the complete **YA-MS 1.3.0**, IC8TEM's meteor scatter program: celestial sphere with the radiants, SKiYMET radar flux (Collm, Sodankylä), shower efficiency calculation, experimental implementation of the forecasts, geometry and attenuation, GRAVES, grid square map, and the **Efficiency - explanation** document with the formulas.
+This tab contains the complete **YA-MS 1.4.0**, IC8TEM's meteor scatter program: celestial sphere with the radiants, SKiYMET radar flux (Collm, Sodankylä), shower efficiency calculation, experimental implementation of the forecasts, geometry and attenuation, GRAVES, grid square map, **Live showers** (ZHR measured by the Global Meteor Network and radiants from the CMOR radar), **Sources map** (Collm, Sodankylä, GRAVES and CMOR relative to the station) and the **Efficiency - explanation** document with the formulas.
 
 - YA-MS uses the language and colour scheme chosen at the top of E-LAYER ANALYZER.
 - YA-MS settings are stored in `data/config.ini`.
