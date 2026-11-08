@@ -696,7 +696,7 @@ namespace ELA
             Refresh();
             inner.Select(2);
             PrecursorAlert a = alerts.Find(x => x.Region == "Giappone") ?? (alerts.Count > 0 ? alerts[0] : null);
-            if (a != null) { selAlert = a; selAlertKey = a.Region + "|" + a.Band; }
+            if (a != null) { selAlert = a; selAlertKey = a.Region + "|" + a.Band; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
             cmbMap.SelectedIndex = 1; MapMode(); map.SetView(-20, 160, -15, 75);
             FillTables(); Draw(); Details();
         }
