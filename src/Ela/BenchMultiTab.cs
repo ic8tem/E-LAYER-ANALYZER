@@ -60,6 +60,7 @@ namespace ELA
 
         public BenchMultiTab()
         {
+            Continents.Changed += () => Continents.Apply(map);   // continente scelto nella barra delle linguette
             Config cf = Station.Cfg;
             Button[] bLoad = new Button[2], bUnload = new Button[2];
             for (int k = 0; k < 2; k++)

@@ -57,6 +57,10 @@ namespace ELA
         public ScatterTab(bool aurora)
         {
             this.aurora = aurora;
+            map.Note = aurora ? (Func<List<string>>)PropData.NoteAurora : PropData.NoteFai;
+            // continente scelto nella barra delle linguette e sintesi dei dati di propagazione in sovraimpressione
+            PropData.Updated += () => Avalonia.Threading.Dispatcher.UIThread.Post(() => map.InvalidateVisual());
+            Continents.Changed += () => Continents.Apply(map);
             pfx = aurora ? "au_" : "fai_";
             Config cf = Station.Cfg;
             cmbMode = Ui.Combo(new[] { Lang.T("Scia (coppia A-B)"), Lang.T("Iso-riflessione (punto)") }, (int)cf.GetD(pfx + "modo", 0), 170);

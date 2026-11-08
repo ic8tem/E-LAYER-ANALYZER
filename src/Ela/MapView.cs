@@ -31,6 +31,7 @@ namespace ELA
         public readonly List<MapMarker> Markers = new List<MapMarker>();
         public readonly List<KeyValuePair<string, Color>> Legend = new List<KeyValuePair<string, Color>>();
         public string Caption = "";
+        public Func<List<string>> Note;   // sintesi dei dati di propagazione, in sovraimpressione in alto a destra (PropData)
         public readonly List<string> Info = new List<string>();   // righe grandi in alto a sinistra (es. Azimut / Elevazione)
         public string LegendTitle = "";
         public bool ShowLocatorGrid = true;
@@ -424,6 +425,20 @@ namespace ELA
                 ctx.DrawText(t, new Point(12, 9));
             }
 
+            // sintesi dei dati di propagazione in alto a destra, sotto le coordinate del cursore
+            List<string> note = null;
+            try { if (Note != null) note = Note(); } catch { }
+            if (note != null && note.Count > 0)
+            {
+                double ny = 34;
+                foreach (string line in note)
+                {
+                    FormattedText t = Ft(line, 11.5, Pal.Yellow, FontWeight.SemiBold);
+                    ctx.FillRectangle(Pal.B(Ov), new Rect(W - t.Width - 18, ny - 1, t.Width + 12, t.Height + 3));
+                    ctx.DrawText(t, new Point(W - t.Width - 12, ny));
+                    ny += t.Height + 3;
+                }
+            }
             // coordinate del cursore in alto a destra
             if (hover.X >= 0)
             {

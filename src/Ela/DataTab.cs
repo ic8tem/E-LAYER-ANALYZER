@@ -19,6 +19,7 @@ namespace ELA
     {
         public readonly Control Root;
         public readonly PillTabs Inner = new PillTabs();
+        public readonly PillTabs Outer = new PillTabs();
         readonly List<SessionPanel> sessions = new List<SessionPanel>();
         readonly TableView tAll;
         readonly ComboBox cmbBand, cmbSrc;
@@ -109,7 +110,13 @@ namespace ELA
             Grid.SetColumn(left, 0); root.Children.Add(left);
             Control right = BuildFilters();
             Grid.SetColumn(right, 1); root.Children.Add(right);
-            Root = root;
+            // due sottolinguette: gli spot (sessioni, spot raccolti, CALL3 e filtri) e i dati di propagazione
+            Outer.Add(Lang.T("Spot"), root);
+            Outer.Add(Lang.T("Dati di propagazione"), BuildPropPanel());
+            DockPanel outer = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(outer, Outer.Bar, Dock.Top);
+            outer.Children.Add(Outer.Host);
+            Root = outer;
 
             CallDb.Loaded += () => Dispatcher.UIThread.Post(UpdateCall3);
             UpdateCall3();
@@ -195,9 +202,13 @@ namespace ELA
             fp.Children.Add(tags);
             fp.Children.Add(FText(Lang.T("Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP."), true));
 
-            fp.Children.Add(FHead(Lang.T("Regole dei 28 e 50 MHz (regole dell'autore)")));
+            fp.Children.Add(FHead(Lang.T("Regole dei 28 e 50 MHz (regole dell'autore e IK3XTV)")));
             NumericUpDown n50 = Ui.N(0, 1500, Ui.Dm(EsModel.MinKm50), 0, 50, 90);
-            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 28 e 50 MHz (km)")), n50));
+            TextBlock l28 = FText("", true);
+            Action upd28 = () => l28.Text = Lang.F("In 28 MHz la distanza minima segue IK3XTV (lo skip si accorcia al diminuire della frequenza): con la stessa nube corrisponde a {0:F0} km (legge della secante).", EsModel.MinKm28);
+            upd28();
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 50 MHz (km)")), n50));
+            fp.Children.Add(l28);
             CheckBox cBp = FCheck(Lang.T("Il bandplan non è un criterio esclusivo: in 50 MHz uno spot nella finestra del meteor scatter resta nell'E-sporadico, salvo modo digitale MS o <MS>"), Filters.Es50WindowNotExclusive);
             fp.Children.Add(cBp);
 
@@ -223,7 +234,7 @@ namespace ELA
 
             Action read = () =>
             {
-                EsModel.MinKm50 = Ui.V(n50); Filters.Es50WindowNotExclusive = cBp.IsChecked == true;
+                EsModel.MinKm50 = Ui.V(n50); Filters.Es50WindowNotExclusive = cBp.IsChecked == true; upd28();
                 EsModel.Use144Rule = c144.IsChecked == true; EsModel.MinKm144 = Ui.V(nMin); EsModel.Confirm144Min = Ui.V(nConf);
                 EsModel.CloudMatchKm = Ui.V(nCloud); EsModel.Short50Km = Ui.V(nShort); EsModel.Near50Min = Ui.V(nNear);
                 EsModel.UseTepRule = cTep.IsChecked == true; EsModel.TepInclinationDeg = Ui.V(nTep);
@@ -345,12 +356,92 @@ namespace ELA
             sb.AppendLine(Lang.F("Transequatoriale: {0}", yn(tep)));
             bool es = s.EsCandidate && !tep;
             string esNote = "";
-            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in 28 e 50 MHz)", EsModel.MinKm50);
+            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in {1})", s.Band == "10m" ? EsModel.MinKm28 : EsModel.MinKm50, s.Band == "10m" ? "28 MHz" : "50 MHz");
             if (es && s.Band == "2m" && EsModel.Use144Rule)
                 esNote = s.HasBoth && s.DistanceKm < EsModel.MinKm144 ? " " + Lang.F("(scartato: sotto {0:F0} km in 144 MHz)", EsModel.MinKm144)
                                                                       : " " + Lang.T("(in 144 MHz si disegna solo con una conferma)");
             sb.AppendLine(Lang.F("E-sporadico: {0}", yn(es)) + esNote);
             lblProva.Text = sb.ToString().TrimEnd();
+        }
+
+        // ---------------- sottolinguetta "Dati di propagazione"
+        TextBlock lblPropStatus, lblN0nbh, lblBz;
+        Image imgVhf, imgMs;
+
+        static Avalonia.Media.Imaging.Bitmap LoadBmp(string f)
+        {
+            try { if (System.IO.File.Exists(f)) using (System.IO.FileStream fs = System.IO.File.OpenRead(f)) return new Avalonia.Media.Imaging.Bitmap(fs); } catch { }
+            return null;
+        }
+
+        Control BuildPropPanel()
+        {
+            StackPanel sp = new StackPanel { Spacing = 8, Margin = new Thickness(14, 10, 14, 14) };
+            sp.Children.Add(new TextBlock { Text = Lang.T("Dati di propagazione"), FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
+            sp.Children.Add(FText(Lang.T("Dati solari e condizioni VHF di N0NBH (hamqsl.com, dati VHF di DXrobot e Make More Miles on VHF), Bz e vento solare della NOAA, attività meteorica del giorno (RMOB) da Make More Miles on VHF. I dati si scaricano al massimo una volta l'ora, come chiede N0NBH, e la loro sintesi compare sulle mappe di SPORADIC-E, F.A.I. e AURORA per il continente scelto nella barra delle linguette."), true));
+            Button bUpd = Ui.B(Lang.T("Aggiorna adesso"));
+            lblPropStatus = FText("", true);
+            bUpd.Click += (s, e) => StartPropFetch(true);
+            sp.Children.Add(Ui.Row(bUpd, lblPropStatus));
+
+            sp.Children.Add(FHead(Lang.T("N0NBH - condizioni VHF")));
+            imgVhf = new Image { Stretch = Stretch.Uniform, MaxWidth = 900, HorizontalAlignment = HorizontalAlignment.Left };
+            sp.Children.Add(imgVhf);
+            lblN0nbh = new TextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
+            sp.Children.Add(lblN0nbh);
+
+            sp.Children.Add(FHead(Lang.T("Bz per l'aurora - NOAA SWPC, vento solare in tempo reale (DSCOVR/ACE)")));
+            sp.Children.Add(FText(Lang.T("È la fonte migliore per il Bz: misura del campo magnetico interplanetario nel punto L1, ogni minuto, circa 30-60 minuti prima che il vento solare arrivi alla Terra. Un Bz negativo (verso sud) e persistente favorisce l'aurora."), true));
+            lblBz = new TextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
+            sp.Children.Add(lblBz);
+
+            sp.Children.Add(FHead(Lang.T("Meteor scatter - attività meteorica del giorno (RMOB, Make More Miles on VHF)")));
+            imgMs = new Image { Stretch = Stretch.Uniform, MaxWidth = 700, HorizontalAlignment = HorizontalAlignment.Left };
+            sp.Children.Add(imgMs);
+            sp.Children.Add(FText(Lang.T("Il grafico riporta i conteggi medi degli osservatori radio di meteore (RMOB) e si aggiorna ogni ora. Gli sciami, l'efficienza e il traffico meteor scatter in diretta sono nella linguetta METEOR SCATTER (YA-MS)."), true));
+
+            PropData.Updated += () => Dispatcher.UIThread.Post(ShowProp);
+            PropData.LoadCached(AppPaths.DataDir);
+            ShowProp();
+            StartPropFetch(false);
+            DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromMinutes(10) };
+            t.Tick += (s, e) => { StartPropFetch(false); ShowProp(); };
+            t.Start();
+            return Scroll(sp);
+        }
+
+        void StartPropFetch(bool force)
+        {
+            string dd = AppPaths.DataDir;
+            if (lblPropStatus != null) lblPropStatus.Text = Lang.T("Scarico i dati di propagazione...");
+            System.Threading.Tasks.Task.Run(async () =>
+            {
+                try { await PropData.FetchAsync(dd, force); } catch { }
+                Dispatcher.UIThread.Post(ShowProp);
+            });
+        }
+
+        void ShowProp()
+        {
+            if (lblN0nbh == null) return;
+            string dd = AppPaths.DataDir;
+            imgVhf.Source = LoadBmp(PropData.VhfImageFile(dd));
+            imgMs.Source = LoadBmp(PropData.MsImageFile(dd));
+            StringBuilder sb = new StringBuilder();
+            if (PropData.Solar.Count == 0) sb.Append(Lang.T("Nessun dato N0NBH: premi Aggiorna adesso (serve la rete)."));
+            else
+            {
+                sb.AppendLine(Lang.F("Aggiornato: {0}", PropData.S("updated")));
+                sb.AppendLine(Lang.F("Flusso solare {0}   macchie {1}   indice A {2}   indice K {3}   raggi X {4}", PropData.S("solarflux"), PropData.S("sunspots"), PropData.S("aindex"), PropData.S("kindex"), PropData.S("xray")));
+                sb.AppendLine(Lang.F("Vento solare {0} km/s   campo magnetico (Bz) {1} nT   aurora {2}   latitudine aurorale {3}°", PropData.S("solarwind"), PropData.S("magneticfield"), PropData.S("aurora"), PropData.S("latdegree")));
+                sb.AppendLine(Lang.F("Continente scelto: {0}", Lang.T(Continents.Names[Continents.Index])));
+                sb.AppendLine(PropData.EsSummary());
+                sb.Append(PropData.AuroraSummary());
+            }
+            lblN0nbh.Text = sb.ToString();
+            lblBz.Text = double.IsNaN(SpaceWeather.Bz) ? Lang.T("Nessun dato NOAA: si scarica con la linguetta AURORA (ogni 5 minuti).")
+                : Lang.F("Bz {0} nT   Bt {1} nT   vento {2} km/s   densità {3} p/cm³   ({4:HH:mm} UTC)", Geo.Fmt(SpaceWeather.Bz, 1), Geo.Fmt(SpaceWeather.Bt, 1), Geo.Fmt(SpaceWeather.Speed, 0), Geo.Fmt(SpaceWeather.Density, 1), SpaceWeather.WindTime);
+            lblPropStatus.Text = PropData.LastFetch == DateTime.MinValue ? "" : Lang.F("Ultimo scaricamento: {0:HH:mm} UTC", PropData.LastFetch) + (PropData.LastError.Length > 0 ? "  " + PropData.LastError : "");
         }
 
         public void ConnectSaved()

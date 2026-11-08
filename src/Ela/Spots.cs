@@ -50,8 +50,9 @@ namespace ELA
         public bool IsMeteorScatterSure { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
         // In 50 MHz il bandplan non e' un criterio esclusivo (regola dell'autore): la sola finestra MS non toglie lo spot all'E-sporadico
         public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || (Band == "6m" && Filters.Es50WindowNotExclusive ? IsMeteorScatterSure : IsMeteorScatter); } }
-        // In 28 e 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore)
-        public bool TooShortForEs { get { return (Band == "6m" || Band == "10m") && HasBoth && DistanceKm < EsModel.MinKm50; } }
+        // In 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore);
+        // in 28 MHz la distanza minima si scala da quella dei 50 MHz seguendo IK3XTV (EsModel.MinKm28)
+        public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "10m" && DistanceKm < EsModel.MinKm28)); } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES

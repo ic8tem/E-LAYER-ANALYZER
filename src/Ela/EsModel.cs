@@ -98,7 +98,18 @@ namespace ELA
         // valori di partenza = regola dell'autore; si regolano nei filtri di DATA COLLECTION (Filters.cs)
         public static double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15, Short50Km = 1200;
         public static bool Use144Rule = true;
-        public static double MinKm50 = 450;   // regola dell'autore: in 28 e 50 MHz entro 450 km non e' E-sporadico
+        public static double MinKm50 = 450;   // regola dell'autore: in 50 MHz entro 450 km non e' E-sporadico
+        // 28 MHz: si segue IK3XTV (lo skip si accorcia al diminuire della frequenza): stessa nube (stessa foEs), quindi
+        // la distanza minima dei 28 MHz e' quella in cui sec(phi) vale sec(phi a MinKm50) x 28,5 / 50,2 (legge della secante)
+        public static double MinKm28 { get { return ScaledMinKm(MinKm50, 50.2, 28.5, 105); } }
+        public static double ScaledMinKm(double km, double fFrom, double fTo, double h)
+        {
+            double target = Geo.SecantFactor(km, h) * fTo / fFrom;
+            if (target <= 1.0) return 0;
+            double lo = 0, hi = km;
+            for (int i = 0; i < 40; i++) { double m = (lo + hi) / 2; if (Geo.SecantFactor(m, h) < target) lo = m; else hi = m; }
+            return Math.Round((lo + hi) / 2 / 10) * 10;
+        }
 
         static IEnumerable<EsHop> RefPoints(EsPath p)
         {

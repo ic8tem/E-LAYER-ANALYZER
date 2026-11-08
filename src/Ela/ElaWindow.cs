@@ -87,6 +87,7 @@ namespace ELA
 
             // --- linguette
             Filters.Load(Station.Cfg);   // filtri degli spot (colonna destra di DATA COLLECTION)
+            Continents.Load();           // continente scelto (menu nella barra delle linguette)
             es = new EsTab();
             bench = new BenchTab();
             bench50 = new BenchMultiTab();
@@ -119,6 +120,14 @@ namespace ELA
                 else if (i == 5) au.Recalc();
                 else if (i == 7) log.Refresh();
             };
+            // menu dei sei continenti, a destra nella barra delle linguette: cambia le viste delle mappe e i dati previsionali
+            ComboBox cmbCont = Ui.Combo(Array.ConvertAll(Continents.Names, n => Lang.T(n)), Continents.Index, 150);
+            cmbCont.VerticalAlignment = VerticalAlignment.Center;
+            cmbCont.Margin = new Thickness(8, 0, 0, 0);
+            ToolTip.SetTip(cmbCont, Lang.T("Continente: sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America)."));
+            cmbCont.SelectionChanged += (s2, e2) => Continents.Set(Math.Max(0, cmbCont.SelectedIndex));
+            DockPanel.SetDock(cmbCont, Dock.Right);
+            tabs.Line.Children.Insert(0, cmbCont);
             int sel = (int)Station.Cfg.GetD("linguetta", 0);
 
             status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
@@ -352,6 +361,8 @@ namespace ELA
                 string[] fn = { "ms", "es", "fai", "aurora", "prova" };
                 for (int j = 1; j < dc.FilterTabs.Count; j++) { dc.FilterTabs.Select(j); await Task.Delay(1200); Shot(Path.Combine(dir, "5f_filtri_" + fn[Math.Min(j, fn.Length - 1)] + ".png")); }
                 dc.FilterTabs.Select(0);
+                dc.Outer.Select(1); await Task.Delay(2500); Shot(Path.Combine(dir, "5g_dati_propagazione.png"));
+                dc.Outer.Select(0);
                 // tutte le linguette di YA-MS
                 tabs.Select(4);
                 await Task.Delay(1500);

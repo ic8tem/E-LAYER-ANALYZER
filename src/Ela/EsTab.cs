@@ -39,7 +39,7 @@ namespace ELA
         bool dirty = true;
         int short144, held144, tep;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
-        class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf; public int N; public List<string> Calls = new List<string>(); }
+        class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf, MaxMHz, MufMax; public int N; public List<string> Calls = new List<string>(); }
 
         public EsTab()
         {
@@ -66,6 +66,10 @@ namespace ELA
             range = new RangeBar(map, cf.GetD("es_raggio_km", 6000));
             range.Changed += km => { if (cmbMap.SelectedIndex == 0) { multiRange = km; Draw(); } };
             cmbMap.SelectionChanged += (s, e) => { MapMode(); Draw(); };
+            map.Note = PropData.NoteEs;
+            // continente scelto nella barra delle linguette e sintesi dei dati di propagazione in sovraimpressione
+            PropData.Updated += () => Avalonia.Threading.Dispatcher.UIThread.Post(() => map.InvalidateVisual());
+            Continents.Changed += () => { if (cmbMap.SelectedIndex == 1) Continents.Apply(map); };
             foreach (CheckBox c in new[] { c10, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
             foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { dirty = true; Refresh(); };
@@ -128,6 +132,16 @@ namespace ELA
 
             SpotStore.Added += s => dirty = true;
             Station.Changed += () => { MapMode(); dirty = true; Refresh(); };
+            DispatcherTimer tb = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(600) };
+            tb.Tick += (s, e) =>
+            {
+                if (blink.Count == 0) return;
+                blinkOn = !blinkOn;
+                foreach (KeyValuePair<MapCell, Color> kv in blink)
+                    kv.Key.Fill = blinkOn ? kv.Value : Color.FromArgb(40, kv.Value.R, kv.Value.G, kv.Value.B);
+                map.InvalidateVisual();
+            };
+            tb.Start();
             DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
             t.Tick += (s, e) => { if (dirty && Root.IsEffectivelyVisible) Refresh(); };
             t.Start();
@@ -178,6 +192,19 @@ namespace ELA
                 default: return Pal.Silver;
             }
         }
+
+        // scala dei quadrati Maidenhead per frequenza (regola dell'autore): verde fino a 29 MHz, giallo fino a 51,
+        // arancio fino a 71, rosso fino a 145 MHz
+        public static int FreqClass(double mhz) { return mhz <= 29 ? 0 : mhz <= 51 ? 1 : mhz <= 71 ? 2 : 3; }
+        public static Color FreqClassColor(int k, byte a)
+        {
+            Color c = k == 0 ? Pal.Green : k == 1 ? Pal.Yellow : k == 2 ? Pal.Orange : Pal.Red;
+            return Color.FromArgb(a, c.R, c.G, c.B);
+        }
+
+        // quadrati che lampeggiano: la MUF stimata per il salto piu' lungo supera la banda degli spot
+        readonly List<KeyValuePair<MapCell, Color>> blink = new List<KeyValuePair<MapCell, Color>>();
+        bool blinkOn;
 
         // colore della nube secondo la foEs minima (MHz)
         public static Color FoEsColor(double f)
@@ -249,12 +276,15 @@ namespace ELA
                     }
                     c.N++;
                     if (kv.Value > c.FoEs) c.FoEs = kv.Value;
+                    if (p.Spot.FreqMHz > c.MaxMHz) c.MaxMHz = p.Spot.FreqMHz;
                     if (c.Calls.Count < 6) c.Calls.Add(p.Spot.Spotter + "-" + p.Spot.DxCall);
                 }
             }
             double maxHalf = Geo.HalfHopKm(Ui.V(numElev), H);
             foreach (Cloud c in d.Values)
             {
+                // MUF probabile della nube sul salto piu' lungo (massima del singolo salto, tabella IK3XTV): foEs x sec(phi)
+                c.MufMax = c.FoEs * Geo.SecantFactor(EsModel.SingleMax[1], H);
                 c.Az = c.Dist = c.Muf = double.NaN;
                 if (!Station.Valid) continue;
                 c.Dist = Geo.DistanceKm(Station.Lat, Station.Lon, c.Lat, c.Lon);
@@ -315,11 +345,16 @@ namespace ELA
         {
             map.Cells.Clear(); map.Lines.Clear(); map.Markers.Clear(); map.Legend.Clear(); map.Info.Clear();
             map.Caption = "SPORADIC-E";
+            blink.Clear();
             if (chkCells.IsChecked == true)
                 foreach (Cloud c in clouds)
                 {
                     double la0 = Math.Floor(c.Lat), lo0 = Math.Floor(c.Lon / 2) * 2;
-                    map.Cells.Add(new MapCell { Lat0 = la0, Lon0 = lo0, DLat = 1, DLon = 2, Fill = FoEsColor(c.FoEs) });
+                    int kf = FreqClass(c.MaxMHz), km = FreqClass(c.MufMax);
+                    MapCell mc = new MapCell { Lat0 = la0, Lon0 = lo0, DLat = 1, DLon = 2, Fill = FreqClassColor(kf, 150),
+                        Tip = Lang.F("{0}: spot fino a {1:F1} MHz, foEs ≥ {2:F1} MHz, MUF probabile fino a {3:F0} MHz", c.Sq, c.MaxMHz, c.FoEs, c.MufMax) };
+                    map.Cells.Add(mc);
+                    if (km > kf) blink.Add(new KeyValuePair<MapCell, Color>(mc, FreqClassColor(km, 210)));   // lampeggia con il colore della banda raggiunta
                 }
             foreach (EsPath p in paths)
             {
@@ -365,7 +400,7 @@ namespace ELA
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto del DX (salti uguali)"), Pal.Violet));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("○ primo salto corto (ipotesi IC8TEM)"), Pal.Orange));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("cerchio verde: portata del singolo salto dalla mia stazione"), Pal.Green));
-            map.LegendTitle = Lang.T("Nubi: foEs minima <5 / 7 / 10 / 14 / 20 / >20 MHz = blu, azzurro, verde, giallo, arancio, rosso");
+            map.LegendTitle = Lang.T("Quadrati: spot fino a 29 / 51 / 71 / 145 MHz = verde, giallo, arancio, rosso; lampeggia se la MUF probabile raggiunge una banda più alta");
             map.InvalidateVisual();
         }
 
