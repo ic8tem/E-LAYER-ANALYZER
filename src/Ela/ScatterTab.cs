@@ -313,7 +313,6 @@ namespace ELA
             double h = H, maxD = Geo.HalfHopKm(Ui.V(numElev), h);
             double step = 0.2;
             List<PerpPoint> loc = FieldAligned.PairLocus(aLat, aLon, bLat, bLon, h, Tol, Ui.V(numElev), maxD, step);
-            if (aurora) loc = loc.FindAll(p => InAuRange(p, bLat, bLon));
             Func<double, double, double> w = null;
             if (aurora && chkOval.IsChecked == true && SpaceWeather.Oval != null) w = (la, lo) => SpaceWeather.OvalAt(la, lo) / 30.0;
             PerpPoint best = null; double bestScore = double.MaxValue;
@@ -327,6 +326,7 @@ namespace ELA
                 qtf.Add(p.Az, p.Elev, azB, eB, p.Off);
                 double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                 if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
+                if (!InAuRange(p, bLat, bLon)) score += 3;   // aurora: preferenza per 370-1100 km da ciascuna stazione (Lange-Hesse)
                 if (score < bestScore) { bestScore = score; best = p; }
             }
             map.Legend.Add(new KeyValuePair<string, Color>("0° - 1°", Dev(0.5, false)));
@@ -627,13 +627,14 @@ namespace ELA
                 if (!auCache.TryGetValue(key, out sol))
                 {
                     sol = new AuSol();
-                    List<PerpPoint> loc = FieldAligned.PairLocus(s.LatS, s.LonS, s.LatD, s.LonD, h, Tol, minEl, maxD, 0.5).FindAll(p => InAuRange(p, s.LatD, s.LonD));
+                    List<PerpPoint> loc = FieldAligned.PairLocus(s.LatS, s.LonS, s.LatD, s.LonD, h, Tol, minEl, maxD, 0.5);
                     double bestScore = double.MaxValue;
                     foreach (PerpPoint p in loc)
                     {
                         double dB = Geo.DistanceKm(s.LatD, s.LonD, p.Lat, p.Lon);
                         double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                         if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
+                        if (!InAuRange(p, s.LatD, s.LonD)) score += 3;
                         if (score < bestScore) { bestScore = score; sol.Best = p; }
                     }
                     if (sol.Best != null)
@@ -704,7 +705,8 @@ namespace ELA
             sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud); scarto dal percorso diretto {0:F0}°", dev)
                                 : Lang.F("QTF tipico tra N e NE (0-50°), che si sposta verso N durante l'evento (G3WPO, G0ISW); scarto dal percorso diretto {0:F0}°", dev));
             sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW)."));
-            sb.AppendLine(Lang.F("Scatter point cercato a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
+            sb.AppendLine(Lang.F("Scatter point preferito a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
+            if (!InAuRange(best, bLat, bLon)) sb.AppendLine(Lang.T("Lo scatter point proposto è fuori dall'intervallo 370-1100 km di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile."));
         }
 
         // aurora-E: sul percorso diretto, senza Doppler, dopo l'aurora (G0ISW [33]); si disegna la tratta diretta
