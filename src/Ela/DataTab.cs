@@ -365,7 +365,7 @@ namespace ELA
         }
 
         // ---------------- sottolinguetta "Dati di propagazione"
-        TextBlock lblPropStatus, lblN0nbh, lblBz;
+        TextBlock lblPropStatus, lblN0nbh, lblBz, lblAuMore;
         Image imgVhf, imgMs;
 
         static Avalonia.Media.Imaging.Bitmap LoadBmp(string f)
@@ -394,6 +394,19 @@ namespace ELA
             sp.Children.Add(FText(Lang.T("È la fonte migliore per il Bz: misura del campo magnetico interplanetario nel punto L1, ogni minuto, circa 30-60 minuti prima che il vento solare arrivi alla Terra. Un Bz negativo (verso sud) e persistente favorisce l'aurora."), true));
             lblBz = new TextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
             sp.Children.Add(lblBz);
+
+            sp.Children.Add(FHead(Lang.T("Aurora - altre misure (Kyoto, Bureau of Meteorology, SuperDARN)")));
+            sp.Children.Add(FText(Lang.T("Indice Dst di Kyoto (tempeste geomagnetiche: con Dst sotto -50 nT l'ovale scende verso sud); per l'emisfero sud le allerte aurora del Bureau of Meteorology australiano, con una chiave gratuita da chiedere su sws-data.sws.bom.gov.au/register. L'indice AE di Kyoto e la convezione SuperDARN si aprono nel browser."), true));
+            lblAuMore = new TextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap };
+            sp.Children.Add(lblAuMore);
+            PropData.BomKey = Station.Cfg.Get("bom_chiave", "");
+            TextBox txtBom = Ui.T(PropData.BomKey, 320, false);
+            txtBom.LostFocus += (s, e) => { PropData.BomKey = (txtBom.Text ?? "").Trim(); Station.Cfg.Set("bom_chiave", PropData.BomKey); };
+            Button bAe = Ui.B(Lang.T("Indice AE (Kyoto)"));
+            bAe.Click += (s, e) => Dialogs.OpenWithDefaultApp(PropData.AeUrl);
+            Button bSd = Ui.B(Lang.T("Convezione SuperDARN"));
+            bSd.Click += (s, e) => Dialogs.OpenWithDefaultApp(PropData.SuperDarnUrl);
+            sp.Children.Add(Ui.Row(Ui.L(Lang.T("Chiave API BoM")), txtBom, bAe, bSd));
 
             sp.Children.Add(FHead(Lang.T("Meteor scatter - attività meteorica del giorno (RMOB, Make More Miles on VHF)")));
             imgMs = new Image { Stretch = Stretch.Uniform, MaxWidth = 700, HorizontalAlignment = HorizontalAlignment.Left };
@@ -441,6 +454,8 @@ namespace ELA
             lblN0nbh.Text = sb.ToString();
             lblBz.Text = double.IsNaN(SpaceWeather.Bz) ? Lang.T("Nessun dato NOAA: si scarica con la linguetta AURORA (ogni 5 minuti).")
                 : Lang.F("Bz {0} nT   Bt {1} nT   vento {2} km/s   densità {3} p/cm³   ({4:HH:mm} UTC)", Geo.Fmt(SpaceWeather.Bz, 1), Geo.Fmt(SpaceWeather.Bt, 1), Geo.Fmt(SpaceWeather.Speed, 0), Geo.Fmt(SpaceWeather.Density, 1), SpaceWeather.WindTime);
+            string dst = PropData.DstSummary(), bom = PropData.BomSummary();
+            lblAuMore.Text = (dst ?? Lang.T("Dst di Kyoto non ancora scaricato.")) + (bom != null ? "\n" + bom : "");
             lblPropStatus.Text = PropData.LastFetch == DateTime.MinValue ? "" : Lang.F("Ultimo scaricamento: {0:HH:mm} UTC", PropData.LastFetch) + (PropData.LastError.Length > 0 ? "  " + PropData.LastError : "");
         }
 

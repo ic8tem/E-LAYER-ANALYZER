@@ -82,6 +82,7 @@ namespace ELA
                     catch (Exception ex) { LastError += Path.GetFileName(files[i]) + ": " + ex.Message + " "; }
                 }
                 LastFetch = DateTime.UtcNow;
+                await FetchAuroraAsync(dataDir);
                 LoadCached(dataDir);
             }
             finally { fetching = false; }
@@ -134,6 +135,108 @@ namespace ELA
 
         // valori di N0NBH tradotti: Lang.T("Band Closed") Lang.T("50MHz ES") Lang.T("70MHz ES") Lang.T("144MHz ES") Lang.T("High MUF")
         // Lang.T("High LAT AUR") Lang.T("Mid LAT AUR")
+        // ---------------------------------------------------------------- dati per l'aurora (fonti approvate dall'autore)
+        // Kyoto WDC: indice Dst orario del mese in corso (testo, solo uso non commerciale) [46]
+        public const string DstUrl = "https://wdc.kugi.kyoto-u.ac.jp/dst_realtime/presentmonth/index.html";
+        // Kyoto WDC: indice AE in tempo reale (pagina; i file digitali sono fermi da ottobre 2026) [45]
+        public const string AeUrl = "https://wdc.kugi.kyoto-u.ac.jp/ae_realtime/today/today.html";
+        // SuperDARN Canada: convezione in tempo reale e bordo dell'ovale (solo collegamento) [47]
+        public const string SuperDarnUrl = "https://superdarn.ca/realtime-convection";
+        // Bureau of Meteorology (Australia): API con chiave gratuita, POST JSON [44]
+        public const string BomApi = "https://sws-data.sws.bom.gov.au/api/v1/";
+        public static double Dst = double.NaN; public static DateTime DstTime;
+        public static string BomKey = "";
+        public static int BomKAus = -1; public static string BomAlert = "", BomWatch = "", BomOutlook = "", BomError = "";
+
+        static void ParseDst(string html)
+        {
+            // righe "giorno  v1 ... v24" con valori in nT; 9999 = mancante
+            DateTime now = DateTime.UtcNow;
+            double last = double.NaN; DateTime lt = DateTime.MinValue;
+            foreach (string raw in html.Replace("\r", "").Split('\n'))
+            {
+                string line = System.Text.RegularExpressions.Regex.Replace(raw, "<[^>]+>", "");
+                System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(line, @"^\s*(\d{1,2})\s+(-?\d.*)$");
+                if (!m.Success) continue;
+                int day = int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture);
+                if (day < 1 || day > 31) continue;
+                // i valori possono essere attaccati (es. -100-120): si separano con una regex sui numeri di 1-4 cifre
+                System.Text.RegularExpressions.MatchCollection vs = System.Text.RegularExpressions.Regex.Matches(m.Groups[2].Value, @"-?\d{1,4}");
+                if (vs.Count < 24) continue;
+                for (int h = 0; h < 24; h++)
+                {
+                    int v = int.Parse(vs[h].Value, CultureInfo.InvariantCulture);
+                    if (Math.Abs(v) >= 999) continue;
+                    try { DateTime t = new DateTime(now.Year, now.Month, day, h, 0, 0, DateTimeKind.Utc); if (t > lt) { lt = t; last = v; } } catch { }
+                }
+            }
+            if (!double.IsNaN(last)) { Dst = last; DstTime = lt; }
+        }
+
+        static async Task<string> BomPost(string method, string options)
+        {
+            string body = "{\"api_key\":\"" + BomKey.Replace("\"", "") + "\"" + (options.Length > 0 ? ",\"options\":{" + options + "}" : "") + "}";
+            using (StringContent sc = new StringContent(body, System.Text.Encoding.UTF8, "application/json"))
+            using (HttpResponseMessage r = await http.PostAsync(BomApi + method, sc))
+                return await r.Content.ReadAsStringAsync();
+        }
+
+        static string Field(string json, string name)
+        {
+            System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(json, "\"" + name + "\"\\s*:\\s*\"?([^\",}\\]]*)");
+            return m.Success ? m.Groups[1].Value.Trim() : "";
+        }
+
+        public static async Task FetchAuroraAsync(string dataDir)
+        {
+            string d = Dir(dataDir);
+            try
+            {
+                string html = await http.GetStringAsync(DstUrl);
+                File.WriteAllText(Path.Combine(d, "kyoto_dst.html"), html);
+                ParseDst(html);
+            }
+            catch (Exception ex) { LastError += "Dst: " + ex.Message + " "; }
+            BomError = "";
+            if (BomKey.Length > 0)
+            {
+                try
+                {
+                    string k = await BomPost("get-k-index", "\"location\":\"Australian region\"");
+                    string ks = Field(k, "index"); int ki; BomKAus = int.TryParse(ks, out ki) ? ki : -1;
+                    string a = await BomPost("get-aurora-alert", "");
+                    BomAlert = Field(a, "k_aus").Length > 0 ? Lang.F("allerta aurora: K aus {0}, latitudini {1}, fino a {2} UTC", Field(a, "k_aus"), Field(a, "lat_band"), Field(a, "valid_until")) : "";
+                    string w = await BomPost("get-aurora-watch", "");
+                    BomWatch = Field(w, "k_aus").Length > 0 ? Lang.F("sorveglianza aurora dal {0}: K aus {1} ({2})", Field(w, "start_date"), Field(w, "k_aus"), Field(w, "cause")) : "";
+                    string o = await BomPost("get-aurora-outlook", "");
+                    BomOutlook = Field(o, "k_aus").Length > 0 ? Lang.F("previsione aurora: K aus {0}, latitudini {1} ({2})", Field(o, "k_aus"), Field(o, "lat_band"), Field(o, "cause")) : "";
+                    if (k.Contains("\"errors\"")) BomError = Field(k, "message");
+                }
+                catch (Exception ex) { BomError = ex.Message; }
+            }
+            Action u = Updated; if (u != null) u();
+        }
+
+        // sintesi per la linguetta AURORA e per il calcolo della probabilita'
+        public static string DstSummary()
+        {
+            if (double.IsNaN(Dst)) return null;
+            string lvl = Dst <= -100 ? Lang.T("tempesta intensa") : Dst <= -50 ? Lang.T("tempesta moderata") : Dst <= -30 ? Lang.T("debole disturbo") : Lang.T("quiete");
+            return Lang.F("Dst {0:F0} nT ({1}, {2:HH} UTC, Kyoto)", Dst, lvl, DstTime);
+        }
+
+        public static string BomSummary()
+        {
+            if (BomKey.Length == 0) return null;
+            if (BomError.Length > 0) return Lang.F("BoM: {0}", BomError);
+            List<string> p = new List<string>();
+            if (BomKAus >= 0) p.Add(Lang.F("K Australia {0}", BomKAus));
+            if (BomAlert.Length > 0) p.Add(BomAlert);
+            if (BomWatch.Length > 0) p.Add(BomWatch);
+            if (BomOutlook.Length > 0) p.Add(BomOutlook);
+            return p.Count == 0 ? Lang.T("BoM: nessuna allerta aurora") : "BoM: " + string.Join("; ", p);
+        }
+
         static string Tr(string v) { return v == null ? "-" : Lang.T(v); }
 
         // righe in sovraimpressione sulle mappe
@@ -152,6 +255,8 @@ namespace ELA
             List<string> l = new List<string>();
             string au = AuroraSummary();
             if (au != null) { l.Add(Lang.F("N0NBH ({0})", S("updated"))); l.Add(au); }
+            string dst = DstSummary(); if (dst != null) l.Add(dst);
+            if (Continents.Index == 5 || Continents.Index == 2) { string b = BomSummary(); if (b != null) l.Add(b); }
             if (!double.IsNaN(SpaceWeather.Bz))
                 l.Add(Lang.F("NOAA RTSW: Bz {0} nT   Bt {1} nT   vento {2} km/s", Geo.Fmt(SpaceWeather.Bz, 1), Geo.Fmt(SpaceWeather.Bt, 1), Geo.Fmt(SpaceWeather.Speed, 0)));
             return l;

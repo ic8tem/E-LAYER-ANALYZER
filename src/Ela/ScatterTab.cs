@@ -686,7 +686,12 @@ namespace ELA
         {
             double kp = SpaceWeather.LatestKp;
             ov = SpaceWeather.Oval != null ? SpaceWeather.OvalAt(la, lo) : double.NaN;
-            if (!double.IsNaN(kp) && kp <= 2) return Lang.T("improbabile (Kp ≤ 2)");
+            if (!double.IsNaN(kp) && kp <= 2 && !(PropData.Dst <= -50)) return Lang.T("improbabile (Kp ≤ 2)");
+            // emisfero sud: allerta aurora del Bureau of Meteorology (Australia) [44]
+            if (la < 0 && PropData.BomAlert.Length > 0) return Lang.T("probabile (allerta aurora BoM)");
+            // tempesta geomagnetica (Dst di Kyoto [46]): l'ovale scende verso sud
+            if (PropData.Dst <= -100 && !double.IsNaN(ov) && ov >= 1) return Lang.T("probabile (tempesta, Dst ≤ -100 nT)");
+            if (PropData.Dst <= -50 && !double.IsNaN(ov) && ov >= 1) return Lang.T("possibile (tempesta, Dst ≤ -50 nT)");
             if (!double.IsNaN(ov) && ov >= 10) return Lang.T("probabile");
             if ((!double.IsNaN(ov) && ov >= 3) || (!double.IsNaN(kp) && kp >= 5)) return Lang.T("possibile");
             return Lang.T("improbabile");
