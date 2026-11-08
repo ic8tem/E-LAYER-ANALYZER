@@ -25,7 +25,7 @@ P|Sekmenin sağ sütunu, pencerenin %40'ı, tüm spot filtrelerini toplar: veri 
 LI|Meteor scatter: YA-MS filtresi (MS'e özgü frekans pencereleri, başka yayılım etiketleri, dijital MS modları ve <MS>, bantlar, filtre testi ve sayaçlar). E-LAYER ANALYZER içinde YA-MS'in Veri toplama alt sekmesi görünmez: filtresi burada ayarlanır.
 LI|Sporadik E: bir spot'u sporadik E'den dışlayan < > arasındaki etiketler; 28 ve 50 MHz kuralları (450 km içinde sporadik E değildir; bant planı dışlayıcı bir ölçüt değildir, bu yüzden meteor scatter penceresindeki bir spot dijital mod MS ya da <MS> olmadıkça sporadik E'de kalır); 144 MHz kuralı (en kısa mesafe; birkaç dakika içinde aynı buluta ikinci bir spot ile ya da çevrede 50 MHz'de kısa atlamalı bir spot ile doğrulama) ve manyetik eğim kuşağıyla transekvatoryal kural. Yazarın kurallarını geri yükle düğmesi başlangıç değerlerini geri getirir.
 LI|F.A.I.: bir F.A.I. spot'unu belirten sözcükler (başlangıçta FAI: büyük, küçük ya da karışık harflerle <FAI> veya fai geçerlidir; bu spot'lar sporadik E'ye girmez), bantlar ve haritadaki spot'ların süresi (başlangıçta 24 saat).
-LI|Aurora: aurora spot'larının < > arasındaki etiketleri (başlangıçta <AU>, <AUR>, <AUE>, <AURORA>), bantlar ve haritadaki spot'ların süresi (başlangıçta 2 saat).
+LI|Aurora: aurora spot'larının sözcükleri, < > ile ya da olmadan ve büyük ya da küçük harfle (başlangıçta AU ve AUR), bantlar ve haritadaki spot'ların süresi (başlangıçta 2 saat).
 LI|Filtre testi: bir küme satırı yazılır ya da yapıştırılır ve program filtrelerin onu nasıl sınıflandırdığını (meteor scatter, aurora, F.A.I., transekvatoryal, sporadik E) bant, lokatör ve mesafeyle birlikte gösterir.
 H2|2.3 Program spot'ları nasıl okur
 P|Program her "DX de" satırından spotter'ı, frekansı, DX'i, yorumu, saati ve, varsa, yorumda JN70CN<ES>JO62QM biçiminde yazılmış lokatörleri ve yayılım modunu çıkarır (ilk lokatör spotter'ın, ikincisi DX'indir; <>, > ve parantezli biçimler de kabul edilir).
@@ -37,7 +37,12 @@ H2|2.4 Toplanan spot'lar ve CALL3 arşivi
 P|Toplanan spot'lar sayfası son spot'ları bant ve kaynak filtresiyle listeler; Spot klasörünü aç düğmesi data/spot klasörünü açar. CALL3 sayfası çağrı işareti -> lokatör arşivini (JTDX/WSJT biçimi) gösterir: bir çağrı işareti aranabilir, arşiv yeniden yüklenebilir ya da kullanılanın yerine geçen yeni bir CALL3.TXT dosyası içe aktarılabilir (eskisi yedek kopya olarak kalır).
 H1|3. Sporadik E (SPORADIC-E)
 H2|3.1 Harita
-P|Harita menüsü üç görünüm arasında seçim yapar. Azimutal - tek atlama: kendi istasyonunuzu merkez alan, 2500 km sabit yarıçaplı ve IK3XTV tablosunun [3] bölgelerini (en az 500 km, en uygun 1500-2000 km, en çok 2400 km) gösteren harita. Azimutal - en büyük mesafe (çok atlama): çok atlamanın gelişimini izlemek için 300 ile 20000 km arasında En büyük mesafe kaydırıcısı ve ikili (5000 km) ile üçlü atlama (6900 km) sınırlarıyla aynı harita. Dikdörtgen: Avrupa ve Dünya düğmeleriyle dünya haritası.
+P|Harita menüsü projeksiyonu seçer. Azimutal: kendi istasyonunuzu merkez alan, yakınlaştırma kaydırıcılı (merkezden 300 ile 20000 km arası, fare tekerleğiyle de) azimutal eşit uzaklıklı harita. Mercator: Avrupa ve Dünya düğmeleriyle dünya haritası. Her iki projeksiyonda da istasyonun çevresine IK3XTV tablosunun [3] mesafe çemberleri çizilir: 500 km (tek atlamanın en azı), 1500-2000 km (en uygun), 2400 km (tek atlamanın en çoğu), 5000 km (çift atlamanın en çoğu) ve 6900 km (üçlü atlamanın en çoğu).
+P|50 MHz'deki atlama uzunlukları tablosu, Flavio Egano IK3XTV'nin «Propagazione sui 6 metri - Caratteristiche generali» [3] çalışmasındaki tablodur; Es bulutları yaklaşık 100 km yükseklikte bulunur ve bu, tek atlamayı yaklaşık 2000 km ile sınırlar [29]. Haritalardaki halkalar ve atlama sayısı bu mesafeleri izler:
+TAB|Atlama;En az mesafe;En uygun mesafe;En çok mesafe
+TAB|Tek atlama;500-650 km;1500-2000 km;2200-2400 km
+TAB|Çift atlama;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Üçlü atlama;-;4800-6400 km;6900 km
 P|Azimutal görünümlerde kesikli halkalar merkezden km'yi gösterir; halkaların aralığı yakınlaştırmayla değişir ve dış kenar gösterilen en büyük mesafeyi belirtir.
 H2|3.2 Kontroller
 LI|Bantlar: 10, 6, 4 ve 2 m (432 MHz incelenmez: sporadik E bu bantta geçerli değildir [22]-[24]); spot'ların zaman penceresi 15 dakikadan 12 saate kadar.

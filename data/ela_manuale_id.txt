@@ -25,7 +25,7 @@ P|Kolom kanan tab, 40% dari jendela, menghimpun semua filter spot: pengumpulan d
 LI|Meteor scatter: filter YA-MS (jendela frekuensi khas MS, tag propagasi lain, mode digital MS dan <MS>, band, uji filter dan penghitung). Di dalam E-LAYER ANALYZER subtab Pengumpulan data YA-MS tidak muncul: filternya diatur di sini.
 LI|Sporadic-E: tag di antara < > yang mengecualikan spot dari sporadic-E; aturan 28 dan 50 MHz (dalam 450 km bukan sporadic-E; bandplan bukan kriteria eksklusif, sehingga spot di jendela meteor scatter tetap masuk sporadic-E kecuali mode digital MS atau <MS>); aturan 144 MHz (jarak minimum; konfirmasi dengan spot kedua pada awan yang sama dalam beberapa menit, atau dengan spot 50 MHz lompatan pendek di sekitarnya) dan aturan transekuatorial dengan pita inklinasi magnetiknya. Tombol Pulihkan aturan penulis mengembalikan nilai bawaan.
 LI|F.A.I.: kata-kata yang menandai spot F.A.I. (bawaan FAI: berlaku <FAI> atau fai, dalam huruf besar, kecil, atau campuran; spot ini tidak masuk sporadic-E), band dan periode spot di peta (bawaan 24 jam).
-LI|Aurora: tag di antara < > untuk spot aurora (bawaan <AU>, <AUR>, <AUE>, <AURORA>), band dan periode spot di peta (bawaan 2 jam).
+LI|Aurora: kata-kata untuk spot aurora, dengan atau tanpa < > dan dalam huruf besar atau kecil (bawaan AU dan AUR), band dan periode spot di peta (bawaan 2 jam).
 LI|Uji filter: ketik atau tempel satu baris kluster dan program menunjukkan bagaimana filter mengklasifikasikannya (meteor scatter, aurora, F.A.I., transekuatorial, sporadic-E), beserta band, locator dan jarak.
 H2|2.3 Cara program membaca spot
 P|Dari setiap baris "DX de" program mengambil spotter, frekuensi, DX, komentar, jam dan, bila ada, locator serta mode propagasi yang ditulis di komentar dalam bentuk JN70CN<ES>JO62QM (locator pertama milik spotter, yang kedua milik DX; bentuk dengan <>, > dan tanda kurung juga diterima).
@@ -37,7 +37,12 @@ H2|2.4 Spot terkumpul dan basis data CALL3
 P|Halaman Spot terkumpul menampilkan spot terakhir dengan filter per band dan per sumber; tombol Buka folder spot membuka data/spot. Halaman CALL3 menampilkan basis data callsign -> locator (format JTDX/WSJT): Anda dapat mencari callsign, memuat ulang basis data atau mengimpor file CALL3.TXT baru, yang menggantikan file yang sedang dipakai (file lama disimpan sebagai cadangan).
 H1|3. Sporadic-E (SPORADIC-E)
 H2|3.1 Peta
-P|Menu Peta memilih salah satu dari tiga tampilan. Azimutal - satu lompatan: peta berpusat pada stasiun Anda dengan radius tetap 2500 km dan zona tabel IK3XTV [3] (500 km minimum, 1500-2000 km optimal, 2400 km maksimum). Azimutal - jarak maksimum (multi-lompatan): peta yang sama dengan penggeser Jarak maksimum, dari 300 hingga 20000 km, dan batas dua lompatan (5000 km) dan tiga lompatan (6900 km), untuk mengikuti perkembangan multi-lompatan. Persegi panjang: peta dunia dengan tombol Eropa dan Dunia.
+P|Menu Peta memilih proyeksi. Azimutal: peta azimutal ekuidistan yang berpusat pada stasiun Anda, dengan penggeser zoom (dari 300 hingga 20000 km dari pusat, juga dengan roda mouse). Mercator: peta dunia dengan tombol Eropa dan Dunia. Pada kedua proyeksi, lingkaran jarak dari tabel IK3XTV [3] digambar di sekitar stasiun: 500 km (minimum satu lompatan), 1500-2000 km (optimal), 2400 km (maksimum satu lompatan), 5000 km (maksimum dua lompatan) dan 6900 km (maksimum tiga lompatan).
+P|Tabel panjang lompatan di 50 MHz adalah tabel Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; awan Es berada pada ketinggian sekitar 100 km, dan hal ini membatasi satu lompatan sekitar 2000 km [29]. Cincin pada peta dan jumlah lompatan mengikuti jarak-jarak ini:
+TAB|Lompatan;Jarak minimum;Jarak optimal;Jarak maksimum
+TAB|Satu lompatan;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dua lompatan;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Tiga lompatan;-;4800-6400 km;6900 km
 P|Pada tampilan azimutal, lingkaran putus-putus menunjukkan km dari pusat; jarak antarlingkaran berubah sesuai perbesaran dan tepi luar menunjukkan jarak maksimum yang ditampilkan.
 H2|3.2 Kontrol
 LI|Band: 10, 6, 4 dan 2 m (432 MHz tidak dianalisis: sporadic-E tidak berlaku [22]-[24]); jendela waktu spot dari 15 menit hingga 12 jam.

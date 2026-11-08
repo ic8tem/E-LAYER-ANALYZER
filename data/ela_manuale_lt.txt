@@ -25,7 +25,7 @@ P|Dešinysis kortelės stulpelis, 40% lango, apima visus spotų filtrus: duomen�
 LI|Meteor scatter: YA-MS filtras (MS būdingi dažnių langai, kito sklidimo žymos, skaitmeniniai MS režimai ir <MS>, juostos, filtro patikra ir skaitikliai). E-LAYER ANALYZER viduje YA-MS vidinė kortelė Duomenų rinkimas nerodoma: jos filtras nustatomas čia.
 LI|Sporadinis E: žymos tarp < >, kurios pašalina spotą iš sporadinio E; 28 ir 50 MHz taisyklės (iki 450 km tai nėra sporadinis E; juostų planas nėra išskirtinis kriterijus, todėl spotas meteor scatter lange lieka sporadiniame E, nebent nurodytas skaitmeninis režimas MS arba <MS>); 144 MHz taisyklė (mažiausias atstumas; patvirtinimas antru spotu per tą patį debesį per kelias minutes arba trumpo šuolio 50 MHz spotu netoliese) ir transekvatorinė taisyklė su savo magnetinės inklinacijos juosta. Mygtukas Atkurti autoriaus taisykles grąžina pradines reikšmes.
 LI|F.A.I.: žodžiai, žymintys F.A.I. spotą (pagal nutylėjimą FAI: tinka <FAI> arba fai, didžiosiomis, mažosiomis ar mišriomis raidėmis; šie spotai nepatenka į sporadinį E), juostos ir žemėlapyje rodomų spotų laikotarpis (pagal nutylėjimą 24 valandos).
-LI|Pašvaistė: pašvaistės spotų žymos tarp < > (pagal nutylėjimą <AU>, <AUR>, <AUE>, <AURORA>), juostos ir žemėlapyje rodomų spotų laikotarpis (pagal nutylėjimą 2 valandos).
+LI|Pašvaistė: pašvaistės spotų žodžiai, su < > arba be jų ir didžiosiomis ar mažosiomis raidėmis (pagal nutylėjimą AU ir AUR), juostos ir žemėlapyje rodomų spotų laikotarpis (pagal nutylėjimą 2 valandos).
 LI|Filtrų patikra: įrašoma arba įklijuojama klasterio eilutė, ir programa parodo, kaip ją klasifikuoja filtrai (meteor scatter, pašvaistė, F.A.I., transekvatorinis, sporadinis E), kartu su juosta, lokatoriumi ir atstumu.
 H2|2.3 Kaip programa skaito spotus
 P|Iš kiekvienos „DX de“ eilutės programa išgauna spoterį, dažnį, DX, komentarą, laiką ir, jei yra, lokatorius bei sklidimo būdą, įrašytus komentare forma JN70CN<ES>JO62QM (pirmasis lokatorius – spoterio, antrasis – DX; priimamos ir formos su <>, > bei skliaustais).
@@ -37,7 +37,12 @@ H2|2.4 Surinkti spotai ir CALL3 archyvas
 P|Puslapyje Surinkti spotai pateikiami paskutiniai spotai su filtru pagal juostą ir šaltinį; mygtukas Atverti spotų aplanką atveria data/spot. Puslapyje CALL3 rodomas archyvas šaukinys -> lokatorius (JTDX/WSJT formatas): galima ieškoti šaukinio, iš naujo įkelti archyvą arba importuoti naują CALL3.TXT failą, kuris pakeičia naudojamąjį (senasis lieka kaip atsarginė kopija).
 H1|3. Sporadinis E (SPORADIC-E)
 H2|3.1 Žemėlapis
-P|Meniu Žemėlapis leidžia rinktis vieną iš trijų vaizdų. Azimutinis - vienas šuolis: žemėlapis, centruotas į savo stotį, su fiksuotu 2500 km spinduliu ir IK3XTV lentelės zonomis [3] (500 km mažiausia, 1500-2000 km optimali, 2400 km didžiausia). Azimutinis - maksimalus atstumas (keli šuoliai): tas pats žemėlapis su slankikliu Maksimalus atstumas nuo 300 iki 20000 km ir dvigubo (5000 km) bei trigubo šuolio (6900 km) ribomis, kad būtų galima sekti kelių šuolių raidą. Stačiakampis: pasaulio žemėlapis su mygtukais Europa ir Pasaulis.
+P|Meniu Žemėlapis leidžia pasirinkti projekciją. Azimutinis: azimutinis lygiatolis žemėlapis, centruotas į savo stotį, su mastelio slankikliu (nuo 300 iki 20000 km nuo centro, taip pat pelės ratuku). Merkatoriaus: pasaulio žemėlapis su mygtukais Europa ir Pasaulis. Abiejose projekcijose aplink stotį braižomi IK3XTV lentelės [3] atstumų apskritimai: 500 km (vieno šuolio mažiausias), 1500-2000 km (optimalus), 2400 km (vieno šuolio didžiausias), 5000 km (dvigubo šuolio didžiausias) ir 6900 km (trigubo šuolio didžiausias).
+P|50 MHz šuolių ilgių lentelė yra Flavio Egano IK3XTV lentelė, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es debesys yra maždaug 100 km aukštyje, ir tai riboja vieną šuolį maždaug iki 2000 km [29]. Žemėlapių žiedai ir šuolių skaičius atitinka šiuos atstumus:
+TAB|Šuolis;Mažiausias atstumas;Optimalus atstumas;Didžiausias atstumas
+TAB|Vienas šuolis;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dvigubas šuolis;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Trigubas šuolis;-;4800-6400 km;6900 km
 P|Azimutiniuose vaizduose punktyriniai žiedai rodo kilometrus nuo centro; žiedų žingsnis keičiasi su masteliu, o išorinis kraštas rodo didžiausią vaizduojamą atstumą.
 H2|3.2 Valdikliai
 LI|Juostos: 10, 6, 4 ir 2 m (432 MHz neanalizuojama: sporadinis E netaikomas [22]-[24]); spotų laiko langas nuo 15 minučių iki 12 valandų.

@@ -25,7 +25,7 @@ P|Hægri dálkur flipans, 40% af glugganum, safnar saman öllum síum spotanna: 
 LI|Meteor scatter: sía YA-MS (tíðnigluggar dæmigerðir fyrir MS, merkingar annarrar útbreiðslu, stafrænir MS-hættir og <MS>, tíðnisvið, prófun síunnar og teljarar). Innan E-LAYER ANALYZER birtist undirflipinn Gagnasöfnun í YA-MS ekki: sía hans er stillt hér.
 LI|Sporadic-E: merkingarnar innan < > sem útiloka spot frá sporadic-E; 28 og 50 MHz-reglurnar (innan 450 km er það ekki sporadic-E; tíðniskipulagið er ekki útilokandi viðmið, svo spot í meteor scatter-glugganum helst í sporadic-E nema með stafrænum hætti MS eða <MS>); 144 MHz-reglan (lágmarksfjarlægð; staðfesting með öðru spoti á sama ský innan fárra mínútna eða með spoti með stuttu stökki á 50 MHz í nágrenninu) og þvermiðbaugsreglan með belti sínu fyrir segulhalla. Hnappurinn Endurheimta reglur höfundarins setur sjálfgefnu gildin aftur.
 LI|F.A.I.: orðin sem auðkenna F.A.I.-spot (sjálfgefið FAI: <FAI> eða fai gildir, með hástöfum, lágstöfum eða blönduðu; þessi spot fara ekki í sporadic-E), tíðnisviðin og tímabil spotanna á kortinu (sjálfgefið 24 klukkustundir).
-LI|Norðurljós: merkingarnar innan < > fyrir norðurljósaspot (sjálfgefið <AU>, <AUR>, <AUE>, <AURORA>), tíðnisviðin og tímabil spotanna á kortinu (sjálfgefið 2 klukkustundir).
+LI|Norðurljós: orðin fyrir norðurljósaspot, með eða án < > og í há- eða lágstöfum (sjálfgefið AU og AUR), tíðnisviðin og tímabil spotanna á kortinu (sjálfgefið 2 klukkustundir).
 LI|Prófun sía: klasalína er skrifuð eða límd inn og forritið sýnir hvernig síurnar flokka hana (meteor scatter, norðurljós, F.A.I., þvermiðbaugsútbreiðsla, sporadic-E), ásamt tíðnisviði, locator og fjarlægð.
 H2|2.3 Hvernig forritið les spotin
 P|Úr hverri "DX de"-línu les forritið spotter, tíðni, DX, athugasemd, tíma og, þegar þau eru til staðar, locatora og útbreiðsluaðferð sem skrifuð eru í athugasemdina á forminu JN70CN<ES>JO62QM (fyrri locatorinn er spotterans, sá seinni DX; einnig eru samþykkt form með <>, > og svigum).
@@ -37,7 +37,12 @@ H2|2.4 Söfnuð spot og CALL3-safnið
 P|Síðan Söfnuð spot sýnir nýjustu spotin með síu eftir tíðnisviði og uppruna; hnappurinn Opna möppu spotanna opnar data/spot. Síðan CALL3 sýnir safnið kallmerki -> locator (JTDX/WSJT-snið): þar má leita að kallmerki, endurhlaða safninu eða flytja inn nýja CALL3.TXT-skrá, sem kemur í stað þeirrar sem er í notkun (sú gamla er geymd sem öryggisafrit).
 H1|3. Sporadic-E (SPORADIC-E)
 H2|3.1 Kortið
-P|Valmyndin Kort velur á milli þriggja sýna. Áttarhornskort - eitt stökk: kort með eigin stöð í miðju, föstum radíus 2500 km og svæðum töflu IK3XTV [3] (500 km lágmark, 1500-2000 km best, 2400 km hámark). Áttarhornskort - hámarksfjarlægð (fjölstökk): sama kort með sleðanum Hámarksfjarlægð, frá 300 til 20000 km, og mörkum tvöfalds (5000 km) og þrefalds stökks (6900 km), til að fylgjast með þróun fjölstökks. Rétthyrnt kort: heimskortið með hnöppunum Evrópa og Heimurinn.
+P|Valmyndin Kort velur vörpunina. Áttarhornskort: jafnfjarlægt áttarhornskort með eigin stöð í miðju, með aðdráttarsleðanum (frá 300 til 20000 km frá miðju, einnig með músarhjólinu). Mercator: heimskortið með hnöppunum Evrópa og Heimurinn. Í báðum vörpununum eru fjarlægðarhringir töflu IK3XTV [3] teiknaðir umhverfis stöðina: 500 km (lágmark eins stökks), 1500-2000 km (best), 2400 km (hámark eins stökks), 5000 km (hámark tvöfalds stökks) og 6900 km (hámark þrefalds stökks).
+P|Tafla stökklengda á 50 MHz er tafla Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es-skýin eru í um 100 km hæð og það takmarkar eitt stökk við um 2000 km [29]. Hringir kortanna og fjöldi stökka fylgja þessum fjarlægðum:
+TAB|Stökk;Lágmarksfjarlægð;Besta fjarlægð;Hámarksfjarlægð
+TAB|Eitt stökk;500-650 km;1500-2000 km;2200-2400 km
+TAB|Tvöfalt stökk;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Þrefalt stökk;-;4800-6400 km;6900 km
 P|Á áttarhornskortunum sýna strikuðu hringirnir km frá miðju; bilið milli hringjanna breytist með aðdrætti og ytri brúnin sýnir mestu fjarlægð sem birt er.
 H2|3.2 Stjórntækin
 LI|Tíðnisvið: 10, 6, 4 og 2 m (432 MHz eru ekki greind: sporadic-E á þar ekki við [22]-[24]); tímagluggi spotanna frá 15 mínútum upp í 12 klukkustundir.

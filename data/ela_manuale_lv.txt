@@ -25,7 +25,7 @@ P|Cilnes labajā kolonnā, 40% no loga, ir apkopoti visi spotu filtri: datu vāk
 LI|Meteor scatter: YA-MS filtrs (MS tipiskie frekvenču logi, citas izplatīšanās atzīmes, digitālie MS režīmi un <MS>, joslas, filtra pārbaude un skaitītāji). E-LAYER ANALYZER iekšienē YA-MS apakšcilne Datu vākšana neparādās: tās filtru iestata šeit.
 LI|Sporādiskais E: atzīmes starp < >, kas izslēdz spotu no sporādiskā E; 28 un 50 MHz noteikumi (450 km robežās tas nav sporādiskais E; joslu plāns nav izslēdzošs kritērijs, tāpēc spots meteor scatter logā paliek sporādiskajā E, ja vien nav digitālā režīma MS vai <MS>); 144 MHz noteikums (minimālais attālums; apstiprinājums ar otru spotu no tā paša mākoņa dažu minūšu laikā vai ar īsa lēciena 50 MHz spotu tuvumā) un transekvatoriālais noteikums ar tā magnētiskās inklinācijas joslu. Poga Atjaunot autora noteikumus atjauno sākotnējās vērtības.
 LI|F.A.I.: vārdi, kas apzīmē F.A.I. spotu (sākotnēji FAI: der <FAI> vai fai, ar lielajiem, mazajiem vai jauktiem burtiem; šie spoti neietilpst sporādiskajā E), joslas un kartē rādīto spotu periods (sākotnēji 24 stundas).
-LI|Aurora: auroras spotu atzīmes starp < > (sākotnēji <AU>, <AUR>, <AUE>, <AURORA>), joslas un kartē rādīto spotu periods (sākotnēji 2 stundas).
+LI|Aurora: auroras spotu vārdi, ar < > vai bez tām un ar lielajiem vai mazajiem burtiem (sākotnēji AU un AUR), joslas un kartē rādīto spotu periods (sākotnēji 2 stundas).
 LI|Filtru pārbaude: ieraksta vai ielīmē klastera rindu, un programma parāda, kā to klasificē filtri (meteor scatter, aurora, F.A.I., transekvatoriālā, sporādiskais E), ar joslu, lokatoru un attālumu.
 H2|2.3 Kā programma nolasa spotus
 P|No katras "DX de" rindas programma iegūst spoteri, frekvenci, DX, komentāru, laiku un, ja tādi ir, komentārā ierakstītos lokatorus un izplatīšanās veidu formā JN70CN<ES>JO62QM (pirmais lokators ir spoterim, otrais – DX; pieņem arī formas ar <>, > un iekavām).
@@ -37,7 +37,12 @@ H2|2.4 Savāktie spoti un CALL3 arhīvs
 P|Lapa Savāktie spoti uzskaita pēdējos spotus ar filtru pēc joslas un avota; poga Atvērt spotu mapi atver data/spot. Lapa CALL3 rāda arhīvu izsaukuma signāls -> lokators (JTDX/WSJT formāts): var meklēt izsaukuma signālu, pārlādēt arhīvu vai importēt jaunu CALL3.TXT failu, kas aizstāj lietoto (vecais paliek kā rezerves kopija).
 H1|3. Sporādiskais E (SPORADIC-E)
 H2|3.1 Karte
-P|Izvēlne Karte ļauj izvēlēties vienu no trim skatiem. Azimutālā - viens lēciens: karte ar savu staciju centrā, fiksētu 2500 km rādiusu un IK3XTV tabulas [3] zonām (500 km minimālā, 1500-2000 km optimālā, 2400 km maksimālā). Azimutālā - maksimālais attālums (vairāklēcienu): tā pati karte ar slīdni Maksimālais attālums no 300 līdz 20000 km un dubultā (5000 km) un trīskāršā lēciena (6900 km) robežām, lai sekotu vairāklēcienu attīstībai. Taisnstūra: pasaules karte ar pogām Eiropa un Pasaule.
+P|Izvēlne Karte izvēlas projekciju. Azimutālā: azimutāla vienādattāluma karte ar savu staciju centrā, ar tālummaiņas slīdni (no 300 līdz 20000 km no centra, arī ar peles ritenīti). Merkatora: pasaules karte ar pogām Eiropa un Pasaule. Abās projekcijās ap staciju tiek zīmēti IK3XTV tabulas [3] attālumu apļi: 500 km (viena lēciena minimālais), 1500-2000 km (optimālais), 2400 km (viena lēciena maksimālais), 5000 km (dubultā lēciena maksimālais) un 6900 km (trīskāršā lēciena maksimālais).
+P|50 MHz lēcienu garumu tabula ir Flavio Egano IK3XTV tabula, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es mākoņi atrodas aptuveni 100 km augstumā, un tas ierobežo vienu lēcienu ap 2000 km [29]. Karšu gredzeni un lēcienu skaits atbilst šiem attālumiem:
+TAB|Lēciens;Minimālais attālums;Optimālais attālums;Maksimālais attālums
+TAB|Viens lēciens;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dubults lēciens;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Trīskāršs lēciens;-;4800-6400 km;6900 km
 P|Azimutālajos skatos raustītie apļi rāda km no centra; apļu solis mainās līdz ar tālummaiņu, un ārējā mala norāda maksimālo parādīto attālumu.
 H2|3.2 Vadīklas
 LI|Joslas: 10, 6, 4 un 2 m (432 MHz netiek analizēti: sporādiskais E uz tiem neattiecas [22]-[24]); spotu laika logs no 15 minūtēm līdz 12 stundām.

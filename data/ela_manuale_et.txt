@@ -25,7 +25,7 @@ P|Saki parem veerg, 40% aknast, koondab kõik spottide filtrid: andmete kogumine
 LI|Meteor scatter: YA-MS-i filter (MS-ile tüüpilised sagedusaknad, muu levi märked, digitaalsed MS-viisid ja <MS>, sagedusalad, filtri test ja loendurid). E-LAYER ANALYZERi sees YA-MS-i alamsakki Andmete kogumine ei kuvata: selle filter seadistatakse siin.
 LI|Sporaadiline E: märked < > vahel, mis välistavad spoti sporaadilisest E-st; 28 ja 50 MHz reeglid (450 km piires ei ole see sporaadiline E; sagedusplaan ei ole välistav kriteerium, seega jääb meteoorhajumise aknas olev spot sporaadilise E alla, välja arvatud digitaalse moodi MS või <MS> korral); 144 MHz reegel (vähim kaugus; kinnitus teise spotiga samalt pilvelt mõne minuti jooksul või 50 MHz lühikese hüppe spotiga läheduses) ja transekvatoriaalne reegel koos magnetilise kalde vööndiga. Nupp Taasta autori reeglid taastab vaikeväärtused.
 LI|F.A.I.: sõnad, mis tähistavad F.A.I. spotti (vaikimisi FAI: kehtib <FAI> või fai, suurte, väikeste või segatähtedega; need spotid ei lähe sporaadilise E alla), sagedusalad ja kaardil näidatavate spottide ajavahemik (vaikimisi 24 tundi).
-LI|Aurora: aurora spottide märked < > vahel (vaikimisi <AU>, <AUR>, <AUE>, <AURORA>), sagedusalad ja kaardil näidatavate spottide ajavahemik (vaikimisi 2 tundi).
+LI|Aurora: aurora spottide sõnad, < > vahel või ilma ning suur- või väiketähtedega (vaikimisi AU ja AUR), sagedusalad ja kaardil näidatavate spottide ajavahemik (vaikimisi 2 tundi).
 LI|Filtrite test: kirjutatakse või kleebitakse klastri rida ja programm näitab, kuidas filtrid selle liigitavad (meteoorhajumine, aurora, F.A.I., transekvatoriaalne, sporaadiline E), koos sagedusala, lokaatori ja kaugusega.
 H2|2.3 Kuidas programm spotte loeb
 P|Igast "DX de" reast võtab programm spotteri, sageduse, DX-i, kommentaari, kellaaja ja, kui need on olemas, kommentaari kirjutatud lokaatorid ja leviviisi kujul JN70CN<ES>JO62QM (esimene lokaator on spotteri, teine DX-i oma; aktsepteeritakse ka kujusid <>, > ja sulgudega).
@@ -37,7 +37,12 @@ H2|2.4 Kogutud spotid ja CALL3 arhiiv
 P|Leht Kogutud spotid loetleb viimased spotid koos sagedusala- ja allikafiltriga; nupp Ava spotide kaust avab kausta data/spot. Leht CALL3 näitab arhiivi kutsung -> lokaator (JTDX/WSJT vorming): saab otsida kutsungit, arhiivi uuesti laadida või importida uue CALL3.TXT faili, mis asendab kasutusel oleva (vana jääb varukoopiaks).
 H1|3. Sporaadiline E (SPORADIC-E)
 H2|3.1 Kaart
-P|Menüü Kaart valib kolme vaate vahel. Asimuutne - üks hüpe: oma jaama keskmega kaart fikseeritud raadiusega 2500 km ja IK3XTV tabeli [3] tsoonidega (500 km minimaalne, 1500-2000 km optimaalne, 2400 km maksimaalne). Asimuutne - maksimaalne kaugus (mitmehüppeline): sama kaart liuguriga Maksimaalne kaugus, 300 kuni 20000 km, ning kahe hüppe (5000 km) ja kolme hüppe (6900 km) piiridega, et jälgida mitmehüppelise levi arengut. Ristkülikuline: maailmakaart nuppudega Euroopa ja Maailm.
+P|Menüü Kaart valib projektsiooni. Asimuutne: oma jaama keskmega asimuutne võrdkauguskaart suurenduse liuguriga (keskpunktist 300 kuni 20000 km, ka hiire rattaga). Mercator: maailmakaart nuppudega Euroopa ja Maailm. Mõlemas projektsioonis joonistatakse jaama ümber IK3XTV tabeli [3] kauguste ringid: 500 km (ühe hüppe minimaalne), 1500-2000 km (optimaalne), 2400 km (ühe hüppe maksimaalne), 5000 km (kahe hüppe maksimaalne) ja 6900 km (kolme hüppe maksimaalne).
+P|50 MHz hüpete pikkuste tabel on Flavio Egano IK3XTV tabel, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es-pilved asuvad umbes 100 km kõrgusel ja see piirab ühe hüppe umbes 2000 km-ga [29]. Kaartide rõngad ja hüpete arv järgivad neid kaugusi:
+TAB|Hüpe;Minimaalne kaugus;Optimaalne kaugus;Maksimaalne kaugus
+TAB|Üks hüpe;500-650 km;1500-2000 km;2200-2400 km
+TAB|Kaks hüpet;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Kolm hüpet;-;4800-6400 km;6900 km
 P|Asimuutsetes vaadetes näitavad katkendlikud ringid kilomeetreid keskpunktist; ringide samm muutub koos suumiga ja välisserv näitab suurimat kuvatud kaugust.
 H2|3.2 Juhtelemendid
 LI|Sagedusalad: 10, 6, 4 ja 2 m (432 MHz ei analüüsita: sporaadiline E seal ei kehti [22]-[24]); spotide ajaaken 15 minutist 12 tunnini.
