@@ -72,7 +72,7 @@ namespace ELA
             cmbSp = Ui.Combo(sps, 0, 140);
             txtA = Ui.T(cf.Get(pfx + "a", ""), 120, true);
             txtB = Ui.T(cf.Get(pfx + "b", aurora ? "" : "F6DRO"), 120, true);
-            numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", aurora ? 105 : 110)), 0, 1, 45);
+            numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", 110)), 0, 1, 45);   // aurora: eco a circa 110 km (100-120 km, Lange-Hesse [35])
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD(pfx + "elev_min", 0)), 1, 0.5m, 45);
             chkOval = Ui.C(Lang.T("Ovale aurorale (NOAA OVATION)"), cf.GetB(pfx + "ovale", true));
             chkRefr = Ui.C(Lang.T("Rifrazione (raggio terrestre 4/3)"), cf.GetB(pfx + "rifrazione", true));
@@ -312,7 +312,8 @@ namespace ELA
             if (double.IsNaN(bLat)) { sb.AppendLine(Lang.T("Imposta la stazione B (nominativo, locator o clic sulla mappa).")); return; }
             double h = H, maxD = Geo.HalfHopKm(Ui.V(numElev), h);
             double step = 0.2;
-            List<PerpPoint> loc = FieldAligned.PairLocus(aLat, aLon, bLat, bLon, h, 2.5, Ui.V(numElev), maxD, step);
+            List<PerpPoint> loc = FieldAligned.PairLocus(aLat, aLon, bLat, bLon, h, Tol, Ui.V(numElev), maxD, step);
+            if (aurora) loc = loc.FindAll(p => InAuRange(p, bLat, bLon));
             Func<double, double, double> w = null;
             if (aurora && chkOval.IsChecked == true && SpaceWeather.Oval != null) w = (la, lo) => SpaceWeather.OvalAt(la, lo) / 30.0;
             PerpPoint best = null; double bestScore = double.MaxValue;
@@ -354,6 +355,7 @@ namespace ELA
             map.Lines.Add(MapView.GreatCircle(bLat, bLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
             map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", aName, best.Az, best.Elev));
             map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0)));
+            if (aurora) AuroraNotes(sb, best);
             // scatter noti vicini alla scia
             foreach (string[] k in KnownSp)
             {
@@ -625,7 +627,7 @@ namespace ELA
                 if (!auCache.TryGetValue(key, out sol))
                 {
                     sol = new AuSol();
-                    List<PerpPoint> loc = FieldAligned.PairLocus(s.LatS, s.LonS, s.LatD, s.LonD, h, 2.5, minEl, maxD, 0.5);
+                    List<PerpPoint> loc = FieldAligned.PairLocus(s.LatS, s.LonS, s.LatD, s.LonD, h, Tol, minEl, maxD, 0.5).FindAll(p => InAuRange(p, s.LatD, s.LonD));
                     double bestScore = double.MaxValue;
                     foreach (PerpPoint p in loc)
                     {
@@ -657,9 +659,67 @@ namespace ELA
                 map.Markers.Add(new MapMarker { Lat = b.Lat, Lon = b.Lon, Radius = 6, Fill = Pal.Orange, Ring = true, Label = Geo.LatLonToLoc(b.Lat, b.Lon, 4), LabelColor = Pal.Orange });
                 sb.AppendLine(Lang.F("  {0} {1} - {2} {3} MHz: scatter {4} (dev. {5:F1}°), {1} QTF {6:F0}° el {7:F0}°, {2} QTF {8:F0}° el {9:F0}°",
                     s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture) + "Z", s.Spotter, s.DxCall, s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture),
-                    Geo.LatLonToLoc(b.Lat, b.Lon, 6), b.Off, b.Az, b.Elev, sol.QtfB, sol.ElB));
+                    Geo.LatLonToLoc(b.Lat, b.Lon, 6), b.Off, b.Az, b.Elev, sol.QtfB, sol.ElB)
+                    + (s.DistanceKm > AuMaxKm ? "  " + Lang.F("dubbio: {0:F0} km, oltre i {1:F0} km tipici dell'aurora", s.DistanceKm, AuMaxKm) : ""));
             }
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("○ arancio: scatter point calcolato per uno spot <AU>/<AUR>"), Pal.Orange));
+            AuroraESpots(sb);
+        }
+
+        // ---------------------------------------------------------------- parametri dell'aurora dalle fonti approvate
+        // [35] Lange-Hesse (144 MHz): perpendicolarita' al campo entro +-2-3 gradi, eco a ~110 km, scatter point a 370-1100 km
+        // da ciascuna stazione; nessun collegamento con Kp 0-2. [36] G3WPO e [37] G0ISW: QTF tipico N-NE (0-50 gradi),
+        // distanze tipiche 250-1300 km, eccezionali 2000 km; Doppler fino a 2 kHz in 144 MHz; 50 MHz favorito.
+        // [41] K7CW: in aurora FT8 spesso non decodifica, meglio CW/SSB o Q65 con sottomodi larghi.
+        double Tol { get { return aurora ? 3.0 : 2.5; } }
+        public const double AuMinRangeKm = 370, AuMaxRangeKm = 1100, AuMaxKm = 2000;
+        bool InAuRange(PerpPoint p, double bLa, double bLo)
+        {
+            if (!aurora) return true;
+            double dB = Geo.DistanceKm(bLa, bLo, p.Lat, p.Lon);
+            return p.DistKm >= AuMinRangeKm && p.DistKm <= AuMaxRangeKm && dB >= AuMinRangeKm && dB <= AuMaxRangeKm;
+        }
+
+        // probabilita' dell'aurora nello scatter point: Kp (Lange-Hesse) e ovale NOAA OVATION (al posto di una soglia di Kp per latitudine)
+        public static string AuroraChance(double la, double lo, out double ov)
+        {
+            double kp = SpaceWeather.LatestKp;
+            ov = SpaceWeather.Oval != null ? SpaceWeather.OvalAt(la, lo) : double.NaN;
+            if (!double.IsNaN(kp) && kp <= 2) return Lang.T("improbabile (Kp ≤ 2)");
+            if (!double.IsNaN(ov) && ov >= 10) return Lang.T("probabile");
+            if ((!double.IsNaN(ov) && ov >= 3) || (!double.IsNaN(kp) && kp >= 5)) return Lang.T("possibile");
+            return Lang.T("improbabile");
+        }
+
+        void AuroraNotes(StringBuilder sb, PerpPoint best)
+        {
+            double ov;
+            string ch = AuroraChance(best.Lat, best.Lon, out ov);
+            sb.AppendLine();
+            sb.AppendLine(Lang.F("Probabilità di aurora nello scatter point: {0} (ovale NOAA {1} %, Kp {2})", ch, Geo.Fmt(ov, 0), Geo.Fmt(SpaceWeather.LatestKp, 1)));
+            map.Info.Add(Lang.F("Aurora: {0}", ch));
+            double direct = Geo.Bearing(aLat, aLon, bLat, bLon);
+            double dev = Math.Abs(((best.Az - direct) % 360 + 540) % 360 - 180);
+            bool south = aLat < 0;
+            sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud); scarto dal percorso diretto {0:F0}°", dev)
+                                : Lang.F("QTF tipico tra N e NE (0-50°), che si sposta verso N durante l'evento (G3WPO, G0ISW); scarto dal percorso diretto {0:F0}°", dev));
+            sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW)."));
+            sb.AppendLine(Lang.F("Scatter point cercato a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
+        }
+
+        // aurora-E: sul percorso diretto, senza Doppler, dopo l'aurora (G0ISW [37]); si disegna la tratta diretta
+        void AuroraESpots(StringBuilder sb)
+        {
+            List<Spot> l = SpotStore.Recent(Filters.AuMinutes, s => s.HasBoth && s.IsAuroraE);
+            if (l.Count == 0) return;
+            sb.AppendLine();
+            sb.AppendLine(Lang.F("Spot di aurora-E (Au-E) sul percorso diretto ({0}):", l.Count));
+            foreach (Spot s in l.GetRange(0, Math.Min(30, l.Count)))
+            {
+                map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, Pal.A(220, Pal.Green), 1.6));
+                sb.AppendLine(Lang.F("  {0} {1} - {2} {3} MHz, {4:F0} km", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture) + "Z", s.Spotter, s.DxCall, s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), s.DistanceKm));
+            }
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("verde: aurora-E (Au-E) sul percorso diretto"), Pal.Green));
         }
     }
 

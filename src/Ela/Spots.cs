@@ -45,7 +45,12 @@ namespace ELA
         // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsAurora { get { return Prop == "AU" || Filters.AuTag(Comment); } }
+        public bool IsAurora { get { return (Prop == "AU" || Filters.AuTag(Comment)) && !IsAuroraE; } }
+        // aurora-E (Au-E): E sporadico di origine aurorale, senza Doppler, sul percorso diretto, dopo l'evento aurorale (G0ISW [37]);
+        // riconosciuto da AUE, AU-E o AURORAL E nel testo, oppure dal modo dichiarato AUE
+        static readonly System.Text.RegularExpressions.Regex rxAuE = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(AUE|AU-E|AURORAL[- ]?E)(?![A-Z0-9])",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool IsAuroraE { get { return Prop == "AUE" || rxAuE.IsMatch(Comment ?? ""); } }
         // MS sicuro: modo dichiarato MS, modo digitale MS o <MS> (la sola finestra di frequenza del bandplan e' un indizio)
         public bool IsMeteorScatterSure { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
         // In 50 MHz il bandplan non e' un criterio esclusivo (regola dell'autore): la sola finestra MS non toglie lo spot all'E-sporadico
@@ -54,7 +59,7 @@ namespace ELA
         // in 28 MHz la distanza minima si scala da quella dei 50 MHz seguendo IK3XTV (EsModel.MinKm28)
         public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "10m" && DistanceKm < EsModel.MinKm28)); } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
         public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD)); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
@@ -160,7 +165,7 @@ namespace ELA
         {
             p = p.ToUpperInvariant();
             if (p.StartsWith("E-") || p == "ESKIP" || p == "SPORADIC") return "ES";
-            if (p == "AURORA" || p == "AUE" || p == "AUR") return "AU";
+            if (p == "AURORA" || p == "AUR") return "AU";   // AUE (aurora-E) resta un modo a se' (G0ISW)
             if (p == "METEOR") return "MS";
             if (p == "TROPO") return "TR";
             return p;
