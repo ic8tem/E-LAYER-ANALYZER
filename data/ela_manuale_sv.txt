@@ -10,11 +10,13 @@ LI|För att flytta programmet till en annan dator räcker det att kopiera dess m
 LI|Lösenordet till LoTW sparas aldrig; endast användarnamnet kan kommas ihåg.
 H2|1.3 Fältet högst upp
 P|Uppe till vänster anger du din anropssignal, din lokator (4, 6 eller 8 tecken) och antennens höjd i meter; knappen Verkställ bekräftar dem och alla flikar uppdateras. Uppe till höger finns UTC-tiden, valet av färgschema (alla scheman från YAEC: Ljust, Natt, Svart, åtta pasteller och Meteorspår) och valet av språk (28 språk). När färgschema eller språk ändras byggs fönstret om direkt, utan att insamlade data går förlorade.
+P|Till höger i flikraden finns kontinentmenyn (Europa, Nordamerika, Sydamerika, Afrika, Asien, Oceanien): den flyttar Mercatorkartorna och F.A.I.- och aurorakartorna till vald kontinent och väljer prognosdata för den kontinenten (E-skip från N0NBH publiceras bara för Europa och Nordamerika).
 H2|1.4 Statusfältet
 P|Längst ned visar statusfältet hur många anropssignaler CALL3-databasen innehåller, hur många spots som finns i minnet och vilken magnetisk modell som används (IGRF-14 med dess epok). Spots i minnet raderas varje gång programmet stängs: varje session börjar om utan gamla spots.
 H2|1.5 Kartorna
 P|Alla kartor används på samma sätt: mushjulet zoomar in eller ut, att dra med vänster knapp flyttar vyn, och vänsterklick väljer en punkt, en spot eller en sträcka beroende på flik. Uppe till höger visas koordinaterna och 6-teckens lokatorn under markören; i de azimutala kartorna även avstånd och azimut från centrum. Rutnätet med Maidenhead-fält och -rutor blir tätare när du zoomar in.
 H1|2. Datainsamling (DATA COLLECTION)
+P|Fliken har två underflikar: Spots, med telnetsessionerna, de insamlade spotsen, CALL3-databasen och filterkolumnen, och Utbredningsdata (kapitel 2.5).
 H2|2.1 De tre telnetsessionerna
 P|Fliken DATA COLLECTION öppnar upp till tre samtidiga telnetförbindelser: ett valfritt DX-kluster (som standard ON0DXK med VHF-filter), Reverse Beacon Network (port 7001 för FT8, 7000 för CW och RTTY) och DM4X:s kluster med spots från PSKReporter (dm4x.ddns.net, port 8500).
 LI|Värd och Port: klustrets adress. Inloggning: anropssignal för åtkomst (om fältet är tomt används den i fältet högst upp). Kommandon efter inloggning: kommandon som skickas efter inloggningen, åtskilda med semikolon (till exempel bandfilter).
@@ -23,7 +25,7 @@ LI|Konsolen visar de mottagna raderna; i rutan nedanför kan du skriva kommandon
 H2|2.2 Filterkolumnen
 P|Flikens högra kolumn, 40 % av fönstret, samlar alla spotfilter: det finns bara en datainsamling för hela programmet, och varje mottagen spot passerar här innan den når flikarna för varje utbredningssätt. Högst upp finns kryssrutan för det lokala filtret, ikryssad från början: "DX de"-rader med frekvens under 27990,0 kHz eller över 145 MHz kasseras, visas inte i konsolen och sparas inte. Det är särskilt användbart med RBN och PSKReporter, som skickar väldigt många spots på HF. Om rutan avmarkeras släpps allt igenom. Under den finns fem underflikar.
 LI|Meteor scatter: filtret från YA-MS (frekvensfönster typiska för MS, märkningar för annan utbredning, digitala MS-moder och <MS>, band, test av filtret och räknare). Inuti E-LAYER ANALYZER visas inte underfliken Datainsamling i YA-MS: dess filter ställs in här.
-LI|Sporadiskt E: märkningarna mellan < > som utesluter en spot från sporadiskt E; 28 och 50 MHz-reglerna (inom 450 km är det inte sporadiskt E; bandplanen är inget uteslutande kriterium, så en spot i meteor scatter-fönstret stannar i sporadiskt E utom vid digitalt trafiksätt MS eller <MS>); 144 MHz-regeln (minsta avstånd; bekräftelse med en andra spot på samma moln inom några minuter, eller med en 50 MHz-spot med kort hopp i närheten) och den transekvatoriella regeln med dess band för magnetisk inklination. Knappen Återställ författarens regler återställer startvärdena.
+LI|Sporadiskt E: märkningarna mellan < > som utesluter en spot från sporadiskt E; 28 och 50 MHz-reglerna (på 50 MHz är det inom 450 km inte sporadiskt E; på 28 MHz härleds minsta avståndet ur det för 50 MHz enligt IK3XTV, cirka 170 km; bandplanen är inget uteslutande kriterium, så en spot i meteor scatter-fönstret stannar i sporadiskt E utom vid digitalt trafiksätt MS eller <MS>); 144 MHz-regeln (minsta avstånd; bekräftelse med en andra spot på samma moln inom några minuter, eller med en 50 MHz-spot med kort hopp i närheten) och den transekvatoriella regeln med dess band för magnetisk inklination. Knappen Återställ författarens regler återställer startvärdena.
 LI|F.A.I.: orden som anger en F.A.I.-spot (från början FAI: <FAI> eller fai gäller, med versaler, gemener eller blandat; dessa spots går inte in i sporadiskt E), banden och perioden för spots på kartan (från början 24 timmar).
 LI|Aurora: orden för auroraspots, med eller utan < > och med stora eller små bokstäver (från början AU och AUR), banden och perioden för spots på kartan (från början 2 timmar).
 LI|Test av filtren: du skriver eller klistrar in en klusterrad och programmet visar hur filtren klassar den (meteor scatter, aurora, F.A.I., transekvatoriell, sporadiskt E), med band, lokator och avstånd.
@@ -35,6 +37,12 @@ LI|Liksom i YA-MS räknas som meteor scatter-spots de som ligger i de typiska MS
 LI|Spots med <AU> eller <AUR> går till fliken AURORA, de med FAI till fliken F.A.I.
 H2|2.4 Insamlade spots och CALL3-databasen
 P|Sidan Insamlade spots listar de senaste spotsen med filter för band och källa; knappen Öppna spotmappen öppnar data/spot. Sidan CALL3 visar databasen anropssignal -> lokator (JTDX/WSJT-format): du kan söka efter en anropssignal, läsa in databasen på nytt eller importera en ny CALL3.TXT-fil, som ersätter den som används (den gamla sparas som säkerhetskopia).
+H2|2.5 Utbredningsdata
+P|Underfliken Utbredningsdata samlar de data som hjälper att förstå om ett band kan öppna. De uppdateras av sig själva högst en gång i timmen; knappen Uppdatera nu hämtar dem direkt.
+LI|N0NBH (hamqsl.com): bannern med VHF-förhållandena och soldata (solflöde, A- och K-index, röntgenstrålning, solvind, Bz, aurora och aurorabredd) med E-skip för Europa och Nordamerika (data från DXrobot).
+LI|Bz för aurora: NOAA SWPC, solvind i realtid uppmätt av satelliten i punkten L1 (DSCOVR/ACE), varje minut. Ett negativt och ihållande Bz gynnar aurora.
+LI|Meteor scatter: diagrammet över dagens meteoraktivitet (RMOB-data) från Make More Miles on VHF; svärmar, effektivitet och trafik i realtid finns under fliken METEOR SCATTER.
+P|Sammanfattningen av dessa data visas uppe till höger på kartorna SPORADIC-E och F.A.I. (E-skip för vald kontinent) och AURORA (aurora från N0NBH och Bz från NOAA).
 H1|3. Sporadiskt E (SPORADIC-E)
 H2|3.1 Kartan
 P|Menyn Karta väljer projektionen. Azimutal: azimutal ekvidistant karta centrerad på den egna stationen, med zoomreglaget (från 300 till 20000 km från mitten, även med mushjulet). Mercator: världskartan med knapparna Europa och Världen. I båda projektionerna ritas avståndscirklarna från IK3XTV:s tabell [3] runt stationen: 500 km (minsta för enkelt hopp), 1500-2000 km (optimalt), 2400 km (största för enkelt hopp), 5000 km (största för dubbelhopp) och 6900 km (största för trippelhopp).
@@ -48,7 +56,7 @@ H2|3.2 Reglagen
 LI|Band: 10, 6, 4 och 2 m (432 MHz analyseras inte: sporadiskt E gäller inte där [22]-[24]); tidsfönster för spots från 15 minuter till 12 timmar.
 LI|Es-höjd (som standard 105 km) och antennernas minsta elevation.
 LI|Första hopp (lika hopp): visar båda stationernas första hopp; Kort första hopp inom…: visar författarens hypotes om ett kort första hopp (som standard 1200 km) [4].
-LI|Es-moln på Maidenhead-rutor: färgar reflexionspunkternas rutor med den uppskattade minsta foEs.
+LI|Es-moln på Maidenhead-rutor: färgar reflexionspunkternas rutor efter spotsens högsta frekvens (grön upp till 29 MHz, gul upp till 51, orange upp till 71, röd upp till 145 MHz). Om molnets troliga MUF på det längsta hoppet (2400 km) når ett högre band blinkar rutan i det bandets färg.
 H2|3.3 Tabeller och detaljer
 P|Tabellen Es-spots listar giltiga spots med avstånd, antal hopp och minsta foEs; tabellen Es-moln (rutor) listar rutorna med uppskattade moln och den MUF de skulle ge för den egna stationen (röd 144 MHz, orange 70 MHz, gul 50 MHz). När en zoom är inställd visar tabellerna bara det som syns på kartan.
 LI|Klick på en spot i tabellen eller på kartan: sträckan lyses upp med en gul gloria, kartan flyttar den till synligt område om det behövs och rutan Detaljer visar hopp, reflexionspunkter, foEs och azimut. Spoten förblir vald även när nya spots kommer in.
