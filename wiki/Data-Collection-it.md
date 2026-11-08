@@ -29,7 +29,7 @@ La raccolta dei dati è **una sola per tutto il programma**: ogni spot passa per
 | Meteor scatter | il filtro di YA-MS: finestre di frequenza MS, scritte di altra propagazione, modi MS e `<MS>`, bande | come in YA-MS |
 | E-sporadico | scritte `< >` che escludono lo spot, regola dei 144 MHz, regola transequatoriale | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, salto corto 50 MHz 1200 km/15 min; ±20° |
 | F.A.I. | parole del F.A.I., bande, periodo sulla mappa | FAI, tutte le bande, 24 ore |
-| Aurora | scritte `< >` dell'aurora, bande, periodo sulla mappa | `<AU> <AUR> <AUE> <AURORA>`, tutte le bande, 2 ore |
+| Aurora | scritte `< >` dell'aurora, bande, periodo sulla mappa | `AU` `AUR` (con o senza `< >`), tutte le bande, 2 ore |
 | Prova dei filtri | si incolla una riga del cluster e si vede come la classificano tutti i filtri | |
 
 Il pulsante **Ripristina le regole dell'autore** riporta i valori di partenza.

@@ -53,7 +53,7 @@ namespace ELA
         // In 28 e 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore)
         public bool TooShortForEs { get { return (Band == "6m" || Band == "10m") && HasBoth && DistanceKm < EsModel.MinKm50; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment); } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
         public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD)); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }

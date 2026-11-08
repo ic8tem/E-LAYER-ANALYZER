@@ -29,7 +29,7 @@ Data collection is **one for the whole program**: every spot goes through these 
 | Meteor scatter | the YA-MS filter: MS frequency windows, other-propagation tags, MS modes and `<MS>`, bands | as in YA-MS |
 | Sporadic-E | `< >` tags that exclude the spot, 144 MHz rule, trans-equatorial rule | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, 50 MHz short hop 1200 km/15 min; ±20° |
 | F.A.I. | F.A.I. words, bands, period on the map | FAI, all bands, 24 hours |
-| Aurora | aurora `< >` tags, bands, period on the map | `<AU> <AUR> <AUE> <AURORA>`, all bands, 2 hours |
+| Aurora | aurora `< >` tags, bands, period on the map | `AU` `AUR` (with or without `< >`), all bands, 2 hours |
 | Filter test | paste a cluster line and see how all filters classify it | |
 
 The **Restore the author's rules** button brings back the defaults.

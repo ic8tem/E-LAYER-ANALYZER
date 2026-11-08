@@ -287,7 +287,7 @@ namespace ELA
         Control BuildAuFilter()
         {
             StackPanel fp = FPanel(Lang.T("Filtro degli spot di aurora"), Pal.Green);
-            fp.Children.Add(FText(Lang.T("Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste scritte tra < > (regola dell'autore: <AU> e <AUR>):")));
+            fp.Children.Add(FText(Lang.T("Uno spot è di aurora se il modo dichiarato è AU oppure se il testo contiene una di queste parole, con o senza < >, in maiuscolo o minuscolo (regola dell'autore: AU e AUR):")));
             TextBox tags = FBox(Filters.AuTags);
             tags.TextChanged += (s, e) => { Filters.SetAuTags(tags.Text); Changed(); };
             fp.Children.Add(tags);

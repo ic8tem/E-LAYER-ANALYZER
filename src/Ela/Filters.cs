@@ -26,9 +26,9 @@ namespace ELA
         public static double FaiMinutes = 24 * 60;
 
         // ---- aurora
-        public const string AuTagsDefault = "AU AUR AUE AURORA";
-        public static string AuTags = AuTagsDefault;            // scritte <..> che indicano uno spot di aurora
-        static Regex rxAu = Build(AuTagsDefault, true);
+        public const string AuTagsDefault = "AU AUR";   // regola dell'autore: au o aur, con o senza < >, maiuscolo o minuscolo
+        public static string AuTags = AuTagsDefault;            // parole (con o senza < >) che indicano uno spot di aurora
+        static Regex rxAu = Build(AuTagsDefault, false);
         public static readonly HashSet<string> AuBands = new HashSet<string>(BandNames);
         public static double AuMinutes = 120;
 
@@ -55,7 +55,7 @@ namespace ELA
 
         public static void SetEsTags(string s) { EsTags = s ?? ""; rxNotEs = Build(EsTags, true); }
         public static void SetFaiTags(string s) { FaiTags = s ?? ""; rxFai = Build(FaiTags, false); }
-        public static void SetAuTags(string s) { AuTags = s ?? ""; rxAu = Build(AuTags, true); }
+        public static void SetAuTags(string s) { AuTags = s ?? ""; rxAu = Build(AuTags, false); }
 
         public static bool NotEsTag(string comment) { Regex r = rxNotEs; return r != null && r.IsMatch(comment ?? ""); }
         public static bool AuTag(string comment) { Regex r = rxAu; return r != null && r.IsMatch(comment ?? ""); }
