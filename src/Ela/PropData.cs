@@ -132,6 +132,8 @@ namespace ELA
             return Lang.F("Aurora VHF: {0}   aurora {1} (lat {2}°)", Tr(vhfAu), S("aurora"), S("latdegree"));
         }
 
+        // valori di N0NBH tradotti: Lang.T("Band Closed") Lang.T("50MHz ES") Lang.T("70MHz ES") Lang.T("144MHz ES") Lang.T("High MUF")
+        // Lang.T("High LAT AUR") Lang.T("Mid LAT AUR")
         static string Tr(string v) { return v == null ? "-" : Lang.T(v); }
 
         // righe in sovraimpressione sulle mappe
