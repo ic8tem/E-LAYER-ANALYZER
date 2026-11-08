@@ -365,8 +365,14 @@ namespace ELA
             foreach (BenchQso q in cur)
             {
                 if (q == hover) continue;
-                Color c = fo ? EsTab.FoEsColor(q.Path.FoEsMin) : SetColor(q.Set);
-                MapLine l = new MapLine { Color = Pal.A(fo ? 230 : 170, c), Width = 1.4 }; l.Pts.AddRange(geo[q]); map.Lines.Add(l);
+                bool esTep = EsModel.IsEsTepCached(q.LatTx, q.LonTx, q.LatRx, q.LonRx);   // Es che aggancia il TEP: blu elettrico
+                Color c = esTep ? EsTab.ElectricBlue : fo ? EsTab.FoEsColor(q.Path.FoEsMin) : SetColor(q.Set);
+                MapLine l = new MapLine { Color = Pal.A(fo && !esTep ? 230 : 200, c), Width = esTep ? 2 : 1.4 }; l.Pts.AddRange(geo[q]); map.Lines.Add(l);
+                if (esTep && geo[q].Count > 0)
+                {
+                    double mla, mlo; Geo.Intermediate(q.LatTx, q.LonTx, q.LatRx, q.LonRx, 0.5, out mla, out mlo);
+                    map.Markers.Add(new MapMarker { Lat = mla, Lon = mlo, Radius = 0, Fill = c, Stroke = c, Label = "TEP", LabelColor = c });
+                }
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = 3, Fill = c });
                 if (q.Path.FirstA != null) map.Markers.Add(new MapMarker { Lat = q.Path.FirstA.Lat, Lon = q.Path.FirstA.Lon, Radius = 2.5, Fill = Pal.Orange, Square = true });
             }

@@ -43,6 +43,7 @@ namespace ELA
             { "Europa", "Riporta la mappa sull'Europa." },
             { "Mondo", "Mostra tutto il mondo." },
             { "Distanza massima", "Raggio della mappa azimutale: chilometri dal centro fino al bordo." },
+            { "Precursori multi-salto", "Allerte del multi-salto in 28 e 50 MHz (in 144 MHz solo il doppio salto): nubi Es attive negli altri continenti sui punti di salto delle tratte trasversali dalla mia stazione." },
             // BENCHMARK
             { "Carica ADIF", "Legge un log ADIF: il centro della mappa si ricava dal MY_GRIDSQUARE dei QSO." },
             { "Scarica ADIF", "Toglie il log caricato e pulisce la mappa." },

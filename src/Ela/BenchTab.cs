@@ -485,8 +485,14 @@ namespace ELA
             foreach (BenchQso q in cur)
             {
                 bool isSel = q == selQso;
-                Color bc = EsTab.BandColor(q.Band);
+                bool esTep = EsModel.IsEsTepCached(q.LatTx, q.LonTx, q.LatRx, q.LonRx);   // Es che aggancia il TEP: blu elettrico
+                Color bc = esTep ? EsTab.ElectricBlue : EsTab.BandColor(q.Band);
                 if (isSel) map.Lines.Add(MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, Pal.A(90, Pal.Yellow), 10));
+                if (esTep)
+                {
+                    double mla, mlo; Geo.Intermediate(q.LatTx, q.LonTx, q.LatRx, q.LonRx, 0.5, out mla, out mlo);
+                    map.Markers.Add(new MapMarker { Lat = mla, Lon = mlo, Radius = 0, Fill = bc, Stroke = bc, Label = "TEP", LabelColor = bc });
+                }
                 if (chkPaths.IsChecked == true || isSel)
                     map.Lines.Add(MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, isSel ? Pal.Yellow : Pal.A(150, bc), isSel ? 3 : 1.2));
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = isSel ? 5 : 3, Fill = bc, Label = isSel || cur.Count <= 25 ? q.Call : null });

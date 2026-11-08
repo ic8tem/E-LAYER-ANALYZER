@@ -253,6 +253,7 @@ namespace ELA
         public static bool IsTransEquatorial(double latA, double lonA, double latB, double lonB)
         {
             if (!UseTepRule) return false;
+            if (IsEsTep(latA, lonA, latB, lonB)) return false;   // Es che aggancia il TEP: resta tra gli spot Es, in blu elettrico
             bool south = InAfrica(latA, lonA) || InAfrica(latB, lonB) || InSouthAmerica(latA, lonA) || InSouthAmerica(latB, lonB);
             if (!south) return false;
             double la, lo;
@@ -272,6 +273,7 @@ namespace ELA
         {
             if (!UseTepRule) return false;
             if (TepExcluded(latA, lonA) || TepExcluded(latB, lonB)) return false;
+            if (IsEsTep(latA, lonA, latB, lonB)) return false;
             double d = Geo.DistanceKm(latA, lonA, latB, lonB);
             if (d < TepMinKm || d > TepMaxKm) return false;
             double incA = Geo.InclinationDeg(latA, lonA), incB = Geo.InclinationDeg(latB, lonB);
@@ -284,6 +286,42 @@ namespace ELA
             double brg = Geo.Bearing(la, lo, latB, lonB);
             double dev = Math.Abs(((brg - dec) % 180 + 270) % 180 - 90);          // scarto dal meridiano magnetico (0-90 gradi)
             return dev <= TepMeridianDeg;
+        }
+
+        // Es che aggancia il TEP ("ombra del TEP", su indicazione dell'autore: ZS6 - OH/SM/LA, ZD7 - GM4FVM [P2]).
+        // La tratta attraversa l'equatore magnetico quasi lungo il meridiano magnetico (entro 15 gradi, Kennewell-Wilkinson [49]),
+        // ma non e' un TEP puro: e' piu' lunga dei 8000 km del TEP oppure e' asimmetrica (punto medio con inclinazione oltre
+        // i 15 gradi: un estremo e' molto piu' lontano dall'equatore magnetico e serve l'Es per arrivarci).
+        // Non si puo' sapere dallo spot: si disegna in blu elettrico con la scritta TEP e resta tra gli spot Es.
+        public static double EsTepMidInclDeg = 15;
+        static readonly Dictionary<string, bool> esTepCache = new Dictionary<string, bool>();
+        public static bool IsEsTepCached(double latA, double lonA, double latB, double lonB)
+        {
+            string k = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F2},{1:F2},{2:F2},{3:F2},{4}", latA, lonA, latB, lonB, UseTepRule);
+            bool v;
+            lock (esTepCache)
+            {
+                if (esTepCache.TryGetValue(k, out v)) return v;
+                if (esTepCache.Count > 50000) esTepCache.Clear();
+            }
+            v = IsEsTep(latA, lonA, latB, lonB);
+            lock (esTepCache) esTepCache[k] = v;
+            return v;
+        }
+
+        public static bool IsEsTep(double latA, double lonA, double latB, double lonB)
+        {
+            if (!UseTepRule) return false;
+            if (TepExcluded(latA, lonA) || TepExcluded(latB, lonB)) return false;
+            double d = Geo.DistanceKm(latA, lonA, latB, lonB);
+            if (d < TepMinKm) return false;
+            if (Math.Sign(Geo.InclinationDeg(latA, lonA)) == Math.Sign(Geo.InclinationDeg(latB, lonB))) return false;
+            double la, lo, inc, dec;
+            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            Igrf.IncDec(la, lo, out inc, out dec);
+            double dev = Math.Abs(((Geo.Bearing(la, lo, latB, lonB) - dec) % 180 + 270) % 180 - 90);
+            if (dev > TepMeridianDeg) return false;
+            return d > TepMaxKm || Math.Abs(inc) > EsTepMidInclDeg;
         }
 
         // lunghezza del primo salto corto (km); 0 = ipotesi spenta

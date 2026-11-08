@@ -391,6 +391,7 @@ namespace ELA
                 tabs.Select(0); esTabs.Select(0);
                 es.ShotMap(0, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
                 es.ShotMap(1, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_mercatore.png"));
+                es.ShotPrecursors(); await Task.Delay(2500); Shot(Path.Combine(dir, "1k_sporadic_e_precursori.png"));
                 es.ShotMap(0, 3000);
                 // BENCHMARK Es: un'ora della giornata e lo zoom
                 esTabs.Select(1);
@@ -415,6 +416,10 @@ namespace ELA
                 dc.FilterTabs.Select(0);
                 dc.Outer.Select(1); await Task.Delay(2500); Shot(Path.Combine(dir, "5g_dati_propagazione.png"));
                 dc.Outer.Select(0);
+                // AURORA: caso di verifica K8GU [57] (144 MHz, FM19LA - FN01XT, 322 km, QTF 45° contro 345° diretto)
+                tabs.Select(3);
+                au.View(-95, -55, 30, 60);
+                au.ShotPair("K8GU FM19LA", "KA1ZE FN01XT"); await Task.Delay(3000); Shot(Path.Combine(dir, "4k_aurora_verifica_K8GU.png"));
                 // tutte le linguette di YA-MS
                 tabs.Select(2);
                 await Task.Delay(1500);
