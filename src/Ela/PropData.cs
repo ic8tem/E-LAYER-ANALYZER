@@ -160,13 +160,19 @@ namespace ELA
                 if (!m.Success) continue;
                 int day = int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture);
                 if (day < 1 || day > 31) continue;
-                // i valori possono essere attaccati (es. -100-120): si separano con una regex sui numeri di 1-4 cifre
-                System.Text.RegularExpressions.MatchCollection vs = System.Text.RegularExpressions.Regex.Matches(m.Groups[2].Value, @"-?\d{1,4}");
-                if (vs.Count < 24) continue;
+                // valori di 4 caratteri: possono essere attaccati (es. -100-120); le ore mancanti sono gruppi di 9999 attaccati
+                List<double> vs = new List<double>();
+                foreach (string tok in m.Groups[2].Value.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (System.Text.RegularExpressions.Regex.IsMatch(tok, "^9{4,}$")) { for (int q = 0; q < tok.Length / 4; q++) vs.Add(double.NaN); continue; }
+                    foreach (System.Text.RegularExpressions.Match mv in System.Text.RegularExpressions.Regex.Matches(tok, @"-?\d+"))
+                        vs.Add(double.Parse(mv.Value, CultureInfo.InvariantCulture));
+                }
+                if (vs.Count != 24) continue;
                 for (int h = 0; h < 24; h++)
                 {
-                    int v = int.Parse(vs[h].Value, CultureInfo.InvariantCulture);
-                    if (Math.Abs(v) >= 999) continue;
+                    double v = vs[h];
+                    if (double.IsNaN(v) || Math.Abs(v) >= 999) continue;
                     try { DateTime t = new DateTime(now.Year, now.Month, day, h, 0, 0, DateTimeKind.Utc); if (t > lt) { lt = t; last = v; } } catch { }
                 }
             }
