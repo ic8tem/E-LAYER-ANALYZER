@@ -10,6 +10,7 @@ LI|Programmi teisele arvutile viimiseks piisab selle kausta kopeerimisest; algse
 LI|LoTW parooli ei salvestata kunagi; meelde saab jätta ainult kasutajanime.
 H2|1.3 Ülemine riba
 P|Üleval vasakul sisestatakse oma kutsung, lokaator (4, 6 või 8 märki) ja antenni kõrgus meetrites; nupp Rakenda kinnitab need ja kõik sakid uuenevad. Üleval paremal on UTC-aeg, värviskeemi valik (kõik YAEC-i skeemid: Hele, Öö, Must, kaheksa pastelset ja Meteoorijälg) ja keele valik (28 keelt). Värviskeemi või keele vahetamisel ehitatakse aken kohe uuesti üles, kogutud andmeid kaotamata.
+P|UTC-aja kõrval näitab kiri NTP:OK (roheline) või NTP:FAILED (punane), kas aeg on õige: iga 5 minuti järel küsib programm aega kahelt ajaserverilt kümnest üle maailma ja läheb teistele üle, kui need ei vasta. Kohtspikker näitab kasutatud servereid ja arvuti kella nihet.
 P|Sakiriba paremas servas on kontinendi menüü (Euroopa, Põhja-Ameerika, Lõuna-Ameerika, Aafrika, Aasia, Okeaania): see nihutab Mercatori kaardid ning F.A.I. ja aurora kaardid valitud kontinendile ja valib selle kontinendi prognoosiandmed (N0NBH E-skip avaldatakse ainult Euroopa ja Põhja-Ameerika jaoks).
 H2|1.4 Olekuriba
 P|All näitab olekuriba, mitu kutsungit on CALL3 arhiivis, mitu spotti on mälus ja kasutatavat magnetmudelit (IGRF-14 koos epohhiga). Mälus olevad spotid kustutatakse iga kord, kui programm suletakse: iga seanss algab ilma vanade spotideta.
@@ -45,6 +46,7 @@ LI|Aurora: Kyoto Dst-indeks (geomagnetilised tormid) ja lõunapoolkera jaoks Aus
 LI|Meteoorhajumine: Make More Miles on VHF-i päeva meteoorite aktiivsuse graafik (RMOB andmed); voolud, tõhusus ja reaalajas liiklus on sakil METEOR SCATTER.
 P|Nende andmete kokkuvõte kuvatakse üleval paremal SPORADIC-E ja F.A.I. kaartidel (valitud kontinendi E-skip) ning AURORA kaardil (N0NBH aurora ja NOAA Bz).
 H1|3. Sporaadiline E (SPORADIC-E)
+P|Sakil SPORADIC-E on kolm alamsakki: REAL-TIME, selles peatükis kirjeldatud reaalajas spotid; BENCHMARK Es (peatükk 4) ja BENCHMARK 50 MHz (peatükk 5).
 H2|3.1 Kaart
 P|Menüü Kaart valib projektsiooni. Asimuutne: oma jaama keskmega asimuutne võrdkauguskaart suurenduse liuguriga (keskpunktist 300 kuni 20000 km, ka hiire rattaga). Mercator: maailmakaart nuppudega Euroopa ja Maailm. Mõlemas projektsioonis joonistatakse jaama ümber IK3XTV tabeli [3] kauguste ringid: 500 km (ühe hüppe minimaalne), 1500-2000 km (optimaalne), 2400 km (ühe hüppe maksimaalne), 5000 km (kahe hüppe maksimaalne) ja 6900 km (kolme hüppe maksimaalne).
 P|50 MHz hüpete pikkuste tabel on Flavio Egano IK3XTV tabel, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es-pilved asuvad umbes 100 km kõrgusel ja see piirab ühe hüppe umbes 2000 km-ga [29]. Kaartide rõngad ja hüpete arv järgivad neid kaugusi:
@@ -63,20 +65,22 @@ H2|3.3 Tabelid ja üksikasjad
 P|Tabel Es-spotid loetleb kehtivad spotid koos kauguse, hüpete arvu ja minimaalse foEs-iga; tabel Es-pilved (ruudud) loetleb ruudud hinnanguliste pilvedega ja MUF-i, mida need annaksid oma jaamale (punane 144 MHz, oranž 70 MHz, kollane 50 MHz). Kui suum on seatud, näitavad tabelid ainult seda, mis on kaardil nähtav.
 LI|Klõps spotil tabelis või kaardil: trass süttib kollase halona, kaart toob selle vajadusel nähtavale ja kast Üksikasjad näitab hüppeid, peegelduspunkte, foEs-i ja asimuuti. Spot jääb valituks ka uute spotide saabumisel.
 LI|Klõps kaardi vabal punktil: punkti käsitletakse võimaliku Es-pilvena koos vajaliku foEs-iga 28, 50, 70 ja 144 MHz jaoks.
+LI|Kui Kp on üle 3, näitab kaart seda üleval paremal: sporaadiline E on vähem tõenäoline (üle 90% avanemistest toimub Kp ≤ 3 korral, IK3XTV-IZ3ESV [51]).
+LI|Üle 11000 km pikkune 50 MHz QSO kuvatakse kastis Üksikasjad kui HOIATUS, ainult statistilise teatena (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Autori reeglid
 LI|144 MHz: sporaadiline E algab üle 900 km; üksikut spotti ei joonistata; see joonistatakse, kui 5 minuti jooksul saabub teine spot samalt pilvelt või kui läheduses on 50 MHz lühikese hüppe spot. Ülemine roheline rida ütleb, mitu spotti ootab kinnitust.
 LI|Transekvatoriaalne levi: mandri-Aafrika (koos Madagaskariga) ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise kalde vööndisse -20° kuni +20°, on side transekvatoriaalne, mitte sporaadiline E, välja arvatud juhul, kui spot märgib <ES>. Kanaari saared, Madeira, Roheneemesaared ja Araabia poolsaar jäävad reeglist välja.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (SPORADIC-E alamsakk)
 H2|4.1 Logi laadimine
-P|Sakk BENCHMARK Es on sporaadilise E katsestend tervel ADIF-logil, ka teise jaama omal. Laadi ADIF avab faili (programm jätab selle meelde ja laadib käivitamisel uuesti), Eemalda ADIF eemaldab selle. Jaam keskel pakub logi kõige sagedasemat kutsungit ja lokaatorit; neid saab muuta ja kinnitada nupuga Rakenda.
+P|Alamsakk BENCHMARK Es on sporaadilise E katsestend tervel ADIF-logil, ka teise jaama omal. Laadi ADIF avab faili (programm jätab selle meelde ja laadib käivitamisel uuesti), Eemalda ADIF eemaldab selle. Jaam keskel pakub logi kõige sagedasemat kutsungit ja lokaatorit; neid saab muuta ja kinnitada nupuga Rakenda.
 LI|Saatmiskoht on iga QSO MY_GRIDSQUARE; vastuvõtukohad on GRIDSQUARE-id (puuduvad või 4-märgilised lokaatorid võetakse CALL3-st).
 LI|Välja saab jätta muu PROP_MODE-iga QSO-d ja need, mis on alla 500 km (144 MHz-l alla 900 km); transekvatoriaalsed jäetakse alati välja, välja arvatud PROP_MODE=ES.
 H2|4.2 Päevad, kellaajad ja arvutused
 P|Tabel QSO-d päevade kaupa loetleb päevad koos QSO-de arvu, sagedusalade, suurima kauguse ja mitmehüppeliste sidetega; klõps päeval täidab tabeli Päeva tunnid, kus on rida iga UTC-tunni kohta ja rida Kogu päev. Asimuutne kaart koos maksimaalse kauguse liuguriga joonistab skipi 10° sektorite kaupa (oranž kaar = lähim QSO, roheline sektor = saavutatud kaugused), pilved ruutudel ja kogu päeva puhul pilvede tunnise nihkumise (punane joon).
 P|Leht Pakutud arvutused näitab skipi sektorite kaupa, hinnangulist foEs-i koos oodatava MUF-iga 1000, 1500, 2000 ja 2400 km juures, hinnangulisi pilvi, mitmehüppelise levi kontrolli (võrdsed hüpped versus lühike esimene hüpe, võrrelduna ±30 minuti jooksul ühe hüppega nähtud pilvedega) ning pilvede nihkumist tund-tunnilt.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (SPORADIC-E alamsakk)
 H2|5.1 Üks või kaks jaama
-P|Sakk BENCHMARK 50 MHz on pühendatud 50 MHz mitmehüppelisele sporaadilisele E-le. Real Jaam 1 laaditakse ja eemaldatakse oma jaama logi; real Jaam 2 teise jaama logi, mida näidatakse või peidetakse märkeruuduga Jaam 2. Jaama 1 trassid on helesinised, jaama 2 omad lillad.
+P|Alamsakk BENCHMARK 50 MHz on pühendatud 50 MHz mitmehüppelisele sporaadilisele E-le. Real Jaam 1 laaditakse ja eemaldatakse oma jaama logi; real Jaam 2 teise jaama logi, mida näidatakse või peidetakse märkeruuduga Jaam 2. Jaama 1 trassid on helesinised, jaama 2 omad lillad.
 LI|Näidatakse 50 MHz mitmehüppelisi QSO-sid ehk üle 3100 km (autori reegel); hüpete arv järgib IK3XTV tabelit.
 LI|Päev, alates… kuni… UTC: päev (avamisel see, kus on kõige rohkem mitmehüppelisi QSO-sid) ja kellaaeg 15-minutiliste sammudega.
 LI|foEs (valikuline): värvib trassid minimaalse foEs-i järgi ja näitab seda tabelis. Es kõrgus ja Lühike esimene hüpe kuni 1200 km nagu teistel sakkidel.
@@ -98,6 +102,7 @@ P|Sakk AURORA kasutab samu vaateid nagu F.A.I. (vaikimisi kõrgus 110 km, Lange-
 LI|DATA COLLECTION filtrites valitud ajavahemiku aurora spotid (vaikimisi viimased 2 tundi, kõige rohkem 30) joonistatakse kaardile koos arvutatud hajumispunktiga (oranž ring), kui märkeruut <AU>/<AUR> spotid kaardil koos arvutusega on sees; tulemustes kuvatakse mõlema jaama QTF ja elevatsioon.
 LI|Vaate Scatter trail tulemustes kuvatakse aurora tõenäosus hajumispunktis (ebatõenäoline Kp ≤ 2 korral; muul juhul NOAA ovaali järgi), tüüpiline QTF N ja NE vahel (lõunapoolkeral S-SE) koos kõrvalekaldega otseteest ning soovitused Doppleri ja režiimide kohta (CW/SSB või laiade alamrežiimidega Q65: FT8 sageli ei dekodeeri). Hajumispunkti otsitakse eelistatult 370-1100 km kaugusel kummastki jaamast, ristsusega ±3° piires; kui pakutud punkt jääb sellest vahemikust välja, annab programm sellest märku.
 LI|Üle 2000 km aurora spotid märgitakse kahtlaseks: Newtoni [48] järgi ulatub aurora umbes 1000 km põhja-lõuna ja 2000 km ida-lääne suunal. Aurora-E spotid (AUE, AU-E, AURORAL E) joonistatakse otseteele rohelisena: see on auroralise päritoluga sporaadiline E, ilma Dopplerita.
+LI|Tulemused näitavad hajumispunkti päikeseaega: 4 tunni piires kohalikust keskööst toimub enamik aurora peegeldusi (Reeve [52]). Lõunapoolkeral ulatub aurora 50 MHz-l kuni umbes 2000 km-ni ida-lääne trassidel (ANVDG [55]); aurora-E annab otseteel nõrgemaid ja stabiilsemaid signaale (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|Sakk LOG ADIF näitab töötatud ja kinnitatud ruute sagedusala kaupa alates 28 MHz-st, sagedusalasid koondamata. Ava ADIF-fail... lisab logifailid; Laadi alla LoTW-st... laadib alla kinnituste aruande (kasutajanime saab meelde jätta, parooli ei salvestata kunagi); Tühjenda mälu eemaldab failid ja aruande. Ruudud on oranžid, kui need on töötatud, ja teist värvi, kui need on kinnitatud QSL-iga või LoTW kaudu; klõps ruudul näitab kutsungeid ja leviviisi.
 H1|10. Dokumendid

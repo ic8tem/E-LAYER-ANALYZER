@@ -10,6 +10,7 @@ LI|Untuk memindahkan program ke komputer lain cukup salin foldernya; untuk kemba
 LI|Kata sandi LoTW tidak pernah disimpan; hanya nama pengguna yang dapat diingat.
 H2|1.3 Bilah atas
 P|Di kiri atas diisi callsign Anda, locator (4, 6 atau 8 karakter) dan ketinggian antena dalam meter; tombol Terapkan mengonfirmasinya dan semua tab diperbarui. Di kanan atas terdapat jam UTC, pilihan skema warna (semua skema YAEC: Terang, Malam, Hitam, delapan warna pastel dan Jejak meteor) dan pilihan bahasa (28 bahasa). Saat skema warna atau bahasa diganti, jendela langsung dibangun ulang tanpa kehilangan data yang sudah terkumpul.
+P|Di samping jam UTC, tulisan NTP:OK (hijau) atau NTP:FAILED (merah) menunjukkan apakah jam sudah selaras: setiap 5 menit program menanyai dua server waktu dari sepuluh server yang tersebar di seluruh dunia dan beralih ke server lain jika tidak menjawab. Tooltip menampilkan server yang dipakai dan selisih jam PC.
 P|Di kanan bilah tab terdapat menu benua (Eropa, Amerika Utara, Amerika Selatan, Afrika, Asia, Oseania): menu ini menggeser peta Mercator serta peta F.A.I. dan aurora ke benua yang dipilih dan memilih data prakiraan benua itu (E-skip dari N0NBH hanya diterbitkan untuk Eropa dan Amerika Utara).
 H2|1.4 Bilah status
 P|Di bagian bawah, bilah status menunjukkan berapa callsign yang ada di basis data CALL3, berapa spot yang ada di memori dan model magnetik yang dipakai (IGRF-14 beserta epoknya). Spot di memori dihapus setiap kali program ditutup: setiap sesi dimulai tanpa spot lama.
@@ -45,6 +46,7 @@ LI|Aurora: indeks Dst Kyoto (badai geomagnetik) dan, untuk belahan bumi selatan,
 LI|Meteor scatter: grafik aktivitas meteor hari ini (data RMOB) dari Make More Miles on VHF; hujan meteor, efisiensi dan lalu lintas waktu nyata ada di tab METEOR SCATTER.
 P|Ringkasan data ini tampil di kanan atas pada peta SPORADIC-E dan F.A.I. (E-skip benua yang dipilih) serta AURORA (aurora dari N0NBH dan Bz dari NOAA).
 H1|3. Sporadic-E (SPORADIC-E)
+P|Tab SPORADIC-E memiliki tiga subtab: REAL-TIME, spot langsung yang dijelaskan dalam bab ini; BENCHMARK Es (bab 4) dan BENCHMARK 50 MHz (bab 5).
 H2|3.1 Peta
 P|Menu Peta memilih proyeksi. Azimutal: peta azimutal ekuidistan yang berpusat pada stasiun Anda, dengan penggeser zoom (dari 300 hingga 20000 km dari pusat, juga dengan roda mouse). Mercator: peta dunia dengan tombol Eropa dan Dunia. Pada kedua proyeksi, lingkaran jarak dari tabel IK3XTV [3] digambar di sekitar stasiun: 500 km (minimum satu lompatan), 1500-2000 km (optimal), 2400 km (maksimum satu lompatan), 5000 km (maksimum dua lompatan) dan 6900 km (maksimum tiga lompatan).
 P|Tabel panjang lompatan di 50 MHz adalah tabel Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; awan Es berada pada ketinggian sekitar 100 km, dan hal ini membatasi satu lompatan sekitar 2000 km [29]. Cincin pada peta dan jumlah lompatan mengikuti jarak-jarak ini:
@@ -63,20 +65,22 @@ H2|3.3 Tabel dan rincian
 P|Tabel Spot Es menampilkan spot yang valid dengan jarak, jumlah lompatan dan foEs minimum; tabel Awan Es (kotak) menampilkan kotak dengan perkiraan awan dan MUF yang akan dihasilkannya untuk stasiun Anda (merah 144 MHz, oranye 70 MHz, kuning 50 MHz). Bila perbesaran diatur, tabel hanya menampilkan apa yang terlihat di peta.
 LI|Klik spot di tabel atau di peta: lintasan menyala dengan pendar kuning, peta menggesernya ke tampilan bila perlu dan panel Rincian menampilkan lompatan, titik pantul, foEs dan azimut. Spot tetap terpilih meskipun spot baru berdatangan.
 LI|Klik titik kosong di peta: titik itu diperlakukan sebagai kemungkinan awan Es, dengan foEs yang diperlukan untuk 28, 50, 70 dan 144 MHz.
+LI|Bila Kp di atas 3, peta menandainya di kanan atas: sporadic-E kurang mungkin (lebih dari 90% bukaan terjadi dengan Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|QSO di 50 MHz lebih dari 11000 km muncul dalam detail sebagai PERINGATAN, hanya sebagai kabar statistik (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Aturan penulis
 LI|144 MHz: sporadic-E dimulai dari lebih dari 900 km; satu spot saja tidak digambar; spot digambar jika dalam 5 menit datang spot kedua pada awan yang sama atau jika di sekitarnya ada spot 50 MHz lompatan pendek. Baris hijau di atas menunjukkan berapa spot yang menunggu konfirmasi.
 LI|Transekuatorial: ke arah Afrika daratan (termasuk Madagaskar) dan Amerika Selatan, jika titik tengah jatuh pada pita inklinasi magnetik antara -20° dan +20°, hubungan tersebut transekuatorial dan bukan sporadic-E, kecuali spot menyatakan <ES>. Kepulauan Canaria, Madeira, Tanjung Verde dan Jazirah Arab tidak termasuk dalam aturan ini.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (subtab SPORADIC-E)
 H2|4.1 Memuat log
-P|Tab BENCHMARK Es adalah bangku uji sporadic-E pada satu log ADIF utuh, termasuk log stasiun lain. Muat ADIF membuka file (program mengingatnya dan memuatnya lagi saat dijalankan), Lepas ADIF melepaskannya. Stasiun di tengah mengusulkan callsign dan locator yang paling sering muncul di log; keduanya dapat diubah dan dikonfirmasi dengan Terapkan.
+P|Subtab BENCHMARK Es adalah bangku uji sporadic-E pada satu log ADIF utuh, termasuk log stasiun lain. Muat ADIF membuka file (program mengingatnya dan memuatnya lagi saat dijalankan), Lepas ADIF melepaskannya. Stasiun di tengah mengusulkan callsign dan locator yang paling sering muncul di log; keduanya dapat diubah dan dikonfirmasi dengan Terapkan.
 LI|Posisi pemancar adalah MY_GRIDSQUARE setiap QSO; posisi penerima adalah GRIDSQUARE (locator yang tidak ada atau 4 karakter diambil dari CALL3).
 LI|QSO dengan PROP_MODE lain dan QSO di bawah 500 km (900 km di 144 MHz) dapat dikecualikan; QSO transekuatorial selalu dikecualikan, kecuali PROP_MODE=ES.
 H2|4.2 Hari, jam dan perhitungan
 P|Tabel QSO per hari menampilkan hari-hari dengan jumlah QSO, band, jarak maksimum dan multi-lompatan; klik pada satu hari mengisi tabel Jam dalam sehari, dengan satu baris untuk setiap jam UTC dan baris Sepanjang hari. Peta azimutal, dengan penggeser jarak maksimum, menggambar skip per sektor 10° (busur oranye = QSO terdekat, sektor hijau = jarak yang tercapai), awan pada kotak dan, untuk satu hari penuh, pergeseran awan per jam (garis merah).
 P|Halaman Perhitungan yang diusulkan menampilkan skip per sektor, perkiraan foEs dengan MUF yang diharapkan pada 1000, 1500, 2000 dan 2400 km, perkiraan awan, verifikasi multi-lompatan (lompatan sama dibandingkan lompatan pertama pendek, dicocokkan dengan awan yang terlihat dalam satu lompatan dalam ±30 menit) dan pergeseran awan jam demi jam.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (subtab SPORADIC-E)
 H2|5.1 Satu atau dua stasiun
-P|Tab BENCHMARK 50 MHz dikhususkan untuk sporadic-E multi-lompatan di 50 MHz. Pada baris Stasiun 1 dimuat dan dilepas log stasiun Anda; pada baris Stasiun 2 log stasiun kedua, yang ditampilkan atau disembunyikan dengan kotak centang Stasiun 2. Lintasan stasiun 1 berwarna biru muda, lintasan stasiun 2 ungu.
+P|Subtab BENCHMARK 50 MHz dikhususkan untuk sporadic-E multi-lompatan di 50 MHz. Pada baris Stasiun 1 dimuat dan dilepas log stasiun Anda; pada baris Stasiun 2 log stasiun kedua, yang ditampilkan atau disembunyikan dengan kotak centang Stasiun 2. Lintasan stasiun 1 berwarna biru muda, lintasan stasiun 2 ungu.
 LI|Yang ditampilkan adalah QSO 50 MHz multi-lompatan, yaitu di atas 3100 km (aturan penulis); jumlah lompatan mengikuti tabel IK3XTV.
 LI|Hari, dari… sampai… UTC: hari (saat dibuka, hari dengan QSO multi-lompatan terbanyak) dan rentang jam, dalam langkah 15 menit.
 LI|foEs (opsional): mewarnai lintasan dengan foEs minimum dan mencantumkannya di tabel. Ketinggian Es dan Lompatan pertama pendek dalam 1200 km seperti di tab lainnya.
@@ -98,6 +102,7 @@ P|Tab AURORA memakai tampilan yang sama dengan F.A.I. (ketinggian bawaan 110 km,
 LI|Spot aurora dari periode yang dipilih di filter DATA COLLECTION (bawaan 2 jam terakhir, paling banyak 30) digambar di peta dengan scatter point yang dihitung (lingkaran oranye) jika kotak centang Spot <AU>/<AUR> di peta dengan perhitungan aktif; hasilnya menampilkan QTF dan elevasi kedua stasiun.
 LI|Dalam hasil tampilan Scatter trail muncul probabilitas aurora di scatter point (kecil kemungkinannya dengan Kp ≤ 2; selebihnya menurut oval NOAA), QTF khas antara N dan NE (S-SE di belahan bumi selatan) dengan selisih dari jalur langsung, serta saran tentang Doppler dan mode (CW/SSB atau Q65 dengan submode lebar: FT8 sering tidak terdekode). Scatter point dicari terutama antara 370 dan 1100 km dari masing-masing stasiun, dengan ketegaklurusan dalam ±3°; jika titik yang diusulkan berada di luar rentang ini, program menandainya.
 LI|Spot aurora di atas 2000 km ditandai meragukan: menurut Newton [48], aurora mencapai sekitar 1000 km utara-selatan dan 2000 km timur-barat. Spot aurora-E (AUE, AU-E, AURORAL E) digambar berwarna hijau pada jalur langsung: ini adalah sporadic-E asal aurora, tanpa Doppler.
+LI|Hasil menampilkan waktu matahari di scatter point: sebagian besar pantulan aurora terjadi dalam 4 jam dari tengah malam setempat (Reeve [52]). Di belahan bumi selatan, aurora di 50 MHz mencapai sekitar 2000 km pada lintasan timur-barat (ANVDG [55]); aurora-E memberi sinyal lebih lemah dan stabil pada jalur langsung (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|Tab LOG ADIF menampilkan kotak yang dikerjakan dan dikonfirmasi, band demi band mulai dari 28 MHz ke atas, tanpa menggabungkan band. Buka file ADIF… menambahkan file log; Unduh dari LoTW… mengunduh laporan konfirmasi (nama pengguna dapat diingat, kata sandi tidak pernah disimpan); Hapus memori melepaskan file dan laporan. Kotak berwarna oranye bila dikerjakan, dengan warna lain bila dikonfirmasi dengan QSL atau via LoTW; klik pada sebuah kotak menampilkan callsign dan mode propagasinya.
 H1|10. Dokumen

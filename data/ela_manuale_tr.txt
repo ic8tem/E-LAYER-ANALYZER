@@ -10,6 +10,7 @@ LI|Programı başka bir bilgisayara taşımak için klasörünü kopyalamak yete
 LI|LoTW parolası hiçbir zaman kaydedilmez; yalnızca kullanıcı adı hatırlanabilir.
 H2|1.3 Üst çubuk
 P|Sol üstte kendi çağrı işaretiniz, lokatörünüz (4, 6 ya da 8 karakter) ve anten yüksekliği metre olarak yazılır; Uygula düğmesi bunları onaylar ve tüm sekmeler güncellenir. Sağ üstte UTC saati, renklendirme seçimi (YAEC'nin tüm şemaları: Açık, Gece, Siyah, sekiz pastel ve Meteor izi) ve dil seçimi (28 dil) bulunur. Renklendirme ya da dil değiştirildiğinde pencere toplanan veriler kaybolmadan hemen yeniden oluşturulur.
+P|UTC saatinin yanındaki NTP:OK (yeşil) ya da NTP:FAILED (kırmızı) yazısı saatin doğru olup olmadığını gösterir: program her 5 dakikada bir, dünyaya dağılmış on zaman sunucusundan ikisini sorgular ve yanıt vermezlerse başkalarına geçer. Araç ipucu kullanılan sunucuları ve bilgisayar saatinin farkını gösterir.
 P|Sekme çubuğunun sağında kıta menüsü vardır (Avrupa, Kuzey Amerika, Güney Amerika, Afrika, Asya, Okyanusya): Mercator haritaları ile F.A.I. ve aurora haritalarını seçilen kıtaya kaydırır ve o kıtanın tahmin verilerini seçer (N0NBH E-skip'i yalnızca Avrupa ve Kuzey Amerika için yayımlanır).
 H2|1.4 Durum çubuğu
 P|Altta durum çubuğu CALL3 arşivinde kaç çağrı işareti bulunduğunu, bellekte kaç spot olduğunu ve kullanılan manyetik modeli (dönemiyle birlikte IGRF-14) gösterir. Bellekteki spot'lar program her kapatıldığında silinir: her oturum eski spot'lar olmadan yeniden başlar.
@@ -45,6 +46,7 @@ LI|Aurora: Kyoto Dst indeksi (jeomanyetik fırtınalar) ve güney yarımküre i�
 LI|Meteor scatter: Make More Miles on VHF'nin günün meteor etkinliği grafiği (RMOB verileri); yağmurlar, verimlilik ve canlı trafik METEOR SCATTER sekmesindedir.
 P|Bu verilerin özeti SPORADIC-E ve F.A.I. haritalarında (seçilen kıtanın E-skip'i) ve AURORA haritasında (N0NBH aurorası ve NOAA Bz'si) sağ üstte görünür.
 H1|3. Sporadik E (SPORADIC-E)
+P|SPORADIC-E sekmesinin üç alt sekmesi vardır: REAL-TIME, bu bölümde anlatılan canlı spot'lar; BENCHMARK Es (bölüm 4) ve BENCHMARK 50 MHz (bölüm 5).
 H2|3.1 Harita
 P|Harita menüsü projeksiyonu seçer. Azimutal: kendi istasyonunuzu merkez alan, yakınlaştırma kaydırıcılı (merkezden 300 ile 20000 km arası, fare tekerleğiyle de) azimutal eşit uzaklıklı harita. Mercator: Avrupa ve Dünya düğmeleriyle dünya haritası. Her iki projeksiyonda da istasyonun çevresine IK3XTV tablosunun [3] mesafe çemberleri çizilir: 500 km (tek atlamanın en azı), 1500-2000 km (en uygun), 2400 km (tek atlamanın en çoğu), 5000 km (çift atlamanın en çoğu) ve 6900 km (üçlü atlamanın en çoğu).
 P|50 MHz'deki atlama uzunlukları tablosu, Flavio Egano IK3XTV'nin «Propagazione sui 6 metri - Caratteristiche generali» [3] çalışmasındaki tablodur; Es bulutları yaklaşık 100 km yükseklikte bulunur ve bu, tek atlamayı yaklaşık 2000 km ile sınırlar [29]. Haritalardaki halkalar ve atlama sayısı bu mesafeleri izler:
@@ -63,20 +65,22 @@ H2|3.3 Tablolar ve ayrıntılar
 P|Es spot'ları tablosu geçerli spot'ları mesafe, atlama sayısı ve en küçük foEs ile listeler; Es bulutları (kareler) tablosu tahmini bulutların bulunduğu kareleri ve bunların kendi istasyonunuz için vereceği MUF'u listeler (kırmızı 144 MHz, turuncu 70 MHz, sarı 50 MHz). Bir yakınlaştırma ayarlıyken tablolar yalnızca haritada görüneni gösterir.
 LI|Tabloda ya da haritada bir spot'a tıklama: yol sarı bir haleyle aydınlanır, gerekirse harita onu görünür alana getirir ve Ayrıntılar kutusu atlamaları, yansıma noktalarını, foEs'i ve azimutu gösterir. Yeni spot'lar geldiğinde de spot seçili kalır.
 LI|Haritada boş bir noktaya tıklama: nokta olası bir Es bulutu olarak ele alınır ve 28, 50, 70 ve 144 MHz için gereken foEs gösterilir.
+LI|Kp 3'ü aştığında harita bunu sağ üstte bildirir: sporadik E daha az olasıdır (açılışların %90'ından fazlası Kp ≤ 3 ile gerçekleşir, IK3XTV-IZ3ESV [51]).
+LI|50 MHz'de 11000 km'yi aşan bir QSO ayrıntılarda UYARI olarak, yalnızca istatistiksel bilgi olarak görünür (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Yazarın kuralları
 LI|144 MHz: sporadik E 900 km'nin ötesinde başlar; tek başına bir spot çizilmez; 5 dakika içinde aynı buluta ikinci bir spot gelirse ya da çevrede 50 MHz'de kısa atlamalı bir spot varsa çizilir. Üstteki yeşil satır kaç spot'un onay beklediğini söyler.
 LI|Transekvatoryal: kıtasal Afrika (Madagaskar dahil) ve Güney Amerika yönünde, orta nokta -20° ile +20° arasındaki manyetik eğim kuşağına düşerse, spot <ES> bildirmedikçe bağlantı sporadik E değil transekvatoryaldir. Kanarya Adaları, Madeira, Yeşil Burun ve Arap Yarımadası kuralın dışında kalır.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (SPORADIC-E alt sekmesi)
 H2|4.1 Log yükleme
-P|BENCHMARK Es sekmesi, başka bir istasyona ait olsa bile tam bir ADIF logu üzerinde sporadik E için bir test tezgâhıdır. ADIF yükle dosyayı açar (program onu hatırlar ve açılışta yeniden yükler), ADIF'i kaldır onu çıkarır. Merkezdeki istasyon logdaki en sık çağrı işaretini ve lokatörü önerir; bunlar değiştirilip Uygula ile onaylanabilir.
+P|BENCHMARK Es alt sekmesi, başka bir istasyona ait olsa bile tam bir ADIF logu üzerinde sporadik E için bir test tezgâhıdır. ADIF yükle dosyayı açar (program onu hatırlar ve açılışta yeniden yükler), ADIF'i kaldır onu çıkarır. Merkezdeki istasyon logdaki en sık çağrı işaretini ve lokatörü önerir; bunlar değiştirilip Uygula ile onaylanabilir.
 LI|Gönderme konumu her QSO'nun MY_GRIDSQUARE alanıdır; alma konumları GRIDSQUARE alanlarıdır (eksik ya da 4 karakterlik lokatörler CALL3'ten alınır).
 LI|Başka bir PROP_MODE'a sahip QSO'lar ve 500 km'nin (144 MHz'de 900 km) altındakiler hariç tutulabilir; transekvatoryaller, PROP_MODE=ES olmadıkça her zaman hariç tutulur.
 H2|4.2 Günler, saatler ve hesaplar
 P|Günlere göre QSO'lar tablosu günleri QSO sayısı, bantlar, en büyük mesafe ve çok atlamalarla listeler; bir güne tıklamak Günün saatleri tablosunu her UTC saati için bir satır ve Bütün gün satırıyla doldurur. En büyük mesafe kaydırıcılı azimutal harita, 10°'lik sektörler hâlinde skip'i (turuncu yay = en yakın QSO, yeşil sektör = ulaşılan mesafeler), kareler üzerindeki bulutları ve bütün gün seçiliyken bulutların saatlik kaymasını (kırmızı çizgi) çizer.
 P|Önerilen hesaplar sayfası sektörlere göre skip'i, 1000, 1500, 2000 ve 2400 km'de beklenen MUF ile tahmini foEs'i, tahmini bulutları, çok atlama doğrulamasını (eşit atlamalar ile kısa ilk atlamanın karşılaştırılması, ±30 dakika içinde tek atlamada görülen bulutlarla kıyaslanarak) ve bulutların saat saat kaymasını gösterir.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (SPORADIC-E alt sekmesi)
 H2|5.1 Bir ya da iki istasyon
-P|BENCHMARK 50 MHz sekmesi 50 MHz'de çok atlamalı sporadik E'ye ayrılmıştır. İstasyon 1 satırında kendi istasyonunuzun logu yüklenir ve kaldırılır; İstasyon 2 satırında ikinci bir istasyonun logu yüklenir; bu log İstasyon 2 kutusuyla gösterilir ya da gizlenir. İstasyon 1'in yolları açık mavi, İstasyon 2'ninkiler mor renktedir.
+P|BENCHMARK 50 MHz alt sekmesi 50 MHz'de çok atlamalı sporadik E'ye ayrılmıştır. İstasyon 1 satırında kendi istasyonunuzun logu yüklenir ve kaldırılır; İstasyon 2 satırında ikinci bir istasyonun logu yüklenir; bu log İstasyon 2 kutusuyla gösterilir ya da gizlenir. İstasyon 1'in yolları açık mavi, İstasyon 2'ninkiler mor renktedir.
 LI|50 MHz'de çok atlamalı, yani 3100 km'nin ötesindeki QSO'lar gösterilir (yazarın kuralı); atlama sayısı IK3XTV tablosunu izler.
 LI|Gün, başlangıç… bitiş… UTC: gün (açılışta en çok çok atlamalı QSO'ya sahip gün) ve 15 dakikalık adımlarla saat aralığı.
 LI|foEs (isteğe bağlı): yolları en küçük foEs ile renklendirir ve tabloda gösterir. Es yüksekliği ve 1200 km içinde kısa ilk atlama diğer sekmelerdeki gibidir.
@@ -98,6 +102,7 @@ P|AURORA sekmesi F.A.I. ile aynı görünümleri (başlangıç yüksekliği 110 
 LI|DATA COLLECTION filtrelerinde seçilen süreye ait aurora spot'ları (başlangıçta son 2 saat, en fazla 30), Haritada hesaplamalı <AU>/<AUR> spot'ları kutusu işaretliyse hesaplanan scatter point (turuncu çember) ile haritada çizilir; sonuçlarda iki istasyonun QTF ve elevasyonu görünür.
 LI|Scatter trail görünümünün sonuçlarında scatter point'teki aurora olasılığı (Kp ≤ 2 ile olası değil; diğer durumlarda NOAA ovaline göre), doğrudan yoldan sapmasıyla birlikte N ile NE arasındaki tipik QTF (güney yarımkürede S-SE) ve Doppler ile modlar hakkında öneriler (CW/SSB ya da geniş alt modlu Q65: FT8 çoğu zaman çözemez) görünür. Scatter point tercihen her istasyondan 370-1100 km uzaklıkta, ±3° içinde diklikle aranır; önerilen nokta bu aralığın dışındaysa program bunu bildirir.
 LI|2000 km'nin ötesindeki aurora spot'ları şüpheli olarak işaretlenir: Newton'a [48] göre aurora kuzey-güney yönünde yaklaşık 1000 km'ye, doğu-batı yönünde 2000 km'ye ulaşır. Aurora-E spot'ları (AUE, AU-E, AURORAL E) doğrudan yol üzerinde yeşil olarak çizilir: Doppler'siz, aurora kökenli bir sporadik E'dir.
+LI|Sonuçlar scatter point'teki güneş saatini verir: aurora yansımalarının çoğu yerel gece yarısından 4 saat içinde gerçekleşir (Reeve [52]). Güney yarımkürede 50 MHz'de aurora doğu-batı yollarında yaklaşık 2000 km'ye kadar ulaşır (ANVDG [55]); aurora-E doğrudan yol üzerinde daha zayıf ve daha kararlı sinyaller verir (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|LOG ADIF sekmesi, bantları birleştirmeden 28 MHz'den yukarıya bant bant çalışılan ve onaylanan kareleri gösterir. ADIF dosyası aç… log dosyalarını ekler; LoTW'den indir… onay raporunu indirir (kullanıcı adı hatırlanabilir, parola hiçbir zaman kaydedilmez); Belleği temizle dosyaları ve raporu kaldırır. Kareler çalışılmışsa turuncu, QSL ya da LoTW ile onaylanmışsa farklı renktedir; bir kareye tıklamak çağrı işaretlerini ve yayılım modunu gösterir.
 H1|10. Belgeler

@@ -24,6 +24,7 @@ EQ|MUF = foEs · sec φ        →        foEs ≥ f / sec φ
 TAG|SCELTA|程序给出的 foEs 是最低门限：spot 只说明频率 f 已经通过。sec φ 因子考虑了地球曲率。
 TAG|RILIEVO|IK3XTV [3] 报告的经验表明，144 MHz 对应的 foEs 为 12-15 MHz：纯正割定律给出的数值更高（2000 km 时约 25-28 MHz）。该数据应作为云之间的相对比较来解读，而不是绝对值。
 H1|3. 偶发 E 层
+TAG|SCELTA|从 0.4.4 版起，SPORADIC-E 选项卡有三个子选项卡：REAL-TIME（实时 spot，第 3.1-3.7 节）、BENCHMARK Es（3.8）和 BENCHMARK 50 MHz（3.9）。
 H2|3.1 跳数
 P|50 MHz 偶发 E 层的跳距长度依据 Flavio Egano IK3XTV 的研究 «Propagazione sui 6 metri - Caratteristiche generali»（6 米波段传播——一般特性；Amateur Radio Propagation Studies，doc. n. 10.36.43，2003 年 4 月）[3]，该研究根据实际通联给出了 6 米波段经 Es 通联的参考距离。在关于 10 米波段的研究 [29] 中，IK3XTV 指出 Es 云层位于约 100 km 高度，这使单跳限制在 2000 km 左右：双跳是可能的，但较为少见。下面转载的这张表是跳数、地图上所绘环带以及两个 BENCHMARK 计算的基础。
 TAB|跳;最小距离;最佳距离;最大距离
@@ -57,6 +58,9 @@ TAG|SCELTA|全球通用规则，依据作者认可的资料（Kennewell 和 Wilk
 H2|3.6b 作者的规则：144 MHz 朝向加那利群岛、马德拉和亚速尔群岛
 TAG|SCELTA|作者规则（IC8TEM）：在 144 MHz，如果一个 spot 以超过单跳的距离（超过 2400 km）连接大陆与加那利群岛、马德拉或亚速尔群岛，则该通联是偶发 E 层加上大西洋上的对流层波导。只有当 5 分钟内两个或更多 spot 指向同一 Es 云（距大陆台站 1000-2300 km 的单跳中点，彼此相距 300 km 以内）时，该 spot 才有效；此时绘制实线的 Es 跳、云块以及到海岛的虚线对流层路径。单独一个 spot 保持等待状态。该规则不适用于 50 和 70 MHz。
 TAG|FONTE|EI7GL [41] 正是用同样的混合机制，即偶发 E 层加上海面上的对流层波导，来解释澳大利亚与新西兰之间超过 3100 km 的 144 MHz 开通。
+H2|3.6c 统计提示
+TAG|FONTE|IK3XTV 和 IZ3ESV，«Prevedere l'E sporadico» [51]：超过 90% 的偶发 E 层出现在地磁平静时（Kp ≤ 3，Ap ≤ 17），达到 144 MHz 的开通约占总数的 5%。当 Kp（NOAA 或 N0NBH）超过 3 时，SPORADIC-E 地图右上角会给出提示：偶发 E 层的可能性降低，但 spot 照常分析。
+TAG|SCELTA|应作者要求的统计警示：超过 11000 km 的 50 MHz QSO 在详细信息中作为统计消息标出，并引用 EI7GL [56]（HZ1SK-K4MOG，11460 km，至少六跳）。警示不改变计算。
 H2|3.7 方位等距地图
 TAG|SCELTA|SPORADIC-E 选项卡的地图可在两种投影中选择。方位等距投影，以本台为中心：到中心的距离和方位角都是真实的，围绕中心的圆是等距离圆；缩放滑块（300 至 20000 km，也可用滚轮调节）可跟踪从单跳到多跳的演变。墨卡托投影：世界地图，用于结合地理来解读长距离路径。两者都会围绕台站绘制 IK3XTV [3] 的距离圆：单跳的 500、1500-2000 和 2400 km，双跳的 5000 km 以及三跳的 6900 km。
 EQ|ρ = d(中心, P) · k        x = ρ · sin(az)        y = −ρ · cos(az)        k = 圆盘半径（像素）/ 最大距离（km）
@@ -106,6 +110,8 @@ TAG|SCELTA|散射点出现极光的概率：Kp ≤ 2 时不太可能（Lange-Hes
 TAG|SCELTA|经作者认可的其他极光测量：与 N0NBH 数据一起下载的 Kyoto Dst 指数 [46] 在发生磁暴时提高概率（若该点的 NOAA 椭圆不为零，Dst ≤ -50 nT 时为可能，Dst ≤ -100 nT 时为很可能），因为磁暴期间椭圆向南移动；南半球在拥有 Bureau of Meteorology 免费密钥 [44] 时，极光警报使散射点为很可能。Kyoto 的 AE 指数 [45] 和 SuperDARN 对流 [47] 从“传播数据”子选项卡在浏览器中打开：AE 的数字文件停在 2026 年 10 月，而 SuperDARN 不提供可读取的文件。
 TAG|FONTE|作者规则（IC8TEM）：文本中含有 AU 或 AUR 的 spot，无论是否带尖括号（<AU>、<AUR>），也不区分大小写，均为极光 spot。AURORA 标签页在地图上绘制它们并进行计算：对最近 2 小时内的每个 spot（最多 30 个），绘制 spotter-DX 这对电台的散射点轨迹，所用模型与 Scatter trail 视图相同（步长 0.5°，偏差在 2.5° 以内，以 OVATION 椭圆为权重），以及最可能的散射点及两台站的 QTF 和仰角。
 TAG|SCELTA|应作者要求，极光 E（Au-E）作为独立模式：文本中含有 AUE、AU-E 或 AURORAL E 的 spot，或声明模式为 AUE 的 spot，既不是极光也不是偶发 E 层。它是 G0ISW [33] 所述的极光起源的偶发 E 层：没有多普勒，位于直接路径上，出现在极光事件之后。AURORA 选项卡将这些 spot 以绿色绘制在直接路径上。
+TAG|SCELTA|经作者认可的时间权重：大多数极光反射发生在当地太阳时午夜前后约 4 小时之内（Reeve [52]，阿拉斯加的 HF 观测，并提及 50 MHz）。程序计算散射点的太阳时，并说明它位于该时段之内还是之外；在时段之外极光仍然可能，因为磁暴期间下午和傍晚也能通联（G3WPO [14]）。
+TAG|FONTE|关于极光引用的其他资料：ARRL [53]，美国的 50 MHz 极光，K 指数 5-7，天线朝北；SM2CEW-SM0FOB [54]，瑞典北极地区 50 和 144 MHz 的极光 E，极光之后在直接路径上信号较弱而稳定；ANVDG [55]，澳大利亚的南极光，50 MHz 在东西向路径上可达约 2000 km。
 H1|5. 数据收集
 H2|5.1 Telnet 会话
 TAG|SCELTA|三个会话：自选 cluster、Reverse Beacon Network（7000 CW/RTTY，7001 FT8）[18]、含 PSKReporter spot 的 cluster（例如 DM4X dm4x.ddns.net:8500 [27]，HamAlert [19]）。使用呼号自动登录，初始命令以分号分隔，30 s 后重新连接。
@@ -121,6 +127,7 @@ TAG|SCELTA|28 和 50 MHz 规则（作者和 IK3XTV 的规则）：在 50 MHz，4
 TAG|SCELTA|DATA COLLECTION 选项卡有两个子选项卡：Spot（会话、已收集的 spot、CALL3 和过滤列）和“传播数据”。传播数据来自 N0NBH [31]（XML 格式的太阳数据和 VHF 状况：DXrobot 提供的欧洲和北美洲 E-skip 及极光，附 VHF 横幅）、NOAA [15] 的实时 Bz 和太阳风（DSCOVR/ACE，L1 点，每分钟一次：这是 Bz 的最佳来源），以及 Make More Miles on VHF [32] 的当日流星活动（RMOB）。按照 N0NBH 的要求，最多每小时下载一次。程序从与横幅数据相同的 XML 文件中读取数值，并将其摘要叠加显示在 SPORADIC-E、F.A.I. 和 AURORA 地图上。
 TAG|SCELTA|选项卡栏中的菜单可选择六个大洲之一（欧洲、北美洲、南美洲、非洲、亚洲、大洋洲）：墨卡托地图以及 F.A.I. 和极光地图移到该大洲，E-skip 摘要使用该大洲的数据。N0NBH 仅为欧洲和北美洲发布 E-skip：对其他大洲，程序会注明这一点。
 TAG|FONTE|作者规则（IC8TEM），与 YA-MS 相同：不精确的网格坐标（少于 6 个字符）取自 CALL3；如果 CALL3 中该呼号有 6 个字符的网格坐标，则始终以其为准（在 spot 中，以及在 BENCHMARK Es 的日志网格坐标中）。
+TAG|SCELTA|应作者要求的时钟：程序每 5 分钟向两台 NTP 服务器查询，它们选自分布在世界各地的十台服务器（INRIM、PTB、NIST、NRC、NICT、NIC.br、澳大利亚和南非的 NTP 池、Google、Cloudflare）；如果某台服务器没有响应，就换下一台。UTC 时间旁显示 NTP:OK 或 NTP:FAILED。偏差应用于程序的时间；在 Windows 上，若有管理员权限且偏差超过 1 s，还会校正电脑的时钟。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
 TAG|SCELTA|只包括 28 MHz 及以上的频段，每个频段单独列出，不做合并。颜色：橙色 = 已通联，蓝色 = 已通过 QSL 确认，绿色 = 已通过 LoTW 确认。可按传播模式过滤（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。

@@ -10,6 +10,7 @@ LI|For at flytte programmet til en anden computer er det nok at kopiere dets map
 LI|Adgangskoden til LoTW gemmes aldrig; kun brugernavnet kan huskes.
 H2|1.3 Linjen øverst
 P|Øverst til venstre indtaster du dit kaldesignal, din lokator (4, 6 eller 8 tegn) og antennens højde i meter; knappen Anvend bekræfter dem, og alle faner opdateres. Øverst til højre findes UTC-tiden, valget af farvetema (alle temaerne fra YAEC: Lys, Nat, Sort, otte pasteller og Meteorspor) og valget af sprog (28 sprog). Når farvetema eller sprog ændres, genopbygges vinduet straks, uden at indsamlede data går tabt.
+P|Ved siden af UTC-tiden angiver teksten NTP:OK (grøn) eller NTP:FAILED (rød), om tiden er synkroniseret: hvert 5. minut spørger programmet to tidsservere blandt ti spredt over hele verden og skifter til andre, hvis de ikke svarer. Værktøjstippet viser de anvendte servere og afvigelsen på pc'ens ur.
 P|Til højre i fanelinjen findes kontinentmenuen (Europa, Nordamerika, Sydamerika, Afrika, Asien, Oceanien): den flytter Mercator-kortene og F.A.I.- og nordlyskortene til det valgte kontinent og vælger prognosedataene for det kontinent (E-skip fra N0NBH udgives kun for Europa og Nordamerika).
 H2|1.4 Statuslinjen
 P|Nederst viser statuslinjen, hvor mange kaldesignaler CALL3-databasen indeholder, hvor mange spots der er i hukommelsen, og hvilken magnetisk model der er i brug (IGRF-14 med dens epoke). Spots i hukommelsen slettes, hver gang programmet lukkes: hver session starter forfra uden gamle spots.
@@ -45,6 +46,7 @@ LI|Nordlys: Dst-indekset fra Kyoto (geomagnetiske storme) og, for den sydlige ha
 LI|Meteor scatter: grafen over dagens meteoraktivitet (RMOB-data) fra Make More Miles on VHF; sværme, effektivitet og live trafik findes under fanen METEOR SCATTER.
 P|Sammendraget af disse data vises øverst til højre på kortene SPORADIC-E og F.A.I. (E-skip for det valgte kontinent) og AURORA (nordlys fra N0NBH og Bz fra NOAA).
 H1|3. Sporadisk E (SPORADIC-E)
+P|Fanen SPORADIC-E har tre underfaner: REAL-TIME, spots i realtid som beskrevet i dette kapitel; BENCHMARK Es (kapitel 4) og BENCHMARK 50 MHz (kapitel 5).
 H2|3.1 Kortet
 P|Menuen Kort vælger projektionen. Azimutal: azimutalt ækvidistant kort centreret på egen station, med zoomskyderen (fra 300 til 20000 km fra centrum, også med musehjulet). Mercator: verdenskortet med knapperne Europa og Verden. I begge projektioner tegnes afstandscirklerne fra IK3XTV's tabel [3] omkring stationen: 500 km (mindst for ét hop), 1500-2000 km (optimalt), 2400 km (højst for ét hop), 5000 km (højst for dobbelthop) og 6900 km (højst for tredobbelt hop).
 P|Tabellen over hoplængder på 50 MHz er Flavio Eganos (IK3XTV), «Propagazione sui 6 metri - Caratteristiche generali» (Udbredelse på 6 meter - Generelle egenskaber) [3]; Es-skyerne ligger i omkring 100 km højde, og det begrænser ét hop til omkring 2000 km [29]. Kortenes ringe og antallet af hop følger disse afstande:
@@ -63,20 +65,22 @@ H2|3.3 Tabeller og detaljer
 P|Tabellen Es-spots viser de gyldige spots med afstand, antal hop og mindste foEs; tabellen Es-skyer (felter) viser felterne med estimerede skyer og den MUF, de ville give for egen station (rød 144 MHz, orange 70 MHz, gul 50 MHz). Når der er indstillet en zoom, viser tabellerne kun det, der er synligt på kortet.
 LI|Klik på et spot i tabellen eller på kortet: strækningen lyser op med en gul glorie, kortet flytter den ind i synsfeltet om nødvendigt, og boksen Detaljer viser hop, refleksionspunkter, foEs og azimut. Spottet forbliver valgt, også når der kommer nye spots.
 LI|Klik på et tomt punkt på kortet: punktet behandles som en mulig Es-sky, med den foEs, der kræves for 28, 50, 70 og 144 MHz.
+LI|Når Kp er over 3, angiver kortet det øverst til højre: sporadisk E er mindre sandsynlig (over 90 % af åbningerne sker ved Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|En QSO på 50 MHz over 11000 km vises i detaljerne som ALARM, kun som statistisk notits (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Forfatterens regler
 LI|144 MHz: sporadisk E begynder over 900 km; et enkeltstående spot tegnes ikke; det tegnes, hvis der inden for 5 minutter kommer et andet spot på samme sky, eller hvis der i nærheden findes et 50 MHz-spot med kort hop. Den grønne linje øverst angiver, hvor mange spots der venter på bekræftelse.
 LI|Transækvatorial: mod det afrikanske fastland (med Madagaskar) og Sydamerika er forbindelsen transækvatorial og ikke sporadisk E, hvis midtpunktet falder i bæltet med magnetisk inklination mellem -20° og +20°, medmindre spottet angiver <ES>. De Kanariske Øer, Madeira, Kap Verde og Den Arabiske Halvø er undtaget fra reglen.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (underfane til SPORADIC-E)
 H2|4.1 Indlæsning af en log
-P|Fanen BENCHMARK Es er en prøvebænk for sporadisk E på en hel ADIF-log, også fra en anden station. Indlæs ADIF åbner filen (programmet husker den og indlæser den igen ved opstart), Fjern ADIF fjerner den. Station i centrum foreslår loggens hyppigste kaldesignal og lokator; de kan ændres og bekræftes med Anvend.
+P|Underfanen BENCHMARK Es er en prøvebænk for sporadisk E på en hel ADIF-log, også fra en anden station. Indlæs ADIF åbner filen (programmet husker den og indlæser den igen ved opstart), Fjern ADIF fjerner den. Station i centrum foreslår loggens hyppigste kaldesignal og lokator; de kan ændres og bekræftes med Anvend.
 LI|Sendepositionen er MY_GRIDSQUARE for hver QSO; modtagepositionerne er GRIDSQUARE (manglende lokatorer eller lokatorer med 4 tegn hentes fra CALL3).
 LI|Man kan udelade QSO'er med en anden PROP_MODE og dem under 500 km (900 km på 144 MHz); transækvatoriale QSO'er udelades altid, undtagen ved PROP_MODE=ES.
 H2|4.2 Dage, tidspunkter og beregninger
 P|Tabellen QSO'er pr. dag viser dagene med antal QSO'er, bånd, største afstand og multi-hop; et klik på en dag udfylder tabellen Dagens timer, med én række for hver UTC-time og rækken Hele dagen. Det azimutale kort, med skyderen for maksimal afstand, tegner skip pr. 10°-sektor (orange bue = nærmeste QSO, grøn sektor = opnåede afstande), skyerne på felterne og, for hele dagen, skyernes forskydning time for time (rød linje).
 P|Siden Foreslåede beregninger viser skip pr. sektor, estimeret foEs med forventet MUF ved 1000, 1500, 2000 og 2400 km, de estimerede skyer, kontrollen af multi-hoppet (lige lange hop over for kort første hop, sammenholdt med skyerne set i ét hop inden for ±30 minutter) og skyernes forskydning time for time.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (underfane til SPORADIC-E)
 H2|5.1 Én eller to stationer
-P|Fanen BENCHMARK 50 MHz er helliget sporadisk E med multi-hop på 50 MHz. I rækken Station 1 indlæses og fjernes egen stations log; i rækken Station 2 loggen fra en anden station, som vises eller skjules med afkrydsningsfeltet Station 2. Station 1's strækninger er lyseblå, station 2's violette.
+P|Underfanen BENCHMARK 50 MHz er helliget sporadisk E med multi-hop på 50 MHz. I rækken Station 1 indlæses og fjernes egen stations log; i rækken Station 2 loggen fra en anden station, som vises eller skjules med afkrydsningsfeltet Station 2. Station 1's strækninger er lyseblå, station 2's violette.
 LI|De viste QSO'er på 50 MHz er multi-hop, dvs. over 3100 km (forfatterens regel); antallet af hop følger IK3XTV's tabel.
 LI|Dag, fra… til… UTC: dagen (ved åbning den med flest multi-hop-QSO'er) og tidsrummet, i trin på 15 minutter.
 LI|foEs (valgfri): farver strækningerne med mindste foEs og viser den i tabellen. Es-højde og Kort første hop inden for 1200 km fungerer som i de andre faner.
@@ -98,6 +102,7 @@ P|Fanen AURORA bruger de samme visninger som F.A.I. (standardhøjde 110 km, Lang
 LI|Nordlysspots fra den periode, der er valgt i filtrene i DATA COLLECTION (fra start de seneste 2 timer, højst 30), tegnes på kortet med det beregnede scatterpunkt (orange cirkel), hvis afkrydsningsfeltet <AU>/<AUR>-spots på kortet med beregningen er slået til; i resultaterne vises QTF og elevation for de to stationer.
 LI|I resultaterne af visningen Scatter trail vises sandsynligheden for nordlys i scatterpunktet (usandsynlig ved Kp ≤ 2; ellers efter NOAA-ovalen), den typiske QTF mellem N og NØ (S-SØ på den sydlige halvkugle) med afvigelsen fra den direkte vej samt råd om Doppler og modes (CW/SSB eller Q65 med brede undermodes: FT8 dekoder ofte ikke). Scatterpunktet søges helst mellem 370 og 1100 km fra hver station, med vinkelrethed inden for ±3°; hvis det foreslåede punkt ligger uden for dette interval, gør programmet opmærksom på det.
 LI|Nordlys-spots over 2000 km markeres som tvivlsomme: ifølge Newton [48] når nordlys omkring 1000 km nord-syd og 2000 km øst-vest. Spots af nordlys-E (AUE, AU-E, AURORAL E) tegnes med grønt på den direkte vej: det er sporadisk E af auroral oprindelse, uden Doppler.
+LI|Resultaterne viser soltiden i scatterpunktet: inden for 4 timer fra lokal midnat falder de fleste nordlysrefleksioner (Reeve [52]). På den sydlige halvkugle når nordlys på 50 MHz op til omkring 2000 km på øst-vest-strækninger (ANVDG [55]); nordlys-E giver svagere og mere stabile signaler på den direkte vej (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|Fanen LOG ADIF viser kørte og bekræftede felter, bånd for bånd fra 28 MHz og opefter, uden at slå båndene sammen. Åbn ADIF-fil... tilføjer logfilerne; Hent fra LoTW... henter rapporten over bekræftelser (brugernavnet kan huskes, adgangskoden gemmes aldrig); Ryd hukommelsen fjerner filer og rapport. Felterne er orange, når de er kørt, og farves anderledes, når de er bekræftet med QSL eller via LoTW; et klik på et felt viser kaldesignalerne og udbredelsesformen.
 H1|10. Dokumenter

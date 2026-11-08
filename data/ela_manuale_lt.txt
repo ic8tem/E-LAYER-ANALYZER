@@ -10,6 +10,7 @@ LI|Norint perkelti programą į kitą kompiuterį, pakanka nukopijuoti jos aplan
 LI|LoTW slaptažodis niekada neįrašomas; galima įsiminti tik naudotojo vardą.
 H2|1.3 Viršutinė juosta
 P|Viršuje kairėje įrašomas savo šaukinys, lokatorius (4, 6 arba 8 simboliai) ir antenos aukštis metrais; mygtukas Taikyti juos patvirtina ir visos kortelės atnaujinamos. Viršuje dešinėje yra UTC laikas, spalvų schemos pasirinkimas (visos YAEC schemos: Šviesi, Naktis, Juoda, aštuonios pastelinės ir Meteoro pėdsakas) ir kalbos pasirinkimas (28 kalbos). Pakeitus spalvų schemą ar kalbą, langas iš karto perkuriamas, surinkti duomenys neprarandami.
+P|Šalia UTC laiko užrašas NTP:OK (žalias) arba NTP:FAILED (raudonas) rodo, ar laikas suderintas: kas 5 minutes programa apklausia du laiko serverius iš dešimties, išsibarsčiusių po visą pasaulį, ir pereina prie kitų, jei jie neatsako. Paaiškinimo debesėlyje nurodomi naudoti serveriai ir kompiuterio laikrodžio nuokrypis.
 P|Kortelių juostos dešinėje yra žemyno meniu (Europa, Šiaurės Amerika, Pietų Amerika, Afrika, Azija, Okeanija): jis perkelia Merkatoriaus žemėlapius ir F.A.I. bei pašvaistės žemėlapius į pasirinktą žemyną ir parenka to žemyno prognozės duomenis (N0NBH E-skip skelbiamas tik Europai ir Šiaurės Amerikai).
 H2|1.4 Būsenos juosta
 P|Apačioje esanti būsenos juosta rodo, kiek šaukinių yra CALL3 archyve, kiek spotų laikoma atmintyje ir kuris magnetinis modelis naudojamas (IGRF-14 su jo epocha). Atmintyje esantys spotai ištrinami kaskart uždarius programą: kiekviena sesija pradedama be senų spotų.
@@ -45,6 +46,7 @@ LI|Pašvaistė: Kyoto Dst indeksas (geomagnetinės audros) ir, pietų pusrutuliu
 LI|Meteor scatter: Make More Miles on VHF dienos meteorų aktyvumo grafikas (RMOB duomenys); srautai, efektyvumas ir ryšiai realiuoju laiku yra kortelėje METEOR SCATTER.
 P|Šių duomenų santrauka rodoma viršuje dešinėje SPORADIC-E ir F.A.I. žemėlapiuose (pasirinkto žemyno E-skip) ir AURORA žemėlapyje (N0NBH pašvaistė ir NOAA Bz).
 H1|3. Sporadinis E (SPORADIC-E)
+P|Kortelė SPORADIC-E turi tris vidines korteles: REAL-TIME – šiame skyriuje aprašyti tiesioginiai spotai; BENCHMARK Es (4 skyrius) ir BENCHMARK 50 MHz (5 skyrius).
 H2|3.1 Žemėlapis
 P|Meniu Žemėlapis leidžia pasirinkti projekciją. Azimutinis: azimutinis lygiatolis žemėlapis, centruotas į savo stotį, su mastelio slankikliu (nuo 300 iki 20000 km nuo centro, taip pat pelės ratuku). Merkatoriaus: pasaulio žemėlapis su mygtukais Europa ir Pasaulis. Abiejose projekcijose aplink stotį braižomi IK3XTV lentelės [3] atstumų apskritimai: 500 km (vieno šuolio mažiausias), 1500-2000 km (optimalus), 2400 km (vieno šuolio didžiausias), 5000 km (dvigubo šuolio didžiausias) ir 6900 km (trigubo šuolio didžiausias).
 P|50 MHz šuolių ilgių lentelė yra Flavio Egano IK3XTV lentelė, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es debesys yra maždaug 100 km aukštyje, ir tai riboja vieną šuolį maždaug iki 2000 km [29]. Žemėlapių žiedai ir šuolių skaičius atitinka šiuos atstumus:
@@ -63,20 +65,22 @@ H2|3.3 Lentelės ir detalės
 P|Lentelėje Es spotai pateikiami galiojantys spotai su atstumu, šuolių skaičiumi ir minimalia foEs; lentelėje Es debesys (kvadratai) pateikiami kvadratai su įvertintais debesimis ir MUF, kurią jie duotų savo stočiai (raudona – 144 MHz, oranžinė – 70 MHz, geltona – 50 MHz). Nustačius mastelį, lentelės rodo tik tai, kas matoma žemėlapyje.
 LI|Spustelėjus spotą lentelėje arba žemėlapyje: trasa paryškinama geltonu švytėjimu, prireikus žemėlapis ją parodo, o skydelyje Detalės pateikiami šuoliai, atspindžio taškai, foEs ir azimutas. Spotas lieka pasirinktas ir atėjus naujiems spotams.
 LI|Spustelėjus laisvą žemėlapio tašką: taškas laikomas galimu Es debesiu ir pateikiama foEs, reikalinga 28, 50, 70 ir 144 MHz.
+LI|Kai Kp viršija 3, žemėlapis tai praneša viršuje dešinėje: sporadinis E mažiau tikėtinas (daugiau nei 90% atsivėrimų vyksta esant Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|QSO 50 MHz juostoje, ilgesnis nei 11000 km, skydelyje Detalės rodomas kaip ĮSPĖJIMAS, tik kaip statistinė žinia (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Autoriaus taisyklės
 LI|144 MHz: sporadinis E prasideda nuo daugiau nei 900 km; pavienis spotas nebraižomas; jis braižomas, jei per 5 minutes ateina antras spotas per tą patį debesį arba jei netoliese yra trumpo šuolio 50 MHz spotas. Žalia eilutė viršuje rodo, kiek spotų laukia patvirtinimo.
 LI|Transekvatorinis: ryšiams su žemynine Afrika (su Madagaskaru) ir Pietų Amerika, jei vidurio taškas patenka į magnetinės inklinacijos juostą nuo -20° iki +20°, ryšys laikomas transekvatoriniu, o ne sporadiniu E, nebent spote nurodyta <ES>. Kanarų salos, Madeira, Žaliasis Kyšulys ir Arabijos pusiasalis į taisyklę neįtraukiami.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (SPORADIC-E vidinė kortelė)
 H2|4.1 Žurnalo įkėlimas
-P|Kortelė BENCHMARK Es yra sporadinio E bandymų stendas visam ADIF žurnalui, taip pat ir kitos stoties. Įkelti ADIF atveria failą (programa jį įsimena ir įkelia paleidžiant), Pašalinti ADIF jį pašalina. Stotis centre siūlo dažniausią žurnalo šaukinį ir lokatorių; juos galima pakeisti ir patvirtinti mygtuku Taikyti.
+P|Vidinė kortelė BENCHMARK Es yra sporadinio E bandymų stendas visam ADIF žurnalui, taip pat ir kitos stoties. Įkelti ADIF atveria failą (programa jį įsimena ir įkelia paleidžiant), Pašalinti ADIF jį pašalina. Stotis centre siūlo dažniausią žurnalo šaukinį ir lokatorių; juos galima pakeisti ir patvirtinti mygtuku Taikyti.
 LI|Siuntimo vieta yra kiekvieno QSO MY_GRIDSQUARE; priėmimo vietos – GRIDSQUARE (trūkstami arba 4 simbolių lokatoriai imami iš CALL3).
 LI|Galima atmesti QSO su kitu PROP_MODE ir trumpesnius nei 500 km (900 km – 144 MHz); transekvatoriniai visada atmetami, išskyrus PROP_MODE=ES.
 H2|4.2 Dienos, valandos ir skaičiavimai
 P|Lentelėje QSO pagal dienas pateikiamos dienos su QSO skaičiumi, juostomis, didžiausiu atstumu ir keliais šuoliais; spustelėjus dieną užpildoma lentelė Dienos valandos – po eilutę kiekvienai UTC valandai ir eilutė Visa diena. Azimutinis žemėlapis su didžiausio atstumo slankikliu braižo skip 10° sektoriais (oranžinis lankas = artimiausias QSO, žalias sektorius = pasiekti atstumai), debesis kvadratuose ir, visai dienai, valandinį debesų poslinkį (raudona linija).
 P|Puslapyje Siūlomi skaičiavimai pateikiamas skip pagal sektorius, įvertinta foEs su laukiama MUF 1000, 1500, 2000 ir 2400 km atstumu, įvertinti debesys, kelių šuolių patikra (vienodi šuoliai ir trumpas pirmas šuolis, palyginti su debesimis, matytais vieno šuolio režimu per ±30 minučių) ir debesų poslinkis valanda po valandos.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (SPORADIC-E vidinė kortelė)
 H2|5.1 Viena ar dvi stotys
-P|Kortelė BENCHMARK 50 MHz skirta kelių šuolių sporadiniam E 50 MHz juostoje. Eilutėje Stotis 1 įkeliamas ir pašalinamas savo stoties žurnalas; eilutėje Stotis 2 – antrosios stoties žurnalas, kuris rodomas arba slepiamas žymimuoju langeliu Stotis 2. 1 stoties trasos yra žydros, 2 stoties – violetinės.
+P|Vidinė kortelė BENCHMARK 50 MHz skirta kelių šuolių sporadiniam E 50 MHz juostoje. Eilutėje Stotis 1 įkeliamas ir pašalinamas savo stoties žurnalas; eilutėje Stotis 2 – antrosios stoties žurnalas, kuris rodomas arba slepiamas žymimuoju langeliu Stotis 2. 1 stoties trasos yra žydros, 2 stoties – violetinės.
 LI|Rodomi kelių šuolių 50 MHz QSO, t. y. ilgesni nei 3100 km (autoriaus taisyklė); šuolių skaičius nustatomas pagal IK3XTV lentelę.
 LI|Diena, nuo… iki… UTC: diena (atvėrus – ta, kurioje daugiausia kelių šuolių QSO) ir laikas, 15 minučių žingsniu.
 LI|foEs (nebūtina): nuspalvina trasas pagal minimalią foEs ir pateikia ją lentelėje. Es aukštis ir Trumpas pirmas šuolis iki 1200 km – kaip kitose kortelėse.
@@ -98,6 +102,7 @@ P|Kortelėje AURORA naudojami tie patys vaizdai kaip F.A.I. (pradinis aukštis 1
 LI|Pašvaistės spotai iš DATA COLLECTION filtruose pasirinkto laikotarpio (pagal nutylėjimą paskutinės 2 valandos, ne daugiau kaip 30) braižomi žemėlapyje su apskaičiuotu sklaidos tašku (oranžinis apskritimas), jei įjungtas žymimasis langelis <AU>/<AUR> spotai žemėlapyje su skaičiavimu; rezultatuose pateikiami abiejų stočių QTF ir elevacija.
 LI|Rodinio Scatter trail rezultatuose pateikiama pašvaistės tikimybė sklaidos taške (mažai tikėtina esant Kp ≤ 2; kitais atvejais pagal NOAA ovalą), tipinis QTF tarp N ir NE (pietų pusrutulyje S-SE) su nuokrypiu nuo tiesioginio kelio ir patarimai dėl Doplerio poslinkio ir darbo režimų (CW/SSB arba Q65 su plačiais porežimiais: FT8 dažnai nedekoduoja). Sklaidos taškas pageidautina ieškomas 370-1100 km atstumu nuo kiekvienos stoties, su statmenumu ±3° ribose; jei siūlomas taškas yra už šio intervalo ribų, programa tai pažymi.
 LI|Pašvaistės spotai, toliau nei 2000 km, pažymimi kaip abejotini: pasak Newton [48], pašvaistė siekia apie 1000 km šiaurės-pietų ir 2000 km rytų-vakarų kryptimi. Pašvaistės E spotai (AUE, AU-E, AURORAL E) braižomi žaliai tiesioginiame kelyje: tai pašvaistinės kilmės sporadinis E, be Doplerio poslinkio.
+LI|Rezultatuose nurodomas saulės laikas sklaidos taške: dauguma pašvaistės atspindžių būna 4 valandų intervale nuo vietinio vidurnakčio (Reeve [52]). Pietų pusrutulyje pašvaistė 50 MHz juostoje siekia maždaug 2000 km rytų-vakarų trasose (ANVDG [55]); pašvaistės E duoda silpnesnius ir stabilesnius signalus tiesioginiame kelyje (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|Kortelėje LOG ADIF rodomi dirbti ir patvirtinti kvadratai kiekvienai juostai nuo 28 MHz ir aukščiau, juostų nesujungiant. Atverti ADIF failą… prideda žurnalo failus; Atsisiųsti iš LoTW… atsisiunčia patvirtinimų ataskaitą (galima įsiminti naudotojo vardą, slaptažodis niekada neįrašomas); Išvalyti atmintį pašalina failus ir ataskaitą. Dirbti kvadratai yra oranžiniai, o patvirtinti QSL kortele arba per LoTW nuspalvinami kitaip; spustelėjus kvadratą rodomi šaukiniai ir sklidimo būdas.
 H1|10. Dokumentai

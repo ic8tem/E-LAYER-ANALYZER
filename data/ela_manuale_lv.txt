@@ -10,6 +10,7 @@ LI|Lai pārvietotu programmu uz citu datoru, pietiek nokopēt tās mapi; lai atg
 LI|LoTW parole nekad netiek saglabāta; var atcerēties tikai lietotājvārdu.
 H2|1.3 Augšējā josla
 P|Augšā pa kreisi ieraksta savu izsaukuma signālu, lokatoru (4, 6 vai 8 rakstzīmes) un antenas augstumu metros; poga Lietot tos apstiprina, un visas cilnes atjaunojas. Augšā pa labi ir UTC laiks, krāsojuma izvēle (visas YAEC shēmas: Gaišs, Nakts, Melns, astoņas pasteļkrāsas un Meteora sliede) un valodas izvēle (28 valodas). Mainot krāsojumu vai valodu, logs uzreiz tiek pārbūvēts, nezaudējot savāktos datus.
+P|Blakus UTC laikam uzraksts NTP:OK (zaļš) vai NTP:FAILED (sarkans) norāda, vai laiks ir sinhronizēts: ik pēc 5 minūtēm programma vaicā divus laika serverus no desmit pa visu pasauli un pāriet uz citiem, ja tie neatbild. Rīka padomā redzami izmantotie serveri un datora pulksteņa novirze.
 P|Cilņu joslas labajā pusē ir kontinenta izvēlne (Eiropa, Ziemeļamerika, Dienvidamerika, Āfrika, Āzija, Okeānija): tā pārvieto Merkatora kartes un F.A.I. un auroras kartes uz izvēlēto kontinentu un izvēlas šī kontinenta prognozes datus (N0NBH E-skip tiek publicēts tikai Eiropai un Ziemeļamerikai).
 H2|1.4 Statusa josla
 P|Apakšā statusa josla rāda, cik izsaukuma signālu ir CALL3 arhīvā, cik spotu ir atmiņā un izmantoto magnētisko modeli (IGRF-14 ar tā epohu). Atmiņā esošie spoti tiek dzēsti katru reizi, kad programma tiek aizvērta: katra sesija sākas bez veciem spotiem.
@@ -45,6 +46,7 @@ LI|Aurora: Kyoto Dst indekss (ģeomagnētiskās vētras) un dienvidu puslodei Au
 LI|Meteor scatter: Make More Miles on VHF dienas meteoru aktivitātes grafiks (RMOB dati); plūsmas, efektivitāte un trafiks reāllaikā ir cilnē METEOR SCATTER.
 P|Šo datu kopsavilkums parādās augšā pa labi SPORADIC-E un F.A.I. kartēs (izvēlētā kontinenta E-skip) un AURORA kartē (N0NBH aurora un NOAA Bz).
 H1|3. Sporādiskais E (SPORADIC-E)
+P|Cilnei SPORADIC-E ir trīs apakšcilnes: REAL-TIME, šajā nodaļā aprakstītie spoti reāllaikā; BENCHMARK Es (4. nodaļa) un BENCHMARK 50 MHz (5. nodaļa).
 H2|3.1 Karte
 P|Izvēlne Karte izvēlas projekciju. Azimutālā: azimutāla vienādattāluma karte ar savu staciju centrā, ar tālummaiņas slīdni (no 300 līdz 20000 km no centra, arī ar peles ritenīti). Merkatora: pasaules karte ar pogām Eiropa un Pasaule. Abās projekcijās ap staciju tiek zīmēti IK3XTV tabulas [3] attālumu apļi: 500 km (viena lēciena minimālais), 1500-2000 km (optimālais), 2400 km (viena lēciena maksimālais), 5000 km (dubultā lēciena maksimālais) un 6900 km (trīskāršā lēciena maksimālais).
 P|50 MHz lēcienu garumu tabula ir Flavio Egano IK3XTV tabula, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es mākoņi atrodas aptuveni 100 km augstumā, un tas ierobežo vienu lēcienu ap 2000 km [29]. Karšu gredzeni un lēcienu skaits atbilst šiem attālumiem:
@@ -63,20 +65,22 @@ H2|3.3 Tabulas un detaļas
 P|Tabula Es spoti uzskaita derīgos spotus ar attālumu, lēcienu skaitu un minimālo foEs; tabula Es mākoņi (kvadrāti) uzskaita kvadrātus ar novērtētajiem mākoņiem un MUF, ko tie dotu savai stacijai (sarkans 144 MHz, oranžs 70 MHz, dzeltens 50 MHz). Ja iestatīta tālummaiņa, tabulas rāda tikai to, kas redzams kartē.
 LI|Klikšķis uz spota tabulā vai kartē: trase izceļas ar dzeltenu oreolu, karte vajadzības gadījumā to parāda, un lodziņš Detaļas norāda lēcienus, atstarošanas punktus, foEs un azimutu. Spots paliek izvēlēts arī tad, kad pienāk jauni spoti.
 LI|Klikšķis uz brīva kartes punkta: punktu uzskata par iespējamu Es mākoni, ar nepieciešamo foEs 28, 50, 70 un 144 MHz.
+LI|Ja Kp pārsniedz 3, karte to norāda augšā pa labi: sporādiskais E ir mazāk ticams (vairāk nekā 90% atvēršanos notiek pie Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|QSO 50 MHz joslā tālāk par 11000 km lodziņā Detaļas parādās kā BRĪDINĀJUMS, tikai kā statistisks paziņojums (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Autora noteikumi
 LI|144 MHz: sporādiskais E sākas virs 900 km; viens pats spots netiek zīmēts; to zīmē, ja 5 minūšu laikā pienāk otrs spots no tā paša mākoņa vai ja tuvumā ir īsa lēciena 50 MHz spots. Zaļā rinda augšā rāda, cik spotu gaida apstiprinājumu.
 LI|Transekvatoriālā izplatīšanās: virzienā uz kontinentālo Āfriku (ar Madagaskaru) un Dienvidameriku, ja viduspunkts atrodas magnētiskās inklinācijas joslā no -20° līdz +20°, sakars ir transekvatoriāls, nevis sporādiskais E, ja vien spots nenorāda <ES>. Kanāriju salas, Madeira, Kaboverde un Arābijas pussala paliek ārpus noteikuma.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (SPORADIC-E apakšcilne)
 H2|4.1 Žurnāla ielāde
-P|Cilne BENCHMARK Es ir sporādiskā E pārbaudes stends veselam ADIF žurnālam, arī citas stacijas. Ielādēt ADIF atver failu (programma to atceras un startējot ielādē no jauna), Izņemt ADIF to noņem. Stacija centrā piedāvā žurnālā biežāko izsaukuma signālu un lokatoru; tos var mainīt un apstiprināt ar Lietot.
+P|Apakšcilne BENCHMARK Es ir sporādiskā E pārbaudes stends veselam ADIF žurnālam, arī citas stacijas. Ielādēt ADIF atver failu (programma to atceras un startējot ielādē no jauna), Izņemt ADIF to noņem. Stacija centrā piedāvā žurnālā biežāko izsaukuma signālu un lokatoru; tos var mainīt un apstiprināt ar Lietot.
 LI|Raidīšanas vieta ir katra QSO MY_GRIDSQUARE; uztveršanas vietas ir GRIDSQUARE (trūkstošos vai 4 rakstzīmju lokatorus ņem no CALL3).
 LI|Var izslēgt QSO ar citu PROP_MODE un tos, kas ir zem 500 km (144 MHz joslā – zem 900 km); transekvatoriālos izslēdz vienmēr, izņemot PROP_MODE=ES.
 H2|4.2 Dienas, stundas un aprēķini
 P|Tabula QSO pa dienām uzskaita dienas ar QSO skaitu, joslām, maksimālo attālumu un vairāklēcienu sakariem; klikšķis uz dienas aizpilda tabulu Dienas stundas ar rindu katrai UTC stundai un rindu Visa diena. Azimutālā karte ar maksimālā attāluma slīdni zīmē skip pa 10° sektoriem (oranžs loks = tuvākais QSO, zaļš sektors = sasniegtie attālumi), mākoņus kvadrātos un, visai dienai, mākoņu pārvietošanos pa stundām (sarkana līnija).
 P|Lapa Ieteiktie aprēķini rāda skip pa sektoriem, novērtēto foEs ar sagaidāmo MUF pie 1000, 1500, 2000 un 2400 km, novērtētos mākoņus, vairāklēcienu pārbaudi (vienādi lēcieni pret īsu pirmo lēcienu, salīdzinot ar viena lēciena mākoņiem ±30 minūšu robežās) un mākoņu pārvietošanos stundu pēc stundas.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (SPORADIC-E apakšcilne)
 H2|5.1 Viena vai divas stacijas
-P|Cilne BENCHMARK 50 MHz ir veltīta vairāklēcienu sporādiskajam E 50 MHz joslā. Rindā Stacija 1 ielādē un izņem savas stacijas žurnālu; rindā Stacija 2 – otras stacijas žurnālu, ko parāda vai paslēpj ar izvēles rūtiņu Stacija 2. Stacijas 1 trases ir gaiši zilas, stacijas 2 – violetas.
+P|Apakšcilne BENCHMARK 50 MHz ir veltīta vairāklēcienu sporādiskajam E 50 MHz joslā. Rindā Stacija 1 ielādē un izņem savas stacijas žurnālu; rindā Stacija 2 – otras stacijas žurnālu, ko parāda vai paslēpj ar izvēles rūtiņu Stacija 2. Stacijas 1 trases ir gaiši zilas, stacijas 2 – violetas.
 LI|Rāda 50 MHz vairāklēcienu QSO, t.i., virs 3100 km (autora noteikums); lēcienu skaits atbilst IK3XTV tabulai.
 LI|Diena, no… līdz… UTC: diena (atverot – tā, kurā ir visvairāk vairāklēcienu QSO) un laiks ar 15 minūšu soli.
 LI|foEs (pēc izvēles): iekrāso trases pēc minimālās foEs un parāda to tabulā. Es augstums un Īss pirmais lēciens līdz 1200 km – kā citās cilnēs.
@@ -98,6 +102,7 @@ P|Cilne AURORA izmanto tos pašus skatus kā F.A.I. (sākotnējais augstums 110 
 LI|Auroras spoti no DATA COLLECTION filtros izvēlētā perioda (sākotnēji pēdējās 2 stundas, ne vairāk kā 30) tiek zīmēti kartē ar aprēķināto scatter point (oranžs aplis), ja ieslēgta izvēles rūtiņa <AU>/<AUR> spoti kartē ar aprēķinu; rezultātos parādās abu staciju QTF un elevācija.
 LI|Skata Scatter trail rezultātos parādās auroras varbūtība scatter point (maz ticams pie Kp ≤ 2; pārējos gadījumos pēc NOAA ovāla), tipiskais QTF starp N un NE (dienvidu puslodē S-SE) ar novirzi no tiešā ceļa un ieteikumi par Doplera nobīdi un režīmiem (CW/SSB vai Q65 ar platiem apakšrežīmiem: FT8 bieži nedekodē). Scatter point vēlams meklēt 370-1100 km attālumā no katras stacijas, ar perpendikularitāti ±3° robežās; ja piedāvātais punkts ir ārpus šī intervāla, programma to atzīmē.
 LI|Auroras spoti tālāk par 2000 km tiek atzīmēti kā apšaubāmi: pēc Newton [48] aurora sasniedz ap 1000 km ziemeļu-dienvidu un 2000 km austrumu-rietumu virzienā. Auroras E spoti (AUE, AU-E, AURORAL E) tiek zīmēti zaļā krāsā uz tiešā ceļa: tas ir auroras izcelsmes sporādiskais E, bez Doplera nobīdes.
+LI|Rezultātos norādīts saules laiks scatter point: 4 stundu robežās no vietējās pusnakts notiek lielākā daļa auroras atstarojumu (Reeve [52]). Dienvidu puslodē aurora 50 MHz joslā sasniedz apmēram 2000 km austrumu-rietumu trasēs (ANVDG [55]); auroras E dod vājākus un stabilākus signālus uz tiešā ceļa (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|Cilne LOG ADIF rāda strādātos un apstiprinātos kvadrātus pa joslām no 28 MHz uz augšu, neapvienojot joslas. Atvērt ADIF failu... pievieno žurnāla failus; Lejupielādēt no LoTW... lejupielādē apstiprinājumu atskaiti (lietotājvārdu var atcerēties, parole nekad netiek saglabāta); Notīrīt atmiņu noņem failus un atskaiti. Kvadrāti ir oranži, ja strādāti, un citā krāsā, ja apstiprināti ar QSL vai caur LoTW; klikšķis uz kvadrāta parāda izsaukuma signālus un izplatīšanās veidu.
 H1|10. Dokumenti
