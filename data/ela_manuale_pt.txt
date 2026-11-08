@@ -25,7 +25,7 @@ P|A coluna direita do separador, 40 % da janela, reúne todos os filtros dos spo
 LI|Meteor scatter: o filtro do YA-MS (janelas de frequência típicas do MS, etiquetas de outra propagação, modos digitais MS e <MS>, bandas, teste do filtro e contadores). Dentro do E-LAYER ANALYZER o subseparador Recolha de dados do YA-MS não aparece: o seu filtro configura-se aqui.
 LI|Esporádica E: as etiquetas entre < > que excluem um spot da esporádica E; as regras dos 28 e 50 MHz (dentro de 450 km não é esporádica E; o plano de banda não é um critério exclusivo, pelo que um spot na janela do meteor scatter fica na esporádica E salvo modo digital MS ou <MS>); a regra dos 144 MHz (distância mínima; confirmação com um segundo spot sobre a mesma nuvem dentro de poucos minutos, ou com um spot em 50 MHz de salto curto nas proximidades) e a regra transequatorial com a sua faixa de inclinação magnética. O botão Repor as regras do autor repõe os valores iniciais.
 LI|F.A.I.: as palavras que indicam um spot de F.A.I. (por omissão FAI: vale <FAI> ou fai, em maiúsculas, minúsculas ou misto; estes spots não entram na esporádica E), as bandas e o período dos spots no mapa (por omissão 24 horas).
-LI|Aurora: as etiquetas entre < > dos spots de aurora (por omissão <AU>, <AUR>, <AUE>, <AURORA>), as bandas e o período dos spots no mapa (por omissão 2 horas).
+LI|Aurora: as palavras dos spots de aurora, com ou sem < > e em maiúsculas ou minúsculas (por omissão AU e AUR), as bandas e o período dos spots no mapa (por omissão 2 horas).
 LI|Teste dos filtros: escreve-se ou cola-se uma linha do cluster e o programa mostra como os filtros a classificam (meteor scatter, aurora, F.A.I., transequatorial, esporádica E), com banda, locator e distância.
 H2|2.3 Como o programa lê os spots
 P|De cada linha "DX de" o programa extrai spotter, frequência, DX, comentário, hora e, quando existem, os locators e o modo de propagação escritos no comentário na forma JN70CN<ES>JO62QM (o primeiro locator é do spotter, o segundo do DX; também são aceites as formas com <>, > e parênteses).
@@ -37,7 +37,12 @@ H2|2.4 Spots recolhidos e arquivo CALL3
 P|A página Spots recolhidos lista os últimos spots com o filtro por banda e por fonte; o botão Abrir a pasta dos spots abre data/spot. A página CALL3 mostra o arquivo indicativo -> locator (formato JTDX/WSJT): pode procurar-se um indicativo, recarregar o arquivo ou importar um novo ficheiro CALL3.TXT, que substitui o que está em uso (o anterior fica como cópia de segurança).
 H1|3. Esporádica E (SPORADIC-E)
 H2|3.1 O mapa
-P|O menu Mapa escolhe entre três vistas. Azimutal - salto único: mapa centrado na própria estação com raio fixo de 2500 km e as zonas da tabela IK3XTV [3] (500 km mínima, 1500-2000 km ótima, 2400 km máxima). Azimutal - distância máxima (multi-salto): o mesmo mapa com o cursor Distância máxima, de 300 a 20000 km, e os limites do salto duplo (5000 km) e triplo (6900 km), para acompanhar a evolução do multi-salto. Retangular: o mapa do mundo com os botões Europa e Mundo.
+P|O menu Mapa escolhe a projeção. Azimutal: mapa azimutal equidistante centrado na própria estação, com o cursor do zoom (de 300 a 20000 km a partir do centro, também com a roda do rato). Mercator: o mapa do mundo, com os botões Europa e Mundo. Em ambas as projeções desenham-se em redor da estação os círculos de distância da tabela de IK3XTV [3]: 500 km (mínima do salto único), 1500-2000 km (ótima), 2400 km (máxima do salto único), 5000 km (máxima do salto duplo) e 6900 km (máxima do salto triplo).
+P|A tabela dos comprimentos dos saltos em 50 MHz é a de Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Propagação nos 6 metros - Características gerais) [3]; as nuvens Es encontram-se a cerca de 100 km de altitude, e isto limita o salto único a cerca de 2000 km [29]. As coroas dos mapas e o número de saltos seguem estas distâncias:
+TAB|Salto;Distância mínima;Distância ótima;Distância máxima
+TAB|Salto único;500-650 km;1500-2000 km;2200-2400 km
+TAB|Salto duplo;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Salto triplo;-;4800-6400 km;6900 km
 P|Nas vistas azimutais os anéis tracejados indicam os km a partir do centro; o passo dos anéis muda com o zoom e o bordo exterior indica a distância máxima mostrada.
 H2|3.2 Os comandos
 LI|Bandas: 10, 6, 4 e 2 m (os 432 MHz não são analisados: a esporádica E não se aplica [22]-[24]); janela temporal dos spots de 15 minutos a 12 horas.

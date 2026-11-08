@@ -25,7 +25,7 @@ P|The right-hand column of the tab, 40% of the window, holds all the spot filter
 LI|Meteor scatter: the YA-MS filter (frequency windows typical of MS, tags of other propagation, MS digital modes and <MS>, bands, filter test and counters). Inside E-LAYER ANALYZER the YA-MS Data collection sub-tab does not appear: its filter is set here.
 LI|Sporadic-E: the tags between < > that exclude a spot from sporadic-E; the 28 and 50 MHz rules (within 450 km it is not sporadic-E; the bandplan is not an exclusive criterion, so a spot in the meteor scatter window stays in sporadic-E unless it has the MS digital mode or <MS>); the 144 MHz rule (minimum distance; confirmation by a second spot on the same cloud within a few minutes, or by a short-hop 50 MHz spot nearby) and the trans-equatorial rule with its magnetic dip band. The Restore the author's rules button brings back the default values.
 LI|F.A.I.: the words that mark a F.A.I. spot (FAI by default: <FAI> or fai counts, in upper, lower or mixed case; these spots do not enter sporadic-E), the bands and the period of the spots on the map (24 hours by default).
-LI|Aurora: the tags between < > of aurora spots (by default <AU>, <AUR>, <AUE>, <AURORA>), the bands and the period of the spots on the map (2 hours by default).
+LI|Aurora: the words of aurora spots, with or without < > and in upper or lower case (AU and AUR by default), the bands and the period of the spots on the map (2 hours by default).
 LI|Filter test: you type or paste a cluster line and the program shows how the filters classify it (meteor scatter, aurora, F.A.I., trans-equatorial, sporadic-E), with band, locator and distance.
 H2|2.3 How the program reads the spots
 P|From each "DX de" line the program extracts spotter, frequency, DX, comment, time and, when present, the locators and the propagation mode written in the comment in the form JN70CN<ES>JO62QM (the first locator is the spotter's, the second the DX's; the forms with <>, > and brackets are also accepted).
@@ -37,7 +37,12 @@ H2|2.4 Collected spots and CALL3 database
 P|The Collected spots page lists the latest spots with a filter by band and by source; the Open the spot folder button opens data/spot. The CALL3 page shows the callsign -> locator database (JTDX/WSJT format): you can search for a callsign, reload the database or import a new CALL3.TXT file, which replaces the one in use (the old one is kept as a backup copy).
 H1|3. Sporadic-E (SPORADIC-E)
 H2|3.1 The map
-P|The Map menu offers three views. Azimuthal - single hop: a map centred on your own station with a fixed radius of 2500 km and the zones of the IK3XTV table [3] (500 km minimum, 1500-2000 km optimum, 2400 km maximum). Azimuthal - maximum distance (multi-hop): the same map with the Maximum distance slider, from 300 to 20000 km, and the limits of the double (5000 km) and triple hop (6900 km), to follow the evolution of multi-hop. Rectangular: the world map with the Europe and World buttons.
+P|The Map menu chooses the projection. Azimuthal: azimuthal equidistant map centred on your own station, with the zoom slider (from 300 to 20000 km from the centre, also with the mouse wheel). Mercator: the world map, with the Europe and World buttons. In both projections the distance circles of the IK3XTV table [3] are drawn around the station: 500 km (single-hop minimum), 1500-2000 km (optimum), 2400 km (single-hop maximum), 5000 km (double-hop maximum) and 6900 km (triple-hop maximum).
+P|The table of hop lengths on 50 MHz is the one by Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Propagation on 6 metres - General characteristics) [3]; Es clouds lie at a height of about 100 km, and this limits the single hop to around 2000 km [29]. The rings on the maps and the number of hops follow these distances:
+TAB|Hop;Minimum distance;Optimum distance;Maximum distance
+TAB|Single hop;500-650 km;1500-2000 km;2200-2400 km
+TAB|Double hop;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Triple hop;-;4800-6400 km;6900 km
 P|In the azimuthal views the dashed rings give the km from the centre; the ring spacing changes with the zoom and the outer edge shows the maximum distance displayed.
 H2|3.2 The controls
 LI|Bands: 10, 6, 4 and 2 m (432 MHz is not analysed: sporadic-E does not apply [22]-[24]); spot time window from 15 minutes to 12 hours.

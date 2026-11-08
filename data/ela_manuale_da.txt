@@ -25,7 +25,7 @@ P|Fanens højre kolonne, 40 % af vinduet, samler alle spotfiltrene: der er kun �
 LI|Meteor scatter: filteret fra YA-MS (frekvensvinduer typiske for MS, mærker for anden udbredelse, digitale MS-modes og <MS>, bånd, test af filteret og tællere). Inde i E-LAYER ANALYZER vises underfanen Dataindsamling i YA-MS ikke: dens filter indstilles her.
 LI|Sporadisk E: mærkerne mellem < >, der udelukker et spot fra sporadisk E; 28 og 50 MHz-reglerne (inden for 450 km er det ikke sporadisk E; båndplanen er ikke et eksklusivt kriterium, så et spot i meteor scatter-vinduet forbliver i sporadisk E, medmindre det har den digitale mode MS eller <MS>); 144 MHz-reglen (minimumsafstand; bekræftelse med et andet spot på samme sky inden for nogle minutter eller med et 50 MHz-spot med kort hop i nærheden) og den transækvatoriale regel med dens bånd for magnetisk inklination. Knappen Gendan forfatterens regler sætter startværdierne tilbage.
 LI|F.A.I.: de ord, der angiver et F.A.I.-spot (fra start FAI: <FAI> eller fai gælder, med store, små eller blandede bogstaver; disse spots kommer ikke med i sporadisk E), båndene og perioden for spots på kortet (fra start 24 timer).
-LI|Nordlys: mærkerne mellem < > for nordlysspots (fra start <AU>, <AUR>, <AUE>, <AURORA>), båndene og perioden for spots på kortet (fra start 2 timer).
+LI|Nordlys: ordene for nordlysspots, med eller uden < > og med store eller små bogstaver (fra start AU og AUR), båndene og perioden for spots på kortet (fra start 2 timer).
 LI|Test af filtre: du skriver eller indsætter en cluster-linje, og programmet viser, hvordan filtrene klassificerer den (meteor scatter, nordlys, F.A.I., transækvatorial, sporadisk E), med bånd, lokator og afstand.
 H2|2.3 Hvordan programmet læser spots
 P|Fra hver "DX de"-linje udtrækker programmet spotter, frekvens, DX, kommentar, tid og, når de findes, lokatorerne og udbredelsesformen skrevet i kommentaren på formen JN70CN<ES>JO62QM (den første lokator er spotterens, den anden DX-stationens; formerne med <>, > og parenteser accepteres også).
@@ -37,7 +37,12 @@ H2|2.4 Indsamlede spots og CALL3-databasen
 P|Siden Indsamlede spots viser de seneste spots med filter for bånd og kilde; knappen Åbn spotmappen åbner data/spot. Siden CALL3 viser databasen kaldesignal -> lokator (JTDX/WSJT-format): du kan søge efter et kaldesignal, genindlæse databasen eller importere en ny CALL3.TXT-fil, som erstatter den, der er i brug (den gamle bevares som sikkerhedskopi).
 H1|3. Sporadisk E (SPORADIC-E)
 H2|3.1 Kortet
-P|Menuen Kort vælger mellem tre visninger. Azimutal - ét hop: kort centreret på egen station med fast radius på 2500 km og zonerne fra IK3XTV's tabel [3] (mindst 500 km, optimalt 1500-2000 km, højst 2400 km). Azimutal - maksimal afstand (multi-hop): samme kort med skyderen Maksimal afstand, fra 300 til 20000 km, og grænserne for dobbelt hop (5000 km) og tredobbelt hop (6900 km), så man kan følge multi-hoppets udvikling. Rektangulær: verdenskortet med knapperne Europa og Verden.
+P|Menuen Kort vælger projektionen. Azimutal: azimutalt ækvidistant kort centreret på egen station, med zoomskyderen (fra 300 til 20000 km fra centrum, også med musehjulet). Mercator: verdenskortet med knapperne Europa og Verden. I begge projektioner tegnes afstandscirklerne fra IK3XTV's tabel [3] omkring stationen: 500 km (mindst for ét hop), 1500-2000 km (optimalt), 2400 km (højst for ét hop), 5000 km (højst for dobbelthop) og 6900 km (højst for tredobbelt hop).
+P|Tabellen over hoplængder på 50 MHz er Flavio Eganos (IK3XTV), «Propagazione sui 6 metri - Caratteristiche generali» (Udbredelse på 6 meter - Generelle egenskaber) [3]; Es-skyerne ligger i omkring 100 km højde, og det begrænser ét hop til omkring 2000 km [29]. Kortenes ringe og antallet af hop følger disse afstande:
+TAB|Hop;Mindste afstand;Optimal afstand;Største afstand
+TAB|Ét hop;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dobbelthop;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Tredobbelt hop;-;4800-6400 km;6900 km
 P|I de azimutale visninger angiver de stiplede ringe km fra centrum; afstanden mellem ringene ændres med zoomen, og yderkanten angiver den største viste afstand.
 H2|3.2 Betjeningen
 LI|Bånd: 10, 6, 4 og 2 m (432 MHz analyseres ikke: sporadisk E gælder ikke dér [22]-[24]); tidsvindue for spots fra 15 minutter til 12 timer.
