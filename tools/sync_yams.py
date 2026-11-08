@@ -119,6 +119,31 @@ for f in os.listdir(ui):
 p = os.path.join(ui, 'MainWindow.Spiegazione.cs'); s = rd(p)
 s = rep(s, '        static void FillExplain(StackPanel doc, string file)', '        internal static void FillExplain(StackPanel doc, string file)', 'FillExplain')
 s = rep(s, '                                    Text = tag,\n', '                                    Text = Lang.T(tag),\n', 'etichette FONTE/RILIEVO/SCELTA')
+# E-LAYER ANALYZER: righe di tabella "TAB|cella;cella;..." (la prima riga di ogni gruppo e' l'intestazione)
+s = rep(s, '                    case "SRC":\n',
+        '                    case "TAB":\n'
+        '                        {\n'
+        '                            string[] cells = text.Split(\';\');\n'
+        '                            Grid prev = doc.Children.Count > 0 ? doc.Children[doc.Children.Count - 1] as Grid : null;\n'
+        '                            bool head = prev == null || !"tab".Equals(prev.Tag);\n'
+        '                            Grid row = new Grid { Tag = "tab", Margin = new Thickness(14, head ? 4 : 0, 14, 0) };\n'
+        '                            for (int ci = 0; ci < cells.Length; ci++)\n'
+        '                            {\n'
+        '                                row.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(ci == 0 ? 1.3 : 1, GridUnitType.Star)));\n'
+        '                                Border cb = new Border\n'
+        '                                {\n'
+        '                                    Background = Pal.B(head ? Pal.Rgb(232, 236, 248) : Pal.Rgb(255, 255, 255)),\n'
+        '                                    BorderBrush = Pal.B(Pal.Rgb(200, 205, 225)),\n'
+        '                                    BorderThickness = new Thickness(ci == 0 ? 1 : 0, head ? 1 : 0, 1, 1),\n'
+        '                                    Padding = new Thickness(8, 4),\n'
+        '                                    Child = DocText(cells[ci].Trim(), 13, head ? DocH1 : DocInk, head || ci == 0 ? FontWeight.SemiBold : FontWeight.Normal, FontStyle.Normal, new Thickness(0))\n'
+        '                                };\n'
+        '                                Grid.SetColumn(cb, ci); row.Children.Add(cb);\n'
+        '                            }\n'
+        '                            doc.Children.Add(row);\n'
+        '                        }\n'
+        '                        break;\n'
+        '                    case "SRC":\n', 'righe di tabella TAB')
 wr(p, s)
 
 p = os.path.join(ui, 'MainWindow.Screenshot.cs'); s = rd(p)

@@ -37,7 +37,12 @@ H2|2.4 Spot raccolti e archivio CALL3
 P|La pagina Spot raccolti elenca gli ultimi spot con il filtro per banda e per fonte; il pulsante Apri la cartella degli spot apre data/spot. La pagina CALL3 mostra l'archivio nominativo -> locator (formato JTDX/WSJT): si può cercare un nominativo, ricaricare l'archivio o importare un nuovo file CALL3.TXT, che sostituisce quello in uso (il vecchio resta come copia di sicurezza).
 H1|3. E-sporadico (SPORADIC-E)
 H2|3.1 La mappa
-P|Il menu Mappa sceglie tra tre viste. Azimutale - singolo salto: mappa centrata sulla propria stazione con raggio fisso di 2500 km e le zone della tabella IK3XTV [3] (500 km minima, 1500-2000 km ottimale, 2400 km massima). Azimutale - distanza massima (multi-salto): la stessa mappa con il cursore Distanza massima, da 300 a 20000 km, e i limiti del doppio (5000 km) e del triplo salto (6900 km), per seguire l'evoluzione del multi-salto. Rettangolare: la mappa del mondo con i pulsanti Europa e Mondo.
+P|Il menu Mappa sceglie la proiezione. Azimutale: mappa azimutale equidistante centrata sulla propria stazione, con il cursore dello zoom (da 300 a 20000 km dal centro, anche con la rotella del mouse). Mercatore: la mappa del mondo, con i pulsanti Europa e Mondo. In tutte e due le proiezioni si disegnano attorno alla stazione i cerchi delle distanze della tabella di IK3XTV [3]: 500 km (minima del singolo salto), 1500-2000 km (ottimale), 2400 km (massima del singolo salto), 5000 km (massima del doppio salto) e 6900 km (massima del triplo salto).
+P|La tabella delle lunghezze dei salti in 50 MHz è quella di Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; le nubi Es si trovano a circa 100 km di quota, e questo limita il singolo salto attorno ai 2000 km [29]. Le corone delle mappe e il numero dei salti seguono queste distanze:
+TAB|Salto;Distanza minima;Distanza ottimale;Distanza massima
+TAB|Singolo salto;500-650 km;1500-2000 km;2200-2400 km
+TAB|Doppio salto;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Triplo salto;-;4800-6400 km;6900 km
 P|Nelle viste azimutali gli anelli tratteggiati riportano i km dal centro; il passo degli anelli cambia con lo zoom e il bordo esterno indica la distanza massima mostrata.
 H2|3.2 I comandi
 LI|Bande: 10, 6, 4 e 2 m (i 432 MHz non si analizzano: l'E-sporadico non si applica [22]-[24]); finestra di tempo degli spot da 15 minuti a 12 ore.

@@ -326,11 +326,11 @@ namespace ELA
                     await Task.Delay(2500);
                     Shot(Path.Combine(dir, names[i] + ".png"));
                 }
-                // SPORADIC-E: mappa azimutale con la distanza massima (multi-salto) e rettangolare
+                // SPORADIC-E: azimutale allargata (multi-salto) e Mercatore, con i cerchi delle distanze di IK3XTV
                 tabs.Select(0);
-                es.ShotMap(1, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
-                es.ShotMap(2, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_rettangolare.png"));
-                es.ShotMap(0, 0);
+                es.ShotMap(0, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
+                es.ShotMap(1, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_mercatore.png"));
+                es.ShotMap(0, 3000);
                 // BENCHMARK Es: un'ora della giornata e lo zoom
                 tabs.Select(1);
                 bench.ShotSelect("2025-06-15", 11, 9000); await Task.Delay(2500); Shot(Path.Combine(dir, "1e_benchmark_es_ora.png"));

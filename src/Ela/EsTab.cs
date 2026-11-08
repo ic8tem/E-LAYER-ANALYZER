@@ -56,13 +56,15 @@ namespace ELA
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("es_salto_corto_km", 1200)), 0, 50, 55);
             chkCells = Ui.C(Lang.T("Nubi Es sui quadrati Maidenhead"), cf.GetB("es_celle", true));
             Button bView = Ui.B(Lang.T("Europa"));
-            bView.Click += (s, e) => { cmbMap.SelectedIndex = 2; map.SetView(-30, 60, 20, 72); };
+            bView.Click += (s, e) => { cmbMap.SelectedIndex = 1; map.SetView(-30, 60, 20, 72); };
             Button bWorld = Ui.B(Lang.T("Mondo"));
-            bWorld.Click += (s, e) => { cmbMap.SelectedIndex = 2; map.SetView(-180, 180, -60, 80); };
-            cmbMap = Ui.Combo(new[] { Lang.T("Azimutale - singolo salto"), Lang.T("Azimutale - distanza massima (multi-salto)"), Lang.T("Rettangolare") },
-                Math.Max(0, Math.Min(2, (int)cf.GetD("es_mappa", 0))), 250);
+            bWorld.Click += (s, e) => { cmbMap.SelectedIndex = 1; map.SetView(-180, 180, -75, 80); };
+            // proiezione: 0 = azimutale equidistante centrata sulla stazione (zoom con il cursore), 1 = Mercatore
+            int oldMode = (int)cf.GetD("es_mappa", 0);   // versioni fino alla 0.4.3: 0/1 azimutale, 2 rettangolare
+            int startMode = cf.Get("es_proiezione", "").Length > 0 ? (int)cf.GetD("es_proiezione", 0) : (oldMode == 2 ? 1 : 0);
+            cmbMap = Ui.Combo(new[] { Lang.T("Azimutale"), Lang.T("Mercatore") }, Math.Max(0, Math.Min(1, startMode)), 160);
             range = new RangeBar(map, cf.GetD("es_raggio_km", 6000));
-            range.Changed += km => { if (cmbMap.SelectedIndex == 1) { multiRange = km; Draw(); } };
+            range.Changed += km => { if (cmbMap.SelectedIndex == 0) { multiRange = km; Draw(); } };
             cmbMap.SelectionChanged += (s, e) => { MapMode(); Draw(); };
             foreach (CheckBox c in new[] { c10, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
@@ -139,22 +141,23 @@ namespace ELA
             cf.Set("es_quota_km", Ui.V(numH)); cf.Set("es_elev_min", Ui.V(numElev));
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
             cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true);
-            cf.Set("es_mappa", Math.Max(0, cmbMap.SelectedIndex));
+            cf.Set("es_proiezione", Math.Max(0, cmbMap.SelectedIndex));
             if (!double.IsNaN(multiRange)) cf.Set("es_raggio_km", multiRange);
         }
 
-        // 0 = azimutale per il singolo salto (raggio fisso), 1 = azimutale con il cursore della distanza massima, 2 = rettangolare
-        double multiRange = double.NaN;   // raggio scelto con il cursore (vista 1)
+        // 0 = azimutale equidistante centrata sulla stazione, con il cursore dello zoom (km dal centro); 1 = Mercatore.
+        // In entrambe si disegnano i cerchi delle distanze di IK3XTV attorno alla stazione.
+        double multiRange = double.NaN;   // raggio scelto con il cursore (vista azimutale)
         void MapMode()
         {
             int m = Math.Max(0, cmbMap.SelectedIndex);
             if (double.IsNaN(multiRange)) multiRange = range.Km;
-            if (m == 1) range.Apply(multiRange, true);
-            map.Azimuthal = m < 2;
-            map.WheelZoom = m == 1;
-            range.Root.IsVisible = m == 1;
+            map.Azimuthal = m == 0;
+            map.Mercator = m == 1;
+            map.WheelZoom = m == 0;
+            range.Root.IsVisible = m == 0;
             if (Station.Valid) { map.AzLat = Station.Lat; map.AzLon = Station.Lon; }
-            if (m == 0) map.RangeKm = SingleHopRangeKm;
+            if (m == 0) range.Apply(multiRange, true);
             map.InvalidateVisual();
         }
 
@@ -348,7 +351,9 @@ namespace ELA
                 map.Lines.Add(MapView.Circle(Station.Lat, Station.Lon, Geo.HalfHopKm(Ui.V(numElev), H), Pal.A(150, Pal.Green), 1));
                 map.Markers.Add(new MapMarker { Lat = Station.Lat, Lon = Station.Lon, Radius = 5, Fill = Pal.Green, Square = true, Label = Station.Call.Length > 0 ? Station.Call : Station.Loc, LabelColor = Pal.Green });
             }
-            if (map.Azimuthal) AddHopZones(map, map.AzLat, map.AzLon, cmbMap.SelectedIndex == 1);
+            // cerchi delle distanze di IK3XTV attorno alla stazione, in tutte e due le proiezioni
+            if (map.Azimuthal) AddHopZones(map, map.AzLat, map.AzLon, true);
+            else if (Station.Valid) AddHopZones(map, Station.Lat, Station.Lon, true);
             if (!double.IsNaN(clickLat))
             {
                 map.Markers.Add(new MapMarker { Lat = clickLat, Lon = clickLon, Radius = 8, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(clickLat, clickLon, 6) });
@@ -399,8 +404,7 @@ namespace ELA
             if (map.Azimuthal)
             {
                 double need = Math.Max(Geo.DistanceKm(map.AzLat, map.AzLon, s.LatS, s.LonS), Geo.DistanceKm(map.AzLat, map.AzLon, s.LatD, s.LonD)) * 1.12 + 100;
-                if (cmbMap.SelectedIndex == 0) { multiRange = Math.Max(need, SingleHopRangeKm); cmbMap.SelectedIndex = 1; }   // il singolo salto ha raggio fisso: passa alla distanza massima
-                else range.Apply(Math.Max(need, map.RangeKm), true);
+                range.Apply(Math.Max(need, map.RangeKm), true);
                 return;
             }
             double lw = Math.Min(s.LonS, s.LonD), le = Math.Max(s.LonS, s.LonD), ls = Math.Min(s.LatS, s.LatD), ln = Math.Max(s.LatS, s.LatD);
@@ -515,12 +519,13 @@ namespace ELA
             }
         }
 
+        // mode: 0 = azimutale (km = raggio), 1 = Mercatore sull'Europa
         public void ShotMap(int mode, double km)
         {
             if (km > 0) multiRange = km;
             cmbMap.SelectedIndex = mode;
             MapMode(); Draw();
-            if (mode == 2) map.SetView(-30, 60, 20, 72);
+            if (mode == 1) map.SetView(-30, 60, 20, 72);
         }
 
         public void SelectFirst() { if (paths.Count > 0) { sel = paths[0]; selKey = sel.Spot.Key; FocusOn(sel); FillTables(); Draw(); Details(); } }

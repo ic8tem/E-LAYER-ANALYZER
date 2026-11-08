@@ -8,9 +8,10 @@
 
 A button above the map chooses the view:
 
-- **Azimuthal - single hop**: azimuthal equidistant map centred on your station, fixed radius 2500 km, with the zones of the IK3XTV table (500 km minimum, 1500-2000 km optimum, 2400 km maximum single hop).
-- **Azimuthal - maximum distance (multi-hop)**: the same map with the **Maximum distance** slider (from 300 to 20000 km, also with the mouse wheel); the limits of the double (5000 km) and triple hop (6900 km) also appear, so the evolution of multi-hop can be followed.
-- **Rectangular**: the previous world map, with the Europe and World buttons.
+- **Azimuthal**: azimuthal equidistant map centred on your station, with the **zoom** slider (300 to 20000 km from the centre, also with the mouse wheel).
+- **Mercator**: the world map, with the Europe and World buttons.
+
+In both projections the **distance circles of Flavio IK3XTV** are drawn around the station: 500 km (single-hop minimum), 1500-2000 km (optimum), 2400 km (single-hop maximum), 5000 km (double-hop maximum) and 6900 km (triple-hop maximum).
 
 In the azimuthal views the dashed rings show the **km from the centre** (the step changes with the zoom), the edge marks the maximum distance shown, and the mouse cursor gives the distance and azimuth from the centre.
 

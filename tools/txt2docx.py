@@ -21,11 +21,25 @@ for s in d.sections:
     s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2)
 st = d.styles['Normal']; st.font.name = 'Calibri'; st.font.size = Pt(11)
 COL = {'FONTE': RGBColor(0x1F, 0x5F, 0xAD), 'RILIEVO': RGBColor(0x2E, 0x7D, 0x32), 'SCELTA': RGBColor(0xB4, 0x53, 0x09)}
+tab = None   # tabella in corso (righe TAB|cella;cella;...; la prima e' l'intestazione)
 for raw in open(src, encoding='utf-8'):
     raw = raw.rstrip('\n')
     if not raw.strip(): continue
     kind, _, text = raw.partition('|')
     kind = kind.strip().upper()
+    if kind == 'TAB':
+        cells = [c.strip() for c in text.split(';')]
+        if tab is None:
+            tab = d.add_table(rows=0, cols=len(cells)); tab.style = 'Table Grid'; head = True
+        else: head = False
+        row = tab.add_row().cells
+        for i, c in enumerate(cells[:len(row)]):
+            row[i].text = c
+            if head or i == 0:
+                for r in row[i].paragraphs[0].runs: r.bold = True
+        continue
+    if tab is not None:
+        tab = None; d.add_paragraph()
     if kind == 'TITLE':
         p = d.add_paragraph(); r = p.add_run(text); r.bold = True; r.font.size = Pt(22); r.font.color.rgb = RGBColor(24, 32, 72)
     elif kind == 'SUB':

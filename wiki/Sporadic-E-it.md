@@ -8,9 +8,10 @@
 
 Un pulsante sopra la mappa sceglie la vista:
 
-- **Azimutale - singolo salto**: mappa azimutale equidistante centrata sulla tua stazione, raggio fisso 2500 km, con le zone della tabella IK3XTV (500 km minima, 1500-2000 km ottimale, 2400 km massima del singolo salto).
-- **Azimutale - distanza massima (multi-salto)**: la stessa mappa con il cursore **Distanza massima** (da 300 a 20000 km, anche con la rotella del mouse); compaiono anche i limiti del doppio (5000 km) e del triplo salto (6900 km), così si segue l'evoluzione del multi-salto.
-- **Rettangolare**: la mappa del mondo di prima, con i pulsanti Europa e Mondo.
+- **Azimutale**: mappa azimutale equidistante centrata sulla tua stazione, con il cursore dello **zoom** (da 300 a 20000 km dal centro, anche con la rotella).
+- **Mercatore**: la mappa del mondo, con i pulsanti Europa e Mondo.
+
+In tutte e due le proiezioni si disegnano attorno alla stazione i **cerchi delle distanze di Flavio IK3XTV**: 500 km (minima del singolo salto), 1500-2000 km (ottimale), 2400 km (massima del singolo salto), 5000 km (massima del doppio) e 6900 km (massima del triplo salto).
 
 Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il passo cambia con lo zoom), il bordo indica la distanza massima mostrata e il cursore del mouse dà distanza e azimut dal centro.
 

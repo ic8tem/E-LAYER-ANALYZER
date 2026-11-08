@@ -184,6 +184,28 @@ namespace YAMS
                             doc.Children.Add(DocHanging(dot, DocText(text, 14, DocInk, FontWeight.Normal, FontStyle.Normal, new Thickness(0)), new Thickness(14, 0, 0, 6)));
                         }
                         break;
+                    case "TAB":
+                        {
+                            string[] cells = text.Split(';');
+                            Grid prev = doc.Children.Count > 0 ? doc.Children[doc.Children.Count - 1] as Grid : null;
+                            bool head = prev == null || !"tab".Equals(prev.Tag);
+                            Grid row = new Grid { Tag = "tab", Margin = new Thickness(14, head ? 4 : 0, 14, 0) };
+                            for (int ci = 0; ci < cells.Length; ci++)
+                            {
+                                row.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(ci == 0 ? 1.3 : 1, GridUnitType.Star)));
+                                Border cb = new Border
+                                {
+                                    Background = Pal.B(head ? Pal.Rgb(232, 236, 248) : Pal.Rgb(255, 255, 255)),
+                                    BorderBrush = Pal.B(Pal.Rgb(200, 205, 225)),
+                                    BorderThickness = new Thickness(ci == 0 ? 1 : 0, head ? 1 : 0, 1, 1),
+                                    Padding = new Thickness(8, 4),
+                                    Child = DocText(cells[ci].Trim(), 13, head ? DocH1 : DocInk, head || ci == 0 ? FontWeight.SemiBold : FontWeight.Normal, FontStyle.Normal, new Thickness(0))
+                                };
+                                Grid.SetColumn(cb, ci); row.Children.Add(cb);
+                            }
+                            doc.Children.Add(row);
+                        }
+                        break;
                     case "SRC":
                         {
                             // fonti numerate: "12. testo" -> numero in colonna, testo con rientro sporgente
