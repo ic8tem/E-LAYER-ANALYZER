@@ -36,10 +36,14 @@ H2|3.2 两个台站的首跳
 TAG|SCELTA|等长跳假设：反射点沿大圆位于路径的 (2k − 1) / (2n) 处。报告者的首跳是 k = 1 的点（橙色），DX 的首跳是 k = n 的点（紫色）；单跳时两者重合于中点（黄色）。
 TAG|FONTE|短首跳假设：作者（IC8TEM）在多跳中有短首跳的经验，在距其 QTH 1200 km 以内 [4]。程序在每个台站短跳的一半处绘制反射点（空心圆）；短跳长度可在选项卡中选择（初始值 1200 km）。
 H2|3.3 Maidenhead 方格上的 Es 云
-TAG|SCELTA|反射点（单跳为中点，多跳为各首跳）归入 4 位 Maidenhead 方格（2° × 1°）。每个方格保留落入其中的 spot 中最高的最低 foEs；颜色从蓝色（< 5 MHz）到红色（> 20 MHz）。
+TAG|SCELTA|反射点（单跳为中点，多跳为各首跳）归入 4 位 Maidenhead 方格（2° × 1°）。每个方格保留落入其中的 spot 中最高的最低 foEs 以及最高的频率。颜色按频率确定（作者规则）：29 MHz 以内为绿色，51 MHz 以内为黄色，71 MHz 以内为橙色，145 MHz 以内为红色。
 P|对于本台，仅当云位于单跳覆盖范围内时，程序才计算经由距离为 d 的每块云、跳距为 2d 的 MUF：
 EQ|MUF_mia = foEs_nube · sec φ(2d)
 TAG|SCELTA|“Es 云”表：红色表示可提供 MUF ≥ 144 MHz 的云，橙色 ≥ 70 MHz，黄色 ≥ 50 MHz。
+P|由方格的 foEs 估算云所能支持的最长跳上的可能 MUF，即 IK3XTV 表中单跳的最大值（2400 km）：
+EQ|MUF_prob = foEs_nube · sec φ(2400 km)
+TAG|SCELTA|如果可能的 MUF 达到比 spot 更高的频率等级（例如 50 MHz 的 spot 而可能的 MUF 超过 51 MHz），方格就以所达到等级的颜色闪烁：这表示同一片云可能打开更高的频段。
+TAG|FONTE|这是 IK3XTV [3]、[29] 提出的原理：跳距缩短表示 MUF 升高（28 MHz 上 400-500 km 的跳距对应达到 50 MHz 的 MUF，50 MHz 上 500-700 km 的跳距对应可支持 144 MHz 的 MUF）。Jacobs 和 Leinwoll [30] 也描述了同样的方法：由 28 MHz 上的最小跳距可推出 MUF，而 28 MHz 上小于 500 英里（约 800 km）的跳距表示 50 MHz 将在同一方向打开。
 H2|3.4 偶发 E 层不适用于 432 MHz
 TAG|FONTE|中纬度偶发 E 层的 MUF 可达 150 MHz 甚至更高（Whitehead [23]）；要将掠射射线偏折到 200 MHz 需要非常密的云（IK3XTV [22]）。ARRL 纪录 [24] 只报告了 50 和 144 MHz 上的偶发 E 层通联，222 和 432 MHz 上没有。
 TAG|SCELTA|因此 SPORADIC-E 选项卡只分析 28、50、70 和 144 MHz：432 MHz 的 spot 从不按偶发 E 层处理（一些泛泛的来源，包括人工智能生成的内容，在没有文献依据的情况下声称如此）。
@@ -105,7 +109,9 @@ TAG|FONTE|作者规则（IC8TEM）：每次关闭程序时，spot 数据库都�
 TAG|SCELTA|可选本地过滤（DATA COLLECTION 过滤列顶部的复选框，应作者要求）：频率低于 27990.0 kHz 或高于 145 MHz（作者指定的最高频率）的 "DX de" 行被丢弃，不在控制台显示，也不保存。YA-MS 的流星散射 spot 过滤仍会接收所有行并应用其自身的规则。
 TAG|FONTE|此处同样采用 YA-MS 的规则：落在 MS 典型频率窗口内（50190-50300, 70100-70400, 144290-144399 kHz，可在 DATA COLLECTION 过滤列的“流星散射”子选项卡中设置）且没有其他传播方式标签（<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>）的 spot，或者含有明确 MS 模式（MSK144, FSK441/FSK41, PSK2K, JTMS, JT6M）或 <MS>（不区分大小写）的 spot，属于流星散射，而非偶发 E 层。带有 <AS> 或 <ACS>（aircraft scatter）的 spot 不用于偶发 E 层。
 TAG|SCELTA|整个程序只有一个数据收集，所有 spot 过滤都位于 DATA COLLECTION 的右侧列中：流星散射（YA-MS 的过滤）、偶发 E 层、F.A.I. 和极光，另有基于一行集群数据的过滤测试。默认值为作者的规则：偶发 E 层采用其他传播方式的标记、144 MHz 规则和跨赤道传播规则；极光采用 AU 和 AUR（带或不带 < >）以及最近 2 小时的 spot；F.A.I. 采用 FAI 一词以及最近 24 小时的 spot。这些值可为测试而调整，并有一个按钮可恢复作者的规则；数值保存在设置中。
-TAG|SCELTA|28 和 50 MHz 规则（作者规则）：在 28 和 50 MHz，450 km 以内的通联不算偶发 E 层；频段规划只是线索而非排他性标准，因此在 50 MHz 落入流星散射窗口的 spot 仍归入偶发 E 层，除非其注明了数字 MS 模式（MSK144、FSK441...）或 <MS>。YA-MS 继续使用该窗口进行自己的流星散射收集。F.A.I. spot 通过 <FAI> 或 fai 字样（大写、小写或混合均可）识别，且不归入偶发 E 层。
+TAG|SCELTA|28 和 50 MHz 规则（作者和 IK3XTV 的规则）：在 50 MHz，450 km 以内的通联不算偶发 E 层；在 28 MHz，最小距离遵循 IK3XTV [3]、[29]，即频率越低跳距越短：对于同一片云（相同的 foEs），它是正割定律在 28.5 MHz 下给出与 50 MHz 最小距离在 50.2 MHz 下相同 MUF/foEs 比值的距离（50 MHz 为 450 km 时约为 170 km）。频段规划只是线索而非排他性标准，因此在 50 MHz 落入流星散射窗口的 spot 仍归入偶发 E 层，除非其注明了数字 MS 模式（MSK144、FSK441...）或 <MS>。YA-MS 继续使用该窗口进行自己的流星散射收集。F.A.I. spot 通过 <FAI> 或 fai 字样（大写、小写或混合均可）识别，且不归入偶发 E 层。
+TAG|SCELTA|DATA COLLECTION 选项卡有两个子选项卡：Spot（会话、已收集的 spot、CALL3 和过滤列）和“传播数据”。传播数据来自 N0NBH [31]（XML 格式的太阳数据和 VHF 状况：DXrobot 提供的欧洲和北美洲 E-skip 及极光，附 VHF 横幅）、NOAA [15] 的实时 Bz 和太阳风（DSCOVR/ACE，L1 点，每分钟一次：这是 Bz 的最佳来源），以及 Make More Miles on VHF [32] 的当日流星活动（RMOB）。按照 N0NBH 的要求，最多每小时下载一次。程序从与横幅数据相同的 XML 文件中读取数值，并将其摘要叠加显示在 SPORADIC-E、F.A.I. 和 AURORA 地图上。
+TAG|SCELTA|选项卡栏中的菜单可选择六个大洲之一（欧洲、北美洲、南美洲、非洲、亚洲、大洋洲）：墨卡托地图以及 F.A.I. 和极光地图移到该大洲，E-skip 摘要使用该大洲的数据。N0NBH 仅为欧洲和北美洲发布 E-skip：对其他大洲，程序会注明这一点。
 TAG|FONTE|作者规则（IC8TEM），与 YA-MS 相同：不精确的网格坐标（少于 6 个字符）取自 CALL3；如果 CALL3 中该呼号有 6 个字符的网格坐标，则始终以其为准（在 spot 中，以及在 BENCHMARK Es 的日志网格坐标中）。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
