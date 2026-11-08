@@ -47,3 +47,9 @@ In the azimuthal views the dashed rings show the **km from the centre** (the ste
 ## Note on 432 MHz
 
 Sporadic-E **does not apply to 432 MHz**: the Es MUF reaches about 150-200 MHz and the ARRL records list Es contacts only on 50 and 144 MHz. 70 cm spots are not analysed here.
+
+## Squares coloured by frequency and MUF blinking
+
+The Maidenhead squares of the reflection points are coloured by the highest spot frequency: **green** up to 29 MHz, **yellow** up to 51, **orange** up to 71, **red** up to 145 MHz. From the square's foEs the probable MUF on the longest hop (2400 km, IK3XTV table) is estimated: if it reaches a higher band, the square **blinks** in that band's colour (principle of IK3XTV and Jacobs-Leinwoll: short skip means high MUF).
+
+At the top right of the map the N0NBH summary appears (E-skip for the chosen continent, SFI, K and A indices).

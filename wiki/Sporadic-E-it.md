@@ -47,3 +47,9 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 ## Nota sui 432 MHz
 
 L'E-sporadico **non si applica ai 432 MHz**: la MUF dell'Es arriva a circa 150-200 MHz e i record ARRL riportano collegamenti in Es solo su 50 e 144 MHz. Gli spot in 70 cm non vengono analizzati qui.
+
+## Quadrati colorati per frequenza e lampeggio della MUF
+
+I quadrati Maidenhead dei punti di riflessione si colorano con la frequenza più alta degli spot: **verde** fino a 29 MHz, **giallo** fino a 51, **arancio** fino a 71, **rosso** fino a 145 MHz. Dalla foEs del quadrato si stima la MUF probabile sul salto più lungo (2400 km, tabella IK3XTV): se raggiunge una banda più alta, il quadrato **lampeggia** con il colore di quella banda (principio di IK3XTV e di Jacobs-Leinwoll: lo skip corto indica una MUF alta).
+
+In alto a destra sulla mappa compare la sintesi di N0NBH (E-skip del continente scelto, SFI, indici K e A).

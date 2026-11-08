@@ -37,3 +37,13 @@ Il pulsante **Ripristina le regole dell'autore** riporta i valori di partenza.
 ## CALL3
 
 Archivio **nominativo → locator** di JTDX (oltre un milione di nominativi) in `data/call3.txt`. Pulsanti **Ricarica** e **Importa un nuovo CALL3.TXT**. I locator a 6 caratteri letti nei commenti degli spot si aggiungono a `data/call3_nuovi.txt`.
+
+## Sottolinguette Spot e Dati di propagazione
+
+La linguetta ha due sottolinguette: **Spot** (sessioni, spot raccolti, CALL3 e colonna dei filtri) e **Dati di propagazione**:
+
+- **N0NBH** (hamqsl.com): banner VHF e dati solari, E-skip Europa e Nord America (DXrobot), aurora.
+- **Bz per l'aurora**: NOAA SWPC, vento solare in tempo reale (DSCOVR/ACE, punto L1), la fonte migliore per il Bz.
+- **Meteor scatter**: attività meteorica del giorno (RMOB) da Make More Miles on VHF.
+
+Si scaricano al massimo una volta l'ora. La sintesi compare sulle mappe di SPORADIC-E, F.A.I. e AURORA. Il **menu del continente**, a destra nella barra delle linguette, sposta le mappe e sceglie i dati del continente.

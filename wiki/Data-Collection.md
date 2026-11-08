@@ -37,3 +37,13 @@ The **Restore the author's rules** button brings back the defaults.
 ## CALL3
 
 JTDX **callsign → locator** database (over a million callsigns) in `data/call3.txt`. Buttons **Reload** and **Import a new CALL3.TXT**. 6-character locators read in spot comments are added to `data/call3_nuovi.txt`.
+
+## Spot and Propagation data sub-tabs
+
+The tab has two sub-tabs: **Spot** (sessions, collected spots, CALL3 and filter column) and **Propagation data**:
+
+- **N0NBH** (hamqsl.com): VHF banner and solar data, E-skip Europe and North America (DXrobot), aurora.
+- **Bz for aurora**: NOAA SWPC real-time solar wind (DSCOVR/ACE, L1 point), the best source for Bz.
+- **Meteor scatter**: daily meteor activity (RMOB) from Make More Miles on VHF.
+
+They are downloaded at most once an hour. The summary appears on the SPORADIC-E, F.A.I. and AURORA maps. The **continent menu**, at the right of the tab bar, moves the maps and selects the data of that continent.
