@@ -260,6 +260,32 @@ namespace ELA
             return Math.Abs(Geo.InclinationDeg(la, lo)) <= TepInclinationDeg;
         }
 
+        // Regola generale per tutto il mondo (Kennewell e Wilkinson, IPS [49]): il TEP richiede un percorso che attraversa
+        // l'equatore magnetico in modo quasi simmetrico, entro circa 15 gradi dalla direzione nord-sud magnetica, su 3000-8000 km.
+        // Restano fuori le zone escluse dall'autore (Canarie, Madeira, Capo Verde, penisola arabica).
+        public static double TepMinKm = 3000, TepMaxKm = 8000, TepMeridianDeg = 15;
+        static bool InCapoVerde(double lat, double lon) { return lat >= 14.5 && lat <= 17.5 && lon >= -25.7 && lon <= -22.3; }
+        static bool InArabia(double lat, double lon) { return lat >= 12 && lat <= 32.5 && lon >= 34.5 && lon <= 60; }
+        static bool TepExcluded(double lat, double lon) { return InCanarie(lat, lon) || InMadeira(lat, lon) || InCapoVerde(lat, lon) || InArabia(lat, lon); }
+
+        public static bool IsTransEquatorialWorld(double latA, double lonA, double latB, double lonB)
+        {
+            if (!UseTepRule) return false;
+            if (TepExcluded(latA, lonA) || TepExcluded(latB, lonB)) return false;
+            double d = Geo.DistanceKm(latA, lonA, latB, lonB);
+            if (d < TepMinKm || d > TepMaxKm) return false;
+            double incA = Geo.InclinationDeg(latA, lonA), incB = Geo.InclinationDeg(latB, lonB);
+            if (Math.Sign(incA) == Math.Sign(incB)) return false;                 // non attraversa l'equatore magnetico
+            double la, lo;
+            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            if (Math.Abs(Geo.InclinationDeg(la, lo)) > TepInclinationDeg) return false;   // punto medio lontano dall'equatore magnetico
+            double inc, dec;
+            Igrf.IncDec(la, lo, out inc, out dec);
+            double brg = Geo.Bearing(la, lo, latB, lonB);
+            double dev = Math.Abs(((brg - dec) % 180 + 270) % 180 - 90);          // scarto dal meridiano magnetico (0-90 gradi)
+            return dev <= TepMeridianDeg;
+        }
+
         // lunghezza del primo salto corto (km); 0 = ipotesi spenta
         public static double ShortHopKm = 1200;
 

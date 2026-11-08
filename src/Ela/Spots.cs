@@ -61,7 +61,8 @@ namespace ELA
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
-        public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD)); } }
+        // e per la regola generale di tutto il mondo (EsModel.IsTransEquatorialWorld, Kennewell e Wilkinson)
+        public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && (EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD) || EsModel.IsTransEquatorialWorld(LatS, LonS, LatD, LonD))); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
         public double DistanceKm { get { return HasBoth ? Geo.DistanceKm(LatS, LonS, LatD, LonD) : double.NaN; } }
         public string Band { get { return Bands.Name(FreqKHz); } }

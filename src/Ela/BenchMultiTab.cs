@@ -245,7 +245,7 @@ namespace ELA
                     BenchQso q = new BenchQso { Utc = dt, Call = call, Grid = grid, MyCall = mca, MyGrid = mg, Band = "6m", FreqMHz = mhz, LatTx = tla, LonTx = tlo, LatRx = la, LonRx = lo, Prop = prop, Set = k };
                     q.Path = EsModel.Build(new Spot { Utc = dt, FreqKHz = mhz * 1000, DxCall = call, Spotter = mca, LocSpotter = mg, LocDx = grid, LatS = tla, LonS = tlo, LatD = la, LonD = lo, Prop = "ES" }, Ui.V(numH));
                     if (q.Path == null) continue;
-                    if (prop != "ES" && EsModel.IsTransEquatorial(tla, tlo, la, lo)) { tep++; continue; }   // transequatoriale (regola IC8TEM)
+                    if (prop != "ES" && (EsModel.IsTransEquatorial(tla, tlo, la, lo) || EsModel.IsTransEquatorialWorld(tla, tlo, la, lo))) { tep++; continue; }   // transequatoriale (regola IC8TEM)
                     list.Add(q); n++; if (IsMulti(q)) multi++;
                 }
             }
