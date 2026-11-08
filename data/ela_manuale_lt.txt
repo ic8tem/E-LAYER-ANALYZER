@@ -10,11 +10,13 @@ LI|Norint perkelti programą į kitą kompiuterį, pakanka nukopijuoti jos aplan
 LI|LoTW slaptažodis niekada neįrašomas; galima įsiminti tik naudotojo vardą.
 H2|1.3 Viršutinė juosta
 P|Viršuje kairėje įrašomas savo šaukinys, lokatorius (4, 6 arba 8 simboliai) ir antenos aukštis metrais; mygtukas Taikyti juos patvirtina ir visos kortelės atnaujinamos. Viršuje dešinėje yra UTC laikas, spalvų schemos pasirinkimas (visos YAEC schemos: Šviesi, Naktis, Juoda, aštuonios pastelinės ir Meteoro pėdsakas) ir kalbos pasirinkimas (28 kalbos). Pakeitus spalvų schemą ar kalbą, langas iš karto perkuriamas, surinkti duomenys neprarandami.
+P|Kortelių juostos dešinėje yra žemyno meniu (Europa, Šiaurės Amerika, Pietų Amerika, Afrika, Azija, Okeanija): jis perkelia Merkatoriaus žemėlapius ir F.A.I. bei pašvaistės žemėlapius į pasirinktą žemyną ir parenka to žemyno prognozės duomenis (N0NBH E-skip skelbiamas tik Europai ir Šiaurės Amerikai).
 H2|1.4 Būsenos juosta
 P|Apačioje esanti būsenos juosta rodo, kiek šaukinių yra CALL3 archyve, kiek spotų laikoma atmintyje ir kuris magnetinis modelis naudojamas (IGRF-14 su jo epocha). Atmintyje esantys spotai ištrinami kaskart uždarius programą: kiekviena sesija pradedama be senų spotų.
 H2|1.5 Žemėlapiai
 P|Visi žemėlapiai naudojami vienodai: pelės ratukas didina arba mažina, tempiant kairiuoju mygtuku perkeliamas vaizdas, kairysis spustelėjimas pasirenka tašką, spotą arba trasą, priklausomai nuo kortelės. Viršuje dešinėje rodomos koordinatės ir 6 simbolių lokatorius po žymekliu; azimutiniuose žemėlapiuose – ir atstumas bei azimutas nuo centro. Maidenhead laukų ir kvadratų tinklelis tankėja didinant mastelį.
 H1|2. Duomenų rinkimas (DATA COLLECTION)
+P|Kortelė turi dvi pakorteles: Spotai, su telnet sesijomis, surinktais spotais, CALL3 archyvu ir filtrų stulpeliu, ir Sklidimo duomenys (2.5 skyrius).
 H2|2.1 Trys telnet sesijos
 P|Kortelė DATA COLLECTION atveria iki trijų vienu metu veikiančių telnet ryšių: pasirinktą DX klasterį (pagal nutylėjimą ON0DXK su VHF filtrais), Reverse Beacon Network (prievadas 7001 – FT8, 7000 – CW ir RTTY) ir DM4X klasterį su PSKReporter spotais (dm4x.ddns.net, prievadas 8500).
 LI|Serveris ir Prievadas: klasterio adresas. Prisijungimas: prisijungimo šaukinys (jei tuščias, naudojamas viršutinės juostos šaukinys). Komandos po prisijungimo: po prisijungimo siunčiamos komandos, atskirtos kabliataškiu (pavyzdžiui, juostų filtrai).
@@ -23,7 +25,7 @@ LI|Konsolė rodo gautas eilutes; apačioje esančiame laukelyje galima įrašyti
 H2|2.2 Filtrų stulpelis
 P|Dešinysis kortelės stulpelis, 40% lango, apima visus spotų filtrus: duomenų rinkimas visai programai yra vienas, ir kiekvienas gautas spotas pereina čia, prieš patekdamas į kiekvieno sklidimo būdo korteles. Viršuje yra vietinio filtro žymimasis langelis, pagal nutylėjimą įjungtas: „DX de“ eilutės, kurių dažnis žemiau 27990,0 kHz arba aukščiau 145 MHz, atmetamos, nerodomos konsolėje ir neįsimenamos. Tai ypač naudinga su RBN ir PSKReporter, kurie siunčia labai daug HF spotų. Išjungus langelį, praleidžiama viskas. Žemiau yra penkios vidinės kortelės.
 LI|Meteor scatter: YA-MS filtras (MS būdingi dažnių langai, kito sklidimo žymos, skaitmeniniai MS režimai ir <MS>, juostos, filtro patikra ir skaitikliai). E-LAYER ANALYZER viduje YA-MS vidinė kortelė Duomenų rinkimas nerodoma: jos filtras nustatomas čia.
-LI|Sporadinis E: žymos tarp < >, kurios pašalina spotą iš sporadinio E; 28 ir 50 MHz taisyklės (iki 450 km tai nėra sporadinis E; juostų planas nėra išskirtinis kriterijus, todėl spotas meteor scatter lange lieka sporadiniame E, nebent nurodytas skaitmeninis režimas MS arba <MS>); 144 MHz taisyklė (mažiausias atstumas; patvirtinimas antru spotu per tą patį debesį per kelias minutes arba trumpo šuolio 50 MHz spotu netoliese) ir transekvatorinė taisyklė su savo magnetinės inklinacijos juosta. Mygtukas Atkurti autoriaus taisykles grąžina pradines reikšmes.
+LI|Sporadinis E: žymos tarp < >, kurios pašalina spotą iš sporadinio E; 28 ir 50 MHz taisyklės (50 MHz juostoje iki 450 km tai nėra sporadinis E; 28 MHz juostoje mažiausias atstumas išvedamas iš 50 MHz atstumo pagal IK3XTV, apie 170 km; juostų planas nėra išskirtinis kriterijus, todėl spotas meteor scatter lange lieka sporadiniame E, nebent nurodytas skaitmeninis režimas MS arba <MS>); 144 MHz taisyklė (mažiausias atstumas; patvirtinimas antru spotu per tą patį debesį per kelias minutes arba trumpo šuolio 50 MHz spotu netoliese) ir transekvatorinė taisyklė su savo magnetinės inklinacijos juosta. Mygtukas Atkurti autoriaus taisykles grąžina pradines reikšmes.
 LI|F.A.I.: žodžiai, žymintys F.A.I. spotą (pagal nutylėjimą FAI: tinka <FAI> arba fai, didžiosiomis, mažosiomis ar mišriomis raidėmis; šie spotai nepatenka į sporadinį E), juostos ir žemėlapyje rodomų spotų laikotarpis (pagal nutylėjimą 24 valandos).
 LI|Pašvaistė: pašvaistės spotų žodžiai, su < > arba be jų ir didžiosiomis ar mažosiomis raidėmis (pagal nutylėjimą AU ir AUR), juostos ir žemėlapyje rodomų spotų laikotarpis (pagal nutylėjimą 2 valandos).
 LI|Filtrų patikra: įrašoma arba įklijuojama klasterio eilutė, ir programa parodo, kaip ją klasifikuoja filtrai (meteor scatter, pašvaistė, F.A.I., transekvatorinis, sporadinis E), kartu su juosta, lokatoriumi ir atstumu.
@@ -35,6 +37,12 @@ LI|Kaip ir YA-MS, meteor scatter spotais laikomi tie, kurie patenka į MS būdin
 LI|Spotai su <AU> arba <AUR> patenka į kortelę AURORA, spotai su FAI – į kortelę F.A.I.
 H2|2.4 Surinkti spotai ir CALL3 archyvas
 P|Puslapyje Surinkti spotai pateikiami paskutiniai spotai su filtru pagal juostą ir šaltinį; mygtukas Atverti spotų aplanką atveria data/spot. Puslapyje CALL3 rodomas archyvas šaukinys -> lokatorius (JTDX/WSJT formatas): galima ieškoti šaukinio, iš naujo įkelti archyvą arba importuoti naują CALL3.TXT failą, kuris pakeičia naudojamąjį (senasis lieka kaip atsarginė kopija).
+H2|2.5 Sklidimo duomenys
+P|Pakortelė Sklidimo duomenys renka duomenis, padedančius suprasti, ar juosta gali atsiverti. Jie patys atsinaujina ne dažniau kaip kartą per valandą; mygtukas Atnaujinti dabar juos atsisiunčia iš karto.
+LI|N0NBH (hamqsl.com): VHF sąlygų reklamjuostė ir saulės duomenys (saulės srautas, A ir K indeksai, rentgeno spinduliai, saulės vėjas, Bz, pašvaistė ir pašvaistės platuma) su Europos ir Šiaurės Amerikos E-skip (DXrobot duomenys).
+LI|Bz pašvaistei: NOAA SWPC, saulės vėjas realiuoju laiku, kurį kas minutę matuoja palydovas taške L1 (DSCOVR/ACE). Neigiamas ir ilgalaikis Bz palankus pašvaistei.
+LI|Meteor scatter: Make More Miles on VHF dienos meteorų aktyvumo grafikas (RMOB duomenys); srautai, efektyvumas ir ryšiai realiuoju laiku yra kortelėje METEOR SCATTER.
+P|Šių duomenų santrauka rodoma viršuje dešinėje SPORADIC-E ir F.A.I. žemėlapiuose (pasirinkto žemyno E-skip) ir AURORA žemėlapyje (N0NBH pašvaistė ir NOAA Bz).
 H1|3. Sporadinis E (SPORADIC-E)
 H2|3.1 Žemėlapis
 P|Meniu Žemėlapis leidžia pasirinkti projekciją. Azimutinis: azimutinis lygiatolis žemėlapis, centruotas į savo stotį, su mastelio slankikliu (nuo 300 iki 20000 km nuo centro, taip pat pelės ratuku). Merkatoriaus: pasaulio žemėlapis su mygtukais Europa ir Pasaulis. Abiejose projekcijose aplink stotį braižomi IK3XTV lentelės [3] atstumų apskritimai: 500 km (vieno šuolio mažiausias), 1500-2000 km (optimalus), 2400 km (vieno šuolio didžiausias), 5000 km (dvigubo šuolio didžiausias) ir 6900 km (trigubo šuolio didžiausias).
@@ -48,7 +56,7 @@ H2|3.2 Valdikliai
 LI|Juostos: 10, 6, 4 ir 2 m (432 MHz neanalizuojama: sporadinis E netaikomas [22]-[24]); spotų laiko langas nuo 15 minučių iki 12 valandų.
 LI|Es aukštis (pagal nutylėjimą 105 km) ir minimali antenų elevacija.
 LI|Pirmieji šuoliai (vienodi šuoliai): rodo abiejų stočių pirmąjį šuolį; Trumpas pirmas šuolis iki…: rodo autoriaus hipotezę apie trumpą pirmąjį šuolį (pagal nutylėjimą 1200 km) [4].
-LI|Es debesys Maidenhead kvadratuose: nuspalvina atspindžio taškų kvadratus pagal įvertintą minimalią foEs.
+LI|Es debesys Maidenhead kvadratuose: nuspalvina atspindžio taškų kvadratus pagal aukščiausią spotų dažnį (žalia iki 29 MHz, geltona iki 51, oranžinė iki 71, raudona iki 145 MHz). Jei tikėtina debesies MUF ilgiausiame šuolyje (2400 km) pasiekia aukštesnę juostą, kvadratas mirksi tos juostos spalva.
 H2|3.3 Lentelės ir detalės
 P|Lentelėje Es spotai pateikiami galiojantys spotai su atstumu, šuolių skaičiumi ir minimalia foEs; lentelėje Es debesys (kvadratai) pateikiami kvadratai su įvertintais debesimis ir MUF, kurią jie duotų savo stočiai (raudona – 144 MHz, oranžinė – 70 MHz, geltona – 50 MHz). Nustačius mastelį, lentelės rodo tik tai, kas matoma žemėlapyje.
 LI|Spustelėjus spotą lentelėje arba žemėlapyje: trasa paryškinama geltonu švytėjimu, prireikus žemėlapis ją parodo, o skydelyje Detalės pateikiami šuoliai, atspindžio taškai, foEs ir azimutas. Spotas lieka pasirinktas ir atėjus naujiems spotams.
