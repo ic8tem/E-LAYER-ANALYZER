@@ -32,6 +32,8 @@ namespace ELA
         public static readonly HashSet<string> AuBands = new HashSet<string>(BandNames);
         public static double AuMinutes = 120;
 
+        public static bool Es50WindowNotExclusive = true;   // regola dell'autore: in 50 MHz il bandplan non e' esclusivo
+
         public static event Action Changed;
         public static void NotifyChanged() { Action a = Changed; if (a != null) a(); }
 
@@ -66,6 +68,8 @@ namespace ELA
         public static void Load(Config c)
         {
             SetEsTags(c.Get("flt_es_scritte", EsTagsDefault));
+            EsModel.MinKm50 = c.GetD("flt_es_50_min_km", 450);
+            Es50WindowNotExclusive = c.GetB("flt_es_50_bandplan", true);
             EsModel.Use144Rule = c.GetB("flt_es_144", true);
             EsModel.MinKm144 = c.GetD("flt_es_144_km", 900);
             EsModel.Confirm144Min = c.GetD("flt_es_144_min", 5);
@@ -91,6 +95,8 @@ namespace ELA
         public static void Save(Config c)
         {
             c.Set("flt_es_scritte", EsTags);
+            c.Set("flt_es_50_min_km", EsModel.MinKm50);
+            c.Set("flt_es_50_bandplan", Es50WindowNotExclusive);
             c.Set("flt_es_144", EsModel.Use144Rule);
             c.Set("flt_es_144_km", EsModel.MinKm144);
             c.Set("flt_es_144_min", EsModel.Confirm144Min);
@@ -111,6 +117,7 @@ namespace ELA
         public static void ResetEs()
         {
             SetEsTags(EsTagsDefault);
+            EsModel.MinKm50 = 450; Es50WindowNotExclusive = true;
             EsModel.Use144Rule = true; EsModel.MinKm144 = 900; EsModel.Confirm144Min = 5; EsModel.CloudMatchKm = 300;
             EsModel.Near50Min = 15; EsModel.Short50Km = 1200; EsModel.UseTepRule = true; EsModel.TepInclinationDeg = 20;
         }

@@ -98,6 +98,7 @@ namespace ELA
         // valori di partenza = regola dell'autore; si regolano nei filtri di DATA COLLECTION (Filters.cs)
         public static double MinKm144 = 900, Confirm144Min = 5, CloudMatchKm = 300, Near50Min = 15, Short50Km = 1200;
         public static bool Use144Rule = true;
+        public static double MinKm50 = 450;   // regola dell'autore: in 50 MHz entro 450 km non e' E-sporadico
 
         static IEnumerable<EsHop> RefPoints(EsPath p)
         {

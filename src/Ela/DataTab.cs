@@ -195,6 +195,12 @@ namespace ELA
             fp.Children.Add(tags);
             fp.Children.Add(FText(Lang.T("Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP."), true));
 
+            fp.Children.Add(FHead(Lang.T("Regole dei 50 MHz (regole dell'autore)")));
+            NumericUpDown n50 = Ui.N(0, 1500, Ui.Dm(EsModel.MinKm50), 0, 50, 90);
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 50 MHz (km)")), n50));
+            CheckBox cBp = FCheck(Lang.T("Il bandplan non è un criterio esclusivo: in 50 MHz uno spot nella finestra del meteor scatter resta nell'E-sporadico, salvo modo digitale MS o <MS>"), Filters.Es50WindowNotExclusive);
+            fp.Children.Add(cBp);
+
             fp.Children.Add(FHead(Lang.T("Regola dei 144 MHz (regola dell'autore)")));
             CheckBox c144 = FCheck(Lang.T("Applica la regola: in 144 MHz l'E-sporadico vale oltre la distanza minima, e uno spot da solo non si disegna finché non è confermato"), EsModel.Use144Rule);
             fp.Children.Add(c144);
@@ -217,17 +223,19 @@ namespace ELA
 
             Action read = () =>
             {
+                EsModel.MinKm50 = Ui.V(n50); Filters.Es50WindowNotExclusive = cBp.IsChecked == true;
                 EsModel.Use144Rule = c144.IsChecked == true; EsModel.MinKm144 = Ui.V(nMin); EsModel.Confirm144Min = Ui.V(nConf);
                 EsModel.CloudMatchKm = Ui.V(nCloud); EsModel.Short50Km = Ui.V(nShort); EsModel.Near50Min = Ui.V(nNear);
                 EsModel.UseTepRule = cTep.IsChecked == true; EsModel.TepInclinationDeg = Ui.V(nTep);
                 Changed();
             };
-            c144.IsCheckedChanged += (s, e) => read(); cTep.IsCheckedChanged += (s, e) => read();
-            foreach (NumericUpDown n in new[] { nMin, nConf, nCloud, nShort, nNear, nTep }) n.ValueChanged += (s, e) => read();
+            c144.IsCheckedChanged += (s, e) => read(); cTep.IsCheckedChanged += (s, e) => read(); cBp.IsCheckedChanged += (s, e) => read();
+            foreach (NumericUpDown n in new[] { n50, nMin, nConf, nCloud, nShort, nNear, nTep }) n.ValueChanged += (s, e) => read();
             Button bReset = Ui.B(Lang.T("Ripristina le regole dell'autore"));
             bReset.Click += (s, e) =>
             {
                 Filters.ResetEs();
+                n50.Value = Ui.Dm(EsModel.MinKm50); cBp.IsChecked = Filters.Es50WindowNotExclusive;
                 tags.Text = Filters.EsTags; c144.IsChecked = EsModel.Use144Rule; cTep.IsChecked = EsModel.UseTepRule;
                 nMin.Value = Ui.Dm(EsModel.MinKm144); nConf.Value = Ui.Dm(EsModel.Confirm144Min); nCloud.Value = Ui.Dm(EsModel.CloudMatchKm);
                 nShort.Value = Ui.Dm(EsModel.Short50Km); nNear.Value = Ui.Dm(EsModel.Near50Min); nTep.Value = Ui.Dm(EsModel.TepInclinationDeg);
@@ -329,13 +337,15 @@ namespace ELA
             if (s.HasBoth) sb.AppendLine(Lang.F("Distanza: {0:F0} km", s.DistanceKm));
             sb.AppendLine(Lang.F("Propagazione dichiarata: {0}", s.Prop.Length > 0 ? s.Prop : "-"));
             sb.AppendLine();
-            sb.AppendLine(Lang.F("Meteor scatter: {0}", yn(s.IsMeteorScatter)));
+            string msTxt = s.IsMeteorScatterSure ? Lang.T("sì") : s.IsMeteorScatter ? Lang.T("possibile (finestra MS del bandplan)") : Lang.T("no");
+            sb.AppendLine(Lang.F("Meteor scatter: {0}", msTxt));
             sb.AppendLine(Lang.F("Aurora: {0}", yn(Filters.IsAuroraSpot(s))));
             sb.AppendLine(Lang.F("F.A.I.: {0}", yn(Filters.IsFaiSpot(s))));
             bool tep = s.IsTep;
             sb.AppendLine(Lang.F("Transequatoriale: {0}", yn(tep)));
             bool es = s.EsCandidate && !tep;
             string esNote = "";
+            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in 50 MHz)", EsModel.MinKm50);
             if (es && s.Band == "2m" && EsModel.Use144Rule)
                 esNote = s.HasBoth && s.DistanceKm < EsModel.MinKm144 ? " " + Lang.F("(scartato: sotto {0:F0} km in 144 MHz)", EsModel.MinKm144)
                                                                       : " " + Lang.T("(in 144 MHz si disegna solo con una conferma)");

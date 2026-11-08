@@ -46,9 +46,14 @@ namespace ELA
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         public bool IsAurora { get { return Prop == "AU" || Filters.AuTag(Comment); } }
-        public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || IsMeteorScatter; } }
+        // MS sicuro: modo dichiarato MS, modo digitale MS o <MS> (la sola finestra di frequenza del bandplan e' un indizio)
+        public bool IsMeteorScatterSure { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
+        // In 50 MHz il bandplan non e' un criterio esclusivo (regola dell'autore): la sola finestra MS non toglie lo spot all'E-sporadico
+        public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || (Band == "6m" && Filters.Es50WindowNotExclusive ? IsMeteorScatterSure : IsMeteorScatter); } }
+        // In 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore)
+        public bool TooShortForEs { get { return Band == "6m" && HasBoth && DistanceKm < EsModel.MinKm50; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs; } }
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs; } }
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
         public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD)); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
