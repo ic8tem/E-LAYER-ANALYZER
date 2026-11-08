@@ -173,6 +173,68 @@ namespace ELA
         public static bool UseTepRule = true;
 
         // Africa (con il Madagascar; senza Canarie, Madeira, Capo Verde e penisola arabica) e Sud America: riquadri geografici approssimati
+        public static bool InAzzorre(double lat, double lon) { return lat >= 36.8 && lat <= 39.9 && lon >= -31.5 && lon <= -24.7; }
+        public static bool InAtlanticIslands(double lat, double lon) { return InCanarie(lat, lon) || InMadeira(lat, lon) || InAzzorre(lat, lon); }
+
+        // Regola dell'autore (IC8TEM) per i 144 MHz verso Canarie, Madeira e Azzorre: oltre il singolo salto la tratta e' un
+        // E-sporadico seguito da un condotto troposferico sull'Atlantico (come per le aperture VK-ZL in 144 MHz [41]).
+        // Lo spot vale solo se due o piu' spot indicano la stessa nube Es; non si applica ai 50 e 70 MHz.
+        public class EsTropo { public Spot Spot; public double CloudLat, CloudLon, LandLat, LandLon, IsleLat, IsleLon, EsKm, TropoKm; }
+
+        public static bool IsAtlanticTropoCandidate(Spot s)
+        {
+            if (s.Band != "2m" || !s.HasBoth) return false;
+            bool a = InAtlanticIslands(s.LatS, s.LonS), b = InAtlanticIslands(s.LatD, s.LonD);
+            return a != b && s.DistanceKm > SingleMax[1];
+        }
+
+        // punti candidati della nube: punto medio di un salto Es di 1000-2300 km partito dalla stazione sul continente verso l'isola
+        static List<double[]> CloudCandidates(Spot s, out double mLat, out double mLon, out double iLat, out double iLon)
+        {
+            bool sIsle = InAtlanticIslands(s.LatS, s.LonS);
+            mLat = sIsle ? s.LatD : s.LatS; mLon = sIsle ? s.LonD : s.LonS;
+            iLat = sIsle ? s.LatS : s.LatD; iLon = sIsle ? s.LonS : s.LonD;
+            double brg = Geo.Bearing(mLat, mLon, iLat, iLon);
+            List<double[]> l = new List<double[]>();
+            for (double hop = 1000; hop <= 2300; hop += 100)
+            {
+                double la, lo; Geo.Destination(mLat, mLon, brg, hop / 2, out la, out lo);
+                l.Add(new[] { la, lo, hop });
+            }
+            return l;
+        }
+
+        // conferma con due o piu' spot sulla stessa nube (entro CloudMatchKm e Confirm144Min)
+        public static List<EsTropo> AtlanticTropo(List<Spot> cands, out int held)
+        {
+            List<EsTropo> res = new List<EsTropo>();
+            held = 0;
+            for (int i = 0; i < cands.Count; i++)
+            {
+                double mLa, mLo, iLa, iLo;
+                List<double[]> ci = CloudCandidates(cands[i], out mLa, out mLo, out iLa, out iLo);
+                double best = double.MaxValue; double[] bp = null;
+                for (int j = 0; j < cands.Count; j++)
+                {
+                    if (j == i || Math.Abs((cands[i].Utc - cands[j].Utc).TotalMinutes) > Confirm144Min) continue;
+                    if (cands[i].Spotter == cands[j].Spotter && cands[i].DxCall == cands[j].DxCall) continue;
+                    double a, b, c, d;
+                    List<double[]> cj = CloudCandidates(cands[j], out a, out b, out c, out d);
+                    foreach (double[] p in ci) foreach (double[] q in cj)
+                    {
+                        double km = Geo.DistanceKm(p[0], p[1], q[0], q[1]);
+                        if (km <= CloudMatchKm && km < best) { best = km; bp = p; }
+                    }
+                }
+                if (bp == null) { held++; continue; }
+                double brg = Geo.Bearing(mLa, mLo, iLa, iLo), lLa, lLo;
+                Geo.Destination(mLa, mLo, brg, bp[2], out lLa, out lLo);
+                res.Add(new EsTropo { Spot = cands[i], CloudLat = bp[0], CloudLon = bp[1], LandLat = lLa, LandLon = lLo, IsleLat = iLa, IsleLon = iLo,
+                                      EsKm = bp[2], TropoKm = Geo.DistanceKm(lLa, lLo, iLa, iLo) });
+            }
+            return res;
+        }
+
         public static bool InCanarie(double lat, double lon) { return lat >= 27.4 && lat <= 29.6 && lon >= -18.4 && lon <= -13.2; }
         public static bool InMadeira(double lat, double lon) { return lat >= 29.9 && lat <= 33.3 && lon >= -17.5 && lon <= -15.7; }   // Madeira e Selvagens
 

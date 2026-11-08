@@ -37,7 +37,8 @@ namespace ELA
         List<EsPath> shown = new List<EsPath>();
         double clickLat = double.NaN, clickLon = double.NaN;
         bool dirty = true;
-        int short144, held144, tep;   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
+        int short144, held144, tep, heldAtl;
+        List<EsModel.EsTropo> esTropo = new List<EsModel.EsTropo>();   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
         class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf, MaxMHz, MufMax; public int N; public List<string> Calls = new List<string>(); }
 
@@ -227,6 +228,10 @@ namespace ELA
             List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate);
             tep = 0;
             sp = sp.FindAll(s => { if (s.IsTep) { tep++; return false; } return true; });   // transequatoriali: non E-sporadico (regola IC8TEM)
+            // 144 MHz verso Canarie, Madeira e Azzorre oltre il singolo salto: Es + tropo, con conferma di due o piu' spot (regola IC8TEM)
+            List<Spot> atl = sp.FindAll(EsModel.IsAtlanticTropoCandidate);
+            sp = sp.FindAll(s => !EsModel.IsAtlanticTropoCandidate(s));
+            esTropo = EsModel.AtlanticTropo(atl, out heldAtl);
             paths = new List<EsPath>();
             HashSet<string> seen = new HashSet<string>();
             foreach (Spot s in sp)
@@ -338,6 +343,7 @@ namespace ELA
                 + (shown.Count < paths.Count ? " " + Lang.F("In tabella i {0} visibili sulla mappa.", shown.Count) : "")
                 + (tep > 0 ? " " + Lang.F("{0} spot transequatoriali (TEP) esclusi.", tep) : "")
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
+                + (esTropo.Count + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count, heldAtl) : "")
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }
 
@@ -394,6 +400,19 @@ namespace ELA
                 map.Markers.Add(new MapMarker { Lat = clickLat, Lon = clickLon, Radius = 8, Fill = Pal.Red, Ring = true, Label = Geo.LatLonToLoc(clickLat, clickLon, 6) });
                 if (Station.Valid) map.Lines.Add(MapView.GreatCircle(Station.Lat, Station.Lon, clickLat, clickLon, Pal.Red, 1.5, true));
             }
+            // Es + tropo verso le isole atlantiche (144 MHz): salto Es pieno, nube, tratta tropo tratteggiata
+            foreach (EsModel.EsTropo et in esTropo)
+            {
+                Spot s = et.Spot;
+                bool mainS = !EsModel.InAtlanticIslands(s.LatS, s.LonS);
+                double mLa = mainS ? s.LatS : s.LatD, mLo = mainS ? s.LonS : s.LonD;
+                map.Lines.Add(MapView.GreatCircle(mLa, mLo, et.LandLat, et.LandLon, Pal.A(220, Pal.Orange), 1.6));
+                map.Lines.Add(MapView.GreatCircle(et.LandLat, et.LandLon, et.IsleLat, et.IsleLon, Pal.A(220, Pal.Azure), 1.6, true));
+                map.Markers.Add(new MapMarker { Lat = et.CloudLat, Lon = et.CloudLon, Radius = 5, Fill = Pal.Orange, Square = true, Label = Geo.LatLonToLoc(et.CloudLat, et.CloudLon, 4) });
+                map.Markers.Add(new MapMarker { Lat = s.LatS, Lon = s.LonS, Radius = 2.5, Fill = Pal.Orange, Label = s.Spotter });
+                map.Markers.Add(new MapMarker { Lat = s.LatD, Lon = s.LonD, Radius = 2.5, Fill = Pal.Orange, Label = s.DxCall });
+            }
+            if (esTropo.Count > 0) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("144 MHz Es + tropo verso Canarie, Madeira, Azzorre (tratteggio: tropo)"), Pal.Azure));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("10 m / 6 m / 4 m / 2 m: verde, azzurro, viola, arancio"), Pal.Azure));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ giallo: punto medio (singolo salto)"), Pal.Yellow));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto dello spotter (salti uguali)"), Pal.Orange));

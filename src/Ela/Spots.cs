@@ -46,7 +46,7 @@ namespace ELA
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         public bool IsAurora { get { return (Prop == "AU" || Filters.AuTag(Comment)) && !IsAuroraE; } }
-        // aurora-E (Au-E): E sporadico di origine aurorale, senza Doppler, sul percorso diretto, dopo l'evento aurorale (G0ISW [37]);
+        // aurora-E (Au-E): E sporadico di origine aurorale, senza Doppler, sul percorso diretto, dopo l'evento aurorale (G0ISW [33]);
         // riconosciuto da AUE, AU-E o AURORAL E nel testo, oppure dal modo dichiarato AUE
         static readonly System.Text.RegularExpressions.Regex rxAuE = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(AUE|AU-E|AURORAL[- ]?E)(?![A-Z0-9])",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);

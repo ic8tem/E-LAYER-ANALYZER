@@ -72,7 +72,7 @@ namespace ELA
             cmbSp = Ui.Combo(sps, 0, 140);
             txtA = Ui.T(cf.Get(pfx + "a", ""), 120, true);
             txtB = Ui.T(cf.Get(pfx + "b", aurora ? "" : "F6DRO"), 120, true);
-            numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", 110)), 0, 1, 45);   // aurora: eco a circa 110 km (100-120 km, Lange-Hesse [35])
+            numH = Ui.N(80, 160, Ui.Dm(cf.GetD(pfx + "quota_km", 110)), 0, 1, 45);   // aurora: eco a circa 110 km (100-120 km, Lange-Hesse [12])
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD(pfx + "elev_min", 0)), 1, 0.5m, 45);
             chkOval = Ui.C(Lang.T("Ovale aurorale (NOAA OVATION)"), cf.GetB(pfx + "ovale", true));
             chkRefr = Ui.C(Lang.T("Rifrazione (raggio terrestre 4/3)"), cf.GetB(pfx + "rifrazione", true));
@@ -667,10 +667,10 @@ namespace ELA
         }
 
         // ---------------------------------------------------------------- parametri dell'aurora dalle fonti approvate
-        // [35] Lange-Hesse (144 MHz): perpendicolarita' al campo entro +-2-3 gradi, eco a ~110 km, scatter point a 370-1100 km
-        // da ciascuna stazione; nessun collegamento con Kp 0-2. [36] G3WPO e [37] G0ISW: QTF tipico N-NE (0-50 gradi),
+        // [12] Lange-Hesse (144 MHz): perpendicolarita' al campo entro +-2-3 gradi, eco a ~110 km, scatter point a 370-1100 km
+        // da ciascuna stazione; nessun collegamento con Kp 0-2. [14] G3WPO e [33] G0ISW: QTF tipico N-NE (0-50 gradi),
         // distanze tipiche 250-1300 km, eccezionali 2000 km; Doppler fino a 2 kHz in 144 MHz; 50 MHz favorito.
-        // [41] K7CW: in aurora FT8 spesso non decodifica, meglio CW/SSB o Q65 con sottomodi larghi.
+        // [34] K7CW: in aurora FT8 spesso non decodifica, meglio CW/SSB o Q65 con sottomodi larghi.
         double Tol { get { return aurora ? 3.0 : 2.5; } }
         public const double AuMinRangeKm = 370, AuMaxRangeKm = 1100, AuMaxKm = 2000;
         bool InAuRange(PerpPoint p, double bLa, double bLo)
@@ -707,7 +707,7 @@ namespace ELA
             sb.AppendLine(Lang.F("Scatter point cercato a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
         }
 
-        // aurora-E: sul percorso diretto, senza Doppler, dopo l'aurora (G0ISW [37]); si disegna la tratta diretta
+        // aurora-E: sul percorso diretto, senza Doppler, dopo l'aurora (G0ISW [33]); si disegna la tratta diretta
         void AuroraESpots(StringBuilder sb)
         {
             List<Spot> l = SpotStore.Recent(Filters.AuMinutes, s => s.HasBoth && s.IsAuroraE);
