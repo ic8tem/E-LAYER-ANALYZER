@@ -20,7 +20,8 @@ namespace ELA
             { "Quota m", "Quota dell'antenna sul livello del mare, in metri: serve al calcolo dell'orizzonte radio." },
             { "Applica", "Conferma nominativo, locator e quota e aggiorna tutte le linguette." },
             // linguette principali
-            { "SPORADIC-E", "E-sporadico in diretta dagli spot dei cluster: salti, nubi e foEs su mappa azimutale centrata sulla stazione." },
+            { "SPORADIC-E", "E-sporadico: la vista in diretta (REAL-TIME) e i due banchi di prova sui log ADIF (BENCHMARK Es e BENCHMARK 50 MHz)." },
+            { "REAL-TIME", "E-sporadico in diretta dagli spot dei cluster: salti, nubi e foEs su mappa azimutale centrata sulla stazione o di Mercatore." },
             { "BENCHMARK Es", "Analisi di un log ADIF (anche di altre stazioni) per giornate e ore: salti, settori e nubi dell'E-sporadico." },
             { "BENCHMARK 50 MHz", "Multi-salto in 50 MHz (oltre 3100 km) dai log ADIF di una o due stazioni, su mappa di Mercatore a centro libero." },
             { "F.A.I.", "Field Aligned Irregularities: scatter point di una coppia di stazioni con il campo magnetico IGRF-14." },

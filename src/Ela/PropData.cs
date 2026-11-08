@@ -253,6 +253,10 @@ namespace ELA
             if (es != null) l.Add(Lang.F("N0NBH ({0})", S("updated")));
             if (es != null) l.Add(es);
             if (Solar.Count > 0) l.Add(Lang.F("SFI {0}   K {1}   A {2}", S("solarflux"), S("kindex"), S("aindex")));
+            // IK3XTV-IZ3ESV [51]: oltre il 90% delle aperture Es con campo quieto (Kp <= 3); con Kp > 3 l'Es e' meno probabile
+            double kp = SpaceWeather.LatestKp;
+            if (double.IsNaN(kp)) double.TryParse(S("kindex"), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out kp);
+            if (!double.IsNaN(kp) && kp > 3) l.Add(Lang.F("Kp {0}: campo perturbato, E-sporadico meno probabile (oltre il 90% delle aperture con Kp ≤ 3, IK3XTV-IZ3ESV [51])", Geo.Fmt(kp, 1)));
             return l;
         }
 

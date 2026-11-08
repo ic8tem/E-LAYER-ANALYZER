@@ -24,6 +24,9 @@ namespace ELA
         public const string Version = "0.4.3";
 
         readonly PillTabs tabs = new PillTabs(true);
+        TextBlock lblNtp;
+        static DispatcherTimer ntpTimer;
+        readonly PillTabs esTabs = new PillTabs();   // sottolinguette di SPORADIC-E
         readonly TextBox txtCall, txtLoc;
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
@@ -54,6 +57,17 @@ namespace ELA
             bApply.Click += (s, e) => ApplyStation();
             txtLoc.KeyUp += (s, e) => { if (e.Key == Avalonia.Input.Key.Enter) ApplyStation(); };
             lblClock = new TextBlock { Foreground = Pal.B(Pal.Yellow), FontFamily = Pal.Mono, FontSize = 15, FontWeight = FontWeight.SemiBold, Margin = new Thickness(12, 0), VerticalAlignment = VerticalAlignment.Center };
+            lblNtp = new TextBlock { FontFamily = Pal.Mono, FontSize = 12, FontWeight = FontWeight.SemiBold, Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
+            UpdateNtp();
+            Ntp.Changed += OnNtp;
+            if (ntpTimer == null)
+            {
+                // allineatore dell'orologio: elemento nascosto, un controllo all'avvio e poi ogni 5 minuti
+                ntpTimer = new DispatcherTimer { Interval = Ntp.Interval };
+                ntpTimer.Tick += (s, e) => { _ = Ntp.CheckAsync(); };
+                ntpTimer.Start();
+                _ = Ntp.CheckAsync();
+            }
             List<string> langNames = new List<string>();
             foreach (string[] lg in Lang.Languages) langNames.Add(lg[1]);
             cmbLang = new ComboBox { ItemsSource = langNames, MinWidth = 120, Margin = new Thickness(6, 1, 0, 1), VerticalAlignment = VerticalAlignment.Center };
@@ -81,6 +95,7 @@ namespace ELA
             DockPanel top = new DockPanel();
             DockPanel.SetDock(cmbLang, Dock.Right); top.Children.Add(cmbLang);
             DockPanel.SetDock(cmbTheme, Dock.Right); top.Children.Add(cmbTheme);
+            DockPanel.SetDock(lblNtp, Dock.Right); top.Children.Add(lblNtp);
             DockPanel.SetDock(lblClock, Dock.Right); top.Children.Add(lblClock);
             top.Children.Add(Ui.Row(brand, Ui.L(Lang.T("Nominativo")), txtCall, Ui.L(Lang.T("Locator")), txtLoc, Ui.L(Lang.T("Quota m")), numAlt, bApply));
             Border topB = new Border { Background = Pal.B(Pal.Panel2), Child = top };
@@ -98,9 +113,15 @@ namespace ELA
             au = new ScatterTab(true);
             dc = new DataTab();
             log = new LogTab();
-            tabs.Add(Lang.T("SPORADIC-E"), es.Root);
-            tabs.Add(Lang.T("BENCHMARK Es"), bench.Root);
-            tabs.Add(Lang.T("BENCHMARK 50 MHz"), bench50.Root);
+            // SPORADIC-E: tre sottolinguette (REAL-TIME, BENCHMARK Es, BENCHMARK 50 MHz)
+            esTabs.Add(Lang.T("REAL-TIME"), es.Root);
+            esTabs.Add(Lang.T("BENCHMARK Es"), bench.Root);
+            esTabs.Add(Lang.T("BENCHMARK 50 MHz"), bench50.Root);
+            esTabs.SelectionChanged += i => { if (i == 0) es.Refresh(); };
+            DockPanel esPage = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(esPage, esTabs.Bar, Dock.Top);
+            esPage.Children.Add(esTabs.Host);
+            tabs.Add(Lang.T("SPORADIC-E"), esPage);
             tabs.Add(Lang.T("F.A.I."), fai.Root);
             tabs.Add(Lang.T("METEOR SCATTER"), ms);
             tabs.Add(Lang.T("AURORA"), au.Root);
@@ -115,10 +136,10 @@ namespace ELA
                 "E-LAYER ANALYZER - relazione tecnica.docx", Lang.T("Le scelte che hanno portato alla realizzazione del programma")));
             tabs.SelectionChanged += i =>
             {
-                if (i == 0) es.Refresh();
-                else if (i == 3) fai.Recalc();
-                else if (i == 5) au.Recalc();
-                else if (i == 7) log.Refresh();
+                if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); }
+                else if (i == 1) fai.Recalc();
+                else if (i == 3) au.Recalc();
+                else if (i == 5) log.Refresh();
             };
             // menu dei sei continenti, a destra nella barra delle linguette: cambia le viste delle mappe e i dati previsionali
             ComboBox cmbCont = Ui.Combo(Array.ConvertAll(Continents.Names, n => Lang.T(n)), Continents.Index, 150);
@@ -128,7 +149,8 @@ namespace ELA
             cmbCont.SelectionChanged += (s2, e2) => Continents.Set(Math.Max(0, cmbCont.SelectedIndex));
             DockPanel.SetDock(cmbCont, Dock.Right);
             tabs.Line.Children.Insert(0, cmbCont);
-            int sel = (int)Station.Cfg.GetD("linguetta", 0);
+            int sel = (int)Station.Cfg.GetD("linguetta2", 0);   // "linguetta2": numerazione con le sottolinguette di SPORADIC-E
+            esTabs.Select(Math.Max(0, Math.Min(esTabs.Count - 1, (int)Station.Cfg.GetD("linguetta_es", 0))));
 
             status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
             Border sb = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 3), Child = status };
@@ -145,7 +167,7 @@ namespace ELA
             DispatcherTimer timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += (s, e) =>
             {
-                lblClock.Text = DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
+                lblClock.Text = Ntp.UtcNow.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
                 status.Text = Lang.F("CALL3: {0:N0} nominativi{1}   Spot in memoria: {2}   Modello magnetico: {3}", CallDb.Count, CallDb.Loading ? " (" + Lang.T("caricamento") + ")" : "", SpotStore.All.Count, Igrf.Info);
             };
             timer.Start();
@@ -154,8 +176,25 @@ namespace ELA
             Closing += (s, e) =>
             {
                 timer.Stop();
+                Ntp.Changed -= OnNtp;
                 if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); SpotStore.ClearAll(); }   // a ogni chiusura il database degli spot si svuota
             };
+        }
+
+        void OnNtp() { Dispatcher.UIThread.Post(UpdateNtp); }
+
+        // NTP:OK in verde, NTP:FAILED in rosso; il fumetto riporta server, scarto e ora del controllo
+        void UpdateNtp()
+        {
+            if (Ntp.Ok == null) { lblNtp.Text = "NTP:…"; lblNtp.Foreground = Pal.B(Pal.BarMuted); ToolTip.SetTip(lblNtp, Lang.T("Controllo dell'ora in corso")); return; }
+            bool ok = Ntp.Ok == true;
+            lblNtp.Text = ok ? "NTP:OK" : "NTP:FAILED";
+            lblNtp.Foreground = Pal.B(ok ? Pal.Green : Pal.Red);
+            string when = Ntp.LastCheckUtc.ToString("HH:mm:ss", CultureInfo.InvariantCulture) + " UTC";
+            ToolTip.SetTip(lblNtp, ok
+                ? Lang.F("Ora allineata con {0} (scarto del PC {1:+0.000;-0.000} s, controllo delle {2}); si ricontrolla ogni 5 minuti.", Ntp.LastServers, Ntp.OffsetSec, when)
+                  + (Ntp.SystemClockSet ? " " + Lang.T("L'orologio del PC è stato corretto.") : "")
+                : Lang.F("Nessun server NTP ha risposto (controllo delle {0}); si riprova tra 5 minuti con altri server.", when));
         }
 
         // documento nella lingua scelta (data/<nome>_<codice>.txt), altrimenti quello italiano
@@ -181,7 +220,7 @@ namespace ELA
         {
             try
             {
-                Station.Cfg.Set("linguetta", Math.Max(0, tabs.Selected));
+                Station.Cfg.Set("linguetta2", Math.Max(0, tabs.Selected)); Station.Cfg.Set("linguetta_es", Math.Max(0, esTabs.Selected));
                 es.Save(); bench.Save(); bench50.Save(); fai.Save(); au.Save(); dc.Save(); log.Save();
                 Station.Set(Ui.Up(txtCall), Ui.Up(txtLoc), Ui.V(numAlt), false);
                 Station.Save();
@@ -247,12 +286,13 @@ namespace ELA
         void Rebuild()
         {
             replaced = true;
-            int sel = tabs.Selected;
+            int sel = tabs.Selected, esSel = esTabs.Selected;
             ElaWindow w = new ElaWindow();
             w.WindowStartupLocation = WindowStartupLocation.Manual;
             w.Position = Position;
             if (WindowState == WindowState.Normal) { w.Width = Width; w.Height = Height; }
             w.WindowState = WindowState == WindowState.Minimized ? WindowState.Normal : WindowState;
+            if (esSel >= 0) w.esTabs.Select(esSel);
             if (sel >= 0) w.tabs.Select(sel);
             if (Application.Current != null && Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 desktop.MainWindow = w;
@@ -289,7 +329,7 @@ namespace ELA
                 if (Program.AuroraA != null)
                 {
                     // bozzetto del calcolo aurora per una coppia di locator (--aurora A B)
-                    tabs.Select(5);
+                    tabs.Select(3);
                     au.StartFetch();
                     await Task.Delay(12000);
                     au.View(-25, 35, 45, 75);
@@ -327,35 +367,47 @@ namespace ELA
                 string b50demo2 = Path.Combine(LogStore.Dir, "benchmark50_prova2.adi");
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
-                string[] names = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
+                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
+                string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50" };
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     tabs.Select(i);
-                    if (i == 0) { es.Refresh(); es.SelectFirst(); }
+                    if (i == 0)
+                    {
+                        for (int j = 0; j < esTabs.Count; j++)
+                        {
+                            esTabs.Select(j);
+                            if (j == 0) { es.Refresh(); es.SelectFirst(); }
+                            await Task.Delay(2500);
+                            Shot(Path.Combine(dir, esNames[j] + ".png"));
+                        }
+                        esTabs.Select(0);
+                        continue;
+                    }
                     await Task.Delay(2500);
                     Shot(Path.Combine(dir, names[i] + ".png"));
                 }
                 // SPORADIC-E: azimutale allargata (multi-salto) e Mercatore, con i cerchi delle distanze di IK3XTV
-                tabs.Select(0);
+                tabs.Select(0); esTabs.Select(0);
                 es.ShotMap(0, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
                 es.ShotMap(1, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_mercatore.png"));
                 es.ShotMap(0, 3000);
                 // BENCHMARK Es: un'ora della giornata e lo zoom
-                tabs.Select(1);
+                esTabs.Select(1);
                 bench.ShotSelect("2025-06-15", 11, 9000); await Task.Delay(2500); Shot(Path.Combine(dir, "1e_benchmark_es_ora.png"));
                 bench.ShotSelect("2025-06-15", -1, 1500); await Task.Delay(2500); Shot(Path.Combine(dir, "1f_benchmark_es_zoom.png"));
                 // BENCHMARK 50 MHz: tratta ingrandita (mouse vicino), foEs, dintorni di 150 km dopo il popup
-                tabs.Select(2);
+                esTabs.Select(2);
                 bench50.ShotHover(4); await Task.Delay(2000); Shot(Path.Combine(dir, "1h_benchmark_50_tratta.png"));
                 bench50.ShotFoEs(true); await Task.Delay(2000); Shot(Path.Combine(dir, "1i_benchmark_50_foes.png"));
                 bench50.ShotFoEs(false); bench50.ShotHover(4); bench50.ShotArea(4); await Task.Delay(2500); Shot(Path.Combine(dir, "1j_benchmark_50_dintorni.png"));
                 // F.A.I.: le verifiche richieste (scia) e l'iso-riflessione su Ginevra
-                tabs.Select(3);
+                tabs.Select(1);
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));
                 fai.ShotPreset(2); await Task.Delay(2500); Shot(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.png"));
                 fai.ShotIso(46.2, 6.15); await Task.Delay(2500); Shot(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.png"));
                 fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
-                tabs.Select(6);
+                tabs.Select(4);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
                 dc.Inner.Select(0);
                 string[] fn = { "ms", "es", "fai", "aurora", "prova" };
@@ -364,7 +416,7 @@ namespace ELA
                 dc.Outer.Select(1); await Task.Delay(2500); Shot(Path.Combine(dir, "5g_dati_propagazione.png"));
                 dc.Outer.Select(0);
                 // tutte le linguette di YA-MS
-                tabs.Select(4);
+                tabs.Select(2);
                 await Task.Delay(1500);
                 await ms.RunScreenshots(Path.Combine(dir, "ya-ms"), "IN78UO", 0, this);
             }

@@ -707,20 +707,28 @@ namespace ELA
             double direct = Geo.Bearing(aLat, aLon, bLat, bLon);
             double dev = Math.Abs(((best.Az - direct) % 360 + 540) % 360 - 180);
             bool south = aLat < 0;
-            sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud); scarto dal percorso diretto {0:F0}°", dev)
+            sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud; in 50 MHz fino a circa 2000 km sulle tratte est-ovest, ANVDG [55]); scarto dal percorso diretto {0:F0}°", dev)
                                 : Lang.F("QTF tipico tra N e NE (0-50°), che si sposta verso N durante l'evento (G3WPO, G0ISW); scarto dal percorso diretto {0:F0}°", dev));
             sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW)."));
             sb.AppendLine(Lang.F("Scatter point preferito a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
+            // peso orario (Reeve [52]): la maggior parte delle riflessioni aurorali cade entro circa 4 ore dalla mezzanotte solare locale
+            double lst = ((DateTime.UtcNow.TimeOfDay.TotalHours + best.Lon / 15.0) % 24 + 24) % 24;
+            double fromMidnight = Math.Min(lst, 24 - lst);
+            string hh = TimeSpan.FromHours(lst).ToString(@"hh\:mm");
+            sb.AppendLine(fromMidnight <= 4
+                ? Lang.F("Ora solare nello scatter point {0}: dentro le 4 ore dalla mezzanotte locale, la fascia con la maggior parte delle riflessioni aurorali (Reeve [52]).", hh)
+                : Lang.F("Ora solare nello scatter point {0}: fuori dalle 4 ore dalla mezzanotte locale (Reeve [52]); l'aurora resta possibile nel pomeriggio e in serata durante le tempeste (G3WPO).", hh));
             if (!InAuRange(best, bLat, bLon)) sb.AppendLine(Lang.T("Lo scatter point proposto è fuori dall'intervallo 370-1100 km di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile."));
         }
 
-        // aurora-E: sul percorso diretto, senza Doppler, dopo l'aurora (G0ISW [33]); si disegna la tratta diretta
+        // aurora-E: sul percorso diretto (forward scatter), senza Doppler, segnali piu' deboli e stabili dopo l'aurora
+        // (G0ISW [33], SM2CEW-SM0FOB [54]); si disegna la tratta diretta
         void AuroraESpots(StringBuilder sb)
         {
             List<Spot> l = SpotStore.Recent(Filters.AuMinutes, s => s.HasBoth && s.IsAuroraE);
             if (l.Count == 0) return;
             sb.AppendLine();
-            sb.AppendLine(Lang.F("Spot di aurora-E (Au-E) sul percorso diretto ({0}):", l.Count));
+            sb.AppendLine(Lang.F("Spot di aurora-E (Au-E) sul percorso diretto, segnali più deboli e stabili dopo l'aurora (G0ISW [33], SM2CEW-SM0FOB [54]): {0}", l.Count));
             foreach (Spot s in l.GetRange(0, Math.Min(30, l.Count)))
             {
                 map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, Pal.A(220, Pal.Green), 1.6));

@@ -10,6 +10,7 @@ LI|Per spostare il programma su un altro computer basta copiare la sua cartella;
 LI|La password di LoTW non viene mai salvata; si può ricordare solo il nome utente.
 H2|1.3 La barra in alto
 P|In alto a sinistra si scrivono il proprio nominativo, il locator (4, 6 o 8 caratteri) e la quota dell'antenna in metri; il pulsante Applica li conferma e tutte le linguette si aggiornano. In alto a destra si trovano l'ora UTC, la scelta della colorazione (tutti gli schemi di YAEC: Chiaro, Notte, Nero, otto pastelli e Scia meteorica) e la scelta della lingua (28 lingue). Cambiando colorazione o lingua la finestra si ricostruisce subito, senza perdere i dati raccolti.
+P|Accanto all'ora UTC la scritta NTP:OK (verde) o NTP:FAILED (rossa) dice se l'ora è allineata: ogni 5 minuti il programma interroga due server di tempo tra dieci sparsi nel mondo e passa ad altri se non rispondono. Il fumetto riporta i server usati e lo scarto dell'orologio del PC.
 P|A destra nella barra delle linguette c'è il menu del continente (Europa, Nord America, Sud America, Africa, Asia, Oceania): sposta le mappe di Mercatore e quelle del F.A.I. e dell'aurora sul continente scelto e sceglie i dati previsionali di quel continente (l'E-skip di N0NBH è pubblicato solo per Europa e Nord America).
 H2|1.4 La barra di stato
 P|In basso la barra di stato indica quanti nominativi contiene l'archivio CALL3, quanti spot sono in memoria e il modello magnetico in uso (IGRF-14 con la sua epoca). Gli spot in memoria si cancellano a ogni chiusura del programma: ogni sessione riparte senza spot vecchi.
@@ -45,6 +46,7 @@ LI|Aurora: l'indice Dst di Kyoto (tempeste geomagnetiche) e, per l'emisfero sud,
 LI|Meteor scatter: il grafico dell'attività meteorica del giorno (dati RMOB) di Make More Miles on VHF; sciami, efficienza e traffico in diretta sono nella linguetta METEOR SCATTER.
 P|La sintesi di questi dati compare in alto a destra sulle mappe di SPORADIC-E e F.A.I. (E-skip del continente scelto) e di AURORA (aurora di N0NBH e Bz della NOAA).
 H1|3. E-sporadico (SPORADIC-E)
+P|La linguetta SPORADIC-E ha tre sottolinguette: REAL-TIME, gli spot in diretta descritti in questo capitolo; BENCHMARK Es (capitolo 4) e BENCHMARK 50 MHz (capitolo 5).
 H2|3.1 La mappa
 P|Il menu Mappa sceglie la proiezione. Azimutale: mappa azimutale equidistante centrata sulla propria stazione, con il cursore dello zoom (da 300 a 20000 km dal centro, anche con la rotella del mouse). Mercatore: la mappa del mondo, con i pulsanti Europa e Mondo. In tutte e due le proiezioni si disegnano attorno alla stazione i cerchi delle distanze della tabella di IK3XTV [3]: 500 km (minima del singolo salto), 1500-2000 km (ottimale), 2400 km (massima del singolo salto), 5000 km (massima del doppio salto) e 6900 km (massima del triplo salto).
 P|La tabella delle lunghezze dei salti in 50 MHz è quella di Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; le nubi Es si trovano a circa 100 km di quota, e questo limita il singolo salto attorno ai 2000 km [29]. Le corone delle mappe e il numero dei salti seguono queste distanze:
@@ -63,20 +65,22 @@ H2|3.3 Tabelle e dettagli
 P|La tabella Spot Es elenca gli spot validi con distanza, numero di salti e foEs minima; la tabella Nubi Es (quadrati) elenca i quadrati con le nubi stimate e la MUF che darebbero per la propria stazione (rosso 144 MHz, arancio 70 MHz, giallo 50 MHz). Con uno zoom impostato le tabelle mostrano solo ciò che si vede sulla mappa.
 LI|Clic su uno spot nella tabella o sulla mappa: la tratta si illumina con un alone giallo, la mappa la porta in vista se serve e il riquadro Dettagli riporta salti, punti di riflessione, foEs e azimut. Lo spot resta scelto anche quando arrivano spot nuovi.
 LI|Clic su un punto libero della mappa: il punto si tratta come possibile nube Es, con la foEs necessaria per 28, 50, 70 e 144 MHz.
+LI|Con il Kp oltre 3 la mappa lo segnala in alto a destra: l'E-sporadico è meno probabile (oltre il 90% delle aperture avviene con Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|Un QSO in 50 MHz oltre gli 11000 km compare nei dettagli come ALLERTA, solo come notizia statistica (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
 H2|3.4 Le regole dell'autore
 LI|144 MHz: l'E-sporadico parte da oltre 900 km; uno spot da solo non si disegna; si disegna se entro 5 minuti arriva un secondo spot sulla stessa nube o se nei dintorni c'è uno spot in 50 MHz di salto corto. La riga verde in alto dice quanti spot sono in attesa di conferma.
 LI|Transequatoriale: verso l'Africa continentale (con il Madagascar) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -20° e +20°, il collegamento è transequatoriale e non E-sporadico, salvo che lo spot dichiari <ES>. Canarie, Madeira, Capo Verde e penisola arabica restano fuori dalla regola.
-H1|4. BENCHMARK Es
+H1|4. BENCHMARK Es (sottolinguetta di SPORADIC-E)
 H2|4.1 Caricare un log
-P|La linguetta BENCHMARK Es è un banco di prova dell'E-sporadico su un log ADIF intero, anche di un'altra stazione. Carica ADIF apre il file (il programma lo ricorda e lo ricarica all'avvio), Scarica ADIF lo toglie. Stazione al centro propone il nominativo e il locator più frequenti del log; si possono cambiare e confermare con Applica.
+P|La sottolinguetta BENCHMARK Es è un banco di prova dell'E-sporadico su un log ADIF intero, anche di un'altra stazione. Carica ADIF apre il file (il programma lo ricorda e lo ricarica all'avvio), Scarica ADIF lo toglie. Stazione al centro propone il nominativo e il locator più frequenti del log; si possono cambiare e confermare con Applica.
 LI|La posizione di trasmissione è il MY_GRIDSQUARE di ogni QSO; le posizioni di ricezione sono i GRIDSQUARE (i locator mancanti o a 4 caratteri si prendono da CALL3).
 LI|Si possono escludere i QSO con un altro PROP_MODE e quelli sotto i 500 km (900 km in 144 MHz); i transequatoriali si escludono sempre, salvo PROP_MODE=ES.
 H2|4.2 Giornate, orari e calcoli
 P|La tabella QSO per giornata elenca le giornate con numero di QSO, bande, distanza massima e multi-salti; il clic su una giornata riempie la tabella Orari della giornata, con una riga per ogni ora UTC e la riga Tutta la giornata. La mappa azimutale, con il cursore della distanza massima, disegna lo skip per settori di 10° (arco arancio = QSO più vicino, settore verde = distanze raggiunte), le nubi sui quadrati e, sulla giornata intera, lo spostamento orario delle nubi (linea rossa).
 P|La pagina Calcoli proposti riporta lo skip per settori, la foEs stimata con la MUF attesa a 1000, 1500, 2000 e 2400 km, le nubi stimate, la verifica del multi-salto (salti uguali contro primo salto corto, confrontati con le nubi viste in singolo salto entro ±30 minuti) e lo spostamento delle nubi ora per ora.
-H1|5. BENCHMARK 50 MHz
+H1|5. BENCHMARK 50 MHz (sottolinguetta di SPORADIC-E)
 H2|5.1 Una o due stazioni
-P|La linguetta BENCHMARK 50 MHz è dedicata all'E-sporadico multi-salto in 50 MHz. Nella riga Stazione 1 si carica e si scarica il log della propria stazione; nella riga Stazione 2 il log di una seconda stazione, che si mostra o si nasconde con la casella Stazione 2. Le tratte della stazione 1 sono azzurre, quelle della stazione 2 viola.
+P|La sottolinguetta BENCHMARK 50 MHz è dedicata all'E-sporadico multi-salto in 50 MHz. Nella riga Stazione 1 si carica e si scarica il log della propria stazione; nella riga Stazione 2 il log di una seconda stazione, che si mostra o si nasconde con la casella Stazione 2. Le tratte della stazione 1 sono azzurre, quelle della stazione 2 viola.
 LI|Si mostrano i QSO in 50 MHz multi-salto, cioè oltre i 3100 km (regola dell'autore); il numero dei salti segue la tabella IK3XTV.
 LI|Giorno, dalle… alle… UTC: la giornata (all'apertura quella con più QSO multi-salto) e l'orario, a passi di 15 minuti.
 LI|foEs (facoltativa): colora le tratte con la foEs minima e la riporta in tabella. Quota Es e Primo salto corto entro 1200 km come nelle altre linguette.
@@ -98,6 +102,7 @@ P|La linguetta AURORA usa le stesse viste del F.A.I. (quota di partenza 110 km, 
 LI|Gli spot di aurora del periodo scelto nei filtri di DATA COLLECTION (di partenza le ultime 2 ore, al massimo 30) si disegnano sulla mappa con lo scatter point calcolato (cerchio arancio) se è accesa la casella Spot <AU>/<AUR> sulla mappa con il calcolo; nei risultati compaiono QTF ed elevazione delle due stazioni.
 LI|Nei risultati della vista Scatter trail compaiono la probabilità di aurora nello scatter point (improbabile con Kp ≤ 2; per il resto secondo l'ovale NOAA), il QTF tipico tra N e NE (S-SE nell'emisfero sud) con lo scarto dal percorso diretto e i consigli sul Doppler e sui modi (CW/SSB o Q65 con sottomodi larghi: FT8 spesso non decodifica). Lo scatter point si cerca di preferenza tra 370 e 1100 km da ciascuna stazione, con la perpendicolarità entro ±3°; se il punto proposto è fuori da questo intervallo, il programma lo segnala.
 LI|Gli spot di aurora oltre 2000 km sono segnalati come dubbi: secondo Newton [48] l'aurora arriva intorno ai 1000 km nord-sud e ai 2000 km est-ovest. Gli spot di aurora-E (AUE, AU-E, AURORAL E) si disegnano in verde sul percorso diretto: è un E sporadico di origine aurorale, senza Doppler.
+LI|I risultati riportano l'ora solare nello scatter point: entro 4 ore dalla mezzanotte locale cade la maggior parte delle riflessioni aurorali (Reeve [52]). Nell'emisfero sud l'aurora in 50 MHz arriva fino a circa 2000 km sulle tratte est-ovest (ANVDG [55]); l'aurora-E dà segnali più deboli e stabili sul percorso diretto (SM2CEW-SM0FOB [54]).
 H1|9. LOG ADIF
 P|La linguetta LOG ADIF mostra i quadrati lavorati e confermati, banda per banda dai 28 MHz in su, senza aggregare le bande. Apri file ADIF… aggiunge i file del log; Scarica da LoTW… scarica il report delle conferme (si può ricordare il nome utente, la password non viene mai salvata); Cancella memoria toglie file e report. I quadrati sono arancio se lavorati, colorati diversamente se confermati con QSL o via LoTW; il clic su un quadrato mostra i nominativi e il modo di propagazione.
 H1|10. Documenti

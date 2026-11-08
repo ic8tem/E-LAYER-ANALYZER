@@ -220,6 +220,9 @@ namespace ELA
 
         double H { get { return Ui.V(numH); } }
 
+        const double UltraKm = 11000;
+        List<EsPath> ultra = new List<EsPath>();
+
         public void Refresh()
         {
             dirty = false;
@@ -250,6 +253,8 @@ namespace ELA
                 if (p != null && p.Hops == 1) six.Add(p);
             }
             paths = EsModel.Apply144Rule(paths, six, out short144, out held144);
+            // notizia statistica: QSO in 50 MHz oltre gli 11000 km (EI7GL [56]: 11460 km HZ1SK-K4MOG, almeno sei salti)
+            ultra = paths.FindAll(p => p.Spot.Band == "6m" && p.DistKm > UltraKm);
             sel = null;
             if (selKey != null) foreach (EsPath p in paths) if (p.Spot.Key == selKey) { sel = p; break; }
             BuildClouds();
@@ -534,6 +539,8 @@ namespace ELA
                 sb.AppendLine(Lang.T("Clic su uno spot della tabella, su una nube o su un punto della mappa."));
                 sb.AppendLine(Lang.T("Gli spot arrivano dalle sessioni telnet della linguetta DATA COLLECTION; i locator mancanti si cercano in CALL3."));
             }
+            foreach (EsPath u in ultra)
+                sb.AppendLine(Lang.F("ALLERTA (solo notizia statistica): {0} - {1} in 50 MHz a {2:F0} km, oltre gli 11000 km; il QSO di riferimento è HZ1SK-K4MOG, 11460 km con almeno sei salti (EI7GL [56]).", u.Spot.Spotter, u.Spot.DxCall, u.DistKm));
             sb.AppendLine();
             sb.AppendLine(Lang.T("Tabella IK3XTV: singolo salto 500-650 / 1500-2000 / 2200-2400 km (minima / ottimale / massima); doppio 2800-3000 / 3200-4000 / 4400-5000 km; triplo ottimale 4800-6400, massima 6900 km."));
             sb.AppendLine(Lang.T("Multi-salto: l'autore (IC8TEM) ha esperienza di primo salto corto, entro i 1200 km dal proprio QTH."));
