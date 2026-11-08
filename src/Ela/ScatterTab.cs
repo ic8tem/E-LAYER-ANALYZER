@@ -355,6 +355,7 @@ namespace ELA
             map.Lines.Add(MapView.GreatCircle(bLat, bLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
             map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", aName, best.Az, best.Elev));
             map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0)));
+            if (aurora) QtfRange(sb, loc, best);
             if (aurora) AuroraNotes(sb, best);
             // scatter noti vicini alla scia
             foreach (string[] k in KnownSp)
@@ -695,6 +696,29 @@ namespace ELA
             if (!double.IsNaN(ov) && ov >= 10) return Lang.T("probabile");
             if ((!double.IsNaN(ov) && ov >= 3) || (!double.IsNaN(kp) && kp >= 5)) return Lang.T("possibile");
             return Lang.T("improbabile");
+        }
+
+        // intervallo di QTF lungo tutta la scia (scelta dell'autore dopo la verifica K8GU [57]): oltre al punto piu' probabile,
+        // i puntamenti di tutti i punti con deviazione <= 1,5 gradi, di preferenza a 370-1100 km da entrambe le stazioni
+        void QtfRange(StringBuilder sb, List<PerpPoint> loc, PerpPoint best)
+        {
+            List<PerpPoint> good = loc.FindAll(p => p.Off <= 1.5 && InAuRange(p, bLat, bLon));
+            bool inRange = good.Count > 0;
+            if (!inRange) good = loc.FindAll(p => p.Off <= 1.5);
+            if (good.Count < 2) return;
+            double azB0 = Geo.Bearing(bLat, bLon, best.Lat, best.Lon);
+            double aMin = 0, aMax = 0, bMin = 0, bMax = 0;
+            foreach (PerpPoint p in good)
+            {
+                double da = Geo.Norm180(p.Az - best.Az), db = Geo.Norm180(Geo.Bearing(bLat, bLon, p.Lat, p.Lon) - azB0);
+                aMin = Math.Min(aMin, da); aMax = Math.Max(aMax, da); bMin = Math.Min(bMin, db); bMax = Math.Max(bMax, db);
+            }
+            Func<double, string> f = v => Geo.Norm360(v).ToString("F0", CultureInfo.InvariantCulture) + "°";
+            sb.AppendLine(inRange ? Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, 370-1100 km da entrambe le stazioni):")
+                                  : Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°):"));
+            sb.AppendLine(Lang.F("  {0}: da {1} a {2}   {3}: da {4} a {5}", aName, f(best.Az + aMin), f(best.Az + aMax), bName, f(azB0 + bMin), f(azB0 + bMax)));
+            sb.AppendLine(Lang.T("  Il punto più probabile privilegia la tratta più corta; l'aurora può arrivare da tutto l'intervallo (caso di verifica K8GU [57])."));
+            map.Info.Add(Lang.F("QTF {0} {1}-{2}", aName, f(best.Az + aMin), f(best.Az + aMax)));
         }
 
         void AuroraNotes(StringBuilder sb, PerpPoint best)
