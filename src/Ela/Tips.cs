@@ -86,7 +86,7 @@ namespace ELA
             { "Banda", "Mostra solo gli spot di questa banda." },
             { "Ripristina le regole dell'autore", "Riporta i valori di partenza, cioè le regole dell'autore." },
             { "Distanza minima in 144 MHz (km)", "In 144 MHz l'E-sporadico vale solo oltre questa distanza (regola dell'autore: 900 km)." },
-            { "Distanza minima in 50 MHz (km)", "In 50 MHz un collegamento entro questa distanza non è E-sporadico (regola dell'autore: 450 km)." },
+            { "Distanza minima in 28 e 50 MHz (km)", "In 28 e 50 MHz un collegamento entro questa distanza non è E-sporadico (regola dell'autore: 450 km)." },
             { "entro (minuti)", "Tempo massimo tra lo spot e la sua conferma." },
             { "nube entro (km)", "Distanza massima tra i punti di riflessione perché due spot siano sulla stessa nube." },
             { "salto corto fino a (km)", "Lunghezza massima di un salto corto in 50 MHz che conferma lo spot in 144 MHz." },

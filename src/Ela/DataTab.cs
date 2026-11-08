@@ -195,9 +195,9 @@ namespace ELA
             fp.Children.Add(tags);
             fp.Children.Add(FText(Lang.T("Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP."), true));
 
-            fp.Children.Add(FHead(Lang.T("Regole dei 50 MHz (regole dell'autore)")));
+            fp.Children.Add(FHead(Lang.T("Regole dei 28 e 50 MHz (regole dell'autore)")));
             NumericUpDown n50 = Ui.N(0, 1500, Ui.Dm(EsModel.MinKm50), 0, 50, 90);
-            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 50 MHz (km)")), n50));
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 28 e 50 MHz (km)")), n50));
             CheckBox cBp = FCheck(Lang.T("Il bandplan non è un criterio esclusivo: in 50 MHz uno spot nella finestra del meteor scatter resta nell'E-sporadico, salvo modo digitale MS o <MS>"), Filters.Es50WindowNotExclusive);
             fp.Children.Add(cBp);
 
@@ -345,7 +345,7 @@ namespace ELA
             sb.AppendLine(Lang.F("Transequatoriale: {0}", yn(tep)));
             bool es = s.EsCandidate && !tep;
             string esNote = "";
-            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in 50 MHz)", EsModel.MinKm50);
+            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in 28 e 50 MHz)", EsModel.MinKm50);
             if (es && s.Band == "2m" && EsModel.Use144Rule)
                 esNote = s.HasBoth && s.DistanceKm < EsModel.MinKm144 ? " " + Lang.F("(scartato: sotto {0:F0} km in 144 MHz)", EsModel.MinKm144)
                                                                       : " " + Lang.T("(in 144 MHz si disegna solo con una conferma)");
