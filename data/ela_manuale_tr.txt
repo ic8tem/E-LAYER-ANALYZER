@@ -10,11 +10,13 @@ LI|Programı başka bir bilgisayara taşımak için klasörünü kopyalamak yete
 LI|LoTW parolası hiçbir zaman kaydedilmez; yalnızca kullanıcı adı hatırlanabilir.
 H2|1.3 Üst çubuk
 P|Sol üstte kendi çağrı işaretiniz, lokatörünüz (4, 6 ya da 8 karakter) ve anten yüksekliği metre olarak yazılır; Uygula düğmesi bunları onaylar ve tüm sekmeler güncellenir. Sağ üstte UTC saati, renklendirme seçimi (YAEC'nin tüm şemaları: Açık, Gece, Siyah, sekiz pastel ve Meteor izi) ve dil seçimi (28 dil) bulunur. Renklendirme ya da dil değiştirildiğinde pencere toplanan veriler kaybolmadan hemen yeniden oluşturulur.
+P|Sekme çubuğunun sağında kıta menüsü vardır (Avrupa, Kuzey Amerika, Güney Amerika, Afrika, Asya, Okyanusya): Mercator haritaları ile F.A.I. ve aurora haritalarını seçilen kıtaya kaydırır ve o kıtanın tahmin verilerini seçer (N0NBH E-skip'i yalnızca Avrupa ve Kuzey Amerika için yayımlanır).
 H2|1.4 Durum çubuğu
 P|Altta durum çubuğu CALL3 arşivinde kaç çağrı işareti bulunduğunu, bellekte kaç spot olduğunu ve kullanılan manyetik modeli (dönemiyle birlikte IGRF-14) gösterir. Bellekteki spot'lar program her kapatıldığında silinir: her oturum eski spot'lar olmadan yeniden başlar.
 H2|1.5 Haritalar
 P|Tüm haritalar aynı şekilde kullanılır: fare tekerleği yakınlaştırır ya da uzaklaştırır, sol tuşla sürüklemek görünümü kaydırır, sol tık sekmeye göre bir nokta, bir spot ya da bir yol seçer. Sağ üstte imlecin altındaki koordinatlar ve 6 karakterlik lokatör görünür; azimutal haritalarda ayrıca merkezden mesafe ve azimut da görünür. Maidenhead alanları ve kareleri ızgarası yakınlaştırdıkça sıklaşır.
 H1|2. Veri toplama (DATA COLLECTION)
+P|Sekmenin iki alt sekmesi vardır: telnet oturumları, toplanan spot'lar, CALL3 arşivi ve filtre sütunuyla Spot'lar, ve Yayılım verileri (bölüm 2.5).
 H2|2.1 Üç telnet oturumu
 P|DATA COLLECTION sekmesi aynı anda en fazla üç telnet bağlantısı açar: seçilen bir DX cluster (başlangıçta VHF filtreleriyle ON0DXK), Reverse Beacon Network (FT8 için port 7001, CW ve RTTY için 7000) ve PSKReporter spot'larını veren DM4X kümesi (dm4x.ddns.net, port 8500).
 LI|Sunucu ve Port: kümenin adresi. Giriş: erişim için çağrı işareti (boşsa üst çubuktaki kullanılır). Girişten sonraki komutlar: oturum açtıktan sonra gönderilecek komutlar, noktalı virgülle ayrılmış (örneğin bant filtreleri).
@@ -23,7 +25,7 @@ LI|Konsol alınan satırları gösterir; alttaki kutuya kümeye gönderilecek ko
 H2|2.2 Filtre sütunu
 P|Sekmenin sağ sütunu, pencerenin %40'ı, tüm spot filtrelerini toplar: veri toplama tüm program için tektir ve gelen her spot, her yayılım türünün sekmelerine ulaşmadan önce buradan geçer. En üstte, başlangıçta işaretli olan yerel filtre kutusu vardır: frekansı 27990,0 kHz'in altında ya da 145 MHz'in üstünde olan "DX de" satırları atılır, konsolda görünmez ve saklanmaz. Özellikle HF'de çok sayıda spot gönderen RBN ve PSKReporter ile kullanışlıdır. Kutunun işareti kaldırılırsa her şey geçer. Altında beş alt sekme vardır.
 LI|Meteor scatter: YA-MS filtresi (MS'e özgü frekans pencereleri, başka yayılım etiketleri, dijital MS modları ve <MS>, bantlar, filtre testi ve sayaçlar). E-LAYER ANALYZER içinde YA-MS'in Veri toplama alt sekmesi görünmez: filtresi burada ayarlanır.
-LI|Sporadik E: bir spot'u sporadik E'den dışlayan < > arasındaki etiketler; 28 ve 50 MHz kuralları (450 km içinde sporadik E değildir; bant planı dışlayıcı bir ölçüt değildir, bu yüzden meteor scatter penceresindeki bir spot dijital mod MS ya da <MS> olmadıkça sporadik E'de kalır); 144 MHz kuralı (en kısa mesafe; birkaç dakika içinde aynı buluta ikinci bir spot ile ya da çevrede 50 MHz'de kısa atlamalı bir spot ile doğrulama) ve manyetik eğim kuşağıyla transekvatoryal kural. Yazarın kurallarını geri yükle düğmesi başlangıç değerlerini geri getirir.
+LI|Sporadik E: bir spot'u sporadik E'den dışlayan < > arasındaki etiketler; 28 ve 50 MHz kuralları (50 MHz'de 450 km içinde sporadik E değildir; 28 MHz'de en kısa mesafe IK3XTV'ye göre 50 MHz'inkinden türetilir, yaklaşık 170 km; bant planı dışlayıcı bir ölçüt değildir, bu yüzden meteor scatter penceresindeki bir spot dijital mod MS ya da <MS> olmadıkça sporadik E'de kalır); 144 MHz kuralı (en kısa mesafe; birkaç dakika içinde aynı buluta ikinci bir spot ile ya da çevrede 50 MHz'de kısa atlamalı bir spot ile doğrulama) ve manyetik eğim kuşağıyla transekvatoryal kural. Yazarın kurallarını geri yükle düğmesi başlangıç değerlerini geri getirir.
 LI|F.A.I.: bir F.A.I. spot'unu belirten sözcükler (başlangıçta FAI: büyük, küçük ya da karışık harflerle <FAI> veya fai geçerlidir; bu spot'lar sporadik E'ye girmez), bantlar ve haritadaki spot'ların süresi (başlangıçta 24 saat).
 LI|Aurora: aurora spot'larının sözcükleri, < > ile ya da olmadan ve büyük ya da küçük harfle (başlangıçta AU ve AUR), bantlar ve haritadaki spot'ların süresi (başlangıçta 2 saat).
 LI|Filtre testi: bir küme satırı yazılır ya da yapıştırılır ve program filtrelerin onu nasıl sınıflandırdığını (meteor scatter, aurora, F.A.I., transekvatoryal, sporadik E) bant, lokatör ve mesafeyle birlikte gösterir.
@@ -35,6 +37,12 @@ LI|YA-MS'te olduğu gibi, MS'e özgü frekans pencerelerinde (50190-50300, 70100
 LI|<AU> ya da <AUR> içeren spot'lar AURORA sekmesine, FAI içerenler F.A.I. sekmesine gider.
 H2|2.4 Toplanan spot'lar ve CALL3 arşivi
 P|Toplanan spot'lar sayfası son spot'ları bant ve kaynak filtresiyle listeler; Spot klasörünü aç düğmesi data/spot klasörünü açar. CALL3 sayfası çağrı işareti -> lokatör arşivini (JTDX/WSJT biçimi) gösterir: bir çağrı işareti aranabilir, arşiv yeniden yüklenebilir ya da kullanılanın yerine geçen yeni bir CALL3.TXT dosyası içe aktarılabilir (eskisi yedek kopya olarak kalır).
+H2|2.5 Yayılım verileri
+P|Yayılım verileri alt sekmesi, bir bandın açılıp açılamayacağını anlamaya yardım eden verileri toplar. En fazla saatte bir kendiliğinden güncellenir; Şimdi güncelle düğmesi onları hemen indirir.
+LI|N0NBH (hamqsl.com): VHF koşulları afişi ve güneş verileri (güneş akısı, A ve K indeksleri, X ışınları, güneş rüzgârı, Bz, aurora ve aurora enlemi) ile Avrupa ve Kuzey Amerika E-skip'i (DXrobot verileri).
+LI|Aurora için Bz: NOAA SWPC, L1 noktasındaki uydunun (DSCOVR/ACE) her dakika ölçtüğü gerçek zamanlı güneş rüzgârı. Negatif ve kalıcı bir Bz aurorayı destekler.
+LI|Meteor scatter: Make More Miles on VHF'nin günün meteor etkinliği grafiği (RMOB verileri); yağmurlar, verimlilik ve canlı trafik METEOR SCATTER sekmesindedir.
+P|Bu verilerin özeti SPORADIC-E ve F.A.I. haritalarında (seçilen kıtanın E-skip'i) ve AURORA haritasında (N0NBH aurorası ve NOAA Bz'si) sağ üstte görünür.
 H1|3. Sporadik E (SPORADIC-E)
 H2|3.1 Harita
 P|Harita menüsü projeksiyonu seçer. Azimutal: kendi istasyonunuzu merkez alan, yakınlaştırma kaydırıcılı (merkezden 300 ile 20000 km arası, fare tekerleğiyle de) azimutal eşit uzaklıklı harita. Mercator: Avrupa ve Dünya düğmeleriyle dünya haritası. Her iki projeksiyonda da istasyonun çevresine IK3XTV tablosunun [3] mesafe çemberleri çizilir: 500 km (tek atlamanın en azı), 1500-2000 km (en uygun), 2400 km (tek atlamanın en çoğu), 5000 km (çift atlamanın en çoğu) ve 6900 km (üçlü atlamanın en çoğu).
@@ -48,7 +56,7 @@ H2|3.2 Kontroller
 LI|Bantlar: 10, 6, 4 ve 2 m (432 MHz incelenmez: sporadik E bu bantta geçerli değildir [22]-[24]); spot'ların zaman penceresi 15 dakikadan 12 saate kadar.
 LI|Es yüksekliği (başlangıçta 105 km) ve antenlerin en küçük elevasyonu.
 LI|İlk atlamalar (eşit atlamalar): her iki istasyonun ilk atlamasını gösterir; Kısa ilk atlama sınırı…: yazarın kısa ilk atlama varsayımını (başlangıçta 1200 km) gösterir [4].
-LI|Maidenhead kareleri üzerinde Es bulutları: yansıma noktalarının bulunduğu kareleri tahmini en küçük foEs ile renklendirir.
+LI|Maidenhead kareleri üzerinde Es bulutları: yansıma noktalarının bulunduğu kareleri spot'ların en yüksek frekansına göre renklendirir (29 MHz'e kadar yeşil, 51'e kadar sarı, 71'e kadar turuncu, 145 MHz'e kadar kırmızı). Bulutun en uzun atlamadaki (2400 km) olası MUF'u daha yüksek bir banda ulaşırsa kare o bandın rengiyle yanıp söner.
 H2|3.3 Tablolar ve ayrıntılar
 P|Es spot'ları tablosu geçerli spot'ları mesafe, atlama sayısı ve en küçük foEs ile listeler; Es bulutları (kareler) tablosu tahmini bulutların bulunduğu kareleri ve bunların kendi istasyonunuz için vereceği MUF'u listeler (kırmızı 144 MHz, turuncu 70 MHz, sarı 50 MHz). Bir yakınlaştırma ayarlıyken tablolar yalnızca haritada görüneni gösterir.
 LI|Tabloda ya da haritada bir spot'a tıklama: yol sarı bir haleyle aydınlanır, gerekirse harita onu görünür alana getirir ve Ayrıntılar kutusu atlamaları, yansıma noktalarını, foEs'i ve azimutu gösterir. Yeni spot'lar geldiğinde de spot seçili kalır.
