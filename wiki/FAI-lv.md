@@ -1,0 +1,37 @@
+# F.A.I.
+
+[← Home](Home-lv)
+
+F.A.I. (Field Aligned Irregularities) ir izkliede no neregularitātēm, kas orientētas gar ģeomagnētisko lauku; tā raksturīga vasaras vakariem pēc sporādiskā E. Izkliedētais signāls aiziet pa **konusu**, kura ass ir vērsta gar lauku: divas stacijas var sazināties, ja tās atrodas uz **papildinošām kontūrām** (a1 + a2 = 180°, IC8FAX-IC8TEM raksts; K9SE ±c kontūras). Magnētiskais lauks tiek aprēķināts ar modeli **IGRF-14**.
+
+## Skats Scatter trail (pāris A-B)
+
+![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)
+
+- Ievadi **Stacija A** un **Stacija B** (izsaukuma signāls tiek meklēts CALL3 un/vai lokators). Tukšs A = tava stacija.
+- Karte rāda **scatter trail**: visus slāņa augstuma punktus, ko redz abas stacijas un kas atbilst atstarošanas nosacījumam 2,5° robežās (klases 0-1, 1-1,5, 1,5-2, 2-2,5°).
+- Lodziņš augšā pa labi rāda A (sarkans) un B (zaļš) **QTF un elevāciju** uz katru punktu.
+- Programma iesaka **varbūtīgāko scatter point** (minimālā novirze, īsākā trase).
+- **Refrakcija 4/3**: noklusējumā ieslēgta, tā paplašina horizontus.
+
+## Skats Izoatstarošana (izoatstarošanas līknes)
+
+![Izoatstarošana](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2e_fai_verifica_IC8FAX_G4LOH.png)
+
+Tā ir ģeometriska konstrukcija, ko izmanto, lai **pārbaudītu, vai atstarošanas punkts ir pareizs**.
+
+- **Kreisais klikšķis** uz kartes: izvēlas pārbaudāmo punktu. **Labais klikšķis**: pārvieto staciju B.
+- **Pārbaudīt ieteikto punktu**: atver grafiku programmas ieteiktajā punktā.
+- Kontūrlīnijas pie **0, ±1, ±2, ±4, ±8, ±16°**: krāsainas joslas tumšajās shēmās, **biezas līnijas** gaišajās shēmās.
+- Pāra vērtējums: **apmierinošs** līdz 1°, **pieņemams** līdz 2,5°, **neapmierinošs** virs tā.
+- Ja punkts ir zem kādas stacijas horizonta, parādās uznirstošais logs **Aprēķins nav iespējams**, un nekas vairāk.
+
+## Pārbaudes
+
+| Sakars | Scatter point | Novirze | QTF |
+|---|---|---|---|
+| IC8FAX - F6DRO | JN44GH (virs Dženovas) | 0,97° | 314° / 77° |
+| IC8FAX - G4LOH | JN49FR (DR Vācija, 28 km no Briseles) | 0,88° | 338° / 87° |
+| DB0FAI - Drēzdene caur Šefīldu (DL5MCG) | – | 0,3° | – |
+
+Sarakstā esošie zināmie scatter point: Ženēva, Brisele, Budapešta, JN92, JN41/42.

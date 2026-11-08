@@ -1,0 +1,25 @@
+# DATA COLLECTION
+
+[← Home](Home-sv)
+
+## Telnetsessioner
+
+| Session | Standard | Anmärkningar |
+|---|---|---|
+| 1. DX cluster som du väljer | on0dxk.dyndns.org 8000 | På ON0DXK är VHF-spotsen filtrerade: `set/filter dxbm/pass 6` (sedan 4, 2). Ett annat exempel: hamqth.com 7300. |
+| 2. Reverse Beacon Network | telnet.reversebeacon.net 7001 | 7000 = CW och RTTY, 7001 = FT8. |
+| 3. Kluster med PSKReporter | **dm4x.ddns.net 8500** | DM4X:s kluster; alternativt HamAlert (hamalert.org 7300, konto krävs). |
+
+- Automatisk inloggning med anropssignalen (högst upp eller i fältet Inloggning); **startkommandon** åtskilda med `;`.
+- **Återanslut** efter 30 s om förbindelsen bryts; **Anslut vid start**.
+- Som standard sparas bara spots från **28 MHz och uppåt**.
+
+## Insamlade spots
+
+De senaste 2000 spotsen, med filter för band och källa. Arkiv: en CSV-fil per dag i `data/spot`. Varje gång programmet stängs töms spotdatabasen (minnet och filerna i `data/spot`): varje session börjar från noll.
+
+**Lokalt filter** (valfri ruta): "DX de"-rader under 27990,0 kHz eller över 145 MHz slängs, visas inte i konsolen och sparas inte. **Oprecisa lokatorer** (färre än 6 tecken) hämtas från CALL3: om CALL3 har en lokator med 6 tecken har den alltid företräde. Som i YA-MS är meteorscatter-spots (inte sporadiskt E) de som ligger i de typiska MS-frekvensfönstren (50190-50300, 70100-70400, 144290-144399 kHz) utan taggar för annan utbredning (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), och de som har moder som bara används för MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) eller `<MS>`. Spots med `<AS>`/`<ACS>` (aircraft scatter) används inte för sporadiskt E.
+
+## CALL3
+
+JTDX-databas för **anropssignal → lokator** (över en miljon anropssignaler) i `data/call3.txt`. Knapparna **Läs om** och **Importera en ny CALL3.TXT**. Lokatorer med 6 tecken som läses i spotkommentarer läggs till i `data/call3_nuovi.txt`.

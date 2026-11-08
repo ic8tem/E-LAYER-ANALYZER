@@ -1,0 +1,27 @@
+# E-LAYER ANALYZER - pubblica la cartella wiki/ nella sezione Wiki di GitHub a ogni modifica sul ramo main
+name: wiki
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'wiki/**' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pubblica il wiki
+        run: |
+          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.wiki.git" wikirepo
+          cp wiki/*.md wikirepo/
+          cd wikirepo
+          git config user.name "github-actions"; git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet && { echo "wiki gia' aggiornato"; exit 0; }
+          git commit -q -m "Wiki aggiornato da ${GITHUB_SHA::7}"
+          git push origin HEAD
