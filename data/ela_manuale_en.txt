@@ -10,11 +10,13 @@ LI|To move the program to another computer just copy its folder; to return to th
 LI|The LoTW password is never saved; only the user name can be remembered.
 H2|1.3 The top bar
 P|At the top left you enter your callsign, your locator (4, 6 or 8 characters) and the antenna height in metres; the Apply button confirms them and all the tabs are updated. At the top right are the UTC time, the choice of colour scheme (all the YAEC schemes: Light, Night, Black, eight pastels and Meteor trail) and the choice of language (28 languages). When the colour scheme or the language is changed the window is rebuilt at once, without losing the data collected.
+P|On the right of the tab bar is the continent menu (Europe, North America, South America, Africa, Asia, Oceania): it moves the Mercator maps and the F.A.I. and aurora maps to the chosen continent and selects the forecast data for that continent (N0NBH's E-skip is published only for Europe and North America).
 H2|1.4 The status bar
 P|At the bottom, the status bar shows how many callsigns the CALL3 database contains, how many spots are in memory and the magnetic model in use (IGRF-14 with its epoch). The spots in memory are cleared every time the program is closed: each session starts again without old spots.
 H2|1.5 The maps
 P|All the maps are used in the same way: the mouse wheel zooms in or out, dragging with the left button moves the view, and a left click selects a point, a spot or a path depending on the tab. At the top right the coordinates and the 6-character locator under the cursor are shown; on the azimuthal maps also the distance and the azimuth from the centre. The grid of Maidenhead fields and squares becomes denser as you zoom in.
 H1|2. Data collection (DATA COLLECTION)
+P|The tab has two sub-tabs: Spots, with the telnet sessions, the collected spots, the CALL3 database and the filter column, and Propagation data (section 2.5).
 H2|2.1 The three telnet sessions
 P|The DATA COLLECTION tab opens up to three simultaneous telnet connections: a DX cluster of your choice (by default ON0DXK with the VHF filters), the Reverse Beacon Network (port 7001 for FT8, 7000 for CW and RTTY) and the DM4X cluster with the PSKReporter spots (dm4x.ddns.net, port 8500).
 LI|Host and Port: address of the cluster. Login: callsign used to log in (if empty, the one in the top bar is used). Commands after login: commands to be sent after login, separated by semicolons (for example the band filters).
@@ -23,7 +25,7 @@ LI|The console shows the lines received; in the box below you can type commands 
 H2|2.2 The filter column
 P|The right-hand column of the tab, 40% of the window, holds all the spot filters: there is only one data collection for the whole program, and every spot received passes through here before reaching the tabs of each propagation mode. At the top is the local filter checkbox, on by default: "DX de" lines with a frequency below 27990.0 kHz or above 145 MHz are discarded, do not appear in the console and are not stored. It is useful above all with RBN and PSKReporter, which send a great many HF spots. With the checkbox off, everything passes. Below there are five sub-tabs.
 LI|Meteor scatter: the YA-MS filter (frequency windows typical of MS, tags of other propagation, MS digital modes and <MS>, bands, filter test and counters). Inside E-LAYER ANALYZER the YA-MS Data collection sub-tab does not appear: its filter is set here.
-LI|Sporadic-E: the tags between < > that exclude a spot from sporadic-E; the 28 and 50 MHz rules (within 450 km it is not sporadic-E; the bandplan is not an exclusive criterion, so a spot in the meteor scatter window stays in sporadic-E unless it has the MS digital mode or <MS>); the 144 MHz rule (minimum distance; confirmation by a second spot on the same cloud within a few minutes, or by a short-hop 50 MHz spot nearby) and the trans-equatorial rule with its magnetic dip band. The Restore the author's rules button brings back the default values.
+LI|Sporadic-E: the tags between < > that exclude a spot from sporadic-E; the 28 and 50 MHz rules (on 50 MHz within 450 km it is not sporadic-E; on 28 MHz the minimum distance is derived from the 50 MHz one following IK3XTV, about 170 km; the bandplan is not an exclusive criterion, so a spot in the meteor scatter window stays in sporadic-E unless it has the MS digital mode or <MS>); the 144 MHz rule (minimum distance; confirmation by a second spot on the same cloud within a few minutes, or by a short-hop 50 MHz spot nearby) and the trans-equatorial rule with its magnetic dip band. The Restore the author's rules button brings back the default values.
 LI|F.A.I.: the words that mark a F.A.I. spot (FAI by default: <FAI> or fai counts, in upper, lower or mixed case; these spots do not enter sporadic-E), the bands and the period of the spots on the map (24 hours by default).
 LI|Aurora: the words of aurora spots, with or without < > and in upper or lower case (AU and AUR by default), the bands and the period of the spots on the map (2 hours by default).
 LI|Filter test: you type or paste a cluster line and the program shows how the filters classify it (meteor scatter, aurora, F.A.I., trans-equatorial, sporadic-E), with band, locator and distance.
@@ -35,6 +37,12 @@ LI|As in YA-MS, meteor scatter spots are those in the frequency windows typical 
 LI|Spots with <AU> or <AUR> go to the AURORA tab, those with FAI to the F.A.I. tab.
 H2|2.4 Collected spots and CALL3 database
 P|The Collected spots page lists the latest spots with a filter by band and by source; the Open the spot folder button opens data/spot. The CALL3 page shows the callsign -> locator database (JTDX/WSJT format): you can search for a callsign, reload the database or import a new CALL3.TXT file, which replaces the one in use (the old one is kept as a backup copy).
+H2|2.5 Propagation data
+P|The Propagation data sub-tab gathers the data that help to understand whether a band may open. They update by themselves at most once an hour; the Update now button downloads them at once.
+LI|N0NBH (hamqsl.com): the VHF conditions banner and the solar data (solar flux, A and K indices, X-rays, solar wind, Bz, aurora and auroral latitude) with the E-skip for Europe and North America (DXrobot data).
+LI|Bz for aurora: NOAA SWPC, real-time solar wind measured by the satellite at the L1 point (DSCOVR/ACE), every minute. A negative and persistent Bz favours aurora.
+LI|Meteor scatter: the chart of today's meteor activity (RMOB data) from Make More Miles on VHF; showers, efficiency and live traffic are in the METEOR SCATTER tab.
+P|The summary of these data appears at the top right of the SPORADIC-E and F.A.I. maps (E-skip for the chosen continent) and of the AURORA map (N0NBH aurora and NOAA Bz).
 H1|3. Sporadic-E (SPORADIC-E)
 H2|3.1 The map
 P|The Map menu chooses the projection. Azimuthal: azimuthal equidistant map centred on your own station, with the zoom slider (from 300 to 20000 km from the centre, also with the mouse wheel). Mercator: the world map, with the Europe and World buttons. In both projections the distance circles of the IK3XTV table [3] are drawn around the station: 500 km (single-hop minimum), 1500-2000 km (optimum), 2400 km (single-hop maximum), 5000 km (double-hop maximum) and 6900 km (triple-hop maximum).
@@ -48,7 +56,7 @@ H2|3.2 The controls
 LI|Bands: 10, 6, 4 and 2 m (432 MHz is not analysed: sporadic-E does not apply [22]-[24]); spot time window from 15 minutes to 12 hours.
 LI|Es height (105 km by default) and minimum antenna elevation.
 LI|First hops (equal hops): shows the first hop of both stations; Short first hop within…: shows the author's hypothesis of the short first hop (1200 km by default) [4].
-LI|Es clouds on Maidenhead squares: colours the squares of the reflection points with the estimated minimum foEs.
+LI|Es clouds on Maidenhead squares: colours the squares of the reflection points according to the highest frequency of the spots (green up to 29 MHz, yellow up to 51, orange up to 71, red up to 145 MHz). If the probable MUF of the cloud on the longest hop (2400 km) reaches a higher band, the square flashes in the colour of that band.
 H2|3.3 Tables and details
 P|The Es spots table lists the valid spots with distance, number of hops and minimum foEs; the Es clouds (squares) table lists the squares with the estimated clouds and the MUF they would give for your own station (red 144 MHz, orange 70 MHz, yellow 50 MHz). When a zoom is set, the tables show only what is visible on the map.
 LI|Click on a spot in the table or on the map: the path lights up with a yellow halo, the map brings it into view if needed and the Details box gives hops, reflection points, foEs and azimuth. The spot stays selected even when new spots arrive.
