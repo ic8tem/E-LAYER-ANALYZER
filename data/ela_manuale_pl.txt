@@ -1,0 +1,124 @@
+TITLE|Instrukcja obsługi E-LAYER ANALYZER
+SUB|Szczegółowa instrukcja obsługi - opracował Costantino IC8TEM - wersja 0.4.3, listopad 2026. Liczby w nawiasach kwadratowych odsyłają do zakładki ŹRÓDŁA; wzory i wybory obliczeniowe znajdują się w zakładce PODSUMOWANIE WYBORÓW OBLICZENIOWYCH.
+H1|1. Zanim zaczniesz
+H2|1.1 Co robi program
+P|E-LAYER ANALYZER łączy w jednym programie narzędzia do badania rodzajów propagacji VHF, które przechodzą przez warstwę E jonosfery: E-sporadycznego, także wieloskokowego i pozakontynentalnego, F.A.I. (nieregularności zorientowanych wzdłuż pola magnetycznego), meteor scatter, ze zintegrowanym programem YA-MS, oraz zorzy radiowej. Pracuje na spotach z DX clusterów w czasie rzeczywistym i na logach ADIF, a każdy wynik pokazuje na mapie zajmującej dwie trzecie okna, z danymi i obliczeniami w prawej jednej trzeciej.
+H2|1.2 Instalacja i folder danych
+P|Program działa w systemach Windows (64 i 32 bity), Linux, Raspberry Pi (ARM64) i Mac (Apple Silicon i Intel). Pobiera się go ze strony Releases repozytorium GitHub: dla Windows jest instalator i wersja przenośna w pliku .zip; dla Linuksa i Raspberry Pi archiwum .tar.gz ze skryptem instalacyjnym; dla Maca obraz .dmg.
+LI|Wszystkie dane programu znajdują się w folderze data obok programu: ustawienia (config.ini), archiwum CALL3, współczynniki pola magnetycznego, logi, pobrane dane NOAA, zebrane spoty. Nic nie jest zapisywane w AppData ani w innych folderach systemowych.
+LI|Aby przenieść program na inny komputer, wystarczy skopiować jego folder; aby wrócić do ustawień początkowych, wystarczy usunąć data/config.ini.
+LI|Hasło LoTW nigdy nie jest zapisywane; można zapamiętać jedynie nazwę użytkownika.
+H2|1.3 Górny pasek
+P|W lewym górnym rogu wpisuje się własny znak wywoławczy, lokator (4, 6 lub 8 znaków) i wysokość anteny w metrach; przycisk Zastosuj je zatwierdza i wszystkie zakładki się aktualizują. W prawym górnym rogu znajdują się czas UTC, wybór kolorystyki (wszystkie schematy YAEC: Jasny, Noc, Czarny, osiem pasteli i Ślad meteoru) oraz wybór języka (36 języków). Po zmianie kolorystyki lub języka okno jest natychmiast przebudowywane, bez utraty zebranych danych.
+P|Obok czasu UTC napis NTP:OK (zielony) lub NTP:FAILED (czerwony) informuje, czy czas jest zsynchronizowany: co 5 minut program odpytuje dwa serwery czasu spośród dziesięciu rozmieszczonych na świecie i przechodzi do innych, jeśli nie odpowiadają. Dymek podpowiedzi podaje użyte serwery i przesunięcie zegara PC.
+P|Po prawej stronie paska zakładek znajduje się menu kontynentu (Europa, Ameryka Północna, Ameryka Południowa, Afryka, Azja, Oceania): przesuwa mapy Merkatora oraz mapy F.A.I. i zorzy na wybrany kontynent i wybiera dane prognostyczne tego kontynentu (E-skip N0NBH jest publikowany tylko dla Europy i Ameryki Północnej).
+H2|1.4 Pasek stanu
+P|Na dole pasek stanu pokazuje, ile znaków wywoławczych zawiera archiwum CALL3, ile spotów jest w pamięci i jaki model magnetyczny jest używany (IGRF-14 z jego epoką). Spoty w pamięci są usuwane przy każdym zamknięciu programu: każda sesja zaczyna się bez starych spotów.
+H2|1.5 Mapy
+P|Wszystkich map używa się tak samo: kółko myszy powiększa lub pomniejsza, przeciąganie lewym przyciskiem przesuwa widok, lewy klik wybiera punkt, spot lub trasę, zależnie od zakładki. W prawym górnym rogu pojawiają się współrzędne i 6-znakowy lokator pod kursorem; na mapach azymutalnych także odległość i azymut od środka. Siatka pól i kwadratów Maidenhead zagęszcza się wraz z powiększeniem.
+H1|2. Zbieranie danych (DATA COLLECTION)
+P|Zakładka ma dwie podzakładki: Spoty, z sesjami telnet, zebranymi spotami, archiwum CALL3 i kolumną filtrów, oraz Dane propagacyjne (rozdział 2.5).
+H2|2.1 Trzy sesje telnet
+P|Zakładka DATA COLLECTION otwiera do trzech jednoczesnych połączeń telnet: DX cluster do wyboru (domyślnie ON0DXK z filtrami VHF), Reverse Beacon Network (port 7001 dla FT8, 7000 dla CW i RTTY) oraz klaster DM4X ze spotami PSKReporter (dm4x.ddns.net, port 8500).
+LI|Host i Port: adres klastra. Login: znak wywoławczy do logowania (jeśli puste, używany jest znak z górnego paska). Polecenia po zalogowaniu: polecenia wysyłane po zalogowaniu, oddzielone średnikami (na przykład filtry pasm).
+LI|Połącz i Rozłącz otwierają i zamykają sesję; Połącz ponownie samodzielnie otwiera ją ponownie po zerwaniu; Połącz przy uruchomieniu otwiera ją przy starcie programu.
+LI|Konsola pokazuje odebrane wiersze; w polu poniżej można wpisywać polecenia do wysłania do klastra (na przykład sh/dx 20) i zatwierdzać je przyciskiem Wyślij lub klawiszem Enter.
+H2|2.2 Kolumna filtrów
+P|Prawa kolumna zakładki, 40% okna, zawiera wszystkie filtry spotów: zbieranie danych jest jedno dla całego programu, a każdy odebrany spot przechodzi tędy, zanim trafi do zakładek poszczególnych rodzajów propagacji. Na górze znajduje się pole filtra lokalnego, domyślnie włączone: wiersze "DX de" z częstotliwością poniżej 27990,0 kHz lub powyżej 145 MHz są odrzucane, nie pojawiają się w konsoli i nie są zapamiętywane. Przydaje się to zwłaszcza przy RBN i PSKReporter, które wysyłają bardzo dużo spotów z KF. Po wyłączeniu pola przechodzi wszystko. Poniżej znajduje się pięć podzakładek.
+LI|Meteor scatter: filtr YA-MS (typowe okna częstotliwości MS, napisy innej propagacji, emisje cyfrowe MS i <MS>, pasma, test filtra i liczniki). Wewnątrz E-LAYER ANALYZER podzakładka Zbieranie danych YA-MS się nie pojawia: jej filtr ustawia się tutaj.
+LI|E-sporadyczne: napisy między < >, które wykluczają spot z E-sporadycznego; reguły 28 i 50 MHz (na 50 MHz do 450 km nie jest to E-sporadyczne; na 28 MHz odległość minimalna wyprowadzana jest z odległości dla 50 MHz zgodnie z IK3XTV, około 170 km; bandplan nie jest kryterium wyłącznym, więc spot w oknie meteor scatter pozostaje w E-sporadycznym, chyba że ma emisję cyfrową MS lub <MS>); reguła 144 MHz (odległość minimalna; potwierdzenie drugim spotem na tym samym obłoku w ciągu kilku minut albo spotem na 50 MHz z krótkim skokiem w pobliżu) oraz reguła transrównikowa z jej pasem inklinacji magnetycznej, obowiązująca dla Afryki i Ameryki Południowej (reguła autora) oraz, na całym świecie, dla łączności na 3000-8000 km przecinających równik magnetyczny w kierunku zbliżonym do północ-południe (Kennewell i Wilkinson [49]). Przycisk Przywróć reguły autora przywraca wartości domyślne.
+LI|F.A.I.: słowa oznaczające spot F.A.I. (domyślnie FAI: obowiązuje <FAI> lub fai, wielkimi, małymi lub mieszanymi literami; te spoty nie trafiają do E-sporadycznego), pasma i okres spotów na mapie (domyślnie 24 godziny).
+LI|Zorza: słowa spotów zorzowych, z < > lub bez, wielkimi lub małymi literami (domyślnie AU i AUR), pasma i okres spotów na mapie (domyślnie 2 godziny).
+LI|Test filtrów: wpisuje się lub wkleja wiersz z klastra, a program pokazuje, jak klasyfikują go filtry (meteor scatter, zorza, F.A.I., transrównikowa, E-sporadyczne), z pasmem, lokatorami i odległością.
+H2|2.3 Jak program odczytuje spoty
+P|Z każdego wiersza "DX de" program wyodrębnia spottera, częstotliwość, DX, komentarz, godzinę oraz, jeśli są obecne, lokatory i rodzaj propagacji zapisane w komentarzu w postaci JN70CN<ES>JO62QM (pierwszy lokator należy do spottera, drugi do DX; akceptowane są także postacie z <>, > i nawiasami).
+LI|Brakujące lokatory wyszukiwane są w archiwum CALL3; nieprecyzyjne lokatory (mniej niż 6 znaków) zastępowane są 6-znakowym lokatorem z CALL3, jeśli taki istnieje.
+LI|Spoty z <MS>, <AU>, <AUR>, <TR>, <AS> lub <ACS> w tekście nie są używane dla E-sporadycznego: służą do meteor scatter, zorzy, tropo lub aircraft scatter.
+LI|Tak jak w YA-MS, spotami meteor scatter są spoty w typowych oknach częstotliwości MS (50190-50300, 70100-70400, 144290-144399 kHz) bez napisów innej propagacji oraz spoty z emisjami MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M lub z <MS>.
+LI|Spoty z <AU> lub <AUR> trafiają do zakładki AURORA, te z FAI do zakładki F.A.I.
+H2|2.4 Zebrane spoty i archiwum CALL3
+P|Strona Zebrane spoty wyświetla ostatnie spoty z filtrem według pasma i źródła; przycisk Otwórz folder spotów otwiera data/spot. Strona CALL3 pokazuje archiwum znak wywoławczy -> lokator (format JTDX/WSJT): można wyszukać znak wywoławczy, ponownie wczytać archiwum lub zaimportować nowy plik CALL3.TXT, który zastępuje używany (stary pozostaje jako kopia zapasowa).
+H2|2.5 Dane propagacyjne
+P|Podzakładka Dane propagacyjne zbiera dane, które pomagają ocenić, czy pasmo może się otworzyć. Aktualizują się same najwyżej raz na godzinę; przycisk Aktualizuj teraz pobiera je natychmiast.
+LI|N0NBH (hamqsl.com): baner warunków VHF i dane słoneczne (strumień słoneczny, indeksy A i K, promienie X, wiatr słoneczny, Bz, zorza i szerokość zorzowa) z E-skip dla Europy i Ameryki Północnej (dane DXrobot).
+LI|Bz dla zorzy: NOAA SWPC, wiatr słoneczny w czasie rzeczywistym mierzony przez satelitę w punkcie L1 (DSCOVR/ACE), co minutę. Ujemne i utrzymujące się Bz sprzyja zorzy.
+LI|Zorza: indeks Dst z Kioto (burze geomagnetyczne) oraz, dla półkuli południowej, alerty zorzowe australijskiego Bureau of Meteorology, które wymagają bezpłatnego klucza wpisywanego w polu Klucz API BoM. Przyciski Indeks AE (Kioto) i Konwekcja SuperDARN otwierają obie strony w przeglądarce.
+LI|Meteor scatter: wykres dzisiejszej aktywności meteorowej (dane RMOB) z Make More Miles on VHF; roje, efektywność i ruch na żywo znajdują się w zakładce METEOR SCATTER.
+P|Podsumowanie tych danych pojawia się w prawym górnym rogu map SPORADIC-E i F.A.I. (E-skip wybranego kontynentu) oraz AURORA (zorza wg N0NBH i Bz z NOAA).
+H1|3. E-sporadyczne (SPORADIC-E)
+P|Zakładka SPORADIC-E ma trzy podzakładki: REAL-TIME, spoty na żywo opisane w tym rozdziale; BENCHMARK Es (rozdział 4) i BENCHMARK 50 MHz (rozdział 5).
+H2|3.1 Mapa
+P|Menu Mapa wybiera odwzorowanie. Azymutalna: mapa azymutalna równoodległościowa wyśrodkowana na własnej stacji, z suwakiem powiększenia (od 300 do 20000 km od środka, także kółkiem myszy). Merkator: mapa świata, z przyciskami Europa i Świat. W obu odwzorowaniach wokół stacji rysowane są okręgi odległości z tabeli IK3XTV [3]: 500 km (minimum pojedynczego skoku), 1500-2000 km (optymalna), 2400 km (maksimum pojedynczego skoku), 5000 km (maksimum podwójnego skoku) i 6900 km (maksimum potrójnego skoku).
+P|Tabela długości skoków na 50 MHz pochodzi od Flavia Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; obłoki Es znajdują się na wysokości około 100 km, co ogranicza pojedynczy skok do około 2000 km [29]. Pierścienie na mapach i liczba skoków są zgodne z tymi odległościami:
+TAB|Skok;Odległość minimalna;Odległość optymalna;Odległość maksymalna
+TAB|Pojedynczy skok;500-650 km;1500-2000 km;2200-2400 km
+TAB|Podwójny skok;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Potrójny skok;-;4800-6400 km;6900 km
+P|W widokach azymutalnych przerywane pierścienie pokazują km od środka; krok pierścieni zmienia się wraz z powiększeniem, a zewnętrzna krawędź wskazuje maksymalną wyświetlaną odległość.
+H2|3.2 Elementy sterujące
+LI|Pasma: 10, 6, 4 i 2 m (432 MHz nie jest analizowane: E-sporadyczne nie ma zastosowania [22]-[24]); okno czasowe spotów od 15 minut do 12 godzin.
+LI|Wysokość Es (domyślnie 110 km) i minimalna elewacja anten (domyślnie 1°); elewacja uwzględnia refrakcję troposferyczną (promień Ziemi 4/3), dzięki czemu pojedynczy skok sięga około 2440 km.
+LI|Pierwsze skoki (skoki równe): pokazuje pierwszy skok obu stacji; Krótki pierwszy skok do…: pokazuje hipotezę autora o krótkim pierwszym skoku (domyślnie 1200 km) [4].
+LI|Obłoki Es na kwadratach Maidenhead: koloruje kwadraty punktów odbicia według najwyższej częstotliwości spotów (zielony do 29 MHz, żółty do 51, pomarańczowy do 71, czerwony do 145 MHz). Jeśli prawdopodobna MUF obłoku na najdłuższym skoku (2400 km) osiąga wyższe pasmo, kwadrat miga kolorem tego pasma.
+LI|144 MHz w kierunku Wysp Kanaryjskich, Madery i Azorów (reguła autora): powyżej 2400 km spot jest ważny tylko wtedy, gdy co najmniej dwa spoty wskazują ten sam obłok Es; rysowane są skok Es, obłok i przerywana trasa tropo aż do wyspy. Na 50 i 70 MHz reguła nie ma zastosowania.
+H2|3.3 Tabele i szczegóły
+P|Tabela Spoty Es wyświetla ważne spoty z odległością, liczbą skoków i minimalną foEs; tabela Obłoki Es (kwadraty) wyświetla kwadraty z szacowanymi obłokami i MUF, jaką dałyby dla własnej stacji (czerwony 144 MHz, pomarańczowy 70 MHz, żółty 50 MHz). Przy ustawionym powiększeniu tabele pokazują tylko to, co widać na mapie.
+LI|Kliknięcie spotu w tabeli lub na mapie: trasa podświetla się żółtą poświatą, mapa w razie potrzeby przesuwa ją w pole widzenia, a ramka Szczegóły podaje skoki, punkty odbicia, foEs i azymuty. Spot pozostaje wybrany także wtedy, gdy nadchodzą nowe spoty.
+LI|Kliknięcie wolnego punktu na mapie: punkt traktowany jest jako możliwy obłok Es, z foEs potrzebną dla 28, 50, 70 i 144 MHz.
+LI|Gdy Kp przekracza 3, mapa sygnalizuje to w prawym górnym rogu: E-sporadyczne jest mniej prawdopodobne (ponad 90% otwarć występuje przy Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|QSO na 50 MHz powyżej 11000 km pojawia się w szczegółach jako ALERT, wyłącznie jako informacja statystyczna (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
+LI|Podzakładka Prekursory wieloskoku: dla odległych regionów (trzydziestu na całym świecie) program sprawdza, czy w punktach skoku trasy, przy skokach równych i zawsze także z krótkim pierwszym skokiem do 1200 km, są aktywne obłoki Es widoczne w spotach innych stacji. ALERT (czerwony): wszystkie punkty pokryte; PREKURSOR (żółty): brakuje tylko jednego punktu, w obszarze bez obserwatorów. Kliknięcie wiersza rysuje przerywaną trasę, punkty skoku (zielony: aktywny obłok; szary: brak obserwatorów; czerwony: brak obłoku) i spoty potwierdzające obłoki; szczegóły podają foEs potrzebną dla każdego skoku.
+LI|Spoty w kolorze elektrycznym niebieskim z napisem TEP to trasy, które przecinają równik magnetyczny, ale są dłuższe lub bardziej asymetryczne niż czysty TEP (na przykład ZS6 - OH, SM, LA): E-sporadyczne może sprząc się z TEP. Pozostają wśród spotów Es; w kolumnie Prop pojawia się ES+TEP.
+H2|3.4 Reguły autora
+LI|144 MHz: E-sporadyczne zaczyna się powyżej 900 km; pojedynczy spot nie jest rysowany; jest rysowany, jeśli w ciągu 5 minut nadejdzie drugi spot na tym samym obłoku lub jeśli w pobliżu jest spot na 50 MHz z krótkim skokiem. Zielony wiersz u góry informuje, ile spotów czeka na potwierdzenie.
+LI|Transrównikowa: w kierunku Afryki kontynentalnej (z Madagaskarem) i Ameryki Południowej, jeśli punkt środkowy wypada w pasie inklinacji magnetycznej od -20° do +20°, łączność jest transrównikowa, a nie E-sporadyczna, chyba że spot deklaruje <ES>. Wyspy Kanaryjskie, Madera, Republika Zielonego Przylądka i Półwysep Arabski pozostają poza regułą.
+H1|4. BENCHMARK Es (podzakładka SPORADIC-E)
+H2|4.1 Wczytywanie logu
+P|Podzakładka BENCHMARK Es to stanowisko testowe E-sporadycznego na całym logu ADIF, także innej stacji. Wczytaj ADIF otwiera plik (program go zapamiętuje i wczytuje ponownie przy uruchomieniu), Zamknij ADIF go usuwa. Stacja w środku proponuje najczęstszy znak wywoławczy i lokator z logu; można je zmienić i zatwierdzić przyciskiem Zastosuj.
+LI|Pozycją nadawania jest MY_GRIDSQUARE każdego QSO; pozycjami odbioru są GRIDSQUARE (brakujące lub 4-znakowe lokatory pobierane są z CALL3).
+LI|Można wykluczyć QSO z innym PROP_MODE i te poniżej 500 km (900 km na 144 MHz); transrównikowe są zawsze wykluczane, chyba że PROP_MODE=ES.
+LI|Na mapie rozmyta żółta kropka oznacza środek każdego skoku, gdzie przypuszczalnie znajduje się obłok E-sporadycznego (także środek krótkiego pierwszego skoku, jeśli hipoteza jest aktywna).
+H2|4.2 Dni, godziny i obliczenia
+P|Tabela QSO na dzień wyświetla dni z liczbą QSO, pasmami, odległością maksymalną i wieloskokami; kliknięcie dnia wypełnia tabelę Godziny dnia, z wierszem dla każdej godziny UTC i wierszem Cały dzień. Mapa azymutalna, z suwakiem odległości maksymalnej, rysuje skip według 10-stopniowych sektorów (pomarańczowy łuk = najbliższe QSO, zielony sektor = osiągnięte odległości), obłoki na kwadratach oraz, dla całego dnia, godzinowe przemieszczanie się obłoków (czerwona linia).
+P|Strona Proponowane obliczenia podaje skip według sektorów, szacowaną foEs z oczekiwaną MUF na 1000, 1500, 2000 i 2400 km, szacowane obłoki, weryfikację wieloskoku (skoki równe wobec krótkiego pierwszego skoku, porównane z obłokami widzianymi na pojedynczym skoku w ciągu ±30 minut) i przemieszczanie się obłoków godzina po godzinie.
+H1|5. BENCHMARK 50 MHz (podzakładka SPORADIC-E)
+H2|5.1 Jedna lub dwie stacje
+P|Podzakładka BENCHMARK 50 MHz jest poświęcona wieloskokowemu E-sporadycznemu na 50 MHz. W wierszu Stacja 1 wczytuje się i zamyka log własnej stacji; w wierszu Stacja 2 log drugiej stacji, który pokazuje się lub ukrywa polem Stacja 2. Trasy stacji 1 są błękitne, trasy stacji 2 fioletowe.
+LI|Pokazywane są wieloskokowe QSO na 50 MHz, czyli powyżej 3100 km (reguła autora); liczba skoków jest zgodna z tabelą IK3XTV.
+LI|Dzień, od… do… UTC: dzień (przy otwarciu ten z największą liczbą wieloskokowych QSO) i przedział godzin, z krokiem 15 minut.
+LI|foEs (opcjonalnie): koloruje trasy minimalną foEs i podaje ją w tabeli. Wysokość Es i Krótki pierwszy skok do 1200 km jak w pozostałych zakładkach.
+LI|Rozmyta żółta kropka oznacza środek każdego skoku, gdzie przypuszczalnie znajduje się obłok E-sporadycznego; na trasie pod kursorem myszy staje się większa.
+H2|5.2 Mapa Merkatora
+P|Mapa jest w odwzorowaniu Merkatora z dowolnym środkiem. Po zbliżeniu myszy do trasy linia i ikony powiększają się i pojawia się 6-znakowy kwadrat WWL korespondenta. Po lewym kliknięciu tej trasy okienko pyta, czy pokazać wszystkie QSO z pliku, ze wszystkich dni, z punktem końcowym w promieniu 150 km: Tak czyści mapę i pokazuje te QSO wewnątrz pomarańczowego koła, Nie pozostawia mapę bez zmian. Przycisk Powrót do dnia i godziny przywraca poprzedni wybór.
+H1|6. F.A.I.
+H2|6.1 Dwa widoki
+P|Zakładka F.A.I. bada rozpraszanie na nieregularnościach zorientowanych wzdłuż pola magnetycznego (główne źródło [1], [2]). Widok Scatter trail (para A-B) oblicza dla dwóch stacji miejsce geometryczne możliwych scatter pointów, pokolorowane według odchylenia od warunku odbicia, proponuje najbardziej prawdopodobny scatter point i rysuje w prawym górnym rogu ramkę z QTF i elewacjami obu stacji (czerwony = A, zielony = B). Widok Izorefleksja (punkt) rysuje dla wybranego punktu odbicia linie izorefleksji, podobnie jak AuroReflex i SE-PROP K9SE: kolorowe pasy w schematach ciemnych, grube linie w schematach jasnych.
+H2|6.2 Elementy sterujące
+LI|Stacja A i Stacja B: znak wywoławczy (wyszukiwany w CALL3) i/lub lokator; puste A = własna stacja. Menu Weryfikacje… wczytuje pary testowe (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); menu Znane punkty scatter… wybiera udokumentowany scatter point (Genewa, Bruksela, Budapeszt, JN92, JN41/42).
+LI|Wysokość (domyślnie 110 km), minimalna elewacja i Refrakcja (promień Ziemi 4/3), domyślnie włączona.
+LI|Lewy klik na mapie: punkt odbicia do sprawdzenia (przełącza na widok Izorefleksja); prawy klik: położenie stacji B.
+LI|Sprawdź zalecany punkt: oblicza scatter trail, bierze zaproponowany scatter point i pokazuje jego linie izorefleksji z werdyktem: ZADOWALAJĄCE (w granicach 1°), DOPUSZCZALNE (w granicach 2,5°), NIEZADOWALAJĄCE (powyżej).
+P|Jeśli według modelu obliczenie nie jest możliwe, pojawia się komunikat Obliczenie niemożliwe i nie jest pokazywany żaden inny wynik. Na dole tabela Spoty F.A.I. wyświetla spoty zadeklarowane jako FAI; kliknięcie spotu wczytuje jego parę stacji.
+H1|7. METEOR SCATTER
+P|Zakładka zawiera pełny program YA-MS, z jego zakładkami (Na żywo i dane w czasie rzeczywistym: ruch meteor scatter na żywo, strumień radarowy, radar GRAVES; Obliczenie prognozy: sklepienie niebieskie i obliczenia, geometria i tłumienie, obliczanie efektywności, eksperymentalne prognozy; Dokumenty techniczne: roje, źródła, mapa źródeł, efektywność - wyjaśnienie, mapa kwadratów) i jego instrukcją obliczeń. Język i kolorystyka są takie, jak wybrane u góry. Wewnątrz E-LAYER ANALYZER Zbieranie danych YA-MS się nie pojawia: zbieranie jest jedno, to w DATA COLLECTION, które przekazuje wiersze do YA-MS, a filtr spotów meteor scatter ustawia się w kolumnie filtrów DATA COLLECTION.
+H1|8. AURORA
+P|Zakładka AURORA używa tych samych widoków co F.A.I. (domyślna wysokość 110 km, Lange-Hesse [12]) z danymi pogody kosmicznej NOAA [15]: owal zorzowy OVATION (cieniowany na mapie), indeks Kp z ostatnich trzech dni i wiatr słoneczny, pobierane co 5 minut do data/swpc lub natychmiast przyciskiem Pobierz NOAA teraz. Program zaleca kierunek anteny dla obu stacji.
+LI|Spoty zorzowe z okresu wybranego w filtrach DATA COLLECTION (domyślnie ostatnie 2 godziny, najwyżej 30) są rysowane na mapie z obliczonym scatter pointem (pomarańczowe koło), jeśli włączone jest pole Spoty <AU>/<AUR> na mapie z obliczeniem; w wynikach pojawiają się QTF i elewacja obu stacji.
+LI|W wynikach widoku Scatter trail pojawiają się prawdopodobieństwo zorzy w scatter poincie (mało prawdopodobna przy Kp ≤ 2; poza tym według owalu NOAA), typowy QTF między N a NE (S-SE na półkuli południowej) z odchyleniem od trasy bezpośredniej oraz wskazówki dotyczące Dopplera i emisji (CW/SSB lub Q65 z szerokimi podtrybami: FT8 często nie dekoduje). Scatter point szukany jest najlepiej w odległości 370-1100 km od każdej stacji, z prostopadłością w granicach ±3°; jeśli zaproponowany punkt leży poza tym przedziałem, program to sygnalizuje.
+LI|Spoty zorzowe powyżej 2000 km są oznaczane jako wątpliwe: według Newtona [48] zorza sięga około 1000 km w kierunku północ-południe i 2000 km wschód-zachód. Spoty zorzowego E (AUE, AU-E, AURORAL E) są rysowane na zielono na trasie bezpośredniej: to E sporadyczne pochodzenia zorzowego, bez Dopplera.
+LI|Wyniki podają czas słoneczny w scatter poincie: w ciągu 4 godzin od lokalnej północy przypada większość odbić zorzowych (Reeve [52]). Na półkuli południowej zorza na 50 MHz sięga około 2000 km na trasach wschód-zachód (ANVDG [55]); zorzowe E daje słabsze i stabilniejsze sygnały na trasie bezpośredniej (SM2CEW-SM0FOB [54]).
+LI|Oprócz najbardziej prawdopodobnego scatter pointu wyniki podają zakres QTF obu stacji wzdłuż całego scatter trail (odchylenie ≤ 1,5°): zorza może przychodzić z każdego punktu zakresu, a najbardziej prawdopodobny punkt preferuje najkrótszą trasę.
+H2|8.1 BENCHMARK AURORA
+P|Zakładka AURORA ma dwie podzakładki: REAL-TIME, obliczenia opisane powyżej, oraz BENCHMARK AURORA, stanowisko testowe modelu na 298 rzeczywistych opublikowanych QSO zorzowych (logi EI5FK 2003-2005 i mapa logu PA0O).
+LI|Menu Log wybiera jeden log lub wszystkie razem; domyślna wysokość wynosi 110 km, z tolerancją 3°, refrakcją 4/3 i IGRF-14.
+LI|Tabela podaje dla każdego QSO obliczony scatter point, odchylenie, QTF i elewację stacji oraz QTF korespondenta. Zielony: scatter point w odległości 370-1100 km od obu stacji; żółty: wyjaśnione, ale poza tym oknem; pomarańczowy: QSO powyżej 2000 km; czerwony: brak scatter pointu, QSO niewyjaśnione przez model.
+LI|Podsumowanie podaje wartości procentowe oraz, dla każdego logu, zakres i medianę obliczonego QTF; kliknięcie wiersza rysuje trasę i oba kierunki anten. Logi nie podają kierunku anteny: porównanie dotyczy geometrii, a nie QTF.
+H1|9. LOG ADIF
+P|Zakładka LOG ADIF pokazuje kwadraty zrobione i potwierdzone, pasmo po paśmie od 28 MHz wzwyż, bez łączenia pasm. Otwórz plik ADIF… dodaje pliki logu; Pobierz z LoTW… pobiera raport potwierdzeń (można zapamiętać nazwę użytkownika, hasło nigdy nie jest zapisywane); Wyczyść pamięć usuwa pliki i raport. Kwadraty są pomarańczowe, jeśli zrobione, i mają inne kolory, jeśli potwierdzone kartą QSL lub przez LoTW; kliknięcie kwadratu pokazuje znaki wywoławcze i rodzaj propagacji.
+H1|10. Dokumenty
+P|Zakładka ŹRÓDŁA wymienia źródła cytowane przez program, zakładka po zakładce. Zakładka PODSUMOWANIE WYBORÓW OBLICZENIOWYCH podaje wzory i wybory obliczeniowe ze źródłami na każdym kroku; niniejsza INSTRUKCJA OBSŁUGI wyjaśnia, jak używać programu; RAPORT TECHNICZNY przedstawia powody, którymi kierowano się przy tworzeniu programu. Wszystkie trzy dokumenty można wyeksportować do Worda.
+H1|11. Praktyczne wskazówki
+LI|Przede wszystkim wpisz u góry znak wywoławczy i lokator i naciśnij Zastosuj: wszystkie odległości, MUF i elewacje są liczone od tego miejsca.
+LI|Przy RBN i PSKReporter pozostaw włączony filtr lokalny, aby nie zapełniać pamięci spotami z KF.
+LI|Do analizy minionego sezonu używaj obu zakładek BENCHMARK z własnym logiem; dla zorzy i F.A.I. zawsze sprawdzaj zaproponowany punkt w widoku Izorefleksja.
+LI|Obliczenia są orientacyjne: spot lub QSO mówi, że trasa była otwarta, a nie gdzie dokładnie znajdował się obłok.
