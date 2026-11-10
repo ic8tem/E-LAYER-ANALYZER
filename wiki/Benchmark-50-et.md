@@ -23,6 +23,7 @@ Vaba keskpunktiga **Mercatori** kaart: rullik = suum, lohistamine = nihutamine.
 
 ![Trass](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Hägune kollane täpp** tähistab iga hüppe keskpunkti, kus eeldatakse Es-pilve asukohta; hiire all oleval trassil muutub see suuremaks.
 - **Hiir trassi lähedal**: joon ja ikoonid suurenevad ning ilmub DX-jaama **6-märgiline WWL-ruut**.
 - **Vasakklõps** sellel trassil: hüpikaken küsib, kas näidata **kõiki faili QSO-sid** (kõik päevad), mille kaugema otsa asukoht on selle punkti suhtes **150 km piires**. *Jah*: kaart tühjendatakse ja näitab neid QSO-sid oranži ringi sees; *Ei*: kaart jääb samaks. *Tagasi päeva ja kellaaja juurde* taastab eelmise valiku.
 

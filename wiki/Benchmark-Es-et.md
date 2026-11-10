@@ -27,6 +27,7 @@ Jaamale tsentreeritud **asimuutne kaugustruu** kaart, suurendamiseks liugur **Ma
 - **Skip sektorite kaupa** (10° asimuuti): oranž kaar = sektori lähim QSO (vaikusetsooni serv), roheline kaar = kaugeim QSO, nende vahel saavutatud ala.
 - **Es-pilved** Maidenheadi ruutudel, värvitud hinnangulise foEs järgi.
 - Ühe hüppe keskpunkt (kollane), jaama esimene hüpe (oranž, õõnes ring = lühike esimene hüpe), DX-jaama esimene hüpe (lilla).
+- **Hägune kollane täpp** tähistab iga hüppe keskpunkti, kus eeldatakse Es-pilve asukohta (ka lühikese esimese hüppe keskpunkti, kui see hüpotees on sisse lülitatud).
 - Kogu päeva puhul ühendab **punane joon** keskpunktide raskuskeskmeid tund-tunnilt: see on pilvede nihkumine.
 
 ![Üks tund](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)
