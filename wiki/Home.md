@@ -2,7 +2,7 @@
 
 *by Costantino IC8TEM* — **English** · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** is a free program for radio amateurs that analyses every VHF propagation mode involving the ionosphere's **E layer**: **sporadic-E** (including intercontinental multi-hop), **F.A.I.** (field-aligned irregularities), **meteor scatter** (with the built-in YA-MS program) and **radio aurora**. It runs on **Windows (64 and 32 bit), Linux, Raspberry Pi and Mac**, in **28 languages**, and writes nothing outside its own folder.
+**E-LAYER ANALYZER** is a free program for radio amateurs that analyses every VHF propagation mode involving the ionosphere's **E layer**: **sporadic-E** (including intercontinental multi-hop), **F.A.I.** (field-aligned irregularities), **meteor scatter** (with the built-in YA-MS program) and **radio aurora**. It runs on **Windows (64 and 32 bit), Linux, Raspberry Pi and Mac**, in **36 languages**, and writes nothing outside its own folder.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

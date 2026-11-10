@@ -27,6 +27,7 @@ Mappa **azimutale equidistante** centrata sulla stazione, con il cursore **Dista
 - **Skip per settori** (10° di azimut): arco arancio = QSO più vicino del settore (bordo della zona di silenzio), arco verde = QSO più lontano, in mezzo il settore raggiunto.
 - **Nubi Es** sui quadrati Maidenhead, colorate dalla foEs stimata.
 - Punto medio dei singoli salti (giallo), primo salto della stazione (arancio, cerchio vuoto = primo salto corto), primo salto del corrispondente (viola).
+- Un **pallino giallo sfocato** segna il centro di ogni salto, dove si presume la nube Es (anche il centro del primo salto corto, se l'ipotesi è attiva).
 - Sulla giornata intera, la **linea rossa** unisce il baricentro dei punti medi ora per ora: è lo spostamento delle nubi.
 
 ![Un'ora](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

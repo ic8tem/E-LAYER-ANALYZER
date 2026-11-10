@@ -27,6 +27,7 @@ Test bench for **sporadic-E** and **multi-hop** on a **whole ADIF log**, even on
 - **Skip by sector** (10° of azimuth): orange arc = closest QSO in the sector (edge of the skip zone), green arc = farthest QSO, in between the area reached.
 - **Es clouds** on the Maidenhead squares, coloured by the estimated foEs.
 - Midpoint of single hops (yellow), first hop of the station (orange, hollow circle = short first hop), first hop of the DX station (purple).
+- A **blurred yellow dot** marks the centre of every hop, where the Es cloud is presumed to be (also the centre of the short first hop, when that hypothesis is on).
 - For the whole day, the **red line** joins the centroid of the midpoints hour by hour: it is the drift of the clouds.
 
 ![One hour](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

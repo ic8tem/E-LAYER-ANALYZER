@@ -23,6 +23,7 @@ Choose the **day** (on opening, the one with the most multi-hop QSOs) and the ti
 
 ![Path](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- A **blurred yellow dot** marks the centre of every hop, where the Es cloud is presumed to be; it gets bigger on the path under the mouse.
 - **Mouse near a path**: the line and icons are enlarged and the DX station's **6-character WWL square** appears.
 - **Left click** on that path: a popup asks whether to show **all QSOs in the file** (all days) with the far-end position **within 150 km** of that point. *Yes*: the map is cleared and shows those QSOs inside the orange circle; *No*: the map stays as it is. *Back to day and time* returns to the previous selection.
 

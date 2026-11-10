@@ -23,6 +23,7 @@ Mappa di **Mercatore** a centro libero: rotella = zoom, trascina = sposta.
 
 ![Tratta](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- Un **pallino giallo sfocato** segna il centro di ogni salto, dove si presume la nube Es; sulla tratta sotto il mouse diventa più grande.
 - **Mouse vicino a una tratta**: linea e icone si ingrandiscono e compare il **quadrato WWL a 6 caratteri** del corrispondente.
 - **Clic sinistro** su quella tratta: un popup chiede se vedere **tutti i QSO del file** (tutte le giornate) con la posizione terminale **entro 150 km** da quel punto. *Sì*: la mappa si svuota e mostra quei QSO dentro il cerchio arancio; *No*: la mappa resta com'è. *Torna a giorno e orario* riporta alla scelta precedente.
 
