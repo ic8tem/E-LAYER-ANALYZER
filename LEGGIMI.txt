@@ -4,14 +4,19 @@ Windows, Linux e Mac.
 
 INSTALLAZIONE
   Il programma e la sua cartella "data" stanno sempre insieme nella cartella personale E-LAYER-ANALYZER.
-  Windows  E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe (64 bit) o -windows-x86-setup.exe (32 bit): installa in
+  Windows  E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe (64 bit) o -win-x86-setup.exe (32 bit): installa in
            C:\E-LAYER-ANALYZER, senza permessi di amministratore e senza scrivere in C:\Users\...\AppData
-           (niente collegamento nel menu Start, solo l'icona facoltativa sul desktop). In alternativa gli zip portatili.
-  Linux    E-LAYER-ANALYZER-x.y.z-linux-x64.tar.gz: estrarre e lanciare ./installa.sh (installa in ~/E-LAYER-ANALYZER).
-  Raspberry Pi  E-LAYER-ANALYZER-x.y.z-raspberry-arm64.tar.gz (Pi 3/4/5 con Raspberry Pi OS a 64 bit e desktop;
-           consigliati 4 GB di RAM): estrarre e lanciare ./installa.sh (installa in ~/E-LAYER-ANALYZER).
-  Mac      E-LAYER-ANALYZER-x.y.z-mac-apple-silicon.dmg (M1/M2/M3/M4) oppure -mac-intel.dmg; aprire il .dmg,
-           clic destro su "Installa E-LAYER-ANALYZER.command" > Apri.
+           (niente collegamento nel menu Start, solo l'icona facoltativa sul desktop). In alternativa gli zip
+           portatili -win-x64-portatile.zip e -win-x86-portatile.zip.
+  Linux    e-layer-analyzer_x.y.z_amd64.deb: sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb, poi si avvia dal
+           menu (al primo avvio si copia in ~/E-LAYER-ANALYZER). Oppure E-LAYER-ANALYZER-x.y.z-linux-x64-portatile.tar.gz:
+           estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh (installa in ~/E-LAYER-ANALYZER con l'icona nel menu).
+  Raspberry Pi  Raspberry Pi OS a 64 bit (Pi 3/4/5): e-layer-analyzer_x.y.z_arm64.deb oppure -linux-arm64-portatile.tar.gz;
+           Raspberry Pi OS a 32 bit (Pi 2/3/4): -linux-arm-portatile.tar.gz. Consigliati 4 GB di RAM e il desktop.
+  Mac      E-LAYER-ANALYZER-x.y.z-osx-arm64.dmg (Apple Silicon M1-M4) oppure -osx-x64.dmg (Intel); aprire il .dmg,
+           clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa -osx-arm64-app.zip / -osx-x64-app.zip
+           con la sola applicazione, da estrarre in una propria cartella (per esempio ~/E-LAYER-ANALYZER):
+           la cartella data si crea accanto all'app.
   Tutti i dati (impostazioni, spot, log, CALL3, dati NOAA) stanno nella cartella data accanto al programma.
   Le versioni nuove si installano sopra la precedente: impostazioni, spot raccolti e call3.txt restano.
 
