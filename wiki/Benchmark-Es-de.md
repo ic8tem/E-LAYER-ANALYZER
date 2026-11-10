@@ -27,6 +27,7 @@ Prüfstand für **Sporadic-E** und **Mehrfachsprung** an einem **ganzen ADIF-Log
 - **Skip nach Sektoren** (10° Azimut): oranger Bogen = nächstes QSO des Sektors (Rand der Skip-Zone), grüner Bogen = entferntestes QSO, dazwischen der erreichte Bereich.
 - **Es-Wolken** auf den Maidenhead-Feldern, gefärbt nach der geschätzten foEs.
 - Mittelpunkt der Einzelsprünge (gelb), erster Sprung der Station (orange, hohler Kreis = kurzer erster Sprung), erster Sprung der Gegenstation (violett).
+- Ein **unscharfer gelber Punkt** markiert die Mitte jedes Sprungs, wo die Es-Wolke vermutet wird (auch die Mitte des kurzen ersten Sprungs, wenn diese Hypothese aktiv ist).
 - Für den ganzen Tag verbindet die **rote Linie** Stunde für Stunde den Schwerpunkt der Mittelpunkte: Das ist die Drift der Wolken.
 
 ![Eine Stunde](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

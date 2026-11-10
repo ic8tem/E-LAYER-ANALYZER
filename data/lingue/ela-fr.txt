@@ -657,3 +657,41 @@ Intervallo di QTF lungo la scia (deviazione ≤ 1,5°):	Plage de QTF le long de 
 QTF {0} {1}-{2}	QTF {0} {1}-{2}
 Quota dello strato E sporadico usata nella geometria dei salti (di partenza 110 km).	Altitude de la couche E sporadique utilisée dans la géométrie des bonds (par défaut 110 km).
 Elevazione minima dell'antenna (di partenza 1°): limita la lunghezza massima di un salto; si calcola con la rifrazione troposferica (raggio terrestre 4/3).	Élévation minimale de l'antenne (par défaut 1°) : limite la longueur maximale d'un bond ; elle est calculée avec la réfraction troposphérique (rayon terrestre 4/3).
+● giallo sfocato: centro del salto, dove si presume la nube Es	● jaune flou : centre du bond, où l'on présume le nuage Es
+Tutti i log ({0} QSO)	Tous les logs ({0} QSO)
+data non nota	date inconnue
+QTF corr.	QTF corr.
+Esito	Résultat
+Log	Log
+tolleranza 3°, rifrazione 4/3, IGRF-14	tolérance 3°, réfraction 4/3, IGRF-14
+Riepilogo	Récapitulatif
+Dettagli del QSO scelto	Détails du QSO choisi
+QSO di aurora (dati del banco di prova)	QSO d'aurore (données du banc d'essai)
+Calcolo in corso…	Calcul en cours…
+non spiegato	non expliqué
+spiegato, oltre 2000 km	expliqué, au-delà de 2000 km
+spiegato, 370-1100 km	expliqué, 370-1100 km
+spiegato, fuori finestra	expliqué, hors fenêtre
+Nessun dato: manca il file data/aurora_benchmark.txt.	Aucune donnée : le fichier data/aurora_benchmark.txt est absent.
+QSO: {0}; spiegati dal modello (scatter point entro 3°): {1} ({2:F0}%)	QSO : {0} ; expliqués par le modèle (scatter point à moins de 3°) : {1} ({2:F0} %)
+con lo scatter point a 370-1100 km da entrambe le stazioni (Lange-Hesse): {0} ({1:F0}%)	avec le scatter point à 370-1100 km des deux stations (Lange-Hesse) : {0} ({1:F0} %)
+oltre i 2000 km (dubbi per il programma): {0}	au-delà de 2000 km (douteux pour le programme) : {0}
+{0} {1} ({2}): QTF calcolato della stazione da {3:F0}° a {4:F0}°, mediana {5:F0}°	{0} {1} ({2}) : QTF calculé de la station de {3:F0}° à {4:F0}°, médiane {5:F0}°
+Distanza dichiarata e calcolata dai locator: scarto massimo {0:F0} km.	Distance déclarée et distance calculée à partir des locators : écart maximal {0:F0} km.
+I log non riportano il puntamento: il confronto è sulla geometria (esiste lo scatter point?), non sul QTF.	Les logs n'indiquent pas le pointage : la comparaison porte sur la géométrie (le scatter point existe-t-il ?), non sur le QTF.
+Fonte: {0} {1}, {2}	Source : {0} {1}, {2}
+● azzurro: corrispondenti; ■ verde: stazione del log	● bleu clair : correspondants ; ■ vert : station du log
+scatter point: verde 370-1100 km, giallo fuori finestra, arancio QSO oltre 2000 km	scatter point : vert 370-1100 km, jaune hors fenêtre, orange QSO au-delà de 2000 km
+rosso: nessuno scatter point entro 3° (QSO non spiegato dal modello)	rouge : aucun scatter point à moins de 3° (QSO non expliqué par le modèle)
+Clic su un QSO della tabella.	Cliquez sur un QSO du tableau.
+{0} {1}Z  {2} {3} - {4} {5}, {6:F0} km (dichiarati {7:F0})	{0} {1}Z  {2} {3} - {4} {5}, {6:F0} km (déclarés {7:F0})
+Il modello non trova scatter point entro 3°: QSO non spiegato (tratta troppo corta o geometria sfavorevole).	Le modèle ne trouve aucun scatter point à moins de 3° : QSO non expliqué (trajet trop court ou géométrie défavorable).
+Scatter point {0} (dev. {1:F1}°), celle del luogo {2}	Scatter point {0} (écart {1:F1}°), cellules du lieu {2}
+  {0}: QTF {1:F0}° el {2:F1}°, {3:F0} km	  {0} : QTF {1:F0}° él. {2:F1}°, {3:F0} km
+Percorso diretto {0:F0}°: scarto del QTF {1:F0}°	Trajet direct {0:F0}° : écart du QTF {1:F0}°
+BENCHMARK AURORA	BENCHMARK AURORA
+  Il punto più probabile privilegia la tratta più corta; l'aurora può arrivare da tutto l'intervallo.	  Le point le plus probable privilégie le trajet le plus court ; l'aurore peut venir de toute la plage.
+Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW; Q65-30D in 144 MHz, PE1ITR [61]); il segnale è largo e spostato, serve il RIT o lo split.	Doppler jusqu'à 2 kHz sur 144 MHz, moindre sur 50 MHz (G3WPO) ; le 50 MHz est favorisé par rapport au 144 (G0ISW). Le FT8 ne décode souvent pas : mieux vaut CW/SSB ou Q65 avec des sous-modes larges (K7CW ; Q65-30D sur 144 MHz, PE1ITR [61]) ; le signal est large et décalé, il faut le RIT ou le split.
+Calcolo in diretta dagli spot dei cluster e dai dati in tempo reale (in SPORADIC-E: salti, nubi e foEs; in AURORA: scatter point e puntamenti).	Calcul en direct à partir des spots des clusters et des données en temps réel (dans SPORADIC-E : bonds, nuages et foEs ; dans AURORA : scatter point et pointages).
+Aurora radio: il calcolo in diretta (REAL-TIME) e il banco di prova sui QSO reali (BENCHMARK AURORA).	Aurore radio : le calcul en direct (REAL-TIME) et le banc d'essai sur des QSO réels (BENCHMARK AURORA).
+Banco di prova del modello dell'aurora su QSO reali pubblicati (EI5FK 2003-2005, PA0O): quanti ne spiega il modello e dove cade lo scatter point.	Banc d'essai du modèle de l'aurore sur des QSO réels publiés (EI5FK 2003-2005, PA0O) : combien le modèle en explique et où tombe le scatter point.

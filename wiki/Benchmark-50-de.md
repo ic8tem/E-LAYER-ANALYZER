@@ -23,6 +23,7 @@ Wählen Sie den **Tag** (beim Öffnen der mit den meisten Mehrfachsprung-QSOs) u
 
 ![Strecke](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- Ein **unscharfer gelber Punkt** markiert die Mitte jedes Sprungs, wo die Es-Wolke vermutet wird; auf der Strecke unter der Maus wird er größer.
 - **Maus nahe einer Strecke**: Linie und Symbole werden vergrößert, und das **6-stellige WWL-Feld** der Gegenstation erscheint.
 - **Linksklick** auf diese Strecke: Eine Abfrage fragt, ob **alle QSOs der Datei** (alle Tage) angezeigt werden sollen, deren Gegenstelle **innerhalb von 150 km** um diesen Punkt liegt. *Ja*: Die Karte wird geleert und zeigt diese QSOs im orangen Kreis; *Nein*: Die Karte bleibt, wie sie ist. *Zurück zu Tag und Uhrzeit* stellt die vorherige Auswahl wieder her.
 

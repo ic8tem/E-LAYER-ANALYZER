@@ -27,6 +27,7 @@ Carte **azimutale équidistante** centrée sur la station, avec le curseur **Dis
 - **Skip par secteur** (10° d'azimut) : arc orange = QSO le plus proche dans le secteur (bord de la zone de silence), arc vert = QSO le plus lointain, entre les deux la zone atteinte.
 - **Nuages Es** sur les carrés Maidenhead, colorés selon la foEs estimée.
 - Point milieu des bonds uniques (jaune), premier bond de la station (orange, cercle creux = premier bond court), premier bond de la station DX (violet).
+- Un **point jaune flou** marque le centre de chaque bond, où l'on présume que se trouve le nuage Es (aussi le centre du premier bond court, quand cette hypothèse est active).
 - Pour la journée entière, la **ligne rouge** relie heure par heure le barycentre des points milieux : c'est la dérive des nuages.
 
 ![Une heure](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)
