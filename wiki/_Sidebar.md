@@ -559,3 +559,163 @@
 - [常见问题](FAQ-zh)
 
 </details>
+
+<details><summary>Português (Brasil)</summary>
+
+- [E-LAYER ANALYZER](Home-pt-BR)
+- [Instalação](Installation-pt-BR)
+- [Primeiros passos](Getting-Started-pt-BR)
+- [SPORADIC-E](Sporadic-E-pt-BR)
+- [BENCHMARK Es](Benchmark-Es-pt-BR)
+- [BENCHMARK 50 MHz](Benchmark-50-pt-BR)
+- [F.A.I.](FAI-pt-BR)
+- [METEOR SCATTER](Meteor-Scatter-pt-BR)
+- [AURORA](Aurora-pt-BR)
+- [DATA COLLECTION](Data-Collection-pt-BR)
+- [LOG ADIF](Log-ADIF-pt-BR)
+- [Cores e idiomas](Colours-and-Languages-pt-BR)
+- [Pasta de dados](Data-Folder-pt-BR)
+- [Fontes e documentos](Sources-and-Technical-Document-pt-BR)
+- [Perguntas frequentes](FAQ-pt-BR)
+
+</details>
+
+<details><summary>Polski</summary>
+
+- [E-LAYER ANALYZER](Home-pl)
+- [Instalacja](Installation-pl)
+- [Pierwsze uruchomienie](Getting-Started-pl)
+- [SPORADIC-E](Sporadic-E-pl)
+- [BENCHMARK Es](Benchmark-Es-pl)
+- [BENCHMARK 50 MHz](Benchmark-50-pl)
+- [F.A.I.](FAI-pl)
+- [METEOR SCATTER](Meteor-Scatter-pl)
+- [AURORA](Aurora-pl)
+- [DATA COLLECTION](Data-Collection-pl)
+- [LOG ADIF](Log-ADIF-pl)
+- [Kolory i języki](Colours-and-Languages-pl)
+- [Folder danych](Data-Folder-pl)
+- [Źródła i dokumenty](Sources-and-Technical-Document-pl)
+- [Najczęstsze pytania](FAQ-pl)
+
+</details>
+
+<details><summary>Čeština</summary>
+
+- [E-LAYER ANALYZER](Home-cs)
+- [Instalace](Installation-cs)
+- [První kroky](Getting-Started-cs)
+- [SPORADIC-E](Sporadic-E-cs)
+- [BENCHMARK Es](Benchmark-Es-cs)
+- [BENCHMARK 50 MHz](Benchmark-50-cs)
+- [F.A.I.](FAI-cs)
+- [METEOR SCATTER](Meteor-Scatter-cs)
+- [AURORA](Aurora-cs)
+- [DATA COLLECTION](Data-Collection-cs)
+- [LOG ADIF](Log-ADIF-cs)
+- [Barvy a jazyky](Colours-and-Languages-cs)
+- [Datová složka](Data-Folder-cs)
+- [Zdroje a dokumenty](Sources-and-Technical-Document-cs)
+- [Časté dotazy](FAQ-cs)
+
+</details>
+
+<details><summary>Magyar</summary>
+
+- [E-LAYER ANALYZER](Home-hu)
+- [Telepítés](Installation-hu)
+- [Az első indítás](Getting-Started-hu)
+- [SPORADIC-E](Sporadic-E-hu)
+- [BENCHMARK Es](Benchmark-Es-hu)
+- [BENCHMARK 50 MHz](Benchmark-50-hu)
+- [F.A.I.](FAI-hu)
+- [METEOR SCATTER](Meteor-Scatter-hu)
+- [AURORA](Aurora-hu)
+- [DATA COLLECTION](Data-Collection-hu)
+- [LOG ADIF](Log-ADIF-hu)
+- [Színek és nyelvek](Colours-and-Languages-hu)
+- [Adatmappa](Data-Folder-hu)
+- [Források és dokumentumok](Sources-and-Technical-Document-hu)
+- [Gyakori kérdések](FAQ-hu)
+
+</details>
+
+<details><summary>Română</summary>
+
+- [E-LAYER ANALYZER](Home-ro)
+- [Instalare](Installation-ro)
+- [Prima pornire](Getting-Started-ro)
+- [SPORADIC-E](Sporadic-E-ro)
+- [BENCHMARK Es](Benchmark-Es-ro)
+- [BENCHMARK 50 MHz](Benchmark-50-ro)
+- [F.A.I.](FAI-ro)
+- [METEOR SCATTER](Meteor-Scatter-ro)
+- [AURORA](Aurora-ro)
+- [DATA COLLECTION](Data-Collection-ro)
+- [LOG ADIF](Log-ADIF-ro)
+- [Culori și limbi](Colours-and-Languages-ro)
+- [Dosarul de date](Data-Folder-ro)
+- [Surse și documente](Sources-and-Technical-Document-ro)
+- [Întrebări frecvente](FAQ-ro)
+
+</details>
+
+<details><summary>Ελληνικά</summary>
+
+- [E-LAYER ANALYZER](Home-el)
+- [Εγκατάσταση](Installation-el)
+- [Πρώτη εκκίνηση](Getting-Started-el)
+- [SPORADIC-E](Sporadic-E-el)
+- [BENCHMARK Es](Benchmark-Es-el)
+- [BENCHMARK 50 MHz](Benchmark-50-el)
+- [F.A.I.](FAI-el)
+- [METEOR SCATTER](Meteor-Scatter-el)
+- [AURORA](Aurora-el)
+- [DATA COLLECTION](Data-Collection-el)
+- [LOG ADIF](Log-ADIF-el)
+- [Χρώματα και γλώσσες](Colours-and-Languages-el)
+- [Φάκελος δεδομένων](Data-Folder-el)
+- [Πηγές και έγγραφα](Sources-and-Technical-Document-el)
+- [Συχνές ερωτήσεις](FAQ-el)
+
+</details>
+
+<details><summary>ไทย</summary>
+
+- [E-LAYER ANALYZER](Home-th)
+- [การติดตั้ง](Installation-th)
+- [การเริ่มใช้งานครั้งแรก](Getting-Started-th)
+- [SPORADIC-E](Sporadic-E-th)
+- [BENCHMARK Es](Benchmark-Es-th)
+- [BENCHMARK 50 MHz](Benchmark-50-th)
+- [F.A.I.](FAI-th)
+- [METEOR SCATTER](Meteor-Scatter-th)
+- [AURORA](Aurora-th)
+- [DATA COLLECTION](Data-Collection-th)
+- [LOG ADIF](Log-ADIF-th)
+- [สีและภาษา](Colours-and-Languages-th)
+- [โฟลเดอร์ข้อมูล](Data-Folder-th)
+- [แหล่งอ้างอิงและเอกสาร](Sources-and-Technical-Document-th)
+- [คำถามที่พบบ่อย](FAQ-th)
+
+</details>
+
+<details><summary>中文 (繁體)</summary>
+
+- [E-LAYER ANALYZER](Home-zh-TW)
+- [安裝](Installation-zh-TW)
+- [首次啟動](Getting-Started-zh-TW)
+- [SPORADIC-E](Sporadic-E-zh-TW)
+- [BENCHMARK Es](Benchmark-Es-zh-TW)
+- [BENCHMARK 50 MHz](Benchmark-50-zh-TW)
+- [F.A.I.](FAI-zh-TW)
+- [METEOR SCATTER](Meteor-Scatter-zh-TW)
+- [AURORA](Aurora-zh-TW)
+- [DATA COLLECTION](Data-Collection-zh-TW)
+- [LOG ADIF](Log-ADIF-zh-TW)
+- [配色與語言](Colours-and-Languages-zh-TW)
+- [資料資料夾](Data-Folder-zh-TW)
+- [來源與文件](Sources-and-Technical-Document-zh-TW)
+- [常見問題](FAQ-zh-TW)
+
+</details>

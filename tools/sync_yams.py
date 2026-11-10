@@ -224,13 +224,43 @@ s = rep(s, '        public static bool EnsureFiles(string dataDir, out string ms
 wr(p, s)
 print('YA-MS allineato in', DST)
 
-# --- Lingue di E-LAYER ANALYZER (tutte quelle di YAEC, piu' danese e tagalog): elenco e culture
-LANGS = [('it','Italiano','it-IT'),('en','English','en-GB'),('de','Deutsch','de-DE'),('fr','Français','fr-FR'),('es','Español','es-ES'),
-         ('pt','Português','pt-PT'),('nl','Nederlands','nl-NL'),('sv','Svenska','sv-SE'),('nb','Norsk (bokmål)','nb-NO'),('da','Dansk','da-DK'),
-         ('is','Íslenska','is-IS'),('et','Eesti','et-EE'),('lv','Latviešu','lv-LV'),('lt','Lietuvių','lt-LT'),('ru','Русский','ru-RU'),
-         ('uk','Українська','uk-UA'),('tr','Türkçe','tr-TR'),('af','Afrikaans','af-ZA'),('ar','العربية','ar-EG'),('he','עברית','he-IL'),
-         ('ur','اردو','ur-PK'),('hi','हिन्दी','hi-IN'),('bn','বাংলা','bn-BD'),('id','Bahasa Indonesia','id-ID'),('tl','Tagalog','fil-PH'),
-         ('zh','中文 (简体)','zh-CN'),('ja','日本語','ja-JP'),('ko','한국어','ko-KR')]
+# --- Lingue di E-LAYER ANALYZER: le stesse 36 di YA-MS e di YAEC (elenco e culture)
+LANGS = [('it', 'Italiano', 'it-IT'),
+         ('en', 'English', 'en-GB'),
+         ('de', 'Deutsch', 'de-DE'),
+         ('fr', 'Français', 'fr-FR'),
+         ('es', 'Español', 'es-ES'),
+         ('pt', 'Português (Portugal)', 'pt-PT'),
+         ('pt-BR', 'Português (Brasil)', 'pt-BR'),
+         ('nl', 'Nederlands', 'nl-NL'),
+         ('sv', 'Svenska', 'sv-SE'),
+         ('nb', 'Norsk (bokmål)', 'nb-NO'),
+         ('da', 'Dansk', 'da-DK'),
+         ('is', 'Íslenska', 'is-IS'),
+         ('et', 'Eesti', 'et-EE'),
+         ('lv', 'Latviešu', 'lv-LV'),
+         ('lt', 'Lietuvių', 'lt-LT'),
+         ('pl', 'Polski', 'pl-PL'),
+         ('cs', 'Čeština', 'cs-CZ'),
+         ('hu', 'Magyar', 'hu-HU'),
+         ('ro', 'Română', 'ro-RO'),
+         ('el', 'Ελληνικά', 'el-GR'),
+         ('ru', 'Русский', 'ru-RU'),
+         ('uk', 'Українська', 'uk-UA'),
+         ('tr', 'Türkçe', 'tr-TR'),
+         ('af', 'Afrikaans', 'af-ZA'),
+         ('ar', 'العربية', 'ar-EG'),
+         ('he', 'עברית', 'he-IL'),
+         ('ur', 'اردو', 'ur-PK'),
+         ('hi', 'हिन्दी', 'hi-IN'),
+         ('bn', 'বাংলা', 'bn-BD'),
+         ('th', 'ไทย', 'th-TH'),
+         ('id', 'Bahasa Indonesia', 'id-ID'),
+         ('tl', 'Tagalog', 'fil-PH'),
+         ('zh', '中文 (简体)', 'zh-CN'),
+         ('zh-TW', '中文 (繁體)', 'zh-TW'),
+         ('ja', '日本語', 'ja-JP'),
+         ('ko', '한국어', 'ko-KR')]
 p = os.path.join(ui, 'Lang.cs'); s = rd(p)
 langs = 'public static readonly string[][] Languages =\n        {\n' + ',\n'.join('            new[] { "%s", "%s" }' % (c, n) for c, n, _ in LANGS) + '\n        };'
 cult = 'static readonly string[][] Cultures =\n        {\n' + ',\n'.join('            new[] { "%s", "%s" }' % (c, k) for c, _, k in LANGS) + '\n        };'

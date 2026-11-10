@@ -22,7 +22,8 @@ namespace YAMS
             new[] { "de", "Deutsch" },
             new[] { "fr", "Français" },
             new[] { "es", "Español" },
-            new[] { "pt", "Português" },
+            new[] { "pt", "Português (Portugal)" },
+            new[] { "pt-BR", "Português (Brasil)" },
             new[] { "nl", "Nederlands" },
             new[] { "sv", "Svenska" },
             new[] { "nb", "Norsk (bokmål)" },
@@ -31,6 +32,11 @@ namespace YAMS
             new[] { "et", "Eesti" },
             new[] { "lv", "Latviešu" },
             new[] { "lt", "Lietuvių" },
+            new[] { "pl", "Polski" },
+            new[] { "cs", "Čeština" },
+            new[] { "hu", "Magyar" },
+            new[] { "ro", "Română" },
+            new[] { "el", "Ελληνικά" },
             new[] { "ru", "Русский" },
             new[] { "uk", "Українська" },
             new[] { "tr", "Türkçe" },
@@ -40,9 +46,11 @@ namespace YAMS
             new[] { "ur", "اردو" },
             new[] { "hi", "हिन्दी" },
             new[] { "bn", "বাংলা" },
+            new[] { "th", "ไทย" },
             new[] { "id", "Bahasa Indonesia" },
             new[] { "tl", "Tagalog" },
             new[] { "zh", "中文 (简体)" },
+            new[] { "zh-TW", "中文 (繁體)" },
             new[] { "ja", "日本語" },
             new[] { "ko", "한국어" }
         };
@@ -56,6 +64,7 @@ namespace YAMS
             new[] { "fr", "fr-FR" },
             new[] { "es", "es-ES" },
             new[] { "pt", "pt-PT" },
+            new[] { "pt-BR", "pt-BR" },
             new[] { "nl", "nl-NL" },
             new[] { "sv", "sv-SE" },
             new[] { "nb", "nb-NO" },
@@ -64,6 +73,11 @@ namespace YAMS
             new[] { "et", "et-EE" },
             new[] { "lv", "lv-LV" },
             new[] { "lt", "lt-LT" },
+            new[] { "pl", "pl-PL" },
+            new[] { "cs", "cs-CZ" },
+            new[] { "hu", "hu-HU" },
+            new[] { "ro", "ro-RO" },
+            new[] { "el", "el-GR" },
             new[] { "ru", "ru-RU" },
             new[] { "uk", "uk-UA" },
             new[] { "tr", "tr-TR" },
@@ -73,9 +87,11 @@ namespace YAMS
             new[] { "ur", "ur-PK" },
             new[] { "hi", "hi-IN" },
             new[] { "bn", "bn-BD" },
+            new[] { "th", "th-TH" },
             new[] { "id", "id-ID" },
             new[] { "tl", "fil-PH" },
             new[] { "zh", "zh-CN" },
+            new[] { "zh-TW", "zh-TW" },
             new[] { "ja", "ja-JP" },
             new[] { "ko", "ko-KR" }
         };
@@ -85,21 +101,28 @@ namespace YAMS
 
         public static int IndexOf(string code)
         {
-            for (int i = 0; i < Languages.Length; i++) if (Languages[i][0] == code) return i;
+            for (int i = 0; i < Languages.Length; i++) if (string.Equals(Languages[i][0], code, StringComparison.OrdinalIgnoreCase)) return i;
             return -1;
         }
+
+        // codice canonico (pt-BR, zh-TW con le maiuscole giuste) o null
+        static string Canonical(string code) { int i = IndexOf(code); return i < 0 ? null : Languages[i][0]; }
 
         // Lingua all'avvio: quella salvata in config.ini (chiave "lingua"); al primo avvio quella del sistema, se prevista, altrimenti l'italiano
         public static void Init(string saved)
         {
-            string code = (saved ?? "").Trim().ToLowerInvariant();
-            if (IndexOf(code) < 0)
+            string code = Canonical((saved ?? "").Trim());
+            if (code == null)
             {
                 code = "it";
                 try
                 {
-                    string os = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
-                    if (IndexOf(os) >= 0) code = os;
+                    CultureInfo ui = CultureInfo.CurrentUICulture;
+                    string name = ui.Name, os = ui.TwoLetterISOLanguageName.ToLowerInvariant();
+                    // varianti: portoghese del Brasile, cinese tradizionale (Taiwan, Hong Kong, Macao, Hant)
+                    if (name.StartsWith("pt-BR", StringComparison.OrdinalIgnoreCase)) os = "pt-BR";
+                    else if (os == "zh" && (name.Contains("TW") || name.Contains("HK") || name.Contains("MO") || name.Contains("Hant"))) os = "zh-TW";
+                    if (Canonical(os) != null) code = Canonical(os);
                 }
                 catch { }
             }
@@ -110,7 +133,7 @@ namespace YAMS
         // Carica la lingua (per "it" nessun file: si usano le chiavi)
         public static void Load(string code)
         {
-            if (IndexOf(code) < 0) code = "it";
+            code = Canonical(code) ?? "it";
             Dictionary<string, string> m = new Dictionary<string, string>(StringComparer.Ordinal);
             if (code != "it")
             {
