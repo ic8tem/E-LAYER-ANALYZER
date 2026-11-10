@@ -2,7 +2,7 @@
 
 *إعداد Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · **العربية** · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** برنامج مجاني لهواة الراديو يحلّل كل أنماط انتشار VHF التي تتدخل فيها **الطبقة E** من الأيونوسفير: **الطبقة E المتفرقة (sporadic-E)** (بما فيها تعدد القفزات بين القارات)، و**F.A.I.** (عدم الانتظام المحاذي لخطوط المجال المغناطيسي)، و**التشتت النيزكي (meteor scatter)** (مع برنامج YA-MS المدمج)، و**الشفق الراديوي (radio aurora)**. يعمل على **Windows (64 و32 بت) وLinux وRaspberry Pi وMac**، بـ**28 لغة**، ولا يكتب شيئاً خارج مجلده الخاص.
+**E-LAYER ANALYZER** برنامج مجاني لهواة الراديو يحلّل كل أنماط انتشار VHF التي تتدخل فيها **الطبقة E** من الأيونوسفير: **الطبقة E المتفرقة (sporadic-E)** (بما فيها تعدد القفزات بين القارات)، و**F.A.I.** (عدم الانتظام المحاذي لخطوط المجال المغناطيسي)، و**التشتت النيزكي (meteor scatter)** (مع برنامج YA-MS المدمج)، و**الشفق الراديوي (radio aurora)**. يعمل على **Windows (64 و32 بت) وLinux وRaspberry Pi وMac**، بـ**36 لغة**، ولا يكتب شيئاً خارج مجلده الخاص.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

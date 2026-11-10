@@ -6,8 +6,8 @@
 
 থিমগুলো YA-MS-এর, যা আবার এসেছে YAEC থেকে: **হালকা**, **রাত**, **কালো**, আটটি **প্যাস্টেল** (আসমানি, কমলা, অ্যাকোয়ামেরিন, সবুজ, গোলাপি, লাইল্যাক, ইন্ডিগো, বাদামি) এবং **উল্কা-রেখা**। এগুলো ডান দিকের ওপরে বেছে নেওয়া হয়।
 
-## ভাষা (28)
+## ভাষা (36)
 
-Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어।
+Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어।
 
 E-LAYER ANALYZER ও YA-MS-এর ইন্টারফেস, হিসাবের নির্বাচনসমূহের সারসংক্ষেপ, ব্যবহার নির্দেশিকা, প্রযুক্তিগত প্রতিবেদন এবং উৎস – সবই অনূদিত। F.A.I./অরোরা দৃশ্যে **Scatter trail** শব্দটি সব ভাষায় একই।

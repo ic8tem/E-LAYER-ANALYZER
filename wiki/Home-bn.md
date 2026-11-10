@@ -2,7 +2,7 @@
 
 *রচনা: Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · **বাংলা** · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** রেডিও অ্যামেচারদের জন্য একটি বিনামূল্যের প্রোগ্রাম, যা আয়নমণ্ডলের **E স্তর** জড়িত সব VHF প্রোপাগেশন মোড বিশ্লেষণ করে: **স্পোরাডিক-E** (আন্তঃমহাদেশীয় মাল্টি-হপসহ), **F.A.I.** (ভূচৌম্বক ক্ষেত্র বরাবর সারিবদ্ধ অনিয়মিততা), **মিটিওর স্ক্যাটার** (অন্তর্নির্মিত YA-MS প্রোগ্রামসহ) এবং **রেডিও অরোরা**। এটি চলে **Windows (64 ও 32 বিট), Linux, Raspberry Pi ও Mac**-এ, **28টি ভাষায়**, এবং নিজের ফোল্ডারের বাইরে কিছুই লেখে না।
+**E-LAYER ANALYZER** রেডিও অ্যামেচারদের জন্য একটি বিনামূল্যের প্রোগ্রাম, যা আয়নমণ্ডলের **E স্তর** জড়িত সব VHF প্রোপাগেশন মোড বিশ্লেষণ করে: **স্পোরাডিক-E** (আন্তঃমহাদেশীয় মাল্টি-হপসহ), **F.A.I.** (ভূচৌম্বক ক্ষেত্র বরাবর সারিবদ্ধ অনিয়মিততা), **মিটিওর স্ক্যাটার** (অন্তর্নির্মিত YA-MS প্রোগ্রামসহ) এবং **রেডিও অরোরা**। এটি চলে **Windows (64 ও 32 বিট), Linux, Raspberry Pi ও Mac**-এ, **36টি ভাষায়**, এবং নিজের ফোল্ডারের বাইরে কিছুই লেখে না।
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

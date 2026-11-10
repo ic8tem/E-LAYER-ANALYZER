@@ -2,7 +2,7 @@
 
 *Costantino IC8TEM द्वारा* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · **हिन्दी** · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** रेडियो शौकीनों के लिए एक निःशुल्क प्रोग्राम है जो आयनमंडल की **E परत** से जुड़े हर VHF प्रसार मोड का विश्लेषण करता है: **स्पोरैडिक-E** (अंतरमहाद्वीपीय बहु-हॉप सहित), **F.A.I.** (क्षेत्र-संरेखित अनियमितताएँ), **मीटियोर स्कैटर** (अंतर्निहित YA-MS प्रोग्राम के साथ) और **रेडियो ऑरोरा**। यह **Windows (64 और 32 बिट), Linux, Raspberry Pi और Mac** पर, **28 भाषाओं** में चलता है, और अपने फ़ोल्डर के बाहर कुछ भी नहीं लिखता।
+**E-LAYER ANALYZER** रेडियो शौकीनों के लिए एक निःशुल्क प्रोग्राम है जो आयनमंडल की **E परत** से जुड़े हर VHF प्रसार मोड का विश्लेषण करता है: **स्पोरैडिक-E** (अंतरमहाद्वीपीय बहु-हॉप सहित), **F.A.I.** (क्षेत्र-संरेखित अनियमितताएँ), **मीटियोर स्कैटर** (अंतर्निहित YA-MS प्रोग्राम के साथ) और **रेडियो ऑरोरा**। यह **Windows (64 और 32 बिट), Linux, Raspberry Pi और Mac** पर, **36 भाषाओं** में चलता है, और अपने फ़ोल्डर के बाहर कुछ भी नहीं लिखता।
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 
