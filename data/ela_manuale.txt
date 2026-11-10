@@ -77,6 +77,7 @@ H2|4.1 Caricare un log
 P|La sottolinguetta BENCHMARK Es è un banco di prova dell'E-sporadico su un log ADIF intero, anche di un'altra stazione. Carica ADIF apre il file (il programma lo ricorda e lo ricarica all'avvio), Scarica ADIF lo toglie. Stazione al centro propone il nominativo e il locator più frequenti del log; si possono cambiare e confermare con Applica.
 LI|La posizione di trasmissione è il MY_GRIDSQUARE di ogni QSO; le posizioni di ricezione sono i GRIDSQUARE (i locator mancanti o a 4 caratteri si prendono da CALL3).
 LI|Si possono escludere i QSO con un altro PROP_MODE e quelli sotto i 500 km (900 km in 144 MHz); i transequatoriali si escludono sempre, salvo PROP_MODE=ES.
+LI|Sulla mappa un pallino giallo sfocato segna il centro di ogni salto, dove si presume la nube di E-sporadico (anche il centro del primo salto corto, se l'ipotesi è attiva).
 H2|4.2 Giornate, orari e calcoli
 P|La tabella QSO per giornata elenca le giornate con numero di QSO, bande, distanza massima e multi-salti; il clic su una giornata riempie la tabella Orari della giornata, con una riga per ogni ora UTC e la riga Tutta la giornata. La mappa azimutale, con il cursore della distanza massima, disegna lo skip per settori di 10° (arco arancio = QSO più vicino, settore verde = distanze raggiunte), le nubi sui quadrati e, sulla giornata intera, lo spostamento orario delle nubi (linea rossa).
 P|La pagina Calcoli proposti riporta lo skip per settori, la foEs stimata con la MUF attesa a 1000, 1500, 2000 e 2400 km, le nubi stimate, la verifica del multi-salto (salti uguali contro primo salto corto, confrontati con le nubi viste in singolo salto entro ±30 minuti) e lo spostamento delle nubi ora per ora.
@@ -86,6 +87,7 @@ P|La sottolinguetta BENCHMARK 50 MHz è dedicata all'E-sporadico multi-salto in 
 LI|Si mostrano i QSO in 50 MHz multi-salto, cioè oltre i 3100 km (regola dell'autore); il numero dei salti segue la tabella IK3XTV.
 LI|Giorno, dalle… alle… UTC: la giornata (all'apertura quella con più QSO multi-salto) e l'orario, a passi di 15 minuti.
 LI|foEs (facoltativa): colora le tratte con la foEs minima e la riporta in tabella. Quota Es e Primo salto corto entro 1200 km come nelle altre linguette.
+LI|Il pallino giallo sfocato segna il centro di ogni salto, dove si presume la nube di E-sporadico; sulla tratta sotto il mouse diventa più grande.
 H2|5.2 La mappa di Mercatore
 P|La mappa è di Mercatore a centro libero. Avvicinando il mouse a una tratta, linea e icone si ingrandiscono e compare il quadrato WWL a 6 caratteri del corrispondente. Con il clic sinistro su quella tratta un popup chiede se mostrare tutti i QSO del file, di tutte le giornate, con la posizione terminale entro 150 km: Sì svuota la mappa e mostra quei QSO dentro il cerchio arancio, No lascia la mappa com'è. Il pulsante Torna a giorno e orario riporta alla scelta precedente.
 H1|6. F.A.I.

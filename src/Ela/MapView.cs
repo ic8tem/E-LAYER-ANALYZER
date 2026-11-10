@@ -15,7 +15,7 @@ namespace ELA
     public class MapCell { public double Lat0, Lon0, DLat, DLon; public Color Fill; public string Tip; }
     public class MapLine { public List<Point> Pts = new List<Point>(); public Color Color; public double Width = 1.5; public bool Dashed; }   // Point(X=lon, Y=lat)
     public class MapPoly { public List<Point> Pts = new List<Point>(); public Color Fill; public Color Stroke; public double Width; }   // poligono pieno, Point(X=lon, Y=lat)
-    public class MapMarker { public double Lat, Lon, Radius = 4; public Color Fill, Stroke = Colors.Black; public string Label; public bool Square, Ring; public Color LabelColor = Pal.Fore; }
+    public class MapMarker { public double Lat, Lon, Radius = 4; public Color Fill, Stroke = Colors.Black; public string Label; public bool Square, Ring, Glow; public Color LabelColor = Pal.Fore; }
 
     public class MapView : Control
     {
@@ -375,6 +375,16 @@ namespace ELA
                 Point c = ToScreen(m.Lat, m.Lon);
                 if (c.X < -10 || c.X > W + 10 || c.Y < -10 || c.Y > H + 10) continue;
                 double r = m.Radius;
+                if (m.Glow)
+                {
+                    // pallino sfocato (nube Es presunta): gradiente radiale dal colore pieno al trasparente
+                    RadialGradientBrush g = new RadialGradientBrush();
+                    g.GradientStops.Add(new GradientStop(Color.FromArgb(200, m.Fill.R, m.Fill.G, m.Fill.B), 0));
+                    g.GradientStops.Add(new GradientStop(Color.FromArgb(110, m.Fill.R, m.Fill.G, m.Fill.B), 0.45));
+                    g.GradientStops.Add(new GradientStop(Color.FromArgb(0, m.Fill.R, m.Fill.G, m.Fill.B), 1));
+                    ctx.DrawEllipse(g, null, c, r, r);
+                    continue;
+                }
                 if (m.Ring) ctx.DrawEllipse(null, Pal.P(m.Fill, 2), c, r, r);
                 else if (m.Square) ctx.DrawRectangle(Pal.B(m.Fill), Pal.P(m.Stroke, 1), new Rect(c.X - r, c.Y - r, 2 * r, 2 * r));
                 else ctx.DrawEllipse(Pal.B(m.Fill), Pal.P(m.Stroke, 1), c, r, r);

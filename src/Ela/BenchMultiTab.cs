@@ -373,6 +373,8 @@ namespace ELA
                     double mla, mlo; Geo.Intermediate(q.LatTx, q.LonTx, q.LatRx, q.LonRx, 0.5, out mla, out mlo);
                     map.Markers.Add(new MapMarker { Lat = mla, Lon = mlo, Radius = 0, Fill = c, Stroke = c, Label = "TEP", LabelColor = c });
                 }
+                // pallino giallo sfocato al centro di ogni salto, dove si presume la nube di E-sporadico (richiesta dell'autore)
+                foreach (EsHop hc in q.Path.Points) map.Markers.Insert(0, new MapMarker { Lat = hc.Lat, Lon = hc.Lon, Radius = 10, Fill = Pal.Yellow, Glow = true });
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = 3, Fill = c });
                 if (q.Path.FirstA != null) map.Markers.Add(new MapMarker { Lat = q.Path.FirstA.Lat, Lon = q.Path.FirstA.Lon, Radius = 2.5, Fill = Pal.Orange, Square = true });
             }
@@ -382,6 +384,8 @@ namespace ELA
                 BenchQso q = hover;
                 MapLine glow = new MapLine { Color = Pal.A(90, Pal.Yellow), Width = 11 }; glow.Pts.AddRange(geo[q]); map.Lines.Add(glow);
                 MapLine l = new MapLine { Color = Pal.Orange, Width = 3.6 }; l.Pts.AddRange(geo[q]); map.Lines.Add(l);
+                foreach (EsHop hc in q.Path.Points) map.Markers.Add(new MapMarker { Lat = hc.Lat, Lon = hc.Lon, Radius = 20, Fill = Pal.Yellow, Glow = true });
+                if (chkShort.IsChecked == true && q.Path.ShortA != null) map.Markers.Add(new MapMarker { Lat = q.Path.ShortA.Lat, Lon = q.Path.ShortA.Lon, Radius = 20, Fill = Pal.Yellow, Glow = true });
                 for (int i = 0; i < q.Path.Points.Count; i++)
                 {
                     EsHop h = q.Path.Points[i];
@@ -408,6 +412,7 @@ namespace ELA
                 if (chk2.IsChecked == true && raw[1].Count > 0) map.Legend.Add(new KeyValuePair<string, Color>(Lang.F("stazione 2: {0}", myCall[1]), SetColor(1)));
             }
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto della stazione / ○ primo salto corto"), Pal.Orange));
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("● giallo sfocato: centro del salto, dove si presume la nube Es"), Pal.Yellow));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("mouse vicino a una tratta: ingrandita con il WWL; clic sinistro: QSO entro 150 km"), Pal.Yellow));
             if (areaMode) map.Legend.Add(new KeyValuePair<string, Color>(Lang.F("cerchio arancio: {0:F0} km attorno al punto scelto", AreaKm), Pal.Orange));
             map.LegendTitle = fo ? Lang.T("Nubi: foEs minima <5 / 7 / 10 / 14 / 20 / >20 MHz = blu, azzurro, verde, giallo, arancio, rosso") : "";

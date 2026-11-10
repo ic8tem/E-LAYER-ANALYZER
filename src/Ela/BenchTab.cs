@@ -497,6 +497,10 @@ namespace ELA
                     map.Lines.Add(MapView.GreatCircle(q.LatTx, q.LonTx, q.LatRx, q.LonRx, isSel ? Pal.Yellow : Pal.A(150, bc), isSel ? 3 : 1.2));
                 map.Markers.Add(new MapMarker { Lat = q.LatRx, Lon = q.LonRx, Radius = isSel ? 5 : 3, Fill = bc, Label = isSel || cur.Count <= 25 ? q.Call : null });
                 EsPath p = q.Path;
+                // pallino giallo sfocato al centro di ogni salto, dove si presume la nube di E-sporadico (richiesta dell'autore)
+                foreach (EsHop hc in p.Points) map.Markers.Insert(0, new MapMarker { Lat = hc.Lat, Lon = hc.Lon, Radius = isSel ? 18 : 11, Fill = Pal.Yellow, Glow = true });
+                if (p.ShortA != null && p.Hops >= 2 && chkShort.IsChecked == true)
+                    map.Markers.Insert(0, new MapMarker { Lat = p.ShortA.Lat, Lon = p.ShortA.Lon, Radius = isSel ? 18 : 11, Fill = Pal.Yellow, Glow = true });
                 if (p.Hops == 1) map.Markers.Add(new MapMarker { Lat = p.FirstA.Lat, Lon = p.FirstA.Lon, Radius = isSel ? 5 : 3, Fill = Pal.Yellow, Square = true });
                 else if (p.Hops >= 2)
                 {
@@ -523,6 +527,7 @@ namespace ELA
             map.Markers.Add(new MapMarker { Lat = cLat, Lon = cLon, Radius = 5, Fill = Pal.Green, Square = true, Label = me, LabelColor = Pal.Green });
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("10 m / 6 m / 4 m / 2 m: verde, azzurro, viola, arancio"), Pal.Azure));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ giallo: punto medio (singolo salto)"), Pal.Yellow));
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("● giallo sfocato: centro del salto, dove si presume la nube Es"), Pal.Yellow));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto della stazione / ○ primo salto corto"), Pal.Orange));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto del corrispondente"), Pal.Violet));
             if (chkSkip.IsChecked == true)
