@@ -1,4 +1,5 @@
-# E-LAYER ANALYZER - compilazione e installatori per Windows (64 e 32 bit), Linux, Raspberry Pi (ARM64) e Mac.
+# E-LAYER ANALYZER - compilazione e installatori per Windows (64 e 32 bit), Linux (x64, ARM64, ARM 32 bit, pacchetti .deb),
+# Raspberry Pi e Mac (Apple Silicon e Intel: .dmg e .app in zip).
 # A ogni push sul ramo main: solo compilazione di controllo su Linux (i minuti Mac costano 10 volte, Windows 2 volte).
 # Con un push sul ramo release (o un tag vX.Y.Z, o avviandolo a mano): installatori per Windows, Linux e Mac;
 # con il ramo release o il tag crea anche la Release vX.Y.Z (versione letta dal file VERSION).
@@ -51,7 +52,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force dist | Out-Null
-          Compress-Archive -Path publish\${{ matrix.rid }}\* -DestinationPath dist\E-LAYER-ANALYZER-${{ env.VER }}-windows-${{ matrix.arch }}-portatile.zip
+          Compress-Archive -Path publish\${{ matrix.rid }}\* -DestinationPath dist\E-LAYER-ANALYZER-${{ env.VER }}-win-${{ matrix.arch }}-portatile.zip
       - uses: actions/upload-artifact@v4
         with:
           name: windows-${{ matrix.arch }}
@@ -82,25 +83,53 @@ jobs:
           git config user.name "github-actions"; git config user.email "actions@github.com"
           git add -A && git commit -q -m "registro ${GITHUB_SHA::7}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" ci-log
-      - name: Pacchetto
-        run: |
-          mkdir -p dist pkg
-          cp -R publish/linux-x64 pkg/E-LAYER-ANALYZER
-          cp installer/linux-install.sh pkg/E-LAYER-ANALYZER/installa.sh
-          cp src/Assets/ela-256.png pkg/E-LAYER-ANALYZER/ela.png
-          chmod +x pkg/E-LAYER-ANALYZER/installa.sh pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER
-          tar -C pkg -czf dist/E-LAYER-ANALYZER-$VER-linux-x64.tar.gz E-LAYER-ANALYZER
-      - name: Compila e impacchetta per Raspberry Pi (Linux ARM64)
+      - name: Compila per Linux ARM64 e ARM 32 bit (Raspberry Pi)
+        if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release' || github.event_name == 'workflow_dispatch'
         run: |
           set -o pipefail
-          dotnet publish E-LAYER-ANALYZER.csproj -c Release -r linux-arm64 --self-contained true -p:Version=$VER -p:DebugType=none -o publish/linux-arm64 2>&1 | tail -3
-          mkdir -p pkgpi
-          cp -R publish/linux-arm64 pkgpi/E-LAYER-ANALYZER
-          cp installer/linux-install.sh pkgpi/E-LAYER-ANALYZER/installa.sh
-          cp src/Assets/ela-256.png pkgpi/E-LAYER-ANALYZER/ela.png
-          chmod +x pkgpi/E-LAYER-ANALYZER/installa.sh pkgpi/E-LAYER-ANALYZER/E-LAYER-ANALYZER
-          tar -C pkgpi -czf dist/E-LAYER-ANALYZER-$VER-raspberry-arm64.tar.gz E-LAYER-ANALYZER
-          file publish/linux-arm64/E-LAYER-ANALYZER | tee -a build.log
+          for R in linux-arm64 linux-arm; do
+            dotnet publish E-LAYER-ANALYZER.csproj -c Release -r $R --self-contained true -p:Version=$VER -p:DebugType=none -o publish/$R 2>&1 | tail -3
+            file publish/$R/E-LAYER-ANALYZER | tee -a build.log
+          done
+      - name: Pacchetti portatili (.tar.gz) e .deb
+        run: |
+          mkdir -p dist
+          for R in linux-x64 linux-arm64 linux-arm; do
+            [ -d publish/$R ] || continue
+            rm -rf pkg && mkdir -p pkg
+            cp -R publish/$R pkg/E-LAYER-ANALYZER
+            cp installer/linux-install.sh pkg/E-LAYER-ANALYZER/installa.sh
+            cp src/Assets/ela-256.png pkg/E-LAYER-ANALYZER/ela.png
+            chmod +x pkg/E-LAYER-ANALYZER/installa.sh pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER
+            tar -C pkg -czf dist/E-LAYER-ANALYZER-$VER-$R-portatile.tar.gz E-LAYER-ANALYZER
+          done
+          # .deb per PC (amd64) e Raspberry Pi OS 64 bit (arm64): programma in /opt/e-layer-analyzer; al primo avvio
+          # (e dopo ogni aggiornamento) si copia in ~/E-LAYER-ANALYZER, perche' la cartella data deve stare accanto al programma
+          for P in "linux-x64 amd64" "linux-arm64 arm64"; do
+            set -- $P; R=$1; A=$2
+            [ -d publish/$R ] || continue
+            D=deb-$A; rm -rf $D
+            mkdir -p $D/DEBIAN $D/opt/e-layer-analyzer $D/usr/bin $D/usr/share/applications $D/usr/share/icons/hicolor/256x256/apps
+            cp -R publish/$R/. $D/opt/e-layer-analyzer/
+            echo "$VER" > $D/opt/e-layer-analyzer/.versione
+            chmod +x $D/opt/e-layer-analyzer/E-LAYER-ANALYZER
+            cp installer/deb-avvio.sh $D/usr/bin/e-layer-analyzer && chmod 755 $D/usr/bin/e-layer-analyzer
+            cp src/Assets/ela-256.png $D/usr/share/icons/hicolor/256x256/apps/e-layer-analyzer.png
+            printf '%s\n' "[Desktop Entry]" "Type=Application" "Name=E-LAYER ANALYZER" \
+              "Comment=Propagazione dello strato E: E-sporadico, F.A.I., meteor scatter, aurora" \
+              "Exec=e-layer-analyzer" "Icon=e-layer-analyzer" "Terminal=false" "Categories=HamRadio;Science;Utility;" \
+              > $D/usr/share/applications/e-layer-analyzer.desktop
+            SIZE=$(du -sk $D/opt | cut -f1)
+            printf '%s\n' "Package: e-layer-analyzer" "Version: $VER" "Section: hamradio" "Priority: optional" "Architecture: $A" \
+              "Installed-Size: $SIZE" "Maintainer: Costantino Cerrotta IC8TEM <ic8tem@gmail.com>" \
+              "Depends: libc6, libfontconfig1, libx11-6, libice6, libsm6, libicu74 | libicu72 | libicu71 | libicu70 | libicu67 | libicu66 | libicu63" \
+              "Homepage: https://github.com/${GITHUB_REPOSITORY}" \
+              "Description: E-LAYER ANALYZER - propagazione dello strato E" \
+              " E-sporadico, F.A.I., meteor scatter (YA-MS) e aurora in VHF, a cura di Costantino IC8TEM." \
+              > $D/DEBIAN/control
+            dpkg-deb --root-owner-group --build $D dist/e-layer-analyzer_${VER}_$A.deb
+          done
+          ls -la dist
       - name: Fotografie delle linguette (schermo virtuale)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
@@ -161,8 +190,8 @@ jobs:
           cp "installer/macos-install.command" "pkg/E-LAYER-ANALYZER/Installa E-LAYER-ANALYZER.command"
           chmod +x "pkg/E-LAYER-ANALYZER/Installa E-LAYER-ANALYZER.command"
           cp LEGGIMI.txt pkg/E-LAYER-ANALYZER/
-          ARCH=$([ "${{ matrix.rid }}" = "osx-arm64" ] && echo "apple-silicon" || echo "intel")
-          hdiutil create -volname "E-LAYER ANALYZER" -srcfolder pkg/E-LAYER-ANALYZER -ov -format UDZO "dist/E-LAYER-ANALYZER-$VER-mac-$ARCH.dmg"
+          hdiutil create -volname "E-LAYER ANALYZER" -srcfolder pkg/E-LAYER-ANALYZER -ov -format UDZO "dist/E-LAYER-ANALYZER-$VER-${{ matrix.rid }}.dmg"
+          ditto -c -k --keepParent "$APP" "dist/E-LAYER-ANALYZER-$VER-${{ matrix.rid }}-app.zip"
       - uses: actions/upload-artifact@v4
         with:
           name: macos-${{ matrix.rid }}
@@ -189,10 +218,12 @@ jobs:
             E-LAYER ANALYZER - analisi dei modi di propagazione dello strato E (E-sporadico, F.A.I., meteor scatter con YA-MS, aurora).
             A cura di Costantino IC8TEM.
 
-            - Windows 64 bit: E-LAYER-ANALYZER-...-windows-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure lo zip portatile.
-            - Windows 32 bit: E-LAYER-ANALYZER-...-windows-x86-setup.exe oppure lo zip portatile x86.
-            - Linux (PC): E-LAYER-ANALYZER-...-linux-x64.tar.gz, estrarre e lanciare ./installa.sh (installa in ~/E-LAYER-ANALYZER).
-            - Raspberry Pi 3/4/5 con Raspberry Pi OS a 64 bit: E-LAYER-ANALYZER-...-raspberry-arm64.tar.gz, estrarre e lanciare ./installa.sh.
+            - Windows 64 bit: E-LAYER-ANALYZER-...-win-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure ...-win-x64-portatile.zip.
+            - Windows 32 bit: E-LAYER-ANALYZER-...-win-x86-setup.exe oppure ...-win-x86-portatile.zip.
+            - Linux 64 bit: e-layer-analyzer_..._amd64.deb (sudo apt install ./e-layer-analyzer_..._amd64.deb) oppure ...-linux-x64-portatile.tar.gz.
+            - Raspberry Pi OS 64 bit: e-layer-analyzer_..._arm64.deb oppure ...-linux-arm64-portatile.tar.gz; Raspberry Pi OS 32 bit: ...-linux-arm-portatile.tar.gz.
+            - Portatili Linux: estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh per installare in ~/E-LAYER-ANALYZER con l'icona nel menu.
+            - Con il .deb il programma si avvia dal menu: al primo avvio si copia in ~/E-LAYER-ANALYZER, con la cartella data accanto.
             - Nessun dato in AppData: tutto sta nella cartella data accanto al programma.
-            - Mac: E-LAYER-ANALYZER-...-mac-apple-silicon.dmg (M1/M2/M3/M4) o -mac-intel.dmg; aprire il .dmg, clic destro su "Installa E-LAYER-ANALYZER.command" > Apri.
+            - Mac: E-LAYER-ANALYZER-...-osx-arm64.dmg (Apple Silicon M1-M4) o ...-osx-x64.dmg (Intel); aprire il .dmg, clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa ...-osx-arm64-app.zip / ...-osx-x64-app.zip con la sola applicazione.
           files: dist/*

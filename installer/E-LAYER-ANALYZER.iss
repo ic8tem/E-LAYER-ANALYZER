@@ -27,7 +27,7 @@ ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 #endif
 OutputDir=..\dist
-OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-windows-{#Arch}-setup
+OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-win-{#Arch}-setup
 SetupIconFile=..\src\Assets\ela.ico
 UninstallDisplayIcon={app}\E-LAYER-ANALYZER.exe
 Compression=lzma2
