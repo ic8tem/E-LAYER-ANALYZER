@@ -69,7 +69,7 @@ namespace ELA
             p.HopKm = p.DistKm / n;
             p.SecPhi = Geo.SecantFactor(p.HopKm, Hkm);
             p.FoEsMin = s.FreqMHz / p.SecPhi;
-            p.ElevDeg = Geo.ElevationDeg(p.HopKm / 2, Hkm, 0);
+            p.ElevDeg = Geo.ElevationDeg(p.HopKm / 2, Hkm, 0, EsK);
             for (int k = 1; k <= n; k++)
             {
                 double la, lo;
@@ -101,7 +101,13 @@ namespace ELA
         public static double MinKm50 = 450;   // regola dell'autore: in 50 MHz entro 450 km non e' E-sporadico
         // 28 MHz: si segue IK3XTV (lo skip si accorcia al diminuire della frequenza): stessa nube (stessa foEs), quindi
         // la distanza minima dei 28 MHz e' quella in cui sec(phi) vale sec(phi a MinKm50) x 28,5 / 50,2 (legge della secante)
-        public static double MinKm28 { get { return ScaledMinKm(MinKm50, 50.2, 28.5, 105); } }
+        public static double MinKm28 { get { return ScaledMinKm(MinKm50, 50.2, 28.5, DefaultH); } }
+
+        // Quota dell'E-sporadico e rifrazione troposferica (correzione approvata dall'autore): con 110 km, raggio terrestre
+        // equivalente 4/3 ed elevazione minima di 1 grado il singolo salto arriva a ~2440 km, quindi anche i 2400 km della
+        // tabella IK3XTV [3] sono calcolabili (senza rifrazione, a 100-110 km, il salto massimo e' 2243-2351 km a 0 gradi).
+        // La rifrazione vale per l'elevazione e la portata; la legge della secante resta sulla geometria vera (cautelativa).
+        public const double DefaultH = 110, DefaultElevMin = 1, EsK = 4.0 / 3.0;
         public static double ScaledMinKm(double km, double fFrom, double fTo, double h)
         {
             double target = Geo.SecantFactor(km, h) * fTo / fFrom;

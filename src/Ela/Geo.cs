@@ -134,17 +134,19 @@ namespace ELA
         // ------------------------------------------------------------ strato E: elevazione, salti, angolo di incidenza
         // Elevazione (gradi) di un punto alla quota H (km) visto da una stazione alla quota h (km) a distanza al suolo d (km).
         // Geometria sferica esatta, equivalente alla formula (2) dell'articolo F.A.I. [1] e alla formula di YA-MS.
-        public static double ElevationDeg(double dKm, double Hkm, double hKm)
+        public static double ElevationDeg(double dKm, double Hkm, double hKm) { return ElevationDeg(dKm, Hkm, hKm, K); }
+        public static double ElevationDeg(double dKm, double Hkm, double hKm, double k)
         {
-            double Re = R * K, x = dKm / Re, a = Re + hKm, b = Re + Hkm;
+            double Re = R * k, x = dKm / Re, a = Re + hKm, b = Re + Hkm;
             return Math.Atan2(b * Math.Cos(x) - a, b * Math.Sin(x)) * R2D;
         }
 
         // Distanza al suolo (km) del punto di riflessione di un salto che parte con elevazione e (gradi), quota H (km)
         // = meta' della lunghezza del salto.
-        public static double HalfHopKm(double elevDeg, double Hkm)
+        public static double HalfHopKm(double elevDeg, double Hkm) { return HalfHopKm(elevDeg, Hkm, K); }
+        public static double HalfHopKm(double elevDeg, double Hkm, double k)
         {
-            double e = elevDeg * D2R, Re = R * K;
+            double e = elevDeg * D2R, Re = R * k;
             double phi = Math.Asin(Re * Math.Cos(e) / (Re + Hkm));   // angolo di incidenza sullo strato
             double theta = Math.PI / 2 - e - phi;                    // angolo al centro tra stazione e punto di riflessione
             return Re * theta;

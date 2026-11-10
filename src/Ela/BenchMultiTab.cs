@@ -80,7 +80,7 @@ namespace ELA
             foreach (ComboBox c in new[] { cmbDay, cmbFrom, cmbTo }) c.SelectionChanged += (s, e) => { if (!busyFill) { areaMode = false; Fill(); } };
             chkFoEs = Ui.C(Lang.T("foEs"), cf.GetB("b50_foes", false));
             chkShort = Ui.C(Lang.T("Primo salto corto entro 1200 km"), cf.GetB("b50_corto", true));
-            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("b50_quota_km", 105)), 0, 1, 45);
+            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("b50_quota_km2", EsModel.DefaultH)), 0, 1, 45);
             chkFoEs.IsCheckedChanged += (s, e) => Fill(false);
             chkShort.IsCheckedChanged += (s, e) => Rebuild();
             numH.ValueChanged += (s, e) => Rebuild();
@@ -127,7 +127,7 @@ namespace ELA
         {
             Config cf = Station.Cfg;
             cf.Set("b50_foes", chkFoEs.IsChecked == true); cf.Set("b50_corto", chkShort.IsChecked == true);
-            cf.Set("b50_quota_km", Ui.V(numH)); cf.Set("b50_file", file[0]); cf.Set("b50_file2", file[1]); cf.Set("b50_st2", chk2.IsChecked == true);
+            cf.Set("b50_quota_km2", Ui.V(numH)); cf.Set("b50_file", file[0]); cf.Set("b50_file2", file[1]); cf.Set("b50_st2", chk2.IsChecked == true);
         }
 
         // ---------------------------------------------------------------- caricamento del log

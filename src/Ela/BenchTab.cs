@@ -70,7 +70,7 @@ namespace ELA
 
             c10 = Ui.C("10 m", cf.GetB("bench_10m", true)); c6 = Ui.C("6 m", cf.GetB("bench_6m", true));
             c4 = Ui.C("4 m", cf.GetB("bench_4m", true)); c2 = Ui.C("2 m", cf.GetB("bench_2m", true));
-            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("bench_quota_km", 105)), 0, 1, 45);
+            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("bench_quota_km2", EsModel.DefaultH)), 0, 1, 45);
             chkProp = Ui.C("", cf.GetB("bench_prop", true));
             chkProp.Content = new TextBlock { Text = Lang.T("Escludi i QSO con un altro PROP_MODE (TR, MS, FAI, AUR, EME...)"), TextWrapping = TextWrapping.Wrap };   // testo semplice: "_" non e' un tasto di scelta rapida
             chkMin = Ui.C(Lang.T("Escludi i QSO sotto i 500 km (900 km in 144 MHz)"), cf.GetB("bench_min", true));
@@ -141,7 +141,7 @@ namespace ELA
         {
             Config cf = Station.Cfg;
             cf.Set("bench_10m", c10.IsChecked == true); cf.Set("bench_6m", c6.IsChecked == true); cf.Set("bench_4m", c4.IsChecked == true); cf.Set("bench_2m", c2.IsChecked == true);
-            cf.Set("bench_quota_km", Ui.V(numH)); cf.Set("bench_prop", chkProp.IsChecked == true); cf.Set("bench_min", chkMin.IsChecked == true);
+            cf.Set("bench_quota_km2", Ui.V(numH)); cf.Set("bench_prop", chkProp.IsChecked == true); cf.Set("bench_min", chkMin.IsChecked == true);
             cf.Set("bench_corto", chkShort.IsChecked == true); cf.Set("bench_corto_km", Ui.V(numShort));
             cf.Set("bench_skip", chkSkip.IsChecked == true); cf.Set("bench_tratte", chkPaths.IsChecked == true);
             cf.Set("bench_raggio_km", range.Km); cf.Set("bench_file", file);

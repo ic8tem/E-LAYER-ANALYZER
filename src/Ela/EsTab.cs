@@ -54,8 +54,8 @@ namespace ELA
             List<string> wn = new List<string>();
             foreach (int w in Windows) wn.Add(Lang.F("ultimi {0} min", w));
             cmbWin = Ui.Combo(wn, Math.Max(0, Array.IndexOf(Windows, (int)cf.GetD("es_minuti", 60))), 120);
-            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("es_quota_km", 105)), 0, 1, 45);
-            numElev = Ui.N(0, 10, Ui.Dm(cf.GetD("es_elev_min", 2)), 1, 0.5m, 45);
+            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("es_quota_km2", EsModel.DefaultH)), 0, 1, 45);
+            numElev = Ui.N(0, 10, Ui.Dm(cf.GetD("es_elev_min2", EsModel.DefaultElevMin)), 1, 0.5m, 45);
             chkFirst = Ui.C(Lang.T("Primi salti (salti uguali)"), cf.GetB("es_primo_salto", true));
             chkShort = Ui.C(Lang.T("Primo salto corto entro"), cf.GetB("es_salto_corto", true));
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("es_salto_corto_km", 1200)), 0, 50, 55);
@@ -170,7 +170,7 @@ namespace ELA
             Config cf = Station.Cfg;
             cf.Set("es_10m", c10.IsChecked == true); cf.Set("es_6m", c6.IsChecked == true); cf.Set("es_4m", c4.IsChecked == true); cf.Set("es_2m", c2.IsChecked == true);
             cf.Set("es_minuti", Windows[Math.Max(0, cmbWin.SelectedIndex)]);
-            cf.Set("es_quota_km", Ui.V(numH)); cf.Set("es_elev_min", Ui.V(numElev));
+            cf.Set("es_quota_km2", Ui.V(numH)); cf.Set("es_elev_min2", Ui.V(numElev));
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
             cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true);
             cf.Set("es_proiezione", Math.Max(0, cmbMap.SelectedIndex));
@@ -310,7 +310,7 @@ namespace ELA
                     if (c.Calls.Count < 6) c.Calls.Add(p.Spot.Spotter + "-" + p.Spot.DxCall);
                 }
             }
-            double maxHalf = Geo.HalfHopKm(Ui.V(numElev), H);
+            double maxHalf = Geo.HalfHopKm(Ui.V(numElev), H, EsModel.EsK);
             foreach (Cloud c in d.Values)
             {
                 // MUF probabile della nube sul salto piu' lungo (massima del singolo salto, tabella IK3XTV): foEs x sec(phi)
@@ -435,7 +435,7 @@ namespace ELA
             }
             if (Station.Valid)
             {
-                map.Lines.Add(MapView.Circle(Station.Lat, Station.Lon, Geo.HalfHopKm(Ui.V(numElev), H), Pal.A(150, Pal.Green), 1));
+                map.Lines.Add(MapView.Circle(Station.Lat, Station.Lon, Geo.HalfHopKm(Ui.V(numElev), H, EsModel.EsK), Pal.A(150, Pal.Green), 1));
                 map.Markers.Add(new MapMarker { Lat = Station.Lat, Lon = Station.Lon, Radius = 5, Fill = Pal.Green, Square = true, Label = Station.Call.Length > 0 ? Station.Call : Station.Loc, LabelColor = Pal.Green });
             }
             // cerchi delle distanze di IK3XTV attorno alla stazione, in tutte e due le proiezioni
@@ -613,7 +613,7 @@ namespace ELA
                 if (Station.Valid)
                 {
                     double d = Geo.DistanceKm(Station.Lat, Station.Lon, clickLat, clickLon);
-                    double el = Geo.ElevationDeg(d, h, Station.AltKm);
+                    double el = Geo.ElevationDeg(d, h, Station.AltKm, EsModel.EsK);
                     double sec = Geo.SecantFactor(2 * d, h);
                     sb.AppendLine(Lang.F("Dalla mia stazione: azimut {0:F0}°, distanza {1:F0} km, elevazione {2:F1}°", Geo.Bearing(Station.Lat, Station.Lon, clickLat, clickLon), d, el));
                     sb.AppendLine(Lang.F("Salto di {0:F0} km ({1}); sec(φ) = {2:F2}", 2 * d, Lang.T(EsModel.Judge(2 * d)), sec));
