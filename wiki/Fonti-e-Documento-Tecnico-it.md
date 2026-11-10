@@ -2,7 +2,7 @@
 
 [← Home](Home-it)
 
-- La linguetta **FONTI** elenca tutte le fonti, numerate [1]-[28].
+- La linguetta **FONTI** elenca tutte le fonti, numerate [1]-[63].
 - La linguetta **SINTESI DELLE SCELTE DI CALCOLO** (prima *Documento tecnico*) spiega ogni calcolo con le formule e le etichette **FONTE** (passo preso da una fonte), **RILIEVO** (verifica sul programma o su un caso reale) e **SCELTA** (scelta del programma da confermare in banda).
 - La linguetta **MANUALE D'USO** è il manuale d'uso approfondito del programma, linguetta per linguetta.
 - La linguetta **RELAZIONE TECNICA** espone le scelte che hanno portato alla realizzazione del programma: architettura, modelli fisici, riconoscimento dei dati, verifiche, limiti e sviluppi.

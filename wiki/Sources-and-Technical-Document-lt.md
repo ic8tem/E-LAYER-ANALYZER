@@ -2,7 +2,7 @@
 
 [← Home](Home-lt)
 
-- Kortelėje **ŠALTINIAI** išvardyti visi šaltiniai, sunumeruoti [1]-[28].
+- Kortelėje **ŠALTINIAI** išvardyti visi šaltiniai, sunumeruoti [1]-[63].
 - Kortelė **SKAIČIAVIMO SPRENDIMŲ SANTRAUKA** (anksčiau *Techninis dokumentas*) paaiškina kiekvieną skaičiavimą su formulėmis ir žymomis **ŠALTINIS** (žingsnis paimtas iš šaltinio), **PATIKRA** (patikrinta programoje arba realiu atveju) ir **PASIRINKIMAS** (programos sprendimas, kurį reikia patvirtinti eteryje).
 - Kortelė **NAUDOTOJO VADOVAS** – išsamus programos naudotojo vadovas, kortelė po kortelės.
 - Kortelė **TECHNINĖ ATASKAITA** pateikia sprendimus, lėmusius programos sukūrimą: architektūrą, fizikinius modelius, duomenų atpažinimą, patikras, ribojimus ir tolesnę plėtrą.

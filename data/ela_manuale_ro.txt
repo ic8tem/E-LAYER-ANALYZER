@@ -1,0 +1,124 @@
+TITLE|Manualul de utilizare E-LAYER ANALYZER
+SUB|Manual de utilizare detaliat - realizat de Costantino IC8TEM - versiunea 0.4.3, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE; formulele și alegerile de calcul se află în fila SINTEZA ALEGERILOR DE CALCUL.
+H1|1. Înainte de a începe
+H2|1.1 Ce face programul
+P|E-LAYER ANALYZER reunește într-un singur program instrumentele pentru studiul modurilor de propagare VHF care trec prin stratul E al ionosferei: E-sporadic, inclusiv multi-salt și extracontinental, F.A.I. (neregularități aliniate cu câmpul magnetic), meteor scatter, cu programul YA-MS integrat, și aurora radio. Lucrează pe spoturile DX clusterelor în timp real și pe logurile ADIF și arată fiecare rezultat pe o hartă care ocupă două treimi din fereastră, cu datele și calculele în treimea din dreapta.
+H2|1.2 Instalarea și dosarul de date
+P|Programul funcționează pe Windows (64 și 32 de biți), Linux, Raspberry Pi (ARM64) și Mac (Apple Silicon și Intel). Se descarcă de pe pagina Releases a depozitului GitHub: pentru Windows există un program de instalare și o versiune portabilă într-un fișier .zip; pentru Linux și Raspberry Pi o arhivă .tar.gz cu scriptul de instalare; pentru Mac o imagine .dmg.
+LI|Toate datele programului se află în dosarul data de lângă program: setări (config.ini), arhiva CALL3, coeficienții câmpului magnetic, loguri, datele NOAA descărcate, spoturile colectate. Nimic nu este scris în AppData sau în alte dosare de sistem.
+LI|Pentru a muta programul pe alt calculator este suficient să copiați dosarul său; pentru a reveni la setările inițiale este suficient să ștergeți data/config.ini.
+LI|Parola LoTW nu este salvată niciodată; se poate memora doar numele de utilizator.
+H2|1.3 Bara de sus
+P|În stânga sus se scriu indicativul propriu, locatorul (4, 6 sau 8 caractere) și altitudinea antenei în metri; butonul Aplică le confirmă și toate filele se actualizează. În dreapta sus se află ora UTC, alegerea schemei de culori (toate schemele YAEC: Luminos, Noapte, Negru, opt pasteluri și Urmă meteorică) și alegerea limbii (36 de limbi). La schimbarea schemei de culori sau a limbii fereastra se reconstruiește imediat, fără a pierde datele colectate.
+P|Lângă ora UTC inscripția NTP:OK (verde) sau NTP:FAILED (roșie) arată dacă ora este aliniată: la fiecare 5 minute programul interoghează două servere de timp din zece răspândite în lume și trece la altele dacă nu răspund. Balonul de informații indică serverele folosite și abaterea ceasului PC-ului.
+P|În dreapta, în bara filelor, se află meniul continentului (Europa, America de Nord, America de Sud, Africa, Asia, Oceania): mută hărțile Mercator și cele F.A.I. și de auroră pe continentul ales și alege datele previzionale ale acelui continent (E-skip de la N0NBH este publicat doar pentru Europa și America de Nord).
+H2|1.4 Bara de stare
+P|Jos, bara de stare indică câte indicative conține arhiva CALL3, câte spoturi sunt în memorie și modelul magnetic folosit (IGRF-14 cu epoca sa). Spoturile din memorie se șterg la fiecare închidere a programului: fiecare sesiune repornește fără spoturi vechi.
+H2|1.5 Hărțile
+P|Toate hărțile se folosesc la fel: rotița mouse-ului mărește sau micșorează, tragerea cu butonul stâng mută vederea, clicul stânga alege un punct, un spot sau un traseu în funcție de filă. În dreapta sus apar coordonatele și locatorul cu 6 caractere de sub cursor; pe hărțile azimutale și distanța și azimutul de la centru. Rețeaua câmpurilor și pătratelor Maidenhead se îndesește odată cu zoomul.
+H1|2. Colectarea datelor (DATA COLLECTION)
+P|Fila are două sub-file: Spoturi, cu sesiunile telnet, spoturile colectate, arhiva CALL3 și coloana filtrelor, și Date de propagare (capitolul 2.5).
+H2|2.1 Cele trei sesiuni telnet
+P|Fila DATA COLLECTION deschide până la trei conexiuni telnet simultane: un DX cluster la alegere (implicit ON0DXK cu filtrele VHF), Reverse Beacon Network (portul 7001 pentru FT8, 7000 pentru CW și RTTY) și clusterul DM4X cu spoturile PSKReporter (dm4x.ddns.net, portul 8500).
+LI|Host și Port: adresa clusterului. Login: indicativul pentru acces (dacă este gol se folosește cel din bara de sus). Comenzi după login: comenzi de trimis după acces, separate prin punct și virgulă (de exemplu filtrele de bandă).
+LI|Conectează și Deconectează deschid și închid sesiunea; Reconectează o redeschide singur după o cădere; Conectare la pornire o deschide la pornirea programului.
+LI|Consola arată rândurile primite; în caseta de dedesubt se pot scrie comenzi de trimis clusterului (de exemplu sh/dx 20) și se confirmă cu Trimite sau cu tasta Enter.
+H2|2.2 Coloana filtrelor
+P|Coloana din dreapta a filei, 40% din fereastră, reunește toate filtrele spoturilor: colectarea datelor este unică pentru tot programul, iar fiecare spot primit trece pe aici înainte de a ajunge la filele fiecărui mod de propagare. Sus se află caseta filtrului local, bifată implicit: rândurile „DX de” cu frecvența sub 27990,0 kHz sau peste 145 MHz sunt respinse, nu apar în consolă și nu se memorează. Este util mai ales cu RBN și PSKReporter, care trimit foarte multe spoturi în HF. Debifând caseta trece totul. Dedesubt se află cinci sub-file.
+LI|Meteor scatter: filtrul YA-MS (ferestre de frecvență tipice pentru MS, cuvinte de altă propagare, moduri digitale MS și <MS>, benzi, testul filtrului și contoare). În E-LAYER ANALYZER sub-fila Colectare date din YA-MS nu apare: filtrul său se configurează aici.
+LI|E-sporadic: cuvintele între < > care exclud un spot din E-sporadic; regulile pentru 28 și 50 MHz (pe 50 MHz în limita a 450 km nu este E-sporadic; pe 28 MHz distanța minimă se obține din cea de pe 50 MHz urmând IK3XTV, circa 170 km; bandplanul nu este un criteriu exclusiv, așa că un spot în fereastra meteor scatter rămâne în E-sporadic, cu excepția modului digital MS sau <MS>); regula pentru 144 MHz (distanța minimă; confirmare cu un al doilea spot pe același nor în câteva minute sau cu un spot pe 50 MHz cu salt scurt în apropiere) și regula transecuatorială cu banda sa de înclinație magnetică, valabilă pentru Africa și America de Sud (regula autorului) și, în toată lumea, pentru legăturile de 3000-8000 km care traversează ecuatorul magnetic pe direcție aproape nord-sud (Kennewell și Wilkinson [49]). Butonul Restabilește regulile autorului readuce valorile inițiale.
+LI|F.A.I.: cuvintele care indică un spot F.A.I. (implicit FAI: este valabil <FAI> sau fai, cu majuscule, minuscule sau mixt; aceste spoturi nu intră în E-sporadic), benzile și perioada spoturilor de pe hartă (implicit 24 de ore).
+LI|Auroră: cuvintele spoturilor de auroră, cu sau fără < > și cu majuscule sau minuscule (implicit AU și AUR), benzile și perioada spoturilor de pe hartă (implicit 2 ore).
+LI|Testul filtrelor: se scrie sau se lipește un rând din cluster, iar programul arată cum îl clasifică filtrele (meteor scatter, auroră, F.A.I., transecuatorial, E-sporadic), cu banda, locatorii și distanța.
+H2|2.3 Cum citește programul spoturile
+P|Din fiecare rând „DX de” programul extrage spotterul, frecvența, DX-ul, comentariul, ora și, când există, locatorii și modul de propagare scrise în comentariu în forma JN70CN<ES>JO62QM (primul locator este al spotterului, al doilea al DX-ului; sunt acceptate și formele cu <>, > și paranteze).
+LI|Locatorii lipsă se caută în arhiva CALL3; locatorii impreciși (sub 6 caractere) se înlocuiesc cu locatorul cu 6 caractere din CALL3, când există.
+LI|Spoturile cu <MS>, <AU>, <AUR>, <TR>, <AS> sau <ACS> în text nu sunt folosite pentru E-sporadic: servesc pentru meteor scatter, auroră, tropo sau aircraft scatter.
+LI|Ca în YA-MS, sunt spoturi de meteor scatter cele din ferestrele de frecvență tipice pentru MS (50190-50300, 70100-70400, 144290-144399 kHz) fără cuvinte de altă propagare și cele cu modurile MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M sau cu <MS>.
+LI|Spoturile cu <AU> sau <AUR> merg în fila AURORA, cele cu FAI în fila F.A.I.
+H2|2.4 Spoturi colectate și arhiva CALL3
+P|Pagina Spoturi colectate listează ultimele spoturi cu filtru pe bandă și pe sursă; butonul Deschide dosarul spoturilor deschide data/spot. Pagina CALL3 arată arhiva indicativ -> locator (format JTDX/WSJT): se poate căuta un indicativ, reîncărca arhiva sau importa un nou fișier CALL3.TXT, care îl înlocuiește pe cel folosit (cel vechi rămâne ca copie de siguranță).
+H2|2.5 Date de propagare
+P|Sub-fila Date de propagare reunește datele care ajută la a înțelege dacă o bandă se poate deschide. Se actualizează singure cel mult o dată pe oră; butonul Actualizează acum le descarcă imediat.
+LI|N0NBH (hamqsl.com): bannerul condițiilor VHF și datele solare (flux solar, indicii A și K, raze X, vânt solar, Bz, auroră și latitudine aurorală) cu E-skip pentru Europa și America de Nord (date DXrobot).
+LI|Bz pentru auroră: NOAA SWPC, vântul solar în timp real măsurat de satelitul din punctul L1 (DSCOVR/ACE), la fiecare minut. Un Bz negativ și persistent favorizează aurora.
+LI|Auroră: indicele Dst de la Kyoto (furtuni geomagnetice) și, pentru emisfera sudică, alertele de auroră ale Bureau of Meteorology australian, care necesită o cheie gratuită de scris în caseta Cheie API BoM. Butoanele Indicele AE (Kyoto) și Convecția SuperDARN deschid cele două pagini în browser.
+LI|Meteor scatter: graficul activității meteorice a zilei (date RMOB) de la Make More Miles on VHF; roiurile, eficiența și traficul în direct se află în fila METEOR SCATTER.
+P|Sinteza acestor date apare în dreapta sus pe hărțile SPORADIC-E și F.A.I. (E-skip pentru continentul ales) și AURORA (aurora de la N0NBH și Bz de la NOAA).
+H1|3. E-sporadic (SPORADIC-E)
+P|Fila SPORADIC-E are trei sub-file: REAL-TIME, spoturile în direct descrise în acest capitol; BENCHMARK Es (capitolul 4) și BENCHMARK 50 MHz (capitolul 5).
+H2|3.1 Harta
+P|Meniul Hartă alege proiecția. Azimutală: hartă azimutală echidistantă centrată pe propria stație, cu cursorul de zoom (de la 300 la 20000 km de la centru, și cu rotița mouse-ului). Mercator: harta lumii, cu butoanele Europa și Lume. În ambele proiecții se desenează în jurul stației cercurile distanțelor din tabelul lui IK3XTV [3]: 500 km (minimul saltului unic), 1500-2000 km (optim), 2400 km (maximul saltului unic), 5000 km (maximul saltului dublu) și 6900 km (maximul saltului triplu).
+P|Tabelul lungimilor salturilor pe 50 MHz este cel al lui Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; norii Es se află la circa 100 km altitudine, iar aceasta limitează saltul unic în jurul a 2000 km [29]. Coroanele hărților și numărul salturilor urmează aceste distanțe:
+TAB|Salt;Distanța minimă;Distanța optimă;Distanța maximă
+TAB|Salt unic;500-650 km;1500-2000 km;2200-2400 km
+TAB|Salt dublu;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Salt triplu;-;4800-6400 km;6900 km
+P|În vederile azimutale inelele punctate indică km de la centru; pasul inelelor se schimbă cu zoomul, iar marginea exterioară indică distanța maximă afișată.
+H2|3.2 Comenzile
+LI|Benzi: 10, 6, 4 și 2 m (432 MHz nu se analizează: E-sporadic nu se aplică [22]-[24]); fereastra de timp a spoturilor de la 15 minute la 12 ore.
+LI|Altitudine Es (implicit 110 km) și elevația minimă a antenelor (implicit 1°); elevația ține cont de refracția troposferică (raza terestră 4/3), astfel încât saltul unic ajunge la circa 2440 km.
+LI|Primele salturi (salturi egale): arată primul salt al ambelor stații; Primul salt scurt până la…: arată ipoteza autorului privind primul salt scurt (implicit 1200 km) [4].
+LI|Nori Es pe pătratele Maidenhead: colorează pătratele punctelor de reflexie după cea mai mare frecvență a spoturilor (verde până la 29 MHz, galben până la 51, portocaliu până la 71, roșu până la 145 MHz). Dacă MUF-ul probabil al norului pe cel mai lung salt (2400 km) atinge o bandă mai înaltă, pătratul clipește cu culoarea acelei benzi.
+LI|144 MHz spre Canare, Madeira și Azore (regula autorului): dincolo de 2400 km spotul este valabil doar dacă cel puțin două spoturi indică același nor Es; se desenează saltul Es, norul și traseul tropo punctat până la insulă. Pe 50 și 70 MHz regula nu se aplică.
+H2|3.3 Tabele și detalii
+P|Tabelul Spoturi Es listează spoturile valide cu distanța, numărul de salturi și foEs minim; tabelul Nori Es (pătrate) listează pătratele cu norii estimați și MUF-ul pe care l-ar da pentru propria stație (roșu 144 MHz, portocaliu 70 MHz, galben 50 MHz). Cu un zoom setat tabelele arată doar ceea ce se vede pe hartă.
+LI|Clic pe un spot în tabel sau pe hartă: traseul se luminează cu un halou galben, harta îl aduce în vedere dacă este nevoie, iar caseta Detalii indică salturile, punctele de reflexie, foEs și azimutul. Spotul rămâne selectat și când sosesc spoturi noi.
+LI|Clic pe un punct liber al hărții: punctul este tratat ca posibil nor Es, cu foEs necesar pentru 28, 50, 70 și 144 MHz.
+LI|Cu Kp peste 3 harta semnalează acest lucru în dreapta sus: E-sporadic este mai puțin probabil (peste 90% din deschideri au loc cu Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|Un QSO pe 50 MHz de peste 11000 km apare în detalii ca ALERTĂ, doar ca informație statistică (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
+LI|Sub-fila Precursori multi-salt: pentru regiunile îndepărtate (treizeci în toată lumea) programul verifică dacă pe punctele de salt ale traseului, cu salturi egale și întotdeauna și cu primul salt scurt de până la 1200 km, există nori Es activi văzuți din spoturile altor stații. ALERTĂ (roșu): toate punctele acoperite; PRECURSOR (galben): lipsește un singur punct, într-o zonă fără observatori. Clicul pe un rând desenează traseul punctat, punctele de salt (verde: nor activ; gri: niciun observator; roșu: niciun nor) și spoturile care dovedesc norii; detaliile indică foEs necesar pentru fiecare salt.
+LI|Spoturile în albastru electric cu inscripția TEP sunt trasee care traversează ecuatorul magnetic, dar sunt mai lungi sau mai asimetrice decât un TEP pur (de exemplu ZS6 - OH, SM, LA): E-sporadic se poate cupla cu TEP. Rămân printre spoturile Es; în coloana Prop apare ES+TEP.
+H2|3.4 Regulile autorului
+LI|144 MHz: E-sporadic începe de la peste 900 km; un spot singur nu se desenează; se desenează dacă în 5 minute sosește un al doilea spot pe același nor sau dacă în apropiere există un spot pe 50 MHz cu salt scurt. Rândul verde de sus arată câte spoturi sunt în așteptarea confirmării.
+LI|Transecuatorial: spre Africa continentală (cu Madagascarul) și America de Sud, dacă punctul median cade în banda de înclinație magnetică între -20° și +20°, legătura este transecuatorială și nu E-sporadic, cu excepția cazului în care spotul declară <ES>. Canarele, Madeira, Capul Verde și Peninsula Arabică rămân în afara regulii.
+H1|4. BENCHMARK Es (sub-filă a SPORADIC-E)
+H2|4.1 Încărcarea unui log
+P|Sub-fila BENCHMARK Es este un banc de probă pentru E-sporadic pe un log ADIF întreg, chiar și al altei stații. Încarcă ADIF deschide fișierul (programul îl reține și îl reîncarcă la pornire), Descarcă ADIF îl elimină. Stația în centru propune indicativul și locatorul cele mai frecvente din log; pot fi schimbate și confirmate cu Aplică.
+LI|Poziția de emisie este MY_GRIDSQUARE al fiecărui QSO; pozițiile de recepție sunt GRIDSQUARE (locatorii lipsă sau cu 4 caractere se iau din CALL3).
+LI|Se pot exclude QSO-urile cu alt PROP_MODE și cele sub 500 km (900 km pe 144 MHz); cele transecuatoriale se exclud întotdeauna, cu excepția PROP_MODE=ES.
+LI|Pe hartă un punct galben estompat marchează centrul fiecărui salt, unde se presupune norul de E-sporadic (și centrul primului salt scurt, dacă ipoteza este activă).
+H2|4.2 Zile, ore și calcule
+P|Tabelul QSO pe zi listează zilele cu numărul de QSO-uri, benzile, distanța maximă și multi-salturile; clicul pe o zi umple tabelul Orele zilei, cu un rând pentru fiecare oră UTC și rândul Toată ziua. Harta azimutală, cu cursorul distanței maxime, desenează skip-ul pe sectoare de 10° (arc portocaliu = QSO-ul cel mai apropiat, sector verde = distanțe atinse), norii pe pătrate și, pentru ziua întreagă, deplasarea orară a norilor (linia roșie).
+P|Pagina Calcule propuse indică skip-ul pe sectoare, foEs estimat cu MUF-ul așteptat la 1000, 1500, 2000 și 2400 km, norii estimați, verificarea multi-saltului (salturi egale față de primul salt scurt, comparate cu norii văzuți în salt unic în ±30 de minute) și deplasarea norilor oră cu oră.
+H1|5. BENCHMARK 50 MHz (sub-filă a SPORADIC-E)
+H2|5.1 Una sau două stații
+P|Sub-fila BENCHMARK 50 MHz este dedicată E-sporadic multi-salt pe 50 MHz. În rândul Stația 1 se încarcă și se descarcă logul propriei stații; în rândul Stația 2 logul unei a doua stații, care se arată sau se ascunde cu caseta Stația 2. Traseele stației 1 sunt bleu, cele ale stației 2 violet.
+LI|Se arată QSO-urile pe 50 MHz multi-salt, adică de peste 3100 km (regula autorului); numărul salturilor urmează tabelul IK3XTV.
+LI|Ziua, de la… până la… UTC: ziua (la deschidere cea cu cele mai multe QSO-uri multi-salt) și intervalul orar, în pași de 15 minute.
+LI|foEs (opțional): colorează traseele după foEs minim și îl afișează în tabel. Altitudine Es și Primul salt scurt până la 1200 km ca în celelalte file.
+LI|Punctul galben estompat marchează centrul fiecărui salt, unde se presupune norul de E-sporadic; pe traseul de sub mouse devine mai mare.
+H2|5.2 Harta Mercator
+P|Harta este Mercator cu centru liber. Apropiind mouse-ul de un traseu, linia și pictogramele se măresc și apare pătratul WWL cu 6 caractere al corespondentului. Cu clic stânga pe acel traseu o fereastră popup întreabă dacă să fie afișate toate QSO-urile din fișier, din toate zilele, cu poziția terminală la cel mult 150 km: Da golește harta și arată acele QSO-uri în cercul portocaliu, Nu lasă harta neschimbată. Butonul Înapoi la zi și interval orar revine la alegerea anterioară.
+H1|6. F.A.I.
+H2|6.1 Cele două vederi
+P|Fila F.A.I. studiază scatter-ul pe neregularități aliniate cu câmpul magnetic (sursa principală [1], [2]). Vederea Scatter trail (perechea A-B) calculează, pentru două stații, locul scatter point-urilor posibile, colorat după abaterea de la condiția de reflexie, propune scatter point-ul cel mai probabil și desenează în dreapta sus caseta cu QTF-urile și elevațiile ambelor stații (roșu = A, verde = B). Vederea Izo-reflexie (punct) desenează, pentru un punct de reflexie ales, liniile de izo-reflexie ca AuroReflex și SE-PROP al lui K9SE: benzi colorate în schemele întunecate, linii groase în schemele luminoase.
+H2|6.2 Comenzile
+LI|Stația A și Stația B: indicativ (căutat în CALL3) și/sau locator; A gol = propria stație. Meniul Verificări… încarcă perechile de test (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); meniul Scatter point cunoscute… alege un scatter point documentat (Geneva, Bruxelles, Budapesta, JN92, JN41/42).
+LI|Altitudine (implicit 110 km), elevație minimă și Refracție (raza terestră 4/3), bifată implicit.
+LI|Clic stânga pe hartă: punct de reflexie de verificat (trece la vederea Izo-reflexie); clic dreapta: poziția stației B.
+LI|Verifică punctul recomandat: calculează scatter trail, ia scatter point-ul propus și îi arată liniile de izo-reflexie cu verdictul: SATISFĂCĂTOR (în limita a 1°), ACCEPTABIL (în limita a 2,5°), NESATISFĂCĂTOR (peste).
+P|Dacă pentru model calculul nu este posibil, apare mesajul Calcul imposibil și nu se mai afișează niciun alt rezultat. Jos, tabelul Spoturi F.A.I. listează spoturile declarate FAI; clicul pe un spot încarcă perechea sa de stații.
+H1|7. METEOR SCATTER
+P|Fila conține programul YA-MS complet, cu filele sale (Live și date în timp real: trafic meteor scatter în direct, flux radar, radar GRAVES; Calcul previzional: bolta cerească și calculul, geometrie și atenuare, calculul eficienței, implementarea experimentală a prognozelor; Documente tehnice: roiuri, surse, harta surselor, eficiență - explicație, harta pătratelor) și manualul său de calcule. Limba și schema de culori sunt cele alese sus. În E-LAYER ANALYZER Colectarea datelor din YA-MS nu apare: colectarea este una singură, cea din DATA COLLECTION, care transmite rândurile către YA-MS, iar filtrul spoturilor meteor scatter se configurează în coloana filtrelor din DATA COLLECTION.
+H1|8. AURORA
+P|Fila AURORA folosește aceleași vederi ca F.A.I. (altitudine implicită 110 km, Lange-Hesse [12]) cu datele de meteorologie spațială ale NOAA [15]: ovalul auroral OVATION (estompat pe hartă), indicele Kp din ultimele trei zile și vântul solar, descărcate la fiecare 5 minute în data/swpc sau imediat cu Descarcă NOAA acum. Programul recomandă orientarea pentru ambele stații.
+LI|Spoturile de auroră din perioada aleasă în filtrele DATA COLLECTION (implicit ultimele 2 ore, cel mult 30) se desenează pe hartă cu scatter point-ul calculat (cerc portocaliu) dacă este bifată caseta Spoturi <AU>/<AUR> pe hartă cu calculul; în rezultate apar QTF și elevația celor două stații.
+LI|În rezultatele vederii Scatter trail apar probabilitatea de auroră în scatter point (improbabilă cu Kp ≤ 2; în rest conform ovalului NOAA), QTF-ul tipic între N și NE (S-SE în emisfera sudică) cu abaterea de la traseul direct și sfaturile privind efectul Doppler și modurile (CW/SSB sau Q65 cu submoduri late: FT8 adesea nu decodează). Scatter point-ul se caută de preferință între 370 și 1100 km de fiecare stație, cu perpendicularitatea în limita a ±3°; dacă punctul propus este în afara acestui interval, programul semnalează acest lucru.
+LI|Spoturile de auroră de peste 2000 km sunt semnalate ca îndoielnice: după Newton [48] aurora ajunge în jur de 1000 km nord-sud și 2000 km est-vest. Spoturile de auroră-E (AUE, AU-E, AURORAL E) se desenează cu verde pe traseul direct: este un E sporadic de origine aurorală, fără Doppler.
+LI|Rezultatele indică ora solară în scatter point: în cele 4 ore din jurul miezului nopții locale cad cele mai multe reflexii aurorale (Reeve [52]). În emisfera sudică aurora pe 50 MHz ajunge până la circa 2000 km pe traseele est-vest (ANVDG [55]); aurora-E dă semnale mai slabe și stabile pe traseul direct (SM2CEW-SM0FOB [54]).
+LI|Pe lângă scatter point-ul cel mai probabil, rezultatele indică intervalul de QTF al celor două stații de-a lungul întregului scatter trail (abatere ≤ 1,5°): aurora poate veni din orice punct al intervalului, iar punctul cel mai probabil favorizează traseul cel mai scurt.
+H2|8.1 BENCHMARK AURORA
+P|Fila AURORA are două sub-file: REAL-TIME, calculul descris mai sus, și BENCHMARK AURORA, un banc de probă al modelului pe 298 de QSO-uri de auroră reale publicate (logurile lui EI5FK 2003-2005 și harta logului lui PA0O).
+LI|Meniul Log alege un log sau pe toate împreună; altitudinea implicită este 110 km, cu toleranță de 3°, refracție 4/3 și IGRF-14.
+LI|Tabelul indică pentru fiecare QSO scatter point-ul calculat, abaterea, QTF-ul și elevația stației și QTF-ul corespondentului. Verde: scatter point la 370-1100 km de ambele stații; galben: explicat, dar în afara acestei ferestre; portocaliu: QSO de peste 2000 km; roșu: niciun scatter point, QSO neexplicat de model.
+LI|Rezumatul dă procentele și, pentru fiecare log, intervalul și mediana QTF-ului calculat; clicul pe un rând desenează traseul și cele două orientări. Logurile nu indică orientarea: comparația se face pe geometrie, nu pe QTF.
+H1|9. LOG ADIF
+P|Fila LOG ADIF arată pătratele lucrate și confirmate, bandă cu bandă de la 28 MHz în sus, fără a agrega benzile. Deschide fișier ADIF… adaugă fișierele logului; Descarcă din LoTW… descarcă raportul confirmărilor (se poate memora numele de utilizator, parola nu se salvează niciodată); Șterge memoria elimină fișierele și raportul. Pătratele sunt portocalii dacă sunt lucrate și colorate diferit dacă sunt confirmate cu QSL sau via LoTW; clicul pe un pătrat arată indicativele și modul de propagare.
+H1|10. Documente
+P|Fila SURSE listează sursele citate de program, filă cu filă. Fila SINTEZA ALEGERILOR DE CALCUL prezintă formulele și alegerile de calcul cu sursele la fiecare pas; acest MANUAL DE UTILIZARE explică cum se folosește programul; RAPORTUL TEHNIC expune motivele care au ghidat realizarea programului. Cele trei documente pot fi exportate în Word.
+H1|11. Sfaturi practice
+LI|Înainte de toate scrieți indicativul și locatorul sus și apăsați Aplică: toate distanțele, MUF-urile și elevațiile pornesc de acolo.
+LI|Cu RBN și PSKReporter țineți filtrul local activ, pentru a nu umple memoria cu spoturi HF.
+LI|Pentru analiza unui sezon trecut folosiți cele două BENCHMARK cu propriul log; pentru auroră și F.A.I. verificați întotdeauna punctul propus cu vederea Izo-reflexie.
+LI|Calculele sunt orientative: un spot sau un QSO spune că traseul era deschis, nu unde se afla exact norul.

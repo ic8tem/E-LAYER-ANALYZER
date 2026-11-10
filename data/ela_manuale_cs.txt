@@ -1,0 +1,124 @@
+TITLE|Uživatelská příručka E-LAYER ANALYZER
+SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.4.3, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
+H1|1. Než začnete
+H2|1.1 Co program dělá
+P|E-LAYER ANALYZER shromažďuje v jediném programu nástroje ke studiu druhů šíření na VKV, které procházejí vrstvou E ionosféry: sporadickou vrstvu E, i vícenásobným skokem a mimokontinentální, F.A.I. (nehomogenity orientované podél magnetického pole), meteor scatter se začleněným programem YA-MS a rádiovou auroru. Pracuje se spoty z DX clusterů v reálném čase a s deníky ADIF a každý výsledek zobrazuje na mapě, která zabírá dvě třetiny okna, s daty a výpočty v pravé třetině.
+H2|1.2 Instalace a složka dat
+P|Program běží na Windows (64 a 32 bitů), Linuxu, Raspberry Pi (ARM64) a Macu (Apple Silicon a Intel). Stahuje se ze stránky Releases repozitáře GitHub: pro Windows je k dispozici instalátor a přenosná verze v souboru .zip; pro Linux a Raspberry Pi archiv .tar.gz s instalačním skriptem; pro Mac obraz .dmg.
+LI|Všechna data programu jsou ve složce data vedle programu: nastavení (config.ini), archiv CALL3, koeficienty magnetického pole, deníky, stažená data NOAA, shromážděné spoty. Nic se nezapisuje do AppData ani do jiných systémových složek.
+LI|K přesunu programu na jiný počítač stačí zkopírovat jeho složku; k návratu k výchozímu nastavení stačí smazat data/config.ini.
+LI|Heslo k LoTW se nikdy neukládá; zapamatovat si lze jen uživatelské jméno.
+H2|1.3 Horní lišta
+P|Vlevo nahoře se zadává vlastní značka, lokátor (4, 6 nebo 8 znaků) a výška antény v metrech; tlačítko Použít je potvrdí a všechny karty se aktualizují. Vpravo nahoře je čas UTC, volba barevného schématu (všechna schémata YAEC: Světlé, Noc, Černé, osm pastelových a Meteorická stopa) a volba jazyka (36 jazyků). Při změně barevného schématu nebo jazyka se okno okamžitě přestaví, aniž by se ztratila shromážděná data.
+P|Vedle času UTC nápis NTP:OK (zelený) nebo NTP:FAILED (červený) říká, zda je čas srovnaný: každých 5 minut se program dotáže dvou časových serverů z deseti rozmístěných po světě a přejde na jiné, pokud neodpovídají. Bublina nápovědy uvádí použité servery a odchylku hodin PC.
+P|Vpravo v liště karet je nabídka kontinentu (Evropa, Severní Amerika, Jižní Amerika, Afrika, Asie, Oceánie): přesune Mercatorovy mapy a mapy F.A.I. a aurory na zvolený kontinent a vybere data předpovědi pro tento kontinent (E-skip od N0NBH se zveřejňuje jen pro Evropu a Severní Ameriku).
+H2|1.4 Stavový řádek
+P|Dole stavový řádek ukazuje, kolik značek obsahuje archiv CALL3, kolik spotů je v paměti a jaký magnetický model se používá (IGRF-14 s jeho epochou). Spoty v paměti se mažou při každém zavření programu: každá relace začíná bez starých spotů.
+H2|1.5 Mapy
+P|Všechny mapy se ovládají stejně: kolečko myši zvětšuje nebo zmenšuje, tažením levým tlačítkem se posouvá pohled, levé kliknutí vybírá bod, spot nebo trasu podle karty. Vpravo nahoře se zobrazují souřadnice a 6znakový lokátor pod kurzorem; v azimutálních mapách také vzdálenost a azimut od středu. Síť polí a čtverců Maidenhead se se zvětšením zahušťuje.
+H1|2. Sběr dat (DATA COLLECTION)
+P|Karta má dvě podkarty: Spoty, s relacemi telnet, shromážděnými spoty, archivem CALL3 a sloupcem filtrů, a Data o šíření (kapitola 2.5).
+H2|2.1 Tři relace telnet
+P|Karta DATA COLLECTION otevírá až tři současná spojení telnet: DX cluster podle volby (výchozí ON0DXK s filtry VKV), Reverse Beacon Network (port 7001 pro FT8, 7000 pro CW a RTTY) a cluster DM4X se spoty z PSKReporter (dm4x.ddns.net, port 8500).
+LI|Host a Port: adresa clusteru. Přihlášení: značka pro přístup (pokud je prázdná, použije se ta z horní lišty). Příkazy po přihlášení: příkazy odesílané po přihlášení, oddělené středníkem (například filtry pásem).
+LI|Připojit a Odpojit otevírají a zavírají relaci; Znovu připojit ji po výpadku sám znovu otevře; Připojit při spuštění ji otevře při spuštění programu.
+LI|Konzole zobrazuje přijaté řádky; do pole pod ní lze psát příkazy k odeslání do clusteru (například sh/dx 20) a potvrdit je tlačítkem Odeslat nebo klávesou Enter.
+H2|2.2 Sloupec filtrů
+P|Pravý sloupec karty, 40 % okna, soustřeďuje všechny filtry spotů: sběr dat je jediný pro celý program a každý přijatý spot prochází tudy, než dorazí do karet jednotlivých druhů šíření. Nahoře je zaškrtávací pole místního filtru, ve výchozím stavu zapnuté: řádky "DX de" s kmitočtem pod 27990,0 kHz nebo nad 145 MHz se zahazují, neobjevují se v konzoli a neukládají se. Je to užitečné hlavně s RBN a PSKReporter, které posílají obrovské množství spotů z KV. Po vypnutí pole projde vše. Pod ním je pět podkaret.
+LI|Meteor scatter: filtr YA-MS (kmitočtová okna typická pro MS, tagy jiného šíření, digitální druhy provozu MS a <MS>, pásma, test filtru a počitadla). Uvnitř E-LAYER ANALYZER se podkarta Sběr dat programu YA-MS nezobrazuje: její filtr se nastavuje zde.
+LI|Sporadická vrstva E: tagy mezi < >, které vylučují spot ze sporadické vrstvy E; pravidla pro 28 a 50 MHz (na 50 MHz do 450 km nejde o sporadickou vrstvu E; na 28 MHz se minimální vzdálenost odvozuje od vzdálenosti pro 50 MHz podle IK3XTV, asi 170 km; kmitočtový plán není výlučné kritérium, takže spot v okně meteor scatter zůstává ve sporadické vrstvě E, pokud nemá digitální druh provozu MS nebo <MS>); pravidlo pro 144 MHz (minimální vzdálenost; potvrzení druhým spotem na stejném oblaku během několika minut nebo spotem s krátkým skokem na 50 MHz v okolí) a transekvatoriální pravidlo s pásem magnetické inklinace, které platí pro Afriku a Jižní Ameriku (pravidlo autora) a po celém světě pro spojení 3000-8000 km, která protínají magnetický rovník téměř ve směru sever-jih (Kennewell a Wilkinson [49]). Tlačítko Obnovit pravidla autora vrátí výchozí hodnoty.
+LI|F.A.I.: slova, která označují spot F.A.I. (výchozí FAI: platí <FAI> nebo fai, velkými, malými nebo smíšenými písmeny; tyto spoty nevstupují do sporadické vrstvy E), pásma a časové období spotů na mapě (výchozí 24 hodin).
+LI|Aurora: slova spotů aurory, s < > nebo bez nich a velkými nebo malými písmeny (výchozí AU a AUR), pásma a časové období spotů na mapě (výchozí 2 hodiny).
+LI|Test filtru: napíše se nebo vloží řádek clusteru a program ukáže, jak jej filtry klasifikují (meteor scatter, aurora, F.A.I., transekvatoriální, sporadická vrstva E), s pásmem, lokátorem a vzdáleností.
+H2|2.3 Jak program čte spoty
+P|Z každého řádku "DX de" program získá spottera, kmitočet, DX, komentář, čas a, pokud jsou uvedeny, lokátory a druh šíření zapsané v komentáři ve tvaru JN70CN<ES>JO62QM (první lokátor patří spotterovi, druhý DX; přijímají se i tvary s <>, > a závorkami).
+LI|Chybějící lokátory se hledají v archivu CALL3; nepřesné lokátory (méně než 6 znaků) se nahrazují 6znakovým lokátorem z CALL3, pokud tam je.
+LI|Spoty s <MS>, <AU>, <AUR>, <TR>, <AS> nebo <ACS> v textu se pro sporadickou vrstvu E nepoužívají: slouží pro meteor scatter, auroru, tropo nebo aircraft scatter.
+LI|Stejně jako v YA-MS jsou spoty meteor scatter ty v kmitočtových oknech typických pro MS (50190-50300, 70100-70400, 144290-144399 kHz) bez tagů jiného šíření a ty s druhy provozu MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M nebo s <MS>.
+LI|Spoty s <AU> nebo <AUR> jdou do karty AURORA, spoty s FAI do karty F.A.I.
+H2|2.4 Shromážděné spoty a archiv CALL3
+P|Stránka Shromážděné spoty uvádí poslední spoty s filtrem podle pásma a zdroje; tlačítko Otevřít složku spotů otevře data/spot. Stránka CALL3 zobrazuje archiv značka -> lokátor (formát JTDX/WSJT): lze vyhledat značku, znovu načíst archiv nebo importovat nový soubor CALL3.TXT, který nahradí používaný (starý zůstane jako záložní kopie).
+H2|2.5 Data o šíření
+P|Podkarta Data o šíření shromažďuje data, která pomáhají pochopit, zda se pásmo může otevřít. Aktualizují se sama nejvýše jednou za hodinu; tlačítko Aktualizovat nyní je stáhne okamžitě.
+LI|N0NBH (hamqsl.com): banner podmínek VKV a sluneční data (sluneční tok, indexy A a K, rentgenové záření, sluneční vítr, Bz, aurora a aurorální šířka) s E-skipem pro Evropu a Severní Ameriku (data DXrobot).
+LI|Bz pro auroru: NOAA SWPC, sluneční vítr v reálném čase měřený družicí v bodě L1 (DSCOVR/ACE), každou minutu. Záporná a trvalá Bz auroře napomáhá.
+LI|Aurora: index Dst z Kjóta (geomagnetické bouře) a pro jižní polokouli výstrahy aurory australského Bureau of Meteorology, které vyžadují bezplatný klíč zadaný do pole Klíč API BoM. Tlačítka Index AE (Kjóto) a Konvekce SuperDARN otevřou obě stránky v prohlížeči.
+LI|Meteor scatter: graf dnešní meteorické aktivity (data RMOB) z Make More Miles on VHF; roje, účinnost a živý provoz jsou v kartě METEOR SCATTER.
+P|Souhrn těchto dat se zobrazuje vpravo nahoře na mapách SPORADIC-E a F.A.I. (E-skip zvoleného kontinentu) a AURORA (aurora od N0NBH a Bz od NOAA).
+H1|3. Sporadická vrstva E (SPORADIC-E)
+P|Karta SPORADIC-E má tři podkarty: REAL-TIME, živé spoty popsané v této kapitole; BENCHMARK Es (kapitola 4) a BENCHMARK 50 MHz (kapitola 5).
+H2|3.1 Mapa
+P|Nabídka Mapa volí projekci. Azimutální: azimutální ekvidistantní mapa se středem ve vlastní stanici, s posuvníkem zvětšení (od 300 do 20000 km od středu, také kolečkem myši). Mercator: mapa světa s tlačítky Evropa a Svět. V obou projekcích se kolem stanice kreslí kruhy vzdáleností z tabulky IK3XTV [3]: 500 km (minimum jednoho skoku), 1500-2000 km (optimum), 2400 km (maximum jednoho skoku), 5000 km (maximum dvojitého skoku) a 6900 km (maximum trojitého skoku).
+P|Tabulka délek skoků na 50 MHz pochází od Flavia Egana IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; oblaka Es se nacházejí ve výšce asi 100 km, což omezuje jeden skok na zhruba 2000 km [29]. Mezikruží na mapách a počet skoků se řídí těmito vzdálenostmi:
+TAB|Skok;Minimální vzdálenost;Optimální vzdálenost;Maximální vzdálenost
+TAB|Jeden skok;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dvojitý skok;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Trojitý skok;-;4800-6400 km;6900 km
+P|V azimutálních zobrazeních čárkované kruhy udávají km od středu; krok kruhů se mění se zvětšením a vnější okraj udává maximální zobrazenou vzdálenost.
+H2|3.2 Ovládací prvky
+LI|Pásma: 10, 6, 4 a 2 m (432 MHz se neanalyzuje: sporadická vrstva E se ho netýká [22]-[24]); časové okno spotů od 15 minut do 12 hodin.
+LI|Výška Es (výchozí 110 km) a minimální elevace antén (výchozí 1°); elevace zohledňuje troposférickou refrakci (poloměr Země 4/3), takže jeden skok dosahuje asi 2440 km.
+LI|První skoky (stejné skoky): zobrazí první skok obou stanic; Krátký první skok do…: zobrazí hypotézu autora o krátkém prvním skoku (výchozí 1200 km) [4].
+LI|Oblaka Es na čtvercích Maidenhead: obarví čtverce bodů odrazu podle nejvyššího kmitočtu spotů (zelená do 29 MHz, žlutá do 51, oranžová do 71, červená do 145 MHz). Pokud pravděpodobná MUF oblaku na nejdelším skoku (2400 km) dosáhne vyššího pásma, čtverec bliká barvou tohoto pásma.
+LI|144 MHz směrem ke Kanárským ostrovům, Madeiře a Azorům (pravidlo autora): nad 2400 km spot platí, jen pokud alespoň dva spoty ukazují na stejný oblak Es; kreslí se skok Es, oblak a čárkovaně trasa tropo až k ostrovu. Na 50 a 70 MHz se pravidlo neuplatňuje.
+H2|3.3 Tabulky a podrobnosti
+P|Tabulka Spoty Es uvádí platné spoty se vzdáleností, počtem skoků a minimální foEs; tabulka Oblaka Es (čtverce) uvádí čtverce s odhadnutými oblaky a MUF, kterou by daly pro vlastní stanici (červená 144 MHz, oranžová 70 MHz, žlutá 50 MHz). Při nastaveném zvětšení tabulky ukazují jen to, co je vidět na mapě.
+LI|Kliknutí na spot v tabulce nebo na mapě: trasa se zvýrazní žlutým svitem, mapa ji v případě potřeby přivede do zorného pole a rámeček Podrobnosti uvede skoky, body odrazu, foEs a azimuty. Spot zůstane vybrán, i když přicházejí nové spoty.
+LI|Kliknutí na volný bod mapy: bod se posuzuje jako možný oblak Es, s foEs potřebnou pro 28, 50, 70 a 144 MHz.
+LI|Při Kp nad 3 to mapa signalizuje vpravo nahoře: sporadická vrstva E je méně pravděpodobná (více než 90 % otevření nastává při Kp ≤ 3, IK3XTV-IZ3ESV [51]).
+LI|QSO na 50 MHz nad 11000 km se v podrobnostech objeví jako VÝSTRAHA, jen jako statistická poznámka (EI7GL [56]: HZ1SK-K4MOG, 11460 km).
+LI|Podkarta Předzvěsti vícenásobného skoku: pro vzdálené oblasti (celkem třicet po celém světě) program kontroluje, zda jsou v bodech skoku trasy, při stejných skocích a vždy také s krátkým prvním skokem do 1200 km, aktivní oblaka Es zjištěná ze spotů jiných stanic. VÝSTRAHA (červená): všechny body pokryty; PŘEDZVĚST (žlutá): chybí jediný bod, v oblasti bez pozorovatelů. Kliknutí na řádek nakreslí čárkovanou trasu, body skoku (zelená: aktivní oblak; šedá: žádný pozorovatel; červená: žádný oblak) a spoty, které oblaka dokládají; podrobnosti uvádějí potřebnou foEs pro každý skok.
+LI|Spoty v elektricky modré s popiskem TEP jsou trasy, které protínají magnetický rovník, ale jsou delší nebo asymetričtější než čisté TEP (například ZS6 - OH, SM, LA): sporadická vrstva E se může navázat na TEP. Zůstávají mezi spoty Es; ve sloupci Prop se zobrazí ES+TEP.
+H2|3.4 Pravidla autora
+LI|144 MHz: sporadická vrstva E začíná od více než 900 km; samotný spot se nekreslí; kreslí se, pokud do 5 minut přijde druhý spot na stejném oblaku nebo pokud je v okolí spot s krátkým skokem na 50 MHz. Zelený řádek nahoře říká, kolik spotů čeká na potvrzení.
+LI|Transekvatoriální: směrem do kontinentální Afriky (s Madagaskarem) a Jižní Ameriky, pokud střed trasy padne do pásu magnetické inklinace mezi -20° a +20°, je spojení transekvatoriální a ne přes sporadickou vrstvu E, pokud spot neuvádí <ES>. Kanárské ostrovy, Madeira, Kapverdy a Arabský poloostrov zůstávají mimo pravidlo.
+H1|4. BENCHMARK Es (podkarta SPORADIC-E)
+H2|4.1 Načtení deníku
+P|Podkarta BENCHMARK Es je testovací lavicí sporadické vrstvy E na celém deníku ADIF, i jiné stanice. Načíst ADIF otevře soubor (program si jej zapamatuje a při spuštění znovu načte), Uvolnit ADIF jej odebere. Stanice ve středu nabídne nejčastější značku a lokátor z deníku; lze je změnit a potvrdit tlačítkem Použít.
+LI|Poloha vysílání je MY_GRIDSQUARE každého QSO; polohy příjmu jsou GRIDSQUARE (chybějící nebo 4znakové lokátory se berou z CALL3).
+LI|Lze vyloučit QSO s jiným PROP_MODE a ta pod 500 km (900 km na 144 MHz); transekvatoriální se vylučují vždy, kromě PROP_MODE=ES.
+LI|Na mapě rozmazaná žlutá tečka označuje střed každého skoku, kde se předpokládá oblak sporadické vrstvy E (také střed krátkého prvního skoku, pokud je hypotéza aktivní).
+H2|4.2 Dny, hodiny a výpočty
+P|Tabulka QSO za den uvádí dny s počtem QSO, pásmy, maximální vzdáleností a vícenásobnými skoky; kliknutí na den vyplní tabulku Hodiny dne, s řádkem pro každou hodinu UTC a řádkem Celý den. Azimutální mapa s posuvníkem maximální vzdálenosti kreslí skip po sektorech 10° (oranžový oblouk = nejbližší QSO, zelený sektor = dosažené vzdálenosti), oblaka na čtvercích a pro celý den hodinový posun oblaků (červená čára).
+P|Stránka Navržené výpočty uvádí skip po sektorech, odhadnutou foEs s očekávanou MUF na 1000, 1500, 2000 a 2400 km, odhadnutá oblaka, ověření vícenásobného skoku (stejné skoky proti krátkému prvnímu skoku, porovnané s oblaky viděnými jedním skokem v rozmezí ±30 minut) a posun oblaků hodinu po hodině.
+H1|5. BENCHMARK 50 MHz (podkarta SPORADIC-E)
+H2|5.1 Jedna nebo dvě stanice
+P|Podkarta BENCHMARK 50 MHz je věnována sporadické vrstvě E s vícenásobným skokem na 50 MHz. V řádku Stanice 1 se načítá a uvolňuje deník vlastní stanice; v řádku Stanice 2 deník druhé stanice, který se zobrazuje nebo skrývá zaškrtávacím polem Stanice 2. Trasy stanice 1 jsou světle modré, trasy stanice 2 fialové.
+LI|Zobrazují se QSO na 50 MHz s vícenásobným skokem, tj. nad 3100 km (pravidlo autora); počet skoků se řídí tabulkou IK3XTV.
+LI|Den, od… do… UTC: den (při otevření ten s nejvíce QSO s vícenásobným skokem) a časový interval v krocích po 15 minutách.
+LI|foEs (volitelné): obarví trasy podle minimální foEs a uvede ji v tabulce. Výška Es a Krátký první skok do 1200 km jako v ostatních kartách.
+LI|Rozmazaná žlutá tečka označuje střed každého skoku, kde se předpokládá oblak sporadické vrstvy E; na trase pod myší se zvětší.
+H2|5.2 Mercatorova mapa
+P|Mapa je Mercatorova s volným středem. Když se myš přiblíží k trase, čára a ikony se zvětší a zobrazí se 6znakový čtverec WWL protistanice. Levým kliknutím na tuto trasu se objeví okno s dotazem, zda zobrazit všechna QSO v souboru, ze všech dnů, s koncovou polohou do 150 km: Ano vyprázdní mapu a zobrazí tato QSO uvnitř oranžového kruhu, Ne nechá mapu, jak je. Tlačítko Zpět na den a čas vrátí předchozí volbu.
+H1|6. F.A.I.
+H2|6.1 Dvě zobrazení
+P|Karta F.A.I. studuje rozptyl na nehomogenitách orientovaných podél magnetického pole (hlavní zdroj [1], [2]). Zobrazení Scatter trail (dvojice A-B) vypočítá pro dvě stanice místo možných bodů rozptylu, obarvené podle odchylky od podmínky odrazu, navrhne nejpravděpodobnější bod rozptylu a vpravo nahoře nakreslí rámeček QTF a elevací obou stanic (červená = A, zelená = B). Zobrazení Izoflexe (bod) kreslí pro zvolený bod odrazu čáry izoflexe jako AuroReflex a SE-PROP od K9SE: barevné pásy v tmavých schématech, silné čáry ve světlých schématech.
+H2|6.2 Ovládací prvky
+LI|Stanice A a Stanice B: značka (hledaná v CALL3) a/nebo lokátor; prázdné A = vlastní stanice. Nabídka Kontroly… načte zkušební dvojice (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE); nabídka Známé body rozptylu… vybere doložený bod rozptylu (Ženeva, Brusel, Budapešť, JN92, JN41/42).
+LI|Výška (výchozí 110 km), minimální elevace a Refrakce (poloměr Země 4/3), ve výchozím stavu zapnutá.
+LI|Levé kliknutí na mapu: bod odrazu k ověření (přepne do zobrazení Izoflexe); pravé kliknutí: poloha stanice B.
+LI|Ověřit doporučený bod: vypočítá stopu, vezme navržený bod rozptylu a zobrazí jeho čáry izoflexe s verdiktem: USPOKOJIVÉ (do 1°), PŘIJATELNÉ (do 2,5°), NEUSPOKOJIVÉ (nad).
+P|Pokud podle modelu výpočet není možný, zobrazí se zpráva Výpočet není možný a žádný další výsledek se nezobrazí. Dole tabulka Spoty F.A.I. uvádí spoty označené FAI; kliknutí na spot načte jeho dvojici stanic.
+H1|7. METEOR SCATTER
+P|Karta obsahuje kompletní program YA-MS s jeho kartami (Živá data a data v reálném čase: živý provoz meteor scatter, tok z radaru, radar GRAVES; Výpočet předpovědi: nebeská klenba a výpočet, geometrie a útlum trasy, výpočet účinnosti, experimentální předpovědi; Technické dokumenty: roje, zdroje, mapa zdrojů, účinnost - vysvětlení, mapa čtverců) a jeho příručkou výpočtů. Jazyk a barevné schéma jsou ty zvolené nahoře. Uvnitř E-LAYER ANALYZER se Sběr dat programu YA-MS nezobrazuje: sběr je jediný, ten z DATA COLLECTION, který předává řádky do YA-MS, a filtr spotů meteor scatter se nastavuje ve sloupci filtrů DATA COLLECTION.
+H1|8. AURORA
+P|Karta AURORA používá stejná zobrazení jako F.A.I. (výchozí výška 110 km, Lange-Hesse [12]) s daty kosmického počasí od NOAA [15]: polární ovál OVATION (vystínovaný na mapě), index Kp za poslední tři dny a sluneční vítr, stahované každých 5 minut do data/swpc nebo okamžitě tlačítkem Stáhnout NOAA nyní. Program doporučí směrování pro obě stanice.
+LI|Spoty aurory za období zvolené ve filtrech DATA COLLECTION (výchozí poslední 2 hodiny, nejvýše 30) se kreslí na mapu s vypočteným bodem rozptylu (oranžový kruh), pokud je zaškrtnuto pole Spoty <AU>/<AUR> na mapě s výpočtem; ve výsledcích se zobrazí QTF a elevace obou stanic.
+LI|Ve výsledcích zobrazení Scatter trail se objeví pravděpodobnost aurory v bodě rozptylu (nepravděpodobná při Kp ≤ 2; jinak podle oválu NOAA), typický QTF mezi S a SV (J-JV na jižní polokouli) s odchylkou od přímé trasy a doporučení k Dopplerovu posuvu a druhům provozu (CW/SSB nebo Q65 se širokými submódy: FT8 často nedekóduje). Bod rozptylu se hledá přednostně ve vzdálenosti 370 až 1100 km od každé stanice, s kolmostí do ±3°; pokud je navržený bod mimo tento rozsah, program to oznámí.
+LI|Spoty aurory nad 2000 km jsou označeny jako pochybné: podle Newtona [48] aurora dosahuje kolem 1000 km sever-jih a 2000 km východ-západ. Spoty aurorální E (AUE, AU-E, AURORAL E) se kreslí zeleně na přímé trase: jde o sporadickou vrstvu E aurorálního původu, bez Dopplerova posuvu.
+LI|Výsledky uvádějí sluneční čas v bodě rozptylu: do 4 hodin od místní půlnoci spadá většina aurorálních odrazů (Reeve [52]). Na jižní polokouli dosahuje aurora na 50 MHz až asi 2000 km na trasách východ-západ (ANVDG [55]); aurorální E dává slabší a stabilnější signály na přímé trase (SM2CEW-SM0FOB [54]).
+LI|Kromě nejpravděpodobnějšího bodu rozptylu výsledky uvádějí rozsah QTF obou stanic podél celé stopy (odchylka ≤ 1,5°): aurora může přicházet z kteréhokoli bodu rozsahu a nejpravděpodobnější bod upřednostňuje nejkratší trasu.
+H2|8.1 BENCHMARK AURORA
+P|Karta AURORA má dvě podkarty: REAL-TIME, výpočet popsaný výše, a BENCHMARK AURORA, testovací lavici modelu na 298 skutečných publikovaných QSO přes auroru (deníky EI5FK 2003-2005 a mapa deníku PA0O).
+LI|Nabídka Deník volí jeden deník nebo všechny dohromady; výchozí výška je 110 km, s tolerancí 3°, refrakcí 4/3 a IGRF-14.
+LI|Tabulka uvádí pro každé QSO vypočtený bod rozptylu, odchylku, QTF a elevaci stanice a QTF protistanice. Zelená: bod rozptylu ve vzdálenosti 370-1100 km od obou stanic; žlutá: vysvětleno, ale mimo toto okno; oranžová: QSO nad 2000 km; červená: žádný bod rozptylu, QSO nevysvětlené modelem.
+LI|Souhrn dává procenta a pro každý deník rozsah a medián vypočteného QTF; kliknutí na řádek nakreslí trasu a obě směrování. Deníky neuvádějí směrování antény: porovnání se týká geometrie, ne QTF.
+H1|9. LOG ADIF
+P|Karta LOG ADIF zobrazuje pracované a potvrzené čtverce, pásmo po pásmu od 28 MHz výše, bez slučování pásem. Otevřít soubor ADIF… přidá soubory deníku; Stáhnout z LoTW… stáhne výpis potvrzení (uživatelské jméno lze zapamatovat, heslo se nikdy neukládá); Vymazat paměť odebere soubory a výpis. Čtverce jsou oranžové, pokud jsou pracované, jinak obarvené, pokud jsou potvrzené QSL nebo přes LoTW; kliknutí na čtverec zobrazí značky a druh šíření.
+H1|10. Dokumenty
+P|Karta ZDROJE uvádí zdroje citované programem, karta po kartě. Karta SHRNUTÍ VOLEB VÝPOČTU uvádí vzorce a volby výpočtu se zdroji v každém kroku; tato UŽIVATELSKÁ PŘÍRUČKA vysvětluje, jak program používat; TECHNICKÁ ZPRÁVA vykládá důvody, které vedly tvorbu programu. Všechny tři dokumenty lze exportovat do Wordu.
+H1|11. Praktické rady
+LI|Nejprve nahoře zadejte značku a lokátor a stiskněte Použít: od nich se odvíjejí všechny vzdálenosti, MUF a elevace.
+LI|S RBN a PSKReporter nechte místní filtr zapnutý, abyste nezaplnili paměť spoty z KV.
+LI|K analýze minulé sezóny použijte oba BENCHMARKy s vlastním deníkem; u aurory a F.A.I. vždy ověřte navržený bod v zobrazení Izoflexe.
+LI|Výpočty jsou orientační: spot nebo QSO říká, že trasa byla otevřená, ne kde přesně byl oblak.

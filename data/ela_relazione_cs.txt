@@ -1,0 +1,67 @@
+TITLE|Technická zpráva o E-LAYER ANALYZER
+SUB|Volby, které vedly ke vzniku programu - autor Costantino IC8TEM - verze 0.4.3, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE.
+H1|1. Úvod
+P|E-LAYER ANALYZER vzniká z konkrétní potřeby operátora VKV: mít v jediném nástroji vše, co je potřeba k interpretaci druhů šíření, které se týkají vrstvy E ionosféry. Až dosud se sporadická vrstva E, F.A.I., meteor scatter a rádiová aurora studovaly různými programy, často vytvořenými jen pro jeden operační systém, někdy už neudržovanými, každý s vlastním geometrickým modelem a vlastními konvencemi. Tato zpráva vykládá důvody provedených voleb a rozlišuje, co vychází z literatury, co ze zkušeností autora z provozu na pásmu a co je volbou programu, kterou je třeba potvrdit používáním.
+H2|1.1 Cíle
+LI|Spojit v jednom programu analýzu sporadické vrstvy E, i vícenásobného skoku a mimokontinentální, F.A.I., meteor scatter a rádiové aurory.
+LI|Pracovat se skutečnými daty: spoty z DX clusterů v reálném čase a deníky ADIF stanic.
+LI|Učinit každý výpočet ověřitelným: vzorce a zdroje vyložené krok za krokem a skutečné srovnávací případy.
+LI|Fungovat všude, kde má operátor svůj staniční počítač, od PC s Windows po Raspberry Pi.
+H2|1.2 Metoda
+P|Práce postupovala postupnými zkouškami: každá karta byla nejprve načrtnuta, pak ověřena na doložených případech a pak opravena podle pokynů autora, které jsou plodem let činnosti na VKV z Capri (JN70CN). Pravidla, která z toho vzešla, jsou ve shrnutí voleb výpočtu uvedena jako pravidla autora, aby je čtenář mohl odlišit od výsledků literatury.
+H1|2. Architektura programu
+H2|2.1 Jedna platforma pro všechny systémy
+TAG|SCELTA|Program je napsán v C# na .NET 8 s grafickým rozhraním Avalonia. Bylo mu dáno přednost před řešeními vázanými na Windows, protože jediný kód vytváří balíčky pro 64bitové a 32bitové Windows, Linux, Raspberry Pi (ARM64) a Mac, se stejnou grafikou a stejnými funkcemi; kompilace a balíčky se vytvářejí automaticky, se zkušebními snímky každé karty v několika barevných schématech a jazycích.
+TAG|SCELTA|Všechna data zůstávají ve složce data vedle programu a žádný soubor se nezapisuje do AppData ani do systémových složek: program se přesouvá zkopírováním složky, obnovuje se smazáním souboru a stanice zůstává pánem svých dat. Ze stejného důvodu se heslo k LoTW nikdy neukládá.
+H2|2.2 Rodina programů
+P|E-LAYER ANALYZER sdílí grafiku, barevná schémata a konvence s YA-MS a YAEC, dalšími programy autora. YA-MS, věnovaný meteor scatter, je celý obsažen v kartě METEOR SCATTER: slaďovací skript jej mění z okna na panel, aniž by měnil jeho výpočty, takže každá nová verze YA-MS vstupuje do E-LAYER ANALYZER bez přepisování. Když mají oba programy společné funkce, jako je sběr spotů, platí jediné pravidlo: uvnitř E-LAYER ANALYZER dostává sběr dat YA-MS řádky z relací telnet karty DATA COLLECTION, čímž se zabrání dvojímu připojení se stejnou značkou.
+H2|2.3 Rozhraní
+TAG|SCELTA|Každá analytická karta věnuje alespoň 65 % okna mapě a 35 % datům a výpočtům: šíření je geografický jev a mapa musí zůstat středem čtení. Projekce jsou zvoleny podle své funkce: pro sporadickou vrstvu E azimutální ekvidistantní se středem ve stanici (skutečné vzdálenosti a azimuty, kruhy stejné vzdálenosti) nebo Mercatorova, v obou případech s kruhy vzdáleností podle IK3XTV; Mercatorova s volným středem pro vícenásobný skok na 50 MHz v celosvětovém měřítku; ekvirektangulární pro F.A.I. a auroru, kde záleží na síti lokátorů a na siločarách.
+TAG|SCELTA|Všechny popisky, dokumenty a wiki jsou přeloženy: 36 jazyků: všechny jazyky YAEC plus dánština a tagalština, a od verze 0.4.4 také brazilská portugalština, tradiční čínština, polština, čeština, rumunština, maďarština, řečtina a thajština. V zobrazení F.A.I. a aurory se místo bodů rozptylu ve všech jazycích nazývá Scatter trail, aby nevznikala záměna s meteorickou stopou.
+TAG|SCELTA|Ve verzi 0.4.4 se oba BENCHMARKy stávají podkartami SPORADIC-E, vedle živého zobrazení REAL-TIME: tři zobrazení sporadické vrstvy E jsou pohromadě. Vedle času UTC skrytá kontrola s deseti servery NTP po celém světě říká, zda jsou hodiny srovnané (NTP:OK nebo NTP:FAILED), protože porovnávání spotů z různých clusterů vyžaduje spolehlivý čas.
+H1|3. Fyzikální volby
+H2|3.1 Společná geometrie
+TAG|FONTE|Země je koule o poloměru 6372,7955 km, jako v článku o F.A.I. [1] a v YA-MS [5]; elevace k bodu vrstvy a zákon sekanty jsou převzaty z klasické literatury. Volba koule místo elipsoidu odpovídá přesnosti 6znakových lokátorů, která je několik kilometrů.
+TAG|SCELTA|U F.A.I. a aurory se uplatňuje troposférická refrakce s ekvivalentním poloměrem Země 4/3, která posouvá rádiový obzor o několik desítek kilometrů; u sporadické vrstvy E, kde záleží hlavně na vzdálenostech mezi stanicemi, zůstává geometrie skutečné koule.
+H2|3.2 Sporadická vrstva E
+TAG|FONTE|Počet skoků se řídí tabulkou Flavia Egana IK3XTV, zveřejněnou ve studii «Propagazione sui 6 metri - Caratteristiche generali» (Amateur Radio Propagation Studies, dok. č. 10.36.43, duben 2003) [3]: jeden skok do 2200-2400 km, dvojitý do 4400-5000 km, trojitý do 6900 km. Je to empirická tabulka odvozená ze skutečných spojení na 50 MHz, a proto jí byla dána přednost před čistě geometrickým výpočtem, který by dával teoretické dosahy větší, než jsou pozorované. IK3XTV váže délku skoku na výšku oblaků Es, asi 100 km, která omezuje jeden skok na zhruba 2000 km [29], a na zkracování skipu, které ukazuje růst MUF: skip 400-500 km na 28 MHz pro MUF, která dosahuje 50 MHz, skip 500-700 km na 50 MHz pro MUF, která unese 144 MHz.
+TAB|Skok;Minimální vzdálenost;Optimální vzdálenost;Maximální vzdálenost
+TAB|Jeden skok;500-650 km;1500-2000 km;2200-2400 km
+TAB|Dvojitý skok;2800-3000 km;3200-4000 km;4400-5000 km
+TAB|Trojitý skok;-;4800-6400 km;6900 km
+TAG|FONTE|U vícenásobného skoku program staví vedle hypotézy stejných skoků hypotézu krátkého prvního skoku, do 1200 km od vlastního QTH, která vychází ze zkušenosti autora [4]. Obě hypotézy se v BENCHMARKech porovnávají s oblaky viděnými jedním skokem ve stejnou hodinu: je to nejpoctivější způsob, jak nechat rozhodnout data.
+TAG|SCELTA|foEs se odhaduje zákonem sekanty a je vždy minimálním prahem: spot říká, že kmitočet prošel, ne jak vysoký byl kritický kmitočet. Oblaka se seskupují na čtverce Maidenhead o 4 znacích, v měřítku, ve kterém operátoři šíření čtou a porovnávají.
+TAG|FONTE|Sporadická vrstva E se netýká 432 MHz: její MUF dosahuje asi 150-200 MHz [22], [23] a rekordy ARRL uvádějí spojení přes Es jen na 50 a 144 MHz [24]. Program to výslovně uvádí, protože některé obecné zdroje, i ty vytvořené umělou inteligencí, tvrdí opak.
+TAG|FONTE|Dvě statistická upozornění, schválená autorem, doprovázejí sporadickou vrstvu E, aniž by měnila výpočty: při Kp nad 3 je Es méně pravděpodobná (IK3XTV-IZ3ESV [51]); QSO na 50 MHz nad 11000 km je označeno jako statistická poznámka (EI7GL [56]).
+TAG|SCELTA|Vícenásobný skok na 28 a 50 MHz probíhá hlavně ve směru východ-západ (Takata [60]) a ohlašuje se aktivními oblaky na jiných kontinentech (EI7GL [58]): proto program hledá předzvěsti podél příčných tras od stanice uživatele, se skoky podle IK3XTV a vždy s krátkým prvním skokem autora. Trasy, které protínají magnetický rovník, ale přesahují čisté TEP (ZS6 - OH, ZD7 - GM [59]), se zobrazují elektricky modře jako Es navazující na TEP, protože ze spotu to nelze rozlišit.
+H2|3.3 F.A.I. a aurora
+TAG|FONTE|F.A.I. se opírá o článek IC8FAX a IC8TEM z roku 2011 [1] a o stránku IC8FAX [2]: rozptyl nastává tam, kde paprsek potká nehomogenity orientované podél magnetického pole pod takovým úhlem, že jej vrátí k protistanici. Pro dvojici stanic není správnou podmínkou prostá kolmost k poli, ale bistatická Braggova podmínka (kužel odrazu), kterou program uplatňuje.
+TAG|RILIEVO|Magnetické pole se počítá mezinárodním modelem IGRF-14 [16] do stupně 13, ověřeným s přesností 1 nT proti referenční implementaci. S prostým dipólem vycházelo spojení IC8FAX-G4LOH jako nemožné; s IGRF-14 padá bod rozptylu 28 km od Bruselu, jednoho z doložených bodů rozptylu. Právě toto ověření rozhodlo o přijetí úplného modelu.
+TAG|SCELTA|Obě zobrazení, Scatter trail a Izoflexe, přebírají grafiku Aurora QTF, AuroReflex a SE-PROP od K9SE [9], [11]: první navrhuje nejpravděpodobnější bod, druhé umožňuje operátorovi ověřit libovolný bod zvolený kliknutím. Pokud model nenajde řešení, program to oznámí zprávou Výpočet není možný a nezobrazí dílčí výsledky, které by byly zavádějící.
+TAG|FONTE|Pro auroru program přidává data NOAA (ovál OVATION, Kp, sluneční vítr) [15], používaná jako ukazatel přítomnosti nehomogenit, a kritéria literatury o rádiové auroře [12]-[14] pro doporučené směrování obou stanic.
+TAG|FONTE|Ve verzi 0.4.4 se aurora opírá o zdroje schválené autorem: Lange-Hesse [12] pro výšku 110 km, kolmost do ±3° a preferovaný rozsah 370-1100 km od stanic; G3WPO [14] a G0ISW [33] pro směrování mezi severem a východem, vzdálenosti a Dopplerův posuv; K7CW [34] pro digitální druhy provozu; Newton [48] pro maximální vzdálenosti, kolem 1000 km sever-jih a 2000 km východ-západ; index Dst z Kjóta [46] a výstrahy Bureau of Meteorology [44] pro bouře a jižní polokouli.
+TAG|FONTE|Přidává se časová váha podle Reeva [52] (aurorální odrazy do asi 4 hodin od místní sluneční půlnoci), aurora na 50 MHz ve Spojených státech (ARRL [53]), aurorální E ze švédské Arktidy (SM2CEW-SM0FOB [54]) a jižní aurora na 50 MHz až do asi 2000 km (ANVDG [55]).
+TAG|SCELTA|Model aurory má testovací lavici na skutečných QSO (BENCHMARK AURORA): z 298 QSO od EI5FK a PA0O jich vysvětlí 296; případ K8GU byl vyřazen, protože není známa použitá anténa.
+H2|3.4 Meteor scatter
+P|Meteor scatter je svěřen YA-MS [5], který počítá účinnost rojů, čte tok z meteorických radarů a začleňuje živá pozorování. Volba začlenit jej celý, místo přepisování jeho části, zaručuje, že oba programy dávají vždy stejný výsledek.
+H1|4. Rozpoznávání dat
+H2|4.1 Spoty
+P|Kvalita každé analýzy závisí na kvalitě rozpoznání dat: pokud je skip odvozen ze spolehlivých spotů, lze pak zrekonstruovat další skoky a hledat další oblaka. Proto program uplatňuje řadu pravidel, téměř všechna stanovená autorem po ověření na skutečných spotech.
+LI|Spoty s <MS>, <AU>, <AUR>, <TR>, <AS> nebo <ACS> patří k jiným druhům šíření a do sporadické vrstvy E nevstupují; spoty v kmitočtových oknech typických pro meteor scatter nebo s digitálními druhy provozu MS patří k meteor scatter, jako v YA-MS.
+LI|Na 144 MHz začíná sporadická vrstva E od více než 900 km a osamocený spot se nekreslí, dokud jej nepotvrdí druhý spot na stejném oblaku nebo krátký skok na 50 MHz v okolí: jediný spot na 2 m je příliš často tropo nebo chyba lokátoru.
+LI|Směrem do kontinentální Afriky a Jižní Ameriky, když střed trasy padne do pásu ±20° magnetické inklinace, je spojení transekvatoriální a ne přes sporadickou vrstvu E, pokud není výslovně uvedeno jinak.
+LI|Chybějící nebo nepřesné lokátory se berou z archivu CALL3; program se učí nové lokátory jen z úplného tvaru LOC<druh provozu>LOC, který nenechává pochybnost, který lokátor patří ke které stanici.
+LI|Místní filtr zahazuje řádky clusteru mimo rozsah 27990 kHz - 145 MHz a při každém zavření programu se databáze spotů vyprázdní: každá relace začíná s čerstvými daty.
+H2|4.2 Deníky
+P|Oba BENCHMARKy uplatňují na deníky ADIF stejná kritéria: poloha vysílání z MY_GRIDSQUARE každého QSO, polohy příjmu z GRIDSQUARE, vyloučení odlišně uvedených druhů šíření a transekvatoriálních spojení. V BENCHMARK 50 MHz se vícenásobný skok posuzuje nad 3100 km, což je práh stanovený autorem, který bezpečně odděluje spojení s vícenásobným skokem od dlouhých jednoduchých skoků.
+H1|5. Ověření
+TAG|RILIEVO|F.A.I. IC8FAX-F6DRO: bod rozptylu JN44GH, odchylka 0,97°. IC8FAX-G4LOH: JN49FR, odchylka 0,88°, 28 km od Bruselu. IC8FAX-FA1MXE s bodem rozptylu u Ženevy: odchylka 3,82°, hodnocená jako neuspokojivá, což odpovídá tomu, že toto spojení vyžaduje jiný bod.
+TAG|RILIEVO|Aurora IO70VJ-JO59BC s refrakcí: bod rozptylu JP01AK, na moři u Shetland, odchylka 0,97°, QTF 11° a 299°, ve shodě s pozorovaným aurorálním směrováním na sever.
+TAG|RILIEVO|V deníku autora na 50 MHz (9876 QSO od roku 2017 do 2026) program rozpozná 1738 QSO nad 2400 km ve 386 dnech a transekvatoriální pravidlo z nich 62 přiřadí transekvatoriálnímu šíření, téměř všechna směrem do Jihoafrické republiky, Brazílie a východní Afriky.
+H1|6. Omezení a další vývoj
+LI|Stanice jsou umístěny do středu čtverce lokátoru: se 4 znaky dosahuje chyba asi 80 km.
+LI|foEs je minimální práh a zákon sekanty nadhodnocuje foEs potřebnou na VKV; údaj je třeba číst jako relativní porovnání mezi oblaky.
+LI|Zeměpisné rámce Afriky a Jižní Ameriky jsou přibližné; hraniční případy lze opravit podle údajů operátorů.
+LI|Plánovaný vývoj: porovnání dvou deníků různých stanic ve všech analýzách vícenásobného skoku, stále jemnější rozpoznávání spotů, systematické ověřování pravidel na celých sezónách.
+H1|7. Závěry
+P|E-LAYER ANALYZER nenahrazuje zkušenost operátora: činí ji měřitelnou. Každá volba programu je uvedena, každý vzorec má svůj zdroj, každé pravidlo vzešlé ze zkušenosti je jako takové označeno a lze je prověřit na denících. Právě v této rovnováze mezi literaturou, zkušeností z pásma a ověřováním na datech nachází program svůj smysl.

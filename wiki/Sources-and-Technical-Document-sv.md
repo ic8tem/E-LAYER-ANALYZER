@@ -2,7 +2,7 @@
 
 [← Home](Home-sv)
 
-- Fliken **KÄLLOR** listar alla källor, numrerade [1]-[28].
+- Fliken **KÄLLOR** listar alla källor, numrerade [1]-[63].
 - Fliken **SAMMANFATTNING AV BERÄKNINGSVALEN** (tidigare *Tekniskt dokument*) förklarar varje beräkning med dess formler och etiketterna **KÄLLA** (steg hämtat från en källa), **KONTROLL** (verifierat på programmet eller på ett verkligt fall) och **VAL** (ett val gjort av programmet, som ska bekräftas i luften).
 - Fliken **ANVÄNDARHANDBOK** är programmets fördjupade användarhandbok, flik för flik.
 - Fliken **TEKNISK RAPPORT** redogör för de val som ledde fram till programmet: arkitektur, fysikaliska modeller, igenkänning av data, kontroller, begränsningar och framtida utveckling.
