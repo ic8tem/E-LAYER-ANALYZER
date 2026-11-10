@@ -23,6 +23,7 @@ namespace YAMS
             new[] { "fr", "Français" },
             new[] { "es", "Español" },
             new[] { "pt", "Português" },
+            new[] { "pt-br", "Português (Brasil)" },
             new[] { "nl", "Nederlands" },
             new[] { "sv", "Svenska" },
             new[] { "nb", "Norsk (bokmål)" },
@@ -31,6 +32,11 @@ namespace YAMS
             new[] { "et", "Eesti" },
             new[] { "lv", "Latviešu" },
             new[] { "lt", "Lietuvių" },
+            new[] { "pl", "Polski" },
+            new[] { "cs", "Čeština" },
+            new[] { "hu", "Magyar" },
+            new[] { "ro", "Română" },
+            new[] { "el", "Ελληνικά" },
             new[] { "ru", "Русский" },
             new[] { "uk", "Українська" },
             new[] { "tr", "Türkçe" },
@@ -43,6 +49,8 @@ namespace YAMS
             new[] { "id", "Bahasa Indonesia" },
             new[] { "tl", "Tagalog" },
             new[] { "zh", "中文 (简体)" },
+            new[] { "zh-tw", "中文 (繁體)" },
+            new[] { "th", "ไทย" },
             new[] { "ja", "日本語" },
             new[] { "ko", "한국어" }
         };
@@ -56,6 +64,7 @@ namespace YAMS
             new[] { "fr", "fr-FR" },
             new[] { "es", "es-ES" },
             new[] { "pt", "pt-PT" },
+            new[] { "pt-br", "pt-BR" },
             new[] { "nl", "nl-NL" },
             new[] { "sv", "sv-SE" },
             new[] { "nb", "nb-NO" },
@@ -64,6 +73,11 @@ namespace YAMS
             new[] { "et", "et-EE" },
             new[] { "lv", "lv-LV" },
             new[] { "lt", "lt-LT" },
+            new[] { "pl", "pl-PL" },
+            new[] { "cs", "cs-CZ" },
+            new[] { "hu", "hu-HU" },
+            new[] { "ro", "ro-RO" },
+            new[] { "el", "el-GR" },
             new[] { "ru", "ru-RU" },
             new[] { "uk", "uk-UA" },
             new[] { "tr", "tr-TR" },
@@ -76,6 +90,8 @@ namespace YAMS
             new[] { "id", "id-ID" },
             new[] { "tl", "fil-PH" },
             new[] { "zh", "zh-CN" },
+            new[] { "zh-tw", "zh-TW" },
+            new[] { "th", "th-TH" },
             new[] { "ja", "ja-JP" },
             new[] { "ko", "ko-KR" }
         };
@@ -99,6 +115,9 @@ namespace YAMS
                 try
                 {
                     string os = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+                    string full = CultureInfo.CurrentUICulture.Name.ToLowerInvariant();   // varianti: portoghese brasiliano, cinese tradizionale
+                    if (full == "pt-br") os = "pt-br";
+                    else if (full == "zh-tw" || full == "zh-hk" || full == "zh-mo" || full.StartsWith("zh-hant")) os = "zh-tw";
                     if (IndexOf(os) >= 0) code = os;
                 }
                 catch { }
