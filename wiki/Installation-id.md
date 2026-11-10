@@ -6,12 +6,15 @@ Unduh file yang tepat dari halaman **[Releases](https://github.com/ic8tem/E-LAYE
 
 | Sistem | File | Cara memasang |
 |---|---|---|
-| Windows 64 bit | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | Klik dua kali. Terpasang di `C:\E-LAYER-ANALYZER`, tanpa perlu hak administrator. Tidak ada pintasan di menu Start (pintasan itu akan berada di AppData), hanya ikon desktop opsional. |
-| Windows 32 bit | `...-windows-x86-setup.exe` | Seperti di atas, untuk Windows 32-bit. |
-| Windows portabel | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | Ekstrak di mana saja lalu jalankan `E-LAYER-ANALYZER.exe`. |
-| Linux (PC) | `...-linux-x64.tar.gz` | Ekstrak lalu jalankan `./installa.sh`: terpasang di `~/E-LAYER-ANALYZER` dengan ikon di menu. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 atau 5 dengan **Raspberry Pi OS 64-bit** dan desktop (disarankan RAM 4 GB). Ekstrak lalu jalankan `./installa.sh`. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) atau `...-mac-intel.dmg` | Buka .dmg, klik kanan **Installa E-LAYER-ANALYZER.command** > Open. Terpasang di `~/E-LAYER-ANALYZER`. |
+| Windows 64 bit | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Klik dua kali. Terpasang di `C:\E-LAYER-ANALYZER`, tanpa perlu hak administrator. Tidak ada pintasan di menu Start (pintasan itu akan berada di AppData), hanya ikon desktop opsional. |
+| Windows 32 bit | `...-win-x86-setup.exe` | Seperti di atas, untuk Windows 32-bit. |
+| Windows portabel | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Ekstrak di mana saja lalu jalankan `E-LAYER-ANALYZER.exe`. |
+| Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, lalu jalankan dari menu: pada start pertama program menyalin dirinya ke `~/E-LAYER-ANALYZER`, dengan folder `data` di sebelahnya. |
+| Linux portabel | `...-linux-x64-portatile.tar.gz` | Ekstrak lalu jalankan `./E-LAYER-ANALYZER`, atau jalankan `./installa.sh`: terpasang di `~/E-LAYER-ANALYZER` dengan ikon di menu. |
+| Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` atau `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 atau 5 dengan **Raspberry Pi OS 64-bit** dan desktop (disarankan RAM 4 GB). File .deb seperti di atas; versi portabel seperti untuk Linux. |
+| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 atau 4 dengan **Raspberry Pi OS 32-bit**. Ekstrak lalu jalankan `./E-LAYER-ANALYZER` atau `./installa.sh`. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) atau `...-osx-x64.dmg` (Intel) | Buka .dmg, klik kanan **Installa E-LAYER-ANALYZER.command** > Open. Terpasang di `~/E-LAYER-ANALYZER`. |
+| Mac, hanya aplikasi | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Ekstrak **E-LAYER-ANALYZER.app** ke folder milik Anda sendiri (misalnya `~/E-LAYER-ANALYZER`, bukan Applications): folder `data` dibuat di sebelah aplikasi. Pada start pertama klik kanan > Open. |
 
 ## Pembaruan
 

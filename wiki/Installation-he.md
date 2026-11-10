@@ -6,12 +6,15 @@
 
 | מערכת | קובץ | איך מתקינים |
 |---|---|---|
-| Windows ‏64 ביט | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | לחיצה כפולה. מותקן ב-`C:\E-LAYER-ANALYZER`, ללא צורך בהרשאות מנהל. אין קיצור דרך בתפריט התחל (הוא היה נשמר ב-AppData), רק סמל אופציונלי בשולחן העבודה. |
-| Windows ‏32 ביט | `...-windows-x86-setup.exe` | כנ״ל, עבור Windows ‏32 ביט. |
-| Windows נייד | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | חלצו בכל מקום והפעילו את `E-LAYER-ANALYZER.exe`. |
-| Linux (מחשב אישי) | `...-linux-x64.tar.gz` | חלצו והריצו `./installa.sh`: מותקן ב-`~/E-LAYER-ANALYZER` עם סמל בתפריט. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 או 5 עם **Raspberry Pi OS ‏64 ביט** ושולחן עבודה (מומלץ 4 GB של RAM). חלצו והריצו `./installa.sh`. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) או `...-mac-intel.dmg` | פתחו את ה-‎.dmg, לחצו לחיצה ימנית על **Installa E-LAYER-ANALYZER.command** > Open. מותקן ב-`~/E-LAYER-ANALYZER`. |
+| Windows ‏64 ביט | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | לחיצה כפולה. מותקן ב-`C:\E-LAYER-ANALYZER`, ללא צורך בהרשאות מנהל. אין קיצור דרך בתפריט התחל (הוא היה נשמר ב-AppData), רק סמל אופציונלי בשולחן העבודה. |
+| Windows ‏32 ביט | `...-win-x86-setup.exe` | כנ״ל, עבור Windows ‏32 ביט. |
+| Windows נייד | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | חלצו בכל מקום והפעילו את `E-LAYER-ANALYZER.exe`. |
+| Linux ‏64 ביט (מחשב אישי) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ואז הפעילו מהתפריט: בהפעלה הראשונה התוכנה מעתיקה את עצמה ל-`~/E-LAYER-ANALYZER`, עם תיקיית ה-`data` לצידה. |
+| Linux נייד | `...-linux-x64-portatile.tar.gz` | חלצו והריצו `./E-LAYER-ANALYZER`, או הריצו `./installa.sh`: מותקן ב-`~/E-LAYER-ANALYZER` עם סמל בתפריט. |
+| Raspberry Pi ‏(64 ביט) | `e-layer-analyzer_x.y.z_arm64.deb` או `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 או 5 עם **Raspberry Pi OS ‏64 ביט** ושולחן עבודה (מומלץ 4 GB של RAM). ה-‎.deb כמו למעלה; הגרסה הניידת כמו ב-Linux. |
+| Raspberry Pi ‏(32 ביט) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 או 4 עם **Raspberry Pi OS ‏32 ביט**. חלצו והריצו `./E-LAYER-ANALYZER` או `./installa.sh`. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) או `...-osx-x64.dmg` (Intel) | פתחו את ה-‎.dmg, לחצו לחיצה ימנית על **Installa E-LAYER-ANALYZER.command** > Open. מותקן ב-`~/E-LAYER-ANALYZER`. |
+| Mac, אפליקציה בלבד | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | חלצו את **E-LAYER-ANALYZER.app** לתיקייה משלכם (למשל `~/E-LAYER-ANALYZER`, לא Applications): תיקיית ה-`data` נוצרת ליד האפליקציה. בהפעלה הראשונה לחיצה ימנית > Open. |
 
 ## עדכון
 

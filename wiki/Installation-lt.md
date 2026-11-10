@@ -6,12 +6,15 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 
 | Sistema | Failas | Kaip įdiegti |
 |---|---|---|
-| Windows 64 bitų | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | Dukart spustelėkite. Įdiegiama į `C:\E-LAYER-ANALYZER`, administratoriaus teisių nereikia. Nuorodos meniu Start nėra (ji būtų AppData aplanke), tik neprivaloma piktograma darbalaukyje. |
-| Windows 32 bitų | `...-windows-x86-setup.exe` | Kaip aukščiau, 32 bitų Windows. |
-| Windows nešiojamoji | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | Išskleiskite bet kur ir paleiskite `E-LAYER-ANALYZER.exe`. |
-| Linux (PC) | `...-linux-x64.tar.gz` | Išskleiskite ir paleiskite `./installa.sh`: įdiegiama į `~/E-LAYER-ANALYZER`, piktograma pridedama į meniu. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 arba 5 su **64 bitų Raspberry Pi OS** ir darbalaukiu (rekomenduojama 4 GB RAM). Išskleiskite ir paleiskite `./installa.sh`. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) arba `...-mac-intel.dmg` | Atverkite .dmg, dešiniuoju pelės mygtuku spustelėkite **Installa E-LAYER-ANALYZER.command** > Open. Įdiegiama į `~/E-LAYER-ANALYZER`. |
+| Windows 64 bitų | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Dukart spustelėkite. Įdiegiama į `C:\E-LAYER-ANALYZER`, administratoriaus teisių nereikia. Nuorodos meniu Start nėra (ji būtų AppData aplanke), tik neprivaloma piktograma darbalaukyje. |
+| Windows 32 bitų | `...-win-x86-setup.exe` | Kaip aukščiau, 32 bitų Windows. |
+| Windows nešiojamoji | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Išskleiskite bet kur ir paleiskite `E-LAYER-ANALYZER.exe`. |
+| Linux 64 bitų (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, tada paleiskite iš meniu: pirmą kartą paleidžiant programa nusikopijuoja į `~/E-LAYER-ANALYZER`, šalia – aplankas `data`. |
+| Linux nešiojamoji | `...-linux-x64-portatile.tar.gz` | Išskleiskite ir paleiskite `./E-LAYER-ANALYZER` arba paleiskite `./installa.sh`: įdiegiama į `~/E-LAYER-ANALYZER`, piktograma pridedama į meniu. |
+| Raspberry Pi (64 bitų) | `e-layer-analyzer_x.y.z_arm64.deb` arba `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 arba 5 su **64 bitų Raspberry Pi OS** ir darbalaukiu (rekomenduojama 4 GB RAM). .deb – kaip aukščiau; nešiojamoji versija – kaip Linux. |
+| Raspberry Pi (32 bitų) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 arba 4 su **32 bitų Raspberry Pi OS**. Išskleiskite ir paleiskite `./E-LAYER-ANALYZER` arba `./installa.sh`. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) arba `...-osx-x64.dmg` (Intel) | Atverkite .dmg, dešiniuoju pelės mygtuku spustelėkite **Installa E-LAYER-ANALYZER.command** > Open. Įdiegiama į `~/E-LAYER-ANALYZER`. |
+| Mac, tik programa | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Išskleiskite **E-LAYER-ANALYZER.app** į savo pasirinktą aplanką (pavyzdžiui, `~/E-LAYER-ANALYZER`, ne Applications): aplankas `data` sukuriamas šalia programos. Pirmą kartą paleidžiant spustelėkite dešiniuoju pelės mygtuku > Open. |
 
 ## Atnaujinimas
 

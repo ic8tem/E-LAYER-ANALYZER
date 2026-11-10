@@ -6,12 +6,15 @@
 
 | সিস্টেম | ফাইল | কীভাবে ইনস্টল করবেন |
 |---|---|---|
-| Windows 64 বিট | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | ডাবল-ক্লিক করুন। `C:\E-LAYER-ANALYZER`-এ ইনস্টল হয়, অ্যাডমিনিস্ট্রেটর অধিকার লাগে না। Start মেনুতে কোনো শর্টকাট নেই (সেটি AppData-তে থাকত), কেবল ঐচ্ছিক ডেস্কটপ আইকন। |
-| Windows 32 বিট | `...-windows-x86-setup.exe` | ওপরের মতোই, 32-বিট Windows-এর জন্য। |
-| Windows পোর্টেবল | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | যেকোনো জায়গায় এক্সট্র্যাক্ট করে `E-LAYER-ANALYZER.exe` চালান। |
-| Linux (PC) | `...-linux-x64.tar.gz` | এক্সট্র্যাক্ট করে `./installa.sh` চালান: মেনুতে আইকনসহ `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | **64-বিট Raspberry Pi OS** ও ডেস্কটপসহ Pi 3, 4 বা 5 (4 GB RAM প্রস্তাবিত)। এক্সট্র্যাক্ট করে `./installa.sh` চালান। |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) অথবা `...-mac-intel.dmg` | .dmg খুলুন, **Installa E-LAYER-ANALYZER.command**-এ ডান ক্লিক > Open। `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
+| Windows 64 বিট | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | ডাবল-ক্লিক করুন। `C:\E-LAYER-ANALYZER`-এ ইনস্টল হয়, অ্যাডমিনিস্ট্রেটর অধিকার লাগে না। Start মেনুতে কোনো শর্টকাট নেই (সেটি AppData-তে থাকত), কেবল ঐচ্ছিক ডেস্কটপ আইকন। |
+| Windows 32 বিট | `...-win-x86-setup.exe` | ওপরের মতোই, 32-বিট Windows-এর জন্য। |
+| Windows পোর্টেবল | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | যেকোনো জায়গায় এক্সট্র্যাক্ট করে `E-LAYER-ANALYZER.exe` চালান। |
+| Linux 64 বিট (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, তারপর মেনু থেকে চালু করুন: প্রথমবার চালুর সময় প্রোগ্রামটি নিজেকে `~/E-LAYER-ANALYZER`-এ কপি করে, পাশে `data` ফোল্ডারসহ। |
+| Linux পোর্টেবল | `...-linux-x64-portatile.tar.gz` | এক্সট্র্যাক্ট করে `./E-LAYER-ANALYZER` চালান, অথবা `./installa.sh` চালান: মেনুতে আইকনসহ `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
+| Raspberry Pi (64 বিট) | `e-layer-analyzer_x.y.z_arm64.deb` অথবা `...-linux-arm64-portatile.tar.gz` | **64-বিট Raspberry Pi OS** ও ডেস্কটপসহ Pi 3, 4 বা 5 (4 GB RAM প্রস্তাবিত)। .deb ওপরের মতো; পোর্টেবল সংস্করণ Linux-এর মতো। |
+| Raspberry Pi (32 বিট) | `...-linux-arm-portatile.tar.gz` | **32-বিট Raspberry Pi OS**-সহ Pi 2, 3 বা 4। এক্সট্র্যাক্ট করে `./E-LAYER-ANALYZER` বা `./installa.sh` চালান। |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) অথবা `...-osx-x64.dmg` (Intel) | .dmg খুলুন, **Installa E-LAYER-ANALYZER.command**-এ ডান ক্লিক > Open। `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
+| Mac, কেবল অ্যাপ্লিকেশন | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** আপনার নিজের একটি ফোল্ডারে এক্সট্র্যাক্ট করুন (যেমন `~/E-LAYER-ANALYZER`, Applications নয়): অ্যাপের পাশে `data` ফোল্ডার তৈরি হয়। প্রথমবার চালুর সময় ডান ক্লিক > Open। |
 
 ## হালনাগাদ
 

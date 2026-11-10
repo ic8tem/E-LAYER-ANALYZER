@@ -6,12 +6,15 @@ Laden Sie die passende Datei von der Seite **[Releases](https://github.com/ic8te
 
 | System | Datei | Installation |
 |---|---|---|
-| Windows 64 Bit | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | Doppelklick. Installiert nach `C:\E-LAYER-ANALYZER`, ohne Administratorrechte. Keine Verknüpfung im Startmenü (sie läge in AppData), nur das optionale Desktop-Symbol. |
-| Windows 32 Bit | `...-windows-x86-setup.exe` | Wie oben, für 32-Bit-Windows. |
-| Windows portabel | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | An beliebiger Stelle entpacken und `E-LAYER-ANALYZER.exe` starten. |
-| Linux (PC) | `...-linux-x64.tar.gz` | Entpacken und `./installa.sh` ausführen: installiert nach `~/E-LAYER-ANALYZER` mit einem Symbol im Menü. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 oder 5 mit **64-Bit-Raspberry-Pi-OS** und Desktop (4 GB RAM empfohlen). Entpacken und `./installa.sh` ausführen. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) oder `...-mac-intel.dmg` | Die .dmg öffnen, Rechtsklick auf **Installa E-LAYER-ANALYZER.command** > Öffnen. Installiert nach `~/E-LAYER-ANALYZER`. |
+| Windows 64 Bit | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Doppelklick. Installiert nach `C:\E-LAYER-ANALYZER`, ohne Administratorrechte. Keine Verknüpfung im Startmenü (sie läge in AppData), nur das optionale Desktop-Symbol. |
+| Windows 32 Bit | `...-win-x86-setup.exe` | Wie oben, für 32-Bit-Windows. |
+| Windows portabel | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | An beliebiger Stelle entpacken und `E-LAYER-ANALYZER.exe` starten. |
+| Linux 64 Bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, dann aus dem Menü starten: Beim ersten Start kopiert sich das Programm nach `~/E-LAYER-ANALYZER`, mit dem Ordner `data` daneben. |
+| Linux portabel | `...-linux-x64-portatile.tar.gz` | Entpacken und `./E-LAYER-ANALYZER` starten oder `./installa.sh` ausführen: installiert nach `~/E-LAYER-ANALYZER` mit einem Symbol im Menü. |
+| Raspberry Pi (64 Bit) | `e-layer-analyzer_x.y.z_arm64.deb` oder `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 oder 5 mit **64-Bit-Raspberry-Pi-OS** und Desktop (4 GB RAM empfohlen). Die .deb wie oben; die portable Version wie bei Linux. |
+| Raspberry Pi (32 Bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 oder 4 mit **32-Bit-Raspberry-Pi-OS**. Entpacken und `./E-LAYER-ANALYZER` oder `./installa.sh` ausführen. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) oder `...-osx-x64.dmg` (Intel) | Die .dmg öffnen, Rechtsklick auf **Installa E-LAYER-ANALYZER.command** > Öffnen. Installiert nach `~/E-LAYER-ANALYZER`. |
+| Mac, nur Anwendung | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** in einen Ordner Ihrer Wahl entpacken (zum Beispiel `~/E-LAYER-ANALYZER`, nicht Applications): Der Ordner `data` wird neben der App angelegt. Beim ersten Start Rechtsklick > Öffnen. |
 
 ## Aktualisieren
 

@@ -6,12 +6,15 @@
 
 | Система | Файл | Як встановити |
 |---|---|---|
-| Windows 64 біт | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | Подвійний клік. Встановлюється в `C:\E-LAYER-ANALYZER`, права адміністратора не потрібні. Ярлика в меню «Пуск» немає (він був би в AppData), лише необов'язковий значок на робочому столі. |
-| Windows 32 біт | `...-windows-x86-setup.exe` | Як вище, для 32-бітної Windows. |
-| Windows портативна | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | Розпакуйте будь-куди й запустіть `E-LAYER-ANALYZER.exe`. |
-| Linux (ПК) | `...-linux-x64.tar.gz` | Розпакуйте й запустіть `./installa.sh`: встановлюється в `~/E-LAYER-ANALYZER` зі значком у меню. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 або 5 з **64-бітною Raspberry Pi OS** і робочим столом (рекомендовано 4 GB RAM). Розпакуйте й запустіть `./installa.sh`. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) або `...-mac-intel.dmg` | Відкрийте .dmg, правий клік на **Installa E-LAYER-ANALYZER.command** > Open. Встановлюється в `~/E-LAYER-ANALYZER`. |
+| Windows 64 біт | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Подвійний клік. Встановлюється в `C:\E-LAYER-ANALYZER`, права адміністратора не потрібні. Ярлика в меню «Пуск» немає (він був би в AppData), лише необов'язковий значок на робочому столі. |
+| Windows 32 біт | `...-win-x86-setup.exe` | Як вище, для 32-бітної Windows. |
+| Windows портативна | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Розпакуйте будь-куди й запустіть `E-LAYER-ANALYZER.exe`. |
+| Linux 64 біт (ПК) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, потім запустіть із меню: під час першого запуску програма копіює себе в `~/E-LAYER-ANALYZER`, з текою `data` поруч. |
+| Linux портативна | `...-linux-x64-portatile.tar.gz` | Розпакуйте й запустіть `./E-LAYER-ANALYZER` або запустіть `./installa.sh`: встановлюється в `~/E-LAYER-ANALYZER` зі значком у меню. |
+| Raspberry Pi (64 біт) | `e-layer-analyzer_x.y.z_arm64.deb` або `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 або 5 з **64-бітною Raspberry Pi OS** і робочим столом (рекомендовано 4 GB RAM). Пакет .deb — як вище; портативна версія — як для Linux. |
+| Raspberry Pi (32 біт) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 або 4 з **32-бітною Raspberry Pi OS**. Розпакуйте й запустіть `./E-LAYER-ANALYZER` або `./installa.sh`. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) або `...-osx-x64.dmg` (Intel) | Відкрийте .dmg, правий клік на **Installa E-LAYER-ANALYZER.command** > Open. Встановлюється в `~/E-LAYER-ANALYZER`. |
+| Mac, лише застосунок | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Розпакуйте **E-LAYER-ANALYZER.app** у власну теку (наприклад, `~/E-LAYER-ANALYZER`, не в Applications): тека `data` створюється поруч із застосунком. Під час першого запуску правий клік > Open. |
 
 ## Оновлення
 

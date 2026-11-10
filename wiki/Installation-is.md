@@ -6,12 +6,15 @@ Sæktu réttu skrána af síðunni **[Releases](https://github.com/ic8tem/E-LAYE
 
 | Kerfi | Skrá | Hvernig á að setja upp |
 |---|---|---|
-| Windows 64 bita | `E-LAYER-ANALYZER-x.y.z-windows-x64-setup.exe` | Tvísmelltu. Sett upp í `C:\E-LAYER-ANALYZER`, engin stjórnandaréttindi nauðsynleg. Engin flýtileið í Start-valmyndinni (hún yrði í AppData), aðeins valfrjálst tákn á skjáborðinu. |
-| Windows 32 bita | `...-windows-x86-setup.exe` | Eins og hér að ofan, fyrir 32 bita Windows. |
-| Windows færanleg útgáfa | `...-windows-x64-portatile.zip` / `...-x86-portatile.zip` | Afþjappaðu hvar sem er og keyrðu `E-LAYER-ANALYZER.exe`. |
-| Linux (PC) | `...-linux-x64.tar.gz` | Afþjappaðu og keyrðu `./installa.sh`: sett upp í `~/E-LAYER-ANALYZER` með tákni í valmyndinni. |
-| Raspberry Pi | `...-raspberry-arm64.tar.gz` | Pi 3, 4 eða 5 með **64 bita Raspberry Pi OS** og skjáborði (mælt með 4 GB vinnsluminni). Afþjappaðu og keyrðu `./installa.sh`. |
-| Mac | `...-mac-apple-silicon.dmg` (M1-M4) eða `...-mac-intel.dmg` | Opnaðu .dmg-skrána, hægrismelltu á **Installa E-LAYER-ANALYZER.command** > Opna. Sett upp í `~/E-LAYER-ANALYZER`. |
+| Windows 64 bita | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Tvísmelltu. Sett upp í `C:\E-LAYER-ANALYZER`, engin stjórnandaréttindi nauðsynleg. Engin flýtileið í Start-valmyndinni (hún yrði í AppData), aðeins valfrjálst tákn á skjáborðinu. |
+| Windows 32 bita | `...-win-x86-setup.exe` | Eins og hér að ofan, fyrir 32 bita Windows. |
+| Windows færanleg útgáfa | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Afþjappaðu hvar sem er og keyrðu `E-LAYER-ANALYZER.exe`. |
+| Linux 64 bita (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ræstu það síðan úr valmyndinni: við fyrstu ræsingu afritar forritið sig í `~/E-LAYER-ANALYZER`, með möppuna `data` við hliðina. |
+| Linux færanleg útgáfa | `...-linux-x64-portatile.tar.gz` | Afþjappaðu og keyrðu `./E-LAYER-ANALYZER`, eða keyrðu `./installa.sh`: sett upp í `~/E-LAYER-ANALYZER` með tákni í valmyndinni. |
+| Raspberry Pi (64 bita) | `e-layer-analyzer_x.y.z_arm64.deb` eða `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 eða 5 með **64 bita Raspberry Pi OS** og skjáborði (mælt með 4 GB vinnsluminni). .deb eins og hér að ofan; færanlega útgáfan eins og fyrir Linux. |
+| Raspberry Pi (32 bita) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 eða 4 með **32 bita Raspberry Pi OS**. Afþjappaðu og keyrðu `./E-LAYER-ANALYZER` eða `./installa.sh`. |
+| Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) eða `...-osx-x64.dmg` (Intel) | Opnaðu .dmg-skrána, hægrismelltu á **Installa E-LAYER-ANALYZER.command** > Opna. Sett upp í `~/E-LAYER-ANALYZER`. |
+| Mac, aðeins forritið | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Afþjappaðu **E-LAYER-ANALYZER.app** í eigin möppu (til dæmis `~/E-LAYER-ANALYZER`, ekki Applications): mappan `data` er búin til við hliðina á forritinu. Við fyrstu ræsingu hægrismelltu > Opna. |
 
 ## Uppfærsla
 
