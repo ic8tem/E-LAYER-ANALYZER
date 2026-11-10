@@ -7,7 +7,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 src, out = sys.argv[1], sys.argv[2]
 import os, re as _re
-_m = _re.search(r'_([a-z]{2})\.txt$', os.path.basename(src))
+_m = _re.search(r'_([a-z]{2}(?:-[a-z]{2})?)\.txt$', os.path.basename(src))
 _lang = _m.group(1) if _m else 'it'
 # etichette FONTE/RILIEVO/SCELTA tradotte: dal file data/lingue/ela-<codice>.txt della lingua del documento
 TAGNAME = {}
