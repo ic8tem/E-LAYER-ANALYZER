@@ -672,7 +672,8 @@ namespace ELA
         // [12] Lange-Hesse (144 MHz): perpendicolarita' al campo entro +-2-3 gradi, eco a ~110 km, scatter point a 370-1100 km
         // da ciascuna stazione; nessun collegamento con Kp 0-2. [14] G3WPO e [33] G0ISW: QTF tipico N-NE (0-50 gradi),
         // distanze tipiche 250-1300 km, eccezionali 2000 km; Doppler fino a 2 kHz in 144 MHz; 50 MHz favorito.
-        // [34] K7CW: in aurora FT8 spesso non decodifica, meglio CW/SSB o Q65 con sottomodi larghi.
+        // [34] K7CW: in aurora FT8 spesso non decodifica, meglio CW/SSB o Q65 con sottomodi larghi; [61] PE1ITR: Q65-30D
+        // decodificato in 144 MHz l'11 maggio 2024, segnali quasi invisibili sul waterfall di WSJT-X, serve RIT o split.
         double Tol { get { return aurora ? 3.0 : 2.5; } }
         public const double AuMinRangeKm = 370, AuMaxRangeKm = 1100, AuMaxKm = 2000;
         bool InAuRange(PerpPoint p, double bLa, double bLo)
@@ -698,7 +699,7 @@ namespace ELA
             return Lang.T("improbabile");
         }
 
-        // intervallo di QTF lungo tutta la scia (scelta dell'autore dopo la verifica K8GU [57]): oltre al punto piu' probabile,
+        // intervallo di QTF lungo tutta la scia (scelta dell'autore): oltre al punto piu' probabile,
         // i puntamenti di tutti i punti con deviazione <= 1,5 gradi, di preferenza a 370-1100 km da entrambe le stazioni
         void QtfRange(StringBuilder sb, List<PerpPoint> loc, PerpPoint best)
         {
@@ -717,7 +718,7 @@ namespace ELA
             sb.AppendLine(inRange ? Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, 370-1100 km da entrambe le stazioni):")
                                   : Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°):"));
             sb.AppendLine(Lang.F("  {0}: da {1} a {2}   {3}: da {4} a {5}", aName, f(best.Az + aMin), f(best.Az + aMax), bName, f(azB0 + bMin), f(azB0 + bMax)));
-            sb.AppendLine(Lang.T("  Il punto più probabile privilegia la tratta più corta; l'aurora può arrivare da tutto l'intervallo (caso di verifica K8GU [57])."));
+            sb.AppendLine(Lang.T("  Il punto più probabile privilegia la tratta più corta; l'aurora può arrivare da tutto l'intervallo."));
             map.Info.Add(Lang.F("QTF {0} {1}-{2}", aName, f(best.Az + aMin), f(best.Az + aMax)));
         }
 
@@ -733,7 +734,7 @@ namespace ELA
             bool south = aLat < 0;
             sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud; in 50 MHz fino a circa 2000 km sulle tratte est-ovest, ANVDG [55]); scarto dal percorso diretto {0:F0}°", dev)
                                 : Lang.F("QTF tipico tra N e NE (0-50°), che si sposta verso N durante l'evento (G3WPO, G0ISW); scarto dal percorso diretto {0:F0}°", dev));
-            sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW)."));
+            sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW; Q65-30D in 144 MHz, PE1ITR [61]); il segnale è largo e spostato, serve il RIT o lo split."));
             sb.AppendLine(Lang.F("Scatter point preferito a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
             // peso orario (Reeve [52]): la maggior parte delle riflessioni aurorali cade entro circa 4 ore dalla mezzanotte solare locale
             double lst = ((DateTime.UtcNow.TimeOfDay.TotalHours + best.Lon / 15.0) % 24 + 24) % 24;

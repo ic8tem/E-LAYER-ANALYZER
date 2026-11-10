@@ -91,6 +91,11 @@ namespace ELA
 
         // Luogo degli scatter point possibili per il collegamento A-B alla quota H (celle di 'step' gradi con scarto <= tol)
         public static List<PerpPoint> PairLocus(double latA, double lonA, double latB, double lonB, double Hkm, double tolDeg, double minElev, double maxDistKm, double step)
+        { return PairLocus(latA, lonA, latB, lonB, Hkm, tolDeg, minElev, maxDistKm, step, Geo.K); }
+
+        // stessa funzione con il fattore del raggio terrestre esplicito (k = 4/3 con la rifrazione): utile fuori dal thread
+        // dell'interfaccia, dove Geo.K puo' cambiare
+        public static List<PerpPoint> PairLocus(double latA, double lonA, double latB, double lonB, double Hkm, double tolDeg, double minElev, double maxDistKm, double step, double k)
         {
             List<PerpPoint> res = new List<PerpPoint>();
             Geo.V3 a = Geo.Ecef(latA, lonA, 0), b = Geo.Ecef(latB, lonB, 0);
@@ -104,7 +109,7 @@ namespace ELA
                 {
                     double dA = Geo.DistanceKm(latA, lonA, la, lo), dB = Geo.DistanceKm(latB, lonB, la, lo);
                     if (dA > maxDistKm || dB > maxDistKm) continue;
-                    double eA = Geo.ElevationDeg(dA, Hkm, 0), eB = Geo.ElevationDeg(dB, Hkm, 0);
+                    double eA = Geo.ElevationDeg(dA, Hkm, 0, k), eB = Geo.ElevationDeg(dB, Hkm, 0, k);
                     if (eA < minElev || eB < minElev) continue;
                     double off = BraggOffDeg(a, Geo.Ecef(la, lo, Hkm), b);
                     if (off <= tolDeg) res.Add(new PerpPoint { Lat = la, Lon = Geo.Norm180(lo), DistKm = dA, Az = Geo.Bearing(latA, lonA, la, lo), Elev = eA, Off = off });

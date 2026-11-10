@@ -27,11 +27,12 @@ namespace ELA
         TextBlock lblNtp;
         static DispatcherTimer ntpTimer;
         readonly PillTabs esTabs = new PillTabs();   // sottolinguette di SPORADIC-E
+        readonly PillTabs auTabs = new PillTabs();   // sottolinguette di AURORA
         readonly TextBox txtCall, txtLoc;
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; BenchTab bench; BenchMultiTab bench50; ScatterTab fai, au; DataTab dc; LogTab log;
+        EsTab es; BenchTab bench; BenchMultiTab bench50; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log;
         readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
@@ -124,7 +125,15 @@ namespace ELA
             tabs.Add(Lang.T("SPORADIC-E"), esPage);
             tabs.Add(Lang.T("F.A.I."), fai.Root);
             tabs.Add(Lang.T("METEOR SCATTER"), ms);
-            tabs.Add(Lang.T("AURORA"), au.Root);
+            // AURORA: sottolinguette REAL-TIME (calcolo e spot in diretta) e BENCHMARK AURORA (QSO reali come banco di prova)
+            auBench = new AuroraBenchTab();
+            auTabs.Add(Lang.T("REAL-TIME"), au.Root);
+            auTabs.Add(Lang.T("BENCHMARK AURORA"), auBench.Root);
+            auTabs.SelectionChanged += i => { if (i == 0) au.Recalc(); };
+            DockPanel auPage = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(auPage, auTabs.Bar, Dock.Top);
+            auPage.Children.Add(auTabs.Host);
+            tabs.Add(Lang.T("AURORA"), auPage);
             tabs.Add(Lang.T("DATA COLLECTION"), dc.Root);
             tabs.Add(Lang.T("LOG ADIF"), log.Root);
             tabs.Add(Lang.T("FONTI"), DocTab.Build(LocFile(dataDir, "ela_fonti", ".txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
@@ -138,7 +147,7 @@ namespace ELA
             {
                 if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); }
                 else if (i == 1) fai.Recalc();
-                else if (i == 3) au.Recalc();
+                else if (i == 3) { if (auTabs.Selected == 0) au.Recalc(); }
                 else if (i == 5) log.Refresh();
             };
             // menu dei sei continenti, a destra nella barra delle linguette: cambia le viste delle mappe e i dati previsionali
@@ -416,10 +425,11 @@ namespace ELA
                 dc.FilterTabs.Select(0);
                 dc.Outer.Select(1); await Task.Delay(2500); Shot(Path.Combine(dir, "5g_dati_propagazione.png"));
                 dc.Outer.Select(0);
-                // AURORA: caso di verifica K8GU [57] (144 MHz, FM19LA - FN01XT, 322 km, QTF 45° contro 345° diretto)
-                tabs.Select(3);
-                au.View(-95, -55, 30, 60);
-                au.ShotPair("K8GU FM19LA", "KA1ZE FN01XT"); await Task.Delay(3000); Shot(Path.Combine(dir, "4k_aurora_verifica_K8GU.png"));
+                // AURORA: banco di prova sui QSO reali (EI5FK, PA0O)
+                tabs.Select(3); auTabs.Select(1);
+                for (int k = 0; k < 120 && auBench.Busy; k++) await Task.Delay(1000);
+                auBench.ShotSelect(); await Task.Delay(2500); Shot(Path.Combine(dir, "4k_benchmark_aurora.png"));
+                auTabs.Select(0);
                 // tutte le linguette di YA-MS
                 tabs.Select(2);
                 await Task.Delay(1500);
