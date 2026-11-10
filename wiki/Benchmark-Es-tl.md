@@ -27,6 +27,7 @@ Test bench para sa **sporadic-E** at **multi-hop** sa isang **buong ADIF log**, 
 - **Skip ayon sa sektor** (10° ng azimuth): kahel na arko = pinakamalapit na QSO sa sektor (gilid ng skip zone), berdeng arko = pinakamalayong QSO, sa pagitan nila ang naabot na lugar.
 - **Mga ulap ng Es** sa mga Maidenhead grid square, kinulayan ayon sa tinatayang foEs.
 - Gitnang punto ng mga iisang hop (dilaw), unang hop ng istasyon (kahel, bilog na walang laman = maikling unang hop), unang hop ng DX station (lila).
+- Minamarkahan ng **malabong dilaw na tuldok** ang gitna ng bawat hop, kung saan ipinapalagay na naroon ang ulap ng Es (pati ang gitna ng maikling unang hop, kapag aktibo ang hipotesis na iyon).
 - Para sa buong araw, pinag-uugnay ng **pulang linya** ang sentroid ng mga gitnang punto oras-oras: ito ang pag-usad ng mga ulap.
 
 ![Isang oras](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

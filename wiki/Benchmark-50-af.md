@@ -23,6 +23,7 @@ Kies die **dag** (by die oopmaak dié met die meeste multi-sprong-QSO's) en die 
 
 ![Pad](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- 'n **Vaag geel kolletjie** merk die middel van elke sprong, waar die Es-wolk vermoedelik is; op die pad onder die muis word dit groter.
 - **Muis naby 'n pad**: die lyn en ikone word vergroot en die DX-stasie se **WWL-vierkant van 6 karakters** verskyn.
 - **Linksklik** op daardie pad: 'n opspringvenster vra of **al die QSO's in die lêer** (alle dae) gewys moet word waarvan die verre kant **binne 150 km** van daardie punt is. *Ja*: die kaart word skoongemaak en wys daardie QSO's binne die oranje sirkel; *Nee*: die kaart bly soos dit is. *Terug na dag en tyd* keer terug na die vorige keuse.
 

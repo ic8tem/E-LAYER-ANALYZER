@@ -5,7 +5,19 @@
 ![AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/aurora/aurora_scia_IO70VJ_JO59BC.png)
 
 - NOAA OVATION Prime se **aurorale ovaal** (geskadu), **Kp** van die laaste 3 dae, **sonwind** (Bz, snelheid, digtheid), elke 5 minute bygewerk en in `data/swpc` gestoor.
-- Dieselfde aansigte as F.A.I.: **Scatter trail** vir 'n paar stasies en **Iso-refleksie** om 'n punt na te gaan, met 'n verstekhoogte van 105 km.
+- Dieselfde aansigte as F.A.I.: **Scatter trail** vir 'n paar stasies en **Iso-refleksie** om 'n punt na te gaan, met 'n verstekhoogte van 110 km.
 - **Aanbevole antennarigting vir albei stasies**: langs elke stasie se loodlyn (kolletjies in sy kleur), die punt met die hoogste ovaalwaarskynlikheid. Duimreël (G3WPO): begin by ongeveer 45°, tussen noord en oos.
 - Voorbeeld IO70VJ - JO59BC: scatter point JP01AK voor die Shetland-eilande, afwyking 0,97°, QTF 11° en 299°.
 - **Aurora-spots op die kaart**: spots met **<AU>** of **<AUR>** in die teks is aurora-spots (outeur se reël). Met die blokkie *<AU>/<AUR>-spots op die kaart met die berekening* gemerk, plot die oortjie die spots van die laaste 2 uur (hoogstens 30): vir elke spotter-DX-paar bereken dit die scatter trail en wys die mees waarskynlike scatter point (oranje sirkel), met die QTF en elevasie van albei stasies in die resultate.
+- Benewens die mees waarskynlike scatter point gee die resultate die **QTF-interval** van albei stasies langs die hele Scatter trail (afwyking ≤ 1,5°).
+
+## BENCHMARK AURORA
+
+Die AURORA-oortjie het twee suboortjies: **REAL-TIME** (die berekening hierbo beskryf) en **BENCHMARK AURORA**, 'n toetsbank vir die model op **298 werklike aurora-QSO's** met tyd en lokator: die gepubliseerde logs van EI5FK (IO51RT, Ierland, 2003-2005, 144 en 432 MHz) en die logkaart van PA0O (JO33HG, Nederland).
+
+![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
+
+- Vir elke QSO bereken die program die scatter point met dieselfde model (IGRF-14, hoogte 110 km, refraksie 4/3, toleransie 3°).
+- Kleure: **groen** = scatter point 370-1100 km van albei stasies (Lange-Hesse); **geel** = verklaar maar buite daardie venster; **oranje** = QSO verder as 2000 km; **rooi** = geen scatter point nie, QSO nie deur die model verklaar nie.
+- Die opsomming gee die persentasies en, vir elke log, die interval en mediaan van die berekende QTF. Klik op 'n ry om die pad en albei antennarigtings te teken.
+- Resultaat (weergawe 0.4.4): **296 van 298 QSO's verklaar (99%)**, 243 (82%) binne die venster van 370-1100 km; mediaan-QTF van EI5FK tussen 25° en 41°, dit wil sê die noordooste wat G3WPO aanbeveel. Die logs gee nie die antennarigting nie: die kontrole is op geometrie, nie op QTF nie.

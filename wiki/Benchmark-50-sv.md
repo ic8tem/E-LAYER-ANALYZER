@@ -23,6 +23,7 @@ Välj **dag** (när fliken öppnas den med flest QSO med multihopp) och tid **fr
 
 ![Sträcka](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- En **suddig gul prick** markerar mitten av varje hopp, där Es-molnet antas ligga; på sträckan under musen blir den större.
 - **Musen nära en sträcka**: linjen och ikonerna förstoras och motstationens **WWL-ruta med 6 tecken** visas.
 - **Vänsterklick** på den sträckan: en dialogruta frågar om alla **QSO i filen** (alla dagar) ska visas där den andra ändens position ligger **inom 150 km** från den punkten. *Ja*: kartan rensas och visar de QSO:na inom den orange cirkeln; *Nej*: kartan förblir som den är. *Tillbaka till dag och tid* återgår till det tidigare urvalet.
 

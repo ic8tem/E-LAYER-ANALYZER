@@ -23,6 +23,7 @@ Kies de **dag** (bij het openen die met de meeste QSO's met meervoudige sprong) 
 
 ![Traject](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- Een **vage gele stip** markeert het midden van elke sprong, waar de Es-wolk vermoed wordt; op het traject onder de muis wordt hij groter.
 - **Muis bij een traject**: lijn en pictogrammen worden vergroot en het **WWL-vak van 6 tekens** van het tegenstation verschijnt.
 - **Linksklik** op dat traject: een venster vraagt of **alle QSO's in het bestand** (alle dagen) moeten worden getoond waarvan het andere eind **binnen 150 km** van dat punt ligt. *Ja*: de kaart wordt leeggemaakt en toont die QSO's binnen de oranje cirkel; *Nee*: de kaart blijft zoals ze is. *Terug naar dag en tijd* herstelt de vorige selectie.
 

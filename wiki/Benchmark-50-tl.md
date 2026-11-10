@@ -23,6 +23,7 @@ Mapang **Mercator** na malaya ang gitna: gulong = zoom, hilahin = ilipat.
 
 ![Landas](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- Minamarkahan ng **malabong dilaw na tuldok** ang gitna ng bawat hop, kung saan ipinapalagay na naroon ang ulap ng Es; lumalaki ito sa landas na nasa ilalim ng mouse.
 - **Mouse malapit sa isang landas**: pinalalaki ang linya at mga icon at lumalabas ang **6-character na WWL square** ng DX station.
 - **Kaliwang click** sa landas na iyon: may popup na nagtatanong kung ipapakita ang **lahat ng QSO sa file** (lahat ng araw) na ang posisyon ng kabilang dulo ay **nasa loob ng 150 km** mula sa puntong iyon. *Oo*: nililinis ang mapa at ipinapakita ang mga QSO na iyon sa loob ng kahel na bilog; *Hindi*: nananatili ang mapa. Ibinabalik ng *Bumalik sa araw at oras* ang naunang pinili.
 

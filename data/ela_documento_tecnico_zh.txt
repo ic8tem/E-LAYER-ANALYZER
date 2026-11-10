@@ -82,6 +82,7 @@ TAG|SCELTA|所选范围的 foEs：每个频段最短的单跳给出最高估值�
 TAG|SCELTA|多跳：在两种假设（等长跳，3.2；短首跳 [4]）下，将台站首跳与同一天 ±30 分钟内各单跳的中点比较：在 300 km 以内，该假设即被一个真实看到的云所确认。程序统计每种假设的确认次数。
 EQ|云的速度 = d(h 时重心, h+1 时重心) / 1 h
 TAG|RILIEVO|单跳中点的逐时重心显示云的移动（红线）。计算仅供参考：QSO 说明路径曾经开通，但不说明云的确切位置。
+TAG|SCELTA|应作者要求，在两个 BENCHMARK 中，每一跳的中心（推定偶发 E 层云所在之处）用一个模糊的黄色圆点标出（所选 QSO 或鼠标下方的 QSO 的圆点更大）；启用短首跳假设时，圆点也标出短首跳的中心。这是推定的位置，而非测得的位置（见上文）。
 H2|3.9 BENCHMARK 50 MHz：50 MHz 多跳
 P|BENCHMARK 50 MHz 选项卡载入一个台站的 ADIF 日志，并可选（台站 2 复选框）载入第二个台站的日志，在中心可自由设定的墨卡托地图上显示所选日期和时段（从…到… UTC）内多跳（即超过 3100 km，作者规则；跳数仍按 IK3XTV 表 [3]）的 50 MHz QSO。
 TAG|SCELTA|鼠标靠近一条路径（8 像素以内）时，线条和图标会放大，并显示对方电台的 6 位 WWL 网格；左键单击时弹出窗口询问是否显示文件中全部日期内终端位置位于该点 150 km 以内的所有 QSO：是 = 清空地图并显示这些 QSO，否 = 地图保持不变。
@@ -122,9 +123,9 @@ TAG|FONTE|作者规则（IC8TEM）：文本中含有 AU 或 AUR 的 spot，无�
 TAG|SCELTA|应作者要求，极光 E（Au-E）作为独立模式：文本中含有 AUE、AU-E 或 AURORAL E 的 spot，或声明模式为 AUE 的 spot，既不是极光也不是偶发 E 层。它是 G0ISW [33] 所述的极光起源的偶发 E 层：没有多普勒，位于直接路径上，出现在极光事件之后。AURORA 选项卡将这些 spot 以绿色绘制在直接路径上。
 TAG|SCELTA|经作者认可的时间权重：大多数极光反射发生在当地太阳时午夜前后约 4 小时之内（Reeve [52]，阿拉斯加单个台站的 15 MHz 观测，无计数；Reeve 引用的 30 MHz 以上研究给出的峰值在午夜之前，因此在 VHF 中该时段只是较弱的指示）。程序计算散射点的太阳时，并说明它位于该时段之内还是之外；在时段之外极光仍然可能，因为磁暴期间下午和傍晚也能通联（G3WPO [14]）。
 TAG|FONTE|关于极光引用的其他资料：ARRL [53]，美国的 50 MHz 极光，K 指数 5-7，天线朝北；SM2CEW-SM0FOB [54]，瑞典北极地区 50 和 144 MHz 的极光 E，极光之后在直接路径上信号较弱而稳定；ANVDG [55]，澳大利亚的南极光，50 MHz 在东西向路径上可达约 2000 km。
-TAG|SCELTA|经作者认可的 QTF 验证案例：K8GU (FM19LA) - KA1ZE/3 (FN01XT)，144 MHz，322 km，极光指向 45°，而直接路径为 345°，多普勒约 300 Hz（K8GU [57]）。程序的自动截图在 Scatter trail 视图中计算这一对电台。
-TAG|RILIEVO|K8GU - KA1ZE 验证（FM19LA - FN01XT，144 MHz，322 km，高度 110 km）：程序给出位于 FN24 的散射点，K8GU 的 QTF 为 15°（仰角 8°），KA1ZE 为 39°，而 K8GU 声明的是 45°。Scatter trail 继续向东北延伸，经过新英格兰和魁北克上空，从 K8GU 指向那里约为 35°，指向 45° 的 2 m 天线可以覆盖：偏差源于选择了最短路径。
-TAG|SCELTA|因此，根据作者的决定，AURORA 选项卡除最可能的散射点外，还给出两个电台沿整个 Scatter trail 的 QTF 范围（偏差 ≤ 1.5°，最好距两站均为 370-1100 km）。是否优先东北方向的分支（G3WPO [14]：从 45° 开始）将在与 DK3XT 数据库 [50] 比较之后决定。
+TAG|SCELTA|根据作者的决定，AURORA 选项卡除最可能的散射点外，还给出两个电台沿整个 Scatter trail 的 QTF 范围（偏差 ≤ 1.5°，最好距两站均为 370-1100 km）。是否优先东北方向的分支（G3WPO [14]：从 45° 开始）将在与 DK3XT 数据库 [50] 比较之后决定。K8GU 的案例 [57] 已不再用作验证：所用天线不明。
+TAG|SCELTA|应作者要求设立 BENCHMARK AURORA：AURORA 选项卡有两个子选项卡，REAL-TIME（实时计算）和 BENCHMARK AURORA，后者是用已发表的真实 QSO 检验模型的试验台：298 个带时间和网格坐标的 QSO，来自 EI5FK 的日志（IO51RT，爱尔兰，2003-2005，144 和 432 MHz [62]）以及 PA0O 的日志地图（JO33HG，荷兰 [63]）。每个 QSO 都用同一模型（IGRF-14，高度 110 km，4/3 折射，容差 3°）计算散射点；日志中没有记录天线指向，因此比较的是几何而不是 QTF。
+TAG|RILIEVO|BENCHMARK AURORA 的结果（0.4.4 版）：模型为 298 个 QSO 中的 296 个找到了散射点（99%）；其中 243 个（82%）的散射点距两站均为 370-1100 km，符合 Lange-Hesse [12] 的要求；只有一个 QSO 超过 2000 km（OH1NOR，2101 km）。EI5FK 计算得到的 QTF 中位数随日期在 25° 至 41° 之间，也就是 G3WPO [14] 建议的东北方向。所用磁场为当前磁场，而非 2003-2005 年的磁场。
 H1|5. 数据收集
 H2|5.1 Telnet 会话
 TAG|SCELTA|三个会话：自选 cluster、Reverse Beacon Network（7000 CW/RTTY，7001 FT8）[18]、含 PSKReporter spot 的 cluster（例如 DM4X dm4x.ddns.net:8500 [27]，HamAlert [19]）。使用呼号自动登录，初始命令以分号分隔，30 s 后重新连接。
@@ -149,7 +150,7 @@ TAG|FONTE|配色方案与 YA-MS 1.5.0 相同，后者沿用 YAEC [26]：浅色�
 H1|8. 流星散射（YA-MS 1.6.0）与语言
 TAG|FONTE|METEOR SCATTER 选项卡包含完整的 YA-MS 1.6.0 [5]，以及它的“效率 - 说明”文档和它的来源。脚本 tools/sync_yams.py 复制 YA-MS 的每个新版本并将其转换为面板，不改动其计算。
 TAG|FONTE|YA-MS 1.4.0 新增了“实时流星雨”选项卡（Global Meteor Network 实测的 ZHR 和 CMOR 雷达的辐射点地图）和“数据源地图”选项卡（Collm、Sodankylä、GRAVES 和 CMOR 相对于本台的位置）；YA-MS 1.5.0 新增了“数据收集”（来自 DX cluster、RBN 和 PSKReporter 的流星余迹散射报告，过滤条件为 MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>）；YA-MS 1.6.0 将各选项卡归入“实况与实时数据”“预报计算”和“技术文档”三组，并加入“实时流星散射通信”。在 E-LAYER ANALYZER 内部，YA-MS 的“数据收集”不显示：数据收集只有一个，即 DATA COLLECTION，它将数据行传给 YA-MS，流星散射的过滤在 DATA COLLECTION 的过滤列中设置；因此不会用同一呼号重复登录。YA-MS 的来源在 YA-MS 中注明。
-TAG|SCELTA|语言：28 种，即 YAEC 的全部语言加上丹麦语和他加禄语（Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어），用于界面（data/lingue/ela-<代码>.txt）、各文档（计算选择摘要、使用手册、技术报告）和来源。在 F.A.I./极光视图中，散射点的轨迹在所有译本中都称为“Scatter trail”。状态栏显示所用的磁场模型（IAGA 的 IGRF-14 [16]）。
+TAG|SCELTA|语言：36 种，即 YAEC 的全部语言加上丹麦语和他加禄语，自 0.4.4 版起又增加了巴西葡萄牙语、繁体中文、波兰语、捷克语、罗马尼亚语、匈牙利语、希腊语和泰语（Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어），用于界面（data/lingue/ela-<代码>.txt）、各文档（计算选择摘要、使用手册、技术报告）和来源。在 F.A.I./极光视图中，散射点的轨迹在所有译本中都称为“Scatter trail”。状态栏显示所用的磁场模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 局限
 LI|台站位于网格坐标方格的中心：使用 4 位网格坐标时误差可达 ~80 km。
 LI|由 spot 得出的 foEs 是最低门限，而正割定律会高估 VHF 所需的 foEs（见 2.3）。

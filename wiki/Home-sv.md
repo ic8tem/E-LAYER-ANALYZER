@@ -2,7 +2,7 @@
 
 *av Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · **Svenska** · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** är ett gratisprogram för radioamatörer som analyserar alla VHF-utbredningsformer där jonosfärens **E-skikt** är inblandat: **sporadiskt E** (inklusive interkontinentalt multihopp), **F.A.I.** (fältorienterade irreguljariteter), **meteorscatter** (med det inbyggda programmet YA-MS) och **radioaurora**. Det körs på **Windows (64 och 32 bitar), Linux, Raspberry Pi och Mac**, på **28 språk**, och skriver ingenting utanför sin egen mapp.
+**E-LAYER ANALYZER** är ett gratisprogram för radioamatörer som analyserar alla VHF-utbredningsformer där jonosfärens **E-skikt** är inblandat: **sporadiskt E** (inklusive interkontinentalt multihopp), **F.A.I.** (fältorienterade irreguljariteter), **meteorscatter** (med det inbyggda programmet YA-MS) och **radioaurora**. Det körs på **Windows (64 och 32 bitar), Linux, Raspberry Pi och Mac**, på **36 språk**, och skriver ingenting utanför sin egen mapp.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

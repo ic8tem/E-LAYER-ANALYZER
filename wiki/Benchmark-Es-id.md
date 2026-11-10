@@ -27,6 +27,7 @@ Peta **azimutal ekuidistan** yang berpusat di stasiun, dengan penggeser **Jarak 
 - **Skip per sektor** (10° azimut): busur oranye = QSO terdekat di sektor (tepi zona skip), busur hijau = QSO terjauh, di antaranya area yang tercapai.
 - **Awan Es** pada kotak Maidenhead, diwarnai menurut foEs perkiraan.
 - Titik tengah satu lompatan (kuning), lompatan pertama stasiun (oranye, lingkaran kosong = lompatan pertama pendek), lompatan pertama stasiun DX (ungu).
+- **Titik kuning buram** menandai pusat setiap lompatan, tempat awan Es diperkirakan berada (juga pusat lompatan pertama pendek, bila hipotesis itu aktif).
 - Untuk sepanjang hari, **garis merah** menghubungkan sentroid titik-titik tengah jam demi jam: itulah pergeseran awan.
 
 ![Satu jam](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

@@ -9,7 +9,7 @@ LI|Visi programmas dati atrodas mapē data blakus programmai: iestatījumi (conf
 LI|Lai pārvietotu programmu uz citu datoru, pietiek nokopēt tās mapi; lai atgrieztos pie sākotnējiem iestatījumiem, pietiek izdzēst data/config.ini.
 LI|LoTW parole nekad netiek saglabāta; var atcerēties tikai lietotājvārdu.
 H2|1.3 Augšējā josla
-P|Augšā pa kreisi ieraksta savu izsaukuma signālu, lokatoru (4, 6 vai 8 rakstzīmes) un antenas augstumu metros; poga Lietot tos apstiprina, un visas cilnes atjaunojas. Augšā pa labi ir UTC laiks, krāsojuma izvēle (visas YAEC shēmas: Gaišs, Nakts, Melns, astoņas pasteļkrāsas un Meteora sliede) un valodas izvēle (28 valodas). Mainot krāsojumu vai valodu, logs uzreiz tiek pārbūvēts, nezaudējot savāktos datus.
+P|Augšā pa kreisi ieraksta savu izsaukuma signālu, lokatoru (4, 6 vai 8 rakstzīmes) un antenas augstumu metros; poga Lietot tos apstiprina, un visas cilnes atjaunojas. Augšā pa labi ir UTC laiks, krāsojuma izvēle (visas YAEC shēmas: Gaišs, Nakts, Melns, astoņas pasteļkrāsas un Meteora sliede) un valodas izvēle (36 valodas). Mainot krāsojumu vai valodu, logs uzreiz tiek pārbūvēts, nezaudējot savāktos datus.
 P|Blakus UTC laikam uzraksts NTP:OK (zaļš) vai NTP:FAILED (sarkans) norāda, vai laiks ir sinhronizēts: ik pēc 5 minūtēm programma vaicā divus laika serverus no desmit pa visu pasauli un pāriet uz citiem, ja tie neatbild. Rīka padomā redzami izmantotie serveri un datora pulksteņa novirze.
 P|Cilņu joslas labajā pusē ir kontinenta izvēlne (Eiropa, Ziemeļamerika, Dienvidamerika, Āfrika, Āzija, Okeānija): tā pārvieto Merkatora kartes un F.A.I. un auroras kartes uz izvēlēto kontinentu un izvēlas šī kontinenta prognozes datus (N0NBH E-skip tiek publicēts tikai Eiropai un Ziemeļamerikai).
 H2|1.4 Statusa josla
@@ -77,6 +77,7 @@ H2|4.1 Žurnāla ielāde
 P|Apakšcilne BENCHMARK Es ir sporādiskā E pārbaudes stends veselam ADIF žurnālam, arī citas stacijas. Ielādēt ADIF atver failu (programma to atceras un startējot ielādē no jauna), Izņemt ADIF to noņem. Stacija centrā piedāvā žurnālā biežāko izsaukuma signālu un lokatoru; tos var mainīt un apstiprināt ar Lietot.
 LI|Raidīšanas vieta ir katra QSO MY_GRIDSQUARE; uztveršanas vietas ir GRIDSQUARE (trūkstošos vai 4 rakstzīmju lokatorus ņem no CALL3).
 LI|Var izslēgt QSO ar citu PROP_MODE un tos, kas ir zem 500 km (144 MHz joslā – zem 900 km); transekvatoriālos izslēdz vienmēr, izņemot PROP_MODE=ES.
+LI|Kartē izplūdis dzeltens punkts atzīmē katra lēciena centru, kur tiek pieņemts sporādiskā E mākonis (arī īsā pirmā lēciena centru, ja šī hipotēze ir ieslēgta).
 H2|4.2 Dienas, stundas un aprēķini
 P|Tabula QSO pa dienām uzskaita dienas ar QSO skaitu, joslām, maksimālo attālumu un vairāklēcienu sakariem; klikšķis uz dienas aizpilda tabulu Dienas stundas ar rindu katrai UTC stundai un rindu Visa diena. Azimutālā karte ar maksimālā attāluma slīdni zīmē skip pa 10° sektoriem (oranžs loks = tuvākais QSO, zaļš sektors = sasniegtie attālumi), mākoņus kvadrātos un, visai dienai, mākoņu pārvietošanos pa stundām (sarkana līnija).
 P|Lapa Ieteiktie aprēķini rāda skip pa sektoriem, novērtēto foEs ar sagaidāmo MUF pie 1000, 1500, 2000 un 2400 km, novērtētos mākoņus, vairāklēcienu pārbaudi (vienādi lēcieni pret īsu pirmo lēcienu, salīdzinot ar viena lēciena mākoņiem ±30 minūšu robežās) un mākoņu pārvietošanos stundu pēc stundas.
@@ -86,6 +87,7 @@ P|Apakšcilne BENCHMARK 50 MHz ir veltīta vairāklēcienu sporādiskajam E 50 M
 LI|Rāda 50 MHz vairāklēcienu QSO, t.i., virs 3100 km (autora noteikums); lēcienu skaits atbilst IK3XTV tabulai.
 LI|Diena, no… līdz… UTC: diena (atverot – tā, kurā ir visvairāk vairāklēcienu QSO) un laiks ar 15 minūšu soli.
 LI|foEs (pēc izvēles): iekrāso trases pēc minimālās foEs un parāda to tabulā. Es augstums un Īss pirmais lēciens līdz 1200 km – kā citās cilnēs.
+LI|Izplūdis dzeltens punkts atzīmē katra lēciena centru, kur tiek pieņemts sporādiskā E mākonis; uz trases zem peles tas kļūst lielāks.
 H2|5.2 Merkatora karte
 P|Karte ir Merkatora projekcijā ar brīvu centru. Kad pele tuvojas trasei, līnija un ikonas palielinās un parādās korespondenta 6 rakstzīmju WWL kvadrāts. Ar kreiso klikšķi uz šīs trases uznirstošais logs jautā, vai rādīt visus faila QSO no visām dienām, kuru gala atrašanās vieta ir 150 km robežās: Jā iztīra karti un rāda šos QSO oranžajā aplī, Nē atstāj karti nemainītu. Poga Atpakaļ uz dienu un laiku atgriež iepriekšējo izvēli.
 H1|6. F.A.I.
@@ -105,7 +107,12 @@ LI|Auroras spoti no DATA COLLECTION filtros izvēlētā perioda (sākotnēji pē
 LI|Skata Scatter trail rezultātos parādās auroras varbūtība scatter point (maz ticams pie Kp ≤ 2; pārējos gadījumos pēc NOAA ovāla), tipiskais QTF starp N un NE (dienvidu puslodē S-SE) ar novirzi no tiešā ceļa un ieteikumi par Doplera nobīdi un režīmiem (CW/SSB vai Q65 ar platiem apakšrežīmiem: FT8 bieži nedekodē). Scatter point vēlams meklēt 370-1100 km attālumā no katras stacijas, ar perpendikularitāti ±3° robežās; ja piedāvātais punkts ir ārpus šī intervāla, programma to atzīmē.
 LI|Auroras spoti tālāk par 2000 km tiek atzīmēti kā apšaubāmi: pēc Newton [48] aurora sasniedz ap 1000 km ziemeļu-dienvidu un 2000 km austrumu-rietumu virzienā. Auroras E spoti (AUE, AU-E, AURORAL E) tiek zīmēti zaļā krāsā uz tiešā ceļa: tas ir auroras izcelsmes sporādiskais E, bez Doplera nobīdes.
 LI|Rezultātos norādīts saules laiks scatter point: 4 stundu robežās no vietējās pusnakts notiek lielākā daļa auroras atstarojumu (Reeve [52]). Dienvidu puslodē aurora 50 MHz joslā sasniedz apmēram 2000 km austrumu-rietumu trasēs (ANVDG [55]); auroras E dod vājākus un stabilākus signālus uz tiešā ceļa (SM2CEW-SM0FOB [54]).
-LI|Papildus varbūtīgākajam scatter point rezultātos norādīts abu staciju QTF intervāls visā sliedes garumā (novirze ≤ 1,5°): aurora var nākt no jebkura intervāla punkta, un varbūtīgākais punkts dod priekšroku īsākajai trasei (pārbaudes gadījums K8GU [57]).
+LI|Papildus varbūtīgākajam scatter point rezultātos norādīts abu staciju QTF intervāls visā sliedes garumā (novirze ≤ 1,5°): aurora var nākt no jebkura intervāla punkta, un varbūtīgākais punkts dod priekšroku īsākajai trasei.
+H2|8.1 BENCHMARK AURORA
+P|Cilnei AURORA ir divas apakšcilnes: REAL-TIME, iepriekš aprakstītais aprēķins, un BENCHMARK AURORA, modeļa pārbaudes stends uz 298 publicētiem reāliem auroras QSO (EI5FK žurnāli 2003-2005 un PA0O žurnāla karte).
+LI|Izvēlne Žurnāls izvēlas vienu žurnālu vai visus kopā; noklusējuma augstums ir 110 km, ar pielaidi 3°, refrakciju 4/3 un IGRF-14.
+LI|Tabulā katram QSO norādīts aprēķinātais scatter point, novirze, stacijas QTF un elevācija un korespondenta QTF. Zaļš: scatter point 370-1100 km no abām stacijām; dzeltens: izskaidrots, bet ārpus šī loga; oranžs: QSO virs 2000 km; sarkans: nav scatter point, modelis QSO neizskaidro.
+LI|Kopsavilkums dod procentus un katram žurnālam aprēķinātā QTF intervālu un mediānu; klikšķis uz rindas uzzīmē trasi un abus antenu virzienus. Žurnālos antenu virziens nav norādīts: salīdzina ģeometriju, nevis QTF.
 H1|9. LOG ADIF
 P|Cilne LOG ADIF rāda strādātos un apstiprinātos kvadrātus pa joslām no 28 MHz uz augšu, neapvienojot joslas. Atvērt ADIF failu... pievieno žurnāla failus; Lejupielādēt no LoTW... lejupielādē apstiprinājumu atskaiti (lietotājvārdu var atcerēties, parole nekad netiek saglabāta); Notīrīt atmiņu noņem failus un atskaiti. Kvadrāti ir oranži, ja strādāti, un citā krāsā, ja apstiprināti ar QSL vai caur LoTW; klikšķis uz kvadrāta parāda izsaukuma signālus un izplatīšanās veidu.
 H1|10. Dokumenti

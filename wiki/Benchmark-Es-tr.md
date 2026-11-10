@@ -27,6 +27,7 @@
 - **Sektörlere göre skip** (10° azimut): turuncu yay = sektördeki en yakın QSO (skip bölgesinin kenarı), yeşil yay = en uzak QSO, aradaki alan ulaşılan bölge.
 - Tahmini foEs'e göre renklendirilmiş, Maidenhead kareleri üzerinde **Es bulutları**.
 - Tek atlamaların orta noktası (sarı), istasyonun ilk atlaması (turuncu; içi boş daire = kısa ilk atlama), karşı istasyonun ilk atlaması (mor).
+- **Bulanık sarı bir nokta**, Es bulutunun bulunduğu varsayılan her atlamanın merkezini işaretler (bu varsayım etkinse kısa ilk atlamanın merkezini de).
 - Bütün gün için **kırmızı çizgi** orta noktaların ağırlık merkezini saat saat birleştirir: bu, bulutların kaymasıdır.
 
 ![Bir saat](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

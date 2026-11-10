@@ -23,6 +23,7 @@ Mapa **Mercator** con centro libre: rueda = zoom, arrastrar = mover.
 
 ![Trayecto](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- Un **punto amarillo difuminado** marca el centro de cada salto, donde se presume la nube Es; se hace más grande en el trayecto bajo el ratón.
 - **Ratón cerca de un trayecto**: la línea y los iconos se amplían y aparece la **cuadrícula WWL de 6 caracteres** del corresponsal.
 - **Clic izquierdo** sobre ese trayecto: una ventana pregunta si mostrar **todos los QSO del archivo** (todos los días) con el extremo lejano **dentro de 150 km** de ese punto. *Sí*: el mapa se vacía y muestra esos QSO dentro del círculo naranja; *No*: el mapa se queda como está. *Volver a día y horario* devuelve a la selección anterior.
 

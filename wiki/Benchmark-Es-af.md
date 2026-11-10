@@ -27,6 +27,7 @@ Toetsbank vir **sporadiese E** en **multi-sprong** op 'n **hele ADIF-log**, self
 - **Skip per sektor** (10° azimut): oranje boog = naaste QSO in die sektor (rand van die stiltesone), groen boog = verste QSO, daartussen die gebied wat bereik is.
 - **Es-wolke** op die Maidenhead-vierkante, gekleur volgens die geskatte foEs.
 - Middelpunt van enkele spronge (geel), eerste sprong van die stasie (oranje, hol sirkel = kort eerste sprong), eerste sprong van die DX-stasie (pers).
+- 'n **Vaag geel kolletjie** merk die middel van elke sprong, waar die Es-wolk vermoedelik is (ook die middel van die kort eerste sprong, as dié hipotese aan is).
 - Vir die hele dag verbind die **rooi lyn** uur vir uur die swaartepunt van die middelpunte: dit is die drywing van die wolke.
 
 ![Een uur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

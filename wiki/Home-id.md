@@ -2,7 +2,7 @@
 
 *disusun oleh Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · **Bahasa Indonesia** · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** adalah program gratis untuk radio amatir yang menganalisis setiap mode propagasi VHF yang melibatkan **lapisan E** ionosfer: **sporadic-E** (termasuk multi-lompatan antarbenua), **F.A.I.** (iregularitas yang sejajar medan magnet), **meteor scatter** (dengan program YA-MS terpasang di dalamnya) dan **aurora radio**. Program berjalan di **Windows (64 dan 32 bit), Linux, Raspberry Pi dan Mac**, dalam **28 bahasa**, dan tidak menulis apa pun di luar foldernya sendiri.
+**E-LAYER ANALYZER** adalah program gratis untuk radio amatir yang menganalisis setiap mode propagasi VHF yang melibatkan **lapisan E** ionosfer: **sporadic-E** (termasuk multi-lompatan antarbenua), **F.A.I.** (iregularitas yang sejajar medan magnet), **meteor scatter** (dengan program YA-MS terpasang di dalamnya) dan **aurora radio**. Program berjalan di **Windows (64 dan 32 bit), Linux, Raspberry Pi dan Mac**, dalam **36 bahasa**, dan tidak menulis apa pun di luar foldernya sendiri.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

@@ -2,7 +2,7 @@
 
 *inihanda ni Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · **Tagalog** · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-Ang **E-LAYER ANALYZER** ay isang libreng programa para sa mga radio amateur na sumusuri sa bawat mode ng propagasyon sa VHF na may kinalaman sa **E layer** ng ionosphere: **sporadic-E** (kasama ang intercontinental na multi-hop), **F.A.I.** (field-aligned irregularities), **meteor scatter** (kasama ang built-in na programang YA-MS) at **radio aurora**. Tumatakbo ito sa **Windows (64 at 32 bit), Linux, Raspberry Pi at Mac**, sa **28 wika**, at walang isinusulat sa labas ng sarili nitong folder.
+Ang **E-LAYER ANALYZER** ay isang libreng programa para sa mga radio amateur na sumusuri sa bawat mode ng propagasyon sa VHF na may kinalaman sa **E layer** ng ionosphere: **sporadic-E** (kasama ang intercontinental na multi-hop), **F.A.I.** (field-aligned irregularities), **meteor scatter** (kasama ang built-in na programang YA-MS) at **radio aurora**. Tumatakbo ito sa **Windows (64 at 32 bit), Linux, Raspberry Pi at Mac**, sa **36 wika**, at walang isinusulat sa labas ng sarili nitong folder.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

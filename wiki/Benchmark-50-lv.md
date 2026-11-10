@@ -23,6 +23,7 @@ Izvēlies **dienu** (atverot – to, kurā visvairāk vairāklēcienu QSO) un la
 
 ![Trase](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Izplūdis dzeltens punkts** atzīmē katra lēciena centru, kur tiek pieņemts Es mākonis; uz trases zem peles tas kļūst lielāks.
 - **Pele pie trases**: līnija un ikonas tiek palielinātas un parādās korespondenta **6 rakstzīmju WWL kvadrāts**.
 - **Kreisais klikšķis** uz šīs trases: uznirstošs logs jautā, vai parādīt **visus failā esošos QSO** (visas dienas), kuru tālā gala vieta ir **150 km robežās** no šī punkta. *Jā*: karte tiek notīrīta un rāda šos QSO oranžajā aplī; *Nē*: karte paliek, kāda bija. *Atpakaļ uz dienu un laiku* atgriež iepriekšējo atlasi.
 

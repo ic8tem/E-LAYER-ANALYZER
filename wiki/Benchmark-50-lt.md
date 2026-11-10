@@ -23,6 +23,7 @@ Pasirinkite **dieną** (atidarius – tą, kurioje daugiausia kelių šuolių QS
 
 ![Trasa](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Išsiliejęs geltonas taškelis** pažymi kiekvieno šuolio centrą, kur spėjama esant Es debesiui; ant trasos po pele jis padidėja.
 - **Pelė prie trasos**: linija ir piktogramos padidinamos, pasirodo DX stoties **6 simbolių WWL kvadratas**.
 - **Kairysis spustelėjimas** ant tos trasos: iššokantis langas klausia, ar rodyti **visus failo QSO** (visas dienas), kurių tolimojo galo vieta yra **iki 150 km** nuo to taško. *Taip*: žemėlapis išvalomas ir rodo tuos QSO oranžiniame apskritime; *Ne*: žemėlapis lieka toks pat. *Grįžti į dieną ir laiką* grąžina ankstesnį pasirinkimą.
 

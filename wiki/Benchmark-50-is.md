@@ -23,6 +23,7 @@ Veldu **dag** (við opnun sá með flest fjölstökks-QSO) og tíma **frá… ti
 
 ![Leið](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Óskýr gulur depill** merkir miðju hvers stökks, þar sem Es-skýið er talið vera; á leiðinni undir músinni verður hann stærri.
 - **Mús nálægt leið**: línan og táknin stækka og **6 stafa WWL-reitur** mótstöðvarinnar birtist.
 - **Vinstri smellur** á þá leið: sprettigluggi spyr hvort sýna eigi **öll QSO í skránni** (alla daga) þar sem staðsetning hins endans er **innan 150 km** frá þeim punkti. *Já*: kortið er hreinsað og sýnir þau QSO innan appelsínugula hringsins; *Nei*: kortið helst óbreytt. *Aftur í dag og tíma* snýr aftur að fyrra vali.
 

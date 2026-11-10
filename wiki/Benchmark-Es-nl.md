@@ -27,6 +27,7 @@ Testbank voor **sporadische E** en **meervoudige sprongen** op een **volledig AD
 - **Skip per sector** (10° azimut): oranje boog = dichtstbijzijnde QSO van de sector (rand van de skipzone), groene boog = verste QSO, daartussen het bereikte gebied.
 - **Es-wolken** op de Maidenhead-vakken, gekleurd naar de geschatte foEs.
 - Middelpunt van de enkele sprongen (geel), eerste sprong van het station (oranje, open cirkel = korte eerste sprong), eerste sprong van het tegenstation (paars).
+- Een **vage gele stip** markeert het midden van elke sprong, waar de Es-wolk vermoed wordt (ook het midden van de korte eerste sprong, als die hypothese actief is).
 - Voor de hele dag verbindt de **rode lijn** uur na uur het zwaartepunt van de middelpunten: dat is de drift van de wolken.
 
 ![Eén uur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

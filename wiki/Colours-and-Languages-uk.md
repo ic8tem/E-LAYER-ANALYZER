@@ -6,8 +6,8 @@
 
 Схеми ті самі, що й у YA-MS, які своєю чергою походять із YAEC: **Світла**, **Ніч**, **Чорна**, вісім **пастельних** (блакитна, помаранчева, аквамаринова, зелена, рожева, бузкова, індиго, коричнева) і **Метеорний слід**. Їх вибирають угорі праворуч.
 
-## Мови (28)
+## Мови (36)
 
-Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어.
+Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردו, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어.
 
 Перекладено інтерфейс E-LAYER ANALYZER і YA-MS, Зведення розрахункових рішень, Посібник користувача, Технічний звіт і Джерела. У вигляді F.A.I./аврори термін **Scatter trail** однаковий у всіх мовах.

@@ -2,7 +2,7 @@
 
 *автор: Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · **Русский** · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** — бесплатная программа для радиолюбителей, которая анализирует все виды распространения УКВ с участием **слоя E** ионосферы: **спорадический E** (в том числе многоскачковый межконтинентальный), **F.A.I.** (неоднородности, вытянутые вдоль магнитного поля), **meteor scatter** (со встроенной программой YA-MS) и **радиоаврора**. Работает в **Windows (64 и 32 бит), Linux, Raspberry Pi и Mac**, на **28 языках**, и ничего не записывает за пределами своей папки.
+**E-LAYER ANALYZER** — бесплатная программа для радиолюбителей, которая анализирует все виды распространения УКВ с участием **слоя E** ионосферы: **спорадический E** (в том числе многоскачковый межконтинентальный), **F.A.I.** (неоднородности, вытянутые вдоль магнитного поля), **meteor scatter** (со встроенной программой YA-MS) и **радиоаврора**. Работает в **Windows (64 и 32 бит), Linux, Raspberry Pi и Mac**, на **36 языках**, и ничего не записывает за пределами своей папки.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

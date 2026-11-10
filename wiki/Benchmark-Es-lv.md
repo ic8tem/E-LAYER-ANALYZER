@@ -27,6 +27,7 @@ Pārbaudes stends **sporādiskajam E** un **vairāklēcienu** sakariem **veselā
 - **Skip pa sektoriem** (10° azimuta): oranžs loks = sektora tuvākais QSO (skip zonas mala), zaļš loks = tālākais QSO, starp tiem – sasniegtā zona.
 - **Es mākoņi** Maidenhead kvadrātos, iekrāsoti pēc novērtētās foEs.
 - Viena lēciena viduspunkts (dzeltens), stacijas pirmais lēciens (oranžs, tukšs aplis = īss pirmais lēciens), korespondenta pirmais lēciens (violets).
+- **Izplūdis dzeltens punkts** atzīmē katra lēciena centru, kur tiek pieņemts Es mākonis (arī īsā pirmā lēciena centru, ja šī hipotēze ir ieslēgta).
 - Visai dienai **sarkanā līnija** stundu pa stundai savieno viduspunktu smaguma centrus: tā ir mākoņu pārvietošanās.
 
 ![Viena stunda](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

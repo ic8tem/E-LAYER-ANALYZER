@@ -23,6 +23,7 @@ Vælg **dagen** (ved åbning den med flest multi-hop-QSO'er) og tidsrummet **fra
 
 ![Strækning](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- En **sløret gul prik** markerer midten af hvert hop, hvor Es-skyen formodes at ligge; på strækningen under musen bliver den større.
 - **Musen nær en strækning**: linjen og ikonerne forstørres, og modstationens **WWL-felt med 6 tegn** vises.
 - **Venstreklik** på den strækning: en popup spørger, om **alle QSO'er i filen** (alle dage) med slutpositionen **inden for 150 km** fra det punkt skal vises. *Ja*: kortet ryddes og viser disse QSO'er inden for den orange cirkel; *Nej*: kortet forbliver uændret. *Tilbage til dag og tidsrum* vender tilbage til det tidligere udvalg.
 

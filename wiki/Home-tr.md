@@ -2,7 +2,7 @@
 
 *hazırlayan: Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · [Dansk](Home-da) · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · **Türkçe** · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER**, iyonosferin **E katmanını** ilgilendiren tüm VHF yayılım modlarını çözümleyen, radyo amatörleri için ücretsiz bir programdır: **sporadik E** (kıtalar arası çok atlamalı bağlantılar dahil), **F.A.I.** (alan hizalı düzensizlikler), **meteor scatter** (yerleşik YA-MS programıyla) ve **radyo aurorası**. **Windows (64 ve 32 bit), Linux, Raspberry Pi ve Mac** üzerinde, **28 dilde** çalışır ve kendi klasörü dışına hiçbir şey yazmaz.
+**E-LAYER ANALYZER**, iyonosferin **E katmanını** ilgilendiren tüm VHF yayılım modlarını çözümleyen, radyo amatörleri için ücretsiz bir programdır: **sporadik E** (kıtalar arası çok atlamalı bağlantılar dahil), **F.A.I.** (alan hizalı düzensizlikler), **meteor scatter** (yerleşik YA-MS programıyla) ve **radyo aurorası**. **Windows (64 ve 32 bit), Linux, Raspberry Pi ve Mac** üzerinde, **36 dilde** çalışır ve kendi klasörü dışına hiçbir şey yazmaz.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

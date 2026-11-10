@@ -27,6 +27,7 @@ Testbenk for **sporadisk E** og **multihopp** på en **hel ADIF-logg**, også fr
 - **Skip per sektor** (10° asimut): oransje bue = nærmeste QSO i sektoren (kanten av den døde sonen), grønn bue = fjerneste QSO, imellom det oppnådde området.
 - **Es-skyer** på Maidenhead-rutene, farget etter estimert foEs.
 - Midtpunkt for enkelthopp (gul), stasjonens første hopp (oransje, hul sirkel = kort første hopp), motstasjonens første hopp (fiolett).
+- En **uskarp gul prikk** markerer midten av hvert hopp, der Es-skyen antas å ligge (også midten av det korte første hoppet, når den hypotesen er aktiv).
 - For hele dagen binder den **røde linjen** sammen tyngdepunktet for midtpunktene time for time: det er skyenes forflytning.
 
 ![Én time](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

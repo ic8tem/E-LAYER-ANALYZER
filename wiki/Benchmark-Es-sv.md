@@ -27,6 +27,7 @@ Testbänk för **sporadiskt E** och **multihopp** på en **hel ADIF-logg**, äve
 - **Skip per sektor** (10° azimut): orange båge = närmaste QSO i sektorn (skipzonens kant), grön båge = det mest avlägsna QSO:t, däremellan det område som nåtts.
 - **Es-moln** på Maidenhead-rutorna, färgade efter uppskattad foEs.
 - Mittpunkt för enkelhopp (gul), stationens första hopp (orange, ihålig cirkel = kort första hopp), DX-stationens första hopp (lila).
+- En **suddig gul prick** markerar mitten av varje hopp, där Es-molnet antas ligga (även mitten av det korta första hoppet, när den hypotesen är aktiv).
 - För hela dagen förenar den **röda linjen** mittpunkternas tyngdpunkt timme för timme: det är molnens drift.
 
 ![En timme](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

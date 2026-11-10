@@ -6,8 +6,8 @@
 
 Schemana är desamma som i YA-MS, som i sin tur kommer från YAEC: **Ljust**, **Natt**, **Svart**, åtta **pastellscheman** (ljusblå, orange, akvamarin, grön, rosa, lila, indigo, brun) och **Meteorspår**. De väljs uppe till höger.
 
-## Språk (28)
+## Språk (36)
 
-Italiano, English, Deutsch, Français, Español, Português, Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 日本語, 한국어.
+Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어.
 
 Gränssnittet i E-LAYER ANALYZER och i YA-MS, Sammanfattningen av beräkningsvalen, Användarhandboken, den Tekniska rapporten och Källorna är alla översatta. I vyn F.A.I./aurora är termen **Scatter trail** densamma på alla språk.

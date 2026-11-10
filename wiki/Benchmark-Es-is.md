@@ -27,6 +27,7 @@ Prófunarbekkur fyrir **sporadic-E** og **fjölstökk** á **heilli ADIF-dagbók
 - **Skip eftir geirum** (10° áttarhorns): appelsínugulur bogi = næsta QSO í geiranum (jaðar skip-svæðisins), grænn bogi = fjarlægasta QSO, á milli þeirra svæðið sem náðist.
 - **Es-ský** á Maidenhead-reitunum, lituð eftir áætluðu foEs.
 - Miðpunktur eins stökks (gulur), fyrsta stökk stöðvarinnar (appelsínugulur, holur hringur = stutt fyrsta stökk), fyrsta stökk mótstöðvarinnar (fjólublár).
+- **Óskýr gulur depill** merkir miðju hvers stökks, þar sem Es-skýið er talið vera (einnig miðju stutta fyrsta stökksins, þegar sú tilgáta er virk).
 - Fyrir allan daginn tengir **rauða línan** þyngdarmiðju miðpunktanna klukkustund fyrir klukkustund: það er rek skýjanna.
 
 ![Ein klukkustund](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

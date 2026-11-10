@@ -23,6 +23,7 @@ Serbest merkezli **Mercator** haritası: tekerlek = yakınlaştırma, sürüklem
 
 ![Yol](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Bulanık sarı bir nokta**, Es bulutunun bulunduğu varsayılan her atlamanın merkezini işaretler; farenin altındaki yolda büyür.
 - **Fare bir yolun yakınında**: çizgi ve simgeler büyür ve karşı istasyonun **6 karakterli WWL karesi** görünür.
 - O yola **sol tık**: bir açılır pencere, uzak ucu o noktanın **150 km yakınında** olan **dosyadaki tüm QSO'ların** (tüm günler) gösterilip gösterilmeyeceğini sorar. *Evet*: harita temizlenir ve bu QSO'ları turuncu dairenin içinde gösterir; *Hayır*: harita olduğu gibi kalır. *Gün ve saate dön* önceki seçime döner.
 

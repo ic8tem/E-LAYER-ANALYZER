@@ -27,6 +27,7 @@ Bandymų stendas **sporadiniam E** ir **keliems šuoliams** su **visu ADIF žurn
 - **Skip pagal sektorius** (10° azimuto): oranžinis lankas = artimiausias sektoriaus QSO (tylos zonos kraštas), žalias lankas = toliausias QSO, tarp jų – pasiekta sritis.
 - **Es debesys** Maidenhead kvadratuose, nuspalvinti pagal įvertintą foEs.
 - Vieno šuolio vidurio taškas (geltonas), stoties pirmas šuolis (oranžinis, tuščias apskritimas = trumpas pirmas šuolis), DX stoties pirmas šuolis (violetinis).
+- **Išsiliejęs geltonas taškelis** pažymi kiekvieno šuolio centrą, kur spėjama esant Es debesiui (taip pat trumpo pirmo šuolio centrą, jei ši hipotezė įjungta).
 - Visai dienai **raudona linija** jungia vidurio taškų svorio centrus valanda po valandos: tai debesų slinkimas.
 
 ![Viena valanda](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)

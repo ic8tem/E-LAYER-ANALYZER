@@ -23,6 +23,7 @@ Peta **Mercator** dengan pusat bebas: roda = zoom, seret = geser.
 
 ![Lintasan](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1h_benchmark_50_tratta.png)
 
+- **Titik kuning buram** menandai pusat setiap lompatan, tempat awan Es diperkirakan berada; pada lintasan di bawah mouse titik itu menjadi lebih besar.
 - **Mouse di dekat lintasan**: garis dan ikon diperbesar dan muncul **kotak WWL 6 karakter** stasiun DX.
 - **Klik kiri** pada lintasan itu: sebuah popup menanyakan apakah akan ditampilkan **semua QSO dalam file** (semua hari) yang ujung jauhnya berada **dalam 150 km** dari titik tersebut. *Ya*: peta dibersihkan dan menampilkan QSO-QSO itu di dalam lingkaran oranye; *Tidak*: peta tetap seperti semula. *Kembali ke hari dan jam* kembali ke pilihan sebelumnya.
 

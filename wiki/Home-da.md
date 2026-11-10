@@ -2,7 +2,7 @@
 
 *af Costantino IC8TEM* — [English](Home) · [Italiano](Home-it) · [Deutsch](Home-de) · [Nederlands](Home-nl) · [Français](Home-fr) · [Español](Home-es) · [Português](Home-pt) · **Dansk** · [Norsk](Home-nb) · [Svenska](Home-sv) · [Íslenska](Home-is) · [Eesti](Home-et) · [Lietuvių](Home-lt) · [Latviešu](Home-lv) · [Русский](Home-ru) · [Українська](Home-uk) · [Türkçe](Home-tr) · [Afrikaans](Home-af) · [العربية](Home-ar) · [עברית](Home-he) · [اردو](Home-ur) · [हिन्दी](Home-hi) · [বাংলা](Home-bn) · [Bahasa Indonesia](Home-id) · [Tagalog](Home-tl) · [日本語](Home-ja) · [한국어](Home-ko) · [中文](Home-zh)
 
-**E-LAYER ANALYZER** er et gratis program til radioamatører, der analyserer alle VHF-udbredelsesformer, som involverer ionosfærens **E-lag**: **sporadisk E** (også interkontinental multi-hop), **F.A.I.** (field-aligned irregularities, uregelmæssigheder langs magnetfeltet), **meteor scatter** (med det indbyggede program YA-MS) og **radionordlys**. Det kører på **Windows (64 og 32 bit), Linux, Raspberry Pi og Mac** på **28 sprog** og skriver intet uden for sin egen mappe.
+**E-LAYER ANALYZER** er et gratis program til radioamatører, der analyserer alle VHF-udbredelsesformer, som involverer ionosfærens **E-lag**: **sporadisk E** (også interkontinental multi-hop), **F.A.I.** (field-aligned irregularities, uregelmæssigheder langs magnetfeltet), **meteor scatter** (med det indbyggede program YA-MS) og **radionordlys**. Det kører på **Windows (64 og 32 bit), Linux, Raspberry Pi og Mac** på **36 sprog** og skriver intet uden for sin egen mappe.
 
 ![SPORADIC-E](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1_sporadic_e.png)
 

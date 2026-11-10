@@ -9,7 +9,7 @@ LI|Alla programmets data ligger i mappen data bredvid programmet: inställningar
 LI|För att flytta programmet till en annan dator räcker det att kopiera dess mapp; för att återgå till grundinställningarna räcker det att radera data/config.ini.
 LI|Lösenordet till LoTW sparas aldrig; endast användarnamnet kan kommas ihåg.
 H2|1.3 Fältet högst upp
-P|Uppe till vänster anger du din anropssignal, din lokator (4, 6 eller 8 tecken) och antennens höjd i meter; knappen Verkställ bekräftar dem och alla flikar uppdateras. Uppe till höger finns UTC-tiden, valet av färgschema (alla scheman från YAEC: Ljust, Natt, Svart, åtta pasteller och Meteorspår) och valet av språk (28 språk). När färgschema eller språk ändras byggs fönstret om direkt, utan att insamlade data går förlorade.
+P|Uppe till vänster anger du din anropssignal, din lokator (4, 6 eller 8 tecken) och antennens höjd i meter; knappen Verkställ bekräftar dem och alla flikar uppdateras. Uppe till höger finns UTC-tiden, valet av färgschema (alla scheman från YAEC: Ljust, Natt, Svart, åtta pasteller och Meteorspår) och valet av språk (36 språk). När färgschema eller språk ändras byggs fönstret om direkt, utan att insamlade data går förlorade.
 P|Bredvid UTC-tiden anger texten NTP:OK (grön) eller NTP:FAILED (röd) om tiden är synkroniserad: var 5:e minut frågar programmet två tidsservrar bland tio spridda över världen och byter till andra om de inte svarar. Verktygstipset visar de använda servrarna och avvikelsen i datorns klocka.
 P|Till höger i flikraden finns kontinentmenyn (Europa, Nordamerika, Sydamerika, Afrika, Asien, Oceanien): den flyttar Mercatorkartorna och F.A.I.- och aurorakartorna till vald kontinent och väljer prognosdata för den kontinenten (E-skip från N0NBH publiceras bara för Europa och Nordamerika).
 H2|1.4 Statusfältet
@@ -77,6 +77,7 @@ H2|4.1 Läsa in en logg
 P|Underfliken BENCHMARK Es är en provbänk för sporadiskt E på en hel ADIF-logg, även från en annan station. Läs in ADIF öppnar filen (programmet kommer ihåg den och läser in den igen vid start), Ta bort ADIF tar bort den. Station i mitten föreslår loggens vanligaste anropssignal och lokator; de kan ändras och bekräftas med Verkställ.
 LI|Sändarpositionen är MY_GRIDSQUARE för varje QSO; mottagarpositionerna är GRIDSQUARE (saknade lokatorer eller lokatorer med 4 tecken hämtas från CALL3).
 LI|Det går att utesluta QSO med ett annat PROP_MODE och de under 500 km (900 km på 144 MHz); transekvatoriella QSO utesluts alltid, utom vid PROP_MODE=ES.
+LI|På kartan markerar en suddig gul prick mitten av varje hopp, där molnet av sporadiskt E antas ligga (även mitten av det korta första hoppet, om hypotesen är aktiv).
 H2|4.2 Dagar, tider och beräkningar
 P|Tabellen QSO per dag listar dagarna med antal QSO, band, största avstånd och multihopp; ett klick på en dag fyller tabellen Dagens timmar, med en rad för varje UTC-timme och raden Hela dagen. Den azimutala kartan, med reglaget för största avstånd, ritar skip per 10°-sektor (orange båge = närmaste QSO, grön sektor = uppnådda avstånd), molnen på rutorna och, för hela dagen, molnens förflyttning timme för timme (röd linje).
 P|Sidan Föreslagna beräkningar visar skip per sektor, uppskattad foEs med förväntad MUF vid 1000, 1500, 2000 och 2400 km, de uppskattade molnen, kontrollen av multihoppet (lika hopp mot kort första hopp, jämförda med de moln som setts i enkelt hopp inom ±30 minuter) och molnens förflyttning timme för timme.
@@ -86,6 +87,7 @@ P|Underfliken BENCHMARK 50 MHz är ägnad åt sporadiskt E med multihopp på 50 
 LI|De QSO på 50 MHz som visas är multihopp, det vill säga över 3100 km (författarens regel); antalet hopp följer IK3XTV:s tabell.
 LI|Dag, från… till… UTC: dagen (vid start den med flest multihopp-QSO) och tidsintervallet, i steg om 15 minuter.
 LI|foEs (valfri): färgar sträckorna med minsta foEs och visar den i tabellen. Es-höjd och Kort första hopp inom 1200 km fungerar som i de andra flikarna.
+LI|Den suddiga gula pricken markerar mitten av varje hopp, där molnet av sporadiskt E antas ligga; på sträckan under musen blir den större.
 H2|5.2 Mercatorkartan
 P|Kartan är en Mercatorkarta med fritt centrum. När musen närmar sig en sträcka förstoras linjen och ikonerna, och motstationens WWL-ruta med 6 tecken visas. Vid vänsterklick på sträckan frågar en dialogruta om alla QSO i filen, från alla dagar, med slutposition inom 150 km ska visas: Ja tömmer kartan och visar dessa QSO inom den orange cirkeln, Nej lämnar kartan som den är. Knappen Tillbaka till dag och tid återgår till det tidigare valet.
 H1|6. F.A.I.
@@ -105,7 +107,12 @@ LI|Auroraspots från den period som valts i filtren i DATA COLLECTION (från bö
 LI|I resultaten för vyn Scatter trail visas sannolikheten för aurora i scatterpunkten (osannolik vid Kp ≤ 2; i övrigt enligt NOAA-ovalen), typisk QTF mellan N och NO (S-SO på södra halvklotet) med avvikelsen från den direkta vägen samt råd om Doppler och trafiksätt (CW/SSB eller Q65 med breda undermoder: FT8 avkodar ofta inte). Scatterpunkten söks helst mellan 370 och 1100 km från varje station, med vinkelräthet inom ±3°; om den föreslagna punkten ligger utanför detta intervall påpekar programmet det.
 LI|Aurora-spots över 2000 km markeras som tveksamma: enligt Newton [48] når auroran omkring 1000 km nord-syd och 2000 km öst-väst. Spots av aurora-E (AUE, AU-E, AURORAL E) ritas i grönt på den direkta vägen: det är sporadiskt E av auroralt ursprung, utan Doppler.
 LI|Resultaten visar soltiden i scatterpunkten: inom 4 timmar från lokal midnatt inträffar de flesta aurorareflexer (Reeve [52]). På södra halvklotet når aurora på 50 MHz upp till omkring 2000 km på öst-västliga sträckor (ANVDG [55]); aurora-E ger svagare och stabilare signaler på den direkta vägen (SM2CEW-SM0FOB [54]).
-LI|Utöver den mest sannolika scatterpunkten anger resultaten QTF-intervallet för de två stationerna längs hela spåret (avvikelse ≤ 1,5°): auroran kan komma från varje punkt i intervallet, och den mest sannolika punkten gynnar den kortaste sträckan (kontrollfall K8GU [57]).
+LI|Utöver den mest sannolika scatterpunkten anger resultaten QTF-intervallet för de två stationerna längs hela spåret (avvikelse ≤ 1,5°): auroran kan komma från varje punkt i intervallet, och den mest sannolika punkten gynnar den kortaste sträckan.
+H2|8.1 BENCHMARK AURORA
+P|Fliken AURORA har två underflikar: REAL-TIME, beräkningen som beskrivs ovan, och BENCHMARK AURORA, en provbänk för modellen med 298 verkliga, publicerade aurora-QSO (loggar från EI5FK 2003-2005 och loggkarta från PA0O).
+LI|Menyn Logg väljer en logg eller alla tillsammans; starthöjden är 110 km, med tolerans 3°, refraktion 4/3 och IGRF-14.
+LI|Tabellen anger för varje QSO den beräknade scatterpunkten, avvikelsen, stationens QTF och elevation samt motstationens QTF. Grönt: scatterpunkt 370-1100 km från båda stationerna; gult: förklarat men utanför detta fönster; orange: QSO över 2000 km; rött: ingen scatterpunkt, QSO inte förklarat av modellen.
+LI|Sammanfattningen ger procentandelarna och för varje logg intervallet och medianen för det beräknade QTF; ett klick på en rad ritar sträckan och de två antennriktningarna. Loggarna anger inte antennriktningen: jämförelsen gäller geometrin, inte QTF.
 H1|9. LOG ADIF
 P|Fliken LOG ADIF visar körda och bekräftade rutor, band för band från 28 MHz och uppåt, utan att slå samman banden. Öppna ADIF-fil... lägger till loggfilerna; Hämta från LoTW... hämtar rapporten över bekräftelser (användarnamnet kan kommas ihåg, lösenordet sparas aldrig); Rensa minnet tar bort filer och rapport. Rutorna är orange om de är körda och färgas annorlunda om de är bekräftade med QSL eller via LoTW; ett klick på en ruta visar anropssignalerna och utbredningssättet.
 H1|10. Dokument

@@ -5,7 +5,19 @@
 ![AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/aurora/aurora_scia_IO70VJ_JO59BC.png)
 
 - NOAA OVATION Prime **오로라 오벌**(음영), 최근 3일의 **Kp**, **태양풍**(Bz, 속도, 밀도). 5분마다 업데이트되어 `data/swpc`에 저장됩니다.
-- F.A.I.와 같은 보기: 국 쌍에 대한 **Scatter trail**과 한 점을 검증하는 **등반사**, 기본 고도 105 km.
+- F.A.I.와 같은 보기: 국 쌍에 대한 **Scatter trail**과 한 점을 검증하는 **등반사**, 기본 고도 110 km.
 - **두 국의 추천 빔 지향**: 각 국의 수직선(그 국의 색으로 표시된 점)을 따라 오벌 확률이 가장 높은 지점. 경험 규칙(G3WPO): 북과 동 사이 약 45°에서 시작합니다.
 - 예 IO70VJ - JO59BC: 셰틀랜드 앞바다의 스캐터 포인트 JP01AK, 편차 0.97°, QTF 11°와 299°.
 - **지도 위 오로라 스폿**: 텍스트에 **<AU>** 또는 **<AUR>**이 있는 스폿은 오로라 스폿입니다(작성자 규칙). *계산을 포함한 <AU>/<AUR> 스폿 지도 표시* 상자를 선택하면 최근 2시간의 스폿(최대 30개)을 표시합니다: 스포터-DX 쌍마다 Scatter trail을 계산하여 가장 가능성 높은 스캐터 포인트(주황 원)를 보여 주고, 결과에 두 국의 QTF와 앙각을 표시합니다.
+- 가장 가능성 높은 스캐터 포인트 외에, 결과에는 Scatter trail 전체를 따라 두 국의 **QTF 범위**(편차 ≤ 1.5°)가 표시됩니다.
+
+## BENCHMARK AURORA
+
+AURORA 탭에는 두 하위 탭이 있습니다: **REAL-TIME**(위에서 설명한 계산)과 **BENCHMARK AURORA**로, 후자는 시각과 로케이터가 있는 **실제 오로라 QSO 298개**로 모델을 검증하는 시험대입니다: EI5FK의 공개 로그(IO51RT, 아일랜드, 2003-2005, 144 및 432 MHz)와 PA0O의 로그 지도(JO33HG, 네덜란드).
+
+![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
+
+- 프로그램은 각 QSO의 스캐터 포인트를 같은 모델(IGRF-14, 고도 110 km, 4/3 굴절, 허용 오차 3°)로 계산합니다.
+- 색: **초록** = 스캐터 포인트가 두 국 모두에서 370-1100 km(Lange-Hesse); **노랑** = 설명되지만 이 범위 밖; **주황** = 2000 km를 넘는 QSO; **빨강** = 스캐터 포인트가 없어 모델로 설명되지 않는 QSO.
+- 요약에는 비율과 로그별 계산 QTF의 범위와 중앙값이 표시됩니다. 행을 클릭하면 경로와 두 안테나 방향이 그려집니다.
+- 결과(버전 0.4.4): **298개 QSO 중 296개 설명(99%)**, 243개(82%)가 370-1100 km 범위 안; EI5FK의 QTF 중앙값은 25°에서 41°로, G3WPO가 권하는 북동쪽입니다. 로그에는 안테나 방향이 기록되어 있지 않으므로 검증은 QTF가 아니라 기하로 합니다.

@@ -27,6 +27,7 @@ Mapa **azimutal equidistante** centrado en la estación, con el regulador **Dist
 - **Skip por sectores** (10° de azimut): arco naranja = QSO más cercano del sector (borde de la zona de skip), arco verde = QSO más lejano; entre ambos, la zona alcanzada.
 - **Nubes Es** sobre las cuadrículas Maidenhead, coloreadas según la foEs estimada.
 - Punto medio de los saltos únicos (amarillo), primer salto de la estación (naranja; círculo hueco = primer salto corto), primer salto del corresponsal (violeta).
+- Un **punto amarillo difuminado** marca el centro de cada salto, donde se presume la nube Es (también el centro del primer salto corto, cuando esa hipótesis está activa).
 - Para el día completo, la **línea roja** une hora por hora el baricentro de los puntos medios: es el desplazamiento de las nubes.
 
 ![Una hora](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/1e_benchmark_es_ora.png)
