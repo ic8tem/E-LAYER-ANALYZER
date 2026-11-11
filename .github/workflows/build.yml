@@ -39,6 +39,9 @@ jobs:
         run: |
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
           echo "VER=$V" >> $GITHUB_ENV
+      - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
+        shell: bash
+        run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
       - name: Compila
         run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Version=${{ env.VER }} -p:DebugType=none -o publish/${{ matrix.rid }}
       - name: Installatore (Inno Setup)
@@ -69,6 +72,9 @@ jobs:
         run: |
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
           echo "VER=$V" >> $GITHUB_ENV
+      - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
+        shell: bash
+        run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
       - name: Compila
         run: |
           set -o pipefail
@@ -175,6 +181,9 @@ jobs:
         run: |
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
           echo "VER=$V" >> $GITHUB_ENV
+      - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
+        shell: bash
+        run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
       - name: Compila
         run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Version=$VER -p:DebugType=none -o publish/${{ matrix.rid }}
       - name: Pacchetto YA-MS.app e immagine disco

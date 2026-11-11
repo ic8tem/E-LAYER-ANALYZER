@@ -20,6 +20,15 @@ Scarica il file adatto dalla pagina **[Releases](https://github.com/ic8tem/E-LAY
 
 Installa la nuova versione sopra la precedente: impostazioni, spot raccolti, log e `call3.txt` restano.
 
+**Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 6 ore il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
+
+- **Aggiorna ora** scarica il pacchetto portatile adatto al computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), chiude il programma, sostituisce i file e lo riavvia. Impostazioni, spot raccolti, log e `call3.txt` restano.
+- **Più tardi** lo ripropone al controllo successivo; **Salta questa versione** non propone più quella versione.
+- Un clic sulla versione mostrata nella barra in alto (per esempio `v0.4.5`) controlla subito gli aggiornamenti. Il controllo automatico si spegne con la casella nella stessa finestra.
+- Se la cartella del programma non è scrivibile (per esempio una cartella di sistema), si aggiorna con il pacchetto di installazione dalla pagina della release.
+
+**File mancanti.** All'avvio il programma controlla di avere tutti i file con cui è stato distribuito (traduzioni, documenti, tabelle, elencati in `data/manifest.txt`). Se ne manca qualcuno, una finestra li elenca e **Scarica da GitHub** li riprende dalla stessa versione pubblicata su GitHub.
+
 ## Requisiti
 
 - Nessun .NET da installare: il programma contiene tutto.

@@ -20,6 +20,15 @@ Download the right file from the **[Releases](https://github.com/ic8tem/E-LAYER-
 
 Install the new version over the old one: settings, collected spots, logs and `call3.txt` are kept.
 
+**Automatic update (from version 0.4.5).** At start-up and then every 6 hours the program checks the GitHub Releases. When a new version is out it opens a window and shows an orange **▲ x.y.z** next to the NTP indicator in the top bar:
+
+- **Update now** downloads the portable package for your computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), closes the program, replaces the files and restarts it. Settings, collected spots, logs and `call3.txt` are kept.
+- **Later** asks again at the next check; **Skip this version** stops proposing that version.
+- Clicking the version shown in the top bar (for example `v0.4.5`) checks for updates at once. The automatic check can be switched off with the box in the same window.
+- If the program folder cannot be written (for example a system folder), use the installation package from the release page instead.
+
+**Missing files.** At start-up the program checks that all the files it was distributed with are present (translations, documents, tables, listed in `data/manifest.txt`). If any is missing, a window lists them and **Download from GitHub** fetches them again from the same version on GitHub.
+
 ## Requirements
 
 - No .NET to install: the program contains everything it needs.

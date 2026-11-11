@@ -24,7 +24,7 @@ namespace ELA
         public const string Version = "0.4.4";
 
         readonly PillTabs tabs = new PillTabs(true);
-        TextBlock lblNtp;
+        TextBlock lblNtp, lblUpd;
         static DispatcherTimer ntpTimer;
         readonly PillTabs esTabs = new PillTabs();   // sottolinguette di SPORADIC-E
         readonly PillTabs auTabs = new PillTabs();   // sottolinguette di AURORA
@@ -61,6 +61,11 @@ namespace ELA
             lblNtp = new TextBlock { FontFamily = Pal.Mono, FontSize = 12, FontWeight = FontWeight.SemiBold, Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
             UpdateNtp();
             Ntp.Changed += OnNtp;
+            // versione in uso; diventa un avviso cliccabile quando su GitHub esce una versione nuova
+            lblUpd = new TextBlock { FontFamily = Pal.Mono, FontSize = 12, FontWeight = FontWeight.SemiBold, Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center, Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand) };
+            lblUpd.PointerPressed += async (s, e) => { await Updater.CheckAsync(); await Updater.ShowDialog(this); };
+            UpdateUpd();
+            Updater.Changed += OnUpd;
             if (ntpTimer == null)
             {
                 // allineatore dell'orologio: elemento nascosto, un controllo all'avvio e poi ogni 5 minuti
@@ -97,6 +102,7 @@ namespace ELA
             DockPanel.SetDock(cmbLang, Dock.Right); top.Children.Add(cmbLang);
             DockPanel.SetDock(cmbTheme, Dock.Right); top.Children.Add(cmbTheme);
             DockPanel.SetDock(lblNtp, Dock.Right); top.Children.Add(lblNtp);
+            DockPanel.SetDock(lblUpd, Dock.Right); top.Children.Add(lblUpd);
             DockPanel.SetDock(lblClock, Dock.Right); top.Children.Add(lblClock);
             top.Children.Add(Ui.Row(brand, Ui.L(Lang.T("Nominativo")), txtCall, Ui.L(Lang.T("Locator")), txtLoc, Ui.L(Lang.T("Quota m")), numAlt, bApply));
             Border topB = new Border { Background = Pal.B(Pal.Panel2), Child = top };
@@ -186,11 +192,30 @@ namespace ELA
             {
                 timer.Stop();
                 Ntp.Changed -= OnNtp;
+                Updater.Changed -= OnUpd;
                 if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); SpotStore.ClearAll(); }   // a ogni chiusura il database degli spot si svuota
             };
         }
 
         void OnNtp() { Dispatcher.UIThread.Post(UpdateNtp); }
+        void OnUpd() { Dispatcher.UIThread.Post(UpdateUpd); }
+
+        // "v0.4.4" in grigio; con una versione nuova su GitHub: "▲ 0.4.5" in arancio, cliccabile
+        void UpdateUpd()
+        {
+            if (Updater.Newer)
+            {
+                lblUpd.Text = "▲ " + Updater.LatestVersion;
+                lblUpd.Foreground = Pal.B(Pal.Orange);
+                ToolTip.SetTip(lblUpd, Lang.F("È disponibile la versione {0} (in uso: {1}): clic per aggiornare.", Updater.LatestVersion, Version));
+            }
+            else
+            {
+                lblUpd.Text = "v" + Version;
+                lblUpd.Foreground = Pal.B(Pal.BarMuted);
+                ToolTip.SetTip(lblUpd, Lang.T("Versione in uso: clic per controllare gli aggiornamenti su GitHub."));
+            }
+        }
 
         // NTP:OK in verde, NTP:FAILED in rosso; il fumetto riporta server, scarto e ora del controllo
         void UpdateNtp()
@@ -256,7 +281,13 @@ namespace ELA
             if (Program.ScreenshotDir == null) dc.ConnectSaved();
             es.Refresh(); fai.Recalc(); au.Recalc();
             if (Program.ScreenshotDir != null) _ = RunScreenshots(Program.ScreenshotDir);
+            else if (!checkedFiles)
+            {
+                checkedFiles = true;
+                Dispatcher.UIThread.Post(async () => { await Task.Delay(3000); await Updater.CheckMissing(this); Updater.Start(this); });
+            }
         }
+        static bool checkedFiles;
 
         static void StartMapLoad(string dataDir)
         {
