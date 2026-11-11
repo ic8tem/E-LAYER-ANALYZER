@@ -28,3 +28,6 @@ Gli installatori li produce GitHub Actions (`.github/workflows/build.yml`) a ogn
 e fotografie delle linguette sul ramo `ci-screenshots`.
 In locale: `dotnet publish E-LAYER-ANALYZER.csproj -c Release -r win-x64|linux-x64|osx-arm64 --self-contained true`.
 Documenti Word: `python3 tools/txt2docx.py data/ela_documento_tecnico.txt data/ela_documento_tecnico.docx`.
+
+## Sostieni il progetto
+E-LAYER ANALYZER è gratuito. Se ti è utile puoi offrirmi un caffè su **[Ko-fi](https://ko-fi.com/ic8tem)**.
