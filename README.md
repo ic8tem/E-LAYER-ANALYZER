@@ -5,6 +5,8 @@ extracontinentale), F.A.I., meteor scatter (programma YA-MS integrato) e aurora 
 A cura di Costantino Cerrotta IC8TEM. Windows (64 e 32 bit), Linux, Raspberry Pi (ARM64) e Mac (.NET 8 + Avalonia), stessa grafica di YA-MS.
 Nessun dato in AppData: tutto sta nella cartella `data` accanto al programma.
 
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-ic8tem-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/ic8tem)
+
 | Linguetta | Contenuto |
 |---|---|
 | SPORADIC-E | mappa azimutale (singolo salto o distanza massima) o rettangolare, spot con primi salti di entrambe le stazioni, nubi Es sui quadrati Maidenhead, tabella dei salti di IK3XTV, regola dei 144 MHz |
