@@ -142,6 +142,7 @@ TAG|SCELTA|DATA COLLECTION 頁籤有兩個子頁籤：spot（連線階段、已�
 TAG|SCELTA|頁籤列中的選單可選擇六大洲之一（歐洲、北美洲、南美洲、非洲、亞洲、大洋洲）：麥卡托地圖以及 F.A.I. 與極光的地圖會移到該洲，E-skip 摘要則使用該洲的資料。N0NBH 只發布歐洲與北美洲的 E-skip：其他洲則由程式加以說明。
 TAG|FONTE|作者（IC8TEM）的規則，與 YA-MS 相同：不精確的網格座標（少於 6 碼）從 CALL3 取得；若 CALL3 中該呼號有 6 碼的網格座標，一律以其為準（在 spot 中，以及在 BENCHMARK Es 的日誌網格座標中）。
 TAG|SCELTA|時鐘，應作者要求：程式每 5 分鐘向從十個分布全球的伺服器清單中選出的兩個 NTP 伺服器查詢（INRIM、PTB、NIST、NRC、NICT、NIC.br、澳洲與南非的 NTP pool、Google、Cloudflare）；若某伺服器沒有回應就改用下一個。UTC 時間旁會顯示 NTP:OK 或 NTP:FAILED。偏差會套用到程式的時間；在 Windows 上，若有系統管理員權限且偏差超過 1 s，也會校正電腦時鐘。
+TAG|SCELTA|更新，應作者要求（從 0.4.5 版起）：程式在啟動時及每 6 小時讀取 GitHub 儲存庫 ic8tem/E-LAYER-ANALYZER 的最新 Release，並與目前使用的版本比較。若較新就會提示（視窗及上方工具列中的 ▲ 字樣），並可依要求下載自身平台的免安裝版套件，更新 data 資料夾中的程式檔案（使用者的 call3.txt 會保留），然後關閉，由一個指令碼負責替換檔案並重新啟動程式。啟動時也會檢查 data/manifest.txt（於 GitHub 上編譯時產生）中列出的檔案是否齊全，並建議重新下載缺少的檔案。
 H1|6. ADIF 日誌
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 報告（以使用者名稱與密碼下載，密碼永遠不會儲存）與日誌的 ADIF 檔案依呼號、頻段、日期與時間合併；確認數會累加。
 TAG|SCELTA|只處理 28 MHz 以上的頻段，每個頻段單獨處理，不合併。顏色：橘色 = 已通聯，藍色 = 以 QSL 確認，綠色 = 經由 LoTW 確認。可依傳播模式篩選（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。

@@ -20,6 +20,15 @@ Lejupielādē piemēroto failu no lapas **[Releases](https://github.com/ic8tem/E
 
 Instalē jauno versiju virs vecās: iestatījumi, savāktie spoti, žurnāli un `call3.txt` saglabājas.
 
+**Automātiskā atjaunināšana (kopš versijas 0.4.5).** Startējot un pēc tam ik pēc 6 stundām programma pārbauda GitHub Releases. Kad iznāk jauna versija, tā atver logu un augšējā joslā blakus NTP indikatoram parāda oranžu **▲ x.y.z**:
+
+- **Atjaunināt tagad** lejupielādē tavam datoram paredzēto pārnēsājamo pakotni (Windows 64/32 biti, Linux, Raspberry Pi, Mac), aizver programmu, aizstāj failus un to restartē. Iestatījumi, savāktie spoti, žurnāli un `call3.txt` saglabājas.
+- **Vēlāk** jautā vēlreiz nākamajā pārbaudē; **Izlaist šo versiju** pārtrauc šīs versijas piedāvāšanu.
+- Klikšķis uz augšējā joslā redzamās versijas (piemēram, `v0.4.5`) uzreiz pārbauda atjauninājumus. Automātisko pārbaudi var izslēgt ar izvēles rūtiņu tajā pašā logā.
+- Ja programmas mapē nevar rakstīt (piemēram, sistēmas mapē), tā vietā izmanto instalēšanas pakotni no laidiena lapas.
+
+**Trūkstošie faili.** Startējot programma pārbauda, vai ir visi faili, ar kuriem tā tika izplatīta (tulkojumi, dokumenti, tabulas, kas uzskaitīti `data/manifest.txt`). Ja kāds trūkst, logs tos uzskaita, un **Lejupielādēt no GitHub** tos atkal iegūst no tās pašas versijas GitHub.
+
 ## Prasības
 
 - .NET nav jāinstalē: programmā ir viss nepieciešamais.

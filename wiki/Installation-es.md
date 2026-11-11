@@ -20,6 +20,15 @@ Descarga el archivo adecuado de la página **[Releases](https://github.com/ic8te
 
 Instala la nueva versión encima de la anterior: se conservan los ajustes, los spots recogidos, los logs y `call3.txt`.
 
+**Actualización automática (desde la versión 0.4.5).** Al iniciar y luego cada 6 horas el programa consulta las Releases de GitHub. Cuando sale una versión nueva, abre una ventana y muestra un **▲ x.y.z** naranja junto al indicador NTP en la barra superior:
+
+- **Actualizar ahora** descarga el paquete portátil para tu ordenador (Windows de 64/32 bits, Linux, Raspberry Pi, Mac), cierra el programa, sustituye los archivos y lo reinicia. Se conservan los ajustes, los spots recogidos, los logs y `call3.txt`.
+- **Más tarde** vuelve a preguntar en la siguiente comprobación; **Omitir esta versión** deja de proponer esa versión.
+- Un clic en la versión que aparece en la barra superior (por ejemplo `v0.4.5`) busca actualizaciones al momento. La comprobación automática se puede desactivar con la casilla de la misma ventana.
+- Si no se puede escribir en la carpeta del programa (por ejemplo, una carpeta del sistema), usa en su lugar el paquete de instalación de la página de la release.
+
+**Archivos que faltan.** Al iniciar, el programa comprueba que estén todos los archivos con los que se distribuyó (traducciones, documentos, tablas, enumerados en `data/manifest.txt`). Si falta alguno, una ventana los enumera y **Descargar de GitHub** los vuelve a obtener de la misma versión en GitHub.
+
 ## Requisitos
 
 - No hay que instalar .NET: el programa contiene todo lo que necesita.

@@ -20,6 +20,15 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 
 Įdiekite naują versiją ant senosios: nustatymai, surinkti spotai, žurnalai ir `call3.txt` išsaugomi.
 
+**Automatinis atnaujinimas (nuo 0.4.5 versijos).** Paleidžiant ir vėliau kas 6 valandas programa tikrina GitHub Releases. Pasirodžius naujai versijai, ji atidaro langą ir viršutinėje juostoje šalia NTP indikatoriaus parodo oranžinį **▲ x.y.z**:
+
+- **Atnaujinti dabar** atsisiunčia jūsų kompiuteriui skirtą nešiojamąjį paketą (Windows 64/32 bitų, Linux, Raspberry Pi, Mac), uždaro programą, pakeičia failus ir ją paleidžia iš naujo. Nustatymai, surinkti spotai, žurnalai ir `call3.txt` išsaugomi.
+- **Vėliau** paklausia dar kartą per kitą patikrinimą; **Praleisti šią versiją** nustoja siūlyti tą versiją.
+- Spustelėjus viršutinėje juostoje rodomą versiją (pavyzdžiui, `v0.4.5`), atnaujinimai patikrinami iš karto. Automatinį tikrinimą galima išjungti žymimuoju langeliu tame pačiame lange.
+- Jei į programos aplanką negalima rašyti (pavyzdžiui, sisteminis aplankas), vietoj to naudokite diegimo paketą iš leidimo puslapio.
+
+**Trūkstami failai.** Paleidžiant programa tikrina, ar yra visi failai, su kuriais ji buvo platinama (vertimai, dokumentai, lentelės, išvardyti `data/manifest.txt`). Jei kurio nors trūksta, langas juos išvardija, o **Atsisiųsti iš GitHub** juos vėl atsisiunčia iš tos pačios versijos GitHub.
+
 ## Reikalavimai
 
 - .NET diegti nereikia: programoje yra viskas, ko jai reikia.

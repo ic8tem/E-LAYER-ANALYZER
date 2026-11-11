@@ -20,6 +20,15 @@ Laadi õige fail alla lehelt **[Releases](https://github.com/ic8tem/E-LAYER-ANAL
 
 Paigalda uus versioon vana peale: seaded, kogutud spotid, logid ja `call3.txt` säilivad.
 
+**Automaatne uuendamine (alates versioonist 0.4.5).** Käivitamisel ja seejärel iga 6 tunni järel kontrollib programm GitHubi Releases-lehte. Kui ilmub uus versioon, avab programm akna ja näitab ülemisel ribal NTP näidiku kõrval oranži **▲ x.y.z**:
+
+- **Uuenda kohe** laadib alla sinu arvutile sobiva kaasaskantava paketi (Windows 64/32 bitti, Linux, Raspberry Pi, Mac), sulgeb programmi, asendab failid ja käivitab selle uuesti. Seaded, kogutud spotid, logid ja `call3.txt` säilivad.
+- **Hiljem** küsib uuesti järgmisel kontrollil; **Jäta see versioon vahele** lõpetab selle versiooni pakkumise.
+- Klõps ülemisel ribal näidatud versioonil (näiteks `v0.4.5`) kontrollib uuendusi kohe. Automaatse kontrolli saab välja lülitada samas aknas oleva märkeruuduga.
+- Kui programmi kausta ei saa kirjutada (näiteks süsteemikaust), kasuta selle asemel väljalaske lehel olevat paigalduspaketti.
+
+**Puuduvad failid.** Käivitamisel kontrollib programm, kas olemas on kõik failid, millega see levitati (tõlked, dokumendid, tabelid, loetletud failis `data/manifest.txt`). Kui mõni puudub, loetleb aken need ja **Laadi alla GitHubist** toob need uuesti samast versioonist GitHubis.
+
 ## Nõuded
 
 - .NET-i pole vaja paigaldada: programm sisaldab kõike vajalikku.

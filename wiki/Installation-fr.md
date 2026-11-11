@@ -20,6 +20,15 @@ Téléchargez le bon fichier depuis la page **[Releases](https://github.com/ic8t
 
 Installez la nouvelle version par-dessus l'ancienne : les réglages, les spots collectés, les logs et `call3.txt` sont conservés.
 
+**Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 6 heures, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
+
+- **Mettre à jour** télécharge le paquet portable pour votre ordinateur (Windows 64/32 bits, Linux, Raspberry Pi, Mac), ferme le programme, remplace les fichiers et le redémarre. Les réglages, les spots collectés, les logs et `call3.txt` sont conservés.
+- **Plus tard** redemande à la vérification suivante ; **Ignorer cette version** cesse de proposer cette version.
+- Un clic sur la version affichée dans la barre du haut (par exemple `v0.4.5`) recherche immédiatement les mises à jour. La vérification automatique peut être désactivée avec la case de la même fenêtre.
+- Si le dossier du programme n'est pas accessible en écriture (par exemple un dossier système), utilisez plutôt le paquet d'installation de la page de la release.
+
+**Fichiers manquants.** Au démarrage, le programme vérifie que tous les fichiers avec lesquels il a été distribué sont présents (traductions, documents, tables, listés dans `data/manifest.txt`). S'il en manque, une fenêtre les énumère et **Télécharger depuis GitHub** les récupère dans la même version sur GitHub.
+
 ## Configuration requise
 
 - Pas de .NET à installer : le programme contient tout ce dont il a besoin.

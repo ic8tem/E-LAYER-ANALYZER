@@ -20,6 +20,15 @@ Last ned riktig fil fra siden **[Releases](https://github.com/ic8tem/E-LAYER-ANA
 
 Installer den nye versjonen oppå den gamle: innstillinger, innsamlede spot, logger og `call3.txt` beholdes.
 
+**Automatisk oppdatering (fra versjon 0.4.5).** Ved oppstart og deretter hver 6. time sjekker programmet GitHub Releases. Når en ny versjon er kommet, åpner det et vindu og viser en oransje **▲ x.y.z** ved siden av NTP-indikatoren i linjen øverst:
+
+- **Oppdater nå** laster ned den portable pakken for datamaskinen din (Windows 64/32 bit, Linux, Raspberry Pi, Mac), lukker programmet, erstatter filene og starter det på nytt. Innstillinger, innsamlede spot, logger og `call3.txt` beholdes.
+- **Senere** spør igjen ved neste sjekk; **Hopp over versjonen** slutter å foreslå den versjonen.
+- Et klikk på versjonen som vises i linjen øverst (for eksempel `v0.4.5`), ser straks etter oppdateringer. Den automatiske sjekken kan slås av med avkrysningsboksen i samme vindu.
+- Hvis programmappen ikke er skrivbar (for eksempel en systemmappe), bruk heller installasjonspakken fra release-siden.
+
+**Manglende filer.** Ved oppstart sjekker programmet at alle filene det ble distribuert med, finnes (oversettelser, dokumenter, tabeller, oppført i `data/manifest.txt`). Mangler noen, lister et vindu dem opp, og **Last ned fra GitHub** henter dem på nytt fra den samme versjonen på GitHub.
+
 ## Krav
 
 - Ingen .NET å installere: programmet inneholder alt det trenger.

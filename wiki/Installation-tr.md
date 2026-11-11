@@ -20,6 +20,15 @@ Doğru dosyayı **[Releases](https://github.com/ic8tem/E-LAYER-ANALYZER/releases
 
 Yeni sürümü eskisinin üzerine kurun: ayarlar, toplanan spot'lar, loglar ve `call3.txt` korunur.
 
+**Otomatik güncelleme (0.4.5 sürümünden itibaren).** Program başlangıçta ve ardından her 6 saatte bir GitHub Releases'i denetler. Yeni bir sürüm çıktığında bir pencere açar ve üst çubuktaki NTP göstergesinin yanında turuncu bir **▲ x.y.z** gösterir:
+
+- **Şimdi güncelle** bilgisayarınız için taşınabilir paketi (Windows 64/32 bit, Linux, Raspberry Pi, Mac) indirir, programı kapatır, dosyaları değiştirir ve programı yeniden başlatır. Ayarlar, toplanan spot'lar, loglar ve `call3.txt` korunur.
+- **Daha sonra** bir sonraki denetimde yeniden sorar; **Bu sürümü atla** o sürümü önermeyi bırakır.
+- Üst çubukta gösterilen sürüme (örneğin `v0.4.5`) tıklamak güncellemeleri hemen denetler. Otomatik denetim aynı penceredeki onay kutusuyla kapatılabilir.
+- Program klasörüne yazılamıyorsa (örneğin bir sistem klasörü), bunun yerine sürüm sayfasındaki kurulum paketini kullanın.
+
+**Eksik dosyalar.** Başlangıçta program, birlikte dağıtıldığı tüm dosyaların (çeviriler, belgeler, tablolar; `data/manifest.txt` içinde listelenir) mevcut olduğunu denetler. Eksik olan varsa bir pencere bunları listeler ve **GitHub'dan indir** bunları GitHub'daki aynı sürümden yeniden indirir.
+
 ## Gereksinimler
 
 - Kurulacak .NET yok: program ihtiyaç duyduğu her şeyi içerir.

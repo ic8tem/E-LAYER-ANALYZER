@@ -20,6 +20,15 @@ Töltse le a megfelelő fájlt a **[Releases](https://github.com/ic8tem/E-LAYER-
 
 Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a naplók és a `call3.txt` megmaradnak.
 
+**Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 6 óránként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
+
+- A **Frissítés most** letölti a számítógépéhez való hordozható csomagot (Windows 64/32 bit, Linux, Raspberry Pi, Mac), bezárja a programot, lecseréli a fájlokat és újraindítja. A beállítások, a gyűjtött spotok, a naplók és a `call3.txt` megmaradnak.
+- A **Később** a következő ellenőrzéskor újra rákérdez; a **Verzió kihagyása** után az adott verziót a program többé nem ajánlja fel.
+- A felső sávban látható verzióra (például `v0.4.5`) kattintva a program azonnal frissítést keres. Az automatikus ellenőrzés ugyanabban az ablakban egy jelölőnégyzettel kikapcsolható.
+- Ha a program mappája nem írható (például rendszermappa), használja helyette a kiadás oldalán található telepítőcsomagot.
+
+**Hiányzó fájlok.** Indításkor a program ellenőrzi, hogy megvan-e minden fájl, amellyel terjesztették (fordítások, dokumentumok, táblázatok, a `data/manifest.txt` felsorolása szerint). Ha valamelyik hiányzik, egy ablak felsorolja őket, és a **Letöltés a GitHubról** újra letölti őket ugyanabból a verzióból a GitHubról.
+
 ## Követelmények
 
 - Nem kell .NET-et telepíteni: a program mindent tartalmaz, amire szüksége van.

@@ -20,6 +20,15 @@ Pobierz odpowiedni plik ze strony **[Releases](https://github.com/ic8tem/E-LAYER
 
 Zainstaluj nową wersję na starej: ustawienia, zebrane spoty, logi i `call3.txt` zostają zachowane.
 
+**Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 6 godzin program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
+
+- **Aktualizuj teraz** pobiera pakiet przenośny dla twojego komputera (Windows 64/32 bity, Linux, Raspberry Pi, Mac), zamyka program, zastępuje pliki i uruchamia go ponownie. Ustawienia, zebrane spoty, logi i `call3.txt` zostają zachowane.
+- **Później** pyta ponownie przy następnym sprawdzeniu; **Pomiń tę wersję** przestaje proponować tę wersję.
+- Kliknięcie wersji wyświetlanej na górnym pasku (na przykład `v0.4.5`) od razu sprawdza aktualizacje. Automatyczne sprawdzanie można wyłączyć polem wyboru w tym samym oknie.
+- Jeśli do folderu programu nie można zapisywać (na przykład folder systemowy), użyj zamiast tego pakietu instalacyjnego ze strony wydania.
+
+**Brakujące pliki.** Przy starcie program sprawdza, czy są wszystkie pliki, z którymi był rozpowszechniany (tłumaczenia, dokumenty, tabele, wymienione w `data/manifest.txt`). Jeśli któregoś brakuje, okno wyświetla ich listę, a **Pobierz z GitHub** pobiera je ponownie z tej samej wersji na GitHubie.
+
 ## Wymagania
 
 - Nie trzeba instalować .NET: program zawiera wszystko, czego potrzebuje.

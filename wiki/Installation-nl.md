@@ -20,6 +20,15 @@ Download het juiste bestand van de pagina **[Releases](https://github.com/ic8tem
 
 Installeer de nieuwe versie over de oude heen: instellingen, verzamelde spots, logs en `call3.txt` blijven behouden.
 
+**Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 6 uur controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
+
+- **Nu bijwerken** downloadt het draagbare pakket voor je computer (Windows 64/32-bit, Linux, Raspberry Pi, Mac), sluit het programma, vervangt de bestanden en start het opnieuw. Instellingen, verzamelde spots, logs en `call3.txt` blijven behouden.
+- **Later** vraagt het opnieuw bij de volgende controle; **Deze versie overslaan** stelt die versie niet meer voor.
+- Een klik op de versie in de bovenste balk (bijvoorbeeld `v0.4.5`) zoekt meteen naar updates. De automatische controle kan worden uitgeschakeld met het vakje in hetzelfde venster.
+- Als de programmamap niet beschrijfbaar is (bijvoorbeeld een systeemmap), gebruik dan het installatiepakket van de releasepagina.
+
+**Ontbrekende bestanden.** Bij het opstarten controleert het programma of alle bestanden waarmee het is verspreid aanwezig zijn (vertalingen, documenten, tabellen, vermeld in `data/manifest.txt`). Ontbreekt er een, dan toont een venster de lijst en haalt **Downloaden van GitHub** ze opnieuw op uit dezelfde versie op GitHub.
+
 ## Vereisten
 
 - Geen .NET te installeren: het programma bevat alles wat het nodig heeft.

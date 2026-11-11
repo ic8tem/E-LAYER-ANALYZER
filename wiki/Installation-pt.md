@@ -20,6 +20,15 @@ Descarregue o ficheiro certo da página **[Releases](https://github.com/ic8tem/E
 
 Instale a nova versão por cima da anterior: as definições, os spots recolhidos, os logs e o `call3.txt` são mantidos.
 
+**Atualização automática (a partir da versão 0.4.5).** Ao arrancar e depois a cada 6 horas o programa consulta as Releases do GitHub. Quando sai uma versão nova, abre uma janela e mostra um **▲ x.y.z** laranja ao lado do indicador NTP na barra superior:
+
+- **Atualizar agora** descarrega o pacote portátil para o seu computador (Windows 64/32 bits, Linux, Raspberry Pi, Mac), fecha o programa, substitui os ficheiros e reinicia-o. As definições, os spots recolhidos, os logs e o `call3.txt` são mantidos.
+- **Mais tarde** volta a perguntar na verificação seguinte; **Saltar esta versão** deixa de propor essa versão.
+- Um clique na versão mostrada na barra superior (por exemplo `v0.4.5`) procura atualizações de imediato. A verificação automática pode ser desligada com a caixa na mesma janela.
+- Se não for possível escrever na pasta do programa (por exemplo, uma pasta do sistema), use antes o pacote de instalação da página da release.
+
+**Ficheiros em falta.** Ao arrancar, o programa verifica se estão presentes todos os ficheiros com que foi distribuído (traduções, documentos, tabelas, enumerados em `data/manifest.txt`). Se faltar algum, uma janela enumera-os e **Descarregar do GitHub** volta a obtê-los da mesma versão no GitHub.
+
 ## Requisitos
 
 - Não é preciso instalar o .NET: o programa contém tudo aquilo de que precisa.

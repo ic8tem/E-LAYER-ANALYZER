@@ -20,6 +20,15 @@ Laai die regte lêer van die **[Releases](https://github.com/ic8tem/E-LAYER-ANAL
 
 Installeer die nuwe weergawe oor die ou een: instellings, versamelde spots, logs en `call3.txt` word behou.
 
+**Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 6 uur kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
+
+- **Werk nou by** laai die draagbare pakket vir jou rekenaar af (Windows 64/32-bis, Linux, Raspberry Pi, Mac), maak die program toe, vervang die lêers en herbegin dit. Instellings, versamelde spots, logs en `call3.txt` word behou.
+- **Later** vra weer by die volgende kontrole; **Slaan hierdie weergawe oor** hou op om daardie weergawe aan te bied.
+- 'n Klik op die weergawe wat in die boonste balk gewys word (byvoorbeeld `v0.4.5`) kyk dadelik na bywerkings. Die outomatiese kontrole kan met die merkblokkie in dieselfde venster afgeskakel word.
+- As daar nie in die programgids geskryf kan word nie (byvoorbeeld 'n stelselgids), gebruik eerder die installeerpakket van die vrystellingsbladsy.
+
+**Ontbrekende lêers.** By opstart kyk die program of al die lêers waarmee dit versprei is, teenwoordig is (vertalings, dokumente, tabelle, gelys in `data/manifest.txt`). As enige ontbreek, lys 'n venster hulle en **Laai af van GitHub** haal hulle weer af uit dieselfde weergawe op GitHub.
+
 ## Vereistes
 
 - Geen .NET om te installeer nie: die program bevat alles wat dit nodig het.

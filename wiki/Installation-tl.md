@@ -20,6 +20,15 @@ I-download ang tamang file mula sa pahinang **[Releases](https://github.com/ic8t
 
 I-install ang bagong bersyon sa ibabaw ng luma: pinananatili ang mga setting, nakolektang spot, log at `call3.txt`.
 
+**Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 6 na oras, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
+
+- Dina-download ng **I-update ngayon** ang portable na package para sa iyong computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), isinasara ang programa, pinapalitan ang mga file at muli itong binubuksan. Pinananatili ang mga setting, nakolektang spot, log at `call3.txt`.
+- Nagtatanong muli ang **Mamaya** sa susunod na pagsusuri; tumitigil ang **Laktawan ang bersiyong ito** sa pagmumungkahi ng bersiyong iyon.
+- Ang pag-click sa bersiyong ipinapakita sa bar sa itaas (halimbawa `v0.4.5`) ay agad na tumitingin ng mga update. Maaaring patayin ang awtomatikong pagsusuri gamit ang checkbox sa parehong window.
+- Kung hindi masulatan ang folder ng programa (halimbawa isang system folder), gamitin na lamang ang installation package mula sa pahina ng release.
+
+**Mga nawawalang file.** Sa pagbukas, tinitingnan ng programa kung naroon ang lahat ng file na kasama nang ipamahagi ito (mga salin, dokumento, talahanayan, na nakalista sa `data/manifest.txt`). Kung may nawawala, inililista ang mga ito ng isang window at kinukuha muli ng **I-download mula sa GitHub** mula sa parehong bersiyon sa GitHub.
+
 ## Mga kailangan
 
 - Walang .NET na kailangang i-install: nasa programa na ang lahat ng kailangan nito.

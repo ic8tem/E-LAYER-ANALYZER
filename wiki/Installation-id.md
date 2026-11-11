@@ -20,6 +20,15 @@ Unduh file yang tepat dari halaman **[Releases](https://github.com/ic8tem/E-LAYE
 
 Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3.txt` tetap tersimpan.
 
+**Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 6 jam program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
+
+- **Perbarui sekarang** mengunduh paket portabel untuk komputer Anda (Windows 64/32 bit, Linux, Raspberry Pi, Mac), menutup program, mengganti file lalu menjalankannya kembali. Pengaturan, spot terkumpul, log dan `call3.txt` tetap tersimpan.
+- **Nanti** menanyakan lagi pada pemeriksaan berikutnya; **Lewati versi ini** berhenti menawarkan versi tersebut.
+- Mengklik versi yang tampil di bilah atas (misalnya `v0.4.5`) langsung memeriksa pembaruan. Pemeriksaan otomatis dapat dimatikan dengan kotak centang di jendela yang sama.
+- Jika folder program tidak dapat ditulisi (misalnya folder sistem), gunakan paket instalasi dari halaman Release.
+
+**File hilang.** Saat mulai program memeriksa apakah semua file yang disertakan saat distribusi ada (terjemahan, dokumen, tabel, yang tercantum di `data/manifest.txt`). Jika ada yang hilang, sebuah jendela menampilkan daftarnya dan **Unduh dari GitHub** mengambilnya kembali dari versi yang sama di GitHub.
+
 ## Persyaratan
 
 - Tidak ada .NET yang perlu dipasang: program sudah berisi semua yang dibutuhkannya.

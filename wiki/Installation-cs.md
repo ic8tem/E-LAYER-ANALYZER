@@ -20,6 +20,15 @@ Stáhněte si správný soubor ze stránky **[Releases](https://github.com/ic8te
 
 Nainstalujte novou verzi přes starou: nastavení, shromážděné spoty, deníky a `call3.txt` zůstanou zachovány.
 
+**Automatická aktualizace (od verze 0.4.5).** Při spuštění a pak každých 6 hodin program kontroluje Releases na GitHubu. Když vyjde nová verze, otevře okno a vedle ukazatele NTP v horní liště zobrazí oranžové **▲ x.y.z**:
+
+- **Aktualizovat nyní** stáhne přenosný balíček pro váš počítač (Windows 64/32 bitů, Linux, Raspberry Pi, Mac), zavře program, nahradí soubory a znovu jej spustí. Nastavení, shromážděné spoty, deníky a `call3.txt` zůstanou zachovány.
+- **Později** se zeptá znovu při příští kontrole; **Přeskočit tuto verzi** přestane tuto verzi nabízet.
+- Kliknutím na verzi zobrazenou v horní liště (například `v0.4.5`) se aktualizace zkontrolují okamžitě. Automatickou kontrolu lze vypnout zaškrtávacím políčkem ve stejném okně.
+- Pokud do složky programu nelze zapisovat (například systémová složka), použijte místo toho instalační balíček ze stránky vydání.
+
+**Chybějící soubory.** Při spuštění program kontroluje, zda jsou přítomny všechny soubory, se kterými byl distribuován (překlady, dokumenty, tabulky, uvedené v `data/manifest.txt`). Pokud některý chybí, okno je vypíše a **Stáhnout z GitHubu** je znovu stáhne ze stejné verze na GitHubu.
+
 ## Požadavky
 
 - Není třeba instalovat .NET: program obsahuje vše, co potřebuje.

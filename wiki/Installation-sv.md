@@ -20,6 +20,15 @@ Ladda ned rätt fil från sidan **[Releases](https://github.com/ic8tem/E-LAYER-A
 
 Installera den nya versionen ovanpå den gamla: inställningar, insamlade spots, loggar och `call3.txt` behålls.
 
+**Automatisk uppdatering (från version 0.4.5).** Vid start och sedan var 6:e timme kontrollerar programmet GitHub Releases. När en ny version har kommit ut öppnar det ett fönster och visar ett orange **▲ x.y.z** bredvid NTP-indikatorn i fältet högst upp:
+
+- **Uppdatera nu** hämtar det portabla paketet för din dator (Windows 64/32 bitar, Linux, Raspberry Pi, Mac), stänger programmet, ersätter filerna och startar om det. Inställningar, insamlade spots, loggar och `call3.txt` behålls.
+- **Senare** frågar igen vid nästa kontroll; **Hoppa över versionen** slutar föreslå den versionen.
+- Ett klick på versionen i fältet högst upp (till exempel `v0.4.5`) söker direkt efter uppdateringar. Den automatiska kontrollen kan stängas av med rutan i samma fönster.
+- Om programmappen inte är skrivbar (till exempel en systemmapp), använd i stället installationspaketet från releasesidan.
+
+**Saknade filer.** Vid start kontrollerar programmet att alla filer som det distribuerades med finns (översättningar, dokument, tabeller, listade i `data/manifest.txt`). Saknas någon listas de i ett fönster, och **Hämta från GitHub** hämtar dem igen från samma version på GitHub.
+
 ## Krav
 
 - Ingen .NET behöver installeras: programmet innehåller allt det behöver.

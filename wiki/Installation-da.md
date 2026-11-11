@@ -20,6 +20,15 @@ Hent den rigtige fil fra siden **[Releases](https://github.com/ic8tem/E-LAYER-AN
 
 Installér den nye version oven i den gamle: indstillinger, indsamlede spots, logs og `call3.txt` bevares.
 
+**Automatisk opdatering (fra version 0.4.5).** Ved opstart og derefter hver 6. time kontrollerer programmet GitHub Releases. Når der er kommet en ny version, åbner det et vindue og viser et orange **▲ x.y.z** ved siden af NTP-indikatoren i linjen øverst:
+
+- **Opdatér nu** henter den portable pakke til din computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), lukker programmet, erstatter filerne og genstarter det. Indstillinger, indsamlede spots, logs og `call3.txt` bevares.
+- **Senere** spørger igen ved næste kontrol; **Spring versionen over** holder op med at foreslå den version.
+- Et klik på versionen, der vises i linjen øverst (for eksempel `v0.4.5`), søger straks efter opdateringer. Den automatiske kontrol kan slås fra med afkrydsningsfeltet i samme vindue.
+- Hvis programmappen ikke er skrivbar (for eksempel en systemmappe), så brug i stedet installationspakken fra release-siden.
+
+**Manglende filer.** Ved opstart kontrollerer programmet, at alle de filer, det blev distribueret med, er til stede (oversættelser, dokumenter, tabeller, opført i `data/manifest.txt`). Mangler der nogen, viser et vindue en liste over dem, og **Hent fra GitHub** henter dem igen fra den samme version på GitHub.
+
 ## Krav
 
 - Ingen .NET at installere: programmet indeholder alt, hvad det har brug for.

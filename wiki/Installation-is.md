@@ -20,6 +20,15 @@ Sæktu réttu skrána af síðunni **[Releases](https://github.com/ic8tem/E-LAYE
 
 Settu nýju útgáfuna upp yfir þá gömlu: stillingar, söfnuð spot, dagbækur og `call3.txt` haldast.
 
+**Sjálfvirk uppfærsla (frá útgáfu 0.4.5).** Við ræsingu og síðan á 6 klukkustunda fresti athugar forritið GitHub Releases. Þegar ný útgáfa er komin út opnar það glugga og sýnir appelsínugult **▲ x.y.z** við hlið NTP-vísisins í efri stikunni:
+
+- **Uppfæra núna** sækir færanlega pakkann fyrir tölvuna þína (Windows 64/32 bita, Linux, Raspberry Pi, Mac), lokar forritinu, skiptir út skránum og endurræsir það. Stillingar, söfnuð spot, dagbækur og `call3.txt` haldast.
+- **Seinna** spyr aftur við næstu athugun; **Sleppa þessari útgáfu** hættir að bjóða þá útgáfu.
+- Smellur á útgáfuna sem sýnd er í efri stikunni (til dæmis `v0.4.5`) leitar strax að uppfærslum. Slökkva má á sjálfvirku athuguninni með gátreitnum í sama glugga.
+- Ef ekki er hægt að skrifa í möppu forritsins (til dæmis kerfismöppu) skaltu frekar nota uppsetningarpakkann af síðunni Releases.
+
+**Skrár vantar.** Við ræsingu athugar forritið hvort allar skrárnar sem því var dreift með séu til staðar (þýðingar, skjöl, töflur, taldar upp í `data/manifest.txt`). Ef einhverja vantar birtir gluggi lista yfir þær og **Sækja af GitHub** sækir þær aftur úr sömu útgáfu á GitHub.
+
 ## Kröfur
 
 - Ekkert .NET þarf að setja upp: forritið inniheldur allt sem það þarf.
