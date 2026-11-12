@@ -12,7 +12,9 @@ Descarregue o ficheiro certo da página **[Releases](https://github.com/ic8tem/E
 | Linux 64 bits (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, depois inicie-o a partir do menu: no primeiro arranque o programa copia-se para `~/E-LAYER-ANALYZER`, com a pasta `data` ao lado. |
 | Linux portátil | `...-linux-x64-portatile.tar.gz` | Extraia e execute `./E-LAYER-ANALYZER`, ou execute `./installa.sh`: instala em `~/E-LAYER-ANALYZER` com um ícone no menu. |
 | Raspberry Pi (64 bits) | `e-layer-analyzer_x.y.z_arm64.deb` ou `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 ou 5 com **Raspberry Pi OS de 64 bits** e ambiente de trabalho (recomendam-se 4 GB de RAM). O .deb como acima; a versão portátil como para Linux. |
-| Raspberry Pi (32 bits) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 ou 4 com **Raspberry Pi OS de 32 bits**. Extraia e execute `./E-LAYER-ANALYZER` ou `./installa.sh`. |
+| Raspberry Pi (32 bits) | `e-layer-analyzer_x.y.z_armhf.deb` ou `...-linux-arm-portatile.tar.gz` | Pi 2, 3 ou 4 com **Raspberry Pi OS de 32 bits**. O .deb como acima; a versão portátil: extraia e execute `./E-LAYER-ANALYZER` ou `./installa.sh`. |
+| Raspberry Pi com Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` ou `...-linux-arm64-portatile.tar.gz` | Como root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` e depois execute `e-layer-analyzer` a partir do menu ou do terminal: no primeiro arranque o programa copia-se para `~/E-LAYER-ANALYZER`. A versão portátil como para Linux. |
+| Linux armv7l (outras placas ARM de 32 bits) | `...-linux-armv7l-portatile.tar.gz` | Como a versão portátil para Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) ou `...-osx-x64.dmg` (Intel) | Abra o .dmg, clique direito em **Installa E-LAYER-ANALYZER.command** > Abrir. Instala em `~/E-LAYER-ANALYZER`. |
 | Mac, só a aplicação | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Extraia **E-LAYER-ANALYZER.app** para uma pasta sua (por exemplo `~/E-LAYER-ANALYZER`, não Applications): a pasta `data` é criada ao lado da aplicação. No primeiro arranque, clique direito > Abrir. |
 
@@ -34,3 +36,4 @@ Instale a nova versão por cima da anterior: as definições, os spots recolhido
 - Não é preciso instalar o .NET: o programa contém tudo aquilo de que precisa.
 - Ligação à internet para o mapa (Natural Earth, no primeiro arranque), os dados de aurora da NOAA, os radares do YA-MS e as sessões telnet.
 - O Raspberry Pi Zero e o Pi 1 não são suportados (os seus processadores não são suportados pelo .NET).
+- Não há versões para Linux i686 (PC de 32 bits), porque o .NET não existe para esse sistema, nem para FreeBSD, onde faltam as bibliotecas gráficas do Avalonia.

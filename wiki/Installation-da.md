@@ -12,7 +12,9 @@ Hent den rigtige fil fra siden **[Releases](https://github.com/ic8tem/E-LAYER-AN
 | Linux 64 bit (pc) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, og start det derefter fra menuen: ved første opstart kopierer programmet sig selv til `~/E-LAYER-ANALYZER`, med mappen `data` ved siden af. |
 | Linux portabel | `...-linux-x64-portatile.tar.gz` | Pak ud, og kør `./E-LAYER-ANALYZER`, eller kør `./installa.sh`: installeres i `~/E-LAYER-ANALYZER` med et ikon i menuen. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` eller `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 eller 5 med **64 bit Raspberry Pi OS** og skrivebord (4 GB RAM anbefales). .deb-filen som ovenfor; den portable version som til Linux. |
-| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 eller 4 med **32 bit Raspberry Pi OS**. Pak ud, og kør `./E-LAYER-ANALYZER` eller `./installa.sh`. |
+| Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` eller `...-linux-arm-portatile.tar.gz` | Pi 2, 3 eller 4 med **32 bit Raspberry Pi OS**. .deb-filen som ovenfor; den portable version: pak ud, og kør `./E-LAYER-ANALYZER` eller `./installa.sh`. |
+| Raspberry Pi med Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` eller `...-linux-arm64-portatile.tar.gz` | Som root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, og start derefter `e-layer-analyzer` fra menuen eller terminalen: ved første start kopierer programmet sig til `~/E-LAYER-ANALYZER`. Den portable version som til Linux. |
+| Linux armv7l (andre 32 bit ARM-boards) | `...-linux-armv7l-portatile.tar.gz` | Som den portable version til Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) eller `...-osx-x64.dmg` (Intel) | Åbn .dmg-filen, højreklik på **Installa E-LAYER-ANALYZER.command** > Åbn. Installeres i `~/E-LAYER-ANALYZER`. |
 | Mac, kun programmet | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Pak **E-LAYER-ANALYZER.app** ud i en mappe, du selv vælger (for eksempel `~/E-LAYER-ANALYZER`, ikke Applications): mappen `data` oprettes ved siden af programmet. Ved første opstart: højreklik > Åbn. |
 
@@ -34,3 +36,4 @@ Installér den nye version oven i den gamle: indstillinger, indsamlede spots, lo
 - Ingen .NET at installere: programmet indeholder alt, hvad det har brug for.
 - Internetforbindelse til kortet (Natural Earth, ved første opstart), NOAA's nordlysdata, YA-MS' radarer og telnet-sessionerne.
 - Raspberry Pi Zero og Pi 1 understøttes ikke (deres processorer håndteres ikke af .NET).
+- Der findes ingen versioner til Linux i686 (32 bit-pc'er), fordi .NET ikke findes til det system, og heller ikke til FreeBSD, hvor Avalonias grafikbiblioteker mangler.
