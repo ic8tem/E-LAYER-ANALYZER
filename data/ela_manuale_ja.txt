@@ -4,9 +4,10 @@ H1|1. はじめる前に
 H2|1.1 プログラムの機能
 P|E-LAYER ANALYZER は、電離層の E 層を経由する VHF の伝搬モードを調べるためのツールを 1 つのプログラムにまとめたものです: スポラディックE (マルチホップや大陸間伝搬を含む)、F.A.I. (磁力線に沿った不規則構造)、メテオスキャッター (YA-MS プログラムを内蔵)、電波オーロラ。リアルタイムの DX クラスターのスポットと ADIF ログを扱い、すべての結果をウィンドウの 3 分の 2 を占める地図に表示し、データと計算は右側の 3 分の 1 に表示します。
 H2|1.2 インストールとデータフォルダー
-P|プログラムは Windows (64 ビットおよび 32 ビット)、Linux、Raspberry Pi (ARM64)、Mac (Apple Silicon および Intel) で動作します。GitHub リポジトリの Releases ページからダウンロードできます: Windows 用にはインストーラーと .zip ファイルのポータブル版、Linux と Raspberry Pi 用にはインストールスクリプト付きの .tar.gz アーカイブ、Mac 用には .dmg イメージがあります。
+P|プログラムは Windows (64 ビットおよび 32 ビット)、Linux x86_64、Raspberry Pi (64 ビットおよび 32 ビットの Raspberry Pi OS、Slackware ARM64)、Linux armv7l、Mac (Apple Silicon および Intel) で動作します。GitHub リポジトリの Releases ページからダウンロードできます: Windows 用にはインストーラーと .zip ファイルのポータブル版、Linux と Raspberry Pi 用には .deb パッケージ、ARM64 用の Slackware .txz パッケージ、インストールスクリプト付きの .tar.gz アーカイブ、Mac 用には .dmg イメージがあります。Linux i686 (32 ビット PC) 用のバージョンはありません。そのシステム用の .NET が存在しないためです。FreeBSD 用もありません。Avalonia のグラフィックライブラリがないためです。
 LI|Windows: インストーラーはプログラムを C:\E-LAYER-ANALYZER に入れ、その横に data フォルダーを置きます。ポータブル版は任意のフォルダーに展開し、E-LAYER-ANALYZER.exe で起動します。
-LI|Linux と Raspberry Pi: .deb パッケージ (sudo apt install ./e-layer-analyzer_..._amd64.deb、または _arm64.deb) の場合、プログラムはメニューから起動し、初回起動時に ~/E-LAYER-ANALYZER にコピーされます。.tar.gz アーカイブの場合は展開して ./E-LAYER-ANALYZER を起動するか、./installa.sh でメニューのアイコン付きで ~/E-LAYER-ANALYZER にインストールします。
+LI|Linux と Raspberry Pi: .deb パッケージ (sudo apt install ./e-layer-analyzer_..._amd64.deb、64 ビット版 Raspberry Pi OS では _arm64.deb、32 ビット版では _armhf.deb) の場合、プログラムはメニューから起動し、初回起動時に ~/E-LAYER-ANALYZER にコピーされます。.tar.gz アーカイブ (linux-x64、linux-arm64、linux-arm、linux-armv7l) の場合は展開して ./E-LAYER-ANALYZER を起動するか、./installa.sh でメニューのアイコン付きで ~/E-LAYER-ANALYZER にインストールします。
+LI|Slackware ARM64: root で installpkg e-layer-analyzer-...-aarch64-1_ic8tem.txz を実行してパッケージをインストールします。プログラムはメニューまたは端末から e-layer-analyzer で起動し、.deb と同様に初回起動時に ~/E-LAYER-ANALYZER にコピーされます。
 LI|Mac: .dmg ファイル (Apple Silicon M1-M4 用は arm64、Intel 用は x64) を開き、«Installa E-LAYER-ANALYZER.command» を右クリックして「開く」を選びます。代わりに、-app.zip ファイルにはアプリケーションだけが入っています。
 LI|プログラムのデータはすべてプログラムと同じ場所の data フォルダーに保存されます: 設定 (config.ini)、CALL3 データベース、磁場係数、ログ、ダウンロードした NOAA データ、収集したスポット。AppData やその他のシステムフォルダーには何も書き込みません。
 LI|プログラムを別のコンピューターに移すにはフォルダーをコピーするだけで、初期設定に戻すには data/config.ini を削除するだけです。

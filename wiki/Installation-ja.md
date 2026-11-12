@@ -12,7 +12,9 @@
 | Linux 64 ビット (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` の後、メニューから起動します。初回起動時にプログラムは自身を `~/E-LAYER-ANALYZER` にコピーし、その隣に `data` フォルダーを置きます。 |
 | Linux ポータブル | `...-linux-x64-portatile.tar.gz` | 展開して `./E-LAYER-ANALYZER` を起動するか、`./installa.sh` を実行: `~/E-LAYER-ANALYZER` にインストールし、メニューにアイコンを追加します。 |
 | Raspberry Pi (64 ビット) | `e-layer-analyzer_x.y.z_arm64.deb` または `...-linux-arm64-portatile.tar.gz` | Pi 3、4、5 で **64 ビット版 Raspberry Pi OS** (デスクトップ付き) が必要 (RAM 4 GB 推奨)。.deb は上と同じ、ポータブル版は Linux と同じです。 |
-| Raspberry Pi (32 ビット) | `...-linux-arm-portatile.tar.gz` | Pi 2、3、4 で **32 ビット版 Raspberry Pi OS** が必要。展開して `./E-LAYER-ANALYZER` または `./installa.sh` を実行します。 |
+| Raspberry Pi (32 ビット) | `e-layer-analyzer_x.y.z_armhf.deb` または `...-linux-arm-portatile.tar.gz` | Pi 2、3、4 で **32 ビット版 Raspberry Pi OS** が必要。.deb は上と同じ、ポータブル版は展開して `./E-LAYER-ANALYZER` または `./installa.sh` を実行します。 |
+| Raspberry Pi (Slackware ARM64) | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` または `...-linux-arm64-portatile.tar.gz` | root で `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` を実行し、メニューまたは端末から `e-layer-analyzer` を起動します: 初回起動時にプログラムは自身を `~/E-LAYER-ANALYZER` にコピーします。ポータブル版は Linux と同じです。 |
+| Linux armv7l (その他の 32 ビット ARM ボード) | `...-linux-armv7l-portatile.tar.gz` | Linux のポータブル版と同じ。 |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) または `...-osx-x64.dmg` (Intel) | .dmg を開き、**Installa E-LAYER-ANALYZER.command** を右クリック > 開く。`~/E-LAYER-ANALYZER` にインストールします。 |
 | Mac、アプリケーションのみ | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** を個人用フォルダー (例: `~/E-LAYER-ANALYZER`、Applications ではなく) に展開します: `data` フォルダーはアプリの隣に作成されます。初回起動時は右クリック > 開く。 |
 
@@ -34,3 +36,4 @@
 - .NET のインストールは不要: 必要なものはすべてプログラムに含まれています。
 - インターネット接続: 地図 (Natural Earth、初回起動時)、オーロラの NOAA データ、YA-MS のレーダー、Telnet セッションに必要です。
 - Raspberry Pi Zero と Pi 1 は非対応です (.NET がサポートしないプロセッサーのため)。
+- Linux i686 (32 ビット PC) 用のバージョンはありません。そのシステム用の .NET が存在しないためです。FreeBSD 用もありません。Avalonia のグラフィックライブラリがないためです。

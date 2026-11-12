@@ -4,9 +4,10 @@ H1|1. 開始之前
 H2|1.1 本程式的功能
 P|E-LAYER ANALYZER 將研究經由電離層 E 層的 VHF 傳播模式所需的工具整合在一個程式中：散塊 E 層（包括多跳與跨洲）、F.A.I.（沿磁場排列的不規則體）、流星散射（內建 YA-MS 程式）以及無線電極光。它以 DX cluster 的即時 spot 與 ADIF 日誌為資料，並將每個結果顯示在占視窗三分之二的地圖上，資料與計算則顯示在右側三分之一。
 H2|1.2 安裝與資料資料夾
-P|本程式可在 Windows（64 與 32 位元）、Linux、Raspberry Pi（ARM64）與 Mac（Apple Silicon 與 Intel）上執行。請從 GitHub 儲存庫的 Releases 頁面下載：Windows 有安裝程式及 .zip 檔的免安裝版；Linux 與 Raspberry Pi 為附安裝腳本的 .tar.gz 壓縮檔；Mac 為 .dmg 映像檔。
+P|本程式可在 Windows（64 與 32 位元）、Linux x86_64、Raspberry Pi（64 與 32 位元的 Raspberry Pi OS、Slackware ARM64）、Linux armv7l 與 Mac（Apple Silicon 與 Intel）上執行。請從 GitHub 儲存庫的 Releases 頁面下載：Windows 有安裝程式及 .zip 檔的免安裝版；Linux 與 Raspberry Pi 有 .deb 套件、ARM64 用的 Slackware .txz 套件，以及附安裝腳本的 .tar.gz 壓縮檔；Mac 為 .dmg 映像檔。沒有適用於 Linux i686（32 位元 PC）的版本，因為該系統沒有 .NET；也沒有適用於 FreeBSD 的版本，因為那裡缺少 Avalonia 的圖形函式庫。
 LI|Windows：安裝程式會將程式安裝在 C:\E-LAYER-ANALYZER，data 資料夾就在旁邊；可攜版可解壓縮到任一資料夾，以 E-LAYER-ANALYZER.exe 啟動。
-LI|Linux 與 Raspberry Pi：使用 .deb 套件（sudo apt install ./e-layer-analyzer_..._amd64.deb，或 _arm64.deb）時，程式從選單啟動，首次啟動時會複製到 ~/E-LAYER-ANALYZER；使用 .tar.gz 壓縮檔時，解壓縮後執行 ./E-LAYER-ANALYZER，或以 ./installa.sh 將其安裝到 ~/E-LAYER-ANALYZER 並在選單中加入圖示。
+LI|Linux 與 Raspberry Pi：使用 .deb 套件（sudo apt install ./e-layer-analyzer_..._amd64.deb，或 64 位元 Raspberry Pi OS 用的 _arm64.deb 與 32 位元用的 _armhf.deb）時，程式從選單啟動，首次啟動時會複製到 ~/E-LAYER-ANALYZER；使用 .tar.gz 壓縮檔（linux-x64、linux-arm64、linux-arm 或 linux-armv7l）時，解壓縮後執行 ./E-LAYER-ANALYZER，或以 ./installa.sh 將其安裝到 ~/E-LAYER-ANALYZER 並在選單中加入圖示。
+LI|Slackware ARM64：以 root 身分用 installpkg e-layer-analyzer-...-aarch64-1_ic8tem.txz 安裝套件；程式從選單或終端機以 e-layer-analyzer 啟動，首次啟動時會複製到 ~/E-LAYER-ANALYZER，與 .deb 相同。
 LI|Mac：開啟 .dmg 檔案（arm64 用於 Apple Silicon M1-M4，x64 用於 Intel），在 «Installa E-LAYER-ANALYZER.command» 上按右鍵並選擇 開啟；另外，-app.zip 檔案只包含應用程式本身。
 LI|程式的所有資料都放在程式旁的 data 資料夾中：設定（config.ini）、CALL3 資料庫、磁場係數、日誌、下載的 NOAA 資料、收集到的 spot。不會在 AppData 或其他系統資料夾中寫入任何東西。
 LI|要把程式搬到另一台電腦，只要複製它的資料夾；要恢復初始設定，只要刪除 data/config.ini。

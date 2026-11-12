@@ -12,7 +12,9 @@
 | Linux 64 บิต (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` แล้วเปิดจากเมนู: เมื่อเริ่มครั้งแรก โปรแกรมจะคัดลอกตัวเองไปที่ `~/E-LAYER-ANALYZER` โดยมีโฟลเดอร์ `data` อยู่ข้างกัน |
 | Linux แบบพกพา | `...-linux-x64-portatile.tar.gz` | แตกไฟล์แล้วเรียกใช้ `./E-LAYER-ANALYZER` หรือเรียกใช้ `./installa.sh`: ติดตั้งไปที่ `~/E-LAYER-ANALYZER` พร้อมไอคอนในเมนู |
 | Raspberry Pi (64 บิต) | `e-layer-analyzer_x.y.z_arm64.deb` หรือ `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 หรือ 5 ที่ใช้ **Raspberry Pi OS 64 บิต** พร้อมเดสก์ท็อป (แนะนำ RAM 4 GB) ไฟล์ .deb ติดตั้งเหมือนข้างต้น; แบบพกพาเหมือนของ Linux |
-| Raspberry Pi (32 บิต) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 หรือ 4 ที่ใช้ **Raspberry Pi OS 32 บิต** แตกไฟล์แล้วเรียกใช้ `./E-LAYER-ANALYZER` หรือ `./installa.sh` |
+| Raspberry Pi (32 บิต) | `e-layer-analyzer_x.y.z_armhf.deb` หรือ `...-linux-arm-portatile.tar.gz` | Pi 2, 3 หรือ 4 ที่ใช้ **Raspberry Pi OS 32 บิต** ไฟล์ .deb ติดตั้งเหมือนข้างต้น; แบบพกพา: แตกไฟล์แล้วเรียกใช้ `./E-LAYER-ANALYZER` หรือ `./installa.sh` |
+| Raspberry Pi ที่ใช้ Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` หรือ `...-linux-arm64-portatile.tar.gz` | ในฐานะ root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` แล้วเปิด `e-layer-analyzer` จากเมนูหรือเทอร์มินัล: เมื่อเริ่มครั้งแรก โปรแกรมจะคัดลอกตัวเองไปที่ `~/E-LAYER-ANALYZER` แบบพกพาเหมือนของ Linux |
+| Linux armv7l (บอร์ด ARM 32 บิตอื่น ๆ) | `...-linux-armv7l-portatile.tar.gz` | เหมือน Linux แบบพกพา |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) หรือ `...-osx-x64.dmg` (Intel) | เปิดไฟล์ .dmg คลิกขวาที่ **Installa E-LAYER-ANALYZER.command** > Open ติดตั้งไปที่ `~/E-LAYER-ANALYZER` |
 | Mac เฉพาะแอปพลิเคชัน | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | แตก **E-LAYER-ANALYZER.app** ไว้ในโฟลเดอร์ของคุณเอง (เช่น `~/E-LAYER-ANALYZER` ไม่ใช่ Applications): โฟลเดอร์ `data` จะถูกสร้างข้างแอป เมื่อเริ่มครั้งแรกให้คลิกขวา > Open |
 
@@ -34,3 +36,4 @@
 - ไม่ต้องติดตั้ง .NET: โปรแกรมมีทุกอย่างที่ต้องใช้อยู่ในตัว
 - การเชื่อมต่ออินเทอร์เน็ตสำหรับแผนที่ (Natural Earth เมื่อเริ่มครั้งแรก) ข้อมูลออโรราของ NOAA เรดาร์ของ YA-MS และเซสชัน telnet
 - ไม่รองรับ Raspberry Pi Zero และ Pi 1 (.NET ไม่รองรับโปรเซสเซอร์ของรุ่นเหล่านี้)
+- ไม่มีเวอร์ชันสำหรับ Linux i686 (PC 32 บิต) เพราะไม่มี .NET สำหรับระบบนั้น และไม่มีสำหรับ FreeBSD ซึ่งขาดไลบรารีกราฟิกของ Avalonia

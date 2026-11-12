@@ -12,7 +12,9 @@
 | Linux 64 位元（PC） | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`，然後從選單啟動：首次啟動時，程式會將自己複製到 `~/E-LAYER-ANALYZER`，`data` 資料夾就在旁邊。 |
 | Linux 免安裝版 | `...-linux-x64-portatile.tar.gz` | 解壓縮後執行 `./E-LAYER-ANALYZER`，或執行 `./installa.sh`：安裝到 `~/E-LAYER-ANALYZER`，並在選單中建立圖示。 |
 | Raspberry Pi（64 位元） | `e-layer-analyzer_x.y.z_arm64.deb` 或 `...-linux-arm64-portatile.tar.gz` | Pi 3、4 或 5，使用含桌面的 **64 位元 Raspberry Pi OS**（建議 4 GB 記憶體）。.deb 安裝方式同上；免安裝版同 Linux。 |
-| Raspberry Pi（32 位元） | `...-linux-arm-portatile.tar.gz` | Pi 2、3 或 4，使用 **32 位元 Raspberry Pi OS**。解壓縮後執行 `./E-LAYER-ANALYZER` 或 `./installa.sh`。 |
+| Raspberry Pi（32 位元） | `e-layer-analyzer_x.y.z_armhf.deb` 或 `...-linux-arm-portatile.tar.gz` | Pi 2、3 或 4，使用 **32 位元 Raspberry Pi OS**。.deb 安裝方式同上；免安裝版：解壓縮後執行 `./E-LAYER-ANALYZER` 或 `./installa.sh`。 |
+| 使用 Slackware ARM64 的 Raspberry Pi | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` 或 `...-linux-arm64-portatile.tar.gz` | 以 root 身分：`installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`，然後從選單或終端機啟動 `e-layer-analyzer`：首次啟動時，程式會將自己複製到 `~/E-LAYER-ANALYZER`。免安裝版同 Linux。 |
+| Linux armv7l（其他 32 位元 ARM 板） | `...-linux-armv7l-portatile.tar.gz` | 同 Linux 免安裝版。 |
 | Mac | `...-osx-arm64.dmg`（Apple Silicon M1-M4）或 `...-osx-x64.dmg`（Intel） | 開啟 .dmg，在 **Installa E-LAYER-ANALYZER.command** 上按右鍵 > 開啟。安裝到 `~/E-LAYER-ANALYZER`。 |
 | Mac，僅應用程式 | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | 將 **E-LAYER-ANALYZER.app** 解壓縮到你自己的資料夾（例如 `~/E-LAYER-ANALYZER`，不要放在「應用程式」）：`data` 資料夾會建立在 app 旁邊。首次啟動時按右鍵 > 開啟。 |
 
@@ -34,3 +36,4 @@
 - 不需要安裝 .NET：程式已包含所需的一切。
 - 需要網際網路連線，用於地圖（Natural Earth，首次啟動時）、NOAA 極光資料、YA-MS 的雷達與 telnet 連線階段。
 - 不支援 Raspberry Pi Zero 與 Pi 1（.NET 不支援它們的處理器）。
+- 沒有適用於 Linux i686（32 位元 PC）的版本，因為該系統沒有 .NET；也沒有適用於 FreeBSD 的版本，因為那裡缺少 Avalonia 的圖形函式庫。

@@ -12,7 +12,9 @@
 | Linux 64비트 (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` 후 메뉴에서 실행: 첫 실행 시 프로그램이 자신을 `~/E-LAYER-ANALYZER`에 복사하며, `data` 폴더는 그 옆에 있습니다. |
 | Linux 포터블 | `...-linux-x64-portatile.tar.gz` | 압축 해제 후 `./E-LAYER-ANALYZER` 실행, 또는 `./installa.sh` 실행: 메뉴 아이콘과 함께 `~/E-LAYER-ANALYZER`에 설치. |
 | Raspberry Pi (64비트) | `e-layer-analyzer_x.y.z_arm64.deb` 또는 `...-linux-arm64-portatile.tar.gz` | **64비트 Raspberry Pi OS**와 데스크톱이 있는 Pi 3, 4 또는 5(RAM 4 GB 권장). .deb는 위와 같고, 포터블은 Linux와 같습니다. |
-| Raspberry Pi (32비트) | `...-linux-arm-portatile.tar.gz` | **32비트 Raspberry Pi OS**가 있는 Pi 2, 3 또는 4. 압축 해제 후 `./E-LAYER-ANALYZER` 또는 `./installa.sh` 실행. |
+| Raspberry Pi (32비트) | `e-layer-analyzer_x.y.z_armhf.deb` 또는 `...-linux-arm-portatile.tar.gz` | **32비트 Raspberry Pi OS**가 있는 Pi 2, 3 또는 4. .deb는 위와 같고, 포터블은 압축 해제 후 `./E-LAYER-ANALYZER` 또는 `./installa.sh` 실행. |
+| Slackware ARM64를 쓰는 Raspberry Pi | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` 또는 `...-linux-arm64-portatile.tar.gz` | root로: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` 후 메뉴나 터미널에서 `e-layer-analyzer` 실행: 첫 실행 시 프로그램이 자신을 `~/E-LAYER-ANALYZER`에 복사합니다. 포터블은 Linux와 같습니다. |
+| Linux armv7l (기타 32비트 ARM 보드) | `...-linux-armv7l-portatile.tar.gz` | Linux 포터블과 같음. |
 | Mac | `...-osx-arm64.dmg`(Apple Silicon M1-M4) 또는 `...-osx-x64.dmg`(Intel) | .dmg를 열고 **Installa E-LAYER-ANALYZER.command**를 오른쪽 클릭 > Open. `~/E-LAYER-ANALYZER`에 설치. |
 | Mac, 애플리케이션만 | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app**을 사용자의 폴더에 압축 해제(예: `~/E-LAYER-ANALYZER`, Applications가 아님): `data` 폴더는 앱 옆에 만들어집니다. 첫 실행 시 오른쪽 클릭 > Open. |
 
@@ -34,3 +36,4 @@
 - .NET을 설치할 필요가 없습니다: 프로그램에 필요한 모든 것이 들어 있습니다.
 - 지도(Natural Earth, 첫 실행 시), NOAA 오로라 데이터, YA-MS 레이더, 텔넷 세션에는 인터넷 연결이 필요합니다.
 - Raspberry Pi Zero와 Pi 1은 지원하지 않습니다(.NET이 해당 프로세서를 지원하지 않음).
+- Linux i686(32비트 PC)용 버전은 없습니다. 그 시스템용 .NET이 없기 때문입니다. FreeBSD용도 없는데, Avalonia의 그래픽 라이브러리가 없기 때문입니다.
