@@ -32,6 +32,11 @@ Ito ang heometrikong konstruksiyong ginagamit para **suriin kung tama ang isang 
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (sa itaas ng Genoa) | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (timog-kanlurang Germany, 28 km mula sa Brussels) | 0.88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0.3° | – |
+| Beacon DB0FAI (305°) - Dresden via Sheffield (DL5MCG; nakatutok sa 290° ang Dresden at idineklarang aurora) | – | 0.3° | – |
+| DL5MCG - SV1DH (pagsubok noong 1987 via Budapest, 1569 km) | Budapest nasa bakas; mga cell na mas mababa sa 1° mula 35 km | 2.16° | 95° / 341° |
 
 Mga kilalang scatter point sa listahan: Geneva, Brussels, Budapest, JN92, JN41/42.
+
+Ikinakarga ng menu na **Mga pagsusuri...** ang mga pares na pansubok IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE at DL5MCG-SV1DH.
+
+**Kagamitan** (DL5MCG): para sa F.A.I. sa 144 MHz, kailangan ng hindi bababa sa isang mahabang yagi at 100 W (nakontak din si SV1DH gamit ang yagi na may 8 elemento at 50 W). Itutok ang antena sa scatter point na ibinibigay ng programa, hindi sa kabilang istasyon.

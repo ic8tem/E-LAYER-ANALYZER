@@ -32,6 +32,11 @@ F.A.I. (Field Aligned Irregularities) ارضی مقناطیسی میدان کے 
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (جینوا کے اوپر) | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (جنوب مغربی جرمنی، برسلز سے 28 km) | 0.88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0.3° | – |
+| بیکن DB0FAI (305°) - Dresden via Sheffield (DL5MCG؛ Dresden کا رخ 290° تھا اور اس نے aurora قرار دیا) | – | 0.3° | – |
+| DL5MCG - SV1DH (1987 کا تجربہ بذریعہ بوڈاپسٹ، 1569 km) | بوڈاپسٹ Scatter trail پر؛ 1° سے کم والے خانے 35 km سے | 2.16° | 95° / 341° |
 
 فہرست میں معلوم scatter points: جنیوا، برسلز، بوڈاپسٹ، JN92، JN41/42۔
+
+**جانچ...** مینو آزمائشی جوڑیاں IC8FAX-F6DRO، IC8FAX-G4LOH، IC8FAX-FA1MXE اور DL5MCG-SV1DH لوڈ کرتا ہے۔
+
+**سامان** (DL5MCG): 144 MHz میں F.A.I. کے لیے کم از کم ایک لمبا yagi اور 100 W درکار ہیں (SV1DH سے 8 عناصر والے yagi اور 50 W کے ساتھ بھی رابطہ ہوا)۔ اینٹینا کا رخ پروگرام کے بتائے ہوئے scatter point کی طرف کریں، دوسرے اسٹیشن کی طرف نہیں۔

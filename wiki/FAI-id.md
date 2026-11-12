@@ -32,6 +32,11 @@ Ini adalah konstruksi geometris yang dipakai untuk **memeriksa apakah sebuah tit
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (di atas Genoa) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Jerman barat daya, 28 km dari Brussel) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0,3° | – |
+| Beacon DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden mengarah ke 290° dan melaporkan aurora) | – | 0,3° | – |
+| DL5MCG - SV1DH (uji 1987 via Budapest, 1569 km) | Budapest di jejak; sel di bawah 1° mulai 35 km | 2,16° | 95° / 341° |
 
 Scatter point dikenal dalam daftar: Jenewa, Brussel, Budapest, JN92, JN41/42.
+
+Menu **Verifikasi...** memuat pasangan uji IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE dan DL5MCG-SV1DH.
+
+**Perlengkapan** (DL5MCG): F.A.I. di 144 MHz memerlukan setidaknya yagi panjang dan 100 W (SV1DH juga pernah dikontak dengan yagi 8 elemen dan 50 W). Arahkan antena ke scatter point yang ditunjukkan program, bukan ke stasiun lawan.
