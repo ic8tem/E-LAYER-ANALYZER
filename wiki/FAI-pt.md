@@ -32,6 +32,11 @@ O F.A.I. (Field Aligned Irregularities) é a dispersão causada por irregularida
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (sobre Génova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (SO da Alemanha, a 28 km de Bruxelas) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0,3° | – |
+| Farol DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden apontava a 290° e declarou aurora) | – | 0,3° | – |
+| DL5MCG - SV1DH (teste de 1987 via Budapeste, 1569 km) | Budapeste no Scatter trail; células abaixo de 1° a partir de 35 km | 2,16° | 95° / 341° |
 
 Scatter points conhecidos na lista: Genebra, Bruxelas, Budapeste, JN92, JN41/42.
+
+O menu **Verificações...** carrega os pares de teste IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE e DL5MCG-SV1DH.
+
+**Equipamento** (DL5MCG): o F.A.I. em 144 MHz requer pelo menos uma yagi longa e 100 W (SV1DH também foi trabalhado com uma yagi de 8 elementos e 50 W). Aponte a antena para o scatter point indicado pelo programa, não para a outra estação.

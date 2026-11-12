@@ -32,6 +32,11 @@ Det er den geometriske konstruktion, der bruges til at **kontrollere, om et refl
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (over Genova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (det sydvestlige Tyskland, 28 km fra Bruxelles) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0,3° | – |
+| Fyret DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden havde antennen mod 290° og meldte nordlys) | – | 0,3° | – |
+| DL5MCG - SV1DH (test fra 1987 via Budapest, 1569 km) | Budapest på Scatter trail; celler under 1° fra 35 km | 2,16° | 95° / 341° |
 
 Kendte scatterpunkter på listen: Genève, Bruxelles, Budapest, JN92, JN41/42.
+
+Menuen **Kontroller...** indlæser testparrene IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE og DL5MCG-SV1DH.
+
+**Udstyr** (DL5MCG): F.A.I. på 144 MHz kræver mindst en lang yagi og 100 W (SV1DH er også blevet kørt med en 8-elementers yagi og 50 W). Ret antennen mod det scatterpunkt, programmet angiver, ikke mod modstationen.

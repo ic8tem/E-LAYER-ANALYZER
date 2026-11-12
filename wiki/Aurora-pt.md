@@ -10,6 +10,7 @@
 - Exemplo IO70VJ - JO59BC: scatter point JP01AK ao largo das Shetland, desvio 0,97°, QTF 11° e 299°.
 - **Spots aurora no mapa**: os spots com **<AU>** ou **<AUR>** no texto são spots de aurora (regra do autor). Com a caixa *Spots <AU>/<AUR> no mapa com o cálculo* assinalada, o separador desenha os spots das últimas 2 horas (no máximo 30): para cada par spotter-DX calcula o scatter trail e mostra o scatter point mais provável (círculo laranja), com QTF e elevação de ambas as estações nos resultados.
 - Além do scatter point mais provável, os resultados indicam o **intervalo de QTF** de ambas as estações ao longo de todo o Scatter trail (desvio ≤ 1,5°).
+- **Janela de Lange-Hesse**: o scatter point é preferido a 370-1100 km de cada estação, a janela que Lange-Hesse calculou a 54° de latitude geomagnética. Desde a versão 0.4.5 a janela desloca-se com a inclinação IGRF-14 de cada estação: mais próxima para as estações mais a sul, mais afastada para as estações mais a norte (p. ex. Capri cerca de 260-990 km, Oslo 470-1200 km). Os resultados mostram a janela de ambas as estações.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ O separador AURORA tem dois subseparadores: **REAL-TIME** (o cálculo descrito a
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Para cada QSO o programa calcula o scatter point com o mesmo modelo (IGRF-14, altitude 110 km, refração 4/3, tolerância 3°).
-- Cores: **verde** = scatter point a 370-1100 km de ambas as estações (Lange-Hesse); **amarelo** = explicado, mas fora dessa janela; **laranja** = QSO para além de 2000 km; **vermelho** = nenhum scatter point, QSO não explicado pelo modelo.
-- O resumo dá as percentagens e, para cada log, o intervalo e a mediana do QTF calculado. Clique numa linha para desenhar o percurso e os dois apontamentos.
-- Resultado (versão 0.4.4): **296 de 298 QSO explicados (99%)**, 243 (82%) dentro da janela de 370-1100 km; QTF mediano de EI5FK entre 25° e 41°, ou seja, o nordeste sugerido por G3WPO. Os logs não indicam o apontamento: a verificação incide sobre a geometria, não sobre o QTF.
+- Cores: **verde** = scatter point dentro da janela de Lange-Hesse de ambas as estações; **amarelo** = explicado, mas fora dessa janela; **laranja** = QSO para além de 2000 km; **vermelho** = nenhum scatter point, QSO não explicado pelo modelo.
+- O resumo dá as percentagens, também com a janela fixa de 370-1100 km para comparação, e, para cada log, o intervalo e a mediana do QTF calculado. Clique numa linha para desenhar o percurso e os dois apontamentos.
+- Resultado (versão 0.4.4): **296 de 298 QSO explicados (99%)**, 243 (82%) dentro da janela de 370-1100 km; QTF mediano de EI5FK entre 25° e 41°, ou seja, o nordeste sugerido por G3WPO. Os logs não indicam o apontamento: a verificação incide sobre a geometria, não sobre o QTF. Com a janela móvel (versão 0.4.5) o resultado é o mesmo, 243 QSO (82%), que com a janela fixa: as estações do banco de ensaio (Irlanda, Grã-Bretanha, Países Baixos, Alemanha) têm uma inclinação de 66-70°, próxima da referência de Lange-Hesse (janela de EI5FK 350-1080 km); a diferença diz respeito às estações mais a sul ou mais a norte, para as quais o banco de ensaio não tem QSO.

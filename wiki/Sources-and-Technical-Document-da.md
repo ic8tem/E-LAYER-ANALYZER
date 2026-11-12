@@ -2,7 +2,7 @@
 
 [← Home](Home-da)
 
-- Fanen **KILDER** opregner alle kilderne, nummereret [1]-[63].
+- Fanen **KILDER** opregner alle kilderne, nummereret [1]-[64].
 - Fanen **RESUMÉ AF BEREGNINGSVALGENE** (tidligere *Teknisk dokument*) forklarer hver beregning med formler og mærkaterne **KILDE** (trin taget fra en kilde), **KONTROL** (verificeret på programmet eller på et virkeligt tilfælde) og **VALG** (et valg truffet af programmet, som skal bekræftes på båndet).
 - Fanen **BRUGERVEJLEDNING** er programmets udførlige brugervejledning, fane for fane.
 - Fanen **TEKNISK RAPPORT** fremlægger de valg, der førte frem til programmet: arkitektur, fysiske modeller, genkendelse af data, kontroller, begrænsninger og fremtidig udvikling.
