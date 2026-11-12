@@ -16,8 +16,9 @@ P|Alle pakker ligger på release-siden på GitHub (github.com/ic8tem/YA-MS/relea
 LI|Windows 64 bit: YA-MS-<version>-windows-x64-setup.exe (installerer i C:\YA-MS uden administratorrettigheder) eller den bærbare zip-fil, som kan pakkes ud i en vilkårlig mappe. Til 32-bit Windows de samme filer med x86.
 LI|Linux (Debian, Ubuntu, Mint): .deb-pakken, som installeres med sudo apt install ./ya-ms_<version>_amd64.deb; ved første start kopierer programmet sig selv til ~/YA-MS. Til andre distributioner .tar.gz-filen, som pakkes ud og køres med ./YA-MS.
 LI|Raspberry Pi 3, 4, 5, 400 og 500: pakken raspberry-pi-64bit (Raspberry Pi OS 64 bit) eller raspberry-pi-32bit, som .tar.gz eller .deb.
-LI|Andre ARM-Linux-systemer (for eksempel Slackware ARM64 eller armv7l-kort): pakken linux-arm64 eller linux-armv7l, som .tar.gz, som for Linux. 32-bit pc-Linux (i686) og FreeBSD findes ikke, fordi .NET 8 ikke virker der.
-LI|Windows på ARM (pc'er med Snapdragon): pakken windows-arm64. Fedora og openSUSE: .rpm-pakken (x86_64 eller aarch64), med sudo dnf install eller sudo zypper install. Heller ikke OpenBSD findes.
+LI|Andre ARM-Linux-systemer (for eksempel Slackware ARM64 eller armv7l-kort): pakken linux-arm64 eller linux-armv7l, som .tar.gz, som for Linux.
+LI|Windows på ARM (pc'er med Snapdragon): pakken windows-arm64. Fedora og openSUSE: .rpm-pakken (x86_64 eller aarch64), med sudo dnf install eller sudo zypper install.
+LI|Arch, Manjaro og Arch Linux ARM: pakken .pkg.tar.zst, med sudo pacman -U. Slackware64 og Slackware ARM64: pakken .txz, med installpkg som root. Enhver Linux: AppImage-filen (x86_64 eller aarch64), gøres eksekverbar og startes. Alpine Linux: pakken alpine-x64 eller alpine-arm64, som .tar.gz.
 LI|macOS: .dmg-filen til Apple Silicon (M1 og nyere) eller til Intel, eller app.zip. Træk YA-MS.app til en af dine egne mapper (for eksempel ~/YA-MS): mappen data oprettes ved siden af appen.
 TAG|ATTENZIONE|Windows kan vise »Windows beskyttede din pc«: vælg »Flere oplysninger« og derefter »Kør alligevel«. På macOS skal du første gang åbne appen med højre museknap og »Åbn«. Programmet er ikke signeret med et betalt certifikat.
 H2|2.2 Første start

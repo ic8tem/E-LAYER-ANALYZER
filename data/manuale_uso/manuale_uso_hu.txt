@@ -16,8 +16,9 @@ P|Minden csomag a GitHub kiadási oldalán található (github.com/ic8tem/YA-MS/
 LI|Windows 64 bit: YA-MS-<versione>-windows-x64-setup.exe (a C:\YA-MS mappába telepít, rendszergazdai jogok nélkül) vagy a hordozható zip, amelyet bármely mappába kibonthat. 32 bites Windowshoz ugyanezek a fájlok x86 jelöléssel.
 LI|Linux (Debian, Ubuntu, Mint): a .deb csomag, amelyet a sudo apt install ./ya-ms_<versione>_amd64.deb paranccsal telepíthet; az első indításkor a program a ~/YA-MS mappába másolja magát. Más disztribúciókhoz a .tar.gz, amelyet kibontás után a ./YA-MS paranccsal futtathat.
 LI|Raspberry Pi 3, 4, 5, 400 és 500: a raspberry-pi-64bit csomag (Raspberry Pi OS 64 bit) vagy a raspberry-pi-32bit, .tar.gz vagy .deb formátumban.
-LI|Más ARM-es Linux rendszerek (például Slackware ARM64 vagy armv7l lapok): a linux-arm64 vagy linux-armv7l csomag, .tar.gz formában, mint Linuxon. 32 bites PC-s Linux (i686) és FreeBSD nem érhető el, mert a .NET 8 nem fut rajtuk.
-LI|Windows ARM-on (Snapdragon processzoros PC-k): a windows-arm64 csomag. Fedora és openSUSE: az .rpm csomag (x86_64 vagy aarch64), sudo dnf install vagy sudo zypper install paranccsal. OpenBSD sem érhető el.
+LI|Más ARM-es Linux rendszerek (például Slackware ARM64 vagy armv7l lapok): a linux-arm64 vagy linux-armv7l csomag, .tar.gz formában, mint Linuxon.
+LI|Windows ARM-on (Snapdragon processzoros PC-k): a windows-arm64 csomag. Fedora és openSUSE: az .rpm csomag (x86_64 vagy aarch64), sudo dnf install vagy sudo zypper install paranccsal.
+LI|Arch, Manjaro és Arch Linux ARM: a .pkg.tar.zst csomag, sudo pacman -U paranccsal. Slackware64 és Slackware ARM64: a .txz csomag, installpkg paranccsal rootként. Bármely Linux: az AppImage (x86_64 vagy aarch64), futtathatóvá téve és elindítva. Alpine Linux: az alpine-x64 vagy alpine-arm64 csomag, .tar.gz formában.
 LI|macOS: a .dmg Apple Siliconhoz (M1 és újabb) vagy Intelhez, illetve az app.zip. Húzza a YA-MS.app-ot egy saját mappába (például ~/YA-MS): a data mappa az alkalmazás mellett jön létre.
 TAG|ATTENZIONE|A Windows megjelenítheti „A Windows megvédte a számítógépet” üzenetet: válassza a „További információ”, majd a „Futtatás mindenképp” lehetőséget. macOS-en az első alkalommal jobb gombbal nyissa meg az alkalmazást, és válassza a „Megnyitás” parancsot. A program nincs fizetős tanúsítvánnyal aláírva.
 H2|2.2 Az első indítás

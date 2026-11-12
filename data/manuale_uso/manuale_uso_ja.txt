@@ -16,8 +16,9 @@ P|すべてのパッケージは GitHub のリリースページ（github.com/ic
 LI|Windows 64 ビット: YA-MS-<バージョン>-windows-x64-setup.exe（C:\YA-MS にインストール、管理者権限は不要）、または任意のフォルダーに展開するポータブル版の zip。32 ビット版 Windows には、同じファイルの x86 版を使います。
 LI|Linux（Debian、Ubuntu、Mint）: .deb パッケージを sudo apt install ./ya-ms_<バージョン>_amd64.deb でインストールします。初回起動時に、プログラムは自身を ~/YA-MS にコピーします。その他のディストリビューションでは .tar.gz を展開し、./YA-MS で実行します。
 LI|Raspberry Pi 3、4、5、400、500: raspberry-pi-64bit パッケージ（Raspberry Pi OS 64 ビット）または raspberry-pi-32bit を、.tar.gz か .deb で使います。
-LI|その他の ARM Linux（例: Slackware ARM64 や armv7l ボード）: linux-arm64 または linux-armv7l の .tar.gz パッケージを Linux と同様に使います。32 ビット PC 用 Linux（i686）と FreeBSD は、.NET 8 が動作しないため提供していません。
-LI|ARM 版 Windows（Snapdragon 搭載 PC）: windows-arm64 パッケージ。Fedora と openSUSE: .rpm パッケージ（x86_64 または aarch64）を sudo dnf install または sudo zypper install でインストールします。OpenBSD も提供していません。
+LI|その他の ARM Linux（例: Slackware ARM64 や armv7l ボード）: linux-arm64 または linux-armv7l の .tar.gz パッケージを Linux と同様に使います。
+LI|ARM 版 Windows（Snapdragon 搭載 PC）: windows-arm64 パッケージ。Fedora と openSUSE: .rpm パッケージ（x86_64 または aarch64）を sudo dnf install または sudo zypper install でインストールします。
+LI|Arch、Manjaro、Arch Linux ARM: .pkg.tar.zst パッケージを sudo pacman -U でインストールします。Slackware64 と Slackware ARM64: .txz パッケージを root で installpkg します。どの Linux でも: AppImage（x86_64 または aarch64）に実行権を付けて起動します。Alpine Linux: .tar.gz の alpine-x64 または alpine-arm64 パッケージ。
 LI|macOS: Apple Silicon（M1 以降）用または Intel 用の .dmg、あるいは app.zip。YA-MS.app を自分のフォルダー（例: ~/YA-MS）にドラッグしてください。data フォルダーはアプリの隣に作成されます。
 TAG|ATTENZIONE|Windows では「Windows によって PC が保護されました」と表示されることがあります。「詳細情報」を選び、続いて「実行」を押してください。macOS では、初回はアプリを右クリックして「開く」を選んでください。このプログラムは有料の証明書で署名されていません。
 H2|2.2 初回起動

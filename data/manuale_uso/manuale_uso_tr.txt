@@ -16,8 +16,9 @@ P|Tüm paketler GitHub'daki sürümler (release) sayfasındadır (github.com/ic8
 LI|Windows 64 bit: YA-MS-<sürüm>-windows-x64-setup.exe (yönetici hakları gerekmeden C:\YA-MS konumuna kurar) veya istediğiniz bir klasöre çıkarılacak taşınabilir zip. 32 bit Windows için aynı dosyaların x86 sürümü.
 LI|Linux (Debian, Ubuntu, Mint): sudo apt install ./ya-ms_<sürüm>_amd64.deb ile kurulacak .deb paketi; ilk açılışta program kendini ~/YA-MS konumuna kopyalar. Diğer dağıtımlar için .tar.gz; çıkarıp ./YA-MS ile çalıştırın.
 LI|Raspberry Pi 3, 4, 5, 400 ve 500: raspberry-pi-64bit paketi (Raspberry Pi OS 64 bit) veya raspberry-pi-32bit, .tar.gz ya da .deb olarak.
-LI|Diğer ARM Linux sistemleri (örneğin Slackware ARM64 veya armv7l kartlar): Linux'taki gibi .tar.gz biçiminde linux-arm64 veya linux-armv7l paketi. 32 bit PC Linux (i686) ve FreeBSD mevcut değildir, çünkü .NET 8 bunlarda çalışmaz.
-LI|ARM üzerinde Windows (Snapdragon'lu PC'ler): windows-arm64 paketi. Fedora ve openSUSE: sudo dnf install veya sudo zypper install ile .rpm paketi (x86_64 veya aarch64). OpenBSD de mevcut değildir.
+LI|Diğer ARM Linux sistemleri (örneğin Slackware ARM64 veya armv7l kartlar): Linux'taki gibi .tar.gz biçiminde linux-arm64 veya linux-armv7l paketi.
+LI|ARM üzerinde Windows (Snapdragon'lu PC'ler): windows-arm64 paketi. Fedora ve openSUSE: sudo dnf install veya sudo zypper install ile .rpm paketi (x86_64 veya aarch64).
+LI|Arch, Manjaro ve Arch Linux ARM: sudo pacman -U ile .pkg.tar.zst paketi. Slackware64 ve Slackware ARM64: root olarak installpkg ile .txz paketi. Herhangi bir Linux: çalıştırılabilir yapılıp başlatılan AppImage (x86_64 veya aarch64). Alpine Linux: .tar.gz biçiminde alpine-x64 veya alpine-arm64 paketi.
 LI|macOS: Apple Silicon (M1 ve sonrası) veya Intel için .dmg ya da app.zip. YA-MS.app'i kendinize ait bir klasöre sürükleyin (örneğin ~/YA-MS): data klasörü uygulamanın yanında oluşturulur.
 TAG|ATTENZIONE|Windows "Windows kişisel bilgisayarınızı korudu" iletisini gösterebilir: "Ek bilgi"yi, ardından "Yine de çalıştır"ı seçin. macOS'ta ilk seferde uygulamayı sağ tıklayıp "Aç" ile açın. Program ücretli bir sertifikayla imzalanmamıştır.
 H2|2.2 İlk açılış

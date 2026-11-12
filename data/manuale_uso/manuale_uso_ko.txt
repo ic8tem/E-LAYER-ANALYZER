@@ -16,8 +16,9 @@ P|모든 패키지는 GitHub의 릴리스 페이지(github.com/ic8tem/YA-MS/rele
 LI|Windows 64비트: YA-MS-<버전>-windows-x64-setup.exe(C:\YA-MS에 설치, 관리자 권한 불필요) 또는 아무 폴더에나 압축을 풀면 되는 포터블 zip. 32비트 Windows에는 같은 파일의 x86 버전을 사용합니다.
 LI|Linux(Debian, Ubuntu, Mint): .deb 패키지를 sudo apt install ./ya-ms_<버전>_amd64.deb로 설치합니다. 처음 실행할 때 프로그램이 ~/YA-MS로 자신을 복사합니다. 다른 배포판에서는 .tar.gz의 압축을 풀고 ./YA-MS로 실행합니다.
 LI|Raspberry Pi 3, 4, 5, 400, 500: raspberry-pi-64bit 패키지(Raspberry Pi OS 64비트) 또는 raspberry-pi-32bit를 .tar.gz나 .deb로 사용합니다.
-LI|기타 ARM Linux 시스템(예: Slackware ARM64 또는 armv7l 보드): linux-arm64 또는 linux-armv7l 패키지(.tar.gz)를 Linux와 같은 방식으로 사용합니다. 32비트 PC용 Linux(i686)와 FreeBSD는 .NET 8이 동작하지 않아 제공되지 않습니다.
-LI|ARM용 Windows(Snapdragon PC): windows-arm64 패키지. Fedora와 openSUSE: .rpm 패키지(x86_64 또는 aarch64)를 sudo dnf install 또는 sudo zypper install로 설치합니다. OpenBSD도 제공되지 않습니다.
+LI|기타 ARM Linux 시스템(예: Slackware ARM64 또는 armv7l 보드): linux-arm64 또는 linux-armv7l 패키지(.tar.gz)를 Linux와 같은 방식으로 사용합니다.
+LI|ARM용 Windows(Snapdragon PC): windows-arm64 패키지. Fedora와 openSUSE: .rpm 패키지(x86_64 또는 aarch64)를 sudo dnf install 또는 sudo zypper install로 설치합니다.
+LI|Arch, Manjaro, Arch Linux ARM: .pkg.tar.zst 패키지를 sudo pacman -U로 설치합니다. Slackware64와 Slackware ARM64: .txz 패키지를 root로 installpkg합니다. 모든 Linux: AppImage(x86_64 또는 aarch64)에 실행 권한을 주고 실행합니다. Alpine Linux: .tar.gz 형식의 alpine-x64 또는 alpine-arm64 패키지.
 LI|macOS: Apple Silicon(M1 이후)용 또는 Intel용 .dmg, 아니면 app.zip. YA-MS.app을 내 폴더(예: ~/YA-MS)로 끌어다 놓으세요. data 폴더는 앱 옆에 만들어집니다.
 TAG|ATTENZIONE|Windows에서 "Windows의 PC 보호" 메시지가 나타날 수 있습니다. "추가 정보"를 선택한 다음 "실행"을 누르세요. macOS에서는 처음에 앱을 마우스 오른쪽 버튼으로 클릭하고 "열기"를 선택하세요. 이 프로그램은 유료 인증서로 서명되어 있지 않습니다.
 H2|2.2 처음 실행
