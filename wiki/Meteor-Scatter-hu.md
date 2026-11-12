@@ -8,6 +8,8 @@ A YA-MS 1.5.0 hozzáadja az **Adatgyűjtés** fület (MSK144, FSK441, FSK41, PSK
 
 A YA-MS 1.6.0 a füleket **Élő és valós idejű adatok** (élő meteor scatter forgalom az egyes összeköttetések felhőjével, radarfluxus, GRAVES, adatgyűjtés) és **Előrejelzés számítása** (előrejelzés, geometria, hatékonyság számítása, az előrejelzések megvalósítása) csoportokba rendezi át.
 
+A YA-MS 1.7.0 és 1.8.0 hozzáadja a radiánsok összevetését az IAU MDC katalógussal, a Global Meteor Network rajonkénti napi számlálásait, a populációs indexekből levezetett k indexet, a nyom kezdeti sugarát Stober és mtsai (2021) szerint, a pingek időtartamát a sávok között (alapértelmezésben λ² vagy NN4SA HamSCI MSQP mérései) és az összevetést a Sonneberg állomás BRAMS észleléseivel (Perseidák 2026). A YA-MS automatikus frissítése az E-LAYER ANALYZER-en belül ki van kapcsolva; a program magától frissül a GitHub Releases oldaláról.
+
 - A YA-MS az E-LAYER ANALYZER tetején választott nyelvet és színsémát használja.
 - A YA-MS beállításai a `data/config.ini` fájlban tárolódnak.
 - A YA-MS minden új verziója a `tools/sync_yams.py` szkripttel kerül be.

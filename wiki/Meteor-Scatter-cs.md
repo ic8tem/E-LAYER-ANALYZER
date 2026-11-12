@@ -8,6 +8,8 @@ YA-MS 1.5.0 přidává kartu **Sběr dat** (spoty meteor scatter filtrované pod
 
 YA-MS 1.6.0 přeskupuje karty do skupin **Živá data a data v reálném čase** (živý provoz meteor scatter s oblakem každého spojení, tok z radaru, GRAVES, sběr dat) a **Výpočet předpovědi** (předpověď, geometrie, výpočet účinnosti, provádění předpovědí).
 
+YA-MS 1.7.0 a 1.8.0 přidávají porovnání radiantů s katalogem IAU MDC, denní počty Global Meteor Network podle rojů, index k odvozený z populačních indexů, počáteční poloměr stopy podle Stober a kol. (2021), dobu trvání pingů mezi pásmy (výchozí λ² nebo měření HamSCI MSQP od NN4SA) a porovnání s detekcemi BRAMS ze stanice Sonneberg (Perseidy 2026). Automatická aktualizace YA-MS je uvnitř E-LAYER ANALYZER vypnutá; program se aktualizuje sám z GitHub Releases.
+
 - YA-MS používá jazyk a barevné schéma zvolené nahoře v E-LAYER ANALYZER.
 - Nastavení YA-MS se ukládají do `data/config.ini`.
 - Každá nová verze YA-MS se přebírá skriptem `tools/sync_yams.py`.

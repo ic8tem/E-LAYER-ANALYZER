@@ -8,6 +8,8 @@ YA-MS 1.5.0 では **データ収集** タブ（MSK144、FSK441、FSK41、PSK2K�
 
 YA-MS 1.6.0 ではタブが **ライブとリアルタイムデータ**（各交信の雲を表示するライブ流星散乱トラフィック、レーダーフラックス、GRAVES、データ収集）と **予測計算**（予測計算、幾何、効率計算、予測の実施）に再編成されました。
 
+YA-MS 1.7.0 と 1.8.0 では、放射点と IAU MDC カタログとの比較、流星群ごとの Global Meteor Network の日別カウント、個数指数から求めた k 指数、Stober ほか (2021) による流星痕の初期半径、バンド間の ping 継続時間 (既定は λ²、または NN4SA による HamSCI MSQP の測定)、Sonneberg の BRAMS 検出との比較 (2026 年ペルセウス座流星群) が加わりました。E-LAYER ANALYZER の中では YA-MS の自動更新はオフになっており、E-LAYER ANALYZER は GitHub の Releases から自身を更新します。
+
 - YA-MS の言語と配色は、E-LAYER ANALYZER の上部で選んだものが使われます。
 - YA-MS の設定は `data/config.ini` に保存されます。
 - YA-MS の新しいバージョンは、スクリプト `tools/sync_yams.py` で取り込みます。

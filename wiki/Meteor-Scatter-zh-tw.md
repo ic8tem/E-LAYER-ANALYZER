@@ -8,6 +8,8 @@ YA-MS 1.5.0 加入了**資料收集**頁籤（以 MSK144、FSK441、FSK41、PSK2
 
 YA-MS 1.6.0 將各頁籤重新整理為 **Live 與即時資料**（即時流星散射通訊及每筆通聯的雲團、雷達通量、GRAVES、資料收集）與**預報計算**（預報、幾何、效率計算、預報的實作）。
 
+YA-MS 1.7.0 與 1.8.0 加入了輻射點與 IAU MDC 目錄的比較、Global Meteor Network 各流星雨的每日計數、由族群指數求得的 k 指數、Stober 等人（2021）的餘跡初始半徑、各頻段之間的 ping 持續時間（預設 λ²，或 NN4SA 的 HamSCI MSQP 量測值），以及與 Sonneberg 的 BRAMS 偵測結果的比較（2026 年英仙座流星雨）。在 E-LAYER ANALYZER 內，YA-MS 的自動更新已關閉，E-LAYER ANALYZER 會從 GitHub 的 Releases 自行更新。
+
 - YA-MS 使用在 E-LAYER ANALYZER 上方所選的語言與配色方案。
 - YA-MS 的設定儲存在 `data/config.ini`。
 - 每個新版的 YA-MS 都以 `tools/sync_yams.py` 腳本納入。

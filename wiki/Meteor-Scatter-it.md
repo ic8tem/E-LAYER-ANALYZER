@@ -8,6 +8,8 @@ YA-MS 1.5.0 aggiunge la linguetta **Raccolta dati** (spot meteor scatter filtrat
 
 YA-MS 1.6.0 riorganizza le linguette in **Live e dati real-time** (traffico meteor scatter in diretta con la nuvola di ogni contatto, flusso radar, GRAVES, raccolta dati) e **Calcolo previsionale** (calcolo previsionale, geometria, calcolo dell'efficienza, attuazione delle previsioni).
 
+YA-MS 1.7.0 e 1.8.0 aggiungono il confronto dei radianti con il catalogo IAU MDC, i conteggi giornalieri del Global Meteor Network per sciame, l'indice k ricavato dagli indici di popolazione, il raggio iniziale della scia di Stober e altri (2021), la durata dei ping tra le bande (λ² di partenza o misure HamSCI MSQP di NN4SA) e il confronto con i rilevamenti BRAMS di Sonneberg (Perseidi 2026). L'aggiornamento automatico di YA-MS è spento dentro E-LAYER ANALYZER, che si aggiorna da sé dalle Release di GitHub.
+
 - La lingua e lo schema di colori di YA-MS sono quelli scelti in alto in E-LAYER ANALYZER.
 - Le impostazioni di YA-MS stanno in `data/config.ini`.
 - Ogni nuova versione di YA-MS si porta dentro con lo script `tools/sync_yams.py`.
