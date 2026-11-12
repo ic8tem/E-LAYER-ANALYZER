@@ -1,6 +1,6 @@
 E-LAYER ANALYZER 0.4.6 - a cura di Costantino IC8TEM
 Analisi dei modi di propagazione VHF dello strato E: E-sporadico, F.A.I., meteor scatter (YA-MS), aurora.
-Windows, Linux e Mac.
+Windows, Linux, Raspberry Pi e Mac.
 
 INSTALLAZIONE
   Il programma e la sua cartella "data" stanno sempre insieme nella cartella personale E-LAYER-ANALYZER.
@@ -12,7 +12,12 @@ INSTALLAZIONE
            menu (al primo avvio si copia in ~/E-LAYER-ANALYZER). Oppure E-LAYER-ANALYZER-x.y.z-linux-x64-portatile.tar.gz:
            estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh (installa in ~/E-LAYER-ANALYZER con l'icona nel menu).
   Raspberry Pi  Raspberry Pi OS a 64 bit (Pi 3/4/5): e-layer-analyzer_x.y.z_arm64.deb oppure -linux-arm64-portatile.tar.gz;
-           Raspberry Pi OS a 32 bit (Pi 2/3/4): -linux-arm-portatile.tar.gz. Consigliati 4 GB di RAM e il desktop.
+           Raspberry Pi OS a 32 bit (Pi 2/3/4): e-layer-analyzer_x.y.z_armhf.deb oppure -linux-arm-portatile.tar.gz.
+           Slackware ARM64: da root installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz, poi si avvia e-layer-analyzer
+           (al primo avvio si copia in ~/E-LAYER-ANALYZER); oppure -linux-arm64-portatile.tar.gz.
+           Consigliati 4 GB di RAM e il desktop.
+  Linux armv7l  altre schede ARM a 32 bit: E-LAYER-ANALYZER-x.y.z-linux-armv7l-portatile.tar.gz, come il portatile per Linux.
+  Non disponibili: Linux i686 (PC a 32 bit: .NET non esiste) e FreeBSD (mancano le librerie grafiche di Avalonia).
   Mac      E-LAYER-ANALYZER-x.y.z-osx-arm64.dmg (Apple Silicon M1-M4) oppure -osx-x64.dmg (Intel); aprire il .dmg,
            clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa -osx-arm64-app.zip / -osx-x64-app.zip
            con la sola applicazione, da estrarre in una propria cartella (per esempio ~/E-LAYER-ANALYZER):

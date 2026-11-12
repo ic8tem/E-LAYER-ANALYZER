@@ -1,4 +1,4 @@
-# E-LAYER ANALYZER - compilazione e installatori per Windows (64 e 32 bit), Linux (x64, ARM64, ARM 32 bit, pacchetti .deb),
+# E-LAYER ANALYZER - compilazione e installatori per Windows (64 e 32 bit), Linux (x64, ARM64, ARM 32 bit/armv7l, pacchetti .deb e Slackware ARM64),
 # Raspberry Pi e Mac (Apple Silicon e Intel: .dmg e .app in zip).
 # A ogni push sul ramo main: solo compilazione di controllo su Linux (i minuti Mac costano 10 volte, Windows 2 volte).
 # Con un push sul ramo release (o un tag vX.Y.Z, o avviandolo a mano): installatori per Windows, Linux e Mac;
@@ -108,10 +108,12 @@ jobs:
             cp src/Assets/ela-256.png pkg/E-LAYER-ANALYZER/ela.png
             chmod +x pkg/E-LAYER-ANALYZER/installa.sh pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER
             tar -C pkg -czf dist/E-LAYER-ANALYZER-$VER-$R-portatile.tar.gz E-LAYER-ANALYZER
+            # stesso programma con il nome dell'architettura, per le altre schede ARM a 32 bit (armv7l)
+            [ "$R" = linux-arm ] && cp dist/E-LAYER-ANALYZER-$VER-linux-arm-portatile.tar.gz dist/E-LAYER-ANALYZER-$VER-linux-armv7l-portatile.tar.gz
           done
-          # .deb per PC (amd64) e Raspberry Pi OS 64 bit (arm64): programma in /opt/e-layer-analyzer; al primo avvio
+          # .deb per PC (amd64) e Raspberry Pi OS 64 bit (arm64) e 32 bit (armhf): programma in /opt/e-layer-analyzer; al primo avvio
           # (e dopo ogni aggiornamento) si copia in ~/E-LAYER-ANALYZER, perche' la cartella data deve stare accanto al programma
-          for P in "linux-x64 amd64" "linux-arm64 arm64"; do
+          for P in "linux-x64 amd64" "linux-arm64 arm64" "linux-arm armhf"; do
             set -- $P; R=$1; A=$2
             [ -d publish/$R ] || continue
             D=deb-$A; rm -rf $D
@@ -135,6 +137,31 @@ jobs:
               > $D/DEBIAN/control
             dpkg-deb --root-owner-group --build $D dist/e-layer-analyzer_${VER}_$A.deb
           done
+          # pacchetto Slackware ARM64 (Raspberry Pi con Slackware AArch64): installpkg mette il programma in /opt/e-layer-analyzer
+          # con lo stesso avvio del .deb (al primo avvio si copia in ~/E-LAYER-ANALYZER)
+          if [ -d publish/linux-arm64 ]; then
+            S=slack; rm -rf $S
+            mkdir -p $S/install $S/opt/e-layer-analyzer $S/usr/bin $S/usr/share/applications $S/usr/share/icons/hicolor/256x256/apps
+            cp -R deb-arm64/opt/e-layer-analyzer/. $S/opt/e-layer-analyzer/
+            cp deb-arm64/usr/bin/e-layer-analyzer $S/usr/bin/
+            cp deb-arm64/usr/share/applications/e-layer-analyzer.desktop $S/usr/share/applications/
+            cp deb-arm64/usr/share/icons/hicolor/256x256/apps/e-layer-analyzer.png $S/usr/share/icons/hicolor/256x256/apps/
+            printf '%s\n' \
+              "                 |-----handy-ruler------------------------------------------------------|" \
+              "e-layer-analyzer: e-layer-analyzer (propagazione dello strato E)" \
+              "e-layer-analyzer:" \
+              "e-layer-analyzer: E-sporadico, F.A.I., meteor scatter (YA-MS) e aurora in VHF." \
+              "e-layer-analyzer: A cura di Costantino IC8TEM." \
+              "e-layer-analyzer: Al primo avvio il programma si copia in ~/E-LAYER-ANALYZER," \
+              "e-layer-analyzer: con la cartella data accanto." \
+              "e-layer-analyzer:" \
+              "e-layer-analyzer: https://github.com/ic8tem/E-LAYER-ANALYZER" \
+              "e-layer-analyzer:" "e-layer-analyzer:" "e-layer-analyzer:" > $S/install/slack-desc
+            printf '%s\n' "if [ -x /usr/bin/update-desktop-database ]; then /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1; fi" \
+              "if [ -x /usr/bin/gtk-update-icon-cache ]; then /usr/bin/gtk-update-icon-cache -q usr/share/icons/hicolor >/dev/null 2>&1; fi" > $S/install/doinst.sh
+            tar -C $S --owner=0 --group=0 -cJf dist/e-layer-analyzer-$VER-aarch64-1_ic8tem.txz install opt usr
+            tar -tJf dist/e-layer-analyzer-$VER-aarch64-1_ic8tem.txz | head -5
+          fi
           ls -la dist
       - name: Fotografie delle linguette (schermo virtuale)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

@@ -2,7 +2,7 @@
 
 **E-LAYER ANALYZER** - analisi dei modi di propagazione VHF che coinvolgono lo strato E: E-sporadico (anche multi-salto
 extracontinentale), F.A.I., meteor scatter (programma YA-MS integrato) e aurora radio.
-A cura di Costantino Cerrotta IC8TEM. Windows (64 e 32 bit), Linux, Raspberry Pi (ARM64) e Mac (.NET 8 + Avalonia), stessa grafica di YA-MS.
+A cura di Costantino Cerrotta IC8TEM. Windows (64 e 32 bit), Linux x86_64, Raspberry Pi (Raspberry Pi OS 64 e 32 bit, Slackware ARM64), Linux armv7l e Mac (.NET 8 + Avalonia), stessa grafica di YA-MS.
 Nessun dato in AppData: tutto sta nella cartella `data` accanto al programma.
 
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-ic8tem-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/ic8tem)
@@ -26,7 +26,7 @@ https://qsl.net/ic8fax/page4.html; tabella dei salti Es di F. Egano IK3XTV.
 Gli installatori li produce GitHub Actions (`.github/workflows/build.yml`) a ogni aggiornamento del ramo `release`
 (versione dal file `VERSION`). A ogni push su `main`: compilazione di controllo su Linux, registro sul ramo `ci-log`
 e fotografie delle linguette sul ramo `ci-screenshots`.
-In locale: `dotnet publish E-LAYER-ANALYZER.csproj -c Release -r win-x64|linux-x64|osx-arm64 --self-contained true`.
+In locale: `dotnet publish E-LAYER-ANALYZER.csproj -c Release -r win-x64|win-x86|linux-x64|linux-arm64|linux-arm|osx-arm64|osx-x64 --self-contained true`.
 Documenti Word: `python3 tools/txt2docx.py data/ela_documento_tecnico.txt data/ela_documento_tecnico.docx`.
 
 ## Sostieni il progetto
