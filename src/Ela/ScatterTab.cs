@@ -37,12 +37,14 @@ namespace ELA
         double aLat = double.NaN, aLon, bLat = double.NaN, bLon, spLat = double.NaN, spLon;
         string aName = "", bName = "";
 
-        // stazioni di verifica (IC8FAX: pagina F.A.I. e articolo 2011)
+        // stazioni di verifica (IC8FAX: pagina F.A.I. e articolo 2011; DL5MCG [6])
         static readonly string[][] FaiPresets =
         {
             new[] { "IC8FAX - F6DRO", "IC8FAX", "JN70CN", "F6DRO", "JN03TJ" },
             new[] { "IC8FAX - G4LOH", "IC8FAX", "JN70CN", "G4LOH", "IO70JC" },
-            new[] { "IC8FAX - FA1MXE (1° QSO F.A.I., 1990)", "IC8FAX", "JN70CN", "FA1MXE", "JN05GQ" }
+            new[] { "IC8FAX - FA1MXE (1° QSO F.A.I., 1990)", "IC8FAX", "JN70CN", "FA1MXE", "JN05GQ" },
+            // DL5MCG [6]: test DL4MEA-DL5MCG con SV1DH, 2 m, giugno-luglio 1987, 1571 km, scatter «sopra Budapest»
+            new[] { "DL5MCG - SV1DH (1987, via Budapest)", "DL5MCG", "JN58KH", "SV1DH", "KM27AW" }
         };
         // scatter point noti (pagina F.A.I. di IC8FAX, articolo IC8FAX-IC8TEM, DL5MCG)
         static readonly string[][] KnownSp =
@@ -326,7 +328,7 @@ namespace ELA
                 qtf.Add(p.Az, p.Elev, azB, eB, p.Off);
                 double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                 if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
-                if (!InAuRange(p, bLat, bLon)) score += 3;   // aurora: preferenza per 370-1100 km da ciascuna stazione (Lange-Hesse)
+                if (!InAuRange(p, bLat, bLon)) score += 3;   // aurora: preferenza per la finestra di Lange-Hesse di ciascuna stazione (mobile)
                 if (score < bestScore) { bestScore = score; best = p; }
             }
             map.Legend.Add(new KeyValuePair<string, Color>("0° - 1°", Dev(0.5, false)));
@@ -635,7 +637,7 @@ namespace ELA
                         double dB = Geo.DistanceKm(s.LatD, s.LonD, p.Lat, p.Lon);
                         double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                         if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
-                        if (!InAuRange(p, s.LatD, s.LonD)) score += 3;
+                        if (aurora && !InAuWindow(s.LatS, s.LonS, p.DistKm, s.LatD, s.LonD, dB)) score += 3;
                         if (score < bestScore) { bestScore = score; sol.Best = p; }
                     }
                     if (sol.Best != null)
@@ -679,8 +681,77 @@ namespace ELA
         bool InAuRange(PerpPoint p, double bLa, double bLo)
         {
             if (!aurora) return true;
-            double dB = Geo.DistanceKm(bLa, bLo, p.Lat, p.Lon);
-            return p.DistKm >= AuMinRangeKm && p.DistKm <= AuMaxRangeKm && dB >= AuMinRangeKm && dB <= AuMaxRangeKm;
+            return InAuWindow(aLat, aLon, p.DistKm, bLa, bLo, Geo.DistanceKm(bLa, bLo, p.Lat, p.Lon));
+        }
+
+        // Finestra mobile (scelta dell'autore, proposta 6 del confronto delle fonti). Lange-Hesse [12] ricava la finestra
+        // 370-1100 km (perpendicolarita' entro +-3 gradi a 110 km) su una sola linea: da 54 gradi di latitudine geomagnetica
+        // verso nord, sul meridiano geomagnetico 93 gradi E (punto di riferimento 53,47 N 7,73 E, inclinazione IGRF-14 ~69 gradi,
+        // zona B di Lange-Hesse). Per ogni stazione si calcola con IGRF-14 la distanza a cui il raggio verso il nord magnetico
+        // (il sud magnetico nell'emisfero sud) diventa perpendicolare al campo entro 3 gradi a 110 km; la finestra si sposta
+        // della differenza rispetto al punto di riferimento (inclinazione maggiore = finestra piu' lontana) e si ferma
+        // all'orizzonte radio a 110 km. Senza IGRF, o dove la perpendicolarita' non si raggiunge (stazioni sotto l'ovale,
+        // inclinazione oltre ~77 gradi), resta la finestra fissa 370-1100 km.
+        public const double AuRefLat = 53.47, AuRefLon = 7.73, AuWinH = 110, AuWinTol = 3;
+        static readonly Dictionary<long, double[]> auWin = new Dictionary<long, double[]>();
+        static double auRefKm = double.NaN, auWinEpoch = double.NaN;
+
+        // [0] inizio, [1] fine della finestra (km), [2] inclinazione IGRF-14 della stazione (NaN senza IGRF), [3] 1 se mobile
+        public static double[] AuWindow(double lat, double lon)
+        {
+            if (!Igrf.Loaded) return new[] { AuMinRangeKm, AuMaxRangeKm, double.NaN, 0 };
+            long key = (long)Math.Round((lat + 90) * 10) * 100000 + (long)Math.Round((Geo.Norm180(lon) + 180) * 10);
+            lock (auWin)
+            {
+                if (Igrf.Epoch != auWinEpoch) { auWin.Clear(); auRefKm = double.NaN; auWinEpoch = Igrf.Epoch; }
+                double[] w;
+                if (auWin.TryGetValue(key, out w)) return w;
+                if (double.IsNaN(auRefKm)) auRefKm = PerpStartKm(AuRefLat, AuRefLon);
+                double inc, dec; Igrf.IncDec(lat, lon, out inc, out dec);
+                double d = PerpStartKm(lat, lon), hor = Geo.HalfHopKm(0, AuWinH, 4.0 / 3.0);
+                if (double.IsNaN(d) || double.IsNaN(auRefKm)) w = new[] { AuMinRangeKm, AuMaxRangeKm, inc, 0 };
+                else
+                {
+                    double sh = d - auRefKm, mx = Math.Min(hor, AuMaxRangeKm + sh), mn = Math.Min(mx, Math.Max(100, AuMinRangeKm + sh));
+                    w = new[] { mn, mx, inc, 1 };
+                }
+                auWin[key] = w;
+                return w;
+            }
+        }
+
+        // distanza (km) a cui il raggio dalla stazione verso il polo magnetico diventa perpendicolare al campo entro 3 gradi
+        // alla quota di 110 km (elevazione >= 0 con la rifrazione 4/3); NaN se non succede prima dell'orizzonte
+        static double PerpStartKm(double lat, double lon)
+        {
+            double inc, dec; Igrf.IncDec(lat, lon, out inc, out dec);
+            double az = inc >= 0 ? dec : dec + 180;
+            Geo.V3 st = Geo.Ecef(lat, lon, 0);
+            for (double d = 50; d <= 2500; d += 10)
+            {
+                if (Geo.ElevationDeg(d, AuWinH, 0, 4.0 / 3.0) < 0) break;
+                double la, lo; Geo.Destination(lat, lon, az, d, out la, out lo);
+                if (Geo.AspectOffDeg(st, Geo.Ecef(la, lo, AuWinH)) <= AuWinTol) return d;
+            }
+            return double.NaN;
+        }
+
+        public static bool InAuWindow(double laA, double loA, double dA, double laB, double loB, double dB)
+        {
+            double[] a = AuWindow(laA, loA), b = AuWindow(laB, loB);
+            return dA >= a[0] && dA <= a[1] && dB >= b[0] && dB <= b[1];
+        }
+
+        public static bool InAuFixed(double dA, double dB)
+        {
+            return dA >= AuMinRangeKm && dA <= AuMaxRangeKm && dB >= AuMinRangeKm && dB <= AuMaxRangeKm;
+        }
+
+        public static string AuWindowText(string name, double lat, double lon)
+        {
+            double[] w = AuWindow(lat, lon);
+            return w[3] > 0 ? Lang.F("{0} {1:F0}-{2:F0} km (inclinazione {3:F1}°)", name, w[0], w[1], w[2])
+                            : Lang.F("{0} {1:F0}-{2:F0} km (finestra fissa)", name, w[0], w[1]);
         }
 
         // probabilita' dell'aurora nello scatter point: Kp (Lange-Hesse) e ovale NOAA OVATION (al posto di una soglia di Kp per latitudine)
@@ -700,7 +771,7 @@ namespace ELA
         }
 
         // intervallo di QTF lungo tutta la scia (scelta dell'autore): oltre al punto piu' probabile,
-        // i puntamenti di tutti i punti con deviazione <= 1,5 gradi, di preferenza a 370-1100 km da entrambe le stazioni
+        // i puntamenti di tutti i punti con deviazione <= 1,5 gradi, di preferenza dentro la finestra di Lange-Hesse di entrambe le stazioni
         void QtfRange(StringBuilder sb, List<PerpPoint> loc, PerpPoint best)
         {
             List<PerpPoint> good = loc.FindAll(p => p.Off <= 1.5 && InAuRange(p, bLat, bLon));
@@ -715,7 +786,7 @@ namespace ELA
                 aMin = Math.Min(aMin, da); aMax = Math.Max(aMax, da); bMin = Math.Min(bMin, db); bMax = Math.Max(bMax, db);
             }
             Func<double, string> f = v => Geo.Norm360(v).ToString("F0", CultureInfo.InvariantCulture) + "°";
-            sb.AppendLine(inRange ? Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, 370-1100 km da entrambe le stazioni):")
+            sb.AppendLine(inRange ? Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):")
                                   : Lang.T("Intervallo di QTF lungo la scia (deviazione ≤ 1,5°):"));
             sb.AppendLine(Lang.F("  {0}: da {1} a {2}   {3}: da {4} a {5}", aName, f(best.Az + aMin), f(best.Az + aMax), bName, f(azB0 + bMin), f(azB0 + bMax)));
             sb.AppendLine(Lang.T("  Il punto più probabile privilegia la tratta più corta; l'aurora può arrivare da tutto l'intervallo."));
@@ -735,7 +806,7 @@ namespace ELA
             sb.AppendLine(south ? Lang.F("QTF tipico verso S-SE (emisfero sud; in 50 MHz fino a circa 2000 km sulle tratte est-ovest, ANVDG [55]); scarto dal percorso diretto {0:F0}°", dev)
                                 : Lang.F("QTF tipico tra N e NE (0-50°), che si sposta verso N durante l'evento (G3WPO, G0ISW); scarto dal percorso diretto {0:F0}°", dev));
             sb.AppendLine(Lang.T("Doppler fino a 2 kHz in 144 MHz, minore in 50 MHz (G3WPO); i 50 MHz sono favoriti rispetto ai 144 (G0ISW). FT8 spesso non decodifica: meglio CW/SSB o Q65 con sottomodi larghi (K7CW; Q65-30D in 144 MHz, PE1ITR [61]); il segnale è largo e spostato, serve il RIT o lo split."));
-            sb.AppendLine(Lang.F("Scatter point preferito a {0:F0}-{1:F0} km da ciascuna stazione, quota circa 110 km, perpendicolarità entro ±3° (Lange-Hesse).", AuMinRangeKm, AuMaxRangeKm));
+            sb.AppendLine(Lang.F("Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.", AuWindowText(aName, aLat, aLon), AuWindowText(bName, bLat, bLon)));
             // peso orario (Reeve [52]): la maggior parte delle riflessioni aurorali cade entro circa 4 ore dalla mezzanotte solare locale
             double lst = ((DateTime.UtcNow.TimeOfDay.TotalHours + best.Lon / 15.0) % 24 + 24) % 24;
             double fromMidnight = Math.Min(lst, 24 - lst);
@@ -743,7 +814,7 @@ namespace ELA
             sb.AppendLine(fromMidnight <= 4
                 ? Lang.F("Ora solare nello scatter point {0}: dentro le 4 ore dalla mezzanotte locale, la fascia con la maggior parte delle riflessioni aurorali (Reeve [52]).", hh)
                 : Lang.F("Ora solare nello scatter point {0}: fuori dalle 4 ore dalla mezzanotte locale (Reeve [52]); l'aurora resta possibile nel pomeriggio e in serata durante le tempeste (G3WPO).", hh));
-            if (!InAuRange(best, bLat, bLon)) sb.AppendLine(Lang.T("Lo scatter point proposto è fuori dall'intervallo 370-1100 km di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile."));
+            if (!InAuRange(best, bLat, bLon)) sb.AppendLine(Lang.T("Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile."));
         }
 
         // aurora-E: sul percorso diretto (forward scatter), senza Doppler, segnali piu' deboli e stabili dopo l'aurora

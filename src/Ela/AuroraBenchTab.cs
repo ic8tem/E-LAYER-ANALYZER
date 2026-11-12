@@ -2,8 +2,8 @@
 // I dati stanno in data/aurora_benchmark.txt (log pubblicati di EI5FK, IO51RT, 2003-2005, e la mappa del log di PA0O,
 // JO33HG). Per ogni QSO si calcola, con lo stesso modello della linguetta AURORA (IGRF-14, condizione di Bragg sul campo,
 // quota 110 km, rifrazione 4/3, tolleranza 3 gradi), la scia degli scatter point possibili e il punto piu' probabile;
-// il riepilogo dice quanti QSO il modello spiega, quanti cadono nella finestra 370-1100 km di Lange-Hesse e quanti
-// superano i 2000 km. I log non riportano il puntamento: il QTF calcolato non si confronta con un QTF dichiarato.
+// il riepilogo dice quanti QSO il modello spiega, quanti cadono nella finestra di Lange-Hesse (mobile, spostata con
+// l'inclinazione IGRF-14 di ogni stazione, e fissa 370-1100 km per confronto) e quanti superano i 2000 km. I log non riportano il puntamento: il QTF calcolato non si confronta con un QTF dichiarato.
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -25,7 +25,7 @@ namespace ELA
         class BQso
         {
             public BSet Set; public string Time, Call, Loc; public double Lat, Lon, Km, DeclKm;
-            public PerpPoint Best; public double QtfB, ElB, DistB; public int Cells; public bool InRange;
+            public PerpPoint Best; public double QtfB, ElB, DistB; public int Cells; public bool InRange, InFixed;
         }
 
         public readonly Control Root;
@@ -129,16 +129,18 @@ namespace ELA
             double maxD = Geo.HalfHopKm(0, h, K);
             foreach (BQso q in s.Qso)
             {
-                q.Best = null; q.InRange = false; q.Cells = 0;
+                q.Best = null; q.InRange = false; q.InFixed = false; q.Cells = 0;
                 List<PerpPoint> loc = FieldAligned.PairLocus(s.Lat, s.Lon, q.Lat, q.Lon, h, Tol, 0, maxD, 0.5, K);
                 q.Cells = loc.Count;
-                double best = double.MaxValue;
+                double best = double.MaxValue, bestF = double.MaxValue;
                 foreach (PerpPoint p in loc)
                 {
                     double dB = Geo.DistanceKm(q.Lat, q.Lon, p.Lat, p.Lon);
-                    bool inR = p.DistKm >= ScatterTab.AuMinRangeKm && p.DistKm <= ScatterTab.AuMaxRangeKm && dB >= ScatterTab.AuMinRangeKm && dB <= ScatterTab.AuMaxRangeKm;
-                    double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6 + (inR ? 0 : 3);
-                    if (score < best) { best = score; q.Best = p; q.InRange = inR; q.DistB = dB; }
+                    bool inR = ScatterTab.InAuWindow(s.Lat, s.Lon, p.DistKm, q.Lat, q.Lon, dB), inF = ScatterTab.InAuFixed(p.DistKm, dB);
+                    double sc0 = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
+                    if (sc0 + (inR ? 0 : 3) < best) { best = sc0 + (inR ? 0 : 3); q.Best = p; q.InRange = inR; q.DistB = dB; }
+                    // stesso calcolo con la finestra fissa di Lange-Hesse, solo per il confronto nel riepilogo
+                    if (sc0 + (inF ? 0 : 3) < bestF) { bestF = sc0 + (inF ? 0 : 3); q.InFixed = inF; }
                 }
                 if (q.Best != null)
                 {
@@ -153,7 +155,7 @@ namespace ELA
         {
             if (q.Best == null) return Lang.T("non spiegato");
             if (q.Km > ScatterTab.AuMaxKm) return Lang.T("spiegato, oltre 2000 km");
-            return q.InRange ? Lang.T("spiegato, 370-1100 km") : Lang.T("spiegato, fuori finestra");
+            return q.InRange ? Lang.T("spiegato, nella finestra") : Lang.T("spiegato, fuori finestra");
         }
 
         void Fill()
@@ -176,11 +178,12 @@ namespace ELA
             tQso.SelectedIndex = sel != null ? all.IndexOf(sel) : -1;
             tQso.Refresh();
 
-            int n = all.Count, ok2 = all.Count(q => q.Best != null), inr = all.Count(q => q.Best != null && q.InRange), far = all.Count(q => q.Km > ScatterTab.AuMaxKm);
+            int n = all.Count, ok2 = all.Count(q => q.Best != null), inr = all.Count(q => q.Best != null && q.InRange), inf = all.Count(q => q.Best != null && q.InFixed), far = all.Count(q => q.Km > ScatterTab.AuMaxKm);
             StringBuilder sb = new StringBuilder();
             if (n == 0) { txtSum.Text = Lang.T("Nessun dato: manca il file data/aurora_benchmark.txt."); return; }
             sb.AppendLine(Lang.F("QSO: {0}; spiegati dal modello (scatter point entro 3°): {1} ({2:F0}%)", n, ok2, 100.0 * ok2 / n));
-            sb.AppendLine(Lang.F("con lo scatter point a 370-1100 km da entrambe le stazioni (Lange-Hesse): {0} ({1:F0}%)", inr, 100.0 * inr / n));
+            sb.AppendLine(Lang.F("con lo scatter point nella finestra di Lange-Hesse di entrambe le stazioni, spostata con l'inclinazione IGRF-14: {0} ({1:F0}%)", inr, 100.0 * inr / n));
+            sb.AppendLine(Lang.F("con la finestra fissa 370-1100 km (Lange-Hesse, 54° geomagnetici), per confronto: {0} ({1:F0}%)", inf, 100.0 * inf / n));
             sb.AppendLine(Lang.F("oltre i 2000 km (dubbi per il programma): {0}", far));
             List<BQso> sol = all.Where(q => q.Best != null).ToList();
             if (sol.Count > 0)
@@ -222,7 +225,7 @@ namespace ELA
                 map.Markers.Add(new MapMarker { Lat = s.Lat, Lon = s.Lon, Radius = 6, Fill = Pal.Green, Square = true, Label = s.Call, LabelColor = Pal.Green });
             }
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("● azzurro: corrispondenti; ■ verde: stazione del log"), Pal.Azure));
-            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("scatter point: verde 370-1100 km, giallo fuori finestra, arancio QSO oltre 2000 km"), Pal.Green));
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("scatter point: verde nella finestra di Lange-Hesse, giallo fuori finestra, arancio QSO oltre 2000 km"), Pal.Green));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("rosso: nessuno scatter point entro 3° (QSO non spiegato dal modello)"), Pal.Red));
             map.InvalidateVisual();
         }
@@ -239,6 +242,7 @@ namespace ELA
                 sb.AppendLine(Lang.F("Scatter point {0} (dev. {1:F1}°), celle del luogo {2}", Geo.LatLonToLoc(q.Best.Lat, q.Best.Lon, 6), q.Best.Off, q.Cells));
                 sb.AppendLine(Lang.F("  {0}: QTF {1:F0}° el {2:F1}°, {3:F0} km", q.Set.Call, q.Best.Az, q.Best.Elev, q.Best.DistKm));
                 sb.AppendLine(Lang.F("  {0}: QTF {1:F0}° el {2:F1}°, {3:F0} km", q.Call, q.QtfB, q.ElB, q.DistB));
+                sb.AppendLine(Lang.F("Finestra di Lange-Hesse: {0}; {1}", ScatterTab.AuWindowText(q.Set.Call, q.Set.Lat, q.Set.Lon), ScatterTab.AuWindowText(q.Call, q.Lat, q.Lon)));
                 sb.AppendLine(Lang.F("Percorso diretto {0:F0}°: scarto del QTF {1:F0}°", Geo.Bearing(q.Set.Lat, q.Set.Lon, q.Lat, q.Lon), Math.Abs(Geo.Norm180(q.Best.Az - Geo.Bearing(q.Set.Lat, q.Set.Lon, q.Lat, q.Lon)))));
             }
             txtDet.Text = sb.ToString();
