@@ -32,6 +32,11 @@ F.A.I.（Field Aligned Irregularities，场向不规则体）是由沿地磁场�
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH（热那亚上空） | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR（德国西南部，距布鲁塞尔 28 km） | 0.88° | 338° / 87° |
-| DB0FAI - Dresden 经由 Sheffield（DL5MCG） | – | 0.3° | – |
+| 信标 DB0FAI（305°）- Dresden 经由 Sheffield（DL5MCG；Dresden 指向 290° 并报告为极光） | – | 0.3° | – |
+| DL5MCG - SV1DH（1987 年经由布达佩斯的试验，1569 km） | 布达佩斯在 Scatter trail 上；低于 1° 的格点从 35 km 起 | 2.16° | 95° / 341° |
 
 列表中的已知散射点：日内瓦、布鲁塞尔、布达佩斯、JN92、JN41/42。
+
+**验证...** 菜单载入测试台站对 IC8FAX-F6DRO、IC8FAX-G4LOH、IC8FAX-FA1MXE 和 DL5MCG-SV1DH。
+
+**设备**（DL5MCG）：144 MHz 的 F.A.I. 至少需要一副长八木天线和 100 W（SV1DH 也曾用 8 单元八木天线和 50 W 被通联）。天线指向程序给出的散射点，而不是对方电台。
