@@ -90,5 +90,21 @@
       <Setter Property="VerticalAlignment" Value="Center"/>
       <Setter Property="Margin" Value="8,0,4,0"/>
     </Style>
+    <!-- caselle numeriche: i pulsanti su/giu' senza fondo proprio, cosi' non coprono il bordo arrotondato della casella
+         (il selettore con pseudoclasse vince sul TemplateBinding del tema) -->
+    <Style Selector="ButtonSpinner /template/ RepeatButton:not(:disabled)">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style Selector="ButtonSpinner /template/ RepeatButton:disabled">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style Selector="ButtonSpinner /template/ RepeatButton#PART_DecreaseButton:not(:disabled)">
+      <Setter Property="CornerRadius" Value="0,11,11,0"/>
+    </Style>
+    <Style Selector="ButtonSpinner /template/ RepeatButton#PART_DecreaseButton:disabled">
+      <Setter Property="CornerRadius" Value="0,11,11,0"/>
+    </Style>
   </Application.Styles>
 </Application>

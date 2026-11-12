@@ -69,10 +69,42 @@ namespace YAMS
                     }
                     if (sub != null) sub.Select(0);
                 }
+                // prova: Geometria e attenuazione dopo aver cambiato la durata dei ping e il raggio iniziale
+                for (int i = 0; i < tabs.Count; i++)
+                {
+                    PillTabs sub = tabs.Subs[i];
+                    if (sub == null) continue;
+                    for (int k = 0; k < sub.Count; k++)
+                    {
+                        sub.Select(k); tabs.Select(i);
+                        await Task.Delay(300);
+                        if (cmbDur == null || !cmbDur.IsEffectivelyVisible) continue;
+                        int d0 = cmbDur.SelectedIndex, r0 = cmbR0.SelectedIndex;
+                        cmbDur.SelectedIndex = 1 - d0;
+                        await Task.Delay(1500);
+                        Shot(Path.Combine(dir, "prova_durata.png"));
+                        cmbR0.SelectedIndex = (r0 + 1) % 3;
+                        await Task.Delay(1500);
+                        Shot(Path.Combine(dir, "prova_raggio.png"));
+                        cmbDur.SelectedIndex = d0; cmbR0.SelectedIndex = r0;
+                        i = tabs.Count; break;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 try { File.WriteAllText(Path.Combine(dir, "errore.txt"), ex.ToString()); } catch { }
+            }
+        }
+
+        void Shot(string file)
+        {
+            Rect bb = (target ?? this).Bounds;
+                    PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));
+            using (RenderTargetBitmap rtb = new RenderTargetBitmap(ps, new Vector(96, 96)))
+            {
+                rtb.Render(target ?? this);
+                rtb.Save(file);
             }
         }
     }

@@ -62,6 +62,8 @@ namespace YAMS
         string recommendText = "";
         string recommendShort = "";   // consiglio senza la parte tra parentesi (riquadro "Adesso")
         TextBlock glBest, glShower, glNow, glFore;
+        Border cardBest, cardShower, cardNow, cardFore;   // riquadri del colpo d'occhio (per i fumetti)
+        Border boxNoZone, boxNoZoneSky; TextBlock lblNoZone, lblNoZoneSky;   // avviso: nessuna zona comune della tratta
         CheckBox chkHot, chkMap, chkTopView;
         Button btnCalc, btnReal;
         TextBlock lblClock, lblSkyTime;
@@ -72,7 +74,6 @@ namespace YAMS
         TextBlock lblFont;
         bool fontReady;              // la scala dei controlli standard si applica dopo l'apertura (stili gia' applicati)
         TextBlock lblMapCaption;     // didascalia sotto la pianta
-        CalendarDatePicker dtDay;
 
         // linguette
         PillTabs tabs;
@@ -363,6 +364,23 @@ namespace YAMS
         }
 
         // riga di comandi (fondo Panel2): gli elementi vanno a capo se la finestra e' stretta
+        // bordino in rilievo attorno a una casella da tenere d'occhio (diagramma d'antenna, angolo beta)
+        static Border Raised(Control c)
+        {
+            return new Border
+            {
+                Child = c,
+                Background = Pal.B(Pal.Card),
+                BorderBrush = Pal.B(Pal.Border),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(6),
+                Padding = new Thickness(6, 1, 8, 1),
+                Margin = new Thickness(4, 2),
+                VerticalAlignment = VerticalAlignment.Center,
+                BoxShadow = new BoxShadows(new BoxShadow { OffsetX = 1, OffsetY = 2, Blur = 4, Color = Pal.Argb(110, 0, 0, 0) })
+            };
+        }
+
         static Border Row(params Control[] items)
         {
             WrapPanel wp = new WrapPanel { Orientation = Orientation.Horizontal };
@@ -431,16 +449,31 @@ namespace YAMS
             numLayer = N(70, 130, Dm(cfg.GetD("quota_scie_km", 90)), 1, 0.5m, 60);
             chkLayerRadar = C(Lang.T("dal radar"), cfg.GetB("quota_da_radar", true));
             numElev = N(0, 30, Dm(cfg.GetD("elevazione_lobo_gradi", 0)), 1, 0.5m, 55);
+            ToolTip.SetTip(numElev, Lang.T("Elevazione del massimo del lobo verticale dell'antenna. Una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra l'orizzonte, per la riflessione sul terreno (di solito 3-8°, secondo l'altezza dell'antenna in lunghezze d'onda).\n" +
+                "Con \"diagramma d'antenna\" acceso questo valore è il massimo del lobo: i punti sotto pesano sempre meno fino a zero all'orizzonte, quelli sopra seguono il lobo verticale calcolato dal boom. Con la casella spenta è un limite netto: i punti sotto non contano."));
+            // casella: lobo come diagramma d'antenna (attenuazione) invece del limite netto
+            chkLobe = C(Lang.T("diagramma d'antenna"), cfg.GetB("lobo_diagramma", true));
+            PathModel.LobePattern = chkLobe.IsChecked == true;
+            ToolTip.SetTip(chkLobe, Lang.T("Come conta l'elevazione del lobo.\n" +
+                "Accesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); " +
+                "sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\n" +
+                "Spenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0."));
+            WhenChanged(chkLobe, ToggleButton.IsCheckedProperty, () =>
+            {
+                PathModel.LobePattern = chkLobe.IsChecked == true;
+                cfg.Set("lobo_diagramma", PathModel.LobePattern);
+                if (model != null) Recalc();
+            });
             btnCalc = B(Lang.T("Calcola")); btnCalc.Classes.Add("accent");
             btnCalc.Click += (s, e) => Recalc();
-            cmbBand.SelectionChanged += (s, e) => { if (model != null) { ApplyAntenna(); UpdateSky(); UpdateFluxTab(); UpdateGeometry(); } };
+            cmbBand.SelectionChanged += (s, e) => { if (model != null) { if (PathModel.LobePattern) Recalc(); else { ApplyAntenna(); UpdateSky(); UpdateFluxTab(); UpdateGeometry(); } } };
 
             // l'antenna e' sempre puntata verso il corrispondente (azimut della tratta)
             Color wheat = Pal.Ink(Pal.Rgb(245, 222, 179));   // color grano: scurito negli schemi chiari
             lblAntAz = L(Lang.T("Antenna az: -")); lblAntAz.Foreground = Pal.B(wheat);
             numBoom = N(0.5m, 30, Dm(cfg.GetD("boom_m", 4.6)), 2, 0.1m, 60);
             lblAnt = L(""); lblAnt.Foreground = Pal.B(wheat);
-            numBoom.ValueChanged += (s, e) => { if (model != null) { ApplyAntenna(); UpdateSky(); UpdateGeometry(); } };
+            numBoom.ValueChanged += (s, e) => { if (model != null) { if (PathModel.LobePattern) Recalc(); else { ApplyAntenna(); UpdateSky(); UpdateGeometry(); } } };
             numHotKm = N(30, 400, Dm(cfg.GetD("hot_spot_km", 150)), 0, 10, 55);
             PathModel.HotSpotOffsetKm = V(numHotKm);
             numHotKm.ValueChanged += (s, e) => { if (!PathModel.HotSpotAuto) { PathModel.HotSpotOffsetKm = V(numHotKm); if (model != null) Recalc(); } };
@@ -459,7 +492,7 @@ namespace YAMS
 
             // riga 2: strato E, lobo e antenna
             Border row2 = Row(L(Lang.T("Quota scie km")), numLayer, chkLayerRadar,
-                              L(Lang.T("Elevazione lobo °")), numElev,
+                              L(Lang.T("Elevazione lobo °")), numElev, Raised(chkLobe),   // casella in evidenza, come l'angolo beta
                               L(Lang.T("Antenna Yagi: boom m")), numBoom, lblAnt,
                               L(Lang.T("Hot spot dal punto medio km")), numHotKm, chkHotAuto);
 
@@ -478,9 +511,8 @@ namespace YAMS
             btnReal.Click += (s, e) => ResetCalcTime();
             // data del calcolo: con l'ora attuale e lo spostamento del cursore (da -12 a +36 h) da' il momento del calcolo
             dtCalc = new CalendarDatePicker { SelectedDate = DateTime.UtcNow.Date, Width = 150, Margin = new Thickness(2, 3), FlowDirection = FlowDirection.LeftToRight };   // date sempre da sinistra a destra (arabo, ebraico, urdu)
-            WhenChanged(dtCalc, CalendarDatePicker.SelectedDateProperty, () => UpdateSky());
-            dtDay = new CalendarDatePicker { SelectedDate = DateTime.UtcNow.Date, Width = 150, Margin = new Thickness(2, 3), FlowDirection = FlowDirection.LeftToRight };   // date sempre da sinistra a destra (arabo, ebraico, urdu)
-            WhenChanged(dtDay, CalendarDatePicker.SelectedDateProperty, () => Update24h());
+            // una sola data: vale per il calcolo del momento e per la tabella delle 24 ore (Calcolo dell'efficienza)
+            WhenChanged(dtCalc, CalendarDatePicker.SelectedDateProperty, () => { UpdateSky(); Update24h(); });
             // dimensione del carattere di tutto il programma (solo il testo), a passi del 10 %
             double pct0 = Math.Max(100, Math.Min(300, Math.Round(cfg.GetD("carattere_pct", 100) / 10) * 10));
             lblFont = L(pct0.ToString("F0", CultureInfo.InvariantCulture) + " %"); lblFont.Foreground = Pal.B(Pal.Azure);
@@ -489,7 +521,7 @@ namespace YAMS
             UiScale.Set(pct0 / 100.0);
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
             Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc, L(Lang.T("Ore (da −12 a +36 h)")), trackTime,
-                              btnReal, lblSkyTime, L(Lang.T("Giorno per la tabella 24 h (UTC)")), dtDay);
+                              btnReal, lblSkyTime);
             // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
             Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
                        L(Lang.T("Corrispondente")), txtDx, L(Lang.T("quota m")), numDxAlt,
@@ -529,6 +561,7 @@ namespace YAMS
             UiScale.Apply(this);
             if (chart24 != null) chart24.Height = Chart24Height * (0.5 + 0.5 * UiScale.Font);   // spazio per scritte piu' grandi
             if (explainSheet != null) explainSheet.MaxWidth = 860 * Math.Min(2.0, UiScale.Font);
+            if (manualSheet != null) manualSheet.MaxWidth = 860 * Math.Min(2.0, UiScale.Font);
             GravesFontScale();
             UpdateGeometry();   // il resoconto usa caratteri ricavati da quello della casella
         }
@@ -667,10 +700,11 @@ namespace YAMS
             boxLowAlong = Warn(Pal.Panel3, Pal.Azure, out lblLowAlong);
             // avviso tratta oltre l'orizzonte della scia (punto medio sotto l'orizzonte alla quota delle scie)
             boxHorizon = Warn(Pal.OrangeDark, Pal.OrangeText, out lblHorizon);
+            boxNoZoneSky = Warn(Pal.OrangeDark, Pal.OrangeText, out lblNoZoneSky);
             // lato destro: in alto elenco degli sciami, al centro volta celeste + testo del calcolo, in basso la sezione
             Grid rt = new Grid { RowDefinitions = new RowDefinitions("31*,37*,32*") };
             DockPanel rTop = new DockPanel();
-            DockTop(rTop, opt); DockTop(rTop, boxLobeWarn); DockTop(rTop, boxHorizon); DockTop(rTop, boxHighRad); DockTop(rTop, boxLowAlong);
+            DockTop(rTop, opt); DockTop(rTop, boxLobeWarn); DockTop(rTop, boxNoZoneSky); DockTop(rTop, boxHorizon); DockTop(rTop, boxHighRad); DockTop(rTop, boxLowAlong);
             rTop.Children.Add(lvSky);
             Grid rMid = new Grid { ColumnDefinitions = new ColumnDefinitions("42*,58*") };
             Grid.SetColumn(skySmall, 0); Grid.SetColumn(lblPathInfo, 1);
@@ -749,13 +783,16 @@ namespace YAMS
             // colpo d'occhio: quattro riquadri riassuntivi sopra il grafico
             // altezza minima 100: con caratteri grandi i riquadri crescono
             Grid glance = new Grid { ColumnDefinitions = new ColumnDefinitions("*,*,*,*"), MinHeight = 100, Margin = new Thickness(6, 6, 6, 2) };
-            Border c0 = Card(Lang.T("ORA MIGLIORE DEL GIORNO"), Pal.Azure, out glBest);
-            Border c1 = Card(Lang.T("SCIAME PIÙ FAVOREVOLE"), Pal.Yellow, out glShower);
-            Border c2 = Card(Lang.T("ADESSO"), Pal.Green, out glNow);
-            Border c3 = Card(Lang.T("PREVISIONE SPERIMENTALE"), Pal.Orange, out glFore);
+            Border c0 = cardBest = Card(Lang.T("ORA MIGLIORE DEL GIORNO"), Pal.Azure, out glBest);
+            Border c1 = cardShower = Card(Lang.T("SCIAME PIÙ FAVOREVOLE"), Pal.Yellow, out glShower);
+            Border c2 = cardNow = Card(Lang.T("ADESSO"), Pal.Green, out glNow);
+            Border c3 = cardFore = Card(Lang.T("PREVISIONE SPERIMENTALE"), Pal.Orange, out glFore);
             Grid.SetColumn(c0, 0); Grid.SetColumn(c1, 1); Grid.SetColumn(c2, 2); Grid.SetColumn(c3, 3);
             glance.Children.Add(c0); glance.Children.Add(c1); glance.Children.Add(c2); glance.Children.Add(c3);
             DockTop(p2, glance);
+            boxNoZone = Warn(Pal.OrangeDark, Pal.OrangeText, out lblNoZone);
+            boxNoZone.Margin = new Thickness(6, 0, 6, 4);
+            DockTop(p2, boxNoZone);
             lblAB = new TextBlock
             {
                 Foreground = Pal.B(Pal.Fore), FontSize = 13, TextWrapping = TextWrapping.Wrap,
@@ -787,7 +824,8 @@ namespace YAMS
                 "Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\n" +
                 "Spenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, " +
                 "quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\n" +
-                "Un primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella \"Giudizio classico\" mostra il verdetto della regola classica sotto l'efficienza, ora per ora."));
+                "Un primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella \"Giudizio classico\" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.\n" +
+                "Quanto pesa: è la scelta che cambia di più i risultati. Su JN70CN – JO76QP (1791 km), Geminidi del 14/12/2026, l'efficienza massima passa dal 98 % (spenta) al 13 % (accesa), un fattore 7. Gli altri affinamenti sono molto più piccoli: raggio iniziale e durata dei ping valgono pochi dB e solo sopra 144 MHz, il diagramma d'antenna conta sulle tratte vicine al limite dell'orizzonte, la quota delle scie varia di ±7 km da un'ora all'altra. Le ore migliori e il lato restano invece quasi gli stessi con le due scelte."));
             WhenChanged(chkBeta, ToggleButton.IsCheckedProperty, () =>
             {
                 PathModel.BetaFactor = chkBeta.IsChecked == true;
@@ -814,7 +852,21 @@ namespace YAMS
             WhenChanged(chkLayerRadar, ToggleButton.IsCheckedProperty, SyncProfile);
             numLayer.ValueChanged += (s, e) => SyncProfile();
             SyncProfile();
-            DockTop(p2, Row(L(Lang.T("Impostazione del calcolo:")), rbProfPrud, rbProfDj, rbProfPers, chkTrailLen, chkBeta, chkClassic));
+            // casella dell'angolo beta in evidenza: bordino in rilievo (cambia molto i valori sulle tratte lunghe)
+            chkBeta.FontWeight = FontWeight.SemiBold;
+            StackPanel betaInner = new StackPanel { Orientation = Orientation.Horizontal };
+            betaInner.Children.Add(chkBeta);
+            betaInner.Children.Add(new TextBlock
+            {
+                Text = "⚠ " + Lang.T("la scelta che pesa di più"), Foreground = Pal.B(Pal.OrangeText), FontWeight = FontWeight.Bold,
+                VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(6, 0, 0, 0)
+            });
+            Border betaBox = Raised(betaInner);
+            betaBox.Background = Pal.B(Pal.A(55, Pal.Orange));
+            betaBox.BorderBrush = Pal.B(Pal.Orange);
+            betaBox.BorderThickness = new Thickness(1.5);
+            ToolTip.SetTip(betaInner, ToolTip.GetTip(chkBeta));
+            DockTop(p2, Row(L(Lang.T("Impostazione del calcolo:")), rbProfPrud, rbProfDj, rbProfPers, chkTrailLen, betaBox, chkClassic));
             chart24 = new SimpleChart { Height = Chart24Height };
             DockTop(p2, chart24);
             List<string> cols24 = new List<string> { Lang.T("Sigla"), Lang.T("Sciame"), "ZHR" };
@@ -839,28 +891,7 @@ namespace YAMS
 
             EndGroup();
 
-            // ===== 3. Documenti tecnici: fonti, mappa dei radar europei, efficienza - spiegazione
-            Group(Lang.T("Documenti tecnici"));
-
-            // --- Fonti
-            DockPanel p6 = Page(Lang.T("Fonti"));
-            txtSources = new SelectableTextBlock { FontSize = 13.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap, Text = SourcesText() };
-            p6.Children.Add(new ScrollViewer
-            {
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                Content = new Border { Padding = new Thickness(14, 10), Child = txtSources }
-            });
-
-            // --- Mappa dei radar europei (ex "Mappa delle fonti", MainWindow.MappaFonti.cs)
-            BuildSourcesMapTab();
-
-            // --- Efficienza - spiegazione (MainWindow.Spiegazione.cs)
-            BuildExplainTab();
-
-            EndGroup();
-
-            // ===== le altre linguette, nell'ordine di prima
+            // ===== 3. le linguette senza sottolinguette
             // --- Sciami in diretta: GMN e CMOR (MainWindow.Diretta.cs)
             BuildLiveTab();
 
@@ -888,6 +919,30 @@ namespace YAMS
 
             // --- Mappa quadrati da ADIF (MainWindow.Grid.cs)
             BuildGridTab();
+
+            // ===== ultima: Documenti tecnici: fonti, mappa dei radar europei, efficienza - spiegazione
+            Group(Lang.T("Documenti tecnici"));
+
+            // --- Manuale d'uso (MainWindow.Spiegazione.cs)
+            BuildManualTab();
+
+            // --- Fonti
+            DockPanel p6 = Page(Lang.T("Fonti"));
+            txtSources = new SelectableTextBlock { FontSize = 13.5, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap, Text = SourcesText() };
+            p6.Children.Add(new ScrollViewer
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Content = new Border { Padding = new Thickness(14, 10), Child = txtSources }
+            });
+
+            // --- Mappa dei radar europei (ex "Mappa delle fonti", MainWindow.MappaFonti.cs)
+            BuildSourcesMapTab();
+
+            // --- Spiegazione del calcolo dell'efficienza (MainWindow.Spiegazione.cs)
+            BuildExplainTab();
+
+            EndGroup();
 
         }
 
@@ -966,6 +1021,7 @@ namespace YAMS
             if (!Astro.TryLocator(Up(txtHome), out home)) { status.Text = Lang.T("Locator della stazione non valido"); return; }
             if (!Astro.TryLocator(Up(txtDx), out dx)) { status.Text = Lang.T("Locator del corrispondente non valido"); return; }
             DateTime t0 = DateTime.Now;
+            PathModel.VerticalHpbwDeg = MsGeometry.HpbwVerticalDeg(MsGeometry.YagiGainDbi(V(numBoom), BandMHz));   // lobo verticale dal boom
             model = PathModel.Build(home, V(numHomeAlt) / 1000.0, dx, V(numDxAlt) / 1000.0, V(numLayer), V(numElev));
             if (PathModel.HotSpotAuto && model.Valid) numHotKm.Value = (decimal)Math.Round(Math.Max(30, Math.Min(400, model.HotOffsetKm)));   // mostra la distanza calcolata
             StartGravesModel();   // tratta GRAVES -> stazione, in un thread secondario
@@ -1182,6 +1238,8 @@ namespace YAMS
                 boxHorizon.IsVisible = true;
             }
             else boxHorizon.IsVisible = false;
+            string noZone = mv ? NoZoneText() : null;
+            lblNoZoneSky.Text = noZone ?? ""; boxNoZoneSky.IsVisible = noZone != null;
             // Hot consigliato dall'efficienza: il lato (A o B) da cui arriva la maggior parte delle riflessioni,
             // sommando su tutti gli sciami attivi ZHR x efficienza x frazione del lato
             double wA = 0, wB = 0;
@@ -1199,6 +1257,7 @@ namespace YAMS
                         (100 * Math.Max(wA, wB) / (wA + wB)).ToString("F0"));
                     recommendShort = Lang.F("{0} consigliato ora: az. {1}°", Lang.T(rh.Label), rh.BearingFromHome.ToString("F0"));
                 }
+                else if (model.SamplePoints == 0) recommendShort = recommendText = Lang.T("Nessun Hot consigliato: le due stazioni non vedono una zona comune dello strato (vedi l'avviso)");
                 else recommendShort = recommendText = Lang.T("Nessun Hot consigliato: sciami attivi quasi assenti in questo momento");
             }
             UpdateEffStrip(t, mv);
@@ -1317,7 +1376,7 @@ namespace YAMS
         Border boxHorizon; TextBlock lblHorizon;
         RadioButton rbProfPrud, rbProfDj, rbProfPers;
         ComboBox cmbR0, cmbDur;
-        CheckBox chkBeta, chkClassic;
+        CheckBox chkBeta, chkClassic, chkLobe;
         bool applyingProfile;
         public const double Dj5hgLayerKm = 102.0;
 
@@ -1379,9 +1438,56 @@ namespace YAMS
         {
             get
             {
-                DateTime d = dtDay.SelectedDate ?? DateTime.UtcNow;
+                DateTime d = dtCalc.SelectedDate ?? DateTime.UtcNow;
                 return DateTime.SpecifyKind(d.Date, DateTimeKind.Utc);
             }
+        }
+
+        // Avviso quando nessun punto dello strato e' visto da entrambe le stazioni sopra l'elevazione del lobo:
+        // il modello scarta i punti sotto quell'elevazione, quindi tutte le efficienze valgono 0. null = zona comune presente.
+        string NoZoneText()
+        {
+            if (model == null || !model.Valid || model.SamplePoints > 0) return null;
+            double alt = Math.Min(model.HomeAltKm, model.DxAltKm), half = model.DistKm / 2;
+            if (PathModel.LobePattern)
+            {
+                double hor = MsGeometry.LayerRangeKm(model.LayerKm, 0, alt);
+                string t = Lang.F("NESSUNA ZONA COMUNE: con le scie a {0:F1} km ogni stazione vede lo strato solo fino all'orizzonte, a {1:F0} km, ma il punto medio della tratta ({2:F0} km) è a {3:F0} km. Nessun punto di riflessione è visibile da entrambe le stazioni, quindi tutte le efficienze valgono 0.",
+                    model.LayerKm, hor, model.DistKm, half);
+                double hh = -1;
+                if (MsGeometry.LayerRangeKm(200, 0, alt) > half)
+                {
+                    double lo = model.LayerKm, hi = 200;
+                    for (int i = 0; i < 40; i++) { double m = (lo + hi) / 2; if (MsGeometry.LayerRangeKm(m, 0, alt) > half) hi = m; else lo = m; }
+                    hh = Math.Ceiling(hi);
+                }
+                if (hh > 0) t += " " + Lang.F("Servono scie ad almeno {0:F0} km.", hh);
+                return t + " " + Lang.T("La formula di DH9GCD (righe azzurre) non tiene conto dell'orizzonte né del lobo, per questo dà valori anche qui.");
+            }
+            double reach = MsGeometry.LayerRangeKm(model.LayerKm, model.MinElevDeg, alt);
+            string s = Lang.F("NESSUNA ZONA COMUNE: con le scie a {0:F1} km e il lobo d'antenna a {1:F1}° ogni stazione vede lo strato fino a {2:F0} km, ma il punto medio della tratta ({3:F0} km) è a {4:F0} km. " +
+                "Il calcolo tiene solo i punti visti da entrambe le stazioni almeno a quell'elevazione: qui non ce n'è nessuno, quindi tutte le efficienze valgono 0.",
+                model.LayerKm, model.MinElevDeg, reach, model.DistKm, half);
+            // elevazione massima del lobo e quota minima delle scie che aprono la zona comune
+            double needE = -1;
+            if (MsGeometry.LayerRangeKm(model.LayerKm, 0, alt) > half)
+            {
+                double lo = 0, hi = Math.Max(0.1, model.MinElevDeg);
+                for (int i = 0; i < 40; i++) { double m = (lo + hi) / 2; if (MsGeometry.LayerRangeKm(model.LayerKm, m, alt) > half) lo = m; else hi = m; }
+                needE = Math.Floor(lo * 10) / 10;
+            }
+            double needH = -1;
+            if (MsGeometry.LayerRangeKm(200, model.MinElevDeg, alt) > half)
+            {
+                double lo = model.LayerKm, hi = 200;
+                for (int i = 0; i < 40; i++) { double m = (lo + hi) / 2; if (MsGeometry.LayerRangeKm(m, model.MinElevDeg, alt) > half) hi = m; else lo = m; }
+                needH = Math.Ceiling(hi);
+            }
+            if (needE >= 0 && needH > 0) s += " " + Lang.F("Per avere un calcolo: elevazione del lobo di {0:F1}° o meno, oppure scie ad almeno {1:F0} km.", needE, needH);
+            else if (needE >= 0) s += " " + Lang.F("Per avere un calcolo: elevazione del lobo di {0:F1}° o meno.", needE);
+            else if (needH > 0) s += " " + Lang.F("Anche con il lobo a 0° non basta: servono scie ad almeno {0:F0} km.", needH);
+            s += " " + Lang.T("La formula di DH9GCD (righe azzurre) non tiene conto dell'orizzonte né del lobo, per questo dà valori anche qui.");
+            return s;
         }
 
         void Update24h()
@@ -1498,10 +1604,19 @@ namespace YAMS
 
             // colpo d'occhio
             int hb = 0; for (int h = 1; h < 24; h++) if (index[h] > index[hb]) hb = h;
+            // perche' non c'e' nessun valore: zona comune assente, nessuno sciame attivo, radianti sfavorevoli tutto il giorno
+            string noZone = NoZoneText();
+            string why = noZone != null ? Lang.T("nessun valore: le due stazioni non vedono una zona comune dello strato E (vedi l'avviso qui sotto)")
+                : act.Count == 0 ? Lang.T("nessun valore: in questo giorno non c'è nessuno sciame attivo con ZHR di almeno 1 (catalogo IMO)")
+                : Lang.F("nessun valore: i {0} sciami attivi hanno per tutto il giorno il radiante sotto l'orizzonte o in posizione sfavorevole per questa tratta (efficienza sotto l'1 %)", act.Count);
+            lblNoZone.Text = noZone ?? ""; boxNoZone.IsVisible = noZone != null;
             glBest.Text = index[hb] > 0
                 ? Lang.F("{0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)", hb, index[hb], wA[hb] >= wB[hb] ? "A" : "B", 100 * Math.Max(wA[hb], wB[hb]) / Math.Max(1e-9, wA[hb] + wB[hb]))
-                : Lang.T("nessuno sciame utile in questo giorno");
-            glShower.Text = bestShower;
+                : why;
+            glShower.Text = bestScore > 0 ? bestShower : why;
+            string tipWhy = index[hb] > 0 ? "" : "\n\n" + (noZone ?? why);
+            ToolTip.SetTip(cardBest, Lang.T("L'ora del giorno scelto con l'indice della tratta più alto (somma di ZHR × efficienza di tutti gli sciami attivi) e il lato della tratta da cui arriva la maggior parte delle riflessioni.") + tipWhy);
+            ToolTip.SetTip(cardShower, Lang.T("Lo sciame che dà il contributo più alto (ZHR × efficienza) nel giorno scelto, con l'ora, il lato e le due direzioni d'antenna migliori.") + (bestScore > 0 ? "" : "\n\n" + (noZone ?? why)));
             DateTime nowU = DateTime.UtcNow;
             if (nowU.Date == day.Date)
             {
@@ -1510,6 +1625,8 @@ namespace YAMS
                     index[hn] > 0.05 ? (wA[hn] >= wB[hn] ? "A" : "B") : "-", recommendShort.Trim());
             }
             else glNow.Text = Lang.T("il giorno scelto non è oggi");
+            ToolTip.SetTip(cardNow, Lang.T("L'indice della tratta nell'ora attuale, il lato prevalente e l'Hot consigliato. Compare solo se il giorno scelto è oggi.") +
+                (nowU.Date == day.Date && index[nowU.Hour] <= 0 ? "\n\n" + (noZone ?? why) : ""));
             DateTime hNow = new DateTime(nowU.Year, nowU.Month, nowU.Day, nowU.Hour, 0, 0, DateTimeKind.Utc);
             double f1 = ForecastAt(hNow);
             double f2 = ForecastAt(hNow.AddHours(1));
@@ -1517,6 +1634,7 @@ namespace YAMS
             glFore.Text = f1 < 0 ? Lang.T("nessun dato radar: vedi Live e dati real-time › Flusso radar")
                 : Lang.F("{0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)", PrevFreqMHz, f1,
                     f2 < 0 ? "-" : f2.ToString("F0"), f3 < 0 ? "-" : f3.ToString("F0"));
+            ToolTip.SetTip(cardFore, Lang.T("Riflessioni all'ora previste sulla banda scelta, ottenute traslando i conteggi del radar di Collm con le regole di SM6FHZ. Serve il dato del radar (Live e dati real-time › Flusso radar). È indipendente dalla geometria della tratta."));
             ChartSeries ix = new ChartSeries(); ix.Name = Lang.T("indice tratta"); ix.Color = Pal.Ink(Pal.Rgb(90, 110, 200)); ix.Values = index; ix.Bars = true; ix.RightAxis = true;
             chart24.Series.Insert(0, ix);
             chart24.Title = Lang.F("Efficienza oraria per {0} del {1} (UTC, valori a metà ora)", PathLabel(), day.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
@@ -1558,7 +1676,10 @@ namespace YAMS
             }
             sb.Append("\n");
             head(Lang.T("LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)"));
-            line(Lang.F("Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km", model.MinElevDeg, model.HotRadiusKm));
+            if (PathModel.LobePattern)
+                line(Lang.F("Portata alla quota delle scie fino all'orizzonte: {0:F0} km. Lobo d'antenna con il massimo a {1:F1}° e larghezza verticale {2:F0}° a -3 dB: i punti fuori dal lobo pesano meno, quelli sotto il massimo scendono a zero all'orizzonte",
+                    model.HotRadiusKm, model.MinElevDeg, PathModel.VerticalHpbwDeg));
+            else line(Lang.F("Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km", model.MinElevDeg, model.HotRadiusKm));
             if (model.LimitA != null)
             {
                 foreach (HotPoint h in new HotPoint[] { model.LimitA, model.LimitB })
@@ -1925,7 +2046,8 @@ namespace YAMS
             {
                 if (IsRealTime) UpdateSky();
                 else if (now.Minute % 15 == 0) UpdateSky();   // la data scelta segue l'ora attuale
-                if (now.Minute == 0 && (dtDay.SelectedDate ?? now).Date == now.AddMinutes(-1).Date) dtDay.SelectedDate = now.Date;
+                // a mezzanotte la data del calcolo segue il giorno nuovo, se era quella di oggi
+                if (now.Minute == 0 && (dtCalc.SelectedDate ?? now).Date == now.AddMinutes(-1).Date) dtCalc.SelectedDate = now.Date;
                 if (now.Minute == 0 && now.Hour == 0) UpdateShowerGrid();   // nuovo giorno: aggiorna i prossimi massimi
             }
             if (chkAuto.IsChecked == true && !fetching && (now - lastFetchUtc).TotalMinutes >= 5)
@@ -1957,6 +2079,7 @@ namespace YAMS
             cfg.Set("hot_spot_auto", chkHotAuto.IsChecked == true);
             if (chkTrailLen != null) cfg.Set("lunghezza_scie", chkTrailLen.IsChecked == true);
             if (chkBeta != null) cfg.Set("angolo_beta", chkBeta.IsChecked == true);
+            if (chkLobe != null) cfg.Set("lobo_diagramma", chkLobe.IsChecked == true);
             cfg.Set("carattere_pct", Math.Round(sldFont.Value / 10) * 10);
             cfg.Set("lingua", Lang.Code);
             cfg.Set("tema", Tema.Chiave);

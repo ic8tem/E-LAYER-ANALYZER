@@ -74,6 +74,28 @@ namespace YAMS
         public bool Valid;
         public string Message = "";
 
+        // Lobo verticale dell'antenna (IC8TEM): una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra
+        // l'orizzonte (riflessione sul terreno) e irradia, con meno guadagno, anche sopra e sotto. Con LobePattern = true
+        // l'"Elevazione lobo" e' il massimo del lobo: i punti di riflessione pesano con il diagramma verticale di ciascuna
+        // stazione (spazio libero con larghezza VerticalHpbwDeg a -3 dB, dalla curva DL6WU/Kraus; sotto il massimo il
+        // fattore del terreno sin^2(pi/2 * sin e / sin e0) scende a zero all'orizzonte). Con LobePattern = false
+        // l'elevazione del lobo e' un limite netto: i punti sotto non contano (calcolo fino alla 1.8.0).
+        public static bool LobePattern = true;
+        public static double VerticalHpbwDeg = 30;
+
+        public static double LobeGain(double elDeg, double lobeDeg)
+        {
+            if (elDeg < 0) return 0;
+            double h = Math.Max(5, VerticalHpbwDeg);
+            double g = Math.Max(0.01, Math.Pow(10, -1.2 * (elDeg / h) * (elDeg / h)));   // spazio libero, antenna orizzontale; fondo -20 dB
+            if (lobeDeg > 0.05 && elDeg < lobeDeg)
+            {
+                double x = Math.Sin(Math.PI / 2 * Math.Sin(elDeg * Astro.D2R) / Math.Sin(lobeDeg * Astro.D2R));
+                g *= x * x;
+            }
+            return g;
+        }
+
         // campo di efficienza in funzione della direzione del radiante (riferimento: punto medio)
         public const double AzStep = 5.0, ElStep = 2.5;
         public int NAz = 72, NEl = 37;
@@ -104,7 +126,7 @@ namespace YAMS
 
         void ComputeHot()
         {
-            HotRadiusKm = MsGeometry.LayerRangeKm(LayerKm, MinElevDeg, HomeAltKm);
+            HotRadiusKm = MsGeometry.LayerRangeKm(LayerKm, LobePattern ? 0 : MinElevDeg, HomeAltKm);
             // Hot spot classici: a HotSpotOffsetKm ai lati del punto medio, perpendicolari alla tratta (A a sinistra, B a destra)
             double bMid = Astro.Bearing(Mid, Dx);
             HotOffsetKm = HotOffsetFor(DistKm);
@@ -156,7 +178,14 @@ namespace YAMS
                     double Ra = ra.Length, Rb = rb.Length;
                     double ea = Math.Asin(ra.Dot(ua) / Ra) / Astro.D2R;
                     double eb = Math.Asin(rb.Dot(ub) / Rb) / Astro.D2R;
-                    if (ea < MinElevDeg || eb < MinElevDeg) continue;
+                    double gl = 1;
+                    if (LobePattern)
+                    {
+                        if (ea < 0 || eb < 0) continue;   // oltre l'orizzonte geometrico
+                        gl = LobeGain(ea, MinElevDeg) * LobeGain(eb, MinElevDeg);
+                        if (gl < 1e-6) continue;
+                    }
+                    else if (ea < MinElevDeg || eb < MinElevDeg) continue;
                     Vec3 na = ra * (-1.0 / Ra), nb = rb * (-1.0 / Rb);
                     Vec3 n = (na + nb).Unit;
                     double phi = Math.Acos(Math.Max(-1, Math.Min(1, na.Dot(nb)))) / 2.0;
@@ -164,8 +193,8 @@ namespace YAMS
                     double cp = Math.Cos(phi);
                     Sample s = new Sample();
                     s.Up = P.Unit; s.N = n; s.P = P; s.Ll = p;
-                    s.W = 1e9 / (Ra * Rb * (Ra + Rb) * cp * cp);
-                    s.Wb = 1e9 / (Ra * Rb * (Ra + Rb)); s.S2 = 1 - cp * cp;
+                    s.W = gl * 1e9 / (Ra * Rb * (Ra + Rb) * cp * cp);
+                    s.Wb = gl * 1e9 / (Ra * Rb * (Ra + Rb)); s.S2 = 1 - cp * cp;
                     Vec3 pn = na.Cross(nb); double pl = pn.Length;
                     s.Pn = pl > 1e-12 ? pn * (1.0 / pl) : n;
                     s.Left = v < 0;
@@ -273,13 +302,13 @@ namespace YAMS
         static double refRaw = double.NaN; static string refKey = "";
         double ReferenceRaw()
         {
-            string key = LayerKm.ToString("F2") + "|" + MinElevDeg.ToString("F2") + "|" + TrailLength + "|" + BetaFactor;
+            string key = LayerKm.ToString("F2") + "|" + MinElevDeg.ToString("F2") + "|" + TrailLength + "|" + BetaFactor + "|" + LobePattern + "|" + VerticalHpbwDeg.ToString("F1");
             if (refKey == key && !double.IsNaN(refRaw)) return refRaw;
             PathModel r = new PathModel();
             r.Home = new LatLon(-4.4966, 0); r.Dx = new LatLon(4.4966, 0); r.HomeAltKm = 0; r.DxAltKm = 0;
             r.LayerKm = LayerKm; r.MinElevDeg = MinElevDeg; r.DistKm = Astro.DistanceKm(r.Home, r.Dx);
             r.BearingHomeToDx = Astro.Bearing(r.Home, r.Dx); r.Mid = new LatLon(0, 0);
-            r.HotRadiusKm = MsGeometry.LayerRangeKm(LayerKm, MinElevDeg, 0);
+            r.HotRadiusKm = MsGeometry.LayerRangeKm(LayerKm, LobePattern ? 0 : MinElevDeg, 0);
             r.BuildSamples();
             double best = 1e-30, l;
             for (double el = 1; el <= 90; el += 1)

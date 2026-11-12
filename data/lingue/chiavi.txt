@@ -25,6 +25,7 @@ ADESSO
 ADIF: {0} ({1} quadrati-QSO)
 ALTRI RIFERIMENTI DELL'ARTICOLO
 ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)
+ATTENZIONE
 ATTENZIONE: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.
@@ -37,6 +38,7 @@ Aggiornamento installato
 Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.
 Aggiungi
 Alcune modifiche si vedono solo dopo aver riavviato il programma.
+Anche con il lobo a 0° non basta: servono scie ad almeno {0:F0} km.
 Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.
 Andromedidi
 Angolo β tra scia e tratta (McKinley completo)
@@ -80,6 +82,7 @@ Calcolo previsionale
 Camelopardalidi di ottobre
 Cancella memoria
 Cancellare tutti i quadrati caricati dal file ADIF?
+Capitoli: installazione, finestra, stazione e tratta, calcolo previsionale, geometria, efficienza, previsioni, dati in diretta, sciami, mappa quadrati, documenti, cartella data, procedure, problemi
 Capitoli: introduzione, strato E, geometria, radiante, riflessione, efficienza, lettura dei risultati, frequenza, limiti, fonti
 Carattere
 Carica file ADIF...
@@ -99,6 +102,7 @@ Comae Berenicidi
 Comandi
 Come DJ5HG
 Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².
+Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.
 Commento
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB
 Connessione a {0}...
@@ -142,19 +146,19 @@ Documento Word
 Documento esportato: {0}
 Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.
 Draconidi di ottobre
-Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.\nQuanto pesa: è la scelta che cambia di più i risultati. Su JN70CN – JO76QP (1791 km), Geminidi del 14/12/2026, l'efficienza massima passa dal 98 % (spenta) al 13 % (accesa), un fattore 7. Gli altri affinamenti sono molto più piccoli: raggio iniziale e durata dei ping valgono pochi dB e solo sopra 144 MHz, il diagramma d'antenna conta sulle tratte vicine al limite dell'orizzonte, la quota delle scie varia di ±7 km da un'ora all'altra. Le ore migliori e il lato restano invece quasi gli stessi con le due scelte.
 Durata dei ping tra le bande
 Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}
 Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.
 E
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO
 Effic. %
-Efficienza - spiegazione
 Efficienza oraria per {0} del {1} (UTC, valori a metà ora)
 Efficienza tratta GRAVES → te
 Elev.
 Elevazione d'antenna in funzione della distanza dallo scatter point
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)
+Elevazione del massimo del lobo verticale dell'antenna. Una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra l'orizzonte, per la riflessione sul terreno (di solito 3-8°, secondo l'altezza dell'antenna in lunghezze d'onda).\nCon "diagramma d'antenna" acceso questo valore è il massimo del lobo: i punti sotto pesano sempre meno fino a zero all'orizzonte, quelli sopra seguono il lobo verticale calcolato dal boom. Con la casella spenta è un limite netto: i punti sotto non contano.
 Elevazione lobo °
 Errore all'avvio: {0}
 Errore: {0}
@@ -198,7 +202,6 @@ GMN oggi
 GRAVES in linea diretta: az {0:F0}°
 Geminidi
 Geometria e attenuazione
-Giorno per la tabella 24 h (UTC)
 Giudizio
 Giudizio classico
 Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).
@@ -250,8 +253,11 @@ John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 
 Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello
 L'aggiornamento non è riuscito: {0}
+L'indice della tratta nell'ora attuale, il lato prevalente e l'Hot consigliato. Compare solo se il giorno scelto è oggi.
+L'ora del giorno scelto con l'indice della tratta più alto (somma di ZHR × efficienza di tutti gli sciami attivi) e il lato della tratta da cui arriva la maggior parte delle riflessioni.
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)
+La formula di DH9GCD (righe azzurre) non tiene conto dell'orizzonte né del lobo, per questo dà valori anche qui.
 La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.
 La riga non è uno spot "DX de ..." valido.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.
@@ -271,12 +277,14 @@ Lincidi di settembre
 Lingua dell'interfaccia
 Liridi
 Live e dati real-time
+Lo sciame che dà il contributo più alto (ZHR × efficienza) nel giorno scelto, con l'ora, il lato e le due direzioni d'antenna migliori.
 Loc DX
 Loc spotter
 Locator del corrispondente non valido
 Locator della stazione non valido
 Manca il nominativo per il login
 Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?
+Manuale d'uso
 Mappa d'Europa
 Mappa d'Europa non disponibile (serve la rete al primo avvio).
 Mappa dei radar europei
@@ -293,10 +301,14 @@ Mondo
 Monocerotidi di dicembre
 N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.
+NESSUNA ZONA COMUNE: con le scie a {0:F1} km e il lobo d'antenna a {1:F1}° ogni stazione vede lo strato fino a {2:F0} km, ma il punto medio della tratta ({3:F0} km) è a {4:F0} km. Il calcolo tiene solo i punti visti da entrambe le stazioni almeno a quell'elevazione: qui non ce n'è nessuno, quindi tutte le efficienze valgono 0.
+NESSUNA ZONA COMUNE: con le scie a {0:F1} km ogni stazione vede lo strato solo fino all'orizzonte, a {1:F0} km, ma il punto medio della tratta ({2:F0} km) è a {3:F0} km. Nessun punto di riflessione è visibile da entrambe le stazioni, quindi tutte le efficienze valgono 0.
+NOTA
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)
 Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB
 Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.
 Nero
+Nessun Hot consigliato: le due stazioni non vedono una zona comune dello strato (vedi l'avviso)
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento
 Nessun dato GMN: premi "Scarica adesso".
 Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.
@@ -333,6 +345,7 @@ Orionidi
 Orionidi di novembre
 Osservatore RMOB
 PREVISIONE SPERIMENTALE
+PROCEDURA
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA
 PSKReporter MQTT
 Passo
@@ -345,6 +358,8 @@ Pastello marrone
 Pastello rosa
 Pastello verde
 Pegasidi di luglio
+Per avere un calcolo: elevazione del lobo di {0:F1}° o meno, oppure scie ad almeno {1:F0} km.
+Per avere un calcolo: elevazione del lobo di {0:F1}° o meno.
 Perseidi
 Personalizzata
 Phoenicidi
@@ -353,6 +368,7 @@ Piscidi di aprile diurne
 Più tardi
 Porta
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km
+Portata alla quota delle scie fino all'orizzonte: {0:F0} km. Lobo d'antenna con il massimo a {1:F1}° e larghezza verticale {2:F0}° a -3 dB: i punti fuori dal lobo pesano meno, quelli sotto il massimo scendono a zero all'orizzonte
 Potenza W
 Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)
 Previsione /ora
@@ -408,6 +424,7 @@ Ricevitore
 Riconnessione tra {0} s
 Riconnetti
 Riepilogo dell'anno (ZHR misurati, GMN)
+Riflessioni all'ora previste sulla banda scelta, ottenute traslando i conteggi del radar di Collm con le regole di SM6FHZ. Serve il dato del radar (Live e dati real-time › Flusso radar). È indipendente dalla geometria della tratta.
 Riga {0} ignorata (colonne insufficienti)
 Riga {0}: {1}
 Riporta il momento del calcolo al tempo reale
@@ -446,6 +463,7 @@ Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOM
 Scrivi il nominativo per il login prima di connettere.
 Segnale minimo dBm
 Sequenza del fascio
+Servono scie ad almeno {0:F0} km.
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.
 Sextantidi diurne
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)
@@ -454,6 +472,7 @@ Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti d
 Sorge
 Sorgente Antielio
 Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.
+Spiegazione del calcolo dell'efficienza
 Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.
 Spot MS raccolti
 Spot da mostrare
@@ -539,6 +558,7 @@ corrispondente
 dal radar
 dati CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud
+diagramma d'antenna
 doppio dell'ITU (Stober 2021, prudente)
 eco
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)
@@ -576,6 +596,7 @@ k dagli indici di popolazione
 kappa-Cygnidi
 kappa-Leonidi diurne
 la mia stazione
+la scelta che pesa di più
 la tua stazione
 lato prevalente {0} ({1:F0}%)
 lavorato
@@ -602,6 +623,9 @@ nessun ADIF caricato
 nessun dato radar: vedi Live e dati real-time › Flusso radar
 nessun file RMOB caricato
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
+nessun valore: i {0} sciami attivi hanno per tutto il giorno il radiante sotto l'orizzonte o in posizione sfavorevole per questa tratta (efficienza sotto l'1 %)
+nessun valore: in questo giorno non c'è nessuno sciame attivo con ZHR di almeno 1 (catalogo IMO)
+nessun valore: le due stazioni non vedono una zona comune dello strato E (vedi l'avviso qui sotto)
 nessuna rete attiva
 nessuno sciame utile adesso: hot spot più adatto al fascio
 nessuno sciame utile in questo giorno

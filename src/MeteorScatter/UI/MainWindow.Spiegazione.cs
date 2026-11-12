@@ -1,4 +1,4 @@
-// YA-MS - linguetta "Efficienza - spiegazione" e caricamento della mappa
+// YA-MS - linguetta "Spiegazione del calcolo dell'efficienza" e caricamento della mappa
 // Il documento sta in data/efficienza_spiegazione.txt (un blocco per riga: TITLE, SUB, H1, H2, P, TAG|FONTE|..., TAG|RILIEVO|...,
 // TAG|SCELTA|..., EQ, LI, SRC) ed e' mostrato come un foglio chiaro; la versione per Word e' data/efficienza_spiegazione.docx.
 using System;
@@ -32,10 +32,25 @@ namespace YAMS
 
         void BuildExplainTab()
         {
-            DockPanel p = Page(Lang.T("Efficienza - spiegazione"));
-            string docx = ExplainFile("docx");
+            explainSheet = BuildDocTab(Lang.T("Spiegazione del calcolo dell'efficienza"), "efficienza_spiegazione", "spiegazione",
+                "YA-MS - calcolo dell'efficienza.docx",
+                Lang.T("Capitoli: introduzione, strato E, geometria, radiante, riflessione, efficienza, lettura dei risultati, frequenza, limiti, fonti"));
+        }
+
+        // Manuale d'uso (data/manuale_uso.txt e .docx, tradotti in data/manuale_uso/), stessa formattazione della spiegazione
+        void BuildManualTab()
+        {
+            manualSheet = BuildDocTab(Lang.T("Manuale d'uso"), "manuale_uso", "manuale_uso", "YA-MS - manuale d'uso.docx",
+                Lang.T("Capitoli: installazione, finestra, stazione e tratta, calcolo previsionale, geometria, efficienza, previsioni, dati in diretta, sciami, mappa quadrati, documenti, cartella data, procedure, problemi"));
+        }
+
+        // Linguetta con un documento: pulsanti di esportazione e foglio chiaro centrato
+        Border BuildDocTab(string title, string baseName, string subDir, string exportName, string chapters)
+        {
+            DockPanel p = Page(title);
+            string docx = DocFile(baseName, subDir, "docx");
             Button bExport = B(Lang.T("Esporta in Word (.docx)..."));
-            bExport.Click += async (s, e) => await ExportDocx(docx);
+            bExport.Click += async (s, e) => await ExportDocx(docx, exportName);
             Button bOpen = B(Lang.T("Apri in Word"));
             bOpen.Click += async (s, e) =>
             {
@@ -46,18 +61,17 @@ namespace YAMS
                 }
                 catch (Exception ex) { await Dialogs.Message(Win, Lang.T("Apri in Word"), Lang.F("Non riesco ad aprire il documento: {0}", ex.Message)); }
             };
-            DockTop(p, Row(bExport, bOpen,
-                L(Lang.T("Capitoli: introduzione, strato E, geometria, radiante, riflessione, efficienza, lettura dei risultati, frequenza, limiti, fonti"))));
+            DockTop(p, Row(bExport, bOpen, L(chapters)));
 
             // aspetto "pagina": foglio chiaro centrato, larghezza massima 860 px, ombra, sul fondo dello schema (Pal.Desk)
             StackPanel doc = new StackPanel();
-            FillExplain(doc, ExplainFile("txt"));
+            FillExplain(doc, DocFile(baseName, subDir, "txt"));
             Border sheet = new Border
             {
                 Background = Brushes.White,
                 BorderBrush = Pal.B(Pal.Rgb(200, 200, 210)),
                 BorderThickness = new Thickness(1),
-                MaxWidth = 860,
+                MaxWidth = 860 * Math.Min(2.0, UiScale.Font),
                 HorizontalAlignment = HorizontalAlignment.Stretch,   // con MaxWidth il foglio resta centrato
                 Padding = new Thickness(56, 40, 40, 32),
                 Margin = new Thickness(20, 16, 20, 24),
@@ -72,9 +86,10 @@ namespace YAMS
                 Content = sheet
             };
             p.Children.Add(sv);
-            explainSheet = sheet;
+            return sheet;
         }
 
+        Border manualSheet;
         Border explainSheet;   // foglio del documento: piu' largo con il carattere ingrandito (ApplyFontScale)
 
         static SelectableTextBlock DocText(string text, double size, Color c, FontWeight w, FontStyle st, Thickness margin)
@@ -142,7 +157,7 @@ namespace YAMS
                             int b2 = text.IndexOf('|');
                             string tag = b2 > 0 ? text.Substring(0, b2).Trim().ToUpperInvariant() : "FONTE";
                             string body = b2 > 0 ? text.Substring(b2 + 1) : text;
-                            Color tc = tag == "RILIEVO" ? TagRilievo : tag == "SCELTA" ? TagScelta : TagFonte;
+                            Color tc = tag == "RILIEVO" || tag == "NOTA" ? TagRilievo : tag == "SCELTA" || tag == "ATTENZIONE" ? TagScelta : TagFonte;   // PROCEDURA come FONTE
                             Border pill = new Border
                             {
                                 Background = Pal.B(tc),
@@ -224,18 +239,18 @@ namespace YAMS
         }
 
         // documento nella lingua dell'interfaccia (data/spiegazione/efficienza_spiegazione_<codice>.<ext>), altrimenti quello italiano
-        string ExplainFile(string ext)
+        string DocFile(string baseName, string subDir, string ext)
         {
             if (Lang.Code != "it")
             {
-                string f = Path.Combine(dataDir, "spiegazione", "efficienza_spiegazione_" + Lang.Code + "." + ext);
+                string f = Path.Combine(dataDir, subDir, baseName + "_" + Lang.Code + "." + ext);
                 if (File.Exists(f)) return f;
             }
-            return Path.Combine(dataDir, "efficienza_spiegazione." + ext);
+            return Path.Combine(dataDir, baseName + "." + ext);
         }
 
         // Copia il documento .docx dove sceglie l'utente
-        async Task ExportDocx(string docx)
+        async Task ExportDocx(string docx, string suggested)
         {
             try
             {
@@ -243,7 +258,7 @@ namespace YAMS
                 IStorageFile f = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
                 {
                     Title = Lang.T("Esporta il documento in Word"),
-                    SuggestedFileName = "YA-MS - calcolo dell'efficienza.docx",
+                    SuggestedFileName = suggested,
                     DefaultExtension = "docx",
                     FileTypeChoices = new[] { new FilePickerFileType(Lang.T("Documento Word")) { Patterns = new[] { "*.docx" } } }
                 });
