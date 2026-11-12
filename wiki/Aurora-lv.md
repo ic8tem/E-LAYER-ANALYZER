@@ -10,6 +10,7 @@
 - Piemērs IO70VJ - JO59BC: scatter point JP01AK pie Šetlendas salām, novirze 0,97°, QTF 11° un 299°.
 - **Auroras spoti kartē**: spoti ar **<AU>** vai **<AUR>** tekstā ir auroras spoti (autora likums). Ja atzīmēta rūtiņa *<AU>/<AUR> spoti kartē ar aprēķinu*, cilne attēlo pēdējo 2 stundu spotus (ne vairāk kā 30): katram spotera-DX pārim tā aprēķina scatter trail un parāda varbūtīgāko scatter point (oranžs aplis), rezultātos norādot abu staciju QTF un elevāciju.
 - Papildus varbūtīgākajam scatter point rezultātos norādīts abu staciju **QTF intervāls** visā Scatter trail garumā (novirze ≤ 1,5°).
+- **Lange-Hesse logs**: scatter point vēlams 370-1100 km attālumā no katras stacijas – logā, ko Lange-Hesse aprēķināja pie 54° ģeomagnētiskā platuma. Kopš versijas 0.4.5 logs nobīdās atbilstoši katras stacijas IGRF-14 inklinācijai: tuvāk dienvidos esošām stacijām, tālāk ziemeļos esošām (piem., Kapri ap 260-990 km, Oslo 470-1200 km). Rezultātos norādīts abu staciju logs.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ Cilnei AURORA ir divas apakšcilnes: **REAL-TIME** (iepriekš aprakstītais apr�
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Katram QSO programma aprēķina scatter point ar to pašu modeli (IGRF-14, augstums 110 km, refrakcija 4/3, pielaide 3°).
-- Krāsas: **zaļš** = scatter point 370-1100 km no abām stacijām (Lange-Hesse); **dzeltens** = izskaidrots, bet ārpus šī loga; **oranžs** = QSO virs 2000 km; **sarkans** = nav scatter point, modelis QSO neizskaidro.
-- Kopsavilkums dod procentus un katram žurnālam aprēķinātā QTF intervālu un mediānu. Klikšķis uz rindas uzzīmē trasi un abus antenu virzienus.
-- Rezultāts (versija 0.4.4): **izskaidroti 296 no 298 QSO (99%)**, 243 (82%) 370-1100 km logā; EI5FK QTF mediāna no 25° līdz 41°, t.i., G3WPO ieteiktie ziemeļaustrumi. Žurnālos antenu virziens nav norādīts: pārbauda ģeometriju, nevis QTF.
+- Krāsas: **zaļš** = scatter point abu staciju Lange-Hesse logā; **dzeltens** = izskaidrots, bet ārpus šī loga; **oranžs** = QSO virs 2000 km; **sarkans** = nav scatter point, modelis QSO neizskaidro.
+- Kopsavilkums dod procentus, arī ar fiksēto 370-1100 km logu salīdzinājumam, un katram žurnālam aprēķinātā QTF intervālu un mediānu. Klikšķis uz rindas uzzīmē trasi un abus antenu virzienus.
+- Rezultāts (versija 0.4.4): **izskaidroti 296 no 298 QSO (99%)**, 243 (82%) 370-1100 km logā; EI5FK QTF mediāna no 25° līdz 41°, t.i., G3WPO ieteiktie ziemeļaustrumi. Žurnālos antenu virziens nav norādīts: pārbauda ģeometriju, nevis QTF. Ar slīdošo logu (versija 0.4.5) rezultāts ir tāds pats, 243 QSO (82%), kā ar fiksēto logu: pārbaudes stenda stacijām (Īrija, Lielbritānija, Nīderlande, Vācija) inklinācija ir 66-70°, tuva Lange-Hesse atskaites punktam (EI5FK logs 350-1080 km); atšķirība attiecas uz stacijām tālāk uz dienvidiem vai ziemeļiem, kurām pārbaudes stendā nav QSO.

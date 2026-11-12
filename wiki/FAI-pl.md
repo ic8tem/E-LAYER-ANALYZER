@@ -32,6 +32,11 @@ To konstrukcja geometryczna służąca do **sprawdzenia, czy punkt odbicia jest 
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (nad Genuą) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (płd.-zach. Niemcy, 28 km od Brukseli) | 0,88° | 338° / 87° |
-| DB0FAI - Drezno przez Sheffield (DL5MCG) | – | 0,3° | – |
+| Radiolatarnia DB0FAI (305°) - Drezno przez Sheffield (DL5MCG; Drezno kierowało antenę na 290° i zgłosiło zorzę) | – | 0,3° | – |
+| DL5MCG - SV1DH (test z 1987 przez Budapeszt, 1569 km) | Budapeszt na śladzie; komórki poniżej 1° od 35 km | 2,16° | 95° / 341° |
 
 Znane scatter pointy na liście: Genewa, Bruksela, Budapeszt, JN92, JN41/42.
+
+Menu **Weryfikacje...** wczytuje pary testowe IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE i DL5MCG-SV1DH.
+
+**Wyposażenie** (DL5MCG): F.A.I. na 144 MHz wymaga co najmniej długiej yagi i 100 W (z SV1DH nawiązano łączność także przy 8-elementowej yagi i 50 W). Kieruj antenę na scatter point wskazany przez program, a nie na drugą stację.

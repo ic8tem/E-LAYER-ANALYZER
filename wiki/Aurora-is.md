@@ -10,6 +10,7 @@
 - Dæmi IO70VJ - JO59BC: scatter point JP01AK undan Hjaltlandi, frávik 0,97°, QTF 11° og 299°.
 - **Norðurljósa-spot á kortinu**: spot með **<AU>** eða **<AUR>** í textanum eru norðurljósa-spot (regla höfundar). Þegar hakað er við reitinn *<AU>/<AUR>-spot á kortinu með útreikningi* teiknar flipinn spot síðustu 2 klukkustunda (í mesta lagi 30): fyrir hvert par spottara og DX reiknar hann scatter trail og sýnir líklegasta scatter point (appelsínugulur hringur), með QTF og hæðarhorni beggja stöðva í niðurstöðunum.
 - Auk líklegasta scatter point sýna niðurstöðurnar **QTF-bil** beggja stöðva eftir öllum Scatter trail (frávik ≤ 1,5°).
+- **Gluggi Lange-Hesse**: scatter point er helst valinn innan 370-1100 km frá hvorri stöð, glugganum sem Lange-Hesse reiknaði við 54° segulbreidd. Frá útgáfu 0.4.5 hliðrast glugginn eftir segulhalla IGRF-14 hvorrar stöðvar: nær fyrir stöðvar sunnar, fjær fyrir stöðvar norðar (t.d. Capri um 260-990 km, Ósló 470-1200 km). Niðurstöðurnar sýna glugga beggja stöðva.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ Flipinn AURORA hefur tvo undirflipa: **REAL-TIME** (útreikninginn sem lýst er 
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Fyrir hvert QSO reiknar forritið scatter point með sama líkani (IGRF-14, hæð 110 km, ljósbrot 4/3, vikmörk 3°).
-- Litir: **grænt** = scatter point í 370-1100 km fjarlægð frá báðum stöðvum (Lange-Hesse); **gult** = skýrt en utan þess glugga; **appelsínugult** = QSO lengra en 2000 km; **rautt** = enginn scatter point, QSO ekki skýrt af líkaninu.
-- Samantektin gefur hlutföllin í prósentum og, fyrir hverja dagbók, bil og miðgildi reiknaðs QTF. Smelltu á línu til að teikna leiðina og báðar miðanirnar.
-- Niðurstaða (útgáfa 0.4.4): **296 af 298 QSO skýrð (99%)**, 243 (82%) innan 370-1100 km gluggans; miðgildi QTF hjá EI5FK milli 25° og 41°, þ.e. norðaustrið sem G3WPO leggur til. Dagbækurnar gefa ekki upp miðunina: prófunin snýr að rúmfræðinni, ekki að QTF.
+- Litir: **grænt** = scatter point innan glugga Lange-Hesse beggja stöðva; **gult** = skýrt en utan þess glugga; **appelsínugult** = QSO lengra en 2000 km; **rautt** = enginn scatter point, QSO ekki skýrt af líkaninu.
+- Samantektin gefur hlutföllin í prósentum, einnig með fasta glugganum 370-1100 km til samanburðar, og, fyrir hverja dagbók, bil og miðgildi reiknaðs QTF. Smelltu á línu til að teikna leiðina og báðar miðanirnar.
+- Niðurstaða (útgáfa 0.4.4): **296 af 298 QSO skýrð (99%)**, 243 (82%) innan 370-1100 km gluggans; miðgildi QTF hjá EI5FK milli 25° og 41°, þ.e. norðaustrið sem G3WPO leggur til. Dagbækurnar gefa ekki upp miðunina: prófunin snýr að rúmfræðinni, ekki að QTF. Með hreyfanlega glugganum (útgáfa 0.4.5) er niðurstaðan sú sama, 243 QSO (82%), og með fasta glugganum: stöðvar prófunarbekksins (Írland, Bretland, Holland, Þýskaland) hafa segulhalla 66-70°, nálægt viðmiðun Lange-Hesse (gluggi EI5FK 350-1080 km); munurinn varðar stöðvar sunnar eða norðar, sem prófunarbekkurinn hefur engin QSO fyrir.

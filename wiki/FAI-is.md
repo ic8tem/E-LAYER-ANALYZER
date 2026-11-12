@@ -32,6 +32,11 @@ F.A.I. (Field Aligned Irregularities) er dreifing frá óreglum sem raðast efti
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (yfir Genúa) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (suðvestur-Þýskaland, 28 km frá Brussel) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden um Sheffield (DL5MCG) | – | 0,3° | – |
+| Viti DB0FAI (305°) - Dresden um Sheffield (DL5MCG; Dresden beindi loftnetinu á 290° og tilkynnti norðurljós) | – | 0,3° | – |
+| DL5MCG - SV1DH (prófun 1987 um Búdapest, 1569 km) | Búdapest á slóðinni; reitir undir 1° frá 35 km | 2,16° | 95° / 341° |
 
 Þekktir scatter point á listanum: Genf, Brussel, Búdapest, JN92, JN41/42.
+
+Valmyndin **Prófanir...** hleður prófunarpörunum IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE og DL5MCG-SV1DH.
+
+**Búnaður** (DL5MCG): F.A.I. á 144 MHz krefst a.m.k. langs yagi-loftnets og 100 W (SV1DH var einnig unninn með 8 staka yagi-loftneti og 50 W). Beindu loftnetinu að scatter point sem forritið gefur upp, ekki að hinni stöðinni.

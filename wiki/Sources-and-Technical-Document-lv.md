@@ -2,7 +2,7 @@
 
 [← Home](Home-lv)
 
-- Cilne **AVOTI** uzskaita visus avotus, numurētus [1]-[63].
+- Cilne **AVOTI** uzskaita visus avotus, numurētus [1]-[64].
 - Cilne **APRĒĶINU IZVĒĻU KOPSAVILKUMS** (agrāk *Tehniskais dokuments*) izskaidro katru aprēķinu ar formulām un etiķetēm **AVOTS** (solis ņemts no avota), **PĀRBAUDE** (pārbaudīts programmā vai reālā gadījumā) un **IZVĒLE** (programmas izdarīta izvēle, kas jāapstiprina ēterā).
 - Cilne **LIETOŠANAS ROKASGRĀMATA** ir padziļināta programmas lietošanas rokasgrāmata, cilni pa cilnei.
 - Cilne **TEHNISKAIS ZIŅOJUMS** izklāsta izvēles, kas noveda pie programmas izstrādes: arhitektūra, fizikālie modeļi, datu atpazīšana, pārbaudes, ierobežojumi un turpmākā attīstība.

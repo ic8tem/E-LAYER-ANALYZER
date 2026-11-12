@@ -32,6 +32,11 @@ See on geomeetriline konstruktsioon, millega **kontrollitakse, kas peegelduspunk
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (Genova kohal) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Edela-Saksamaa, Brüsselist 28 km) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden üle Sheffieldi (DL5MCG) | – | 0,3° | – |
+| Majakas DB0FAI (305°) - Dresden üle Sheffieldi (DL5MCG; Dresdeni antenn oli suunatud 290° ja vastuvõttu kirjeldati kui aurorat) | – | 0,3° | – |
+| DL5MCG - SV1DH (1987. aasta test läbi Budapesti, 1569 km) | Budapest jäljel; alla 1° lahtrid alates 35 km-st | 2,16° | 95° / 341° |
 
 Loendis olevad teadaolevad hajumispunktid: Genf, Brüssel, Budapest, JN92, JN41/42.
+
+Menüü **Kontrollid...** laadib testpaarid IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE ja DL5MCG-SV1DH.
+
+**Varustus** (DL5MCG): F.A.I. jaoks 144 MHz-l on vaja vähemalt pikka yagi't ja 100 W (SV1DH-ga saadi side ka 8-elemendilise yagi ja 50 W-ga). Suuna antenn programmi näidatud hajumispunktile, mitte teisele jaamale.

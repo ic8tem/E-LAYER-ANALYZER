@@ -32,6 +32,11 @@ Tai geometrinė konstrukcija, naudojama **patikrinti, ar atspindžio taškas tei
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (virš Genujos) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (pietvakarių Vokietija, 28 km nuo Briuselio) | 0,88° | 338° / 87° |
-| DB0FAI - Drezdenas per Šefildą (DL5MCG) | – | 0,3° | – |
+| Švyturys DB0FAI (305°) - Drezdenas per Šefildą (DL5MCG; Drezdenas buvo nukreipęs anteną 290° ir nurodė pašvaistę) | – | 0,3° | – |
+| DL5MCG - SV1DH (1987 m. bandymas per Budapeštą, 1569 km) | Budapeštas ant pėdsako; langeliai žemiau 1° nuo 35 km | 2,16° | 95° / 341° |
 
 Žinomi sklaidos taškai sąraše: Ženeva, Briuselis, Budapeštas, JN92, JN41/42.
+
+Meniu **Patikros...** įkelia bandomąsias poras IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE ir DL5MCG-SV1DH.
+
+**Įranga** (DL5MCG): F.A.I. 144 MHz juostoje reikia bent ilgos yagi ir 100 W (su SV1DH buvo dirbta ir su 8 elementų yagi bei 50 W). Nukreipkite anteną į programos nurodytą sklaidos tašką, o ne į kitą stotį.

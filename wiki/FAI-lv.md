@@ -32,6 +32,11 @@ Tā ir ģeometriska konstrukcija, ko izmanto, lai **pārbaudītu, vai atstaroša
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (virs Dženovas) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (DR Vācija, 28 km no Briseles) | 0,88° | 338° / 87° |
-| DB0FAI - Drēzdene caur Šefīldu (DL5MCG) | – | 0,3° | – |
+| Bāka DB0FAI (305°) - Drēzdene caur Šefīldu (DL5MCG; Drēzdene tēmēja uz 290° un pieteica auroru) | – | 0,3° | – |
+| DL5MCG - SV1DH (1987. gada tests caur Budapeštu, 1569 km) | Budapešta uz sliedes; šūnas zem 1° no 35 km | 2,16° | 95° / 341° |
 
 Sarakstā esošie zināmie scatter point: Ženēva, Brisele, Budapešta, JN92, JN41/42.
+
+Izvēlne **Pārbaudes...** ielādē testa pārus IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE un DL5MCG-SV1DH.
+
+**Aprīkojums** (DL5MCG): F.A.I. 144 MHz joslā vajag vismaz garu yagi un 100 W (ar SV1DH strādāja arī ar 8 elementu yagi un 50 W). Vērs antenu uz programmas norādīto scatter point, nevis uz otru staciju.
