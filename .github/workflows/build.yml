@@ -254,15 +254,19 @@ jobs:
             E-LAYER ANALYZER - analisi dei modi di propagazione dello strato E (E-sporadico, F.A.I., meteor scatter con YA-MS, aurora).
             A cura di Costantino IC8TEM.
 
-            Novità della 0.4.6: linguetta METEOR SCATTER con YA-MS 1.8.1 (lobo d'antenna come diagramma verticale, avviso "nessuna zona comune",
-            casella dell'angolo beta in evidenza, Manuale d'uso di YA-MS, confronto con spot reali MSQP 2025); documenti e wiki aggiornati in 36 lingue.
+            Novità della 0.4.7: nuovi pacchetti per Raspberry Pi OS a 32 bit (.deb armhf), Slackware ARM64 (.txz) e Linux armv7l (tar.gz);
+            manuale d'uso di YA-MS in 36 lingue nella linguetta METEOR SCATTER; manuale e wiki aggiornati in 36 lingue.
 
             - Windows 64 bit: E-LAYER-ANALYZER-...-win-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure ...-win-x64-portatile.zip.
             - Windows 32 bit: E-LAYER-ANALYZER-...-win-x86-setup.exe oppure ...-win-x86-portatile.zip.
             - Linux 64 bit: e-layer-analyzer_..._amd64.deb (sudo apt install ./e-layer-analyzer_..._amd64.deb) oppure ...-linux-x64-portatile.tar.gz.
-            - Raspberry Pi OS 64 bit: e-layer-analyzer_..._arm64.deb oppure ...-linux-arm64-portatile.tar.gz; Raspberry Pi OS 32 bit: ...-linux-arm-portatile.tar.gz.
+            - Raspberry Pi OS 64 bit: e-layer-analyzer_..._arm64.deb oppure ...-linux-arm64-portatile.tar.gz.
+            - Raspberry Pi OS 32 bit: e-layer-analyzer_..._armhf.deb oppure ...-linux-arm-portatile.tar.gz.
+            - Raspberry Pi con Slackware ARM64: da root installpkg e-layer-analyzer-...-aarch64-1_ic8tem.txz, poi si avvia e-layer-analyzer; oppure ...-linux-arm64-portatile.tar.gz.
+            - Linux armv7l (altre schede ARM a 32 bit): ...-linux-armv7l-portatile.tar.gz.
             - Portatili Linux: estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh per installare in ~/E-LAYER-ANALYZER con l'icona nel menu.
             - Con il .deb il programma si avvia dal menu: al primo avvio si copia in ~/E-LAYER-ANALYZER, con la cartella data accanto.
+            - Non disponibili: Linux i686 (PC a 32 bit, .NET non esiste per quel sistema) e FreeBSD (mancano le librerie grafiche di Avalonia).
             - Nessun dato in AppData: tutto sta nella cartella data accanto al programma.
             - Mac: E-LAYER-ANALYZER-...-osx-arm64.dmg (Apple Silicon M1-M4) o ...-osx-x64.dmg (Intel); aprire il .dmg, clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa ...-osx-arm64-app.zip / ...-osx-x64-app.zip con la sola applicazione.
           files: dist/*
