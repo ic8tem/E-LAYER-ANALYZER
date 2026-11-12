@@ -32,6 +32,11 @@ Il F.A.I. (Field Aligned Irregularities) è lo scatter da irregolarità allineat
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (sopra Genova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Germania SW, 28 km da Bruxelles) | 0,88° | 338° / 87° |
-| DB0FAI - Dresda via Sheffield (DL5MCG) | – | 0,3° | – |
+| Beacon DB0FAI (305°) - Dresda via Sheffield (DL5MCG; Dresda puntava a 290° e aveva dichiarato aurora) | – | 0,3° | – |
+| DL5MCG - SV1DH (test del 1987 via Budapest, 1569 km) | Budapest sulla scia; celle sotto 1° da 35 km | 2,16° | 95° / 341° |
 
 Scatter point noti nell'elenco: Ginevra, Bruxelles, Budapest, JN92, JN41/42.
+
+Il menu **Verifiche...** carica le coppie di prova IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE e DL5MCG-SV1DH.
+
+**Attrezzatura** (DL5MCG): il F.A.I. in 144 MHz richiede almeno una yagi lunga e 100 W (SV1DH è stato lavorato anche con una 8 elementi e 50 W). Punta l'antenna verso lo scatter point indicato dal programma, non verso il corrispondente.

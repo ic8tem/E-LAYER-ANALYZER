@@ -32,6 +32,11 @@ Das ist die geometrische Konstruktion, mit der **geprüft wird, ob ein Reflexion
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (über Genua) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Südwestdeutschland, 28 km von Brüssel) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden über Sheffield (DL5MCG) | – | 0,3° | – |
+| Bake DB0FAI (305°) - Dresden über Sheffield (DL5MCG; Dresden richtete auf 290° und meldete Aurora) | – | 0,3° | – |
+| DL5MCG - SV1DH (Test von 1987 über Budapest, 1569 km) | Budapest auf der Spur; Zellen unter 1° ab 35 km | 2,16° | 95° / 341° |
 
 Bekannte Streupunkte in der Liste: Genf, Brüssel, Budapest, JN92, JN41/42.
+
+Das Menü **Prüfungen...** lädt die Testpaare IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE und DL5MCG-SV1DH.
+
+**Ausrüstung** (DL5MCG): F.A.I. auf 144 MHz erfordert mindestens eine lange Yagi und 100 W (SV1DH wurde auch mit einer 8-Element-Yagi und 50 W gearbeitet). Richten Sie die Antenne auf den vom Programm angegebenen Streupunkt, nicht auf die Gegenstation.

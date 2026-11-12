@@ -32,6 +32,11 @@ C'est la construction géométrique qui sert à **vérifier si un point de réfl
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (au-dessus de Gênes) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (sud-ouest de l'Allemagne, à 28 km de Bruxelles) | 0,88° | 338° / 87° |
-| DB0FAI - Dresde via Sheffield (DL5MCG) | – | 0,3° | – |
+| Balise DB0FAI (305°) - Dresde via Sheffield (DL5MCG ; Dresde pointait à 290° et avait déclaré une aurore) | – | 0,3° | – |
+| DL5MCG - SV1DH (essai de 1987 via Budapest, 1569 km) | Budapest sur la traînée ; cellules sous 1° à partir de 35 km | 2,16° | 95° / 341° |
 
 Scatter points connus dans la liste : Genève, Bruxelles, Budapest, JN92, JN41/42.
+
+Le menu **Vérifications...** charge les paires d'essai IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE et DL5MCG-SV1DH.
+
+**Équipement** (DL5MCG) : le F.A.I. en 144 MHz demande au moins une yagi longue et 100 W (SV1DH a aussi été contacté avec une 8 éléments et 50 W). Pointez l'antenne vers le scatter point indiqué par le programme, non vers le correspondant.

@@ -10,6 +10,7 @@
 - Voorbeeld IO70VJ - JO59BC: scatterpunt JP01AK voor de Shetlandeilanden, afwijking 0,97°, QTF 11° en 299°.
 - **Aurora-spots op de kaart**: spots met **<AU>** of **<AUR>** in de tekst zijn aurora-spots (regel van de auteur). Met het vakje *<AU>/<AUR>-spots op de kaart met de berekening* aangevinkt, tekent het tabblad de spots van de laatste 2 uur (hooguit 30): voor elk paar spotter-DX berekent het de scatter trail en toont het het meest waarschijnlijke scatterpunt (oranje cirkel), met QTF en elevatie van beide stations in de resultaten.
 - Naast het meest waarschijnlijke scatterpunt vermelden de resultaten het **QTF-bereik** van beide stations langs het hele Scatter trail (afwijking ≤ 1,5°).
+- **Lange-Hesse-venster**: het scatterpunt krijgt de voorkeur binnen 370-1100 km van elk station, het venster dat Lange-Hesse berekende op 54° geomagnetische breedte. Vanaf versie 0.4.5 verschuift het venster met de IGRF-14-inclinatie van elk station: dichterbij voor stations verder naar het zuiden, verder weg voor stations verder naar het noorden (bijv. Capri ongeveer 260-990 km, Oslo 470-1200 km). De resultaten tonen het venster van beide stations.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ Het tabblad AURORA heeft twee subtabs: **REAL-TIME** (de hierboven beschreven be
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Voor elk QSO berekent het programma het scatterpunt met hetzelfde model (IGRF-14, hoogte 110 km, refractie 4/3, tolerantie 3°).
-- Kleuren: **groen** = scatterpunt op 370-1100 km van beide stations (Lange-Hesse); **geel** = verklaard maar buiten dat venster; **oranje** = QSO verder dan 2000 km; **rood** = geen scatterpunt, QSO niet verklaard door het model.
-- De samenvatting geeft de percentages en voor elk log het bereik en de mediaan van de berekende QTF. Klik op een rij om het traject en de twee antennerichtingen te tekenen.
-- Resultaat (versie 0.4.4): **296 van de 298 QSO's verklaard (99%)**, 243 (82%) binnen het venster van 370-1100 km; mediane QTF van EI5FK tussen 25° en 41°, dus het noordoosten dat G3WPO aanraadt. De logs vermelden de antennerichting niet: de controle gaat over de geometrie, niet over de QTF.
+- Kleuren: **groen** = scatterpunt binnen het Lange-Hesse-venster van beide stations; **geel** = verklaard maar buiten dat venster; **oranje** = QSO verder dan 2000 km; **rood** = geen scatterpunt, QSO niet verklaard door het model.
+- De samenvatting geeft de percentages, ook met het vaste venster van 370-1100 km ter vergelijking, en voor elk log het bereik en de mediaan van de berekende QTF. Klik op een rij om het traject en de twee antennerichtingen te tekenen.
+- Resultaat (versie 0.4.4): **296 van de 298 QSO's verklaard (99%)**, 243 (82%) binnen het venster van 370-1100 km; mediane QTF van EI5FK tussen 25° en 41°, dus het noordoosten dat G3WPO aanraadt. De logs vermelden de antennerichting niet: de controle gaat over de geometrie, niet over de QTF. Met het verschuivende venster (versie 0.4.5) is het resultaat hetzelfde, 243 QSO's (82%), als met het vaste venster: de stations van de testbank (Ierland, Groot-Brittannië, Nederland, Duitsland) hebben een inclinatie van 66-70°, dicht bij de referentie van Lange-Hesse (venster van EI5FK 350-1080 km); het verschil betreft stations verder naar het zuiden of het noorden, waarvoor de testbank geen QSO's heeft.
