@@ -12,7 +12,9 @@ Töltse le a megfelelő fájlt a **[Releases](https://github.com/ic8tem/E-LAYER-
 | Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, majd indítsa el a menüből: első indításkor a program átmásolja magát a `~/E-LAYER-ANALYZER` mappába, mellette a `data` mappával. |
 | Linux hordozható | `...-linux-x64-portatile.tar.gz` | Csomagolja ki, és indítsa el a `./E-LAYER-ANALYZER` fájlt, vagy futtassa a `./installa.sh` szkriptet: a `~/E-LAYER-ANALYZER` mappába telepít, ikonnal a menüben. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` vagy `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 vagy 5 **64 bites Raspberry Pi OS**-sel és asztali környezettel (4 GB RAM ajánlott). A .deb mint fent; a hordozható mint Linuxon. |
-| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 vagy 4 **32 bites Raspberry Pi OS**-sel. Csomagolja ki, és indítsa el a `./E-LAYER-ANALYZER` fájlt vagy a `./installa.sh` szkriptet. |
+| Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` vagy `...-linux-arm-portatile.tar.gz` | Pi 2, 3 vagy 4 **32 bites Raspberry Pi OS**-sel. A .deb mint fent; a hordozható: csomagolja ki, és indítsa el a `./E-LAYER-ANALYZER` fájlt vagy a `./installa.sh` szkriptet. |
+| Raspberry Pi Slackware ARM64-gyel | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` vagy `...-linux-arm64-portatile.tar.gz` | Rootként: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, majd indítsa el az `e-layer-analyzer` programot a menüből vagy a terminálból: első indításkor a program a `~/E-LAYER-ANALYZER` mappába másolja magát. A hordozható mint Linuxon. |
+| Linux armv7l (más 32 bites ARM-kártyák) | `...-linux-armv7l-portatile.tar.gz` | Mint a Linuxos hordozható változat. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) vagy `...-osx-x64.dmg` (Intel) | Nyissa meg a .dmg fájlt, jobb kattintás az **Installa E-LAYER-ANALYZER.command** fájlra > Megnyitás. A `~/E-LAYER-ANALYZER` mappába telepít. |
 | Mac, csak az alkalmazás | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Csomagolja ki az **E-LAYER-ANALYZER.app** alkalmazást egy saját mappába (például `~/E-LAYER-ANALYZER`, ne az Alkalmazások mappába): a `data` mappa az alkalmazás mellett jön létre. Első indításkor jobb kattintás > Megnyitás. |
 
@@ -34,3 +36,4 @@ Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a n
 - Nem kell .NET-et telepíteni: a program mindent tartalmaz, amire szüksége van.
 - Internetkapcsolat a térképhez (Natural Earth, első indításkor), a NOAA aurora-adataihoz, a YA-MS radarjaihoz és a telnet-kapcsolatokhoz.
 - A Raspberry Pi Zero és a Pi 1 nem támogatott (processzorukat a .NET nem kezeli).
+- Linux i686-ra (32 bites PC-k) nincs változat, mert arra a rendszerre nincs .NET, és FreeBSD-re sem, ahol hiányoznak az Avalonia grafikus könyvtárai.

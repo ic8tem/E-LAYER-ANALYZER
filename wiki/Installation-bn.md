@@ -12,7 +12,9 @@
 | Linux 64 বিট (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, তারপর মেনু থেকে চালু করুন: প্রথমবার চালুর সময় প্রোগ্রামটি নিজেকে `~/E-LAYER-ANALYZER`-এ কপি করে, পাশে `data` ফোল্ডারসহ। |
 | Linux পোর্টেবল | `...-linux-x64-portatile.tar.gz` | এক্সট্র্যাক্ট করে `./E-LAYER-ANALYZER` চালান, অথবা `./installa.sh` চালান: মেনুতে আইকনসহ `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
 | Raspberry Pi (64 বিট) | `e-layer-analyzer_x.y.z_arm64.deb` অথবা `...-linux-arm64-portatile.tar.gz` | **64-বিট Raspberry Pi OS** ও ডেস্কটপসহ Pi 3, 4 বা 5 (4 GB RAM প্রস্তাবিত)। .deb ওপরের মতো; পোর্টেবল সংস্করণ Linux-এর মতো। |
-| Raspberry Pi (32 বিট) | `...-linux-arm-portatile.tar.gz` | **32-বিট Raspberry Pi OS**-সহ Pi 2, 3 বা 4। এক্সট্র্যাক্ট করে `./E-LAYER-ANALYZER` বা `./installa.sh` চালান। |
+| Raspberry Pi (32 বিট) | `e-layer-analyzer_x.y.z_armhf.deb` অথবা `...-linux-arm-portatile.tar.gz` | **32-বিট Raspberry Pi OS**-সহ Pi 2, 3 বা 4। .deb ওপরের মতো; পোর্টেবল: এক্সট্র্যাক্ট করে `./E-LAYER-ANALYZER` বা `./installa.sh` চালান। |
+| Slackware ARM64-সহ Raspberry Pi | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` অথবা `...-linux-arm64-portatile.tar.gz` | root হিসেবে: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, তারপর মেনু বা টার্মিনাল থেকে `e-layer-analyzer` চালু করুন: প্রথমবার চালুর সময় প্রোগ্রাম নিজেকে `~/E-LAYER-ANALYZER`-এ কপি করে। পোর্টেবল সংস্করণ Linux-এর মতো। |
+| Linux armv7l (অন্যান্য 32-বিট ARM বোর্ড) | `...-linux-armv7l-portatile.tar.gz` | Linux পোর্টেবলের মতো। |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) অথবা `...-osx-x64.dmg` (Intel) | .dmg খুলুন, **Installa E-LAYER-ANALYZER.command**-এ ডান ক্লিক > Open। `~/E-LAYER-ANALYZER`-এ ইনস্টল হয়। |
 | Mac, কেবল অ্যাপ্লিকেশন | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** আপনার নিজের একটি ফোল্ডারে এক্সট্র্যাক্ট করুন (যেমন `~/E-LAYER-ANALYZER`, Applications নয়): অ্যাপের পাশে `data` ফোল্ডার তৈরি হয়। প্রথমবার চালুর সময় ডান ক্লিক > Open। |
 
@@ -34,3 +36,4 @@
 - কোনো .NET ইনস্টল করতে হয় না: প্রোগ্রামে প্রয়োজনীয় সবকিছু আছে।
 - ইন্টারনেট সংযোগ দরকার মানচিত্রের জন্য (Natural Earth, প্রথমবার চালুর সময়), NOAA-র অরোরা তথ্য, YA-MS-এর রাডার এবং টেলনেট সেশনের জন্য।
 - Raspberry Pi Zero ও Pi 1 সমর্থিত নয় (তাদের প্রসেসর .NET সমর্থন করে না)।
+- Linux i686 (32-বিট PC)-এর জন্য কোনো সংস্করণ নেই, কারণ সেই সিস্টেমের জন্য .NET নেই, FreeBSD-এর জন্যও নেই, যেখানে Avalonia-র গ্রাফিক লাইব্রেরি অনুপস্থিত।

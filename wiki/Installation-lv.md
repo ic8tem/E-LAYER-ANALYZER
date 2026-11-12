@@ -12,7 +12,9 @@ Lejupielādē piemēroto failu no lapas **[Releases](https://github.com/ic8tem/E
 | Linux 64 biti (dators) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, pēc tam palaid no izvēlnes: pirmajā palaišanā programma nokopē sevi mapē `~/E-LAYER-ANALYZER`, ar mapi `data` blakus. |
 | Linux portatīvā | `...-linux-x64-portatile.tar.gz` | Atarhivē un palaid `./E-LAYER-ANALYZER` vai palaid `./installa.sh`: instalē mapē `~/E-LAYER-ANALYZER` ar ikonu izvēlnē. |
 | Raspberry Pi (64 biti) | `e-layer-analyzer_x.y.z_arm64.deb` vai `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 vai 5 ar **64 bitu Raspberry Pi OS** un darbvirsmu (ieteicami 4 GB RAM). .deb kā iepriekš; portatīvā versija kā Linux. |
-| Raspberry Pi (32 biti) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 vai 4 ar **32 bitu Raspberry Pi OS**. Atarhivē un palaid `./E-LAYER-ANALYZER` vai `./installa.sh`. |
+| Raspberry Pi (32 biti) | `e-layer-analyzer_x.y.z_armhf.deb` vai `...-linux-arm-portatile.tar.gz` | Pi 2, 3 vai 4 ar **32 bitu Raspberry Pi OS**. .deb kā iepriekš; portatīvā versija: atarhivē un palaid `./E-LAYER-ANALYZER` vai `./installa.sh`. |
+| Raspberry Pi ar Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` vai `...-linux-arm64-portatile.tar.gz` | Kā root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, pēc tam palaid `e-layer-analyzer` no izvēlnes vai termināļa: pirmajā startēšanā programma nokopējas uz `~/E-LAYER-ANALYZER`. Portatīvā versija kā Linux. |
+| Linux armv7l (citas 32 bitu ARM plates) | `...-linux-armv7l-portatile.tar.gz` | Kā Linux portatīvā versija. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) vai `...-osx-x64.dmg` (Intel) | Atver .dmg, labais klikšķis uz **Installa E-LAYER-ANALYZER.command** > Open. Instalē mapē `~/E-LAYER-ANALYZER`. |
 | Mac, tikai lietotne | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Atarhivē **E-LAYER-ANALYZER.app** savā mapē (piemēram, `~/E-LAYER-ANALYZER`, nevis Applications): mape `data` tiek izveidota blakus lietotnei. Pirmajā palaišanā labais klikšķis > Open. |
 
@@ -34,3 +36,4 @@ Instalē jauno versiju virs vecās: iestatījumi, savāktie spoti, žurnāli un 
 - .NET nav jāinstalē: programmā ir viss nepieciešamais.
 - Interneta savienojums kartei (Natural Earth, pirmajā palaišanā), NOAA auroras datiem, YA-MS radariem un telnet sesijām.
 - Raspberry Pi Zero un Pi 1 netiek atbalstīti (.NET neatbalsta to procesorus).
+- Versiju Linux i686 (32 bitu datoriem) nav, jo .NET šai sistēmai neeksistē, kā arī nav versijas FreeBSD, kur trūkst Avalonia grafikas bibliotēku.

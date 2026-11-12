@@ -12,7 +12,9 @@ Stáhněte si správný soubor ze stránky **[Releases](https://github.com/ic8te
 | Linux 64 bitů (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, pak spusťte z nabídky: při prvním spuštění se program zkopíruje do `~/E-LAYER-ANALYZER` se složkou `data` vedle sebe. |
 | Linux přenosná verze | `...-linux-x64-portatile.tar.gz` | Rozbalte a spusťte `./E-LAYER-ANALYZER`, nebo spusťte `./installa.sh`: nainstaluje se do `~/E-LAYER-ANALYZER` s ikonou v nabídce. |
 | Raspberry Pi (64 bitů) | `e-layer-analyzer_x.y.z_arm64.deb` nebo `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 nebo 5 s **64bitovým Raspberry Pi OS** a desktopem (doporučeno 4 GB RAM). Balíček .deb jako výše; přenosnou verzi jako pro Linux. |
-| Raspberry Pi (32 bitů) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 nebo 4 s **32bitovým Raspberry Pi OS**. Rozbalte a spusťte `./E-LAYER-ANALYZER` nebo `./installa.sh`. |
+| Raspberry Pi (32 bitů) | `e-layer-analyzer_x.y.z_armhf.deb` nebo `...-linux-arm-portatile.tar.gz` | Pi 2, 3 nebo 4 s **32bitovým Raspberry Pi OS**. Balíček .deb jako výše; přenosnou verzi rozbalte a spusťte `./E-LAYER-ANALYZER` nebo `./installa.sh`. |
+| Raspberry Pi se Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` nebo `...-linux-arm64-portatile.tar.gz` | Jako root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, pak spusťte `e-layer-analyzer` z nabídky nebo z terminálu: při prvním spuštění se program zkopíruje do `~/E-LAYER-ANALYZER`. Přenosnou verzi jako pro Linux. |
+| Linux armv7l (jiné 32bitové desky ARM) | `...-linux-armv7l-portatile.tar.gz` | Jako přenosná verze pro Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) nebo `...-osx-x64.dmg` (Intel) | Otevřete .dmg, pravým tlačítkem na **Installa E-LAYER-ANALYZER.command** > Otevřít. Instaluje se do `~/E-LAYER-ANALYZER`. |
 | Mac, jen aplikace | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Rozbalte **E-LAYER-ANALYZER.app** do vlastní složky (například `~/E-LAYER-ANALYZER`, ne do Aplikací): složka `data` se vytvoří vedle aplikace. Při prvním spuštění pravé tlačítko > Otevřít. |
 
@@ -34,3 +36,4 @@ Nainstalujte novou verzi přes starou: nastavení, shromážděné spoty, deník
 - Není třeba instalovat .NET: program obsahuje vše, co potřebuje.
 - Připojení k internetu pro mapu (Natural Earth, při prvním spuštění), data aurory NOAA, radary YA-MS a relace telnet.
 - Raspberry Pi Zero a Pi 1 nejsou podporovány (jejich procesory .NET nepodporuje).
+- Verze pro Linux i686 (32bitová PC) neexistuje, protože pro tento systém není .NET, a ani pro FreeBSD, kde chybějí grafické knihovny Avalonia.

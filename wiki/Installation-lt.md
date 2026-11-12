@@ -12,7 +12,9 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 | Linux 64 bitų (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, tada paleiskite iš meniu: pirmą kartą paleidžiant programa nusikopijuoja į `~/E-LAYER-ANALYZER`, šalia – aplankas `data`. |
 | Linux nešiojamoji | `...-linux-x64-portatile.tar.gz` | Išskleiskite ir paleiskite `./E-LAYER-ANALYZER` arba paleiskite `./installa.sh`: įdiegiama į `~/E-LAYER-ANALYZER`, piktograma pridedama į meniu. |
 | Raspberry Pi (64 bitų) | `e-layer-analyzer_x.y.z_arm64.deb` arba `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 arba 5 su **64 bitų Raspberry Pi OS** ir darbalaukiu (rekomenduojama 4 GB RAM). .deb – kaip aukščiau; nešiojamoji versija – kaip Linux. |
-| Raspberry Pi (32 bitų) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 arba 4 su **32 bitų Raspberry Pi OS**. Išskleiskite ir paleiskite `./E-LAYER-ANALYZER` arba `./installa.sh`. |
+| Raspberry Pi (32 bitų) | `e-layer-analyzer_x.y.z_armhf.deb` arba `...-linux-arm-portatile.tar.gz` | Pi 2, 3 arba 4 su **32 bitų Raspberry Pi OS**. .deb – kaip aukščiau; nešiojamoji versija: išskleiskite ir paleiskite `./E-LAYER-ANALYZER` arba `./installa.sh`. |
+| Raspberry Pi su Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` arba `...-linux-arm64-portatile.tar.gz` | Root teisėmis: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, tada paleiskite `e-layer-analyzer` iš meniu arba terminalo: pirmą kartą paleista programa nusikopijuoja į `~/E-LAYER-ANALYZER`. Nešiojamoji versija – kaip Linux. |
+| Linux armv7l (kitos 32 bitų ARM plokštės) | `...-linux-armv7l-portatile.tar.gz` | Kaip Linux nešiojamoji versija. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) arba `...-osx-x64.dmg` (Intel) | Atverkite .dmg, dešiniuoju pelės mygtuku spustelėkite **Installa E-LAYER-ANALYZER.command** > Open. Įdiegiama į `~/E-LAYER-ANALYZER`. |
 | Mac, tik programa | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Išskleiskite **E-LAYER-ANALYZER.app** į savo pasirinktą aplanką (pavyzdžiui, `~/E-LAYER-ANALYZER`, ne Applications): aplankas `data` sukuriamas šalia programos. Pirmą kartą paleidžiant spustelėkite dešiniuoju pelės mygtuku > Open. |
 
@@ -34,3 +36,4 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 - .NET diegti nereikia: programoje yra viskas, ko jai reikia.
 - Interneto ryšys reikalingas žemėlapiui (Natural Earth, pirmą kartą paleidžiant), NOAA pašvaistės duomenims, YA-MS radarams ir telnet seansams.
 - Raspberry Pi Zero ir Pi 1 nepalaikomi (.NET nepalaiko jų procesorių).
+- Versijų Linux i686 (32 bitų kompiuteriams) nėra, nes .NET šiai sistemai neegzistuoja, taip pat nėra FreeBSD, kurioje trūksta Avalonia grafikos bibliotekų.

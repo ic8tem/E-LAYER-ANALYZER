@@ -12,7 +12,9 @@
 | Linux ‏64 ביט (מחשב אישי) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ואז הפעילו מהתפריט: בהפעלה הראשונה התוכנה מעתיקה את עצמה ל-`~/E-LAYER-ANALYZER`, עם תיקיית ה-`data` לצידה. |
 | Linux נייד | `...-linux-x64-portatile.tar.gz` | חלצו והריצו `./E-LAYER-ANALYZER`, או הריצו `./installa.sh`: מותקן ב-`~/E-LAYER-ANALYZER` עם סמל בתפריט. |
 | Raspberry Pi ‏(64 ביט) | `e-layer-analyzer_x.y.z_arm64.deb` או `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 או 5 עם **Raspberry Pi OS ‏64 ביט** ושולחן עבודה (מומלץ 4 GB של RAM). ה-‎.deb כמו למעלה; הגרסה הניידת כמו ב-Linux. |
-| Raspberry Pi ‏(32 ביט) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 או 4 עם **Raspberry Pi OS ‏32 ביט**. חלצו והריצו `./E-LAYER-ANALYZER` או `./installa.sh`. |
+| Raspberry Pi ‏(32 ביט) | `e-layer-analyzer_x.y.z_armhf.deb` או `...-linux-arm-portatile.tar.gz` | Pi 2, 3 או 4 עם **Raspberry Pi OS ‏32 ביט**. ה-‎.deb כמו למעלה; הגרסה הניידת: חלצו והריצו `./E-LAYER-ANALYZER` או `./installa.sh`. |
+| Raspberry Pi עם Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` או `...-linux-arm64-portatile.tar.gz` | כ-root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, ואז הפעילו את `e-layer-analyzer` מהתפריט או מהמסוף: בהפעלה הראשונה התוכנה מעתיקה את עצמה ל-`~/E-LAYER-ANALYZER`. הגרסה הניידת כמו ב-Linux. |
+| Linux armv7l ‏(לוחות ARM אחרים של 32 ביט) | `...-linux-armv7l-portatile.tar.gz` | כמו הגרסה הניידת ל-Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) או `...-osx-x64.dmg` (Intel) | פתחו את ה-‎.dmg, לחצו לחיצה ימנית על **Installa E-LAYER-ANALYZER.command** > Open. מותקן ב-`~/E-LAYER-ANALYZER`. |
 | Mac, אפליקציה בלבד | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | חלצו את **E-LAYER-ANALYZER.app** לתיקייה משלכם (למשל `~/E-LAYER-ANALYZER`, לא Applications): תיקיית ה-`data` נוצרת ליד האפליקציה. בהפעלה הראשונה לחיצה ימנית > Open. |
 
@@ -34,3 +36,4 @@
 - אין צורך להתקין ‎.NET: התוכנה מכילה את כל מה שהיא צריכה.
 - חיבור לאינטרנט עבור המפה (Natural Earth, בהפעלה הראשונה), נתוני האורורה של NOAA, המכ״מים של YA-MS וחיבורי ה-telnet.
 - ‏Raspberry Pi Zero ו-Pi 1 אינם נתמכים (‏.NET אינו תומך במעבדים שלהם).
+- אין גרסאות ל-Linux i686 ‏(מחשבים של 32 ביט), כי ‎.NET אינו קיים למערכת זו, וגם לא ל-FreeBSD, שבה חסרות הספריות הגרפיות של Avalonia.

@@ -12,7 +12,9 @@ Doğru dosyayı **[Releases](https://github.com/ic8tem/E-LAYER-ANALYZER/releases
 | Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ardından menüden başlatın: ilk açılışta program kendini `~/E-LAYER-ANALYZER` klasörüne kopyalar, `data` klasörü de yanında olur. |
 | Linux taşınabilir | `...-linux-x64-portatile.tar.gz` | Açın ve `./E-LAYER-ANALYZER` dosyasını çalıştırın ya da `./installa.sh` komutunu çalıştırın: menüde bir simgeyle `~/E-LAYER-ANALYZER` klasörüne kurulur. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` ya da `...-linux-arm64-portatile.tar.gz` | **64 bit Raspberry Pi OS** ve masaüstüyle Pi 3, 4 ya da 5 (4 GB RAM önerilir). .deb yukarıdaki gibi; taşınabilir sürüm Linux'taki gibi. |
-| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | **32 bit Raspberry Pi OS** ile Pi 2, 3 ya da 4. Açın ve `./E-LAYER-ANALYZER` ya da `./installa.sh` komutunu çalıştırın. |
+| Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` ya da `...-linux-arm-portatile.tar.gz` | **32 bit Raspberry Pi OS** ile Pi 2, 3 ya da 4. .deb yukarıdaki gibi; taşınabilir sürüm: açın ve `./E-LAYER-ANALYZER` ya da `./installa.sh` komutunu çalıştırın. |
+| Slackware ARM64'lü Raspberry Pi | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` ya da `...-linux-arm64-portatile.tar.gz` | Root olarak: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, ardından `e-layer-analyzer` komutunu menüden ya da terminalden başlatın: program ilk açılışta kendini `~/E-LAYER-ANALYZER` klasörüne kopyalar. Taşınabilir sürüm Linux'taki gibi. |
+| Linux armv7l (diğer 32 bit ARM kartlar) | `...-linux-armv7l-portatile.tar.gz` | Linux taşınabilir sürümü gibi. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) ya da `...-osx-x64.dmg` (Intel) | .dmg dosyasını açın, **Installa E-LAYER-ANALYZER.command** üzerine sağ tıklayın > Aç. `~/E-LAYER-ANALYZER` klasörüne kurulur. |
 | Mac, yalnızca uygulama | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** dosyasını kendinize ait bir klasöre açın (örneğin `~/E-LAYER-ANALYZER`, Applications değil): `data` klasörü uygulamanın yanında oluşturulur. İlk açılışta sağ tıklayın > Aç. |
 
@@ -34,3 +36,4 @@ Yeni sürümü eskisinin üzerine kurun: ayarlar, toplanan spot'lar, loglar ve `
 - Kurulacak .NET yok: program ihtiyaç duyduğu her şeyi içerir.
 - Harita (Natural Earth, ilk açılışta), NOAA aurora verileri, YA-MS radarları ve telnet oturumları için internet bağlantısı.
 - Raspberry Pi Zero ve Pi 1 desteklenmez (işlemcileri .NET tarafından desteklenmez).
+- Linux i686 (32 bit PC) için sürüm yoktur, çünkü o sistem için .NET bulunmaz; Avalonia'nın grafik kütüphanelerinin eksik olduğu FreeBSD için de sürüm yoktur.

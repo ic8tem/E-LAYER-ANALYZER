@@ -12,7 +12,9 @@
 | Linux 64 بت (حاسوب شخصي) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`، ثم شغّله من القائمة: عند التشغيل الأول ينسخ البرنامج نفسه إلى `~/E-LAYER-ANALYZER`، مع مجلد `data` بجانبه. |
 | Linux محمول | `...-linux-x64-portatile.tar.gz` | فك الضغط وشغّل `./E-LAYER-ANALYZER`، أو شغّل `./installa.sh`: يُثبَّت في `~/E-LAYER-ANALYZER` مع أيقونة في القائمة. |
 | Raspberry Pi (64 بت) | `e-layer-analyzer_x.y.z_arm64.deb` أو `...-linux-arm64-portatile.tar.gz` | Pi 3 أو 4 أو 5 مع **Raspberry Pi OS ‏64 بت** وسطح المكتب (يُنصح بـ 4 GB من RAM). ملف ‎.deb كما سبق؛ والنسخة المحمولة كما في Linux. |
-| Raspberry Pi (32 بت) | `...-linux-arm-portatile.tar.gz` | Pi 2 أو 3 أو 4 مع **Raspberry Pi OS ‏32 بت**. فك الضغط وشغّل `./E-LAYER-ANALYZER` أو `./installa.sh`. |
+| Raspberry Pi (32 بت) | `e-layer-analyzer_x.y.z_armhf.deb` أو `...-linux-arm-portatile.tar.gz` | Pi 2 أو 3 أو 4 مع **Raspberry Pi OS ‏32 بت**. ملف ‎.deb كما سبق؛ والنسخة المحمولة: فك الضغط وشغّل `./E-LAYER-ANALYZER` أو `./installa.sh`. |
+| Raspberry Pi مع Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` أو `...-linux-arm64-portatile.tar.gz` | بصلاحيات root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`، ثم شغّل `e-layer-analyzer` من القائمة أو من الطرفية: في التشغيل الأول ينسخ البرنامج نفسه إلى `~/E-LAYER-ANALYZER`. والنسخة المحمولة كما في Linux. |
+| Linux armv7l (لوحات ARM أخرى بـ 32 بت) | `...-linux-armv7l-portatile.tar.gz` | كالنسخة المحمولة لـ Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) أو `...-osx-x64.dmg` (Intel) | افتح ملف ‎.dmg، وانقر بزر الفأرة الأيمن على **Installa E-LAYER-ANALYZER.command** > Open. يُثبَّت في `~/E-LAYER-ANALYZER`. |
 | Mac، التطبيق فقط | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | فك ضغط **E-LAYER-ANALYZER.app** في مجلد خاص بك (مثلاً `~/E-LAYER-ANALYZER`، وليس Applications): يُنشأ مجلد `data` بجانب التطبيق. عند التشغيل الأول انقر بزر الفأرة الأيمن > Open. |
 
@@ -34,3 +36,4 @@
 - لا حاجة إلى تثبيت .NET: يحتوي البرنامج على كل ما يحتاجه.
 - اتصال بالإنترنت للخريطة (Natural Earth، عند التشغيل الأول)، ولبيانات الشفق من NOAA، ولرادارات YA-MS، ولجلسات telnet.
 - لا يُدعم Raspberry Pi Zero وPi 1 (لا يتعامل .NET مع معالجاتهما).
+- لا توجد نسخ لـ Linux i686 ‏(الحواسيب ذات 32 بت)، لأن .NET غير موجود لذلك النظام، ولا لـ FreeBSD، الذي تنقصه المكتبات الرسومية لـ Avalonia.

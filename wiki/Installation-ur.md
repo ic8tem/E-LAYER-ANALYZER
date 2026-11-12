@@ -12,7 +12,9 @@
 | Linux 64 بٹ (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`، پھر مینو سے چلائیں: پہلی بار چلانے پر پروگرام خود کو `~/E-LAYER-ANALYZER` میں کاپی کر لیتا ہے، اور `data` فولڈر اس کے ساتھ ہوتا ہے۔ |
 | Linux پورٹیبل | `...-linux-x64-portatile.tar.gz` | نکالیں اور `./E-LAYER-ANALYZER` چلائیں، یا `./installa.sh` چلائیں: مینو میں آئیکن کے ساتھ `~/E-LAYER-ANALYZER` میں انسٹال ہوتا ہے۔ |
 | Raspberry Pi (64 بٹ) | `e-layer-analyzer_x.y.z_arm64.deb` یا `...-linux-arm64-portatile.tar.gz` | **64 بٹ Raspberry Pi OS** اور ڈیسک ٹاپ کے ساتھ Pi 3، 4 یا 5 (4 GB RAM تجویز کردہ)۔ .deb اوپر کی طرح؛ پورٹیبل Linux کی طرح۔ |
-| Raspberry Pi (32 بٹ) | `...-linux-arm-portatile.tar.gz` | **32 بٹ Raspberry Pi OS** کے ساتھ Pi 2، 3 یا 4۔ نکالیں اور `./E-LAYER-ANALYZER` یا `./installa.sh` چلائیں۔ |
+| Raspberry Pi (32 بٹ) | `e-layer-analyzer_x.y.z_armhf.deb` یا `...-linux-arm-portatile.tar.gz` | **32 بٹ Raspberry Pi OS** کے ساتھ Pi 2، 3 یا 4۔ .deb اوپر کی طرح؛ پورٹیبل: نکالیں اور `./E-LAYER-ANALYZER` یا `./installa.sh` چلائیں۔ |
+| Slackware ARM64 کے ساتھ Raspberry Pi | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` یا `...-linux-arm64-portatile.tar.gz` | root کے طور پر: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`، پھر مینو یا ٹرمینل سے `e-layer-analyzer` چلائیں: پہلی بار چلنے پر پروگرام خود کو `~/E-LAYER-ANALYZER` میں کاپی کر لیتا ہے۔ پورٹیبل Linux کی طرح۔ |
+| Linux armv7l (دوسرے 32 بٹ ARM بورڈ) | `...-linux-armv7l-portatile.tar.gz` | Linux پورٹیبل کی طرح۔ |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) یا `...-osx-x64.dmg` (Intel) | .dmg کھولیں، **Installa E-LAYER-ANALYZER.command** پر دایاں کلک > Open۔ `~/E-LAYER-ANALYZER` میں انسٹال ہوتا ہے۔ |
 | Mac، صرف ایپلیکیشن | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | **E-LAYER-ANALYZER.app** کو اپنے ایک فولڈر میں نکالیں (مثلاً `~/E-LAYER-ANALYZER`، Applications نہیں): `data` فولڈر ایپ کے ساتھ بنتا ہے۔ پہلی بار چلانے پر دایاں کلک > Open۔ |
 
@@ -34,3 +36,4 @@
 - کوئی .NET انسٹال کرنے کی ضرورت نہیں: پروگرام میں ضرورت کی ہر چیز شامل ہے۔
 - انٹرنیٹ کنکشن نقشے (Natural Earth، پہلی بار چلانے پر)، NOAA کے aurora ڈیٹا، YA-MS کے ریڈاروں اور Telnet سیشنوں کے لیے۔
 - Raspberry Pi Zero اور Pi 1 معاون نہیں (ان کے پروسیسر .NET سنبھال نہیں سکتا)۔
+- Linux i686 (32 بٹ PC) کے لیے کوئی ورژن نہیں، کیونکہ اس سسٹم کے لیے .NET موجود نہیں، اور نہ FreeBSD کے لیے، جہاں Avalonia کی گرافک لائبریریاں موجود نہیں۔

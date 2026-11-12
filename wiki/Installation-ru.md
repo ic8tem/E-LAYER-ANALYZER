@@ -12,7 +12,9 @@
 | Linux 64 бит (ПК) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, затем запустите из меню: при первом запуске программа копирует себя в `~/E-LAYER-ANALYZER`, с папкой `data` рядом. |
 | Linux, портативная версия | `...-linux-x64-portatile.tar.gz` | Распакуйте и запустите `./E-LAYER-ANALYZER` или запустите `./installa.sh`: программа установится в `~/E-LAYER-ANALYZER` со значком в меню. |
 | Raspberry Pi (64 бит) | `e-layer-analyzer_x.y.z_arm64.deb` или `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 или 5 с **64-битной Raspberry Pi OS** и рабочим столом (рекомендуется 4 GB RAM). Пакет .deb — как выше; портативная версия — как для Linux. |
-| Raspberry Pi (32 бит) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 или 4 с **32-битной Raspberry Pi OS**. Распакуйте и запустите `./E-LAYER-ANALYZER` или `./installa.sh`. |
+| Raspberry Pi (32 бит) | `e-layer-analyzer_x.y.z_armhf.deb` или `...-linux-arm-portatile.tar.gz` | Pi 2, 3 или 4 с **32-битной Raspberry Pi OS**. Пакет .deb — как выше; портативная версия: распакуйте и запустите `./E-LAYER-ANALYZER` или `./installa.sh`. |
+| Raspberry Pi со Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` или `...-linux-arm64-portatile.tar.gz` | От root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, затем запустите `e-layer-analyzer` из меню или из терминала: при первом запуске программа копирует себя в `~/E-LAYER-ANALYZER`. Портативная версия — как для Linux. |
+| Linux armv7l (другие 32-битные платы ARM) | `...-linux-armv7l-portatile.tar.gz` | Как портативная версия для Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) или `...-osx-x64.dmg` (Intel) | Откройте .dmg, щёлкните правой кнопкой по **Installa E-LAYER-ANALYZER.command** > Открыть. Устанавливается в `~/E-LAYER-ANALYZER`. |
 | Mac, только приложение | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Распакуйте **E-LAYER-ANALYZER.app** в собственную папку (например, `~/E-LAYER-ANALYZER`, не в Applications): папка `data` создаётся рядом с приложением. При первом запуске щёлкните правой кнопкой > Открыть. |
 
@@ -34,3 +36,4 @@
 - Устанавливать .NET не нужно: программа содержит всё необходимое.
 - Доступ в интернет для карты (Natural Earth, при первом запуске), данных NOAA об авроре, радаров YA-MS и сессий telnet.
 - Raspberry Pi Zero и Pi 1 не поддерживаются (их процессоры не поддерживаются .NET).
+- Версий для Linux i686 (32-битные ПК) нет, потому что .NET для этой системы не существует, и для FreeBSD, где нет графических библиотек Avalonia.

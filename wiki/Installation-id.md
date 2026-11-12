@@ -12,7 +12,9 @@ Unduh file yang tepat dari halaman **[Releases](https://github.com/ic8tem/E-LAYE
 | Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, lalu jalankan dari menu: pada start pertama program menyalin dirinya ke `~/E-LAYER-ANALYZER`, dengan folder `data` di sebelahnya. |
 | Linux portabel | `...-linux-x64-portatile.tar.gz` | Ekstrak lalu jalankan `./E-LAYER-ANALYZER`, atau jalankan `./installa.sh`: terpasang di `~/E-LAYER-ANALYZER` dengan ikon di menu. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` atau `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 atau 5 dengan **Raspberry Pi OS 64-bit** dan desktop (disarankan RAM 4 GB). File .deb seperti di atas; versi portabel seperti untuk Linux. |
-| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 atau 4 dengan **Raspberry Pi OS 32-bit**. Ekstrak lalu jalankan `./E-LAYER-ANALYZER` atau `./installa.sh`. |
+| Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` atau `...-linux-arm-portatile.tar.gz` | Pi 2, 3 atau 4 dengan **Raspberry Pi OS 32-bit**. File .deb seperti di atas; versi portabel: ekstrak lalu jalankan `./E-LAYER-ANALYZER` atau `./installa.sh`. |
+| Raspberry Pi dengan Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` atau `...-linux-arm64-portatile.tar.gz` | Sebagai root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, lalu jalankan `e-layer-analyzer` dari menu atau terminal: pada start pertama program menyalin dirinya ke `~/E-LAYER-ANALYZER`. Versi portabel seperti untuk Linux. |
+| Linux armv7l (papan ARM 32-bit lainnya) | `...-linux-armv7l-portatile.tar.gz` | Seperti Linux portabel. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) atau `...-osx-x64.dmg` (Intel) | Buka .dmg, klik kanan **Installa E-LAYER-ANALYZER.command** > Open. Terpasang di `~/E-LAYER-ANALYZER`. |
 | Mac, hanya aplikasi | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Ekstrak **E-LAYER-ANALYZER.app** ke folder milik Anda sendiri (misalnya `~/E-LAYER-ANALYZER`, bukan Applications): folder `data` dibuat di sebelah aplikasi. Pada start pertama klik kanan > Open. |
 
@@ -34,3 +36,4 @@ Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3
 - Tidak ada .NET yang perlu dipasang: program sudah berisi semua yang dibutuhkannya.
 - Koneksi internet untuk peta (Natural Earth, pada start pertama), data aurora NOAA, radar YA-MS dan sesi telnet.
 - Raspberry Pi Zero dan Pi 1 tidak didukung (prosesornya tidak ditangani oleh .NET).
+- Tidak ada versi untuk Linux i686 (PC 32-bit), karena .NET tidak tersedia untuk sistem itu, juga tidak untuk FreeBSD, yang tidak memiliki pustaka grafis Avalonia.

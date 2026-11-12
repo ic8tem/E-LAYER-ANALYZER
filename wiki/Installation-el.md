@@ -12,7 +12,9 @@
 | Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, μετά ξεκινήστε το από το μενού: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`, με τον φάκελο `data` δίπλα του. |
 | Linux φορητό | `...-linux-x64-portatile.tar.gz` | Αποσυμπιέστε και εκτελέστε `./E-LAYER-ANALYZER`, ή εκτελέστε `./installa.sh`: εγκαθίσταται στο `~/E-LAYER-ANALYZER` με εικονίδιο στο μενού. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` ή `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 ή 5 με **Raspberry Pi OS 64 bit** και επιφάνεια εργασίας (συνιστώνται 4 GB RAM). Το .deb όπως παραπάνω· το φορητό όπως για το Linux. |
-| Raspberry Pi (32 bit) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 ή 4 με **Raspberry Pi OS 32 bit**. Αποσυμπιέστε και εκτελέστε `./E-LAYER-ANALYZER` ή `./installa.sh`. |
+| Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` ή `...-linux-arm-portatile.tar.gz` | Pi 2, 3 ή 4 με **Raspberry Pi OS 32 bit**. Το .deb όπως παραπάνω· το φορητό: αποσυμπιέστε και εκτελέστε `./E-LAYER-ANALYZER` ή `./installa.sh`. |
+| Raspberry Pi με Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` ή `...-linux-arm64-portatile.tar.gz` | Ως root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, έπειτα εκκινήστε το `e-layer-analyzer` από το μενού ή από το τερματικό: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`. Το φορητό όπως για το Linux. |
+| Linux armv7l (άλλες πλακέτες ARM 32 bit) | `...-linux-armv7l-portatile.tar.gz` | Όπως το φορητό για Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) ή `...-osx-x64.dmg` (Intel) | Ανοίξτε το .dmg, δεξί κλικ στο **Installa E-LAYER-ANALYZER.command** > Άνοιγμα. Εγκαθίσταται στο `~/E-LAYER-ANALYZER`. |
 | Mac, μόνο η εφαρμογή | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Αποσυμπιέστε το **E-LAYER-ANALYZER.app** σε έναν δικό σας φάκελο (για παράδειγμα `~/E-LAYER-ANALYZER`, όχι στις Εφαρμογές): ο φάκελος `data` δημιουργείται δίπλα στην εφαρμογή. Στην πρώτη εκκίνηση δεξί κλικ > Άνοιγμα. |
 
@@ -34,3 +36,4 @@
 - Δεν χρειάζεται εγκατάσταση .NET: το πρόγραμμα περιέχει ό,τι χρειάζεται.
 - Σύνδεση στο διαδίκτυο για τον χάρτη (Natural Earth, στην πρώτη εκκίνηση), τα δεδομένα σέλαος της NOAA, τα ραντάρ του YA-MS και τις συνεδρίες telnet.
 - Τα Raspberry Pi Zero και Pi 1 δεν υποστηρίζονται (οι επεξεργαστές τους δεν υποστηρίζονται από το .NET).
+- Δεν υπάρχουν εκδόσεις για Linux i686 (PC 32 bit), επειδή το .NET δεν υπάρχει για αυτό το σύστημα, ούτε για FreeBSD, όπου λείπουν οι βιβλιοθήκες γραφικών του Avalonia.

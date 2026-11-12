@@ -12,7 +12,9 @@ Descarcă fișierul potrivit de pe pagina **[Releases](https://github.com/ic8tem
 | Linux 64 de biți (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, apoi pornește-l din meniu: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`, cu dosarul `data` alături. |
 | Linux portabil | `...-linux-x64-portatile.tar.gz` | Dezarhivează și pornește `./E-LAYER-ANALYZER`, sau rulează `./installa.sh`: se instalează în `~/E-LAYER-ANALYZER` cu o pictogramă în meniu. |
 | Raspberry Pi (64 de biți) | `e-layer-analyzer_x.y.z_arm64.deb` sau `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 sau 5 cu **Raspberry Pi OS pe 64 de biți** și desktop (recomandat 4 GB de RAM). Pachetul .deb ca mai sus; versiunea portabilă ca pentru Linux. |
-| Raspberry Pi (32 de biți) | `...-linux-arm-portatile.tar.gz` | Pi 2, 3 sau 4 cu **Raspberry Pi OS pe 32 de biți**. Dezarhivează și pornește `./E-LAYER-ANALYZER` sau `./installa.sh`. |
+| Raspberry Pi (32 de biți) | `e-layer-analyzer_x.y.z_armhf.deb` sau `...-linux-arm-portatile.tar.gz` | Pi 2, 3 sau 4 cu **Raspberry Pi OS pe 32 de biți**. Pachetul .deb ca mai sus; versiunea portabilă: dezarhivează și pornește `./E-LAYER-ANALYZER` sau `./installa.sh`. |
+| Raspberry Pi cu Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` sau `...-linux-arm64-portatile.tar.gz` | Ca root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, apoi pornește `e-layer-analyzer` din meniu sau din terminal: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`. Versiunea portabilă ca pentru Linux. |
+| Linux armv7l (alte plăci ARM pe 32 de biți) | `...-linux-armv7l-portatile.tar.gz` | Ca versiunea portabilă pentru Linux. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) sau `...-osx-x64.dmg` (Intel) | Deschide fișierul .dmg, clic dreapta pe **Installa E-LAYER-ANALYZER.command** > Open. Se instalează în `~/E-LAYER-ANALYZER`. |
 | Mac, doar aplicația | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Dezarhivează **E-LAYER-ANALYZER.app** într-un dosar ales de tine (de exemplu `~/E-LAYER-ANALYZER`, nu Applications): dosarul `data` se creează lângă aplicație. La prima pornire clic dreapta > Open. |
 
@@ -34,3 +36,4 @@ Instalează noua versiune peste cea veche: setările, spoturile colectate, logur
 - Nu trebuie instalat .NET: programul conține tot ce îi trebuie.
 - Conexiune la internet pentru hartă (Natural Earth, la prima pornire), datele de auroră NOAA, radarele YA-MS și sesiunile telnet.
 - Raspberry Pi Zero și Pi 1 nu sunt suportate (procesoarele lor nu sunt suportate de .NET).
+- Nu există versiuni pentru Linux i686 (PC-uri pe 32 de biți), pentru că .NET nu există pentru acel sistem, nici pentru FreeBSD, unde lipsesc bibliotecile grafice Avalonia.
