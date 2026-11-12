@@ -32,6 +32,11 @@ This is the geometric construction used to **check whether a reflection point is
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (above Genoa) | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (SW Germany, 28 km from Brussels) | 0.88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0.3° | – |
+| DB0FAI beacon (305°) - Dresden via Sheffield (DL5MCG; Dresden beamed 290° and reported aurora) | – | 0.3° | – |
+| DL5MCG - SV1DH (1987 test via Budapest, 1569 km) | Budapest on the trail; cells below 1° from 35 km | 2.16° | 95° / 341° |
 
 Known scatter points in the list: Geneva, Brussels, Budapest, JN92, JN41/42.
+
+The **Checks...** menu loads the test pairs IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE and DL5MCG-SV1DH.
+
+**Equipment** (DL5MCG): F.A.I. on 144 MHz needs at least a long yagi and 100 W (SV1DH was also worked with an 8-element yagi and 50 W). Point the antenna at the scatter point given by the program, not at the other station.

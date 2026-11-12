@@ -20,6 +20,13 @@ for f in os.listdir(os.path.join(YA, 'data')):
     src = os.path.join(YA, 'data', f)
     if os.path.isfile(src) and not f.startswith(ELA_DATA) and f != 'config.ini':
         shutil.copy2(src, os.path.join(EL, 'data', f))
+# sottocartelle dei dati di YA-MS (dalla 1.8.0: data/spiegazione con la spiegazione dell'efficienza in tutte le lingue)
+for d in os.listdir(os.path.join(YA, 'data')):
+    src = os.path.join(YA, 'data', d)
+    if os.path.isdir(src) and d not in ('lingue', 'backup', 'aggiornamento'):
+        dst = os.path.join(EL, 'data', d)
+        if os.path.isdir(dst): shutil.rmtree(dst)
+        shutil.copytree(src, dst)
 os.makedirs(os.path.join(EL, 'data', 'lingue'), exist_ok=True)
 for f in os.listdir(os.path.join(YA, 'data', 'lingue')):
     shutil.copy2(os.path.join(YA, 'data', 'lingue', f), os.path.join(EL, 'data', 'lingue', f))
@@ -118,7 +125,8 @@ for f in os.listdir(ui):
 
 p = os.path.join(ui, 'MainWindow.Spiegazione.cs'); s = rd(p)
 s = rep(s, '        static void FillExplain(StackPanel doc, string file)', '        internal static void FillExplain(StackPanel doc, string file)', 'FillExplain')
-s = rep(s, '                                    Text = tag,\n', '                                    Text = Lang.T(tag),\n', 'etichette FONTE/RILIEVO/SCELTA')
+if 'Text = Lang.T(tag),' not in s:   # dalla 1.8.0 YA-MS traduce gia' le etichette
+    s = rep(s, '                                    Text = tag,\n', '                                    Text = Lang.T(tag),\n', 'etichette FONTE/RILIEVO/SCELTA')
 # E-LAYER ANALYZER: righe di tabella "TAB|cella;cella;..." (la prima riga di ogni gruppo e' l'intestazione)
 s = rep(s, '                    case "SRC":\n',
         '                    case "TAB":\n'
@@ -183,11 +191,37 @@ if os.path.exists(p):
     s = rep(s, '            if (MsCollector.Started) return;', '            if (Hosted || MsCollector.Started) return;', 'RdAutoStart')
     wr(p, s)
     p = os.path.join(DST, 'Core', 'MsSpots.cs'); s = rd(p)
-    s = rep(s, '        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }',
-            '        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }\n\n'
+    m = re.search(r'\n        public static void Shutdown\(\) \{[^\n]*\}', s)   # dalla 1.8.0 chiude anche PskMqtt
+    if not m: raise SystemExit('NON TROVATO (MsCollector.Shutdown)')
+    s = rep(s, m.group(0)[1:],
+            m.group(0)[1:] + '\n\n'
             '        // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)\n'
             '        public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }',
             'MsCollector.Feed')
+    wr(p, s)
+
+# --- Aggiornamento automatico di YA-MS (dalla 1.8.0): dentro E-LAYER ANALYZER lo fa E-LAYER ANALYZER (src/Ela/Updater.cs),
+#     quindi il pannello non controlla ne' installa le Release di YA-MS e il pulsante Aggiornamenti non compare
+p = os.path.join(ui, 'MainWindow.Aggiornamenti.cs')
+if os.path.exists(p):
+    wr(p, '''// E-LAYER ANALYZER: l'aggiornamento di YA-MS e' disattivato nel pannello (tools/sync_yams.py); aggiorna E-LAYER ANALYZER
+using System.Threading.Tasks;
+using Avalonia.Controls;
+
+namespace YAMS
+{
+    public partial class MainWindow
+    {
+        Button btnUpdate;
+        Task StartupUpdateChecks() { return Task.CompletedTask; }
+        void CheckUpdatesManual() { }
+    }
+}
+''')
+    up = os.path.join(DST, 'Core', 'Updater.cs')
+    if os.path.exists(up): os.remove(up)
+    p = os.path.join(ui, 'MainWindow.cs'); s = rd(p)
+    s = rep(s, '            sbLine.Children.Add(btnUpdate);', '            btnUpdate.IsVisible = false;   // E-LAYER ANALYZER: aggiornamento dalla finestra principale\n            sbLine.Children.Add(btnUpdate);', 'pulsante Aggiornamenti')
     wr(p, s)
 
 # --- Lang: anche le voci di E-LAYER ANALYZER (data/lingue/ela-<codice>.txt)
@@ -199,7 +233,8 @@ wr(p, s)
 # --- Lang: varianti di lingua del sistema (portoghese brasiliano, cinese tradizionale)
 p = os.path.join(ui, 'Lang.cs'); s = rd(p)
 A = "                    string os = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();"
-s = rep(s, A, A + '''
+if '"pt-br"; else' not in s and 'os = "pt-br";' not in s:   # dalla 1.7.0 YA-MS riconosce gia' le varianti
+  s = rep(s, A, A + '''
                     string full = CultureInfo.CurrentUICulture.Name.ToLowerInvariant();   // varianti: portoghese brasiliano, cinese tradizionale
                     if (full == "pt-br") os = "pt-br";
                     else if (full == "zh-tw" || full == "zh-hk" || full == "zh-mo" || full.StartsWith("zh-hant")) os = "zh-tw";''', 'Lang.Init')
