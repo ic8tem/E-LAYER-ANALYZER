@@ -101,24 +101,28 @@ namespace YAMS
 
         public static int IndexOf(string code)
         {
-            for (int i = 0; i < Languages.Length; i++) if (Languages[i][0] == code) return i;
+            for (int i = 0; i < Languages.Length; i++) if (string.Equals(Languages[i][0], code, StringComparison.OrdinalIgnoreCase)) return i;
             return -1;
         }
+
+        // codice canonico (pt-BR, zh-TW con le maiuscole giuste) o null
+        static string Canonical(string code) { int i = IndexOf(code); return i < 0 ? null : Languages[i][0]; }
 
         // Lingua all'avvio: quella salvata in config.ini (chiave "lingua"); al primo avvio quella del sistema, se prevista, altrimenti l'italiano
         public static void Init(string saved)
         {
-            string code = (saved ?? "").Trim().ToLowerInvariant();
-            if (IndexOf(code) < 0)
+            string code = Canonical((saved ?? "").Trim());
+            if (code == null)
             {
                 code = "it";
                 try
                 {
-                    string os = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
-                    string full = CultureInfo.CurrentUICulture.Name.ToLowerInvariant();   // varianti: portoghese brasiliano, cinese tradizionale
-                    if (full == "pt-br") os = "pt-br";
-                    else if (full == "zh-tw" || full == "zh-hk" || full == "zh-mo" || full.StartsWith("zh-hant")) os = "zh-tw";
-                    if (IndexOf(os) >= 0) code = os;
+                    CultureInfo ui = CultureInfo.CurrentUICulture;
+                    string name = ui.Name, os = ui.TwoLetterISOLanguageName.ToLowerInvariant();
+                    // varianti: portoghese del Brasile, cinese tradizionale (Taiwan, Hong Kong, Macao, Hant)
+                    if (name.StartsWith("pt-BR", StringComparison.OrdinalIgnoreCase)) os = "pt-br";
+                    else if (os == "zh" && (name.Contains("TW") || name.Contains("HK") || name.Contains("MO") || name.Contains("Hant"))) os = "zh-tw";
+                    if (Canonical(os) != null) code = Canonical(os);
                 }
                 catch { }
             }
@@ -129,7 +133,7 @@ namespace YAMS
         // Carica la lingua (per "it" nessun file: si usano le chiavi)
         public static void Load(string code)
         {
-            if (IndexOf(code) < 0) code = "it";
+            code = Canonical(code) ?? "it";
             Dictionary<string, string> m = new Dictionary<string, string>(StringComparer.Ordinal);
             if (code != "it")
             {

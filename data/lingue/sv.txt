@@ -1,52 +1,69 @@
-# YA-MS - Svenska (sv), översättning av användargränssnittet. UTF-8.
-# En post per rad: <Italian key><TAB><translation> (italiensk nyckel, TAB, svensk översättning). Nycklarna finns i chiavi.txt (samma mapp).
-# I båda kolumnerna betyder de två tecknen \n radbrytning. Behåll platshållarna {0}, {1}, ... (med sitt format, t.ex. {0:F1}).
-# Rader som börjar med # är kommentarer. Saknade poster visas på italienska.
+# YA-MS - Swedish (sv) translation of the user interface. UTF-8.
+# One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
+# In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
 (confermato)	(bekräftad)
 (destra)  B →	(höger)   B →
 (lettura Collm: {0})	(avläsning Collm: {0})
 (stima poco precisa sotto 2 λ)	(grov uppskattning under 2 λ)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> mittpunkten under horisonten på spårhöjden: sträckan ligger bortom den geometriska räckvidden för ett enkelt hopp
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> mittpunkten under horisonten på spårhöjden: sträckan ligger bortom den geometriska räckvidden för ett enkelt hopp (kräver spår på minst {0:F0} km höjd)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	0,8 s per steg · cykel 4,8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1:a kriteriet: typiska frekvenser för meteor scatter-spots (kHz)
+2° criterio: modi digitali MS e <MS>	2:a kriteriet: digitala MS-moder och <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	3,2 s per steg · cykel 19,2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- typvärde uppmätt av Collm-radarn
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  lob {2:F0}° hor. / {3:F0}° vert.{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Till vänster: uppmätt flöde och ZHR för de aktiva svärmarna från Global Meteor Network (kameror, daglig uppdatering; röd linje = senaste uppdatering). Till höger: radianter som CMOR-radarn (Kanada, 43° N) upptäcker i nästan realtid, även dagtidssvärmar; nedanför samma radianter färgade efter hastighet.
 A.R.	R.A.
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	ACCEPTERAD för "{0}": {1} av {2}, {3} MHz
 ADESSO	NU
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} QSO-rutor)
 ALTRI RIFERIMENTI DELL'ARTICOLO	ÖVRIGA REFERENSER I ARTIKELN
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	STRÄCKDÄMPNING (underdenst spår, McKinley 1961; antennförstärkning ej medräknad)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	STRÄCKDÄMPNING (underdenst spår, McKinley 1961 och ITU-R P.843; antennförstärkning ej medräknad)
 ATTENZIONE: {0}	VARNING: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	VARNING: {0} och {1} ligger inom antennloben ({2}° vid -3 dB kring {3}°): med denna riktning täcks de redan. Visas i grått på kartan.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	VARNING: {0} ligger inom antennloben ({1}° vid -3 dB kring {2}°): med denna riktning täcks den redan. Visas i grått på kartan.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	På (försiktig, startinställning): varje spårs effekt följer den fullständiga formeln från McKinley och ITU-R P.843, 1 / (1 − cos²β sin²φ): spår som korsar sträckans plan ger 10-15 dB mindre än de som ligger i det, och inget spår överskattas.\nVerkan: radianter längs sträckan dominerar, inte de vinkelräta; DJ5HG:s kurvor följs bättre timme för timme, med djupa minima när radianten står lågt.\nAv: varje spår viktas som om det låg i sträckans plan (β = 0), som till och med version 1.6: följer regeln om radianter vinkelräta mot sträckan (SM6FHZ, DH9GCD), men överskattar spåren som korsar planet.
 Adesso	Nu
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	Automatisk uppdatering av alla källor var 5:e minut
+Aggiungi	Lägg till
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Även oprecisa lokatorer (bara 4 tecken) hämtas från CALL3, när CALL3 har lokatorn med 6 tecken.
 Andromedidi	Andromediderna
+Angolo β tra scia e tratta (McKinley completo)	Vinkel β mellan spår och sträcka (fullständig McKinley)
 Antenna	Antenn
 Antenna Yagi: boom m	Yagiantenn: bom m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	Yagiantenn: bom {0:F2} m = {1:F2} lambda vid {2:F0} MHz -> förstärkning {3:F1} dBi (DL6WU-kurvan),\n  lob vid -3 dB {4:F0}° horisontellt / {5:F0}° vertikalt (Kraus korrigerad med W4RNL:s NEC-simuleringar)
 Antenna az: -	Antenn az: -
 Antenna az: {0}° (verso il DX)	Antenn az: {0}° (mot DX)
 Apri in Word	Öppna i Word
+Apri la cartella degli spot	Öppna spotmappen
+Argomenti di partenza	Standardämnen
 Arietidi di maggio Sud diurne	Dagtida sydliga maj-Arietiderna
 Arietidi diurne	Dagtida Arietiderna
 Assi del flusso non trovati nella posizione attesa.	Flödesaxlarna hittades inte på förväntad plats.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	Dämpning {0:F1} dB -> signal vid antennen {1:F1} dBm, minsta mottagbara {2:F0} dBm, marginal {3:+0.0;-0.0} dB
 Attività	Aktivitet
-Attivo oggi	Aktiv idag
 Attuazione sperimentale previsioni	Experimentella prognoser
 Aurigidi	Aurigiderna
 Azimut	Azimut
 BILANCIO A {0:F0} MHz (punto medio)	LÄNKBUDGET VID {0:F0} MHz (mittpunkt)
 Banda MHz	Band MHz
+Bande (MHz)	Band (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – antenngrupper, sektorer och lobens tidsschema
 Bootidi di giugno	Juni-Bootiderna
 CALCOLO E TEORIA DELL'EFFICIENZA	EFFEKTIVITET: BERÄKNING OCH TEORI
+CALL3: caricamento...	CALL3: laddar...
+CALL3: nessun archivio (data/call3.txt)	CALL3: ingen databas (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} anropssignaler
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantkartor
 COME ASCOLTARE I PING DI GRAVES	SÅ HÖR DU GRAVES-PINGARNA
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	INGEN INTERNETANSLUTNING: externa data ej uppdaterade (nytt försök om 5 minuter)
 Calcola	Beräkna
 Calcolo dell'efficienza	Effektivitetsberäkning
 Calcolo non riuscito: {0}	Beräkningen misslyckades: {0}
+Calcolo per {0} UTC	Beräkning för {0} UTC
+Calcolo per: adesso	Beräkning för: nu
+Calcolo per: {0} UTC	Beräkning för: {0} UTC
+Calcolo previsionale	Prognosberäkning
 Camelopardalidi di ottobre	Oktober-Camelopardaliderna
 Cancella memoria	Rensa minnet
 Cancellare tutti i quadrati caricati dal file ADIF?	Radera alla rutor som lästs in från ADIF-filen?
@@ -55,14 +72,27 @@ Carattere	Typsnitt
 Carica file ADIF...	Läs in ADIF-fil...
 Carica file RMOB dal disco...	Läs in RMOB-fil från disk...
 Catalogo sciami	Svärmkatalog
-Che cosa fare	Vad du ska göra
+Che cosa fare	Vad du gör
+Chiaro	Ljust
+Chiuso	Stängd
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Klicka på en sträcka på kartan eller en rad i tabellen för detaljer om förbindelsen och dess moln.
+Cluster con PSKReporter	Kluster med PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X:s kluster med spots från PSKReporter (dm4x.ddns.net, port 8500): hit kommer MSK144-avkodningarna från WSJT-X och MSHV. Alternativt HamAlert (hamalert.org 7300, kräver ett konto med triggers).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Kluster valt av användaren. På ON0DXK är VHF-banden filtrerade: aktivera dem med set/filter dxbm/pass 6 (sedan 4, 2...). Ett annat exempel: hamqth.com 7300.
 Collm stessa ora	Collm samma timme
 Collm {0} MHz (validi)	Collm {0} MHz (giltiga)
 Comae Berenicidi	Coma Bereniciderna
 Comandi	Reglage
+Come DJ5HG	Som DJ5HG
+Commento	Kommentar
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	Med OH5IY:s medeldämpning (200 dB vid 144 MHz, skalad med λ³: {0:F1} dB vid {1:F0} MHz) skulle marginalen bli {2:+0.0;-0.0} dB
+Connessione a {0}...	Ansluter till {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	Ingen internetanslutning.\n\nRadar- och RMOB-data kan inte uppdateras: programmet använder senast sparade data och försöker igen automatiskt var 5:e minut.
 Connessione ripristinata.	Anslutningen återställd.
+Connesso: {0} argomenti	Ansluten: {0} ämnen
+Connetti	Anslut
+Connetti all'avvio	Anslut vid start
+Contatori	Räknare
 Conteggio	Räkning
 Controllo le fonti di dati esterne...	Kontrollerar externa datakällor...
 Corrispondente	Motstation
@@ -70,18 +100,26 @@ Corrispondente  {0}   quota {1:F0} m	Motstation      {0}   höjd {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (artikel på italienska, version 7).
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961 (ekvationen för underdensa spår)
 DATI DEGLI SCIAMI	SVÄRMDATA
-DATI RADAR IN DIRETTA	RADARDATA I REALTID
+DATI RADAR IN DIRETTA	LIVE-RADARDATA
 DENTRO il lobo	INOM loben
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	Härifrån: spår i E-skiktet på cirka 90 km (SKiYMET-radar), elevationsformeln, Hot A / Hot B, side-scatter, dämpning 182-200 dB, IARU:s pinglängd.
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	Valfritt DX-kluster
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	Härifrån: spår i E-skiktet på cirka 90 km (SKiYMET-radar), elevationsformeln, Hot A / Hot B, side-scatter, sträckdämpning, IARU:s pinglängd.
+Data del calcolo (UTC)	Beräkningsdatum (UTC)
 Decl.	Dekl.
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	Spårets täthet q = {0:E1} elektroner/m. Artikelns referenser vid 144 MHz: 182 dB minimum (GM8JBJ), 200 dB medel (OH5IY)
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	Spårets täthet q = {0:E1} elektroner/m. Referenser: 172-190 dB (G4BAO:s beräkningar, citerade av GM8JBJ), 200 dB medel vid 144 MHz (OH5IY)
 Densita' scia q = 10^	Spårtäthet q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Detalj för de närmaste {0:F0} s: den användbara zonen ligger inte i något lobsteg
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	Detalj för de närmaste {0:F0} s: steg i sektor {1} ({2:F1} s vardera) och steget som belyser den användbara zonen
 Direzioni Hot A / Hot B	Riktningar Hot A / Hot B
+Disconnesso	Frånkopplad
+Disconnetti	Koppla från
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	Avstånd         {0:F0} km   azimut {1:F1}°   (från motstationen {2:F1}°)
+Documenti tecnici	Tekniska dokument
 Documento Word	Word-dokument
 Documento esportato: {0}	Dokument exporterat: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Var källorna till livedata finns. Streckade cirklar = den del av himlen som radarn ser (cirka 300 km runt stationen, spår på 90 km): ingen radar tittar på himlen ovanför din sträcka, data visar hur aktiv svärmen är. Prickade linjer = avstånd från din station.
 Draconidi di ottobre	Oktober-Draconiderna
 E	Ö
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	EFFEKTIVITET FÖR STRÄCKAN GRAVES → DIG NU
@@ -94,6 +132,7 @@ Elevazione d'antenna in funzione della distanza dallo scatter point	Antennelevat
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	Antennelevation mot mittpunkten: {0:F1}°   (artikelns formel, bild 7)
 Elevazione lobo °	Lobelevation °
 Errore all'avvio: {0}	Startfel: {0}
+Errore: {0}	Fel: {0}
 Esponente	Exponent
 Esponente dal confronto RMOB	Exponent från RMOB-jämförelse
 Esponente non calcolabile con questi dati.	Exponenten kan inte beräknas med dessa data.
@@ -102,6 +141,7 @@ Esponente λ^k	λ^k-exponent
 Esporta	Exportera
 Esporta il documento in Word	Exportera dokumentet till Word
 Esporta in Word (.docx)...	Exportera till Word (.docx)...
+Europa	Europa
 FONTE PRINCIPALE	HUVUDKÄLLA
 FONTI	KÄLLOR
 Fattore di stazione K	Stationsfaktor K
@@ -110,27 +150,38 @@ File ADIF del log	Loggens ADIF-fil
 File RMOB	RMOB-fil
 File RMOB (conteggi orari del mese)	RMOB-fil (månadens timräkningar)
 File mancante: {0}	Fil saknas: {0}
+Filtro	Filter
+Filtro degli spot meteor scatter	Filter för meteor scatter-spots
 Finestra utile	Användbart fönster
 Flusso radar	Radarflöde
 Flusso radar: nessun dato. Premi "Scarica adesso".	Radarflöde: inga data. Tryck på "Hämta nu".
+Fonte	Källa
 Fonte del massimo	Källa för maximum
 Fonti	Källor
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	Diagrammets format har ändrats ({0}x{1}): kan inte läsas.
 Formato file mensile, {0}/{1}.	Månadsfilformat, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	Bulletinens tabellformat ({0}/{1}): om filen innehåller flera observatörer läses de efter varandra; använd en fil med en enda observatör.
+Foto	Foto
 Frequenza di arrivo MHz	Målfrekvens MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT, DH8BQA, geekshed.co.uk, WSJT-X-manualen, WB2FKO (pingar), IU6GIR (aktivitet 143,050 MHz), IARU Region 1 VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	STRÄCKANS GEOMETRI (sfärisk jord, R = 6372,7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN och CMOR kl. {0} UTC: {1} fel ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN och CMOR kontrollerade kl. {0} UTC ({1} nya filer). GMN-data: CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES direktväg: az {0:F0}°
 Geminidi	Geminiderna
 Geometria e attenuazione	Geometri och dämpning
 Giorno per la tabella 24 h (UTC)	Dag för 24 h-tabellen (UTC)
 Giudizio	Bedömning
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Accepterade spots sparas i data/spot_ms, en CSV-fil per dag. Saknade lokatorer hämtas från CALL3-databasen (data/call3.txt).
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: uppmätt flöde och ZHR för svärmarna. Data CC BY 4.0; Vida et al. 2021, MNRAS 506(4), och Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	Antennförstärkning dBi (tx = rx)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - kurva förstärkning/bomlängd för långa yagis, G(dBi) = 7,773 log(L/lambda) + 11,43, återgiven av W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (klassiska hot spots, för antennriktning)
+Host	Värd
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: hot spots {0} km från mittpunkten (AMS 203, W8WN, MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: hot spots {0} km från mittpunkten (värde inmatat för hand).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: hot spots {0} km från mittpunkten, avvikelse {1}° (AMS-tabellen av J. Richardson, DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}
@@ -145,25 +196,35 @@ Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale vi
 Il file scelto non e' un file locale.	Den valda filen är inte en lokal fil.
 Il mio locator	Min lokator
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (begreppet svärmeffektivitet), www.kolumbus.fi/oh5iy (historisk webbplats)
+Importa CALL3.TXT...	Importera CALL3.TXT...
 Impossibile leggere {0}: {1}	Kan inte läsa {0}: {1}
+Impostazione del calcolo:	Beräkningsinställning:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	I forward scatter växer varaktigheten också med sec²φ (φ = {0:F0}° i sträckans mittpunkt; Collm mäter i backscatter, φ = 0): x {1:F1}, så ett eko på 1 s vid Collm varar cirka {2:F0} ms på sträckan.
+Indice della tratta Σ ZHR×η: {0}	Sträckindex Σ ZHR×η: {0}
 Indice sciami tratta	Sträckans svärmindex
 Indice tratta (ZHR×eff.)	Sträckindex (ZHR×eff.)
+Indirizzo mancante	Adress saknas
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maj 2025 (lambda^3- och lambda^2-reglerna, mittpunkt, bästa riktning)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (polärdiagram med bästa riktning)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabell 5, 6 och 7)
+Invia	Skicka
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: förstärkning och lobbredd, G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", DARC-konferens, januari 2018: formeln för bästa riktning\n    av DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), konspridning och val av HOT-A / HOT-B enligt DJ5HG,\n    användbar radiant mellan 20 och 70 grader, bästa avstånd 1300-1500 km, sporadiska meteorer enligt KB0VUK
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: förstärkningsuppskattningar för varianterna VK3AUU, WA2PHW och DJ9BV
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (från Kaiser & Closs 1952)
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (från Kaiser & Closs 1952; citerar John Worsnop G4BAO:s beräkningar, 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): fast referens i dB, långa spår med låg radiant,\n    kurvor för sträckor från Hamburg och från München; AMS-tabellen av J. Richardson för hot spot-avståndet
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI och meteor scatter) och manualen "QTFGUI Help" 2007: konspridningslagen,\n    testfallet Hamburg - Barcelona under Kvadrantiderna, använt för att verifiera modellen
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (kontroll av de två reglerna);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design och 70-CM Yagi Stacks Part 2 (David Tanners VK3AUU-yagi):\n    NEC-simuleringar använda för att verifiera förstärkningskurvan och korrigera den horisontella loben (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	GRÄNSER FÖR DEN GEMENSAMMA ZONEN (skärningar mellan kurvorna där varje stations horisont möter E-skiktet, artikeln)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Ordet "{0}" finns, men raden är inte en giltig "DX de ..."-spot.
+La riga non è uno spot "DX de ..." valido.	Raden är inte en giltig "DX de ..."-spot.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	Höjddiagrammets skala har ändrats: höjdstatistiken (typvärde, medel, median) gäller fortfarande, de absoluta antalen inte.
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Lobsekvensen beräknas från datorns klocka: synkronisera den med en NTP-server (fel på högst några tiondels sekund).
 La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Sekvensen är knuten till UTC (PE1ITR): sedan 2021 varar varje steg 0,8 s och en sektorcykel 4,8 s; 2007 var de 3,2 s och 19,2 s. Kommandostationen förskjuter ibland sekvensen några steg: detaljen är en prognos som ska bekräftas genom lyssning. Ett spår hörs bara om loben belyser det medan det varar: sannolikhet ≈ min(1, (steg + spår) / cykel) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (typisk varaktighet för ett underdenst spår vid 143 MHz ≈ {1:F1} s).
 Lato	Sida
 Lato A = a sinistra della tratta, B = a destra	Sida A = till vänster om sträckan, B = till höger
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	Bokstäverna bredvid procenttalet visar från vilken sida av sträckan de flesta reflexionerna kommer. A = till VÄNSTER sett från din station mot motstationen (Hot A-zonen); B = till HÖGER (Hot B-zonen). Det lönar sig att vrida antennen 10-30° mot den sidan (side-scatter). Ingen bokstav = effektivitet under 5 %. Raden Σ: sträckindex = summan av ZHR x effektivitet för alla aktiva svärmar. Ljusblå rader: jämförelse med DH9GCD:s formel (DF5HC 2018). ↑ = radianten över 70° från din station (för högt).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	Markerade rader är de svärmar som är aktiva idag (UTC)
 Legenda	Teckenförklaring
 Leonidi	Leoniderna
 Leonis Minoridi	Leonis Minoriderna
@@ -173,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	Gränser 
 Lincidi di settembre	September-Lynciderna
 Lingua dell'interfaccia	Gränssnittets språk
 Liridi	Lyriderna
+Live e dati real-time	Live och realtidsdata
+Loc DX	DX-lok
+Loc spotter	Spotter-lok
 Locator del corrispondente non valido	Ogiltig lokator för motstationen
 Locator della stazione non valido	Ogiltig stationslokator
+Manca il nominativo per il login	Anropssignal för inloggning saknas
 Mappa d'Europa	Europakarta
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	Europakartan är inte tillgänglig (nätverk krävs vid första start).
+Mappa dei radar europei	Karta över europeiska radarer
 Mappa quadrati	Rutkarta
 Mappa:	Karta:
 Mappa: bordo = {0} km dalla stazione. {1}	Karta: kant = {0} km från stationen. {1}
@@ -185,54 +251,80 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	Meteorer/timme - igår {0} och idag {1} 
 Metti GRAVES come DX	Sätt GRAVES som DX
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	Bästa riktning för svärmen: VINKELRÄT mot ankomst-\nriktningen (radiantens azimut +-90°, tolerans +-40-50°,\nSM6FHZ). Planvy: gul linje = svärmens\nförflyttning, orange punkter = riktningar, ellipser\nPREV = mest sannolika spår nu.\nKlicka på en radiant: bana med UTC-tider
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	Uppmätt i Collm och omräknat till {0} MHz - igår {1} och idag {2} (UTC)
+Mondo	Världen
 Monocerotidi di dicembre	December-Monocerotiderna
 N	N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Reflexionernas varaktighet x ({1:F1}/{0:F0})^2 = x {5:F4}: ett eko på 1 s vid {1:F1} MHz varar cirka {6:F0} ms vid {0:F0} MHz (IARU:s maximala ping vid {0:F0} MHz: {7:F0} ms).\nExperimentella regler av SM6FHZ (VUSHF 2025). Faktorn K tar hänsyn till mottagarstationen (effekt, antenner): den fås genom jämförelse med en RMOB-observatör på samma band.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - kustlinjer och gränser 1:50 miljoner, public domain, www.naturalearthdata.com (Europakarta)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	I dämpningen (β = 90°, försiktig): spårets initiala radie {0:F1} dB (r0 = {1:F2} m på ITU:s medelhöjd {2:F1} km för {3:F0} MHz). Med spåret i sträckans plan (β = 0°, bästa fall) sjunker dämpningen till {4:F1} dB ({5:F1} dB) och marginalen ökar till {6:+0.0;-0.0} dB
+Nero	Svart
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	Ingen rekommenderad Hot: nästan inga aktiva svärmar just nu
+Nessun dato GMN: premi "Scarica adesso".	Inga GMN-data: tryck på "Hämta nu".
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Inga radardata: hämta dem från underfliken Live och realtidsdata › Radarflöde.
 Nessuna fonte Collm in fonti_radar.csv	Ingen Collm-källa i fonti_radar.csv
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	Inga spår väntas: aktiva svärmar under horisonten eller med noll effektivitet för denna sträcka.
 Nessuna zona comune dello strato E ({0})	Ingen gemensam zon i E-skiktet ({0})
+Nessuno sciame utile in questo momento	Ingen användbar svärm just nu
 No	Nej
 No: fuori dai settori	Nej: utanför sektorerna
 No: sopra il fascio (circa 25°)	Nej: över loben (cirka 25°)
 No: sotto l'orizzonte di GRAVES	Nej: under GRAVES horisont
+Nominativo per il login	Anropssignal för inloggning
+Non connesso	Ej ansluten
 Non ho riconosciuto il formato del file.	Filformatet känns inte igen.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	Kan inte läsa flödets vertikala skala (översta etiketten: {0}): värdena bör kontrolleras.
 Non riesco ad aprire il documento: {0}	Kan inte öppna dokumentet: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Det är ingen punkt på kartan: det är ett världsomspännande nätverk av kameror (mest amatörer) i många länder på alla kontinenter.
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	Obs: radardata tillhör respektive institution. Innan programmet distribueras måste tillstånd begäras för att hämta dem automatiskt.
+Notte	Natt
 Nuovo locator del corrispondente dalla mappa: {0}	Ny lokator för motstationen från kartan: {0}
 Nuovo locator della stazione dalla mappa: {0}	Ny stationslokator från kartan: {0}
+Nuovo tentativo tra 30 s	Nytt försök om 30 s
+Nuvola	Moln
 O	V
 ORA MIGLIORE DEL GIORNO	DAGENS BÄSTA TID
 Ora	Tid
 Ora UTC	UTC-tid
-Ora della volta celeste (±36 h)	Himlavalvets tid (±36 h)
+Ore (da −12 a +36 h)	Timmar (−12 till +36 h)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	Gemensamma timmar: {0}. Medianförhållande RMOB/Collm = {1:F4}.\nEmpirisk exponent (med K = 1): k = {2:F2}  (SM6FHZ-regeln: 3).\n\nTillämpa denna exponent? (Alternativt behålls k = 3 och faktorn K = {3:F2} justeras.)
 Orionidi	Orioniderna
 Orionidi di novembre	November-Orioniderna
 Osservatore RMOB	RMOB-observatör
 PREVISIONE SPERIMENTALE	EXPERIMENTELL PROGNOS
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	NÄSTA LOBPASSAGE ÖVER ZONEN
+PSKReporter MQTT	PSKReporter MQTT
 Passo	Steg
+Pastello acquamarina	Pastell akvamarin
+Pastello arancione	Pastell orange
+Pastello azzurro	Pastell ljusblå
+Pastello indaco	Pastell indigo
+Pastello lilla	Pastell lila
+Pastello marrone	Pastell brun
+Pastello rosa	Pastell rosa
+Pastello verde	Pastell grön
 Pegasidi di luglio	Juli-Pegasiderna
 Perseidi	Perseiderna
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (maximala radiotimfrekvenser)
+Personalizzata	Anpassad
 Phoenicidi	Phoeniciderna
 Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Planvy: gul linje = förflyttning av vald svärm (eller den mest gynnsamma), PREV-ellipser = där de mest sannolika spåren faller nu. Himlavalvet till höger (Uppgång/Nedgång i UTC den {0}): gul = effektivitet >= 50 % och ZHR >= 2, orange >= 20 %, grå = nästan inaktiv.
 Piscidi di aprile diurne	Dagtida april-Pisciderna
+Porta	Port
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	Räckvidd på spårhöjd med lob vid {0:F1}°: {1:F0} km
 Potenza W	Effekt W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	Effekt {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (förstärkning i dBd = dBi - 2,15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	Effekt {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (förstärkning i dBi)
 Previsione /ora	Prognos /timme
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Prognos och beräkning live av meteorsvärmarnas effektivitet för meteor scatter
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	Experimentell prognos för de närmaste 24 timmarna vid {0} MHz för {1}
 Previsione {0} /ora	Prognos {0} /timme
 Previsione {0} MHz (rifl./ora)	Prognos {0} MHz (refl./timme)
 Pronto	Klar
 Prossimo massimo (UTC)	Nästa maximum (UTC)
+Prova del filtro	Test av filtret
+Prudente	Försiktig
 Punt. migliore	Bästa riktn.
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	Riktning {0:F0}°: Hot A {1}, Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	Punkter {0:F0} km på var sida om mittpunkten, vinkelrätt mot sträckan (AMS Bulletin 203 och W8WN: 50-150 km; som i MSHV)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	Punkter {0:F0} km på var sida om mittpunkten, vinkelrätt mot sträckan (värde inmatat för hand; MSHV använder 150 km)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	Punkter {0:F0} km på var sida om mittpunkten, vinkelrätt mot sträckan: avvikelse {1:F1}° från AMS-tabellen av J. Richardson (13° vid 1000 km, 11° vid 1250, 10° vid 1500 och 2000), återgiven av DJ5HG
 Punto di riflessione	Reflexionspunkt
 Punto medio     {0}  ({1:F2}N {2:F2}E)	Mittpunkt       {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	Mittpunkt (forward)
@@ -240,11 +332,15 @@ Punto medio {0}, elev. per {1:F1} km: {2:F1}°	Mittpunkt {0}, elev. för {1:F1} 
 Puppidi-Velidi	Puppid-Veliderna
 Quadrantidi	Kvadrantiderna
 Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Fyra fasstyrda antenngrupper täcker den södra himlen, från 90° till 270° azimut, i fyra sektorer om 45° (D, C, B, A); varje sektor är indelad i 6 steg om 7,5°, som belyses ett efter ett, samtidigt i alla fyra sektorerna (steg numrerade 1 till 6 från lägsta azimut). Loben är cirka 25° bred i elevation: på spårhöjden täcker den den färgade ringen mellan de två streckade cirklarna. Orange/rosa punkter = PREV-zoner för sträckan GRAVES → dig, grön linje = riktning till din station, röd linje = från din station till rekommenderad hot spot (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	Spårhöjd och alternativ valda för hand. Väljs automatiskt när du ändrar höjden, rutan "från radar", de långa spåren eller vinkeln β.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	Fast höjd på 102 km, längre spår med låg radiant och vinkeln β, som i "Die Geometrie von Meteorscatterverbindungen" av DJ5HG (2004).\nJämförelse med hans kurvor: i medel 2 dB under, typisk avvikelse 5 dB; radianter längs sträckan dominerar.
 Quota scie      {0:F1} km (strato E){1}	Spårhöjd        {0:F1} km (E-skiktet){1}
 Quota scie km	Spårhöjd km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	Spårhöjder (Collm): vanligast {0:F1} km, medel {1:F1}, median {2:F1}, std.avv. {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)	GRAVES-RADAR (fliken GRAVES-radar)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	LÅG RADIANT LÄNGS STRÄCKAN: {0}. Den beräknade effektiviteten förblir låg, men med strykande spår längs sträckan väntar sig DJ5HG sällsynta, starka reflexer: värt att lyssna.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	RADIANTEN FÖR HÖGT (över {0}°): {1}. Spåren faller nästan lodrätt och reflekterar lite mot sträckan (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: port 7000 = CW och RTTY, port 7001 = FT8. Inloggning med enbart anropssignalen. RBN-skimmers avkodar sällan MS-moder: det är främst användbart för spots med <MS> i kommentaren.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	EXPERIMENTELLA REGLER MELLAN BANDEN (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	KRONOLOGISK REKONSTRUKTION · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB använder GRAVES för meteorräkning per timme: jämför dina pingar med observatörerna på 143,050 MHz
@@ -252,26 +348,46 @@ RMOB {0} (scala a destra)	RMOB {0} (höger skala)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {1} timmar lästa kl. {2} UTC
 RMOB – osservatori su 143,050 MHz	RMOB – observatörer på 143,050 MHz
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; månadsbulletiner rmob.org/rmobtext (GRAVES-observatörer 143,050 MHz: Venedigs planetarium, Faenza, Rovereto m.fl.)
+Raccolta dati	Datainsamling
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	Rekommendation ITU-R P.843-1 (1997): vinkeln beta mellan spår och sträckans plan, spårets initiala radie, medelhöjd som funktion av frekvensen
 Radar GRAVES	GRAVES-radar
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	Collms meteorradar, Leipzigs universitet (LIM) och IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	Radiant:
+Raggio della mappa	Kartradie
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	Härled exponenten från RMOB-filen
 Ricevitore	Mottagare
+Riconnessione tra {0} s	Återansluter om {0} s
+Riconnetti	Återanslut
+Riepilogo dell'anno (ZHR misurati, GMN)	Årsöversikt (uppmätt ZHR, GMN)
 Riga {0} ignorata (colonne insufficienti)	Rad {0} ignorerad (för få kolumner)
 Riga {0}: {1}	Rad {0}: {1}
-Riporta la volta celeste al tempo reale	Återställ himlavalvet till realtid
+Riporta il momento del calcolo al tempo reale	För beräkningstidpunkten tillbaka till realtid
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	Jämfört med 144 MHz: antal/intensitet x {0:F3} ({1:+0.0;-0.0} dB), varaktighet x {2:F2}. IARU:s maximala ping vid {3:F0} MHz: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) och "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	Skrollhjul = zoom, dra = panorera, mus över en ruta = QSO
 S	S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	AVVISAD: "{0}" hittad, men frekvensen {1:F1} kHz ligger inte i ett valt band.
+SCARTATO: frequenza sotto 27990,0 kHz.	AVVISAD: frekvens under 27990,0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	AVVISAD: utanför MS-fönstren och inget filterord.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	AVVISAD: kommentaren anger en annan utbredning ({0}) och det finns ingen MS-mod.
 SCIAME PIÙ FAVOREVOLE	MEST GYNNSAM SVÄRM
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	TVÄRSNITT - de mest sannolika spåren sedda från antennen mot motstationen (az. {0}°)
+SGO, Finlandia	SGO, Finland
 Scarica RMOB adesso	Hämta RMOB nu
 Scarica adesso	Hämta nu
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Släng direkt klusterrader under 27990,0 kHz (de visas inte i konsolen och sparas inte)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	Antennavvikelse för hot spots från AMS-tabellen av J. Richardson, återgiven av DJ5HG: 13° vid 1000 km, 11° vid 1250 km, 10° vid 1500 och 2000 km. Avmarkera för att mata in avståndet för hand (MSHV använder 150 km).
+Scia meteorica	Meteorspår
 Sciame	Svärm
 Sciame più favorevole	Mest gynnsam svärm
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	Mest användbara svärm: {0} (ZHR {1}, effektivitet {2} %)
 Sciami	Svärmar
+Sciami in diretta	Svärmar live
+Sciami sopra l'orizzonte: {0}	Svärmar ovanför horisonten: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	Längre spår med låg radiant (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	Skriv RMOB-observatörens namn så som det står i filnamnet (t.ex. NAMN_112026rmob.TXT -> NAMN).
+Scrivi il nominativo per il login prima di connettere.	Skriv anropssignalen för inloggning innan du ansluter.
 Segnale minimo dBm	Minsta signal dBm
 Sequenza del fascio	Lobsekvens
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	Både Collm-data och en RMOB-fil för samma timmar behövs.
@@ -281,16 +397,30 @@ Sigla	Kod
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	Detta är de yttersta kanterna av himlen sedd från båda stationerna, inte punkter att rikta mot.
 Sorge	Uppgång
 Sorgente Antielio	Antihelionkällan
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	Av (försiktig): varje spår viktas med sinus för radiantens elevation, eftersom färre meteorer per km² faller när radianten står lågt.\nPå: som hos DJ5HG (2004) är spåren längre med låg radiant (skiktets användbara tjocklek, 15 km, delat med sinus för elevationen, upp till 100 km) och uppfyller oftare reflexionslagen. De två effekterna tar ut varandra över cirka 9° elevation: effektiviteten med låg radiant ökar, med hög radiant ändras den inte.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS-spots från fliken "Datainsamling". För varje förbindelse visar molnet var de mest sannolika spåren samlas för den sträckan och den timmen (spegelreflektion, summan av de aktiva svärmarna). Streckade moln = endast sporadiska meteorer. Spots med en station utanför kartan ritas inte; de som just har kommit (mindre än 3 minuter) blinkar i en minut.
+Spot MS raccolti	Insamlade MS-spots
+Spot da mostrare	Spots att visa
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	PSKReporter-spots live via MQTT (mqtt.pskreporter.info, en tjänst från M0LTE): ingen inloggning, spotsen kommer redan med lokatorerna för den sändande och den mottagande stationen. Ett ämne per rad eller åtskilda med ;  format pskr/filter/v2/band/mod/anropssignal tx/anropssignal rx/... (+ = valfri, # = resten).
+Spot meteor scatter raccolti (i più recenti in alto)	Insamlade meteor scatter-spots (nyaste överst)
+Stazione	Station
 Stazione        {0}   quota {1:F0} m	Station         {0}   höjd {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	Experimentell uppskattning (SM6FHZ-regler): meteorer/timme vid {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; pinglängd x {4:F3}. IARU:s maximala ping vid {0:F0} MHz: {5:F0} ms. Ungefärliga värden, att jämföra med erfarenhet på bandet.{6}
+Svuota la tabella	Töm tabellen
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC:s Swan Meteor Skyview - swan.ms (förebild för himlavalvets grafik)
 Sì	Ja
 Sì · settore {0}	Ja · sektor {0}
 TRATTA	STRÄCKA
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	STRÄCKA BORTOM SPÅRETS HORISONT: med spår på {0:F1} km ligger mittpunkten {1:F1}° under horisonten. Det krävs spår på minst {2:F0} km höjd: förbindelse möjlig bara med de högsta spåren, effektivitet och dämpning ligger vid modellens gräns.
 Tauridi Nord	Nordliga Tauriderna
 Tauridi Sud	Sydliga Tauriderna
+Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
+Tema	Tema
 Tempo reale	Realtid
 Tipo	Typ
+Traffico MS in diretta · {0}	MS-trafik live · {0}
+Traffico in diretta	Trafik live
+Traffico meteor scatter in diretta	Meteor scatter-trafik live
 Tramonta	Nedgång
 Traslato	Omräknat
 Traslato {0}	Omräknat {0}
@@ -301,25 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	Sträcka {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	För få gemensamma timmar ({0}) mellan Collm och RMOB-filen.
 Tutti i file	Alla filer
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	USB på 143,049 MHz (ton vid cirka 1 kHz) eller 143,050 MHz, långsam eller avstängd AGC, ljudbandbredd minst 2,4 kHz
+Univ. Lipsia / IAP Kühlungsborn	Leipzigs univ. / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	En spot i dessa fönster accepteras även utan modens namn, utom när kommentaren anger en annan utbredning med någon av dessa märkningar:
 Ursidi	Ursiderna
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Gäller spots utanför fönstren och spots med en märkning för en annan utbredning: de behålls om de innehåller ett av de aktiverade orden, skrivet med versaler, gemener eller blandat. MSK144, FSK441, PSK2K, JTMS och JT6M är digitala moder som bara används för meteor scatter: spoten är säkert MS. <MS> anger allmänt att förbindelsen gjordes via meteor scatter.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	Mest försiktiga värden, startinställning: spårhöjd uppmätt av Collm-radarn (rutan "från radar"), normala spår, vinkeln β på.\nJämförelse med DJ5HG:s kurvor (Kvadrantiderna, sträckor från Hamburg): i medel 7 dB under, med samma förlopp timme för timme (formavvikelse cirka 3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	Försiktiga värden: spår som korsar sträckans plan (β = 90°, sämsta fall), inklusive spårets initiala radie (ITU-R P.843) på ekonas medelhöjd för varje frekvens
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	Mot rekommenderad hot spot för sträckan GRAVES → dig (rutan Sträcka), med låg elevation
 Vista dall'alto (E a destra)	Vy ovanifrån (Ö till höger)
-Volta celeste: tempo reale	Himlavalv: realtid
-Volta celeste: {0} UTC	Himlavalv: {0} UTC
-Waterfall	Vattenfall
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – sändare i Broye-lès-Pesmes (47,348° N 5,515° E)
 YA-MS - nessuna connessione	YA-MS - ingen anslutning
 YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	YAEC av IC8TEM – fliken GRAVES-radar (skissen den härstammar från)
 ZHR ora	ZHR nu
 ZONA UTILE NEL FASCIO DI GRAVES	ANVÄNDBAR ZON I GRAVES-LOBEN
+a DESTRA guardando verso il corrispondente	till HÖGER sett mot motstationen
+a SINISTRA guardando verso il corrispondente	till VÄNSTER sett mot motstationen
+a cura di	av
 a cura di Costantino IC8TEM	av Costantino IC8TEM
+accettati per finestra di frequenza: {0}	accepterade via frekvensfönster: {0}
+adesso	nu
 adesso {0}	nu {0}
 adesso · ancora {0:F1} s	nu · {0:F1} s kvar
+aggiornamento una volta al giorno	uppdateras en gång om dagen
 alfa-Capricornidi	alfa-Capricorniderna
 alfa-Centauridi	alfa-Centauriderna
 alfa-Monocerotidi	alfa-Monocerotiderna
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: rad ignorerad: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	antenn mot {0}: az {1:F0}° · el {2:F1}°\nGRAVES direktväg: az {3:F0}°
+antenna {0}°	antenn {0}°
+auto (AMS)	auto (AMS)
 azimut rispetto al corrispondente	azimut relativt motstationen
 beta-Tauridi diurne	Dagtida beta-Tauriderna
 buono	bra
@@ -328,10 +469,14 @@ calcolo della tratta GRAVES → te in corso...	beräknar sträckan GRAVES → di
 circumpolare	cirkumpolär
 clic destro =	högerklick =
 clic sinistro =	vänsterklick =
+collegamento via meteor scatter	förbindelse via meteor scatter
+comandi dopo il login, separati da ;	kommandon efter inloggning, åtskilda med ;
+comando da inviare (es. sh/dx 20)	kommando att skicka (t.ex. sh/dx 20)
 confermato (QSL o LoTW)	bekräftad (QSL eller LoTW)
 copia locale del {0} UTC	lokal kopia från {0} UTC
 corrispondente	motstation
 dal radar	från radar
+dati CC BY 4.0 (Vida et al. 2021, 2022)	data CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud	Sydliga delta-Aquariiderna
 eco	eko
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	förväntade ekon ≈ {0:F0}/timme (experimentellt: prognos × lob {1:F0} %)
@@ -350,10 +495,12 @@ errore: {0}	fel: {0}
 eta-Aquaridi	eta-Aquariiderna
 eta-Eridanidi	eta-Eridaniderna
 eta-Liridi	eta-Lyriderna
+finestra {0} kHz	fönster {0} kHz
 fuori dal lobo	utanför loben
 gamma-Draconidi di luglio	Juli-gamma-Draconiderna
 gamma-Ursae Minoridi	gamma-Ursae Minoriderna
 gradi	grader
+hot spot (solo sporadiche) {0}	hot spot (endast sporadiska) {0}
 il giorno scelto non è oggi	vald dag är inte idag
 indice	index
 indice sciami tratta (scala a destra)	sträckans svärmindex (höger skala)
@@ -363,13 +510,16 @@ invariato (controllato alle {0} UTC)	oförändrat (kontrollerat kl. {0} UTC)
 kappa-Cygnidi	kappa-Cygniderna
 kappa-Leonidi diurne	Dagtida kappa-Leoniderna
 la mia stazione	min station
+la tua stazione	din station
 lato prevalente {0} ({1:F0}%)	dominerande sida {0} ({1:F0}%)
 lavorato	körd
 lim. A	gr. A
 lim. B	gr. B
 limiti zona comune	gränser gemensam zon
+linguetta "{0}"	fliken "{0}"
 lobo antenna	antennlob
 lobo {0}°	lob {0}°
+locale	lokal
 mai scaricato	aldrig hämtad
 mappa: bordo = {0} km dalla stazione	karta: kant = {0} km från stationen
 max Σ {0:F1} alle {1:00}:30	max Σ {0:F1} kl. {1:00}:30
@@ -379,20 +529,29 @@ meteore per km di quota	meteorer per km höjd
 meteore/ora radar	radarmeteorer/timme
 meteore/ora stimate	uppskattade meteorer/timme
 miglior punt.	bästa riktn.
+misura il flusso e lo ZHR di ogni sciame attivo	mäter flöde och ZHR för varje aktiv svärm
 mobile	rörlig
+modo digitale MS	digital MS-mod
 nessun ADIF caricato	ingen ADIF inläst
+nessun dato radar: vedi Live e dati real-time › Flusso radar	inga radardata: se Live och realtidsdata › Radarflöde
 nessun file RMOB caricato	ingen RMOB-fil inläst
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	inget lobsteg belyser den användbara zonen\nfångat spår ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	inget aktivt nätverk
 nessuno sciame utile adesso: hot spot più adatto al fascio	ingen användbar svärm nu: hot spot bäst anpassad till loben
 nessuno sciame utile in questo giorno	ingen användbar svärm denna dag
 nessuno sciame utile in questo momento	ingen användbar svärm just nu
+nominativo	anropssignal
+nuova parola	nytt ord
 nuovo dato	nya data
 nuovo dato alle {0} UTC	nya data kl. {0} UTC
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	moln kan inte beräknas för denna sträcka (för kort eller för lång)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	moln {0}: {1:F0} % av reflektionerna, {2:F0} × {3:F0} km, axel vid {4:F0}°
 omega-Cetidi Nord diurne	Dagtida nordliga omega-Cetiderna
 omega-Cetidi Sud diurne	Dagtida sydliga omega-Cetiderna
 orizzonte del fascio	lobens horisont
 orologio del PC sincronizzato	datorns klocka synkroniserad
+osservatori RMOB che ascoltano GRAVES	RMOB-observatörer som lyssnar på GRAVES
+parola aggiunta	tillagt ord
 passi	steg
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	steg {0}{1} var {2:F1} s · kl. {3} ...\nfångat spår ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	rad.-bana
@@ -400,52 +559,75 @@ pi-Puppidi	pi-Puppiderna
 prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)	automatisk hämtning var 5:e minut (aktivera endast med tillstånd från RMOB)
 previsione {0} MHz /ora	prognos {0} MHz /timme
 puntamento migliore {0}° / {1}°	bästa riktning {0}° / {1}°
+puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	rikta mot {0:F0}° ({1:+0;-0}° från motstationen), elevation {2:F1}°, hot spot på {3:F0} km
 quasi inattivo	nästan inaktiv
 quota m	höjd m
+radar SKiYMET 36,2 MHz	SKiYMET-radar 36,2 MHz
+radar meteorico 17-38 MHz, orbite	meteorradar 17-38 MHz, banor
+radar meteorico 36,9 MHz	meteorradar 36,9 MHz
 radio, diurno	radio, dagtid
 rete assente: {0}	inget nätverk: {0}
 riflessioni/ora	reflexioner/timme
 riflessioni/ora a {0} MHz	reflexioner/timme vid {0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	mottagna rader            {0}\nlästa spots               {1}\naccepterade MS-spots      {2}\navvisade (ord)            {3}\navvisade (band)           {4}\nMS-spots senaste timmen   {5}
+righe sotto 27990 kHz scartate: {0}	rader under 27990 kHz slängda: {0}
+righe {0}, spot letti {1}, MS {2}	rader {0}, lästa spots {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	skala avläst från diagrammet: 0-{0} meteorer/timme
 scala non letta	skala ej avläst
 scala tarata 0-1200 meteore/ora	kalibrerad skala 0-1200 meteorer/timme
 scarso	dålig
 scartati	kasserade
+scartati per altra propagazione: {0}	avvisade för annan utbredning: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	bästa svärm {0} {1}: ZHR {2:F0} × eff. {3:F0} %
 scorrimento sciame	svärmens förflyttning
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	segment = spår (±10 km kring höjden) riktade mot radianten; tjockare = mer sannolika
 sempre sotto	alltid under
 sigma-Hydridi	sigma-Hydriderna
+sporadiche	sporadiska
 stima a {0} MHz (scala a destra)	uppskattning vid {0} MHz (höger skala)
-sì	ja
 tra {0:F1} s	om {0:F1} s
 traslato a {0} MHz (scala a destra)	omräknat till {0} MHz (höger skala)
+trasmettitore 143,050 MHz	sändare 143,050 MHz
 tratta / DX	sträcka / DX
 tratta GRAVES → te non calcolata	sträckan GRAVES → dig ej beräknad
 tu {0}	du {0}
+ultima ora	senaste timmen
+ultime 24 ore	senaste 24 timmarna
+ultime {0} ore	senaste {0} timmarna
+ultimi {0} minuti	senaste {0} minuterna
 var.	var.
 varie (tab. 6 IMO)	diverse (IMO tab. 6)
+versione	version
 visuale	visuell
 zeta-Perseidi diurne	Dagtida zeta-Perseiderna
 zona PREV	PREV-zon
 {0:00}:00 → {1:00}:00 UTC · {2} h	{0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)	{0:00}:00-{0:00}:59 UTC\nsträckindex {1:F1}\ndominerande sida {2} ({3:F0}%)
 {0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}	{0:00}:{1:00} UTC - index {2:F1}\ndominerande sida {3}\n{4}
+{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % av reflexionerna kommer från denna sida
 {0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)	{0:F0} MHz, förväntade reflexioner/timme\nnu {1:F0} - om 1 h {2} - om 2 h {3}\nexperimentellt (Collm, SM6FHZ-regler)
 {0:F0} km	{0:F0} km
 {0} (dal radiante, az. {1}°)	{0} (från radianten, az. {1}°)
 {0} (in rosso sulla mappa)	{0} (i rött på kartan)
 {0} (~{1} calc.)	{0} (~{1} ber.)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	{0} QSO lästa, {1} QSO-rutor på banden 50-432 MHz, {2} QSO kasserade (andra band eller utan ruta).
-{0} UTC (ora della volta celeste)	{0} UTC (himlavalvets tid)
+{0} UTC (momento del calcolo)	{0} UTC (beräkningstidpunkt)
 {0} UTC (tempo reale)	{0} UTC (realtid)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	{0} rekommenderas nu: az. {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	{0} rekommenderas nu: az. {1}° ({2}% av förväntade reflexioner)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} förbindelser på kartan · {1} utanför kartan · {2} utan lokator
+{0} dB rispetto al riferimento di DJ5HG	{0} dB i förhållande till DJ5HG:s referens
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	{0} från GRAVES: az {1:F1}° · el {2:F1}° (steg {3} av 6)
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} från GRAVES: az {1:F1}° · el {2:F1}° (sektorer från 90° till 270°, lob upp till cirka 25°)
 {0} h	{0} h
+{0} h rispetto ad adesso	{0} h från nu
+{0} km dalla tua stazione	{0} km från din station
+{0} spot MS in memoria	{0} MS-spots i minnet
+{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % kl. {3} UTC ({4} lokal tid)
 {0} · zona	{0} · zon
-{0}: non lavorato	{0}: ej körd
+{0}: non lavorato	{0}: inte körd
 {0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  az. från mig {2:F0}° (avvikelse {3:+0;-0}°), från motstationen {4:F0}°, avstånd {5:F0} km
 {0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  az. från mig {2:F1}° (avvikelse {3:+0.0;-0.0}° från direktriktningen), från motstationen {4:F0}°, avstånd {5:F0} km, elevation {6:F1}°
 {0}: {1} QSO	{0}: {1} QSO
@@ -455,151 +637,73 @@ zona PREV	PREV-zon
 Σ ZHR x effic.	Σ ZHR x eff.
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (vänster)
-# schemi di colori (nomi dei pastelli come in YAEC)
-Chiaro	Ljust
-Notte	Natt
-Nero	Svart
-Pastello azzurro	Pastell ljusblå
-Pastello arancione	Pastell orange
-Pastello acquamarina	Pastell akvamarin
-Pastello verde	Pastell grön
-Pastello rosa	Pastell rosa
-Pastello lilla	Pastell lila
-Pastello indaco	Pastell indigo
-Pastello marrone	Pastell brun
-Scia meteorica	Meteorspår
-Tema	Tema
-locale	lokal
-{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % kl. {3} UTC ({4} lokal tid)
-a SINISTRA guardando verso il corrispondente	till VÄNSTER sett mot motstationen
-a DESTRA guardando verso il corrispondente	till HÖGER sett mot motstationen
-{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % av reflexionerna kommer från denna sida
-puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	rikta mot {0:F0}° ({1:+0;-0}° från motstationen), elevation {2:F1}°, hot spot på {3:F0} km
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Till vänster: uppmätt flöde och ZHR för de aktiva svärmarna från Global Meteor Network (kameror, daglig uppdatering; röd linje = senaste uppdatering). Till höger: radianter som CMOR-radarn (Kanada, 43° N) upptäcker i nästan realtid, även dagtidssvärmar; nedanför samma radianter färgade efter hastighet.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantkartor
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Var källorna till livedata finns. Streckade cirklar = den del av himlen som radarn ser (cirka 300 km runt stationen, spår på 90 km): ingen radar tittar på himlen ovanför din sträcka, data visar hur aktiv svärmen är. Prickade linjer = avstånd från din station.
-Europa	Europa
-GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN och CMOR kl. {0} UTC: {1} fel ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN och CMOR kontrollerade kl. {0} UTC ({1} nya filer). GMN-data: CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: uppmätt flöde och ZHR för svärmarna. Data CC BY 4.0; Vida et al. 2021, MNRAS 506(4), och Vida et al. 2022, MNRAS 515(2)
-Mondo	Världen
-Nessun dato GMN: premi "Scarica adesso".	Inga GMN-data: tryck på "Hämta nu".
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Det är ingen punkt på kartan: det är ett världsomspännande nätverk av kameror (mest amatörer) i många länder på alla kontinenter.
-Riepilogo dell'anno (ZHR misurati, GMN)	Årsöversikt (uppmätt ZHR, GMN)
-SGO, Finlandia	SGO, Finland
-Sciami in diretta	Svärmar live
-Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
-Univ. Lipsia / IAP Kühlungsborn	Leipzigs univ. / IAP Kühlungsborn
-aggiornamento una volta al giorno	uppdateras en gång om dagen
-dati CC BY 4.0 (Vida et al. 2021, 2022)	data CC BY 4.0 (Vida et al. 2021, 2022)
-la tua stazione	din station
-linguetta "{0}"	fliken "{0}"
-misura il flusso e lo ZHR di ogni sciame attivo	mäter flöde och ZHR för varje aktiv svärm
-osservatori RMOB che ascoltano GRAVES	RMOB-observatörer som lyssnar på GRAVES
-radar SKiYMET 36,2 MHz	SKiYMET-radar 36,2 MHz
-radar meteorico 17-38 MHz, orbite	meteorradar 17-38 MHz, banor
-radar meteorico 36,9 MHz	meteorradar 36,9 MHz
-trasmettitore 143,050 MHz	sändare 143,050 MHz
-{0} km dalla tua stazione	{0} km från din station
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	ACCEPTERAD för "{0}": {1} av {2}, {3} MHz
-Aggiungi	Lägg till
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Även oprecisa lokatorer (bara 4 tecken) hämtas från CALL3, när CALL3 har lokatorn med 6 tecken.
-Apri la cartella degli spot	Öppna spotmappen
-Bande (MHz)	Band (MHz)
-CALL3: caricamento...	CALL3: laddar...
-CALL3: nessun archivio (data/call3.txt)	CALL3: ingen databas (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} anropssignaler
-Chiuso	Stängd
-Cluster con PSKReporter	Kluster med PSKReporter
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X:s kluster med spots från PSKReporter (dm4x.ddns.net, port 8500): hit kommer MSK144-avkodningarna från WSJT-X och MSHV. Alternativt HamAlert (hamalert.org 7300, kräver ett konto med triggers).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Kluster valt av användaren. På ON0DXK är VHF-banden filtrerade: aktivera dem med set/filter dxbm/pass 6 (sedan 4, 2...). Ett annat exempel: hamqth.com 7300.
-Commento	Kommentar
-Connetti	Anslut
-Connetti all'avvio	Anslut vid start
-Contatori	Räknare
-DX cluster a scelta	Valfritt DX-kluster
-Disconnesso	Frånkopplad
-Disconnetti	Koppla från
-Filtro	Filter
-Filtro degli spot meteor scatter	Filter för meteor scatter-spots
-Fonte	Källa
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Accepterade spots sparas i data/spot_ms, en CSV-fil per dag. Saknade lokatorer hämtas från CALL3-databasen (data/call3.txt).
-Host	Värd
-Importa CALL3.TXT...	Importera CALL3.TXT...
-Indirizzo mancante	Adress saknas
-Invia	Skicka
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Ordet "{0}" finns, men raden är inte en giltig "DX de ..."-spot.
-Loc DX	DX-lok
-Loc spotter	Spotter-lok
-Manca il nominativo per il login	Anropssignal för inloggning saknas
-Nominativo per il login	Anropssignal för inloggning
-Non connesso	Ej ansluten
-Nuovo tentativo tra 30 s	Nytt försök om 30 s
-Porta	Port
-Prova del filtro	Test av filtret
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: port 7000 = CW och RTTY, port 7001 = FT8. Inloggning med enbart anropssignalen. RBN-skimmers avkodar sällan MS-moder: det är främst användbart för spots med <MS> i kommentaren.
-Raccolta dati	Datainsamling
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	Återanslut
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	AVVISAD: "{0}" hittad, men frekvensen {1:F1} kHz ligger inte i ett valt band.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Släng direkt klusterrader under 27990,0 kHz (de visas inte i konsolen och sparas inte)
-Scrivi il nominativo per il login prima di connettere.	Skriv anropssignalen för inloggning innan du ansluter.
-Spot meteor scatter raccolti (i più recenti in alto)	Insamlade meteor scatter-spots (nyaste överst)
-Svuota la tabella	Töm tabellen
-collegamento via meteor scatter	förbindelse via meteor scatter
-comandi dopo il login, separati da ;	kommandon efter inloggning, åtskilda med ;
-comando da inviare (es. sh/dx 20)	kommando att skicka (t.ex. sh/dx 20)
-modo digitale MS	digital MS-mod
-nominativo	anropssignal
-nuova parola	nytt ord
-parola aggiunta	tillagt ord
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	mottagna rader            {0}\nlästa spots               {1}\naccepterade MS-spots      {2}\navvisade (ord)            {3}\navvisade (band)           {4}\nMS-spots senaste timmen   {5}
-righe sotto 27990 kHz scartate: {0}	rader under 27990 kHz slängda: {0}
-righe {0}, spot letti {1}, MS {2}	rader {0}, lästa spots {1}, MS {2}
-{0} spot MS in memoria	{0} MS-spots i minnet
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1:a kriteriet: typiska frekvenser för meteor scatter-spots (kHz)
-2° criterio: modi digitali MS e <MS>	2:a kriteriet: digitala MS-moder och <MS>
-La riga non è uno spot "DX de ..." valido.	Raden är inte en giltig "DX de ..."-spot.
-SCARTATO: frequenza sotto 27990,0 kHz.	AVVISAD: frekvens under 27990,0 kHz.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	AVVISAD: utanför MS-fönstren och inget filterord.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	AVVISAD: kommentaren anger en annan utbredning ({0}) och det finns ingen MS-mod.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	En spot i dessa fönster accepteras även utan modens namn, utom när kommentaren anger en annan utbredning med någon av dessa märkningar:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Gäller spots utanför fönstren och spots med en märkning för en annan utbredning: de behålls om de innehåller ett av de aktiverade orden, skrivet med versaler, gemener eller blandat. MSK144, FSK441, PSK2K, JTMS och JT6M är digitala moder som bara används för meteor scatter: spoten är säkert MS. <MS> anger allmänt att förbindelsen gjordes via meteor scatter.
-accettati per finestra di frequenza: {0}	accepterade via frekvensfönster: {0}
-finestra {0} kHz	fönster {0} kHz
-scartati per altra propagazione: {0}	avvisade för annan utbredning: {0}
-Spot MS raccolti	Insamlade MS-spots
-antenna {0}°	antenn {0}°
-Calcolo previsionale	Prognosberäkning
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Klicka på en sträcka på kartan eller en rad i tabellen för detaljer om förbindelsen och dess moln.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	Tekniska dokument
-Foto	Foto
-Live e dati real-time	Live och realtidsdata
-Mappa dei radar europei	Karta över europeiska radarer
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Inga radardata: hämta dem från underfliken Live och realtidsdata › Radarflöde.
-Nuvola	Moln
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Prognos och beräkning live av meteorsvärmarnas effektivitet för meteor scatter
-Raggio della mappa	Kartradie
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS-spots från fliken "Datainsamling". För varje förbindelse visar molnet var de mest sannolika spåren samlas för den sträckan och den timmen (spegelreflektion, summan av de aktiva svärmarna). Streckade moln = endast sporadiska meteorer. Spots med en station utanför kartan ritas inte; de som just har kommit (mindre än 3 minuter) blinkar i en minut.
-Spot da mostrare	Spots att visa
-Stazione	Station
-Traffico MS in diretta · {0}	MS-trafik live · {0}
-Traffico in diretta	Trafik live
-Traffico meteor scatter in diretta	Meteor scatter-trafik live
-a cura di	av
-hot spot (solo sporadiche) {0}	hot spot (endast sporadiska) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	inga radardata: se Live och realtidsdata › Radarflöde
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	moln kan inte beräknas för denna sträcka (för kort eller för lång)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	moln {0}: {1:F0} % av reflektionerna, {2:F0} × {3:F0} km, axel vid {4:F0}°
-sporadiche	sporadiska
-ultima ora	senaste timmen
-ultime 24 ore	senaste 24 timmarna
-ultime {0} ore	senaste {0} timmarna
-ultimi {0} minuti	senaste {0} minuterna
-versione	version
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} förbindelser på kartan · {1} utanför kartan · {2} utan lokator
+FONTE	KÄLLA
+RILIEVO	KONTROLL
+SCELTA	VAL
+(sopra 144 MHz nessuna misura: λ²)	(inga mätningar över 144 MHz: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	Hur pingarnas längd ändras från ett band till ett annat.\nTeoretisk (försiktig, standard): längd proportionell mot λ² (McKinley 1961; SM6FHZ:s regel): från 50 till 144 MHz blir pingarna 8 gånger kortare.\nObserverad: medianer uppmätta av NN4SA (EM64) under Perseiderna 2026 i HamSCI:s MSQP (R. Suggs NN4NT): 148 ms på 28 MHz, 78 ms på 50 MHz, 53 ms på 144 MHz; från 50 till 144 MHz blir pingarna bara 1,5 gånger kortare. En enda mottagarstation, preliminär analys; över 144 MHz finns inga mätningar och λ² används.
+Durata dei ping tra le bande	Pingarnas längd mellan banden
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	Observerad längd (HamSCI MSQP, NN4SA, Perseiderna 2026; medianer 148 / 78 / 53 ms på 28 / 50 / 144 MHz): cirka {0:F0} ms på {1:F0} MHz, x {2:F2} jämfört med 144 MHz{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	Längd enligt mätningarna i HamSCI MSQP (NN4SA, Perseiderna 2026) i stället för λ²: x {0:F3}, alltså varar ett eko på 1 s på {1:F1} MHz cirka {2:F0} ms på {3:F0} MHz.
+Raggio iniziale della scia	Spårets initialradie
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	Spårets initialradie r0: ju större den är, desto mer förloras på höga frekvenser.\nDubbla ITU-värdet (försiktig, standard): radarn CMOR på 17, 29 och 38 MHz finner r0 på 0,5-2 m mellan 85 och 95 km, oftast 1-1,5 m, med en spridning på en faktor två; ungefär dubbelt så mycket som tidigare mätningar (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m på 90 km), medelvärde.\nUtesluten: utan initialradiefaktorn.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	Initialradie: med medelvärdet från ITU-R P.843 (r0 = {0:F2} m) skulle faktorn vara {1:F1} dB; aktuellt val {2}. CMOR-mätningar: r0 på 0,5-2 m mellan 85 och 95 km, spridning på en faktor två (Stober et al. 2021)
+doppio dell'ITU (Stober 2021, prudente)	dubbla ITU-värdet (Stober 2021, försiktig)
+escluso	utesluten
+osservata (HamSCI MSQP, NN4SA 2026)	observerad (HamSCI MSQP, NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	teoretisk λ² (McKinley, SM6FHZ; försiktig)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	Lägger under varje svärm till raden "klassisk": domen enligt radioamatörernas regel, beräknad i förbindelsens mittpunkt.\n✗ radianten under horisonten; ◐ marginell (radianten under 15° eller över 70°, eller mindre än 30° från förbindelsens riktning); ● bra; ★ bäst (radianten mellan 15° och 70° och mer än 60° från förbindelsens riktning).\nTrösklar som i meteor-mcp (qso-graph, 2026); samma idé som DH9GCD:s formel och SM6FHZ:s regler. Ändrar inte beräkningen: används för att jämföra de två synsätten på vinkeln β.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	Beräknar k = 3,75·log10 r för varje svärm som är aktiv nu (r från GMN-tabellen, annars från IMO-katalogen) och tar det ZHR-viktade medelvärdet.\nTeori: med massindex s = 1 + 2,5·log10 r skalar antalet spår över en fast tröskel med λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nStandard förblir k = 3 (SM6FHZ:s erfarenhetsregel), försiktigare: ett lägre k förutsäger fler reflexer på höga frekvenser.\nObs: Collms räkningar är mest sporadiska meteorer, för vilka GMN inte publicerar r.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	Kameraräkning, inte flöde: beror på hur många stationer som har klar och mörk himmel.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	Avstånd mellan programmets radiant och MDC:s: median {0:F1}°, max {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Två synsätt på geometrin, med olika källor.\nPå (försiktig, standard): fullständig formel från McKinley (1961) och ITU-R P.843, 1 / (1 − cos²β sin²φ), där β är vinkeln mellan spåret och förbindelsens plan. Spår som korsar planet är värda 10-15 dB mindre än de som ligger i det och inget spår överskattas: radianter i linje med förbindelsen dominerar. Med detta val följer YA-MS formen på DJ5HG:s timkurvor (2004) bättre.\nAv: varje spår räknas som om det låg i förbindelsens plan (β = 0), som fram till version 1.6. Radioamatörernas klassiska regel gäller: bästa radianten står 15-70° högt och tvärs över förbindelsen, en radiant i linje är marginell (SM6FHZ, DH9GCD, meteor-mcp från qso-graph).\nDe två synsätten har ännu inte jämförts med oberoende mätningar: rutan "Klassisk dom" visar timme för timme den klassiska regelns dom under effektiviteten.
+GMN oggi	GMN i dag
+Giudizio classico	Klassisk dom
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: {0} bekräftade banor från {1} till {2} UTC, varav {3} sporadiska. Kameraräkning, inte flöde. Data CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ({0}): {1} lösningar. Medianer: λ {2:F1}°, RA {3:F1}°, dekl. {4:+0.0;-0.0}°, v {5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: lösningar
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	ZHR-viktat medelvärde: k = {0:F2} (SM6FHZ:s regel: 3, försiktigare).\n\nAnvända denna exponent?
+Nessuno sciame attivo con un indice di popolazione valido.	Ingen aktiv svärm med giltigt populationsindex.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	Banor bekräftade av GMN från {0} till {1} UTC: {2} (sporadiska {3})
+classico	klassisk
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3,75·log10 r = {0}, med r = {1} ({2}). SM6FHZ:s erfarenhetsregel använder k = 3, försiktigare.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = exponent för frekvensomräkningen från populationsindex r (GMN om tillgängligt, annars IMO): k = 3,75·log10 r. IAU MDC: lösningar publicerade i IAU Meteor Data Centers katalog; Δ = programmets IMO-katalog minus median av MDC-lösningarna (radianten jämförd vid samma sollongitud). GMN i dag: banor bekräftade i Global Meteor Networks senaste dagsfil (räkning, inte flöde).
+k dagli indici di popolazione	k från populationsindex
+Δ radiante	Δ radiant
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Två synsätt på geometrin, med olika källor.\nPå (försiktig, standard): fullständig formel från McKinley (1961) och ITU-R P.843, 1 / (1 − cos²β sin²φ), där β är vinkeln mellan spåret och förbindelsens plan. Spår som korsar planet är värda 10-15 dB mindre än de som ligger i det och inget spår överskattas: radianter i linje med förbindelsen dominerar. Med detta val följer YA-MS formen på DJ5HG:s timkurvor (2004) bättre.\nAv: varje spår räknas som om det låg i förbindelsens plan (β = 0), som fram till version 1.6. Radioamatörernas klassiska regel gäller: bästa radianten står 15-70° högt och tvärs över förbindelsen, en radiant i linje är marginell (SM6FHZ, DH9GCD, meteor-mcp från qso-graph).\nEn första jämförelse med BRAMS-räkningarna i Sonneberg (Perseiderna 2026, 471 km) skiljer dem inte åt: rutan "Klassisk dom" visar timme för timme den klassiska regelns dom under effektiviteten.
+... e altri {0}	... och {0} till
+Aggiorna adesso	Uppdatera nu
+Aggiornamenti	Uppdateringar
+Aggiornamento disponibile	Uppdatering tillgänglig
+Aggiornamento installato	Uppdatering installerad
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	Vissa ändringar syns först efter att programmet startats om.
+Apri la pagina delle release	Öppna sidan med utgåvor
+Chiudi	Stäng
+Continua senza	Fortsätt utan
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	Kontrollera internetanslutningen, eller ladda ner hela paketet igen från sidan med utgåvor.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	Kontrollerar på GitHub om det finns en nyare version av YA-MS och installerar den i så fall; kontrollerar också att inga programfiler saknas.
+Controllo degli aggiornamenti su GitHub...	Söker efter uppdateringar på GitHub...
+File mancanti	Saknade filer
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	Programmet laddar ner paketet {0}, ersätter sina filer, behåller mappen data (ändrade programfiler kopieras först till data/backup) och startar om.
+Installazione dell'aggiornamento...	Installerar uppdateringen...
+L'aggiornamento non è riuscito: {0}	Uppdateringen misslyckades: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	{0} programfiler saknas:\n{1}\n\nLadda ner dem från GitHub (version {2})?
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	Utgåvan har inget paket för det här systemet ({0}): ladda ner det för hand från sidan med utgåvor.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	Jag kan inte skriva i programmappen ({0}): installera den nya versionen för hand.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	Kan inte läsa versionerna som publicerats på GitHub: {0}
+Più tardi	Senare
+Riavvia YA-MS a mano: {0}	Starta om YA-MS för hand: {0}
+Salta questa versione	Hoppa över den här versionen
+Scarica i file mancanti	Ladda ner saknade filer
+Scaricamento dei file mancanti: {0} di {1}	Laddar ner saknade filer: {0} av {1}
+Scaricamento dell'aggiornamento...	Laddar ner uppdateringen...
+Scaricamento dell'aggiornamento: {0} %	Laddar ner uppdateringen: {0} %
+Scaricati {0} file mancanti.	{0} saknade filer nedladdade.
+Scaricati {0} file su {1}.	{0} av {1} filer nedladdade.
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} är installerat. Programmet startar nu om.
+YA-MS è aggiornato (versione {0}).	YA-MS är uppdaterat (version {0}).
+YA-MS.app non trovato nel pacchetto	YA-MS.app hittades inte i paketet
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	{0} filer i mappen data har ersatts: de tidigare kopiorna finns i data/backup/v{1}.
+{0} non trovato nel pacchetto	{0} hittades inte i paketet
+È disponibile YA-MS {0} (questa è la {1}).	YA-MS {0} finns tillgänglig (detta är {1}).

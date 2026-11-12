@@ -1,52 +1,69 @@
-# YA-MS - Türkçe (tr) translation of the user interface. UTF-8.
+# YA-MS - Turkish (tr) translation of the user interface. UTF-8.
 # One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
 # In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
-# Lines starting with # are comments. Missing entries are shown in Italian.
 (confermato)	(onaylandı)
 (destra)  B →	(sağ)  B →
 (lettura Collm: {0})	(Collm okuması: {0})
 (stima poco precisa sotto 2 λ)	(2 λ altında kaba tahmin)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> iz yüksekliğinde orta nokta ufkun altında: yol, tek atlamanın geometrik menzilinin ötesinde
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> iz yüksekliğinde orta nokta ufkun altında: yol, tek atlamanın geometrik menzilinin ötesinde (en az {0:F0} km yükseklikte izler gerekir)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	adım başına 0,8 s · döngü 4,8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1. kriter: meteor scatter spot'larının tipik frekansları (kHz)
+2° criterio: modi digitali MS e <MS>	2. kriter: MS dijital modları ve <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	adım başına 3,2 s · döngü 19,2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- Collm radarının ölçtüğü mod
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  lob {2:F0}° yatay / {3:F0}° dikey{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Solda: Global Meteor Network'ten aktif yağmurların ölçülen akısı ve ZHR'si (kameralar, günlük güncelleme; kırmızı çizgi = son güncelleme). Sağda: CMOR radarının (Kanada, 43° N) neredeyse gerçek zamanlı olarak saptadığı radyantlar, gündüz yağmurları dahil; altta, aynı radyantlar hıza göre renklendirilmiş.
 A.R.	S.A.
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	"{0}" için KABUL EDİLDİ: {1}, bildiren {2}, {3} MHz
 ADESSO	ŞİMDİ
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} QSO karesi)
 ALTRI RIFERIMENTI DELL'ARTICOLO	MAKALENİN DİĞER KAYNAKLARI
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	YOL KAYBI (düşük yoğunluklu iz, McKinley 1961; anten kazançları hariç)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	YOL KAYBI (düşük yoğunluklu iz, McKinley 1961 ve ITU-R P.843; anten kazançları hariç)
 ATTENZIONE: {0}	UYARI: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	UYARI: {0} ve {1} anten lobunun içinde ({3}° çevresinde -3 dB'de {2}°): bu yönlendirmeyle zaten kapsanıyorlar. Haritada gri gösterilir.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	UYARI: {0} anten lobunun içinde ({2}° çevresinde -3 dB'de {1}°): bu yönlendirmeyle zaten kapsanıyor. Haritada gri gösterilir.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	Açık (temkinli, başlangıç ayarı): her izin gücü McKinley ve ITU-R P.843'ün tam formülünü izler, 1 / (1 − cos²β sin²φ): yol düzlemini kesen izler, düzlemde yatanlardan 10-15 dB daha az değer ve hiçbir iz olduğundan fazla değerlendirilmez.\nEtki: dik olanlar değil, yol boyunca hizalı radyantlar baskın olur; DJ5HG eğrileri saatlik değişimde daha iyi izlenir, radyant alçakken derin minimumlarla.\nKapalı: her iz yol düzleminde duruyormuş gibi ağırlıklandırılır (β = 0), 1.6 sürümüne kadar olduğu gibi: yola dik radyantlar kuralını izler (SM6FHZ, DH9GCD), ancak düzlemi kesen izleri olduğundan fazla değerlendirir.
 Adesso	Şimdi
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	Tüm kaynakların 5 dakikada bir otomatik güncellenmesi
+Aggiungi	Ekle
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Belirsiz lokatörler (yalnızca 4 karakter) de, CALL3'te 6 karakterli lokatör varsa CALL3'ten alınır.
 Andromedidi	Andromedidler
+Angolo β tra scia e tratta (McKinley completo)	İz ile yol arasındaki β açısı (tam McKinley)
 Antenna	Anten
 Antenna Yagi: boom m	Yagi anten: boom m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	Yagi anten: boom {0:F2} m = {2:F0} MHz'de {1:F2} lambda -> kazanç {3:F1} dBi (DL6WU eğrisi),\n  -3 dB lob {4:F0}° yatay / {5:F0}° dikey (Kraus, W4RNL'nin NEC simülasyonlarıyla düzeltilmiş)
 Antenna az: -	Anten az: -
 Antenna az: {0}° (verso il DX)	Anten az: {0}° (DX'e doğru)
 Apri in Word	Word'de aç
+Apri la cartella degli spot	Spot klasörünü aç
+Argomenti di partenza	Varsayılan konular
 Arietidi di maggio Sud diurne	Gündüz Güney Mayıs Arietidleri
 Arietidi diurne	Gündüz Arietidleri
 Assi del flusso non trovati nella posizione attesa.	Akı eksenleri beklenen konumda bulunamadı.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	Yol kaybı {0:F1} dB -> antende sinyal {1:F1} dBm, alınabilir en düşük {2:F0} dBm, pay {3:+0.0;-0.0} dB
 Attività	Etkinlik
-Attivo oggi	Bugün etkin
 Attuazione sperimentale previsioni	Deneysel tahminler
 Aurigidi	Aurigidler
 Azimut	Azimut
 BILANCIO A {0:F0} MHz (punto medio)	{0:F0} MHz'DE BAĞLANTI BÜTÇESİ (orta nokta)
 Banda MHz	Bant MHz
-Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – diziler, sektörler ve huzme zamanlaması
+Bande (MHz)	Bantlar (MHz)
+Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – diziler, sektörler ve hüzme zamanlaması
 Bootidi di giugno	Haziran Bootidleri
 CALCOLO E TEORIA DELL'EFFICIENZA	VERİM: HESAP VE KURAM
+CALL3: caricamento...	CALL3: yükleniyor...
+CALL3: nessun archivio (data/call3.txt)	CALL3: arşiv yok (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} çağrı işareti
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radyant haritaları
 COME ASCOLTARE I PING DI GRAVES	GRAVES PİNGLERİ NASIL DİNLENİR
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	İNTERNET BAĞLANTISI YOK: dış veriler güncellenmedi (5 dakika sonra yeniden denenecek)
 Calcola	Hesapla
 Calcolo dell'efficienza	Verim hesabı
 Calcolo non riuscito: {0}	Hesap başarısız: {0}
+Calcolo per {0} UTC	{0} UTC için hesap
+Calcolo per: adesso	Hesap zamanı: şimdi
+Calcolo per: {0} UTC	Hesap zamanı: {0} UTC
+Calcolo previsionale	Tahmin hesabı
 Camelopardalidi di ottobre	Ekim Camelopardalidleri
 Cancella memoria	Belleği temizle
 Cancellare tutti i quadrati caricati dal file ADIF?	ADIF dosyasından yüklenen tüm kareler silinsin mi?
@@ -57,34 +74,54 @@ Carica file RMOB dal disco...	Diskten RMOB dosyası yükle...
 Catalogo sciami	Yağmur kataloğu
 Che cosa fare	Ne yapmalı
 Chiaro	Açık
+Chiuso	Kapalı
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Bağlantının ve bulutunun ayrıntıları için haritadaki bir yola veya tablodaki bir satıra tıklayın.
+Cluster con PSKReporter	PSKReporter'lı cluster
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	PSKReporter spot'larıyla DM4X cluster'ı (dm4x.ddns.net, port 8500): WSJT-X ve MSHV'nin MSK144 çözümleri buraya gelir. Alternatif olarak HamAlert (hamalert.org 7300, tetikleyicili bir hesap gerekir).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Kullanıcının seçtiği cluster. ON0DXK'de VHF bantları filtrelidir: set/filter dxbm/pass 6 (sonra 4, 2...) ile etkinleştirilir. Başka bir örnek: hamqth.com 7300.
 Collm stessa ora	Collm aynı saat
 Collm {0} MHz (validi)	Collm {0} MHz (geçerli)
 Comae Berenicidi	Comae Berenicidler
 Comandi	Kontroller
+Come DJ5HG	DJ5HG gibi
+Commento	Yorum
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	OH5IY'nin ortalama yol kaybıyla (144 MHz'de 200 dB, λ³ ile ölçeklenmiş: {1:F0} MHz'de {0:F1} dB) pay {2:+0.0;-0.0} dB olurdu
+Connessione a {0}...	{0} adresine bağlanılıyor...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	İnternet bağlantısı yok.\n\nRadar ve RMOB verileri güncellenemiyor: program son kaydedilen verileri kullanır ve 5 dakikada bir kendiliğinden yeniden dener.
 Connessione ripristinata.	Bağlantı yeniden kuruldu.
+Connesso: {0} argomenti	Bağlandı: {0} konu
+Connetti	Bağlan
+Connetti all'avvio	Açılışta bağlan
+Contatori	Sayaçlar
 Conteggio	Sayım
 Controllo le fonti di dati esterne...	Dış veri kaynakları denetleniyor...
 Corrispondente	Karşı istasyon
-Corrispondente  {0}   quota {1:F0} m	Karşı istasyon  {0}   yükseklik {1:F0} m
+Corrispondente  {0}   quota {1:F0} m	Karşı istasyon  {0}   rakım {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (İtalyanca makale, sürüm 7).
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961 (düşük yoğunluklu iz denklemi)
 DATI DEGLI SCIAMI	YAĞMUR VERİLERİ
 DATI RADAR IN DIRETTA	CANLI RADAR VERİLERİ
 DENTRO il lobo	lobun İÇİNDE
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	Buradan: E katmanında yaklaşık 90 km'de izler (SKiYMET radarı), elevasyon formülü, Hot A / Hot B, side-scatter, yol kaybı 182-200 dB, IARU ping süresi.
-Decl.	Dek.
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	İz yoğunluğu q = {0:E1} elektron/m. Makalenin 144 MHz referansları: en az 182 dB (GM8JBJ), ortalama 200 dB (OH5IY)
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	Seçilen DX cluster
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	Buradan: E katmanında yaklaşık 90 km'de izler (SKiYMET radarı), elevasyon formülü, Hot A / Hot B, side-scatter, yol kaybı, IARU ping süresi.
+Data del calcolo (UTC)	Hesap tarihi (UTC)
+Decl.	Dik aç.
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	İz yoğunluğu q = {0:E1} elektron/m. Referanslar: 172-190 dB (GM8JBJ'nin aktardığı G4BAO hesapları), 144 MHz'de ortalama 200 dB (OH5IY)
 Densita' scia q = 10^	İz yoğunluğu q = 10^
-Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Sonraki {0:F0} s ayrıntısı: yararlı bölge hiçbir huzme adımında değil
+Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Sonraki {0:F0} s ayrıntısı: yararlı bölge hiçbir hüzme adımında değil
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	Sonraki {0:F0} s ayrıntısı: {1} sektörünün adımları (her biri {2:F1} s) ve yararlı bölgeyi aydınlatan adım
 Direzioni Hot A / Hot B	Hot A / Hot B yönleri
-Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	Mesafe          {0:F0} km   azimut {1:F1}°   (karşı istasyondan {2:F1}°)
+Disconnesso	Bağlantı kesildi
+Disconnetti	Bağlantıyı kes
+Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	Uzaklık         {0:F0} km   azimut {1:F1}°   (karşı istasyondan {2:F1}°)
+Documenti tecnici	Teknik belgeler
 Documento Word	Word belgesi
 Documento esportato: {0}	Belge dışa aktarıldı: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Canlı veri kaynaklarının bulunduğu yerler. Kesikli çemberler = radarın gördüğü gökyüzü alanı (istasyon çevresinde yaklaşık 300 km, izler 90 km'de): hiçbir radar yolunuzun üzerindeki gökyüzüne bakmaz, veriler yağmurun ne kadar aktif olduğunu söyler. Noktalı çizgiler = istasyonunuza uzaklık.
 Draconidi di ottobre	Ekim Draconidleri
-E	D
+E	E
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	GRAVES → SİZ YOLUNUN ŞU ANKİ VERİMİ
 Effic. %	Verim %
 Efficienza - spiegazione	Verim - açıklama
@@ -94,7 +131,8 @@ Elev.	Elev.
 Elevazione d'antenna in funzione della distanza dallo scatter point	Scatter point'e uzaklığa göre anten elevasyonu
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	Orta noktaya anten elevasyonu: {0:F1}°   (makale formülü, Şekil 7)
 Elevazione lobo °	Lob elevasyonu °
-Errore all'avvio: {0}	Başlangıç hatası: {0}
+Errore all'avvio: {0}	Açılışta hata: {0}
+Errore: {0}	Hata: {0}
 Esponente	Üs
 Esponente dal confronto RMOB	RMOB karşılaştırmasından üs
 Esponente non calcolabile con questi dati.	Bu verilerle üs hesaplanamıyor.
@@ -103,6 +141,7 @@ Esponente λ^k	λ^k üssü
 Esporta	Dışa aktar
 Esporta il documento in Word	Belgeyi Word'e aktar
 Esporta in Word (.docx)...	Word'e aktar (.docx)...
+Europa	Avrupa
 FONTE PRINCIPALE	ANA KAYNAK
 FONTI	KAYNAKLAR
 Fattore di stazione K	İstasyon katsayısı K
@@ -111,27 +150,38 @@ File ADIF del log	Log ADIF dosyası
 File RMOB	RMOB dosyası
 File RMOB (conteggi orari del mese)	RMOB dosyası (ayın saatlik sayımları)
 File mancante: {0}	Eksik dosya: {0}
+Filtro	Filtre
+Filtro degli spot meteor scatter	Meteor scatter spot filtresi
 Finestra utile	Yararlı pencere
 Flusso radar	Radar akısı
 Flusso radar: nessun dato. Premi "Scarica adesso".	Radar akısı: veri yok. "Şimdi indir"e basın.
+Fonte	Kaynak
 Fonte del massimo	Tepe kaynağı
 Fonti	Kaynaklar
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	Grafik biçimi değişti ({0}x{1}): okunamıyor.
 Formato file mensile, {0}/{1}.	Aylık dosya biçimi, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	Bülten tablosu biçimi ({0}/{1}): dosyada birden çok gözlemci varsa art arda okunur; tek gözlemcili bir dosya kullanın.
+Foto	Fotoğraf
 Frequenza di arrivo MHz	Hedef frekans MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT, DH8BQA, geekshed.co.uk, WSJT-X kılavuzu, WB2FKO (pingler), IU6GIR (143,050 MHz etkinliği), IARU 1. Bölge VHF El Kitabı
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	YOL GEOMETRİSİ (küresel Dünya, R = 6372,7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	{0} UTC'de GMN ve CMOR: {1} hata ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ve CMOR {0} UTC'de denetlendi ({1} yeni dosya). GMN verileri: CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES doğrudan yol: az {0:F0}°
 Geminidi	Geminidler
 Geometria e attenuazione	Geometri ve yol kaybı
 Giorno per la tabella 24 h (UTC)	24 saatlik tablo için gün (UTC)
 Giudizio	Değerlendirme
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Kabul edilen spot'lar data/spot_ms klasörüne, günde bir CSV dosyası olarak kaydedilir. Eksik lokatörler CALL3 arşivinden (data/call3.txt) alınır.
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: yağmurların ölçülen akısı ve ZHR'si. Veriler CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ve Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	Anten kazancı dBi (tx = rx)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - uzun Yagi'ler için kazanç/boom uzunluğu eğrisi, G(dBi) = 7,773 log(L/lambda) + 11,43, W8IO'nun aktardığı biçimde (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (klasik hot spot'lar, anten yönlendirmesi için)
+Host	Sunucu
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: orta noktadan {0} km uzaklıkta hot spot'lar (AMS 203, W8WN, MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: orta noktadan {0} km uzaklıkta hot spot'lar (elle girilen değer).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: orta noktadan {0} km uzaklıkta hot spot'lar, sapma {1}° (J. Richardson'ın AMS tablosu, DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}
@@ -142,29 +192,39 @@ Hot spot dal punto medio km	Orta noktadan hot spot km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	Pingler taşıyıcıya yakın kısa çizgilerdir; uzun (yüksek yoğunluklu) izler daha geniştir ve Doppler gösterir
 IL CIELO VISTO DA GRAVES	GRAVES'TEN GÖRÜLEN GÖKYÜZÜ
 IMO {0} (giorno)	IMO {0} (gün)
-Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	Karşı istasyon GRAVES olur (JN27SI, yükseklik 200 m) ve ana yol yeniden hesaplanır
+Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	Karşı istasyon GRAVES olur (JN27SI, rakım 200 m) ve ana yol yeniden hesaplanır
 Il file scelto non e' un file locale.	Seçilen dosya yerel bir dosya değil.
 Il mio locator	Benim lokatörüm
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (yağmur verimi kavramı), www.kolumbus.fi/oh5iy (tarihî site)
+Importa CALL3.TXT...	CALL3.TXT içe aktar...
 Impossibile leggere {0}: {1}	{0} okunamıyor: {1}
+Impostazione del calcolo:	Hesaplama ayarı:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	Forward scatter'da süre sec²φ ile de artar (φ = yolun orta noktasında {0:F0}°; Collm backscatter'da ölçer, φ = 0): x {1:F1}, yani Collm'de 1 s'lik bir yankı yolda yaklaşık {2:F0} ms sürer.
+Indice della tratta Σ ZHR×η: {0}	Yol endeksi Σ ZHR×η: {0}
 Indice sciami tratta	Yol yağmur endeksi
 Indice tratta (ZHR×eff.)	Yol endeksi (ZHR×verim)
+Indirizzo mancante	Adres eksik
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, Mayıs 2025 (lambda^3 ve lambda^2 kuralları, orta nokta, en iyi yön)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (en iyi yönü gösteren kutupsal grafik)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tablo 5, 6 ve 7)
+Invia	Gönder
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: kazanç ve lob genişliği, G = 41253 / (thetaE x thetaH)
-Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", DARC konferansı, Ocak 2018: DH9GCD'nin en iyi yön formülü\n    (Sin(El) x Cos(El) x Sin(P-Az)), DJ5HG'nin koni saçılması ve HOT-A / HOT-B seçimi,\n    20 ile 70 derece arasında yararlı radyant, en iyi mesafe 1300-1500 km, KB0VUK'un sporadik meteorları
+Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", DARC konferansı, Ocak 2018: DH9GCD'nin en iyi yön formülü\n    (Sin(El) x Cos(El) x Sin(P-Az)), DJ5HG'nin koni saçılması ve HOT-A / HOT-B seçimi,\n    20 ile 70 derece arasında yararlı radyant, en iyi uzaklık 1300-1500 km, KB0VUK'un sporadik meteorları
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: VK3AUU, WA2PHW ve DJ9BV varyantları için kazanç tahminleri
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs 1952'den)
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs 1952'den; John Worsnop G4BAO'nun hesaplarını aktarır, 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): dB cinsinden sabit referans, alçak radyantta uzun izler,\n    Hamburg ve Münih çıkışlı yolların eğrileri; hot spot uzaklığı için J. Richardson'ın AMS tablosu
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI ve meteor scatter) ve "QTFGUI Help" kılavuzu 2007: koni saçılma yasası,\n    Quadrantidler sırasında Hamburg - Barselona deneme örneği, modeli doğrulamak için kullanıldı
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (iki kuralın doğrulanması);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design ve 70-CM Yagi Stacks Part 2 (David Tanner'ın VK3AUU Yagi'si):\n    kazanç eğrisini doğrulamak ve yatay lobu düzeltmek için kullanılan NEC simülasyonları (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	ORTAK BÖLGE SINIRLARI (her istasyonun ufkunun E katmanıyla buluştuğu eğrilerin kesişimleri, makale)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	"{0}" kelimesi var, ancak satır geçerli bir "DX de ..." spot'u değil.
+La riga non è uno spot "DX de ..." valido.	Satır geçerli bir "DX de ..." spot'u değil.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	Yükseklik grafiğinin ölçeği değişti: yükseklik istatistikleri (mod, ortalama, medyan) geçerli kalır, mutlak sayımlar geçerli değildir.
-La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Huzme dizisi PC saatine göre hesaplanır: saati bir NTP sunucusuyla eşitleyin (hata en fazla saniyenin birkaç onda biri).
-La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Dizi UTC saatine bağlıdır (PE1ITR): 2021'den beri her adım 0,8 s, bir sektör döngüsü 4,8 s sürer; 2007'de 3,2 s ve 19,2 s idi. Komuta istasyonu diziyi bazen birkaç adım kaydırır: ayrıntı, dinleyerek doğrulanması gereken bir tahmindir. Bir iz ancak sürdüğü sırada huzme onu aydınlatırsa duyulur: olasılık ≈ min(1, (adım + iz) / döngü) = ({0:F1} + {1:F1}) / {2:F1} ≈ %{3:F0} (143 MHz'de düşük yoğunluklu izin tipik süresi ≈ {1:F1} s).
+La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Hüzme dizisi PC saatine göre hesaplanır: saati bir NTP sunucusuyla eşitleyin (hata en fazla saniyenin birkaç onda biri).
+La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Dizi UTC saatine bağlıdır (PE1ITR): 2021'den beri her adım 0,8 s, bir sektör döngüsü 4,8 s sürer; 2007'de 3,2 s ve 19,2 s idi. Komuta istasyonu diziyi bazen birkaç adım kaydırır: ayrıntı, dinleyerek doğrulanması gereken bir tahmindir. Bir iz ancak sürdüğü sırada hüzme onu aydınlatırsa duyulur: olasılık ≈ min(1, (adım + iz) / döngü) = ({0:F1} + {1:F1}) / {2:F1} ≈ %{3:F0} (143 MHz'de düşük yoğunluklu izin tipik süresi ≈ {1:F1} s).
 Lato	Taraf
 Lato A = a sinistra della tratta, B = a destra	A tarafı = yolun solu, B = sağı
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	Yüzdenin yanındaki harfler yansımaların çoğunun yolun hangi tarafından geldiğini gösterir. A = istasyonunuzdan karşı istasyona bakarken SOLDA (Hot A bölgesi); B = SAĞDA (Hot B bölgesi). Anteni o tarafa 10-30° çevirmek yararlıdır (side-scatter). Harf yok = verim %5'in altında. Σ satırı: yol endeksi = tüm etkin yağmurların ZHR x verim toplamı. Açık mavi satırlar: DH9GCD formülüyle karşılaştırma (DF5HC 2018). ↑ = radyant istasyonunuzdan 70°'nin üstünde (çok yüksek).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	Vurgulanan satırlar bugün (UTC) etkin olan yağmurlardır
 Legenda	Açıklama
 Leonidi	Leonidler
 Leonis Minoridi	Leonis Minoridler
@@ -174,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	Ortak bö
 Lincidi di settembre	Eylül Lyncidleri
 Lingua dell'interfaccia	Arayüz dili
 Liridi	Liridler
+Live e dati real-time	Canlı ve gerçek zamanlı veriler
+Loc DX	DX lok.
+Loc spotter	Spotter lok.
 Locator del corrispondente non valido	Geçersiz karşı istasyon lokatörü
 Locator della stazione non valido	Geçersiz istasyon lokatörü
+Manca il nominativo per il login	Oturum için çağrı işareti eksik
 Mappa d'Europa	Avrupa haritası
-Mappa d'Europa non disponibile (serve la rete al primo avvio).	Avrupa haritası yok (ilk açılışta ağ gerekir).
+Mappa d'Europa non disponibile (serve la rete al primo avvio).	Avrupa haritası mevcut değil (ilk açılışta ağ gerekir).
+Mappa dei radar europei	Avrupa radarları haritası
 Mappa quadrati	Kare haritası
 Mappa:	Harita:
 Mappa: bordo = {0} km dalla stazione. {1}	Harita: kenar = istasyondan {0} km. {1}
@@ -186,37 +251,48 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	Meteor/saat - dün {0} ve bugün {1} (UT
 Metti GRAVES come DX	GRAVES'i DX yap
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	Yağmur için en iyi yönlendirme: geliş yönüne DİK\n(radyant azimutu +-90°, tolerans +-40-50°,\nSM6FHZ). Plan görünüm: sarı çizgi = yağmurun\nkayması, turuncu noktalar = yönlendirmeler, PREV\nelipsleri = şu an en olası izler.\nBir radyanta tıklayın: UTC saatleriyle rota
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	Collm'da ölçülüp {0} MHz'e ölçeklendi - dün {1} ve bugün {2} (UTC)
+Mondo	Dünya
 Monocerotidi di dicembre	Aralık Monocerotidleri
-N	K
+N	N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Yansıma süresi x ({1:F1}/{0:F0})^2 = x {5:F4}: {1:F1} MHz'de 1 s'lik bir yankı {0:F0} MHz'de yaklaşık {6:F0} ms sürer ({0:F0} MHz'de IARU en uzun pingi: {7:F0} ms).\nSM6FHZ'nin deneysel kuralları (VUSHF 2025). K katsayısı alıcı istasyonu (güç, antenler) hesaba katar: aynı banttaki bir RMOB gözlemcisiyle karşılaştırılarak bulunur.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - 1:50 milyon ölçekli kıyı çizgileri ve sınırlar, kamu malı, www.naturalearthdata.com (Avrupa haritası)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	Kayıpta (β = 90°, temkinli): izin başlangıç yarıçapı {0:F1} dB ({3:F0} MHz için {2:F1} km ITU ortalama yüksekliğinde r0 = {1:F2} m). İz yol düzleminde olduğunda (β = 0°, en iyi durum) kayıp {4:F1} dB'ye iner ({5:F1} dB) ve pay {6:+0.0;-0.0} dB'ye çıkar
 Nero	Siyah
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	Önerilen Hot yok: şu anda neredeyse hiç etkin yağmur yok
+Nessun dato GMN: premi "Scarica adesso".	GMN verisi yok: "Şimdi indir"e basın.
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Radar verisi yok: Canlı ve gerçek zamanlı veriler › Radar akısı alt sekmesinden indirin.
 Nessuna fonte Collm in fonti_radar.csv	fonti_radar.csv içinde Collm kaynağı yok
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	İz beklenmiyor: etkin yağmurlar ufkun altında ya da bu yol için verimleri sıfır.
 Nessuna zona comune dello strato E ({0})	Ortak E katmanı bölgesi yok ({0})
+Nessuno sciame utile in questo momento	Şu anda yararlı yağmur yok
 No	Hayır
 No: fuori dai settori	Hayır: sektörlerin dışında
-No: sopra il fascio (circa 25°)	Hayır: huzmenin üstünde (yaklaşık 25°)
+No: sopra il fascio (circa 25°)	Hayır: hüzmenin üstünde (yaklaşık 25°)
 No: sotto l'orizzonte di GRAVES	Hayır: GRAVES ufkunun altında
+Nominativo per il login	Oturum için çağrı işareti
+Non connesso	Bağlı değil
 Non ho riconosciuto il formato del file.	Dosya biçimi tanınmadı.
-Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	Akının dikey ölçeği okunamıyor (üst etiket: {0}): değerler denetlenmeli.
+Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	Akının dikey ölçeği okunamıyor (üst etiket: {0}): değerler doğrulanmalı.
 Non riesco ad aprire il documento: {0}	Belge açılamıyor: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Haritada bir nokta değildir: tüm kıtalarda birçok ülkeye dağılmış, dünya çapında bir kamera ağıdır (çoğunlukla amatör).
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	Not: radar verileri ilgili kurumlara aittir. Programı dağıtmadan önce verileri otomatik olarak çekmek için izin istenmelidir.
 Notte	Gece
 Nuovo locator del corrispondente dalla mappa: {0}	Haritadan yeni karşı istasyon lokatörü: {0}
 Nuovo locator della stazione dalla mappa: {0}	Haritadan yeni istasyon lokatörü: {0}
-O	B
+Nuovo tentativo tra 30 s	30 s sonra yeniden denenecek
+Nuvola	Bulut
+O	W
 ORA MIGLIORE DEL GIORNO	GÜNÜN EN İYİ SAATİ
 Ora	Saat
 Ora UTC	UTC saati
-Ora della volta celeste (±36 h)	Gökyüzü kubbesi saati (±36 sa)
+Ore (da −12 a +36 h)	Saatler (−12 ile +36 sa arası)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	Ortak saatler: {0}. Medyan RMOB/Collm oranı = {1:F4}.\nDeneysel üs (K = 1 ile): k = {2:F2}  (SM6FHZ kuralı: 3).\n\nBu üs uygulansın mı? (Ya da k = 3 bırakılır ve K katsayısı = {3:F2} olarak ayarlanır.)
 Orionidi	Orionidler
 Orionidi di novembre	Kasım Orionidleri
 Osservatore RMOB	RMOB gözlemcisi
 PREVISIONE SPERIMENTALE	DENEYSEL TAHMİN
-PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	HUZMENİN BÖLGE ÜZERİNDEN SONRAKİ GEÇİŞİ
+PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	HÜZMENİN BÖLGE ÜZERİNDEN SONRAKİ GEÇİŞİ
+PSKReporter MQTT	PSKReporter MQTT
 Passo	Adım
 Pastello acquamarina	Pastel akuamarin
 Pastello arancione	Pastel turuncu
@@ -228,34 +304,43 @@ Pastello rosa	Pastel pembe
 Pastello verde	Pastel yeşil
 Pegasidi di luglio	Temmuz Pegasidleri
 Perseidi	Perseidler
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (en yüksek radyo saatlik oranları)
+Personalizzata	Özel
 Phoenicidi	Phoenicidler
-Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Plan görünüm: sarı çizgi = seçili (ya da en elverişli) yağmurun kayması, PREV elipsleri = en olası izlerin şu an düştüğü yer. Sağda gökyüzü kubbesi ({0} tarihinde UTC olarak Doğuş/Batış): sarı = verim >= %50 ve ZHR >= 2, turuncu >= %20, gri = neredeyse etkin değil.
+Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Plan görünüm: sarı çizgi = seçili (ya da en elverişli) yağmurun kayması, PREV elipsleri = en olası izlerin şu an düştüğü yer. Sağda gök kubbesi ({0} tarihinde UTC olarak Doğuş/Batış): sarı = verim >= %50 ve ZHR >= 2, turuncu >= %20, gri = neredeyse etkin değil.
 Piscidi di aprile diurne	Gündüz Nisan Piscidleri
+Porta	Port
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	Lob {0:F1}° iken iz yüksekliğinde menzil: {1:F0} km
 Potenza W	Güç W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	Güç {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (dBd cinsinden kazanç = dBi - 2,15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	Güç {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (dBi cinsinden kazanç)
 Previsione /ora	Tahmin /saat
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Meteor scatter için meteor yağmurlarının veriminin canlı tahmini ve hesabı
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	{1} için {0} MHz'de sonraki 24 saatin deneysel tahmini
 Previsione {0} /ora	Tahmin {0} /saat
 Previsione {0} MHz (rifl./ora)	Tahmin {0} MHz (yans./saat)
 Pronto	Hazır
 Prossimo massimo (UTC)	Sonraki tepe (UTC)
+Prova del filtro	Filtre testi
+Prudente	Temkinli
 Punt. migliore	En iyi yön
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	Yönlendirme {0:F0}°: Hot A {1}, Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	Orta noktanın iki yanında, yola dik {0:F0} km uzaklıkta noktalar (AMS Bulletin 203 ve W8WN: 50-150 km; MSHV'deki gibi)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	Orta noktanın iki yanında, yola dik {0:F0} km uzaklıktaki noktalar (elle girilen değer; MSHV 150 km kullanır)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	Orta noktanın iki yanında, yola dik {0:F0} km uzaklıktaki noktalar: DJ5HG'nin aktardığı J. Richardson AMS tablosundan sapma {1:F1}° (1000 km'de 13°, 1250'de 11°, 1500 ve 2000'de 10°)
 Punto di riflessione	Yansıma noktası
 Punto medio     {0}  ({1:F2}N {2:F2}E)	Orta nokta      {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	Orta nokta (forward)
 Punto medio {0}, elev. per {1:F1} km: {2:F1}°	Orta nokta {0}, {1:F1} km için elev.: {2:F1}°
 Puppidi-Velidi	Puppid-Velidler
 Quadrantidi	Kuadrantidler
-Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Dört fazlı dizi güney gökyüzünü 90° ile 270° azimut arasında, dört adet 45°'lik sektörde (D, C, B, A) kapsar; her sektör 7,5°'lik 6 adıma bölünür, adımlar birbiri ardına ve dört sektörde aynı anda aydınlatılır (adımlar en düşük azimuttan başlayarak 1'den 6'ya numaralanır). Huzme elevasyonda yaklaşık 25° geniştir: iz yüksekliğinde iki kesikli çember arasındaki renkli halkayı kapsar. Turuncu/pembe noktalar = GRAVES → siz yolunun PREV bölgeleri, yeşil çizgi = istasyonunuzun yönü, kırmızı çizgi = istasyonunuzdan önerilen hot spot'a (PE1ITR).
+Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Dört fazlı dizi güney gökyüzünü 90° ile 270° azimut arasında, dört adet 45°'lik sektörde (D, C, B, A) kapsar; her sektör 7,5°'lik 6 adıma bölünür, adımlar birbiri ardına ve dört sektörde aynı anda aydınlatılır (adımlar en düşük azimuttan başlayarak 1'den 6'ya numaralanır). Hüzme elevasyonda yaklaşık 25° geniştir: iz yüksekliğinde iki kesikli çember arasındaki renkli halkayı kapsar. Turuncu/pembe noktalar = GRAVES → siz yolunun PREV bölgeleri, yeşil çizgi = istasyonunuzun yönü, kırmızı çizgi = istasyonunuzdan önerilen hot spot'a (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	İz yüksekliği ve seçenekler elle seçildi. Yüksekliği, "radardan" kutusunu, uzun izleri veya β açısını değiştirdiğinizde kendiliğinden seçilir.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	102 km sabit yükseklik, alçak radyantta daha uzun izler ve β açısı; DJ5HG'nin "Die Geometrie von Meteorscatterverbindungen" (2004) çalışmasındaki gibi.\nOnun eğrileriyle karşılaştırma: ortalama 2 dB aşağıda, tipik sapma 5 dB; yol boyunca hizalı radyantlar baskın olur.
 Quota scie      {0:F1} km (strato E){1}	İz yüksekliği    {0:F1} km (E katmanı){1}
 Quota scie km	İz yüksekliği km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	İz yükseklikleri (Collm): en sık {0:F1} km, ortalama {1:F1}, medyan {2:F1}, std sapma {3:F1} km
-RADAR GRAVES (linguetta Radar GRAVES)	GRAVES RADARI (Radar GRAVES sekmesi)
+RADAR GRAVES (linguetta Radar GRAVES)	GRAVES RADARI (GRAVES radarı sekmesi)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	YOL BOYUNCA ALÇAK RADYANT: {0}. Hesaplanan verim düşük kalır, ancak yol boyunca hizalı sıyırıcı izlerle DJ5HG seyrek ve güçlü yansımalar bekler: dinlemeye değer.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	RADYANT ÇOK YÜKSEK ({0}° üstünde): {1}. İzler neredeyse dikey düşer ve yola doğru az yansıtır (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: port 7000 = CW ve RTTY, port 7001 = FT8. Oturum yalnızca çağrı işaretiyle açılır. RBN skimmer'ları MS modlarını nadiren çözer: esas olarak yorumunda <MS> olan spot'lar için işe yarar.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	BANTLAR ARASI DENEYSEL KURALLAR (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	ZAMAN SIRALI YENİDEN KURULUM · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB saatlik meteor sayımları için GRAVES'i kullanır: pinglerinizi 143,050 MHz'deki gözlemcilerle karşılaştırın
@@ -263,29 +348,48 @@ RMOB {0} (scala a destra)	RMOB {0} (sağ ölçek)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {2} UTC'de {1} saat okundu
 RMOB – osservatori su 143,050 MHz	RMOB – 143,050 MHz'deki gözlemciler
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; aylık bültenler rmob.org/rmobtext (GRAVES 143,050 MHz gözlemcileri: Venedik Planetaryumu, Faenza, Rovereto ve diğerleri)
+Raccolta dati	Veri toplama
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	ITU-R P.843-1 Tavsiyesi (1997): iz ile yol düzlemi arasındaki beta açısı, izin başlangıç yarıçapı, frekansa bağlı ortalama yükseklik
 Radar GRAVES	GRAVES radarı
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	Collm meteor radarı, Leipzig Üniversitesi (LIM) ve IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	Radyant:
+Raggio della mappa	Harita yarıçapı
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	Üssü RMOB dosyasından çıkar
 Ricevitore	Alıcı
+Riconnessione tra {0} s	{0} s sonra yeniden bağlanılacak
+Riconnetti	Yeniden bağlan
+Riepilogo dell'anno (ZHR misurati, GMN)	Yılın özeti (ölçülen ZHR, GMN)
 Riga {0} ignorata (colonne insufficienti)	{0}. satır yok sayıldı (yetersiz sütun)
 Riga {0}: {1}	Satır {0}: {1}
-Riporta la volta celeste al tempo reale	Gökyüzü kubbesini gerçek zamana döndür
+Riporta il momento del calcolo al tempo reale	Hesap zamanını gerçek zamana döndür
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	144 MHz'e göre: sayı/şiddet x {0:F3} ({1:+0.0;-0.0} dB), süre x {2:F2}. {3:F0} MHz'de IARU en uzun pingi: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) ve "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	Tekerlek = yakınlaştır, sürükle = kaydır, fare bir karenin üstünde = QSO'lar
-S	G
+S	S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	REDDEDİLDİ: "{0}" bulundu, ancak {1:F1} kHz frekansı seçili bir bantta değil.
+SCARTATO: frequenza sotto 27990,0 kHz.	REDDEDİLDİ: frekans 27990,0 kHz'in altında.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	REDDEDİLDİ: MS pencerelerinin dışında ve filtre kelimesi yok.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	REDDEDİLDİ: yorum başka bir yayılım ({0}) belirtiyor ve MS modu yok.
 SCIAME PIÙ FAVOREVOLE	EN ELVERİŞLİ YAĞMUR
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	KESİT - antenden karşı istasyona doğru görülen en olası izler (az. {0}°)
+SGO, Finlandia	SGO, Finlandiya
 Scarica RMOB adesso	RMOB'u şimdi indir
 Scarica adesso	Şimdi indir
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	27990,0 kHz altındaki cluster satırlarını hemen at (konsolda görünmez ve saklanmaz)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	DJ5HG'nin aktardığı J. Richardson AMS tablosundan hot spot'ların anten sapması: 1000 km'de 13°, 1250 km'de 11°, 1500 ve 2000 km'de 10°. Uzaklığı elle yazmak için işareti kaldırın (MSHV 150 km kullanır).
 Scia meteorica	Meteor izi
 Sciame	Yağmur
 Sciame più favorevole	En elverişli yağmur
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	En yararlı yağmur: {0} (ZHR {1}, verim %{2})
 Sciami	Yağmurlar
+Sciami in diretta	Canlı yağmurlar
+Sciami sopra l'orizzonte: {0}	Ufkun üstündeki yağmurlar: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	Alçak radyantta daha uzun izler (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	RMOB gözlemcisinin adını dosya adında göründüğü gibi yazın (örn. AD_112026rmob.TXT -> AD).
+Scrivi il nominativo per il login prima di connettere.	Bağlanmadan önce oturum için çağrı işaretini yazın.
 Segnale minimo dBm	En düşük sinyal dBm
-Sequenza del fascio	Huzme dizisi
+Sequenza del fascio	Hüzme dizisi
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	Hem Collm verileri hem de aynı saatleri kapsayan bir RMOB dosyası gerekir.
 Sextantidi diurne	Gündüz Sextantidleri
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)	Shelby W8WN - qsl.net/w8wn/hscw (en uygun elevasyon ve sapma)
@@ -293,17 +397,30 @@ Sigla	Kod
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	Bunlar iki istasyonun da gördüğü gökyüzünün en uzak kenarlarıdır, yönlendirilecek noktalar değildir.
 Sorge	Doğuş
 Sorgente Antielio	Antihelion Kaynağı
-Stazione        {0}   quota {1:F0} m	İstasyon         {0}   yükseklik {1:F0} m
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	Kapalı (temkinli): her iz radyant elevasyonunun sinüsüyle ağırlıklandırılır, çünkü alçak radyantta km² başına daha az meteor düşer.\nAçık: DJ5HG'deki (2004) gibi, alçak radyantta izler daha uzundur (katmanın yararlı kalınlığı 15 km, elevasyonun sinüsüne bölünür, en çok 100 km) ve yansıma yasasını daha sık sağlar. İki etki yaklaşık 9° elevasyonun üzerinde birbirini dengeler: alçak radyantta verim artar, yüksek radyantta değişmez.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"Veri toplama" sekmesindeki MS spot'ları. Her bağlantı için bulut, o yol ve o saat için en olası izlerin nerede yoğunlaştığını gösterir (aynasal yansıma, aktif yağmurların toplamı). Kesikli bulutlar = yalnızca sporadik meteorlar. İstasyonlarından biri harita dışında olan spot'lar çizilmez; yeni gelenler (3 dakikadan az) bir dakika boyunca yanıp söner.
+Spot MS raccolti	Toplanan MS spot'ları
+Spot da mostrare	Gösterilecek spot'lar
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	MQTT üzerinden canlı PSKReporter spot'ları (mqtt.pskreporter.info, M0LTE hizmeti): oturum açmak gerekmez, spot'lar gönderen ve alan istasyonun lokatörleriyle birlikte gelir. Satır başına bir konu ya da ; ile ayrılmış  biçim pskr/filter/v2/bant/mod/tx çağrı/rx çağrı/... (+ = herhangi, # = geri kalanı).
+Spot meteor scatter raccolti (i più recenti in alto)	Toplanan meteor scatter spot'ları (en yeniler üstte)
+Stazione	İstasyon
+Stazione        {0}   quota {1:F0} m	İstasyon         {0}   rakım {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	Deneysel tahmin (SM6FHZ kuralları): {0:F0} MHz'de meteor/saat = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; ping süresi x {4:F3}. {0:F0} MHz'de IARU en uzun pingi: {5:F0} ms. Yaklaşık değerlerdir, bantta edinilen deneyimle karşılaştırılmalıdır.{6}
-Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC'nin Swan Meteor Skyview'u - swan.ms (gökyüzü kubbesi grafiği için referans)
+Svuota la tabella	Tabloyu temizle
+Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC'nin Swan Meteor Skyview'u - swan.ms (gök kubbesi grafiği için referans)
 Sì	Evet
 Sì · settore {0}	Evet · sektör {0}
 TRATTA	YOL
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	YOL, İZİN UFKUNUN ÖTESİNDE: izler {0:F1} km'deyken orta nokta ufkun {1:F1}° altındadır. En az {2:F0} km yükseklikte izler gerekir: bağlantı yalnızca en yüksek izlerle mümkün, verim ve kayıplar modelin sınırındadır.
 Tauridi Nord	Kuzey Tauridleri
 Tauridi Sud	Güney Tauridleri
+Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
 Tema	Tema
 Tempo reale	Gerçek zaman
 Tipo	Tür
+Traffico MS in diretta · {0}	Canlı MS trafiği · {0}
+Traffico in diretta	Canlı trafik
+Traffico meteor scatter in diretta	Canlı meteor scatter trafiği
 Tramonta	Batış
 Traslato	Ölçeklenmiş
 Traslato {0}	Ölçeklenmiş {0}
@@ -314,27 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	Yol {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	Collm ile RMOB dosyası arasında çok az ortak saat var ({0}).
 Tutti i file	Tüm dosyalar
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	143,049 MHz'de USB (yaklaşık 1 kHz ton) ya da 143,050 MHz, AGC yavaş veya kapalı, ses bant genişliği en az 2,4 kHz
+Univ. Lipsia / IAP Kühlungsborn	Leipzig Üniv. / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	Bu pencerelerdeki bir spot, mod adı olmasa da kabul edilir; ancak yorum şu etiketlerden biriyle başka bir yayılım belirtiyorsa kabul edilmez:
 Ursidi	Ursidler
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Pencerelerin dışındaki spot'lar ve başka yayılım etiketi taşıyanlar için geçerlidir: açık kelimelerden birini (büyük, küçük veya karışık harfle yazılmış) içerirlerse tutulurlar. MSK144, FSK441, PSK2K, JTMS ve JT6M yalnızca meteor scatter için kullanılan dijital modlardır: spot kesinlikle MS'tir. <MS> genel olarak bağlantının meteor scatter üzerinden yapıldığını belirtir.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	En temkinli değerler, başlangıç ayarı: Collm radarının ölçtüğü iz yüksekliği ("radardan" kutusu), normal izler, β açısı açık.\nDJ5HG eğrileriyle karşılaştırma (Kuadrantidler, Hamburg çıkışlı yollar): ortalama 7 dB aşağıda, aynı saatlik değişimle (biçim sapması yaklaşık 3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	Temkinli değerler: yol düzlemini kesen iz (β = 90°, en kötü durum), her frekans için ortalama yankı yüksekliğinde izin başlangıç yarıçapı (ITU-R P.843) dahil
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	GRAVES → siz yolunun önerilen hot spot'una doğru (Yol kartı), düşük elevasyonla
 Vista dall'alto (E a destra)	Üstten görünüm (D sağda)
-Volta celeste: tempo reale	Gökyüzü kubbesi: gerçek zaman
-Volta celeste: {0} UTC	Gökyüzü kubbesi: {0} UTC
-Waterfall	Şelale
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – Broye-lès-Pesmes'teki verici (47,348° K 5,515° D)
 YA-MS - nessuna connessione	YA-MS - bağlantı yok
-YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	IC8TEM'in YAEC'i – Radar GRAVES sekmesi (türetildiği taslak)
+YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	IC8TEM'in YAEC'i – GRAVES radarı sekmesi (türetildiği taslak)
 ZHR ora	ZHR şimdi
-ZONA UTILE NEL FASCIO DI GRAVES	GRAVES HUZMESİNDEKİ YARARLI BÖLGE
+ZONA UTILE NEL FASCIO DI GRAVES	GRAVES HÜZMESİNDEKİ YARARLI BÖLGE
 a DESTRA guardando verso il corrispondente	karşı istasyona bakarken SAĞDA
 a SINISTRA guardando verso il corrispondente	karşı istasyona bakarken SOLDA
+a cura di	hazırlayan:
 a cura di Costantino IC8TEM	hazırlayan: Costantino IC8TEM
+accettati per finestra di frequenza: {0}	frekans penceresiyle kabul edilen: {0}
+adesso	şimdi
 adesso {0}	şimdi {0}
 adesso · ancora {0:F1} s	şimdi · {0:F1} s kaldı
+aggiornamento una volta al giorno	günde bir kez güncellenir
 alfa-Capricornidi	alfa Kaprikornidler
 alfa-Centauridi	alfa Centauridler
 alfa-Monocerotidi	alfa Monocerotidler
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: satır yok sayıldı: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	antenden {0} yönüne: az {1:F0}° · el {2:F1}°\nGRAVES doğrudan yol: az {3:F0}°
+antenna {0}°	anten {0}°
+auto (AMS)	otomatik (AMS)
 azimut rispetto al corrispondente	karşı istasyona göre azimut
 beta-Tauridi diurne	Gündüz beta Tauridleri
 buono	iyi
@@ -343,14 +469,18 @@ calcolo della tratta GRAVES → te in corso...	GRAVES → siz yolu hesaplanıyor
 circumpolare	çevrekutupsal
 clic destro =	sağ tık =
 clic sinistro =	sol tık =
+collegamento via meteor scatter	meteor scatter üzerinden bağlantı
+comandi dopo il login, separati da ;	oturum açtıktan sonraki komutlar, ; ile ayrılmış
+comando da inviare (es. sh/dx 20)	gönderilecek komut (örn. sh/dx 20)
 confermato (QSL o LoTW)	onaylandı (QSL ya da LoTW)
 copia locale del {0} UTC	{0} UTC tarihli yerel kopya
 corrispondente	karşı istasyon
 dal radar	radardan
+dati CC BY 4.0 (Vida et al. 2021, 2022)	veriler CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud	Güney delta Akuaridler
 eco	yankı
-eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	beklenen yankı ≈ {0:F0}/saat (deneysel: tahmin × huzme %{1:F0})
-eco possibile (+{0:F1} s di scia)	olası yankı (+{0:F1} s iz)
+eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	beklenen yankı ≈ {0:F0}/saat (deneysel: tahmin × hüzme %{1:F0})
+eco possibile (+{0:F1} s di scia)	yankı mümkün (+{0:F1} s iz)
 effic. %	verim %
 effic. < 20%	verim < %20
 effic. >= 20%	verim >= %20
@@ -365,10 +495,12 @@ errore: {0}	hata: {0}
 eta-Aquaridi	eta Akuaridler
 eta-Eridanidi	eta Eridanidler
 eta-Liridi	eta Liridler
+finestra {0} kHz	pencere {0} kHz
 fuori dal lobo	lobun dışında
 gamma-Draconidi di luglio	Temmuz gamma Draconidleri
 gamma-Ursae Minoridi	gamma Ursae Minoridler
 gradi	derece
+hot spot (solo sporadiche) {0}	hot spot (yalnızca sporadik) {0}
 il giorno scelto non è oggi	seçilen gün bugün değil
 indice	endeks
 indice sciami tratta (scala a destra)	yol yağmur endeksi (sağ ölçek)
@@ -378,11 +510,13 @@ invariato (controllato alle {0} UTC)	değişmedi ({0} UTC'de denetlendi)
 kappa-Cygnidi	kappa Cygnidler
 kappa-Leonidi diurne	Gündüz kappa Leonidleri
 la mia stazione	benim istasyonum
+la tua stazione	istasyonunuz
 lato prevalente {0} ({1:F0}%)	baskın taraf {0} (%{1:F0})
 lavorato	çalışıldı
 lim. A	sın. A
 lim. B	sın. B
 limiti zona comune	ortak bölge sınırları
+linguetta "{0}"	"{0}" sekmesi
 lobo antenna	anten lobu
 lobo {0}°	lob {0}°
 locale	yerel
@@ -395,20 +529,29 @@ meteore per km di quota	km yükseklik başına meteor
 meteore/ora radar	radar meteor/saat
 meteore/ora stimate	tahmini meteor/saat
 miglior punt.	en iyi yön
+misura il flusso e lo ZHR di ogni sciame attivo	her aktif yağmurun akısını ve ZHR'sini ölçer
 mobile	hareketli
+modo digitale MS	MS dijital modu
 nessun ADIF caricato	ADIF yüklenmedi
+nessun dato radar: vedi Live e dati real-time › Flusso radar	radar verisi yok: bkz. Canlı ve gerçek zamanlı veriler › Radar akısı
 nessun file RMOB caricato	RMOB dosyası yüklenmedi
-nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	hiçbir huzme adımı yararlı bölgeyi aydınlatmıyor\nyakalanan iz ≈ %{0:F0} ({1:F1} + {2:F1}) / {3:F1}
+nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	hiçbir hüzme adımı yararlı bölgeyi aydınlatmıyor\nyakalanan iz ≈ %{0:F0} ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	etkin ağ yok
-nessuno sciame utile adesso: hot spot più adatto al fascio	şu an yararlı yağmur yok: huzmeye en uygun hot spot
+nessuno sciame utile adesso: hot spot più adatto al fascio	şu an yararlı yağmur yok: hüzmeye en uygun hot spot
 nessuno sciame utile in questo giorno	bu gün yararlı yağmur yok
 nessuno sciame utile in questo momento	şu anda yararlı yağmur yok
+nominativo	çağrı işareti
+nuova parola	yeni kelime
 nuovo dato	yeni veri
 nuovo dato alle {0} UTC	{0} UTC'de yeni veri
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	bu yol için bulut hesaplanamıyor (çok kısa veya çok uzun)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	bulut {0}: yansımaların {1:F0} %'si, {2:F0} × {3:F0} km, eksen {4:F0}°
 omega-Cetidi Nord diurne	Gündüz Kuzey omega Cetidleri
 omega-Cetidi Sud diurne	Gündüz Güney omega Cetidleri
-orizzonte del fascio	huzme ufku
-orologio del PC sincronizzato	PC saati eşitlendi
+orizzonte del fascio	hüzme ufku
+orologio del PC sincronizzato	PC saati senkronize
+osservatori RMOB che ascoltano GRAVES	GRAVES'i dinleyen RMOB gözlemcileri
+parola aggiunta	eklenen kelime
 passi	adım
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	adım {0}{1} her {2:F1} s · saat {3} ...\nyakalanan iz ≈ %{4:F0} = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	rad. rotası
@@ -418,30 +561,43 @@ previsione {0} MHz /ora	tahmin {0} MHz /saat
 puntamento migliore {0}° / {1}°	en iyi yön {0}° / {1}°
 puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	{0:F0}°'ye yönlendirin (karşı istasyondan {1:+0;-0}°), elevasyon {2:F1}°, hot spot {3:F0} km'de
 quasi inattivo	neredeyse etkin değil
-quota m	yükseklik m
+quota m	rakım m
+radar SKiYMET 36,2 MHz	SKiYMET radarı 36,2 MHz
+radar meteorico 17-38 MHz, orbite	meteor radarı 17-38 MHz, yörüngeler
+radar meteorico 36,9 MHz	meteor radarı 36,9 MHz
 radio, diurno	radyo, gündüz
 rete assente: {0}	ağ yok: {0}
 riflessioni/ora	yansıma/saat
 riflessioni/ora a {0} MHz	{0} MHz'de yansıma/saat
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	alınan satırlar      {0}\nokunan spot'lar      {1}\nkabul edilen MS      {2}\nreddedilen (kelime)  {3}\nreddedilen (bant)    {4}\nson saatte MS spot   {5}
+righe sotto 27990 kHz scartate: {0}	27990 kHz altında atılan satırlar: {0}
+righe {0}, spot letti {1}, MS {2}	satır {0}, okunan spot {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	grafikten okunan ölçek: 0-{0} meteor/saat
 scala non letta	ölçek okunamadı
 scala tarata 0-1200 meteore/ora	kalibre ölçek 0-1200 meteor/saat
 scarso	zayıf
 scartati	atıldı
+scartati per altra propagazione: {0}	başka yayılım nedeniyle reddedilen: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	en iyi yağmur {0} {1}: ZHR {2:F0} × verim %{3:F0}
 scorrimento sciame	yağmur kayması
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	çizgi parçaları = radyanta yönelmiş izler (yüksekliğin ±10 km çevresi); kalın = daha olası
 sempre sotto	hep altında
 sigma-Hydridi	sigma Hydridler
+sporadiche	sporadik
 stima a {0} MHz (scala a destra)	{0} MHz'de tahmin (sağ ölçek)
-sì	evet
 tra {0:F1} s	{0:F1} s sonra
 traslato a {0} MHz (scala a destra)	{0} MHz'e ölçeklenmiş (sağ ölçek)
+trasmettitore 143,050 MHz	verici 143,050 MHz
 tratta / DX	yol / DX
 tratta GRAVES → te non calcolata	GRAVES → siz yolu hesaplanmadı
 tu {0}	siz {0}
+ultima ora	son bir saat
+ultime 24 ore	son 24 saat
+ultime {0} ore	son {0} saat
+ultimi {0} minuti	son {0} dakika
 var.	değ.
 varie (tab. 6 IMO)	çeşitli (IMO tab. 6)
+versione	sürüm
 visuale	görsel
 zeta-Perseidi diurne	Gündüz zeta Perseidleri
 zona PREV	PREV bölgesi
@@ -454,19 +610,26 @@ zona PREV	PREV bölgesi
 {0} (dal radiante, az. {1}°)	{0} (radyanttan, az. {1}°)
 {0} (in rosso sulla mappa)	{0} (haritada kırmızı)
 {0} (~{1} calc.)	{0} (~{1} hes.)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	{0} QSO okundu, 50-432 MHz bantlarında {1} QSO karesi, {2} QSO atıldı (diğer bantlar ya da karesiz).
-{0} UTC (ora della volta celeste)	{0} UTC (gökyüzü kubbesi saati)
+{0} UTC (momento del calcolo)	{0} UTC (hesap zamanı)
 {0} UTC (tempo reale)	{0} UTC (gerçek zaman)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	Şimdi önerilen {0}: az. {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	Şimdi önerilen {0}: az. {1}° (beklenen yansımaların %{2}'si)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	haritada {0} bağlantı · harita dışında {1} · lokatörsüz {2}
+{0} dB rispetto al riferimento di DJ5HG	DJ5HG referansına göre {0} dB
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	GRAVES'ten {0}: az {1:F1}° · el {2:F1}° (6 adımdan {3}.)
-{0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	GRAVES'ten {0}: az {1:F1}° · el {2:F1}° (sektörler 90°'den 270°'ye, huzme yaklaşık 25°'ye kadar)
+{0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	GRAVES'ten {0}: az {1:F1}° · el {2:F1}° (sektörler 90°'den 270°'ye, hüzme yaklaşık 25°'ye kadar)
 {0} h	{0} sa
+{0} h rispetto ad adesso	şimdiden itibaren {0} sa
+{0} km dalla tua stazione	İstasyonunuzdan {0} km
+{0} spot MS in memoria	bellekte {0} MS spot'u
 {0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {3} UTC'de %{2:F0} (yerel saat {4})
 {0} · zona	{0} · bölge
 {0}: non lavorato	{0}: çalışılmadı
-{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  benden az. {2:F0}° (sapma {3:+0;-0}°), karşı istasyondan {4:F0}°, mesafe {5:F0} km
-{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  benden az. {2:F1}° (doğrudan yoldan sapma {3:+0.0;-0.0}°), karşı istasyondan {4:F0}°, mesafe {5:F0} km, elevasyon {6:F1}°
+{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  benden az. {2:F0}° (sapma {3:+0;-0}°), karşı istasyondan {4:F0}°, uzaklık {5:F0} km
+{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  benden az. {2:F1}° (doğrudan yoldan sapma {3:+0.0;-0.0}°), karşı istasyondan {4:F0}°, uzaklık {5:F0} km, elevasyon {6:F1}°
 {0}: {1} QSO	{0}: {1} QSO
 {0}: {1} ore lette.	{0}: {1} saat okundu.
 {0}: {1} quadrati lavorati, {2} confermati	{0}: {1} kare çalışıldı, {2} onaylandı
@@ -474,131 +637,73 @@ zona PREV	PREV bölgesi
 Σ ZHR x effic.	Σ ZHR x verim
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (sol)
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Solda: Global Meteor Network'ten aktif yağmurların ölçülen akısı ve ZHR'si (kameralar, günlük güncelleme; kırmızı çizgi = son güncelleme). Sağda: CMOR radarının (Kanada, 43° N) neredeyse gerçek zamanlı olarak saptadığı radyantlar, gündüz yağmurları dahil; altta, aynı radyantlar hıza göre renklendirilmiş.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radyant haritaları
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Canlı veri kaynaklarının bulunduğu yerler. Kesikli çemberler = radarın gördüğü gökyüzü alanı (istasyon çevresinde yaklaşık 300 km, izler 90 km'de): hiçbir radar yolunuzun üzerindeki gökyüzüne bakmaz, veriler yağmurun ne kadar aktif olduğunu söyler. Noktalı çizgiler = istasyonunuza uzaklık.
-Europa	Avrupa
-GMN e CMOR alle {0} UTC: {1} errori ({2})	{0} UTC'de GMN ve CMOR: {1} hata ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ve CMOR {0} UTC'de denetlendi ({1} yeni dosya). GMN verileri: CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: yağmurların ölçülen akısı ve ZHR'si. Veriler CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ve Vida et al. 2022, MNRAS 515(2)
-Mondo	Dünya
-Nessun dato GMN: premi "Scarica adesso".	GMN verisi yok: "Şimdi indir"e basın.
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Haritada bir nokta değildir: tüm kıtalarda birçok ülkeye dağılmış, dünya çapında bir kamera ağıdır (çoğunlukla amatör).
-Riepilogo dell'anno (ZHR misurati, GMN)	Yılın özeti (ölçülen ZHR, GMN)
-SGO, Finlandia	SGO, Finlandiya
-Sciami in diretta	Canlı yağmurlar
-Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
-Univ. Lipsia / IAP Kühlungsborn	Leipzig Üniv. / IAP Kühlungsborn
-aggiornamento una volta al giorno	günde bir kez güncellenir
-dati CC BY 4.0 (Vida et al. 2021, 2022)	veriler CC BY 4.0 (Vida et al. 2021, 2022)
-la tua stazione	istasyonunuz
-linguetta "{0}"	"{0}" sekmesi
-misura il flusso e lo ZHR di ogni sciame attivo	her aktif yağmurun akısını ve ZHR'sini ölçer
-osservatori RMOB che ascoltano GRAVES	GRAVES'i dinleyen RMOB gözlemcileri
-radar SKiYMET 36,2 MHz	SKiYMET radarı 36,2 MHz
-radar meteorico 17-38 MHz, orbite	meteor radarı 17-38 MHz, yörüngeler
-radar meteorico 36,9 MHz	meteor radarı 36,9 MHz
-trasmettitore 143,050 MHz	verici 143,050 MHz
-{0} km dalla tua stazione	İstasyonunuzdan {0} km
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	"{0}" için KABUL EDİLDİ: {1}, bildiren {2}, {3} MHz
-Aggiungi	Ekle
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Belirsiz lokatörler (yalnızca 4 karakter) de, CALL3'te 6 karakterli lokatör varsa CALL3'ten alınır.
-Apri la cartella degli spot	Spot klasörünü aç
-Bande (MHz)	Bantlar (MHz)
-CALL3: caricamento...	CALL3: yükleniyor...
-CALL3: nessun archivio (data/call3.txt)	CALL3: arşiv yok (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} çağrı işareti
-Chiuso	Kapalı
-Cluster con PSKReporter	PSKReporter'lı cluster
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	PSKReporter spot'larıyla DM4X cluster'ı (dm4x.ddns.net, port 8500): WSJT-X ve MSHV'nin MSK144 çözümleri buraya gelir. Alternatif olarak HamAlert (hamalert.org 7300, tetikleyicili bir hesap gerekir).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Kullanıcının seçtiği cluster. ON0DXK'de VHF bantları filtrelidir: set/filter dxbm/pass 6 (sonra 4, 2...) ile etkinleştirilir. Başka bir örnek: hamqth.com 7300.
-Commento	Yorum
-Connetti	Bağlan
-Connetti all'avvio	Açılışta bağlan
-Contatori	Sayaçlar
-DX cluster a scelta	Seçilen DX cluster
-Disconnesso	Bağlantı kesildi
-Disconnetti	Bağlantıyı kes
-Filtro	Filtre
-Filtro degli spot meteor scatter	Meteor scatter spot filtresi
-Fonte	Kaynak
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Kabul edilen spot'lar data/spot_ms klasörüne, günde bir CSV dosyası olarak kaydedilir. Eksik lokatörler CALL3 arşivinden (data/call3.txt) alınır.
-Host	Sunucu
-Importa CALL3.TXT...	CALL3.TXT içe aktar...
-Indirizzo mancante	Adres eksik
-Invia	Gönder
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	"{0}" kelimesi var, ancak satır geçerli bir "DX de ..." spot'u değil.
-Loc DX	DX lok.
-Loc spotter	Spotter lok.
-Manca il nominativo per il login	Oturum için çağrı işareti eksik
-Nominativo per il login	Oturum için çağrı işareti
-Non connesso	Bağlı değil
-Nuovo tentativo tra 30 s	30 s sonra yeniden denenecek
-Porta	Port
-Prova del filtro	Filtre testi
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: port 7000 = CW ve RTTY, port 7001 = FT8. Oturum yalnızca çağrı işaretiyle açılır. RBN skimmer'ları MS modlarını nadiren çözer: esas olarak yorumunda <MS> olan spot'lar için işe yarar.
-Raccolta dati	Veri toplama
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	Yeniden bağlan
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	REDDEDİLDİ: "{0}" bulundu, ancak {1:F1} kHz frekansı seçili bir bantta değil.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	27990,0 kHz altındaki cluster satırlarını hemen at (konsolda görünmez ve saklanmaz)
-Scrivi il nominativo per il login prima di connettere.	Bağlanmadan önce oturum için çağrı işaretini yazın.
-Spot meteor scatter raccolti (i più recenti in alto)	Toplanan meteor scatter spot'ları (en yeniler üstte)
-Svuota la tabella	Tabloyu temizle
-collegamento via meteor scatter	meteor scatter üzerinden bağlantı
-comandi dopo il login, separati da ;	oturum açtıktan sonraki komutlar, ; ile ayrılmış
-comando da inviare (es. sh/dx 20)	gönderilecek komut (örn. sh/dx 20)
-modo digitale MS	MS dijital modu
-nominativo	çağrı işareti
-nuova parola	yeni kelime
-parola aggiunta	eklenen kelime
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	alınan satırlar      {0}\nokunan spot'lar      {1}\nkabul edilen MS      {2}\nreddedilen (kelime)  {3}\nreddedilen (bant)    {4}\nson saatte MS spot   {5}
-righe sotto 27990 kHz scartate: {0}	27990 kHz altında atılan satırlar: {0}
-righe {0}, spot letti {1}, MS {2}	satır {0}, okunan spot {1}, MS {2}
-{0} spot MS in memoria	bellekte {0} MS spot'u
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1. kriter: meteor scatter spot'larının tipik frekansları (kHz)
-2° criterio: modi digitali MS e <MS>	2. kriter: MS dijital modları ve <MS>
-La riga non è uno spot "DX de ..." valido.	Satır geçerli bir "DX de ..." spot'u değil.
-SCARTATO: frequenza sotto 27990,0 kHz.	REDDEDİLDİ: frekans 27990,0 kHz'in altında.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	REDDEDİLDİ: MS pencerelerinin dışında ve filtre kelimesi yok.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	REDDEDİLDİ: yorum başka bir yayılım ({0}) belirtiyor ve MS modu yok.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	Bu pencerelerdeki bir spot, mod adı olmasa da kabul edilir; ancak yorum şu etiketlerden biriyle başka bir yayılım belirtiyorsa kabul edilmez:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Pencerelerin dışındaki spot'lar ve başka yayılım etiketi taşıyanlar için geçerlidir: açık kelimelerden birini (büyük, küçük veya karışık harfle yazılmış) içerirlerse tutulurlar. MSK144, FSK441, PSK2K, JTMS ve JT6M yalnızca meteor scatter için kullanılan dijital modlardır: spot kesinlikle MS'tir. <MS> genel olarak bağlantının meteor scatter üzerinden yapıldığını belirtir.
-accettati per finestra di frequenza: {0}	frekans penceresiyle kabul edilen: {0}
-finestra {0} kHz	pencere {0} kHz
-scartati per altra propagazione: {0}	başka yayılım nedeniyle reddedilen: {0}
-Spot MS raccolti	Toplanan MS spot'ları
-antenna {0}°	anten {0}°
-Calcolo previsionale	Tahmin hesabı
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Bağlantının ve bulutunun ayrıntıları için haritadaki bir yola veya tablodaki bir satıra tıklayın.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	Teknik belgeler
-Foto	Fotoğraf
-Live e dati real-time	Canlı ve gerçek zamanlı veriler
-Mappa dei radar europei	Avrupa radarları haritası
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Radar verisi yok: Canlı ve gerçek zamanlı veriler › Radar akısı alt sekmesinden indirin.
-Nuvola	Bulut
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Meteor scatter için meteor yağmurlarının veriminin canlı tahmini ve hesabı
-Raggio della mappa	Harita yarıçapı
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"Veri toplama" sekmesindeki MS spot'ları. Her bağlantı için bulut, o yol ve o saat için en olası izlerin nerede yoğunlaştığını gösterir (aynasal yansıma, aktif yağmurların toplamı). Kesikli bulutlar = yalnızca sporadik meteorlar. İstasyonlarından biri harita dışında olan spot'lar çizilmez; yeni gelenler (3 dakikadan az) bir dakika boyunca yanıp söner.
-Spot da mostrare	Gösterilecek spot'lar
-Stazione	İstasyon
-Traffico MS in diretta · {0}	Canlı MS trafiği · {0}
-Traffico in diretta	Canlı trafik
-Traffico meteor scatter in diretta	Canlı meteor scatter trafiği
-a cura di	hazırlayan:
-hot spot (solo sporadiche) {0}	hot spot (yalnızca sporadik) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	radar verisi yok: bkz. Canlı ve gerçek zamanlı veriler › Radar akısı
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	bu yol için bulut hesaplanamıyor (çok kısa veya çok uzun)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	bulut {0}: yansımaların {1:F0} %'si, {2:F0} × {3:F0} km, eksen {4:F0}°
-sporadiche	sporadik
-ultima ora	son bir saat
-ultime 24 ore	son 24 saat
-ultime {0} ore	son {0} saat
-ultimi {0} minuti	son {0} dakika
-versione	sürüm
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	haritada {0} bağlantı · harita dışında {1} · lokatörsüz {2}
+FONTE	KAYNAK
+RILIEVO	KONTROL
+SCELTA	SEÇİM
+(sopra 144 MHz nessuna misura: λ²)	(144 MHz üzerinde ölçüm yok: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	Ping sürelerinin bir banttan diğerine nasıl değiştiği.\nKuramsal (temkinli, varsayılan): süre λ² ile orantılı (McKinley 1961; SM6FHZ kuralı): 50'den 144 MHz'e pingler 8 kat kısalır.\nGözlenen: NN4SA (EM64) tarafından 2026 Perseidleri sırasında HamSCI MSQP kapsamında ölçülen medyanlar (R. Suggs NN4NT): 28 MHz'de 148 ms, 50 MHz'de 78 ms, 144 MHz'de 53 ms; 50'den 144 MHz'e pingler yalnızca 1,5 kat kısalır. Tek bir alıcı istasyon, ön analiz; 144 MHz üzerinde ölçüm yoktur ve λ² kullanılır.
+Durata dei ping tra le bande	Bantlar arası ping süresi
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	Gözlenen süre (HamSCI MSQP, NN4SA, 2026 Perseidleri; medyanlar 28 / 50 / 144 MHz'de 148 / 78 / 53 ms): {1:F0} MHz'de yaklaşık {0:F0} ms, 144 MHz'e göre x {2:F2}{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	λ² yerine HamSCI MSQP ölçümlerine göre süre (NN4SA, 2026 Perseidleri): x {0:F3}; yani {1:F1} MHz'de 1 s süren bir yankı {3:F0} MHz'de yaklaşık {2:F0} ms sürer.
+Raggio iniziale della scia	İzin başlangıç yarıçapı
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	İzin başlangıç yarıçapı r0: ne kadar büyükse yüksek frekanslarda o kadar çok kayıp olur.\nITU değerinin iki katı (temkinli, varsayılan): CMOR radarı 17, 29 ve 38 MHz'de 85 ile 95 km arasında 0,5-2 m, çoğunlukla 1-1,5 m r0 bulur, saçılım iki kat; önceki ölçümlerin yaklaşık iki katı (Stober vd. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (90 km'de 0,5 m), ortalama değer.\nHariç: başlangıç yarıçapı çarpanı olmadan.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	Başlangıç yarıçapı: ITU-R P.843 ortalama değeriyle (r0 = {0:F2} m) çarpan {1:F1} dB olurdu; geçerli seçim {2}. CMOR ölçümleri: 85 ile 95 km arasında r0 0,5-2 m, iki kat saçılım (Stober vd. 2021)
+doppio dell'ITU (Stober 2021, prudente)	ITU değerinin iki katı (Stober 2021, temkinli)
+escluso	hariç
+osservata (HamSCI MSQP, NN4SA 2026)	gözlenen (HamSCI MSQP, NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	kuramsal λ² (McKinley, SM6FHZ; temkinli)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	Her yağmurun altına "klasik" satırını ekler: radyo amatörlerinin kuralının yol orta noktasında hesaplanan kararı.\n✗ radyant ufkun altında; ◐ sınırda (radyant 15°'nin altında veya 70°'nin üstünde ya da yol yönüne 30°'den yakın); ● iyi; ★ en iyi (radyant 15° ile 70° arasında ve yol yönünden 60°'den uzak).\nEşikler meteor-mcp'deki gibi (qso-graph, 2026); DH9GCD formülü ve SM6FHZ kurallarıyla aynı fikir. Hesabı değiştirmez: β açısına dair iki görüşü karşılaştırmaya yarar.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	Şu anda etkin her yağmur için k = 3,75·log10 r hesaplar (r GMN tablosundan, yoksa IMO kataloğundan) ve ZHR ile ağırlıklı ortalamayı alır.\nKuram: s = 1 + 2,5·log10 r kütle indeksiyle sabit bir eşiğin üstündeki iz sayısı λ^(1,5·(s − 1)) ile ölçeklenir (IZ5TEK, OH5IY).\nVarsayılan k = 3 olarak kalır (SM6FHZ'nin deneysel kuralı), daha temkinli: daha düşük k yüksek frekanslarda daha çok yansıma öngörür.\nDikkat: Collm sayımları çoğunlukla seyrek meteorlardır ve GMN bunlar için r yayımlamaz.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	Kamera sayımı, akı değil: kaç istasyonun açık ve karanlık gökyüzüne sahip olduğuna bağlıdır.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	Programın radyantı ile MDC radyantları arasındaki uzaklık: medyan {0:F1}°, en büyük {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Geometri üzerine farklı kaynaklara dayanan iki görüş.\nAçık (temkinli, varsayılan): McKinley (1961) ve ITU-R P.843'ün tam formülü, 1 / (1 − cos²β sin²φ); β iz ile yol düzlemi arasındaki açıdır. Düzlemi kesen izler, düzlemde yatanlardan 10-15 dB daha az değerlidir ve hiçbir iz abartılmaz: yolla aynı doğrultudaki radyantlar öne çıkar. Bu seçimle YA-MS, DJ5HG'nin saatlik eğrilerinin biçimini (2004) daha iyi izler.\nKapalı: her iz yol düzleminde yatıyormuş gibi sayılır (β = 0), sürüm 1.6'ya kadar olduğu gibi. Radyo amatörlerinin klasik kuralı geçerlidir: en iyi radyant 15-70° yükseklikte ve yola dik konumdadır, yolla aynı doğrultudaki sınırdadır (SM6FHZ, DH9GCD, qso-graph'ın meteor-mcp'si).\nİki görüş henüz bağımsız ölçümlerle karşılaştırılmadı: "Klasik karar" kutusu klasik kuralın kararını verimliliğin altında saat saat gösterir.
+GMN oggi	GMN bugün
+Giudizio classico	Klasik karar
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: {1} ile {2} UTC arasında {0} doğrulanmış yörünge, bunların {3} tanesi seyrek. Kamera sayımı, akı değil. Veriler CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ({0}): {1} çözüm. Medyanlar: λ {2:F1}°, sağ açıklık {3:F1}°, dik açıklık {4:+0.0;-0.0}°, v {5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: çözümler
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	ZHR ile ağırlıklı ortalama: k = {0:F2} (SM6FHZ kuralı: 3, daha temkinli).\n\nBu üs uygulansın mı?
+Nessuno sciame attivo con un indice di popolazione valido.	Geçerli popülasyon indeksine sahip etkin yağmur yok.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	GMN tarafından {0} ile {1} UTC arasında doğrulanan yörüngeler: {2} (seyrek {3})
+classico	klasik
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3,75·log10 r = {0}, r = {1} ({2}) ile. SM6FHZ'nin deneysel kuralı daha temkinli olan k = 3'ü kullanır.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = popülasyon indeksi r'den frekans dönüşümünün üssü (varsa GMN, yoksa IMO): k = 3,75·log10 r. IAU MDC: IAU Meteor Data Center kataloğunda yayımlanan çözümler; Δ = programın IMO kataloğu eksi MDC çözümlerinin medyanı (radyant aynı güneş boylamında karşılaştırılır). GMN bugün: Global Meteor Network'ün son günlük dosyasında doğrulanan yörüngeler (sayım, akı değil).
+k dagli indici di popolazione	Popülasyon indekslerinden k
+Δ radiante	Δ radyant
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Geometri üzerine farklı kaynaklara dayanan iki görüş.\nAçık (temkinli, varsayılan): McKinley (1961) ve ITU-R P.843'ün tam formülü, 1 / (1 − cos²β sin²φ); β iz ile yol düzlemi arasındaki açıdır. Düzlemi kesen izler, düzlemde yatanlardan 10-15 dB daha az değerlidir ve hiçbir iz abartılmaz: yolla aynı doğrultudaki radyantlar öne çıkar. Bu seçimle YA-MS, DJ5HG'nin saatlik eğrilerinin biçimini (2004) daha iyi izler.\nKapalı: her iz yol düzleminde yatıyormuş gibi sayılır (β = 0), sürüm 1.6'ya kadar olduğu gibi. Radyo amatörlerinin klasik kuralı geçerlidir: en iyi radyant 15-70° yükseklikte ve yola dik konumdadır, yolla aynı doğrultudaki sınırdadır (SM6FHZ, DH9GCD, qso-graph'ın meteor-mcp'si).\nSonneberg'deki BRAMS sayımlarıyla ilk karşılaştırma (Perseidler 2026, 471 km) onları ayırt etmiyor: "Klasik karar" kutusu klasik kuralın kararını verimliliğin altında saat saat gösterir.
+... e altri {0}	... ve {0} tane daha
+Aggiorna adesso	Şimdi güncelle
+Aggiornamenti	Güncellemeler
+Aggiornamento disponibile	Güncelleme mevcut
+Aggiornamento installato	Güncelleme kuruldu
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	Bazı değişiklikler ancak program yeniden başlatıldıktan sonra görünür.
+Apri la pagina delle release	Sürümler sayfasını aç
+Chiudi	Kapat
+Continua senza	Onlarsız devam et
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	İnternet bağlantınızı kontrol edin veya tam paketi sürümler sayfasından yeniden indirin.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	GitHub'da YA-MS'in daha yeni bir sürümü olup olmadığını denetler ve varsa kurar; ayrıca program dosyalarının eksik olmadığını da denetler.
+Controllo degli aggiornamenti su GitHub...	GitHub'da güncellemeler denetleniyor...
+File mancanti	Eksik dosyalar
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	Program {0} paketini indirir, kendi dosyalarını değiştirir, data klasörünü korur (değişen program dosyaları önce data/backup klasörüne kopyalanır) ve yeniden başlar.
+Installazione dell'aggiornamento...	Güncelleme kuruluyor...
+L'aggiornamento non è riuscito: {0}	Güncelleme başarısız oldu: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	{0} program dosyası eksik:\n{1}\n\nGitHub'dan indirilsin mi (sürüm {2})?
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	Sürümde bu sistem için paket yok ({0}): sürümler sayfasından elle indirin.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	Program klasörüne yazamıyorum ({0}): yeni sürümü elle kurun.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	GitHub'da yayımlanan sürümler okunamıyor: {0}
+Più tardi	Daha sonra
+Riavvia YA-MS a mano: {0}	YA-MS'i elle yeniden başlatın: {0}
+Salta questa versione	Bu sürümü atla
+Scarica i file mancanti	Eksik dosyaları indir
+Scaricamento dei file mancanti: {0} di {1}	Eksik dosyalar indiriliyor: {0} / {1}
+Scaricamento dell'aggiornamento...	Güncelleme indiriliyor...
+Scaricamento dell'aggiornamento: {0} %	Güncelleme indiriliyor: %{0}
+Scaricati {0} file mancanti.	{0} eksik dosya indirildi.
+Scaricati {0} file su {1}.	{1} dosyadan {0} tanesi indirildi.
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} kuruldu. Program şimdi yeniden başlıyor.
+YA-MS è aggiornato (versione {0}).	YA-MS güncel (sürüm {0}).
+YA-MS.app non trovato nel pacchetto	Pakette YA-MS.app bulunamadı
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	data klasöründe {0} dosya değiştirildi: önceki kopyalar data/backup/v{1} klasöründe.
+{0} non trovato nel pacchetto	Pakette {0} bulunamadı
+È disponibile YA-MS {0} (questa è la {1}).	YA-MS {0} mevcut (bu sürüm {1}).

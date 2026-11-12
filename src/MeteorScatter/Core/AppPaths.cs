@@ -8,7 +8,20 @@ namespace YAMS
     public static class AppPaths
     {
         public const string AppName = "YA-MS";
-        public const string Version = "1.6.0";
+        // versione dal file VERSION (scritta nell'eseguibile durante la compilazione), senza il codice del commit
+        public static readonly string Version = "1.8.0";   // E-LAYER ANALYZER: versione di YA-MS incorporata (tools/sync_yams.py)
+        static string ReadVersion()
+        {
+            try
+            {
+                System.Reflection.AssemblyInformationalVersionAttribute a = (System.Reflection.AssemblyInformationalVersionAttribute)Attribute.GetCustomAttribute(
+                    typeof(AppPaths).Assembly, typeof(System.Reflection.AssemblyInformationalVersionAttribute));
+                string v = a != null ? a.InformationalVersion : typeof(AppPaths).Assembly.GetName().Version.ToString(3);
+                int i = v.IndexOf('+');
+                return i > 0 ? v.Substring(0, i) : v;
+            }
+            catch { return "0.0.0"; }
+        }
         public const string Author = "a cura di Costantino IC8TEM";
         public static string Title { get { return AppName + " " + Version + " - " + Author; } }
 

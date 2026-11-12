@@ -73,12 +73,15 @@ namespace YAMS
                 rdDot[i] = new TextBlock { Text = (i + 1) + ". " + Lang.T(MsCollector.Defaults[i][0]) + " ●", FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 18, 0) };
                 rdStrip.Children.Add(rdDot[i]);
             }
+            mqDot = new TextBlock { Text = "4. " + Lang.T("PSKReporter MQTT") + " ●", FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 18, 0) };
+            rdStrip.Children.Add(mqDot);
             DockTop(left, rdStrip);
             // una sottolinguetta per ciascuno dei tre flussi di cluster (richiesta IC8TEM), poi gli spot raccolti
             PillTabs inner = new PillTabs(true);
             string[] shortName = { Lang.T("DX cluster"), "RBN", Lang.T("DM4X (PSKReporter)") };
             // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio
             for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }
+            inner.Add("4. " + Lang.T("PSKReporter MQTT"), MqttBox(Pal.Green));
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);
@@ -227,6 +230,60 @@ namespace YAMS
             };
         }
 
+        // quarta fonte: PSKReporter via MQTT (mqtt.pskreporter.info), spot gia' strutturati con i locator di chi trasmette e di chi riceve
+        TextBox mqHost, mqTopics;
+        NumericUpDown mqPort;
+        CheckBox mqAuto, mqStart;
+        TextBlock mqState, mqCounts, mqDot;
+        SelectableTextBlock mqConsole;
+        ScrollViewer mqSv;
+
+        Border MqttBox(Color tc)
+        {
+            mqHost = T(cfg.Get("rd4_host", PskMqtt.DefaultHost), 200, false);
+            mqPort = N(1, 65535, Dm(cfg.GetD("rd4_porta", PskMqtt.DefaultPort)), 0, 1, 60);
+            mqTopics = T(cfg.Get("rd4_argomenti", PskMqtt.DefaultTopics), 300, false);
+            mqTopics.AcceptsReturn = true; mqTopics.TextWrapping = TextWrapping.Wrap; mqTopics.Height = 74;
+            mqTopics.HorizontalAlignment = HorizontalAlignment.Stretch; mqTopics.Width = double.NaN;
+            mqAuto = C(Lang.T("Riconnetti"), cfg.GetB("rd4_riconnetti", true));
+            mqStart = C(Lang.T("Connetti all'avvio"), cfg.GetB("rd4_avvio", false));
+            Button bc = B(Lang.T("Connetti")); bc.Classes.Add("accent");
+            Button bd = B(Lang.T("Disconnetti"));
+            Button bdef = B(Lang.T("Argomenti di partenza"));
+            bc.Click += (s, e) => MqConnect();
+            bd.Click += (s, e) => PskMqtt.Disconnect();
+            bdef.Click += (s, e) => mqTopics.Text = PskMqtt.DefaultTopics;
+            mqState = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
+            mqCounts = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
+            mqConsole = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.NoWrap };
+            mqSv = new ScrollViewer { Content = mqConsole, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+            DockPanel sp = new DockPanel();
+            DockTop(sp, new TextBlock { Text = "4. " + Lang.T("PSKReporter MQTT"), FontWeight = FontWeight.Bold, FontSize = 15, Foreground = Pal.B(tc), Margin = new Thickness(4, 2, 12, 2) });
+            DockTop(sp, new TextBlock
+            {
+                Text = Lang.T("Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto)."),
+                Foreground = Pal.B(Pal.Muted), FontSize = 12, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 0, 6, 4)
+            });
+            DockTop(sp, Row(L(Lang.T("Host")), mqHost, L(Lang.T("Porta")), mqPort, bdef));
+            DockTop(sp, new Border { Padding = new Thickness(6, 2), Child = mqTopics });
+            DockTop(sp, Row(bc, bd, mqAuto, mqStart, mqState, mqCounts));
+            sp.Children.Add(mqSv);
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(10), Padding = new Thickness(6, 3), Margin = new Thickness(4), Child = sp
+            };
+        }
+
+        void MqConnect()
+        {
+            PskMqtt.Host = (mqHost.Text ?? "").Trim();
+            PskMqtt.Port = (int)V(mqPort);
+            PskMqtt.Topics = mqTopics.Text ?? "";
+            PskMqtt.AutoReconnect = mqAuto.IsChecked == true;
+            PskMqtt.Connect();
+        }
+
         void RdConnect(int i)
         {
             TelnetSession s = MsCollector.Sessions[i];
@@ -245,6 +302,7 @@ namespace YAMS
             if (Hosted || MsCollector.Started) return;
             MsCollector.Started = true;
             for (int i = 0; i < 3; i++) if (rdStart[i].IsChecked == true) RdConnect(i);
+            if (mqStart != null && mqStart.IsChecked == true) MqConnect();
         }
 
         void FillWordList()
@@ -362,8 +420,21 @@ namespace YAMS
                     if (rdConsole[i].Text != txt) { rdConsole[i].Text = txt; rdSv[i].ScrollToEnd(); }
                 }
             }
+            if (mqState != null)
+            {
+                mqState.Text = Lang.F(PskMqtt.StateKey, PskMqtt.StateArg);
+                mqState.Foreground = Pal.B(PskMqtt.Connected ? Pal.Green : Pal.Muted);
+                mqDot.Foreground = Pal.B(PskMqtt.Connected ? Pal.Green : Pal.Muted);
+                ToolTip.SetTip(mqDot, mqState.Text);
+                mqCounts.Text = Lang.F("righe {0}, spot letti {1}, MS {2}", MsCollector.Lines[3], MsCollector.Parsed[3], MsCollector.Accepted[3]);
+                if (mqSv.IsEffectivelyVisible)
+                {
+                    string txt = string.Join("\n", MsCollector.ConsoleLines[3]);
+                    if (mqConsole.Text != txt) { mqConsole.Text = txt; mqSv.ScrollToEnd(); }
+                }
+            }
             int lines = 0, parsed = 0, acc = 0;
-            for (int i = 0; i < 3; i++) { lines += MsCollector.Lines[i]; parsed += MsCollector.Parsed[i]; acc += MsCollector.Accepted[i]; }
+            for (int i = 0; i < 4; i++) { lines += MsCollector.Lines[i]; parsed += MsCollector.Parsed[i]; acc += MsCollector.Accepted[i]; }
             int lastHour = 0; DateTime lim = DateTime.UtcNow.AddHours(-1);
             foreach (MsSpot s in MsCollector.Spots) if (s.Utc >= lim) lastHour++;
             lblRdStats.Text = Lang.F("righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}",
@@ -407,6 +478,11 @@ namespace YAMS
                 string k = "rd" + (i + 1) + "_";
                 cfg.Set(k + "host", rdHost[i].Text ?? ""); cfg.Set(k + "porta", V(rdPort[i])); cfg.Set(k + "comandi", rdCmds[i].Text ?? "");
                 cfg.Set(k + "riconnetti", rdAuto[i].IsChecked == true); cfg.Set(k + "avvio", rdStart[i].IsChecked == true);
+            }
+            if (mqHost != null)
+            {
+                cfg.Set("rd4_host", mqHost.Text ?? ""); cfg.Set("rd4_porta", V(mqPort)); cfg.Set("rd4_argomenti", mqTopics.Text ?? "");
+                cfg.Set("rd4_riconnetti", mqAuto.IsChecked == true); cfg.Set("rd4_avvio", mqStart.IsChecked == true);
             }
             MsCollector.Save(cfg);
         }

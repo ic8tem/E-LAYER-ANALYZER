@@ -1,0 +1,175 @@
+TITLE|Jak YA-MS počítá účinnost roje
+SUB|Technický dokument - připravil Costantino IC8TEM - listopad 2026
+H1|1. Úvod
+H2|1.1 Účel dokumentu
+P|Tento dokument krok za krokem vysvětluje, jak program odvozuje účinnost meteorického roje pro trasu meteor scatter. U každého kroku je uvedeno, odkud pochází: z publikovaného zdroje, z ověření provedeného na programu, nebo z volby samotného programu. Úplné, číslované rovnice jsou v Manuálu výpočtů (složka doc).
+H2|1.2 Jak číst štítky
+TAG|FONTE|krok přebírá citovaný zdroj; číslo v hranatých závorkách odkazuje na seznam zdrojů na konci.
+TAG|RILIEVO|srovnání programu se zdroji, s výsledkem ověření.
+TAG|SCELTA|volba programu, nepřevzatá ze zdroje: je třeba ji ověřit zkušeností z pásma.
+H2|1.3 Co se rozumí účinností
+TAG|FONTE|Účinnost udává v procentech, nakolik poloha roje umožňuje odrazy na dané trase. Koncepce pochází od Ilkky OH5IY (MS-Soft) [2] a je převzata v článku [1]: maximum účinnosti se neshoduje s viditelným maximem (ZHR), protože závisí na tom, kde se radiant nachází vzhledem k oběma stanicím.
+TAG|FONTE|MCG_MS od DL5MCG [3] uplatňuje stejnou koncepci na čtyři pevné směry (N/S, NE/SW, E/W, SE/NW) a po zadání lokátoru protistanice i na skutečnou trasu.
+TAG|SCELTA|YA-MS počítá účinnost pro skutečnou trasu mezi oběma lokátory, ne pro pevné směry.
+H1|2. Kde dochází k odrazům: vrstva E
+H2|2.1 Stopy roje
+TAG|FONTE|Meteory roje vytvářejí ionizované stopy ve vrstvě E, ve výšce 80 až 120 km. Radary SKiYMET udávají střední výšku asi 90 km [1].
+H2|2.2 Výpočtová výška
+TAG|SCELTA|Program čte histogram výšek radaru Collm [7] a jako výpočtovou výšku používá nejčastější hodnotu (modus). Pokud je políčko „z radaru“ vypnuté, použije se ručně zadaná hodnota.
+TAG|RILIEVO|Graf z Collmu z 5/11/2026: modus 89,5 km, průměr 88,6 km, směrodatná odchylka 6,8 km. Údaj potvrzuje 90 km z článku [1].
+TAG|RILIEVO|DJ5HG [18] a QTFGUI [17] používají pevnou výšku 102 km; program dává přednost hodnotě změřené radarem. Doporučení ITU-R P.843 [24] udává střední výšku h = 124 − 17·log10(f) km: asi 97 km na 36,2 MHz a 87 km na 144 MHz, v souladu s modusem z Collmu (89,5 km dne 5/11/2026).
+H1|3. Geometrie trasy
+H2|3.1 Země, stanice a střední bod
+TAG|FONTE|Kulová Země o poloměru r = 6372,7955 km [1].
+TAG|SCELTA|Trasa je vždy skutečná trasa mezi lokátorem stanice a lokátorem protistanice. Vzdálenost, azimut a střední bod se počítají vzorci hlavní kružnice.
+TAG|FONTE|Výpočty závislé na čase se vztahují ke střednímu bodu trasy: mezi oběma konci se nejlepší čas může lišit až o 1,5 hodiny (SM6FHZ [4]).
+H2|3.2 Elevace antény
+TAG|FONTE|Elevace k bodu odrazu se počítá vzorcem z článku (Obrázek 7) [1], s x = vzdálenost / r, H výškou stopy, h výškou stanice:
+EQ|e = 90° − 57,3 · arctan[ (r·tan x + (H − r(1−cos x)/cos x)·sin x) / (H − r(1−cos x)/cos x − h·sin x) ]
+TAG|RILIEVO|Vzorec se shoduje s přesnou sférickou geometrií do 0,03°. Program používá arkustangens se dvěma argumenty, který za horizontem dává záporné hodnoty a vyhýbá se problému periodicity zmíněnému v článku.
+H2|3.3 Společná zóna a její meze
+TAG|FONTE|Článek [1] určuje průsečíky křivek, kde horizont každé stanice protíná vrstvu E. Jsou to průsečíky dvou kružnic kolem stanic o poloměru rovném dosahu ve výšce stop:
+EQ|d_H = r · [ π/2 − e − arcsin( (r+h)·cos e / (r+H) ) ]
+P|S H = 89,5 km a lalokem v 0° je dosah 1062 km. Je-li trasa delší než dvojnásobek dosahu, obě stanice nevidí žádnou společnou zónu vrstvy E.
+TAG|RILIEVO|Tyto dva body jsou nejvzdálenější okraje oblohy viditelné z obou stanic, nikoli body, kam přichází nejvíce odrazů. Na trase JN70CN - IN78UO (1710 km) leží 37° vlevo a vpravo od přímého směru, zatímco MSHV doporučuje 10°. Proto je program nazývá „Mez A“ a „Mez B“ a kreslí je na mapě slabě, s oběma kružnicemi společné zóny.
+TAG|RILIEVO|V příkladu z článku (JN44BB - IO53RT) klade výkres tyto průsečíky asi 870 km od stanic: to odpovídá laloku zvednutému asi o 2° (865 km).
+H2|3.4 Hot A a Hot B: kam směrovat
+TAG|FONTE|Odrazy sporadických meteorů se soustřeďují do dvou zón („hot spot“) po stranách středního bodu trasy. J. Richardson (AMS) [19] v tabulce, kterou uvádí DJ5HG [18], udává odchylku antény od přímého směru: 13° při 1000 km, 11° při 1250 km, 10° při 1500 a 2000 km. AMS Bulletin n. 203, převzatý W8WN [14], udává 10° při 1500 a 1800 km.
+TAG|SCELTA|Hot A a Hot B jsou body ve vzdálenosti s od středního bodu, kolmo k trase (A vlevo při pohledu ze stanice k protistanici, B vpravo). Se zapnutým políčkem „auto (AMS)“ (výchozí stav) se s odvodí z odchylky v Richardsonově tabulce, lineárně interpolované (13° pod 1000 km, 10° nad 2000 km): s = (D/2)·tan(odchylka). Po vypnutí políčka se s zadává ručně (MSHV [15] používá 150 km).
+EQ|Δaz ≈ arctan( s / (D/2) )
+TAG|RILIEVO|S tabulkou AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s ≈ 121 km; 1500 km → 10°, s ≈ 132 km; 2000 km → 10°, s ≈ 176 km. JN70CN-IN78UO (1710 km) → 10°, s ≈ 151 km, jako 150 km používaných dříve a v MSHV; na krátkých trasách tabulka přibližuje hot spoty ke střednímu bodu.
+TAG|SCELTA|Pro čas zobrazený na nebeské klenbě program sečte přes všechny roje nad horizontem ZHR x účinnost rozdělené mezi stranu A a stranu B (kapitola 7.1). Hot spot strany, která přijímá více odrazů, je doporučený: na mapě se zobrazí červeně.
+TAG|FONTE|Podle DJ5HG, citovaného DF5HC [16], nastává odraz na kuželu kolem stopy: pro kratší trasy se antény mají směrovat stranou od přímého směru, obě stanice na stejný bod, a podle polohy radiantu je jeden ze dvou bodů (HOT-A nebo HOT-B) příznivější. DF5HC také udává nejlepší vzdálenost 1300-1500 km, s maximem těsně nad 2000 km.
+H2|3.5 Lalok antény
+TAG|FONTE|Zisk dlouhé Yagi z délky ráhna (křivka DL6WU [10]) a šířka laloku −3 dB ze zisku (Krausovo pravidlo [11]):
+EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|RILIEVO|Simulace NEC od W4RNL [12] potvrzují křivku zisku do 0,1 dB jak pro Yagi DL6WU, tak pro Yagi Davida Tannera VK3AUU, které mají při stejném počtu prvků kratší ráhno: zisk závisí na délce ráhna. Tytéž simulace dávají vodorovný lalok o 5-10 % užší než Kraus.
+TAG|SCELTA|Vodorovný lalok (ten pro nasměrování v azimutu) = 0,93 · θK; svislý lalok = θK. Yagi 14 λ na 432 MHz: 20,3 dBi, 18,1° vodorovně a 19,5° svisle; modely W4RNL dávají 20,4 dBi a 18,4°/18,8°.
+TAG|SCELTA|Anténa se vždy považuje za nasměrovanou na protistanici. Hot spot, který leží do ±θ/2 od tohoto směru, je již pokryt lalokem: je označen šedě místo růžově a program na to upozorní. Hot spot doporučený podle účinnosti zůstává v každém případě červený.
+H1|4. Radiant roje
+H2|4.1 Poloha radiantu
+TAG|FONTE|Rektascenze, deklinace, sluneční délka maxima, rychlost, index r a ZHR pocházejí z kalendářů IMO 2026 a 2027 [5], tabulky 5 a 7; zdroj Antihelion z tabulky 6. Zahrnuty jsou i menší roje ze seznamu IMO, například říjnové Camelopardalidy (OCT, ZHR 5, aktivní 5-6 října), Andromedidy a denní rádiové roje v dubnu a květnu: i s malým ZHR přispívají k indexu trasy a k doporučení hot spotu.
+TAG|SCELTA|Pro denní rádiové roje IMO neudává ZHR ani rychlost: program používá pracovní hodnotu 5.
+TAG|FONTE|Sluneční délka (ekvinokcium J2000), hvězdný čas a převod na azimut a elevaci: vzorce Meeuse [6].
+TAG|SCELTA|Denní drift radiantu používá pracovní hodnoty, zapsané v souboru sciami.csv a upravitelné.
+TAG|RILIEVO|Porovnání s katalogem IAU Meteor Data Center [32]: záložka Roje ukazuje u každého roje, kolik řešení je zveřejněno v seznamu ustavených rojů, a rozdíl mezi katalogem IMO programu a mediánem řešení: úhlovou vzdálenost radiantů (porovnaných při stejné délce Slunce, s driftem programu), Δλ (λ max programu minus medián středních délek Slunce aktivity, které přesně nesplývají s maximem) a Δv. Bublina vypíše řešení s jejich zdroji. Původní soubor se stahuje nejvýše jednou za měsíc z www.ta3.sk; MDC žádá o citaci Jenniskens et al. 2020 a Jopek a Kaňuchová 2017.
+H2|4.2 Datum maxima
+TAG|FONTE|Program vždy zobrazuje nejbližší maximum. Pokud IMO zveřejnila kalendář daného roku (2026 a 2027 jsou již vloženy v massimi_imo.csv), použije datum a čas IMO [5]; jinak vypočte okamžik, kdy Slunce dosáhne sluneční délky maxima.
+TAG|RILIEVO|Výpočet se shoduje s kalendáři IMO 2026 a 2027 do několika minut u rojů, pro které IMO udává čas (například Kvadrantidy 3/1/2026 21:13 oproti 21:00, Geminidy 14/12/2027 19:51 oproti 20:00). Výjimkou jsou denní kappa-Leonidy 2026, o den později (26/9 místo 25/9), a čas eta-Akvaridů 2027 (15:10 oproti 09:00 podle IMO): v těchto případech platí údaj IMO.
+H2|4.3 Aktivita v čase
+TAG|FONTE|Maximální ZHR z kalendáře IMO [5].
+TAG|SCELTA|Kolem maxima aktivita exponenciálně klesá, s různým sklonem při vzestupu a poklesu (pracovní hodnoty v sciami.csv):
+EQ|ZHR(λ) = ZHRmax · 10^( −B · |λ − λmax| )
+H1|5. Podmínka odrazu
+H2|5.1 Zrcadlový odraz
+TAG|FONTE|Stopa vrací signál mezi oběma stanicemi pouze tehdy, je-li tečnou k elipsoidu s ohnisky ve stanicích (McKinley [8]). Stopy roje jsou rovnoběžné se směrem radiantu [1, 8].
+P|V praxi se pro každý bod P vrstvy E vezmou směry z P k oběma stanicím a jejich osa n. Stopa, rovnoběžná s radiantem (směr s), odráží k oběma stanicím, když je kolmá k této ose:
+EQ|s · n = 0
+TAG|FONTE|Stejný zákon je základem QTFGUI od DJ5HG: paprsek, který dopadne na stopu, je rozptýlen na kužel kolem ní a signál přijímá jen ten, kdo leží na kuželu. Podmínka kužele je ekvivalentní s · n = 0. [17, 18] Ve svém textu z roku 2004 ji DJ5HG popisuje takto: stopa prochází vrstvou E, obě antény ji ozařují a přijímač leží na kuželu, jehož osou je stopa; plášť kužele je lalok zářiče dlouhého tisíce vlnových délek, tedy úzký, ale při tečném dopadu (dlouhé trasy) se dotýká země na velké ploše.
+H2|5.2 Tolerance
+TAG|SCELTA|Podmínka se přijímá s gaussovskou tolerancí 0,05 rad (asi 3°). Plášť kužele je pro ideální stopu mnohem užší [18]; 3° představují to, co ideální kužel nevidí: rozptyl radiantů roje (0,3-1,4° naměřeno sítí GMN), stopu ohnutou větrem a její konečnou délku.
+TAG|RILIEVO|Pro meteor scatter kreslí QTFGUI od DJ5HG odchylky od zákona odrazu až do 32°: gaussovská tolerance programu 0,05 rad je přísnější a soustřeďuje váhu na body téměř přesně zrcadlové. Při vzorkování po 5 km místo 15 km se procenta mění o méně než 0,3 bodu.
+H2|5.3 Praktický důsledek: nejlepší nasměrování
+TAG|FONTE|Stopa vrací signál mezi oběma stanicemi pouze tehdy, je-li tečnou k elipsoidu s ohnisky ve stanicích: v každém bodě vrstvy E jsou užitečné jen radianty na polokružnici oblohy kolmé k ose úhlu rozptylu (Eshleman a Mlodnosky [20]; Meeks a James [21]). Poblíž středního bodu tato polokružnice stoupá nejvýše napříč trasou: radiant s elevací El vytváří zrcadlové stopy asi H·tan El stranou od středního bodu, na straně odvrácené od radiantu, tedy v hot spotech, které Eshleman a Mlodnosky a Doporučení ITU-R P.843 [24] umisťují asi 100 km na obě strany. Počet stop a jejich ionizace rostou se sin El [21]. Závislost ozvěn na poloze radiantu vypočítal Hines [22] a na čtyřech rojích ověřili Forsyth, Hines a Vogan [23]. Z toho plyne praktické pravidlo SM6FHZ [4]: nejlepší trasa kolmá k azimutu radiantu, nasměrování Az ± 90°, tolerance ±40-50°.
+TAG|RILIEVO|Výhrada DJ5HG [18]: s nízkým radiantem přesně podél trasy dává McKinleyho vzorec silné signály, i když je meteorů málo (Hamburk-Narvik, Kvadrantidy, kolem 19 UTC). Pravidlo „radiant v ose trasy = téměř nulová účinnost“ tedy platí pro vysoký radiant, ne pro tečný. Program zůstává opatrný a účinnost nezvyšuje, ale na nebeské klenbě hlásí „NÍZKÝ RADIANT PODÉL TRASY“, když má aktivní roj radiant pod 20° a do 30° od směru trasy. Díra s radiantem v zenitu mezi oběma stanicemi je potvrzena (Kvadrantidy, Hamburk-Barcelona, kolem 08 UTC).
+TAG|RILIEVO|Stejné pravidlo se objevuje ve vzorci DH9GCD uváděném DF5HC [16]: účinnost = sin(El) · cos(El) · sin(P − Az), kde El a Az jsou elevace a azimut radiantu a P azimut protistanice. Je maximální s radiantem ve 45° a napříč trasou; DF5HC považuje radiant pod 20° za příliš nízký a nad 70° za příliš vysoký. Vzorec nebere v úvahu vzdálenost ani výšky, ale je dobrým srovnávacím měřítkem: v podzáložce „Předpovědní výpočet › Výpočet účinnosti“ se zobrazuje modře pod každým rojem, v procentech svého maxima (0,5). Když je radiant ze stanice nad 70°, program to v tabulce označí ↑ a upozorní na nebeské klenbě.
+TAG|RILIEVO|Vzorec DH9GCD nemá publikovaný primární zdroj: spojuje faktor sin El (počet a ionizace stop) s faktorem cos El, který představuje vzdalování zrcadlového bodu od středu trasy při stoupání radiantu. Počítán s radiantem viděným ze středního bodu, jak to dělá MS-Soft [25], reprodukuje tabulku MS-Soft pro KP30HV-JO52MM (1324 km, Kvadrantidy, 4/1/2001) do 4 bodů mezi 16° a 48° elevace a do 16 bodů až do 64°, se stejným maximem ve 13 UT (96 % oproti 92 %). Zůstává srovnávacím měřítkem.
+H1|6. Od jednotlivého bodu k účinnosti
+H2|6.1 Body odrazu
+TAG|SCELTA|Program rozdělí vrstvu E na body po 15 km a ponechá jen ty, které obě stanice vidí nad minimální elevací laloku.
+H2|6.2 Váha každého bodu
+TAG|FONTE|Výkon podhuštěné stopy (McKinley [8]; ITU-R P.843 [24]) roste s λ³ a klesá se vzdálenostmi R1, R2 od stanic; φ je polovina úhlu rozptylu, β úhel mezi stopou a rovinou, která obsahuje obě stanice a bod:
+EQ|váha = 1 / [ R1 · R2 · (R1 + R2) · (1 − cos²β · sin²φ) ]
+TAG|SCELTA|Až do verze 1.6 program bral β = 0 pro všechny stopy (váha s cos²φ): stopy, které protínají rovinu trasy, vážily až o 10-15 dB více, než měly. Od verze 1.7 lze β počítat pro každý bod a každý směr radiantu volbou „Úhel β mezi stopou a trasou (úplný McKinley)“, která je ve výchozím stavu zapnutá, protože dává nejopatrnější hodnoty (žádná stopa není nadhodnocena).
+TAG|SCELTA|Úhel φ je omezen na 85°, aby se zabránilo nekonečným hodnotám v tečných směrech.
+TAG|FONTE|Počet meteorů dopadajících do bodu je úměrný sinu elevace radiantu v tomto bodě: je to stejná korekce, se kterou IMO počítá ZHR [5].
+TAG|SCELTA|Volba „Delší stopy při nízkém radiantu (DJ5HG)“, ve výchozím stavu vypnutá, ve Výpočtu účinnosti: DJ5HG [18] pozoruje, že při nízkém radiantu dopadá méně meteorů na km², ale stopy jsou delší (až 100 km využitelné délky) a častěji splňují zákon odrazu. Se zapnutou volbou se váha stane min(sin El, 15/100): užitečná tloušťka vrstvy, 15 km, dělená sinem elevace dává délku stopy, omezenou na 100 km. Nad asi 9° elevace se oba efekty vyrovnávají; vypnutá volba ponechává výpočet opatrný.
+TAG|SCELTA|Připravená nastavení výpočtu na stejném řádku: „Opatrné“ (výchozí, nejopatrnější hodnoty: výška z radaru, normální stopy, s β), „Jako DJ5HG“ (102 km, dlouhé stopy, s β) a „Vlastní“, které se vybere samo, když se ručně změní výška, políčko „z radaru“, dlouhé stopy nebo úhel β.
+TAG|RILIEVO|Vliv úhlu β na nejlepší směr, trasa 1000 km: bez β leží maximum mezi 15° a 90° od trasy podle elevace radiantu (30° při radiantu ve 30°, kolmo při radiantu v 60°) a kolmý radiant má 67 % při radiantu ve 30°; s β je maximum vždy s radiantem podél trasy a kolmý radiant klesá na 15 %. S β se tedy ztrácí pravidlo nejlepšího směru podle SM6FHZ a DH9GCD: proto je β volbou, ve výchozím stavu zapnutou, protože dává nejopatrnější hodnoty (žádná stopa není nadhodnocena).
+TAG|FONTE|Dva pohledy na nejlepší směr radiantu. Klasický pohled radioamatérů: nejlepší radiant je ve výšce mezi 15° a 70° a napříč trasou, radiant v ose trasy je hraniční. Zastávají ho SM6FHZ [4] se svými zkušenostními pravidly, DH9GCD se svým vzorcem (uvedeným DF5HC [16]) a meteor-mcp od qso-graph [31], který ho zdůvodňuje podmínkou tečnosti: užitečné stopy musí být tečné k elipsoidu s ohnisky v obou stanicích, a stopy vedoucí podél trasy takové bývají zřídka. Tento pohled počítá, kde stopy mohou odrážet, ale ne kolik odráží každá z nich.
+TAG|FONTE|Pohled úplného vzorce: McKinley [8] a ITU-R P.843 [24] dávají výkonu každé stopy činitel 1 / (1 − cos²β sin²φ), kde β je úhel mezi stopou a rovinou trasy. Stopa ležící v rovině (β = 0) odráží 1/cos²φ krát více než stopa, která ji protíná (β = 90°): 10-15 dB mezi 600 a 2000 km. Je-li radiant v ose trasy, leží tečné stopy blízko roviny a váží více; je-li radiant napříč, protínají ji a váží méně. DJ5HG [18] používá stejný činitel a jeho hodinové křivky mají tvar, který YA-MS dostává se zapnutým β (odchylka tvaru asi 3 dB).
+TAG|RILIEVO|Oba pohledy používají stejnou podmínku zrcadlového odrazu, ale váží stopy různě: klasický počítá užitečné stopy, úplný váží i jejich výkon. Na 1000 km, s radiantem ve 30°, má kolmý radiant bez β hodnotu 67 % a s β 15 %. První porovnání se skutečnými počty je nerozliší (další odstavec): k rozhodnutí jsou potřeba delší trasy a více přijímačů.
+TAG|RILIEVO|Porovnání se skutečnými počty: detekce BRAMS přijaté v Sonnebergu (maják Dourbes, 49,97 MHz, trasa 471 km) od 12. do 28. srpna 2026, asi 97 000 odrazů zjištěných metodou M. Bundscherera [34]. Po odečtení pozadí (medián hodinu po hodině od 22. do 27. srpna) přidávají Perseidy nejvýše, 13. srpna mezi 02 a 10 UTC, asi 80-130 odrazů za hodinu k 300-470: na 50 MHz váží málo ve srovnání se sporadickými. Hodinový přebytek sleduje výpočet YA-MS (účinnost Perseid × ZHR) s korelací 0,44 se zapnutým β a 0,43 s vypnutým, stejnou jako ZHR krát sinus výšky radiantu; s dlouhými stopami klesá na 0,36. Na této krátké trase geometrie nepřidává informaci a porovnání mezi oběma pohledy nerozhoduje. Omezení: jediný přijímač, adaptivní práh detekce, který může v nejaktivnějších hodinách snižovat počty, menší roje ještě aktivní ve dnech pozadí, anténa majáku namířená do zenitu.
+TAG|SCELTA|V programu je políčko „Úhel β mezi stopou a trasou (úplný McKinley)“ ve výchozím stavu zapnuté, protože nenadhodnocuje žádnou stopu (opatrná hodnota); vypnuté uplatní klasický pohled. Políčko „Klasický verdikt“ přidá v hodinové tabulce pod každý roj řádek klasického verdiktu spočteného ve středu trasy: ✗ radiant pod obzorem, ◐ hraniční (pod 15° nebo nad 70°, nebo méně než 30° od směru trasy), ● dobrý, ★ nejlepší (mezi 15° a 70° a více než 60° od směru trasy), s prahy meteor-mcp [31]. Výpočet nemění: ukazuje hodinu po hodině, kde se oba pohledy shodují a kde ne.
+H2|6.3 Procento
+TAG|SCELTA|Pro každý směr radiantu se sečtou váhy všech bodů, kde stopa odráží. 100 % je nejpříznivější poloha radiantu pro danou trasu:
+TAG|SCELTA|Vedle procenta, které platí jen pro danou trasu, uvádí program účinnost v dB vztaženou k pevné referenci DJ5HG [18]: 0 dB je maximum severojižní trasy 1000 km přes rovník s radiantem na nebeském rovníku v době rovnodennosti (radiant vychází na východě, prochází zenitem a zapadá na západě), počítané se stejnou výškou a stejnými vahami. Tak lze vzájemně srovnávat různé trasy. DJ5HG uvádí pro své hodnoty přesnost lepší než 6 dB.
+EQ|η = 100 · F(radiant) / F(nejlepší poloha)  %
+TAG|RILIEVO|Srovnání s QTFGUI od DJ5HG (příklad z jeho manuálu): trasa Hamburk JO53IM - Barcelona, Kvadrantidy, 4. ledna. QTFGUI dává v 07:00 UTC nasměrování 252°, elevaci 1°, relativní účinnost -8 dB, radiant v zóně odrazu az. 83° el. 75°; v 08:00 žádnou zónu odrazu; v 09:00 nasměrování 168°, elevaci 2°, -4 dB, radiant az. 292° el. 74°. Model programu (výška 102 km jako QTFGUI) dává v 07:00 241°, 0°, -5,4 dB, radiant az. 77° el. 74°; v 08:00 0,6 % (-22 dB), tedy prakticky nulu; v 09:00 161°, 4°, -4,0 dB, radiant az. 286° el. 75°. Ve stejných hodinách dává DH9GCD 26 %, 2 % a 32 %: všechny tři metody vidí díru v 08:00, s radiantem téměř v zenitu. [17]
+TAG|RILIEVO|Srovnání s křivkami DJ5HG [18] (Bild 8 a 9: z Hamburku a z Mnichova, Kvadrantidy, 4. ledna), odečtenými z grafu (asi ±0,5 dB a ±15 min) a porovnanými s automatickým testem programu (--prova-dj5hg, jedna hodnota za hodinu). Časy: díra s radiantem blízko zenitu nastává ve stejných hodinách (Barcelona 7,5–8,5 UTC u DJ5HG, 7–9 v programu; Sofie 6,6–7,8 a 7–8; Narvik 7–8,5 a 7–9); Moskva je zavřená od 3 do 10 v obou a program potvrzuje text DJ5HG: z Hamburku otevřeno asi do 2:30, z Mnichova asi do 0:30. Nasměrování: odchylky 2–10° (Barcelona 225° a 233° oproti 223° a 235° před dírou, 160° oproti 169° po ní; Moskva 84° oproti 82°, 79° oproti 76°; Narvik přeskočí ke 338° ve 20:40 u DJ5HG, mezi 20 a 21 v programu). Úrovně a tvar, při 102 km (střední odchylka a typická odchylka vůči křivkám): bez β a bez dlouhých stop −1,6 a 4,0 dB; s dlouhými stopami +1,1 a 4,6 dB; s úhlem β −5,4 a 6,2 dB, ale s nejlepším tvarem (3,0 dB po odečtení střední odchylky, oproti 3,6): objevují se hluboká minima s nízkým radiantem (Barcelona −15,6 dB v 17, oproti −16 dB v 19:36; Sofie −18,5 dB ve 20, oproti −14 dB). S β a dlouhými stopami (nastavení „jako DJ5HG“) −2,2 a 4,7 dB; opatrné nastavení (výška z radaru, 89,5 km, s β, bez dlouhých stop) dává −6,9 a 7,6 dB, s tvarem 3,3 dB. Bez β program sotva vidí minimum s nízkým radiantem téměř v ose trasy (−8,6 a −10,4 dB): to je případ výhrady DJ5HG, proto upozornění zůstává.
+TAG|RILIEVO|Dokumentace MS-Soft 5.2 [25] definuje účinnost podle OH5IY jako relativní index pouze pro podhuštěné stopy, se dvěma faktory: elevace radiantu (optimum asi 45°) a úhel s trasou (90° = maximum). Minimum je ručně zvýšeno na 20 % kvůli přehuštěným stopám; vzorec není publikován. MCG_MS [3] počítá účinnost pro čtyři pevné směry a po zadání lokátoru protistanice i pro skutečnou trasu.
+H1|7. Jak číst výsledky
+H2|7.1 Strana odrazů (A / B)
+TAG|SCELTA|Pro každou hodinu program vypočte, jaká část odrazů padá vlevo od trasy (strana A) a jaká vpravo (strana B). V hodinové tabulce se zobrazuje písmeno převažující strany.
+TAG|FONTE|Vyplatí se posunout nasměrování o 10-30° k této straně (side-scatter) [1].
+H2|7.2 Index trasy
+TAG|SCELTA|Index shrnuje do jednoho čísla, nakolik celek rojů v dané hodině trase přeje:
+EQ|I = Σ  ZHR · η / 100   (přes všechny aktivní roje)
+H2|7.3 Barva radiantů
+P|Na nebeské klenbě je tečka radiantu žlutá při účinnosti ≥ 50% a ZHR ≥ 2, oranžová při účinnosti ≥ 20%, tmavě červená pod 20%, šedá, když je roj téměř neaktivní.
+H2|7.4 Zóny PREV v půdorysu
+TAG|SCELTA|Pro zobrazený čas program sčítá bod po bodu vrstvy E příspěvek každého aktivního roje k účinnosti (stejná podmínka zrcadlového odrazu jako v kapitole 5), vážený ZHR. Body s alespoň 3 % maxima tvoří zóny PREV, jednu na každé straně trasy, kreslené v půdorysu jako elipsy: střed = vážený průměr bodů, osy = dvojnásobek jejich rozptylu. Je to praktické pravidlo: když roj běží od severu k jihu, užitečné stopy leží na východě a na západě. Žlutá čára ukazuje směr pohybu (azimut radiantu) vybraného roje nebo nejpříznivějšího roje.
+H2|7.5 Řez viděný z antény
+TAG|SCELTA|Řez ukazuje tytéž stopy viděné ze stanice s anténou nasměrovanou na protistanici: vodorovně azimut vůči protistanici (A vlevo, B vpravo), svisle elevace. Pro každý roj se vezme 14 nejsilnějších bodů odrazu; každá stopa je úsečka orientovaná k radiantu, od 10 km nad do 10 km pod výškou stop (nejvýše 60 km na každou stranu), tím silnější, čím je pravděpodobnější. Kreslí se také lalok antény (kružnice −3 dB kolem elevace laloku), protistanice a Hot A / Hot B.
+H1|8. Pracovní kmitočet a útlum
+H2|8.1 Pravidla mezi pásmy
+TAG|FONTE|Experimentální pravidla SM6FHZ [4]: počet a intenzita odrazů se mění s λ³, doba trvání s λ². V dopředném rozptylu roste doba trvání také se sec²φ (τ = λ²·sec²φ / 16π²D, McKinley [8]; OH5IY [25]): radar v Collmu měří ve zpětném rozptylu (φ = 0), takže na trase je třeba dobu trvání vynásobit sec²φ ve středním bodě (×4 při 60°, ×8,5 při 70°, ×33 při 80°).
+TAG|RILIEVO|Skutečná měření (HamSCI, Meteor Scatter QSO Party [29]): R. Suggs NN4NT změřil konstantu poklesu výkonu u 1298 podhustých odrazů v záznamech MSK144 stanice NN4SA (EM64) během Perseid 2026 (4736 souborů WAV z WSJT-X). Mediány: 148 ms na 28,145 MHz (41 odrazů), 78 ms na 50,260 MHz (1198), 53 ms na 144,150 MHz (59). S λ² vycházeje z 6 m by to bylo asi 245 ms a 9,5 ms: na 2 m trvají pingy více než pětkrát déle, než se předpokládalo. Autor to přičítá pravděpodobnému efektu výškového stropu odrazů na 2 m: na vysokých kmitočtech zůstávají viditelné hlavně nízké stopy, kde je difuze pomalejší. Je to předběžná analýza: jediná přijímací stanice, různé vzdálenosti nenormované pomocí sec²φ, jen odrazy dost silné na to, aby byly zachyceny.
+TAG|FONTE|Weitzen a Ralston [27]: konstanta poklesu se mění od stopy ke stopě s exponenciálním rozdělením se střední hodnotou τ = λ²·sec²φ / (32π²D) (konstanta výkonu; 16π² platí pro amplitudu). Xia, Li a Zheng [28] udávají D jako funkci výšky, D = 10^(0,067·h − 5,6) m²/s: na trase 1000 km se stopou ve 95 km vychází τ ≈ 47 ms na 144 MHz a 390 ms na 50 MHz. Hodnota na 144 MHz je blízko naměřenému mediánu, na 50 MHz je pětkrát vyšší: D roste desetkrát na každých 15 km výšky, takže výška viditelných stop, která se mění s kmitočtem, ovlivňuje délku víc než λ².
+TAG|SCELTA|Program nabízí volbu „Délka pingů mezi pásmy“ v podzáložce Geometrie a útlum. Teoretická (výchozí, opatrná): λ², která dává nejkratší pingy. Pozorovaná: lineární interpolace v logaritmickém měřítku mezi třemi mediány NN4SA; pod 28 MHz se prodlouží úsek 10–6 m, nad 144 MHz, kde nejsou měření, se opět použije λ². S pozorovanou volbou trvá echo 1 s v Collmu (36,2 MHz) na 144 MHz asi 473 ms místo 63 ms a z 50 na 144 MHz se pingy zkrátí 1,5krát místo 8krát.
+TAG|RILIEVO|U McKinleyho [8] je λ³ výkon jedné podhuštěné stopy, nikoli počet stop. Při pevném prahu a hmotnostním indexu s se počet stop nad prahem mění s λ umocněnou na 1,5·(s − 1), tedy asi λ^1,5 pro s = 2 (IZ5TEK [26]; OH5IY [25]). Program ponechává k = 3, experimentální pravidlo SM6FHZ [4], a uvádí to: s k = 3 se z 1000 meteorů/h v Collmu stane asi 16 odrazů/h na 144 MHz, s k = 1,5 asi 127. Pozorovatelé RMOB radaru GRAVES na 143,050 MHz [13] obvykle počítají 20 až 140 ozvěn/h; správnou hodnotu k pro vlastní stanici lze odvodit ze srovnání s RMOB (následující odstavec).
+TAG|FONTE|Maximální délka pingu podle IARU Region 1: 1000 ms na 50 MHz, 500 ms na 70 MHz, 100 ms na 144 MHz, 13 ms na 432 MHz [1].
+H2|8.2 Od radaru k radioamatérskému pásmu
+EQ|N(f) = N(36,2 MHz) · (36,2 / f)^k · K        s k = 3
+TAG|RILIEVO|Hodnotu k pro vlastní stanici lze odvodit ze srovnání s pozorovatelem RMOB na stejném pásmu: k = 3 je pravidlo SM6FHZ, teorie pro podhuštěné stopy s hmotnostním indexem 2 dává asi 1,5.
+TAG|SCELTA|Tlačítko „k z populačních indexů“ spočte pro každý aktivní roj k = 1,5·(s − 1) při s = 1 + 2,5·log10 r, tedy k = 3,75·log10 r, a vezme průměr vážený ZHR. Populační index r pochází z tabulky na stránce toku Global Meteor Network [33], pokud existuje, jinak z katalogu IMO [5]; záložka Roje ukazuje k u každého roje. Příklady: Perseidy r = 2,2, k = 1,28; Geminidy r = 2,6, k = 1,56. Výchozí zůstává k = 3 od SM6FHZ [4], opatrnější; počty z Collmu jsou však převážně sporadické meteory, pro které GMN r nezveřejňuje.
+TAG|FONTE|Počty Global Meteor Network [33]: v záložce Roje živě a ve sloupci „GMN dnes“ záložky Roje program čte denní souhrn drah potvrzených kamerami sítě (jeden řádek na meteor, s kódem IAU roje nebo „...“ u sporadických) a počítá je podle rojů. Je to počet, ne tok: závisí na tom, kolik stanic má jasné a tmavé nebe. Data CC BY 4.0.
+H2|8.3 Útlum trasy
+EQ|L = 10 · log10 [ 16π² · R1 · R2 · (R1 + R2) · (1 − cos²β · sin²φ) / (λ³ · q² · re²) ] − 10 · log10 a1        a1 = exp[ −8π² · r0² / (λ² · sec²φ) ]
+TAG|FONTE|McKinley [8] a Doporučení ITU-R P.843 [24]: β úhel mezi stopou a rovinou trasy, a1 faktor počátečního poloměru stopy, s log10 r0 = 0,035 h − 3,45 (r0 v m, h v km). V bilanci se používá β = 90°, nejnepříznivější případ (opatrná hodnota), a ukazuje se také nejlepší případ, β = 0.
+TAG|FONTE|Reference: 172–190 dB z výpočtů G4BAO, uváděných GM8JBJ (podle Kaiser & Closs [9]); průměrně asi 200 dB na 144 MHz (OH5IY); minimální přijímatelný signál −130 dBm [1].
+TAG|RILIEVO|S q = 10¹⁴ elektronů/m, stopami v 89,5 km a β = 0 vychází na 144 MHz 182–192 dB mezi 600 a 2100 km (185 dB při 1000 km). Interval 172–190 dB, který vypočítal John Worsnop G4BAO ve své disertační práci a uvádí GM8JBJ [9], tyto hodnoty zahrnuje. S β = 90° roste útlum o 10 dB při 600 km, o 13 dB při 1000 km a o 16 dB při 2100 km: průměrných 200 dB podle OH5IY citovaných v článku [1] leží mezi oběma případy. Rovněž podle GM8JBJ nachází G4BAO asi o 6 dB méně pro stopy rovnoběžné s trasou.
+TAG|RILIEVO|182 dB z tabulky GM8JBJ [9] není potvrzením: tabulka neuvádí kmitočet, jejích 86,4 dB na úsek je útlum volného prostoru na 500 km při 1 MHz (chybí člen 20 log f: na 144 MHz je to 129,6 dB) a součet položek, 86,4 + 0 − 9 + 86,4, dává 163,8 dB, nikoli 182. Stránka nehovoří ani o minimální hodnotě, ani o 144 MHz.
+TAG|RILIEVO|Počáteční poloměr ve střední výšce ozvěn, h = 124 − 17 log f [24]: r0 = 0,76 m v 95 km pro 50 MHz, 0,40 m v 87 km pro 144 MHz, 0,21 m v 79 km pro 432 MHz. Na 1000 km činí a1 0,2 dB na 50 MHz, 0,6 dB na 144 MHz a 1,4 dB na 432 MHz (2,9 dB na 600 km). V pevné výšce 102 km podle DJ5HG by na 432 MHz dával asi 70 dB, tedy žádnou ozvěnu: proto se používá střední výška ozvěn pro daný kmitočet.
+TAG|RILIEVO|Nejistota počátečního poloměru: Stober a kol. [30] s radarem CMOR na 17,45, 29,85 a 38,15 MHz a modelem úplného vlnového rozptylu nacházejí mezi 85 a 95 km r0 0,5–2 m, většinou 1–1,5 m, s rozptylem dvojnásobku v každé výšce; u příčné polarizace jsou hodnoty asi dvojnásobné oproti dřívějším měřením (Greenhow a Hall 1960; Jones a Campbell-Brown 2005). Ideálním modelem lze popsat jen asi 5 % odrazů. Vzorec ITU-R P.843 [24] dává 0,5 m ve 90 km a 0,75 m v 95 km, tedy spodní mez těchto měření.
+TAG|SCELTA|Program nabízí volbu „Počáteční poloměr stopy“ v podzáložce Geometrie a útlum: dvojnásobek ITU (výchozí, opatrná, jako měření Stober a kol.), ITU-R P.843, vyloučeno. Zdvojnásobením r0 se činitel a1 v dB vynásobí 4: na trase 1000 km 0,8 dB na 50 MHz, 2,4 dB na 144 MHz a 5,6 dB na 432 MHz (11,6 dB na 600 km). Měření CMOR jsou na nižších kmitočtech a ve výšce 85–95 km: použít je na 432 MHz, kde odrazy přicházejí z asi 79 km, je extrapolace.
+H1|9. Známá omezení
+LI|Model uvažuje pouze podhuštěné stopy. Přehuštěné stopy (dlouhé bursty) a sporadické pozadí do účinnosti nevstupují; sporadické pozadí je zastoupeno radarovým tokem.
+LI|Při výpočtu účinnosti jsou antény považovány za izotropní; skutečný lalok slouží jen ke kontrole Hot bodů.
+LI|Drifty radiantu a koeficienty B profilu aktivity jsou pracovní hodnoty.
+LI|Procenta je třeba porovnávat s MCG_MS, MS-Soft a s pozorováními v pásmu.
+H1|10. Zdroje
+SRC|1. C. Cerrotta IC8TEM, G. Sartori IV3GTH - „METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese“, článek, verze 7 (hlavní zdroj).
+SRC|2. I. Yrjölä OH5IY - MS-Soft, www.kolumbus.fi/oh5iy (historický web).
+SRC|3. W. Rauh DL5MCG - MCG_MS, MS Efficiency Calculator v1.61, qsl.net/dl5mcg.
+SRC|4. SM6FHZ - „432 MHz Meteorscatter, Challenges and Techniques“, 45th Nordic VUSHF, květen 2025.
+SRC|5. International Meteor Organization - Meteor Shower Calendar 2026 a 2027, www.imo.net.
+SRC|6. J. Meeus - Astronomical Algorithms, 2. vyd., Willmann-Bell, 1998.
+SRC|7. Meteorický radar Collm, Univerzita Lipsko (LIM) a IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
+SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
+SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (podle Kaiser & Closs, 1952).
+SRC|10. G. Hoch DL6WU - křivka zisku dlouhých Yagi, uváděná W8IO, www.w8io.com.
+SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
+SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
+SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin z června 2018.
+SRC|14. AMS Bulletin n. 203, „The AMS Radiometeor Project“, tabulka odchylek antény, převzatá W8WN, qsl.net/w8wn/hscw/papers/ms_az_el.html.
+SRC|15. LZ2HV - MSHV, program pro digitální druhy provozu MS (výpočet Hot A / Hot B).
+SRC|16. J. DF5HC - „Meteorscatter auf UKW“, konference DARC, leden 2018 (vzorec nejlepšího směru podle DH9GCD; kuželový rozptyl a HOT-A / HOT-B podle DJ5HG, „Meteorscatter Propagation“, www.vhfdx.de/mseff/MS-Geometrie.pdf; sporadické meteory podle KB0VUK).
+SRC|17. K. von der Heide DJ5HG - QTFGUI, program pro nasměrování při polární záři, FAI a meteor scatteru, s manuálem „QTFGUI Help“ (2007) a daty meteorshowerdata.txt.
+SRC|18. K. von der Heide DJ5HG - „Die Geometrie von Meteorscatterverbindungen“, srpen 2004 (zákon kužele, relativní účinnost vůči pevné referenci, užitečné stopy až 100 km, výška 102 km).
+SRC|19. J. Richardson (AMS) - „Some Notes and Equations for Forward Scatter“: odchylky antény 13°, 11°, 10° a 10° při 1000, 1250, 1500 a 2000 km, tabulka uváděná DJ5HG.
+SRC|20. V.R. Eshleman, R.F. Mlodnosky - „Directional Characteristics of Meteor Propagation Derived from Radar Measurements“, Proc. IRE 45(12), 1715-1723, 1957.
+SRC|21. M.L. Meeks, J.C. James - „On the Influence of Meteor-Radiant Distributions in Meteor-Scatter Communication“, Proc. IRE 45(12), 1724-1733, 1957.
+SRC|22. C.O. Hines - „Diurnal Variations in the Number of Shower Meteors Detected by the Forward-Scattering of Radio Waves, Part I: Theory“, Can. J. Phys. 33, 493-503, 1955.
+SRC|23. P.A. Forsyth, C.O. Hines, E.L. Vogan - stejný název, „Part II: Experiment“, Can. J. Phys. 33, 600-606, 1955.
+SRC|24. ITU-R P.843-1 - „Communication by meteor-burst propagation“, 1997.
+SRC|25. I. Yrjölä OH5IY - „Meteors & Communication“, část 2, dokumentace MS-Soft 5.2 (2017).
+SRC|26. R. Pardini IZ5TEK - „Il meteor-scatter e i collegamenti radioamatoriali via meteor-scatter“, ARI Pisa, 2014.
+SRC|27. J.A. Weitzen, W.T. Ralston - "Meteor Scatter: An Overview", IEEE Transactions on Antennas and Propagation 36(12), 1813-1819, 1988.
+SRC|28. B. Xia, L. Li, Y. Zheng - "Modeling and Simulation of the Meteor Burst Channel", Telecommunications Science, 2016 (9), DOI 10.11959/j.issn.1000-0801.2016206 (English translation by R. Hipple, github.com/HamSCI/MSQP).
+SRC|29. R. Suggs NN4NT, HamSCI Meteor Scatter Working Group - "MSQP data analysis progress", 4 November 2026, underdense_decay, github.com/HamSCI/MSQP (NN4SA, 2026 Perseids, Zenodo).
+SRC|30. G. Stober, P. Brown, M. Campbell-Brown, R.J. Weryk - "Triple-frequency meteor radar full wave scattering: Measurements and comparison to theory", Astronomy & Astrophysics, 2021, arXiv:2108.07647.
+SRC|31. meteor-mcp, qso-graph - meteor scatter MCP server, github.com/qso-graph/meteor-mcp, 2026.
+SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/MDC2022 (Jenniskens et al., Planetary and Space Science 182, 104821, 2020; Jopek & Kaňuchová, Planetary and Space Science 143, 3-6, 2017).
+SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
+SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.

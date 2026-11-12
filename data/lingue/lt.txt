@@ -1,52 +1,69 @@
-# YA-MS - lietuvių (lt) naudotojo sąsajos vertimas / Lithuanian (lt) translation of the user interface. UTF-8.
-# Vienas įrašas eilutėje: <Italian key><TAB><translation>. Raktai pateikti faile chiavi.txt (tame pačiame aplanke).
-# Abiejuose stulpeliuose du simboliai \n reiškia naują eilutę. Palikite vietos rezervavimo žymes {0}, {1}, ... (su formatu, pvz., {0:F1}).
-# Eilutės, prasidedančios #, yra komentarai. Trūkstami įrašai rodomi itališkai.
+# YA-MS - Lithuanian (lt) translation of the user interface. UTF-8.
+# One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
+# In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
 (confermato)	(patvirtinta)
 (destra)  B →	(dešinėje)  B →
 (lettura Collm: {0})	(Collm rodmuo: {0})
 (stima poco precisa sotto 2 λ)	(apytikslis įvertis žemiau 2 λ)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> vidurio taškas žemiau horizonto pėdsakų aukštyje: trasa už vieno šuolio geometrinio nuotolio
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> vidurio taškas žemiau horizonto pėdsakų aukštyje: trasa už vieno šuolio geometrinio nuotolio (reikia pėdsakų ne žemiau kaip {0:F0} km)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	0,8 s žingsniui · ciklas 4,8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1-as kriterijus: tipiniai meteor scatter spotų dažniai (kHz)
+2° criterio: modi digitali MS e <MS>	2-as kriterijus: MS skaitmeninės modos ir <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	3,2 s žingsniui · ciklas 19,2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- moda, išmatuota Collm radaru
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  lapelis {2:F0}° horiz. / {3:F0}° vert.{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Kairėje: Global Meteor Network išmatuotas aktyvių srautų tankis ir ZHR (kameros, kasdienis atnaujinimas; raudona linija = paskutinis atnaujinimas). Dešinėje: CMOR radaro (Kanada, 43° N) beveik realiuoju laiku aptikti radiantai, įskaitant dieninius srautus; apačioje tie patys radiantai, nuspalvinti pagal greitį.
 A.R.	R.A.
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	PRIIMTA ("{0}"): {1}, pranešė {2}, {3} MHz
 ADESSO	DABAR
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} QSO kvadratų)
 ALTRI RIFERIMENTI DELL'ARTICOLO	KITI STRAIPSNIO ŠALTINIAI
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	TRASOS SLOPINIMAS (retasis pėdsakas, McKinley 1961; be antenų stiprinimo)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	TRASOS SLOPINIMAS (retasis pėdsakas, McKinley 1961 ir ITU-R P.843; be antenų stiprinimo)
 ATTENZIONE: {0}	DĖMESIO: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	DĖMESIO: {0} ir {1} patenka į antenos lapelį ({2}° ties -3 dB apie {3}°): šiuo nukreipimu jie jau padengti. Žemėlapyje pažymėti pilkai.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	DĖMESIO: {0} patenka į antenos lapelį ({1}° ties -3 dB apie {2}°): šiuo nukreipimu jis jau padengtas. Žemėlapyje pažymėtas pilkai.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	Įjungta (atsargiai, pradinė nuostata): kiekvieno pėdsako galia skaičiuojama pagal visą McKinley ir ITU-R P.843 formulę 1 / (1 − cos²β sin²φ): trasos plokštumą kertantys pėdsakai duoda 10-15 dB mažiau nei joje esantys, ir nė vienas pėdsakas nepervertinamas.\nPoveikis: vyrauja išilgai trasos išsidėstę radiantai, o ne statmeni; DJ5HG kreivės geriau atkartojamos pagal valandas, su giliais minimumais, kai radiantas žemas.\nIšjungta: kiekvienas pėdsakas vertinamas taip, lyg būtų trasos plokštumoje (β = 0), kaip iki 1.6 versijos imtinai: atitinka trasai statmenų radiantų taisyklę (SM6FHZ, DH9GCD), bet pervertina plokštumą kertančius pėdsakus.
 Adesso	Dabar
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	Visų šaltinių automatinis atnaujinimas kas 5 minutes
+Aggiungi	Pridėti
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Netikslūs lokatoriai (tik 4 simboliai) taip pat imami iš CALL3, kai CALL3 turi 6 simbolių lokatorių.
 Andromedidi	Andromedidai
+Angolo β tra scia e tratta (McKinley completo)	Kampas β tarp pėdsako ir trasos (visa McKinley formulė)
 Antenna	Antena
 Antenna Yagi: boom m	Yagi antena: strėlė m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	Yagi antena: strėlė {0:F2} m = {1:F2} lambda ties {2:F0} MHz -> stiprinimas {3:F1} dBi (DL6WU kreivė),\n  lapelis ties -3 dB {4:F0}° horizontaliai / {5:F0}° vertikaliai (Kraus, pataisyta pagal W4RNL NEC modeliavimus)
 Antenna az: -	Antenos az: -
 Antenna az: {0}° (verso il DX)	Antenos az: {0}° (DX kryptimi)
 Apri in Word	Atverti Word
+Apri la cartella degli spot	Atverti spotų aplanką
+Argomenti di partenza	Numatytosios temos
 Arietidi di maggio Sud diurne	Dieniniai pietų gegužės Arietidai
 Arietidi diurne	Dieniniai Arietidai
 Assi del flusso non trovati nella posizione attesa.	Srauto ašys nerastos numatytoje vietoje.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	Slopinimas {0:F1} dB -> signalas antenoje {1:F1} dBm, minimalus priimamas {2:F0} dBm, atsarga {3:+0.0;-0.0} dB
 Attività	Aktyvumas
-Attivo oggi	Aktyvus šiandien
 Attuazione sperimentale previsioni	Eksperimentinės prognozės
 Aurigidi	Aurigidai
 Azimut	Azimutas
 BILANCIO A {0:F0} MHz (punto medio)	BIUDŽETAS TIES {0:F0} MHz (vidurio taškas)
-Banda MHz	Juosta MHz
-Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, „Graves“ – gardelės, sektoriai ir pluošto laikai
+Banda MHz	Diapazonas MHz
+Bande (MHz)	Juostos (MHz)
+Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, „Graves“ – gardelės, sektoriai ir spindulio laikai
 Bootidi di giugno	Birželio Bootidai
 CALCOLO E TEORIA DELL'EFFICIENZA	EFEKTYVUMAS: SKAIČIAVIMAS IR TEORIJA
+CALL3: caricamento...	CALL3: įkeliama...
+CALL3: nessun archivio (data/call3.txt)	CALL3: bazės nėra (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} šaukinių
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantų žemėlapiai
 COME ASCOLTARE I PING DI GRAVES	KAIP IŠGIRSTI GRAVES ATSPINDŽIUS
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	NĖRA INTERNETO RYŠIO: išoriniai duomenys neatnaujinti (kitas bandymas po 5 minučių)
 Calcola	Skaičiuoti
 Calcolo dell'efficienza	Efektyvumo skaičiavimas
 Calcolo non riuscito: {0}	Skaičiavimas nepavyko: {0}
+Calcolo per {0} UTC	Skaičiavimas {0} UTC
+Calcolo per: adesso	Skaičiavimas: dabar
+Calcolo per: {0} UTC	Skaičiavimas: {0} UTC
+Calcolo previsionale	Prognozės skaičiavimas
 Camelopardalidi di ottobre	Spalio Kamelopardalidai
 Cancella memoria	Išvalyti atmintį
 Cancellare tutti i quadrati caricati dal file ADIF?	Ištrinti visus iš ADIF failo įkeltus kvadratus?
@@ -57,13 +74,25 @@ Carica file RMOB dal disco...	Įkelti RMOB failą iš disko...
 Catalogo sciami	Srautų katalogas
 Che cosa fare	Ką daryti
 Chiaro	Šviesi
+Chiuso	Uždaryta
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Spustelėkite trasą žemėlapyje arba lentelės eilutę, kad pamatytumėte ryšio ir jo debesies informaciją.
+Cluster con PSKReporter	Klasteris su PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X klasteris su PSKReporter spotais (dm4x.ddns.net, prievadas 8500): čia ateina WSJT-X ir MSHV MSK144 dekodavimai. Arba HamAlert (hamalert.org 7300, reikia paskyros su trigeriais).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Naudotojo pasirinktas klasteris. ON0DXK VHF juostos filtruojamos: jos įjungiamos komanda set/filter dxbm/pass 6 (toliau 4, 2...). Kitas pavyzdys: hamqth.com 7300.
 Collm stessa ora	Collm ta pačia valanda
 Collm {0} MHz (validi)	Collm {0} MHz (galiojantys)
 Comae Berenicidi	Comae Berenicidai
 Comandi	Valdymas
+Come DJ5HG	Kaip DJ5HG
+Commento	Komentaras
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	Su vidutiniu OH5IY slopinimu (200 dB ties 144 MHz, perskaičiuota pagal λ³: {0:F1} dB ties {1:F0} MHz) atsarga būtų {2:+0.0;-0.0} dB
+Connessione a {0}...	Jungiamasi prie {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	Nėra interneto ryšio.\n\nRadarų ir RMOB duomenų atnaujinti negalima: programa naudoja paskutinius išsaugotus duomenis ir pati bando iš naujo kas 5 minutes.
 Connessione ripristinata.	Ryšys atkurtas.
+Connesso: {0} argomenti	Prisijungta: {0} temos
+Connetti	Prisijungti
+Connetti all'avvio	Prisijungti paleidžiant
+Contatori	Skaitikliai
 Conteggio	Skaičiavimas
 Controllo le fonti di dati esterne...	Tikrinami išoriniai duomenų šaltiniai...
 Corrispondente	Korespondentas
@@ -71,18 +100,26 @@ Corrispondente  {0}   quota {1:F0} m	Korespondentas  {0}   aukštis {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (straipsnis italų k., 7 versija).
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961 (retųjų pėdsakų lygtis)
 DATI DEGLI SCIAMI	SRAUTŲ DUOMENYS
-DATI RADAR IN DIRETTA	RADARŲ DUOMENYS REALIUOJU LAIKU
+DATI RADAR IN DIRETTA	RADARŲ DUOMENYS TIESIOGIAI
 DENTRO il lobo	LAPELIO VIDUJE
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	Iš čia: pėdsakai E sluoksnyje apie 90 km aukštyje (SKiYMET radaras), elevacijos formulė, Hot A / Hot B, šoninė sklaida, slopinimas 182-200 dB, IARU atspindžių trukmė.
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	Pasirinktas DX klasteris
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	Iš čia: pėdsakai E sluoksnyje apie 90 km aukštyje (SKiYMET radaras), elevacijos formulė, Hot A / Hot B, šoninė sklaida, trasos slopinimas, IARU atspindžių trukmė.
+Data del calcolo (UTC)	Skaičiavimo data (UTC)
 Decl.	Dekl.
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	Pėdsako tankis q = {0:E1} elektronų/m. Straipsnio duomenys ties 144 MHz: 182 dB mažiausias (GM8JBJ), 200 dB vidutinis (OH5IY)
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	Pėdsako tankis q = {0:E1} elektronų/m. Atskaitos: 172-190 dB (G4BAO skaičiavimai, cituojami GM8JBJ), 200 dB vidutiniškai ties 144 MHz (OH5IY)
 Densita' scia q = 10^	Pėdsako tankis q = 10^
-Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Kitų {0:F0} s detalės: naudingoji zona nepatenka į jokį pluošto žingsnį
+Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Kitų {0:F0} s detalės: naudingoji zona nepatenka į jokį spindulio žingsnį
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	Kitų {0:F0} s detalės: sektoriaus {1} žingsniai (po {2:F1} s) ir žingsnis, apšviečiantis naudingąją zoną
 Direzioni Hot A / Hot B	Hot A / Hot B kryptys
+Disconnesso	Atsijungta
+Disconnetti	Atsijungti
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	Atstumas        {0:F0} km   azimutas {1:F1}°   (nuo korespondento {2:F1}°)
+Documenti tecnici	Techniniai dokumentai
 Documento Word	Word dokumentas
 Documento esportato: {0}	Dokumentas eksportuotas: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Kur yra tiesioginių duomenų šaltiniai. Brūkšniniai apskritimai = radaro matoma dangaus zona (apie 300 km aplink stotį, pėdsakai 90 km aukštyje): joks radaras nežiūri į dangų virš jūsų trasos, duomenys rodo, koks aktyvus srautas. Taškinės linijos = atstumas nuo jūsų stoties.
 Draconidi di ottobre	Spalio Drakonidai
 E	R
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	GRAVES → JŪSŲ TRASOS EFEKTYVUMAS DABAR
@@ -94,7 +131,8 @@ Elev.	Elev.
 Elevazione d'antenna in funzione della distanza dallo scatter point	Antenos elevacija priklausomai nuo atstumo iki sklaidos taško
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	Antenos elevacija į vidurio tašką: {0:F1}°   (straipsnio formulė, 7 pav.)
 Elevazione lobo °	Lapelio elevacija °
-Errore all'avvio: {0}	Paleidimo klaida: {0}
+Errore all'avvio: {0}	Klaida paleidžiant: {0}
+Errore: {0}	Klaida: {0}
 Esponente	Rodiklis
 Esponente dal confronto RMOB	Rodiklis iš RMOB palyginimo
 Esponente non calcolabile con questi dati.	Rodiklio su šiais duomenimis apskaičiuoti negalima.
@@ -103,6 +141,7 @@ Esponente λ^k	λ^k rodiklis
 Esporta	Eksportuoti
 Esporta il documento in Word	Eksportuoti dokumentą į Word
 Esporta in Word (.docx)...	Eksportuoti į Word (.docx)...
+Europa	Europa
 FONTE PRINCIPALE	PAGRINDINIS ŠALTINIS
 FONTI	ŠALTINIAI
 Fattore di stazione K	Stoties koeficientas K
@@ -111,27 +150,38 @@ File ADIF del log	Žurnalo ADIF failas
 File RMOB	RMOB failas
 File RMOB (conteggi orari del mese)	RMOB failas (mėnesio valandiniai skaičiai)
 File mancante: {0}	Trūksta failo: {0}
-Finestra utile	Naudingasis langas
+Filtro	Filtras
+Filtro degli spot meteor scatter	Meteor scatter spotų filtras
+Finestra utile	Tinkamas langas
 Flusso radar	Radaro srautas
 Flusso radar: nessun dato. Premi "Scarica adesso".	Radaro srautas: duomenų nėra. Spauskite „Atsisiųsti dabar“.
+Fonte	Šaltinis
 Fonte del massimo	Maksimumo šaltinis
 Fonti	Šaltiniai
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	Pasikeitė grafiko formatas ({0}x{1}): nuskaityti negalima.
 Formato file mensile, {0}/{1}.	Mėnesio failo formatas, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	Biuletenio lentelės formatas ({0}/{1}): jei faile yra keli stebėtojai, jie nuskaitomi iš eilės; naudokite failą su vienu stebėtoju.
+Foto	Nuotrauka
 Frequenza di arrivo MHz	Tikslinis dažnis MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT, DH8BQA, geekshed.co.uk, WSJT-X vadovas, WB2FKO (pings), IU6GIR (aktyvumas 143,050 MHz), IARU 1 regiono VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	TRASOS GEOMETRIJA (sferinė Žemė, R = 6372,7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN ir CMOR {0} UTC: {1} klaidų ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ir CMOR patikrinti {0} UTC ({1} naujų failų). GMN duomenys: CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES tiesiogine kryptimi: az {0:F0}°
 Geminidi	Geminidai
 Geometria e attenuazione	Geometrija ir slopinimas
 Giorno per la tabella 24 h (UTC)	24 h lentelės diena (UTC)
 Giudizio	Įvertinimas
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Priimti spotai įrašomi į data/spot_ms, po vieną CSV failą per dieną. Trūkstami lokatoriai imami iš CALL3 bazės (data/call3.txt).
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: išmatuotas srautų tankis ir ZHR. Duomenys CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ir Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	Antenos stiprinimas dBi (tx = rx)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - ilgųjų Yagi stiprinimo ir strėlės ilgio kreivė, G(dBi) = 7,773 log(L/lambda) + 11,43, pateikta W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (klasikiniai hot spot, antenai nukreipti)
+Host	Serveris
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: hot spot {0} km nuo vidurio taško (AMS 203, W8WN, MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: hot spot {0} km nuo vidurio taško (ranka įvesta vertė).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: hot spot {0} km nuo vidurio taško, nuokrypis {1}° (J. Richardsono AMS lentelė, DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}
@@ -140,31 +190,41 @@ Hot fuori lobo	Hot už lapelio
 Hot nel lobo	Hot lapelyje
 Hot spot dal punto medio km	Hot spot nuo vidurio taško km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	Atspindžiai (ping) – trumpos linijos šalia nešlio; ilgi (tankieji) pėdsakai platesni ir rodo Doplerį
-IL CIELO VISTO DA GRAVES	DANGUS, KURĮ MATO GRAVES
+IL CIELO VISTO DA GRAVES	DANGUS, MATOMAS IŠ GRAVES
 IMO {0} (giorno)	IMO {0} (diena)
 Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	Korespondentu tampa GRAVES (JN27SI, aukštis 200 m), o pagrindinė trasa perskaičiuojama
 Il file scelto non e' un file locale.	Pasirinktas failas nėra vietinis.
 Il mio locator	Mano lokatorius
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (srauto efektyvumo sąvoka), www.kolumbus.fi/oh5iy (istorinė svetainė)
+Importa CALL3.TXT...	Importuoti CALL3.TXT...
 Impossibile leggere {0}: {1}	Nepavyko perskaityti {0}: {1}
+Impostazione del calcolo:	Skaičiavimo nuostata:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	Forward scatter atveju trukmė dar auga su sec²φ (φ = {0:F0}° trasos vidurio taške; Collm matuoja backscatter režimu, φ = 0): x {1:F1}, taigi 1 s aidas Collm trasoje trunka apie {2:F0} ms.
+Indice della tratta Σ ZHR×η: {0}	Trasos indeksas Σ ZHR×η: {0}
 Indice sciami tratta	Trasos srautų indeksas
 Indice tratta (ZHR×eff.)	Trasos indeksas (ZHR×efekt.)
+Indirizzo mancante	Trūksta adreso
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, 2025 m. gegužė (lambda^3 ir lambda^2 taisyklės, vidurio taškas, geriausia kryptis)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (polinė diagrama su geriausia kryptimi)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (5, 6 ir 7 lentelės)
+Invia	Siųsti
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: stiprinimas ir lapelio plotis, G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", DARC konferencija, 2018 m. sausis: geriausios krypties formulė\n    pagal DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), kūginė sklaida ir HOT-A / HOT-B pasirinkimas pagal DJ5HG,\n    naudingas radiantas tarp 20 ir 70 laipsnių, geriausias atstumas 1300-1500 km, sporadiniai meteorai pagal KB0VUK
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: stiprinimo įverčiai VK3AUU, WA2PHW ir DJ9BV variantams
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (pagal Kaiser & Closs 1952)
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (pagal Kaiser & Closs 1952; cituoja John Worsnop G4BAO skaičiavimus, 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): fiksuotas atskaitos lygis dB, ilgi pėdsakai esant žemam radiantui,\n    trasų iš Hamburgo ir iš Miuncheno kreivės; J. Richardsono AMS lentelė hot spot atstumui
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (pašvaistė, FAI ir meteor scatter) ir vadovas "QTFGUI Help" 2007: kūginės sklaidos dėsnis,\n    bandomasis atvejis Hamburgas - Barselona per Kvadrantidus, naudotas modeliui patikrinti
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (abiejų taisyklių patikra);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design ir 70-CM Yagi Stacks Part 2 (David Tanner VK3AUU Yagi):\n    NEC modeliavimai, naudoti stiprinimo kreivei patikrinti ir horizontaliam lapeliui pataisyti (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	BENDROSIOS ZONOS RIBOS (kreivių sankirtos, kur kiekvienos stoties horizontas susitinka su E sluoksniu, straipsnis)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Žodis "{0}" yra, bet eilutė nėra tinkamas "DX de ..." spotas.
+La riga non è uno spot "DX de ..." valido.	Eilutė nėra tinkamas "DX de ..." spotas.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	Pasikeitė aukščių grafiko skalė: aukščių statistika (moda, vidurkis, mediana) lieka galioti, absoliutūs skaičiai – ne.
-La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Pluošto seka skaičiuojama pagal PC laikrodį: sinchronizuokite jį su NTP serveriu (paklaida daugiausia kelios sekundės dešimtosios).
-La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Seka susieta su UTC laiku (PE1ITR): nuo 2021 m. žingsnis trunka 0,8 s, o sektoriaus ciklas 4,8 s; 2007 m. buvo 3,2 s ir 19,2 s. Valdymo stotis kartais paslenka seką keliais žingsniais: detalės yra prognozė, kurią reikia patvirtinti klausantis. Pėdsakas girdimas tik tada, jei pluoštas jį apšviečia, kol jis egzistuoja: tikimybė ≈ min(1, (žingsnis + pėdsakas) / ciklas) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (tipinė retojo pėdsako trukmė ties 143 MHz ≈ {1:F1} s).
+La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Spindulio seka skaičiuojama pagal PC laikrodį: sinchronizuokite jį su NTP serveriu (paklaida daugiausia kelios sekundės dešimtosios).
+La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Seka susieta su UTC laiku (PE1ITR): nuo 2021 m. žingsnis trunka 0,8 s, o sektoriaus ciklas 4,8 s; 2007 m. buvo 3,2 s ir 19,2 s. Valdymo stotis kartais paslenka seką keliais žingsniais: detalės yra prognozė, kurią reikia patvirtinti klausantis. Pėdsakas girdimas tik tada, jei spindulys jį apšviečia, kol jis egzistuoja: tikimybė ≈ min(1, (žingsnis + pėdsakas) / ciklas) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (tipinė retojo pėdsako trukmė ties 143 MHz ≈ {1:F1} s).
 Lato	Pusė
 Lato A = a sinistra della tratta, B = a destra	Pusė A = trasos kairėje, B = dešinėje
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	Raidės šalia procentų rodo, iš kurios trasos pusės ateina dauguma atspindžių. A = KAIRĖJE, žiūrint iš jūsų stoties į korespondentą (Hot A zona); B = DEŠINĖJE (Hot B zona). Verta pasukti anteną 10-30° į tą pusę (šoninė sklaida). Nėra raidės = efektyvumas mažesnis nei 5 %. Eilutė Σ: trasos indeksas = visų aktyvių srautų ZHR x efektyvumas suma. Žydros eilutės: palyginimas su DH9GCD formule (DF5HC 2018). ↑ = radiantas aukščiau nei 70° iš jūsų stoties (per aukštai).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	Paryškintos eilutės – šiandien (UTC) aktyvūs srautai
 Legenda	Legenda
 Leonidi	Leonidai
 Leonis Minoridi	Leonis Minoridai
@@ -174,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	Bendrosio
 Lincidi di settembre	Rugsėjo Lyncidai
 Lingua dell'interfaccia	Sąsajos kalba
 Liridi	Lyridai
+Live e dati real-time	Tiesiogiai ir realiojo laiko duomenys
+Loc DX	DX lok.
+Loc spotter	Spoterio lok.
 Locator del corrispondente non valido	Netinkamas korespondento lokatorius
 Locator della stazione non valido	Netinkamas stoties lokatorius
+Manca il nominativo per il login	Trūksta šaukinio prisijungimui
 Mappa d'Europa	Europos žemėlapis
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	Europos žemėlapis neprieinamas (pirmą kartą paleidžiant reikia tinklo).
+Mappa dei radar europei	Europos radarų žemėlapis
 Mappa quadrati	Kvadratų žemėlapis
 Mappa:	Žemėlapis:
 Mappa: bordo = {0} km dalla stazione. {1}	Žemėlapis: kraštas = {0} km nuo stoties. {1}
@@ -186,37 +251,48 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	Meteorai/val. - vakar {0} ir šiandien {
 Metti GRAVES come DX	GRAVES kaip DX
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	Geriausias nukreipimas srautui: STATMENAI atėjimo\nkrypčiai (radianto azimutas +-90°, tolerancija +-40-50°,\nSM6FHZ). Plane: geltona linija = srauto\nslinkimas, oranžiniai taškai = nukreipimai, PREV\nelipsės = labiausiai tikėtini pėdsakai dabar.\nSpustelėkite radiantą: kelias su UTC valandomis
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	Išmatuota Collm ir perskaičiuota į {0} MHz - vakar {1} ir šiandien {2} (UTC)
+Mondo	Pasaulis
 Monocerotidi di dicembre	Gruodžio Monocerotidai
 N	Š
-N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Atspindžių trukmė x ({1:F1}/{0:F0})^2 = x {5:F4}: 1 s aidas ties {1:F1} MHz trunka apie {6:F0} ms ties {0:F0} MHz (IARU didžiausias atspindys ties {0:F0} MHz: {7:F0} ms).\nEksperimentinės SM6FHZ taisyklės (VUSHF 2025). Koeficientas K įvertina priimančiąją stotį (galia, antenos): jis gaunamas lyginant su RMOB stebėtoju toje pačioje juostoje.
+N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Atspindžių trukmė x ({1:F1}/{0:F0})^2 = x {5:F4}: 1 s aidas ties {1:F1} MHz trunka apie {6:F0} ms ties {0:F0} MHz (IARU didžiausias atspindys ties {0:F0} MHz: {7:F0} ms).\nEksperimentinės SM6FHZ taisyklės (VUSHF 2025). Koeficientas K įvertina priimančiąją stotį (galia, antenos): jis gaunamas lyginant su RMOB stebėtoju tame pačiame diapazone.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - pakrantės ir sienos 1:50 milijonų, viešoji nuosavybė, www.naturalearthdata.com (Europos žemėlapis)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	Slopinime (β = 90°, atsargiai): pradinis pėdsako spindulys {0:F1} dB (r0 = {1:F2} m ITU vidutiniame {2:F1} km aukštyje, {3:F0} MHz). Kai pėdsakas yra trasos plokštumoje (β = 0°, palankiausias atvejis), slopinimas sumažėja iki {4:F1} dB ({5:F1} dB), o atsarga padidėja iki {6:+0.0;-0.0} dB
 Nero	Juoda
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	Nėra rekomenduojamo Hot: šiuo metu beveik nėra aktyvių srautų
+Nessun dato GMN: premi "Scarica adesso".	Nėra GMN duomenų: spauskite „Atsisiųsti dabar“.
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Nėra radaro duomenų: atsisiųskite juos vidinėje kortelėje Tiesiogiai ir realiojo laiko duomenys › Radaro srautas.
 Nessuna fonte Collm in fonti_radar.csv	fonti_radar.csv nėra Collm šaltinio
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	Pėdsakų nenumatoma: aktyvūs srautai žemiau horizonto arba jų efektyvumas šiai trasai nulinis.
 Nessuna zona comune dello strato E ({0})	Nėra bendrosios E sluoksnio zonos ({0})
+Nessuno sciame utile in questo momento	Šiuo metu naudingų srautų nėra
 No	Ne
 No: fuori dai settori	Ne: už sektorių ribų
-No: sopra il fascio (circa 25°)	Ne: virš pluošto (apie 25°)
+No: sopra il fascio (circa 25°)	Ne: virš spindulio (apie 25°)
 No: sotto l'orizzonte di GRAVES	Ne: žemiau GRAVES horizonto
+Nominativo per il login	Šaukinys prisijungimui
+Non connesso	Neprisijungta
 Non ho riconosciuto il formato del file.	Failo formatas neatpažintas.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	Nepavyko nuskaityti vertikalios srauto skalės (viršutinė žymė: {0}): vertes reikia patikrinti.
 Non riesco ad aprire il documento: {0}	Nepavyko atverti dokumento: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Tai ne taškas žemėlapyje: tai pasaulinis kamerų (daugiausia mėgėjiškų) tinklas, išsidėstęs daugelyje šalių visuose žemynuose.
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	Pastaba: radarų duomenys priklauso atitinkamoms institucijoms. Prieš platinant programą reikia gauti leidimą juos automatiškai atsisiųsti.
-Notte	Naktis
+Notte	Naktinė
 Nuovo locator del corrispondente dalla mappa: {0}	Naujas korespondento lokatorius iš žemėlapio: {0}
 Nuovo locator della stazione dalla mappa: {0}	Naujas stoties lokatorius iš žemėlapio: {0}
+Nuovo tentativo tra 30 s	Kitas bandymas po 30 s
+Nuvola	Debesis
 O	V
 ORA MIGLIORE DEL GIORNO	GERIAUSIAS DIENOS LAIKAS
 Ora	Laikas
 Ora UTC	UTC laikas
-Ora della volta celeste (±36 h)	Dangaus skliauto laikas (±36 h)
+Ore (da −12 a +36 h)	Valandos (nuo −12 iki +36 h)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	Bendros valandos: {0}. RMOB/Collm santykio mediana = {1:F4}.\nEmpirinis rodiklis (kai K = 1): k = {2:F2}  (SM6FHZ taisyklė: 3).\n\nTaikyti šį rodiklį? (Arba palikti k = 3 ir nustatyti koeficientą K = {3:F2}.)
 Orionidi	Orionidai
 Orionidi di novembre	Lapkričio Orionidai
 Osservatore RMOB	RMOB stebėtojas
 PREVISIONE SPERIMENTALE	EKSPERIMENTINĖ PROGNOZĖ
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	KITAS PLUOŠTO PRAĖJIMAS PER ZONĄ
+PSKReporter MQTT	PSKReporter MQTT
 Passo	Žingsnis
 Pastello acquamarina	Pastelinė akvamarino
 Pastello arancione	Pastelinė oranžinė
@@ -228,34 +304,43 @@ Pastello rosa	Pastelinė rožinė
 Pastello verde	Pastelinė žalia
 Pegasidi di luglio	Liepos Pegasidai
 Perseidi	Perseidai
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (didžiausi radijo valandiniai skaičiai)
+Personalizzata	Pasirinktinė
 Phoenicidi	Phoenicidai
 Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Planas: geltona linija = pasirinkto (arba palankiausio) srauto slinkimas, PREV elipsės = kur dabar krenta labiausiai tikėtini pėdsakai. Dangaus skliautas dešinėje (Teka/Leidžiasi UTC laiku, {0}): geltona = efektyvumas >= 50 % ir ZHR >= 2, oranžinė >= 20 %, pilka = beveik neaktyvus.
 Piscidi di aprile diurne	Dieniniai balandžio Piscidai
+Porta	Prievadas
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	Nuotolis pėdsakų aukštyje, kai lapelis {0:F1}°: {1:F0} km
 Potenza W	Galia W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	Galia {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (stiprinimas dBd = dBi - 2,15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	Galia {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (stiprinimas dBi)
 Previsione /ora	Prognozė /val.
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Meteorų srautų efektyvumo prognozė ir skaičiavimas tiesiogiai meteor scatter ryšiams
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	Eksperimentinė kitų 24 valandų prognozė ties {0} MHz: {1}
 Previsione {0} /ora	Prognozė {0} /val.
 Previsione {0} MHz (rifl./ora)	Prognozė {0} MHz (atsp./val.)
 Pronto	Paruošta
 Prossimo massimo (UTC)	Kitas maksimumas (UTC)
+Prova del filtro	Filtro bandymas
+Prudente	Atsargi
 Punt. migliore	Geriausias nukr.
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	Nukreipimas {0:F0}°: Hot A {1}, Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	Taškai {0:F0} km abipus vidurio taško, statmenai trasai (AMS Bulletin 203 ir W8WN: 50-150 km; kaip MSHV)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	Taškai {0:F0} km abipus vidurio taško, statmenai trasai (ranka įvesta vertė; MSHV naudoja 150 km)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	Taškai {0:F0} km abipus vidurio taško, statmenai trasai: nuokrypis {1:F1}° pagal J. Richardsono AMS lentelę (13° ties 1000 km, 11° ties 1250, 10° ties 1500 ir 2000), pateiktą DJ5HG
 Punto di riflessione	Atspindžio taškas
 Punto medio     {0}  ({1:F2}N {2:F2}E)	Vidurio taškas  {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	Vidurio taškas (forward)
 Punto medio {0}, elev. per {1:F1} km: {2:F1}°	Vidurio taškas {0}, elev. {1:F1} km: {2:F1}°
 Puppidi-Velidi	Puppidai-Velidai
 Quadrantidi	Kvadrantidai
-Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Keturios fazuotosios gardelės dengia pietinę dangaus dalį nuo 90° iki 270° azimuto keturiais 45° sektoriais (D, C, B, A); kiekvienas sektorius padalytas į 6 žingsnius po 7,5°, apšviečiamus vienas po kito, tuo pačiu metu visuose keturiuose sektoriuose (žingsniai numeruojami nuo 1 iki 6 pradedant mažiausiu azimutu). Pluoštas apie 25° pločio pagal elevaciją: pėdsakų aukštyje jis dengia spalvotą žiedą tarp dviejų brūkšninių apskritimų. Oranžiniai/rožiniai taškai = GRAVES → jūsų trasos PREV zonos, žalia linija = jūsų stoties kryptis, raudona linija = nuo jūsų stoties iki rekomenduojamo hot spot (PE1ITR).
+Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Keturios fazuotosios gardelės dengia pietinę dangaus dalį nuo 90° iki 270° azimuto keturiais 45° sektoriais (D, C, B, A); kiekvienas sektorius padalytas į 6 žingsnius po 7,5°, apšviečiamus vienas po kito, tuo pačiu metu visuose keturiuose sektoriuose (žingsniai numeruojami nuo 1 iki 6 pradedant mažiausiu azimutu). Spindulys apie 25° pločio pagal elevaciją: pėdsakų aukštyje jis dengia spalvotą žiedą tarp dviejų brūkšninių apskritimų. Oranžiniai/rožiniai taškai = GRAVES → jūsų trasos PREV zonos, žalia linija = jūsų stoties kryptis, raudona linija = nuo jūsų stoties iki rekomenduojamo hot spot (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	Pėdsakų aukštis ir parinktys pasirinkti rankiniu būdu. Pasirenkama automatiškai, kai pakeičiate aukštį, langelį „iš radaro“, ilgus pėdsakus ar kampą β.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	Fiksuotas 102 km aukštis, ilgesni pėdsakai esant žemam radiantui ir kampas β, kaip DJ5HG darbe "Die Geometrie von Meteorscatterverbindungen" (2004).\nPalyginimas su jo kreivėmis: vidutiniškai 2 dB mažiau, tipinis nuokrypis 5 dB; vyrauja išilgai trasos išsidėstę radiantai.
 Quota scie      {0:F1} km (strato E){1}	Pėdsakų aukštis {0:F1} km (E sluoksnis){1}
 Quota scie km	Pėdsakų aukštis km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	Pėdsakų aukščiai (Collm): dažniausias {0:F1} km, vidurkis {1:F1}, mediana {2:F1}, st. nuokr. {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)	GRAVES RADARAS (kortelė GRAVES radaras)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	ŽEMAS RADIANTAS IŠILGAI TRASOS: {0}. Apskaičiuotas efektyvumas lieka mažas, tačiau esant slystantiems pėdsakams išilgai trasos DJ5HG tikisi retų ir stiprių atspindžių: verta klausytis.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	RADIANTAS PER AUKŠTAI (virš {0}°): {1}. Pėdsakai krenta beveik vertikaliai ir mažai atspindi trasos kryptimi (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: prievadas 7000 = CW ir RTTY, prievadas 7001 = FT8. Prisijungimas tik su šaukiniu. RBN skimeriai retai dekoduoja MS modas: jis naudingas daugiausia spotams su <MS> komentare.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	EKSPERIMENTINĖS TAISYKLĖS TARP JUOSTŲ (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	CHRONOLOGINĖ REKONSTRUKCIJA · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB naudoja GRAVES valandiniams meteorų skaičiams: palyginkite savo atspindžius su stebėtojais 143,050 MHz dažniu
@@ -263,29 +348,48 @@ RMOB {0} (scala a destra)	RMOB {0} (skalė dešinėje)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {1} val. nuskaityta {2} UTC
 RMOB – osservatori su 143,050 MHz	RMOB – stebėtojai 143,050 MHz dažniu
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; mėnesio biuleteniai rmob.org/rmobtext (GRAVES 143,050 MHz stebėtojai: Venecijos planetariumas, Faenza, Roveretas ir kiti)
+Raccolta dati	Duomenų rinkimas
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	Rekomendacija ITU-R P.843-1 (1997): kampas beta tarp pėdsako ir trasos plokštumos, pradinis pėdsako spindulys, vidutinis aukštis priklausomai nuo dažnio
 Radar GRAVES	GRAVES radaras
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	Collm meteorų radaras, Leipcigo universitetas (LIM) ir IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	Radiantas:
+Raggio della mappa	Žemėlapio spindulys
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	Rodiklį gauti iš RMOB failo
 Ricevitore	Imtuvas
+Riconnessione tra {0} s	Prisijungiama iš naujo po {0} s
+Riconnetti	Prisijungti iš naujo
+Riepilogo dell'anno (ZHR misurati, GMN)	Metų apžvalga (išmatuoti ZHR, GMN)
 Riga {0} ignorata (colonne insufficienti)	Eilutė {0} praleista (per mažai stulpelių)
 Riga {0}: {1}	Eilutė {0}: {1}
-Riporta la volta celeste al tempo reale	Grąžinti dangaus skliautą į realų laiką
+Riporta il momento del calcolo al tempo reale	Grąžinti skaičiavimo laiką į realų laiką
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	Palyginti su 144 MHz: skaičius/intensyvumas x {0:F3} ({1:+0.0;-0.0} dB), trukmė x {2:F2}. IARU didžiausias atspindys ties {3:F0} MHz: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) ir "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	Ratukas = mastelis, tempti = slinkti, pelė virš kvadrato = QSO
 S	P
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	ATMESTA: "{0}" rastas, bet dažnis {1:F1} kHz nėra pasirinktame diapazone.
+SCARTATO: frequenza sotto 27990,0 kHz.	ATMESTA: dažnis žemiau 27990,0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	ATMESTA: už MS langų ir nėra nė vieno filtro žodžio.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	ATMESTA: komentare nurodytas kitas sklidimas ({0}) ir nėra MS modos.
 SCIAME PIÙ FAVOREVOLE	PALANKIAUSIAS SRAUTAS
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	PJŪVIS - labiausiai tikėtini pėdsakai, matomi iš antenos korespondento kryptimi (az. {0}°)
+SGO, Finlandia	SGO, Suomija
 Scarica RMOB adesso	Atsisiųsti RMOB dabar
 Scarica adesso	Atsisiųsti dabar
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Iš karto atmesti klasterio eilutes žemiau 27990,0 kHz (jos nerodomos konsolėje ir nesaugomos)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	Hot spot antenos nuokrypis pagal J. Richardsono AMS lentelę, pateiktą DJ5HG: 13° ties 1000 km, 11° ties 1250 km, 10° ties 1500 ir 2000 km. Nuimkite varnelę, kad atstumą įvestumėte ranka (MSHV naudoja 150 km).
 Scia meteorica	Meteoro pėdsakas
 Sciame	Srautas
 Sciame più favorevole	Palankiausias srautas
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	Naudingiausias srautas: {0} (ZHR {1}, efektyvumas {2} %)
 Sciami	Srautai
+Sciami in diretta	Srautai tiesiogiai
+Sciami sopra l'orizzonte: {0}	Srautų virš horizonto: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	Ilgesni pėdsakai esant žemam radiantui (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	Įrašykite RMOB stebėtojo vardą taip, kaip jis yra failo pavadinime (pvz., VARDAS_112026rmob.TXT -> VARDAS).
+Scrivi il nominativo per il login prima di connettere.	Prieš jungdamiesi įrašykite šaukinį prisijungimui.
 Segnale minimo dBm	Minimalus signalas dBm
-Sequenza del fascio	Pluošto seka
+Sequenza del fascio	Spindulio seka
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	Reikia ir Collm duomenų, ir tų pačių valandų RMOB failo.
 Sextantidi diurne	Dieniniai Sextantidai
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)	Shelby W8WN - qsl.net/w8wn/hscw (optimali elevacija ir poslinkis)
@@ -293,17 +397,30 @@ Sigla	Kodas
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	Tai tolimiausi dangaus kraštai, matomi iš abiejų stočių, o ne taškai, į kuriuos reikia nukreipti.
 Sorge	Teka
 Sorgente Antielio	Antihelio šaltinis
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	Išjungta (atsargiai): kiekvienas pėdsakas sveriamas radianto elevacijos sinusu, nes esant žemam radiantui į km² nukrenta mažiau meteorų.\nĮjungta: kaip DJ5HG (2004), esant žemam radiantui pėdsakai ilgesni (naudingas sluoksnio storis, 15 km, padalytas iš elevacijos sinuso, iki 100 km) ir dažniau tenkina atspindžio dėsnį. Abu poveikiai kompensuoja vienas kitą virš maždaug 9° elevacijos: efektyvumas esant žemam radiantui didėja, esant aukštam nesikeičia.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS spotai iš kortelės „Duomenų rinkimas“. Kiekvienam ryšiui debesis rodo, kur susitelkia labiausiai tikėtini pėdsakai tai trasai ir tai valandai (veidrodinis atspindys, aktyvių srautų suma). Brūkšniniai debesys = tik sporadiniai meteorai. Spotai, kurių stotis yra už žemėlapio ribų, nepiešiami; ką tik atėję (mažiau nei 3 minutės) mirksi vieną minutę.
+Spot MS raccolti	Surinkti MS spotai
+Spot da mostrare	Rodomi spotai
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	PSKReporter spotai tiesiogiai per MQTT (mqtt.pskreporter.info, M0LTE paslauga): prisijungti nereikia, spotai ateina jau su siunčiančios ir priimančios stoties lokatoriais. Viena tema eilutėje arba atskirtos ;  formatas pskr/filter/v2/diapazonas/režimas/tx šaukinys/rx šaukinys/... (+ = bet koks, # = likusi dalis).
+Spot meteor scatter raccolti (i più recenti in alto)	Surinkti meteor scatter spotai (naujausi viršuje)
+Stazione	Stotis
 Stazione        {0}   quota {1:F0} m	Stotis          {0}   aukštis {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	Eksperimentinis įvertis (SM6FHZ taisyklės): meteorai/val. ties {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; atspindžių trukmė x {4:F3}. IARU didžiausias atspindys ties {0:F0} MHz: {5:F0} ms. Orientacinės vertės, lygintinos su patirtimi eteryje.{6}
+Svuota la tabella	Išvalyti lentelę
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC Swan Meteor Skyview - swan.ms (dangaus skliauto grafikos pavyzdys)
 Sì	Taip
 Sì · settore {0}	Taip · sektorius {0}
 TRATTA	TRASA
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	TRASA UŽ PĖDSAKO HORIZONTO: kai pėdsakai {0:F1} km aukštyje, vidurio taškas yra {1:F1}° žemiau horizonto. Reikia pėdsakų ne žemiau kaip {2:F0} km: ryšys galimas tik per aukščiausius pėdsakus, efektyvumas ir slopinimas yra ties modelio riba.
 Tauridi Nord	Šiaurės Tauridai
 Tauridi Sud	Pietų Tauridai
+Tavistock, Ontario (Canada)	Tavistock, Ontarijas (Kanada)
 Tema	Tema
 Tempo reale	Realus laikas
 Tipo	Tipas
+Traffico MS in diretta · {0}	MS eismas tiesiogiai · {0}
+Traffico in diretta	Eismas tiesiogiai
+Traffico meteor scatter in diretta	Meteor scatter eismas tiesiogiai
 Tramonta	Leidžiasi
 Traslato	Perskaičiuota
 Traslato {0}	Perskaičiuota {0}
@@ -314,12 +431,15 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	Trasa {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	Per mažai bendrų valandų ({0}) tarp Collm ir RMOB failo.
 Tutti i file	Visi failai
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	USB ties 143,049 MHz (tonas apie 1 kHz) arba 143,050 MHz, lėtas arba išjungtas AGC, garso juosta ne siauresnė nei 2,4 kHz
+Univ. Lipsia / IAP Kühlungsborn	Leipcigo univ. / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	Šiuose languose esantis spotas priimamas ir be modos pavadinimo, išskyrus atvejus, kai komentare nurodytas kitas sklidimas viena iš šių žymų:
 Ursidi	Ursidai
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Taikoma spotams už langų ir spotams su kito sklidimo žyma: jie paliekami, jei juose yra vienas iš įjungtų žodžių, parašytas didžiosiomis, mažosiomis ar mišriomis raidėmis. MSK144, FSK441, PSK2K, JTMS ir JT6M yra skaitmeninės modos, naudojamos tik meteor scatter: spotas tikrai yra MS. <MS> bendrai nurodo, kad ryšys įvyko per meteor scatter.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	Atsargiausios vertės, pradinė nuostata: pėdsakų aukštis, išmatuotas Collm radaru (langelis „iš radaro“), įprasti pėdsakai, kampas β įjungtas.\nPalyginimas su DJ5HG kreivėmis (Kvadrantidai, trasos iš Hamburgo): vidutiniškai 7 dB mažiau, su ta pačia eiga pagal valandas (formos nuokrypis apie 3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	Atsargios vertės: trasos plokštumą kertantis pėdsakas (β = 90°, nepalankiausias atvejis), įskaitant pradinį pėdsako spindulį (ITU-R P.843) vidutiniame aidų aukštyje kiekvienam dažniui
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	Į GRAVES → jūsų trasos rekomenduojamą hot spot (skydelis Trasa), maža elevacija
 Vista dall'alto (E a destra)	Vaizdas iš viršaus (R dešinėje)
-Volta celeste: tempo reale	Dangaus skliautas: realus laikas
-Volta celeste: {0} UTC	Dangaus skliautas: {0} UTC
-Waterfall	Krioklys
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – siųstuvas Broye-lès-Pesmes (47,348° N 5,515° E)
 YA-MS - nessuna connessione	YA-MS - nėra ryšio
 YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	IC8TEM YAEC – kortelė GRAVES radaras (eskizas, iš kurio ji kilo)
@@ -327,14 +447,20 @@ ZHR ora	ZHR dabar
 ZONA UTILE NEL FASCIO DI GRAVES	NAUDINGOJI ZONA GRAVES PLUOŠTE
 a DESTRA guardando verso il corrispondente	DEŠINĖJE, žiūrint į korespondentą
 a SINISTRA guardando verso il corrispondente	KAIRĖJE, žiūrint į korespondentą
+a cura di	parengė
 a cura di Costantino IC8TEM	parengė Costantino IC8TEM
+accettati per finestra di frequenza: {0}	priimta pagal dažnių langą: {0}
+adesso	dabar
 adesso {0}	dabar {0}
-adesso · ancora {0:F1} s	dabar · liko {0:F1} s
+adesso · ancora {0:F1} s	dabar · dar {0:F1} s
+aggiornamento una volta al giorno	atnaujinama kartą per dieną
 alfa-Capricornidi	alfa Kaprikornidai
 alfa-Centauridi	alfa Centauridai
 alfa-Monocerotidi	alfa Monocerotidai
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: eilutė praleista: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	antena į {0}: az {1:F0}° · el {2:F1}°\nGRAVES tiesiogine kryptimi: az {3:F0}°
+antenna {0}°	antena {0}°
+auto (AMS)	auto (AMS)
 azimut rispetto al corrispondente	azimutas korespondento atžvilgiu
 beta-Tauridi diurne	Dieniniai beta Tauridai
 buono	geras
@@ -343,14 +469,18 @@ calcolo della tratta GRAVES → te in corso...	skaičiuojama GRAVES → jūsų t
 circumpolare	cirkumpoliarinis
 clic destro =	dešinysis spust. =
 clic sinistro =	kairysis spust. =
+collegamento via meteor scatter	ryšys per meteor scatter
+comandi dopo il login, separati da ;	komandos po prisijungimo, atskirtos ;
+comando da inviare (es. sh/dx 20)	siunčiama komanda (pvz., sh/dx 20)
 confermato (QSL o LoTW)	patvirtinta (QSL arba LoTW)
 copia locale del {0} UTC	vietinė kopija, {0} UTC
 corrispondente	korespondentas
 dal radar	iš radaro
+dati CC BY 4.0 (Vida et al. 2021, 2022)	duomenys CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud	Pietų delta Akvaridai
 eco	aidas
-eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	laukiami aidai ≈ {0:F0}/val. (eksperimentinis: prognozė × pluoštas {1:F0} %)
-eco possibile (+{0:F1} s di scia)	galimas aidas (+{0:F1} s pėdsako)
+eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	laukiami aidai ≈ {0:F0}/val. (eksperimentinis: prognozė × spindulys {1:F0} %)
+eco possibile (+{0:F1} s di scia)	aidas galimas (+{0:F1} s pėdsako)
 effic. %	efekt. %
 effic. < 20%	efekt. < 20%
 effic. >= 20%	efekt. >= 20%
@@ -365,10 +495,12 @@ errore: {0}	klaida: {0}
 eta-Aquaridi	eta Akvaridai
 eta-Eridanidi	eta Eridanidai
 eta-Liridi	eta Lyridai
+finestra {0} kHz	langas {0} kHz
 fuori dal lobo	už lapelio
 gamma-Draconidi di luglio	Liepos gama Drakonidai
 gamma-Ursae Minoridi	gama Ursae Minoridai
 gradi	laipsniai
+hot spot (solo sporadiche) {0}	hot spot (tik sporadiniai) {0}
 il giorno scelto non è oggi	pasirinkta diena nėra šiandien
 indice	indeksas
 indice sciami tratta (scala a destra)	trasos srautų indeksas (skalė dešinėje)
@@ -378,11 +510,13 @@ invariato (controllato alle {0} UTC)	nepakito (tikrinta {0} UTC)
 kappa-Cygnidi	kapa Cygnidai
 kappa-Leonidi diurne	Dieniniai kapa Leonidai
 la mia stazione	mano stotis
+la tua stazione	jūsų stotis
 lato prevalente {0} ({1:F0}%)	vyraujanti pusė {0} ({1:F0}%)
 lavorato	dirbta
 lim. A	rib. A
 lim. B	rib. B
 limiti zona comune	bendrosios zonos ribos
+linguetta "{0}"	kortelė „{0}“
 lobo antenna	antenos lapelis
 lobo {0}°	lapelis {0}°
 locale	vietinis
@@ -395,20 +529,29 @@ meteore per km di quota	meteorai aukščio kilometrui
 meteore/ora radar	radaro meteorai/val.
 meteore/ora stimate	įvertinti meteorai/val.
 miglior punt.	geriaus. nukr.
+misura il flusso e lo ZHR di ogni sciame attivo	matuoja kiekvieno aktyvaus srauto tankį ir ZHR
 mobile	judantis
+modo digitale MS	MS skaitmeninė moda
 nessun ADIF caricato	ADIF neįkeltas
+nessun dato radar: vedi Live e dati real-time › Flusso radar	nėra radaro duomenų: žr. Tiesiogiai ir realiojo laiko duomenys › Radaro srautas
 nessun file RMOB caricato	RMOB failas neįkeltas
-nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	joks pluošto žingsnis neapšviečia naudingosios zonos\npagautas pėdsakas ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
+nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	joks spindulio žingsnis neapšviečia naudingosios zonos\npagautas pėdsakas ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	nėra aktyvaus tinklo
-nessuno sciame utile adesso: hot spot più adatto al fascio	dabar naudingų srautų nėra: pluoštui tinkamiausias hot spot
+nessuno sciame utile adesso: hot spot più adatto al fascio	dabar naudingų srautų nėra: spinduliui tinkamiausias hot spot
 nessuno sciame utile in questo giorno	šią dieną naudingų srautų nėra
 nessuno sciame utile in questo momento	šiuo metu naudingų srautų nėra
+nominativo	šaukinys
+nuova parola	naujas žodis
 nuovo dato	nauji duomenys
 nuovo dato alle {0} UTC	nauji duomenys {0} UTC
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	debesies šiai trasai apskaičiuoti negalima (per trumpa arba per ilga)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	debesis {0}: {1:F0} % atspindžių, {2:F0} × {3:F0} km, ašis {4:F0}°
 omega-Cetidi Nord diurne	Dieniniai šiaurės omega Cetidai
 omega-Cetidi Sud diurne	Dieniniai pietų omega Cetidai
-orizzonte del fascio	pluošto horizontas
-orologio del PC sincronizzato	PC laikrodis sinchronizuotas
+orizzonte del fascio	spindulio horizontas
+orologio del PC sincronizzato	kompiuterio laikrodis sinchronizuotas
+osservatori RMOB che ascoltano GRAVES	RMOB stebėtojai, klausantys GRAVES
+parola aggiunta	pridėtas žodis
 passi	žingsniai
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	žingsnis {0}{1} kas {2:F1} s · {3} ...\npagautas pėdsakas ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	rad. kelias
@@ -419,29 +562,42 @@ puntamento migliore {0}° / {1}°	geriausias nukreipimas {0}° / {1}°
 puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	nukreipti į {0:F0}° ({1:+0;-0}° nuo korespondento krypties), elevacija {2:F1}°, hot spot už {3:F0} km
 quasi inattivo	beveik neaktyvus
 quota m	aukštis m
+radar SKiYMET 36,2 MHz	SKiYMET radaras 36,2 MHz
+radar meteorico 17-38 MHz, orbite	meteorų radaras 17-38 MHz, orbitos
+radar meteorico 36,9 MHz	meteorų radaras 36,9 MHz
 radio, diurno	radijo, dieninis
 rete assente: {0}	nėra tinklo: {0}
 riflessioni/ora	atspindžiai/val.
 riflessioni/ora a {0} MHz	atspindžiai/val. ties {0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	gauta eilučių       {0}\nperskaityta spotų   {1}\npriimta MS spotų    {2}\natmesta (žodis)     {3}\natmesta (diapaz.)   {4}\nMS spotų per val.   {5}
+righe sotto 27990 kHz scartate: {0}	atmesta eilučių žemiau 27990 kHz: {0}
+righe {0}, spot letti {1}, MS {2}	eilutės {0}, perskaityti spotai {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	skalė, nuskaityta iš grafiko: 0-{0} meteorų/val.
 scala non letta	skalė nenuskaityta
 scala tarata 0-1200 meteore/ora	kalibruota skalė 0-1200 meteorų/val.
 scarso	silpnas
 scartati	atmesti
+scartati per altra propagazione: {0}	atmesta dėl kito sklidimo: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	geriausias srautas {0} {1}: ZHR {2:F0} × efekt. {3:F0} %
 scorrimento sciame	srauto slinkimas
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	atkarpos = pėdsakai (±10 km apie aukštį), orientuoti į radiantą; storesni = labiau tikėtini
 sempre sotto	visada žemiau
 sigma-Hydridi	sigma Hydridai
+sporadiche	sporadiniai
 stima a {0} MHz (scala a destra)	įvertis ties {0} MHz (skalė dešinėje)
-sì	taip
 tra {0:F1} s	po {0:F1} s
 traslato a {0} MHz (scala a destra)	perskaičiuota į {0} MHz (skalė dešinėje)
+trasmettitore 143,050 MHz	siųstuvas 143,050 MHz
 tratta / DX	trasa / DX
 tratta GRAVES → te non calcolata	GRAVES → jūsų trasa neapskaičiuota
 tu {0}	jūs {0}
+ultima ora	paskutinė valanda
+ultime 24 ore	paskutinės 24 valandos
+ultime {0} ore	paskutinės {0} val.
+ultimi {0} minuti	paskutinės {0} min.
 var.	kint.
 varie (tab. 6 IMO)	įvairūs (IMO 6 lent.)
+versione	versija
 visuale	vizualinis
 zeta-Perseidi diurne	Dieniniai zeta Perseidai
 zona PREV	PREV zona
@@ -454,14 +610,21 @@ zona PREV	PREV zona
 {0} (dal radiante, az. {1}°)	{0} (nuo radianto, az. {1}°)
 {0} (in rosso sulla mappa)	{0} (raudonai žemėlapyje)
 {0} (~{1} calc.)	{0} (~{1} apsk.)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	Nuskaityta {0} QSO, {1} QSO kvadratų 50-432 MHz juostose, atmesta {2} QSO (kitos juostos arba be kvadrato).
-{0} UTC (ora della volta celeste)	{0} UTC (dangaus skliauto laikas)
+{0} UTC (momento del calcolo)	{0} UTC (skaičiavimo laikas)
 {0} UTC (tempo reale)	{0} UTC (realus laikas)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	{0} rekomenduojamas dabar: az. {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	{0} rekomenduojamas dabar: az. {1}° ({2}% numatomų atspindžių)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} ryšių žemėlapyje · {1} už žemėlapio · {2} be lokatoriaus
+{0} dB rispetto al riferimento di DJ5HG	{0} dB DJ5HG atskaitos atžvilgiu
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	{0} iš GRAVES: az {1:F1}° · el {2:F1}° (žingsnis {3} iš 6)
-{0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} iš GRAVES: az {1:F1}° · el {2:F1}° (sektoriai nuo 90° iki 270°, pluoštas iki maždaug 25°)
+{0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} iš GRAVES: az {1:F1}° · el {2:F1}° (sektoriai nuo 90° iki 270°, spindulys iki maždaug 25°)
 {0} h	{0} h
+{0} h rispetto ad adesso	{0} h nuo dabar
+{0} km dalla tua stazione	{0} km nuo jūsų stoties
+{0} spot MS in memoria	atmintyje {0} MS spotų
 {0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % {3} UTC ({4} vietos laiku)
 {0} · zona	{0} · zona
 {0}: non lavorato	{0}: nedirbta
@@ -474,131 +637,73 @@ zona PREV	PREV zona
 Σ ZHR x effic.	Σ ZHR x efekt.
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (kairėje)
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Kairėje: Global Meteor Network išmatuotas aktyvių srautų tankis ir ZHR (kameros, kasdienis atnaujinimas; raudona linija = paskutinis atnaujinimas). Dešinėje: CMOR radaro (Kanada, 43° N) beveik realiuoju laiku aptikti radiantai, įskaitant dieninius srautus; apačioje tie patys radiantai, nuspalvinti pagal greitį.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantų žemėlapiai
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Kur yra realiojo laiko duomenų šaltiniai. Brūkšniniai apskritimai = radaro matoma dangaus zona (apie 300 km aplink stotį, pėdsakai 90 km aukštyje): joks radaras nežiūri į dangų virš jūsų trasos, duomenys rodo, koks aktyvus srautas. Taškinės linijos = atstumas nuo jūsų stoties.
-Europa	Europa
-GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN ir CMOR {0} UTC: {1} klaidų ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ir CMOR patikrinti {0} UTC ({1} naujų failų). GMN duomenys: CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: išmatuotas srautų tankis ir ZHR. Duomenys CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ir Vida et al. 2022, MNRAS 515(2)
-Mondo	Pasaulis
-Nessun dato GMN: premi "Scarica adesso".	Nėra GMN duomenų: spauskite „Atsisiųsti dabar“.
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Tai ne taškas žemėlapyje: tai pasaulinis kamerų (daugiausia mėgėjiškų) tinklas, išsidėstęs daugelyje šalių visuose žemynuose.
-Riepilogo dell'anno (ZHR misurati, GMN)	Metų apžvalga (išmatuoti ZHR, GMN)
-SGO, Finlandia	SGO, Suomija
-Sciami in diretta	Srautai realiuoju laiku
-Tavistock, Ontario (Canada)	Tavistock, Ontarijas (Kanada)
-Univ. Lipsia / IAP Kühlungsborn	Leipcigo univ. / IAP Kühlungsborn
-aggiornamento una volta al giorno	atnaujinama kartą per dieną
-dati CC BY 4.0 (Vida et al. 2021, 2022)	duomenys CC BY 4.0 (Vida et al. 2021, 2022)
-la tua stazione	jūsų stotis
-linguetta "{0}"	kortelė „{0}“
-misura il flusso e lo ZHR di ogni sciame attivo	matuoja kiekvieno aktyvaus srauto tankį ir ZHR
-osservatori RMOB che ascoltano GRAVES	RMOB stebėtojai, klausantys GRAVES
-radar SKiYMET 36,2 MHz	SKiYMET radaras 36,2 MHz
-radar meteorico 17-38 MHz, orbite	meteorų radaras 17-38 MHz, orbitos
-radar meteorico 36,9 MHz	meteorų radaras 36,9 MHz
-trasmettitore 143,050 MHz	siųstuvas 143,050 MHz
-{0} km dalla tua stazione	{0} km nuo jūsų stoties
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	PRIIMTA ("{0}"): {1}, pranešė {2}, {3} MHz
-Aggiungi	Pridėti
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Netikslūs lokatoriai (tik 4 simboliai) taip pat imami iš CALL3, kai CALL3 turi 6 simbolių lokatorių.
-Apri la cartella degli spot	Atverti spotų aplanką
-Bande (MHz)	Juostos (MHz)
-CALL3: caricamento...	CALL3: įkeliama...
-CALL3: nessun archivio (data/call3.txt)	CALL3: bazės nėra (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} šaukinių
-Chiuso	Uždaryta
-Cluster con PSKReporter	Klasteris su PSKReporter
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X klasteris su PSKReporter spotais (dm4x.ddns.net, prievadas 8500): čia ateina WSJT-X ir MSHV MSK144 dekodavimai. Arba HamAlert (hamalert.org 7300, reikia paskyros su trigeriais).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Naudotojo pasirinktas klasteris. ON0DXK VHF juostos filtruojamos: jos įjungiamos komanda set/filter dxbm/pass 6 (toliau 4, 2...). Kitas pavyzdys: hamqth.com 7300.
-Commento	Komentaras
-Connetti	Prisijungti
-Connetti all'avvio	Prisijungti paleidžiant
-Contatori	Skaitikliai
-DX cluster a scelta	Pasirinktas DX klasteris
-Disconnesso	Atsijungta
-Disconnetti	Atsijungti
-Filtro	Filtras
-Filtro degli spot meteor scatter	Meteor scatter spotų filtras
-Fonte	Šaltinis
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Priimti spotai įrašomi į data/spot_ms, po vieną CSV failą per dieną. Trūkstami lokatoriai imami iš CALL3 bazės (data/call3.txt).
-Host	Serveris
-Importa CALL3.TXT...	Importuoti CALL3.TXT...
-Indirizzo mancante	Trūksta adreso
-Invia	Siųsti
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Žodis "{0}" yra, bet eilutė nėra tinkamas "DX de ..." spotas.
-Loc DX	DX lok.
-Loc spotter	Spoterio lok.
-Manca il nominativo per il login	Trūksta šaukinio prisijungimui
-Nominativo per il login	Šaukinys prisijungimui
-Non connesso	Neprisijungta
-Nuovo tentativo tra 30 s	Kitas bandymas po 30 s
-Porta	Prievadas
-Prova del filtro	Filtro bandymas
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: prievadas 7000 = CW ir RTTY, prievadas 7001 = FT8. Prisijungimas tik su šaukiniu. RBN skimeriai retai dekoduoja MS modas: jis naudingas daugiausia spotams su <MS> komentare.
-Raccolta dati	Duomenų rinkimas
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	Prisijungti iš naujo
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	ATMESTA: "{0}" rastas, bet dažnis {1:F1} kHz nėra pasirinktoje juostoje.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Iš karto atmesti klasterio eilutes žemiau 27990,0 kHz (jos nerodomos konsolėje ir nesaugomos)
-Scrivi il nominativo per il login prima di connettere.	Prieš jungdamiesi įrašykite šaukinį prisijungimui.
-Spot meteor scatter raccolti (i più recenti in alto)	Surinkti meteor scatter spotai (naujausi viršuje)
-Svuota la tabella	Išvalyti lentelę
-collegamento via meteor scatter	ryšys per meteor scatter
-comandi dopo il login, separati da ;	komandos po prisijungimo, atskirtos ;
-comando da inviare (es. sh/dx 20)	siunčiama komanda (pvz., sh/dx 20)
-modo digitale MS	MS skaitmeninė moda
-nominativo	šaukinys
-nuova parola	naujas žodis
-parola aggiunta	pridėtas žodis
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	gauta eilučių       {0}\nperskaityta spotų   {1}\npriimta MS spotų    {2}\natmesta (žodis)     {3}\natmesta (juosta)    {4}\nMS spotų per val.   {5}
-righe sotto 27990 kHz scartate: {0}	atmesta eilučių žemiau 27990 kHz: {0}
-righe {0}, spot letti {1}, MS {2}	eilutės {0}, perskaityti spotai {1}, MS {2}
-{0} spot MS in memoria	atmintyje {0} MS spotų
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1-as kriterijus: tipiniai meteor scatter spotų dažniai (kHz)
-2° criterio: modi digitali MS e <MS>	2-as kriterijus: MS skaitmeninės modos ir <MS>
-La riga non è uno spot "DX de ..." valido.	Eilutė nėra tinkamas "DX de ..." spotas.
-SCARTATO: frequenza sotto 27990,0 kHz.	ATMESTA: dažnis žemiau 27990,0 kHz.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	ATMESTA: už MS langų ir nėra nė vieno filtro žodžio.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	ATMESTA: komentare nurodytas kitas sklidimas ({0}) ir nėra MS modos.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	Šiuose languose esantis spotas priimamas ir be modos pavadinimo, išskyrus atvejus, kai komentare nurodytas kitas sklidimas viena iš šių žymų:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Taikoma spotams už langų ir spotams su kito sklidimo žyma: jie paliekami, jei juose yra vienas iš įjungtų žodžių, parašytas didžiosiomis, mažosiomis ar mišriomis raidėmis. MSK144, FSK441, PSK2K, JTMS ir JT6M yra skaitmeninės modos, naudojamos tik meteor scatter: spotas tikrai yra MS. <MS> bendrai nurodo, kad ryšys įvyko per meteor scatter.
-accettati per finestra di frequenza: {0}	priimta pagal dažnių langą: {0}
-finestra {0} kHz	langas {0} kHz
-scartati per altra propagazione: {0}	atmesta dėl kito sklidimo: {0}
-Spot MS raccolti	Surinkti MS spotai
-antenna {0}°	antena {0}°
-Calcolo previsionale	Prognozės skaičiavimas
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Spustelėkite trasą žemėlapyje arba lentelės eilutę, kad pamatytumėte ryšio ir jo debesies informaciją.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	Techniniai dokumentai
-Foto	Nuotrauka
-Live e dati real-time	Tiesiogiai ir realiojo laiko duomenys
-Mappa dei radar europei	Europos radarų žemėlapis
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Nėra radaro duomenų: atsisiųskite juos vidinėje kortelėje Tiesiogiai ir realiojo laiko duomenys › Radaro srautas.
-Nuvola	Debesis
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Meteorų srautų efektyvumo prognozė ir skaičiavimas realiuoju laiku meteor scatter ryšiams
-Raggio della mappa	Žemėlapio spindulys
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS spotai iš kortelės „Duomenų rinkimas“. Kiekvienam ryšiui debesis rodo, kur susitelkia labiausiai tikėtini pėdsakai tai trasai ir tai valandai (veidrodinis atspindys, aktyvių srautų suma). Brūkšniniai debesys = tik sporadiniai meteorai. Spotai, kurių stotis yra už žemėlapio ribų, nepiešiami; ką tik atėję (mažiau nei 3 minutės) mirksi vieną minutę.
-Spot da mostrare	Rodomi spotai
-Stazione	Stotis
-Traffico MS in diretta · {0}	MS eismas realiuoju laiku · {0}
-Traffico in diretta	Eismas realiuoju laiku
-Traffico meteor scatter in diretta	Meteor scatter eismas realiuoju laiku
-a cura di	parengė
-hot spot (solo sporadiche) {0}	hot spot (tik sporadiniai) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	nėra radaro duomenų: žr. Tiesiogiai ir realiojo laiko duomenys › Radaro srautas
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	debesies šiai trasai apskaičiuoti negalima (per trumpa arba per ilga)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	debesis {0}: {1:F0} % atspindžių, {2:F0} × {3:F0} km, ašis {4:F0}°
-sporadiche	sporadiniai
-ultima ora	paskutinė valanda
-ultime 24 ore	paskutinės 24 valandos
-ultime {0} ore	paskutinės {0} val.
-ultimi {0} minuti	paskutinės {0} min.
-versione	versija
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} ryšių žemėlapyje · {1} už žemėlapio · {2} be lokatoriaus
+FONTE	ŠALTINIS
+RILIEVO	PATIKRA
+SCELTA	PASIRINKIMAS
+(sopra 144 MHz nessuna misura: λ²)	(virš 144 MHz matavimų nėra: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	Kaip pingų trukmė keičiasi iš vienos juostos į kitą.\nTeorinė (atsargi, numatytoji): trukmė proporcinga λ² (McKinley 1961; SM6FHZ taisyklė): nuo 50 iki 144 MHz pingai sutrumpėja 8 kartus.\nStebėta: medianos, kurias išmatavo NN4SA (EM64) per 2026 m. Perseidus HamSCI MSQP metu (R. Suggs NN4NT): 148 ms ties 28 MHz, 78 ms ties 50 MHz, 53 ms ties 144 MHz; nuo 50 iki 144 MHz pingai sutrumpėja tik 1,5 karto. Viena priėmimo stotis, preliminari analizė; virš 144 MHz matavimų nėra ir naudojama λ².
+Durata dei ping tra le bande	Pingų trukmė tarp juostų
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	Stebėta trukmė (HamSCI MSQP, NN4SA, Perseidai 2026; medianos 148 / 78 / 53 ms ties 28 / 50 / 144 MHz): apie {0:F0} ms ties {1:F0} MHz, x {2:F2}, palyginti su 144 MHz{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	Trukmė pagal HamSCI MSQP matavimus (NN4SA, Perseidai 2026) vietoje λ²: x {0:F3}, taigi 1 s aidas ties {1:F1} MHz trunka apie {2:F0} ms ties {3:F0} MHz.
+Raggio iniziale della scia	Pradinis pėdsako spindulys
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	Pradinis pėdsako spindulys r0: kuo jis didesnis, tuo daugiau prarandama aukštuose dažniuose.\nDviguba ITU vertė (atsargi, numatytoji): radaras CMOR ties 17, 29 ir 38 MHz randa r0 0,5-2 m tarp 85 ir 95 km, dažniausiai 1-1,5 m, su dvigubu išsibarstymu; maždaug dvigubai daugiau nei ankstesni matavimai (Stober ir kt. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m ties 90 km), vidutinė vertė.\nNeįtrauktas: be pradinio spindulio daugiklio.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	Pradinis spindulys: su ITU-R P.843 vidutine verte (r0 = {0:F2} m) daugiklis būtų {1:F1} dB; dabartinis pasirinkimas {2}. CMOR matavimai: r0 0,5-2 m tarp 85 ir 95 km, dvigubas išsibarstymas (Stober ir kt. 2021)
+doppio dell'ITU (Stober 2021, prudente)	dviguba ITU vertė (Stober 2021, atsargi)
+escluso	neįtrauktas
+osservata (HamSCI MSQP, NN4SA 2026)	stebėta (HamSCI MSQP, NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	teorinė λ² (McKinley, SM6FHZ; atsargi)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	Po kiekvienu srautu prideda eilutę „klasikinis“: radijo mėgėjų taisyklės įvertinimą, apskaičiuotą trasos vidurio taške.\n✗ radiantas žemiau horizonto; ◐ ribinis (radiantas žemiau 15° ar aukščiau 70°, arba mažiau nei 30° nuo trasos krypties); ● geras; ★ geriausias (radiantas tarp 15° ir 70° ir daugiau nei 60° nuo trasos krypties).\nRibos kaip meteor-mcp (qso-graph, 2026); ta pati idėja kaip DH9GCD formulėje ir SM6FHZ taisyklėse. Skaičiavimo nekeičia: skirta abiem požiūriams į kampą β palyginti.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	Apskaičiuoja k = 3,75·log10 r kiekvienam dabar aktyviam srautui (r iš GMN lentelės, kitaip iš IMO katalogo) ir ima ZHR svertinį vidurkį.\nTeorija: kai masės indeksas s = 1 + 2,5·log10 r, pėdsakų virš fiksuoto slenksčio skaičius kinta kaip λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nNumatytoji reikšmė lieka k = 3 (SM6FHZ patirties taisyklė), atsargesnė: mažesnis k prognozuoja daugiau atspindžių aukštuose dažniuose.\nDėmesio: Collm skaičiavimai daugiausia yra sporadiniai meteorai, kuriems GMN r neskelbia.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	Kamerų skaičiavimas, ne srautas: priklauso nuo to, kiek stočių turi giedrą ir tamsų dangų.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	Atstumas tarp programos radianto ir MDC radiantų: mediana {0:F1}°, didžiausias {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Du požiūriai į geometriją, su skirtingais šaltiniais.\nĮjungta (atsargu, numatytoji): visa McKinley (1961) ir ITU-R P.843 formulė 1 / (1 − cos²β sin²φ), kur β yra kampas tarp pėdsako ir trasos plokštumos. Plokštumą kertantys pėdsakai vertingi 10-15 dB mažiau nei joje gulintys, ir nė vienas pėdsakas nepervertinamas: vyrauja su trasa sulygiuoti radiantai. Su šiuo pasirinkimu YA-MS geriau atkartoja DJ5HG valandinių kreivių formą (2004).\nIšjungta: kiekvienas pėdsakas skaičiuojamas taip, lyg gulėtų trasos plokštumoje (β = 0), kaip iki 1.6 versijos. Galioja klasikinė radijo mėgėjų taisyklė: geriausias radiantas yra 15-70° aukštyje ir skersai trasos, sulygiuotas yra ribinis (SM6FHZ, DH9GCD, qso-graph meteor-mcp).\nAbu požiūriai dar nepalyginti su nepriklausomais matavimais: langelis „Klasikinis įvertinimas“ kas valandą rodo klasikinės taisyklės įvertinimą po efektyvumu.
+GMN oggi	GMN šiandien
+Giudizio classico	Klasikinis įvertinimas
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: {0} patvirtintos trajektorijos nuo {1} iki {2} UTC, iš jų {3} sporadinės. Kamerų skaičiavimas, ne srautas. Duomenys CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ({0}): {1} sprendiniai. Medianos: λ {2:F1}°, rekt. {3:F1}°, dekl. {4:+0.0;-0.0}°, v {5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: sprendiniai
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	ZHR svertinis vidurkis: k = {0:F2} (SM6FHZ taisyklė: 3, atsargesnė).\n\nTaikyti šį laipsnio rodiklį?
+Nessuno sciame attivo con un indice di popolazione valido.	Nėra aktyvaus srauto su galiojančiu populiacijos indeksu.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	GMN patvirtintos trajektorijos nuo {0} iki {1} UTC: {2} (sporadinės {3})
+classico	klasikinis
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3,75·log10 r = {0}, kai r = {1} ({2}). SM6FHZ patirties taisyklė naudoja k = 3, atsargesnę.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = dažnio perskaičiavimo laipsnio rodiklis iš populiacijos indekso r (GMN, jei yra, kitaip IMO): k = 3,75·log10 r. IAU MDC: IAU Meteor Data Center kataloge paskelbti sprendiniai; Δ = programos IMO katalogas minus MDC sprendinių mediana (radiantas lyginamas ties ta pačia Saulės ilguma). GMN šiandien: paskutiniame Global Meteor Network dienos faile patvirtintos trajektorijos (skaičiavimas, ne srautas).
+k dagli indici di popolazione	k iš populiacijos indeksų
+Δ radiante	Δ radiantas
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Du požiūriai į geometriją, su skirtingais šaltiniais.\nĮjungta (atsargu, numatytoji): visa McKinley (1961) ir ITU-R P.843 formulė 1 / (1 − cos²β sin²φ), kur β yra kampas tarp pėdsako ir trasos plokštumos. Plokštumą kertantys pėdsakai vertingi 10-15 dB mažiau nei joje gulintys, ir nė vienas pėdsakas nepervertinamas: vyrauja su trasa sulygiuoti radiantai. Su šiuo pasirinkimu YA-MS geriau atkartoja DJ5HG valandinių kreivių formą (2004).\nIšjungta: kiekvienas pėdsakas skaičiuojamas taip, lyg gulėtų trasos plokštumoje (β = 0), kaip iki 1.6 versijos. Galioja klasikinė radijo mėgėjų taisyklė: geriausias radiantas yra 15-70° aukštyje ir skersai trasos, sulygiuotas yra ribinis (SM6FHZ, DH9GCD, qso-graph meteor-mcp).\nPirmasis palyginimas su BRAMS skaičiavimais Zonnberge (Perseidai 2026, 471 km) jų neatskiria: langelis „Klasikinis įvertinimas“ kas valandą rodo klasikinės taisyklės įvertinimą po efektyvumu.
+... e altri {0}	... ir dar {0}
+Aggiorna adesso	Atnaujinti dabar
+Aggiornamenti	Atnaujinimai
+Aggiornamento disponibile	Yra atnaujinimas
+Aggiornamento installato	Atnaujinimas įdiegtas
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	Kai kurie pakeitimai matomi tik iš naujo paleidus programą.
+Apri la pagina delle release	Atverti leidimų puslapį
+Chiudi	Uždaryti
+Continua senza	Tęsti be jų
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	Patikrinkite interneto ryšį arba vėl atsisiųskite visą paketą iš leidimų puslapio.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	Patikrina GitHub, ar yra naujesnė YA-MS versija, ir, jei yra, ją įdiegia; taip pat patikrina, ar netrūksta programos failų.
+Controllo degli aggiornamenti su GitHub...	Ieškoma atnaujinimų GitHub...
+File mancanti	Trūkstami failai
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	Programa atsisiunčia paketą {0}, pakeičia savo failus, palieka aplanką data (pakeisti programos failai prieš tai nukopijuojami į data/backup) ir pasileidžia iš naujo.
+Installazione dell'aggiornamento...	Diegiamas atnaujinimas...
+L'aggiornamento non è riuscito: {0}	Atnaujinti nepavyko: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	Trūksta {0} programos failų:\n{1}\n\nAtsisiųsti juos iš GitHub (versija {2})?
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	Leidime nėra paketo šiai sistemai ({0}): atsisiųskite jį rankiniu būdu iš leidimų puslapio.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	Negaliu rašyti į programos aplanką ({0}): įdiekite naują versiją rankiniu būdu.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	Nepavyksta perskaityti GitHub paskelbtų versijų: {0}
+Più tardi	Vėliau
+Riavvia YA-MS a mano: {0}	Paleiskite YA-MS iš naujo rankiniu būdu: {0}
+Salta questa versione	Praleisti šią versiją
+Scarica i file mancanti	Atsisiųsti trūkstamus failus
+Scaricamento dei file mancanti: {0} di {1}	Atsisiunčiami trūkstami failai: {0} iš {1}
+Scaricamento dell'aggiornamento...	Atsisiunčiamas atnaujinimas...
+Scaricamento dell'aggiornamento: {0} %	Atsisiunčiamas atnaujinimas: {0} %
+Scaricati {0} file mancanti.	Atsisiųsta trūkstamų failų: {0}.
+Scaricati {0} file su {1}.	Atsisiųsta {0} failų iš {1}.
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} įdiegta. Programa dabar pasileis iš naujo.
+YA-MS è aggiornato (versione {0}).	YA-MS yra naujausia (versija {0}).
+YA-MS.app non trovato nel pacchetto	Pakete nerasta YA-MS.app
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	Aplanke data pakeista failų: {0}; ankstesnės kopijos yra data/backup/v{1}.
+{0} non trovato nel pacchetto	Pakete nerasta {0}
+È disponibile YA-MS {0} (questa è la {1}).	Yra YA-MS {0} (ši yra {1}).

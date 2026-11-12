@@ -1,52 +1,69 @@
-# YA-MS - Hebrew / עברית (he) translation of the user interface. UTF-8.
+# YA-MS - Hebrew (he) translation of the user interface. UTF-8.
 # One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
 # In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
-# Lines starting with # are comments. Missing entries are shown in Italian.
 (confermato)	(מאושר)
 (destra)  B →	(ימין)  B →
 (lettura Collm: {0})	(קריאת Collm: {0})
 (stima poco precisa sotto 2 λ)	(הערכה גסה מתחת ל-2 λ)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> נקודת האמצע מתחת לאופק בגובה השובלים: הנתיב חורג מהטווח הגאומטרי של קפיצה אחת
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> נקודת האמצע מתחת לאופק בגובה השובלים: הנתיב חורג מהטווח הגאומטרי של קפיצה אחת (נדרשים שובלים בגובה {0:F0} km לפחות)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	0.8 s לצעד · מחזור 4.8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	קריטריון 1: תדרים אופייניים של ספוטי meteor scatter (kHz)
+2° criterio: modi digitali MS e <MS>	קריטריון 2: אופנים ספרתיים של MS ו-<MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	3.2 s לצעד · מחזור 19.2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- ערך שכיח שנמדד במכ״ם Collm
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  אונה {2:F0}° אופקי / {3:F0}° אנכי{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	משמאל: השטף וה-ZHR שנמדדו של המטרים הפעילים מ-Global Meteor Network (מצלמות, עדכון יומי; קו אדום = העדכון האחרון). מימין: רדיאנטים שזוהו על ידי מכ״ם CMOR (קנדה, 43° N) כמעט בזמן אמת, כולל מטרים יומיים; למטה, אותם רדיאנטים צבועים לפי מהירות.
 A.R.	עלייה ישרה
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	התקבל עבור "{0}": {1} מאת {2}, {3} MHz
 ADESSO	עכשיו
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} ריבועי QSO)
 ALTRI RIFERIMENTI DELL'ARTICOLO	מקורות נוספים מהמאמר
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	הנחתת נתיב (שובל תת-צפוף, McKinley 1961; ללא הגבר האנטנות)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	הנחתת נתיב (שובל תת-צפוף, McKinley 1961 ו-ITU-R P.843; ללא הגבר האנטנות)
 ATTENZIONE: {0}	אזהרה: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	אזהרה: {0} ו-{1} נכנסים לאונת האנטנה ({2}° ברמת -3 dB סביב {3}°): בכיוון זה הם כבר מכוסים. מסומנים באפור במפה.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	אזהרה: {0} נכנס לאונת האנטנה ({1}° ברמת -3 dB סביב {2}°): בכיוון זה הוא כבר מכוסה. מסומן באפור במפה.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	פעיל (זהיר, הגדרת ההתחלה): ההספק של כל שובל נקבע לפי הנוסחה המלאה של McKinley ושל ITU-R P.843, 1 / (1 − cos²β sin²φ): שובלים החוצים את מישור הנתיב שווים 10-15 dB פחות מאלה השוכבים בו, ואף שובל אינו מוערך יתר על המידה.\nהשפעה: שולטים הרדיאנטים המיושרים לאורך הנתיב, לא הניצבים; העקומות של DJ5HG משוחזרות טוב יותר שעה אחר שעה, עם מינימום עמוק כשהרדיאנט נמוך.\nכבוי: כל שובל נשקל כאילו הוא נמצא במישור הנתיב (β = 0), כמו עד גרסה 1.6: פועל לפי כלל הרדיאנטים הניצבים לנתיב (SM6FHZ, DH9GCD), אך מעריך יתר על המידה את השובלים החוצים את המישור.
 Adesso	עכשיו
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	עדכון אוטומטי של כל המקורות כל 5 דקות
+Aggiungi	הוסף
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	גם לוקייטורים לא מדויקים (4 תווים בלבד) נלקחים מ-CALL3, כאשר ב-CALL3 יש לוקייטור בן 6 תווים.
 Andromedidi	אנדרומדידים
+Angolo β tra scia e tratta (McKinley completo)	הזווית β בין השובל לנתיב (McKinley מלא)
 Antenna	אנטנה
 Antenna Yagi: boom m	אנטנת יאגי: בום m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	אנטנת יאגי: בום {0:F2} m = {1:F2} lambda ב-{2:F0} MHz -> הגבר {3:F1} dBi (עקומת DL6WU),\n  אונה ברמת -3 dB {4:F0}° אופקית / {5:F0}° אנכית (Kraus מתוקן לפי סימולציות NEC של W4RNL)
 Antenna az: -	אזימוט אנטנה: -
 Antenna az: {0}° (verso il DX)	אזימוט אנטנה: {0}° (לעבר ה-DX)
 Apri in Word	פתח ב-Word
+Apri la cartella degli spot	פתח את תיקיית הספוטים
+Argomenti di partenza	נושאי ברירת המחדל
 Arietidi di maggio Sud diurne	אריאטידים דרומיים של מאי, יומיים
 Arietidi diurne	אריאטידים יומיים
 Assi del flusso non trovati nella posizione attesa.	צירי השטף לא נמצאו במיקום הצפוי.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	הנחתה {0:F1} dB -> אות באנטנה {1:F1} dBm, מינימום לקליטה {2:F0} dBm, מרווח {3:+0.0;-0.0} dB
 Attività	פעילות
-Attivo oggi	פעיל היום
 Attuazione sperimentale previsioni	תחזיות ניסיוניות
 Aurigidi	אוריגידים
 Azimut	אזימוט
-BILANCIO A {0:F0} MHz (punto medio)	מאזן קישור ב-{0:F0} MHz (נקודת אמצע)
-Banda MHz	פס MHz
+BILANCIO A {0:F0} MHz (punto medio)	תקציב קישור ב-{0:F0} MHz (נקודת אמצע)
+Banda MHz	תחום MHz
+Bande (MHz)	פסים (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – מערכים, גזרות ותזמון האלומה
 Bootidi di giugno	בוטידים של יוני
 CALCOLO E TEORIA DELL'EFFICIENZA	יעילות: חישוב ותאוריה
+CALL3: caricamento...	CALL3: טוען...
+CALL3: nessun archivio (data/call3.txt)	CALL3: אין מאגר (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} אותות קריאה
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: מפות רדיאנטים
 COME ASCOLTARE I PING DI GRAVES	איך לשמוע את הפינגים של GRAVES
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	אין חיבור לאינטרנט: נתונים חיצוניים לא עודכנו (ניסיון נוסף בעוד 5 דקות)
 Calcola	חשב
 Calcolo dell'efficienza	חישוב היעילות
 Calcolo non riuscito: {0}	החישוב נכשל: {0}
+Calcolo per {0} UTC	חישוב עבור {0} UTC
+Calcolo per: adesso	חישוב עבור: עכשיו
+Calcolo per: {0} UTC	חישוב עבור: {0} UTC
+Calcolo previsionale	חישוב תחזית
 Camelopardalidi di ottobre	קמלופרדלידים של אוקטובר
 Cancella memoria	נקה זיכרון
 Cancellare tutti i quadrati caricati dal file ADIF?	למחוק את כל הריבועים שנטענו מקובץ ה-ADIF?
@@ -56,13 +73,26 @@ Carica file ADIF...	טען קובץ ADIF...
 Carica file RMOB dal disco...	טען קובץ RMOB מהדיסק...
 Catalogo sciami	קטלוג מטרים
 Che cosa fare	מה לעשות
+Chiaro	בהיר
+Chiuso	סגור
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	לחץ על נתיב במפה או על שורה בטבלה לפרטי הקשר והענן שלו.
+Cluster con PSKReporter	Cluster עם PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	Cluster של DM4X עם ספוטים של PSKReporter (dm4x.ddns.net, פורט 8500): לכאן מגיעים פענוחי MSK144 של WSJT-X ו-MSHV. לחלופין HamAlert (hamalert.org 7300, נדרש חשבון עם טריגרים).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster שנבחר על ידי המשתמש. ב-ON0DXK פסי ה-VHF מסוננים: מאפשרים אותם עם set/filter dxbm/pass 6 (אחר כך 4, 2...). דוגמה נוספת: hamqth.com 7300.
 Collm stessa ora	Collm באותה שעה
 Collm {0} MHz (validi)	Collm {0} MHz (תקפים)
 Comae Berenicidi	קומה ברניצידים
 Comandi	פקדים
+Come DJ5HG	כמו DJ5HG
+Commento	הערה
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	עם ההנחתה הממוצעת של OH5IY (200 dB ב-144 MHz, מותאמת לפי λ³: {0:F1} dB ב-{1:F0} MHz) המרווח היה {2:+0.0;-0.0} dB
+Connessione a {0}...	מתחבר אל {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	אין חיבור לאינטרנט.\n\nלא ניתן לעדכן את נתוני המכ״מים ו-RMOB: התוכנה משתמשת בנתונים האחרונים שנשמרו ומנסה שוב בעצמה כל 5 דקות.
 Connessione ripristinata.	החיבור חודש.
+Connesso: {0} argomenti	מחובר: {0} נושאים
+Connetti	התחבר
+Connetti all'avvio	התחבר בהפעלה
+Contatori	מונים
 Conteggio	ספירה
 Controllo le fonti di dati esterne...	בודק את מקורות הנתונים החיצוניים...
 Corrispondente	תחנת DX
@@ -70,20 +100,28 @@ Corrispondente  {0}   quota {1:F0} m	תחנת DX      {0}   גובה {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (מאמר באיטלקית, גרסה 7).
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961 (משוואת השובלים התת-צפופים)
 DATI DEGLI SCIAMI	נתוני המטרים
-DATI RADAR IN DIRETTA	נתוני מכ״ם בזמן אמת
+DATI RADAR IN DIRETTA	נתוני מכ״ם בשידור חי
 DENTRO il lobo	בתוך האונה
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	מכאן: שובלים בשכבת E בגובה כ-90 km (מכ״ם SKiYMET), נוסחת ההגבהה, Hot A / Hot B, פיזור צדי (side-scatter), הנחתה 182-200 dB, משך הפינגים לפי IARU.
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	DX cluster לבחירתך
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	מכאן: שובלים בשכבת E בגובה כ-90 km (מכ״ם SKiYMET), נוסחת ההגבהה, Hot A / Hot B, פיזור צדי (side-scatter), הנחתת נתיב, משך הפינגים לפי IARU.
+Data del calcolo (UTC)	תאריך החישוב (UTC)
 Decl.	נטייה
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	צפיפות השובל q = {0:E1} אלקטרונים/m. נתוני ייחוס מהמאמר ב-144 MHz: 182 dB מינימום (GM8JBJ), 200 dB ממוצע (OH5IY)
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	צפיפות השובל q = {0:E1} אלקטרונים/m. נתוני ייחוס: 172-190 dB (חישובי G4BAO שמצטט GM8JBJ), 200 dB ממוצע ב-144 MHz (OH5IY)
 Densita' scia q = 10^	צפיפות שובל q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	פירוט {0:F0} השניות הבאות: האזור השימושי אינו באף צעד של האלומה
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	פירוט {0:F0} השניות הבאות: צעדי הגזרה {1} ({2:F1} s כל אחד) והצעד שמאיר את האזור השימושי
 Direzioni Hot A / Hot B	כיווני Hot A / Hot B
+Disconnesso	מנותק
+Disconnetti	התנתק
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	מרחק           {0:F0} km   אזימוט {1:F1}°   (מתחנת ה-DX {2:F1}°)
+Documenti tecnici	מסמכים טכניים
 Documento Word	מסמך Word
 Documento esportato: {0}	המסמך יוצא: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	היכן נמצאים מקורות הנתונים החיים. עיגולים מקווקווים = אזור השמיים שהמכ״ם רואה (כ-300 km סביב התחנה, שובלים בגובה 90 km): אף מכ״ם אינו מביט בשמיים שמעל הנתיב שלך, הנתונים מראים עד כמה המטר פעיל. קווים מנוקדים = מרחק מהתחנה שלך.
 Draconidi di ottobre	דרקונידים של אוקטובר
-E	מז
+E	E
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	יעילות הנתיב GRAVES → אליך עכשיו
 Effic. %	יעיל. %
 Efficienza - spiegazione	יעילות - הסבר
@@ -94,6 +132,7 @@ Elevazione d'antenna in funzione della distanza dallo scatter point	הגבהת �
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	הגבהת האנטנה לעבר נקודת האמצע: {0:F1}°   (נוסחת המאמר, איור 7)
 Elevazione lobo °	הגבהת אונה °
 Errore all'avvio: {0}	שגיאה בהפעלה: {0}
+Errore: {0}	שגיאה: {0}
 Esponente	מעריך
 Esponente dal confronto RMOB	מעריך מהשוואה ל-RMOB
 Esponente non calcolabile con questi dati.	לא ניתן לחשב את המעריך מנתונים אלה.
@@ -102,6 +141,7 @@ Esponente λ^k	מעריך λ^k
 Esporta	ייצא
 Esporta il documento in Word	ייצא את המסמך ל-Word
 Esporta in Word (.docx)...	ייצא ל-Word (.docx)...
+Europa	אירופה
 FONTE PRINCIPALE	מקור עיקרי
 FONTI	מקורות
 Fattore di stazione K	מקדם תחנה K
@@ -110,27 +150,38 @@ File ADIF del log	קובץ ADIF של היומן
 File RMOB	קובץ RMOB
 File RMOB (conteggi orari del mese)	קובץ RMOB (ספירות שעתיות של החודש)
 File mancante: {0}	קובץ חסר: {0}
+Filtro	מסנן
+Filtro degli spot meteor scatter	מסנן ספוטי meteor scatter
 Finestra utile	חלון שימושי
 Flusso radar	שטף מכ״ם
 Flusso radar: nessun dato. Premi "Scarica adesso".	שטף מכ״ם: אין נתונים. לחץ "הורד עכשיו".
+Fonte	מקור
 Fonte del massimo	מקור השיא
 Fonti	מקורות
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	תבנית הגרף השתנתה ({0}x{1}): לא ניתן לקרוא.
 Formato file mensile, {0}/{1}.	תבנית קובץ חודשי, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	תבנית טבלת העלון ({0}/{1}): אם הקובץ מכיל כמה צופים הם נקראים ברצף; השתמש בקובץ עם צופה אחד בלבד.
+Foto	צילום
 Frequenza di arrivo MHz	תדר יעד MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT, DH8BQA, geekshed.co.uk, מדריך WSJT-X, WB2FKO (פינגים), IU6GIR (פעילות ב-143.050 MHz), IARU Region 1 VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	גאומטריית הנתיב (ארץ כדורית, R = 6372.7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN ו-CMOR ב-{0} UTC: {1} שגיאות ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ו-CMOR נבדקו ב-{0} UTC ({1} קבצים חדשים). נתוני GMN: CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES בקו ישיר: אזימוט {0:F0}°
 Geminidi	ג׳מינידים
 Geometria e attenuazione	גאומטריה והנחתה
 Giorno per la tabella 24 h (UTC)	יום לטבלת 24 h (UTC)
 Giudizio	הערכה
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	ספוטים שהתקבלו נשמרים ב-data/spot_ms, קובץ CSV אחד ליום. לוקייטורים חסרים נלקחים ממאגר CALL3 (data/call3.txt).
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: השטף וה-ZHR שנמדדו של המטרים. נתונים CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ו-Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	הגבר אנטנה dBi (שידור = קליטה)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - עקומת הגבר/אורך בום של יאגי ארוכות, G(dBi) = 7.773 log(L/lambda) + 11.43, כפי שמובאת אצל W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (נקודות חמות קלאסיות, לכיוון האנטנה)
+Host	שרת
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: נקודות חמות במרחק {0} km מנקודת האמצע (AMS 203, W8WN, MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: נקודות חמות במרחק {0} km מנקודת האמצע (ערך שהוזן ידנית).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: נקודות חמות במרחק {0} km מנקודת האמצע, סטייה {1}° (טבלת AMS של J. Richardson, DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: אזימוט {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: אזימוט {0:F0}° ({1:+0;-0}°)  {2}
@@ -139,31 +190,41 @@ Hot fuori lobo	Hot מחוץ לאונה
 Hot nel lobo	Hot בתוך האונה
 Hot spot dal punto medio km	נקודה חמה מנקודת האמצע km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	הפינגים הם קווים קצרים ליד הנושא; השובלים הארוכים (overdense) רחבים יותר ומראים דופלר
-IL CIELO VISTO DA GRAVES	השמיים כפי ש-GRAVES רואה אותם
+IL CIELO VISTO DA GRAVES	השמיים כפי שנראים מ־GRAVES
 IMO {0} (giorno)	IMO {0} (יום)
 Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	תחנת ה-DX הופכת ל-GRAVES (JN27SI, גובה 200 m) והנתיב הראשי מחושב מחדש
 Il file scelto non e' un file locale.	הקובץ שנבחר אינו קובץ מקומי.
 Il mio locator	הלוקייטור שלי
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (מושג היעילות של המטר), www.kolumbus.fi/oh5iy (אתר היסטורי)
+Importa CALL3.TXT...	ייבא CALL3.TXT...
 Impossibile leggere {0}: {1}	לא ניתן לקרוא את {0}: {1}
+Impostazione del calcolo:	הגדרת החישוב:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	ב-forward scatter המשך גדל גם עם sec²φ (φ = {0:F0}° בנקודת האמצע של הנתיב; Collm מודד ב-backscatter, φ = 0): x {1:F1}, ולכן הד של 1 s ב-Collm נמשך כ-{2:F0} ms בנתיב.
+Indice della tratta Σ ZHR×η: {0}	מדד הנתיב Σ ZHR×η: {0}
 Indice sciami tratta	מדד המטרים לנתיב
 Indice tratta (ZHR×eff.)	מדד נתיב (ZHR×יעיל.)
+Indirizzo mancante	כתובת חסרה
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, מאי 2025 (כללי lambda^3 ו-lambda^2, נקודת אמצע, הכיוון הטוב ביותר)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (גרף קוטבי עם הכיוון הטוב ביותר)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (טבלאות 5, 6 ו-7)
+Invia	שלח
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: הגבר ורוחב אונה, G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", כנס DARC, ינואר 2018: נוסחת הכיוון הטוב ביותר\n    של DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), פיזור חרוטי ובחירת HOT-A / HOT-B של DJ5HG,\n    רדיאנט שימושי בין 20 ל-70 מעלות, מרחק מיטבי 1300-1500 km, מטאורים ספורדיים של KB0VUK
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: הערכות הגבר לגרסאות VK3AUU, WA2PHW ו-DJ9BV
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (לפי Kaiser & Closs 1952)
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (לפי Kaiser & Closs 1952; מצטט את חישובי John Worsnop G4BAO, 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): ייחוס קבוע ב-dB, שובלים ארוכים כשהרדיאנט נמוך,\n    עקומות הנתיבים מהמבורג וממינכן; טבלת AMS של J. Richardson למרחק הנקודות החמות
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (אורורה, FAI ו-meteor scatter) והמדריך "QTFGUI Help" 2007: חוק הפיזור החרוטי,\n    מקרה הבדיקה המבורג - ברצלונה בקוודרנטידים, ששימש לאימות המודל
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (בדיקת שני הכללים);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design ו-70-CM Yagi Stacks Part 2 (יאגי VK3AUU של David Tanner):\n    סימולציות NEC ששימשו לאימות עקומת ההגבר ולתיקון האונה האופקית (0.93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	גבולות האזור המשותף (נקודות החיתוך של העקומות שבהן האופק של כל תחנה פוגש את שכבת E, מאמר)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	המילה "{0}" קיימת, אבל השורה אינה ספוט "DX de ..." תקין.
+La riga non è uno spot "DX de ..." valido.	השורה אינה ספוט "DX de ..." תקין.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	סולם גרף הגבהים השתנה: סטטיסטיקות הגובה (שכיח, ממוצע, חציון) נשארות תקפות, הספירות המוחלטות לא.
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	רצף האלומה מחושב לפי שעון המחשב: סנכרן אותו עם שרת NTP (שגיאה של עשיריות שנייה ספורות לכל היותר).
 La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	הרצף קשור לשעון UTC (PE1ITR): מאז 2021 כל צעד נמשך 0.8 s ומחזור של גזרה 4.8 s; ב-2007 הם היו 3.2 s ו-19.2 s. תחנת הבקרה מזיזה לעיתים את הרצף בכמה צעדים: הפירוט הוא תחזית שיש לאשר בהאזנה. שובל נשמע רק אם האלומה מאירה אותו בזמן שהוא קיים: הסתברות ≈ min(1, (צעד + שובל) / מחזור) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (משך טיפוסי של שובל תת-צפוף ב-143 MHz ≈ {1:F1} s).
 Lato	צד
 Lato A = a sinistra della tratta, B = a destra	צד A = משמאל לנתיב, B = מימין
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	האותיות ליד האחוז מציינות מאיזה צד של הנתיב מגיעות רוב ההחזרות. A = משמאל במבט מהתחנה שלך לעבר תחנת ה-DX (אזור Hot A); B = מימין (אזור Hot B). כדאי להסיט את האנטנה ב-10-30° לעבר אותו צד (side-scatter). ללא אות = יעילות מתחת ל-5 %. שורת Σ: מדד הנתיב = סכום ZHR x יעילות של כל המטרים הפעילים. שורות תכלת: השוואה לנוסחת DH9GCD (DF5HC 2018). ↑ = רדיאנט מעל 70° מהתחנה שלך (גבוה מדי).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	השורות המודגשות הן המטרים הפעילים היום (UTC)
 Legenda	מקרא
 Leonidi	לאונידים
 Leonis Minoridi	לאוניס מינורידים
@@ -173,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	גבול�
 Lincidi di settembre	לינצידים של ספטמבר
 Lingua dell'interfaccia	שפת הממשק
 Liridi	לירידים
+Live e dati real-time	חי ונתונים בזמן אמת
+Loc DX	לוקייטור DX
+Loc spotter	לוקייטור המדווח
 Locator del corrispondente non valido	לוקייטור תחנת ה-DX אינו תקין
 Locator della stazione non valido	לוקייטור התחנה אינו תקין
+Manca il nominativo per il login	חסר אות קריאה להתחברות
 Mappa d'Europa	מפת אירופה
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	מפת אירופה אינה זמינה (נדרשת רשת בהפעלה הראשונה).
+Mappa dei radar europei	מפת המכ״מים האירופיים
 Mappa quadrati	מפת ריבועים
 Mappa:	מפה:
 Mappa: bordo = {0} km dalla stazione. {1}	מפה: שוליים = {0} km מהתחנה. {1}
@@ -185,54 +251,80 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	מטאורים/שעה - אתמול {0} �
 Metti GRAVES come DX	קבע את GRAVES כ-DX
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	כיוון מיטבי למטר: ניצב לכיוון\nההגעה (אזימוט הרדיאנט +-90°, סובלנות +-40-50°,\nSM6FHZ). במבט על: קו צהוב = היסחפות\nהמטר, נקודות כתומות = כיווני אנטנה, אליפסות\nPREV = השובלים הסבירים ביותר כעת.\nלחיצה על רדיאנט: מסלול עם שעות UTC
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	נמדד ב-Collm והותאם ל-{0} MHz - אתמול {1} והיום {2} (UTC)
+Mondo	העולם
 Monocerotidi di dicembre	מונוצרוטידים של דצמבר
-N	צ
-N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  משך ההחזרות x ({1:F1}/{0:F0})^2 = x {5:F4}: הד של 1 s ב-{1:F1} MHz נמשך כ-{6:F0} ms ב-{0:F0} MHz (פינג מרבי לפי IARU ב-{0:F0} MHz: {7:F0} ms).\nכללים ניסיוניים של SM6FHZ (VUSHF 2025). המקדם K מביא בחשבון את תחנת הקליטה (הספק, אנטנות): הוא נגזר מהשוואה לצופה RMOB באותו פס.
+N	N
+N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  משך ההחזרות x ({1:F1}/{0:F0})^2 = x {5:F4}: הד של 1 s ב-{1:F1} MHz נמשך כ-{6:F0} ms ב-{0:F0} MHz (פינג מרבי לפי IARU ב-{0:F0} MHz: {7:F0} ms).\nכללים ניסיוניים של SM6FHZ (VUSHF 2025). המקדם K מביא בחשבון את תחנת הקליטה (הספק, אנטנות): הוא נגזר מהשוואה לצופה RMOB באותו תחום.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - קווי חוף וגבולות 1:50 מיליון, נחלת הכלל, www.naturalearthdata.com (מפת אירופה)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	בהנחתה (β = 90°, זהיר): הרדיוס ההתחלתי של השובל {0:F1} dB (r0 = {1:F2} m בגובה הממוצע לפי ITU של {2:F1} km עבור {3:F0} MHz). כשהשובל נמצא במישור הנתיב (β = 0°, המקרה הטוב ביותר) ההנחתה יורדת ל-{4:F1} dB ({5:F1} dB) והמרווח עולה ל-{6:+0.0;-0.0} dB
+Nero	שחור
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	אין Hot מומלץ: כמעט אין מטרים פעילים כרגע
+Nessun dato GMN: premi "Scarica adesso".	אין נתוני GMN: לחץ "הורד עכשיו".
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	אין נתוני מכ״ם: הורד אותם מתת-הלשונית חי ונתונים בזמן אמת › שטף מכ״ם.
 Nessuna fonte Collm in fonti_radar.csv	אין מקור Collm ב-fonti_radar.csv
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	לא צפויים שובלים: המטרים הפעילים מתחת לאופק או עם יעילות אפס לנתיב זה.
 Nessuna zona comune dello strato E ({0})	אין אזור משותף בשכבת E ({0})
+Nessuno sciame utile in questo momento	אין מטר שימושי ברגע זה
 No	לא
 No: fuori dai settori	לא: מחוץ לגזרות
 No: sopra il fascio (circa 25°)	לא: מעל האלומה (כ-25°)
 No: sotto l'orizzonte di GRAVES	לא: מתחת לאופק של GRAVES
+Nominativo per il login	אות קריאה להתחברות
+Non connesso	לא מחובר
 Non ho riconosciuto il formato del file.	תבנית הקובץ לא זוהתה.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	לא ניתן לקרוא את הסולם האנכי של השטף (תווית עליונה: {0}): יש לבדוק את הערכים.
 Non riesco ad aprire il documento: {0}	לא ניתן לפתוח את המסמך: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	זו אינה נקודה על המפה: זוהי רשת עולמית של מצלמות (רובן של חובבים) הפזורות בארצות רבות בכל היבשות.
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	הערה: נתוני המכ״מים שייכים למוסדות המפעילים אותם. לפני הפצת התוכנה יש לבקש רשות לאסוף אותם אוטומטית.
+Notte	לילה
 Nuovo locator del corrispondente dalla mappa: {0}	לוקייטור חדש לתחנת ה-DX מהמפה: {0}
 Nuovo locator della stazione dalla mappa: {0}	לוקייטור חדש לתחנה מהמפה: {0}
-O	מע
+Nuovo tentativo tra 30 s	ניסיון נוסף בעוד 30 s
+Nuvola	ענן
+O	W
 ORA MIGLIORE DEL GIORNO	השעה הטובה ביותר ביום
 Ora	שעה
 Ora UTC	שעת UTC
-Ora della volta celeste (±36 h)	זמן כיפת השמיים (±36 h)
+Ore (da −12 a +36 h)	שעות (−12 עד +36 h)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	שעות משותפות: {0}. יחס חציוני RMOB/Collm = {1:F4}.\nמעריך אמפירי (עם K = 1): k = {2:F2}  (כלל SM6FHZ: 3).\n\nלהחיל מעריך זה? (לחלופין להשאיר k = 3 ולכוונן את המקדם K = {3:F2}.)
 Orionidi	אוריונידים
 Orionidi di novembre	אוריונידים של נובמבר
 Osservatore RMOB	צופה RMOB
 PREVISIONE SPERIMENTALE	תחזית ניסיונית
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	המעבר הבא של האלומה מעל האזור
+PSKReporter MQTT	PSKReporter MQTT
 Passo	צעד
+Pastello acquamarina	פסטל אקוומרין
+Pastello arancione	פסטל כתום
+Pastello azzurro	פסטל תכלת
+Pastello indaco	פסטל אינדיגו
+Pastello lilla	פסטל לילך
+Pastello marrone	פסטל חום
+Pastello rosa	פסטל ורוד
+Pastello verde	פסטל ירוק
 Pegasidi di luglio	פגסידים של יולי
 Perseidi	פרסאידים
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (קצבי רדיו שעתיים מרביים)
+Personalizzata	מותאמת אישית
 Phoenicidi	פניקידים
 Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	מבט על: קו צהוב = היסחפות המטר הנבחר (או הנוח ביותר), אליפסות PREV = היכן נופלים כעת השובלים הסבירים ביותר. כיפת השמיים מימין (זריחה/שקיעה ב-UTC בתאריך {0}): צהוב = יעילות >= 50 % ו-ZHR >= 2, כתום >= 20 %, אפור = כמעט לא פעיל.
 Piscidi di aprile diurne	פיסידים של אפריל, יומיים
+Porta	פורט
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	טווח בגובה השובלים עם אונה ב-{0:F1}°: {1:F0} km
 Potenza W	הספק W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	הספק {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (הגבר ב-dBd = dBi - 2.15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	הספק {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (הגבר ב-dBi)
 Previsione /ora	תחזית /שעה
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	תחזית וחישוב בזמן אמת של יעילות מטרי המטאורים עבור meteor scatter
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	תחזית ניסיונית ל-24 השעות הבאות ב-{0} MHz עבור {1}
 Previsione {0} /ora	תחזית {0} /שעה
 Previsione {0} MHz (rifl./ora)	תחזית {0} MHz (החזרות/שעה)
 Pronto	מוכן
 Prossimo massimo (UTC)	השיא הבא (UTC)
+Prova del filtro	בדיקת המסנן
+Prudente	זהירה
 Punt. migliore	כיוון מיטבי
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	כיוון {0:F0}°: Hot A {1}, Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	נקודות במרחק {0:F0} km משני צידי נקודת האמצע, ניצבות לנתיב (AMS Bulletin 203 ו-W8WN: 50-150 km; כמו ב-MSHV)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	נקודות במרחק {0:F0} km משני צדי נקודת האמצע, ניצבות לנתיב (ערך שהוזן ידנית; MSHV משתמש ב-150 km)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	נקודות במרחק {0:F0} km משני צדי נקודת האמצע, ניצבות לנתיב: סטייה {1:F1}° מטבלת AMS של J. Richardson (13° ב-1000 km, 11° ב-1250, 10° ב-1500 וב-2000), שמביא DJ5HG
 Punto di riflessione	נקודת החזרה
 Punto medio     {0}  ({1:F2}N {2:F2}E)	נקודת אמצע     {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	נקודת אמצע (קדמי)
@@ -240,11 +332,15 @@ Punto medio {0}, elev. per {1:F1} km: {2:F1}°	נקודת אמצע {0}, הגבה
 Puppidi-Velidi	פופידים-ולידים
 Quadrantidi	קוודרנטידים
 Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	ארבעה מערכי מופע מכסים את השמיים הדרומיים, מאזימוט 90° עד 270°, בארבע גזרות של 45° (D, C, B, A); כל גזרה מחולקת ל-6 צעדים של 7.5°, המוארים בזה אחר זה, באותו רגע בכל ארבע הגזרות (הצעדים ממוספרים 1 עד 6 החל מהאזימוט הנמוך ביותר). רוחב האלומה כ-25° בהגבהה: בגובה השובלים היא מכסה את הטבעת הצבעונית שבין שני המעגלים המקווקווים. נקודות כתומות/ורודות = אזורי PREV של הנתיב GRAVES → אליך, קו ירוק = הכיוון של התחנה שלך, קו אדום = מהתחנה שלך לנקודה החמה המומלצת (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	גובה השובלים והאפשרויות נבחרו ידנית. נבחרת אוטומטית כשאתה משנה את הגובה, את התיבה "מהמכ״ם", את השובלים הארוכים או את הזווית β.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	גובה קבוע של 102 km, שובלים ארוכים יותר כשהרדיאנט נמוך והזווית β, כמו ב-"Die Geometrie von Meteorscatterverbindungen" של DJ5HG (2004).\nהשוואה לעקומות שלו: בממוצע 2 dB מתחת, סטייה אופיינית 5 dB; שולטים הרדיאנטים המיושרים לאורך הנתיב.
 Quota scie      {0:F1} km (strato E){1}	גובה שובלים    {0:F1} km (שכבת E){1}
 Quota scie km	גובה שובלים km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	גובהי השובלים (Collm): השכיח {0:F1} km, ממוצע {1:F1}, חציון {2:F1}, סטיית תקן {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)	מכ״ם GRAVES (לשונית מכ״ם GRAVES)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	רדיאנט נמוך לאורך הנתיב: {0}. היעילות המחושבת נשארת נמוכה, אבל עם שובלים משיקים המיושרים לאורך הנתיב DJ5HG צופה החזרות נדירות וחזקות: כדאי להאזין.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	רדיאנט גבוה מדי (מעל {0}°): {1}. השובלים יורדים כמעט אנכית ומחזירים מעט לעבר הנתיב (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: פורט 7000 = CW ו-RTTY, פורט 7001 = FT8. התחברות עם אות הקריאה בלבד. ה-skimmers של RBN מפענחים לעתים רחוקות אופני MS: הוא שימושי בעיקר לספוטים עם <MS> בהערה.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	כללים ניסיוניים בין פסים (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	שחזור כרונולוגי · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB משתמש ב-GRAVES לספירות שעתיות של מטאורים: השווה את הפינגים שלך לצופים ב-143.050 MHz
@@ -252,26 +348,46 @@ RMOB {0} (scala a destra)	RMOB {0} (סולם ימני)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {1} שעות נקראו ב-{2} UTC
 RMOB – osservatori su 143,050 MHz	RMOB – צופים ב-143.050 MHz
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; עלונים חודשיים rmob.org/rmobtext (צופי GRAVES ב-143.050 MHz: הפלנטריום של ונציה, Faenza, Rovereto ואחרים)
+Raccolta dati	איסוף נתונים
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	המלצה ITU-R P.843-1 (1997): הזווית beta בין השובל למישור הנתיב, הרדיוס ההתחלתי של השובל, גובה ממוצע כפונקציה של התדר
 Radar GRAVES	מכ״ם GRAVES
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	מכ״ם המטאורים של Collm, אוניברסיטת לייפציג (LIM) ו-IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	רדיאנט:
+Raggio della mappa	רדיוס המפה
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	גזור את המעריך מקובץ ה-RMOB
 Ricevitore	מקלט
+Riconnessione tra {0} s	חיבור מחדש בעוד {0} s
+Riconnetti	התחבר מחדש
+Riepilogo dell'anno (ZHR misurati, GMN)	סיכום השנה (ZHR שנמדדו, GMN)
 Riga {0} ignorata (colonne insufficienti)	שורה {0} נדחתה (אין מספיק עמודות)
 Riga {0}: {1}	שורה {0}: {1}
-Riporta la volta celeste al tempo reale	החזר את כיפת השמיים לזמן אמת
+Riporta il momento del calcolo al tempo reale	החזר את זמן החישוב לזמן אמת
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	בהשוואה ל-144 MHz: מספר/עוצמה x {0:F3} ({1:+0.0;-0.0} dB), משך x {2:F2}. פינג מרבי לפי IARU ב-{3:F0} MHz: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) ו-"Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	גלגלת = זום, גרירה = הזזה, עכבר מעל ריבוע = QSO
-S	ד
+S	S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	נדחה: "{0}" נמצא, אבל התדר {1:F1} kHz אינו בתחום שנבחר.
+SCARTATO: frequenza sotto 27990,0 kHz.	נדחה: תדר מתחת ל-27990.0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	נדחה: מחוץ לחלונות MS ואין אף מילת מסנן.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	נדחה: ההערה מציינת התפשטות אחרת ({0}) ואין אופן MS.
 SCIAME PIÙ FAVOREVOLE	המטר הנוח ביותר
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	חתך - השובלים הסבירים ביותר כפי שנראים מהאנטנה לעבר תחנת ה-DX (אזימוט {0}°)
+SGO, Finlandia	SGO, פינלנד
 Scarica RMOB adesso	הורד RMOB עכשיו
 Scarica adesso	הורד עכשיו
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	השמט מיד שורות קלסטר מתחת ל-27990.0 kHz (הן אינן מופיעות בקונסולה ואינן נשמרות)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	סטיית האנטנה של הנקודות החמות מטבלת AMS של J. Richardson שמביא DJ5HG: 13° ב-1000 km, 11° ב-1250 km, 10° ב-1500 וב-2000 km. בטל את הסימון כדי להזין את המרחק ידנית (MSHV משתמש ב-150 km).
+Scia meteorica	שובל מטאורי
 Sciame	מטר
 Sciame più favorevole	המטר הנוח ביותר
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	המטר השימושי ביותר: {0} (ZHR {1}, יעילות {2} %)
 Sciami	מטרים
+Sciami in diretta	מטרים בשידור חי
+Sciami sopra l'orizzonte: {0}	מטרים מעל האופק: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	שובלים ארוכים יותר כשהרדיאנט נמוך (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	הקלד את שם צופה ה-RMOB כפי שהוא מופיע בשם הקובץ שלו (לדוגמה NOME_112026rmob.TXT -> NOME).
+Scrivi il nominativo per il login prima di connettere.	כתוב את אות הקריאה להתחברות לפני החיבור.
 Segnale minimo dBm	אות מינימלי dBm
 Sequenza del fascio	רצף האלומה
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	נדרשים גם נתוני Collm וגם קובץ RMOB של אותן שעות.
@@ -281,16 +397,30 @@ Sigla	קוד
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	אלה הקצוות הרחוקים ביותר של השמיים שרואות שתי התחנות, לא נקודות לכוון אליהן.
 Sorge	זריחה
 Sorgente Antielio	מקור אנטי-הליון
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	כבוי (זהיר): כל שובל נשקל בסינוס זווית ההגבהה של הרדיאנט, כי כשהרדיאנט נמוך נופלים פחות מטאורים לכל km².\nפעיל: כמו אצל DJ5HG (2004), כשהרדיאנט נמוך השובלים ארוכים יותר (העובי השימושי של השכבה, 15 km, חלקי סינוס ההגבהה, עד 100 km) ומקיימים לעתים קרובות יותר את חוק ההחזרה. שתי ההשפעות מקזזות זו את זו מעל כ-9° הגבהה: היעילות עם רדיאנט נמוך עולה, עם רדיאנט גבוה אינה משתנה.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	ספוטי MS מהלשונית "איסוף נתונים". לכל קשר הענן מראה היכן מתרכזים השובלים הסבירים ביותר עבור אותו נתיב ואותה שעה (החזרה מראתית, סכום המטרים הפעילים). עננים מקווקווים = מטאורים ספורדיים בלבד. ספוטים שאחת מתחנותיהם מחוץ למפה אינם מצוירים; אלה שהגיעו זה עתה (פחות מ-3 דקות) מהבהבים במשך דקה.
+Spot MS raccolti	ספוטי MS שנאספו
+Spot da mostrare	ספוטים להצגה
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	ספוטים של PSKReporter בשידור חי דרך MQTT (mqtt.pskreporter.info, שירות של M0LTE): ללא התחברות, הם מגיעים כבר עם הלוקייטורים של המשדר ושל הקולט. נושא אחד בכל שורה או מופרדים ב-;  תבנית pskr/filter/v2/band/mode/call tx/call rx/... (+ = כלשהו, # = השאר).
+Spot meteor scatter raccolti (i più recenti in alto)	ספוטי meteor scatter שנאספו (החדשים ביותר למעלה)
+Stazione	תחנה
 Stazione        {0}   quota {1:F0} m	תחנה          {0}   גובה {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	הערכה ניסיונית (כללי SM6FHZ): מטאורים/שעה ב-{0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; משך הפינגים x {4:F3}. פינג מרבי לפי IARU ב-{0:F0} MHz: {5:F0} ms. ערכים משוערים, להשוואה עם הניסיון בפס.{6}
+Svuota la tabella	רוקן את הטבלה
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	Swan Meteor Skyview של DL1DBC - swan.ms (ייחוס לגרפיקה של כיפת השמיים)
 Sì	כן
 Sì · settore {0}	כן · גזרה {0}
 TRATTA	נתיב
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	הנתיב מעבר לאופק השובל: עם שובלים בגובה {0:F1} km נקודת האמצע נמצאת {1:F1}° מתחת לאופק. נדרשים שובלים בגובה {2:F0} km לפחות: קשר אפשרי רק עם השובלים הגבוהים ביותר, היעילות וההנחתה בגבול המודל.
 Tauridi Nord	טאורידים צפוניים
 Tauridi Sud	טאורידים דרומיים
+Tavistock, Ontario (Canada)	Tavistock, אונטריו (קנדה)
+Tema	ערכת נושא
 Tempo reale	זמן אמת
 Tipo	סוג
+Traffico MS in diretta · {0}	תעבורת MS בשידור חי · {0}
+Traffico in diretta	תעבורה בשידור חי
+Traffico meteor scatter in diretta	תעבורת meteor scatter בשידור חי
 Tramonta	שקיעה
 Traslato	מותאם
 Traslato {0}	מותאם {0}
@@ -301,25 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	נתיב {0}: {1:F0} km, אזימוט {2:F0}
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	מעט מדי שעות משותפות ({0}) בין Collm לקובץ ה-RMOB.
 Tutti i file	כל הקבצים
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	USB על 143.049 MHz (צליל של כ-1 kHz) או 143.050 MHz, AGC איטי או כבוי, רוחב פס שמע של 2.4 kHz לפחות
+Univ. Lipsia / IAP Kühlungsborn	אוניברסיטת לייפציג / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	ספוט בחלונות אלה מתקבל גם ללא שם האופן, אלא אם ההערה מציינת התפשטות אחרת באחד מהסימונים האלה:
 Ursidi	אורסידים
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	חל על ספוטים מחוץ לחלונות ועל ספוטים עם סימון של התפשטות אחרת: הם נשמרים אם הם מכילים אחת מהמילים הפעילות, באותיות גדולות, קטנות או מעורבות. MSK144, FSK441, PSK2K, JTMS ו-JT6M הם אופנים ספרתיים המשמשים רק ל-meteor scatter: הספוט הוא בוודאות MS. <MS> מציין באופן כללי שהקשר נעשה דרך meteor scatter.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	הערכים הזהירים ביותר, הגדרת ההתחלה: גובה השובלים כפי שנמדד במכ״ם Collm (התיבה "מהמכ״ם"), שובלים רגילים, הזווית β פעילה.\nהשוואה לעקומות של DJ5HG (הקוודרנטידים, נתיבים מהמבורג): בממוצע 7 dB מתחת, עם אותה מגמה שעתית (סטיית צורה של כ-3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	ערכים זהירים: שובל החוצה את מישור הנתיב (β = 90°, המקרה הגרוע ביותר), כולל הרדיוס ההתחלתי של השובל (ITU-R P.843) בגובה הממוצע של ההדים לכל תדר
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	לעבר הנקודה החמה המומלצת של הנתיב GRAVES → אליך (חלונית נתיב), בהגבהה נמוכה
 Vista dall'alto (E a destra)	מבט על (מזרח מימין)
-Volta celeste: tempo reale	כיפת השמיים: זמן אמת
-Volta celeste: {0} UTC	כיפת השמיים: {0} UTC
-Waterfall	מפל
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – משדר ב-Broye-lès-Pesmes (47.348° N 5.515° E)
 YA-MS - nessuna connessione	YA-MS - אין חיבור
 YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	YAEC של IC8TEM – לשונית מכ״ם GRAVES (הסקיצה שממנה נגזרה)
 ZHR ora	ZHR כעת
 ZONA UTILE NEL FASCIO DI GRAVES	האזור השימושי באלומת GRAVES
+a DESTRA guardando verso il corrispondente	מימין במבט לעבר תחנת ה-DX
+a SINISTRA guardando verso il corrispondente	משמאל במבט לעבר תחנת ה-DX
+a cura di	מאת
 a cura di Costantino IC8TEM	מאת Costantino IC8TEM
+accettati per finestra di frequenza: {0}	התקבלו לפי חלון תדר: {0}
+adesso	עכשיו
 adesso {0}	עכשיו {0}
 adesso · ancora {0:F1} s	עכשיו · נותרו {0:F1} s
+aggiornamento una volta al giorno	מתעדכן פעם ביום
 alfa-Capricornidi	אלפא קפריקורנידים
 alfa-Centauridi	אלפא קנטאורידים
 alfa-Monocerotidi	אלפא מונוצרוטידים
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: שורה נדחתה: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	אנטנה לעבר {0}: אזימוט {1:F0}° · הגבהה {2:F1}°\nGRAVES בקו ישיר: אזימוט {3:F0}°
+antenna {0}°	אנטנה {0}°
+auto (AMS)	אוטומטי (AMS)
 azimut rispetto al corrispondente	אזימוט ביחס לתחנת ה-DX
 beta-Tauridi diurne	בטא טאורידים יומיים
 buono	טוב
@@ -328,10 +469,14 @@ calcolo della tratta GRAVES → te in corso...	מחשב את הנתיב GRAVES �
 circumpolare	סובב קוטב
 clic destro =	לחיצה ימנית =
 clic sinistro =	לחיצה שמאלית =
+collegamento via meteor scatter	קשר דרך meteor scatter
+comandi dopo il login, separati da ;	פקודות אחרי ההתחברות, מופרדות ב-;
+comando da inviare (es. sh/dx 20)	פקודה לשליחה (לדוגמה sh/dx 20)
 confermato (QSL o LoTW)	מאושר (QSL או LoTW)
 copia locale del {0} UTC	עותק מקומי מ-{0} UTC
 corrispondente	תחנת DX
 dal radar	מהמכ״ם
+dati CC BY 4.0 (Vida et al. 2021, 2022)	נתונים CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud	דלתא אקווארידים דרומיים
 eco	הד
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	הדים צפויים ≈ {0:F0}/שעה (ניסיוני: תחזית × אלומה {1:F0} %)
@@ -350,10 +495,12 @@ errore: {0}	שגיאה: {0}
 eta-Aquaridi	אטא אקווארידים
 eta-Eridanidi	אטא ארידנידים
 eta-Liridi	אטא לירידים
+finestra {0} kHz	חלון {0} kHz
 fuori dal lobo	מחוץ לאונה
 gamma-Draconidi di luglio	גמא דרקונידים של יולי
 gamma-Ursae Minoridi	גמא אורסה מינורידים
 gradi	מעלות
+hot spot (solo sporadiche) {0}	hot spot (ספורדיים בלבד) {0}
 il giorno scelto non è oggi	היום שנבחר אינו היום
 indice	מדד
 indice sciami tratta (scala a destra)	מדד המטרים לנתיב (סולם ימני)
@@ -363,13 +510,16 @@ invariato (controllato alle {0} UTC)	ללא שינוי (נבדק ב-{0} UTC)
 kappa-Cygnidi	קאפה ציגנידים
 kappa-Leonidi diurne	קאפה לאונידים יומיים
 la mia stazione	התחנה שלי
+la tua stazione	התחנה שלך
 lato prevalente {0} ({1:F0}%)	צד דומיננטי {0} ({1:F0}%)
 lavorato	בוצע קשר
 lim. A	גבול A
 lim. B	גבול B
 limiti zona comune	גבולות האזור המשותף
+linguetta "{0}"	לשונית "{0}"
 lobo antenna	אונת האנטנה
 lobo {0}°	אונה {0}°
+locale	מקומי
 mai scaricato	מעולם לא הורד
 mappa: bordo = {0} km dalla stazione	מפה: שוליים = {0} km מהתחנה
 max Σ {0:F1} alle {1:00}:30	מקס׳ Σ {0:F1} ב-{1:00}:30
@@ -379,20 +529,29 @@ meteore per km di quota	מטאורים לכל km גובה
 meteore/ora radar	מטאורים/שעה מכ״ם
 meteore/ora stimate	מטאורים/שעה משוערים
 miglior punt.	כיוון מיטבי
+misura il flusso e lo ZHR di ogni sciame attivo	מודד את השטף וה-ZHR של כל מטר פעיל
 mobile	נע
+modo digitale MS	אופן ספרתי MS
 nessun ADIF caricato	לא נטען ADIF
+nessun dato radar: vedi Live e dati real-time › Flusso radar	אין נתוני מכ״ם: ראה חי ונתונים בזמן אמת › שטף מכ״ם
 nessun file RMOB caricato	לא נטען קובץ RMOB
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	אף צעד של האלומה אינו מאיר את האזור השימושי\nשובל נקלט ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	אין רשת פעילה
 nessuno sciame utile adesso: hot spot più adatto al fascio	אין מטר שימושי כעת: הנקודה החמה המתאימה ביותר לאלומה
 nessuno sciame utile in questo giorno	אין מטר שימושי ביום זה
 nessuno sciame utile in questo momento	אין מטר שימושי ברגע זה
+nominativo	אות קריאה
+nuova parola	מילה חדשה
 nuovo dato	נתון חדש
 nuovo dato alle {0} UTC	נתון חדש ב-{0} UTC
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	לא ניתן לחשב ענן עבור נתיב זה (קצר מדי או ארוך מדי)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	ענן {0}: {1:F0} % מההחזרות, {2:F0} × {3:F0} km, ציר ב-{4:F0}°
 omega-Cetidi Nord diurne	אומגה צטידים צפוניים יומיים
 omega-Cetidi Sud diurne	אומגה צטידים דרומיים יומיים
 orizzonte del fascio	אופק האלומה
 orologio del PC sincronizzato	שעון המחשב מסונכרן
+osservatori RMOB che ascoltano GRAVES	משקיפי RMOB המאזינים ל-GRAVES
+parola aggiunta	מילה נוספה
 passi	צעדים
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	צעד {0}{1} כל {2:F1} s · ב-{3} ...\nשובל נקלט ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	מסלול רדיאנט
@@ -400,52 +559,75 @@ pi-Puppidi	פאי פופידים
 prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)	הורדה אוטומטית כל 5 דקות (להפעיל רק ברשות RMOB)
 previsione {0} MHz /ora	תחזית {0} MHz /שעה
 puntamento migliore {0}° / {1}°	כיוון מיטבי {0}° / {1}°
+puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	כוון ל-{0:F0}° ({1:+0;-0}° מתחנת ה-DX), הגבהה {2:F1}°, נקודה חמה במרחק {3:F0} km
 quasi inattivo	כמעט לא פעיל
 quota m	גובה m
+radar SKiYMET 36,2 MHz	מכ״ם SKiYMET 36.2 MHz
+radar meteorico 17-38 MHz, orbite	מכ״ם מטאורים 17-38 MHz, מסלולים
+radar meteorico 36,9 MHz	מכ״ם מטאורים 36.9 MHz
 radio, diurno	רדיו, יומי
 rete assente: {0}	אין רשת: {0}
 riflessioni/ora	החזרות/שעה
 riflessioni/ora a {0} MHz	החזרות/שעה ב-{0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	שורות שהתקבלו          {0}\nספוטים שנקראו          {1}\nספוטי MS שהתקבלו       {2}\nנדחו (מילה)            {3}\nנדחו (תחום)            {4}\nספוטי MS בשעה האחרונה  {5}
+righe sotto 27990 kHz scartate: {0}	שורות מתחת ל-27990 kHz שהושמטו: {0}
+righe {0}, spot letti {1}, MS {2}	שורות {0}, ספוטים שנקראו {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	סולם שנקרא מהגרף: 0-{0} מטאורים/שעה
 scala non letta	הסולם לא נקרא
 scala tarata 0-1200 meteore/ora	סולם מכויל 0-1200 מטאורים/שעה
 scarso	חלש
 scartati	נדחו
+scartati per altra propagazione: {0}	נדחו בשל התפשטות אחרת: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	המטר הטוב ביותר {0} {1}: ZHR {2:F0} × יעיל. {3:F0} %
 scorrimento sciame	היסחפות המטר
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	קטעים = שובלים (±10 km סביב הגובה) המכוונים לעבר הרדיאנט; עבים יותר = סבירים יותר
 sempre sotto	תמיד מתחת
 sigma-Hydridi	סיגמא הידרידים
+sporadiche	ספורדיים
 stima a {0} MHz (scala a destra)	הערכה ב-{0} MHz (סולם ימני)
-sì	כן
 tra {0:F1} s	בעוד {0:F1} s
 traslato a {0} MHz (scala a destra)	מותאם ל-{0} MHz (סולם ימני)
+trasmettitore 143,050 MHz	משדר 143.050 MHz
 tratta / DX	נתיב / DX
 tratta GRAVES → te non calcolata	הנתיב GRAVES → אליך לא חושב
 tu {0}	אתה {0}
+ultima ora	השעה האחרונה
+ultime 24 ore	24 השעות האחרונות
+ultime {0} ore	{0} השעות האחרונות
+ultimi {0} minuti	{0} הדקות האחרונות
 var.	משתנה
 varie (tab. 6 IMO)	שונים (IMO טבלה 6)
+versione	גרסה
 visuale	חזותי
 zeta-Perseidi diurne	זטא פרסאידים יומיים
 zona PREV	אזור PREV
 {0:00}:00 → {1:00}:00 UTC · {2} h	{0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)	{0:00}:00-{0:00}:59 UTC\nמדד הנתיב {1:F1}\nצד דומיננטי {2} ({3:F0}%)
 {0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}	{0:00}:{1:00} UTC - מדד {2:F1}\nצד דומיננטי {3}\n{4}
+{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % מההחזרות מגיעות מצד זה
 {0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)	{0:F0} MHz, החזרות/שעה צפויות\nכעת {1:F0} - בעוד 1 h {2} - בעוד 2 h {3}\nניסיוני (Collm, כללי SM6FHZ)
 {0:F0} km	{0:F0} km
 {0} (dal radiante, az. {1}°)	{0} (מהרדיאנט, אזימוט {1}°)
 {0} (in rosso sulla mappa)	{0} (באדום במפה)
 {0} (~{1} calc.)	{0} (~{1} מחושב)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	{0} QSO נקראו, {1} ריבועי QSO בפסים 50-432 MHz, {2} QSO נדחו (פסים אחרים או ללא ריבוע).
-{0} UTC (ora della volta celeste)	{0} UTC (זמן כיפת השמיים)
+{0} UTC (momento del calcolo)	{0} UTC (זמן החישוב)
 {0} UTC (tempo reale)	{0} UTC (זמן אמת)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	{0} מומלץ כעת: אזימוט {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	{0} מומלץ כעת: אזימוט {1}° ({2}% מההחזרות הצפויות)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} קשרים על המפה · {1} מחוץ למפה · {2} ללא לוקייטור
+{0} dB rispetto al riferimento di DJ5HG	{0} dB ביחס לייחוס של DJ5HG
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	{0} מ-GRAVES: אזימוט {1:F1}° · הגבהה {2:F1}° (צעד {3} מתוך 6)
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} מ-GRAVES: אזימוט {1:F1}° · הגבהה {2:F1}° (גזרות מ-90° עד 270°, אלומה עד כ-25°)
 {0} h	{0} h
+{0} h rispetto ad adesso	{0} h ביחס לעכשיו
+{0} km dalla tua stazione	{0} km מהתחנה שלך
+{0} spot MS in memoria	{0} ספוטי MS בזיכרון
+{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % ב-{3} UTC ({4} שעון מקומי)
 {0} · zona	{0} · אזור
-{0}: non lavorato	{0}: לא בוצע קשר
+{0}: non lavorato	{0}: לא עבדת
 {0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  אזימוט ממני {2:F0}° (סטייה {3:+0;-0}°), מתחנת ה-DX {4:F0}°, מרחק {5:F0} km
 {0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  אזימוט ממני {2:F1}° (סטייה {3:+0.0;-0.0}° מהכיוון הישיר), מתחנת ה-DX {4:F0}°, מרחק {5:F0} km, הגבהה {6:F1}°
 {0}: {1} QSO	{0}: {1} QSO
@@ -455,150 +637,73 @@ zona PREV	אזור PREV
 Σ ZHR x effic.	Σ ZHR x יעיל.
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (שמאל)
-Chiaro	בהיר
-Notte	לילה
-Nero	שחור
-Pastello azzurro	פסטל תכלת
-Pastello arancione	פסטל כתום
-Pastello acquamarina	פסטל אקוומרין
-Pastello verde	פסטל ירוק
-Pastello rosa	פסטל ורוד
-Pastello lilla	פסטל לילך
-Pastello indaco	פסטל אינדיגו
-Pastello marrone	פסטל חום
-Scia meteorica	שובל מטאורי
-Tema	ערכת נושא
-locale	מקומי
-{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % ב-{3} UTC ({4} שעון מקומי)
-a SINISTRA guardando verso il corrispondente	משמאל במבט לעבר תחנת ה-DX
-a DESTRA guardando verso il corrispondente	מימין במבט לעבר תחנת ה-DX
-{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % מההחזרות מגיעות מצד זה
-puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	כוון ל-{0:F0}° ({1:+0;-0}° מתחנת ה-DX), הגבהה {2:F1}°, נקודה חמה במרחק {3:F0} km
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	משמאל: השטף וה-ZHR שנמדדו של המטרים הפעילים מ-Global Meteor Network (מצלמות, עדכון יומי; קו אדום = העדכון האחרון). מימין: רדיאנטים שזוהו על ידי מכ״ם CMOR (קנדה, 43° N) כמעט בזמן אמת, כולל מטרים יומיים; למטה, אותם רדיאנטים צבועים לפי מהירות.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: מפות רדיאנטים
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	היכן נמצאים מקורות הנתונים החיים. עיגולים מקווקווים = אזור השמיים שהמכ״ם רואה (כ-300 km סביב התחנה, שובלים בגובה 90 km): אף מכ״ם אינו מביט בשמיים שמעל הנתיב שלך, הנתונים מראים עד כמה המטר פעיל. קווים מנוקדים = מרחק מהתחנה שלך.
-Europa	אירופה
-GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN ו-CMOR ב-{0} UTC: {1} שגיאות ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN ו-CMOR נבדקו ב-{0} UTC ({1} קבצים חדשים). נתוני GMN: CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: השטף וה-ZHR שנמדדו של המטרים. נתונים CC BY 4.0; Vida et al. 2021, MNRAS 506(4), ו-Vida et al. 2022, MNRAS 515(2)
-Mondo	העולם
-Nessun dato GMN: premi "Scarica adesso".	אין נתוני GMN: לחץ "הורד עכשיו".
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	זו אינה נקודה על המפה: זוהי רשת עולמית של מצלמות (רובן של חובבים) הפזורות בארצות רבות בכל היבשות.
-Riepilogo dell'anno (ZHR misurati, GMN)	סיכום השנה (ZHR שנמדדו, GMN)
-SGO, Finlandia	SGO, פינלנד
-Sciami in diretta	מטרים בזמן אמת
-Tavistock, Ontario (Canada)	Tavistock, אונטריו (קנדה)
-Univ. Lipsia / IAP Kühlungsborn	אוניברסיטת לייפציג / IAP Kühlungsborn
-aggiornamento una volta al giorno	מתעדכן פעם ביום
-dati CC BY 4.0 (Vida et al. 2021, 2022)	נתונים CC BY 4.0 (Vida et al. 2021, 2022)
-la tua stazione	התחנה שלך
-linguetta "{0}"	לשונית "{0}"
-misura il flusso e lo ZHR di ogni sciame attivo	מודד את השטף וה-ZHR של כל מטר פעיל
-osservatori RMOB che ascoltano GRAVES	משקיפי RMOB המאזינים ל-GRAVES
-radar SKiYMET 36,2 MHz	מכ״ם SKiYMET 36.2 MHz
-radar meteorico 17-38 MHz, orbite	מכ״ם מטאורים 17-38 MHz, מסלולים
-radar meteorico 36,9 MHz	מכ״ם מטאורים 36.9 MHz
-trasmettitore 143,050 MHz	משדר 143.050 MHz
-{0} km dalla tua stazione	{0} km מהתחנה שלך
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	התקבל עבור "{0}": {1} מאת {2}, {3} MHz
-Aggiungi	הוסף
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	גם לוקייטורים לא מדויקים (4 תווים בלבד) נלקחים מ-CALL3, כאשר ב-CALL3 יש לוקייטור בן 6 תווים.
-Apri la cartella degli spot	פתח את תיקיית הספוטים
-Bande (MHz)	פסים (MHz)
-CALL3: caricamento...	CALL3: טוען...
-CALL3: nessun archivio (data/call3.txt)	CALL3: אין מאגר (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} אותות קריאה
-Chiuso	סגור
-Cluster con PSKReporter	Cluster עם PSKReporter
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	Cluster של DM4X עם ספוטים של PSKReporter (dm4x.ddns.net, פורט 8500): לכאן מגיעים פענוחי MSK144 של WSJT-X ו-MSHV. לחלופין HamAlert (hamalert.org 7300, נדרש חשבון עם טריגרים).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster שנבחר על ידי המשתמש. ב-ON0DXK פסי ה-VHF מסוננים: מאפשרים אותם עם set/filter dxbm/pass 6 (אחר כך 4, 2...). דוגמה נוספת: hamqth.com 7300.
-Commento	הערה
-Connetti	התחבר
-Connetti all'avvio	התחבר בהפעלה
-Contatori	מונים
-DX cluster a scelta	DX cluster לבחירתך
-Disconnesso	מנותק
-Disconnetti	התנתק
-Filtro	מסנן
-Filtro degli spot meteor scatter	מסנן ספוטי meteor scatter
-Fonte	מקור
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	ספוטים שהתקבלו נשמרים ב-data/spot_ms, קובץ CSV אחד ליום. לוקייטורים חסרים נלקחים ממאגר CALL3 (data/call3.txt).
-Host	שרת
-Importa CALL3.TXT...	ייבא CALL3.TXT...
-Indirizzo mancante	כתובת חסרה
-Invia	שלח
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	המילה "{0}" קיימת, אבל השורה אינה ספוט "DX de ..." תקין.
-Loc DX	לוקייטור DX
-Loc spotter	לוקייטור המדווח
-Manca il nominativo per il login	חסר אות קריאה להתחברות
-Nominativo per il login	אות קריאה להתחברות
-Non connesso	לא מחובר
-Nuovo tentativo tra 30 s	ניסיון נוסף בעוד 30 s
-Porta	פורט
-Prova del filtro	בדיקת המסנן
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: פורט 7000 = CW ו-RTTY, פורט 7001 = FT8. התחברות עם אות הקריאה בלבד. ה-skimmers של RBN מפענחים לעתים רחוקות אופני MS: הוא שימושי בעיקר לספוטים עם <MS> בהערה.
-Raccolta dati	איסוף נתונים
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	התחבר מחדש
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	נדחה: "{0}" נמצא, אבל התדר {1:F1} kHz אינו בפס שנבחר.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	השמט מיד שורות קלסטר מתחת ל-27990.0 kHz (הן אינן מופיעות בקונסולה ואינן נשמרות)
-Scrivi il nominativo per il login prima di connettere.	כתוב את אות הקריאה להתחברות לפני החיבור.
-Spot meteor scatter raccolti (i più recenti in alto)	ספוטי meteor scatter שנאספו (החדשים ביותר למעלה)
-Svuota la tabella	רוקן את הטבלה
-collegamento via meteor scatter	קשר דרך meteor scatter
-comandi dopo il login, separati da ;	פקודות אחרי ההתחברות, מופרדות ב-;
-comando da inviare (es. sh/dx 20)	פקודה לשליחה (לדוגמה sh/dx 20)
-modo digitale MS	אופן ספרתי MS
-nominativo	אות קריאה
-nuova parola	מילה חדשה
-parola aggiunta	מילה נוספה
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	שורות שהתקבלו          {0}\nספוטים שנקראו          {1}\nספוטי MS שהתקבלו       {2}\nנדחו (מילה)            {3}\nנדחו (פס)              {4}\nספוטי MS בשעה האחרונה  {5}
-righe sotto 27990 kHz scartate: {0}	שורות מתחת ל-27990 kHz שהושמטו: {0}
-righe {0}, spot letti {1}, MS {2}	שורות {0}, ספוטים שנקראו {1}, MS {2}
-{0} spot MS in memoria	{0} ספוטי MS בזיכרון
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	קריטריון 1: תדרים אופייניים של ספוטי meteor scatter (kHz)
-2° criterio: modi digitali MS e <MS>	קריטריון 2: אופנים ספרתיים של MS ו-<MS>
-La riga non è uno spot "DX de ..." valido.	השורה אינה ספוט "DX de ..." תקין.
-SCARTATO: frequenza sotto 27990,0 kHz.	נדחה: תדר מתחת ל-27990.0 kHz.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	נדחה: מחוץ לחלונות MS ואין אף מילת מסנן.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	נדחה: ההערה מציינת התפשטות אחרת ({0}) ואין אופן MS.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	ספוט בחלונות אלה מתקבל גם ללא שם האופן, אלא אם ההערה מציינת התפשטות אחרת באחד מהסימונים האלה:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	חל על ספוטים מחוץ לחלונות ועל ספוטים עם סימון של התפשטות אחרת: הם נשמרים אם הם מכילים אחת מהמילים הפעילות, באותיות גדולות, קטנות או מעורבות. MSK144, FSK441, PSK2K, JTMS ו-JT6M הם אופנים ספרתיים המשמשים רק ל-meteor scatter: הספוט הוא בוודאות MS. <MS> מציין באופן כללי שהקשר נעשה דרך meteor scatter.
-accettati per finestra di frequenza: {0}	התקבלו לפי חלון תדר: {0}
-finestra {0} kHz	חלון {0} kHz
-scartati per altra propagazione: {0}	נדחו בשל התפשטות אחרת: {0}
-Spot MS raccolti	ספוטי MS שנאספו
-antenna {0}°	אנטנה {0}°
-Calcolo previsionale	חישוב תחזית
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	לחץ על נתיב במפה או על שורה בטבלה לפרטי הקשר והענן שלו.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	מסמכים טכניים
-Foto	צילום
-Live e dati real-time	חי ונתונים בזמן אמת
-Mappa dei radar europei	מפת המכ״מים האירופיים
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	אין נתוני מכ״ם: הורד אותם מתת-הלשונית חי ונתונים בזמן אמת › שטף מכ״ם.
-Nuvola	ענן
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	תחזית וחישוב בזמן אמת של יעילות מטרי המטאורים עבור meteor scatter
-Raggio della mappa	רדיוס המפה
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	ספוטי MS מהלשונית "איסוף נתונים". לכל קשר הענן מראה היכן מתרכזים השובלים הסבירים ביותר עבור אותו נתיב ואותה שעה (החזרה מראתית, סכום המטרים הפעילים). עננים מקווקווים = מטאורים ספורדיים בלבד. ספוטים שאחת מתחנותיהם מחוץ למפה אינם מצוירים; אלה שהגיעו זה עתה (פחות מ-3 דקות) מהבהבים במשך דקה.
-Spot da mostrare	ספוטים להצגה
-Stazione	תחנה
-Traffico MS in diretta · {0}	תעבורת MS בזמן אמת · {0}
-Traffico in diretta	תעבורה בזמן אמת
-Traffico meteor scatter in diretta	תעבורת meteor scatter בזמן אמת
-a cura di	מאת
-hot spot (solo sporadiche) {0}	hot spot (ספורדיים בלבד) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	אין נתוני מכ״ם: ראה חי ונתונים בזמן אמת › שטף מכ״ם
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	לא ניתן לחשב ענן עבור נתיב זה (קצר מדי או ארוך מדי)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	ענן {0}: {1:F0} % מההחזרות, {2:F0} × {3:F0} km, ציר ב-{4:F0}°
-sporadiche	ספורדיים
-ultima ora	השעה האחרונה
-ultime 24 ore	24 השעות האחרונות
-ultime {0} ore	{0} השעות האחרונות
-ultimi {0} minuti	{0} הדקות האחרונות
-versione	גרסה
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} קשרים על המפה · {1} מחוץ למפה · {2} ללא לוקייטור
+FONTE	מקור
+RILIEVO	בדיקה
+SCELTA	בחירה
+(sopra 144 MHz nessuna misura: λ²)	(אין מדידות מעל 144 MHz: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	איך משך הפינגים משתנה מתחום לתחום.\nתאורטי (זהיר, ברירת מחדל): המשך יחסי ל-λ² (McKinley 1961; הכלל של SM6FHZ): מ-50 ל-144 MHz הפינגים מתקצרים פי 8.\nנצפה: חציונים שמדד NN4SA (EM64) במהלך הפרסאידים 2026 ב-MSQP של HamSCI (R. Suggs NN4NT): 148 ms ב-28 MHz, 78 ms ב-50 MHz, 53 ms ב-144 MHz; מ-50 ל-144 MHz הפינגים מתקצרים רק פי 1.5. תחנת קליטה אחת, ניתוח ראשוני; מעל 144 MHz אין מדידות ומשתמשים ב-λ².
+Durata dei ping tra le bande	משך הפינגים בין התחומים
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	משך נצפה (HamSCI MSQP, NN4SA, פרסאידים 2026; חציונים 148 / 78 / 53 ms ב-28 / 50 / 144 MHz): כ-{0:F0} ms ב-{1:F0} MHz, x {2:F2} ביחס ל-144 MHz{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	משך לפי המדידות של HamSCI MSQP (NN4SA, פרסאידים 2026) במקום λ²: x {0:F3}, כלומר הד של 1 s ב-{1:F1} MHz נמשך כ-{2:F0} ms ב-{3:F0} MHz.
+Raggio iniziale della scia	רדיוס התחלתי של השובל
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	רדיוס התחלתי של השובל r0: ככל שהוא גדול יותר, כך ההפסד בתדרים גבוהים גדול יותר.\nכפול מערך ה-ITU (זהיר, ברירת מחדל): מכ"ם CMOR ב-17, 29 ו-38 MHz מוצא r0 של 0.5-2 m בין 85 ל-95 km, לרוב 1-1.5 m, עם פיזור של פי שניים; בערך כפול מהמדידות הקודמות (Stober ואחרים 2021).\nITU-R P.843: log10 r0 = 0.035 h − 3.45 (0.5 m ב-90 km), ערך ממוצע.\nלא נכלל: בלי גורם הרדיוס ההתחלתי.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	רדיוס התחלתי: עם הערך הממוצע של ITU-R P.843 (r0 = {0:F2} m) הגורם היה {1:F1} dB; הבחירה הנוכחית {2}. מדידות CMOR: r0 של 0.5-2 m בין 85 ל-95 km, פיזור של פי שניים (Stober ואחרים 2021)
+doppio dell'ITU (Stober 2021, prudente)	כפול מערך ה-ITU (Stober 2021, זהיר)
+escluso	לא נכלל
+osservata (HamSCI MSQP, NN4SA 2026)	נצפה (HamSCI MSQP, NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	תאורטי λ² (McKinley, SM6FHZ; זהיר)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	מוסיף מתחת לכל מטר את השורה "קלאסי": פסק הכלל של חובבי הרדיו, מחושב בנקודת האמצע של הנתיב.\n✗ הקורן מתחת לאופק; ◐ גבולי (הקורן מתחת ל-15° או מעל 70°, או פחות מ-30° מכיוון הנתיב); ● טוב; ★ הטוב ביותר (הקורן בין 15° ל-70° ויותר מ-60° מכיוון הנתיב).\nספים כמו ב-meteor-mcp ‏(qso-graph, ‏2026); אותו רעיון כמו בנוסחה של DH9GCD ובכללים של SM6FHZ. אינו משנה את החישוב: נועד להשוות את שתי הגישות לזווית β.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	מחשב k = 3.75·log10 r לכל מטר הפעיל עכשיו (r מטבלת ה-GMN, אחרת מקטלוג ה-IMO) ולוקח ממוצע משוקלל ב-ZHR.\nתאוריה: עם מדד המסה s = 1 + 2.5·log10 r, מספר השובלים מעל סף קבוע משתנה כמו λ^(1.5·(s − 1)) ‏(IZ5TEK, ‏OH5IY).\nברירת המחדל נשארת k = 3 (כלל הניסיון של SM6FHZ), זהיר יותר: k נמוך יותר חוזה יותר החזרות בתדרים גבוהים.\nשימו לב: הספירות של Collm הן ברובן מטאורים ספורדיים, ש-GMN אינו מפרסם עבורם r.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	ספירת מצלמות, לא שטף: תלויה בכמה תחנות יש שמיים בהירים וחשוכים.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	המרחק בין הקורן של התוכנה לקורנים של MDC: חציון {0:F1}°, מרבי {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	שתי גישות לגאומטריה, עם מקורות שונים.\nמופעל (זהיר, ברירת מחדל): הנוסחה המלאה של McKinley ‏(1961) ו-ITU-R P.843, ‏1 / (1 − cos²β sin²φ), כאשר β היא הזווית בין השובל למישור הנתיב. שובלים החוצים את המישור שווים 10-15 dB פחות מאלה השוכבים בו, ואף שובל אינו מוערך יתר על המידה: גוברים קורנים המיושרים עם הנתיב. בבחירה זו YA-MS עוקבת טוב יותר אחר צורת העקומות השעתיות של DJ5HG ‏(2004).\nכבוי: כל שובל נספר כאילו שכב במישור הנתיב (β = 0), כמו עד גרסה 1.6. חל הכלל הקלאסי של חובבי הרדיו: הקורן הטוב ביותר בגובה 15-70° ורוחבי לנתיב, קורן מיושר הוא גבולי (SM6FHZ, ‏DH9GCD, ‏meteor-mcp של qso-graph).\nשתי הגישות טרם הושוו למדידות בלתי תלויות: התיבה "פסק קלאסי" מציגה שעה אחר שעה את פסק הכלל הקלאסי מתחת ליעילות.
+GMN oggi	GMN היום
+Giudizio classico	פסק קלאסי
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: ‏{0} מסלולים מאומתים מ-{1} עד {2} UTC, מהם {3} ספורדיים. ספירת מצלמות, לא שטף. נתונים CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ‏({0}): ‏{1} פתרונות. חציונים: λ ‏{2:F1}°, עלייה ישרה {3:F1}°, נטייה {4:+0.0;-0.0}°, v ‏{5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: פתרונות
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	ממוצע משוקלל ב-ZHR: ‏k = {0:F2} (כלל SM6FHZ: ‏3, זהיר יותר).\n\nלהחיל את המעריך הזה?
+Nessuno sciame attivo con un indice di popolazione valido.	אין מטר פעיל עם מדד אוכלוסייה תקף.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	מסלולים שאומתו על ידי GMN מ-{0} עד {1} UTC: ‏{2} (ספורדיים {3})
+classico	קלאסי
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3.75·log10 r = {0}, עם r = {1} ({2}). כלל הניסיון של SM6FHZ משתמש ב-k = 3, זהיר יותר.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = מעריך המרת התדר ממדד האוכלוסייה r ‏(GMN אם זמין, אחרת IMO): ‏k = 3.75·log10 r. IAU MDC: פתרונות שפורסמו בקטלוג של IAU Meteor Data Center; ‏Δ = קטלוג ה-IMO של התוכנה פחות חציון פתרונות ה-MDC (הקורן מושווה באותו אורך שמש). GMN היום: מסלולים שאומתו בקובץ היומי האחרון של Global Meteor Network (ספירה, לא שטף).
+k dagli indici di popolazione	k ממדדי האוכלוסייה
+Δ radiante	Δ קורן
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	שתי גישות לגאומטריה, עם מקורות שונים.\nמופעל (זהיר, ברירת מחדל): הנוסחה המלאה של McKinley ‏(1961) ו-ITU-R P.843, ‏1 / (1 − cos²β sin²φ), כאשר β היא הזווית בין השובל למישור הנתיב. שובלים החוצים את המישור שווים 10-15 dB פחות מאלה השוכבים בו, ואף שובל אינו מוערך יתר על המידה: גוברים קורנים המיושרים עם הנתיב. בבחירה זו YA-MS עוקבת טוב יותר אחר צורת העקומות השעתיות של DJ5HG ‏(2004).\nכבוי: כל שובל נספר כאילו שכב במישור הנתיב (β = 0), כמו עד גרסה 1.6. חל הכלל הקלאסי של חובבי הרדיו: הקורן הטוב ביותר בגובה 15-70° ורוחבי לנתיב, קורן מיושר הוא גבולי (SM6FHZ, ‏DH9GCD, ‏meteor-mcp של qso-graph).\nהשוואה ראשונה לספירות BRAMS ב-Sonneberg (פרסאידים 2026, ‏471 km) אינה מבחינה ביניהן: התיבה "פסק קלאסי" מציגה שעה אחר שעה את פסק הכלל הקלאסי מתחת ליעילות.
+... e altri {0}	... ועוד {0}
+Aggiorna adesso	עדכן עכשיו
+Aggiornamenti	עדכונים
+Aggiornamento disponibile	יש עדכון זמין
+Aggiornamento installato	העדכון הותקן
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	חלק מהשינויים נראים רק אחרי הפעלה מחדש של התוכנה.
+Apri la pagina delle release	פתח את דף הגרסאות
+Chiudi	סגור
+Continua senza	המשך בלעדיהם
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	בדוק את החיבור לאינטרנט, או הורד שוב את החבילה המלאה מדף הגרסאות.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	בודק ב-GitHub אם יש גרסה חדשה יותר של YA-MS ואם יש, מתקין אותה; בודק גם שלא חסרים קבצי תוכנה.
+Controllo degli aggiornamenti su GitHub...	בודק עדכונים ב-GitHub...
+File mancanti	קבצים חסרים
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	התוכנה מורידה את החבילה {0}, מחליפה את הקבצים שלה, שומרת את התיקייה data (קבצי תוכנה שהשתנו מועתקים קודם ל-data/backup) ומופעלת מחדש.
+Installazione dell'aggiornamento...	מתקין את העדכון...
+L'aggiornamento non è riuscito: {0}	העדכון נכשל: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	חסרים {0} קבצי תוכנה:\n{1}\n\nלהוריד אותם מ-GitHub (גרסה {2})?
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	בגרסה אין חבילה למערכת הזו ({0}): הורד אותה ידנית מדף הגרסאות.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	אין לי אפשרות לכתוב בתיקיית התוכנה ({0}): התקן את הגרסה החדשה ידנית.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	לא ניתן לקרוא את הגרסאות שפורסמו ב-GitHub: {0}
+Più tardi	מאוחר יותר
+Riavvia YA-MS a mano: {0}	הפעל מחדש את YA-MS ידנית: {0}
+Salta questa versione	דלג על גרסה זו
+Scarica i file mancanti	הורד את הקבצים החסרים
+Scaricamento dei file mancanti: {0} di {1}	מוריד קבצים חסרים: {0} מתוך {1}
+Scaricamento dell'aggiornamento...	מוריד את העדכון...
+Scaricamento dell'aggiornamento: {0} %	מוריד את העדכון: {0} %
+Scaricati {0} file mancanti.	הורדו {0} קבצים חסרים.
+Scaricati {0} file su {1}.	הורדו {0} קבצים מתוך {1}.
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} הותקנה. התוכנה תופעל מחדש עכשיו.
+YA-MS è aggiornato (versione {0}).	YA-MS מעודכנת (גרסה {0}).
+YA-MS.app non trovato nel pacchetto	YA-MS.app לא נמצא בחבילה
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	הוחלפו {0} קבצים בתיקייה data: העותקים הקודמים נמצאים ב-data/backup/v{1}.
+{0} non trovato nel pacchetto	{0} לא נמצא בחבילה
+È disponibile YA-MS {0} (questa è la {1}).	YA-MS {0} זמינה (זו גרסה {1}).

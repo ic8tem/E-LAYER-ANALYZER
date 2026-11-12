@@ -16,6 +16,7 @@ namespace YAMS
     {
         public string[] Cells;
         public Color? Fore;          // colore del testo della riga (null = Pal.Fore)
+        public Color? Back;          // velatura di evidenziazione della riga (null = nessuna)
         public Color?[] CellBack;    // sfondo per cella (null = fondo della riga)
         public Color?[] CellFore;    // colore del testo per cella (null = colore della riga)
         public bool Italic;
@@ -113,6 +114,15 @@ namespace YAMS
             double top = row * RH, bottom = top + RH;
             if (top < scrollY) scrollY = top;
             else if (bottom > scrollY + body) scrollY = bottom - body;
+            ClampScroll();
+            InvalidateVisual();
+        }
+
+        // porta la riga in cima alla parte visibile della tabella
+        public void ScrollToRow(int row)
+        {
+            if (Rows == null || row < 0 || row >= Rows.Count) return;
+            scrollY = row * RH;
             ClampScroll();
             InvalidateVisual();
         }
@@ -222,6 +232,7 @@ namespace YAMS
                         bool sel = Selectable && r == SelectedIndex;
                         if (sel) ctx.DrawRectangle(selB, null, rr);
                         else if (r % 2 == 1) ctx.DrawRectangle(odd, null, rr);
+                        if (!sel && row.Back.HasValue) ctx.DrawRectangle(Pal.B(row.Back.Value), null, rr);
                         double x = 0;
                         Color rowFore = row.Fore ?? Pal.Fore;
                         double fs = (row.FontSize > 0 ? row.FontSize : 12) * k;

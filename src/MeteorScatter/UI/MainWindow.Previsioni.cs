@@ -51,12 +51,18 @@ namespace YAMS
             btnRmob.Click += async (s, e) => await LoadRmobFile();
             Button btnK = B(Lang.T("Ricava l'esponente dal file RMOB"));
             btnK.Click += async (s, e) => await FitExponentFromRmob();
+            Button btnKr = B(Lang.T("k dagli indici di popolazione"));
+            ToolTip.SetTip(btnKr, Lang.T("Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\n" +
+                "Teoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\n" +
+                "Il valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\n" +
+                "Attenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r."));
+            btnKr.Click += async (s, e) => await ExponentFromPopIndex();
             numPrevFreq.ValueChanged += (s, e) => UpdatePrevTab();
             numPrevK.ValueChanged += (s, e) => UpdatePrevTab();
             numPrevStation.ValueChanged += (s, e) => UpdatePrevTab();
             lblRmob = L(Lang.T("nessun file RMOB caricato"));
             DockTop(p, Row(L(Lang.T("Frequenza di arrivo MHz")), numPrevFreq, L(Lang.T("Esponente λ^k")), numPrevK,
-                           L(Lang.T("Fattore di stazione K")), numPrevStation, btnRmob, btnK, lblRmob));
+                           L(Lang.T("Fattore di stazione K")), numPrevStation, btnRmob, btnK, btnKr, lblRmob));
 
             txtRmobObs = T(cfg.Get("rmob_osservatore", ""), 170, false);
             chkRmobAuto = C(Lang.T("prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)"), cfg.GetB("rmob_automatico", false));
@@ -120,7 +126,17 @@ namespace YAMS
                 "N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: " +
                 "un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\n" +
                 "Regole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.",
-                f, fr, k, scale, K, dur, 1000 * dur, MsGeometry.PingMaxMs(f));
+                f, fr, k, scale, K, Math.Pow(fr / f, 2), 1000 * Math.Pow(fr / f, 2), MsGeometry.PingMaxMs(f));
+            if (MsGeometry.DurationObserved)
+                lblPrevNote.Text += "\n" + Lang.F("Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.",
+                    dur, fr, 1000 * dur, f);
+            // forward scatter: la durata cresce anche con sec^2(phi) (McKinley; IZ5TEK; OH5IY), Collm misura in backscatter (phi = 0)
+            if (model != null && model.Valid)
+            {
+                double phi = model.HalfScatterAngleDeg(model.Mid), sec2 = 1.0 / Math.Pow(Math.Cos(Math.Min(85, phi) * Astro.D2R), 2);
+                lblPrevNote.Text += "\n" + Lang.F("In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.",
+                    phi, sec2, 1000 * dur * sec2);
+            }
 
             chartPrev48.Series.Clear(); chartPrev24.Series.Clear();
             gridPrev.Columns = new List<string> { Lang.T("Ora UTC"), Lang.T("Collm stessa ora"), Lang.F("Traslato {0}", f.ToString("F0")), Lang.T("Indice sciami tratta"), Lang.F("Previsione {0} /ora", f.ToString("F0")), Lang.T("Giudizio") };
@@ -282,6 +298,29 @@ namespace YAMS
         }
 
         // Ricava l'esponente k (con K = 1) dalla mediana dei rapporti RMOB / Collm sulle ore comuni
+        async Task ExponentFromPopIndex()
+        {
+            DateTime now = DateTime.UtcNow;
+            double lam = Astro.SolarLongitude(Astro.JulianDay(now)), sw = 0, sk = 0;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (Shower sh in Catalog.Showers)
+            {
+                if (!sh.IsActive(now)) continue;
+                double z = sh.ZhrAt(lam, now);
+                double r; bool g = GmnPopIndex.R.TryGetValue(sh.Code, out r);
+                if (!g) r = sh.PopIndex;
+                double k = MsGeometry.KFromPopIndex(r);
+                if (z < 0.5 || double.IsNaN(k)) continue;
+                sw += z; sk += z * k;
+                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}  ZHR {1:F0}  r {2:F2} ({3})  k {4:F2}", sh.Code, z, r, g ? "GMN" : "IMO", k));
+            }
+            if (sw <= 0) { await Dialogs.Message(Win, Lang.T("Esponente"), Lang.T("Nessuno sciame attivo con un indice di popolazione valido.")); return; }
+            double km = sk / sw;
+            string txt = sb.ToString() + "\n" + Lang.F("Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?", km);
+            if (await Dialogs.Confirm(Win, Lang.T("k dagli indici di popolazione"), txt))
+                numPrevK.Value = Dm(Math.Max(1, Math.Min(4, Math.Round(km, 2))));
+        }
+
         async Task FitExponentFromRmob()
         {
             if (collm == null || rmobCounts == null) { await Dialogs.Message(Win, Lang.T("Esponente"), Lang.T("Servono sia i dati di Collm sia un file RMOB delle stesse ore.")); return; }

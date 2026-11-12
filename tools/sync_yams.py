@@ -224,6 +224,15 @@ namespace YAMS
     s = rep(s, '            sbLine.Children.Add(btnUpdate);', '            btnUpdate.IsVisible = false;   // E-LAYER ANALYZER: aggiornamento dalla finestra principale\n            sbLine.Children.Add(btnUpdate);', 'pulsante Aggiornamenti')
     wr(p, s)
 
+# --- Versione di YA-MS (dalla 1.8.0 letta dall'assembly, che dentro E-LAYER ANALYZER e' quello di E-LAYER ANALYZER):
+#     si scrive quella del file VERSION di YA-MS
+p = os.path.join(DST, 'Core', 'AppPaths.cs'); s = rd(p)
+if 'Version = ReadVersion();' in s:
+    yv = open(os.path.join(YA, 'VERSION'), encoding='utf-8').read().strip()
+    s = rep(s, 'public static readonly string Version = ReadVersion();',
+            'public static readonly string Version = "' + yv + '";   // E-LAYER ANALYZER: versione di YA-MS incorporata (tools/sync_yams.py)', 'AppPaths.Version')
+    wr(p, s)
+
 # --- Lang: anche le voci di E-LAYER ANALYZER (data/lingue/ela-<codice>.txt)
 p = os.path.join(ui, 'Lang.cs'); s = rd(p)
 s = rep(s, '                string file = FindFile(code);\n                if (file != null)',

@@ -125,6 +125,17 @@ namespace YAMS
                     foreach (GmnPlot pl in plots) get(pl.Url, pl.File);
                     get(CmorBase + "skymap-activity.png", Path.Combine(dir, "cmor_activity.png"));
                     get(CmorBase + "skymap-velocity.png", Path.Combine(dir, "cmor_velocity.png"));
+                    get(GmnDaily.Url, GmnDaily.LocalFile(dataDir));
+                    // catalogo IAU MDC: si riscarica al massimo una volta al mese (prima il file dell'anno, poi quello generale)
+                    string mdc = IauMdc.LocalFile(dataDir);
+                    if (!File.Exists(mdc) || (DateTime.UtcNow - File.GetLastWriteTimeUtc(mdc)).TotalDays > 30)
+                    {
+                        int before = errs.Count;
+                        if (get(string.Format(IauMdc.UrlYear, DateTime.UtcNow.Year), mdc) < 0 && get(string.Format(IauMdc.UrlYear, DateTime.UtcNow.Year - 1), mdc) < 0)
+                            get(IauMdc.UrlLatest, mdc);
+                        if (File.Exists(mdc)) errs.RemoveRange(before, errs.Count - before);
+                    }
+                    GmnDaily.Load(dataDir); IauMdc.Load(dataDir); GmnPopIndex.Load(Path.Combine(dir, "gmn_flux.html"));
                     Dispatcher.UIThread.Post(() =>
                     {
                         liveFetching = false;
@@ -134,6 +145,8 @@ namespace YAMS
                             ? Lang.F("GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.", t, newCount)
                             : Lang.F("GMN e CMOR alle {0} UTC: {1} errori ({2})", t, errs.Count, errs[0]);
                         ShowLive(plots);
+                        UpdateShowerGrid();
+                        UpdatePrevTab();
                     });
                 }
                 catch (Exception ex)
@@ -162,6 +175,23 @@ namespace YAMS
             if (gmnList == null) return;
             gmnList.Children.Clear();
             string dir = LiveDir;
+            if (GmnDaily.Total > 0)
+            {
+                List<KeyValuePair<string, int>> l = new List<KeyValuePair<string, int>>(GmnDaily.Counts);
+                l.Sort((a, b) => b.Value.CompareTo(a.Value));
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (KeyValuePair<string, int> kv in l)
+                {
+                    string nm = kv.Key;
+                    foreach (Shower s in Catalog.Showers) if (s.Code == kv.Key) { nm = s.Code + " " + Lang.T(s.Name); break; }
+                    sb.Append(nm).Append(": ").Append(kv.Value).Append("   ");
+                }
+                gmnList.Children.Add(new TextBlock { Text = Lang.F("Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})",
+                    GmnDaily.FirstUtc.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture), GmnDaily.LastUtc.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture), GmnDaily.Total, GmnDaily.Sporadic),
+                    FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(4, 2, 0, 0) });
+                gmnList.Children.Add(new TextBlock { Text = sb.ToString().TrimEnd() + "\n" + Lang.T("Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte."),
+                    TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(4, 0, 4, 4) });
+            }
             Bitmap ov = LoadScaled(Path.Combine(dir, "gmn_overview.png"), 1800);
             if (plots.Count == 0 && ov == null)
                 gmnList.Children.Add(new TextBlock { Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6),

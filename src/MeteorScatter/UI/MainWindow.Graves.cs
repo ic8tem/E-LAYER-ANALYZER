@@ -87,8 +87,8 @@ namespace YAMS
             TextBlock info = L(Lang.T("· 143,050 MHz CW · JN27SI (Broye-lès-Pesmes, 47,348° N 5,515° E)"));
             Button btnNow = B(Lang.T("Adesso"));
             btnNow.Classes.Add("accent");
-            ToolTip.SetTip(btnNow, Lang.T("Riporta la volta celeste al tempo reale"));
-            btnNow.Click += (s, e) => { trackTime.Value = 0; UpdateSky(); };
+            ToolTip.SetTip(btnNow, Lang.T("Riporta il momento del calcolo al tempo reale"));
+            btnNow.Click += (s, e) => ResetCalcTime();
             Button btnDx = B(Lang.T("Metti GRAVES come DX"));
             btnDx.Background = Pal.B(Pal.Violet); btnDx.Foreground = Pal.B(Pal.AccentFore); btnDx.FontWeight = FontWeight.SemiBold;
             ToolTip.SetTip(btnDx, Lang.T("Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata"));
@@ -250,7 +250,7 @@ namespace YAMS
         {
             LatLon home;
             if (!Astro.TryLocator(Up(txtHome), out home)) return;
-            double homeAlt = V(numHomeAlt) / 1000.0, layer = V(numLayer), elev = V(numElev), hot = PathModel.HotSpotOffsetKm;
+            double homeAlt = V(numHomeAlt) / 1000.0, layer = V(numLayer), elev = V(numElev), hot = (PathModel.HotSpotAuto ? -1 : PathModel.HotSpotOffsetKm) + (PathModel.TrailLength ? 1000 : 0) + (PathModel.BetaFactor ? 2000 : 0);
             string key = string.Format(CultureInfo.InvariantCulture, "{0:F4};{1:F4};{2:F3};{3:F2};{4:F2};{5:F1}", home.Lat, home.Lon, homeAlt, layer, elev, hot);
             if (key == gravesKey && gravesModel != null) return;   // stessa tratta: il modello c'e' gia'
             if (key != gravesKey) gravesModel = null;   // parametri cambiati: il modello vecchio non vale piu'
@@ -386,8 +386,8 @@ namespace YAMS
                 sb.Append('\n').Append(Lang.F("lato prevalente {0} ({1:F0}%)", wA >= wB ? "A" : "B", 100 * Math.Max(wA, wB) / Math.Max(1e-9, wA + wB)));
             }
             else sb.Append(Lang.T("nessuno sciame utile in questo momento"));
-            sb.Append('\n').Append(TrackValue == 0 ? Lang.F("{0} UTC (tempo reale)", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture))
-                                                   : Lang.F("{0} UTC (ora della volta celeste)", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture)));
+            sb.Append('\n').Append(IsRealTime ? Lang.F("{0} UTC (tempo reale)", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture))
+                                                   : Lang.F("{0} UTC (momento del calcolo)", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture)));
             // eco attese all'ora (sperimentale): previsione della linguetta "Attuazione sperimentale previsioni" (tratta
             // principale) portata a 143,050 MHz con la regola SM6FHZ, corretta con il rapporto degli indici degli sciami
             // (come fa ForecastAt) e moltiplicata per la probabilita' che il fascio a passi illumini la scia

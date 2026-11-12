@@ -1,51 +1,69 @@
-# YA-MS - Afrikaans (af). UTF-8. <Italian key><TAB><translation>
-# Keys are listed in chiavi.txt (same folder). The two characters \n mean a line break; keep the placeholders {0}, {1}, ... with their format.
-# Lines starting with # are comments. Missing entries are shown in Italian.
+# YA-MS - Afrikaans (af) translation of the user interface. UTF-8.
+# One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
+# In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
 (confermato)	(bevestig)
 (destra)  B →	(regs)  B →
 (lettura Collm: {0})	(Collm-lesing: {0})
 (stima poco precisa sotto 2 λ)	(onakkurate skatting onder 2 λ)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> middelpunt onder die horison op spoorhoogte: pad verder as die geometriese bereik van 'n enkele sprong
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> middelpunt onder die horison op spoorhoogte: pad verder as die geometriese bereik van 'n enkele sprong (spore op minstens {0:F0} km hoogte nodig)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	0,8 s per stap · siklus 4,8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1ste kriterium: tipiese frekwensies van meteor scatter-spots (kHz)
+2° criterio: modi digitali MS e <MS>	2de kriterium: digitale MS-modusse en <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	3,2 s per stap · siklus 19,2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- modus gemeet deur die Collm-radar
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  lob {2:F0}° hor. / {3:F0}° vert.{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Links: gemete vloed en ZHR van die aktiewe swerms van die Global Meteor Network (kameras, daaglikse bywerking; rooi lyn = laaste bywerking). Regs: radiante wat die CMOR-radar (Kanada, 43° N) byna intyds waarneem, ook die dagswerms; onder, dieselfde radiante gekleur volgens spoed.
 A.R.	R.A.
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	AANVAAR vir "{0}": {1} deur {2}, {3} MHz
 ADESSO	NOU
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} QSO-vierkante)
 ALTRI RIFERIMENTI DELL'ARTICOLO	ANDER VERWYSINGS UIT DIE ARTIKEL
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	PADVERLIES (onderdigte spoor, McKinley 1961; antennawins uitgesluit)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	PADVERLIES (onderdigte spoor, McKinley 1961 en ITU-R P.843; antennaversterking uitgesluit)
 ATTENZIONE: {0}	WAARSKUWING: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	WAARSKUWING: {0} en {1} val binne die antennalob ({2}° by -3 dB rondom {3}°): met hierdie rigting is hulle reeds gedek. Grys op die kaart aangedui.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	WAARSKUWING: {0} val binne die antennalob ({1}° by -3 dB rondom {2}°): met hierdie rigting is dit reeds gedek. Grys op die kaart aangedui.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	Aan (versigtig, begininstelling): die drywing van elke spoor volg die volledige formule van McKinley en ITU-R P.843, 1 / (1 − cos²β sin²φ): spore wat die padvlak kruis, lewer 10-15 dB minder as dié wat daarin lê, en geen spoor word oorskat nie.\nEffek: radiante in lyn met die pad oorheers, nie die loodregte nie; die krommes van DJ5HG volg die uurlikse verloop beter, met diep minima wanneer die radiant laag is.\nAf: elke spoor tel asof dit in die padvlak lê (β = 0), soos tot en met weergawe 1.6: volg die reël van radiante loodreg op die pad (SM6FHZ, DH9GCD), maar oorskat die spore wat die vlak kruis.
 Adesso	Nou
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	Outomatiese bywerking van alle bronne elke 5 minute
+Aggiungi	Voeg by
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Onakkurate lokators (slegs 4 karakters) word ook uit CALL3 geneem wanneer CALL3 die lokator van 6 karakters het.
 Andromedidi	Andromediede
+Angolo β tra scia e tratta (McKinley completo)	Hoek β tussen spoor en pad (volledige McKinley)
 Antenna	Antenna
 Antenna Yagi: boom m	Yagi-antenna: boom m
-Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	Yagi-antenna: boom {0:F2} m = {1:F2} lambda by {2:F0} MHz -> wins {3:F1} dBi (DL6WU-kurwe),\n  -3 dB-lob {4:F0}° horisontaal / {5:F0}° vertikaal (Kraus gekorrigeer met W4RNL se NEC-simulasies)
+Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	Yagi-antenna: boom {0:F2} m = {1:F2} lambda by {2:F0} MHz -> versterking {3:F1} dBi (DL6WU-kurwe),\n  -3 dB-lob {4:F0}° horisontaal / {5:F0}° vertikaal (Kraus gekorrigeer met W4RNL se NEC-simulasies)
 Antenna az: -	Antenna az: -
 Antenna az: {0}° (verso il DX)	Antenna az: {0}° (na die DX)
 Apri in Word	Open in Word
+Apri la cartella degli spot	Open die spot-gids
+Argomenti di partenza	Verstekonderwerpe
 Arietidi di maggio Sud diurne	Suidelike Mei-Arietiede (bedags)
 Arietidi diurne	Arietiede (bedags)
 Assi del flusso non trovati nella posizione attesa.	Vloed-asse nie op die verwagte plek gevind nie.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	Padverlies {0:F1} dB -> sein by antenna {1:F1} dBm, minimum waarneembaar {2:F0} dBm, marge {3:+0.0;-0.0} dB
 Attività	Aktiwiteit
-Attivo oggi	Vandag aktief
 Attuazione sperimentale previsioni	Eksperimentele voorspellings
 Aurigidi	Aurigiede
 Azimut	Azimut
 BILANCIO A {0:F0} MHz (punto medio)	SKAKELBEGROTING BY {0:F0} MHz (middelpunt)
 Banda MHz	Band MHz
+Bande (MHz)	Bande (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – skikkings, sektore en bundeltydsberekening
 Bootidi di giugno	Junie-Bootiede
 CALCOLO E TEORIA DELL'EFFICIENZA	DOELTREFFENDHEID: BEREKENING EN TEORIE
+CALL3: caricamento...	CALL3: laai tans...
+CALL3: nessun archivio (data/call3.txt)	CALL3: geen databasis nie (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} roepname
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantkaarte
 COME ASCOLTARE I PING DI GRAVES	HOE OM DIE GRAVES-PINGS TE HOOR
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	GEEN INTERNETVERBINDING NIE: eksterne data nie bygewerk nie (probeer weer oor 5 minute)
 Calcola	Bereken
 Calcolo dell'efficienza	Berekening van doeltreffendheid
 Calcolo non riuscito: {0}	Berekening het misluk: {0}
+Calcolo per {0} UTC	Berekening vir {0} UTC
+Calcolo per: adesso	Berekening vir: nou
+Calcolo per: {0} UTC	Berekening vir: {0} UTC
+Calcolo previsionale	Voorspellingsberekening
 Camelopardalidi di ottobre	Oktober-Camelopardaliede
 Cancella memoria	Vee geheue uit
 Cancellare tutti i quadrati caricati dal file ADIF?	Skrap alle vierkante wat uit die ADIF-lêer gelaai is?
@@ -56,13 +74,25 @@ Carica file RMOB dal disco...	Laai RMOB-lêer van skyf...
 Catalogo sciami	Swermkatalogus
 Che cosa fare	Wat om te doen
 Chiaro	Lig
+Chiuso	Gesluit
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Klik op 'n pad op die kaart of op 'n tabelry vir die besonderhede van die kontak en sy wolk.
+Cluster con PSKReporter	Cluster met PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X-cluster met PSKReporter-spots (dm4x.ddns.net, poort 8500): hier kom die MSK144-dekoderings van WSJT-X en MSHV aan. Andersins HamAlert (hamalert.org 7300, vereis 'n rekening met triggers).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster deur die gebruiker gekies. Op ON0DXK word die VHF-bande gefiltreer: hulle word geaktiveer met set/filter dxbm/pass 6 (dan 4, 2...). Nog 'n voorbeeld: hamqth.com 7300.
 Collm stessa ora	Collm selfde uur
 Collm {0} MHz (validi)	Collm {0} MHz (geldig)
 Comae Berenicidi	Comae Bereniciede
 Comandi	Kontroles
+Come DJ5HG	Soos DJ5HG
+Commento	Kommentaar
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	Met OH5IY se gemiddelde padverlies (200 dB by 144 MHz, geskaal met λ³: {0:F1} dB by {1:F0} MHz) sou die marge {2:+0.0;-0.0} dB wees
+Connessione a {0}...	Koppel aan {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	Geen internetverbinding nie.\n\nRadar- en RMOB-data kan nie bygewerk word nie: die program gebruik die laaste gestoorde data en probeer self elke 5 minute weer.
 Connessione ripristinata.	Verbinding herstel.
+Connesso: {0} argomenti	Gekoppel: {0} onderwerpe
+Connetti	Koppel
+Connetti all'avvio	Koppel by aanskakel
+Contatori	Tellers
 Conteggio	Telling
 Controllo le fonti di dati esterne...	Kontroleer eksterne databronne...
 Corrispondente	DX-stasie
@@ -70,18 +100,26 @@ Corrispondente  {0}   quota {1:F0} m	DX-stasie       {0}   hoogte {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (artikel in Italiaans, weergawe 7).
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961 (vergelyking vir onderdigte spore)
 DATI DEGLI SCIAMI	SWERMDATA
-DATI RADAR IN DIRETTA	LEWENDE RADARDATA
+DATI RADAR IN DIRETTA	REGSTREEKSE RADARDATA
 DENTRO il lobo	BINNE die lob
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	Hiervandaan: spore in die E-laag op ongeveer 90 km (SKiYMET-radar), elevasieformule, Hot A / Hot B, side-scatter, padverlies 182-200 dB, IARU-pingduur.
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	DX-cluster na keuse
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	Hiervandaan: spore in die E-laag op ongeveer 90 km (SKiYMET-radar), elevasieformule, Hot A / Hot B, side-scatter, padverlies, IARU-pingduur.
+Data del calcolo (UTC)	Berekeningsdatum (UTC)
 Decl.	Dekl.
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	Spoordigtheid q = {0:E1} elektrone/m. Verwysings uit die artikel by 144 MHz: 182 dB minimum (GM8JBJ), 200 dB gemiddeld (OH5IY)
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	Spoordigtheid q = {0:E1} elektrone/m. Verwysings: 172-190 dB (berekeninge van G4BAO, aangehaal deur GM8JBJ), 200 dB gemiddeld by 144 MHz (OH5IY)
 Densita' scia q = 10^	Spoordigtheid q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	Besonderhede van die volgende {0:F0} s: die bruikbare sone is in geen bundelstap nie
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	Besonderhede van die volgende {0:F0} s: stappe van sektor {1} ({2:F1} s elk) en die stap wat die bruikbare sone belig
 Direzioni Hot A / Hot B	Hot A / Hot B-rigtings
+Disconnesso	Verbinding verbreek
+Disconnetti	Ontkoppel
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	Afstand         {0:F0} km   azimut {1:F1}°   (vanaf die DX-stasie {2:F1}°)
+Documenti tecnici	Tegniese dokumente
 Documento Word	Word-dokument
 Documento esportato: {0}	Dokument uitgevoer: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Waar die regstreekse databronne is. Sirkels met strepies = luggebied wat die radar sien (ongeveer 300 km rondom die stasie, spore op 90 km): geen radar kyk na die lug bo jou pad nie, die data sê hoe aktief die swerm is. Stippellyne = afstand vanaf jou stasie.
 Draconidi di ottobre	Oktober-Draconiede
 E	O
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	DOELTREFFENDHEID VAN DIE PAD GRAVES → JY NOU
@@ -93,7 +131,8 @@ Elev.	Elev.
 Elevazione d'antenna in funzione della distanza dallo scatter point	Antenna-elevasie teenoor afstand vanaf die scatter point
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	Antenna-elevasie na die middelpunt: {0:F1}°   (formule uit die artikel, Figuur 7)
 Elevazione lobo °	Lob-elevasie °
-Errore all'avvio: {0}	Fout by opstart: {0}
+Errore all'avvio: {0}	Fout by aanskakel: {0}
+Errore: {0}	Fout: {0}
 Esponente	Eksponent
 Esponente dal confronto RMOB	Eksponent uit RMOB-vergelyking
 Esponente non calcolabile con questi dati.	Eksponent kan nie met hierdie data bereken word nie.
@@ -102,6 +141,7 @@ Esponente λ^k	λ^k-eksponent
 Esporta	Voer uit
 Esporta il documento in Word	Voer die dokument na Word uit
 Esporta in Word (.docx)...	Voer na Word uit (.docx)...
+Europa	Europa
 FONTE PRINCIPALE	HOOFBRON
 FONTI	BRONNE
 Fattore di stazione K	Stasiefaktor K
@@ -110,27 +150,38 @@ File ADIF del log	Log se ADIF-lêer
 File RMOB	RMOB-lêer
 File RMOB (conteggi orari del mese)	RMOB-lêer (maandelikse uurtellings)
 File mancante: {0}	Lêer ontbreek: {0}
+Filtro	Filter
+Filtro degli spot meteor scatter	Meteor scatter-spotfilter
 Finestra utile	Bruikbare venster
 Flusso radar	Radarvloed
 Flusso radar: nessun dato. Premi "Scarica adesso".	Radarvloed: geen data nie. Druk "Laai nou af".
+Fonte	Bron
 Fonte del massimo	Bron van die maksimum
 Fonti	Bronne
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	Grafiekformaat het verander ({0}x{1}): kan nie gelees word nie.
 Formato file mensile, {0}/{1}.	Maandelikse lêerformaat, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	Bulletin-tabelformaat ({0}/{1}): as die lêer verskeie waarnemers bevat, word hulle na mekaar gelees; gebruik 'n lêer met een enkele waarnemer.
+Foto	Foto
 Frequenza di arrivo MHz	Teikenfrekwensie MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT, DH8BQA, geekshed.co.uk, WSJT-X-handleiding, WB2FKO (pings), IU6GIR (aktiwiteit op 143,050 MHz), IARU Streek 1 VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	PADGEOMETRIE (sferiese Aarde, R = 6372,7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN en CMOR om {0} UTC: {1} foute ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN en CMOR nagegaan om {0} UTC ({1} nuwe lêers). GMN-data: CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES direkte pad: az {0:F0}°
 Geminidi	Geminiede
 Geometria e attenuazione	Geometrie en padverlies
 Giorno per la tabella 24 h (UTC)	Dag vir die 24 h-tabel (UTC)
 Giudizio	Beoordeling
-Guadagno antenna dBi (tx = rx)	Antennawins dBi (tx = rx)
-Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - wins teenoor boomlengte-kurwe vir lang Yagi's, G(dBi) = 7,773 log(L/lambda) + 11,43, soos gerapporteer deur W8IO (w8io.com)
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Aanvaarde spots word in data/spot_ms gestoor, een CSV-lêer per dag. Ontbrekende lokators word uit die CALL3-databasis (data/call3.txt) geneem.
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: gemete vloed en ZHR van die swerms. Data CC BY 4.0; Vida et al. 2021, MNRAS 506(4), en Vida et al. 2022, MNRAS 515(2)
+Guadagno antenna dBi (tx = rx)	Antennaversterking dBi (tx = rx)
+Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - versterking teenoor boomlengte-kurwe vir lang Yagi's, G(dBi) = 7,773 log(L/lambda) + 11,43, soos gerapporteer deur W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (klassieke hot spots, vir antennarigting)
+Host	Gasheer
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: hot spots {0} km vanaf die middelpunt (AMS 203, W8WN, MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: hot spots {0} km vanaf die middelpunt (waarde met die hand ingevoer).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: hot spots {0} km vanaf die middelpunt, afwyking {1}° (AMS-tabel van J. Richardson, DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}
@@ -139,31 +190,41 @@ Hot fuori lobo	Hot buite lob
 Hot nel lobo	Hot in lob
 Hot spot dal punto medio km	Hot spot vanaf middelpunt km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	Pings is kort lyne naby die draer; lang (oordigte) spore is wyer en toon Doppler
-IL CIELO VISTO DA GRAVES	DIE HEMEL SOOS GRAVES DIT SIEN
+IL CIELO VISTO DA GRAVES	DIE LUG GESIEN VANAF GRAVES
 IMO {0} (giorno)	IMO {0} (dag)
 Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	Die DX-stasie word GRAVES (JN27SI, hoogte 200 m) en die hoofpad word herbereken
 Il file scelto non e' un file locale.	Die gekose lêer is nie 'n plaaslike lêer nie.
 Il mio locator	My lokator
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (konsep van swermdoeltreffendheid), www.kolumbus.fi/oh5iy (historiese webwerf)
+Importa CALL3.TXT...	Voer CALL3.TXT in...
 Impossibile leggere {0}: {1}	Kan nie {0} lees nie: {1}
+Impostazione del calcolo:	Berekeningsinstelling:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	In forward scatter groei die duur ook met sec²φ (φ = {0:F0}° by die middelpunt van die pad; Collm meet in backscatter, φ = 0): x {1:F1}, dus duur 'n eggo van 1 s by Collm ongeveer {2:F0} ms op die pad.
+Indice della tratta Σ ZHR×η: {0}	Padindeks Σ ZHR×η: {0}
 Indice sciami tratta	Padswermindeks
 Indice tratta (ZHR×eff.)	Padindeks (ZHR×doeltr.)
+Indirizzo mancante	Adres ontbreek
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, Mei 2025 (lambda^3- en lambda^2-reëls, middelpunt, beste rigting)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (poolgrafiek met die beste rigting)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 en 7)
-J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: wins en bundelwydte, G = 41253 / (thetaE x thetaH)
+Invia	Stuur
+J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: versterking en bundelwydte, G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW", DARC-konferensie, Januarie 2018: formule vir die beste rigting\n    deur DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), keëlverstrooiing en HOT-A / HOT-B-keuse deur DJ5HG,\n    bruikbare radiant tussen 20 en 70 grade, beste afstand 1300-1500 km, sporadiese meteore deur KB0VUK
-John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: winsskattings vir die VK3AUU-, WA2PHW- en DJ9BV-variante
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (volgens Kaiser & Closs 1952)
+John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: versterkingskattings vir die VK3AUU-, WA2PHW- en DJ9BV-variante
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (volgens Kaiser & Closs 1952; haal die berekeninge van John Worsnop G4BAO aan, 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): vaste verwysing in dB, lang spore met 'n lae radiant,\n    krommes van die paaie vanaf Hamburg en vanaf München; AMS-tabel van J. Richardson vir die afstand van die hot spots
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI en meteor scatter) en handleiding "QTFGUI Help" 2007: keëlverstrooiingswet,\n    toetsgeval Hamburg - Barcelona in die Kwadrantiede, gebruik om die model te verifieer
-L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (kontrole van die twee reëls);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design en 70-CM Yagi Stacks Part 2 (David Tanner se VK3AUU-Yagi):\n    NEC-simulasies gebruik om die winskurwe te verifieer en die horisontale lob te korrigeer (0,93 x Kraus)
+L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (kontrole van die twee reëls);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design en 70-CM Yagi Stacks Part 2 (David Tanner se VK3AUU-Yagi):\n    NEC-simulasies gebruik om die versterkingskurwe te verifieer en die horisontale lob te korrigeer (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	GRENSE VAN DIE GEMEENSKAPLIKE SONE (kruisings van die kurwes waar elke stasie se horison die E-laag ontmoet, artikel)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Die woord "{0}" is daar, maar die reël is nie 'n geldige "DX de ..."-spot nie.
+La riga non è uno spot "DX de ..." valido.	Die reël is nie 'n geldige "DX de ..."-spot nie.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	Die skaal van die hoogtegrafiek het verander: hoogtestatistieke (modus, gemiddeld, mediaan) bly geldig, absolute tellings nie.
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	Die bundelvolgorde word met die PC-horlosie bereken: sinchroniseer dit met 'n NTP-bediener (fout van hoogstens 'n paar tiendes van 'n sekonde).
 La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	Die volgorde is aan UTC gekoppel (PE1ITR): sedert 2021 duur elke stap 0,8 s en 'n sektorsiklus 4,8 s; in 2007 was dit 3,2 s en 19,2 s. Die beheerstasie skuif die volgorde soms 'n paar stappe: die besonderhede is 'n voorspelling wat deur luister bevestig moet word. 'n Spoor word slegs gehoor as die bundel dit belig terwyl dit duur: waarskynlikheid ≈ min(1, (stap + spoor) / siklus) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (tipiese duur van 'n onderdigte spoor by 143 MHz ≈ {1:F1} s).
 Lato	Kant
 Lato A = a sinistra della tratta, B = a destra	Kant A = links van die pad, B = regs
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	Die letters langs die persentasie wys van watter kant van die pad die meeste refleksies kom. A = LINKS as jy van jou stasie na die DX-stasie kyk (Hot A-sone); B = REGS (Hot B-sone). Dit is die moeite werd om die antenna 10-30° na daardie kant te draai (side-scatter). Geen letter = doeltreffendheid onder 5 %. Ry Σ: padindeks = som van ZHR x doeltreffendheid van alle aktiewe swerms. Ligblou rye: vergelyking met die DH9GCD-formule (DF5HC 2018). ↑ = radiant hoër as 70° vanaf jou stasie (te hoog).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	Gemerkte rye is die swerms wat vandag (UTC) aktief is
 Legenda	Sleutel
 Leonidi	Leoniede
 Leonis Minoridi	Leonis Minoriede
@@ -173,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	Grense va
 Lincidi di settembre	September-Lynciede
 Lingua dell'interfaccia	Koppelvlaktaal
 Liridi	Lyriede
+Live e dati real-time	Regstreeks en intydse data
+Loc DX	DX-lok
+Loc spotter	Spotter-lok
 Locator del corrispondente non valido	Ongeldige lokator van die DX-stasie
 Locator della stazione non valido	Ongeldige stasielokator
+Manca il nominativo per il login	Roepsein vir aanmelding ontbreek
 Mappa d'Europa	Kaart van Europa
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	Kaart van Europa nie beskikbaar nie (netwerk nodig by eerste opstart).
+Mappa dei radar europei	Kaart van Europese radars
 Mappa quadrati	Vierkantkaart
 Mappa:	Kaart:
 Mappa: bordo = {0} km dalla stazione. {1}	Kaart: rand = {0} km vanaf die stasie. {1}
@@ -185,76 +251,96 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	Meteore/uur - gister {0} en vandag {1} (
 Metti GRAVES come DX	Stel GRAVES as DX
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	Beste rigting vir die swerm: LOODREG op die rigting\nvan aankoms (radiant-azimut +-90°, toleransie +-40-50°,\nSM6FHZ). Bo-aansig: geel lyn = drywing\nvan die swerm, oranje kolle = rigtings, PREV-\nellipse = mees waarskynlike spore nou.\nKlik op 'n radiant: baan met UTC-ure
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	Gemeet by Collm en geskaal na {0} MHz - gister {1} en vandag {2} (UTC)
+Mondo	Wêreld
 Monocerotidi di dicembre	Desember-Monocerotiede
 N	N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Refleksieduur x ({1:F1}/{0:F0})^2 = x {5:F4}: 'n eggo van 1 s by {1:F1} MHz duur ongeveer {6:F0} ms by {0:F0} MHz (IARU-maksimum ping by {0:F0} MHz: {7:F0} ms).\nEksperimentele reëls van SM6FHZ (VUSHF 2025). Faktor K verreken die ontvangstasie (drywing, antennas): dit word bepaal deur vergelyking met 'n RMOB-waarnemer op dieselfde band.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - kuslyne en grense 1:50 miljoen, publieke domein, www.naturalearthdata.com (kaart van Europa)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	In die padverlies (β = 90°, versigtig): aanvanklike spoorradius {0:F1} dB (r0 = {1:F2} m by die gemiddelde ITU-hoogte van {2:F1} km vir {3:F0} MHz). Met die spoor in die padvlak (β = 0°, beste geval) daal die verlies tot {4:F1} dB ({5:F1} dB) en styg die marge tot {6:+0.0;-0.0} dB
 Nero	Swart
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	Geen aanbevole Hot nie: byna geen aktiewe swerms op hierdie oomblik nie
+Nessun dato GMN: premi "Scarica adesso".	Geen GMN-data nie: druk "Laai nou af".
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Geen radardata nie: laai dit af by die sub-oortjie Regstreeks en intydse data › Radarvloed.
 Nessuna fonte Collm in fonti_radar.csv	Geen Collm-bron in fonti_radar.csv nie
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	Geen spore verwag nie: aktiewe swerms onder die horison of met nul doeltreffendheid vir hierdie pad.
 Nessuna zona comune dello strato E ({0})	Geen gemeenskaplike E-laagsone nie ({0})
+Nessuno sciame utile in questo momento	Geen nuttige swerm op hierdie oomblik nie
 No	Nee
 No: fuori dai settori	Nee: buite die sektore
 No: sopra il fascio (circa 25°)	Nee: bo die bundel (ongeveer 25°)
 No: sotto l'orizzonte di GRAVES	Nee: onder die GRAVES-horison
+Nominativo per il login	Roepsein vir aanmelding
+Non connesso	Nie gekoppel nie
 Non ho riconosciuto il formato del file.	Lêerformaat nie herken nie.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	Kan nie die vertikale vloedskaal lees nie (boonste etiket: {0}): waardes moet nagegaan word.
 Non riesco ad aprire il documento: {0}	Kan nie die dokument oopmaak nie: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Dit is nie 'n punt op die kaart nie: dit is 'n wêreldwye netwerk van kameras (meestal amateur) in baie lande op alle vastelande.
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	Let wel: radardata behoort aan die onderskeie instellings. Voordat die program versprei word, moet toestemming gevra word om dit outomaties af te haal.
 Notte	Nag
 Nuovo locator del corrispondente dalla mappa: {0}	Nuwe lokator van die DX-stasie vanaf die kaart: {0}
 Nuovo locator della stazione dalla mappa: {0}	Nuwe stasielokator vanaf die kaart: {0}
+Nuovo tentativo tra 30 s	Probeer weer oor 30 s
+Nuvola	Wolk
 O	W
 ORA MIGLIORE DEL GIORNO	BESTE TYD VAN DIE DAG
 Ora	Tyd
 Ora UTC	UTC-tyd
-Ora della volta celeste (±36 h)	Tyd van die hemelkoepel (±36 h)
+Ore (da −12 a +36 h)	Ure (−12 tot +36 h)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	Gemeenskaplike ure: {0}. Mediaanverhouding RMOB/Collm = {1:F4}.\nEmpiriese eksponent (met K = 1): k = {2:F2}  (SM6FHZ-reël: 3).\n\nPas hierdie eksponent toe? (Andersins hou k = 3 en stel faktor K = {3:F2}.)
 Orionidi	Orioniede
 Orionidi di novembre	November-Orioniede
 Osservatore RMOB	RMOB-waarnemer
 PREVISIONE SPERIMENTALE	EKSPERIMENTELE VOORSPELLING
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	VOLGENDE BUNDELDEURGANG OOR DIE SONE
+PSKReporter MQTT	PSKReporter MQTT
 Passo	Stap
-Pastello acquamarina	Pastel-akwamaryn
-Pastello arancione	Pastel-oranje
-Pastello azzurro	Pastel-ligblou
-Pastello indaco	Pastel-indigo
-Pastello lilla	Pastel-lila
-Pastello marrone	Pastel-bruin
-Pastello rosa	Pastel-pienk
-Pastello verde	Pastel-groen
+Pastello acquamarina	Pastel akwamaryn
+Pastello arancione	Pastel oranje
+Pastello azzurro	Pastel ligblou
+Pastello indaco	Pastel indigo
+Pastello lilla	Pastel lila
+Pastello marrone	Pastel bruin
+Pastello rosa	Pastel pienk
+Pastello verde	Pastel groen
 Pegasidi di luglio	Julie-Pegasiede
 Perseidi	Perseïede
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (maksimum radio-uurtempo's)
+Personalizzata	Pasgemaak
 Phoenicidi	Phoeniciede
-Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Bo-aansig: geel lyn = drywing van die gekose swerm (of die gunstigste een), PREV-ellipse = waar die mees waarskynlike spore nou val. Hemelkoepel regs (Opkoms/Ondergang in UTC op {0}): geel = doeltreffendheid >= 50 % en ZHR >= 2, oranje >= 20 %, grys = byna onaktief.
+Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	Bo-aansig: geel lyn = drywing van die gekose swerm (of die gunstigste een), PREV-ellipse = waar die mees waarskynlike spore nou val. Lugaansig regs (Kom op/Gaan onder in UTC op {0}): geel = doeltreffendheid >= 50 % en ZHR >= 2, oranje >= 20 %, grys = byna onaktief.
 Piscidi di aprile diurne	April-Pisciede (bedags)
+Porta	Poort
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	Bereik op spoorhoogte met lob op {0:F1}°: {1:F0} km
 Potenza W	Drywing W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	Drywing {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (wins in dBd = dBi - 2,15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	Drywing {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (versterking in dBi)
 Previsione /ora	Voorspelling /uur
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Regstreekse voorspelling en berekening van die doeltreffendheid van meteoorswerms vir meteor scatter
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	Eksperimentele voorspelling vir die volgende 24 uur by {0} MHz vir {1}
 Previsione {0} /ora	Voorspelling {0} /uur
 Previsione {0} MHz (rifl./ora)	Voorspelling {0} MHz (refl./uur)
 Pronto	Gereed
 Prossimo massimo (UTC)	Volgende maksimum (UTC)
+Prova del filtro	Filtertoets
+Prudente	Versigtig
 Punt. migliore	Beste rigting
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	Rigting {0:F0}°: Hot A {1}, Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	Punte {0:F0} km weerskante van die middelpunt, loodreg op die pad (AMS Bulletin 203 en W8WN: 50-150 km; soos in MSHV)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	Punte {0:F0} km weerskante van die middelpunt, loodreg op die pad (waarde met die hand ingevoer; MSHV gebruik 150 km)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	Punte {0:F0} km weerskante van die middelpunt, loodreg op die pad: afwyking {1:F1}° uit die AMS-tabel van J. Richardson (13° by 1000 km, 11° by 1250, 10° by 1500 en 2000), aangehaal deur DJ5HG
 Punto di riflessione	Refleksiepunt
 Punto medio     {0}  ({1:F2}N {2:F2}E)	Middelpunt       {0}  ({1:F2}N {2:F2}O)
 Punto medio (forward)	Middelpunt (forward)
 Punto medio {0}, elev. per {1:F1} km: {2:F1}°	Middelpunt {0}, elev. vir {1:F1} km: {2:F1}°
 Puppidi-Velidi	Puppiede-Veliede
 Quadrantidi	Kwadrantiede
-Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Vier fasegestuurde skikkings dek die suidelike hemel, van 90° tot 270° azimut, in vier sektore van 45° (D, C, B, A); elke sektor is in 6 stappe van 7,5° verdeel, wat een na die ander belig word, op dieselfde oomblik in al vier sektore (stappe genommer 1 tot 6 vanaf die laagste azimut). Die bundel is ongeveer 25° breed in elevasie: op spoorhoogte dek dit die gekleurde ring tussen die twee stippelsirkels. Oranje/pienk kolle = PREV-sones van die pad GRAVES → jy, groen lyn = rigting van jou stasie, rooi lyn = van jou stasie na die aanbevole hot spot (PE1ITR).
+Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	Vier fasegestuurde skikkings dek die suidelike lug, van 90° tot 270° azimut, in vier sektore van 45° (D, C, B, A); elke sektor is in 6 stappe van 7,5° verdeel, wat een na die ander belig word, op dieselfde oomblik in al vier sektore (stappe genommer 1 tot 6 vanaf die laagste azimut). Die bundel is ongeveer 25° breed in elevasie: op spoorhoogte dek dit die gekleurde ring tussen die twee stippelsirkels. Oranje/pienk kolle = PREV-sones van die pad GRAVES → jy, groen lyn = rigting van jou stasie, rooi lyn = van jou stasie na die aanbevole hot spot (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	Spoorhoogte en opsies met die hand gekies. Word vanself gekies wanneer jy die hoogte, die blokkie "van radar", die lang spore of die hoek β verander.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	Vaste hoogte van 102 km, langer spore met 'n lae radiant en hoek β, soos in "Die Geometrie von Meteorscatterverbindungen" van DJ5HG (2004).\nVergelyking met sy krommes: gemiddeld 2 dB laer, tipiese afwyking 5 dB; radiante in lyn met die pad oorheers.
 Quota scie      {0:F1} km (strato E){1}	Spoorhoogte      {0:F1} km (E-laag){1}
 Quota scie km	Spoorhoogte km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	Spoorhoogtes (Collm): mees algemeen {0:F1} km, gemiddeld {1:F1}, mediaan {2:F1}, std.afw. {3:F1} km
-RADAR GRAVES (linguetta Radar GRAVES)	GRAVES-RADAR (oortjie Radar GRAVES)
+RADAR GRAVES (linguetta Radar GRAVES)	GRAVES-RADAR (oortjie GRAVES-radar)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	LAE RADIANT LANGS DIE PAD: {0}. Die berekende doeltreffendheid bly laag, maar met skrams spore in lyn met die pad verwag DJ5HG seldsame, sterk refleksies: die moeite werd om te luister.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	RADIANT TE HOOG (bo {0}°): {1}. Die spore val byna vertikaal en reflekteer min na die pad (DF5HC, DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: poort 7000 = CW en RTTY, poort 7001 = FT8. Aanmelding slegs met roepsein. RBN-skimmers dekodeer selde MS-modusse: dit is hoofsaaklik nuttig vir spots met <MS> in die kommentaar.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	EKSPERIMENTELE REËLS TUSSEN BANDE (SM6FHZ, VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	CHRONOLOGIESE REKONSTRUKSIE · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB gebruik GRAVES vir uurlikse meteoortellings: vergelyk jou pings met die waarnemers op 143,050 MHz
@@ -262,48 +348,80 @@ RMOB {0} (scala a destra)	RMOB {0} (skaal regs)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {1} ure gelees om {2} UTC
 RMOB – osservatori su 143,050 MHz	RMOB – waarnemers op 143,050 MHz
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; maandelikse bulletins rmob.org/rmobtext (GRAVES 143,050 MHz-waarnemers: Planetarium van Venesië, Faenza, Rovereto en ander)
+Raccolta dati	Data-insameling
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	Aanbeveling ITU-R P.843-1 (1997): hoek beta tussen spoor en padvlak, aanvanklike spoorradius, gemiddelde hoogte as funksie van die frekwensie
 Radar GRAVES	GRAVES-radar
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	Collm-meteoorradar, Universiteit van Leipzig (LIM) en IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	Radiant:
+Raggio della mappa	Kaartradius
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	Bepaal die eksponent uit die RMOB-lêer
 Ricevitore	Ontvanger
+Riconnessione tra {0} s	Herkoppel oor {0} s
+Riconnetti	Herkoppel
+Riepilogo dell'anno (ZHR misurati, GMN)	Jaaroorsig (gemete ZHR, GMN)
 Riga {0} ignorata (colonne insufficienti)	Reël {0} geïgnoreer (te min kolomme)
 Riga {0}: {1}	Reël {0}: {1}
-Riporta la volta celeste al tempo reale	Stel die hemelkoepel terug na intydse tyd
+Riporta il momento del calcolo al tempo reale	Stel die berekeningstyd terug na intyds
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	Vergeleke met 144 MHz: aantal/intensiteit x {0:F3} ({1:+0.0;-0.0} dB), duur x {2:F2}. IARU-maksimum ping by {3:F0} MHz: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) en "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	Wieletjie = zoem, sleep = skuif, muis oor 'n vierkant = QSO's
 S	S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	VERWERP: "{0}" gevind, maar die frekwensie {1:F1} kHz is nie in 'n gekose band nie.
+SCARTATO: frequenza sotto 27990,0 kHz.	VERWERP: frekwensie onder 27990,0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	VERWERP: buite die MS-vensters en geen filterwoord nie.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	VERWERP: die kommentaar verklaar 'n ander voortplanting ({0}) en daar is geen MS-modus nie.
 SCIAME PIÙ FAVOREVOLE	GUNSTIGSTE SWERM
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	DEURSNEE - die mees waarskynlike spore gesien vanaf die antenna na die DX-stasie (az. {0}°)
+SGO, Finlandia	SGO, Finland
 Scarica RMOB adesso	Laai RMOB nou af
 Scarica adesso	Laai nou af
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Gooi clusterreëls onder 27990,0 kHz dadelik weg (hulle verskyn nie in die konsole nie en word nie gestoor nie)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	Antenna-afwyking van die hot spots uit die AMS-tabel van J. Richardson, aangehaal deur DJ5HG: 13° by 1000 km, 11° by 1250 km, 10° by 1500 en 2000 km. Verwyder die regmerkie om die afstand met die hand in te voer (MSHV gebruik 150 km).
 Scia meteorica	Meteoorspoor
 Sciame	Swerm
 Sciame più favorevole	Gunstigste swerm
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	Nuttigste swerm: {0} (ZHR {1}, doeltreffendheid {2} %)
 Sciami	Swerms
+Sciami in diretta	Regstreekse swerms
+Sciami sopra l'orizzonte: {0}	Swerms bo die horison: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	Langer spore met 'n lae radiant (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	Tik die naam van die RMOB-waarnemer soos dit in die lêernaam verskyn (bv. NAAM_112026rmob.TXT -> NAAM).
+Scrivi il nominativo per il login prima di connettere.	Skryf die roepsein vir aanmelding voordat jy koppel.
 Segnale minimo dBm	Minimum sein dBm
 Sequenza del fascio	Bundelvolgorde
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	Beide Collm-data en 'n RMOB-lêer vir dieselfde ure is nodig.
 Sextantidi diurne	Sextantiede (bedags)
 Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)	Shelby W8WN - qsl.net/w8wn/hscw (optimale elevasie en verskuiwing)
 Sigla	Kode
-Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	Dit is die verste rande van die hemel wat albei stasies sien, nie punte om op te mik nie.
-Sorge	Opkoms
+Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	Dit is die verste rande van die lug wat albei stasies sien, nie punte om op te mik nie.
+Sorge	Kom op
 Sorgente Antielio	Antihelion-bron
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	Af (versigtig): elke spoor word geweeg met die sinus van die radiant se elevasie, want met 'n lae radiant val minder meteore per km².\nAan: soos DJ5HG (2004) is die spore met 'n lae radiant langer (die bruikbare laagdikte, 15 km, gedeel deur die sinus van die elevasie, tot 100 km) en voldoen hulle meer dikwels aan die refleksiewet. Die twee effekte hef mekaar op bo ongeveer 9° elevasie: die doeltreffendheid met 'n lae radiant styg, met 'n hoë radiant verander dit nie.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS-spots van die oortjie "Data-insameling". Vir elke kontak toon die wolk waar die waarskynlikste spore vir daardie pad en daardie uur saamtrek (spieëlrefleksie, som van die aktiewe swerms). Wolke met strepies = slegs sporadiese meteore. Spots met 'n stasie buite die kaart word nie geteken nie; dié wat pas aangekom het (minder as 3 minute) flikker vir een minuut.
+Spot MS raccolti	Versamelde MS-spots
+Spot da mostrare	Spots om te wys
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	Regstreekse PSKReporter-spots via MQTT (mqtt.pskreporter.info, 'n diens van M0LTE): geen aanmelding nie, spots kom reeds met die lokators van die uitsaai- en die ontvangstasie. Een onderwerp per reël of geskei deur ;  formaat pskr/filter/v2/band/modus/tx-roepsein/rx-roepsein/... (+ = enige, # = die res).
+Spot meteor scatter raccolti (i più recenti in alto)	Ingesamelde meteor scatter-spots (nuutste bo)
+Stazione	Stasie
 Stazione        {0}   quota {1:F0} m	Stasie           {0}   hoogte {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	Eksperimentele skatting (SM6FHZ-reëls): meteore/uur by {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; pingduur x {4:F3}. IARU-maksimum ping by {0:F0} MHz: {5:F0} ms. Aanduidende waardes, te vergelyk met ervaring op die band.{6}
-Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC se Swan Meteor Skyview - swan.ms (verwysing vir die grafika van die hemelkoepel)
+Svuota la tabella	Maak die tabel leeg
+Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC se Swan Meteor Skyview - swan.ms (verwysing vir die grafika van die lugaansig)
 Sì	Ja
 Sì · settore {0}	Ja · sektor {0}
 TRATTA	PAD
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	PAD VERBY DIE SPOORHORISON: met spore op {0:F1} km is die middelpunt {1:F1}° onder die horison. Spore op minstens {2:F0} km hoogte is nodig: verbinding slegs moontlik met die hoogste spore, doeltreffendheid en padverlies is op die grens van die model.
 Tauridi Nord	Noordelike Tauriede
 Tauridi Sud	Suidelike Tauriede
+Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
 Tema	Tema
 Tempo reale	Intyds
 Tipo	Tipe
-Tramonta	Ondergang
+Traffico MS in diretta · {0}	Regstreekse MS-verkeer · {0}
+Traffico in diretta	Regstreekse verkeer
+Traffico meteor scatter in diretta	Regstreekse meteor scatter-verkeer
+Tramonta	Gaan onder
 Traslato	Geskaal
 Traslato {0}	Geskaal {0}
 Tratta calcolata: {0:F0} km, {1} punti di riflessione campionati in {2:F1} s. {3}	Pad bereken: {0:F0} km, {1} refleksiepunte gemonster in {2:F1} s. {3}
@@ -313,27 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	Pad {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	Te min gemeenskaplike ure ({0}) tussen Collm en die RMOB-lêer.
 Tutti i file	Alle lêers
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	USB op 143,049 MHz (toon by ongeveer 1 kHz) of 143,050 MHz, stadige of afgeskakelde AGC, oudiobandwydte van minstens 2,4 kHz
+Univ. Lipsia / IAP Kühlungsborn	Univ. Leipzig / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	'n Spot in hierdie vensters word aanvaar selfs sonder die modusnaam, behalwe wanneer die kommentaar 'n ander voortplanting verklaar met een van hierdie etikette:
 Ursidi	Ursiede
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Geld vir spots buite die vensters en vir dié met 'n etiket van 'n ander voortplanting: hulle word behou as hulle een van die geaktiveerde woorde bevat, in hoof-, klein- of gemengde letters geskryf. MSK144, FSK441, PSK2K, JTMS en JT6M is digitale modusse wat slegs vir meteor scatter gebruik word: die spot is beslis MS. <MS> dui in die algemeen aan dat die verbinding via meteor scatter gemaak is.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	Versigtigste waardes, begininstelling: spoorhoogte gemeet deur die Collm-radar (blokkie "van radar"), normale spore, hoek β aan.\nVergelyking met die krommes van DJ5HG (Kwadrantiede, paaie vanaf Hamburg): gemiddeld 7 dB laer, met dieselfde uurlikse verloop (vormafwyking ongeveer 3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	Versigtige waardes: spoor wat die padvlak kruis (β = 90°, slegste geval), insluitend die aanvanklike spoorradius (ITU-R P.843) op die gemiddelde eggohoogte vir elke frekwensie
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	Na die aanbevole hot spot van die pad GRAVES → jy (paneel Pad), met lae elevasie
 Vista dall'alto (E a destra)	Bo-aansig (O regs)
-Volta celeste: tempo reale	Hemelkoepel: intyds
-Volta celeste: {0} UTC	Hemelkoepel: {0} UTC
-Waterfall	Waterval
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – sender by Broye-lès-Pesmes (47,348° N 5,515° O)
 YA-MS - nessuna connessione	YA-MS - geen verbinding nie
-YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	YAEC deur IC8TEM – oortjie Radar GRAVES (die ontwerpskets waaruit dit afgelei is)
+YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	YAEC deur IC8TEM – oortjie GRAVES-radar (die ontwerpskets waaruit dit afgelei is)
 ZHR ora	ZHR nou
 ZONA UTILE NEL FASCIO DI GRAVES	BRUIKBARE SONE IN DIE GRAVES-BUNDEL
 a DESTRA guardando verso il corrispondente	REGS as jy na die DX-stasie kyk
 a SINISTRA guardando verso il corrispondente	LINKS as jy na die DX-stasie kyk
+a cura di	deur
 a cura di Costantino IC8TEM	deur Costantino IC8TEM
+accettati per finestra di frequenza: {0}	aanvaar volgens frekwensievenster: {0}
+adesso	nou
 adesso {0}	nou {0}
 adesso · ancora {0:F1} s	nou · nog {0:F1} s
+aggiornamento una volta al giorno	een keer per dag bygewerk
 alfa-Capricornidi	alfa-Capricorniede
 alfa-Centauridi	alfa-Centauriede
 alfa-Monocerotidi	alfa-Monocerotiede
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: reël geïgnoreer: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	antenna na {0}: az {1:F0}° · el {2:F1}°\nGRAVES direkte pad: az {3:F0}°
+antenna {0}°	antenna {0}°
+auto (AMS)	outo (AMS)
 azimut rispetto al corrispondente	azimut relatief tot die DX-stasie
 beta-Tauridi diurne	beta-Tauriede (bedags)
 buono	goed
@@ -342,14 +469,18 @@ calcolo della tratta GRAVES → te in corso...	bereken die pad GRAVES → jy...
 circumpolare	sirkumpolêr
 clic destro =	regsklik =
 clic sinistro =	linksklik =
+collegamento via meteor scatter	verbinding via meteor scatter
+comandi dopo il login, separati da ;	opdragte ná aanmelding, geskei deur ;
+comando da inviare (es. sh/dx 20)	opdrag om te stuur (bv. sh/dx 20)
 confermato (QSL o LoTW)	bevestig (QSL of LoTW)
 copia locale del {0} UTC	plaaslike kopie van {0} UTC
 corrispondente	DX-stasie
 dal radar	van radar
+dati CC BY 4.0 (Vida et al. 2021, 2022)	data CC BY 4.0 (Vida et al. 2021, 2022)
 delta-Aquaridi Sud	Suidelike delta-Akwariede
 eco	eggo
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	verwagte eggo's ≈ {0:F0}/uur (eksperimenteel: voorspelling × bundel {1:F0} %)
-eco possibile (+{0:F1} s di scia)	moontlike eggo (+{0:F1} s spoor)
+eco possibile (+{0:F1} s di scia)	eggo moontlik (+{0:F1} s spoor)
 effic. %	doeltr. %
 effic. < 20%	doeltr. < 20%
 effic. >= 20%	doeltr. >= 20%
@@ -364,10 +495,12 @@ errore: {0}	fout: {0}
 eta-Aquaridi	eta-Akwariede
 eta-Eridanidi	eta-Eridaniede
 eta-Liridi	eta-Lyriede
+finestra {0} kHz	venster {0} kHz
 fuori dal lobo	buite die lob
 gamma-Draconidi di luglio	Julie-gamma-Draconiede
 gamma-Ursae Minoridi	gamma-Ursae Minoriede
 gradi	grade
+hot spot (solo sporadiche) {0}	hot spot (slegs sporadies) {0}
 il giorno scelto non è oggi	die gekose dag is nie vandag nie
 indice	indeks
 indice sciami tratta (scala a destra)	padswermindeks (skaal regs)
@@ -377,11 +510,13 @@ invariato (controllato alle {0} UTC)	onveranderd (nagegaan om {0} UTC)
 kappa-Cygnidi	kappa-Cygniede
 kappa-Leonidi diurne	kappa-Leoniede (bedags)
 la mia stazione	my stasie
+la tua stazione	jou stasie
 lato prevalente {0} ({1:F0}%)	oorheersende kant {0} ({1:F0}%)
 lavorato	gewerk
 lim. A	gr. A
 lim. B	gr. B
 limiti zona comune	grense van gemeenskaplike sone
+linguetta "{0}"	oortjie "{0}"
 lobo antenna	antennalob
 lobo {0}°	lob {0}°
 locale	plaaslik
@@ -394,20 +529,29 @@ meteore per km di quota	meteore per km hoogte
 meteore/ora radar	radarmeteore/uur
 meteore/ora stimate	geskatte meteore/uur
 miglior punt.	beste rigting
+misura il flusso e lo ZHR di ogni sciame attivo	meet die vloed en ZHR van elke aktiewe swerm
 mobile	bewegend
+modo digitale MS	MS digitale modus
 nessun ADIF caricato	geen ADIF gelaai nie
+nessun dato radar: vedi Live e dati real-time › Flusso radar	geen radardata nie: sien Regstreeks en intydse data › Radarvloed
 nessun file RMOB caricato	geen RMOB-lêer gelaai nie
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	geen bundelstap belig die bruikbare sone nie\nspoor gevang ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	geen aktiewe netwerk nie
 nessuno sciame utile adesso: hot spot più adatto al fascio	geen bruikbare swerm nou nie: hot spot wat die beste by die bundel pas
 nessuno sciame utile in questo giorno	geen bruikbare swerm op hierdie dag nie
 nessuno sciame utile in questo momento	geen bruikbare swerm op hierdie oomblik nie
+nominativo	roepsein
+nuova parola	nuwe woord
 nuovo dato	nuwe data
 nuovo dato alle {0} UTC	nuwe data om {0} UTC
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	wolk nie berekenbaar vir hierdie pad nie (te kort of te lank)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	wolk {0}: {1:F0} % van die refleksies, {2:F0} × {3:F0} km, as op {4:F0}°
 omega-Cetidi Nord diurne	Noordelike omega-Cetiede (bedags)
 omega-Cetidi Sud diurne	Suidelike omega-Cetiede (bedags)
 orizzonte del fascio	bundelhorison
-orologio del PC sincronizzato	PC-horlosie gesinchroniseer
+orologio del PC sincronizzato	rekenaarhorlosie gesinchroniseer
+osservatori RMOB che ascoltano GRAVES	RMOB-waarnemers wat na GRAVES luister
+parola aggiunta	woord bygevoeg
 passi	stappe
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	stap {0}{1} elke {2:F1} s · om {3} ...\nspoor gevang ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	rad.-baan
@@ -418,29 +562,42 @@ puntamento migliore {0}° / {1}°	beste rigting {0}° / {1}°
 puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	rig na {0:F0}° ({1:+0;-0}° vanaf die DX-stasie), elevasie {2:F1}°, hot spot op {3:F0} km
 quasi inattivo	byna onaktief
 quota m	hoogte m
+radar SKiYMET 36,2 MHz	SKiYMET-radar 36,2 MHz
+radar meteorico 17-38 MHz, orbite	meteoorradar 17-38 MHz, wentelbane
+radar meteorico 36,9 MHz	meteoorradar 36,9 MHz
 radio, diurno	radio, bedags
 rete assente: {0}	geen netwerk nie: {0}
 riflessioni/ora	refleksies/uur
 riflessioni/ora a {0} MHz	refleksies/uur by {0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	reëls ontvang        {0}\nspots gelees         {1}\nMS-spots aanvaar     {2}\nverwerp (woord)      {3}\nverwerp (band)       {4}\nMS-spots laaste uur  {5}
+righe sotto 27990 kHz scartate: {0}	reëls onder 27990 kHz weggegooi: {0}
+righe {0}, spot letti {1}, MS {2}	reëls {0}, spots gelees {1}, MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	skaal van grafiek gelees: 0-{0} meteore/uur
 scala non letta	skaal nie gelees nie
 scala tarata 0-1200 meteore/ora	gekalibreerde skaal 0-1200 meteore/uur
 scarso	swak
 scartati	verwerp
+scartati per altra propagazione: {0}	verwerp weens ander voortplanting: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	beste swerm {0} {1}: ZHR {2:F0} × doeltr. {3:F0} %
 scorrimento sciame	swermdrywing
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	segmente = spore (±10 km rondom die hoogte) gerig na die radiant; dikker = meer waarskynlik
 sempre sotto	altyd onder
 sigma-Hydridi	sigma-Hydriede
+sporadiche	sporadies
 stima a {0} MHz (scala a destra)	skatting by {0} MHz (skaal regs)
-sì	ja
 tra {0:F1} s	oor {0:F1} s
 traslato a {0} MHz (scala a destra)	geskaal na {0} MHz (skaal regs)
+trasmettitore 143,050 MHz	sender 143,050 MHz
 tratta / DX	pad / DX
 tratta GRAVES → te non calcolata	pad GRAVES → jy nie bereken nie
 tu {0}	jy {0}
+ultima ora	laaste uur
+ultime 24 ore	laaste 24 uur
+ultime {0} ore	laaste {0} uur
+ultimi {0} minuti	laaste {0} minute
 var.	var.
 varie (tab. 6 IMO)	verskeie (IMO tab. 6)
+versione	weergawe
 visuale	visueel
 zeta-Perseidi diurne	zeta-Perseïede (bedags)
 zona PREV	PREV-sone
@@ -453,19 +610,26 @@ zona PREV	PREV-sone
 {0} (dal radiante, az. {1}°)	{0} (vanaf die radiant, az. {1}°)
 {0} (in rosso sulla mappa)	{0} (in rooi op die kaart)
 {0} (~{1} calc.)	{0} (~{1} ber.)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	{0} QSO's gelees, {1} QSO-vierkante in die 50-432 MHz-bande, {2} QSO's verwerp (ander bande of sonder vierkant).
-{0} UTC (ora della volta celeste)	{0} UTC (tyd van die hemelkoepel)
+{0} UTC (momento del calcolo)	{0} UTC (berekeningstyd)
 {0} UTC (tempo reale)	{0} UTC (intyds)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	{0} nou aanbeveel: az. {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	{0} nou aanbeveel: az. {1}° ({2}% van die verwagte refleksies)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} kontakte op die kaart · {1} buite die kaart · {2} sonder lokator
+{0} dB rispetto al riferimento di DJ5HG	{0} dB relatief tot die DJ5HG-verwysing
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	{0} vanaf GRAVES: az {1:F1}° · el {2:F1}° (stap {3} van 6)
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} vanaf GRAVES: az {1:F1}° · el {2:F1}° (sektore van 90° tot 270°, bundel tot ongeveer 25°)
 {0} h	{0} h
+{0} h rispetto ad adesso	{0} h van nou af
+{0} km dalla tua stazione	{0} km vanaf jou stasie
+{0} spot MS in memoria	{0} MS-spots in geheue
 {0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % om {3} UTC ({4} plaaslike tyd)
 {0} · zona	{0} · sone
 {0}: non lavorato	{0}: nie gewerk nie
-{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  az. vanaf my {2:F0}° (afwyking {3:+0;-0}°), vanaf die DX-stasie {4:F0}°, afstand {5:F0} km
-{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  az. vanaf my {2:F1}° (afwyking {3:+0.0;-0.0}° van die direkte rigting), vanaf die DX-stasie {4:F0}°, afstand {5:F0} km, elevasie {6:F1}°
+{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  az. van my {2:F0}° (afwyking {3:+0;-0}°), vanaf die DX-stasie {4:F0}°, afstand {5:F0} km
+{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  az. van my {2:F1}° (afwyking {3:+0.0;-0.0}° van die direkte rigting), vanaf die DX-stasie {4:F0}°, afstand {5:F0} km, elevasie {6:F1}°
 {0}: {1} QSO	{0}: {1} QSO's
 {0}: {1} ore lette.	{0}: {1} ure gelees.
 {0}: {1} quadrati lavorati, {2} confermati	{0}: {1} vierkante gewerk, {2} bevestig
@@ -473,131 +637,73 @@ zona PREV	PREV-sone
 Σ ZHR x effic.	Σ ZHR x doeltr.
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (links)
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	Links: gemete vloed en ZHR van die aktiewe swerms van die Global Meteor Network (kameras, daaglikse bywerking; rooi lyn = laaste bywerking). Regs: radiante wat die CMOR-radar (Kanada, 43° N) byna intyds waarneem, ook die dagswerms; onder, dieselfde radiante gekleur volgens spoed.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: radiantkaarte
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	Waar die regstreekse databronne is. Sirkels met strepies = hemelgebied wat die radar sien (ongeveer 300 km rondom die stasie, spore op 90 km): geen radar kyk na die hemel bo jou pad nie, die data sê hoe aktief die swerm is. Stippellyne = afstand vanaf jou stasie.
-Europa	Europa
-GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN en CMOR om {0} UTC: {1} foute ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	GMN en CMOR nagegaan om {0} UTC ({1} nuwe lêers). GMN-data: CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: gemete vloed en ZHR van die swerms. Data CC BY 4.0; Vida et al. 2021, MNRAS 506(4), en Vida et al. 2022, MNRAS 515(2)
-Mondo	Wêreld
-Nessun dato GMN: premi "Scarica adesso".	Geen GMN-data nie: druk "Laai nou af".
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	Dit is nie 'n punt op die kaart nie: dit is 'n wêreldwye netwerk van kameras (meestal amateur) in baie lande op alle vastelande.
-Riepilogo dell'anno (ZHR misurati, GMN)	Jaaroorsig (gemete ZHR, GMN)
-SGO, Finlandia	SGO, Finland
-Sciami in diretta	Regstreekse swerms
-Tavistock, Ontario (Canada)	Tavistock, Ontario (Kanada)
-Univ. Lipsia / IAP Kühlungsborn	Univ. Leipzig / IAP Kühlungsborn
-aggiornamento una volta al giorno	een keer per dag bygewerk
-dati CC BY 4.0 (Vida et al. 2021, 2022)	data CC BY 4.0 (Vida et al. 2021, 2022)
-la tua stazione	jou stasie
-linguetta "{0}"	oortjie "{0}"
-misura il flusso e lo ZHR di ogni sciame attivo	meet die vloed en ZHR van elke aktiewe swerm
-osservatori RMOB che ascoltano GRAVES	RMOB-waarnemers wat na GRAVES luister
-radar SKiYMET 36,2 MHz	SKiYMET-radar 36,2 MHz
-radar meteorico 17-38 MHz, orbite	meteoorradar 17-38 MHz, wentelbane
-radar meteorico 36,9 MHz	meteoorradar 36,9 MHz
-trasmettitore 143,050 MHz	sender 143,050 MHz
-{0} km dalla tua stazione	{0} km vanaf jou stasie
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	AANVAAR vir "{0}": {1} deur {2}, {3} MHz
-Aggiungi	Voeg by
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	Onakkurate lokators (slegs 4 karakters) word ook uit CALL3 geneem wanneer CALL3 die lokator van 6 karakters het.
-Apri la cartella degli spot	Open die spot-gids
-Bande (MHz)	Bande (MHz)
-CALL3: caricamento...	CALL3: laai tans...
-CALL3: nessun archivio (data/call3.txt)	CALL3: geen databasis nie (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} roepname
-Chiuso	Gesluit
-Cluster con PSKReporter	Cluster met PSKReporter
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X-cluster met PSKReporter-spots (dm4x.ddns.net, poort 8500): hier kom die MSK144-dekoderings van WSJT-X en MSHV aan. Andersins HamAlert (hamalert.org 7300, vereis 'n rekening met triggers).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster deur die gebruiker gekies. Op ON0DXK word die VHF-bande gefiltreer: hulle word geaktiveer met set/filter dxbm/pass 6 (dan 4, 2...). Nog 'n voorbeeld: hamqth.com 7300.
-Commento	Kommentaar
-Connetti	Koppel
-Connetti all'avvio	Koppel by opstart
-Contatori	Tellers
-DX cluster a scelta	DX-cluster na keuse
-Disconnesso	Verbinding verbreek
-Disconnetti	Ontkoppel
-Filtro	Filter
-Filtro degli spot meteor scatter	Meteor scatter-spotfilter
-Fonte	Bron
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	Aanvaarde spots word in data/spot_ms gestoor, een CSV-lêer per dag. Ontbrekende lokators word uit die CALL3-databasis (data/call3.txt) geneem.
-Host	Gasheer
-Importa CALL3.TXT...	Voer CALL3.TXT in...
-Indirizzo mancante	Adres ontbreek
-Invia	Stuur
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	Die woord "{0}" is daar, maar die reël is nie 'n geldige "DX de ..."-spot nie.
-Loc DX	DX-lok
-Loc spotter	Spotter-lok
-Manca il nominativo per il login	Roepnaam vir aanmelding ontbreek
-Nominativo per il login	Roepnaam vir aanmelding
-Non connesso	Nie gekoppel nie
-Nuovo tentativo tra 30 s	Probeer weer oor 30 s
-Porta	Poort
-Prova del filtro	Filtertoets
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: poort 7000 = CW en RTTY, poort 7001 = FT8. Aanmelding slegs met roepnaam. RBN-skimmers dekodeer selde MS-modusse: dit is hoofsaaklik nuttig vir spots met <MS> in die kommentaar.
-Raccolta dati	Data-insameling
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	Herkoppel
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	VERWERP: "{0}" gevind, maar die frekwensie {1:F1} kHz is nie in 'n gekose band nie.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	Gooi clusterreëls onder 27990,0 kHz dadelik weg (hulle verskyn nie in die konsole nie en word nie gestoor nie)
-Scrivi il nominativo per il login prima di connettere.	Skryf die aanmeldroepnaam voordat jy koppel.
-Spot meteor scatter raccolti (i più recenti in alto)	Ingesamelde meteor scatter-spots (nuutste bo)
-Svuota la tabella	Maak die tabel leeg
-collegamento via meteor scatter	verbinding via meteor scatter
-comandi dopo il login, separati da ;	opdragte ná aanmelding, geskei deur ;
-comando da inviare (es. sh/dx 20)	opdrag om te stuur (bv. sh/dx 20)
-modo digitale MS	MS digitale modus
-nominativo	roepnaam
-nuova parola	nuwe woord
-parola aggiunta	woord bygevoeg
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	reëls ontvang        {0}\nspots gelees         {1}\nMS-spots aanvaar     {2}\nverwerp (woord)      {3}\nverwerp (band)       {4}\nMS-spots laaste uur  {5}
-righe sotto 27990 kHz scartate: {0}	reëls onder 27990 kHz weggegooi: {0}
-righe {0}, spot letti {1}, MS {2}	reëls {0}, spots gelees {1}, MS {2}
-{0} spot MS in memoria	{0} MS-spots in geheue
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	1ste kriterium: tipiese frekwensies van meteor scatter-spots (kHz)
-2° criterio: modi digitali MS e <MS>	2de kriterium: digitale MS-modusse en <MS>
-La riga non è uno spot "DX de ..." valido.	Die reël is nie 'n geldige "DX de ..."-spot nie.
-SCARTATO: frequenza sotto 27990,0 kHz.	VERWERP: frekwensie onder 27990,0 kHz.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	VERWERP: buite die MS-vensters en geen filterwoord nie.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	VERWERP: die kommentaar verklaar 'n ander voortplanting ({0}) en daar is geen MS-modus nie.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	'n Spot in hierdie vensters word aanvaar selfs sonder die modusnaam, behalwe wanneer die kommentaar 'n ander voortplanting verklaar met een van hierdie etikette:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	Geld vir spots buite die vensters en vir dié met 'n etiket van 'n ander voortplanting: hulle word behou as hulle een van die geaktiveerde woorde bevat, in hoof-, klein- of gemengde letters geskryf. MSK144, FSK441, PSK2K, JTMS en JT6M is digitale modusse wat slegs vir meteor scatter gebruik word: die spot is beslis MS. <MS> dui in die algemeen aan dat die verbinding via meteor scatter gemaak is.
-accettati per finestra di frequenza: {0}	aanvaar volgens frekwensievenster: {0}
-finestra {0} kHz	venster {0} kHz
-scartati per altra propagazione: {0}	verwerp weens ander voortplanting: {0}
-Spot MS raccolti	Versamelde MS-spots
-antenna {0}°	antenna {0}°
-Calcolo previsionale	Voorspellingsberekening
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	Klik op 'n pad op die kaart of op 'n tabelry vir die besonderhede van die kontak en sy wolk.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	Tegniese dokumente
-Foto	Foto
-Live e dati real-time	Regstreeks en intydse data
-Mappa dei radar europei	Kaart van Europese radars
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	Geen radardata nie: laai dit af by die sub-oortjie Regstreeks en intydse data › Radarvloed.
-Nuvola	Wolk
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	Regstreekse voorspelling en berekening van die doeltreffendheid van meteoorswerms vir meteor scatter
-Raggio della mappa	Kaartradius
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	MS-spots van die oortjie "Data-insameling". Vir elke kontak toon die wolk waar die waarskynlikste spore vir daardie pad en daardie uur saamtrek (spieëlrefleksie, som van die aktiewe swerms). Wolke met strepies = slegs sporadiese meteore. Spots met 'n stasie buite die kaart word nie geteken nie; dié wat pas aangekom het (minder as 3 minute) flikker vir een minuut.
-Spot da mostrare	Spots om te wys
-Stazione	Stasie
-Traffico MS in diretta · {0}	Regstreekse MS-verkeer · {0}
-Traffico in diretta	Regstreekse verkeer
-Traffico meteor scatter in diretta	Regstreekse meteor scatter-verkeer
-a cura di	deur
-hot spot (solo sporadiche) {0}	hot spot (slegs sporadies) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	geen radardata nie: sien Regstreeks en intydse data › Radarvloed
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	wolk nie berekenbaar vir hierdie pad nie (te kort of te lank)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	wolk {0}: {1:F0} % van die refleksies, {2:F0} × {3:F0} km, as op {4:F0}°
-sporadiche	sporadies
-ultima ora	laaste uur
-ultime 24 ore	laaste 24 uur
-ultime {0} ore	laaste {0} uur
-ultimi {0} minuti	laaste {0} minute
-versione	weergawe
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} kontakte op die kaart · {1} buite die kaart · {2} sonder lokator
+FONTE	BRON
+RILIEVO	KONTROLE
+SCELTA	KEUSE
+(sopra 144 MHz nessuna misura: λ²)	(geen metings bo 144 MHz nie: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	Hoe die duur van die pings van een band na 'n ander verander.\nTeoreties (versigtig, verstek): duur eweredig aan λ² (McKinley 1961; SM6FHZ se reël): van 50 na 144 MHz word die pings 8 keer korter.\nWaargeneem: mediane gemeet deur NN4SA (EM64) tydens die Perseïede van 2026 in HamSCI se MSQP (R. Suggs NN4NT): 148 ms op 28 MHz, 78 ms op 50 MHz, 53 ms op 144 MHz; van 50 na 144 MHz word die pings net 1,5 keer korter. Een enkele ontvangstasie, voorlopige ontleding; bo 144 MHz is daar geen metings nie en λ² word gebruik.
+Durata dei ping tra le bande	Duur van die pings tussen bande
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	Waargenome duur (HamSCI MSQP, NN4SA, Perseïede 2026; mediane 148 / 78 / 53 ms op 28 / 50 / 144 MHz): ongeveer {0:F0} ms op {1:F0} MHz, x {2:F2} teenoor 144 MHz{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	Duur volgens die metings van HamSCI MSQP (NN4SA, Perseïede 2026) in plaas van λ²: x {0:F3}, dus duur 'n eggo van 1 s op {1:F1} MHz ongeveer {2:F0} ms op {3:F0} MHz.
+Raggio iniziale della scia	Beginradius van die spoor
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	Beginradius van die spoor r0: hoe groter dit is, hoe meer gaan by hoë frekwensies verlore.\nDubbel die ITU-waarde (versigtig, verstek): die CMOR-radar op 17, 29 en 38 MHz vind r0 van 0,5-2 m tussen 85 en 95 km, meestal 1-1,5 m, met 'n verspreiding van 'n faktor twee; ongeveer dubbel die vroeëre metings (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m op 90 km), gemiddelde waarde.\nUitgesluit: sonder die beginradiusfaktor.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	Beginradius: met die gemiddelde waarde van ITU-R P.843 (r0 = {0:F2} m) sou die faktor {1:F1} dB wees; huidige keuse {2}. CMOR-metings: r0 van 0,5-2 m tussen 85 en 95 km, verspreiding van 'n faktor twee (Stober et al. 2021)
+doppio dell'ITU (Stober 2021, prudente)	dubbel die ITU-waarde (Stober 2021, versigtig)
+escluso	uitgesluit
+osservata (HamSCI MSQP, NN4SA 2026)	waargeneem (HamSCI MSQP, NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	teoreties λ² (McKinley, SM6FHZ; versigtig)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	Voeg onder elke swerm die ry "klassiek" by: die uitspraak van die radioamateurs se reël, bereken by die middelpunt van die pad.\n✗ radiant onder die horison; ◐ marginaal (radiant onder 15° of bo 70°, of minder as 30° van die padrigting); ● goed; ★ beste (radiant tussen 15° en 70° en meer as 60° van die padrigting).\nDrempels soos in meteor-mcp (qso-graph, 2026); dieselfde idee as DH9GCD se formule en SM6FHZ se reëls. Verander nie die berekening nie: dien om die twee sienings oor die hoek β te vergelyk.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	Bereken k = 3,75·log10 r vir elke swerm wat nou aktief is (r uit die GMN-tabel, anders uit die IMO-katalogus) en neem die ZHR-geweegde gemiddeld.\nTeorie: met massa-indeks s = 1 + 2,5·log10 r skaal die getal spore bo 'n vaste drempel met λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nDie verstek bly k = 3 (SM6FHZ se ervaringsreël), versigtiger: 'n laer k voorspel meer refleksies op hoë frekwensies.\nLet wel: die tellings van Collm is meestal sporadiese meteore, waarvoor die GMN nie r publiseer nie.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	Kameratelling, nie vloed nie: hang af van hoeveel stasies 'n helder, donker hemel het.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	Afstand tussen die program se radiant en dié van die MDC: mediaan {0:F1}°, maksimum {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Twee sienings oor die geometrie, met verskillende bronne.\nAan (versigtig, verstek): volledige formule van McKinley (1961) en ITU-R P.843, 1 / (1 − cos²β sin²φ), waar β die hoek tussen die spoor en die padvlak is. Spore wat die vlak kruis, is 10-15 dB minder werd as dié wat daarin lê, en geen spoor word oorskat nie: radiante in lyn met die pad oorheers. Met hierdie keuse volg YA-MS die vorm van DJ5HG se uurlikse kurwes (2004) beter.\nAf: elke spoor tel asof dit in die padvlak lê (β = 0), soos tot weergawe 1.6. Die radioamateurs se klassieke reël geld: die beste radiant staan 15-70° hoog en dwars op die pad, een in lyn is marginaal (SM6FHZ, DH9GCD, meteor-mcp van qso-graph).\nDie twee sienings is nog nie met onafhanklike metings vergelyk nie: die blokkie "Klassieke uitspraak" wys uur vir uur die klassieke reël se uitspraak onder die doeltreffendheid.
+GMN oggi	GMN vandag
+Giudizio classico	Klassieke uitspraak
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: {0} bevestigde bane van {1} tot {2} UTC, waarvan {3} sporadies. Kameratelling, nie vloed nie. Data CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ({0}): {1} oplossings. Mediane: λ {2:F1}°, R.A. {3:F1}°, dekl. {4:+0.0;-0.0}°, v {5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: oplossings
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	ZHR-geweegde gemiddeld: k = {0:F2} (SM6FHZ se reël: 3, versigtiger).\n\nPas hierdie eksponent toe?
+Nessuno sciame attivo con un indice di popolazione valido.	Geen aktiewe swerm met 'n geldige bevolkingsindeks nie.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	Bane deur die GMN bevestig van {0} tot {1} UTC: {2} (sporadies {3})
+classico	klassiek
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3,75·log10 r = {0}, met r = {1} ({2}). SM6FHZ se ervaringsreël gebruik k = 3, versigtiger.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = eksponent van die frekwensie-omrekening uit die bevolkingsindeks r (GMN indien beskikbaar, anders IMO): k = 3,75·log10 r. IAU MDC: oplossings gepubliseer in die katalogus van die IAU Meteor Data Center; Δ = die program se IMO-katalogus min die mediaan van die MDC-oplossings (radiant vergelyk by dieselfde sonlengte). GMN vandag: bane bevestig in die jongste daaglikse lêer van die Global Meteor Network (telling, nie vloed nie).
+k dagli indici di popolazione	k uit bevolkingsindekse
+Δ radiante	Δ radiant
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	Twee sienings oor die geometrie, met verskillende bronne.\nAan (versigtig, verstek): volledige formule van McKinley (1961) en ITU-R P.843, 1 / (1 − cos²β sin²φ), waar β die hoek tussen die spoor en die padvlak is. Spore wat die vlak kruis, is 10-15 dB minder werd as dié wat daarin lê, en geen spoor word oorskat nie: radiante in lyn met die pad oorheers. Met hierdie keuse volg YA-MS die vorm van DJ5HG se uurlikse kurwes (2004) beter.\nAf: elke spoor tel asof dit in die padvlak lê (β = 0), soos tot weergawe 1.6. Die radioamateurs se klassieke reël geld: die beste radiant staan 15-70° hoog en dwars op die pad, een in lyn is marginaal (SM6FHZ, DH9GCD, meteor-mcp van qso-graph).\n'n Eerste vergelyking met die BRAMS-tellings by Sonneberg (Perseïede 2026, 471 km) onderskei hulle nie: die blokkie "Klassieke uitspraak" wys uur vir uur die klassieke reël se uitspraak onder die doeltreffendheid.
+... e altri {0}	... en nog {0}
+Aggiorna adesso	Werk nou by
+Aggiornamenti	Bywerkings
+Aggiornamento disponibile	Bywerking beskikbaar
+Aggiornamento installato	Bywerking geïnstalleer
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	Sommige veranderinge is eers sigbaar nadat die program herbegin is.
+Apri la pagina delle release	Maak die vrystellingsbladsy oop
+Chiudi	Sluit
+Continua senza	Gaan voort sonder
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	Kontroleer die internetverbinding, of laai die volledige pakket weer van die vrystellingsbladsy af.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	Kyk op GitHub of daar 'n nuwer weergawe van YA-MS is en installeer dit indien wel; kyk ook dat geen programlêers ontbreek nie.
+Controllo degli aggiornamenti su GitHub...	Soek na bywerkings op GitHub...
+File mancanti	Ontbrekende lêers
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	Die program laai die pakket {0} af, vervang sy lêers, behou die vouer data (veranderde programlêers word eers na data/backup gekopieer) en herbegin.
+Installazione dell'aggiornamento...	Installeer die bywerking...
+L'aggiornamento non è riuscito: {0}	Die bywerking het misluk: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	{0} programlêers ontbreek:\n{1}\n\nLaai hulle van GitHub af (weergawe {2})?
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	Die vrystelling het geen pakket vir hierdie stelsel nie ({0}): laai dit met die hand van die vrystellingsbladsy af.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	Ek kan nie in die programvouer skryf nie ({0}): installeer die nuwe weergawe met die hand.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	Kan nie die weergawes wat op GitHub gepubliseer is, lees nie: {0}
+Più tardi	Later
+Riavvia YA-MS a mano: {0}	Herbegin YA-MS met die hand: {0}
+Salta questa versione	Slaan hierdie weergawe oor
+Scarica i file mancanti	Laai die ontbrekende lêers af
+Scaricamento dei file mancanti: {0} di {1}	Laai ontbrekende lêers af: {0} van {1}
+Scaricamento dell'aggiornamento...	Laai die bywerking af...
+Scaricamento dell'aggiornamento: {0} %	Laai die bywerking af: {0} %
+Scaricati {0} file mancanti.	{0} ontbrekende lêers afgelaai.
+Scaricati {0} file su {1}.	{0} van {1} lêers afgelaai.
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} is geïnstalleer. Die program herbegin nou.
+YA-MS è aggiornato (versione {0}).	YA-MS is op datum (weergawe {0}).
+YA-MS.app non trovato nel pacchetto	YA-MS.app nie in die pakket gevind nie
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	{0} lêers in die vouer data is vervang: die vorige kopieë is in data/backup/v{1}.
+{0} non trovato nel pacchetto	{0} nie in die pakket gevind nie
+È disponibile YA-MS {0} (questa è la {1}).	YA-MS {0} is beskikbaar (hierdie is {1}).

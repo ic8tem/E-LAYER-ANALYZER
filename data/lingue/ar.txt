@@ -1,52 +1,69 @@
-# YA-MS - Arabic (ar) translation of the user interface (العربية). UTF-8.
+# YA-MS - Arabic (ar) translation of the user interface. UTF-8.
 # One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
 # In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
-# Lines starting with # are comments. Missing entries are shown in Italian.
 (confermato)	(مؤكَّد)
 (destra)  B →	(يمين)  B →
 (lettura Collm: {0})	(قراءة Collm: {0})
 (stima poco precisa sotto 2 λ)	(تقدير تقريبي دون 2 λ)
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> نقطة المنتصف تحت الأفق عند ارتفاع الآثار: المسار يتجاوز المدى الهندسي للقفزة الواحدة
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> نقطة المنتصف تحت الأفق عند ارتفاع الآثار: المسار يتجاوز المدى الهندسي للقفزة الواحدة (يلزم آثار على ارتفاع {0:F0} km على الأقل)
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	0.8 s لكل خطوة · دورة 4.8 s (PE1ITR 2021)
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	المعيار الأول: الترددات النموذجية لبلاغات meteor scatter (kHz)
+2° criterio: modi digitali MS e <MS>	المعيار الثاني: الأنماط الرقمية MS و<MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	3.2 s لكل خطوة · دورة 19.2 s (PE1ITR 2007)
 <- moda misurata dal radar Collm	<- المنوال المقيس برادار Collm
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  الفص {2:F0}° أفقي / {3:F0}° رأسي{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	على اليسار: التدفق وZHR المقيسان للزخات النشطة من Global Meteor Network (كاميرات، تحديث يومي؛ الخط الأحمر = آخر تحديث). على اليمين: نقاط الإشعاع التي يرصدها رادار CMOR (كندا، 43° N) في الوقت شبه الحقيقي، بما فيها الزخات النهارية؛ وفي الأسفل، نقاط الإشعاع نفسها ملوَّنة حسب السرعة.
 A.R.	المطلع المستقيم
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	مقبول لـ "{0}": {1} من {2}، {3} MHz
 ADESSO	الآن
 ADIF: {0} ({1} quadrati-QSO)	ADIF: {0} ({1} مربعات QSO)
 ALTRI RIFERIMENTI DELL'ARTICOLO	مراجع أخرى من المقال
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	توهين المسار (أثر منخفض الكثافة، McKinley 1961؛ دون احتساب كسب الهوائيات)
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	توهين المسار (أثر منخفض الكثافة، McKinley 1961 و ITU-R P.843؛ دون احتساب كسب الهوائيات)
 ATTENZIONE: {0}	تنبيه: {0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	تنبيه: {0} و{1} يقعان داخل فص الهوائي ({2}° عند -3 dB حول {3}°): بهذا التوجيه هما مغطَّيان أصلاً. مُعلَّمان بالرمادي على الخريطة.
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	تنبيه: {0} يقع داخل فص الهوائي ({1}° عند -3 dB حول {2}°): بهذا التوجيه هو مغطّى أصلاً. مُعلَّم بالرمادي على الخريطة.
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	مفعّل (حذر، الإعداد الابتدائي): تتبع قدرة كل أثر الصيغة الكاملة لـ McKinley و ITU-R P.843، 1 / (1 − cos²β sin²φ): الآثار التي تعبر مستوى المسار تقل بـ 10-15 dB عن تلك الواقعة فيه، ولا يُبالغ في تقدير أي أثر.\nالتأثير: تسود نقاط الإشعاع المحاذية للمسار لا العمودية عليه؛ وتُتتبَّع منحنيات DJ5HG بشكل أفضل ساعة بساعة، مع قيم دنيا عميقة عندما تكون نقطة الإشعاع منخفضة.\nمعطّل: يُوزن كل أثر كأنه يقع في مستوى المسار (β = 0)، كما حتى الإصدار 1.6: يتبع قاعدة نقاط الإشعاع العمودية على المسار (SM6FHZ، DH9GCD)، لكنه يبالغ في تقدير الآثار التي تعبر المستوى.
 Adesso	الآن
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	تحديث تلقائي لجميع المصادر كل 5 دقائق
+Aggiungi	إضافة
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	تؤخذ محددات المواقع غير الدقيقة (4 خانات فقط) أيضاً من CALL3، عندما يحوي CALL3 محدد الموقع ذا 6 خانات.
 Andromedidi	الأندروميديات
+Angolo β tra scia e tratta (McKinley completo)	الزاوية β بين الأثر والمسار (صيغة McKinley الكاملة)
 Antenna	الهوائي
 Antenna Yagi: boom m	هوائي Yagi: طول الذراع m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	هوائي Yagi: الذراع {0:F2} m = {1:F2} lambda عند {2:F0} MHz -> كسب {3:F1} dBi (منحنى DL6WU)،\n  الفص عند -3 dB {4:F0}° أفقياً / {5:F0}° رأسياً (Kraus مصحَّحاً بمحاكاة NEC لـ W4RNL)
 Antenna az: -	سمت الهوائي: -
 Antenna az: {0}° (verso il DX)	سمت الهوائي: {0}° (نحو DX)
 Apri in Word	فتح في Word
+Apri la cartella degli spot	فتح مجلد البلاغات
+Argomenti di partenza	المواضيع الافتراضية
 Arietidi di maggio Sud diurne	الحمليات الجنوبية النهارية لشهر مايو
 Arietidi diurne	الحمليات النهارية
 Assi del flusso non trovati nella posizione attesa.	لم يُعثر على محاور التدفق في الموضع المتوقع.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	التوهين {0:F1} dB -> الإشارة عند الهوائي {1:F1} dBm، الحد الأدنى للاستقبال {2:F0} dBm، الهامش {3:+0.0;-0.0} dB
 Attività	النشاط
-Attivo oggi	نشطة اليوم
 Attuazione sperimentale previsioni	تنبؤات تجريبية
 Aurigidi	الأوريجيات
 Azimut	السمت
 BILANCIO A {0:F0} MHz (punto medio)	ميزانية الوصلة عند {0:F0} MHz (نقطة المنتصف)
 Banda MHz	النطاق MHz
+Bande (MHz)	النطاقات (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki, "Graves" – المصفوفات والقطاعات وتوقيت الحزمة
 Bootidi di giugno	العوّائيات لشهر يونيو
 CALCOLO E TEORIA DELL'EFFICIENZA	الكفاءة: الحساب والنظرية
+CALL3: caricamento...	CALL3: جارٍ التحميل...
+CALL3: nessun archivio (data/call3.txt)	CALL3: لا يوجد أرشيف (data/call3.txt)
+CALL3: {0:N0} nominativi	CALL3: {0:N0} رمز نداء
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: خرائط نقاط الإشعاع
 COME ASCOLTARE I PING DI GRAVES	كيف تسمع نبضات GRAVES
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	لا يوجد اتصال بالإنترنت: البيانات الخارجية غير محدَّثة (محاولة جديدة بعد 5 دقائق)
 Calcola	احسب
 Calcolo dell'efficienza	حساب الكفاءة
 Calcolo non riuscito: {0}	فشل الحساب: {0}
+Calcolo per {0} UTC	الحساب لـ {0} UTC
+Calcolo per: adesso	الحساب لـ: الآن
+Calcolo per: {0} UTC	الحساب لـ: {0} UTC
+Calcolo previsionale	الحساب التنبؤي
 Camelopardalidi di ottobre	الزرافيات لشهر أكتوبر
 Cancella memoria	مسح الذاكرة
 Cancellare tutti i quadrati caricati dal file ADIF?	حذف جميع المربعات المحمَّلة من ملف ADIF؟
@@ -55,14 +72,27 @@ Carattere	الخط
 Carica file ADIF...	تحميل ملف ADIF...
 Carica file RMOB dal disco...	تحميل ملف RMOB من القرص...
 Catalogo sciami	فهرس الزخات
-Che cosa fare	ما العمل
+Che cosa fare	ما الذي تفعله
+Chiaro	فاتح
+Chiuso	مغلق
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	انقر على مسار في الخريطة أو على صف في الجدول لعرض تفاصيل الاتصال وسحابته.
+Cluster con PSKReporter	Cluster مع PSKReporter
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	Cluster الخاص بـ DM4X مع بلاغات PSKReporter (dm4x.ddns.net، المنفذ 8500): هنا تصل فكّات ترميز MSK144 من WSJT-X وMSHV. وبديلاً HamAlert (hamalert.org 7300، يتطلب حساباً مع مشغِّلات trigger).
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster يختاره المستخدم. على ON0DXK تكون نطاقات VHF مُرشَّحة: تُفعَّل بالأمر set/filter dxbm/pass 6 (ثم 4، 2...). مثال آخر: hamqth.com 7300.
 Collm stessa ora	Collm في الساعة نفسها
 Collm {0} MHz (validi)	Collm {0} MHz (صالحة)
 Comae Berenicidi	الهلبيات
 Comandi	عناصر التحكم
+Come DJ5HG	مثل DJ5HG
+Commento	التعليق
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	مع التوهين المتوسط لـ OH5IY (200 dB عند 144 MHz، محوَّلاً بـ λ³: {0:F1} dB عند {1:F0} MHz) يصبح الهامش {2:+0.0;-0.0} dB
+Connessione a {0}...	جارٍ الاتصال بـ {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	لا يوجد اتصال بالإنترنت.\n\nلا يمكن تحديث بيانات الرادارات وRMOB: يستخدم البرنامج آخر البيانات المحفوظة ويعيد المحاولة تلقائياً كل 5 دقائق.
 Connessione ripristinata.	عاد الاتصال.
+Connesso: {0} argomenti	متصل: {0} مواضيع
+Connetti	اتصال
+Connetti all'avvio	الاتصال عند التشغيل
+Contatori	العدّادات
 Conteggio	العدّ
 Controllo le fonti di dati esterne...	جارٍ فحص مصادر البيانات الخارجية...
 Corrispondente	المحطة المقابلة
@@ -72,28 +102,37 @@ D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sot
 DATI DEGLI SCIAMI	بيانات الزخات
 DATI RADAR IN DIRETTA	بيانات الرادار المباشرة
 DENTRO il lobo	داخل الفص
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	من هنا: الآثار في الطبقة E على نحو 90 km (رادار SKiYMET)، صيغة زاوية الارتفاع، Hot A / Hot B، التشتت الجانبي (side-scatter)، توهين 182-200 dB، مدة النبضات وفق IARU.
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	DX cluster من اختيارك
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	من هنا: الآثار في الطبقة E على نحو 90 km (رادار SKiYMET)، صيغة الارتفاع الزاوي، Hot A / Hot B، التشتت الجانبي (side-scatter)، توهين المسار، مدة النبضات وفق IARU.
+Data del calcolo (UTC)	تاريخ الحساب (UTC)
 Decl.	الميل
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	كثافة الأثر q = {0:E1} إلكترون/m. مراجع المقال عند 144 MHz: ‏182 dB حداً أدنى (GM8JBJ)، ‏200 dB متوسطاً (OH5IY)
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	كثافة الأثر q = {0:E1} إلكترون/m. المراجع: 172-190 dB (حسابات G4BAO التي ينقلها GM8JBJ)، 200 dB متوسطاً عند 144 MHz (OH5IY)
 Densita' scia q = 10^	كثافة الأثر q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	تفاصيل الـ {0:F0} s القادمة: المنطقة المفيدة ليست في أي خطوة من خطوات الحزمة
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	تفاصيل الـ {0:F0} s القادمة: خطوات القطاع {1} ({2:F1} s لكل منها) والخطوة التي تضيء المنطقة المفيدة
 Direzioni Hot A / Hot B	اتجاها Hot A / Hot B
+Disconnesso	انقطع الاتصال
+Disconnetti	قطع الاتصال
 Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	المسافة        {0:F0} km   السمت {1:F1}°   (من المحطة المقابلة {2:F1}°)
+Documenti tecnici	وثائق تقنية
 Documento Word	مستند Word
 Documento esportato: {0}	تم تصدير المستند: {0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	أين توجد مصادر البيانات المباشرة. الدوائر المتقطعة = منطقة السماء التي يراها الرادار (نحو 300 km حول المحطة، والآثار على 90 km): لا يرصد أي رادار السماء فوق مسارك، فالبيانات تبيّن مدى نشاط الزخة. الخطوط المنقَّطة = المسافة من محطتك.
 Draconidi di ottobre	التنينيات لشهر أكتوبر
-E	شرق
+E	E
 EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	كفاءة المسار GRAVES → أنت الآن
 Effic. %	الكفاءة %
 Efficienza - spiegazione	الكفاءة - شرح
 Efficienza oraria per {0} del {1} (UTC, valori a metà ora)	الكفاءة الساعية لـ {0} في {1} (UTC، القيم عند منتصف الساعة)
 Efficienza tratta GRAVES → te	كفاءة المسار GRAVES → أنت
-Elev.	زاوية الارتفاع
-Elevazione d'antenna in funzione della distanza dallo scatter point	زاوية ارتفاع الهوائي بدلالة المسافة من نقطة التشتت
-Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	زاوية ارتفاع الهوائي نحو نقطة المنتصف: {0:F1}°   (صيغة المقال، الشكل 7)
-Elevazione lobo °	زاوية ارتفاع الفص °
-Errore all'avvio: {0}	خطأ عند بدء التشغيل: {0}
+Elev.	الارتفاع الزاوي
+Elevazione d'antenna in funzione della distanza dallo scatter point	الارتفاع الزاوي للهوائي بدلالة المسافة من نقطة التشتت
+Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	الارتفاع الزاوي للهوائي نحو نقطة المنتصف: {0:F1}°   (صيغة المقال، الشكل 7)
+Elevazione lobo °	الارتفاع الزاوي للفص °
+Errore all'avvio: {0}	خطأ عند التشغيل: {0}
+Errore: {0}	خطأ: {0}
 Esponente	الأُس
 Esponente dal confronto RMOB	الأُس من مقارنة RMOB
 Esponente non calcolabile con questi dati.	لا يمكن حساب الأُس من هذه البيانات.
@@ -102,6 +141,7 @@ Esponente λ^k	أُس λ^k
 Esporta	تصدير
 Esporta il documento in Word	تصدير المستند إلى Word
 Esporta in Word (.docx)...	تصدير إلى Word (.docx)...
+Europa	أوروبا
 FONTE PRINCIPALE	المصدر الرئيسي
 FONTI	المصادر
 Fattore di stazione K	معامل المحطة K
@@ -110,27 +150,38 @@ File ADIF del log	ملف ADIF للسجل
 File RMOB	ملف RMOB
 File RMOB (conteggi orari del mese)	ملف RMOB (العدّ الساعي للشهر)
 File mancante: {0}	ملف مفقود: {0}
+Filtro	المرشِّح
+Filtro degli spot meteor scatter	مرشِّح بلاغات meteor scatter
 Finestra utile	النافذة المفيدة
 Flusso radar	تدفق الرادار
 Flusso radar: nessun dato. Premi "Scarica adesso".	تدفق الرادار: لا بيانات. اضغط "تنزيل الآن".
+Fonte	المصدر
 Fonte del massimo	مصدر الذروة
 Fonti	المصادر
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	تغيّر تنسيق الرسم البياني ({0}x{1}): تتعذر القراءة.
 Formato file mensile, {0}/{1}.	تنسيق الملف الشهري، {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	تنسيق جدول النشرة ({0}/{1}): إذا احتوى الملف على عدة راصدين فتُقرأ بياناتهم متتالية؛ استخدم ملفاً لراصد واحد.
+Foto	صورة
 Frequenza di arrivo MHz	التردد المستهدف MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT، DH8BQA، geekshed.co.uk، دليل WSJT-X، WB2FKO (النبضات)، IU6GIR (النشاط على 143.050 MHz)، IARU Region 1 VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	هندسة المسار (أرض كروية، R = 6372.7955 km)
+GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN وCMOR عند {0} UTC: ‏{1} أخطاء ({2})
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	تم فحص GMN وCMOR عند {0} UTC ‏({1} ملفات جديدة). بيانات GMN: ‏CC BY 4.0.
 GRAVES in linea diretta: az {0:F0}°	GRAVES في خط مباشر: السمت {0:F0}°
 Geminidi	التوأميات
 Geometria e attenuazione	الهندسة والتوهين
 Giorno per la tabella 24 h (UTC)	يوم جدول الـ 24 h (UTC)
 Giudizio	التقييم
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	تُحفظ البلاغات المقبولة في data/spot_ms، ملف CSV واحد لكل يوم. وتؤخذ محددات المواقع الناقصة من أرشيف CALL3 (data/call3.txt).
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: التدفق وZHR المقيسان للزخات. البيانات CC BY 4.0؛ Vida et al. 2021, MNRAS 506(4)، وVida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	كسب الهوائي dBi (الإرسال = الاستقبال)
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - منحنى الكسب/طول الذراع لهوائيات Yagi الطويلة، G(dBi) = 7.773 log(L/lambda) + 11.43، كما أورده W8IO (w8io.com)
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B (البقع الساخنة التقليدية، لتوجيه الهوائي)
+Host	المضيف
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B: بقع ساخنة على بعد {0} km من نقطة المنتصف (AMS 203، W8WN، MSHV).
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B: بقع ساخنة على بعد {0} km من نقطة المنتصف (قيمة مُدخلة يدوياً).
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B: بقع ساخنة على بعد {0} km من نقطة المنتصف، انحراف {1}° (جدول AMS لـ J. Richardson، DJ5HG).
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A: السمت {0:F0}° ({1:+0;-0}°)  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B: السمت {0:F0}° ({1:+0;-0}°)  {2}
@@ -139,31 +190,41 @@ Hot fuori lobo	Hot خارج الفص
 Hot nel lobo	Hot داخل الفص
 Hot spot dal punto medio km	البقعة الساخنة من نقطة المنتصف km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	النبضات خطوط قصيرة قرب الحامل؛ الآثار الطويلة (عالية الكثافة) أعرض وتُظهر إزاحة دوبلر
-IL CIELO VISTO DA GRAVES	السماء كما يراها GRAVES
+IL CIELO VISTO DA GRAVES	السماء كما تُرى من GRAVES
 IMO {0} (giorno)	IMO {0} (يوم)
 Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	تصبح المحطة المقابلة GRAVES (JN27SI، الارتفاع 200 m) ويُعاد حساب المسار الرئيسي
 Il file scelto non e' un file locale.	الملف المختار ليس ملفاً محلياً.
 Il mio locator	محدد موقعي
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft (مفهوم كفاءة الزخة)، www.kolumbus.fi/oh5iy (موقع تاريخي)
+Importa CALL3.TXT...	استيراد CALL3.TXT...
 Impossibile leggere {0}: {1}	تتعذر قراءة {0}: {1}
+Impostazione del calcolo:	إعداد الحساب:
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	في forward scatter تزداد المدة أيضاً مع sec²φ (φ = {0:F0}° عند نقطة منتصف المسار؛ يقيس Collm في backscatter، φ = 0): x {1:F1}، لذا فإن صدى مدته 1 s في Collm يدوم نحو {2:F0} ms على المسار.
+Indice della tratta Σ ZHR×η: {0}	مؤشر المسار Σ ZHR×η: {0}
 Indice sciami tratta	مؤشر زخات المسار
 Indice tratta (ZHR×eff.)	مؤشر المسار (ZHR×الكفاءة)
+Indirizzo mancante	العنوان مفقود
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF، مايو 2025 (قاعدتا lambda^3 وlambda^2، نقطة المنتصف، أفضل اتجاه)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc (مخطط قطبي مع أفضل اتجاه)
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (الجداول 5 و6 و7)
+Invia	إرسال
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas: الكسب وعرض الفص، G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW"، مؤتمر DARC، يناير 2018: صيغة أفضل اتجاه\n    لـ DH9GCD (Sin(El) x Cos(El) x Sin(P-Az))، التشتت المخروطي واختيار HOT-A / HOT-B لـ DJ5HG،\n    نقطة إشعاع مفيدة بين 20 و70 درجة، أفضل مسافة 1300-1500 km، الشهب المتفرقة لـ KB0VUK
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator: تقديرات الكسب للأنواع VK3AUU وWA2PHW وDJ9BV
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (عن Kaiser & Closs 1952)
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss, hamradio.engineering (عن Kaiser & Closs 1952؛ ينقل حسابات John Worsnop G4BAO، 172-190 dB)
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): مرجع ثابت بالـ dB، آثار طويلة مع نقطة إشعاع منخفضة،\n    منحنيات المسارات من هامبورغ ومن ميونخ؛ جدول AMS لـ J. Richardson لمسافة البقع الساخنة
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI (الشفق وFAI والتشتت النيزكي) ودليل "QTFGUI Help" 2007: قانون التشتت المخروطي،\n    حالة الاختبار هامبورغ - برشلونة خلال الربعيات، استُخدمت للتحقق من النموذج
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (التحقق من القاعدتين)؛\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design و70-CM Yagi Stacks Part 2 (هوائي Yagi VK3AUU لـ David Tanner):\n    محاكاة NEC استُخدمت للتحقق من منحنى الكسب وتصحيح الفص الأفقي (0.93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	حدود المنطقة المشتركة (تقاطعات المنحنيات حيث يلتقي أفق كل محطة بالطبقة E، المقال)
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	الكلمة "{0}" موجودة، لكن السطر ليس بلاغاً "DX de ..." صالحاً.
+La riga non è uno spot "DX de ..." valido.	السطر ليس بلاغاً "DX de ..." صالحاً.
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	تغيّر مقياس مخطط الارتفاعات: تبقى إحصاءات الارتفاع (المنوال، المتوسط، الوسيط) صالحة، أما الأعداد المطلقة فلا.
-La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	يُحسب تتابع الحزمة من ساعة الحاسوب: زامِنها مع خادم NTP (خطأ بضعة أعشار الثانية على الأكثر).
-La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	التتابع مرتبط بتوقيت UTC (PE1ITR): منذ 2021 تدوم كل خطوة 0.8 s ودورة القطاع 4.8 s؛ وفي 2007 كانت 3.2 s و19.2 s. تُزيح محطة التحكم التتابع أحياناً ببضع خطوات: التفاصيل تنبؤ يجب تأكيده بالاستماع. لا يُسمع الأثر إلا إذا أضاءته الحزمة أثناء بقائه: الاحتمال ≈ min(1, (الخطوة + الأثر) / الدورة) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (المدة النموذجية لأثر منخفض الكثافة عند 143 MHz ≈ {1:F1} s).
+La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	يُحسب تسلسل الحزمة من ساعة الحاسوب: زامِنها مع خادم NTP (خطأ بضعة أعشار الثانية على الأكثر).
+La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	التسلسل مرتبط بتوقيت UTC (PE1ITR): منذ 2021 تدوم كل خطوة 0.8 s ودورة القطاع 4.8 s؛ وفي 2007 كانت 3.2 s و19.2 s. تُزيح محطة التحكم التسلسل أحياناً ببضع خطوات: التفاصيل تنبؤ يجب تأكيده بالاستماع. لا يُسمع الأثر إلا إذا أضاءته الحزمة أثناء بقائه: الاحتمال ≈ min(1, (الخطوة + الأثر) / الدورة) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (المدة النموذجية لأثر منخفض الكثافة عند 143 MHz ≈ {1:F1} s).
 Lato	الجانب
 Lato A = a sinistra della tratta, B = a destra	الجانب A = يسار المسار، B = يمينه
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	الحروف بجانب النسبة المئوية تبيّن من أي جانب من المسار تأتي معظم الانعكاسات. A = إلى اليسار عند النظر من محطتك نحو المحطة المقابلة (منطقة Hot A)؛ B = إلى اليمين (منطقة Hot B). يُستحسن إدارة الهوائي 10-30° نحو ذلك الجانب (side-scatter). بلا حرف = كفاءة دون 5 %. السطر Σ: مؤشر المسار = مجموع ZHR x الكفاءة لجميع الزخات النشطة. الأسطر الزرقاء الفاتحة: مقارنة مع صيغة DH9GCD (DF5HC 2018). ↑ = نقطة الإشعاع فوق 70° من محطتك (مرتفعة جداً).
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	الصفوف المميَّزة هي الزخات النشطة اليوم (UTC)
 Legenda	مفتاح الرموز
 Leonidi	الأسديات
 Leonis Minoridi	الأسديات الصغرى
@@ -173,10 +234,15 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	حدود 
 Lincidi di settembre	الوشقيات لشهر سبتمبر
 Lingua dell'interfaccia	لغة الواجهة
 Liridi	القيثاريات
+Live e dati real-time	مباشر وبيانات الوقت الفعلي
+Loc DX	محدد DX
+Loc spotter	محدد المُبلِّغ
 Locator del corrispondente non valido	محدد موقع المحطة المقابلة غير صالح
 Locator della stazione non valido	محدد موقع المحطة غير صالح
+Manca il nominativo per il login	رمز النداء لتسجيل الدخول مفقود
 Mappa d'Europa	خريطة أوروبا
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	خريطة أوروبا غير متاحة (يلزم اتصال بالشبكة عند أول تشغيل).
+Mappa dei radar europei	خريطة الرادارات الأوروبية
 Mappa quadrati	خريطة المربعات
 Mappa:	الخريطة:
 Mappa: bordo = {0} km dalla stazione. {1}	الخريطة: الحافة = {0} km من المحطة. {1}
@@ -185,66 +251,96 @@ Meteore/ora - ieri {0} e oggi {1} (UTC)	شهب/ساعة - أمس {0} واليو�
 Metti GRAVES come DX	اجعل GRAVES هو DX
 Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	أفضل توجيه للزخة: متعامد مع اتجاه\nالوصول (سمت نقطة الإشعاع +-90°، تفاوت +-40-50°،\nSM6FHZ). في المسقط الأفقي: الخط الأصفر = انجراف\nالزخة، النقاط البرتقالية = التوجيهات، القطوع الناقصة\nPREV = الآثار الأرجح الآن.\nانقر على نقطة إشعاع: مسارها مع ساعات UTC
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	مقيس في Collm ومحوَّل إلى {0} MHz - أمس {1} واليوم {2} (UTC)
+Mondo	العالم
 Monocerotidi di dicembre	وحيد القرنيات لشهر ديسمبر
-N	شمال
+N	N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  مدة الانعكاسات x ({1:F1}/{0:F0})^2 = x {5:F4}: صدى مدته 1 s عند {1:F1} MHz يدوم نحو {6:F0} ms عند {0:F0} MHz (أقصى نبضة وفق IARU عند {0:F0} MHz: {7:F0} ms).\nقواعد تجريبية لـ SM6FHZ (VUSHF 2025). يأخذ المعامل K في الحسبان محطة الاستقبال (القدرة، الهوائيات): يُستنتج بالمقارنة مع راصد RMOB على النطاق نفسه.
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - السواحل والحدود بمقياس 1:50 مليون، ملكية عامة، www.naturalearthdata.com (خريطة أوروبا)
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	في التوهين (β = 90°، حذر): نصف القطر الابتدائي للأثر {0:F1} dB (r0 = {1:F2} m عند متوسط الارتفاع وفق ITU البالغ {2:F1} km لتردد {3:F0} MHz). عندما يقع الأثر في مستوى المسار (β = 0°، أفضل حالة) ينخفض التوهين إلى {4:F1} dB ({5:F1} dB) ويرتفع الهامش إلى {6:+0.0;-0.0} dB
+Nero	أسود
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	لا يوجد Hot موصى به: الزخات النشطة شبه منعدمة في هذا الوقت
+Nessun dato GMN: premi "Scarica adesso".	لا بيانات GMN: اضغط "تنزيل الآن".
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	لا بيانات رادار: نزّلها من التبويب الفرعي مباشر وبيانات الوقت الفعلي › تدفق الرادار.
 Nessuna fonte Collm in fonti_radar.csv	لا يوجد مصدر Collm في fonti_radar.csv
 Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	لا آثار متوقعة: الزخات النشطة تحت الأفق أو بكفاءة معدومة لهذا المسار.
 Nessuna zona comune dello strato E ({0})	لا توجد منطقة مشتركة في الطبقة E ({0})
+Nessuno sciame utile in questo momento	لا توجد زخة مفيدة في هذه اللحظة
 No	لا
 No: fuori dai settori	لا: خارج القطاعات
 No: sopra il fascio (circa 25°)	لا: فوق الحزمة (نحو 25°)
 No: sotto l'orizzonte di GRAVES	لا: تحت أفق GRAVES
+Nominativo per il login	رمز النداء لتسجيل الدخول
+Non connesso	غير متصل
 Non ho riconosciuto il formato del file.	لم يُتعرَّف على تنسيق الملف.
 Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	تتعذر قراءة المقياس الرأسي للتدفق (التسمية في الأعلى: {0}): القيم تحتاج إلى تحقق.
 Non riesco ad aprire il documento: {0}	يتعذر فتح المستند: {0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	ليست نقطة على الخريطة: إنها شبكة عالمية من الكاميرات (لهواة في معظمها) منتشرة في بلدان كثيرة في جميع القارات.
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	ملاحظة: بيانات الرادارات ملك للجهات المعنية بها. قبل توزيع البرنامج يجب طلب الإذن بجلبها آلياً.
+Notte	ليلي
 Nuovo locator del corrispondente dalla mappa: {0}	محدد موقع جديد للمحطة المقابلة من الخريطة: {0}
 Nuovo locator della stazione dalla mappa: {0}	محدد موقع جديد للمحطة من الخريطة: {0}
-O	غرب
+Nuovo tentativo tra 30 s	محاولة جديدة بعد 30 s
+Nuvola	السحابة
+O	W
 ORA MIGLIORE DEL GIORNO	أفضل وقت في اليوم
 Ora	الوقت
 Ora UTC	وقت UTC
-Ora della volta celeste (±36 h)	وقت القبة السماوية (±36 h)
+Ore (da −12 a +36 h)	الساعات (من −12 إلى +36 h)
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	الساعات المشتركة: {0}. النسبة الوسيطة RMOB/Collm = {1:F4}.\nالأُس التجريبي (مع K = 1): k = {2:F2}  (قاعدة SM6FHZ: 3).\n\nهل يُطبَّق هذا الأُس؟ (بديلاً يمكن إبقاء k = 3 وضبط المعامل K = {3:F2}.)
 Orionidi	الجباريات
 Orionidi di novembre	الجباريات لشهر نوفمبر
 Osservatore RMOB	راصد RMOB
 PREVISIONE SPERIMENTALE	تنبؤ تجريبي
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	المرور التالي للحزمة فوق المنطقة
+PSKReporter MQTT	PSKReporter MQTT
 Passo	الخطوة
+Pastello acquamarina	زبرجدي باستيل
+Pastello arancione	برتقالي باستيل
+Pastello azzurro	سماوي باستيل
+Pastello indaco	نيلي باستيل
+Pastello lilla	ليلكي باستيل
+Pastello marrone	بني باستيل
+Pastello rosa	وردي باستيل
+Pastello verde	أخضر باستيل
 Pegasidi di luglio	الفرسيات لشهر يوليو
 Perseidi	البرشاويات
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (أقصى المعدلات الساعية الراديوية)
+Personalizzata	مخصص
 Phoenicidi	العنقاويات
-Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	المسقط الأفقي: الخط الأصفر = انجراف الزخة المختارة (أو الأنسب)، القطوع الناقصة PREV = حيث تقع الآثار الأرجح الآن. القبة السماوية إلى اليمين (الشروق/الغروب بتوقيت UTC في {0}): أصفر = كفاءة >= 50 % وZHR >= 2، برتقالي >= 20 %، رمادي = شبه خامل.
+Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	المسقط الأفقي: الخط الأصفر = انجراف الزخة المختارة (أو الأنسب)، القطوع الناقصة PREV = حيث تقع الآثار الأرجح الآن. قبة السماء إلى اليمين (يشرق/يغرب بتوقيت UTC في {0}): أصفر = كفاءة >= 50 % وZHR >= 2، برتقالي >= 20 %، رمادي = شبه خامل.
 Piscidi di aprile diurne	الحوتيات النهارية لشهر أبريل
+Porta	المنفذ
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	المدى عند ارتفاع الآثار مع فص عند {0:F1}°: {1:F0} km
 Potenza W	القدرة W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	القدرة {0:F0} W = {1:F1} dBm، EIRP = {2:F1} dBm (الكسب بـ dBd = dBi - 2.15)
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	القدرة {0:F0} W = {1:F1} dBm، EIRP = {2:F1} dBm (الكسب بـ dBi)
 Previsione /ora	التنبؤ /ساعة
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	تنبؤ وحساب مباشر لكفاءة الزخات الشهابية لأجل meteor scatter
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	تنبؤ تجريبي للساعات الـ 24 القادمة عند {0} MHz لـ {1}
 Previsione {0} /ora	التنبؤ {0} /ساعة
 Previsione {0} MHz (rifl./ora)	التنبؤ {0} MHz (انعكاس/ساعة)
 Pronto	جاهز
 Prossimo massimo (UTC)	الذروة التالية (UTC)
+Prova del filtro	اختبار المرشِّح
+Prudente	حذر
 Punt. migliore	أفضل توجيه
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	التوجيه {0:F0}°: Hot A {1}، Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	نقاط على بعد {0:F0} km على جانبي نقطة المنتصف، متعامدة مع المسار (AMS Bulletin 203 وW8WN: 50-150 km؛ كما في MSHV)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	نقاط على بعد {0:F0} km على جانبي نقطة المنتصف، عمودية على المسار (قيمة مُدخلة يدوياً؛ يستخدم MSHV مسافة 150 km)
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	نقاط على بعد {0:F0} km على جانبي نقطة المنتصف، عمودية على المسار: انحراف {1:F1}° من جدول AMS لـ J. Richardson (13° عند 1000 km، 11° عند 1250، 10° عند 1500 و 2000)، كما أورده DJ5HG
 Punto di riflessione	نقطة الانعكاس
 Punto medio     {0}  ({1:F2}N {2:F2}E)	نقطة المنتصف     {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	نقطة المنتصف (أمامي)
-Punto medio {0}, elev. per {1:F1} km: {2:F1}°	نقطة المنتصف {0}، زاوية الارتفاع لـ {1:F1} km: {2:F1}°
+Punto medio {0}, elev. per {1:F1} km: {2:F1}°	نقطة المنتصف {0}، الارتفاع الزاوي لـ {1:F1} km: {2:F1}°
 Puppidi-Velidi	الكوثليات-الشراعيات
 Quadrantidi	الربعيات
-Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	أربع مصفوفات مطوَّرة الطور تغطي السماء الجنوبية، من سمت 90° إلى 270°، في أربعة قطاعات من 45° (D، C، B، A)؛ يُقسَم كل قطاع إلى 6 خطوات من 7.5°، تُضاء واحدة تلو الأخرى، في اللحظة نفسها في القطاعات الأربعة جميعها (الخطوات مرقَّمة من 1 إلى 6 بدءاً من أدنى سمت). عرض الحزمة نحو 25° في زاوية الارتفاع: عند ارتفاع الآثار تغطي الحلقة الملونة بين الدائرتين المتقطعتين. النقاط البرتقالية/الوردية = مناطق PREV للمسار GRAVES → أنت، الخط الأخضر = اتجاه محطتك، الخط الأحمر = من محطتك إلى البقعة الساخنة الموصى بها (PE1ITR).
+Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	أربع مصفوفات مطوَّرة الطور تغطي السماء الجنوبية، من سمت 90° إلى 270°، في أربعة قطاعات من 45° (D، C، B، A)؛ يُقسَم كل قطاع إلى 6 خطوات من 7.5°، تُضاء واحدة تلو الأخرى، في اللحظة نفسها في القطاعات الأربعة جميعها (الخطوات مرقَّمة من 1 إلى 6 بدءاً من أدنى سمت). عرض الحزمة نحو 25° في الارتفاع الزاوي: عند ارتفاع الآثار تغطي الحلقة الملونة بين الدائرتين المتقطعتين. النقاط البرتقالية/الوردية = مناطق PREV للمسار GRAVES → أنت، الخط الأخضر = اتجاه محطتك، الخط الأحمر = من محطتك إلى البقعة الساخنة الموصى بها (PE1ITR).
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	ارتفاع الآثار والخيارات مختارة يدوياً. يُختار تلقائياً عندما تغيّر الارتفاع أو خانة "من الرادار" أو الآثار الطويلة أو الزاوية β.
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	ارتفاع ثابت قدره 102 km، آثار أطول مع نقطة إشعاع منخفضة والزاوية β، كما في "Die Geometrie von Meteorscatterverbindungen" لـ DJ5HG (2004).\nمقارنة بمنحنياته: في المتوسط أقل بـ 2 dB، والانحراف النموذجي 5 dB؛ تسود نقاط الإشعاع المحاذية للمسار.
 Quota scie      {0:F1} km (strato E){1}	ارتفاع الآثار      {0:F1} km (الطبقة E){1}
 Quota scie km	ارتفاع الآثار km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	ارتفاعات الآثار (Collm): الأكثر تكراراً {0:F1} km، المتوسط {1:F1}، الوسيط {2:F1}، الانحراف المعياري {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)	رادار GRAVES (تبويب رادار GRAVES)
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	نقطة إشعاع منخفضة على امتداد المسار: {0}. تبقى الكفاءة المحسوبة منخفضة، لكن مع آثار مماسة محاذية للمسار يتوقع DJ5HG انعكاسات نادرة وقوية: يستحق الاستماع.
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	نقطة الإشعاع مرتفعة جداً (فوق {0}°): {1}. تسقط الآثار شبه عمودية وتعكس قليلاً نحو المسار (DF5HC، DH9GCD).
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: المنفذ 7000 = CW وRTTY، المنفذ 7001 = FT8. تسجيل الدخول برمز النداء فقط. نادراً ما تفك مستقبلات skimmer في RBN ترميز أنماط MS: يفيد أساساً للبلاغات التي تحوي <MS> في التعليق.
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	قواعد تجريبية بين النطاقات (SM6FHZ، VUSHF 2025)
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	إعادة بناء زمنية · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	يستخدم RMOB رادار GRAVES لعدّ الشهب الساعي: قارن نبضاتك مع الراصدين على 143.050 MHz
@@ -252,46 +348,80 @@ RMOB {0} (scala a destra)	RMOB {0} (المقياس الأيمن)
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}: {1} ساعة مقروءة عند {2} UTC
 RMOB – osservatori su 143,050 MHz	RMOB – الراصدون على 143.050 MHz
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org؛ النشرات الشهرية rmob.org/rmobtext (راصدو GRAVES على 143.050 MHz: القبة السماوية في البندقية (Planetario di Venezia)، Faenza، Rovereto وغيرهم)
+Raccolta dati	جمع البيانات
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	التوصية ITU-R P.843-1 (1997): الزاوية beta بين الأثر ومستوى المسار، نصف القطر الابتدائي للأثر، متوسط الارتفاع بدلالة التردد
 Radar GRAVES	رادار GRAVES
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	رادار الشهب في Collm، جامعة لايبزيغ (LIM) وIAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	نقطة الإشعاع:
+Raggio della mappa	نصف قطر الخريطة
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	استنتاج الأُس من ملف RMOB
 Ricevitore	المستقبِل
+Riconnessione tra {0} s	إعادة الاتصال بعد {0} s
+Riconnetti	إعادة الاتصال
+Riepilogo dell'anno (ZHR misurati, GMN)	ملخص السنة (ZHR المقيس، GMN)
 Riga {0} ignorata (colonne insufficienti)	تم تجاهل السطر {0} (أعمدة غير كافية)
 Riga {0}: {1}	السطر {0}: {1}
-Riporta la volta celeste al tempo reale	إعادة القبة السماوية إلى الوقت الحقيقي
+Riporta il momento del calcolo al tempo reale	إعادة وقت الحساب إلى الوقت الحقيقي
 Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	مقارنةً بـ 144 MHz: العدد/الشدة x {0:F3} ({1:+0.0;-0.0} dB)، المدة x {2:F2}. أقصى نبضة وفق IARU عند {3:F0} MHz: {4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) و"Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	العجلة = تكبير، السحب = تحريك، الفأرة فوق مربع = اتصالات QSO
-S	جنوب
+S	S
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	مرفوض: وُجدت "{0}"، لكن التردد {1:F1} kHz ليس في نطاق مختار.
+SCARTATO: frequenza sotto 27990,0 kHz.	مرفوض: التردد أقل من 27990.0 kHz.
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	مرفوض: خارج نوافذ MS ولا توجد أي كلمة من كلمات المرشِّح.
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	مرفوض: التعليق يصرّح بانتشار آخر ({0}) ولا يوجد نمط MS.
 SCIAME PIÙ FAVOREVOLE	الزخة الأنسب
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	مقطع - الآثار الأرجح كما يراها الهوائي نحو المحطة المقابلة (السمت {0}°)
+SGO, Finlandia	SGO، فنلندا
 Scarica RMOB adesso	تنزيل RMOB الآن
 Scarica adesso	تنزيل الآن
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	تجاهل فوراً أسطر الكلستر دون 27990.0 kHz (لا تظهر في وحدة التحكم ولا تُخزَّن)
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	انحراف الهوائي للبقع الساخنة من جدول AMS لـ J. Richardson كما أورده DJ5HG: 13° عند 1000 km، 11° عند 1250 km، 10° عند 1500 و 2000 km. أزل علامة الاختيار لكتابة المسافة يدوياً (يستخدم MSHV مسافة 150 km).
+Scia meteorica	أثر نيزكي
 Sciame	الزخة
 Sciame più favorevole	الزخة الأنسب
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	الزخة الأكثر فائدة: {0} (ZHR {1}، الكفاءة {2} %)
 Sciami	الزخات
+Sciami in diretta	الزخات مباشرةً
+Sciami sopra l'orizzonte: {0}	الزخات فوق الأفق: {0}
+Scie più lunghe con il radiante basso (DJ5HG)	آثار أطول مع نقطة إشعاع منخفضة (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	اكتب اسم راصد RMOB كما يظهر في اسم ملفه (مثلاً NOME_112026rmob.TXT -> NOME).
+Scrivi il nominativo per il login prima di connettere.	اكتب رمز النداء لتسجيل الدخول قبل الاتصال.
 Segnale minimo dBm	الحد الأدنى للإشارة dBm
-Sequenza del fascio	تتابع الحزمة
+Sequenza del fascio	تسلسل الحزمة
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	يلزم توفر بيانات Collm وملف RMOB للساعات نفسها معاً.
 Sextantidi diurne	السدسيات النهارية
-Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)	Shelby W8WN - qsl.net/w8wn/hscw (زاوية الارتفاع والإزاحة المثلى)
+Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)	Shelby W8WN - qsl.net/w8wn/hscw (الارتفاع الزاوي والإزاحة المثلى)
 Sigla	الرمز
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	هذه أبعد حواف السماء التي تراها المحطتان كلتاهما، وليست نقاطاً للتوجيه نحوها.
-Sorge	الشروق
+Sorge	يشرق
 Sorgente Antielio	مصدر مقابل الشمس (Antihelion)
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	معطّل (حذر): يُوزن كل أثر بجيب الارتفاع الزاوي لنقطة الإشعاع، لأنه مع نقطة إشعاع منخفضة تسقط شهب أقل لكل km².\nمفعّل: كما عند DJ5HG (2004)، مع نقطة إشعاع منخفضة تكون الآثار أطول (السماكة المفيدة للطبقة، 15 km، مقسومة على جيب الارتفاع الزاوي، حتى 100 km) وتحقق قانون الانعكاس أكثر. يتعادل التأثيران فوق نحو 9° من الارتفاع الزاوي: ترتفع الكفاءة مع نقطة إشعاع منخفضة، ولا تتغير مع نقطة إشعاع مرتفعة.
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	بلاغات MS من تبويب "جمع البيانات". لكل اتصال تبيّن السحابة أين تتركز الآثار الأرجح لذلك المسار وتلك الساعة (انعكاس مرآوي، مجموع الزخات النشطة). السحب المتقطعة = شهب متفرقة فقط. لا تُرسم البلاغات التي تقع إحدى محطتيها خارج الخريطة؛ أما التي وصلت للتو (أقل من 3 دقائق) فتومض لمدة دقيقة.
+Spot MS raccolti	بلاغات MS المجمَّعة
+Spot da mostrare	البلاغات المعروضة
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	بلاغات PSKReporter المباشرة عبر MQTT (mqtt.pskreporter.info، خدمة من M0LTE): بلا تسجيل دخول، تصل البلاغات ومعها محددات مواقع المحطة المرسِلة والمحطة المستقبِلة. موضوع واحد في كل سطر أو مفصولة بـ ;  الصيغة pskr/filter/v2/النطاق/النمط/نداء tx/نداء rx/... (+ = أي قيمة، # = الباقي).
+Spot meteor scatter raccolti (i più recenti in alto)	بلاغات meteor scatter المجمَّعة (الأحدث في الأعلى)
+Stazione	المحطة
 Stazione        {0}   quota {1:F0} m	المحطة        {0}   الارتفاع {1:F0} m
 Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	تقدير تجريبي (قواعد SM6FHZ): شهب/ساعة عند {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}؛ مدة النبضات x {4:F3}. أقصى نبضة وفق IARU عند {0:F0} MHz: {5:F0} ms. قيم استرشادية، تُقارَن بالخبرة على النطاق.{6}
-Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	Swan Meteor Skyview لـ DL1DBC - swan.ms (مرجع رسوم القبة السماوية)
+Svuota la tabella	إفراغ الجدول
+Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	Swan Meteor Skyview لـ DL1DBC - swan.ms (مرجع رسوم قبة السماء)
 Sì	نعم
 Sì · settore {0}	نعم · القطاع {0}
 TRATTA	المسار
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	المسار خلف أفق الأثر: مع آثار على ارتفاع {0:F1} km تكون نقطة المنتصف {1:F1}° تحت الأفق. يلزم آثار على ارتفاع {2:F0} km على الأقل: الاتصال ممكن فقط مع أعلى الآثار، والكفاءة والتوهين عند حد النموذج.
 Tauridi Nord	الثوريات الشمالية
 Tauridi Sud	الثوريات الجنوبية
+Tavistock, Ontario (Canada)	Tavistock، أونتاريو (كندا)
+Tema	السمة
 Tempo reale	الوقت الحقيقي
 Tipo	النوع
-Tramonta	الغروب
+Traffico MS in diretta · {0}	حركة MS مباشرةً · {0}
+Traffico in diretta	الحركة مباشرةً
+Traffico meteor scatter in diretta	حركة meteor scatter مباشرةً
+Tramonta	يغرب
 Traslato	محوَّل
 Traslato {0}	محوَّل {0}
 Tratta calcolata: {0:F0} km, {1} punti di riflessione campionati in {2:F1} s. {3}	تم حساب المسار: {0:F0} km، {1} نقطة انعكاس أُخذت عيناتها في {2:F1} s. {3}
@@ -301,25 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	المسار {0}: {1:F0} km، السمت {2:
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	ساعات مشتركة قليلة جداً ({0}) بين Collm وملف RMOB.
 Tutti i file	جميع الملفات
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	USB على 143.049 MHz (نغمة عند نحو 1 kHz) أو 143.050 MHz، AGC بطيء أو مطفأ، عرض نطاق صوتي 2.4 kHz على الأقل
+Univ. Lipsia / IAP Kühlungsborn	جامعة لايبزيغ / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	يُقبل البلاغ الواقع في هذه النوافذ حتى دون اسم النمط، إلا إذا صرّح التعليق بانتشار آخر بإحدى هذه العلامات:
 Ursidi	الدببيات
-Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	نحو البقعة الساخنة الموصى بها للمسار GRAVES → أنت (بطاقة المسار)، بزاوية ارتفاع منخفضة
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	ينطبق على البلاغات خارج النوافذ وعلى التي تحمل علامة انتشار آخر: يُحتفظ بها إذا احتوت إحدى الكلمات المفعَّلة، مكتوبة بأحرف كبيرة أو صغيرة أو مختلطة. MSK144 وFSK441 وPSK2K وJTMS وJT6M أنماط رقمية تُستخدم فقط في meteor scatter: البلاغ MS بالتأكيد. ويشير <MS> عموماً إلى أن الاتصال تم عبر meteor scatter.
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	القيم الأكثر حذراً، الإعداد الابتدائي: ارتفاع الآثار المقيس برادار Collm (خانة "من الرادار")، آثار عادية، الزاوية β مفعّلة.\nمقارنة بمنحنيات DJ5HG (الربعيات، مسارات من هامبورغ): في المتوسط أقل بـ 7 dB، مع التغير الساعي نفسه (انحراف الشكل نحو 3 dB).
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	قيم حذرة: أثر يعبر مستوى المسار (β = 90°، أسوأ حالة)، مع نصف القطر الابتدائي للأثر (ITU-R P.843) عند متوسط ارتفاع الأصداء لكل تردد
+Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	نحو البقعة الساخنة الموصى بها للمسار GRAVES → أنت (بطاقة المسار)، بارتفاع زاوي منخفض
 Vista dall'alto (E a destra)	منظر علوي (الشرق إلى اليمين)
-Volta celeste: tempo reale	القبة السماوية: الوقت الحقيقي
-Volta celeste: {0} UTC	القبة السماوية: {0} UTC
-Waterfall	الشلال (Waterfall)
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	Wikipedia, "GRAVES (system)" – المرسِل في Broye-lès-Pesmes (47.348° N 5.515° E)
 YA-MS - nessuna connessione	YA-MS - لا يوجد اتصال
 YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	YAEC من IC8TEM – تبويب رادار GRAVES (النموذج الأولي المشتق منه)
 ZHR ora	ZHR الآن
 ZONA UTILE NEL FASCIO DI GRAVES	المنطقة المفيدة في حزمة GRAVES
+a DESTRA guardando verso il corrispondente	إلى اليمين عند النظر نحو المحطة المقابلة
+a SINISTRA guardando verso il corrispondente	إلى اليسار عند النظر نحو المحطة المقابلة
+a cura di	إعداد
 a cura di Costantino IC8TEM	إعداد Costantino IC8TEM
+accettati per finestra di frequenza: {0}	مقبولة بنافذة التردد: {0}
+adesso	الآن
 adesso {0}	الآن {0}
 adesso · ancora {0:F1} s	الآن · متبقٍّ {0:F1} s
+aggiornamento una volta al giorno	تحديث مرة واحدة في اليوم
 alfa-Capricornidi	ألفا الجدييات
 alfa-Centauridi	ألفا القنطوريات
 alfa-Monocerotidi	ألفا وحيد القرنيات
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv: تم تجاهل السطر: {0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	الهوائي نحو {0}: السمت {1:F0}° · الارتفاع {2:F1}°\nGRAVES في خط مباشر: السمت {3:F0}°
+antenna {0}°	الهوائي {0}°
+auto (AMS)	تلقائي (AMS)
 azimut rispetto al corrispondente	السمت بالنسبة إلى المحطة المقابلة
 beta-Tauridi diurne	بيتا الثوريات النهارية
 buono	جيد
@@ -328,14 +469,18 @@ calcolo della tratta GRAVES → te in corso...	جارٍ حساب المسار GR
 circumpolare	دائم الظهور
 clic destro =	النقر الأيمن =
 clic sinistro =	النقر الأيسر =
+collegamento via meteor scatter	اتصال عبر meteor scatter
+comandi dopo il login, separati da ;	الأوامر بعد تسجيل الدخول، مفصولة بـ ;
+comando da inviare (es. sh/dx 20)	الأمر المراد إرساله (مثلاً sh/dx 20)
 confermato (QSL o LoTW)	مؤكَّد (QSL أو LoTW)
 copia locale del {0} UTC	نسخة محلية من {0} UTC
 corrispondente	المحطة المقابلة
 dal radar	من الرادار
+dati CC BY 4.0 (Vida et al. 2021, 2022)	بيانات CC BY 4.0 ‏(Vida et al. 2021, 2022)
 delta-Aquaridi Sud	دلتا الدلويات الجنوبية
 eco	صدى
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	الأصداء المتوقعة ≈ {0:F0}/ساعة (تجريبي: التنبؤ × الحزمة {1:F0} %)
-eco possibile (+{0:F1} s di scia)	صدى ممكن (+{0:F1} s من الأثر)
+eco possibile (+{0:F1} s di scia)	الصدى ممكن (+{0:F1} s من الأثر)
 effic. %	الكفاءة %
 effic. < 20%	الكفاءة < 20%
 effic. >= 20%	الكفاءة >= 20%
@@ -350,10 +495,12 @@ errore: {0}	خطأ: {0}
 eta-Aquaridi	إيتا الدلويات
 eta-Eridanidi	إيتا النهريات
 eta-Liridi	إيتا القيثاريات
+finestra {0} kHz	نافذة {0} kHz
 fuori dal lobo	خارج الفص
 gamma-Draconidi di luglio	غاما التنينيات لشهر يوليو
 gamma-Ursae Minoridi	غاما الدببيات الصغرى
 gradi	درجات
+hot spot (solo sporadiche) {0}	hot spot (الشهب المتفرقة فقط) {0}
 il giorno scelto non è oggi	اليوم المختار ليس اليوم الحالي
 indice	المؤشر
 indice sciami tratta (scala a destra)	مؤشر زخات المسار (المقياس الأيمن)
@@ -363,13 +510,16 @@ invariato (controllato alle {0} UTC)	دون تغيير (فُحص عند {0} UTC)
 kappa-Cygnidi	كابا الدجاجيات
 kappa-Leonidi diurne	كابا الأسديات النهارية
 la mia stazione	محطتي
+la tua stazione	محطتك
 lato prevalente {0} ({1:F0}%)	الجانب الغالب {0} ({1:F0}%)
 lavorato	تم الاتصال
 lim. A	حد A
 lim. B	حد B
 limiti zona comune	حدود المنطقة المشتركة
+linguetta "{0}"	تبويب "{0}"
 lobo antenna	فص الهوائي
 lobo {0}°	الفص {0}°
+locale	محلي
 mai scaricato	لم يُنزَّل قط
 mappa: bordo = {0} km dalla stazione	الخريطة: الحافة = {0} km من المحطة
 max Σ {0:F1} alle {1:00}:30	أقصى Σ {0:F1} عند {1:00}:30
@@ -379,20 +529,29 @@ meteore per km di quota	شهب لكل km من الارتفاع
 meteore/ora radar	شهب/ساعة (رادار)
 meteore/ora stimate	شهب/ساعة (تقديرية)
 miglior punt.	أفضل توجيه
+misura il flusso e lo ZHR di ogni sciame attivo	يقيس التدفق وZHR لكل زخة نشطة
 mobile	متحرك
+modo digitale MS	نمط رقمي MS
 nessun ADIF caricato	لم يُحمَّل ملف ADIF
+nessun dato radar: vedi Live e dati real-time › Flusso radar	لا بيانات رادار: انظر مباشر وبيانات الوقت الفعلي › تدفق الرادار
 nessun file RMOB caricato	لم يُحمَّل ملف RMOB
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	لا توجد خطوة للحزمة تضيء المنطقة المفيدة\nاحتمال التقاط الأثر ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	لا توجد شبكة نشطة
 nessuno sciame utile adesso: hot spot più adatto al fascio	لا زخة مفيدة الآن: البقعة الساخنة الأنسب للحزمة
 nessuno sciame utile in questo giorno	لا زخة مفيدة في هذا اليوم
 nessuno sciame utile in questo momento	لا زخة مفيدة في هذه اللحظة
+nominativo	رمز النداء
+nuova parola	كلمة جديدة
 nuovo dato	بيانات جديدة
 nuovo dato alle {0} UTC	بيانات جديدة عند {0} UTC
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	لا يمكن حساب السحابة لهذا المسار (قصير جداً أو طويل جداً)
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	السحابة {0}: {1:F0} % من الانعكاسات، {2:F0} × {3:F0} km، المحور عند {4:F0}°
 omega-Cetidi Nord diurne	أوميغا القيطسيات الشمالية النهارية
 omega-Cetidi Sud diurne	أوميغا القيطسيات الجنوبية النهارية
 orizzonte del fascio	أفق الحزمة
 orologio del PC sincronizzato	ساعة الحاسوب متزامنة
+osservatori RMOB che ascoltano GRAVES	مراقبو RMOB الذين يستمعون إلى GRAVES
+parola aggiunta	كلمة مضافة
 passi	خطوات
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	الخطوة {0}{1} كل {2:F1} s · عند {3} ...\nاحتمال التقاط الأثر ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	مسار نقطة الإشعاع
@@ -400,54 +559,77 @@ pi-Puppidi	باي الكوثليات
 prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)	جلب تلقائي كل 5 دقائق (فعّله فقط بإذن من RMOB)
 previsione {0} MHz /ora	التنبؤ {0} MHz /ساعة
 puntamento migliore {0}° / {1}°	أفضل توجيه {0}° / {1}°
+puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	وجِّه إلى {0:F0}° ({1:+0;-0}° من المحطة المقابلة)، الارتفاع الزاوي {2:F1}°، البقعة الساخنة على {3:F0} km
 quasi inattivo	شبه خامل
 quota m	الارتفاع m
+radar SKiYMET 36,2 MHz	رادار SKiYMET ‏36.2 MHz
+radar meteorico 17-38 MHz, orbite	رادار نيزكي 17-38 MHz، المدارات
+radar meteorico 36,9 MHz	رادار نيزكي 36.9 MHz
 radio, diurno	راديوي، نهاري
 rete assente: {0}	لا شبكة: {0}
 riflessioni/ora	انعكاسات/ساعة
 riflessioni/ora a {0} MHz	انعكاسات/ساعة عند {0} MHz
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	الأسطر المستلمة     {0}\nالبلاغات المقروءة   {1}\nبلاغات MS المقبولة  {2}\nالمرفوضة (كلمة)     {3}\nالمرفوضة (نطاق)     {4}\nبلاغات MS آخر ساعة  {5}
+righe sotto 27990 kHz scartate: {0}	الأسطر المتجاهَلة دون 27990 kHz: {0}
+righe {0}, spot letti {1}, MS {2}	الأسطر {0}، البلاغات المقروءة {1}، MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	المقياس المقروء من المخطط: 0-{0} شهب/ساعة
 scala non letta	لم يُقرأ المقياس
 scala tarata 0-1200 meteore/ora	مقياس معايَر 0-1200 شهب/ساعة
 scarso	ضعيف
 scartati	مستبعدة
+scartati per altra propagazione: {0}	مرفوضة لانتشار آخر: {0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	أفضل زخة {0} {1}: ZHR {2:F0} × الكفاءة {3:F0} %
 scorrimento sciame	انجراف الزخة
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	القِطع = الآثار (±10 km حول الارتفاع) موجَّهة نحو نقطة الإشعاع؛ الأسمك = الأرجح
 sempre sotto	دائماً تحت الأفق
 sigma-Hydridi	سيغما الشجاعيات
+sporadiche	الشهب المتفرقة
 stima a {0} MHz (scala a destra)	تقدير عند {0} MHz (المقياس الأيمن)
-sì	نعم
 tra {0:F1} s	بعد {0:F1} s
 traslato a {0} MHz (scala a destra)	محوَّل إلى {0} MHz (المقياس الأيمن)
+trasmettitore 143,050 MHz	مرسِل 143.050 MHz
 tratta / DX	المسار / DX
 tratta GRAVES → te non calcolata	المسار GRAVES → أنت غير محسوب
 tu {0}	أنت {0}
+ultima ora	الساعة الأخيرة
+ultime 24 ore	آخر 24 ساعة
+ultime {0} ore	آخر {0} ساعات
+ultimi {0} minuti	آخر {0} دقائق
 var.	متغير
 varie (tab. 6 IMO)	متنوعة (جدول IMO 6)
+versione	الإصدار
 visuale	بصري
 zeta-Perseidi diurne	زيتا البرشاويات النهارية
 zona PREV	منطقة PREV
 {0:00}:00 → {1:00}:00 UTC · {2} h	{0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)	{0:00}:00-{0:00}:59 UTC\nمؤشر المسار {1:F1}\nالجانب الغالب {2} ({3:F0}%)
 {0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}	{0:00}:{1:00} UTC - المؤشر {2:F1}\nالجانب الغالب {3}\n{4}
+{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % من الانعكاسات تأتي من هذا الجانب
 {0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)	{0:F0} MHz، الانعكاسات/ساعة المتوقعة\nالآن {1:F0} - بعد 1 h {2} - بعد 2 h {3}\nتجريبي (Collm، قواعد SM6FHZ)
 {0:F0} km	{0:F0} km
 {0} (dal radiante, az. {1}°)	{0} (من نقطة الإشعاع، السمت {1}°)
 {0} (in rosso sulla mappa)	{0} (بالأحمر على الخريطة)
 {0} (~{1} calc.)	{0} (~{1} محسوب)
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	قُرئ {0} QSO، {1} مربع QSO في نطاقات 50-432 MHz، استُبعد {2} QSO (نطاقات أخرى أو بلا مربع).
-{0} UTC (ora della volta celeste)	{0} UTC (وقت القبة السماوية)
+{0} UTC (momento del calcolo)	{0} UTC (وقت الحساب)
 {0} UTC (tempo reale)	{0} UTC (الوقت الحقيقي)
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	{0} موصى به الآن: السمت {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	{0} موصى به الآن: السمت {1}° ({2}% من الانعكاسات المتوقعة)
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} اتصالات على الخريطة · {1} خارج الخريطة · {2} بلا محدد موقع
+{0} dB rispetto al riferimento di DJ5HG	{0} dB نسبةً إلى مرجع DJ5HG
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	{0} من GRAVES: السمت {1:F1}° · الارتفاع {2:F1}° (الخطوة {3} من 6)
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	{0} من GRAVES: السمت {1:F1}° · الارتفاع {2:F1}° (القطاعات من 90° إلى 270°، الحزمة حتى نحو 25°)
 {0} h	{0} h
+{0} h rispetto ad adesso	{0} h من الآن
+{0} km dalla tua stazione	{0} km من محطتك
+{0} spot MS in memoria	{0} بلاغ MS في الذاكرة
+{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % عند {3} UTC ({4} بالتوقيت المحلي)
 {0} · zona	{0} · المنطقة
 {0}: non lavorato	{0}: لم يتم الاتصال
 {0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}: {1}  السمت مني {2:F0}° (الفرق {3:+0;-0}°)، من المحطة المقابلة {4:F0}°، المسافة {5:F0} km
-{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  السمت مني {2:F1}° (الفرق {3:+0.0;-0.0}° عن الاتجاه المباشر)، من المحطة المقابلة {4:F0}°، المسافة {5:F0} km، زاوية الارتفاع {6:F1}°
+{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}: {1}  السمت مني {2:F1}° (الفرق {3:+0.0;-0.0}° عن الاتجاه المباشر)، من المحطة المقابلة {4:F0}°، المسافة {5:F0} km، الارتفاع الزاوي {6:F1}°
 {0}: {1} QSO	{0}: {1} QSO
 {0}: {1} ore lette.	{0}: {1} ساعة مقروءة.
 {0}: {1} quadrati lavorati, {2} confermati	{0}: {1} مربعاً تم الاتصال بها، {2} مؤكَّدة
@@ -455,150 +637,73 @@ zona PREV	منطقة PREV
 Σ ZHR x effic.	Σ ZHR x الكفاءة
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  (يسار)
-Chiaro	فاتح
-Notte	ليلي
-Nero	أسود
-Pastello azzurro	باستيل أزرق فاتح
-Pastello arancione	باستيل برتقالي
-Pastello acquamarina	باستيل زبرجدي
-Pastello verde	باستيل أخضر
-Pastello rosa	باستيل وردي
-Pastello lilla	باستيل ليلكي
-Pastello indaco	باستيل نيلي
-Pastello marrone	باستيل بني
-Scia meteorica	أثر نيزكي
-Tema	السمة
-locale	محلي
-{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {2:F0} % عند {3} UTC ({4} بالتوقيت المحلي)
-a SINISTRA guardando verso il corrispondente	إلى اليسار عند النظر نحو المحطة المقابلة
-a DESTRA guardando verso il corrispondente	إلى اليمين عند النظر نحو المحطة المقابلة
-{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % من الانعكاسات تأتي من هذا الجانب
-puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	وجِّه إلى {0:F0}° ({1:+0;-0}° من المحطة المقابلة)، زاوية الارتفاع {2:F1}°، البقعة الساخنة على {3:F0} km
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	على اليسار: التدفق وZHR المقيسان للزخات النشطة من Global Meteor Network (كاميرات، تحديث يومي؛ الخط الأحمر = آخر تحديث). على اليمين: نقاط الإشعاع التي يرصدها رادار CMOR (كندا، 43° N) في الوقت شبه الحقيقي، بما فيها الزخات النهارية؛ وفي الأسفل، نقاط الإشعاع نفسها ملوَّنة حسب السرعة.
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: خرائط نقاط الإشعاع
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	أين توجد مصادر البيانات المباشرة. الدوائر المتقطعة = منطقة السماء التي يراها الرادار (نحو 300 km حول المحطة، والآثار على 90 km): لا يرصد أي رادار السماء فوق مسارك، فالبيانات تبيّن مدى نشاط الزخة. الخطوط المنقَّطة = المسافة من محطتك.
-Europa	أوروبا
-GMN e CMOR alle {0} UTC: {1} errori ({2})	GMN وCMOR عند {0} UTC: ‏{1} أخطاء ({2})
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	تم فحص GMN وCMOR عند {0} UTC ‏({1} ملفات جديدة). بيانات GMN: ‏CC BY 4.0.
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux: التدفق وZHR المقيسان للزخات. البيانات CC BY 4.0؛ Vida et al. 2021, MNRAS 506(4)، وVida et al. 2022, MNRAS 515(2)
-Mondo	العالم
-Nessun dato GMN: premi "Scarica adesso".	لا بيانات GMN: اضغط "تنزيل الآن".
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	ليست نقطة على الخريطة: إنها شبكة عالمية من الكاميرات (لهواة في معظمها) منتشرة في بلدان كثيرة في جميع القارات.
-Riepilogo dell'anno (ZHR misurati, GMN)	ملخص السنة (ZHR المقيس، GMN)
-SGO, Finlandia	SGO، فنلندا
-Sciami in diretta	الزخات مباشرةً
-Tavistock, Ontario (Canada)	Tavistock، أونتاريو (كندا)
-Univ. Lipsia / IAP Kühlungsborn	جامعة لايبزيغ / IAP Kühlungsborn
-aggiornamento una volta al giorno	تحديث مرة واحدة في اليوم
-dati CC BY 4.0 (Vida et al. 2021, 2022)	بيانات CC BY 4.0 ‏(Vida et al. 2021, 2022)
-la tua stazione	محطتك
-linguetta "{0}"	تبويب "{0}"
-misura il flusso e lo ZHR di ogni sciame attivo	يقيس التدفق وZHR لكل زخة نشطة
-osservatori RMOB che ascoltano GRAVES	مراقبو RMOB الذين يستمعون إلى GRAVES
-radar SKiYMET 36,2 MHz	رادار SKiYMET ‏36.2 MHz
-radar meteorico 17-38 MHz, orbite	رادار نيزكي 17-38 MHz، المدارات
-radar meteorico 36,9 MHz	رادار نيزكي 36.9 MHz
-trasmettitore 143,050 MHz	مرسِل 143.050 MHz
-{0} km dalla tua stazione	{0} km من محطتك
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	مقبول لـ "{0}": {1} من {2}، {3} MHz
-Aggiungi	إضافة
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	تؤخذ محددات المواقع غير الدقيقة (4 خانات فقط) أيضاً من CALL3، عندما يحوي CALL3 محدد الموقع ذا 6 خانات.
-Apri la cartella degli spot	فتح مجلد البلاغات
-Bande (MHz)	النطاقات (MHz)
-CALL3: caricamento...	CALL3: جارٍ التحميل...
-CALL3: nessun archivio (data/call3.txt)	CALL3: لا يوجد أرشيف (data/call3.txt)
-CALL3: {0:N0} nominativi	CALL3: {0:N0} رمز نداء
-Chiuso	مغلق
-Cluster con PSKReporter	Cluster مع PSKReporter
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	Cluster الخاص بـ DM4X مع بلاغات PSKReporter (dm4x.ddns.net، المنفذ 8500): هنا تصل فكّات ترميز MSK144 من WSJT-X وMSHV. وبديلاً HamAlert (hamalert.org 7300، يتطلب حساباً مع مشغِّلات trigger).
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	Cluster يختاره المستخدم. على ON0DXK تكون نطاقات VHF مُرشَّحة: تُفعَّل بالأمر set/filter dxbm/pass 6 (ثم 4، 2...). مثال آخر: hamqth.com 7300.
-Commento	التعليق
-Connetti	اتصال
-Connetti all'avvio	الاتصال عند بدء التشغيل
-Contatori	العدّادات
-DX cluster a scelta	DX cluster من اختيارك
-Disconnesso	انقطع الاتصال
-Disconnetti	قطع الاتصال
-Filtro	المرشِّح
-Filtro degli spot meteor scatter	مرشِّح بلاغات meteor scatter
-Fonte	المصدر
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	تُحفظ البلاغات المقبولة في data/spot_ms، ملف CSV واحد لكل يوم. وتؤخذ محددات المواقع الناقصة من أرشيف CALL3 (data/call3.txt).
-Host	المضيف
-Importa CALL3.TXT...	استيراد CALL3.TXT...
-Indirizzo mancante	العنوان مفقود
-Invia	إرسال
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	الكلمة "{0}" موجودة، لكن السطر ليس بلاغاً "DX de ..." صالحاً.
-Loc DX	محدد DX
-Loc spotter	محدد المُبلِّغ
-Manca il nominativo per il login	رمز النداء لتسجيل الدخول مفقود
-Nominativo per il login	رمز النداء لتسجيل الدخول
-Non connesso	غير متصل
-Nuovo tentativo tra 30 s	محاولة جديدة بعد 30 s
-Porta	المنفذ
-Prova del filtro	اختبار المرشِّح
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN: المنفذ 7000 = CW وRTTY، المنفذ 7001 = FT8. تسجيل الدخول برمز النداء فقط. نادراً ما تفك مستقبلات skimmer في RBN ترميز أنماط MS: يفيد أساساً للبلاغات التي تحوي <MS> في التعليق.
-Raccolta dati	جمع البيانات
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	إعادة الاتصال
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	مرفوض: وُجدت "{0}"، لكن التردد {1:F1} kHz ليس في نطاق مختار.
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	تجاهل فوراً أسطر الكلستر دون 27990.0 kHz (لا تظهر في وحدة التحكم ولا تُخزَّن)
-Scrivi il nominativo per il login prima di connettere.	اكتب رمز النداء لتسجيل الدخول قبل الاتصال.
-Spot meteor scatter raccolti (i più recenti in alto)	بلاغات meteor scatter المجمَّعة (الأحدث في الأعلى)
-Svuota la tabella	إفراغ الجدول
-collegamento via meteor scatter	اتصال عبر meteor scatter
-comandi dopo il login, separati da ;	الأوامر بعد تسجيل الدخول، مفصولة بـ ;
-comando da inviare (es. sh/dx 20)	الأمر المراد إرساله (مثلاً sh/dx 20)
-modo digitale MS	نمط رقمي MS
-nominativo	رمز النداء
-nuova parola	كلمة جديدة
-parola aggiunta	كلمة مضافة
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	الأسطر المستلمة     {0}\nالبلاغات المقروءة   {1}\nبلاغات MS المقبولة  {2}\nالمرفوضة (كلمة)     {3}\nالمرفوضة (نطاق)     {4}\nبلاغات MS آخر ساعة  {5}
-righe sotto 27990 kHz scartate: {0}	الأسطر المتجاهَلة دون 27990 kHz: {0}
-righe {0}, spot letti {1}, MS {2}	الأسطر {0}، البلاغات المقروءة {1}، MS {2}
-{0} spot MS in memoria	{0} بلاغ MS في الذاكرة
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	المعيار الأول: الترددات النموذجية لبلاغات meteor scatter (kHz)
-2° criterio: modi digitali MS e <MS>	المعيار الثاني: الأنماط الرقمية MS و<MS>
-La riga non è uno spot "DX de ..." valido.	السطر ليس بلاغاً "DX de ..." صالحاً.
-SCARTATO: frequenza sotto 27990,0 kHz.	مرفوض: التردد أقل من 27990.0 kHz.
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	مرفوض: خارج نوافذ MS ولا توجد أي كلمة من كلمات المرشِّح.
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	مرفوض: التعليق يصرّح بانتشار آخر ({0}) ولا يوجد نمط MS.
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	يُقبل البلاغ الواقع في هذه النوافذ حتى دون اسم النمط، إلا إذا صرّح التعليق بانتشار آخر بإحدى هذه العلامات:
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	ينطبق على البلاغات خارج النوافذ وعلى التي تحمل علامة انتشار آخر: يُحتفظ بها إذا احتوت إحدى الكلمات المفعَّلة، مكتوبة بأحرف كبيرة أو صغيرة أو مختلطة. MSK144 وFSK441 وPSK2K وJTMS وJT6M أنماط رقمية تُستخدم فقط في meteor scatter: البلاغ MS بالتأكيد. ويشير <MS> عموماً إلى أن الاتصال تم عبر meteor scatter.
-accettati per finestra di frequenza: {0}	مقبولة بنافذة التردد: {0}
-finestra {0} kHz	نافذة {0} kHz
-scartati per altra propagazione: {0}	مرفوضة لانتشار آخر: {0}
-Spot MS raccolti	بلاغات MS المجمَّعة
-antenna {0}°	الهوائي {0}°
-Calcolo previsionale	الحساب التنبؤي
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	انقر على مسار في الخريطة أو على صف في الجدول لعرض تفاصيل الاتصال وسحابته.
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	وثائق تقنية
-Foto	صورة
-Live e dati real-time	مباشر وبيانات الوقت الفعلي
-Mappa dei radar europei	خريطة الرادارات الأوروبية
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	لا بيانات رادار: نزّلها من التبويب الفرعي مباشر وبيانات الوقت الفعلي › تدفق الرادار.
-Nuvola	السحابة
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	تنبؤ وحساب مباشر لكفاءة الزخات الشهابية لأجل meteor scatter
-Raggio della mappa	نصف قطر الخريطة
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	بلاغات MS من تبويب "جمع البيانات". لكل اتصال تبيّن السحابة أين تتركز الآثار الأرجح لذلك المسار وتلك الساعة (انعكاس مرآوي، مجموع الزخات النشطة). السحب المتقطعة = شهب متفرقة فقط. لا تُرسم البلاغات التي تقع إحدى محطتيها خارج الخريطة؛ أما التي وصلت للتو (أقل من 3 دقائق) فتومض لمدة دقيقة.
-Spot da mostrare	البلاغات المعروضة
-Stazione	المحطة
-Traffico MS in diretta · {0}	حركة MS مباشرةً · {0}
-Traffico in diretta	الحركة مباشرةً
-Traffico meteor scatter in diretta	حركة meteor scatter مباشرةً
-a cura di	إعداد
-hot spot (solo sporadiche) {0}	hot spot (الشهب المتفرقة فقط) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	لا بيانات رادار: انظر مباشر وبيانات الوقت الفعلي › تدفق الرادار
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	لا يمكن حساب السحابة لهذا المسار (قصير جداً أو طويل جداً)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	السحابة {0}: {1:F0} % من الانعكاسات، {2:F0} × {3:F0} km، المحور عند {4:F0}°
-sporadiche	الشهب المتفرقة
-ultima ora	الساعة الأخيرة
-ultime 24 ore	آخر 24 ساعة
-ultime {0} ore	آخر {0} ساعات
-ultimi {0} minuti	آخر {0} دقائق
-versione	الإصدار
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	{0} اتصالات على الخريطة · {1} خارج الخريطة · {2} بلا محدد موقع
+FONTE	مصدر
+RILIEVO	تحقق
+SCELTA	اختيار
+(sopra 144 MHz nessuna misura: λ²)	(لا قياسات فوق 144 MHz: λ²)
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	كيف تتغير مدة الومضات من نطاق إلى آخر.\nنظرية (حذرة، افتراضية): المدة متناسبة مع λ² (McKinley 1961؛ قاعدة SM6FHZ): من 50 إلى 144 MHz تقصر الومضات 8 مرات.\nمرصودة: وسيطات قاسها NN4SA (EM64) خلال البرشاويات 2026 في MSQP التابع لـ HamSCI (R. Suggs NN4NT): 148 ms عند 28 MHz و78 ms عند 50 MHz و53 ms عند 144 MHz؛ من 50 إلى 144 MHz تقصر الومضات 1.5 مرة فقط. محطة استقبال واحدة، تحليل أولي؛ فوق 144 MHz لا قياسات وتُستخدم λ².
+Durata dei ping tra le bande	مدة الومضات بين النطاقات
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	المدة المرصودة (HamSCI MSQP، NN4SA، البرشاويات 2026؛ الوسيطات 148 / 78 / 53 ms عند 28 / 50 / 144 MHz): نحو {0:F0} ms عند {1:F0} MHz، x {2:F2} مقارنة بـ 144 MHz{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	المدة وفق قياسات HamSCI MSQP (NN4SA، البرشاويات 2026) بدل λ²: x {0:F3}، أي أن صدى مدته 1 s عند {1:F1} MHz يدوم نحو {2:F0} ms عند {3:F0} MHz.
+Raggio iniziale della scia	نصف القطر الابتدائي للأثر
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	نصف القطر الابتدائي للأثر r0: كلما كبر زاد الفقد عند الترددات العالية.\nضعف قيمة ITU (حذر، افتراضي): يجد رادار CMOR عند 17 و29 و38 MHz أن r0 بين 0.5 و2 m بين 85 و95 km، غالبًا 1-1.5 m، مع تشتت بعامل اثنين؛ نحو ضعف القياسات السابقة (Stober وآخرون 2021).\nITU-R P.843: log10 r0 = 0.035 h − 3.45 (0.5 m عند 90 km)، قيمة متوسطة.\nمستبعد: بدون عامل نصف القطر الابتدائي.
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	نصف القطر الابتدائي: بالقيمة المتوسطة لـ ITU-R P.843 (r0 = {0:F2} m) يكون العامل {1:F1} dB؛ الاختيار الحالي {2}. قياسات CMOR: r0 بين 0.5 و2 m بين 85 و95 km، تشتت بعامل اثنين (Stober وآخرون 2021)
+doppio dell'ITU (Stober 2021, prudente)	ضعف قيمة ITU (Stober 2021، حذر)
+escluso	مستبعد
+osservata (HamSCI MSQP, NN4SA 2026)	مرصودة (HamSCI MSQP، NN4SA 2026)
+teorica λ² (McKinley, SM6FHZ; prudente)	نظرية λ² (McKinley، SM6FHZ؛ حذرة)
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	يضيف تحت كل زخة السطر «كلاسيكي»: حكم قاعدة هواة الراديو، محسوبًا عند منتصف المسار.\n✗ المشع تحت الأفق؛ ◐ هامشي (المشع تحت 15° أو فوق 70°، أو على أقل من 30° من اتجاه المسار)؛ ● جيد؛ ★ الأفضل (المشع بين 15° و70° وعلى أكثر من 60° من اتجاه المسار).\nالعتبات كما في meteor-mcp (qso-graph، 2026)؛ الفكرة نفسها في صيغة DH9GCD وقواعد SM6FHZ. لا يغيّر الحساب: يفيد في مقارنة الرأيين حول الزاوية β.
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	يحسب k = 3.75·log10 r لكل زخة نشطة الآن (r من جدول GMN، وإلا من فهرس IMO) ويأخذ المتوسط الموزون بـ ZHR.\nالنظرية: مع مؤشر الكتلة s = 1 + 2.5·log10 r يتغير عدد الآثار فوق عتبة ثابتة كـ λ^(1.5·(s − 1)) (IZ5TEK، OH5IY).\nتبقى القيمة الافتراضية k = 3 (قاعدة SM6FHZ التجريبية)، وهي أكثر حذرًا: قيمة k أصغر تتنبأ بانعكاسات أكثر عند الترددات العالية.\nتنبيه: عدّات Collm في معظمها شهب متفرقة لا ينشر GMN قيمة r لها.
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	عدّ الكاميرات، لا تدفق: يتوقف على عدد المحطات التي سماؤها صافية ومظلمة.
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	المسافة بين مشع البرنامج ومشعات MDC: الوسيط {0:F1}°، الأقصى {1:F1}°.
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	رأيان في الهندسة، بمصادر مختلفة.\nمفعّل (حذر، افتراضي): صيغة McKinley (1961) وITU-R P.843 الكاملة 1 / (1 − cos²β sin²φ)، حيث β الزاوية بين الأثر ومستوى المسار. الآثار التي تعبر المستوى أقل قيمة بـ 10-15 dB من الواقعة فيه، ولا يُبالغ في تقدير أي أثر: تغلب المشعات المحاذية للمسار. بهذا الاختيار يتبع YA-MS شكل منحنيات DJ5HG الساعية (2004) على نحو أفضل.\nمعطّل: يُحسب كل أثر كأنه في مستوى المسار (β = 0)، كما حتى الإصدار 1.6. تنطبق القاعدة الكلاسيكية لهواة الراديو: أفضل مشع على ارتفاع 15-70° ومستعرض على المسار، والمحاذي هامشي (SM6FHZ، DH9GCD، meteor-mcp من qso-graph).\nلم يُقارن الرأيان بعد بقياسات مستقلة: يعرض مربع «الحكم الكلاسيكي» حكم القاعدة الكلاسيكية تحت الكفاءة، ساعة بساعة.
+GMN oggi	GMN اليوم
+Giudizio classico	الحكم الكلاسيكي
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network: ‏{0} مسارًا مؤكدًا من {1} إلى {2} UTC، منها {3} متفرقة. عدّ الكاميرات، لا تدفق. البيانات CC BY 4.0.
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC ‏({0}): ‏{1} حلًا. الوسيطات: λ {2:F1}°، المطلع المستقيم {3:F1}°، الميل {4:+0.0;-0.0}°، v {5:F1} km/s.
+IAU MDC: soluzioni	IAU MDC: الحلول
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	المتوسط الموزون بـ ZHR: k = {0:F2} (قاعدة SM6FHZ: ‏3، أكثر حذرًا).\n\nهل أطبّق هذا الأس؟
+Nessuno sciame attivo con un indice di popolazione valido.	لا توجد زخة نشطة بمؤشر سكاني صالح.
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	المسارات التي أكدها GMN من {0} إلى {1} UTC: ‏{2} (متفرقة {3})
+classico	كلاسيكي
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3.75·log10 r = {0}، مع r = {1} ({2}). تستخدم قاعدة SM6FHZ التجريبية k = 3، وهي أكثر حذرًا.
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = أس تحويل التردد من المؤشر السكاني r (GMN إن توفر، وإلا IMO): k = 3.75·log10 r. IAU MDC: الحلول المنشورة في فهرس IAU Meteor Data Center؛ Δ = فهرس IMO في البرنامج ناقص وسيط حلول MDC (يُقارن المشع عند خط الطول الشمسي نفسه). GMN اليوم: المسارات المؤكدة في آخر ملف يومي لـ Global Meteor Network (عدّ، لا تدفق).
+k dagli indici di popolazione	k من المؤشرات السكانية
+Δ radiante	Δ المشع
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	رأيان في الهندسة، بمصادر مختلفة.\nمفعّل (حذر، افتراضي): صيغة McKinley (1961) وITU-R P.843 الكاملة 1 / (1 − cos²β sin²φ)، حيث β الزاوية بين الأثر ومستوى المسار. الآثار التي تعبر المستوى أقل قيمة بـ 10-15 dB من الواقعة فيه، ولا يُبالغ في تقدير أي أثر: تغلب المشعات المحاذية للمسار. بهذا الاختيار يتبع YA-MS شكل منحنيات DJ5HG الساعية (2004) على نحو أفضل.\nمعطّل: يُحسب كل أثر كأنه في مستوى المسار (β = 0)، كما حتى الإصدار 1.6. تنطبق القاعدة الكلاسيكية لهواة الراديو: أفضل مشع على ارتفاع 15-70° ومستعرض على المسار، والمحاذي هامشي (SM6FHZ، DH9GCD، meteor-mcp من qso-graph).\nمقارنة أولى مع عدّات BRAMS في Sonneberg (البرشاويات 2026، ‏471 km) لا تميّز بين الرأيين: يعرض مربع «الحكم الكلاسيكي» حكم القاعدة الكلاسيكية تحت الكفاءة، ساعة بساعة.
+... e altri {0}	... و{0} أخرى
+Aggiorna adesso	حدّث الآن
+Aggiornamenti	التحديثات
+Aggiornamento disponibile	يتوفر تحديث
+Aggiornamento installato	تم تثبيت التحديث
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	بعض التغييرات لا تظهر إلا بعد إعادة تشغيل البرنامج.
+Apri la pagina delle release	افتح صفحة الإصدارات
+Chiudi	إغلاق
+Continua senza	تابع من دونها
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	تحقق من الاتصال بالإنترنت، أو نزّل الحزمة الكاملة مرة أخرى من صفحة الإصدارات.
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	يتحقق على GitHub من وجود إصدار أحدث من YA-MS ويثبّته إن وُجد؛ ويتحقق أيضًا من عدم نقص أي ملفات للبرنامج.
+Controllo degli aggiornamenti su GitHub...	جارٍ البحث عن تحديثات على GitHub...
+File mancanti	ملفات ناقصة
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	ينزّل البرنامج الحزمة {0}، ويستبدل ملفاته، ويحتفظ بمجلد data (تُنسخ ملفات البرنامج المتغيرة أولًا إلى data/backup) ثم يعيد التشغيل.
+Installazione dell'aggiornamento...	جارٍ تثبيت التحديث...
+L'aggiornamento non è riuscito: {0}	فشل التحديث: {0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	تنقص {0} ملفات من البرنامج:\n{1}\n\nهل أنزّلها من GitHub (الإصدار {2})؟
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	لا يحتوي الإصدار على حزمة لهذا النظام ({0}): نزّلها يدويًا من صفحة الإصدارات.
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	لا أستطيع الكتابة في مجلد البرنامج ({0}): ثبّت الإصدار الجديد يدويًا.
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	تعذّرت قراءة الإصدارات المنشورة على GitHub: {0}
+Più tardi	لاحقًا
+Riavvia YA-MS a mano: {0}	أعد تشغيل YA-MS يدويًا: {0}
+Salta questa versione	تخطَّ هذا الإصدار
+Scarica i file mancanti	نزّل الملفات الناقصة
+Scaricamento dei file mancanti: {0} di {1}	جارٍ تنزيل الملفات الناقصة: {0} من {1}
+Scaricamento dell'aggiornamento...	جارٍ تنزيل التحديث...
+Scaricamento dell'aggiornamento: {0} %	جارٍ تنزيل التحديث: {0} %
+Scaricati {0} file mancanti.	تم تنزيل {0} من الملفات الناقصة.
+Scaricati {0} file su {1}.	تم تنزيل {0} ملفات من {1}.
+YA-MS {0} è installato. Il programma ora si riavvia.	تم تثبيت YA-MS {0}. سيُعاد تشغيل البرنامج الآن.
+YA-MS è aggiornato (versione {0}).	YA-MS محدَّث (الإصدار {0}).
+YA-MS.app non trovato nel pacchetto	لم يُعثر على YA-MS.app في الحزمة
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	استُبدلت {0} ملفات في مجلد data: النسخ السابقة موجودة في data/backup/v{1}.
+{0} non trovato nel pacchetto	لم يُعثر على {0} في الحزمة
+È disponibile YA-MS {0} (questa è la {1}).	يتوفر YA-MS {0} (هذا الإصدار {1}).

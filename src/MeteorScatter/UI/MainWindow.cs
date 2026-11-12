@@ -54,6 +54,7 @@ namespace YAMS
         ComboBox cmbBand;
         CheckBox chkLayerRadar;
         NumericUpDown numBoom, numHotKm;
+        CheckBox chkHotAuto, chkTrailLen;
         TextBlock lblAntAz, lblAnt;
         TextBlock lblLobeWarn, lblHighRad, lblAB;
         Border boxLobeWarn, boxHighRad;
@@ -65,6 +66,7 @@ namespace YAMS
         Button btnCalc, btnReal;
         TextBlock lblClock, lblSkyTime;
         Slider trackTime;
+        CalendarDatePicker dtCalc;   // data del calcolo (UTC): base del momento del calcolo
         int lastTrackValue;
         Slider sldFont;              // "Carattere": 100-300 % di tutto il testo
         TextBlock lblFont;
@@ -101,6 +103,7 @@ namespace YAMS
             dataDir = AppPaths.DataDir;
             cfg = new Config(Path.Combine(dataDir, "config.ini"));
             Catalog.Load(dataDir);
+            IauMdc.Load(dataDir); GmnDaily.Load(dataDir); GmnPopIndex.Load(Path.Combine(dataDir, "radar", "diretta", "gmn_flux.html"));
             sources = RadarFlux.LoadSources(dataDir);
             foreach (RadarSource s in sources)
             {
@@ -158,7 +161,16 @@ namespace YAMS
             DockTop(root, tabs.Bar);
             SetRowsVisible(cfg.GetD("comandi_visibili", 1) != 0, false);
             status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
-            Border sb = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 3), Child = status };
+            DockPanel sbLine = new DockPanel();
+            btnUpdate = new Button { Content = Lang.T("Aggiornamenti"), Padding = new Thickness(8, 0), Margin = new Thickness(8, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center, FontSize = 11 };
+            btnUpdate.Classes.Add("pill");
+            ToolTip.SetTip(btnUpdate, Lang.T("Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma."));
+            btnUpdate.Click += (s, e) => CheckUpdatesManual();
+            DockPanel.SetDock(btnUpdate, Dock.Right);
+            btnUpdate.IsVisible = false;   // E-LAYER ANALYZER: aggiornamento dalla finestra principale
+            sbLine.Children.Add(btnUpdate);
+            sbLine.Children.Add(status);
+            Border sb = new Border { Background = Pal.B(Pal.Track), Padding = new Thickness(8, 3), Child = sbLine };
             DockPanel.SetDock(sb, Dock.Bottom);
             root.Children.Add(sb);
             BuildTabs();
@@ -217,6 +229,7 @@ namespace YAMS
                     catalogShown = true;
                     await Dialogs.Message(Win, Lang.T("Catalogo sciami"), Catalog.LoadMessage);
                 }
+                await StartupUpdateChecks();
             }
             catch (Exception ex) { status.Text = Lang.F("Errore all'avvio: {0}", ex.Message); }
         }
@@ -430,28 +443,43 @@ namespace YAMS
             numBoom.ValueChanged += (s, e) => { if (model != null) { ApplyAntenna(); UpdateSky(); UpdateGeometry(); } };
             numHotKm = N(30, 400, Dm(cfg.GetD("hot_spot_km", 150)), 0, 10, 55);
             PathModel.HotSpotOffsetKm = V(numHotKm);
-            numHotKm.ValueChanged += (s, e) => { PathModel.HotSpotOffsetKm = V(numHotKm); if (model != null) Recalc(); };
+            numHotKm.ValueChanged += (s, e) => { if (!PathModel.HotSpotAuto) { PathModel.HotSpotOffsetKm = V(numHotKm); if (model != null) Recalc(); } };
+            // distanza degli hot spot: automatica dalla tabella AMS (J. Richardson, riportata da DJ5HG) o scritta a mano
+            chkHotAuto = C(Lang.T("auto (AMS)"), cfg.GetB("hot_spot_auto", true));
+            PathModel.HotSpotAuto = chkHotAuto.IsChecked == true;
+            numHotKm.IsEnabled = !PathModel.HotSpotAuto;
+            ToolTip.SetTip(chkHotAuto, Lang.T("Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km)."));
+            WhenChanged(chkHotAuto, ToggleButton.IsCheckedProperty, () =>
+            {
+                PathModel.HotSpotAuto = chkHotAuto.IsChecked == true;
+                numHotKm.IsEnabled = !PathModel.HotSpotAuto;
+                if (!PathModel.HotSpotAuto) PathModel.HotSpotOffsetKm = V(numHotKm);
+                if (model != null) Recalc();
+            });
 
             // riga 2: strato E, lobo e antenna
             Border row2 = Row(L(Lang.T("Quota scie km")), numLayer, chkLayerRadar,
                               L(Lang.T("Elevazione lobo °")), numElev,
                               L(Lang.T("Antenna Yagi: boom m")), numBoom, lblAnt,
-                              L(Lang.T("Hot spot dal punto medio km")), numHotKm);
+                              L(Lang.T("Hot spot dal punto medio km")), numHotKm, chkHotAuto);
 
             // riga 3: orologio, ora della volta celeste, giorno della tabella 24 h
             lblClock = L("--:--:-- UTC"); lblClock.FontFamily = Pal.Mono; lblClock.FontSize = 15; lblClock.FontWeight = FontWeight.Bold; lblClock.Foreground = Pal.B(Pal.Yellow);
-            trackTime = new Slider { Minimum = -144, Maximum = 144, Value = 0, SmallChange = 1, LargeChange = 4, TickFrequency = 12, Width = 360, Margin = new Thickness(4, 0) };
+            trackTime = new Slider { Minimum = -48, Maximum = 144, Value = 0, SmallChange = 1, LargeChange = 4, TickFrequency = 12, Width = 240, Margin = new Thickness(4, 0) };
             WhenChanged(trackTime, RangeBase.ValueProperty, () =>
             {
                 int v = TrackValue;
                 if (v == lastTrackValue) return;
                 lastTrackValue = v; UpdateSky();
             });
-            lblSkyTime = L(Lang.T("Volta celeste: tempo reale")); lblSkyTime.Foreground = Pal.B(Pal.Azure);
+            lblSkyTime = L(Lang.T("Calcolo per: adesso")); lblSkyTime.Foreground = Pal.B(Pal.Azure);
             btnReal = B(Lang.T("Tempo reale"));
             btnReal.Background = Brushes.Transparent; btnReal.BorderBrush = Pal.B(Pal.Violet); btnReal.Foreground = Pal.B(Pal.Violet);
-            btnReal.Click += (s, e) => { trackTime.Value = 0; UpdateSky(); };
-            dtDay = new CalendarDatePicker { SelectedDate = DateTime.UtcNow.Date, Width = 150, Margin = new Thickness(2, 3) };
+            btnReal.Click += (s, e) => ResetCalcTime();
+            // data del calcolo: con l'ora attuale e lo spostamento del cursore (da -12 a +36 h) da' il momento del calcolo
+            dtCalc = new CalendarDatePicker { SelectedDate = DateTime.UtcNow.Date, Width = 150, Margin = new Thickness(2, 3), FlowDirection = FlowDirection.LeftToRight };   // date sempre da sinistra a destra (arabo, ebraico, urdu)
+            WhenChanged(dtCalc, CalendarDatePicker.SelectedDateProperty, () => UpdateSky());
+            dtDay = new CalendarDatePicker { SelectedDate = DateTime.UtcNow.Date, Width = 150, Margin = new Thickness(2, 3), FlowDirection = FlowDirection.LeftToRight };   // date sempre da sinistra a destra (arabo, ebraico, urdu)
             WhenChanged(dtDay, CalendarDatePicker.SelectedDateProperty, () => Update24h());
             // dimensione del carattere di tutto il programma (solo il testo), a passi del 10 %
             double pct0 = Math.Max(100, Math.Min(300, Math.Round(cfg.GetD("carattere_pct", 100) / 10) * 10));
@@ -460,7 +488,7 @@ namespace YAMS
                                    IsSnapToTickEnabled = true, Width = 160, Margin = new Thickness(4, 0) };
             UiScale.Set(pct0 / 100.0);
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
-            Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Ora della volta celeste (±36 h)")), trackTime,
+            Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc, L(Lang.T("Ore (da −12 a +36 h)")), trackTime,
                               btnReal, lblSkyTime, L(Lang.T("Giorno per la tabella 24 h (UTC)")), dtDay);
             // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
             Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
@@ -581,6 +609,15 @@ namespace YAMS
             lblMapCaption = new TextBlock { Foreground = Pal.B(Pal.Muted), FontSize = 11.3, TextWrapping = TextWrapping.Wrap };
             Border capBox = new Border { Background = Pal.B(Pal.Panel), Padding = new Thickness(8, 5), Child = lblMapCaption };
             DockPanel skyCol = new DockPanel();
+            // fascia sopra la pianta: i dati di efficienza del momento di calcolo scelto con il cursore
+            lblEffStrip = new TextBlock { Foreground = Pal.B(Pal.Fore), FontSize = 13, FontWeight = FontWeight.SemiBold, TextWrapping = TextWrapping.Wrap };
+            Border effStrip = new Border
+            {
+                Background = Pal.B(Pal.Panel3), BorderBrush = Pal.B(Pal.Azure), BorderThickness = new Thickness(0, 0, 0, 2),
+                Padding = new Thickness(10, 6), Child = lblEffStrip
+            };
+            DockPanel.SetDock(effStrip, Dock.Top);
+            skyCol.Children.Add(effStrip);
             DockPanel.SetDock(capBox, Dock.Bottom);
             skyCol.Children.Add(capBox);
             skyCol.Children.Add(sky);   // riempie lo spazio restante
@@ -626,10 +663,14 @@ namespace YAMS
             boxLobeWarn = Warn(Pal.OrangeDark, Pal.OrangeText, out lblLobeWarn);
             // avviso radiante troppo alto (sopra 70°, DF5HC / DH9GCD)
             boxHighRad = Warn(Pal.Panel3, Pal.Yellow, out lblHighRad);
+            // avviso radiante basso lungo la tratta (DJ5HG 2004)
+            boxLowAlong = Warn(Pal.Panel3, Pal.Azure, out lblLowAlong);
+            // avviso tratta oltre l'orizzonte della scia (punto medio sotto l'orizzonte alla quota delle scie)
+            boxHorizon = Warn(Pal.OrangeDark, Pal.OrangeText, out lblHorizon);
             // lato destro: in alto elenco degli sciami, al centro volta celeste + testo del calcolo, in basso la sezione
             Grid rt = new Grid { RowDefinitions = new RowDefinitions("31*,37*,32*") };
             DockPanel rTop = new DockPanel();
-            DockTop(rTop, opt); DockTop(rTop, boxLobeWarn); DockTop(rTop, boxHighRad);
+            DockTop(rTop, opt); DockTop(rTop, boxLobeWarn); DockTop(rTop, boxHorizon); DockTop(rTop, boxHighRad); DockTop(rTop, boxLowAlong);
             rTop.Children.Add(lvSky);
             Grid rMid = new Grid { ColumnDefinitions = new ColumnDefinitions("42*,58*") };
             Grid.SetColumn(skySmall, 0); Grid.SetColumn(lblPathInfo, 1);
@@ -652,6 +693,43 @@ namespace YAMS
             numGain.ValueChanged += (s, e) => UpdateGeometry();
             numSens.ValueChanged += (s, e) => UpdateGeometry();
             numQ.ValueChanged += (s, e) => UpdateGeometry();
+            // scelte con fonti: raggio iniziale della scia (Stober et al. 2021 / ITU-R P.843) e durata dei ping (lambda^2 / misure HamSCI MSQP)
+            cmbR0 = new ComboBox
+            {
+                ItemsSource = new List<string> { Lang.T("doppio dell'ITU (Stober 2021, prudente)"), Lang.T("ITU-R P.843"), Lang.T("escluso") },
+                Margin = new Thickness(2, 3), VerticalAlignment = VerticalAlignment.Center
+            };
+            cmbR0.SelectedIndex = Math.Max(0, Math.Min(2, (int)Math.Round(cfg.GetD("raggio_iniziale", 0))));
+            MsGeometry.InitialRadiusFactor = new double[] { 2, 1, 0 }[cmbR0.SelectedIndex];
+            ToolTip.SetTip(cmbR0, Lang.T("Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\n" +
+                "Doppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\n" +
+                "ITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\n" +
+                "Escluso: senza il fattore del raggio iniziale."));
+            cmbR0.SelectionChanged += (s, e) =>
+            {
+                MsGeometry.InitialRadiusFactor = new double[] { 2, 1, 0 }[Math.Max(0, cmbR0.SelectedIndex)];
+                cfg.Set("raggio_iniziale", (double)Math.Max(0, cmbR0.SelectedIndex));
+                UpdateGeometry();
+            };
+            cmbDur = new ComboBox
+            {
+                ItemsSource = new List<string> { Lang.T("teorica λ² (McKinley, SM6FHZ; prudente)"), Lang.T("osservata (HamSCI MSQP, NN4SA 2026)") },
+                Margin = new Thickness(2, 3), VerticalAlignment = VerticalAlignment.Center
+            };
+            cmbDur.SelectedIndex = cfg.GetD("durata_ping", 0) >= 0.5 ? 1 : 0;
+            MsGeometry.DurationObserved = cmbDur.SelectedIndex == 1;
+            ToolTip.SetTip(cmbDur, Lang.T("Come cambia la durata dei ping da una banda all'altra.\n" +
+                "Teorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\n" +
+                "Osservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. " +
+                "Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ²."));
+            cmbDur.SelectionChanged += (s, e) =>
+            {
+                MsGeometry.DurationObserved = cmbDur.SelectedIndex == 1;
+                cfg.Set("durata_ping", (double)Math.Max(0, cmbDur.SelectedIndex));
+                UpdateGeometry();
+                UpdatePrevTab();
+            };
+            DockTop(p4, Row(L(Lang.T("Raggio iniziale della scia")), cmbR0, L(Lang.T("Durata dei ping tra le bande")), cmbDur));
             Grid sg = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*") };
             txtGeo = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 12.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.Wrap };
             ScrollViewer geoScroll = new ScrollViewer
@@ -688,6 +766,55 @@ namespace YAMS
                        "Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).")
             };
             DockTop(p2, new Border { Background = Pal.B(Pal.Panel3), Padding = new Thickness(8, 5, 8, 4), Child = lblAB });
+            // opzione: lunghezza delle scie con il radiante basso (DJ5HG 2004), spenta di partenza (calcolo prudente)
+            chkTrailLen = C(Lang.T("Scie più lunghe con il radiante basso (DJ5HG)"), cfg.GetB("lunghezza_scie", false));
+            PathModel.TrailLength = chkTrailLen.IsChecked == true;
+            ToolTip.SetTip(chkTrailLen, Lang.T("Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\n" +
+                "Accesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) " +
+                "e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia."));
+            WhenChanged(chkTrailLen, ToggleButton.IsCheckedProperty, () =>
+            {
+                PathModel.TrailLength = chkTrailLen.IsChecked == true;
+                SyncProfile();
+                if (!applyingProfile && model != null) Recalc();
+            });
+            // opzione: angolo beta tra la scia e il piano della tratta (McKinley completo, ITU-R P.843)
+            chkBeta = C(Lang.T("Angolo β tra scia e tratta (McKinley completo)"), cfg.GetB("angolo_beta", true));
+            PathModel.BetaFactor = chkBeta.IsChecked == true;
+            ToolTip.SetTip(chkBeta, Lang.T("Due tesi sulla geometria, con fonti diverse.\n" +
+                "Accesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. " +
+                "Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. " +
+                "Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\n" +
+                "Spenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, " +
+                "quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\n" +
+                "Un primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella \"Giudizio classico\" mostra il verdetto della regola classica sotto l'efficienza, ora per ora."));
+            WhenChanged(chkBeta, ToggleButton.IsCheckedProperty, () =>
+            {
+                PathModel.BetaFactor = chkBeta.IsChecked == true;
+                SyncProfile();
+                if (!applyingProfile && model != null) Recalc();
+            });
+            // casella: giudizio classico (radiante di traverso alla tratta) mostrato sotto l'efficienza; non cambia il calcolo
+            chkClassic = C(Lang.T("Giudizio classico"), cfg.GetB("giudizio_classico", false));
+            ToolTip.SetTip(chkClassic, Lang.T("Aggiunge sotto ogni sciame la riga \"classico\": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n" +
+                "✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\n" +
+                "Soglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β."));
+            WhenChanged(chkClassic, ToggleButton.IsCheckedProperty, () => { cfg.Set("giudizio_classico", chkClassic.IsChecked == true); if (model != null) Recalc(); });
+            // impostazioni pronte del calcolo: prudente (quota dal radar, scie normali) o come DJ5HG (102 km, scie lunghe)
+            rbProfPrud = new RadioButton { Content = Lang.T("Prudente"), GroupName = "profilo_calcolo", Margin = new Thickness(8, 0, 4, 0), VerticalAlignment = VerticalAlignment.Center, Foreground = Pal.B(Pal.Fore) };
+            rbProfDj = new RadioButton { Content = Lang.T("Come DJ5HG"), GroupName = "profilo_calcolo", Margin = new Thickness(8, 0, 4, 0), VerticalAlignment = VerticalAlignment.Center, Foreground = Pal.B(Pal.Fore) };
+            rbProfPers = new RadioButton { Content = Lang.T("Personalizzata"), GroupName = "profilo_calcolo", Margin = new Thickness(8, 0, 4, 0), VerticalAlignment = VerticalAlignment.Center, Foreground = Pal.B(Pal.Fore) };
+            ToolTip.SetTip(rbProfPrud, Lang.T("Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella \"dal radar\"), scie normali, angolo β acceso.\n" +
+                "Confronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB)."));
+            ToolTip.SetTip(rbProfDj, Lang.T("Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in \"Die Geometrie von Meteorscatterverbindungen\" di DJ5HG (2004).\n" +
+                "Confronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta."));
+            ToolTip.SetTip(rbProfPers, Lang.T("Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella \"dal radar\", le scie lunghe o l'angolo β."));
+            WhenChanged(rbProfPrud, ToggleButton.IsCheckedProperty, () => { if (rbProfPrud.IsChecked == true) ApplyProfile(false); });
+            WhenChanged(rbProfDj, ToggleButton.IsCheckedProperty, () => { if (rbProfDj.IsChecked == true) ApplyProfile(true); });
+            WhenChanged(chkLayerRadar, ToggleButton.IsCheckedProperty, SyncProfile);
+            numLayer.ValueChanged += (s, e) => SyncProfile();
+            SyncProfile();
+            DockTop(p2, Row(L(Lang.T("Impostazione del calcolo:")), rbProfPrud, rbProfDj, rbProfPers, chkTrailLen, chkBeta, chkClassic));
             chart24 = new SimpleChart { Height = Chart24Height };
             DockTop(p2, chart24);
             List<string> cols24 = new List<string> { Lang.T("Sigla"), Lang.T("Sciame"), "ZHR" };
@@ -739,11 +866,24 @@ namespace YAMS
 
             // --- Sciami
             DockPanel p5 = Page(Lang.T("Sciami"));
+            DockTop(p5, new Border
+            {
+                Background = Pal.B(Pal.A(70, Pal.Yellow)), Padding = new Thickness(10, 4), Margin = new Thickness(4, 4, 4, 2), CornerRadius = new CornerRadius(4),
+                Child = new TextBlock { Text = Lang.T("Le righe evidenziate sono gli sciami attivi oggi (UTC)"), Foreground = Pal.B(Pal.Fore), FontWeight = FontWeight.SemiBold }
+            });
             // giustificata sulla larghezza: larghezze di base compatte, caratteri e righe crescono con la finestra
-            gridShowers = MakeTable(new[] { Lang.T("Sigla"), Lang.T("Sciame"), Lang.T("Attività"), "λ max", Lang.T("Prossimo massimo (UTC)"), Lang.T("Fonte del massimo"), Lang.T("A.R."), Lang.T("Decl."), "v km/s", "r", "ZHR", Lang.T("Tipo"), Lang.T("Attivo oggi") },
-                                    new double[] { 44, 170, 96, 56, 170, 130, 50, 50, 44, 36, 40, 90, 70 });
+            gridShowers = MakeTable(new[] { Lang.T("Sigla"), Lang.T("Sciame"), Lang.T("Attività"), "λ max", Lang.T("Prossimo massimo (UTC)"), Lang.T("Fonte del massimo"), Lang.T("A.R."), Lang.T("Decl."), "v km/s", "r", "ZHR", Lang.T("Tipo"),
+                                    "k", Lang.T("IAU MDC: soluzioni"), Lang.T("Δ radiante"), "Δλ", "Δv", Lang.T("GMN oggi") },
+                                    new double[] { 44, 170, 96, 56, 170, 130, 50, 50, 44, 36, 40, 90, 52, 70, 70, 50, 44, 60 });
             gridShowers.Selectable = false;
             gridShowers.FitWidth = true;
+            DockTop(p5, new TextBlock
+            {
+                Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 0, 6, 4),
+                Text = Lang.T("k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. " +
+                              "IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC " +
+                              "(radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).")
+            });
             p5.Children.Add(gridShowers);
 
             // --- Mappa quadrati da ADIF (MainWindow.Grid.cs)
@@ -799,7 +939,26 @@ namespace YAMS
 
         int TrackValue { get { return (int)Math.Round(trackTime.Value); } }
 
-        DateTime SkyTimeUtc { get { return DateTime.UtcNow.AddMinutes(TrackValue * 15); } }
+        // momento del calcolo: data scelta + ora attuale + spostamento del cursore (passi di 15 minuti)
+        DateTime SkyTimeUtc
+        {
+            get
+            {
+                DateTime now = DateTime.UtcNow;
+                DateTime d = dtCalc != null && dtCalc.SelectedDate.HasValue ? dtCalc.SelectedDate.Value.Date : now.Date;
+                return DateTime.SpecifyKind(d, DateTimeKind.Utc).Add(now.TimeOfDay).AddMinutes(TrackValue * 15);
+            }
+        }
+
+        // tempo reale: data di oggi e cursore a zero
+        bool IsRealTime { get { return TrackValue == 0 && (dtCalc == null || !dtCalc.SelectedDate.HasValue || dtCalc.SelectedDate.Value.Date == DateTime.UtcNow.Date); } }
+
+        void ResetCalcTime()
+        {
+            if (dtCalc != null) dtCalc.SelectedDate = DateTime.UtcNow.Date;
+            trackTime.Value = 0;
+            UpdateSky();
+        }
 
         void Recalc()
         {
@@ -808,6 +967,7 @@ namespace YAMS
             if (!Astro.TryLocator(Up(txtDx), out dx)) { status.Text = Lang.T("Locator del corrispondente non valido"); return; }
             DateTime t0 = DateTime.Now;
             model = PathModel.Build(home, V(numHomeAlt) / 1000.0, dx, V(numDxAlt) / 1000.0, V(numLayer), V(numElev));
+            if (PathModel.HotSpotAuto && model.Valid) numHotKm.Value = (decimal)Math.Round(Math.Max(30, Math.Min(400, model.HotOffsetKm)));   // mostra la distanza calcolata
             StartGravesModel();   // tratta GRAVES -> stazione, in un thread secondario
             sky.Model = model; sky.Station = home; sky.InvalidateHeat();
             skySmall.Model = model; skySmall.Station = home; section.Model = model;
@@ -911,8 +1071,8 @@ namespace YAMS
         {
             if (sky == null) return;
             DateTime t = SkyTimeUtc;
-            lblSkyTime.Text = TrackValue == 0 ? Lang.T("Volta celeste: tempo reale")
-                : Lang.F("Volta celeste: {0} UTC", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture));
+            lblSkyTime.Text = IsRealTime ? Lang.T("Calcolo per: adesso")
+                : Lang.F("Calcolo per: {0} UTC", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture));
             LatLon home; if (!Astro.TryLocator(Up(txtHome), out home)) return;
             sky.Station = home;
             sky.Marks.Clear();
@@ -996,6 +1156,32 @@ namespace YAMS
                 boxHighRad.IsVisible = true;
             }
             else boxHighRad.IsVisible = false;
+            // radiante basso (sotto 20°) quasi allineato alla tratta (entro 30°, nei due versi): l'efficienza calcolata resta
+            // bassa (prudente), ma DJ5HG prevede in questa situazione riflessioni rare e forti (Amburgo-Narvik, Quadrantidi)
+            List<string> lowAlong = new List<string>();
+            if (mv)
+                foreach (RadiantMark rm in sky.Marks)
+                {
+                    if (rm.El <= 0 || rm.El > LowRadiantDeg || rm.Zhr < 1) continue;
+                    double d = Math.Abs(Astro.Norm180(rm.Az - model.BearingHomeToDx));
+                    if (d <= 30 || d >= 150) lowAlong.Add(rm.Code + " " + rm.El.ToString("F0") + "°");
+                }
+            if (lowAlong.Count > 0)
+            {
+                lblLowAlong.Text = Lang.F("RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.",
+                    string.Join(", ", lowAlong.ToArray()));
+                boxLowAlong.IsVisible = true;
+            }
+            else boxLowAlong.IsVisible = false;
+            // tratta oltre l'orizzonte della scia: a quella quota il punto medio non e' visto da nessuna delle due stazioni
+            if (mv && model.ElevToMidDeg < 0)
+            {
+                double hMin = MsGeometry.MinLayerForPathKm(model.DistKm, Math.Min(model.HomeAltKm, model.DxAltKm));
+                lblHorizon.Text = Lang.F("TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.",
+                    model.LayerKm, -model.ElevToMidDeg, hMin);
+                boxHorizon.IsVisible = true;
+            }
+            else boxHorizon.IsVisible = false;
             // Hot consigliato dall'efficienza: il lato (A o B) da cui arriva la maggior parte delle riflessioni,
             // sommando su tutti gli sciami attivi ZHR x efficienza x frazione del lato
             double wA = 0, wB = 0;
@@ -1015,6 +1201,7 @@ namespace YAMS
                 }
                 else recommendShort = recommendText = Lang.T("Nessun Hot consigliato: sciami attivi quasi assenti in questo momento");
             }
+            UpdateEffStrip(t, mv);
             sky.Caption = Lang.F("Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. " +
                 "Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.",
                 day0.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
@@ -1035,7 +1222,7 @@ namespace YAMS
                     sb.Append(Lang.F("Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)", model.LimitA.BearingFromHome, model.LimitA.SideScatterDeg, model.LimitB.BearingFromHome, model.LimitB.SideScatterDeg)).Append('\n');
                 else sb.Append(Lang.F("Nessuna zona comune dello strato E ({0})", model.Message)).Append('\n');
                 sb.Append(Lang.T("Lato A = a sinistra della tratta, B = a destra")).Append('\n');
-                sb.Append(Lang.F("Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).", PathModel.HotSpotOffsetKm.ToString("F0"))).Append('\n');
+                sb.Append((PathModel.HotSpotAuto ? Lang.F("Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).", model.HotOffsetKm.ToString("F0"), PathModel.AmsOffsetDeg(model.DistKm).ToString("F1")) : Lang.F("Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).", model.HotOffsetKm.ToString("F0")))).Append('\n');
                 sb.Append(Lang.T("Miglior puntamento per lo sciame: ORTOGONALE alla direzione\n" +
                                  "di arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\n" +
                                  "SM6FHZ). In pianta: linea gialla = scorrimento\n" +
@@ -1046,6 +1233,43 @@ namespace YAMS
             }
             if (sky.Selected != null) SelectInList(sky.Selected);
             UpdateGravesSky();
+        }
+
+        TextBlock lblEffStrip;
+
+        // Fascia sopra la pianta: momento del calcolo, indice della tratta, sciame piu' utile, Hot consigliato
+        void UpdateEffStrip(DateTime t, bool mv)
+        {
+            if (lblEffStrip == null) return;
+            double dh = Math.Round((t - DateTime.UtcNow).TotalHours * 4) / 4;
+            string when = Lang.F("Calcolo per {0} UTC", t.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)) + " · " +
+                          (IsRealTime ? Lang.T("adesso") : Lang.F("{0} h rispetto ad adesso", dh.ToString("+0.##;-0.##", CultureInfo.CurrentCulture)));
+            if (!mv) { lblEffStrip.Text = when; return; }
+            double idx = 0, best = 0; RadiantMark bm = null; int up = 0;
+            foreach (RadiantMark rm in sky.Marks)
+            {
+                if (rm.El <= 0) continue;
+                up++;
+                double w = rm.Zhr * rm.Eff / 100.0;
+                idx += w;
+                if (w > best) { best = w; bm = rm; }
+            }
+            StringBuilder sb = new StringBuilder(when);
+            sb.Append("   |   ").Append(Lang.F("Indice della tratta Σ ZHR×η: {0}", idx.ToString("F1", CultureInfo.CurrentCulture)));
+            sb.Append("   |   ");
+            if (bm != null && best >= 0.05)
+            {
+                sb.Append(Lang.F("Sciame più utile: {0} (ZHR {1}, efficienza {2} %)", bm.Code,
+                    bm.Zhr.ToString(bm.Zhr >= 10 ? "F0" : "F1", CultureInfo.CurrentCulture), bm.Eff.ToString("F0", CultureInfo.CurrentCulture)));
+                LatLon hm; double db = double.NaN;
+                if (Astro.TryLocator(Up(txtHome), out hm)) db = model.AbsoluteDb(Astro.FromAltAz(hm, bm.Az, bm.El));
+                if (!double.IsNaN(db) && !double.IsInfinity(db))
+                    sb.Append(" · ").Append(Lang.F("{0} dB rispetto al riferimento di DJ5HG", db.ToString("+0.0;-0.0", CultureInfo.CurrentCulture)));
+            }
+            else sb.Append(Lang.T("Nessuno sciame utile in questo momento"));
+            sb.Append("   |   ").Append(Lang.F("Sciami sopra l'orizzonte: {0}", up));
+            if (!string.IsNullOrEmpty(recommendShort)) sb.Append("   |   ").Append(recommendShort);
+            lblEffStrip.Text = sb.ToString();
         }
 
         // Contributo di uno sciame alle zone PREV (pianta) e alle scie della sezione:
@@ -1087,6 +1311,59 @@ namespace YAMS
 
         // Radiante troppo alto secondo DF5HC (tabella Geminidi 2017): sopra 70° di elevazione
         public const double HighRadiantDeg = 70.0;
+        // radiante basso per l'avviso "lungo la tratta" (DJ5HG 2004: radiante tiefe am Horizont)
+        public const double LowRadiantDeg = 20.0;
+        Border boxLowAlong; TextBlock lblLowAlong;
+        Border boxHorizon; TextBlock lblHorizon;
+        RadioButton rbProfPrud, rbProfDj, rbProfPers;
+        ComboBox cmbR0, cmbDur;
+        CheckBox chkBeta, chkClassic;
+        bool applyingProfile;
+        public const double Dj5hgLayerKm = 102.0;
+
+        // impostazione pronta: prudente = quota dal radar e scie normali; DJ5HG = 102 km fissi e scie lunghe
+        void ApplyProfile(bool dj5hg)
+        {
+            if (applyingProfile) return;
+            applyingProfile = true;
+            try
+            {
+                if (dj5hg)
+                {
+                    chkLayerRadar.IsChecked = false;
+                    numLayer.Value = Dm(Dj5hgLayerKm);
+                    chkTrailLen.IsChecked = true;
+                    chkBeta.IsChecked = true;
+                }
+                else
+                {
+                    chkLayerRadar.IsChecked = true;
+                    if (!ApplyRadarLayer() && V(numLayer) == Dj5hgLayerKm) numLayer.Value = Dm(cfg.GetD("quota_scie_km_prudente", 90));
+                    chkTrailLen.IsChecked = false;
+                    chkBeta.IsChecked = true;
+                }
+                PathModel.TrailLength = chkTrailLen.IsChecked == true;
+                PathModel.BetaFactor = chkBeta.IsChecked == true;
+            }
+            finally { applyingProfile = false; }
+            SyncProfile();
+            if (model != null) Recalc();
+        }
+
+        // seleziona la casella che corrisponde alle impostazioni attuali
+        void SyncProfile()
+        {
+            if (applyingProfile || rbProfPrud == null || chkLayerRadar == null || chkTrailLen == null || chkBeta == null) return;
+            applyingProfile = true;
+            try
+            {
+                bool radar = chkLayerRadar.IsChecked == true, trail = chkTrailLen.IsChecked == true, beta = chkBeta.IsChecked == true;
+                if (!radar && trail && beta && Math.Abs(V(numLayer) - Dj5hgLayerKm) < 0.01) rbProfDj.IsChecked = true;
+                else if (radar && !trail && beta) rbProfPrud.IsChecked = true;
+                else rbProfPers.IsChecked = true;
+            }
+            finally { applyingProfile = false; }
+        }
 
         // Formula della migliore direzione di DH9GCD (DF5HC, "Meteorscatter auf UKW", DARC 2018):
         // E = sin(El) cos(El) sin(P - Az); massimo 0,5 con El = 45° e P - Az = 90°. Restituita in % del massimo.
@@ -1175,6 +1452,20 @@ namespace YAMS
                 drow[0] = ""; drow[1] = "   DH9GCD %"; drow[2] = "";
                 for (int h = 0; h < 24; h++) drow[3 + h] = dh[h] < 1 ? "" : dh[h].ToString("F0");
                 rows.Add(new TableRow { Cells = drow, Fore = Pal.Azure, Italic = true, FontSize = 11 * Grid24Scale });
+                if (chkClassic != null && chkClassic.IsChecked == true)
+                {
+                    // riga del giudizio classico (radiante di traverso), calcolato al punto medio della tratta
+                    string[] crow = new string[27];
+                    crow[0] = ""; crow[1] = "   " + Lang.T("classico"); crow[2] = "";
+                    string[] sym = { "✗", "◐", "●", "★" };
+                    for (int h = 0; h < 24; h++)
+                    {
+                        double z; Vec3 v = RadiantVec(s, day.AddHours(h + 0.5), out z);
+                        double maz, mel; Astro.AltAz(model.Mid, v, out maz, out mel);
+                        crow[3 + h] = sym[MsGeometry.ClassicVerdict(maz, mel, Astro.Bearing(model.Mid, model.Dx))];
+                    }
+                    rows.Add(new TableRow { Cells = crow, Fore = Pal.Muted, FontSize = 11 * Grid24Scale });
+                }
                 if (ns < 5)
                 {
                     ChartSeries cs = new ChartSeries(); cs.Name = s.Code + " " + Lang.T("effic. %"); cs.Color = pal[ns]; cs.Values = effs;
@@ -1253,10 +1544,12 @@ namespace YAMS
             line(Lang.F("Punto medio     {0}  ({1:F2}N {2:F2}E)", Astro.ToLocator(model.Mid), model.Mid.Lat, model.Mid.Lon));
             line(Lang.F("Quota scie      {0:F1} km (strato E){1}", model.LayerKm, collm != null && chkLayerRadar.IsChecked == true ? "  " + Lang.T("<- moda misurata dal radar Collm") : ""));
             line(Lang.F("Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)", model.ElevToMidDeg));
-            if (model.ElevToMidDeg < 0) line("  " + Lang.T("-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto"));
+            if (model.ElevToMidDeg < 0) line("  " + Lang.F("-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)",
+                MsGeometry.MinLayerForPathKm(model.DistKm, Math.Min(model.HomeAltKm, model.DxAltKm))));
             sb.Append("\n");
             head(Lang.T("HOT A / HOT B (hot spot classici, per il puntamento d'antenna)"));
-            line(Lang.F("Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)", PathModel.HotSpotOffsetKm));
+            line(PathModel.HotSpotAuto ? Lang.F("Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG", model.HotOffsetKm, PathModel.AmsOffsetDeg(model.DistKm))
+                                         : Lang.F("Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)", model.HotOffsetKm));
             foreach (HotPoint h in new HotPoint[] { model.HotA, model.HotB })
             {
                 if (h == null) continue;
@@ -1284,8 +1577,9 @@ namespace YAMS
                 line(Lang.F("Puntamento {0:F0}°: Hot A {1}, Hot B {2}", sky.AntennaAz,
                     model.HotA.InLobe ? Lang.T("DENTRO il lobo") : Lang.T("fuori dal lobo"), model.HotB.InLobe ? Lang.T("DENTRO il lobo") : Lang.T("fuori dal lobo")));
             sb.Append("\n");
-            head(Lang.T("ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)"));
-            line(Lang.F("Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)", q));
+            head(Lang.T("ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)"));
+            line(Lang.F("Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)", q));
+            line(Lang.T("Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza"));
             line(Lang.T("Punto di riflessione").PadRight(30) + "28 MHz   50 MHz   70 MHz  144 MHz  222 MHz  432 MHz");
             List<KeyValuePair<string, LatLon>> pts = new List<KeyValuePair<string, LatLon>>();
             pts.Add(new KeyValuePair<string, LatLon>(Lang.T("Punto medio (forward)"), model.Mid));
@@ -1295,27 +1589,43 @@ namespace YAMS
                 sb.Append(kv.Key.PadRight(28));
                 foreach (double fb in new double[] { 28, 50, 70, 144, 222, 432 })
                 {
-                    double Ldb = MsGeometry.PathLossDb(model.Home, model.HomeAltKm, model.Dx, model.DxAltKm, kv.Value, model.LayerKm, fb, q);
+                    double Ldb = MsGeometry.PathLossDb(model.Home, model.HomeAltKm, model.Dx, model.DxAltKm, kv.Value, model.LayerKm, fb, q, 90, true);
                     sb.Append(Ldb.ToString("F1").PadLeft(9));
                 }
                 sb.Append("\n");
             }
-            double lossMid = MsGeometry.PathLossDb(model.Home, model.HomeAltKm, model.Dx, model.DxAltKm, model.Mid, model.LayerKm, f, q);
+            // valore prudente: beta = 90 gradi (scia che attraversa il piano della tratta); il caso migliore (beta = 0) si mostra a parte
+            double lossMid = MsGeometry.PathLossDb(model.Home, model.HomeAltKm, model.Dx, model.DxAltKm, model.Mid, model.LayerKm, f, q, 90, true);
+            double loss0 = MsGeometry.PathLossDb(model.Home, model.HomeAltKm, model.Dx, model.DxAltKm, model.Mid, model.LayerKm, f, q, 0, true);
+            double phiMid = model.HalfScatterAngleDeg(model.Mid);
+            double hItu = MsGeometry.ItuMeanHeightKm(f);
+            double lossR0 = MsGeometry.InitialRadiusLossDb(hItu, f, phiMid);
             double gain = V(numGain), sens = V(numSens), power = V(numPower);
             double pdbm = 10 * Math.Log10(power * 1000.0);
-            double eirp = pdbm + gain - 2.15;
-            double rx = eirp - lossMid + gain - 2.15;
+            double eirp = pdbm + gain;   // guadagno in dBi: la perdita di McKinley e' riferita ad antenne isotrope
+            double rx = eirp - lossMid + gain;
             sb.Append("\n");
             head(Lang.F("BILANCIO A {0:F0} MHz (punto medio)", f));
-            line(Lang.F("Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)", power, pdbm, eirp));
+            line(Lang.F("Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)", power, pdbm, eirp));
             line(Lang.F("Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB",
                 lossMid, rx, sens, rx - sens));
+            line(Lang.F("Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB",
+                lossR0, MsGeometry.InitialRadiusM(hItu), hItu, f, loss0, loss0 - lossMid, eirp - loss0 + gain - sens));
+            if (MsGeometry.InitialRadiusFactor != 1)
+            {
+                double rItu = MsGeometry.InitialRadiusItuM(hItu), lItu = 10 * Math.Log10(Math.E) * 8 * Math.PI * Math.PI * rItu * rItu * Math.Pow(Math.Cos(Math.Min(phiMid, 85) * Astro.D2R), 2) / Math.Pow(299.792458 / f, 2);
+                line(Lang.F("Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)",
+                    rItu, lItu, MsGeometry.InitialRadiusFactor == 2 ? Lang.T("doppio dell'ITU (Stober 2021, prudente)") : Lang.T("escluso")));
+            }
             line(Lang.F("Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB",
-                200 + 30 * Math.Log10(f / 144.0), f, eirp - (200 + 30 * Math.Log10(f / 144.0)) + gain - 2.15 - sens));
+                200 + 30 * Math.Log10(f / 144.0), f, eirp - (200 + 30 * Math.Log10(f / 144.0)) + gain - sens));
             sb.Append("\n");
             head(Lang.T("REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)"));
             line(Lang.F("Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms",
-                MsGeometry.CountScale(144, f, 3), 10 * Math.Log10(MsGeometry.CountScale(144, f, 3)), MsGeometry.DurationScale(144, f), f, MsGeometry.PingMaxMs(f)));
+                MsGeometry.CountScale(144, f, 3), 10 * Math.Log10(MsGeometry.CountScale(144, f, 3)), Math.Pow(144 / f, 2), f, MsGeometry.PingMaxMs(f)));
+            line(Lang.F("Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}",
+                MsGeometry.ObservedDurationMs(f), f, MsGeometry.ObservedDurationMs(f) / MsGeometry.ObservedDurationMs(144),
+                f > 144.15 ? " " + Lang.T("(sopra 144 MHz nessuna misura: λ²)") : ""));
             StyleReport(txtGeo, sb.ToString(), heads);
 
             // curve dell'elevazione (come Immagine 8 dell'articolo)
@@ -1350,11 +1660,49 @@ namespace YAMS
                     s.IsAntihelion ? "-" : s.LambdaMax.ToString("F2"), peak ?? "", src ?? "",
                     s.IsAntihelion ? Lang.T("mobile") : s.Ra.ToString("F0") + "°", s.IsAntihelion ? Lang.T("mobile") : s.Dec.ToString("+0;-0") + "°",
                     s.V.ToString("F0"), s.PopIndex.ToString("F1"), s.Zhr > 0 ? s.Zhr.ToString("F0") : Lang.T("var."),
-                    s.Type == "R" ? Lang.T("radio, diurno") : Lang.T("visuale"), s.IsActive(now) ? Lang.T("sì") : "" };
-                rows.Add(new TableRow { Cells = cells, Tag = s.Code });
+                    s.Type == "R" ? Lang.T("radio, diurno") : Lang.T("visuale"), "", "", "", "", "", "" };
+                string[] tips = new string[cells.Length];
+                double rG; bool gmnR = GmnPopIndex.R.TryGetValue(s.Code, out rG);
+                double kk = MsGeometry.KFromPopIndex(gmnR ? rG : s.PopIndex);
+                cells[12] = double.IsNaN(kk) ? "-" : kk.ToString("F2") + (gmnR ? " G" : "");
+                tips[12] = Lang.F("k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.",
+                    double.IsNaN(kk) ? "-" : kk.ToString("F2"), (gmnR ? rG : s.PopIndex).ToString("F2"), gmnR ? "GMN" : "IMO");
+                IauMdc.Comparison mc = IauMdc.Compare(s);
+                if (mc != null)
+                {
+                    cells[13] = mc.N.ToString();
+                    cells[14] = double.IsNaN(mc.SepMed) ? "-" : mc.SepMed.ToString("F1") + "°";
+                    cells[15] = double.IsNaN(mc.DLambda) ? "-" : mc.DLambda.ToString("+0.0;-0.0");
+                    cells[16] = double.IsNaN(mc.DV) ? "-" : mc.DV.ToString("+0.0;-0.0");
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.AppendLine(Lang.F("IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.",
+                        IauMdc.Edition, mc.N, mc.LoSMed, mc.RaMed, mc.DeMed, mc.VgMed));
+                    sb.AppendLine(Lang.F("Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.", mc.SepMed, mc.SepMax));
+                    int shown = 0;
+                    foreach (MdcSolution x in IauMdc.ByCode[s.Code])
+                    {
+                        if (++shown > 12) { sb.AppendLine("…"); break; }
+                        sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}  λ {1:F1}  {2:F1}/{3:+0.0;-0.0}  v {4:F1}  {5}", x.AdNo, x.LoS, x.Ra, x.De, x.Vg, x.Reference));
+                    }
+                    tips[13] = tips[14] = tips[15] = tips[16] = sb.ToString().TrimEnd();
+                }
+                int gc;
+                if (GmnDaily.Total > 0)
+                {
+                    cells[17] = GmnDaily.Counts.TryGetValue(s.Code, out gc) ? gc.ToString() : "0";
+                    tips[17] = Lang.F("Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.",
+                        GmnDaily.Total, GmnDaily.FirstUtc.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture), GmnDaily.LastUtc.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture), GmnDaily.Sporadic);
+                }
+                TableRow tr = new TableRow { Cells = cells, Tag = s.Code, CellTips = tips };
+                // velatura sugli sciami attivi oggi (al posto della vecchia colonna "Attivo oggi")
+                if (s.IsActive(now)) { tr.Back = Pal.A(70, Pal.Yellow); tr.Bold = true; }
+                rows.Add(tr);
             }
             gridShowers.Rows = rows;
             gridShowers.Refresh();
+            // la tabella si apre sul primo sciame attivo oggi (in autunno e in inverno sarebbero fuori vista)
+            int firstActive = rows.FindIndex(r => r.Back.HasValue);
+            if (firstActive > 0) gridShowers.ScrollToRow(Math.Max(0, firstActive - 1));
         }
 
         // ------------------------------------------------------------ radar
@@ -1575,7 +1923,8 @@ namespace YAMS
             RefreshCollect(false);   // raccolta dati: righe telnet nuove, contatori, tabella
             if (now.Second == 0)
             {
-                if (TrackValue == 0) UpdateSky();
+                if (IsRealTime) UpdateSky();
+                else if (now.Minute % 15 == 0) UpdateSky();   // la data scelta segue l'ora attuale
                 if (now.Minute == 0 && (dtDay.SelectedDate ?? now).Date == now.AddMinutes(-1).Date) dtDay.SelectedDate = now.Date;
                 if (now.Minute == 0 && now.Hour == 0) UpdateShowerGrid();   // nuovo giorno: aggiorna i prossimi massimi
             }
@@ -1605,6 +1954,9 @@ namespace YAMS
             cfg.Set("vista_alto", chkTopView.IsChecked == true);
             cfg.Set("boom_m", V(numBoom));
             cfg.Set("hot_spot_km", V(numHotKm));
+            cfg.Set("hot_spot_auto", chkHotAuto.IsChecked == true);
+            if (chkTrailLen != null) cfg.Set("lunghezza_scie", chkTrailLen.IsChecked == true);
+            if (chkBeta != null) cfg.Set("angolo_beta", chkBeta.IsChecked == true);
             cfg.Set("carattere_pct", Math.Round(sldFont.Value / 10) * 10);
             cfg.Set("lingua", Lang.Code);
             cfg.Set("tema", Tema.Chiave);
@@ -1618,16 +1970,23 @@ namespace YAMS
             return
 Lang.T("FONTE PRINCIPALE") + "\n" +
 "  " + Lang.T("Costantino Cerrotta IC8TEM, Gianluigi \"Gigi\" Sartori IV3GTH - \"METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese\" (articolo, versione 7).") + "\n" +
-"  " + Lang.T("Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.") + "\n\n" +
+"  " + Lang.T("Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.") + "\n\n" +
 Lang.T("CALCOLO E TEORIA DELL'EFFICIENZA") + "\n" +
 "  " + Lang.T("Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)") + "\n" +
 "  Wilhelm Rauh DL5MCG - MCG_MS, MS Efficiency Calculator, qsl.net/dl5mcg\n" +
 "  " + Lang.T("Ingolf SM6FHZ - \"432 MHz Meteorscatter, Challenges and Techniques\", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)") + "\n" +
 "  " + Lang.T("D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)") + "\n" +
-"  " + Lang.T("John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)") + "\n" +
+"  " + Lang.T("John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)") + "\n" +
+"  " + Lang.T("Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza") + "\n" +
+"  G. Stober, P. Brown, M. Campbell-Brown, R.J. Weryk - \"Triple-frequency meteor radar full wave scattering\", A&A 2021, arXiv:2108.07647\n" +
+"  J.A. Weitzen, W.T. Ralston - \"Meteor Scatter: An Overview\", IEEE Trans. Antennas Propag. 36(12), 1813-1819, 1988\n" +
+"  B. Xia, L. Li, Y. Zheng - \"Modeling and Simulation of the Meteor Burst Channel\", Telecommunications Science 2016 (9)\n" +
+"  Rob Suggs NN4NT, HamSCI Meteor Scatter Working Group - MSQP, NN4SA 2026 Perseids, 4 Nov 2026, github.com/HamSCI/MSQP\n" +
 "  " + Lang.T("Shelby W8WN - qsl.net/w8wn/hscw (elevazione e offset ottimali)") + "\n" +
 "  " + Lang.T("Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale \"QTFGUI Help\" 2007: legge di diffusione a cono,\n" +
 "    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello") + "\n" +
+"  " + Lang.T("Klaus von der Heide DJ5HG - \"Die Geometrie von Meteorscatterverbindungen\" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n" +
+"    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot") + "\n" +
 "  " + Lang.T("Jens DF5HC - \"Meteorscatter auf UKW\", conferenza DARC, gennaio 2018: formula della migliore direzione\n" +
 "    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n" +
 "    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK") + "\n" +
@@ -1639,7 +1998,6 @@ Lang.T("CALCOLO E TEORIA DELL'EFFICIENZA") + "\n" +
 "  " + Lang.T("John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV") + "\n\n" +
 Lang.T("DATI DEGLI SCIAMI") + "\n" +
 "  " + Lang.T("International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)") + "\n" +
-"  " + Lang.T("Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)") + "\n" +
 "  Rossano IZ5TEK - www.aripisa.it/images/pdf/scattertek.pdf\n\n" +
 Lang.T("DATI RADAR IN DIRETTA") + "\n" +
 "  " + Lang.T("Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php") + "\n" +

@@ -1,0 +1,175 @@
+TITLE|YA-MS 如何计算流星雨的效率
+SUB|技术文档 - 作者 Costantino IC8TEM - 2026 年 11 月
+H1|1. 引言
+H2|1.1 本文档的目的
+P|本文档逐步说明程序如何为一条流星余迹散射路径推导出流星雨的效率。每一步都注明其出处：已发表的来源、对程序进行的核查，或程序自身做出的选择。完整且编号的方程见《计算手册》（doc 文件夹）。
+H2|1.2 如何阅读标签
+TAG|FONTE|该步骤遵循所引用的来源；方括号中的数字对应文末的来源列表。
+TAG|RILIEVO|程序与来源之间的比较，以及核查结果。
+TAG|SCELTA|由程序做出的选择，并非取自来源：有待实际通联经验验证。
+H2|1.3 效率的含义
+TAG|FONTE|效率以百分比表示流星雨的位置在多大程度上允许在给定路径上产生反射。这一概念源自 Ilkka OH5IY（MS-Soft）[2]，并被文章 [1] 沿用：效率的极大并不与目视极大（ZHR）重合，因为它取决于辐射点相对于两个台站的位置。
+TAG|FONTE|DL5MCG 的 MCG_MS [3] 将同一概念应用于四个固定方向（N/S、NE/SW、E/W、SE/NW），输入 DX 台定位符后也应用于真实路径。
+TAG|SCELTA|YA-MS 针对两个定位符之间的真实路径计算效率，而不是针对固定方向。
+H1|2. 反射发生的位置：E 层
+H2|2.1 流星雨的余迹
+TAG|FONTE|流星雨的流星在 E 层中 80 至 120 km 高度之间产生电离余迹。SKiYMET 雷达给出的平均高度约为 90 km [1]。
+H2|2.2 计算高度
+TAG|SCELTA|程序读取 Collm 雷达 [7] 的高度直方图，并以最常出现的高度（众数）作为计算高度。如果取消勾选“来自雷达”复选框，则使用手动输入的数值。
+TAG|RILIEVO|2026/11/5 的 Collm 图：众数 89.5 km，平均值 88.6 km，标准差 6.8 km。该数值证实了文章 [1] 中的 90 km。
+TAG|RILIEVO|DJ5HG [18] 和 QTFGUI [17] 使用 102 km 的固定高度；本程序优先采用雷达实测值。ITU-R P.843 建议书 [24] 给出平均高度 h = 124 − 17·log10(f) km：36.2 MHz 时约 97 km，144 MHz 时约 87 km，与 Collm 的众数一致（2026/11/5 为 89.5 km）。
+H1|3. 路径几何
+H2|3.1 地球、台站与中点
+TAG|FONTE|半径 r = 6372.7955 km 的球形地球 [1]。
+TAG|SCELTA|路径始终是本台定位符与 DX 台定位符之间的真实路径。距离、方位角和中点用大圆公式计算。
+TAG|FONTE|与时间相关的计算以路径中点为参照：路径两端的最佳时间可能相差多达 1.5 小时（SM6FHZ [4]）。
+H2|3.2 天线仰角
+TAG|FONTE|指向反射点的仰角用文章中的公式（图 7）[1] 计算，其中 x = 距离 / r，H 为余迹高度，h 为台站高度：
+EQ|e = 90° − 57,3 · arctan[ (r·tan x + (H − r(1−cos x)/cos x)·sin x) / (H − r(1−cos x)/cos x − h·sin x) ]
+TAG|RILIEVO|该公式与精确的球面几何相差在 0.03° 以内。程序使用双参数反正切，在地平线以外给出负值，并避免了文章中指出的周期性问题。
+H2|3.3 共同区域及其界限
+TAG|FONTE|文章 [1] 找出了各台站地平线与 E 层相交的曲线的交点。它们是围绕两台站、半径等于余迹高度处作用距离的两个圆的交点：
+EQ|d_H = r · [ π/2 − e − arcsin( (r+h)·cos e / (r+H) ) ]
+P|H = 89.5 km、波瓣仰角 0° 时，作用距离为 1062 km。如果路径长于作用距离的两倍，两个台站就看不到 E 层的共同区域。
+TAG|RILIEVO|这两个点是两台站共同可见天空的最远边缘，而不是大多数反射到达的点。在路径 JN70CN - IN78UO（1710 km）上，它们位于直射方向左右各 37°，而 MSHV 推荐的是 10°。因此程序称之为“Limit A”和“Limit B”，并在地图上以淡色绘出，同时绘出共同区域的两个圆。
+TAG|RILIEVO|在文章的例子（JN44BB - IO53RT）中，图示将这些交点置于距台站约 870 km 处：这对应约 2° 的波瓣仰角（865 km）。
+H2|3.4 Hot A 和 Hot B：指向何处
+TAG|FONTE|偶发流星的反射集中在路径中点两侧的两个区域（“热点”）。J. Richardson（AMS）[19] 在 DJ5HG [18] 引用的表中给出了天线相对直射方向的偏角：1000 km 时 13°，1250 km 时 11°，1500 km 和 2000 km 时 10°。W8WN [14] 引用的 AMS Bulletin No. 203 给出 1500 km 和 1800 km 时为 10°。
+TAG|SCELTA|Hot A 和 Hot B 是距中点 s、垂直于路径的两个点（从本台看向 DX 台，A 在左，B 在右）。勾选“自动（AMS）”复选框（默认）时，s 由 Richardson 表中的偏角线性插值得到（1000 km 以下取 13°，2000 km 以上取 10°）：s = (D/2)·tan(偏角)。取消勾选后可手动输入 s（MSHV [15] 使用 150 km）。
+EQ|Δaz ≈ arctan( s / (D/2) )
+TAG|RILIEVO|按 AMS 表：1000 km → 13°，s ≈ 115 km；1250 km → 11°，s ≈ 121 km；1500 km → 10°，s ≈ 132 km；2000 km → 10°，s ≈ 176 km。JN70CN-IN78UO（1710 km）→ 10°，s ≈ 151 km，与此前及 MSHV 使用的 150 km 相近；在短路径上，该表使热点更靠近中点。
+TAG|SCELTA|对于天球图上显示的时刻，程序对地平线以上的所有流星雨累加 ZHR x 效率，并在 A 侧和 B 侧之间分配（第 7.1 章）。接收反射较多一侧的热点即为推荐热点：在地图上以红色显示。
+TAG|FONTE|据 DF5HC [16] 引用的 DJ5HG 所述，反射发生在围绕余迹的锥面上：对于较短的路径，天线应指向直射方向的一侧，两台站指向同一点，并且根据辐射点位置，两个点（HOT-A 或 HOT-B）中的一个更为有利。DF5HC 还给出最佳距离为 1300-1500 km，极大值略超过 2000 km。
+H2|3.5 天线波瓣
+TAG|FONTE|由横梁长度求长八木天线的增益（DL6WU 曲线 [10]），由增益求 −3 dB 波束宽度（Kraus 规则 [11]）：
+EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|RILIEVO|W4RNL 的 NEC 仿真 [12] 证实了增益曲线，偏差在 0.1 dB 以内，对 DL6WU 八木天线以及 David Tanner VK3AUU 的八木天线（相同单元数下横梁较短）均如此：增益取决于横梁长度。同样的仿真给出的水平波瓣比 Kraus 窄 5-10 %。
+TAG|SCELTA|水平波瓣（用于方位指向）= 0.93 · θK；垂直波瓣 = θK。432 MHz 的 14 λ 八木天线：20.3 dBi，水平 18.1°、垂直 19.5°；W4RNL 的模型给出 20.4 dBi 和 18.4°/18.8°。
+TAG|SCELTA|天线始终被视为指向 DX 台。落在该方向 ±θ/2 以内的热点已被波瓣覆盖：以灰色而非粉色标示，程序显示警告。按效率推荐的热点仍然为红色。
+H1|4. 流星雨辐射点
+H2|4.1 辐射点位置
+TAG|FONTE|赤经、赤纬、极大时的太阳黄经、速度、r 指数和 ZHR 取自 IMO 2026 和 2027 年历表 [5] 的表 5 和表 7；反日点源取自表 6。IMO 列表中的次要流星雨也已纳入，例如十月鹿豹座流星雨（OCT，ZHR 5，10 月 5-6 日活跃）、仙女座流星雨以及 4 月和 5 月的白昼射电流星雨：即使 ZHR 较小，它们也计入路径指数和热点推荐。
+TAG|SCELTA|对于白昼射电流星雨，IMO 既不给出 ZHR 也不给出速度：程序使用工作值 5。
+TAG|FONTE|太阳黄经（J2000 分点）、恒星时以及换算为方位角和仰角：Meeus [6] 的公式。
+TAG|SCELTA|辐射点的每日漂移使用工作值，写在 sciami.csv 文件中，可以编辑。
+TAG|RILIEVO|与 IAU Meteor Data Center 目录比较 [32]：“流星雨”页为每个流星雨显示既定流星雨列表中公布了多少个解，以及程序的 IMO 目录与各解中位数的差：辐射点的角距（在同一太阳黄经下、按程序的漂移比较）、Δλ（程序的 λ max 减活动期平均太阳黄经的中位数，二者与极大并不完全重合）和 Δv。提示框列出各解及其文献。原始文件每月至多从 www.ta3.sk 下载一次；MDC 要求引用 Jenniskens 等 2020 以及 Jopek 和 Kaňuchová 2017。
+H2|4.2 极大日期
+TAG|FONTE|程序始终显示下一次极大。当 IMO 已发布该年的年历表时（2026 和 2027 年已包含在 massimi_imo.csv 中），使用 IMO 的日期和时间 [5]；否则计算太阳到达极大时黄经的时刻。
+TAG|RILIEVO|对于 IMO 给出时间的流星雨，计算结果与 IMO 2026 和 2027 年历表相差在几分钟以内（例如象限仪座流星雨 2026/1/3 21:13 对 21:00，双子座流星雨 2027/12/14 19:51 对 20:00）。例外是 2026 年白昼 kappa-狮子座流星雨晚一天（9月26日而非9月25日），以及 2027 年宝瓶座 η 流星雨的时间（15:10 对 IMO 的 09:00）：这些情况下以 IMO 的值为准。
+H2|4.3 随时间变化的活动
+TAG|FONTE|极大 ZHR 取自 IMO 年历表 [5]。
+TAG|SCELTA|在极大附近，活动呈指数下降，上升段和下降段斜率不同（工作值见 sciami.csv）：
+EQ|ZHR(λ) = ZHRmax · 10^( −B · |λ − λmax| )
+H1|5. 反射条件
+H2|5.1 镜面反射
+TAG|FONTE|只有当余迹与以两台站为焦点的椭球相切时，余迹才会在两台站之间传送信号（McKinley [8]）。同一流星雨的余迹平行于辐射点方向 [1, 8]。
+P|实际计算中，对 E 层的每个点 P，取从 P 指向两台站的方向及其角平分线 n。平行于辐射点（方向 s）的余迹在与角平分线垂直时向两台站反射：
+EQ|s · n = 0
+TAG|FONTE|DJ5HG 的 QTFGUI 也基于同一定律：照射到余迹上的射线在围绕余迹的锥面上散射，只有位于锥面上的台站才能收到信号。锥面条件等价于 s · n = 0。[17, 18] DJ5HG 在其 2004 年的文章中这样描述：余迹穿过 E 层，两副天线照射它，接收机位于以余迹为轴的锥面上；锥壁是一个长达数千波长的辐射体的波瓣，因此很窄，但在掠射入射（长路径）时，它会覆盖地面的大片区域。
+H2|5.2 容差
+TAG|SCELTA|该条件以 0.05 rad（约 3°）的高斯容差接受。对于理想余迹，锥壁要窄得多 [18]；这 3° 代表理想锥面未考虑的因素：流星雨辐射点的弥散（GMN 测得 0.3-1.4°）、被风吹弯的余迹及其有限长度。
+TAG|RILIEVO|对于流星余迹散射，DJ5HG 的 QTFGUI 绘出的偏离反射定律可达 32°：本程序 0.05 rad 的高斯容差更严格，将权重集中在几乎完全镜面的点上。以 5 km 而非 15 km 采样时，百分比变化小于 0.3 个百分点。
+H2|5.3 实际结果：最佳指向
+TAG|FONTE|只有当余迹与以两台站为焦点的椭球相切时，余迹才会在两台站之间传送信号：在 E 层的每一点上，只有天空中与散射角平分线垂直的半圆上的辐射点才有用（Eshleman 和 Mlodnosky [20]；Meeks 和 James [21]）。在中点附近，该半圆在横跨路径的方向上升得最高：仰角为 El 的辐射点在中点侧方约 H·tan El 处、辐射点的对侧产生镜面余迹，也就是 Eshleman 和 Mlodnosky 以及 ITU-R P.843 建议书 [24] 所定位于两侧约 100 km 处的热点。余迹的数量及其电离度随 sin El 增大 [21]。回波对辐射点位置的依赖关系由 Hines [22] 计算，并由 Forsyth、Hines 和 Vogan [23] 在四个流星雨上验证。由此得出 SM6FHZ [4] 的实用规则：最佳路径与辐射点方位角正交，指向 Az ± 90°，容差 ±40-50°。
+TAG|RILIEVO|DJ5HG [18] 的保留意见：当低辐射点恰好沿路径方向时，即使流星很少，McKinley 公式也给出强信号（汉堡-纳尔维克，象限仪座流星雨，约 19 UTC）。因此“辐射点与路径对齐 = 效率几乎为零”的规则适用于高辐射点，而不适用于掠射的辐射点。程序保持保守，不提高效率，但当某个活跃流星雨的辐射点低于 20° 且与路径方向相差 30° 以内时，在天球图上显示“低辐射点沿路径”。辐射点位于两台站之间天顶时的缺口得到证实（象限仪座流星雨，汉堡-巴塞罗那，约 08 UTC）。
+TAG|RILIEVO|DF5HC [16] 引用的 DH9GCD 公式中也出现了同一规则：效能 = sin(El) · cos(El) · sin(P − Az)，其中 El 和 Az 为辐射点的仰角和方位角，P 为 DX 台的方位角。辐射点位于 45° 且横跨路径时取极大值；DF5HC 认为辐射点低于 20° 时过低，高于 70° 时过高。该公式不考虑距离和高度，但它是一个很好的比较项：在“预报计算 › 效率计算”子选项卡中，它以浅蓝色显示在每个流星雨下方，为其极大值（0.5）的百分比。当从台站看辐射点高于 70° 时，程序在表中以 ↑ 标示，并在天球图上给出警告。
+TAG|RILIEVO|DH9GCD 公式没有已发表的原始来源：它将 sin El 因子（余迹的数量和电离度）与 cos El 因子相结合，后者表示随着辐射点升高，镜面点离路径中心有多远。按 MS-Soft [25] 的做法以从中点看到的辐射点计算时，它再现了 KP30HV-JO52MM（1324 km，象限仪座流星雨，2001/1/4）的 MS-Soft 表：仰角 16° 至 48° 之间相差在 4 个百分点以内，直至 64° 相差在 16 个百分点以内，且极大值同在 13 UT（96 % 对 92 %）。它仍只是一个比较项。
+H1|6. 从单个点到效率
+H2|6.1 反射点
+TAG|SCELTA|程序将 E 层划分为每隔 15 km 的点，仅保留两个台站都能在波瓣最低仰角以上看到的点。
+H2|6.2 各点的权重
+TAG|FONTE|欠密余迹的功率（McKinley [8]；ITU-R P.843 [24]）随 λ³ 增大，随与台站的距离 R1、R2 减小；φ 为散射角的一半，β 为余迹与包含两台站和该点的平面之间的夹角：
+EQ|权重 = 1 / [ R1 · R2 · (R1 + R2) · (1 − cos²β · sin²φ) ]
+TAG|SCELTA|在 1.6 版之前，程序对所有余迹取 β = 0（权重含 cos²φ）：穿过路径平面的余迹权重被高估最多 10-15 dB。从 1.7 版起，可通过选项“余迹与路径之间的夹角 β（完整 McKinley 公式）”对每个点和每个辐射点方向计算 β；该选项默认开启，因为它给出最保守的数值（不会高估任何余迹）。
+TAG|SCELTA|夹角 φ 限制在 85°，以避免掠射方向上出现无穷大值。
+TAG|FONTE|到达某点的流星数量正比于该点处辐射点仰角的正弦：这与 IMO 计算 ZHR 时使用的修正相同 [5]。
+TAG|SCELTA|选项“低辐射点时余迹更长（DJ5HG）”位于“效率计算”中，默认关闭：DJ5HG [18] 观察到，辐射点较低时每 km² 落下的流星较少，但余迹较长（可用长度达 100 km），更常满足反射定律。开启该选项后，权重变为 min(sin El, 15/100)：层的可用厚度 15 km 除以仰角的正弦即为余迹长度，上限 100 km。仰角约 9° 以上时两种效应相互抵消；关闭该选项时计算保持保守。
+TAG|SCELTA|计算预设位于同一行：“保守”（默认，最保守的数值：雷达高度、普通余迹、含 β）、“按 DJ5HG”（102 km、长余迹、含 β）和“自定义”；当手动更改高度、“来自雷达”复选框、长余迹或夹角 β 时，会自动选中“自定义”。
+TAG|RILIEVO|夹角 β 对最佳方向的影响，1000 km 路径：不含 β 时，极大值位于偏离路径 15° 至 90° 之间，取决于辐射点仰角（辐射点 30° 时为 30°，辐射点 60° 时为垂直方向），辐射点为 30° 时垂直方向的辐射点效率为 67 %；含 β 时，极大值始终出现在辐射点沿路径方向时，垂直方向的辐射点降至 15 %。因此含 β 时 SM6FHZ 和 DH9GCD 的最佳方向规则不再成立：正因如此 β 是一个选项，默认开启，因为它给出最保守的数值（不会高估任何余迹）。
+TAG|FONTE|关于辐射点最佳方向的两种观点。业余无线电的经典观点：最佳辐射点高 15° 至 70° 且横跨路径，与路径同向的为勉强。持此观点的有 SM6FHZ [4] 的经验规则、DH9GCD 的公式（由 DF5HC [16] 转述）以及 qso-graph 的 meteor-mcp [31]，后者以相切条件为依据：有用的余迹必须与以两台站为焦点的椭球相切，而沿路径延伸的余迹很少满足。此观点计算余迹可以在哪里反射，但不计算每条余迹反射多少。
+TAG|FONTE|完整公式的观点：McKinley [8] 和 ITU-R P.843 [24] 给每条余迹的功率乘以因子 1 / (1 − cos²β sin²φ)，其中 β 是余迹与路径平面的夹角。位于平面内的余迹（β = 0）比穿过平面的余迹（β = 90°）多反射 1/cos²φ 倍：600 至 2000 km 间为 10-15 dB。辐射点与路径同向时，相切的余迹靠近平面，权重更大；辐射点横跨路径时，余迹穿过平面，权重更小。DJ5HG [18] 使用同一因子，其逐时曲线的形状与 YA-MS 开启 β 时得到的一致（形状偏差约 3 dB）。
+TAG|RILIEVO|两种观点使用同一镜面反射条件，但对余迹的加权不同：经典观点计算有用余迹的数量，完整观点还考虑其功率。在 1000 km、辐射点高 30° 时，垂直方向的辐射点不计 β 为 67 %，计 β 为 15 %。与实测计数的初步比较无法区分两者（见下段）：要作出判断，需要更长的路径和更多接收站。
+TAG|RILIEVO|与实测计数比较：2026 年 8 月 12 日至 28 日在 Sonneberg 接收的 BRAMS 检测（Dourbes 信标，49.97 MHz，路径 471 km），约 97 000 个回波，用 M. Bundscherer 的方法 [34] 检测。扣除背景（8 月 22 日至 27 日逐时中位数）后，英仙座流星雨最多在 8 月 13 日 02 至 10 UTC 之间于 300-470 之上增加约 80-130 个回波/小时：在 50 MHz，它们相对偶发流星分量很小。逐时超出量与 YA-MS 的计算（英仙座效率 × ZHR）相关，开启 β 时相关系数 0.44，关闭时 0.43，与 ZHR 乘辐射点高度正弦所得相同；使用长余迹时降至 0.36。在这条短路径上，几何没有提供额外信息，比较无法在两种观点之间作出判断。局限：只有一台接收机；自适应检测阈值可能在最活跃时段降低计数；背景日仍有小流星雨活动；信标天线指向天顶。
+TAG|SCELTA|程序中“余迹与路径的夹角 β（完整 McKinley）”复选框默认开启，因为它不高估任何余迹（保守值）；关闭时采用经典观点。“经典判断”复选框在逐时表格中每个流星雨下方增加在路径中点计算的经典判断一行：✗ 辐射点在地平线下，◐ 勉强（低于 15° 或高于 70°，或与路径方向相差不到 30°），● 好，★ 最佳（在 15° 与 70° 之间，且与路径方向相差超过 60°），阈值取自 meteor-mcp [31]。它不改变计算：逐时显示两种观点在哪里一致、在哪里不一致。
+H2|6.3 百分比
+TAG|SCELTA|对每个辐射点方向，累加余迹发生反射的所有点的权重。100% 对应该路径最有利的辐射点位置：
+TAG|SCELTA|除仅适用于该路径的百分比外，程序还给出相对于 DJ5HG [18] 固定参考的效率 dB 值：0 dB 是一条跨越赤道、长 1000 km 的南北向路径在分点时辐射点位于天赤道上（辐射点从东方升起，经过天顶，在西方落下）时的极大值，按相同的高度和相同的权重计算。这样不同的路径就可以相互比较。DJ5HG 称其数值的精度优于 6 dB。
+EQ|η = 100 · F(辐射点) / F(最佳位置)  %
+TAG|RILIEVO|与 DJ5HG 的 QTFGUI 比较（取自其手册的例子）：路径汉堡 JO53IM - 巴塞罗那，象限仪座流星雨，1 月 4 日。07:00 UTC 时 QTFGUI 给出指向 252°、仰角 1°、相对效能 -8 dB，反射区中的辐射点方位 83°、仰角 75°；08:00 时无反射区；09:00 时指向 168°、仰角 2°、-4 dB，辐射点方位 292°、仰角 74°。本程序的模型（高度 102 km，与 QTFGUI 相同）给出：07:00 时 241°、0°、-5.4 dB，辐射点方位 77°、仰角 74°；08:00 时 0.6 %（-22 dB），即几乎为零；09:00 时 161°、4°、-4.0 dB，辐射点方位 286°、仰角 75°。在相同时刻 DH9GCD 给出 26 %、2 % 和 32 %：三种方法都看到了 08:00 的缺口，此时辐射点几乎位于天顶。[17]
+TAG|RILIEVO|与 DJ5HG [18] 的曲线比较（Bild 8 和 9：从汉堡和从慕尼黑出发，象限仪座流星雨，1 月 4 日），从图上读取（约 ±0.5 dB 和 ±15 分钟），并与程序的自动测试（--prova-dj5hg，每小时一个值）比较。时间：辐射点接近天顶时的缺口出现在相同的时段（巴塞罗那：DJ5HG 为 7.5–8.5 UTC，程序为 7–9；索非亚 6.6–7.8 和 7–8；纳尔维克 7–8.5 和 7–9）；莫斯科在两者中均从 3 点到 10 点关闭，程序也证实了 DJ5HG 的文字：从汉堡开通至约 2:30，从慕尼黑开通至约 0:30。指向：偏差 2–10°（巴塞罗那缺口前 225° 和 233° 对 223° 和 235°，缺口后 160° 对 169°；莫斯科 84° 对 82°，79° 对 76°；纳尔维克在 DJ5HG 中于 20:40 跳向 338°，在程序中于 20 至 21 点之间）。102 km 时的电平和形状（相对曲线的平均偏差和典型偏差）：不含 β 且不含长余迹时为 −1.6 和 4.0 dB；含长余迹时为 +1.1 和 4.6 dB；含夹角 β 时为 −5.4 和 6.2 dB，但形状最佳（去除平均偏差后为 3.0 dB，对 3.6）：出现了低辐射点时的深极小值（巴塞罗那 17 点为 −15.6 dB，对 19:36 的 −16 dB；索非亚 20 点为 −18.5 dB，对 −14 dB）。含 β 和长余迹（“按 DJ5HG”预设）时为 −2.2 和 4.7 dB；保守预设（雷达高度 89.5 km，含 β，不含长余迹）给出 −6.9 和 7.6 dB，形状 3.3 dB。不含 β 时，程序几乎看不到低辐射点与路径几乎对齐时的极小值（−8.6 和 −10.4 dB）：这正是 DJ5HG 保留意见所指的情况，因此保留了该警告。
+TAG|RILIEVO|MS-Soft 5.2 文档 [25] 将 OH5IY 的效率定义为仅适用于欠密余迹的相对指数，包含两个因子：辐射点仰角（最佳约 45°）和与路径的夹角（90° = 极大）。对于过密余迹，最小值被人为提高到 20 %；公式未公开。MCG_MS [3] 针对四个固定方向计算效率，输入 DX 台定位符后也针对真实路径计算。
+H1|7. 如何解读结果
+H2|7.1 反射侧（A / B）
+TAG|SCELTA|程序对每个小时计算反射中有多少落在路径左侧（A 侧），多少落在右侧（B 侧）。逐时表显示占优一侧的字母。
+TAG|FONTE|值得将指向向该侧偏移 10-30°（侧向散射）[1]。
+H2|7.2 路径指数
+TAG|SCELTA|该指数用一个数字概括在某一小时内流星雨整体对该路径的有利程度：
+EQ|I = Σ  ZHR · η / 100   （对所有活跃流星雨）
+H2|7.3 辐射点颜色
+P|在天球图上，效率 ≥ 50% 且 ZHR ≥ 2 时辐射点圆点为黄色，效率 ≥ 20% 时为橙色，低于 20% 时为暗红色，流星雨几乎不活跃时为灰色。
+H2|7.4 平面图中的 PREV 区域
+TAG|SCELTA|对于所显示的时刻，程序在 E 层上逐点累加每个活跃流星雨对效率的贡献（与第 5 章相同的镜面反射条件），并以 ZHR 加权。达到极大值至少 3 % 的点构成 PREV 区域，路径每侧一个，在平面图中以椭圆绘出：中心 = 各点的加权平均，轴 = 其离散度的两倍。这就是实用规则：如果流星雨自北向南运动，有用的余迹落在东侧和西侧。黄线表示所选流星雨或最有利流星雨的运动方向（辐射点方位角）。
+H2|7.5 从天线看的剖面
+TAG|SCELTA|剖面显示从台站看到的相同余迹，天线指向 DX 台：横向为相对 DX 台的方位角（A 在左，B 在右），纵向为仰角。每个流星雨取 14 个最强的反射点；每条余迹是一条朝向辐射点的线段，从余迹高度以上 10 km 到以下 10 km（每侧最多 60 km），出现概率越大线条越粗。图中还绘出天线波瓣（围绕波瓣仰角的 −3 dB 圆）、DX 台以及 Hot A / Hot B。
+H1|8. 工作频率与路径损耗
+H2|8.1 频段间规则
+TAG|FONTE|SM6FHZ [4] 的经验规则：反射的数量和强度按 λ³ 换算，持续时间按 λ² 换算。在前向散射中，持续时间还随 sec²φ 增大（τ = λ²·sec²φ / 16π²D，McKinley [8]；OH5IY [25]）：Collm 雷达以后向散射方式测量（φ = 0），因此在路径上持续时间须乘以中点处的 sec²φ（60° 时 ×4，70° 时 ×8.5，80° 时 ×33）。
+TAG|RILIEVO|实测数据（HamSCI，Meteor Scatter QSO Party [29]）：R. Suggs NN4NT 在 2026 年英仙座流星雨期间 NN4SA (EM64) 的 MSK144 录音（WSJT-X 的 4736 个 WAV 文件）中测量了 1298 个欠密回波的功率衰减常数。中位数：28.145 MHz 为 148 ms（41 个回波），50.260 MHz 为 78 ms（1198 个），144.150 MHz 为 53 ms（59 个）。若从 6 m 按 λ² 推算，应约为 245 ms 和 9.5 ms：在 2 m，ping 的持续时间是预测值的五倍以上。作者认为这可能是 2 m 回波的高度上限效应：在高频时可见的主要是低处余迹，那里扩散较慢。这是初步分析：仅一个接收站，不同距离未用 sec²φ 归一化，只包含强到足以被检测的回波。
+TAG|FONTE|Weitzen 和 Ralston [27]：衰减常数逐条余迹变化，服从指数分布，平均值 τ = λ²·sec²φ / (32π²D)（功率常数；16π² 用于振幅）。Xia、Li 和 Zheng [28] 给出 D 随高度的关系 D = 10^(0.067·h − 5.6) m²/s：1000 km 路径、余迹高 95 km 时，144 MHz 得 τ ≈ 47 ms，50 MHz 得 390 ms。144 MHz 的值接近实测中位数，50 MHz 的值高出五倍：高度每增加 15 km，D 增大十倍，因此随频率变化的可见余迹高度对持续时间的影响大于 λ²。
+TAG|SCELTA|程序在“几何与路径损耗”子页中提供“各波段之间的 ping 持续时间”选项。理论值（默认，保守）：λ²，得到最短的 ping。观测值：在 NN4SA 的三个中位数之间按对数刻度线性插值；28 MHz 以下延长 10–6 m 段，144 MHz 以上没有测量，重新使用 λ²。选择观测值时，Collm（36.2 MHz）1 s 的回波在 144 MHz 约持续 473 ms 而不是 63 ms，从 50 到 144 MHz ping 缩短到 1/1.5 而不是 1/8。
+TAG|RILIEVO|在 McKinley [8] 中，λ³ 是单条欠密余迹的功率，而非余迹的数量。在固定阈值且质量指数为 s 时，超过阈值的余迹数量按 λ 的 1.5·(s − 1) 次方换算，即 s = 2 时约为 λ^1.5（IZ5TEK [26]；OH5IY [25]）。程序保留 k = 3，即 SM6FHZ [4] 的经验规则，并明确说明：k = 3 时，Collm 的 1000 流星/小时在 144 MHz 时约为 16 次反射/小时，k = 1.5 时约为 127 次。GRAVES 雷达 143.050 MHz [13] 的 RMOB 观测者通常每小时记录 20 至 140 个回波；本台适用的 k 值可通过与 RMOB 比较得到（下一节）。
+TAG|FONTE|IARU 第 1 区规定的最大 ping 时长：50 MHz 时 1000 ms，70 MHz 时 500 ms，144 MHz 时 100 ms，432 MHz 时 13 ms [1]。
+H2|8.2 从雷达到业余频段
+EQ|N(f) = N(36,2 MHz) · (36,2 / f)^k · K        其中 k = 3
+TAG|RILIEVO|本台适用的 k 值可通过与同一频段上的 RMOB 观测者比较得到：k = 3 是 SM6FHZ 规则，质量指数为 2 的欠密余迹理论给出约 1.5。
+TAG|SCELTA|“由布居指数求 k”按钮为每个活跃流星雨计算 k = 1.5·(s − 1)，其中 s = 1 + 2.5·log10 r，即 k = 3.75·log10 r，并按 ZHR 加权平均。布居指数 r 有时取自 Global Meteor Network 通量页面的表格 [33]，否则取自 IMO 目录 [5]；“流星雨”页显示每个流星雨的 k。例：英仙座 r = 2.2，k = 1.28；双子座 r = 2.6，k = 1.56。默认仍为 SM6FHZ [4] 的 k = 3，更保守；不过 Collm 的计数大多是偶发流星，GMN 不公布其 r。
+TAG|FONTE|Global Meteor Network 的计数 [33]：在“实时流星雨”页和“流星雨”页的“GMN 今日”列中，程序读取网络相机确认轨迹的每日汇总（每颗流星一行，带流星雨的 IAU 代码，偶发流星为“...”），并按流星雨计数。这是计数，不是通量：取决于有多少台站天空晴朗且黑暗。数据 CC BY 4.0。
+H2|8.3 路径损耗
+EQ|L = 10 · log10 [ 16π² · R1 · R2 · (R1 + R2) · (1 − cos²β · sin²φ) / (λ³ · q² · re²) ] − 10 · log10 a1        a1 = exp[ −8π² · r0² / (λ² · sec²φ) ]
+TAG|FONTE|McKinley [8] 及 ITU-R P.843 建议书 [24]：β 为余迹与路径平面的夹角，a1 为余迹初始半径因子，其中 log10 r0 = 0,035 h − 3,45（r0 单位为 m，h 单位为 km）。链路预算使用 β = 90°，即最不利的情况（保守值），同时也显示最佳情况 β = 0。
+TAG|FONTE|参考值：GM8JBJ 引用的 G4BAO 计算结果 172–190 dB（引自 Kaiser & Closs [9]）；144 MHz 时平均约 200 dB（OH5IY）；最小可接收信号 −130 dBm [1]。
+TAG|RILIEVO|当 q = 10¹⁴ 电子/m、余迹位于 89.5 km 且 β = 0 时，在 144 MHz 下 600 至 2100 km 之间的结果为 182–192 dB（1000 km 时为 185 dB）。GM8JBJ [9] 引用的 John Worsnop G4BAO 在其博士论文中计算的 172–190 dB 范围包含了这些数值。β = 90° 时，损耗在 600 km 处增加 10 dB，在 1000 km 处增加 13 dB，在 2100 km 处增加 16 dB：文章 [1] 中引用的 OH5IY 平均值 200 dB 介于两种情况之间。同样据 GM8JBJ，G4BAO 发现与路径平行的余迹约低 6 dB。
+TAG|RILIEVO|GM8JBJ 表 [9] 中的 182 dB 并不构成证实：该表未注明频率，其每段 86.4 dB 是 1 MHz 下 500 km 的自由空间损耗（缺少 20 log f 项：在 144 MHz 时为 129.6 dB），而各项之和 86.4 + 0 − 9 + 86.4 为 163.8 dB 而不是 182。该网页既未提及最小值，也未提及 144 MHz。
+TAG|RILIEVO|在平均回波高度 h = 124 − 17 log f [24] 处的初始半径：50 MHz 时 95 km 处 r0 = 0.76 m，144 MHz 时 87 km 处 0.40 m，432 MHz 时 79 km 处 0.21 m。在 1000 km 上，a1 在 50 MHz 时为 0.2 dB，144 MHz 时为 0.6 dB，432 MHz 时为 1.4 dB（600 km 时为 2.9 dB）。若采用 DJ5HG 的 102 km 固定高度，432 MHz 时约为 70 dB，即没有回波：因此使用该频率下的平均回波高度。
+TAG|RILIEVO|初始半径的不确定性：Stober 等 [30] 用 17.45、29.85 和 38.15 MHz 的 CMOR 雷达及全波散射模型，在 85 至 95 km 之间测得 r0 为 0.5–2 m，多数为 1–1.5 m，每个高度的离散约两倍；横向极化时，数值约为以往测量（Greenhow 和 Hall 1960；Jones 和 Campbell-Brown 2005）的两倍。只有约 5 % 的回波能用理想模型描述。ITU-R P.843 [24] 公式给出 90 km 处 0.5 m、95 km 处 0.75 m，即这些测量的下限。
+TAG|SCELTA|程序在“几何与路径损耗”子页中提供“余迹初始半径”选项：ITU 值的两倍（默认，保守，与 Stober 等的测量一致）、ITU-R P.843、不计入。r0 加倍时，以 dB 计的因子 a1 乘以 4：1000 km 路径上 50 MHz 为 0.8 dB，144 MHz 为 2.4 dB，432 MHz 为 5.6 dB（600 km 时 11.6 dB）。CMOR 测量是在较低频率和 85–95 km 高度上进行的：把它们用于回波来自约 79 km 的 432 MHz 属于外推。
+H1|9. 已知局限
+LI|模型只考虑欠密余迹。过密余迹（长 burst）和偶发流星背景不计入效率；偶发流星背景由雷达流量表示。
+LI|在效率计算中天线被视为各向同性；实际波瓣仅用于 Hot 检查。
+LI|辐射点漂移和活动轮廓的 B 系数为工作值。
+LI|百分比应与 MCG_MS、MS-Soft 以及实际通联观测进行比较。
+H1|10. 来源
+SRC|1. C. Cerrotta IC8TEM, G. Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese"，文章，第 7 版（主要来源）。
+SRC|2. I. Yrjölä OH5IY - MS-Soft，www.kolumbus.fi/oh5iy（历史网站）。
+SRC|3. W. Rauh DL5MCG - MCG_MS, MS Efficiency Calculator v1.61, qsl.net/dl5mcg。
+SRC|4. SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques"，第 45 届 Nordic VUSHF，2025 年 5 月。
+SRC|5. International Meteor Organization - Meteor Shower Calendar 2026 和 2027，www.imo.net。
+SRC|6. J. Meeus - Astronomical Algorithms，第 2 版，Willmann-Bell，1998。
+SRC|7. Collm 流星雷达，莱比锡大学（LIM）和 IAP Kühlungsborn，wetterdaten.meteo.uni-leipzig.de/radar_flux.php。
+SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961。
+SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering（引自 Kaiser & Closs, 1952）。
+SRC|10. G. Hoch DL6WU - 长八木天线增益曲线，W8IO 引用，www.w8io.com。
+SRC|11. J.D. Kraus - Antennas, McGraw-Hill。
+SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data。
+SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org，2018 年 6 月公报。
+SRC|14. AMS Bulletin No. 203, "The AMS Radiometeor Project"，天线偏角表，W8WN 引用，qsl.net/w8wn/hscw/papers/ms_az_el.html。
+SRC|15. LZ2HV - MSHV，MS 数字模式程序（Hot A / Hot B 计算）。
+SRC|16. J. DF5HC - "Meteorscatter auf UKW"，DARC 会议，2018 年 1 月（DH9GCD 的最佳方向公式；DJ5HG 的锥面散射与 HOT-A / HOT-B，"Meteorscatter Propagation"，www.vhfdx.de/mseff/MS-Geometrie.pdf；KB0VUK 的偶发流星）。
+SRC|17. K. von der Heide DJ5HG - QTFGUI，用于极光、FAI 和流星余迹散射指向的程序，附手册 "QTFGUI Help"（2007）及数据 meteorshowerdata.txt。
+SRC|18. K. von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen"，2004 年 8 月（锥面定律、相对固定参考的效率、可用余迹长达 100 km、高度 102 km）。
+SRC|19. J. Richardson (AMS) - "Some Notes and Equations for Forward Scatter"：1000、1250、1500 和 2000 km 时天线偏角分别为 13°、11°、10° 和 10°，DJ5HG 引用的表。
+SRC|20. V.R. Eshleman, R.F. Mlodnosky - "Directional Characteristics of Meteor Propagation Derived from Radar Measurements", Proc. IRE 45(12), 1715-1723, 1957。
+SRC|21. M.L. Meeks, J.C. James - "On the Influence of Meteor-Radiant Distributions in Meteor-Scatter Communication", Proc. IRE 45(12), 1724-1733, 1957。
+SRC|22. C.O. Hines - "Diurnal Variations in the Number of Shower Meteors Detected by the Forward-Scattering of Radio Waves, Part I: Theory", Can. J. Phys. 33, 493-503, 1955。
+SRC|23. P.A. Forsyth, C.O. Hines, E.L. Vogan - 同一标题，"Part II: Experiment", Can. J. Phys. 33, 600-606, 1955。
+SRC|24. ITU-R P.843-1 - "Communication by meteor-burst propagation", 1997。
+SRC|25. I. Yrjölä OH5IY - "Meteors & Communication"，第 2 部分，MS-Soft 5.2 文档（2017）。
+SRC|26. R. Pardini IZ5TEK - "Il meteor-scatter e i collegamenti radioamatoriali via meteor-scatter", ARI Pisa, 2014。
+SRC|27. J.A. Weitzen, W.T. Ralston - "Meteor Scatter: An Overview", IEEE Transactions on Antennas and Propagation 36(12), 1813-1819, 1988.
+SRC|28. B. Xia, L. Li, Y. Zheng - "Modeling and Simulation of the Meteor Burst Channel", Telecommunications Science, 2016 (9), DOI 10.11959/j.issn.1000-0801.2016206 (English translation by R. Hipple, github.com/HamSCI/MSQP).
+SRC|29. R. Suggs NN4NT, HamSCI Meteor Scatter Working Group - "MSQP data analysis progress", 4 November 2026, underdense_decay, github.com/HamSCI/MSQP (NN4SA, 2026 Perseids, Zenodo).
+SRC|30. G. Stober, P. Brown, M. Campbell-Brown, R.J. Weryk - "Triple-frequency meteor radar full wave scattering: Measurements and comparison to theory", Astronomy & Astrophysics, 2021, arXiv:2108.07647.
+SRC|31. meteor-mcp, qso-graph - meteor scatter MCP server, github.com/qso-graph/meteor-mcp, 2026.
+SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/MDC2022 (Jenniskens et al., Planetary and Space Science 182, 104821, 2020; Jopek & Kaňuchová, Planetary and Space Science 143, 3-6, 2017).
+SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
+SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.

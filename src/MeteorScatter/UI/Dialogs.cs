@@ -40,6 +40,23 @@ namespace YAMS
             return result;
         }
 
+        // Scelta tra piu' pulsanti: restituisce l'indice del pulsante premuto (-1 se la finestra si chiude)
+        public static async Task<int> Choice(Window owner, string title, string text, params string[] labels)
+        {
+            StackPanel buttons;
+            Window w = Build(title, text, out buttons);
+            int result = -1;
+            for (int i = 0; i < labels.Length; i++)
+            {
+                int k = i;
+                Button b = Btn(labels[i], i == 0);
+                b.Click += (s, e) => { result = k; w.Close(); };
+                buttons.Children.Add(b);
+            }
+            await ShowAsync(w, owner);
+            return result;
+        }
+
         // Apre un file con il programma predefinito del sistema (Windows, Mac, Linux)
         public static void OpenWithDefaultApp(string path)
         {

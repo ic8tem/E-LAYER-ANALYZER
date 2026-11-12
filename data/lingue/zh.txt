@@ -1,52 +1,69 @@
-# YA-MS - 简体中文 (zh) translation of the user interface. UTF-8.
+# YA-MS - Chinese (Simplified) (zh) translation of the user interface. UTF-8.
 # One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
 # In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
-# Lines starting with # are comments. Missing entries are shown in Italian.
 (confermato)	（已确认）
 (destra)  B →	（右）  B →
 (lettura Collm: {0})	（Collm 读数：{0}）
 (stima poco precisa sotto 2 λ)	（低于 2 λ 时估算不够精确）
--> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto	-> 中点在余迹高度处位于地平线以下：路径超出单跳的几何覆盖范围
+-> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> 中点在余迹高度处低于地平线：路径超出单跳的几何覆盖范围（需要高度至少 {0:F0} km 的余迹）
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	每步 0.8 s · 周期 4.8 s（PE1ITR 2021）
+1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	第 1 条标准：流星散射 spot 的典型频率 (kHz)
+2° criterio: modi digitali MS e <MS>	第 2 条标准：MS 数字模式和 <MS>
 3,2 s per passo · ciclo 19,2 s (PE1ITR 2007)	每步 3.2 s · 周期 19.2 s（PE1ITR 2007）
 <- moda misurata dal radar Collm	<- Collm 雷达测得的众数
 = {0:F1} λ  G {1:F1} dBi  lobo {2:F0}° oriz. / {3:F0}° vert.{4}	= {0:F1} λ  G {1:F1} dBi  波瓣 水平 {2:F0}° / 垂直 {3:F0}°{4}
+A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	左：Global Meteor Network 测得的活跃流星雨流量和 ZHR（摄像机，每日更新；红线 = 最近一次更新）。右：CMOR 雷达（加拿大，43° N）近实时探测到的辐射点，包括白昼流星雨；下方为按速度着色的同一批辐射点。
 A.R.	赤经
-ADESSO	当前
+ACCETTATO per "{0}": {1} da {2}, {3} MHz	"{0}" 已接受：{1}，由 {2} 报告，{3} MHz
+ADESSO	现在
 ADIF: {0} ({1} quadrati-QSO)	ADIF：{0}（{1} 个 QSO 方格）
 ALTRI RIFERIMENTI DELL'ARTICOLO	文章的其他参考文献
-ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961; guadagni d'antenna esclusi)	路径损耗（欠密余迹，McKinley 1961；不含天线增益）
+ATTENUAZIONE DI TRATTA (scia sottodensa, McKinley 1961 e ITU-R P.843; guadagni d'antenna esclusi)	路径损耗（欠密余迹，McKinley 1961 及 ITU-R P.843；不含天线增益）
 ATTENZIONE: {0}	注意：{0}
 ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}°): con questo puntamento sono gia' coperti. Segnati in grigio sulla mappa.	注意：{0} 和 {1} 位于天线波瓣内（以 {3}° 为中心，-3 dB 宽度 {2}°）：此指向已覆盖它们。地图上以灰色标示。
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.	注意：{0} 位于天线波瓣内（以 {2}° 为中心，-3 dB 宽度 {1}°）：此指向已覆盖它。地图上以灰色标示。
-Adesso	当前
+Accesa (prudente, di partenza): la potenza di ogni scia segue la formula completa di McKinley e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ): le scie che attraversano il piano della tratta valgono 10-15 dB meno di quelle che vi giacciono, e nessuna scia è sopravvalutata.\nEffetto: prevalgono i radianti allineati alla tratta, non quelli perpendicolari; le curve di DJ5HG seguono meglio l'andamento orario, con i minimi profondi quando il radiante è basso.\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6: segue la regola dei radianti perpendicolari alla tratta (SM6FHZ, DH9GCD), ma sopravvaluta le scie che attraversano il piano.	开启（保守，初始设置）：每条余迹的功率遵循 McKinley 和 ITU-R P.843 的完整公式 1 / (1 − cos²β sin²φ)：横穿路径平面的余迹比位于平面内的余迹低 10-15 dB，不会高估任何余迹。\n效果：沿路径方向排列的辐射点占优，而非垂直的辐射点；能更好地吻合 DJ5HG 曲线的逐时变化，辐射点低时出现深谷。\n关闭：每条余迹都按位于路径平面内计权（β = 0），与 1.6 版及以前相同：遵循辐射点垂直于路径的规则（SM6FHZ、DH9GCD），但会高估横穿该平面的余迹。
+Adesso	现在
 Aggiornamento automatico di tutte le fonti ogni 5 minuti	每 5 分钟自动更新所有数据源
+Aggiungi	添加
+Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	不精确的网格坐标（仅 4 位）也会从 CALL3 获取，前提是 CALL3 中有 6 位网格坐标。
 Andromedidi	仙女座流星雨
+Angolo β tra scia e tratta (McKinley completo)	余迹与路径之间的夹角 β（完整 McKinley 公式）
 Antenna	天线
 Antenna Yagi: boom m	八木天线：横梁 m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	八木天线：横梁 {0:F2} m = {1:F2} lambda（{2:F0} MHz）-> 增益 {3:F1} dBi（DL6WU 曲线），\n  -3 dB 波瓣 水平 {4:F0}° / 垂直 {5:F0}°（Kraus 公式，按 W4RNL 的 NEC 仿真修正）
 Antenna az: -	天线方位：-
 Antenna az: {0}° (verso il DX)	天线方位：{0}°（朝向 DX）
 Apri in Word	在 Word 中打开
+Apri la cartella degli spot	打开 spot 文件夹
+Argomenti di partenza	默认主题
 Arietidi di maggio Sud diurne	白昼五月南白羊座流星雨
 Arietidi diurne	白昼白羊座流星雨
 Assi del flusso non trovati nella posizione attesa.	未在预期位置找到流量坐标轴。
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB	路径损耗 {0:F1} dB -> 天线处信号 {1:F1} dBm，最小可接收 {2:F0} dBm，余量 {3:+0.0;-0.0} dB
 Attività	活动
-Attivo oggi	今日活跃
 Attuazione sperimentale previsioni	试验性预报
 Aurigidi	御夫座流星雨
 Azimut	方位角
 BILANCIO A {0:F0} MHz (punto medio)	{0:F0} MHz 链路预算（中点）
-Banda MHz	频段 MHz
+Banda MHz	波段 MHz
+Bande (MHz)	频段（MHz）
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio	Bolidozor wiki，"Graves" – 阵列、扇区与波束时序
 Bootidi di giugno	六月牧夫座流星雨
 CALCOLO E TEORIA DELL'EFFICIENZA	效率的计算与理论
+CALL3: caricamento...	CALL3：正在加载...
+CALL3: nessun archivio (data/call3.txt)	CALL3：无档案（data/call3.txt）
+CALL3: {0:N0} nominativi	CALL3：{0:N0} 个呼号
+CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants：辐射点地图
 COME ASCOLTARE I PING DI GRAVES	如何收听 GRAVES 的 ping
 CONNESSIONE INTERNET ASSENTE: dati esterni non aggiornati (nuovo tentativo tra 5 minuti)	无互联网连接：外部数据未更新（5 分钟后重试）
 Calcola	计算
 Calcolo dell'efficienza	效率计算
 Calcolo non riuscito: {0}	计算失败：{0}
+Calcolo per {0} UTC	{0} UTC 的计算
+Calcolo per: adesso	计算时间：现在
+Calcolo per: {0} UTC	计算时间：{0} UTC
+Calcolo previsionale	预报计算
 Camelopardalidi di ottobre	十月鹿豹座流星雨
 Cancella memoria	清除内存
 Cancellare tutti i quadrati caricati dal file ADIF?	删除从 ADIF 文件载入的所有方格？
@@ -55,36 +72,57 @@ Carattere	字体
 Carica file ADIF...	载入 ADIF 文件...
 Carica file RMOB dal disco...	从磁盘载入 RMOB 文件...
 Catalogo sciami	流星雨目录
-Che cosa fare	操作方法
+Che cosa fare	操作
+Chiaro	浅色
+Chiuso	已关闭
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	点击地图上的路径或表格中的一行，查看该通联及其云团的详情。
+Cluster con PSKReporter	含 PSKReporter 的 cluster
+Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X 的 cluster，含 PSKReporter 的 spot（dm4x.ddns.net，端口 8500）：WSJT-X 和 MSHV 的 MSK144 解码会到达这里。也可用 HamAlert（hamalert.org 7300，需要设置了触发器的账户）。
+Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	用户选择的 cluster。ON0DXK 上 VHF 频段被过滤：用 set/filter dxbm/pass 6（然后 4、2...）启用。另一个例子：hamqth.com 7300。
 Collm stessa ora	Collm 同一时刻
 Collm {0} MHz (validi)	Collm {0} MHz（有效）
 Comae Berenicidi	后发座流星雨
 Comandi	控制
+Come DJ5HG	按 DJ5HG
+Commento	注释
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB	若采用 OH5IY 的平均路径损耗（144 MHz 时 200 dB，按 λ³ 换算：{1:F0} MHz 时 {0:F1} dB），余量为 {2:+0.0;-0.0} dB
+Connessione a {0}...	正在连接 {0}...
 Connessione internet assente.\n\nI dati dei radar e di RMOB non possono essere aggiornati: il programma usa gli ultimi dati salvati e riprova da solo ogni 5 minuti.	无互联网连接。\n\n雷达和 RMOB 数据无法更新：程序使用最后保存的数据，并每 5 分钟自动重试。
 Connessione ripristinata.	连接已恢复。
+Connesso: {0} argomenti	已连接：{0} 个主题
+Connetti	连接
+Connetti all'avvio	启动时连接
+Contatori	计数器
 Conteggio	计数
 Controllo le fonti di dati esterne...	正在检查外部数据源...
 Corrispondente	对方电台
-Corrispondente  {0}   quota {1:F0} m	对方电台        {0}   高度 {1:F0} m
+Corrispondente  {0}   quota {1:F0} m	对方电台        {0}   海拔 {1:F0} m
 Costantino Cerrotta IC8TEM, Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese" (articolo, versione 7).	Costantino Cerrotta IC8TEM、Gianluigi "Gigi" Sartori IV3GTH - "METEOR-SCATTER. Ovvero come collegare l'Europa in VHF tutto l'anno senza tante pretese"（意大利文文章，第 7 版）。
 D.W.R. McKinley - Meteor Science and Engineering, 1961 (equazione delle scie sottodense)	D.W.R. McKinley - Meteor Science and Engineering, 1961（欠密余迹方程）
 DATI DEGLI SCIAMI	流星雨数据
 DATI RADAR IN DIRETTA	实时雷达数据
 DENTRO il lobo	在波瓣内
-Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione 182-200 dB, durata dei ping IARU.	引自本文：E 层中约 90 km 高度的余迹（SKiYMET 雷达）、仰角公式、Hot A / Hot B、侧向散射、路径损耗 182-200 dB、IARU ping 持续时间。
+DM4X (PSKReporter)	DM4X (PSKReporter)
+DX cluster	DX cluster
+DX cluster a scelta	自选 DX cluster
+Da qui: scie nello strato E a circa 90 km (radar SKiYMET), formula dell'elevazione, Hot A / Hot B, side-scatter, attenuazione di tratta, durata dei ping IARU.	引自本文：E 层中约 90 km 高度的余迹（SKiYMET 雷达）、仰角公式、Hot A / Hot B、侧向散射、路径损耗、IARU ping 时长。
+Data del calcolo (UTC)	计算日期（UTC）
 Decl.	赤纬
-Densita' della scia q = {0:E1} elettroni/m. Riferimenti dell'articolo a 144 MHz: 182 dB minimo (GM8JBJ), 200 dB medio (OH5IY)	余迹密度 q = {0:E1} 电子/m。文章中 144 MHz 的参考值：最小 182 dB（GM8JBJ），平均 200 dB（OH5IY）
+Densita' della scia q = {0:E1} elettroni/m. Riferimenti: 172-190 dB (calcoli di G4BAO citati da GM8JBJ), 200 dB medio a 144 MHz (OH5IY)	余迹密度 q = {0:E1} 电子/m。参考值：172-190 dB（GM8JBJ 引用的 G4BAO 计算），144 MHz 平均 200 dB（OH5IY）
 Densita' scia q = 10^	余迹密度 q = 10^
 Dettaglio dei prossimi {0:F0} s: la zona utile non è in nessun passo del fascio	未来 {0:F0} s 详情：有效区域不在任何波束步进中
 Dettaglio dei prossimi {0:F0} s: passi del settore {1} ({2:F1} s ciascuno) e passo che illumina la zona utile	未来 {0:F0} s 详情：扇区 {1} 的步进（每步 {2:F1} s）及照射有效区域的步进
 Direzioni Hot A / Hot B	Hot A / Hot B 方向
-Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	距离            {0:F0} km   方位 {1:F1}°   （从对方电台 {2:F1}°）
+Disconnesso	已断开
+Disconnetti	断开
+Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)	距离            {0:F0} km   方位角 {1:F1}°   （从对方电台 {2:F1}°）
+Documenti tecnici	技术文档
 Documento Word	Word 文档
 Documento esportato: {0}	文档已导出：{0}
+Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	实时数据源的位置。虚线圆 = 雷达看到的天空区域（台站周围约 300 km，余迹高度 90 km）：没有雷达观测你的路径上空，这些数据说明的是流星雨有多活跃。点线 = 与本台的距离。
 Draconidi di ottobre	十月天龙座流星雨
 E	东
-EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	当前 GRAVES → 本台路径的效率
+EFFICIENZA DELLA TRATTA GRAVES → TE ADESSO	现在 GRAVES → 本台路径的效率
 Effic. %	效率 %
 Efficienza - spiegazione	效率 - 说明
 Efficienza oraria per {0} del {1} (UTC, valori a metà ora)	{0} 在 {1} 的逐时效率（UTC，取每小时半点的值）
@@ -94,6 +132,7 @@ Elevazione d'antenna in funzione della distanza dallo scatter point	天线仰角
 Elevazione d'antenna verso il punto medio: {0:F1}°   (formula dell'articolo, Immagine 7)	指向中点的天线仰角：{0:F1}°   （文章公式，图 7）
 Elevazione lobo °	波瓣仰角 °
 Errore all'avvio: {0}	启动错误：{0}
+Errore: {0}	错误：{0}
 Esponente	指数
 Esponente dal confronto RMOB	由 RMOB 比较得出的指数
 Esponente non calcolabile con questi dati.	无法用这些数据计算指数。
@@ -102,6 +141,7 @@ Esponente λ^k	λ^k 指数
 Esporta	导出
 Esporta il documento in Word	将文档导出为 Word
 Esporta in Word (.docx)...	导出为 Word (.docx)...
+Europa	欧洲
 FONTE PRINCIPALE	主要来源
 FONTI	来源
 Fattore di stazione K	电台因子 K
@@ -110,27 +150,38 @@ File ADIF del log	日志 ADIF 文件
 File RMOB	RMOB 文件
 File RMOB (conteggi orari del mese)	RMOB 文件（当月逐时计数）
 File mancante: {0}	缺少文件：{0}
-Finestra utile	有效窗口
+Filtro	过滤
+Filtro degli spot meteor scatter	流星散射 spot 过滤器
+Finestra utile	可用窗口
 Flusso radar	雷达流量
 Flusso radar: nessun dato. Premi "Scarica adesso".	雷达流量：无数据。请点击“立即下载”。
+Fonte	来源
 Fonte del massimo	峰值来源
 Fonti	来源
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.	图表格式已变化（{0}x{1}）：无法读取。
 Formato file mensile, {0}/{1}.	月度文件格式，{0}/{1}。
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.	公报表格格式（{0}/{1}）：如果文件包含多个观测者，会依次读取；请使用只含一个观测者的文件。
+Foto	照片
 Frequenza di arrivo MHz	目标频率 MHz
 G3WZT, DH8BQA, geekshed.co.uk, manuale WSJT-X, WB2FKO (pings), IU6GIR (attivita' 143,050 MHz), IARU Regione 1 VHF Handbook	G3WZT、DH8BQA、geekshed.co.uk、WSJT-X 手册、WB2FKO（ping）、IU6GIR（143.050 MHz 活动）、IARU 第一区 VHF Handbook
 GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)	路径几何（球形地球，R = 6372.7955 km）
+GMN e CMOR alle {0} UTC: {1} errori ({2})	{0} UTC 的 GMN 和 CMOR：{1} 个错误（{2}）
+GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	已于 {0} UTC 检查 GMN 和 CMOR（{1} 个新文件）。GMN 数据：CC BY 4.0。
 GRAVES in linea diretta: az {0:F0}°	GRAVES 直射方向：方位 {0:F0}°
 Geminidi	双子座流星雨
 Geometria e attenuazione	几何与路径损耗
 Giorno per la tabella 24 h (UTC)	24 h 表格的日期（UTC）
 Giudizio	评价
+Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	已接受的 spot 保存在 data/spot_ms 中，每天一个 CSV 文件。缺失的网格坐标从 CALL3 档案（data/call3.txt）获取。
+Global Meteor Network (GMN)	Global Meteor Network (GMN)
+Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux：实测的流星雨流量和 ZHR。数据 CC BY 4.0；Vida et al. 2021, MNRAS 506(4)，及 Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	天线增益 dBi（发 = 收）
 Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - 长八木天线增益/横梁长度曲线，G(dBi) = 7.773 log(L/lambda) + 11.43，引自 W8IO（w8io.com）
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B（经典热点，用于天线指向）
+Host	主机
 Hot A	Hot A
-Hot A/B: hot spot a {0} km dal punto medio (AMS 203, W8WN, MSHV).	Hot A/B：距中点 {0} km 的热点（AMS 203、W8WN、MSHV）。
+Hot A/B: hot spot a {0} km dal punto medio (valore scritto a mano).	Hot A/B：距中点 {0} km 的热点（手动输入值）。
+Hot A/B: hot spot a {0} km dal punto medio, scarto {1}° (tabella AMS di J. Richardson, DJ5HG).	Hot A/B：距中点 {0} km 的热点，偏差 {1}°（J. Richardson 的 AMS 表，DJ5HG）。
 Hot A: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot A：方位 {0:F0}°（{1:+0;-0}°）  {2}
 Hot B	Hot B
 Hot B: az. {0:F0}° ({1:+0;-0}°)  {2}	Hot B：方位 {0:F0}°（{1:+0;-0}°）  {2}
@@ -141,29 +192,39 @@ Hot spot dal punto medio km	热点距中点 km
 I ping sono righe brevi vicino alla portante; le scie lunghe (overdense) sono più larghe e mostrano il Doppler	ping 是靠近载波的短线；长（过密）余迹更宽并显示多普勒
 IL CIELO VISTO DA GRAVES	从 GRAVES 看到的天空
 IMO {0} (giorno)	IMO {0}（日）
-Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	对方电台改为 GRAVES（JN27SI，高度 200 m），并重新计算主路径
+Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata	对方电台改为 GRAVES（JN27SI，海拔 200 m），并重新计算主路径
 Il file scelto non e' un file locale.	所选文件不是本地文件。
 Il mio locator	我的网格坐标
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)	Ilkka Yrjola OH5IY - MS-Soft（流星雨效率概念），www.kolumbus.fi/oh5iy（历史网站）
+Importa CALL3.TXT...	导入 CALL3.TXT...
 Impossibile leggere {0}: {1}	无法读取 {0}：{1}
+Impostazione del calcolo:	计算设置：
+In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.	在前向散射中，时长还随 sec²φ 增长（路径中点处 φ = {0:F0}°；Collm 以后向散射测量，φ = 0）：x {1:F1}，因此 Collm 处 1 s 的回波在该路径上约持续 {2:F0} ms。
+Indice della tratta Σ ZHR×η: {0}	路径指数 Σ ZHR×η：{0}
 Indice sciami tratta	路径流星雨指数
 Indice tratta (ZHR×eff.)	路径指数（ZHR×效率）
+Indirizzo mancante	缺少地址
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)	Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques"，45th Nordic VUSHF，2025 年 5 月（lambda^3 与 lambda^2 规则、中点、最佳方向）
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)	Ingolf SM6FHZ - RadiantCalc（带最佳方向的极坐标图）
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)	International Meteor Organization - Meteor Shower Calendar 2026，www.imo.net（表 5、6、7）
+Invia	发送
 J.D. Kraus - Antennas: guadagno e apertura del lobo, G = 41253 / (thetaE x thetaH)	J.D. Kraus - Antennas：增益与波瓣宽度，G = 41253 / (thetaE x thetaH)
 Jens DF5HC - "Meteorscatter auf UKW", conferenza DARC, gennaio 2018: formula della migliore direzione\n    di DH9GCD (Sin(El) x Cos(El) x Sin(P-Az)), diffusione a cono e scelta HOT-A / HOT-B di DJ5HG,\n    radiante utile tra 20 e 70 gradi, distanza migliore 1300-1500 km, meteore sporadiche di KB0VUK	Jens DF5HC - "Meteorscatter auf UKW"，DARC 会议，2018 年 1 月：DH9GCD 的最佳方向公式\n    （Sin(El) x Cos(El) x Sin(P-Az)）、DJ5HG 的锥面散射及 HOT-A / HOT-B 选择，\n    有效辐射点高度 20 至 70 度、最佳距离 1300-1500 km、KB0VUK 的偶发流星
 John Drew VK5DJ - Yagi Calculator: stime del guadagno per le varianti VK3AUU, WA2PHW e DJ9BV	John Drew VK5DJ - Yagi Calculator：VK3AUU、WA2PHW 和 DJ9BV 型八木天线的增益估算
-John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952)	John GM8JBJ - Meteor scatter path loss，hamradio.engineering（源自 Kaiser & Closs 1952）
+John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 1952; cita i calcoli di John Worsnop G4BAO, 172-190 dB)	John GM8JBJ - Meteor scatter path loss，hamradio.engineering（源自 Kaiser & Closs 1952；引用 John Worsnop G4BAO 的计算，172-190 dB）
+Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot	Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen"（2004）：以 dB 表示的固定参考、低辐射点时的长余迹，\n    从汉堡和慕尼黑出发的路径曲线；用于热点距离的 J. Richardson AMS 表
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello	Klaus von der Heide DJ5HG - QTFGUI（极光、FAI 和流星散射）及 2007 年 "QTFGUI Help" 手册：锥面散射定律，\n    象限仪座流星雨期间的汉堡 - 巴塞罗那测试案例，用于验证模型
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)	L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data（两条规则的验证）；\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design 及 70-CM Yagi Stacks Part 2（David Tanner 的 VK3AUU 八木天线）：\n    用于验证增益曲线并修正水平波瓣的 NEC 仿真（0.93 x Kraus）
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)	公共区域边界（文章：各台站地平线与 E 层相交处曲线的交点）
+La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	词 "{0}" 存在，但该行不是有效的 "DX de ..." spot。
+La riga non è uno spot "DX de ..." valido.	该行不是有效的 "DX de ..." spot。
 La scala del grafico delle quote e' cambiata: le statistiche delle quote (moda, media, mediana) restano valide, i conteggi assoluti no.	高度图表的刻度已变化：高度统计（众数、平均值、中位数）仍然有效，绝对计数则不再有效。
 La sequenza del fascio si calcola con l'orologio del PC: sincronizzalo con un server NTP (errore di pochi decimi di secondo al massimo).	波束序列按电脑时钟计算：请与 NTP 服务器同步（误差最多十分之几秒）。
-La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	序列与 UTC 时间绑定（PE1ITR）：自 2021 年起每步 0.8 s，一个扇区周期 4.8 s；2007 年为 3.2 s 和 19.2 s。控制站有时会将序列移动几步：详情只是预测，需通过收听确认。只有当余迹持续期间被波束照射时才能听到：概率 ≈ min(1, (步进 + 余迹) / 周期) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} %（143 MHz 欠密余迹的典型持续时间 ≈ {1:F1} s）。
+La sequenza è legata all'ora UTC (PE1ITR): dal 2021 i passi durano 0,8 s e il ciclo di un settore 4,8 s; nel 2007 erano 3,2 s e 19,2 s. La stazione di comando a volte sposta la sequenza di qualche passo: il dettaglio è una previsione da confermare con l'ascolto. Una scia si sente solo se il fascio la illumina mentre dura: probabilità ≈ min(1, (passo + scia) / ciclo) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} % (durata tipica di una scia sottodensa a 143 MHz ≈ {1:F1} s).	序列与 UTC 时间绑定（PE1ITR）：自 2021 年起每步 0.8 s，一个扇区周期 4.8 s；2007 年为 3.2 s 和 19.2 s。控制站有时会将序列移动几步：详情只是预测，需通过收听确认。只有当余迹持续期间被波束照射时才能听到：概率 ≈ min(1, (步进 + 余迹) / 周期) = ({0:F1} + {1:F1}) / {2:F1} ≈ {3:F0} %（143 MHz 欠密余迹的典型时长 ≈ {1:F1} s）。
 Lato	侧
 Lato A = a sinistra della tratta, B = a destra	A 侧 = 路径左侧，B = 右侧
 Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).	百分比旁边的字母表示大部分反射来自路径的哪一侧。A = 从本台望向对方电台时的左侧（Hot A 区）；B = 右侧（Hot B 区）。建议将天线向该侧偏转 10-30°（侧向散射）。无字母 = 效率低于 5 %。Σ 行：路径指数 = 所有活跃流星雨的 ZHR x 效率之和。浅蓝色行：与 DH9GCD 公式的比较（DF5HC 2018）。↑ = 辐射点在本台的仰角高于 70°（过高）。
+Le righe evidenziate sono gli sciami attivi oggi (UTC)	突出显示的行为今日（UTC）活跃的流星雨
 Legenda	图例
 Leonidi	狮子座流星雨
 Leonis Minoridi	小狮座流星雨
@@ -173,66 +234,97 @@ Limiti zona comune: A {0:F0}° ({1:+0;-0}°), B {2:F0}° ({3:+0;-0}°)	公共区
 Lincidi di settembre	九月天猫座流星雨
 Lingua dell'interfaccia	界面语言
 Liridi	天琴座流星雨
+Live e dati real-time	实况与实时数据
+Loc DX	DX 网格
+Loc spotter	报告者网格
 Locator del corrispondente non valido	对方电台网格坐标无效
 Locator della stazione non valido	本台网格坐标无效
+Manca il nominativo per il login	缺少登录呼号
 Mappa d'Europa	欧洲地图
 Mappa d'Europa non disponibile (serve la rete al primo avvio).	欧洲地图不可用（首次启动需要网络）。
+Mappa dei radar europei	欧洲雷达地图
 Mappa quadrati	方格地图
 Mappa:	地图：
 Mappa: bordo = {0} km dalla stazione. {1}	地图：边缘 = 距本台 {0} km。{1}
 Mese non indicato: uso il mese corrente.	未指定月份：使用当前月份。
 Meteore/ora - ieri {0} e oggi {1} (UTC)	流星数/小时 - 昨天 {0} 和今天 {1}（UTC）
 Metti GRAVES come DX	将 GRAVES 设为 DX
-Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	流星雨最佳指向：与到达方向\n垂直（辐射点方位 +-90°，容差 +-40-50°，\nSM6FHZ）。平面图：黄线 = 流星雨\n移动轨迹，橙点 = 指向，PREV\n椭圆 = 当前最可能的余迹。\n点击辐射点：显示带 UTC 时刻的轨迹
+Miglior puntamento per lo sciame: ORTOGONALE alla direzione\ndi arrivo (azimut del radiante +-90°, tolleranza +-40-50°,\nSM6FHZ). In pianta: linea gialla = scorrimento\ndello sciame, punti arancioni = puntamenti, ellissi\nPREV = scie piu' probabili adesso.\nClic su un radiante: percorso con le ore UTC	流星雨最佳指向：与到达方向\n垂直（辐射点方位角 +-90°，容差 +-40-50°，\nSM6FHZ）。平面图：黄线 = 流星雨\n移动轨迹，橙点 = 指向，PREV\n椭圆 = 现在最可能的余迹。\n点击辐射点：显示带 UTC 时刻的轨迹
 Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)	在 Collm 测得并换算至 {0} MHz - 昨天 {1} 和今天 {2}（UTC）
+Mondo	世界
 Monocerotidi di dicembre	十二月麒麟座流星雨
 N	北
-N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}。  反射持续时间 x ({1:F1}/{0:F0})^2 = x {5:F4}：{1:F1} MHz 时 1 s 的回波在 {0:F0} MHz 时约持续 {6:F0} ms（{0:F0} MHz 的 IARU 最大 ping：{7:F0} ms）。\nSM6FHZ 的经验规则（VUSHF 2025）。因子 K 反映接收电台（功率、天线）的影响：通过与同频段的 RMOB 观测者比较得出。
+N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.	N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}。  反射时长 x ({1:F1}/{0:F0})^2 = x {5:F4}：{1:F1} MHz 时 1 s 的回波在 {0:F0} MHz 时约持续 {6:F0} ms（{0:F0} MHz 的 IARU 最大 ping：{7:F0} ms）。\nSM6FHZ 的经验规则（VUSHF 2025）。因子 K 反映接收电台（功率、天线）的影响：通过与同波段的 RMOB 观测者比较得出。
 Natural Earth - coste e confini 1:50 milioni, dominio pubblico, www.naturalearthdata.com (mappa d'Europa)	Natural Earth - 1:5000 万海岸线与边界，公共领域，www.naturalearthdata.com（欧洲地图）
+Nell'attenuazione (β = 90°, prudente): raggio iniziale della scia {0:F1} dB (r0 = {1:F2} m alla quota media ITU di {2:F1} km per {3:F0} MHz). Con la scia nel piano della tratta (β = 0°, caso migliore) l'attenuazione scende a {4:F1} dB ({5:F1} dB) e il margine sale a {6:+0.0;-0.0} dB	损耗中（β = 90°，保守）：余迹初始半径 {0:F1} dB（{3:F0} MHz 时 ITU 平均高度 {2:F1} km 处 r0 = {1:F2} m）。余迹位于路径平面内时（β = 0°，最佳情况），损耗降至 {4:F1} dB（{5:F1} dB），余量升至 {6:+0.0;-0.0} dB
+Nero	黑色
 Nessun Hot consigliato: sciami attivi quasi assenti in questo momento	无推荐的 Hot：当前几乎没有活跃的流星雨
+Nessun dato GMN: premi "Scarica adesso".	无 GMN 数据：请点击“立即下载”。
+Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	无雷达数据：请从“实况与实时数据 › 雷达流量”子选项卡下载。
 Nessuna fonte Collm in fonti_radar.csv	fonti_radar.csv 中没有 Collm 数据源
-Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	无预期余迹：活跃流星雨位于地平线以下，或对本路径的效率为零。
+Nessuna scia prevista: sciami attivi sotto l'orizzonte o con efficienza nulla per questa tratta.	无预期余迹：活跃流星雨低于地平线，或对本路径的效率为零。
 Nessuna zona comune dello strato E ({0})	没有 E 层公共区域（{0}）
+Nessuno sciame utile in questo momento	此刻没有有用的流星雨
 No	否
 No: fuori dai settori	否：在扇区外
 No: sopra il fascio (circa 25°)	否：高于波束（约 25°）
-No: sotto l'orizzonte di GRAVES	否：在 GRAVES 地平线以下
+No: sotto l'orizzonte di GRAVES	否：低于 GRAVES 地平线
+Nominativo per il login	登录呼号
+Non connesso	未连接
 Non ho riconosciuto il formato del file.	无法识别文件格式。
-Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	无法读取流量纵轴刻度（顶部标签：{0}）：数值需核实。
+Non riesco a leggere la scala verticale del flusso (etichetta in cima: {0}): valori da verificare.	无法读取流量纵轴刻度（顶部标签：{0}）：数值待核实。
 Non riesco ad aprire il documento: {0}	无法打开文档：{0}
+Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	它不是地图上的一个点：它是遍布各大洲许多国家的全球摄像机网络（大多为业余爱好者所建）。
 Nota: i dati dei radar appartengono ai rispettivi enti. Prima di distribuire il programma va chiesto il permesso di prelevarli automaticamente.	注意：雷达数据归各自机构所有。分发本程序前，必须先申请自动获取这些数据的许可。
+Notte	夜间
 Nuovo locator del corrispondente dalla mappa: {0}	从地图获取的对方电台新网格坐标：{0}
 Nuovo locator della stazione dalla mappa: {0}	从地图获取的本台新网格坐标：{0}
+Nuovo tentativo tra 30 s	30 s 后重试
+Nuvola	云团
 O	西
 ORA MIGLIORE DEL GIORNO	当天最佳时段
 Ora	时间
 Ora UTC	UTC 时间
-Ora della volta celeste (±36 h)	天穹时间（±36 h）
+Ore (da −12 a +36 h)	小时（−12 至 +36 h）
 Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (con K = 1): k = {2:F2}  (regola SM6FHZ: 3).\n\nApplico questo esponente? (In alternativa si lascia k = 3 e si regola il fattore K = {3:F2}.)	共同小时数：{0}。RMOB/Collm 比值中位数 = {1:F4}。\n经验指数（K = 1 时）：k = {2:F2}  （SM6FHZ 规则：3）。\n\n应用此指数吗？（或者保留 k = 3 并调整因子 K = {3:F2}。）
 Orionidi	猎户座流星雨
 Orionidi di novembre	十一月猎户座流星雨
 Osservatore RMOB	RMOB 观测者
 PREVISIONE SPERIMENTALE	试验性预报
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA	波束下次扫过该区域
+PSKReporter MQTT	PSKReporter MQTT
 Passo	步进
+Pastello acquamarina	柔和海蓝
+Pastello arancione	柔和橙色
+Pastello azzurro	柔和天蓝
+Pastello indaco	柔和靛蓝
+Pastello lilla	柔和淡紫
+Pastello marrone	柔和棕色
+Pastello rosa	柔和粉红
+Pastello verde	柔和绿色
 Pegasidi di luglio	七月飞马座流星雨
 Perseidi	英仙座流星雨
-Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm (tassi orari radio massimi)	Philip G0ISW - www.qsl.net/g0isw/g0iswms.htm（无线电最大每小时流星数）
+Personalizzata	自定义
 Phoenicidi	凤凰座流星雨
 Pianta: linea gialla = scorrimento dello sciame selezionato (o del più favorevole), ellissi PREV = dove cadono ora le scie più probabili. Volta celeste a destra (Sorge/Tramonta in UTC del {0}): giallo = efficienza >= 50 % e ZHR >= 2, arancio >= 20 %, grigio = quasi inattivo.	平面图：黄线 = 所选流星雨（或最有利流星雨）的移动轨迹，PREV 椭圆 = 当前最可能余迹的落点。右侧为天穹（{0} 的升起/落下时间，UTC）：黄色 = 效率 >= 50 % 且 ZHR >= 2，橙色 >= 20 %，灰色 = 几乎不活跃。
 Piscidi di aprile diurne	白昼四月双鱼座流星雨
+Porta	端口
 Portata alla quota delle scie con lobo a {0:F1}°: {1:F0} km	波瓣仰角 {0:F1}° 时在余迹高度的覆盖范围：{1:F0} km
 Potenza W	功率 W
-Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBd = dBi - 2,15)	功率 {0:F0} W = {1:F1} dBm，EIRP = {2:F1} dBm（dBd 增益 = dBi - 2.15）
+Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)	功率 {0:F0} W = {1:F1} dBm，EIRP = {2:F1} dBm（dBi 增益）
 Previsione /ora	预报 /小时
+Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	面向流星散射的流星雨效率实时预报与计算
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}	{1} 未来 24 小时 {0} MHz 试验性预报
 Previsione {0} /ora	预报 {0} /小时
 Previsione {0} MHz (rifl./ora)	预报 {0} MHz（反射/小时）
 Pronto	就绪
 Prossimo massimo (UTC)	下一个峰值（UTC）
+Prova del filtro	过滤器测试
+Prudente	保守
 Punt. migliore	最佳指向
 Puntamento {0:F0}°: Hot A {1}, Hot B {2}	指向 {0:F0}°：Hot A {1}，Hot B {2}
-Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (AMS Bulletin 203 e W8WN: 50-150 km; come MSHV)	中点两侧 {0:F0} km、垂直于路径的点（AMS Bulletin 203 和 W8WN：50-150 km；与 MSHV 相同）
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta (valore scritto a mano; MSHV usa 150 km)	中点两侧 {0:F0} km 处、垂直于路径的点（手动输入值；MSHV 使用 150 km）
+Punti a {0:F0} km ai lati del punto medio, perpendicolari alla tratta: scarto {1:F1}° dalla tabella AMS di J. Richardson (13° a 1000 km, 11° a 1250, 10° a 1500 e 2000), riportata da DJ5HG	中点两侧 {0:F0} km 处、垂直于路径的点：偏差 {1:F1}°，取自 DJ5HG 引用的 J. Richardson AMS 表（1000 km 时 13°，1250 时 11°，1500 和 2000 时 10°）
 Punto di riflessione	反射点
 Punto medio     {0}  ({1:F2}N {2:F2}E)	中点            {0}  ({1:F2}N {2:F2}E)
 Punto medio (forward)	中点（前向）
@@ -240,11 +332,15 @@ Punto medio {0}, elev. per {1:F1} km: {2:F1}°	中点 {0}，{1:F1} km 处的仰�
 Puppidi-Velidi	船尾-船帆座流星雨
 Quadrantidi	象限仪座流星雨
 Quattro schiere a fasi coprono il cielo a sud, da 90° a 270° di azimut, in quattro settori di 45° (D, C, B, A); ogni settore è diviso in 6 passi da 7,5°, illuminati uno dopo l'altro, nello stesso momento in tutti e quattro i settori (passi numerati da 1 a 6 a partire dall'azimut più basso). Il fascio è largo circa 25° in elevazione: alla quota delle scie copre la corona colorata tra i due cerchi tratteggiati. Punti arancio/rosa = zone PREV della tratta GRAVES → te, linea verde = direzione della tua stazione, linea rossa = dalla tua stazione all'hot spot consigliato (PE1ITR).	四个相控阵覆盖南方天空，方位角 90° 至 270°，分为四个 45° 扇区（D、C、B、A）；每个扇区分为 6 个 7.5° 的步进，依次照射，四个扇区同时进行（步进从方位角最低处起编号 1 至 6）。波束仰角宽约 25°：在余迹高度覆盖两个虚线圆之间的彩色环带。橙/粉色点 = GRAVES → 本台路径的 PREV 区域，绿线 = 本台方向，红线 = 从本台到推荐热点（PE1ITR）。
+Quota delle scie e opzioni scelte a mano. Si seleziona da sola quando cambi la quota, la casella "dal radar", le scie lunghe o l'angolo β.	余迹高度和选项为手动选择。当你更改高度、“来自雷达”复选框、长余迹或夹角 β 时会自动选中。
+Quota fissa di 102 km, scie più lunghe con il radiante basso e angolo β, come in "Die Geometrie von Meteorscatterverbindungen" di DJ5HG (2004).\nConfronto con le sue curve: in media 2 dB sotto, scarto tipico 5 dB; prevalgono i radianti allineati alla tratta.	固定高度 102 km，低辐射点时余迹更长并计入夹角 β，与 DJ5HG 的 "Die Geometrie von Meteorscatterverbindungen"（2004）相同。\n与其曲线比较：平均低 2 dB，典型偏差 5 dB；沿路径方向排列的辐射点占优。
 Quota scie      {0:F1} km (strato E){1}	余迹高度        {0:F1} km（E 层）{1}
 Quota scie km	余迹高度 km
 Quote delle scie (Collm): più frequente {0:F1} km, media {1:F1}, mediana {2:F1}, dev. std {3:F1} km	余迹高度（Collm）：最常见 {0:F1} km，平均 {1:F1}，中位数 {2:F1}，标准差 {3:F1} km
 RADAR GRAVES (linguetta Radar GRAVES)	GRAVES 雷达（“GRAVES 雷达”选项卡）
+RADIANTE BASSO LUNGO LA TRATTA: {0}. L'efficienza calcolata resta bassa, ma con scie radenti allineate alla tratta DJ5HG prevede riflessioni rare e forti: vale la pena ascoltare.	低辐射点沿路径方向：{0}。计算效率仍然很低，但对于沿路径排列的掠射余迹，DJ5HG 预计会有罕见而强烈的反射：值得监听。
 RADIANTE TROPPO ALTO (sopra {0}°): {1}. Le scie scendono quasi verticali e riflettono poco verso la tratta (DF5HC, DH9GCD).	辐射点过高（高于 {0}°）：{1}。余迹几乎垂直下落，向路径方向的反射很少（DF5HC、DH9GCD）。
+RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN：端口 7000 = CW 和 RTTY，端口 7001 = FT8。仅用呼号登录。RBN 的 skimmer 很少解码 MS 模式：主要适用于注释中带有 <MS> 的 spot。
 REGOLE SPERIMENTALI TRA LE BANDE (SM6FHZ, VUSHF 2025)	频段间经验规则（SM6FHZ，VUSHF 2025）
 RICOSTRUZIONE CRONOLOGICA · {0} UTC	时间线重建 · {0} UTC
 RMOB usa GRAVES per i conteggi orari delle meteore: confronta i tuoi ping con gli osservatori su 143,050 MHz	RMOB 利用 GRAVES 进行流星逐时计数：可将你的 ping 与 143.050 MHz 上的观测者比较
@@ -252,26 +348,46 @@ RMOB {0} (scala a destra)	RMOB {0}（右侧刻度）
 RMOB {0}: {1} ore lette alle {2} UTC	RMOB {0}：{2} UTC 读取了 {1} 小时
 RMOB – osservatori su 143,050 MHz	RMOB – 143.050 MHz 观测者
 RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollettini mensili rmob.org/rmobtext (osservatori GRAVES 143,050 MHz: Planetario di Venezia, Faenza, Rovereto e altri)	RMOB，Radio Meteor Observatories On Line（Pierre Terrier）- www.rmob.org；月度公报 rmob.org/rmobtext（GRAVES 143.050 MHz 观测者：威尼斯天文馆、法恩扎、罗韦雷托等）
+Raccolta dati	数据收集
+Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza	建议书 ITU-R P.843-1（1997）：余迹与路径平面之间的夹角 beta、余迹初始半径、随频率变化的平均高度
 Radar GRAVES	GRAVES 雷达
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php	Collm 流星雷达，莱比锡大学（LIM）与 IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:	辐射点：
+Raggio della mappa	地图半径
+Reverse Beacon Network	Reverse Beacon Network
 Ricava l'esponente dal file RMOB	由 RMOB 文件推算指数
 Ricevitore	接收机
+Riconnessione tra {0} s	{0} 秒后重新连接
+Riconnetti	重新连接
+Riepilogo dell'anno (ZHR misurati, GMN)	年度概览（实测 ZHR，GMN）
 Riga {0} ignorata (colonne insufficienti)	第 {0} 行已忽略（列数不足）
 Riga {0}: {1}	第 {0} 行：{1}
-Riporta la volta celeste al tempo reale	将天穹恢复为实时
-Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	与 144 MHz 相比：数量/强度 x {0:F3}（{1:+0.0;-0.0} dB），持续时间 x {2:F2}。{3:F0} MHz 的 IARU 最大 ping：{4:F0} ms
+Riporta il momento del calcolo al tempo reale	将计算时间恢复为实时
+Rispetto a 144 MHz: numero/intensità x {0:F3} ({1:+0.0;-0.0} dB), durata x {2:F2}. Ping massimo IARU a {3:F0} MHz: {4:F0} ms	与 144 MHz 相比：数量/强度 x {0:F3}（{1:+0.0;-0.0} dB），时长 x {2:F2}。{3:F0} MHz 的 IARU 最大 ping：{4:F0} ms
 Rob Hardenberg PE1ITR, "The 143.050 MHz Graves Radar, a VHF Beacon" (DUBUS 4/2007) e "Graves Radar Update April 2021" – pe1itr.com/graves	Rob Hardenberg PE1ITR，"The 143.050 MHz Graves Radar, a VHF Beacon"（DUBUS 4/2007）及 "Graves Radar Update April 2021" – pe1itr.com/graves
 Rotellina = zoom, trascina = sposta, mouse sopra un quadrato = QSO	滚轮 = 缩放，拖动 = 平移，鼠标悬停方格 = QSO
 S	南
+SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	已丢弃："{0}" 已找到，但频率 {1:F1} kHz 不在所选波段内。
+SCARTATO: frequenza sotto 27990,0 kHz.	已丢弃：频率低于 27990.0 kHz。
+SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	已丢弃：不在 MS 窗口内，且无过滤词。
+SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	已丢弃：注释声明了其他传播方式（{0}），且没有 MS 模式。
 SCIAME PIÙ FAVOREVOLE	最有利的流星雨
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)	剖面 - 从天线朝对方电台方向看到的最可能余迹（方位 {0}°）
+SGO, Finlandia	SGO，芬兰
 Scarica RMOB adesso	立即下载 RMOB
 Scarica adesso	立即下载
+Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	立即丢弃低于 27990.0 kHz 的 cluster 行（不在控制台显示，也不保存）
+Scarto d'antenna degli hot spot dalla tabella AMS di J. Richardson riportata da DJ5HG: 13° a 1000 km, 11° a 1250 km, 10° a 1500 e 2000 km. Togli la spunta per scrivere la distanza a mano (MSHV usa 150 km).	热点的天线偏差取自 DJ5HG 引用的 J. Richardson AMS 表：1000 km 时 13°，1250 km 时 11°，1500 和 2000 km 时 10°。取消勾选可手动输入距离（MSHV 使用 150 km）。
+Scia meteorica	流星余迹
 Sciame	流星雨
 Sciame più favorevole	最有利的流星雨
+Sciame più utile: {0} (ZHR {1}, efficienza {2} %)	最有用的流星雨：{0}（ZHR {1}，效率 {2} %）
 Sciami	流星雨
+Sciami in diretta	实时流星雨
+Sciami sopra l'orizzonte: {0}	地平线以上的流星雨：{0}
+Scie più lunghe con il radiante basso (DJ5HG)	低辐射点时余迹更长（DJ5HG）
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).	输入 RMOB 观测者的名称，与其文件名中的写法一致（例如 NAME_112026rmob.TXT -> NAME）。
+Scrivi il nominativo per il login prima di connettere.	连接前请输入登录呼号。
 Segnale minimo dBm	最小信号 dBm
 Sequenza del fascio	波束序列
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.	需要 Collm 数据和相同时段的 RMOB 文件。
@@ -281,16 +397,30 @@ Sigla	代码
 Sono i bordi piu' lontani del cielo visto da entrambe le stazioni, non i punti da puntare.	这是两台站共同可见天空的最远边界，而非指向点。
 Sorge	升起
 Sorgente Antielio	反日点源
-Stazione        {0}   quota {1:F0} m	本台            {0}   高度 {1:F0} m
-Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	试验性估算（SM6FHZ 规则）：{0:F0} MHz 的流星数/小时 = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}；ping 持续时间 x {4:F3}。{0:F0} MHz 的 IARU 最大 ping：{5:F0} ms。数值仅供参考，需与实际上机经验比较。{6}
+Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.	关闭（保守）：每条余迹按辐射点仰角的正弦计权，因为辐射点低时每 km² 落下的流星更少。\n开启：与 DJ5HG（2004）一致，辐射点低时余迹更长（层的有效厚度 15 km 除以仰角正弦，最长 100 km），且更常满足反射定律。两种效应在仰角约 9° 以上相互抵消：低辐射点时效率上升，高辐射点时不变。
+Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	来自“数据收集”选项卡的 MS spot。对每个通联，云团显示该路径在该小时最可能的余迹集中在何处（镜面反射，所有活跃流星雨之和）。虚线云团 = 仅偶发流星。有台站位于地图外的 spot 不绘制；刚到达的 spot（不足 3 分钟）闪烁一分钟。
+Spot MS raccolti	已收集的 MS spot
+Spot da mostrare	要显示的 spot
+Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).	通过 MQTT 获取的 PSKReporter 实时 spot（mqtt.pskreporter.info，M0LTE 提供的服务）：无需登录，spot 到达时已带有发射方和接收方的网格坐标。每行一个主题或用 ; 分隔  格式 pskr/filter/v2/波段/模式/发射呼号/接收呼号/...（+ = 任意，# = 其余全部）。
+Spot meteor scatter raccolti (i più recenti in alto)	已收集的流星散射 spot（最新的在上方）
+Stazione	电台
+Stazione        {0}   quota {1:F0} m	本台            {0}   海拔 {1:F0} m
+Stima sperimentale (regole SM6FHZ): meteore/ora a {0:F0} MHz = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}; durata dei ping x {4:F3}. Ping massimo IARU a {0:F0} MHz: {5:F0} ms. Valori indicativi, da confrontare con l'esperienza in banda.{6}	试验性估算（SM6FHZ 规则）：{0:F0} MHz 的流星数/小时 = Collm {1:F1} MHz x ({1:F1}/{0:F0})^{2:F1} = x {3:F4}；ping 时长 x {4:F3}。{0:F0} MHz 的 IARU 最大 ping：{5:F0} ms。数值仅供参考，需与实际上机经验比较。{6}
+Svuota la tabella	清空表格
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)	DL1DBC 的 Swan Meteor Skyview - swan.ms（天穹图形参考）
 Sì	是
 Sì · settore {0}	是 · 扇区 {0}
 TRATTA	路径
+TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.	路径超出余迹地平线：余迹高度为 {0:F1} km 时，中点低于地平线 {1:F1}°。需要高度至少 {2:F0} km 的余迹：只能借助最高的余迹通联，效率和损耗处于模型的极限。
 Tauridi Nord	北金牛座流星雨
 Tauridi Sud	南金牛座流星雨
+Tavistock, Ontario (Canada)	Tavistock，Ontario（加拿大）
+Tema	主题
 Tempo reale	实时
 Tipo	类型
+Traffico MS in diretta · {0}	实时 MS 通信 · {0}
+Traffico in diretta	实时通信
+Traffico meteor scatter in diretta	实时流星散射通信
 Tramonta	落下
 Traslato	换算
 Traslato {0}	换算 {0}
@@ -301,25 +431,36 @@ Tratta {0}: {1:F0} km, az. {2:F0}°	路径 {0}：{1:F0} km，方位 {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.	Collm 与 RMOB 文件的共同小时数过少（{0}）。
 Tutti i file	所有文件
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz	143.049 MHz USB（音调约 1 kHz）或 143.050 MHz，AGC 慢速或关闭，音频带宽至少 2.4 kHz
+Univ. Lipsia / IAP Kühlungsborn	莱比锡大学 / IAP Kühlungsborn
+Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	落在这些窗口内的 spot 即使没有模式名称也会被接受，除非注释用以下标签之一声明了其他传播方式：
 Ursidi	小熊座流星雨
+Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	适用于窗口外的 spot 以及带有其他传播方式标签的 spot：如果包含任一已启用词（大写、小写或混合均可）则保留。MSK144、FSK441、PSK2K、JTMS 和 JT6M 是仅用于流星散射的数字模式：该 spot 必定是 MS。<MS> 泛指该通联是通过流星散射完成的。
+Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm (casella "dal radar"), scie normali, angolo β acceso.\nConfronto con le curve di DJ5HG (Quadrantidi, tratte da Amburgo): in media 7 dB sotto, con lo stesso andamento orario (scarto di forma circa 3 dB).	最保守的数值，初始设置：Collm 雷达测得的余迹高度（“来自雷达”复选框），普通余迹，夹角 β 开启。\n与 DJ5HG 曲线比较（象限仪座流星雨，从汉堡出发的路径）：平均低 7 dB，逐时变化趋势相同（形状偏差约 3 dB）。
+Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza	保守数值：横穿路径平面的余迹（β = 90°，最不利情况），包括各频率回波平均高度处的余迹初始半径（ITU-R P.843）
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione	朝向 GRAVES → 本台路径的推荐热点（“路径”框），低仰角
 Vista dall'alto (E a destra)	俯视图（东在右）
-Volta celeste: tempo reale	天穹：实时
-Volta celeste: {0} UTC	天穹：{0} UTC
-Waterfall	瀑布图
+Waterfall	Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)	维基百科，"GRAVES (system)" – 发射机位于 Broye-lès-Pesmes（47.348° N 5.515° E）
 YA-MS - nessuna connessione	YA-MS - 无连接
 YAEC di IC8TEM – linguetta Radar GRAVES (bozzetto da cui è derivata)	IC8TEM 的 YAEC – GRAVES 雷达选项卡（本功能所源自的原型）
 ZHR ora	当前 ZHR
 ZONA UTILE NEL FASCIO DI GRAVES	GRAVES 波束中的有效区域
-a cura di Costantino IC8TEM	作者：Costantino IC8TEM
-adesso {0}	当前 {0}
-adesso · ancora {0:F1} s	当前 · 剩余 {0:F1} s
+a DESTRA guardando verso il corrispondente	望向对方电台时的右侧
+a SINISTRA guardando verso il corrispondente	望向对方电台时的左侧
+a cura di	作者：
+a cura di Costantino IC8TEM	作者 Costantino IC8TEM
+accettati per finestra di frequenza: {0}	按频率窗口接受：{0}
+adesso	现在
+adesso {0}	现在 {0}
+adesso · ancora {0:F1} s	现在 · 剩余 {0:F1} s
+aggiornamento una volta al giorno	每天更新一次
 alfa-Capricornidi	摩羯座α流星雨
 alfa-Centauridi	半人马座α流星雨
 alfa-Monocerotidi	麒麟座α流星雨
 ant_radiante.csv: riga ignorata: {0}	ant_radiante.csv：已忽略行：{0}
 antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0}°	天线指向 {0}：方位 {1:F0}° · 仰角 {2:F1}°\nGRAVES 直射方向：方位 {3:F0}°
+antenna {0}°	天线 {0}°
+auto (AMS)	自动（AMS）
 azimut rispetto al corrispondente	相对于对方电台的方位角
 beta-Tauridi diurne	白昼金牛座β流星雨
 buono	良好
@@ -328,14 +469,18 @@ calcolo della tratta GRAVES → te in corso...	正在计算 GRAVES → 本台路
 circumpolare	拱极
 clic destro =	右键 =
 clic sinistro =	左键 =
+collegamento via meteor scatter	通过流星散射通联
+comandi dopo il login, separati da ;	登录后执行的命令，以 ; 分隔
+comando da inviare (es. sh/dx 20)	要发送的命令（例如 sh/dx 20）
 confermato (QSL o LoTW)	已确认（QSL 或 LoTW）
 copia locale del {0} UTC	{0} UTC 的本地副本
 corrispondente	对方电台
 dal radar	来自雷达
+dati CC BY 4.0 (Vida et al. 2021, 2022)	数据 CC BY 4.0（Vida et al. 2021, 2022）
 delta-Aquaridi Sud	南宝瓶座δ流星雨
 eco	回波
 eco attese ≈ {0:F0}/ora (sperimentale: previsione × fascio {1:F0} %)	预期回波 ≈ {0:F0}/小时（试验性：预报 × 波束 {1:F0} %）
-eco possibile (+{0:F1} s di scia)	可能有回波（余迹 +{0:F1} s）
+eco possibile (+{0:F1} s di scia)	可收到回波（余迹 +{0:F1} s）
 effic. %	效率 %
 effic. < 20%	效率 < 20%
 effic. >= 20%	效率 >= 20%
@@ -350,10 +495,12 @@ errore: {0}	错误：{0}
 eta-Aquaridi	宝瓶座η流星雨
 eta-Eridanidi	波江座η流星雨
 eta-Liridi	天琴座η流星雨
+finestra {0} kHz	窗口 {0} kHz
 fuori dal lobo	在波瓣外
 gamma-Draconidi di luglio	七月天龙座γ流星雨
 gamma-Ursae Minoridi	小熊座γ流星雨
 gradi	度
+hot spot (solo sporadiche) {0}	hot spot (仅偶发流星) {0}
 il giorno scelto non è oggi	所选日期不是今天
 indice	指数
 indice sciami tratta (scala a destra)	路径流星雨指数（右侧刻度）
@@ -362,14 +509,17 @@ invariato	未变化
 invariato (controllato alle {0} UTC)	未变化（{0} UTC 检查）
 kappa-Cygnidi	天鹅座κ流星雨
 kappa-Leonidi diurne	白昼狮子座κ流星雨
-la mia stazione	本台
+la mia stazione	我的电台
+la tua stazione	本台
 lato prevalente {0} ({1:F0}%)	主要侧 {0}（{1:F0}%）
 lavorato	已通联
 lim. A	界 A
 lim. B	界 B
 limiti zona comune	公共区域边界
+linguetta "{0}"	“{0}”选项卡
 lobo antenna	天线波瓣
 lobo {0}°	波瓣 {0}°
+locale	本地
 mai scaricato	从未下载
 mappa: bordo = {0} km dalla stazione	地图：边缘 = 距本台 {0} km
 max Σ {0:F1} alle {1:00}:30	最大 Σ {0:F1}，{1:00}:30
@@ -379,20 +529,29 @@ meteore per km di quota	每 km 高度的流星数
 meteore/ora radar	雷达流星数/小时
 meteore/ora stimate	估算流星数/小时
 miglior punt.	最佳指向
+misura il flusso e lo ZHR di ogni sciame attivo	测量每个活跃流星雨的流量和 ZHR
 mobile	移动
+modo digitale MS	MS 数字模式
 nessun ADIF caricato	未载入 ADIF
+nessun dato radar: vedi Live e dati real-time › Flusso radar	无雷达数据：见“实况与实时数据 › 雷达流量”
 nessun file RMOB caricato	未载入 RMOB 文件
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}	没有波束步进照射有效区域\n捕获余迹 ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessuna rete attiva	无可用网络
-nessuno sciame utile adesso: hot spot più adatto al fascio	当前无有效流星雨：选择最适合波束的热点
+nessuno sciame utile adesso: hot spot più adatto al fascio	现在无有效流星雨：选择最适合波束的热点
 nessuno sciame utile in questo giorno	当天无有效流星雨
 nessuno sciame utile in questo momento	此刻无有效流星雨
+nominativo	呼号
+nuova parola	新词
 nuovo dato	新数据
 nuovo dato alle {0} UTC	{0} UTC 有新数据
+nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	此路径无法计算云团（过短或过长）
+nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	云团 {0}：{1:F0} % 的反射，{2:F0} × {3:F0} km，轴向 {4:F0}°
 omega-Cetidi Nord diurne	白昼北鲸鱼座ω流星雨
 omega-Cetidi Sud diurne	白昼南鲸鱼座ω流星雨
 orizzonte del fascio	波束地平线
 orologio del PC sincronizzato	电脑时钟已同步
+osservatori RMOB che ascoltano GRAVES	收听 GRAVES 的 RMOB 观测者
+parola aggiunta	已添加的词
 passi	步进
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}	步进 {0}{1}，每 {2:F1} s · {3} ...\n捕获余迹 ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}
 percorso rad.	辐射点轨迹
@@ -400,54 +559,77 @@ pi-Puppidi	船尾座π流星雨
 prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)	每 5 分钟自动下载（仅在获得 RMOB 许可后启用）
 previsione {0} MHz /ora	预报 {0} MHz /小时
 puntamento migliore {0}° / {1}°	最佳指向 {0}° / {1}°
+puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	指向 {0:F0}°（相对对方电台 {1:+0;-0}°），仰角 {2:F1}°，热点距离 {3:F0} km
 quasi inattivo	几乎不活跃
-quota m	高度 m
+quota m	海拔 m
+radar SKiYMET 36,2 MHz	SKiYMET 雷达 36.2 MHz
+radar meteorico 17-38 MHz, orbite	流星雷达 17-38 MHz，轨道
+radar meteorico 36,9 MHz	流星雷达 36.9 MHz
 radio, diurno	无线电，白昼
 rete assente: {0}	无网络：{0}
 riflessioni/ora	反射/小时
 riflessioni/ora a {0} MHz	{0} MHz 反射/小时
+righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	收到行数           {0}\n读取 spot          {1}\n接受 MS spot       {2}\n丢弃（词）         {3}\n丢弃（波段）       {4}\n最近一小时 MS spot {5}
+righe sotto 27990 kHz scartate: {0}	已丢弃低于 27990 kHz 的行：{0}
+righe {0}, spot letti {1}, MS {2}	行数 {0}，读取 spot {1}，MS {2}
 scala letta dal grafico: 0-{0} meteore/ora	从图表读取的刻度：0-{0} 流星/小时
 scala non letta	未读取刻度
 scala tarata 0-1200 meteore/ora	已校准刻度 0-1200 流星/小时
 scarso	差
 scartati	已舍弃
+scartati per altra propagazione: {0}	因其他传播方式丢弃：{0}
 sciame migliore {0} {1}: ZHR {2:F0} × eff. {3:F0} %	最佳流星雨 {0} {1}：ZHR {2:F0} × 效率 {3:F0} %
 scorrimento sciame	流星雨移动轨迹
 segmenti = scie (±10 km attorno alla quota) orientate verso il radiante; più spessi = più probabili	线段 = 余迹（高度上下 ±10 km），指向辐射点；越粗 = 可能性越大
 sempre sotto	始终在下方
 sigma-Hydridi	长蛇座σ流星雨
+sporadiche	偶发流星
 stima a {0} MHz (scala a destra)	{0} MHz 估算（右侧刻度）
-sì	是
 tra {0:F1} s	{0:F1} s 后
 traslato a {0} MHz (scala a destra)	换算至 {0} MHz（右侧刻度）
+trasmettitore 143,050 MHz	发射机 143.050 MHz
 tratta / DX	路径 / DX
 tratta GRAVES → te non calcolata	GRAVES → 本台路径未计算
 tu {0}	本台 {0}
+ultima ora	最近 1 小时
+ultime 24 ore	最近 24 小时
+ultime {0} ore	最近 {0} 小时
+ultimi {0} minuti	最近 {0} 分钟
 var.	变化
 varie (tab. 6 IMO)	多个（IMO 表 6）
+versione	版本
 visuale	目视
 zeta-Perseidi diurne	白昼英仙座ζ流星雨
 zona PREV	PREV 区域
 {0:00}:00 → {1:00}:00 UTC · {2} h	{0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)	{0:00}:00-{0:00}:59 UTC\n路径指数 {1:F1}\n主要侧 {2}（{3:F0}%）
 {0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}	{0:00}:{1:00} UTC - 指数 {2:F1}\n主要侧 {3}\n{4}
+{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % 的反射来自这一侧
 {0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)	{0:F0} MHz，预计反射/小时\n现在 {1:F0} - 1 h 后 {2} - 2 h 后 {3}\n试验性（Collm，SM6FHZ 规则）
 {0:F0} km	{0:F0} km
 {0} (dal radiante, az. {1}°)	{0}（来自辐射点，方位 {1}°）
 {0} (in rosso sulla mappa)	{0}（地图上以红色标示）
 {0} (~{1} calc.)	{0}（计算值 ~{1}）
+{0} MHz: {1}	{0} MHz: {1}
 {0} QSO letti, {1} quadrati-QSO nelle bande 50-432 MHz, {2} QSO scartati (altre bande o senza quadrato).	已读取 {0} 个 QSO，50-432 MHz 频段 {1} 个 QSO 方格，已舍弃 {2} 个 QSO（其他频段或无方格）。
-{0} UTC (ora della volta celeste)	{0} UTC（天穹时间）
+{0} UTC (momento del calcolo)	{0} UTC（计算时间）
 {0} UTC (tempo reale)	{0} UTC（实时）
+{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
 {0} consigliato ora: az. {1}°	当前推荐 {0}：方位 {1}°
 {0} consigliato ora: az. {1}° ({2}% delle riflessioni previste)	当前推荐 {0}：方位 {1}°（占预期反射的 {2}%）
+{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	地图上 {0} 个通联 · 地图外 {1} 个 · 无网格坐标 {2} 个
+{0} dB rispetto al riferimento di DJ5HG	相对 DJ5HG 参考 {0} dB
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (passo {3} di 6)	从 GRAVES 看 {0}：方位 {1:F1}° · 仰角 {2:F1}°（第 {3} 步，共 6 步）
 {0} da GRAVES: az {1:F1}° · el {2:F1}° (settori da 90° a 270°, fascio fino a circa 25°)	从 GRAVES 看 {0}：方位 {1:F1}° · 仰角 {2:F1}°（扇区 90° 至 270°，波束最高约 25°）
 {0} h	{0} h
+{0} h rispetto ad adesso	距现在 {0} 小时
+{0} km dalla tua stazione	距本台 {0} km
+{0} spot MS in memoria	内存中 {0} 条 MS spot
+{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {3} UTC 时 {2:F0} %（本地时间 {4}）
 {0} · zona	{0} · 区域
 {0}: non lavorato	{0}：未通联
-{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}：{1}  本台方位 {2:F0}°（偏差 {3:+0;-0}°），对方电台方位 {4:F0}°，距离 {5:F0} km
-{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}：{1}  本台方位 {2:F1}°（与直射方向偏差 {3:+0.0;-0.0}°），对方电台方位 {4:F0}°，距离 {5:F0} km，仰角 {6:F1}°
+{0}: {1}  az. da me {2:F0}° (scarto {3:+0;-0}°), dal corrispondente {4:F0}°, distanza {5:F0} km	{0}：{1}  本台方位角 {2:F0}°（偏差 {3:+0;-0}°），对方电台方位角 {4:F0}°，距离 {5:F0} km
+{0}: {1}  az. da me {2:F1}° (scarto {3:+0.0;-0.0}° dalla direzione diretta), dal corrispondente {4:F0}°, distanza {5:F0} km, elevazione {6:F1}°	{0}：{1}  本台方位角 {2:F1}°（与直射方向偏差 {3:+0.0;-0.0}°），对方电台方位角 {4:F0}°，距离 {5:F0} km，仰角 {6:F1}°
 {0}: {1} QSO	{0}：{1} 个 QSO
 {0}: {1} ore lette.	{0}：已读取 {1} 小时。
 {0}: {1} quadrati lavorati, {2} confermati	{0}：已通联 {1} 个方格，已确认 {2} 个
@@ -455,151 +637,73 @@ zona PREV	PREV 区域
 Σ ZHR x effic.	Σ ZHR x 效率
 Σ {0:F1}	Σ {0:F1}
 ← A  (sinistra)	← A  （左）
-# schemi di colori (nomi dei pastelli come in YAEC)
-Chiaro	浅色
-Notte	夜间
-Nero	黑色
-Pastello azzurro	粉彩浅蓝
-Pastello arancione	粉彩橙
-Pastello acquamarina	粉彩海蓝
-Pastello verde	粉彩绿
-Pastello rosa	粉彩粉红
-Pastello lilla	粉彩淡紫
-Pastello indaco	粉彩靛蓝
-Pastello marrone	粉彩棕
-Scia meteorica	流星余迹
-Tema	主题
-locale	本地
-{0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)	{0} {1} - {3} UTC 时 {2:F0} %（当地时间 {4}）
-a SINISTRA guardando verso il corrispondente	望向对方电台时的左侧
-a DESTRA guardando verso il corrispondente	望向对方电台时的右侧
-{0:F0} % delle riflessioni arriva da questo lato	{0:F0} % 的反射来自这一侧
-puntare a {0:F0}° ({1:+0;-0}° dal corrispondente), elevazione {2:F1}°, hot spot a {3:F0} km	指向 {0:F0}°（相对对方电台 {1:+0;-0}°），仰角 {2:F1}°，热点距离 {3:F0} km
-A sinistra: flusso e ZHR misurati degli sciami attivi dal Global Meteor Network (telecamere, aggiornamento giornaliero; linea rossa = ultimo aggiornamento). A destra: radianti rilevati dal radar CMOR (Canada, 43° N) in tempo quasi reale, anche gli sciami diurni; sotto, gli stessi radianti colorati per velocità.	左：Global Meteor Network 测得的活跃流星雨流量和 ZHR（摄像机，每日更新；红线 = 最近一次更新）。右：CMOR 雷达（加拿大，43° N）近实时探测到的辐射点，包括白昼流星雨；下方为按速度着色的同一批辐射点。
-CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants: mappe dei radianti	CMOR, Canadian Meteor Orbit Radar (University of Western Ontario, NASA Meteoroid Environment Office) - fireballs.ndc.nasa.gov/cmor-radiants：辐射点地图
-Dove si trovano le fonti dei dati in diretta. Cerchi tratteggiati = zona di cielo vista dal radar (circa 300 km intorno alla stazione, scie a 90 km): nessun radar guarda il cielo sopra la tua tratta, i dati dicono quanto e' attivo lo sciame. Linee punteggiate = distanza dalla tua stazione.	实时数据源的位置。虚线圆 = 雷达看到的天空区域（台站周围约 300 km，余迹高度 90 km）：没有雷达观测你的路径上空，这些数据说明的是流星雨有多活跃。点线 = 与本台的距离。
-Europa	欧洲
-GMN e CMOR alle {0} UTC: {1} errori ({2})	{0} UTC 的 GMN 和 CMOR：{1} 个错误（{2}）
-GMN e CMOR controllati alle {0} UTC ({1} file nuovi). Dati GMN: CC BY 4.0.	已于 {0} UTC 检查 GMN 和 CMOR（{1} 个新文件）。GMN 数据：CC BY 4.0。
-Global Meteor Network (GMN)	Global Meteor Network (GMN)
-Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux：实测的流星雨流量和 ZHR。数据 CC BY 4.0；Vida et al. 2021, MNRAS 506(4)，及 Vida et al. 2022, MNRAS 515(2)
-Mondo	世界
-Nessun dato GMN: premi "Scarica adesso".	无 GMN 数据：请点击“立即下载”。
-Non è un punto sulla mappa: è una rete mondiale di telecamere (soprattutto amatoriali) sparse in molti paesi di tutti i continenti.	它不是地图上的一个点：它是遍布各大洲许多国家的全球摄像机网络（大多为业余爱好者所建）。
-Riepilogo dell'anno (ZHR misurati, GMN)	年度概览（实测 ZHR，GMN）
-SGO, Finlandia	SGO，芬兰
-Sciami in diretta	实时流星雨
-Tavistock, Ontario (Canada)	Tavistock，Ontario（加拿大）
-Univ. Lipsia / IAP Kühlungsborn	莱比锡大学 / IAP Kühlungsborn
-aggiornamento una volta al giorno	每天更新一次
-dati CC BY 4.0 (Vida et al. 2021, 2022)	数据 CC BY 4.0（Vida et al. 2021, 2022）
-la tua stazione	本台
-linguetta "{0}"	“{0}”选项卡
-misura il flusso e lo ZHR di ogni sciame attivo	测量每个活跃流星雨的流量和 ZHR
-osservatori RMOB che ascoltano GRAVES	收听 GRAVES 的 RMOB 观测者
-radar SKiYMET 36,2 MHz	SKiYMET 雷达 36.2 MHz
-radar meteorico 17-38 MHz, orbite	流星雷达 17-38 MHz，轨道
-radar meteorico 36,9 MHz	流星雷达 36.9 MHz
-trasmettitore 143,050 MHz	发射机 143.050 MHz
-{0} km dalla tua stazione	距本台 {0} km
-ACCETTATO per "{0}": {1} da {2}, {3} MHz	"{0}" 已接受：{1}，由 {2} 报告，{3} MHz
-Aggiungi	添加
-Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.	不精确的网格坐标（仅 4 位）也会从 CALL3 获取，前提是 CALL3 中有 6 位网格坐标。
-Apri la cartella degli spot	打开 spot 文件夹
-Bande (MHz)	频段（MHz）
-CALL3: caricamento...	CALL3：正在加载...
-CALL3: nessun archivio (data/call3.txt)	CALL3：无档案（data/call3.txt）
-CALL3: {0:N0} nominativi	CALL3：{0:N0} 个呼号
-Chiuso	已关闭
-Cluster con PSKReporter	含 PSKReporter 的 cluster
-Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).	DM4X 的 cluster，含 PSKReporter 的 spot（dm4x.ddns.net，端口 8500）：WSJT-X 和 MSHV 的 MSK144 解码会到达这里。也可用 HamAlert（hamalert.org 7300，需要设置了触发器的账户）。
-Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.	用户选择的 cluster。ON0DXK 上 VHF 频段被过滤：用 set/filter dxbm/pass 6（然后 4、2...）启用。另一个例子：hamqth.com 7300。
-Commento	注释
-Connetti	连接
-Connetti all'avvio	启动时连接
-Contatori	计数器
-DX cluster a scelta	自选 DX cluster
-Disconnesso	已断开
-Disconnetti	断开
-Filtro	过滤
-Filtro degli spot meteor scatter	流星散射 spot 过滤器
-Fonte	来源
-Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator mancanti si prendono dall'archivio CALL3 (data/call3.txt).	已接受的 spot 保存在 data/spot_ms 中，每天一个 CSV 文件。缺失的网格坐标从 CALL3 档案（data/call3.txt）获取。
-Host	主机
-Importa CALL3.TXT...	导入 CALL3.TXT...
-Indirizzo mancante	缺少地址
-Invia	发送
-La parola "{0}" c'è, ma la riga non è uno spot "DX de ..." valido.	词 "{0}" 存在，但该行不是有效的 "DX de ..." spot。
-Loc DX	DX 网格
-Loc spotter	报告者网格
-Manca il nominativo per il login	缺少登录呼号
-Nominativo per il login	登录呼号
-Non connesso	未连接
-Nuovo tentativo tra 30 s	30 s 后重试
-Porta	端口
-Prova del filtro	过滤器测试
-RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento.	RBN：端口 7000 = CW 和 RTTY，端口 7001 = FT8。仅用呼号登录。RBN 的 skimmer 很少解码 MS 模式：主要适用于注释中带有 <MS> 的 spot。
-Raccolta dati	数据收集
-Reverse Beacon Network	Reverse Beacon Network
-Riconnetti	重新连接
-SCARTATO: "{0}" trovato, ma la frequenza {1:F1} kHz non è in una banda scelta.	已丢弃："{0}" 已找到，但频率 {1:F1} kHz 不在所选频段内。
-Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)	立即丢弃低于 27990.0 kHz 的 cluster 行（不在控制台显示，也不保存）
-Scrivi il nominativo per il login prima di connettere.	连接前请输入登录呼号。
-Spot meteor scatter raccolti (i più recenti in alto)	已收集的流星散射 spot（最新的在上方）
-Svuota la tabella	清空表格
-collegamento via meteor scatter	通过流星散射通联
-comandi dopo il login, separati da ;	登录后执行的命令，以 ; 分隔
-comando da inviare (es. sh/dx 20)	要发送的命令（例如 sh/dx 20）
-modo digitale MS	MS 数字模式
-nominativo	呼号
-nuova parola	新词
-parola aggiunta	已添加的词
-righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}	收到行数           {0}\n读取 spot          {1}\n接受 MS spot       {2}\n丢弃（词）         {3}\n丢弃（频段）       {4}\n最近一小时 MS spot {5}
-righe sotto 27990 kHz scartate: {0}	已丢弃低于 27990 kHz 的行：{0}
-righe {0}, spot letti {1}, MS {2}	行数 {0}，读取 spot {1}，MS {2}
-{0} spot MS in memoria	内存中 {0} 条 MS spot
-1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	第 1 条标准：流星散射 spot 的典型频率 (kHz)
-2° criterio: modi digitali MS e <MS>	第 2 条标准：MS 数字模式和 <MS>
-La riga non è uno spot "DX de ..." valido.	该行不是有效的 "DX de ..." spot。
-SCARTATO: frequenza sotto 27990,0 kHz.	已丢弃：频率低于 27990.0 kHz。
-SCARTATO: fuori dalle finestre MS e nessuna parola del filtro.	已丢弃：不在 MS 窗口内，且无过滤词。
-SCARTATO: il commento dichiara un'altra propagazione ({0}) e non c'è un modo MS.	已丢弃：注释声明了其他传播方式（{0}），且没有 MS 模式。
-Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:	落在这些窗口内的 spot 即使没有模式名称也会被接受，除非注释用以下标签之一声明了其他传播方式：
-Vale per gli spot fuori dalle finestre e per quelli con una scritta di altra propagazione: si tengono se contengono una delle parole accese, in maiuscolo, minuscolo o misto. MSK144, FSK441, PSK2K, JTMS e JT6M sono modi digitali usati solo per il meteor scatter: lo spot è MS di sicuro. <MS> indica genericamente che il collegamento è avvenuto via meteor scatter.	适用于窗口外的 spot 以及带有其他传播方式标签的 spot：如果包含任一已启用词（大写、小写或混合均可）则保留。MSK144、FSK441、PSK2K、JTMS 和 JT6M 是仅用于流星散射的数字模式：该 spot 必定是 MS。<MS> 泛指该通联是通过流星散射完成的。
-accettati per finestra di frequenza: {0}	按频率窗口接受：{0}
-finestra {0} kHz	窗口 {0} kHz
-scartati per altra propagazione: {0}	因其他传播方式丢弃：{0}
-Spot MS raccolti	已收集的 MS spot
-antenna {0}°	天线 {0}°
-Calcolo previsionale	预报计算
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.	点击地图上的路径或表格中的一行，查看该通联及其云团的详情。
-DM4X (PSKReporter)	DM4X (PSKReporter)
-DX cluster	DX cluster
-Documenti tecnici	技术文档
-Foto	照片
-Live e dati real-time	实况与实时数据
-Mappa dei radar europei	欧洲雷达地图
-Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.	无雷达数据：请从“实况与实时数据 › 雷达流量”子选项卡下载。
-Nuvola	云团
-Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter	面向流星散射的流星雨效率实时预报与计算
-Raggio della mappa	地图半径
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	来自“数据收集”选项卡的 MS spot。对每个通联，云团显示该路径在该小时最可能的余迹集中在何处（镜面反射，所有活跃流星雨之和）。虚线云团 = 仅偶发流星。有台站位于地图外的 spot 不绘制；刚到达的 spot（不足 3 分钟）闪烁一分钟。
-Spot da mostrare	要显示的 spot
-Stazione	电台
-Traffico MS in diretta · {0}	实时 MS 通信 · {0}
-Traffico in diretta	实时通信
-Traffico meteor scatter in diretta	实时流星散射通信
-a cura di	作者：
-hot spot (solo sporadiche) {0}	hot spot (仅偶发流星) {0}
-nessun dato radar: vedi Live e dati real-time › Flusso radar	无雷达数据：见“实况与实时数据 › 雷达流量”
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)	此路径无法计算云团（过短或过长）
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	云团 {0}：{1:F0} % 的反射，{2:F0} × {3:F0} km，轴向 {4:F0}°
-sporadiche	偶发流星
-ultima ora	最近 1 小时
-ultime 24 ore	最近 24 小时
-ultime {0} ore	最近 {0} 小时
-ultimi {0} minuti	最近 {0} 分钟
-versione	版本
-{0} MHz: {1}	{0} MHz: {1}
-{0} UTC · {1:F1} kHz · {2:F0} km	{0} UTC · {1:F1} kHz · {2:F0} km
-{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator	地图上 {0} 个通联 · 地图外 {1} 个 · 无网格坐标 {2} 个
+FONTE	来源
+RILIEVO	核查
+SCELTA	选择
+(sopra 144 MHz nessuna misura: λ²)	（144 MHz 以上无测量：λ²）
+Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².	ping 的持续时间如何随波段变化。\n理论值（保守，默认）：持续时间与 λ² 成正比（McKinley 1961；SM6FHZ 规则）：从 50 到 144 MHz，ping 缩短到 1/8。\n观测值：NN4SA (EM64) 在 2026 年英仙座流星雨期间于 HamSCI 的 MSQP 中测得的中位数（R. Suggs NN4NT）：28 MHz 为 148 ms，50 MHz 为 78 ms，144 MHz 为 53 ms；从 50 到 144 MHz，ping 只缩短到 1/1.5。仅一个接收站，初步分析；144 MHz 以上没有测量，使用 λ²。
+Durata dei ping tra le bande	各波段之间的 ping 持续时间
+Durata osservata (HamSCI MSQP, NN4SA, Perseidi 2026; mediane 148 / 78 / 53 ms a 28 / 50 / 144 MHz): circa {0:F0} ms a {1:F0} MHz, x {2:F2} rispetto a 144 MHz{3}	观测持续时间（HamSCI MSQP，NN4SA，2026 年英仙座流星雨；28 / 50 / 144 MHz 的中位数 148 / 78 / 53 ms）：{1:F0} MHz 约 {0:F0} ms，相对 144 MHz 为 x {2:F2}{3}
+Durata secondo le misure HamSCI MSQP (NN4SA, Perseidi 2026) invece di λ²: x {0:F3}, quindi un eco di 1 s a {1:F1} MHz dura circa {2:F0} ms a {3:F0} MHz.	按 HamSCI MSQP 的测量（NN4SA，2026 年英仙座流星雨）代替 λ² 的持续时间：x {0:F3}，即 {1:F1} MHz 上 1 s 的回波在 {3:F0} MHz 约持续 {2:F0} ms。
+Raggio iniziale della scia	余迹初始半径
+Raggio iniziale della scia r0: più è grande, più si perde alle frequenze alte.\nDoppio dell'ITU (prudente, di partenza): il radar CMOR a 17, 29 e 38 MHz trova r0 di 0,5-2 m tra 85 e 95 km, per lo più 1-1,5 m, con dispersione di un fattore due; circa il doppio delle misure precedenti (Stober et al. 2021).\nITU-R P.843: log10 r0 = 0,035 h − 3,45 (0,5 m a 90 km), valore medio.\nEscluso: senza il fattore del raggio iniziale.	余迹初始半径 r0：越大，高频损耗越多。\nITU 值的两倍（保守，默认）：CMOR 雷达在 17、29 和 38 MHz 测得 85 至 95 km 之间 r0 为 0.5-2 m，多数为 1-1.5 m，离散约两倍；约为以往测量的两倍（Stober 等 2021）。\nITU-R P.843：log10 r0 = 0.035 h − 3.45（90 km 处 0.5 m），平均值。\n不计入：不含初始半径因子。
+Raggio iniziale: con il valore medio ITU-R P.843 (r0 = {0:F2} m) il fattore varrebbe {1:F1} dB; scelta attuale {2}. Misure CMOR: r0 di 0,5-2 m tra 85 e 95 km, dispersione di un fattore due (Stober et al. 2021)	初始半径：若用 ITU-R P.843 的平均值（r0 = {0:F2} m），该因子为 {1:F1} dB；当前选择 {2}。CMOR 测量：85 至 95 km 之间 r0 为 0.5-2 m，离散约两倍（Stober 等 2021）
+doppio dell'ITU (Stober 2021, prudente)	ITU 值的两倍（Stober 2021，保守）
+escluso	不计入
+osservata (HamSCI MSQP, NN4SA 2026)	观测值（HamSCI MSQP，NN4SA 2026）
+teorica λ² (McKinley, SM6FHZ; prudente)	理论值 λ²（McKinley，SM6FHZ；保守）
+ITU-R P.843	ITU-R P.843
+Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.	在每个流星雨下方增加“经典”一行：业余无线电规则的判断，在路径中点计算。\n✗ 辐射点在地平线下；◐ 勉强（辐射点低于 15° 或高于 70°，或与路径方向相差不到 30°）；● 好；★ 最佳（辐射点在 15° 与 70° 之间，且与路径方向相差超过 60°）。\n阈值与 meteor-mcp（qso-graph，2026）相同；与 DH9GCD 公式和 SM6FHZ 规则思路一致。不改变计算：用于比较关于角度 β 的两种观点。
+Calcola k = 3,75·log10 r per ogni sciame attivo adesso (r dalla tabella del GMN, altrimenti dal catalogo IMO) e ne fa la media pesata con lo ZHR.\nTeoria: con indice di massa s = 1 + 2,5·log10 r, il numero di scie sopra una soglia fissa scala con λ^(1,5·(s − 1)) (IZ5TEK, OH5IY).\nIl valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\nAttenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r.	为当前每个活跃流星雨计算 k = 3.75·log10 r（r 取自 GMN 表，否则取自 IMO 目录），并按 ZHR 加权平均。\n理论：质量指数 s = 1 + 2.5·log10 r 时，超过固定阈值的余迹数随 λ^(1.5·(s − 1)) 变化（IZ5TEK，OH5IY）。\n默认仍为 k = 3（SM6FHZ 经验规则），更保守：k 越小，预测的高频反射越多。\n注意：Collm 的计数大多是偶发流星，GMN 不公布其 r。
+Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.	相机计数，不是通量：取决于有多少台站天空晴朗且黑暗。
+Distanza tra il radiante del programma e quelli MDC: mediana {0:F1}°, massima {1:F1}°.	程序辐射点与 MDC 辐射点的距离：中位数 {0:F1}°，最大 {1:F1}°。
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nLe due tesi non sono ancora state confrontate con misure indipendenti: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	关于几何的两种观点，来源不同。\n开启（保守，默认）：McKinley（1961）和 ITU-R P.843 的完整公式 1 / (1 − cos²β sin²φ)，其中 β 是余迹与路径平面的夹角。穿过平面的余迹比位于平面内的余迹低 10-15 dB，且没有余迹被高估：与路径同向的辐射点占优。此选择下 YA-MS 更符合 DJ5HG 逐时曲线的形状（2004）。\n关闭：每条余迹都按位于路径平面内计算（β = 0），与 1.6 版之前相同。采用业余无线电的经典规则：最佳辐射点高 15-70° 且横跨路径，同向的辐射点为勉强（SM6FHZ、DH9GCD、qso-graph 的 meteor-mcp）。\n两种观点尚未与独立测量比较：“经典判断”复选框逐时在效率下方显示经典规则的判断。
+GMN oggi	GMN 今日
+Giudizio classico	经典判断
+Global Meteor Network: {0} traiettorie confermate dal {1} al {2} UTC, di cui {3} sporadiche. Conteggio delle telecamere, non flusso. Dati CC BY 4.0.	Global Meteor Network：{1} 至 {2} UTC 共 {0} 条确认轨迹，其中偶发 {3} 条。相机计数，不是通量。数据 CC BY 4.0。
+IAU MDC ({0}): {1} soluzioni. Mediane: λ {2:F1}°, A.R. {3:F1}°, decl. {4:+0.0;-0.0}°, v {5:F1} km/s.	IAU MDC（{0}）：{1} 个解。中位数：λ {2:F1}°，赤经 {3:F1}°，赤纬 {4:+0.0;-0.0}°，v {5:F1} km/s。
+IAU MDC: soluzioni	IAU MDC：解
+Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?	按 ZHR 加权平均：k = {0:F2}（SM6FHZ 规则：3，更保守）。\n\n应用此指数？
+Nessuno sciame attivo con un indice di popolazione valido.	没有具有有效布居指数的活跃流星雨。
+Traiettorie confermate dal GMN dal {0} al {1} UTC: {2} (sporadiche {3})	GMN 在 {0} 至 {1} UTC 确认的轨迹：{2}（偶发 {3}）
+classico	经典
+k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.	k = 3.75·log10 r = {0}，r = {1}（{2}）。SM6FHZ 经验规则用 k = 3，更保守。
+k = esponente della traslazione di frequenza dall'indice di popolazione r (GMN se disponibile, altrimenti IMO): k = 3,75·log10 r. IAU MDC: soluzioni pubblicate nel catalogo dell'IAU Meteor Data Center; Δ = catalogo IMO del programma meno mediana delle soluzioni MDC (radiante confrontato alla stessa longitudine solare). GMN oggi: traiettorie confermate nell'ultimo file giornaliero del Global Meteor Network (conteggio, non flusso).	k = 由布居指数 r 换算频率的指数（有 GMN 时用 GMN，否则用 IMO）：k = 3.75·log10 r。IAU MDC：IAU Meteor Data Center 目录中公布的解；Δ = 程序的 IMO 目录减 MDC 各解的中位数（辐射点在同一太阳黄经下比较）。GMN 今日：Global Meteor Network 最新日文件中确认的轨迹（计数，不是通量）。
+k dagli indici di popolazione	由布居指数求 k
+Δ radiante	Δ 辐射点
+Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.	关于几何的两种观点，来源不同。\n开启（保守，默认）：McKinley（1961）和 ITU-R P.843 的完整公式 1 / (1 − cos²β sin²φ)，其中 β 是余迹与路径平面的夹角。穿过平面的余迹比位于平面内的余迹低 10-15 dB，且没有余迹被高估：与路径同向的辐射点占优。此选择下 YA-MS 更符合 DJ5HG 逐时曲线的形状（2004）。\n关闭：每条余迹都按位于路径平面内计算（β = 0），与 1.6 版之前相同。采用业余无线电的经典规则：最佳辐射点高 15-70° 且横跨路径，同向的辐射点为勉强（SM6FHZ、DH9GCD、qso-graph 的 meteor-mcp）。\n与 Sonneberg 的 BRAMS 计数的初步比较（2026 年英仙座流星雨，471 km）无法区分两者：“经典判断”复选框逐时在效率下方显示经典规则的判断。
+... e altri {0}	……以及另外 {0} 个
+Aggiorna adesso	立即更新
+Aggiornamenti	更新
+Aggiornamento disponibile	有可用更新
+Aggiornamento installato	更新已安装
+Alcune modifiche si vedono solo dopo aver riavviato il programma.	部分更改需重新启动程序后才能看到。
+Apri la pagina delle release	打开发布页面
+Chiudi	关闭
+Continua senza	不下载，继续
+Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.	请检查互联网连接，或从发布页面重新下载完整的软件包。
+Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.	在 GitHub 上检查是否有更新版本的 YA-MS，如有则安装；同时检查是否缺少程序文件。
+Controllo degli aggiornamenti su GitHub...	正在 GitHub 上检查更新...
+File mancanti	缺少的文件
+Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.	程序将下载软件包 {0}，替换自身文件，保留 data 文件夹（已更改的程序文件会先复制到 data/backup），然后重新启动。
+Installazione dell'aggiornamento...	正在安装更新...
+L'aggiornamento non è riuscito: {0}	更新失败：{0}
+Mancano {0} file del programma:\n{1}\n\nLi scarico da GitHub (versione {2})?	缺少 {0} 个程序文件：\n{1}\n\n是否从 GitHub 下载（版本 {2}）？
+Nella release non c'è il pacchetto per questo sistema ({0}): scaricalo a mano dalla pagina delle release.	该发布版本中没有适用于本系统的软件包（{0}）：请从发布页面手动下载。
+Non posso scrivere nella cartella del programma ({0}): installa la nuova versione a mano.	无法写入程序文件夹（{0}）：请手动安装新版本。
+Non riesco a leggere le versioni pubblicate su GitHub: {0}	无法读取 GitHub 上发布的版本：{0}
+Più tardi	稍后
+Riavvia YA-MS a mano: {0}	请手动重新启动 YA-MS：{0}
+Salta questa versione	跳过此版本
+Scarica i file mancanti	下载缺少的文件
+Scaricamento dei file mancanti: {0} di {1}	正在下载缺少的文件：{0} / {1}
+Scaricamento dell'aggiornamento...	正在下载更新...
+Scaricamento dell'aggiornamento: {0} %	正在下载更新：{0} %
+Scaricati {0} file mancanti.	已下载 {0} 个缺少的文件。
+Scaricati {0} file su {1}.	已下载 {0} 个文件（共 {1} 个）。
+YA-MS {0} è installato. Il programma ora si riavvia.	YA-MS {0} 已安装。程序即将重新启动。
+YA-MS è aggiornato (versione {0}).	YA-MS 已是最新版本（版本 {0}）。
+YA-MS.app non trovato nel pacchetto	软件包中未找到 YA-MS.app
+{0} file della cartella data sono stati sostituiti: le copie precedenti sono in data/backup/v{1}.	data 文件夹中已替换 {0} 个文件：之前的副本位于 data/backup/v{1}。
+{0} non trovato nel pacchetto	软件包中未找到 {0}
+È disponibile YA-MS {0} (questa è la {1}).	YA-MS {0} 已发布（当前为 {1}）。

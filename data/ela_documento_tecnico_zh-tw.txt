@@ -152,8 +152,8 @@ TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 報告（以使用者名稱與�
 TAG|SCELTA|只處理 28 MHz 以上的頻段，每個頻段單獨處理，不合併。顏色：橘色 = 已通聯，藍色 = 以 QSL 確認，綠色 = 經由 LoTW 確認。可依傳播模式篩選（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。
 H1|7. 配色
 TAG|FONTE|配色方案與 YA-MS 1.5.0 相同，沿用自 YAEC [26]：淺色、夜間、黑色、八種粉彩與流星餘跡。方案在右上方選擇，視窗會立即重建；在等反射線檢視中，深色方案使用彩色帶，淺色方案使用粗線（4.4）。
-H1|8. 流星散射（YA-MS 1.6.0）與語言
-TAG|FONTE|METEOR SCATTER 頁籤包含完整的 YA-MS 1.6.0 [5]，以及其「效率 - 說明」文件與資料來源。tools/sync_yams.py 腳本會複製每個新版的 YA-MS，並將其轉換為面板而不更動其計算。
+H1|8. 流星散射（YA-MS 1.8.0）與語言
+TAG|FONTE|METEOR SCATTER 頁籤包含完整的 YA-MS 1.8.0 [5]，以及其「效率 - 說明」文件與資料來源。tools/sync_yams.py 腳本會複製每個新版的 YA-MS，並將其轉換為面板而不更動其計算。
 TAG|FONTE|YA-MS 1.4.0 加入了 即時流星雨（Global Meteor Network 量測的 ZHR 與 CMOR 雷達的輻射點地圖）與 資料來源地圖（Collm、Sodankylä、GRAVES 與 CMOR 相對於電台的位置）頁籤；YA-MS 1.5.0 加入 資料收集（來自 DX cluster、RBN 與 PSKReporter 的流星散射 spot，以 MSK144、FSK441、FSK41、PSK2K、JTMS、JT6M、<MS> 篩選）；YA-MS 1.6.0 將各頁籤整合為 Live 與即時資料、預報計算 與 技術文件 三組，並加入即時流星散射通訊。在 E-LAYER ANALYZER 內不會出現 YA-MS 的 資料收集：資料收集只有一套，就是 DATA COLLECTION 的那一套，它把資料行傳給 YA-MS，而流星散射篩選器在 DATA COLLECTION 的篩選器欄中設定；如此就不會以同一呼號重複登入。YA-MS 的資料來源在 YA-MS 內引用。
 TAG|SCELTA|語言：36 種，即 YAEC 的所有語言，加上丹麥文與他加祿文，自 0.4.4 版起另增巴西葡萄牙文、繁體中文、波蘭文、捷克文、羅馬尼亞文、匈牙利文、希臘文與泰文（Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어），適用於介面（data/lingue/ela-<代碼>.txt）、文件（計算選擇摘要、使用手冊、技術報告）與資料來源。在 F.A.I./極光檢視中，散射點的軌跡在所有翻譯中都稱為 "Scatter trail"。狀態列會顯示使用中的磁場模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 限制

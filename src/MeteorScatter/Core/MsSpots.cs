@@ -24,7 +24,7 @@ namespace YAMS
         public DateTime Utc;
         public double FreqKHz;
         public string DxCall = "", Spotter = "", Comment = "", Line = "";
-        public int Source;                 // 0 = cluster, 1 = RBN, 2 = PSKReporter
+        public int Source;                 // 0 = cluster, 1 = RBN, 2 = PSKReporter (cluster DM4X), 3 = PSKReporter MQTT
         public string Match = "";          // parola del filtro trovata (MSK144, <MS>, ...)
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
@@ -74,7 +74,7 @@ namespace YAMS
 
     public static class MsCollector
     {
-        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter" };
+        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter", "PSKR MQTT" };
         public static readonly string[] BuiltInWords = { "MSK144", "FSK441", "FSK41", "PSK2K", "JTMS", "JT6M", "<MS>" };   // FSK41: grafia abbreviata di FSK441 indicata dall'autore
 
         // valori di partenza delle tre sessioni: nome, host, porta, comandi iniziali, nota
@@ -89,8 +89,8 @@ namespace YAMS
         public static readonly List<MsSpot> Spots = new List<MsSpot>();          // accettati (ultimi 5000)
         public static readonly List<MsFilterWord> Words = new List<MsFilterWord>();
         public static readonly HashSet<string> Bands = new HashSet<string>(MsBands.Names);
-        public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>() };
-        public static int[] Lines = new int[3], Parsed = new int[3], Accepted = new int[3];
+        public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>() };
+        public static int[] Lines = new int[4], Parsed = new int[4], Accepted = new int[4];
         public static int RejectedNoWord, RejectedBand, DroppedLow;
         // regola dell'autore (IC8TEM): le righe "DX de" con frequenza sotto 27990,0 kHz si scartano subito, in locale:
         // non vanno nella console, non si contano come spot e non si memorizzano
@@ -168,6 +168,7 @@ namespace YAMS
         public static string[] StateText = { "Non connesso", "Non connesso", "Non connesso" };
         static readonly HashSet<string> keys = new HashSet<string>();
         static readonly Queue<KeyValuePair<int, string>> pending = new Queue<KeyValuePair<int, string>>();
+        static readonly Queue<MsSpot> pendingSpots = new Queue<MsSpot>();   // spot gia' letti (PSKReporter MQTT)
         static readonly object lk = new object();
         static bool hooked;
 
@@ -185,6 +186,7 @@ namespace YAMS
                     Sessions[i].LineReceived += l => { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(k, l)); };
                     Sessions[i].StateChanged += st => { StateText[k] = st; };
                 }
+                PskMqtt.SpotReceived += (sp, line) => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
                 UseWindows = cfg.GetB("rd_finestre_attive", true);
@@ -226,7 +228,7 @@ namespace YAMS
             cfg.Set("rd_altre_propagazioni", OtherTagsText);
         }
 
-        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); }
+        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); }
 
         // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
@@ -248,7 +250,8 @@ namespace YAMS
         public static bool Process()
         {
             List<KeyValuePair<int, string>> got = new List<KeyValuePair<int, string>>();
-            lock (lk) { while (pending.Count > 0) got.Add(pending.Dequeue()); }
+            List<MsSpot> gotSpots = new List<MsSpot>();
+            lock (lk) { while (pending.Count > 0) got.Add(pending.Dequeue()); while (pendingSpots.Count > 0) gotSpots.Add(pendingSpots.Dequeue()); }
             bool added = false;
             DateTime now = DateTime.UtcNow;
             foreach (KeyValuePair<int, string> kv in got)
@@ -261,22 +264,38 @@ namespace YAMS
                 while (ConsoleLines[i].Count > 200) ConsoleLines[i].Dequeue();
                 if (s == null) continue;
                 Parsed[i]++;
-                MsFilterWord w; string other;
-                string why = Decide(s, out w, out other);
-                if (why == null) { if (other != null) RejectedOther++; else RejectedNoWord++; continue; }
-                if (s.Band.Length == 0 || !Bands.Contains(s.Band)) { RejectedBand++; continue; }
-                s.Match = why;
-                if (!keys.Add(s.Key)) continue;
-                if (w != null) w.Count++; else AcceptedWindow++;
-                Accepted[i]++;
-                Locate(s);
-                s.Received = DateTime.UtcNow;
-                Spots.Add(s);
-                if (Spots.Count > 5000) { for (int k = 0; k < 500; k++) keys.Remove(Spots[k].Key); Spots.RemoveRange(0, 500); }
-                Append(s);
-                added = true;
+                if (Accept(s, i)) added = true;
+            }
+            // spot di PSKReporter via MQTT: arrivano gia' letti (fonte 3), passano dallo stesso filtro
+            foreach (MsSpot s in gotSpots)
+            {
+                Lines[3]++;
+                if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
+                ConsoleLines[3].Enqueue(s.Line);
+                while (ConsoleLines[3].Count > 200) ConsoleLines[3].Dequeue();
+                Parsed[3]++;
+                if (Accept(s, 3)) added = true;
             }
             return added;
+        }
+
+        // filtro dello spot (criteri dell'autore e bande) e memorizzazione; true se accettato
+        static bool Accept(MsSpot s, int i)
+        {
+            MsFilterWord w; string other;
+            string why = Decide(s, out w, out other);
+            if (why == null) { if (other != null) RejectedOther++; else RejectedNoWord++; return false; }
+            if (s.Band.Length == 0 || !Bands.Contains(s.Band)) { RejectedBand++; return false; }
+            s.Match = why;
+            if (!keys.Add(s.Key)) return false;
+            if (w != null) w.Count++; else AcceptedWindow++;
+            Accepted[i]++;
+            Locate(s);
+            s.Received = DateTime.UtcNow;
+            Spots.Add(s);
+            if (Spots.Count > 5000) { for (int k = 0; k < 500; k++) keys.Remove(Spots[k].Key); Spots.RemoveRange(0, 500); }
+            Append(s);
+            return true;
         }
 
         // ---- lettura della riga "DX de SPOTTER:  FREQ  DXCALL  commento  HHMMZ [LOC]"
