@@ -10,6 +10,7 @@
 - Příklad IO70VJ - JO59BC: bod rozptylu JP01AK na moři u Shetland, odchylka 0,97°, QTF 11° a 299°.
 - **Spoty aurory na mapě**: spoty s **<AU>** nebo **<AUR>** v textu jsou spoty aurory (pravidlo autora). Se zaškrtnutým polem *Spoty <AU>/<AUR> na mapě s výpočtem* karta kreslí spoty za poslední 2 hodiny (nejvýše 30): pro každou dvojici spotter-DX vypočítá scatter trail a zobrazí nejpravděpodobnější bod rozptylu (oranžový kruh), s QTF a elevací obou stanic ve výsledcích.
 - Kromě nejpravděpodobnějšího bodu rozptylu uvádějí výsledky **rozsah QTF** obou stanic podél celé Scatter trail (odchylka ≤ 1,5°).
+- **Okno Lange-Hesse**: bod rozptylu se upřednostňuje ve vzdálenosti 370-1100 km od každé stanice, v okně, které Lange-Hesse vypočítal při 54° geomagnetické šířky. Od verze 0.4.5 se okno posouvá podle inklinace IGRF-14 každé stanice: blíže pro stanice dále na jihu, dále pro stanice více na severu (např. Capri asi 260-990 km, Oslo 470-1200 km). Výsledky ukazují okno obou stanic.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ Karta AURORA má dvě podkarty: **REAL-TIME** (výpočet popsaný výše) a **BE
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Pro každé QSO program vypočítá bod rozptylu stejným modelem (IGRF-14, výška 110 km, refrakce 4/3, tolerance 3°).
-- Barvy: **zelená** = bod rozptylu 370-1100 km od obou stanic (Lange-Hesse); **žlutá** = vysvětleno, ale mimo toto okno; **oranžová** = QSO nad 2000 km; **červená** = žádný bod rozptylu, QSO nevysvětlené modelem.
-- Souhrn dává procenta a pro každý deník rozsah a medián vypočteného QTF. Kliknutím na řádek se nakreslí trasa a obě směrování antén.
-- Výsledek (verze 0.4.4): **296 z 298 QSO vysvětleno (99 %)**, 243 (82 %) uvnitř okna 370-1100 km; medián QTF stanice EI5FK mezi 25° a 41°, tj. severovýchod doporučený G3WPO. Deníky neuvádějí směrování antény: ověření se týká geometrie, ne QTF.
+- Barvy: **zelená** = bod rozptylu uvnitř okna Lange-Hesse obou stanic; **žlutá** = vysvětleno, ale mimo toto okno; **oranžová** = QSO nad 2000 km; **červená** = žádný bod rozptylu, QSO nevysvětlené modelem.
+- Souhrn dává procenta, také s pevným oknem 370-1100 km pro srovnání, a pro každý deník rozsah a medián vypočteného QTF. Kliknutím na řádek se nakreslí trasa a obě směrování antén.
+- Výsledek (verze 0.4.4): **296 z 298 QSO vysvětleno (99 %)**, 243 (82 %) uvnitř okna 370-1100 km; medián QTF stanice EI5FK mezi 25° a 41°, tj. severovýchod doporučený G3WPO. Deníky neuvádějí směrování antény: ověření se týká geometrie, ne QTF. S pohyblivým oknem (verze 0.4.5) je výsledek stejný, 243 QSO (82 %), jako s pevným oknem: stanice testovací lavice (Irsko, Velká Británie, Nizozemsko, Německo) mají inklinaci 66-70°, blízkou referenčnímu bodu Lange-Hesse (okno EI5FK 350-1080 km); rozdíl se týká stanic dále na jihu nebo dále na severu, pro které testovací lavice nemá žádná QSO.

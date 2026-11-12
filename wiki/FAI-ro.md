@@ -32,6 +32,11 @@ Este construcția geometrică folosită pentru a **verifica dacă un punct de re
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (deasupra Genovei) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (sud-vestul Germaniei, la 28 km de Bruxelles) | 0,88° | 338° / 87° |
-| DB0FAI - Dresda via Sheffield (DL5MCG) | – | 0,3° | – |
+| Beaconul DB0FAI (305°) - Dresda via Sheffield (DL5MCG; Dresda avea antena la 290° și a declarat auroră) | – | 0,3° | – |
+| DL5MCG - SV1DH (testul din 1987 via Budapesta, 1569 km) | Budapesta pe scatter trail; celule sub 1° de la 35 km | 2,16° | 95° / 341° |
 
 Scatter point-uri cunoscute în listă: Geneva, Bruxelles, Budapesta, JN92, JN41/42.
+
+Meniul **Verificări...** încarcă perechile de test IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE și DL5MCG-SV1DH.
+
+**Echipament** (DL5MCG): F.A.I. pe 144 MHz necesită cel puțin o yagi lungă și 100 W (SV1DH a fost lucrat și cu o yagi cu 8 elemente și 50 W). Orientați antena spre scatter point-ul indicat de program, nu spre corespondent.

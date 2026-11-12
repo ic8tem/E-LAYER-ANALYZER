@@ -32,6 +32,11 @@ Je to geometrická konstrukce sloužící k **ověření, zda je bod odrazu spr�
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (nad Janovem) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (JZ Německo, 28 km od Bruselu) | 0,88° | 338° / 87° |
-| DB0FAI - Drážďany přes Sheffield (DL5MCG) | – | 0,3° | – |
+| Maják DB0FAI (305°) - Drážďany přes Sheffield (DL5MCG; Drážďany směřovaly na 290° a ohlásily auroru) | – | 0,3° | – |
+| DL5MCG - SV1DH (test z roku 1987 přes Budapešť, 1569 km) | Budapešť na stopě; body pod 1° od 35 km | 2,16° | 95° / 341° |
 
 Známé body rozptylu v seznamu: Ženeva, Brusel, Budapešť, JN92, JN41/42.
+
+Nabídka **Kontroly...** načte zkušební dvojice IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE a DL5MCG-SV1DH.
+
+**Vybavení** (DL5MCG): F.A.I. na 144 MHz vyžaduje alespoň dlouhou yagi a 100 W (se SV1DH se podařilo spojení i s 8prvkovou yagi a 50 W). Anténu směrujte na bod rozptylu udaný programem, ne na protistanici.

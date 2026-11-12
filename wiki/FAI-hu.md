@@ -32,6 +32,11 @@ Ez az a geometriai szerkesztés, amellyel **ellenőrizhető, hogy egy visszaver�
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (Genova felett) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (DNy-Németország, 28 km-re Brüsszeltől) | 0,88° | 338° / 87° |
-| DB0FAI - Drezda Sheffielden át (DL5MCG) | – | 0,3° | – |
+| DB0FAI jeladó (305°) - Drezda Sheffielden át (DL5MCG; Drezda 290°-ra irányzott és aurorát jelentett) | – | 0,3° | – |
+| DL5MCG - SV1DH (1987-es teszt Budapesten át, 1569 km) | Budapest a nyomon; 1° alatti cellák 35 km-től | 2,16° | 95° / 341° |
 
 A listában szereplő ismert szórási pontok: Genf, Brüsszel, Budapest, JN92, JN41/42.
+
+Az **Ellenőrzések...** menü betölti az IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE és DL5MCG-SV1DH tesztpárokat.
+
+**Felszerelés** (DL5MCG): a 144 MHz-es F.A.I.-hoz legalább egy hosszú yagi és 100 W kell (SV1DH-t egy 8 elemes yagival és 50 W-tal is sikerült elérni). Az antennát a program által megadott szórási pontra irányozza, ne az ellenállomásra.

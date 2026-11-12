@@ -10,6 +10,7 @@
 - Példa: IO70VJ - JO59BC: szórási pont JP01AK a Shetland-szigetek előtt, eltérés 0,97°, QTF 11° és 299°.
 - **Aurora-spotok a térképen**: a szövegükben **<AU>** vagy **<AUR>** jelölést tartalmazó spotok aurora-spotok (a szerző szabálya). Bejelölt *<AU>/<AUR> spotok a térképen a számítással* négyzet mellett a fül kirajzolja az utolsó 2 óra spotjait (legfeljebb 30-at): minden spottoló-DX párra kiszámítja a Scatter trailt, és megmutatja a legvalószínűbb szórási pontot (narancs kör), az eredményekben mindkét állomás QTF-jével és elevációjával.
 - A legvalószínűbb szórási pont mellett az eredmények megadják mindkét állomás **QTF-tartományát** a teljes Scatter trail mentén (eltérés ≤ 1,5°).
+- **Lange-Hesse-ablak**: a szórási pontot lehetőleg az egyes állomásoktól 370-1100 km-re választja, abban az ablakban, amelyet Lange-Hesse 54° geomágneses szélességen számított. A 0.4.5-ös verziótól az ablak az egyes állomások IGRF-14 inklinációjával eltolódik: közelebb a délebbre, távolabb az északabbra fekvő állomásoknál (pl. Capri kb. 260-990 km, Oslo 470-1200 km). Az eredmények mindkét állomás ablakát mutatják.
 
 ## BENCHMARK AURORA
 
@@ -18,6 +19,6 @@ Az AURORA fülnek két allapja van: **REAL-TIME** (a fent leírt számítás) é
 ![BENCHMARK AURORA](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/4k_benchmark_aurora.png)
 
 - Minden QSO-ra a program ugyanazzal a modellel számítja ki a szórási pontot (IGRF-14, magasság 110 km, 4/3-os refrakció, 3°-os tűrés).
-- Színek: **zöld** = a szórási pont mindkét állomástól 370-1100 km-re (Lange-Hesse); **sárga** = magyarázott, de ezen az ablakon kívül; **narancs** = 2000 km feletti QSO; **piros** = nincs szórási pont, a modell által nem magyarázott QSO.
-- Az összefoglaló megadja a százalékokat és naplónként a számított QTF tartományát és mediánját. Egy sorra kattintva kirajzolja az útvonalat és mindkét antennairányt.
-- Eredmény (0.4.4-es verzió): **298 QSO-ból 296 magyarázott (99%)**, 243 (82%) a 370-1100 km-es ablakon belül; EI5FK medián QTF-je 25° és 41° között, vagyis a G3WPO által javasolt északkelet. A naplók nem tartalmazzák az antennairányt: az ellenőrzés a geometrián alapul, nem a QTF-en.
+- Színek: **zöld** = a szórási pont mindkét állomás Lange-Hesse-ablakán belül; **sárga** = magyarázott, de ezen az ablakon kívül; **narancs** = 2000 km feletti QSO; **piros** = nincs szórási pont, a modell által nem magyarázott QSO.
+- Az összefoglaló megadja a százalékokat, összehasonlításként a rögzített 370-1100 km-es ablakkal is, és naplónként a számított QTF tartományát és mediánját. Egy sorra kattintva kirajzolja az útvonalat és mindkét antennairányt.
+- Eredmény (0.4.4-es verzió): **298 QSO-ból 296 magyarázott (99%)**, 243 (82%) a 370-1100 km-es ablakon belül; EI5FK medián QTF-je 25° és 41° között, vagyis a G3WPO által javasolt északkelet. A naplók nem tartalmazzák az antennairányt: az ellenőrzés a geometrián alapul, nem a QTF-en. A mozgó ablakkal (0.4.5-ös verzió) az eredmény ugyanaz, 243 QSO (82%), mint a rögzített ablakkal: a tesztpad állomásainak (Írország, Nagy-Britannia, Hollandia, Németország) inklinációja 66-70°, közel a Lange-Hesse-féle referenciaponthoz (EI5FK ablaka 350-1080 km); a különbség a délebbre vagy északabbra fekvő állomásokat érinti, amelyekre a tesztpadnak nincs QSO-ja.
