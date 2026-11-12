@@ -492,7 +492,7 @@ namespace YAMS
 
             // riga 2: strato E, lobo e antenna
             Border row2 = Row(L(Lang.T("Quota scie km")), numLayer, chkLayerRadar,
-                              L(Lang.T("Elevazione lobo °")), numElev, Raised(chkLobe),   // casella in evidenza, come l'angolo beta
+                              L(Lang.T("Elevazione lobo °")), numElev, chkLobe,
                               L(Lang.T("Antenna Yagi: boom m")), numBoom, lblAnt,
                               L(Lang.T("Hot spot dal punto medio km")), numHotKm, chkHotAuto);
 
@@ -798,7 +798,7 @@ namespace YAMS
                 Foreground = Pal.B(Pal.Fore), FontSize = 13, TextWrapping = TextWrapping.Wrap,
                 Text = Lang.T("Le lettere accanto alla percentuale dicono da quale lato della tratta arriva la maggior parte delle riflessioni. " +
                        "A = a SINISTRA guardando dalla tua stazione verso il corrispondente (zona Hot A); B = a DESTRA (zona Hot B). " +
-                       "Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto il 5 %. " +
+                       "Conviene spostare l'antenna di 10-30° verso quel lato (side-scatter). Nessuna lettera = efficienza sotto l'1 %. " +
                        "Riga Σ: indice della tratta = somma di ZHR x efficienza di tutti gli sciami attivi. " +
                        "Righe azzurre: confronto con la formula di DH9GCD (DF5HC 2018). ↑ = radiante sopra 70° dalla tua stazione (troppo alto).")
             };
@@ -1541,8 +1541,8 @@ namespace YAMS
                         bestShower = s.Code + " " + Lang.T(s.Name) + "\n" + Lang.F("efficienza {0}% alle {1}:30, lato {2}", e.ToString("F0"), h.ToString("00"), sides[h]) +
                             "\n" + Lang.F("puntamento migliore {0}° / {1}°", Astro.Norm360(raz + 90).ToString("F0"), Astro.Norm360(raz - 90).ToString("F0"));
                     }
-                    row[3 + h] = (e < 1 ? "" : e.ToString("F0") + (e >= 5 ? sides[h] : "")) + (tooHigh[h] ? "↑" : "");
-                    if (e >= 5) tips[3 + h] = HotTip(s, t, e, lf);
+                    row[3 + h] = (e < 1 ? "" : e.ToString("F0") + sides[h]) + (tooHigh[h] ? "↑" : "");   // lettera del lato Hot su ogni valore
+                    if (e >= 1) tips[3 + h] = HotTip(s, t, e, lf);
                 }
                 row[2] = zmax.ToString("F0");
                 TableRow tr = new TableRow { Cells = row, CellBack = new Color?[27], CellFore = new Color?[27], Tag = s.Code, FontSize = 12 * Grid24Scale, CellTips = tips };

@@ -2,7 +2,7 @@
 
 [← Home](Home-ro)
 
-Această filă conține **YA-MS 1.8.1** complet, programul de meteor scatter al lui IC8TEM: bolta cerească cu radianții, fluxul radarelor SKiYMET (Collm, Sodankylä), calculul eficienței roiurilor, implementarea experimentală a prognozelor, geometrie și atenuare, GRAVES, harta pătratelor, **Roiuri în direct** (ZHR măsurate de Global Meteor Network și radianții radarului CMOR), **Harta surselor** (Collm, Sodankylä, GRAVES și CMOR față de stație) și documentul **Explicația calculului eficienței** cu formulele.
+Această filă conține **YA-MS 1.8.2** complet, programul de meteor scatter al lui IC8TEM: bolta cerească cu radianții, fluxul radarelor SKiYMET (Collm, Sodankylä), calculul eficienței roiurilor, implementarea experimentală a prognozelor, geometrie și atenuare, GRAVES, harta pătratelor, **Roiuri în direct** (ZHR măsurate de Global Meteor Network și radianții radarului CMOR), **Harta surselor** (Collm, Sodankylä, GRAVES și CMOR față de stație) și documentul **Explicația calculului eficienței** cu formulele.
 
 YA-MS 1.5.0 adaugă fila **Colectare date** (spoturi meteor scatter filtrate după MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). În E-LAYER ANALYZER nu deschide sesiuni telnet proprii: primește rândurile sesiunilor din DATA COLLECTION, astfel încât nu există login-uri duble cu același indicativ.
 
