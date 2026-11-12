@@ -381,6 +381,16 @@ namespace YAMS
             };
         }
 
+        // riquadro arancione delle caselle che pesano di piu' (angolo beta, diagramma d'antenna)
+        static Border OrangeBox(Control c)
+        {
+            Border b = Raised(c);
+            b.Background = Pal.B(Pal.A(55, Pal.Orange));
+            b.BorderBrush = Pal.B(Pal.Orange);
+            b.BorderThickness = new Thickness(1.5);
+            return b;
+        }
+
         static Border Row(params Control[] items)
         {
             WrapPanel wp = new WrapPanel { Orientation = Orientation.Horizontal };
@@ -454,6 +464,7 @@ namespace YAMS
             // casella: lobo come diagramma d'antenna (attenuazione) invece del limite netto
             chkLobe = C(Lang.T("diagramma d'antenna"), cfg.GetB("lobo_diagramma", true));
             PathModel.LobePattern = chkLobe.IsChecked == true;
+            chkLobe.FontWeight = FontWeight.SemiBold;
             ToolTip.SetTip(chkLobe, Lang.T("Come conta l'elevazione del lobo.\n" +
                 "Accesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); " +
                 "sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\n" +
@@ -492,7 +503,7 @@ namespace YAMS
 
             // riga 2: strato E, lobo e antenna
             Border row2 = Row(L(Lang.T("Quota scie km")), numLayer, chkLayerRadar,
-                              L(Lang.T("Elevazione lobo °")), numElev, chkLobe,
+                              L(Lang.T("Elevazione lobo °")), numElev, OrangeBox(chkLobe),   // riquadro arancione come l'angolo beta
                               L(Lang.T("Antenna Yagi: boom m")), numBoom, lblAnt,
                               L(Lang.T("Hot spot dal punto medio km")), numHotKm, chkHotAuto);
 
@@ -861,10 +872,7 @@ namespace YAMS
                 Text = "⚠ " + Lang.T("la scelta che pesa di più"), Foreground = Pal.B(Pal.OrangeText), FontWeight = FontWeight.Bold,
                 VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(6, 0, 0, 0)
             });
-            Border betaBox = Raised(betaInner);
-            betaBox.Background = Pal.B(Pal.A(55, Pal.Orange));
-            betaBox.BorderBrush = Pal.B(Pal.Orange);
-            betaBox.BorderThickness = new Thickness(1.5);
+            Border betaBox = OrangeBox(betaInner);
             ToolTip.SetTip(betaInner, ToolTip.GetTip(chkBeta));
             DockTop(p2, Row(L(Lang.T("Impostazione del calcolo:")), rbProfPrud, rbProfDj, rbProfPers, chkTrailLen, betaBox, chkClassic));
             chart24 = new SimpleChart { Height = Chart24Height };
