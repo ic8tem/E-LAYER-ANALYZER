@@ -160,6 +160,10 @@ s = rep(s, 'rtb.Render(this);', 'rtb.Render(target ?? this);', 'Render')
 s = rep(s, 'PixelSize ps = new PixelSize(Math.Max(100, (int)Bounds.Width), Math.Max(100, (int)Bounds.Height));',
         'Rect bb = (target ?? this).Bounds;\n                    PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));', 'Bounds')
 s = s.replace('            Close();\n', '')
+# dalla 1.8.1 anche Shot() fotografa: il pannello da fotografare sta in un campo
+s = s.replace('(target ?? this)', '(shotTarget ?? this)')
+s = rep(s, 'public async Task RunScreenshots(string dir, string dx, double hours, Visual target)\n        {\n',
+        'Visual shotTarget;   // E-LAYER ANALYZER: finestra da fotografare (tools/sync_yams.py)\n\n        public async Task RunScreenshots(string dir, string dx, double hours, Visual target)\n        {\n            shotTarget = target;\n', 'shotTarget')
 wr(p, s)
 
 # --- Raccolta dati di YA-MS (versioni successive alla 1.4.0): dentro E-LAYER ANALYZER non apre sessioni telnet

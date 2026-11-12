@@ -11,8 +11,11 @@ namespace YAMS
     {
         // --screenshot <cartella> [--dx LOCATOR] [--ore H] [--carattere N]: imposta la tratta, sposta la volta celeste
         // di H ore (passi di 15 minuti), porta il carattere a N % (100-300), fotografa ogni linguetta e chiude il programma.
+        Visual shotTarget;   // E-LAYER ANALYZER: finestra da fotografare (tools/sync_yams.py)
+
         public async Task RunScreenshots(string dir, string dx, double hours, Visual target)
         {
+            shotTarget = target;
             try
             {
                 Directory.CreateDirectory(dir);
@@ -59,11 +62,11 @@ namespace YAMS
                         // traffico in diretta: ridisegno subito (di solito ogni 2 s)
                         RefreshTraffic(true);
                         await Task.Delay(1500);
-                        Rect bb = (target ?? this).Bounds;
+                        Rect bb = (shotTarget ?? this).Bounds;
                     PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));
                         using (RenderTargetBitmap rtb = new RenderTargetBitmap(ps, new Vector(96, 96)))
                         {
-                            rtb.Render(target ?? this);
+                            rtb.Render(shotTarget ?? this);
                             rtb.Save(Path.Combine(dir, "linguetta_" + (i + 1) + (sub == null ? "" : "_" + (k + 1)) + ".png"));
                         }
                     }
@@ -99,11 +102,11 @@ namespace YAMS
 
         void Shot(string file)
         {
-            Rect bb = (target ?? this).Bounds;
+            Rect bb = (shotTarget ?? this).Bounds;
                     PixelSize ps = new PixelSize(Math.Max(100, (int)bb.Width), Math.Max(100, (int)bb.Height));
             using (RenderTargetBitmap rtb = new RenderTargetBitmap(ps, new Vector(96, 96)))
             {
-                rtb.Render(target ?? this);
+                rtb.Render(shotTarget ?? this);
                 rtb.Save(file);
             }
         }
