@@ -32,6 +32,11 @@ Bu, **bir yansıma noktasının doğru olup olmadığını denetlemek** için ku
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (Cenova üzerinde) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (GB Almanya, Brüksel'e 28 km) | 0,88° | 338° / 87° |
-| DB0FAI - Sheffield üzerinden Dresden (DL5MCG) | – | 0,3° | – |
+| DB0FAI beaconı (305°) - Sheffield üzerinden Dresden (DL5MCG; Dresden 290°'ye yönlendirmişti ve aurora bildirmişti) | – | 0,3° | – |
+| DL5MCG - SV1DH (Budapeşte üzerinden 1987 testi, 1569 km) | Budapeşte iz üzerinde; 1°'nin altındaki hücreler 35 km'den itibaren | 2,16° | 95° / 341° |
 
 Listedeki bilinen scatter point'ler: Cenevre, Brüksel, Budapeşte, JN92, JN41/42.
+
+**Doğrulamalar...** menüsü IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE ve DL5MCG-SV1DH test çiftlerini yükler.
+
+**Donanım** (DL5MCG): 144 MHz'de F.A.I. için en az uzun bir yagi ve 100 W gerekir (SV1DH 8 elemanlı bir yagi ve 50 W ile de çalışılmıştır). Anteni karşı istasyona değil, programın verdiği scatter point'e yönlendirin.

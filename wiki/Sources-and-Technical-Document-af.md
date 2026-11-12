@@ -2,7 +2,7 @@
 
 [← Home](Home-af)
 
-- Die oortjie **BRONNE** lys al die bronne, genommer [1]-[63].
+- Die oortjie **BRONNE** lys al die bronne, genommer [1]-[64].
 - Die oortjie **OPSOMMING VAN DIE BEREKENINGSKEUSES** (voorheen *Tegniese dokument*) verduidelik elke berekening met sy formules en die etikette **BRON** (stap uit 'n bron geneem), **KONTROLE** (op die program of op 'n werklike geval geverifieer) en **KEUSE** ('n keuse wat die program gemaak het, wat op die lug bevestig moet word).
 - Die oortjie **GEBRUIKERSHANDLEIDING** is die uitvoerige gebruikershandleiding van die program, oortjie vir oortjie.
 - Die oortjie **TEGNIESE VERSLAG** sit die keuses uiteen wat tot die skepping van die program gelei het: argitektuur, fisiese modelle, dataherkenning, kontroles, beperkings en toekomstige ontwikkelings.

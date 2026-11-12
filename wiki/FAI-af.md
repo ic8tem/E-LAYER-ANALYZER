@@ -32,6 +32,11 @@ Dit is die geometriese konstruksie wat gebruik word om **na te gaan of 'n reflek
 |---|---|---|---|
 | IC8FAX - F6DRO | JN44GH (bo Genua) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (suidwes-Duitsland, 28 km van Brussel) | 0,88° | 338° / 87° |
-| DB0FAI - Dresden via Sheffield (DL5MCG) | – | 0,3° | – |
+| Baken DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden het op 290° gerig en aurora aangemeld) | – | 0,3° | – |
+| DL5MCG - SV1DH (toets van 1987 via Boedapest, 1569 km) | Boedapest op die spoor; selle onder 1° vanaf 35 km | 2,16° | 95° / 341° |
 
 Bekende scatter points in die lys: Genève, Brussel, Boedapest, JN92, JN41/42.
+
+Die kieslys **Kontroles...** laai die toetspare IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE en DL5MCG-SV1DH.
+
+**Toerusting** (DL5MCG): F.A.I. op 144 MHz vereis minstens 'n lang Yagi en 100 W (SV1DH is ook met 'n 8-element-Yagi en 50 W gewerk). Rig die antenna op die scatter point wat die program gee, nie op die ander stasie nie.
