@@ -1,0 +1,233 @@
+TITLE|YA-MS-i kasutusjuhend
+SUB|Versioon 1.8.1 - koostanud Costantino IC8TEM - november 2026
+H1|1. Sissejuhatus
+H2|1.1 Milleks YA-MS on mõeldud
+P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
+P|Programm on tasuta, töötab Windowsis, Linuxis (ka Raspberry Pi-l) ja macOS-is ning on tõlgitud 36 keelde. See ei juhi raadiojaama ega pöörlit: sideks kasutatakse tavalist digitaalmoodide programmi (MSHV, WSJT-X).
+H2|1.2 Kuidas seda juhendit lugeda
+P|Juhend kirjeldab sakke ükshaaval, alustades prognoosarvutusest. Iga peatükk ütleb, mida sakk näitab, mida iga juhtnupp teeb ja kuidas tulemusi lugeda. Peatükk 14 koondab levinumad toimingud, peatükk 15 sagedased probleemid. Kuidas efektiivsust arvutatakse, koos allikate ja kontrollidega, on selgitatud dokumendis „Tõhususe arvutuse selgitus“; täielikud võrrandid on arvutuste juhendis (kaust doc).
+TAG|PROCEDURA|sammud, mida järgida, õiges järjekorras.
+TAG|NOTA|kasulik teave funktsiooni paremaks mõistmiseks või kasutamiseks.
+TAG|ATTENZIONE|sagedane viga, arvutuse piirang või käitumine, mida tasub teada.
+P|Juhtnuppude nimed on kirjutatud nii, nagu need paistavad programmi eestikeelses versioonis; teistes keeltes on neil sama asukoht ja sama järjekord.
+H1|2. Paigaldamine, käivitamine ja uuendused
+H2|2.1 Millise paketi alla laadida
+P|Kõik paketid on GitHubi väljalasete lehel (github.com/ic8tem/YA-MS/releases). .NET-i pole vaja paigaldada: see on juba paketis olemas.
+LI|Windows 64-bitine: YA-MS-<versioon>-windows-x64-setup.exe (paigaldab kausta C:\YA-MS ilma administraatoriõigusteta) või kaasaskantav zip-fail, mille võib lahti pakkida suvalisse kausta. 32-bitise Windowsi jaoks samad failid x86-ga.
+LI|Linux (Debian, Ubuntu, Mint): .deb-pakett, mis paigaldatakse käsuga sudo apt install ./ya-ms_<versioon>_amd64.deb; esimesel käivitamisel kopeerib programm end kausta ~/YA-MS. Teiste distributsioonide jaoks .tar.gz-fail, mis tuleb lahti pakkida ja käivitada käsuga ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 ja 500: pakett raspberry-pi-64bit (Raspberry Pi OS 64-bitine) või raspberry-pi-32bit, .tar.gz- või .deb-vormingus.
+LI|macOS: .dmg-fail Apple Siliconi (M1 ja uuemad) või Inteli jaoks või app.zip. Lohista YA-MS.app oma kausta (näiteks ~/YA-MS): kaust data luuakse rakenduse kõrvale.
+TAG|ATTENZIONE|Windows võib näidata teadet „Windows kaitses teie arvutit“: vali „Rohkem teavet“ ja seejärel „Käivita siiski“. macOS-is ava rakendus esimesel korral paremklõpsuga ja vali „Ava“. Programm pole allkirjastatud tasulise sertifikaadiga.
+H2|2.2 Esimene käivitamine
+P|Käivitamisel kuvatakse mõneks sekundiks pilt Perseiididest ESO VLT kohal. Esimesel käivitamisel valib YA-MS süsteemi keele, kui see on üks 36-st, muidu itaalia keele; laadib alla Euroopa kaardi (Natural Earth) kausta data/mappa ja näitab näidistrassi. Programmi seadistamine oma jaama jaoks võtab vaid mõne minuti (peatükk 4).
+H2|2.3 Kaust data
+P|Kõik seaded ja kõik andmed asuvad ühes kaustas data programmi kõrval: ei mingit AppData-t ega süsteemikaustu. YA-MS-i teise arvutisse viimiseks piisab programmi kausta kopeerimisest koos selle kaustaga data. Kausta sisu on kirjeldatud peatükis 13.
+H2|2.4 Automaatsed uuendused
+P|Alates versioonist 1.8.0 kontrollib YA-MS ise GitHubist käivitamisel ja kõige rohkem kord päevas, kas on ilmunud uus versioon. Kui on, avaneb aken „Uuendus saadaval“ uuenduste loetelu ja kolme nupuga:
+LI|Uuenda kohe: laadib alla sinu süsteemile sobiva paketi, asendab programmi failid, säilitab kausta data ja taaskäivitab YA-MS-i. Kaustas data olevad programmi failid, mida uus versioon muudab, kopeeritakse enne kausta data/backup/v<vana versioon>; sinu faile (seaded, arhiivid, spotid, ADIF) ei puudutata.
+LI|Hiljem: sulgeb akna; kontroll kordub järgmisel päeval.
+LI|Jäta see versioon vahele: seda versiooni käivitamisel enam ei pakuta.
+P|Nupp „Uuendused“ all paremal olekuribal teeb sama kontrolli käsitsi, ka vahele jäetud versiooni puhul.
+TAG|ATTENZIONE|Automaatne uuendus peab saama kirjutada programmi kausta. Kui see ei saa (näiteks kui programm on kopeeritud süsteemikausta), ütleb YA-MS seda ja pakub väljalasete lehe avamist käsitsi paigaldamiseks. Versioonidel kuni 1.7.0 seda funktsiooni pole: esimesel korral tuleb uuendada käsitsi, paigaldades eelmise versiooni peale.
+TAG|NOTA|Kui sa ei soovi enam uusi versioone kontrollida, kirjuta faili data/config.ini rida controlla_aggiornamenti=0.
+H2|2.5 Puuduvad programmifailid
+P|Käivitamisel kontrollib YA-MS, kas kõik tema failid on olemas (tõlked, kataloogid, dokumendid). Kui mõni puudub, näiteks pärast poolikut kopeerimist, loetleb aken „Puuduvad failid“ need ja pakub võimalusi „Laadi puuduvad failid alla“ GitHubist programmiga samas versioonis või „Jätka ilma“. Sama kontroll kordub nupu „Uuendused“ vajutamisel.
+H1|3. Põhiaken
+H2|3.1 Akna osad
+LI|Üleval kolm rida juhtnuppe, mis kehtivad kõigil sakkidel: jaamad ja sagedusala, E-kiht ja antenn, arvutuse aeg (peatükk 4).
+LI|Põhisakkide riba, mille paremas servas on nupp Juhtnupud, värviskeem (Teema) ja keel.
+LI|Alamsakid heledamal real nende sakkide jaoks, millel need on.
+LI|All olekuriba: arvutuse teated, ühenduse hoiatused ja nupp „Uuendused“.
+H2|3.2 Sakid
+LI|Otse ja reaalajas andmed: Liiklus reaalajas, Radari voog, GRAVES-radar, Andmete kogumine (peatükk 9).
+LI|Prognoosarvutus: Prognoosarvutus, Geomeetria ja sumbumine, Efektiivsuse arvutus, Eksperimentaalsed prognoosid (peatükid 5-8).
+LI|Meteoorivoolud reaalajas, Meteoorivoolud, Ruutude kaart (peatükid 10-11).
+LI|Tehnilised dokumendid, viimane: Kasutusjuhend, Allikad, Euroopa radarite kaart, Tõhususe arvutuse selgitus (peatükk 12).
+H2|3.3 Keel, värvid, font
+LI|Keel: 36 keelt. Keele vahetamisel ehitatakse aken uuesti üles samas asendis ja samal sakil, ilma taaskäivituseta. Arvud ja kuupäevad järgivad valitud keelt (itaalia keeles kümnendkoma, inglise keeles punkt).
+LI|Teema: 12 värviskeemi; Hele on vaikimisi, Öö ja Must on mõeldud pimedas kasutamiseks, Meteoorijälg on YA-MS-i algne stiil.
+LI|Font (juhtnuppude esimese rea lõpus): suurendab kogu teksti 100 kuni 300 %. Suure fondi korral murduvad sakid mitmele reale.
+LI|Juhtnupud: peidab ja avab uuesti kolm juhtnuppude rida, et anda kaartidele ja graafikutele ruumi. Valik jäetakse meelde.
+TAG|NOTA|Peaaegu igal juhtnupul on kohtspikker: hoia hiirt juhtnupu kohal paigal, et lugeda, milleks see on ja millisest allikast algväärtus pärineb.
+H1|4. Jaama ja trassi seadistamine
+H2|4.1 Rida 1: jaamad ja sagedusala
+LI|Minu lokaator ja kõrgus m: sinu Maidenheadi lokaator (4, 6 või 8 märki; kasutatakse ruudu keskpunkti) ja jaama kõrgus merepinnast.
+LI|Korrespondent ja kõrgus m: ühendatava jaama lokaator ja kõrgus.
+LI|Sagedusala MHz: 28, 50, 70, 144, 222 või 432 MHz. Vajalik antenni võimenduse ja peaharu, sumbumise ja lingi eelarve ning voo hinnangu jaoks.
+LI|Arvuta: arvutab trassi uuesti (E-kihi valimi võtmine, alla sekundi).
+LI|Antenni az: antenni asimuut, alati korrespondendi suunas.
+H2|4.2 Rida 2: E-kiht ja antenn
+LI|Jälgede kõrgus km ja radarilt: meteoorijälgede kõrgus. Kui „radarilt“ on märgitud, kasutatakse Collmi radari mõõdetud kõige sagedasemat kõrgust (tavaliselt 88-90 km); eemalda märge, et see käsitsi sisestada.
+LI|Peaharu kõrgusnurk °: sinu antenni vertikaalse peaharu maksimumi kõrgusnurk. 0° peale fikseeritud suunaantenni peaharu on maapinnalt peegeldumise tõttu siiski mõne kraadi võrra horisondist kõrgemal: tavaliselt 3-8°, sõltuvalt antenni kõrgusest lainepikkustes.
+LI|antenni suunadiagramm: sisselülitatuna (vaikimisi) arvestatakse peegelduspunkte mõlema antenni vertikaalse võimendusega: täielikult peaharu maksimumi ümbruses ja üha vähem horisondi suunas ning ülespoole. Väljalülitatuna on peaharu kõrgusnurk terav piir: madalamal nähtavaid punkte ei arvestata.
+LI|Yagi antenn: poom m: poomi pikkus. Selle kõrvale kirjutab programm pikkuse lainepikkustes, võimenduse (DL6WU kõver) ja peaharu laiuse -3 dB juures horisontaalselt ja vertikaalselt. Alla 2 λ on hinnang ebatäpne.
+LI|Hot spot keskpunktist km ja auto (AMS): Hot A ja Hot B kaugus keskpunktist. Kui „auto (AMS)“ on märgitud, järgitakse J. Richardsoni tabelit, mida tsiteerib DJ5HG (13° kõrvalekalle 1000 km juures, 10° üle 1500 km); eemalda märge, et sisestada käsitsi 30-400 km (MSHV kasutab 150 km).
+TAG|ATTENZIONE|Kui „antenni suunadiagramm“ on välja lülitatud ja peaharu on mõne kraadi kõrgusel, ei pruugi kaks jaama pikal trassil näha ühtki kihi ühist punkti: kõik efektiivsused on 0 ja kuvatakse hoiatus „ÜHIST TSOONI POLE“ koos peaharu või jälgede kõrgusega, mida oleks vaja. Näide: JN70CN - JO76QP, 1791 km, peaharu 3°, jäljed 88,5 km kõrgusel.
+H2|4.3 Rida 3: arvutuse aeg
+LI|Aeg: UTC kell.
+LI|Arvutuse kuupäev (UTC): arvutuse päev. Kehtib Prognoosarvutuse, Efektiivsuse arvutuse 24 tunni tabeli ja GRAVES-radari ajajoone kohta. Vaikimisi on see tänane päev ja keskööl läheb see üle uuele päevale.
+LI|Tunnid (−12 kuni +36 h): nihutab arvutuse hetke 15-minutiliste sammudega. Kõrval: „Arvutus ajale: praegu“ või valitud kuupäev ja kellaaeg.
+LI|Reaalaeg: naaseb praegusele hetkele.
+H2|4.4 Oma jaama seadistamine
+TAG|PROCEDURA|1) Kirjuta Minu lokaator ja kõrgus. 2) Kirjuta korrespondendi lokaator ja kõrgus või klõpsa Prognoosarvutuse kaardil: vasak klõps = korrespondent, parem klõps = sinu jaam. 3) Vali sagedusala. 4) Kirjuta oma antenni poomi pikkus ja peaharu kõrgusnurk. 5) Vajuta Arvuta: olekuriba kinnitab „Trass arvutatud: ... km, ... peegelduspunkti valimiga“.
+TAG|NOTA|Seaded salvestatakse faili data/config.ini programmi sulgemisel ja iga arvutuse järel: järgmisel käivitamisel leiad eest sama trassi.
+H1|5. Prognoosarvutus
+P|Rühma Prognoosarvutus esimene alamsakk näitab ühel ekraanil, kuhu kasulikud jäljed praegu langevad ja kuhu antenn suunata. Kõik viitab kuupäeva ja tunniliuguriga valitud hetkele.
+H2|5.1 Kokkuvõtteriba
+P|Kaardi kohal võtab riba kokku arvutuse selle hetke kohta: kuupäev ja kellaaeg, trassi indeks (aktiivsete meteoorivoolude ZHR × efektiivsus summa), kõige kasulikum meteoorivool koos ZHR-i ja efektiivsusega (ka dB-des DJ5HG etaloni suhtes), horisondist kõrgemal olevate meteoorivoolude arv ning soovitatud Hot koos asimuudiga.
+H2|5.2 Pealtvaate kaart
+P|Vasakul Euroopa kaart pealtvaates (ida paremal), ümberringi kraadiskaalaga:
+LI|roheline joon: tegelik trass kahe lokaatori vahel;
+LI|Hot A ja Hot B: kaks hot spot'i keskpunkti mõlemal küljel. Punane = soovitatud, roosa = väljaspool antenni peaharu, hall = juba peaharu sees (koos hoiatusega);
+LI|antenni peaharu: sektor -3 dB tasemel antenni asimuudi ümber;
+LI|Piir A ja Piir B, kahvatult: mõlemast jaamast nähtava taeva kaugeimad servad, mitte punktid, kuhu antenn suunata;
+LI|kollane joon: suund, milles valitud (või kõige soodsam) meteoorivool taevast pühib; oranžid punktid: kaks risti asetsevat antennisuunda (radiandi asimuut ±90°);
+LI|PREV alad, heledad ellipsid: kuhu kõige tõenäolisemad jäljed praegu langevad, üks kummalgi pool trassi.
+P|Vasak klõps kaardil = korrespondendi lokaator, parem klõps = sinu jaama lokaator; trass arvutatakse kohe uuesti. Legend on kokkupandav veerg kaardist paremal. Meteoorivoolude loendi kohal olevad märkeruudud lülitavad sisse ja välja Hot-suunad, Euroopa kaardi ja pealtvaate.
+H2|5.3 Meteoorivoolude loend
+P|Iga meteoorivoolu kohta: nimi ja IMO kood, ZHR sel hetkel, radiandi asimuut ja kõrgusnurk sinu jaamast vaadatuna, efektiivsus trassi jaoks, valdav pool (A või B), parim antennisuund, radiandi tõus ja loojang. Klõps real valib meteoorivoolu: kollane joon ja oranžid punktid järgivad seda.
+H2|5.4 Väike taevavõlv ja arvutuse tekst
+P|Sinu jaamast nähtavad radiandid IMO koodi ja ööpäevase teekonnaga tsüaanis. Kollane = efektiivsus vähemalt 50 % ja ZHR vähemalt 2; oranž = vähemalt 20 %; tumepunane = vähem; hall = peaaegu mitteaktiivne. Seniidi läbiv oranž joon annab õiged antennisuunad, risti meteoorivoolu liikumisega. Kõrval on arvutuse tekst: trass, keskpunkt, soovitatud Hot koos oodatavate peegelduste protsendiga, ühisala piirid.
+H2|5.5 Läbilõige
+P|All paremal kõige tõenäolisemad jäljed antennist korrespondendi suunas vaadatuna: horisontaalteljel asimuut korrespondendi suhtes (A vasakul, B paremal), vertikaalteljel kõrgusnurk. Iga jälg on radiandi poole suunatud lõik, seda jämedam, mida tõenäolisem see on. Joonisel on ka antenni peaharu, korrespondent ja Hot-punktid.
+H2|5.6 Hoiatused
+LI|HOIATUS: Hot A (või Hot B) jääb antenni peaharusse: selle suunaga on see hot spot juba kaetud.
+LI|RADIANT LIIGA KÕRGEL: kasulik radiant on üle 70°; jäljed langevad peaaegu vertikaalselt ja peegeldavad trassi suunas vähe.
+LI|MADAL RADIANT PIKI TRASSI: arvutatud efektiivsus jääb madalaks, kuid trassiga joondatud libisevate jälgede korral ennustab DJ5HG harvu ja tugevaid peegeldusi: tasub kuulata.
+LI|TRASS JÄLJE HORISONDIST KAUGEMAL: jälgede kõrgusel on keskpunkt horisondi all; hoiatus ütleb, milline kõrgus oleks vajalik.
+LI|ÜHIST TSOONI POLE: ükski kihi punkt pole nähtav mõlemast jaamast; hoiatus ütleb, kui palju puudu jääb ja mida oleks vaja.
+H1|6. Geomeetria ja sumbumine
+P|Trassi tekstiline aruanne, mida saab valida ja kopeerida, ning paremal graafik antenni kõrgusnurgast sõltuvalt kaugusest peegelduspunktini kolme jälgede kõrguse jaoks.
+H2|6.1 Selle saki andmed
+LI|Võimsus W (400), Antenni võimendus dBi (14; sama antenn mõlemas otsas), Minimaalne signaal dBm (-130), jälje tihedus q = 10^14 elektroni/m: vajalikud lingi eelarve jaoks.
+LI|Jälje algraadius: ITU kahekordne (Stober 2021, ettevaatlik, vaikimisi), ITU-R P.843 või välja jäetud. Mida suurem on raadius, seda suurem on kadu kõrgetel sagedustel.
+LI|Pingide kestus sagedusalade vahel: teoreetiline λ² (McKinley, SM6FHZ; ettevaatlik, vaikimisi) või vaadeldud (NN4SA HamSCI MSQP mõõtmised, Perseiidid 2026: 50-lt 144 MHz-le lühenevad pingid 1,5 korda, mitte 8 korda).
+H2|6.2 Aruanne
+LI|TRASSI GEOMEETRIA: jaamad ja kõrgused, kaugus, asimuut, keskpunkt, jälgede kõrgus, antenni kõrgusnurk keskpunkti suunas.
+LI|HOT A / HOT B: iga hot spot'i lokaator, asimuut, kõrvalekalle otsesuunast, kaugus ja kõrgusnurk.
+LI|ÜHISALA PIIRID: ulatus jälgede kõrgusel kuni horisondini, antenni peaharu koos maksimumi ja vertikaalse laiusega, Piir A ja Piir B; Yagi antenni võimendus ja peaharu.
+LI|TRASSI SUMBUMINE: keskpunkti, Hot A ja Hot B jaoks sagedustel 28, 50, 70, 144, 222 ja 432 MHz (trassi tasandit lõikav jälg, kõige ebasoodsam juhtum).
+LI|LINGI EELARVE: võimsus ja EIRP, sumbumine, signaal antennis, minimaalne signaal ja varu; parim juhtum (jälg trassi tasandis) ja varu OH5IY keskmise sumbumisega.
+LI|EKSPERIMENTAALSED REEGLID SAGEDUSALADE VAHEL: peegelduste arv, tugevus ja kestus võrreldes 144 MHz-ga; IARU maksimaalne ping; MSQP mõõtmistest vaadeldud kestus.
+TAG|NOTA|Positiivne varu tähendab, et keskmisest alatihedast jäljest piisab trassi läbimiseks sinu jaamaga; negatiivne varu tähendab, et vaja on tihedamaid jälgi või ületihedaid meteoore. See on hinnang: aluseks jääb kogemus sagedusalal.
+H1|7. Efektiivsuse arvutus
+P|Efektiivsus näitab protsentides, kui palju meteoorivoolu radiandi asend võimaldab peegeldusi sinu trassil: 100 % on selle trassi jaoks kõige soodsam asend. See alamsakk näitab seda tund-tunnilt „Arvutuse kuupäeva“ päeva kohta, väärtustega iga tunni keskel.
+H2|7.1 Neli kasti
+LI|PÄEVA PARIM AEG: kõrgeima trassi indeksiga tund ja valdav pool.
+LI|KÕIGE SOODSAM METEOORIVOOL: kõige suurema panusega meteoorivool koos tunni, poole ja kahe parima antennisuunaga.
+LI|PRAEGU: indeks ja pool selles tunnis ning soovitatud Hot (ainult siis, kui valitud päev on täna).
+LI|EKSPERIMENTAALNE PROGNOOS: oodatavad peegeldused tunnis praegu, 1 ja 2 tunni pärast (peatükk 8).
+P|Kui kastis pole väärtusi, ütleb see põhjuse: ühisala puudub, aktiivset meteoorivoolu pole või radiandid on terve päeva ebasoodsad. Iga kasti kohtspikker selgitab, mida see näitab. Kastide all kuvatakse vajadusel hoiatus ÜHIST TSOONI POLE ja riba, mis selgitab tähti A ja B.
+H2|7.2 Arvutuse seadistus
+LI|Ettevaatlik (vaikimisi): jälgede kõrgus radarilt, tavalised jäljed, nurk β sisse lülitatud. Annab kõige madalamad väärtused.
+LI|Nagu DJ5HG: fikseeritud kõrgus 102 km, pikemad jäljed madala radiandi korral, nurk β sisse lülitatud; jäljendab programmi QTFGUI.
+LI|Kohandatud: valitakse ise, kui muudad käsitsi mõnda märkeruutu või kõrgust.
+LI|Pikemad jäljed madala radiandi korral (DJ5HG): madala radiandi korral langeb vähem meteoore, kuid jäljed on pikemad ja peegeldavad sagedamini; umbes 9° kohal tasakaalustavad need kaks mõju teineteist.
+LI|Nurk β jälje ja trassi vahel (täielik McKinley), oranžis raamis kirjaga „kõige kaalukam valik“: sisselülitatuna on trassi tasandit lõikavad jäljed 10-15 dB nõrgemad kui selles tasandis asuvad ja ülekaalus on trassiga joondatud radiandid. Väljalülitatuna kehtib klassikaline reegel: parim radiant on 15-70° kõrgusel ja trassiga risti.
+LI|Klassikaline otsus: lisab iga meteoorivoolu alla rea „klassikaline“ raadioamatööride reegli otsusega trassi keskpunktis: ✗ radiant horisondi all, ◐ piiripealne (liiga madal, liiga kõrge või peaaegu trassiga joondatud), ● hea, ★ suurepärane (trassiga risti). Arvutust ei muuda.
+TAG|ATTENZIONE|Nurk β muudab pikkadel trassidel väärtusi palju: JN70CN - JO76QP (1791 km), Geminiidid 14/12/2026, 98 % väljalülitatud β-ga ja 13 % sisselülitatud β-ga. Kahel seisukohal on erinevad allikad ja esimene võrdlus BRAMS-i loendustega ei erista neid: võrdle kaht juhtumit kogemusega sagedusalal. Protsendid on suhtelised selle trassi jaoks parima radiandi asendi suhtes; erinevate trasside võrdlemiseks kasutatakse efektiivsust dB-des.
+H2|7.3 Kui palju numbreid usaldada
+P|Parimad tunnid ja pool on kõige kindlam teave: need muutuvad arvutuse seadetega vähe. Protsendid sõltuvad seevastu palju valikutest, eriti nurgast β. Võrdlus 181 767 tegeliku MSK144 spotiga sagedusel 50 MHz (HamSCI, Perseiidid 11.-12. august 2025) kinnitab trassi indeksi tunnipõhist käiku, kuid näitab ka, et see, millised jaamapaarid teatud tunnil üksteist kuulevad, sõltub peamiselt sporaadilistest meteooridest ja eetris olevast aktiivsusest, mida mudel ei sisalda.
+TAG|NOTA|Kasuta programmi tunni ja selle poole valimiseks, kuhu antenn pöörata; ära loe protsente side õnnestumise tõenäosusena.
+H2|7.4 Graafik
+P|Kuni viie meteoorivoolu jaoks: efektiivsus pideva joonena ja DH9GCD valem sama värvi punktiirjoonena; trassi indeks tulpadena parempoolsel skaalal. Kohalik aeg on kirjutatud UTC aja alla.
+H2|7.5 24 tunni tabel
+LI|Üks rida iga sel päeval aktiivse meteoorivoolu kohta, 24 veergu UTC tundide jaoks.
+LI|63A: efektiivsus 63 %, enamik peegeldusi poolelt A; 41B: pool B; number ilma täheta: alla 5 %; tühi lahter: alla 1 %; ↑: radiant üle 70° (liiga kõrgel); soojem värv = kõrgem efektiivsus.
+LI|A = vasakul, kui vaadata oma jaamast korrespondendi suunas (Hot A ala); B = paremal (Hot B ala). Antenn tasub pöörata 10-30° selle poole suunas (side-scatter).
+LI|Helesinised read DH9GCD %: DH9GCD parima suuna valem võrdluseks; see ei arvesta horisonti ega peaharu.
+LI|Rida Σ: trassi indeks, kõigi aktiivsete meteoorivoolude ZHR × efektiivsus summa.
+LI|Oranž rida: peegelduste tunnipõhine eksperimentaalne prognoos nende tundide jaoks, mil see on olemas.
+TAG|PROCEDURA|Skedi aja valimiseks: määra kuupäev, vaata rida Σ ja kasti PÄEVA PARIM AEG; loe valitud meteoorivoolu realt täht A või B ja pööra antenn 10-30° selle poole suunas. Hoia hiirt lahtri kohal, et lugeda selle tunni Hot-i üksikasju.
+H1|8. Eksperimentaalsed prognoosid
+P|Teisendab Collmi radari (36,2 MHz) loendused peegelduste hinnanguks tunnis raadioamatööride sagedusalal (vaikimisi 144 MHz, 28 kuni 1300 MHz), teeb sinu trassi jaoks järgmise 24 tunni prognoosi ja võrdleb seda RMOB-i vaatlejaga. Kõik siin on eksperimentaalne: numbrid on mõeldud tundide ja päevade võrdlemiseks.
+H2|8.1 Juhtnupud
+LI|Sihtsagedus MHz: prognoosi sagedus.
+LI|λ^k astendaja (3, SM6FHZ) ja Jaama tegur K (1): sageduse reegel ja parandus sinu jaama jaoks.
+LI|k populatsiooniindeksitest: pakub k väärtuse aktiivsete meteoorivoolude populatsiooniindeksite r põhjal (GMN, muidu IMO; k = 3,75 · log10 r, kaalutud ZHR-iga) ja küsib enne rakendamist kinnitust.
+LI|Laadi RMOB-fail kettalt ja Leia astendaja RMOB-failist: loevad kuise RMOB-faili ja leiavad k Collmiga ühiste tundide põhjal.
+LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal.
+H2|8.2 Tulemused
+LI|Eilse ja tänase päeva graafik: meteoorid tunnis Collmis, sinu sagedusele teisendatud väärtused ja, kui need on laaditud, RMOB-i loendused.
+LI|Järgmise 24 tunni prognoos: eelmise päeva sama tund, parandatuna trassi meteoorivoolude indeksi muutusega.
+LI|Tabel hinnanguga: hea, keskmine või kehv võrreldes 24 tunni keskmisega.
+TAG|NOTA|Peegelduste kestus järgib valikut „Pingide kestus sagedusalade vahel“ sakil Geomeetria ja sumbumine; forward scatteri korral kasvab kestus ka koos sec²φ-ga trassi keskpunktis.
+H1|9. Otse ja reaalajas andmed
+H2|9.1 Liiklus reaalajas
+P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede pilv. Äsja saabunud spotid vilguvad ühe minuti.
+LI|Kaardi raadius: 600-3500 km. Näidatavad spotid: viimased 15 või 30 minutit, viimane tund, viimased 3 või 24 tundi.
+LI|Klõps trassil või tabeli real tõstab side esile ja näitab pilve keskpunkti, selle kõrgust ja mõõtmeid.
+H2|9.2 Radari voog
+P|Collmi SKiYMET-radari (36,2 MHz) meteooride tunniloendused ja jälgede kõrgused ning Sodankylä radari (36,9 MHz) viimane pilt.
+LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud.
+LI|λ astendaja (SM6FHZ): sinu sagedusala hinnangu astendaja (oranž joon parempoolsel skaalal).
+LI|Jälgede kõrgused: histogramm moodi, keskmise, mediaani ja standardhälbega; valikuga „radarilt“ saab moodist kõigi arvutuste kõrgus.
+TAG|ATTENZIONE|Kui Collmi graafiku skaalat ei õnnestu lugeda, kuvatakse oranž hoiatus ja väärtusi tuleb kontrollida. Ühenduseta kasutab programm viimati salvestatud andmeid, ütleb seda üks kord ja proovib ise uuesti iga 5 minuti järel; olekuriba muutub punaseks, kuni ühendus taastub.
+H2|9.3 GRAVES-radar
+P|GRAVES saadab CW-d sagedusel 143,050 MHz asukohast Broye-lès-Pesmes (JN27SI). Alamsakk käsitleb GRAVES → sina eraldi meteor scatteri trassina: arvutab efektiivsuse, soovitatud Hot-i ja PREV alad, kontrollib, kas ala on kiire sees ja millal kiir seda valgustab.
+LI|Praegu: viib arvutuse tagasi reaalaega. Määra GRAVES DX-iks: korrespondendiks saab GRAVES. Kiire järjestus: 0,8 s sammu kohta (PE1ITR 2021) või 3,2 s (2007).
+LI|Kaardid: KASULIK ALA KIIRES, GRAVES → SINA TRASSI EFEKTIIVSUS PRAEGU (oodatavate kajadega, eksperimentaalne), TRASS (kuhu suunata), KIIRE JÄRGMINE MÖÖDUMINE.
+LI|Päeva kronoloogiline rekonstruktsioon ja järgmiste sekundite üksikasjad.
+TAG|PROCEDURA|GRAVESi kuulamiseks: USB sagedusel 143,049 MHz (toon umbes 1 kHz juures), aeglane või välja lülitatud AGC, helisagedusriba vähemalt 2,4 kHz; antenn kaardil TRASS soovitatud hot spot'i suunas madala kõrgusnurgaga; arvuti kell sünkroniseeritud. Pingid on kosejoonisel (waterfall) lühikesed jooned kandesageduse lähedal.
+H2|9.4 Andmete kogumine
+P|Kogub meteor scatteri spotte kolmest telneti voost (DX-klaster, RBN, DM4X PSKReporteri spottidega) ja PSKReporteri MQTT voost, igaüks oma alamsakil, ning filtreerib neid.
+LI|Kirjuta üles sisselogimiseks oma kutsung. Igal vool on host, port, käsud pärast sisselogimist, Ühenda uuesti, Ühenda käivitamisel ja konsool.
+LI|Filter võtab vastu spotid meteor scatterile tüüpilistel sagedustel (50190-50300, 70100-70400, 144290-144399 kHz) või MS-moodiga (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ja jätab kõrvale need, mis märgivad teist levi. Aknaid ja sõnu saab muuta; igaühel on oma loendur.
+LI|Puuduvad lokaatorid võetakse CALL3 arhiivist; vastu võetud spotid salvestatakse kausta data/spot_ms, üks fail päevas, ja kuvatakse Liiklus reaalajas kaardil.
+H1|10. Meteoorivoolud reaalajas ja meteoorivoolude kataloog
+H2|10.1 Meteoorivoolud reaalajas
+P|Vasakul Global Meteor Networki mõõdetud voog ja ZHR aktiivsete meteoorivoolude kohta koos GMN-i kaamerate päevaste loendustega voolude kaupa (loendus, mitte voog: see sõltub sellest, mitu jaama näeb selget taevast); paremal CMOR-radari radiantide kaardid, sealhulgas päevaste meteoorivoolude omad. Failid laaditakse uuesti alla ainult siis, kui need on muutunud, kõige rohkem iga 30 minuti järel, või nupuga Laadi kohe alla.
+H2|10.2 Meteoorivoolud
+P|Kõigi arvutuste kasutatav kataloog: IMO 2026. ja 2027. aasta kalendri meteoorivoolud pluss Antiheeliumi allikas. Täna aktiivsed meteoorivoolud on esile tõstetud.
+LI|Kood, nimi, aktiivsusperiood, maksimumi päikesepikkus, järgmine maksimum (UTC) ja selle allikas (IMO või arvutatud), radiant, kiirus, populatsiooniindeks r, ZHR, tüüp (visuaalne või päevane raadio).
+LI|k: sageduse teisenduse astendaja populatsiooniindeksist (GMN, kui on saadaval, muidu IMO).
+LI|IAU MDC: lahendused, Δ radiant, Δλ, Δv: võrdlus IAU Meteor Data Centeri kataloogiga (avaldatud lahendused ja programmi kataloogi erinevused nende mediaanist).
+LI|GMN täna: kinnitatud trajektoorid Global Meteor Networki viimases päevafailis.
+TAG|NOTA|Kataloog on fail data/sciami.csv ja IMO maksimumid on failis data/massimi_imo.csv: neid saab muuta tekstiredaktoriga. Vigane rida märgitakse käivitamisel ära ja jäetakse arvestamata.
+H1|11. Ruutude kaart
+P|Sinu logi ADIF-failist loetud töötatud (oranž) ja kinnitatud (roheline, QSL või LoTW) Maidenheadi ruudud Euroopa kaardil, iga sagedusala jaoks oma alamsakk: 50, 70, 144, 222 ja 432 MHz.
+LI|Laadi ADIF-fail: loeb .adi- või .adif-faili; uus fail asendab eelmise. Tühjenda mälu: kustutab laaditud ruudud.
+LI|Hiireratas = suumimine, lohistamine = liigutamine, hiir ruudu kohal = selle ruudu QSO-d.
+TAG|NOTA|YA-MS ei ühendu LoTW-ga: ekspordi ADIF oma logiprogrammist või LoTW-st ja laadi see siia.
+H1|12. Tehnilised dokumendid
+LI|Kasutusjuhend: see dokument.
+LI|Allikad: kõik programmi allikad koos viidetega.
+LI|Euroopa radarite kaart: kus asuvad Collm, Sodankylä, GRAVES ja CMOR sinu jaama suhtes, koos iga radari poolt nähtava taevaga.
+LI|Tõhususe arvutuse selgitus: kuidas efektiivsust arvutatakse, samm-sammult, siltidega ALLIKAS, KONTROLL ja VALIK.
+P|Dokumendid järgivad kasutajaliidese keelt, kui tõlge on olemas, muidu on need itaalia keeles. „Ekspordi Wordi (.docx)“ salvestab koopia sinu valitud kohta; „Ava Wordis“ avab selle vaikeprogrammiga. Arvutuste juhend kõigi võrranditega on kaustas doc (itaalia keeles) ja doc/manuali (teised keeled).
+H1|13. Kaust data ja seaded
+H2|13.1 Peamised failid
+LI|config.ini: kõik seaded (tekst, võti=väärtus).
+LI|lingue/: kasutajaliidese tõlked; mappa/: Euroopa kaart.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: meteoorivoolude kataloog ja Antiheeliumi allika asukoht; regole_sperimentali.csv: sagedusalade vahelised reeglid.
+LI|flusso_collm.csv, quote_collm.csv: Collmi radari arhiivid; radar/: viimased pildid, RMOB-failid ja reaalajas allikate andmed; fonti_radar.csv: allikate aadressid, mida saab ükshaaval lubada.
+LI|cataloghi/: IAU MDC kataloog; radar/diretta/: GMN-i ja CMOR-i andmed.
+LI|call3.txt: lokaatorite arhiiv; spot_ms/: kogutud meteor scatteri spotid; adif_quadrati.csv: ADIF-ist saadud ruudud.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehnilised dokumendid.
+LI|backup/: uuendusega asendatud failide koopiad; aggiornamento/: alla laaditud pakett (kustutatakse taaskäivitamisel).
+H2|13.2 Mõned config.ini võtmed
+LI|controlla_aggiornamenti=0: ära kontrolli uusi versioone; aggiornamenti_salta: vahele jäetud versioon.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: arvutuse märkeruudud.
+LI|raggio_iniziale (0 = ITU kahekordne, 1 = ITU, 2 = välja jäetud), durata_ping (0 = λ², 1 = vaadeldud).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Muuda faili config.ini ainult siis, kui programm on suletud: sulgemisel kirjutab YA-MS selle üle.
+H1|14. Tüüpilised toimingud
+H2|14.1 Skedi ettevalmistamine meteoorivoolu ajaks
+TAG|PROCEDURA|1) Seadista kaks jaama ja vajuta Arvuta. 2) Kontrolli sakil Meteoorivoolud meteoorivoolu järgmist maksimumi. 3) Pane see kuupäev väljale Arvutuse kuupäev. 4) Vaata sakil Efektiivsuse arvutus meteoorivoolu rida ja rida Σ: vali kõrgeima efektiivsusega tunnid. 5) Märgi üles pool (A või B) ja pööra antenn 10-30° selle poole suunas. 6) Kontrolli sakil Geomeetria ja sumbumine lingi eelarve varu.
+H2|14.2 Seansi jälgimine reaalajas
+TAG|PROCEDURA|1) Vajuta Reaalaeg. 2) Jälgi sakil Prognoosarvutus soovitatud Hot-i ja PREV alasid, mis uuenevad iga minut. 3) Kontrolli sakil Radari voog, et Collmi radar loendab meteoore. 4) Vaata sakil Liiklus reaalajas, kes on eetris ja kuhu nende jäljed langevad.
+H2|14.3 Jaama proovimine GRAVESiga
+TAG|PROCEDURA|1) Kontrolli sakil GRAVES-radar kaarti KASULIK ALA KIIRES. 2) Suuna antenn nii, nagu ütleb kaart TRASS. 3) Kuula USB-s sagedusel 143,049 MHz kiire järgmise möödumise akendes. 4) Võrdle pinge oodatavate kajade ja RMOB-i vaatlejatega.
+H2|14.4 Prognoosi kalibreerimine RMOB-iga
+TAG|PROCEDURA|1) Laadi sakil Eksperimentaalsed prognoosid sinu sagedusala vaatleja kuine RMOB-fail. 2) Vajuta Leia astendaja RMOB-failist ja nõustu k-ga, kui ühiseid tunde on piisavalt. 3) Sea jaama tegur K soovitatud väärtusele.
+H1|15. Sagedased probleemid
+LI|Kõik efektiivsused on 0: loe hoiatust ÜHIST TSOONI POLE. Kui „antenni suunadiagramm“ on välja lülitatud, vähenda peaharu kõrgusnurka; muidu on trass jälgede kõrgusel horisondist kaugemal.
+LI|Väärtused on palju madalamad kui DH9GCD-l või vanemas versioonis: kontrolli nurga β märkeruutu (peatükk 7.2).
+LI|„Jaama lokaator on vigane“: kirjuta 4, 6 või 8 märgiga lokaator (näiteks JN70CN või JN70CN83).
+LI|Hot A ja Hot B on hallid: korrespondendi suunas pööratud antenni korral on need juba peaharu sees; antenni pole vaja pöörata.
+LI|Euroopa kaart puudub: esimesel käivitamisel on vaja võrguühendust; programm proovib ise uuesti.
+LI|Tekst on liiga väike või graafikutel pole ruumi: kasuta valikut Font ja nuppu Juhtnupud.
+LI|GRAVESi kiire möödumine tundub nihkes olevat: sünkroniseeri arvuti kell NTP-serveriga; juhtimisjaam nihutab kiire järjestust mõnikord.
+LI|Linux, hiina või jaapani tekst ruudukestena: paigalda Noto CJK fondid.
+H1|16. Kontaktid
+P|YA-MS on tasuta programm raadioamatööridele, mille on koostanud Costantino IC8TEM (Capri). Veateated, ettepanekud ja võrdlusandmed on teretulnud: märgi operatsioonisüsteem, YA-MS-i versioon ja mida sa tegid. Kood ja väljalasked: github.com/ic8tem/YA-MS. Kontaktid: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Kes soovib tööd toetada, saab seda teha aadressil ko-fi.com/ic8tem.

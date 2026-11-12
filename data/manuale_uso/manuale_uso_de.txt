@@ -1,0 +1,233 @@
+TITLE|Bedienungsanleitung von YA-MS
+SUB|Version 1.8.1 - von Costantino IC8TEM - November 2026
+H1|1. Einführung
+H2|1.1 Wozu YA-MS dient
+P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
+P|Das Programm ist kostenlos, läuft unter Windows, Linux (auch Raspberry Pi) und macOS und ist in 36 Sprachen übersetzt. Es steuert weder das Funkgerät noch den Rotor: Für die Verbindung nutzt du dein gewohntes Programm für digitale Betriebsarten (MSHV, WSJT-X).
+H2|1.2 So liest du dieses Handbuch
+P|Das Handbuch beschreibt die Reiter einzeln, beginnend mit der Vorhersageberechnung. Jedes Kapitel sagt, was der Reiter zeigt, was jedes Bedienelement tut und wie die Ergebnisse zu lesen sind. Kapitel 14 fasst die häufigsten Vorgehensweisen zusammen, Kapitel 15 die häufigen Probleme. Wie die Effektivität berechnet wird, mit Quellen und Prüfungen, erklärt das Dokument „Erklärung der Wirkungsgradberechnung“; die vollständigen Gleichungen stehen im Berechnungshandbuch (Ordner doc).
+TAG|PROCEDURA|Schritte, die der Reihe nach auszuführen sind.
+TAG|NOTA|nützliche Information, um eine Funktion besser zu verstehen oder zu nutzen.
+TAG|ATTENZIONE|häufiger Fehler, Grenze der Berechnung oder Verhalten, das man kennen sollte.
+P|Die Namen der Bedienelemente sind so geschrieben, wie sie in der deutschen Fassung des Programms erscheinen; in den anderen Sprachen haben sie denselben Platz und dieselbe Reihenfolge.
+H1|2. Installation, Start und Aktualisierungen
+H2|2.1 Welches Paket herunterladen
+P|Alle Pakete stehen auf der Release-Seite bei GitHub (github.com/ic8tem/YA-MS/releases). .NET muss nicht installiert werden: Es ist bereits im Paket enthalten.
+LI|Windows 64 Bit: YA-MS-<Version>-windows-x64-setup.exe (installiert nach C:\YA-MS, ohne Administratorrechte) oder das portable Zip, das in einen beliebigen Ordner entpackt wird. Für 32-Bit-Windows dieselben Dateien mit x86.
+LI|Linux (Debian, Ubuntu, Mint): das .deb-Paket, zu installieren mit sudo apt install ./ya-ms_<Version>_amd64.deb; beim ersten Start kopiert sich das Programm nach ~/YA-MS. Für die anderen Distributionen das .tar.gz, das entpackt und mit ./YA-MS gestartet wird.
+LI|Raspberry Pi 3, 4, 5, 400 und 500: das Paket raspberry-pi-64bit (Raspberry Pi OS 64 Bit) oder raspberry-pi-32bit, als .tar.gz oder .deb.
+LI|macOS: das .dmg für Apple Silicon (M1 und neuer) oder für Intel, oder die app.zip. Ziehe YA-MS.app in einen eigenen Ordner (zum Beispiel ~/YA-MS): Der Ordner data wird neben der App angelegt.
+TAG|ATTENZIONE|Windows kann „Der Computer wurde durch Windows geschützt“ anzeigen: Wähle „Weitere Informationen“ und dann „Trotzdem ausführen“. Unter macOS öffne die App beim ersten Mal mit der rechten Maustaste und „Öffnen“. Das Programm ist nicht mit einem kostenpflichtigen Zertifikat signiert.
+H2|2.2 Der erste Start
+P|Beim Start erscheint für einige Sekunden der Startbildschirm mit den Perseiden über dem VLT der ESO. Beim ersten Start wählt YA-MS die Systemsprache, falls sie eine der 36 ist, sonst Italienisch; es lädt die Europakarte (Natural Earth) in den Ordner data/mappa herunter und zeigt eine Beispielstrecke. Wenige Minuten genügen, um es für deine Station einzurichten (Kapitel 4).
+H2|2.3 Der Ordner data
+P|Alle Einstellungen und alle Daten liegen in einem einzigen Ordner data neben dem Programm: kein AppData, keine Systemordner. Um YA-MS auf einen anderen Computer zu übertragen, genügt es, den Programmordner mit seinem Ordner data zu kopieren. Der Inhalt des Ordners ist in Kapitel 13 beschrieben.
+H2|2.4 Automatische Aktualisierungen
+P|Ab Version 1.8.0 prüft YA-MS selbstständig bei GitHub, beim Start und höchstens einmal am Tag, ob eine neue Version erschienen ist. Wenn ja, erscheint das Fenster „Aktualisierung verfügbar“ mit den Neuerungen und drei Schaltflächen:
+LI|Jetzt aktualisieren: lädt das für dein System passende Paket herunter, ersetzt die Programmdateien, behält den Ordner data und startet YA-MS neu. Programmdateien im Ordner data, die die neue Version ändert, werden vorher nach data/backup/v<alte Version> kopiert; deine eigenen Dateien (Einstellungen, Archive, Spots, ADIF) werden nicht angetastet.
+LI|Später: schließt das Fenster; die Prüfung wird am nächsten Tag wiederholt.
+LI|Diese Version überspringen: Diese Version wird beim Start nicht mehr angeboten.
+P|Die Schaltfläche „Aktualisierungen“ unten rechts in der Statusleiste führt dieselbe Prüfung von Hand aus, auch für eine übersprungene Version.
+TAG|ATTENZIONE|Die automatische Aktualisierung muss in den Programmordner schreiben können. Kann sie das nicht (zum Beispiel bei einem in einen Systemordner kopierten Programm), meldet YA-MS das und bietet an, die Release-Seite zu öffnen, um von Hand zu installieren. Die Versionen bis 1.7.0 haben diese Funktion nicht: Beim ersten Mal muss die Aktualisierung von Hand erfolgen, indem man über die vorherige Version installiert.
+TAG|NOTA|Um nicht mehr nach neuen Versionen zu suchen, schreibe controlla_aggiornamenti=0 in die Datei data/config.ini.
+H2|2.5 Fehlende Programmdateien
+P|Beim Start prüft YA-MS, ob alle seine Dateien vorhanden sind (Übersetzungen, Kataloge, Dokumente). Fehlt eine davon, zum Beispiel nach einer unvollständigen Kopie, listet das Fenster „Fehlende Dateien“ sie auf und bietet „Fehlende Dateien herunterladen“ von GitHub in derselben Programmversion an, oder „Ohne weiter“. Dieselbe Prüfung wird beim Drücken von „Aktualisierungen“ wiederholt.
+H1|3. Das Hauptfenster
+H2|3.1 Die Teile des Fensters
+LI|Oben drei Zeilen mit Bedienelementen, die für alle Reiter gelten: Stationen und Band, E-Schicht und Antenne, Berechnungszeitpunkt (Kapitel 4).
+LI|Die Leiste der Hauptreiter, rechts mit der Schaltfläche Bedienung, der Farbgebung (Farbschema) und der Sprache.
+LI|Die Unterreiter, in einer helleren Zeile, für die Reiter, die welche haben.
+LI|Unten die Statusleiste: Meldungen der Berechnung, Hinweise zur Verbindung und die Schaltfläche „Aktualisierungen“.
+H2|3.2 Die Reiter
+LI|Live und Echtzeitdaten: Verkehr live, Radarfluss, GRAVES-Radar, Datensammlung (Kapitel 9).
+LI|Vorhersageberechnung: Vorhersageberechnung, Geometrie und Dämpfung, Effektivitätsberechnung, Experimentelle Vorhersage (Kapitel 5-8).
+LI|Ströme live, Ströme, Feldkarte (Kapitel 10-11).
+LI|Technische Dokumente, als letzter: Bedienungsanleitung, Quellen, Karte der europäischen Radare, Erklärung der Wirkungsgradberechnung (Kapitel 12).
+H2|3.3 Sprache, Farben, Schrift
+LI|Sprache: 36 Sprachen. Beim Sprachwechsel wird das Fenster an derselben Position und auf demselben Reiter neu aufgebaut, ohne Neustart. Zahlen und Datumsangaben folgen der gewählten Sprache (Dezimalkomma auf Italienisch, Dezimalpunkt auf Englisch).
+LI|Farbschema: 12 Farbschemata; Hell ist die Voreinstellung, Nacht und Schwarz sind für den Betrieb im Dunkeln gedacht, Meteorspur ist der ursprüngliche Stil von YA-MS.
+LI|Schrift (am Ende der ersten Bedienzeile): vergrößert den gesamten Text von 100 bis 300 %. Bei großer Schrift werden die Reiter umbrochen.
+LI|Bedienung: klappt die drei Bedienzeilen ein und wieder aus, um Platz für Karten und Diagramme zu schaffen. Die Wahl wird gespeichert.
+TAG|NOTA|Fast jedes Bedienelement hat einen Tooltip: Halte die Maus still über das Element, um zu lesen, wozu es dient und aus welcher Quelle der Ausgangswert stammt.
+H1|4. Station und Strecke einrichten
+H2|4.1 Zeile 1: Stationen und Band
+LI|Mein Locator und Höhe m: dein Maidenhead-Locator (4, 6 oder 8 Zeichen; verwendet wird die Mitte des Feldes) und die Höhe der Station über dem Meeresspiegel.
+LI|Gegenstation und Höhe m: Locator und Höhe der Station, mit der die Verbindung hergestellt werden soll.
+LI|Band MHz: 28, 50, 70, 144, 222 oder 432 MHz. Wird für Gewinn und Keule der Antenne, für Dämpfung und Budget sowie für die Flussschätzung verwendet.
+LI|Berechnen: berechnet die Strecke neu (Abtastung der E-Schicht, weniger als eine Sekunde).
+LI|Antennen-Az.: Azimut der Antenne, immer in Richtung Gegenstation.
+H2|4.2 Zeile 2: E-Schicht und Antenne
+LI|Spurhöhe km und vom Radar: Höhe der Meteorspuren. Ist „vom Radar“ angehakt, wird die vom Radar Collm gemessene häufigste Höhe verwendet (meist 88-90 km); entferne den Haken, um sie von Hand einzugeben.
+LI|Keulenelev. °: Elevation des Maximums der vertikalen Keule deiner Antenne. Ein auf 0° fest montierter Richtstrahler hat seine Hauptkeule wegen der Bodenreflexion trotzdem einige Grad über dem Horizont: meist 3-8°, je nach Antennenhöhe in Wellenlängen.
+LI|Antennendiagramm: eingeschaltet (Voreinstellung) zählen die Reflexionspunkte mit dem vertikalen Gewinn der beiden Antennen: voll um das Keulenmaximum, immer weniger zum Horizont und nach oben hin. Ausgeschaltet ist die Keulenelevation eine harte Grenze: Tiefer gesehene Punkte zählen nicht.
+LI|Yagi: Boomlänge m: Länge des Booms. Daneben schreibt das Programm die Länge in Wellenlängen, den Gewinn (Kurve nach DL6WU) und die horizontale und vertikale -3-dB-Keulenbreite. Unter 2 λ ist die Schätzung ungenau.
+LI|Hot-Spot ab Mittelpunkt km und auto (AMS): Abstand von Hot A und Hot B vom Mittelpunkt. Ist „auto (AMS)“ angehakt, folgt er der von DJ5HG zitierten Tabelle von J. Richardson (13° Abweichung bei 1000 km, 10° über 1500 km); entferne den Haken, um 30-400 km von Hand einzugeben (MSHV verwendet 150 km).
+TAG|ATTENZIONE|Ist „Antennendiagramm“ ausgeschaltet und liegt die Keule bei einigen Grad, sehen die beiden Stationen auf einer langen Strecke unter Umständen keinen gemeinsamen Punkt der Schicht: Alle Effektivitäten sind 0, und es erscheint der Hinweis „KEINE GEMEINSAME ZONE“ mit der Keulenelevation oder Spurhöhe, die nötig wäre. Beispiel: JN70CN - JO76QP, 1791 km, Keule bei 3°, Spuren in 88,5 km.
+H2|4.3 Zeile 3: Berechnungszeitpunkt
+LI|Zeit: UTC-Uhr.
+LI|Berechnungsdatum (UTC): der Tag der Berechnung. Gilt für die Vorhersageberechnung, für die 24-Stunden-Tabelle der Effektivitätsberechnung und für den Zeitverlauf des GRAVES-Radars. Voreingestellt ist heute, und um Mitternacht wechselt es auf den neuen Tag.
+LI|Stunden (−12 bis +36 h): verschiebt den Berechnungszeitpunkt in Schritten von 15 Minuten. Daneben: „Berechnung für: jetzt“ oder das gewählte Datum und die gewählte Uhrzeit.
+LI|Echtzeit: kehrt zum aktuellen Zeitpunkt zurück.
+H2|4.4 Die eigene Station einrichten
+TAG|PROCEDURA|1) Gib unter Mein Locator deinen Locator und die Höhe ein. 2) Gib Locator und Höhe der Gegenstation ein oder klicke auf die Karte der Vorhersageberechnung: Linksklick = Gegenstation, Rechtsklick = deine Station. 3) Wähle das Band. 4) Gib die Boomlänge und die Keulenelevation deiner Antenne ein. 5) Drücke Berechnen: Die Statusleiste bestätigt „Strecke berechnet: ... km, ... Reflexionspunkte abgetastet“.
+TAG|NOTA|Die Einstellungen werden beim Schließen und bei jeder Berechnung in data/config.ini gespeichert: Beim nächsten Start findest du dieselbe Strecke wieder.
+H1|5. Vorhersageberechnung
+P|Der erste Unterreiter der Gruppe Vorhersageberechnung zeigt auf einem Bildschirm, wo die nutzbaren Spuren gerade fallen und wohin du richten solltest. Alles bezieht sich auf den mit dem Datum und dem Stundenregler gewählten Zeitpunkt.
+H2|5.1 Der Übersichtsstreifen
+P|Über der Karte fasst ein Streifen die Berechnung für diesen Zeitpunkt zusammen: Datum und Uhrzeit, Streckenindex (Summe aus ZHR × Effektivität der aktiven Ströme), der nützlichste Strom mit seiner ZHR und seiner Effektivität (auch in dB gegenüber der Referenz von DJ5HG), die Zahl der Ströme über dem Horizont und der empfohlene Hot mit seinem Azimut.
+H2|5.2 Die Karte in Draufsicht
+P|Links die Europakarte von oben gesehen (Osten rechts), mit der Gradskala ringsum:
+LI|grüne Linie: die tatsächliche Strecke zwischen den beiden Locatoren;
+LI|Hot A und Hot B: die beiden Hot-Spots seitlich des Mittelpunkts. Rot = empfohlen, rosa = außerhalb der Antennenkeule, grau = bereits innerhalb der Keule (mit einem Hinweis);
+LI|Antennenkeule: der -3-dB-Sektor um den Antennenazimut;
+LI|Grenze A und Grenze B, blass: die entferntesten Ränder des von beiden Stationen gesehenen Himmels, keine Punkte zum Anpeilen;
+LI|gelbe Linie: die Richtung, in der der gewählte (oder der günstigste) Strom den Himmel überstreicht; orange Punkte: die beiden senkrechten Ausrichtungen (Azimut des Radianten ±90°);
+LI|Zonen PREV, helle Ellipsen: wo die wahrscheinlichsten Spuren gerade fallen, eine für jede Seite der Strecke.
+P|Linksklick auf die Karte = Locator der Gegenstation, Rechtsklick = Locator deiner Station; die Strecke wird sofort neu berechnet. Die Legende ist eine einklappbare Spalte rechts von der Karte. Die Kästchen über der Stromliste schalten die Hot-Richtungen, die Europakarte und die Draufsicht ein und aus.
+H2|5.3 Die Liste der Ströme
+P|Für jeden Strom: Name und IMO-Kürzel, ZHR in diesem Moment, Azimut und Elevation des Radianten von deiner Station aus, Effektivität für die Strecke, vorherrschende Seite (A oder B), beste Ausrichtung, Auf- und Untergang des Radianten. Ein Klick auf eine Zeile wählt den Strom aus: Die gelbe Linie und die orangen Punkte folgen ihm.
+H2|5.4 Das kleine Himmelsgewölbe und der Berechnungstext
+P|Die Radianten von deiner Station aus gesehen, mit dem IMO-Kürzel und der Tagesbahn in Cyan. Gelb = Effektivität mindestens 50 % und ZHR mindestens 2; orange = mindestens 20 %; dunkelrot = weniger; grau = fast inaktiv. Die orange Linie durch den Zenit gibt die richtigen Antennenrichtungen an, senkrecht zur Bewegung des Stroms. Daneben der Berechnungstext: Strecke, Mittelpunkt, empfohlener Hot mit dem Prozentsatz der erwarteten Reflexionen, Grenzen der gemeinsamen Zone.
+H2|5.5 Der Querschnitt
+P|Unten rechts die wahrscheinlichsten Spuren, wie sie die Antenne in Richtung Gegenstation sieht: waagerecht der Azimut bezogen auf die Gegenstation (A links, B rechts), senkrecht die Elevation. Jede Spur ist ein zum Radianten hin ausgerichtetes Segment, umso dicker, je wahrscheinlicher sie ist. Eingezeichnet sind auch die Antennenkeule, die Gegenstation und die Hots.
+H2|5.6 Die Hinweise
+LI|ACHTUNG: Hot A (oder Hot B) liegt in der Antennenkeule: Mit dieser Ausrichtung ist dieser Hot-Spot bereits abgedeckt.
+LI|RADIANT ZU HOCH: Ein nützlicher Radiant steht über 70°; die Spuren verlaufen fast senkrecht und reflektieren wenig in Richtung der Strecke.
+LI|NIEDRIGER RADIANT ENTLANG DER STRECKE: Die berechnete Effektivität bleibt niedrig, aber bei flachen, entlang der Strecke ausgerichteten Spuren erwartet DJ5HG seltene, starke Reflexionen: Zuhören lohnt sich.
+LI|STRECKE JENSEITS DES SPURHORIZONTS: In Spurhöhe liegt der Mittelpunkt unter dem Horizont; der Hinweis sagt, welche Höhe nötig wäre.
+LI|KEINE GEMEINSAME ZONE: Kein Punkt der Schicht ist von beiden Stationen aus sichtbar; der Hinweis sagt, wie viel fehlt und was nötig wäre.
+H1|6. Geometrie und Dämpfung
+P|Ein Textbericht über die Strecke, markier- und kopierbar, und rechts das Diagramm der Antennenelevation in Abhängigkeit von der Entfernung zum Reflexionspunkt, für drei Spurhöhen.
+H2|6.1 Die Eingaben dieses Reiters
+LI|Leistung W (400), Antennengewinn dBi (14; gleiche Antenne an beiden Enden), Min. Signal dBm (-130), Spurdichte q = 10^14 Elektronen/m: Sie dienen dem Verbindungsbudget.
+LI|Anfangsradius der Spur: doppelter ITU-Wert (Stober 2021, vorsichtig, Voreinstellung), ITU-R P.843 oder ausgeschlossen. Je größer der Radius, desto mehr geht bei den höheren Frequenzen verloren.
+LI|Dauer der Pings zwischen den Bändern: theoretisch λ² (McKinley, SM6FHZ; vorsichtig, Voreinstellung) oder beobachtet (Messungen HamSCI MSQP von NN4SA, Perseiden 2026: von 50 auf 144 MHz werden die Pings 1,5-mal statt 8-mal kürzer).
+H2|6.2 Der Bericht
+LI|STRECKENGEOMETRIE: Stationen und Höhen, Entfernung, Azimut, Mittelpunkt, Spurhöhe, Antennenelevation zum Mittelpunkt.
+LI|HOT A / HOT B: Locator, Azimut, Abweichung von der direkten Richtung, Entfernung und Elevation jedes Hot-Spots.
+LI|GRENZEN DER GEMEINSAMEN ZONE: Reichweite in Spurhöhe bis zum Horizont, die Antennenkeule mit ihrem Maximum und ihrer vertikalen Breite, Grenze A und Grenze B; Gewinn und Keule der Yagi.
+LI|STRECKENDÄMPFUNG: für Mittelpunkt, Hot A und Hot B, bei 28, 50, 70, 144, 222 und 432 MHz (Spur, die die Ebene der Strecke kreuzt, der ungünstigste Fall).
+LI|BUDGET: Leistung und EIRP, Dämpfung, Signal an der Antenne, Mindestsignal und Reserve; der günstigste Fall (Spur in der Ebene der Strecke) und die Reserve mit der mittleren Dämpfung nach OH5IY.
+LI|EXPERIMENTELLE REGELN ZWISCHEN DEN BÄNDERN: Anzahl, Stärke und Dauer der Reflexionen bezogen auf 144 MHz; maximaler Ping nach IARU; beobachtete Dauer aus den MSQP-Messungen.
+TAG|NOTA|Eine positive Reserve bedeutet, dass eine mittlere unterdichte Spur genügt, um die Strecke mit deiner Station zu schließen; eine negative Reserve bedeutet, dass dichtere Spuren oder überdichte Meteore nötig sind. Es ist eine Schätzung: Maßstab bleibt die Erfahrung auf dem Band.
+H1|7. Effektivitätsberechnung
+P|Die Effektivität gibt in Prozent an, wie sehr die Lage des Radianten eines Stroms Reflexionen auf deiner Strecke ermöglicht: 100 % ist die günstigste Lage für diese Strecke. Dieser Unterreiter zeigt sie Stunde für Stunde für den Tag des „Berechnungsdatums“, mit den Werten zur Mitte jeder Stunde.
+H2|7.1 Die vier Felder
+LI|BESTE TAGESZEIT: die Stunde mit dem höchsten Streckenindex und die vorherrschende Seite.
+LI|GÜNSTIGSTER STROM: der Strom mit dem größten Beitrag, mit Stunde, Seite und den beiden besten Ausrichtungen.
+LI|JETZT: Index und Seite in dieser Stunde und der empfohlene Hot (nur wenn der gewählte Tag heute ist).
+LI|EXPERIMENTELLE VORHERSAGE: erwartete Reflexionen pro Stunde jetzt, in 1 und in 2 Stunden (Kapitel 8).
+P|Wenn ein Feld keine Werte hat, sagt es warum: keine gemeinsame Zone, kein aktiver Strom oder ungünstige Radianten für den ganzen Tag. Der Tooltip jedes Feldes erklärt, was es zeigt. Unter den Feldern stehen bei Bedarf der Hinweis KEINE GEMEINSAME ZONE und ein Streifen, der die Buchstaben A und B erklärt.
+H2|7.2 Die Einstellung der Berechnung
+LI|Vorsichtig (Voreinstellung): Spurhöhe vom Radar, normale Spuren, Winkel β eingeschaltet. Ergibt die niedrigsten Werte.
+LI|Wie DJ5HG: feste Höhe von 102 km, längere Spuren bei niedrigem Radianten, Winkel β eingeschaltet; bildet das Programm QTFGUI nach.
+LI|Benutzerdefiniert: wird automatisch gewählt, wenn du eines der Kästchen oder die Höhe von Hand änderst.
+LI|Längere Bahnen bei niedrigem Radianten (DJ5HG): Bei niedrigem Radianten fallen weniger Meteore, aber die Spuren sind länger und reflektieren häufiger; oberhalb von etwa 9° heben sich die beiden Effekte auf.
+LI|Winkel β zwischen Spur und Strecke (vollständiger McKinley), im orangen Feld mit der Aufschrift „die Wahl mit der größten Wirkung“: Eingeschaltet sind Spuren, die die Ebene der Strecke kreuzen, 10-15 dB weniger wert als solche, die in ihr liegen, und es überwiegen die entlang der Strecke ausgerichteten Radianten. Ausgeschaltet gilt die klassische Regel: Der beste Radiant steht 15-70° hoch und quer zur Strecke.
+LI|Klassisches Urteil: fügt unter jedem Strom die Zeile „klassisch“ mit dem Urteil der Funkamateur-Regel am Mittelpunkt der Strecke hinzu: ✗ Radiant unter dem Horizont, ◐ grenzwertig (zu niedrig, zu hoch oder fast entlang der Strecke), ● gut, ★ sehr gut (quer zur Strecke). Die Berechnung ändert sich dadurch nicht.
+TAG|ATTENZIONE|Der Winkel β verändert die Werte auf langen Strecken stark: JN70CN - JO76QP (1791 km), Geminiden am 14.12.2026, 98 % mit ausgeschaltetem β und 13 % mit eingeschaltetem β. Die beiden Thesen haben unterschiedliche Quellen, und ein erster Vergleich mit den BRAMS-Zählungen unterscheidet sie nicht: Vergleiche die beiden Fälle mit deiner Erfahrung auf dem Band. Die Prozentwerte beziehen sich auf die beste Radiantenlage für diese Strecke; um verschiedene Strecken zu vergleichen, verwendet man die Effektivität in dB.
+H2|7.3 Wie sehr man den Zahlen trauen kann
+P|Die besten Stunden und die Seite sind die verlässlichsten Angaben: Sie ändern sich mit den Einstellungen der Berechnung kaum. Die Prozentwerte hängen dagegen stark von den gewählten Optionen ab, vor allem vom Winkel β. Der Vergleich mit 181 767 echten MSK144-Spots auf 50 MHz (HamSCI, Perseiden vom 11.-12. August 2025) bestätigt den stündlichen Verlauf des Streckenindex, zeigt aber auch, dass es vor allem von den sporadischen Meteoren und der Aktivität auf dem Band abhängt, welches Stationspaar sich zu einer bestimmten Stunde hört, und beides enthält das Modell nicht.
+TAG|NOTA|Nutze das Programm, um die Uhrzeit und die Seite zu wählen, zu der du die Antenne drehst; lies die Prozentwerte nicht als Erfolgswahrscheinlichkeit der Verbindung.
+H2|7.4 Das Diagramm
+P|Für bis zu fünf Ströme: die Effektivität als durchgezogene Linie und die Formel von DH9GCD als gepunktete Linie in derselben Farbe; der Streckenindex als Balken auf der rechten Skala. Die Ortszeiten stehen unter den UTC-Zeiten.
+H2|7.5 Die 24-Stunden-Tabelle
+LI|Eine Zeile für jeden an diesem Tag aktiven Strom, 24 Spalten für die UTC-Stunden.
+LI|63A: Effektivität 63 %, die meisten Reflexionen von Seite A; 41B: Seite B; eine Zahl ohne Buchstaben: unter 5 %; leere Zelle: unter 1 %; ↑: Radiant über 70° (zu hoch); wärmere Farbe = höhere Effektivität.
+LI|A = links, wenn man von deiner Station zur Gegenstation blickt (Zone Hot A); B = rechts (Zone Hot B). Es lohnt sich, die Antenne um 10-30° zu dieser Seite zu drehen (Side-Scatter).
+LI|Hellblaue Zeilen DH9GCD %: die Formel der besten Richtung nach DH9GCD, zum Vergleich; sie berücksichtigt weder den Horizont noch die Keule.
+LI|Zeile Σ: Streckenindex, Summe aus ZHR × Effektivität aller aktiven Ströme.
+LI|Orange Zeile: die experimentelle Vorhersage der Reflexionen pro Stunde, für die Stunden, in denen sie vorliegt.
+TAG|PROCEDURA|Um die Uhrzeit für ein Sked zu wählen: Stelle das Datum ein, sieh dir die Zeile Σ und das Feld BESTE TAGESZEIT an; lies in der Zeile des gewählten Stroms den Buchstaben A oder B und drehe die Antenne um 10-30° zu dieser Seite. Halte die Maus über eine Zelle, um die Einzelheiten des Hots zu dieser Stunde zu lesen.
+H1|8. Experimentelle Vorhersage
+P|Rechnet die Zählungen des Radars Collm (36,2 MHz) in eine Schätzung der Reflexionen pro Stunde auf einem Amateurfunkband um (voreingestellt 144 MHz, von 28 bis 1300 MHz), erstellt die Vorhersage der nächsten 24 Stunden für deine Strecke und vergleicht sie mit einem RMOB-Beobachter. Alles hier ist experimentell: Die Zahlen dienen dazu, Stunden und Tage zu vergleichen.
+H2|8.1 Die Bedienelemente
+LI|Zielfrequenz MHz: Frequenz der Vorhersage.
+LI|Exponent λ^k (3, SM6FHZ) und Stationsfaktor K (1): Frequenzregel und Korrektur für deine Station.
+LI|k aus den Populationsindizes: schlägt k aus den Populationsindizes r der aktiven Ströme vor (GMN, sonst IMO; k = 3,75 · log10 r, mit der ZHR gewichtet) und fragt vor dem Übernehmen nach einer Bestätigung.
+LI|RMOB-Datei von Festplatte laden und Exponent aus RMOB-Datei ermitteln: lesen eine RMOB-Monatsdatei und ermitteln k aus den mit Collm gemeinsamen Stunden.
+LI|RMOB-Beobachter, RMOB jetzt laden und automatischer Abruf alle 5 Minuten: Der automatische Abruf ist ausgeschaltet und darf nur mit Erlaubnis von RMOB eingeschaltet werden.
+H2|8.2 Die Ergebnisse
+LI|Das Diagramm von gestern und heute: Meteore pro Stunde in Collm, auf deine Frequenz umgerechnete Werte und, falls geladen, die RMOB-Zählungen.
+LI|Die Vorhersage der nächsten 24 Stunden: dieselbe Stunde des Vortags, korrigiert um die Änderung des Stromindex der Strecke.
+LI|Die Tabelle mit der Bewertung: gut, mittel oder schwach im Vergleich zum 24-Stunden-Mittel.
+TAG|NOTA|Die Dauer der Reflexionen folgt der Wahl „Dauer der Pings zwischen den Bändern“ in Geometrie und Dämpfung; im Forward-Scatter wächst die Dauer außerdem mit sec²φ am Mittelpunkt der Strecke.
+H1|9. Live und Echtzeitdaten
+H2|9.1 Verkehr live
+P|Eine mittabstandstreue Azimutalkarte, zentriert auf deine Station, mit dem gesamten gesammelten Meteorscatter-Verkehr: für jede Verbindung die Strecke in der Farbe des Bandes (28 braun, 50 grün, 70 cyan, 144 orange, 222 rosa, 432 violett), die beiden Stationen und die Wolke der wahrscheinlichsten Spuren zu dieser Stunde. Neu eingetroffene Spots blinken eine Minute lang.
+LI|Kartenradius: 600-3500 km. Anzuzeigende Spots: letzte 15 oder 30 Minuten, letzte Stunde, letzte 3 oder 24 Stunden.
+LI|Ein Klick auf eine Strecke oder auf eine Zeile der Tabelle hebt die Verbindung hervor und zeigt den Mittelpunkt der Wolke, ihre Höhe und ihre Ausdehnung.
+H2|9.2 Radarfluss
+P|Die stündlichen Meteorzählungen und die Spurhöhen des SKiYMET-Radars Collm (36,2 MHz) und das neueste Bild des Radars Sodankylä (36,9 MHz).
+LI|Jetzt laden und Automatische Aktualisierung aller Quellen alle 5 Minuten: Jede Quelle wird nur dann neu geladen, wenn sie sich geändert hat.
+LI|Exponent λ (SM6FHZ): Exponent der Schätzung für dein Band (orange Linie auf der rechten Skala).
+LI|Spurhöhen: Histogramm mit Modalwert, Mittelwert, Median und Standardabweichung; mit „vom Radar“ wird der Modalwert zur Höhe aller Berechnungen.
+TAG|ATTENZIONE|Lässt sich die Skala des Collm-Diagramms nicht lesen, erscheint ein oranger Hinweis, und die Werte müssen überprüft werden. Ohne Verbindung verwendet das Programm die zuletzt gespeicherten Daten, meldet das einmal und versucht es alle 5 Minuten selbst erneut; die Statusleiste wird rot, bis die Verbindung wieder da ist.
+H2|9.3 GRAVES-Radar
+P|GRAVES sendet in CW auf 143,050 MHz aus Broye-lès-Pesmes (JN27SI). Der Unterreiter behandelt GRAVES → du als eigene Meteorscatter-Strecke: Er berechnet Effektivität, empfohlenen Hot und Zonen PREV, prüft, ob die Zone im Strahl liegt und wann der Strahl sie beleuchtet.
+LI|Jetzt: setzt die Berechnung auf Echtzeit zurück. GRAVES als Gegenstation: Die Gegenstation wird GRAVES. Strahlsequenz: 0,8 s pro Schritt (PE1ITR 2021) oder 3,2 s (2007).
+LI|Die Karten: NUTZBARE ZONE IM STRAHL VON GRAVES, WIRKSAMKEIT DER STRECKE GRAVES → DU JETZT (mit den erwarteten Echos, experimentell), STRECKE (wohin richten), NÄCHSTER STRAHLDURCHGANG ÜBER DER ZONE.
+LI|Die zeitliche Rekonstruktion des Tages und die Einzelheiten der nächsten Sekunden.
+TAG|PROCEDURA|Um GRAVES zu hören: USB auf 143,049 MHz (Ton bei etwa 1 kHz), AGC langsam oder aus, Audiobandbreite mindestens 2,4 kHz; Antenne in Richtung des empfohlenen Hot-Spots der Karte STRECKE, mit niedriger Elevation; PC-Uhr synchronisiert. Die Pings sind kurze Striche nahe dem Träger im Wasserfall.
+H2|9.4 Datensammlung
+P|Sammelt die Meteorscatter-Spots aus drei Telnet-Datenströmen (DX-Cluster, RBN, DM4X mit den Spots von PSKReporter) und aus dem MQTT-Datenstrom von PSKReporter, jeder in seinem eigenen Unterreiter, und filtert sie.
+LI|Gib oben dein Rufzeichen für den Login ein. Jeder Datenstrom hat Host, Port, Befehle nach dem Login, Neu verbinden, Beim Start verbinden und eine Konsole.
+LI|Der Filter akzeptiert Spots auf den typischen Meteorscatter-Frequenzen (50190-50300, 70100-70400, 144290-144399 kHz) oder mit einer MS-Betriebsart (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) und verwirft solche, die eine andere Ausbreitung angeben. Frequenzfenster und Suchwörter lassen sich ändern; jedes hat seinen eigenen Zähler.
+LI|Fehlende Locatoren werden aus der CALL3-Datenbank übernommen; akzeptierte Spots gehen nach data/spot_ms, eine Datei pro Tag, und in die Karte von Verkehr live.
+H1|10. Ströme live und Katalog der Ströme
+H2|10.1 Ströme live
+P|Links der vom Global Meteor Network gemessene Fluss und die ZHR der aktiven Ströme, mit den Tageszählungen der GMN-Kameras pro Strom (eine Zählung, kein Fluss: Sie hängt davon ab, wie viele Stationen klaren Himmel haben); rechts die Radiantenkarten des CMOR-Radars, einschließlich der Tagesströme. Die Dateien werden nur bei Änderungen neu geladen, höchstens alle 30 Minuten, oder mit Jetzt laden.
+H2|10.2 Ströme
+P|Der von allen Berechnungen verwendete Katalog: die Ströme des IMO-Kalenders 2026 und 2027 sowie die Antihelion-Quelle. Die heute aktiven Ströme sind hervorgehoben.
+LI|Kürzel, Name, Aktivitätszeitraum, Sonnenlänge des Maximums, nächstes Maximum (UTC) und seine Quelle (IMO oder berechnet), Radiant, Geschwindigkeit, Populationsindex r, ZHR, Typ (visuell oder Tages-Radiostrom).
+LI|k: Exponent der Frequenzumrechnung aus dem Populationsindex (GMN, falls verfügbar, sonst IMO).
+LI|IAU MDC: Lösungen, Δ Radiant, Δλ, Δv: Vergleich mit dem Katalog des IAU Meteor Data Center (veröffentlichte Lösungen und Abweichungen des Programmkatalogs von deren Median).
+LI|GMN heute: in der letzten Tagesdatei des Global Meteor Network bestätigte Bahnen.
+TAG|NOTA|Der Katalog ist die Datei data/sciami.csv, und die IMO-Maxima stehen in data/massimi_imo.csv: Sie lassen sich mit einem Texteditor ändern. Eine fehlerhafte Zeile wird beim Start gemeldet und ignoriert.
+H1|11. Feldkarte
+P|Die gearbeiteten (orange) und bestätigten (grün, QSL oder LoTW) Maidenhead-Felder, gelesen aus der ADIF-Datei deines Logs, auf einer Europakarte, mit einem Unterreiter pro Band: 50, 70, 144, 222 und 432 MHz.
+LI|ADIF-Datei laden: liest eine .adi- oder .adif-Datei; eine neue Datei ersetzt die vorherige. Speicher löschen: löscht die geladenen Felder.
+LI|Mausrad = Zoom, Ziehen = Verschieben, Maus über einem Feld = die QSOs dieses Feldes.
+TAG|NOTA|YA-MS verbindet sich nicht mit LoTW: Exportiere das ADIF aus deinem Logprogramm oder aus LoTW und lade es hier.
+H1|12. Technische Dokumente
+LI|Bedienungsanleitung: dieses Dokument.
+LI|Quellen: alle Quellen des Programms, mit den Literaturangaben.
+LI|Karte der europäischen Radare: wo sich Collm, Sodankylä, GRAVES und CMOR bezogen auf deine Station befinden, mit dem von jedem Radar gesehenen Himmel.
+LI|Erklärung der Wirkungsgradberechnung: wie die Effektivität Schritt für Schritt berechnet wird, mit den Kennzeichnungen QUELLE, PRÜFUNG und WAHL.
+P|Die Dokumente folgen der Sprache der Oberfläche, wenn es eine Übersetzung gibt, sonst sind sie auf Italienisch. „Nach Word exportieren (.docx)“ speichert eine Kopie, wo du willst; „In Word öffnen“ öffnet es mit dem Standardprogramm. Das Berechnungshandbuch mit allen Gleichungen liegt im Ordner doc (Italienisch) und in doc/manuali (die anderen Sprachen).
+H1|13. Der Ordner data und die Einstellungen
+H2|13.1 Die wichtigsten Dateien
+LI|config.ini: alle Einstellungen (Text, Schlüssel=Wert).
+LI|lingue/: die Übersetzungen der Oberfläche; mappa/: die Europakarte.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: der Stromkatalog und die Lage der Antihelion-Quelle; regole_sperimentali.csv: die Regeln zwischen den Bändern.
+LI|flusso_collm.csv, quote_collm.csv: Archive des Radars Collm; radar/: neueste Bilder, RMOB-Dateien und Daten der Live-Quellen; fonti_radar.csv: Adressen der Quellen, einzeln aktivierbar.
+LI|cataloghi/: IAU-MDC-Katalog; radar/diretta/: GMN- und CMOR-Daten.
+LI|call3.txt: Locator-Datenbank; spot_ms/: gesammelte Meteorscatter-Spots; adif_quadrati.csv: Felder aus dem ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: die technischen Dokumente.
+LI|backup/: Kopien der durch eine Aktualisierung ersetzten Dateien; aggiornamento/: heruntergeladenes Paket (wird beim Neustart gelöscht).
+H2|13.2 Einige Schlüssel in config.ini
+LI|controlla_aggiornamenti=0: nicht nach neuen Versionen suchen; aggiornamenti_salta: übersprungene Version.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: die Kästchen der Berechnung.
+LI|raggio_iniziale (0 = doppelter ITU-Wert, 1 = ITU, 2 = ausgeschlossen), durata_ping (0 = λ², 1 = beobachtet).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Ändere config.ini nur bei geschlossenem Programm: Beim Schließen schreibt YA-MS die Datei neu.
+H1|14. Typische Vorgehensweisen
+H2|14.1 Ein Sked auf einem Strom vorbereiten
+TAG|PROCEDURA|1) Stelle die beiden Stationen ein und drücke Berechnen. 2) Prüfe unter Ströme das nächste Maximum des Stroms. 3) Trage dieses Datum unter Berechnungsdatum ein. 4) Sieh dir in der Effektivitätsberechnung die Zeile des Stroms und die Zeile Σ an: Wähle die Stunden mit der höchsten Effektivität. 5) Notiere die Seite (A oder B) und drehe die Antenne um 10-30° zu dieser Seite. 6) Prüfe unter Geometrie und Dämpfung die Reserve des Budgets.
+H2|14.2 Eine Sitzung live verfolgen
+TAG|PROCEDURA|1) Drücke Echtzeit. 2) Verfolge in der Vorhersageberechnung den empfohlenen Hot und die Zonen PREV, die jede Minute aktualisiert werden. 3) Prüfe unter Radarfluss, ob das Radar Collm Meteore zählt. 4) Sieh unter Verkehr live nach, wer gerade arbeitet und wo ihre Spuren fallen.
+H2|14.3 Die Station mit GRAVES testen
+TAG|PROCEDURA|1) Prüfe unter GRAVES-Radar die Karte NUTZBARE ZONE IM STRAHL VON GRAVES. 2) Richte die Antenne so aus, wie es die Karte STRECKE angibt. 3) Höre in USB auf 143,049 MHz in den Zeitfenstern des nächsten Strahldurchgangs. 4) Vergleiche die Pings mit den erwarteten Echos und mit den RMOB-Beobachtern.
+H2|14.4 Die Vorhersage mit RMOB abgleichen
+TAG|PROCEDURA|1) Lade unter Experimentelle Vorhersage eine RMOB-Monatsdatei eines Beobachters auf deinem Band. 2) Drücke Exponent aus RMOB-Datei ermitteln und übernimm k, wenn es genügend gemeinsame Stunden gibt. 3) Stelle den Stationsfaktor K auf den vorgeschlagenen Wert ein.
+H1|15. Häufige Probleme
+LI|Alle Effektivitäten sind 0: Lies den Hinweis KEINE GEMEINSAME ZONE. Ist „Antennendiagramm“ ausgeschaltet, verringere die Keulenelevation; andernfalls liegt die Strecke in Spurhöhe jenseits des Horizonts.
+LI|Die Werte sind viel niedriger als die von DH9GCD oder einer alten Version: Prüfe das Kästchen für den Winkel β (Kapitel 7.2).
+LI|„Locator der Station ungültig“: Gib einen Locator mit 4, 6 oder 8 Zeichen ein (zum Beispiel JN70CN oder JN70CN83).
+LI|Hot A und Hot B sind grau: Mit der Antenne in Richtung Gegenstation liegen sie bereits in der Keule; du musst die Antenne nicht drehen.
+LI|Die Europakarte fehlt: Beim ersten Start ist eine Verbindung nötig; das Programm versucht es selbst erneut.
+LI|Der Text ist zu klein oder die Diagramme haben keinen Platz: Verwende Schrift und die Schaltfläche Bedienung.
+LI|Der Strahldurchgang von GRAVES scheint verschoben: Synchronisiere die PC-Uhr mit einem NTP-Server; die Strahlsequenz wird manchmal von der Leitstelle verschoben.
+LI|Linux, chinesischer oder japanischer Text als Kästchen: Installiere die Schriften Noto CJK.
+H1|16. Kontakt
+P|YA-MS ist ein kostenloses Programm für Funkamateure von Costantino IC8TEM (Capri). Meldungen, Vorschläge und Vergleichsdaten sind willkommen: Gib das Betriebssystem, die Version von YA-MS an und was du getan hast. Code und Releases: github.com/ic8tem/YA-MS. Kontakt: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Wer die Arbeit unterstützen möchte, kann das über ko-fi.com/ic8tem tun.

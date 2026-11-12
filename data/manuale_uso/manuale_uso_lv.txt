@@ -1,0 +1,233 @@
+TITLE|YA-MS lietošanas rokasgrāmata
+SUB|Versija 1.8.1 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+H1|1. Ievads
+H2|1.1 Kam paredzēta YA-MS
+P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
+P|Programma ir bezmaksas, darbojas Windows, Linux (arī Raspberry Pi) un macOS vidē un ir tulkota 36 valodās. Tā nevada ne radiostaciju, ne rotatoru: sakariem izmanto ierasto digitālo modu programmu (MSHV, WSJT-X).
+H2|1.2 Kā lasīt šo rokasgrāmatu
+P|Rokasgrāmata apraksta cilnes vienu pēc otras, sākot ar prognozes aprēķinu. Katrā nodaļā ir pateikts, ko cilne parāda, ko dara katra vadīkla un kā lasīt rezultātus. 14. nodaļā apkopotas biežākās procedūras, 15. nodaļā biežākās problēmas. Kā aprēķina efektivitāti, kopā ar avotiem un pārbaudēm, ir paskaidrots dokumentā "Efektivitātes aprēķina skaidrojums"; pilnie vienādojumi ir Aprēķinu rokasgrāmatā (mape doc).
+TAG|PROCEDURA|veicamie soļi norādītajā secībā.
+TAG|NOTA|informācija, kas palīdz saprast vai labāk izmantot kādu funkciju.
+TAG|ATTENZIONE|bieža kļūda, aprēķina ierobežojums vai darbība, kas jāzina.
+P|Vadīklu nosaukumi ir rakstīti tā, kā tie redzami programmā latviešu valodā; citās valodās tiem ir tā pati vieta un tā pati secība.
+H1|2. Instalēšana, palaišana un atjauninājumi
+H2|2.1 Kuru pakotni lejupielādēt
+P|Visas pakotnes ir GitHub laidienu lapā (github.com/ic8tem/YA-MS/releases). .NET nav jāinstalē: tas jau ir iekļauts pakotnē.
+LI|Windows 64 biti: YA-MS-<versija>-windows-x64-setup.exe (instalē mapē C:\YA-MS bez administratora tiesībām) vai pārnēsājamais zip arhīvs, ko var izpakot jebkurā mapē. 32 bitu Windows - tie paši faili ar x86.
+LI|Linux (Debian, Ubuntu, Mint): .deb pakotne, ko instalē ar komandu sudo apt install ./ya-ms_<versija>_amd64.deb; pirmajā palaišanas reizē programma nokopē sevi uz ~/YA-MS. Citiem distributīviem - .tar.gz arhīvs, kas jāizpako un jāpalaiž ar ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 un 500: pakotne raspberry-pi-64bit (Raspberry Pi OS 64 biti) vai raspberry-pi-32bit, .tar.gz vai .deb formātā.
+LI|macOS: .dmg fails Apple Silicon (M1 un jaunākiem) vai Intel datoriem, vai app.zip. Ievelc YA-MS.app savā mapē (piemēram, ~/YA-MS): mape data tiek izveidota blakus lietotnei.
+TAG|ATTENZIONE|Windows var parādīt paziņojumu "Windows aizsargāja jūsu datoru": izvēlies "Papildinformācija" un pēc tam "Tik un tā palaist". macOS pirmajā reizē atver lietotni ar peles labo pogu un "Atvērt". Programma nav parakstīta ar maksas sertifikātu.
+H2|2.2 Pirmā palaišana
+P|Palaižot uz dažām sekundēm parādās ekrāns ar Perseīdām virs ESO VLT teleskopa. Pirmajā palaišanas reizē YA-MS izvēlas sistēmas valodu, ja tā ir viena no 36, citādi itāļu valodu; lejupielādē Eiropas karti (Natural Earth) mapē data/mappa un parāda trases piemēru. Lai programmu iestatītu savai stacijai, pietiek ar dažām minūtēm (4. nodaļa).
+H2|2.3 Mape data
+P|Visi iestatījumi un visi dati atrodas vienā mapē data blakus programmai: nekādas AppData, nekādu sistēmas mapju. Lai pārvietotu YA-MS uz citu datoru, pietiek nokopēt programmas mapi kopā ar tās mapi data. Mapes saturs aprakstīts 13. nodaļā.
+H2|2.4 Automātiskie atjauninājumi
+P|Sākot ar versiju 1.8.0, YA-MS pati pārbauda GitHub, palaišanas brīdī un ne biežāk kā reizi dienā, vai ir iznākusi jauna versija. Ja ir, parādās logs "Pieejams atjauninājums" ar jaunumiem un trim pogām:
+LI|Atjaunināt tagad: lejupielādē tavai sistēmai piemēroto pakotni, aizstāj programmas failus, saglabā mapi data un restartē YA-MS. Programmas faili mapē data, kurus jaunā versija maina, vispirms tiek nokopēti uz data/backup/v<vecā versija>; tavi faili (iestatījumi, arhīvi, spoti, ADIF) netiek aizskarti.
+LI|Vēlāk: aizver logu; pārbaude atkārtojas nākamajā dienā.
+LI|Izlaist šo versiju: palaišanas brīdī šī versija vairs netiek piedāvāta.
+P|Poga "Atjauninājumi" apakšējā labajā stūrī, statusa joslā, veic to pašu pārbaudi manuāli, arī izlaistai versijai.
+TAG|ATTENZIONE|Automātiskajam atjauninājumam jāvar rakstīt programmas mapē. Ja tas nav iespējams (piemēram, ja programma nokopēta sistēmas mapē), YA-MS par to paziņo un piedāvā atvērt laidienu lapu, lai instalētu manuāli. Versijām līdz 1.7.0 šīs funkcijas nav: pirmo reizi atjauninājums jāveic manuāli, instalējot virsū iepriekšējai versijai.
+TAG|NOTA|Lai vairs nepārbaudītu jaunas versijas, ieraksti controlla_aggiornamenti=0 failā data/config.ini.
+H2|2.5 Trūkstošie programmas faili
+P|Palaižot YA-MS pārbauda, vai tai ir visi savi faili (tulkojumi, katalogi, dokumenti). Ja kāds trūkst, piemēram, pēc nepilnīgas kopēšanas, logs "Trūkstošie faili" tos uzskaita un piedāvā "Lejupielādēt trūkstošos failus" no GitHub tajā pašā programmas versijā vai "Turpināt bez tiem". Tā pati pārbaude atkārtojas, nospiežot "Atjauninājumi".
+H1|3. Galvenais logs
+H2|3.1 Loga daļas
+LI|Augšā trīs vadīklu rindas, kas attiecas uz visām cilnēm: stacijas un diapazons, E slānis un antena, aprēķina laiks (4. nodaļa).
+LI|Galveno cilņu josla, kuras labajā pusē ir poga Vadība, krāsu shēma (Tēma) un valoda.
+LI|Apakšcilnes gaišākā rindā tām cilnēm, kurām tās ir.
+LI|Apakšā statusa josla: aprēķina ziņojumi, brīdinājumi par savienojumu un poga "Atjauninājumi".
+H2|3.2 Cilnes
+LI|Tiešsaiste un reāllaika dati: Satiksme tiešraidē, Radara meteoru skaits, GRAVES radars, Datu vākšana (9. nodaļa).
+LI|Prognozes aprēķins: Prognozes aprēķins, Ģeometrija un vājinājums, Efektivitātes aprēķins, Eksperimentālas prognozes (5.-8. nodaļa).
+LI|Plūsmas tiešraidē, Plūsmas, Kvadrātu karte (10.-11. nodaļa).
+LI|Tehniskie dokumenti, pēdējā: Lietošanas rokasgrāmata, Avoti, Eiropas radaru karte, Efektivitātes aprēķina skaidrojums (12. nodaļa).
+H2|3.3 Valoda, krāsas, fonts
+LI|Valoda: 36 valodas. Mainot valodu, logs tiek pārbūvēts tajā pašā vietā un tajā pašā cilnē bez restartēšanas. Skaitļi un datumi atbilst izvēlētajai valodai (decimālkomats latviešu un itāļu valodā, punkts angļu valodā).
+LI|Tēma: 12 krāsu shēmas; Gaiša ir noklusējuma shēma, Nakts un Melna paredzētas darbam tumsā, Meteora sliede ir oriģinālais YA-MS stils.
+LI|Fonts (pirmās vadīklu rindas beigās): palielina visu tekstu no 100 līdz 300 %. Ar lielu fontu cilnes pārceļas jaunā rindā.
+LI|Vadība: sakļauj un atkal atver trīs vadīklu rindas, lai atbrīvotu vietu kartēm un grafikiem. Izvēle tiek atcerēta.
+TAG|NOTA|Gandrīz katrai vadīklai ir uznirstošais padoms: paturi peles kursoru virs vadīklas, lai izlasītu, kam tā paredzēta un no kura avota ņemta noklusējuma vērtība.
+H1|4. Stacijas un trases iestatīšana
+H2|4.1 1. rinda: stacijas un diapazons
+LI|Mans lokators un augstums m: tavs Maidenhead lokators (4, 6 vai 8 rakstzīmes; izmanto kvadrāta centru) un stacijas augstums virs jūras līmeņa.
+LI|Korespondents un augstums m: tās stacijas lokators un augstums, ar kuru vēlies nodibināt sakarus.
+LI|Diapazons MHz: 28, 50, 70, 144, 222 vai 432 MHz. Vajadzīgs antenas pastiprinājumam un ziedlapiņai, vājinājumam un sakaru budžetam, kā arī plūsmas novērtējumam.
+LI|Aprēķināt: no jauna aprēķina trasi (E slāņa izlase, mazāk nekā sekundē).
+LI|Antenas az: antenas azimuts, vienmēr korespondenta virzienā.
+H2|4.2 2. rinda: E slānis un antena
+LI|Sliežu augstums km un no radara: meteoru sliežu augstums. Ja "no radara" ir atzīmēts, izmanto biežāko Collm radara izmērīto augstumu (parasti 88-90 km); noņem atzīmi, lai to ierakstītu manuāli.
+LI|Ziedlapiņas elevācija °: tavas antenas vertikālās ziedlapiņas maksimuma elevācija. Virziena antenai, kas nostiprināta 0° leņķī, galvenā ziedlapiņa tik un tā ir dažus grādus virs horizonta atstarojuma no zemes dēļ: parasti 3-8°, atkarībā no antenas augstuma viļņu garumos.
+LI|antenas diagramma: ieslēgta (noklusējums) - atstarošanas punkti tiek ņemti vērā ar abu antenu vertikālo pastiprinājumu: pilnībā ap ziedlapiņas maksimumu, arvien mazāk uz horizonta pusi un uz augšu. Izslēgta - ziedlapiņas elevācija ir stingra robeža: zemāk redzamie punkti netiek ņemti vērā.
+LI|Yagi antena: traverse m: traverses garums. Blakus programma norāda garumu viļņu garumos, pastiprinājumu (DL6WU līkne) un ziedlapiņas platumu pie -3 dB horizontālajā un vertikālajā plaknē. Zem 2 λ novērtējums ir maz precīzs.
+LI|Hot spot no viduspunkta km un auto (AMS): Hot A un Hot B attālums no viduspunkta. Ja "auto (AMS)" ir atzīmēts, vērtība atbilst J. Richardson tabulai, ko citē DJ5HG (13° novirze pie 1000 km, 10° virs 1500 km); noņem atzīmi, lai manuāli ierakstītu 30-400 km (MSHV izmanto 150 km).
+TAG|ATTENZIONE|Ja "antenas diagramma" ir izslēgta un ziedlapiņa ir dažu grādu augstumā, garā trasē abas stacijas var neredzēt nevienu kopīgu slāņa punktu: visas efektivitātes ir 0 un parādās brīdinājums "NAV KOPĪGAS ZONAS" ar ziedlapiņas elevāciju vai sliežu augstumu, kas būtu vajadzīgs. Piemērs: JN70CN - JO76QP, 1791 km, ziedlapiņa 3°, sliedes 88,5 km.
+H2|4.3 3. rinda: aprēķina laiks
+LI|Laiks: UTC pulkstenis.
+LI|Aprēķina datums (UTC): aprēķina diena. Attiecas uz Prognozes aprēķins, uz 24 stundu tabulu cilnē Efektivitātes aprēķins un uz hronoloģiju cilnē GRAVES radars. Noklusējuma vērtība ir šodiena, un pusnaktī datums pāriet uz jauno dienu.
+LI|Stundas (no −12 līdz +36 h): pārbīda aprēķina brīdi ar 15 minūšu soli. Blakus: "Aprēķins uz: tagad" vai izvēlētais datums un laiks.
+LI|Reālais laiks: atgriežas pašreizējā brīdī.
+H2|4.4 Savas stacijas iestatīšana
+TAG|PROCEDURA|1) Ieraksti Mans lokators un augstumu. 2) Ieraksti korespondenta lokatoru un augstumu vai noklikšķini uz kartes cilnē Prognozes aprēķins: kreisais klikšķis = korespondents, labais klikšķis = tava stacija. 3) Izvēlies diapazonu. 4) Ieraksti savas antenas traverses garumu un ziedlapiņas elevāciju. 5) Nospied Aprēķināt: statusa josla apstiprina "Trase aprēķināta: ... km, ... atstarošanas punktu izlase".
+TAG|NOTA|Iestatījumi tiek saglabāti failā data/config.ini, aizverot programmu, un pēc katra aprēķina: nākamajā palaišanas reizē atradīsi to pašu trasi.
+H1|5. Prognozes aprēķins
+P|Grupas Prognozes aprēķins pirmā apakšcilne vienā ekrānā parāda, kur pašlaik krīt noderīgās sliedes un kur vērst antenu. Viss attiecas uz brīdi, kas izvēlēts ar datumu un stundu slīdni.
+H2|5.1 Kopsavilkuma josla
+P|Virs kartes josla apkopo aprēķinu šim brīdim: datums un laiks, trases indekss (aktīvo plūsmu ZHR × efektivitāte summa), noderīgākā plūsma ar tās ZHR un efektivitāti (arī dB attiecībā pret DJ5HG atskaites vērtību), plūsmu skaits virs horizonta un ieteicamais Hot ar tā azimutu.
+H2|5.2 Plāna karte
+P|Kreisajā pusē Eiropas karte, skatoties no augšas (austrumi pa labi), ar grādu skalu visapkārt:
+LI|zaļa līnija: patiesā trase starp abiem lokatoriem;
+LI|Hot A un Hot B: divi hot spot abās viduspunkta pusēs. Sarkans = ieteicamais, rozā = ārpus antenas ziedlapiņas, pelēks = jau ziedlapiņā (ar brīdinājumu);
+LI|antenas ziedlapiņa: -3 dB sektors ap antenas azimutu;
+LI|Robeža A un Robeža B, blāvas: abu staciju redzamās debess tālākās malas, nevis punkti, uz kuriem vērst antenu;
+LI|dzeltena līnija: virziens, kādā izvēlētā (vai visizdevīgākā) plūsma šķērso debesis; oranži punkti: abi perpendikulārie antenas virzieni (radianta azimuts ±90°);
+LI|PREV zonas, gaišas elipses: kur pašlaik krīt visticamākās sliedes, pa vienai katrā trases pusē.
+P|Kreisais klikšķis uz kartes = korespondenta lokators, labais klikšķis = tavas stacijas lokators; trase tiek nekavējoties pārrēķināta. Leģenda ir sakļaujama kolonna kartes labajā pusē. Izvēles rūtiņas virs plūsmu saraksta ieslēdz un izslēdz Hot virzienus, Eiropas karti un skatu no augšas.
+H2|5.3 Plūsmu saraksts
+P|Katrai plūsmai: nosaukums un IMO saīsinājums, ZHR šajā brīdī, radianta azimuts un elevācija no tavas stacijas, efektivitāte trasei, dominējošā puse (A vai B), labākais antenas virziens, radianta lēkts un riets. Klikšķis uz rindas izvēlas plūsmu: dzeltenā līnija un oranžie punkti seko tai.
+H2|5.4 Mazā debess velve un aprēķina teksts
+P|No tavas stacijas redzamie radianti ar IMO kodu un diennakts ceļu ciānā krāsā. Dzeltens = efektivitāte vismaz 50 % un ZHR vismaz 2; oranžs = vismaz 20 %; tumši sarkans = mazāk; pelēks = gandrīz neaktīvs. Oranžā līnija caur zenītu dod pareizos antenas virzienus, perpendikulārus plūsmas kustībai. Blakus aprēķina teksts: trase, viduspunkts, ieteicamais Hot ar paredzamo atstarojumu procentuālo daļu, kopējās zonas robežas.
+H2|5.5 Griezums
+P|Apakšējā labajā stūrī visticamākās sliedes, kā tās redz antena korespondenta virzienā: horizontāli azimuts attiecībā pret korespondentu (A pa kreisi, B pa labi), vertikāli elevācija. Katra sliede ir nogrieznis, vērsts pret radiantu, jo resnāks, jo tā ticamāka. Uzzīmēta arī antenas ziedlapiņa, korespondents un Hot.
+H2|5.6 Brīdinājumi
+LI|UZMANĪBU: Hot A (vai Hot B) ietilpst antenas ziedlapiņā: ar šo antenas virzienu šis hot spot jau ir nosegts.
+LI|RADIANTS PĀRĀK AUGSTU: noderīgs radiants ir virs 70°; sliedes krīt gandrīz vertikāli un maz atstaro trases virzienā.
+LI|ZEMS RADIANTS GAR TRASI: aprēķinātā efektivitāte paliek zema, taču ar slīdošām sliedēm, kas izvietotas gar trasi, DJ5HG paredz retus un spēcīgus atstarojumus: ir vērts klausīties.
+LI|TRASE AIZ SLIEDES HORIZONTA: sliežu augstumā viduspunkts atrodas zem horizonta; brīdinājums norāda, kāds augstums būtu vajadzīgs.
+LI|NAV KOPĪGAS ZONAS: neviens slāņa punkts nav redzams no abām stacijām; brīdinājums norāda, cik trūkst un kas būtu vajadzīgs.
+H1|6. Ģeometrija un vājinājums
+P|Teksta pārskats par trasi, ko var atlasīt un kopēt, un labajā pusē antenas elevācijas grafiks atkarībā no attāluma līdz atstarošanas punktam trim sliežu augstumiem.
+H2|6.1 Šīs cilnes dati
+LI|Jauda W (400), Antenas pastiprinājums dBi (14; tā pati antena abos galos), Minimālais signāls dBm (-130), Sliedes blīvums q = 10^14 elektronu/m: vajadzīgi sakaru budžetam.
+LI|Sliedes sākuma rādiuss: divkārša ITU vērtība (Stober 2021, piesardzīga, noklusējums), ITU-R P.843 vai neņemts vērā. Jo lielāks rādiuss, jo lielāki zudumi augstākās frekvencēs.
+LI|Pingu ilgums starp joslām: teorētiskais λ² (McKinley, SM6FHZ; piesardzīgs, noklusējums) vai novērotais (NN4SA veiktie HamSCI MSQP mērījumi, Perseīdas 2026: no 50 līdz 144 MHz pingi saīsinās 1,5 reizes, nevis 8 reizes).
+H2|6.2 Pārskats
+LI|TRASES ĢEOMETRIJA: stacijas un to augstumi, attālums, azimuts, viduspunkts, sliežu augstums, antenas elevācija viduspunkta virzienā.
+LI|HOT A / HOT B: katra hot spot lokators, azimuts, novirze no tiešā virziena, attālums un elevācija.
+LI|KOPĒJĀS ZONAS ROBEŽAS: redzamība sliežu augstumā līdz horizontam, antenas ziedlapiņa ar tās maksimumu un vertikālo platumu, Robeža A un Robeža B; Yagi antenas pastiprinājums un ziedlapiņa.
+LI|TRASES VĀJINĀJUMS: viduspunktam, Hot A un Hot B pie 28, 50, 70, 144, 222 un 432 MHz (sliede šķērso trases plakni - visnelabvēlīgākais gadījums).
+LI|SAKARU BUDŽETS: jauda un EIRP, vājinājums, signāls antenā, minimālais signāls un rezerve; labākais gadījums (sliede trases plaknē) un rezerve ar OH5IY vidējo vājinājumu.
+LI|EKSPERIMENTĀLIE LIKUMI STARP JOSLĀM: atstarojumu skaits, intensitāte un ilgums salīdzinājumā ar 144 MHz; IARU maksimālais pings; novērotais ilgums no MSQP mērījumiem.
+TAG|NOTA|Pozitīva rezerve nozīmē, ka vidēja zema blīvuma sliede ir pietiekama, lai ar tavu staciju noslēgtu sakarus šajā trasē; negatīva rezerve nozīmē, ka vajadzīgas blīvākas sliedes vai augsta blīvuma meteori. Tas ir novērtējums: atskaites punkts joprojām ir pieredze ēterā.
+H1|7. Efektivitātes aprēķins
+P|Efektivitāte procentos parāda, cik lielā mērā plūsmas radianta novietojums ļauj atstarojumus tavā trasē: 100 % ir šai trasei vislabvēlīgākais novietojums. Šī apakšcilne to parāda pa stundām dienai, kas norādīta laukā "Aprēķina datums (UTC)", ar vērtībām katras stundas vidū.
+H2|7.1 Četri rāmji
+LI|LABĀKAIS DIENAS LAIKS: stunda ar augstāko trases indeksu un dominējošā puse.
+LI|VISIZDEVĪGĀKĀ PLŪSMA: plūsma, kas dod lielāko ieguldījumu, ar stundu, pusi un diviem labākajiem antenas virzieniem.
+LI|TAGAD: indekss un puse šajā stundā un ieteicamais Hot (tikai tad, ja izvēlētā diena ir šodiena).
+LI|EKSPERIMENTĀLA PROGNOZE: paredzamie atstarojumi stundā tagad, pēc 1 un pēc 2 stundām (8. nodaļa).
+P|Ja rāmim nav vērtību, tas norāda iemeslu: nav kopīgas zonas, nav aktīvas plūsmas vai radianti visu dienu ir nelabvēlīgi. Katra rāmja uznirstošais padoms paskaidro, ko tas parāda. Zem rāmjiem, ja vajadzīgs, brīdinājums NAV KOPĪGAS ZONAS un josla, kas paskaidro burtus A un B.
+H2|7.2 Aprēķina iestatījumi
+LI|Piesardzīgs (noklusējums): sliežu augstums no radara, parastas sliedes, leņķis β ieslēgts. Dod viszemākās vērtības.
+LI|Kā DJ5HG: fiksēts augstums 102 km, garākas sliedes pie zema radianta, leņķis β ieslēgts; atkārto QTFGUI programmu.
+LI|Pielāgots: tiek izvēlēts automātiski, kad manuāli maini kādu no izvēles rūtiņām vai augstumu.
+LI|Garākas sliedes pie zema radianta (DJ5HG): pie zema radianta krīt mazāk meteoru, bet sliedes ir garākas un atstaro biežāk; virs aptuveni 9° abi efekti viens otru kompensē.
+LI|Leņķis β starp sliedi un trasi (pilnā McKinley formula), oranžajā rāmī ar uzrakstu "izvēle, kas sver visvairāk": ieslēgts - sliedes, kas šķērso trases plakni, ir par 10-15 dB vājākas nekā tās, kas atrodas tajā, un dominē radianti, kas izvietoti gar trasi. Izslēgts - ir spēkā klasiskais likums: labākais radiants ir 15-70° augstumā un šķērsām trasei.
+LI|Klasiskais spriedums: zem katras plūsmas pievieno rindu "klasiskais" ar radioamatieru likuma spriedumu trases viduspunktā: ✗ radiants zem horizonta, ◐ robežgadījums (pārāk zemu, pārāk augstu vai gandrīz gar trasi), ● labs, ★ teicams (šķērsām trasei). Aprēķinu tas nemaina.
+TAG|ATTENZIONE|Leņķis β stipri maina vērtības garās trasēs: JN70CN - JO76QP (1791 km), Geminīdas 14/12/2026, 98 % ar izslēgtu β un 13 % ar ieslēgtu β. Abām tēzēm ir atšķirīgi avoti, un pirmais salīdzinājums ar BRAMS skaitījumiem tās neatšķir: salīdzini abus gadījumus ar pieredzi ēterā. Procenti ir relatīvi pret radianta labāko novietojumu konkrētajai trasei; dažādu trašu salīdzināšanai izmanto efektivitāti dB.
+H2|7.3 Cik lielā mērā uzticēties skaitļiem
+P|Labākās stundas un puse ir visdrošākā informācija: tās maz mainās atkarībā no aprēķina iestatījumiem. Turpretī procenti ļoti atkarīgi no izdarītajām izvēlēm, galvenokārt no leņķa β. Salīdzinājums ar 181 767 reāliem MSK144 spotiem 50 MHz diapazonā (HamSCI, Perseīdas 2025. gada 11.-12. augustā) apstiprina trases indeksa izmaiņas pa stundām, taču arī parāda, ka tas, kuri staciju pāri dzird viens otru konkrētā stundā, galvenokārt atkarīgs no sporādiskajiem meteoriem un aktivitātes ēterā, kas modelī nav iekļauti.
+TAG|NOTA|Izmanto programmu, lai izvēlētos stundu un pusi, uz kuru pagriezt antenu; neuztver procentus kā sakaru veiksmes varbūtību.
+H2|7.4 Grafiks
+P|Ne vairāk kā piecām plūsmām: efektivitāte kā nepārtraukta līnija un DH9GCD formula kā punktēta līnija tajā pašā krāsā; trases indekss kā stabiņi labajā skalā. Vietējais laiks ir norādīts zem UTC laika.
+H2|7.5 24 stundu tabula
+LI|Viena rinda katrai plūsmai, kas aktīva tajā dienā, 24 kolonnas UTC stundām.
+LI|63A: efektivitāte 63 %, lielākā daļa atstarojumu no A puses; 41B: B puse; skaitlis bez burta: zem 5 %; tukša šūna: zem 1 %; ↑: radiants virs 70° (pārāk augstu); siltāka krāsa = augstāka efektivitāte.
+LI|A = pa kreisi, skatoties no tavas stacijas uz korespondentu (Hot A zona); B = pa labi (Hot B zona). Antenu ieteicams pagriezt par 10-30° uz šo pusi (side-scatter).
+LI|Gaiši zilās rindas DH9GCD %: DH9GCD labākā virziena formula salīdzinājumam; tā neņem vērā ne horizontu, ne ziedlapiņu.
+LI|Rinda Σ: trases indekss, visu aktīvo plūsmu ZHR × efektivitāte summa.
+LI|Oranžā rinda: eksperimentālā atstarojumu skaita stundā prognoze tām stundām, kurām tā ir pieejama.
+TAG|PROCEDURA|Lai izvēlētos sked laiku: iestati datumu, apskati rindu Σ un rāmi LABĀKAIS DIENAS LAIKS; izvēlētās plūsmas rindā nolasi burtu A vai B un pagriez antenu par 10-30° uz šo pusi. Paturi peles kursoru virs šūnas, lai izlasītu sīkāku informāciju par tās stundas Hot.
+H1|8. Eksperimentālas prognozes
+P|Pārrēķina Collm radara (36,2 MHz) skaitījumus atstarojumu skaita stundā novērtējumā radioamatieru diapazonā (noklusējums 144 MHz, no 28 līdz 1300 MHz), izveido prognozi nākamajām 24 stundām tavai trasei un salīdzina to ar RMOB novērotāju. Viss šeit ir eksperimentāls: skaitļi kalpo stundu un dienu salīdzināšanai.
+H2|8.1 Vadīklas
+LI|Mērķa frekvence MHz: prognozes frekvence.
+LI|λ^k kāpinātājs (3, SM6FHZ) un Stacijas koeficients K (1): frekvences pārrēķina likums un korekcija tavai stacijai.
+LI|k no populācijas indeksiem: piedāvā k no aktīvo plūsmu populācijas indeksiem r (GMN, citādi IMO; k = 3,75 · log10 r, svērts ar ZHR) un pirms piemērošanas lūdz apstiprinājumu.
+LI|Ielādēt RMOB failu no diska un Iegūt kāpinātāju no RMOB faila: nolasa mēneša RMOB failu un iegūst k no stundām, kas kopīgas ar Collm.
+LI|RMOB novērotājs, Lejupielādēt RMOB tagad un automātiska lejupielāde ik pēc 5 minūtēm: automātiskā lejupielāde ir izslēgta, un to drīkst ieslēgt tikai ar RMOB atļauju.
+H2|8.2 Rezultāti
+LI|Vakardienas un šodienas grafiks: meteori stundā Collm, uz tavu frekvenci pārrēķinātās vērtības un, ja ielādēti, RMOB skaitījumi.
+LI|Prognoze nākamajām 24 stundām: tā pati iepriekšējās dienas stunda, koriģēta atbilstoši trases plūsmu indeksa izmaiņai.
+LI|Tabula ar vērtējumu: labs, vidējs vai vājš salīdzinājumā ar 24 stundu vidējo.
+TAG|NOTA|Atstarojumu ilgums atbilst izvēlei "Pingu ilgums starp joslām" cilnē Ģeometrija un vājinājums; forward scatter gadījumā ilgums pieaug arī ar sec²φ trases viduspunktā.
+H1|9. Tiešsaiste un reāllaika dati
+H2|9.1 Satiksme tiešraidē
+P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto meteor scatter satiksmi: katriem sakariem trase diapazona krāsā (28 brūna, 50 zaļa, 70 ciāna, 144 oranža, 222 rozā, 432 violeta), abas stacijas un visticamāko sliežu mākonis tajā stundā. Tikko saņemtie spoti mirgo vienu minūti.
+LI|Kartes rādiuss: 600-3500 km. Rādāmie spoti: pēdējās 15 vai 30 minūtes, pēdējā stunda, pēdējās 3 vai 24 stundas.
+LI|Klikšķis uz trases vai tabulas rindas izceļ sakarus un parāda mākoņa centru, tā augstumu un izmērus.
+H2|9.2 Radara meteoru skaits
+P|Collm SKiYMET radara (36,2 MHz) meteoru skaits stundā un sliežu augstumi, kā arī jaunākais Sodankylä radara (36,9 MHz) attēls.
+LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies.
+LI|λ kāpinātājs (SM6FHZ): novērtējuma kāpinātājs tavam diapazonam (oranža līnija labajā skalā).
+LI|Sliežu augstumi: histogramma ar modu, vidējo vērtību, mediānu un standartnovirzi; ja atzīmēts "no radara", moda kļūst par augstumu visiem aprēķiniem.
+TAG|ATTENZIONE|Ja Collm grafika skalu neizdodas nolasīt, parādās oranžs brīdinājums, un vērtības jāpārbauda. Bez savienojuma programma izmanto pēdējos saglabātos datus, vienreiz par to paziņo un pati mēģina vēlreiz ik pēc 5 minūtēm; statusa josla kļūst sarkana, līdz savienojums atjaunojas.
+H2|9.3 GRAVES radars
+P|GRAVES raida CW režīmā 143,050 MHz frekvencē no Broye-lès-Pesmes (JN27SI). Apakšcilne apstrādā trasi GRAVES → tevi kā atsevišķu meteor scatter trasi: aprēķina efektivitāti, ieteicamo Hot un PREV zonas, pārbauda, vai zona ir kūlī un kad kūlis to apgaismo.
+LI|Tagad: atgriež aprēķinu reālajā laikā. Iestatīt GRAVES kā DX: korespondents kļūst par GRAVES. Stara secība: 0,8 s uz soli (PE1ITR 2021) vai 3,2 s (2007).
+LI|Paneļi: LIETDERĪGĀ ZONA GRAVES KŪLĪ, TRASES GRAVES → TEVI EFEKTIVITĀTE TAGAD (ar gaidāmajām atbalsīm, eksperimentāli), TRASE (kur vērst antenu), NĀKAMĀ KŪĻA PĀREJA PĀR ZONU.
+LI|Dienas hronoloģiskā rekonstrukcija un nākamo sekunžu detaļas.
+TAG|PROCEDURA|Lai klausītos GRAVES: USB 143,049 MHz (tonis ap 1 kHz), AGC lēns vai izslēgts, audio josla vismaz 2,4 kHz; antena vērsta uz paneļa TRASE ieteikto hot spot ar zemu elevāciju; datora pulkstenis sinhronizēts. Pingi ir īsas svītras pie nesēja ūdenskritumā (waterfall).
+H2|9.4 Datu vākšana
+P|Vāc meteor scatter spotus no trim telnet plūsmām (DX klasteris, RBN, DM4X ar PSKReporter spotiem) un no PSKReporter MQTT plūsmas, katru savā apakšcilnē, un tos filtrē.
+LI|Augšā ieraksti savu izsaukuma signālu pieteikšanās vajadzībām. Katrai plūsmai ir hosts, ports, komandas pēc pieteikšanās, Savienot vēlreiz, Savienot startējot un konsole.
+LI|Filtrs pieņem spotus meteor scatter tipiskajās frekvencēs (50190-50300, 70100-70400, 144290-144399 kHz) vai ar MS modu (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) un atmet tos, kuros norādīts cits izplatīšanās veids. Frekvenču logus un vārdus var mainīt; katram ir savs skaitītājs.
+LI|Trūkstošie lokatori tiek ņemti no CALL3 arhīva; pieņemtie spoti tiek saglabāti mapē data/spot_ms, pa vienam failam dienā, un parādīti kartē cilnē Satiksme tiešraidē.
+H1|10. Plūsmas tiešraidē un plūsmu katalogs
+H2|10.1 Plūsmas tiešraidē
+P|Kreisajā pusē Global Meteor Network mērītā aktīvo plūsmu plūsma un ZHR ar GMN kameru dienas skaitījumiem katrai plūsmai (tas ir skaits, nevis plūsma: tas atkarīgs no tā, cik stacijām ir skaidras debesis); labajā pusē CMOR radara radiantu kartes, ieskaitot dienas plūsmu kartes. Failus lejupielādē atkārtoti tikai tad, ja tie ir mainījušies, ne biežāk kā ik pēc 30 minūtēm, vai ar pogu Lejupielādēt tagad.
+H2|10.2 Plūsmas
+P|Katalogs, ko izmanto visi aprēķini: IMO 2026. un 2027. gada kalendāra plūsmas un Antihēlija avots. Šodien aktīvās plūsmas ir izceltas.
+LI|Saīsinājums, nosaukums, aktivitātes periods, Saules garums maksimumā, nākamais maksimums (UTC) un tā avots (IMO vai aprēķināts), radiants, ātrums, populācijas indekss r, ZHR, veids (vizuāla vai dienas radio plūsma).
+LI|k: frekvences pārrēķina kāpinātājs no populācijas indeksa (GMN, ja pieejams, citādi IMO).
+LI|IAU MDC: risinājumi, Δ radiants, Δλ, Δv: salīdzinājums ar IAU Meteor Data Center katalogu (publicētie risinājumi un programmas kataloga atšķirības no to mediānas).
+LI|GMN šodien: trajektorijas, kas apstiprinātas jaunākajā Global Meteor Network dienas failā.
+TAG|NOTA|Katalogs ir fails data/sciami.csv, un IMO maksimumi ir failā data/massimi_imo.csv: tos var labot ar teksta redaktoru. Kļūdaina rinda tiek norādīta palaišanas brīdī un ignorēta.
+H1|11. Kvadrātu karte
+P|Nostrādātie (oranži) un apstiprinātie (zaļi, QSL vai LoTW) Maidenhead kvadrāti, nolasīti no tava žurnāla ADIF faila, Eiropas kartē, ar atsevišķu apakšcilni katram diapazonam: 50, 70, 144, 222 un 432 MHz.
+LI|Ielādēt ADIF failu: nolasa .adi vai .adif failu; jauns fails aizstāj iepriekšējo. Notīrīt atmiņu: dzēš ielādētos kvadrātus.
+LI|Peles ritenītis = tālummaiņa, vilkšana = pārvietošana, kursors virs kvadrāta = šī kvadrāta QSO.
+TAG|NOTA|YA-MS nesavienojas ar LoTW: eksportē ADIF no savas žurnāla programmas vai no LoTW un ielādē to šeit.
+H1|12. Tehniskie dokumenti
+LI|Lietošanas rokasgrāmata: šis dokuments.
+LI|Avoti: visi programmas avoti ar atsaucēm.
+LI|Eiropas radaru karte: kur atrodas Collm, Sodankylä, GRAVES un CMOR attiecībā pret tavu staciju, ar debesīm, ko redz katrs radars.
+LI|Efektivitātes aprēķina skaidrojums: kā aprēķina efektivitāti, soli pa solim, ar atzīmēm AVOTS, PĀRBAUDE un IZVĒLE.
+P|Dokumenti ir saskarnes valodā, ja tulkojums pastāv, citādi itāļu valodā. "Eksportēt uz Word (.docx)" saglabā kopiju, kur vēlies; "Atvērt Word" atver to ar noklusējuma programmu. Aprēķinu rokasgrāmata ar visiem vienādojumiem ir mapē doc (itāļu valodā) un doc/manuali (pārējās valodās).
+H1|13. Mape data un iestatījumi
+H2|13.1 Galvenie faili
+LI|config.ini: visi iestatījumi (teksts, atslēga=vērtība).
+LI|lingue/: saskarnes tulkojumi; mappa/: Eiropas karte.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: plūsmu katalogs un Antihēlija avota novietojums; regole_sperimentali.csv: likumi starp joslām.
+LI|flusso_collm.csv, quote_collm.csv: Collm radara arhīvi; radar/: jaunākie attēli, RMOB faili un tiešsaistes avotu dati; fonti_radar.csv: avotu adreses, kuras var ieslēgt pa vienai.
+LI|cataloghi/: IAU MDC katalogs; radar/diretta/: GMN un CMOR dati.
+LI|call3.txt: lokatoru arhīvs; spot_ms/: savāktie meteor scatter spoti; adif_quadrati.csv: kvadrāti no ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehniskie dokumenti.
+LI|backup/: atjauninājuma aizstāto failu kopijas; aggiornamento/: lejupielādētā pakotne (dzēsta pēc restartēšanas).
+H2|13.2 Dažas config.ini atslēgas
+LI|controlla_aggiornamenti=0: nepārbaudīt jaunas versijas; aggiornamenti_salta: izlaistā versija.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: aprēķina izvēles rūtiņas.
+LI|raggio_iniziale (0 = divkārša ITU vērtība, 1 = ITU, 2 = neņemts vērā), durata_ping (0 = λ², 1 = novērotais).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Labo config.ini tikai tad, kad programma ir aizvērta: aizverot YA-MS to pārraksta.
+H1|14. Tipiskās procedūras
+H2|14.1 Sked sagatavošana plūsmas laikā
+TAG|PROCEDURA|1) Iestati abas stacijas un nospied Aprēķināt. 2) Cilnē Plūsmas pārbaudi plūsmas nākamo maksimumu. 3) Ieraksti šo datumu laukā Aprēķina datums (UTC). 4) Cilnē Efektivitātes aprēķins apskati plūsmas rindu un rindu Σ: izvēlies stundas ar augstāko efektivitāti. 5) Pieraksti pusi (A vai B) un pagriez antenu par 10-30° uz šo pusi. 6) Cilnē Ģeometrija un vājinājums pārbaudi sakaru budžeta rezervi.
+H2|14.2 Sekošana sesijai tiešraidē
+TAG|PROCEDURA|1) Nospied Reālais laiks. 2) Cilnē Prognozes aprēķins seko ieteicamajam Hot un PREV zonām, kas atjauninās katru minūti. 3) Cilnē Radara meteoru skaits pārbaudi, vai Collm radars skaita meteorus. 4) Cilnē Satiksme tiešraidē paskaties, kas strādā ēterā un kur krīt viņu sliedes.
+H2|14.3 Stacijas pārbaude ar GRAVES
+TAG|PROCEDURA|1) Cilnē GRAVES radars pārbaudi paneli LIETDERĪGĀ ZONA GRAVES KŪLĪ. 2) Pavērs antenu, kā norāda panelis TRASE. 3) Klausies USB 143,049 MHz nākamās kūļa pārejas laika logos. 4) Salīdzini pingus ar gaidāmajām atbalsīm un ar RMOB novērotājiem.
+H2|14.4 Prognozes kalibrēšana ar RMOB
+TAG|PROCEDURA|1) Cilnē Eksperimentālas prognozes ielādē mēneša RMOB failu no novērotāja tavā diapazonā. 2) Nospied Iegūt kāpinātāju no RMOB faila un pieņem k, ja kopīgo stundu ir pietiekami daudz. 3) Iestati Stacijas koeficients K uz ieteikto vērtību.
+H1|15. Biežākās problēmas
+LI|Visas efektivitātes ir 0: izlasi brīdinājumu NAV KOPĪGAS ZONAS. Ja "antenas diagramma" ir izslēgta, samazini ziedlapiņas elevāciju; citādi trase sliežu augstumā ir aiz horizonta.
+LI|Vērtības ir daudz zemākas nekā DH9GCD vai vecākā versijā: pārbaudi leņķa β izvēles rūtiņu (7.2. nodaļa).
+LI|"Nederīgs stacijas lokators": ieraksti 4, 6 vai 8 rakstzīmju lokatoru (piemēram, JN70CN vai JN70CN83).
+LI|Hot A un Hot B ir pelēki: ar antenu korespondenta virzienā tie jau ir ziedlapiņā; antena nav jāgroza.
+LI|Trūkst Eiropas kartes: pirmajā palaišanas reizē vajadzīgs interneta savienojums; programma pati mēģina vēlreiz.
+LI|Teksts ir pārāk mazs vai grafikiem nepietiek vietas: izmanto Fonts un pogu Vadība.
+LI|GRAVES kūļa pāreja šķiet nobīdīta: sinhronizē datora pulksteni ar NTP serveri; vadības stacija dažkārt nobīda stara secību.
+LI|Linux, ķīniešu vai japāņu teksts kvadrātiņu veidā: instalē Noto CJK fontus.
+H1|16. Kontakti
+P|YA-MS ir bezmaksas programma radioamatieriem, ko izstrādājis Costantino IC8TEM (Capri). Ziņojumi, ierosinājumi un salīdzināšanas dati ir laipni gaidīti: norādi operētājsistēmu, YA-MS versiju un ko tieši darīji. Kods un laidieni: github.com/ic8tem/YA-MS. Kontakti: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Kas vēlas atbalstīt šo darbu, var to izdarīt vietnē ko-fi.com/ic8tem.

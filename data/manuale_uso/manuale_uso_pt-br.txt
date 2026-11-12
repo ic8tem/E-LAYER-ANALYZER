@@ -1,0 +1,233 @@
+TITLE|Manual de uso do YA-MS
+SUB|Versão 1.8.1 - de autoria de Costantino IC8TEM - novembro de 2026
+H1|1. Introdução
+H2|1.1 Para que serve o YA-MS
+P|O YA-MS ajuda a prever e a acompanhar ao vivo as condições de meteor scatter entre a sua estação e um correspondente, de 28 a 432 MHz. Para cada chuva de meteoros ativa, ele indica o quanto a posição do seu radiante favorece o seu trajeto (a eficiência), em que horários, de que lado do trajeto chegam as reflexões e para onde convém apontar a antena. Ao lado da previsão, mostra os dados medidos ao vivo: as contagens do radar de meteoros de Collm, as câmeras da Global Meteor Network, o radar CMOR, o transmissor GRAVES e o tráfego de meteor scatter coletado dos clusters e do PSKReporter.
+P|O programa é gratuito, funciona no Windows, no Linux (inclusive Raspberry Pi) e no macOS, e está traduzido para 36 idiomas. Ele não controla o rádio nem o rotor: para o contato, usa-se o programa de modos digitais de sempre (MSHV, WSJT-X).
+H2|1.2 Como ler este manual
+P|O manual descreve as abas uma por uma, começando pelo cálculo de previsão. Cada capítulo explica o que a aba mostra, o que faz cada comando e como ler os resultados. O capítulo 14 reúne os procedimentos mais comuns e o capítulo 15, os problemas frequentes. Como a eficiência é calculada, com as fontes e as verificações, está explicado no documento "Explicação do cálculo da eficiência"; as equações completas estão no Manual dos cálculos (pasta doc).
+TAG|PROCEDURA|passos a seguir, na ordem.
+TAG|NOTA|informação útil para entender ou usar melhor uma função.
+TAG|ATTENZIONE|erro frequente, limite do cálculo ou comportamento que é bom conhecer.
+P|Os nomes dos comandos estão escritos como aparecem no programa em português; nos outros idiomas eles ocupam o mesmo lugar e a mesma ordem.
+H1|2. Instalação, inicialização e atualizações
+H2|2.1 Qual pacote baixar
+P|Todos os pacotes estão na página de releases no GitHub (github.com/ic8tem/YA-MS/releases). Não é preciso instalar o .NET: ele já vem dentro do pacote.
+LI|Windows 64 bits: YA-MS-<versão>-windows-x64-setup.exe (instala em C:\YA-MS, sem direitos de administrador) ou o zip portátil, para extrair em qualquer pasta. Para Windows 32 bits, os mesmos arquivos com x86.
+LI|Linux (Debian, Ubuntu, Mint): o pacote .deb, para instalar com sudo apt install ./ya-ms_<versão>_amd64.deb; na primeira execução o programa se copia para ~/YA-MS. Para as outras distribuições, o .tar.gz, para extrair e executar com ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 e 500: o pacote raspberry-pi-64bit (Raspberry Pi OS 64 bits) ou raspberry-pi-32bit, em .tar.gz ou .deb.
+LI|macOS: o .dmg para Apple Silicon (M1 e posteriores) ou para Intel, ou então o app.zip. Arraste o YA-MS.app para uma pasta sua (por exemplo ~/YA-MS): a pasta data é criada ao lado do app.
+TAG|ATTENZIONE|O Windows pode mostrar "O Windows protegeu o computador": escolha "Mais informações" e depois "Executar assim mesmo". No macOS, na primeira vez, abra o app com o botão direito e "Abrir". O programa não é assinado com um certificado pago.
+H2|2.2 A primeira execução
+P|Na inicialização aparece por alguns segundos a tela com as Perseidas sobre o VLT do ESO. Na primeira execução, o YA-MS escolhe o idioma do sistema, se for um dos 36, ou então o italiano; baixa o mapa da Europa (Natural Earth) para a pasta data/mappa e mostra um trajeto de exemplo. Bastam poucos minutos para configurá-lo para a sua estação (capítulo 4).
+H2|2.3 A pasta data
+P|Todas as configurações e todos os dados ficam em uma única pasta data ao lado do programa: nada de AppData, nada de pastas do sistema. Para levar o YA-MS para outro computador, basta copiar a pasta do programa com a sua pasta data. O conteúdo da pasta é descrito no capítulo 13.
+H2|2.4 Atualizações automáticas
+P|A partir da versão 1.8.0, o YA-MS verifica sozinho no GitHub, na inicialização e no máximo uma vez por dia, se saiu uma versão nova. Se houver, aparece a janela "Atualização disponível" com as novidades e três botões:
+LI|Atualizar agora: baixa o pacote adequado ao seu sistema, substitui os arquivos do programa, mantém a pasta data e reinicia o YA-MS. Os arquivos do programa na pasta data que a nova versão altera são antes copiados para data/backup/v<versão antiga>; os seus arquivos (configurações, históricos, spots, ADIF) não são tocados.
+LI|Mais tarde: fecha a janela; a verificação se repete no dia seguinte.
+LI|Pular esta versão: não oferece mais essa versão na inicialização.
+P|O botão "Atualizações", no canto inferior direito, na barra de status, faz a mesma verificação manualmente, inclusive para uma versão pulada.
+TAG|ATTENZIONE|A atualização automática precisa poder gravar na pasta do programa. Se não puder (por exemplo, um programa copiado para uma pasta do sistema), o YA-MS avisa e propõe abrir a página de releases para instalar manualmente. As versões até a 1.7.0 não têm essa função: na primeira vez, a atualização deve ser feita manualmente, instalando por cima da versão anterior.
+TAG|NOTA|Para não verificar mais as versões novas, escreva controlla_aggiornamenti=0 no arquivo data/config.ini.
+H2|2.5 Arquivos do programa faltando
+P|Na inicialização, o YA-MS verifica se tem todos os seus arquivos (traduções, catálogos, documentos). Se faltar algum, por exemplo após uma cópia incompleta, a janela "Arquivos faltando" os lista e propõe "Baixar os arquivos faltando" do GitHub, na mesma versão do programa, ou "Continuar sem eles". A mesma verificação se repete ao clicar em "Atualizações".
+H1|3. A janela principal
+H2|3.1 As partes da janela
+LI|No alto, três linhas de comandos válidas para todas as abas: estações e banda, camada E e antena, horário do cálculo (capítulo 4).
+LI|A barra das abas principais, tendo à direita o botão Comandos, o esquema de cores (Tema) e o idioma.
+LI|As subabas, em uma linha mais clara, para as abas que as possuem.
+LI|Embaixo, a barra de status: mensagens do cálculo, avisos sobre a conexão e o botão "Atualizações".
+H2|3.2 As abas
+LI|Ao vivo e dados em tempo real: Tráfego ao vivo, Fluxo do radar, Radar GRAVES, Coleta de dados (capítulo 9).
+LI|Cálculo de previsão: Cálculo de previsão, Geometria e atenuação, Cálculo da eficiência, Previsões experimentais (capítulos 5-8).
+LI|Chuvas ao vivo, Chuvas, Mapa de quadrados (capítulos 10-11).
+LI|Documentos técnicos, a última: Manual de uso, Fontes, Mapa dos radares europeus, Explicação do cálculo da eficiência (capítulo 12).
+H2|3.3 Idioma, cores, fonte
+LI|Idioma: 36 idiomas. Ao trocar de idioma, a janela se reconstrói na mesma posição e na mesma aba, sem reiniciar. Números e datas seguem o idioma escolhido (vírgula decimal em português, ponto em inglês).
+LI|Tema: 12 esquemas de cores; Claro é o padrão, Noite e Preto servem para o escuro, Rastro meteórico é o estilo original do YA-MS.
+LI|Fonte (no final da primeira linha de comandos): aumenta todo o texto de 100 a 300 %. Com fontes grandes, as abas quebram em várias linhas.
+LI|Comandos: recolhe e reabre as três linhas de comandos, para dar espaço a mapas e gráficos. A escolha é lembrada.
+TAG|NOTA|Quase todo comando tem uma dica: deixe o mouse parado sobre o comando para ler para que serve e de qual fonte vem o valor padrão.
+H1|4. Configurar a estação e o trajeto
+H2|4.1 Linha 1: estações e banda
+LI|Meu locator e altitude m: o seu locator Maidenhead (4, 6 ou 8 caracteres; usa-se o centro do quadrado) e a altitude da estação acima do nível do mar.
+LI|Correspondente e altitude m: locator e altitude da estação a ser contatada.
+LI|Banda MHz: 28, 50, 70, 144, 222 ou 432 MHz. Serve para o ganho e o lóbulo da antena, para a atenuação e o balanço, e para a estimativa do fluxo.
+LI|Calcular: recalcula o trajeto (amostragem da camada E, menos de um segundo).
+LI|Antena az: azimute da antena, sempre em direção ao correspondente.
+H2|4.2 Linha 2: camada E e antena
+LI|Altura dos rastros km e do radar: altura dos rastros meteóricos. Com "do radar" marcado, usa-se a altura mais frequente medida pelo radar de Collm (normalmente 88-90 km); desmarque para digitá-la manualmente.
+LI|Elevação do lóbulo °: elevação do máximo do lóbulo vertical da sua antena. Uma antena direcional fixada a 0° tem mesmo assim o lóbulo principal alguns graus acima do horizonte, por causa da reflexão no solo: normalmente 3-8°, conforme a altura da antena em comprimentos de onda.
+LI|diagrama da antena: ligado (padrão), os pontos de reflexão contam com o ganho vertical das duas antenas: pleno em torno do máximo do lóbulo, cada vez menor em direção ao horizonte e para cima. Desligado, a elevação do lóbulo é um limite rígido: os pontos vistos mais abaixo não contam.
+LI|Antena Yagi: boom m: comprimento do boom. Ao lado, o programa escreve o comprimento em comprimentos de onda, o ganho (curva DL6WU) e o lóbulo a -3 dB horizontal e vertical. Abaixo de 2 λ a estimativa é pouco precisa.
+LI|Hot spot a partir do ponto médio km e auto (AMS): distância de Hot A e Hot B ao ponto médio. Com "auto (AMS)" marcado, segue a tabela de J. Richardson citada por DJ5HG (13° de desvio a 1000 km, 10° acima de 1500 km); desmarque para digitar 30-400 km manualmente (o MSHV usa 150 km).
+TAG|ATTENZIONE|Com "diagrama da antena" desligado e o lóbulo a poucos graus, em um trajeto longo as duas estações podem não ver nenhum ponto comum da camada: todas as eficiências valem 0 e aparece o aviso "NENHUMA ZONA COMUM" com o lóbulo ou a altura dos rastros que seriam necessários. Exemplo: JN70CN - JO76QP, 1791 km, lóbulo a 3°, rastros a 88,5 km.
+H2|4.3 Linha 3: horário do cálculo
+LI|Hora: relógio UTC.
+LI|Data do cálculo (UTC): o dia do cálculo. Vale para Cálculo de previsão, para a tabela das 24 horas de Cálculo da eficiência e para a cronologia de Radar GRAVES. Por padrão é hoje e, à meia-noite, passa para o novo dia.
+LI|Horas (de −12 a +36 h): desloca o momento do cálculo, em passos de 15 minutos. Ao lado: "Cálculo para: agora" ou a data e a hora escolhidas.
+LI|Tempo real: volta ao momento atual.
+H2|4.4 Configurar a sua estação
+TAG|PROCEDURA|1) Digite Meu locator e a altitude. 2) Digite o locator e a altitude do correspondente, ou clique no mapa de Cálculo de previsão: clique esquerdo = correspondente, clique direito = a sua estação. 3) Escolha a banda. 4) Digite o comprimento do boom e a elevação do lóbulo da sua antena. 5) Clique em Calcular: a barra de status confirma "Trajeto calculado: ... km, ... pontos de reflexão amostrados".
+TAG|NOTA|As configurações são salvas em data/config.ini ao fechar e a cada cálculo: na próxima inicialização você encontra o mesmo trajeto.
+H1|5. Cálculo de previsão
+P|A primeira subaba do grupo Cálculo de previsão reúne em uma só tela onde caem agora os rastros úteis e para onde apontar. Tudo se refere ao momento escolhido com a data e o controle deslizante das horas.
+H2|5.1 A faixa de resumo
+P|Acima do mapa, uma faixa resume o cálculo para aquele momento: data e hora, índice do trajeto (soma de ZHR × eficiência das chuvas ativas), a chuva mais útil com o seu ZHR e a sua eficiência (também em dB em relação à referência de DJ5HG), o número de chuvas acima do horizonte e o Hot recomendado com o seu azimute.
+H2|5.2 O mapa em planta
+P|À esquerda, o mapa da Europa visto de cima (leste à direita), com a escala de graus ao redor:
+LI|linha verde: o trajeto real entre os dois locators;
+LI|Hot A e Hot B: os dois hot spots dos lados do ponto médio. Vermelho = recomendado, rosa = fora do lóbulo da antena, cinza = já dentro do lóbulo (com um aviso);
+LI|lóbulo da antena: o setor a -3 dB em torno do azimute da antena;
+LI|Limite A e Limite B, esmaecidos: as bordas mais distantes do céu visto por ambas as estações, não os pontos para onde apontar;
+LI|linha amarela: a direção em que a chuva selecionada (ou a mais favorável) varre o céu; pontos laranja: os dois apontamentos perpendiculares (azimute do radiante ±90°);
+LI|zonas PREV, elipses claras: onde caem agora os rastros mais prováveis, uma de cada lado do trajeto.
+P|Clique esquerdo no mapa = locator do correspondente, clique direito = locator da sua estação; o trajeto é recalculado na hora. A legenda é uma coluna recolhível à direita do mapa. As caixas acima da lista das chuvas ligam e desligam as direções dos Hot, o mapa da Europa e a vista de cima.
+H2|5.3 A lista das chuvas
+P|Para cada chuva: nome e código IMO, ZHR neste momento, azimute e elevação do radiante a partir da sua estação, eficiência para o trajeto, lado predominante (A ou B), melhor apontamento, nascer e ocaso do radiante. Um clique em uma linha seleciona a chuva: a linha amarela e os pontos laranja passam a acompanhá-la.
+H2|5.4 A pequena abóbada celeste e o texto do cálculo
+P|Os radiantes vistos da sua estação, com o código IMO e o percurso diário em ciano. Amarelo = eficiência de pelo menos 50 % e ZHR de pelo menos 2; laranja = pelo menos 20 %; vermelho-escuro = menos; cinza = quase inativa. A linha laranja que passa pelo zênite dá as direções de antena corretas, ortogonais ao deslocamento da chuva. Ao lado, o texto do cálculo: trajeto, ponto médio, Hot recomendado com a porcentagem das reflexões previstas, limites da zona comum.
+H2|5.5 A seção
+P|No canto inferior direito, os rastros mais prováveis vistos da antena em direção ao correspondente: na horizontal, o azimute em relação ao correspondente (A à esquerda, B à direita); na vertical, a elevação. Cada rastro é um segmento orientado para o radiante, mais grosso quanto mais provável. Também são desenhados o lóbulo da antena, o correspondente e os Hot.
+H2|5.6 Os avisos
+LI|ATENÇÃO: o Hot A (ou o Hot B) entra no lóbulo da antena: com este apontamento aquele hot spot já está coberto.
+LI|RADIANTE ALTO DEMAIS: um radiante útil está acima de 70°; os rastros descem quase na vertical e refletem pouco em direção ao trajeto.
+LI|RADIANTE BAIXO AO LONGO DO TRAJETO: a eficiência calculada continua baixa, mas com rastros rasantes alinhados DJ5HG prevê reflexões raras e fortes: vale a pena escutar.
+LI|TRAJETO ALÉM DO HORIZONTE DO RASTRO: na altura dos rastros o ponto médio está abaixo do horizonte; o aviso diz qual altura seria necessária.
+LI|NENHUMA ZONA COMUM: nenhum ponto da camada é visível pelas duas estações; o aviso diz quanto falta e o que seria necessário.
+H1|6. Geometria e atenuação
+P|Um relatório em texto do trajeto, selecionável e copiável, e, à direita, o gráfico da elevação da antena em função da distância do ponto de reflexão, para três alturas dos rastros.
+H2|6.1 Os dados desta aba
+LI|Potência W (400), Ganho da antena dBi (14; mesma antena nas duas pontas), Sinal mínimo dBm (-130), Densidade do rastro q = 10^14 elétrons/m: servem para o balanço do enlace.
+LI|Raio inicial do rastro: dobro do ITU (Stober 2021, prudente, padrão), ITU-R P.843, ou excluído. Quanto maior o raio, mais se perde nas frequências altas.
+LI|Duração dos pings entre bandas: teórica λ² (McKinley, SM6FHZ; prudente, padrão) ou observada (medições HamSCI MSQP de NN4SA, Perseidas 2026: de 50 para 144 MHz os pings ficam 1,5 vez mais curtos, em vez de 8).
+H2|6.2 O relatório
+LI|GEOMETRIA DO TRAJETO: estações e altitudes, distância, azimute, ponto médio, altura dos rastros, elevação da antena em direção ao ponto médio.
+LI|HOT A / HOT B: locator, azimute, desvio em relação à direção direta, distância e elevação de cada hot spot.
+LI|LIMITES DA ZONA COMUM: alcance na altura dos rastros até o horizonte, o lóbulo da antena com o seu máximo e a sua largura vertical, Limite A e Limite B; ganho e lóbulo da Yagi.
+LI|ATENUAÇÃO DO TRAJETO: para o ponto médio, Hot A e Hot B, em 28, 50, 70, 144, 222 e 432 MHz (rastro que atravessa o plano do trajeto, o caso mais desfavorável).
+LI|BALANÇO DO ENLACE: potência e EIRP, atenuação, sinal na antena, sinal mínimo e margem; o melhor caso (rastro no plano do trajeto) e a margem com a atenuação média de OH5IY.
+LI|REGRAS EXPERIMENTAIS ENTRE AS BANDAS: número, intensidade e duração das reflexões em relação a 144 MHz; ping máximo IARU; duração observada segundo as medições MSQP.
+TAG|NOTA|Uma margem positiva indica que um rastro subdenso médio basta para fechar o trajeto com a sua estação; uma margem negativa indica que são necessários rastros mais densos ou meteoros sobredensos. É uma estimativa: a referência continua sendo a experiência na banda.
+H1|7. Cálculo da eficiência
+P|A eficiência indica, em porcentagem, o quanto a posição do radiante de uma chuva permite reflexões no seu trajeto: 100 % é a posição mais favorável para aquele trajeto. Esta subaba a mostra hora a hora para o dia da "Data do cálculo", com os valores na metade de cada hora.
+H2|7.1 Os quatro quadros
+LI|MELHOR HORA DO DIA: a hora com o índice do trajeto mais alto e o lado predominante.
+LI|CHUVA MAIS FAVORÁVEL: a chuva que mais contribui, com a hora, o lado e os dois melhores apontamentos.
+LI|AGORA: índice e lado nesta hora e o Hot recomendado (só se o dia escolhido for hoje).
+LI|PREVISÃO EXPERIMENTAL: reflexões por hora previstas agora, daqui a 1 hora e daqui a 2 horas (capítulo 8).
+P|Quando um quadro não tem valores, ele diz por quê: nenhuma zona comum, nenhuma chuva ativa ou radiantes desfavoráveis o dia inteiro. A dica de cada quadro explica o que ele mostra. Abaixo dos quadros, quando necessário, aparecem o aviso NENHUMA ZONA COMUM e uma faixa que explica as letras A e B.
+H2|7.2 A configuração do cálculo
+LI|Prudente (padrão): altura dos rastros do radar, rastros normais, ângulo β ligado. Dá os valores mais baixos.
+LI|Como DJ5HG: altura fixa de 102 km, rastros mais longos com o radiante baixo, ângulo β ligado; reproduz o programa QTFGUI.
+LI|Personalizada: é selecionada sozinha quando você altera manualmente uma das caixas ou a altura.
+LI|Rastros mais longos com o radiante baixo (DJ5HG): com o radiante baixo caem menos meteoros, mas os rastros são mais longos e refletem com mais frequência; acima de cerca de 9° os dois efeitos se compensam.
+LI|Ângulo β entre rastro e trajeto (McKinley completo), no quadro laranja com o texto "a escolha que mais pesa": ligado, os rastros que atravessam o plano do trajeto valem 10-15 dB menos do que os que estão nele e predominam os radiantes alinhados com o trajeto. Desligado, vale a regra clássica: o melhor radiante fica a 15-70° de altura e transversal ao trajeto.
+LI|Veredicto clássico: acrescenta abaixo de cada chuva a linha "clássico" com o veredicto da regra dos radioamadores no ponto médio do trajeto: ✗ radiante abaixo do horizonte, ◐ marginal (baixo demais, alto demais ou quase alinhado com o trajeto), ● bom, ★ ótimo (transversal ao trajeto). Não altera o cálculo.
+TAG|ATTENZIONE|O ângulo β muda muito os valores nos trajetos longos: JN70CN - JO76QP (1791 km), Geminídeas de 14/12/2026, 98 % com β desligado e 13 % com β ligado. As duas teses têm fontes diferentes e uma primeira comparação com as contagens BRAMS não permite distingui-las: compare os dois casos com a experiência na banda. As porcentagens são relativas à melhor posição do radiante para aquele trajeto; para comparar trajetos diferentes, usa-se a eficiência em dB.
+H2|7.3 Quanto confiar nos números
+P|Os melhores horários e o lado são as informações mais sólidas: mudam pouco com a configuração do cálculo. Já as porcentagens dependem muito das escolhas, sobretudo do ângulo β. A comparação com 181 767 spots MSK144 reais em 50 MHz (HamSCI, Perseidas de 11-12 de agosto de 2025) confirma a variação horária do índice do trajeto, mas mostra também que qual par de estações se ouve em um dado horário depende sobretudo dos meteoros esporádicos e da atividade no ar, que o modelo não contém.
+TAG|NOTA|Use o programa para escolher o horário e o lado para onde girar a antena; não leia as porcentagens como probabilidades de sucesso do contato.
+H2|7.4 O gráfico
+P|Para no máximo cinco chuvas: a eficiência como linha contínua e a fórmula de DH9GCD como linha pontilhada da mesma cor; o índice do trajeto como barras na escala da direita. As horas locais estão escritas abaixo das horas UTC.
+H2|7.5 A tabela das 24 horas
+LI|Uma linha para cada chuva ativa naquele dia, 24 colunas para as horas UTC.
+LI|63A: eficiência de 63 %, a maior parte das reflexões do lado A; 41B: lado B; um número sem letra: abaixo de 5 %; célula vazia: abaixo de 1 %; ↑: radiante acima de 70° (alto demais); cor mais quente = eficiência mais alta.
+LI|A = à esquerda, olhando da sua estação para o correspondente (zona Hot A); B = à direita (zona Hot B). Convém girar a antena 10-30° para esse lado (side-scatter).
+LI|Linhas azul-claras DH9GCD %: a fórmula da melhor direção de DH9GCD, para comparação; não considera nem o horizonte nem o lóbulo.
+LI|Linha Σ: índice do trajeto, soma de ZHR × eficiência de todas as chuvas ativas.
+LI|Linha laranja: a previsão experimental das reflexões por hora, para os horários em que existe.
+TAG|PROCEDURA|Para escolher o horário de um sked: defina a data, observe a linha Σ e o quadro MELHOR HORA DO DIA; na linha da chuva escolhida, leia a letra A ou B e gire a antena 10-30° para esse lado. Deixe o mouse sobre uma célula para ler o detalhe do Hot daquela hora.
+H1|8. Previsões experimentais
+P|Converte as contagens do radar de Collm (36,2 MHz) em uma estimativa das reflexões por hora em uma banda de radioamador (144 MHz por padrão, de 28 a 1300 MHz), faz a previsão das próximas 24 horas para o seu trajeto e a compara com um observador RMOB. Tudo aqui é experimental: os números servem para comparar horários e dias.
+H2|8.1 Os comandos
+LI|Frequência de destino MHz: frequência da previsão.
+LI|Expoente λ^k (3, SM6FHZ) e Fator de estação K (1): regra sobre a frequência e correção para a sua estação.
+LI|k a partir dos índices de população: propõe k a partir dos índices de população r das chuvas ativas (GMN, ou então IMO; k = 3,75 · log10 r, ponderado pelo ZHR) e pede confirmação antes de aplicá-lo.
+LI|Carregar arquivo RMOB do disco e Obter o expoente do arquivo RMOB: leem um arquivo mensal RMOB e obtêm k a partir das horas em comum com Collm.
+LI|Observador RMOB, Baixar RMOB agora e download automático a cada 5 minutos: o download automático vem desligado e só deve ser ativado com a permissão do RMOB.
+H2|8.2 Os resultados
+LI|O gráfico de ontem e hoje: meteoros por hora em Collm, valores convertidos para a sua frequência e, se carregadas, as contagens RMOB.
+LI|A previsão das próximas 24 horas: a mesma hora do dia anterior, corrigida pela variação do índice das chuvas do trajeto.
+LI|A tabela com a avaliação: bom, médio ou fraco em relação à média das 24 horas.
+TAG|NOTA|A duração das reflexões segue a escolha "Duração dos pings entre bandas" de Geometria e atenuação; em forward scatter, a duração cresce também com sec²φ no ponto médio do trajeto.
+H1|9. Ao vivo e dados em tempo real
+H2|9.1 Tráfego ao vivo
+P|Um mapa azimutal equidistante centrado na sua estação com todo o tráfego de meteor scatter coletado: para cada contato, o trajeto na cor da banda (28 marrom, 50 verde, 70 ciano, 144 laranja, 222 rosa, 432 violeta), as duas estações e a nuvem dos rastros mais prováveis naquele horário. Os spots recém-chegados piscam por um minuto.
+LI|Raio do mapa: 600-3500 km. Spots a mostrar: últimos 15 ou 30 minutos, última hora, últimas 3 ou 24 horas.
+LI|Um clique em um trajeto ou em uma linha da tabela destaca o contato e mostra o centro da nuvem, a sua altura e as suas dimensões.
+H2|9.2 Fluxo do radar
+P|As contagens horárias de meteoros e as alturas dos rastros do radar SKiYMET de Collm (36,2 MHz) e a última imagem do radar de Sodankylä (36,9 MHz).
+LI|Baixar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é baixada de novo se tiver mudado.
+LI|Expoente λ (SM6FHZ): expoente da estimativa na sua banda (linha laranja na escala da direita).
+LI|Alturas dos rastros: histograma com moda, média, mediana e desvio padrão; com "do radar", a moda passa a ser a altura de todos os cálculos.
+TAG|ATTENZIONE|Se não for possível ler a escala do gráfico de Collm, aparece um aviso laranja e os valores devem ser verificados. Sem conexão, o programa usa os últimos dados salvos, avisa uma vez e tenta de novo sozinho a cada 5 minutos; a barra de status fica vermelha até a conexão voltar.
+H2|9.3 Radar GRAVES
+P|O GRAVES transmite em CW em 143,050 MHz a partir de Broye-lès-Pesmes (JN27SI). A subaba trata GRAVES → você como um trajeto de meteor scatter à parte: calcula a eficiência, o Hot recomendado e as zonas PREV, verifica se a zona está dentro do feixe e quando o feixe a ilumina.
+LI|Agora: traz o cálculo de volta ao tempo real. Definir GRAVES como DX: o correspondente passa a ser o GRAVES. Sequência do feixe: 0,8 s por passo (PE1ITR 2021) ou 3,2 s (2007).
+LI|Os cartões: ZONA ÚTIL NO FEIXE, EFICIÊNCIA DO TRAJETO GRAVES → VOCÊ AGORA (com os ecos esperados, experimentais), TRAJETO (para onde apontar), PRÓXIMA PASSAGEM DO FEIXE.
+LI|A reconstrução cronológica do dia e o detalhe dos próximos segundos.
+TAG|PROCEDURA|Para ouvir o GRAVES: USB em 143,049 MHz (tom de cerca de 1 kHz), AGC lento ou desligado, banda de áudio de pelo menos 2,4 kHz; antena voltada para o hot spot recomendado no cartão TRAJETO, com baixa elevação; relógio do PC sincronizado. Os pings são linhas curtas perto da portadora no waterfall.
+H2|9.4 Coleta de dados
+P|Coleta os spots de meteor scatter de três fluxos telnet (DX cluster, RBN, DM4X com os spots do PSKReporter) e do fluxo MQTT do PSKReporter, cada um na sua subaba, e os filtra.
+LI|Digite no alto o seu indicativo para o login. Cada fluxo tem host, porta, comandos após o login, Reconectar, Conectar ao iniciar e um console.
+LI|O filtro aceita os spots nas frequências típicas do meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) ou com um modo MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), e descarta os que declaram outra propagação. Faixas e palavras podem ser alteradas; cada uma tem o seu contador.
+LI|Os locators que faltam são obtidos do arquivo CALL3; os spots aceitos vão para data/spot_ms, um arquivo por dia, e para o mapa de Tráfego ao vivo.
+H1|10. Chuvas ao vivo e catálogo das chuvas
+H2|10.1 Chuvas ao vivo
+P|À esquerda, o fluxo e o ZHR medidos pela Global Meteor Network para as chuvas ativas, com as contagens do dia das câmeras GMN por chuva (uma contagem, não um fluxo: depende de quantas estações veem o céu limpo); à direita, os mapas de radiantes do radar CMOR, inclusive os das chuvas diurnas. Os arquivos só são baixados de novo se tiverem mudado, no máximo a cada 30 minutos, ou com Baixar agora.
+H2|10.2 Chuvas
+P|O catálogo usado por todos os cálculos: as chuvas do calendário IMO 2026 e 2027 mais a Fonte Anti-hélio. As chuvas ativas hoje ficam destacadas.
+LI|Código, nome, período de atividade, longitude solar do máximo, próximo máximo (UTC) e sua fonte (IMO ou calculado), radiante, velocidade, índice de população r, ZHR, tipo (visual ou rádio diurna).
+LI|k: expoente da conversão de frequência a partir do índice de população (GMN se disponível, senão IMO).
+LI|IAU MDC: soluções, Δ radiante, Δλ, Δv: comparação com o catálogo do IAU Meteor Data Center (soluções publicadas e diferenças do catálogo do programa em relação à sua mediana).
+LI|GMN hoje: trajetórias confirmadas no último arquivo diário da Global Meteor Network.
+TAG|NOTA|O catálogo é o arquivo data/sciami.csv e os máximos IMO estão em data/massimi_imo.csv: podem ser alterados com um editor de texto. Uma linha errada é sinalizada na inicialização e ignorada.
+H1|11. Mapa de quadrados
+P|Os quadrados Maidenhead trabalhados (laranja) e confirmados (verde, QSL ou LoTW), lidos do arquivo ADIF do seu log, em um mapa da Europa, com uma subaba por banda: 50, 70, 144, 222 e 432 MHz.
+LI|Carregar arquivo ADIF: lê um arquivo .adi ou .adif; um novo arquivo substitui o anterior. Limpar memória: apaga os quadrados carregados.
+LI|Rodinha do mouse = zoom, arrastar = mover, mouse sobre um quadrado = os QSOs daquele quadrado.
+TAG|NOTA|O YA-MS não se conecta ao LoTW: exporte o ADIF do seu programa de log ou do LoTW e carregue-o aqui.
+H1|12. Documentos técnicos
+LI|Manual de uso: este documento.
+LI|Fontes: todas as fontes do programa, com as referências.
+LI|Mapa dos radares europeus: onde ficam Collm, Sodankylä, GRAVES e CMOR em relação à sua estação, com o céu visto por cada radar.
+LI|Explicação do cálculo da eficiência: como a eficiência é calculada, passo a passo, com as etiquetas FONTE, VERIFICAÇÃO e ESCOLHA.
+P|Os documentos seguem o idioma da interface quando a tradução existe; caso contrário, ficam em italiano. "Exportar para o Word (.docx)" salva uma cópia onde você quiser; "Abrir no Word" abre o documento com o programa padrão. O Manual dos cálculos, com todas as equações, fica na pasta doc (italiano) e em doc/manuali (os outros idiomas).
+H1|13. A pasta data e as configurações
+H2|13.1 Os arquivos principais
+LI|config.ini: todas as configurações (texto, chave=valor).
+LI|lingue/: as traduções da interface; mappa/: o mapa da Europa.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: o catálogo das chuvas e a posição da Fonte Anti-hélio; regole_sperimentali.csv: as regras entre as bandas.
+LI|flusso_collm.csv, quote_collm.csv: históricos do radar de Collm; radar/: últimas imagens, arquivos RMOB e dados das fontes ao vivo; fonti_radar.csv: endereços das fontes, que podem ser ativadas uma a uma.
+LI|cataloghi/: catálogo IAU MDC; radar/diretta/: dados GMN e CMOR.
+LI|call3.txt: arquivo de locators; spot_ms/: spots de meteor scatter coletados; adif_quadrati.csv: quadrados do ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: os documentos técnicos.
+LI|backup/: cópias dos arquivos substituídos por uma atualização; aggiornamento/: pacote baixado (apagado ao reiniciar).
+H2|13.2 Algumas chaves do config.ini
+LI|controlla_aggiornamenti=0: não verificar as versões novas; aggiornamenti_salta: versão pulada.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: as caixas do cálculo.
+LI|raggio_iniziale (0 = dobro do ITU, 1 = ITU, 2 = excluído), durata_ping (0 = λ², 1 = observada).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Altere o config.ini somente com o programa fechado: ao fechar, o YA-MS o regrava.
+H1|14. Procedimentos típicos
+H2|14.1 Preparar um sked em uma chuva
+TAG|PROCEDURA|1) Configure as duas estações e clique em Calcular. 2) Em Chuvas, verifique o próximo máximo da chuva. 3) Coloque essa data em Data do cálculo. 4) Em Cálculo da eficiência, observe a linha da chuva e a linha Σ: escolha os horários com a eficiência mais alta. 5) Anote o lado (A ou B) e gire a antena 10-30° para esse lado. 6) Em Geometria e atenuação, verifique a margem do balanço.
+H2|14.2 Acompanhar uma sessão ao vivo
+TAG|PROCEDURA|1) Clique em Tempo real. 2) Em Cálculo de previsão, acompanhe o Hot recomendado e as zonas PREV, que se atualizam a cada minuto. 3) Em Fluxo do radar, verifique se o radar de Collm está contando meteoros. 4) Em Tráfego ao vivo, veja quem está operando e onde caem os rastros deles.
+H2|14.3 Testar a estação com o GRAVES
+TAG|PROCEDURA|1) Em Radar GRAVES, verifique o cartão ZONA ÚTIL NO FEIXE. 2) Aponte a antena como indica o cartão TRAJETO. 3) Escute em USB em 143,049 MHz nas janelas da próxima passagem do feixe. 4) Compare os pings com os ecos esperados e com os observadores RMOB.
+H2|14.4 Calibrar a previsão com o RMOB
+TAG|PROCEDURA|1) Em Previsões experimentais, carregue um arquivo RMOB mensal de um observador na sua banda. 2) Clique em Obter o expoente do arquivo RMOB e aceite k se as horas em comum forem suficientes. 3) Ajuste o fator de estação K para o valor sugerido.
+H1|15. Problemas frequentes
+LI|Todas as eficiências valem 0: leia o aviso NENHUMA ZONA COMUM. Com "diagrama da antena" desligado, abaixe a elevação do lóbulo; caso contrário, o trajeto está além do horizonte na altura dos rastros.
+LI|Os valores são muito mais baixos que os de DH9GCD ou de uma versão antiga: verifique a caixa do ângulo β (capítulo 7.2).
+LI|"Locator da estação inválido": digite um locator de 4, 6 ou 8 caracteres (por exemplo JN70CN ou JN70CN83).
+LI|Hot A e Hot B estão em cinza: com a antena voltada para o correspondente, eles já estão dentro do lóbulo; não é preciso girar a antena.
+LI|Falta o mapa da Europa: é necessária conexão na primeira execução; o programa tenta de novo sozinho.
+LI|O texto está pequeno demais ou os gráficos não têm espaço: use Fonte e o botão Comandos.
+LI|A passagem do feixe do GRAVES parece deslocada: sincronize o relógio do PC com um servidor NTP; às vezes a sequência do feixe é deslocada pela estação de controle.
+LI|Linux, texto chinês ou japonês em quadradinhos: instale as fontes Noto CJK.
+H1|16. Contato
+P|O YA-MS é um programa gratuito para radioamadores, de autoria de Costantino IC8TEM (Capri). Relatos de problemas, sugestões e dados de comparação são bem-vindos: informe o sistema operacional, a versão do YA-MS e o que você fez. Código e releases: github.com/ic8tem/YA-MS. Contato: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Quem quiser apoiar o trabalho pode fazê-lo em ko-fi.com/ic8tem.

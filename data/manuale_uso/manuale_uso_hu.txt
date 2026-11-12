@@ -1,0 +1,233 @@
+TITLE|A YA-MS felhasználói kézikönyve
+SUB|1.8.1-es verzió - készítette Costantino IC8TEM - 2026. november
+H1|1. Bevezetés
+H2|1.1 Mire szolgál a YA-MS
+P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
+P|A program ingyenes, Windowson, Linuxon (Raspberry Pi-n is) és macOS-en fut, és 36 nyelvre van lefordítva. Nem vezérli sem a rádiót, sem a rotort: az összeköttetéshez a szokásos digitális üzemmódú programot kell használni (MSHV, WSJT-X).
+H2|1.2 Hogyan olvassa ezt a kézikönyvet
+P|A kézikönyv egyenként írja le a füleket, az előrejelző számítástól kezdve. Minden fejezet elmondja, mit mutat a fül, mit csinálnak az egyes vezérlők, és hogyan kell az eredményeket olvasni. A 14. fejezet a leggyakoribb eljárásokat, a 15. fejezet a gyakori problémákat gyűjti össze. Hogy hogyan számítja a program a hatásfokot, a forrásokkal és ellenőrzésekkel együtt, „A hatásfok számításának magyarázata” című dokumentum írja le; a teljes egyenletek a Számítási kézikönyvben vannak (doc mappa).
+TAG|PROCEDURA|követendő lépések, sorrendben.
+TAG|NOTA|hasznos információ egy funkció jobb megértéséhez vagy használatához.
+TAG|ATTENZIONE|gyakori hiba, a számítás korlátja vagy ismerendő viselkedés.
+P|A vezérlők nevei úgy szerepelnek, ahogy a program magyar változatában megjelennek; a többi nyelven ugyanott és ugyanabban a sorrendben találhatók.
+H1|2. Telepítés, indítás és frissítések
+H2|2.1 Melyik csomagot töltse le
+P|Minden csomag a GitHub kiadási oldalán található (github.com/ic8tem/YA-MS/releases). A .NET-et nem kell telepíteni: már benne van a csomagban.
+LI|Windows 64 bit: YA-MS-<versione>-windows-x64-setup.exe (a C:\YA-MS mappába telepít, rendszergazdai jogok nélkül) vagy a hordozható zip, amelyet bármely mappába kibonthat. 32 bites Windowshoz ugyanezek a fájlok x86 jelöléssel.
+LI|Linux (Debian, Ubuntu, Mint): a .deb csomag, amelyet a sudo apt install ./ya-ms_<versione>_amd64.deb paranccsal telepíthet; az első indításkor a program a ~/YA-MS mappába másolja magát. Más disztribúciókhoz a .tar.gz, amelyet kibontás után a ./YA-MS paranccsal futtathat.
+LI|Raspberry Pi 3, 4, 5, 400 és 500: a raspberry-pi-64bit csomag (Raspberry Pi OS 64 bit) vagy a raspberry-pi-32bit, .tar.gz vagy .deb formátumban.
+LI|macOS: a .dmg Apple Siliconhoz (M1 és újabb) vagy Intelhez, illetve az app.zip. Húzza a YA-MS.app-ot egy saját mappába (például ~/YA-MS): a data mappa az alkalmazás mellett jön létre.
+TAG|ATTENZIONE|A Windows megjelenítheti „A Windows megvédte a számítógépet” üzenetet: válassza a „További információ”, majd a „Futtatás mindenképp” lehetőséget. macOS-en az első alkalommal jobb gombbal nyissa meg az alkalmazást, és válassza a „Megnyitás” parancsot. A program nincs fizetős tanúsítvánnyal aláírva.
+H2|2.2 Az első indítás
+P|Indításkor néhány másodpercre megjelenik a nyitókép az ESO VLT távcsöve fölötti Perseidákkal. Az első indításkor a YA-MS a rendszer nyelvét választja, ha az a 36 nyelv egyike, különben az olaszt; letölti Európa térképét (Natural Earth) a data/mappa mappába, és egy példa-útvonalat mutat. Néhány perc elég ahhoz, hogy beállítsa a saját állomására (4. fejezet).
+H2|2.3 A data mappa
+P|Minden beállítás és minden adat egyetlen data mappában van a program mellett: nincs AppData, nincsenek rendszermappák. A YA-MS másik számítógépre költöztetéséhez elég átmásolni a program mappáját a data mappájával együtt. A mappa tartalmát a 13. fejezet írja le.
+H2|2.4 Automatikus frissítések
+P|Az 1.8.0-s verziótól a YA-MS magától ellenőrzi a GitHubon, indításkor és legfeljebb naponta egyszer, hogy megjelent-e új verzió. Ha igen, megjelenik a „Frissítés érhető el” ablak az újdonságokkal és három gombbal:
+LI|Frissítés most: letölti a rendszerének megfelelő csomagot, lecseréli a program fájljait, megtartja a data mappát, és újraindítja a YA-MS-t. A data mappában lévő programfájlokat, amelyeket az új verzió módosít, előbb a data/backup/v<versione vecchia> mappába másolja; az Ön fájljaihoz (beállítások, archívumok, spotok, ADIF) nem nyúl.
+LI|Később: bezárja az ablakot; az ellenőrzés másnap megismétlődik.
+LI|Verzió kihagyása: indításkor többé nem ajánlja fel azt a verziót.
+P|Az állapotsor jobb alsó sarkában lévő „Frissítések” gomb ugyanezt az ellenőrzést végzi el kézzel, kihagyott verzióra is.
+TAG|ATTENZIONE|Az automatikus frissítésnek írnia kell tudnia a program mappájába. Ha nem tud (például egy rendszermappába másolt program esetén), a YA-MS jelzi ezt, és felajánlja a kiadási oldal megnyitását a kézi telepítéshez. Az 1.7.0-s verzióig ez a funkció nem létezik: első alkalommal kézzel kell frissíteni, az előző verzióra telepítve.
+TAG|NOTA|Ha nem szeretné többé ellenőrizni az új verziókat, írja be a controlla_aggiornamenti=0 sort a data/config.ini fájlba.
+H2|2.5 Hiányzó programfájlok
+P|Indításkor a YA-MS ellenőrzi, hogy megvan-e minden fájlja (fordítások, katalógusok, dokumentumok). Ha valamelyik hiányzik, például egy hiányos másolás után, a „Hiányzó fájlok” ablak felsorolja őket, és felajánlja a „Hiányzó fájlok letöltése” lehetőséget a GitHubról, a program azonos verziójában, vagy a „Folytatás nélkülük” lehetőséget. Ugyanez az ellenőrzés megismétlődik a „Frissítések” gomb megnyomásakor.
+H1|3. A főablak
+H2|3.1 Az ablak részei
+LI|Felül a vezérlők három sora, amelyek minden fülre érvényesek: állomások és sáv, E-réteg és antenna, a számítás időpontja (4. fejezet).
+LI|A fő fülek sávja, jobb oldalán a Vezérlők gombbal, a színsémával (Téma) és a nyelvvel.
+LI|Az alfülek egy világosabb sorban, azoknál a füleknél, amelyeknek vannak.
+LI|Alul az állapotsor: a számítás üzenetei, a kapcsolatra vonatkozó figyelmeztetések és a „Frissítések” gomb.
+H2|3.2 A fülek
+LI|Élő és valós idejű adatok: Élő forgalom, Radarfluxus, GRAVES radar, Adatgyűjtés (9. fejezet).
+LI|Előrejelző számítás: Előrejelző számítás, Geometria és csillapítás, Hatásfok számítása, Kísérleti előrejelzések (5-8. fejezet).
+LI|Élő rajok, Rajok, Négyzettérkép (10-11. fejezet).
+LI|Műszaki dokumentumok, az utolsó: Felhasználói kézikönyv, Források, Az európai radarok térképe, A hatásfok számításának magyarázata (12. fejezet).
+H2|3.3 Nyelv, színek, betűtípus
+LI|Nyelv: 36 nyelv. Nyelvváltáskor az ablak ugyanazon a helyen és ugyanazon a fülön épül fel újra, újraindítás nélkül. A számok és dátumok a választott nyelvet követik (tizedesvessző magyarul, tizedespont angolul).
+LI|Téma: 12 színséma; a Világos az alapértelmezett, az Éjszaka és a Fekete sötétben használható, a Meteornyom a YA-MS eredeti stílusa.
+LI|Betűtípus (a vezérlők első sorának végén): az összes szöveget 100-ról 300 %-ra nagyítja. Nagy betűméretnél a fülek több sorba törnek.
+LI|Vezérlők: összecsukja és újra kinyitja a vezérlők három sorát, hogy helyet adjon a térképeknek és grafikonoknak. A választást a program megjegyzi.
+TAG|NOTA|Szinte minden vezérlőnek van buboréksúgója: tartsa az egeret a vezérlő fölött, és elolvashatja, mire szolgál, és melyik forrásból származik a kezdőérték.
+H1|4. Az állomás és az útvonal beállítása
+H2|4.1 1. sor: állomások és sáv
+LI|Saját lokátorom és magasság m: az Ön Maidenhead-lokátora (4, 6 vagy 8 karakter; a négyzet középpontja számít) és az állomás tengerszint feletti magassága.
+LI|Ellenállomás és magasság m: a megdolgozni kívánt állomás lokátora és magassága.
+LI|Sáv MHz: 28, 50, 70, 144, 222 vagy 432 MHz. Az antenna nyereségéhez és lebenyéhez, a csillapításhoz és a mérleghez, valamint a fluxus becsléséhez kell.
+LI|Számítás: újraszámolja az útvonalat (az E-réteg mintavételezése, kevesebb mint egy másodperc).
+LI|Antenna az: az antenna azimutja, mindig az ellenállomás felé.
+H2|4.2 2. sor: E-réteg és antenna
+LI|Nyommagasság km és a radarból: a meteornyomok magassága. Bejelölt „a radarból” esetén a Collm radar által mért leggyakoribb magasságot használja (általában 88-90 km); szüntesse meg a jelölést, ha kézzel szeretné megadni.
+LI|Lebeny emelkedése °: antennája függőleges lebenye maximumának emelkedési szöge. A 0°-ra állított irányantenna főlebenye a talajról való visszaverődés miatt mégis néhány fokkal a horizont fölött van: általában 3-8°, az antenna hullámhosszban kifejezett magasságától függően.
+LI|antenna iránykarakterisztika: bekapcsolva (alapértelmezés) a visszaverődési pontok a két antenna függőleges nyereségével súlyozva számítanak: teljes súllyal a lebeny maximuma körül, egyre kevésbé a horizont és felfelé haladva. Kikapcsolva a lebeny emelkedése éles határ: az alacsonyabban látott pontok nem számítanak.
+LI|Yagi antenna: tartócső m: a tartócső (boom) hossza. Mellette a program kiírja a hosszt hullámhosszban, a nyereséget (DL6WU-görbe), valamint a vízszintes és függőleges -3 dB-es lebenyt. 2 λ alatt a becslés pontatlan.
+LI|Hot spot a felezőponttól km és auto (AMS): Hot A és Hot B távolsága a felezőponttól. Bejelölt „auto (AMS)” esetén J. Richardson DJ5HG által idézett táblázatát követi (13° eltérés 1000 km-nél, 10° 1500 km felett); szüntesse meg a jelölést, ha kézzel szeretne 30-400 km-t megadni (az MSHV 150 km-t használ).
+TAG|ATTENZIONE|Kikapcsolt „antenna iránykarakterisztika” és néhány fokos lebeny esetén egy hosszú útvonalon előfordulhat, hogy a két állomás nem lát közös pontot a rétegben: minden hatásfok 0, és megjelenik a „NINCS KÖZÖS ZÓNA” figyelmeztetés a szükséges lebennyel vagy nyommagassággal. Példa: JN70CN - JO76QP, 1791 km, lebeny 3°-on, nyomok 88,5 km-en.
+H2|4.3 3. sor: a számítás időpontja
+LI|Idő: UTC óra.
+LI|A számítás dátuma (UTC): a számítás napja. Érvényes az Előrejelző számításra, a Hatásfok számítása fül 24 órás táblázatára és a GRAVES radar időrendjére. Alapértelmezés szerint a mai nap, és éjfélkor az új napra vált.
+LI|Órák (−12-től +36 h-ig): 15 perces lépésekben eltolja a számítás időpontját. Mellette: „Számítás ideje: most” vagy a választott dátum és idő.
+LI|Valós idő: visszatér az aktuális időponthoz.
+H2|4.4 A saját állomás beállítása
+TAG|PROCEDURA|1) Írja be a Saját lokátorom mezőbe a lokátort és a magasságot. 2) Írja be az ellenállomás lokátorát és magasságát, vagy kattintson az Előrejelző számítás térképére: bal kattintás = ellenállomás, jobb kattintás = saját állomás. 3) Válassza ki a sávot. 4) Írja be antennája tartócsövének hosszát és a lebeny emelkedését. 5) Nyomja meg a Számítás gombot: az állapotsor megerősíti: „Útvonal kiszámítva: ... km, ... visszaverődési pont mintavételezve”.
+TAG|NOTA|A beállításokat a program bezáráskor és minden számításkor a data/config.ini fájlba menti: a következő indításkor ugyanazt az útvonalat találja.
+H1|5. Előrejelző számítás
+P|Az Előrejelző számítás csoport első alfüle egyetlen képernyőn mutatja, hová esnek éppen a hasznos nyomok, és merre kell irányítani az antennát. Minden a dátummal és az órák csúszkájával választott időpontra vonatkozik.
+H2|5.1 Az összefoglaló sáv
+P|A térkép fölött egy sáv összefoglalja az adott időpont számítását: dátum és idő, útvonalindex (az aktív rajok ZHR × hatásfok összege), a leghasznosabb raj ZHR-jével és hatásfokával (dB-ben is, DJ5HG referenciájához képest), a horizont feletti rajok száma, valamint a javasolt Hot az azimutjával.
+H2|5.2 Az alaprajzi térkép
+P|Bal oldalon Európa térképe felülnézetből (kelet jobbra), körben fokbeosztással:
+LI|zöld vonal: a két lokátor közötti valódi útvonal;
+LI|Hot A és Hot B: a felezőpont két oldalán lévő két hot spot. Piros = javasolt, rózsaszín = az antennalebenyen kívül, szürke = már a lebenyen belül (figyelmeztetéssel);
+LI|antennalebeny: a -3 dB-es szektor az antenna azimutja körül;
+LI|A határ és B határ, halványan: az égbolt mindkét állomásról látható legtávolabbi szélei, nem pedig irányzási pontok;
+LI|sárga vonal: az az irány, amelyben a kiválasztott (vagy a legkedvezőbb) raj végigsöpör az égbolton; narancssárga pontok: a két rá merőleges irányzás (a radiáns azimutja ±90°);
+LI|PREV zónák, világos ellipszisek: ahová éppen a legvalószínűbb nyomok esnek, az útvonal mindkét oldalán egy-egy.
+P|Bal kattintás a térképen = az ellenállomás lokátora, jobb kattintás = a saját állomás lokátora; az útvonal azonnal újraszámolódik. A jelmagyarázat egy összecsukható oszlop a térképtől jobbra. A rajlista fölötti jelölőnégyzetek be- és kikapcsolják a Hot-irányokat, Európa térképét és a felülnézetet.
+H2|5.3 A rajok listája
+P|Minden rajnál: név és IMO-kód, ZHR ebben a pillanatban, a radiáns azimutja és emelkedési szöge az Ön állomásáról, hatásfok az útvonalra, uralkodó oldal (A vagy B), legjobb irány, a radiáns kelte és nyugta. Egy sorra kattintva kijelöli a rajt: a sárga vonal és a narancssárga pontok követik.
+H2|5.4 A kis égbolttérkép és a számítás szövege
+P|Az Ön állomásáról látható radiánsok IMO-kóddal és cián színű napi pályájukkal. Sárga = hatásfok legalább 50 % és ZHR legalább 2; narancssárga = legalább 20 %; sötétpiros = kevesebb; szürke = szinte inaktív. A zeniten átmenő narancssárga vonal adja a helyes antennairányokat, merőlegesen a raj mozgására. Mellette a számítás szövege: útvonal, felezőpont, javasolt Hot a várható visszaverődések százalékával, a közös zóna határai.
+H2|5.5 A metszet
+P|Jobbra lent a legvalószínűbb nyomok az antennától az ellenállomás felé nézve: vízszintesen az azimut az ellenállomáshoz képest (A balra, B jobbra), függőlegesen az emelkedési szög. Minden nyom egy a radiáns felé mutató szakasz, annál vastagabb, minél valószínűbb. Az ábrán az antennalebeny, az ellenállomás és a hot spotok is szerepelnek.
+H2|5.6 A figyelmeztetések
+LI|FIGYELEM: Hot A (vagy Hot B) az antenna lebenyébe esik: ezzel az iránnyal az a hot spot már le van fedve.
+LI|TÚL MAGAS RADIÁNS: egy hasznos radiáns 70° felett van; a nyomok szinte függőlegesen esnek, és keveset vernek vissza az útvonal felé.
+LI|ALACSONY RADIÁNS AZ ÚTVONAL MENTÉN: a számított hatásfok alacsony marad, de az útvonallal párhuzamos súroló nyomokkal DJ5HG ritka és erős visszaverődéseket vár: érdemes hallgatni.
+LI|AZ ÚTVONAL A NYOM HORIZONTJÁN TÚL: a nyomok magasságában a felezőpont a horizont alatt van; a figyelmeztetés megadja, milyen magasság kellene.
+LI|NINCS KÖZÖS ZÓNA: a réteg egyetlen pontja sem látható mindkét állomásról; a figyelmeztetés megadja, mennyi hiányzik, és mi kellene.
+H1|6. Geometria és csillapítás
+P|Az útvonal szöveges összefoglalója, amely kijelölhető és másolható, jobb oldalon pedig az antenna emelkedési szögének grafikonja a visszaverődési ponttól mért távolság függvényében, három nyommagasságra.
+H2|6.1 A fül adatai
+LI|Teljesítmény W (400), Antennanyereség dBi (14; azonos antenna mindkét végen), Minimális jel dBm (-130), Nyomsűrűség q = 10^14 elektron/m: az összeköttetési mérleghez kellenek.
+LI|A nyom kezdeti sugara: az ITU kétszerese (Stober 2021, óvatos, alapértelmezett), ITU-R P.843, vagy kizárva. Minél nagyobb a sugár, annál nagyobb a veszteség a magasabb frekvenciákon.
+LI|Pingek hossza a sávok között: elméleti λ² (McKinley, SM6FHZ; óvatos, alapértelmezett) vagy megfigyelt (NN4SA HamSCI MSQP mérései, Perseidák 2026: 50-ről 144 MHz-re a pingek 8-szoros helyett csak 1,5-szörösen rövidülnek).
+H2|6.2 Az összefoglaló
+LI|AZ ÚTVONAL GEOMETRIÁJA: állomások és magasságok, távolság, azimut, felezőpont, nyommagasság, az antenna emelkedési szöge a felezőpont felé.
+LI|HOT A / HOT B: az egyes hot spotok lokátora, azimutja, eltérése a közvetlen iránytól, távolsága és emelkedési szöge.
+LI|A KÖZÖS ZÓNA HATÁRAI: hatótávolság a nyomok magasságában a horizontig, az antennalebeny a maximumával és függőleges szélességével, A határ és B határ; a Yagi nyeresége és lebenye.
+LI|ÚTVONALCSILLAPÍTÁS: a felezőpontra, Hot A-ra és Hot B-re, 28, 50, 70, 144, 222 és 432 MHz-en (az útvonal síkját keresztező nyom, a legkedvezőtlenebb eset).
+LI|ÖSSZEKÖTTETÉSI MÉRLEG: teljesítmény és EIRP, csillapítás, jel az antennán, minimális jel és tartalék; a legjobb eset (a nyom az útvonal síkjában) és a tartalék OH5IY átlagos csillapításával.
+LI|KÍSÉRLETI SZABÁLYOK A SÁVOK KÖZÖTT: a visszaverődések száma, erőssége és hossza a 144 MHz-hez képest; IARU szerinti maximális ping; az MSQP-mérésekből megfigyelt hossz.
+TAG|NOTA|A pozitív tartalék azt jelzi, hogy egy átlagos alulsűrű nyom elég az összeköttetéshez az Ön állomásával ezen az útvonalon; a negatív tartalék azt, hogy sűrűbb nyomok vagy túlsűrű meteorok kellenek. Ez becslés: a mérvadó továbbra is a sávon szerzett tapasztalat.
+H1|7. Hatásfok számítása
+P|A hatásfok százalékban adja meg, hogy egy raj radiánsának helyzete mennyire teszi lehetővé a visszaverődéseket az Ön útvonalán: 100 % az adott útvonal számára legkedvezőbb helyzet. Ez az alfül óránként mutatja „A számítás dátuma” napjára, minden óra közepén vett értékekkel.
+H2|7.1 A négy panel
+LI|A NAP LEGJOBB IDŐPONTJA: a legmagasabb útvonalindexű óra és az uralkodó oldal.
+LI|A LEGKEDVEZŐBB RAJ: a legnagyobb mértékben hozzájáruló raj, az órával, az oldallal és a két legjobb iránnyal.
+LI|MOST: index és oldal ebben az órában, valamint a javasolt Hot (csak ha a választott nap a mai).
+LI|KÍSÉRLETI ELŐREJELZÉS: óránkénti visszaverődések most, 1 és 2 óra múlva várható száma (8. fejezet).
+P|Ha egy panelnek nincsenek értékei, megmondja, miért: nincs közös zóna, nincs aktív raj, vagy a radiánsok egész nap kedvezőtlenek. Minden panel buboréksúgója elmagyarázza, mit mutat. A panelek alatt szükség esetén megjelenik a NINCS KÖZÖS ZÓNA figyelmeztetés és egy sáv, amely az A és B betűket magyarázza.
+H2|7.2 A számítás beállítása
+LI|Óvatos (alapértelmezett): nyommagasság a radarból, normál nyomok, β szög bekapcsolva. Ez adja a legalacsonyabb értékeket.
+LI|DJ5HG szerint: rögzített 102 km-es magasság, hosszabb nyomok alacsony radiánssal, β szög bekapcsolva; a QTFGUI programot követi.
+LI|Egyéni: magától kiválasztódik, ha kézzel módosítja valamelyik jelölőnégyzetet vagy a magasságot.
+LI|Hosszabb nyomok alacsony radiánssal (DJ5HG): alacsony radiánsnál kevesebb meteor esik be, de a nyomok hosszabbak és gyakrabban vernek vissza; nagyjából 9° felett a két hatás kiegyenlíti egymást.
+LI|β szög a nyom és az útvonal között (teljes McKinley), a narancssárga keretben „a legnagyobb súlyú választás” felirattal: bekapcsolva az útvonal síkját keresztező nyomok 10-15 dB-lel kevesebbet érnek, mint a benne fekvők, és az útvonallal párhuzamos radiánsok kerülnek túlsúlyba. Kikapcsolva a klasszikus szabály érvényes: a legjobb radiáns 15-70° magasan van, és keresztben áll az útvonalhoz képest.
+LI|Klasszikus ítélet: minden raj alá hozzáad egy „klasszikus” sort a rádióamatőr-szabály ítéletével az útvonal felezőpontjában: ✗ a radiáns a horizont alatt, ◐ határeset (túl alacsony, túl magas vagy majdnem párhuzamos az útvonallal), ● jó, ★ kiváló (keresztben az útvonalhoz képest). A számítást nem változtatja meg.
+TAG|ATTENZIONE|A β szög hosszú útvonalakon nagyon megváltoztatja az értékeket: JN70CN - JO76QP (1791 km), Geminidák 2026. 12. 14., 98 % kikapcsolt β-val és 13 % bekapcsolt β-val. A két álláspontnak eltérő forrásai vannak, és a BRAMS-számlálásokkal végzett első összehasonlítás nem tesz különbséget köztük: vesse össze a két esetet a sávon szerzett tapasztalattal. A százalékok az adott útvonal számára legjobb radiánshelyzethez viszonyítottak; különböző útvonalak összehasonlítására a dB-ben kifejezett hatásfok szolgál.
+H2|7.3 Mennyire bízhat a számokban
+P|A legjobb órák és az oldal a legmegbízhatóbb információk: a számítási beállításokkal alig változnak. A százalékok viszont erősen függenek a választásoktól, mindenekelőtt a β szögtől. Az összehasonlítás 181 767 valódi MSK144 spottal az 50 MHz-en (HamSCI, Perseidák, 2025. augusztus 11-12.) megerősíti az útvonalindex óránkénti alakulását, de azt is megmutatja, hogy egy adott órában melyik állomáspár hallja egymást, főleg a sporadikus meteoroktól és a sávon zajló aktivitástól függ, amelyeket a modell nem tartalmaz.
+TAG|NOTA|Használja a programot az óra és az antenna elfordításának oldala kiválasztására; ne olvassa a százalékokat az összeköttetés sikerének valószínűségeként.
+H2|7.4 A grafikon
+P|Legfeljebb öt rajra: a hatásfok folytonos vonalként, DH9GCD képlete ugyanolyan színű pontozott vonalként; az útvonalindex oszlopokként a jobb oldali skálán. A helyi idő az UTC idő alatt szerepel.
+H2|7.5 A 24 órás táblázat
+LI|Egy sor minden, az adott napon aktív rajnak, 24 oszlop az UTC órákra.
+LI|63A: hatásfok 63 %, a visszaverődések többsége az A oldalról; 41B: B oldal; betű nélküli szám: 5 % alatt; üres cella: 1 % alatt; ↑: a radiáns 70° felett (túl magas); melegebb szín = nagyobb hatásfok.
+LI|A = balra, az Ön állomásáról az ellenállomás felé nézve (Hot A zóna); B = jobbra (Hot B zóna). Érdemes az antennát 10-30°-kal arra az oldalra fordítani (side-scatter).
+LI|Világoskék DH9GCD % sorok: DH9GCD legjobb irányra vonatkozó képlete, összehasonlításként; sem a horizontot, sem a lebenyt nem veszi figyelembe.
+LI|Σ sor: útvonalindex, az összes aktív raj ZHR × hatásfok összege.
+LI|Narancssárga sor: az óránkénti visszaverődések kísérleti előrejelzése azokra az órákra, amelyekre létezik.
+TAG|PROCEDURA|Egy sked időpontjának kiválasztásához: állítsa be a dátumot, nézze meg a Σ sort és A NAP LEGJOBB IDŐPONTJA panelt; a kiválasztott raj sorában olvassa le az A vagy B betűt, és fordítsa az antennát 10-30°-kal arra az oldalra. Tartsa az egeret egy cella fölött, hogy elolvassa az adott óra Hot-jának részleteit.
+H1|8. Kísérleti előrejelzések
+P|A Collm radar (36,2 MHz) számlálásait óránkénti visszaverődések becslésévé alakítja egy rádióamatőr sávon (alapértelmezés 144 MHz, 28 és 1300 MHz között), elkészíti az Ön útvonalára a következő 24 óra előrejelzését, és összeveti egy RMOB-megfigyelővel. Itt minden kísérleti: a számok órák és napok összehasonlítására szolgálnak.
+H2|8.1 A vezérlők
+LI|Célfrekvencia MHz: az előrejelzés frekvenciája.
+LI|λ^k kitevő (3, SM6FHZ) és K állomástényező (1): frekvenciaszabály és korrekció az Ön állomására.
+LI|k a populációs indexekből: k-t javasol az aktív rajok r populációs indexeiből (GMN, egyébként IMO; k = 3,75 · log10 r, ZHR-rel súlyozva), és alkalmazás előtt megerősítést kér.
+LI|RMOB-fájl betöltése lemezről és Kitevő meghatározása az RMOB-fájlból: beolvasnak egy havi RMOB-fájlt, és a Collm-mal közös órákból meghatározzák k-t.
+LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni.
+H2|8.2 Az eredmények
+LI|A tegnapi és mai grafikon: óránkénti meteorszám Collmban, az Ön frekvenciájára átszámított értékek és, ha be vannak töltve, az RMOB-számlálások.
+LI|A következő 24 óra előrejelzése: az előző nap ugyanazon órája, az útvonal rajindexének változásával korrigálva.
+LI|A táblázat értékeléssel: jó, közepes vagy gyenge a 24 órás átlaghoz képest.
+TAG|NOTA|A visszaverődések hossza a Geometria és csillapítás fül „Pingek hossza a sávok között” beállítását követi; forward scatter esetén a hossz a felezőpontbeli sec²φ-vel is nő.
+H1|9. Élő és valós idejű adatok
+H2|9.1 Élő forgalom
+P|Az Ön állomására központosított azimutális távolságtartó térkép az összes összegyűjtött meteor scatter forgalommal: minden összeköttetésnél az útvonal a sáv színével (28 barna, 50 zöld, 70 cián, 144 narancssárga, 222 rózsaszín, 432 lila), a két állomás és az adott órában legvalószínűbb nyomok felhője. Az éppen beérkezett spotok egy percig villognak.
+LI|Térkép sugara: 600-3500 km. Megjelenítendő spotok: az utolsó 15 vagy 30 perc, az utolsó óra, az utolsó 3 vagy 24 óra.
+LI|Egy útvonalra vagy a táblázat egy sorára kattintva kiemeli az összeköttetést, és megmutatja a felhő középpontját, magasságát és méreteit.
+H2|9.2 Radarfluxus
+P|A Collm SKiYMET radar (36,2 MHz) óránkénti meteorszámai és nyommagasságai, valamint a sodankyläi radar (36,9 MHz) legutóbbi képe.
+LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott.
+LI|λ kitevő (SM6FHZ): a sávjára vonatkozó becslés kitevője (narancssárga vonal a jobb oldali skálán).
+LI|Nyommagasságok: hisztogram módusszal, átlaggal, mediánnal és szórással; „a radarból” beállítás mellett a módusz lesz az összes számítás magassága.
+TAG|ATTENZIONE|Ha a Collm-grafikon skálája nem olvasható le, narancssárga figyelmeztetés jelenik meg, és az értékeket ellenőrizni kell. Kapcsolat nélkül a program az utoljára mentett adatokat használja, ezt egyszer jelzi, és 5 percenként magától újra próbálkozik; az állapotsor pirosra vált, amíg a kapcsolat helyre nem áll.
+H2|9.3 GRAVES radar
+P|A GRAVES CW-ben sugároz 143,050 MHz-en Broye-lès-Pesmes-ből (JN27SI). Az alfül a GRAVES → Ön útvonalat önálló meteor scatter útvonalként kezeli: kiszámítja a hatásfokot, a javasolt Hot-ot és a PREV zónákat, ellenőrzi, hogy a zóna a nyalábon belül van-e, és hogy a nyaláb mikor világítja meg.
+LI|Most: visszaállítja a számítást a valós időre. GRAVES beállítása DX-ként: az ellenállomás a GRAVES lesz. Nyalábsorrend: 0,8 s lépésenként (PE1ITR 2021) vagy 3,2 s (2007).
+LI|A panelek: HASZNOS ZÓNA A NYALÁBBAN, A GRAVES → TE ÚTVONAL HATÁSFOKA MOST (a várható visszhangokkal, kísérleti), ÚTVONAL (merre irányítson), A NYALÁB KÖVETKEZŐ ÁTHALADÁSA.
+LI|A nap időrendi rekonstrukciója és a következő másodpercek részletei.
+TAG|PROCEDURA|A GRAVES vételéhez: USB 143,049 MHz-en (kb. 1 kHz-es hang), lassú vagy kikapcsolt AGC, legalább 2,4 kHz-es hangfrekvenciás sávszélesség; az antenna az ÚTVONAL panelen javasolt hot spot felé, alacsony emelkedési szöggel; a PC órája szinkronizálva. A pingek rövid vonalkák a vivő közelében a waterfallon.
+H2|9.4 Adatgyűjtés
+P|Meteor scatter spotokat gyűjt három telnet-folyamból (DX cluster, RBN, DM4X a PSKReporter spotjaival) és a PSKReporter MQTT-folyamából, mindegyiket a saját alfülén, és szűri őket.
+LI|Felül adja meg a hívójelét a bejelentkezéshez. Minden folyamnak van hosztja, portja, bejelentkezés utáni parancsai, Újracsatlakozás és Csatlakozás indításkor beállítása, valamint konzolja.
+LI|A szűrő elfogadja a meteor scatterre jellemző frekvenciákon (50190-50300, 70100-70400, 144290-144399 kHz) vagy MS üzemmóddal (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) érkező spotokat, és elveti azokat, amelyek más terjedési módot jelölnek meg. Az ablakok és a szavak módosíthatók; mindegyiknek saját számlálója van.
+LI|A hiányzó lokátorokat a CALL3 archívumból veszi; az elfogadott spotok a data/spot_ms mappába kerülnek, naponta egy fájlba, valamint az Élő forgalom térképére.
+H1|10. Élő rajok és a rajkatalógus
+H2|10.1 Élő rajok
+P|Bal oldalon az aktív rajoknak a Global Meteor Network által mért fluxusa és ZHR-je, a GMN-kamerák rajonkénti napi számlálásaival (ez számlálás, nem fluxus: attól függ, hány állomás lát derült eget); jobb oldalon a CMOR radar radiánstérképei, a nappali rajokéi is. A fájlokat csak változás esetén tölti le újra, legfeljebb 30 percenként, vagy a Letöltés most gombbal.
+H2|10.2 Rajok
+P|Az összes számítás által használt katalógus: az IMO 2026-os és 2027-es naptárának rajai, valamint az Antihelion forrás. A ma aktív rajok kiemelve jelennek meg.
+LI|Kód, név, aktivitási időszak, a maximum napi ekliptikai hosszúsága, a következő maximum (UTC) és forrása (IMO vagy számított), radiáns, sebesség, r populációs index, ZHR, típus (vizuális vagy nappali rádiós).
+LI|k: a frekvencia-átszámítás kitevője a populációs indexből (GMN, ha elérhető, egyébként IMO).
+LI|IAU MDC: megoldások, Δ radiáns, Δλ, Δv: összehasonlítás az IAU Meteor Data Center katalógusával (a publikált megoldások és a program katalógusának eltérése azok mediánjától).
+LI|GMN ma: a Global Meteor Network legutóbbi napi fájljában megerősített pályák.
+TAG|NOTA|A katalógus a data/sciami.csv fájl, az IMO-maximumok pedig a data/massimi_imo.csv fájlban vannak: szövegszerkesztővel módosíthatók. A hibás sort a program indításkor jelzi és figyelmen kívül hagyja.
+H1|11. Négyzettérkép
+P|A naplója ADIF-fájljából beolvasott megdolgozott (narancssárga) és visszaigazolt (zöld, QSL vagy LoTW) Maidenhead-négyzetek Európa térképén, sávonként egy alfüllel: 50, 70, 144, 222 és 432 MHz.
+LI|ADIF-fájl betöltése: beolvas egy .adi vagy .adif fájlt; az új fájl felülírja az előzőt. Memória törlése: törli a betöltött négyzeteket.
+LI|Görgő = nagyítás, húzás = mozgatás, egér egy négyzet fölött = az adott négyzet QSO-i.
+TAG|NOTA|A YA-MS nem csatlakozik a LoTW-hez: exportálja az ADIF-et a naplóprogramjából vagy a LoTW-ből, és töltse be ide.
+H1|12. Műszaki dokumentumok
+LI|Felhasználói kézikönyv: ez a dokumentum.
+LI|Források: a program összes forrása, hivatkozásokkal.
+LI|Az európai radarok térképe: hol található Collm, Sodankylä, GRAVES és CMOR az Ön állomásához képest, az egyes radarokról látható égbolttal.
+LI|A hatásfok számításának magyarázata: hogyan számítja a program a hatásfokot, lépésről lépésre, FORRÁS, ELLENŐRZÉS és VÁLASZTÁS címkékkel.
+P|A dokumentumok a felület nyelvét követik, ha létezik fordítás, egyébként olaszul jelennek meg. Az „Exportálás Wordbe (.docx)” egy másolatot ment oda, ahová szeretné; a „Megnyitás Wordben” az alapértelmezett programmal nyitja meg. A Számítási kézikönyv az összes egyenlettel a doc (olasz) és a doc/manuali (többi nyelv) mappában található.
+H1|13. A data mappa és a beállítások
+H2|13.1 A fő fájlok
+LI|config.ini: minden beállítás (szöveg, kulcs=érték).
+LI|lingue/: a felület fordításai; mappa/: Európa térképe.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: a rajkatalógus és az Antihelion forrás helyzete; regole_sperimentali.csv: a sávok közötti szabályok.
+LI|flusso_collm.csv, quote_collm.csv: a Collm radar archívumai; radar/: legutóbbi képek, RMOB-fájlok és az élő források adatai; fonti_radar.csv: a források címei, egyenként engedélyezhetők.
+LI|cataloghi/: IAU MDC katalógus; radar/diretta/: GMN- és CMOR-adatok.
+LI|call3.txt: lokátorarchívum; spot_ms/: összegyűjtött meteor scatter spotok; adif_quadrati.csv: négyzetek az ADIF-ből.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: a műszaki dokumentumok.
+LI|backup/: a frissítés által lecserélt fájlok másolatai; aggiornamento/: a letöltött csomag (újraindításkor törlődik).
+H2|13.2 Néhány config.ini kulcs
+LI|controlla_aggiornamenti=0: ne ellenőrizze az új verziókat; aggiornamenti_salta: kihagyott verzió.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: a számítás jelölőnégyzetei.
+LI|raggio_iniziale (0 = az ITU kétszerese, 1 = ITU, 2 = kizárva), durata_ping (0 = λ², 1 = megfigyelt).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|A config.ini fájlt csak bezárt program mellett módosítsa: bezáráskor a YA-MS újraírja.
+H1|14. Tipikus eljárások
+H2|14.1 Sked előkészítése egy rajra
+TAG|PROCEDURA|1) Állítsa be a két állomást, és nyomja meg a Számítás gombot. 2) A Rajok fülön ellenőrizze a raj következő maximumát. 3) Írja be ezt a dátumot A számítás dátuma mezőbe. 4) A Hatásfok számítása fülön nézze meg a raj sorát és a Σ sort: válassza a legnagyobb hatásfokú órákat. 5) Jegyezze fel az oldalt (A vagy B), és fordítsa az antennát 10-30°-kal arra az oldalra. 6) A Geometria és csillapítás fülön ellenőrizze a mérleg tartalékát.
+H2|14.2 Egy munkamenet élő követése
+TAG|PROCEDURA|1) Nyomja meg a Valós idő gombot. 2) Az Előrejelző számításban kövesse a javasolt Hot-ot és a PREV zónákat, amelyek percenként frissülnek. 3) A Radarfluxus fülön ellenőrizze, hogy a Collm radar számlálja-e a meteorokat. 4) Az Élő forgalom fülön nézze meg, ki forgalmaz éppen, és hová esnek a nyomaik.
+H2|14.3 Az állomás kipróbálása a GRAVES-szel
+TAG|PROCEDURA|1) A GRAVES radar fülön ellenőrizze a HASZNOS ZÓNA A NYALÁBBAN panelt. 2) Irányítsa az antennát az ÚTVONAL panel szerint. 3) Hallgassa USB-ben a 143,049 MHz-et a nyaláb következő áthaladásának ablakaiban. 4) Vesse össze a pingeket a várható visszhangokkal és az RMOB-megfigyelőkkel.
+H2|14.4 Az előrejelzés kalibrálása RMOB-bal
+TAG|PROCEDURA|1) A Kísérleti előrejelzések fülön töltse be egy, az Ön sávján dolgozó megfigyelő havi RMOB-fájlját. 2) Nyomja meg a Kitevő meghatározása az RMOB-fájlból gombot, és fogadja el k-t, ha elég a közös óra. 3) Állítsa a K állomástényezőt a javasolt értékre.
+H1|15. Gyakori problémák
+LI|Minden hatásfok 0: olvassa el a NINCS KÖZÖS ZÓNA figyelmeztetést. Kikapcsolt „antenna iránykarakterisztika” esetén csökkentse a lebeny emelkedését; ellenkező esetben az útvonal a nyomok magasságában a horizonton túl van.
+LI|Az értékek sokkal alacsonyabbak, mint DH9GCD-nél vagy egy régi verzióban: ellenőrizze a β szög jelölőnégyzetét (7.2. fejezet).
+LI|„Érvénytelen állomáslokátor”: írjon be 4, 6 vagy 8 karakteres lokátort (például JN70CN vagy JN70CN83).
+LI|Hot A és Hot B szürke: az ellenállomás felé fordított antennával már a lebenyen belül vannak; nem kell elfordítani az antennát.
+LI|Hiányzik Európa térképe: az első indításkor kapcsolat szükséges; a program magától újra próbálkozik.
+LI|A szöveg túl kicsi, vagy a grafikonoknak nincs helyük: használja a Betűtípus beállítást és a Vezérlők gombot.
+LI|A GRAVES nyaláb áthaladása eltoltnak tűnik: szinkronizálja a PC óráját egy NTP-szerverrel; a nyalábsorrendet a vezérlőállomás időnként eltolja.
+LI|Linux, kínai vagy japán szöveg négyzetekként jelenik meg: telepítse a Noto CJK betűtípusokat.
+H1|16. Kapcsolat
+P|A YA-MS ingyenes program rádióamatőröknek, készítette Costantino IC8TEM (Capri). Hibajelentéseket, javaslatokat és összehasonlító adatokat szívesen fogadunk: adja meg az operációs rendszert, a YA-MS verzióját és azt, hogy mit csinált. Forráskód és kiadások: github.com/ic8tem/YA-MS. Kapcsolat: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Aki támogatni szeretné a munkát, megteheti a ko-fi.com/ic8tem oldalon.

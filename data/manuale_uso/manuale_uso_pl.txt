@@ -1,0 +1,233 @@
+TITLE|Instrukcja obsługi YA-MS
+SUB|Wersja 1.8.1 - opracował Costantino IC8TEM - listopad 2026
+H1|1. Wprowadzenie
+H2|1.1 Do czego służy YA-MS
+P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
+P|Program jest bezpłatny, działa w systemach Windows, Linux (także Raspberry Pi) i macOS i jest przetłumaczony na 36 języków. Nie steruje radiem ani rotorem: do łączności używa się zwykłego programu do emisji cyfrowych (MSHV, WSJT-X).
+H2|1.2 Jak czytać tę instrukcję
+P|Instrukcja opisuje karty po kolei, zaczynając od obliczenia prognozy. Każdy rozdział mówi, co pokazuje dana karta, co robi każde polecenie i jak odczytywać wyniki. Rozdział 14 zbiera najczęstsze procedury, rozdział 15 częste problemy. Sposób obliczania sprawności, wraz ze źródłami i weryfikacjami, wyjaśnia dokument "Wyjaśnienie obliczania wydajności"; pełne równania znajdują się w Podręczniku obliczeń (folder doc).
+TAG|PROCEDURA|kroki do wykonania, w podanej kolejności.
+TAG|NOTA|informacja przydatna do zrozumienia lub lepszego wykorzystania funkcji.
+TAG|ATTENZIONE|częsty błąd, ograniczenie obliczeń lub zachowanie, o którym warto wiedzieć.
+P|Nazwy poleceń są zapisane tak, jak wyświetlają się w programie w języku polskim; w innych językach mają to samo miejsce i tę samą kolejność.
+H1|2. Instalacja, uruchomienie i aktualizacje
+H2|2.1 Który pakiet pobrać
+P|Wszystkie pakiety znajdują się na stronie wydań w serwisie GitHub (github.com/ic8tem/YA-MS/releases). Nie trzeba instalować .NET: jest już zawarty w pakiecie.
+LI|Windows 64-bitowy: YA-MS-<wersja>-windows-x64-setup.exe (instaluje w C:\YA-MS, bez uprawnień administratora) albo przenośne archiwum zip, do rozpakowania w dowolnym folderze. Dla 32-bitowego Windows te same pliki z oznaczeniem x86.
+LI|Linux (Debian, Ubuntu, Mint): pakiet .deb, do zainstalowania poleceniem sudo apt install ./ya-ms_<wersja>_amd64.deb; przy pierwszym uruchomieniu program kopiuje się do ~/YA-MS. Dla innych dystrybucji archiwum .tar.gz, które należy rozpakować i uruchomić poleceniem ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 i 500: pakiet raspberry-pi-64bit (Raspberry Pi OS 64-bitowy) albo raspberry-pi-32bit, w formacie .tar.gz lub .deb.
+LI|macOS: plik .dmg dla Apple Silicon (M1 i nowsze) lub dla Intel, albo app.zip. Przeciągnij YA-MS.app do własnego folderu (na przykład ~/YA-MS): folder data zostanie utworzony obok aplikacji.
+TAG|ATTENZIONE|Windows może wyświetlić komunikat "System Windows ochronił ten komputer": wybierz "Więcej informacji", a potem "Uruchom mimo to". W macOS za pierwszym razem otwórz aplikację prawym przyciskiem myszy i poleceniem "Otwórz". Program nie jest podpisany płatnym certyfikatem.
+H2|2.2 Pierwsze uruchomienie
+P|Przy uruchomieniu przez kilka sekund pojawia się ekran z Perseidami nad teleskopem VLT ESO. Przy pierwszym uruchomieniu YA-MS wybiera język systemu, jeśli jest jednym z 36, w przeciwnym razie włoski; pobiera mapę Europy (Natural Earth) do folderu data/mappa i pokazuje przykładową trasę. Ustawienie programu dla twojej stacji zajmuje kilka minut (rozdział 4).
+H2|2.3 Folder data
+P|Wszystkie ustawienia i wszystkie dane znajdują się w jednym folderze data obok programu: bez AppData, bez folderów systemowych. Aby przenieść YA-MS na inny komputer, wystarczy skopiować folder programu razem z jego folderem data. Zawartość folderu opisano w rozdziale 13.
+H2|2.4 Automatyczne aktualizacje
+P|Od wersji 1.8.0 YA-MS sam sprawdza w serwisie GitHub, przy uruchomieniu i najwyżej raz dziennie, czy pojawiła się nowa wersja. Jeśli tak, pojawia się okno "Dostępna aktualizacja" z listą nowości i trzema przyciskami:
+LI|Aktualizuj teraz: pobiera pakiet odpowiedni dla twojego systemu, zastępuje pliki programu, zachowuje folder data i ponownie uruchamia YA-MS. Pliki programu w folderze data, które nowa wersja zmienia, są najpierw kopiowane do data/backup/v<stara wersja>; twoje pliki (ustawienia, archiwa, spoty, ADIF) nie są zmieniane.
+LI|Później: zamyka okno; sprawdzenie powtarza się następnego dnia.
+LI|Pomiń tę wersję: przy uruchomieniu ta wersja nie będzie już proponowana.
+P|Przycisk "Aktualizacje" w prawym dolnym rogu, na pasku stanu, wykonuje to samo sprawdzenie ręcznie, także dla pominiętej wersji.
+TAG|ATTENZIONE|Automatyczna aktualizacja musi mieć możliwość zapisu w folderze programu. Jeśli jej nie ma (na przykład gdy program skopiowano do folderu systemowego), YA-MS informuje o tym i proponuje otwarcie strony wydań, aby zainstalować ręcznie. Wersje do 1.7.0 nie mają tej funkcji: za pierwszym razem aktualizację trzeba wykonać ręcznie, instalując na poprzedniej wersji.
+TAG|NOTA|Aby wyłączyć sprawdzanie nowych wersji, wpisz controlla_aggiornamenti=0 w pliku data/config.ini.
+H2|2.5 Brakujące pliki programu
+P|Przy uruchomieniu YA-MS sprawdza, czy ma wszystkie swoje pliki (tłumaczenia, katalogi, dokumenty). Jeśli któregoś brakuje, na przykład po niepełnym kopiowaniu, okno "Brakujące pliki" je wymienia i proponuje "Pobierz brakujące pliki" z serwisu GitHub, w tej samej wersji programu, albo "Kontynuuj bez nich". To samo sprawdzenie powtarza się po naciśnięciu "Aktualizacje".
+H1|3. Okno główne
+H2|3.1 Części okna
+LI|U góry trzy wiersze poleceń wspólnych dla wszystkich kart: stacje i pasmo, warstwa E i antena, czas obliczenia (rozdział 4).
+LI|Pasek kart głównych, a po jego prawej stronie przycisk Sterowanie, schemat kolorów (Motyw) i język.
+LI|Podkarty, w jaśniejszym wierszu, dla kart, które je mają.
+LI|Na dole pasek stanu: komunikaty z obliczeń, ostrzeżenia o połączeniu i przycisk "Aktualizacje".
+H2|3.2 Karty
+LI|Na żywo i dane w czasie rzeczywistym: Ruch na żywo, Strumień radarowy, Radar GRAVES, Zbieranie danych (rozdział 9).
+LI|Obliczenie prognozy: Obliczenie prognozy, Geometria i tłumienie, Obliczanie sprawności, Prognozy eksperymentalne (rozdziały 5-8).
+LI|Roje na żywo, Roje, Mapa kwadratów (rozdziały 10-11).
+LI|Dokumenty techniczne, ostatnia: Instrukcja obsługi, Źródła, Mapa radarów europejskich, Wyjaśnienie obliczania wydajności (rozdział 12).
+H2|3.3 Język, kolory, czcionka
+LI|Język: 36 języków. Po zmianie języka okno odbudowuje się w tym samym położeniu i na tej samej karcie, bez ponownego uruchamiania. Liczby i daty są zgodne z wybranym językiem (przecinek dziesiętny po polsku i po włosku, kropka po angielsku).
+LI|Motyw: 12 schematów kolorów; Jasny jest domyślny, Noc i Czarny służą do pracy w ciemności, Ślad meteoru to oryginalny styl YA-MS.
+LI|Czcionka (na końcu pierwszego wiersza poleceń): powiększa cały tekst od 100 do 300 %. Przy dużej czcionce karty zawijają się do następnego wiersza.
+LI|Sterowanie: zwija i ponownie rozwija trzy wiersze poleceń, aby zrobić miejsce dla map i wykresów. Wybór jest zapamiętywany.
+TAG|NOTA|Prawie każde polecenie ma dymek podpowiedzi: przytrzymaj kursor myszy nad poleceniem, aby przeczytać, do czego służy i z jakiego źródła pochodzi wartość domyślna.
+H1|4. Ustawienie stacji i trasy
+H2|4.1 Wiersz 1: stacje i pasmo
+LI|Mój lokator i wysokość m: twój lokator Maidenhead (4, 6 lub 8 znaków; używany jest środek kwadratu) i wysokość stacji nad poziomem morza.
+LI|Korespondent i wysokość m: lokator i wysokość stacji, z którą chcesz nawiązać łączność.
+LI|Pasmo MHz: 28, 50, 70, 144, 222 lub 432 MHz. Służy do obliczenia zysku i wiązki anteny, tłumienia i bilansu łącza oraz do oszacowania strumienia.
+LI|Oblicz: ponownie oblicza trasę (próbkowanie warstwy E, poniżej jednej sekundy).
+LI|Antena az: azymut anteny, zawsze w kierunku korespondenta.
+H2|4.2 Wiersz 2: warstwa E i antena
+LI|Wysokość śladów km i z radaru: wysokość śladów meteorów. Gdy pole "z radaru" jest zaznaczone, używana jest najczęstsza wysokość zmierzona przez radar w Collm (zwykle 88-90 km); odznacz je, aby wpisać wartość ręcznie.
+LI|Elewacja wiązki °: elewacja maksimum pionowej wiązki twojej anteny. Antena kierunkowa ustawiona na 0° i tak ma główną wiązkę kilka stopni nad horyzontem z powodu odbicia od gruntu: zwykle 3-8°, zależnie od wysokości anteny w długościach fali.
+LI|charakterystyka anteny: włączona (domyślnie) - punkty odbicia liczą się z pionowym zyskiem obu anten: w pełni wokół maksimum wiązki, coraz mniej w stronę horyzontu i w górę. Wyłączona - elewacja wiązki jest ostrą granicą: punkty widziane niżej nie są brane pod uwagę.
+LI|Antena Yagi: boom m: długość bumu. Obok program wyświetla długość w długościach fali, zysk (krzywa DL6WU) oraz szerokość wiązki przy -3 dB w poziomie i w pionie. Poniżej 2 λ oszacowanie jest mało dokładne.
+LI|Hot spot od punktu środkowego km i auto (AMS): odległość Hot A i Hot B od punktu środkowego. Gdy pole "auto (AMS)" jest zaznaczone, wartość jest zgodna z tabelą J. Richardsona cytowaną przez DJ5HG (13° odchylenia przy 1000 km, 10° powyżej 1500 km); odznacz je, aby ręcznie wpisać 30-400 km (MSHV używa 150 km).
+TAG|ATTENZIONE|Gdy "charakterystyka anteny" jest wyłączona, a wiązka ustawiona na kilka stopni, na długiej trasie obie stacje mogą nie widzieć żadnego wspólnego punktu warstwy: wszystkie sprawności wynoszą 0 i pojawia się ostrzeżenie "BRAK WSPÓLNEJ STREFY" z elewacją wiązki lub wysokością śladów, które byłyby potrzebne. Przykład: JN70CN - JO76QP, 1791 km, wiązka na 3°, ślady na 88,5 km.
+H2|4.3 Wiersz 3: czas obliczenia
+LI|Godzina: zegar UTC.
+LI|Data obliczenia (UTC): dzień obliczenia. Dotyczy kart Obliczenie prognozy, tabeli 24 godzin w karcie Obliczanie sprawności oraz chronologii w karcie Radar GRAVES. Domyślnie jest to dzień dzisiejszy, a o północy data przechodzi na nowy dzień.
+LI|Godziny (od −12 do +36 h): przesuwa moment obliczenia w krokach co 15 minut. Obok: "Obliczenie dla: teraz" albo wybrana data i godzina.
+LI|Czas rzeczywisty: powrót do bieżącej chwili.
+H2|4.4 Ustawienie własnej stacji
+TAG|PROCEDURA|1) Wpisz Mój lokator i wysokość. 2) Wpisz lokator i wysokość korespondenta albo kliknij mapę w karcie Obliczenie prognozy: lewy przycisk = korespondent, prawy przycisk = twoja stacja. 3) Wybierz pasmo. 4) Wpisz długość bumu i elewację wiązki twojej anteny. 5) Naciśnij Oblicz: pasek stanu potwierdzi "Trasa obliczona: ... km, ... punktów odbicia próbkowanych".
+TAG|NOTA|Ustawienia są zapisywane w data/config.ini przy zamknięciu programu i przy każdym obliczeniu: przy następnym uruchomieniu zastaniesz tę samą trasę.
+H1|5. Obliczenie prognozy
+P|Pierwsza podkarta grupy Obliczenie prognozy pokazuje na jednym ekranie, gdzie teraz padają użyteczne ślady i gdzie skierować antenę. Wszystko odnosi się do chwili wybranej datą i suwakiem godzin.
+H2|5.1 Pasek podsumowania
+P|Nad mapą pasek podsumowuje obliczenie dla tej chwili: data i godzina, indeks trasy (suma ZHR × sprawność aktywnych rojów), najbardziej użyteczny rój z jego ZHR i sprawnością (także w dB względem odniesienia DJ5HG), liczba rojów nad horyzontem oraz zalecany Hot z jego azymutem.
+H2|5.2 Mapa w rzucie
+P|Po lewej mapa Europy widziana z góry (wschód po prawej), z podziałką stopni dookoła:
+LI|zielona linia: rzeczywista trasa między dwoma lokatorami;
+LI|Hot A i Hot B: dwa hot spoty po obu stronach punktu środkowego. Czerwony = zalecany, różowy = poza wiązką anteny, szary = już w wiązce (z ostrzeżeniem);
+LI|wiązka anteny: sektor -3 dB wokół azymutu anteny;
+LI|Granica A i Granica B, blade: najdalsze krawędzie nieba widzianego przez obie stacje, a nie punkty, na które należy kierować antenę;
+LI|żółta linia: kierunek, w którym wybrany rój (lub najkorzystniejszy) przemiata niebo; pomarańczowe punkty: dwa kierunki prostopadłe (azymut radiantu ±90°);
+LI|strefy PREV, jasne elipsy: miejsca, w których teraz padają najbardziej prawdopodobne ślady, po jednej z każdej strony trasy.
+P|Lewe kliknięcie na mapie = lokator korespondenta, prawe kliknięcie = lokator twojej stacji; trasa jest natychmiast przeliczana. Legenda jest zwijaną kolumną po prawej stronie mapy. Pola wyboru nad listą rojów włączają i wyłączają kierunki Hot, mapę Europy i widok z góry.
+H2|5.3 Lista rojów
+P|Dla każdego roju: nazwa i skrót IMO, ZHR w tej chwili, azymut i elewacja radiantu widzianego z twojej stacji, sprawność dla trasy, przeważająca strona (A lub B), najlepszy kierunek anteny, wschód i zachód radiantu. Kliknięcie wiersza wybiera rój: żółta linia i pomarańczowe punkty podążają za nim.
+H2|5.4 Małe sklepienie nieba i tekst obliczenia
+P|Radianty widziane z twojej stacji, z kodem IMO i dobową drogą zaznaczoną na cyjanowo. Żółty = sprawność co najmniej 50 % i ZHR co najmniej 2; pomarańczowy = co najmniej 20 %; ciemnoczerwony = mniej; szary = prawie nieaktywny. Pomarańczowa linia przez zenit wyznacza właściwe kierunki anteny, prostopadłe do przesuwania się roju. Obok tekst obliczenia: trasa, punkt środkowy, zalecany Hot z odsetkiem przewidywanych odbić, granice strefy wspólnej.
+H2|5.5 Przekrój
+P|W prawym dolnym rogu najbardziej prawdopodobne ślady widziane od anteny w stronę korespondenta: w poziomie azymut względem korespondenta (A po lewej, B po prawej), w pionie elewacja. Każdy ślad to odcinek zorientowany w stronę radiantu, tym grubszy, im bardziej prawdopodobny. Narysowane są także wiązka anteny, korespondent i hot spoty.
+H2|5.6 Ostrzeżenia
+LI|UWAGA: Hot A (lub Hot B) mieści się w wiązce anteny: przy tym kierunku anteny ten hot spot jest już pokryty.
+LI|RADIANT ZA WYSOKO: użyteczny radiant jest powyżej 70°; ślady opadają niemal pionowo i słabo odbijają w kierunku trasy.
+LI|NISKI RADIANT WZDŁUŻ TRASY: obliczona sprawność pozostaje niska, ale przy śladach ślizgowych ułożonych wzdłuż trasy DJ5HG przewiduje rzadkie i silne odbicia: warto nasłuchiwać.
+LI|TRASA POZA HORYZONTEM ŚLADU: na wysokości śladów punkt środkowy jest pod horyzontem; ostrzeżenie podaje, jaka wysokość byłaby potrzebna.
+LI|BRAK WSPÓLNEJ STREFY: żaden punkt warstwy nie jest widoczny z obu stacji; ostrzeżenie podaje, ile brakuje i co byłoby potrzebne.
+H1|6. Geometria i tłumienie
+P|Tekstowe zestawienie danych trasy, które można zaznaczyć i skopiować, a po prawej wykres elewacji anteny w funkcji odległości od punktu odbicia, dla trzech wysokości śladów.
+H2|6.1 Dane tej karty
+LI|Moc W (400), Zysk anteny dBi (14; ta sama antena na obu końcach), Minimalny sygnał dBm (-130), Gęstość śladu q = 10^14 elektronów/m: służą do obliczenia bilansu łącza.
+LI|Promień początkowy śladu: podwójna wartość ITU (Stober 2021, ostrożna, domyślna), ITU-R P.843 albo pominięty. Im większy promień, tym większe straty na wyższych częstotliwościach.
+LI|Czas trwania pingów między pasmami: teoretyczny λ² (McKinley, SM6FHZ; ostrożny, domyślny) albo obserwowany (pomiary HamSCI MSQP wykonane przez NN4SA, Perseidy 2026: od 50 do 144 MHz pingi skracają się 1,5 raza zamiast 8).
+H2|6.2 Zestawienie
+LI|GEOMETRIA TRASY: stacje i ich wysokości, odległość, azymut, punkt środkowy, wysokość śladów, elewacja anteny w stronę punktu środkowego.
+LI|HOT A / HOT B: lokator, azymut, odchylenie od kierunku bezpośredniego, odległość i elewacja każdego hot spotu.
+LI|GRANICE STREFY WSPÓLNEJ: zasięg na wysokości śladów aż do horyzontu, wiązka anteny z jej maksimum i szerokością w pionie, Granica A i Granica B; zysk i wiązka anteny Yagi.
+LI|TŁUMIENIE TRASY: dla punktu środkowego, Hot A i Hot B, przy 28, 50, 70, 144, 222 i 432 MHz (ślad przecinający płaszczyznę trasy, przypadek najmniej korzystny).
+LI|BILANS ŁĄCZA: moc i EIRP, tłumienie, sygnał na antenie, sygnał minimalny i margines; przypadek najkorzystniejszy (ślad w płaszczyźnie trasy) oraz margines przy średnim tłumieniu według OH5IY.
+LI|EKSPERYMENTALNE REGUŁY MIĘDZY PASMAMI: liczba, natężenie i czas trwania odbić w porównaniu z 144 MHz; maksymalny ping IARU; czas trwania obserwowany w pomiarach MSQP.
+TAG|NOTA|Dodatni margines oznacza, że przeciętny ślad niedogęszczony wystarcza do zrealizowania łączności na tej trasie twoją stacją; ujemny margines oznacza, że potrzebne są gęstsze ślady lub meteory przegęszczone. To jest oszacowanie: punktem odniesienia pozostaje doświadczenie na paśmie.
+H1|7. Obliczanie sprawności
+P|Sprawność mówi w procentach, w jakim stopniu położenie radiantu roju umożliwia odbicia na twojej trasie: 100 % to położenie najkorzystniejsze dla tej trasy. Ta podkarta pokazuje ją godzina po godzinie dla dnia ustawionego w polu "Data obliczenia (UTC)", z wartościami w połowie każdej godziny.
+H2|7.1 Cztery ramki
+LI|NAJLEPSZA PORA DNIA: godzina z najwyższym indeksem trasy i przeważająca strona.
+LI|NAJKORZYSTNIEJSZY RÓJ: rój, który ma największy udział, z godziną, stroną i dwoma najlepszymi kierunkami anteny.
+LI|TERAZ: indeks i strona w bieżącej godzinie oraz zalecany Hot (tylko jeśli wybranym dniem jest dzisiaj).
+LI|PROGNOZA EKSPERYMENTALNA: przewidywana liczba odbić na godzinę teraz, za 1 i za 2 godziny (rozdział 8).
+P|Gdy ramka nie ma wartości, podaje powód: brak wspólnej strefy, brak aktywnego roju albo radianty niekorzystne przez cały dzień. Dymek każdej ramki wyjaśnia, co ona pokazuje. Pod ramkami, w razie potrzeby, ostrzeżenie BRAK WSPÓLNEJ STREFY oraz pasek objaśniający litery A i B.
+H2|7.2 Ustawienia obliczenia
+LI|Ostrożnie (domyślnie): wysokość śladów z radaru, zwykłe ślady, kąt β włączony. Daje najniższe wartości.
+LI|Jak DJ5HG: stała wysokość 102 km, dłuższe ślady przy niskim radiancie, kąt β włączony; odwzorowuje program QTFGUI.
+LI|Własny: wybiera się sam, gdy ręcznie zmienisz któreś z pól wyboru lub wysokość.
+LI|Dłuższe ślady przy niskim radiancie (DJ5HG): przy niskim radiancie spada mniej meteorów, ale ślady są dłuższe i częściej odbijają; powyżej około 9° oba efekty się równoważą.
+LI|Kąt β między śladem a trasą (pełny McKinley), w pomarańczowej ramce z napisem "wybór, który waży najwięcej": gdy jest włączony, ślady przecinające płaszczyznę trasy są warte 10-15 dB mniej niż ślady w niej leżące i przeważają radianty ułożone wzdłuż trasy. Gdy jest wyłączony, obowiązuje klasyczna reguła: najlepszy radiant na wysokości 15-70° i w poprzek trasy.
+LI|Werdykt klasyczny: dodaje pod każdym rojem wiersz "klasyczny" z werdyktem według reguły krótkofalowców w punkcie środkowym trasy: ✗ radiant pod horyzontem, ◐ marginalny (za nisko, za wysoko lub prawie wzdłuż trasy), ● dobry, ★ doskonały (w poprzek trasy). Nie zmienia obliczenia.
+TAG|ATTENZIONE|Kąt β silnie zmienia wartości na długich trasach: JN70CN - JO76QP (1791 km), Geminidy 14/12/2026, 98 % przy wyłączonym β i 13 % przy włączonym β. Obie tezy mają różne źródła, a pierwsze porównanie ze zliczeniami BRAMS ich nie rozróżnia: porównaj oba przypadki z doświadczeniem na paśmie. Wartości procentowe odnoszą się do najlepszego położenia radiantu dla danej trasy; do porównywania różnych tras służy sprawność w dB.
+H2|7.3 Na ile ufać liczbom
+P|Najlepsze godziny i strona to najbardziej wiarygodne informacje: niewiele się zmieniają przy różnych ustawieniach obliczenia. Wartości procentowe natomiast bardzo zależą od dokonanych wyborów, przede wszystkim od kąta β. Porównanie ze 181 767 rzeczywistymi spotami MSK144 na 50 MHz (HamSCI, Perseidy 11-12 sierpnia 2025) potwierdza godzinowy przebieg indeksu trasy, ale pokazuje też, że to, które pary stacji słyszą się o danej godzinie, zależy przede wszystkim od meteorów sporadycznych i od aktywności na paśmie, których model nie uwzględnia.
+TAG|NOTA|Używaj programu do wyboru godziny i strony, w którą należy obrócić antenę; nie traktuj wartości procentowych jako prawdopodobieństwa powodzenia łączności.
+H2|7.4 Wykres
+P|Dla maksymalnie pięciu rojów: sprawność jako linia ciągła, a wzór DH9GCD jako linia kropkowana w tym samym kolorze; indeks trasy jako słupki na prawej skali. Czas lokalny podany jest pod czasem UTC.
+H2|7.5 Tabela 24 godzin
+LI|Jeden wiersz dla każdego roju aktywnego w danym dniu, 24 kolumny dla godzin UTC.
+LI|63A: sprawność 63 %, większość odbić od strony A; 41B: strona B; liczba bez litery: poniżej 5 %; pusta komórka: poniżej 1 %; ↑: radiant powyżej 70° (za wysoko); cieplejszy kolor = wyższa sprawność.
+LI|A = po lewej, patrząc z twojej stacji w stronę korespondenta (strefa Hot A); B = po prawej (strefa Hot B). Warto obrócić antenę o 10-30° w tę stronę (side-scatter).
+LI|Jasnoniebieskie wiersze DH9GCD %: wzór DH9GCD na najlepszy kierunek, do porównania; nie uwzględnia ani horyzontu, ani wiązki anteny.
+LI|Wiersz Σ: indeks trasy, suma ZHR × sprawność wszystkich aktywnych rojów.
+LI|Pomarańczowy wiersz: eksperymentalna prognoza liczby odbić na godzinę, dla godzin, w których jest dostępna.
+TAG|PROCEDURA|Aby wybrać godzinę skedu: ustaw datę, spójrz na wiersz Σ i ramkę NAJLEPSZA PORA DNIA; w wierszu wybranego roju odczytaj literę A lub B i obróć antenę o 10-30° w tę stronę. Przytrzymaj kursor myszy nad komórką, aby zobaczyć szczegóły hot spotu w tej godzinie.
+H1|8. Prognozy eksperymentalne
+P|Przelicza zliczenia radaru w Collm (36,2 MHz) na oszacowanie liczby odbić na godzinę w paśmie amatorskim (domyślnie 144 MHz, od 28 do 1300 MHz), tworzy prognozę na najbliższe 24 godziny dla twojej trasy i porównuje ją z obserwatorem RMOB. Wszystko tutaj ma charakter eksperymentalny: liczby służą do porównywania godzin i dni.
+H2|8.1 Polecenia
+LI|Częstotliwość docelowa MHz: częstotliwość prognozy.
+LI|Wykładnik λ^k (3, SM6FHZ) i Współczynnik stacji K (1): reguła przeliczania z częstotliwością i poprawka dla twojej stacji.
+LI|k ze wskaźników populacji: proponuje k na podstawie wskaźników populacji r aktywnych rojów (GMN, a w razie braku IMO; k = 3,75 · log10 r, ważone ZHR) i przed zastosowaniem prosi o potwierdzenie.
+LI|Wczytaj plik RMOB z dysku i Wyznacz wykładnik z pliku RMOB: wczytują miesięczny plik RMOB i wyznaczają k z godzin wspólnych z Collm.
+LI|Obserwator RMOB, Pobierz RMOB teraz i automatyczne pobieranie co 5 minut: automatyczne pobieranie jest wyłączone i należy je włączać tylko za zgodą RMOB.
+H2|8.2 Wyniki
+LI|Wykres z wczoraj i dzisiaj: meteory na godzinę w Collm, wartości przeliczone na twoją częstotliwość oraz, jeśli zostały wczytane, zliczenia RMOB.
+LI|Prognoza na najbliższe 24 godziny: ta sama godzina z poprzedniego dnia, skorygowana o zmianę indeksu rojów dla trasy.
+LI|Tabela z oceną: dobra, średnia lub słaba w porównaniu ze średnią z 24 godzin.
+TAG|NOTA|Czas trwania odbić zależy od wyboru "Czas trwania pingów między pasmami" w karcie Geometria i tłumienie; w forward scatter czas trwania rośnie także z sec²φ w punkcie środkowym trasy.
+H1|9. Na żywo i dane w czasie rzeczywistym
+H2|9.1 Ruch na żywo
+P|Mapa azymutalna równoodległościowa wyśrodkowana na twojej stacji z całym zebranym ruchem meteor scatter: dla każdej łączności trasa w kolorze pasma (28 brązowy, 50 zielony, 70 cyjanowy, 144 pomarańczowy, 222 różowy, 432 fioletowy), obie stacje oraz chmura najbardziej prawdopodobnych śladów o tej godzinie. Świeżo nadesłane spoty migają przez minutę.
+LI|Promień mapy: 600-3500 km. Spoty do wyświetlenia: ostatnie 15 lub 30 minut, ostatnia godzina, ostatnie 3 lub 24 godziny.
+LI|Kliknięcie trasy lub wiersza tabeli wyróżnia łączność i pokazuje środek chmury, jej wysokość i rozmiary.
+H2|9.2 Strumień radarowy
+P|Godzinowe zliczenia meteorów i wysokości śladów z radaru SKiYMET w Collm (36,2 MHz) oraz najnowszy obraz z radaru w Sodankylä (36,9 MHz).
+LI|Pobierz teraz i Automatyczna aktualizacja wszystkich źródeł co 5 minut: każde źródło jest pobierane ponownie tylko wtedy, gdy się zmieniło.
+LI|Wykładnik λ (SM6FHZ): wykładnik oszacowania dla twojego pasma (pomarańczowa linia na prawej skali).
+LI|Wysokości śladów: histogram z dominantą, średnią, medianą i odchyleniem standardowym; przy zaznaczonym polu "z radaru" dominanta staje się wysokością używaną we wszystkich obliczeniach.
+TAG|ATTENZIONE|Jeśli nie udaje się odczytać skali wykresu z Collm, pojawia się pomarańczowe ostrzeżenie i wartości należy zweryfikować. Bez połączenia program używa ostatnio zapisanych danych, informuje o tym raz i sam ponawia próbę co 5 minut; pasek stanu zmienia kolor na czerwony, dopóki połączenie nie wróci.
+H2|9.3 Radar GRAVES
+P|GRAVES nadaje w CW na 143,050 MHz z Broye-lès-Pesmes (JN27SI). Podkarta traktuje GRAVES → ty jako osobną trasę meteor scatter: oblicza sprawność, zalecany Hot i strefy PREV, sprawdza, czy strefa znajduje się w wiązce i kiedy wiązka ją oświetla.
+LI|Teraz: przywraca obliczenie do czasu rzeczywistego. Ustaw GRAVES jako DX: korespondentem staje się GRAVES. Sekwencja wiązki: 0,8 s na krok (PE1ITR 2021) albo 3,2 s (2007).
+LI|Panele: STREFA UŻYTECZNA W WIĄZCE GRAVES, SPRAWNOŚĆ TRASY GRAVES → TY TERAZ (z oczekiwanymi echami, eksperymentalnie), TRASA (gdzie skierować antenę), NASTĘPNE PRZEJŚCIE WIĄZKI NAD STREFĄ.
+LI|Chronologiczna rekonstrukcja dnia i szczegóły najbliższych sekund.
+TAG|PROCEDURA|Aby słuchać GRAVES: USB na 143,049 MHz (ton około 1 kHz), AGC wolne lub wyłączone, pasmo audio co najmniej 2,4 kHz; antena skierowana na zalecany hot spot z panelu TRASA, przy niskiej elewacji; zegar komputera zsynchronizowany. Pingi to krótkie kreski obok nośnej na wodospadzie.
+H2|9.4 Zbieranie danych
+P|Zbiera spoty meteor scatter z trzech strumieni telnet (DX cluster, RBN, DM4X ze spotami z PSKReporter) i ze strumienia MQTT PSKReporter, każdy w osobnej podkarcie, i je filtruje.
+LI|Wpisz u góry swój znak wywoławczy do logowania. Każdy strumień ma host, port, polecenia po zalogowaniu, Połącz ponownie, Połącz przy starcie oraz konsolę.
+LI|Filtr przyjmuje spoty w częstotliwościach typowych dla meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) lub z emisją MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) i odrzuca te, które deklarują inny rodzaj propagacji. Okna częstotliwości i słowa można zmieniać; każde ma własny licznik.
+LI|Brakujące lokatory są pobierane z archiwum CALL3; przyjęte spoty trafiają do data/spot_ms, po jednym pliku na dzień, oraz na mapę w karcie Ruch na żywo.
+H1|10. Roje na żywo i katalog rojów
+H2|10.1 Roje na żywo
+P|Po lewej strumień i ZHR mierzone przez Global Meteor Network dla aktywnych rojów, wraz z dziennymi zliczeniami kamer GMN dla każdego roju (to zliczenie, a nie strumień: zależy od tego, ile stacji ma pogodne niebo); po prawej mapy radiantów z radaru CMOR, łącznie z mapami rojów dziennych. Pliki są pobierane ponownie tylko wtedy, gdy się zmieniły, najwyżej co 30 minut, albo przyciskiem Pobierz teraz.
+H2|10.2 Roje
+P|Katalog używany we wszystkich obliczeniach: roje z kalendarza IMO 2026 i 2027 oraz Źródło Antyhelionowe. Roje aktywne dzisiaj są wyróżnione.
+LI|Skrót, nazwa, okres aktywności, długość ekliptyczna Słońca w maksimum, następne maksimum (UTC) i jego źródło (IMO lub obliczone), radiant, prędkość, wskaźnik populacji r, ZHR, typ (wizualny lub radiowy dzienny).
+LI|k: wykładnik przeliczania częstotliwości na podstawie wskaźnika populacji (GMN, jeśli jest dostępny, w przeciwnym razie IMO).
+LI|IAU MDC: rozwiązania, Δ radiantu, Δλ, Δv: porównanie z katalogiem IAU Meteor Data Center (opublikowane rozwiązania i różnice katalogu programu względem ich mediany).
+LI|GMN dzisiaj: trajektorie potwierdzone w ostatnim dziennym pliku Global Meteor Network.
+TAG|NOTA|Katalog to plik data/sciami.csv, a maksima IMO są w data/massimi_imo.csv: można je edytować w edytorze tekstu. Błędny wiersz jest zgłaszany przy uruchomieniu i pomijany.
+H1|11. Mapa kwadratów
+P|Kwadraty Maidenhead zrobione (pomarańczowe) i potwierdzone (zielone, QSL lub LoTW), odczytane z pliku ADIF twojego logu, na mapie Europy, z osobną podkartą dla każdego pasma: 50, 70, 144, 222 i 432 MHz.
+LI|Wczytaj plik ADIF: wczytuje plik .adi lub .adif; nowy plik zastępuje poprzedni. Wyczyść pamięć: usuwa wczytane kwadraty.
+LI|Kółko myszy = powiększenie, przeciągnięcie = przesunięcie, kursor nad kwadratem = łączności QSO z tego kwadratu.
+TAG|NOTA|YA-MS nie łączy się z LoTW: wyeksportuj ADIF ze swojego programu do prowadzenia logu lub z LoTW i wczytaj go tutaj.
+H1|12. Dokumenty techniczne
+LI|Instrukcja obsługi: ten dokument.
+LI|Źródła: wszystkie źródła programu wraz z odnośnikami.
+LI|Mapa radarów europejskich: gdzie znajdują się Collm, Sodankylä, GRAVES i CMOR względem twojej stacji, z niebem widzianym przez każdy z radarów.
+LI|Wyjaśnienie obliczania wydajności: jak oblicza się sprawność, krok po kroku, z etykietami ŹRÓDŁO, WERYFIKACJA i WYBÓR.
+P|Dokumenty są wyświetlane w języku interfejsu, jeśli istnieje tłumaczenie, w przeciwnym razie po włosku. "Eksportuj do Word (.docx)" zapisuje kopię w wybranym miejscu; "Otwórz w programie Word" otwiera dokument w programie domyślnym. Podręcznik obliczeń, ze wszystkimi równaniami, znajduje się w folderze doc (po włosku) i doc/manuali (pozostałe języki).
+H1|13. Folder data i ustawienia
+H2|13.1 Najważniejsze pliki
+LI|config.ini: wszystkie ustawienia (tekst, klucz=wartość).
+LI|lingue/: tłumaczenia interfejsu; mappa/: mapa Europy.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: katalog rojów i położenie Źródła Antyhelionowego; regole_sperimentali.csv: reguły między pasmami.
+LI|flusso_collm.csv, quote_collm.csv: archiwa radaru w Collm; radar/: najnowsze obrazy, pliki RMOB i dane ze źródeł na żywo; fonti_radar.csv: adresy źródeł, które można włączać pojedynczo.
+LI|cataloghi/: katalog IAU MDC; radar/diretta/: dane GMN i CMOR.
+LI|call3.txt: archiwum lokatorów; spot_ms/: zebrane spoty meteor scatter; adif_quadrati.csv: kwadraty z pliku ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: dokumenty techniczne.
+LI|backup/: kopie plików zastąpionych podczas aktualizacji; aggiornamento/: pobrany pakiet (usuwany przy ponownym uruchomieniu).
+H2|13.2 Niektóre klucze pliku config.ini
+LI|controlla_aggiornamenti=0: nie sprawdzaj nowych wersji; aggiornamenti_salta: pominięta wersja.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: pola wyboru obliczenia.
+LI|raggio_iniziale (0 = podwójna wartość ITU, 1 = ITU, 2 = pominięty), durata_ping (0 = λ², 1 = obserwowany).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Edytuj config.ini tylko przy zamkniętym programie: przy zamknięciu YA-MS zapisuje go na nowo.
+H1|14. Typowe procedury
+H2|14.1 Przygotowanie skedu na roju
+TAG|PROCEDURA|1) Ustaw obie stacje i naciśnij Oblicz. 2) W karcie Roje sprawdź następne maksimum roju. 3) Wpisz tę datę w polu Data obliczenia (UTC). 4) W karcie Obliczanie sprawności spójrz na wiersz roju i wiersz Σ: wybierz godziny o najwyższej sprawności. 5) Zanotuj stronę (A lub B) i obróć antenę o 10-30° w tę stronę. 6) W karcie Geometria i tłumienie sprawdź margines bilansu łącza.
+H2|14.2 Śledzenie sesji na żywo
+TAG|PROCEDURA|1) Naciśnij Czas rzeczywisty. 2) W karcie Obliczenie prognozy obserwuj zalecany Hot i strefy PREV, które aktualizują się co minutę. 3) W karcie Strumień radarowy sprawdź, czy radar w Collm zlicza meteory. 4) W karcie Ruch na żywo zobacz, kto prowadzi łączności i gdzie padają ich ślady.
+H2|14.3 Test stacji z GRAVES
+TAG|PROCEDURA|1) W karcie Radar GRAVES sprawdź panel STREFA UŻYTECZNA W WIĄZCE GRAVES. 2) Skieruj antenę tak, jak wskazuje panel TRASA. 3) Słuchaj w USB na 143,049 MHz w oknach czasowych następnego przejścia wiązki. 4) Porównaj pingi z oczekiwanymi echami i z obserwatorami RMOB.
+H2|14.4 Kalibracja prognozy za pomocą RMOB
+TAG|PROCEDURA|1) W karcie Prognozy eksperymentalne wczytaj miesięczny plik RMOB obserwatora pracującego w twoim paśmie. 2) Naciśnij Wyznacz wykładnik z pliku RMOB i zaakceptuj k, jeśli wspólnych godzin jest wystarczająco dużo. 3) Ustaw Współczynnik stacji K na sugerowaną wartość.
+H1|15. Częste problemy
+LI|Wszystkie sprawności wynoszą 0: przeczytaj ostrzeżenie BRAK WSPÓLNEJ STREFY. Jeśli "charakterystyka anteny" jest wyłączona, obniż elewację wiązki; w przeciwnym razie trasa leży poza horyzontem na wysokości śladów.
+LI|Wartości są znacznie niższe niż u DH9GCD lub w starszej wersji: sprawdź pole wyboru kąta β (rozdział 7.2).
+LI|"Nieprawidłowy lokator stacji": wpisz lokator o długości 4, 6 lub 8 znaków (na przykład JN70CN lub JN70CN83).
+LI|Hot A i Hot B są szare: przy antenie skierowanej na korespondenta znajdują się już w wiązce; nie trzeba obracać anteny.
+LI|Brak mapy Europy: przy pierwszym uruchomieniu potrzebne jest połączenie z internetem; program sam ponawia próbę.
+LI|Tekst jest za mały lub wykresy nie mają miejsca: użyj opcji Czcionka i przycisku Sterowanie.
+LI|Przejście wiązki GRAVES wydaje się przesunięte: zsynchronizuj zegar komputera z serwerem NTP; sekwencja wiązki bywa czasem przesuwana przez stację sterującą.
+LI|Linux, tekst chiński lub japoński wyświetlany jako kwadraciki: zainstaluj czcionki Noto CJK.
+H1|16. Kontakt
+P|YA-MS to bezpłatny program dla krótkofalowców, opracowany przez Costantino IC8TEM (Capri). Zgłoszenia, propozycje i dane porównawcze są mile widziane: podaj system operacyjny, wersję YA-MS i opis tego, co zrobiłeś. Kod i wydania: github.com/ic8tem/YA-MS. Kontakt: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Kto chce wesprzeć tę pracę, może to zrobić na ko-fi.com/ic8tem.

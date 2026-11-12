@@ -1,0 +1,233 @@
+TITLE|Manwal ng paggamit ng YA-MS
+SUB|Bersyon 1.8.1 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+H1|1. Panimula
+H2|1.1 Para saan ang YA-MS
+P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
+P|Libre ang programa, gumagana sa Windows, Linux (pati Raspberry Pi) at macOS, at isinalin sa 36 na wika. Hindi nito kinokontrol ang radyo o ang rotator: para sa QSO, gamitin ang karaniwang programa para sa mga digital mode (MSHV, WSJT-X).
+H2|1.2 Paano basahin ang manwal na ito
+P|Inilalarawan ng manwal ang mga tab isa-isa, simula sa kalkulasyon ng pagtataya. Sinasabi ng bawat kabanata kung ano ang ipinapakita ng tab, ano ang ginagawa ng bawat kontrol at paano basahin ang mga resulta. Tinitipon ng kabanata 14 ang mga pinakakaraniwang pamamaraan, at ng kabanata 15 ang mga madalas na problema. Kung paano kinakalkula ang episyensya, kasama ang mga sanggunian at mga pagsusuri, ay ipinapaliwanag sa dokumentong “Paliwanag ng pagkalkula ng kahusayan”; ang kumpletong mga equation ay nasa Manwal ng mga kalkulasyon (folder na doc).
+TAG|PROCEDURA|mga hakbang na susundin, ayon sa pagkakasunod-sunod.
+TAG|NOTA|kapaki-pakinabang na impormasyon para mas maunawaan o mas magamit ang isang function.
+TAG|ATTENZIONE|madalas na pagkakamali, limitasyon ng kalkulasyon o kilos ng programa na dapat malaman.
+P|Ang mga pangalan ng mga kontrol ay isinulat ayon sa paglabas nila sa programa sa Tagalog; sa ibang mga wika, pareho ang kanilang puwesto at pagkakasunod-sunod.
+H1|2. Pag-install, pagsisimula at mga update
+H2|2.1 Aling package ang ida-download
+P|Lahat ng package ay nasa pahina ng mga release sa GitHub (github.com/ic8tem/YA-MS/releases). Hindi kailangang mag-install ng .NET: kasama na ito sa package.
+LI|Windows 64 bit: YA-MS-<bersyon>-windows-x64-setup.exe (nag-i-install sa C:\YA-MS, nang walang karapatan ng administrator) o ang portable na zip, na ie-extract sa kahit anong folder. Para sa Windows na 32 bit, ang parehong mga file na may x86.
+LI|Linux (Debian, Ubuntu, Mint): ang .deb package, na ii-install gamit ang sudo apt install ./ya-ms_<bersyon>_amd64.deb; sa unang pagsisimula, kinokopya ng programa ang sarili nito sa ~/YA-MS. Para sa ibang mga distribusyon, ang .tar.gz, na ie-extract at patatakbuhin gamit ang ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 at 500: ang package na raspberry-pi-64bit (Raspberry Pi OS 64 bit) o raspberry-pi-32bit, sa .tar.gz o .deb.
+LI|macOS: ang .dmg para sa Apple Silicon (M1 at mas bago) o para sa Intel, o ang app.zip. I-drag ang YA-MS.app sa sarili mong folder (halimbawa ~/YA-MS): ang folder na data ay nalilikha sa tabi ng app.
+TAG|ATTENZIONE|Maaaring ipakita ng Windows ang “Pinrotektahan ng Windows ang iyong PC”: piliin ang “Higit pang impormasyon” at pagkatapos ang “Patakbuhin pa rin”. Sa macOS, sa unang pagkakataon, buksan ang app gamit ang right-click at “Open”. Hindi naka-sign ang programa gamit ang bayad na sertipiko.
+H2|2.2 Ang unang pagsisimula
+P|Sa pagsisimula, lumalabas nang ilang segundo ang screen na may Perseids sa itaas ng VLT ng ESO. Sa unang pagsisimula, pinipili ng YA-MS ang wika ng system kung isa ito sa 36, kung hindi ay Italyano; dina-download nito ang mapa ng Europa (Natural Earth) sa folder na data/mappa at nagpapakita ng halimbawang landas. Ilang minuto lang ang kailangan para i-set up ito para sa iyong istasyon (kabanata 4).
+H2|2.3 Ang folder na data
+P|Lahat ng setting at lahat ng datos ay nasa iisang folder na data sa tabi ng programa: walang AppData, walang system folder. Para ilipat ang YA-MS sa ibang computer, kopyahin lang ang folder ng programa kasama ang folder na data nito. Inilalarawan sa kabanata 13 ang laman ng folder.
+H2|2.4 Mga awtomatikong update
+P|Mula sa bersyon 1.8.0, kusang tinitingnan ng YA-MS sa GitHub, sa pagsisimula at hindi hihigit sa isang beses bawat araw, kung may lumabas na bagong bersyon. Kung mayroon, lumalabas ang window na “May available na update” na may mga bagong feature at tatlong button:
+LI|I-update ngayon: dina-download ang package na angkop sa iyong system, pinapalitan ang mga file ng programa, pinapanatili ang folder na data at nire-restart ang YA-MS. Ang mga file ng programa sa folder na data na binabago ng bagong bersyon ay kinokopya muna sa data/backup/v<lumang bersyon>; hindi ginagalaw ang iyong mga file (mga setting, archive, spot, ADIF).
+LI|Mamaya: isinasara ang window; uulitin ang pagsusuri sa susunod na araw.
+LI|Laktawan ang bersyong ito: hindi na muling iaalok ang bersyong iyon sa pagsisimula.
+P|Ang button na “Mga update” sa kanang ibaba, sa status bar, ay gumagawa ng parehong pagsusuri nang mano-mano, pati para sa nilaktawang bersyon.
+TAG|ATTENZIONE|Kailangang makasulat ang awtomatikong update sa folder ng programa. Kung hindi ito makasulat (halimbawa, programang kinopya sa isang system folder), sinasabi ito ng YA-MS at iminumungkahing buksan ang pahina ng mga release para mag-install nang mano-mano. Walang ganitong function ang mga bersyon hanggang 1.7.0: sa unang pagkakataon, mano-mano ang update, sa pag-install sa ibabaw ng naunang bersyon.
+TAG|NOTA|Para hindi na tingnan ang mga bagong bersyon, isulat ang controlla_aggiornamenti=0 sa file na data/config.ini.
+H2|2.5 Mga nawawalang file ng programa
+P|Sa pagsisimula, tinitingnan ng YA-MS kung kumpleto ang lahat ng file nito (mga salin, katalogo, dokumento). Kung may kulang, halimbawa pagkatapos ng hindi kumpletong pagkopya, inililista ang mga ito ng window na “Mga nawawalang file” at iniaalok ang “I-download ang mga nawawalang file” mula sa GitHub, sa parehong bersyon ng programa, o “Magpatuloy nang wala ang mga ito”. Inuulit ang parehong pagsusuri kapag pinindot ang “Mga update”.
+H1|3. Ang pangunahing window
+H2|3.1 Ang mga bahagi ng window
+LI|Sa itaas, tatlong hanay ng mga kontrol na para sa lahat ng tab: mga istasyon at banda, E layer at antena, oras ng kalkulasyon (kabanata 4).
+LI|Ang bar ng mga pangunahing tab, na may button na Mga kontrol sa kanan, ang color scheme (Tema) at ang wika.
+LI|Ang mga sub-tab, sa isang mas mapusyaw na hanay, para sa mga tab na mayroon nito.
+LI|Sa ibaba, ang status bar: mga mensahe ng kalkulasyon, mga babala tungkol sa koneksiyon, at ang button na “Mga update”.
+H2|3.2 Ang mga tab
+LI|Live at real-time na datos: Live na trapiko, Flux ng radar, GRAVES radar, Pangongolekta ng data (kabanata 9).
+LI|Kalkulasyon ng pagtataya: Kalkulasyon ng pagtataya, Heometriya at path loss, Kalkulasyon ng episyensya, Eksperimental na pagtataya (mga kabanata 5-8).
+LI|Mga live na shower, Mga shower, Mapa ng grid square (mga kabanata 10-11).
+LI|Mga teknikal na dokumento, ang huli: Manwal ng paggamit, Mga source, Mapa ng mga radar sa Europa, Paliwanag ng pagkalkula ng kahusayan (kabanata 12).
+H2|3.3 Wika, mga kulay, font
+LI|Wika: 36 na wika. Kapag pinalitan ang wika, binubuo muli ang window sa parehong posisyon at sa parehong tab, nang hindi nagre-restart. Sumusunod ang mga numero at petsa sa napiling wika (decimal comma sa Italyano, tuldok sa Ingles).
+LI|Tema: 12 color scheme; ang Maliwanag ang default, ang Gabi at Itim ay para sa dilim, ang Bakas ng meteor ang orihinal na istilo ng YA-MS.
+LI|Font (sa dulo ng unang hanay ng mga kontrol): pinalalaki ang lahat ng teksto mula 100 hanggang 300 %. Kapag malaki ang font, bumababa sa susunod na linya ang mga tab.
+LI|Mga kontrol: itinitiklop at muling binubuksan ang tatlong hanay ng mga kontrol, para magbigay ng espasyo sa mga mapa at graph. Tinatandaan ang napili.
+TAG|NOTA|Halos bawat kontrol ay may tooltip: itigil ang mouse sa ibabaw ng kontrol para mabasa kung para saan ito at kung saang source galing ang default na halaga.
+H1|4. Pag-set up ng istasyon at ng landas
+H2|4.1 Hanay 1: mga istasyon at banda
+LI|Ang aking locator at altitude m: ang iyong Maidenhead locator (4, 6 o 8 karakter; ginagamit ang gitna ng square) at ang altitude ng istasyon mula sa antas ng dagat.
+LI|DX station at altitude m: locator at altitude ng istasyong kokontakin.
+LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Ginagamit para sa gain at lobe ng antena, para sa path loss at link budget, at para sa tantiya ng flux.
+LI|Kalkulahin: kinakalkula muli ang landas (pag-sample ng E layer, wala pang isang segundo).
+LI|Antena az: azimuth ng antena, laging patungo sa DX station.
+H2|4.2 Hanay 2: E layer at antena
+LI|Taas ng bakas km at mula sa radar: taas ng mga bakas ng meteor. Kapag naka-tsek ang “mula sa radar”, ginagamit ang pinakamadalas na taas na sinukat ng radar ng Collm (karaniwang 88-90 km); alisin ang tsek para isulat ito nang mano-mano.
+LI|Elevation ng lobe °: elevation ng maximum ng patayong lobe ng iyong antena. Ang isang directional na antena na nakapirmi sa 0° ay may pangunahing lobe pa rin na ilang digri sa itaas ng horizon, dahil sa repleksiyon sa lupa: karaniwang 3-8°, depende sa taas ng antena sa wavelength.
+LI|pattern ng antena: kapag naka-on (default), binibilang ang mga punto ng repleksiyon ayon sa patayong gain ng dalawang antena: buo sa paligid ng maximum ng lobe, pakaunti nang pakaunti patungo sa horizon at pataas. Kapag naka-off, ang elevation ng lobe ay isang matigas na hangganan: hindi binibilang ang mga puntong nakikita sa mas mababa.
+LI|Yagi antena: boom m: haba ng boom. Sa tabi nito, isinusulat ng programa ang haba sa wavelength, ang gain (kurba ng DL6WU) at ang pahalang at patayong lobe sa -3 dB. Sa ilalim ng 2 λ, hindi gaanong tumpak ang tantiya.
+LI|Hot spot mula sa gitnang punto km at auto (AMS): distansiya ng Hot A at Hot B mula sa gitnang punto. Kapag naka-tsek ang “auto (AMS)”, sinusunod ang talahanayan ni J. Richardson na binanggit ni DJ5HG (13° na paglihis sa 1000 km, 10° lampas sa 1500 km); alisin ang tsek para isulat nang mano-mano ang 30-400 km (gumagamit ang MSHV ng 150 km).
+TAG|ATTENZIONE|Kapag naka-off ang “pattern ng antena” at ilang digri ang lobe, sa isang mahabang landas ay maaaring walang makitang pinagsasaluhang punto ng layer ang dalawang istasyon: 0 ang lahat ng episyensya at lumalabas ang babalang “WALANG PINAGSASALUHANG SONA” kasama ang lobe o taas ng bakas na kakailanganin. Halimbawa: JN70CN - JO76QP, 1791 km, lobe sa 3°, mga bakas sa 88.5 km.
+H2|4.3 Hanay 3: oras ng kalkulasyon
+LI|Oras: orasang UTC.
+LI|Petsa ng kalkulasyon (UTC): ang araw ng kalkulasyon. Para ito sa Kalkulasyon ng pagtataya, sa talahanayan ng 24 na oras ng Kalkulasyon ng episyensya at sa kronolohiya ng GRAVES radar. Ang default ay ngayon, at sa hatinggabi ay sumusunod ito sa bagong araw.
+LI|Mga oras (mula −12 hanggang +36 h): inililipat ang sandali ng kalkulasyon, nang 15 minuto bawat hakbang. Sa tabi: “Kalkulasyon para sa: ngayon” o ang napiling petsa at oras.
+LI|Real time: bumabalik sa kasalukuyang sandali.
+H2|4.4 Pag-set up ng sariling istasyon
+TAG|PROCEDURA|1) Isulat ang Ang aking locator at ang altitude. 2) Isulat ang locator at altitude ng DX station, o mag-click sa mapa ng Kalkulasyon ng pagtataya: left-click = DX station, right-click = iyong istasyon. 3) Piliin ang banda. 4) Isulat ang haba ng boom at ang elevation ng lobe ng iyong antena. 5) Pindutin ang Kalkulahin: kinukumpirma ng status bar ang “Nakalkula ang landas: ... km, ... punto ng repleksiyon na na-sample”.
+TAG|NOTA|Sine-save ang mga setting sa data/config.ini sa pagsasara at sa bawat kalkulasyon: sa susunod na pagsisimula, makikita mo ang parehong landas.
+H1|5. Kalkulasyon ng pagtataya
+P|Ipinapakita ng unang sub-tab ng grupong Kalkulasyon ng pagtataya sa iisang screen kung saan bumabagsak ngayon ang mga kapaki-pakinabang na bakas at saan dapat tumutok. Lahat ay tumutukoy sa sandaling pinili gamit ang petsa at ang slider ng mga oras.
+H2|5.1 Ang buod na strip
+P|Sa itaas ng mapa, isang strip ang nagbubuod ng kalkulasyon para sa sandaling iyon: petsa at oras, index ng landas (kabuuan ng ZHR × episyensya ng mga aktibong shower), ang pinakakapaki-pakinabang na shower kasama ang ZHR at episyensya nito (pati sa dB kumpara sa reference ni DJ5HG), ang bilang ng mga shower sa itaas ng horizon at ang inirerekomendang Hot kasama ang azimuth nito.
+H2|5.2 Ang mapa mula sa itaas
+P|Sa kaliwa, ang mapa ng Europa na tinitingnan mula sa itaas (silangan sa kanan), na may iskala ng mga digri sa paligid:
+LI|berdeng linya: ang tunay na landas sa pagitan ng dalawang locator;
+LI|Hot A at Hot B: ang dalawang hot spot sa magkabilang panig ng gitnang punto. Pula = inirerekomenda, rosas = labas sa lobe ng antena, abo = nasa loob na ng lobe (may babala);
+LI|lobe ng antena: ang sektor sa -3 dB sa paligid ng azimuth ng antena;
+LI|Hangganan A at Hangganan B, malabo: ang pinakamalayong gilid ng langit na nakikita ng parehong istasyon, hindi mga puntong tututukan;
+LI|dilaw na linya: ang direksiyon kung saan winawalis ng napiling shower (o ng pinakapaborable) ang langit; mga kahel na tuldok: ang dalawang patayong pagtutok (azimuth ng radiant ±90°);
+LI|mga sonang PREV, mapusyaw na ellipse: kung saan bumabagsak ngayon ang mga pinaka-malamang na bakas, isa sa bawat panig ng landas.
+P|Left-click sa mapa = locator ng DX station, right-click = locator ng iyong istasyon; kinakalkula agad muli ang landas. Ang legend ay isang naitutuping column sa kanan ng mapa. Ang mga checkbox sa itaas ng listahan ng mga shower ay nag-o-on at nag-o-off sa mga direksiyon ng Hot, sa mapa ng Europa at sa tanaw mula sa itaas.
+H2|5.3 Ang listahan ng mga shower
+P|Para sa bawat shower: pangalan at code ng IMO, ZHR sa sandaling ito, azimuth at elevation ng radiant mula sa iyong istasyon, episyensya para sa landas, nangingibabaw na panig (A o B), pinakamahusay na pagtutok, pagsikat at paglubog ng radiant. Ang pag-click sa isang hilera ay pumipili sa shower: sumusunod dito ang dilaw na linya at ang mga kahel na tuldok.
+H2|5.4 Ang maliit na celestial dome at ang teksto ng kalkulasyon
+P|Ang mga radiant na nakikita mula sa iyong istasyon, na may code ng IMO at ang pang-araw-araw na daan nito sa cyan. Dilaw = episyensya na hindi bababa sa 50 % at ZHR na hindi bababa sa 2; kahel = hindi bababa sa 20 %; madilim na pula = mas mababa; abo = halos hindi aktibo. Ang kahel na linyang dumaraan sa zenith ay nagbibigay ng tamang mga direksiyon ng antena, na patayo sa pag-usad ng shower. Sa tabi, ang teksto ng kalkulasyon: landas, gitnang punto, inirerekomendang Hot kasama ang porsiyento ng inaasahang mga repleksiyon, mga hangganan ng pinagsasaluhang sona.
+H2|5.5 Ang cross-section
+P|Sa kanang ibaba, ang mga pinaka-malamang na bakas na nakikita mula sa antena patungo sa DX station: pahalang ang azimuth kaugnay ng DX station (A sa kaliwa, B sa kanan), patayo ang elevation. Ang bawat bakas ay isang segment na nakaturo sa radiant, mas makapal kung mas malamang. Iginuguhit din ang lobe ng antena, ang DX station at ang mga Hot.
+H2|5.6 Ang mga babala
+LI|BABALA: pumapasok ang Hot A (o Hot B) sa lobe ng antena: sa pagtutok na ito, sakop na ang hot spot na iyon.
+LI|MASYADONG MATAAS ANG RADIANT: isang kapaki-pakinabang na radiant ay nasa itaas ng 70°; halos patayong bumababa ang mga bakas at kaunti ang naire-reflect patungo sa landas.
+LI|MABABANG RADIANT SA KAHABAAN NG LANDAS: nananatiling mababa ang nakalkulang episyensya, pero sa mga sumasayad na bakas na nakahanay sa landas, inaasahan ni DJ5HG ang bihira at malalakas na repleksiyon: sulit makinig.
+LI|LAMPAS ANG LANDAS SA HORIZON NG BAKAS: sa taas ng mga bakas, nasa ilalim ng horizon ang gitnang punto; sinasabi ng babala kung anong taas ang kakailanganin.
+LI|WALANG PINAGSASALUHANG SONA: walang punto ng layer na nakikita ng parehong istasyon; sinasabi ng babala kung gaano kalaki ang kulang at ano ang kakailanganin.
+H1|6. Heometriya at path loss
+P|Isang tekstuwal na ulat ng landas, na maaaring piliin at kopyahin, at sa kanan ang graph ng elevation ng antena ayon sa distansiya mula sa punto ng repleksiyon, para sa tatlong taas ng bakas.
+H2|6.1 Ang mga datos ng tab na ito
+LI|Power W (400), Gain ng antena dBi (14; parehong antena sa dalawang dulo), Pinakamahinang signal dBm (-130), Densidad ng bakas q = 10^14 electron/m: ginagamit para sa link budget.
+LI|Panimulang radius ng bakas: doble ng ITU (Stober 2021, maingat, default), ITU-R P.843, o hindi kasama. Kapag mas malaki ang radius, mas malaki ang nawawala sa matataas na frequency.
+LI|Tagal ng mga ping sa pagitan ng mga band: teoretikal λ² (McKinley, SM6FHZ; maingat, default) o naobserbahan (mga sukat ng HamSCI MSQP ni NN4SA, Perseids 2026: mula 50 hanggang 144 MHz, umiikli ang mga ping nang 1.5 beses sa halip na 8).
+H2|6.2 Ang ulat
+LI|HEOMETRIYA NG LANDAS: mga istasyon at altitude, distansiya, azimuth, gitnang punto, taas ng bakas, elevation ng antena patungo sa gitnang punto.
+LI|HOT A / HOT B: locator, azimuth, paglihis mula sa direktang direksiyon, distansiya at elevation ng bawat hot spot.
+LI|MGA HANGGANAN NG KARANIWANG SONA: abot sa taas ng bakas hanggang sa horizon, ang lobe ng antena kasama ang maximum at patayong lapad nito, Hangganan A at Hangganan B; gain at lobe ng Yagi.
+LI|PATH LOSS NG LANDAS: para sa gitnang punto, Hot A at Hot B, sa 28, 50, 70, 144, 222 at 432 MHz (bakas na tumatawid sa plano ng landas, ang pinakahindi paborableng kaso).
+LI|LINK BUDGET: power at EIRP, path loss, signal sa antena, pinakamahinang signal at margin; ang pinakamagandang kaso (bakas na nasa plano ng landas) at ang margin gamit ang average na path loss ni OH5IY.
+LI|MGA EKSPERIMENTAL NA PATAKARAN SA PAGITAN NG MGA BANDA: bilang, lakas at tagal ng mga repleksiyon kumpara sa 144 MHz; maximum na ping ng IARU; naobserbahang tagal mula sa mga sukat ng MSQP.
+TAG|NOTA|Ang positibong margin ay nangangahulugang sapat na ang isang karaniwang underdense na bakas para makumpleto ang landas gamit ang iyong istasyon; ang negatibong margin ay nangangahulugang kailangan ng mas siksik na mga bakas o overdense na mga meteor. Tantiya lamang ito: ang karanasan sa banda pa rin ang batayan.
+H1|7. Kalkulasyon ng episyensya
+P|Sinasabi ng episyensya, sa porsiyento, kung gaano pinapayagan ng posisyon ng radiant ng isang shower ang mga repleksiyon sa iyong landas: ang 100 % ang pinakapaborableng posisyon para sa landas na iyon. Ipinapakita ito ng sub-tab na ito oras-oras para sa araw ng “Petsa ng kalkulasyon”, gamit ang mga halaga sa kalagitnaan ng bawat oras.
+H2|7.1 Ang apat na kahon
+LI|PINAKAMAHUSAY NA ORAS NG ARAW: ang oras na may pinakamataas na index ng landas at ang nangingibabaw na panig.
+LI|PINAKAPABORABLENG SHOWER: ang shower na pinakamalaki ang ambag, kasama ang oras, ang panig at ang dalawang pinakamahusay na pagtutok.
+LI|NGAYON: index at panig sa oras na ito at ang inirerekomendang Hot (kung ngayon lang ang napiling araw).
+LI|EKSPERIMENTAL NA PAGTATAYA: inaasahang mga repleksiyon bawat oras ngayon, sa loob ng 1 at ng 2 oras (kabanata 8).
+P|Kapag walang halaga ang isang kahon, sinasabi nito kung bakit: walang pinagsasaluhang sona, walang aktibong shower, o hindi paborable ang mga radiant buong araw. Ipinapaliwanag ng tooltip ng bawat kahon kung ano ang ipinapakita nito. Sa ilalim ng mga kahon, kung kailangan, ang babalang WALANG PINAGSASALUHANG SONA at isang strip na nagpapaliwanag sa mga titik A at B.
+H2|7.2 Ang setting ng kalkulasyon
+LI|Maingat (default): taas ng bakas mula sa radar, normal na mga bakas, naka-on ang anggulong β. Nagbibigay ng pinakamababang mga halaga.
+LI|Tulad ng DJ5HG: nakapirming taas na 102 km, mas mahahabang bakas kapag mababa ang radiant, naka-on ang anggulong β; ginagaya ang programang QTFGUI.
+LI|Custom: kusang napipili kapag binago mo nang mano-mano ang isa sa mga checkbox o ang taas.
+LI|Mas mahahabang bakas kapag mababa ang radiant (DJ5HG): kapag mababa ang radiant, mas kaunting meteor ang bumabagsak, pero mas mahahaba ang mga bakas at mas madalas mag-reflect; sa itaas ng humigit-kumulang 9°, nagbabalanse ang dalawang epekto.
+LI|Anggulong β sa pagitan ng bakas at landas (buong McKinley), sa kahel na kahon na may nakasulat na “ang pagpiling pinakamabigat”: kapag naka-on, ang mga bakas na tumatawid sa plano ng landas ay 10-15 dB na mas mahina kaysa sa mga nakahiga rito, at nangingibabaw ang mga radiant na nakahanay sa landas. Kapag naka-off, ang klasikong patakaran ang umiiral: ang pinakamahusay na radiant ay nasa taas na 15-70° at pahalang sa landas.
+LI|Klasikong hatol: nagdaragdag sa ilalim ng bawat shower ng hilerang “klasiko” na may hatol ng patakaran ng mga radioamateur sa gitnang punto ng landas: ✗ radiant sa ilalim ng horizon, ◐ marginal (masyadong mababa, masyadong mataas o halos nakahanay sa landas), ● mabuti, ★ napakahusay (pahalang sa landas). Hindi nito binabago ang kalkulasyon.
+TAG|ATTENZIONE|Malaki ang binabago ng anggulong β sa mga halaga sa mahahabang landas: JN70CN - JO76QP (1791 km), Geminids ng 14/12/2026, 98 % kapag naka-off ang β at 13 % kapag naka-on ang β. Magkaiba ang mga sanggunian ng dalawang teorya at hindi sila napaghihiwalay ng isang unang paghahambing sa mga bilang ng BRAMS: ihambing ang dalawang kaso sa karanasan sa banda. Ang mga porsiyento ay kaugnay ng pinakamahusay na posisyon ng radiant para sa landas na iyon; para ihambing ang magkakaibang landas, gamitin ang episyensya sa dB.
+H2|7.3 Gaano mapagkakatiwalaan ang mga numero
+P|Ang pinakamahusay na mga oras at ang panig ang pinakamatibay na impormasyon: kaunti lang ang pagbabago nila sa mga setting ng kalkulasyon. Ang mga porsiyento naman ay lubhang nakadepende sa mga pagpili, lalo na sa anggulong β. Ang paghahambing sa 181,767 tunay na MSK144 spot sa 50 MHz (HamSCI, Perseids ng 11-12 Agosto 2025) ay nagkukumpirma sa oras-oras na takbo ng index ng landas, pero ipinapakita rin nito na kung aling pares ng mga istasyon ang nagkakarinigan sa isang partikular na oras ay higit na nakadepende sa mga sporadic na meteor at sa aktibidad sa ere, na wala sa modelo.
+TAG|NOTA|Gamitin ang programa para piliin ang oras at ang panig kung saan ipipihit ang antena; huwag basahin ang mga porsiyento bilang probabilidad ng tagumpay ng QSO.
+H2|7.4 Ang graph
+P|Para sa hanggang limang shower: ang episyensya bilang tuloy-tuloy na linya at ang formula ni DH9GCD bilang tuldok-tuldok na linya na kapareho ang kulay; ang index ng landas bilang mga bar sa iskala sa kanan. Ang mga lokal na oras ay nakasulat sa ilalim ng mga oras na UTC.
+H2|7.5 Ang talahanayan ng 24 na oras
+LI|Isang hilera para sa bawat shower na aktibo sa araw na iyon, 24 na column para sa mga oras na UTC.
+LI|63A: episyensya 63 %, karamihan ng mga repleksiyon mula sa panig A; 41B: panig B; numerong walang titik: mas mababa sa 5 %; walang lamang cell: mas mababa sa 1 %; ↑: radiant sa itaas ng 70° (masyadong mataas); mas mainit na kulay = mas mataas na episyensya.
+LI|A = sa kaliwa kapag tumitingin mula sa iyong istasyon patungo sa DX station (sona ng Hot A); B = sa kanan (sona ng Hot B). Mainam na ipihit ang antena nang 10-30° patungo sa panig na iyon (side-scatter).
+LI|Mga mapusyaw na asul na hilerang DH9GCD %: ang formula ni DH9GCD para sa pinakamahusay na direksiyon, para sa paghahambing; hindi nito isinasaalang-alang ang horizon o ang lobe.
+LI|Hilerang Σ: index ng landas, kabuuan ng ZHR × episyensya ng lahat ng aktibong shower.
+LI|Kahel na hilera: ang eksperimental na pagtataya ng mga repleksiyon bawat oras, para sa mga oras kung kailan ito mayroon.
+TAG|PROCEDURA|Para pumili ng oras ng sked: itakda ang petsa, tingnan ang hilerang Σ at ang kahong PINAKAMAHUSAY NA ORAS NG ARAW; sa hilera ng napiling shower, basahin ang titik A o B at ipihit ang antena nang 10-30° patungo sa panig na iyon. Itigil ang mouse sa isang cell para mabasa ang detalye ng Hot sa oras na iyon.
+H1|8. Eksperimental na pagtataya
+P|Ginagawa nitong tantiya ng mga repleksiyon bawat oras sa isang amateur band (144 MHz ang default, mula 28 hanggang 1300 MHz) ang mga bilang ng radar ng Collm (36.2 MHz), gumagawa ng pagtataya para sa susunod na 24 na oras para sa iyong landas at inihahambing ito sa isang RMOB observer. Eksperimental ang lahat dito: ang mga numero ay para sa paghahambing ng mga oras at araw.
+H2|8.1 Ang mga kontrol
+LI|Target na frequency MHz: frequency ng pagtataya.
+LI|Exponent ng λ^k (3, SM6FHZ) at Station factor K (1): patakaran sa frequency at koreksiyon para sa iyong istasyon.
+LI|k mula sa mga population index: nagmumungkahi ng k mula sa mga population index r ng mga aktibong shower (GMN, kung hindi ay IMO; k = 3.75 · log10 r, tinimbang ayon sa ZHR) at humihingi ng kumpirmasyon bago ito ilapat.
+LI|Ikarga ang RMOB file mula sa disk at Kunin ang exponent mula sa RMOB file: binabasa ang isang buwanang RMOB file at kinukuha ang k mula sa mga oras na kapareho ng Collm.
+LI|RMOB observer, I-download ang RMOB ngayon at awtomatikong pag-download bawat 5 minuto: naka-off ang awtomatikong pag-download at dapat lamang i-on kung may pahintulot ng RMOB.
+H2|8.2 Ang mga resulta
+LI|Ang graph ng kahapon at ngayon: mga meteor bawat oras sa Collm, mga halagang inilipat sa iyong frequency at, kung naikarga, ang mga bilang ng RMOB.
+LI|Ang pagtataya para sa susunod na 24 na oras: ang parehong oras ng nakaraang araw, iwinasto ayon sa pagbabago ng index ng mga shower ng landas.
+LI|Ang talahanayan na may hatol: mabuti, katamtaman o mahina kumpara sa average ng 24 na oras.
+TAG|NOTA|Sumusunod ang tagal ng mga repleksiyon sa piniling “Tagal ng mga ping sa pagitan ng mga band” sa Heometriya at path loss; sa forward scatter, humahaba rin ang tagal kasabay ng sec²φ sa gitnang punto ng landas.
+H1|9. Live at real-time na datos
+H2|9.1 Live na trapiko
+P|Isang azimuthal equidistant na mapa na nakasentro sa iyong istasyon na may lahat ng nakolektang trapiko ng meteor scatter: para sa bawat QSO, ang landas sa kulay ng banda (28 kayumanggi, 50 berde, 70 cyan, 144 kahel, 222 rosas, 432 lila), ang dalawang istasyon at ang ulap ng mga pinaka-malamang na bakas sa oras na iyon. Kumukutitap nang isang minuto ang mga bagong dating na spot.
+LI|Radius ng mapa: 600-3500 km. Mga spot na ipapakita: huling 15 o 30 minuto, huling oras, huling 3 o 24 na oras.
+LI|Ang pag-click sa isang landas o sa isang hilera ng talahanayan ay nagha-highlight sa QSO at nagpapakita ng gitna ng ulap, ng taas nito at ng laki nito.
+H2|9.2 Flux ng radar
+P|Ang mga bilang bawat oras ng mga meteor at ang mga taas ng bakas ng SKiYMET radar ng Collm (36.2 MHz) at ang pinakabagong larawan ng radar ng Sodankylä (36.9 MHz).
+LI|I-download ngayon at Awtomatikong pag-update ng lahat ng source bawat 5 minuto: muling dina-download ang bawat source kung nagbago lamang ito.
+LI|Exponent ng λ (SM6FHZ): exponent ng tantiya sa iyong banda (kahel na linya sa iskala sa kanan).
+LI|Mga taas ng bakas: histogram na may moda, mean, median at standard deviation; kapag naka-tsek ang “mula sa radar”, ang moda ang nagiging taas sa lahat ng kalkulasyon.
+TAG|ATTENZIONE|Kung hindi mabasa ang iskala ng graph ng Collm, lumalabas ang isang kahel na babala at kailangang suriin ang mga halaga. Kapag walang koneksiyon, ginagamit ng programa ang huling na-save na datos, sinasabi ito nang isang beses at kusang sumusubok muli bawat 5 minuto; nagiging pula ang status bar hanggang bumalik ang koneksiyon.
+H2|9.3 GRAVES radar
+P|Nagta-transmit ang GRAVES ng CW sa 143.050 MHz mula sa Broye-lès-Pesmes (JN27SI). Itinuturing ng sub-tab ang GRAVES → ikaw bilang isang hiwalay na landas ng meteor scatter: kinakalkula ang episyensya, inirerekomendang Hot at mga sonang PREV, sinusuri kung nasa loob ng beam ang sona at kung kailan ito iniilawan ng beam.
+LI|Ngayon: ibinabalik ang kalkulasyon sa real time. Gawing DX ang GRAVES: nagiging GRAVES ang DX station. Sequence ng beam: 0.8 s bawat hakbang (PE1ITR 2021) o 3.2 s (2007).
+LI|Ang mga card: MAGAGAMIT NA SONA SA BEAM NG GRAVES, EPISYENSYA NG LANDAS GRAVES → IKAW NGAYON (kasama ang inaasahang mga echo, eksperimental), LANDAS (saan tututok), SUSUNOD NA PAGDAAN NG BEAM SA SONA.
+LI|Ang kronolohikal na rekonstruksiyon ng araw at ang detalye ng mga susunod na segundo.
+TAG|PROCEDURA|Para makinig sa GRAVES: USB sa 143.049 MHz (tono sa humigit-kumulang 1 kHz), mabagal o naka-off na AGC, audio bandwidth na hindi bababa sa 2.4 kHz; antena patungo sa inirerekomendang hot spot ng card na LANDAS, sa mababang elevation; naka-synchronize ang orasan ng PC. Ang mga ping ay maiikling guhit malapit sa carrier sa waterfall.
+H2|9.4 Pangongolekta ng data
+P|Kinokolekta ang mga meteor scatter spot mula sa tatlong telnet stream (DX cluster, RBN, DM4X na may mga spot ng PSKReporter) at mula sa MQTT stream ng PSKReporter, bawat isa sa sarili nitong sub-tab, at sinasala ang mga ito.
+LI|Isulat sa itaas ang iyong call sign para sa login. Bawat stream ay may host, port, mga command pagkatapos ng login, Kumonekta muli, Kumonekta sa pagsisimula at isang console.
+LI|Tinatanggap ng filter ang mga spot sa mga karaniwang frequency ng meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) o may MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), at itinatapon ang mga nagdedeklara ng ibang propagation. Maaaring baguhin ang mga window at mga salita; bawat isa ay may sariling counter.
+LI|Kinukuha mula sa CALL3 archive ang mga nawawalang locator; ang mga tinanggap na spot ay napupunta sa data/spot_ms, isang file bawat araw, at sa mapa ng Live na trapiko.
+H1|10. Mga live na shower at katalogo ng mga shower
+H2|10.1 Mga live na shower
+P|Sa kaliwa, ang flux at ZHR na sinukat ng Global Meteor Network para sa mga aktibong shower, kasama ang mga bilang sa araw na iyon ng mga camera ng GMN bawat shower (isang bilang, hindi flux: nakadepende ito sa kung ilang istasyon ang nakakakita ng maaliwalas na langit); sa kanan, ang mga mapa ng radiant ng CMOR radar, kasama ang mga daytime shower. Muling dina-download ang mga file kung nagbago lamang, hindi hihigit sa isang beses bawat 30 minuto, o gamit ang I-download ngayon.
+H2|10.2 Mga shower
+P|Ang katalogong ginagamit ng lahat ng kalkulasyon: ang mga shower ng kalendaryo ng IMO 2026 at 2027 at ang Antihelion Source. Naka-highlight ang mga shower na aktibo ngayon.
+LI|Code, pangalan, panahon ng aktibidad, solar longitude ng maximum, susunod na maximum (UTC) at ang source nito (IMO o kinalkula), radiant, bilis, population index r, ZHR, uri (visual o daytime radio).
+LI|k: exponent ng paglilipat ng frequency mula sa population index (GMN kung mayroon, kung hindi ay IMO).
+LI|IAU MDC: mga solusyon, Δ radiant, Δλ, Δv: paghahambing sa katalogo ng IAU Meteor Data Center (mga nailathalang solusyon at mga pagkakaiba ng katalogo ng programa mula sa kanilang median).
+LI|GMN ngayon: mga kumpirmadong trajectory sa pinakabagong pang-araw-araw na file ng Global Meteor Network.
+TAG|NOTA|Ang katalogo ay ang file na data/sciami.csv at ang mga maximum ng IMO ay nasa data/massimi_imo.csv: maaaring baguhin ang mga ito gamit ang isang text editor. Iniuulat sa pagsisimula at hindi pinapansin ang isang maling linya.
+H1|11. Mapa ng grid square
+P|Ang mga Maidenhead square na nakontak (kahel) at nakumpirma (berde, QSL o LoTW) na binasa mula sa ADIF file ng iyong log, sa isang mapa ng Europa, na may isang sub-tab bawat banda: 50, 70, 144, 222 at 432 MHz.
+LI|Ikarga ang ADIF file: binabasa ang isang .adi o .adif file; pinapalitan ng bagong file ang nauna. Burahin ang memorya: binubura ang mga naikargang square.
+LI|Gulong = zoom, hilahin = ilipat, mouse sa ibabaw ng isang square = ang mga QSO ng square na iyon.
+TAG|NOTA|Hindi kumokonekta ang YA-MS sa LoTW: i-export ang ADIF mula sa iyong logging program o mula sa LoTW at ikarga ito rito.
+H1|12. Mga teknikal na dokumento
+LI|Manwal ng paggamit: ang dokumentong ito.
+LI|Mga source: lahat ng sanggunian ng programa, kasama ang mga reference.
+LI|Mapa ng mga radar sa Europa: kung nasaan ang Collm, Sodankylä, GRAVES at CMOR kaugnay ng iyong istasyon, kasama ang langit na nakikita ng bawat radar.
+LI|Paliwanag ng pagkalkula ng kahusayan: kung paano kinakalkula ang episyensya, hakbang-hakbang, na may mga label na SANGGUNIAN, PAGSUSURI at PAGPILI.
+P|Sumusunod ang mga dokumento sa wika ng interface kapag may salin, kung hindi ay nasa Italyano ang mga ito. Ang “I-export sa Word (.docx)” ay nagse-save ng kopya kung saan mo gusto; ang “Buksan sa Word” ay binubuksan ito gamit ang default na programa. Ang Manwal ng mga kalkulasyon, kasama ang lahat ng equation, ay nasa folder na doc (Italyano) at doc/manuali (ibang mga wika).
+H1|13. Ang folder na data at ang mga setting
+H2|13.1 Ang mga pangunahing file
+LI|config.ini: lahat ng setting (teksto, susi=halaga).
+LI|lingue/: ang mga salin ng interface; mappa/: ang mapa ng Europa.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: ang katalogo ng mga shower at ang posisyon ng Antihelion Source; regole_sperimentali.csv: ang mga patakaran sa pagitan ng mga banda.
+LI|flusso_collm.csv, quote_collm.csv: mga archive ng radar ng Collm; radar/: pinakabagong mga larawan, mga RMOB file at datos ng mga live na source; fonti_radar.csv: mga address ng mga source, na maaaring i-enable isa-isa.
+LI|cataloghi/: katalogo ng IAU MDC; radar/diretta/: datos ng GMN at CMOR.
+LI|call3.txt: archive ng mga locator; spot_ms/: mga nakolektang meteor scatter spot; adif_quadrati.csv: mga square mula sa ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: ang mga teknikal na dokumento.
+LI|backup/: mga kopya ng mga file na pinalitan ng isang update; aggiornamento/: na-download na package (binubura sa pag-restart).
+H2|13.2 Ilang susi ng config.ini
+LI|controlla_aggiornamenti=0: huwag tingnan ang mga bagong bersyon; aggiornamenti_salta: nilaktawang bersyon.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: ang mga checkbox ng kalkulasyon.
+LI|raggio_iniziale (0 = doble ng ITU, 1 = ITU, 2 = hindi kasama), durata_ping (0 = λ², 1 = naobserbahan).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Baguhin lamang ang config.ini kapag nakasara ang programa: sa pagsasara, muling isinusulat ito ng YA-MS.
+H1|14. Mga karaniwang pamamaraan
+H2|14.1 Paghahanda ng sked sa isang shower
+TAG|PROCEDURA|1) Itakda ang dalawang istasyon at pindutin ang Kalkulahin. 2) Sa Mga shower, tingnan ang susunod na maximum ng shower. 3) Ilagay ang petsang iyon sa Petsa ng kalkulasyon. 4) Sa Kalkulasyon ng episyensya, tingnan ang hilera ng shower at ang hilerang Σ: piliin ang mga oras na may pinakamataas na episyensya. 5) Itala ang panig (A o B) at ipihit ang antena nang 10-30° patungo sa panig na iyon. 6) Sa Heometriya at path loss, tingnan ang margin ng link budget.
+H2|14.2 Pagsubaybay sa isang live na session
+TAG|PROCEDURA|1) Pindutin ang Real time. 2) Sa Kalkulasyon ng pagtataya, sundan ang inirerekomendang Hot at ang mga sonang PREV, na nag-a-update bawat minuto. 3) Sa Flux ng radar, tingnan kung nagbibilang ng mga meteor ang radar ng Collm. 4) Sa Live na trapiko, tingnan kung sino ang nagko-QSO at kung saan bumabagsak ang kanilang mga bakas.
+H2|14.3 Pagsubok sa istasyon gamit ang GRAVES
+TAG|PROCEDURA|1) Sa GRAVES radar, tingnan ang card na MAGAGAMIT NA SONA SA BEAM NG GRAVES. 2) Itutok ang antena ayon sa sinasabi ng card na LANDAS. 3) Makinig sa USB sa 143.049 MHz sa mga window ng susunod na pagdaan ng beam. 4) Ihambing ang mga ping sa inaasahang mga echo at sa mga RMOB observer.
+H2|14.4 Pag-calibrate ng pagtataya gamit ang RMOB
+TAG|PROCEDURA|1) Sa Eksperimental na pagtataya, ikarga ang isang buwanang RMOB file ng isang observer sa iyong banda. 2) Pindutin ang Kunin ang exponent mula sa RMOB file at tanggapin ang k kung sapat ang mga oras na magkapareho. 3) Itakda ang station factor K sa iminungkahing halaga.
+H1|15. Mga madalas na problema
+LI|0 ang lahat ng episyensya: basahin ang babalang WALANG PINAGSASALUHANG SONA. Kung naka-off ang “pattern ng antena”, ibaba ang elevation ng lobe; kung hindi, lampas sa horizon ang landas sa taas ng mga bakas.
+LI|Mas mababa nang malaki ang mga halaga kaysa sa mga kay DH9GCD o sa isang lumang bersyon: tingnan ang checkbox ng anggulong β (kabanata 7.2).
+LI|“Hindi balidong locator ng istasyon”: magsulat ng locator na may 4, 6 o 8 karakter (halimbawa JN70CN o JN70CN83).
+LI|Abo ang Hot A at Hot B: kapag nakatutok ang antena sa DX station, nasa loob na sila ng lobe; hindi kailangang ipihit ang antena.
+LI|Walang mapa ng Europa: kailangan ng koneksiyon sa unang pagsisimula; kusang sumusubok muli ang programa.
+LI|Masyadong maliit ang teksto o walang espasyo ang mga graph: gamitin ang Font at ang button na Mga kontrol.
+LI|Mukhang nalipat ang pagdaan ng beam ng GRAVES: i-synchronize ang orasan ng PC sa isang NTP server; kung minsan ay inililipat ng control station ang sequence ng beam.
+LI|Linux, tekstong Chinese o Japanese na lumalabas na maliliit na kahon: i-install ang mga font na Noto CJK.
+H1|16. Mga contact
+P|Ang YA-MS ay isang libreng programa para sa mga radioamateur, inihanda ni Costantino IC8TEM (Capri). Malugod na tinatanggap ang mga ulat, mungkahi at datos para sa paghahambing: banggitin ang operating system, ang bersyon ng YA-MS at kung ano ang ginawa mo. Code at mga release: github.com/ic8tem/YA-MS. Mga contact: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Ang sinumang gustong sumuporta sa gawaing ito ay maaaring gawin ito sa ko-fi.com/ic8tem.

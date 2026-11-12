@@ -1,0 +1,233 @@
+TITLE|Gebruikershandleiding van YA-MS
+SUB|Weergawe 1.8.1 - saamgestel deur Costantino IC8TEM - November 2026
+H1|1. Inleiding
+H2|1.1 Waarvoor YA-MS dien
+P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
+P|Die program is gratis, werk op Windows, Linux (ook Raspberry Pi) en macOS, en is in 36 tale vertaal. Dit beheer nie die radio of die rotor nie: vir die verbinding gebruik jy die gewone program vir digitale modusse (MSHV, WSJT-X).
+H2|1.2 Hoe om hierdie handleiding te lees
+P|Die handleiding beskryf die oortjies een vir een, met die voorspellingsberekening as beginpunt. Elke hoofstuk sê wat die oortjie wys, wat elke kontrole doen en hoe om die resultate te lees. Hoofstuk 14 versamel die algemeenste prosedures, hoofstuk 15 die algemene probleme. Hoe die doeltreffendheid bereken word, met die bronne en kontroles, word verduidelik in die dokument "Verduideliking van die doeltreffendheidsberekening"; die volledige vergelykings is in die Handleiding van die berekeninge (doc-gids).
+TAG|PROCEDURA|stappe om in volgorde te volg.
+TAG|NOTA|nuttige inligting om 'n funksie beter te verstaan of te gebruik.
+TAG|ATTENZIONE|algemene fout, beperking van die berekening of gedrag wat jy moet ken.
+P|Die name van die kontroles word geskryf soos hulle in die Afrikaanse program verskyn; in die ander tale het hulle dieselfde plek en dieselfde volgorde.
+H1|2. Installering, aanskakel en bywerkings
+H2|2.1 Watter pakket om af te laai
+P|Al die pakkette is op die vrystellingsbladsy (releases) op GitHub (github.com/ic8tem/YA-MS/releases). Jy hoef nie .NET te installeer nie: dit is reeds in die pakket ingesluit.
+LI|Windows 64 bit: YA-MS-<weergawe>-windows-x64-setup.exe (installeer in C:\YA-MS, sonder administrateursregte) of die draagbare zip, om in enige gids uit te pak. Vir 32-bis-Windows dieselfde lêers met x86.
+LI|Linux (Debian, Ubuntu, Mint): die .deb-pakket, om te installeer met sudo apt install ./ya-ms_<weergawe>_amd64.deb; by die eerste aanskakel kopieer die program homself na ~/YA-MS. Vir ander distribusies die .tar.gz, om uit te pak en met ./YA-MS uit te voer.
+LI|Raspberry Pi 3, 4, 5, 400 en 500: die pakket raspberry-pi-64bit (Raspberry Pi OS 64 bit) of raspberry-pi-32bit, as .tar.gz of .deb.
+LI|macOS: die .dmg vir Apple Silicon (M1 en later) of vir Intel, of die app.zip. Sleep YA-MS.app na 'n gids van jou eie (byvoorbeeld ~/YA-MS): die data-gids word langs die app geskep.
+TAG|ATTENZIONE|Windows kan "Windows het jou rekenaar beskerm" wys: kies "Meer inligting" en dan "Hardloop in elk geval". Op macOS maak jy die eerste keer die app oop met die regterknoppie en "Open". Die program is nie met 'n betaalde sertifikaat onderteken nie.
+H2|2.2 Die eerste aanskakel
+P|By die aanskakel verskyn vir 'n paar sekondes die skerm met die Perseïede bo die VLT van die ESO. By die eerste aanskakel kies YA-MS die taal van die stelsel as dit een van die 36 is, anders Italiaans; dit laai die kaart van Europa (Natural Earth) af na die gids data/mappa en wys 'n voorbeeldpad. 'n Paar minute is genoeg om dit vir jou stasie op te stel (hoofstuk 4).
+H2|2.3 Die data-gids
+P|Al die instellings en al die data is in 'n enkele data-gids langs die program: geen AppData nie, geen stelselgidse nie. Om YA-MS na 'n ander rekenaar te skuif, kopieer jy net die programgids saam met sy data-gids. Die inhoud van die gids word in hoofstuk 13 beskryf.
+H2|2.4 Outomatiese bywerkings
+P|Vanaf weergawe 1.8.0 kontroleer YA-MS self op GitHub, by aanskakel en hoogstens een keer per dag, of 'n nuwe weergawe uitgekom het. As daar een is, verskyn die venster "Bywerking beskikbaar" met die nuwighede en drie knoppies:
+LI|Werk nou by: laai die pakket af wat by jou stelsel pas, vervang die programlêers, behou die data-gids en herbegin YA-MS. Die programlêers in die data-gids wat die nuwe weergawe verander, word eers na data/backup/v<ou weergawe> gekopieer; jou eie lêers (instellings, argiewe, spots, ADIF) word nie aangeraak nie.
+LI|Later: maak die venster toe; die kontrole word die volgende dag herhaal.
+LI|Slaan hierdie weergawe oor: bied daardie weergawe nie weer by aanskakel aan nie.
+P|Die knoppie "Bywerkings" regs onder, in die statusbalk, doen dieselfde kontrole met die hand, ook vir 'n oorgeslaande weergawe.
+TAG|ATTENZIONE|Die outomatiese bywerking moet in die programgids kan skryf. As dit nie kan nie (byvoorbeeld 'n program wat na 'n stelselgids gekopieer is), sê YA-MS so en stel voor om die vrystellingsbladsy oop te maak om met die hand te installeer. Weergawes tot 1.7.0 het nie hierdie funksie nie: die eerste keer moet die bywerking met die hand gedoen word, deur oor die vorige weergawe te installeer.
+TAG|NOTA|Om nie meer na nuwe weergawes te soek nie, skryf controlla_aggiornamenti=0 in die lêer data/config.ini.
+H2|2.5 Ontbrekende programlêers
+P|By die aanskakel kontroleer YA-MS of al sy lêers (vertalings, katalogusse, dokumente) teenwoordig is. As enige ontbreek, byvoorbeeld ná 'n onvolledige kopie, lys die venster "Ontbrekende lêers" hulle en bied "Laai die ontbrekende lêers af" van GitHub aan, in dieselfde weergawe van die program, of "Gaan voort sonder". Dieselfde kontrole word herhaal wanneer jy "Bywerkings" druk.
+H1|3. Die hoofvenster
+H2|3.1 Die dele van die venster
+LI|Bo, drie rye kontroles wat vir alle oortjies geld: stasies en band, E-laag en antenna, berekeningstyd (hoofstuk 4).
+LI|Die balk van die hoofoortjies, met regs die knoppie Kontroles, die kleurskema (Tema) en die taal.
+LI|Die suboortjies, in 'n ligter ry, vir die oortjies wat dit het.
+LI|Onder, die statusbalk: boodskappe van die berekening, waarskuwings oor die verbinding, en die knoppie "Bywerkings".
+H2|3.2 Die oortjies
+LI|Regstreeks en intydse data: Regstreekse verkeer, Radarvloed, GRAVES-radar, Data-insameling (hoofstuk 9).
+LI|Voorspellingsberekening: Voorspellingsberekening, Geometrie en padverlies, Berekening van doeltreffendheid, Eksperimentele voorspellings (hoofstukke 5-8).
+LI|Regstreekse swerms, Swerms, Vierkantkaart (hoofstukke 10-11).
+LI|Tegniese dokumente, laaste: Gebruikershandleiding, Bronne, Kaart van Europese radars, Verduideliking van die doeltreffendheidsberekening (hoofstuk 12).
+H2|3.3 Taal, kleure, lettertipe
+LI|Taal: 36 tale. Wanneer jy die taal verander, word die venster in dieselfde posisie en op dieselfde oortjie herbou, sonder om te herbegin. Getalle en datums volg die gekose taal (desimale komma in Italiaans, punt in Engels).
+LI|Tema: 12 kleurskemas; Lig is die beginskema, Nag en Swart is vir gebruik in die donker, Meteoorspoor is die oorspronklike styl van YA-MS.
+LI|Lettertipe (aan die einde van die eerste ry kontroles): vergroot al die teks van 100 tot 300 %. Met groot lettertipes loop die oortjies na die volgende reël oor.
+LI|Kontroles: vou die drie rye kontroles in en weer oop, om plek te maak vir kaarte en grafieke. Die keuse word onthou.
+TAG|NOTA|Byna elke kontrole het 'n wenkballon: hou die muis stil oor die kontrole om te lees waarvoor dit dien en uit watter bron die beginwaarde kom.
+H1|4. Die stasie en die pad opstel
+H2|4.1 Ry 1: stasies en band
+LI|My lokator en hoogte m: jou Maidenhead-lokator (4, 6 of 8 karakters; die middel van die vierkant word gebruik) en die hoogte van die stasie bo seespieël.
+LI|DX-stasie en hoogte m: lokator en hoogte van die stasie waarmee jy wil verbind.
+LI|Band MHz: 28, 50, 70, 144, 222 of 432 MHz. Dit word gebruik vir die wins en die lob van die antenna, vir die padverlies en die skakelbegroting, en vir die skatting van die vloed.
+LI|Bereken: bereken die pad opnuut (bemonstering van die E-laag, minder as 'n sekonde).
+LI|Antenna az: azimut van die antenna, altyd na die DX-stasie.
+H2|4.2 Ry 2: E-laag en antenna
+LI|Spoorhoogte km en van radar: hoogte van die meteoorspore. Met "van radar" gemerk word die algemeenste hoogte gebruik wat deur die Collm-radar gemeet is (gewoonlik 88-90 km); verwyder die merk om dit met die hand in te tik.
+LI|Lob-elevasie °: elevasie van die maksimum van die vertikale lob van jou antenna. 'n Rigantenna wat op 0° vasgestel is, het tog sy hooflob 'n paar grade bo die horison, weens die refleksie op die grond: gewoonlik 3-8°, afhangende van die hoogte van die antenna in golflengtes.
+LI|antennapatroon: aan (beginwaarde), die refleksiepunte tel met die vertikale wins van die twee antennas: vol rondom die maksimum van die lob, al hoe minder na die horison en na bo. Af, is die lob-elevasie 'n skerp grens: punte wat laer gesien word, tel nie.
+LI|Yagi-antenna: boom m: lengte van die boom. Langsaan skryf die program die lengte in golflengtes, die wins (DL6WU-kurwe) en die -3 dB-lob horisontaal en vertikaal. Onder 2 λ is die skatting nie baie akkuraat nie.
+LI|Hot spot vanaf middelpunt km en outo (AMS): afstand van Hot A en Hot B vanaf die middelpunt. Met "outo (AMS)" gemerk word die tabel van J. Richardson gevolg wat DJ5HG aanhaal (13° afwyking by 1000 km, 10° verder as 1500 km); verwyder die merk om 30-400 km met die hand in te tik (MSHV gebruik 150 km).
+TAG|ATTENZIONE|Met "antennapatroon" af en die lob op 'n paar grade, kan die twee stasies op 'n lang pad geen gemeenskaplike punt van die laag sien nie: al die doeltreffendhede is 0 en die waarskuwing "GEEN GEMEENSKAPLIKE SONE NIE" verskyn, met die lob of die spoorhoogte wat nodig sou wees. Voorbeeld: JN70CN - JO76QP, 1791 km, lob op 3°, spore op 88,5 km.
+H2|4.3 Ry 3: berekeningstyd
+LI|Tyd: UTC-horlosie.
+LI|Berekeningsdatum (UTC): die dag van die berekening. Dit geld vir Voorspellingsberekening, vir die 24-uur-tabel van Berekening van doeltreffendheid en vir die chronologie van GRAVES-radar. Die beginwaarde is vandag en om middernag volg dit die nuwe dag.
+LI|Ure (−12 tot +36 h): skuif die oomblik van die berekening, in stappe van 15 minute. Langsaan: "Berekening vir: nou" of die gekose datum en tyd.
+LI|Intyds: keer terug na die huidige oomblik.
+H2|4.4 Jou eie stasie opstel
+TAG|PROCEDURA|1) Tik My lokator en die hoogte in. 2) Tik die lokator en die hoogte van die DX-stasie in, of klik op die kaart van Voorspellingsberekening: linkerklik = DX-stasie, regterklik = jou stasie. 3) Kies die band. 4) Tik die boomlengte en die lob-elevasie van jou antenna in. 5) Druk Bereken: die statusbalk bevestig "Pad bereken: ... km, ... refleksiepunte gemonster".
+TAG|NOTA|Die instellings word in data/config.ini gestoor wanneer die program toegemaak word en by elke berekening: by die volgende aanskakel kry jy dieselfde pad terug.
+H1|5. Voorspellingsberekening
+P|Die eerste suboortjie van die groep Voorspellingsberekening wys op een skerm waar die bruikbare spore nou val en waarheen om te rig. Alles verwys na die oomblik wat met die datum en die uurskuifbalk gekies is.
+H2|5.1 Die opsommingstrook
+P|Bo die kaart som 'n strook die berekening vir daardie oomblik op: datum en tyd, padindeks (som van ZHR × doeltreffendheid van die aktiewe swerms), die nuttigste swerm met sy ZHR en sy doeltreffendheid (ook in dB relatief tot die verwysing van DJ5HG), die aantal swerms bo die horison en die aanbevole Hot met sy azimut.
+H2|5.2 Die plattegrondkaart
+P|Links die kaart van Europa van bo gesien (oos regs), met die gradeskaal rondom:
+LI|groen lyn: die ware pad tussen die twee lokators;
+LI|Hot A en Hot B: die twee hot spots aan weerskante van die middelpunt. Rooi = aanbeveel, pienk = buite die lob van die antenna, grys = reeds binne die lob (met 'n waarskuwing);
+LI|antennalob: die -3 dB-sektor rondom die azimut van die antenna;
+LI|Grens A en Grens B, flou: die verste rande van die hemel wat deur albei stasies gesien word, nie die punte om na te rig nie;
+LI|geel lyn: die rigting waarin die gekose swerm (of die gunstigste) die hemel deurkruis; oranje punte: die twee loodregte rigtings (azimut van die radiant ±90°);
+LI|PREV-sones, ligte ellipse: waar die waarskynlikste spore nou val, een aan elke kant van die pad.
+P|Linkerklik op die kaart = lokator van die DX-stasie, regterklik = lokator van jou stasie; die pad word dadelik herbereken. Die legende is 'n opvoubare kolom regs van die kaart. Die merkblokkies bo die lys van swerms skakel die Hot-rigtings, die kaart van Europa en die bo-aansig aan en af.
+H2|5.3 Die lys van swerms
+P|Vir elke swerm: naam en IMO-kode, ZHR op hierdie oomblik, azimut en elevasie van die radiant vanaf jou stasie, doeltreffendheid vir die pad, oorheersende kant (A of B), beste rigting, opkoms en ondergang van die radiant. 'n Klik op 'n ry kies die swerm: die geel lyn en die oranje punte volg dit.
+H2|5.4 Die klein hemelkoepel en die berekeningsteks
+P|Die radiante soos van jou stasie gesien, met die IMO-kode en die daaglikse baan in siaan. Geel = doeltreffendheid minstens 50 % en ZHR minstens 2; oranje = minstens 20 %; donkerrooi = minder; grys = byna onaktief. Die oranje lyn deur die senit gee die regte antennarigtings, loodreg op die beweging van die swerm. Langsaan die berekeningsteks: pad, middelpunt, aanbevole Hot met die persentasie van die verwagte refleksies, grense van die gemeenskaplike sone.
+H2|5.5 Die deursnee
+P|Regs onder die waarskynlikste spore soos gesien vanaf die antenna na die DX-stasie: horisontaal die azimut relatief tot die DX-stasie (A links, B regs), vertikaal die elevasie. Elke spoor is 'n lynstuk wat na die radiant wys, dikker hoe waarskynliker dit is. Die antennalob, die DX-stasie en die Hots word ook geteken.
+H2|5.6 Die waarskuwings
+LI|WAARSKUWING: Hot A (of Hot B) val binne die antennalob: met hierdie rigting is daardie hot spot reeds gedek.
+LI|RADIANT TE HOOG: 'n bruikbare radiant is bo 70°; die spore val byna vertikaal en reflekteer min na die pad.
+LI|LAE RADIANT LANGS DIE PAD: die berekende doeltreffendheid bly laag, maar met skrams spore in lyn met die pad voorspel DJ5HG seldsame en sterk refleksies: dit is die moeite werd om te luister.
+LI|PAD VERBY DIE SPOORHORISON: op die spoorhoogte is die middelpunt onder die horison; die waarskuwing sê watter hoogte nodig sou wees.
+LI|GEEN GEMEENSKAPLIKE SONE NIE: geen punt van die laag is vanaf albei stasies sigbaar nie; die waarskuwing sê hoeveel kortkom en wat nodig sou wees.
+H1|6. Geometrie en padverlies
+P|'n Teksverslag van die pad, wat gekies en gekopieer kan word, en regs die grafiek van die antenna-elevasie as funksie van die afstand tot die refleksiepunt, vir drie spoorhoogtes.
+H2|6.1 Die data van hierdie oortjie
+LI|Drywing W (400), Antennaversterking dBi (14; dieselfde antenna aan albei kante), Minimum sein dBm (-130), Spoordigtheid q = 10^14 elektrone/m: dit word vir die skakelbegroting gebruik.
+LI|Beginradius van die spoor: dubbel die ITU-waarde (Stober 2021, versigtig, beginwaarde), ITU-R P.843, of uitgesluit. Hoe groter die radius, hoe meer verlies by die hoë frekwensies.
+LI|Duur van die pings tussen bande: teoreties λ² (McKinley, SM6FHZ; versigtig, beginwaarde) of waargeneem (HamSCI MSQP-metings deur NN4SA, Perseïede 2026: van 50 tot 144 MHz word die pings 1,5 keer korter in plaas van 8 keer).
+H2|6.2 Die verslag
+LI|PADGEOMETRIE: stasies en hoogtes, afstand, azimut, middelpunt, spoorhoogte, antenna-elevasie na die middelpunt.
+LI|HOT A / HOT B: lokator, azimut, afwyking van die direkte rigting, afstand en elevasie van elke hot spot.
+LI|GRENSE VAN DIE GEMEENSKAPLIKE SONE: bereik op die spoorhoogte tot by die horison, die antennalob met sy maksimum en sy vertikale breedte, Grens A en Grens B; wins en lob van die Yagi.
+LI|PADVERLIES: vir middelpunt, Hot A en Hot B, by 28, 50, 70, 144, 222 en 432 MHz (spoor wat die vlak van die pad kruis, die ongunstigste geval).
+LI|SKAKELBEGROTING: drywing en EIRP, padverlies, sein by die antenna, minimum sein en marge; die beste geval (spoor in die vlak van die pad) en die marge met die gemiddelde padverlies van OH5IY.
+LI|EKSPERIMENTELE REËLS TUSSEN BANDE: aantal, sterkte en duur van die refleksies relatief tot 144 MHz; maksimum IARU-ping; waargenome duur uit die MSQP-metings.
+TAG|NOTA|'n Positiewe marge sê dat 'n gemiddelde onderdigte spoor genoeg is om die pad met jou stasie te sluit; 'n negatiewe marge sê dat digter spore of oordigte meteore nodig is. Dit is 'n skatting: die maatstaf bly die ervaring op die band.
+H1|7. Berekening van doeltreffendheid
+P|Die doeltreffendheid sê, as persentasie, in watter mate die posisie van die radiant van 'n swerm refleksies op jou pad toelaat: 100 % is die gunstigste posisie vir daardie pad. Hierdie suboortjie wys dit uur vir uur vir die dag van die "Berekeningsdatum", met die waardes op die halfuur.
+H2|7.1 Die vier blokke
+LI|BESTE TYD VAN DIE DAG: die uur met die hoogste padindeks en die oorheersende kant.
+LI|GUNSTIGSTE SWERM: die swerm wat die meeste bydra, met die uur, die kant en die twee beste rigtings.
+LI|NOU: indeks en kant in hierdie uur en die aanbevole Hot (slegs as die gekose dag vandag is).
+LI|EKSPERIMENTELE VOORSPELLING: verwagte refleksies per uur nou, oor 1 en oor 2 uur (hoofstuk 8).
+P|Wanneer 'n blok geen waardes het nie, sê dit hoekom: geen gemeenskaplike sone nie, geen aktiewe swerm nie, of radiante wat die hele dag ongunstig is. Die wenkballon van elke blok verduidelik wat dit wys. Onder die blokke verskyn, wanneer nodig, die waarskuwing GEEN GEMEENSKAPLIKE SONE NIE en 'n strook wat die letters A en B verduidelik.
+H2|7.2 Die instelling van die berekening
+LI|Versigtig (beginwaarde): spoorhoogte van radar, normale spore, hoek β aan. Gee die laagste waardes.
+LI|Soos DJ5HG: vaste hoogte van 102 km, langer spore met 'n lae radiant, hoek β aan; boots die program QTFGUI na.
+LI|Pasgemaak: word vanself gekies wanneer jy een van die merkblokkies of die hoogte met die hand verander.
+LI|Langer spore met 'n lae radiant (DJ5HG): met 'n lae radiant val minder meteore, maar die spore is langer en reflekteer meer dikwels; bo ongeveer 9° kanselleer die twee effekte mekaar uit.
+LI|Hoek β tussen spoor en pad (volledige McKinley), in die oranje blok met die opskrif "die keuse wat die swaarste weeg": aan, tel spore wat die vlak van die pad kruis 10-15 dB minder as dié wat daarin lê, en radiante in lyn met die pad oorheers. Af, geld die klassieke reël: die beste radiant is 15-70° hoog en dwars op die pad.
+LI|Klassieke uitspraak: voeg onder elke swerm die ry "klassiek" by met die uitspraak van die radioamateursreël by die middelpunt van die pad: ✗ radiant onder die horison, ◐ marginaal (te laag, te hoog of byna in lyn met die pad), ● goed, ★ uitstekend (dwars op die pad). Dit verander nie die berekening nie.
+TAG|ATTENZIONE|Die hoek β verander die waardes baie op lang paaie: JN70CN - JO76QP (1791 km), Geminiede van 14/12/2026, 98 % met β af en 13 % met β aan. Die twee teorieë het verskillende bronne en 'n eerste vergelyking met die BRAMS-tellings onderskei hulle nie: vergelyk die twee gevalle met die ervaring op die band. Die persentasies is relatief tot die beste posisie van die radiant vir daardie pad; om verskillende paaie te vergelyk gebruik jy die doeltreffendheid in dB.
+H2|7.3 Hoeveel om die getalle te vertrou
+P|Die beste ure en die kant is die betroubaarste inligting: hulle verander min met die instellings van die berekening. Die persentasies, daarenteen, hang baie van die keuses af, veral van die hoek β. Die vergelyking met 181 767 werklike MSK144-spots op 50 MHz (HamSCI, Perseïede van 11-12 Augustus 2025) bevestig die uurlikse verloop van die padindeks, maar wys ook dat watter paar stasies mekaar op 'n gegewe uur hoor hoofsaaklik afhang van die sporadiese meteore en van die aktiwiteit in die lug, wat die model nie bevat nie.
+TAG|NOTA|Gebruik die program om die uur en die kant te kies waarheen jy die antenna moet draai; moenie die persentasies lees as die waarskynlikheid dat die verbinding sal slaag nie.
+H2|7.4 Die grafiek
+P|Vir hoogstens vyf swerms: die doeltreffendheid as 'n soliede lyn en die formule van DH9GCD as 'n stippellyn in dieselfde kleur; die padindeks as stawe op die regterskaal. Die plaaslike ure is onder die UTC-ure geskryf.
+H2|7.5 Die 24-uur-tabel
+LI|Een ry vir elke swerm wat daardie dag aktief is, 24 kolomme vir die UTC-ure.
+LI|63A: doeltreffendheid 63 %, die meeste refleksies van kant A; 41B: kant B; 'n getal sonder letter: onder 5 %; leë sel: onder 1 %; ↑: radiant bo 70° (te hoog); warmer kleur = hoër doeltreffendheid.
+LI|A = links as jy van jou stasie na die DX-stasie kyk (Hot A-sone); B = regs (Hot B-sone). Dit loon om die antenna 10-30° na daardie kant te draai (side-scatter).
+LI|Ligblou rye DH9GCD %: die formule vir die beste rigting van DH9GCD, ter vergelyking; dit hou nie rekening met die horison of die lob nie.
+LI|Ry Σ: padindeks, som van ZHR × doeltreffendheid van al die aktiewe swerms.
+LI|Oranje ry: die eksperimentele voorspelling van die refleksies per uur, vir die ure waarvoor dit bestaan.
+TAG|PROCEDURA|Om die uur van 'n sked te kies: stel die datum, kyk na die ry Σ en die blok BESTE TYD VAN DIE DAG; lees in die ry van die gekose swerm die letter A of B en draai die antenna 10-30° na daardie kant. Hou die muis oor 'n sel om die besonderhede van die Hot vir daardie uur te lees.
+H1|8. Eksperimentele voorspellings
+P|Skakel die tellings van die Collm-radar (36,2 MHz) om in 'n skatting van die refleksies per uur op 'n amateurband (beginwaarde 144 MHz, van 28 tot 1300 MHz), maak die voorspelling vir die volgende 24 uur vir jou pad en vergelyk dit met 'n RMOB-waarnemer. Alles hier is eksperimenteel: die getalle dien om ure en dae te vergelyk.
+H2|8.1 Die kontroles
+LI|Teikenfrekwensie MHz: frekwensie van die voorspelling.
+LI|λ^k-eksponent (3, SM6FHZ) en Stasiefaktor K (1): reël vir die frekwensie en korreksie vir jou stasie.
+LI|k uit bevolkingsindekse: stel k voor uit die bevolkingsindekse r van die aktiewe swerms (GMN, anders IMO; k = 3,75 · log10 r, geweeg met die ZHR) en vra bevestiging voordat dit toegepas word.
+LI|Laai RMOB-lêer van skyf en Bepaal die eksponent uit die RMOB-lêer: lees 'n maandelikse RMOB-lêer en bepaal k uit die ure wat dit met Collm gemeen het.
+LI|RMOB-waarnemer, Laai RMOB nou af en outomatiese aflaai elke 5 minute: die outomatiese aflaai is af en moet slegs met die toestemming van RMOB aangeskakel word.
+H2|8.2 Die resultate
+LI|Die grafiek van gister en vandag: meteore per uur by Collm, waardes geskaal na jou frekwensie en, indien gelaai, die RMOB-tellings.
+LI|Die voorspelling vir die volgende 24 uur: dieselfde uur van die vorige dag, gekorrigeer vir die verandering in die swermindeks van die pad.
+LI|Die tabel met die beoordeling: goed, gemiddeld of swak relatief tot die gemiddelde van die 24 uur.
+TAG|NOTA|Die duur van die refleksies volg die keuse "Duur van die pings tussen bande" van Geometrie en padverlies; in forward scatter neem die duur ook toe met sec²φ by die middelpunt van die pad.
+H1|9. Regstreeks en intydse data
+H2|9.1 Regstreekse verkeer
+P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesamelde meteor scatter-verkeer: vir elke verbinding die pad in die kleur van die band (28 bruin, 50 groen, 70 siaan, 144 oranje, 222 pienk, 432 pers), die twee stasies en die wolk van die waarskynlikste spore op daardie uur. Spots wat pas aangekom het, flikker vir een minuut.
+LI|Kaartradius: 600-3500 km. Spots om te wys: laaste 15 of 30 minute, laaste uur, laaste 3 of 24 uur.
+LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die wolk, sy hoogte en sy afmetings.
+H2|9.2 Radarvloed
+P|Die uurlikse meteoortellings en die spoorhoogtes van die SKiYMET-radar by Collm (36,2 MHz) en die jongste beeld van die Sodankylä-radar (36,9 MHz).
+LI|Laai nou af en Outomatiese bywerking van alle bronne elke 5 minute: elke bron word slegs weer afgelaai as dit verander het.
+LI|λ-eksponent (SM6FHZ): eksponent van die skatting op jou band (oranje lyn op die regterskaal).
+LI|Spoorhoogtes: histogram met modus, gemiddelde, mediaan en standaardafwyking; met "van radar" word die modus die hoogte vir al die berekeninge.
+TAG|ATTENZIONE|As die skaal van die Collm-grafiek nie gelees kan word nie, verskyn 'n oranje waarskuwing en moet die waardes nagegaan word. Sonder verbinding gebruik die program die laaste gestoorde data, sê dit een keer en probeer self elke 5 minute weer; die statusbalk word rooi totdat die verbinding terugkeer.
+H2|9.3 GRAVES-radar
+P|GRAVES stuur CW uit op 143,050 MHz vanaf Broye-lès-Pesmes (JN27SI). Die suboortjie behandel GRAVES → jy as 'n afsonderlike meteor scatter-pad: dit bereken doeltreffendheid, aanbevole Hot en PREV-sones, gaan na of die sone binne die bundel is en wanneer die bundel dit belig.
+LI|Nou: stel die berekening terug na intyds. Stel GRAVES as DX: die DX-stasie word GRAVES. Bundelvolgorde: 0,8 s per stap (PE1ITR 2021) of 3,2 s (2007).
+LI|Die kaarte: BRUIKBARE SONE IN DIE GRAVES-BUNDEL, DOELTREFFENDHEID VAN DIE PAD GRAVES → JY NOU (met die verwagte eggo's, eksperimenteel), PAD (waarheen om te rig), VOLGENDE BUNDELDEURGANG OOR DIE SONE.
+LI|Die chronologiese rekonstruksie van die dag en die besonderhede van die volgende sekondes.
+TAG|PROCEDURA|Om na GRAVES te luister: USB op 143,049 MHz (toon van ongeveer 1 kHz), stadige of afgeskakelde AGC, oudiobandwydte van minstens 2,4 kHz; antenna na die aanbevole hot spot van die PAD-kaart, op lae elevasie; rekenaarhorlosie gesinchroniseer. Die pings is kort strepies naby die draer in die waterfall.
+H2|9.4 Data-insameling
+P|Samel die meteor scatter-spots in uit drie telnet-strome (DX cluster, RBN, DM4X met die spots van PSKReporter) en uit die MQTT-stroom van PSKReporter, elkeen in sy eie suboortjie, en filtreer hulle.
+LI|Tik bo jou roepsein vir die aanmelding in. Elke stroom het host, poort, opdragte ná aanmelding, Herkoppel, Koppel by aanskakel en 'n konsole.
+LI|Die filter aanvaar spots op die tipiese meteor scatter-frekwensies (50190-50300, 70100-70400, 144290-144399 kHz) of met 'n MS-modus (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerp dié wat 'n ander voortplanting aandui. Die vensters en woorde kan verander word; elkeen het sy eie teller.
+LI|Ontbrekende lokators word uit die CALL3-argief geneem; aanvaarde spots gaan na data/spot_ms, een lêer per dag, en na die kaart van Regstreekse verkeer.
+H1|10. Regstreekse swerms en swermkatalogus
+H2|10.1 Regstreekse swerms
+P|Links die vloed en die ZHR soos gemeet deur die Global Meteor Network vir die aktiewe swerms, met die daaglikse tellings van die GMN-kameras per swerm ('n telling, nie 'n vloed nie: dit hang af van hoeveel stasies 'n helder hemel sien); regs die radiantkaarte van die CMOR-radar, insluitend dié van die dagswerms. Die lêers word slegs weer afgelaai as hulle verander het, hoogstens elke 30 minute, of met Laai nou af.
+H2|10.2 Swerms
+P|Die katalogus wat deur al die berekeninge gebruik word: die swerms van die IMO-kalender 2026 en 2027 plus die Antihelion-bron. Die swerms wat vandag aktief is, word uitgelig.
+LI|Kode, naam, aktiwiteitstydperk, sonlengte van die maksimum, volgende maksimum (UTC) en sy bron (IMO of bereken), radiant, snelheid, bevolkingsindeks r, ZHR, tipe (visueel of radio-dagswerm).
+LI|k: eksponent van die frekwensieskalering uit die bevolkingsindeks (GMN indien beskikbaar, anders IMO).
+LI|IAU MDC: oplossings, Δ radiant, Δλ, Δv: vergelyking met die katalogus van die IAU Meteor Data Center (gepubliseerde oplossings en verskille van die programkatalogus ten opsigte van hul mediaan).
+LI|GMN vandag: bane wat in die jongste daaglikse lêer van die Global Meteor Network bevestig is.
+TAG|NOTA|Die katalogus is die lêer data/sciami.csv en die IMO-maksimums is in data/massimi_imo.csv: hulle kan met 'n teksredigeerder verander word. 'n Foutiewe reël word by aanskakel gerapporteer en geïgnoreer.
+H1|11. Vierkantkaart
+P|Die gewerkte (oranje) en bevestigde (groen, QSL of LoTW) Maidenhead-vierkante, gelees uit die ADIF-lêer van jou logboek, op 'n kaart van Europa, met een suboortjie per band: 50, 70, 144, 222 en 432 MHz.
+LI|Laai ADIF-lêer: lees 'n .adi- of .adif-lêer; 'n nuwe lêer vervang die vorige. Vee geheue uit: vee die gelaaide vierkante uit.
+LI|Muiswiel = zoem, sleep = skuif, muis oor 'n vierkant = die QSO's van daardie vierkant.
+TAG|NOTA|YA-MS koppel nie aan LoTW nie: voer die ADIF uit jou logprogram of uit LoTW uit en laai dit hier.
+H1|12. Tegniese dokumente
+LI|Gebruikershandleiding: hierdie dokument.
+LI|Bronne: al die bronne van die program, met die verwysings.
+LI|Kaart van Europese radars: waar Collm, Sodankylä, GRAVES en CMOR geleë is relatief tot jou stasie, met die hemel soos deur elke radar gesien.
+LI|Verduideliking van die doeltreffendheidsberekening: hoe die doeltreffendheid stap vir stap bereken word, met die etikette BRON, KONTROLE en KEUSE.
+P|Die dokumente volg die taal van die koppelvlak wanneer die vertaling bestaan, anders is hulle in Italiaans. "Voer na Word uit (.docx)" stoor 'n kopie waar jy wil; "Open in Word" maak dit oop met die verstekprogram. Die Handleiding van die berekeninge, met al die vergelykings, is in die gids doc (Italiaans) en doc/manuali (die ander tale).
+H1|13. Die data-gids en die instellings
+H2|13.1 Die belangrikste lêers
+LI|config.ini: al die instellings (teks, sleutel=waarde).
+LI|lingue/: die vertalings van die koppelvlak; mappa/: die kaart van Europa.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: die swermkatalogus en die posisie van die Antihelion-bron; regole_sperimentali.csv: die reëls tussen bande.
+LI|flusso_collm.csv, quote_collm.csv: argiewe van die Collm-radar; radar/: jongste beelde, RMOB-lêers en data van die regstreekse bronne; fonti_radar.csv: adresse van die bronne, wat een vir een geaktiveer kan word.
+LI|cataloghi/: IAU MDC-katalogus; radar/diretta/: GMN- en CMOR-data.
+LI|call3.txt: lokator-argief; spot_ms/: ingesamelde meteor scatter-spots; adif_quadrati.csv: vierkante uit die ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: die tegniese dokumente.
+LI|backup/: kopieë van die lêers wat deur 'n bywerking vervang is; aggiornamento/: afgelaaide pakket (uitgevee by herbegin).
+H2|13.2 'n Paar sleutels van config.ini
+LI|controlla_aggiornamenti=0: moenie na nuwe weergawes soek nie; aggiornamenti_salta: oorgeslaande weergawe.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: die merkblokkies van die berekening.
+LI|raggio_iniziale (0 = dubbel die ITU-waarde, 1 = ITU, 2 = uitgesluit), durata_ping (0 = λ², 1 = waargeneem).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Verander config.ini slegs terwyl die program toe is: wanneer YA-MS toegemaak word, skryf dit die lêer oor.
+H1|14. Tipiese prosedures
+H2|14.1 'n Sked op 'n swerm voorberei
+TAG|PROCEDURA|1) Stel die twee stasies op en druk Bereken. 2) Kontroleer in Swerms die volgende maksimum van die swerm. 3) Sit daardie datum in Berekeningsdatum. 4) Kyk in Berekening van doeltreffendheid na die ry van die swerm en die ry Σ: kies die ure met die hoogste doeltreffendheid. 5) Let op die kant (A of B) en draai die antenna 10-30° na daardie kant. 6) Kontroleer in Geometrie en padverlies die marge van die skakelbegroting.
+H2|14.2 'n Sessie regstreeks volg
+TAG|PROCEDURA|1) Druk Intyds. 2) Volg in Voorspellingsberekening die aanbevole Hot en die PREV-sones, wat elke minuut bygewerk word. 3) Kontroleer in Radarvloed dat die Collm-radar meteore tel. 4) Kyk in Regstreekse verkeer wie werk en waar hul spore val.
+H2|14.3 Die stasie met GRAVES toets
+TAG|PROCEDURA|1) Kontroleer in GRAVES-radar die kaart BRUIKBARE SONE IN DIE GRAVES-BUNDEL. 2) Rig die antenna soos die PAD-kaart sê. 3) Luister in USB op 143,049 MHz in die vensters van die volgende bundeldeurgang. 4) Vergelyk die pings met die verwagte eggo's en met die RMOB-waarnemers.
+H2|14.4 Die voorspelling met RMOB kalibreer
+TAG|PROCEDURA|1) Laai in Eksperimentele voorspellings 'n maandelikse RMOB-lêer van 'n waarnemer op jou band. 2) Druk Bepaal die eksponent uit die RMOB-lêer en aanvaar k as daar genoeg gemeenskaplike ure is. 3) Stel die stasiefaktor K op die voorgestelde waarde.
+H1|15. Algemene probleme
+LI|Al die doeltreffendhede is 0: lees die waarskuwing GEEN GEMEENSKAPLIKE SONE NIE. Met "antennapatroon" af, verlaag die lob-elevasie; anders is die pad op die spoorhoogte verby die horison.
+LI|Die waardes is baie laer as dié van DH9GCD of van 'n ou weergawe: kontroleer die merkblokkie van die hoek β (hoofstuk 7.2).
+LI|"Ongeldige stasielokator": tik 'n lokator van 4, 6 of 8 karakters in (byvoorbeeld JN70CN of JN70CN83).
+LI|Hot A en Hot B is grys: met die antenna na die DX-stasie gerig is hulle reeds binne die lob; dit is nie nodig om die antenna te draai nie.
+LI|Die kaart van Europa ontbreek: 'n verbinding is by die eerste aanskakel nodig; die program probeer self weer.
+LI|Die teks is te klein of die grafieke het nie plek nie: gebruik Lettertipe en die knoppie Kontroles.
+LI|Die deurgang van die GRAVES-bundel lyk verskuif: sinchroniseer die rekenaarhorlosie met 'n NTP-bediener; die bundelvolgorde word soms deur die beheerstasie verskuif.
+LI|Linux, Chinese of Japannese teks as blokkies: installeer die Noto CJK-lettertipes.
+H1|16. Kontak
+P|YA-MS is 'n gratis program vir radioamateurs, saamgestel deur Costantino IC8TEM (Capri). Foutverslae, voorstelle en vergelykingsdata is welkom: vermeld die bedryfstelsel, die weergawe van YA-MS en wat jy gedoen het. Kode en vrystellings: github.com/ic8tem/YA-MS. Kontak: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Wie die werk wil ondersteun, kan dit op ko-fi.com/ic8tem doen.

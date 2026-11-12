@@ -1,0 +1,233 @@
+TITLE|Manuel d'utilisation de YA-MS
+SUB|Version 1.8.1 - réalisé par Costantino IC8TEM - novembre 2026
+H1|1. Introduction
+H2|1.1 À quoi sert YA-MS
+P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
+P|Le programme est gratuit, fonctionne sous Windows, Linux (y compris Raspberry Pi) et macOS, et est traduit en 36 langues. Il ne commande ni la radio ni le rotor : pour la liaison, on utilise le programme habituel des modes numériques (MSHV, WSJT-X).
+H2|1.2 Comment lire ce manuel
+P|Le manuel décrit les onglets un par un, en commençant par le calcul prévisionnel. Chaque chapitre indique ce que montre l'onglet, ce que fait chaque commande et comment lire les résultats. Le chapitre 14 rassemble les procédures les plus courantes, le chapitre 15 les problèmes fréquents. La manière dont l'efficacité est calculée, avec les sources et les vérifications, est expliquée dans le document « Explication du calcul de l'efficacité » ; les équations complètes se trouvent dans le Manuel des calculs (dossier doc).
+TAG|PROCEDURA|étapes à suivre, dans l'ordre.
+TAG|NOTA|information utile pour mieux comprendre ou mieux utiliser une fonction.
+TAG|ATTENZIONE|erreur fréquente, limite du calcul ou comportement à connaître.
+P|Les noms des commandes sont écrits tels qu'ils apparaissent dans la version française du programme ; dans les autres langues, ils occupent la même place et le même ordre.
+H1|2. Installation, démarrage et mises à jour
+H2|2.1 Quel paquet télécharger
+P|Tous les paquets se trouvent sur la page des releases sur GitHub (github.com/ic8tem/YA-MS/releases). Il n'est pas nécessaire d'installer .NET : il est déjà inclus dans le paquet.
+LI|Windows 64 bits : YA-MS-<version>-windows-x64-setup.exe (installe dans C:\YA-MS, sans droits d'administrateur) ou le zip portable, à extraire dans un dossier quelconque. Pour Windows 32 bits, les mêmes fichiers avec x86.
+LI|Linux (Debian, Ubuntu, Mint) : le paquet .deb, à installer avec sudo apt install ./ya-ms_<version>_amd64.deb ; au premier démarrage, le programme se copie dans ~/YA-MS. Pour les autres distributions, le .tar.gz, à extraire et à lancer avec ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 et 500 : le paquet raspberry-pi-64bit (Raspberry Pi OS 64 bits) ou raspberry-pi-32bit, en .tar.gz ou .deb.
+LI|macOS : le .dmg pour Apple Silicon (M1 et suivants) ou pour Intel, ou bien l'app.zip. Faites glisser YA-MS.app dans un dossier à vous (par exemple ~/YA-MS) : le dossier data se crée à côté de l'application.
+TAG|ATTENZIONE|Windows peut afficher « Windows a protégé votre ordinateur » : choisissez « Informations complémentaires » puis « Exécuter quand même ». Sous macOS, la première fois, ouvrez l'application avec le bouton droit de la souris et « Ouvrir ». Le programme n'est pas signé avec un certificat payant.
+H2|2.2 Le premier démarrage
+P|Au démarrage apparaît pendant quelques secondes l'écran d'accueil avec les Perséides au-dessus du VLT de l'ESO. Au premier démarrage, YA-MS choisit la langue du système si elle fait partie des 36, sinon l'italien ; il télécharge la carte d'Europe (Natural Earth) dans le dossier data/mappa et affiche un trajet d'exemple. Quelques minutes suffisent pour le configurer pour votre station (chapitre 4).
+H2|2.3 Le dossier data
+P|Tous les réglages et toutes les données se trouvent dans un dossier data unique, à côté du programme : pas d'AppData, pas de dossiers système. Pour transférer YA-MS sur un autre ordinateur, il suffit de copier le dossier du programme avec son dossier data. Le contenu du dossier est décrit au chapitre 13.
+H2|2.4 Mises à jour automatiques
+P|Depuis la version 1.8.0, YA-MS vérifie de lui-même sur GitHub, au démarrage et au plus une fois par jour, si une nouvelle version est sortie. Si c'est le cas, la fenêtre « Mise à jour disponible » apparaît avec les nouveautés et trois boutons :
+LI|Mettre à jour maintenant : télécharge le paquet adapté à votre système, remplace les fichiers du programme, conserve le dossier data et redémarre YA-MS. Les fichiers du programme situés dans le dossier data que la nouvelle version modifie sont d'abord copiés dans data/backup/v<ancienne version> ; vos fichiers (réglages, archives, spots, ADIF) ne sont pas touchés.
+LI|Plus tard : ferme la fenêtre ; la vérification est répétée le lendemain.
+LI|Ignorer cette version : cette version n'est plus proposée au démarrage.
+P|Le bouton « Mises à jour », en bas à droite dans la barre d'état, effectue la même vérification manuellement, y compris pour une version ignorée.
+TAG|ATTENZIONE|La mise à jour automatique doit pouvoir écrire dans le dossier du programme. Si elle ne le peut pas (par exemple pour un programme copié dans un dossier système), YA-MS le signale et propose d'ouvrir la page des releases pour installer manuellement. Les versions jusqu'à la 1.7.0 n'ont pas cette fonction : la première fois, la mise à jour doit être faite à la main, en installant par-dessus la version précédente.
+TAG|NOTA|Pour ne plus rechercher les nouvelles versions, écrivez controlla_aggiornamenti=0 dans le fichier data/config.ini.
+H2|2.5 Fichiers du programme manquants
+P|Au démarrage, YA-MS vérifie qu'il dispose de tous ses fichiers (traductions, catalogues, documents). S'il en manque, par exemple après une copie incomplète, la fenêtre « Fichiers manquants » les énumère et propose « Télécharger les fichiers manquants » depuis GitHub, dans la même version du programme, ou « Continuer sans ». La même vérification est répétée en appuyant sur « Mises à jour ».
+H1|3. La fenêtre principale
+H2|3.1 Les parties de la fenêtre
+LI|En haut, trois rangées de commandes valables pour tous les onglets : stations et bande, couche E et antenne, heure du calcul (chapitre 4).
+LI|La barre des onglets principaux, avec à droite le bouton Commandes, le jeu de couleurs (Thème) et la langue.
+LI|Les sous-onglets, dans une rangée plus claire, pour les onglets qui en ont.
+LI|En bas, la barre d'état : messages du calcul, avertissements sur la connexion et le bouton « Mises à jour ».
+H2|3.2 Les onglets
+LI|Direct et données en temps réel : Trafic en direct, Flux radar, Radar GRAVES, Collecte de données (chapitre 9).
+LI|Calcul prévisionnel : Calcul prévisionnel, Géométrie et affaiblissement, Calcul de l'efficacité, Prévisions expérimentales (chapitres 5-8).
+LI|Essaims en direct, Essaims, Carte des carrés (chapitres 10-11).
+LI|Documents techniques, le dernier : Manuel d'utilisation, Sources, Carte des radars européens, Explication du calcul de l'efficacité (chapitre 12).
+H2|3.3 Langue, couleurs, police
+LI|Langue : 36 langues. Lorsque vous changez de langue, la fenêtre se reconstruit à la même position et sur le même onglet, sans redémarrer. Les nombres et les dates suivent la langue choisie (virgule décimale en italien, point en anglais).
+LI|Thème : 12 jeux de couleurs ; Clair est celui par défaut, Nuit et Noir servent dans l'obscurité, Traînée météorique est le style d'origine de YA-MS.
+LI|Police (au bout de la première rangée de commandes) : agrandit tout le texte de 100 à 300 %. Avec de grandes polices, les onglets passent à la ligne.
+LI|Commandes : replie et rouvre les trois rangées de commandes, pour laisser de la place aux cartes et aux graphiques. Le choix est mémorisé.
+TAG|NOTA|Presque chaque commande a une info-bulle : laissez la souris immobile sur la commande pour lire à quoi elle sert et de quelle source provient la valeur par défaut.
+H1|4. Configurer la station et le trajet
+H2|4.1 Rangée 1 : stations et bande
+LI|Mon locator et altitude m : votre locator Maidenhead (4, 6 ou 8 caractères ; c'est le centre du carré qui est utilisé) et l'altitude de la station au-dessus du niveau de la mer.
+LI|Correspondant et altitude m : locator et altitude de la station à contacter.
+LI|Bande MHz : 28, 50, 70, 144, 222 ou 432 MHz. Elle sert pour le gain et le lobe de l'antenne, pour l'affaiblissement et le bilan, pour l'estimation du flux.
+LI|Calculer : recalcule le trajet (échantillonnage de la couche E, moins d'une seconde).
+LI|Antenne az : azimut de l'antenne, toujours vers le correspondant.
+H2|4.2 Rangée 2 : couche E et antenne
+LI|Altitude traînées km et du radar : altitude des traînées météoriques. Avec « du radar » coché, on utilise l'altitude la plus fréquente mesurée par le radar de Collm (en général 88-90 km) ; décochez-la pour la saisir à la main.
+LI|Élévation du lobe ° : élévation du maximum du lobe vertical de votre antenne. Une antenne directive fixée à 0° a quand même son lobe principal quelques degrés au-dessus de l'horizon, à cause de la réflexion sur le sol : en général 3-8°, selon la hauteur de l'antenne en longueurs d'onde.
+LI|diagramme d'antenne : activé (par défaut), les points de réflexion comptent avec le gain vertical des deux antennes : plein autour du maximum du lobe, de moins en moins vers l'horizon et vers le haut. Désactivé, l'élévation du lobe est une limite nette : les points vus plus bas ne comptent pas.
+LI|Antenne Yagi : boom m : longueur du boom. À côté, le programme indique la longueur en longueurs d'onde, le gain (courbe DL6WU) et l'ouverture du lobe à -3 dB horizontale et verticale. En dessous de 2 λ, l'estimation est peu précise.
+LI|Hot spot depuis le point milieu km et auto (AMS) : distance de Hot A et Hot B par rapport au point milieu. Avec « auto (AMS) » coché, elle suit la table de J. Richardson citée par DJ5HG (13° d'écart à 1000 km, 10° au-delà de 1500 km) ; décochez-la pour saisir 30-400 km à la main (MSHV utilise 150 km).
+TAG|ATTENZIONE|Avec « diagramme d'antenne » désactivé et le lobe à quelques degrés, sur un long trajet les deux stations peuvent ne voir aucun point commun de la couche : toutes les efficacités valent 0 et l'avertissement « AUCUNE ZONE COMMUNE » apparaît, avec le lobe ou l'altitude des traînées qui seraient nécessaires. Exemple : JN70CN - JO76QP, 1791 km, lobe à 3°, traînées à 88,5 km.
+H2|4.3 Rangée 3 : heure du calcul
+LI|Heure : horloge UTC.
+LI|Date du calcul (UTC) : le jour du calcul. Elle s'applique au Calcul prévisionnel, au tableau des 24 heures du Calcul de l'efficacité et à la chronologie du Radar GRAVES. Par défaut c'est aujourd'hui, et à minuit elle passe au nouveau jour.
+LI|Heures (de −12 à +36 h) : décale le moment du calcul, par pas de 15 minutes. À côté : « Calcul pour : maintenant » ou la date et l'heure choisies.
+LI|Temps réel : revient au moment présent.
+H2|4.4 Configurer sa propre station
+TAG|PROCEDURA|1) Dans Mon locator, saisissez votre locator et l'altitude. 2) Saisissez le locator et l'altitude du correspondant, ou cliquez sur la carte du Calcul prévisionnel : clic gauche = correspondant, clic droit = votre station. 3) Choisissez la bande. 4) Saisissez la longueur du boom et l'élévation du lobe de votre antenne. 5) Appuyez sur Calculer : la barre d'état confirme « Trajet calculé : ... km, ... points de réflexion échantillonnés ».
+TAG|NOTA|Les réglages sont enregistrés dans data/config.ini à la fermeture et à chaque calcul : au prochain démarrage, vous retrouvez le même trajet.
+H1|5. Calcul prévisionnel
+P|Le premier sous-onglet du groupe Calcul prévisionnel montre sur un seul écran où tombent en ce moment les traînées utiles et où pointer. Tout se rapporte au moment choisi avec la date et le curseur des heures.
+H2|5.1 La bande de résumé
+P|Au-dessus de la carte, une bande résume le calcul pour ce moment : date et heure, indice du trajet (somme de ZHR × efficacité des essaims actifs), l'essaim le plus utile avec son ZHR et son efficacité (aussi en dB par rapport à la référence de DJ5HG), le nombre d'essaims au-dessus de l'horizon et le Hot recommandé avec son azimut.
+H2|5.2 La carte en plan
+P|À gauche, la carte d'Europe vue d'en haut (est à droite), avec l'échelle des degrés tout autour :
+LI|ligne verte : le trajet réel entre les deux locators ;
+LI|Hot A et Hot B : les deux hot spots de part et d'autre du point milieu. Rouge = recommandé, rose = hors du lobe de l'antenne, gris = déjà dans le lobe (avec un avertissement) ;
+LI|lobe de l'antenne : le secteur à -3 dB autour de l'azimut de l'antenne ;
+LI|Limite A et Limite B, en traits pâles : les bords les plus éloignés du ciel vu par les deux stations, pas des points à viser ;
+LI|ligne jaune : la direction dans laquelle l'essaim sélectionné (ou le plus favorable) balaie le ciel ; points orange : les deux pointages perpendiculaires (azimut du radiant ±90°) ;
+LI|zones PREV, ellipses claires : là où tombent en ce moment les traînées les plus probables, une de chaque côté du trajet.
+P|Clic gauche sur la carte = locator du correspondant, clic droit = locator de votre station ; le trajet est recalculé immédiatement. La légende est une colonne repliable à droite de la carte. Les cases au-dessus de la liste des essaims activent et désactivent les directions des Hot, la carte d'Europe et la vue de dessus.
+H2|5.3 La liste des essaims
+P|Pour chaque essaim : nom et code IMO, ZHR à cet instant, azimut et élévation du radiant depuis votre station, efficacité pour le trajet, côté prépondérant (A ou B), meilleur pointage, lever et coucher du radiant. Un clic sur une ligne sélectionne l'essaim : la ligne jaune et les points orange le suivent.
+H2|5.4 La petite voûte céleste et le texte du calcul
+P|Les radiants vus depuis votre station, avec le code IMO et le parcours journalier en cyan. Jaune = efficacité d'au moins 50 % et ZHR d'au moins 2 ; orange = au moins 20 % ; rouge foncé = moins ; gris = presque inactif. La ligne orange passant par le zénith donne les bonnes directions d'antenne, orthogonales au défilement de l'essaim. À côté, le texte du calcul : trajet, point milieu, Hot recommandé avec le pourcentage des réflexions prévues, limites de la zone commune.
+H2|5.5 La coupe
+P|En bas à droite, les traînées les plus probables vues depuis l'antenne en direction du correspondant : à l'horizontale l'azimut par rapport au correspondant (A à gauche, B à droite), à la verticale l'élévation. Chaque traînée est un segment orienté vers le radiant, d'autant plus épais qu'elle est probable. Le lobe de l'antenne, le correspondant et les Hot sont également dessinés.
+H2|5.6 Les avertissements
+LI|ATTENTION : Hot A (ou Hot B) est dans le lobe de l'antenne : avec ce pointage, ce hot spot est déjà couvert.
+LI|RADIANT TROP HAUT : un radiant utile est au-dessus de 70° ; les traînées descendent presque verticalement et réfléchissent peu vers le trajet.
+LI|RADIANT BAS LE LONG DU TRAJET : l'efficacité calculée reste faible, mais avec des traînées rasantes alignées sur le trajet, DJ5HG prévoit des réflexions rares et fortes : cela vaut la peine d'écouter.
+LI|TRAJET AU-DELÀ DE L'HORIZON DES TRAÎNÉES : à l'altitude des traînées, le point milieu est sous l'horizon ; l'avertissement indique quelle altitude serait nécessaire.
+LI|AUCUNE ZONE COMMUNE : aucun point de la couche n'est visible depuis les deux stations ; l'avertissement indique de combien il s'en faut et ce qui serait nécessaire.
+H1|6. Géométrie et affaiblissement
+P|Un compte rendu textuel du trajet, sélectionnable et copiable, et à droite le graphique de l'élévation d'antenne en fonction de la distance au point de réflexion, pour trois altitudes des traînées.
+H2|6.1 Les données de cet onglet
+LI|Puissance W (400), Gain antenne dBi (14 ; même antenne aux deux extrémités), Signal minimal dBm (-130), Densité de la traînée q = 10^14 électrons/m : elles servent au bilan de liaison.
+LI|Rayon initial de la traînée : double de l'ITU (Stober 2021, prudent, par défaut), ITU-R P.843, ou exclu. Plus le rayon est grand, plus on perd aux fréquences élevées.
+LI|Durée des pings entre les bandes : théorique λ² (McKinley, SM6FHZ ; prudente, par défaut) ou observée (mesures HamSCI MSQP de NN4SA, Perséides 2026 : de 50 à 144 MHz, les pings raccourcissent de 1,5 fois au lieu de 8).
+H2|6.2 Le compte rendu
+LI|GÉOMÉTRIE DU TRAJET : stations et altitudes, distance, azimut, point milieu, altitude des traînées, élévation d'antenne vers le point milieu.
+LI|HOT A / HOT B : locator, azimut, écart par rapport à la direction directe, distance et élévation de chaque hot spot.
+LI|LIMITES DE LA ZONE COMMUNE : portée à l'altitude des traînées jusqu'à l'horizon, le lobe d'antenne avec son maximum et sa largeur verticale, Limite A et Limite B ; gain et lobe de la Yagi.
+LI|AFFAIBLISSEMENT DE TRAJET : pour le point milieu, Hot A et Hot B, à 28, 50, 70, 144, 222 et 432 MHz (traînée qui traverse le plan du trajet, le cas le plus défavorable).
+LI|BILAN : puissance et PIRE, affaiblissement, signal à l'antenne, signal minimal et marge ; le meilleur cas (traînée dans le plan du trajet) et la marge avec l'affaiblissement moyen d'OH5IY.
+LI|RÈGLES EXPÉRIMENTALES ENTRE LES BANDES : nombre, intensité et durée des réflexions par rapport à 144 MHz ; ping maximal IARU ; durée observée d'après les mesures MSQP.
+TAG|NOTA|Une marge positive indique qu'une traînée sous-dense moyenne suffit à établir la liaison avec votre station ; une marge négative indique qu'il faut des traînées plus denses ou des météores sur-denses. C'est une estimation : la référence reste l'expérience sur la bande.
+H1|7. Calcul de l'efficacité
+P|L'efficacité indique, en pourcentage, dans quelle mesure la position du radiant d'un essaim permet des réflexions sur votre trajet : 100 % est la position la plus favorable pour ce trajet. Ce sous-onglet la montre heure par heure pour le jour de la « Date du calcul », avec les valeurs au milieu de chaque heure.
+H2|7.1 Les quatre encadrés
+LI|MEILLEURE HEURE DE LA JOURNÉE : l'heure avec l'indice du trajet le plus élevé et le côté prépondérant.
+LI|ESSAIM LE PLUS FAVORABLE : l'essaim qui contribue le plus, avec l'heure, le côté et les deux meilleurs pointages.
+LI|MAINTENANT : indice et côté dans l'heure en cours et le Hot recommandé (seulement si le jour choisi est aujourd'hui).
+LI|PRÉVISION EXPÉRIMENTALE : réflexions par heure prévues maintenant, dans 1 heure et dans 2 heures (chapitre 8).
+P|Lorsqu'un encadré n'a pas de valeurs, il indique pourquoi : aucune zone commune, aucun essaim actif, ou des radiants défavorables toute la journée. L'info-bulle de chaque encadré explique ce qu'il montre. Sous les encadrés figurent, si nécessaire, l'avertissement AUCUNE ZONE COMMUNE et un bandeau qui explique les lettres A et B.
+H2|7.2 Le réglage du calcul
+LI|Prudent (par défaut) : altitude des traînées du radar, traînées normales, angle β activé. Donne les valeurs les plus basses.
+LI|Comme DJ5HG : altitude fixe de 102 km, traînées plus longues avec le radiant bas, angle β activé ; reproduit le programme QTFGUI.
+LI|Personnalisé : se sélectionne tout seul lorsque vous modifiez à la main l'une des cases ou l'altitude.
+LI|Traînées plus longues avec le radiant bas (DJ5HG) : avec le radiant bas, il tombe moins de météores, mais les traînées sont plus longues et réfléchissent plus souvent ; au-dessus d'environ 9°, les deux effets se compensent.
+LI|Angle β entre traînée et trajet (McKinley complet), dans l'encadré orange portant la mention « le choix qui pèse le plus » : activée, les traînées qui traversent le plan du trajet valent 10-15 dB de moins que celles qui s'y trouvent, et les radiants alignés sur le trajet l'emportent. Désactivée, c'est la règle classique qui s'applique : le meilleur radiant est haut de 15-70° et en travers du trajet.
+LI|Verdict classique : ajoute sous chaque essaim la ligne « classique » avec le verdict de la règle des radioamateurs au point milieu du trajet : ✗ radiant sous l'horizon, ◐ marginal (trop bas, trop haut ou presque aligné sur le trajet), ● bon, ★ excellent (en travers du trajet). Ne modifie pas le calcul.
+TAG|ATTENZIONE|L'angle β modifie beaucoup les valeurs sur les longs trajets : JN70CN - JO76QP (1791 km), Géminides du 14/12/2026, 98 % avec β désactivé et 13 % avec β activé. Les deux thèses ont des sources différentes et une première comparaison avec les comptages BRAMS ne permet pas de les départager : comparez les deux cas avec votre expérience sur la bande. Les pourcentages sont relatifs à la meilleure position du radiant pour ce trajet ; pour comparer des trajets différents, on utilise l'efficacité en dB.
+H2|7.3 Quelle confiance accorder aux chiffres
+P|Les meilleures heures et le côté sont les informations les plus solides : elles changent peu avec les réglages du calcul. Les pourcentages, en revanche, dépendent beaucoup des choix, surtout de l'angle β. La comparaison avec 181 767 spots MSK144 réels sur 50 MHz (HamSCI, Perséides des 11-12 août 2025) confirme l'évolution horaire de l'indice du trajet, mais montre aussi que la paire de stations qui s'entendent à une heure donnée dépend surtout des météores sporadiques et de l'activité sur l'air, que le modèle ne contient pas.
+TAG|NOTA|Utilisez le programme pour choisir l'heure et le côté vers lequel tourner l'antenne ; ne lisez pas les pourcentages comme des probabilités de réussite de la liaison.
+H2|7.4 Le graphique
+P|Pour cinq essaims au maximum : l'efficacité en trait continu et la formule de DH9GCD en pointillé de la même couleur ; l'indice du trajet en barres sur l'échelle de droite. Les heures locales sont écrites sous les heures UTC.
+H2|7.5 Le tableau des 24 heures
+LI|Une ligne pour chaque essaim actif ce jour-là, 24 colonnes pour les heures UTC.
+LI|63A : efficacité 63 %, la plupart des réflexions du côté A ; 41B : côté B ; un nombre sans lettre : moins de 5 % ; cellule vide : moins de 1 % ; ↑ : radiant au-dessus de 70° (trop haut) ; couleur plus chaude = efficacité plus élevée.
+LI|A = à gauche en regardant depuis votre station vers le correspondant (zone Hot A) ; B = à droite (zone Hot B). Il convient de tourner l'antenne de 10-30° vers ce côté (side-scatter).
+LI|Lignes bleu clair DH9GCD % : la formule de la meilleure direction de DH9GCD, pour comparaison ; elle ne tient compte ni de l'horizon ni du lobe.
+LI|Ligne Σ : indice du trajet, somme de ZHR × efficacité de tous les essaims actifs.
+LI|Ligne orange : la prévision expérimentale des réflexions par heure, pour les heures où elle existe.
+TAG|PROCEDURA|Pour choisir l'heure d'un sked : réglez la date, regardez la ligne Σ et l'encadré MEILLEURE HEURE DE LA JOURNÉE ; dans la ligne de l'essaim choisi, lisez la lettre A ou B et tournez l'antenne de 10-30° vers ce côté. Laissez la souris sur une cellule pour lire le détail du Hot de cette heure.
+H1|8. Prévisions expérimentales
+P|Transforme les comptages du radar de Collm (36,2 MHz) en une estimation des réflexions par heure sur une bande radioamateur (144 MHz par défaut, de 28 à 1300 MHz), établit la prévision des 24 prochaines heures pour votre trajet et la compare avec un observateur RMOB. Tout ici est expérimental : les chiffres servent à comparer des heures et des jours.
+H2|8.1 Les commandes
+LI|Fréquence cible MHz : fréquence de la prévision.
+LI|Exposant λ^k (3, SM6FHZ) et Facteur de station K (1) : règle en fonction de la fréquence et correction pour votre station.
+LI|k à partir des indices de population : propose k à partir des indices de population r des essaims actifs (GMN, sinon IMO ; k = 3,75 · log10 r, pondéré par le ZHR) et demande confirmation avant de l'appliquer.
+LI|Charger un fichier RMOB depuis le disque et Déduire l'exposant du fichier RMOB : lisent un fichier mensuel RMOB et en déduisent k à partir des heures communes avec Collm.
+LI|Observateur RMOB, Télécharger RMOB maintenant et récupération automatique toutes les 5 minutes : la récupération automatique est désactivée et ne doit être activée qu'avec l'autorisation de RMOB.
+H2|8.2 Les résultats
+LI|Le graphique d'hier et d'aujourd'hui : météores par heure à Collm, valeurs transposées à votre fréquence et, s'ils sont chargés, les comptages RMOB.
+LI|La prévision des 24 prochaines heures : la même heure de la veille, corrigée de la variation de l'indice des essaims du trajet.
+LI|Le tableau avec l'appréciation : bon, moyen ou faible par rapport à la moyenne des 24 heures.
+TAG|NOTA|La durée des réflexions suit le choix « Durée des pings entre les bandes » de Géométrie et affaiblissement ; en forward scatter, la durée augmente aussi avec sec²φ au point milieu du trajet.
+H1|9. Direct et données en temps réel
+H2|9.1 Trafic en direct
+P|Une carte azimutale équidistante centrée sur votre station avec tout le trafic meteor scatter recueilli : pour chaque liaison, le trajet dans la couleur de la bande (28 marron, 50 vert, 70 cyan, 144 orange, 222 rose, 432 violet), les deux stations et le nuage des traînées les plus probables à cette heure. Les spots qui viennent d'arriver clignotent pendant une minute.
+LI|Rayon de la carte : 600-3500 km. Spots à afficher : 15 ou 30 dernières minutes, dernière heure, 3 ou 24 dernières heures.
+LI|Un clic sur un trajet ou sur une ligne du tableau met la liaison en évidence et affiche le centre du nuage, son altitude et ses dimensions.
+H2|9.2 Flux radar
+P|Les comptages horaires des météores et les altitudes des traînées du radar SKiYMET de Collm (36,2 MHz) et la dernière image du radar de Sodankylä (36,9 MHz).
+LI|Télécharger maintenant et Mise à jour automatique de toutes les sources toutes les 5 minutes : chaque source n'est téléchargée à nouveau que si elle a changé.
+LI|Exposant λ (SM6FHZ) : exposant de l'estimation sur votre bande (ligne orange sur l'échelle de droite).
+LI|Altitudes des traînées : histogramme avec mode, moyenne, médiane et écart type ; avec « du radar », le mode devient l'altitude de tous les calculs.
+TAG|ATTENZIONE|Si l'échelle du graphique de Collm ne peut pas être lue, un avertissement orange apparaît et les valeurs doivent être vérifiées. Sans connexion, le programme utilise les dernières données enregistrées, le signale une fois et réessaie de lui-même toutes les 5 minutes ; la barre d'état devient rouge jusqu'au retour de la connexion.
+H2|9.3 Radar GRAVES
+P|GRAVES émet en CW sur 143,050 MHz depuis Broye-lès-Pesmes (JN27SI). Le sous-onglet traite GRAVES → vous comme un trajet meteor scatter à part entière : il calcule l'efficacité, le Hot recommandé et les zones PREV, vérifie si la zone est dans le faisceau et quand le faisceau l'illumine.
+LI|Maintenant : ramène le calcul au temps réel. Mettre GRAVES comme DX : le correspondant devient GRAVES. Séquence du faisceau : 0,8 s par pas (PE1ITR 2021) ou 3,2 s (2007).
+LI|Les fiches : ZONE UTILE DANS LE FAISCEAU DE GRAVES, EFFICACITÉ DU TRAJET GRAVES → VOUS MAINTENANT (avec les échos attendus, expérimentaux), TRAJET (où pointer), PROCHAIN PASSAGE DU FAISCEAU SUR LA ZONE.
+LI|La reconstitution chronologique de la journée et le détail des secondes suivantes.
+TAG|PROCEDURA|Pour écouter GRAVES : USB sur 143,049 MHz (tonalité à environ 1 kHz), AGC lent ou désactivé, bande audio d'au moins 2,4 kHz ; antenne vers le hot spot recommandé de la fiche TRAJET, à faible élévation ; horloge du PC synchronisée. Les pings sont de courts traits près de la porteuse dans le waterfall.
+H2|9.4 Collecte de données
+P|Recueille les spots meteor scatter à partir de trois flux telnet (DX cluster, RBN, DM4X avec les spots de PSKReporter) et du flux MQTT de PSKReporter, chacun dans son propre sous-onglet, et les filtre.
+LI|Saisissez en haut votre indicatif pour le login. Chaque flux a un hôte, un port, des commandes après le login, Reconnecter, Connecter au démarrage et une console.
+LI|Le filtre accepte les spots sur les fréquences typiques du meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) ou avec un mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), et rejette ceux qui déclarent une autre propagation. Les fenêtres et les mots peuvent être modifiés ; chacun a son propre compteur.
+LI|Les locators manquants sont pris dans la base CALL3 ; les spots acceptés vont dans data/spot_ms, un fichier par jour, et sur la carte du Trafic en direct.
+H1|10. Essaims en direct et catalogue des essaims
+H2|10.1 Essaims en direct
+P|À gauche, le flux et le ZHR mesurés par le Global Meteor Network pour les essaims actifs, avec les comptages du jour des caméras GMN par essaim (un comptage, pas un flux : il dépend du nombre de stations qui ont un ciel dégagé) ; à droite, les cartes des radiants du radar CMOR, y compris celles des essaims diurnes. Les fichiers ne sont téléchargés à nouveau que s'ils ont changé, au plus toutes les 30 minutes, ou avec Télécharger maintenant.
+H2|10.2 Essaims
+P|Le catalogue utilisé par tous les calculs : les essaims du calendrier IMO 2026 et 2027 plus la Source de l'antihélion. Les essaims actifs aujourd'hui sont mis en évidence.
+LI|Code, nom, période d'activité, longitude solaire du maximum, prochain maximum (UTC) et sa source (IMO ou calculé), radiant, vitesse, indice de population r, ZHR, type (visuel ou radio diurne).
+LI|k : exposant de la transposition en fréquence à partir de l'indice de population (GMN si disponible, sinon IMO).
+LI|IAU MDC : solutions, Δ radiant, Δλ, Δv : comparaison avec le catalogue de l'IAU Meteor Data Center (solutions publiées et écarts du catalogue du programme par rapport à leur médiane).
+LI|GMN aujourd'hui : trajectoires confirmées dans le dernier fichier journalier du Global Meteor Network.
+TAG|NOTA|Le catalogue est le fichier data/sciami.csv et les maxima IMO sont dans data/massimi_imo.csv : ils peuvent être modifiés avec un éditeur de texte. Une ligne erronée est signalée au démarrage et ignorée.
+H1|11. Carte des carrés
+P|Les carrés Maidenhead contactés (orange) et confirmés (vert, QSL ou LoTW) lus dans le fichier ADIF de votre log, sur une carte d'Europe, avec un sous-onglet par bande : 50, 70, 144, 222 et 432 MHz.
+LI|Charger un fichier ADIF : lit un fichier .adi ou .adif ; un nouveau fichier remplace le précédent. Effacer la mémoire : efface les carrés chargés.
+LI|Molette = zoom, glisser = déplacer, souris sur un carré = les QSO de ce carré.
+TAG|NOTA|YA-MS ne se connecte pas à LoTW : exportez l'ADIF depuis votre logiciel de log ou depuis LoTW et chargez-le ici.
+H1|12. Documents techniques
+LI|Manuel d'utilisation : ce document.
+LI|Sources : toutes les sources du programme, avec les références.
+LI|Carte des radars européens : où se trouvent Collm, Sodankylä, GRAVES et CMOR par rapport à votre station, avec le ciel vu par chaque radar.
+LI|Explication du calcul de l'efficacité : comment l'efficacité est calculée, étape par étape, avec les étiquettes SOURCE, VÉRIFICATION et CHOIX.
+P|Les documents suivent la langue de l'interface lorsque la traduction existe, sinon ils sont en italien. « Exporter vers Word (.docx) » en enregistre une copie où vous voulez ; « Ouvrir dans Word » l'ouvre avec le programme par défaut. Le Manuel des calculs, avec toutes les équations, se trouve dans le dossier doc (italien) et doc/manuali (les autres langues).
+H1|13. Le dossier data et les réglages
+H2|13.1 Les fichiers principaux
+LI|config.ini : tous les réglages (texte, clé=valeur).
+LI|lingue/ : les traductions de l'interface ; mappa/ : la carte d'Europe.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv : le catalogue des essaims et la position de la Source de l'antihélion ; regole_sperimentali.csv : les règles entre les bandes.
+LI|flusso_collm.csv, quote_collm.csv : archives du radar de Collm ; radar/ : dernières images, fichiers RMOB et données des sources en direct ; fonti_radar.csv : adresses des sources, activables une par une.
+LI|cataloghi/ : catalogue IAU MDC ; radar/diretta/ : données GMN et CMOR.
+LI|call3.txt : base des locators ; spot_ms/ : spots meteor scatter recueillis ; adif_quadrati.csv : carrés issus de l'ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/ : les documents techniques.
+LI|backup/ : copies des fichiers remplacés par une mise à jour ; aggiornamento/ : paquet téléchargé (effacé au redémarrage).
+H2|13.2 Quelques clés de config.ini
+LI|controlla_aggiornamenti=0 : ne pas rechercher les nouvelles versions ; aggiornamenti_salta : version ignorée.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico : les cases du calcul.
+LI|raggio_iniziale (0 = double de l'ITU, 1 = ITU, 2 = exclu), durata_ping (0 = λ², 1 = observée).
+LI|rmob_osservatore, rmob_automatico, rmob_url : RMOB.
+TAG|ATTENZIONE|Ne modifiez config.ini que lorsque le programme est fermé : à la fermeture, YA-MS le réécrit.
+H1|14. Procédures types
+H2|14.1 Préparer un sked sur un essaim
+TAG|PROCEDURA|1) Réglez les deux stations et appuyez sur Calculer. 2) Dans Essaims, vérifiez le prochain maximum de l'essaim. 3) Mettez cette date dans Date du calcul. 4) Dans Calcul de l'efficacité, regardez la ligne de l'essaim et la ligne Σ : choisissez les heures avec l'efficacité la plus élevée. 5) Notez le côté (A ou B) et tournez l'antenne de 10-30° vers ce côté. 6) Dans Géométrie et affaiblissement, vérifiez la marge du bilan.
+H2|14.2 Suivre une session en direct
+TAG|PROCEDURA|1) Appuyez sur Temps réel. 2) Dans Calcul prévisionnel, suivez le Hot recommandé et les zones PREV, qui sont mis à jour chaque minute. 3) Dans Flux radar, vérifiez que le radar de Collm compte bien des météores. 4) Dans Trafic en direct, regardez qui est en train de trafiquer et où tombent leurs traînées.
+H2|14.3 Tester la station avec GRAVES
+TAG|PROCEDURA|1) Dans Radar GRAVES, vérifiez la fiche ZONE UTILE DANS LE FAISCEAU DE GRAVES. 2) Pointez l'antenne comme l'indique la fiche TRAJET. 3) Écoutez en USB sur 143,049 MHz pendant les fenêtres du prochain passage du faisceau. 4) Comparez les pings avec les échos attendus et avec les observateurs RMOB.
+H2|14.4 Étalonner la prévision avec RMOB
+TAG|PROCEDURA|1) Dans Prévisions expérimentales, chargez un fichier RMOB mensuel d'un observateur sur votre bande. 2) Appuyez sur Déduire l'exposant du fichier RMOB et acceptez k si les heures communes sont suffisantes. 3) Réglez le facteur de station K sur la valeur suggérée.
+H1|15. Problèmes fréquents
+LI|Toutes les efficacités valent 0 : lisez l'avertissement AUCUNE ZONE COMMUNE. Avec « diagramme d'antenne » désactivé, abaissez l'élévation du lobe ; sinon, le trajet est au-delà de l'horizon à l'altitude des traînées.
+LI|Les valeurs sont bien plus basses que celles de DH9GCD ou d'une ancienne version : vérifiez la case de l'angle β (chapitre 7.2).
+LI|« Locator de la station non valide » : saisissez un locator de 4, 6 ou 8 caractères (par exemple JN70CN ou JN70CN83).
+LI|Hot A et Hot B sont gris : avec l'antenne vers le correspondant, ils sont déjà dans le lobe ; il n'est pas nécessaire de tourner l'antenne.
+LI|La carte d'Europe manque : une connexion est nécessaire au premier démarrage ; le programme réessaie de lui-même.
+LI|Le texte est trop petit ou les graphiques manquent de place : utilisez Police et le bouton Commandes.
+LI|Le passage du faisceau de GRAVES semble décalé : synchronisez l'horloge du PC avec un serveur NTP ; la séquence du faisceau est parfois décalée par la station de commande.
+LI|Linux, texte chinois ou japonais affiché sous forme de petits carrés : installez les polices Noto CJK.
+H1|16. Contacts
+P|YA-MS est un programme gratuit pour les radioamateurs, réalisé par Costantino IC8TEM (Capri). Les signalements, suggestions et données de comparaison sont les bienvenus : indiquez le système d'exploitation, la version de YA-MS et ce que vous avez fait. Code et releases : github.com/ic8tem/YA-MS. Contacts : ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Ceux qui souhaitent soutenir le travail peuvent le faire sur ko-fi.com/ic8tem.

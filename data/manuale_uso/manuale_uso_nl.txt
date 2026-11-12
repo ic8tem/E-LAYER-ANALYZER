@@ -1,0 +1,233 @@
+TITLE|Gebruikershandleiding van YA-MS
+SUB|Versie 1.8.1 - door Costantino IC8TEM - november 2026
+H1|1. Inleiding
+H2|1.1 Waarvoor dient YA-MS
+P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
+P|Het programma is gratis, werkt op Windows, Linux (ook Raspberry Pi) en macOS, en is vertaald in 36 talen. Het bedient de radio en de rotor niet: voor de verbinding gebruik je je gewone programma voor digitale modes (MSHV, WSJT-X).
+H2|1.2 Hoe je deze handleiding leest
+P|De handleiding beschrijft de tabbladen één voor één, te beginnen met de voorspellingsberekening. Elk hoofdstuk vertelt wat het tabblad toont, wat elk bedieningselement doet en hoe je de resultaten leest. Hoofdstuk 14 bevat de meest voorkomende werkwijzen, hoofdstuk 15 de veelvoorkomende problemen. Hoe de efficiëntie wordt berekend, met de bronnen en de controles, wordt uitgelegd in het document "Uitleg van de rendementsberekening"; de volledige vergelijkingen staan in de Rekenhandleiding (map doc).
+TAG|PROCEDURA|te volgen stappen, in de aangegeven volgorde.
+TAG|NOTA|nuttige informatie om een functie beter te begrijpen of te gebruiken.
+TAG|ATTENZIONE|veelgemaakte fout, beperking van de berekening of gedrag dat je moet kennen.
+P|De namen van de bedieningselementen zijn geschreven zoals ze in de Nederlandse versie van het programma verschijnen; in de andere talen staan ze op dezelfde plaats en in dezelfde volgorde.
+H1|2. Installatie, opstarten en updates
+H2|2.1 Welk pakket je downloadt
+P|Alle pakketten staan op de releasepagina op GitHub (github.com/ic8tem/YA-MS/releases). Je hoeft .NET niet te installeren: het zit al in het pakket.
+LI|Windows 64 bit: YA-MS-<versie>-windows-x64-setup.exe (installeert in C:\YA-MS, zonder beheerdersrechten) of de draagbare zip, uit te pakken in een willekeurige map. Voor 32-bit Windows dezelfde bestanden met x86.
+LI|Linux (Debian, Ubuntu, Mint): het .deb-pakket, te installeren met sudo apt install ./ya-ms_<versie>_amd64.deb; bij de eerste start kopieert het programma zichzelf naar ~/YA-MS. Voor andere distributies de .tar.gz, uit te pakken en te starten met ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 en 500: het pakket raspberry-pi-64bit (Raspberry Pi OS 64 bit) of raspberry-pi-32bit, als .tar.gz of .deb.
+LI|macOS: de .dmg voor Apple Silicon (M1 en later) of voor Intel, of de app.zip. Sleep YA-MS.app naar een eigen map (bijvoorbeeld ~/YA-MS): de map data wordt naast de app aangemaakt.
+TAG|ATTENZIONE|Windows kan "Windows heeft uw pc beschermd" tonen: kies "Meer informatie" en daarna "Toch uitvoeren". Op macOS open je de app de eerste keer met de rechtermuisknop en "Open". Het programma is niet ondertekend met een betaald certificaat.
+H2|2.2 De eerste start
+P|Bij het opstarten verschijnt enkele seconden het startscherm met de Perseïden boven de VLT van ESO. Bij de eerste start kiest YA-MS de taal van het systeem, als dat een van de 36 is, anders Italiaans; het downloadt de kaart van Europa (Natural Earth) naar de map data/mappa en toont een voorbeeldtraject. Het instellen voor jouw station kost maar een paar minuten (hoofdstuk 4).
+H2|2.3 De map data
+P|Alle instellingen en alle gegevens staan in één map data naast het programma: geen AppData, geen systeemmappen. Om YA-MS naar een andere computer te verplaatsen kopieer je gewoon de programmamap met de map data erin. De inhoud van de map wordt beschreven in hoofdstuk 13.
+H2|2.4 Automatische updates
+P|Vanaf versie 1.8.0 controleert YA-MS zelf op GitHub, bij het opstarten en hooguit eenmaal per dag, of er een nieuwe versie is verschenen. Als dat zo is, verschijnt het venster "Update beschikbaar" met de nieuwigheden en drie knoppen:
+LI|Nu bijwerken: downloadt het pakket dat bij jouw systeem past, vervangt de programmabestanden, behoudt de map data en start YA-MS opnieuw. Programmabestanden in de map data die de nieuwe versie wijzigt, worden eerst gekopieerd naar data/backup/v<oude versie>; jouw eigen bestanden (instellingen, archieven, spots, ADIF) worden niet aangeraakt.
+LI|Later: sluit het venster; de controle wordt de volgende dag herhaald.
+LI|Deze versie overslaan: stelt die versie bij het opstarten niet meer voor.
+P|De knop "Updates" rechtsonder in de statusbalk voert dezelfde controle handmatig uit, ook voor een overgeslagen versie.
+TAG|ATTENZIONE|De automatische update moet in de programmamap kunnen schrijven. Als dat niet kan (bijvoorbeeld bij een programma dat in een systeemmap is gekopieerd), meldt YA-MS dat en stelt het voor de releasepagina te openen om handmatig te installeren. Versies tot en met 1.7.0 hebben deze functie niet: de eerste keer moet de update handmatig worden gedaan, door over de vorige versie heen te installeren.
+TAG|NOTA|Wil je niet meer op nieuwe versies controleren, schrijf dan controlla_aggiornamenti=0 in het bestand data/config.ini.
+H2|2.5 Ontbrekende programmabestanden
+P|Bij het opstarten controleert YA-MS of al zijn bestanden aanwezig zijn (vertalingen, catalogi, documenten). Als er een ontbreekt, bijvoorbeeld na een onvolledige kopie, somt het venster "Ontbrekende bestanden" ze op en biedt het "Ontbrekende bestanden downloaden" van GitHub aan, in dezelfde versie als het programma, of "Doorgaan zonder". Dezelfde controle wordt herhaald als je op "Updates" drukt.
+H1|3. Het hoofdvenster
+H2|3.1 De onderdelen van het venster
+LI|Bovenaan drie rijen bedieningselementen die voor alle tabbladen gelden: stations en band, E-laag en antenne, tijdstip van de berekening (hoofdstuk 4).
+LI|De balk met de hoofdtabbladen, met rechts de knop Bediening, het kleurenschema (Kleurenschema) en de taal.
+LI|De subtabbladen, in een lichtere rij, voor de tabbladen die ze hebben.
+LI|Onderaan de statusbalk: berichten van de berekening, waarschuwingen over de verbinding en de knop "Updates".
+H2|3.2 De tabbladen
+LI|Live en realtimegegevens: Verkeer live, Radarflux, GRAVES-radar, Gegevensverzameling (hoofdstuk 9).
+LI|Voorspellingsberekening: Voorspellingsberekening, Geometrie en demping, Efficiëntieberekening, Experimentele voorspelling (hoofdstukken 5-8).
+LI|Zwermen live, Zwermen, Vakkenkaart (hoofdstukken 10-11).
+LI|Technische documenten, als laatste: Gebruikershandleiding, Bronnen, Kaart van de Europese radars, Uitleg van de rendementsberekening (hoofdstuk 12).
+H2|3.3 Taal, kleuren, lettertype
+LI|Taal: 36 talen. Bij het wisselen van taal wordt het venster opnieuw opgebouwd op dezelfde positie en op hetzelfde tabblad, zonder herstart. Getallen en datums volgen de gekozen taal (decimale komma in het Italiaans, punt in het Engels).
+LI|Kleurenschema: 12 kleurenschema's; Licht is het standaardschema, Nacht en Zwart zijn bedoeld voor het donker, Meteorenspoor is de oorspronkelijke stijl van YA-MS.
+LI|Lettertype (aan het eind van de eerste rij bedieningselementen): vergroot alle tekst van 100 tot 300 %. Met grote letters lopen de tabbladen over op een nieuwe regel.
+LI|Bediening: klapt de drie rijen bedieningselementen in en weer uit, om ruimte te maken voor kaarten en grafieken. De keuze wordt onthouden.
+TAG|NOTA|Bijna elk bedieningselement heeft een tooltip: houd de muis stil boven het element om te lezen waarvoor het dient en uit welke bron de standaardwaarde komt.
+H1|4. Het station en het traject instellen
+H2|4.1 Rij 1: stations en band
+LI|Mijn locator en hoogte m: jouw Maidenhead-locator (4, 6 of 8 tekens; het midden van het vak wordt gebruikt) en de hoogte van het station boven zeeniveau.
+LI|Tegenstation en hoogte m: locator en hoogte van het station waarmee je verbinding wilt maken.
+LI|Band MHz: 28, 50, 70, 144, 222 of 432 MHz. Wordt gebruikt voor de winst en de bundel van de antenne, voor de demping en het linkbudget en voor de schatting van de flux.
+LI|Bereken: berekent het traject opnieuw (bemonstering van de E-laag, minder dan een seconde).
+LI|Antenne az: azimut van de antenne, altijd richting het tegenstation.
+H2|4.2 Rij 2: E-laag en antenne
+LI|Spoorhoogte km en van de radar: hoogte van de meteorensporen. Met "van de radar" aangevinkt wordt de meest voorkomende hoogte gebruikt die de radar van Collm meet (meestal 88-90 km); haal het vinkje weg om de waarde zelf in te vullen.
+LI|Elevatie bundel °: elevatie van het maximum van de verticale bundel van je antenne. Een richtantenne die op 0° staat, heeft door de reflectie op de grond toch haar hoofdbundel enkele graden boven de horizon: meestal 3-8°, afhankelijk van de hoogte van de antenne in golflengten.
+LI|antennediagram: ingeschakeld (standaard) tellen de reflectiepunten mee met de verticale winst van de twee antennes: volledig rond het maximum van de bundel, steeds minder naar de horizon en naar boven toe. Uitgeschakeld is de elevatie van de bundel een harde grens: punten die lager worden gezien tellen niet mee.
+LI|Yagi-antenne: boom m: lengte van de boom. Ernaast schrijft het programma de lengte in golflengten, de winst (DL6WU-curve) en de horizontale en verticale bundelbreedte bij -3 dB. Onder 2 λ is de schatting weinig nauwkeurig.
+LI|Hotspot vanaf middelpunt km en auto (AMS): afstand van Hot A en Hot B tot het middelpunt. Met "auto (AMS)" aangevinkt volgt het de tabel van J. Richardson, aangehaald door DJ5HG (13° afwijking bij 1000 km, 10° boven 1500 km); haal het vinkje weg om zelf 30-400 km in te vullen (MSHV gebruikt 150 km).
+TAG|ATTENZIONE|Met "antennediagram" uitgeschakeld en de bundel op enkele graden kan het op een lang traject gebeuren dat de twee stations geen enkel gemeenschappelijk punt van de laag zien: alle efficiënties zijn dan 0 en de waarschuwing "GEEN GEMEENSCHAPPELIJKE ZONE" verschijnt, met de bundelelevatie of de spoorhoogte die nodig zou zijn. Voorbeeld: JN70CN - JO76QP, 1791 km, bundel op 3°, sporen op 88,5 km.
+H2|4.3 Rij 3: tijdstip van de berekening
+LI|Uur: UTC-klok.
+LI|Berekeningsdatum (UTC): de dag van de berekening. Geldt voor Voorspellingsberekening, voor de 24-uurstabel van Efficiëntieberekening en voor de tijdlijn van GRAVES-radar. Standaard is het vandaag, en om middernacht volgt de datum de nieuwe dag.
+LI|Uren (−12 tot +36 u): verschuift het tijdstip van de berekening in stappen van 15 minuten. Ernaast: "Berekening voor: nu" of de gekozen datum en tijd.
+LI|Realtime: keert terug naar het huidige moment.
+H2|4.4 Je eigen station instellen
+TAG|PROCEDURA|1) Vul Mijn locator en de hoogte in. 2) Vul de locator en de hoogte van het tegenstation in, of klik op de kaart van Voorspellingsberekening: linksklik = tegenstation, rechtsklik = jouw station. 3) Kies de band. 4) Vul de boomlengte en de bundelelevatie van je antenne in. 5) Druk op Bereken: de statusbalk bevestigt "Traject berekend: ... km, ... reflectiepunten bemonsterd".
+TAG|NOTA|De instellingen worden bij het afsluiten en bij elke berekening opgeslagen in data/config.ini: bij de volgende start vind je hetzelfde traject terug.
+H1|5. Voorspellingsberekening
+P|Het eerste subtabblad van de groep Voorspellingsberekening laat in één scherm zien waar de bruikbare sporen nu vallen en waarheen je moet richten. Alles heeft betrekking op het moment dat met de datum en de urenschuif is gekozen.
+H2|5.1 De samenvattingsbalk
+P|Boven de kaart vat een balk de berekening voor dat moment samen: datum en tijd, trajectindex (som van ZHR × efficiëntie van de actieve zwermen), de nuttigste zwerm met zijn ZHR en zijn efficiëntie (ook in dB ten opzichte van de referentie van DJ5HG), het aantal zwermen boven de horizon en de aanbevolen Hot met zijn azimut.
+H2|5.2 De kaart in bovenaanzicht
+P|Links de kaart van Europa van bovenaf gezien (oost rechts), met de gradenschaal rondom:
+LI|groene lijn: het werkelijke traject tussen de twee locators;
+LI|Hot A en Hot B: de twee hotspots aan weerszijden van het middelpunt. Rood = aanbevolen, roze = buiten de bundel van de antenne, grijs = al binnen de bundel (met een waarschuwing);
+LI|antennebundel: de sector bij -3 dB rond de azimut van de antenne;
+LI|Grens A en Grens B, vaag: de verste randen van de hemel die door beide stations wordt gezien, geen punten om op te richten;
+LI|gele lijn: de richting waarin de geselecteerde zwerm (of de gunstigste) de hemel doorkruist; oranje punten: de twee loodrechte richtingen (azimut van de radiant ±90°);
+LI|zones PREV, lichte ellipsen: waar de meest waarschijnlijke sporen nu vallen, één aan elke kant van het traject.
+P|Linksklik op de kaart = locator van het tegenstation, rechtsklik = locator van jouw station; het traject wordt meteen opnieuw berekend. De legenda is een inklapbare kolom rechts van de kaart. Met de selectievakjes boven de zwermenlijst schakel je de richtingen van de Hot spots, de kaart van Europa en het bovenaanzicht in en uit.
+H2|5.3 De zwermenlijst
+P|Voor elke zwerm: naam en IMO-code, ZHR op dit moment, azimut en elevatie van de radiant vanaf jouw station, efficiëntie voor het traject, overheersende zijde (A of B), beste richting, op- en ondergang van de radiant. Met een klik op een regel selecteer je de zwerm: de gele lijn en de oranje punten volgen hem.
+H2|5.4 Het kleine hemelgewelf en de tekst van de berekening
+P|De radianten gezien vanaf jouw station, met de IMO-code en de dagelijkse baan in cyaan. Geel = efficiëntie minstens 50 % en ZHR minstens 2; oranje = minstens 20 %; donkerrood = minder; grijs = vrijwel inactief. De oranje lijn door het zenit geeft de juiste antennerichtingen, loodrecht op het verloop van de zwerm. Ernaast de tekst van de berekening: traject, middelpunt, aanbevolen Hot met het percentage van de verwachte reflecties, grenzen van de gemeenschappelijke zone.
+H2|5.5 De doorsnede
+P|Rechtsonder de meest waarschijnlijke sporen gezien vanaf de antenne richting het tegenstation: horizontaal de azimut t.o.v. het tegenstation (A links, B rechts), verticaal de elevatie. Elk spoor is een lijnstuk dat naar de radiant wijst, dikker naarmate het waarschijnlijker is. Ook de antennebundel, het tegenstation en de Hot spots zijn getekend.
+H2|5.6 De waarschuwingen
+LI|LET OP: Hot A (of Hot B) valt binnen de antennebundel: met deze richting is die hotspot al gedekt.
+LI|RADIANT TE HOOG: een bruikbare radiant staat boven 70°; de sporen vallen bijna verticaal en reflecteren weinig richting het traject.
+LI|LAGE RADIANT LANGS HET TRAJECT: de berekende efficiëntie blijft laag, maar met scherende sporen die langs het traject liggen voorspelt DJ5HG zeldzame en sterke reflecties: het loont de moeite om te luisteren.
+LI|TRAJECT VOORBIJ DE SPOORHORIZON: op de hoogte van de sporen ligt het middelpunt onder de horizon; de waarschuwing vermeldt welke hoogte nodig zou zijn.
+LI|GEEN GEMEENSCHAPPELIJKE ZONE: geen enkel punt van de laag is voor beide stations zichtbaar; de waarschuwing vermeldt hoeveel er ontbreekt en wat er nodig zou zijn.
+H1|6. Geometrie en demping
+P|Een tekstueel verslag van het traject, selecteerbaar en kopieerbaar, en rechts de grafiek van de antenne-elevatie als functie van de afstand tot het reflectiepunt, voor drie spoorhoogten.
+H2|6.1 De gegevens van dit tabblad
+LI|Vermogen W (400), Antennewinst dBi (14; dezelfde antenne aan beide uiteinden), Minimaal signaal dBm (-130), Spoordichtheid q = 10^14 elektronen/m: deze worden gebruikt voor het linkbudget.
+LI|Beginstraal van het spoor: dubbel van de ITU (Stober 2021, voorzichtig, standaard), ITU-R P.843, of uitgesloten. Hoe groter de straal, hoe meer verlies op de hogere frequenties.
+LI|Duur van de pings tussen de banden: theoretisch λ² (McKinley, SM6FHZ; voorzichtig, standaard) of waargenomen (metingen HamSCI MSQP van NN4SA, Perseïden 2026: van 50 naar 144 MHz worden de pings 1,5 keer korter in plaats van 8 keer).
+H2|6.2 Het verslag
+LI|TRAJECTGEOMETRIE: stations en hoogten, afstand, azimut, middelpunt, spoorhoogte, antenne-elevatie richting het middelpunt.
+LI|HOT A / HOT B: locator, azimut, afwijking van de directe richting, afstand en elevatie van elke hotspot.
+LI|GRENZEN VAN DE GEMEENSCHAPPELIJKE ZONE: bereik op spoorhoogte tot aan de horizon, de antennebundel met zijn maximum en zijn verticale breedte, Grens A en Grens B; winst en bundel van de Yagi.
+LI|TRAJECTDEMPING: voor middelpunt, Hot A en Hot B, op 28, 50, 70, 144, 222 en 432 MHz (spoor dat het vlak van het traject doorkruist, het ongunstigste geval).
+LI|LINKBUDGET: vermogen en EIRP, demping, signaal aan de antenne, minimaal signaal en marge; het gunstigste geval (spoor in het vlak van het traject) en de marge met de gemiddelde demping van OH5IY.
+LI|EXPERIMENTELE REGELS TUSSEN DE BANDEN: aantal, sterkte en duur van de reflecties ten opzichte van 144 MHz; maximale ping volgens IARU; waargenomen duur uit de MSQP-metingen.
+TAG|NOTA|Een positieve marge betekent dat een gemiddeld onderdicht spoor volstaat om het traject met jouw station te overbruggen; een negatieve marge betekent dat dichtere sporen of overdichte meteoren nodig zijn. Het is een schatting: de ervaring op de band blijft de referentie.
+H1|7. Efficiëntieberekening
+P|De efficiëntie geeft in procenten aan in hoeverre de positie van de radiant van een zwerm reflecties op jouw traject mogelijk maakt: 100 % is de gunstigste positie voor dat traject. Dit subtabblad toont haar uur per uur voor de dag van de "Berekeningsdatum", met de waarden op het halve uur.
+H2|7.1 De vier kaders
+LI|BESTE UUR VAN DE DAG: het uur met de hoogste trajectindex en de overheersende zijde.
+LI|GUNSTIGSTE ZWERM: de zwerm die het meest bijdraagt, met het uur, de zijde en de twee beste richtingen.
+LI|NU: index en zijde in dit uur en de aanbevolen Hot (alleen als de gekozen dag vandaag is).
+LI|EXPERIMENTELE VOORSPELLING: verwachte reflecties per uur nu, over 1 en over 2 uur (hoofdstuk 8).
+P|Als een kader geen waarden heeft, staat erbij waarom: geen gemeenschappelijke zone, geen actieve zwerm, of ongunstige radianten de hele dag. De tooltip van elk kader legt uit wat het toont. Onder de kaders staan, als dat nodig is, de waarschuwing GEEN GEMEENSCHAPPELIJKE ZONE en een strook die de letters A en B uitlegt.
+H2|7.2 De instelling van de berekening
+LI|Voorzichtig (standaard): spoorhoogte van de radar, normale sporen, hoek β ingeschakeld. Geeft de laagste waarden.
+LI|Zoals DJ5HG: vaste hoogte van 102 km, langere sporen bij lage radiant, hoek β ingeschakeld; volgt het programma QTFGUI na.
+LI|Aangepast: wordt automatisch geselecteerd zodra je een van de selectievakjes of de hoogte handmatig wijzigt.
+LI|Langere sporen bij lage radiant (DJ5HG): bij een lage radiant vallen er minder meteoren, maar de sporen zijn langer en reflecteren vaker; boven ongeveer 9° heffen de twee effecten elkaar op.
+LI|Hoek β tussen spoor en traject (volledige McKinley), in het oranje kader met het opschrift "de keuze die het zwaarst weegt": ingeschakeld zijn sporen die het vlak van het traject doorkruisen 10-15 dB minder waard dan sporen die erin liggen, en overheersen radianten die langs het traject liggen. Uitgeschakeld geldt de klassieke regel: de beste radiant staat 15-70° hoog en dwars op het traject.
+LI|Klassiek oordeel: voegt onder elke zwerm de regel "klassiek" toe met het oordeel van de radioamateurregel in het middelpunt van het traject: ✗ radiant onder de horizon, ◐ marginaal (te laag, te hoog of bijna langs het traject), ● goed, ★ uitstekend (dwars op het traject). Verandert de berekening niet.
+TAG|ATTENZIONE|De hoek β verandert de waarden sterk op lange trajecten: JN70CN - JO76QP (1791 km), Geminiden van 14/12/2026, 98 % met β uitgeschakeld en 13 % met β ingeschakeld. De twee opvattingen hebben verschillende bronnen en een eerste vergelijking met de BRAMS-tellingen kan ze niet van elkaar onderscheiden: vergelijk de twee gevallen met de ervaring op de band. De percentages zijn relatief ten opzichte van de beste positie van de radiant voor dat traject; om verschillende trajecten te vergelijken gebruik je de efficiëntie in dB.
+H2|7.3 Hoeveel je op de getallen kunt vertrouwen
+P|De beste uren en de zijde zijn de meest betrouwbare informatie: ze veranderen weinig met de instellingen van de berekening. De percentages daarentegen hangen sterk af van de gemaakte keuzes, vooral van de hoek β. De vergelijking met 181 767 echte MSK144-spots op 50 MHz (HamSCI, Perseïden van 11-12 augustus 2025) bevestigt het uurverloop van de trajectindex, maar laat ook zien dat welk paar stations elkaar op een bepaald uur hoort vooral afhangt van de sporadische meteoren en van de activiteit in de lucht, die het model niet bevat.
+TAG|NOTA|Gebruik het programma om het uur te kiezen en de zijde waarnaar je de antenne draait; lees de percentages niet als kans van slagen van de verbinding.
+H2|7.4 De grafiek
+P|Voor maximaal vijf zwermen: de efficiëntie als doorgetrokken lijn en de formule van DH9GCD als stippellijn in dezelfde kleur; de trajectindex als staven op de rechterschaal. De lokale tijden staan onder de UTC-tijden.
+H2|7.5 De 24-uurstabel
+LI|Eén regel voor elke zwerm die die dag actief is, 24 kolommen voor de UTC-uren.
+LI|63A: efficiëntie 63 %, de meeste reflecties van zijde A; 41B: zijde B; een getal zonder letter: onder 5 %; lege cel: onder 1 %; ↑: radiant boven 70° (te hoog); warmere kleur = hogere efficiëntie.
+LI|A = links als je vanaf jouw station naar het tegenstation kijkt (zone Hot A); B = rechts (zone Hot B). Het loont om de antenne 10-30° naar die kant te draaien (side-scatter).
+LI|Lichtblauwe regels DH9GCD %: de formule voor de beste richting van DH9GCD, ter vergelijking; houdt geen rekening met de horizon of met de bundel.
+LI|Regel Σ: trajectindex, som van ZHR × efficiëntie van alle actieve zwermen.
+LI|Oranje regel: de experimentele voorspelling van de reflecties per uur, voor de uren waarvoor die bestaat.
+TAG|PROCEDURA|Om het uur van een sked te kiezen: stel de datum in, kijk naar de regel Σ en het kader BESTE UUR VAN DE DAG; lees in de regel van de gekozen zwerm de letter A of B af en draai de antenne 10-30° naar die kant. Houd de muis boven een cel om het detail van de Hot spot van dat uur te lezen.
+H1|8. Experimentele voorspelling
+P|Zet de tellingen van de radar van Collm (36,2 MHz) om in een schatting van de reflecties per uur op een amateurband (standaard 144 MHz, van 28 tot 1300 MHz), maakt de voorspelling voor de komende 24 uur voor jouw traject en vergelijkt die met een RMOB-waarnemer. Alles hier is experimenteel: de getallen dienen om uren en dagen met elkaar te vergelijken.
+H2|8.1 De bedieningselementen
+LI|Doelfrequentie MHz: frequentie van de voorspelling.
+LI|Exponent λ^k (3, SM6FHZ) en Stationsfactor K (1): regel voor de frequentie en correctie voor jouw station.
+LI|k uit de populatie-indices: stelt k voor op basis van de populatie-indices r van de actieve zwermen (GMN, anders IMO; k = 3,75 · log10 r, gewogen met de ZHR) en vraagt om bevestiging voordat het wordt toegepast.
+LI|RMOB-bestand van schijf laden en Exponent afleiden uit RMOB-bestand: lezen een maandelijks RMOB-bestand en leiden k af uit de uren die het met Collm gemeen heeft.
+LI|RMOB-waarnemer, RMOB nu downloaden en automatisch ophalen elke 5 minuten: automatisch ophalen staat uit en mag alleen met toestemming van RMOB worden ingeschakeld.
+H2|8.2 De resultaten
+LI|De grafiek van gisteren en vandaag: meteoren per uur in Collm, waarden omgerekend naar jouw frequentie en, als ze geladen zijn, de RMOB-tellingen.
+LI|De voorspelling voor de komende 24 uur: hetzelfde uur van de vorige dag, gecorrigeerd voor de verandering van de zwermindex van het traject.
+LI|De tabel met het oordeel: goed, matig of zwak ten opzichte van het gemiddelde over 24 uur.
+TAG|NOTA|De duur van de reflecties volgt de keuze "Duur van de pings tussen de banden" in Geometrie en demping; bij forward scatter neemt de duur ook toe met sec²φ in het middelpunt van het traject.
+H1|9. Live en realtimegegevens
+H2|9.1 Verkeer live
+P|Een azimutale equidistante kaart gecentreerd op jouw station met al het verzamelde meteorscatter-verkeer: voor elke verbinding het traject in de kleur van de band (28 bruin, 50 groen, 70 cyaan, 144 oranje, 222 roze, 432 paars), de twee stations en de wolk van de meest waarschijnlijke sporen op dat uur. Net binnengekomen spots knipperen een minuut lang.
+LI|Kaartstraal: 600-3500 km. Te tonen spots: laatste 15 of 30 minuten, laatste uur, laatste 3 of 24 uur.
+LI|Een klik op een traject of op een regel van de tabel markeert de verbinding en toont het midden van de wolk, de hoogte en de afmetingen ervan.
+H2|9.2 Radarflux
+P|De uurtellingen van de meteoren en de spoorhoogten van de SKiYMET-radar van Collm (36,2 MHz) en de laatste afbeelding van de radar van Sodankylä (36,9 MHz).
+LI|Nu downloaden en Automatisch bijwerken van alle bronnen elke 5 minuten: elke bron wordt alleen opnieuw gedownload als ze veranderd is.
+LI|Exponent λ (SM6FHZ): exponent van de schatting op jouw band (oranje lijn op de rechterschaal).
+LI|Spoorhoogten: histogram met modus, gemiddelde, mediaan en standaardafwijking; met "van de radar" wordt de modus de hoogte voor alle berekeningen.
+TAG|ATTENZIONE|Als de schaal van de grafiek van Collm niet kan worden gelezen, verschijnt een oranje waarschuwing en moeten de waarden worden gecontroleerd. Zonder verbinding gebruikt het programma de laatst opgeslagen gegevens, meldt dat één keer en probeert het zelf elke 5 minuten opnieuw; de statusbalk wordt rood tot de verbinding terug is.
+H2|9.3 GRAVES-radar
+P|GRAVES zendt CW uit op 143,050 MHz vanuit Broye-lès-Pesmes (JN27SI). Het subtabblad behandelt GRAVES → jij als een afzonderlijk meteorscatter-traject: het berekent efficiëntie, aanbevolen Hot en zones PREV, controleert of de zone binnen de bundel ligt en wanneer de bundel haar belicht.
+LI|Nu: zet de berekening terug op realtime. GRAVES als DX instellen: het tegenstation wordt GRAVES. Bundelvolgorde: 0,8 s per stap (PE1ITR 2021) of 3,2 s (2007).
+LI|De kaarten: BRUIKBARE ZONE IN DE BUNDEL, EFFICIËNTIE VAN HET TRAJECT GRAVES → JIJ NU (met de verwachte echo's, experimenteel), TRAJECT (waarheen richten), VOLGENDE BUNDELDOORGANG.
+LI|De chronologische reconstructie van de dag en het detail van de komende seconden.
+TAG|PROCEDURA|Om GRAVES te beluisteren: USB op 143,049 MHz (toon op ongeveer 1 kHz), AGC langzaam of uit, audiobandbreedte van minstens 2,4 kHz; antenne naar de aanbevolen hotspot van de kaart TRAJECT, met lage elevatie; pc-klok gesynchroniseerd. De pings zijn korte lijnen dicht bij de draaggolf in de waterval.
+H2|9.4 Gegevensverzameling
+P|Verzamelt de meteorscatter-spots uit drie telnetstromen (DX-cluster, RBN, DM4X met de spots van PSKReporter) en uit de MQTT-stroom van PSKReporter, elk in een eigen subtabblad, en filtert ze.
+LI|Vul bovenaan je roepnaam in voor het inloggen. Elke stroom heeft host, poort, commando's na het inloggen, Opnieuw verbinden, Verbinden bij opstarten en een console.
+LI|Het filter accepteert de spots op de typische meteorscatter-frequenties (50190-50300, 70100-70400, 144290-144399 kHz) of met een MS-mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerpt de spots die een andere propagatie vermelden. Vensters en woorden kunnen worden aangepast; elk heeft een eigen teller.
+LI|Ontbrekende locators worden uit het CALL3-archief gehaald; de geaccepteerde spots gaan naar data/spot_ms, één bestand per dag, en naar de kaart van Verkeer live.
+H1|10. Zwermen live en de zwermencatalogus
+H2|10.1 Zwermen live
+P|Links de flux en de ZHR, gemeten door het Global Meteor Network voor de actieve zwermen, met de dagtellingen van de GMN-camera's per zwerm (een telling, geen flux: hangt af van hoeveel stations een heldere hemel zien); rechts de radiantkaarten van de CMOR-radar, ook die van de dagzwermen. De bestanden worden alleen opnieuw gedownload als ze veranderd zijn, hooguit elke 30 minuten, of met Nu downloaden.
+H2|10.2 Zwermen
+P|De catalogus die door alle berekeningen wordt gebruikt: de zwermen uit de IMO-kalender 2026 en 2027 plus de Antihelion-bron. De zwermen die vandaag actief zijn, zijn gemarkeerd.
+LI|Code, naam, activiteitsperiode, zonnelengte van het maximum, volgend maximum (UTC) en de bron ervan (IMO of berekend), radiant, snelheid, populatie-index r, ZHR, type (visueel of radio overdag).
+LI|k: exponent van de frequentieomrekening op basis van de populatie-index (GMN indien beschikbaar, anders IMO).
+LI|IAU MDC: oplossingen, Δ radiant, Δλ, Δv: vergelijking met de catalogus van het IAU Meteor Data Center (gepubliceerde oplossingen en verschillen tussen de catalogus van het programma en hun mediaan).
+LI|GMN vandaag: bevestigde banen in het laatste dagbestand van het Global Meteor Network.
+TAG|NOTA|De catalogus is het bestand data/sciami.csv en de IMO-maxima staan in data/massimi_imo.csv: ze kunnen met een teksteditor worden aangepast. Een foutieve regel wordt bij het opstarten gemeld en genegeerd.
+H1|11. Vakkenkaart
+P|De gewerkte (oranje) en bevestigde (groen, QSL of LoTW) Maidenhead-vakken, gelezen uit het ADIF-bestand van je log, op een kaart van Europa, met een subtabblad per band: 50, 70, 144, 222 en 432 MHz.
+LI|ADIF-bestand laden: leest een .adi- of .adif-bestand; een nieuw bestand vervangt het vorige. Geheugen wissen: wist de geladen vakken.
+LI|Scrollwiel = zoomen, slepen = verschuiven, muis boven een vak = de QSO's van dat vak.
+TAG|NOTA|YA-MS maakt geen verbinding met LoTW: exporteer het ADIF uit je logprogramma of uit LoTW en laad het hier.
+H1|12. Technische documenten
+LI|Gebruikershandleiding: dit document.
+LI|Bronnen: alle bronnen van het programma, met de referenties.
+LI|Kaart van de Europese radars: waar Collm, Sodankylä, GRAVES en CMOR liggen ten opzichte van jouw station, met de hemel zoals elke radar die ziet.
+LI|Uitleg van de rendementsberekening: hoe de efficiëntie stap voor stap wordt berekend, met de labels BRON, CONTROLE en KEUZE.
+P|De documenten volgen de taal van de interface als de vertaling bestaat, anders zijn ze in het Italiaans. "Exporteren naar Word (.docx)" slaat er een kopie van op waar je wilt; "Openen in Word" opent het met het standaardprogramma. De Rekenhandleiding, met alle vergelijkingen, staat in de map doc (Italiaans) en doc/manuali (de andere talen).
+H1|13. De map data en de instellingen
+H2|13.1 De belangrijkste bestanden
+LI|config.ini: alle instellingen (tekst, sleutel=waarde).
+LI|lingue/: de vertalingen van de interface; mappa/: de kaart van Europa.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: de zwermencatalogus en de positie van de Antihelion-bron; regole_sperimentali.csv: de regels tussen de banden.
+LI|flusso_collm.csv, quote_collm.csv: archieven van de radar van Collm; radar/: laatste afbeeldingen, RMOB-bestanden en gegevens van de live bronnen; fonti_radar.csv: adressen van de bronnen, elk afzonderlijk in te schakelen.
+LI|cataloghi/: IAU MDC-catalogus; radar/diretta/: GMN- en CMOR-gegevens.
+LI|call3.txt: locatorarchief; spot_ms/: verzamelde meteorscatter-spots; adif_quadrati.csv: vakken uit het ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de technische documenten.
+LI|backup/: kopieën van de bestanden die door een update zijn vervangen; aggiornamento/: gedownload pakket (bij de herstart gewist).
+H2|13.2 Enkele sleutels van config.ini
+LI|controlla_aggiornamenti=0: niet controleren op nieuwe versies; aggiornamenti_salta: overgeslagen versie.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: de selectievakjes van de berekening.
+LI|raggio_iniziale (0 = dubbel van de ITU, 1 = ITU, 2 = uitgesloten), durata_ping (0 = λ², 1 = waargenomen).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Wijzig config.ini alleen als het programma gesloten is: bij het afsluiten schrijft YA-MS het opnieuw.
+H1|14. Typische werkwijzen
+H2|14.1 Een sked op een zwerm voorbereiden
+TAG|PROCEDURA|1) Stel de twee stations in en druk op Bereken. 2) Controleer in Zwermen het volgende maximum van de zwerm. 3) Zet die datum in Berekeningsdatum. 4) Kijk in Efficiëntieberekening naar de regel van de zwerm en de regel Σ: kies de uren met de hoogste efficiëntie. 5) Noteer de zijde (A of B) en draai de antenne 10-30° naar die kant. 6) Controleer in Geometrie en demping de marge van het linkbudget.
+H2|14.2 Een sessie live volgen
+TAG|PROCEDURA|1) Druk op Realtime. 2) Volg in Voorspellingsberekening de aanbevolen Hot en de zones PREV, die elke minuut worden bijgewerkt. 3) Controleer in Radarflux of de radar van Collm meteoren telt. 4) Kijk in Verkeer live wie er actief is en waar hun sporen vallen.
+H2|14.3 Het station testen met GRAVES
+TAG|PROCEDURA|1) Controleer in GRAVES-radar de kaart BRUIKBARE ZONE IN DE BUNDEL. 2) Richt de antenne zoals de kaart TRAJECT aangeeft. 3) Luister in USB op 143,049 MHz in de vensters van de volgende bundeldoorgang. 4) Vergelijk de pings met de verwachte echo's en met de RMOB-waarnemers.
+H2|14.4 De voorspelling kalibreren met RMOB
+TAG|PROCEDURA|1) Laad in Experimentele voorspelling een maandelijks RMOB-bestand van een waarnemer op jouw band. 2) Druk op Exponent afleiden uit RMOB-bestand en accepteer k als er genoeg gemeenschappelijke uren zijn. 3) Stel de stationsfactor K in op de voorgestelde waarde.
+H1|15. Veelvoorkomende problemen
+LI|Alle efficiënties zijn 0: lees de waarschuwing GEEN GEMEENSCHAPPELIJKE ZONE. Met "antennediagram" uitgeschakeld verlaag je de bundelelevatie; anders ligt het traject voorbij de horizon op de hoogte van de sporen.
+LI|De waarden zijn veel lager dan die van DH9GCD of van een oude versie: controleer het selectievakje van de hoek β (hoofdstuk 7.2).
+LI|"Ongeldige locator van het station": vul een locator van 4, 6 of 8 tekens in (bijvoorbeeld JN70CN of JN70CN83).
+LI|Hot A en Hot B zijn grijs: met de antenne richting het tegenstation liggen ze al binnen de bundel; je hoeft de antenne niet te draaien.
+LI|De kaart van Europa ontbreekt: bij de eerste start is een verbinding nodig; het programma probeert het zelf opnieuw.
+LI|De tekst is te klein of de grafieken hebben geen ruimte: gebruik Lettertype en de knop Bediening.
+LI|De bundeldoorgang van GRAVES lijkt verschoven: synchroniseer de pc-klok met een NTP-server; de bundelvolgorde wordt soms door het commandostation verschoven.
+LI|Linux, Chinese of Japanse tekst als vierkantjes: installeer de Noto CJK-lettertypen.
+H1|16. Contact
+P|YA-MS is een gratis programma voor radioamateurs, verzorgd door Costantino IC8TEM (Capri). Meldingen, voorstellen en vergelijkingsgegevens zijn welkom: vermeld het besturingssysteem, de versie van YA-MS en wat je hebt gedaan. Code en releases: github.com/ic8tem/YA-MS. Contact: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Wie het werk wil steunen, kan dat doen via ko-fi.com/ic8tem.

@@ -1,0 +1,233 @@
+TITLE|Bruksanvisning för YA-MS
+SUB|Version 1.8.1 - av Costantino IC8TEM - november 2026
+H1|1. Inledning
+H2|1.1 Vad YA-MS används till
+P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
+P|Programmet är gratis, fungerar på Windows, Linux (även Raspberry Pi) och macOS och är översatt till 36 språk. Det styr inte radion eller rotorn: för förbindelsen använder du ditt vanliga program för digitala trafiksätt (MSHV, WSJT-X).
+H2|1.2 Så läser du den här bruksanvisningen
+P|Bruksanvisningen beskriver flikarna en i taget, med början i prognosberäkningen. Varje kapitel berättar vad fliken visar, vad varje reglage gör och hur du läser resultaten. Kapitel 14 samlar de vanligaste tillvägagångssätten, kapitel 15 de vanliga problemen. Hur effektiviteten beräknas, med källor och kontroller, förklaras i dokumentet "Förklaring av effektivitetsberäkningen"; de fullständiga ekvationerna finns i Beräkningshandboken (mappen doc).
+TAG|PROCEDURA|steg att följa, i angiven ordning.
+TAG|NOTA|användbar information för att bättre förstå eller använda en funktion.
+TAG|ATTENZIONE|vanligt misstag, begränsning i beräkningen eller beteende som är bra att känna till.
+P|Namnen på reglagen är skrivna så som de visas i programmets svenska version; i de andra språken har de samma plats och samma ordning.
+H1|2. Installation, start och uppdateringar
+H2|2.1 Vilket paket du ska ladda ner
+P|Alla paket finns på releasesidan på GitHub (github.com/ic8tem/YA-MS/releases). Du behöver inte installera .NET: det ingår redan i paketet.
+LI|Windows 64 bitar: YA-MS-<version>-windows-x64-setup.exe (installerar i C:\YA-MS, utan administratörsrättigheter) eller den portabla zip-filen, som packas upp i valfri mapp. För 32-bitars Windows samma filer med x86.
+LI|Linux (Debian, Ubuntu, Mint): .deb-paketet, som installeras med sudo apt install ./ya-ms_<version>_amd64.deb; vid första starten kopierar programmet sig självt till ~/YA-MS. För andra distributioner .tar.gz-filen, som packas upp och körs med ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 och 500: paketet raspberry-pi-64bit (Raspberry Pi OS 64 bitar) eller raspberry-pi-32bit, som .tar.gz eller .deb.
+LI|macOS: .dmg-filen för Apple Silicon (M1 och senare) eller för Intel, eller app.zip. Dra YA-MS.app till en egen mapp (till exempel ~/YA-MS): mappen data skapas bredvid appen.
+TAG|ATTENZIONE|Windows kan visa "Windows skyddade datorn": välj "Mer information" och sedan "Kör ändå". På macOS öppnar du appen första gången med högerklick och "Öppna". Programmet är inte signerat med ett betalt certifikat.
+H2|2.2 Första starten
+P|Vid start visas i några sekunder startbilden med Perseiderna över ESO:s VLT. Vid första starten väljer YA-MS systemets språk, om det är ett av de 36, annars italienska; det laddar ner Europakartan (Natural Earth) till mappen data/mappa och visar en exempelsträcka. Det tar bara några minuter att ställa in det för din station (kapitel 4).
+H2|2.3 Mappen data
+P|Alla inställningar och alla data finns i en enda mapp data bredvid programmet: ingen AppData, inga systemmappar. För att flytta YA-MS till en annan dator räcker det att kopiera programmappen med dess mapp data. Mappens innehåll beskrivs i kapitel 13.
+H2|2.4 Automatiska uppdateringar
+P|Från version 1.8.0 kontrollerar YA-MS själv på GitHub, vid start och högst en gång per dag, om en ny version har kommit ut. Om det finns en visas fönstret "Uppdatering tillgänglig" med nyheterna och tre knappar:
+LI|Uppdatera nu: laddar ner det paket som passar ditt system, ersätter programfilerna, behåller mappen data och startar om YA-MS. Programfiler i mappen data som den nya versionen ändrar kopieras först till data/backup/v<gammal version>; dina egna filer (inställningar, arkiv, spots, ADIF) rörs inte.
+LI|Senare: stänger fönstret; kontrollen upprepas nästa dag.
+LI|Hoppa över den här versionen: föreslår inte längre den versionen vid start.
+P|Knappen "Uppdateringar" nere till höger i statusfältet gör samma kontroll manuellt, även för en överhoppad version.
+TAG|ATTENZIONE|Den automatiska uppdateringen måste kunna skriva i programmappen. Om den inte kan det (till exempel om programmet har kopierats till en systemmapp) säger YA-MS det och föreslår att releasesidan öppnas för manuell installation. Versionerna till och med 1.7.0 har inte den här funktionen: första gången måste uppdateringen göras manuellt, genom att installera ovanpå den tidigare versionen.
+TAG|NOTA|Om du inte längre vill att nya versioner kontrolleras skriver du controlla_aggiornamenti=0 i filen data/config.ini.
+H2|2.5 Saknade programfiler
+P|Vid start kontrollerar YA-MS att alla dess filer finns (översättningar, kataloger, dokument). Om någon saknas, till exempel efter en ofullständig kopiering, listar fönstret "Saknade filer" dem och erbjuder "Ladda ner saknade filer" från GitHub, i samma version som programmet, eller "Fortsätt utan". Samma kontroll upprepas när du trycker på "Uppdateringar".
+H1|3. Huvudfönstret
+H2|3.1 Fönstrets delar
+LI|Överst tre rader med reglage som gäller för alla flikar: stationer och band, E-skikt och antenn, tidpunkt för beräkningen (kapitel 4).
+LI|Raden med huvudflikarna, med knappen Reglage, färgschemat (Tema) och språket till höger.
+LI|Underflikarna, i en ljusare rad, för de flikar som har sådana.
+LI|Längst ner statusfältet: meddelanden från beräkningen, varningar om anslutningen och knappen "Uppdateringar".
+H2|3.2 Flikarna
+LI|Live och realtidsdata: Trafik live, Radarflöde, GRAVES-radar, Datainsamling (kapitel 9).
+LI|Prognosberäkning: Prognosberäkning, Geometri och dämpning, Effektivitetsberäkning, Experimentella prognoser (kapitel 5-8).
+LI|Svärmar live, Svärmar, Rutkarta (kapitel 10-11).
+LI|Tekniska dokument, sist: Bruksanvisning, Källor, Karta över europeiska radarer, Förklaring av effektivitetsberäkningen (kapitel 12).
+H2|3.3 Språk, färger, typsnitt
+LI|Språk: 36 språk. När du byter språk byggs fönstret upp igen på samma position och på samma flik, utan omstart. Tal och datum följer det valda språket (decimalkomma på italienska, punkt på engelska).
+LI|Tema: 12 färgscheman; Ljust är standardschemat, Natt och Svart är till för mörker, Meteorspår är YA-MS ursprungliga stil.
+LI|Typsnitt (i slutet av den första raden med reglage): förstorar all text från 100 till 300 %. Med stora tecken radbryts flikarna.
+LI|Reglage: fäller ihop och fäller ut de tre raderna med reglage, för att ge plats åt kartor och diagram. Valet sparas.
+TAG|NOTA|Nästan varje reglage har ett verktygstips: håll musen stilla över reglaget för att läsa vad det används till och från vilken källa standardvärdet kommer.
+H1|4. Ställa in stationen och sträckan
+H2|4.1 Rad 1: stationer och band
+LI|Min lokator och höjd m: din Maidenhead-lokator (4, 6 eller 8 tecken; rutans mittpunkt används) och stationens höjd över havet.
+LI|Motstation och höjd m: lokator och höjd för den station du vill köra.
+LI|Band MHz: 28, 50, 70, 144, 222 eller 432 MHz. Används för antennens förstärkning och lob, för dämpningen och länkbudgeten och för uppskattningen av flödet.
+LI|Beräkna: beräknar sträckan på nytt (sampling av E-skiktet, mindre än en sekund).
+LI|Antenn az: antennens azimut, alltid mot motstationen.
+H2|4.2 Rad 2: E-skikt och antenn
+LI|Spårhöjd km och från radar: meteorspårens höjd. Med "från radar" markerad används den vanligaste höjden som uppmätts av radarn i Collm (oftast 88-90 km); avmarkera för att skriva in den för hand.
+LI|Lobelevation °: elevationen för maximum i din antenns vertikala lob. En riktantenn som står på 0° har ändå sin huvudlob några grader över horisonten, på grund av markreflexionen: oftast 3-8°, beroende på antennens höjd i våglängder.
+LI|antenndiagram: påslaget (standard) räknas reflexionspunkterna med de två antennernas vertikala förstärkning: fullt kring lobens maximum, allt mindre mot horisonten och uppåt. Avslaget är lobens elevation en skarp gräns: punkter som ses lägre räknas inte.
+LI|Yagiantenn: bom m: bommens längd. Bredvid skriver programmet längden i våglängder, förstärkningen (DL6WU-kurvan) och den horisontella och vertikala loben vid -3 dB. Under 2 λ är uppskattningen inte särskilt noggrann.
+LI|Hot spot från mittpunkt km och auto (AMS): avståndet från Hot A och Hot B till mittpunkten. Med "auto (AMS)" markerad följs J. Richardsons tabell, citerad av DJ5HG (13° avvikelse vid 1000 km, 10° över 1500 km); avmarkera för att skriva in 30-400 km för hand (MSHV använder 150 km).
+TAG|ATTENZIONE|Med "antenndiagram" avslaget och loben på några grader kan de två stationerna på en lång sträcka sakna gemensamma punkter i skiktet: alla effektiviteter blir 0 och varningen "INGEN GEMENSAM ZON" visas, med den lob eller den spårhöjd som skulle behövas. Exempel: JN70CN - JO76QP, 1791 km, lob på 3°, spår på 88,5 km.
+H2|4.3 Rad 3: tidpunkt för beräkningen
+LI|Tid: UTC-klocka.
+LI|Beräkningsdatum (UTC): beräkningens dag. Gäller för Prognosberäkning, för 24-timmarstabellen i Effektivitetsberäkning och för tidslinjen i GRAVES-radar. Standard är i dag, och vid midnatt följer datumet med till den nya dagen.
+LI|Timmar (−12 till +36 h): flyttar beräkningens tidpunkt i steg om 15 minuter. Bredvid: "Beräkning för: nu" eller det valda datumet och klockslaget.
+LI|Realtid: återgår till aktuell tidpunkt.
+H2|4.4 Ställa in den egna stationen
+TAG|PROCEDURA|1) Skriv in Min lokator och höjden. 2) Skriv in motstationens lokator och höjd, eller klicka på kartan i Prognosberäkning: vänsterklick = motstation, högerklick = din station. 3) Välj band. 4) Skriv in bomlängden och lobelevationen för din antenn. 5) Tryck på Beräkna: statusfältet bekräftar "Sträcka beräknad: ... km, ... reflexionspunkter samplade".
+TAG|NOTA|Inställningarna sparas i data/config.ini när programmet stängs och vid varje beräkning: vid nästa start hittar du samma sträcka.
+H1|5. Prognosberäkning
+P|Den första underfliken i gruppen Prognosberäkning visar på en enda skärm var de användbara spåren faller just nu och vart du ska rikta. Allt avser den tidpunkt som valts med datumet och timreglaget.
+H2|5.1 Sammanfattningsraden
+P|Ovanför kartan sammanfattar en rad beräkningen för den tidpunkten: datum och tid, sträckindex (summan av ZHR × effektivitet för de aktiva svärmarna), den mest användbara svärmen med dess ZHR och effektivitet (även i dB i förhållande till DJ5HG:s referens), antalet svärmar över horisonten och den rekommenderade Hot med dess azimut.
+H2|5.2 Kartan i planvy
+P|Till vänster Europakartan sedd ovanifrån (öster till höger), med gradskalan runt om:
+LI|grön linje: den verkliga sträckan mellan de två lokatorerna;
+LI|Hot A och Hot B: de två hot spots på var sida om mittpunkten. Röd = rekommenderad, rosa = utanför antennloben, grå = redan inom loben (med en varning);
+LI|antennlob: sektorn vid -3 dB kring antennens azimut;
+LI|Gräns A och Gräns B, svaga: de yttersta kanterna av den himmel som båda stationerna ser, inte punkter att rikta mot;
+LI|gul linje: den riktning i vilken den valda svärmen (eller den mest gynnsamma) sveper över himlen; orange punkter: de två vinkelräta riktningarna (radiantens azimut ±90°);
+LI|PREV-zoner, ljusa ellipser: där de mest sannolika spåren faller just nu, en på var sida om sträckan.
+P|Vänsterklick på kartan = motstationens lokator, högerklick = din stations lokator; sträckan beräknas om direkt. Teckenförklaringen är en hopfällbar kolumn till höger om kartan. Kryssrutorna ovanför svärmlistan slår på och av Hot-riktningarna, Europakartan och vyn ovanifrån.
+H2|5.3 Svärmlistan
+P|För varje svärm: namn och IMO-kod, ZHR just nu, radiantens azimut och elevation från din station, effektivitet för sträckan, dominerande sida (A eller B), bästa riktning, radiantens uppgång och nedgång. Ett klick på en rad väljer svärmen: den gula linjen och de orange punkterna följer den.
+H2|5.4 Det lilla himlavalvet och beräkningstexten
+P|Radianterna sedda från din station, med IMO-koden och den dagliga banan i cyan. Gul = effektivitet minst 50 % och ZHR minst 2; orange = minst 20 %; mörkröd = mindre; grå = nästan inaktiv. Den orange linjen genom zenit ger de rätta antennriktningarna, vinkelräta mot svärmens förflyttning. Bredvid beräkningstexten: sträcka, mittpunkt, rekommenderad Hot med andelen förväntade reflexioner, gränser för den gemensamma zonen.
+H2|5.5 Tvärsnittet
+P|Nere till höger de mest sannolika spåren sedda från antennen mot motstationen: horisontellt azimut relativt motstationen (A till vänster, B till höger), vertikalt elevationen. Varje spår är en sträcka orienterad mot radianten, tjockare ju mer sannolikt det är. Antennloben, motstationen och Hot-punkterna är också inritade.
+H2|5.6 Varningarna
+LI|VARNING: Hot A (eller Hot B) ligger inom antennloben: med den här riktningen täcks den hot spot redan.
+LI|RADIANTEN FÖR HÖGT: en användbar radiant står över 70°; spåren faller nästan lodrätt och reflekterar lite mot sträckan.
+LI|LÅG RADIANT LÄNGS STRÄCKAN: den beräknade effektiviteten förblir låg, men med strykande spår i linje med sträckan förutser DJ5HG sällsynta och starka reflexioner: det är värt att lyssna.
+LI|STRÄCKA BORTOM SPÅRETS HORISONT: på spårhöjden ligger mittpunkten under horisonten; varningen anger vilken höjd som skulle behövas.
+LI|INGEN GEMENSAM ZON: ingen punkt i skiktet är synlig från båda stationerna; varningen anger hur mycket som fattas och vad som skulle behövas.
+H1|6. Geometri och dämpning
+P|En textrapport över sträckan, som går att markera och kopiera, och till höger diagrammet över antennens elevation som funktion av avståndet till reflexionspunkten, för tre spårhöjder.
+H2|6.1 Uppgifterna på den här fliken
+LI|Effekt W (400), Antennförstärkning dBi (14; samma antenn i båda ändarna), Minsta signal dBm (-130), Spårtäthet q = 10^14 elektroner/m: används för länkbudgeten.
+LI|Spårets initialradie: dubbla ITU-värdet (Stober 2021, försiktig, standard), ITU-R P.843, eller utesluten. Ju större radie, desto större förluster på de höga frekvenserna.
+LI|Pingarnas längd mellan banden: teoretisk λ² (McKinley, SM6FHZ; försiktig, standard) eller observerad (HamSCI MSQP-mätningar av NN4SA, Perseiderna 2026: från 50 till 144 MHz blir pingarna 1,5 gånger kortare i stället för 8).
+H2|6.2 Rapporten
+LI|STRÄCKANS GEOMETRI: stationer och höjder, avstånd, azimut, mittpunkt, spårhöjd, antennelevation mot mittpunkten.
+LI|HOT A / HOT B: lokator, azimut, avvikelse från den direkta riktningen, avstånd och elevation för varje hot spot.
+LI|GRÄNSER FÖR DEN GEMENSAMMA ZONEN: räckvidd på spårhöjd fram till horisonten, antennloben med dess maximum och vertikala bredd, Gräns A och Gräns B; yagins förstärkning och lob.
+LI|STRÄCKDÄMPNING: för mittpunkt, Hot A och Hot B, vid 28, 50, 70, 144, 222 och 432 MHz (spår som korsar sträckans plan, det mest ogynnsamma fallet).
+LI|LÄNKBUDGET: effekt och EIRP, dämpning, signal vid antennen, minsta signal och marginal; det bästa fallet (spår i sträckans plan) och marginalen med OH5IY:s genomsnittliga dämpning.
+LI|EXPERIMENTELLA REGLER MELLAN BANDEN: antal, styrka och längd för reflexionerna i förhållande till 144 MHz; maximal ping enligt IARU; observerad längd från MSQP-mätningarna.
+TAG|NOTA|En positiv marginal betyder att ett genomsnittligt underdenst spår räcker för att klara sträckan med din station; en negativ marginal betyder att det behövs tätare spår eller överdensa meteorer. Det är en uppskattning: referensen är fortfarande erfarenheten på bandet.
+H1|7. Effektivitetsberäkning
+P|Effektiviteten anger i procent hur mycket radiantens läge för en svärm möjliggör reflexioner på din sträcka: 100 % är det mest gynnsamma läget för den sträckan. Den här underfliken visar den timme för timme för dagen i "Beräkningsdatum", med värdena vid varje halvtimme.
+H2|7.1 De fyra rutorna
+LI|DAGENS BÄSTA TID: timmen med högst sträckindex och den dominerande sidan.
+LI|MEST GYNNSAM SVÄRM: den svärm som bidrar mest, med timme, sida och de två bästa riktningarna.
+LI|NU: index och sida under den här timmen och den rekommenderade Hot (endast om den valda dagen är i dag).
+LI|EXPERIMENTELL PROGNOS: förväntade reflexioner per timme nu, om 1 och om 2 timmar (kapitel 8).
+P|När en ruta saknar värden anges varför: ingen gemensam zon, ingen aktiv svärm eller ogynnsamma radianter hela dagen. Verktygstipset för varje ruta förklarar vad den visar. Under rutorna visas vid behov varningen INGEN GEMENSAM ZON och ett band som förklarar bokstäverna A och B.
+H2|7.2 Beräkningens inställning
+LI|Försiktig (standard): spårhöjd från radarn, normala spår, vinkel β påslagen. Ger de lägsta värdena.
+LI|Som DJ5HG: fast höjd på 102 km, längre spår med låg radiant, vinkel β påslagen; efterliknar programmet QTFGUI.
+LI|Anpassad: väljs automatiskt när du för hand ändrar någon av kryssrutorna eller höjden.
+LI|Längre spår med låg radiant (DJ5HG): med låg radiant faller färre meteorer, men spåren är längre och reflekterar oftare; över cirka 9° tar de två effekterna ut varandra.
+LI|Vinkel β mellan spår och sträcka (fullständig McKinley), i den orange rutan med texten "valet som väger tyngst": påslagen är spår som korsar sträckans plan värda 10-15 dB mindre än spår som ligger i det, och radianter i linje med sträckan dominerar. Avslagen gäller den klassiska regeln: bästa radiant står 15-70° högt och tvärs över sträckan.
+LI|Klassisk dom: lägger under varje svärm till raden "klassisk" med utlåtandet enligt radioamatörernas regel i sträckans mittpunkt: ✗ radiant under horisonten, ◐ marginell (för låg, för hög eller nästan i linje med sträckan), ● bra, ★ utmärkt (tvärs över sträckan). Ändrar inte beräkningen.
+TAG|ATTENZIONE|Vinkeln β ändrar värdena mycket på långa sträckor: JN70CN - JO76QP (1791 km), Geminiderna den 14/12/2026, 98 % med β avslagen och 13 % med β påslagen. De två synsätten har olika källor och en första jämförelse med BRAMS-räkningarna kan inte skilja dem åt: jämför de två fallen med erfarenheten på bandet. Procentsatserna är relativa till radiantens bästa läge för den sträckan; för att jämföra olika sträckor används effektiviteten i dB.
+H2|7.3 Hur mycket du kan lita på siffrorna
+P|De bästa timmarna och sidan är den mest tillförlitliga informationen: de ändras lite med beräkningens inställningar. Procentsatserna däremot beror mycket på valen, framför allt på vinkeln β. Jämförelsen med 181 767 verkliga MSK144-spots på 50 MHz (HamSCI, Perseiderna 11-12 augusti 2025) bekräftar sträckindexets förlopp timme för timme, men visar också att vilket stationspar som hör varandra vid en viss timme framför allt beror på de sporadiska meteorerna och på aktiviteten i luften, som modellen inte innehåller.
+TAG|NOTA|Använd programmet för att välja timme och den sida som du ska vrida antennen mot; läs inte procentsatserna som sannolikheten att förbindelsen lyckas.
+H2|7.4 Diagrammet
+P|För högst fem svärmar: effektiviteten som heldragen linje och DH9GCD:s formel som prickad linje i samma färg; sträckindexet som staplar på den högra skalan. Lokal tid står under UTC-tiden.
+H2|7.5 24-timmarstabellen
+LI|En rad för varje svärm som är aktiv den dagen, 24 kolumner för UTC-timmarna.
+LI|63A: effektivitet 63 %, de flesta reflexionerna från sida A; 41B: sida B; ett tal utan bokstav: under 5 %; tom cell: under 1 %; ↑: radiant över 70° (för högt); varmare färg = högre effektivitet.
+LI|A = till vänster när du tittar från din station mot motstationen (zon Hot A); B = till höger (zon Hot B). Det lönar sig att vrida antennen 10-30° åt den sidan (side-scatter).
+LI|Ljusblå rader DH9GCD %: DH9GCD:s formel för bästa riktning, för jämförelse; den tar inte hänsyn till horisonten eller till loben.
+LI|Rad Σ: sträckindex, summan av ZHR × effektivitet för alla aktiva svärmar.
+LI|Orange rad: den experimentella prognosen för reflexioner per timme, för de timmar då den finns.
+TAG|PROCEDURA|För att välja tid för ett sked: ställ in datumet, titta på raden Σ och rutan DAGENS BÄSTA TID; läs av bokstaven A eller B på raden för den valda svärmen och vrid antennen 10-30° åt den sidan. Håll musen över en cell för att läsa detaljerna om Hot för den timmen.
+H1|8. Experimentella prognoser
+P|Omvandlar räkningarna från radarn i Collm (36,2 MHz) till en uppskattning av reflexioner per timme på ett amatörband (144 MHz som standard, från 28 till 1300 MHz), gör prognosen för de närmaste 24 timmarna för din sträcka och jämför den med en RMOB-observatör. Allt här är experimentellt: siffrorna används för att jämföra timmar och dagar.
+H2|8.1 Reglagen
+LI|Målfrekvens MHz: prognosens frekvens.
+LI|λ^k-exponent (3, SM6FHZ) och Stationsfaktor K (1): regel för frekvensen och korrigering för din station.
+LI|k från populationsindex: föreslår k utifrån populationsindex r för de aktiva svärmarna (GMN, annars IMO; k = 3,75 · log10 r, viktat med ZHR) och ber om bekräftelse innan det tillämpas.
+LI|Läs in RMOB-fil från disk och Härled exponenten från RMOB-filen: läser en månatlig RMOB-fil och härleder k från de timmar som är gemensamma med Collm.
+LI|RMOB-observatör, Hämta RMOB nu och automatisk hämtning var 5:e minut: den automatiska hämtningen är avstängd och får bara slås på med tillstånd från RMOB.
+H2|8.2 Resultaten
+LI|Diagrammet för i går och i dag: meteorer per timme i Collm, värden omräknade till din frekvens och, om de är inlästa, RMOB-räkningarna.
+LI|Prognosen för de närmaste 24 timmarna: samma timme dagen före, korrigerad för förändringen i sträckans svärmindex.
+LI|Tabellen med bedömningen: bra, medel eller dålig i förhållande till medelvärdet över 24 timmar.
+TAG|NOTA|Reflexionernas längd följer valet "Pingarnas längd mellan banden" i Geometri och dämpning; vid forward scatter ökar längden också med sec²φ i sträckans mittpunkt.
+H1|9. Live och realtidsdata
+H2|9.1 Trafik live
+P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteorscattertrafik: för varje förbindelse sträckan i bandets färg (28 brun, 50 grön, 70 cyan, 144 orange, 222 rosa, 432 lila), de två stationerna och molnet av de mest sannolika spåren vid den tiden. Nyss inkomna spots blinkar i en minut.
+LI|Kartradie: 600-3500 km. Spots att visa: senaste 15 eller 30 minuterna, senaste timmen, senaste 3 eller 24 timmarna.
+LI|Ett klick på en sträcka eller på en rad i tabellen markerar förbindelsen och visar molnets centrum, dess höjd och dess storlek.
+H2|9.2 Radarflöde
+P|Timräkningarna av meteorer och spårhöjderna från SKiYMET-radarn i Collm (36,2 MHz) och den senaste bilden från radarn i Sodankylä (36,9 MHz).
+LI|Hämta nu och Automatisk uppdatering av alla källor var 5:e minut: varje källa hämtas på nytt bara om den har ändrats.
+LI|λ-exponent (SM6FHZ): exponent för uppskattningen på ditt band (orange linje på den högra skalan).
+LI|Spårhöjder: histogram med typvärde, medelvärde, median och standardavvikelse; med "från radar" blir typvärdet höjden för alla beräkningar.
+TAG|ATTENZIONE|Om skalan i Collm-diagrammet inte kan läsas visas en orange varning och värdena bör kontrolleras. Utan anslutning använder programmet de senast sparade data, säger det en gång och försöker själv igen var 5:e minut; statusfältet blir rött tills anslutningen är tillbaka.
+H2|9.3 GRAVES-radar
+P|GRAVES sänder CW på 143,050 MHz från Broye-lès-Pesmes (JN27SI). Underfliken behandlar GRAVES → dig som en egen meteorscattersträcka: den beräknar effektivitet, rekommenderad Hot och PREV-zoner, kontrollerar om zonen ligger inom loben och när loben belyser den.
+LI|Nu: återställer beräkningen till realtid. Sätt GRAVES som DX: motstationen blir GRAVES. Lobsekvens: 0,8 s per steg (PE1ITR 2021) eller 3,2 s (2007).
+LI|Korten: ANVÄNDBAR ZON I LOBEN, EFFEKTIVITET FÖR STRÄCKAN GRAVES → DIG NU (med förväntade ekon, experimentellt), STRÄCKA (vart du ska rikta), NÄSTA LOBPASSAGE.
+LI|Den kronologiska rekonstruktionen av dagen och detaljerna för de närmaste sekunderna.
+TAG|PROCEDURA|För att lyssna på GRAVES: USB på 143,049 MHz (ton på cirka 1 kHz), AGC långsam eller avstängd, ljudbandbredd på minst 2,4 kHz; antennen mot den rekommenderade hot spot i kortet STRÄCKA, med låg elevation; datorns klocka synkroniserad. Pingarna är korta streck nära bärvågen i vattenfallet.
+H2|9.4 Datainsamling
+P|Samlar in meteorscatterspots från tre telnetflöden (DX cluster, RBN, DM4X med spots från PSKReporter) och från PSKReporters MQTT-flöde, vart och ett i sin egen underflik, och filtrerar dem.
+LI|Skriv in din anropssignal överst för inloggningen. Varje flöde har värd, port, kommandon efter inloggning, Återanslut, Anslut vid start och en konsol.
+LI|Filtret godkänner spots på de typiska meteorscatterfrekvenserna (50190-50300, 70100-70400, 144290-144399 kHz) eller med ett MS-trafiksätt (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) och kastar de spots som anger en annan utbredning. Fönster och ord kan ändras; vart och ett har sin egen räknare.
+LI|Saknade lokatorer hämtas från CALL3-arkivet; godkända spots hamnar i data/spot_ms, en fil per dag, och på kartan i Trafik live.
+H1|10. Svärmar live och svärmkatalogen
+H2|10.1 Svärmar live
+P|Till vänster flödet och ZHR uppmätta av Global Meteor Network för de aktiva svärmarna, med dagens räkningar från GMN-kamerorna per svärm (en räkning, inte ett flöde: beror på hur många stationer som ser klar himmel); till höger radiantkartorna från CMOR-radarn, även för dagsvärmarna. Filerna hämtas på nytt bara om de har ändrats, högst var 30:e minut, eller med Hämta nu.
+H2|10.2 Svärmar
+P|Katalogen som används av alla beräkningar: svärmarna i IMO:s kalender för 2026 och 2027 plus Antihelionkällan. De svärmar som är aktiva i dag är markerade.
+LI|Kod, namn, aktivitetsperiod, solens longitud vid maximum, nästa maximum (UTC) och dess källa (IMO eller beräknat), radiant, hastighet, populationsindex r, ZHR, typ (visuell eller dagradio).
+LI|k: exponent för frekvensomräkningen utifrån populationsindexet (GMN om det finns, annars IMO).
+LI|IAU MDC: lösningar, Δ radiant, Δλ, Δv: jämförelse med katalogen från IAU Meteor Data Center (publicerade lösningar och skillnaderna mellan programmets katalog och deras median).
+LI|GMN i dag: bekräftade banor i den senaste dagliga filen från Global Meteor Network.
+TAG|NOTA|Katalogen är filen data/sciami.csv och IMO-maxima finns i data/massimi_imo.csv: de kan ändras med en textredigerare. En felaktig rad rapporteras vid start och ignoreras.
+H1|11. Rutkarta
+P|De körda (orange) och bekräftade (gröna, QSL eller LoTW) Maidenhead-rutorna, lästa från ADIF-filen i din logg, på en Europakarta, med en underflik per band: 50, 70, 144, 222 och 432 MHz.
+LI|Läs in ADIF-fil: läser en .adi- eller .adif-fil; en ny fil ersätter den föregående. Rensa minnet: raderar de inlästa rutorna.
+LI|Mushjul = zoom, dra = flytta, musen över en ruta = rutans QSO:n.
+TAG|NOTA|YA-MS ansluter inte till LoTW: exportera ADIF från ditt loggprogram eller från LoTW och läs in den här.
+H1|12. Tekniska dokument
+LI|Bruksanvisning: det här dokumentet.
+LI|Källor: alla programmets källor, med referenser.
+LI|Karta över europeiska radarer: var Collm, Sodankylä, GRAVES och CMOR ligger i förhållande till din station, med himlen sedd från varje radar.
+LI|Förklaring av effektivitetsberäkningen: hur effektiviteten beräknas, steg för steg, med etiketterna KÄLLA, KONTROLL och VAL.
+P|Dokumenten följer gränssnittets språk när översättningen finns, annars är de på italienska. "Exportera till Word (.docx)" sparar en kopia där du vill; "Öppna i Word" öppnar det med standardprogrammet. Beräkningshandboken, med alla ekvationer, finns i mappen doc (italienska) och doc/manuali (övriga språk).
+H1|13. Mappen data och inställningarna
+H2|13.1 De viktigaste filerna
+LI|config.ini: alla inställningar (text, nyckel=värde).
+LI|lingue/: gränssnittets översättningar; mappa/: Europakartan.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: svärmkatalogen och Antihelionkällans läge; regole_sperimentali.csv: reglerna mellan banden.
+LI|flusso_collm.csv, quote_collm.csv: arkiv från radarn i Collm; radar/: senaste bilder, RMOB-filer och data från livekällorna; fonti_radar.csv: källornas adresser, som kan aktiveras en och en.
+LI|cataloghi/: IAU MDC-katalogen; radar/diretta/: GMN- och CMOR-data.
+LI|call3.txt: lokatorarkiv; spot_ms/: insamlade meteorscatterspots; adif_quadrati.csv: rutor från ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de tekniska dokumenten.
+LI|backup/: kopior av filer som ersatts av en uppdatering; aggiornamento/: nedladdat paket (raderas vid omstart).
+H2|13.2 Några nycklar i config.ini
+LI|controlla_aggiornamenti=0: kontrollera inte nya versioner; aggiornamenti_salta: överhoppad version.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: beräkningens kryssrutor.
+LI|raggio_iniziale (0 = dubbla ITU-värdet, 1 = ITU, 2 = utesluten), durata_ping (0 = λ², 1 = observerad).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Ändra config.ini bara när programmet är stängt: när det stängs skriver YA-MS om filen.
+H1|14. Typiska tillvägagångssätt
+H2|14.1 Förbereda ett sked på en svärm
+TAG|PROCEDURA|1) Ställ in de två stationerna och tryck på Beräkna. 2) Kontrollera svärmens nästa maximum i Svärmar. 3) Ange det datumet i Beräkningsdatum. 4) Titta i Effektivitetsberäkning på svärmens rad och raden Σ: välj timmarna med högst effektivitet. 5) Anteckna sidan (A eller B) och vrid antennen 10-30° åt den sidan. 6) Kontrollera länkbudgetens marginal i Geometri och dämpning.
+H2|14.2 Följa en session live
+TAG|PROCEDURA|1) Tryck på Realtid. 2) Följ den rekommenderade Hot och PREV-zonerna i Prognosberäkning; de uppdateras varje minut. 3) Kontrollera i Radarflöde att radarn i Collm räknar meteorer. 4) Titta i Trafik live på vilka som kör och var deras spår faller.
+H2|14.3 Prova stationen med GRAVES
+TAG|PROCEDURA|1) Kontrollera kortet ANVÄNDBAR ZON I LOBEN i GRAVES-radar. 2) Rikta antennen som kortet STRÄCKA anger. 3) Lyssna i USB på 143,049 MHz under fönstren för nästa lobpassage. 4) Jämför pingarna med de förväntade ekona och med RMOB-observatörerna.
+H2|14.4 Kalibrera prognosen med RMOB
+TAG|PROCEDURA|1) Läs i Experimentella prognoser in en månatlig RMOB-fil från en observatör på ditt band. 2) Tryck på Härled exponenten från RMOB-filen och godkänn k om de gemensamma timmarna är tillräckligt många. 3) Ställ in stationsfaktorn K på det föreslagna värdet.
+H1|15. Vanliga problem
+LI|Alla effektiviteter är 0: läs varningen INGEN GEMENSAM ZON. Med "antenndiagram" avslaget sänker du lobelevationen; annars ligger sträckan bortom horisonten på spårhöjden.
+LI|Värdena är mycket lägre än DH9GCD:s eller än en äldre versions: kontrollera kryssrutan för vinkeln β (kapitel 7.2).
+LI|"Ogiltig stationslokator": skriv in en lokator med 4, 6 eller 8 tecken (till exempel JN70CN eller JN70CN83).
+LI|Hot A och Hot B är grå: med antennen mot motstationen ligger de redan inom loben; du behöver inte vrida antennen.
+LI|Europakartan saknas: en anslutning krävs vid första starten; programmet försöker själv igen.
+LI|Texten är för liten eller diagrammen har inget utrymme: använd Typsnitt och knappen Reglage.
+LI|GRAVES lobpassage verkar förskjuten: synkronisera datorns klocka med en NTP-server; lobsekvensen förskjuts ibland av ledningsstationen.
+LI|Linux, kinesisk eller japansk text som små rutor: installera typsnitten Noto CJK.
+H1|16. Kontakt
+P|YA-MS är ett gratis program för radioamatörer, utvecklat av Costantino IC8TEM (Capri). Felrapporter, förslag och jämförelsedata är välkomna: ange operativsystem, version av YA-MS och vad du gjorde. Kod och releaser: github.com/ic8tem/YA-MS. Kontakt: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Den som vill stödja arbetet kan göra det på ko-fi.com/ic8tem.

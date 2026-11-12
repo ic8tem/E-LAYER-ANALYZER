@@ -1,0 +1,233 @@
+TITLE|Manualul de utilizare YA-MS
+SUB|Versiunea 1.8.1 - realizată de Costantino IC8TEM - noiembrie 2026
+H1|1. Introducere
+H2|1.1 La ce folosește YA-MS
+P|YA-MS vă ajută să prevedeți și să urmăriți în direct condițiile de meteor scatter între stația dumneavoastră și un corespondent, de la 28 la 432 MHz. Pentru fiecare roi meteoric activ arată în ce măsură poziția radiantului său favorizează traseul dumneavoastră (eficiența), în ce ore, din ce parte a traseului sosesc reflexiile și încotro este bine să orientați antena. Pe lângă prognoză, afișează datele măsurate în direct: numărătorile radarului meteoric de la Collm, camerele Global Meteor Network, radarul CMOR, emițătorul GRAVES și traficul meteor scatter colectat din clustere și din PSKReporter.
+P|Programul este gratuit, funcționează pe Windows, Linux (inclusiv Raspberry Pi) și macOS și este tradus în 36 de limbi. Nu comandă stația radio și nici rotorul: pentru legătură se folosește programul obișnuit pentru moduri digitale (MSHV, WSJT-X).
+H2|1.2 Cum se citește acest manual
+P|Manualul descrie filele una câte una, începând cu calculul de prognoză. Fiecare capitol spune ce arată fila, ce face fiecare comandă și cum se citesc rezultatele. Capitolul 14 reunește procedurile cele mai obișnuite, capitolul 15 problemele frecvente. Cum se calculează eficiența, cu sursele și verificările, este explicat în documentul „Explicația calculului eficienței”; ecuațiile complete se află în Manualul calculelor (dosarul doc).
+TAG|PROCEDURA|pași de urmat, în ordine.
+TAG|NOTA|informație utilă pentru a înțelege sau a folosi mai bine o funcție.
+TAG|ATTENZIONE|greșeală frecventă, limită a calculului sau comportament de cunoscut.
+P|Numele comenzilor sunt scrise așa cum apar în versiunea în limba română a programului; în celelalte limbi au același loc și aceeași ordine.
+H1|2. Instalare, pornire și actualizări
+H2|2.1 Ce pachet trebuie descărcat
+P|Toate pachetele se află pe pagina de versiuni de pe GitHub (github.com/ic8tem/YA-MS/releases). Nu este nevoie să instalați .NET: este deja inclus în pachet.
+LI|Windows 64 bit: YA-MS-<versione>-windows-x64-setup.exe (instalează în C:\YA-MS, fără drepturi de administrator) sau arhiva zip portabilă, de extras în orice dosar. Pentru Windows pe 32 de biți, aceleași fișiere cu x86.
+LI|Linux (Debian, Ubuntu, Mint): pachetul .deb, de instalat cu sudo apt install ./ya-ms_<versione>_amd64.deb; la prima pornire programul se copiază în ~/YA-MS. Pentru celelalte distribuții, arhiva .tar.gz, de extras și de rulat cu ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 și 500: pachetul raspberry-pi-64bit (Raspberry Pi OS 64 bit) sau raspberry-pi-32bit, în format .tar.gz sau .deb.
+LI|macOS: fișierul .dmg pentru Apple Silicon (M1 și ulterioare) sau pentru Intel, ori app.zip. Trageți YA-MS.app într-un dosar propriu (de exemplu ~/YA-MS): dosarul data se creează lângă aplicație.
+TAG|ATTENZIONE|Windows poate afișa „Windows a protejat PC-ul”: alegeți „Mai multe informații” și apoi „Rulați oricum”. Pe macOS, prima dată, deschideți aplicația cu clic dreapta și „Deschide”. Programul nu este semnat cu un certificat plătit.
+H2|2.2 Prima pornire
+P|La pornire apare pentru câteva secunde ecranul cu Perseidele deasupra telescopului VLT al ESO. La prima pornire YA-MS alege limba sistemului, dacă este una dintre cele 36, altfel italiana; descarcă harta Europei (Natural Earth) în dosarul data/mappa și afișează un traseu de exemplu. Sunt suficiente câteva minute pentru a-l configura pentru stația dumneavoastră (capitolul 4).
+H2|2.3 Dosarul data
+P|Toate setările și toate datele se află într-un singur dosar data lângă program: fără AppData, fără dosare de sistem. Pentru a muta YA-MS pe alt calculator este suficient să copiați dosarul programului împreună cu dosarul său data. Conținutul dosarului este descris în capitolul 13.
+H2|2.4 Actualizări automate
+P|Începând cu versiunea 1.8.0, YA-MS verifică singur pe GitHub, la pornire și cel mult o dată pe zi, dacă a apărut o versiune nouă. Dacă există, apare fereastra „Actualizare disponibilă” cu noutățile și trei butoane:
+LI|Actualizează acum: descarcă pachetul potrivit pentru sistemul dumneavoastră, înlocuiește fișierele programului, păstrează dosarul data și repornește YA-MS. Fișierele programului din dosarul data pe care noua versiune le modifică sunt mai întâi copiate în data/backup/v<versione vecchia>; fișierele dumneavoastră (setări, arhive, spoturi, ADIF) nu sunt atinse.
+LI|Mai târziu: închide fereastra; verificarea se repetă a doua zi.
+LI|Sari peste această versiune: nu mai propune acea versiune la pornire.
+P|Butonul „Actualizări” din dreapta jos, în bara de stare, face aceeași verificare manual, inclusiv pentru o versiune sărită.
+TAG|ATTENZIONE|Actualizarea automată trebuie să poată scrie în dosarul programului. Dacă nu poate (de exemplu un program copiat într-un dosar de sistem), YA-MS vă anunță și vă propune să deschideți pagina de versiuni pentru instalarea manuală. Versiunile până la 1.7.0 nu au această funcție: prima dată actualizarea trebuie făcută manual, instalând peste versiunea anterioară.
+TAG|NOTA|Pentru a nu mai verifica versiunile noi, scrieți controlla_aggiornamenti=0 în fișierul data/config.ini.
+H2|2.5 Fișiere ale programului lipsă
+P|La pornire YA-MS verifică dacă are toate fișierele sale (traduceri, cataloage, documente). Dacă lipsește vreunul, de exemplu după o copiere incompletă, fereastra „Fișiere lipsă” le enumeră și propune „Descarcă fișierele lipsă” de pe GitHub, în aceeași versiune a programului, sau „Continuă fără ele”. Aceeași verificare se repetă la apăsarea butonului „Actualizări”.
+H1|3. Fereastra principală
+H2|3.1 Părțile ferestrei
+LI|Sus, trei rânduri de comenzi valabile pentru toate filele: stații și bandă, stratul E și antenă, ora calculului (capitolul 4).
+LI|Bara filelor principale, cu butonul Comenzi în dreapta, schema de culori (Temă) și limba.
+LI|Sub-filele, pe un rând mai deschis, pentru filele care le au.
+LI|Jos, bara de stare: mesajele calculului, avertismentele privind conexiunea și butonul „Actualizări”.
+H2|3.2 Filele
+LI|Live și date în timp real: Trafic în direct, Flux radar, Radar GRAVES, Colectare date (capitolul 9).
+LI|Calcul de prognoză: Calcul de prognoză, Geometrie și atenuare, Calculul eficienței, Prognoze experimentale (capitolele 5-8).
+LI|Roiuri în direct, Roiuri, Harta pătratelor (capitolele 10-11).
+LI|Documente tehnice, ultima: Manual de utilizare, Surse, Harta radarelor europene, Explicația calculului eficienței (capitolul 12).
+H2|3.3 Limbă, culori, font
+LI|Limba: 36 de limbi. La schimbarea limbii fereastra se reconstruiește în aceeași poziție și pe aceeași filă, fără repornire. Numerele și datele urmează limba aleasă (virgulă zecimală în română, punct în engleză).
+LI|Temă: 12 scheme de culori; Luminos este cea implicită, Noapte și Negru sunt pentru întuneric, Dâră meteorică este stilul original al YA-MS.
+LI|Font (la capătul primului rând de comenzi): mărește tot textul de la 100 la 300 %. Cu fonturi mari, filele trec pe mai multe rânduri.
+LI|Comenzi: pliază și redeschide cele trei rânduri de comenzi, pentru a face loc hărților și graficelor. Alegerea este memorată.
+TAG|NOTA|Aproape fiecare comandă are un balon de ajutor: țineți mouse-ul nemișcat deasupra comenzii pentru a citi la ce servește și din ce sursă provine valoarea implicită.
+H1|4. Configurarea stației și a traseului
+H2|4.1 Rândul 1: stații și bandă
+LI|Locatorul meu și altitudine m: locatorul dumneavoastră Maidenhead (4, 6 sau 8 caractere; se folosește centrul pătratului) și altitudinea stației deasupra nivelului mării.
+LI|Corespondent și altitudine m: locatorul și altitudinea stației cu care doriți să lucrați.
+LI|Bandă MHz: 28, 50, 70, 144, 222 sau 432 MHz. Servește pentru câștigul și lobul antenei, pentru atenuare și bilanț și pentru estimarea fluxului.
+LI|Calculează: recalculează traseul (eșantionarea stratului E, sub o secundă).
+LI|Antenă az: azimutul antenei, întotdeauna spre corespondent.
+H2|4.2 Rândul 2: stratul E și antena
+LI|Altitudine dâre km și de la radar: altitudinea dârelor meteorice. Cu „de la radar” bifat se folosește altitudinea cea mai frecventă măsurată de radarul de la Collm (de obicei 88-90 km); debifați pentru a o scrie manual.
+LI|Elevație lob °: elevația maximului lobului vertical al antenei dumneavoastră. O antenă directivă fixată la 0° are totuși lobul principal la câteva grade deasupra orizontului, din cauza reflexiei pe sol: de obicei 3-8°, în funcție de înălțimea antenei în lungimi de undă.
+LI|diagrama antenei: activată (implicit), punctele de reflexie contează cu câștigul vertical al celor două antene: complet în jurul maximului lobului, din ce în ce mai puțin spre orizont și spre în sus. Dezactivată, elevația lobului este o limită netă: punctele văzute mai jos nu contează.
+LI|Antenă Yagi: boom m: lungimea boom-ului. Alături programul afișează lungimea în lungimi de undă, câștigul (curba DL6WU) și lobul la -3 dB orizontal și vertical. Sub 2 λ estimarea este puțin precisă.
+LI|Hot spot de la punctul de mijloc km și auto (AMS): distanța dintre Hot A și Hot B și punctul de mijloc. Cu „auto (AMS)” bifat urmează tabelul lui J. Richardson citat de DJ5HG (abatere de 13° la 1000 km, 10° peste 1500 km); debifați pentru a scrie manual 30-400 km (MSHV folosește 150 km).
+TAG|ATTENZIONE|Cu „diagrama antenei” dezactivată și lobul la câteva grade, pe un traseu lung cele două stații pot să nu vadă niciun punct comun al stratului: toate eficiențele sunt 0 și apare avertismentul „NICIO ZONĂ COMUNĂ” cu lobul sau altitudinea dârelor care ar fi necesare. Exemplu: JN70CN - JO76QP, 1791 km, lob la 3°, dâre la 88,5 km.
+H2|4.3 Rândul 3: ora calculului
+LI|Ora: ceas UTC.
+LI|Data calculului (UTC): ziua calculului. Este valabilă pentru Calcul de prognoză, pentru tabelul de 24 de ore din Calculul eficienței și pentru cronologia din Radar GRAVES. Implicit este ziua de azi, iar la miezul nopții trece la ziua nouă.
+LI|Ore (de la −12 la +36 h): deplasează momentul calculului, în pași de 15 minute. Alături: „Calcul pentru: acum” sau data și ora alese.
+LI|Timp real: revine la momentul actual.
+H2|4.4 Configurarea propriei stații
+TAG|PROCEDURA|1) Scrieți Locatorul meu și altitudinea. 2) Scrieți locatorul și altitudinea corespondentului sau faceți clic pe harta din Calcul de prognoză: clic stânga = corespondent, clic dreapta = stația dumneavoastră. 3) Alegeți banda. 4) Scrieți lungimea boom-ului și elevația lobului antenei dumneavoastră. 5) Apăsați Calculează: bara de stare confirmă „Traseu calculat: ... km, ... puncte de reflexie eșantionate”.
+TAG|NOTA|Setările se salvează în data/config.ini la închidere și la fiecare calcul: la următoarea pornire regăsiți același traseu.
+H1|5. Calcul de prognoză
+P|Prima sub-filă a grupului Calcul de prognoză arată pe un singur ecran unde cad acum dârele utile și încotro trebuie orientată antena. Totul se referă la momentul ales cu data și cu cursorul orelor.
+H2|5.1 Banda de rezumat
+P|Deasupra hărții, o bandă rezumă calculul pentru acel moment: data și ora, indicele traseului (suma ZHR × eficiență a roiurilor active), roiul cel mai util cu ZHR-ul și eficiența sa (și în dB față de referința DJ5HG), numărul de roiuri deasupra orizontului și Hot-ul recomandat cu azimutul său.
+H2|5.2 Harta în plan
+P|În stânga, harta Europei văzută de sus (estul la dreapta), cu scala gradelor de jur împrejur:
+LI|linia verde: traseul real între cei doi locatori;
+LI|Hot A și Hot B: cele două hot spot-uri de o parte și de alta a punctului de mijloc. Roșu = recomandat, roz = în afara lobului antenei, gri = deja în interiorul lobului (cu un avertisment);
+LI|lobul antenei: sectorul la -3 dB în jurul azimutului antenei;
+LI|Limita A și Limita B, estompate: marginile cele mai îndepărtate ale cerului văzut de ambele stații, nu punctele spre care trebuie orientată antena;
+LI|linia galbenă: direcția în care roiul selectat (sau cel mai favorabil) mătură cerul; punctele portocalii: cele două orientări perpendiculare (azimutul radiantului ±90°);
+LI|zonele PREV, elipse deschise la culoare: unde cad acum dârele cele mai probabile, câte una de fiecare parte a traseului.
+P|Clic stânga pe hartă = locatorul corespondentului, clic dreapta = locatorul stației dumneavoastră; traseul se recalculează imediat. Legenda este o coloană pliabilă în dreapta hărții. Casetele de deasupra listei de roiuri activează și dezactivează direcțiile Hot, harta Europei și vederea de sus.
+H2|5.3 Lista roiurilor
+P|Pentru fiecare roi: numele și codul IMO, ZHR-ul în acest moment, azimutul și elevația radiantului de la stația dumneavoastră, eficiența pentru traseu, latura predominantă (A sau B), orientarea optimă, răsăritul și apusul radiantului. Un clic pe un rând selectează roiul: linia galbenă și punctele portocalii îl urmăresc.
+H2|5.4 Mica boltă cerească și textul calculului
+P|Radianții văzuți de la stația dumneavoastră, cu codul IMO și traiectoria zilnică în cyan. Galben = eficiență de cel puțin 50 % și ZHR de cel puțin 2; portocaliu = cel puțin 20 %; roșu închis = mai puțin; gri = aproape inactiv. Linia portocalie prin zenit dă direcțiile corecte ale antenei, perpendiculare pe deplasarea roiului. Alături, textul calculului: traseul, punctul de mijloc, Hot-ul recomandat cu procentul reflexiilor prevăzute, limitele zonei comune.
+H2|5.5 Secțiunea
+P|În dreapta jos, dârele cele mai probabile văzute de la antenă spre corespondent: pe orizontală azimutul față de corespondent (A la stânga, B la dreapta), pe verticală elevația. Fiecare dâră este un segment orientat spre radiant, cu atât mai gros cu cât este mai probabilă. Sunt desenate și lobul antenei, corespondentul și hot spot-urile.
+H2|5.6 Avertismentele
+LI|ATENȚIE: Hot A (sau Hot B) intră în lobul antenei: cu această orientare acel hot spot este deja acoperit.
+LI|RADIANT PREA SUS: un radiant util este peste 70°; dârele cad aproape vertical și reflectă puțin spre traseu.
+LI|RADIANT JOS DE-A LUNGUL TRASEULUI: eficiența calculată rămâne mică, dar cu dâre razante aliniate cu traseul DJ5HG prevede reflexii rare și puternice: merită să ascultați.
+LI|TRASEU DINCOLO DE ORIZONTUL DÂREI: la altitudinea dârelor punctul de mijloc este sub orizont; avertismentul indică ce altitudine ar fi necesară.
+LI|NICIO ZONĂ COMUNĂ: niciun punct al stratului nu este vizibil de la ambele stații; avertismentul indică cât lipsește și ce ar fi necesar.
+H1|6. Geometrie și atenuare
+P|Un raport text al traseului, care poate fi selectat și copiat, și în dreapta graficul elevației antenei în funcție de distanța până la punctul de reflexie, pentru trei altitudini ale dârelor.
+H2|6.1 Datele acestei file
+LI|Putere W (400), Câștig antenă dBi (14; aceeași antenă la ambele capete), Semnal minim dBm (-130), Densitatea dârei q = 10^14 electroni/m: servesc la bilanțul legăturii.
+LI|Raza inițială a dârei: dublul valorii ITU (Stober 2021, prudent, implicit), ITU-R P.843 sau exclus. Cu cât raza este mai mare, cu atât pierderile sunt mai mari la frecvențele înalte.
+LI|Durata pingurilor între benzi: teoretică λ² (McKinley, SM6FHZ; prudentă, implicită) sau observată (măsurătorile HamSCI MSQP ale lui NN4SA, Perseide 2026: de la 50 la 144 MHz pingurile se scurtează de 1,5 ori în loc de 8).
+H2|6.2 Raportul
+LI|GEOMETRIA TRASEULUI: stațiile și altitudinile, distanța, azimutul, punctul de mijloc, altitudinea dârelor, elevația antenei spre punctul de mijloc.
+LI|HOT A / HOT B: locatorul, azimutul, abaterea de la direcția directă, distanța și elevația fiecărui hot spot.
+LI|LIMITELE ZONEI COMUNE: raza de acțiune la altitudinea dârelor până la orizont, lobul antenei cu maximul și lățimea sa verticală, Limita A și Limita B; câștigul și lobul antenei Yagi.
+LI|ATENUAREA TRASEULUI: pentru punctul de mijloc, Hot A și Hot B, la 28, 50, 70, 144, 222 și 432 MHz (dâră care traversează planul traseului, cazul cel mai defavorabil).
+LI|BILANȚ: puterea și EIRP, atenuarea, semnalul la antenă, semnalul minim și marja; cazul cel mai bun (dâra în planul traseului) și marja cu atenuarea medie după OH5IY.
+LI|REGULI EXPERIMENTALE ÎNTRE BENZI: numărul, intensitatea și durata reflexiilor față de 144 MHz; pingul maxim după IARU; durata observată din măsurătorile MSQP.
+TAG|NOTA|O marjă pozitivă arată că o dâră subdensă medie este suficientă pentru a realiza legătura pe traseu cu stația dumneavoastră; o marjă negativă arată că sunt necesare dâre mai dense sau meteori supradenși. Este o estimare: referința rămâne experiența în bandă.
+H1|7. Calculul eficienței
+P|Eficiența arată, în procente, în ce măsură poziția radiantului unui roi permite reflexii pe traseul dumneavoastră: 100 % este poziția cea mai favorabilă pentru acel traseu. Această sub-filă o afișează oră cu oră pentru ziua din „Data calculului”, cu valorile de la jumătatea fiecărei ore.
+H2|7.1 Cele patru casete
+LI|CEA MAI BUNĂ ORĂ A ZILEI: ora cu indicele traseului cel mai mare și latura predominantă.
+LI|ROIUL CEL MAI FAVORABIL: roiul care contribuie cel mai mult, cu ora, latura și cele două orientări optime.
+LI|ACUM: indicele și latura în această oră și Hot-ul recomandat (numai dacă ziua aleasă este azi).
+LI|PROGNOZĂ EXPERIMENTALĂ: reflexiile pe oră prevăzute acum, peste 1 și peste 2 ore (capitolul 8).
+P|Când o casetă nu are valori, spune de ce: nicio zonă comună, niciun roi activ sau radianți nefavorabili toată ziua. Balonul de ajutor al fiecărei casete explică ce arată. Sub casete, când este cazul, apar avertismentul NICIO ZONĂ COMUNĂ și o bandă care explică literele A și B.
+H2|7.2 Setarea calculului
+LI|Prudentă (implicit): altitudinea dârelor de la radar, dâre normale, unghiul β activat. Dă valorile cele mai mici.
+LI|Ca DJ5HG: altitudine fixă de 102 km, dâre mai lungi cu radiantul jos, unghiul β activat; reproduce programul QTFGUI.
+LI|Personalizată: se selectează singură când modificați manual una dintre casete sau altitudinea.
+LI|Dâre mai lungi cu radiantul jos (DJ5HG): cu radiantul jos cad mai puțini meteori, dar dârele sunt mai lungi și reflectă mai des; peste aproximativ 9° cele două efecte se compensează.
+LI|Unghiul β între dâră și traseu (McKinley complet), în chenarul portocaliu cu textul „alegerea care cântărește cel mai mult”: activată, dârele care traversează planul traseului valorează cu 10-15 dB mai puțin decât cele care se află în el și predomină radianții aliniați cu traseul. Dezactivată, se aplică regula clasică: radiantul cel mai bun este la 15-70° înălțime și transversal față de traseu.
+LI|Verdict clasic: adaugă sub fiecare roi rândul „clasic” cu verdictul regulii radioamatorilor în punctul de mijloc al traseului: ✗ radiant sub orizont, ◐ marginal (prea jos, prea sus sau aproape aliniat cu traseul), ● bun, ★ excelent (transversal față de traseu). Nu schimbă calculul.
+TAG|ATTENZIONE|Unghiul β schimbă mult valorile pe traseele lungi: JN70CN - JO76QP (1791 km), Geminidele din 14.12.2026, 98 % cu β dezactivat și 13 % cu β activat. Cele două teze au surse diferite, iar o primă comparație cu numărătorile BRAMS nu le deosebește: comparați cele două cazuri cu experiența în bandă. Procentele sunt relative la poziția cea mai bună a radiantului pentru acel traseu; pentru a compara trasee diferite se folosește eficiența în dB.
+H2|7.3 Cât de mult să vă încredeți în cifre
+P|Orele cele mai bune și latura sunt informațiile cele mai solide: se schimbă puțin cu setările calculului. Procentele, în schimb, depind mult de alegeri, mai ales de unghiul β. Comparația cu 181 767 de spoturi MSK144 reale pe 50 MHz (HamSCI, Perseidele din 11-12 august 2025) confirmă evoluția orară a indicelui traseului, dar arată și că perechea de stații care se aud la o anumită oră depinde mai ales de meteorii sporadici și de activitatea din eter, pe care modelul nu le conține.
+TAG|NOTA|Folosiți programul pentru a alege ora și latura spre care să rotiți antena; nu citiți procentele ca pe o probabilitate de reușită a legăturii.
+H2|7.4 Graficul
+P|Pentru cel mult cinci roiuri: eficiența ca linie continuă și formula lui DH9GCD ca linie punctată de aceeași culoare; indicele traseului ca bare pe scala din dreapta. Orele locale sunt scrise sub cele UTC.
+H2|7.5 Tabelul de 24 de ore
+LI|Un rând pentru fiecare roi activ în acea zi, 24 de coloane pentru orele UTC.
+LI|63A: eficiență 63 %, majoritatea reflexiilor din latura A; 41B: latura B; un număr fără literă: sub 5 %; celulă goală: sub 1 %; ↑: radiant peste 70° (prea sus); culoare mai caldă = eficiență mai mare.
+LI|A = la stânga privind de la stația dumneavoastră spre corespondent (zona Hot A); B = la dreapta (zona Hot B). Este bine să rotiți antena cu 10-30° spre acea latură (side-scatter).
+LI|Rândurile bleu DH9GCD %: formula direcției optime a lui DH9GCD, pentru comparație; nu ține cont nici de orizont, nici de lob.
+LI|Rândul Σ: indicele traseului, suma ZHR × eficiență a tuturor roiurilor active.
+LI|Rândul portocaliu: prognoza experimentală a reflexiilor pe oră, pentru orele în care există.
+TAG|PROCEDURA|Pentru a alege ora unui sked: setați data, urmăriți rândul Σ și caseta CEA MAI BUNĂ ORĂ A ZILEI; în rândul roiului ales citiți litera A sau B și rotiți antena cu 10-30° spre acea latură. Țineți mouse-ul pe o celulă pentru a citi detaliile Hot-ului din acea oră.
+H1|8. Prognoze experimentale
+P|Transformă numărătorile radarului de la Collm (36,2 MHz) într-o estimare a reflexiilor pe oră pe o bandă de radioamatori (implicit 144 MHz, de la 28 la 1300 MHz), face prognoza pentru următoarele 24 de ore pentru traseul dumneavoastră și o compară cu un observator RMOB. Totul aici este experimental: cifrele servesc la compararea orelor și a zilelor.
+H2|8.1 Comenzile
+LI|Frecvența țintă MHz: frecvența prognozei.
+LI|Exponent λ^k (3, SM6FHZ) și Factor de stație K (1): regula de frecvență și corecția pentru stația dumneavoastră.
+LI|k din indicii de populație: propune k din indicii de populație r ai roiurilor active (GMN, altfel IMO; k = 3,75 · log10 r, ponderat cu ZHR) și cere confirmare înainte de a-l aplica.
+LI|Încarcă fișier RMOB de pe disc și Obține exponentul din fișierul RMOB: citesc un fișier lunar RMOB și obțin k din orele comune cu Collm.
+LI|Observator RMOB, Descarcă RMOB acum și preluare automată la fiecare 5 minute: preluarea automată este dezactivată și trebuie activată numai cu permisiunea RMOB.
+H2|8.2 Rezultatele
+LI|Graficul de ieri și de azi: meteori pe oră la Collm, valorile transpuse pe frecvența dumneavoastră și, dacă sunt încărcate, numărătorile RMOB.
+LI|Prognoza pentru următoarele 24 de ore: aceeași oră din ziua precedentă, corectată cu variația indicelui roiurilor pentru traseu.
+LI|Tabelul cu aprecierea: bun, mediu sau slab față de media celor 24 de ore.
+TAG|NOTA|Durata reflexiilor urmează alegerea „Durata pingurilor între benzi” din Geometrie și atenuare; în forward scatter durata crește și cu sec²φ în punctul de mijloc al traseului.
+H1|9. Live și date în timp real
+H2|9.1 Trafic în direct
+P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot traficul meteor scatter colectat: pentru fiecare legătură, traseul în culoarea benzii (28 maro, 50 verde, 70 cyan, 144 portocaliu, 222 roz, 432 violet), cele două stații și norul dârelor cele mai probabile la acea oră. Spoturile tocmai sosite clipesc timp de un minut.
+LI|Raza hărții: 600-3500 km. Spoturi de afișat: ultimele 15 sau 30 de minute, ultima oră, ultimele 3 sau 24 de ore.
+LI|Un clic pe un traseu sau pe un rând al tabelului evidențiază legătura și arată centrul norului, altitudinea și dimensiunile sale.
+H2|9.2 Flux radar
+P|Numărătorile orare ale meteorilor și altitudinile dârelor de la radarul SKiYMET de la Collm (36,2 MHz) și ultima imagine a radarului de la Sodankylä (36,9 MHz).
+LI|Descarcă acum și Actualizare automată a tuturor surselor la fiecare 5 minute: fiecare sursă este descărcată din nou numai dacă s-a schimbat.
+LI|Exponent λ (SM6FHZ): exponentul estimării pentru banda dumneavoastră (linia portocalie pe scala din dreapta).
+LI|Altitudinile dârelor: histogramă cu modul, media, mediana și abaterea standard; cu „de la radar”, modul devine altitudinea folosită în toate calculele.
+TAG|ATTENZIONE|Dacă scala graficului de la Collm nu poate fi citită, apare un avertisment portocaliu și valorile trebuie verificate. Fără conexiune, programul folosește ultimele date salvate, anunță acest lucru o dată și reîncearcă singur la fiecare 5 minute; bara de stare devine roșie până când conexiunea revine.
+H2|9.3 Radar GRAVES
+P|GRAVES emite în CW pe 143,050 MHz de la Broye-lès-Pesmes (JN27SI). Sub-fila tratează traseul GRAVES → dumneavoastră ca pe un traseu meteor scatter separat: calculează eficiența, Hot-ul recomandat și zonele PREV, verifică dacă zona este în interiorul fasciculului și când o iluminează fasciculul.
+LI|Acum: readuce calculul la timpul real. Pune GRAVES ca DX: corespondentul devine GRAVES. Secvența fasciculului: 0,8 s pe pas (PE1ITR 2021) sau 3,2 s (2007).
+LI|Casetele: ZONA UTILĂ ÎN FASCICUL, EFICIENȚA TRASEULUI GRAVES → TU ACUM (cu ecourile așteptate, experimental), TRASEU (încotro să orientați antena), URMĂTOAREA TRECERE A FASCICULULUI.
+LI|Reconstituirea cronologică a zilei și detaliile secundelor următoare.
+TAG|PROCEDURA|Pentru a asculta GRAVES: USB pe 143,049 MHz (ton la circa 1 kHz), AGC lent sau oprit, bandă audio de cel puțin 2,4 kHz; antena spre hot spot-ul recomandat în caseta TRASEU, la elevație mică; ceasul PC-ului sincronizat. Pingurile sunt linii scurte lângă purtătoare în waterfall.
+H2|9.4 Colectare date
+P|Colectează spoturile meteor scatter din trei fluxuri telnet (DX cluster, RBN, DM4X cu spoturile PSKReporter) și din fluxul MQTT al PSKReporter, fiecare în sub-fila sa, și le filtrează.
+LI|Scrieți sus indicativul dumneavoastră pentru login. Fiecare flux are host, port, comenzi după login, Reconectează, Conectează la pornire și o consolă.
+LI|Filtrul acceptă spoturile pe frecvențele tipice pentru meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) sau cu un mod MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) și le respinge pe cele care declară o altă propagare. Ferestrele și cuvintele pot fi modificate; fiecare are propriul contor.
+LI|Locatorii lipsă sunt luați din arhiva CALL3; spoturile acceptate ajung în data/spot_ms, un fișier pe zi, și pe harta din Trafic în direct.
+H1|10. Roiuri în direct și catalogul roiurilor
+H2|10.1 Roiuri în direct
+P|În stânga, fluxul și ZHR-ul măsurate de Global Meteor Network pentru roiurile active, cu numărătorile zilnice ale camerelor GMN pe roi (o numărătoare, nu un flux: depinde de câte stații văd cerul senin); în dreapta, hărțile radianților de la radarul CMOR, inclusiv cele ale roiurilor diurne. Fișierele sunt descărcate din nou numai dacă s-au schimbat, cel mult la fiecare 30 de minute, sau cu Descarcă acum.
+H2|10.2 Roiuri
+P|Catalogul folosit de toate calculele: roiurile din calendarul IMO 2026 și 2027 plus Sursa Antihelion. Roiurile active azi sunt evidențiate.
+LI|Codul, numele, perioada de activitate, longitudinea solară a maximului, următorul maxim (UTC) și sursa sa (IMO sau calculat), radiantul, viteza, indicele de populație r, ZHR, tipul (vizual sau radio diurn).
+LI|k: exponentul transpunerii în frecvență obținut din indicele de populație (GMN dacă este disponibil, altfel IMO).
+LI|IAU MDC: soluții, Δ radiant, Δλ, Δv: comparație cu catalogul IAU Meteor Data Center (soluțiile publicate și diferențele catalogului programului față de mediana lor).
+LI|GMN azi: traiectorii confirmate în ultimul fișier zilnic al Global Meteor Network.
+TAG|NOTA|Catalogul este fișierul data/sciami.csv, iar maximele IMO sunt în data/massimi_imo.csv: pot fi modificate cu un editor de text. Un rând greșit este semnalat la pornire și ignorat.
+H1|11. Harta pătratelor
+P|Pătratele Maidenhead lucrate (portocaliu) și confirmate (verde, QSL sau LoTW) citite din fișierul ADIF al jurnalului dumneavoastră, pe o hartă a Europei, cu o sub-filă pentru fiecare bandă: 50, 70, 144, 222 și 432 MHz.
+LI|Încarcă fișier ADIF: citește un fișier .adi sau .adif; un fișier nou îl înlocuiește pe cel anterior. Șterge memoria: șterge pătratele încărcate.
+LI|Rotița = zoom, tragere = deplasare, mouse deasupra unui pătrat = QSO-urile din acel pătrat.
+TAG|NOTA|YA-MS nu se conectează la LoTW: exportați fișierul ADIF din programul dumneavoastră de jurnal sau din LoTW și încărcați-l aici.
+H1|12. Documente tehnice
+LI|Manual de utilizare: acest document.
+LI|Surse: toate sursele programului, cu referințele.
+LI|Harta radarelor europene: unde se află Collm, Sodankylä, GRAVES și CMOR față de stația dumneavoastră, cu cerul văzut de fiecare radar.
+LI|Explicația calculului eficienței: cum se calculează eficiența, pas cu pas, cu etichetele SURSĂ, VERIFICARE și ALEGERE.
+P|Documentele urmează limba interfeței atunci când traducerea există, altfel sunt în italiană. „Exportă în Word (.docx)” salvează o copie unde doriți; „Deschide în Word” îl deschide cu programul implicit. Manualul calculelor, cu toate ecuațiile, se află în dosarul doc (italiană) și doc/manuali (celelalte limbi).
+H1|13. Dosarul data și setările
+H2|13.1 Fișierele principale
+LI|config.ini: toate setările (text, cheie=valoare).
+LI|lingue/: traducerile interfeței; mappa/: harta Europei.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: catalogul roiurilor și poziția Sursei Antihelion; regole_sperimentali.csv: regulile între benzi.
+LI|flusso_collm.csv, quote_collm.csv: arhivele radarului de la Collm; radar/: ultimele imagini, fișierele RMOB și datele surselor în direct; fonti_radar.csv: adresele surselor, care pot fi activate una câte una.
+LI|cataloghi/: catalogul IAU MDC; radar/diretta/: date GMN și CMOR.
+LI|call3.txt: arhiva locatorilor; spot_ms/: spoturile meteor scatter colectate; adif_quadrati.csv: pătratele din ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: documentele tehnice.
+LI|backup/: copii ale fișierelor înlocuite de o actualizare; aggiornamento/: pachetul descărcat (șters la repornire).
+H2|13.2 Câteva chei din config.ini
+LI|controlla_aggiornamenti=0: nu verifica versiunile noi; aggiornamenti_salta: versiunea sărită.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: casetele calculului.
+LI|raggio_iniziale (0 = dublul valorii ITU, 1 = ITU, 2 = exclus), durata_ping (0 = λ², 1 = observată).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Modificați config.ini numai cu programul închis: la închidere YA-MS îl rescrie.
+H1|14. Proceduri tipice
+H2|14.1 Pregătirea unui sked pe un roi
+TAG|PROCEDURA|1) Setați cele două stații și apăsați Calculează. 2) În Roiuri verificați următorul maxim al roiului. 3) Introduceți acea dată în Data calculului. 4) În Calculul eficienței urmăriți rândul roiului și rândul Σ: alegeți orele cu eficiența cea mai mare. 5) Notați latura (A sau B) și rotiți antena cu 10-30° spre acea latură. 6) În Geometrie și atenuare verificați marja bilanțului.
+H2|14.2 Urmărirea unei sesiuni în direct
+TAG|PROCEDURA|1) Apăsați Timp real. 2) În Calcul de prognoză urmăriți Hot-ul recomandat și zonele PREV, care se actualizează în fiecare minut. 3) În Flux radar verificați că radarul de la Collm numără meteori. 4) În Trafic în direct urmăriți cine lucrează și unde cad dârele lor.
+H2|14.3 Testarea stației cu GRAVES
+TAG|PROCEDURA|1) În Radar GRAVES verificați caseta ZONA UTILĂ ÎN FASCICUL. 2) Orientați antena așa cum indică caseta TRASEU. 3) Ascultați în USB pe 143,049 MHz în ferestrele următoarei treceri a fasciculului. 4) Comparați pingurile cu ecourile așteptate și cu observatorii RMOB.
+H2|14.4 Calibrarea prognozei cu RMOB
+TAG|PROCEDURA|1) În Prognoze experimentale încărcați un fișier RMOB lunar al unui observator pe banda dumneavoastră. 2) Apăsați Obține exponentul din fișierul RMOB și acceptați k dacă orele comune sunt suficiente. 3) Reglați factorul de stație K la valoarea sugerată.
+H1|15. Probleme frecvente
+LI|Toate eficiențele sunt 0: citiți avertismentul NICIO ZONĂ COMUNĂ. Cu „diagrama antenei” dezactivată, coborâți elevația lobului; altfel traseul este dincolo de orizont la altitudinea dârelor.
+LI|Valorile sunt mult mai mici decât cele ale lui DH9GCD sau ale unei versiuni vechi: verificați caseta unghiului β (capitolul 7.2).
+LI|„Locatorul stației nu este valid”: scrieți un locator de 4, 6 sau 8 caractere (de exemplu JN70CN sau JN70CN83).
+LI|Hot A și Hot B sunt gri: cu antena spre corespondent sunt deja în interiorul lobului; nu este nevoie să rotiți antena.
+LI|Lipsește harta Europei: la prima pornire este necesară conexiunea; programul reîncearcă singur.
+LI|Textul este prea mic sau graficele nu au spațiu: folosiți Font și butonul Comenzi.
+LI|Trecerea fasciculului GRAVES pare decalată: sincronizați ceasul PC-ului cu un server NTP; secvența fasciculului este uneori decalată de stația de comandă.
+LI|Linux, text chinezesc sau japonez afișat ca pătrățele: instalați fonturile Noto CJK.
+H1|16. Contact
+P|YA-MS este un program gratuit pentru radioamatori, realizat de Costantino IC8TEM (Capri). Semnalările, propunerile și datele de comparație sunt binevenite: indicați sistemul de operare, versiunea YA-MS și ce ați făcut. Cod și versiuni: github.com/ic8tem/YA-MS. Contact: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Cine dorește să susțină această muncă o poate face pe ko-fi.com/ic8tem.

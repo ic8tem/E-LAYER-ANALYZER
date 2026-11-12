@@ -1,0 +1,233 @@
+TITLE|Panduan penggunaan YA-MS
+SUB|Versi 1.8.1 - disusun oleh Costantino IC8TEM - November 2026
+H1|1. Pendahuluan
+H2|1.1 Untuk apa YA-MS
+P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
+P|Program ini gratis, berjalan di Windows, Linux (termasuk Raspberry Pi) dan macOS, dan diterjemahkan ke dalam 36 bahasa. Program ini tidak mengendalikan radio maupun rotator: untuk melakukan kontak digunakan program mode digital yang biasa (MSHV, WSJT-X).
+H2|1.2 Cara membaca panduan ini
+P|Panduan ini menjelaskan tab satu per satu, dimulai dari perhitungan prakiraan. Setiap bab menjelaskan apa yang ditampilkan tab tersebut, apa fungsi setiap kontrol, dan cara membaca hasilnya. Bab 14 menghimpun prosedur yang paling umum, bab 15 masalah yang sering terjadi. Cara menghitung efisiensi, beserta sumber dan verifikasinya, dijelaskan dalam dokumen "Penjelasan perhitungan efisiensi"; persamaan lengkapnya ada di Manual perhitungan (folder doc).
+TAG|PROCEDURA|langkah-langkah yang harus diikuti, secara berurutan.
+TAG|NOTA|informasi yang berguna untuk memahami atau memakai suatu fungsi dengan lebih baik.
+TAG|ATTENZIONE|kesalahan yang sering terjadi, batas perhitungan, atau perilaku yang perlu diketahui.
+P|Nama-nama kontrol ditulis sebagaimana tampil dalam program berbahasa Indonesia; dalam bahasa lain posisi dan urutannya sama.
+H1|2. Instalasi, menjalankan program, dan pembaruan
+H2|2.1 Paket mana yang diunduh
+P|Semua paket ada di halaman rilis di GitHub (github.com/ic8tem/YA-MS/releases). Anda tidak perlu memasang .NET: sudah tercakup di dalam paket.
+LI|Windows 64 bit: YA-MS-<versi>-windows-x64-setup.exe (memasang ke C:\YA-MS, tanpa hak administrator) atau zip portabel, yang dapat diekstrak ke folder mana saja. Untuk Windows 32 bit, berkas yang sama dengan x86.
+LI|Linux (Debian, Ubuntu, Mint): paket .deb, dipasang dengan sudo apt install ./ya-ms_<versi>_amd64.deb; saat pertama kali dijalankan program menyalin dirinya ke ~/YA-MS. Untuk distribusi lain gunakan .tar.gz, ekstrak lalu jalankan dengan ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 dan 500: paket raspberry-pi-64bit (Raspberry Pi OS 64 bit) atau raspberry-pi-32bit, dalam format .tar.gz atau .deb.
+LI|macOS: berkas .dmg untuk Apple Silicon (M1 dan sesudahnya) atau untuk Intel, atau app.zip. Seret YA-MS.app ke folder milik Anda (misalnya ~/YA-MS): folder data dibuat di samping aplikasi.
+TAG|ATTENZIONE|Windows dapat menampilkan "Windows melindungi PC Anda": pilih "Info selengkapnya" lalu "Tetap jalankan". Di macOS, pada kali pertama, buka aplikasi dengan klik kanan lalu "Buka". Program ini tidak ditandatangani dengan sertifikat berbayar.
+H2|2.2 Saat pertama kali dijalankan
+P|Saat dijalankan, selama beberapa detik muncul layar pembuka bergambar Perseid di atas VLT milik ESO. Saat pertama kali dijalankan, YA-MS memilih bahasa sistem jika termasuk dalam 36 bahasa yang tersedia, jika tidak memilih bahasa Italia; program mengunduh peta Eropa (Natural Earth) ke folder data/mappa dan menampilkan lintasan contoh. Hanya perlu beberapa menit untuk menyesuaikannya dengan stasiun Anda (bab 4).
+H2|2.3 Folder data
+P|Semua pengaturan dan semua data berada dalam satu folder data di samping program: tanpa AppData, tanpa folder sistem. Untuk memindahkan YA-MS ke komputer lain cukup salin folder program beserta folder data-nya. Isi folder ini dijelaskan di bab 13.
+H2|2.4 Pembaruan otomatis
+P|Sejak versi 1.8.0, YA-MS memeriksa sendiri di GitHub, saat dijalankan dan paling banyak sekali sehari, apakah ada versi baru. Jika ada, muncul jendela "Pembaruan tersedia" berisi daftar perubahan dan tiga tombol:
+LI|Perbarui sekarang: mengunduh paket yang sesuai dengan sistem Anda, mengganti berkas program, mempertahankan folder data, lalu menjalankan ulang YA-MS. Berkas program di dalam folder data yang diubah oleh versi baru terlebih dahulu disalin ke data/backup/v<versi lama>; berkas Anda (pengaturan, arsip, spot, ADIF) tidak disentuh.
+LI|Nanti: menutup jendela; pemeriksaan diulang keesokan harinya.
+LI|Lewati versi ini: versi tersebut tidak lagi ditawarkan saat program dijalankan.
+P|Tombol "Pembaruan" di kanan bawah, pada bilah status, melakukan pemeriksaan yang sama secara manual, juga untuk versi yang dilewati.
+TAG|ATTENZIONE|Pembaruan otomatis harus dapat menulis ke folder program. Jika tidak bisa (misalnya program yang disalin ke folder sistem), YA-MS memberi tahu dan menawarkan untuk membuka halaman rilis agar Anda memasang secara manual. Versi hingga 1.7.0 tidak memiliki fungsi ini: pada kali pertama pembaruan harus dilakukan secara manual, dengan memasang di atas versi sebelumnya.
+TAG|NOTA|Agar program tidak lagi memeriksa versi baru, tulis controlla_aggiornamenti=0 di berkas data/config.ini.
+H2|2.5 Berkas program yang hilang
+P|Saat dijalankan, YA-MS memeriksa apakah semua berkasnya ada (terjemahan, katalog, dokumen). Jika ada yang hilang, misalnya setelah penyalinan yang tidak lengkap, jendela "Berkas hilang" menampilkan daftarnya dan menawarkan "Unduh berkas yang hilang" dari GitHub, dalam versi program yang sama, atau "Lanjutkan tanpa itu". Pemeriksaan yang sama diulang dengan menekan "Pembaruan".
+H1|3. Jendela utama
+H2|3.1 Bagian-bagian jendela
+LI|Di atas, tiga baris kontrol yang berlaku untuk semua tab: stasiun dan pita, lapisan E dan antena, waktu perhitungan (bab 4).
+LI|Bilah tab utama, dengan di sebelah kanan tombol Kontrol, skema warna (Tema) dan bahasa.
+LI|Sub-tab, dalam baris yang lebih terang, untuk tab yang memilikinya.
+LI|Di bawah, bilah status: pesan perhitungan, peringatan tentang koneksi, dan tombol "Pembaruan".
+H2|3.2 Tab-tab
+LI|Langsung dan data waktu nyata: Lalu lintas langsung, Fluks radar, Radar GRAVES, Pengumpulan data (bab 9).
+LI|Perhitungan prakiraan: Perhitungan prakiraan, Geometri dan redaman, Perhitungan efisiensi, Prakiraan eksperimental (bab 5-8).
+LI|Hujan meteor langsung, Hujan meteor, Peta kotak (bab 10-11).
+LI|Dokumen teknis, tab terakhir: Panduan penggunaan, Sumber, Peta radar Eropa, Penjelasan perhitungan efisiensi (bab 12).
+H2|3.3 Bahasa, warna, huruf
+LI|Bahasa: 36 bahasa. Saat bahasa diganti, jendela dibangun ulang pada posisi yang sama dan pada tab yang sama, tanpa menjalankan ulang program. Angka dan tanggal mengikuti bahasa yang dipilih (koma desimal dalam bahasa Italia, titik dalam bahasa Inggris).
+LI|Tema: 12 skema warna; Terang adalah bawaan, Malam dan Hitam berguna dalam gelap, Jejak meteor adalah gaya asli YA-MS.
+LI|Huruf (di ujung baris kontrol pertama): memperbesar semua teks dari 100 hingga 300 %. Dengan huruf besar, tab-tab berpindah ke baris baru.
+LI|Kontrol: melipat dan membuka kembali tiga baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
+TAG|NOTA|Hampir setiap kontrol memiliki tooltip: tahan mouse di atas kontrol untuk membaca fungsinya dan dari sumber mana nilai awalnya berasal.
+H1|4. Mengatur stasiun dan lintasan
+H2|4.1 Baris 1: stasiun dan pita
+LI|Locator saya dan ketinggian m: locator Maidenhead Anda (4, 6 atau 8 karakter; yang dipakai adalah pusat kotak) dan ketinggian stasiun di atas permukaan laut.
+LI|Stasiun DX dan ketinggian m: locator dan ketinggian stasiun yang akan dihubungi.
+LI|Pita MHz: 28, 50, 70, 144, 222 atau 432 MHz. Digunakan untuk penguatan dan lobus antena, untuk redaman dan anggaran link, serta untuk estimasi fluks.
+LI|Hitung: menghitung ulang lintasan (pengambilan sampel lapisan E, kurang dari satu detik).
+LI|Az antena: azimut antena, selalu ke arah stasiun DX.
+H2|4.2 Baris 2: lapisan E dan antena
+LI|Ketinggian jejak km dan dari radar: ketinggian jejak meteor. Bila "dari radar" dicentang, digunakan ketinggian yang paling sering diukur oleh radar Collm (biasanya 88-90 km); hapus centang untuk menuliskannya secara manual.
+LI|Elevasi lobus °: elevasi puncak lobus vertikal antena Anda. Antena pengarah yang dipasang pada 0° tetap memiliki lobus utama beberapa derajat di atas cakrawala, karena pantulan dari tanah: biasanya 3-8°, tergantung tinggi antena dalam panjang gelombang.
+LI|pola antena: bila aktif (bawaan), titik-titik pantul diperhitungkan dengan penguatan vertikal kedua antena: penuh di sekitar puncak lobus, makin berkurang ke arah cakrawala dan ke arah atas. Bila nonaktif, elevasi lobus menjadi batas tegas: titik yang terlihat lebih rendah tidak diperhitungkan.
+LI|Antena Yagi: boom m: panjang boom. Di sampingnya program menuliskan panjang dalam panjang gelombang, penguatan (kurva DL6WU) dan lebar lobus -3 dB horizontal dan vertikal. Di bawah 2 λ estimasinya kurang tepat.
+LI|Hot spot dari titik tengah km dan otomatis (AMS): jarak Hot A dan Hot B dari titik tengah. Bila "otomatis (AMS)" dicentang, nilai mengikuti tabel J. Richardson yang dikutip oleh DJ5HG (simpangan 13° pada 1000 km, 10° di atas 1500 km); hapus centang untuk menulis 30-400 km secara manual (MSHV memakai 150 km).
+TAG|ATTENZIONE|Dengan "pola antena" nonaktif dan lobus pada beberapa derajat, pada lintasan panjang kedua stasiun bisa tidak melihat satu pun titik bersama di lapisan: semua efisiensi bernilai 0 dan muncul peringatan "TIDAK ADA ZONA BERSAMA" beserta lobus atau ketinggian jejak yang diperlukan. Contoh: JN70CN - JO76QP, 1791 km, lobus pada 3°, jejak pada 88,5 km.
+H2|4.3 Baris 3: waktu perhitungan
+LI|Jam: jam UTC.
+LI|Tanggal perhitungan (UTC): hari perhitungan. Berlaku untuk Perhitungan prakiraan, untuk tabel 24 jam di Perhitungan efisiensi dan untuk kronologi di Radar GRAVES. Bawaannya hari ini, dan pada tengah malam berpindah ke hari yang baru.
+LI|Jam (−12 hingga +36 h): menggeser saat perhitungan, dengan langkah 15 menit. Di sampingnya: "Perhitungan untuk: sekarang" atau tanggal dan jam yang dipilih.
+LI|Waktu nyata: kembali ke saat ini.
+H2|4.4 Mengatur stasiun Anda
+TAG|PROCEDURA|1) Tulis Locator saya dan ketinggiannya. 2) Tulis locator dan ketinggian stasiun DX, atau klik pada peta di Perhitungan prakiraan: klik kiri = stasiun DX, klik kanan = stasiun Anda. 3) Pilih pita. 4) Tulis panjang boom dan elevasi lobus antena Anda. 5) Tekan Hitung: bilah status mengonfirmasi "Lintasan dihitung: ... km, ... titik pantul disampel".
+TAG|NOTA|Pengaturan disimpan di data/config.ini saat program ditutup dan pada setiap perhitungan: saat dijalankan berikutnya Anda menemukan lintasan yang sama.
+H1|5. Perhitungan prakiraan
+P|Sub-tab pertama dari grup Perhitungan prakiraan menampilkan dalam satu layar di mana jejak yang berguna jatuh saat ini dan ke mana antena diarahkan. Semuanya mengacu pada saat yang dipilih dengan tanggal dan penggeser jam.
+H2|5.1 Strip ringkasan
+P|Di atas peta, sebuah strip merangkum perhitungan untuk saat itu: tanggal dan jam, indeks lintasan (jumlah ZHR × efisiensi hujan meteor aktif), hujan meteor yang paling berguna dengan ZHR dan efisiensinya (juga dalam dB relatif terhadap acuan DJ5HG), jumlah hujan meteor di atas cakrawala, serta Hot disarankan beserta azimutnya.
+H2|5.2 Peta denah
+P|Di kiri, peta Eropa dilihat dari atas (timur di kanan), dengan skala derajat di sekelilingnya:
+LI|garis hijau: lintasan sebenarnya antara kedua locator;
+LI|Hot A dan Hot B: dua hot spot di sisi-sisi titik tengah. Merah = disarankan, merah muda = di luar lobus antena, abu-abu = sudah berada di dalam lobus (dengan peringatan);
+LI|lobus antena: sektor -3 dB di sekitar azimut antena;
+LI|Batas A dan Batas B, samar: tepi terjauh langit yang terlihat dari kedua stasiun, bukan titik yang harus dituju;
+LI|garis kuning: arah hujan meteor yang dipilih (atau yang paling menguntungkan) menyapu langit; titik oranye: dua arah bidik yang tegak lurus (azimut radian ±90°);
+LI|zona PREV, elips terang: tempat jejak yang paling mungkin jatuh saat ini, satu untuk setiap sisi lintasan.
+P|Klik kiri pada peta = locator stasiun DX, klik kanan = locator stasiun Anda; lintasan langsung dihitung ulang. Legenda berupa kolom yang dapat dilipat di sebelah kanan peta. Kotak centang di atas daftar hujan meteor menyalakan dan mematikan arah Hot, peta Eropa, dan tampilan dari atas.
+H2|5.3 Daftar hujan meteor
+P|Untuk setiap hujan meteor: nama dan kode IMO, ZHR saat ini, azimut dan elevasi radian dari stasiun Anda, efisiensi untuk lintasan, sisi dominan (A atau B), arah bidik terbaik, terbit dan terbenam radian. Klik pada sebuah baris untuk memilih hujan meteor tersebut: garis kuning dan titik oranye mengikutinya.
+H2|5.4 Kubah langit kecil dan teks perhitungan
+P|Radian yang terlihat dari stasiun Anda, dengan kode IMO dan lintasan hariannya berwarna sian. Kuning = efisiensi minimal 50 % dan ZHR minimal 2; oranye = minimal 20 %; merah tua = kurang; abu-abu = hampir tidak aktif. Garis oranye melalui zenit memberi arah antena yang tepat, tegak lurus terhadap gerak hujan meteor. Di sampingnya, teks perhitungan: lintasan, titik tengah, Hot disarankan dengan persentase pantulan yang diperkirakan, batas zona bersama.
+H2|5.5 Penampang
+P|Di kanan bawah, jejak yang paling mungkin dilihat dari antena ke arah stasiun DX: secara horizontal azimut relatif terhadap stasiun DX (A di kiri, B di kanan), secara vertikal elevasi. Setiap jejak berupa ruas garis yang mengarah ke radian, makin tebal makin besar kemungkinannya. Lobus antena, stasiun DX, dan Hot juga digambarkan.
+H2|5.6 Peringatan
+LI|PERHATIAN: Hot A (atau Hot B) masuk ke lobus antena: dengan arah ini hot spot tersebut sudah tercakup.
+LI|RADIAN TERLALU TINGGI: sebuah radian yang berguna berada di atas 70°; jejak jatuh hampir vertikal dan sedikit memantul ke arah lintasan.
+LI|RADIAN RENDAH SEARAH LINTASAN: efisiensi terhitung tetap rendah, tetapi dengan jejak landai yang searah lintasan DJ5HG memperkirakan pantulan yang jarang namun kuat: layak didengarkan.
+LI|LINTASAN MELEWATI CAKRAWALA JEJAK: pada ketinggian jejak, titik tengah berada di bawah cakrawala; peringatan menyebutkan ketinggian yang diperlukan.
+LI|TIDAK ADA ZONA BERSAMA: tidak ada titik lapisan yang terlihat dari kedua stasiun; peringatan menyebutkan seberapa banyak kekurangannya dan apa yang diperlukan.
+H1|6. Geometri dan redaman
+P|Laporan tekstual tentang lintasan, yang dapat dipilih dan disalin, dan di kanan grafik elevasi antena sebagai fungsi jarak dari titik pantul, untuk tiga ketinggian jejak.
+H2|6.1 Data pada tab ini
+LI|Daya W (400), Penguatan antena dBi (14; antena yang sama di kedua ujung), Sinyal minimum dBm (-130), Kerapatan jejak q = 10^14 elektron/m: digunakan untuk anggaran link.
+LI|Jari-jari awal jejak: dua kali nilai ITU (Stober 2021, hati-hati, bawaan), ITU-R P.843, atau dikecualikan. Makin besar jari-jarinya, makin besar kerugian pada frekuensi tinggi.
+LI|Durasi ping antarband: teoretis λ² (McKinley, SM6FHZ; hati-hati, bawaan) atau teramati (pengukuran HamSCI MSQP oleh NN4SA, Perseid 2026: dari 50 ke 144 MHz ping memendek 1,5 kali, bukan 8 kali).
+H2|6.2 Laporan
+LI|GEOMETRI LINTASAN: stasiun dan ketinggiannya, jarak, azimut, titik tengah, ketinggian jejak, elevasi antena ke arah titik tengah.
+LI|HOT A / HOT B: locator, azimut, simpangan dari arah langsung, jarak dan elevasi masing-masing hot spot.
+LI|BATAS ZONA BERSAMA: jangkauan pada ketinggian jejak sampai cakrawala, lobus antena dengan puncak dan lebar vertikalnya, Batas A dan Batas B; penguatan dan lobus Yagi.
+LI|REDAMAN LINTASAN: untuk titik tengah, Hot A dan Hot B, pada 28, 50, 70, 144, 222 dan 432 MHz (jejak yang memotong bidang lintasan, kasus paling tidak menguntungkan).
+LI|ANGGARAN LINK: daya dan EIRP, redaman, sinyal di antena, sinyal minimum dan margin; kasus terbaik (jejak di bidang lintasan) dan margin dengan redaman rata-rata OH5IY.
+LI|ATURAN EKSPERIMENTAL ANTARBAND: jumlah, kekuatan dan durasi pantulan relatif terhadap 144 MHz; ping maksimum IARU; durasi teramati dari pengukuran MSQP.
+TAG|NOTA|Margin positif berarti jejak underdense rata-rata sudah cukup untuk menutup lintasan dengan stasiun Anda; margin negatif berarti diperlukan jejak yang lebih rapat atau meteor overdense. Ini adalah estimasi: acuan tetap pengalaman di pita.
+H1|7. Perhitungan efisiensi
+P|Efisiensi menunjukkan, dalam persen, seberapa besar posisi radian suatu hujan meteor memungkinkan pantulan pada lintasan Anda: 100 % adalah posisi paling menguntungkan untuk lintasan itu. Sub-tab ini menampilkannya jam demi jam untuk hari pada "Tanggal perhitungan", dengan nilai di pertengahan setiap jam.
+H2|7.1 Empat panel
+LI|JAM TERBAIK HARI INI: jam dengan indeks lintasan tertinggi dan sisi dominannya.
+LI|HUJAN METEOR PALING MENGUNTUNGKAN: hujan meteor yang paling besar kontribusinya, dengan jam, sisi, dan dua arah bidik terbaik.
+LI|SEKARANG: indeks dan sisi pada jam ini serta Hot disarankan (hanya jika hari yang dipilih adalah hari ini).
+LI|PRAKIRAAN EKSPERIMENTAL: pantulan per jam yang diperkirakan sekarang, 1 jam lagi dan 2 jam lagi (bab 8).
+P|Bila sebuah panel tidak memiliki nilai, panel menjelaskan alasannya: tidak ada zona bersama, tidak ada hujan meteor aktif, atau radian tidak menguntungkan sepanjang hari. Tooltip setiap panel menjelaskan apa yang ditampilkannya. Di bawah panel, bila perlu, muncul peringatan TIDAK ADA ZONA BERSAMA dan sebuah pita yang menjelaskan huruf A dan B.
+H2|7.2 Pengaturan perhitungan
+LI|Hati-hati (bawaan): ketinggian jejak dari radar, jejak normal, sudut β aktif. Memberikan nilai paling rendah.
+LI|Seperti DJ5HG: ketinggian tetap 102 km, jejak lebih panjang saat radian rendah, sudut β aktif; meniru program QTFGUI.
+LI|Kustom: terpilih dengan sendirinya bila Anda mengubah secara manual salah satu kotak atau ketinggian.
+LI|Jejak lebih panjang saat radian rendah (DJ5HG): saat radian rendah jumlah meteor yang jatuh lebih sedikit, tetapi jejaknya lebih panjang dan lebih sering memantul; di atas sekitar 9° kedua efek saling mengimbangi.
+LI|Sudut β antara jejak dan lintasan (McKinley lengkap), di panel oranye bertuliskan "pilihan yang paling berpengaruh": bila aktif, jejak yang memotong bidang lintasan bernilai 10-15 dB lebih rendah daripada yang terletak di dalamnya, dan radian yang searah lintasan mendominasi. Bila nonaktif, berlaku aturan klasik: radian terbaik setinggi 15-70° dan melintang terhadap lintasan.
+LI|Vonis klasik: menambahkan di bawah setiap hujan meteor baris "klasik" dengan vonis aturan radio amatir di titik tengah lintasan: ✗ radian di bawah cakrawala, ◐ marginal (terlalu rendah, terlalu tinggi, atau hampir searah lintasan), ● baik, ★ sangat baik (melintang terhadap lintasan). Tidak mengubah perhitungan.
+TAG|ATTENZIONE|Sudut β sangat mengubah nilai pada lintasan panjang: JN70CN - JO76QP (1791 km), Geminid 14/12/2026, 98 % dengan β nonaktif dan 13 % dengan β aktif. Kedua pandangan memiliki sumber berbeda dan perbandingan pertama dengan hitungan BRAMS tidak membedakannya: bandingkan kedua kasus dengan pengalaman di pita. Persentase bersifat relatif terhadap posisi radian terbaik untuk lintasan tersebut; untuk membandingkan lintasan yang berbeda gunakan efisiensi dalam dB.
+H2|7.3 Seberapa jauh angka dapat dipercaya
+P|Jam terbaik dan sisi adalah informasi yang paling andal: keduanya hanya sedikit berubah dengan pengaturan perhitungan. Sebaliknya, persentase sangat bergantung pada pilihan, terutama sudut β. Perbandingan dengan 181 767 spot MSK144 nyata di 50 MHz (HamSCI, Perseid 11-12 Agustus 2025) mengonfirmasi pola per jam indeks lintasan, tetapi juga menunjukkan bahwa pasangan stasiun mana yang saling mendengar pada jam tertentu terutama bergantung pada meteor sporadis dan aktivitas di udara, yang tidak tercakup dalam model.
+TAG|NOTA|Gunakan program ini untuk memilih jam dan sisi ke mana antena diputar; jangan membaca persentase sebagai peluang keberhasilan kontak.
+H2|7.4 Grafik
+P|Untuk paling banyak lima hujan meteor: efisiensi sebagai garis utuh dan rumus DH9GCD sebagai garis titik-titik dengan warna yang sama; indeks lintasan sebagai batang pada skala kanan. Jam lokal ditulis di bawah jam UTC.
+H2|7.5 Tabel 24 jam
+LI|Satu baris untuk setiap hujan meteor yang aktif pada hari itu, 24 kolom untuk jam UTC.
+LI|63A: efisiensi 63 %, sebagian besar pantulan dari sisi A; 41B: sisi B; angka tanpa huruf: di bawah 5 %; sel kosong: di bawah 1 %; ↑: radian di atas 70° (terlalu tinggi); warna lebih hangat = efisiensi lebih tinggi.
+LI|A = di kiri jika melihat dari stasiun Anda ke arah stasiun DX (zona Hot A); B = di kanan (zona Hot B). Sebaiknya putar antena 10-30° ke sisi tersebut (side-scatter).
+LI|Baris biru muda DH9GCD %: rumus arah terbaik DH9GCD, sebagai pembanding; tidak memperhitungkan cakrawala maupun lobus.
+LI|Baris Σ: indeks lintasan, jumlah ZHR × efisiensi semua hujan meteor aktif.
+LI|Baris oranye: prakiraan eksperimental pantulan per jam, untuk jam-jam yang memilikinya.
+TAG|PROCEDURA|Untuk memilih jam sked: atur tanggal, lihat baris Σ dan panel JAM TERBAIK HARI INI; pada baris hujan meteor yang dipilih baca huruf A atau B dan putar antena 10-30° ke sisi tersebut. Tahan mouse di atas sebuah sel untuk membaca detail Hot pada jam itu.
+H1|8. Prakiraan eksperimental
+P|Mengubah hitungan radar Collm (36,2 MHz) menjadi estimasi pantulan per jam pada pita radio amatir (bawaan 144 MHz, dari 28 hingga 1300 MHz), membuat prakiraan 24 jam ke depan untuk lintasan Anda dan membandingkannya dengan pengamat RMOB. Semua yang ada di sini bersifat eksperimental: angka-angkanya berguna untuk membandingkan jam dan hari.
+H2|8.1 Kontrol
+LI|Frekuensi tujuan MHz: frekuensi prakiraan.
+LI|Eksponen λ^k (3, SM6FHZ) dan Faktor stasiun K (1): aturan frekuensi dan koreksi untuk stasiun Anda.
+LI|k dari indeks populasi: mengusulkan k dari indeks populasi r hujan meteor aktif (GMN, jika tidak ada IMO; k = 3,75 · log10 r, dibobot dengan ZHR) dan meminta konfirmasi sebelum menerapkannya.
+LI|Muat file RMOB dari disk dan Turunkan eksponen dari file RMOB: membaca file bulanan RMOB dan menurunkan k dari jam-jam yang sama dengan Collm.
+LI|Pengamat RMOB, Unduh RMOB sekarang dan pengambilan otomatis setiap 5 menit: pengambilan otomatis nonaktif dan hanya boleh diaktifkan dengan izin RMOB.
+H2|8.2 Hasil
+LI|Grafik kemarin dan hari ini: meteor per jam di Collm, nilai yang dikonversi ke frekuensi Anda dan, jika dimuat, hitungan RMOB.
+LI|Prakiraan 24 jam ke depan: jam yang sama pada hari sebelumnya, dikoreksi menurut perubahan indeks hujan meteor lintasan.
+LI|Tabel dengan penilaian: baik, sedang atau buruk dibandingkan rata-rata 24 jam.
+TAG|NOTA|Durasi pantulan mengikuti pilihan "Durasi ping antarband" di Geometri dan redaman; pada forward scatter durasi juga bertambah dengan sec²φ di titik tengah lintasan.
+H1|9. Langsung dan data waktu nyata
+H2|9.1 Lalu lintas langsung
+P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu lintas meteor scatter yang terkumpul: untuk setiap kontak, lintasan dalam warna pita (28 cokelat, 50 hijau, 70 sian, 144 oranye, 222 merah muda, 432 ungu), kedua stasiun dan awan jejak yang paling mungkin pada jam itu. Spot yang baru tiba berkedip selama satu menit.
+LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 15 atau 30 menit terakhir, satu jam terakhir, 3 atau 24 jam terakhir.
+LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat awan, ketinggian, dan ukurannya.
+H2|9.2 Fluks radar
+P|Hitungan meteor per jam dan ketinggian jejak dari radar SKiYMET di Collm (36,2 MHz) serta gambar terbaru radar Sodankylä (36,9 MHz).
+LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah.
+LI|Eksponen λ (SM6FHZ): eksponen estimasi pada pita Anda (garis oranye pada skala kanan).
+LI|Ketinggian jejak: histogram dengan modus, rata-rata, median dan simpangan baku; dengan "dari radar" modus menjadi ketinggian untuk semua perhitungan.
+TAG|ATTENZIONE|Jika skala grafik Collm tidak dapat dibaca, muncul peringatan oranye dan nilainya perlu diperiksa. Tanpa koneksi, program memakai data terakhir yang tersimpan, memberi tahu sekali, dan mencoba lagi sendiri setiap 5 menit; bilah status menjadi merah sampai koneksi pulih.
+H2|9.3 Radar GRAVES
+P|GRAVES memancar CW pada 143,050 MHz dari Broye-lès-Pesmes (JN27SI). Sub-tab ini memperlakukan GRAVES → Anda sebagai lintasan meteor scatter tersendiri: menghitung efisiensi, Hot disarankan dan zona PREV, memeriksa apakah zona berada di dalam berkas dan kapan berkas menyinarinya.
+LI|Sekarang: mengembalikan perhitungan ke waktu nyata. Jadikan GRAVES sebagai DX: stasiun DX menjadi GRAVES. Urutan berkas: 0,8 s per langkah (PE1ITR 2021) atau 3,2 s (2007).
+LI|Kartu-kartunya: ZONA BERGUNA DALAM BERKAS, EFISIENSI LINTASAN GRAVES → ANDA SEKARANG (dengan gema yang diharapkan, eksperimental), LINTASAN (ke mana mengarahkan antena), LINTASAN BERKAS BERIKUTNYA.
+LI|Rekonstruksi kronologis hari itu dan rincian beberapa detik berikutnya.
+TAG|PROCEDURA|Untuk mendengarkan GRAVES: USB pada 143,049 MHz (nada sekitar 1 kHz), AGC lambat atau mati, lebar pita audio minimal 2,4 kHz; antena ke arah hot spot yang disarankan pada kartu LINTASAN, dengan elevasi rendah; jam PC tersinkronisasi. Ping tampak sebagai garis pendek di dekat pembawa pada waterfall.
+H2|9.4 Pengumpulan data
+P|Mengumpulkan spot meteor scatter dari tiga aliran telnet (DX cluster, RBN, DM4X dengan spot PSKReporter) dan dari aliran MQTT PSKReporter, masing-masing di sub-tabnya sendiri, lalu menyaringnya.
+LI|Tulis callsign Anda di bagian atas untuk login. Setiap aliran memiliki host, port, perintah setelah login, Sambung ulang, Sambung saat mulai, dan sebuah konsol.
+LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) atau dengan mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), dan menolak spot yang menyatakan propagasi lain. Jendela frekuensi dan kata-kata dapat diubah; masing-masing memiliki penghitungnya sendiri.
+LI|Locator yang hilang diambil dari arsip CALL3; spot yang diterima masuk ke data/spot_ms, satu file per hari, dan ke peta Lalu lintas langsung.
+H1|10. Hujan meteor langsung dan katalog hujan meteor
+H2|10.1 Hujan meteor langsung
+P|Di kiri, fluks dan ZHR yang diukur oleh Global Meteor Network untuk hujan meteor aktif, dengan hitungan harian kamera GMN per hujan meteor (sebuah hitungan, bukan fluks: tergantung berapa banyak stasiun yang melihat langit cerah); di kanan, peta radian radar CMOR, termasuk hujan meteor siang hari. Berkas diunduh ulang hanya jika berubah, paling sering setiap 30 menit, atau dengan Unduh sekarang.
+H2|10.2 Hujan meteor
+P|Katalog yang digunakan oleh semua perhitungan: hujan meteor dari kalender IMO 2026 dan 2027 ditambah Sumber Antihelion. Hujan meteor yang aktif hari ini disorot.
+LI|Kode, nama, periode aktivitas, bujur matahari puncak, puncak berikutnya (UTC) dan sumbernya (IMO atau dihitung), radian, kecepatan, indeks populasi r, ZHR, jenis (visual atau radio siang hari).
+LI|k: eksponen konversi frekuensi dari indeks populasi (GMN jika tersedia, jika tidak IMO).
+LI|IAU MDC: solusi, Δ radian, Δλ, Δv: perbandingan dengan katalog IAU Meteor Data Center (solusi yang diterbitkan dan selisih katalog program terhadap mediannya).
+LI|GMN hari ini: lintasan yang terkonfirmasi dalam berkas harian terbaru Global Meteor Network.
+TAG|NOTA|Katalog adalah berkas data/sciami.csv dan puncak IMO ada di data/massimi_imo.csv: keduanya dapat diubah dengan editor teks. Baris yang salah dilaporkan saat program dijalankan dan diabaikan.
+H1|11. Peta kotak
+P|Kotak Maidenhead yang sudah dikerjakan (oranye) dan terkonfirmasi (hijau, QSL atau LoTW) yang dibaca dari berkas ADIF log Anda, pada peta Eropa, dengan satu sub-tab per pita: 50, 70, 144, 222 dan 432 MHz.
+LI|Muat file ADIF: membaca berkas .adi atau .adif; berkas baru menggantikan yang sebelumnya. Hapus memori: menghapus kotak yang sudah dimuat.
+LI|Roda mouse = zoom, seret = geser, mouse di atas kotak = QSO pada kotak itu.
+TAG|NOTA|YA-MS tidak terhubung ke LoTW: ekspor ADIF dari program log Anda atau dari LoTW, lalu muat di sini.
+H1|12. Dokumen teknis
+LI|Panduan penggunaan: dokumen ini.
+LI|Sumber: semua sumber program, dengan referensinya.
+LI|Peta radar Eropa: lokasi Collm, Sodankylä, GRAVES dan CMOR relatif terhadap stasiun Anda, dengan langit yang terlihat dari masing-masing radar.
+LI|Penjelasan perhitungan efisiensi: cara efisiensi dihitung, langkah demi langkah, dengan label SUMBER, PEMERIKSAAN dan PILIHAN.
+P|Dokumen mengikuti bahasa antarmuka bila terjemahannya ada, jika tidak tersedia dalam bahasa Italia. "Ekspor ke Word (.docx)" menyimpan salinannya di tempat yang Anda inginkan; "Buka di Word" membukanya dengan program bawaan. Manual perhitungan, dengan semua persamaan, ada di folder doc (bahasa Italia) dan doc/manuali (bahasa lain).
+H1|13. Folder data dan pengaturan
+H2|13.1 Berkas utama
+LI|config.ini: semua pengaturan (teks, kunci=nilai).
+LI|lingue/: terjemahan antarmuka; mappa/: peta Eropa.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: katalog hujan meteor dan posisi Sumber Antihelion; regole_sperimentali.csv: aturan antarband.
+LI|flusso_collm.csv, quote_collm.csv: arsip radar Collm; radar/: gambar terbaru, berkas RMOB dan data sumber langsung; fonti_radar.csv: alamat sumber, yang dapat diaktifkan satu per satu.
+LI|cataloghi/: katalog IAU MDC; radar/diretta/: data GMN dan CMOR.
+LI|call3.txt: arsip locator; spot_ms/: spot meteor scatter yang terkumpul; adif_quadrati.csv: kotak dari ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: dokumen teknis.
+LI|backup/: salinan berkas yang diganti oleh pembaruan; aggiornamento/: paket yang diunduh (dihapus saat program dijalankan ulang).
+H2|13.2 Beberapa kunci config.ini
+LI|controlla_aggiornamenti=0: tidak memeriksa versi baru; aggiornamenti_salta: versi yang dilewati.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: kotak-kotak perhitungan.
+LI|raggio_iniziale (0 = dua kali nilai ITU, 1 = ITU, 2 = dikecualikan), durata_ping (0 = λ², 1 = teramati).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Ubah config.ini hanya saat program ditutup: ketika ditutup, YA-MS menulisnya ulang.
+H1|14. Prosedur umum
+H2|14.1 Menyiapkan sked pada suatu hujan meteor
+TAG|PROCEDURA|1) Atur kedua stasiun lalu tekan Hitung. 2) Di Hujan meteor periksa puncak berikutnya dari hujan meteor tersebut. 3) Masukkan tanggal itu di Tanggal perhitungan. 4) Di Perhitungan efisiensi lihat baris hujan meteor tersebut dan baris Σ: pilih jam dengan efisiensi tertinggi. 5) Catat sisinya (A atau B) dan putar antena 10-30° ke sisi itu. 6) Di Geometri dan redaman periksa margin anggaran link.
+H2|14.2 Mengikuti sesi secara langsung
+TAG|PROCEDURA|1) Tekan Waktu nyata. 2) Di Perhitungan prakiraan ikuti Hot disarankan dan zona PREV, yang diperbarui setiap menit. 3) Di Fluks radar periksa bahwa radar Collm sedang menghitung meteor. 4) Di Lalu lintas langsung lihat siapa yang sedang aktif dan di mana jejak mereka jatuh.
+H2|14.3 Menguji stasiun dengan GRAVES
+TAG|PROCEDURA|1) Di Radar GRAVES periksa kartu ZONA BERGUNA DALAM BERKAS. 2) Arahkan antena seperti yang ditunjukkan kartu LINTASAN. 3) Dengarkan dalam USB pada 143,049 MHz selama jendela lintasan berkas berikutnya. 4) Bandingkan ping dengan gema yang diharapkan dan dengan pengamat RMOB.
+H2|14.4 Mengkalibrasi prakiraan dengan RMOB
+TAG|PROCEDURA|1) Di Prakiraan eksperimental muat file RMOB bulanan dari seorang pengamat di pita Anda. 2) Tekan Turunkan eksponen dari file RMOB dan terima k jika jam-jam yang sama cukup banyak. 3) Atur faktor stasiun K ke nilai yang disarankan.
+H1|15. Masalah yang sering terjadi
+LI|Semua efisiensi bernilai 0: baca peringatan TIDAK ADA ZONA BERSAMA. Dengan "pola antena" nonaktif, turunkan elevasi lobus; jika tidak, lintasan berada di luar cakrawala pada ketinggian jejak.
+LI|Nilainya jauh lebih rendah daripada nilai DH9GCD atau versi lama: periksa kotak sudut β (bab 7.2).
+LI|"Locator stasiun tidak valid": tulis locator 4, 6 atau 8 karakter (misalnya JN70CN atau JN70CN83).
+LI|Hot A dan Hot B berwarna abu-abu: dengan antena mengarah ke stasiun DX keduanya sudah berada di dalam lobus; antena tidak perlu diputar.
+LI|Peta Eropa tidak ada: diperlukan koneksi saat pertama kali dijalankan; program akan mencoba lagi sendiri.
+LI|Teks terlalu kecil atau grafik tidak punya ruang: gunakan Huruf dan tombol Kontrol.
+LI|Lintasan berkas GRAVES tampak bergeser: sinkronkan jam PC dengan server NTP; urutan berkas kadang digeser oleh stasiun pengendali.
+LI|Linux, teks Tionghoa atau Jepang tampil sebagai kotak-kotak: pasang font Noto CJK.
+H1|16. Kontak
+P|YA-MS adalah program gratis untuk radio amatir, disusun oleh Costantino IC8TEM (Capri). Laporan, usulan, dan data pembanding sangat diharapkan: sebutkan sistem operasi, versi YA-MS, dan apa yang Anda lakukan. Kode dan rilis: github.com/ic8tem/YA-MS. Kontak: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Siapa pun yang ingin mendukung pekerjaan ini dapat melakukannya di ko-fi.com/ic8tem.

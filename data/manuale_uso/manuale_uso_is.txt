@@ -1,0 +1,233 @@
+TITLE|Notendahandbók YA-MS
+SUB|Útgáfa 1.8.1 - umsjón Costantino IC8TEM - nóvember 2026
+H1|1. Inngangur
+H2|1.1 Til hvers YA-MS er
+P|YA-MS hjálpar þér að spá fyrir um og fylgjast í beinni með skilyrðum fyrir meteor scatter milli stöðvarinnar þinnar og mótstöðvar, frá 28 upp í 432 MHz. Fyrir hverja virka loftsteinadrífu segir forritið hversu vel staða geislapunktsins hentar leiðinni þinni (nýtnin), á hvaða tímum, frá hvorri hlið leiðarinnar endurvörpin koma og hvert best er að beina loftnetinu. Við hlið spárinnar sýnir það mæligögn í beinni: talningar loftsteinaratsjárinnar í Collm, myndavélar Global Meteor Network, CMOR-ratsjána, GRAVES-sendinn og meteor scatter-umferðina sem safnað er frá klösunum og frá PSKReporter.
+P|Forritið er ókeypis, keyrir á Windows, Linux (líka Raspberry Pi) og macOS og er þýtt á 36 tungumál. Það stýrir hvorki stöðinni né snúningsmótornum: fyrir sambandið sjálft notar þú venjulega forritið þitt fyrir stafræna hætti (MSHV, WSJT-X).
+H2|1.2 Hvernig á að lesa þessa handbók
+P|Handbókin lýsir flipunum einum af öðrum og byrjar á spáreikningnum. Hver kafli segir hvað flipinn sýnir, hvað hver stýring gerir og hvernig á að lesa niðurstöðurnar. Í kafla 14 eru algengustu verklagsreglurnar, í kafla 15 algeng vandamál. Hvernig nýtnin er reiknuð, með heimildum og prófunum, er útskýrt í skjalinu „Skýring á útreikningi nýtninnar“; heildarjöfnurnar eru í Útreikningahandbókinni (mappan doc).
+TAG|PROCEDURA|skref sem fylgja skal, í réttri röð.
+TAG|NOTA|gagnlegar upplýsingar til að skilja eða nota aðgerð betur.
+TAG|ATTENZIONE|algeng mistök, takmörk útreikningsins eða hegðun sem gott er að þekkja.
+P|Heiti stýringa eru rituð eins og þau birtast í forritinu á íslensku; á hinum tungumálunum eru þær á sama stað og í sömu röð.
+H1|2. Uppsetning, ræsing og uppfærslur
+H2|2.1 Hvaða pakka á að sækja
+P|Allir pakkarnir eru á útgáfusíðunni á GitHub (github.com/ic8tem/YA-MS/releases). Ekki þarf að setja upp .NET: það fylgir þegar með í pakkanum.
+LI|Windows 64 bita: YA-MS-<útgáfa>-windows-x64-setup.exe (setur upp í C:\YA-MS, án stjórnandaréttinda) eða ferðaútgáfan í zip-skrá, sem afþjappa má í hvaða möppu sem er. Fyrir 32 bita Windows sömu skrár með x86.
+LI|Linux (Debian, Ubuntu, Mint): .deb-pakkinn, sem settur er upp með sudo apt install ./ya-ms_<útgáfa>_amd64.deb; við fyrstu ræsingu afritar forritið sig í ~/YA-MS. Fyrir aðrar dreifingar .tar.gz-skráin, sem á að afþjappa og keyra með ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 og 500: pakkinn raspberry-pi-64bit (Raspberry Pi OS 64 bita) eða raspberry-pi-32bit, sem .tar.gz eða .deb.
+LI|macOS: .dmg-skráin fyrir Apple Silicon (M1 og nýrri) eða fyrir Intel, eða app.zip. Dragðu YA-MS.app í eigin möppu (til dæmis ~/YA-MS): mappan data verður til við hlið forritsins.
+TAG|ATTENZIONE|Windows getur birt „Windows verndaði tölvuna þína“: veldu „Frekari upplýsingar“ og síðan „Keyra samt“. Á macOS skaltu í fyrsta skipti opna forritið með hægri músarhnappi og „Opna“. Forritið er ekki undirritað með greiddu skilríki.
+H2|2.2 Fyrsta ræsing
+P|Við ræsingu birtist í nokkrar sekúndur mynd af Persítum yfir VLT-sjónauka ESO. Við fyrstu ræsingu velur YA-MS tungumál kerfisins, ef það er eitt af þessum 36, annars ítölsku; það sækir kort af Evrópu (Natural Earth) í möppuna data/mappa og sýnir dæmi um leið. Það tekur aðeins nokkrar mínútur að stilla það fyrir stöðina þína (kafli 4).
+H2|2.3 Mappan data
+P|Allar stillingar og öll gögn eru í einni möppu, data, við hlið forritsins: engin AppData, engar kerfismöppur. Til að flytja YA-MS á aðra tölvu nægir að afrita forritsmöppuna ásamt möppunni data. Innihaldi möppunnar er lýst í kafla 13.
+H2|2.4 Sjálfvirkar uppfærslur
+P|Frá útgáfu 1.8.0 athugar YA-MS sjálft á GitHub, við ræsingu og í mesta lagi einu sinni á dag, hvort ný útgáfa sé komin. Ef svo er birtist glugginn „Uppfærsla í boði“ með nýjungunum og þremur hnöppum:
+LI|Uppfæra núna: sækir pakkann sem hentar kerfinu þínu, skiptir út skrám forritsins, heldur möppunni data og endurræsir YA-MS. Forritsskrár í möppunni data sem nýja útgáfan breytir eru fyrst afritaðar í data/backup/v<gamla útgáfan>; skrárnar þínar (stillingar, söfn, spot, ADIF) eru ekki snertar.
+LI|Seinna: lokar glugganum; athugunin er endurtekin daginn eftir.
+LI|Sleppa þessari útgáfu: býður ekki aftur upp á þá útgáfu við ræsingu.
+P|Hnappurinn „Uppfærslur“ neðst til hægri, í stöðustikunni, framkvæmir sömu athugun handvirkt, líka fyrir útgáfu sem sleppt var.
+TAG|ATTENZIONE|Sjálfvirka uppfærslan verður að geta skrifað í forritsmöppuna. Ef hún getur það ekki (til dæmis ef forritið var afritað í kerfismöppu) lætur YA-MS vita og býðst til að opna útgáfusíðuna svo þú getir sett upp handvirkt. Útgáfur til og með 1.7.0 hafa ekki þennan eiginleika: í fyrsta skipti þarf að uppfæra handvirkt með því að setja upp yfir fyrri útgáfuna.
+TAG|NOTA|Til að hætta að leita að nýjum útgáfum skaltu skrifa controlla_aggiornamenti=0 í skrána data/config.ini.
+H2|2.5 Forritsskrár sem vantar
+P|Við ræsingu athugar YA-MS hvort allar skrár þess séu til staðar (þýðingar, skrár, skjöl). Ef einhverjar vantar, til dæmis eftir ófullkomna afritun, telur glugginn „Skrár sem vantar“ þær upp og býður upp á „Sækja skrárnar sem vantar“ frá GitHub, í sömu útgáfu og forritið, eða „Halda áfram án“. Sama athugun er endurtekin þegar ýtt er á „Uppfærslur“.
+H1|3. Aðalglugginn
+H2|3.1 Hlutar gluggans
+LI|Efst eru þrjár raðir af stýringum sem gilda fyrir alla flipa: stöðvar og band, E-lag og loftnet, tími útreiknings (kafli 4).
+LI|Stika aðalflipanna, með hnappnum Stýringar, litaþemanu (Þema) og tungumálinu til hægri.
+LI|Undirflipar, í ljósari röð, fyrir þá flipa sem hafa þá.
+LI|Neðst er stöðustikan: skilaboð útreikningsins, viðvaranir um tenginguna og hnappurinn „Uppfærslur“.
+H2|3.2 Fliparnir
+LI|Beint og rauntímagögn: Umferð í beinni, Ratsjárflæði, GRAVES-ratsjá, Gagnasöfnun (kafli 9).
+LI|Spáreikningur: Spáreikningur, Rúmfræði og deyfing, Útreikningur nýtni, Tilraunaspár (kaflar 5-8).
+LI|Drífur í beinni, Drífur, Reitakort (kaflar 10-11).
+LI|Tæknileg skjöl, síðast: Notendahandbók, Heimildir, Kort af evrópskum ratsjám, Skýring á útreikningi nýtninnar (kafli 12).
+H2|3.3 Tungumál, litir, letur
+LI|Tungumál: 36 tungumál. Þegar skipt er um tungumál er glugginn endurbyggður á sama stað og á sama flipa, án endurræsingar. Tölur og dagsetningar fylgja völdu tungumáli (kommu sem tugabrotsmerki á ítölsku, punktur á ensku).
+LI|Þema: 12 litaþemu; Ljóst er sjálfgefið, Nótt og Svart eru ætluð til notkunar í myrkri, Loftsteinaslóð er upprunalegi stíll YA-MS.
+LI|Letur (aftast í fyrstu röð stýringa): stækkar allan texta frá 100 upp í 300 %. Með stóru letri fara fliparnir í fleiri línur.
+LI|Stýringar: fellir saman og opnar aftur raðirnar þrjár af stýringum, til að gefa kortum og gröfum meira rými. Valið er munað.
+TAG|NOTA|Nær allar stýringar hafa skýringartexta: haltu músinni kyrri yfir stýringunni til að lesa til hvers hún er og úr hvaða heimild upphafsgildið kemur.
+H1|4. Stilling stöðvar og leiðar
+H2|4.1 Röð 1: stöðvar og band
+LI|Minn locator og hæð m: Maidenhead-locatorinn þinn (4, 6 eða 8 stafir; miðja reitsins er notuð) og hæð stöðvarinnar yfir sjávarmáli.
+LI|Mótstöð og hæð m: locator og hæð stöðvarinnar sem þú vilt ná sambandi við.
+LI|Band MHz: 28, 50, 70, 144, 222 eða 432 MHz. Notað fyrir mögnun og geisla loftnetsins, fyrir deyfingu og aflreikning og fyrir mat á flæðinu.
+LI|Reikna: endurreiknar leiðina (úrtak úr E-laginu, innan við sekúnda).
+LI|Loftnet az: stefnuhorn loftnetsins, alltaf í átt að mótstöðinni.
+H2|4.2 Röð 2: E-lag og loftnet
+LI|Hæð slóða km og frá ratsjá: hæð loftsteinaslóðanna. Þegar hakað er við „frá ratsjá“ er notuð algengasta hæðin sem Collm-ratsjáin mælir (venjulega 88-90 km); taktu hakið af til að slá hana inn handvirkt.
+LI|Hæðarhorn geisla °: hæðarhorn hámarks lóðrétta geislans í loftnetinu þínu. Stefnuloftnet sem stillt er á 0° hefur samt aðalgeislann nokkrum gráðum yfir sjóndeildarhring vegna endurvarps frá jörðinni: venjulega 3-8°, eftir hæð loftnetsins í bylgjulengdum.
+LI|geislamynstur loftnets: þegar kveikt er á því (sjálfgefið) gilda endurvarpspunktarnir með lóðréttri mögnun beggja loftnetanna: full í kringum hámark geislans og sífellt minni í átt að sjóndeildarhring og upp á við. Þegar slökkt er á því er hæðarhorn geislans skörp mörk: punktar sem sjást neðar teljast ekki með.
+LI|Yagi-loftnet: bóma m: lengd bómunnar. Við hliðina skrifar forritið lengdina í bylgjulengdum, mögnunina (DL6WU-ferillinn) og geislann við -3 dB lárétt og lóðrétt. Undir 2 λ er matið ónákvæmt.
+LI|Heitur blettur frá miðpunkti km og sjálfv. (AMS): fjarlægð Hot A og Hot B frá miðpunktinum. Þegar hakað er við „sjálfv. (AMS)“ er fylgt töflu J. Richardson sem DJ5HG vitnar í (13° frávik við 1000 km, 10° yfir 1500 km); taktu hakið af til að slá inn 30-400 km handvirkt (MSHV notar 150 km).
+TAG|ATTENZIONE|Þegar slökkt er á „geislamynstur loftnets“ og geislinn er nokkrum gráðum ofar geta stöðvarnar tvær á langri leið lent í því að sjá engan sameiginlegan punkt í laginu: öll nýtnigildi verða 0 og viðvörunin „ENGIN SAMEIGINLEG SVÆÐI“ birtist ásamt þeim geisla eða þeirri hæð slóða sem þyrfti. Dæmi: JN70CN - JO76QP, 1791 km, geisli við 3°, slóðir í 88,5 km.
+H2|4.3 Röð 3: tími útreiknings
+LI|Tími: UTC-klukka.
+LI|Dagsetning útreiknings (UTC): dagur útreikningsins. Gildir fyrir Spáreikning, fyrir 24 klukkustunda töfluna í Útreikningi nýtni og fyrir tímalínuna í GRAVES-ratsjá. Sjálfgefið er dagurinn í dag og á miðnætti færist hún yfir á nýja daginn.
+LI|Klukkustundir (−12 til +36 klst.): færir tíma útreikningsins í 15 mínútna skrefum. Við hliðina: „Útreikningur fyrir: núna“ eða valin dagsetning og tími.
+LI|Rauntími: fer aftur á núverandi tíma.
+H2|4.4 Að stilla eigin stöð
+TAG|PROCEDURA|1) Skrifaðu Minn locator og hæðina. 2) Skrifaðu locator og hæð mótstöðvarinnar, eða smelltu á kortið í Spáreikningi: vinstri smellur = mótstöð, hægri smellur = stöðin þín. 3) Veldu bandið. 4) Skrifaðu lengd bómunnar og hæðarhorn geisla loftnetsins þíns. 5) Ýttu á Reikna: stöðustikan staðfestir „Leið reiknuð: ... km, ... endurvarpspunktar teknir í úrtak“.
+TAG|NOTA|Stillingarnar eru vistaðar í data/config.ini þegar forritinu er lokað og við hvern útreikning: við næstu ræsingu finnur þú sömu leið.
+H1|5. Spáreikningur
+P|Fyrsti undirflipinn í hópnum Spáreikningur sýnir á einum skjá hvar nýtilegu slóðirnar falla núna og hvert á að beina loftnetinu. Allt miðast við þann tíma sem valinn er með dagsetningunni og klukkustundasleðanum.
+H2|5.1 Yfirlitsröndin
+P|Fyrir ofan kortið tekur rönd saman útreikninginn fyrir þann tíma: dagsetningu og tíma, leiðarstuðul (summu ZHR × nýtni virku drífanna), gagnlegustu drífuna með ZHR hennar og nýtni (einnig í dB miðað við viðmið DJ5HG), fjölda drífa yfir sjóndeildarhring og Hot sem mælt er með ásamt stefnuhorni þess.
+H2|5.2 Kortið séð ofan frá
+P|Til vinstri er kort af Evrópu séð ofan frá (austur til hægri), með gráðukvarða allan hringinn:
+LI|græn lína: raunveruleg leið milli locatoranna tveggja;
+LI|Hot A og Hot B: heitu blettirnir tveir sitt hvorum megin við miðpunktinn. Rautt = mælt með, bleikt = utan loftnetsgeislans, grátt = þegar innan geislans (með viðvörun);
+LI|loftnetsgeisli: geirinn við -3 dB umhverfis stefnuhorn loftnetsins;
+LI|Mörk A og Mörk B, dauflega dregin: fjarlægustu jaðrar himinsins sem báðar stöðvar sjá, ekki punktar til að beina loftnetinu að;
+LI|gul lína: stefnan sem valda drífan (eða sú hagstæðasta) sópar himininn í; appelsínugulir punktar: stefnurnar tvær hornrétt á hana (stefnuhorn geislapunktsins ±90°);
+LI|PREV-svæði, ljósar sporbaugar: hvar líklegustu slóðirnar falla núna, einn hvorum megin við leiðina.
+P|Vinstri smellur á kortið = locator mótstöðvarinnar, hægri smellur = locator stöðvarinnar þinnar; leiðin er endurreiknuð strax. Skýringarnar eru í samfellanlegum dálki hægra megin við kortið. Gátreitirnir fyrir ofan drífulistann kveikja og slökkva á Hot-stefnunum, korti af Evrópu og sýninni ofan frá.
+H2|5.3 Drífulistinn
+P|Fyrir hverja drífu: heiti og IMO-kóði, ZHR á þessari stundu, stefnuhorn og hæðarhorn geislapunktsins séð frá stöðinni þinni, nýtni fyrir leiðina, ríkjandi hlið (A eða B), besta stefna loftnets, ris og sest geislapunktsins. Smellur á línu velur drífuna: gula línan og appelsínugulu punktarnir fylgja henni.
+H2|5.4 Litla himinhvelfingin og útreikningstextinn
+P|Geislapunktarnir séðir frá stöðinni þinni, með IMO-kóðanum og daglegri braut í blágrænu. Gult = nýtni a.m.k. 50 % og ZHR a.m.k. 2; appelsínugult = a.m.k. 20 %; dökkrautt = minna; grátt = nær óvirk. Appelsínugula línan gegnum hvirfilpunktinn gefur réttu loftnetsstefnurnar, hornrétt á hreyfingu drífunnar. Við hliðina er útreikningstextinn: leið, miðpunktur, Hot sem mælt er með ásamt hlutfalli væntra endurvarpa, mörk sameiginlega svæðisins.
+H2|5.5 Þversniðið
+P|Neðst til hægri eru líklegustu slóðirnar séðar frá loftnetinu í átt að mótstöðinni: lárétt er stefnuhorn miðað við mótstöðina (A til vinstri, B til hægri), lóðrétt hæðarhorn. Hver slóð er línubútur sem snýr að geislapunktinum, þeim mun þykkari sem hún er líklegri. Einnig eru teiknuð loftnetsgeislinn, mótstöðin og Hot-punktarnir.
+H2|5.6 Viðvaranirnar
+LI|VIÐVÖRUN: Hot A (eða Hot B) lendir innan loftnetsgeislans: með þessari stefnu er sá heiti blettur þegar þakinn.
+LI|GEISLAPUNKTUR OF HÁTT: nýtilegur geislapunktur er yfir 70°; slóðirnar falla nærri lóðrétt og endurvarpa litlu í átt að leiðinni.
+LI|LÁGUR GEISLAPUNKTUR Í STEFNU LEIÐARINNAR: reiknuð nýtni er áfram lág, en með láréttum slóðum samsíða leiðinni spáir DJ5HG sjaldgæfum og sterkum endurvörpum: það borgar sig að hlusta.
+LI|LEIÐ HANDAN SJÓNDEILDARHRINGS SLÓÐANNA: í hæð slóðanna er miðpunkturinn undir sjóndeildarhring; viðvörunin segir hvaða hæð þyrfti.
+LI|ENGIN SAMEIGINLEG SVÆÐI: enginn punktur í laginu sést frá báðum stöðvum; viðvörunin segir hversu mikið vantar og hvað þyrfti.
+H1|6. Rúmfræði og deyfing
+P|Textaskýrsla um leiðina, sem hægt er að velja og afrita, og hægra megin graf af hæðarhorni loftnets sem falli af fjarlægð frá endurvarpspunktinum, fyrir þrjár hæðir slóða.
+H2|6.1 Gögn þessa flipa
+LI|Afl W (400), Loftnetsmögnun dBi (14; sama loftnet á báðum endum), Lágmarksmerki dBm (-130), Þéttleiki slóðar q = 10^14 rafeindir/m: notað í aflreikning sambandsins.
+LI|Upphafsgeisli slóðarinnar: tvöfalt ITU-gildi (Stober 2021, varfærið, sjálfgefið), ITU-R P.843, eða undanskilið. Því stærri sem geislinn er, þeim mun meira tapast á háum tíðnum.
+LI|Lengd pinga milli banda: fræðileg λ² (McKinley, SM6FHZ; varfærin, sjálfgefin) eða mæld (HamSCI MSQP-mælingar NN4SA, Persítar 2026: frá 50 til 144 MHz styttast pingin 1,5 sinnum í stað 8).
+H2|6.2 Skýrslan
+LI|RÚMFRÆÐI LEIÐARINNAR: stöðvar og hæðir, fjarlægð, stefnuhorn, miðpunktur, hæð slóða, hæðarhorn loftnets í átt að miðpunktinum.
+LI|HOT A / HOT B: locator, stefnuhorn, frávik frá beinni stefnu, fjarlægð og hæðarhorn hvers heits bletts.
+LI|MÖRK SAMEIGINLEGA SVÆÐISINS: drægni í hæð slóðanna að sjóndeildarhring, loftnetsgeislinn með hámarki sínu og lóðréttri breidd, Mörk A og Mörk B; mögnun og geisli Yagi-loftnetsins.
+LI|LEIÐARDEYFING: fyrir miðpunkt, Hot A og Hot B, við 28, 50, 70, 144, 222 og 432 MHz (slóð sem sker plan leiðarinnar, óhagstæðasta tilvikið).
+LI|AFLREIKNINGUR: afl og EIRP, deyfing, merki við loftnet, lágmarksmerki og vikmörk; besta tilvikið (slóð í plani leiðarinnar) og vikmörkin með meðaldeyfingu OH5IY.
+LI|TILRAUNAREGLUR MILLI TÍÐNISVIÐA: fjöldi, styrkur og lengd endurvarpa miðað við 144 MHz; hámarksping IARU; mæld lengd úr MSQP-mælingunum.
+TAG|NOTA|Jákvæð vikmörk þýða að meðal undirþétt slóð nægir til að ná leiðinni með stöðinni þinni; neikvæð vikmörk þýða að þéttari slóðir eða yfirþéttir loftsteinar eru nauðsynlegir. Þetta er mat: viðmiðið er áfram reynslan á bandinu.
+H1|7. Útreikningur nýtni
+P|Nýtnin segir í prósentum hversu vel staða geislapunkts drífu leyfir endurvörp á leiðinni þinni: 100 % er hagstæðasta staðan fyrir þá leið. Þessi undirflipi sýnir hana klukkustund fyrir klukkustund fyrir daginn í „Dagsetning útreiknings“, með gildunum á miðri hverri klukkustund.
+H2|7.1 Reitirnir fjórir
+LI|BESTI TÍMI DAGSINS: klukkustundin með hæsta leiðarstuðulinn og ríkjandi hlið.
+LI|HAGSTÆÐASTA DRÍFAN: drífan sem leggur mest af mörkum, með klukkustund, hlið og tveimur bestu stefnunum.
+LI|NÚNA: stuðull og hlið á þessari klukkustund og Hot sem mælt er með (aðeins ef valinn dagur er í dag).
+LI|TILRAUNASPÁ: vænt endurvörp á klukkustund núna, eftir 1 og eftir 2 klukkustundir (kafli 8).
+P|Þegar reitur hefur engin gildi segir hann hvers vegna: ekkert sameiginlegt svæði, engin virk drífa eða óhagstæðir geislapunktar allan daginn. Skýringartexti hvers reits útskýrir hvað hann sýnir. Fyrir neðan reitina birtist, þegar þörf er á, viðvörunin ENGIN SAMEIGINLEG SVÆÐI og rönd sem útskýrir bókstafina A og B.
+H2|7.2 Stilling útreikningsins
+LI|Varfærin (sjálfgefin): hæð slóða frá ratsjá, venjulegar slóðir, kveikt á horni β. Gefur lægstu gildin.
+LI|Eins og DJ5HG: föst hæð 102 km, lengri slóðir við lágan geislapunkt, kveikt á horni β; líkir eftir forritinu QTFGUI.
+LI|Sérsniðin: verður sjálfkrafa fyrir valinu þegar þú breytir handvirkt einhverjum gátreitanna eða hæðinni.
+LI|Lengri slóðir við lágan geislapunkt (DJ5HG): við lágan geislapunkt falla færri loftsteinar, en slóðirnar eru lengri og endurvarpa oftar; yfir um 9° jafnast áhrifin tvö út.
+LI|Horn β milli slóðar og leiðar (fullur McKinley), í appelsínugula rammanum með textanum „valið sem vegur mest“: þegar kveikt er á því eru slóðir sem skera plan leiðarinnar 10-15 dB veikari en þær sem liggja í því, og geislapunktar í stefnu leiðarinnar ráða ferðinni. Þegar slökkt er á því gildir hefðbundna reglan: besti geislapunkturinn er 15-70° hátt og þvert á leiðina.
+LI|Klassískur dómur: bætir undir hverja drífu línunni „klassískt“ með niðurstöðu reglu radíóamatöra í miðpunkti leiðarinnar: ✗ geislapunktur undir sjóndeildarhring, ◐ á mörkunum (of lágt, of hátt eða nær samsíða leiðinni), ● góður, ★ ágætur (þvert á leiðina). Breytir ekki útreikningnum.
+TAG|ATTENZIONE|Hornið β breytir gildunum mikið á löngum leiðum: JN70CN - JO76QP (1791 km), Geminítar 14/12/2026, 98 % með slökkt á β og 13 % með kveikt á β. Kenningarnar tvær byggja á ólíkum heimildum og fyrsti samanburður við BRAMS-talningar greinir ekki á milli þeirra: berðu tilvikin tvö saman við reynsluna á bandinu. Prósenturnar eru miðaðar við bestu stöðu geislapunktsins fyrir þá leið; til að bera saman ólíkar leiðir er nýtnin í dB notuð.
+H2|7.3 Hversu mikið má treysta tölunum
+P|Bestu tímarnir og hliðin eru traustustu upplýsingarnar: þær breytast lítið með stillingum útreikningsins. Prósenturnar ráðast hins vegar mjög af valinu, einkum af horninu β. Samanburður við 181 767 raunveruleg MSK144-spot á 50 MHz (HamSCI, Persítar 11.-12. ágúst 2025) staðfestir feril leiðarstuðulsins klukkustund fyrir klukkustund, en sýnir einnig að hvaða stöðvapör heyra hvort í öðru á tilteknum tíma ræðst fyrst og fremst af stökum loftsteinum og af virkninni á bandinu, sem líkanið inniheldur ekki.
+TAG|NOTA|Notaðu forritið til að velja tímann og hliðina sem þú snýrð loftnetinu að; lestu prósenturnar ekki sem líkur á því að sambandið takist.
+H2|7.4 Grafið
+P|Fyrir allt að fimm drífur: nýtnin sem heil lína og formúla DH9GCD sem punktalína í sama lit; leiðarstuðullinn sem súlur á kvarðanum til hægri. Staðartími er ritaður undir UTC-tímanum.
+H2|7.5 24 klukkustunda taflan
+LI|Ein lína fyrir hverja drífu sem er virk þann dag, 24 dálkar fyrir UTC-klukkustundirnar.
+LI|63A: nýtni 63 %, flest endurvörp frá hlið A; 41B: hlið B; tala án bókstafs: undir 5 %; tómur reitur: undir 1 %; ↑: geislapunktur yfir 70° (of hátt); hlýrri litur = meiri nýtni.
+LI|A = til vinstri þegar horft er frá stöðinni þinni í átt að mótstöðinni (Hot A-svæðið); B = til hægri (Hot B-svæðið). Gott er að snúa loftnetinu 10-30° í átt að þeirri hlið (side-scatter).
+LI|Ljósbláar línur DH9GCD %: formúla DH9GCD fyrir bestu stefnu, til samanburðar; hún tekur hvorki tillit til sjóndeildarhrings né geisla.
+LI|Lína Σ: leiðarstuðull, summa ZHR × nýtni allra virkra drífa.
+LI|Appelsínugul lína: tilraunaspá um endurvörp á klukkustund, fyrir þær klukkustundir þar sem hún er til.
+TAG|PROCEDURA|Til að velja tíma fyrir sked: stilltu dagsetninguna, skoðaðu línu Σ og reitinn BESTI TÍMI DAGSINS; lestu bókstafinn A eða B í línu valinnar drífu og snúðu loftnetinu 10-30° í átt að þeirri hlið. Haltu músinni yfir reit til að lesa nánari upplýsingar um Hot á þeirri klukkustund.
+H1|8. Tilraunaspár
+P|Breytir talningum Collm-ratsjárinnar (36,2 MHz) í mat á endurvörpum á klukkustund á radíóamatörabandi (144 MHz sjálfgefið, frá 28 upp í 1300 MHz), gerir spá fyrir næstu 24 klukkustundir fyrir leiðina þína og ber hana saman við RMOB-athuganda. Allt hér er á tilraunastigi: tölurnar eru til að bera saman klukkustundir og daga.
+H2|8.1 Stýringarnar
+LI|Markmiðstíðni MHz: tíðni spárinnar.
+LI|Veldisvísir λ^k (3, SM6FHZ) og Stöðvarstuðull K (1): regla um tíðnina og leiðrétting fyrir stöðina þína.
+LI|k úr fjöldastuðlum: leggur til k út frá fjöldastuðlum r virku drífanna (GMN, annars IMO; k = 3,75 · log10 r, vegið með ZHR) og biður um staðfestingu áður en það er notað.
+LI|Hlaða RMOB-skrá af diski og Finna veldisvísinn út frá RMOB-skránni: lesa mánaðarlega RMOB-skrá og finna k út frá klukkustundunum sem eru sameiginlegar með Collm.
+LI|RMOB-athugandi, Sækja RMOB núna og sjálfvirk sókn á 5 mínútna fresti: slökkt er á sjálfvirku sókninni og aðeins má kveikja á henni með leyfi RMOB.
+H2|8.2 Niðurstöðurnar
+LI|Grafið fyrir gærdaginn og daginn í dag: loftsteinar á klukkustund í Collm, gildi færð yfir á tíðnina þína og, ef þær hafa verið hlaðnar, RMOB-talningarnar.
+LI|Spáin fyrir næstu 24 klukkustundir: sama klukkustund daginn áður, leiðrétt fyrir breytingu á drífustuðli leiðarinnar.
+LI|Taflan með matinu: gott, miðlungs eða lélegt miðað við meðaltal 24 klukkustunda.
+TAG|NOTA|Lengd endurvarpanna fylgir valinu „Lengd pinga milli banda“ í Rúmfræði og deyfingu; í forward scatter eykst lengdin einnig með sec²φ í miðpunkti leiðarinnar.
+H1|9. Beint og rauntímagögn
+H2|9.1 Umferð í beinni
+P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þína í miðju og allri meteor scatter-umferð sem safnað hefur verið: fyrir hvert samband er leiðin í lit bandsins (28 brúnt, 50 grænt, 70 blágrænt, 144 appelsínugult, 222 bleikt, 432 fjólublátt), stöðvarnar tvær og ský líklegustu slóðanna á þeim tíma. Nýkomin spot blikka í eina mínútu.
+LI|Radíus korts: 600-3500 km. Spot til að sýna: síðustu 15 eða 30 mínútur, síðasta klukkustund, síðustu 3 eða 24 klukkustundir.
+LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju skýsins, hæð þess og stærð.
+H2|9.2 Ratsjárflæði
+P|Talningar loftsteina á klukkustund og hæðir slóða frá SKiYMET-ratsjánni í Collm (36,2 MHz) og nýjasta myndin frá ratsjánni í Sodankylä (36,9 MHz).
+LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst.
+LI|Veldisvísir λ (SM6FHZ): veldisvísir matsins á þínu bandi (appelsínugul lína á kvarðanum til hægri).
+LI|Hæðir slóða: stuðlarit með tíðasta gildi, meðaltali, miðgildi og staðalfráviki; með „frá ratsjá“ verður tíðasta gildið hæðin í öllum útreikningum.
+TAG|ATTENZIONE|Ef ekki tekst að lesa kvarðann á grafi Collm birtist appelsínugul viðvörun og sannreyna þarf gildin. Án nettengingar notar forritið síðustu vistuðu gögnin, segir frá því einu sinni og reynir sjálft aftur á 5 mínútna fresti; stöðustikan verður rauð þar til tengingin kemst aftur á.
+H2|9.3 GRAVES-ratsjá
+P|GRAVES sendir CW á 143,050 MHz frá Broye-lès-Pesmes (JN27SI). Undirflipinn meðhöndlar GRAVES → þig sem sjálfstæða meteor scatter-leið: hann reiknar nýtni, Hot sem mælt er með og PREV-svæði, athugar hvort svæðið sé innan geislans og hvenær geislinn lýsir það upp.
+LI|Núna: færir útreikninginn aftur í rauntíma. Setja GRAVES sem DX: mótstöðin verður GRAVES. Röð geislans: 0,8 s á skref (PE1ITR 2021) eða 3,2 s (2007).
+LI|Spjöldin: NÝTILEGT SVÆÐI Í GEISLANUM, NÝTNI LEIÐARINNAR GRAVES → ÞÚ NÚNA (með væntum bergmálum, á tilraunastigi), LEIÐ (hvert á að beina loftnetinu), NÆSTA YFIRFERÐ GEISLANS.
+LI|Tímaröð dagsins og nánari upplýsingar um næstu sekúndur.
+TAG|PROCEDURA|Til að hlusta á GRAVES: USB á 143,049 MHz (tónn á um 1 kHz), hæg eða óvirk AGC, hljóðbandbreidd a.m.k. 2,4 kHz; loftnetið að heita blettinum sem mælt er með á spjaldinu LEIÐ, með lágu hæðarhorni; klukka tölvunnar samstillt. Pingin eru stuttar línur nálægt burðarbylgjunni í fossinum (waterfall).
+H2|9.4 Gagnasöfnun
+P|Safnar meteor scatter-spotum úr þremur telnet-straumum (DX-klasi, RBN, DM4X með spotum frá PSKReporter) og úr MQTT-straumi PSKReporter, hverjum í sínum undirflipa, og síar þau.
+LI|Skrifaðu kallmerkið þitt efst til innskráningar. Hver straumur hefur hýsil, gátt, skipanir eftir innskráningu, Tengja aftur, Tengja við ræsingu og stjórnborð.
+LI|Sían tekur við spotum á dæmigerðum tíðnum fyrir meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) eða með MS-hætti (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) og hafnar þeim sem tilgreina aðra útbreiðslu. Gluggum og orðum má breyta; hvert hefur sinn teljara.
+LI|Locatorar sem vantar eru sóttir úr CALL3-safninu; samþykkt spot fara í data/spot_ms, ein skrá á dag, og á kortið í Umferð í beinni.
+H1|10. Drífur í beinni og drífuskrá
+H2|10.1 Drífur í beinni
+P|Til vinstri flæði og ZHR mælt af Global Meteor Network fyrir virku drífurnar, með talningum dagsins frá GMN-myndavélunum fyrir hverja drífu (talning, ekki flæði: hún fer eftir því hve margar stöðvar sjá heiðskíran himin); til hægri kort CMOR-ratsjárinnar af geislapunktum, þar á meðal fyrir dagdrífur. Skrárnar eru aðeins sóttar aftur ef þær hafa breyst, í mesta lagi á 30 mínútna fresti, eða með Sækja núna.
+H2|10.2 Drífur
+P|Skráin sem allir útreikningar nota: drífurnar í dagatali IMO fyrir 2026 og 2027 auk Andsólaruppsprettunnar. Drífur sem eru virkar í dag eru auðkenndar.
+LI|Kóði, heiti, virknitímabil, sólarlengd hámarksins, næsta hámark (UTC) og heimild þess (IMO eða reiknað), geislapunktur, hraði, fjöldastuðull r, ZHR, tegund (sjónræn eða dagdrífa á radíó).
+LI|k: veldisvísir tíðniyfirfærslunnar út frá fjöldastuðlinum (GMN ef til staðar, annars IMO).
+LI|IAU MDC: lausnir, Δ geislapunktur, Δλ, Δv: samanburður við skrá IAU Meteor Data Center (birtar lausnir og frávik drífuskrár forritsins frá miðgildi þeirra).
+LI|GMN í dag: staðfestar brautir í nýjustu daglegu skrá Global Meteor Network.
+TAG|NOTA|Skráin er skráin data/sciami.csv og hámörk IMO eru í data/massimi_imo.csv: breyta má þeim með textaritli. Röng lína er tilkynnt við ræsingu og hunsuð.
+H1|11. Reitakort
+P|Maidenhead-reitir sem unnir hafa verið (appelsínugult) og staðfestir (grænt, QSL eða LoTW), lesnir úr ADIF-skrá dagbókarinnar þinnar, á korti af Evrópu, með einum undirflipa á band: 50, 70, 144, 222 og 432 MHz.
+LI|Hlaða ADIF-skrá: les .adi- eða .adif-skrá; ný skrá kemur í stað þeirrar fyrri. Hreinsa minni: eyðir reitunum sem hlaðið var.
+LI|Músarhjól = aðdráttur, draga = færa, mús yfir reit = QSO-sambönd þess reits.
+TAG|NOTA|YA-MS tengist ekki LoTW: fluttu ADIF-skrána út úr dagbókarforritinu þínu eða frá LoTW og hladdu henni hér.
+H1|12. Tæknileg skjöl
+LI|Notendahandbók: þetta skjal.
+LI|Heimildir: allar heimildir forritsins, með tilvísunum.
+LI|Kort af evrópskum ratsjám: hvar Collm, Sodankylä, GRAVES og CMOR eru miðað við stöðina þína, með himninum eins og hann sést frá hverri ratsjá.
+LI|Skýring á útreikningi nýtninnar: hvernig nýtnin er reiknuð, skref fyrir skref, með merkjunum HEIMILD, ATHUGUN og VAL.
+P|Skjölin fylgja tungumáli viðmótsins þegar þýðing er til, annars eru þau á ítölsku. „Flytja út í Word (.docx)“ vistar afrit hvar sem þú vilt; „Opna í Word“ opnar það með sjálfgefna forritinu. Útreikningahandbókin, með öllum jöfnunum, er í möppunni doc (ítalska) og doc/manuali (hin tungumálin).
+H1|13. Mappan data og stillingarnar
+H2|13.1 Helstu skrárnar
+LI|config.ini: allar stillingar (texti, lykill=gildi).
+LI|lingue/: þýðingar viðmótsins; mappa/: kort af Evrópu.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: drífuskráin og staða Andsólaruppsprettunnar; regole_sperimentali.csv: reglurnar milli banda.
+LI|flusso_collm.csv, quote_collm.csv: söfn Collm-ratsjárinnar; radar/: nýjustu myndir, RMOB-skrár og gögn úr beinum gagnalindum; fonti_radar.csv: vistföng gagnalindanna, sem virkja má eina af annarri.
+LI|cataloghi/: IAU MDC-skráin; radar/diretta/: GMN- og CMOR-gögn.
+LI|call3.txt: locatorasafn; spot_ms/: söfnuð meteor scatter-spot; adif_quadrati.csv: reitir úr ADIF-skránni.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tæknilegu skjölin.
+LI|backup/: afrit af skrám sem uppfærsla skipti út; aggiornamento/: sóttur pakki (eytt við endurræsingu).
+H2|13.2 Nokkrir lyklar í config.ini
+LI|controlla_aggiornamenti=0: ekki leita að nýjum útgáfum; aggiornamenti_salta: útgáfa sem sleppt var.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: gátreitir útreikningsins.
+LI|raggio_iniziale (0 = tvöfalt ITU-gildi, 1 = ITU, 2 = undanskilið), durata_ping (0 = λ², 1 = mæld).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Breyttu config.ini aðeins þegar forritið er lokað: þegar YA-MS er lokað skrifar það skrána upp á nýtt.
+H1|14. Dæmigert verklag
+H2|14.1 Undirbúningur sked á drífu
+TAG|PROCEDURA|1) Stilltu stöðvarnar tvær og ýttu á Reikna. 2) Í Drífum skaltu athuga næsta hámark drífunnar. 3) Settu þá dagsetningu í Dagsetning útreiknings. 4) Í Útreikningi nýtni skaltu skoða línu drífunnar og línu Σ: veldu klukkustundirnar með mestu nýtnina. 5) Skráðu hliðina (A eða B) og snúðu loftnetinu 10-30° í átt að þeirri hlið. 6) Í Rúmfræði og deyfingu skaltu athuga vikmörk aflreikningsins.
+H2|14.2 Að fylgjast með lotu í beinni
+TAG|PROCEDURA|1) Ýttu á Rauntími. 2) Í Spáreikningi skaltu fylgjast með Hot sem mælt er með og PREV-svæðunum, sem uppfærast á hverri mínútu. 3) Í Ratsjárflæði skaltu athuga að Collm-ratsjáin sé að telja loftsteina. 4) Í Umferð í beinni skaltu sjá hverjir eru í sambandi og hvar slóðir þeirra falla.
+H2|14.3 Að prófa stöðina með GRAVES
+TAG|PROCEDURA|1) Í GRAVES-ratsjá skaltu skoða spjaldið NÝTILEGT SVÆÐI Í GEISLANUM. 2) Beindu loftnetinu eins og spjaldið LEIÐ segir til um. 3) Hlustaðu á USB á 143,049 MHz í gluggum næstu yfirferðar geislans. 4) Berðu pingin saman við væntu bergmálin og við RMOB-athugendurna.
+H2|14.4 Að kvarða spána með RMOB
+TAG|PROCEDURA|1) Í Tilraunaspám skaltu hlaða mánaðarlegri RMOB-skrá frá athuganda á þínu bandi. 2) Ýttu á Finna veldisvísinn út frá RMOB-skránni og samþykktu k ef sameiginlegu klukkustundirnar eru nógu margar. 3) Stilltu stöðvarstuðulinn K á gildið sem lagt er til.
+H1|15. Algeng vandamál
+LI|Öll nýtnigildi eru 0: lestu viðvörunina ENGIN SAMEIGINLEG SVÆÐI. Ef slökkt er á „geislamynstur loftnets“ skaltu lækka hæðarhorn geislans; annars er leiðin handan sjóndeildarhrings í hæð slóðanna.
+LI|Gildin eru miklu lægri en hjá DH9GCD eða í eldri útgáfu: athugaðu gátreitinn fyrir hornið β (kafli 7.2).
+LI|„Ógildur locator stöðvar“: skrifaðu locator með 4, 6 eða 8 stöfum (til dæmis JN70CN eða JN70CN83).
+LI|Hot A og Hot B eru grá: þegar loftnetinu er beint að mótstöðinni eru þau þegar innan geislans; ekki þarf að snúa loftnetinu.
+LI|Kort af Evrópu vantar: nettenging þarf við fyrstu ræsingu; forritið reynir sjálft aftur.
+LI|Textinn er of smár eða gröfin hafa ekki pláss: notaðu Letur og hnappinn Stýringar.
+LI|Yfirferð GRAVES-geislans virðist hliðruð: samstilltu klukku tölvunnar við NTP-þjón; stjórnstöðin hliðrar stundum röð geislans.
+LI|Linux, kínverskur eða japanskur texti birtist sem ferningar: settu upp Noto CJK-leturgerðirnar.
+H1|16. Tengiliðir
+P|YA-MS er ókeypis forrit fyrir radíóamatöra, umsjón Costantino IC8TEM (Capri). Villutilkynningar, tillögur og samanburðargögn eru vel þegin: tilgreindu stýrikerfið, útgáfu YA-MS og hvað þú gerðir. Kóði og útgáfur: github.com/ic8tem/YA-MS. Tengiliðir: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Þeir sem vilja styðja verkið geta gert það á ko-fi.com/ic8tem.

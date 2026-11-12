@@ -1,0 +1,233 @@
+TITLE|YA-MS Kullanım Kılavuzu
+SUB|Sürüm 1.8.1 - hazırlayan: Costantino IC8TEM - Kasım 2026
+H1|1. Giriş
+H2|1.1 YA-MS ne işe yarar
+P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
+P|Program ücretsizdir, Windows, Linux (Raspberry Pi dahil) ve macOS üzerinde çalışır ve 36 dile çevrilmiştir. Telsizi veya rotoru kontrol etmez: bağlantı için her zamanki dijital mod programı (MSHV, WSJT-X) kullanılır.
+H2|1.2 Bu kılavuz nasıl okunmalı
+P|Kılavuz, tahmin hesabından başlayarak sekmeleri tek tek anlatır. Her bölüm, sekmenin ne gösterdiğini, her kontrolün ne yaptığını ve sonuçların nasıl okunacağını açıklar. Bölüm 14 en yaygın yordamları, bölüm 15 sık karşılaşılan sorunları toplar. Verimin nasıl hesaplandığı, kaynakları ve doğrulamalarıyla birlikte "Verim hesabının açıklaması" belgesinde anlatılmıştır; denklemlerin tamamı Hesaplamalar Kılavuzu'ndadır (doc klasörü).
+TAG|PROCEDURA|sırasıyla izlenecek adımlar.
+TAG|NOTA|bir işlevi daha iyi anlamak veya kullanmak için yararlı bilgi.
+TAG|ATTENZIONE|sık yapılan hata, hesabın bir sınırı veya bilinmesi gereken bir davranış.
+P|Kontrollerin adları, programın Türkçe arayüzünde göründükleri gibi yazılmıştır; diğer dillerde de aynı yerde ve aynı sıradadırlar.
+H1|2. Kurulum, açılış ve güncellemeler
+H2|2.1 Hangi paket indirilmeli
+P|Tüm paketler GitHub'daki sürümler (release) sayfasındadır (github.com/ic8tem/YA-MS/releases). .NET kurmanıza gerek yoktur: paketin içinde zaten bulunur.
+LI|Windows 64 bit: YA-MS-<sürüm>-windows-x64-setup.exe (yönetici hakları gerekmeden C:\YA-MS konumuna kurar) veya istediğiniz bir klasöre çıkarılacak taşınabilir zip. 32 bit Windows için aynı dosyaların x86 sürümü.
+LI|Linux (Debian, Ubuntu, Mint): sudo apt install ./ya-ms_<sürüm>_amd64.deb ile kurulacak .deb paketi; ilk açılışta program kendini ~/YA-MS konumuna kopyalar. Diğer dağıtımlar için .tar.gz; çıkarıp ./YA-MS ile çalıştırın.
+LI|Raspberry Pi 3, 4, 5, 400 ve 500: raspberry-pi-64bit paketi (Raspberry Pi OS 64 bit) veya raspberry-pi-32bit, .tar.gz ya da .deb olarak.
+LI|macOS: Apple Silicon (M1 ve sonrası) veya Intel için .dmg ya da app.zip. YA-MS.app'i kendinize ait bir klasöre sürükleyin (örneğin ~/YA-MS): data klasörü uygulamanın yanında oluşturulur.
+TAG|ATTENZIONE|Windows "Windows kişisel bilgisayarınızı korudu" iletisini gösterebilir: "Ek bilgi"yi, ardından "Yine de çalıştır"ı seçin. macOS'ta ilk seferde uygulamayı sağ tıklayıp "Aç" ile açın. Program ücretli bir sertifikayla imzalanmamıştır.
+H2|2.2 İlk açılış
+P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i gösteren ekran görünür. İlk açılışta YA-MS, 36 dilden biriyse sistem dilini, değilse İtalyancayı seçer; Avrupa haritasını (Natural Earth) data/mappa klasörüne indirir ve örnek bir yol gösterir. Programı istasyonunuza göre ayarlamak birkaç dakika sürer (bölüm 4).
+H2|2.3 data klasörü
+P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
+H2|2.4 Otomatik güncellemeler
+P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
+LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
+LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
+LI|Bu sürümü atla: o sürümü açılışta bir daha önermez.
+P|Sağ alttaki, durum çubuğunda bulunan "Güncellemeler" düğmesi aynı denetimi elle yapar; atlanmış bir sürüm için de.
+TAG|ATTENZIONE|Otomatik güncellemenin program klasörüne yazabilmesi gerekir. Yazamıyorsa (örneğin bir sistem klasörüne kopyalanmış bir program), YA-MS bunu bildirir ve elle kurmak için sürümler sayfasını açmayı önerir. 1.7.0'a kadarki sürümlerde bu işlev yoktur: ilk seferde güncelleme, önceki sürümün üzerine kurularak elle yapılmalıdır.
+TAG|NOTA|Yeni sürümleri artık denetlememek için data/config.ini dosyasına controlla_aggiornamenti=0 yazın.
+H2|2.5 Eksik program dosyaları
+P|Açılışta YA-MS tüm dosyalarının (çeviriler, kataloglar, belgeler) mevcut olup olmadığını denetler. Bazıları eksikse, örneğin eksik bir kopyalamadan sonra, "Eksik dosyalar" penceresi bunları listeler ve programın aynı sürümünden GitHub'dan "Eksik dosyaları indir" ya da "Onlarsız devam et" seçeneğini sunar. Aynı denetim "Güncellemeler" düğmesine basıldığında yinelenir.
+H1|3. Ana pencere
+H2|3.1 Pencerenin bölümleri
+LI|Üstte, tüm sekmeler için geçerli üç sıra kontrol: istasyonlar ve bant, E katmanı ve anten, hesap zamanı (bölüm 4).
+LI|Ana sekmelerin çubuğu; sağında Kontroller düğmesi, renk şeması (Tema) ve dil.
+LI|Alt sekmeleri olan sekmeler için, daha açık renkli bir sırada alt sekmeler.
+LI|Altta durum çubuğu: hesap iletileri, bağlantı uyarıları ve "Güncellemeler" düğmesi.
+H2|3.2 Sekmeler
+LI|Canlı ve gerçek zamanlı veriler: Canlı trafik, Radar akısı, GRAVES radarı, Veri toplama (bölüm 9).
+LI|Tahmin hesabı: Tahmin hesabı, Geometri ve yol kaybı, Verim hesabı, Deneysel tahminler (bölüm 5-8).
+LI|Canlı yağmurlar, Yağmurlar, Kare haritası (bölüm 10-11).
+LI|Teknik belgeler, en sonda: Kullanım kılavuzu, Kaynaklar, Avrupa radarları haritası, Verim hesabının açıklaması (bölüm 12).
+H2|3.3 Dil, renkler, yazı tipi
+LI|Dil: 36 dil. Dil değiştirildiğinde pencere, yeniden başlatmaya gerek kalmadan aynı konumda ve aynı sekmede yeniden oluşturulur. Sayılar ve tarihler seçilen dili izler (İtalyancada ondalık virgül, İngilizcede nokta).
+LI|Tema: 12 renk şeması; Açık başlangıç şemasıdır, Gece ve Siyah karanlıkta kullanım içindir, Meteor izi YA-MS'in özgün stilidir.
+LI|Yazı tipi (ilk kontrol sırasının sonunda): tüm metni %100'den %300'e kadar büyütür. Büyük yazı tiplerinde sekmeler alt satıra geçer.
+LI|Kontroller: haritalara ve grafiklere yer açmak için üç kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
+TAG|NOTA|Hemen her kontrolün bir ipucu balonu vardır: ne işe yaradığını ve başlangıç değerinin hangi kaynaktan geldiğini okumak için fareyi kontrolün üzerinde tutun.
+H1|4. İstasyonu ve yolu ayarlama
+H2|4.1 Sıra 1: istasyonlar ve bant
+LI|Benim lokatörüm ve rakım m: Maidenhead lokatörünüz (4, 6 veya 8 karakter; karenin merkezi kullanılır) ve istasyonun deniz seviyesinden yüksekliği.
+LI|Karşı istasyon ve rakım m: bağlantı kurulacak istasyonun lokatörü ve rakımı.
+LI|Bant MHz: 28, 50, 70, 144, 222 veya 432 MHz. Anten kazancı ve lobu, yol kaybı ve bağlantı bütçesi ile akı tahmini için kullanılır.
+LI|Hesapla: yolu yeniden hesaplar (E katmanının örneklenmesi, bir saniyeden kısa).
+LI|Anten az: antenin azimutu, her zaman karşı istasyona doğru.
+H2|4.2 Sıra 2: E katmanı ve anten
+LI|İz yüksekliği km ve radardan: meteor izlerinin yüksekliği. "radardan" işaretliyken Collm radarının ölçtüğü en sık yükseklik (genellikle 88-90 km) kullanılır; elle yazmak için işareti kaldırın.
+LI|Lob elevasyonu °: anteninizin dikey lobunun maksimumunun elevasyonu. 0°'ye sabitlenmiş bir yönlü antenin ana lobu bile, zeminden yansıma nedeniyle ufkun birkaç derece üzerindedir: antenin dalga boyu cinsinden yüksekliğine göre genellikle 3-8°.
+LI|anten diyagramı: açıkken (başlangıç ayarı) yansıma noktaları iki antenin dikey kazancıyla ağırlıklandırılır: lob maksimumu çevresinde tam, ufka doğru ve yukarıya doğru giderek azalan. Kapalıyken lob elevasyonu kesin bir sınırdır: daha aşağıda görülen noktalar hesaba katılmaz.
+LI|Yagi anten: boom m: boom uzunluğu. Program yanına uzunluğu dalga boyu cinsinden, kazancı (DL6WU eğrisi) ve yatay ve dikey -3 dB lobunu yazar. 2 λ'nın altında tahmin pek kesin değildir.
+LI|Orta noktadan hot spot km ve otomatik (AMS): Hot A ve Hot B'nin orta noktaya uzaklığı. "otomatik (AMS)" işaretliyken DJ5HG'nin aktardığı J. Richardson tablosu izlenir (1000 km'de 13°, 1500 km'nin ötesinde 10° sapma); 30-400 km arasını elle yazmak için işareti kaldırın (MSHV 150 km kullanır).
+TAG|ATTENZIONE|"anten diyagramı" kapalı ve lob birkaç derecedeyken, uzun bir yolda iki istasyon katmanın hiçbir ortak noktasını göremeyebilir: tüm verimler 0 olur ve gerekli lob ya da iz yüksekliğini belirten "ORTAK BÖLGE YOK" uyarısı görünür. Örnek: JN70CN - JO76QP, 1791 km, lob 3°'de, izler 88,5 km'de.
+H2|4.3 Sıra 3: hesap zamanı
+LI|Saat: UTC saati.
+LI|Hesap tarihi (UTC): hesabın günü. Tahmin hesabı, Verim hesabı'ndaki 24 saatlik tablo ve GRAVES radarı'ndaki kronoloji için geçerlidir. Başlangıçta bugündür ve gece yarısı yeni güne geçer.
+LI|Saatler (−12 ile +36 sa arası): hesap anını 15 dakikalık adımlarla kaydırır. Yanında: "Hesap zamanı: şimdi" ya da seçilen tarih ve saat.
+LI|Gerçek zaman: şu ana döner.
+H2|4.4 Kendi istasyonunuzu ayarlama
+TAG|PROCEDURA|1) Benim lokatörüm ve rakımı yazın. 2) Karşı istasyonun lokatörünü ve rakımını yazın ya da Tahmin hesabı haritasına tıklayın: sol tık = karşı istasyon, sağ tık = sizin istasyonunuz. 3) Bandı seçin. 4) Anteninizin boom uzunluğunu ve lob elevasyonunu yazın. 5) Hesapla'ya basın: durum çubuğu "Yol hesaplandı: ... km, ... yansıma noktası örneklendi" ile onaylar.
+TAG|NOTA|Ayarlar kapanışta ve her hesapta data/config.ini dosyasına kaydedilir: bir sonraki açılışta aynı yolu bulursunuz.
+H1|5. Tahmin hesabı
+P|Tahmin hesabı grubunun ilk alt sekmesi, yararlı izlerin şu anda nereye düştüğünü ve nereye yönlendirileceğini tek ekranda toplar. Her şey, tarih ve saat kaydırıcısıyla seçilen ana göredir.
+H2|5.1 Özet şeridi
+P|Haritanın üstündeki bir şerit o anki hesabı özetler: tarih ve saat, yol endeksi (etkin yağmurların ZHR × verim toplamı), ZHR'si ve verimiyle (DJ5HG referansına göre dB olarak da) en yararlı yağmur, ufkun üstündeki yağmurların sayısı ve azimutuyla birlikte önerilen Hot.
+H2|5.2 Plan haritası
+P|Solda, yukarıdan görülen Avrupa haritası (doğu sağda), çevresinde derece ölçeğiyle:
+LI|yeşil çizgi: iki lokatör arasındaki gerçek yol;
+LI|Hot A ve Hot B: orta noktanın iki yanındaki iki hot spot. Kırmızı = önerilen, pembe = anten lobunun dışında, gri = zaten lobun içinde (bir uyarıyla);
+LI|anten lobu: anten azimutu çevresindeki -3 dB sektörü;
+LI|A sınırı ve B sınırı, soluk: her iki istasyonun da gördüğü gökyüzünün en uzak kenarları; yönlendirilecek noktalar değildir;
+LI|sarı çizgi: seçilen yağmurun (veya en elverişli olanın) gökyüzünü taradığı yön; turuncu noktalar: iki dik yönlendirme (radyant azimutu ±90°);
+LI|PREV bölgeleri, açık renkli elipsler: en olası izlerin şu anda düştüğü yerler, yolun her iki yanı için bir tane.
+P|Haritada sol tık = karşı istasyonun lokatörü, sağ tık = sizin istasyonunuzun lokatörü; yol hemen yeniden hesaplanır. Lejant, haritanın sağında katlanabilen bir sütundur. Yağmur listesinin üstündeki onay kutuları Hot yönlerini, Avrupa haritasını ve üstten görünümü açar ve kapatır.
+H2|5.3 Yağmur listesi
+P|Her yağmur için: adı ve IMO kodu, bu andaki ZHR, istasyonunuzdan radyantın azimutu ve elevasyonu, yol için verim, baskın taraf (A veya B), en iyi yön, radyantın doğuşu ve batışı. Bir satıra tıklamak yağmuru seçer: sarı çizgi ve turuncu noktalar onu izler.
+H2|5.4 Küçük gök kubbesi ve hesap metni
+P|İstasyonunuzdan görülen radyantlar, IMO koduyla ve camgöbeği renkli günlük yollarıyla. Sarı = verim en az %50 ve ZHR en az 2; turuncu = en az %20; koyu kırmızı = daha az; gri = neredeyse etkin değil. Zenitten geçen turuncu çizgi, yağmurun akış yönüne dik olan doğru anten yönlerini verir. Yanında hesap metni: yol, orta nokta, beklenen yansımaların yüzdesiyle önerilen Hot, ortak bölgenin sınırları.
+H2|5.5 Kesit
+P|Sağ altta, antenden karşı istasyona doğru görülen en olası izler: yatayda karşı istasyona göre azimut (A solda, B sağda), dikeyde elevasyon. Her iz, radyanta doğru yönelmiş bir doğru parçasıdır; ne kadar olasıysa o kadar kalındır. Anten lobu, karşı istasyon ve Hot'lar da çizilir.
+H2|5.6 Uyarılar
+LI|UYARI: Hot A (veya Hot B) anten lobunun içine giriyor: bu yönlendirmeyle o hot spot zaten kapsanmış durumda.
+LI|RADYANT ÇOK YÜKSEK: yararlı bir radyant 70°'nin üzerinde; izler neredeyse dikey iner ve yola doğru az yansıtır.
+LI|YOL BOYUNCA ALÇAK RADYANT: hesaplanan verim düşük kalır, ancak yolla hizalı sıyırıcı izlerle DJ5HG seyrek ve güçlü yansımalar öngörür: dinlemeye değer.
+LI|YOL, İZİN UFKUNUN ÖTESİNDE: iz yüksekliğinde orta nokta ufkun altındadır; uyarı hangi yüksekliğin gerektiğini söyler.
+LI|ORTAK BÖLGE YOK: katmanın hiçbir noktası her iki istasyondan da görünmüyor; uyarı ne kadar eksik olduğunu ve neyin gerektiğini söyler.
+H1|6. Geometri ve yol kaybı
+P|Yolun seçilip kopyalanabilen metin hâlinde bir raporu ve sağda, üç iz yüksekliği için anten elevasyonunun yansıma noktasına uzaklığa göre grafiği.
+H2|6.1 Bu sekmenin verileri
+LI|Güç W (400), Anten kazancı dBi (14; iki uçta aynı anten), En düşük sinyal dBm (-130), İz yoğunluğu q = 10^14 elektron/m: bağlantı bütçesi için kullanılır.
+LI|İzin başlangıç yarıçapı: ITU değerinin iki katı (Stober 2021, temkinli, başlangıç ayarı), ITU-R P.843 veya hariç. Yarıçap ne kadar büyükse, yüksek frekanslarda kayıp o kadar fazladır.
+LI|Bantlar arası ping süresi: kuramsal λ² (McKinley, SM6FHZ; temkinli, başlangıç ayarı) veya gözlenen (NN4SA'nın HamSCI MSQP ölçümleri, Perseidler 2026: 50'den 144 MHz'e pingler 8 kat yerine 1,5 kat kısalır).
+H2|6.2 Rapor
+LI|YOL GEOMETRİSİ: istasyonlar ve rakımları, uzaklık, azimut, orta nokta, iz yüksekliği, orta noktaya doğru anten elevasyonu.
+LI|HOT A / HOT B: her hot spot'un lokatörü, azimutu, doğrudan yönden sapması, uzaklığı ve elevasyonu.
+LI|ORTAK BÖLGE SINIRLARI: iz yüksekliğinde ufka kadar menzil, maksimumu ve dikey genişliğiyle anten lobu, A sınırı ve B sınırı; Yagi'nin kazancı ve lobu.
+LI|YOL KAYBI: orta nokta, Hot A ve Hot B için, 28, 50, 70, 144, 222 ve 432 MHz'de (yol düzlemini kesen iz, en elverişsiz durum).
+LI|BAĞLANTI BÜTÇESİ: güç ve EIRP, yol kaybı, antendeki sinyal, en düşük sinyal ve pay; en iyi durum (yol düzlemindeki iz) ve OH5IY'nin ortalama yol kaybıyla pay.
+LI|BANTLAR ARASI DENEYSEL KURALLAR: 144 MHz'e göre yansımaların sayısı, şiddeti ve süresi; IARU azami ping'i; MSQP ölçümlerinden gözlenen süre.
+TAG|NOTA|Pozitif bir pay, ortalama düşük yoğunluklu bir izin istasyonunuzla yolu kapatmaya yettiğini; negatif bir pay ise daha yoğun izlere veya yüksek yoğunluklu meteorlara ihtiyaç olduğunu söyler. Bu bir tahmindir: asıl ölçüt banttaki deneyimdir.
+H1|7. Verim hesabı
+P|Verim, bir yağmurun radyant konumunun yolunuzda yansımaya ne ölçüde olanak tanıdığını yüzde olarak söyler: %100, o yol için en elverişli konumdur. Bu alt sekme verimi, "Hesap tarihi" gününün her saati için, saat ortasındaki değerlerle gösterir.
+H2|7.1 Dört kutu
+LI|GÜNÜN EN İYİ SAATİ: yol endeksinin en yüksek olduğu saat ve baskın taraf.
+LI|EN ELVERİŞLİ YAĞMUR: en çok katkı yapan yağmur; saati, tarafı ve iki en iyi yönlendirmesiyle.
+LI|ŞİMDİ: bu saatteki endeks ve taraf ile önerilen Hot (yalnızca seçilen gün bugünse).
+LI|DENEYSEL TAHMİN: şimdi, 1 saat sonra ve 2 saat sonra beklenen saatlik yansıma sayısı (bölüm 8).
+P|Bir kutuda değer yoksa nedenini söyler: ortak bölge yok, etkin yağmur yok ya da radyantlar bütün gün elverişsiz. Her kutunun ipucu balonu ne gösterdiğini açıklar. Kutuların altında, gerektiğinde ORTAK BÖLGE YOK uyarısı ve A ile B harflerini açıklayan bir şerit bulunur.
+H2|7.2 Hesap ayarı
+LI|Temkinli (başlangıç ayarı): iz yüksekliği radardan, normal izler, β açısı açık. En düşük değerleri verir.
+LI|DJ5HG gibi: sabit 102 km yükseklik, alçak radyantta daha uzun izler, β açısı açık; QTFGUI programını yansıtır.
+LI|Özel: onay kutularından birini veya yüksekliği elle değiştirdiğinizde kendiliğinden seçilir.
+LI|Alçak radyantta daha uzun izler (DJ5HG): radyant alçakken daha az meteor düşer, ancak izler daha uzundur ve daha sık yansıtır; yaklaşık 9°'nin üzerinde iki etki birbirini dengeler.
+LI|İz ile yol arasındaki β açısı (tam McKinley), "en çok etkileyen seçim" yazılı turuncu kutuda: açıkken yol düzlemini kesen izler, düzlemde yatanlardan 10-15 dB daha düşük değer alır ve yolla hizalı radyantlar öne çıkar. Kapalıyken klasik kural geçerlidir: en iyi radyant 15-70° yükseklikte ve yola çapraz olandır.
+LI|Klasik karar: her yağmurun altına, yolun orta noktasında radyoamatör kuralının hükmünü veren "klasik" satırını ekler: ✗ radyant ufkun altında, ◐ sınırda (çok alçak, çok yüksek veya yolla neredeyse hizalı), ● iyi, ★ mükemmel (yola çapraz). Hesabı değiştirmez.
+TAG|ATTENZIONE|β açısı, uzun yollarda değerleri çok değiştirir: JN70CN - JO76QP (1791 km), 14/12/2026 Geminidler, β kapalıyken %98, β açıkken %13. İki görüşün kaynakları farklıdır ve BRAMS sayımlarıyla yapılan ilk karşılaştırma bunları ayırt etmiyor: iki durumu banttaki deneyimle karşılaştırın. Yüzdeler, o yol için radyantın en iyi konumuna görelidir; farklı yolları karşılaştırmak için dB cinsinden verim kullanılır.
+H2|7.3 Sayılara ne kadar güvenilmeli
+P|En iyi saatler ve taraf en sağlam bilgilerdir: hesap ayarlarıyla az değişirler. Yüzdeler ise seçimlere, özellikle β açısına çok bağlıdır. 50 MHz'deki 181 767 gerçek MSK144 spot'uyla (HamSCI, 11-12 Ağustos 2025 Perseidleri) yapılan karşılaştırma, yol endeksinin saatlik gidişini doğrular; ancak belirli bir saatte hangi istasyon çiftinin birbirini duyduğunun, modelin içermediği sporadik meteorlara ve havadaki etkinliğe bağlı olduğunu da gösterir.
+TAG|NOTA|Programı, saati ve anteni çevireceğiniz tarafı seçmek için kullanın; yüzdeleri bağlantının başarı olasılığı olarak okumayın.
+H2|7.4 Grafik
+P|En fazla beş yağmur için: verim düz çizgi olarak, DH9GCD formülü aynı renkte noktalı çizgi olarak; yol endeksi sağ ölçekte çubuklar olarak. Yerel saatler UTC saatlerinin altında yazılıdır.
+H2|7.5 24 saatlik tablo
+LI|O gün etkin olan her yağmur için bir satır, UTC saatleri için 24 sütun.
+LI|63A: verim %63, yansımaların çoğu A tarafından; 41B: B tarafı; harfsiz bir sayı: %5'in altında; boş hücre: %1'in altında; ↑: radyant 70°'nin üzerinde (çok yüksek); daha sıcak renk = daha yüksek verim.
+LI|A = istasyonunuzdan karşı istasyona bakarken solda (Hot A bölgesi); B = sağda (Hot B bölgesi). Anteni o tarafa doğru 10-30° çevirmek yararlıdır (side-scatter).
+LI|Açık mavi DH9GCD % satırları: karşılaştırma için DH9GCD'nin en iyi yön formülü; ne ufku ne de lobu dikkate alır.
+LI|Σ satırı: yol endeksi, tüm etkin yağmurların ZHR × verim toplamı.
+LI|Turuncu satır: var olduğu saatler için saatlik yansımaların deneysel tahmini.
+TAG|PROCEDURA|Bir sked'in saatini seçmek için: tarihi ayarlayın, Σ satırına ve GÜNÜN EN İYİ SAATİ kutusuna bakın; seçilen yağmurun satırında A veya B harfini okuyun ve anteni o tarafa doğru 10-30° çevirin. O saatin Hot ayrıntısını okumak için fareyi bir hücrenin üzerinde tutun.
+H1|8. Deneysel tahminler
+P|Collm radarının (36,2 MHz) sayımlarını bir radyoamatör bandındaki (başlangıçta 144 MHz, 28'den 1300 MHz'e kadar) saatlik yansıma tahminine dönüştürür, yolunuz için sonraki 24 saatin tahminini yapar ve bunu bir RMOB gözlemcisiyle karşılaştırır. Buradaki her şey deneyseldir: sayılar saatleri ve günleri karşılaştırmaya yarar.
+H2|8.1 Kontroller
+LI|Hedef frekans MHz: tahminin frekansı.
+LI|λ^k üssü (3, SM6FHZ) ve İstasyon katsayısı K (1): frekansa göre kural ve istasyonunuz için düzeltme.
+LI|Popülasyon indekslerinden k: etkin yağmurların r popülasyon indekslerinden k önerir (GMN, yoksa IMO; k = 3,75 · log10 r, ZHR ile ağırlıklı) ve uygulamadan önce onay ister.
+LI|Diskten RMOB dosyası yükle ve Üssü RMOB dosyasından çıkar: aylık bir RMOB dosyasını okur ve Collm ile ortak saatlerden k'yi çıkarır.
+LI|RMOB gözlemcisi, RMOB'u şimdi indir ve 5 dakikada bir otomatik indirme: otomatik indirme kapalıdır ve yalnızca RMOB'un izniyle açılmalıdır.
+H2|8.2 Sonuçlar
+LI|Dün ve bugünün grafiği: Collm'da saatlik meteorlar, sizin frekansınıza ölçeklenmiş değerler ve, yüklendiyse, RMOB sayımları.
+LI|Sonraki 24 saatin tahmini: önceki günün aynı saati, yolun yağmur endeksindeki değişime göre düzeltilmiş.
+LI|Değerlendirmeli tablo: 24 saatin ortalamasına göre iyi, orta veya zayıf.
+TAG|NOTA|Yansımaların süresi, Geometri ve yol kaybı'ndaki "Bantlar arası ping süresi" seçimini izler; forward scatter'da süre, yolun orta noktasında sec²φ ile de artar.
+H1|9. Canlı ve gerçek zamanlı veriler
+H2|9.1 Canlı trafik
+P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin bulutu. Yeni gelen spot'lar bir dakika boyunca yanıp söner.
+LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 15 veya 30 dakika, son bir saat, son 3 veya 24 saat.
+LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve bulutun merkezini, yüksekliğini ve boyutlarını gösterir.
+H2|9.2 Radar akısı
+P|Collm SKiYMET radarının (36,2 MHz) saatlik meteor sayımları ve iz yükseklikleri ile Sodankylä radarının (36,9 MHz) son görüntüsü.
+LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir.
+LI|λ üssü (SM6FHZ): sizin bandınızdaki tahminin üssü (sağ ölçekte turuncu çizgi).
+LI|İz yükseklikleri: mod, ortalama, medyan ve standart sapma ile histogram; "radardan" seçiliyken mod, tüm hesapların yüksekliği olur.
+TAG|ATTENZIONE|Collm grafiğinin ölçeği okunamazsa turuncu bir uyarı görünür ve değerlerin doğrulanması gerekir. Bağlantı yoksa program son kaydedilen verileri kullanır, bunu bir kez bildirir ve her 5 dakikada bir kendiliğinden yeniden dener; bağlantı geri gelene kadar durum çubuğu kırmızı olur.
+H2|9.3 GRAVES radarı
+P|GRAVES, Broye-lès-Pesmes'ten (JN27SI) 143,050 MHz'de CW yayın yapar. Alt sekme GRAVES → siz yolunu ayrı bir meteor scatter yolu olarak ele alır: verimi, önerilen Hot'u ve PREV bölgelerini hesaplar, bölgenin hüzmenin içinde olup olmadığını ve hüzmenin onu ne zaman aydınlattığını denetler.
+LI|Şimdi: hesabı gerçek zamana döndürür. GRAVES'i DX yap: karşı istasyon GRAVES olur. Hüzme dizisi: adım başına 0,8 s (PE1ITR 2021) veya 3,2 s (2007).
+LI|Kartlar: GRAVES HÜZMESİNDEKİ YARARLI BÖLGE, GRAVES → SİZ YOLUNUN ŞU ANKİ VERİMİ (beklenen yankılarla, deneysel), YOL (nereye yönlendirileceği), HÜZMENİN BÖLGE ÜZERİNDEN SONRAKİ GEÇİŞİ.
+LI|Günün kronolojik yeniden yapılandırması ve sonraki saniyelerin ayrıntısı.
+TAG|PROCEDURA|GRAVES'i dinlemek için: 143,049 MHz'de USB (yaklaşık 1 kHz ton), yavaş veya kapalı AGC, en az 2,4 kHz ses bant genişliği; anten, YOL kartındaki önerilen hot spot'a doğru, düşük elevasyonda; PC saati senkronize. Pingler, waterfall'da taşıyıcının yanında kısa çizgilerdir.
+H2|9.4 Veri toplama
+P|Meteor scatter spot'larını üç telnet akışından (DX cluster, RBN, PSKReporter spot'larıyla DM4X) ve PSKReporter'ın MQTT akışından, her birini kendi alt sekmesinde toplar ve filtreler.
+LI|Oturum için çağrı işaretinizi en üste yazın. Her akışın host'u, portu, oturum açtıktan sonraki komutları, Yeniden bağlan, Açılışta bağlan seçenekleri ve bir konsolu vardır.
+LI|Filtre, meteor scatter'a özgü frekanslardaki (50190-50300, 70100-70400, 144290-144399 kHz) veya bir MS moduna sahip (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) spot'ları kabul eder ve başka bir yayılım bildirenleri reddeder. Pencereler ve sözcükler değiştirilebilir; her birinin kendi sayacı vardır.
+LI|Eksik lokatörler CALL3 arşivinden alınır; kabul edilen spot'lar, günde bir dosya olmak üzere data/spot_ms klasörüne ve Canlı trafik haritasına gider.
+H1|10. Canlı yağmurlar ve yağmur kataloğu
+H2|10.1 Canlı yağmurlar
+P|Solda, etkin yağmurlar için Global Meteor Network'ün ölçtüğü akı ve ZHR, yağmur başına GMN kameralarının günlük sayımlarıyla (bir sayımdır, akı değildir: açık gökyüzü gören istasyon sayısına bağlıdır); sağda, gündüz yağmurları dahil CMOR radarının radyant haritaları. Dosyalar yalnızca değiştiyse, en fazla 30 dakikada bir ya da Şimdi indir ile yeniden indirilir.
+H2|10.2 Yağmurlar
+P|Tüm hesapların kullandığı katalog: IMO 2026 ve 2027 takvimindeki yağmurlar ile Antihelion Kaynağı. Bugün etkin olan yağmurlar vurgulanır.
+LI|Kod, ad, etkinlik dönemi, maksimumun güneş boylamı, sonraki maksimum (UTC) ve kaynağı (IMO veya hesaplanmış), radyant, hız, r popülasyon indeksi, ZHR, tür (görsel veya gündüz radyo).
+LI|k: popülasyon indeksinden frekans ölçeklemesinin üssü (varsa GMN, yoksa IMO).
+LI|IAU MDC: çözümler, Δ radyant, Δλ, Δv: IAU Meteor Data Center kataloğuyla karşılaştırma (yayımlanmış çözümler ve program kataloğunun bunların medyanından farkları).
+LI|GMN bugün: Global Meteor Network'ün son günlük dosyasında doğrulanmış yörüngeler.
+TAG|NOTA|Katalog data/sciami.csv dosyasıdır ve IMO maksimumları data/massimi_imo.csv dosyasındadır: bir metin düzenleyiciyle değiştirilebilirler. Hatalı bir satır açılışta bildirilir ve yok sayılır.
+H1|11. Kare haritası
+P|Kaydınızın ADIF dosyasından okunan, çalışılmış (turuncu) ve onaylanmış (yeşil, QSL veya LoTW) Maidenhead kareleri, bir Avrupa haritası üzerinde, bant başına bir alt sekmeyle: 50, 70, 144, 222 ve 432 MHz.
+LI|ADIF dosyası yükle: bir .adi veya .adif dosyasını okur; yeni bir dosya öncekinin yerini alır. Belleği temizle: yüklenen kareleri siler.
+LI|Tekerlek = yakınlaştırma, sürükleme = kaydırma, fare bir karenin üzerinde = o karenin QSO'ları.
+TAG|NOTA|YA-MS LoTW'ye bağlanmaz: ADIF'i log programınızdan veya LoTW'den dışa aktarın ve buraya yükleyin.
+H1|12. Teknik belgeler
+LI|Kullanım kılavuzu: bu belge.
+LI|Kaynaklar: programın tüm kaynakları, referanslarıyla.
+LI|Avrupa radarları haritası: Collm, Sodankylä, GRAVES ve CMOR'un istasyonunuza göre nerede bulunduğu ve her radarın gördüğü gökyüzü.
+LI|Verim hesabının açıklaması: verimin adım adım nasıl hesaplandığı, KAYNAK, KONTROL ve SEÇİM etiketleriyle.
+P|Belgeler, çeviri varsa arayüz dilini izler, yoksa İtalyancadır. "Word'e aktar (.docx)" istediğiniz yere bir kopyasını kaydeder; "Word'de aç" onu varsayılan programla açar. Tüm denklemleri içeren Hesaplamalar Kılavuzu doc klasöründe (İtalyanca) ve doc/manuali klasöründedir (diğer diller).
+H1|13. data klasörü ve ayarlar
+H2|13.1 Başlıca dosyalar
+LI|config.ini: tüm ayarlar (metin, anahtar=değer).
+LI|lingue/: arayüz çevirileri; mappa/: Avrupa haritası.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: yağmur kataloğu ve Antihelion Kaynağı'nın konumu; regole_sperimentali.csv: bantlar arası kurallar.
+LI|flusso_collm.csv, quote_collm.csv: Collm radarının arşivleri; radar/: son görüntüler, RMOB dosyaları ve canlı kaynakların verileri; fonti_radar.csv: tek tek etkinleştirilebilen kaynakların adresleri.
+LI|cataloghi/: IAU MDC kataloğu; radar/diretta/: GMN ve CMOR verileri.
+LI|call3.txt: lokatör arşivi; spot_ms/: toplanan meteor scatter spot'ları; adif_quadrati.csv: ADIF'ten gelen kareler.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: teknik belgeler.
+LI|backup/: bir güncellemenin değiştirdiği dosyaların kopyaları; aggiornamento/: indirilen paket (yeniden başlatmada silinir).
+H2|13.2 config.ini'nin bazı anahtarları
+LI|controlla_aggiornamenti=0: yeni sürümleri denetleme; aggiornamenti_salta: atlanan sürüm.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: hesabın onay kutuları.
+LI|raggio_iniziale (0 = ITU değerinin iki katı, 1 = ITU, 2 = hariç), durata_ping (0 = λ², 1 = gözlenen).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|config.ini'yi yalnızca program kapalıyken değiştirin: YA-MS kapanışta onu yeniden yazar.
+H1|14. Tipik yordamlar
+H2|14.1 Bir yağmur için sked hazırlama
+TAG|PROCEDURA|1) İki istasyonu ayarlayın ve Hesapla'ya basın. 2) Yağmurlar'da yağmurun sonraki maksimumunu denetleyin. 3) O tarihi Hesap tarihi alanına girin. 4) Verim hesabı'nda yağmurun satırına ve Σ satırına bakın: verimin en yüksek olduğu saatleri seçin. 5) Tarafı (A veya B) not edin ve anteni o tarafa doğru 10-30° çevirin. 6) Geometri ve yol kaybı'nda bağlantı bütçesinin payını denetleyin.
+H2|14.2 Canlı bir oturumu izleme
+TAG|PROCEDURA|1) Gerçek zaman'a basın. 2) Tahmin hesabı'nda her dakika güncellenen önerilen Hot'u ve PREV bölgelerini izleyin. 3) Radar akısı'nda Collm radarının meteor saydığını denetleyin. 4) Canlı trafik'te kimin çalıştığına ve izlerinin nereye düştüğüne bakın.
+H2|14.3 İstasyonu GRAVES ile deneme
+TAG|PROCEDURA|1) GRAVES radarı'nda GRAVES HÜZMESİNDEKİ YARARLI BÖLGE kartını denetleyin. 2) Anteni YOL kartının dediği gibi yönlendirin. 3) Hüzmenin sonraki geçişinin pencerelerinde 143,049 MHz'de USB ile dinleyin. 4) Pingleri beklenen yankılarla ve RMOB gözlemcileriyle karşılaştırın.
+H2|14.4 Tahmini RMOB ile kalibre etme
+TAG|PROCEDURA|1) Deneysel tahminler'de sizin bandınızdaki bir gözlemcinin aylık RMOB dosyasını yükleyin. 2) Üssü RMOB dosyasından çıkar'a basın ve ortak saatler yeterliyse k'yi kabul edin. 3) İstasyon katsayısı K'yi önerilen değere ayarlayın.
+H1|15. Sık karşılaşılan sorunlar
+LI|Tüm verimler 0: ORTAK BÖLGE YOK uyarısını okuyun. "anten diyagramı" kapalıysa lob elevasyonunu düşürün; aksi hâlde yol, iz yüksekliğinde ufkun ötesindedir.
+LI|Değerler DH9GCD'ninkilerden veya eski bir sürümünkilerden çok daha düşük: β açısı onay kutusunu denetleyin (bölüm 7.2).
+LI|"Geçersiz istasyon lokatörü": 4, 6 veya 8 karakterlik bir lokatör yazın (örneğin JN70CN veya JN70CN83).
+LI|Hot A ve Hot B gri: anten karşı istasyona dönükken zaten lobun içindedirler; anteni çevirmeye gerek yoktur.
+LI|Avrupa haritası eksik: ilk açılışta bağlantı gerekir; program kendiliğinden yeniden dener.
+LI|Metin çok küçük veya grafiklere yer yok: Yazı tipi'ni ve Kontroller düğmesini kullanın.
+LI|GRAVES hüzmesinin geçişi kaymış görünüyor: PC saatini bir NTP sunucusuyla senkronize edin; hüzme dizisi bazen komuta istasyonu tarafından kaydırılır.
+LI|Linux'ta Çince veya Japonca metin kutucuklar hâlinde: Noto CJK yazı tiplerini kurun.
+H1|16. İletişim
+P|YA-MS, Costantino IC8TEM (Capri) tarafından hazırlanan, radyoamatörler için ücretsiz bir programdır. Hata bildirimleri, öneriler ve karşılaştırma verileri memnuniyetle karşılanır: işletim sistemini, YA-MS sürümünü ve ne yaptığınızı belirtin. Kod ve sürümler: github.com/ic8tem/YA-MS. İletişim: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Çalışmayı desteklemek isteyenler bunu ko-fi.com/ic8tem üzerinden yapabilir.

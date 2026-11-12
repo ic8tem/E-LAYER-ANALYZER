@@ -1,0 +1,233 @@
+TITLE|YA-MS naudotojo vadovas
+SUB|1.8.1 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+H1|1. Įvadas
+H2|1.1 Kam skirta YA-MS
+P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
+P|Programa nemokama, veikia Windows, Linux (taip pat Raspberry Pi) ir macOS sistemose ir išversta į 36 kalbas. Ji nevaldo nei radijo stoties, nei sukiklio: ryšiui naudojama įprasta skaitmeninių modų programa (MSHV, WSJT-X).
+H2|1.2 Kaip skaityti šį vadovą
+P|Vadove kortelės aprašomos viena po kitos, pradedant prognozės skaičiavimu. Kiekviename skyriuje nurodoma, ką kortelė rodo, ką daro kiekvienas valdiklis ir kaip skaityti rezultatus. 14 skyriuje surinktos dažniausios procedūros, 15 skyriuje - dažnos problemos. Kaip skaičiuojamas efektyvumas, kartu su šaltiniais ir patikromis, paaiškinta dokumente „Efektyvumo skaičiavimo paaiškinimas“; visos lygtys pateiktos Skaičiavimų vadove (aplankas doc).
+TAG|PROCEDURA|veiksmai, kuriuos reikia atlikti nurodyta tvarka.
+TAG|NOTA|informacija, padedanti suprasti ar geriau naudoti funkciją.
+TAG|ATTENZIONE|dažna klaida, skaičiavimo apribojimas arba elgsena, kurią reikia žinoti.
+P|Valdiklių pavadinimai parašyti taip, kaip jie rodomi programoje lietuvių kalba; kitomis kalbomis jie yra toje pačioje vietoje ir ta pačia tvarka.
+H1|2. Diegimas, paleidimas ir atnaujinimai
+H2|2.1 Kurį paketą atsisiųsti
+P|Visi paketai yra GitHub leidimų puslapyje (github.com/ic8tem/YA-MS/releases). .NET diegti nereikia: jis jau įtrauktas į paketą.
+LI|Windows 64 bitų: YA-MS-<versija>-windows-x64-setup.exe (įdiegia į C:\YA-MS be administratoriaus teisių) arba nešiojamasis zip archyvas, kurį galima išskleisti bet kuriame aplanke. 32 bitų Windows - tie patys failai su x86.
+LI|Linux (Debian, Ubuntu, Mint): .deb paketas, diegiamas komanda sudo apt install ./ya-ms_<versija>_amd64.deb; pirmą kartą paleista programa nusikopijuoja į ~/YA-MS. Kitiems distributyvams - .tar.gz archyvas, kurį reikia išskleisti ir paleisti komanda ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 ir 500: paketas raspberry-pi-64bit (Raspberry Pi OS 64 bitų) arba raspberry-pi-32bit, .tar.gz arba .deb formatu.
+LI|macOS: .dmg failas Apple Silicon (M1 ir naujesniems) arba Intel kompiuteriams, arba app.zip. Nuvilkite YA-MS.app į savo aplanką (pavyzdžiui, ~/YA-MS): aplankas data sukuriamas šalia programėlės.
+TAG|ATTENZIONE|Windows gali parodyti pranešimą „Windows apsaugojo jūsų kompiuterį“: pasirinkite „Daugiau informacijos“, o tada „Vis tiek vykdyti“. macOS sistemoje pirmą kartą atidarykite programėlę dešiniuoju pelės mygtuku ir „Atidaryti“. Programa nepasirašyta mokamu sertifikatu.
+H2|2.2 Pirmasis paleidimas
+P|Paleidžiant kelioms sekundėms parodomas ekranas su Perseidais virš ESO VLT teleskopo. Pirmą kartą paleista YA-MS pasirenka sistemos kalbą, jei ji yra viena iš 36, kitaip - italų kalbą; atsisiunčia Europos žemėlapį (Natural Earth) į aplanką data/mappa ir parodo pavyzdinę trasą. Programai nustatyti savo stočiai pakanka kelių minučių (4 skyrius).
+H2|2.3 Aplankas data
+P|Visi nustatymai ir visi duomenys saugomi viename aplanke data šalia programos: jokio AppData, jokių sistemos aplankų. Norint perkelti YA-MS į kitą kompiuterį, pakanka nukopijuoti programos aplanką kartu su jo aplanku data. Aplanko turinys aprašytas 13 skyriuje.
+H2|2.4 Automatiniai atnaujinimai
+P|Nuo 1.8.0 versijos YA-MS pati tikrina GitHub, paleidžiant ir ne dažniau kaip kartą per dieną, ar išleista nauja versija. Jei taip, atsiranda langas „Yra atnaujinimas“ su naujovėmis ir trimis mygtukais:
+LI|Atnaujinti dabar: atsisiunčia jūsų sistemai tinkamą paketą, pakeičia programos failus, išsaugo aplanką data ir iš naujo paleidžia YA-MS. Programos failai aplanke data, kuriuos nauja versija keičia, pirmiausia nukopijuojami į data/backup/v<sena versija>; jūsų failai (nustatymai, archyvai, spotai, ADIF) neliečiami.
+LI|Vėliau: uždaro langą; tikrinimas pakartojamas kitą dieną.
+LI|Praleisti šią versiją: paleidžiant ši versija nebesiūloma.
+P|Mygtukas „Atnaujinimai“ apatiniame dešiniajame kampe, būsenos juostoje, atlieka tą patį tikrinimą rankiniu būdu, taip pat ir praleistai versijai.
+TAG|ATTENZIONE|Automatinis atnaujinimas turi galėti rašyti į programos aplanką. Jei negali (pavyzdžiui, kai programa nukopijuota į sistemos aplanką), YA-MS apie tai praneša ir pasiūlo atidaryti leidimų puslapį, kad įdiegtumėte rankiniu būdu. Versijos iki 1.7.0 šios funkcijos neturi: pirmą kartą atnaujinti reikia rankiniu būdu, įdiegiant ant ankstesnės versijos.
+TAG|NOTA|Kad naujos versijos nebebūtų tikrinamos, faile data/config.ini įrašykite controlla_aggiornamenti=0.
+H2|2.5 Trūkstami programos failai
+P|Paleidžiant YA-MS patikrina, ar turi visus savo failus (vertimus, katalogus, dokumentus). Jei kurio nors trūksta, pavyzdžiui, po nepilno kopijavimo, langas „Trūkstami failai“ juos išvardija ir pasiūlo „Atsisiųsti trūkstamus failus“ iš GitHub tos pačios programos versijos arba „Tęsti be jų“. Tas pats tikrinimas pakartojamas paspaudus „Atnaujinimai“.
+H1|3. Pagrindinis langas
+H2|3.1 Lango dalys
+LI|Viršuje trys valdiklių eilutės, bendros visoms kortelėms: stotys ir diapazonas, E sluoksnis ir antena, skaičiavimo laikas (4 skyrius).
+LI|Pagrindinių kortelių juosta, kurios dešinėje yra mygtukas Valdymas, spalvų schema (Tema) ir kalba.
+LI|Antrinės kortelės šviesesnėje eilutėje tose kortelėse, kurios jų turi.
+LI|Apačioje būsenos juosta: skaičiavimo pranešimai, įspėjimai apie ryšį ir mygtukas „Atnaujinimai“.
+H2|3.2 Kortelės
+LI|Tiesiogiai ir realiojo laiko duomenys: Eismas tiesiogiai, Radaro srautas, GRAVES radaras, Duomenų rinkimas (9 skyrius).
+LI|Prognozės skaičiavimas: Prognozės skaičiavimas, Geometrija ir slopinimas, Efektyvumo skaičiavimas, Eksperimentinės prognozės (5-8 skyriai).
+LI|Srautai tiesiogiai, Srautai, Kvadratų žemėlapis (10-11 skyriai).
+LI|Techniniai dokumentai, paskutinė: Naudotojo vadovas, Šaltiniai, Europos radarų žemėlapis, Efektyvumo skaičiavimo paaiškinimas (12 skyrius).
+H2|3.3 Kalba, spalvos, šriftas
+LI|Kalba: 36 kalbos. Pakeitus kalbą, langas perkuriamas toje pačioje vietoje ir toje pačioje kortelėje, nepaleidžiant programos iš naujo. Skaičiai ir datos atitinka pasirinktą kalbą (dešimtainis kablelis lietuvių ir italų kalbomis, taškas anglų kalba).
+LI|Tema: 12 spalvų schemų; Šviesi yra numatytoji, Naktinė ir Juoda skirtos darbui tamsoje, Meteoro pėdsakas yra originalus YA-MS stilius.
+LI|Šriftas (pirmosios valdiklių eilutės gale): padidina visą tekstą nuo 100 iki 300 %. Esant dideliam šriftui, kortelės perkeliamos į kitą eilutę.
+LI|Valdymas: suskleidžia ir vėl išskleidžia tris valdiklių eilutes, kad liktų daugiau vietos žemėlapiams ir grafikams. Pasirinkimas įsimenamas.
+TAG|NOTA|Beveik kiekvienas valdiklis turi patarimą: palaikykite pelės žymeklį virš valdiklio, kad perskaitytumėte, kam jis skirtas ir iš kokio šaltinio paimta numatytoji vertė.
+H1|4. Stoties ir trasos nustatymas
+H2|4.1 1 eilutė: stotys ir diapazonas
+LI|Mano lokatorius ir aukštis m: jūsų Maidenhead lokatorius (4, 6 arba 8 simboliai; naudojamas kvadrato centras) ir stoties aukštis virš jūros lygio.
+LI|Korespondentas ir aukštis m: stoties, su kuria norite užmegzti ryšį, lokatorius ir aukštis.
+LI|Diapazonas MHz: 28, 50, 70, 144, 222 arba 432 MHz. Naudojamas antenos stiprinimui ir lapeliui, slopinimui ir ryšio biudžetui bei srauto įvertinimui.
+LI|Skaičiuoti: iš naujo apskaičiuoja trasą (E sluoksnio imtis, greičiau nei per sekundę).
+LI|Antenos az: antenos azimutas, visada korespondento kryptimi.
+H2|4.2 2 eilutė: E sluoksnis ir antena
+LI|Pėdsakų aukštis km ir iš radaro: meteorų pėdsakų aukštis. Pažymėjus „iš radaro“, naudojamas dažniausias Collm radaru išmatuotas aukštis (paprastai 88-90 km); nuimkite žymą, kad įrašytumėte jį rankiniu būdu.
+LI|Lapelio elevacija °: jūsų antenos vertikaliojo lapelio maksimumo elevacija. Kryptinės antenos, nustatytos 0° kampu, pagrindinis lapelis vis tiek yra keliais laipsniais virš horizonto dėl atspindžio nuo žemės: paprastai 3-8°, priklausomai nuo antenos aukščio bangos ilgiais.
+LI|antenos diagrama: įjungta (numatytoji) - atspindžio taškai vertinami pagal abiejų antenų vertikalųjį stiprinimą: visiškai ties lapelio maksimumu, vis mažiau horizonto link ir aukštyn. Išjungta - lapelio elevacija yra griežta riba: žemiau matomi taškai neskaičiuojami.
+LI|Yagi antena: strėlė m: strėlės ilgis. Šalia programa nurodo ilgį bangos ilgiais, stiprinimą (DL6WU kreivė) ir lapelio plotį ties -3 dB horizontalioje ir vertikalioje plokštumoje. Kai ilgis mažesnis nei 2 λ, įvertinimas nelabai tikslus.
+LI|Hot spot nuo vidurio taško km ir auto (AMS): Hot A ir Hot B atstumas nuo vidurio taško. Pažymėjus „auto (AMS)“, vertė atitinka J. Richardsono lentelę, kurią cituoja DJ5HG (13° nuokrypis ties 1000 km, 10° virš 1500 km); nuimkite žymą, kad rankiniu būdu įrašytumėte 30-400 km (MSHV naudoja 150 km).
+TAG|ATTENZIONE|Kai „antenos diagrama“ išjungta, o lapelis yra kelių laipsnių aukštyje, ilgoje trasoje abi stotys gali nematyti nė vieno bendro sluoksnio taško: visi efektyvumai lygūs 0 ir pasirodo įspėjimas „NĖRA BENDROS ZONOS“ su lapelio elevacija arba pėdsakų aukščiu, kurių reikėtų. Pavyzdys: JN70CN - JO76QP, 1791 km, lapelis ties 3°, pėdsakai 88,5 km aukštyje.
+H2|4.3 3 eilutė: skaičiavimo laikas
+LI|Laikas: UTC laikrodis.
+LI|Skaičiavimo data (UTC): skaičiavimo diena. Taikoma kortelei Prognozės skaičiavimas, 24 valandų lentelei kortelėje Efektyvumo skaičiavimas ir chronologijai kortelėje GRAVES radaras. Numatytoji vertė yra šiandiena, o vidurnaktį data pereina į naują dieną.
+LI|Valandos (nuo −12 iki +36 h): perkelia skaičiavimo momentą 15 minučių žingsniais. Šalia: „Skaičiavimas: dabar“ arba pasirinkta data ir laikas.
+LI|Realus laikas: grįžta į dabartinį momentą.
+H2|4.4 Savo stoties nustatymas
+TAG|PROCEDURA|1) Įrašykite Mano lokatorius ir aukštį. 2) Įrašykite korespondento lokatorių ir aukštį arba spustelėkite žemėlapį kortelėje Prognozės skaičiavimas: kairysis spustelėjimas = korespondentas, dešinysis spustelėjimas = jūsų stotis. 3) Pasirinkite diapazoną. 4) Įrašykite savo antenos strėlės ilgį ir lapelio elevaciją. 5) Paspauskite Skaičiuoti: būsenos juosta patvirtina „Trasa apskaičiuota: ... km, ... atspindžio taškų imtis“.
+TAG|NOTA|Nustatymai išsaugomi faile data/config.ini uždarant programą ir po kiekvieno skaičiavimo: kitą kartą paleidę rasite tą pačią trasą.
+H1|5. Prognozės skaičiavimas
+P|Pirmoji grupės Prognozės skaičiavimas antrinė kortelė viename ekrane parodo, kur dabar krenta naudingi pėdsakai ir kur nukreipti anteną. Viskas susiję su momentu, pasirinktu data ir valandų slankikliu.
+H2|5.1 Suvestinės juosta
+P|Virš žemėlapio juosta apibendrina skaičiavimą tam momentui: data ir laikas, trasos indeksas (aktyvių srautų ZHR × efektyvumas suma), naudingiausias srautas su jo ZHR ir efektyvumu (taip pat dB, palyginti su DJ5HG atskaitos verte), srautų virš horizonto skaičius ir rekomenduojamas Hot su jo azimutu.
+H2|5.2 Planinis žemėlapis
+P|Kairėje Europos žemėlapis, matomas iš viršaus (rytai dešinėje), su laipsnių skale aplink:
+LI|žalia linija: tikroji trasa tarp dviejų lokatorių;
+LI|Hot A ir Hot B: du hot spot abiejose vidurio taško pusėse. Raudona = rekomenduojamas, rožinė = už antenos lapelio ribų, pilka = jau lapelyje (su įspėjimu);
+LI|antenos lapelis: -3 dB sektorius aplink antenos azimutą;
+LI|Riba A ir Riba B, blyškios: tolimiausi dangaus, matomo iš abiejų stočių, kraštai, o ne taškai, į kuriuos reikia nukreipti anteną;
+LI|geltona linija: kryptis, kuria pasirinktas (arba palankiausias) srautas brauko per dangų; oranžiniai taškai: dvi statmenos antenos kryptys (radianto azimutas ±90°);
+LI|PREV zonos, šviesios elipsės: kur dabar krenta labiausiai tikėtini pėdsakai, po vieną kiekvienoje trasos pusėje.
+P|Kairysis spustelėjimas žemėlapyje = korespondento lokatorius, dešinysis spustelėjimas = jūsų stoties lokatorius; trasa iškart perskaičiuojama. Legenda yra suskleidžiamas stulpelis žemėlapio dešinėje. Žymimieji langeliai virš srautų sąrašo įjungia ir išjungia Hot kryptis, Europos žemėlapį ir vaizdą iš viršaus.
+H2|5.3 Srautų sąrašas
+P|Kiekvienam srautui: pavadinimas ir IMO santrumpa, ZHR šiuo momentu, radianto azimutas ir elevacija iš jūsų stoties, efektyvumas trasai, vyraujanti pusė (A arba B), geriausia antenos kryptis, radianto patekėjimas ir nusileidimas. Spustelėjus eilutę pasirenkamas srautas: geltona linija ir oranžiniai taškai seka jį.
+H2|5.4 Mažasis dangaus skliautas ir skaičiavimo tekstas
+P|Iš jūsų stoties matomi radiantai su IMO kodu ir paros keliu žydra spalva. Geltona = efektyvumas ne mažiau kaip 50 % ir ZHR ne mažiau kaip 2; oranžinė = ne mažiau kaip 20 %; tamsiai raudona = mažiau; pilka = beveik neaktyvus. Oranžinė linija per zenitą rodo teisingas antenos kryptis, statmenas srauto slinkimui. Šalia skaičiavimo tekstas: trasa, vidurio taškas, rekomenduojamas Hot su numatomų atspindžių procentine dalimi, bendrosios zonos ribos.
+H2|5.5 Pjūvis
+P|Apatiniame dešiniajame kampe labiausiai tikėtini pėdsakai, matomi nuo antenos korespondento kryptimi: horizontaliai azimutas korespondento atžvilgiu (A kairėje, B dešinėje), vertikaliai elevacija. Kiekvienas pėdsakas yra atkarpa, nukreipta į radiantą, tuo storesnė, kuo jis labiau tikėtinas. Taip pat nubraižyti antenos lapelis, korespondentas ir Hot.
+H2|5.6 Įspėjimai
+LI|DĖMESIO: Hot A (arba Hot B) patenka į antenos lapelį: esant šiam nukreipimui tas hot spot jau padengtas.
+LI|RADIANTAS PER AUKŠTAI: naudingas radiantas yra aukščiau nei 70°; pėdsakai krenta beveik vertikaliai ir mažai atspindi trasos kryptimi.
+LI|ŽEMAS RADIANTAS IŠILGAI TRASOS: apskaičiuotas efektyvumas lieka mažas, bet su slystančiais pėdsakais, išsidėsčiusiais išilgai trasos, DJ5HG numato retus ir stiprius atspindžius: verta klausytis.
+LI|TRASA UŽ PĖDSAKO HORIZONTO: pėdsakų aukštyje vidurio taškas yra žemiau horizonto; įspėjime nurodoma, kokio aukščio reikėtų.
+LI|NĖRA BENDROS ZONOS: nė vienas sluoksnio taškas nematomas iš abiejų stočių; įspėjime nurodoma, kiek trūksta ir ko reikėtų.
+H1|6. Geometrija ir slopinimas
+P|Tekstinė trasos ataskaita, kurią galima pažymėti ir nukopijuoti, o dešinėje antenos elevacijos priklausomybės nuo atstumo iki atspindžio taško grafikas trims pėdsakų aukščiams.
+H2|6.1 Šios kortelės duomenys
+LI|Galia W (400), Antenos stiprinimas dBi (14; ta pati antena abiejuose galuose), Minimalus signalas dBm (-130), Pėdsako tankis q = 10^14 elektronų/m: naudojami ryšio biudžetui.
+LI|Pradinis pėdsako spindulys: dviguba ITU vertė (Stober 2021, atsargi, numatytoji), ITU-R P.843 arba neįtraukiamas. Kuo didesnis spindulys, tuo didesni nuostoliai aukštesniuose dažniuose.
+LI|Pingų trukmė tarp juostų: teorinė λ² (McKinley, SM6FHZ; atsargi, numatytoji) arba stebėta (NN4SA atlikti HamSCI MSQP matavimai, Perseidai 2026: nuo 50 iki 144 MHz pingai sutrumpėja 1,5 karto, o ne 8 kartus).
+H2|6.2 Ataskaita
+LI|TRASOS GEOMETRIJA: stotys ir jų aukščiai, atstumas, azimutas, vidurio taškas, pėdsakų aukštis, antenos elevacija vidurio taško kryptimi.
+LI|HOT A / HOT B: kiekvieno hot spot lokatorius, azimutas, nuokrypis nuo tiesioginės krypties, atstumas ir elevacija.
+LI|BENDROSIOS ZONOS RIBOS: matomumas pėdsakų aukštyje iki horizonto, antenos lapelis su jo maksimumu ir vertikaliuoju pločiu, Riba A ir Riba B; Yagi antenos stiprinimas ir lapelis.
+LI|TRASOS SLOPINIMAS: vidurio taškui, Hot A ir Hot B ties 28, 50, 70, 144, 222 ir 432 MHz (pėdsakas kerta trasos plokštumą - nepalankiausias atvejis).
+LI|BIUDŽETAS: galia ir EIRP, slopinimas, signalas antenoje, minimalus signalas ir atsarga; palankiausias atvejis (pėdsakas trasos plokštumoje) ir atsarga esant OH5IY vidutiniam slopinimui.
+LI|EKSPERIMENTINĖS TAISYKLĖS TARP JUOSTŲ: atspindžių skaičius, intensyvumas ir trukmė, palyginti su 144 MHz; IARU didžiausias pingas; MSQP matavimais stebėta trukmė.
+TAG|NOTA|Teigiama atsarga reiškia, kad vidutinio retojo pėdsako pakanka užmegzti ryšį šioje trasoje su jūsų stotimi; neigiama atsarga reiškia, kad reikia tankesnių pėdsakų arba tankiųjų meteorų. Tai yra įvertinimas: atskaitos taškas lieka patirtis eteryje.
+H1|7. Efektyvumo skaičiavimas
+P|Efektyvumas procentais parodo, kiek srauto radianto padėtis leidžia atspindžius jūsų trasoje: 100 % yra šiai trasai palankiausia padėtis. Ši antrinė kortelė jį rodo valanda po valandos dienai, nurodytai lauke „Skaičiavimo data (UTC)“, su vertėmis kiekvienos valandos viduryje.
+H2|7.1 Keturi langeliai
+LI|GERIAUSIAS DIENOS LAIKAS: valanda su didžiausiu trasos indeksu ir vyraujanti pusė.
+LI|PALANKIAUSIAS SRAUTAS: srautas, kurio indėlis didžiausias, su valanda, puse ir dviem geriausiomis antenos kryptimis.
+LI|DABAR: indeksas ir pusė šią valandą bei rekomenduojamas Hot (tik jei pasirinkta diena yra šiandien).
+LI|EKSPERIMENTINĖ PROGNOZĖ: numatomi atspindžiai per valandą dabar, po 1 ir po 2 valandų (8 skyrius).
+P|Kai langelis neturi verčių, jis nurodo priežastį: nėra bendros zonos, nėra aktyvaus srauto arba radiantai visą dieną nepalankūs. Kiekvieno langelio patarimas paaiškina, ką jis rodo. Po langeliais, kai reikia, rodomas įspėjimas NĖRA BENDROS ZONOS ir juosta, paaiškinanti raides A ir B.
+H2|7.2 Skaičiavimo nustatymai
+LI|Atsargi (numatytoji): pėdsakų aukštis iš radaro, įprasti pėdsakai, kampas β įjungtas. Duoda mažiausias vertes.
+LI|Kaip DJ5HG: fiksuotas 102 km aukštis, ilgesni pėdsakai esant žemam radiantui, kampas β įjungtas; atkartoja programą QTFGUI.
+LI|Pasirinktinė: pasirenkama automatiškai, kai rankiniu būdu pakeičiate kurį nors žymimąjį langelį arba aukštį.
+LI|Ilgesni pėdsakai esant žemam radiantui (DJ5HG): esant žemam radiantui krenta mažiau meteorų, bet pėdsakai ilgesni ir atspindi dažniau; virš maždaug 9° abu efektai vienas kitą kompensuoja.
+LI|Kampas β tarp pėdsako ir trasos (visa McKinley formulė), oranžiniame rėmelyje su užrašu „labiausiai sveriantis pasirinkimas“: įjungus pėdsakai, kertantys trasos plokštumą, yra 10-15 dB silpnesni už esančius joje ir vyrauja radiantai, išsidėstę išilgai trasos. Išjungus galioja klasikinė taisyklė: geriausias radiantas yra 15-70° aukštyje ir skersai trasos.
+LI|Klasikinis įvertinimas: po kiekvienu srautu prideda eilutę „klasikinis“ su radijo mėgėjų taisyklės verdiktu trasos vidurio taške: ✗ radiantas žemiau horizonto, ◐ ribinis (per žemai, per aukštai arba beveik išilgai trasos), ● geras, ★ puikus (skersai trasos). Skaičiavimo nekeičia.
+TAG|ATTENZIONE|Kampas β smarkiai keičia vertes ilgose trasose: JN70CN - JO76QP (1791 km), Geminidai 14/12/2026, 98 % su išjungtu β ir 13 % su įjungtu β. Abi tezės turi skirtingus šaltinius, o pirmasis palyginimas su BRAMS skaičiais jų neatskiria: palyginkite abu atvejus su patirtimi eteryje. Procentai yra santykiniai, palyginti su geriausia radianto padėtimi tai trasai; skirtingoms trasoms palyginti naudojamas efektyvumas dB.
+H2|7.3 Kiek pasitikėti skaičiais
+P|Geriausios valandos ir pusė yra patikimiausia informacija: jos mažai kinta keičiant skaičiavimo nustatymus. O procentai labai priklauso nuo pasirinkimų, ypač nuo kampo β. Palyginimas su 181 767 tikrais MSK144 spotais 50 MHz diapazone (HamSCI, Perseidai, 2025 m. rugpjūčio 11-12 d.) patvirtina trasos indekso kitimą per valandas, tačiau taip pat rodo, kad tai, kurios stočių poros girdi viena kitą tam tikrą valandą, labiausiai priklauso nuo sporadinių meteorų ir aktyvumo eteryje, kurių modelis neapima.
+TAG|NOTA|Naudokite programą valandai ir pusei, į kurią sukti anteną, pasirinkti; nelaikykite procentų ryšio sėkmės tikimybe.
+H2|7.4 Grafikas
+P|Daugiausia penkiems srautams: efektyvumas kaip ištisinė linija, o DH9GCD formulė kaip taškinė tos pačios spalvos linija; trasos indeksas kaip stulpeliai dešinėje skalėje. Vietinis laikas nurodytas po UTC laiku.
+H2|7.5 24 valandų lentelė
+LI|Po vieną eilutę kiekvienam tą dieną aktyviam srautui, 24 stulpeliai UTC valandoms.
+LI|63A: efektyvumas 63 %, daugiausia atspindžių iš A pusės; 41B: B pusė; skaičius be raidės: mažiau nei 5 %; tuščias langelis: mažiau nei 1 %; ↑: radiantas aukščiau nei 70° (per aukštai); šiltesnė spalva = didesnis efektyvumas.
+LI|A = kairėje, žiūrint iš jūsų stoties į korespondentą (Hot A zona); B = dešinėje (Hot B zona). Anteną verta pasukti 10-30° į tą pusę (side-scatter).
+LI|Žydros eilutės DH9GCD %: DH9GCD geriausios krypties formulė palyginimui; ji neatsižvelgia nei į horizontą, nei į lapelį.
+LI|Eilutė Σ: trasos indeksas, visų aktyvių srautų ZHR × efektyvumas suma.
+LI|Oranžinė eilutė: eksperimentinė atspindžių per valandą prognozė toms valandoms, kurioms ji yra.
+TAG|PROCEDURA|Sked laikui pasirinkti: nustatykite datą, pažiūrėkite į eilutę Σ ir langelį GERIAUSIAS DIENOS LAIKAS; pasirinkto srauto eilutėje perskaitykite raidę A arba B ir pasukite anteną 10-30° į tą pusę. Palaikykite pelės žymeklį virš langelio, kad perskaitytumėte tos valandos Hot detales.
+H1|8. Eksperimentinės prognozės
+P|Perskaičiuoja Collm radaro (36,2 MHz) skaičius į atspindžių per valandą įvertinimą radijo mėgėjų diapazone (numatytasis 144 MHz, nuo 28 iki 1300 MHz), sudaro jūsų trasos prognozę ateinančioms 24 valandoms ir palygina ją su RMOB stebėtoju. Viskas čia eksperimentiška: skaičiai skirti valandoms ir dienoms palyginti.
+H2|8.1 Valdikliai
+LI|Tikslinis dažnis MHz: prognozės dažnis.
+LI|λ^k rodiklis (3, SM6FHZ) ir Stoties koeficientas K (1): dažnio perskaičiavimo taisyklė ir jūsų stoties pataisa.
+LI|k iš populiacijos indeksų: pasiūlo k pagal aktyvių srautų populiacijos indeksus r (GMN, kitaip IMO; k = 3,75 · log10 r, svertinis pagal ZHR) ir prieš taikydamas prašo patvirtinimo.
+LI|Įkelti RMOB failą iš disko ir Rodiklį gauti iš RMOB failo: nuskaito mėnesio RMOB failą ir gauna k iš valandų, bendrų su Collm.
+LI|RMOB stebėtojas, Atsisiųsti RMOB dabar ir automatinis atsisiuntimas kas 5 minutes: automatinis atsisiuntimas išjungtas, jį galima įjungti tik gavus RMOB leidimą.
+H2|8.2 Rezultatai
+LI|Vakar ir šiandien grafikas: meteorai per valandą Collm, į jūsų dažnį perskaičiuotos vertės ir, jei įkelti, RMOB skaičiai.
+LI|Ateinančių 24 valandų prognozė: ta pati ankstesnės dienos valanda, pakoreguota pagal trasos srautų indekso pokytį.
+LI|Lentelė su įvertinimu: geras, vidutinis arba silpnas, palyginti su 24 valandų vidurkiu.
+TAG|NOTA|Atspindžių trukmė atitinka pasirinkimą „Pingų trukmė tarp juostų“ kortelėje Geometrija ir slopinimas; forward scatter atveju trukmė didėja ir su sec²φ trasos vidurio taške.
+H1|9. Tiesiogiai ir realiojo laiko duomenys
+H2|9.1 Eismas tiesiogiai
+P|Azimutinis vienodų atstumų žemėlapis, kurio centras yra jūsų stotis, su visu surinktu meteor scatter srautu: kiekvienam ryšiui trasa diapazono spalva (28 ruda, 50 žalia, 70 žydra, 144 oranžinė, 222 rožinė, 432 violetinė), abi stotys ir labiausiai tikėtinų pėdsakų debesis tą valandą. Ką tik gauti spotai mirksi vieną minutę.
+LI|Žemėlapio spindulys: 600-3500 km. Rodomi spotai: paskutinės 15 arba 30 minučių, paskutinė valanda, paskutinės 3 arba 24 valandos.
+LI|Spustelėjus trasą arba lentelės eilutę ryšys paryškinamas ir parodomas debesies centras, jo aukštis ir matmenys.
+H2|9.2 Radaro srautas
+P|Collm SKiYMET radaro (36,2 MHz) meteorų skaičiai per valandą ir pėdsakų aukščiai bei naujausias Sodankylä radaro (36,9 MHz) vaizdas.
+LI|Atsisiųsti dabar ir Visų šaltinių automatinis atnaujinimas kas 5 minutes: kiekvienas šaltinis atsisiunčiamas iš naujo tik tada, kai pasikeitė.
+LI|λ rodiklis (SM6FHZ): įvertinimo jūsų diapazone rodiklis (oranžinė linija dešinėje skalėje).
+LI|Pėdsakų aukščiai: histograma su moda, vidurkiu, mediana ir standartiniu nuokrypiu; pažymėjus „iš radaro“, moda tampa aukščiu visiems skaičiavimams.
+TAG|ATTENZIONE|Jei Collm grafiko skalės nepavyksta nuskaityti, pasirodo oranžinis įspėjimas ir vertes reikia patikrinti. Neturėdama ryšio programa naudoja paskutinius išsaugotus duomenis, vieną kartą apie tai praneša ir pati bando iš naujo kas 5 minutes; būsenos juosta tampa raudona, kol ryšys atsistato.
+H2|9.3 GRAVES radaras
+P|GRAVES transliuoja CW 143,050 MHz dažniu iš Broye-lès-Pesmes (JN27SI). Antrinė kortelė trasą GRAVES → jūs traktuoja kaip atskirą meteor scatter trasą: apskaičiuoja efektyvumą, rekomenduojamą Hot ir PREV zonas, patikrina, ar zona yra pluošte ir kada pluoštas ją apšviečia.
+LI|Dabar: grąžina skaičiavimą į realų laiką. GRAVES kaip DX: korespondentu tampa GRAVES. Spindulio seka: 0,8 s vienam žingsniui (PE1ITR 2021) arba 3,2 s (2007).
+LI|Skydeliai: NAUDINGOJI ZONA GRAVES PLUOŠTE, GRAVES → JŪSŲ TRASOS EFEKTYVUMAS DABAR (su laukiamais aidais, eksperimentiškai), TRASA (kur nukreipti anteną), KITAS PLUOŠTO PRAĖJIMAS PER ZONĄ.
+LI|Chronologinė dienos rekonstrukcija ir artimiausių sekundžių detalės.
+TAG|PROCEDURA|GRAVES klausytis: USB 143,049 MHz (apie 1 kHz tonas), AGC lėtas arba išjungtas, garso juosta ne siauresnė kaip 2,4 kHz; antena nukreipta į skydelyje TRASA rekomenduojamą hot spot, maža elevacija; kompiuterio laikrodis sinchronizuotas. Pingai yra trumpi brūkšneliai šalia nešlio krioklio (waterfall) vaizde.
+H2|9.4 Duomenų rinkimas
+P|Renka meteor scatter spotus iš trijų telnet srautų (DX klasteris, RBN, DM4X su PSKReporter spotais) ir iš PSKReporter MQTT srauto, kiekvieną savo antrinėje kortelėje, ir juos filtruoja.
+LI|Viršuje įrašykite savo šaukinį prisijungimui. Kiekvienas srautas turi serverį, prievadą, komandas po prisijungimo, Prisijungti iš naujo, Prisijungti paleidžiant ir konsolę.
+LI|Filtras priima spotus meteor scatter būdinguose dažniuose (50190-50300, 70100-70400, 144290-144399 kHz) arba su MS moda (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ir atmeta tuos, kuriuose nurodytas kitas sklidimo būdas. Dažnių langus ir žodžius galima keisti; kiekvienas turi savo skaitiklį.
+LI|Trūkstami lokatoriai paimami iš CALL3 archyvo; priimti spotai įrašomi į data/spot_ms, po vieną failą per dieną, ir rodomi kortelės Eismas tiesiogiai žemėlapyje.
+H1|10. Srautai tiesiogiai ir srautų katalogas
+H2|10.1 Srautai tiesiogiai
+P|Kairėje Global Meteor Network išmatuotas aktyvių srautų srautas ir ZHR su GMN kamerų dienos skaičiais kiekvienam srautui (tai skaičius, o ne srautas: jis priklauso nuo to, kiek stočių mato giedrą dangų); dešinėje CMOR radaro radiantų žemėlapiai, įskaitant dieninių srautų žemėlapius. Failai atsisiunčiami iš naujo tik pasikeitę, ne dažniau kaip kas 30 minučių, arba mygtuku Atsisiųsti dabar.
+H2|10.2 Srautai
+P|Katalogas, naudojamas visuose skaičiavimuose: IMO 2026 ir 2027 metų kalendoriaus srautai ir Antihelio šaltinis. Šiandien aktyvūs srautai paryškinti.
+LI|Santrumpa, pavadinimas, aktyvumo laikotarpis, Saulės ilguma maksimumo metu, kitas maksimumas (UTC) ir jo šaltinis (IMO arba apskaičiuotas), radiantas, greitis, populiacijos indeksas r, ZHR, tipas (vizualinis arba dieninis radijo).
+LI|k: dažnio perskaičiavimo rodiklis pagal populiacijos indeksą (GMN, jei yra, kitaip IMO).
+LI|IAU MDC: sprendiniai, Δ radianto, Δλ, Δv: palyginimas su IAU Meteor Data Center katalogu (paskelbti sprendiniai ir programos katalogo skirtumai nuo jų medianos).
+LI|GMN šiandien: trajektorijos, patvirtintos naujausiame Global Meteor Network dienos faile.
+TAG|NOTA|Katalogas yra failas data/sciami.csv, o IMO maksimumai yra faile data/massimi_imo.csv: juos galima redaguoti teksto redaktoriumi. Klaidinga eilutė paleidžiant nurodoma ir ignoruojama.
+H1|11. Kvadratų žemėlapis
+P|Dirbti (oranžiniai) ir patvirtinti (žali, QSL arba LoTW) Maidenhead kvadratai, nuskaityti iš jūsų žurnalo ADIF failo, Europos žemėlapyje, su atskira antrine kortele kiekvienam diapazonui: 50, 70, 144, 222 ir 432 MHz.
+LI|Įkelti ADIF failą: nuskaito .adi arba .adif failą; naujas failas pakeičia ankstesnįjį. Išvalyti atmintį: ištrina įkeltus kvadratus.
+LI|Pelės ratukas = mastelis, vilkimas = perkėlimas, žymeklis virš kvadrato = to kvadrato QSO.
+TAG|NOTA|YA-MS neprisijungia prie LoTW: eksportuokite ADIF iš savo žurnalo programos arba iš LoTW ir įkelkite jį čia.
+H1|12. Techniniai dokumentai
+LI|Naudotojo vadovas: šis dokumentas.
+LI|Šaltiniai: visi programos šaltiniai su nuorodomis.
+LI|Europos radarų žemėlapis: kur yra Collm, Sodankylä, GRAVES ir CMOR jūsų stoties atžvilgiu, su dangumi, kurį mato kiekvienas radaras.
+LI|Efektyvumo skaičiavimo paaiškinimas: kaip apskaičiuojamas efektyvumas, žingsnis po žingsnio, su žymomis ŠALTINIS, PATIKRA ir PASIRINKIMAS.
+P|Dokumentai rodomi sąsajos kalba, jei vertimas yra, kitaip - italų kalba. „Eksportuoti į Word (.docx)“ išsaugo kopiją norimoje vietoje; „Atverti Word“ atveria jį numatytąja programa. Skaičiavimų vadovas su visomis lygtimis yra aplanke doc (italų kalba) ir doc/manuali (kitomis kalbomis).
+H1|13. Aplankas data ir nustatymai
+H2|13.1 Pagrindiniai failai
+LI|config.ini: visi nustatymai (tekstas, raktas=vertė).
+LI|lingue/: sąsajos vertimai; mappa/: Europos žemėlapis.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: srautų katalogas ir Antihelio šaltinio padėtis; regole_sperimentali.csv: taisyklės tarp juostų.
+LI|flusso_collm.csv, quote_collm.csv: Collm radaro archyvai; radar/: naujausi vaizdai, RMOB failai ir tiesioginių šaltinių duomenys; fonti_radar.csv: šaltinių adresai, kuriuos galima įjungti po vieną.
+LI|cataloghi/: IAU MDC katalogas; radar/diretta/: GMN ir CMOR duomenys.
+LI|call3.txt: lokatorių archyvas; spot_ms/: surinkti meteor scatter spotai; adif_quadrati.csv: kvadratai iš ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: techniniai dokumentai.
+LI|backup/: atnaujinimo metu pakeistų failų kopijos; aggiornamento/: atsisiųstas paketas (ištrinamas paleidus iš naujo).
+H2|13.2 Kai kurie config.ini raktai
+LI|controlla_aggiornamenti=0: netikrinti naujų versijų; aggiornamenti_salta: praleista versija.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: skaičiavimo žymimieji langeliai.
+LI|raggio_iniziale (0 = dviguba ITU vertė, 1 = ITU, 2 = neįtraukiamas), durata_ping (0 = λ², 1 = stebėta).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Redaguokite config.ini tik uždarę programą: uždaroma YA-MS jį perrašo.
+H1|14. Tipinės procedūros
+H2|14.1 Sked paruošimas srauto metu
+TAG|PROCEDURA|1) Nustatykite abi stotis ir paspauskite Skaičiuoti. 2) Kortelėje Srautai patikrinkite kitą srauto maksimumą. 3) Įrašykite tą datą į lauką Skaičiavimo data (UTC). 4) Kortelėje Efektyvumo skaičiavimas pažiūrėkite į srauto eilutę ir eilutę Σ: pasirinkite valandas su didžiausiu efektyvumu. 5) Užsirašykite pusę (A arba B) ir pasukite anteną 10-30° į tą pusę. 6) Kortelėje Geometrija ir slopinimas patikrinkite biudžeto atsargą.
+H2|14.2 Sesijos stebėjimas tiesiogiai
+TAG|PROCEDURA|1) Paspauskite Realus laikas. 2) Kortelėje Prognozės skaičiavimas sekite rekomenduojamą Hot ir PREV zonas, kurios atnaujinamos kas minutę. 3) Kortelėje Radaro srautas patikrinkite, ar Collm radaras skaičiuoja meteorus. 4) Kortelėje Eismas tiesiogiai pažiūrėkite, kas dirba eteryje ir kur krenta jų pėdsakai.
+H2|14.3 Stoties bandymas su GRAVES
+TAG|PROCEDURA|1) Kortelėje GRAVES radaras patikrinkite skydelį NAUDINGOJI ZONA GRAVES PLUOŠTE. 2) Nukreipkite anteną taip, kaip nurodo skydelis TRASA. 3) Klausykitės USB 143,049 MHz dažniu kito pluošto praėjimo laiko languose. 4) Palyginkite pingus su laukiamais aidais ir su RMOB stebėtojais.
+H2|14.4 Prognozės kalibravimas pagal RMOB
+TAG|PROCEDURA|1) Kortelėje Eksperimentinės prognozės įkelkite stebėtojo jūsų diapazone mėnesio RMOB failą. 2) Paspauskite Rodiklį gauti iš RMOB failo ir priimkite k, jei bendrų valandų pakanka. 3) Nustatykite Stoties koeficientas K į siūlomą vertę.
+H1|15. Dažnos problemos
+LI|Visi efektyvumai lygūs 0: perskaitykite įspėjimą NĖRA BENDROS ZONOS. Jei „antenos diagrama“ išjungta, sumažinkite lapelio elevaciją; kitaip trasa pėdsakų aukštyje yra už horizonto.
+LI|Vertės daug mažesnės nei DH9GCD arba senesnėje versijoje: patikrinkite kampo β žymimąjį langelį (7.2 skyrius).
+LI|„Netinkamas stoties lokatorius“: įrašykite 4, 6 arba 8 simbolių lokatorių (pavyzdžiui, JN70CN arba JN70CN83).
+LI|Hot A ir Hot B pilki: kai antena nukreipta į korespondentą, jie jau yra lapelyje; anteną sukti nereikia.
+LI|Trūksta Europos žemėlapio: pirmą kartą paleidžiant reikia interneto ryšio; programa pati bando iš naujo.
+LI|Tekstas per mažas arba grafikams trūksta vietos: naudokite Šriftas ir mygtuką Valdymas.
+LI|GRAVES pluošto praėjimas atrodo pasislinkęs: sinchronizuokite kompiuterio laikrodį su NTP serveriu; valdymo stotis kartais paslenka spindulio seką.
+LI|Linux, kiniškas arba japoniškas tekstas rodomas kvadratėliais: įdiekite Noto CJK šriftus.
+H1|16. Kontaktai
+P|YA-MS yra nemokama programa radijo mėgėjams, kurią parengė Costantino IC8TEM (Capri). Pranešimai, pasiūlymai ir palyginimo duomenys laukiami: nurodykite operacinę sistemą, YA-MS versiją ir ką darėte. Kodas ir leidimai: github.com/ic8tem/YA-MS. Kontaktai: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Norintys paremti šį darbą gali tai padaryti ko-fi.com/ic8tem.

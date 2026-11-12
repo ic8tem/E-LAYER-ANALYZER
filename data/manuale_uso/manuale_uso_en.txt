@@ -1,0 +1,233 @@
+TITLE|YA-MS User Manual
+SUB|Version 1.8.1 - by Costantino IC8TEM - November 2026
+H1|1. Introduction
+H2|1.1 What YA-MS is for
+P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
+P|The program is free, runs on Windows, Linux (including Raspberry Pi) and macOS, and is translated into 36 languages. It does not control the radio or the rotator: for the contact you use your usual digital-mode program (MSHV, WSJT-X).
+H2|1.2 How to read this manual
+P|The manual describes the tabs one by one, starting from the forecast calculation. Each chapter tells you what the tab shows, what each control does and how to read the results. Chapter 14 collects the most common procedures, chapter 15 the frequent problems. How the efficiency is calculated, with sources and checks, is explained in the document "Explanation of the efficiency calculation"; the complete equations are in the Calculation Manual (doc folder).
+TAG|PROCEDURA|steps to follow, in order.
+TAG|NOTA|useful information for understanding or making better use of a function.
+TAG|ATTENZIONE|common mistake, limit of the calculation or behaviour worth knowing.
+P|The names of the controls are written as they appear in the English version of the program; in the other languages they have the same place and the same order.
+H1|2. Installation, startup and updates
+H2|2.1 Which package to download
+P|All packages are on the releases page on GitHub (github.com/ic8tem/YA-MS/releases). You do not need to install .NET: it is already inside the package.
+LI|Windows 64-bit: YA-MS-<version>-windows-x64-setup.exe (installs to C:\YA-MS, without administrator rights) or the portable zip, to be extracted into any folder. For 32-bit Windows, the same files with x86.
+LI|Linux (Debian, Ubuntu, Mint): the .deb package, to be installed with sudo apt install ./ya-ms_<version>_amd64.deb; on first start the program copies itself to ~/YA-MS. For other distributions the .tar.gz, to be extracted and run with ./YA-MS.
+LI|Raspberry Pi 3, 4, 5, 400 and 500: the raspberry-pi-64bit package (64-bit Raspberry Pi OS) or raspberry-pi-32bit, as .tar.gz or .deb.
+LI|macOS: the .dmg for Apple Silicon (M1 and later) or for Intel, or the app.zip. Drag YA-MS.app into a folder of your own (for example ~/YA-MS): the data folder is created next to the app.
+TAG|ATTENZIONE|Windows may show "Windows protected your PC": choose "More info" and then "Run anyway". On macOS, the first time, open the app with the right mouse button and "Open". The program is not signed with a paid certificate.
+H2|2.2 First start
+P|At startup the splash screen with the Perseids above ESO's VLT appears for a few seconds. On first start YA-MS chooses the system language, if it is one of the 36, otherwise Italian; it downloads the map of Europe (Natural Earth) into the data/mappa folder and shows an example path. A few minutes are enough to set it up for your station (chapter 4).
+H2|2.3 The data folder
+P|All settings and all data are in a single data folder next to the program: no AppData, no system folders. To move YA-MS to another computer, just copy the program folder together with its data folder. The contents of the folder are described in chapter 13.
+H2|2.4 Automatic updates
+P|Since version 1.8.0 YA-MS checks GitHub by itself, at startup and at most once a day, for a new version. If there is one, the "Update available" window appears with the release notes and three buttons:
+LI|Update now: downloads the package suited to your system, replaces the program files, keeps the data folder and restarts YA-MS. Program files in the data folder that the new version changes are first copied to data/backup/v<old version>; your own files (settings, archives, spots, ADIF) are not touched.
+LI|Later: closes the window; the check is repeated the next day.
+LI|Skip this version: that version is no longer offered at startup.
+P|The "Updates" button at the bottom right, in the status bar, performs the same check manually, also for a skipped version.
+TAG|ATTENZIONE|The automatic update must be able to write to the program folder. If it cannot (for example a program copied into a system folder), YA-MS says so and offers to open the releases page so you can install manually. Versions up to 1.7.0 do not have this function: the first time, the update must be done manually, by installing over the previous version.
+TAG|NOTA|To stop checking for new versions, write controlla_aggiornamenti=0 in the data/config.ini file.
+H2|2.5 Missing program files
+P|At startup YA-MS checks that it has all its files (translations, catalogues, documents). If any are missing, for example after an incomplete copy, the "Missing files" window lists them and offers "Download the missing files" from GitHub, in the same version as the program, or "Continue without". The same check is repeated when you press "Updates".
+H1|3. The main window
+H2|3.1 The parts of the window
+LI|At the top, three rows of controls that apply to all tabs: stations and band, E layer and antenna, calculation time (chapter 4).
+LI|The bar of the main tabs, with the Controls button, the colour scheme (Theme) and the language on the right.
+LI|The sub-tabs, in a lighter row, for the tabs that have them.
+LI|At the bottom, the status bar: calculation messages, connection warnings, and the "Updates" button.
+H2|3.2 The tabs
+LI|Live and real-time data: Live traffic, Radar flux, GRAVES radar, Data collection (chapter 9).
+LI|Forecast calculation: Forecast calculation, Geometry and path loss, Efficiency calculation, Experimental forecasts (chapters 5-8).
+LI|Live showers, Showers, Grid square map (chapters 10-11).
+LI|Technical documents, the last one: User manual, Sources, Map of European radars, Explanation of the efficiency calculation (chapter 12).
+H2|3.3 Language, colours, font
+LI|Language: 36 languages. When you change language the window is rebuilt in the same position and on the same tab, without restarting. Numbers and dates follow the chosen language (decimal comma in Italian, point in English).
+LI|Theme: 12 colour schemes; Light is the default, Night and Black are for use in the dark, Meteor trail is the original YA-MS style.
+LI|Font (at the end of the first row of controls): enlarges all text from 100 to 300 %. With large fonts the tabs wrap onto several lines.
+LI|Controls: collapses and reopens the three rows of controls, to make room for maps and charts. The choice is remembered.
+TAG|NOTA|Almost every control has a tooltip: hold the mouse still over the control to read what it is for and which source the default value comes from.
+H1|4. Setting up the station and the path
+H2|4.1 Row 1: stations and band
+LI|My locator and height m: your Maidenhead locator (4, 6 or 8 characters; the centre of the square is used) and the height of the station above sea level.
+LI|DX station and height m: locator and height of the station to be worked.
+LI|Band MHz: 28, 50, 70, 144, 222 or 432 MHz. It is used for the antenna gain and lobe, for the path loss and the link budget, and for the flux estimate.
+LI|Calculate: recalculates the path (sampling of the E layer, less than a second).
+LI|Antenna az: antenna azimuth, always towards the DX station.
+H2|4.2 Row 2: E layer and antenna
+LI|Trail height km and from radar: height of the meteor trails. With "from radar" ticked, the most frequent height measured by the Collm radar is used (usually 88-90 km); untick it to type it in manually.
+LI|Lobe elevation °: elevation of the maximum of your antenna's vertical lobe. A beam fixed at 0° still has its main lobe a few degrees above the horizon, because of the ground reflection: usually 3-8°, depending on the antenna height in wavelengths.
+LI|antenna pattern: when on (default), the reflection points count with the vertical gain of the two antennas: full around the maximum of the lobe, less and less towards the horizon and upwards. When off, the lobe elevation is a hard limit: points seen lower down do not count.
+LI|Yagi antenna: boom m: length of the boom. Next to it the program writes the length in wavelengths, the gain (DL6WU curve) and the horizontal and vertical -3 dB beamwidth. Below 2 λ the estimate is not very accurate.
+LI|Hot spot from midpoint km and auto (AMS): distance of Hot A and Hot B from the midpoint. With "auto (AMS)" ticked it follows J. Richardson's table quoted by DJ5HG (13° offset at 1000 km, 10° beyond 1500 km); untick it to type 30-400 km manually (MSHV uses 150 km).
+TAG|ATTENZIONE|With "antenna pattern" off and the lobe at a few degrees, on a long path the two stations may not see any common point of the layer: all efficiencies are 0 and the warning "NO COMMON ZONE" appears, with the lobe or trail height that would be needed. Example: JN70CN - JO76QP, 1791 km, lobe at 3°, trails at 88.5 km.
+H2|4.3 Row 3: calculation time
+LI|Time: UTC clock.
+LI|Calculation date (UTC): the day of the calculation. It applies to Forecast calculation, to the 24-hour table of Efficiency calculation and to the timeline of GRAVES radar. By default it is today, and at midnight it moves on to the new day.
+LI|Hours (−12 to +36 h): shifts the moment of the calculation, in 15-minute steps. Next to it: "Calculation for: now" or the chosen date and time.
+LI|Real time: returns to the current moment.
+H2|4.4 Setting up your own station
+TAG|PROCEDURA|1) Enter My locator and the height. 2) Enter the locator and height of the DX station, or click on the map of Forecast calculation: left click = DX station, right click = your station. 3) Choose the band. 4) Enter the boom length and the lobe elevation of your antenna. 5) Press Calculate: the status bar confirms "Path computed: ... km, ... reflection points sampled".
+TAG|NOTA|The settings are saved in data/config.ini on closing and at every calculation: at the next start you will find the same path.
+H1|5. Forecast calculation
+P|The first sub-tab of the Forecast calculation group shows on one screen where the useful trails are falling right now and where to point. Everything refers to the moment chosen with the date and the hours slider.
+H2|5.1 The summary strip
+P|Above the map a strip summarises the calculation for that moment: date and time, path index (sum of ZHR × efficiency of the active showers), the most useful shower with its ZHR and its efficiency (also in dB relative to DJ5HG's reference), the number of showers above the horizon and the recommended Hot with its azimuth.
+H2|5.2 The plan map
+P|On the left, the map of Europe seen from above (east to the right), with the degree scale all around:
+LI|green line: the true path between the two locators;
+LI|Hot A and Hot B: the two hot spots on either side of the midpoint. Red = recommended, pink = outside the antenna lobe, grey = already inside the lobe (with a warning);
+LI|antenna lobe: the -3 dB sector around the antenna azimuth;
+LI|Limit A and Limit B, faint: the farthest edges of the sky seen by both stations, not points to aim at;
+LI|yellow line: the direction in which the selected shower (or the most favourable one) sweeps the sky; orange dots: the two perpendicular pointings (radiant azimuth ±90°);
+LI|PREV zones, light ellipses: where the most probable trails are falling right now, one for each side of the path.
+P|Left click on the map = locator of the DX station, right click = locator of your station; the path is recalculated immediately. The legend is a collapsible column to the right of the map. The checkboxes above the shower list turn on and off the Hot directions, the map of Europe and the top view.
+H2|5.3 The shower list
+P|For each shower: name and IMO code, ZHR at this moment, azimuth and elevation of the radiant from your station, efficiency for the path, prevailing side (A or B), best pointing, rise and set of the radiant. Clicking a row selects the shower: the yellow line and the orange dots follow it.
+H2|5.4 The small sky dome and the calculation text
+P|The radiants seen from your station, with the IMO code and the daily track in cyan. Yellow = efficiency at least 50 % and ZHR at least 2; orange = at least 20 %; dark red = less; grey = almost inactive. The orange line through the zenith gives the right antenna directions, orthogonal to the shower's motion. Next to it, the calculation text: path, midpoint, recommended Hot with the percentage of expected reflections, limits of the common zone.
+H2|5.5 The cross-section
+P|At the bottom right, the most probable trails as seen from the antenna towards the DX station: horizontally the azimuth relative to the DX station (A on the left, B on the right), vertically the elevation. Each trail is a segment oriented towards the radiant, thicker the more probable it is. The antenna lobe, the DX station and the Hots are also drawn.
+H2|5.6 The warnings
+LI|WARNING: Hot A (or Hot B) falls inside the antenna lobe: with this pointing that hot spot is already covered.
+LI|RADIANT TOO HIGH: a useful radiant is above 70°; the trails fall almost vertically and reflect little towards the path.
+LI|LOW RADIANT ALONG THE PATH: the calculated efficiency stays low, but with grazing trails aligned with the path DJ5HG expects rare, strong reflections: it is worth listening.
+LI|PATH BEYOND THE TRAIL HORIZON: at the trail height the midpoint is below the horizon; the warning tells you what height would be needed.
+LI|NO COMMON ZONE: no point of the layer is visible from both stations; the warning tells you by how much it falls short and what would be needed.
+H1|6. Geometry and path loss
+P|A text report of the path, which can be selected and copied, and on the right the chart of the antenna elevation as a function of the distance to the reflection point, for three trail heights.
+H2|6.1 The inputs of this tab
+LI|Power W (400), Antenna gain dBi (14; same antenna at both ends), Minimum signal dBm (-130), Trail density q = 10^14 electrons/m: they are used for the link budget.
+LI|Initial trail radius: twice the ITU value (Stober 2021, cautious, default), ITU-R P.843, or excluded. The larger the radius, the more is lost at the higher frequencies.
+LI|Ping duration between bands: theoretical λ² (McKinley, SM6FHZ; cautious, default) or observed (HamSCI MSQP measurements by NN4SA, Perseids 2026: from 50 to 144 MHz the pings get 1.5 times shorter instead of 8).
+H2|6.2 The report
+LI|PATH GEOMETRY: stations and heights, distance, azimuth, midpoint, trail height, antenna elevation towards the midpoint.
+LI|HOT A / HOT B: locator, azimuth, offset from the direct bearing, distance and elevation of each hot spot.
+LI|COMMON ZONE LIMITS: range at trail height up to the horizon, the antenna lobe with its maximum and its vertical width, Limit A and Limit B; gain and lobe of the Yagi.
+LI|PATH LOSS: for the midpoint, Hot A and Hot B, at 28, 50, 70, 144, 222 and 432 MHz (trail crossing the plane of the path, the least favourable case).
+LI|LINK BUDGET: power and EIRP, path loss, signal at the antenna, minimum signal and margin; the best case (trail in the plane of the path) and the margin with OH5IY's average path loss.
+LI|EXPERIMENTAL RULES BETWEEN BANDS: number, strength and duration of the reflections relative to 144 MHz; IARU maximum ping; duration observed from the MSQP measurements.
+TAG|NOTA|A positive margin means that an average underdense trail is enough to close the path with your station; a negative margin means that denser trails or overdense meteors are needed. It is an estimate: the reference remains on-air experience.
+H1|7. Efficiency calculation
+P|The efficiency tells you, as a percentage, how much the position of a shower's radiant allows reflections on your path: 100 % is the most favourable position for that path. This sub-tab shows it hour by hour for the day of the "Calculation date", with the values at the middle of each hour.
+H2|7.1 The four boxes
+LI|BEST TIME OF THE DAY: the hour with the highest path index and the prevailing side.
+LI|MOST FAVOURABLE SHOWER: the shower that contributes the most, with the hour, the side and the two best pointings.
+LI|NOW: index and side in this hour and the recommended Hot (only if the chosen day is today).
+LI|EXPERIMENTAL FORECAST: reflections per hour expected now, in 1 hour and in 2 hours (chapter 8).
+P|When a box has no values it tells you why: no common zone, no active shower, or unfavourable radiants for the whole day. The tooltip of each box explains what it shows. Below the boxes, when needed, the NO COMMON ZONE warning and a band explaining the letters A and B.
+H2|7.2 Calculation settings
+LI|Cautious (default): trail height from radar, normal trails, angle β on. It gives the lowest values.
+LI|As DJ5HG: fixed height of 102 km, longer trails with a low radiant, angle β on; it mirrors the QTFGUI program.
+LI|Custom: selected automatically when you manually change one of the checkboxes or the height.
+LI|Longer trails with a low radiant (DJ5HG): with a low radiant fewer meteors fall, but the trails are longer and reflect more often; above about 9° the two effects cancel out.
+LI|Angle β between trail and path (full McKinley), in the orange box labelled "the choice that weighs most": when on, trails crossing the plane of the path are worth 10-15 dB less than those lying in it, and radiants aligned with the path prevail. When off, the classic rule applies: the best radiant is 15-70° high and across the path.
+LI|Classic verdict: adds below each shower the "classic" row with the verdict of the radio amateurs' rule at the midpoint of the path: ✗ radiant below the horizon, ◐ marginal (too low, too high or almost aligned with the path), ● good, ★ excellent (across the path). It does not change the calculation.
+TAG|ATTENZIONE|Angle β changes the values a lot on long paths: JN70CN - JO76QP (1791 km), Geminids of 14/12/2026, 98 % with β off and 13 % with β on. The two theses have different sources and a first comparison with the BRAMS counts does not tell them apart: compare the two cases with your on-air experience. The percentages are relative to the best radiant position for that path; to compare different paths, use the efficiency in dB.
+H2|7.3 How far to trust the numbers
+P|The best hours and the side are the most solid information: they change little with the calculation settings. The percentages, on the other hand, depend a lot on the choices, especially on angle β. The comparison with 181 767 real MSK144 spots on 50 MHz (HamSCI, Perseids of 11-12 August 2025) confirms the hourly trend of the path index, but also shows that which pair of stations can hear each other at a given hour depends mainly on sporadic meteors and on on-air activity, which the model does not contain.
+TAG|NOTA|Use the program to choose the hour and the side towards which to turn the antenna; do not read the percentages as probabilities of completing the contact.
+H2|7.4 The chart
+P|For up to five showers: the efficiency as a solid line and DH9GCD's formula as a dotted line of the same colour; the path index as bars on the right-hand scale. Local times are written below the UTC times.
+H2|7.5 The 24-hour table
+LI|One row for each shower active that day, 24 columns for the UTC hours.
+LI|63A: efficiency 63 %, most reflections from side A; 41B: side B; a number without a letter: below 5 %; empty cell: below 1 %; ↑: radiant above 70° (too high); warmer colour = higher efficiency.
+LI|A = on the left looking from your station towards the DX station (Hot A zone); B = on the right (Hot B zone). It is worth turning the antenna 10-30° towards that side (side-scatter).
+LI|Light-blue DH9GCD % rows: DH9GCD's best-direction formula, for comparison; it takes into account neither the horizon nor the lobe.
+LI|Σ row: path index, sum of ZHR × efficiency of all active showers.
+LI|Orange row: the experimental forecast of reflections per hour, for the hours in which it exists.
+TAG|PROCEDURA|To choose the time of a sked: set the date, look at the Σ row and the BEST TIME OF THE DAY box; in the row of the chosen shower read the letter A or B and turn the antenna 10-30° towards that side. Hold the mouse over a cell to read the details of the Hot for that hour.
+H1|8. Experimental forecasts
+P|It converts the counts of the Collm radar (36.2 MHz) into an estimate of reflections per hour on an amateur band (144 MHz by default, from 28 to 1300 MHz), makes the forecast for the next 24 hours for your path and compares it with an RMOB observer. Everything here is experimental: the numbers are meant for comparing hours and days.
+H2|8.1 The controls
+LI|Target frequency MHz: frequency of the forecast.
+LI|λ^k exponent (3, SM6FHZ) and Station factor K (1): frequency rule and correction for your station.
+LI|k from population indices: proposes k from the population indices r of the active showers (GMN, otherwise IMO; k = 3.75 · log10 r, weighted by ZHR) and asks for confirmation before applying it.
+LI|Load RMOB file from disk and Derive the exponent from the RMOB file: they read a monthly RMOB file and derive k from the hours in common with Collm.
+LI|RMOB observer, Download RMOB now and automatic download every 5 minutes: the automatic download is off and must be turned on only with RMOB's permission.
+H2|8.2 The results
+LI|The chart of yesterday and today: meteors per hour at Collm, values scaled to your frequency and, if loaded, the RMOB counts.
+LI|The forecast for the next 24 hours: the same hour of the previous day, corrected for the change in the shower index of the path.
+LI|The table with the verdict: good, average or poor compared with the 24-hour average.
+TAG|NOTA|The duration of the reflections follows the "Ping duration between bands" choice in Geometry and path loss; in forward scatter the duration also grows with sec²φ at the midpoint of the path.
+H1|9. Live and real-time data
+H2|9.1 Live traffic
+P|An azimuthal equidistant map centred on your station with all the meteor scatter traffic collected: for each contact the path in the colour of the band (28 brown, 50 green, 70 cyan, 144 orange, 222 pink, 432 purple), the two stations and the cloud of the most probable trails at that hour. Newly arrived spots flash for one minute.
+LI|Map radius: 600-3500 km. Spots to show: last 15 or 30 minutes, last hour, last 3 or 24 hours.
+LI|Clicking a path or a row of the table highlights the contact and shows the centre of the cloud, its height and its size.
+H2|9.2 Radar flux
+P|The hourly meteor counts and the trail heights of the Collm SKiYMET radar (36.2 MHz) and the latest image from the Sodankylä radar (36.9 MHz).
+LI|Download now and Automatic update of all sources every 5 minutes: each source is downloaded again only if it has changed.
+LI|λ exponent (SM6FHZ): exponent of the estimate on your band (orange line on the right-hand scale).
+LI|Trail heights: histogram with mode, mean, median and standard deviation; with "from radar" the mode becomes the height used in all calculations.
+TAG|ATTENZIONE|If the scale of the Collm chart cannot be read, an orange warning appears and the values must be checked. Without a connection the program uses the last saved data, says so once and tries again by itself every 5 minutes; the status bar turns red until the connection is back.
+H2|9.3 GRAVES radar
+P|GRAVES transmits CW on 143.050 MHz from Broye-lès-Pesmes (JN27SI). The sub-tab treats GRAVES → you as a meteor scatter path of its own: it calculates efficiency, recommended Hot and PREV zones, checks whether the zone is inside the beam and when the beam illuminates it.
+LI|Now: brings the calculation back to real time. Set GRAVES as DX: the DX station becomes GRAVES. Beam sequence: 0.8 s per step (PE1ITR 2021) or 3.2 s (2007).
+LI|The cards: USEFUL ZONE IN THE GRAVES BEAM, EFFICIENCY OF THE GRAVES → YOU PATH NOW (with the expected echoes, experimental), PATH (where to point), NEXT BEAM PASS OVER THE ZONE.
+LI|The chronological reconstruction of the day and the details of the next few seconds.
+TAG|PROCEDURA|To listen to GRAVES: USB on 143.049 MHz (tone at about 1 kHz), AGC slow or off, audio bandwidth of at least 2.4 kHz; antenna towards the recommended hot spot of the PATH card, at low elevation; PC clock synchronised. The pings are short lines near the carrier in the waterfall.
+H2|9.4 Data collection
+P|It collects meteor scatter spots from three telnet feeds (DX cluster, RBN, DM4X with the PSKReporter spots) and from the PSKReporter MQTT feed, each in its own sub-tab, and filters them.
+LI|Enter your callsign for the login at the top. Each feed has host, port, commands after login, Reconnect, Connect at startup and a console.
+LI|The filter accepts spots on the typical meteor scatter frequencies (50190-50300, 70100-70400, 144290-144399 kHz) or with an MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), and discards those that declare another propagation mode. Windows and words can be edited; each has its own counter.
+LI|Missing locators are taken from the CALL3 database; accepted spots go to data/spot_ms, one file per day, and to the Live traffic map.
+H1|10. Live showers and shower catalogue
+H2|10.1 Live showers
+P|On the left, the flux and ZHR measured by the Global Meteor Network for the active showers, with the day's counts from the GMN cameras per shower (a count, not a flux: it depends on how many stations have clear skies); on the right, the radiant maps of the CMOR radar, including those of the daytime showers. The files are downloaded again only if changed, at most every 30 minutes, or with Download now.
+H2|10.2 Showers
+P|The catalogue used by all calculations: the showers of the IMO 2026 and 2027 calendar plus the Antihelion Source. The showers active today are highlighted.
+LI|Code, name, activity period, solar longitude of the maximum, next maximum (UTC) and its source (IMO or calculated), radiant, velocity, population index r, ZHR, type (visual or daytime radio).
+LI|k: exponent of the frequency scaling from the population index (GMN if available, otherwise IMO).
+LI|IAU MDC: solutions, Δ radiant, Δλ, Δv: comparison with the catalogue of the IAU Meteor Data Center (published solutions and differences of the program's catalogue from their median).
+LI|GMN today: trajectories confirmed in the latest daily file of the Global Meteor Network.
+TAG|NOTA|The catalogue is the data/sciami.csv file and the IMO maxima are in data/massimi_imo.csv: they can be edited with a text editor. A wrong line is reported at startup and ignored.
+H1|11. Grid square map
+P|The Maidenhead squares worked (orange) and confirmed (green, QSL or LoTW) read from the ADIF file of your log, on a map of Europe, with one sub-tab per band: 50, 70, 144, 222 and 432 MHz.
+LI|Load ADIF file: reads an .adi or .adif file; a new file replaces the previous one. Clear memory: deletes the loaded squares.
+LI|Mouse wheel = zoom, drag = pan, mouse over a square = the QSOs in that square.
+TAG|NOTA|YA-MS does not connect to LoTW: export the ADIF from your logging program or from LoTW and load it here.
+H1|12. Technical documents
+LI|User manual: this document.
+LI|Sources: all the program's sources, with references.
+LI|Map of European radars: where Collm, Sodankylä, GRAVES and CMOR are located relative to your station, with the sky seen by each radar.
+LI|Explanation of the efficiency calculation: how the efficiency is calculated, step by step, with the labels SOURCE, CHECK and CHOICE.
+P|The documents follow the interface language when the translation exists, otherwise they are in Italian. "Export to Word (.docx)" saves a copy wherever you like; "Open in Word" opens it with the default program. The Calculation Manual, with all the equations, is in the doc folder (Italian) and doc/manuali (the other languages).
+H1|13. The data folder and the settings
+H2|13.1 The main files
+LI|config.ini: all settings (text, key=value).
+LI|lingue/: the interface translations; mappa/: the map of Europe.
+LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: the shower catalogue and the position of the Antihelion Source; regole_sperimentali.csv: the rules between bands.
+LI|flusso_collm.csv, quote_collm.csv: archives of the Collm radar; radar/: latest images, RMOB files and data from the live sources; fonti_radar.csv: addresses of the sources, which can be enabled one by one.
+LI|cataloghi/: IAU MDC catalogue; radar/diretta/: GMN and CMOR data.
+LI|call3.txt: locator database; spot_ms/: collected meteor scatter spots; adif_quadrati.csv: squares from the ADIF.
+LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: the technical documents.
+LI|backup/: copies of the files replaced by an update; aggiornamento/: downloaded package (deleted on restart).
+H2|13.2 Some config.ini keys
+LI|controlla_aggiornamenti=0: do not check for new versions; aggiornamenti_salta: skipped version.
+LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: the calculation checkboxes.
+LI|raggio_iniziale (0 = twice the ITU value, 1 = ITU, 2 = excluded), durata_ping (0 = λ², 1 = observed).
+LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+TAG|ATTENZIONE|Edit config.ini only with the program closed: YA-MS rewrites it when it closes.
+H1|14. Typical procedures
+H2|14.1 Preparing a sked on a shower
+TAG|PROCEDURA|1) Set the two stations and press Calculate. 2) In Showers check the next maximum of the shower. 3) Put that date in Calculation date. 4) In Efficiency calculation look at the row of the shower and the Σ row: choose the hours with the highest efficiency. 5) Note the side (A or B) and turn the antenna 10-30° towards that side. 6) In Geometry and path loss check the link budget margin.
+H2|14.2 Following a session live
+TAG|PROCEDURA|1) Press Real time. 2) In Forecast calculation follow the recommended Hot and the PREV zones, which are updated every minute. 3) In Radar flux check that the Collm radar is counting meteors. 4) In Live traffic see who is working and where their trails are falling.
+H2|14.3 Testing the station with GRAVES
+TAG|PROCEDURA|1) In GRAVES radar check the USEFUL ZONE IN THE GRAVES BEAM card. 2) Point the antenna as the PATH card says. 3) Listen in USB on 143.049 MHz during the windows of the next beam pass. 4) Compare the pings with the expected echoes and with the RMOB observers.
+H2|14.4 Calibrating the forecast with RMOB
+TAG|PROCEDURA|1) In Experimental forecasts load a monthly RMOB file from an observer on your band. 2) Press Derive the exponent from the RMOB file and accept k if there are enough hours in common. 3) Set the station factor K to the suggested value.
+H1|15. Frequent problems
+LI|All efficiencies are 0: read the NO COMMON ZONE warning. With "antenna pattern" off, lower the lobe elevation; otherwise the path is beyond the horizon at the trail height.
+LI|The values are much lower than those of DH9GCD or of an old version: check the angle β checkbox (chapter 7.2).
+LI|"Invalid station locator": enter a locator of 4, 6 or 8 characters (for example JN70CN or JN70CN83).
+LI|Hot A and Hot B are grey: with the antenna towards the DX station they are already inside the lobe; there is no need to turn the antenna.
+LI|The map of Europe is missing: a connection is needed on first start; the program tries again by itself.
+LI|The text is too small or the charts have no room: use Font and the Controls button.
+LI|The GRAVES beam pass seems shifted: synchronise the PC clock with an NTP server; the beam sequence is sometimes shifted by the control station.
+LI|Linux, Chinese or Japanese text shown as little squares: install the Noto CJK fonts.
+H1|16. Contacts
+P|YA-MS is a free program for radio amateurs, by Costantino IC8TEM (Capri). Reports, suggestions and comparison data are welcome: state your operating system, the YA-MS version and what you did. Code and releases: github.com/ic8tem/YA-MS. Contacts: ccerrotta@gmail.com, ic8tem@gmail.com, www.qrz.com/db/ic8tem. Anyone who wishes to support the work can do so at ko-fi.com/ic8tem.
