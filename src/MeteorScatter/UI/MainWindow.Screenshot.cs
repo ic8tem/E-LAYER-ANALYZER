@@ -38,7 +38,7 @@ namespace YAMS
                 await Task.Delay(4000);
                 if (Program.ScreenshotFontPct > 0)
                 {
-                    double pct = Math.Max(100, Math.Min(300, Math.Round(Program.ScreenshotFontPct / 10) * 10));
+                    double pct = Math.Max(85, Math.Min(140, Math.Round(Program.ScreenshotFontPct / 5) * 5));
                     sldFont.Value = pct;
                     UiScale.Set(pct / 100.0);   // anche se il cursore non cambia valore
                     ApplyFontScale();

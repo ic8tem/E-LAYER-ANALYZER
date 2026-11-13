@@ -71,7 +71,7 @@ namespace YAMS
         Slider trackTime;
         CalendarDatePicker dtCalc;   // data del calcolo (UTC): base del momento del calcolo
         int lastTrackValue;
-        Slider sldFont;              // "Carattere": 100-300 % di tutto il testo
+        Slider sldFont;              // "Carattere": 85-140 % di tutto il testo (richiesta dell'autore, 13/11/2026)
         TextBlock lblFont;
         bool fontReady;              // la scala dei controlli standard si applica dopo l'apertura (stili gia' applicati)
         TextBlock lblMapCaption;     // didascalia sotto la pianta
@@ -535,9 +535,9 @@ namespace YAMS
             // una sola data: vale per il calcolo del momento e per la tabella delle 24 ore (Calcolo dell'efficienza)
             WhenChanged(dtCalc, CalendarDatePicker.SelectedDateProperty, () => { UpdateSky(); Update24h(); });
             // dimensione del carattere di tutto il programma (solo il testo), a passi del 10 %
-            double pct0 = Math.Max(100, Math.Min(300, Math.Round(cfg.GetD("carattere_pct", 100) / 10) * 10));
+            double pct0 = Math.Max(85, Math.Min(140, Math.Round(cfg.GetD("carattere_pct", 100) / 5) * 5));
             lblFont = L(pct0.ToString("F0", CultureInfo.InvariantCulture) + " %"); lblFont.Foreground = Pal.B(Pal.Azure);
-            sldFont = new Slider { Minimum = 100, Maximum = 300, Value = pct0, SmallChange = 10, LargeChange = 10, TickFrequency = 10,
+            sldFont = new Slider { Minimum = 85, Maximum = 140, Value = pct0, SmallChange = 5, LargeChange = 5, TickFrequency = 5,
                                    IsSnapToTickEnabled = true, Width = 160, Margin = new Thickness(4, 0) };
             UiScale.Set(pct0 / 100.0);
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
@@ -570,7 +570,7 @@ namespace YAMS
         // cursore "Carattere": nuova scala, poi controlli standard e testi costruiti con dimensioni proprie
         void SetFontPercent(double pct)
         {
-            pct = Math.Max(100, Math.Min(300, Math.Round(pct / 10) * 10));
+            pct = Math.Max(85, Math.Min(140, Math.Round(pct / 5) * 5));
             lblFont.Text = pct.ToString("F0", CultureInfo.InvariantCulture) + " %";
             UiScale.Set(pct / 100.0);   // i controlli disegnati si ridisegnano da soli (evento UiScale.Changed)
             ApplyFontScale();
@@ -2145,7 +2145,7 @@ namespace YAMS
             if (chkTrailLen != null) cfg.Set("lunghezza_scie", chkTrailLen.IsChecked == true);
             if (chkBeta != null) cfg.Set("angolo_beta", chkBeta.IsChecked == true);
             if (chkLobe != null) cfg.Set("lobo_diagramma", chkLobe.IsChecked == true);
-            cfg.Set("carattere_pct", Math.Round(sldFont.Value / 10) * 10);
+            cfg.Set("carattere_pct", Math.Round(sldFont.Value / 5) * 5);
             cfg.Set("lingua", Lang.Code);
             cfg.Set("tema", Tema.Chiave);
             SavePrevConfig();

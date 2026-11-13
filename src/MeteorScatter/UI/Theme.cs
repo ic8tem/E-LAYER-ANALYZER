@@ -333,7 +333,7 @@ namespace YAMS
         public static void Set(double f)
         {
             if (double.IsNaN(f) || double.IsInfinity(f)) f = 1.0;
-            f = Math.Max(1.0, Math.Min(3.0, f));
+            f = Math.Max(0.85, Math.Min(1.4, f));
             if (Math.Abs(f - Font) < 1e-6) return;
             Font = f;
             Changed?.Invoke();
