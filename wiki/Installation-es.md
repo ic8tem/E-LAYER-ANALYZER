@@ -24,6 +24,8 @@ Instala la nueva versión encima de la anterior: se conservan los ajustes, los s
 
 **Actualización automática (desde la versión 0.4.5).** Al iniciar y luego cada 6 horas el programa consulta las Releases de GitHub. Cuando sale una versión nueva, abre una ventana y muestra un **▲ x.y.z** naranja junto al indicador NTP en la barra superior:
 
+**Desde la versión 0.4.12 las actualizaciones son automáticas y silenciosas**: cuando hay una versión nueva en GitHub, el programa la descarga, la instala y se reinicia solo sin preguntar nada. También los archivos que faltan se vuelven a descargar sin preguntar. La ventana de actualización aparece solo con un clic en la versión de arriba, o si escribes agg_automatici=0 en el archivo data/ela.ini.
+
 - **Actualizar ahora** descarga el paquete portátil para tu ordenador (Windows de 64/32 bits, Linux, Raspberry Pi, Mac), cierra el programa, sustituye los archivos y lo reinicia. Se conservan los ajustes, los spots recogidos, los logs y `call3.txt`.
 - **Más tarde** vuelve a preguntar en la siguiente comprobación; **Omitir esta versión** deja de proponer esa versión.
 - Un clic en la versión que aparece en la barra superior (por ejemplo `v0.4.5`) busca actualizaciones al momento. La comprobación automática se puede desactivar con la casilla de la misma ventana.

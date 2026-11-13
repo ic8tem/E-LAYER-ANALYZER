@@ -1,5 +1,5 @@
 TITLE|Manwal ng paggamit ng YA-MS
-SUB|Bersyon 1.8.5 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+SUB|Bersyon 1.8.6 - inihanda ni Costantino IC8TEM - Nobyembre 2026
 H1|1. Panimula
 H2|1.1 Para saan ang YA-MS
 P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
@@ -26,6 +26,7 @@ P|Sa pagsisimula, lumalabas nang ilang segundo ang screen na may Perseids sa ita
 H2|2.3 Ang folder na data
 P|Lahat ng setting at lahat ng datos ay nasa iisang folder na data sa tabi ng programa: walang AppData, walang system folder. Para ilipat ang YA-MS sa ibang computer, kopyahin lang ang folder ng programa kasama ang folder na data nito. Inilalarawan sa kabanata 13 ang laman ng folder.
 H2|2.4 Mga awtomatikong update
+P|Mula sa bersyon 1.8.6, awtomatiko at tahimik ang mga update: sa pagsisimula at pagkatapos ay bawat 6 na oras, tinitingnan ng YA-MS ang GitHub at, kung may bagong bersyon, dina-download ito, ini-install, at kusang nagre-restart nang walang tinatanong (ang status bar lang ang nagsasabi). Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window na inilarawan sa ibaba kapag pinindot ang "Mga update" o kung isusulat mo ang aggiornamenti_automatici=0 sa file na data/config.ini.
 P|Mula sa bersyon 1.8.0, kusang tinitingnan ng YA-MS sa GitHub, sa pagsisimula at hindi hihigit sa isang beses bawat araw, kung may lumabas na bagong bersyon. Kung mayroon, lumalabas ang window na “May available na update” na may mga bagong feature at tatlong button:
 LI|I-update ngayon: dina-download ang package na angkop sa iyong system, pinapalitan ang mga file ng programa, pinapanatili ang folder na data at nire-restart ang YA-MS. Ang mga file ng programa sa folder na data na binabago ng bagong bersyon ay kinokopya muna sa data/backup/v<lumang bersyon>; hindi ginagalaw ang iyong mga file (mga setting, archive, spot, ADIF).
 LI|Mamaya: isinasara ang window; uulitin ang pagsusuri sa susunod na araw.
@@ -161,6 +162,7 @@ P|Isang azimuthal equidistant na mapa na nakasentro sa iyong istasyon na may lah
 LI|Radius ng mapa: 600-3500 km. Mga spot na ipapakita: huling 15 o 30 minuto, huling oras, huling 3 o 24 na oras.
 LI|Ang pag-click sa isang landas o sa isang hilera ng talahanayan ay nagha-highlight sa QSO at nagpapakita ng gitna ng ulap, ng taas nito at ng laki nito.
 LI|Ipakita kung sino ang nakikinig: mga tatsulok na kulay ng banda ang nagmamarka sa mga istasyong, ayon sa PSKReporter, tumatanggap ng MSK144, FSK441, PSK2K o JTMS sa 28, 50, 70, 144 at 432 MHz sa napiling panahon. Ang pag-click sa tatsulok ay nagpapakita ng call sign, locator, mga mode at huling spot. Dapat nakakonekta ang daloy na MQTT sa tab na Pangongolekta ng data.
+LI|Ipinapakita ang mga spot ng lahat ng banda, pati ng mga bandang hindi pinili sa Pagkolekta ng data (hindi ito iniimbak). Hindi ipinapakita ang mga CW spot at ang mga spot sa pagitan ng mga istasyong masyadong malapit, kung itinatapon ang mga ito sa Pagkolekta ng data.
 H2|9.2 Flux ng radar
 P|Ang mga bilang bawat oras ng mga meteor at ang mga taas ng bakas ng SKiYMET radar ng Collm (36.2 MHz) at ang pinakabagong larawan ng radar ng Sodankylä (36.9 MHz).
 LI|I-download ngayon at Awtomatikong pag-update ng lahat ng source bawat 5 minuto: muling dina-download ang bawat source kung nagbago lamang ito.

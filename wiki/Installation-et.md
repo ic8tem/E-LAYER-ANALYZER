@@ -24,6 +24,8 @@ Paigalda uus versioon vana peale: seaded, kogutud spotid, logid ja `call3.txt` s
 
 **Automaatne uuendamine (alates versioonist 0.4.5).** Käivitamisel ja seejärel iga 6 tunni järel kontrollib programm GitHubi Releases-lehte. Kui ilmub uus versioon, avab programm akna ja näitab ülemisel ribal NTP näidiku kõrval oranži **▲ x.y.z**:
 
+**Alates versioonist 0.4.12 on uuendused automaatsed ja vaiksed**: kui GitHubis on uus versioon, laadib programm selle alla, paigaldab ja käivitub ise uuesti midagi küsimata. Ka puuduvad failid laaditakse uuesti alla küsimata. Uuendusaken ilmub ainult üleval versioonil klõpsates või kui kirjutad faili data/ela.ini rea agg_automatici=0.
+
 - **Uuenda kohe** laadib alla sinu arvutile sobiva kaasaskantava paketi (Windows 64/32 bitti, Linux, Raspberry Pi, Mac), sulgeb programmi, asendab failid ja käivitab selle uuesti. Seaded, kogutud spotid, logid ja `call3.txt` säilivad.
 - **Hiljem** küsib uuesti järgmisel kontrollil; **Jäta see versioon vahele** lõpetab selle versiooni pakkumise.
 - Klõps ülemisel ribal näidatud versioonil (näiteks `v0.4.5`) kontrollib uuendusi kohe. Automaatse kontrolli saab välja lülitada samas aknas oleva märkeruuduga.

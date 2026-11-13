@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.5-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.6-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -26,6 +26,7 @@ P|Indításkor néhány másodpercre megjelenik a nyitókép az ESO VLT távcsö
 H2|2.3 A data mappa
 P|Minden beállítás és minden adat egyetlen data mappában van a program mellett: nincs AppData, nincsenek rendszermappák. A YA-MS másik számítógépre költöztetéséhez elég átmásolni a program mappáját a data mappájával együtt. A mappa tartalmát a 13. fejezet írja le.
 H2|2.4 Automatikus frissítések
+P|Az 1.8.6-os verziótól a frissítések automatikusak és csendesek: indításkor, majd 6 óránként a YA-MS megnézi a GitHubot, és ha új verzió van, letölti, telepíti és magától újraindul, semmit sem kérdezve (csak az állapotsor jelzi). A hiányzó fájlokat is kérdés nélkül újratölti. Az alább leírt ablak csak a "Frissítések" gomb megnyomásakor jelenik meg, vagy ha a data/config.ini fájlba beírod: aggiornamenti_automatici=0.
 P|Az 1.8.0-s verziótól a YA-MS magától ellenőrzi a GitHubon, indításkor és legfeljebb naponta egyszer, hogy megjelent-e új verzió. Ha igen, megjelenik a „Frissítés érhető el” ablak az újdonságokkal és három gombbal:
 LI|Frissítés most: letölti a rendszerének megfelelő csomagot, lecseréli a program fájljait, megtartja a data mappát, és újraindítja a YA-MS-t. A data mappában lévő programfájlokat, amelyeket az új verzió módosít, előbb a data/backup/v<versione vecchia> mappába másolja; az Ön fájljaihoz (beállítások, archívumok, spotok, ADIF) nem nyúl.
 LI|Később: bezárja az ablakot; az ellenőrzés másnap megismétlődik.
@@ -161,6 +162,7 @@ P|Az Ön állomására központosított azimutális távolságtartó térkép az
 LI|Térkép sugara: 600-3500 km. Megjelenítendő spotok: az utolsó 15 vagy 30 perc, az utolsó óra, az utolsó 3 vagy 24 óra.
 LI|Egy útvonalra vagy a táblázat egy sorára kattintva kiemeli az összeköttetést, és megmutatja a felhő középpontját, magasságát és méreteit.
 LI|Mutasd, ki figyel: a sáv színű háromszögek jelölik azokat az állomásokat, amelyek a PSKReporter szerint a választott időablakban MSK144, FSK441, PSK2K vagy JTMS módban vesznek 28, 50, 70, 144 és 432 MHz-en. Egy háromszögre kattintva látszik a hívójel, a lokátor, a módok és az utolsó spot. Az Adatgyűjtés fül MQTT-folyamának csatlakoztatva kell lennie.
+LI|Minden sáv spotjai látszanak, azoké is, amelyeket az Adatgyűjtésben nem választottál ki (ezek nem tárolódnak). A CW spotok és a túl közeli állomások közötti spotok nem látszanak, ha az Adatgyűjtésben elvetésre kerülnek.
 H2|9.2 Radarfluxus
 P|A Collm SKiYMET radar (36,2 MHz) óránkénti meteorszámai és nyommagasságai, valamint a sodankyläi radar (36,9 MHz) legutóbbi képe.
 LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott.

@@ -24,6 +24,8 @@ Installeer die nuwe weergawe oor die ou een: instellings, versamelde spots, logs
 
 **Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 6 uur kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
 
+**Vanaf weergawe 0.4.12 is opdaterings outomaties en stil**: wanneer daar 'n nuwe weergawe op GitHub is, laai die program dit af, installeer dit en begin self weer sonder om iets te vra. Ontbrekende lêers word ook sonder vra weer afgelaai. Die opdateringsvenster verskyn net met 'n klik op die weergawe bo, of as jy agg_automatici=0 in die lêer data/ela.ini skryf.
+
 - **Werk nou by** laai die draagbare pakket vir jou rekenaar af (Windows 64/32-bis, Linux, Raspberry Pi, Mac), maak die program toe, vervang die lêers en herbegin dit. Instellings, versamelde spots, logs en `call3.txt` word behou.
 - **Later** vra weer by die volgende kontrole; **Slaan hierdie weergawe oor** hou op om daardie weergawe aan te bied.
 - 'n Klik op die weergawe wat in die boonste balk gewys word (byvoorbeeld `v0.4.5`) kyk dadelik na bywerkings. Die outomatiese kontrole kan met die merkblokkie in dieselfde venster afgeskakel word.

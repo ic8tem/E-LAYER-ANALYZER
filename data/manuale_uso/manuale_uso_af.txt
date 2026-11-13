@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Weergawe 1.8.5 - saamgestel deur Costantino IC8TEM - November 2026
+SUB|Weergawe 1.8.6 - saamgestel deur Costantino IC8TEM - November 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor YA-MS dien
 P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
@@ -26,6 +26,7 @@ P|By die aanskakel verskyn vir 'n paar sekondes die skerm met die Perseïede bo 
 H2|2.3 Die data-gids
 P|Al die instellings en al die data is in 'n enkele data-gids langs die program: geen AppData nie, geen stelselgidse nie. Om YA-MS na 'n ander rekenaar te skuif, kopieer jy net die programgids saam met sy data-gids. Die inhoud van die gids word in hoofstuk 13 beskryf.
 H2|2.4 Outomatiese bywerkings
+P|Vanaf weergawe 1.8.6 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
 P|Vanaf weergawe 1.8.0 kontroleer YA-MS self op GitHub, by aanskakel en hoogstens een keer per dag, of 'n nuwe weergawe uitgekom het. As daar een is, verskyn die venster "Bywerking beskikbaar" met die nuwighede en drie knoppies:
 LI|Werk nou by: laai die pakket af wat by jou stelsel pas, vervang die programlêers, behou die data-gids en herbegin YA-MS. Die programlêers in die data-gids wat die nuwe weergawe verander, word eers na data/backup/v<ou weergawe> gekopieer; jou eie lêers (instellings, argiewe, spots, ADIF) word nie aangeraak nie.
 LI|Later: maak die venster toe; die kontrole word die volgende dag herhaal.
@@ -161,6 +162,7 @@ P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesameld
 LI|Kaartradius: 600-3500 km. Spots om te wys: laaste 15 of 30 minute, laaste uur, laaste 3 of 24 uur.
 LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die wolk, sy hoogte en sy afmetings.
 LI|Wys wie luister: driehoeke in die bandkleur merk die stasies wat volgens PSKReporter in die gekose tydvenster MSK144, FSK441, PSK2K of JTMS op 28, 50, 70, 144 en 432 MHz ontvang. 'n Klik op 'n driehoek wys roepsein, lokator, modusse en laaste spot. Die MQTT-stroom in die oortjie Data-insameling moet gekoppel wees.
+LI|Spots van alle bande word gewys, ook van bande wat nie in Data-insameling gekies is nie (dié word nie gestoor nie). CW-spots en spots tussen stasies wat te naby is, word nie gewys nie as hulle in Data-insameling weggegooi word.
 H2|9.2 Radarvloed
 P|Die uurlikse meteoortellings en die spoorhoogtes van die SKiYMET-radar by Collm (36,2 MHz) en die jongste beeld van die Sodankylä-radar (36,9 MHz).
 LI|Laai nou af en Outomatiese bywerking van alle bronne elke 5 minute: elke bron word slegs weer afgelaai as dit verander het.

@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.5 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.6 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -26,6 +26,7 @@ P|Při spuštění se na několik sekund zobrazí úvodní obrazovka s Perseidam
 H2|2.3 Složka data
 P|Všechna nastavení a všechna data jsou v jediné složce data vedle programu: žádné AppData, žádné systémové složky. Chcete-li YA-MS přesunout na jiný počítač, stačí zkopírovat složku programu i s její složkou data. Obsah složky popisuje kapitola 13.
 H2|2.4 Automatické aktualizace
+P|Od verze 1.8.6 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
 P|Od verze 1.8.0 YA-MS sám kontroluje na GitHubu, při spuštění a nejvýše jednou denně, zda vyšla nová verze. Pokud ano, zobrazí se okno „Je k dispozici aktualizace“ s novinkami a třemi tlačítky:
 LI|Aktualizovat nyní: stáhne balíček vhodný pro váš systém, nahradí soubory programu, ponechá složku data a restartuje YA-MS. Soubory programu ve složce data, které nová verze mění, se nejprve zkopírují do data/backup/v<versione vecchia>; vašich souborů (nastavení, archivy, spoty, ADIF) se aktualizace nedotkne.
 LI|Později: zavře okno; kontrola se zopakuje následující den.
@@ -161,6 +162,7 @@ P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachy
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
 LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed oblaku, jeho výška a rozměry.
 LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
+LI|Zobrazují se spoty všech pásem, i těch, která nejsou vybrána ve Sběru dat (ty se neukládají). Spoty CW a spoty mezi příliš blízkými stanicemi se nezobrazují, pokud se ve Sběru dat zahazují.
 H2|9.2 Tok z radaru
 P|Hodinové počty meteorů a výšky stop z radaru SKiYMET v Collm (36,2 MHz) a poslední snímek z radaru v Sodankylä (36,9 MHz).
 LI|Stáhnout nyní a Automatická aktualizace všech zdrojů každých 5 minut: každý zdroj se znovu stáhne jen tehdy, když se změnil.

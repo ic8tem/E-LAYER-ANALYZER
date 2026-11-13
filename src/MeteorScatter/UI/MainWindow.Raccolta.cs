@@ -155,13 +155,13 @@ namespace YAMS
             fp.Children.Add(chkLow);
             CheckBox chkCw = C(Lang.T("Scarta subito gli spot CW (CW o WPM nel commento, oppure 28000-28070 kHz): non compaiono nella console e non si memorizzano. Restano quelli segnati <MS>."), MsCollector.DropCw);
             if (chkCw.Content is string cws) chkCw.Content = new TextBlock { Text = cws, TextWrapping = TextWrapping.Wrap };
-            chkCw.IsCheckedChanged += (s, e) => MsCollector.DropCw = chkCw.IsChecked == true;
+            chkCw.IsCheckedChanged += (s, e) => { MsCollector.DropCw = chkCw.IsChecked == true; rdDirty = true; RefreshTraffic(true); };
             fp.Children.Add(chkCw);
             CheckBox chkNear = C(Lang.T("Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta."), MsCollector.DropNear);
             if (chkNear.Content is string ns) chkNear.Content = new TextBlock { Text = ns, TextWrapping = TextWrapping.Wrap };
-            chkNear.IsCheckedChanged += (s, e) => MsCollector.DropNear = chkNear.IsChecked == true;
+            chkNear.IsCheckedChanged += (s, e) => { MsCollector.DropNear = chkNear.IsChecked == true; rdDirty = true; RefreshTraffic(true); };
             NumericUpDown nudNear = new NumericUpDown { Minimum = 0, Maximum = 5000, Increment = 50, Value = MsCollector.NearKm, FormatString = "0", Width = 130, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(24, 2, 0, 0) };
-            nudNear.ValueChanged += (s, e) => { if (nudNear.Value.HasValue) MsCollector.NearKm = (int)nudNear.Value.Value; };
+            nudNear.ValueChanged += (s, e) => { if (nudNear.Value.HasValue) { MsCollector.NearKm = (int)nudNear.Value.Value; rdDirty = true; RefreshTraffic(true); } };
             fp.Children.Add(chkNear);
             fp.Children.Add(nudNear);
 
@@ -474,6 +474,7 @@ namespace YAMS
             for (int i = MsCollector.Spots.Count - 1; i >= 0 && rows.Count < 1500; i--)
             {
                 MsSpot s = MsCollector.Spots[i];
+                if (MsCollector.Hidden(s)) continue;
                 rows.Add(new TableRow
                 {
                     Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), MsCollector.SourceNames[s.Source], s.FreqKHz.ToString("F1", CultureInfo.CurrentCulture),

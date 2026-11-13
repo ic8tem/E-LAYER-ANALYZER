@@ -24,6 +24,8 @@ Instalē jauno versiju virs vecās: iestatījumi, savāktie spoti, žurnāli un 
 
 **Automātiskā atjaunināšana (kopš versijas 0.4.5).** Startējot un pēc tam ik pēc 6 stundām programma pārbauda GitHub Releases. Kad iznāk jauna versija, tā atver logu un augšējā joslā blakus NTP indikatoram parāda oranžu **▲ x.y.z**:
 
+**Sākot ar versiju 0.4.12, atjauninājumi ir automātiski un klusi**: kad GitHub ir jauna versija, programma to lejupielādē, instalē un pati restartējas, neko nejautājot. Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Atjaunināšanas logs parādās tikai, noklikšķinot uz versijas augšā, vai ja failā data/ela.ini ieraksti agg_automatici=0.
+
 - **Atjaunināt tagad** lejupielādē tavam datoram paredzēto pārnēsājamo pakotni (Windows 64/32 biti, Linux, Raspberry Pi, Mac), aizver programmu, aizstāj failus un to restartē. Iestatījumi, savāktie spoti, žurnāli un `call3.txt` saglabājas.
 - **Vēlāk** jautā vēlreiz nākamajā pārbaudē; **Izlaist šo versiju** pārtrauc šīs versijas piedāvāšanu.
 - Klikšķis uz augšējā joslā redzamās versijas (piemēram, `v0.4.5`) uzreiz pārbauda atjauninājumus. Automātisko pārbaudi var izslēgt ar izvēles rūtiņu tajā pašā logā.

@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka E-LAYER ANALYZER
-SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.4.11, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
+SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.4.12, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
 H1|1. Než začnete
 H2|1.1 Co program dělá
 P|E-LAYER ANALYZER shromažďuje v jediném programu nástroje ke studiu druhů šíření na VKV, které procházejí vrstvou E ionosféry: sporadickou vrstvu E, i vícenásobným skokem a mimokontinentální, F.A.I. (nehomogenity orientované podél magnetického pole), meteor scatter se začleněným programem YA-MS a rádiovou auroru. Pracuje se spoty z DX clusterů v reálném čase a s deníky ADIF a každý výsledek zobrazuje na mapě, která zabírá dvě třetiny okna, s daty a výpočty v pravé třetině.
@@ -14,6 +14,7 @@ LI|K přesunu programu na jiný počítač stačí zkopírovat jeho složku; k n
 LI|Ve složce data program uchovává také: lingue (překlady), spot (shromážděné spoty), spot_ms (spoty meteor scatter z YA-MS), swpc (data NOAA), mappa (pobřeží a hranice z Natural Earth, stažené z GitHubu při prvním spuštění: poprvé je potřeba síť) a aggiornamento (balíčky automatické aktualizace, které lze smazat).
 LI|Heslo k LoTW se nikdy neukládá; zapamatovat si lze jen uživatelské jméno.
 LI|Aktualizace: od verze 0.4.5 program sám kontroluje, při spuštění a pak každých 6 hodin, zda na GitHubu nevyšla nová verze. Pokud ano, oznámí to oknem a oranžovým nápisem ▲ v horní liště: „Aktualizovat nyní“ stáhne balíček vhodný pro počítač (Windows 64 nebo 32 bitů, Linux, Raspberry Pi, Mac), zavře program, nahradí soubory a znovu jej spustí; „Později“ odloží, „Přeskočit tuto verzi“ ji již nenabízí. Nastavení, shromážděné spoty a call3.txt zůstanou. Kontrolu lze vypnout zaškrtávacím políčkem ve stejném okně.
+LI|Od verze 0.4.12 jsou aktualizace automatické a tiché: když je na GitHubu nová verze, program ji stáhne, nainstaluje a sám se restartuje, aniž by se na cokoli ptal. Chybějící soubory se také znovu stáhnou bez ptaní. Okno aktualizace se objeví jen po kliknutí na verzi nahoře nebo pokud do souboru data/ela.ini zapíšete agg_automatici=0.
 LI|Chybějící soubory: při spuštění program kontroluje, zda má všechny soubory, se kterými byl distribuován (překlady, dokumenty, tabulky). Pokud některý chybí, okno je vypíše a tlačítko „Stáhnout z GitHubu“ je znovu získá ze stejné verze zveřejněné na GitHubu.
 LI|Během aktualizace okno ukazuje průběh stahování a rozbalování. Pokud do složky programu nelze zapisovat, například uvnitř systémové složky, program to oznámí a nabídne stránku vydání, odkud se stáhne instalační balíček; pokud se něco nezdaří, zobrazí se důvod a tlačítko se změní na „Stránka vydání“.
 H2|1.3 Horní lišta

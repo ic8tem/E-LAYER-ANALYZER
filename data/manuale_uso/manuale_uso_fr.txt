@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de YA-MS
-SUB|Version 1.8.5 - réalisé par Costantino IC8TEM - novembre 2026
+SUB|Version 1.8.6 - réalisé par Costantino IC8TEM - novembre 2026
 H1|1. Introduction
 H2|1.1 À quoi sert YA-MS
 P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
@@ -26,6 +26,7 @@ P|Au démarrage apparaît pendant quelques secondes l'écran d'accueil avec les 
 H2|2.3 Le dossier data
 P|Tous les réglages et toutes les données se trouvent dans un dossier data unique, à côté du programme : pas d'AppData, pas de dossiers système. Pour transférer YA-MS sur un autre ordinateur, il suffit de copier le dossier du programme avec son dossier data. Le contenu du dossier est décrit au chapitre 13.
 H2|2.4 Mises à jour automatiques
+P|Depuis la version 1.8.6, les mises à jour sont automatiques et silencieuses : au démarrage puis toutes les 6 heures, YA-MS consulte GitHub et, s'il y a une nouvelle version, la télécharge, l'installe et redémarre tout seul sans rien demander (seule la barre d'état l'indique). Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre décrite ci-dessous n'apparaît qu'en appuyant sur "Mises à jour" ou si vous écrivez aggiornamenti_automatici=0 dans le fichier data/config.ini.
 P|Depuis la version 1.8.0, YA-MS vérifie de lui-même sur GitHub, au démarrage et au plus une fois par jour, si une nouvelle version est sortie. Si c'est le cas, la fenêtre « Mise à jour disponible » apparaît avec les nouveautés et trois boutons :
 LI|Mettre à jour maintenant : télécharge le paquet adapté à votre système, remplace les fichiers du programme, conserve le dossier data et redémarre YA-MS. Les fichiers du programme situés dans le dossier data que la nouvelle version modifie sont d'abord copiés dans data/backup/v<ancienne version> ; vos fichiers (réglages, archives, spots, ADIF) ne sont pas touchés.
 LI|Plus tard : ferme la fenêtre ; la vérification est répétée le lendemain.
@@ -161,6 +162,7 @@ P|Une carte azimutale équidistante centrée sur votre station avec tout le traf
 LI|Rayon de la carte : 600-3500 km. Spots à afficher : 15 ou 30 dernières minutes, dernière heure, 3 ou 24 dernières heures.
 LI|Un clic sur un trajet ou sur une ligne du tableau met la liaison en évidence et affiche le centre du nuage, son altitude et ses dimensions.
 LI|Afficher qui écoute : des triangles de la couleur de la bande marquent les stations qui, selon PSKReporter, reçoivent en MSK144, FSK441, PSK2K ou JTMS sur 28, 50, 70, 144 et 432 MHz dans la fenêtre de temps choisie. Un clic sur un triangle affiche indicatif, locator, modes et dernier spot. Le flux MQTT de l'onglet Collecte de données doit être connecté.
+LI|Les spots de toutes les bandes sont affichés, y compris ceux des bandes non choisies dans Collecte de données (ceux-ci ne sont pas enregistrés). Les spots CW et ceux entre stations trop proches ne sont pas affichés s'ils sont rejetés dans Collecte de données.
 H2|9.2 Flux radar
 P|Les comptages horaires des météores et les altitudes des traînées du radar SKiYMET de Collm (36,2 MHz) et la dernière image du radar de Sodankylä (36,9 MHz).
 LI|Télécharger maintenant et Mise à jour automatique de toutes les sources toutes les 5 minutes : chaque source n'est téléchargée à nouveau que si elle a changé.

@@ -24,6 +24,8 @@ Installer den nye versjonen oppå den gamle: innstillinger, innsamlede spot, log
 
 **Automatisk oppdatering (fra versjon 0.4.5).** Ved oppstart og deretter hver 6. time sjekker programmet GitHub Releases. Når en ny versjon er kommet, åpner det et vindu og viser en oransje **▲ x.y.z** ved siden av NTP-indikatoren i linjen øverst:
 
+**Fra versjon 0.4.12 er oppdateringene automatiske og stille**: når det finnes en ny versjon på GitHub, laster programmet den ned, installerer den og starter på nytt av seg selv uten å spørre om noe. Manglende filer lastes også ned på nytt uten å spørre. Oppdateringsvinduet vises bare med et klikk på versjonen øverst, eller hvis du skriver agg_automatici=0 i filen data/ela.ini.
+
 - **Oppdater nå** laster ned den portable pakken for datamaskinen din (Windows 64/32 bit, Linux, Raspberry Pi, Mac), lukker programmet, erstatter filene og starter det på nytt. Innstillinger, innsamlede spot, logger og `call3.txt` beholdes.
 - **Senere** spør igjen ved neste sjekk; **Hopp over versjonen** slutter å foreslå den versjonen.
 - Et klikk på versjonen som vises i linjen øverst (for eksempel `v0.4.5`), ser straks etter oppdateringer. Den automatiske sjekken kan slås av med avkrysningsboksen i samme vindu.

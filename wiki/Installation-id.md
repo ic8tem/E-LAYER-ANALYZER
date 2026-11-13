@@ -24,6 +24,8 @@ Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3
 
 **Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 6 jam program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
 
+**Sejak versi 0.4.12 pembaruan berjalan otomatis dan diam-diam**: saat ada versi baru di GitHub, program mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun. Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela pembaruan hanya muncul dengan klik pada versi di bagian atas, atau jika Anda menulis agg_automatici=0 di berkas data/ela.ini.
+
 - **Perbarui sekarang** mengunduh paket portabel untuk komputer Anda (Windows 64/32 bit, Linux, Raspberry Pi, Mac), menutup program, mengganti file lalu menjalankannya kembali. Pengaturan, spot terkumpul, log dan `call3.txt` tetap tersimpan.
 - **Nanti** menanyakan lagi pada pemeriksaan berikutnya; **Lewati versi ini** berhenti menawarkan versi tersebut.
 - Mengklik versi yang tampil di bilah atas (misalnya `v0.4.5`) langsung memeriksa pembaruan. Pemeriksaan otomatis dapat dimatikan dengan kotak centang di jendela yang sama.

@@ -24,6 +24,8 @@ Settu nýju útgáfuna upp yfir þá gömlu: stillingar, söfnuð spot, dagbæku
 
 **Sjálfvirk uppfærsla (frá útgáfu 0.4.5).** Við ræsingu og síðan á 6 klukkustunda fresti athugar forritið GitHub Releases. Þegar ný útgáfa er komin út opnar það glugga og sýnir appelsínugult **▲ x.y.z** við hlið NTP-vísisins í efri stikunni:
 
+**Frá útgáfu 0.4.12 eru uppfærslur sjálfvirkar og hljóðlausar**: þegar ný útgáfa er á GitHub sækir forritið hana, setur hana upp og endurræsir sig sjálft án þess að spyrja. Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Uppfærsluglugginn birtist aðeins með smelli á útgáfuna efst, eða ef þú skrifar agg_automatici=0 í skrána data/ela.ini.
+
 - **Uppfæra núna** sækir færanlega pakkann fyrir tölvuna þína (Windows 64/32 bita, Linux, Raspberry Pi, Mac), lokar forritinu, skiptir út skránum og endurræsir það. Stillingar, söfnuð spot, dagbækur og `call3.txt` haldast.
 - **Seinna** spyr aftur við næstu athugun; **Sleppa þessari útgáfu** hættir að bjóða þá útgáfu.
 - Smellur á útgáfuna sem sýnd er í efri stikunni (til dæmis `v0.4.5`) leitar strax að uppfærslum. Slökkva má á sjálfvirku athuguninni með gátreitnum í sama glugga.

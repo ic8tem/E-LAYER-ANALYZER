@@ -61,6 +61,11 @@ namespace YAMS
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
                 Text = Lang.T("Spot MS della linguetta \"Raccolta dati\". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
             });
+            side.Children.Add(new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), FontSize = 12,
+                Text = Lang.T("Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.")
+            });
             sldTrafficRadius = new Slider { Minimum = 600, Maximum = 3500, Value = traffic.RadiusKm, Width = 220, VerticalAlignment = VerticalAlignment.Center };
             lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
             sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
@@ -187,9 +192,10 @@ namespace YAMS
             List<TrafficSpot> list = new List<TrafficSpot>();
             int outside = 0, noLoc = 0;
             Dictionary<string, int> perBand = new Dictionary<string, int>();
-            for (int i = MsCollector.Spots.Count - 1; i >= 0 && list.Count < 400; i--)
+            List<MsSpot> all = MsCollector.MapSpots();   // tutte le bande, senza CW e spot troppo vicini
+            for (int i = all.Count - 1; i >= 0 && list.Count < 400; i--)
             {
-                MsSpot s = MsCollector.Spots[i];
+                MsSpot s = all[i];
                 if (s.Utc < lim) continue;
                 LatLon a, b;
                 if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) { noLoc++; continue; }
@@ -228,7 +234,7 @@ namespace YAMS
             if (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true)
                 foreach (MsListener ml in MsCollector.Listeners.Values)
                 {
-                    if (ml.LastUtc < lim || !MsCollector.Bands.Contains(ml.Band)) continue;
+                    if (ml.LastUtc < lim) continue;   // tutte le bande, anche quelle non scelte nella Raccolta dati
                     LatLon q;
                     if (!Astro.TryLocator(ml.Loc, out q) || !traffic.Inside(q)) continue;
                     nLis++;

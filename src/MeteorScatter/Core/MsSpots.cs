@@ -114,8 +114,24 @@ namespace YAMS
         public static bool IsNear(MsSpot s)
         {
             if (s == null) return false;
-            Locate(s);
+            if (double.IsNaN(s.DistKm)) Locate(s);
             return !double.IsNaN(s.DistKm) && s.DistKm < NearKm;
+        }
+        // spot da non mostrare con i filtri attuali (anche quelli gia' in memoria o letti dall'archivio di una versione
+        // precedente): CW e stazioni piu' vicine della distanza minima
+        public static bool Hidden(MsSpot s) { return (DropCw && IsCw(s)) || (DropNear && IsNear(s)); }
+        // spot MS delle bande non scelte nella Raccolta dati: non si memorizzano su disco, ma si mostrano comunque nel
+        // Traffico in diretta (richiesta dell'autore, 13/11/2026); ultimi 2000
+        public static readonly List<MsSpot> OtherBandSpots = new List<MsSpot>();
+        static readonly HashSet<string> otherKeys = new HashSet<string>();
+        // tutti gli spot da disegnare nel traffico in diretta, in ordine di arrivo
+        public static List<MsSpot> MapSpots()
+        {
+            List<MsSpot> r = new List<MsSpot>(Spots.Count + OtherBandSpots.Count);
+            foreach (MsSpot s in Spots) if (!Hidden(s)) r.Add(s);
+            foreach (MsSpot s in OtherBandSpots) if (!Hidden(s)) r.Add(s);
+            r.Sort((x, y) => x.Utc.CompareTo(y.Utc));
+            return r;
         }
         static readonly Regex rxCw = new Regex(@"(?<![A-Za-z0-9])(CW|WPM)(?![A-Za-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
         static readonly Regex rxMsTag = new Regex(@"<\s*MS\s*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
@@ -298,7 +314,7 @@ namespace YAMS
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
 
         // svuota la tabella degli spot e l'elenco dei doppioni (uno spot uguale arrivato dopo torna a comparire)
-        public static void ClearSpots() { Spots.Clear(); keys.Clear(); }
+        public static void ClearSpots() { Spots.Clear(); keys.Clear(); OtherBandSpots.Clear(); otherKeys.Clear(); }
 
         // solo per le fotografie di controllo (--screenshot): spot di esempio, non salvati su disco
         public static void AddDemo(MsSpot s) { if (keys.Add(s.Key)) Spots.Add(s); }
@@ -354,7 +370,18 @@ namespace YAMS
             MsFilterWord w; string other;
             string why = Decide(s, out w, out other);
             if (why == null) { if (other != null) RejectedOther++; else RejectedNoWord++; return false; }
-            if (s.Band.Length == 0 || !Bands.Contains(s.Band)) { RejectedBand++; return false; }
+            if (s.Band.Length == 0) { RejectedBand++; return false; }
+            if (!Bands.Contains(s.Band))
+            {
+                RejectedBand++;
+                s.Match = why;
+                if (!otherKeys.Add(s.Key)) return false;
+                Locate(s);
+                s.Received = DateTime.UtcNow;
+                OtherBandSpots.Add(s);
+                if (OtherBandSpots.Count > 2000) { for (int k = 0; k < 200; k++) otherKeys.Remove(OtherBandSpots[k].Key); OtherBandSpots.RemoveRange(0, 200); }
+                return true;
+            }
             s.Match = why;
             if (!keys.Add(s.Key)) return false;
             if (w != null) w.Count++; else AcceptedWindow++;
@@ -473,6 +500,7 @@ namespace YAMS
                         s.DxCall = p[3]; s.Spotter = p[4]; s.LocDx = p[5]; s.LocSpotter = p[6];
                         double km; s.DistKm = double.TryParse(p[7], NumberStyles.Float, CultureInfo.InvariantCulture, out km) ? km : double.NaN;
                         s.Match = p[8]; s.Source = Math.Max(0, Array.IndexOf(SourceNames, p[9])); s.Comment = p[10];
+                        if (Hidden(s)) continue;   // archivio scritto con filtri diversi (versione precedente)
                         if (keys.Add(s.Key)) Spots.Add(s);
                     }
                 }

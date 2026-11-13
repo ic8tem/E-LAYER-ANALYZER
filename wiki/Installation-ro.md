@@ -24,6 +24,8 @@ Instalează noua versiune peste cea veche: setările, spoturile colectate, logur
 
 **Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 6 ore programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
 
+**Începând cu versiunea 0.4.12 actualizările sunt automate și silențioase**: când pe GitHub există o versiune nouă, programul o descarcă, o instalează și repornește singur fără să întrebe nimic. Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra de actualizare apare doar cu un clic pe versiunea de sus sau dacă scrii agg_automatici=0 în fișierul data/ela.ini.
+
 - **Actualizează acum** descarcă pachetul portabil pentru calculatorul tău (Windows 64/32 de biți, Linux, Raspberry Pi, Mac), închide programul, înlocuiește fișierele și îl repornește. Setările, spoturile colectate, logurile și `call3.txt` se păstrează.
 - **Mai târziu** întreabă din nou la următoarea verificare; **Omite această versiune** nu mai propune versiunea respectivă.
 - Un clic pe versiunea afișată în bara de sus (de exemplu `v0.4.5`) verifică imediat actualizările. Verificarea automată se poate dezactiva din caseta din aceeași fereastră.

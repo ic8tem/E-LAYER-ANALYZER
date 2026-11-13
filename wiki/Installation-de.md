@@ -24,6 +24,8 @@ Installieren Sie die neue Version über die alte: Einstellungen, gesammelte Spot
 
 **Automatische Aktualisierung (ab Version 0.4.5).** Beim Start und danach alle 6 Stunden prüft das Programm die GitHub-Releases. Ist eine neue Version erschienen, öffnet es ein Fenster und zeigt in der oberen Leiste neben der NTP-Anzeige ein orangefarbenes **▲ x.y.z**:
 
+**Ab Version 0.4.12 erfolgen Updates automatisch und still**: Liegt auf GitHub eine neue Version vor, lädt das Programm sie herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen. Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das Update-Fenster erscheint nur mit einem Klick auf die Version oben oder wenn du agg_automatici=0 in die Datei data/ela.ini schreibst.
+
 - **Jetzt aktualisieren** lädt das portable Paket für Ihren Computer herunter (Windows 64/32 Bit, Linux, Raspberry Pi, Mac), schließt das Programm, ersetzt die Dateien und startet es neu. Einstellungen, gesammelte Spots, Logs und `call3.txt` bleiben erhalten.
 - **Später** fragt bei der nächsten Prüfung erneut; **Version überspringen** schlägt diese Version nicht mehr vor.
 - Ein Klick auf die in der oberen Leiste angezeigte Version (zum Beispiel `v0.4.5`) sucht sofort nach Updates. Die automatische Prüfung lässt sich mit dem Kästchen im selben Fenster abschalten.

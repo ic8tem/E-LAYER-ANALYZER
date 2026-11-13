@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Versie 1.8.5 - door Costantino IC8TEM - november 2026
+SUB|Versie 1.8.6 - door Costantino IC8TEM - november 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor dient YA-MS
 P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
@@ -26,6 +26,7 @@ P|Bij het opstarten verschijnt enkele seconden het startscherm met de Perseïden
 H2|2.3 De map data
 P|Alle instellingen en alle gegevens staan in één map data naast het programma: geen AppData, geen systeemmappen. Om YA-MS naar een andere computer te verplaatsen kopieer je gewoon de programmamap met de map data erin. De inhoud van de map wordt beschreven in hoofdstuk 13.
 H2|2.4 Automatische updates
+P|Vanaf versie 1.8.6 zijn updates automatisch en stil: bij het starten en daarna elke 6 uur controleert YA-MS GitHub en, als er een nieuwe versie is, downloadt en installeert die en herstart vanzelf zonder iets te vragen (alleen de statusbalk meldt het). Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het hieronder beschreven venster verschijnt alleen als je op "Updates" drukt of als je aggiornamenti_automatici=0 in het bestand data/config.ini schrijft.
 P|Vanaf versie 1.8.0 controleert YA-MS zelf op GitHub, bij het opstarten en hooguit eenmaal per dag, of er een nieuwe versie is verschenen. Als dat zo is, verschijnt het venster "Update beschikbaar" met de nieuwigheden en drie knoppen:
 LI|Nu bijwerken: downloadt het pakket dat bij jouw systeem past, vervangt de programmabestanden, behoudt de map data en start YA-MS opnieuw. Programmabestanden in de map data die de nieuwe versie wijzigt, worden eerst gekopieerd naar data/backup/v<oude versie>; jouw eigen bestanden (instellingen, archieven, spots, ADIF) worden niet aangeraakt.
 LI|Later: sluit het venster; de controle wordt de volgende dag herhaald.
@@ -161,6 +162,7 @@ P|Een azimutale equidistante kaart gecentreerd op jouw station met al het verzam
 LI|Kaartstraal: 600-3500 km. Te tonen spots: laatste 15 of 30 minuten, laatste uur, laatste 3 of 24 uur.
 LI|Een klik op een traject of op een regel van de tabel markeert de verbinding en toont het midden van de wolk, de hoogte en de afmetingen ervan.
 LI|Tonen wie luistert: driehoeken in de bandkleur markeren de stations die volgens PSKReporter in het gekozen tijdvenster MSK144, FSK441, PSK2K of JTMS ontvangen op 28, 50, 70, 144 en 432 MHz. Een klik op een driehoek toont roepnaam, locator, modes en laatste spot. De MQTT-stroom in het tabblad Gegevensverzameling moet verbonden zijn.
+LI|Spots van alle banden worden getoond, ook van banden die niet in Gegevensverzameling zijn gekozen (die worden niet opgeslagen). CW-spots en spots tussen te dicht bij elkaar liggende stations worden niet getoond als ze in Gegevensverzameling worden weggegooid.
 H2|9.2 Radarflux
 P|De uurtellingen van de meteoren en de spoorhoogten van de SKiYMET-radar van Collm (36,2 MHz) en de laatste afbeelding van de radar van Sodankylä (36,9 MHz).
 LI|Nu downloaden en Automatisch bijwerken van alle bronnen elke 5 minuten: elke bron wordt alleen opnieuw gedownload als ze veranderd is.

@@ -1,4 +1,4 @@
-E-LAYER ANALYZER 0.4.11 - a cura di Costantino IC8TEM
+E-LAYER ANALYZER 0.4.12 - a cura di Costantino IC8TEM
 Analisi dei modi di propagazione VHF dello strato E: E-sporadico, F.A.I., meteor scatter (YA-MS), aurora.
 Windows, Linux, Raspberry Pi e Mac.
 
@@ -26,6 +26,9 @@ INSTALLAZIONE
   Le versioni nuove si installano sopra la precedente: impostazioni, spot raccolti e call3.txt restano.
   Dalla versione 0.4.5 il programma segnala da solo le versioni nuove pubblicate su GitHub e si aggiorna con
   un clic ("Aggiorna ora"); all'avvio controlla anche che non manchino file e propone di riscaricarli.
+  Dalla versione 0.4.12 l'aggiornamento e' automatico e silenzioso: il programma scarica la versione nuova, la
+  installa e si riavvia da solo senza chiedere; anche i file mancanti si riscaricano senza chiedere.
+  Per farsi chiedere di nuovo: agg_automatici=0 nel file data/ela.ini.
 
 PRIMO AVVIO
   1. In alto scrivere nominativo, locator e quota, poi "Applica".
@@ -41,7 +44,7 @@ LINGUETTE
   F.A.I.           "Scatter trail": luogo degli scatter point per una coppia di stazioni (con i QTF di entrambe);
                    "Iso-riflessione": curve di deviazione dalla condizione di riflessione per un punto cliccato.
                    Campo geomagnetico IGRF-14.
-  METEOR SCATTER   il programma YA-MS completo (dalla 0.4.11 YA-MS 1.8.5: spot tra stazioni piu' vicine di 500 km scartati; dalla 0.4.10: spot CW scartati, stazioni in ascolto MS sulla mappa del traffico; dalla 0.4.9: lettera del lato Hot su ogni valore, "diagramma d'antenna" nel riquadro arancione; dalla 0.4.6: lobo d'antenna come diagramma verticale,
+  METEOR SCATTER   il programma YA-MS completo (dalla 0.4.12 YA-MS 1.8.6: traffico in diretta con tutte le bande; dalla 0.4.11 YA-MS 1.8.5: spot tra stazioni piu' vicine di 500 km scartati; dalla 0.4.10: spot CW scartati, stazioni in ascolto MS sulla mappa del traffico; dalla 0.4.9: lettera del lato Hot su ogni valore, "diagramma d'antenna" nel riquadro arancione; dalla 0.4.6: lobo d'antenna come diagramma verticale,
                    avviso "nessuna zona comune", angolo beta in evidenza, Manuale d'uso, confronto con spot reali MSQP 2025).
   AURORA           ovale OVATION, Kp e vento solare NOAA, Scatter trail e iso-riflessione per l'aurora radio,
                    spot <AU>/<AUR> disegnati con il calcolo dello scatter point.

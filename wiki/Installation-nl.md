@@ -24,6 +24,8 @@ Installeer de nieuwe versie over de oude heen: instellingen, verzamelde spots, l
 
 **Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 6 uur controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
 
+**Vanaf versie 0.4.12 zijn updates automatisch en stil**: als er een nieuwe versie op GitHub staat, downloadt het programma die, installeert die en herstart vanzelf zonder iets te vragen. Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het updatevenster verschijnt alleen met een klik op de versie bovenaan, of als je agg_automatici=0 in het bestand data/ela.ini schrijft.
+
 - **Nu bijwerken** downloadt het draagbare pakket voor je computer (Windows 64/32-bit, Linux, Raspberry Pi, Mac), sluit het programma, vervangt de bestanden en start het opnieuw. Instellingen, verzamelde spots, logs en `call3.txt` blijven behouden.
 - **Later** vraagt het opnieuw bij de volgende controle; **Deze versie overslaan** stelt die versie niet meer voor.
 - Een klik op de versie in de bovenste balk (bijvoorbeeld `v0.4.5`) zoekt meteen naar updates. De automatische controle kan worden uitgeschakeld met het vakje in hetzelfde venster.

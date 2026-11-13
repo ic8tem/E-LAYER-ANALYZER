@@ -1,5 +1,5 @@
 TITLE|Notendahandbók YA-MS
-SUB|Útgáfa 1.8.5 - umsjón Costantino IC8TEM - nóvember 2026
+SUB|Útgáfa 1.8.6 - umsjón Costantino IC8TEM - nóvember 2026
 H1|1. Inngangur
 H2|1.1 Til hvers YA-MS er
 P|YA-MS hjálpar þér að spá fyrir um og fylgjast í beinni með skilyrðum fyrir meteor scatter milli stöðvarinnar þinnar og mótstöðvar, frá 28 upp í 432 MHz. Fyrir hverja virka loftsteinadrífu segir forritið hversu vel staða geislapunktsins hentar leiðinni þinni (nýtnin), á hvaða tímum, frá hvorri hlið leiðarinnar endurvörpin koma og hvert best er að beina loftnetinu. Við hlið spárinnar sýnir það mæligögn í beinni: talningar loftsteinaratsjárinnar í Collm, myndavélar Global Meteor Network, CMOR-ratsjána, GRAVES-sendinn og meteor scatter-umferðina sem safnað er frá klösunum og frá PSKReporter.
@@ -26,6 +26,7 @@ P|Við ræsingu birtist í nokkrar sekúndur mynd af Persítum yfir VLT-sjónauk
 H2|2.3 Mappan data
 P|Allar stillingar og öll gögn eru í einni möppu, data, við hlið forritsins: engin AppData, engar kerfismöppur. Til að flytja YA-MS á aðra tölvu nægir að afrita forritsmöppuna ásamt möppunni data. Innihaldi möppunnar er lýst í kafla 13.
 H2|2.4 Sjálfvirkar uppfærslur
+P|Frá útgáfu 1.8.6 eru uppfærslur sjálfvirkar og hljóðlausar: við ræsingu og síðan á 6 klukkustunda fresti athugar YA-MS GitHub og, ef ný útgáfa er til, sækir hana, setur hana upp og endurræsir sig sjálft án þess að spyrja (aðeins stöðustikan segir frá því). Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Glugginn sem lýst er hér að neðan birtist aðeins þegar þú ýtir á "Uppfærslur" eða ef þú skrifar aggiornamenti_automatici=0 í skrána data/config.ini.
 P|Frá útgáfu 1.8.0 athugar YA-MS sjálft á GitHub, við ræsingu og í mesta lagi einu sinni á dag, hvort ný útgáfa sé komin. Ef svo er birtist glugginn „Uppfærsla í boði“ með nýjungunum og þremur hnöppum:
 LI|Uppfæra núna: sækir pakkann sem hentar kerfinu þínu, skiptir út skrám forritsins, heldur möppunni data og endurræsir YA-MS. Forritsskrár í möppunni data sem nýja útgáfan breytir eru fyrst afritaðar í data/backup/v<gamla útgáfan>; skrárnar þínar (stillingar, söfn, spot, ADIF) eru ekki snertar.
 LI|Seinna: lokar glugganum; athugunin er endurtekin daginn eftir.
@@ -161,6 +162,7 @@ P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þ
 LI|Radíus korts: 600-3500 km. Spot til að sýna: síðustu 15 eða 30 mínútur, síðasta klukkustund, síðustu 3 eða 24 klukkustundir.
 LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju skýsins, hæð þess og stærð.
 LI|Sýna hverjir hlusta: þríhyrningar í lit bandsins merkja stöðvar sem samkvæmt PSKReporter taka á móti MSK144, FSK441, PSK2K eða JTMS á 28, 50, 70, 144 og 432 MHz í völdum tímaglugga. Smellur á þríhyrning sýnir kallmerki, staðsetningu, hætti og síðasta spot. MQTT-straumurinn í flipanum Gagnasöfnun verður að vera tengdur.
+LI|Spott allra banda eru sýnd, líka banda sem ekki eru valin í Gagnasöfnun (þau eru ekki vistuð). CW-spott og spott milli stöðva sem eru of nálægt eru ekki sýnd ef þeim er hent í Gagnasöfnun.
 H2|9.2 Ratsjárflæði
 P|Talningar loftsteina á klukkustund og hæðir slóða frá SKiYMET-ratsjánni í Collm (36,2 MHz) og nýjasta myndin frá ratsjánni í Sodankylä (36,9 MHz).
 LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst.

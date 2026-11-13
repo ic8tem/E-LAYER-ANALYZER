@@ -1,5 +1,5 @@
 TITLE|Bruksanvisning för YA-MS
-SUB|Version 1.8.5 - av Costantino IC8TEM - november 2026
+SUB|Version 1.8.6 - av Costantino IC8TEM - november 2026
 H1|1. Inledning
 H2|1.1 Vad YA-MS används till
 P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
@@ -26,6 +26,7 @@ P|Vid start visas i några sekunder startbilden med Perseiderna över ESO:s VLT.
 H2|2.3 Mappen data
 P|Alla inställningar och alla data finns i en enda mapp data bredvid programmet: ingen AppData, inga systemmappar. För att flytta YA-MS till en annan dator räcker det att kopiera programmappen med dess mapp data. Mappens innehåll beskrivs i kapitel 13.
 H2|2.4 Automatiska uppdateringar
+P|Från version 1.8.6 är uppdateringarna automatiska och tysta: vid start och sedan var 6:e timme kontrollerar YA-MS GitHub och, om det finns en ny version, laddar ner den, installerar den och startar om av sig självt utan att fråga något (bara statusraden visar det). Saknade filer laddas också ner igen utan att fråga. Fönstret som beskrivs nedan visas bara när du trycker på "Uppdateringar" eller om du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Från version 1.8.0 kontrollerar YA-MS själv på GitHub, vid start och högst en gång per dag, om en ny version har kommit ut. Om det finns en visas fönstret "Uppdatering tillgänglig" med nyheterna och tre knappar:
 LI|Uppdatera nu: laddar ner det paket som passar ditt system, ersätter programfilerna, behåller mappen data och startar om YA-MS. Programfiler i mappen data som den nya versionen ändrar kopieras först till data/backup/v<gammal version>; dina egna filer (inställningar, arkiv, spots, ADIF) rörs inte.
 LI|Senare: stänger fönstret; kontrollen upprepas nästa dag.
@@ -161,6 +162,7 @@ P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteo
 LI|Kartradie: 600-3500 km. Spots att visa: senaste 15 eller 30 minuterna, senaste timmen, senaste 3 eller 24 timmarna.
 LI|Ett klick på en sträcka eller på en rad i tabellen markerar förbindelsen och visar molnets centrum, dess höjd och dess storlek.
 LI|Visa vem som lyssnar: trianglar i bandets färg markerar stationer som enligt PSKReporter tar emot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 och 432 MHz i det valda tidsfönstret. Ett klick på en triangel visar anropssignal, lokator, moder och senaste spot. MQTT-flödet i fliken Datainsamling måste vara anslutet.
+LI|Spottar från alla band visas, även från band som inte valts i Datainsamling (de sparas inte). CW-spottar och spottar mellan för närliggande stationer visas inte, om de kastas i Datainsamling.
 H2|9.2 Radarflöde
 P|Timräkningarna av meteorer och spårhöjderna från SKiYMET-radarn i Collm (36,2 MHz) och den senaste bilden från radarn i Sodankylä (36,9 MHz).
 LI|Hämta nu och Automatisk uppdatering av alla källor var 5:e minut: varje källa hämtas på nytt bara om den har ändrats.

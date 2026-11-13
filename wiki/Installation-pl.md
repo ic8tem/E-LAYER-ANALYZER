@@ -24,6 +24,8 @@ Zainstaluj nową wersję na starej: ustawienia, zebrane spoty, logi i `call3.txt
 
 **Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 6 godzin program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
 
+**Od wersji 0.4.12 aktualizacje są automatyczne i ciche**: gdy na GitHubie jest nowa wersja, program ją pobiera, instaluje i sam uruchamia się ponownie, o nic nie pytając. Brakujące pliki również są pobierane ponownie bez pytania. Okno aktualizacji pojawia się tylko po kliknięciu wersji u góry albo jeśli wpiszesz agg_automatici=0 w pliku data/ela.ini.
+
 - **Aktualizuj teraz** pobiera pakiet przenośny dla twojego komputera (Windows 64/32 bity, Linux, Raspberry Pi, Mac), zamyka program, zastępuje pliki i uruchamia go ponownie. Ustawienia, zebrane spoty, logi i `call3.txt` zostają zachowane.
 - **Później** pyta ponownie przy następnym sprawdzeniu; **Pomiń tę wersję** przestaje proponować tę wersję.
 - Kliknięcie wersji wyświetlanej na górnym pasku (na przykład `v0.4.5`) od razu sprawdza aktualizacje. Automatyczne sprawdzanie można wyłączyć polem wyboru w tym samym oknie.

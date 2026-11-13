@@ -24,6 +24,8 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 
 **Automatinis atnaujinimas (nuo 0.4.5 versijos).** Paleidžiant ir vėliau kas 6 valandas programa tikrina GitHub Releases. Pasirodžius naujai versijai, ji atidaro langą ir viršutinėje juostoje šalia NTP indikatoriaus parodo oranžinį **▲ x.y.z**:
 
+**Nuo 0.4.12 versijos atnaujinimai yra automatiniai ir tylūs**: kai GitHub yra nauja versija, programa ją atsisiunčia, įdiegia ir pati paleidžiama iš naujo nieko neklausdama. Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Atnaujinimo langas atsiranda tik spustelėjus versiją viršuje arba jei faile data/ela.ini įrašai agg_automatici=0.
+
 - **Atnaujinti dabar** atsisiunčia jūsų kompiuteriui skirtą nešiojamąjį paketą (Windows 64/32 bitų, Linux, Raspberry Pi, Mac), uždaro programą, pakeičia failus ir ją paleidžia iš naujo. Nustatymai, surinkti spotai, žurnalai ir `call3.txt` išsaugomi.
 - **Vėliau** paklausia dar kartą per kitą patikrinimą; **Praleisti šią versiją** nustoja siūlyti tą versiją.
 - Spustelėjus viršutinėje juostoje rodomą versiją (pavyzdžiui, `v0.4.5`), atnaujinimai patikrinami iš karto. Automatinį tikrinimą galima išjungti žymimuoju langeliu tame pačiame lange.

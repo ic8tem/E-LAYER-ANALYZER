@@ -2,7 +2,7 @@
 
 [← Strona główna](Home-pl)
 
-Ta zakładka zawiera pełny **YA-MS 1.8.5**, program meteor scatter autorstwa IC8TEM: sferę niebieską z radiantami, strumień z radarów SKiYMET (Collm, Sodankylä), obliczanie efektywności rojów, eksperymentalne prognozy, geometrię i tłumienie, GRAVES, mapę kwadratów, **Roje na żywo** (ZHR mierzone przez Global Meteor Network i radianty z radaru CMOR), **Mapę źródeł** (Collm, Sodankylä, GRAVES i CMOR względem stacji) oraz dokument **Wyjaśnienie obliczania wydajności** ze wzorami.
+Ta zakładka zawiera pełny **YA-MS 1.8.6**, program meteor scatter autorstwa IC8TEM: sferę niebieską z radiantami, strumień z radarów SKiYMET (Collm, Sodankylä), obliczanie efektywności rojów, eksperymentalne prognozy, geometrię i tłumienie, GRAVES, mapę kwadratów, **Roje na żywo** (ZHR mierzone przez Global Meteor Network i radianty z radaru CMOR), **Mapę źródeł** (Collm, Sodankylä, GRAVES i CMOR względem stacji) oraz dokument **Wyjaśnienie obliczania wydajności** ze wzorami.
 
 YA-MS 1.5.0 dodaje zakładkę **Zbieranie danych** (spoty meteor scatter filtrowane według MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Wewnątrz E-LAYER ANALYZER nie otwiera własnych sesji telnet: otrzymuje wiersze z sesji DATA COLLECTION, więc nie ma podwójnych logowań tym samym znakiem wywoławczym.
 

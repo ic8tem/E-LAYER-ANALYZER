@@ -24,6 +24,8 @@ Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a n
 
 **Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 6 óránként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
 
+**A 0.4.12-es verziótól a frissítések automatikusak és csendesek**: ha a GitHubon új verzió van, a program letölti, telepíti és magától újraindul, semmit sem kérdezve. A hiányzó fájlokat is kérdés nélkül újratölti. A frissítési ablak csak a fenti verzióra kattintva jelenik meg, vagy ha a data/ela.ini fájlba beírod: agg_automatici=0.
+
 - A **Frissítés most** letölti a számítógépéhez való hordozható csomagot (Windows 64/32 bit, Linux, Raspberry Pi, Mac), bezárja a programot, lecseréli a fájlokat és újraindítja. A beállítások, a gyűjtött spotok, a naplók és a `call3.txt` megmaradnak.
 - A **Később** a következő ellenőrzéskor újra rákérdez; a **Verzió kihagyása** után az adott verziót a program többé nem ajánlja fel.
 - A felső sávban látható verzióra (például `v0.4.5`) kattintva a program azonnal frissítést keres. Az automatikus ellenőrzés ugyanabban az ablakban egy jelölőnégyzettel kikapcsolható.

@@ -1,5 +1,5 @@
 TITLE|YA-MS lietošanas rokasgrāmata
-SUB|Versija 1.8.5 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+SUB|Versija 1.8.6 - sagatavojis Costantino IC8TEM - 2026. gada novembris
 H1|1. Ievads
 H2|1.1 Kam paredzēta YA-MS
 P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
@@ -26,6 +26,7 @@ P|Palaižot uz dažām sekundēm parādās ekrāns ar Perseīdām virs ESO VLT t
 H2|2.3 Mape data
 P|Visi iestatījumi un visi dati atrodas vienā mapē data blakus programmai: nekādas AppData, nekādu sistēmas mapju. Lai pārvietotu YA-MS uz citu datoru, pietiek nokopēt programmas mapi kopā ar tās mapi data. Mapes saturs aprakstīts 13. nodaļā.
 H2|2.4 Automātiskie atjauninājumi
+P|Sākot ar versiju 1.8.6, atjauninājumi ir automātiski un klusi: palaižot un pēc tam ik pēc 6 stundām YA-MS pārbauda GitHub un, ja ir jauna versija, to lejupielādē, instalē un pats restartējas, neko nejautājot (to parāda tikai statusa josla). Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Tālāk aprakstītais logs parādās tikai, nospiežot "Atjauninājumi", vai ja failā data/config.ini ieraksti aggiornamenti_automatici=0.
 P|Sākot ar versiju 1.8.0, YA-MS pati pārbauda GitHub, palaišanas brīdī un ne biežāk kā reizi dienā, vai ir iznākusi jauna versija. Ja ir, parādās logs "Pieejams atjauninājums" ar jaunumiem un trim pogām:
 LI|Atjaunināt tagad: lejupielādē tavai sistēmai piemēroto pakotni, aizstāj programmas failus, saglabā mapi data un restartē YA-MS. Programmas faili mapē data, kurus jaunā versija maina, vispirms tiek nokopēti uz data/backup/v<vecā versija>; tavi faili (iestatījumi, arhīvi, spoti, ADIF) netiek aizskarti.
 LI|Vēlāk: aizver logu; pārbaude atkārtojas nākamajā dienā.
@@ -161,6 +162,7 @@ P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto 
 LI|Kartes rādiuss: 600-3500 km. Rādāmie spoti: pēdējās 15 vai 30 minūtes, pēdējā stunda, pēdējās 3 vai 24 stundas.
 LI|Klikšķis uz trases vai tabulas rindas izceļ sakarus un parāda mākoņa centru, tā augstumu un izmērus.
 LI|Rādīt, kas klausās: joslas krāsas trijstūri iezīmē stacijas, kas pēc PSKReporter datiem izvēlētajā laika logā uztver MSK144, FSK441, PSK2K vai JTMS 28, 50, 70, 144 un 432 MHz joslās. Klikšķis uz trijstūra parāda izsaukuma signālu, lokatoru, režīmus un pēdējo spotu. Cilnes Datu vākšana MQTT plūsmai jābūt pievienotai.
+LI|Tiek rādīti visu joslu spoti, arī to joslu, kas nav izvēlētas Datu vākšanā (tie netiek saglabāti). CW spoti un spoti starp pārāk tuvām stacijām netiek rādīti, ja Datu vākšanā tie tiek atmesti.
 H2|9.2 Radara meteoru skaits
 P|Collm SKiYMET radara (36,2 MHz) meteoru skaits stundā un sliežu augstumi, kā arī jaunākais Sodankylä radara (36,9 MHz) attēls.
 LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies.

@@ -19,6 +19,9 @@ using YAMS;
 
 namespace ELA
 {
+    // Aggiornamento automatico e silenzioso (richiesta dell'autore, 13/11/2026; agg_automatici=1, di partenza): quando
+    // c'e' una versione piu' recente la si scarica e installa e il programma si riavvia da solo, senza finestre; anche i
+    // file mancanti si riscaricano senza chiedere. Con agg_automatici=0 in data/config.ini torna il comportamento qui sotto.
     // Aggiornamento automatico.
     // All'avvio (dopo 20 s) e poi ogni 6 ore legge l'ultima Release di GitHub; se e' piu' recente della versione in uso
     // lo segnala nella barra in alto (scritta lampeggiante cliccabile) e con una finestra: Aggiorna ora / Più tardi / Salta questa versione.
@@ -45,6 +48,7 @@ namespace ELA
         }
 
         public static bool Enabled { get { return Station.Cfg == null || Station.Cfg.GetB("agg_controlla", true); } }
+        public static bool Silent { get { return Enabled && (Station.Cfg == null || Station.Cfg.GetB("agg_automatici", true)); } }
 
         // legge l'ultima Release; true se c'e' una versione piu' recente
         public static async Task<bool> CheckAsync()
@@ -142,6 +146,14 @@ namespace ELA
                 timer.Interval = Interval;
                 if (!Enabled) return;
                 bool n = await CheckAsync();
+                if (n && Silent)
+                {
+                    // scarica, installa e riavvia senza chiedere; se non si puo' (nessun pacchetto, cartella non
+                    // scrivibile, rete) resta solo la scritta in alto e si riprova al controllo successivo
+                    string err = await Install(LatestVersion, p => { }, x => { });
+                    if (err == null) QuitForUpdate();
+                    return;
+                }
                 string skip = Station.Cfg.Get("agg_salta", "");
                 if (n && !shownThisSession && skip != LatestVersion)
                 {
@@ -461,6 +473,7 @@ namespace ELA
             if (Program.ScreenshotDir != null) return;
             List<string> miss = await Task.Run(() => { try { return MissingFiles(); } catch { return new List<string>(); } });
             if (miss.Count == 0) return;
+            if (Silent) { await DownloadMissing(miss, null); return; }   // aggiornamenti automatici: senza chiedere
             Window w = new Window
             {
                 Title = Lang.T("File mancanti"), Width = 620, SizeToContent = SizeToContent.Height, CanResize = false,
@@ -498,25 +511,8 @@ namespace ELA
             {
                 bGet.IsEnabled = false;
                 info.Text = Lang.T("Scaricamento in corso...");
-                int ok = 0, bad = 0;
-                await Task.Run(async () =>
-                {
-                    using (HttpClient h = NewClient(5))
-                        foreach (string rel in miss)
-                        {
-                            try
-                            {
-                                byte[] b = await h.GetByteArrayAsync("https://raw.githubusercontent.com/" + Repo + "/v" + ElaWindow.Version + "/" + rel);
-                                string p = rel.StartsWith("data/") ? Path.Combine(AppPaths.DataDir, rel.Substring(5)) : Path.Combine(AppContext.BaseDirectory, rel);
-                                Directory.CreateDirectory(Path.GetDirectoryName(p));
-                                File.WriteAllBytes(p, b);
-                                ok++;
-                            }
-                            catch { bad++; }
-                            int o = ok, x = bad;
-                            Dispatcher.UIThread.Post(() => info.Text = Lang.F("Scaricati {0} di {1}...", o + x, miss.Count));
-                        }
-                });
+                int[] r = await DownloadMissing(miss, (o, n) => Dispatcher.UIThread.Post(() => info.Text = Lang.F("Scaricati {0} di {1}...", o, n)));
+                int ok = r[0], bad = r[1];
                 info.Text = bad == 0
                     ? Lang.F("Scaricati {0} file. Riavvia il programma per usarli.", ok)
                     : Lang.F("Scaricati {0} file, {1} non disponibili: reinstalla il programma dalla pagina delle release.", ok, bad);
@@ -524,6 +520,30 @@ namespace ELA
             };
             w.Opened += (s, e) => UiScale.Apply(w);
             if (owner != null && owner.IsVisible) await w.ShowDialog(owner); else w.Show();
+        }
+
+        // riscarica da GitHub (stessa versione) i file mancanti; { scaricati, non disponibili }
+        static async Task<int[]> DownloadMissing(List<string> miss, Action<int, int> progress)
+        {
+            int ok = 0, bad = 0;
+            await Task.Run(async () =>
+            {
+                using (HttpClient h = NewClient(5))
+                    foreach (string rel in miss)
+                    {
+                        try
+                        {
+                            byte[] b = await h.GetByteArrayAsync("https://raw.githubusercontent.com/" + Repo + "/v" + ElaWindow.Version + "/" + rel);
+                            string p = rel.StartsWith("data/") ? Path.Combine(AppPaths.DataDir, rel.Substring(5)) : Path.Combine(AppContext.BaseDirectory, rel);
+                            Directory.CreateDirectory(Path.GetDirectoryName(p));
+                            File.WriteAllBytes(p, b);
+                            ok++;
+                        }
+                        catch { bad++; }
+                        if (progress != null) progress(ok + bad, miss.Count);
+                    }
+            });
+            return new[] { ok, bad };
         }
     }
 }

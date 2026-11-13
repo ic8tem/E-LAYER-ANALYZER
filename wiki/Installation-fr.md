@@ -24,6 +24,8 @@ Installez la nouvelle version par-dessus l'ancienne : les réglages, les spots c
 
 **Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 6 heures, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
 
+**Depuis la version 0.4.12, les mises à jour sont automatiques et silencieuses **: quand une nouvelle version est sur GitHub, le programme la télécharge, l'installe et redémarre tout seul sans rien demander. Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre de mise à jour n'apparaît qu'en cliquant sur la version en haut, ou si vous écrivez agg_automatici=0 dans le fichier data/ela.ini.
+
 - **Mettre à jour** télécharge le paquet portable pour votre ordinateur (Windows 64/32 bits, Linux, Raspberry Pi, Mac), ferme le programme, remplace les fichiers et le redémarre. Les réglages, les spots collectés, les logs et `call3.txt` sont conservés.
 - **Plus tard** redemande à la vérification suivante ; **Ignorer cette version** cesse de proposer cette version.
 - Un clic sur la version affichée dans la barre du haut (par exemple `v0.4.5`) recherche immédiatement les mises à jour. La vérification automatique peut être désactivée avec la case de la même fenêtre.

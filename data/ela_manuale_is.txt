@@ -1,5 +1,5 @@
 TITLE|Notendahandbók E-LAYER ANALYZER
-SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.4.11, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
+SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.4.12, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
 H1|1. Áður en hafist er handa
 H2|1.1 Hvað forritið gerir
 P|E-LAYER ANALYZER sameinar í einu forriti verkfærin til að rannsaka þær útbreiðsluaðferðir á VHF sem fara um E-lag jónhvolfsins: sporadic-E, einnig fjölstökk og milli heimsálfa, F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter, með innbyggða forritinu YA-MS, og radíónorðurljós. Það vinnur með spot frá DX-klösum í rauntíma og með ADIF-dagbækur, og sýnir hverja niðurstöðu á korti sem tekur tvo þriðju gluggans, með gögnum og útreikningum í hægri þriðjungnum.
@@ -14,6 +14,7 @@ LI|Til að flytja forritið á aðra tölvu nægir að afrita möppu þess; til 
 LI|Í möppunni data geymir forritið einnig: lingue (þýðingarnar), spot (söfnuð spot), spot_ms (meteor scatter-spot YA-MS), swpc (gögn NOAA), mappa (strandlínur og landamæri frá Natural Earth, sótt af GitHub við fyrstu ræsingu: í fyrsta sinn þarf nettengingu) og aggiornamento (pakkar sjálfvirku uppfærslunnar, sem má eyða).
 LI|Lykilorð LoTW er aldrei vistað; aðeins notandanafnið má muna.
 LI|Uppfærslur: frá útgáfu 0.4.5 athugar forritið sjálft, við ræsingu og síðan á 6 klukkustunda fresti, hvort ný útgáfa sé komin á GitHub. Ef svo er lætur það vita með glugga og með appelsínugula textanum ▲ í efri stikunni: „Uppfæra núna“ sækir pakkann sem hentar tölvunni (Windows 64 eða 32 bita, Linux, Raspberry Pi, Mac), lokar forritinu, skiptir út skránum og endurræsir það; „Seinna“ frestar, „Sleppa þessari útgáfu“ hættir að bjóða hana. Stillingar, söfnuð spot og call3.txt haldast. Slökkva má á athuguninni með gátreitnum í sama glugga.
+LI|Frá útgáfu 0.4.12 eru uppfærslur sjálfvirkar og hljóðlausar: þegar ný útgáfa er á GitHub sækir forritið hana, setur hana upp og endurræsir sig sjálft án þess að spyrja. Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Uppfærsluglugginn birtist aðeins með smelli á útgáfuna efst, eða ef þú skrifar agg_automatici=0 í skrána data/ela.ini.
 LI|Skrár vantar: við ræsingu athugar forritið hvort það hafi allar skrárnar sem því var dreift með (þýðingar, skjöl, töflur). Ef einhverja vantar birtir gluggi lista yfir þær og hnappurinn „Sækja af GitHub“ sækir þær aftur úr sömu útgáfu sem birt er á GitHub.
 LI|Á meðan uppfærslan stendur yfir sýnir glugginn framvindu niðurhals og útdráttar. Ef ekki er hægt að skrifa í möppu forritsins, til dæmis innan kerfismöppu, segir forritið frá því og vísar á útgáfusíðuna, þaðan sem uppsetningarpakkinn er sóttur; ef eitthvað mistekst birtist ástæðan og hnappurinn verður „Síðan Releases“.
 H2|1.3 Efri stikan

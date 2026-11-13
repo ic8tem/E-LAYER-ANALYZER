@@ -24,6 +24,8 @@ I-install ang bagong bersyon sa ibabaw ng luma: pinananatili ang mga setting, na
 
 **Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 6 na oras, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
 
+**Mula sa bersyon 0.4.12, awtomatiko at tahimik ang mga update**: kapag may bagong bersyon sa GitHub, dina-download ito ng programa, ini-install, at kusang nagre-restart nang walang tinatanong. Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window ng update kapag kinlik ang bersyon sa itaas, o kung isusulat mo ang agg_automatici=0 sa file na data/ela.ini.
+
 - Dina-download ng **I-update ngayon** ang portable na package para sa iyong computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), isinasara ang programa, pinapalitan ang mga file at muli itong binubuksan. Pinananatili ang mga setting, nakolektang spot, log at `call3.txt`.
 - Nagtatanong muli ang **Mamaya** sa susunod na pagsusuri; tumitigil ang **Laktawan ang bersiyong ito** sa pagmumungkahi ng bersiyong iyon.
 - Ang pag-click sa bersiyong ipinapakita sa bar sa itaas (halimbawa `v0.4.5`) ay agad na tumitingin ng mga update. Maaaring patayin ang awtomatikong pagsusuri gamit ang checkbox sa parehong window.
