@@ -490,7 +490,8 @@ namespace YAMS
                 UpdateCall3Label();
                 w.Close();
             };
-            await w.ShowDialog(this);
+            Window owner = TopLevel.GetTopLevel(this) as Window;   // dentro E-LAYER ANALYZER il pannello non e' una finestra
+            if (owner != null) await w.ShowDialog(owner); else w.Show();
         }
 
         async System.Threading.Tasks.Task ImportCall3()
