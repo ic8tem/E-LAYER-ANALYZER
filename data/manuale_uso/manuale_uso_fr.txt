@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de YA-MS
-SUB|Version 1.8.6 - réalisé par Costantino IC8TEM - novembre 2026
+SUB|Version 1.8.7 - réalisé par Costantino IC8TEM - novembre 2026
 H1|1. Introduction
 H2|1.1 À quoi sert YA-MS
 P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
@@ -26,7 +26,7 @@ P|Au démarrage apparaît pendant quelques secondes l'écran d'accueil avec les 
 H2|2.3 Le dossier data
 P|Tous les réglages et toutes les données se trouvent dans un dossier data unique, à côté du programme : pas d'AppData, pas de dossiers système. Pour transférer YA-MS sur un autre ordinateur, il suffit de copier le dossier du programme avec son dossier data. Le contenu du dossier est décrit au chapitre 13.
 H2|2.4 Mises à jour automatiques
-P|Depuis la version 1.8.6, les mises à jour sont automatiques et silencieuses : au démarrage puis toutes les 6 heures, YA-MS consulte GitHub et, s'il y a une nouvelle version, la télécharge, l'installe et redémarre tout seul sans rien demander (seule la barre d'état l'indique). Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre décrite ci-dessous n'apparaît qu'en appuyant sur "Mises à jour" ou si vous écrivez aggiornamenti_automatici=0 dans le fichier data/config.ini.
+P|Depuis la version 1.8.7, les mises à jour sont automatiques et silencieuses : au démarrage puis toutes les 6 heures, YA-MS consulte GitHub et, s'il y a une nouvelle version, la télécharge, l'installe et redémarre tout seul sans rien demander (seule la barre d'état l'indique). Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre décrite ci-dessous n'apparaît qu'en appuyant sur "Mises à jour" ou si vous écrivez aggiornamenti_automatici=0 dans le fichier data/config.ini.
 P|Depuis la version 1.8.0, YA-MS vérifie de lui-même sur GitHub, au démarrage et au plus une fois par jour, si une nouvelle version est sortie. Si c'est le cas, la fenêtre « Mise à jour disponible » apparaît avec les nouveautés et trois boutons :
 LI|Mettre à jour maintenant : télécharge le paquet adapté à votre système, remplace les fichiers du programme, conserve le dossier data et redémarre YA-MS. Les fichiers du programme situés dans le dossier data que la nouvelle version modifie sont d'abord copiés dans data/backup/v<ancienne version> ; vos fichiers (réglages, archives, spots, ADIF) ne sont pas touchés.
 LI|Plus tard : ferme la fenêtre ; la vérification est répétée le lendemain.
@@ -57,6 +57,7 @@ H1|4. Configurer la station et le trajet
 H2|4.1 Rangée 1 : stations et bande
 LI|Mon locator et altitude m : votre locator Maidenhead (4, 6 ou 8 caractères ; c'est le centre du carré qui est utilisé) et l'altitude de la station au-dessus du niveau de la mer.
 LI|Correspondant et altitude m : locator et altitude de la station à contacter.
+LI|Le correspondant a sa propre ligne, sous votre station : saisissez l'indicatif et appuyez sur Entrée, le locator est pris dans la base CALL3 (comme dans YAEC et LIVETROPOVHF). L'indicatif peut aussi être saisi dans la case du locator.
 LI|Bande MHz : 28, 50, 70, 144, 222 ou 432 MHz. Elle sert pour le gain et le lobe de l'antenne, pour l'affaiblissement et le bilan, pour l'estimation du flux.
 LI|Calculer : recalcule le trajet (échantillonnage de la couche E, moins d'une seconde).
 LI|Antenne az : azimut de l'antenne, toujours vers le correspondant.
@@ -135,6 +136,7 @@ P|Les meilleures heures et le côté sont les informations les plus solides : el
 TAG|NOTA|Utilisez le programme pour choisir l'heure et le côté vers lequel tourner l'antenne ; ne lisez pas les pourcentages comme des probabilités de réussite de la liaison.
 H2|7.4 Le graphique
 P|Pour cinq essaims au maximum : l'efficacité en trait continu et la formule de DH9GCD en pointillé de la même couleur ; l'indice du trajet en barres sur l'échelle de droite. Les heures locales sont écrites sous les heures UTC.
+P|Sur le graphique, une barre rouge verticale marque l'heure du calcul (date et curseur des heures de la ligne 3).
 H2|7.5 Le tableau des 24 heures
 LI|Une ligne pour chaque essaim actif ce jour-là, 24 colonnes pour les heures UTC.
 LI|63A : efficacité 63 %, la plupart des réflexions du côté A ; 41B : côté B ; cellule vide : moins de 1 % ; ↑ : radiant au-dessus de 70° (trop haut) ; couleur plus chaude = efficacité plus élevée.
@@ -163,6 +165,7 @@ LI|Rayon de la carte : 600-3500 km. Spots à afficher : 15 ou 30 dernières minu
 LI|Un clic sur un trajet ou sur une ligne du tableau met la liaison en évidence et affiche le centre du nuage, son altitude et ses dimensions.
 LI|Afficher qui écoute : des triangles de la couleur de la bande marquent les stations qui, selon PSKReporter, reçoivent en MSK144, FSK441, PSK2K ou JTMS sur 28, 50, 70, 144 et 432 MHz dans la fenêtre de temps choisie. Un clic sur un triangle affiche indicatif, locator, modes et dernier spot. Le flux MQTT de l'onglet Collecte de données doit être connecté.
 LI|Les spots de toutes les bandes sont affichés, y compris ceux des bandes non choisies dans Collecte de données (ceux-ci ne sont pas enregistrés). Les spots CW et ceux entre stations trop proches ne sont pas affichés s'ils sont rejetés dans Collecte de données.
+LI|La carte affiche les indicatifs des deux stations de chaque spot, une seule fois par station. La projection se choisit entre azimutale (centrée sur votre station) et Mercator. L'info-bulle de la colonne Nuage en explique le sens.
 H2|9.2 Flux radar
 P|Les comptages horaires des météores et les altitudes des traînées du radar SKiYMET de Collm (36,2 MHz) et la dernière image du radar de Sodankylä (36,9 MHz).
 LI|Télécharger maintenant et Mise à jour automatique de toutes les sources toutes les 5 minutes : chaque source n'est téléchargée à nouveau que si elle a changé.
@@ -182,6 +185,7 @@ LI|Le filtre accepte les spots sur les fréquences typiques du meteor scatter (5
 LI|Les spots CW sont écartés tout de suite (CW ou WPM dans le commentaire, ou 28000-28070 kHz) : ils n'apparaissent pas dans la console et ne sont pas enregistrés, sauf s'ils sont marqués <MS>. La case peut être désactivée.
 LI|Les spots entre stations distantes de moins de 500 km sont rejetés immédiatement, car à cette distance la liaison est directe ou troposphérique et non meteor scatter : ils n'apparaissent pas dans la console et ne sont pas enregistrés. Si un locator manque, le spot est conservé. La distance se modifie sous la case.
 LI|Les locators manquants sont pris dans la base CALL3 ; les spots acceptés vont dans data/spot_ms, un fichier par jour, et sur la carte du Trafic en direct.
+LI|Base CALL3 avec les règles de LIVETROPOVHF. « Mettre à jour maintenant » télécharge CALL3.TXT depuis MMMonVHF (au moins 100 000 lignes valides, le précédent reste dans data/call3.bak) ; avec « Mise à jour automatique tous les 7 jours » cela se fait au démarrage. Au-dessus du fichier, dans l'ordre : entrées manuelles (data/CALL3-MANUALE.TXT), corrections du cluster (le locator à 6 caractères que le spotteur déclare pour lui-même), fichiers ajoutés (data/CALL3-AGGIUNTE), puis CALL3.TXT et les locators à 6 caractères appris en direct (data/LOC6.TXT). Un locator reçu à 4 caractères, ou finissant par LL ou MM, est remplacé par celui à 6 caractères de la base ; les portables (avec une barre) seulement avec l'entrée exacte.
 H1|10. Essaims en direct et catalogue des essaims
 H2|10.1 Essaims en direct
 P|À gauche, le flux et le ZHR mesurés par le Global Meteor Network pour les essaims actifs, avec les comptages du jour des caméras GMN par essaim (un comptage, pas un flux : il dépend du nombre de stations qui ont un ciel dégagé) ; à droite, les cartes des radiants du radar CMOR, y compris celles des essaims diurnes. Les fichiers ne sont téléchargés à nouveau que s'ils ont changé, au plus toutes les 30 minutes, ou avec Télécharger maintenant.

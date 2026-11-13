@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von YA-MS
-SUB|Version 1.8.6 - von Costantino IC8TEM - November 2026
+SUB|Version 1.8.7 - von Costantino IC8TEM - November 2026
 H1|1. Einführung
 H2|1.1 Wozu YA-MS dient
 P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
@@ -26,7 +26,7 @@ P|Beim Start erscheint für einige Sekunden der Startbildschirm mit den Perseide
 H2|2.3 Der Ordner data
 P|Alle Einstellungen und alle Daten liegen in einem einzigen Ordner data neben dem Programm: kein AppData, keine Systemordner. Um YA-MS auf einen anderen Computer zu übertragen, genügt es, den Programmordner mit seinem Ordner data zu kopieren. Der Inhalt des Ordners ist in Kapitel 13 beschrieben.
 H2|2.4 Automatische Aktualisierungen
-P|Ab Version 1.8.6 erfolgen Updates automatisch und still: beim Start und dann alle 6 Stunden prüft YA-MS GitHub und lädt eine neue Version, falls vorhanden, herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen (nur die Statusleiste meldet es). Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das unten beschriebene Fenster erscheint nur beim Drücken von "Aktualisierungen" oder wenn du aggiornamenti_automatici=0 in die Datei data/config.ini schreibst.
+P|Ab Version 1.8.7 erfolgen Updates automatisch und still: beim Start und dann alle 6 Stunden prüft YA-MS GitHub und lädt eine neue Version, falls vorhanden, herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen (nur die Statusleiste meldet es). Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das unten beschriebene Fenster erscheint nur beim Drücken von "Aktualisierungen" oder wenn du aggiornamenti_automatici=0 in die Datei data/config.ini schreibst.
 P|Ab Version 1.8.0 prüft YA-MS selbstständig bei GitHub, beim Start und höchstens einmal am Tag, ob eine neue Version erschienen ist. Wenn ja, erscheint das Fenster „Aktualisierung verfügbar“ mit den Neuerungen und drei Schaltflächen:
 LI|Jetzt aktualisieren: lädt das für dein System passende Paket herunter, ersetzt die Programmdateien, behält den Ordner data und startet YA-MS neu. Programmdateien im Ordner data, die die neue Version ändert, werden vorher nach data/backup/v<alte Version> kopiert; deine eigenen Dateien (Einstellungen, Archive, Spots, ADIF) werden nicht angetastet.
 LI|Später: schließt das Fenster; die Prüfung wird am nächsten Tag wiederholt.
@@ -57,6 +57,7 @@ H1|4. Station und Strecke einrichten
 H2|4.1 Zeile 1: Stationen und Band
 LI|Mein Locator und Höhe m: dein Maidenhead-Locator (4, 6 oder 8 Zeichen; verwendet wird die Mitte des Feldes) und die Höhe der Station über dem Meeresspiegel.
 LI|Gegenstation und Höhe m: Locator und Höhe der Station, mit der die Verbindung hergestellt werden soll.
+LI|Die Gegenstation hat eine eigene Zeile unter deiner Station: Rufzeichen eingeben und Enter drücken, der Locator kommt aus der CALL3-Datenbank (wie in YAEC und LIVETROPOVHF). Das Rufzeichen kann auch ins Locator-Feld geschrieben werden.
 LI|Band MHz: 28, 50, 70, 144, 222 oder 432 MHz. Wird für Gewinn und Keule der Antenne, für Dämpfung und Budget sowie für die Flussschätzung verwendet.
 LI|Berechnen: berechnet die Strecke neu (Abtastung der E-Schicht, weniger als eine Sekunde).
 LI|Antennen-Az.: Azimut der Antenne, immer in Richtung Gegenstation.
@@ -135,6 +136,7 @@ P|Die besten Stunden und die Seite sind die verlässlichsten Angaben: Sie änder
 TAG|NOTA|Nutze das Programm, um die Uhrzeit und die Seite zu wählen, zu der du die Antenne drehst; lies die Prozentwerte nicht als Erfolgswahrscheinlichkeit der Verbindung.
 H2|7.4 Das Diagramm
 P|Für bis zu fünf Ströme: die Effektivität als durchgezogene Linie und die Formel von DH9GCD als gepunktete Linie in derselben Farbe; der Streckenindex als Balken auf der rechten Skala. Die Ortszeiten stehen unter den UTC-Zeiten.
+P|Im Diagramm markiert ein senkrechter roter Balken die Rechenzeit (Datum und Stundenregler der Zeile 3).
 H2|7.5 Die 24-Stunden-Tabelle
 LI|Eine Zeile für jeden an diesem Tag aktiven Strom, 24 Spalten für die UTC-Stunden.
 LI|63A: Effektivität 63 %, die meisten Reflexionen von Seite A; 41B: Seite B; leere Zelle: unter 1 %; ↑: Radiant über 70° (zu hoch); wärmere Farbe = höhere Effektivität.
@@ -163,6 +165,7 @@ LI|Kartenradius: 600-3500 km. Anzuzeigende Spots: letzte 15 oder 30 Minuten, let
 LI|Ein Klick auf eine Strecke oder auf eine Zeile der Tabelle hebt die Verbindung hervor und zeigt den Mittelpunkt der Wolke, ihre Höhe und ihre Ausdehnung.
 LI|Zeigen, wer hört: Dreiecke in der Bandfarbe markieren die Stationen, die laut PSKReporter im gewählten Zeitfenster MSK144, FSK441, PSK2K oder JTMS auf 28, 50, 70, 144 und 432 MHz empfangen. Ein Klick auf ein Dreieck zeigt Rufzeichen, Locator, Betriebsarten und letzten Spot. Der MQTT-Strom im Reiter Datensammlung muss verbunden sein.
 LI|Es werden die Spots aller Bänder angezeigt, auch der in der Datensammlung nicht gewählten (diese werden nicht gespeichert). CW-Spots und Spots zwischen zu nahe liegenden Stationen werden nicht angezeigt, wenn sie in der Datensammlung verworfen werden.
+LI|Die Karte zeigt die Rufzeichen beider Stationen jedes Spots, einmal pro Station. Die Projektion ist wählbar: azimutal (auf deine Station zentriert) oder Mercator. Der Tooltip auf der Spalte Wolke erklärt ihre Bedeutung.
 H2|9.2 Radarfluss
 P|Die stündlichen Meteorzählungen und die Spurhöhen des SKiYMET-Radars Collm (36,2 MHz) und das neueste Bild des Radars Sodankylä (36,9 MHz).
 LI|Jetzt laden und Automatische Aktualisierung aller Quellen alle 5 Minuten: Jede Quelle wird nur dann neu geladen, wenn sie sich geändert hat.
@@ -182,6 +185,7 @@ LI|Der Filter akzeptiert Spots auf den typischen Meteorscatter-Frequenzen (50190
 LI|CW-Spots werden sofort verworfen (CW oder WPM im Kommentar oder 28000-28070 kHz): Sie erscheinen nicht in der Konsole und werden nicht gespeichert, außer sie sind mit <MS> markiert. Das Kästchen lässt sich ausschalten.
 LI|Spots zwischen Stationen, die weniger als 500 km auseinanderliegen, werden sofort verworfen, da die Verbindung auf diese Entfernung direkt oder troposphärisch ist und kein Meteor Scatter: Sie erscheinen nicht in der Konsole und werden nicht gespeichert. Fehlt ein Locator, bleibt der Spot erhalten. Die Entfernung lässt sich unter dem Kästchen ändern.
 LI|Fehlende Locatoren werden aus der CALL3-Datenbank übernommen; akzeptierte Spots gehen nach data/spot_ms, eine Datei pro Tag, und in die Karte von Verkehr live.
+LI|CALL3-Datenbank mit den Regeln von LIVETROPOVHF. „Jetzt aktualisieren" lädt CALL3.TXT von MMMonVHF (mindestens 100.000 gültige Zeilen, die vorherige bleibt in data/call3.bak); mit „Alle 7 Tage selbst aktualisieren" geschieht das beim Start. Über der Datei gelten der Reihe nach: Handeinträge (data/CALL3-MANUALE.TXT), Cluster-Korrekturen (der 6-stellige Locator, den der Spotter für sich angibt), hinzugefügte Dateien (data/CALL3-AGGIUNTE), dann CALL3.TXT und die live gelernten 6-stelligen Locator (data/LOC6.TXT). Ein empfangener 4-stelliger Locator oder einer mit Endung LL oder MM wird durch den 6-stelligen aus der Datenbank ersetzt; Portabelstationen (mit Schrägstrich) nur mit exaktem Eintrag.
 H1|10. Ströme live und Katalog der Ströme
 H2|10.1 Ströme live
 P|Links der vom Global Meteor Network gemessene Fluss und die ZHR der aktiven Ströme, mit den Tageszählungen der GMN-Kameras pro Strom (eine Zählung, kein Fluss: Sie hängt davon ab, wie viele Stationen klaren Himmel haben); rechts die Radiantenkarten des CMOR-Radars, einschließlich der Tagesströme. Die Dateien werden nur bei Änderungen neu geladen, höchstens alle 30 Minuten, oder mit Jetzt laden.

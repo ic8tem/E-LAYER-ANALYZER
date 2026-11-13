@@ -40,6 +40,7 @@ namespace YAMS
         public List<ChartSeries> Series = new List<ChartSeries>();
         public double YMaxFixed = 0, Y2MaxFixed = 0;
         public int MarkIndex = -1;   // linea verticale (es. ora attuale)
+        public double CalcPos = double.NaN;   // barra rossa dell'orario di calcolo, in unita' di colonna (12.5 = 12:30)
 
         // scritte degli assi e della legenda: colore dello schema scelto
         static Color TextCol { get { return Pal.ChartText; } }
@@ -223,6 +224,11 @@ namespace YAMS
             {
                 double x = pr.Left + bw * (MarkIndex + 0.5);
                 ctx.DrawLine(Pal.P(Pal.A(200, Pal.Fore), 1, Pal.Dot), new Point(x, pr.Top), new Point(x, pr.Bottom));
+            }
+            if (!double.IsNaN(CalcPos) && CalcPos >= 0 && CalcPos <= n)
+            {
+                double x = pr.Left + bw * CalcPos;
+                ctx.DrawLine(new ImmutablePen(new ImmutableSolidColorBrush(Color.FromArgb(230, 220, 38, 38)), 3), new Point(x, pr.Top), new Point(x, pr.Bottom));
             }
             DrawLegend(ctx, series, pr);
         }

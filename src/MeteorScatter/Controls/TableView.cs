@@ -29,6 +29,7 @@ namespace YAMS
     public class TableView : Control
     {
         public List<string> Columns = new List<string>();
+        public string[] HeaderTips;   // fumetto delle intestazioni di colonna (null o "" = nessuno)
         public List<double> ColumnWidths = new List<double>();   // px; l'ultima colonna puo' riempire
         public List<TableRow> Rows = new List<TableRow>();
         public int SelectedIndex = -1;
@@ -295,6 +296,17 @@ namespace YAMS
         string TipAt(Point p)
         {
             double hh = HH;
+            if (p.Y < hh && HeaderTips != null)
+            {
+                double[] hw = Widths(Bounds.Width, Factor());
+                double hx = 0;
+                for (int c = 0; c < hw.Length; c++)
+                {
+                    if (p.X >= hx && p.X < hx + hw[c]) return c < HeaderTips.Length && !string.IsNullOrEmpty(HeaderTips[c]) ? HeaderTips[c] : null;
+                    hx += hw[c];
+                }
+                return null;
+            }
             if (p.Y < hh || Rows == null) return null;
             int idx = (int)Math.Floor((p.Y - hh + scrollY) / RH);
             if (idx < 0 || idx >= Rows.Count || Rows[idx] == null || Rows[idx].CellTips == null) return null;

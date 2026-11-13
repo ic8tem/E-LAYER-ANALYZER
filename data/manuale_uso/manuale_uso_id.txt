@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.6 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.7 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -26,7 +26,7 @@ P|Saat dijalankan, selama beberapa detik muncul layar pembuka bergambar Perseid 
 H2|2.3 Folder data
 P|Semua pengaturan dan semua data berada dalam satu folder data di samping program: tanpa AppData, tanpa folder sistem. Untuk memindahkan YA-MS ke komputer lain cukup salin folder program beserta folder data-nya. Isi folder ini dijelaskan di bab 13.
 H2|2.4 Pembaruan otomatis
-P|Sejak versi 1.8.6 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
+P|Sejak versi 1.8.7 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
 P|Sejak versi 1.8.0, YA-MS memeriksa sendiri di GitHub, saat dijalankan dan paling banyak sekali sehari, apakah ada versi baru. Jika ada, muncul jendela "Pembaruan tersedia" berisi daftar perubahan dan tiga tombol:
 LI|Perbarui sekarang: mengunduh paket yang sesuai dengan sistem Anda, mengganti berkas program, mempertahankan folder data, lalu menjalankan ulang YA-MS. Berkas program di dalam folder data yang diubah oleh versi baru terlebih dahulu disalin ke data/backup/v<versi lama>; berkas Anda (pengaturan, arsip, spot, ADIF) tidak disentuh.
 LI|Nanti: menutup jendela; pemeriksaan diulang keesokan harinya.
@@ -57,6 +57,7 @@ H1|4. Mengatur stasiun dan lintasan
 H2|4.1 Baris 1: stasiun dan pita
 LI|Locator saya dan ketinggian m: locator Maidenhead Anda (4, 6 atau 8 karakter; yang dipakai adalah pusat kotak) dan ketinggian stasiun di atas permukaan laut.
 LI|Stasiun DX dan ketinggian m: locator dan ketinggian stasiun yang akan dihubungi.
+LI|Stasiun lawan punya baris sendiri, di bawah stasiunmu: ketik callsign dan tekan Enter, lokator diambil dari basis data CALL3 (seperti di YAEC dan LIVETROPOVHF). Callsign juga bisa diketik di kotak lokator.
 LI|Pita MHz: 28, 50, 70, 144, 222 atau 432 MHz. Digunakan untuk penguatan dan lobus antena, untuk redaman dan anggaran link, serta untuk estimasi fluks.
 LI|Hitung: menghitung ulang lintasan (pengambilan sampel lapisan E, kurang dari satu detik).
 LI|Az antena: azimut antena, selalu ke arah stasiun DX.
@@ -135,6 +136,7 @@ P|Jam terbaik dan sisi adalah informasi yang paling andal: keduanya hanya sediki
 TAG|NOTA|Gunakan program ini untuk memilih jam dan sisi ke mana antena diputar; jangan membaca persentase sebagai peluang keberhasilan kontak.
 H2|7.4 Grafik
 P|Untuk paling banyak lima hujan meteor: efisiensi sebagai garis utuh dan rumus DH9GCD sebagai garis titik-titik dengan warna yang sama; indeks lintasan sebagai batang pada skala kanan. Jam lokal ditulis di bawah jam UTC.
+P|Pada grafik, batang merah vertikal menandai waktu perhitungan (tanggal dan penggeser jam di baris 3).
 H2|7.5 Tabel 24 jam
 LI|Satu baris untuk setiap hujan meteor yang aktif pada hari itu, 24 kolom untuk jam UTC.
 LI|63A: efisiensi 63 %, sebagian besar pantulan dari sisi A; 41B: sisi B; sel kosong: di bawah 1 %; ↑: radian di atas 70° (terlalu tinggi); warna lebih hangat = efisiensi lebih tinggi.
@@ -163,6 +165,7 @@ LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 15 atau 30 menit terakhir, s
 LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat awan, ketinggian, dan ukurannya.
 LI|Tampilkan siapa yang mendengarkan: segitiga berwarna pita menandai stasiun yang menurut PSKReporter menerima MSK144, FSK441, PSK2K, atau JTMS di 28, 50, 70, 144, dan 432 MHz dalam jendela waktu yang dipilih. Klik pada segitiga menampilkan callsign, locator, mode, dan spot terakhir. Aliran MQTT di tab Pengumpulan data harus terhubung.
 LI|Spot dari semua pita ditampilkan, termasuk pita yang tidak dipilih di Pengumpulan data (spot ini tidak disimpan). Spot CW dan spot antarstasiun yang terlalu dekat tidak ditampilkan, jika dibuang di Pengumpulan data.
+LI|Peta menuliskan callsign kedua stasiun pada setiap spot, sekali per stasiun. Proyeksi bisa dipilih: azimutal (berpusat di stasiunmu) atau Mercator. Tooltip pada kolom Awan menjelaskan artinya.
 H2|9.2 Fluks radar
 P|Hitungan meteor per jam dan ketinggian jejak dari radar SKiYMET di Collm (36,2 MHz) serta gambar terbaru radar Sodankylä (36,9 MHz).
 LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah.
@@ -182,6 +185,7 @@ LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-7
 LI|Spot CW langsung dibuang (CW atau WPM di komentar, atau 28000-28070 kHz): tidak muncul di konsol dan tidak disimpan, kecuali bertanda <MS>. Kotak ini dapat dimatikan.
 LI|Spot antarstasiun yang berjarak kurang dari 500 km langsung dibuang, karena pada jarak itu hubungannya langsung atau troposferik, bukan meteor scatter: tidak muncul di konsol dan tidak disimpan. Jika lokator tidak ada, spot tetap disimpan. Jaraknya dapat diubah di bawah kotak centang.
 LI|Locator yang hilang diambil dari arsip CALL3; spot yang diterima masuk ke data/spot_ms, satu file per hari, dan ke peta Lalu lintas langsung.
+LI|Basis data CALL3 dengan aturan LIVETROPOVHF. "Perbarui sekarang" mengunduh CALL3.TXT dari MMMonVHF (minimal 100.000 baris valid, yang lama tetap di data/call3.bak); dengan "Perbarui sendiri setiap 7 hari" hal itu dilakukan saat mulai. Di atas berkas berlaku berurutan: entri manual (data/CALL3-MANUALE.TXT), koreksi dari cluster (lokator 6 karakter yang dinyatakan pelapor tentang dirinya), berkas tambahan (data/CALL3-AGGIUNTE), lalu CALL3.TXT dan lokator 6 karakter yang dipelajari langsung (data/LOC6.TXT). Lokator diterima 4 karakter, atau berakhiran LL atau MM, diganti dengan yang 6 karakter dari basis data; stasiun portabel (dengan garis miring) hanya dengan entri yang persis.
 H1|10. Hujan meteor langsung dan katalog hujan meteor
 H2|10.1 Hujan meteor langsung
 P|Di kiri, fluks dan ZHR yang diukur oleh Global Meteor Network untuk hujan meteor aktif, dengan hitungan harian kamera GMN per hujan meteor (sebuah hitungan, bukan fluks: tergantung berapa banyak stasiun yang melihat langit cerah); di kanan, peta radian radar CMOR, termasuk hujan meteor siang hari. Berkas diunduh ulang hanya jika berubah, paling sering setiap 30 menit, atau dengan Unduh sekarang.

@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.6 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.7 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -26,7 +26,7 @@ P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i g�
 H2|2.3 data klasörü
 P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
 H2|2.4 Otomatik güncellemeler
-P|1.8.6 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
+P|1.8.7 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
 P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
 LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
 LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
@@ -57,6 +57,7 @@ H1|4. İstasyonu ve yolu ayarlama
 H2|4.1 Sıra 1: istasyonlar ve bant
 LI|Benim lokatörüm ve rakım m: Maidenhead lokatörünüz (4, 6 veya 8 karakter; karenin merkezi kullanılır) ve istasyonun deniz seviyesinden yüksekliği.
 LI|Karşı istasyon ve rakım m: bağlantı kurulacak istasyonun lokatörü ve rakımı.
+LI|Karşı istasyonun kendi satırı vardır, istasyonunun altında: çağrı işaretini yaz ve Enter'a bas, lokatör CALL3 veritabanından alınır (YAEC ve LIVETROPOVHF'teki gibi). Çağrı işareti lokatör kutusuna da yazılabilir.
 LI|Bant MHz: 28, 50, 70, 144, 222 veya 432 MHz. Anten kazancı ve lobu, yol kaybı ve bağlantı bütçesi ile akı tahmini için kullanılır.
 LI|Hesapla: yolu yeniden hesaplar (E katmanının örneklenmesi, bir saniyeden kısa).
 LI|Anten az: antenin azimutu, her zaman karşı istasyona doğru.
@@ -135,6 +136,7 @@ P|En iyi saatler ve taraf en sağlam bilgilerdir: hesap ayarlarıyla az değişi
 TAG|NOTA|Programı, saati ve anteni çevireceğiniz tarafı seçmek için kullanın; yüzdeleri bağlantının başarı olasılığı olarak okumayın.
 H2|7.4 Grafik
 P|En fazla beş yağmur için: verim düz çizgi olarak, DH9GCD formülü aynı renkte noktalı çizgi olarak; yol endeksi sağ ölçekte çubuklar olarak. Yerel saatler UTC saatlerinin altında yazılıdır.
+P|Grafikte dikey kırmızı bir çubuk hesaplama saatini gösterir (3. satırın tarihi ve saat sürgüsü).
 H2|7.5 24 saatlik tablo
 LI|O gün etkin olan her yağmur için bir satır, UTC saatleri için 24 sütun.
 LI|63A: verim %63, yansımaların çoğu A tarafından; 41B: B tarafı; boş hücre: %1'in altında; ↑: radyant 70°'nin üzerinde (çok yüksek); daha sıcak renk = daha yüksek verim.
@@ -163,6 +165,7 @@ LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 15 veya 30 dakik
 LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve bulutun merkezini, yüksekliğini ve boyutlarını gösterir.
 LI|Kimin dinlediğini göster: bant renginde üçgenler, PSKReporter'a göre seçilen zaman aralığında 28, 50, 70, 144 ve 432 MHz'de MSK144, FSK441, PSK2K veya JTMS alan istasyonları gösterir. Bir üçgene tıklamak çağrı işaretini, lokatörü, modları ve son spotu gösterir. Veri toplama sekmesindeki MQTT akışı bağlı olmalıdır.
 LI|Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
+LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. Bulut sütunundaki ipucu anlamını açıklar.
 H2|9.2 Radar akısı
 P|Collm SKiYMET radarının (36,2 MHz) saatlik meteor sayımları ve iz yükseklikleri ile Sodankylä radarının (36,9 MHz) son görüntüsü.
 LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir.
@@ -182,6 +185,7 @@ LI|Filtre, meteor scatter'a özgü frekanslardaki (50190-50300, 70100-70400, 144
 LI|CW spotları hemen atılır (yorumda CW veya WPM, ya da 28000-28070 kHz): <MS> ile işaretlenmedikçe konsolda görünmez ve kaydedilmez. Kutu kapatılabilir.
 LI|500 km'den yakın istasyonlar arasındaki spotlar hemen atılır, çünkü bu mesafede bağlantı meteor scatter değil, doğrudan veya troposferiktir: konsolda görünmezler ve kaydedilmezler. Bir lokatör eksikse spot korunur. Mesafe kutunun altından değiştirilir.
 LI|Eksik lokatörler CALL3 arşivinden alınır; kabul edilen spot'lar, günde bir dosya olmak üzere data/spot_ms klasörüne ve Canlı trafik haritasına gider.
+LI|LIVETROPOVHF kurallarıyla CALL3 veritabanı. "Şimdi güncelle" CALL3.TXT'yi MMMonVHF'den indirir (en az 100.000 geçerli satır, önceki data/call3.bak içinde kalır); "7 günde bir kendiliğinden güncelle" ile bu başlangıçta yapılır. Dosyanın üstünde sırayla geçerlidir: elle girişler (data/CALL3-MANUALE.TXT), küme düzeltmeleri (spot yapanın kendisi için bildirdiği 6 karakterli lokatör), eklenen dosyalar (data/CALL3-AGGIUNTE), sonra CALL3.TXT ve canlı öğrenilen 6 karakterli lokatörler (data/LOC6.TXT). Alınan 4 karakterli ya da LL veya MM ile biten lokatör veritabanındaki 6 karakterliyle değiştirilir; taşınabilir istasyonlar (eğik çizgili) yalnızca tam girişle.
 H1|10. Canlı yağmurlar ve yağmur kataloğu
 H2|10.1 Canlı yağmurlar
 P|Solda, etkin yağmurlar için Global Meteor Network'ün ölçtüğü akı ve ZHR, yağmur başına GMN kameralarının günlük sayımlarıyla (bir sayımdır, akı değildir: açık gökyüzü gören istasyon sayısına bağlıdır); sağda, gündüz yağmurları dahil CMOR radarının radyant haritaları. Dosyalar yalnızca değiştiyse, en fazla 30 dakikada bir ya da Şimdi indir ile yeniden indirilir.

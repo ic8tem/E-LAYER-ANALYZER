@@ -747,3 +747,27 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT 연결 안 �
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(km)보다 가까운 국 사이의 스팟을 즉시 버립니다. 이 거리에서는 직접파 또는 대류권 전파이기 때문입니다. 콘솔에 표시되지 않고 저장되지 않습니다. 로케이터가 없으면 스팟은 유지됩니다.
 spot entro {0} km scartati: {1}	{0} km 이내 버린 스팟: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	데이터 수집에서 선택하지 않은 밴드를 포함해 모든 밴드의 스팟이 표시됩니다(이것들은 저장되지 않습니다). CW 스팟과 너무 가까운 국 사이의 스팟은 데이터 수집에서 버리도록 설정되어 있으면 표시되지 않습니다.
+Aggiorna da solo ogni 7 giorni	7일마다 자동 업데이트
+Aggiornamento di CALL3 già in corso.	CALL3 업데이트가 이미 진행 중입니다.
+Aggiornamento di CALL3 non riuscito: {0}	CALL3 업데이트 실패: {0}
+Aggiungi un file...	파일 추가...
+Annulla	취소
+CALL3.TXT aggiornato da MMMonVHF ({0:dd/MM/yyyy HH:mm}). Il precedente è in data/call3.bak.	MMMonVHF에서 CALL3.TXT를 업데이트했습니다({0:dd/MM/yyyy HH:mm}). 이전 파일은 data/call3.bak에 있습니다.
+File scaricato non valido ({0} righe utili): CALL3 non cambiato.	내려받은 파일이 올바르지 않습니다(사용 가능한 줄 {0}): CALL3는 바뀌지 않았습니다.
+Mercatore	메르카토르
+Nominativo e locatore scritti a mano (data/CALL3-MANUALE.TXT): valgono sopra tutto, anche sopra il locatore che la stazione stessa manda.	손으로 입력한 호출부호와 로케이터(data/CALL3-MANUALE.TXT): 모든 것보다 우선하며, 국이 직접 보내는 로케이터보다도 우선합니다.
+Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).	구름: 그 경로의 그 시간대 유효 반사 중 지도에 그려진 가장 가능성 높은 구름에 들어가는 비율(유성흔에서의 거울 반사, 활동 중인 유성우의 합). 높을수록 좋은 유성흔이 안테나를 향할 한 영역에 모여 있습니다. "산발" = 활동 중인 유성우가 유효 반사를 주지 않음: 경로 양쪽에 흩어진 산발 유성만 남습니다(점선 구름).
+Proiezione della mappa	지도 투영
+Salva	저장
+Scarica il CALL3.TXT più recente da MMMonVHF (www.mmmonvhf.de), lo controlla (almeno 100.000 righe valide, altrimenti non cambia nulla), salva il precedente in data/call3.bak e lo sostituisce. Voci a mano, file aggiunti, correzioni dal cluster e locatori imparati restano sopra e non si toccano.	MMMonVHF(www.mmmonvhf.de)에서 최신 CALL3.TXT를 내려받아 확인하고(유효한 줄이 100,000개 이상이 아니면 아무것도 바꾸지 않음), 이전 파일을 data/call3.bak에 저장한 뒤 교체합니다. 손 입력, 추가 파일, 클러스터 수정, 학습한 로케이터는 위에 남고 건드리지 않습니다.
+Scarico CALL3.TXT da mmmonvhf.de...	mmmonvhf.de에서 CALL3.TXT 내려받는 중...
+Scrivi il nominativo del corrispondente e premi Invio: il locator si prende dall'archivio CALL3 (con le voci a mano, i file aggiunti e le correzioni). Si può scrivere il nominativo anche nella casella del locator.	상대국의 호출부호를 입력하고 Enter를 누르면 로케이터를 CALL3 데이터베이스(손 입력, 추가 파일, 수정 포함)에서 가져옵니다. 호출부호는 로케이터 칸에 입력해도 됩니다.
+Un file nel formato di CALL3.TXT (nominativo,locatore; vanno bene anche punto e virgola, tabulazione e spazio) si copia in data/CALL3-AGGIUNTE e vale sopra CALL3.TXT; con più file vince l'ultimo in ordine alfabetico.	CALL3.TXT 형식의 파일(호출부호,로케이터. 세미콜론, 탭, 공백도 가능)은 data/CALL3-AGGIUNTE로 복사되어 CALL3.TXT보다 우선합니다. 여러 파일이면 알파벳 순서로 마지막 파일이 우선합니다.
+Una voce per riga: NOMINATIVO,LOCATORE. Valgono sopra tutto, anche sopra il locatore che la stazione stessa manda.	한 줄에 하나: 호출부호,로케이터. 모든 것보다 우선하며, 국이 직접 보내는 로케이터보다도 우선합니다.
+Voci a mano	손 입력
+Voci a mano...	손 입력...
+a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}	손 입력 {0} · 추가 파일 {1} · 클러스터에서 {2} · 학습 {3}
+azimutale (centrata sulla mia stazione)	방위 정거(내 국이 중심)
+locator	로케이터
+{0} nel CALL3: {1}	CALL3의 {0}: {1}
+{0} non è nel CALL3: scrivi il locator a mano	{0}은(는) CALL3에 없습니다: 로케이터를 직접 입력하세요

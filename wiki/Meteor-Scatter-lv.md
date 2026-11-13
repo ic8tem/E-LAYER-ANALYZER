@@ -2,7 +2,7 @@
 
 [← Home](Home-lv)
 
-Šajā cilnē ir pilna **YA-MS 1.8.6** – IC8TEM meteor scatter programma: debess sfēra ar radiantiem, SKiYMET radaru meteoru skaits (Collm, Sodankylä), plūsmu efektivitātes aprēķins, prognožu eksperimentāla realizācija, ģeometrija un vājinājums, GRAVES, kvadrātu karte, **Plūsmas tiešsaistē** (Global Meteor Network izmērītie ZHR un CMOR radara radianti), **Avotu karte** (Collm, Sodankylä, GRAVES un CMOR attiecībā pret staciju) un dokuments **Efektivitātes aprēķina skaidrojums** ar formulām.
+Šajā cilnē ir pilna **YA-MS 1.8.7** – IC8TEM meteor scatter programma: debess sfēra ar radiantiem, SKiYMET radaru meteoru skaits (Collm, Sodankylä), plūsmu efektivitātes aprēķins, prognožu eksperimentāla realizācija, ģeometrija un vājinājums, GRAVES, kvadrātu karte, **Plūsmas tiešsaistē** (Global Meteor Network izmērītie ZHR un CMOR radara radianti), **Avotu karte** (Collm, Sodankylä, GRAVES un CMOR attiecībā pret staciju) un dokuments **Efektivitātes aprēķina skaidrojums** ar formulām.
 
 YA-MS 1.5.0 pievieno cilni **Datu vākšana** (meteor scatter spoti, filtrēti pēc MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). E-LAYER ANALYZER iekšienē tā neatver savas telnet sesijas: tā saņem DATA COLLECTION sesiju rindas, tāpēc nav dubultu pieteikšanos ar to pašu izsaukuma signālu.
 

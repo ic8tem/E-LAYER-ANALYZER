@@ -1,5 +1,5 @@
 TITLE|Manual de uso de YA-MS
-SUB|Versión 1.8.6 - a cargo de Costantino IC8TEM - noviembre de 2026
+SUB|Versión 1.8.7 - a cargo de Costantino IC8TEM - noviembre de 2026
 H1|1. Introducción
 H2|1.1 Para qué sirve YA-MS
 P|YA-MS ayuda a prever y a seguir en directo las condiciones de meteor scatter entre tu estación y un corresponsal, de 28 a 432 MHz. Para cada lluvia de meteoros activa indica en qué medida la posición de su radiante favorece tu trayecto (la eficiencia), en qué horas, desde qué lado del trayecto llegan las reflexiones y hacia dónde conviene apuntar la antena. Junto a la previsión muestra los datos medidos en directo: los recuentos del radar de meteoros de Collm, las cámaras de la Global Meteor Network, el radar CMOR, el transmisor GRAVES y el tráfico de meteor scatter recogido de los clústeres y de PSKReporter.
@@ -26,7 +26,7 @@ P|Al arrancar aparece durante unos segundos la pantalla con las Perseidas sobre 
 H2|2.3 La carpeta data
 P|Todos los ajustes y todos los datos están en una única carpeta data junto al programa: nada de AppData ni de carpetas del sistema. Para pasar YA-MS a otro ordenador basta con copiar la carpeta del programa con su carpeta data. El contenido de la carpeta se describe en el capítulo 13.
 H2|2.4 Actualizaciones automáticas
-P|Desde la versión 1.8.6 las actualizaciones son automáticas y silenciosas: al arrancar y luego cada 6 horas YA-MS consulta GitHub y, si hay una versión nueva, la descarga, la instala y se reinicia solo sin preguntar nada (solo lo indica la barra de estado). También los archivos que faltan se vuelven a descargar sin preguntar. La ventana descrita abajo aparece solo al pulsar "Actualizaciones" o si escribes aggiornamenti_automatici=0 en el archivo data/config.ini.
+P|Desde la versión 1.8.7 las actualizaciones son automáticas y silenciosas: al arrancar y luego cada 6 horas YA-MS consulta GitHub y, si hay una versión nueva, la descarga, la instala y se reinicia solo sin preguntar nada (solo lo indica la barra de estado). También los archivos que faltan se vuelven a descargar sin preguntar. La ventana descrita abajo aparece solo al pulsar "Actualizaciones" o si escribes aggiornamenti_automatici=0 en el archivo data/config.ini.
 P|Desde la versión 1.8.0, YA-MS comprueba por sí solo en GitHub, al arrancar y como mucho una vez al día, si ha salido una versión nueva. Si la hay, aparece la ventana "Actualización disponible" con las novedades y tres botones:
 LI|Actualizar ahora: descarga el paquete adecuado para tu sistema, sustituye los archivos del programa, conserva la carpeta data y reinicia YA-MS. Los archivos del programa de la carpeta data que la nueva versión modifica se copian antes en data/backup/v<versión anterior>; tus archivos (ajustes, archivos históricos, spots, ADIF) no se tocan.
 LI|Más tarde: cierra la ventana; la comprobación se repite al día siguiente.
@@ -57,6 +57,7 @@ H1|4. Configurar la estación y el trayecto
 H2|4.1 Fila 1: estaciones y banda
 LI|Mi locator y altitud m: tu locator Maidenhead (4, 6 u 8 caracteres; se usa el centro de la cuadrícula) y la altitud de la estación sobre el nivel del mar.
 LI|Corresponsal y altitud m: locator y altitud de la estación con la que quieres contactar.
+LI|El corresponsal tiene su propia fila, debajo de tu estación: escribe el indicativo y pulsa Intro, el locator se toma de la base CALL3 (como en YAEC y LIVETROPOVHF). El indicativo también puede escribirse en la casilla del locator.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Sirve para la ganancia y el lóbulo de la antena, para la atenuación y el balance, y para la estimación del flujo.
 LI|Calcular: vuelve a calcular el trayecto (muestreo de la capa E, menos de un segundo).
 LI|Antena az: acimut de la antena, siempre hacia el corresponsal.
@@ -135,6 +136,7 @@ P|Las mejores horas y el lado son la información más sólida: cambian poco con
 TAG|NOTA|Usa el programa para elegir la hora y el lado hacia el que girar la antena; no leas los porcentajes como probabilidades de éxito del contacto.
 H2|7.4 El gráfico
 P|Para un máximo de cinco lluvias: la eficiencia como línea continua y la fórmula de DH9GCD como línea punteada del mismo color; el índice del trayecto como barras en la escala de la derecha. Las horas locales aparecen escritas debajo de las UTC.
+P|En el gráfico una barra roja vertical marca la hora del cálculo (fecha y cursor de horas de la fila 3).
 H2|7.5 La tabla de 24 horas
 LI|Una fila por cada lluvia activa ese día, 24 columnas para las horas UTC.
 LI|63A: eficiencia del 63 %, la mayor parte de las reflexiones desde el lado A; 41B: lado B; celda vacía: por debajo del 1 %; ↑: radiante por encima de 70° (demasiado alto); color más cálido = eficiencia más alta.
@@ -163,6 +165,7 @@ LI|Radio del mapa: 600-3500 km. Spots a mostrar: últimos 15 o 30 minutos, últi
 LI|Un clic en un trayecto o en una fila de la tabla resalta el contacto y muestra el centro de la nube, su altura y sus dimensiones.
 LI|Mostrar quién escucha: triángulos del color de la banda marcan las estaciones que, según PSKReporter, reciben en MSK144, FSK441, PSK2K o JTMS en 28, 50, 70, 144 y 432 MHz en la ventana de tiempo elegida. Un clic en un triángulo muestra indicativo, locator, modos y último spot. El flujo MQTT de la pestaña Recogida de datos debe estar conectado.
 LI|Se muestran los spots de todas las bandas, también de las no elegidas en Recogida de datos (estos no se guardan). Los spots CW y los de estaciones demasiado cercanas no se muestran si se descartan en Recogida de datos.
+LI|El mapa muestra los indicativos de las dos estaciones de cada spot, una sola vez por estación. La proyección puede ser azimutal (centrada en tu estación) o Mercator. La ayuda emergente de la columna Nube explica su significado.
 H2|9.2 Flujo radar
 P|Los recuentos horarios de meteoros y las alturas de las estelas del radar SKiYMET de Collm (36,2 MHz) y la última imagen del radar de Sodankylä (36,9 MHz).
 LI|Descargar ahora y Actualización automática de todas las fuentes cada 5 minutos: cada fuente se vuelve a descargar solo si ha cambiado.
@@ -182,6 +185,7 @@ LI|El filtro acepta los spots en las frecuencias típicas del meteor scatter (50
 LI|Los spots CW se descartan enseguida (CW o WPM en el comentario, o 28000-28070 kHz): no aparecen en la consola y no se guardan, salvo los marcados <MS>. La casilla se puede desactivar.
 LI|Los spots entre estaciones a menos de 500 km se descartan de inmediato, porque a esa distancia el enlace es directo o troposférico y no meteor scatter: no aparecen en la consola y no se guardan. Si falta un locator, el spot se conserva. La distancia se cambia debajo de la casilla.
 LI|Los locators que faltan se toman del archivo CALL3; los spots aceptados van a data/spot_ms, un archivo por día, y al mapa de Tráfico en directo.
+LI|Base CALL3 con las reglas de LIVETROPOVHF. «Actualizar ahora» descarga CALL3.TXT de MMMonVHF (al menos 100.000 líneas válidas, el anterior queda en data/call3.bak); con «Actualizar solo cada 7 días» lo hace al arrancar. Sobre el archivo valen, por orden: entradas manuales (data/CALL3-MANUALE.TXT), correcciones del clúster (el locator de 6 caracteres que el que spotea declara de sí mismo), archivos añadidos (data/CALL3-AGGIUNTE), luego CALL3.TXT y los locators de 6 caracteres aprendidos en directo (data/LOC6.TXT). Un locator recibido de 4 caracteres, o que acaba en LL o MM, se sustituye por el de 6 caracteres de la base; los portátiles (con barra) solo con la entrada exacta.
 H1|10. Lluvias en directo y catálogo de lluvias
 H2|10.1 Lluvias en directo
 P|A la izquierda, el flujo y el ZHR medidos por la Global Meteor Network para las lluvias activas, con los recuentos del día de las cámaras GMN por lluvia (un recuento, no un flujo: depende de cuántas estaciones ven el cielo despejado); a la derecha, los mapas de radiantes del radar CMOR, incluidos los de las lluvias diurnas. Los archivos se vuelven a descargar solo si han cambiado, como mucho cada 30 minutos, o bien con Descargar ahora.

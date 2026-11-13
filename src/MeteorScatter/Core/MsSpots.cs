@@ -423,6 +423,8 @@ namespace YAMS
             if (tl.Success && IsLoc(tl.Groups[1].Value) && IsLoc(tl.Groups[2].Value))
             {
                 s.LocSpotter = tl.Groups[1].Value.ToUpperInvariant(); s.LocDx = tl.Groups[2].Value.ToUpperInvariant();
+                // il primo locatore e' quello che la stazione che spotta dichiara di se': corregge CALL3 (come LIVETROPOVHF)
+                CallDb.SetCluster(s.Spotter, s.LocSpotter);
             }
             else
             {
@@ -440,14 +442,7 @@ namespace YAMS
         // - locator a 4 caratteri (solo il quadrato, ~100 x 200 km): se CALL3 ha un locator a 6 caratteri si usa sempre
         //   quello (~5 x 2,5 km), anche se indica un altro quadrato (scelta dell'autore, 7/11/2026);
         // - locator a 6 caratteri: si tiene quello dello spot.
-        public static string Refine(string loc, string call)
-        {
-            loc = (loc ?? "").Trim().ToUpperInvariant();
-            string c3 = CallDb.Lookup(call);
-            if (loc.Length == 0) return c3 ?? "";
-            if (loc.Length < 6 && c3 != null && c3.Length >= 6) return c3;
-            return loc;
-        }
+        public static string Refine(string loc, string call) { return CallDb.Refine(loc, call); }
 
         // locator mancanti o imprecisi dall'archivio CALL3 e distanza
         static void Locate(MsSpot s)
@@ -506,101 +501,6 @@ namespace YAMS
                 }
                 catch { }
             }
-        }
-    }
-
-    // Archivio nominativo -> locator (file CALL3.TXT di WSJT-X/JTDX/MSHV, formato "CALL,LOCATOR,..."), in data/call3.txt
-    public static class CallDb
-    {
-        static string[] calls = new string[0], locs = new string[0];
-        public static volatile bool Loading;
-        public static int Count { get { return calls.Length; } }
-        public static string FilePath = "";
-        public static DateTime FileDate;
-        public static string LastError = "";
-        public static event Action Loaded;
-
-        public static void StartLoad(string dataDir)
-        {
-            FilePath = Path.Combine(dataDir, "call3.txt");
-            if (Loading) return;
-            Loading = true;
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                try { Load(); LastError = ""; } catch (Exception ex) { LastError = ex.Message; }
-                Loading = false;
-                Action a = Loaded; if (a != null) a();
-            });
-        }
-
-        static void Load()
-        {
-            List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
-            Dictionary<string, string> pool = new Dictionary<string, string>(StringComparer.Ordinal);
-            if (File.Exists(FilePath))
-            {
-                FileDate = File.GetLastWriteTime(FilePath);
-                using (StreamReader sr = new StreamReader(FilePath, Encoding.ASCII))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        if (line.StartsWith("//", StringComparison.Ordinal)) continue;
-                        int c1 = line.IndexOf(',');
-                        if (c1 <= 0) continue;
-                        int c2 = line.IndexOf(',', c1 + 1);
-                        string call = line.Substring(0, c1).Trim().ToUpperInvariant();
-                        string loc = (c2 > c1 ? line.Substring(c1 + 1, c2 - c1 - 1) : line.Substring(c1 + 1)).Trim().ToUpperInvariant();
-                        if (call.Length == 0 || (loc.Length != 4 && loc.Length != 6)) continue;
-                        string pl; if (!pool.TryGetValue(loc, out pl)) { pool[loc] = loc; pl = loc; }
-                        list.Add(new KeyValuePair<string, string>(call, pl));
-                    }
-                }
-            }
-            list.Sort((a, b) => string.CompareOrdinal(a.Key, b.Key));
-            string[] c = new string[list.Count], l = new string[list.Count];
-            for (int i = 0; i < list.Count; i++) { c[i] = list[i].Key; l[i] = list[i].Value; }
-            calls = c; locs = l;
-        }
-
-        static string Exact(string call)
-        {
-            string[] c = calls, l = locs;
-            int lo = 0, hi = c.Length - 1;
-            while (lo <= hi)
-            {
-                int mid = (lo + hi) >> 1;
-                int k = string.CompareOrdinal(c[mid], call);
-                if (k == 0) return l[mid];
-                if (k < 0) lo = mid + 1; else hi = mid - 1;
-            }
-            return null;
-        }
-
-        // esatto, poi senza suffisso da skimmer (-#, -1), poi la parte piu' lunga tra le barre
-        public static string Lookup(string call)
-        {
-            if (string.IsNullOrEmpty(call)) return null;
-            call = call.Trim().ToUpperInvariant();
-            string r = Exact(call);
-            if (r != null) return r;
-            int dash = call.IndexOf('-');
-            if (dash > 0) { call = call.Substring(0, dash); r = Exact(call); if (r != null) return r; }
-            if (call.IndexOf('/') >= 0)
-            {
-                string best = "";
-                foreach (string p in call.Split('/')) if (p.Length > best.Length) best = p;
-                if (best.Length >= 3) return Exact(best);
-            }
-            return null;
-        }
-
-        public static void Replace(string newFile, string dataDir)
-        {
-            string dest = Path.Combine(dataDir, "call3.txt");
-            if (File.Exists(dest)) File.Copy(dest, dest + ".bak", true);
-            File.Copy(newFile, dest, true);
-            StartLoad(dataDir);
         }
     }
 }

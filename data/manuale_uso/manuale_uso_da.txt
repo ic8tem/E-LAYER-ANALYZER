@@ -1,5 +1,5 @@
 TITLE|Brugervejledning til YA-MS
-SUB|Version 1.8.6 - udarbejdet af Costantino IC8TEM - november 2026
+SUB|Version 1.8.7 - udarbejdet af Costantino IC8TEM - november 2026
 H1|1. Indledning
 H2|1.1 Hvad YA-MS bruges til
 P|YA-MS hjælper dig med at forudsige og følge meteor scatter-forholdene live mellem din station og en modstation, fra 28 til 432 MHz. For hver aktiv meteorsværm fortæller programmet, hvor meget dens radiants position begunstiger din strækning (effektiviteten), på hvilke tidspunkter, fra hvilken side af strækningen refleksionerne kommer, og hvor det er bedst at rette antennen. Ved siden af prognosen viser det live måledata: tællingerne fra meteorradaren i Collm, kameraerne i Global Meteor Network, CMOR-radaren, GRAVES-senderen og den meteor scatter-trafik, der indsamles fra clusterne og fra PSKReporter.
@@ -26,7 +26,7 @@ P|Ved start vises i nogle få sekunder et billede med Perseiderne over ESO's VLT
 H2|2.3 Mappen data
 P|Alle indstillinger og alle data ligger i én enkelt mappe data ved siden af programmet: ingen AppData, ingen systemmapper. For at flytte YA-MS til en anden computer er det nok at kopiere programmappen med dens mappe data. Mappens indhold er beskrevet i kapitel 13.
 H2|2.4 Automatiske opdateringer
-P|Fra version 1.8.6 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
+P|Fra version 1.8.7 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Fra version 1.8.0 kontrollerer YA-MS selv på GitHub, ved start og højst én gang om dagen, om der er kommet en ny version. Hvis der er, vises vinduet »Opdatering tilgængelig« med nyhederne og tre knapper:
 LI|Opdater nu: henter den pakke, der passer til dit system, erstatter programfilerne, beholder mappen data og genstarter YA-MS. Programfiler i mappen data, som den nye version ændrer, kopieres først til data/backup/v<gammel version>; dine egne filer (indstillinger, arkiver, spots, ADIF) røres ikke.
 LI|Senere: lukker vinduet; kontrollen gentages næste dag.
@@ -57,6 +57,7 @@ H1|4. Indstilling af station og strækning
 H2|4.1 Række 1: stationer og bånd
 LI|Min lokator og højde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten af feltet bruges) og stationens højde over havet.
 LI|Modstation og højde m: lokator og højde for den station, du vil forbinde med.
+LI|Modstationen har sin egen række, under din station: skriv kaldesignalet og tryk Enter, locatoren hentes fra CALL3-databasen (som i YAEC og LIVETROPOVHF). Kaldesignalet kan også skrives i locator-feltet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Bruges til antennens forstærkning og lap, til dæmpning og linkbudget og til fluxestimatet.
 LI|Beregn: genberegner strækningen (sampling af E-laget, under et sekund).
 LI|Antenne az: antennens azimut, altid mod modstationen.
@@ -135,6 +136,7 @@ P|De bedste tidspunkter og siden er de mest robuste oplysninger: de ændrer sig 
 TAG|NOTA|Brug programmet til at vælge tidspunktet og den side, du skal dreje antennen mod; læs ikke procenterne som sandsynligheder for, at forbindelsen lykkes.
 H2|7.4 Grafen
 P|For op til fem sværme: effektiviteten som fuldt optrukken linje og DH9GCD's formel som prikket linje i samme farve; strækningsindekset som søjler på skalaen til højre. Lokal tid er skrevet under UTC-tiden.
+P|I diagrammet markerer en lodret rød bjælke beregningstidspunktet (dato og timeskyderen i række 3).
 H2|7.5 24-timerstabellen
 LI|Én række for hver sværm, der er aktiv den dag, 24 kolonner for UTC-timerne.
 LI|63A: effektivitet 63 %, de fleste refleksioner fra side A; 41B: side B; tom celle: under 1 %; ↑: radiant over 70° (for højt); varmere farve = højere effektivitet.
@@ -163,6 +165,7 @@ LI|Kortradius: 600-3500 km. Spots der vises: seneste 15 eller 30 minutter, senes
 LI|Et klik på en strækning eller på en række i tabellen fremhæver forbindelsen og viser skyens centrum, dens højde og dens dimensioner.
 LI|Vis hvem der lytter: trekanter i båndets farve markerer de stationer, der ifølge PSKReporter modtager MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvindue. Et klik på en trekant viser kaldesignal, lokator, modes og sidste spot. MQTT-strømmen i fanen Dataindsamling skal være forbundet.
 LI|Spots fra alle bånd vises, også fra bånd der ikke er valgt i Dataindsamling (de gemmes ikke). CW-spots og spots mellem stationer, der ligger for tæt, vises ikke, hvis de kasseres i Dataindsamling.
+LI|Kortet viser kaldesignalerne for begge stationer i hvert spot, én gang pr. station. Projektionen kan være azimutal (centreret på din station) eller Mercator. Værktøjstippet på kolonnen Sky forklarer betydningen.
 H2|9.2 Radarflux
 P|Timetællingerne af meteorer og sporhøjderne fra SKiYMET-radaren i Collm (36,2 MHz) og det seneste billede fra radaren i Sodankylä (36,9 MHz).
 LI|Hent nu og Automatisk opdatering af alle kilder hvert 5. minut: hver kilde hentes kun igen, hvis den er ændret.
@@ -182,6 +185,7 @@ LI|Filteret accepterer spots på de typiske meteor scatter-frekvenser (50190-503
 LI|CW-spots kasseres med det samme (CW eller WPM i kommentaren, eller 28000-28070 kHz): de vises ikke i konsollen og gemmes ikke, undtagen dem der er mærket <MS>. Feltet kan slås fra.
 LI|Spots mellem stationer tættere end 500 km kasseres straks, fordi forbindelsen på den afstand er direkte eller troposfærisk og ikke meteor scatter: de vises ikke i konsollen og gemmes ikke. Mangler en locator, beholdes spottet. Afstanden ændres under feltet.
 LI|Manglende lokatorer hentes fra CALL3-arkivet; accepterede spots gemmes i data/spot_ms, én fil pr. dag, og vises på kortet i Live-trafik.
+LI|CALL3-database med reglerne fra LIVETROPOVHF. »Opdatér nu« henter CALL3.TXT fra MMMonVHF (mindst 100.000 gyldige linjer, den forrige bliver i data/call3.bak); med »Opdatér selv hver 7. dag« sker det ved start. Over filen gælder i rækkefølge: håndindtastninger (data/CALL3-MANUALE.TXT), cluster-rettelser (den 6-tegns locator, som spotteren angiver for sig selv), tilføjede filer (data/CALL3-AGGIUNTE), derefter CALL3.TXT og 6-tegns locatorer lært live (data/LOC6.TXT). En modtaget locator på 4 tegn, eller som ender på LL eller MM, erstattes af den 6-tegns fra databasen; portable (med skråstreg) kun med den præcise indtastning.
 H1|10. Live-sværme og sværmkatalog
 H2|10.1 Live-sværme
 P|Til venstre fluxen og ZHR målt af Global Meteor Network for de aktive sværme, med dagens tællinger fra GMN-kameraerne pr. sværm (en tælling, ikke en flux: den afhænger af, hvor mange stationer der ser en klar himmel); til højre radiantkortene fra CMOR-radaren, også for dagsværmene. Filerne hentes kun igen, hvis de er ændret, højst hvert 30. minut, eller med Hent nu.

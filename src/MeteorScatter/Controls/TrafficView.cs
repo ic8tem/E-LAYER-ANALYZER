@@ -49,6 +49,10 @@ namespace YAMS
         public LatLon Home;
         public string HomeLabel = "";
         public double RadiusKm = 2500;
+        // proiezione di Mercatore (rettangolo, nord in alto, meridiani verticali) al posto dell'azimutale equidistante
+        // centrata sulla stazione; il raggio indica quanti km stanno tra il centro e il bordo piu' vicino
+        public bool Mercator;
+        double hw, hh;   // mezza larghezza e mezza altezza dell'area della mappa (Mercatore)
         public List<System.Drawing.PointF[]> MapLines, MapBorders;
         public List<TrafficSpot> Spots = new List<TrafficSpot>();
         public TrafficSpot Selected;
@@ -109,10 +113,30 @@ namespace YAMS
             UiScale.Changed -= InvalidateVisual;
         }
 
-        public bool Inside(LatLon p) { return Astro.DistanceKm(Home, p) <= RadiusKm; }
+        public bool Inside(LatLon p)
+        {
+            if (!Mercator || rad <= 0) return Astro.DistanceKm(Home, p) <= RadiusKm;
+            Point q = P(p);
+            return Math.Abs(q.X - cx) <= hw && Math.Abs(q.Y - cy) <= hh && Astro.DistanceKm(Home, p) <= RadiusKm * 3;
+        }
+
+        static double MercY(double latDeg)
+        {
+            double la = Math.Max(-85, Math.Min(85, latDeg)) * Math.PI / 180;
+            return Math.Log(Math.Tan(Math.PI / 4 + la / 2));
+        }
 
         Point P(LatLon p)
         {
+            if (Mercator)
+            {
+                // scala vera alla latitudine della stazione: 1 radiante di Mercatore = R cos(lat) km
+                double k = rad / RadiusKm * 6371.0 * Math.Cos(Home.Lat * Math.PI / 180);
+                double dl = p.Lon - Home.Lon;
+                while (dl > 180) dl -= 360;
+                while (dl < -180) dl += 360;
+                return new Point(cx + k * dl * Math.PI / 180, cy - k * (MercY(p.Lat) - MercY(Home.Lat)));
+            }
             double d = Astro.DistanceKm(Home, p), b = Astro.Bearing(Home, p) * Math.PI / 180;
             double r = d / RadiusKm * rad;
             return new Point(cx + r * Math.Sin(b), cy - r * Math.Cos(b));
@@ -150,15 +174,19 @@ namespace YAMS
             rad = Math.Max(20, Math.Min(W, H) / 2 - margin);
             cx = W / 2; cy = H / 2;
             Point c0 = new Point(cx, cy);
-            ctx.DrawEllipse(new ImmutableSolidColorBrush(sea), null, c0, rad, rad);
-            using (ctx.PushGeometryClip(new EllipseGeometry(new Rect(cx - rad, cy - rad, 2 * rad, 2 * rad))))
+            if (Mercator) { rad = Math.Max(20, Math.Min(W, H) / 2 - 6); hw = W / 2 - 6; hh = H / 2 - 6; }
+            Rect mrect = new Rect(cx - hw, cy - hh, 2 * hw, 2 * hh);
+            if (Mercator) ctx.DrawRectangle(new ImmutableSolidColorBrush(sea), null, mrect);
+            else ctx.DrawEllipse(new ImmutableSolidColorBrush(sea), null, c0, rad, rad);
+            using (ctx.PushGeometryClip(Mercator ? (Geometry)new RectangleGeometry(mrect) : new EllipseGeometry(new Rect(cx - rad, cy - rad, 2 * rad, 2 * rad))))
             {
+                if (Mercator) DrawGraticule(ctx, new Pen(new ImmutableSolidColorBrush(ring), 1, new ImmutableDashStyle(new double[] { 4, 4 }, 0)), fs, ring, W, H);
                 DrawLines(ctx, MapBorders, new Pen(new ImmutableSolidColorBrush(border), 0.6));
                 DrawLines(ctx, MapLines, new Pen(new ImmutableSolidColorBrush(coast), 0.9));
                 // cerchi di distanza ogni 500 km
                 IPen rp = new Pen(new ImmutableSolidColorBrush(ring), 1, new ImmutableDashStyle(new double[] { 4, 4 }, 0));
                 double step = RadiusKm > 3000 ? 1000 : 500;
-                for (double r = step; r < RadiusKm; r += step)
+                for (double r = step; r < RadiusKm && !Mercator; r += step)
                 {
                     double rr = r / RadiusKm * rad;
                     ctx.DrawEllipse(null, rp, c0, rr, rr);
@@ -168,13 +196,15 @@ namespace YAMS
                 // nuvole, poi tratte e stazioni (gli spot selezionati e lampeggianti sopra gli altri)
                 foreach (TrafficSpot s in Spots) DrawClouds(ctx, s, false);
                 foreach (TrafficListener l in Listeners) DrawListener(ctx, l, box, Listeners.Count <= 40);
+                labeled.Clear();
                 foreach (TrafficSpot s in Spots) DrawPath(ctx, s, box);
                 if (Selected != null && Spots.Contains(Selected)) { DrawClouds(ctx, Selected, true); DrawPath(ctx, Selected, box); }
             }
             // bordo e scala dei gradi (come il rotore d'antenna)
             IPen rim = new Pen(new ImmutableSolidColorBrush(coast), 1.5);
-            ctx.DrawEllipse(null, rim, c0, rad, rad);
-            for (int a = 0; a < 360; a += 10)
+            if (Mercator) ctx.DrawRectangle(null, rim, mrect);
+            else ctx.DrawEllipse(null, rim, c0, rad, rad);
+            for (int a = 0; a < 360 && !Mercator; a += 10)
             {
                 double ar = a * Math.PI / 180, l = a % 30 == 0 ? 8 : 4;
                 ctx.DrawLine(rim, new Point(cx + rad * Math.Sin(ar), cy - rad * Math.Cos(ar)), new Point(cx + (rad + l) * Math.Sin(ar), cy - (rad + l) * Math.Cos(ar)));
@@ -234,13 +264,15 @@ namespace YAMS
             }
         }
 
+        readonly HashSet<string> labeled = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
         void DrawPath(DrawingContext ctx, TrafficSpot s, Color box)
         {
             bool sel = s == Selected;
             if (s.Blink && !phase && !sel) return;
             Point a = P(s.A), b = P(s.B);
-            if (sel) ctx.DrawLine(new Pen(new ImmutableSolidColorBrush(Color.FromArgb(120, 255, 255, 255)), 7), a, b);
-            ctx.DrawLine(new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : (s.Blink ? 3 : 1.8)), a, b);
+            if (sel) Seg(ctx, new Pen(new ImmutableSolidColorBrush(Color.FromArgb(120, 255, 255, 255)), 7), s.A, s.B);
+            Seg(ctx, new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : (s.Blink ? 3 : 1.8)), s.A, s.B);
             foreach (Point p in new[] { a, b }) ctx.DrawEllipse(new ImmutableSolidColorBrush(s.Color), new Pen(Brushes.White, 1.5), p, sel ? 5.5 : 4, sel ? 5.5 : 4);
             if (s.Blink)
             {
@@ -249,9 +281,16 @@ namespace YAMS
             }
             if (sel || s.Blink || Spots.Count <= 25)
             {
+                // nominativi di entrambe le stazioni (chi ascolta e chi e' ascoltato), una sola volta per stazione;
+                // la stazione di casa ha gia' la sua scritta
                 Color ink = Tema.Scuro ? Color.FromRgb(225, 230, 240) : Color.FromRgb(31, 41, 55);
-                FormattedText t = Ft(s.CallB, 10.5, ink, sel ? FontWeight.Bold : FontWeight.Normal);
-                Label(ctx, t, b.X + 6, b.Y - t.Height - 2, box);
+                foreach (var e in new[] { (s.CallA, a), (s.CallB, b) })
+                {
+                    if (string.IsNullOrEmpty(e.Item1) || (Math.Abs(e.Item2.X - cx) < 3 && Math.Abs(e.Item2.Y - cy) < 3)) continue;
+                    if (!labeled.Add(e.Item1) && !sel) continue;
+                    FormattedText t = Ft(e.Item1, 9, ink, sel ? FontWeight.Bold : FontWeight.Normal);
+                    Label(ctx, t, e.Item2.X + 6, e.Item2.Y - t.Height - 2, box);
+                }
             }
         }
 
@@ -269,7 +308,7 @@ namespace YAMS
             if (label)
             {
                 Color ink = Tema.Scuro ? Color.FromRgb(200, 208, 222) : Color.FromRgb(71, 85, 105);
-                FormattedText t = Ft(l.Call, 9.5, ink);
+                FormattedText t = Ft(l.Call, 8, ink);
                 Label(ctx, t, c.X + 6, c.Y - 2, Color.FromArgb((byte)(box.A * 0.8), box.R, box.G, box.B));
             }
         }
@@ -296,10 +335,50 @@ namespace YAMS
             ctx.DrawGeometry(new ImmutableSolidColorBrush(col), new Pen(Brushes.White, 1.5), g);
         }
 
+        // tratta sul cerchio massimo: retta nell'azimutale centrata sulla stazione, curva in Mercatore
+        void Seg(DrawingContext ctx, IPen pen, LatLon a, LatLon b)
+        {
+            if (!Mercator) { ctx.DrawLine(pen, P(a), P(b)); return; }
+            double d = Astro.DistanceKm(a, b), br = Astro.Bearing(a, b);
+            int n = Math.Max(2, Math.Min(32, (int)(d / 100)));
+            StreamGeometry g = new StreamGeometry();
+            using (StreamGeometryContext c = g.Open())
+            {
+                c.BeginFigure(P(a), false);
+                for (int i = 1; i <= n; i++) c.LineTo(P(i == n ? b : Astro.Destination(a, br, d * i / n)));
+                c.EndFigure(false);
+            }
+            ctx.DrawGeometry(null, pen, g);
+        }
+
+        // reticolo di paralleli e meridiani (Mercatore), con i gradi sul bordo
+        void DrawGraticule(DrawingContext ctx, IPen pen, double fs, Color ring, double W, double H)
+        {
+            double k = rad / RadiusKm * 6371.0 * Math.Cos(Home.Lat * Math.PI / 180);
+            double degW = hw / k * 180 / Math.PI;
+            double step = degW > 40 ? 20 : degW > 15 ? 10 : 5;
+            for (double lo = Math.Floor((Home.Lon - degW) / step) * step; lo <= Home.Lon + degW; lo += step)
+            {
+                double x = P(new LatLon(Home.Lat, lo)).X;
+                ctx.DrawLine(pen, new Point(x, 0), new Point(x, H));
+                double l = lo > 180 ? lo - 360 : lo < -180 ? lo + 360 : lo;
+                FormattedText t = Ft(Math.Abs(l).ToString("F0", CultureInfo.InvariantCulture) + "°" + (l < 0 ? "W" : l > 0 ? "E" : ""), fs * 0.8, ring);
+                ctx.DrawText(t, new Point(x + 2, cy + hh - t.Height - 2));
+            }
+            for (double la = -80; la <= 80; la += step)
+            {
+                double y = P(new LatLon(la, Home.Lon)).Y;
+                if (y < 0 || y > H) continue;
+                ctx.DrawLine(pen, new Point(0, y), new Point(W, y));
+                FormattedText t = Ft(Math.Abs(la).ToString("F0", CultureInfo.InvariantCulture) + "°" + (la < 0 ? "S" : la > 0 ? "N" : ""), fs * 0.8, ring);
+                ctx.DrawText(t, new Point(cx + hw - t.Width - 4, y - t.Height - 1));
+            }
+        }
+
         void DrawLines(DrawingContext ctx, List<System.Drawing.PointF[]> lines, IPen pen)
         {
             if (lines == null) return;
-            double lim = RadiusKm * 1.08;
+            double lim = Mercator ? RadiusKm * 3.2 : RadiusKm * 1.08;
             foreach (System.Drawing.PointF[] l in lines)
             {
                 if (l == null || l.Length < 2) continue;
@@ -307,12 +386,14 @@ namespace YAMS
                 bool any = false;
                 using (StreamGeometryContext c = g.Open())
                 {
-                    bool open = false;
+                    bool open = false; double lastX = 0;
                     foreach (System.Drawing.PointF q in l)
                     {
                         LatLon ll = new LatLon(q.Y, q.X);
                         if (Astro.DistanceKm(Home, ll) > lim) { if (open) { c.EndFigure(false); open = false; } continue; }
                         Point p = P(ll);
+                        if (Mercator && open && Math.Abs(p.X - lastX) > hw) { c.EndFigure(false); open = false; }   // salto dell'antimeridiano
+                        lastX = p.X;
                         if (!open) { c.BeginFigure(p, false); open = true; any = true; } else c.LineTo(p);
                     }
                     if (open) c.EndFigure(false);

@@ -49,7 +49,8 @@ namespace YAMS
         DateTime lastFetchUtc = DateTime.MinValue;
 
         // comandi in alto
-        TextBox txtHome, txtDx;
+        TextBox txtHome, txtDx, txtDxCall;
+        TextBlock lblDxCall3;
         NumericUpDown numHomeAlt, numDxAlt, numLayer, numElev;
         ComboBox cmbBand;
         CheckBox chkLayerRadar;
@@ -452,6 +453,15 @@ namespace YAMS
             numHomeAlt = N(0, 5000, Dm(cfg.GetD("mia_quota_m", 62)), 0, 10, 60);
             txtDx = T(cfg.Get("dx_locator", "JO62QM"), 90, true);
             numDxAlt = N(0, 5000, Dm(cfg.GetD("dx_quota_m", 50)), 0, 10, 60);
+            // nominativo del corrispondente: il locator si prende dal CALL3 (come in YAEC e LIVETROPOVHF)
+            txtDxCall = T(cfg.Get("dx_nominativo", ""), 120, true);
+            txtDxCall.Watermark = Lang.T("nominativo");
+            ToolTip.SetTip(txtDxCall, Lang.T("Scrivi il nominativo del corrispondente e premi Invio: il locator si prende dall'archivio CALL3 (con le voci a mano, i file aggiunti e le correzioni). Si può scrivere il nominativo anche nella casella del locator."));
+            lblDxCall3 = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
+            txtDxCall.KeyDown += (s, e) => { if (e.Key == Key.Enter) ApplyDxCall(true); };
+            txtDxCall.LostFocus += (s, e) => ApplyDxCall(false);
+            txtDx.KeyDown += (s, e) => { if (e.Key == Key.Enter) DxLocatorAsCall(); };
+            txtDx.LostFocus += (s, e) => DxLocatorAsCall();
             string[] bands = { "28", "50", "70", "144", "222", "432" };
             cmbBand = new ComboBox { ItemsSource = bands, Width = 90, Margin = new Thickness(2, 3), VerticalAlignment = VerticalAlignment.Center };
             cmbBand.SelectedIndex = Array.IndexOf(bands, cfg.Get("banda_MHz", "144"));
@@ -535,13 +545,15 @@ namespace YAMS
                               btnReal, lblSkyTime);
             // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
             Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
-                       L(Lang.T("Corrispondente")), txtDx, L(Lang.T("quota m")), numDxAlt,
                        L(Lang.T("Banda MHz")), cmbBand, btnCalc, lblAntAz, L(Lang.T("Carattere")), sldFont, lblFont);
+            // riga del corrispondente, sotto la propria stazione (richiesta dell'autore, 13/11/2026)
+            Border rowDx = Row(L(Lang.T("Corrispondente")), txtDxCall, L(Lang.T("locator")), txtDx, L(Lang.T("quota m")), numDxAlt, lblDxCall3);
 
             DockTop(root, row1);
+            DockTop(root, rowDx);
             DockTop(root, row2);
             DockTop(root, row3);
-            topRows = new[] { row1, row2, row3 };
+            topRows = new[] { row1, rowDx, row2, row3 };
         }
 
         Border[] topRows;
@@ -1016,11 +1028,51 @@ namespace YAMS
         // tempo reale: data di oggi e cursore a zero
         bool IsRealTime { get { return TrackValue == 0 && (dtCalc == null || !dtCalc.SelectedDate.HasValue || dtCalc.SelectedDate.Value.Date == DateTime.UtcNow.Date); } }
 
+        // barra rossa sul grafico dell'efficienza all'orario del calcolo (data e cursore delle ore)
+        DateTime chart24Day = DateTime.MinValue;
+
+        void SetCalcMark()
+        {
+            if (chart24 == null) return;
+            DateTime c = SkyTimeUtc, d = chart24Day;
+            if (d == DateTime.MinValue) return;
+            chart24.CalcPos = c.Date == d.Date ? c.TimeOfDay.TotalHours : double.NaN;
+            chart24.InvalidateVisual();
+        }
+
         void ResetCalcTime()
         {
             if (dtCalc != null) dtCalc.SelectedDate = DateTime.UtcNow.Date;
             trackTime.Value = 0;
             UpdateSky();
+        }
+
+        string lastDxCall = null;
+
+        // nominativo -> locator dal CALL3; con Invio ricalcola sempre
+        void ApplyDxCall(bool force)
+        {
+            string call = (txtDxCall.Text ?? "").Trim().ToUpperInvariant();
+            if (!force && call == lastDxCall) return;
+            lastDxCall = call;
+            if (call.Length == 0) { lblDxCall3.Text = ""; return; }
+            if (CallDb.Loading || CallDb.Count == 0 && CallDb.ManualCount == 0) { lblDxCall3.Text = Lang.T("CALL3: caricamento..."); return; }
+            string loc = CallDb.Lookup(call);
+            if (loc == null) { lblDxCall3.Text = Lang.F("{0} non è nel CALL3: scrivi il locator a mano", call); lblDxCall3.Foreground = Pal.B(Pal.Orange); return; }
+            lblDxCall3.Text = Lang.F("{0} nel CALL3: {1}", call, loc);
+            lblDxCall3.Foreground = Pal.B(Pal.Green);
+            if (Up(txtDx) != loc || force) { txtDx.Text = loc; Recalc(); }
+        }
+
+        // un nominativo scritto nella casella del locator (come in YAEC): si sposta nella casella del nominativo
+        void DxLocatorAsCall()
+        {
+            string v = Up(txtDx);
+            LatLon q;
+            if (v.Length == 0 || Astro.TryLocator(v, out q)) return;
+            if (CallDb.Lookup(v) == null) return;
+            txtDxCall.Text = v;
+            ApplyDxCall(true);
         }
 
         void Recalc()
@@ -1105,6 +1157,7 @@ namespace YAMS
             else if (btn == MouseButton.Left)
             {
                 txtDx.Text = loc;
+                txtDxCall.Text = ""; lastDxCall = ""; lblDxCall3.Text = "";
                 status.Text = Lang.F("Nuovo locator del corrispondente dalla mappa: {0}", loc);
                 Recalc();
             }
@@ -1135,6 +1188,7 @@ namespace YAMS
         {
             if (sky == null) return;
             DateTime t = SkyTimeUtc;
+            SetCalcMark();
             lblSkyTime.Text = IsRealTime ? Lang.T("Calcolo per: adesso")
                 : Lang.F("Calcolo per: {0} UTC", t.ToString("dd/MM HH:mm", CultureInfo.InvariantCulture));
             LatLon home; if (!Astro.TryLocator(Up(txtHome), out home)) return;
@@ -1651,7 +1705,8 @@ namespace YAMS
             chart24.XLabels = xl;
             SetLocalRow(chart24, day.Date, 24);
             chart24.MarkIndex = day.Date == DateTime.UtcNow.Date ? DateTime.UtcNow.Hour : -1;
-            chart24.InvalidateVisual();
+            chart24Day = day.Date;
+            SetCalcMark();
         }
 
         void UpdateGeometry()
@@ -2069,6 +2124,8 @@ namespace YAMS
             cfg.Set("mio_locator", Up(txtHome));
             cfg.Set("mia_quota_m", V(numHomeAlt));
             cfg.Set("dx_locator", Up(txtDx));
+            cfg.Set("dx_nominativo", (txtDxCall.Text ?? "").Trim().ToUpperInvariant());
+            CallDb.SaveLayers();
             cfg.Set("dx_quota_m", V(numDxAlt));
             cfg.Set("banda_MHz", (cmbBand.SelectedItem as string) ?? "144");
             cfg.Set("quota_scie_km", V(numLayer));

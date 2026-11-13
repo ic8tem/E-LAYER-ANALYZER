@@ -44,6 +44,8 @@ namespace YAMS
             }
         }
 
+        string trafficCloudTip;
+
         void BuildTrafficTab()
         {
             DockPanel p = Page(Lang.T("Traffico in diretta"));
@@ -70,6 +72,11 @@ namespace YAMS
             lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
             sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
             side.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
+            ComboBox cmbProj = new ComboBox { ItemsSource = new[] { Lang.T("azimutale (centrata sulla mia stazione)"), Lang.T("Mercatore") }, MinWidth = 220, VerticalAlignment = VerticalAlignment.Center };
+            traffic.Mercator = cfg.GetB("traffico_mercatore", false);
+            cmbProj.SelectedIndex = traffic.Mercator ? 1 : 0;
+            cmbProj.SelectionChanged += (s, e) => { traffic.Mercator = cmbProj.SelectedIndex == 1; cfg.Set("traffico_mercatore", traffic.Mercator); RefreshTraffic(true); };
+            side.Children.Add(Row(L(Lang.T("Proiezione della mappa")), cmbProj));
             List<string> wn = new List<string>();
             foreach (int m in TrafficMinutes) wn.Add(m < 60 ? Lang.F("ultimi {0} minuti", m) : m == 60 ? Lang.T("ultima ora") : m < 1440 ? Lang.F("ultime {0} ore", m / 60) : Lang.T("ultime 24 ore"));
             cmbTrafficWindow = new ComboBox { ItemsSource = wn, MinWidth = 170, VerticalAlignment = VerticalAlignment.Center };
@@ -88,6 +95,8 @@ namespace YAMS
 
             tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("Nuvola") }, new double[] { 46, 64, 82, 82, 50, 90 });
             tTraffic.FitWidth = true;
+            trafficCloudTip = Lang.T("Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. \"sporadiche\" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).");
+            tTraffic.HeaderTips = new[] { "", "", "", "", "", trafficCloudTip };
             tTraffic.RowClicked += i =>
             {
                 if (i < 0 || i >= tTraffic.Rows.Count) return;
@@ -273,7 +282,7 @@ namespace YAMS
                     {
                         Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), (s.FreqKHz / 1000).ToString("F3", CultureInfo.CurrentCulture), s.Spotter, s.DxCall,
                                         Astro.DistanceKm(t.A, t.B).ToString("F0", CultureInfo.CurrentCulture), side },
-                        Fore = t.Color, Tag = t
+                        Fore = t.Color, Tag = t, CellTips = new[] { "", "", "", "", "", trafficCloudTip }
                     });
                 }
                 tTraffic.Rows = rows;

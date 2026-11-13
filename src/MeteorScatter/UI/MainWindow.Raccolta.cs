@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -36,7 +37,7 @@ namespace YAMS
         {
             MsCollector.Init(dataDir, cfg);
             if (CallDb.Count == 0 && !CallDb.Loading) CallDb.StartLoad(dataDir);
-            CallDb.Loaded += () => Avalonia.Threading.Dispatcher.UIThread.Post(UpdateCall3Label);
+            CallDb.Loaded += () => Avalonia.Threading.Dispatcher.UIThread.Post(() => { UpdateCall3Label(); AutoUpdateCall3(); });
 
             DockPanel p = Hosted ? new DockPanel() : Page(Lang.T("Raccolta dati"));   // dentro E-LAYER ANALYZER: raccolta unica in DATA COLLECTION
             Grid g = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*") };
@@ -50,6 +51,20 @@ namespace YAMS
             Button bImp = B(Lang.T("Importa CALL3.TXT..."));
             bImp.Click += async (s, e) => await ImportCall3();
             DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));
+            // CALL3 con le regole di LIVETROPOVHF: aggiornamento da MMMonVHF, voci a mano, file aggiunti
+            Button bC3Upd = B(Lang.T("Aggiorna adesso"));
+            ToolTip.SetTip(bC3Upd, Lang.T("Scarica il CALL3.TXT più recente da MMMonVHF (www.mmmonvhf.de), lo controlla (almeno 100.000 righe valide, altrimenti non cambia nulla), salva il precedente in data/call3.bak e lo sostituisce. Voci a mano, file aggiunti, correzioni dal cluster e locatori imparati restano sopra e non si toccano."));
+            bC3Upd.Click += async (s, e) => await UpdateCall3Now();
+            chkC3Auto = C(Lang.T("Aggiorna da solo ogni 7 giorni"), cfg.GetB("call3_auto", true));
+            chkC3Auto.IsCheckedChanged += (s, e) => cfg.Set("call3_auto", chkC3Auto.IsChecked == true);
+            Button bC3Add = B(Lang.T("Aggiungi un file..."));
+            ToolTip.SetTip(bC3Add, Lang.T("Un file nel formato di CALL3.TXT (nominativo,locatore; vanno bene anche punto e virgola, tabulazione e spazio) si copia in data/CALL3-AGGIUNTE e vale sopra CALL3.TXT; con più file vince l'ultimo in ordine alfabetico."));
+            bC3Add.Click += async (s, e) => await AddCall3File();
+            Button bC3Man = B(Lang.T("Voci a mano..."));
+            ToolTip.SetTip(bC3Man, Lang.T("Nominativo e locatore scritti a mano (data/CALL3-MANUALE.TXT): valgono sopra tutto, anche sopra il locatore che la stazione stessa manda."));
+            bC3Man.Click += async (s, e) => await EditCall3Manual();
+            lblC3Status = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap };
+            DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, bC3Add, bC3Man, lblC3Status));
 
             Color[] cols = { Pal.Azure, Pal.Violet, Pal.Orange };
 
@@ -395,6 +410,87 @@ namespace YAMS
             if (lblRdCall3 == null) return;
             lblRdCall3.Text = CallDb.Loading ? Lang.T("CALL3: caricamento...")
                 : CallDb.Count > 0 ? Lang.F("CALL3: {0:N0} nominativi", CallDb.Count) : Lang.T("CALL3: nessun archivio (data/call3.txt)");
+            if (!CallDb.Loading)
+                lblRdCall3.Text += " · " + Lang.F("a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}", CallDb.ManualCount, CallDb.OverlayCount, CallDb.ClusterCount, CallDb.LearnedCount);
+        }
+
+        CheckBox chkC3Auto;
+        TextBlock lblC3Status;
+        bool c3AutoTried;
+
+        // all'avvio, se scelto e se l'ultimo aggiornamento ha piu' di 7 giorni (come LIVETROPOVHF)
+        async void AutoUpdateCall3()
+        {
+            if (c3AutoTried || Program.ScreenshotDir != null) return;
+            c3AutoTried = true;
+            if (!cfg.GetB("call3_auto", true)) return;
+            DateTime last;
+            if (DateTime.TryParse(cfg.Get("call3_ultimo", ""), CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out last)
+                && DateTime.UtcNow - last < TimeSpan.FromDays(CallDb.AutoDays)) return;
+            await UpdateCall3Now();
+        }
+
+        async System.Threading.Tasks.Task UpdateCall3Now()
+        {
+            string err = await CallDb.UpdateFromMmmonvhf(dataDir, m => Avalonia.Threading.Dispatcher.UIThread.Post(() => { if (lblC3Status != null) lblC3Status.Text = m; }));
+            if (err == null)
+            {
+                cfg.Set("call3_ultimo", DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
+                try { cfg.Save(); } catch { }
+                lblC3Status.Text = Lang.F("CALL3.TXT aggiornato da MMMonVHF ({0:dd/MM/yyyy HH:mm}). Il precedente è in data/call3.bak.", DateTime.Now);
+            }
+            else lblC3Status.Text = err;
+        }
+
+        async System.Threading.Tasks.Task AddCall3File()
+        {
+            try
+            {
+                IReadOnlyList<IStorageFile> files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "CALL3", AllowMultiple = false,
+                    FileTypeFilter = new[] { new FilePickerFileType("CALL3") { Patterns = new[] { "*.txt", "*.TXT", "*.csv", "*.CSV" } } }
+                });
+                if (files == null || files.Count == 0) return;
+                string path = files[0].TryGetLocalPath();
+                if (path == null) return;
+                CallDb.AddOverlayFile(path);
+                UpdateCall3Label();
+            }
+            catch (Exception ex) { await Dialogs.Message(Win, "CALL3", ex.Message); }
+        }
+
+        // voci a mano: una per riga, "NOMINATIVO,LOCATORE"
+        async System.Threading.Tasks.Task EditCall3Manual()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> kv in CallDb.ManualEntries()) sb.Append(kv.Key).Append(',').Append(kv.Value).AppendLine();
+            TextBox box = new TextBox { Text = sb.ToString(), AcceptsReturn = true, FontFamily = Pal.Mono, Height = 320, TextWrapping = TextWrapping.NoWrap };
+            Window w = new Window
+            {
+                Title = Lang.T("Voci a mano"), Width = 460, SizeToContent = SizeToContent.Height, CanResize = false,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner, Background = Pal.B(Pal.Back), Foreground = Pal.B(Pal.Fore)
+            };
+            StackPanel sp = new StackPanel { Margin = new Thickness(12) };
+            sp.Children.Add(new TextBlock { Text = Lang.T("Una voce per riga: NOMINATIVO,LOCATORE. Valgono sopra tutto, anche sopra il locatore che la stazione stessa manda."), TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 0, 8) });
+            sp.Children.Add(box);
+            Button bOk = B(Lang.T("Salva")), bNo = B(Lang.T("Annulla"));
+            sp.Children.Add(Row(bOk, bNo));
+            w.Content = sp;
+            bNo.Click += (s, e) => w.Close();
+            bOk.Click += (s, e) =>
+            {
+                List<KeyValuePair<string, string>> list = new List<KeyValuePair<string, string>>();
+                foreach (string line in (box.Text ?? "").Split('\n'))
+                {
+                    string[] q = line.Split(new[] { ',', ';', '\t', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (q.Length >= 2) list.Add(new KeyValuePair<string, string>(q[0], q[1]));
+                }
+                CallDb.ReplaceManual(list);
+                UpdateCall3Label();
+                w.Close();
+            };
+            await w.ShowDialog(this);
         }
 
         async System.Threading.Tasks.Task ImportCall3()

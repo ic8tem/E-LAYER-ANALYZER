@@ -31,17 +31,22 @@ ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.
 Adesso
 Aggiorna adesso
+Aggiorna da solo ogni 7 giorni
 Aggiornamenti
 Aggiornamento automatico di tutte le fonti ogni 5 minuti
+Aggiornamento di CALL3 già in corso.
+Aggiornamento di CALL3 non riuscito: {0}
 Aggiornamento disponibile
 Aggiornamento installato
 Aggiunge sotto ogni sciame la riga "classico": il verdetto della regola dei radioamatori, calcolato al punto medio della tratta.\n✗ radiante sotto l'orizzonte; ◐ marginale (radiante sotto 15° o sopra 70°, oppure a meno di 30° dalla direzione della tratta); ● buono; ★ migliore (radiante tra 15° e 70° e a più di 60° dalla direzione della tratta).\nSoglie come in meteor-mcp (qso-graph, 2026); stessa idea della formula di DH9GCD e delle regole di SM6FHZ. Non cambia il calcolo: serve a confrontare le due tesi sull'angolo β.
 Aggiungi
+Aggiungi un file...
 Alcune modifiche si vedono solo dopo aver riavviato il programma.
 Anche con il lobo a 0° non basta: servono scie ad almeno {0:F0} km.
 Anche i locator imprecisi (solo 4 caratteri) si prendono da CALL3, quando CALL3 ha il locator a 6 caratteri.
 Andromedidi
 Angolo β tra scia e tratta (McKinley completo)
+Annulla
 Antenna
 Antenna Yagi: boom m
 Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)
@@ -65,6 +70,7 @@ Bande (MHz)
 Bolidozor wiki, "Graves" – schiere, settori e tempi del fascio
 Bootidi di giugno
 CALCOLO E TEORIA DELL'EFFICIENZA
+CALL3.TXT aggiornato da MMMonVHF ({0:dd/MM/yyyy HH:mm}). Il precedente è in data/call3.bak.
 CALL3: caricamento...
 CALL3: nessun archivio (data/call3.txt)
 CALL3: {0:N0} nominativi
@@ -181,6 +187,7 @@ File RMOB
 File RMOB (conteggi orari del mese)
 File mancante: {0}
 File mancanti
+File scaricato non valido ({0} righe utili): CALL3 non cambiato.
 Filtro
 Filtro degli spot meteor scatter
 Finestra utile
@@ -293,6 +300,7 @@ Mappa quadrati
 Mappa:
 Mappa: bordo = {0} km dalla stazione. {1}
 Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?
+Mercatore
 Mese non indicato: uso il mese corrente.
 Meteore/ora - ieri {0} e oggi {1} (UTC)
 Metti GRAVES come DX
@@ -323,6 +331,7 @@ No
 No: fuori dai settori
 No: sopra il fascio (circa 25°)
 No: sotto l'orizzonte di GRAVES
+Nominativo e locatore scritti a mano (data/CALL3-MANUALE.TXT): valgono sopra tutto, anche sopra il locatore che la stazione stessa manda.
 Nominativo per il login
 Non connesso
 Non ho riconosciuto il formato del file.
@@ -337,6 +346,7 @@ Nuovo locator del corrispondente dalla mappa: {0}
 Nuovo locator della stazione dalla mappa: {0}
 Nuovo tentativo tra 30 s
 Nuvola
+Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).
 O
 ORA MIGLIORE DEL GIORNO
 Ora
@@ -378,6 +388,7 @@ Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il me
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}
 Previsione {0} /ora
 Previsione {0} MHz (rifl./ora)
+Proiezione della mappa
 Pronto
 Prossimo massimo (UTC)
 Prova del filtro
@@ -443,14 +454,17 @@ SCIAME PIÙ FAVOREVOLE
 SEZIONE - le scie più probabili viste dall'antenna verso il corrispondente (az. {0}°)
 SGO, Finlandia
 Salta questa versione
+Salva
 Scarica RMOB adesso
 Scarica adesso
 Scarica i file mancanti
+Scarica il CALL3.TXT più recente da MMMonVHF (www.mmmonvhf.de), lo controlla (almeno 100.000 righe valide, altrimenti non cambia nulla), salva il precedente in data/call3.bak e lo sostituisce. Voci a mano, file aggiunti, correzioni dal cluster e locatori imparati restano sopra e non si toccano.
 Scaricamento dei file mancanti: {0} di {1}
 Scaricamento dell'aggiornamento...
 Scaricamento dell'aggiornamento: {0} %
 Scaricati {0} file mancanti.
 Scaricati {0} file su {1}.
+Scarico CALL3.TXT da mmmonvhf.de...
 Scarta subito gli spot CW (CW o WPM nel commento, oppure 28000-28070 kHz): non compaiono nella console e non si memorizzano. Restano quelli segnati <MS>.
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.
 Scarta subito le righe del cluster sotto 27990,0 kHz (non compaiono nella console e non si memorizzano)
@@ -464,6 +478,7 @@ Sciami in diretta
 Sciami sopra l'orizzonte: {0}
 Scie più lunghe con il radiante basso (DJ5HG)
 Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOME_112026rmob.TXT -> NOME).
+Scrivi il nominativo del corrispondente e premi Invio: il locator si prende dall'archivio CALL3 (con le voci a mano, i file aggiunti e le correzioni). Si può scrivere il nominativo anche nella casella del locator.
 Scrivi il nominativo per il login prima di connettere.
 Segnale minimo dBm
 Sequenza del fascio
@@ -512,6 +527,8 @@ Tratta {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.
 Tutti i file
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz
+Un file nel formato di CALL3.TXT (nominativo,locatore; vanno bene anche punto e virgola, tabulazione e spazio) si copia in data/CALL3-AGGIUNTE e vale sopra CALL3.TXT; con più file vince l'ultimo in ordine alfabetico.
+Una voce per riga: NOMINATIVO,LOCATORE. Valgono sopra tutto, anche sopra il locatore che la stazione stessa manda.
 Univ. Lipsia / IAP Kühlungsborn
 Uno spot in queste finestre si accetta anche senza il nome del modo, tranne quando il commento dichiara un'altra propagazione con una di queste scritte:
 Ursidi
@@ -520,6 +537,8 @@ Valori più prudenti, di partenza: quota delle scie misurata dal radar di Collm 
 Valori prudenti: scia che attraversa il piano della tratta (β = 90°, caso più sfavorevole), compreso il raggio iniziale della scia (ITU-R P.843) alla quota media degli echi per ciascuna frequenza
 Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con bassa elevazione
 Vista dall'alto (E a destra)
+Voci a mano
+Voci a mano...
 Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)
 YA-MS - nessuna connessione
@@ -533,6 +552,7 @@ a DESTRA guardando verso il corrispondente
 a SINISTRA guardando verso il corrispondente
 a cura di
 a cura di Costantino IC8TEM
+a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}
 accettati per finestra di frequenza: {0}
 adesso
 adesso {0}
@@ -546,6 +566,7 @@ antenna verso {0}: az {1:F0}° · el {2:F1}°\nGRAVES in linea diretta: az {3:F0
 antenna {0}°
 auto (AMS)
 azimut rispetto al corrispondente
+azimutale (centrata sulla mia stazione)
 beta-Tauridi diurne
 buono
 calcolato da λ
@@ -612,6 +633,7 @@ linguetta "{0}"
 lobo antenna
 lobo {0}°
 locale
+locator
 mai scaricato
 mappa: bordo = {0} km dalla stazione
 max Σ {0:F1} alle {1:00}:30
@@ -726,7 +748,9 @@ zona PREV
 {0} h
 {0} h rispetto ad adesso
 {0} km dalla tua stazione
+{0} nel CALL3: {1}
 {0} non trovato nel pacchetto
+{0} non è nel CALL3: scrivi il locator a mano
 {0} spot MS in memoria
 {0} stazioni in ascolto (PSKReporter MQTT)
 {0} {1} - {2:F0} % alle {3} UTC ({4} ora locale)
