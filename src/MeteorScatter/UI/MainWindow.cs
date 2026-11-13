@@ -546,14 +546,13 @@ namespace YAMS
             // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
             Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
                        L(Lang.T("Banda MHz")), cmbBand, btnCalc, lblAntAz, L(Lang.T("Carattere")), sldFont, lblFont);
-            // riga del corrispondente, sotto la propria stazione (richiesta dell'autore, 13/11/2026)
-            Border rowDx = Row(L(Lang.T("Corrispondente")), txtDxCall, L(Lang.T("locator")), txtDx, L(Lang.T("quota m")), numDxAlt, lblDxCall3);
+            // il corrispondente (nominativo, locator, quota) sta nel Calcolo previsionale, accanto alla mappa
+            // (bozzetto B scelto dall'autore, 13/11/2026): BuildDxPanel()
 
             DockTop(root, row1);
-            DockTop(root, rowDx);
             DockTop(root, row2);
             DockTop(root, row3);
-            topRows = new[] { row1, rowDx, row2, row3 };
+            topRows = new[] { row1, row2, row3 };
         }
 
         Border[] topRows;
@@ -676,7 +675,13 @@ namespace YAMS
             skyCol.Children.Add(effStrip);
             DockPanel.SetDock(capBox, Dock.Bottom);
             skyCol.Children.Add(capBox);
-            skyCol.Children.Add(sky);   // riempie lo spazio restante
+            // accanto alla pianta: i dati del corrispondente (nominativo dal CALL3, locator, quota)
+            Grid skyRow = new Grid { ColumnDefinitions = new ColumnDefinitions("*,Auto") };
+            Grid.SetColumn(sky, 0);
+            Control dxPanel = BuildDxPanel();
+            Grid.SetColumn(dxPanel, 1);
+            skyRow.Children.Add(sky); skyRow.Children.Add(dxPanel);
+            skyCol.Children.Add(skyRow);   // riempie lo spazio restante
             Grid.SetColumn(skyCol, 0);
             sc.Children.Add(skyCol);
             // volta celeste piccola: radianti e percorsi (clic su un radiante = selezione)
@@ -1045,6 +1050,29 @@ namespace YAMS
             if (dtCalc != null) dtCalc.SelectedDate = DateTime.UtcNow.Date;
             trackTime.Value = 0;
             UpdateSky();
+        }
+
+        // riquadro del corrispondente accanto alla mappa del Calcolo previsionale
+        Control BuildDxPanel()
+        {
+            StackPanel sp = new StackPanel { Spacing = 4, Margin = new Thickness(10, 8) };
+            sp.Children.Add(new TextBlock { Text = Lang.T("Corrispondente"), FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Azure), FontSize = 14 });
+            sp.Children.Add(L(Lang.T("nominativo")));
+            sp.Children.Add(txtDxCall);
+            sp.Children.Add(L(Lang.T("locator")));
+            sp.Children.Add(txtDx);
+            sp.Children.Add(L(Lang.T("quota m")));
+            sp.Children.Add(numDxAlt);
+            lblDxCall3.TextWrapping = TextWrapping.Wrap;
+            lblDxCall3.MaxWidth = 170;
+            lblDxCall3.Margin = new Thickness(0, 4, 0, 0);
+            sp.Children.Add(lblDxCall3);
+            foreach (Control c in sp.Children) c.HorizontalAlignment = HorizontalAlignment.Left;
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Azure), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Margin = new Thickness(6, 8, 8, 8), VerticalAlignment = VerticalAlignment.Top, Child = sp
+            };
         }
 
         string lastDxCall = null;
