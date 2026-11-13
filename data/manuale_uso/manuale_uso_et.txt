@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.7 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.8 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -26,7 +26,7 @@ P|Käivitamisel kuvatakse mõneks sekundiks pilt Perseiididest ESO VLT kohal. Es
 H2|2.3 Kaust data
 P|Kõik seaded ja kõik andmed asuvad ühes kaustas data programmi kõrval: ei mingit AppData-t ega süsteemikaustu. YA-MS-i teise arvutisse viimiseks piisab programmi kausta kopeerimisest koos selle kaustaga data. Kausta sisu on kirjeldatud peatükis 13.
 H2|2.4 Automaatsed uuendused
-P|Alates versioonist 1.8.7 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 6 tunni järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
+P|Alates versioonist 1.8.8 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 6 tunni järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
 P|Alates versioonist 1.8.0 kontrollib YA-MS ise GitHubist käivitamisel ja kõige rohkem kord päevas, kas on ilmunud uus versioon. Kui on, avaneb aken „Uuendus saadaval“ uuenduste loetelu ja kolme nupuga:
 LI|Uuenda kohe: laadib alla sinu süsteemile sobiva paketi, asendab programmi failid, säilitab kausta data ja taaskäivitab YA-MS-i. Kaustas data olevad programmi failid, mida uus versioon muudab, kopeeritakse enne kausta data/backup/v<vana versioon>; sinu faile (seaded, arhiivid, spotid, ADIF) ei puudutata.
 LI|Hiljem: sulgeb akna; kontroll kordub järgmisel päeval.
@@ -186,6 +186,7 @@ LI|CW-spotid visatakse kohe ära (CW või WPM kommentaaris või 28000-28070 kHz)
 LI|Spotid jaamade vahel, mis on lähemal kui 500 km, visatakse kohe ära, sest sellel kaugusel on side otsene või troposfääriline, mitte meteor scatter: need ei ilmu konsooli ega salvestata. Kui lokaator puudub, spot jääb alles. Kaugust saab muuta kasti all.
 LI|Puuduvad lokaatorid võetakse CALL3 arhiivist; vastu võetud spotid salvestatakse kausta data/spot_ms, üks fail päevas, ja kuvatakse Liiklus reaalajas kaardil.
 LI|CALL3 andmebaas LIVETROPOVHF-i reeglitega. „Uuenda kohe" laadib MMMonVHF-ist CALL3.TXT (vähemalt 100 000 kehtivat rida, eelmine jääb faili data/call3.bak); valikuga „Uuenda ise iga 7 päeva järel" tehakse seda käivitamisel. Faili kohal kehtivad järjekorras: käsitsi kirjed (data/CALL3-MANUALE.TXT), klastri parandused (6-märgiline lokaator, mille spottija enda kohta teatab), lisatud failid (data/CALL3-AGGIUNTE), seejärel CALL3.TXT ja otse õpitud 6-märgilised lokaatorid (data/LOC6.TXT). Saadud 4-märgiline lokaator või LL/MM-ga lõppev asendatakse andmebaasi 6-märgilisega; portatiivjaamad (kaldkriipsuga) ainult täpse kirjega.
+LI|Viimane allikas, nagu LIVETROPOVHF-is: kutsungitele, millel üheski teises allikas pole 6-märgilist lokaatorit, küsib programm taustal G7VRD avalikult API-lt (api.g7vrd.co.uk). Aktsepteeritakse ainult 6-märgilist lokaatorit, mitte ruudu keskpunkti (LL või MM), samas ruudus kui saadud; kuni 40 kutsungit minutis, iga kutsung kord päevas. Tulemused on failis data/CALL3-G7VRD.TXT.
 H1|10. Meteoorivoolud reaalajas ja meteoorivoolude kataloog
 H2|10.1 Meteoorivoolud reaalajas
 P|Vasakul Global Meteor Networki mõõdetud voog ja ZHR aktiivsete meteoorivoolude kohta koos GMN-i kaamerate päevaste loendustega voolude kaupa (loendus, mitte voog: see sõltub sellest, mitu jaama näeb selget taevast); paremal CMOR-radari radiantide kaardid, sealhulgas päevaste meteoorivoolude omad. Failid laaditakse uuesti alla ainult siis, kui need on muutunud, kõige rohkem iga 30 minuti järel, või nupuga Laadi kohe alla.

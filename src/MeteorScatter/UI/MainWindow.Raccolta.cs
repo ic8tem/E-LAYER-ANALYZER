@@ -64,7 +64,11 @@ namespace YAMS
             ToolTip.SetTip(bC3Man, Lang.T("Nominativo e locatore scritti a mano (data/CALL3-MANUALE.TXT): valgono sopra tutto, anche sopra il locatore che la stazione stessa manda."));
             bC3Man.Click += async (s, e) => await EditCall3Manual();
             lblC3Status = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap };
-            DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, bC3Add, bC3Man, lblC3Status));
+            CheckBox chkG7 = C(Lang.T("Cerca su G7VRD i locator mancanti"), cfg.GetB("call3_g7vrd", true));
+            ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in sottofondo all'API pubblica di G7VRD (api.g7vrd.co.uk). Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto; al massimo 40 nominativi al minuto, ogni nominativo una volta al giorno. I risultati stanno in data/CALL3-G7VRD.TXT."));
+            CallDb.G7Enabled = chkG7.IsChecked == true;
+            chkG7.IsCheckedChanged += (s, e) => { CallDb.G7Enabled = chkG7.IsChecked == true; cfg.Set("call3_g7vrd", CallDb.G7Enabled); };
+            DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status));
 
             Color[] cols = { Pal.Azure, Pal.Violet, Pal.Orange };
 
@@ -411,7 +415,7 @@ namespace YAMS
             lblRdCall3.Text = CallDb.Loading ? Lang.T("CALL3: caricamento...")
                 : CallDb.Count > 0 ? Lang.F("CALL3: {0:N0} nominativi", CallDb.Count) : Lang.T("CALL3: nessun archivio (data/call3.txt)");
             if (!CallDb.Loading)
-                lblRdCall3.Text += " · " + Lang.F("a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}", CallDb.ManualCount, CallDb.OverlayCount, CallDb.ClusterCount, CallDb.LearnedCount);
+                lblRdCall3.Text += " · " + Lang.F("a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}", CallDb.ManualCount, CallDb.OverlayCount, CallDb.ClusterCount, CallDb.LearnedCount) + " · G7VRD " + CallDb.G7Count.ToString("N0", CultureInfo.CurrentCulture);
         }
 
         CheckBox chkC3Auto;

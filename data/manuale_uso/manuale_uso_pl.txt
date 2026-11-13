@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi YA-MS
-SUB|Wersja 1.8.7 - opracował Costantino IC8TEM - listopad 2026
+SUB|Wersja 1.8.8 - opracował Costantino IC8TEM - listopad 2026
 H1|1. Wprowadzenie
 H2|1.1 Do czego służy YA-MS
 P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
@@ -26,7 +26,7 @@ P|Przy uruchomieniu przez kilka sekund pojawia się ekran z Perseidami nad teles
 H2|2.3 Folder data
 P|Wszystkie ustawienia i wszystkie dane znajdują się w jednym folderze data obok programu: bez AppData, bez folderów systemowych. Aby przenieść YA-MS na inny komputer, wystarczy skopiować folder programu razem z jego folderem data. Zawartość folderu opisano w rozdziale 13.
 H2|2.4 Automatyczne aktualizacje
-P|Od wersji 1.8.7 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
+P|Od wersji 1.8.8 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
 P|Od wersji 1.8.0 YA-MS sam sprawdza w serwisie GitHub, przy uruchomieniu i najwyżej raz dziennie, czy pojawiła się nowa wersja. Jeśli tak, pojawia się okno "Dostępna aktualizacja" z listą nowości i trzema przyciskami:
 LI|Aktualizuj teraz: pobiera pakiet odpowiedni dla twojego systemu, zastępuje pliki programu, zachowuje folder data i ponownie uruchamia YA-MS. Pliki programu w folderze data, które nowa wersja zmienia, są najpierw kopiowane do data/backup/v<stara wersja>; twoje pliki (ustawienia, archiwa, spoty, ADIF) nie są zmieniane.
 LI|Później: zamyka okno; sprawdzenie powtarza się następnego dnia.
@@ -186,6 +186,7 @@ LI|Spoty CW są od razu odrzucane (CW lub WPM w komentarzu albo 28000-28070 kHz)
 LI|Spoty między stacjami oddalonymi o mniej niż 500 km są od razu odrzucane, bo na tej odległości łączność jest bezpośrednia lub troposferyczna, a nie meteor scatter: nie pojawiają się w konsoli i nie są zapisywane. Jeśli brakuje lokatora, spot zostaje. Odległość zmienia się pod polem wyboru.
 LI|Brakujące lokatory są pobierane z archiwum CALL3; przyjęte spoty trafiają do data/spot_ms, po jednym pliku na dzień, oraz na mapę w karcie Ruch na żywo.
 LI|Baza CALL3 z regułami LIVETROPOVHF. „Aktualizuj teraz" pobiera CALL3.TXT z MMMonVHF (co najmniej 100 000 poprawnych wierszy, poprzedni zostaje w data/call3.bak); z opcją „Aktualizuj samo co 7 dni" dzieje się to przy uruchomieniu. Nad plikiem obowiązują kolejno: wpisy ręczne (data/CALL3-MANUALE.TXT), poprawki z klastra (6-znakowy lokator, który spotujący deklaruje o sobie), dodane pliki (data/CALL3-AGGIUNTE), potem CALL3.TXT i 6-znakowe lokatory nauczone na żywo (data/LOC6.TXT). Odebrany lokator 4-znakowy albo kończący się na LL lub MM zastępuje się 6-znakowym z bazy; stacje przenośne (z ukośnikiem) tylko dokładnym wpisem.
+LI|Ostatnie źródło, jak w LIVETROPOVHF: dla znaków bez 6-znakowego lokatora w żadnym innym źródle program pyta w tle publiczne API G7VRD (api.g7vrd.co.uk). Przyjmowany jest tylko lokator 6-znakowy, nie środek kwadratu (LL lub MM), w tym samym kwadracie co odebrany; najwyżej 40 znaków na minutę, każdy raz dziennie. Wyniki są w data/CALL3-G7VRD.TXT.
 H1|10. Roje na żywo i katalog rojów
 H2|10.1 Roje na żywo
 P|Po lewej strumień i ZHR mierzone przez Global Meteor Network dla aktywnych rojów, wraz z dziennymi zliczeniami kamer GMN dla każdego roju (to zliczenie, a nie strumień: zależy od tego, ile stacji ma pogodne niebo); po prawej mapy radiantów z radaru CMOR, łącznie z mapami rojów dziennych. Pliki są pobierane ponownie tylko wtedy, gdy się zmieniły, najwyżej co 30 minut, albo przyciskiem Pobierz teraz.

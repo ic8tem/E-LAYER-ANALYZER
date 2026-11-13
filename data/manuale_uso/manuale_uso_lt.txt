@@ -1,5 +1,5 @@
 TITLE|YA-MS naudotojo vadovas
-SUB|1.8.7 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+SUB|1.8.8 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
 H1|1. Įvadas
 H2|1.1 Kam skirta YA-MS
 P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
@@ -26,7 +26,7 @@ P|Paleidžiant kelioms sekundėms parodomas ekranas su Perseidais virš ESO VLT 
 H2|2.3 Aplankas data
 P|Visi nustatymai ir visi duomenys saugomi viename aplanke data šalia programos: jokio AppData, jokių sistemos aplankų. Norint perkelti YA-MS į kitą kompiuterį, pakanka nukopijuoti programos aplanką kartu su jo aplanku data. Aplanko turinys aprašytas 13 skyriuje.
 H2|2.4 Automatiniai atnaujinimai
-P|Nuo 1.8.7 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
+P|Nuo 1.8.8 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
 P|Nuo 1.8.0 versijos YA-MS pati tikrina GitHub, paleidžiant ir ne dažniau kaip kartą per dieną, ar išleista nauja versija. Jei taip, atsiranda langas „Yra atnaujinimas“ su naujovėmis ir trimis mygtukais:
 LI|Atnaujinti dabar: atsisiunčia jūsų sistemai tinkamą paketą, pakeičia programos failus, išsaugo aplanką data ir iš naujo paleidžia YA-MS. Programos failai aplanke data, kuriuos nauja versija keičia, pirmiausia nukopijuojami į data/backup/v<sena versija>; jūsų failai (nustatymai, archyvai, spotai, ADIF) neliečiami.
 LI|Vėliau: uždaro langą; tikrinimas pakartojamas kitą dieną.
@@ -186,6 +186,7 @@ LI|CW spotai iškart atmetami (CW ar WPM komentare arba 28000-28070 kHz): jie ne
 LI|Spotai tarp stočių, esančių arčiau nei 500 km, iš karto atmetami, nes tokiu atstumu ryšys yra tiesioginis arba troposferinis, o ne meteor scatter: jie nerodomi konsolėje ir neišsaugomi. Jei trūksta lokatoriaus, spotas paliekamas. Atstumą galima pakeisti po langeliu.
 LI|Trūkstami lokatoriai paimami iš CALL3 archyvo; priimti spotai įrašomi į data/spot_ms, po vieną failą per dieną, ir rodomi kortelės Eismas tiesiogiai žemėlapyje.
 LI|CALL3 duomenų bazė su LIVETROPOVHF taisyklėmis. „Atnaujinti dabar" atsisiunčia CALL3.TXT iš MMMonVHF (bent 100 000 tinkamų eilučių, ankstesnis lieka data/call3.bak); pasirinkus „Atnaujinti pačiam kas 7 dienas" tai daroma paleidžiant. Virš failo eilės tvarka galioja: rankiniai įrašai (data/CALL3-MANUALE.TXT), klasterio pataisos (6 simbolių lokatorius, kurį spotintojas nurodo apie save), pridėti failai (data/CALL3-AGGIUNTE), tada CALL3.TXT ir tiesiogiai išmokti 6 simbolių lokatoriai (data/LOC6.TXT). Gautas 4 simbolių lokatorius arba besibaigiantis LL ar MM pakeičiamas 6 simbolių lokatoriumi iš duomenų bazės; portatyvinės (su pasviruoju brūkšniu) tik su tiksliu įrašu.
+LI|Paskutinis šaltinis, kaip LIVETROPOVHF: šaukiniams, kurie jokiame kitame šaltinyje neturi 6 simbolių lokatoriaus, programa fone klausia viešosios G7VRD API (api.g7vrd.co.uk). Priimamas tik 6 simbolių lokatorius, ne kvadrato centras (LL ar MM), tame pačiame kvadrate kaip gautasis; ne daugiau kaip 40 šaukinių per minutę, kiekvienas kartą per dieną. Rezultatai saugomi data/CALL3-G7VRD.TXT.
 H1|10. Srautai tiesiogiai ir srautų katalogas
 H2|10.1 Srautai tiesiogiai
 P|Kairėje Global Meteor Network išmatuotas aktyvių srautų srautas ir ZHR su GMN kamerų dienos skaičiais kiekvienam srautui (tai skaičius, o ne srautas: jis priklauso nuo to, kiek stočių mato giedrą dangų); dešinėje CMOR radaro radiantų žemėlapiai, įskaitant dieninių srautų žemėlapius. Failai atsisiunčiami iš naujo tik pasikeitę, ne dažniau kaip kas 30 minučių, arba mygtuku Atsisiųsti dabar.

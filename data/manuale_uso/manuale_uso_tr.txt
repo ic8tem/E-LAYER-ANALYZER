@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.7 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.8 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -26,7 +26,7 @@ P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i g�
 H2|2.3 data klasörü
 P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
 H2|2.4 Otomatik güncellemeler
-P|1.8.7 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
+P|1.8.8 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
 P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
 LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
 LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
@@ -186,6 +186,7 @@ LI|CW spotları hemen atılır (yorumda CW veya WPM, ya da 28000-28070 kHz): <MS
 LI|500 km'den yakın istasyonlar arasındaki spotlar hemen atılır, çünkü bu mesafede bağlantı meteor scatter değil, doğrudan veya troposferiktir: konsolda görünmezler ve kaydedilmezler. Bir lokatör eksikse spot korunur. Mesafe kutunun altından değiştirilir.
 LI|Eksik lokatörler CALL3 arşivinden alınır; kabul edilen spot'lar, günde bir dosya olmak üzere data/spot_ms klasörüne ve Canlı trafik haritasına gider.
 LI|LIVETROPOVHF kurallarıyla CALL3 veritabanı. "Şimdi güncelle" CALL3.TXT'yi MMMonVHF'den indirir (en az 100.000 geçerli satır, önceki data/call3.bak içinde kalır); "7 günde bir kendiliğinden güncelle" ile bu başlangıçta yapılır. Dosyanın üstünde sırayla geçerlidir: elle girişler (data/CALL3-MANUALE.TXT), küme düzeltmeleri (spot yapanın kendisi için bildirdiği 6 karakterli lokatör), eklenen dosyalar (data/CALL3-AGGIUNTE), sonra CALL3.TXT ve canlı öğrenilen 6 karakterli lokatörler (data/LOC6.TXT). Alınan 4 karakterli ya da LL veya MM ile biten lokatör veritabanındaki 6 karakterliyle değiştirilir; taşınabilir istasyonlar (eğik çizgili) yalnızca tam girişle.
+LI|Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program arka planda G7VRD'nin açık API'sine (api.g7vrd.co.uk) sorar. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede; dakikada en çok 40 çağrı işareti, her biri günde bir kez. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur.
 H1|10. Canlı yağmurlar ve yağmur kataloğu
 H2|10.1 Canlı yağmurlar
 P|Solda, etkin yağmurlar için Global Meteor Network'ün ölçtüğü akı ve ZHR, yağmur başına GMN kameralarının günlük sayımlarıyla (bir sayımdır, akı değildir: açık gökyüzü gören istasyon sayısına bağlıdır); sağda, gündüz yağmurları dahil CMOR radarının radyant haritaları. Dosyalar yalnızca değiştiyse, en fazla 30 dakikada bir ya da Şimdi indir ile yeniden indirilir.

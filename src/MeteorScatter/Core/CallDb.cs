@@ -11,6 +11,10 @@
 //    per due anni si lasciano cadere;
 //  - LOC6: ogni locatore a 6 caratteri ricevuto (cluster, PSKReporter) per un nominativo che il database non ha o ha
 //    solo a 4 caratteri si ricorda e vale per gli spot dello stesso nominativo nello stesso quadrato; due anni;
+//  - ultima fonte G7VRD (api.g7vrd.co.uk, "locator by callsign"): solo per i nominativi senza locatore a 6 caratteri
+//    in tutte le fonti precedenti; si accetta solo un 6 caratteri valido (non LL/MM) nello stesso quadrato di quello
+//    ricevuto; al massimo 40 nominativi al minuto, ogni nominativo una volta al giorno; risultati in
+//    data/CALL3-G7VRD.TXT (tenuti un anno); si spegne con la casella (call3_g7vrd=0);
 //  - regola unica: un locatore ricevuto di meno di 6 caratteri, o a 6 che finisce con LL/MM (centro del quadrato),
 //    si sostituisce con quello a 6 caratteri del database; per i portatili (con la barra: IC8TEM/P, F/IC8TEM)
 //    vale solo una voce esatta.
@@ -20,6 +24,8 @@ using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
+using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -54,6 +60,123 @@ namespace YAMS
         public static string OverlayDir { get { return Path.Combine(DataDir, "CALL3-AGGIUNTE"); } }
         public static string ClusterPath { get { return Path.Combine(DataDir, "CALL3-CLUSTER.TXT"); } }
         public static string LearnedPath { get { return Path.Combine(DataDir, "LOC6.TXT"); } }
+        public static string G7Path { get { return Path.Combine(DataDir, "CALL3-G7VRD.TXT"); } }
+
+        // ---- G7VRD
+        public const string G7Api = "https://api.g7vrd.co.uk/v1/locators/by-callsign/";
+        public static volatile bool G7Enabled = true;
+        public static string G7Status = "";
+        static readonly ConcurrentDictionary<string, KeyValuePair<string, DateTime>> g7 = new ConcurrentDictionary<string, KeyValuePair<string, DateTime>>(StringComparer.Ordinal);
+        static readonly ConcurrentDictionary<string, DateTime> g7Asked = new ConcurrentDictionary<string, DateTime>(StringComparer.Ordinal);
+        static readonly ConcurrentQueue<string> g7Queue = new ConcurrentQueue<string>();
+        static int g7Dirty, g7Busy;
+        static Timer g7Timer;
+        public static int G7Count { get { return g7.Count; } }
+
+        static string G7Get(string call) { KeyValuePair<string, DateTime> v; return call != null && g7.TryGetValue(call, out v) ? v.Key : ""; }
+
+        static void G7Request(string call)
+        {
+            if (!G7Enabled || string.IsNullOrEmpty(call) || call.Length < 3 || call.IndexOf('/') >= 0 || call.IndexOf('-') >= 0) return;
+            DateTime now = DateTime.UtcNow, t;
+            if (g7Asked.TryGetValue(call, out t) && now - t < TimeSpan.FromHours(24)) return;
+            g7Asked[call] = now;
+            g7Queue.Enqueue(call);
+        }
+
+        static void G7Load()
+        {
+            try
+            {
+                if (!File.Exists(G7Path)) return;
+                foreach (string line in File.ReadLines(G7Path))
+                {
+                    if (line.StartsWith("//", StringComparison.Ordinal)) continue;
+                    string[] p = line.Split(',');
+                    if (p.Length < 2 || !Precise(p[1].Trim().ToUpperInvariant())) continue;
+                    DateTime w;
+                    if (p.Length < 3 || !DateTime.TryParse(p[2], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out w)) w = DateTime.UtcNow;
+                    if (DateTime.UtcNow - w > TimeSpan.FromDays(365)) continue;
+                    g7[p[0].Trim().ToUpperInvariant()] = new KeyValuePair<string, DateTime>(p[1].Trim().ToUpperInvariant(), w);
+                }
+            }
+            catch { }
+        }
+
+        static void G7Save()
+        {
+            if (Interlocked.Exchange(ref g7Dirty, 0) == 0 || DataDir.Length == 0) return;
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("// YA-MS - locatori a 6 caratteri da api.g7vrd.co.uk (dati raccolti in automatico, ultima fonte). CALL,LOCATORE,data");
+                List<string> k = new List<string>(g7.Keys); k.Sort(StringComparer.Ordinal);
+                foreach (string c in k) sb.Append(c).Append(',').Append(g7[c].Key).Append(',').Append(g7[c].Value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)).AppendLine();
+                File.WriteAllText(G7Path + ".tmp", sb.ToString());
+                File.Move(G7Path + ".tmp", G7Path, true);
+            }
+            catch { }
+        }
+
+        // un gruppo di nominativi al minuto, in sottofondo
+        static async void G7Tick(object state)
+        {
+            if (!G7Enabled || g7Queue.IsEmpty || Interlocked.Exchange(ref g7Busy, 1) == 1) return;
+            try
+            {
+                List<string> batch = new List<string>();
+                string c;
+                while (batch.Count < 40 && g7Queue.TryDequeue(out c)) batch.Add(c);
+                List<string> esc = new List<string>(); foreach (string b in batch) esc.Add(Uri.EscapeDataString(b));
+                using (HttpClient h = new HttpClient { Timeout = TimeSpan.FromSeconds(30) })
+                {
+                    h.DefaultRequestHeaders.UserAgent.ParseAdd("YA-MS/" + AppPaths.Version);
+                    using (HttpResponseMessage r = await h.GetAsync(G7Api + string.Join(",", esc)))
+                    {
+                        if (!r.IsSuccessStatusCode) { G7Status = "G7VRD: HTTP " + ((int)r.StatusCode).ToString(CultureInfo.InvariantCulture); return; }
+                        using (JsonDocument doc = JsonDocument.Parse(await r.Content.ReadAsStringAsync()))
+                        {
+                            int n = 0;
+                            if (doc.RootElement.ValueKind == JsonValueKind.Object)
+                                foreach (JsonProperty prop in doc.RootElement.EnumerateObject())
+                                {
+                                    string loc = G7Pick(prop.Value);
+                                    if (loc.Length == 0) continue;
+                                    g7[prop.Name.ToUpperInvariant()] = new KeyValuePair<string, DateTime>(loc, DateTime.UtcNow);
+                                    n++;
+                                }
+                            if (n > 0) { Interlocked.Exchange(ref g7Dirty, 1); G7Save(); }
+                            G7Status = "G7VRD: " + batch.Count.ToString(CultureInfo.InvariantCulture) + " / " + n.ToString(CultureInfo.InvariantCulture);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { G7Status = "G7VRD: " + ex.Message; }
+            finally { Interlocked.Exchange(ref g7Busy, 0); }
+        }
+
+        // il valore puo' essere una stringa, un elenco o un oggetto: il primo locatore a 6 caratteri utile
+        static string G7Pick(JsonElement v)
+        {
+            switch (v.ValueKind)
+            {
+                case JsonValueKind.String:
+                    string s = (v.GetString() ?? "").Trim().ToUpperInvariant();
+                    return Precise(s) ? s : "";
+                case JsonValueKind.Array:
+                    foreach (JsonElement e in v.EnumerateArray()) { string r = G7Pick(e); if (r.Length > 0) return r; }
+                    return "";
+                case JsonValueKind.Object:
+                    foreach (string name in new[] { "locator", "grid", "maidenhead", "value" })
+                    {
+                        JsonElement x;
+                        if (v.TryGetProperty(name, out x)) { string r = G7Pick(x); if (r.Length > 0) return r; }
+                    }
+                    foreach (JsonProperty p in v.EnumerateObject()) { string r = G7Pick(p.Value); if (r.Length > 0) return r; }
+                    return "";
+                default: return "";
+            }
+        }
 
         // voci iniziali (le stesse di LIVETROPOVHF): le mancanti si aggiungono una volta sola per versione dell'elenco
         // (riga "// seed N" nel file), cosi' una voce tolta a mano non ricompare
@@ -79,6 +202,7 @@ namespace YAMS
         {
             DataDir = dataDir;
             FilePath = Path.Combine(dataDir, "call3.txt");
+            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(60)); }
             if (Loading) return;
             Loading = true;
             ThreadPool.QueueUserWorkItem(_ =>
@@ -311,6 +435,7 @@ namespace YAMS
                     if (clusterDirty > 0) { WriteDated(ClusterPath, cluster, "// YA-MS - correzioni di call3.txt dal cluster (nominativo,locatore,ultima conferma UTC)"); clusterDirty = 0; }
                     if (learnedDirty > 0) { WriteDated(LearnedPath, learned, "// YA-MS - locatori a 6 caratteri imparati dal vivo (nominativo,locatore,ultima volta UTC)"); learnedDirty = 0; }
                 }
+                G7Save();
             }
             catch { }
         }
@@ -366,15 +491,22 @@ namespace YAMS
             return call.IndexOf('/') >= 0 ? null : ExactAll(call);
         }
 
-        // locatore dal database (con LOC6 come ultima fonte)
-        public static string Lookup(string call)
+        // locatore dal database, poi LOC6, poi G7VRD (stesso quadrato del locatore ricevuto o di quello a 4 caratteri
+        // del database); G7VRD si chiede in sottofondo e la risposta vale dalla volta successiva
+        public static string Lookup(string call) { return Lookup(call, null); }
+
+        public static string Lookup(string call, string grid)
         {
             string r = LookupDb(call);
             if (r != null && r.Length == 6) return r;
             string key = (call ?? "").Trim().ToUpperInvariant();
             int dash = key.IndexOf('-'); if (dash > 0) key = key.Substring(0, dash);
+            string sq = grid != null && grid.Length >= 4 ? grid.Substring(0, 4).ToUpperInvariant() : r != null && r.Length >= 4 ? r.Substring(0, 4) : "";
             KeyValuePair<string, DateTime> c;
-            lock (lk) if (learned.TryGetValue(key, out c) && (r == null || c.Key.StartsWith(r, StringComparison.Ordinal))) return c.Key;
+            lock (lk) if (learned.TryGetValue(key, out c) && (sq.Length == 0 || c.Key.StartsWith(sq, StringComparison.Ordinal))) return c.Key;
+            string g = G7Get(key);
+            if (g.Length == 6 && (sq.Length == 0 || g.StartsWith(sq, StringComparison.Ordinal))) return g;
+            if (g.Length == 0) G7Request(key);
             return r;
         }
 
@@ -386,7 +518,7 @@ namespace YAMS
             string key = (call ?? "").Trim().ToUpperInvariant();
             string man; lock (lk) if (manual.TryGetValue(key, out man)) return man;
             if (Precise(loc)) Learn(key, loc);
-            string db = Lookup(call);
+            string db = Lookup(call, loc);
             if (loc.Length == 0) return db ?? "";
             if (!Precise(loc) && db != null && db.Length == 6) return db;
             return loc;

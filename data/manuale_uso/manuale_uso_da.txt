@@ -1,5 +1,5 @@
 TITLE|Brugervejledning til YA-MS
-SUB|Version 1.8.7 - udarbejdet af Costantino IC8TEM - november 2026
+SUB|Version 1.8.8 - udarbejdet af Costantino IC8TEM - november 2026
 H1|1. Indledning
 H2|1.1 Hvad YA-MS bruges til
 P|YA-MS hjælper dig med at forudsige og følge meteor scatter-forholdene live mellem din station og en modstation, fra 28 til 432 MHz. For hver aktiv meteorsværm fortæller programmet, hvor meget dens radiants position begunstiger din strækning (effektiviteten), på hvilke tidspunkter, fra hvilken side af strækningen refleksionerne kommer, og hvor det er bedst at rette antennen. Ved siden af prognosen viser det live måledata: tællingerne fra meteorradaren i Collm, kameraerne i Global Meteor Network, CMOR-radaren, GRAVES-senderen og den meteor scatter-trafik, der indsamles fra clusterne og fra PSKReporter.
@@ -26,7 +26,7 @@ P|Ved start vises i nogle få sekunder et billede med Perseiderne over ESO's VLT
 H2|2.3 Mappen data
 P|Alle indstillinger og alle data ligger i én enkelt mappe data ved siden af programmet: ingen AppData, ingen systemmapper. For at flytte YA-MS til en anden computer er det nok at kopiere programmappen med dens mappe data. Mappens indhold er beskrevet i kapitel 13.
 H2|2.4 Automatiske opdateringer
-P|Fra version 1.8.7 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
+P|Fra version 1.8.8 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Fra version 1.8.0 kontrollerer YA-MS selv på GitHub, ved start og højst én gang om dagen, om der er kommet en ny version. Hvis der er, vises vinduet »Opdatering tilgængelig« med nyhederne og tre knapper:
 LI|Opdater nu: henter den pakke, der passer til dit system, erstatter programfilerne, beholder mappen data og genstarter YA-MS. Programfiler i mappen data, som den nye version ændrer, kopieres først til data/backup/v<gammel version>; dine egne filer (indstillinger, arkiver, spots, ADIF) røres ikke.
 LI|Senere: lukker vinduet; kontrollen gentages næste dag.
@@ -186,6 +186,7 @@ LI|CW-spots kasseres med det samme (CW eller WPM i kommentaren, eller 28000-2807
 LI|Spots mellem stationer tættere end 500 km kasseres straks, fordi forbindelsen på den afstand er direkte eller troposfærisk og ikke meteor scatter: de vises ikke i konsollen og gemmes ikke. Mangler en locator, beholdes spottet. Afstanden ændres under feltet.
 LI|Manglende lokatorer hentes fra CALL3-arkivet; accepterede spots gemmes i data/spot_ms, én fil pr. dag, og vises på kortet i Live-trafik.
 LI|CALL3-database med reglerne fra LIVETROPOVHF. »Opdatér nu« henter CALL3.TXT fra MMMonVHF (mindst 100.000 gyldige linjer, den forrige bliver i data/call3.bak); med »Opdatér selv hver 7. dag« sker det ved start. Over filen gælder i rækkefølge: håndindtastninger (data/CALL3-MANUALE.TXT), cluster-rettelser (den 6-tegns locator, som spotteren angiver for sig selv), tilføjede filer (data/CALL3-AGGIUNTE), derefter CALL3.TXT og 6-tegns locatorer lært live (data/LOC6.TXT). En modtaget locator på 4 tegn, eller som ender på LL eller MM, erstattes af den 6-tegns fra databasen; portable (med skråstreg) kun med den præcise indtastning.
+LI|Sidste kilde, som i LIVETROPOVHF: for kaldesignaler uden 6-tegns locator i nogen anden kilde spørger programmet i baggrunden G7VRD's offentlige API (api.g7vrd.co.uk). Kun en 6-tegns locator accepteres, ikke feltets midte (LL eller MM), i samme felt som den modtagne; højst 40 kaldesignaler pr. minut, hvert én gang om dagen. Resultaterne ligger i data/CALL3-G7VRD.TXT.
 H1|10. Live-sværme og sværmkatalog
 H2|10.1 Live-sværme
 P|Til venstre fluxen og ZHR målt af Global Meteor Network for de aktive sværme, med dagens tællinger fra GMN-kameraerne pr. sværm (en tælling, ikke en flux: den afhænger af, hvor mange stationer der ser en klar himmel); til højre radiantkortene fra CMOR-radaren, også for dagsværmene. Filerne hentes kun igen, hvis de er ændret, højst hvert 30. minut, eller med Hent nu.
