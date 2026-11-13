@@ -102,11 +102,21 @@ namespace YAMS
         public static readonly HashSet<string> Bands = new HashSet<string>(MsBands.Names);
         public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>() };
         public static int[] Lines = new int[4], Parsed = new int[4], Accepted = new int[4];
-        public static int RejectedNoWord, RejectedBand, DroppedLow, DroppedCw;
+        public static int RejectedNoWord, RejectedBand, DroppedLow, DroppedCw, DroppedNear;
         // regola dell'autore (IC8TEM, 13/11/2026): gli spot CW si scartano subito, come quelli sotto 27990 kHz (non vanno nella
         // console e non si memorizzano). CW = parola CW o WPM nel commento (formato RBN "CW 12 dB 25 WPM"), oppure
         // frequenza nel segmento solo CW dei 10 m (28000-28070 kHz). Restano gli spot dichiarati meteor scatter con <MS>.
         public static bool DropCw = true;
+        // regola dell'autore (IC8TEM, 13/11/2026): gli spot tra stazioni piu' vicine di NearKm (500 km) si scartano subito:
+        // a quella distanza il collegamento e' diretto o troposferico, non meteor scatter. Senza i due locator lo spot resta.
+        public static bool DropNear = true;
+        public static int NearKm = 500;
+        public static bool IsNear(MsSpot s)
+        {
+            if (s == null) return false;
+            Locate(s);
+            return !double.IsNaN(s.DistKm) && s.DistKm < NearKm;
+        }
         static readonly Regex rxCw = new Regex(@"(?<![A-Za-z0-9])(CW|WPM)(?![A-Za-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
         static readonly Regex rxMsTag = new Regex(@"<\s*MS\s*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
         public static bool IsCw(MsSpot s)
@@ -238,6 +248,8 @@ namespace YAMS
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
                 DropCw = cfg.GetB("rd_scarta_cw", true);
+                DropNear = cfg.GetB("rd_scarta_vicini", true);
+                int nk; NearKm = int.TryParse(cfg.Get("rd_scarta_vicini_km", "500"), out nk) && nk >= 0 && nk <= 5000 ? nk : 500;
                 UseWindows = cfg.GetB("rd_finestre_attive", true);
                 SetWindows(cfg.Get("rd_finestre", DefaultWindows));
                 SetOtherTags(cfg.Get("rd_altre_propagazioni", DefaultOtherTags));
@@ -273,6 +285,8 @@ namespace YAMS
             cfg.Set("rd_bande", string.Join(",", Bands));
             cfg.Set("rd_scarta_sotto_28", DropLow);
             cfg.Set("rd_scarta_cw", DropCw);
+            cfg.Set("rd_scarta_vicini", DropNear);
+            cfg.Set("rd_scarta_vicini_km", NearKm.ToString(CultureInfo.InvariantCulture));
             cfg.Set("rd_finestre_attive", UseWindows);
             cfg.Set("rd_finestre", WindowsText);
             cfg.Set("rd_altre_propagazioni", OtherTagsText);
@@ -311,6 +325,7 @@ namespace YAMS
                 MsSpot s = Parse(kv.Value, i, now);
                 if (DropLow && s != null && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
                 if (DropCw && s != null && IsCw(s)) { DroppedCw++; continue; }
+                if (DropNear && s != null && IsNear(s)) { DroppedNear++; continue; }
                 ConsoleLines[i].Enqueue(kv.Value);
                 while (ConsoleLines[i].Count > 200) ConsoleLines[i].Dequeue();
                 if (s == null) continue;
@@ -323,7 +338,8 @@ namespace YAMS
                 Lines[3]++;
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
                 if (DropCw && IsCw(s)) { DroppedCw++; continue; }
-                NoteListener(s);
+                NoteListener(s);   // chi ascolta resta sulla mappa anche se lo spot e' vicino
+                if (DropNear && IsNear(s)) { DroppedNear++; continue; }
                 ConsoleLines[3].Enqueue(s.Line);
                 while (ConsoleLines[3].Count > 200) ConsoleLines[3].Dequeue();
                 Parsed[3]++;

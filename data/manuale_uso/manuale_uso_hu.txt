@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.4-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.5-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -178,6 +178,7 @@ P|Meteor scatter spotokat gyűjt három telnet-folyamból (DX cluster, RBN, DM4X
 LI|Felül adja meg a hívójelét a bejelentkezéshez. Minden folyamnak van hosztja, portja, bejelentkezés utáni parancsai, Újracsatlakozás és Csatlakozás indításkor beállítása, valamint konzolja.
 LI|A szűrő elfogadja a meteor scatterre jellemző frekvenciákon (50190-50300, 70100-70400, 144290-144399 kHz) vagy MS üzemmóddal (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) érkező spotokat, és elveti azokat, amelyek más terjedési módot jelölnek meg. Az ablakok és a szavak módosíthatók; mindegyiknek saját számlálója van.
 LI|A CW spotokat azonnal eldobja (CW vagy WPM a megjegyzésben, vagy 28000-28070 kHz): nem jelennek meg a konzolon és nem mentődnek, hacsak nincs rajtuk <MS> jelölés. A négyzet kikapcsolható.
+LI|Az 500 km-nél közelebbi állomások közötti spotok azonnal elvetésre kerülnek, mert ekkora távolságon az összeköttetés közvetlen vagy troposzférikus, nem meteor scatter: nem jelennek meg a konzolon és nem tárolódnak. Ha hiányzik egy lokátor, a spot megmarad. A távolság a jelölőnégyzet alatt módosítható.
 LI|A hiányzó lokátorokat a CALL3 archívumból veszi; az elfogadott spotok a data/spot_ms mappába kerülnek, naponta egy fájlba, valamint az Élő forgalom térképére.
 H1|10. Élő rajok és a rajkatalógus
 H2|10.1 Élő rajok

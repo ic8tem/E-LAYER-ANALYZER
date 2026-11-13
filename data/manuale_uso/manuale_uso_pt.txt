@@ -1,5 +1,5 @@
 TITLE|Manual de utilização do YA-MS
-SUB|Versão 1.8.4 - da autoria de Costantino IC8TEM - novembro de 2026
+SUB|Versão 1.8.5 - da autoria de Costantino IC8TEM - novembro de 2026
 H1|1. Introdução
 H2|1.1 Para que serve o YA-MS
 P|O YA-MS ajuda a prever e a acompanhar em direto as condições de meteor scatter entre a sua estação e um correspondente, de 28 a 432 MHz. Para cada chuva de meteoros ativa indica em que medida a posição do seu radiante favorece o seu percurso (a eficiência), em que horas, de que lado do percurso chegam as reflexões e para onde convém apontar a antena. Ao lado da previsão mostra os dados medidos em direto: as contagens do radar de meteoros de Collm, as câmaras da Global Meteor Network, o radar CMOR, o transmissor GRAVES e o tráfego de meteor scatter recolhido dos clusters e do PSKReporter.
@@ -178,6 +178,7 @@ P|Recolhe os spots de meteor scatter de três fluxos telnet (DX cluster, RBN, DM
 LI|Escreva em cima o seu indicativo para o login. Cada fluxo tem host, porta, comandos após o login, Voltar a ligar, Ligar no arranque e uma consola.
 LI|O filtro aceita os spots nas frequências típicas do meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) ou com um modo MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), e rejeita os que declaram outra propagação. As janelas e as palavras podem ser alteradas; cada uma tem o seu contador.
 LI|Os spots CW são descartados logo (CW ou WPM no comentário, ou 28000-28070 kHz): não aparecem na consola e não se guardam, exceto os marcados <MS>. A caixa pode ser desativada.
+LI|Os spots entre estações a menos de 500 km são descartados de imediato, porque a essa distância a ligação é direta ou troposférica e não meteor scatter: não aparecem na consola e não são guardados. Se faltar um locator, o spot mantém-se. A distância altera-se por baixo da caixa.
 LI|Os locators em falta são obtidos do arquivo CALL3; os spots aceites vão para data/spot_ms, um ficheiro por dia, e para o mapa do Tráfego em direto.
 H1|10. Chuvas em direto e catálogo das chuvas
 H2|10.1 Chuvas em direto

@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.4 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.5 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -178,6 +178,7 @@ P|Mengumpulkan spot meteor scatter dari tiga aliran telnet (DX cluster, RBN, DM4
 LI|Tulis callsign Anda di bagian atas untuk login. Setiap aliran memiliki host, port, perintah setelah login, Sambung ulang, Sambung saat mulai, dan sebuah konsol.
 LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) atau dengan mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), dan menolak spot yang menyatakan propagasi lain. Jendela frekuensi dan kata-kata dapat diubah; masing-masing memiliki penghitungnya sendiri.
 LI|Spot CW langsung dibuang (CW atau WPM di komentar, atau 28000-28070 kHz): tidak muncul di konsol dan tidak disimpan, kecuali bertanda <MS>. Kotak ini dapat dimatikan.
+LI|Spot antarstasiun yang berjarak kurang dari 500 km langsung dibuang, karena pada jarak itu hubungannya langsung atau troposferik, bukan meteor scatter: tidak muncul di konsol dan tidak disimpan. Jika lokator tidak ada, spot tetap disimpan. Jaraknya dapat diubah di bawah kotak centang.
 LI|Locator yang hilang diambil dari arsip CALL3; spot yang diterima masuk ke data/spot_ms, satu file per hari, dan ke peta Lalu lintas langsung.
 H1|10. Hujan meteor langsung dan katalog hujan meteor
 H2|10.1 Hujan meteor langsung

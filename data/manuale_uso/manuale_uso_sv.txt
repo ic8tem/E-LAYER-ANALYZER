@@ -1,5 +1,5 @@
 TITLE|Bruksanvisning för YA-MS
-SUB|Version 1.8.4 - av Costantino IC8TEM - november 2026
+SUB|Version 1.8.5 - av Costantino IC8TEM - november 2026
 H1|1. Inledning
 H2|1.1 Vad YA-MS används till
 P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
@@ -178,6 +178,7 @@ P|Samlar in meteorscatterspots från tre telnetflöden (DX cluster, RBN, DM4X me
 LI|Skriv in din anropssignal överst för inloggningen. Varje flöde har värd, port, kommandon efter inloggning, Återanslut, Anslut vid start och en konsol.
 LI|Filtret godkänner spots på de typiska meteorscatterfrekvenserna (50190-50300, 70100-70400, 144290-144399 kHz) eller med ett MS-trafiksätt (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) och kastar de spots som anger en annan utbredning. Fönster och ord kan ändras; vart och ett har sin egen räknare.
 LI|CW-spottar kastas direkt (CW eller WPM i kommentaren, eller 28000-28070 kHz): de visas inte i konsolen och sparas inte, utom de som är märkta <MS>. Rutan kan stängas av.
+LI|Spottar mellan stationer närmare än 500 km kastas direkt, eftersom förbindelsen på det avståndet är direkt eller troposfärisk och inte meteor scatter: de visas inte i konsolen och sparas inte. Saknas en lokator behålls spotten. Avståndet ändras under rutan.
 LI|Saknade lokatorer hämtas från CALL3-arkivet; godkända spots hamnar i data/spot_ms, en fil per dag, och på kartan i Trafik live.
 H1|10. Svärmar live och svärmkatalogen
 H2|10.1 Svärmar live

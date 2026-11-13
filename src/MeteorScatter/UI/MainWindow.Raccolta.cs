@@ -157,6 +157,13 @@ namespace YAMS
             if (chkCw.Content is string cws) chkCw.Content = new TextBlock { Text = cws, TextWrapping = TextWrapping.Wrap };
             chkCw.IsCheckedChanged += (s, e) => MsCollector.DropCw = chkCw.IsChecked == true;
             fp.Children.Add(chkCw);
+            CheckBox chkNear = C(Lang.T("Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta."), MsCollector.DropNear);
+            if (chkNear.Content is string ns) chkNear.Content = new TextBlock { Text = ns, TextWrapping = TextWrapping.Wrap };
+            chkNear.IsCheckedChanged += (s, e) => MsCollector.DropNear = chkNear.IsChecked == true;
+            NumericUpDown nudNear = new NumericUpDown { Minimum = 0, Maximum = 5000, Increment = 50, Value = MsCollector.NearKm, FormatString = "0", Width = 130, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(24, 2, 0, 0) };
+            nudNear.ValueChanged += (s, e) => { if (nudNear.Value.HasValue) MsCollector.NearKm = (int)nudNear.Value.Value; };
+            fp.Children.Add(chkNear);
+            fp.Children.Add(nudNear);
 
             fp.Children.Add(new TextBlock { Text = Lang.T("Prova del filtro"), FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 6, 0, 0) });
             txtRdTest = T("DX de DK5EW-#:  144360.0  IC8TEM   JN48<>JN70 -12 dB   2133Z", 420, false);
@@ -449,6 +456,7 @@ namespace YAMS
                 lines, parsed, acc, MsCollector.RejectedNoWord, MsCollector.RejectedBand, lastHour)
                 + "\n" + Lang.F("righe sotto 27990 kHz scartate: {0}", MsCollector.DroppedLow)
                 + "\n" + Lang.F("spot CW scartati: {0}", MsCollector.DroppedCw)
+                + "\n" + Lang.F("spot entro {0} km scartati: {1}", MsCollector.NearKm, MsCollector.DroppedNear)
                 + "\n" + Lang.F("accettati per finestra di frequenza: {0}", MsCollector.AcceptedWindow)
                 + "\n" + Lang.F("scartati per altra propagazione: {0}", MsCollector.RejectedOther);
             foreach (Control c in rdWordList.Children)

@@ -1,5 +1,5 @@
 TITLE|YA-MS lietošanas rokasgrāmata
-SUB|Versija 1.8.4 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+SUB|Versija 1.8.5 - sagatavojis Costantino IC8TEM - 2026. gada novembris
 H1|1. Ievads
 H2|1.1 Kam paredzēta YA-MS
 P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
@@ -178,6 +178,7 @@ P|Vāc meteor scatter spotus no trim telnet plūsmām (DX klasteris, RBN, DM4X a
 LI|Augšā ieraksti savu izsaukuma signālu pieteikšanās vajadzībām. Katrai plūsmai ir hosts, ports, komandas pēc pieteikšanās, Savienot vēlreiz, Savienot startējot un konsole.
 LI|Filtrs pieņem spotus meteor scatter tipiskajās frekvencēs (50190-50300, 70100-70400, 144290-144399 kHz) vai ar MS modu (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) un atmet tos, kuros norādīts cits izplatīšanās veids. Frekvenču logus un vārdus var mainīt; katram ir savs skaitītājs.
 LI|CW spoti tiek uzreiz izmesti (CW vai WPM komentārā vai 28000-28070 kHz): tie neparādās konsolē un netiek saglabāti, ja vien nav atzīmēti ar <MS>. Rūtiņu var izslēgt.
+LI|Spoti starp stacijām, kas ir tuvāk par 500 km, tiek uzreiz atmesti, jo šādā attālumā sakari ir tieši vai troposfēriski, nevis meteor scatter: tie neparādās konsolē un netiek saglabāti. Ja trūkst lokatora, spots paliek. Attālumu var mainīt zem rūtiņas.
 LI|Trūkstošie lokatori tiek ņemti no CALL3 arhīva; pieņemtie spoti tiek saglabāti mapē data/spot_ms, pa vienam failam dienā, un parādīti kartē cilnē Satiksme tiešraidē.
 H1|10. Plūsmas tiešraidē un plūsmu katalogs
 H2|10.1 Plūsmas tiešraidē

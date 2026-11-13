@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.4 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.5 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -178,6 +178,7 @@ P|Kogub meteor scatteri spotte kolmest telneti voost (DX-klaster, RBN, DM4X PSKR
 LI|Kirjuta üles sisselogimiseks oma kutsung. Igal vool on host, port, käsud pärast sisselogimist, Ühenda uuesti, Ühenda käivitamisel ja konsool.
 LI|Filter võtab vastu spotid meteor scatterile tüüpilistel sagedustel (50190-50300, 70100-70400, 144290-144399 kHz) või MS-moodiga (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ja jätab kõrvale need, mis märgivad teist levi. Aknaid ja sõnu saab muuta; igaühel on oma loendur.
 LI|CW-spotid visatakse kohe ära (CW või WPM kommentaaris või 28000-28070 kHz): need ei ilmu konsooli ega salvestu, välja arvatud <MS> märgiga. Kasti saab välja lülitada.
+LI|Spotid jaamade vahel, mis on lähemal kui 500 km, visatakse kohe ära, sest sellel kaugusel on side otsene või troposfääriline, mitte meteor scatter: need ei ilmu konsooli ega salvestata. Kui lokaator puudub, spot jääb alles. Kaugust saab muuta kasti all.
 LI|Puuduvad lokaatorid võetakse CALL3 arhiivist; vastu võetud spotid salvestatakse kausta data/spot_ms, üks fail päevas, ja kuvatakse Liiklus reaalajas kaardil.
 H1|10. Meteoorivoolud reaalajas ja meteoorivoolude kataloog
 H2|10.1 Meteoorivoolud reaalajas

@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.4 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.5 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -178,6 +178,7 @@ P|It collects meteor scatter spots from three telnet feeds (DX cluster, RBN, DM4
 LI|Enter your callsign for the login at the top. Each feed has host, port, commands after login, Reconnect, Connect at startup and a console.
 LI|The filter accepts spots on the typical meteor scatter frequencies (50190-50300, 70100-70400, 144290-144399 kHz) or with an MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), and discards those that declare another propagation mode. Windows and words can be edited; each has its own counter.
 LI|CW spots are discarded straight away (CW or WPM in the comment, or 28000-28070 kHz): they do not appear in the console and are not stored, unless they are marked <MS>. The box can be switched off.
+LI|Spots between stations closer than 500 km are discarded straight away, because at that distance the path is direct or tropospheric, not meteor scatter: they do not appear in the console and are not stored. If a locator is missing the spot is kept. The distance can be changed below the box.
 LI|Missing locators are taken from the CALL3 database; accepted spots go to data/spot_ms, one file per day, and to the Live traffic map.
 H1|10. Live showers and shower catalogue
 H2|10.1 Live showers

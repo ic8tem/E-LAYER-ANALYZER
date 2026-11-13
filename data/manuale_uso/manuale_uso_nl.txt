@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Versie 1.8.4 - door Costantino IC8TEM - november 2026
+SUB|Versie 1.8.5 - door Costantino IC8TEM - november 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor dient YA-MS
 P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
@@ -178,6 +178,7 @@ P|Verzamelt de meteorscatter-spots uit drie telnetstromen (DX-cluster, RBN, DM4X
 LI|Vul bovenaan je roepnaam in voor het inloggen. Elke stroom heeft host, poort, commando's na het inloggen, Opnieuw verbinden, Verbinden bij opstarten en een console.
 LI|Het filter accepteert de spots op de typische meteorscatter-frequenties (50190-50300, 70100-70400, 144290-144399 kHz) of met een MS-mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerpt de spots die een andere propagatie vermelden. Vensters en woorden kunnen worden aangepast; elk heeft een eigen teller.
 LI|CW-spots worden meteen weggegooid (CW of WPM in het commentaar, of 28000-28070 kHz): ze verschijnen niet in de console en worden niet opgeslagen, tenzij ze met <MS> gemarkeerd zijn. Het vakje kan uit.
+LI|Spots tussen stations die minder dan 500 km van elkaar liggen worden direct weggegooid, omdat de verbinding op die afstand direct of troposferisch is en geen meteor scatter: ze verschijnen niet in de console en worden niet opgeslagen. Ontbreekt een locator, dan blijft de spot staan. De afstand is onder het vakje te wijzigen.
 LI|Ontbrekende locators worden uit het CALL3-archief gehaald; de geaccepteerde spots gaan naar data/spot_ms, één bestand per dag, en naar de kaart van Verkeer live.
 H1|10. Zwermen live en de zwermencatalogus
 H2|10.1 Zwermen live

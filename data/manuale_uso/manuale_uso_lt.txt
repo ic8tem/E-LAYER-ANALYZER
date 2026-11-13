@@ -1,5 +1,5 @@
 TITLE|YA-MS naudotojo vadovas
-SUB|1.8.4 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+SUB|1.8.5 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
 H1|1. Įvadas
 H2|1.1 Kam skirta YA-MS
 P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
@@ -178,6 +178,7 @@ P|Renka meteor scatter spotus iš trijų telnet srautų (DX klasteris, RBN, DM4X
 LI|Viršuje įrašykite savo šaukinį prisijungimui. Kiekvienas srautas turi serverį, prievadą, komandas po prisijungimo, Prisijungti iš naujo, Prisijungti paleidžiant ir konsolę.
 LI|Filtras priima spotus meteor scatter būdinguose dažniuose (50190-50300, 70100-70400, 144290-144399 kHz) arba su MS moda (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ir atmeta tuos, kuriuose nurodytas kitas sklidimo būdas. Dažnių langus ir žodžius galima keisti; kiekvienas turi savo skaitiklį.
 LI|CW spotai iškart atmetami (CW ar WPM komentare arba 28000-28070 kHz): jie nerodomi konsolėje ir neišsaugomi, nebent pažymėti <MS>. Langelį galima išjungti.
+LI|Spotai tarp stočių, esančių arčiau nei 500 km, iš karto atmetami, nes tokiu atstumu ryšys yra tiesioginis arba troposferinis, o ne meteor scatter: jie nerodomi konsolėje ir neišsaugomi. Jei trūksta lokatoriaus, spotas paliekamas. Atstumą galima pakeisti po langeliu.
 LI|Trūkstami lokatoriai paimami iš CALL3 archyvo; priimti spotai įrašomi į data/spot_ms, po vieną failą per dieną, ir rodomi kortelės Eismas tiesiogiai žemėlapyje.
 H1|10. Srautai tiesiogiai ir srautų katalogas
 H2|10.1 Srautai tiesiogiai

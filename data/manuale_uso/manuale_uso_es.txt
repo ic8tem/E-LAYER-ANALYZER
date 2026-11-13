@@ -1,5 +1,5 @@
 TITLE|Manual de uso de YA-MS
-SUB|Versión 1.8.4 - a cargo de Costantino IC8TEM - noviembre de 2026
+SUB|Versión 1.8.5 - a cargo de Costantino IC8TEM - noviembre de 2026
 H1|1. Introducción
 H2|1.1 Para qué sirve YA-MS
 P|YA-MS ayuda a prever y a seguir en directo las condiciones de meteor scatter entre tu estación y un corresponsal, de 28 a 432 MHz. Para cada lluvia de meteoros activa indica en qué medida la posición de su radiante favorece tu trayecto (la eficiencia), en qué horas, desde qué lado del trayecto llegan las reflexiones y hacia dónde conviene apuntar la antena. Junto a la previsión muestra los datos medidos en directo: los recuentos del radar de meteoros de Collm, las cámaras de la Global Meteor Network, el radar CMOR, el transmisor GRAVES y el tráfico de meteor scatter recogido de los clústeres y de PSKReporter.
@@ -178,6 +178,7 @@ P|Recoge los spots de meteor scatter de tres flujos telnet (DX cluster, RBN, DM4
 LI|Escribe arriba tu indicativo para el login. Cada flujo tiene host, puerto, comandos tras el login, Reconectar, Conectar al inicio y una consola.
 LI|El filtro acepta los spots en las frecuencias típicas del meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) o con un modo MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), y descarta los que declaran otra propagación. Las ventanas y las palabras se pueden modificar; cada una tiene su contador.
 LI|Los spots CW se descartan enseguida (CW o WPM en el comentario, o 28000-28070 kHz): no aparecen en la consola y no se guardan, salvo los marcados <MS>. La casilla se puede desactivar.
+LI|Los spots entre estaciones a menos de 500 km se descartan de inmediato, porque a esa distancia el enlace es directo o troposférico y no meteor scatter: no aparecen en la consola y no se guardan. Si falta un locator, el spot se conserva. La distancia se cambia debajo de la casilla.
 LI|Los locators que faltan se toman del archivo CALL3; los spots aceptados van a data/spot_ms, un archivo por día, y al mapa de Tráfico en directo.
 H1|10. Lluvias en directo y catálogo de lluvias
 H2|10.1 Lluvias en directo

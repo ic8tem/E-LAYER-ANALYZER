@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von YA-MS
-SUB|Version 1.8.4 - von Costantino IC8TEM - November 2026
+SUB|Version 1.8.5 - von Costantino IC8TEM - November 2026
 H1|1. Einführung
 H2|1.1 Wozu YA-MS dient
 P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
@@ -178,6 +178,7 @@ P|Sammelt die Meteorscatter-Spots aus drei Telnet-Datenströmen (DX-Cluster, RBN
 LI|Gib oben dein Rufzeichen für den Login ein. Jeder Datenstrom hat Host, Port, Befehle nach dem Login, Neu verbinden, Beim Start verbinden und eine Konsole.
 LI|Der Filter akzeptiert Spots auf den typischen Meteorscatter-Frequenzen (50190-50300, 70100-70400, 144290-144399 kHz) oder mit einer MS-Betriebsart (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) und verwirft solche, die eine andere Ausbreitung angeben. Frequenzfenster und Suchwörter lassen sich ändern; jedes hat seinen eigenen Zähler.
 LI|CW-Spots werden sofort verworfen (CW oder WPM im Kommentar oder 28000-28070 kHz): Sie erscheinen nicht in der Konsole und werden nicht gespeichert, außer sie sind mit <MS> markiert. Das Kästchen lässt sich ausschalten.
+LI|Spots zwischen Stationen, die weniger als 500 km auseinanderliegen, werden sofort verworfen, da die Verbindung auf diese Entfernung direkt oder troposphärisch ist und kein Meteor Scatter: Sie erscheinen nicht in der Konsole und werden nicht gespeichert. Fehlt ein Locator, bleibt der Spot erhalten. Die Entfernung lässt sich unter dem Kästchen ändern.
 LI|Fehlende Locatoren werden aus der CALL3-Datenbank übernommen; akzeptierte Spots gehen nach data/spot_ms, eine Datei pro Tag, und in die Karte von Verkehr live.
 H1|10. Ströme live und Katalog der Ströme
 H2|10.1 Ströme live

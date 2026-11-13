@@ -2,7 +2,7 @@
 
 [← Domů](Home-cs)
 
-Tato karta obsahuje kompletní **YA-MS 1.8.4**, program pro meteor scatter od IC8TEM: nebeskou sféru s radianty, tok z radarů SKiYMET (Collm, Sodankylä), výpočet účinnosti rojů, experimentální provádění předpovědí, geometrii a útlum, GRAVES, mapu čtverců, **Živé roje** (ZHR změřené Global Meteor Network a radianty z radaru CMOR), **Mapu zdrojů** (Collm, Sodankylä, GRAVES a CMOR vzhledem ke stanici) a dokument **Vysvětlení výpočtu účinnosti** se vzorci.
+Tato karta obsahuje kompletní **YA-MS 1.8.5**, program pro meteor scatter od IC8TEM: nebeskou sféru s radianty, tok z radarů SKiYMET (Collm, Sodankylä), výpočet účinnosti rojů, experimentální provádění předpovědí, geometrii a útlum, GRAVES, mapu čtverců, **Živé roje** (ZHR změřené Global Meteor Network a radianty z radaru CMOR), **Mapu zdrojů** (Collm, Sodankylä, GRAVES a CMOR vzhledem ke stanici) a dokument **Vysvětlení výpočtu účinnosti** se vzorci.
 
 YA-MS 1.5.0 přidává kartu **Sběr dat** (spoty meteor scatter filtrované podle MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Uvnitř E-LAYER ANALYZER neotevírá žádné vlastní relace telnet: dostává řádky z relací DATA COLLECTION, takže nedochází ke dvojímu přihlášení se stejnou značkou.
 

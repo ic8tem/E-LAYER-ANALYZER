@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi YA-MS
-SUB|Wersja 1.8.4 - opracował Costantino IC8TEM - listopad 2026
+SUB|Wersja 1.8.5 - opracował Costantino IC8TEM - listopad 2026
 H1|1. Wprowadzenie
 H2|1.1 Do czego służy YA-MS
 P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
@@ -178,6 +178,7 @@ P|Zbiera spoty meteor scatter z trzech strumieni telnet (DX cluster, RBN, DM4X z
 LI|Wpisz u góry swój znak wywoławczy do logowania. Każdy strumień ma host, port, polecenia po zalogowaniu, Połącz ponownie, Połącz przy starcie oraz konsolę.
 LI|Filtr przyjmuje spoty w częstotliwościach typowych dla meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) lub z emisją MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) i odrzuca te, które deklarują inny rodzaj propagacji. Okna częstotliwości i słowa można zmieniać; każde ma własny licznik.
 LI|Spoty CW są od razu odrzucane (CW lub WPM w komentarzu albo 28000-28070 kHz): nie pojawiają się w konsoli i nie są zapisywane, chyba że są oznaczone <MS>. Pole można wyłączyć.
+LI|Spoty między stacjami oddalonymi o mniej niż 500 km są od razu odrzucane, bo na tej odległości łączność jest bezpośrednia lub troposferyczna, a nie meteor scatter: nie pojawiają się w konsoli i nie są zapisywane. Jeśli brakuje lokatora, spot zostaje. Odległość zmienia się pod polem wyboru.
 LI|Brakujące lokatory są pobierane z archiwum CALL3; przyjęte spoty trafiają do data/spot_ms, po jednym pliku na dzień, oraz na mapę w karcie Ruch na żywo.
 H1|10. Roje na żywo i katalog rojów
 H2|10.1 Roje na żywo

@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de YA-MS
-SUB|Version 1.8.4 - réalisé par Costantino IC8TEM - novembre 2026
+SUB|Version 1.8.5 - réalisé par Costantino IC8TEM - novembre 2026
 H1|1. Introduction
 H2|1.1 À quoi sert YA-MS
 P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
@@ -178,6 +178,7 @@ P|Recueille les spots meteor scatter à partir de trois flux telnet (DX cluster,
 LI|Saisissez en haut votre indicatif pour le login. Chaque flux a un hôte, un port, des commandes après le login, Reconnecter, Connecter au démarrage et une console.
 LI|Le filtre accepte les spots sur les fréquences typiques du meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) ou avec un mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), et rejette ceux qui déclarent une autre propagation. Les fenêtres et les mots peuvent être modifiés ; chacun a son propre compteur.
 LI|Les spots CW sont écartés tout de suite (CW ou WPM dans le commentaire, ou 28000-28070 kHz) : ils n'apparaissent pas dans la console et ne sont pas enregistrés, sauf s'ils sont marqués <MS>. La case peut être désactivée.
+LI|Les spots entre stations distantes de moins de 500 km sont rejetés immédiatement, car à cette distance la liaison est directe ou troposphérique et non meteor scatter : ils n'apparaissent pas dans la console et ne sont pas enregistrés. Si un locator manque, le spot est conservé. La distance se modifie sous la case.
 LI|Les locators manquants sont pris dans la base CALL3 ; les spots acceptés vont dans data/spot_ms, un fichier par jour, et sur la carte du Trafic en direct.
 H1|10. Essaims en direct et catalogue des essaims
 H2|10.1 Essaims en direct
