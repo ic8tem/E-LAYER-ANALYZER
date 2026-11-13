@@ -21,9 +21,22 @@ namespace YAMS
     {
         public const string DefaultHost = "mqtt.pskreporter.info";
         public const int DefaultPort = 1883;
-        // modi MS sulle bande VHF/UHF (nomi delle bande come li scrive PSKReporter)
-        public const string DefaultTopics = "pskr/filter/v2/6m/MSK144/#; pskr/filter/v2/4m/MSK144/#; pskr/filter/v2/2m/MSK144/#; " +
-                                            "pskr/filter/v2/1.25m/MSK144/#; pskr/filter/v2/70cm/MSK144/#; pskr/filter/v2/2m/FSK441/#";
+        // modi MS (MSK144, FSK441, PSK2K, JTMS) su 28, 50, 70, 144 e 432 MHz (nomi delle bande come li scrive PSKReporter),
+        // piu' MSK144 su 222 MHz (regola dell'autore, IC8TEM, 13/11/2026)
+        public static readonly string[] MsModes = { "MSK144", "FSK441", "PSK2K", "JTMS" };
+        public static readonly string DefaultTopics = BuildDefault();
+        // argomenti di partenza delle versioni fino alla 1.8.3 (si aggiornano da soli se l'utente non li aveva cambiati)
+        public const string OldDefaultTopics = "pskr/filter/v2/6m/MSK144/#; pskr/filter/v2/4m/MSK144/#; pskr/filter/v2/2m/MSK144/#; " +
+                                               "pskr/filter/v2/1.25m/MSK144/#; pskr/filter/v2/70cm/MSK144/#; pskr/filter/v2/2m/FSK441/#";
+
+        static string BuildDefault()
+        {
+            List<string> t = new List<string>();
+            foreach (string b in new[] { "10m", "6m", "4m", "2m", "70cm" })
+                foreach (string m in MsModes) t.Add("pskr/filter/v2/" + b + "/" + m + "/#");
+            t.Add("pskr/filter/v2/1.25m/MSK144/#");
+            return string.Join("; ", t);
+        }
 
         public static string Host = DefaultHost;
         public static int Port = DefaultPort;
@@ -197,7 +210,7 @@ namespace YAMS
                     double rp = Num(r, "rp");
                     MsSpot s = new MsSpot
                     {
-                        Source = 3, FreqKHz = f / 1000.0, DxCall = sc, Spotter = rc, Utc = utc,
+                        Source = 3, FreqKHz = f / 1000.0, DxCall = sc, Spotter = rc, Utc = utc, Mode = md.ToUpperInvariant(),
                         LocDx = Loc(Txt(r, "sl")), LocSpotter = Loc(Txt(r, "rl")),
                         Comment = (md + (double.IsNaN(rp) ? "" : " " + rp.ToString("+0;-0", CultureInfo.InvariantCulture) + " dB")).Trim()
                     };

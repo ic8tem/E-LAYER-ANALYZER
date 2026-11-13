@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.3 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.4 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Live traffic
 P|An azimuthal equidistant map centred on your station with all the meteor scatter traffic collected: for each contact the path in the colour of the band (28 brown, 50 green, 70 cyan, 144 orange, 222 pink, 432 purple), the two stations and the cloud of the most probable trails at that hour. Newly arrived spots flash for one minute.
 LI|Map radius: 600-3500 km. Spots to show: last 15 or 30 minutes, last hour, last 3 or 24 hours.
 LI|Clicking a path or a row of the table highlights the contact and shows the centre of the cloud, its height and its size.
+LI|Show who is listening: triangles in the band colour mark the stations that, according to PSKReporter, are receiving in MSK144, FSK441, PSK2K or JTMS on 28, 50, 70, 144 and 432 MHz in the chosen time window. A click on a triangle shows call, locator, modes and last spot. The MQTT feed of the Data collection tab must be connected.
 H2|9.2 Radar flux
 P|The hourly meteor counts and the trail heights of the Collm SKiYMET radar (36.2 MHz) and the latest image from the Sodankylä radar (36.9 MHz).
 LI|Download now and Automatic update of all sources every 5 minutes: each source is downloaded again only if it has changed.
@@ -176,6 +177,7 @@ H2|9.4 Data collection
 P|It collects meteor scatter spots from three telnet feeds (DX cluster, RBN, DM4X with the PSKReporter spots) and from the PSKReporter MQTT feed, each in its own sub-tab, and filters them.
 LI|Enter your callsign for the login at the top. Each feed has host, port, commands after login, Reconnect, Connect at startup and a console.
 LI|The filter accepts spots on the typical meteor scatter frequencies (50190-50300, 70100-70400, 144290-144399 kHz) or with an MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), and discards those that declare another propagation mode. Windows and words can be edited; each has its own counter.
+LI|CW spots are discarded straight away (CW or WPM in the comment, or 28000-28070 kHz): they do not appear in the console and are not stored, unless they are marked <MS>. The box can be switched off.
 LI|Missing locators are taken from the CALL3 database; accepted spots go to data/spot_ms, one file per day, and to the Live traffic map.
 H1|10. Live showers and shower catalogue
 H2|10.1 Live showers

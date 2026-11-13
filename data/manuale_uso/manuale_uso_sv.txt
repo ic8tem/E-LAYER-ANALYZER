@@ -1,5 +1,5 @@
 TITLE|Bruksanvisning för YA-MS
-SUB|Version 1.8.3 - av Costantino IC8TEM - november 2026
+SUB|Version 1.8.4 - av Costantino IC8TEM - november 2026
 H1|1. Inledning
 H2|1.1 Vad YA-MS används till
 P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Trafik live
 P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteorscattertrafik: för varje förbindelse sträckan i bandets färg (28 brun, 50 grön, 70 cyan, 144 orange, 222 rosa, 432 lila), de två stationerna och molnet av de mest sannolika spåren vid den tiden. Nyss inkomna spots blinkar i en minut.
 LI|Kartradie: 600-3500 km. Spots att visa: senaste 15 eller 30 minuterna, senaste timmen, senaste 3 eller 24 timmarna.
 LI|Ett klick på en sträcka eller på en rad i tabellen markerar förbindelsen och visar molnets centrum, dess höjd och dess storlek.
+LI|Visa vem som lyssnar: trianglar i bandets färg markerar stationer som enligt PSKReporter tar emot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 och 432 MHz i det valda tidsfönstret. Ett klick på en triangel visar anropssignal, lokator, moder och senaste spot. MQTT-flödet i fliken Datainsamling måste vara anslutet.
 H2|9.2 Radarflöde
 P|Timräkningarna av meteorer och spårhöjderna från SKiYMET-radarn i Collm (36,2 MHz) och den senaste bilden från radarn i Sodankylä (36,9 MHz).
 LI|Hämta nu och Automatisk uppdatering av alla källor var 5:e minut: varje källa hämtas på nytt bara om den har ändrats.
@@ -176,6 +177,7 @@ H2|9.4 Datainsamling
 P|Samlar in meteorscatterspots från tre telnetflöden (DX cluster, RBN, DM4X med spots från PSKReporter) och från PSKReporters MQTT-flöde, vart och ett i sin egen underflik, och filtrerar dem.
 LI|Skriv in din anropssignal överst för inloggningen. Varje flöde har värd, port, kommandon efter inloggning, Återanslut, Anslut vid start och en konsol.
 LI|Filtret godkänner spots på de typiska meteorscatterfrekvenserna (50190-50300, 70100-70400, 144290-144399 kHz) eller med ett MS-trafiksätt (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) och kastar de spots som anger en annan utbredning. Fönster och ord kan ändras; vart och ett har sin egen räknare.
+LI|CW-spottar kastas direkt (CW eller WPM i kommentaren, eller 28000-28070 kHz): de visas inte i konsolen och sparas inte, utom de som är märkta <MS>. Rutan kan stängas av.
 LI|Saknade lokatorer hämtas från CALL3-arkivet; godkända spots hamnar i data/spot_ms, en fil per dag, och på kartan i Trafik live.
 H1|10. Svärmar live och svärmkatalogen
 H2|10.1 Svärmar live

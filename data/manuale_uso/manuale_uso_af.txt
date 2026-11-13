@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Weergawe 1.8.3 - saamgestel deur Costantino IC8TEM - November 2026
+SUB|Weergawe 1.8.4 - saamgestel deur Costantino IC8TEM - November 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor YA-MS dien
 P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
@@ -160,6 +160,7 @@ H2|9.1 Regstreekse verkeer
 P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesamelde meteor scatter-verkeer: vir elke verbinding die pad in die kleur van die band (28 bruin, 50 groen, 70 siaan, 144 oranje, 222 pienk, 432 pers), die twee stasies en die wolk van die waarskynlikste spore op daardie uur. Spots wat pas aangekom het, flikker vir een minuut.
 LI|Kaartradius: 600-3500 km. Spots om te wys: laaste 15 of 30 minute, laaste uur, laaste 3 of 24 uur.
 LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die wolk, sy hoogte en sy afmetings.
+LI|Wys wie luister: driehoeke in die bandkleur merk die stasies wat volgens PSKReporter in die gekose tydvenster MSK144, FSK441, PSK2K of JTMS op 28, 50, 70, 144 en 432 MHz ontvang. 'n Klik op 'n driehoek wys roepsein, lokator, modusse en laaste spot. Die MQTT-stroom in die oortjie Data-insameling moet gekoppel wees.
 H2|9.2 Radarvloed
 P|Die uurlikse meteoortellings en die spoorhoogtes van die SKiYMET-radar by Collm (36,2 MHz) en die jongste beeld van die Sodankylä-radar (36,9 MHz).
 LI|Laai nou af en Outomatiese bywerking van alle bronne elke 5 minute: elke bron word slegs weer afgelaai as dit verander het.
@@ -176,6 +177,7 @@ H2|9.4 Data-insameling
 P|Samel die meteor scatter-spots in uit drie telnet-strome (DX cluster, RBN, DM4X met die spots van PSKReporter) en uit die MQTT-stroom van PSKReporter, elkeen in sy eie suboortjie, en filtreer hulle.
 LI|Tik bo jou roepsein vir die aanmelding in. Elke stroom het host, poort, opdragte ná aanmelding, Herkoppel, Koppel by aanskakel en 'n konsole.
 LI|Die filter aanvaar spots op die tipiese meteor scatter-frekwensies (50190-50300, 70100-70400, 144290-144399 kHz) of met 'n MS-modus (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerp dié wat 'n ander voortplanting aandui. Die vensters en woorde kan verander word; elkeen het sy eie teller.
+LI|CW-spots word dadelik weggegooi (CW of WPM in die kommentaar, of 28000-28070 kHz): hulle verskyn nie in die konsole nie en word nie gestoor nie, tensy hulle met <MS> gemerk is. Die blokkie kan afgeskakel word.
 LI|Ontbrekende lokators word uit die CALL3-argief geneem; aanvaarde spots gaan na data/spot_ms, een lêer per dag, en na die kaart van Regstreekse verkeer.
 H1|10. Regstreekse swerms en swermkatalogus
 H2|10.1 Regstreekse swerms

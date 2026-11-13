@@ -1,5 +1,5 @@
 TITLE|Brukerveiledning for YA-MS
-SUB|Versjon 1.8.3 - av Costantino IC8TEM - november 2026
+SUB|Versjon 1.8.4 - av Costantino IC8TEM - november 2026
 H1|1. Innledning
 H2|1.1 Hva YA-MS brukes til
 P|YA-MS hjelper deg med å forutsi og følge direkte meteorscatter-forholdene mellom stasjonen din og en motstasjon, fra 28 til 432 MHz. For hver aktive meteorsverm forteller programmet hvor mye radiantens posisjon begunstiger strekningen din (effektiviteten), i hvilke timer, fra hvilken side av strekningen refleksjonene kommer og hvor det lønner seg å rette antennen. Ved siden av prognosen viser det data målt direkte: tellingene fra meteorradaren i Collm, kameraene i Global Meteor Network, CMOR-radaren, GRAVES-senderen og meteorscatter-trafikken samlet inn fra clusterne og fra PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Trafikk direkte
 P|Et asimutalt ekvidistant kart sentrert på stasjonen din med all innsamlet meteorscatter-trafikk: for hver forbindelse strekningen i båndets farge (28 brun, 50 grønn, 70 cyan, 144 oransje, 222 rosa, 432 lilla), de to stasjonene og skyen av de mest sannsynlige sporene på det tidspunktet. Nylig mottatte spot blinker i ett minutt.
 LI|Kartradius: 600-3500 km. Spot som vises: siste 15 eller 30 minutter, siste time, siste 3 eller 24 timer.
 LI|Et klikk på en strekning eller på en rad i tabellen markerer forbindelsen og viser sentrum av skyen, høyden og størrelsen.
+LI|Vis hvem som lytter: trekanter i båndets farge markerer stasjonene som ifølge PSKReporter tar imot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvinduet. Et klikk på en trekant viser kallesignal, lokator, moduser og siste spot. MQTT-strømmen i fanen Datainnsamling må være tilkoblet.
 H2|9.2 Radarfluks
 P|Timetellingene av meteorer og sporhøydene fra SKiYMET-radaren i Collm (36,2 MHz) og det siste bildet fra radaren i Sodankylä (36,9 MHz).
 LI|Last ned nå og Automatisk oppdatering av alle kilder hvert 5. minutt: hver kilde lastes ned på nytt bare hvis den er endret.
@@ -176,6 +177,7 @@ H2|9.4 Datainnsamling
 P|Samler inn meteorscatter-spot fra tre telnet-strømmer (DX cluster, RBN, DM4X med spot fra PSKReporter) og fra MQTT-strømmen til PSKReporter, hver i sin egen underfane, og filtrerer dem.
 LI|Skriv inn kallesignalet ditt øverst for innloggingen. Hver strøm har vert, port, kommandoer etter innlogging, Koble til på nytt, Koble til ved oppstart og en konsoll.
 LI|Filteret godtar spot på de typiske meteorscatter-frekvensene (50190-50300, 70100-70400, 144290-144399 kHz) eller med en MS-modus (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), og forkaster dem som oppgir en annen utbredelse. Vinduer og ord kan endres; hver av dem har sin egen teller.
+LI|CW-spotter forkastes med en gang (CW eller WPM i kommentaren, eller 28000-28070 kHz): de vises ikke i konsollen og lagres ikke, unntatt de som er merket <MS>. Boksen kan slås av.
 LI|Manglende lokatorer hentes fra CALL3-arkivet; godtatte spot havner i data/spot_ms, én fil per dag, og i kartet i Trafikk direkte.
 H1|10. Svermer direkte og svermkatalogen
 H2|10.1 Svermer direkte

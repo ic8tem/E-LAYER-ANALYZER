@@ -1,5 +1,5 @@
 TITLE|Manwal ng paggamit ng YA-MS
-SUB|Bersyon 1.8.3 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+SUB|Bersyon 1.8.4 - inihanda ni Costantino IC8TEM - Nobyembre 2026
 H1|1. Panimula
 H2|1.1 Para saan ang YA-MS
 P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Live na trapiko
 P|Isang azimuthal equidistant na mapa na nakasentro sa iyong istasyon na may lahat ng nakolektang trapiko ng meteor scatter: para sa bawat QSO, ang landas sa kulay ng banda (28 kayumanggi, 50 berde, 70 cyan, 144 kahel, 222 rosas, 432 lila), ang dalawang istasyon at ang ulap ng mga pinaka-malamang na bakas sa oras na iyon. Kumukutitap nang isang minuto ang mga bagong dating na spot.
 LI|Radius ng mapa: 600-3500 km. Mga spot na ipapakita: huling 15 o 30 minuto, huling oras, huling 3 o 24 na oras.
 LI|Ang pag-click sa isang landas o sa isang hilera ng talahanayan ay nagha-highlight sa QSO at nagpapakita ng gitna ng ulap, ng taas nito at ng laki nito.
+LI|Ipakita kung sino ang nakikinig: mga tatsulok na kulay ng banda ang nagmamarka sa mga istasyong, ayon sa PSKReporter, tumatanggap ng MSK144, FSK441, PSK2K o JTMS sa 28, 50, 70, 144 at 432 MHz sa napiling panahon. Ang pag-click sa tatsulok ay nagpapakita ng call sign, locator, mga mode at huling spot. Dapat nakakonekta ang daloy na MQTT sa tab na Pangongolekta ng data.
 H2|9.2 Flux ng radar
 P|Ang mga bilang bawat oras ng mga meteor at ang mga taas ng bakas ng SKiYMET radar ng Collm (36.2 MHz) at ang pinakabagong larawan ng radar ng Sodankylä (36.9 MHz).
 LI|I-download ngayon at Awtomatikong pag-update ng lahat ng source bawat 5 minuto: muling dina-download ang bawat source kung nagbago lamang ito.
@@ -176,6 +177,7 @@ H2|9.4 Pangongolekta ng data
 P|Kinokolekta ang mga meteor scatter spot mula sa tatlong telnet stream (DX cluster, RBN, DM4X na may mga spot ng PSKReporter) at mula sa MQTT stream ng PSKReporter, bawat isa sa sarili nitong sub-tab, at sinasala ang mga ito.
 LI|Isulat sa itaas ang iyong call sign para sa login. Bawat stream ay may host, port, mga command pagkatapos ng login, Kumonekta muli, Kumonekta sa pagsisimula at isang console.
 LI|Tinatanggap ng filter ang mga spot sa mga karaniwang frequency ng meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) o may MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), at itinatapon ang mga nagdedeklara ng ibang propagation. Maaaring baguhin ang mga window at mga salita; bawat isa ay may sariling counter.
+LI|Agad na itinatapon ang mga spot na CW (CW o WPM sa komento, o 28000-28070 kHz): hindi lumalabas sa console at hindi sine-save, maliban kung may markang <MS>. Maaaring patayin ang kahon.
 LI|Kinukuha mula sa CALL3 archive ang mga nawawalang locator; ang mga tinanggap na spot ay napupunta sa data/spot_ms, isang file bawat araw, at sa mapa ng Live na trapiko.
 H1|10. Mga live na shower at katalogo ng mga shower
 H2|10.1 Mga live na shower

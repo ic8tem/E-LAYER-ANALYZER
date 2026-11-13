@@ -25,6 +25,7 @@ namespace YAMS
         TextBlock lblTrafficInfo, lblTrafficCount, lblTrafficRadius;
         Slider sldTrafficRadius;
         ComboBox cmbTrafficWindow;
+        CheckBox chkTrafficListeners;
         static readonly int[] TrafficMinutes = { 15, 30, 60, 180, 1440 };
         readonly Dictionary<MsSpot, List<TrafficCloud>> cloudCache = new Dictionary<MsSpot, List<TrafficCloud>>();
         int trafficSpotCount = -1;
@@ -50,6 +51,7 @@ namespace YAMS
             p.Children.Add(g);
             traffic = new TrafficView { RadiusKm = Math.Max(600, Math.Min(3500, cfg.GetD("traffico_raggio", 2500))) };
             traffic.SpotClicked += t => ShowTrafficInfo(t);
+            traffic.ListenerClicked += l => { if (lblTrafficInfo != null) lblTrafficInfo.Text = l.Info; };
             Grid.SetColumn(traffic, 0); g.Children.Add(traffic);
 
             StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
@@ -70,6 +72,10 @@ namespace YAMS
             cmbTrafficWindow.SelectedIndex = wi < 0 ? 2 : wi;
             cmbTrafficWindow.SelectionChanged += (s, e) => RefreshTraffic(true);
             side.Children.Add(Row(L(Lang.T("Spot da mostrare")), cmbTrafficWindow));
+            chkTrafficListeners = C(Lang.T("Mostra chi è in ascolto in MSK144, FSK441, PSK2K e JTMS (PSKReporter MQTT, triangoli)"), cfg.GetB("traffico_ascolto", true));
+            if (chkTrafficListeners.Content is string tls) chkTrafficListeners.Content = new TextBlock { Text = tls, TextWrapping = TextWrapping.Wrap };
+            chkTrafficListeners.IsCheckedChanged += (s, e) => { cfg.Set("traffico_ascolto", chkTrafficListeners.IsChecked == true); RefreshTraffic(true); };
+            side.Children.Add(chkTrafficListeners);
             lblTrafficCount = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap };
             side.Children.Add(lblTrafficCount);
             lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
@@ -216,6 +222,26 @@ namespace YAMS
                 traffic.Selected = keep;
             }
             traffic.Spots = list;
+            // stazioni in ascolto nei modi MS (PSKReporter MQTT) nella stessa finestra di tempo, 28-50-70-144-432 MHz
+            List<TrafficListener> lis = new List<TrafficListener>();
+            int nLis = 0;
+            if (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true)
+                foreach (MsListener ml in MsCollector.Listeners.Values)
+                {
+                    if (ml.LastUtc < lim || !MsCollector.Bands.Contains(ml.Band)) continue;
+                    LatLon q;
+                    if (!Astro.TryLocator(ml.Loc, out q) || !traffic.Inside(q)) continue;
+                    nLis++;
+                    if (lis.Count >= 600) continue;
+                    lis.Add(new TrafficListener
+                    {
+                        Pos = q, Call = ml.Call, Color = BandColor(ml.Band),
+                        Info = Lang.F("{0} {1} in ascolto su {2} MHz ({3})", ml.Call, ml.Loc, ml.Band, ml.Modes) + "\n" +
+                               Lang.F("ultimo spot ricevuto {0} UTC · {1} spot", ml.LastUtc.ToString("HH:mm", CultureInfo.InvariantCulture), ml.Count) + "\n" +
+                               Lang.F("{0:F0} km · azimut {1:F0}°", Astro.DistanceKm(traffic.Home, q), Astro.Bearing(traffic.Home, q))
+                    });
+                }
+            traffic.Listeners = lis;
             traffic.Caption = Lang.F("Traffico MS in diretta · {0}", cmbTrafficWindow.SelectedItem as string);
             traffic.Legend.Clear();
             foreach (string bn in MsBands.Names)
@@ -224,7 +250,9 @@ namespace YAMS
                 traffic.Legend.Add(new KeyValuePair<string, Color>(Lang.F("{0} MHz: {1}", bn, n), BandColor(bn)));
             }
             traffic.InvalidateVisual();
-            lblTrafficCount.Text = Lang.F("{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator", list.Count, outside, noLoc);
+            lblTrafficCount.Text = Lang.F("{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator", list.Count, outside, noLoc)
+                                   + (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true
+                                      ? "\n" + Lang.F("{0} stazioni in ascolto (PSKReporter MQTT)", nLis) + (PskMqtt.Connected ? "" : " · " + Lang.T("MQTT non connesso: si connette dalla linguetta \"Raccolta dati\"")) : "");
             if (list.Count != trafficSpotCount || force)
             {
                 trafficSpotCount = list.Count;
@@ -279,6 +307,11 @@ namespace YAMS
                 if (Astro.TryLocator(s.LocSpotter, out a) && Astro.TryLocator(s.LocDx, out b)) s.DistKm = Astro.DistanceKm(a, b);
                 MsCollector.AddDemo(s);
             }
+            // stazioni in ascolto di esempio (PSKReporter MQTT)
+            string[][] ls = { new[] { "OH5IY", "KP30KX", "144" }, new[] { "EA5BB", "IM98WN", "50" }, new[] { "LA1VNA", "JO59FX", "144" },
+                              new[] { "OZ1BEF", "JO55WM", "70" }, new[] { "YO3JW", "KN34BK", "432" }, new[] { "G3WOS", "IO91IL", "28" } };
+            foreach (string[] r in ls)
+                MsCollector.Listeners[r[0] + "|" + r[2]] = new MsListener { Call = r[0], Loc = r[1], Band = r[2], Modes = "MSK144", LastUtc = now.AddMinutes(-5), Count = 3 };
             rdDirty = true;
         }
     }

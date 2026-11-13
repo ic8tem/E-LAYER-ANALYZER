@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.3 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.4 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -160,6 +160,7 @@ H2|9.1 Canlı trafik
 P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin bulutu. Yeni gelen spot'lar bir dakika boyunca yanıp söner.
 LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 15 veya 30 dakika, son bir saat, son 3 veya 24 saat.
 LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve bulutun merkezini, yüksekliğini ve boyutlarını gösterir.
+LI|Kimin dinlediğini göster: bant renginde üçgenler, PSKReporter'a göre seçilen zaman aralığında 28, 50, 70, 144 ve 432 MHz'de MSK144, FSK441, PSK2K veya JTMS alan istasyonları gösterir. Bir üçgene tıklamak çağrı işaretini, lokatörü, modları ve son spotu gösterir. Veri toplama sekmesindeki MQTT akışı bağlı olmalıdır.
 H2|9.2 Radar akısı
 P|Collm SKiYMET radarının (36,2 MHz) saatlik meteor sayımları ve iz yükseklikleri ile Sodankylä radarının (36,9 MHz) son görüntüsü.
 LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir.
@@ -176,6 +177,7 @@ H2|9.4 Veri toplama
 P|Meteor scatter spot'larını üç telnet akışından (DX cluster, RBN, PSKReporter spot'larıyla DM4X) ve PSKReporter'ın MQTT akışından, her birini kendi alt sekmesinde toplar ve filtreler.
 LI|Oturum için çağrı işaretinizi en üste yazın. Her akışın host'u, portu, oturum açtıktan sonraki komutları, Yeniden bağlan, Açılışta bağlan seçenekleri ve bir konsolu vardır.
 LI|Filtre, meteor scatter'a özgü frekanslardaki (50190-50300, 70100-70400, 144290-144399 kHz) veya bir MS moduna sahip (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) spot'ları kabul eder ve başka bir yayılım bildirenleri reddeder. Pencereler ve sözcükler değiştirilebilir; her birinin kendi sayacı vardır.
+LI|CW spotları hemen atılır (yorumda CW veya WPM, ya da 28000-28070 kHz): <MS> ile işaretlenmedikçe konsolda görünmez ve kaydedilmez. Kutu kapatılabilir.
 LI|Eksik lokatörler CALL3 arşivinden alınır; kabul edilen spot'lar, günde bir dosya olmak üzere data/spot_ms klasörüne ve Canlı trafik haritasına gider.
 H1|10. Canlı yağmurlar ve yağmur kataloğu
 H2|10.1 Canlı yağmurlar

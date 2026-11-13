@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.3 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.4 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Provoz živě
 P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a oblak nejpravděpodobnějších stop v danou hodinu. Právě přijaté spoty minutu blikají.
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
 LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed oblaku, jeho výška a rozměry.
+LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
 H2|9.2 Tok z radaru
 P|Hodinové počty meteorů a výšky stop z radaru SKiYMET v Collm (36,2 MHz) a poslední snímek z radaru v Sodankylä (36,9 MHz).
 LI|Stáhnout nyní a Automatická aktualizace všech zdrojů každých 5 minut: každý zdroj se znovu stáhne jen tehdy, když se změnil.
@@ -176,6 +177,7 @@ H2|9.4 Sběr dat
 P|Sbírá spoty meteor scatter ze tří telnetových toků (DX cluster, RBN, DM4X se spoty z PSKReporter) a z toku MQTT od PSKReporter, každý ve své podkartě, a filtruje je.
 LI|Nahoře zadejte svou značku pro přihlášení. Každý tok má hostitele, port, příkazy po přihlášení, Znovu připojit, Připojit při spuštění a konzoli.
 LI|Filtr přijímá spoty na kmitočtech typických pro meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) nebo s druhem provozu MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) a vyřazuje ty, které uvádějí jiný druh šíření. Okna i slova lze upravit; každé má vlastní počítadlo.
+LI|Spoty CW se hned zahazují (CW nebo WPM v komentáři, nebo 28000-28070 kHz): neobjeví se v konzoli a neukládají se, pokud nejsou označené <MS>. Políčko lze vypnout.
 LI|Chybějící lokátory se doplní z archivu CALL3; přijaté spoty se ukládají do data/spot_ms, jeden soubor za den, a do mapy v kartě Provoz živě.
 H1|10. Roje živě a katalog rojů
 H2|10.1 Roje živě

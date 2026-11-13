@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.3 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.4 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -160,6 +160,7 @@ H2|9.1 Liiklus reaalajas
 P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede pilv. Äsja saabunud spotid vilguvad ühe minuti.
 LI|Kaardi raadius: 600-3500 km. Näidatavad spotid: viimased 15 või 30 minutit, viimane tund, viimased 3 või 24 tundi.
 LI|Klõps trassil või tabeli real tõstab side esile ja näitab pilve keskpunkti, selle kõrgust ja mõõtmeid.
+LI|Näita, kes kuulab: riba värvi kolmnurgad märgivad jaamu, mis PSKReporteri järgi võtavad valitud ajaaknas vastu MSK144, FSK441, PSK2K või JTMS režiimis 28, 50, 70, 144 ja 432 MHz sagedusel. Klõps kolmnurgal näitab kutsungit, lokaatorit, režiime ja viimast spotti. Vahekaardi Andmete kogumine MQTT-voog peab olema ühendatud.
 H2|9.2 Radari voog
 P|Collmi SKiYMET-radari (36,2 MHz) meteooride tunniloendused ja jälgede kõrgused ning Sodankylä radari (36,9 MHz) viimane pilt.
 LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud.
@@ -176,6 +177,7 @@ H2|9.4 Andmete kogumine
 P|Kogub meteor scatteri spotte kolmest telneti voost (DX-klaster, RBN, DM4X PSKReporteri spottidega) ja PSKReporteri MQTT voost, igaüks oma alamsakil, ning filtreerib neid.
 LI|Kirjuta üles sisselogimiseks oma kutsung. Igal vool on host, port, käsud pärast sisselogimist, Ühenda uuesti, Ühenda käivitamisel ja konsool.
 LI|Filter võtab vastu spotid meteor scatterile tüüpilistel sagedustel (50190-50300, 70100-70400, 144290-144399 kHz) või MS-moodiga (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ja jätab kõrvale need, mis märgivad teist levi. Aknaid ja sõnu saab muuta; igaühel on oma loendur.
+LI|CW-spotid visatakse kohe ära (CW või WPM kommentaaris või 28000-28070 kHz): need ei ilmu konsooli ega salvestu, välja arvatud <MS> märgiga. Kasti saab välja lülitada.
 LI|Puuduvad lokaatorid võetakse CALL3 arhiivist; vastu võetud spotid salvestatakse kausta data/spot_ms, üks fail päevas, ja kuvatakse Liiklus reaalajas kaardil.
 H1|10. Meteoorivoolud reaalajas ja meteoorivoolude kataloog
 H2|10.1 Meteoorivoolud reaalajas

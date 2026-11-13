@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.3 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.4 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Lalu lintas langsung
 P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu lintas meteor scatter yang terkumpul: untuk setiap kontak, lintasan dalam warna pita (28 cokelat, 50 hijau, 70 sian, 144 oranye, 222 merah muda, 432 ungu), kedua stasiun dan awan jejak yang paling mungkin pada jam itu. Spot yang baru tiba berkedip selama satu menit.
 LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 15 atau 30 menit terakhir, satu jam terakhir, 3 atau 24 jam terakhir.
 LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat awan, ketinggian, dan ukurannya.
+LI|Tampilkan siapa yang mendengarkan: segitiga berwarna pita menandai stasiun yang menurut PSKReporter menerima MSK144, FSK441, PSK2K, atau JTMS di 28, 50, 70, 144, dan 432 MHz dalam jendela waktu yang dipilih. Klik pada segitiga menampilkan callsign, locator, mode, dan spot terakhir. Aliran MQTT di tab Pengumpulan data harus terhubung.
 H2|9.2 Fluks radar
 P|Hitungan meteor per jam dan ketinggian jejak dari radar SKiYMET di Collm (36,2 MHz) serta gambar terbaru radar Sodankylä (36,9 MHz).
 LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah.
@@ -176,6 +177,7 @@ H2|9.4 Pengumpulan data
 P|Mengumpulkan spot meteor scatter dari tiga aliran telnet (DX cluster, RBN, DM4X dengan spot PSKReporter) dan dari aliran MQTT PSKReporter, masing-masing di sub-tabnya sendiri, lalu menyaringnya.
 LI|Tulis callsign Anda di bagian atas untuk login. Setiap aliran memiliki host, port, perintah setelah login, Sambung ulang, Sambung saat mulai, dan sebuah konsol.
 LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) atau dengan mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), dan menolak spot yang menyatakan propagasi lain. Jendela frekuensi dan kata-kata dapat diubah; masing-masing memiliki penghitungnya sendiri.
+LI|Spot CW langsung dibuang (CW atau WPM di komentar, atau 28000-28070 kHz): tidak muncul di konsol dan tidak disimpan, kecuali bertanda <MS>. Kotak ini dapat dimatikan.
 LI|Locator yang hilang diambil dari arsip CALL3; spot yang diterima masuk ke data/spot_ms, satu file per hari, dan ke peta Lalu lintas langsung.
 H1|10. Hujan meteor langsung dan katalog hujan meteor
 H2|10.1 Hujan meteor langsung

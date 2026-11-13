@@ -3,7 +3,7 @@
 ; Nessun file in C:\Users\...\AppData: niente collegamento nel menu Start (che Windows mette in AppData\Roaming),
 ; solo l'icona facoltativa sul desktop. Versioni a 64 bit (x64) e 32 bit (x86).
 #ifndef AppVersion
-  #define AppVersion "0.4.9"
+  #define AppVersion "0.4.10"
 #endif
 #ifndef Arch
   #define Arch "x64"

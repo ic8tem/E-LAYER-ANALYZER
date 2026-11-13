@@ -26,6 +26,7 @@ namespace YAMS
         public string DxCall = "", Spotter = "", Comment = "", Line = "";
         public int Source;                 // 0 = cluster, 1 = RBN, 2 = PSKReporter (cluster DM4X), 3 = PSKReporter MQTT
         public string Match = "";          // parola del filtro trovata (MSK144, <MS>, ...)
+        public string Mode = "";           // modo dichiarato dalla fonte (PSKReporter MQTT: MSK144, FSK441...)
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
         public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: lampeggio nel traffico in diretta
@@ -47,6 +48,14 @@ namespace YAMS
             if (kHz >= 430000 && kHz <= 440000) return "432";
             return "";
         }
+    }
+
+    // stazione in ascolto nei modi MS secondo PSKReporter (chi riceve negli spot MQTT)
+    public class MsListener
+    {
+        public string Call = "", Loc = "", Band = "", Modes = "";
+        public DateTime LastUtc;
+        public int Count;
     }
 
     public class MsFilterWord
@@ -80,10 +89,12 @@ namespace YAMS
         // valori di partenza delle tre sessioni: nome, host, porta, comandi iniziali, nota
         public static readonly string[][] Defaults =
         {
-            new[] { "DX cluster a scelta", "on0dxk.dyndns.org", "8000", "set/filter dxbm/pass 6;set/filter dxbm/pass 2", "Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300." },
+            new[] { "DX cluster a scelta", "on0dxk.dyndns.org", "8000", "set/filter dxbm/pass 10;set/filter dxbm/pass 6;set/filter dxbm/pass 4;set/filter dxbm/pass 2", "Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300." },
             new[] { "Reverse Beacon Network", "telnet.reversebeacon.net", "7001", "", "RBN: porta 7000 = CW e RTTY, porta 7001 = FT8. Login con il solo nominativo. Gli skimmer RBN raramente decodificano i modi MS: serve soprattutto per gli spot con <MS> nel commento." },
             new[] { "Cluster con PSKReporter", "dm4x.ddns.net", "8500", "", "Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger)." }
         };
+
+        public const string OldClusterCommands = "set/filter dxbm/pass 6;set/filter dxbm/pass 2";   // fino alla 1.8.3 (senza 28 e 70 MHz)
 
         public static readonly TelnetSession[] Sessions = { new TelnetSession(), new TelnetSession(), new TelnetSession() };
         public static readonly List<MsSpot> Spots = new List<MsSpot>();          // accettati (ultimi 5000)
@@ -91,7 +102,44 @@ namespace YAMS
         public static readonly HashSet<string> Bands = new HashSet<string>(MsBands.Names);
         public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>() };
         public static int[] Lines = new int[4], Parsed = new int[4], Accepted = new int[4];
-        public static int RejectedNoWord, RejectedBand, DroppedLow;
+        public static int RejectedNoWord, RejectedBand, DroppedLow, DroppedCw;
+        // regola dell'autore (IC8TEM, 13/11/2026): gli spot CW si scartano subito, come quelli sotto 27990 kHz (non vanno nella
+        // console e non si memorizzano). CW = parola CW o WPM nel commento (formato RBN "CW 12 dB 25 WPM"), oppure
+        // frequenza nel segmento solo CW dei 10 m (28000-28070 kHz). Restano gli spot dichiarati meteor scatter con <MS>.
+        public static bool DropCw = true;
+        static readonly Regex rxCw = new Regex(@"(?<![A-Za-z0-9])(CW|WPM)(?![A-Za-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        static readonly Regex rxMsTag = new Regex(@"<\s*MS\s*>", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+        public static bool IsCw(MsSpot s)
+        {
+            if (s == null || rxMsTag.IsMatch(s.Comment ?? "")) return false;
+            if (string.Equals(s.Mode, "CW", StringComparison.OrdinalIgnoreCase)) return true;
+            if (rxCw.IsMatch(s.Comment ?? "")) return true;
+            return s.FreqKHz >= 28000 && s.FreqKHz < 28070;
+        }
+        // stazioni in ascolto nei modi MS (PSKReporter MQTT), per nominativo e banda
+        public static readonly Dictionary<string, MsListener> Listeners = new Dictionary<string, MsListener>();
+        public static readonly string[] ListenerBands = { "28", "50", "70", "144", "432" };
+        static void NoteListener(MsSpot s)
+        {
+            if (Array.IndexOf(PskMqtt.MsModes, s.Mode) < 0) return;
+            string b = s.Band;
+            if (Array.IndexOf(ListenerBands, b) < 0 || s.Spotter.Length == 0) return;
+            string k = s.Spotter + "|" + b;
+            MsListener l;
+            if (!Listeners.TryGetValue(k, out l)) { l = new MsListener { Call = s.Spotter, Band = b }; Listeners[k] = l; }
+            string loc = Refine(s.LocSpotter, s.Spotter);
+            if (loc.Length > 0) l.Loc = loc;
+            if (s.Utc > l.LastUtc) l.LastUtc = s.Utc;
+            l.Count++;
+            if (l.Modes.IndexOf(s.Mode, StringComparison.Ordinal) < 0) l.Modes = l.Modes.Length == 0 ? s.Mode : l.Modes + " " + s.Mode;
+            if (Listeners.Count > 20000)
+            {
+                DateTime lim = DateTime.UtcNow.AddHours(-24);
+                List<string> old = new List<string>();
+                foreach (KeyValuePair<string, MsListener> kv in Listeners) if (kv.Value.LastUtc < lim) old.Add(kv.Key);
+                foreach (string o in old) Listeners.Remove(o);
+            }
+        }
         // regola dell'autore (IC8TEM): le righe "DX de" con frequenza sotto 27990,0 kHz si scartano subito, in locale:
         // non vanno nella console, non si contano come spot e non si memorizzano
         // (opzionale: casella nella linguetta, accesa di partenza)
@@ -189,6 +237,7 @@ namespace YAMS
                 PskMqtt.SpotReceived += (sp, line) => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
+                DropCw = cfg.GetB("rd_scarta_cw", true);
                 UseWindows = cfg.GetB("rd_finestre_attive", true);
                 SetWindows(cfg.Get("rd_finestre", DefaultWindows));
                 SetOtherTags(cfg.Get("rd_altre_propagazioni", DefaultOtherTags));
@@ -223,6 +272,7 @@ namespace YAMS
             cfg.Set("rd_filtri", sb.ToString());
             cfg.Set("rd_bande", string.Join(",", Bands));
             cfg.Set("rd_scarta_sotto_28", DropLow);
+            cfg.Set("rd_scarta_cw", DropCw);
             cfg.Set("rd_finestre_attive", UseWindows);
             cfg.Set("rd_finestre", WindowsText);
             cfg.Set("rd_altre_propagazioni", OtherTagsText);
@@ -260,6 +310,7 @@ namespace YAMS
                 Lines[i]++;
                 MsSpot s = Parse(kv.Value, i, now);
                 if (DropLow && s != null && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
+                if (DropCw && s != null && IsCw(s)) { DroppedCw++; continue; }
                 ConsoleLines[i].Enqueue(kv.Value);
                 while (ConsoleLines[i].Count > 200) ConsoleLines[i].Dequeue();
                 if (s == null) continue;
@@ -271,6 +322,8 @@ namespace YAMS
             {
                 Lines[3]++;
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
+                if (DropCw && IsCw(s)) { DroppedCw++; continue; }
+                NoteListener(s);
                 ConsoleLines[3].Enqueue(s.Line);
                 while (ConsoleLines[3].Count > 200) ConsoleLines[3].Dequeue();
                 Parsed[3]++;

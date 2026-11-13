@@ -153,6 +153,10 @@ namespace YAMS
             chkLow.IsCheckedChanged += (s, e) => MsCollector.DropLow = chkLow.IsChecked == true;
             chkLow.IsVisible = !Hosted;   // in E-LAYER ANALYZER c'e' gia' il filtro locale di DATA COLLECTION
             fp.Children.Add(chkLow);
+            CheckBox chkCw = C(Lang.T("Scarta subito gli spot CW (CW o WPM nel commento, oppure 28000-28070 kHz): non compaiono nella console e non si memorizzano. Restano quelli segnati <MS>."), MsCollector.DropCw);
+            if (chkCw.Content is string cws) chkCw.Content = new TextBlock { Text = cws, TextWrapping = TextWrapping.Wrap };
+            chkCw.IsCheckedChanged += (s, e) => MsCollector.DropCw = chkCw.IsChecked == true;
+            fp.Children.Add(chkCw);
 
             fp.Children.Add(new TextBlock { Text = Lang.T("Prova del filtro"), FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 6, 0, 0) });
             txtRdTest = T("DX de DK5EW-#:  144360.0  IC8TEM   JN48<>JN70 -12 dB   2133Z", 420, false);
@@ -192,7 +196,9 @@ namespace YAMS
             string k = "rd" + (i + 1) + "_";
             rdHost[i] = T(cfg.Get(k + "host", def[1]), 200, false);
             rdPort[i] = N(1, 65535, Dm(cfg.GetD(k + "porta", double.Parse(def[2], CultureInfo.InvariantCulture))), 0, 1, 60);
-            rdCmds[i] = T(cfg.Get(k + "comandi", def[3]), 240, false);
+            string cmds = cfg.Get(k + "comandi", def[3]);
+            if (i == 0 && cmds.Trim() == MsCollector.OldClusterCommands) cmds = def[3];   // comandi di partenza vecchi: si aggiungono 28 e 70 MHz
+            rdCmds[i] = T(cmds, 240, false);
             rdCmds[i].Watermark = Lang.T("comandi dopo il login, separati da ;");
             rdAuto[i] = C(Lang.T("Riconnetti"), cfg.GetB(k + "riconnetti", true));
             rdStart[i] = C(Lang.T("Connetti all'avvio"), cfg.GetB(k + "avvio", false));
@@ -242,7 +248,9 @@ namespace YAMS
         {
             mqHost = T(cfg.Get("rd4_host", PskMqtt.DefaultHost), 200, false);
             mqPort = N(1, 65535, Dm(cfg.GetD("rd4_porta", PskMqtt.DefaultPort)), 0, 1, 60);
-            mqTopics = T(cfg.Get("rd4_argomenti", PskMqtt.DefaultTopics), 300, false);
+            string topics = cfg.Get("rd4_argomenti", PskMqtt.DefaultTopics);
+            if (topics.Trim() == PskMqtt.OldDefaultTopics) topics = PskMqtt.DefaultTopics;   // argomenti di partenza vecchi: si aggiornano
+            mqTopics = T(topics, 300, false);
             mqTopics.AcceptsReturn = true; mqTopics.TextWrapping = TextWrapping.Wrap; mqTopics.Height = 74;
             mqTopics.HorizontalAlignment = HorizontalAlignment.Stretch; mqTopics.Width = double.NaN;
             mqAuto = C(Lang.T("Riconnetti"), cfg.GetB("rd4_riconnetti", true));
@@ -440,6 +448,7 @@ namespace YAMS
             lblRdStats.Text = Lang.F("righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}",
                 lines, parsed, acc, MsCollector.RejectedNoWord, MsCollector.RejectedBand, lastHour)
                 + "\n" + Lang.F("righe sotto 27990 kHz scartate: {0}", MsCollector.DroppedLow)
+                + "\n" + Lang.F("spot CW scartati: {0}", MsCollector.DroppedCw)
                 + "\n" + Lang.F("accettati per finestra di frequenza: {0}", MsCollector.AcceptedWindow)
                 + "\n" + Lang.F("scartati per altra propagazione: {0}", MsCollector.RejectedOther);
             foreach (Control c in rdWordList.Children)

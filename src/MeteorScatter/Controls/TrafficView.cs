@@ -34,8 +34,18 @@ namespace YAMS
         public object Tag;
     }
 
+    // stazione in ascolto nei modi MS (PSKReporter MQTT): triangolo del colore della banda
+    public class TrafficListener
+    {
+        public LatLon Pos;
+        public string Call = "", Info = "";
+        public Color Color;
+    }
+
     public class TrafficView : Control
     {
+        public List<TrafficListener> Listeners = new List<TrafficListener>();
+        public event Action<TrafficListener> ListenerClicked;
         public LatLon Home;
         public string HomeLabel = "";
         public double RadiusKm = 2500;
@@ -68,6 +78,16 @@ namespace YAMS
                 {
                     double d = SegDist(p, P(t.A), P(t.B));
                     if (d < bd) { bd = d; best = t; }
+                }
+                if (best == null)
+                {
+                    TrafficListener bl = null; double ld = 10;
+                    foreach (TrafficListener l in Listeners)
+                    {
+                        Point q = P(l.Pos); double d = Math.Sqrt((q.X - p.X) * (q.X - p.X) + (q.Y - p.Y) * (q.Y - p.Y));
+                        if (d < ld) { ld = d; bl = l; }
+                    }
+                    if (bl != null) { Action<TrafficListener> la = ListenerClicked; if (la != null) la(bl); return; }
                 }
                 Selected = best;
                 InvalidateVisual();
@@ -147,6 +167,7 @@ namespace YAMS
                 }
                 // nuvole, poi tratte e stazioni (gli spot selezionati e lampeggianti sopra gli altri)
                 foreach (TrafficSpot s in Spots) DrawClouds(ctx, s, false);
+                foreach (TrafficListener l in Listeners) DrawListener(ctx, l, box, Listeners.Count <= 40);
                 foreach (TrafficSpot s in Spots) DrawPath(ctx, s, box);
                 if (Selected != null && Spots.Contains(Selected)) { DrawClouds(ctx, Selected, true); DrawPath(ctx, Selected, box); }
             }
@@ -231,6 +252,25 @@ namespace YAMS
                 Color ink = Tema.Scuro ? Color.FromRgb(225, 230, 240) : Color.FromRgb(31, 41, 55);
                 FormattedText t = Ft(s.CallB, 10.5, ink, sel ? FontWeight.Bold : FontWeight.Normal);
                 Label(ctx, t, b.X + 6, b.Y - t.Height - 2, box);
+            }
+        }
+
+        void DrawListener(DrawingContext ctx, TrafficListener l, Color box, bool label)
+        {
+            Point c = P(l.Pos);
+            StreamGeometry g = new StreamGeometry();
+            using (StreamGeometryContext s = g.Open())
+            {
+                s.BeginFigure(new Point(c.X, c.Y - 6), true);
+                s.LineTo(new Point(c.X + 5.5, c.Y + 4)); s.LineTo(new Point(c.X - 5.5, c.Y + 4));
+                s.EndFigure(true);
+            }
+            ctx.DrawGeometry(new ImmutableSolidColorBrush(Color.FromArgb(150, l.Color.R, l.Color.G, l.Color.B)), new Pen(new ImmutableSolidColorBrush(l.Color), 1.4), g);
+            if (label)
+            {
+                Color ink = Tema.Scuro ? Color.FromRgb(200, 208, 222) : Color.FromRgb(71, 85, 105);
+                FormattedText t = Ft(l.Call, 9.5, ink);
+                Label(ctx, t, c.X + 6, c.Y - 2, Color.FromArgb((byte)(box.A * 0.8), box.R, box.G, box.B));
             }
         }
 

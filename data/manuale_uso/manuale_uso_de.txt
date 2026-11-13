@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von YA-MS
-SUB|Version 1.8.3 - von Costantino IC8TEM - November 2026
+SUB|Version 1.8.4 - von Costantino IC8TEM - November 2026
 H1|1. Einführung
 H2|1.1 Wozu YA-MS dient
 P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
@@ -160,6 +160,7 @@ H2|9.1 Verkehr live
 P|Eine mittabstandstreue Azimutalkarte, zentriert auf deine Station, mit dem gesamten gesammelten Meteorscatter-Verkehr: für jede Verbindung die Strecke in der Farbe des Bandes (28 braun, 50 grün, 70 cyan, 144 orange, 222 rosa, 432 violett), die beiden Stationen und die Wolke der wahrscheinlichsten Spuren zu dieser Stunde. Neu eingetroffene Spots blinken eine Minute lang.
 LI|Kartenradius: 600-3500 km. Anzuzeigende Spots: letzte 15 oder 30 Minuten, letzte Stunde, letzte 3 oder 24 Stunden.
 LI|Ein Klick auf eine Strecke oder auf eine Zeile der Tabelle hebt die Verbindung hervor und zeigt den Mittelpunkt der Wolke, ihre Höhe und ihre Ausdehnung.
+LI|Zeigen, wer hört: Dreiecke in der Bandfarbe markieren die Stationen, die laut PSKReporter im gewählten Zeitfenster MSK144, FSK441, PSK2K oder JTMS auf 28, 50, 70, 144 und 432 MHz empfangen. Ein Klick auf ein Dreieck zeigt Rufzeichen, Locator, Betriebsarten und letzten Spot. Der MQTT-Strom im Reiter Datensammlung muss verbunden sein.
 H2|9.2 Radarfluss
 P|Die stündlichen Meteorzählungen und die Spurhöhen des SKiYMET-Radars Collm (36,2 MHz) und das neueste Bild des Radars Sodankylä (36,9 MHz).
 LI|Jetzt laden und Automatische Aktualisierung aller Quellen alle 5 Minuten: Jede Quelle wird nur dann neu geladen, wenn sie sich geändert hat.
@@ -176,6 +177,7 @@ H2|9.4 Datensammlung
 P|Sammelt die Meteorscatter-Spots aus drei Telnet-Datenströmen (DX-Cluster, RBN, DM4X mit den Spots von PSKReporter) und aus dem MQTT-Datenstrom von PSKReporter, jeder in seinem eigenen Unterreiter, und filtert sie.
 LI|Gib oben dein Rufzeichen für den Login ein. Jeder Datenstrom hat Host, Port, Befehle nach dem Login, Neu verbinden, Beim Start verbinden und eine Konsole.
 LI|Der Filter akzeptiert Spots auf den typischen Meteorscatter-Frequenzen (50190-50300, 70100-70400, 144290-144399 kHz) oder mit einer MS-Betriebsart (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) und verwirft solche, die eine andere Ausbreitung angeben. Frequenzfenster und Suchwörter lassen sich ändern; jedes hat seinen eigenen Zähler.
+LI|CW-Spots werden sofort verworfen (CW oder WPM im Kommentar oder 28000-28070 kHz): Sie erscheinen nicht in der Konsole und werden nicht gespeichert, außer sie sind mit <MS> markiert. Das Kästchen lässt sich ausschalten.
 LI|Fehlende Locatoren werden aus der CALL3-Datenbank übernommen; akzeptierte Spots gehen nach data/spot_ms, eine Datei pro Tag, und in die Karte von Verkehr live.
 H1|10. Ströme live und Katalog der Ströme
 H2|10.1 Ströme live

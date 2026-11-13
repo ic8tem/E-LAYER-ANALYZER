@@ -1,5 +1,5 @@
 TITLE|Manual de uso do YA-MS
-SUB|Versão 1.8.3 - de autoria de Costantino IC8TEM - novembro de 2026
+SUB|Versão 1.8.4 - de autoria de Costantino IC8TEM - novembro de 2026
 H1|1. Introdução
 H2|1.1 Para que serve o YA-MS
 P|O YA-MS ajuda a prever e a acompanhar ao vivo as condições de meteor scatter entre a sua estação e um correspondente, de 28 a 432 MHz. Para cada chuva de meteoros ativa, ele indica o quanto a posição do seu radiante favorece o seu trajeto (a eficiência), em que horários, de que lado do trajeto chegam as reflexões e para onde convém apontar a antena. Ao lado da previsão, mostra os dados medidos ao vivo: as contagens do radar de meteoros de Collm, as câmeras da Global Meteor Network, o radar CMOR, o transmissor GRAVES e o tráfego de meteor scatter coletado dos clusters e do PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Tráfego ao vivo
 P|Um mapa azimutal equidistante centrado na sua estação com todo o tráfego de meteor scatter coletado: para cada contato, o trajeto na cor da banda (28 marrom, 50 verde, 70 ciano, 144 laranja, 222 rosa, 432 violeta), as duas estações e a nuvem dos rastros mais prováveis naquele horário. Os spots recém-chegados piscam por um minuto.
 LI|Raio do mapa: 600-3500 km. Spots a mostrar: últimos 15 ou 30 minutos, última hora, últimas 3 ou 24 horas.
 LI|Um clique em um trajeto ou em uma linha da tabela destaca o contato e mostra o centro da nuvem, a sua altura e as suas dimensões.
+LI|Mostrar quem está ouvindo: triângulos na cor da banda marcam as estações que, segundo o PSKReporter, recebem em MSK144, FSK441, PSK2K ou JTMS em 28, 50, 70, 144 e 432 MHz na janela de tempo escolhida. Um clique em um triângulo mostra indicativo, locator, modos e último spot. O fluxo MQTT da aba Coleta de dados precisa estar conectado.
 H2|9.2 Fluxo do radar
 P|As contagens horárias de meteoros e as alturas dos rastros do radar SKiYMET de Collm (36,2 MHz) e a última imagem do radar de Sodankylä (36,9 MHz).
 LI|Baixar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é baixada de novo se tiver mudado.
@@ -176,6 +177,7 @@ H2|9.4 Coleta de dados
 P|Coleta os spots de meteor scatter de três fluxos telnet (DX cluster, RBN, DM4X com os spots do PSKReporter) e do fluxo MQTT do PSKReporter, cada um na sua subaba, e os filtra.
 LI|Digite no alto o seu indicativo para o login. Cada fluxo tem host, porta, comandos após o login, Reconectar, Conectar ao iniciar e um console.
 LI|O filtro aceita os spots nas frequências típicas do meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) ou com um modo MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), e descarta os que declaram outra propagação. Faixas e palavras podem ser alteradas; cada uma tem o seu contador.
+LI|Os spots CW são descartados na hora (CW ou WPM no comentário, ou 28000-28070 kHz): não aparecem no console e não são gravados, exceto os marcados <MS>. A caixa pode ser desligada.
 LI|Os locators que faltam são obtidos do arquivo CALL3; os spots aceitos vão para data/spot_ms, um arquivo por dia, e para o mapa de Tráfego ao vivo.
 H1|10. Chuvas ao vivo e catálogo das chuvas
 H2|10.1 Chuvas ao vivo

@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare YA-MS
-SUB|Versiunea 1.8.3 - realizată de Costantino IC8TEM - noiembrie 2026
+SUB|Versiunea 1.8.4 - realizată de Costantino IC8TEM - noiembrie 2026
 H1|1. Introducere
 H2|1.1 La ce folosește YA-MS
 P|YA-MS vă ajută să prevedeți și să urmăriți în direct condițiile de meteor scatter între stația dumneavoastră și un corespondent, de la 28 la 432 MHz. Pentru fiecare roi meteoric activ arată în ce măsură poziția radiantului său favorizează traseul dumneavoastră (eficiența), în ce ore, din ce parte a traseului sosesc reflexiile și încotro este bine să orientați antena. Pe lângă prognoză, afișează datele măsurate în direct: numărătorile radarului meteoric de la Collm, camerele Global Meteor Network, radarul CMOR, emițătorul GRAVES și traficul meteor scatter colectat din clustere și din PSKReporter.
@@ -160,6 +160,7 @@ H2|9.1 Trafic în direct
 P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot traficul meteor scatter colectat: pentru fiecare legătură, traseul în culoarea benzii (28 maro, 50 verde, 70 cyan, 144 portocaliu, 222 roz, 432 violet), cele două stații și norul dârelor cele mai probabile la acea oră. Spoturile tocmai sosite clipesc timp de un minut.
 LI|Raza hărții: 600-3500 km. Spoturi de afișat: ultimele 15 sau 30 de minute, ultima oră, ultimele 3 sau 24 de ore.
 LI|Un clic pe un traseu sau pe un rând al tabelului evidențiază legătura și arată centrul norului, altitudinea și dimensiunile sale.
+LI|Arată cine ascultă: triunghiuri în culoarea benzii marchează stațiile care, după PSKReporter, recepționează MSK144, FSK441, PSK2K sau JTMS pe 28, 50, 70, 144 și 432 MHz în fereastra de timp aleasă. Un clic pe un triunghi arată indicativul, locatorul, modurile și ultimul spot. Fluxul MQTT din fila Colectare date trebuie să fie conectat.
 H2|9.2 Flux radar
 P|Numărătorile orare ale meteorilor și altitudinile dârelor de la radarul SKiYMET de la Collm (36,2 MHz) și ultima imagine a radarului de la Sodankylä (36,9 MHz).
 LI|Descarcă acum și Actualizare automată a tuturor surselor la fiecare 5 minute: fiecare sursă este descărcată din nou numai dacă s-a schimbat.
@@ -176,6 +177,7 @@ H2|9.4 Colectare date
 P|Colectează spoturile meteor scatter din trei fluxuri telnet (DX cluster, RBN, DM4X cu spoturile PSKReporter) și din fluxul MQTT al PSKReporter, fiecare în sub-fila sa, și le filtrează.
 LI|Scrieți sus indicativul dumneavoastră pentru login. Fiecare flux are host, port, comenzi după login, Reconectează, Conectează la pornire și o consolă.
 LI|Filtrul acceptă spoturile pe frecvențele tipice pentru meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) sau cu un mod MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) și le respinge pe cele care declară o altă propagare. Ferestrele și cuvintele pot fi modificate; fiecare are propriul contor.
+LI|Spoturile CW sunt eliminate imediat (CW sau WPM în comentariu, sau 28000-28070 kHz): nu apar în consolă și nu se salvează, cu excepția celor marcate <MS>. Căsuța se poate dezactiva.
 LI|Locatorii lipsă sunt luați din arhiva CALL3; spoturile acceptate ajung în data/spot_ms, un fișier pe zi, și pe harta din Trafic în direct.
 H1|10. Roiuri în direct și catalogul roiurilor
 H2|10.1 Roiuri în direct
