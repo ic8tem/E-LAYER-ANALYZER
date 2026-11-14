@@ -12,7 +12,7 @@ Fra versjon 0.4.18 samler fanen **INNSTILLINGER** de generelle innstillingene fo
 | Utseende | Språk, fargetema (skjemaene fra YAEC og YA-MS og, fra versjon 0.5.0, de seks temaene fra IP-TRX-CTRL: Lys, Natt, Svart, Blå, Lilla, Grønn) og **skriftstørrelse for hele programmet** (85-140 %, som i YA-MS). Språk og farger bygger opp vinduet på nytt: innstillinger og spot beholdes. |
 | Kart og prognosedata | Kontinentet, den samme menyen som i fanelinjen. |
 | Tid | NTP-status og forskjellen mellom servertiden og PC-ens klokke. |
-| Oppdateringer | Sjekk på GitHub ved oppstart og hver 6. time, automatisk og stille oppdatering, knappen **Sjekk nå**. Automatisk oppdatering gjelder ikke for systempakker (.deb, .rpm, Arch, Slackware). |
+| Oppdateringer | Sjekk på GitHub ved oppstart og hvert 30. minutt, automatisk og stille oppdatering, knappen **Sjekk nå**. Automatisk oppdatering gjelder ikke for systempakker (.deb, .rpm, Arch, Slackware). |
 | Data | Knapp som åpner mappen `data`. API-nøkkelen til Bureau of Meteorology blir værende i DATA COLLECTION › Utbredelsesdata. |
 
 ## Fordeling av spot

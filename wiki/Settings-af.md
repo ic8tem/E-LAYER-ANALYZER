@@ -12,7 +12,7 @@ Vanaf weergawe 0.4.18 bevat die oortjie **INSTELLINGS** die algemene opsies van 
 | Voorkoms | Taal, kleurskema (die skemas van YAEC en YA-MS en, vanaf weergawe 0.5.0, die ses temas van IP-TRX-CTRL: Lig, Nag, Swart, Blou, Pers, Groen) en **lettergrootte van die hele program** (85-140 %, soos in YA-MS). Taal en kleure bou die venster weer op: instellings en spots bly behoue. |
 | Kaarte en voorspellingsdata | Die kontinent, dieselfde kieslys as op die oortjiebalk. |
 | Tyd | NTP-status en die verskil tussen die bedienertyd en die rekenaar se klok. |
-| Opdaterings | Kontrole op GitHub by opstart en elke 6 uur, outomatiese en stil opdatering, knoppie **Kyk nou**. Outomatiese opdaterings geld nie vir stelselpakkette (.deb, .rpm, Arch, Slackware) nie. |
+| Opdaterings | Kontrole op GitHub by opstart en elke 30 minute, outomatiese en stil opdatering, knoppie **Kyk nou**. Outomatiese opdaterings geld nie vir stelselpakkette (.deb, .rpm, Arch, Slackware) nie. |
 | Data | Knoppie wat die `data`-gids oopmaak. Die API-sleutel van die Bureau of Meteorology bly in DATA COLLECTION › Voortplantingsdata. |
 
 ## Spotverdeling

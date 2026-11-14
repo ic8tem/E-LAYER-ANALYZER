@@ -152,7 +152,7 @@ TAG|SCELTA|DATA COLLECTION 选项卡有两个子选项卡：Spot（会话、PSKR
 TAG|SCELTA|选项卡栏中的菜单可选择六个大洲之一（欧洲、北美洲、南美洲、非洲、亚洲、大洋洲）：墨卡托地图以及 F.A.I. 和极光地图移到该大洲，E-skip 摘要使用该大洲的数据。N0NBH 仅为欧洲和北美洲发布 E-skip：对其他大洲，程序会注明这一点。
 TAG|FONTE|作者规则（IC8TEM），与 YA-MS 相同：不精确的网格坐标（少于 6 个字符）取自 CALL3；如果 CALL3 中该呼号有 6 个字符的网格坐标，则始终以其为准（在 spot 中，以及在 BENCHMARK Es 的日志网格坐标中）。
 TAG|SCELTA|应作者要求的时钟：程序每 5 分钟向两台 NTP 服务器查询，它们选自分布在世界各地的十台服务器（INRIM、PTB、NIST、NRC、NICT、NIC.br、澳大利亚和南非的 NTP 池、Google、Cloudflare）；如果某台服务器没有响应，就换下一台。UTC 时间旁显示 NTP:OK 或 NTP:FAILED。偏差应用于程序的时间；在 Windows 上，若有管理员权限且偏差超过 1 s，还会校正电脑的时钟。
-TAG|SCELTA|应作者要求的更新（从 0.4.5 版起）：程序在启动时及每 6 小时读取 GitHub 仓库 ic8tem/E-LAYER-ANALYZER 的最新 Release，并与当前使用的版本比较。如果该版本较新，就给出提示（窗口和顶部栏中的 ▲ 字样），并可按要求下载本平台的便携版软件包，更新 data 文件夹中的程序文件（用户的 call3.txt 保留），然后关闭，由一个脚本负责替换文件并重新启动程序。启动时还会检查 data/manifest.txt（在 GitHub 上编译时生成）中列出的文件是否齐全，并提议重新下载缺失的文件。
+TAG|SCELTA|应作者要求的更新（从 0.4.5 版起）：程序在启动时及每 30 分钟（0.4.17 版以前为每 6 小时）读取 GitHub 仓库 ic8tem/E-LAYER-ANALYZER 的最新 Release，并与当前使用的版本比较。如果该版本较新，就给出提示（窗口和顶部栏中的 ▲ 字样），并可按要求下载本平台的便携版软件包，更新 data 文件夹中的程序文件（用户的 call3.txt 保留），然后关闭，由一个脚本负责替换文件并重新启动程序。启动时还会检查 data/manifest.txt（在 GitHub 上编译时生成）中列出的文件是否齐全，并提议重新下载缺失的文件。
 TAG|SCELTA|软件包，应作者要求（0.4.18 版）：Windows 64 位、32 位和 ARM64；Linux x86_64、ARM64、armv7l 和 Alpine（musl）；.deb、.rpm、Arch、Slackware 软件包和 AppImage；64 位和 32 位 Raspberry Pi OS；Mac Apple Silicon 和 Intel；FreeBSD amd64 为试验性、未经验证的软件包，因为 Microsoft 不为 FreeBSD 发布 .NET，Avalonia 也没有其原生库。没有 Linux i686 和 OpenBSD 版本，这些系统上没有 .NET。使用系统软件包（.deb、.rpm、Arch、Slackware）时，按作者的选择，程序不会自行更新：它提示新版本，用新软件包安装。AppImage、便携版、Windows 安装程序和 Mac 应用会自行更新。
 H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。

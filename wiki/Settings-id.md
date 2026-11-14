@@ -12,7 +12,7 @@ Sejak versi 0.4.18 tab **PENGATURAN** menghimpun opsi umum program dan distribus
 | Tampilan | Bahasa, skema warna (skema YAEC dan YA-MS serta, sejak versi 0.5.0, enam tema IP-TRX-CTRL: Terang, Malam, Hitam, Biru, Ungu, Hijau) dan **ukuran huruf seluruh program** (85-140 %, seperti di YA-MS). Bahasa dan warna membangun ulang jendela: pengaturan dan spot tetap ada. |
 | Peta dan data prakiraan | Benua, menu yang sama dengan yang ada di bilah tab. |
 | Waktu | Status NTP dan selisih antara waktu server dan jam PC. |
-| Pembaruan | Pemeriksaan di GitHub saat mulai dan setiap 6 jam, pembaruan otomatis dan diam-diam, tombol **Periksa sekarang**. Pembaruan otomatis tidak berlaku untuk paket sistem (.deb, .rpm, Arch, Slackware). |
+| Pembaruan | Pemeriksaan di GitHub saat mulai dan setiap 30 menit, pembaruan otomatis dan diam-diam, tombol **Periksa sekarang**. Pembaruan otomatis tidak berlaku untuk paket sistem (.deb, .rpm, Arch, Slackware). |
 | Data | Tombol yang membuka folder `data`. Kunci API Bureau of Meteorology tetap di DATA COLLECTION › Data propagasi. |
 
 ## Distribusi spot

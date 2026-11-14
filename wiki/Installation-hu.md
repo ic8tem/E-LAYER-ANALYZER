@@ -31,7 +31,7 @@ Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a n
 
 **A rendszercsomagok (.deb, .rpm, Arch, Slackware) nem frissülnek automatikusan.** Velük a program csak jelzi az új verziót: töltse le az új csomagot a Releases oldalról, és telepítse úgy, mint először (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Az automatikus frissítés a Windows telepítővel és zipekkel, a Mac alkalmazással, a hordozható tar.gz csomagokkal és az AppImage-dzsel működik.
 
-**Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 6 óránként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
+**Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 30 percenként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
 
 **A 0.4.12-es verziótól a frissítések automatikusak és csendesek**: ha a GitHubon új verzió van, a program letölti, telepíti és magától újraindul, semmit sem kérdezve. A hiányzó fájlokat is kérdés nélkül újratölti. A frissítési ablak csak a fenti verzióra kattintva jelenik meg, vagy ha a BEÁLLÍTÁSOK fülön (Általános) kikapcsolja az automatikus frissítést.
 

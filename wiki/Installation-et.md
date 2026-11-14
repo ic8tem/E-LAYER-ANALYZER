@@ -31,7 +31,7 @@ Paigalda uus versioon vana peale: seaded, kogutud spotid, logid ja `call3.txt` s
 
 **Süsteemipaketid (.deb, .rpm, Arch, Slackware) ei uuene automaatselt.** Nendega ainult teatab programm uuest versioonist: laadi Releases-lehelt alla uus pakett ja paigalda see nagu esimesel korral (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automaatsed uuendused töötavad Windowsi paigaldaja ja zip-failide, Maci rakenduse, kaasaskantavate tar.gz-pakettide ja AppImage'iga.
 
-**Automaatne uuendamine (alates versioonist 0.4.5).** Käivitamisel ja seejärel iga 6 tunni järel kontrollib programm GitHubi Releases-lehte. Kui ilmub uus versioon, avab programm akna ja näitab ülemisel ribal NTP näidiku kõrval oranži **▲ x.y.z**:
+**Automaatne uuendamine (alates versioonist 0.4.5).** Käivitamisel ja seejärel iga 30 minuti järel kontrollib programm GitHubi Releases-lehte. Kui ilmub uus versioon, avab programm akna ja näitab ülemisel ribal NTP näidiku kõrval oranži **▲ x.y.z**:
 
 **Alates versioonist 0.4.12 on uuendused automaatsed ja vaiksed**: kui GitHubis on uus versioon, laadib programm selle alla, paigaldab ja käivitub ise uuesti midagi küsimata. Ka puuduvad failid laaditakse uuesti alla küsimata. Uuendusaken ilmub ainult üleval versioonil klõpsates või kui lülitad automaatsed uuendused SEADETES (Üldine) välja.
 

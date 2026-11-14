@@ -31,7 +31,7 @@ Instale a nova versão por cima da anterior: as definições, os spots recolhido
 
 **Os pacotes de sistema (.deb, .rpm, Arch, Slackware) não se atualizam automaticamente.** Com eles o programa só assinala a versão nova: descarregue o pacote novo da página Releases e instale-o como da primeira vez (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). A atualização automática funciona com o instalador e os zip de Windows, a aplicação do Mac, os pacotes portáteis tar.gz e a AppImage.
 
-**Atualização automática (a partir da versão 0.4.5).** Ao arrancar e depois a cada 6 horas o programa consulta as Releases do GitHub. Quando sai uma versão nova, abre uma janela e mostra um **▲ x.y.z** laranja ao lado do indicador NTP na barra superior:
+**Atualização automática (a partir da versão 0.4.5).** Ao arrancar e depois a cada 30 minutos o programa consulta as Releases do GitHub. Quando sai uma versão nova, abre uma janela e mostra um **▲ x.y.z** laranja ao lado do indicador NTP na barra superior:
 
 **A partir da versão 0.4.12 as atualizações são automáticas e silenciosas**: quando há uma versão nova no GitHub, o programa descarrega-a, instala-a e reinicia sozinho sem perguntar nada. Também os ficheiros em falta são descarregados de novo sem perguntar. A janela de atualização só aparece com um clique na versão em cima, ou se desligar a atualização automática em DEFINIÇÕES (Gerais).
 

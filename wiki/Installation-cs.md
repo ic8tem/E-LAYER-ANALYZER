@@ -31,7 +31,7 @@ Nainstalujte novou verzi přes starou: nastavení, shromážděné spoty, deník
 
 **Systémové balíčky (.deb, .rpm, Arch, Slackware) se automaticky neaktualizují.** S nimi program novou verzi jen oznámí: stáhněte nový balíček ze stránky Releases a nainstalujte jej stejně jako poprvé (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automatické aktualizace fungují s instalátorem a zipy pro Windows, s aplikací pro Mac, s přenosnými balíčky tar.gz a s AppImage.
 
-**Automatická aktualizace (od verze 0.4.5).** Při spuštění a pak každých 6 hodin program kontroluje Releases na GitHubu. Když vyjde nová verze, otevře okno a vedle ukazatele NTP v horní liště zobrazí oranžové **▲ x.y.z**:
+**Automatická aktualizace (od verze 0.4.5).** Při spuštění a pak každých 30 minut program kontroluje Releases na GitHubu. Když vyjde nová verze, otevře okno a vedle ukazatele NTP v horní liště zobrazí oranžové **▲ x.y.z**:
 
 **Od verze 0.4.12 jsou aktualizace automatické a tiché**: když je na GitHubu nová verze, program ji stáhne, nainstaluje a sám se restartuje, aniž by se na cokoli ptal. Chybějící soubory se také znovu stáhnou bez ptaní. Okno aktualizace se objeví jen po kliknutí na verzi nahoře nebo pokud vypnete automatické aktualizace v NASTAVENÍ (Obecné).
 

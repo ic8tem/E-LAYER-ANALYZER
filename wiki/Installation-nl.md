@@ -31,7 +31,7 @@ Installeer de nieuwe versie over de oude heen: instellingen, verzamelde spots, l
 
 **Systeempakketten (.deb, .rpm, Arch, Slackware) worden niet automatisch bijgewerkt.** Daarmee meldt het programma alleen de nieuwe versie: download het nieuwe pakket van de pagina Releases en installeer het zoals de eerste keer (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automatische updates werken met het Windows-installatieprogramma en de zips, de Mac-app, de draagbare tar.gz-pakketten en de AppImage.
 
-**Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 6 uur controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
+**Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 30 minuten controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
 
 **Vanaf versie 0.4.12 zijn updates automatisch en stil**: als er een nieuwe versie op GitHub staat, downloadt het programma die, installeert die en herstart vanzelf zonder iets te vragen. Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het updatevenster verschijnt alleen met een klik op de versie bovenaan, of als je de automatische updates uitschakelt in INSTELLINGEN (Algemeen).
 

@@ -31,7 +31,7 @@ I-install ang bagong bersyon sa ibabaw ng luma: pinananatili ang mga setting, na
 
 **Hindi kusang nag-a-update ang mga package ng sistema (.deb, .rpm, Arch, Slackware).** Sa mga ito, ipinapaalam lamang ng programa ang bagong bersiyon: i-download ang bagong package mula sa pahinang Releases at i-install ito gaya ng una (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Gumagana ang awtomatikong update sa installer at mga zip ng Windows, sa app ng Mac, sa mga portable na package na tar.gz at sa AppImage.
 
-**Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 6 na oras, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
+**Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 30 minuto, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
 
 **Mula sa bersyon 0.4.12, awtomatiko at tahimik ang mga update**: kapag may bagong bersyon sa GitHub, dina-download ito ng programa, ini-install, at kusang nagre-restart nang walang tinatanong. Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window ng update kapag kinlik ang bersyon sa itaas, o kung papatayin ang awtomatikong update sa MGA SETTING (Pangkalahatan).
 

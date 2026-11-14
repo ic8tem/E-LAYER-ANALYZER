@@ -12,7 +12,7 @@
 | Görünüm | Dil, renk şeması (YAEC ve YA-MS şemaları ve 0.5.0 sürümünden itibaren IP-TRX-CTRL'nin altı teması: Açık, Gece, Siyah, Mavi, Mor, Yeşil) ve **tüm programın yazı tipi boyutu** (%85-140, YA-MS'teki gibi). Dil ve renkler pencereyi yeniden oluşturur: ayarlar ve spot'lar korunur. |
 | Haritalar ve tahmin verileri | Kıta, sekme çubuğundaki menünün aynısı. |
 | Saat | NTP durumu ve sunucu saati ile bilgisayar saati arasındaki fark. |
-| Güncellemeler | Başlangıçta ve her 6 saatte bir GitHub'da denetim, otomatik ve sessiz güncelleme, **Şimdi denetle** düğmesi. Otomatik güncellemeler sistem paketleri (.deb, .rpm, Arch, Slackware) için geçerli değildir. |
+| Güncellemeler | Başlangıçta ve her 30 dakikada bir GitHub'da denetim, otomatik ve sessiz güncelleme, **Şimdi denetle** düğmesi. Otomatik güncellemeler sistem paketleri (.deb, .rpm, Arch, Slackware) için geçerli değildir. |
 | Veriler | `data` klasörünü açan düğme. Bureau of Meteorology API anahtarı DATA COLLECTION › Yayılım verileri bölümünde kalır. |
 
 ## Spot yönlendirme

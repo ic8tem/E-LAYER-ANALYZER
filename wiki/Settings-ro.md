@@ -12,7 +12,7 @@ Din versiunea 0.4.18 fila **SETĂRI** reunește opțiunile generale ale programu
 | Aspect | Limba, schema de culori (schemele YAEC și YA-MS și, din versiunea 0.5.0, cele șase teme ale IP-TRX-CTRL: Luminos, Noapte, Negru, Albastru, Violet, Verde) și **dimensiunea fontului întregului program** (85-140 %, ca în YA-MS). Limba și culorile reconstruiesc fereastra: setările și spoturile se păstrează. |
 | Hărți și date de prognoză | Continentul, același meniu ca în bara filelor. |
 | Ora | Starea NTP și diferența dintre ora serverelor și ceasul PC-ului. |
-| Actualizări | Verificarea pe GitHub la pornire și la fiecare 6 ore, actualizarea automată și silențioasă, butonul **Verifică acum**. Actualizările automate nu sunt valabile pentru pachetele de sistem (.deb, .rpm, Arch, Slackware). |
+| Actualizări | Verificarea pe GitHub la pornire și la fiecare 30 de minute, actualizarea automată și silențioasă, butonul **Verifică acum**. Actualizările automate nu sunt valabile pentru pachetele de sistem (.deb, .rpm, Arch, Slackware). |
 | Date | Butonul care deschide dosarul `data`. Cheia API a Bureau of Meteorology rămâne în DATA COLLECTION › Date de propagare. |
 
 ## Distribuirea spoturilor

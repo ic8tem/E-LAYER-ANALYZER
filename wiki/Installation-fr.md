@@ -31,7 +31,7 @@ Installez la nouvelle version par-dessus l'ancienne : les réglages, les spots c
 
 **Les paquets système (.deb, .rpm, Arch, Slackware) ne se mettent pas à jour automatiquement.** Avec eux, le programme signale seulement la nouvelle version : téléchargez le nouveau paquet depuis la page des Releases et installez-le comme la première fois (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Les mises à jour automatiques fonctionnent avec l'installateur et les zips de Windows, l'app du Mac, les paquets tar.gz portables et l'AppImage.
 
-**Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 6 heures, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
+**Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 30 minutes, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
 
 **Depuis la version 0.4.12, les mises à jour sont automatiques et silencieuses** : quand une nouvelle version est sur GitHub, le programme la télécharge, l'installe et redémarre tout seul sans rien demander. Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre de mise à jour n'apparaît qu'en cliquant sur la version en haut, ou si vous désactivez les mises à jour automatiques dans RÉGLAGES (Général).
 

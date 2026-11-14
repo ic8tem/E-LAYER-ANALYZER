@@ -12,7 +12,7 @@ Desde la versión 0.4.18 la pestaña **AJUSTES** reúne las opciones generales d
 | Aspecto | Idioma, colores (los esquemas de YAEC y YA-MS y, desde la versión 0.5.0, los seis temas de IP-TRX-CTRL: Claro, Noche, Negro, Azul, Violeta, Verde) y **tamaño de la letra de todo el programa** (85-140 %, como en YA-MS). El idioma y los colores reconstruyen la ventana: los ajustes y los spots se conservan. |
 | Mapas y datos de previsión | El continente, el mismo menú de la barra de pestañas. |
 | Hora | Estado NTP y diferencia entre la hora de los servidores y el reloj del PC. |
-| Actualizaciones | Comprobación en GitHub al arrancar y cada 6 horas, actualización automática y silenciosa, botón **Comprobar ahora**. Las actualizaciones automáticas no valen para los paquetes del sistema (.deb, .rpm, Arch, Slackware). |
+| Actualizaciones | Comprobación en GitHub al arrancar y cada 30 minutos, actualización automática y silenciosa, botón **Comprobar ahora**. Las actualizaciones automáticas no valen para los paquetes del sistema (.deb, .rpm, Arch, Slackware). |
 | Datos | Botón que abre la carpeta `data`. La clave API del Bureau of Meteorology sigue en DATA COLLECTION › Datos de propagación. |
 
 ## Reparto de los spots

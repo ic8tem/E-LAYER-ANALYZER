@@ -31,7 +31,7 @@ Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3
 
 **Paket sistem (.deb, .rpm, Arch, Slackware) tidak diperbarui otomatis.** Dengan paket ini program hanya memberi tahu adanya versi baru: unduh paket baru dari halaman Releases lalu pasang seperti pertama kali (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Pembaruan otomatis bekerja dengan installer dan zip Windows, aplikasi Mac, paket tar.gz portabel dan AppImage.
 
-**Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 6 jam program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
+**Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 30 menit program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
 
 **Sejak versi 0.4.12 pembaruan berjalan otomatis dan diam-diam**: saat ada versi baru di GitHub, program mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun. Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela pembaruan hanya muncul dengan klik pada versi di bagian atas, atau jika pembaruan otomatis dimatikan di PENGATURAN (Umum).
 

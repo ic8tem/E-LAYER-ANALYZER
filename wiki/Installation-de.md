@@ -31,7 +31,7 @@ Installieren Sie die neue Version über die alte: Einstellungen, gesammelte Spot
 
 **Systempakete (.deb, .rpm, Arch, Slackware) aktualisieren sich nicht automatisch.** Mit ihnen meldet das Programm nur die neue Version: Laden Sie das neue Paket von der Release-Seite herunter und installieren Sie es wie beim ersten Mal (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Die automatische Aktualisierung funktioniert mit dem Windows-Installationsprogramm und den Zips, der Mac-App, den portablen tar.gz-Paketen und dem AppImage.
 
-**Automatische Aktualisierung (ab Version 0.4.5).** Beim Start und danach alle 6 Stunden prüft das Programm die GitHub-Releases. Ist eine neue Version erschienen, öffnet es ein Fenster und zeigt in der oberen Leiste neben der NTP-Anzeige ein orangefarbenes **▲ x.y.z**:
+**Automatische Aktualisierung (ab Version 0.4.5).** Beim Start und danach alle 30 Minuten prüft das Programm die GitHub-Releases. Ist eine neue Version erschienen, öffnet es ein Fenster und zeigt in der oberen Leiste neben der NTP-Anzeige ein orangefarbenes **▲ x.y.z**:
 
 **Ab Version 0.4.12 erfolgen Updates automatisch und still**: Liegt auf GitHub eine neue Version vor, lädt das Programm sie herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen. Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das Update-Fenster erscheint nur mit einem Klick auf die Version oben oder wenn Sie die automatische Aktualisierung in EINSTELLUNGEN (Allgemein) ausschalten.
 

@@ -12,7 +12,7 @@ A partir da versão 0.4.18 o separador **DEFINIÇÕES** reúne as opções gerai
 | Aspeto | Idioma, esquema de cores (os esquemas do YAEC e do YA-MS e, a partir da versão 0.5.0, os seis temas do IP-TRX-CTRL: Claro, Noite, Preto, Azul, Violeta, Verde) e **tamanho do tipo de letra de todo o programa** (85-140 %, como no YA-MS). O idioma e as cores reconstroem a janela: as definições e os spots mantêm-se. |
 | Mapas e dados de previsão | O continente, o mesmo menu da barra dos separadores. |
 | Hora | Estado do NTP e diferença entre a hora dos servidores e o relógio do PC. |
-| Atualizações | Verificação no GitHub ao arrancar e a cada 6 horas, atualização automática e silenciosa, botão **Verificar agora**. A atualização automática não se aplica aos pacotes de sistema (.deb, .rpm, Arch, Slackware). |
+| Atualizações | Verificação no GitHub ao arrancar e a cada 30 minutos, atualização automática e silenciosa, botão **Verificar agora**. A atualização automática não se aplica aos pacotes de sistema (.deb, .rpm, Arch, Slackware). |
 | Dados | Botão que abre a pasta `data`. A chave API do Bureau of Meteorology fica em DATA COLLECTION › Dados de propagação. |
 
 ## Encaminhamento dos spots

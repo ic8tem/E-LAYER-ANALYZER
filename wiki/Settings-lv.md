@@ -12,7 +12,7 @@ Kopš versijas 0.4.18 cilne **IESTATĪJUMI** apkopo programmas vispārīgās opc
 | Izskats | Valoda, krāsu shēma (YAEC un YA-MS shēmas un, kopš versijas 0.5.0, sešas IP-TRX-CTRL tēmas: Gaiša, Nakts, Melna, Zila, Violeta, Zaļa) un **visas programmas fonta lielums** (85-140 %, tāpat kā YA-MS). Valoda un krāsas pārbūvē logu: iestatījumi un spoti saglabājas. |
 | Kartes un prognožu dati | Kontinents, tā pati izvēlne kā cilņu joslā. |
 | Laiks | NTP stāvoklis un starpība starp serveru laiku un datora pulksteni. |
-| Atjauninājumi | Pārbaude GitHub startējot un ik pēc 6 stundām, automātiska un klusa atjaunināšana, poga **Pārbaudīt tagad**. Automātiskie atjauninājumi neattiecas uz sistēmas pakotnēm (.deb, .rpm, Arch, Slackware). |
+| Atjauninājumi | Pārbaude GitHub startējot un ik pēc 30 minūtēm, automātiska un klusa atjaunināšana, poga **Pārbaudīt tagad**. Automātiskie atjauninājumi neattiecas uz sistēmas pakotnēm (.deb, .rpm, Arch, Slackware). |
 | Dati | Poga, kas atver mapi `data`. Bureau of Meteorology API atslēga paliek DATA COLLECTION › Izplatīšanās dati. |
 
 ## Spotu sadale

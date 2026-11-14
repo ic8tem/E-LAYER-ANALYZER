@@ -31,7 +31,7 @@ Installera den nya versionen ovanpå den gamla: inställningar, insamlade spots,
 
 **Systempaket (.deb, .rpm, Arch, Slackware) uppdateras inte automatiskt.** Med dem meddelar programmet bara den nya versionen: hämta det nya paketet från sidan Releases och installera det som första gången (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automatisk uppdatering fungerar med Windows-installationsprogrammet och zip-filerna, Mac-appen, de portabla tar.gz-paketen och AppImage.
 
-**Automatisk uppdatering (från version 0.4.5).** Vid start och sedan var 6:e timme kontrollerar programmet GitHub Releases. När en ny version har kommit ut öppnar det ett fönster och visar ett orange **▲ x.y.z** bredvid NTP-indikatorn i fältet högst upp:
+**Automatisk uppdatering (från version 0.4.5).** Vid start och sedan var 30:e minut kontrollerar programmet GitHub Releases. När en ny version har kommit ut öppnar det ett fönster och visar ett orange **▲ x.y.z** bredvid NTP-indikatorn i fältet högst upp:
 
 **Från version 0.4.12 är uppdateringarna automatiska och tysta**: när en ny version finns på GitHub laddar programmet ner den, installerar den och startar om av sig självt utan att fråga något. Saknade filer laddas också ner igen utan att fråga. Uppdateringsfönstret visas bara med ett klick på versionen högst upp, eller om du stänger av automatisk uppdatering i INSTÄLLNINGAR (Allmänt).
 

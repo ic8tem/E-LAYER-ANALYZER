@@ -12,7 +12,7 @@ Ab Version 0.4.18 fasst der Reiter **EINSTELLUNGEN** die allgemeinen Optionen de
 | Darstellung | Sprache, Farbschema (die Schemata von YAEC und YA-MS und ab Version 0.5.0 die sechs Themen von IP-TRX-CTRL: Hell, Nacht, Schwarz, Blau, Violett, Grün) und **Schriftgröße des ganzen Programms** (85-140 %, wie in YA-MS). Sprache und Farben bauen das Fenster neu auf: Einstellungen und Spots bleiben erhalten. |
 | Karten und Vorhersagedaten | Der Kontinent, dasselbe Menü wie in der Reiterleiste. |
 | Zeit | NTP-Status und Differenz zwischen der Serverzeit und der PC-Uhr. |
-| Aktualisierungen | Prüfung auf GitHub beim Start und alle 6 Stunden, automatische und stille Aktualisierung, Schaltfläche **Jetzt prüfen**. Die automatische Aktualisierung gilt nicht für Systempakete (.deb, .rpm, Arch, Slackware). |
+| Aktualisierungen | Prüfung auf GitHub beim Start und alle 30 Minuten, automatische und stille Aktualisierung, Schaltfläche **Jetzt prüfen**. Die automatische Aktualisierung gilt nicht für Systempakete (.deb, .rpm, Arch, Slackware). |
 | Daten | Schaltfläche, die den Ordner `data` öffnet. Der API-Schlüssel des Bureau of Meteorology bleibt in DATA COLLECTION › Ausbreitungsdaten. |
 
 ## Spot-Verteilung

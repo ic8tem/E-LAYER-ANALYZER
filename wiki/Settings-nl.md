@@ -12,7 +12,7 @@ Vanaf versie 0.4.18 verzamelt het tabblad **INSTELLINGEN** de algemene opties va
 | Weergave | Taal, kleurenschema (de schema's van YAEC en YA-MS en, vanaf versie 0.5.0, de zes thema's van IP-TRX-CTRL: Licht, Nacht, Zwart, Blauw, Paars, Groen) en **lettergrootte van het hele programma** (85-140 %, zoals in YA-MS). Taal en kleuren bouwen het venster opnieuw op: instellingen en spots blijven behouden. |
 | Kaarten en voorspellingsgegevens | Het continent, hetzelfde menu als in de tabbladbalk. |
 | Tijd | NTP-status en het verschil tussen de tijd van de servers en de pc-klok. |
-| Updates | Controle op GitHub bij het opstarten en elke 6 uur, automatische en stille update, knop **Nu controleren**. Automatische updates gelden niet voor systeempakketten (.deb, .rpm, Arch, Slackware). |
+| Updates | Controle op GitHub bij het opstarten en elke 30 minuten, automatische en stille update, knop **Nu controleren**. Automatische updates gelden niet voor systeempakketten (.deb, .rpm, Arch, Slackware). |
 | Gegevens | Knop die de map `data` opent. De API-sleutel van het Bureau of Meteorology blijft in DATA COLLECTION › Propagatiegegevens. |
 
 ## Spotverdeling

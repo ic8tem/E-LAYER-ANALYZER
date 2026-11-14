@@ -31,7 +31,7 @@ Installeer die nuwe weergawe oor die ou een: instellings, versamelde spots, logs
 
 **Stelselpakkette (.deb, .rpm, Arch, Slackware) word nie outomaties opgedateer nie.** Daarmee meld die program net die nuwe weergawe: laai die nuwe pakket van die Releases-bladsy af en installeer dit soos die eerste keer (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Outomatiese opdaterings werk met die Windows-installeerder en -zips, die Mac-app, die draagbare tar.gz-pakkette en die AppImage.
 
-**Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 6 uur kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
+**Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 30 minute kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
 
 **Vanaf weergawe 0.4.12 is opdaterings outomaties en stil**: wanneer daar 'n nuwe weergawe op GitHub is, laai die program dit af, installeer dit en begin self weer sonder om iets te vra. Ontbrekende lêers word ook sonder vra weer afgelaai. Die opdateringsvenster verskyn net met 'n klik op die weergawe bo, of as jy outomatiese opdaterings in INSTELLINGS (Algemeen) afskakel.
 

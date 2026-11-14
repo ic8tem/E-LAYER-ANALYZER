@@ -31,7 +31,7 @@ Instalē jauno versiju virs vecās: iestatījumi, savāktie spoti, žurnāli un 
 
 **Sistēmas pakotnes (.deb, .rpm, Arch, Slackware) neatjauninās automātiski.** Ar tām programma tikai paziņo par jauno versiju: lejupielādē jauno pakotni no Releases lapas un instalē to tāpat kā pirmo reizi (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automātiskie atjauninājumi darbojas ar Windows instalētāju un zip failiem, Mac lietotni, portatīvajām tar.gz pakotnēm un AppImage.
 
-**Automātiskā atjaunināšana (kopš versijas 0.4.5).** Startējot un pēc tam ik pēc 6 stundām programma pārbauda GitHub Releases. Kad iznāk jauna versija, tā atver logu un augšējā joslā blakus NTP indikatoram parāda oranžu **▲ x.y.z**:
+**Automātiskā atjaunināšana (kopš versijas 0.4.5).** Startējot un pēc tam ik pēc 30 minūtēm programma pārbauda GitHub Releases. Kad iznāk jauna versija, tā atver logu un augšējā joslā blakus NTP indikatoram parāda oranžu **▲ x.y.z**:
 
 **Sākot ar versiju 0.4.12, atjauninājumi ir automātiski un klusi**: kad GitHub ir jauna versija, programma to lejupielādē, instalē un pati restartējas, neko nejautājot. Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Atjaunināšanas logs parādās tikai, noklikšķinot uz versijas augšā, vai ja izslēdz automātiskos atjauninājumus cilnē IESTATĪJUMI (Vispārīgi).
 

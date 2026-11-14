@@ -31,7 +31,7 @@ Zainstaluj nową wersję na starej: ustawienia, zebrane spoty, logi i `call3.txt
 
 **Pakiety systemowe (.deb, .rpm, Arch, Slackware) nie aktualizują się automatycznie.** Z nimi program tylko zgłasza nową wersję: pobierz nowy pakiet ze strony Releases i zainstaluj go tak jak za pierwszym razem (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automatyczne aktualizacje działają z instalatorem i plikami zip dla Windows, aplikacją na Maca, przenośnymi pakietami tar.gz i AppImage.
 
-**Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 6 godzin program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
+**Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 30 minut program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
 
 **Od wersji 0.4.12 aktualizacje są automatyczne i ciche**: gdy na GitHubie jest nowa wersja, program ją pobiera, instaluje i sam uruchamia się ponownie, o nic nie pytając. Brakujące pliki również są pobierane ponownie bez pytania. Okno aktualizacji pojawia się tylko po kliknięciu wersji u góry albo jeśli wyłączysz automatyczne aktualizacje w zakładce USTAWIENIA (Ogólne).
 

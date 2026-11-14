@@ -12,7 +12,7 @@ Mula sa bersiyon 0.4.18, tinitipon ng tab na **MGA SETTING** ang mga pangkalahat
 | Hitsura | Wika, kulay (ang mga scheme ng YAEC at YA-MS at, mula sa bersiyon 0.5.0, ang anim na tema ng IP-TRX-CTRL: Maliwanag, Gabi, Itim, Asul, Lila, Berde) at **laki ng titik ng buong programa** (85-140 %, gaya ng sa YA-MS). Muling binubuo ng wika at kulay ang window: nananatili ang mga setting at ang mga spot. |
 | Mga mapa at datos ng pagtataya | Ang kontinente, ang parehong menu ng bar ng mga tab. |
 | Oras | Kalagayan ng NTP at ang pagkakaiba ng oras ng server at ng orasan ng PC. |
-| Mga update | Pagsusuri sa GitHub sa pagbukas at bawat 6 na oras, awtomatiko at tahimik na update, button na **Suriin ngayon**. Hindi para sa mga package ng sistema (.deb, .rpm, Arch, Slackware) ang awtomatikong update. |
+| Mga update | Pagsusuri sa GitHub sa pagbukas at bawat 30 minuto, awtomatiko at tahimik na update, button na **Suriin ngayon**. Hindi para sa mga package ng sistema (.deb, .rpm, Arch, Slackware) ang awtomatikong update. |
 | Datos | Button na nagbubukas ng folder na `data`. Nananatili ang API key ng Bureau of Meteorology sa DATA COLLECTION › Datos ng propagasyon. |
 
 ## Pamamahagi ng mga spot

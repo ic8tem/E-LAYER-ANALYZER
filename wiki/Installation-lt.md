@@ -31,7 +31,7 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 
 **Sistemos paketai (.deb, .rpm, Arch, Slackware) automatiškai neatsinaujina.** Su jais programa tik praneša apie naują versiją: atsisiųskite naują paketą iš Releases puslapio ir įdiekite jį kaip pirmą kartą (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Automatiniai atnaujinimai veikia su Windows diegimo programa ir zip, Mac programa, nešiojamaisiais tar.gz paketais ir AppImage.
 
-**Automatinis atnaujinimas (nuo 0.4.5 versijos).** Paleidžiant ir vėliau kas 6 valandas programa tikrina GitHub Releases. Pasirodžius naujai versijai, ji atidaro langą ir viršutinėje juostoje šalia NTP indikatoriaus parodo oranžinį **▲ x.y.z**:
+**Automatinis atnaujinimas (nuo 0.4.5 versijos).** Paleidžiant ir vėliau kas 30 minučių programa tikrina GitHub Releases. Pasirodžius naujai versijai, ji atidaro langą ir viršutinėje juostoje šalia NTP indikatoriaus parodo oranžinį **▲ x.y.z**:
 
 **Nuo 0.4.12 versijos atnaujinimai yra automatiniai ir tylūs**: kai GitHub yra nauja versija, programa ją atsisiunčia, įdiegia ir pati paleidžiama iš naujo nieko neklausdama. Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Atnaujinimo langas atsiranda tik spustelėjus versiją viršuje arba jei išjungiate automatinius atnaujinimus kortelėje NUSTATYMAI (Bendrieji).
 

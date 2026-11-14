@@ -31,7 +31,7 @@ Instalează noua versiune peste cea veche: setările, spoturile colectate, logur
 
 **Pachetele de sistem (.deb, .rpm, Arch, Slackware) nu se actualizează automat.** Cu ele programul doar semnalează versiunea nouă: descarcă pachetul nou de pe pagina Releases și instalează-l ca prima dată (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Actualizările automate funcționează cu programul de instalare și zip-urile de Windows, aplicația de Mac, pachetele portabile tar.gz și AppImage.
 
-**Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 6 ore programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
+**Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 30 de minute programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
 
 **Începând cu versiunea 0.4.12 actualizările sunt automate și silențioase**: când pe GitHub există o versiune nouă, programul o descarcă, o instalează și repornește singur fără să întrebe nimic. Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra de actualizare apare doar cu un clic pe versiunea de sus sau dacă dezactivezi actualizările automate în SETĂRI (Generale).
 
