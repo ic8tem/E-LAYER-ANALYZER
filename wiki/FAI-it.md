@@ -33,7 +33,10 @@ Il F.A.I. (Field Aligned Irregularities) è lo scatter da irregolarità allineat
 | IC8FAX - F6DRO | JN44GH (sopra Genova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Germania SW, 28 km da Bruxelles) | 0,88° | 338° / 87° |
 | Beacon DB0FAI (305°) - Dresda via Sheffield (DL5MCG; Dresda puntava a 290° e aveva dichiarato aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (test del 1987 via Budapest, 1569 km) | Budapest sulla scia; celle sotto 1° da 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, campo IGRF del 1990) | JN45MV, scia a 40 km da Ginevra (Ginevra: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (test del 1987 via Budapest, 1569 km, campo IGRF del 1987) | Budapest a 2,53°, appena oltre i 2,5° (2,16° con il campo di oggi); scia a 26 km; più probabile KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Dalla versione 0.4.18 i due casi con una data (1987 e 1990) usano il campo IGRF-14 di quell'anno, finché le stazioni restano quelle del caso.
 
 Scatter point noti nell'elenco: Ginevra, Bruxelles, Budapest, JN92, JN41/42.
 

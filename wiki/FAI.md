@@ -33,7 +33,10 @@ This is the geometric construction used to **check whether a reflection point is
 | IC8FAX - F6DRO | JN44GH (above Genoa) | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (SW Germany, 28 km from Brussels) | 0.88° | 338° / 87° |
 | DB0FAI beacon (305°) - Dresden via Sheffield (DL5MCG; Dresden beamed 290° and reported aurora) | – | 0.3° | – |
-| DL5MCG - SV1DH (1987 test via Budapest, 1569 km) | Budapest on the trail; cells below 1° from 35 km | 2.16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF field of 1990) | JN45MV, trail 40 km from Geneva (Geneva: 4.10°) | 0.76° | 326° / 85° |
+| DL5MCG - SV1DH (1987 test via Budapest, 1569 km, IGRF field of 1987) | Budapest at 2.53°, just beyond 2.5° (2.16° with today's field); trail 26 km away; most probable KN06RV | 2.53° (KN06RV 0.93°) | 95° / 341° |
+
+From version 0.4.18 the two dated cases (1987 and 1990) use the IGRF-14 field of that year, as long as the stations are those of the case.
 
 Known scatter points in the list: Geneva, Brussels, Budapest, JN92, JN41/42.
 
