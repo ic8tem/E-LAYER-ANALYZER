@@ -476,7 +476,7 @@ namespace YAMS
             lblRdCall3.Text = CallDb.Loading ? Lang.T("CALL3: caricamento...")
                 : CallDb.Count > 0 ? Lang.F("CALL3: {0:N0} nominativi", CallDb.Count) : Lang.T("CALL3: nessun archivio (data/call3.txt)");
             if (!CallDb.Loading)
-                lblRdCall3.Text += " · " + Lang.F("a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}", CallDb.ManualCount, CallDb.OverlayCount, CallDb.ClusterCount, CallDb.LearnedCount) + " · G7VRD " + CallDb.G7Count.ToString("N0", CultureInfo.CurrentCulture);
+                lblRdCall3.Text += " · " + Lang.F("a mano {0} · file aggiunti {1} · dal cluster {2} · imparati {3}", CallDb.ManualCount, CallDb.OverlayCount, CallDb.ClusterCount, CallDb.LearnedCount) + " · G7VRD " + CallDb.G7Count.ToString("N0", CultureInfo.CurrentCulture) + " · JTDX " + CallDb.JtdxCount.ToString("N0", CultureInfo.CurrentCulture);
         }
 
         CheckBox chkC3Auto;

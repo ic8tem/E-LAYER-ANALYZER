@@ -16,6 +16,11 @@
 //    ricevuto; le ricerche si fanno in automatico ogni 30 minuti (richiesta dell'autore, 14/11/2026), in gruppi di 40
 //    nominativi, ogni nominativo al massimo una volta al giorno; risultati in data/CALL3-G7VRD.TXT (tenuti un anno);
 //    si spegne con la casella (call3_g7vrd=0);
+//  - strato JTDX (richiesta dell'autore, 14/11/2026): data/grid_data.bin di JTDX (nominativo -> locatore, circa 365.000
+//    voci, molte europee). Fonte meno sicura: vale solo per i nominativi senza locatore a 6 caratteri in tutte le altre
+//    fonti (G7VRD compreso), solo se nello stesso quadrato di quello ricevuto, e non si scrive mai dentro call3.txt.
+//    Formato: qCompress (4 byte di lunghezza + zlib), poi QDataStream: quint32 numero di voci e coppie di QString
+//    (quint32 lunghezza in byte, UTF-16 big-endian) nominativo, locatore. Si puo' sostituire con un file piu' nuovo di JTDX;
 //  - le correzioni (voci a mano, cluster, file aggiunti, G7VRD, LOC6) si scrivono anche dentro data/call3.txt
 //    (richiesta dell'autore, 14/11/2026), cosi' le vedono anche gli altri programmi che usano lo stesso file; gli
 //    strati restano come fonte, perche' l'aggiornamento da MMMonVHF riscrive call3.txt e dopo le si riapplica;
@@ -77,6 +82,50 @@ namespace YAMS
         static int g7Dirty, g7Busy;
         static Timer g7Timer;
         public static int G7Count { get { return g7.Count; } }
+
+        // ---- strato JTDX (data/grid_data.bin): solo locatori a 6 caratteri validi, non LL/MM
+        static Dictionary<string, string> jtdx = new Dictionary<string, string>(StringComparer.Ordinal);
+        public static int JtdxCount { get { return jtdx.Count; } }
+
+        static void JtdxLoad(string dataDir)
+        {
+            try
+            {
+                string f = Path.Combine(dataDir, "grid_data.bin");
+                if (!File.Exists(f)) return;
+                byte[] raw = File.ReadAllBytes(f);
+                if (raw.Length < 8) return;
+                byte[] d;
+                using (MemoryStream ms = new MemoryStream(raw, 4, raw.Length - 4))
+                using (System.IO.Compression.ZLibStream z = new System.IO.Compression.ZLibStream(ms, System.IO.Compression.CompressionMode.Decompress))
+                using (MemoryStream o = new MemoryStream())
+                {
+                    z.CopyTo(o);
+                    d = o.ToArray();
+                }
+                int pos = 0;
+                Func<uint> u32 = () => { uint v = (uint)(d[pos] << 24 | d[pos + 1] << 16 | d[pos + 2] << 8 | d[pos + 3]); pos += 4; return v; };
+                Func<string> qs = () =>
+                {
+                    uint n = u32();
+                    if (n == 0xFFFFFFFF || n == 0) return "";
+                    if (pos + n > d.Length) throw new InvalidDataException();
+                    string t = Encoding.BigEndianUnicode.GetString(d, pos, (int)n); pos += (int)n; return t;
+                };
+                uint count = u32();
+                Dictionary<string, string> r = new Dictionary<string, string>((int)Math.Min(count, 1000000u), StringComparer.Ordinal);
+                for (uint i = 0; i < count && pos + 8 <= d.Length; i++)
+                {
+                    string call = qs().Trim().ToUpperInvariant(), loc = qs().Trim().ToUpperInvariant();
+                    if (call.Length < 3 || loc.Length < 6) continue;
+                    loc = loc.Substring(0, 6);
+                    if (!Precise(loc) || !Astro.TryLocator(loc, out LatLon _)) continue;
+                    r[call] = loc;
+                }
+                jtdx = r;
+            }
+            catch { }
+        }
 
         static string G7Get(string call) { KeyValuePair<string, DateTime> v; return call != null && g7.TryGetValue(call, out v) ? v.Key : ""; }
 
@@ -225,7 +274,7 @@ namespace YAMS
         {
             DataDir = dataDir;
             FilePath = Path.Combine(dataDir, "call3.txt");
-            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(30)); }
+            if (g7Timer == null) { string dd = dataDir; ThreadPool.QueueUserWorkItem(_ => JtdxLoad(dd)); G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(30)); }
             if (Loading) return;
             Loading = true;
             ThreadPool.QueueUserWorkItem(_ =>
@@ -522,6 +571,9 @@ namespace YAMS
             string g = G7Get(key);
             if (g.Length == 6 && (sq.Length == 0 || g.StartsWith(sq, StringComparison.Ordinal))) return g;
             if (g.Length == 0) G7Request(key);
+            // ultimo: JTDX (grid_data.bin), solo nello stesso quadrato di quello ricevuto
+            string j;
+            if (sq.Length == 4 && jtdx.TryGetValue(key, out j) && j.StartsWith(sq, StringComparison.Ordinal)) return j;
             return r;
         }
 
