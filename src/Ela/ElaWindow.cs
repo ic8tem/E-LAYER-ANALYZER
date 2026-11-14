@@ -464,6 +464,12 @@ namespace ELA
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));
                 fai.ShotPreset(2); await Task.Delay(2500); Shot(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.png"));
                 fai.ShotIso(46.2, 6.15); await Task.Delay(2500); Shot(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.txt"), fai.ResultText); } catch { }
+                // casi di verifica con la data: campo IGRF dell'anno (1990, 1987); risultati in testo per i documenti
+                fai.ShotPreset(3); await Task.Delay(2500); Shot(Path.Combine(dir, "2f_fai_scia_IC8FAX_FA1MXE_1990.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2f_fai_scia_IC8FAX_FA1MXE_1990.txt"), fai.ResultText); } catch { }
+                fai.ShotPreset(4); await Task.Delay(2500); Shot(Path.Combine(dir, "2g_fai_scia_DL5MCG_SV1DH_1987.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2g_fai_scia_DL5MCG_SV1DH_1987.txt"), fai.ResultText); } catch { }
                 fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
                 tabs.Select(4);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }

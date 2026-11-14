@@ -42,10 +42,22 @@ namespace ELA
         {
             new[] { "IC8FAX - F6DRO", "IC8FAX", "JN70CN", "F6DRO", "JN03TJ" },
             new[] { "IC8FAX - G4LOH", "IC8FAX", "JN70CN", "G4LOH", "IO70JC" },
-            new[] { "IC8FAX - FA1MXE (1° QSO F.A.I., 1990)", "IC8FAX", "JN70CN", "FA1MXE", "JN05GQ" },
+            new[] { "IC8FAX - FA1MXE (1° QSO F.A.I., 1990)", "IC8FAX", "JN70CN", "FA1MXE", "JN05GQ", "1990" },
             // DL5MCG [6]: test DL4MEA-DL5MCG con SV1DH, 2 m, giugno-luglio 1987, 1571 km, scatter «sopra Budapest»
-            new[] { "DL5MCG - SV1DH (1987, via Budapest)", "DL5MCG", "JN58KH", "SV1DH", "KM27AW" }
+            new[] { "DL5MCG - SV1DH (1987, via Budapest)", "DL5MCG", "JN58KH", "SV1DH", "KM27AW", "1987" }
         };
+
+        // casi di verifica con una data (richiesta dell'autore, 14/11/2026): campo IGRF dell'anno del collegamento, finche'
+        // le due stazioni restano quelle del caso; NaN = campo di oggi
+        double PresetYear()
+        {
+            if (aurora) return double.NaN;
+            string a = (txtA.Text ?? "").Trim().ToUpperInvariant(), b = (txtB.Text ?? "").Trim().ToUpperInvariant();
+            foreach (string[] p in FaiPresets)
+                if (p.Length > 5 && a == (p[1] + " " + p[2]).ToUpperInvariant() && b == (p[3] + " " + p[4]).ToUpperInvariant())
+                    return Igrf.YearOf(p[5]);
+            return double.NaN;
+        }
         // scatter point noti (pagina F.A.I. di IC8FAX, articolo IC8FAX-IC8TEM, DL5MCG)
         static readonly string[][] KnownSp =
         {
@@ -192,6 +204,7 @@ namespace ELA
 
         // per le fotografie automatiche
         public void ShotPreset(int i) { cmbPreset.SelectedIndex = i; }
+        public string ResultText { get { return txtRes.Text ?? ""; } }
         public PerpPoint LastBest;
         public void ShotPair(string a, string b) { txtA.Text = a; txtB.Text = b; cmbMode.SelectedIndex = 0; Recalc(); }
         public void ShotIsoA(string a, double lat, double lon) { txtA.Text = a; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
@@ -241,7 +254,7 @@ namespace ELA
         public void Recalc(bool user)
         {
             Geo.K = chkRefr.IsChecked == true ? 4.0 / 3.0 : 1.0;
-            try { RecalcCore(user); }
+            try { using (Igrf.At(PresetYear())) RecalcCore(user); }
             finally { Geo.K = 1.0; }
         }
 
@@ -260,7 +273,8 @@ namespace ELA
             if (pk != pairKey) { pairKey = pk; LastBest = null; }   // lo scatter consigliato vale solo per la coppia con cui e' stato calcolato
             map.Cells.Clear(); map.Lines.Clear(); map.Markers.Clear(); map.Legend.Clear(); map.Info.Clear(); map.LegendTitle = "";
             qtf.Clear();
-            map.Caption = (aurora ? "AURORA" : "F.A.I.") + " - " + Igrf.Info + " - " + Lang.F("quota {0:F0} km", H);
+            double py = PresetYear();
+            map.Caption = (aurora ? "AURORA" : "F.A.I.") + " - " + (double.IsNaN(py) || !Igrf.HasHistory ? Igrf.Info : Lang.F("IGRF-14 dell'anno {0:F0} (caso di verifica)", Math.Floor(py))) + " - " + Lang.F("quota {0:F0} km", H);
             if (aurora && chkOval.IsChecked == true) DrawOval();
             StringBuilder sb = new StringBuilder();
             if (double.IsNaN(aLat)) impossible = Lang.T("Manca la stazione A: imposta il locator della stazione in alto o scrivilo nella casella Stazione A.");
