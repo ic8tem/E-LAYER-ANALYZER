@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0: 新しいバージョンを確認しない。aggio
 LI|lobo_diagramma、angolo_beta、lunghezza_scie、giudizio_classico: 計算のチェックボックス。
 LI|raggio_iniziale（0 = ITU の 2 倍、1 = ITU、2 = 除外）、durata_ping（0 = λ²、1 = 観測値）。
 LI|rmob_osservatore、rmob_automatico、rmob_url: RMOB。
+LI|psk_rimando=0: UDP で受けた MS のデコード (MSK144、FSK441、PSK2K、JTMS) を PSKReporter へ転送する機能をオフにします。初期設定でオンで、自動で動作します: PSKReporter に報告を送っている局の中に自局のコールサインが 20 分以上見当たらない場合 (デジタルモードソフトが送っていない)、YA-MS が 5 分ごとに自局を受信局としてデコードした MS 局を送ります。デジタルモードソフトが送信を再開するとすぐに YA-MS は止まります。開始と停止は UDP コンソールの 1 行で知らせます。
 TAG|ATTENZIONE|config.ini は、プログラムを閉じた状態でのみ編集してください。YA-MS は終了時にこのファイルを書き直します。
 H1|14. よく使う手順
 H2|14.1 流星群でのスケジュールの準備

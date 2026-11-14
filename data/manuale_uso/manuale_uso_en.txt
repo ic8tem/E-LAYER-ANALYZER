@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0: do not check for new versions; aggiornamenti_salta
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: the calculation checkboxes.
 LI|raggio_iniziale (0 = twice the ITU value, 1 = ITU, 2 = excluded), durata_ping (0 = λ², 1 = observed).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|psk_rimando=0: turns off the forwarding to PSKReporter of the MS decodes (MSK144, FSK441, PSK2K, JTMS) received via UDP. It is on by default and works by itself: if your callsign has been missing for more than 20 minutes from the stations sending reports to PSKReporter (the digital program is not sending), YA-MS sends every 5 minutes the MS stations you decode, with you as receiver; as soon as the digital program sends again, YA-MS stops. A line in the UDP console says when it starts and stops.
 TAG|ATTENZIONE|Edit config.ini only with the program closed: YA-MS rewrites it when it closes.
 H1|14. Typical procedures
 H2|14.1 Preparing a sked on a shower

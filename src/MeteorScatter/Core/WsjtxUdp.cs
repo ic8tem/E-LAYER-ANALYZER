@@ -79,6 +79,8 @@ namespace YAMS
             cfg.Set("udp_forward", Forward); cfg.Set("udp_auto", AutoStart);
         }
 
+        public static void Note(string s) { Say(s); }   // riga nella console UDP da altre classi (PskRelay)
+
         static void Say(string s)
         {
             lock (logLk) { Log.Enqueue(DateTime.UtcNow.ToString("HH:mm:ss", CultureInfo.InvariantCulture) + "  " + s); while (Log.Count > 300) Log.Dequeue(); }

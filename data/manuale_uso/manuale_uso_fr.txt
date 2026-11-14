@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0 : ne pas rechercher les nouvelles versions ; aggior
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico : les cases du calcul.
 LI|raggio_iniziale (0 = double de l'ITU, 1 = ITU, 2 = exclu), durata_ping (0 = λ², 1 = observée).
 LI|rmob_osservatore, rmob_automatico, rmob_url : RMOB.
+LI|psk_rimando=0 : désactive le renvoi vers PSKReporter des décodages MS (MSK144, FSK441, PSK2K, JTMS) reçus par UDP. Il est activé par défaut et fonctionne seul : si votre indicatif est absent depuis plus de 20 minutes des stations qui envoient des rapports à PSKReporter (le logiciel numérique n'envoie pas), YA-MS envoie toutes les 5 minutes les stations MS que vous décodez, avec vous comme récepteur ; dès que le logiciel numérique envoie de nouveau, YA-MS s'arrête. Une ligne dans la console UDP indique quand il démarre et s'arrête.
 TAG|ATTENZIONE|Ne modifiez config.ini que lorsque le programme est fermé : à la fermeture, YA-MS le réécrit.
 H1|14. Procédures types
 H2|14.1 Préparer un sked sur un essaim

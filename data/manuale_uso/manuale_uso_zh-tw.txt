@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0：不檢查新版本；aggiornamenti_salta：已略
 LI|lobo_diagramma、angolo_beta、lunghezza_scie、giudizio_classico：計算相關的核取方塊。
 LI|raggio_iniziale（0 = ITU 值的兩倍，1 = ITU，2 = 不計入），durata_ping（0 = λ²，1 = 觀測值）。
 LI|rmob_osservatore、rmob_automatico、rmob_url：RMOB。
+LI|psk_rimando=0：關閉將經 UDP 收到的 MS 解碼（MSK144、FSK441、PSK2K、JTMS）轉發到 PSKReporter。預設開啟並自動運作：如果你的呼號在向 PSKReporter 傳送報告的電台中缺席超過 20 分鐘（數位模式軟體沒有傳送），YA-MS 每 5 分鐘以你為接收方傳送你解碼到的 MS 電台；數位模式軟體一旦恢復傳送，YA-MS 即停止。UDP 主控台中的一行會提示何時開始、何時停止。
 TAG|ATTENZIONE|只能在程式關閉時修改 config.ini：YA-MS 在關閉時會重寫該檔案。
 H1|14. 典型操作
 H2|14.1 為某個流星雨準備 sked

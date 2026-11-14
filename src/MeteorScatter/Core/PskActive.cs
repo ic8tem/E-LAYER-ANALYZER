@@ -29,6 +29,7 @@ namespace YAMS
         public static bool Enabled = true;
         public static int Monitors, Requests, Errors;
         public static DateTime LastOkUtc;
+        public static DateTime SelfSeenUtc;   // il mio nominativo tra chi manda rapporti, con un programma che non e' YA-MS (PskRelay)
         public static string LastError = "";
 
         static readonly object lk = new object();
@@ -61,7 +62,7 @@ namespace YAMS
 
         static void Tick(object st)
         {
-            if (!Enabled || Interlocked.Exchange(ref busy, 1) == 1) return;
+            if (!(Enabled || PskRelay.Enabled) || Interlocked.Exchange(ref busy, 1) == 1) return;
             try { Fetch(); }
             finally { busy = 0; }
         }
@@ -103,6 +104,8 @@ namespace YAMS
                     string loc = (x.GetAttribute("locator") ?? "").Trim();
                     string md = (x.GetAttribute("mode") ?? mode ?? "").Trim().ToUpperInvariant();
                     double hz;
+                    if (call.Length > 0 && call == WsjtxUdp.DeCall && (x.GetAttribute("decoderSoftware") ?? "").IndexOf("YA-MS", StringComparison.OrdinalIgnoreCase) < 0)
+                        SelfSeenUtc = now;
                     if (call.Length == 0 || !double.TryParse(x.GetAttribute("frequency") ?? "", NumberStyles.Float, CultureInfo.InvariantCulture, out hz)) continue;
                     if (Array.IndexOf(PskMqtt.MsModes, md) < 0) continue;   // solo i modi MS
                     string band = MsBands.Name(hz / 1000.0);

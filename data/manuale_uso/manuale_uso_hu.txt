@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0: ne ellenőrizze az új verziókat; aggiornamenti_s
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: a számítás jelölőnégyzetei.
 LI|raggio_iniziale (0 = az ITU kétszerese, 1 = ITU, 2 = kizárva), durata_ping (0 = λ², 1 = megfigyelt).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|psk_rimando=0: kikapcsolja az UDP-n kapott MS dekódolások (MSK144, FSK441, PSK2K, JTMS) továbbítását a PSKReporternek. Alapból be van kapcsolva és magától működik: ha a hívójeled több mint 20 perce hiányzik a PSKReporternek jelentést küldő állomások közül (a digitális program nem küld), a YA-MS 5 percenként elküldi az általad dekódolt MS állomásokat, téged megadva vevőként; amint a digitális program újra küld, a YA-MS leáll. Egy sor az UDP konzolban jelzi az indulást és a leállást.
 TAG|ATTENZIONE|A config.ini fájlt csak bezárt program mellett módosítsa: bezáráskor a YA-MS újraírja.
 H1|14. Tipikus eljárások
 H2|14.1 Sked előkészítése egy rajra

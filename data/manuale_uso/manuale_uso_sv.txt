@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0: kontrollera inte nya versioner; aggiornamenti_salt
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: beräkningens kryssrutor.
 LI|raggio_iniziale (0 = dubbla ITU-värdet, 1 = ITU, 2 = utesluten), durata_ping (0 = λ², 1 = observerad).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|psk_rimando=0: stänger av vidarebefordran till PSKReporter av MS-avkodningar (MSK144, FSK441, PSK2K, JTMS) mottagna via UDP. Den är på från början och sköter sig själv: saknas din anropssignal i mer än 20 minuter bland stationerna som skickar rapporter till PSKReporter (det digitala programmet skickar inte), skickar YA-MS var 5:e minut de MS-stationer du avkodar, med dig som mottagare; så snart det digitala programmet skickar igen slutar YA-MS. En rad i UDP-konsolen visar när den startar och slutar.
 TAG|ATTENZIONE|Ändra config.ini bara när programmet är stängt: när det stängs skriver YA-MS om filen.
 H1|14. Typiska tillvägagångssätt
 H2|14.1 Förbereda ett sked på en svärm

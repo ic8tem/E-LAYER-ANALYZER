@@ -225,6 +225,7 @@ LI|controlla_aggiornamenti=0: nicht nach neuen Versionen suchen; aggiornamenti_s
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: die Kästchen der Berechnung.
 LI|raggio_iniziale (0 = doppelter ITU-Wert, 1 = ITU, 2 = ausgeschlossen), durata_ping (0 = λ², 1 = beobachtet).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|psk_rimando=0: schaltet die Weiterleitung der über UDP empfangenen MS-Dekodierungen (MSK144, FSK441, PSK2K, JTMS) an PSKReporter aus. Sie ist standardmäßig an und arbeitet selbstständig: fehlt dein Rufzeichen seit mehr als 20 Minuten unter den Stationen, die an PSKReporter melden (das Digitalprogramm sendet nicht), schickt YA-MS alle 5 Minuten die MS-Stationen, die du dekodierst, mit dir als Empfänger; sobald das Digitalprogramm wieder sendet, hört YA-MS auf. Eine Zeile in der UDP-Konsole meldet Start und Stopp.
 TAG|ATTENZIONE|Ändere config.ini nur bei geschlossenem Programm: Beim Schließen schreibt YA-MS die Datei neu.
 H1|14. Typische Vorgehensweisen
 H2|14.1 Ein Sked auf einem Strom vorbereiten

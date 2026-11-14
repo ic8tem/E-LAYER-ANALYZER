@@ -385,6 +385,10 @@ namespace YAMS
                 if (WsjtxUdp.AutoStart && !WsjtxUdp.Running) WsjtxUdp.Start();
                 PskActive.Enabled = cfg.GetB("psk_monitor_attivi", true);
                 Ft8Enabled = cfg.GetB("ft8_isolati", true);
+                // metodo nascosto: rimando a PSKReporter delle decodifiche MS via UDP se il programma digitale non le manda
+                PskRelay.Enabled = cfg.GetB("psk_rimando", true);
+                cfg.Set("psk_rimando", PskRelay.Enabled);
+                PskRelay.Start();
                 PskActive.Start();
             }
         }
