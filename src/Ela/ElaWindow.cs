@@ -110,6 +110,8 @@ namespace ELA
             // --- linguette
             Filters.Load(Station.Cfg);   // filtri degli spot (colonna destra di DATA COLLECTION)
             Continents.Load();           // continente scelto (menu nella barra delle linguette)
+            // campo IGRF prima delle linguette: i banchi di prova calcolano subito, in background, con l'epoca del QSO
+            if (!Igrf.Loaded) Igrf.Load(AppPaths.DataDir, DateTime.UtcNow);
             es = new EsTab();
             bench = new BenchTab();
             bench50 = new BenchMultiTab();
@@ -283,7 +285,7 @@ namespace ELA
             {
                 startedOnce = true;
                 string dataDir = AppPaths.DataDir;
-                Igrf.Load(dataDir, DateTime.UtcNow);
+                if (!Igrf.Loaded) Igrf.Load(dataDir, DateTime.UtcNow);
                 if (Program.ScreenshotDir == null) Igrf.CheckUpdateSilent(dataDir, Station.Cfg);   // nuova generazione IGRF, senza chiedere
                 SpotStore.Init(dataDir);
                 SpotStore.LoadRecent();
