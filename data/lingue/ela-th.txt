@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	ช่วง QTF ตามรอยทาง (ค่าเบี่ยงเบน ≤ 1.5°, ภายในช่วง Lange-Hesse ของทั้งสองสถานี):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	ช่วงของจุดกระเจิง (Lange-Hesse: 370-1100 km ที่ละติจูดแม่เหล็กโลก 54° เลื่อนตามมุมเอียง IGRF-14 ของแต่ละสถานี): {0}; {1} ความสูงประมาณ 110 km ความตั้งฉากภายใน ±3°
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	จุดกระเจิงที่เสนออยู่นอกช่วง Lange-Hesse สำหรับอย่างน้อยหนึ่งสถานี: เป็นไปได้ แต่มีโอกาสน้อยกว่า
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	ตัวกรองในเครื่อง: ทิ้งบรรทัดของคลัสเตอร์ที่ต่ำกว่า 27990.0 kHz และสูงกว่า 145 MHz (ไม่แสดงและไม่เก็บ); ในช่วง 430-440 MHz ให้ผ่านเฉพาะสปอตออโรรา
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	การเก็บข้อมูลใช้ร่วมกันทั้งโปรแกรม: ทุกสปอตที่ได้รับใน DATA COLLECTION จะผ่านตัวกรองเหล่านี้และไปยังแท็บของแต่ละโหมดการแพร่กระจาย
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	กฎ 28, 40, 50 และ 70 MHz (กฎของผู้เขียนและ IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	บน 40 MHz (8 m) ระยะทางต่ำสุดได้มาด้วยวิธีเดียวกัน ({0:F0} km) และใช้ได้เฉพาะระยะทางภายในฮอปแรกของเรขาคณิตชั้น E ({1:F0} km)
+in 70 MHz (km)	บน 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 และ FT4 บน 70 MHz ไปที่ sporadic-E แม้อยู่ในหน้าต่าง meteor scatter ของแผนความถี่ (70.154 MHz คือความถี่ของ FT8)
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 และ FT4 บน 50 MHz: เป็น sporadic-E เฉพาะเมื่อเป็นส่วนหนึ่งของเมฆ คือมีสปอต 50 MHz อีกอันที่มีจุดกึ่งกลางอยู่ใกล้กัน; สปอตเดี่ยวไปที่ meteor scatter
+punto medio entro (km)	จุดกึ่งกลางภายใน (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 และ JT65 บน 144 MHz เป็น EME และไม่เข้าสู่ sporadic-E เว้นแต่มี <ES> ในข้อความ
+sì	ใช่
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	ตัวกรองในเครื่อง: ทิ้งบรรทัด (อยู่นอกช่วง 27990 kHz - 145 MHz; ในช่วง 430-440 MHz ให้ผ่านเฉพาะสปอตออโรรา)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(ทิ้ง: เกินฮอปแรก {0:F0} km บน 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(ทิ้ง: Q65 หรือ JT65 บน 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 บน 50 MHz ที่ไม่มีสปอตอื่นภายใน {0:F0} นาทีซึ่งมีจุดกึ่งกลางภายใน {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	ทิ้งโดยตัวกรองในเครื่อง: {0}
+IMPOSTAZIONI	การตั้งค่า
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): สีเหลือง เฉพาะภายในฮอปแรก
+Generali	ทั่วไป
+Smistamento degli spot	การคัดแยกสปอต
+Impostazioni generali	การตั้งค่าทั่วไป
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	เป็นข้อมูลเดียวกับแถวด้านบน: ใช้กับทุกแท็บ รวมถึง METEOR SCATTER
+Aspetto	รูปลักษณ์
+Lingua	ภาษา
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	ขนาดแบบอักษรใช้กับทั้งโปรแกรม ตั้งแต่ 85 ถึง 140 % เหมือนใน YA-MS ภาษาและธีมจะสร้างหน้าต่างใหม่: การตั้งค่าและสปอตยังคงอยู่
+Mappe e dati previsionali	แผนที่และข้อมูลพยากรณ์
+Continente	ทวีป
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	ย้ายแผนที่ Mercator ไปยังทวีปที่เลือกและเลือกข้อมูลพยากรณ์ (N0NBH E-skip สำหรับยุโรปและอเมริกาเหนือ) เป็นเมนูเดียวกับในแถบแท็บ
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	โปรแกรมตรวจเวลากับเซิร์ฟเวอร์ NTP เมื่อเริ่มทำงานและทุก 5 นาที และใช้เวลาที่ถูกต้องในการคำนวณ บน Windows เมื่อมีสิทธิ์ผู้ดูแลระบบ จะแก้ไขนาฬิกาของ PC ด้วย หากข้อความด้านบนเป็น NTP:FAILED แสดงว่าเครือข่ายบล็อกพอร์ต UDP 123
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	ตรวจหาอัปเดตบน GitHub (เมื่อเริ่มโปรแกรมและทุก 6 ชั่วโมง)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	อัปเดตอัตโนมัติแบบเงียบ: ดาวน์โหลดและติดตั้งเวอร์ชันใหม่โดยไม่ถาม
+Controlla adesso	ตรวจเดี๋ยวนี้
+Versione in uso: {0}	เวอร์ชันที่ใช้อยู่: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	การอัปเดตอัตโนมัติใช้ได้กับทุกแพ็กเกจ เพราะโปรแกรมทำงานจากโฟลเดอร์ของผู้ใช้เสมอ: โฟลเดอร์ที่เลือกด้วยตัวติดตั้งหรือ zip บน Windows, แอปบน Mac, ~/E-LAYER-ANALYZER บน Linux เมื่อใช้แพ็กเกจ .deb, .rpm, Arch, Slackware และ AppImage จะอัปเดตสำเนาใน ~/E-LAYER-ANALYZER: ตัวจัดการแพ็กเกจยังคงแสดงเวอร์ชันที่ติดตั้งครั้งแรก จนกว่าคุณจะติดตั้งแพ็กเกจใหม่ หากโฟลเดอร์ของโปรแกรมเขียนไม่ได้ โปรแกรมจะแจ้ง และต้องดาวน์โหลดเวอร์ชันใหม่ด้วยตนเองจากหน้า Release
+Apri la cartella dei dati	เปิดโฟลเดอร์ข้อมูล
+Dati	ข้อมูล
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	ข้อมูลทั้งหมดของโปรแกรมอยู่ในโฟลเดอร์ data ข้างโปรแกรม (ไม่มีอะไรใน AppData) สปอตที่เก็บรวบรวมจะถูกลบเมื่อปิดโปรแกรม คีย์ API ของ Bureau of Meteorology ใส่ได้ใน DATA COLLECTION ข้อมูลการแพร่กระจาย
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - ความต่างระหว่างเวลาของเซิร์ฟเวอร์กับเวลาของ PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - ไม่สามารถติดต่อเซิร์ฟเวอร์ NTP ใดได้: โปรแกรมใช้นาฬิกาของ PC
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	ทุกสปอตที่ได้รับใน DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) จะถูกตรวจกับกฎตามลำดับในตาราง: กฎแรกที่เข้าเงื่อนไขจะตัดสินแท็บ ทางขวาคือตัวกรองของแต่ละโหมด พร้อมค่าที่แก้ไขได้และการทดสอบบรรทัดของคลัสเตอร์
+Se lo spot...	ถ้าสปอต...
+Valori	ค่า
+va a	ไปที่
+nessuna linguetta	ไม่มีแท็บ
+è fuori dalla gamma del filtro locale	อยู่นอกช่วงของตัวกรองในเครื่อง
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	ต่ำกว่า 27990 kHz หรือสูงกว่า 145 MHz; ในช่วง 430-440 MHz เฉพาะออโรรา
+filtro locale spento	ตัวกรองในเครื่องปิดอยู่
+scartato	ทิ้ง
+contiene AUE, AU-E o AURORAL E	มี AUE, AU-E หรือ AURORAL E
+contiene una parola dell'aurora (o modo AU)	มีคำของออโรรา (หรือโหมด AU)
+contiene una parola del F.A.I. (o modo FAI)	มีคำของ F.A.I. (หรือโหมด FAI)
+ha un modo del meteor scatter o <MS>	มีโหมด meteor scatter หรือ <MS>
+cade in una finestra MS del bandplan	อยู่ในหน้าต่าง MS ของแผนความถี่
+in 50 MHz non esclusiva	บน 50 MHz ไม่เด็ดขาด
+FT8 e FT4 in 50 e 70 MHz esclusi	ยกเว้น FT8 และ FT4 บน 50 และ 70 MHz
+è FT8 o FT4 in 50 MHz senza nube	เป็น FT8 หรือ FT4 บน 50 MHz ที่ไม่มีเมฆ
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	ไม่มีสปอตอื่นภายใน {0:F0} นาทีที่มีจุดกึ่งกลางภายใน {1:F0} km
+regola spenta	กฎปิดอยู่
+meteor scatter (non E-sporadico)	meteor scatter (ไม่ใช่ sporadic-E)
+è Q65 o JT65 in 144 MHz	เป็น Q65 หรือ JT65 บน 144 MHz
+salvo <ES> nel testo	เว้นแต่มี <ES> ในข้อความ
+EME: scartato	EME: ทิ้ง
+contiene una scritta di altra propagazione	มีข้อความของการแพร่กระจายแบบอื่น
+non E-sporadico	ไม่ใช่ sporadic-E
+è transequatoriale	เป็นแบบข้ามเส้นศูนย์สูตร
+fascia di inclinazione ± {0:F0}°	แถบมุมเอียง ± {0:F0}°
+non E-sporadico (TEP)	ไม่ใช่ sporadic-E (TEP)
+è in 28 MHz	อยู่บน 28 MHz
+da {0:F0} km	ตั้งแต่ {0:F0} km
+è in 40 MHz	อยู่บน 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	ตั้งแต่ {0:F0} ถึง {1:F0} km (ฮอปแรก)
+è in 50 MHz	อยู่บน 50 MHz
+è in 70 MHz	อยู่บน 70 MHz
+è in 144 MHz	อยู่บน 144 MHz
+oltre {0:F0} km, con conferma	เกิน {0:F0} km พร้อมการยืนยัน
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	ไม่เข้ากฎใดเลย (tropo, 432 MHz, HF...)
+resta in Spot raccolti	คงอยู่ใน สปอตที่เก็บรวบรวม
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	โปรแกรมติดตั้งด้วยแพ็กเกจ {0}: หากต้องการอัปเดต ให้ดาวน์โหลดแพ็กเกจใหม่จากหน้า release แล้วติดตั้งเหมือนครั้งแรก
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	การอัปเดตอัตโนมัติใช้กับตัวติดตั้งและ zip ของ Windows, แอปของ Mac, ไฟล์ .tar.gz และ AppImage เมื่อใช้แพ็กเกจของระบบ (.deb, .rpm, Arch, Slackware) โปรแกรมจะไม่อัปเดตเอง: จะแจ้งเวอร์ชันใหม่ ซึ่งติดตั้งได้โดยดาวน์โหลดแพ็กเกจใหม่จากหน้า Release หากโฟลเดอร์ของโปรแกรมเขียนไม่ได้ โปรแกรมจะแจ้ง และต้องดาวน์โหลดเวอร์ชันใหม่ด้วยตนเอง

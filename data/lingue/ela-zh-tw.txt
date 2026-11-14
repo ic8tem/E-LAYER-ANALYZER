@@ -734,3 +734,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	沿餘跡的 QTF 範圍（偏差 ≤ 1.5°，在兩個電台的 Lange-Hesse 範圍內）：
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	散射點範圍（Lange-Hesse：地磁緯度 54° 處為 370-1100 km，依各電台的 IGRF-14 磁傾角平移）：{0}；{1}。高度約 110 km，垂直條件 ±3° 以內。
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	所提出的散射點至少對一個電台不在 Lange-Hesse 範圍內：仍有可能，但機率較低。
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	本機篩選：捨棄低於 27990.0 kHz 與高於 145 MHz 的 Cluster 行（不顯示也不儲存）；在 430-440 MHz 只放行極光 spot
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	整個程式共用同一套資料收集：在 DATA COLLECTION 收到的每一筆 spot 都會經過這些篩選器，再送到各傳播模式的頁籤。
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28、40、50 與 70 MHz 規則（作者規則與 IK3XTV）
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	在 40 MHz（8 m），最短距離以相同方式求得（{0:F0} km），且只接受 E 層幾何第一跳以內的距離（{1:F0} km）。
+in 70 MHz (km)	70 MHz（km）
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	70 MHz 的 FT8 與 FT4 即使落在頻段計畫的流星散射頻率窗內，也歸散塊 E 層（70.154 MHz 是 FT8 的頻率）。
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	50 MHz 的 FT8 與 FT4：只有屬於一片雲時才是散塊 E 層，也就是附近有另一筆中點相近的 50 MHz spot；孤立的 spot 歸流星散射
+punto medio entro (km)	中點距離不超過（km）
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	144 MHz 的 Q65 與 JT65 屬於 EME，不會進入散塊 E 層，除非文字中有 <ES>。
+sì	是
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	本機篩選：已捨棄此行（在 27990 kHz - 145 MHz 範圍外；在 430-440 MHz 只放行極光 spot）
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	（已捨棄：40 MHz 超出第一跳 {0:F0} km）
+(scartato: Q65 o JT65 in 144 MHz = EME)	（已捨棄：144 MHz 的 Q65 或 JT65 = EME）
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	（50 MHz 的 FT8/FT4，{0:F0} 分鐘內沒有中點在 {1:F0} km 以內的其他 spot：流星散射）
+scartate dal filtro locale: {0}	被本機篩選捨棄：{0}
+IMPOSTAZIONI	設定
+8 m (40 MHz): giallo, solo entro il primo salto	8 m（40 MHz）：黃色，僅限第一跳以內
+Generali	一般
+Smistamento degli spot	spot 分派
+Impostazioni generali	一般設定
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	這些資料與上方那一列相同：適用於所有頁籤，包括 METEOR SCATTER。
+Aspetto	外觀
+Lingua	語言
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	字型大小適用於整個程式，從 85 到 140 %，與 YA-MS 相同。變更語言與主題會重建視窗：設定與 spot 都會保留。
+Mappe e dati previsionali	地圖與預報資料
+Continente	洲
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	將麥卡托地圖移到所選的洲，並選擇預報資料（N0NBH 的 E-skip 適用於歐洲與北美洲）。與頁籤列中的選單相同。
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	程式在啟動時及每 5 分鐘以 NTP 伺服器檢查時間，並在計算中使用正確的時間。在 Windows 上，若有系統管理員權限，也會校正電腦時鐘。若上方顯示 NTP:FAILED，表示網路封鎖了 UDP 123 連接埠。
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	在 GitHub 上檢查更新（啟動時及每 6 小時）
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	自動靜默更新：不詢問即下載並安裝新版本
+Controlla adesso	立即檢查
+Versione in uso: {0}	使用中的版本：{0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	自動更新適用於所有套件，因為程式一律從使用者的資料夾執行：在 Windows 上是以安裝程式或 zip 選擇的資料夾，在 Mac 上是 app，在 Linux 上是 ~/E-LAYER-ANALYZER。使用 .deb、.rpm、Arch、Slackware 套件與 AppImage 時，更新的是 ~/E-LAYER-ANALYZER 中的副本：在你安裝新套件之前，套件管理員仍會顯示第一次安裝的版本。若程式資料夾無法寫入，程式會提示，新版本須從 Release 頁面手動下載。
+Apri la cartella dei dati	開啟資料資料夾
+Dati	資料
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	程式的所有資料都在程式旁的 data 資料夾中（AppData 中沒有任何東西）。收集到的 spot 會在關閉程式時刪除。Bureau of Meteorology 的 API 金鑰在 DATA COLLECTION 的 傳播資料 中輸入。
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - 伺服器時間與電腦時間的差：{0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - 無法連上任何 NTP 伺服器：程式使用電腦時鐘。
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	在 DATA COLLECTION 收到的每一筆 spot（cluster、RBN、PSKReporter、WSJT-X）都會依表格的順序與規則比對：第一條符合的規則決定頁籤。右側是各模式的篩選器，數值可修改，並可測試一行 Cluster 內容。
+Se lo spot...	如果 spot...
+Valori	數值
+va a	送往
+nessuna linguetta	無頁籤
+è fuori dalla gamma del filtro locale	在本機篩選的範圍外
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	低於 27990 kHz 或高於 145 MHz；430-440 MHz 僅限極光
+filtro locale spento	本機篩選已關閉
+scartato	已捨棄
+contiene AUE, AU-E o AURORAL E	含有 AUE、AU-E 或 AURORAL E
+contiene una parola dell'aurora (o modo AU)	含有極光的字詞（或模式 AU）
+contiene una parola del F.A.I. (o modo FAI)	含有 F.A.I. 的字詞（或模式 FAI）
+ha un modo del meteor scatter o <MS>	使用流星散射模式或帶有 <MS>
+cade in una finestra MS del bandplan	落在頻段計畫的 MS 頻率窗內
+in 50 MHz non esclusiva	在 50 MHz 不具排他性
+FT8 e FT4 in 50 e 70 MHz esclusi	50 與 70 MHz 的 FT8 與 FT4 除外
+è FT8 o FT4 in 50 MHz senza nube	是 50 MHz 上不成雲的 FT8 或 FT4
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	{0:F0} 分鐘內沒有中點在 {1:F0} km 以內的其他 spot
+regola spenta	規則已關閉
+meteor scatter (non E-sporadico)	流星散射（非散塊 E 層）
+è Q65 o JT65 in 144 MHz	是 144 MHz 的 Q65 或 JT65
+salvo <ES> nel testo	文字中有 <ES> 時除外
+EME: scartato	EME：已捨棄
+contiene una scritta di altra propagazione	含有其他傳播方式的標記
+non E-sporadico	非散塊 E 層
+è transequatoriale	屬於跨赤道傳播
+fascia di inclinazione ± {0:F0}°	磁傾角帶 ± {0:F0}°
+non E-sporadico (TEP)	非散塊 E 層（TEP）
+è in 28 MHz	在 28 MHz
+da {0:F0} km	從 {0:F0} km 起
+è in 40 MHz	在 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} 至 {1:F0} km（第一跳）
+è in 50 MHz	在 50 MHz
+è in 70 MHz	在 70 MHz
+è in 144 MHz	在 144 MHz
+oltre {0:F0} km, con conferma	超過 {0:F0} km，須確認
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	不符合任何規則（對流層、432 MHz、HF...）
+resta in Spot raccolti	留在 已收集的 spot 中
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	程式是以 {0} 套件安裝的：若要更新，請從 release 頁面下載新套件，並像第一次一樣安裝。
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	自動更新適用於 Windows 的安裝程式與 zip、Mac 的 app、.tar.gz 壓縮檔與 AppImage。使用系統套件（.deb、.rpm、Arch、Slackware）時，程式不會自行更新：它會提示新版本，須從 Release 頁面下載新套件來安裝。若程式資料夾無法寫入，程式會提示，新版本須手動下載。

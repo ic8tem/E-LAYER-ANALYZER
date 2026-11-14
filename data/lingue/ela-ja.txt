@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Scatter trail に沿った QTF の範囲 (ずれ ≤ 1.5°、両局の Lange-Hesse の範囲内):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	散乱点の範囲 (Lange-Hesse: 地磁気緯度 54° で 370-1100 km、各局の IGRF-14 伏角に応じて移動): {0}; {1}。高度約 110 km、直交性 ±3° 以内。
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	提案された散乱点は、少なくとも 1 局について Lange-Hesse の範囲外です: 可能ですが、可能性は低くなります。
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	ローカルフィルター: 27990.0 kHz 未満および 145 MHz 超のクラスター行を破棄 (表示も保存もしない); 430-440 MHz ではオーロラのスポットだけを通す
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	データ収集はプログラム全体で 1 つだけです。DATA COLLECTION で受信した各スポットはこれらのフィルターを通り、各伝搬モードのタブに送られます。
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28・40・50・70 MHz のルール (作者と IK3XTV のルール)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz (8 m) では最小距離を同じ方法で求め ({0:F0} km)、E 層の幾何による第 1 ホップ以内の距離 ({1:F0} km) だけを有効とします。
+in 70 MHz (km)	70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	70 MHz の FT8 と FT4 は、バンドプランのメテオスキャッターのウィンドウ内でもスポラディックE に振り分けます (70.154 MHz は FT8 の周波数です)。
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	50 MHz の FT8 と FT4: 雲の一部である場合、つまり中間点が近い別の 50 MHz のスポットがある場合だけスポラディックE とし、孤立したスポットはメテオスキャッターに振り分ける
+punto medio entro (km)	中間点の範囲 (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	144 MHz の Q65 と JT65 は EME であり、テキストに <ES> がない限りスポラディックE に入りません。
+sì	はい
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	ローカルフィルター: 行を破棄 (27990 kHz - 145 MHz の範囲外; 430-440 MHz ではオーロラのスポットだけを通す)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(破棄: 40 MHz で第 1 ホップ {0:F0} km を超える)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(破棄: 144 MHz の Q65 または JT65 = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(50 MHz の FT8/FT4 で、{0:F0} 分以内に中間点が {1:F0} km 以内の別のスポットがない: メテオスキャッター)
+scartate dal filtro locale: {0}	ローカルフィルターで破棄: {0}
+IMPOSTAZIONI	設定
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): 黄、第 1 ホップ以内のみ
+Generali	一般
+Smistamento degli spot	スポットの振り分け
+Impostazioni generali	一般設定
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	上部の行と同じデータです: METEOR SCATTER を含むすべてのタブに適用されます。
+Aspetto	外観
+Lingua	言語
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	フォントサイズはプログラム全体に適用され、YA-MS と同様に 85 から 140 % まで設定できます。言語とテーマを変えるとウィンドウが再構築されますが、設定とスポットは残ります。
+Mappe e dati previsionali	地図と予測データ
+Continente	大陸
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	メルカトル図を選んだ大陸に移動し、予測データを選びます (N0NBH の E-skip はヨーロッパと北アメリカのみ)。タブバーのメニューと同じです。
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	プログラムは起動時と 5 分ごとに NTP サーバーで時刻を確認し、計算には正しい時刻を使います。Windows では、管理者権限があれば PC の時計も補正します。上部の表示が NTP:FAILED の場合は、ネットワークが UDP 123 ポートをブロックしています。
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	GitHub で更新を確認する (起動時と 6 時間ごと)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	自動・無言の更新: 新しいバージョンを確認なしでダウンロードしてインストールする
+Controlla adesso	今すぐ確認
+Versione in uso: {0}	使用中のバージョン: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	プログラムは常にユーザーのフォルダーから動作するため、自動更新はすべてのパッケージで機能します: Windows ではインストーラーまたは zip で選んだフォルダー、Mac ではアプリ、Linux では ~/E-LAYER-ANALYZER です。.deb、.rpm、Arch、Slackware のパッケージと AppImage では ~/E-LAYER-ANALYZER のコピーが更新されます: 新しいパッケージをインストールするまで、パッケージマネージャーには最初にインストールしたバージョンが表示され続けます。プログラムのフォルダーに書き込めない場合はプログラムがその旨を伝え、新しいバージョンは Release ページから手動でダウンロードする必要があります。
+Apri la cartella dei dati	データフォルダーを開く
+Dati	データ
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	プログラムのデータはすべてプログラムの隣の data フォルダーにあります (AppData には何も書きません)。収集したスポットはプログラムを閉じると消去されます。Bureau of Meteorology の API キーは DATA COLLECTION の「伝搬データ」で入力します。
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - サーバーの時刻と PC の時刻の差: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - 到達できる NTP サーバーがありません: プログラムは PC の時計を使います。
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	DATA COLLECTION で受信した各スポット (cluster、RBN、PSKReporter、WSJT-X) は、表の順序でルールに照らして調べられます: 最初に当てはまったルールがタブを決めます。右側には各モードのフィルターがあり、値を変更でき、クラスターの行をテストできます。
+Se lo spot...	スポットが...
+Valori	値
+va a	振り分け先
+nessuna linguetta	タブなし
+è fuori dalla gamma del filtro locale	ローカルフィルターの範囲外
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz 未満または 145 MHz 超; 430-440 MHz ではオーロラのみ
+filtro locale spento	ローカルフィルターはオフ
+scartato	破棄
+contiene AUE, AU-E o AURORAL E	AUE、AU-E または AURORAL E を含む
+contiene una parola dell'aurora (o modo AU)	オーロラの語を含む (またはモード AU)
+contiene una parola del F.A.I. (o modo FAI)	F.A.I. の語を含む (またはモード FAI)
+ha un modo del meteor scatter o <MS>	メテオスキャッターのモードまたは <MS> がある
+cade in una finestra MS del bandplan	バンドプランの MS ウィンドウに入る
+in 50 MHz non esclusiva	50 MHz では排他的でない
+FT8 e FT4 in 50 e 70 MHz esclusi	50・70 MHz の FT8 と FT4 は除く
+è FT8 o FT4 in 50 MHz senza nube	雲のない 50 MHz の FT8 または FT4
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	{0:F0} 分以内に中間点が {1:F0} km 以内の別のスポットがない
+regola spenta	ルールはオフ
+meteor scatter (non E-sporadico)	メテオスキャッター (スポラディックE ではない)
+è Q65 o JT65 in 144 MHz	144 MHz の Q65 または JT65
+salvo <ES> nel testo	テキストに <ES> がある場合を除く
+EME: scartato	EME: 破棄
+contiene una scritta di altra propagazione	他の伝搬の記述を含む
+non E-sporadico	スポラディックE ではない
+è transequatoriale	赤道横断伝搬である
+fascia di inclinazione ± {0:F0}°	伏角帯 ± {0:F0}°
+non E-sporadico (TEP)	スポラディックE ではない (TEP)
+è in 28 MHz	28 MHz にある
+da {0:F0} km	{0:F0} km から
+è in 40 MHz	40 MHz にある
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} から {1:F0} km (第 1 ホップ)
+è in 50 MHz	50 MHz にある
+è in 70 MHz	70 MHz にある
+è in 144 MHz	144 MHz にある
+oltre {0:F0} km, con conferma	{0:F0} km 超、確認あり
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	どのルールにも当てはまらない (対流圏、432 MHz、HF...)
+resta in Spot raccolti	収集スポットに残る
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	プログラムは {0} パッケージでインストールされています: 更新するには、Release ページから新しいパッケージをダウンロードし、最初と同じようにインストールしてください。
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	自動更新は、Windows のインストーラーと zip、Mac のアプリ、.tar.gz アーカイブ、AppImage に適用されます。システムパッケージ (.deb、.rpm、Arch、Slackware) では、プログラムは自動では更新されません: 新しいバージョンを知らせるので、Release ページから新しいパッケージをダウンロードしてインストールしてください。プログラムのフォルダーに書き込めない場合はプログラムがその旨を伝え、新しいバージョンは手動でダウンロードする必要があります。

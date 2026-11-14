@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Scatter trail을 따른 QTF 범위 (편차 ≤ 1.5°, 두 국 모두의 Lange-Hesse 범위 안):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	스캐터 포인트 범위 (Lange-Hesse: 지자기 위도 54°에서 370-1100 km, 각 국의 IGRF-14 복각에 따라 이동): {0}; {1}. 고도 약 110 km, 수직성 ±3° 이내.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	제안된 스캐터 포인트가 적어도 한 국에 대해 Lange-Hesse 범위 밖에 있습니다: 가능하지만 가능성은 낮습니다.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	로컬 필터: 27990.0 kHz 미만 및 145 MHz 초과 클러스터 줄 버리기(표시하지 않고 저장하지 않음); 430-440 MHz에서는 오로라 스폿만 통과
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	데이터 수집은 프로그램 전체에서 하나뿐입니다. DATA COLLECTION에서 받은 모든 스폿은 이 필터를 거쳐 각 전파 모드의 탭으로 전달됩니다.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28·40·50·70 MHz 규칙 (저자와 IK3XTV의 규칙)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz(8 m)에서는 최소 거리를 같은 방법으로 구하며({0:F0} km), E층 기하에 따른 첫 홉 이내의 거리({1:F0} km)만 유효합니다.
+in 70 MHz (km)	70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	70 MHz의 FT8과 FT4는 밴드플랜의 유성 산란 구간 안에 있어도 스포라딕 E로 보냅니다(70.154 MHz가 FT8 주파수입니다).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	50 MHz의 FT8과 FT4: 구름의 일부일 때, 즉 중간점이 가까운 다른 50 MHz 스폿이 있을 때만 스포라딕 E; 단독 스폿은 유성 산란으로 보냄
+punto medio entro (km)	중간점 범위 (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	144 MHz의 Q65와 JT65는 EME이며, 텍스트에 <ES>가 없는 한 스포라딕 E에 들어가지 않습니다.
+sì	예
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	로컬 필터: 줄 버림 (27990 kHz - 145 MHz 범위 밖; 430-440 MHz에서는 오로라 스폿만 통과)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(버림: 40 MHz에서 첫 홉 {0:F0} km 초과)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(버림: 144 MHz의 Q65 또는 JT65 = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(50 MHz FT8/FT4이며 {0:F0}분 이내에 중간점이 {1:F0} km 이내인 다른 스폿 없음: 유성 산란)
+scartate dal filtro locale: {0}	로컬 필터로 버린 줄: {0}
+IMPOSTAZIONI	설정
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): 노랑, 첫 홉 이내만
+Generali	일반
+Smistamento degli spot	스폿 분류
+Impostazioni generali	일반 설정
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	위쪽 줄과 같은 데이터입니다: METEOR SCATTER를 포함한 모든 탭에 적용됩니다.
+Aspetto	모양
+Lingua	언어
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	글꼴 크기는 프로그램 전체에 적용되며, YA-MS와 마찬가지로 85에서 140 %까지입니다. 언어와 테마를 바꾸면 창이 다시 만들어지지만 설정과 스폿은 유지됩니다.
+Mappe e dati previsionali	지도와 예보 데이터
+Continente	대륙
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	메르카토르 지도를 선택한 대륙으로 옮기고 예보 데이터를 고릅니다(N0NBH의 E-skip은 유럽과 북아메리카만). 탭 표시줄의 메뉴와 같습니다.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	프로그램은 시작할 때와 5분마다 NTP 서버로 시각을 확인하고 계산에 올바른 시각을 사용합니다. Windows에서는 관리자 권한이 있으면 PC 시계도 보정합니다. 위쪽 표시가 NTP:FAILED이면 네트워크가 UDP 123 포트를 막고 있습니다.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	GitHub에서 업데이트 확인 (시작할 때와 6시간마다)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	자동·무음 업데이트: 묻지 않고 새 버전을 다운로드하여 설치
+Controlla adesso	지금 확인
+Versione in uso: {0}	사용 중인 버전: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	프로그램이 항상 사용자 폴더에서 실행되므로 자동 업데이트는 모든 패키지에서 동작합니다: Windows에서는 설치 프로그램이나 zip으로 선택한 폴더, Mac에서는 앱, Linux에서는 ~/E-LAYER-ANALYZER입니다. .deb, .rpm, Arch, Slackware 패키지와 AppImage에서는 ~/E-LAYER-ANALYZER의 사본이 업데이트됩니다: 새 패키지를 설치할 때까지 패키지 관리자는 처음 설치한 버전을 계속 표시합니다. 프로그램 폴더에 쓸 수 없으면 프로그램이 이를 알리며, 새 버전은 Release 페이지에서 직접 다운로드해야 합니다.
+Apri la cartella dei dati	데이터 폴더 열기
+Dati	데이터
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	프로그램의 모든 데이터는 프로그램 옆의 data 폴더에 있습니다(AppData에는 아무것도 없음). 수집된 스폿은 프로그램을 닫을 때 지워집니다. Bureau of Meteorology의 API 키는 DATA COLLECTION의 "전파 데이터"에서 입력합니다.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - 서버 시각과 PC 시각의 차이: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - 연결할 수 있는 NTP 서버가 없음: 프로그램은 PC 시계를 사용합니다.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	DATA COLLECTION에서 받은 모든 스폿(cluster, RBN, PSKReporter, WSJT-X)은 표의 순서대로 규칙에 비추어 확인합니다: 처음 해당하는 규칙이 탭을 정합니다. 오른쪽에는 각 모드의 필터가 있으며, 값을 바꿀 수 있고 클러스터 줄을 시험할 수 있습니다.
+Se lo spot...	스폿이...
+Valori	값
+va a	보내는 곳
+nessuna linguetta	탭 없음
+è fuori dalla gamma del filtro locale	로컬 필터 범위 밖에 있음
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz 미만 또는 145 MHz 초과; 430-440 MHz에서는 오로라만
+filtro locale spento	로컬 필터 꺼짐
+scartato	버림
+contiene AUE, AU-E o AURORAL E	AUE, AU-E 또는 AURORAL E를 포함함
+contiene una parola dell'aurora (o modo AU)	오로라 단어를 포함함 (또는 모드 AU)
+contiene una parola del F.A.I. (o modo FAI)	F.A.I. 단어를 포함함 (또는 모드 FAI)
+ha un modo del meteor scatter o <MS>	유성 산란 모드 또는 <MS>가 있음
+cade in una finestra MS del bandplan	밴드플랜의 MS 구간에 있음
+in 50 MHz non esclusiva	50 MHz에서는 배타적이지 않음
+FT8 e FT4 in 50 e 70 MHz esclusi	50·70 MHz의 FT8과 FT4는 제외
+è FT8 o FT4 in 50 MHz senza nube	구름이 없는 50 MHz FT8 또는 FT4임
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	{0:F0}분 이내에 중간점이 {1:F0} km 이내인 다른 스폿 없음
+regola spenta	규칙 꺼짐
+meteor scatter (non E-sporadico)	유성 산란 (스포라딕 E 아님)
+è Q65 o JT65 in 144 MHz	144 MHz의 Q65 또는 JT65임
+salvo <ES> nel testo	텍스트에 <ES>가 있으면 제외
+EME: scartato	EME: 버림
+contiene una scritta di altra propagazione	다른 전파 표기를 포함함
+non E-sporadico	스포라딕 E 아님
+è transequatoriale	적도 횡단임
+fascia di inclinazione ± {0:F0}°	복각 범위 ± {0:F0}°
+non E-sporadico (TEP)	스포라딕 E 아님 (TEP)
+è in 28 MHz	28 MHz에 있음
+da {0:F0} km	{0:F0} km부터
+è in 40 MHz	40 MHz에 있음
+da {0:F0} a {1:F0} km (primo salto)	{0:F0}에서 {1:F0} km (첫 홉)
+è in 50 MHz	50 MHz에 있음
+è in 70 MHz	70 MHz에 있음
+è in 144 MHz	144 MHz에 있음
+oltre {0:F0} km, con conferma	{0:F0} km 초과, 확인 필요
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	어떤 규칙에도 해당하지 않음 (대류권, 432 MHz, HF...)
+resta in Spot raccolti	수집된 스폿에 남음
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	프로그램이 {0} 패키지로 설치되어 있습니다: 업데이트하려면 릴리스 페이지에서 새 패키지를 다운로드하여 처음과 같이 설치하십시오.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	자동 업데이트는 Windows 설치 프로그램과 zip, Mac 앱, .tar.gz 아카이브, AppImage에 적용됩니다. 시스템 패키지(.deb, .rpm, Arch, Slackware)에서는 프로그램이 스스로 업데이트하지 않습니다: 새 버전을 알려 주며, Release 페이지에서 새 패키지를 다운로드하여 설치합니다. 프로그램 폴더에 쓸 수 없으면 프로그램이 이를 알리며, 새 버전은 직접 다운로드해야 합니다.
