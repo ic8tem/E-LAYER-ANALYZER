@@ -9,7 +9,7 @@ Dalla versione 0.4.18 la linguetta **IMPOSTAZIONI** raccoglie le opzioni general
 | Sezione | Che cosa si imposta |
 |---|---|
 | Stazione | Nominativo, locator e quota, gli stessi della riga in alto; **Applica** li conferma per tutte le linguette. |
-| Aspetto | Lingua, colorazione e **dimensione del carattere di tutto il programma** (85-140 %, come in YA-MS). Lingua e colorazione ricostruiscono la finestra: impostazioni e spot restano. |
+| Aspetto | Lingua, colorazione (gli schemi di YAEC e YA-MS e, dalla versione 0.5.0, i sei temi di IP-TRX-CTRL: Chiaro, Notte, Nero, Blu, Viola, Verde) e **dimensione del carattere di tutto il programma** (85-140 %, come in YA-MS). Lingua e colorazione ricostruiscono la finestra: impostazioni e spot restano. |
 | Mappe e dati previsionali | Il continente, lo stesso menu della barra delle linguette. |
 | Ora | Stato del controllo NTP e scarto tra l'ora dei server e l'orologio del PC. |
 | Aggiornamenti | Controllo su GitHub all'avvio e ogni 6 ore, aggiornamento automatico e silenzioso, pulsante **Controlla adesso**. L'aggiornamento automatico non vale per i pacchetti di sistema (.deb, .rpm, Arch, Slackware). |
