@@ -2,9 +2,10 @@
 // hanno ancora ricevuto nulla. Lo stream MQTT manda solo gli spot: chi ascolta senza ricevere non c'e'. La mappa del
 // sito usa l'interfaccia di consultazione retrieve.pskreporter.info/query, che oltre ai rapporti restituisce gli
 // elementi <activeReceiver callsign=".." locator=".." frequency=".." mode=".." decoderSoftware=".." .../>.
-// Regole del servizio (pskreporter.info/pskdev.html): non piu' di una richiesta ogni 5 minuti per modo, appcontact
-// con il nome del programma (mai l'indirizzo dell'utente). Qui: un modo MS alla volta, una richiesta ogni 3 minuti,
-// quindi ogni modo si rilegge ogni 12 minuti; rptlimit=1 perche' i rapporti arrivano gia' da MQTT.
+// Regole del servizio (pskreporter.info/pskdev.html): non piu' di una richiesta ogni 5 minuti, appcontact con il nome
+// del programma (mai l'indirizzo dell'utente). Qui: una sola richiesta ogni 5 minuti per tutti i modi (aggiornamento a
+// 5 minuti voluto dall'autore, 14/11/2026), solo da 28 a 440 MHz (frange), ultimi 15 minuti; rptlimit=1 perche' i
+// rapporti arrivano gia' da MQTT. Dei monitor si tengono quelli in MSK144, FSK441, PSK2K e JTMS.
 // I monitor trovati entrano in MsCollector.Listeners (triangoli del Traffico in diretta) con Count = 0.
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,12 @@ namespace YAMS
         static readonly object lk = new object();
         static readonly List<PskMonitor> pending = new List<PskMonitor>();
         static Timer timer;
-        static int busy, next;
+        static int busy;
 
         public static void Start()
         {
             if (timer != null) return;
-            timer = new Timer(Tick, null, TimeSpan.FromSeconds(20), TimeSpan.FromMinutes(3));
+            timer = new Timer(Tick, null, TimeSpan.FromSeconds(20), TimeSpan.FromMinutes(5));
         }
 
         public static void Stop()
@@ -61,29 +62,24 @@ namespace YAMS
         static void Tick(object st)
         {
             if (!Enabled || Interlocked.Exchange(ref busy, 1) == 1) return;
-            try
-            {
-                string mode = PskMqtt.MsModes[next % PskMqtt.MsModes.Length];
-                next++;
-                Fetch(mode);
-            }
+            try { Fetch(); }
             finally { busy = 0; }
         }
 
-        static void Fetch(string mode)
+        static void Fetch()
         {
             try
             {
-                string url = Url + "?mode=" + Uri.EscapeDataString(mode) + "&flowStartSeconds=-1800&rptlimit=1&appcontact=" +
+                string url = Url + "?flowStartSeconds=-900&rptlimit=1&frange=28000000-440000000&appcontact=" +
                              Uri.EscapeDataString("YA-MS " + AppPaths.Version + " (IC8TEM)");
                 string xml;
-                using (HttpClient h = new HttpClient { Timeout = TimeSpan.FromSeconds(60) })
+                using (HttpClient h = new HttpClient { Timeout = TimeSpan.FromSeconds(90) })
                 {
                     h.DefaultRequestHeaders.UserAgent.ParseAdd("YA-MS/" + AppPaths.Version);
                     xml = h.GetStringAsync(url).GetAwaiter().GetResult();
                 }
                 Requests++;
-                List<PskMonitor> got = Parse(xml, mode, DateTime.UtcNow);
+                List<PskMonitor> got = Parse(xml, "", DateTime.UtcNow);
                 lock (lk)
                 {
                     pending.AddRange(got);
@@ -105,10 +101,10 @@ namespace YAMS
                     if (x.NodeType != XmlNodeType.Element || !string.Equals(x.LocalName, "activeReceiver", StringComparison.OrdinalIgnoreCase)) continue;
                     string call = (x.GetAttribute("callsign") ?? "").Trim().ToUpperInvariant();
                     string loc = (x.GetAttribute("locator") ?? "").Trim();
-                    string md = (x.GetAttribute("mode") ?? mode).Trim().ToUpperInvariant();
+                    string md = (x.GetAttribute("mode") ?? mode ?? "").Trim().ToUpperInvariant();
                     double hz;
                     if (call.Length == 0 || !double.TryParse(x.GetAttribute("frequency") ?? "", NumberStyles.Float, CultureInfo.InvariantCulture, out hz)) continue;
-                    if (Array.IndexOf(PskMqtt.MsModes, md) < 0) md = mode;
+                    if (Array.IndexOf(PskMqtt.MsModes, md) < 0) continue;   // solo i modi MS
                     string band = MsBands.Name(hz / 1000.0);
                     if (band.Length == 0) continue;
                     r.Add(new PskMonitor { Call = call, Loc = loc, Band = band, Mode = md, Soft = (x.GetAttribute("decoderSoftware") ?? "").Trim(), SeenUtc = now });

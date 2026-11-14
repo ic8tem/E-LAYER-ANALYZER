@@ -282,7 +282,7 @@ namespace YAMS
             mqHost = T(cfg.Get("rd4_host", PskMqtt.DefaultHost), 200, false);
             mqPort = N(1, 65535, Dm(cfg.GetD("rd4_porta", PskMqtt.DefaultPort)), 0, 1, 60);
             string topics = cfg.Get("rd4_argomenti", PskMqtt.DefaultTopics);
-            if (topics.Trim() == PskMqtt.OldDefaultTopics) topics = PskMqtt.DefaultTopics;   // argomenti di partenza vecchi: si aggiornano
+            if (topics.Trim() == PskMqtt.OldDefaultTopics || topics.Trim() == PskMqtt.PrevDefaultTopics) topics = PskMqtt.DefaultTopics;   // argomenti di partenza vecchi: si aggiornano
             mqTopics = T(topics, 300, false);
             mqTopics.AcceptsReturn = true; mqTopics.TextWrapping = TextWrapping.Wrap; mqTopics.Height = 74;
             mqTopics.HorizontalAlignment = HorizontalAlignment.Stretch; mqTopics.Width = double.NaN;

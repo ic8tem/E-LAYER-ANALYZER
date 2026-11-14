@@ -24,17 +24,23 @@ namespace YAMS
         // modi MS (MSK144, FSK441, PSK2K, JTMS) su 28, 50, 70, 144 e 432 MHz (nomi delle bande come li scrive PSKReporter),
         // piu' MSK144 su 222 MHz (regola dell'autore, IC8TEM, 13/11/2026)
         public static readonly string[] MsModes = { "MSK144", "FSK441", "PSK2K", "JTMS" };
-        public static readonly string DefaultTopics = BuildDefault();
+        // FT8 su 6 m, 4 m, 2 m, 1,25 m e 70 cm per la clausola degli FT8 lunghi e isolati (regola dell'autore, 14/11/2026).
+        // Niente FT8 sui 10 m di partenza: il traffico mondiale e' enorme; si puo' aggiungere a mano pskr/filter/v2/10m/FT8/#
+        public static readonly string[] Ft8Bands = { "6m", "4m", "2m", "1.25m", "70cm" };
+        public static readonly string DefaultTopics = BuildDefault(true);
+        // argomenti di partenza delle versioni dalla 1.8.4 alla 1.8.11, senza FT8 (si aggiornano da soli se non cambiati)
+        public static readonly string PrevDefaultTopics = BuildDefault(false);
         // argomenti di partenza delle versioni fino alla 1.8.3 (si aggiornano da soli se l'utente non li aveva cambiati)
         public const string OldDefaultTopics = "pskr/filter/v2/6m/MSK144/#; pskr/filter/v2/4m/MSK144/#; pskr/filter/v2/2m/MSK144/#; " +
                                                "pskr/filter/v2/1.25m/MSK144/#; pskr/filter/v2/70cm/MSK144/#; pskr/filter/v2/2m/FSK441/#";
 
-        static string BuildDefault()
+        static string BuildDefault(bool ft8)
         {
             List<string> t = new List<string>();
             foreach (string b in new[] { "10m", "6m", "4m", "2m", "70cm" })
                 foreach (string m in MsModes) t.Add("pskr/filter/v2/" + b + "/" + m + "/#");
             t.Add("pskr/filter/v2/1.25m/MSK144/#");
+            if (ft8) foreach (string b in Ft8Bands) t.Add("pskr/filter/v2/" + b + "/FT8/#");
             return string.Join("; ", t);
         }
 

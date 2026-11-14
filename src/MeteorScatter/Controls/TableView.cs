@@ -9,6 +9,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Immutable;
+using Avalonia.Threading;
 
 namespace YAMS
 {
@@ -24,6 +25,7 @@ namespace YAMS
         public double FontSize = 12;
         public object Tag;
         public string[] CellTips;    // fumetto per cella al passaggio del mouse (null o "" = nessuno)
+        public bool Blink;           // la riga lampeggia sempre (spot da notare: fondo Back pieno a fasi alterne)
     }
 
     public class TableView : Control
@@ -57,22 +59,35 @@ namespace YAMS
         static Color HeaderLine { get { return Pal.TableHeadLine; } }
         static Color HeaderFore { get { return Pal.TableHeadFore; } }
 
+        readonly DispatcherTimer blinkTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+        bool blinkOn = true;
+
         public TableView()
         {
             ClipToBounds = true;
             Focusable = true;
+            blinkTimer.Tick += (s, e) =>
+            {
+                bool any = false;
+                if (Rows != null) foreach (TableRow r in Rows) if (r != null && r.Blink) { any = true; break; }
+                if (!any) { blinkOn = true; return; }
+                blinkOn = !blinkOn;
+                if (IsEffectivelyVisible) InvalidateVisual();
+            };
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnAttachedToVisualTree(e);
             UiScale.Changed += OnScaleChanged;
+            blinkTimer.Start();
         }
 
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
         {
             base.OnDetachedFromVisualTree(e);
             UiScale.Changed -= OnScaleChanged;
+            blinkTimer.Stop();
         }
 
         void OnScaleChanged() { ClampScroll(); InvalidateMeasure(); InvalidateVisual(); }
@@ -233,9 +248,10 @@ namespace YAMS
                         bool sel = Selectable && r == SelectedIndex;
                         if (sel) ctx.DrawRectangle(selB, null, rr);
                         else if (r % 2 == 1) ctx.DrawRectangle(odd, null, rr);
-                        if (!sel && row.Back.HasValue) ctx.DrawRectangle(Pal.B(row.Back.Value), null, rr);
+                        bool flash = row.Blink && blinkOn;
+                        if (!sel && row.Back.HasValue && (!row.Blink || flash)) ctx.DrawRectangle(Pal.B(row.Back.Value), null, rr);
                         double x = 0;
-                        Color rowFore = row.Fore ?? Pal.Fore;
+                        Color rowFore = row.Blink && flash ? Color.FromRgb(20, 83, 45) : (row.Fore ?? Pal.Fore);
                         double fs = (row.FontSize > 0 ? row.FontSize : 12) * k;
                         for (int c = 0; c < n; c++)
                         {
@@ -245,7 +261,7 @@ namespace YAMS
                                 ctx.DrawRectangle(Pal.B(row.CellBack[c].Value), null, new Rect(cell.X + 1, cell.Y + 1, Math.Max(0, cell.Width - 2), Math.Max(0, cell.Height - 2)));
                             if (row.Cells == null || c >= row.Cells.Length || string.IsNullOrEmpty(row.Cells[c])) continue;
                             Color fc = row.CellFore != null && c < row.CellFore.Length && row.CellFore[c].HasValue ? row.CellFore[c].Value : rowFore;
-                            DrawCellText(ctx, Ft(row.Cells[c], fs, fc, row.Bold, row.Italic), cell, Align(c));
+                            DrawCellText(ctx, Ft(row.Cells[c], fs, fc, row.Bold || row.Blink, row.Italic), cell, Align(c));
                         }
                         if (sel) ctx.DrawRectangle(null, selP, new Rect(0.5, y + 0.5, Math.Max(0, Wd - 1), Math.Max(0, rh - 1)));
                     }

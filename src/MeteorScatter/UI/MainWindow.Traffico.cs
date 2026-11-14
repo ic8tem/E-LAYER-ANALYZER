@@ -26,7 +26,7 @@ namespace YAMS
         Slider sldTrafficRadius;
         ComboBox cmbTrafficWindow;
         CheckBox chkTrafficListeners, chkPskMonitors;
-        static readonly int[] TrafficMinutes = { 15, 30, 60, 180, 1440 };
+        static readonly int[] TrafficMinutes = { 3, 15, 30, 60, 180, 1440 };   // minimo 3 minuti (richiesta dell'autore, 14/11/2026)
         readonly Dictionary<MsSpot, List<TrafficCloud>> cloudCache = new Dictionary<MsSpot, List<TrafficCloud>>();
         int trafficSpotCount = -1;
 
@@ -45,6 +45,8 @@ namespace YAMS
         }
 
         string trafficCloudTip;
+        // FT8 lunghi e isolati (possibile meteor scatter): verde chiaro
+        static readonly Color Ft8IsoColor = Color.FromRgb(134, 239, 172);
 
         void BuildTrafficTab()
         {
@@ -81,7 +83,7 @@ namespace YAMS
             foreach (int m in TrafficMinutes) wn.Add(m < 60 ? Lang.F("ultimi {0} minuti", m) : m == 60 ? Lang.T("ultima ora") : m < 1440 ? Lang.F("ultime {0} ore", m / 60) : Lang.T("ultime 24 ore"));
             cmbTrafficWindow = new ComboBox { ItemsSource = wn, MinWidth = 170, VerticalAlignment = VerticalAlignment.Center };
             int wi = Array.IndexOf(TrafficMinutes, (int)cfg.GetD("traffico_minuti", 60));
-            cmbTrafficWindow.SelectedIndex = wi < 0 ? 2 : wi;
+            cmbTrafficWindow.SelectedIndex = wi < 0 ? Array.IndexOf(TrafficMinutes, 60) : wi;
             cmbTrafficWindow.SelectionChanged += (s, e) => RefreshTraffic(true);
             side.Children.Add(Row(L(Lang.T("Spot da mostrare")), cmbTrafficWindow));
             chkTrafficListeners = C(Lang.T("Mostra chi è in ascolto in MSK144, FSK441, PSK2K e JTMS (PSKReporter MQTT, triangoli)"), cfg.GetB("traffico_ascolto", true));
@@ -89,10 +91,15 @@ namespace YAMS
             chkTrafficListeners.IsCheckedChanged += (s, e) => { cfg.Set("traffico_ascolto", chkTrafficListeners.IsChecked == true); RefreshTraffic(true); };
             side.Children.Add(chkTrafficListeners);
             // anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (interrogazione periodica)
-            chkPskMonitors = C(Lang.T("Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (triangoli vuoti, aggiornati ogni 12 minuti)"), PskActive.Enabled);
+            chkPskMonitors = C(Lang.T("Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (triangoli vuoti, aggiornati ogni 5 minuti)"), cfg.GetB("psk_monitor_attivi", true));
             if (chkPskMonitors.Content is string pms) chkPskMonitors.Content = new TextBlock { Text = pms, TextWrapping = TextWrapping.Wrap };
             chkPskMonitors.IsCheckedChanged += (s, e) => { PskActive.Enabled = chkPskMonitors.IsChecked == true; cfg.Set("psk_monitor_attivi", PskActive.Enabled); RefreshTraffic(true); };
             side.Children.Add(chkPskMonitors);
+            // FT8 lunghi e isolati: possibile meteor scatter (regola dell'autore, 14/11/2026)
+            CheckBox chkFt8 = C(Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)"), cfg.GetB("ft8_isolati", true));
+            if (chkFt8.Content is string f8) chkFt8.Content = new TextBlock { Text = f8, TextWrapping = TextWrapping.Wrap };
+            chkFt8.IsCheckedChanged += (s, e) => { MsCollector.Ft8Enabled = chkFt8.IsChecked == true; cfg.Set("ft8_isolati", MsCollector.Ft8Enabled); RefreshTraffic(true); };
+            side.Children.Add(chkFt8);
             lblTrafficCount = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap };
             side.Children.Add(lblTrafficCount);
             lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
@@ -207,6 +214,24 @@ namespace YAMS
             int outside = 0, noLoc = 0;
             Dictionary<string, int> perBand = new Dictionary<string, int>();
             List<MsSpot> all = MsCollector.MapSpots();   // tutte le bande, senza CW e spot troppo vicini
+            // in piu': FT8 oltre i 1100 km senza tratte parallele (verde chiaro, riga che lampeggia sempre) e spot WSJT-X UDP
+            // che riguardano la mia stazione (tratteggio che lampeggia sempre)
+            HashSet<MsSpot> ft8Iso = new HashSet<MsSpot>(), mine = new HashSet<MsSpot>();
+            HashSet<string> seen = new HashSet<string>();
+            foreach (MsSpot s in all) seen.Add(s.Key);
+            if (MsCollector.Ft8Enabled)
+                foreach (MsCollector.Ft8Path fp in MsCollector.Ft8Long)
+                    if (!fp.Parallel && fp.S.Utc >= lim) { ft8Iso.Add(fp.S); if (seen.Add(fp.S.Key)) all.Add(fp.S); }
+            foreach (MsSpot s in MsCollector.MyUdp)
+                if (s.Utc >= lim) { mine.Add(s); if (seen.Add(s.Key)) all.Add(s); }
+            if (ft8Iso.Count > 0 || mine.Count > 0)
+            {
+                all.Sort((x, y) => x.Utc.CompareTo(y.Utc));
+                HashSet<string> mk = new HashSet<string>(), fk = new HashSet<string>();
+                foreach (MsSpot s in mine) mk.Add(s.Key);
+                foreach (MsSpot s in ft8Iso) fk.Add(s.Key);
+                foreach (MsSpot s in all) { if (mk.Contains(s.Key)) mine.Add(s); if (fk.Contains(s.Key)) ft8Iso.Add(s); }
+            }
             for (int i = all.Count - 1; i >= 0 && list.Count < 400; i--)
             {
                 MsSpot s = all[i];
@@ -214,10 +239,12 @@ namespace YAMS
                 LatLon a, b;
                 if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) { noLoc++; continue; }
                 if (!traffic.Inside(a) || !traffic.Inside(b)) { outside++; continue; }
+                bool iso = ft8Iso.Contains(s);
                 TrafficSpot t = new TrafficSpot
                 {
-                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = BandColor(s.Band), Tag = s,
-                    Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60
+                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
+                    Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60,
+                    Dashed = mine.Contains(s)
                 };
                 t.Clouds = CloudsFor(s, a, b);
                 string cl = "";
@@ -230,7 +257,9 @@ namespace YAMS
                 t.Info = s.DxCall + " " + s.LocDx + "  ⇄  " + s.Spotter + " " + s.LocSpotter + "\n" +
                          Lang.F("{0} UTC · {1:F1} kHz · {2:F0} km", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.FreqKHz, Astro.DistanceKm(a, b)) + "\n" +
                          (cl.Length > 0 ? cl : Lang.T("nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
-                         (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment);
+                         (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment) +
+                         (iso ? "\n" + Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter") : "") +
+                         (t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
                 list.Add(t);
                 int nb; perBand.TryGetValue(s.Band, out nb); perBand[s.Band] = nb + 1;
             }
@@ -250,7 +279,7 @@ namespace YAMS
                 {
                     bool monOnly = ml.Count == 0;   // monitor attivo di PSKReporter che non ha ancora ricevuto spot MS
                     if (monOnly && !PskActive.Enabled) continue;
-                    if ((monOnly ? ml.SeenUtc : ml.Latest) < lim) continue;   // tutte le bande, anche quelle non scelte nella Raccolta dati
+                    if ((monOnly ? ml.SeenUtc : ml.Latest) < (monOnly && lim > now.AddMinutes(-11) ? now.AddMinutes(-11) : lim)) continue;   // i monitor si rileggono ogni 5 minuti: restano almeno 11 minuti   // tutte le bande, anche quelle non scelte nella Raccolta dati
                     LatLon q;
                     if (!Astro.TryLocator(ml.Loc, out q) || !traffic.Inside(q)) continue;
                     nLis++;
@@ -280,9 +309,10 @@ namespace YAMS
                                       ? "\n" + Lang.F("{0} stazioni in ascolto (PSKReporter MQTT)", nLis)
                                         + (PskActive.Enabled ? " · " + Lang.F("{0} solo monitor attivi", nMon) + (PskActive.LastError.Length > 0 ? " · " + Lang.F("mappa di PSKReporter non raggiungibile: {0}", PskActive.LastError) : "") : "")
                                         + (PskMqtt.Connected ? "" : " · " + Lang.T("MQTT non connesso: si connette dalla linguetta \"Raccolta dati\"")) : "");
-            if (list.Count != trafficSpotCount || force)
+            int sig = list.Count; foreach (TrafficSpot t in list) if (t.Color == Ft8IsoColor) sig += 100000;
+            if (sig != trafficSpotCount || force)
             {
-                trafficSpotCount = list.Count;
+                trafficSpotCount = sig;
                 List<TableRow> rows = new List<TableRow>();
                 for (int i = list.Count - 1; i >= 0; i--)
                 {
@@ -294,7 +324,8 @@ namespace YAMS
                     {
                         Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), (s.FreqKHz / 1000).ToString("F3", CultureInfo.CurrentCulture), s.Spotter, s.DxCall,
                                         Astro.DistanceKm(t.A, t.B).ToString("F0", CultureInfo.CurrentCulture), side },
-                        Fore = t.Color, Tag = t, CellTips = new[] { "", "", "", "", "", trafficCloudTip }
+                        Fore = t.Color == Ft8IsoColor && !Tema.Scuro ? Color.FromRgb(21, 128, 61) : t.Color, Tag = t, CellTips = new[] { "", "", "", "", "", trafficCloudTip },
+                        Blink = t.Color == Ft8IsoColor, Back = t.Color == Ft8IsoColor ? Ft8IsoColor : (Color?)null
                     });
                 }
                 tTraffic.Rows = rows;
@@ -339,6 +370,12 @@ namespace YAMS
                               new[] { "OZ1BEF", "JO55WM", "70" }, new[] { "YO3JW", "KN34BK", "432" }, new[] { "G3WOS", "IO91IL", "28" } };
             foreach (string[] r in ls)
                 MsCollector.Listeners[r[0] + "|" + r[2]] = new MsListener { Call = r[0], Loc = r[1], Band = r[2], Modes = "MSK144", LastUtc = now.AddMinutes(-5), Count = 3 };
+            // FT8 lungo e isolato di esempio (verde chiaro, riga che lampeggia) e spot UDP che mi riguarda (tratteggio)
+            MsSpot f8 = new MsSpot { Spotter = "EA4EOZ", LocSpotter = "IN80DJ", DxCall = "OK1TEH", LocDx = "JO70FD", FreqKHz = 144174, Utc = now.AddMinutes(-1), Source = 3, Mode = "FT8", Comment = "FT8 -18 dB", Received = now };
+            LatLon fa, fb;
+            if (Astro.TryLocator(f8.LocSpotter, out fa) && Astro.TryLocator(f8.LocDx, out fb)) f8.DistKm = Astro.DistanceKm(fa, fb);
+            MsCollector.Ft8Long.Add(new MsCollector.Ft8Path { S = f8 });
+            MsCollector.MyUdp.Add(new MsSpot { Spotter = "IC8TEM", LocSpotter = "JN70ON", DxCall = "9A2AE", LocDx = "JN95GM", FreqKHz = 144360, Utc = now.AddMinutes(-2), Source = 4, Mode = "MSK144", Comment = "MSK144 +3 dB  IC8TEM 9A2AE R+03  (WSJT-X UDP)", Received = now });
             // monitor attivi di esempio (mappa di PSKReporter, nessuno spot ricevuto: triangoli vuoti)
             string[][] ms = { new[] { "IK0XYZ", "JN61HT", "144" }, new[] { "S51DI", "JN76HD", "50" }, new[] { "SM6FHZ", "JO57XQ", "144" } };
             foreach (string[] r in ms)

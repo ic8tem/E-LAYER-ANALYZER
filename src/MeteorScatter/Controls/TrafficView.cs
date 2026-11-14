@@ -30,6 +30,7 @@ namespace YAMS
         public string CallA = "", CallB = "", Band = "", Info = "";
         public Color Color;
         public bool Blink;
+        public bool Dashed;    // spot WSJT-X UDP che riguarda la mia stazione: tratteggio che lampeggia sempre
         public List<TrafficCloud> Clouds = new List<TrafficCloud>();
         public object Tag;
     }
@@ -70,7 +71,7 @@ namespace YAMS
             ClipToBounds = true;
             blink.Tick += (s, e) =>
             {
-                bool any = false; foreach (TrafficSpot t in Spots) if (t.Blink) { any = true; break; }
+                bool any = false; foreach (TrafficSpot t in Spots) if (t.Blink || t.Dashed) { any = true; break; }
                 if (!any) { phase = true; return; }
                 phase = !phase;
                 if (IsEffectivelyVisible) InvalidateVisual();
@@ -271,17 +272,20 @@ namespace YAMS
         void DrawPath(DrawingContext ctx, TrafficSpot s, Color box)
         {
             bool sel = s == Selected;
-            if (s.Blink && !phase && !sel) return;
+            if ((s.Blink || s.Dashed) && !phase && !sel) return;
             Point a = P(s.A), b = P(s.B);
             if (sel) Seg(ctx, new Pen(new ImmutableSolidColorBrush(Color.FromArgb(120, 255, 255, 255)), 7), s.A, s.B);
-            Seg(ctx, new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : (s.Blink ? 3 : 1.8)), s.A, s.B);
+            if (s.Dashed)
+                Seg(ctx, new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : 3, new ImmutableDashStyle(new double[] { 3, 2 }, 0)), s.A, s.B);
+            else
+                Seg(ctx, new Pen(new ImmutableSolidColorBrush(s.Color), sel ? 3.5 : (s.Blink ? 3 : 1.8)), s.A, s.B);
             foreach (Point p in new[] { a, b }) ctx.DrawEllipse(new ImmutableSolidColorBrush(s.Color), new Pen(Brushes.White, 1.5), p, sel ? 5.5 : 4, sel ? 5.5 : 4);
             if (s.Blink)
             {
                 ctx.DrawEllipse(null, new Pen(new ImmutableSolidColorBrush(s.Color), 2), b, 10, 10);
                 ctx.DrawEllipse(null, new Pen(new ImmutableSolidColorBrush(s.Color), 2), a, 10, 10);
             }
-            if (sel || s.Blink || Spots.Count <= 25)
+            if (sel || s.Blink || s.Dashed || Spots.Count <= 25)
             {
                 // nominativi di entrambe le stazioni (chi ascolta e chi e' ascoltato), una sola volta per stazione;
                 // la stazione di casa ha gia' la sua scritta

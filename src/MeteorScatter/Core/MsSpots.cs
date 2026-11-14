@@ -126,6 +126,95 @@ namespace YAMS
         // Traffico in diretta (richiesta dell'autore, 13/11/2026); ultimi 2000
         public static readonly List<MsSpot> OtherBandSpots = new List<MsSpot>();
         static readonly HashSet<string> otherKeys = new HashSet<string>();
+        // ---- spot WSJT-X UDP che riguardano la mia stazione (regola dell'autore, 14/11/2026): la decodifica contiene il
+        // mio nominativo (chi mi chiama o mi risponde). Si disegnano nel Traffico in diretta con un tratteggio che
+        // lampeggia sempre, in qualsiasi modo e a qualsiasi distanza. Ultimi 500, non si memorizzano.
+        public static readonly List<MsSpot> MyUdp = new List<MsSpot>();
+        public static bool IsMine(MsSpot s)
+        {
+            if (s.Source != 4) return false;
+            string me = WsjtxUdp.DeCall;
+            if (string.IsNullOrEmpty(me)) return false;
+            return Regex.IsMatch(s.Comment ?? "", @"(?<![A-Z0-9/])" + Regex.Escape(me) + @"(?![A-Z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        }
+        static bool NoteMine(MsSpot s, DateTime now)
+        {
+            if (!IsMine(s)) return false;
+            Locate(s);
+            s.Received = now;
+            MyUdp.Add(s);
+            if (MyUdp.Count > 500) MyUdp.RemoveRange(0, 100);
+            return true;
+        }
+
+        // ---- clausola degli FT8 isolati (regola dell'autore, IC8TEM, 14/11/2026) ----
+        // Uno spot FT8 oltre i 1100 km che nei 3 minuti intorno non ha tratte parallele (stessa banda, punto medio entro
+        // 300 km e direzione entro 20 gradi, coppia di stazioni diversa) non ha l'aspetto dell'E-sporadico o della tropo,
+        // che danno sempre molte tratte vicine e parallele: puo' essere una scia meteorica. Si mostra nel Traffico in
+        // diretta in verde chiaro, con la riga della tabella che lampeggia sempre. Non entra nell'archivio MS.
+        public class Ft8Path
+        {
+            public MsSpot S;
+            public LatLon Mid;
+            public double Axis;        // direzione della tratta, 0-180 gradi
+            public string Pair = "";
+            public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo)
+        }
+        public static bool Ft8Enabled = true;
+        public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 20;
+        public static int Ft8Seen;
+        static readonly Dictionary<string, List<Ft8Path>> ft8Recent = new Dictionary<string, List<Ft8Path>>();
+        public static readonly List<Ft8Path> Ft8Long = new List<Ft8Path>();   // FT8 oltre i 1100 km (ultimi 2000)
+        static readonly HashSet<string> ft8Keys = new HashSet<string>();
+        static readonly Regex rxFt8 = new Regex(@"(?<![A-Za-z0-9])FT8(?![A-Za-z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
+
+        public static bool IsFt8(MsSpot s)
+        {
+            return string.Equals(s.Mode, "FT8", StringComparison.OrdinalIgnoreCase) || rxFt8.IsMatch(s.Comment ?? "");
+        }
+
+        static double AxisDiff(double a, double b) { double d = Math.Abs(a - b) % 180; return Math.Min(d, 180 - d); }
+
+        // true se e' arrivato un FT8 lungo e isolato da mostrare
+        static bool NoteFt8(MsSpot s, DateTime now)
+        {
+            if (!Ft8Enabled || !IsFt8(s)) return false;
+            string band = s.Band;
+            if (band.Length == 0) return false;
+            Ft8Seen++;
+            Locate(s);
+            LatLon a, b;
+            if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) return false;
+            double km = Astro.DistanceKm(a, b);
+            if (km < 50) return false;
+            Ft8Path p = new Ft8Path
+            {
+                S = s, Mid = Astro.Destination(a, Astro.Bearing(a, b), km / 2), Axis = Astro.Bearing(a, b) % 180,
+                Pair = string.CompareOrdinal(s.Spotter, s.DxCall) < 0 ? s.Spotter + "|" + s.DxCall : s.DxCall + "|" + s.Spotter
+            };
+            List<Ft8Path> l;
+            if (!ft8Recent.TryGetValue(band, out l)) { l = new List<Ft8Path>(); ft8Recent[band] = l; }
+            // le tratte piu' vecchie di 10 minuti non servono piu'
+            DateTime old = now.AddMinutes(-10);
+            int cut = 0; while (cut < l.Count && l[cut].S.Received < old) cut++;
+            if (cut > 0) l.RemoveRange(0, cut);
+            foreach (Ft8Path q in l)
+            {
+                if (q.Pair == p.Pair || Math.Abs((q.S.Utc - s.Utc).TotalMinutes) > Ft8Minutes) continue;
+                if (AxisDiff(q.Axis, p.Axis) > Ft8Deg || Astro.DistanceKm(q.Mid, p.Mid) > Ft8MidKm) continue;
+                q.Parallel = true; p.Parallel = true;
+            }
+            s.Received = now;
+            l.Add(p);
+            if (l.Count > 30000) l.RemoveRange(0, 5000);
+            if (km <= Ft8MinKm) return false;
+            s.DistKm = km;
+            if (!ft8Keys.Add(s.Key + "|" + band)) return false;
+            Ft8Long.Add(p);
+            if (Ft8Long.Count > 2000) { for (int k = 0; k < 200; k++) ft8Keys.Remove(Ft8Long[k].S.Key + "|" + Ft8Long[k].S.Band); Ft8Long.RemoveRange(0, 200); }
+            return !p.Parallel;
+        }
+
         // tutti gli spot da disegnare nel traffico in diretta, in ordine di arrivo
         public static List<MsSpot> MapSpots()
         {
@@ -295,6 +384,7 @@ namespace YAMS
                 WsjtxUdp.Load(cfg);
                 if (WsjtxUdp.AutoStart && !WsjtxUdp.Running) WsjtxUdp.Start();
                 PskActive.Enabled = cfg.GetB("psk_monitor_attivi", true);
+                Ft8Enabled = cfg.GetB("ft8_isolati", true);
                 PskActive.Start();
             }
         }
@@ -367,6 +457,7 @@ namespace YAMS
                 MsSpot s = Parse(kv.Value, i, now);
                 if (DropLow && s != null && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
                 if (DropCw && s != null && IsCw(s)) { DroppedCw++; continue; }
+                if (s != null && NoteFt8(s, now)) added = true;   // FT8 lunghi e isolati (prima dello scarto dei vicini)
                 if (DropNear && s != null && IsNear(s)) { DroppedNear++; continue; }
                 ConsoleLines[i].Enqueue(kv.Value);
                 while (ConsoleLines[i].Count > 200) ConsoleLines[i].Dequeue();
@@ -382,6 +473,9 @@ namespace YAMS
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
                 if (DropCw && IsCw(s)) { DroppedCw++; continue; }
                 NoteListener(s);   // chi ascolta resta sulla mappa anche se lo spot e' vicino
+                if (NoteMine(s, now)) added = true;
+                if (NoteFt8(s, now)) added = true;
+                if (s.Source == 3 && IsFt8(s)) continue;   // FT8 da MQTT: servono solo alla clausola degli FT8 isolati
                 if (DropNear && IsNear(s)) { DroppedNear++; continue; }
                 ConsoleLines[k].Enqueue(s.Line);
                 while (ConsoleLines[k].Count > 200) ConsoleLines[k].Dequeue();
