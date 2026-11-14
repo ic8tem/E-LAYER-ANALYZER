@@ -149,7 +149,7 @@ namespace YAMS
 
         // ---- clausola degli FT8 isolati (regola dell'autore, IC8TEM, 14/11/2026) ----
         // Uno spot FT8 oltre i 1100 km che nei 3 minuti intorno non ha tratte parallele (stessa banda, punto medio entro
-        // 300 km e direzione entro 20 gradi, coppia di stazioni diversa) non ha l'aspetto dell'E-sporadico o della tropo,
+        // 300 km e direzione entro 15 gradi, coppia di stazioni diversa) non ha l'aspetto dell'E-sporadico o della tropo,
         // che danno sempre molte tratte vicine e parallele: puo' essere una scia meteorica. Si mostra nel Traffico in
         // diretta in verde chiaro, con la riga della tabella che lampeggia sempre. Non entra nell'archivio MS.
         public class Ft8Path
@@ -161,7 +161,7 @@ namespace YAMS
             public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo)
         }
         public static bool Ft8Enabled = true;
-        public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 20;
+        public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 15;
         public static int Ft8Seen;
         static readonly Dictionary<string, List<Ft8Path>> ft8Recent = new Dictionary<string, List<Ft8Path>>();
         public static readonly List<Ft8Path> Ft8Long = new List<Ft8Path>();   // FT8 oltre i 1100 km (ultimi 2000)
