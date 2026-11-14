@@ -27,6 +27,7 @@ namespace YAMS
         IStorageProvider StorageProvider { get { TopLevel t = TopLevel.GetTopLevel(this); return t != null ? t.StorageProvider : null; } }
         public static Action<string> LanguageRequested;   // cambio di lingua: lo esegue la finestra di E-LAYER ANALYZER
         public static Action<int> ThemeRequested;         // cambio dello schema di colori: idem
+        public static bool Hosted = true;                 // dentro E-LAYER ANALYZER: le righe telnet arrivano da DATA COLLECTION
         bool openedOnce;
         public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
         public void SaveSettings() { SaveConfig(); }
@@ -37,7 +38,6 @@ namespace YAMS
             replaced = true;
         }
 
-        public static bool Hosted = true;    // true dentro E-LAYER ANALYZER (tools/sync_yams.py)
         string dataDir;
         Config cfg;
         PathModel model;

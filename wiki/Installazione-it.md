@@ -31,7 +31,7 @@ Installa la nuova versione sopra la precedente: impostazioni, spot raccolti, log
 
 **I pacchetti di sistema (.deb, .rpm, Arch, Slackware) non si aggiornano da soli.** Con questi il programma segnala soltanto la versione nuova: scarica il pacchetto nuovo dalla pagina delle Release e installalo come la prima volta (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). L'aggiornamento automatico funziona con l'installatore e gli zip di Windows, l'app del Mac, i portatili tar.gz e l'AppImage.
 
-**Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 6 ore il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
+**Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 30 minuti il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
 
 - **Aggiorna ora** scarica il pacchetto portatile adatto al computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), chiude il programma, sostituisce i file e lo riavvia. Impostazioni, spot raccolti, log e `call3.txt` restano.
 - **Più tardi** lo ripropone al controllo successivo; **Salta questa versione** non propone più quella versione.

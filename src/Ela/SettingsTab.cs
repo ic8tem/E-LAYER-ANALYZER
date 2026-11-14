@@ -110,7 +110,7 @@ namespace ELA
                 Txt(Lang.T("Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123."), true)));
 
             // aggiornamenti
-            CheckBox cChk = Ui.C(Lang.T("Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)"), Station.Cfg.GetB("agg_controlla", true));
+            CheckBox cChk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 30 minuti"), Station.Cfg.GetB("agg_controlla", true));
             CheckBox cAuto = Ui.C(Lang.T("Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere"), Station.Cfg.GetB("agg_automatici", true));
             cChk.IsCheckedChanged += (s, e) => { Station.Cfg.Set("agg_controlla", cChk.IsChecked == true); cAuto.IsEnabled = cChk.IsChecked == true; Station.Save(); };
             cAuto.IsCheckedChanged += (s, e) => { Station.Cfg.Set("agg_automatici", cAuto.IsChecked == true); Station.Save(); };

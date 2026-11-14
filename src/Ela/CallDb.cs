@@ -1,6 +1,6 @@
 // E-LAYER ANALYZER - archivio nominativo -> locator: un solo database per tutto il programma, quello del nucleo di YA-MS
 // (YAMS.CallDb, regole di LIVETROPOVHF: aggiornamento da MMMonVHF, voci a mano, file aggiunti, correzioni dal cluster,
-// locatori a 6 caratteri imparati, G7VRD ogni 6 ore, correzioni scritte dentro data/call3.txt). Questa classe tiene solo
+// locatori a 6 caratteri imparati, G7VRD ogni 30 minuti, correzioni scritte dentro data/call3.txt). Questa classe tiene solo
 // i nomi usati dalle linguette di E-LAYER e passa tutto a YAMS.CallDb (richiesta dell'autore, 14/11/2026).
 // I locatori imparati dalla versione precedente (data/call3_nuovi.txt) si passano una volta a LOC6 di YA-MS.
 using System;
