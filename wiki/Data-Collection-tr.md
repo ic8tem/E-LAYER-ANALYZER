@@ -18,7 +18,11 @@
 
 Bant ve kaynak filtreleriyle son 2000 spot. Arşiv: `data/spot` içinde her gün için bir CSV dosyası. Program her kapandığında spot veritabanı boşaltılır (bellek ve `data/spot` içindeki dosyalar): her oturum sıfırdan başlar.
 
-**Yerel filtre** (isteğe bağlı kutu): 27990,0 kHz'in altındaki ya da 145 MHz'in üstündeki "DX de" satırları atılır, konsolda gösterilmez ve saklanmaz. **Belirsiz lokatörler** (6 karakterden az) CALL3'ten alınır: CALL3'te 6 karakterli bir lokatör varsa her zaman o geçerlidir. YA-MS'te olduğu gibi meteor scatter (Sporadic-E değil) spot'ları, tipik MS frekans pencerelerinde (50190-50300, 70100-70400, 144290-144399 kHz) başka bir yayılım etiketi (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) taşımayanlar ile yalnızca MS'e özgü modlarla (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ya da `<MS>` ile gelenlerdir. `<AS>`/`<ACS>` (aircraft scatter) içeren spot'lar Sporadic-E için kullanılmaz.
+**Yerel filtre** (isteğe bağlı kutu, AYARLAR'da): 27990,0 kHz'in altındaki ya da 145 MHz'in üstündeki "DX de" satırları atılır, konsolda gösterilmez ve saklanmaz; 430 ile 440 MHz arasında yalnızca aurora spot'ları geçer. **Belirsiz lokatörler** (6 karakterden az) CALL3'ten alınır: CALL3'te 6 karakterli bir lokatör varsa her zaman o geçerlidir. YA-MS'te olduğu gibi meteor scatter (Sporadic-E değil) spot'ları, tipik MS frekans pencerelerinde (50190-50300, 70100-70400, 144290-144399 kHz) başka bir yayılım etiketi (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) taşımayanlar ile yalnızca MS'e özgü modlarla (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ya da `<MS>` ile gelenlerdir. İstisna: 50 ve 70 MHz'de FT8 ve FT4; burada bilinen mod belirler (70,154 MHz'teki FT8, MS penceresinin içinde bile Sporadic-E'ye gider). `<AS>`/`<ACS>` (aircraft scatter) içeren spot'lar Sporadic-E için kullanılmaz.
+
+## Spot filtreleri
+
+Veri toplama **tüm program için tektir**: her spot filtrelerden geçer ve her yayılım türünün sekmesine gider. 0.4.18 sürümünden itibaren filtreler, yerel filtre ve filtre testi **[AYARLAR](Settings-tr)** sekmesinde, **Spot yönlendirme** alt sekmesindedir.
 
 ## CALL3
 
@@ -27,3 +31,13 @@ Bant ve kaynak filtreleriyle son 2000 spot. Arşiv: `data/spot` içinde her gün
 0.4.16 sürümünden itibaren tüm program için tek bir CALL3 veritabanı vardır: YA-MS Veri toplama'nınki (METEOR SCATTER sekmesi), LIVETROPOVHF ile aynı kurallarla: MMMonVHF'den güncelleme, elle girişler, eklenen dosyalar, küme düzeltmeleri, öğrenilen lokatörler ve 6 saatte bir G7VRD; düzeltmeler data/call3.txt içine yazılır ve data/call3_nuovi.txt lokatörleri bir kez içe aktarılır. WSJT-X, JTDX ve MSHV spotları UDP ile de gelir (kaynak WSJT-X UDP, 2237 portu, 2238'e yönlendirme).
 
 YA-MS'ten gelen bu filtreler (CW, en az mesafe, frekans pencereleri, MS modları, bantlar) yalnızca METEOR SCATTER sekmesi için geçerlidir: hangi spotların onun toplamasına gireceğine karar verirler. Diğer sekmeler tüm spotları alır ve kendi filtrelerini kullanır.
+
+## Spot ve Yayılım verileri alt sekmeleri
+
+Sekmenin iki alt sekmesi vardır: **Spot'lar** (oturumlar, PSKReporter MQTT, WSJT-X UDP, toplanan spot'lar ve CALL3) ve **Yayılım verileri**:
+
+- **N0NBH** (hamqsl.com): VHF afişi ve güneş verileri, Avrupa ve Kuzey Amerika E-skip'i (DXrobot), aurora.
+- **Aurora için Bz**: NOAA SWPC gerçek zamanlı güneş rüzgârı (DSCOVR/ACE, L1 noktası), Bz için en iyi kaynak.
+- **Meteor scatter**: Make More Miles on VHF'den günlük meteor etkinliği (RMOB).
+
+En fazla saatte bir indirilirler. Özet SPORADIC-E, F.A.I. ve AURORA haritalarında görünür. Sekme çubuğunun sağındaki **kıta menüsü** haritaları kaydırır ve o kıtanın verilerini seçer.

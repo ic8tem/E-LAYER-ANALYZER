@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	İz boyunca QTF aralığı (sapma ≤ 1,5°, her iki istasyonun Lange-Hesse penceresi içinde):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Scatter point penceresi (Lange-Hesse: 54° jeomanyetik enlemde 370-1100 km, her istasyonun IGRF-14 eğimiyle kaydırılmış): {0}; {1}. Yükseklik yaklaşık 110 km, diklik ±3° içinde.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Önerilen scatter point en az bir istasyon için Lange-Hesse penceresinin dışında: mümkün, ancak daha az olası.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Yerel filtre: 27990,0 kHz'in altındaki ve 145 MHz'in üstündeki küme satırlarını atar (gösterilmez ve saklanmaz); 430-440 MHz'de yalnızca aurora spot'ları geçer
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Veri toplama tüm program için tektir: DATA COLLECTION'da alınan her spot bu filtrelerden geçer ve her yayılım türünün sekmesine gider.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 ve 70 MHz kuralları (yazarın ve IK3XTV'nin kuralları)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz'de (8 m) en kısa mesafe aynı şekilde türetilir ({0:F0} km) ve yalnızca E katmanı geometrisinin ilk atlaması içindeki mesafeler geçerlidir ({1:F0} km).
+in 70 MHz (km)	70 MHz'de (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	70 MHz'de FT8 ve FT4, bant planının meteor scatter penceresi içinde bile sporadik E'ye gider (70,154 MHz FT8 frekansıdır).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	50 MHz'de FT8 ve FT4: yalnızca bir bulutun parçasıysa, yani orta noktası yakın olan başka bir 50 MHz spot'u varsa sporadik E; tek başına bir spot meteor scatter'a gider
+punto medio entro (km)	orta nokta en çok (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	144 MHz'de Q65 ve JT65 EME'dir ve metinde <ES> yoksa sporadik E'ye girmez.
+sì	evet
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Yerel filtre: satır atıldı (27990 kHz - 145 MHz aralığı dışında; 430-440 MHz'de yalnızca aurora spot'ları geçer)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(atıldı: ilk atlamanın ötesinde, {0:F0} km, 40 MHz'de)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(atıldı: 144 MHz'de Q65 ya da JT65 = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(50 MHz'de, {0:F0} dk içinde orta noktası {1:F0} km içinde başka spot olmayan FT8/FT4: meteor scatter)
+scartate dal filtro locale: {0}	yerel filtrenin attıkları: {0}
+IMPOSTAZIONI	AYARLAR
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): sarı, yalnızca ilk atlama içinde
+Generali	Genel
+Smistamento degli spot	Spot yönlendirme
+Impostazioni generali	Genel ayarlar
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Bunlar üst satırdaki verilerle aynıdır: METEOR SCATTER dahil tüm sekmeler için geçerlidir.
+Aspetto	Görünüm
+Lingua	Dil
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Yazı tipi boyutu tüm program için geçerlidir, %85'ten %140'a kadar, YA-MS'teki gibi. Dil ve tema pencereyi yeniden oluşturur: ayarlar ve spot'lar korunur.
+Mappe e dati previsionali	Haritalar ve tahmin verileri
+Continente	Kıta
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Mercator haritalarını seçilen kıtaya kaydırır ve tahmin verilerini seçer (Avrupa ve Kuzey Amerika için N0NBH E-skip'i). Sekme çubuğundaki menüyle aynıdır.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Program saati başlangıçta ve her 5 dakikada bir NTP sunucularıyla denetler ve hesaplarda doğru saati kullanır. Windows'ta, yönetici haklarıyla, bilgisayarın saatini de düzeltir. Üstteki yazı NTP:FAILED ise ağ UDP 123 bağlantı noktasını engelliyordur.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	GitHub'da güncellemeleri denetle (başlangıçta ve her 6 saatte bir)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Otomatik ve sessiz güncelleme: yeni sürümü sormadan indirir ve kurar
+Controlla adesso	Şimdi denetle
+Versione in uso: {0}	Kullanılan sürüm: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Otomatik güncelleme tüm paketlerle çalışır, çünkü program her zaman kullanıcının bir klasöründen çalışır: Windows'ta kurulum programıyla ya da zip ile seçilen klasör, Mac'te uygulama, Linux'ta ~/E-LAYER-ANALYZER. .deb, .rpm, Arch, Slackware paketleriyle ve AppImage ile ~/E-LAYER-ANALYZER içindeki kopya güncellenir: paket yöneticisi, yeni paketi kurana kadar ilk kurulan sürümü göstermeye devam eder. Program klasörü yazılabilir değilse program bunu bildirir ve yeni sürüm Release sayfasından elle indirilmelidir.
+Apri la cartella dei dati	Veri klasörünü aç
+Dati	Veriler
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Programın tüm verileri programın yanındaki data klasöründedir (AppData'da hiçbir şey yok). Toplanan spot'lar program kapanırken silinir. Bureau of Meteorology API anahtarı DATA COLLECTION, Yayılım verileri bölümüne girilir.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - sunucu saati ile bilgisayar saati arasındaki fark: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - erişilebilir NTP sunucusu yok: program bilgisayarın saatini kullanıyor.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	DATA COLLECTION'da alınan her spot (cluster, RBN, PSKReporter, WSJT-X) tablodaki sırayla kurallara göre denetlenir: geçerli olan ilk kural sekmeyi belirler. Sağda her modun filtreleri, değiştirilebilir değerleri ve bir cluster satırının testiyle birlikte yer alır.
+Se lo spot...	Spot...
+Valori	Değerler
+va a	gider
+nessuna linguetta	hiçbir sekme
+è fuori dalla gamma del filtro locale	yerel filtrenin aralığı dışındaysa
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz altı ya da 145 MHz üstü; 430-440 MHz'de yalnızca aurora
+filtro locale spento	yerel filtre kapalı
+scartato	atılır
+contiene AUE, AU-E o AURORAL E	AUE, AU-E ya da AURORAL E içeriyorsa
+contiene una parola dell'aurora (o modo AU)	bir aurora sözcüğü içeriyorsa (ya da AU modu)
+contiene una parola del F.A.I. (o modo FAI)	bir F.A.I. sözcüğü içeriyorsa (ya da FAI modu)
+ha un modo del meteor scatter o <MS>	bir meteor scatter modu ya da <MS> içeriyorsa
+cade in una finestra MS del bandplan	bant planının bir MS penceresine düşüyorsa
+in 50 MHz non esclusiva	50 MHz'de dışlayıcı değil
+FT8 e FT4 in 50 e 70 MHz esclusi	50 ve 70 MHz'de FT8 ve FT4 hariç
+è FT8 o FT4 in 50 MHz senza nube	50 MHz'de bulutsuz FT8 ya da FT4 ise
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	{0:F0} dk içinde orta noktası {1:F0} km içinde başka spot yok
+regola spenta	kural kapalı
+meteor scatter (non E-sporadico)	meteor scatter (sporadik E değil)
+è Q65 o JT65 in 144 MHz	144 MHz'de Q65 ya da JT65 ise
+salvo <ES> nel testo	metinde <ES> yoksa
+EME: scartato	EME: atılır
+contiene una scritta di altra propagazione	başka yayılım ibaresi içeriyorsa
+non E-sporadico	sporadik E değil
+è transequatoriale	transekvatoryal ise
+fascia di inclinazione ± {0:F0}°	eğim kuşağı ± {0:F0}°
+non E-sporadico (TEP)	sporadik E değil (TEP)
+è in 28 MHz	28 MHz'de ise
+da {0:F0} km	{0:F0} km'den itibaren
+è in 40 MHz	40 MHz'de ise
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} ile {1:F0} km arası (ilk atlama)
+è in 50 MHz	50 MHz'de ise
+è in 70 MHz	70 MHz'de ise
+è in 144 MHz	144 MHz'de ise
+oltre {0:F0} km, con conferma	{0:F0} km'nin ötesinde, doğrulamayla
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	hiçbir kurala uymuyorsa (tropo, 432 MHz, HF...)
+resta in Spot raccolti	Toplanan spot'larda kalır
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Program {0} paketiyle kurulmuş: güncellemek için yeni paketi sürüm sayfasından indirin ve ilki gibi kurun.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Otomatik güncelleme Windows kurulum programı ve zip'i, Mac uygulaması, .tar.gz arşivleri ve AppImage için geçerlidir. Sistem paketleriyle (.deb, .rpm, Arch, Slackware) program kendiliğinden güncellenmez: yeni sürümü bildirir; yeni sürüm, yeni paket Release sayfasından indirilerek kurulur. Program klasörü yazılabilir değilse program bunu bildirir ve yeni sürüm elle indirilmelidir.

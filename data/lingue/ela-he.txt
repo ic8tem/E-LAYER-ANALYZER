@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	טווח QTF לאורך ה-Scatter trail ‏(סטייה ≤ 1.5°, בתוך חלון Lange-Hesse של שתי התחנות):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	חלון נקודת הפיזור (Lange-Hesse: 370-1100 km ב-54° רוחב גאומגנטי, מוזז לפי הנטייה של IGRF-14 של כל תחנה): {0}; {1}. גובה כ-110 km, ניצבות בטווח ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	נקודת הפיזור המוצעת נמצאת מחוץ לחלון Lange-Hesse עבור תחנה אחת לפחות: זה אפשרי, אך פחות סביר.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	מסנן מקומי: זורק שורות קלסטר מתחת ל-27990.0 kHz ומעל 145 MHz (אינן מוצגות ואינן נשמרות); ב-430-440 MHz עוברים רק ספוטי אורורה
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	איסוף הנתונים הוא אחד לכל התוכנה: כל ספוט שמתקבל ב-DATA COLLECTION עובר דרך המסננים האלה ומגיע ללשוניות של כל אופן התפשטות.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	כללי 28, 40, 50 ו-70 MHz (כללי המחבר ו-IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	ב-40 MHz ‏(8 m) המרחק המינימלי נגזר באותו אופן ({0:F0} km) ותקפים רק מרחקים בתוך הקפיצה הראשונה של גאומטריית שכבת E ({1:F0} km).
+in 70 MHz (km)	ב-70 MHz ‏(km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 ו-FT4 ב-70 MHz הולכים ל-E הספורדי גם בתוך חלון הפיזור המטאורי של תוכנית הפסים (70.154 MHz הוא תדר ה-FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 ו-FT4 ב-50 MHz: E ספורדי רק אם הם חלק מענן, כלומר אם יש ספוט אחר ב-50 MHz עם נקודת אמצע קרובה; ספוט בודד הולך לפיזור המטאורי
+punto medio entro (km)	נקודת אמצע בטווח ‏(km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 ו-JT65 ב-144 MHz הם EME ואינם נכנסים ל-E הספורדי, אלא אם יש <ES> בטקסט.
+sì	כן
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	מסנן מקומי: השורה נזרקה (מחוץ לתחום 27990 kHz - 145 MHz; ב-430-440 MHz עוברים רק ספוטי אורורה)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(נזרק: מעבר לקפיצה הראשונה, {0:F0} km, ב-40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(נזרק: Q65 או JT65 ב-144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 ב-50 MHz בלי ספוט אחר תוך {0:F0} דק׳ עם נקודת אמצע בטווח {1:F0} km: פיזור מטאורי)
+scartate dal filtro locale: {0}	נזרקו על ידי המסנן המקומי: {0}
+IMPOSTAZIONI	הגדרות
+8 m (40 MHz): giallo, solo entro il primo salto	8 m ‏(40 MHz): צהוב, רק בתוך הקפיצה הראשונה
+Generali	כללי
+Smistamento degli spot	ניתוב ספוטים
+Impostazioni generali	הגדרות כלליות
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	אלה אותם נתונים כמו בשורה העליונה: הם חלים על כל הלשוניות, גם על METEOR SCATTER.
+Aspetto	מראה
+Lingua	שפה
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	גודל הגופן חל על כל התוכנה, מ-85 עד 140 %, כמו ב-YA-MS. השפה וערכת הנושא בונות מחדש את החלון: ההגדרות והספוטים נשמרים.
+Mappe e dati previsionali	מפות ונתוני תחזית
+Continente	יבשת
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	מזיז את מפות מרקטור ליבשת שנבחרה ובוחר את נתוני התחזית (E-skip של N0NBH לאירופה ולצפון אמריקה). זה אותו תפריט כמו בסרגל הלשוניות.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	התוכנה בודקת את השעה מול שרתי NTP בהפעלה וכל 5 דקות ומשתמשת בשעה הנכונה בחישובים. ב-Windows, עם הרשאות מנהל, היא מתקנת גם את שעון המחשב. אם הכיתוב למעלה הוא NTP:FAILED, הרשת חוסמת את פורט UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	בדוק עדכונים ב-GitHub (בהפעלה וכל 6 שעות)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	עדכון אוטומטי ושקט: מוריד ומתקין את הגרסה החדשה בלי לשאול
+Controlla adesso	בדוק עכשיו
+Versione in uso: {0}	גרסה בשימוש: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	העדכון האוטומטי עובד עם כל החבילות, כי התוכנה רצה תמיד מתיקייה של המשתמש: התיקייה שנבחרה במתקין או ב-zip ב-Windows, היישום ב-Mac, ~/E-LAYER-ANALYZER ב-Linux. עם החבילות .deb, .rpm, Arch, Slackware ועם ה-AppImage מתעדכן העותק שב-~/E-LAYER-ANALYZER: מנהל החבילות ממשיך להציג את הגרסה שהותקנה בפעם הראשונה, עד שתתקינו את החבילה החדשה. אם אי אפשר לכתוב לתיקיית התוכנה, התוכנה אומרת זאת ויש להוריד את הגרסה החדשה ידנית מדף ה-Release.
+Apri la cartella dei dati	פתח את תיקיית הנתונים
+Dati	נתונים
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	כל נתוני התוכנה נמצאים בתיקייה data שליד התוכנה (שום דבר ב-AppData). הספוטים שנאספו נמחקים בסגירת התוכנה. מפתח ה-API של Bureau of Meteorology מוזן ב-DATA COLLECTION, נתוני התפשטות.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - ההפרש בין שעת השרתים לשעת המחשב: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - אין שרת NTP זמין: התוכנה משתמשת בשעון המחשב.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	כל ספוט שמתקבל ב-DATA COLLECTION ‏(cluster, RBN, PSKReporter, WSJT-X) נבדק מול הכללים לפי סדר הטבלה: הכלל הראשון שחל קובע את הלשונית. מימין המסננים של כל אופן, עם הערכים הניתנים לשינוי ובדיקה של שורת קלסטר.
+Se lo spot...	אם הספוט...
+Valori	ערכים
+va a	הולך אל
+nessuna linguetta	אף לשונית
+è fuori dalla gamma del filtro locale	מחוץ לתחום המסנן המקומי
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	מתחת ל-27990 kHz או מעל 145 MHz; ב-430-440 MHz רק אורורה
+filtro locale spento	המסנן המקומי כבוי
+scartato	נזרק
+contiene AUE, AU-E o AURORAL E	מכיל AUE, AU-E או AURORAL E
+contiene una parola dell'aurora (o modo AU)	מכיל מילת אורורה (או אופן AU)
+contiene una parola del F.A.I. (o modo FAI)	מכיל מילת F.A.I. (או אופן FAI)
+ha un modo del meteor scatter o <MS>	יש לו אופן של פיזור מטאורי או <MS>
+cade in una finestra MS del bandplan	נופל בחלון MS של תוכנית הפסים
+in 50 MHz non esclusiva	ב-50 MHz לא בלעדי
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 ו-FT4 ב-50 וב-70 MHz מוחרגים
+è FT8 o FT4 in 50 MHz senza nube	הוא FT8 או FT4 ב-50 MHz בלי ענן
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	אין ספוט אחר תוך {0:F0} דק׳ עם נקודת אמצע בטווח {1:F0} km
+regola spenta	הכלל כבוי
+meteor scatter (non E-sporadico)	פיזור מטאורי (לא E ספורדי)
+è Q65 o JT65 in 144 MHz	הוא Q65 או JT65 ב-144 MHz
+salvo <ES> nel testo	אלא אם יש <ES> בטקסט
+EME: scartato	EME: נזרק
+contiene una scritta di altra propagazione	מכיל ציון של התפשטות אחרת
+non E-sporadico	לא E ספורדי
+è transequatoriale	הוא טרנס-משווני
+fascia di inclinazione ± {0:F0}°	רצועת נטייה ± {0:F0}°
+non E-sporadico (TEP)	לא E ספורדי (TEP)
+è in 28 MHz	הוא ב-28 MHz
+da {0:F0} km	מ-{0:F0} km
+è in 40 MHz	הוא ב-40 MHz
+da {0:F0} a {1:F0} km (primo salto)	מ-{0:F0} עד {1:F0} km ‏(קפיצה ראשונה)
+è in 50 MHz	הוא ב-50 MHz
+è in 70 MHz	הוא ב-70 MHz
+è in 144 MHz	הוא ב-144 MHz
+oltre {0:F0} km, con conferma	מעבר ל-{0:F0} km, עם אישור
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	אינו מתאים לאף כלל (טרופו, 432 MHz, HF...)
+resta in Spot raccolti	נשאר בספוטים שנאספו
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	התוכנה מותקנת עם החבילה {0}: כדי לעדכן אותה הורידו את החבילה החדשה מדף ה-Release והתקינו אותה כמו הראשונה.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	העדכון האוטומטי חל על המתקין וה-zip של Windows, על יישום ה-Mac, על ארכיוני ה-.tar.gz ועל ה-AppImage. עם חבילות המערכת (.deb, .rpm, Arch, Slackware) התוכנה אינה מתעדכנת מעצמה: היא מודיעה על הגרסה החדשה, שמותקנת על ידי הורדת החבילה החדשה מדף ה-Release. אם אי אפשר לכתוב לתיקיית התוכנה, התוכנה אומרת זאת ויש להוריד את הגרסה החדשה ידנית.

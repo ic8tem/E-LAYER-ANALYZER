@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	مدى QTF على طول الـ Scatter trail ‏(الانحراف ≤ 1.5°، داخل نافذة Lange-Hesse لكلتا المحطتين):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	نافذة نقطة التشتت (Lange-Hesse: 370-1100 km عند خط العرض المغناطيسي الأرضي 54°، مُزاحة وفق ميل IGRF-14 لكل محطة): {0}؛ {1}. الارتفاع نحو 110 km، والتعامد ضمن ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	نقطة التشتت المقترحة خارج نافذة Lange-Hesse لمحطة واحدة على الأقل: هذا ممكن، لكنه أقل احتمالاً.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	المرشح المحلي: يستبعد أسطر الكلستر دون 27990.0 kHz وفوق 145 MHz (لا تُعرض ولا تُخزَّن)؛ وفي 430-440 MHz لا تمرّ إلا بلاغات الشفق
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	جمع البيانات واحد للبرنامج كله: كل بلاغ يُستلم في DATA COLLECTION يمرّ عبر هذه المرشحات ويذهب إلى تبويبات أنماط الانتشار.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	قواعد 28 و40 و50 و70 MHz (قواعد المؤلف وIK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	على 40 MHz ‏(8 m) تُستخرج المسافة الدنيا بالطريقة نفسها ({0:F0} km) ولا تُقبل إلا المسافات ضمن القفزة الأولى لهندسة الطبقة E ({1:F0} km).
+in 70 MHz (km)	على 70 MHz ‏(km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	يذهب FT8 وFT4 على 70 MHz إلى الطبقة E المتقطعة حتى داخل نافذة التشتت النيزكي في خطة النطاق (70.154 MHz هو تردد FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 وFT4 على 50 MHz: طبقة E متقطعة فقط إذا كانا جزءاً من سحابة، أي إذا وُجد بلاغ آخر على 50 MHz بنقطة منتصف قريبة؛ والبلاغ المنفرد يذهب إلى التشتت النيزكي
+punto medio entro (km)	نقطة المنتصف ضمن ‏(km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 وJT65 على 144 MHz هما EME ولا يدخلان في الطبقة E المتقطعة، إلا إذا وُجد <ES> في النص.
+sì	نعم
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	المرشح المحلي: استُبعد السطر (خارج المدى 27990 kHz - 145 MHz؛ وفي 430-440 MHz لا تمرّ إلا بلاغات الشفق)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(مستبعد: أبعد من القفزة الأولى، {0:F0} km، على 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(مستبعد: Q65 أو JT65 على 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 على 50 MHz دون بلاغ آخر خلال {0:F0} دقيقة بنقطة منتصف ضمن {1:F0} km: تشتت نيزكي)
+scartate dal filtro locale: {0}	استبعدها المرشح المحلي: {0}
+IMPOSTAZIONI	الإعدادات
+8 m (40 MHz): giallo, solo entro il primo salto	8 m ‏(40 MHz): أصفر، ضمن القفزة الأولى فقط
+Generali	عام
+Smistamento degli spot	توزيع البلاغات
+Impostazioni generali	الإعدادات العامة
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	هي البيانات نفسها في السطر العلوي: تسري على كل التبويبات، ومنها METEOR SCATTER.
+Aspetto	المظهر
+Lingua	اللغة
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	يسري حجم الخط على البرنامج كله، من 85 إلى 140 %، كما في YA-MS. وتعيد اللغة والسمة بناء النافذة: وتبقى الإعدادات والبلاغات.
+Mappe e dati previsionali	الخرائط والبيانات التنبؤية
+Continente	القارة
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	ينقل خرائط ميركاتور إلى القارة المختارة ويختار البيانات التنبؤية (E-skip من N0NBH لأوروبا وأمريكا الشمالية). وهي القائمة نفسها الموجودة في شريط التبويبات.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	يتحقق البرنامج من الوقت بخوادم NTP عند التشغيل وكل 5 دقائق ويستخدم الوقت الصحيح في الحسابات. وعلى Windows، مع صلاحيات المسؤول، يصحّح أيضاً ساعة الحاسوب. وإذا كانت العبارة في الأعلى NTP:FAILED فالشبكة تحجب المنفذ UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	التحقق من التحديثات على GitHub (عند التشغيل وكل 6 ساعات)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	تحديث تلقائي وصامت: ينزّل الإصدار الجديد ويثبّته دون سؤال
+Controlla adesso	تحقق الآن
+Versione in uso: {0}	الإصدار المستخدم: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	يعمل التحديث التلقائي مع كل الحزم، لأن البرنامج يعمل دائماً من مجلد للمستخدم: المجلد المختار بالمثبّت أو بملف zip على Windows، والتطبيق على Mac، و~/E-LAYER-ANALYZER على Linux. ومع الحزم .deb و.rpm وArch وSlackware ومع AppImage تُحدَّث النسخة الموجودة في ~/E-LAYER-ANALYZER: ويظل مدير الحزم يعرض الإصدار المثبّت أول مرة، إلى أن تثبّت الحزمة الجديدة. وإذا كان مجلد البرنامج غير قابل للكتابة، يذكر البرنامج ذلك ويجب تنزيل الإصدار الجديد يدوياً من صفحة Release.
+Apri la cartella dei dati	فتح مجلد البيانات
+Dati	البيانات
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	كل بيانات البرنامج في مجلد data بجانب البرنامج (لا شيء في AppData). وتُحذف البلاغات المجمَّعة عند إغلاق البرنامج. ويُدخَل مفتاح API لـ Bureau of Meteorology في DATA COLLECTION، بيانات الانتشار.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - الفرق بين وقت الخوادم ووقت الحاسوب: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - لا يمكن الوصول إلى أي خادم NTP: يستخدم البرنامج ساعة الحاسوب.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	يُفحص كل بلاغ يُستلم في DATA COLLECTION ‏(cluster، RBN، PSKReporter، WSJT-X) بالقواعد بترتيب الجدول: أول قاعدة تنطبق تحدد التبويب. وعلى اليمين مرشحات كل نمط، مع القيم القابلة للتعديل واختبار سطر من الكلستر.
+Se lo spot...	إذا كان البلاغ...
+Valori	القيم
+va a	يذهب إلى
+nessuna linguetta	لا تبويب
+è fuori dalla gamma del filtro locale	خارج مدى المرشح المحلي
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	دون 27990 kHz أو فوق 145 MHz؛ وفي 430-440 MHz الشفق فقط
+filtro locale spento	المرشح المحلي معطّل
+scartato	مستبعد
+contiene AUE, AU-E o AURORAL E	يحتوي على AUE أو AU-E أو AURORAL E
+contiene una parola dell'aurora (o modo AU)	يحتوي على كلمة للشفق (أو النمط AU)
+contiene una parola del F.A.I. (o modo FAI)	يحتوي على كلمة لـ F.A.I. (أو النمط FAI)
+ha un modo del meteor scatter o <MS>	بنمط التشتت النيزكي أو <MS>
+cade in una finestra MS del bandplan	يقع في نافذة MS من خطة النطاق
+in 50 MHz non esclusiva	غير حصرية على 50 MHz
+FT8 e FT4 in 50 e 70 MHz esclusi	باستثناء FT8 وFT4 على 50 و70 MHz
+è FT8 o FT4 in 50 MHz senza nube	FT8 أو FT4 على 50 MHz بلا سحابة
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	لا بلاغ آخر خلال {0:F0} دقيقة بنقطة منتصف ضمن {1:F0} km
+regola spenta	القاعدة معطّلة
+meteor scatter (non E-sporadico)	تشتت نيزكي (ليس طبقة E متقطعة)
+è Q65 o JT65 in 144 MHz	Q65 أو JT65 على 144 MHz
+salvo <ES> nel testo	إلا إذا وُجد <ES> في النص
+EME: scartato	EME: مستبعد
+contiene una scritta di altra propagazione	يحتوي على علامة انتشار آخر
+non E-sporadico	ليس طبقة E متقطعة
+è transequatoriale	عابر للاستواء
+fascia di inclinazione ± {0:F0}°	نطاق الميل ± {0:F0}°
+non E-sporadico (TEP)	ليس طبقة E متقطعة (TEP)
+è in 28 MHz	على 28 MHz
+da {0:F0} km	من {0:F0} km
+è in 40 MHz	على 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	من {0:F0} إلى {1:F0} km ‏(القفزة الأولى)
+è in 50 MHz	على 50 MHz
+è in 70 MHz	على 70 MHz
+è in 144 MHz	على 144 MHz
+oltre {0:F0} km, con conferma	أبعد من {0:F0} km، مع تأكيد
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	لا ينطبق عليه أي قاعدة (تروبو، 432 MHz، HF...)
+resta in Spot raccolti	يبقى في البلاغات المجمَّعة
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	البرنامج مثبَّت بالحزمة {0}: لتحديثه نزّل الحزمة الجديدة من صفحة الإصدار وثبّتها مثل الأولى.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	يسري التحديث التلقائي على مثبّت Windows وملف zip، وتطبيق Mac، وأرشيفات .tar.gz، وAppImage. أما مع حزم النظام (.deb و.rpm وArch وSlackware) فلا يحدّث البرنامج نفسه: بل ينبّه إلى الإصدار الجديد، الذي يُثبَّت بتنزيل الحزمة الجديدة من صفحة Release. وإذا كان مجلد البرنامج غير قابل للكتابة، يذكر البرنامج ذلك ويجب تنزيل الإصدار الجديد يدوياً.
