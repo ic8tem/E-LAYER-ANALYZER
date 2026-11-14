@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Інтервал QTF уздовж Scatter trail (відхилення ≤ 1,5°, у вікні Lange-Hesse обох станцій):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Вікно точки розсіювання (Lange-Hesse: 370-1100 km на 54° геомагнітної широти, зсунуте відповідно до нахилення IGRF-14 кожної станції): {0}; {1}. Висота близько 110 km, перпендикулярність у межах ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Запропонована точка розсіювання хоча б для однієї станції лежить поза вікном Lange-Hesse: це можливо, але менш імовірно.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Локальний фільтр: відкидає рядки кластера нижче 27990,0 kHz і вище 145 MHz (не показуються й не зберігаються); у 430-440 MHz проходять лише споти аврори
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Збір даних один для всієї програми: кожен спот, отриманий у DATA COLLECTION, проходить через ці фільтри й потрапляє на вкладки кожного виду поширення.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Правила для 28, 40, 50 і 70 MHz (правила автора та IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	На 40 MHz (8 m) мінімальна відстань виводиться так само ({0:F0} km) і зараховуються лише відстані в межах першого стрибка геометрії шару E ({1:F0} km).
+in 70 MHz (km)	на 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 і FT4 на 70 MHz ідуть до спорадичного E навіть усередині вікна meteor scatter частотного плану (70,154 MHz — частота FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 і FT4 на 50 MHz: спорадичне E лише тоді, коли вони належать до хмари, тобто коли є інший спот на 50 MHz із близькою серединою траси; поодинокий спот іде до meteor scatter
+punto medio entro (km)	середина траси в межах (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 і JT65 на 144 MHz — це EME, і вони не потрапляють до спорадичного E, якщо в тексті немає <ES>.
+sì	так
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Локальний фільтр: рядок відкинуто (поза діапазоном 27990 kHz - 145 MHz; у 430-440 MHz проходять лише споти аврори)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(відкинуто: далі за перший стрибок, {0:F0} km, на 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(відкинуто: Q65 або JT65 на 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 на 50 MHz без іншого спота протягом {0:F0} хв із серединою траси в межах {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	відкинуто локальним фільтром: {0}
+IMPOSTAZIONI	НАЛАШТУВАННЯ
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): жовтий, лише в межах першого стрибка
+Generali	Загальні
+Smistamento degli spot	Розподіл спотів
+Impostazioni generali	Загальні налаштування
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Це ті самі дані, що й у рядку вгорі: вони діють для всіх вкладок, зокрема для METEOR SCATTER.
+Aspetto	Вигляд
+Lingua	Мова
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Розмір шрифту діє для всієї програми, від 85 до 140 %, як у YA-MS. Мова і тема перебудовують вікно: налаштування і споти зберігаються.
+Mappe e dati previsionali	Мапи й прогнозні дані
+Continente	Континент
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Зсуває мапи Меркатора на вибраний континент і вибирає прогнозні дані (E-skip від N0NBH для Європи та Північної Америки). Це те саме меню, що й на панелі вкладок.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Програма перевіряє час за серверами NTP під час запуску й кожні 5 хвилин і використовує правильний час у розрахунках. У Windows, з правами адміністратора, вона коригує також годинник ПК. Якщо вгорі напис NTP:FAILED, мережа блокує порт UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Перевіряти оновлення на GitHub (під час запуску й кожні 6 годин)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Автоматичне й тихе оновлення: завантажує і встановлює нову версію без запитань
+Controlla adesso	Перевірити зараз
+Versione in uso: {0}	Поточна версія: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Автоматичне оновлення працює з усіма пакетами, бо програма завжди запускається з теки користувача: теки, вибраної інсталятором або zip у Windows, застосунку на Mac, ~/E-LAYER-ANALYZER у Linux. З пакетами .deb, .rpm, Arch, Slackware і з AppImage оновлюється копія в ~/E-LAYER-ANALYZER: менеджер пакетів і далі показує версію, встановлену першого разу, доки ви не встановите новий пакет. Якщо в теку програми не можна записувати, програма про це повідомляє, і нову версію треба завантажити вручну зі сторінки Release.
+Apri la cartella dei dati	Відкрити теку даних
+Dati	Дані
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Усі дані програми зберігаються в теці data поруч із програмою (нічого в AppData). Зібрані споти видаляються під час закриття програми. Ключ API Bureau of Meteorology вводиться в DATA COLLECTION, Дані про поширення.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - різниця між часом серверів і часом ПК: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - жоден сервер NTP недоступний: програма використовує годинник ПК.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Кожен спот, отриманий у DATA COLLECTION (кластер, RBN, PSKReporter, WSJT-X), перевіряється правилами в порядку таблиці: перше правило, що спрацьовує, визначає вкладку. Праворуч — фільтри кожного виду, зі змінюваними значеннями й перевіркою рядка кластера.
+Se lo spot...	Якщо спот...
+Valori	Значення
+va a	іде до
+nessuna linguetta	жодної вкладки
+è fuori dalla gamma del filtro locale	поза діапазоном локального фільтра
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	нижче 27990 kHz або вище 145 MHz; у 430-440 MHz лише аврора
+filtro locale spento	локальний фільтр вимкнено
+scartato	відкинуто
+contiene AUE, AU-E o AURORAL E	містить AUE, AU-E або AURORAL E
+contiene una parola dell'aurora (o modo AU)	містить слово аврори (або вид AU)
+contiene una parola del F.A.I. (o modo FAI)	містить слово F.A.I. (або вид FAI)
+ha un modo del meteor scatter o <MS>	має вид meteor scatter або <MS>
+cade in una finestra MS del bandplan	потрапляє у вікно MS частотного плану
+in 50 MHz non esclusiva	на 50 MHz не виключне
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 і FT4 на 50 і 70 MHz виключено
+è FT8 o FT4 in 50 MHz senza nube	це FT8 або FT4 на 50 MHz без хмари
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	немає іншого спота протягом {0:F0} хв із серединою траси в межах {1:F0} km
+regola spenta	правило вимкнено
+meteor scatter (non E-sporadico)	meteor scatter (не спорадичне E)
+è Q65 o JT65 in 144 MHz	це Q65 або JT65 на 144 MHz
+salvo <ES> nel testo	крім <ES> у тексті
+EME: scartato	EME: відкинуто
+contiene una scritta di altra propagazione	містить позначку іншого поширення
+non E-sporadico	не спорадичне E
+è transequatoriale	трансекваторіальний
+fascia di inclinazione ± {0:F0}°	смуга нахилу ± {0:F0}°
+non E-sporadico (TEP)	не спорадичне E (TEP)
+è in 28 MHz	на 28 MHz
+da {0:F0} km	від {0:F0} km
+è in 40 MHz	на 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	від {0:F0} до {1:F0} km (перший стрибок)
+è in 50 MHz	на 50 MHz
+è in 70 MHz	на 70 MHz
+è in 144 MHz	на 144 MHz
+oltre {0:F0} km, con conferma	понад {0:F0} km, з підтвердженням
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	не підпадає під жодне правило (тропо, 432 MHz, КХ...)
+resta in Spot raccolti	залишається в Зібраних спотах
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Програму встановлено з пакетом {0}: щоб оновити її, завантажте новий пакет зі сторінки релізу і встановіть його так само, як перший.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Автоматичне оновлення діє для інсталятора і zip у Windows, застосунку Mac, архівів .tar.gz і AppImage. З системними пакетами (.deb, .rpm, Arch, Slackware) програма не оновлюється сама: вона повідомляє про нову версію, яку встановлюють, завантаживши новий пакет зі сторінки Release. Якщо в теку програми не можна записувати, програма про це повідомляє, і нову версію треба завантажити вручну.
