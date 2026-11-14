@@ -135,7 +135,7 @@ jobs:
           fi
           ls -la dist
       - name: Fotografie delle linguette (schermo virtuale)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb fonts-dejavu-core fonts-noto-cjk fonts-noto-core >/dev/null
           cp -R publish/linux-x64 run
@@ -150,15 +150,16 @@ jobs:
           ls -la shots shots/ya-ms || true
           cp run/data/errore_avvio.txt shots/ 2>/dev/null || true
           ls run/data/mappa run/data/swpc > shots/dati.txt 2>&1 || true
-      - name: Pubblica le fotografie sul ramo ci-screenshots
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Pubblica le fotografie sul ramo ci-screenshots (avvio a mano, ramo ci-screenshots-prova)
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
         run: |
           [ -d shots ] || exit 0
+          B=ci-screenshots; [ "${{ github.event_name }}" = workflow_dispatch ] && B=ci-screenshots-prova
           cd shots
-          git init -q -b ci-screenshots
+          git init -q -b $B
           git config user.name "github-actions"; git config user.email "actions@github.com"
           git add -A && git commit -q -m "fotografie ${GITHUB_SHA::7}"
-          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" ci-screenshots
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" $B
       - uses: actions/upload-artifact@v4
         with:
           name: linux
