@@ -8,13 +8,20 @@ Descarcă fișierul potrivit de pe pagina **[Releases](https://github.com/ic8tem
 |---|---|---|
 | Windows 64 de biți | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Dublu clic. Se instalează în `C:\E-LAYER-ANALYZER`, fără drepturi de administrator. Nicio scurtătură în meniul Start (ar sta în AppData), doar pictograma opțională de pe desktop. |
 | Windows 32 de biți | `...-win-x86-setup.exe` | Ca mai sus, pentru Windows pe 32 de biți. |
-| Windows portabil | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Dezarhivează oriunde și pornește `E-LAYER-ANALYZER.exe`. |
-| Linux 64 de biți (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, apoi pornește-l din meniu: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`, cu dosarul `data` alături. |
+| Windows pe ARM (PC-uri Snapdragon) | `...-win-arm64-setup.exe` | Ca mai sus, pentru Windows pe procesoare ARM. |
+| Windows portabil | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Dezarhivează oriunde și pornește `E-LAYER-ANALYZER.exe`. |
+| Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, apoi pornește-l din meniu: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`, cu dosarul `data` alături. |
+| Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (și `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (sau `zypper install`), apoi ca pachetul .deb. |
+| Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (sau `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, apoi ca pachetul .deb. |
+| Slackware (x86_64 și ARM64) | `e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz` (sau `-aarch64-`) | Ca root: `installpkg e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz`, apoi pornește `e-layer-analyzer` din meniu sau din terminal: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`. |
+| Orice Linux (AppImage) | `E-LAYER-ANALYZER-x.y.z-x86_64.AppImage` (sau `-aarch64.AppImage`) | Fă-l executabil și pornește-l: la prima pornire copiază programul în `~/E-LAYER-ANALYZER` și îl pornește de acolo. |
 | Linux portabil | `...-linux-x64-portatile.tar.gz` | Dezarhivează și pornește `./E-LAYER-ANALYZER`, sau rulează `./installa.sh`: se instalează în `~/E-LAYER-ANALYZER` cu o pictogramă în meniu. |
+| Alpine Linux (musl) | `...-alpine-x64-portatile.tar.gz` / `...-alpine-arm64-portatile.tar.gz` | `apk add icu-libs fontconfig`, apoi ca versiunea portabilă pentru Linux. |
 | Raspberry Pi (64 de biți) | `e-layer-analyzer_x.y.z_arm64.deb` sau `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 sau 5 cu **Raspberry Pi OS pe 64 de biți** și desktop (recomandat 4 GB de RAM). Pachetul .deb ca mai sus; versiunea portabilă ca pentru Linux. |
 | Raspberry Pi (32 de biți) | `e-layer-analyzer_x.y.z_armhf.deb` sau `...-linux-arm-portatile.tar.gz` | Pi 2, 3 sau 4 cu **Raspberry Pi OS pe 32 de biți**. Pachetul .deb ca mai sus; versiunea portabilă: dezarhivează și pornește `./E-LAYER-ANALYZER` sau `./installa.sh`. |
-| Raspberry Pi cu Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` sau `...-linux-arm64-portatile.tar.gz` | Ca root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, apoi pornește `e-layer-analyzer` din meniu sau din terminal: la prima pornire programul se copiază în `~/E-LAYER-ANALYZER`. Versiunea portabilă ca pentru Linux. |
+| Raspberry Pi cu Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` sau `...-linux-arm64-portatile.tar.gz` | Ca Slackware de mai sus. Versiunea portabilă ca pentru Linux. |
 | Linux armv7l (alte plăci ARM pe 32 de biți) | `...-linux-armv7l-portatile.tar.gz` | Ca versiunea portabilă pentru Linux. |
+| FreeBSD amd64 | `...-freebsd-amd64-sperimentale.tar.gz` | **Experimental, neverificat.** Necesită .NET 8 al comunității (`pkg install dotnet`) și bibliotecile native SkiaSharp și HarfBuzzSharp compilate pentru FreeBSD, pe care Avalonia nu le furnizează: fără ele programul nu pornește. Vezi `LEGGIMI-FREEBSD.txt` din pachet. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) sau `...-osx-x64.dmg` (Intel) | Deschide fișierul .dmg, clic dreapta pe **Installa E-LAYER-ANALYZER.command** > Open. Se instalează în `~/E-LAYER-ANALYZER`. |
 | Mac, doar aplicația | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Dezarhivează **E-LAYER-ANALYZER.app** într-un dosar ales de tine (de exemplu `~/E-LAYER-ANALYZER`, nu Applications): dosarul `data` se creează lângă aplicație. La prima pornire clic dreapta > Open. |
 
@@ -22,9 +29,11 @@ Descarcă fișierul potrivit de pe pagina **[Releases](https://github.com/ic8tem
 
 Instalează noua versiune peste cea veche: setările, spoturile colectate, logurile și `call3.txt` se păstrează.
 
+**Pachetele de sistem (.deb, .rpm, Arch, Slackware) nu se actualizează automat.** Cu ele programul doar semnalează versiunea nouă: descarcă pachetul nou de pe pagina Releases și instalează-l ca prima dată (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Actualizările automate funcționează cu programul de instalare și zip-urile de Windows, aplicația de Mac, pachetele portabile tar.gz și AppImage.
+
 **Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 6 ore programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
 
-**Începând cu versiunea 0.4.12 actualizările sunt automate și silențioase**: când pe GitHub există o versiune nouă, programul o descarcă, o instalează și repornește singur fără să întrebe nimic. Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra de actualizare apare doar cu un clic pe versiunea de sus sau dacă scrii agg_automatici=0 în fișierul data/ela.ini.
+**Începând cu versiunea 0.4.12 actualizările sunt automate și silențioase**: când pe GitHub există o versiune nouă, programul o descarcă, o instalează și repornește singur fără să întrebe nimic. Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra de actualizare apare doar cu un clic pe versiunea de sus sau dacă dezactivezi actualizările automate în SETĂRI (Generale).
 
 - **Actualizează acum** descarcă pachetul portabil pentru calculatorul tău (Windows 64/32 de biți, Linux, Raspberry Pi, Mac), închide programul, înlocuiește fișierele și îl repornește. Setările, spoturile colectate, logurile și `call3.txt` se păstrează.
 - **Mai târziu** întreabă din nou la următoarea verificare; **Omite această versiune** nu mai propune versiunea respectivă.
@@ -38,4 +47,4 @@ Instalează noua versiune peste cea veche: setările, spoturile colectate, logur
 - Nu trebuie instalat .NET: programul conține tot ce îi trebuie.
 - Conexiune la internet pentru hartă (Natural Earth, la prima pornire), datele de auroră NOAA, radarele YA-MS și sesiunile telnet.
 - Raspberry Pi Zero și Pi 1 nu sunt suportate (procesoarele lor nu sunt suportate de .NET).
-- Nu există versiuni pentru Linux i686 (PC-uri pe 32 de biți), pentru că .NET nu există pentru acel sistem, nici pentru FreeBSD, unde lipsesc bibliotecile grafice Avalonia.
+- Nu există versiuni pentru Linux i686 (PC-uri pe 32 de biți) și OpenBSD, pentru că .NET nu există pentru aceste sisteme. Pentru FreeBSD există doar pachetul experimental.

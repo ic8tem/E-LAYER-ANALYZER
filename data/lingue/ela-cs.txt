@@ -731,3 +731,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Rozsah QTF podél stopy (odchylka ≤ 1,5°, uvnitř okna Lange-Hesse obou stanic):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Okno bodu rozptylu (Lange-Hesse: 370-1100 km při 54° geomagnetické šířky, posunuté podle inklinace IGRF-14 každé stanice): {0}; {1}. Výška asi 110 km, kolmost do ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Navržený bod rozptylu leží alespoň pro jednu stanici mimo okno Lange-Hesse: je možný, ale méně pravděpodobný.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Místní filtr: zahazovat řádky clusteru pod 27990,0 kHz a nad 145 MHz (nezobrazují se a neukládají); v pásmu 430-440 MHz projdou jen spoty aurory
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Sběr dat je jediný pro celý program: každý spot přijatý v DATA COLLECTION prochází těmito filtry a dále do karet jednotlivých druhů šíření.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Pravidla 28, 40, 50 a 70 MHz (pravidla autora a IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Na 40 MHz (8 m) se minimální vzdálenost odvozuje stejně ({0:F0} km) a platí jen vzdálenosti do prvního skoku geometrie vrstvy E ({1:F0} km).
+in 70 MHz (km)	na 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 a FT4 na 70 MHz jdou do sporadické vrstvy E i uvnitř okna meteor scatter v kmitočtovém plánu (70,154 MHz je kmitočet FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 a FT4 na 50 MHz: sporadická vrstva E jen tehdy, když jsou součástí oblaku, tj. když existuje jiný spot na 50 MHz s blízkým středem trasy; osamocený spot jde do meteor scatter
+punto medio entro (km)	střed trasy do (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 a JT65 na 144 MHz jsou EME a do sporadické vrstvy E nevstupují, pokud text neobsahuje <ES>.
+sì	ano
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Místní filtr: řádek zahozen (mimo rozsah 27990 kHz - 145 MHz; v pásmu 430-440 MHz projdou jen spoty aurory)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(zahozeno: za prvním skokem, {0:F0} km, na 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(zahozeno: Q65 nebo JT65 na 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 na 50 MHz bez dalšího spotu do {0:F0} min se středem trasy do {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	zahozeno místním filtrem: {0}
+IMPOSTAZIONI	NASTAVENÍ
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): žlutá, jen do prvního skoku
+Generali	Obecné
+Smistamento degli spot	Třídění spotů
+Impostazioni generali	Obecná nastavení
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Jsou to stejná data jako v horní liště: platí pro všechny karty, i pro METEOR SCATTER.
+Aspetto	Vzhled
+Lingua	Jazyk
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Velikost písma platí pro celý program, od 85 do 140 %, jako v YA-MS. Jazyk a motiv znovu sestaví okno: nastavení a spoty zůstanou.
+Mappe e dati previsionali	Mapy a předpovědní data
+Continente	Kontinent
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Přesune Mercatorovy mapy na zvolený kontinent a vybere předpovědní data (E-skip od N0NBH pro Evropu a Severní Ameriku). Je to stejná nabídka jako v liště karet.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Program kontroluje čas pomocí serverů NTP při spuštění a každých 5 minut a ve výpočtech používá správný čas. Na Windows s právy správce opraví i hodiny PC. Pokud je nahoře nápis NTP:FAILED, síť blokuje port UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Kontrolovat aktualizace na GitHubu (při spuštění a každých 6 hodin)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Automatická a tichá aktualizace: stáhne a nainstaluje novou verzi bez ptaní
+Controlla adesso	Zkontrolovat nyní
+Versione in uso: {0}	Používaná verze: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Automatická aktualizace funguje se všemi balíčky, protože program vždy běží ze složky uživatele: ze složky zvolené instalátorem nebo ze zipu na Windows, z aplikace na Macu, z ~/E-LAYER-ANALYZER na Linuxu. S balíčky .deb, .rpm, Arch, Slackware a s AppImage se aktualizuje kopie v ~/E-LAYER-ANALYZER: správce balíčků dál ukazuje verzi nainstalovanou poprvé, dokud nenainstalujete nový balíček. Pokud do složky programu nelze zapisovat, program to oznámí a novou verzi je třeba stáhnout ručně ze stránky Release.
+Apri la cartella dei dati	Otevřít složku dat
+Dati	Data
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Všechna data programu jsou ve složce data vedle programu (nic v AppData). Shromážděné spoty se při zavření programu mažou. Klíč API Bureau of Meteorology se zadává v DATA COLLECTION, Data o šíření.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - rozdíl mezi časem serverů a časem PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - žádný server NTP není dostupný: program používá hodiny PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Každý spot přijatý v DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) se kontroluje pravidly v pořadí tabulky: o kartě rozhodne první pravidlo, které platí. Vpravo jsou filtry jednotlivých druhů šíření s nastavitelnými hodnotami a testem řádku clusteru.
+Se lo spot...	Pokud spot...
+Valori	Hodnoty
+va a	jde do
+nessuna linguetta	žádná karta
+è fuori dalla gamma del filtro locale	je mimo rozsah místního filtru
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	pod 27990 kHz nebo nad 145 MHz; v pásmu 430-440 MHz jen aurora
+filtro locale spento	místní filtr vypnutý
+scartato	zahozen
+contiene AUE, AU-E o AURORAL E	obsahuje AUE, AU-E nebo AURORAL E
+contiene una parola dell'aurora (o modo AU)	obsahuje slovo aurory (nebo druh provozu AU)
+contiene una parola del F.A.I. (o modo FAI)	obsahuje slovo F.A.I. (nebo druh provozu FAI)
+ha un modo del meteor scatter o <MS>	má druh provozu meteor scatter nebo <MS>
+cade in una finestra MS del bandplan	padne do okna MS kmitočtového plánu
+in 50 MHz non esclusiva	na 50 MHz ne výlučné
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 a FT4 na 50 a 70 MHz vyloučeny
+è FT8 o FT4 in 50 MHz senza nube	je FT8 nebo FT4 na 50 MHz bez oblaku
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	žádný jiný spot do {0:F0} min se středem trasy do {1:F0} km
+regola spenta	pravidlo vypnuté
+meteor scatter (non E-sporadico)	meteor scatter (ne sporadická vrstva E)
+è Q65 o JT65 in 144 MHz	je Q65 nebo JT65 na 144 MHz
+salvo <ES> nel testo	pokud text neobsahuje <ES>
+EME: scartato	EME: zahozen
+contiene una scritta di altra propagazione	obsahuje tag jiného šíření
+non E-sporadico	ne sporadická vrstva E
+è transequatoriale	je transekvatoriální
+fascia di inclinazione ± {0:F0}°	pás inklinace ± {0:F0}°
+non E-sporadico (TEP)	ne sporadická vrstva E (TEP)
+è in 28 MHz	je na 28 MHz
+da {0:F0} km	od {0:F0} km
+è in 40 MHz	je na 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	od {0:F0} do {1:F0} km (první skok)
+è in 50 MHz	je na 50 MHz
+è in 70 MHz	je na 70 MHz
+è in 144 MHz	je na 144 MHz
+oltre {0:F0} km, con conferma	nad {0:F0} km, s potvrzením
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	nespadá pod žádné pravidlo (tropo, 432 MHz, KV...)
+resta in Spot raccolti	zůstává ve Shromážděných spotech
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Program je nainstalován balíčkem {0}: pro aktualizaci stáhněte nový balíček ze stránky vydání a nainstalujte jej jako ten první.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Automatická aktualizace platí pro instalátor a zip pro Windows, aplikaci pro Mac, archivy .tar.gz a AppImage. Se systémovými balíčky (.deb, .rpm, Arch, Slackware) se program sám neaktualizuje: oznámí novou verzi, která se nainstaluje stažením nového balíčku ze stránky Release. Pokud do složky programu nelze zapisovat, program to oznámí a novou verzi je třeba stáhnout ručně.

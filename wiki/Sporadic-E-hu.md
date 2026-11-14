@@ -19,7 +19,7 @@ Az azimutális nézetekben a szaggatott gyűrűk a **középponttól mért km-t*
 
 ## Mit mutat
 
-- Az utolsó néhány perc (15 perc - 12 óra) **spotjait** a **28, 50, 70 és 144 MHz-es** sávokon, a telnet-kapcsolatokból. A lokátorok a spot megjegyzéséből (pl. `JN70CN<ES>JO62QM`) vagy a CALL3-adatbázisból származnak.
+- Az utolsó néhány perc (15 perc - 12 óra) **spotjait** a **28, 40 (8 m, alapértelmezésben kikapcsolva), 50, 70 és 144 MHz-es** sávokon, a telnet-kapcsolatokból. A lokátorok a spot megjegyzéséből (pl. `JN70CN<ES>JO62QM`) vagy a CALL3-adatbázisból származnak.
 - A szövegükben **<MS>**, **<AU>** vagy **<TR>** jelölést tartalmazó spotokat **elveti**: ezek nem a sporadikus E-hez tartoznak, de a meteor scatterhez, az aurorához vagy a tropóhoz hasznosak.
 - **Transzekvatoriális, a szerző (IC8TEM) szabálya**: Afrika és Dél-Amerika felé, ha a felezőpont a -20° és +20° közötti mágneses inklinációs sávba esik, az összeköttetés transzekvatoriális (TEP) és nem sporadikus E, hacsak a spot nem jelez `<ES>`-t.
 - **144 MHz, a szerző (IC8TEM) szabálya**: a 2 m-es sporadikus E **900 km felett** kezdődik (a rövidebb spotokat elveti). Egyetlen 144 MHz-es spot **önmagában nem jelenik meg**: akkor jelenik meg, ha **5 percen belül** érkezik egy második 144 MHz-es spot ugyanott lévő felhővel (visszaverődési pontok 300 km-en belül), vagy ha a közelben van egy **rövid ugrású 50 MHz-es** spot (1200 km-en belül, az utolsó 15 percben). A felső sáv mutatja, hány 144 MHz-es spot vár megerősítésre.
@@ -53,3 +53,12 @@ A sporadikus E **nem vonatkozik a 432 MHz-re**: az Es-MUF kb. 150-200 MHz-ig ér
 A visszaverődési pontok Maidenhead-négyzeteit a spotok legmagasabb frekvenciája szerint színezi: **zöld** 29 MHz-ig, **sárga** 51-ig, **narancs** 71-ig, **piros** 145 MHz-ig. A négyzet foEs-éből becsüli a valószínű MUF-ot a leghosszabb ugrásra (2400 km, IK3XTV-táblázat): ha egy magasabb sávot is elér, a négyzet annak a sávnak a színében **villog** (IK3XTV és Jacobs-Leinwoll elve: rövid holtzóna = magas MUF).
 
 A térkép jobb felső sarkában megjelenik az N0NBH összefoglalója (E-skip a választott kontinensre, SFI, K- és A-index).
+
+## Sávonkénti szabályok (0.4.18-as verzió)
+
+- **50 MHz**: 450 km-en belül nem sporadikus E. Az FT8 és FT4 spotok csak akkor sporadikus E-k, ha egy felhőhöz tartoznak: egy másik 50 MHz-es spot 4 percen belül, 150 km-en belüli felezőponttal. Az elszigetelt FT8/FT4 spot a meteor scatterhez kerül.
+- **70 MHz**: 450 km-en belül nem sporadikus E. Az FT8 és az FT4 a sporadikus E-hez kerül akkor is, ha a sávterv meteor scatter ablakába esik (először az ismert üzemmód dönt, utána a frekvencia).
+- **40 MHz (8 m)**: a minimális távolság az 50 MHz-es 450 km-ből a szekánstörvénnyel származik (kb. 330 km); csak az E-réteg geometriája szerinti első ugráson belüli távolságok (kb. 2440 km). Az útvonal színe: sárga.
+- **144 MHz**: sporadikus E 900 km-től, megerősítéssel; a Q65 és JT65 spotok EME-k, és elveti őket, kivéve, ha a szövegben `<ES>` szerepel.
+- G0ISW (Propagation identification, 2024) a legrövidebb sporadikus E-t 50 és 70 MHz-en 400 km felett, 144 MHz-en 1400 km felett látja: a szerző szabályai 50 és 70 MHz-en egyeznek vele, 144 MHz-en tágabbak, de megerősítést kérnek.
+- Az összes szabály alkalmazásának sorrendjét a használt értékekkel a **[BEÁLLÍTÁSOK](Settings-hu)** › Spotok szétosztása mutatja.

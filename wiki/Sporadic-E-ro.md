@@ -19,7 +19,7 @@ Un buton deasupra hărții alege vederea:
 
 ## Ce arată
 
-- **Spoturile** din ultimele minute (15 min - 12 h) pe benzile **28, 50, 70 și 144 MHz**, preluate din sesiunile telnet. Locatorii provin din comentariul spotului (ex. `JN70CN<ES>JO62QM`) sau din arhiva CALL3.
+- **Spoturile** din ultimele minute (15 min - 12 h) pe benzile **28, 40 (8 m, dezactivată implicit), 50, 70 și 144 MHz**, preluate din sesiunile telnet. Locatorii provin din comentariul spotului (ex. `JN70CN<ES>JO62QM`) sau din arhiva CALL3.
 - Spoturile cu **<MS>**, **<AU>** sau **<TR>** în text sunt **respinse**: nu privesc E-sporadic, dar sunt utile pentru meteor scatter, auroră sau tropo.
 - **Transecuatorial, regula autorului (IC8TEM)**: spre Africa și America de Sud, dacă punctul median cade în banda de înclinație magnetică între -20° și +20°, legătura este transecuatorială (TEP) și nu E-sporadic, cu excepția cazului în care spotul declară `<ES>`.
 - **144 MHz, regula autorului (IC8TEM)**: E-sporadic pe 2 m începe **de la peste 900 km** (spoturile mai scurte sunt respinse). Un singur spot pe 144 MHz **nu se desenează singur**: apare când în **5 minute** sosește un al doilea spot pe 144 MHz cu norul în același loc (puncte de reflexie la cel mult 300 km) sau când în apropiere există un spot pe **50 MHz cu salt scurt** (până la 1200 km, în ultimele 15 minute). Bara de sus arată câte spoturi pe 144 MHz așteaptă confirmarea.
@@ -53,3 +53,12 @@ E-sporadic **nu se aplică la 432 MHz**: MUF-ul Es ajunge la circa 150-200 MHz, 
 Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare frecvență a spoturilor: **verde** până la 29 MHz, **galben** până la 51, **portocaliu** până la 71, **roșu** până la 145 MHz. Din foEs al pătratului se estimează MUF-ul probabil pe cel mai lung salt (2400 km, tabelul IK3XTV): dacă acesta atinge o bandă mai înaltă, pătratul **clipește** cu culoarea acelei benzi (principiul lui IK3XTV și Jacobs-Leinwoll: skip scurt înseamnă MUF ridicat).
 
 În dreapta sus pe hartă apare sinteza N0NBH (E-skip pentru continentul ales, SFI, indicii K și A).
+
+## Reguli pe bandă (versiunea 0.4.18)
+
+- **50 MHz**: în limita a 450 km nu este E-sporadic. Spoturile FT8 și FT4 sunt E-sporadic doar dacă fac parte dintr-un nor: un alt spot pe 50 MHz în 4 minute cu punctul median în limita a 150 km. Un spot FT8/FT4 izolat merge la meteor scatter.
+- **70 MHz**: în limita a 450 km nu este E-sporadic. FT8 și FT4 merg la E-sporadic chiar și în fereastra meteor scatter din bandplan (decide întâi modul cunoscut, apoi frecvența).
+- **40 MHz (8 m)**: distanța minimă obținută din cei 450 km de pe 50 MHz cu legea secantei (circa 330 km); doar distanțele din primul salt al geometriei stratului E (circa 2440 km). Culoarea traseului: galben.
+- **144 MHz**: E-sporadic de la 900 km, cu confirmare; spoturile Q65 și JT65 sunt EME și sunt respinse, cu excepția `<ES>` în text.
+- G0ISW (Propagation identification, 2024) vede cel mai scurt E-sporadic peste 400 km pe 50 și 70 MHz și peste 1400 km pe 144 MHz: regulile autorului concordă pe 50 și 70 MHz și sunt mai largi pe 144 MHz, dar cer o confirmare.
+- Ordinea în care se aplică toate regulile, cu valorile în uz, este afișată în **[SETĂRI](Settings-ro)** › Distribuirea spoturilor.

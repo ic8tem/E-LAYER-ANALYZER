@@ -18,21 +18,11 @@
 
 Ultimele 2000 de spoturi, cu filtre pe bandă și sursă. Arhivă: câte un fișier CSV pe zi în `data/spot`. La fiecare închidere a programului baza de date a spoturilor se golește (memoria și fișierele din `data/spot`): fiecare sesiune pornește de la zero.
 
-**Filtru local** (casetă opțională): rândurile „DX de” sub 27990,0 kHz sau peste 145 MHz sunt eliminate, nu apar în consolă și nu se memorează. **Locatorii impreciși** (sub 6 caractere) se iau din CALL3: dacă CALL3 are un locator cu 6 caractere, acesta prevalează întotdeauna. Ca în YA-MS, sunt spoturi de meteor scatter (nu de E-sporadic) cele din ferestrele de frecvență tipice pentru MS (50190-50300, 70100-70400, 144290-144399 kHz) fără inscripții de altă propagare (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) și cele cu moduri exclusiv MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) sau cu `<MS>`. Spoturile cu `<AS>`/`<ACS>` (aircraft scatter) nu se folosesc pentru E-sporadic.
+**Filtru local** (casetă opțională, în SETĂRI): rândurile „DX de” sub 27990,0 kHz sau peste 145 MHz sunt eliminate, nu apar în consolă și nu se memorează; între 430 și 440 MHz trec doar spoturile de auroră. **Locatorii impreciși** (sub 6 caractere) se iau din CALL3: dacă CALL3 are un locator cu 6 caractere, acesta prevalează întotdeauna. Ca în YA-MS, sunt spoturi de meteor scatter (nu de E-sporadic) cele din ferestrele de frecvență tipice pentru MS (50190-50300, 70100-70400, 144290-144399 kHz) fără inscripții de altă propagare (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) și cele cu moduri exclusiv MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) sau cu `<MS>`. Excepție: FT8 și FT4 pe 50 și 70 MHz, unde decide modul cunoscut (FT8 de pe 70,154 MHz merge la E-sporadic chiar și în fereastra MS). Spoturile cu `<AS>`/`<ACS>` (aircraft scatter) nu se folosesc pentru E-sporadic.
 
-## Coloana filtrelor (40% în dreapta)
+## Filtrele spoturilor
 
-Colectarea datelor este **una singură pentru tot programul**: fiecare spot trece prin aceste filtre și ajunge la fila fiecărui mod de propagare (în E-LAYER ANALYZER fila Colectare date din YA-MS nu este afișată). Sus se află caseta **filtrului local**; dedesubt, cinci sub-file:
-
-| Sub-filă | Ce se setează | Implicit (regulile autorului) |
-|---|---|---|
-| Meteor scatter | filtrul YA-MS: ferestrele de frecvență MS, inscripțiile de altă propagare, modurile MS și `<MS>`, benzile | ca în YA-MS |
-| E-sporadic | inscripțiile `< >` care exclud spotul, regula pentru 144 MHz, regula transecuatorială | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, salt scurt 50 MHz 1200 km/15 min; ±20° |
-| F.A.I. | cuvintele F.A.I., benzile, perioada pe hartă | FAI, toate benzile, 24 de ore |
-| Auroră | inscripțiile `< >` de auroră, benzile, perioada pe hartă | `AU` `AUR` (cu sau fără `< >`), toate benzile, 2 ore |
-| Testul filtrelor | lipește un rând din cluster și vezi cum îl clasifică toate filtrele | |
-
-Butonul **Restabilește regulile autorului** readuce valorile implicite.
+Colectarea datelor este **unică pentru tot programul**: fiecare spot trece prin filtre și ajunge la fila fiecărui mod de propagare. Din versiunea 0.4.18 filtrele, filtrul local și testul filtrelor se află în fila **[SETĂRI](Settings-ro)**, sub-fila **Distribuirea spoturilor**.
 
 ## CALL3
 
@@ -44,7 +34,7 @@ Aceste filtre, venite din YA-MS (CW, distanța minimă, ferestre de frecvență,
 
 ## Sub-filele Spoturi și Date de propagare
 
-Fila are două sub-file: **Spoturi** (sesiuni, spoturi colectate, CALL3 și coloana filtrelor) și **Date de propagare**:
+Fila are două sub-file: **Spoturi** (sesiuni, PSKReporter MQTT, WSJT-X UDP, spoturi colectate și CALL3) și **Date de propagare**:
 
 - **N0NBH** (hamqsl.com): bannerul VHF și datele solare, E-skip Europa și America de Nord (DXrobot), auroră.
 - **Bz pentru auroră**: vântul solar în timp real NOAA SWPC (DSCOVR/ACE, punctul L1), cea mai bună sursă pentru Bz.

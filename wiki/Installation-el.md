@@ -8,13 +8,20 @@
 |---|---|---|
 | Windows 64 bit | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Διπλό κλικ. Εγκαθίσταται στο `C:\E-LAYER-ANALYZER`, χωρίς να χρειάζονται δικαιώματα διαχειριστή. Χωρίς συντόμευση στο μενού Έναρξη (θα βρισκόταν στο AppData), μόνο το προαιρετικό εικονίδιο στην επιφάνεια εργασίας. |
 | Windows 32 bit | `...-win-x86-setup.exe` | Όπως παραπάνω, για Windows 32 bit. |
-| Windows φορητό | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Αποσυμπιέστε οπουδήποτε και εκτελέστε το `E-LAYER-ANALYZER.exe`. |
-| Linux 64 bit (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, μετά ξεκινήστε το από το μενού: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`, με τον φάκελο `data` δίπλα του. |
+| Windows σε ARM (PC με Snapdragon) | `...-win-arm64-setup.exe` | Όπως παραπάνω, για Windows σε επεξεργαστές ARM. |
+| Windows φορητό | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Αποσυμπιέστε οπουδήποτε και εκτελέστε το `E-LAYER-ANALYZER.exe`. |
+| Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, μετά ξεκινήστε το από το μενού: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`, με τον φάκελο `data` δίπλα του. |
+| Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (και `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (ή `zypper install`), μετά όπως το .deb. |
+| Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (ή `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, μετά όπως το .deb. |
+| Slackware (x86_64 και ARM64) | `e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz` (ή `-aarch64-`) | Ως root: `installpkg e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz`, έπειτα εκκινήστε το `e-layer-analyzer` από το μενού ή από το τερματικό: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`. |
+| Οποιοδήποτε Linux (AppImage) | `E-LAYER-ANALYZER-x.y.z-x86_64.AppImage` (ή `-aarch64.AppImage`) | Κάντε το εκτελέσιμο και εκτελέστε το: στην πρώτη εκκίνηση αντιγράφει το πρόγραμμα στο `~/E-LAYER-ANALYZER` και το εκκινεί από εκεί. |
 | Linux φορητό | `...-linux-x64-portatile.tar.gz` | Αποσυμπιέστε και εκτελέστε `./E-LAYER-ANALYZER`, ή εκτελέστε `./installa.sh`: εγκαθίσταται στο `~/E-LAYER-ANALYZER` με εικονίδιο στο μενού. |
+| Alpine Linux (musl) | `...-alpine-x64-portatile.tar.gz` / `...-alpine-arm64-portatile.tar.gz` | `apk add icu-libs fontconfig`, μετά όπως το φορητό για Linux. |
 | Raspberry Pi (64 bit) | `e-layer-analyzer_x.y.z_arm64.deb` ή `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 ή 5 με **Raspberry Pi OS 64 bit** και επιφάνεια εργασίας (συνιστώνται 4 GB RAM). Το .deb όπως παραπάνω· το φορητό όπως για το Linux. |
 | Raspberry Pi (32 bit) | `e-layer-analyzer_x.y.z_armhf.deb` ή `...-linux-arm-portatile.tar.gz` | Pi 2, 3 ή 4 με **Raspberry Pi OS 32 bit**. Το .deb όπως παραπάνω· το φορητό: αποσυμπιέστε και εκτελέστε `./E-LAYER-ANALYZER` ή `./installa.sh`. |
-| Raspberry Pi με Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` ή `...-linux-arm64-portatile.tar.gz` | Ως root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, έπειτα εκκινήστε το `e-layer-analyzer` από το μενού ή από το τερματικό: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`. Το φορητό όπως για το Linux. |
+| Raspberry Pi με Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` ή `...-linux-arm64-portatile.tar.gz` | Όπως το Slackware παραπάνω. Το φορητό όπως για το Linux. |
 | Linux armv7l (άλλες πλακέτες ARM 32 bit) | `...-linux-armv7l-portatile.tar.gz` | Όπως το φορητό για Linux. |
+| FreeBSD amd64 | `...-freebsd-amd64-sperimentale.tar.gz` | **Πειραματικό, μη επαληθευμένο.** Χρειάζεται το .NET 8 της κοινότητας (`pkg install dotnet`) και τις εγγενείς βιβλιοθήκες SkiaSharp και HarfBuzzSharp μεταγλωττισμένες για FreeBSD, που το Avalonia δεν παρέχει: χωρίς αυτές το πρόγραμμα δεν ξεκινά. Δείτε το `LEGGIMI-FREEBSD.txt` στο πακέτο. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) ή `...-osx-x64.dmg` (Intel) | Ανοίξτε το .dmg, δεξί κλικ στο **Installa E-LAYER-ANALYZER.command** > Άνοιγμα. Εγκαθίσταται στο `~/E-LAYER-ANALYZER`. |
 | Mac, μόνο η εφαρμογή | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Αποσυμπιέστε το **E-LAYER-ANALYZER.app** σε έναν δικό σας φάκελο (για παράδειγμα `~/E-LAYER-ANALYZER`, όχι στις Εφαρμογές): ο φάκελος `data` δημιουργείται δίπλα στην εφαρμογή. Στην πρώτη εκκίνηση δεξί κλικ > Άνοιγμα. |
 
@@ -22,9 +29,11 @@
 
 Εγκαταστήστε τη νέα έκδοση πάνω από την παλιά: οι ρυθμίσεις, τα συλλεγμένα spot, τα log και το `call3.txt` διατηρούνται.
 
+**Τα πακέτα συστήματος (.deb, .rpm, Arch, Slackware) δεν ενημερώνονται αυτόματα.** Με αυτά το πρόγραμμα απλώς επισημαίνει τη νέα έκδοση: κατεβάστε το νέο πακέτο από τη σελίδα Releases και εγκαταστήστε το όπως την πρώτη φορά (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Οι αυτόματες ενημερώσεις λειτουργούν με το πρόγραμμα εγκατάστασης και τα zip των Windows, την εφαρμογή του Mac, τα φορητά πακέτα tar.gz και το AppImage.
+
 **Αυτόματη ενημέρωση (από την έκδοση 0.4.5).** Κατά την εκκίνηση και στη συνέχεια κάθε 6 ώρες το πρόγραμμα ελέγχει τα Releases στο GitHub. Όταν κυκλοφορήσει νέα έκδοση, ανοίγει ένα παράθυρο και εμφανίζει ένα πορτοκαλί **▲ x.y.z** δίπλα στην ένδειξη NTP στην επάνω γραμμή:
 
-**Από την έκδοση 0.4.12 οι ενημερώσεις είναι αυτόματες και σιωπηλές**: όταν υπάρχει νέα έκδοση στο GitHub, το πρόγραμμα την κατεβάζει, την εγκαθιστά και επανεκκινείται μόνο του χωρίς να ρωτήσει τίποτα. Και τα αρχεία που λείπουν κατεβαίνουν ξανά χωρίς ερώτηση. Το παράθυρο ενημέρωσης εμφανίζεται μόνο με κλικ στην έκδοση επάνω ή αν γράψεις agg_automatici=0 στο αρχείο data/ela.ini.
+**Από την έκδοση 0.4.12 οι ενημερώσεις είναι αυτόματες και σιωπηλές**: όταν υπάρχει νέα έκδοση στο GitHub, το πρόγραμμα την κατεβάζει, την εγκαθιστά και επανεκκινείται μόνο του χωρίς να ρωτήσει τίποτα. Και τα αρχεία που λείπουν κατεβαίνουν ξανά χωρίς ερώτηση. Το παράθυρο ενημέρωσης εμφανίζεται μόνο με κλικ στην έκδοση επάνω ή αν απενεργοποιήσετε τις αυτόματες ενημερώσεις στις ΡΥΘΜΙΣΕΙΣ (Γενικά).
 
 - Το **Ενημέρωση τώρα** κατεβάζει το φορητό πακέτο για τον υπολογιστή σας (Windows 64/32 bit, Linux, Raspberry Pi, Mac), κλείνει το πρόγραμμα, αντικαθιστά τα αρχεία και το επανεκκινεί. Οι ρυθμίσεις, τα συλλεγμένα spot, τα log και το `call3.txt` διατηρούνται.
 - Το **Αργότερα** ρωτά ξανά στον επόμενο έλεγχο· το **Παράλειψη έκδοσης** σταματά να προτείνει αυτήν την έκδοση.
@@ -38,4 +47,4 @@
 - Δεν χρειάζεται εγκατάσταση .NET: το πρόγραμμα περιέχει ό,τι χρειάζεται.
 - Σύνδεση στο διαδίκτυο για τον χάρτη (Natural Earth, στην πρώτη εκκίνηση), τα δεδομένα σέλαος της NOAA, τα ραντάρ του YA-MS και τις συνεδρίες telnet.
 - Τα Raspberry Pi Zero και Pi 1 δεν υποστηρίζονται (οι επεξεργαστές τους δεν υποστηρίζονται από το .NET).
-- Δεν υπάρχουν εκδόσεις για Linux i686 (PC 32 bit), επειδή το .NET δεν υπάρχει για αυτό το σύστημα, ούτε για FreeBSD, όπου λείπουν οι βιβλιοθήκες γραφικών του Avalonia.
+- Δεν υπάρχουν εκδόσεις για Linux i686 (PC 32 bit) και OpenBSD, επειδή το .NET δεν υπάρχει για αυτά τα συστήματα. Για FreeBSD υπάρχει μόνο το πειραματικό πακέτο.

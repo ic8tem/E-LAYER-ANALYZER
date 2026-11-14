@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Εύρος QTF κατά μήκος του ίχνους (απόκλιση ≤ 1,5°, μέσα στο παράθυρο Lange-Hesse και των δύο σταθμών):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Παράθυρο του σημείου σκέδασης (Lange-Hesse: 370-1100 km σε 54° γεωμαγνητικό πλάτος, μετατοπισμένο με την κλίση IGRF-14 κάθε σταθμού): {0}· {1}. Ύψος περίπου 110 km, καθετότητα εντός ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Το προτεινόμενο σημείο σκέδασης βρίσκεται εκτός του παραθύρου Lange-Hesse για τουλάχιστον έναν σταθμό: είναι δυνατό, αλλά λιγότερο πιθανό.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Τοπικό φίλτρο: απόρριψη των γραμμών του cluster κάτω από 27990,0 kHz και πάνω από 145 MHz (δεν εμφανίζονται και δεν αποθηκεύονται)· στα 430-440 MHz περνούν μόνο τα spot σέλαος
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Η συλλογή των δεδομένων είναι μία για όλο το πρόγραμμα: κάθε spot που λαμβάνεται στο DATA COLLECTION περνά από αυτά τα φίλτρα και πηγαίνει στις καρτέλες κάθε τρόπου διάδοσης.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Κανόνες 28, 40, 50 και 70 MHz (κανόνες του συγγραφέα και IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Στα 40 MHz (8 m) η ελάχιστη απόσταση προκύπτει με τον ίδιο τρόπο ({0:F0} km) και ισχύουν μόνο οι αποστάσεις εντός του πρώτου άλματος της γεωμετρίας του στρώματος E ({1:F0} km).
+in 70 MHz (km)	στα 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	Τα FT8 και FT4 στα 70 MHz πηγαίνουν στο σποραδικό E ακόμη και μέσα στο παράθυρο του meteor scatter του bandplan (τα 70,154 MHz είναι η συχνότητα του FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 και FT4 στα 50 MHz: σποραδικό E μόνο αν ανήκουν σε νέφος, δηλαδή αν υπάρχει άλλο spot στα 50 MHz με κοντινό μέσο σημείο· ένα μεμονωμένο spot πηγαίνει στο meteor scatter
+punto medio entro (km)	μέσο σημείο εντός (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Τα Q65 και JT65 στα 144 MHz είναι EME και δεν μπαίνουν στο σποραδικό E, εκτός αν το κείμενο περιέχει <ES>.
+sì	ναι
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Τοπικό φίλτρο: η γραμμή απορρίφθηκε (εκτός του εύρους 27990 kHz - 145 MHz· στα 430-440 MHz περνούν μόνο τα spot σέλαος)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(απορρίφθηκε: πέρα από το πρώτο άλμα, {0:F0} km, στα 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(απορρίφθηκε: Q65 ή JT65 στα 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 στα 50 MHz χωρίς άλλο spot εντός {0:F0} min με μέσο σημείο εντός {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	απορρίφθηκαν από το τοπικό φίλτρο: {0}
+IMPOSTAZIONI	ΡΥΘΜΙΣΕΙΣ
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): κίτρινο, μόνο εντός του πρώτου άλματος
+Generali	Γενικά
+Smistamento degli spot	Κατανομή των spot
+Impostazioni generali	Γενικές ρυθμίσεις
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Είναι τα ίδια δεδομένα με τη γραμμή επάνω: ισχύουν για όλες τις καρτέλες, και για το METEOR SCATTER.
+Aspetto	Εμφάνιση
+Lingua	Γλώσσα
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Το μέγεθος της γραμματοσειράς ισχύει για όλο το πρόγραμμα, από 85 έως 140 %, όπως στο YA-MS. Η γλώσσα και το θέμα ξαναχτίζουν το παράθυρο: οι ρυθμίσεις και τα spot διατηρούνται.
+Mappe e dati previsionali	Χάρτες και δεδομένα πρόγνωσης
+Continente	Ήπειρος
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Μετακινεί τους χάρτες Mercator στην επιλεγμένη ήπειρο και επιλέγει τα δεδομένα πρόγνωσης (E-skip του N0NBH για Ευρώπη και Βόρεια Αμερική). Είναι το ίδιο μενού με τη γραμμή των καρτελών.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Το πρόγραμμα ελέγχει την ώρα με τους διακομιστές NTP κατά την εκκίνηση και κάθε 5 λεπτά και χρησιμοποιεί τη σωστή ώρα στους υπολογισμούς. Στα Windows, με δικαιώματα διαχειριστή, διορθώνει και το ρολόι του PC. Αν η ένδειξη επάνω είναι NTP:FAILED, το δίκτυο μπλοκάρει τη θύρα UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Έλεγχος ενημερώσεων στο GitHub (κατά την εκκίνηση και κάθε 6 ώρες)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Αυτόματη και σιωπηλή ενημέρωση: κατεβάζει και εγκαθιστά τη νέα έκδοση χωρίς να ρωτά
+Controlla adesso	Έλεγχος τώρα
+Versione in uso: {0}	Έκδοση σε χρήση: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Η αυτόματη ενημέρωση λειτουργεί με όλα τα πακέτα, επειδή το πρόγραμμα τρέχει πάντα από έναν φάκελο του χρήστη: τον φάκελο που επιλέχθηκε με το πρόγραμμα εγκατάστασης ή το zip στα Windows, την εφαρμογή στο Mac, το ~/E-LAYER-ANALYZER στο Linux. Με τα πακέτα .deb, .rpm, Arch, Slackware και με το AppImage ενημερώνεται το αντίγραφο στο ~/E-LAYER-ANALYZER: ο διαχειριστής πακέτων συνεχίζει να δείχνει την έκδοση που εγκαταστάθηκε την πρώτη φορά, μέχρι να εγκαταστήσετε το νέο πακέτο. Αν ο φάκελος του προγράμματος δεν είναι εγγράψιμος, το πρόγραμμα το λέει και η νέα έκδοση πρέπει να κατέβει χειροκίνητα από τη σελίδα Release.
+Apri la cartella dei dati	Άνοιγμα του φακέλου δεδομένων
+Dati	Δεδομένα
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Όλα τα δεδομένα του προγράμματος βρίσκονται στον φάκελο data δίπλα στο πρόγραμμα (τίποτα στο AppData). Τα συλλεγμένα spot διαγράφονται όταν κλείνει το πρόγραμμα. Το κλειδί API του Bureau of Meteorology εισάγεται στο DATA COLLECTION, Δεδομένα διάδοσης.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - διαφορά μεταξύ της ώρας των διακομιστών και του PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - κανένας διακομιστής NTP προσβάσιμος: το πρόγραμμα χρησιμοποιεί το ρολόι του PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Κάθε spot που λαμβάνεται στο DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) ελέγχεται με τους κανόνες με τη σειρά του πίνακα: ο πρώτος που ισχύει αποφασίζει την καρτέλα. Δεξιά βρίσκονται τα φίλτρα κάθε τρόπου, με τις τροποποιήσιμες τιμές και τη δοκιμή μιας γραμμής του cluster.
+Se lo spot...	Αν το spot...
+Valori	Τιμές
+va a	πηγαίνει σε
+nessuna linguetta	καμία καρτέλα
+è fuori dalla gamma del filtro locale	είναι εκτός του εύρους του τοπικού φίλτρου
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	κάτω από 27990 kHz ή πάνω από 145 MHz· στα 430-440 MHz μόνο σέλας
+filtro locale spento	τοπικό φίλτρο ανενεργό
+scartato	απορρίπτεται
+contiene AUE, AU-E o AURORAL E	περιέχει AUE, AU-E ή AURORAL E
+contiene una parola dell'aurora (o modo AU)	περιέχει λέξη του σέλαος (ή τρόπο AU)
+contiene una parola del F.A.I. (o modo FAI)	περιέχει λέξη του F.A.I. (ή τρόπο FAI)
+ha un modo del meteor scatter o <MS>	έχει τρόπο του meteor scatter ή <MS>
+cade in una finestra MS del bandplan	πέφτει σε παράθυρο MS του bandplan
+in 50 MHz non esclusiva	στα 50 MHz όχι αποκλειστικό
+FT8 e FT4 in 50 e 70 MHz esclusi	τα FT8 και FT4 στα 50 και 70 MHz εξαιρούνται
+è FT8 o FT4 in 50 MHz senza nube	είναι FT8 ή FT4 στα 50 MHz χωρίς νέφος
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	κανένα άλλο spot εντός {0:F0} min με μέσο σημείο εντός {1:F0} km
+regola spenta	κανόνας ανενεργός
+meteor scatter (non E-sporadico)	meteor scatter (όχι σποραδικό E)
+è Q65 o JT65 in 144 MHz	είναι Q65 ή JT65 στα 144 MHz
+salvo <ES> nel testo	εκτός αν υπάρχει <ES> στο κείμενο
+EME: scartato	EME: απορρίπτεται
+contiene una scritta di altra propagazione	περιέχει ετικέτα άλλης διάδοσης
+non E-sporadico	όχι σποραδικό E
+è transequatoriale	είναι διαισημερινό
+fascia di inclinazione ± {0:F0}°	ζώνη κλίσης ± {0:F0}°
+non E-sporadico (TEP)	όχι σποραδικό E (TEP)
+è in 28 MHz	είναι στα 28 MHz
+da {0:F0} km	από {0:F0} km
+è in 40 MHz	είναι στα 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	από {0:F0} έως {1:F0} km (πρώτο άλμα)
+è in 50 MHz	είναι στα 50 MHz
+è in 70 MHz	είναι στα 70 MHz
+è in 144 MHz	είναι στα 144 MHz
+oltre {0:F0} km, con conferma	πάνω από {0:F0} km, με επιβεβαίωση
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	δεν εμπίπτει σε κανέναν κανόνα (tropo, 432 MHz, HF...)
+resta in Spot raccolti	μένει στα Συλλεγμένα spot
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Το πρόγραμμα είναι εγκατεστημένο με το πακέτο {0}: για να το ενημερώσετε κατεβάστε το νέο πακέτο από τη σελίδα κυκλοφορίας και εγκαταστήστε το όπως το πρώτο.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Η αυτόματη ενημέρωση ισχύει για το πρόγραμμα εγκατάστασης και το zip των Windows, την εφαρμογή του Mac, τα αρχεία .tar.gz και το AppImage. Με τα πακέτα συστήματος (.deb, .rpm, Arch, Slackware) το πρόγραμμα δεν ενημερώνεται μόνο του: επισημαίνει τη νέα έκδοση, που εγκαθίσταται κατεβάζοντας το νέο πακέτο από τη σελίδα Release. Αν ο φάκελος του προγράμματος δεν είναι εγγράψιμος, το πρόγραμμα το λέει και η νέα έκδοση πρέπει να κατέβει χειροκίνητα.

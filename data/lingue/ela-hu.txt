@@ -734,3 +734,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	QTF-tartomány a nyom mentén (eltérés ≤ 1,5°, mindkét állomás Lange-Hesse-ablakán belül):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	A szórási pont ablaka (Lange-Hesse: 370-1100 km 54° geomágneses szélességen, az egyes állomások IGRF-14 inklinációjával eltolva): {0}; {1}. Magasság kb. 110 km, merőlegesség ±3°-on belül.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	A javasolt szórási pont legalább egy állomásra nézve a Lange-Hesse-ablakon kívül esik: lehetséges, de kevésbé valószínű.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Helyi szűrő: a 27990,0 kHz alatti és a 145 MHz feletti cluster-sorok elvetése (nem jelennek meg, és nem tárolódnak); a 430-440 MHz-es sávban csak az aurora-spotok mennek át
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Az egész programnak egyetlen adatgyűjtése van: minden, a DATA COLLECTION-ben fogadott spot átmegy ezeken a szűrőkön, és az egyes terjedési módok füleire kerül.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 és 70 MHz-es szabályok (a szerző szabályai és IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz-en (8 m) a minimális távolságot ugyanígy származtatja ({0:F0} km), és csak az E-réteg geometriája szerinti első ugráson belüli távolságok érvényesek ({1:F0} km).
+in 70 MHz (km)	70 MHz-en (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	Az FT8 és az FT4 70 MHz-en a sporadikus E-hez kerül akkor is, ha a sávterv meteor scatter ablakába esik (az FT8 frekvenciája 70,154 MHz).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 és FT4 50 MHz-en: csak akkor sporadikus E, ha egy felhőhöz tartoznak, vagyis ha van egy másik 50 MHz-es spot közeli felezőponttal; az elszigetelt spot a meteor scatterhez kerül
+punto medio entro (km)	felezőpont legfeljebb (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	A Q65 és a JT65 144 MHz-en EME, és nem kerül a sporadikus E-be, kivéve, ha a szövegben <ES> szerepel.
+sì	igen
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Helyi szűrő: a sor elvetve (a 27990 kHz - 145 MHz tartományon kívül; a 430-440 MHz-es sávban csak az aurora-spotok mennek át)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(elvetve: az első ugráson túl, {0:F0} km, 40 MHz-en)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(elvetve: Q65 vagy JT65 144 MHz-en = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 50 MHz-en, {0:F0} percen belül nincs másik spot {1:F0} km-en belüli felezőponttal: meteor scatter)
+scartate dal filtro locale: {0}	a helyi szűrő elvetette: {0}
+IMPOSTAZIONI	BEÁLLÍTÁSOK
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): sárga, csak az első ugráson belül
+Generali	Általános
+Smistamento degli spot	Spotok szétosztása
+Impostazioni generali	Általános beállítások
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Ugyanazok az adatok, mint a felső sorban: minden fülre érvényesek, a METEOR SCATTER fülre is.
+Aspetto	Megjelenés
+Lingua	Nyelv
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	A betűméret az egész programra érvényes, 85 és 140 % között, mint a YA-MS-ben. A nyelv és a téma újraépíti az ablakot: a beállítások és a spotok megmaradnak.
+Mappe e dati previsionali	Térképek és előrejelzési adatok
+Continente	Kontinens
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	A Mercator-térképeket a választott kontinensre helyezi, és kiválasztja az előrejelzési adatokat (az N0NBH E-skip adatai Európára és Észak-Amerikára). Ugyanaz a menü, mint a fülsávban.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	A program induláskor és 5 percenként ellenőrzi az időt az NTP-szerverekkel, és a számításokban a helyes időt használja. Windowson, rendszergazdai jogokkal a PC óráját is korrigálja. Ha felül NTP:FAILED felirat látható, a hálózat blokkolja az UDP 123-as portot.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Frissítések keresése a GitHubon (indításkor és 6 óránként)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Automatikus és csendes frissítés: kérdés nélkül letölti és telepíti az új verziót
+Controlla adesso	Ellenőrzés most
+Versione in uso: {0}	Használt verzió: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Az automatikus frissítés minden csomaggal működik, mert a program mindig egy felhasználói mappából fut: Windowson a telepítővel választott mappából vagy a zipből, Macen az alkalmazásból, Linuxon a ~/E-LAYER-ANALYZER mappából. A .deb, .rpm, Arch és Slackware csomagokkal, valamint az AppImage-dzsel a ~/E-LAYER-ANALYZER mappában lévő példány frissül: a csomagkezelő továbbra is az első alkalommal telepített verziót mutatja, amíg nem telepíti az új csomagot. Ha a program mappája nem írható, a program ezt jelzi, és az új verziót kézzel kell letölteni a Release oldalról.
+Apri la cartella dei dati	Az adatmappa megnyitása
+Dati	Adatok
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	A program minden adata a program melletti data mappában van (semmi sincs az AppData-ban). A gyűjtött spotok a program bezárásakor törlődnek. A Bureau of Meteorology API-kulcsát a DATA COLLECTION, Terjedési adatok részben kell megadni.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - a szerverek és a PC ideje közötti különbség: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - egyetlen NTP-szerver sem érhető el: a program a PC óráját használja.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Minden, a DATA COLLECTION-ben fogadott spotot (cluster, RBN, PSKReporter, WSJT-X) a táblázat sorrendjében ellenőriz a szabályokkal: az első érvényes szabály dönti el a fület. Jobbra az egyes módok szűrői találhatók, módosítható értékekkel és egy cluster-sor próbájával.
+Se lo spot...	Ha a spot...
+Valori	Értékek
+va a	ide kerül
+nessuna linguetta	egyik fülre sem
+è fuori dalla gamma del filtro locale	a helyi szűrő tartományán kívül esik
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz alatt vagy 145 MHz felett; a 430-440 MHz-es sávban csak aurora
+filtro locale spento	helyi szűrő kikapcsolva
+scartato	elvetve
+contiene AUE, AU-E o AURORAL E	AUE, AU-E vagy AURORAL E szerepel benne
+contiene una parola dell'aurora (o modo AU)	aurorát jelző szó szerepel benne (vagy AU üzemmód)
+contiene una parola del F.A.I. (o modo FAI)	F.A.I.-t jelző szó szerepel benne (vagy FAI üzemmód)
+ha un modo del meteor scatter o <MS>	meteor scatter üzemmódú vagy <MS> szerepel benne
+cade in una finestra MS del bandplan	a sávterv egy MS-ablakába esik
+in 50 MHz non esclusiva	50 MHz-en nem kizárólagos
+FT8 e FT4 in 50 e 70 MHz esclusi	az FT8 és az FT4 50 és 70 MHz-en kizárva
+è FT8 o FT4 in 50 MHz senza nube	FT8 vagy FT4 50 MHz-en felhő nélkül
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	nincs másik spot {0:F0} percen belül {1:F0} km-en belüli felezőponttal
+regola spenta	szabály kikapcsolva
+meteor scatter (non E-sporadico)	meteor scatter (nem sporadikus E)
+è Q65 o JT65 in 144 MHz	Q65 vagy JT65 144 MHz-en
+salvo <ES> nel testo	kivéve, ha a szövegben <ES> szerepel
+EME: scartato	EME: elvetve
+contiene una scritta di altra propagazione	más terjedési mód címkéje szerepel benne
+non E-sporadico	nem sporadikus E
+è transequatoriale	transzekvatoriális
+fascia di inclinazione ± {0:F0}°	inklinációs sáv ± {0:F0}°
+non E-sporadico (TEP)	nem sporadikus E (TEP)
+è in 28 MHz	28 MHz-en van
+da {0:F0} km	{0:F0} km-től
+è in 40 MHz	40 MHz-en van
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} és {1:F0} km között (első ugrás)
+è in 50 MHz	50 MHz-en van
+è in 70 MHz	70 MHz-en van
+è in 144 MHz	144 MHz-en van
+oltre {0:F0} km, con conferma	{0:F0} km felett, megerősítéssel
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	egyik szabály alá sem esik (tropo, 432 MHz, HF...)
+resta in Spot raccolti	a Gyűjtött spotok között marad
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	A program a(z) {0} csomaggal van telepítve: a frissítéshez töltse le az új csomagot a kiadás oldaláról, és telepítse úgy, mint az elsőt.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Az automatikus frissítés a Windows telepítőre és zipre, a Mac alkalmazásra, a .tar.gz archívumokra és az AppImage-re vonatkozik. A rendszercsomagokkal (.deb, .rpm, Arch, Slackware) a program nem frissül magától: jelzi az új verziót, amelyet az új csomag Release oldalról való letöltésével lehet telepíteni. Ha a program mappája nem írható, a program ezt jelzi, és az új verziót kézzel kell letölteni.

@@ -18,21 +18,11 @@
 
 Az utolsó 2000 spot, sáv- és forrásszűrővel. Archívum: naponta egy CSV-fájl a `data/spot` mappában. A program minden bezárásakor kiüríti a spot-adatbázist (a memóriát és a `data/spot` fájljait): minden munkamenet elölről kezdődik.
 
-**Helyi szűrő** (opcionális jelölőnégyzet): a 27990,0 kHz alatti vagy 145 MHz feletti "DX de" sorokat elveti, ezek nem jelennek meg a konzolon, és nem tárolódnak. A **pontatlan lokátorokat** (6 karakternél rövidebbeket) a CALL3-ból veszi: ha a CALL3-ban 6 karakteres lokátor van, az mindig elsőbbséget élvez. A YA-MS-hez hasonlóan meteor scatter (nem sporadikus E) spotnak számítanak az MS-re jellemző frekvenciaablakokba (50190-50300, 70100-70400, 144290-144399 kHz) eső, más terjedési mód címkéit (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) nem tartalmazó spotok, valamint a kizárólag MS-üzemmódúak (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) vagy `<MS>` jelölésűek. Az `<AS>`/`<ACS>` (repülőgép-szórás, aircraft scatter) jelölésű spotokat nem használja a sporadikus E-hez.
+**Helyi szűrő** (opcionális jelölőnégyzet, a BEÁLLÍTÁSOK fülön): a 27990,0 kHz alatti vagy 145 MHz feletti "DX de" sorokat elveti, ezek nem jelennek meg a konzolon, és nem tárolódnak; 430 és 440 MHz között csak az aurora-spotok mennek át. A **pontatlan lokátorokat** (6 karakternél rövidebbeket) a CALL3-ból veszi: ha a CALL3-ban 6 karakteres lokátor van, az mindig elsőbbséget élvez. A YA-MS-hez hasonlóan meteor scatter (nem sporadikus E) spotnak számítanak az MS-re jellemző frekvenciaablakokba (50190-50300, 70100-70400, 144290-144399 kHz) eső, más terjedési mód címkéit (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) nem tartalmazó spotok, valamint a kizárólag MS-üzemmódúak (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) vagy `<MS>` jelölésűek. Kivétel az FT8 és az FT4 50 és 70 MHz-en, ahol az ismert üzemmód dönt (a 70,154 MHz-es FT8 az MS-ablakon belül is a sporadikus E-hez kerül). Az `<AS>`/`<ACS>` (repülőgép-szórás, aircraft scatter) jelölésű spotokat nem használja a sporadikus E-hez.
 
-## Szűrőoszlop (jobb oldali 40%)
+## Spotszűrők
 
-Az adatgyűjtés **az egész programnak egy**: minden spot ezeken a szűrőkön halad át, majd az egyes terjedési módok fülére kerül (az E-LAYER ANALYZER-en belül a YA-MS Adatgyűjtés fül nem látható). Felül a **helyi szűrő** jelölőnégyzete; alatta öt allap:
-
-| Allap | Mit állít be | Alapértékek (a szerző szabályai) |
-|---|---|---|
-| Meteor scatter | a YA-MS szűrője: MS-frekvenciaablakok, más terjedési módok címkéi, MS-üzemmódok és `<MS>`, sávok | mint a YA-MS-ben |
-| Sporadikus E | a spotot kizáró `< >` címkék, 144 MHz-es szabály, transzekvatoriális szabály | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 perc, 300 km, 50 MHz-es rövid ugrás 1200 km/15 perc; ±20° |
-| F.A.I. | F.A.I.-szavak, sávok, időtartam a térképen | FAI, minden sáv, 24 óra |
-| Aurora | aurora `< >` címkék, sávok, időtartam a térképen | `AU` `AUR` (`< >` között vagy anélkül), minden sáv, 2 óra |
-| Szűrőpróba | illesszen be egy cluster-sort, és nézze meg, hogyan sorolja be az összes szűrő | |
-
-A **szerző szabályainak visszaállítása** gomb visszahozza az alapértékeket.
+Az adatgyűjtés **az egész programra egyetlen**: minden spot átmegy a szűrőkön, és az egyes terjedési módok füleire kerül. A 0.4.18-as verziótól a szűrők, a helyi szűrő és a szűrőpróba a **[BEÁLLÍTÁSOK](Settings-hu)** fülön, a **Spotok szétosztása** allapon vannak.
 
 ## CALL3
 
@@ -44,7 +34,7 @@ Ezek a YA-MS-ből származó szűrők (CW, legkisebb távolság, frekvenciaablak
 
 ## Spotok és Terjedési adatok allapok
 
-A fülnek két allapja van: **Spotok** (kapcsolatok, gyűjtött spotok, CALL3 és szűrőoszlop) és **Terjedési adatok**:
+A fülnek két allapja van: **Spotok** (kapcsolatok, PSKReporter MQTT, WSJT-X UDP, gyűjtött spotok és CALL3) és **Terjedési adatok**:
 
 - **N0NBH** (hamqsl.com): VHF-banner és napadatok, E-skip Európa és Észak-Amerika (DXrobot), aurora.
 - **Bz aurorához**: NOAA SWPC valós idejű napszél (DSCOVR/ACE, L1 pont), a Bz legjobb forrása.

@@ -19,7 +19,7 @@ V azimutálních zobrazeních ukazují čárkované kruhy **km od středu** (kro
 
 ## Co zobrazuje
 
-- **Spoty** posledních minut (15 min - 12 h) na pásmech **28, 50, 70 a 144 MHz**, převzaté z relací telnet. Lokátory pocházejí z komentáře spotu (např. `JN70CN<ES>JO62QM`) nebo z databáze CALL3.
+- **Spoty** posledních minut (15 min - 12 h) na pásmech **28, 40 (8 m, ve výchozím stavu vypnuté), 50, 70 a 144 MHz**, převzaté z relací telnet. Lokátory pocházejí z komentáře spotu (např. `JN70CN<ES>JO62QM`) nebo z databáze CALL3.
 - Spoty s **<MS>**, **<AU>** nebo **<TR>** v textu se **zahazují**: netýkají se sporadické vrstvy E, ale jsou užitečné pro meteor scatter, auroru nebo tropo.
 - **Transekvatoriální, pravidlo autora (IC8TEM)**: směrem do Afriky a Jižní Ameriky, pokud střed trasy padne do pásu magnetické inklinace mezi -20° a +20°, je spojení transekvatoriální (TEP) a ne přes sporadickou vrstvu E, pokud spot neuvádí `<ES>`.
 - **144 MHz, pravidlo autora (IC8TEM)**: sporadická vrstva E na 2 m začíná **nad 900 km** (kratší spoty se zahazují). Jediný spot na 144 MHz **se samostatně nekreslí**: objeví se, když do **5 minut** přijde druhý spot na 144 MHz s oblakem na stejném místě (body odrazu do 300 km), nebo když je poblíž spot **50 MHz s krátkým skokem** (do 1200 km, za posledních 15 minut). Lišta nahoře ukazuje, kolik spotů na 144 MHz čeká na potvrzení.
@@ -53,3 +53,12 @@ Sporadická vrstva E **se netýká 432 MHz**: MUF Es dosahuje asi 150-200 MHz a 
 Čtverce Maidenhead bodů odrazu jsou obarveny podle nejvyššího kmitočtu spotů: **zelená** do 29 MHz, **žlutá** do 51, **oranžová** do 71, **červená** do 145 MHz. Z foEs čtverce se odhaduje pravděpodobná MUF na nejdelším skoku (2400 km, tabulka IK3XTV): pokud dosáhne vyššího pásma, čtverec **bliká** barvou tohoto pásma (princip IK3XTV a Jacobse-Leinwolla: krátký skip znamená vysokou MUF).
 
 Vpravo nahoře na mapě se zobrazuje souhrn N0NBH (E-skip pro zvolený kontinent, SFI, indexy K a A).
+
+## Pravidla podle pásma (verze 0.4.18)
+
+- **50 MHz**: do 450 km nejde o sporadickou vrstvu E. Spoty FT8 a FT4 jsou sporadickou vrstvou E jen tehdy, když jsou součástí oblaku: jiný spot na 50 MHz do 4 minut se středem trasy do 150 km. Osamocený spot FT8/FT4 jde do meteor scatter.
+- **70 MHz**: do 450 km nejde o sporadickou vrstvu E. FT8 a FT4 jdou do sporadické vrstvy E i uvnitř okna meteor scatter v kmitočtovém plánu (nejprve rozhoduje známý druh provozu, pak kmitočet).
+- **40 MHz (8 m)**: minimální vzdálenost odvozená ze 450 km pro 50 MHz zákonem sekanty (asi 330 km); jen vzdálenosti do prvního skoku geometrie vrstvy E (asi 2440 km). Barva trasy: žlutá.
+- **144 MHz**: sporadická vrstva E od 900 km, s potvrzením; spoty Q65 a JT65 jsou EME a zahazují se, pokud text neobsahuje `<ES>`.
+- G0ISW (Propagation identification, 2024) vidí nejkratší sporadickou vrstvu E nad 400 km na 50 a 70 MHz a nad 1400 km na 144 MHz: pravidla autora se shodují na 50 a 70 MHz a na 144 MHz jsou širší, ale vyžadují potvrzení.
+- Pořadí, v jakém se všechna pravidla uplatňují, s používanými hodnotami, ukazuje **[NASTAVENÍ](Settings-cs)** › Třídění spotů.

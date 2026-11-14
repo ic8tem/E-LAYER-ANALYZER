@@ -18,21 +18,11 @@
 
 Posledních 2000 spotů s filtry podle pásma a zdroje. Archiv: jeden soubor CSV na den v `data/spot`. Při každém zavření programu se databáze spotů vyprázdní (paměť i soubory v `data/spot`): každá relace začíná od nuly.
 
-**Místní filtr** (volitelné pole): řádky „DX de“ pod 27990,0 kHz nebo nad 145 MHz se zahazují, nezobrazují se v konzoli a neukládají se. **Nepřesné lokátory** (méně než 6 znaků) se berou z CALL3: pokud má CALL3 6znakový lokátor, má vždy přednost. Stejně jako v YA-MS jsou spoty meteor scatter (ne sporadické vrstvy E) ty v typických kmitočtových oknech MS (50190-50300, 70100-70400, 144290-144399 kHz) bez tagů jiného šíření (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) a ty s druhy provozu výhradně pro MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) nebo s `<MS>`. Spoty s `<AS>`/`<ACS>` (aircraft scatter) se pro sporadickou vrstvu E nepoužívají.
+**Místní filtr** (volitelné pole, v NASTAVENÍ): řádky „DX de“ pod 27990,0 kHz nebo nad 145 MHz se zahazují, nezobrazují se v konzoli a neukládají se; mezi 430 a 440 MHz projdou jen spoty aurory. **Nepřesné lokátory** (méně než 6 znaků) se berou z CALL3: pokud má CALL3 6znakový lokátor, má vždy přednost. Stejně jako v YA-MS jsou spoty meteor scatter (ne sporadické vrstvy E) ty v typických kmitočtových oknech MS (50190-50300, 70100-70400, 144290-144399 kHz) bez tagů jiného šíření (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) a ty s druhy provozu výhradně pro MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) nebo s `<MS>`. Výjimka: FT8 a FT4 na 50 a 70 MHz, kde rozhoduje známý druh provozu (FT8 na 70,154 MHz jde do sporadické vrstvy E i uvnitř okna MS). Spoty s `<AS>`/`<ACS>` (aircraft scatter) se pro sporadickou vrstvu E nepoužívají.
 
-## Sloupec filtrů (pravých 40 %)
+## Filtry spotů
 
-Sběr dat je **jediný pro celý program**: každý spot prochází těmito filtry a dále do karty příslušného druhu šíření (uvnitř E-LAYER ANALYZER se karta Sběr dat programu YA-MS nezobrazuje). Nahoře je zaškrtávací pole **místního filtru**; pod ním pět podkaret:
-
-| Podkarta | Co nastavujete | Výchozí hodnoty (pravidla autora) |
-|---|---|---|
-| Meteor scatter | filtr YA-MS: kmitočtová okna MS, tagy jiného šíření, druhy provozu MS a `<MS>`, pásma | jako v YA-MS |
-| Sporadická vrstva E | tagy `< >`, které spot vylučují, pravidlo 144 MHz, transekvatoriální pravidlo | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, krátký skok 50 MHz 1200 km/15 min; ±20° |
-| F.A.I. | slova F.A.I., pásma, období na mapě | FAI, všechna pásma, 24 hodin |
-| Aurora | tagy aurory `< >`, pásma, období na mapě | `AU` `AUR` (s `< >` nebo bez), všechna pásma, 2 hodiny |
-| Test filtru | vložte řádek clusteru a uvidíte, jak jej všechny filtry klasifikují | |
-
-Tlačítko **Obnovit pravidla autora** vrátí výchozí hodnoty.
+Sběr dat je **jediný pro celý program**: každý spot prochází filtry a dále do karty příslušného druhu šíření. Od verze 0.4.18 jsou filtry, místní filtr a test filtru na kartě **[NASTAVENÍ](Settings-cs)**, podkarta **Třídění spotů**.
 
 ## CALL3
 
@@ -44,7 +34,7 @@ Tyto filtry z YA-MS (CW, minimální vzdálenost, frekvenční okna, režimy MS,
 
 ## Podkarty Spoty a Data o šíření
 
-Karta má dvě podkarty: **Spoty** (relace, shromážděné spoty, CALL3 a sloupec filtrů) a **Data o šíření**:
+Karta má dvě podkarty: **Spoty** (relace, PSKReporter MQTT, WSJT-X UDP, shromážděné spoty a CALL3) a **Data o šíření**:
 
 - **N0NBH** (hamqsl.com): banner VKV a sluneční data, E-skip Evropa a Severní Amerika (DXrobot), aurora.
 - **Bz pro auroru**: sluneční vítr v reálném čase od NOAA SWPC (DSCOVR/ACE, bod L1), nejlepší zdroj pro Bz.
