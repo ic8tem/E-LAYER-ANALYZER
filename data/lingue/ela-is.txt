@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	QTF-bil eftir slóðinni (frávik ≤ 1,5°, innan glugga Lange-Hesse beggja stöðva):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Gluggi scatter point (Lange-Hesse: 370-1100 km við 54° segulbreidd, hliðrað eftir segulhalla IGRF-14 hvorrar stöðvar): {0}; {1}. Hæð um 110 km, hornréttni innan ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Tillögð scatter point er utan glugga Lange-Hesse fyrir a.m.k. eina stöð: það er mögulegt, en ólíklegra.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Staðbundin sía: hendir klasalínum undir 27990,0 kHz og yfir 145 MHz (ekki sýndar og ekki vistaðar); á 430-440 MHz fara aðeins norðurljósaspot í gegn
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Gagnasöfnunin er aðeins ein fyrir allt forritið: hvert spot sem berst í DATA COLLECTION fer í gegnum þessar síur og á flipa hverrar útbreiðsluaðferðar.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 og 70 MHz-reglurnar (reglur höfundarins og IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Á 40 MHz (8 m) er lágmarksfjarlægðin leidd út á sama hátt ({0:F0} km) og aðeins fjarlægðir innan fyrsta stökks í rúmfræði E-lagsins gilda ({1:F0} km).
+in 70 MHz (km)	á 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 og FT4 á 70 MHz fara í sporadic-E jafnvel innan meteor scatter-glugga tíðniskipulagsins (70,154 MHz er tíðni FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 og FT4 á 50 MHz: sporadic-E aðeins ef þau tilheyra skýi, þ.e. ef annað spot á 50 MHz er með miðpunkt nálægt; stakt spot fer í meteor scatter
+punto medio entro (km)	miðpunktur innan (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 og JT65 á 144 MHz eru EME og fara ekki í sporadic-E, nema <ES> sé í textanum.
+sì	já
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Staðbundin sía: línu hent (utan sviðsins 27990 kHz - 145 MHz; á 430-440 MHz fara aðeins norðurljósaspot í gegn)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(hent: handan fyrsta stökks, {0:F0} km, á 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(hent: Q65 eða JT65 á 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 á 50 MHz án annars spots innan {0:F0} mín. með miðpunkt innan {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	hent af staðbundnu síunni: {0}
+IMPOSTAZIONI	STILLINGAR
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): gult, aðeins innan fyrsta stökks
+Generali	Almennt
+Smistamento degli spot	Flokkun spota
+Impostazioni generali	Almennar stillingar
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Þetta eru sömu gögn og í línunni efst: þau gilda fyrir alla flipa, líka METEOR SCATTER.
+Aspetto	Útlit
+Lingua	Tungumál
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Leturstærðin gildir fyrir allt forritið, frá 85 til 140 %, eins og í YA-MS. Tungumál og litaþema endurbyggja gluggann: stillingar og spot haldast.
+Mappe e dati previsionali	Kort og spágögn
+Continente	Heimsálfa
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Færir Mercator-kortin á valda heimsálfu og velur spágögnin (E-skip frá N0NBH fyrir Evrópu og Norður-Ameríku). Þetta er sama valmynd og í flipastikunni.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Forritið athugar tímann hjá NTP-þjónum við ræsingu og á 5 mínútna fresti og notar réttan tíma í útreikningum. Á Windows, með stjórnandaréttindum, leiðréttir það einnig klukku tölvunnar. Ef textinn efst er NTP:FAILED lokar netið á port UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Leita að uppfærslum á GitHub (við ræsingu og á 6 klukkustunda fresti)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Sjálfvirk og hljóðlaus uppfærsla: sækir og setur upp nýju útgáfuna án þess að spyrja
+Controlla adesso	Athuga núna
+Versione in uso: {0}	Útgáfa í notkun: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Sjálfvirka uppfærslan virkar með öllum pökkum, því forritið keyrir alltaf úr möppu notandans: möppunni sem valin var með uppsetningarforritinu eða zip-skránni á Windows, forritinu á Mac, ~/E-LAYER-ANALYZER á Linux. Með pökkunum .deb, .rpm, Arch, Slackware og með AppImage er afritið í ~/E-LAYER-ANALYZER uppfært: pakkastjórinn sýnir áfram útgáfuna sem var sett upp fyrst, þar til þú setur nýja pakkann upp. Ef ekki er hægt að skrifa í möppu forritsins segir forritið frá því og nýju útgáfuna þarf að sækja handvirkt af síðunni Releases.
+Apri la cartella dei dati	Opna gagnamöppuna
+Dati	Gögn
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Öll gögn forritsins eru í möppunni data við hlið forritsins (ekkert í AppData). Söfnuðum spotum er eytt þegar forritinu er lokað. API-lykill Bureau of Meteorology er settur inn í DATA COLLECTION, Útbreiðslugögn.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - munur á tíma þjónanna og tölvunnar: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - enginn NTP-þjónn næst: forritið notar klukku tölvunnar.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Hvert spot sem berst í DATA COLLECTION (klasi, RBN, PSKReporter, WSJT-X) er athugað með reglunum í röð töflunnar: fyrsta reglan sem á við ræður flipanum. Til hægri eru síur hverrar aðferðar, með breytanlegum gildum og prófun á klasalínu.
+Se lo spot...	Ef spotið...
+Valori	Gildi
+va a	fer á
+nessuna linguetta	enginn flipi
+è fuori dalla gamma del filtro locale	er utan sviðs staðbundnu síunnar
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	undir 27990 kHz eða yfir 145 MHz; á 430-440 MHz aðeins norðurljós
+filtro locale spento	staðbundin sía óvirk
+scartato	hent
+contiene AUE, AU-E o AURORAL E	inniheldur AUE, AU-E eða AURORAL E
+contiene una parola dell'aurora (o modo AU)	inniheldur norðurljósaorð (eða háttinn AU)
+contiene una parola del F.A.I. (o modo FAI)	inniheldur F.A.I.-orð (eða háttinn FAI)
+ha un modo del meteor scatter o <MS>	hefur meteor scatter-hátt eða <MS>
+cade in una finestra MS del bandplan	fellur í MS-glugga tíðniskipulagsins
+in 50 MHz non esclusiva	á 50 MHz ekki útilokandi
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 og FT4 á 50 og 70 MHz undanskilin
+è FT8 o FT4 in 50 MHz senza nube	er FT8 eða FT4 á 50 MHz án skýs
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	ekkert annað spot innan {0:F0} mín. með miðpunkt innan {1:F0} km
+regola spenta	regla óvirk
+meteor scatter (non E-sporadico)	meteor scatter (ekki sporadic-E)
+è Q65 o JT65 in 144 MHz	er Q65 eða JT65 á 144 MHz
+salvo <ES> nel testo	nema <ES> sé í textanum
+EME: scartato	EME: hent
+contiene una scritta di altra propagazione	inniheldur merkingu annarrar útbreiðslu
+non E-sporadico	ekki sporadic-E
+è transequatoriale	er þvermiðbaugs
+fascia di inclinazione ± {0:F0}°	segulhallabelti ± {0:F0}°
+non E-sporadico (TEP)	ekki sporadic-E (TEP)
+è in 28 MHz	er á 28 MHz
+da {0:F0} km	frá {0:F0} km
+è in 40 MHz	er á 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	frá {0:F0} til {1:F0} km (fyrsta stökk)
+è in 50 MHz	er á 50 MHz
+è in 70 MHz	er á 70 MHz
+è in 144 MHz	er á 144 MHz
+oltre {0:F0} km, con conferma	yfir {0:F0} km, með staðfestingu
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	fellur ekki undir neina reglu (tropo, 432 MHz, HF...)
+resta in Spot raccolti	verður áfram í Söfnuð spot
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Forritið er sett upp með pakkanum {0}: til að uppfæra það skaltu sækja nýja pakkann af útgáfusíðunni og setja hann upp eins og þann fyrsta.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Sjálfvirka uppfærslan gildir fyrir uppsetningarforritið og zip-skrána á Windows, forritið á Mac, .tar.gz-söfnin og AppImage. Með kerfispökkum (.deb, .rpm, Arch, Slackware) uppfærir forritið sig ekki sjálft: það lætur vita af nýju útgáfunni, sem er sett upp með því að sækja nýja pakkann af síðunni Releases. Ef ekki er hægt að skrifa í möppu forritsins segir forritið frá því og nýju útgáfuna þarf að sækja handvirkt.

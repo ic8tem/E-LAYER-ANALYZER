@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	QTF intervalas išilgai pėdsako (nuokrypis ≤ 1,5°, abiejų stočių Lange-Hesse lange):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Sklaidos taško langas (Lange-Hesse: 370-1100 km ties 54° geomagnetine platuma, paslinktas pagal kiekvienos stoties IGRF-14 inklinaciją): {0}; {1}. Aukštis apie 110 km, statmenumas ±3° ribose.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Siūlomas sklaidos taškas bent vienai stočiai yra už Lange-Hesse lango ribų: tai įmanoma, bet mažiau tikėtina.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Vietinis filtras: atmeta klasterio eilutes žemiau 27990,0 kHz ir aukščiau 145 MHz (nerodomos ir neįsimenamos); 430-440 MHz ruože praleidžiami tik pašvaistės spotai
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Duomenų rinkimas visai programai yra vienas: kiekvienas DATA COLLECTION gautas spotas pereina per šiuos filtrus ir patenka į kiekvieno sklidimo būdo korteles.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 ir 70 MHz taisyklės (autoriaus ir IK3XTV taisyklės)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz (8 m) juostoje mažiausias atstumas išvedamas tuo pačiu būdu ({0:F0} km) ir galioja tik atstumai E sluoksnio geometrijos pirmo šuolio ribose ({1:F0} km).
+in 70 MHz (km)	70 MHz juostoje (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 ir FT4 70 MHz juostoje priskiriami sporadiniam E net juostų plano meteor scatter lange (70,154 MHz yra FT8 dažnis).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 ir FT4 50 MHz juostoje: sporadinis E tik tada, kai jie priklauso debesiui, t. y. kai yra kitas 50 MHz spotas su artimu vidurio tašku; pavienis spotas priskiriamas meteor scatter
+punto medio entro (km)	vidurio taškas iki (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 ir JT65 144 MHz juostoje yra EME ir nepatenka į sporadinį E, nebent tekste yra <ES>.
+sì	taip
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Vietinis filtras: eilutė atmesta (už 27990 kHz - 145 MHz ribų; 430-440 MHz ruože praleidžiami tik pašvaistės spotai)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(atmesta: už pirmo šuolio, {0:F0} km, 40 MHz juostoje)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(atmesta: Q65 arba JT65 144 MHz juostoje = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 50 MHz juostoje be kito spoto per {0:F0} min su vidurio tašku iki {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	atmesta vietinio filtro: {0}
+IMPOSTAZIONI	NUSTATYMAI
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): geltona, tik pirmo šuolio ribose
+Generali	Bendrieji
+Smistamento degli spot	Spotų skirstymas
+Impostazioni generali	Bendrieji nustatymai
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Tai tie patys duomenys kaip viršutinėje eilutėje: jie galioja visoms kortelėms, taip pat METEOR SCATTER.
+Aspetto	Išvaizda
+Lingua	Kalba
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Šrifto dydis galioja visai programai, nuo 85 iki 140 %, kaip YA-MS. Kalba ir tema perkuria langą: nustatymai ir spotai išlieka.
+Mappe e dati previsionali	Žemėlapiai ir prognozių duomenys
+Continente	Žemynas
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Perkelia Merkatoriaus žemėlapius į pasirinktą žemyną ir parenka prognozių duomenis (N0NBH E-skip Europai ir Šiaurės Amerikai). Tai tas pats meniu kaip kortelių juostoje.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Programa tikrina laiką NTP serveriuose paleidžiant ir kas 5 minutes ir skaičiavimuose naudoja teisingą laiką. Windows sistemoje, turint administratoriaus teises, ji pataiso ir kompiuterio laikrodį. Jei viršuje rodoma NTP:FAILED, tinklas blokuoja UDP 123 prievadą.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Tikrinti atnaujinimus GitHub (paleidžiant ir kas 6 valandas)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Automatinis ir tylus atnaujinimas: atsisiunčia ir įdiegia naują versiją neklausdamas
+Controlla adesso	Tikrinti dabar
+Versione in uso: {0}	Naudojama versija: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Automatinis atnaujinimas veikia su visais paketais, nes programa visada veikia iš naudotojo aplanko: Windows sistemoje – iš aplanko, pasirinkto diegimo programoje arba zip, Mac – iš programos, Linux – iš ~/E-LAYER-ANALYZER. Su .deb, .rpm, Arch, Slackware paketais ir AppImage atnaujinama kopija ~/E-LAYER-ANALYZER: paketų tvarkyklė toliau rodo pirmą kartą įdiegtą versiją, kol neįdiegsite naujo paketo. Jei į programos aplanką negalima rašyti, programa tai praneša ir naują versiją reikia atsisiųsti rankiniu būdu iš Release puslapio.
+Apri la cartella dei dati	Atverti duomenų aplanką
+Dati	Duomenys
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Visi programos duomenys yra aplanke data šalia programos (nieko AppData). Surinkti spotai ištrinami uždarius programą. Bureau of Meteorology API raktas įvedamas DATA COLLECTION, Sklidimo duomenys.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - serverių ir kompiuterio laiko skirtumas: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - nepasiekiamas nė vienas NTP serveris: programa naudoja kompiuterio laikrodį.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Kiekvienas DATA COLLECTION gautas spotas (klasteris, RBN, PSKReporter, WSJT-X) tikrinamas taisyklėmis lentelės tvarka: pirmoji tinkanti nusprendžia kortelę. Dešinėje – kiekvieno būdo filtrai su keičiamomis reikšmėmis ir klasterio eilutės bandymu.
+Se lo spot...	Jei spotas...
+Valori	Reikšmės
+va a	patenka į
+nessuna linguetta	jokia kortelė
+è fuori dalla gamma del filtro locale	yra už vietinio filtro ribų
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	žemiau 27990 kHz arba aukščiau 145 MHz; 430-440 MHz ruože tik pašvaistė
+filtro locale spento	vietinis filtras išjungtas
+scartato	atmestas
+contiene AUE, AU-E o AURORAL E	turi AUE, AU-E arba AURORAL E
+contiene una parola dell'aurora (o modo AU)	turi pašvaistės žodį (arba režimą AU)
+contiene una parola del F.A.I. (o modo FAI)	turi F.A.I. žodį (arba režimą FAI)
+ha un modo del meteor scatter o <MS>	turi meteor scatter režimą arba <MS>
+cade in una finestra MS del bandplan	patenka į juostų plano MS langą
+in 50 MHz non esclusiva	50 MHz juostoje neišskirtinis
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 ir FT4 50 ir 70 MHz juostose išskyrus
+è FT8 o FT4 in 50 MHz senza nube	yra FT8 arba FT4 50 MHz juostoje be debesies
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	nėra kito spoto per {0:F0} min su vidurio tašku iki {1:F0} km
+regola spenta	taisyklė išjungta
+meteor scatter (non E-sporadico)	meteor scatter (ne sporadinis E)
+è Q65 o JT65 in 144 MHz	yra Q65 arba JT65 144 MHz juostoje
+salvo <ES> nel testo	nebent tekste yra <ES>
+EME: scartato	EME: atmestas
+contiene una scritta di altra propagazione	turi kito sklidimo žymą
+non E-sporadico	ne sporadinis E
+è transequatoriale	yra transekvatorinis
+fascia di inclinazione ± {0:F0}°	inklinacijos juosta ± {0:F0}°
+non E-sporadico (TEP)	ne sporadinis E (TEP)
+è in 28 MHz	yra 28 MHz juostoje
+da {0:F0} km	nuo {0:F0} km
+è in 40 MHz	yra 40 MHz juostoje
+da {0:F0} a {1:F0} km (primo salto)	nuo {0:F0} iki {1:F0} km (pirmas šuolis)
+è in 50 MHz	yra 50 MHz juostoje
+è in 70 MHz	yra 70 MHz juostoje
+è in 144 MHz	yra 144 MHz juostoje
+oltre {0:F0} km, con conferma	daugiau nei {0:F0} km, su patvirtinimu
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	neatitinka jokios taisyklės (tropo, 432 MHz, HF...)
+resta in Spot raccolti	lieka Surinktuose spotuose
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Programa įdiegta su paketu {0}: norėdami ją atnaujinti, atsisiųskite naują paketą iš leidimo puslapio ir įdiekite jį kaip pirmąjį.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Automatinis atnaujinimas taikomas Windows diegimo programai ir zip, Mac programai, .tar.gz archyvams ir AppImage. Su sistemos paketais (.deb, .rpm, Arch, Slackware) programa pati neatsinaujina: ji praneša apie naują versiją, kuri įdiegiama atsisiuntus naują paketą iš Release puslapio. Jei į programos aplanką negalima rašyti, programa tai praneša ir naują versiją reikia atsisiųsti rankiniu būdu.

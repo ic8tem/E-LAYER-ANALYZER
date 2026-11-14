@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	QTF-i vahemik piki jälge (hälve ≤ 1,5°, mõlema jaama Lange-Hesse aknas):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Hajumispunkti aken (Lange-Hesse: 370-1100 km 54° geomagnetilisel laiusel, nihutatud iga jaama IGRF-14 inklinatsiooni järgi): {0}; {1}. Kõrgus umbes 110 km, ristsus ±3° piires.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Pakutud hajumispunkt on vähemalt ühe jaama jaoks väljaspool Lange-Hesse akent: see on võimalik, kuid vähem tõenäoline.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Kohalik filter: jätab kõrvale klastri read alla 27990,0 kHz ja üle 145 MHz (ei kuvata ega salvestata); 430-440 MHz alal pääsevad läbi ainult aurora spotid
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Andmete kogumine on kogu programmi peale üks: iga DATA COLLECTION-is saabunud spot läbib need filtrid ja jõuab iga leviviisi sakkidele.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 ja 70 MHz reeglid (autori ja IK3XTV reeglid)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz-l (8 m) tuletatakse minimaalne kaugus samamoodi ({0:F0} km) ja kehtivad ainult kaugused E-kihi geomeetria esimese hüppe piires ({1:F0} km).
+in 70 MHz (km)	70 MHz-l (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 ja FT4 70 MHz-l lähevad sporaadilise E alla ka sagedusplaani meteoorhajumise aknas (70,154 MHz on FT8 sagedus).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 ja FT4 50 MHz-l: sporaadiline E ainult siis, kui need kuuluvad pilve, st kui on teine 50 MHz spot lähedase keskpunktiga; üksik spot läheb meteoorhajumise alla
+punto medio entro (km)	keskpunkt piires (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 ja JT65 144 MHz-l on EME ega lähe sporaadilise E alla, välja arvatud <ES> tekstis.
+sì	jah
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Kohalik filter: rida jäeti kõrvale (väljaspool vahemikku 27990 kHz - 145 MHz; 430-440 MHz alal pääsevad läbi ainult aurora spotid)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(kõrvale jäetud: väljaspool esimest hüpet, {0:F0} km, 40 MHz-l)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(kõrvale jäetud: Q65 või JT65 144 MHz-l = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 50 MHz-l ilma teise spotita {0:F0} min jooksul, mille keskpunkt oleks {1:F0} km piires: meteoorhajumine)
+scartate dal filtro locale: {0}	kohaliku filtri poolt kõrvale jäetud: {0}
+IMPOSTAZIONI	SEADED
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): kollane, ainult esimese hüppe piires
+Generali	Üldine
+Smistamento degli spot	Spottide suunamine
+Impostazioni generali	Üldseaded
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Need on samad andmed mis ülemisel real: need kehtivad kõigile sakkidele, ka METEOR SCATTER-ile.
+Aspetto	Välimus
+Lingua	Keel
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Kirjasuurus kehtib kogu programmis, 85 kuni 140 %, nagu YA-MS-is. Keel ja teema ehitavad akna uuesti üles: seaded ja spotid säilivad.
+Mappe e dati previsionali	Kaardid ja prognoosiandmed
+Continente	Kontinent
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Nihutab Mercatori kaardid valitud kontinendile ja valib prognoosiandmed (N0NBH E-skip Euroopa ja Põhja-Ameerika jaoks). See on sama menüü mis sakiribal.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Programm kontrollib aega NTP-serveritest käivitamisel ja iga 5 minuti järel ning kasutab arvutustes õiget aega. Windowsis parandab see administraatoriõigustega ka arvuti kella. Kui ülal on kiri NTP:FAILED, blokeerib võrk pordi UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Kontrolli uuendusi GitHubis (käivitamisel ja iga 6 tunni järel)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Automaatne ja vaikne uuendamine: laadib alla ja paigaldab uue versiooni küsimata
+Controlla adesso	Kontrolli kohe
+Versione in uso: {0}	Kasutusel olev versioon: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Automaatne uuendamine töötab kõigi pakettidega, sest programm töötab alati kasutaja kaustast: Windowsis paigaldaja või zip-iga valitud kaustast, Macis rakendusest, Linuxis kaustast ~/E-LAYER-ANALYZER. Pakettidega .deb, .rpm, Arch, Slackware ja AppImage-iga uuendatakse koopiat kaustas ~/E-LAYER-ANALYZER: paketihaldur näitab edasi esimesena paigaldatud versiooni, kuni paigaldad uue paketi. Kui programmi kausta ei saa kirjutada, ütleb programm seda ja uus versioon tuleb käsitsi alla laadida Release'ide lehelt.
+Apri la cartella dei dati	Ava andmekaust
+Dati	Andmed
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Kõik programmi andmed on programmi kõrval olevas kaustas data (AppData-s mitte midagi). Kogutud spotid kustutatakse programmi sulgemisel. Bureau of Meteorology API võti sisestatakse DATA COLLECTION-is, Levi andmed.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - serverite ja arvuti aja erinevus: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - ükski NTP-server pole kättesaadav: programm kasutab arvuti kella.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Iga DATA COLLECTION-is saabunud spotti (klaster, RBN, PSKReporter, WSJT-X) kontrollitakse reeglitega tabeli järjekorras: esimene kehtiv reegel otsustab saki. Paremal on iga leviviisi filtrid muudetavate väärtuste ja klastri rea prooviga.
+Se lo spot...	Kui spot...
+Valori	Väärtused
+va a	läheb
+nessuna linguetta	mitte ükski sakk
+è fuori dalla gamma del filtro locale	on väljaspool kohaliku filtri vahemikku
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	alla 27990 kHz või üle 145 MHz; 430-440 MHz alal ainult aurora
+filtro locale spento	kohalik filter väljas
+scartato	kõrvale jäetud
+contiene AUE, AU-E o AURORAL E	sisaldab AUE, AU-E või AURORAL E
+contiene una parola dell'aurora (o modo AU)	sisaldab aurora sõna (või viisi AU)
+contiene una parola del F.A.I. (o modo FAI)	sisaldab F.A.I. sõna (või viisi FAI)
+ha un modo del meteor scatter o <MS>	on meteoorhajumise viisiga või <MS>
+cade in una finestra MS del bandplan	langeb sagedusplaani MS-aknasse
+in 50 MHz non esclusiva	50 MHz-l mitte välistav
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 ja FT4 50 ja 70 MHz-l välja arvatud
+è FT8 o FT4 in 50 MHz senza nube	on FT8 või FT4 50 MHz-l ilma pilveta
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	pole teist spotti {0:F0} min jooksul keskpunktiga {1:F0} km piires
+regola spenta	reegel väljas
+meteor scatter (non E-sporadico)	meteoorhajumine (mitte sporaadiline E)
+è Q65 o JT65 in 144 MHz	on Q65 või JT65 144 MHz-l
+salvo <ES> nel testo	välja arvatud <ES> tekstis
+EME: scartato	EME: kõrvale jäetud
+contiene una scritta di altra propagazione	sisaldab muu levi märget
+non E-sporadico	mitte sporaadiline E
+è transequatoriale	on transekvatoriaalne
+fascia di inclinazione ± {0:F0}°	inklinatsioonivöönd ± {0:F0}°
+non E-sporadico (TEP)	mitte sporaadiline E (TEP)
+è in 28 MHz	on 28 MHz-l
+da {0:F0} km	alates {0:F0} km
+è in 40 MHz	on 40 MHz-l
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} kuni {1:F0} km (esimene hüpe)
+è in 50 MHz	on 50 MHz-l
+è in 70 MHz	on 70 MHz-l
+è in 144 MHz	on 144 MHz-l
+oltre {0:F0} km, con conferma	üle {0:F0} km, kinnitusega
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	ei vasta ühelegi reeglile (tropo, 432 MHz, HF...)
+resta in Spot raccolti	jääb Kogutud spottide hulka
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Programm on paigaldatud paketiga {0}: selle uuendamiseks laadi väljalaske lehelt alla uus pakett ja paigalda see nagu esimene.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Automaatne uuendamine kehtib Windowsi paigaldaja ja zip-i, Maci rakenduse, .tar.gz-arhiivide ja AppImage'i kohta. Süsteemipakettidega (.deb, .rpm, Arch, Slackware) programm ise ei uuene: see teatab uuest versioonist, mis paigaldatakse, laadides Release'ide lehelt alla uue paketi. Kui programmi kausta ei saa kirjutada, ütleb programm seda ja uus versioon tuleb käsitsi alla laadida.

@@ -18,7 +18,11 @@
 
 Viimased 2000 spotti, sagedusala ja allika filtritega. Arhiiv: üks CSV-fail päevas kaustas `data/spot`. Iga kord, kui programm suletakse, spotide andmebaas tühjendatakse (mälu ja kausta `data/spot` failid): iga seanss algab nullist.
 
-**Kohalik filter** (valikuline kast): "DX de" read alla 27990,0 kHz või üle 145 MHz jäetakse kõrvale, neid ei näidata konsoolis ega salvestata. **Ebatäpsed lokaatorid** (alla 6 märgi) võetakse CALL3-st: kui CALL3-s on 6-märgiline lokaator, on see alati eelistatud. Nagu YA-MS-is, on meteor scatteri (mitte sporaadilise E) spotid need, mis on tüüpilistes MS-sagedusakendes (50190-50300, 70100-70400, 144290-144399 kHz) ilma muu levi märgenditeta (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), ning need, milles on ainult MS-i jaoks kasutatav moodus (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) või `<MS>`. Spotte märgendiga `<AS>`/`<ACS>` (aircraft scatter) sporaadilise E jaoks ei kasutata.
+**Kohalik filter** (valikuline kast, sakil SEADED): "DX de" read alla 27990,0 kHz või üle 145 MHz jäetakse kõrvale, neid ei näidata konsoolis ega salvestata; 430 ja 440 MHz vahel pääsevad läbi ainult aurora spotid. **Ebatäpsed lokaatorid** (alla 6 märgi) võetakse CALL3-st: kui CALL3-s on 6-märgiline lokaator, on see alati eelistatud. Nagu YA-MS-is, on meteor scatteri (mitte sporaadilise E) spotid need, mis on tüüpilistes MS-sagedusakendes (50190-50300, 70100-70400, 144290-144399 kHz) ilma muu levi märgenditeta (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), ning need, milles on ainult MS-i jaoks kasutatav moodus (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) või `<MS>`. Erand: FT8 ja FT4 50 ja 70 MHz-l, kus otsustab teadaolev viis (70,154 MHz FT8 läheb sporaadilise E alla ka MS-aknas). Spotte märgendiga `<AS>`/`<ACS>` (aircraft scatter) sporaadilise E jaoks ei kasutata.
+
+## Spottide filtrid
+
+Andmete kogumine on **kogu programmi peale üks**: iga spot läbib filtrid ja jõuab iga leviviisi sakile. Alates versioonist 0.4.18 asuvad filtrid, kohalik filter ja filtrite proov sakil **[SEADED](Settings-et)**, alamsakil **Spottide suunamine**.
 
 ## CALL3
 
@@ -27,3 +31,13 @@ JTDX-i andmebaas **kutsung → lokaator** (üle miljoni kutsungi) failis `data/c
 Alates versioonist 0.4.16 on kogu programmil üks CALL3 andmebaas, YA-MS-i Andmekogumise oma (sakk METEOR SCATTER), samade reeglitega nagu LIVETROPOVHF: uuendamine MMMonVHF-ist, käsitsi kirjed, lisatud failid, klastri parandused, õpitud lokaatorid ja G7VRD iga 6 tunni järel; parandused kirjutatakse faili data/call3.txt ja failist data/call3_nuovi.txt imporditakse lokaatorid üks kord. WSJT-X-i, JTDX-i ja MSHV spotid tulevad ka UDP kaudu (allikas WSJT-X UDP, port 2237 edastusega porti 2238).
 
 Need YA-MS-ist pärit filtrid (CW, minimaalne kaugus, sagedusaknad, MS-režiimid, sagedusalad) kehtivad ainult sakile METEOR SCATTER: need otsustavad, millised spotid selle kogusse jõuavad. Teised sakid saavad kõik spotid ja kasutavad oma filtreid.
+
+## Alamsakid Spotid ja Levi andmed
+
+Sakil on kaks alamsakki: **Spotid** (seansid, PSKReporter MQTT, WSJT-X UDP, kogutud spotid ja CALL3) ja **Levi andmed**:
+
+- **N0NBH** (hamqsl.com): VHF-banner ja päikeseandmed, Euroopa ja Põhja-Ameerika E-skip (DXrobot), aurora.
+- **Bz aurora jaoks**: NOAA SWPC reaalajas päikesetuul (DSCOVR/ACE, punkt L1), parim allikas Bz jaoks.
+- **Meteoorhajumine**: päeva meteooride aktiivsus (RMOB) Make More Miles on VHF-ilt.
+
+Need laaditakse alla kõige rohkem kord tunnis. Kokkuvõte kuvatakse SPORADIC-E, F.A.I. ja AURORA kaartidel. **Kontinendi menüü** sakiriba paremas servas nihutab kaardid ja valib selle kontinendi andmed.

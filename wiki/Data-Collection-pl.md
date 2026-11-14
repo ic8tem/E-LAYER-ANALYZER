@@ -18,21 +18,11 @@
 
 Ostatnie 2000 spotów, z filtrami pasma i źródła. Archiwum: jeden plik CSV na dzień w `data/spot`. Przy każdym zamknięciu programu baza spotów jest opróżniana (pamięć i pliki w `data/spot`): każda sesja zaczyna od zera.
 
-**Filtr lokalny** (pole opcjonalne): wiersze "DX de" poniżej 27990,0 kHz lub powyżej 145 MHz są odrzucane, nie są wyświetlane w konsoli ani zapamiętywane. **Nieprecyzyjne lokatory** (mniej niż 6 znaków) pobierane są z CALL3: jeśli CALL3 ma lokator 6-znakowy, zawsze ma on pierwszeństwo. Tak jak w YA-MS, spotami meteor scatter (a nie E-sporadycznego) są spoty w typowych oknach częstotliwości MS (50190-50300, 70100-70400, 144290-144399 kHz) bez napisów innej propagacji (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) oraz spoty z emisjami wyłącznie MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) lub z `<MS>`. Spoty z `<AS>`/`<ACS>` (aircraft scatter) nie są używane dla E-sporadycznego.
+**Filtr lokalny** (pole opcjonalne, w zakładce USTAWIENIA): wiersze "DX de" poniżej 27990,0 kHz lub powyżej 145 MHz są odrzucane, nie są wyświetlane w konsoli ani zapamiętywane; między 430 a 440 MHz przechodzą tylko spoty zorzowe. **Nieprecyzyjne lokatory** (mniej niż 6 znaków) pobierane są z CALL3: jeśli CALL3 ma lokator 6-znakowy, zawsze ma on pierwszeństwo. Tak jak w YA-MS, spotami meteor scatter (a nie E-sporadycznego) są spoty w typowych oknach częstotliwości MS (50190-50300, 70100-70400, 144290-144399 kHz) bez napisów innej propagacji (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) oraz spoty z emisjami wyłącznie MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) lub z `<MS>`. Wyjątek: FT8 i FT4 na 50 i 70 MHz, gdzie decyduje znana emisja (FT8 na 70,154 MHz trafia do E-sporadycznego nawet w oknie MS). Spoty z `<AS>`/`<ACS>` (aircraft scatter) nie są używane dla E-sporadycznego.
 
-## Kolumna filtrów (prawe 40%)
+## Filtry spotów
 
-Zbieranie danych jest **jedno dla całego programu**: każdy spot przechodzi przez te filtry i trafia do zakładki odpowiedniego rodzaju propagacji (wewnątrz E-LAYER ANALYZER zakładka Zbieranie danych YA-MS nie jest wyświetlana). Na górze pole **filtra lokalnego**; poniżej pięć podzakładek:
-
-| Podzakładka | Co ustawiasz | Wartości domyślne (reguły autora) |
-|---|---|---|
-| Meteor scatter | filtr YA-MS: okna częstotliwości MS, napisy innej propagacji, emisje MS i `<MS>`, pasma | jak w YA-MS |
-| E-sporadyczne | napisy `< >` wykluczające spot, reguła 144 MHz, reguła transrównikowa | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, krótki skok 50 MHz 1200 km/15 min; ±20° |
-| F.A.I. | słowa F.A.I., pasma, okres na mapie | FAI, wszystkie pasma, 24 godziny |
-| Zorza | napisy zorzowe `< >`, pasma, okres na mapie | `AU` `AUR` (z `< >` lub bez), wszystkie pasma, 2 godziny |
-| Test filtrów | wklej wiersz z klastra i zobacz, jak klasyfikują go wszystkie filtry | |
-
-Przycisk **Przywróć reguły autora** przywraca wartości domyślne.
+Zbieranie danych jest **jedno dla całego programu**: każdy spot przechodzi przez filtry i trafia do zakładki każdego rodzaju propagacji. Od wersji 0.4.18 filtry, filtr lokalny i test filtrów znajdują się w zakładce **[USTAWIENIA](Settings-pl)**, podzakładka **Kierowanie spotów**.
 
 ## CALL3
 
@@ -44,7 +34,7 @@ Te filtry z YA-MS (CW, minimalna odległość, okna częstotliwości, tryby MS, 
 
 ## Podzakładki Spoty i Dane propagacyjne
 
-Zakładka ma dwie podzakładki: **Spoty** (sesje, zebrane spoty, CALL3 i kolumna filtrów) oraz **Dane propagacyjne**:
+Zakładka ma dwie podzakładki: **Spoty** (sesje, PSKReporter MQTT, WSJT-X UDP, zebrane spoty i CALL3) oraz **Dane propagacyjne**:
 
 - **N0NBH** (hamqsl.com): baner VHF i dane słoneczne, E-skip Europa i Ameryka Północna (DXrobot), zorza.
 - **Bz dla zorzy**: wiatr słoneczny w czasie rzeczywistym z NOAA SWPC (DSCOVR/ACE, punkt L1), najlepsze źródło Bz.

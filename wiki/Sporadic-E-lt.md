@@ -8,9 +8,10 @@
 
 Mygtukas virš žemėlapio parenka vaizdą:
 
-- **Azimutinis - vienas šuolis**: azimutinis vienodų atstumų žemėlapis, kurio centras – jūsų stotis, fiksuotas 2500 km spindulys, su IK3XTV lentelės zonomis (minimalus 500 km, optimalus 1500-2000 km, vieno šuolio maksimalus 2400 km).
-- **Azimutinis - maksimalus atstumas (keli šuoliai)**: tas pats žemėlapis su slankikliu **Maksimalus atstumas** (nuo 300 iki 20000 km, taip pat pelės ratuku); rodomos ir dvigubo (5000 km) bei trigubo šuolio (6900 km) ribos, todėl galima stebėti kelių šuolių sklidimo raidą.
-- **Stačiakampis**: ankstesnis pasaulio žemėlapis su mygtukais Europa ir Pasaulis.
+- **Azimutinis**: azimutinis vienodų atstumų žemėlapis, kurio centras – jūsų stotis, su **mastelio** slankikliu (nuo 300 iki 20000 km nuo centro, taip pat pelės ratuku).
+- **Merkatoriaus**: pasaulio žemėlapis su mygtukais Europa ir Pasaulis.
+
+Abiejose projekcijose aplink stotį nubraižomi **Flavio IK3XTV atstumų apskritimai**: 500 km (vieno šuolio minimumas), 1500-2000 km (optimumas), 2400 km (vieno šuolio maksimumas), 5000 km (dvigubo šuolio maksimumas) ir 6900 km (trigubo šuolio maksimumas).
 
 Azimutiniuose vaizduose brūkšniniai apskritimai rodo **km nuo centro** (žingsnis keičiasi su masteliu), kraštas žymi didžiausią rodomą atstumą, o pelės žymeklis rodo atstumą ir azimutą nuo centro.
 
@@ -18,7 +19,7 @@ Azimutiniuose vaizduose brūkšniniai apskritimai rodo **km nuo centro** (žings
 
 ## Ką rodo
 
-- Paskutinių minučių (15 min - 12 h) **spotai** **28, 50, 70 ir 144 MHz** juostose, gauti iš telnet seansų. Lokatoriai imami iš spoto komentaro (pvz., `JN70CN<ES>JO62QM`) arba iš CALL3 duomenų bazės.
+- Paskutinių minučių (15 min - 12 h) **spotai** **28, 40 (8 m, pagal nutylėjimą išjungta), 50, 70 ir 144 MHz** juostose, gauti iš telnet seansų. Lokatoriai imami iš spoto komentaro (pvz., `JN70CN<ES>JO62QM`) arba iš CALL3 duomenų bazės.
 - Spotai, kurių tekste yra **<MS>**, **<AU>** arba **<TR>**, **atmetami**: jie nesusiję su sporadiniu E, bet naudingi meteor scatter, pašvaistei arba tropo.
 - **Transekvatorinis sklidimas, autoriaus (IC8TEM) taisyklė**: Afrikos ir Pietų Amerikos kryptimi, jei vidurio taškas patenka į magnetinės inklinacijos juostą tarp -20° ir +20°, ryšys yra transekvatorinis (TEP), o ne sporadinis E, nebent spote nurodyta `<ES>`.
 - **144 MHz, autoriaus (IC8TEM) taisyklė**: sporadinis E 2 m juostoje prasideda **toliau nei 900 km** (trumpesni spotai atmetami). Pavienis 144 MHz spotas **atskirai nerodomas**: jis pasirodo, kai per **5 minutes** ateina antras 144 MHz spotas su debesiu toje pačioje vietoje (atspindžio taškai iki 300 km vienas nuo kito) arba kai netoliese yra **trumpo šuolio 50 MHz** spotas (iki 1200 km, per paskutines 15 minučių). Viršutinė juosta rodo, kiek 144 MHz spotų laukia patvirtinimo.
@@ -46,3 +47,18 @@ Azimutiniuose vaizduose brūkšniniai apskritimai rodo **km nuo centro** (žings
 ## Pastaba dėl 432 MHz
 
 Sporadinis E **netaikomas 432 MHz**: Es MUF siekia apie 150-200 MHz, o ARRL rekorduose Es ryšiai nurodyti tik 50 ir 144 MHz juostose. 70 cm spotai čia neanalizuojami.
+
+## Kvadratai, nuspalvinti pagal dažnį, ir mirksinti MUF
+
+Atspindžio taškų Maidenhead kvadratai nuspalvinami pagal didžiausią spotų dažnį: **žalia** iki 29 MHz, **geltona** iki 51, **oranžinė** iki 71, **raudona** iki 145 MHz. Iš kvadrato foEs įvertinama tikėtina MUF ilgiausiame šuolyje (2400 km, IK3XTV lentelė): jei ji pasiekia aukštesnę juostą, kvadratas **mirksi** tos juostos spalva (IK3XTV ir Jacobs-Leinwoll principas: trumpas skip reiškia aukštą MUF).
+
+Žemėlapio viršuje dešinėje rodoma N0NBH santrauka (pasirinkto žemyno E-skip, SFI, K ir A indeksai).
+
+## Taisyklės pagal juostą (versija 0.4.18)
+
+- **50 MHz**: iki 450 km sporadinio E nėra. FT8 ir FT4 spotai yra sporadinis E tik tada, kai priklauso debesiui: kitas 50 MHz spotas per 4 minutes su vidurio tašku iki 150 km. Pavienis FT8/FT4 spotas priskiriamas meteor scatter.
+- **70 MHz**: iki 450 km sporadinio E nėra. FT8 ir FT4 priskiriami sporadiniam E net juostų plano meteor scatter lange (pirmiausia sprendžia žinomas režimas, paskui dažnis).
+- **40 MHz (8 m)**: mažiausias atstumas išvestas iš 50 MHz 450 km sekanto dėsniu (apie 330 km); tik atstumai E sluoksnio geometrijos pirmo šuolio ribose (apie 2440 km). Trasos spalva: geltona.
+- **144 MHz**: sporadinis E nuo 900 km, su patvirtinimu; Q65 ir JT65 spotai yra EME ir atmetami, nebent tekste yra `<ES>`.
+- G0ISW (Propagation identification, 2024) trumpiausią sporadinį E stebi daugiau nei 400 km 50 ir 70 MHz juostose ir daugiau nei 1400 km 144 MHz juostoje: autoriaus taisyklės sutampa 50 ir 70 MHz juostose, o 144 MHz juostoje yra platesnės, bet reikalauja patvirtinimo.
+- Visų taisyklių taikymo tvarka su naudojamomis reikšmėmis rodoma kortelėje **[NUSTATYMAI](Settings-lt)** › Spotų skirstymas.

@@ -8,9 +8,10 @@
 
 Kaardi kohal olev nupp valib vaate:
 
-- **Asimuutne - üks hüpe**: sinu jaamale tsentreeritud asimuutne kaugustruu kaart, fikseeritud raadius 2500 km, IK3XTV tabeli tsoonidega (minimaalne 500 km, optimaalne 1500-2000 km, ühe hüppe maksimum 2400 km).
-- **Asimuutne - maksimaalne kaugus (mitmehüppeline)**: sama kaart liuguriga **Maksimaalne kaugus** (300 kuni 20000 km, ka hiire rullikuga); näha on ka kahe hüppe (5000 km) ja kolme hüppe (6900 km) piirid, nii et mitmehüppelise levi arengut saab jälgida.
-- **Ristkülikuline**: varasem maailmakaart nuppudega Euroopa ja Maailm.
+- **Asimuutne**: sinu jaamale tsentreeritud asimuutne kaugustruu kaart **suurenduse** liuguriga (300 kuni 20000 km keskpunktist, ka hiirerattaga).
+- **Mercator**: maailmakaart nuppudega Euroopa ja Maailm.
+
+Mõlemas projektsioonis joonistatakse jaama ümber **Flavio IK3XTV kaugusringid**: 500 km (ühe hüppe miinimum), 1500-2000 km (optimum), 2400 km (ühe hüppe maksimum), 5000 km (kahe hüppe maksimum) ja 6900 km (kolme hüppe maksimum).
 
 Asimuutsetes vaadetes näitavad katkendlikud ringid **kaugust keskpunktist km-des** (samm muutub koos suurendusega), serv tähistab suurimat näidatavat kaugust ning hiirekursor annab kauguse ja asimuudi keskpunktist.
 
@@ -18,7 +19,7 @@ Asimuutsetes vaadetes näitavad katkendlikud ringid **kaugust keskpunktist km-de
 
 ## Mida see näitab
 
-- Viimaste minutite **spotid** (15 min - 12 h) sagedusaladel **28, 50, 70 ja 144 MHz**, võetud telneti seanssidest. Lokaatorid võetakse spoti kommentaarist (nt `JN70CN<ES>JO62QM`) või CALL3 andmebaasist.
+- Viimaste minutite **spotid** (15 min - 12 h) sagedusaladel **28, 40 (8 m, vaikimisi väljas), 50, 70 ja 144 MHz**, võetud telneti seanssidest. Lokaatorid võetakse spoti kommentaarist (nt `JN70CN<ES>JO62QM`) või CALL3 andmebaasist.
 - Spotid, mille tekstis on **<MS>**, **<AU>** või **<TR>**, **jäetakse kõrvale**: need ei puuduta sporaadilist E-d, kuid on kasulikud meteor scatteri, aurora või tropo jaoks.
 - **Transekvatoriaalne levi, autori (IC8TEM) reegel**: Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise inklinatsiooni vööndisse -20° kuni +20°, on side transekvatoriaalne (TEP), mitte sporaadiline E, välja arvatud juhul, kui spotis on märgitud `<ES>`.
 - **144 MHz, autori (IC8TEM) reegel**: sporaadiline E 2 m sagedusalal algab **üle 900 km** (lühemad spotid jäetakse kõrvale). Üksikut 144 MHz spotti **eraldi ei kuvata**: see ilmub, kui **5 minuti** jooksul saabub teine 144 MHz spot, mille pilv on samas kohas (peegelduspunktid kuni 300 km kaugusel), või kui läheduses on **lühikese hüppega 50 MHz** spot (kuni 1200 km, viimase 15 minuti jooksul). Ülemine riba näitab, mitu 144 MHz spotti ootab kinnitust.
@@ -46,3 +47,18 @@ Asimuutsetes vaadetes näitavad katkendlikud ringid **kaugust keskpunktist km-de
 ## Märkus 432 MHz kohta
 
 Sporaadiline E **ei kehti 432 MHz kohta**: Es-i MUF ulatub umbes 150-200 MHz-ni ja ARRL-i rekordid loetlevad Es-sidesid ainult 50 ja 144 MHz-l. 70 cm spotte siin ei analüüsita.
+
+## Sageduse järgi värvitud ruudud ja vilkuv MUF
+
+Peegelduspunktide Maidenheadi ruudud värvitakse spottide kõrgeima sageduse järgi: **roheline** kuni 29 MHz, **kollane** kuni 51, **oranž** kuni 71, **punane** kuni 145 MHz. Ruudu foEs-ist hinnatakse tõenäoline MUF pikimal hüppel (2400 km, IK3XTV tabel): kui see ulatub kõrgemale sagedusalale, siis ruut **vilgub** selle sagedusala värviga (IK3XTV ja Jacobs-Leinwolli põhimõte: lühike skip tähendab kõrget MUF-i).
+
+Kaardi paremas ülanurgas kuvatakse N0NBH kokkuvõte (valitud kontinendi E-skip, SFI, K- ja A-indeks).
+
+## Reeglid sagedusalade kaupa (versioon 0.4.18)
+
+- **50 MHz**: 450 km piires sporaadilist E-d ei ole. FT8 ja FT4 spotid on sporaadiline E ainult siis, kui need kuuluvad pilve: teine 50 MHz spot 4 minuti jooksul keskpunktiga 150 km piires. Üksik FT8/FT4 spot läheb meteoorhajumise alla.
+- **70 MHz**: 450 km piires sporaadilist E-d ei ole. FT8 ja FT4 lähevad sporaadilise E alla ka sagedusplaani meteoorhajumise aknas (esmalt otsustab teadaolev viis, seejärel sagedus).
+- **40 MHz (8 m)**: minimaalne kaugus tuletatud 50 MHz 450 km-st sekantsiseadusega (umbes 330 km); ainult kaugused E-kihi geomeetria esimese hüppe piires (umbes 2440 km). Trassi värv: kollane.
+- **144 MHz**: sporaadiline E alates 900 km-st, kinnitusega; Q65 ja JT65 spotid on EME ja jäetakse kõrvale, välja arvatud `<ES>` tekstis.
+- G0ISW (Propagation identification, 2024) näeb lühimat sporaadilist E-d üle 400 km 50 ja 70 MHz-l ning üle 1400 km 144 MHz-l: autori reeglid on 50 ja 70 MHz-l kooskõlas ja 144 MHz-l laiemad, kuid nõuavad kinnitust.
+- Kõigi reeglite rakendamise järjekord koos kasutusel olevate väärtustega on näha sakil **[SEADED](Settings-et)** › Spottide suunamine.

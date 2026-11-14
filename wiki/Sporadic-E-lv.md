@@ -8,9 +8,10 @@
 
 Poga virs kartes izvēlas skatu:
 
-- **Azimutālā - viens lēciens**: azimutāla ekvidistanta karte ar centru tavā stacijā, fiksēts rādiuss 2500 km, ar IK3XTV tabulas zonām (500 km minimālais, 1500-2000 km optimālais, 2400 km maksimālais viena lēciena attālums).
-- **Azimutālā - maksimālais attālums (vairāklēcienu)**: tā pati karte ar slīdni **Maksimālais attālums** (no 300 līdz 20000 km, arī ar peles ritenīti); parādās arī dubultā (5000 km) un trīskāršā lēciena (6900 km) robežas, lai varētu sekot vairāklēcienu sakaru attīstībai.
-- **Taisnstūra**: iepriekšējā pasaules karte ar pogām Eiropa un Pasaule.
+- **Azimutālā**: azimutāla ekvidistanta karte ar centru tavā stacijā, ar **tālummaiņas** slīdni (no 300 līdz 20000 km no centra, arī ar peles ritenīti).
+- **Merkatora**: pasaules karte ar pogām Eiropa un Pasaule.
+
+Abās projekcijās ap staciju zīmē **Flavio IK3XTV attāluma riņķus**: 500 km (viena lēciena minimums), 1500-2000 km (optimums), 2400 km (viena lēciena maksimums), 5000 km (divkārša lēciena maksimums) un 6900 km (trīskārša lēciena maksimums).
 
 Azimutālajos skatos raustītie gredzeni rāda **km no centra** (solis mainās līdz ar tālummaiņu), mala apzīmē maksimālo parādīto attālumu, un peles kursors rāda attālumu un azimutu no centra.
 
@@ -18,7 +19,7 @@ Azimutālajos skatos raustītie gredzeni rāda **km no centra** (solis mainās l
 
 ## Ko tā rāda
 
-- Pēdējo minūšu (15 min - 12 h) **spotus** joslās **28, 50, 70 un 144 MHz**, ņemtus no telnet sesijām. Lokatori tiek ņemti no spota komentāra (piem. `JN70CN<ES>JO62QM`) vai no CALL3 arhīva.
+- Pēdējo minūšu (15 min - 12 h) **spotus** joslās **28, 40 (8 m, sākotnēji izslēgta), 50, 70 un 144 MHz**, ņemtus no telnet sesijām. Lokatori tiek ņemti no spota komentāra (piem. `JN70CN<ES>JO62QM`) vai no CALL3 arhīva.
 - Spoti ar **<MS>**, **<AU>** vai **<TR>** tekstā tiek **atmesti**: tie neattiecas uz sporādisko E, bet noder meteor scatter, aurorai vai tropo.
 - **Transekvatoriālie, autora likums (IC8TEM)**: virzienā uz Āfriku un Dienvidameriku, ja viduspunkts krīt magnētiskās inklinācijas joslā starp -20° un +20°, sakars ir transekvatoriāls (TEP), nevis sporādiskais E, ja vien spotā nav norādīts `<ES>`.
 - **144 MHz, autora likums (IC8TEM)**: sporādiskais E 2 m joslā sākas **virs 900 km** (īsāki spoti tiek atmesti). Viens 144 MHz spots **netiek zīmēts atsevišķi**: tas parādās, kad **5 minūšu** laikā pienāk otrs 144 MHz spots ar mākoni tajā pašā vietā (atstarošanas punkti 300 km robežās) vai kad tuvumā ir **īsa lēciena 50 MHz** spots (1200 km robežās, pēdējās 15 minūtēs). Josla augšā rāda, cik 144 MHz spotu gaida apstiprinājumu.
@@ -46,3 +47,18 @@ Azimutālajos skatos raustītie gredzeni rāda **km no centra** (solis mainās l
 ## Piezīme par 432 MHz
 
 Sporādiskais E **neattiecas uz 432 MHz**: Es MUF sasniedz ap 150-200 MHz, un ARRL rekordos Es sakari ir tikai 50 un 144 MHz. 70 cm spoti šeit netiek analizēti.
+
+## Kvadrāti, iekrāsoti pēc frekvences, un mirgojošā MUF
+
+Atstarošanas punktu Maidenhead kvadrātus iekrāso pēc spotu augstākās frekvences: **zaļš** līdz 29 MHz, **dzeltens** līdz 51, **oranžs** līdz 71, **sarkans** līdz 145 MHz. No kvadrāta foEs novērtē varbūtējo MUF garākajā lēcienā (2400 km, IK3XTV tabula): ja tā sasniedz augstāku joslu, kvadrāts **mirgo** šīs joslas krāsā (IK3XTV un Jacobs-Leinwoll princips: īss skip nozīmē augstu MUF).
+
+Kartes augšējā labajā stūrī parādās N0NBH kopsavilkums (izvēlētā kontinenta E-skip, SFI, K un A indeksi).
+
+## Noteikumi pa joslām (versija 0.4.18)
+
+- **50 MHz**: 450 km robežās Sporadic-E nav. FT8 un FT4 spoti ir Sporadic-E tikai tad, ja tie pieder mākonim: cits 50 MHz spots 4 minūšu laikā ar viduspunktu 150 km robežās. Atsevišķs FT8/FT4 spots nonāk meteor scatter.
+- **70 MHz**: 450 km robežās Sporadic-E nav. FT8 un FT4 nonāk Sporadic-E arī joslu plāna meteor scatter logā (vispirms izšķir zināmais režīms, pēc tam frekvence).
+- **40 MHz (8 m)**: minimālais attālums atvasināts no 50 MHz 450 km ar sekansa likumu (aptuveni 330 km); tikai attālumi E slāņa ģeometrijas pirmā lēciena robežās (aptuveni 2440 km). Trases krāsa: dzeltena.
+- **144 MHz**: Sporadic-E no 900 km, ar apstiprinājumu; Q65 un JT65 spoti ir EME un tiek atmesti, ja vien tekstā nav `<ES>`.
+- G0ISW (Propagation identification, 2024) īsāko Sporadic-E novēro virs 400 km 50 un 70 MHz joslās un virs 1400 km 144 MHz joslā: autora noteikumi saskan 50 un 70 MHz joslās un ir plašāki 144 MHz joslā, bet prasa apstiprinājumu.
+- Visu noteikumu piemērošanas secība ar lietotajām vērtībām redzama **[IESTATĪJUMI](Settings-lv)** › Spotu sadale.

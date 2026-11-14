@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	QTF intervāls gar sliedi (novirze ≤ 1,5°, abu staciju Lange-Hesse logā):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Scatter point logs (Lange-Hesse: 370-1100 km pie 54° ģeomagnētiskā platuma, nobīdīts pēc katras stacijas IGRF-14 inklinācijas): {0}; {1}. Augstums ap 110 km, perpendikularitāte ±3° robežās.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Piedāvātais scatter point vismaz vienai stacijai ir ārpus Lange-Hesse loga: tas ir iespējams, bet mazāk ticams.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Lokālais filtrs: atmet klastera rindas zem 27990,0 kHz un virs 145 MHz (netiek rādītas un saglabātas); 430-440 MHz diapazonā iziet tikai auroras spoti
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Datu vākšana visai programmai ir viena: katrs DATA COLLECTION saņemtais spots iziet caur šiem filtriem un nonāk katra izplatīšanās veida cilnēs.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 un 70 MHz noteikumi (autora un IK3XTV noteikumi)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz (8 m) joslā minimālo attālumu atvasina tāpat ({0:F0} km), un der tikai attālumi E slāņa ģeometrijas pirmā lēciena robežās ({1:F0} km).
+in 70 MHz (km)	70 MHz joslā (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 un FT4 70 MHz joslā nonāk sporādiskajā E arī joslu plāna meteor scatter logā (70,154 MHz ir FT8 frekvence).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 un FT4 50 MHz joslā: sporādiskais E tikai tad, ja tie pieder mākonim, t.i., ja ir cits 50 MHz spots ar tuvu viduspunktu; atsevišķs spots nonāk meteor scatter
+punto medio entro (km)	viduspunkts robežās (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 un JT65 144 MHz joslā ir EME un nenonāk sporādiskajā E, ja vien tekstā nav <ES>.
+sì	jā
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Lokālais filtrs: rinda atmesta (ārpus diapazona 27990 kHz - 145 MHz; 430-440 MHz diapazonā iziet tikai auroras spoti)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(atmests: aiz pirmā lēciena, {0:F0} km, 40 MHz joslā)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(atmests: Q65 vai JT65 144 MHz joslā = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 50 MHz joslā bez cita spota {0:F0} min laikā ar viduspunktu {1:F0} km robežās: meteor scatter)
+scartate dal filtro locale: {0}	lokālā filtra atmestās: {0}
+IMPOSTAZIONI	IESTATĪJUMI
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): dzeltens, tikai pirmā lēciena robežās
+Generali	Vispārīgi
+Smistamento degli spot	Spotu sadale
+Impostazioni generali	Vispārīgie iestatījumi
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Tie ir tie paši dati kā augšējā rindā: tie attiecas uz visām cilnēm, arī uz METEOR SCATTER.
+Aspetto	Izskats
+Lingua	Valoda
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Fonta lielums attiecas uz visu programmu, no 85 līdz 140 %, tāpat kā YA-MS. Valoda un tēma pārbūvē logu: iestatījumi un spoti saglabājas.
+Mappe e dati previsionali	Kartes un prognožu dati
+Continente	Kontinents
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Pārvieto Merkatora kartes uz izvēlēto kontinentu un izvēlas prognožu datus (N0NBH E-skip Eiropai un Ziemeļamerikai). Tā ir tā pati izvēlne kā cilņu joslā.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Programma pārbauda laiku NTP serveros startējot un ik pēc 5 minūtēm un aprēķinos izmanto pareizo laiku. Windows sistēmā ar administratora tiesībām tā izlabo arī datora pulksteni. Ja augšā redzams NTP:FAILED, tīkls bloķē portu UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Pārbaudīt atjauninājumus GitHub (startējot un ik pēc 6 stundām)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Automātiska un klusa atjaunināšana: lejupielādē un instalē jauno versiju bez jautāšanas
+Controlla adesso	Pārbaudīt tagad
+Versione in uso: {0}	Lietotā versija: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Automātiskā atjaunināšana darbojas ar visām pakotnēm, jo programma vienmēr darbojas no lietotāja mapes: Windows sistēmā no mapes, kas izvēlēta ar instalētāju vai zip, Mac sistēmā no lietotnes, Linux sistēmā no ~/E-LAYER-ANALYZER. Ar pakotnēm .deb, .rpm, Arch, Slackware un ar AppImage tiek atjaunināta kopija mapē ~/E-LAYER-ANALYZER: pakotņu pārvaldnieks turpina rādīt pirmo reizi instalēto versiju, līdz instalēsi jauno pakotni. Ja programmas mapē nevar rakstīt, programma to paziņo, un jaunā versija jālejupielādē manuāli no Release lapas.
+Apri la cartella dei dati	Atvērt datu mapi
+Dati	Dati
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Visi programmas dati atrodas mapē data blakus programmai (nekas AppData). Savāktie spoti tiek dzēsti, aizverot programmu. Bureau of Meteorology API atslēgu ievada DATA COLLECTION, Izplatīšanās dati.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - starpība starp serveru un datora laiku: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - neviens NTP serveris nav sasniedzams: programma izmanto datora pulksteni.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Katru DATA COLLECTION saņemto spotu (klasteris, RBN, PSKReporter, WSJT-X) pārbauda ar noteikumiem tabulas secībā: pirmais derīgais noteikums izlemj cilni. Labajā pusē ir katra veida filtri ar maināmām vērtībām un klastera rindas pārbaudi.
+Se lo spot...	Ja spots...
+Valori	Vērtības
+va a	nonāk
+nessuna linguetta	neviena cilne
+è fuori dalla gamma del filtro locale	ir ārpus lokālā filtra diapazona
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	zem 27990 kHz vai virs 145 MHz; 430-440 MHz tikai aurora
+filtro locale spento	lokālais filtrs izslēgts
+scartato	atmests
+contiene AUE, AU-E o AURORAL E	satur AUE, AU-E vai AURORAL E
+contiene una parola dell'aurora (o modo AU)	satur auroras vārdu (vai režīmu AU)
+contiene una parola del F.A.I. (o modo FAI)	satur F.A.I. vārdu (vai režīmu FAI)
+ha un modo del meteor scatter o <MS>	ir meteor scatter režīmā vai ar <MS>
+cade in una finestra MS del bandplan	iekrīt joslu plāna MS logā
+in 50 MHz non esclusiva	50 MHz joslā neizslēdzošs
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 un FT4 50 un 70 MHz joslā izņemti
+è FT8 o FT4 in 50 MHz senza nube	ir FT8 vai FT4 50 MHz joslā bez mākoņa
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	nav cita spota {0:F0} min laikā ar viduspunktu {1:F0} km robežās
+regola spenta	noteikums izslēgts
+meteor scatter (non E-sporadico)	meteor scatter (nevis sporādiskais E)
+è Q65 o JT65 in 144 MHz	ir Q65 vai JT65 144 MHz joslā
+salvo <ES> nel testo	ja vien tekstā nav <ES>
+EME: scartato	EME: atmests
+contiene una scritta di altra propagazione	satur citas izplatīšanās atzīmi
+non E-sporadico	nav sporādiskais E
+è transequatoriale	ir transekvatoriāls
+fascia di inclinazione ± {0:F0}°	inklinācijas josla ± {0:F0}°
+non E-sporadico (TEP)	nav sporādiskais E (TEP)
+è in 28 MHz	ir 28 MHz joslā
+da {0:F0} km	no {0:F0} km
+è in 40 MHz	ir 40 MHz joslā
+da {0:F0} a {1:F0} km (primo salto)	no {0:F0} līdz {1:F0} km (pirmais lēciens)
+è in 50 MHz	ir 50 MHz joslā
+è in 70 MHz	ir 70 MHz joslā
+è in 144 MHz	ir 144 MHz joslā
+oltre {0:F0} km, con conferma	virs {0:F0} km, ar apstiprinājumu
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	neatbilst nevienam noteikumam (tropo, 432 MHz, HF...)
+resta in Spot raccolti	paliek Savāktajos spotos
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Programma ir instalēta ar pakotni {0}: lai to atjauninātu, lejupielādē jauno pakotni no laidiena lapas un instalē to tāpat kā pirmo.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Automātiskā atjaunināšana attiecas uz Windows instalētāju un zip, Mac lietotni, .tar.gz arhīviem un AppImage. Ar sistēmas pakotnēm (.deb, .rpm, Arch, Slackware) programma pati neatjauninās: tā paziņo par jauno versiju, kuru instalē, lejupielādējot jauno pakotni no Release lapas. Ja programmas mapē nevar rakstīt, programma to paziņo, un jaunā versija jālejupielādē manuāli.
