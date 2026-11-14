@@ -8,13 +8,20 @@ Descarga el archivo adecuado de la página **[Releases](https://github.com/ic8te
 |---|---|---|
 | Windows 64 bits | `E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe` | Doble clic. Se instala en `C:\E-LAYER-ANALYZER`, sin derechos de administrador. Sin acceso directo en el menú Inicio (estaría en AppData), solo el icono opcional en el escritorio. |
 | Windows 32 bits | `...-win-x86-setup.exe` | Como el anterior, para Windows de 32 bits. |
-| Windows portable | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` | Descomprime donde quieras y ejecuta `E-LAYER-ANALYZER.exe`. |
-| Linux 64 bits (PC) | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, luego inícialo desde el menú: en el primer arranque el programa se copia en `~/E-LAYER-ANALYZER`, con la carpeta `data` al lado. |
+| Windows en ARM (PC Snapdragon) | `...-win-arm64-setup.exe` | Como el anterior, para Windows en procesadores ARM. |
+| Windows portable | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Descomprime donde quieras y ejecuta `E-LAYER-ANALYZER.exe`. |
+| Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, luego inícialo desde el menú: en el primer arranque el programa se copia en `~/E-LAYER-ANALYZER`, con la carpeta `data` al lado. |
+| Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (también `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (o `zypper install`), luego como el .deb. |
+| Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (o `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, luego como el .deb. |
+| Slackware (x86_64 y ARM64) | `e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz` (o `-aarch64-`) | Como root: `installpkg e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz`, luego inicia `e-layer-analyzer` desde el menú o el terminal: en el primer arranque el programa se copia en `~/E-LAYER-ANALYZER`. |
+| Cualquier Linux (AppImage) | `E-LAYER-ANALYZER-x.y.z-x86_64.AppImage` (o `-aarch64.AppImage`) | Hazlo ejecutable e inícialo: en el primer arranque copia el programa en `~/E-LAYER-ANALYZER` y lo inicia desde allí. |
 | Linux portable | `...-linux-x64-portatile.tar.gz` | Descomprime y ejecuta `./E-LAYER-ANALYZER`, o ejecuta `./installa.sh`: se instala en `~/E-LAYER-ANALYZER` con un icono en el menú. |
+| Alpine Linux (musl) | `...-alpine-x64-portatile.tar.gz` / `...-alpine-arm64-portatile.tar.gz` | `apk add icu-libs fontconfig`, luego como el portable para Linux. |
 | Raspberry Pi (64 bits) | `e-layer-analyzer_x.y.z_arm64.deb` o `...-linux-arm64-portatile.tar.gz` | Pi 3, 4 o 5 con **Raspberry Pi OS de 64 bits** y escritorio (se recomiendan 4 GB de RAM). El .deb como arriba; el portable como en Linux. |
 | Raspberry Pi (32 bits) | `e-layer-analyzer_x.y.z_armhf.deb` o `...-linux-arm-portatile.tar.gz` | Pi 2, 3 o 4 con **Raspberry Pi OS de 32 bits**. El .deb como arriba; el portable: descomprime y ejecuta `./E-LAYER-ANALYZER` o `./installa.sh`. |
-| Raspberry Pi con Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` o `...-linux-arm64-portatile.tar.gz` | Como root: `installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz`, luego inicia `e-layer-analyzer` desde el menú o el terminal: en el primer arranque el programa se copia en `~/E-LAYER-ANALYZER`. El portable como en Linux. |
+| Raspberry Pi con Slackware ARM64 | `e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz` o `...-linux-arm64-portatile.tar.gz` | Como Slackware más arriba. El portable como en Linux. |
 | Linux armv7l (otras placas ARM de 32 bits) | `...-linux-armv7l-portatile.tar.gz` | Como el portable para Linux. |
+| FreeBSD amd64 | `...-freebsd-amd64-sperimentale.tar.gz` | **Experimental, no verificado.** Necesita el .NET 8 de la comunidad (`pkg install dotnet`) y las bibliotecas nativas SkiaSharp y HarfBuzzSharp compiladas para FreeBSD, que Avalonia no proporciona: sin ellas el programa no arranca. Consulta `LEGGIMI-FREEBSD.txt` en el paquete. |
 | Mac | `...-osx-arm64.dmg` (Apple Silicon M1-M4) o `...-osx-x64.dmg` (Intel) | Abre el .dmg, clic derecho en **Installa E-LAYER-ANALYZER.command** > Abrir. Se instala en `~/E-LAYER-ANALYZER`. |
 | Mac, solo la aplicación | `...-osx-arm64-app.zip` / `...-osx-x64-app.zip` | Descomprime **E-LAYER-ANALYZER.app** en una carpeta tuya (por ejemplo `~/E-LAYER-ANALYZER`, no en Applications): la carpeta `data` se crea junto a la app. En el primer arranque, clic derecho > Abrir. |
 
@@ -22,9 +29,11 @@ Descarga el archivo adecuado de la página **[Releases](https://github.com/ic8te
 
 Instala la nueva versión encima de la anterior: se conservan los ajustes, los spots recogidos, los logs y `call3.txt`.
 
+**Los paquetes del sistema (.deb, .rpm, Arch, Slackware) no se actualizan automáticamente.** Con ellos el programa solo indica la versión nueva: descarga el paquete nuevo de la página de las Releases e instálalo como la primera vez (`sudo apt install ./...deb`, `sudo dnf install ./...rpm`, `sudo pacman -U ./...pkg.tar.zst`, `upgradepkg ...txz`). Las actualizaciones automáticas funcionan con el instalador y los zip de Windows, la app del Mac, los paquetes tar.gz portátiles y la AppImage.
+
 **Actualización automática (desde la versión 0.4.5).** Al iniciar y luego cada 6 horas el programa consulta las Releases de GitHub. Cuando sale una versión nueva, abre una ventana y muestra un **▲ x.y.z** naranja junto al indicador NTP en la barra superior:
 
-**Desde la versión 0.4.12 las actualizaciones son automáticas y silenciosas**: cuando hay una versión nueva en GitHub, el programa la descarga, la instala y se reinicia solo sin preguntar nada. También los archivos que faltan se vuelven a descargar sin preguntar. La ventana de actualización aparece solo con un clic en la versión de arriba, o si escribes agg_automatici=0 en el archivo data/ela.ini.
+**Desde la versión 0.4.12 las actualizaciones son automáticas y silenciosas**: cuando hay una versión nueva en GitHub, el programa la descarga, la instala y se reinicia solo sin preguntar nada. También los archivos que faltan se vuelven a descargar sin preguntar. La ventana de actualización aparece solo con un clic en la versión de arriba, o si desactivas las actualizaciones automáticas en AJUSTES (General).
 
 - **Actualizar ahora** descarga el paquete portátil para tu ordenador (Windows de 64/32 bits, Linux, Raspberry Pi, Mac), cierra el programa, sustituye los archivos y lo reinicia. Se conservan los ajustes, los spots recogidos, los logs y `call3.txt`.
 - **Más tarde** vuelve a preguntar en la siguiente comprobación; **Omitir esta versión** deja de proponer esa versión.
@@ -38,4 +47,4 @@ Instala la nueva versión encima de la anterior: se conservan los ajustes, los s
 - No hay que instalar .NET: el programa contiene todo lo que necesita.
 - Conexión a internet para el mapa (Natural Earth, en el primer arranque), los datos de aurora de NOAA, los radares de YA-MS y las sesiones telnet.
 - La Raspberry Pi Zero y la Pi 1 no son compatibles (.NET no admite sus procesadores).
-- No hay versiones para Linux i686 (PC de 32 bits), porque .NET no existe para ese sistema, ni para FreeBSD, donde faltan las bibliotecas gráficas de Avalonia.
+- No hay versiones para Linux i686 (PC de 32 bits) ni para OpenBSD, porque .NET no existe para esos sistemas. FreeBSD tiene solo el paquete experimental.
