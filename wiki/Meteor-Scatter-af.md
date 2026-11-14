@@ -2,7 +2,7 @@
 
 [← Home](Home-af)
 
-Hierdie oortjie bevat die volledige **YA-MS 1.8.8**, IC8TEM se meteor scatter-program: hemelsfeer met die radiante, SKiYMET-radarvloed (Collm, Sodankylä), berekening van swermdoeltreffendheid, eksperimentele implementering van die voorspellings, geometrie en verswakking, GRAVES, vierkantkaart, **Regstreekse swerms** (ZHR gemeet deur die Global Meteor Network en radiante van die CMOR-radar), **Bronnekaart** (Collm, Sodankylä, GRAVES en CMOR relatief tot die stasie) en die dokument **Verduideliking van die doeltreffendheidsberekening** met die formules.
+Hierdie oortjie bevat die volledige **YA-MS 1.8.9**, IC8TEM se meteor scatter-program: hemelsfeer met die radiante, SKiYMET-radarvloed (Collm, Sodankylä), berekening van swermdoeltreffendheid, eksperimentele implementering van die voorspellings, geometrie en verswakking, GRAVES, vierkantkaart, **Regstreekse swerms** (ZHR gemeet deur die Global Meteor Network en radiante van die CMOR-radar), **Bronnekaart** (Collm, Sodankylä, GRAVES en CMOR relatief tot die stasie) en die dokument **Verduideliking van die doeltreffendheidsberekening** met die formules.
 
 YA-MS 1.5.0 voeg die oortjie **Data-insameling** by (meteor scatter-spots gefiltreer volgens MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Binne E-LAYER ANALYZER open dit geen eie telnet-sessies nie: dit ontvang die reëls van die DATA COLLECTION-sessies, sodat daar geen dubbele aanmeldings met dieselfde roepnaam is nie.
 

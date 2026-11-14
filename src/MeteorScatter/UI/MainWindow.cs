@@ -2153,7 +2153,7 @@ namespace YAMS
             cfg.Set("mia_quota_m", V(numHomeAlt));
             cfg.Set("dx_locator", Up(txtDx));
             cfg.Set("dx_nominativo", (txtDxCall.Text ?? "").Trim().ToUpperInvariant());
-            CallDb.SaveLayers();
+            CallDb.SaveLayers(true);
             cfg.Set("dx_quota_m", V(numDxAlt));
             cfg.Set("banda_MHz", (cmbBand.SelectedItem as string) ?? "144");
             cfg.Set("quota_scie_km", V(numLayer));

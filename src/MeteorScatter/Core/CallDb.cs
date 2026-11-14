@@ -13,8 +13,13 @@
 //    solo a 4 caratteri si ricorda e vale per gli spot dello stesso nominativo nello stesso quadrato; due anni;
 //  - ultima fonte G7VRD (api.g7vrd.co.uk, "locator by callsign"): solo per i nominativi senza locatore a 6 caratteri
 //    in tutte le fonti precedenti; si accetta solo un 6 caratteri valido (non LL/MM) nello stesso quadrato di quello
-//    ricevuto; al massimo 40 nominativi al minuto, ogni nominativo una volta al giorno; risultati in
-//    data/CALL3-G7VRD.TXT (tenuti un anno); si spegne con la casella (call3_g7vrd=0);
+//    ricevuto; le ricerche si fanno in automatico ogni 6 ore (richiesta dell'autore, 14/11/2026), in gruppi di 40
+//    nominativi, ogni nominativo al massimo una volta al giorno; risultati in data/CALL3-G7VRD.TXT (tenuti un anno);
+//    si spegne con la casella (call3_g7vrd=0);
+//  - le correzioni (voci a mano, cluster, file aggiunti, G7VRD, LOC6) si scrivono anche dentro data/call3.txt
+//    (richiesta dell'autore, 14/11/2026), cosi' le vedono anche gli altri programmi che usano lo stesso file; gli
+//    strati restano come fonte, perche' l'aggiornamento da MMMonVHF riscrive call3.txt e dopo le si riapplica;
+//    nessuna correzione e' scritta nel codice del programma: quelle di LIVETROPOVHF sono gia' in data/call3.txt;
 //  - regola unica: un locatore ricevuto di meno di 6 caratteri, o a 6 che finisce con LL/MM (centro del quadrato),
 //    si sostituisce con quello a 6 caratteri del database; per i portatili (con la barra: IC8TEM/P, F/IC8TEM)
 //    vale solo una voce esatta.
@@ -118,22 +123,43 @@ namespace YAMS
             catch { }
         }
 
-        // un gruppo di nominativi al minuto, in sottofondo
+        // ogni 6 ore, in sottofondo: tutti i nominativi in attesa, in gruppi di 40 con una pausa tra un gruppo e l'altro
         static async void G7Tick(object state)
         {
-            if (!G7Enabled || g7Queue.IsEmpty || Interlocked.Exchange(ref g7Busy, 1) == 1) return;
+            if (Interlocked.Exchange(ref g7Busy, 1) == 1) return;
+            int found = 0, asked = 0;
+            try
+            {
+                while (G7Enabled && !g7Queue.IsEmpty)
+                {
+                    int n = await G7Batch();
+                    if (n < 0) break;
+                    found += n; asked++;
+                    await Task.Delay(TimeSpan.FromSeconds(3));
+                }
+                if (found > 0) G7Save();
+                WriteCorrectionsToCall3();   // ogni 6 ore: correzioni nuove (cluster, LOC6, G7VRD) dentro call3.txt
+            }
+            catch (Exception ex) { G7Status = "G7VRD: " + ex.Message; }
+            finally { Interlocked.Exchange(ref g7Busy, 0); }
+        }
+
+        // un gruppo di al massimo 40 nominativi; restituisce quanti locatori ha trovato, -1 se la rete non risponde
+        static async Task<int> G7Batch()
+        {
             try
             {
                 List<string> batch = new List<string>();
                 string c;
                 while (batch.Count < 40 && g7Queue.TryDequeue(out c)) batch.Add(c);
+                if (batch.Count == 0) return 0;
                 List<string> esc = new List<string>(); foreach (string b in batch) esc.Add(Uri.EscapeDataString(b));
                 using (HttpClient h = new HttpClient { Timeout = TimeSpan.FromSeconds(30) })
                 {
                     h.DefaultRequestHeaders.UserAgent.ParseAdd("YA-MS/" + AppPaths.Version);
                     using (HttpResponseMessage r = await h.GetAsync(G7Api + string.Join(",", esc)))
                     {
-                        if (!r.IsSuccessStatusCode) { G7Status = "G7VRD: HTTP " + ((int)r.StatusCode).ToString(CultureInfo.InvariantCulture); return; }
+                        if (!r.IsSuccessStatusCode) { G7Status = "G7VRD: HTTP " + ((int)r.StatusCode).ToString(CultureInfo.InvariantCulture); return -1; }
                         using (JsonDocument doc = JsonDocument.Parse(await r.Content.ReadAsStringAsync()))
                         {
                             int n = 0;
@@ -145,14 +171,14 @@ namespace YAMS
                                     g7[prop.Name.ToUpperInvariant()] = new KeyValuePair<string, DateTime>(loc, DateTime.UtcNow);
                                     n++;
                                 }
-                            if (n > 0) { Interlocked.Exchange(ref g7Dirty, 1); G7Save(); }
+                            if (n > 0) { Interlocked.Exchange(ref g7Dirty, 1); call3Pending = 1; }
                             G7Status = "G7VRD: " + batch.Count.ToString(CultureInfo.InvariantCulture) + " / " + n.ToString(CultureInfo.InvariantCulture);
+                            return n;
                         }
                     }
                 }
             }
-            catch (Exception ex) { G7Status = "G7VRD: " + ex.Message; }
-            finally { Interlocked.Exchange(ref g7Busy, 0); }
+            catch (Exception ex) { G7Status = "G7VRD: " + ex.Message; return -1; }
         }
 
         // il valore puo' essere una stringa, un elenco o un oggetto: il primo locatore a 6 caratteri utile
@@ -178,14 +204,6 @@ namespace YAMS
             }
         }
 
-        // voci iniziali (le stesse di LIVETROPOVHF): le mancanti si aggiungono una volta sola per versione dell'elenco
-        // (riga "// seed N" nel file), cosi' una voce tolta a mano non ricompare
-        static readonly string[,] Seed =
-        {
-            { "IV3/HB9CAT", "JN65UQ" }, { "IC8JHY", "JN60WR" }, { "I8/IZ3CGC", "JN71DB" }, { "IU5SPA", "JN53GU" }, { "IZ6FLS", "JN62XS" },
-            { "SWL1RUCAS", "JN34OS" }, { "IZ1ERR", "JN35UI" }, { "IK0SRL", "JN61IT" },
-        };
-        const int SeedVersion = 4;
 
         public static bool ValidLoc(string l)
         {
@@ -202,7 +220,7 @@ namespace YAMS
         {
             DataDir = dataDir;
             FilePath = Path.Combine(dataDir, "call3.txt");
-            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(60)); }
+            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromMinutes(2), TimeSpan.FromHours(6)); }
             if (Loading) return;
             Loading = true;
             ThreadPool.QueueUserWorkItem(_ =>
@@ -295,24 +313,7 @@ namespace YAMS
             }
             catch { }
             Dictionary<string, string> man = new Dictionary<string, string>(StringComparer.Ordinal);
-            try
-            {
-                int seen = 0;
-                if (File.Exists(ManualPath))
-                {
-                    foreach (KeyValuePair<string, string> kv in ReadFile(ManualPath)) man[kv.Key] = kv.Value;
-                    foreach (string line in File.ReadLines(ManualPath))
-                    {
-                        int v;
-                        if (line.StartsWith("// seed ", StringComparison.Ordinal) && int.TryParse(line.Substring(8).Trim(), out v)) seen = Math.Max(seen, v);
-                    }
-                }
-                if (seen < SeedVersion)
-                {
-                    for (int i = 0; i < Seed.GetLength(0); i++) if (!man.ContainsKey(Seed[i, 0])) man[Seed[i, 0]] = Seed[i, 1];
-                    WriteManual(man);
-                }
-            }
+            try { if (File.Exists(ManualPath)) foreach (KeyValuePair<string, string> kv in ReadFile(ManualPath)) man[kv.Key] = kv.Value; }
             catch { }
             Dictionary<string, KeyValuePair<string, DateTime>> cl = new Dictionary<string, KeyValuePair<string, DateTime>>(), le = new Dictionary<string, KeyValuePair<string, DateTime>>();
             try { cl = ReadDated(ClusterPath); } catch { }
@@ -331,7 +332,6 @@ namespace YAMS
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("// YA-MS - voci a mano sopra call3.txt (nominativo,locatore): valgono sopra tutto");
-            sb.AppendLine("// seed " + SeedVersion.ToString(CultureInfo.InvariantCulture));
             List<string> k = new List<string>(man.Keys); k.Sort(StringComparer.Ordinal);
             foreach (string c in k) sb.Append(c).Append(',').Append(man[c]).AppendLine();
             Directory.CreateDirectory(DataDir);
@@ -354,6 +354,7 @@ namespace YAMS
             call = (call ?? "").Trim().ToUpperInvariant(); loc = (loc ?? "").Trim().ToUpperInvariant();
             if (call.Length < 3 || !ValidLoc(loc)) return false;
             lock (lk) { manual[call] = loc; try { WriteManual(manual); } catch { } }
+            Interlocked.Exchange(ref call3Pending, 1);
             return true;
         }
 
@@ -370,6 +371,8 @@ namespace YAMS
                 }
                 try { WriteManual(manual); } catch { }
             }
+            Interlocked.Exchange(ref call3Pending, 1);
+            ThreadPool.QueueUserWorkItem(_ => WriteCorrectionsToCall3());
         }
 
         public static void RemoveManual(string call)
@@ -384,6 +387,8 @@ namespace YAMS
             Directory.CreateDirectory(OverlayDir);
             File.Copy(path, Path.Combine(OverlayDir, Path.GetFileName(path)), true);
             LoadLayers();
+            call3Pending = 1;
+            ThreadPool.QueueUserWorkItem(_ => WriteCorrectionsToCall3());
         }
 
         // ---- correzioni dal cluster: locatore a 6 caratteri dichiarato dalla stazione stessa che spotta
@@ -404,6 +409,7 @@ namespace YAMS
                 if (before == loc) return;
                 cluster[call] = new KeyValuePair<string, DateTime>(loc, DateTime.UtcNow);
                 clusterDirty++;
+                call3Pending = 1;
             }
             if (clusterDirty >= 20) SaveLayers();
         }
@@ -419,13 +425,16 @@ namespace YAMS
             {
                 KeyValuePair<string, DateTime> c;
                 if (learned.TryGetValue(call, out c) && c.Key == loc && DateTime.UtcNow - c.Value < TimeSpan.FromDays(1)) return;
+                if (!learned.TryGetValue(call, out c) || c.Key != loc) call3Pending = 1;
                 learned[call] = new KeyValuePair<string, DateTime>(loc, DateTime.UtcNow);
                 learnedDirty++;
             }
             if (learnedDirty >= 20) SaveLayers();
         }
 
-        public static void SaveLayers()
+        public static void SaveLayers() { SaveLayers(false); }
+
+        public static void SaveLayers(bool writeCall3)
         {
             if (DataDir.Length == 0) return;
             try
@@ -436,6 +445,7 @@ namespace YAMS
                     if (learnedDirty > 0) { WriteDated(LearnedPath, learned, "// YA-MS - locatori a 6 caratteri imparati dal vivo (nominativo,locatore,ultima volta UTC)"); learnedDirty = 0; }
                 }
                 G7Save();
+                if (writeCall3) WriteCorrectionsToCall3();   // alla chiusura; altrimenti ogni 6 ore (G7Tick)
             }
             catch { }
         }
@@ -524,12 +534,71 @@ namespace YAMS
             return loc;
         }
 
+        // ---- correzioni scritte dentro data/call3.txt
+        static int call3Pending, call3Writing;
+
+        // voci a mano, cluster e file aggiunti cambiano sempre la riga del file; G7VRD e LOC6 solo se il file non ha gia'
+        // un locatore a 6 caratteri vero per quel nominativo
+        public static void WriteCorrectionsToCall3()
+        {
+            if (DataDir.Length == 0 || Interlocked.Exchange(ref call3Pending, 0) == 0) return;
+            if (Interlocked.Exchange(ref call3Writing, 1) == 1) { call3Pending = 1; return; }
+            try
+            {
+                Dictionary<string, string> strong = new Dictionary<string, string>(StringComparer.Ordinal), weak = new Dictionary<string, string>(StringComparer.Ordinal);
+                lock (lk)
+                {
+                    foreach (var kv in learned) weak[kv.Key] = kv.Value.Key;
+                    foreach (var kv in g7) weak[kv.Key] = kv.Value.Key;
+                    foreach (var kv in overlay) strong[kv.Key] = kv.Value;
+                    foreach (var kv in cluster) strong[kv.Key] = kv.Value.Key;
+                    foreach (var kv in manual) strong[kv.Key] = kv.Value;
+                }
+                if (strong.Count == 0 && weak.Count == 0) return;
+                string path = Path.Combine(DataDir, "call3.txt");
+                List<string> lines = File.Exists(path) ? new List<string>(File.ReadAllLines(path, Encoding.Latin1)) : new List<string>();
+                HashSet<string> seen = new HashSet<string>(StringComparer.Ordinal);
+                int changed = 0;
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    string line = lines[i];
+                    if (line.StartsWith("//", StringComparison.Ordinal)) continue;
+                    int c1 = line.IndexOf(',');
+                    if (c1 <= 0) continue;
+                    string call = line.Substring(0, c1).Trim().ToUpperInvariant();
+                    int c2 = line.IndexOf(',', c1 + 1);
+                    string loc = (c2 > c1 ? line.Substring(c1 + 1, c2 - c1 - 1) : line.Substring(c1 + 1)).Trim().ToUpperInvariant();
+                    string want;
+                    if (!strong.TryGetValue(call, out want) && !(weak.TryGetValue(call, out want) && !Precise(loc))) { seen.Add(call); continue; }
+                    seen.Add(call);
+                    if (want == loc) continue;
+                    lines[i] = line.Substring(0, c1 + 1) + want + (c2 > c1 ? line.Substring(c2) : ",,,");
+                    changed++;
+                }
+                List<string> add = new List<string>();
+                foreach (var kv in strong) if (!seen.Contains(kv.Key)) add.Add(kv.Key + "," + kv.Value + ",,,");
+                foreach (var kv in weak) if (!seen.Contains(kv.Key) && !strong.ContainsKey(kv.Key)) add.Add(kv.Key + "," + kv.Value + ",,,");
+                if (changed == 0 && add.Count == 0) return;
+                add.Sort(StringComparer.Ordinal);
+                lines.AddRange(add);
+                string tmp = path + ".tmp";
+                File.WriteAllText(tmp, string.Join("\r\n", lines) + "\r\n", Encoding.Latin1);
+                if (File.Exists(path)) File.SetAttributes(path, FileAttributes.Normal);
+                File.Move(tmp, path, true);
+                FileDate = File.GetLastWriteTime(path);
+            }
+            catch (Exception ex) { LastError = ex.Message; call3Pending = 1; }
+            finally { Interlocked.Exchange(ref call3Writing, 0); }
+        }
+
         // ---- importazione di un CALL3.TXT scelto a mano
         public static void Replace(string newFile, string dataDir)
         {
             string dest = Path.Combine(dataDir, "call3.txt");
             if (File.Exists(dest)) File.Copy(dest, Path.Combine(dataDir, "call3.bak"), true);
             File.Copy(newFile, dest, true);
+            call3Pending = 1;
+            WriteCorrectionsToCall3();
             StartLoad(dataDir);
         }
 
@@ -564,6 +633,8 @@ namespace YAMS
                     File.Copy(dest, Path.Combine(dataDir, "call3.bak"), true);
                 }
                 File.Move(tmp, dest, true);
+                call3Pending = 1;
+                WriteCorrectionsToCall3();   // le correzioni tornano dentro il file nuovo
                 StartLoad(dataDir);
                 return null;
             }

@@ -65,7 +65,7 @@ namespace YAMS
             bC3Man.Click += async (s, e) => await EditCall3Manual();
             lblC3Status = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap };
             CheckBox chkG7 = C(Lang.T("Cerca su G7VRD i locator mancanti"), cfg.GetB("call3_g7vrd", true));
-            ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in sottofondo all'API pubblica di G7VRD (api.g7vrd.co.uk). Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto; al massimo 40 nominativi al minuto, ogni nominativo una volta al giorno. I risultati stanno in data/CALL3-G7VRD.TXT."));
+            ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt."));
             CallDb.G7Enabled = chkG7.IsChecked == true;
             chkG7.IsCheckedChanged += (s, e) => { CallDb.G7Enabled = chkG7.IsChecked == true; cfg.Set("call3_g7vrd", CallDb.G7Enabled); };
             DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status));

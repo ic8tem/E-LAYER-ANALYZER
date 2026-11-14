@@ -2,7 +2,7 @@
 
 [← Home](Home-nb)
 
-Denne fanen inneholder hele **YA-MS 1.8.8**, meteor scatter-programmet til IC8TEM: himmelkule med radiantene, radarfluks fra SKiYMET (Collm, Sodankylä), beregning av svermeffektivitet, eksperimentell implementering av prognosene, geometri og demping, GRAVES, rutekart, **Svermer direkte** (ZHR målt av Global Meteor Network og radianter fra CMOR-radaren), **kart over kildene** (Collm, Sodankylä, GRAVES og CMOR i forhold til stasjonen) og dokumentet **Forklaring av effektivitetsberegningen** med formlene.
+Denne fanen inneholder hele **YA-MS 1.8.9**, meteor scatter-programmet til IC8TEM: himmelkule med radiantene, radarfluks fra SKiYMET (Collm, Sodankylä), beregning av svermeffektivitet, eksperimentell implementering av prognosene, geometri og demping, GRAVES, rutekart, **Svermer direkte** (ZHR målt av Global Meteor Network og radianter fra CMOR-radaren), **kart over kildene** (Collm, Sodankylä, GRAVES og CMOR i forhold til stasjonen) og dokumentet **Forklaring av effektivitetsberegningen** med formlene.
 
 YA-MS 1.5.0 legger til fanen **Datainnsamling** (meteor scatter-spot filtrert etter MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Inne i E-LAYER ANALYZER åpner den ingen egne telnet-økter: den mottar linjene fra øktene i DATA COLLECTION, så det blir ingen doble innlogginger med samme kallesignal.
 
