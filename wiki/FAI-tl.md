@@ -33,7 +33,10 @@ Ito ang heometrikong konstruksiyong ginagamit para **suriin kung tama ang isang 
 | IC8FAX - F6DRO | JN44GH (sa itaas ng Genoa) | 0.97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (timog-kanlurang Germany, 28 km mula sa Brussels) | 0.88° | 338° / 87° |
 | Beacon DB0FAI (305°) - Dresden via Sheffield (DL5MCG; nakatutok sa 290° ang Dresden at idineklarang aurora) | – | 0.3° | – |
-| DL5MCG - SV1DH (pagsubok noong 1987 via Budapest, 1569 km) | Budapest nasa bakas; mga cell na mas mababa sa 1° mula 35 km | 2.16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF na field ng 1990) | JN45MV, bakas sa 40 km mula sa Geneva (Geneva: 4.10°) | 0.76° | 326° / 85° |
+| DL5MCG - SV1DH (pagsubok noong 1987 via Budapest, 1569 km, IGRF na field ng 1987) | Budapest sa 2.53°, bahagyang lampas sa 2.5° (2.16° sa field ngayon); bakas sa 26 km; pinakamalamang KN06RV | 2.53° (KN06RV 0.93°) | 95° / 341° |
+
+Mula sa bersiyon 0.4.18, ginagamit ng dalawang kasong may petsa (1987 at 1990) ang IGRF-14 na field ng taong iyon, hangga't ang mga istasyon ay sa kasong iyon pa rin.
 
 Mga kilalang scatter point sa listahan: Geneva, Brussels, Budapest, JN92, JN41/42.
 

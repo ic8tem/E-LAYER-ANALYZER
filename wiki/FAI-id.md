@@ -33,7 +33,10 @@ Ini adalah konstruksi geometris yang dipakai untuk **memeriksa apakah sebuah tit
 | IC8FAX - F6DRO | JN44GH (di atas Genoa) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Jerman barat daya, 28 km dari Brussel) | 0,88° | 338° / 87° |
 | Beacon DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden mengarah ke 290° dan melaporkan aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (uji 1987 via Budapest, 1569 km) | Budapest di jejak; sel di bawah 1° mulai 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, medan IGRF tahun 1990) | JN45MV, jejak 40 km dari Jenewa (Jenewa: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (uji 1987 via Budapest, 1569 km, medan IGRF tahun 1987) | Budapest pada 2,53°, sedikit melewati 2,5° (2,16° dengan medan hari ini); jejak pada 26 km; paling mungkin KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Sejak versi 0.4.18 kedua kasus bertanggal (1987 dan 1990) memakai medan IGRF-14 tahun tersebut, selama stasiunnya tetap stasiun kasus itu.
 
 Scatter point dikenal dalam daftar: Jenewa, Brussel, Budapest, JN92, JN41/42.
 
