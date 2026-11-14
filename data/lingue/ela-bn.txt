@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Scatter trail বরাবর QTF পরিসর (বিচ্যুতি ≤ 1.5°, উভয় স্টেশনের Lange-Hesse সীমার মধ্যে):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	স্ক্যাটার পয়েন্টের সীমা (Lange-Hesse: 54° ভূচৌম্বকে 370-1100 km, প্রতিটি স্টেশনের IGRF-14 নতি অনুযায়ী সরানো): {0}; {1}। উচ্চতা প্রায় 110 km, লম্বতা ±3°-এর মধ্যে।
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	প্রস্তাবিত স্ক্যাটার পয়েন্ট অন্তত একটি স্টেশনের জন্য Lange-Hesse সীমার বাইরে: এটি সম্ভব, তবে কম সম্ভাব্য।
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	স্থানীয় ফিল্টার: 27990.0 kHz-এর নিচের এবং 145 MHz-এর ওপরের ক্লাস্টার লাইন বাদ দেয় (দেখানো হয় না, সংরক্ষণ হয় না); 430-440 MHz-এ কেবল অরোরা স্পট যায়
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	পুরো প্রোগ্রামের জন্য ডেটা সংগ্রহ একটিই: DATA COLLECTION-এ পাওয়া প্রতিটি স্পট এই ফিল্টারগুলো পেরিয়ে প্রতিটি প্রোপাগেশন মোডের ট্যাবে যায়।
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	28, 40, 50 ও 70 MHz-এর নিয়ম (লেখকের ও IK3XTV-এর নিয়ম)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	40 MHz-এ (8 m) ন্যূনতম দূরত্ব একইভাবে বের করা হয় ({0:F0} km) এবং কেবল E স্তরের জ্যামিতির প্রথম হপের মধ্যের দূরত্ব গ্রহণযোগ্য ({1:F0} km)।
+in 70 MHz (km)	70 MHz-এ (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	70 MHz-এ FT8 ও FT4 ব্যান্ডপ্ল্যানের মিটিওর স্ক্যাটার জানালার ভেতরেও স্পোরাডিক-E-তে যায় (70.154 MHz হলো FT8-এর ফ্রিকোয়েন্সি)।
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	50 MHz-এ FT8 ও FT4: স্পোরাডিক-E কেবল যদি তারা কোনো মেঘের অংশ হয়, অর্থাৎ যদি কাছাকাছি মধ্যবিন্দুসহ 50 MHz-এর আরেকটি স্পট থাকে; একক স্পট মিটিওর স্ক্যাটারে যায়
+punto medio entro (km)	মধ্যবিন্দু এর মধ্যে (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	144 MHz-এ Q65 ও JT65 হলো EME এবং স্পোরাডিক-E-তে ঢোকে না, যদি না লেখায় <ES> থাকে।
+sì	হ্যাঁ
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	স্থানীয় ফিল্টার: লাইন বাদ (27990 kHz - 145 MHz পরিসরের বাইরে; 430-440 MHz-এ কেবল অরোরা স্পট যায়)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(বাদ: প্রথম হপের বাইরে, {0:F0} km, 40 MHz-এ)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(বাদ: 144 MHz-এ Q65 বা JT65 = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(50 MHz-এ FT8/FT4, {0:F0} মিনিটের মধ্যে {1:F0} km-এর মধ্যে মধ্যবিন্দুসহ আর কোনো স্পট নেই: মিটিওর স্ক্যাটার)
+scartate dal filtro locale: {0}	স্থানীয় ফিল্টারে বাদ: {0}
+IMPOSTAZIONI	সেটিংস
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): হলুদ, কেবল প্রথম হপের মধ্যে
+Generali	সাধারণ
+Smistamento degli spot	স্পট বণ্টন
+Impostazioni generali	সাধারণ সেটিংস
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	এগুলো ওপরের সারির একই ডেটা: সব ট্যাবে প্রযোজ্য, METEOR SCATTER-এও।
+Aspetto	চেহারা
+Lingua	ভাষা
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	অক্ষরের আকার পুরো প্রোগ্রামে প্রযোজ্য, 85 থেকে 140 %, YA-MS-এর মতো। ভাষা ও থিম উইন্ডোটি নতুন করে তৈরি করে: সেটিংস ও স্পট থেকে যায়।
+Mappe e dati previsionali	মানচিত্র ও পূর্বাভাস ডেটা
+Continente	মহাদেশ
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Mercator মানচিত্রগুলোকে বেছে নেওয়া মহাদেশে সরায় এবং পূর্বাভাস ডেটা বেছে নেয় (ইউরোপ ও উত্তর আমেরিকার জন্য N0NBH-এর E-skip)। এটি ট্যাব বারের একই মেনু।
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	প্রোগ্রাম চালুর সময় ও প্রতি 5 মিনিটে NTP সার্ভার দিয়ে সময় যাচাই করে এবং হিসাবে সঠিক সময় ব্যবহার করে। Windows-এ, অ্যাডমিনিস্ট্রেটরের অধিকার থাকলে, PC-র ঘড়িও ঠিক করে। ওপরে NTP:FAILED লেখা থাকলে নেটওয়ার্ক UDP 123 পোর্ট আটকে রাখছে।
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	GitHub-এ হালনাগাদ যাচাই করুন (চালুর সময় ও প্রতি 6 ঘণ্টায়)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	স্বয়ংক্রিয় ও নীরব হালনাগাদ: জিজ্ঞেস না করে নতুন সংস্করণ ডাউনলোড ও ইনস্টল করে
+Controlla adesso	এখনই যাচাই করুন
+Versione in uso: {0}	ব্যবহৃত সংস্করণ: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	স্বয়ংক্রিয় হালনাগাদ সব প্যাকেজের সঙ্গে কাজ করে, কারণ প্রোগ্রাম সবসময় ব্যবহারকারীর একটি ফোল্ডার থেকে চলে: Windows-এ ইনস্টলার বা zip দিয়ে বেছে নেওয়া ফোল্ডার, Mac-এ অ্যাপ, Linux-এ ~/E-LAYER-ANALYZER। .deb, .rpm, Arch, Slackware প্যাকেজ ও AppImage-এর ক্ষেত্রে ~/E-LAYER-ANALYZER-এর কপিটি হালনাগাদ হয়: প্যাকেজ ম্যানেজার প্রথমবার ইনস্টল করা সংস্করণই দেখাতে থাকে, যতক্ষণ না আপনি নতুন প্যাকেজ ইনস্টল করেন। প্রোগ্রামের ফোল্ডারে লেখা না গেলে প্রোগ্রাম তা জানায় এবং নতুন সংস্করণটি Release পাতা থেকে হাতে ডাউনলোড করতে হয়।
+Apri la cartella dei dati	ডেটা ফোল্ডার খুলুন
+Dati	ডেটা
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	প্রোগ্রামের সব ডেটা প্রোগ্রামের পাশের data ফোল্ডারে থাকে (AppData-তে কিছু নয়)। প্রোগ্রাম বন্ধ হলে সংগৃহীত স্পট মুছে যায়। Bureau of Meteorology-র API কী DATA COLLECTION, প্রপাগেশন ডেটা-তে বসানো হয়।
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - সার্ভারের সময় ও PC-র সময়ের পার্থক্য: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - কোনো NTP সার্ভারে পৌঁছানো যাচ্ছে না: প্রোগ্রাম PC-র ঘড়ি ব্যবহার করে।
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	DATA COLLECTION-এ পাওয়া প্রতিটি স্পট (cluster, RBN, PSKReporter, WSJT-X) সারণির ক্রমে নিয়মগুলো দিয়ে যাচাই করা হয়: প্রথম যে নিয়ম খাটে সেটিই ট্যাব ঠিক করে। ডানদিকে প্রতিটি মোডের ফিল্টার, পরিবর্তনযোগ্য মান ও ক্লাস্টারের একটি লাইনের পরীক্ষাসহ।
+Se lo spot...	যদি স্পটটি...
+Valori	মান
+va a	যায়
+nessuna linguetta	কোনো ট্যাব নয়
+è fuori dalla gamma del filtro locale	স্থানীয় ফিল্টারের পরিসরের বাইরে
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz-এর নিচে বা 145 MHz-এর ওপরে; 430-440 MHz-এ কেবল অরোরা
+filtro locale spento	স্থানীয় ফিল্টার বন্ধ
+scartato	বাদ
+contiene AUE, AU-E o AURORAL E	এতে AUE, AU-E বা AURORAL E আছে
+contiene una parola dell'aurora (o modo AU)	এতে অরোরার কোনো শব্দ আছে (বা AU মোড)
+contiene una parola del F.A.I. (o modo FAI)	এতে F.A.I.-এর কোনো শব্দ আছে (বা FAI মোড)
+ha un modo del meteor scatter o <MS>	এতে মিটিওর স্ক্যাটারের কোনো মোড বা <MS> আছে
+cade in una finestra MS del bandplan	ব্যান্ডপ্ল্যানের কোনো MS জানালায় পড়ে
+in 50 MHz non esclusiva	50 MHz-এ একচেটিয়া নয়
+FT8 e FT4 in 50 e 70 MHz esclusi	50 ও 70 MHz-এ FT8 ও FT4 বাদে
+è FT8 o FT4 in 50 MHz senza nube	50 MHz-এ মেঘ ছাড়া FT8 বা FT4
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	{0:F0} মিনিটের মধ্যে {1:F0} km-এর মধ্যে মধ্যবিন্দুসহ আর কোনো স্পট নেই
+regola spenta	নিয়ম বন্ধ
+meteor scatter (non E-sporadico)	মিটিওর স্ক্যাটার (স্পোরাডিক-E নয়)
+è Q65 o JT65 in 144 MHz	144 MHz-এ Q65 বা JT65
+salvo <ES> nel testo	লেখায় <ES> থাকলে বাদে
+EME: scartato	EME: বাদ
+contiene una scritta di altra propagazione	এতে অন্য প্রোপাগেশনের লেখা আছে
+non E-sporadico	স্পোরাডিক-E নয়
+è transequatoriale	ট্রান্স-ইকুয়েটোরিয়াল
+fascia di inclinazione ± {0:F0}°	নতি বলয় ± {0:F0}°
+non E-sporadico (TEP)	স্পোরাডিক-E নয় (TEP)
+è in 28 MHz	28 MHz-এ
+da {0:F0} km	{0:F0} km থেকে
+è in 40 MHz	40 MHz-এ
+da {0:F0} a {1:F0} km (primo salto)	{0:F0} থেকে {1:F0} km (প্রথম হপ)
+è in 50 MHz	50 MHz-এ
+è in 70 MHz	70 MHz-এ
+è in 144 MHz	144 MHz-এ
+oltre {0:F0} km, con conferma	{0:F0} km-এর বেশি, নিশ্চিতকরণসহ
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	কোনো নিয়মে পড়ে না (ট্রোপো, 432 MHz, HF...)
+resta in Spot raccolti	সংগৃহীত স্পটে থাকে
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	প্রোগ্রামটি {0} প্যাকেজ দিয়ে ইনস্টল করা: হালনাগাদ করতে release পাতা থেকে নতুন প্যাকেজ ডাউনলোড করে প্রথমবারের মতো ইনস্টল করুন।
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	স্বয়ংক্রিয় হালনাগাদ প্রযোজ্য Windows-এর ইনস্টলার ও zip, Mac-এর অ্যাপ, .tar.gz আর্কাইভ ও AppImage-এ। সিস্টেম প্যাকেজের (.deb, .rpm, Arch, Slackware) ক্ষেত্রে প্রোগ্রাম নিজে হালনাগাদ হয় না: নতুন সংস্করণের খবর জানায়, যা Release পাতা থেকে নতুন প্যাকেজ ডাউনলোড করে ইনস্টল করতে হয়। প্রোগ্রামের ফোল্ডারে লেখা না গেলে প্রোগ্রাম তা জানায় এবং নতুন সংস্করণটি হাতে ডাউনলোড করতে হয়।

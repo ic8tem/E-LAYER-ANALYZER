@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Rentang QTF di sepanjang jejak (deviasi ≤ 1,5°, di dalam jendela Lange-Hesse kedua stasiun):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Jendela scatter point (Lange-Hesse: 370-1100 km pada 54° geomagnetik, digeser sesuai inklinasi IGRF-14 masing-masing stasiun): {0}; {1}. Ketinggian sekitar 110 km, ketegaklurusan dalam ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Scatter point yang diusulkan berada di luar jendela Lange-Hesse untuk setidaknya satu stasiun: mungkin, tetapi kurang mungkin terjadi.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Filter lokal: buang baris kluster di bawah 27990,0 kHz dan di atas 145 MHz (tidak ditampilkan dan tidak disimpan); di 430-440 MHz hanya spot aurora yang lolos
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Pengumpulan data hanya satu untuk seluruh program: setiap spot yang diterima di DATA COLLECTION melewati filter-filter ini dan menuju tab setiap mode propagasi.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Aturan 28, 40, 50 dan 70 MHz (aturan penulis dan IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Di 40 MHz (8 m) jarak minimum diturunkan dengan cara yang sama ({0:F0} km) dan hanya jarak dalam lompatan pertama geometri lapisan E yang berlaku ({1:F0} km).
+in 70 MHz (km)	di 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 dan FT4 di 70 MHz masuk sporadic-E bahkan di dalam jendela meteor scatter bandplan (70,154 MHz adalah frekuensi FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 dan FT4 di 50 MHz: sporadic-E hanya jika menjadi bagian dari sebuah awan, yaitu jika ada spot 50 MHz lain dengan titik tengah di dekatnya; spot tunggal masuk meteor scatter
+punto medio entro (km)	titik tengah dalam (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 dan JT65 di 144 MHz adalah EME dan tidak masuk sporadic-E, kecuali ada <ES> di teks.
+sì	ya
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Filter lokal: baris dibuang (di luar rentang 27990 kHz - 145 MHz; di 430-440 MHz hanya spot aurora yang lolos)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(dibuang: melewati lompatan pertama, {0:F0} km, di 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(dibuang: Q65 atau JT65 di 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 di 50 MHz tanpa spot lain dalam {0:F0} menit dengan titik tengah dalam {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	dibuang oleh filter lokal: {0}
+IMPOSTAZIONI	PENGATURAN
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): kuning, hanya dalam lompatan pertama
+Generali	Umum
+Smistamento degli spot	Distribusi spot
+Impostazioni generali	Pengaturan umum
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Ini adalah data yang sama dengan baris di atas: berlaku untuk semua tab, termasuk METEOR SCATTER.
+Aspetto	Tampilan
+Lingua	Bahasa
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Ukuran huruf berlaku untuk seluruh program, dari 85 hingga 140 %, seperti di YA-MS. Bahasa dan tema membangun ulang jendela: pengaturan dan spot tetap ada.
+Mappe e dati previsionali	Peta dan data prakiraan
+Continente	Benua
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Menggeser peta Mercator ke benua yang dipilih dan memilih data prakiraan (E-skip N0NBH untuk Eropa dan Amerika Utara). Ini menu yang sama dengan yang ada di bilah tab.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Program memeriksa waktu dengan server NTP saat mulai dan setiap 5 menit, dan memakai waktu yang benar dalam perhitungan. Di Windows, dengan hak administrator, program juga mengoreksi jam PC. Jika tulisan di atas adalah NTP:FAILED, jaringan memblokir port UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Periksa pembaruan di GitHub (saat mulai dan setiap 6 jam)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Pembaruan otomatis dan diam-diam: mengunduh dan memasang versi baru tanpa bertanya
+Controlla adesso	Periksa sekarang
+Versione in uso: {0}	Versi yang dipakai: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Pembaruan otomatis bekerja dengan semua paket, karena program selalu berjalan dari folder pengguna: folder yang dipilih dengan installer atau zip di Windows, aplikasi di Mac, ~/E-LAYER-ANALYZER di Linux. Dengan paket .deb, .rpm, Arch, Slackware dan dengan AppImage yang diperbarui adalah salinan di ~/E-LAYER-ANALYZER: manajer paket tetap menampilkan versi yang dipasang pertama kali, sampai Anda memasang paket baru. Jika folder program tidak dapat ditulisi, program memberitahukannya dan versi baru harus diunduh secara manual dari halaman Release.
+Apri la cartella dei dati	Buka folder data
+Dati	Data
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Semua data program ada di folder data di samping program (tidak ada di AppData). Spot terkumpul dihapus saat program ditutup. Kunci API Bureau of Meteorology dimasukkan di DATA COLLECTION, Data propagasi.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - selisih antara waktu server dan waktu PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - tidak ada server NTP yang dapat dijangkau: program memakai jam PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Setiap spot yang diterima di DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) diperiksa dengan aturan menurut urutan tabel: aturan pertama yang berlaku menentukan tabnya. Di sebelah kanan ada filter setiap mode, dengan nilai yang dapat diubah dan uji satu baris kluster.
+Se lo spot...	Jika spot...
+Valori	Nilai
+va a	masuk ke
+nessuna linguetta	tidak ke tab mana pun
+è fuori dalla gamma del filtro locale	berada di luar rentang filter lokal
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	di bawah 27990 kHz atau di atas 145 MHz; di 430-440 MHz hanya aurora
+filtro locale spento	filter lokal mati
+scartato	dibuang
+contiene AUE, AU-E o AURORAL E	memuat AUE, AU-E atau AURORAL E
+contiene una parola dell'aurora (o modo AU)	memuat kata aurora (atau mode AU)
+contiene una parola del F.A.I. (o modo FAI)	memuat kata F.A.I. (atau mode FAI)
+ha un modo del meteor scatter o <MS>	memiliki mode meteor scatter atau <MS>
+cade in una finestra MS del bandplan	jatuh di jendela MS bandplan
+in 50 MHz non esclusiva	di 50 MHz tidak eksklusif
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 dan FT4 di 50 dan 70 MHz dikecualikan
+è FT8 o FT4 in 50 MHz senza nube	adalah FT8 atau FT4 di 50 MHz tanpa awan
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	tidak ada spot lain dalam {0:F0} menit dengan titik tengah dalam {1:F0} km
+regola spenta	aturan mati
+meteor scatter (non E-sporadico)	meteor scatter (bukan sporadic-E)
+è Q65 o JT65 in 144 MHz	adalah Q65 atau JT65 di 144 MHz
+salvo <ES> nel testo	kecuali ada <ES> di teks
+EME: scartato	EME: dibuang
+contiene una scritta di altra propagazione	memuat tag propagasi lain
+non E-sporadico	bukan sporadic-E
+è transequatoriale	transekuatorial
+fascia di inclinazione ± {0:F0}°	pita inklinasi ± {0:F0}°
+non E-sporadico (TEP)	bukan sporadic-E (TEP)
+è in 28 MHz	berada di 28 MHz
+da {0:F0} km	mulai {0:F0} km
+è in 40 MHz	berada di 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	dari {0:F0} hingga {1:F0} km (lompatan pertama)
+è in 50 MHz	berada di 50 MHz
+è in 70 MHz	berada di 70 MHz
+è in 144 MHz	berada di 144 MHz
+oltre {0:F0} km, con conferma	di atas {0:F0} km, dengan konfirmasi
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	tidak masuk aturan mana pun (tropo, 432 MHz, HF...)
+resta in Spot raccolti	tetap di Spot terkumpul
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Program dipasang dengan paket {0}: untuk memperbaruinya unduh paket baru dari halaman release dan pasang seperti yang pertama.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Pembaruan otomatis berlaku untuk installer dan zip Windows, aplikasi Mac, arsip .tar.gz dan AppImage. Dengan paket sistem (.deb, .rpm, Arch, Slackware) program tidak memperbarui dirinya sendiri: program memberi tahu adanya versi baru, yang dipasang dengan mengunduh paket baru dari halaman Release. Jika folder program tidak dapat ditulisi, program memberitahukannya dan versi baru harus diunduh secara manual.

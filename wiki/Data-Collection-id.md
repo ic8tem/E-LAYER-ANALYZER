@@ -18,7 +18,11 @@
 
 2000 spot terakhir, dengan filter band dan sumber. Arsip: satu file CSV per hari di `data/spot`. Setiap kali program ditutup, basis data spot dikosongkan (memori dan file di `data/spot`): setiap sesi dimulai dari nol.
 
-**Filter lokal** (kotak opsional): baris "DX de" di bawah 27990,0 kHz atau di atas 145 MHz dibuang, tidak ditampilkan di konsol dan tidak disimpan. **Locator yang kurang presisi** (kurang dari 6 karakter) diambil dari CALL3: jika CALL3 memiliki locator 6 karakter, locator itu selalu didahulukan. Seperti di YA-MS, spot meteor scatter (bukan Sporadic-E) adalah spot di jendela frekuensi khas MS (50190-50300, 70100-70400, 144290-144399 kHz) tanpa tag propagasi lain (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), serta spot dengan mode khusus MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) atau dengan `<MS>`. Spot dengan `<AS>`/`<ACS>` (aircraft scatter) tidak dipakai untuk Sporadic-E.
+**Filter lokal** (kotak opsional, di PENGATURAN): baris "DX de" di bawah 27990,0 kHz atau di atas 145 MHz dibuang, tidak ditampilkan di konsol dan tidak disimpan; antara 430 dan 440 MHz hanya spot aurora yang lolos. **Locator tidak presisi** (kurang dari 6 karakter) diambil dari CALL3: jika CALL3 memiliki locator 6 karakter, locator itu selalu diutamakan. Seperti di YA-MS, spot meteor scatter (bukan Sporadic-E) adalah spot di jendela frekuensi khas MS (50190-50300, 70100-70400, 144290-144399 kHz) tanpa tag propagasi lain (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), serta spot dengan mode khusus MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) atau dengan `<MS>`. Pengecualian: FT8 dan FT4 di 50 dan 70 MHz, di mana mode yang diketahui yang menentukan (FT8 di 70,154 MHz masuk Sporadic-E bahkan di dalam jendela MS). Spot dengan `<AS>`/`<ACS>` (aircraft scatter) tidak dipakai untuk Sporadic-E.
+
+## Filter spot
+
+Pengumpulan data **hanya satu untuk seluruh program**: setiap spot melewati filter lalu menuju tab setiap mode propagasi. Sejak versi 0.4.18 filter, filter lokal dan uji filter berada di tab **[PENGATURAN](Settings-id)**, subtab **Distribusi spot**.
 
 ## CALL3
 
@@ -27,3 +31,13 @@ Basis data **callsign → locator** JTDX (lebih dari satu juta callsign) di `dat
 Sejak versi 0.4.16 hanya ada satu basis data CALL3 untuk seluruh program, yaitu milik Pengumpulan data YA-MS (tab METEOR SCATTER), dengan aturan yang sama seperti LIVETROPOVHF: pembaruan dari MMMonVHF, entri manual, berkas tambahan, koreksi dari cluster, lokator yang dipelajari dan G7VRD setiap 6 jam; koreksi ditulis ke data/call3.txt dan lokator dari data/call3_nuovi.txt diimpor sekali. Spot dari WSJT-X, JTDX dan MSHV juga datang lewat UDP (sumber WSJT-X UDP, port 2237 diteruskan ke 2238).
 
 Filter-filter dari YA-MS ini (CW, jarak minimum, jendela frekuensi, mode MS, pita) hanya berlaku untuk tab METEOR SCATTER: menentukan spot mana yang masuk ke kumpulannya. Tab lain menerima semua spot dan memakai filternya sendiri.
+
+## Subtab Spot dan Data propagasi
+
+Tab ini memiliki dua subtab: **Spot** (sesi, PSKReporter MQTT, WSJT-X UDP, spot terkumpul dan CALL3) dan **Data propagasi**:
+
+- **N0NBH** (hamqsl.com): banner VHF dan data matahari, E-skip Eropa dan Amerika Utara (DXrobot), aurora.
+- **Bz untuk aurora**: angin matahari waktu nyata NOAA SWPC (DSCOVR/ACE, titik L1), sumber terbaik untuk Bz.
+- **Meteor scatter**: aktivitas meteor harian (RMOB) dari Make More Miles on VHF.
+
+Data diunduh paling banyak sekali per jam. Ringkasannya muncul di peta SPORADIC-E, F.A.I. dan AURORA. **Menu benua**, di kanan bilah tab, menggeser peta dan memilih data benua tersebut.

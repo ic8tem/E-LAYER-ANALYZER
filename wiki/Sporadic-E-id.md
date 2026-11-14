@@ -8,9 +8,10 @@
 
 Sebuah tombol di atas peta memilih tampilan:
 
-- **Azimutal - satu lompatan**: peta azimutal ekuidistan yang berpusat di stasiun Anda, radius tetap 2500 km, dengan zona-zona tabel IK3XTV (minimum 500 km, optimal 1500-2000 km, maksimum satu lompatan 2400 km).
-- **Azimutal - jarak maksimum (multi-lompatan)**: peta yang sama dengan penggeser **Jarak maksimum** (dari 300 hingga 20000 km, juga dengan roda mouse); batas dua lompatan (5000 km) dan tiga lompatan (6900 km) juga muncul, sehingga perkembangan multi-lompatan dapat diikuti.
-- **Persegi panjang**: peta dunia sebelumnya, dengan tombol Eropa dan Dunia.
+- **Azimutal**: peta azimutal ekuidistan yang berpusat di stasiun Anda, dengan penggeser **zoom** (300 hingga 20000 km dari tengah, juga dengan roda mouse).
+- **Mercator**: peta dunia, dengan tombol Eropa dan Dunia.
+
+Pada kedua proyeksi, **lingkaran jarak Flavio IK3XTV** digambar di sekitar stasiun: 500 km (minimum satu lompatan), 1500-2000 km (optimal), 2400 km (maksimum satu lompatan), 5000 km (maksimum dua lompatan) dan 6900 km (maksimum tiga lompatan).
 
 Pada tampilan azimutal, cincin putus-putus menunjukkan **km dari tengah** (langkahnya berubah sesuai zoom), tepi peta menandai jarak maksimum yang ditampilkan, dan kursor mouse memberikan jarak dan azimut dari tengah.
 
@@ -18,7 +19,7 @@ Pada tampilan azimutal, cincin putus-putus menunjukkan **km dari tengah** (langk
 
 ## Yang ditampilkan
 
-- **Spot** beberapa menit terakhir (15 menit - 12 jam) pada band **28, 50, 70 dan 144 MHz**, diambil dari sesi telnet. Locator diambil dari komentar spot (mis. `JN70CN<ES>JO62QM`) atau dari basis data CALL3.
+- **Spot** beberapa menit terakhir (15 menit - 12 jam) pada band **28, 40 (8 m, mati sejak awal), 50, 70 dan 144 MHz**, diambil dari sesi telnet. Locator diambil dari komentar spot (mis. `JN70CN<ES>JO62QM`) atau dari basis data CALL3.
 - Spot dengan **<MS>**, **<AU>** atau **<TR>** di teksnya **dibuang**: spot tersebut tidak berkaitan dengan sporadic-E tetapi berguna untuk meteor scatter, aurora atau tropo.
 - **Transekuatorial, aturan penulis (IC8TEM)**: ke arah Afrika dan Amerika Selatan, jika titik tengah jatuh di pita inklinasi magnetik antara -20° dan +20°, kontak tersebut adalah transekuatorial (TEP), bukan sporadic-E, kecuali spot menyatakan `<ES>`.
 - **144 MHz, aturan penulis (IC8TEM)**: sporadic-E di 2 m dimulai **di atas 900 km** (spot yang lebih pendek dibuang). Satu spot 144 MHz **tidak digambar sendirian**: spot itu muncul jika dalam **5 menit** tiba spot 144 MHz kedua dengan awan di tempat yang sama (titik pantul dalam 300 km), atau jika ada spot **50 MHz lompatan pendek** di dekatnya (dalam 1200 km, pada 15 menit terakhir). Bilah di atas menampilkan berapa banyak spot 144 MHz yang menunggu konfirmasi.
@@ -46,3 +47,18 @@ Pada tampilan azimutal, cincin putus-putus menunjukkan **km dari tengah** (langk
 ## Catatan tentang 432 MHz
 
 Sporadic-E **tidak berlaku untuk 432 MHz**: MUF Es mencapai sekitar 150-200 MHz dan rekor ARRL mencantumkan kontak Es hanya di 50 dan 144 MHz. Spot 70 cm tidak dianalisis di sini.
+
+## Kotak berwarna menurut frekuensi dan MUF berkedip
+
+Kotak Maidenhead titik pantul diwarnai menurut frekuensi spot tertinggi: **hijau** hingga 29 MHz, **kuning** hingga 51, **oranye** hingga 71, **merah** hingga 145 MHz. Dari foEs kotak diperkirakan MUF yang mungkin pada lompatan terpanjang (2400 km, tabel IK3XTV): jika mencapai band yang lebih tinggi, kotak **berkedip** dengan warna band itu (prinsip IK3XTV dan Jacobs-Leinwoll: skip pendek berarti MUF tinggi).
+
+Di kanan atas peta muncul ringkasan N0NBH (E-skip benua yang dipilih, SFI, indeks K dan A).
+
+## Aturan per band (versi 0.4.18)
+
+- **50 MHz**: tidak ada Sporadic-E dalam 450 km. Spot FT8 dan FT4 adalah Sporadic-E hanya jika menjadi bagian dari sebuah awan: spot 50 MHz lain dalam 4 menit dengan titik tengah dalam 150 km. Spot FT8/FT4 tunggal masuk meteor scatter.
+- **70 MHz**: tidak ada Sporadic-E dalam 450 km. FT8 dan FT4 masuk Sporadic-E bahkan di dalam jendela meteor scatter bandplan (mode yang diketahui menentukan lebih dulu, baru frekuensi).
+- **40 MHz (8 m)**: jarak minimum diturunkan dari 450 km di 50 MHz dengan hukum sekan (sekitar 330 km); hanya jarak dalam lompatan pertama geometri lapisan E (sekitar 2440 km). Warna lintasan: kuning.
+- **144 MHz**: Sporadic-E mulai 900 km, dengan konfirmasi; spot Q65 dan JT65 adalah EME dan dibuang, kecuali ada `<ES>` di teks.
+- G0ISW (Propagation identification, 2024) melihat Sporadic-E terpendek di atas 400 km di 50 dan 70 MHz dan di atas 1400 km di 144 MHz: aturan penulis selaras di 50 dan 70 MHz dan lebih longgar di 144 MHz, tetapi meminta konfirmasi.
+- Urutan penerapan semua aturan, dengan nilai yang dipakai, ditampilkan di **[PENGATURAN](Settings-id)** › Distribusi spot.

@@ -734,3 +734,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Saklaw ng QTF sa kahabaan ng bakas (paglihis ≤ 1.5°, nasa loob ng saklaw ni Lange-Hesse ng dalawang istasyon):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Saklaw ng scatter point (Lange-Hesse: 370-1100 km sa 54° geomagnetic, inilipat ayon sa IGRF-14 inclination ng bawat istasyon): {0}; {1}. Taas na mga 110 km, perpendicularity sa loob ng ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	Nasa labas ng saklaw ni Lange-Hesse ang iminungkahing scatter point para sa kahit isang istasyon: posible ito, pero mas malabo.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Lokal na filter: itinatapon ang mga linya ng cluster na mas mababa sa 27990.0 kHz at mas mataas sa 145 MHz (hindi ipinapakita at hindi iniimbak); sa 430-440 MHz, mga spot ng aurora lamang ang pinapadaan
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	Iisa lang ang pangongolekta ng data para sa buong programa: bawat spot na natatanggap sa DATA COLLECTION ay dumaraan sa mga filter na ito at pumupunta sa tab ng bawat mode ng propagasyon.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Mga patakaran sa 28, 40, 50 at 70 MHz (mga patakaran ng may-akda at ni IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Sa 40 MHz (8 m), kinukuha sa parehong paraan ang pinakamaikling distansiya ({0:F0} km) at ang mga distansiya lamang na nasa loob ng unang hop ng heometriya ng E layer ang tinatanggap ({1:F0} km).
+in 70 MHz (km)	sa 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	Ang FT8 at FT4 sa 70 MHz ay napupunta sa sporadic-E kahit nasa loob ng window ng meteor scatter ng bandplan (70.154 MHz ang frequency ng FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 at FT4 sa 50 MHz: sporadic-E lamang kung bahagi sila ng isang ulap, ibig sabihin kung may isa pang spot sa 50 MHz na malapit ang gitnang punto; ang nag-iisang spot ay napupunta sa meteor scatter
+punto medio entro (km)	gitnang punto sa loob ng (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Ang Q65 at JT65 sa 144 MHz ay EME at hindi pumapasok sa sporadic-E, maliban kung may <ES> sa teksto.
+sì	oo
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Lokal na filter: itinapon ang linya (labas sa saklaw na 27990 kHz - 145 MHz; sa 430-440 MHz, mga spot ng aurora lamang ang pinapadaan)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(itinapon: lampas sa unang hop, {0:F0} km, sa 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(itinapon: Q65 o JT65 sa 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 sa 50 MHz na walang ibang spot sa loob ng {0:F0} min na ang gitnang punto ay nasa loob ng {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	itinapon ng lokal na filter: {0}
+IMPOSTAZIONI	MGA SETTING
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): dilaw, sa loob lamang ng unang hop
+Generali	Pangkalahatan
+Smistamento degli spot	Pamamahagi ng mga spot
+Impostazioni generali	Mga pangkalahatang setting
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	Ito rin ang datos ng hanay sa itaas: umiiral ito sa lahat ng tab, pati sa METEOR SCATTER.
+Aspetto	Hitsura
+Lingua	Wika
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	Ang laki ng titik ay umiiral sa buong programa, mula 85 hanggang 140 %, gaya ng sa YA-MS. Muling binubuo ng wika at tema ang window: nananatili ang mga setting at ang mga spot.
+Mappe e dati previsionali	Mga mapa at datos ng pagtataya
+Continente	Kontinente
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Inililipat ang mga mapang Mercator sa napiling kontinente at pinipili ang datos ng pagtataya (E-skip ni N0NBH para sa Europa at Hilagang Amerika). Ito rin ang menu sa bar ng mga tab.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	Sinusuri ng programa ang oras sa mga NTP server sa pagbukas at bawat 5 minuto at ginagamit ang tamang oras sa mga kalkulasyon. Sa Windows, na may karapatang administrator, itinatama rin nito ang orasan ng PC. Kung NTP:FAILED ang nakasulat sa itaas, hinaharangan ng network ang port na UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Tingnan ang mga update sa GitHub (sa pagbukas at bawat 6 na oras)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Awtomatiko at tahimik na update: dina-download at ini-install ang bagong bersiyon nang hindi nagtatanong
+Controlla adesso	Suriin ngayon
+Versione in uso: {0}	Bersiyong ginagamit: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	Gumagana ang awtomatikong update sa lahat ng package, dahil laging tumatakbo ang programa mula sa isang folder ng user: ang folder na pinili gamit ang installer o ang zip sa Windows, ang app sa Mac, ~/E-LAYER-ANALYZER sa Linux. Sa mga package na .deb, .rpm, Arch, Slackware at sa AppImage, ang kopya sa ~/E-LAYER-ANALYZER ang naa-update: patuloy na ipinapakita ng package manager ang bersiyong unang na-install, hanggang mag-install ka ng bagong package. Kung hindi masulatan ang folder ng programa, sinasabi ito ng programa at kailangang i-download nang mano-mano ang bagong bersiyon mula sa pahina ng mga Release.
+Apri la cartella dei dati	Buksan ang folder ng datos
+Dati	Datos
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Lahat ng datos ng programa ay nasa folder na data katabi ng programa (wala sa AppData). Binubura ang mga nakolektang spot kapag isinara ang programa. Inilalagay ang API key ng Bureau of Meteorology sa DATA COLLECTION, Datos ng propagasyon.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - pagkakaiba ng oras ng mga server at ng oras ng PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - walang maabot na NTP server: ginagamit ng programa ang orasan ng PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Bawat spot na natatanggap sa DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) ay sinusuri ayon sa mga patakaran sa pagkakasunod ng talahanayan: ang unang patakarang tumutugma ang nagpapasya ng tab. Sa kanan ang mga filter ng bawat mode, kasama ang mga halagang mababago at ang subok ng isang linya ng cluster.
+Se lo spot...	Kung ang spot...
+Valori	Mga halaga
+va a	pupunta sa
+nessuna linguetta	walang tab
+è fuori dalla gamma del filtro locale	ay nasa labas ng saklaw ng lokal na filter
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	mas mababa sa 27990 kHz o mas mataas sa 145 MHz; sa 430-440 MHz aurora lamang
+filtro locale spento	naka-off ang lokal na filter
+scartato	itinapon
+contiene AUE, AU-E o AURORAL E	ay may AUE, AU-E o AURORAL E
+contiene una parola dell'aurora (o modo AU)	ay may salita ng aurora (o mode na AU)
+contiene una parola del F.A.I. (o modo FAI)	ay may salita ng F.A.I. (o mode na FAI)
+ha un modo del meteor scatter o <MS>	ay may mode ng meteor scatter o <MS>
+cade in una finestra MS del bandplan	ay nasa isang MS window ng bandplan
+in 50 MHz non esclusiva	hindi eksklusibo sa 50 MHz
+FT8 e FT4 in 50 e 70 MHz esclusi	hindi kasama ang FT8 at FT4 sa 50 at 70 MHz
+è FT8 o FT4 in 50 MHz senza nube	ay FT8 o FT4 sa 50 MHz na walang ulap
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	walang ibang spot sa loob ng {0:F0} min na ang gitnang punto ay nasa loob ng {1:F0} km
+regola spenta	naka-off ang patakaran
+meteor scatter (non E-sporadico)	meteor scatter (hindi sporadic-E)
+è Q65 o JT65 in 144 MHz	ay Q65 o JT65 sa 144 MHz
+salvo <ES> nel testo	maliban kung may <ES> sa teksto
+EME: scartato	EME: itinapon
+contiene una scritta di altra propagazione	ay may tanda ng ibang propagasyon
+non E-sporadico	hindi sporadic-E
+è transequatoriale	ay trans-equatorial
+fascia di inclinazione ± {0:F0}°	saklaw ng inclination ± {0:F0}°
+non E-sporadico (TEP)	hindi sporadic-E (TEP)
+è in 28 MHz	ay nasa 28 MHz
+da {0:F0} km	mula {0:F0} km
+è in 40 MHz	ay nasa 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	mula {0:F0} hanggang {1:F0} km (unang hop)
+è in 50 MHz	ay nasa 50 MHz
+è in 70 MHz	ay nasa 70 MHz
+è in 144 MHz	ay nasa 144 MHz
+oltre {0:F0} km, con conferma	lampas {0:F0} km, may kumpirmasyon
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	walang tugmang patakaran (tropo, 432 MHz, HF...)
+resta in Spot raccolti	nananatili sa Mga nakolektang spot
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	Naka-install ang programa gamit ang package na {0}: para i-update ito, i-download ang bagong package mula sa pahina ng release at i-install ito gaya ng una.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	Ang awtomatikong update ay para sa installer at zip ng Windows, sa app ng Mac, sa mga archive na .tar.gz at sa AppImage. Sa mga package ng sistema (.deb, .rpm, Arch, Slackware) hindi kusang nag-a-update ang programa: ipinapaalam nito ang bagong bersiyon, na ini-install sa pamamagitan ng pag-download ng bagong package mula sa pahina ng mga Release. Kung hindi masulatan ang folder ng programa, sinasabi ito ng programa at kailangang i-download nang mano-mano ang bagong bersiyon.
