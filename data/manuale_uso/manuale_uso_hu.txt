@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.13-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.14-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -160,6 +160,7 @@ H1|9. Élő és valós idejű adatok
 H2|9.1 Élő forgalom
 P|Az Ön állomására központosított azimutális távolságtartó térkép az összes összegyűjtött meteor scatter forgalommal: minden összeköttetésnél az útvonal a sáv színével (28 barna, 50 zöld, 70 cián, 144 narancssárga, 222 rózsaszín, 432 lila), a két állomás és az adott órában legvalószínűbb nyomok rajzóna. Az éppen beérkezett spotok egy percig villognak.
 LI|Térkép sugara: 600-3500 km. Megjelenítendő spotok: az utolsó 3, 15 vagy 30 perc, az utolsó óra, az utolsó 3 vagy 24 óra.
+LI|A Mercator-térkép egérrel húzva mozgatható; dupla kattintás: újra az állomásomra középre. Az azimutális térkép az állomásomra középre marad.
 LI|Egy útvonalra vagy a táblázat egy sorára kattintva kiemeli az összeköttetést, és megmutatja a rajzóna középpontját, magasságát és méreteit.
 LI|Mutasd, ki figyel: a sáv színű háromszögek jelölik azokat az állomásokat, amelyek a PSKReporter szerint a választott időablakban MSK144, FSK441, PSK2K vagy JTMS módban vesznek 28, 50, 70, 144 és 432 MHz-en. Egy háromszögre kattintva látszik a hívójel, a lokátor, a módok és az utolsó spot. Az Adatgyűjtés fül MQTT-folyamának csatlakoztatva kell lennie.
 LI|A PSKReporter térkép aktív monitorai is: üres háromszögek azoknak az állomásoknak, amelyek MSK144, FSK441, PSK2K vagy JTMS módban látszanak a pskreporter.info térképén, de még nem vettek spotot (az MQTT csak azokat küldi, akik vesznek valamit). A YA-MS 5 percenként egyszer kérdezi le a PSKReporter lekérdező szolgáltatását minden üzemmódra, ahogy a szolgáltatás szabályai kérik; egy monitor legalább 11 percig a térképen marad. A háromszögre kattintva látszik a hívójel, a lokátor, a dekódoló program és az idő, amikor a monitor aktív volt. Alapból bekapcsolva.

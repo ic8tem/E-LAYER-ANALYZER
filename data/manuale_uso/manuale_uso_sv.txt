@@ -1,5 +1,5 @@
 TITLE|Bruksanvisning för YA-MS
-SUB|Version 1.8.13 - av Costantino IC8TEM - november 2026
+SUB|Version 1.8.14 - av Costantino IC8TEM - november 2026
 H1|1. Inledning
 H2|1.1 Vad YA-MS används till
 P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Live och realtidsdata
 H2|9.1 Trafik live
 P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteorscattertrafik: för varje förbindelse sträckan i bandets färg (28 brun, 50 grön, 70 cyan, 144 orange, 222 rosa, 432 lila), de två stationerna och svärmzon av de mest sannolika spåren vid den tiden. Nyss inkomna spots blinkar i en minut.
 LI|Kartradie: 600-3500 km. Spots att visa: senaste 3, 15 eller 30 minuterna, senaste timmen, senaste 3 eller 24 timmarna.
+LI|Mercatorkartan flyttas genom att dra den med musen; dubbelklick: centrerad på min station igen. Den azimutala kartan förblir centrerad på min station.
 LI|Ett klick på en sträcka eller på en rad i tabellen markerar förbindelsen och visar svärmzons centrum, dess höjd och dess storlek.
 LI|Visa vem som lyssnar: trianglar i bandets färg markerar stationer som enligt PSKReporter tar emot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 och 432 MHz i det valda tidsfönstret. Ett klick på en triangel visar anropssignal, lokator, moder och senaste spot. MQTT-flödet i fliken Datainsamling måste vara anslutet.
 LI|Även de aktiva monitorerna på PSKReporter-kartan: tomma trianglar för stationer som syns på kartan på pskreporter.info i MSK144, FSK441, PSK2K eller JTMS men ännu inte har tagit emot någon spot (MQTT skickar bara stationer som tar emot något). YA-MS frågar PSKReporters söktjänst en gång var 5:e minut för alla trafiksätt, som tjänstens regler kräver; en monitor stannar på kartan minst 11 minuter. Ett klick på triangeln visar anropssignal, lokator, avkodningsprogram och tiden då monitorn var aktiv. På från början.

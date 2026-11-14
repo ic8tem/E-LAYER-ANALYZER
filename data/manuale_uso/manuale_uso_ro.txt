@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare YA-MS
-SUB|Versiunea 1.8.13 - realizată de Costantino IC8TEM - noiembrie 2026
+SUB|Versiunea 1.8.14 - realizată de Costantino IC8TEM - noiembrie 2026
 H1|1. Introducere
 H2|1.1 La ce folosește YA-MS
 P|YA-MS vă ajută să prevedeți și să urmăriți în direct condițiile de meteor scatter între stația dumneavoastră și un corespondent, de la 28 la 432 MHz. Pentru fiecare roi meteoric activ arată în ce măsură poziția radiantului său favorizează traseul dumneavoastră (eficiența), în ce ore, din ce parte a traseului sosesc reflexiile și încotro este bine să orientați antena. Pe lângă prognoză, afișează datele măsurate în direct: numărătorile radarului meteoric de la Collm, camerele Global Meteor Network, radarul CMOR, emițătorul GRAVES și traficul meteor scatter colectat din clustere și din PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Live și date în timp real
 H2|9.1 Trafic în direct
 P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot traficul meteor scatter colectat: pentru fiecare legătură, traseul în culoarea benzii (28 maro, 50 verde, 70 cyan, 144 portocaliu, 222 roz, 432 violet), cele două stații și zona roiului dârelor cele mai probabile la acea oră. Spoturile tocmai sosite clipesc timp de un minut.
 LI|Raza hărții: 600-3500 km. Spoturi de afișat: ultimele 3, 15 sau 30 de minute, ultima oră, ultimele 3 sau 24 de ore.
+LI|Harta Mercator se mută trăgând-o cu mouse-ul; dublu clic: din nou centrată pe stația mea. Harta azimutală rămâne centrată pe stația mea.
 LI|Un clic pe un traseu sau pe un rând al tabelului evidențiază legătura și arată centrul norului, altitudinea și dimensiunile sale.
 LI|Arată cine ascultă: triunghiuri în culoarea benzii marchează stațiile care, după PSKReporter, recepționează MSK144, FSK441, PSK2K sau JTMS pe 28, 50, 70, 144 și 432 MHz în fereastra de timp aleasă. Un clic pe un triunghi arată indicativul, locatorul, modurile și ultimul spot. Fluxul MQTT din fila Colectare date trebuie să fie conectat.
 LI|Și monitoarele active de pe harta PSKReporter: triunghiuri goale pentru stațiile care apar pe harta pskreporter.info în MSK144, FSK441, PSK2K sau JTMS dar nu au recepționat încă niciun spot (MQTT trimite doar stațiile care recepționează ceva). YA-MS interoghează serviciul de consultare PSKReporter o dată la 5 minute pentru toate modurile, cum cer regulile serviciului; un monitor rămâne pe hartă cel puțin 11 minute. Un clic pe triunghi arată indicativul, locatorul, programul de decodare și ora la care monitorul era activ. Activat implicit.

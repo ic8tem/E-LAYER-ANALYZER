@@ -1,5 +1,5 @@
 TITLE|Brugervejledning til YA-MS
-SUB|Version 1.8.13 - udarbejdet af Costantino IC8TEM - november 2026
+SUB|Version 1.8.14 - udarbejdet af Costantino IC8TEM - november 2026
 H1|1. Indledning
 H2|1.1 Hvad YA-MS bruges til
 P|YA-MS hjælper dig med at forudsige og følge meteor scatter-forholdene live mellem din station og en modstation, fra 28 til 432 MHz. For hver aktiv meteorsværm fortæller programmet, hvor meget dens radiants position begunstiger din strækning (effektiviteten), på hvilke tidspunkter, fra hvilken side af strækningen refleksionerne kommer, og hvor det er bedst at rette antennen. Ved siden af prognosen viser det live måledata: tællingerne fra meteorradaren i Collm, kameraerne i Global Meteor Network, CMOR-radaren, GRAVES-senderen og den meteor scatter-trafik, der indsamles fra clusterne og fra PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Live og realtidsdata
 H2|9.1 Live-trafik
 P|Et azimutalt ækvidistant kort centreret på din station med al indsamlet meteor scatter-trafik: for hver forbindelse strækningen i båndets farve (28 brun, 50 grøn, 70 cyan, 144 orange, 222 lyserød, 432 violet), de to stationer og sværmzone af de mest sandsynlige spor på det tidspunkt. Nyankomne spots blinker i et minut.
 LI|Kortradius: 600-3500 km. Spots der vises: seneste 3, 15 eller 30 minutter, seneste time, seneste 3 eller 24 timer.
+LI|Mercatorkortet flyttes ved at trække det med musen; dobbeltklik: centreret på min station igen. Det azimutale kort forbliver centreret på min station.
 LI|Et klik på en strækning eller på en række i tabellen fremhæver forbindelsen og viser sværmzones centrum, dens højde og dens dimensioner.
 LI|Vis hvem der lytter: trekanter i båndets farve markerer de stationer, der ifølge PSKReporter modtager MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvindue. Et klik på en trekant viser kaldesignal, lokator, modes og sidste spot. MQTT-strømmen i fanen Dataindsamling skal være forbundet.
 LI|Også de aktive monitorer på PSKReporter-kortet: tomme trekanter for stationer, der ses på kortet hos pskreporter.info i MSK144, FSK441, PSK2K eller JTMS, men endnu ikke har modtaget noget spot (MQTT sender kun stationer, der modtager noget). YA-MS spørger PSKReporters opslagstjeneste én mode ad gangen, hvert 3. YA-MS spørger PSKReporters opslagstjeneste én gang hvert 5. minut for alle modes, som tjenestens regler beder om; en monitor bliver på kortet i mindst 11 minutter. minut, som tjenestens regler beder om. Et klik på trekanten viser kaldesignal, lokator, dekoderprogram og tidspunktet, hvor monitoren var aktiv. Tændt fra start.

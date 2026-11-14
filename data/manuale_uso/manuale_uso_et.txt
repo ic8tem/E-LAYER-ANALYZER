@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.13 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.14 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -160,6 +160,7 @@ H1|9. Otse ja reaalajas andmed
 H2|9.1 Liiklus reaalajas
 P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede voo tsoon. Äsja saabunud spotid vilguvad ühe minuti.
 LI|Kaardi raadius: 600-3500 km. Näidatavad spotid: viimased 3, 15 või 30 minutit, viimane tund, viimased 3 või 24 tundi.
+LI|Mercatori kaarti saab hiirega lohistades liigutada; topeltklõps: jälle minu jaama keskel. Asimuutkaart jääb minu jaama keskele.
 LI|Klõps trassil või tabeli real tõstab side esile ja näitab voo tsoon keskpunkti, selle kõrgust ja mõõtmeid.
 LI|Näita, kes kuulab: riba värvi kolmnurgad märgivad jaamu, mis PSKReporteri järgi võtavad valitud ajaaknas vastu MSK144, FSK441, PSK2K või JTMS režiimis 28, 50, 70, 144 ja 432 MHz sagedusel. Klõps kolmnurgal näitab kutsungit, lokaatorit, režiime ja viimast spotti. Vahekaardi Andmete kogumine MQTT-voog peab olema ühendatud.
 LI|Ka PSKReporteri kaardi aktiivsed monitorid: tühjad kolmnurgad jaamadele, mis on pskreporter.info kaardil MSK144, FSK441, PSK2K või JTMS režiimis, kuid pole veel ühtegi spotti vastu võtnud (MQTT saadab ainult jaamu, mis midagi vastu võtavad). YA-MS pärib PSKReporteri päringuteenust kord 5 minuti jooksul kõigi režiimide kohta, nagu teenuse reeglid nõuavad; monitor jääb kaardile vähemalt 11 minutiks. Klõps kolmnurgal näitab kutsungit, lokaatorit, dekodeerimisprogrammi ja aega, mil monitor oli aktiivne. Vaikimisi sees.

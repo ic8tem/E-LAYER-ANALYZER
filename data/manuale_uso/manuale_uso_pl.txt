@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi YA-MS
-SUB|Wersja 1.8.13 - opracował Costantino IC8TEM - listopad 2026
+SUB|Wersja 1.8.14 - opracował Costantino IC8TEM - listopad 2026
 H1|1. Wprowadzenie
 H2|1.1 Do czego służy YA-MS
 P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Na żywo i dane w czasie rzeczywistym
 H2|9.1 Ruch na żywo
 P|Mapa azymutalna równoodległościowa wyśrodkowana na twojej stacji z całym zebranym ruchem meteor scatter: dla każdej łączności trasa w kolorze pasma (28 brązowy, 50 zielony, 70 cyjanowy, 144 pomarańczowy, 222 różowy, 432 fioletowy), obie stacje oraz strefa roju najbardziej prawdopodobnych śladów o tej godzinie. Świeżo nadesłane spoty migają przez minutę.
 LI|Promień mapy: 600-3500 km. Spoty do wyświetlenia: ostatnie 3, 15 lub 30 minut, ostatnia godzina, ostatnie 3 lub 24 godziny.
+LI|Mapę Merkatora przesuwa się, przeciągając ją myszą; dwuklik: znów wyśrodkowana na mojej stacji. Mapa azymutalna pozostaje wyśrodkowana na mojej stacji.
 LI|Kliknięcie trasy lub wiersza tabeli wyróżnia łączność i pokazuje środek strefa roju, jej wysokość i rozmiary.
 LI|Pokaż, kto nasłuchuje: trójkąty w kolorze pasma oznaczają stacje, które według PSKReportera odbierają MSK144, FSK441, PSK2K lub JTMS na 28, 50, 70, 144 i 432 MHz w wybranym oknie czasu. Kliknięcie trójkąta pokazuje znak, lokator, emisje i ostatni spot. Strumień MQTT z zakładki Zbieranie danych musi być połączony.
 LI|Również aktywne monitory z mapy PSKReporter: puste trójkąty dla stacji widocznych na mapie pskreporter.info w MSK144, FSK441, PSK2K lub JTMS, które nie odebrały jeszcze żadnego spotu (MQTT wysyła tylko stacje, które coś odbierają). YA-MS odpytuje usługę wyszukiwania PSKReporter raz na 5 minut dla wszystkich emisji, jak wymagają zasady usługi; monitor pozostaje na mapie co najmniej 11 minut. Kliknięcie trójkąta pokazuje znak, lokator, program dekodujący i godzinę, o której monitor był aktywny. Domyślnie włączone.

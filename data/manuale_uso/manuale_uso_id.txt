@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.13 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.14 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Langsung dan data waktu nyata
 H2|9.1 Lalu lintas langsung
 P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu lintas meteor scatter yang terkumpul: untuk setiap kontak, lintasan dalam warna pita (28 cokelat, 50 hijau, 70 sian, 144 oranye, 222 merah muda, 432 ungu), kedua stasiun dan zona hujan meteor jejak yang paling mungkin pada jam itu. Spot yang baru tiba berkedip selama satu menit.
 LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 3, 15 atau 30 menit terakhir, satu jam terakhir, 3 atau 24 jam terakhir.
+LI|Peta Mercator digeser dengan menyeretnya memakai mouse; klik ganda: kembali berpusat di stasiun saya. Peta azimutal tetap berpusat di stasiun saya.
 LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat zona hujan meteor, ketinggian, dan ukurannya.
 LI|Tampilkan siapa yang mendengarkan: segitiga berwarna pita menandai stasiun yang menurut PSKReporter menerima MSK144, FSK441, PSK2K, atau JTMS di 28, 50, 70, 144, dan 432 MHz dalam jendela waktu yang dipilih. Klik pada segitiga menampilkan callsign, locator, mode, dan spot terakhir. Aliran MQTT di tab Pengumpulan data harus terhubung.
 LI|Juga monitor aktif di peta PSKReporter: segitiga kosong untuk stasiun yang tampak di peta pskreporter.info dalam MSK144, FSK441, PSK2K atau JTMS tetapi belum menerima spot apa pun (MQTT hanya mengirim stasiun yang menerima sesuatu). YA-MS menanyai layanan kueri PSKReporter sekali setiap 5 menit untuk semua mode, sesuai aturan layanan; sebuah monitor tetap di peta setidaknya 11 menit. Klik pada segitiga menampilkan callsign, lokator, program dekode, dan waktu monitor aktif. Aktif sejak awal.

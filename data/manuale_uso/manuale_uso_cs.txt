@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.13 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.14 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Živě a data v reálném čase
 H2|9.1 Provoz živě
 P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a zóna roje nejpravděpodobnějších stop v danou hodinu. Právě přijaté spoty minutu blikají.
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 3, 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
+LI|Mapu v Mercatorově zobrazení lze posouvat tažením myší; dvojklik: znovu vystředěná na mou stanici. Azimutální mapa zůstává vystředěná na mou stanici.
 LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed zóna roje, jeho výška a rozměry.
 LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
 LI|Také aktivní monitory z mapy PSKReporter: prázdné trojúhelníky pro stanice, které jsou na mapě pskreporter.info v MSK144, FSK441, PSK2K nebo JTMS, ale ještě nepřijaly žádný spot (MQTT posílá jen stanice, které něco přijímají). YA-MS se dotazuje vyhledávací služby PSKReporter jednou za 5 minut pro všechny druhy provozu, jak žádají pravidla služby; monitor zůstává na mapě nejméně 11 minut. Klepnutí na trojúhelník ukáže značku, lokátor, dekódovací program a čas, kdy byl monitor aktivní. Ve výchozím stavu zapnuto.

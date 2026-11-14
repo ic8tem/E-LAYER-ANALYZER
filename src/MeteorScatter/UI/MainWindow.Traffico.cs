@@ -57,11 +57,19 @@ namespace YAMS
             p.Children.Add(g);
             traffic = new TrafficView { RadiusKm = Math.Max(600, Math.Min(3500, cfg.GetD("traffico_raggio", 2500))) };
             traffic.SpotClicked += t => ShowTrafficInfo(t);
+            traffic.ViewChanged += () => RefreshTraffic(true);   // Mercatore spostato: si ricalcola cosa sta sulla mappa
             traffic.ListenerClicked += l => { if (lblTrafficInfo != null) lblTrafficInfo.Text = l.Info; };
-            Grid.SetColumn(traffic, 0); g.Children.Add(traffic);
+            // la mia stazione: riquadro sopra la mappa, in alto a destra, dove la mappa ha spazio libero (richiesta
+            // dell'autore, 14/11/2026: prima era in cima alla colonna destra)
+            Grid mapHost = new Grid();
+            mapHost.Children.Add(traffic);
+            Control myBox = BuildMyStationBox();
+            myBox.HorizontalAlignment = HorizontalAlignment.Right; myBox.VerticalAlignment = VerticalAlignment.Top;
+            myBox.Margin = new Thickness(0, 8, 10, 0);
+            mapHost.Children.Add(myBox);
+            Grid.SetColumn(mapHost, 0); g.Children.Add(mapHost);
 
             StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
-            side.Children.Add(BuildMyStationBox());
             side.Children.Add(new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
             side.Children.Add(new TextBlock
             {
@@ -76,12 +84,21 @@ namespace YAMS
             sldTrafficRadius = new Slider { Minimum = 600, Maximum = 3500, Value = traffic.RadiusKm, Width = 220, VerticalAlignment = VerticalAlignment.Center };
             lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
             sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
-            side.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
+            // raggio e proiezione: riquadro sopra la mappa, in basso a destra (richiesta dell'autore, 14/11/2026)
+            StackPanel mapOpts = new StackPanel { Spacing = 2 };
+            mapOpts.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
             ComboBox cmbProj = new ComboBox { ItemsSource = new[] { Lang.T("azimutale (centrata sulla mia stazione)"), Lang.T("Mercatore") }, MinWidth = 220, VerticalAlignment = VerticalAlignment.Center };
             traffic.Mercator = cfg.GetB("traffico_mercatore", false);
             cmbProj.SelectedIndex = traffic.Mercator ? 1 : 0;
+            ToolTip.SetTip(cmbProj, Lang.T("Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione."));
             cmbProj.SelectionChanged += (s, e) => { traffic.Mercator = cmbProj.SelectedIndex == 1; cfg.Set("traffico_mercatore", traffic.Mercator); RefreshTraffic(true); };
-            side.Children.Add(Row(L(Lang.T("Proiezione della mappa")), cmbProj));
+            mapOpts.Children.Add(Row(L(Lang.T("Proiezione della mappa")), cmbProj));
+            mapHost.Children.Add(new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(4), Child = mapOpts,
+                HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, Margin = new Thickness(0, 0, 10, 8)
+            });
             List<string> wn = new List<string>();
             foreach (int m in TrafficMinutes) wn.Add(m < 60 ? Lang.F("ultimi {0} minuti", m) : m == 60 ? Lang.T("ultima ora") : m < 1440 ? Lang.F("ultime {0} ore", m / 60) : Lang.T("ultime 24 ore"));
             cmbTrafficWindow = new ComboBox { ItemsSource = wn, MinWidth = 170, VerticalAlignment = VerticalAlignment.Center };
@@ -126,7 +143,7 @@ namespace YAMS
             ShowTrafficInfo(null);
         }
 
-        // riquadro "La mia stazione" in cima alla colonna destra (prima era la prima riga dei comandi)
+        // riquadro "La mia stazione" sopra la mappa del Traffico in diretta, in alto a destra (prima era la prima riga dei comandi)
         Control BuildMyStationBox()
         {
             WrapPanel w1 = new WrapPanel { Orientation = Orientation.Horizontal };
@@ -142,7 +159,7 @@ namespace YAMS
             return new Border
             {
                 Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Red), BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Margin = new Thickness(0, 0, 0, 4), Child = sp
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Child = sp, MaxWidth = 300
             };
         }
 

@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de YA-MS
-SUB|Version 1.8.13 - réalisé par Costantino IC8TEM - novembre 2026
+SUB|Version 1.8.14 - réalisé par Costantino IC8TEM - novembre 2026
 H1|1. Introduction
 H2|1.1 À quoi sert YA-MS
 P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Direct et données en temps réel
 H2|9.1 Trafic en direct
 P|Une carte azimutale équidistante centrée sur votre station avec tout le trafic meteor scatter recueilli : pour chaque liaison, le trajet dans la couleur de la bande (28 marron, 50 vert, 70 cyan, 144 orange, 222 rose, 432 violet), les deux stations et le zone de l'essaim des traînées les plus probables à cette heure. Les spots qui viennent d'arriver clignotent pendant une minute.
 LI|Rayon de la carte : 600-3500 km. Spots à afficher : 3, 15 ou 30 dernières minutes, dernière heure, 3 ou 24 dernières heures.
+LI|La carte Mercator se déplace en la faisant glisser avec la souris ; double clic : de nouveau centrée sur ma station. La carte azimutale reste centrée sur ma station.
 LI|Un clic sur un trajet ou sur une ligne du tableau met la liaison en évidence et affiche le centre du zone de l'essaim, son altitude et ses dimensions.
 LI|Afficher qui écoute : des triangles de la couleur de la bande marquent les stations qui, selon PSKReporter, reçoivent en MSK144, FSK441, PSK2K ou JTMS sur 28, 50, 70, 144 et 432 MHz dans la fenêtre de temps choisie. Un clic sur un triangle affiche indicatif, locator, modes et dernier spot. Le flux MQTT de l'onglet Collecte de données doit être connecté.
 LI|Aussi les moniteurs actifs de la carte PSKReporter : triangles vides pour les stations qui apparaissent sur la carte de pskreporter.info en MSK144, FSK441, PSK2K ou JTMS mais n'ont encore reçu aucun spot (MQTT n'envoie que les stations qui reçoivent quelque chose). YA-MS interroge le service de consultation de PSKReporter une fois toutes les 5 minutes pour tous les modes, comme le demandent les règles du service ; un moniteur reste sur la carte au moins 11 minutes. Un clic sur le triangle montre l'indicatif, le locator, le logiciel de décodage et l'heure à laquelle le moniteur était actif. Activé par défaut.

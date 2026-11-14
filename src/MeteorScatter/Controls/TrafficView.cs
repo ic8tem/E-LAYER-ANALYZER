@@ -54,6 +54,13 @@ namespace YAMS
         // proiezione di Mercatore (rettangolo, nord in alto, meridiani verticali) al posto dell'azimutale equidistante
         // centrata sulla stazione; il raggio indica quanti km stanno tra il centro e il bordo piu' vicino
         public bool Mercator;
+        // Mercatore spostabile (richiesta dell'autore, 14/11/2026): si trascina con il mouse; doppio clic = torna
+        // centrata sulla stazione. L'azimutale resta fissa sulla stazione.
+        double panLat = double.NaN, panLon;
+        public event Action ViewChanged;
+        LatLon C { get { return Mercator && !double.IsNaN(panLat) ? new LatLon(panLat, panLon) : Home; } }
+        public void ResetPan() { panLat = double.NaN; InvalidateVisual(); ViewChanged?.Invoke(); }
+        Point? dragStart; Point dragLast; bool dragged;
         double hw, hh;   // mezza larghezza e mezza altezza dell'area della mappa (Mercatore)
         public List<System.Drawing.PointF[]> MapLines, MapBorders;
         public List<TrafficSpot> Spots = new List<TrafficSpot>();
@@ -78,7 +85,39 @@ namespace YAMS
             };
             PointerPressed += (s, e) =>
             {
+                if (Mercator) { dragStart = dragLast = e.GetPosition(this); dragged = false; e.Pointer.Capture(this); if (e.ClickCount == 2) ResetPan(); return; }
+                ClickAt(e.GetPosition(this));
+            };
+            PointerMoved += (s, e) =>
+            {
+                if (!Mercator || dragStart == null) return;
                 Point p = e.GetPosition(this);
+                if (!dragged && Math.Abs(p.X - dragStart.Value.X) + Math.Abs(p.Y - dragStart.Value.Y) < 5) return;
+                dragged = true;
+                double k = MercK();
+                if (k <= 0) return;
+                LatLon c = C;
+                double lon = c.Lon - (p.X - dragLast.X) / k * 180 / Math.PI;
+                double my = MercY(c.Lat) + (p.Y - dragLast.Y) / k;
+                double lat = (2 * Math.Atan(Math.Exp(my)) - Math.PI / 2) * 180 / Math.PI;
+                while (lon > 180) lon -= 360; while (lon < -180) lon += 360;
+                panLat = Math.Max(-80, Math.Min(80, lat)); panLon = lon;
+                dragLast = p;
+                InvalidateVisual();
+            };
+            PointerReleased += (s, e) =>
+            {
+                if (!Mercator || dragStart == null) return;
+                e.Pointer.Capture(null);
+                Point p0 = dragStart.Value; dragStart = null;
+                if (dragged) { ViewChanged?.Invoke(); return; }
+                ClickAt(p0);
+            };
+        }
+
+        void ClickAt(Point p)
+        {
+            {
                 TrafficSpot best = null; double bd = 14;
                 foreach (TrafficSpot t in Spots)
                 {
@@ -98,7 +137,7 @@ namespace YAMS
                 Selected = best;
                 InvalidateVisual();
                 Action<TrafficSpot> a = SpotClicked; if (a != null) a(best);
-            };
+            }
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -119,8 +158,11 @@ namespace YAMS
         {
             if (!Mercator || rad <= 0) return Astro.DistanceKm(Home, p) <= RadiusKm;
             Point q = P(p);
-            return Math.Abs(q.X - cx) <= hw && Math.Abs(q.Y - cy) <= hh && Astro.DistanceKm(Home, p) <= RadiusKm * 3;
+            return Math.Abs(q.X - cx) <= hw && Math.Abs(q.Y - cy) <= hh && Astro.DistanceKm(C, p) <= RadiusKm * 3;
         }
+
+        // scala del Mercatore: vera alla latitudine della stazione (non cambia spostando la vista)
+        double MercK() { return rad / RadiusKm * 6371.0 * Math.Cos(Home.Lat * Math.PI / 180); }
 
         static double MercY(double latDeg)
         {
@@ -133,11 +175,12 @@ namespace YAMS
             if (Mercator)
             {
                 // scala vera alla latitudine della stazione: 1 radiante di Mercatore = R cos(lat) km
-                double k = rad / RadiusKm * 6371.0 * Math.Cos(Home.Lat * Math.PI / 180);
-                double dl = p.Lon - Home.Lon;
+                LatLon c = C;
+                double k = MercK();
+                double dl = p.Lon - c.Lon;
                 while (dl > 180) dl -= 360;
                 while (dl < -180) dl += 360;
-                return new Point(cx + k * dl * Math.PI / 180, cy - k * (MercY(p.Lat) - MercY(Home.Lat)));
+                return new Point(cx + k * dl * Math.PI / 180, cy - k * (MercY(p.Lat) - MercY(c.Lat)));
             }
             double d = Astro.DistanceKm(Home, p), b = Astro.Bearing(Home, p) * Math.PI / 180;
             double r = d / RadiusKm * rad;
@@ -218,10 +261,14 @@ namespace YAMS
                     ctx.DrawText(t, new Point(cx + lr * Math.Sin(ar) - t.Width / 2, cy - lr * Math.Cos(ar) - t.Height / 2));
                 }
             }
-            // stazione al centro
-            Star(ctx, c0, 10, Color.FromRgb(225, 29, 72));
-            FormattedText hl = Ft(HomeLabel, fs, Color.FromRgb(225, 29, 72), FontWeight.Bold);
-            Label(ctx, hl, cx + 12, cy + 4, box);
+            // stazione al centro (nel Mercatore spostato: dove cade sulla mappa)
+            Point hp = Mercator ? P(Home) : c0;
+            if (!Mercator || (Math.Abs(hp.X - cx) <= hw && Math.Abs(hp.Y - cy) <= hh))
+            {
+                Star(ctx, hp, 10, Color.FromRgb(225, 29, 72));
+                FormattedText hl = Ft(HomeLabel, fs, Color.FromRgb(225, 29, 72), FontWeight.Bold);
+                Label(ctx, hl, hp.X + 12, hp.Y + 4, box);
+            }
             // didascalia e legenda
             if (!string.IsNullOrEmpty(Caption))
             {
@@ -292,7 +339,7 @@ namespace YAMS
                 Color ink = Tema.Scuro ? Color.FromRgb(225, 230, 240) : Color.FromRgb(31, 41, 55);
                 foreach (var e in new[] { (s.CallA, a), (s.CallB, b) })
                 {
-                    if (string.IsNullOrEmpty(e.Item1) || (Math.Abs(e.Item2.X - cx) < 3 && Math.Abs(e.Item2.Y - cy) < 3)) continue;
+                    if (string.IsNullOrEmpty(e.Item1) || (Math.Abs(e.Item2.X - P(Home).X) < 3 && Math.Abs(e.Item2.Y - P(Home).Y) < 3)) continue;
                     if (!labeled.Add(e.Item1) && !sel) continue;
                     FormattedText t = Ft(e.Item1, 9, ink, sel ? FontWeight.Bold : FontWeight.Normal);
                     Label(ctx, t, e.Item2.X + 6, e.Item2.Y - t.Height - 2, box);
@@ -360,12 +407,13 @@ namespace YAMS
         // reticolo di paralleli e meridiani (Mercatore), con i gradi sul bordo
         void DrawGraticule(DrawingContext ctx, IPen pen, double fs, Color ring, double W, double H)
         {
-            double k = rad / RadiusKm * 6371.0 * Math.Cos(Home.Lat * Math.PI / 180);
+            double k = MercK();
+            LatLon c0g = C;
             double degW = hw / k * 180 / Math.PI;
             double step = degW > 40 ? 20 : degW > 15 ? 10 : 5;
-            for (double lo = Math.Floor((Home.Lon - degW) / step) * step; lo <= Home.Lon + degW; lo += step)
+            for (double lo = Math.Floor((c0g.Lon - degW) / step) * step; lo <= c0g.Lon + degW; lo += step)
             {
-                double x = P(new LatLon(Home.Lat, lo)).X;
+                double x = P(new LatLon(c0g.Lat, lo)).X;
                 ctx.DrawLine(pen, new Point(x, 0), new Point(x, H));
                 double l = lo > 180 ? lo - 360 : lo < -180 ? lo + 360 : lo;
                 FormattedText t = Ft(Math.Abs(l).ToString("F0", CultureInfo.InvariantCulture) + "°" + (l < 0 ? "W" : l > 0 ? "E" : ""), fs * 0.8, ring);
@@ -373,7 +421,7 @@ namespace YAMS
             }
             for (double la = -80; la <= 80; la += step)
             {
-                double y = P(new LatLon(la, Home.Lon)).Y;
+                double y = P(new LatLon(la, c0g.Lon)).Y;
                 if (y < 0 || y > H) continue;
                 ctx.DrawLine(pen, new Point(0, y), new Point(W, y));
                 FormattedText t = Ft(Math.Abs(la).ToString("F0", CultureInfo.InvariantCulture) + "°" + (la < 0 ? "S" : la > 0 ? "N" : ""), fs * 0.8, ring);
@@ -396,7 +444,7 @@ namespace YAMS
                     foreach (System.Drawing.PointF q in l)
                     {
                         LatLon ll = new LatLon(q.Y, q.X);
-                        if (Astro.DistanceKm(Home, ll) > lim) { if (open) { c.EndFigure(false); open = false; } continue; }
+                        if (Astro.DistanceKm(Mercator ? C : Home, ll) > lim) { if (open) { c.EndFigure(false); open = false; } continue; }
                         Point p = P(ll);
                         if (Mercator && open && Math.Abs(p.X - lastX) > hw) { c.EndFigure(false); open = false; }   // salto dell'antimeridiano
                         lastX = p.X;

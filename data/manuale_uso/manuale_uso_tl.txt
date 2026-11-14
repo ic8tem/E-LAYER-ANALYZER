@@ -1,5 +1,5 @@
 TITLE|Manwal ng paggamit ng YA-MS
-SUB|Bersyon 1.8.13 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+SUB|Bersyon 1.8.14 - inihanda ni Costantino IC8TEM - Nobyembre 2026
 H1|1. Panimula
 H2|1.1 Para saan ang YA-MS
 P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Live at real-time na datos
 H2|9.1 Live na trapiko
 P|Isang azimuthal equidistant na mapa na nakasentro sa iyong istasyon na may lahat ng nakolektang trapiko ng meteor scatter: para sa bawat QSO, ang landas sa kulay ng banda (28 kayumanggi, 50 berde, 70 cyan, 144 kahel, 222 rosas, 432 lila), ang dalawang istasyon at ang sona ng ulan ng mga pinaka-malamang na bakas sa oras na iyon. Kumukutitap nang isang minuto ang mga bagong dating na spot.
 LI|Radius ng mapa: 600-3500 km. Mga spot na ipapakita: huling 3, 15 o 30 minuto, huling oras, huling 3 o 24 na oras.
+LI|Naililipat ang mapang Mercator sa pag-drag gamit ang mouse; double click: muling nakagitna sa aking istasyon. Nananatiling nakagitna sa aking istasyon ang azimuthal.
 LI|Ang pag-click sa isang landas o sa isang hilera ng talahanayan ay nagha-highlight sa QSO at nagpapakita ng gitna ng sona ng ulan, ng taas nito at ng laki nito.
 LI|Ipakita kung sino ang nakikinig: mga tatsulok na kulay ng banda ang nagmamarka sa mga istasyong, ayon sa PSKReporter, tumatanggap ng MSK144, FSK441, PSK2K o JTMS sa 28, 50, 70, 144 at 432 MHz sa napiling panahon. Ang pag-click sa tatsulok ay nagpapakita ng call sign, locator, mga mode at huling spot. Dapat nakakonekta ang daloy na MQTT sa tab na Pangongolekta ng data.
 LI|Pati ang mga aktibong monitor sa mapa ng PSKReporter: mga hungkag na tatsulok para sa mga istasyong lumalabas sa mapa ng pskreporter.info sa MSK144, FSK441, PSK2K o JTMS pero wala pang natatanggap na spot (ang MQTT ay nagpapadala lang ng mga istasyong may natatanggap). Tinatanong ng YA-MS ang serbisyong pang-query ng PSKReporter nang isang beses bawat 5 minuto para sa lahat ng mode, ayon sa patakaran ng serbisyo; nananatili ang isang monitor sa mapa nang hindi bababa sa 11 minuto. Ang click sa tatsulok ay nagpapakita ng callsign, locator, programang pang-decode at oras na aktibo ang monitor. Naka-on mula sa simula.

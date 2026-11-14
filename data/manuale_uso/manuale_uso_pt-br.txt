@@ -1,5 +1,5 @@
 TITLE|Manual de uso do YA-MS
-SUB|Versão 1.8.13 - de autoria de Costantino IC8TEM - novembro de 2026
+SUB|Versão 1.8.14 - de autoria de Costantino IC8TEM - novembro de 2026
 H1|1. Introdução
 H2|1.1 Para que serve o YA-MS
 P|O YA-MS ajuda a prever e a acompanhar ao vivo as condições de meteor scatter entre a sua estação e um correspondente, de 28 a 432 MHz. Para cada chuva de meteoros ativa, ele indica o quanto a posição do seu radiante favorece o seu trajeto (a eficiência), em que horários, de que lado do trajeto chegam as reflexões e para onde convém apontar a antena. Ao lado da previsão, mostra os dados medidos ao vivo: as contagens do radar de meteoros de Collm, as câmeras da Global Meteor Network, o radar CMOR, o transmissor GRAVES e o tráfego de meteor scatter coletado dos clusters e do PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Ao vivo e dados em tempo real
 H2|9.1 Tráfego ao vivo
 P|Um mapa azimutal equidistante centrado na sua estação com todo o tráfego de meteor scatter coletado: para cada contato, o trajeto na cor da banda (28 marrom, 50 verde, 70 ciano, 144 laranja, 222 rosa, 432 violeta), as duas estações e a zona da chuva dos rastros mais prováveis naquele horário. Os spots recém-chegados piscam por um minuto.
 LI|Raio do mapa: 600-3500 km. Spots a mostrar: últimos 3, 15 ou 30 minutos, última hora, últimas 3 ou 24 horas.
+LI|O mapa de Mercator se move arrastando com o mouse; clique duplo: de novo centrado na minha estação. O azimutal fica centrado na minha estação.
 LI|Um clique em um trajeto ou em uma linha da tabela destaca o contato e mostra o centro da zona da chuva, a sua altura e as suas dimensões.
 LI|Mostrar quem está ouvindo: triângulos na cor da banda marcam as estações que, segundo o PSKReporter, recebem em MSK144, FSK441, PSK2K ou JTMS em 28, 50, 70, 144 e 432 MHz na janela de tempo escolhida. Um clique em um triângulo mostra indicativo, locator, modos e último spot. O fluxo MQTT da aba Coleta de dados precisa estar conectado.
 LI|Também os monitores ativos do mapa do PSKReporter: triângulos vazios para as estações que aparecem no mapa de pskreporter.info em MSK144, FSK441, PSK2K ou JTMS mas ainda não receberam nenhum spot (o MQTT só envia estações que recebem algo). O YA-MS consulta o serviço de consulta do PSKReporter uma vez a cada 5 minutos para todos os modos, como pedem as regras do serviço; um monitor fica no mapa por pelo menos 11 minutos. Um clique no triângulo mostra indicativo, locator, programa de decodificação e o horário em que o monitor estava ativo. Ligado por padrão.

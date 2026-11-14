@@ -2,7 +2,7 @@
 
 [← Home](Home-is)
 
-Þessi flipi inniheldur allt **YA-MS 1.8.13**, meteor scatter-forrit IC8TEM: himinkúla með geislapunktunum, ratsjárflæði SKiYMET (Collm, Sodankylä), útreikningur á nýtni drífa, tilraunaútfærsla spánna, rúmfræði og deyfing, GRAVES, reitakort, **Drífur í beinni** (ZHR mælt af Global Meteor Network og geislapunktar frá CMOR-ratsjánni), **kort af lindum** (Collm, Sodankylä, GRAVES og CMOR miðað við stöðina) og skjalið **Skýring á útreikningi nýtninnar** með formúlunum.
+Þessi flipi inniheldur allt **YA-MS 1.8.14**, meteor scatter-forrit IC8TEM: himinkúla með geislapunktunum, ratsjárflæði SKiYMET (Collm, Sodankylä), útreikningur á nýtni drífa, tilraunaútfærsla spánna, rúmfræði og deyfing, GRAVES, reitakort, **Drífur í beinni** (ZHR mælt af Global Meteor Network og geislapunktar frá CMOR-ratsjánni), **kort af lindum** (Collm, Sodankylä, GRAVES og CMOR miðað við stöðina) og skjalið **Skýring á útreikningi nýtninnar** með formúlunum.
 
 YA-MS 1.5.0 bætir við flipanum **Gagnasöfnun** (meteor scatter-spot síuð eftir MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Innan E-LAYER ANALYZER opnar hann engar eigin telnet-lotur: hann tekur við línunum frá lotunum í DATA COLLECTION, svo engar tvöfaldar innskráningar verða með sama kallmerki.
 

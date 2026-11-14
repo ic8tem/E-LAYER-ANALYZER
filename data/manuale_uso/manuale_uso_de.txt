@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von YA-MS
-SUB|Version 1.8.13 - von Costantino IC8TEM - November 2026
+SUB|Version 1.8.14 - von Costantino IC8TEM - November 2026
 H1|1. Einführung
 H2|1.1 Wozu YA-MS dient
 P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
@@ -160,6 +160,7 @@ H1|9. Live und Echtzeitdaten
 H2|9.1 Verkehr live
 P|Eine mittabstandstreue Azimutalkarte, zentriert auf deine Station, mit dem gesamten gesammelten Meteorscatter-Verkehr: für jede Verbindung die Strecke in der Farbe des Bandes (28 braun, 50 grün, 70 cyan, 144 orange, 222 rosa, 432 violett), die beiden Stationen und die Stromzone der wahrscheinlichsten Spuren zu dieser Stunde. Neu eingetroffene Spots blinken eine Minute lang.
 LI|Kartenradius: 600-3500 km. Anzuzeigende Spots: letzte 3, 15 oder 30 Minuten, letzte Stunde, letzte 3 oder 24 Stunden.
+LI|Die Mercator-Karte lässt sich mit der Maus verschieben; Doppelklick: wieder auf meine Station zentriert. Die azimutale Karte bleibt auf meine Station zentriert.
 LI|Ein Klick auf eine Strecke oder auf eine Zeile der Tabelle hebt die Verbindung hervor und zeigt den Mittelpunkt der Stromzone, ihre Höhe und ihre Ausdehnung.
 LI|Zeigen, wer hört: Dreiecke in der Bandfarbe markieren die Stationen, die laut PSKReporter im gewählten Zeitfenster MSK144, FSK441, PSK2K oder JTMS auf 28, 50, 70, 144 und 432 MHz empfangen. Ein Klick auf ein Dreieck zeigt Rufzeichen, Locator, Betriebsarten und letzten Spot. Der MQTT-Strom im Reiter Datensammlung muss verbunden sein.
 LI|Auch die aktiven Monitore der PSKReporter-Karte: leere Dreiecke für die Stationen, die auf der Karte von pskreporter.info in MSK144, FSK441, PSK2K oder JTMS erscheinen, aber noch keinen Spot empfangen haben (MQTT sendet nur Stationen, die etwas empfangen). YA-MS fragt den Abfragedienst von PSKReporter alle 5 Minuten einmal für alle Betriebsarten ab, wie es die Regeln des Dienstes verlangen; ein Monitor bleibt mindestens 11 Minuten auf der Karte. Ein Klick auf das Dreieck zeigt Rufzeichen, Locator, Dekodierprogramm und die Uhrzeit, zu der der Monitor aktiv war. Standardmäßig eingeschaltet.

@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Versie 1.8.13 - door Costantino IC8TEM - november 2026
+SUB|Versie 1.8.14 - door Costantino IC8TEM - november 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor dient YA-MS
 P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
@@ -160,6 +160,7 @@ H1|9. Live en realtimegegevens
 H2|9.1 Verkeer live
 P|Een azimutale equidistante kaart gecentreerd op jouw station met al het verzamelde meteorscatter-verkeer: voor elke verbinding het traject in de kleur van de band (28 bruin, 50 groen, 70 cyaan, 144 oranje, 222 roze, 432 paars), de twee stations en de wolk van de meest waarschijnlijke sporen op dat uur. Net binnengekomen spots knipperen een minuut lang.
 LI|Kaartstraal: 600-3500 km. Te tonen spots: laatste 3, 15 of 30 minuten, laatste uur, laatste 3 of 24 uur.
+LI|De Mercatorkaart verschuif je door hem met de muis te slepen; dubbelklik: weer gecentreerd op mijn station. De azimutale kaart blijft op mijn station gecentreerd.
 LI|Een klik op een traject of op een regel van de tabel markeert de verbinding en toont het midden van de wolk, de hoogte en de afmetingen ervan.
 LI|Tonen wie luistert: driehoeken in de bandkleur markeren de stations die volgens PSKReporter in het gekozen tijdvenster MSK144, FSK441, PSK2K of JTMS ontvangen op 28, 50, 70, 144 en 432 MHz. Een klik op een driehoek toont roepnaam, locator, modes en laatste spot. De MQTT-stroom in het tabblad Gegevensverzameling moet verbonden zijn.
 LI|Ook de actieve monitors van de PSKReporter-kaart: lege driehoeken voor de stations die op de kaart van pskreporter.info in MSK144, FSK441, PSK2K of JTMS staan maar nog geen spot hebben ontvangen (MQTT stuurt alleen stations die iets ontvangen). YA-MS bevraagt de opvraagdienst van PSKReporter eens per 5 minuten voor alle modi, zoals de regels van de dienst vragen; een monitor blijft minstens 11 minuten op de kaart. Een klik op de driehoek toont roepnaam, locator, decodeerprogramma en het tijdstip waarop de monitor actief was. Standaard aan.

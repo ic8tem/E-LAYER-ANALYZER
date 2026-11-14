@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.13 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.14 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -160,6 +160,7 @@ H1|9. Live and real-time data
 H2|9.1 Live traffic
 P|An azimuthal equidistant map centred on your station with all the meteor scatter traffic collected: for each contact the path in the colour of the band (28 brown, 50 green, 70 cyan, 144 orange, 222 pink, 432 purple), the two stations and the shower zone of the most probable trails at that hour. Newly arrived spots flash for one minute.
 LI|Map radius: 600-3500 km. Spots to show: last 3, 15 or 30 minutes, last hour, last 3 or 24 hours.
+LI|The Mercator map moves by dragging it with the mouse; double click: centred on my station again. The azimuthal map stays centred on my station.
 LI|Clicking a path or a row of the table highlights the contact and shows the centre of the shower zone, its height and its size.
 LI|Show who is listening: triangles in the band colour mark the stations that, according to PSKReporter, are receiving in MSK144, FSK441, PSK2K or JTMS on 28, 50, 70, 144 and 432 MHz in the chosen time window. A click on a triangle shows call, locator, modes and last spot. The MQTT feed of the Data collection tab must be connected.
 LI|Also the active monitors of the PSKReporter map: hollow triangles for the stations that appear on the pskreporter.info map in MSK144, FSK441, PSK2K or JTMS but have not received any spot yet (MQTT only sends stations that receive something). YA-MS queries the PSKReporter retrieval service once every 5 minutes for all modes, as the service rules ask; a monitor stays on the map for at least 11 minutes. A click on the triangle shows callsign, locator, decoding software and the time the monitor was active. On by default.
