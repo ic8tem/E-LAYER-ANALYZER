@@ -9,7 +9,7 @@ Mula sa bersiyon 0.4.18, tinitipon ng tab na **MGA SETTING** ang mga pangkalahat
 | Bahagi | Ang itinatakda mo |
 |---|---|
 | Istasyon | Callsign, locator at taas, ang mga ito rin sa bar sa itaas; kinukumpirma ang mga ito ng **Ilapat** para sa lahat ng tab. |
-| Hitsura | Wika, kulay at **laki ng titik ng buong programa** (85-140 %, gaya ng sa YA-MS). Muling binubuo ng wika at kulay ang window: nananatili ang mga setting at ang mga spot. |
+| Hitsura | Wika, kulay (ang mga scheme ng YAEC at YA-MS at, mula sa bersiyon 0.5.0, ang anim na tema ng IP-TRX-CTRL: Maliwanag, Gabi, Itim, Asul, Lila, Berde) at **laki ng titik ng buong programa** (85-140 %, gaya ng sa YA-MS). Muling binubuo ng wika at kulay ang window: nananatili ang mga setting at ang mga spot. |
 | Mga mapa at datos ng pagtataya | Ang kontinente, ang parehong menu ng bar ng mga tab. |
 | Oras | Kalagayan ng NTP at ang pagkakaiba ng oras ng server at ng orasan ng PC. |
 | Mga update | Pagsusuri sa GitHub sa pagbukas at bawat 6 na oras, awtomatiko at tahimik na update, button na **Suriin ngayon**. Hindi para sa mga package ng sistema (.deb, .rpm, Arch, Slackware) ang awtomatikong update. |

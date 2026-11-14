@@ -9,7 +9,7 @@ Od wersji 0.4.18 zakładka **USTAWIENIA** zbiera ogólne opcje programu i kierow
 | Sekcja | Co ustawiasz |
 |---|---|
 | Stacja | Znak wywoławczy, lokator i wysokość, te same co na górnym pasku; **Zastosuj** zatwierdza je dla wszystkich zakładek. |
-| Wygląd | Język, kolorystyka i **rozmiar czcionki całego programu** (85-140 %, jak w YA-MS). Język i kolory przebudowują okno: ustawienia i spoty zostają zachowane. |
+| Wygląd | Język, kolorystyka (schematy YAEC i YA-MS oraz, od wersji 0.5.0, sześć motywów IP-TRX-CTRL: Jasny, Noc, Czarny, Niebieski, Fioletowy, Zielony) i **rozmiar czcionki całego programu** (85-140 %, jak w YA-MS). Język i kolory przebudowują okno: ustawienia i spoty zostają zachowane. |
 | Mapy i dane prognostyczne | Kontynent, to samo menu co na pasku zakładek. |
 | Czas | Stan NTP i różnica między czasem serwerów a zegarem PC. |
 | Aktualizacje | Sprawdzanie na GitHubie przy starcie i co 6 godzin, automatyczna i cicha aktualizacja, przycisk **Sprawdź teraz**. Automatyczne aktualizacje nie dotyczą pakietów systemowych (.deb, .rpm, Arch, Slackware). |

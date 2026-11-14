@@ -28,7 +28,7 @@ Det finns **bara en datainsamling för hela programmet**: varje spot passerar fi
 
 JTDX-databas för **anropssignal → lokator** (över en miljon anropssignaler) i `data/call3.txt`. Knapparna **Läs om** och **Importera en ny CALL3.TXT**. Lokatorer med 6 tecken som läses i spotkommentarer läggs till i `data/call3_nuovi.txt`.
 
-Från version 0.4.16 finns en enda CALL3-databas för hela programmet, den i YA-MS Datainsamling (fliken METEOR SCATTER), med samma regler som LIVETROPOVHF: uppdatering från MMMonVHF, handposter, tillagda filer, klusterkorrigeringar, inlärda lokatorer och G7VRD var 6:e timme; korrigeringarna skrivs in i data/call3.txt och lokatorerna i data/call3_nuovi.txt importeras en gång. Spottar från WSJT-X, JTDX och MSHV kommer också via UDP (källa WSJT-X UDP, port 2237 vidarebefordrad till 2238).
+Från version 0.4.16 finns en enda CALL3-databas för hela programmet, den i YA-MS Datainsamling (fliken METEOR SCATTER), med samma regler som LIVETROPOVHF: uppdatering från MMMonVHF var 12:e timme, handposter, tillagda filer, klusterkorrigeringar, inlärda lokatorer, G7VRD var 30:e minut och, som sista källa, JTDX-lagret (data/grid_data.bin), som aldrig skrivs i call3.txt; korrigeringarna skrivs in i data/call3.txt och lokatorerna i data/call3_nuovi.txt importeras en gång. Spottar från WSJT-X, JTDX och MSHV kommer också via UDP (källa WSJT-X UDP, port 2237 vidarebefordrad till 2238).
 
 Dessa filter från YA-MS (CW, minsta avstånd, frekvensfönster, MS-moder, band) gäller bara fliken METEOR SCATTER: de avgör vilka spottar som kommer in i dess insamling. De andra flikarna får alla spottar och använder sina egna filter.
 

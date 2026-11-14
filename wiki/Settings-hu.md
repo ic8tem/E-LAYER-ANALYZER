@@ -9,7 +9,7 @@ A 0.4.18-as verziótól a **BEÁLLÍTÁSOK** fül a program általános beállí
 | Szakasz | Mit állít be |
 |---|---|
 | Állomás | Hívójel, lokátor és magasság, ugyanazok, mint a felső sávban; az **Alkalmaz** gomb minden fülre érvényesíti őket. |
-| Megjelenés | Nyelv, színséma és **az egész program betűmérete** (85-140 %, mint a YA-MS-ben). A nyelv és a színek újraépítik az ablakot: a beállítások és a spotok megmaradnak. |
+| Megjelenés | Nyelv, színséma (a YAEC és a YA-MS sémái, a 0.5.0-s verziótól pedig az IP-TRX-CTRL hat témája: Világos, Éjszaka, Fekete, Kék, Lila, Zöld) és **az egész program betűmérete** (85-140 %, mint a YA-MS-ben). A nyelv és a színek újraépítik az ablakot: a beállítások és a spotok megmaradnak. |
 | Térképek és előrejelzési adatok | A kontinens, ugyanaz a menü, mint a fülsávban. |
 | Idő | Az NTP állapota és a szerverek ideje és a PC órája közötti különbség. |
 | Frissítések | Ellenőrzés a GitHubon indításkor és 6 óránként, automatikus és csendes frissítés, **Ellenőrzés most** gomb. Az automatikus frissítés a rendszercsomagokra (.deb, .rpm, Arch, Slackware) nem vonatkozik. |

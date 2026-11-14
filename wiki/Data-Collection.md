@@ -28,7 +28,7 @@ Data collection is **one for the whole program**: every spot goes through the fi
 
 JTDX **callsign → locator** database (over a million callsigns) in `data/call3.txt`. Buttons **Reload** and **Import a new CALL3.TXT**. 6-character locators read in spot comments are added to `data/call3_nuovi.txt`.
 
-From version 0.4.16 there is a single CALL3 database for the whole program, the one of the YA-MS Data collection (METEOR SCATTER tab), with the same rules as LIVETROPOVHF: update from MMMonVHF, manual entries, added files, cluster corrections, learned locators and G7VRD every 6 hours; corrections are written into data/call3.txt and the locators of data/call3_nuovi.txt are imported once. Spots from WSJT-X, JTDX and MSHV also arrive via UDP (source WSJT-X UDP, port 2237 forwarded to 2238).
+From version 0.4.16 there is a single CALL3 database for the whole program, the one of the YA-MS Data collection (METEOR SCATTER tab), with the same rules as LIVETROPOVHF: update from MMMonVHF every 12 hours, manual entries, added files, cluster corrections, learned locators, G7VRD every 30 minutes and, as the last source, the JTDX layer (data/grid_data.bin), never written into call3.txt; corrections are written into data/call3.txt and the locators of data/call3_nuovi.txt are imported once. Spots from WSJT-X, JTDX and MSHV also arrive via UDP (source WSJT-X UDP, port 2237 forwarded to 2238).
 
 These filters, which come from YA-MS (CW, minimum distance, frequency windows, MS modes, bands), apply only to the METEOR SCATTER tab: they decide which spots enter its collection. The other tabs receive all spots and use their own filters.
 

@@ -28,7 +28,7 @@ Gagnasöfnunin er **aðeins ein fyrir allt forritið**: hvert spot fer í gegnum
 
 Gagnagrunnur JTDX fyrir **kallmerki → locator** (yfir milljón kallmerki) í `data/call3.txt`. Hnapparnir **Endurhlaða** og **Flytja inn nýja CALL3.TXT**. 6 stafa locatorum sem lesnir eru úr athugasemdum spota er bætt við `data/call3_nuovi.txt`.
 
-Frá útgáfu 0.4.16 er einn CALL3-gagnagrunnur fyrir allt forritið, sá úr Gagnasöfnun YA-MS (flipinn METEOR SCATTER), með sömu reglum og LIVETROPOVHF: uppfærsla frá MMMonVHF, handskráningar, viðbættar skrár, leiðréttingar úr klasa, lærðir reitir og G7VRD á 6 klukkustunda fresti; leiðréttingar eru skrifaðar í data/call3.txt og reitirnir úr data/call3_nuovi.txt fluttir inn einu sinni. Spott frá WSJT-X, JTDX og MSHV koma líka um UDP (heimild WSJT-X UDP, gátt 2237 framsend á 2238).
+Frá útgáfu 0.4.16 er einn CALL3-gagnagrunnur fyrir allt forritið, sá úr Gagnasöfnun YA-MS (flipinn METEOR SCATTER), með sömu reglum og LIVETROPOVHF: uppfærsla frá MMMonVHF á 12 klukkustunda fresti, handskráningar, viðbættar skrár, leiðréttingar úr klasa, lærðir reitir, G7VRD á 30 mínútna fresti og, sem síðasta heimild, JTDX-lagið (data/grid_data.bin), aldrei skrifað í call3.txt; leiðréttingar eru skrifaðar í data/call3.txt og reitirnir úr data/call3_nuovi.txt fluttir inn einu sinni. Spott frá WSJT-X, JTDX og MSHV koma líka um UDP (heimild WSJT-X UDP, gátt 2237 framsend á 2238).
 
 Þessar síur úr YA-MS (CW, lágmarksfjarlægð, tíðnigluggar, MS-hættir, bönd) gilda aðeins um flipann METEOR SCATTER: þær ráða hvaða spott fara í söfnun hans. Hinir fliparnir fá öll spott og nota sínar eigin síur.
 

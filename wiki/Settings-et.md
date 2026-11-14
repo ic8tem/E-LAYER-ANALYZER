@@ -9,7 +9,7 @@ Alates versioonist 0.4.18 koondab sakk **SEADED** programmi üldised valikud ja 
 | Jaotis | Mida seadistad |
 |---|---|
 | Jaam | Kutsung, lokaator ja kõrgus, samad mis ülemisel ribal; **Rakenda** kinnitab need kõigile sakkidele. |
-| Välimus | Keel, värviskeem ja **kogu programmi kirjasuurus** (85-140 %, nagu YA-MS-is). Keel ja värvid ehitavad akna uuesti üles: seaded ja spotid säilivad. |
+| Välimus | Keel, värviskeem (YAEC-i ja YA-MS-i skeemid ning alates versioonist 0.5.0 kuus IP-TRX-CTRL-i teemat: Hele, Öö, Must, Sinine, Lilla, Roheline) ja **kogu programmi kirjasuurus** (85-140 %, nagu YA-MS-is). Keel ja värvid ehitavad akna uuesti üles: seaded ja spotid säilivad. |
 | Kaardid ja prognoosiandmed | Kontinent, sama menüü mis sakiribal. |
 | Aeg | NTP olek ning serverite aja ja arvuti kella erinevus. |
 | Uuendused | Kontroll GitHubis käivitamisel ja iga 6 tunni järel, automaatne ja vaikne uuendamine, nupp **Kontrolli kohe**. Automaatsed uuendused ei kehti süsteemipakettide (.deb, .rpm, Arch, Slackware) kohta. |

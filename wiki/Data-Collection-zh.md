@@ -28,7 +28,7 @@
 
 JTDX 的**呼号 → 网格坐标**数据库（超过一百万个呼号），位于 `data/call3.txt`。按钮：**重新载入**和**导入新的 CALL3.TXT**。从 spot 注释中读到的 6 位网格坐标会添加到 `data/call3_nuovi.txt` 中。
 
-从 0.4.16 版起，整个程序只有一个 CALL3 数据库，即 YA-MS 数据收集（METEOR SCATTER 选项卡）中的数据库，规则与 LIVETROPOVHF 相同：从 MMMonVHF 更新、手工条目、添加的文件、集群修正、学到的定位符以及每 6 小时一次的 G7VRD；修正写入 data/call3.txt，data/call3_nuovi.txt 中的定位符导入一次。WSJT-X、JTDX 和 MSHV 的报告也可通过 UDP 接收（来源 WSJT-X UDP，端口 2237，转发到 2238）。
+从 0.4.16 版起，整个程序只有一个 CALL3 数据库，即 YA-MS 数据收集（METEOR SCATTER 选项卡）中的数据库，规则与 LIVETROPOVHF 相同：每 12 小时从 MMMonVHF 更新、手工条目、添加的文件、集群修正、学到的定位符、每 30 分钟一次的 G7VRD，以及作为最后来源的 JTDX 层（data/grid_data.bin），它从不写入 call3.txt；修正写入 data/call3.txt，data/call3_nuovi.txt 中的定位符导入一次。WSJT-X、JTDX 和 MSHV 的报告也可通过 UDP 接收（来源 WSJT-X UDP，端口 2237，转发到 2238）。
 
 这些来自 YA-MS 的过滤条件（CW、最小距离、频率窗口、MS 模式、波段）只适用于 METEOR SCATTER 选项卡：它们决定哪些报告进入该选项卡的收集。其他选项卡接收全部报告并使用各自的过滤条件。
 

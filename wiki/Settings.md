@@ -9,7 +9,7 @@ From version 0.4.18 the **SETTINGS** tab gathers the general options of the prog
 | Section | What you set |
 |---|---|
 | Station | Callsign, locator and height, the same as in the top bar; **Apply** confirms them for all tabs. |
-| Appearance | Language, colour scheme and **font size of the whole program** (85-140 %, as in YA-MS). Language and colours rebuild the window: settings and spots are kept. |
+| Appearance | Language, colour scheme (the YAEC and YA-MS schemes and, from version 0.5.0, the six IP-TRX-CTRL themes: Light, Night, Black, Blue, Purple, Green) and **font size of the whole program** (85-140 %, as in YA-MS). Language and colours rebuild the window: settings and spots are kept. |
 | Maps and forecast data | The continent, the same menu as in the tab bar. |
 | Time | NTP status and the difference between the server time and the PC clock. |
 | Updates | Check on GitHub at start-up and every 6 hours, automatic and silent update, **Check now** button. Automatic updates do not apply to system packages (.deb, .rpm, Arch, Slackware). |

@@ -9,7 +9,7 @@ Od verze 0.4.18 soustřeďuje karta **NASTAVENÍ** obecné volby programu a tř�
 | Sekce | Co nastavujete |
 |---|---|
 | Stanice | Značka, lokátor a výška, stejné jako v horní liště; **Použít** je potvrdí pro všechny karty. |
-| Vzhled | Jazyk, barevné schéma a **velikost písma celého programu** (85-140 %, jako v YA-MS). Jazyk a barvy znovu sestaví okno: nastavení a spoty zůstanou. |
+| Vzhled | Jazyk, barevné schéma (schémata YAEC a YA-MS a od verze 0.5.0 šest motivů IP-TRX-CTRL: Světlý, Noc, Černý, Modrá, Fialová, Zelená) a **velikost písma celého programu** (85-140 %, jako v YA-MS). Jazyk a barvy znovu sestaví okno: nastavení a spoty zůstanou. |
 | Mapy a předpovědní data | Kontinent, stejná nabídka jako v liště karet. |
 | Čas | Stav NTP a rozdíl mezi časem serverů a hodinami PC. |
 | Aktualizace | Kontrola na GitHubu při spuštění a každých 6 hodin, automatická a tichá aktualizace, tlačítko **Zkontrolovat nyní**. Automatické aktualizace neplatí pro systémové balíčky (.deb, .rpm, Arch, Slackware). |

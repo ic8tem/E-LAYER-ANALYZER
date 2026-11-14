@@ -28,7 +28,7 @@ Veri toplama **tüm program için tektir**: her spot filtrelerden geçer ve her 
 
 `data/call3.txt` içinde JTDX **çağrı işareti → lokatör** veritabanı (bir milyondan fazla çağrı işareti). **Yeniden yükle** ve **Yeni CALL3.TXT içe aktar** düğmeleri. Spot yorumlarında okunan 6 karakterli lokatörler `data/call3_nuovi.txt` dosyasına eklenir.
 
-0.4.16 sürümünden itibaren tüm program için tek bir CALL3 veritabanı vardır: YA-MS Veri toplama'nınki (METEOR SCATTER sekmesi), LIVETROPOVHF ile aynı kurallarla: MMMonVHF'den güncelleme, elle girişler, eklenen dosyalar, küme düzeltmeleri, öğrenilen lokatörler ve 6 saatte bir G7VRD; düzeltmeler data/call3.txt içine yazılır ve data/call3_nuovi.txt lokatörleri bir kez içe aktarılır. WSJT-X, JTDX ve MSHV spotları UDP ile de gelir (kaynak WSJT-X UDP, 2237 portu, 2238'e yönlendirme).
+0.4.16 sürümünden itibaren tüm program için tek bir CALL3 veritabanı vardır: YA-MS Veri toplama'nınki (METEOR SCATTER sekmesi), LIVETROPOVHF ile aynı kurallarla: 12 saatte bir MMMonVHF'den güncelleme, elle girişler, eklenen dosyalar, küme düzeltmeleri, öğrenilen lokatörler, 30 dakikada bir G7VRD ve son kaynak olarak, call3.txt'ye asla yazılmayan JTDX katmanı (data/grid_data.bin); düzeltmeler data/call3.txt içine yazılır ve data/call3_nuovi.txt lokatörleri bir kez içe aktarılır. WSJT-X, JTDX ve MSHV spotları UDP ile de gelir (kaynak WSJT-X UDP, 2237 portu, 2238'e yönlendirme).
 
 YA-MS'ten gelen bu filtreler (CW, en az mesafe, frekans pencereleri, MS modları, bantlar) yalnızca METEOR SCATTER sekmesi için geçerlidir: hangi spotların onun toplamasına gireceğine karar verirler. Diğer sekmeler tüm spotları alır ve kendi filtrelerini kullanır.
 

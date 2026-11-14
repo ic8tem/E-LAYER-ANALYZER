@@ -28,7 +28,7 @@ Sběr dat je **jediný pro celý program**: každý spot prochází filtry a dá
 
 Databáze **značka → lokátor** z JTDX (přes milion značek) v `data/call3.txt`. Tlačítka **Znovu načíst** a **Importovat nový CALL3.TXT**. 6znakové lokátory přečtené v komentářích spotů se přidávají do `data/call3_nuovi.txt`.
 
-Od verze 0.4.16 má celý program jedinou databázi CALL3, tu ze Sběru dat YA-MS (karta METEOR SCATTER), se stejnými pravidly jako LIVETROPOVHF: aktualizace z MMMonVHF, ruční záznamy, přidané soubory, opravy z clusteru, naučené lokátory a G7VRD každých 6 hodin; opravy se zapisují do data/call3.txt a lokátory z data/call3_nuovi.txt se jednou importují. Spoty z WSJT-X, JTDX a MSHV přicházejí i přes UDP (zdroj WSJT-X UDP, port 2237 s přeposíláním na 2238).
+Od verze 0.4.16 má celý program jedinou databázi CALL3, tu ze Sběru dat YA-MS (karta METEOR SCATTER), se stejnými pravidly jako LIVETROPOVHF: aktualizace z MMMonVHF každých 12 hodin, ruční záznamy, přidané soubory, opravy z clusteru, naučené lokátory, G7VRD každých 30 minut a jako poslední zdroj vrstva JTDX (data/grid_data.bin), nikdy nezapisovaná do call3.txt; opravy se zapisují do data/call3.txt a lokátory z data/call3_nuovi.txt se jednou importují. Spoty z WSJT-X, JTDX a MSHV přicházejí i přes UDP (zdroj WSJT-X UDP, port 2237 s přeposíláním na 2238).
 
 Tyto filtry z YA-MS (CW, minimální vzdálenost, frekvenční okna, režimy MS, pásma) platí jen pro kartu METEOR SCATTER: rozhodují, které spoty vstoupí do jejího sběru. Ostatní karty dostávají všechny spoty a používají své vlastní filtry.
 

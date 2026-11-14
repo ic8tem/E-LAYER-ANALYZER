@@ -9,7 +9,7 @@ Depuis la version 0.4.18, l'onglet **RÉGLAGES** rassemble les options général
 | Section | Ce que l'on règle |
 |---|---|
 | Station | Indicatif, locator et altitude, les mêmes que dans la barre du haut ; **Appliquer** les confirme pour tous les onglets. |
-| Apparence | Langue, couleurs et **taille des caractères de tout le programme** (85-140 %, comme dans YA-MS). La langue et les couleurs reconstruisent la fenêtre : les réglages et les spots sont conservés. |
+| Apparence | Langue, couleurs (les schémas de YAEC et de YA-MS et, depuis la version 0.5.0, les six thèmes d'IP-TRX-CTRL : Clair, Nuit, Noir, Bleu, Violet, Vert) et **taille des caractères de tout le programme** (85-140 %, comme dans YA-MS). La langue et les couleurs reconstruisent la fenêtre : les réglages et les spots sont conservés. |
 | Cartes et données de prévision | Le continent, le même menu que dans la barre des onglets. |
 | Heure | État NTP et différence entre l'heure des serveurs et l'horloge du PC. |
 | Mises à jour | Vérification sur GitHub au démarrage et toutes les 6 heures, mise à jour automatique et silencieuse, bouton **Vérifier maintenant**. Les mises à jour automatiques ne valent pas pour les paquets système (.deb, .rpm, Arch, Slackware). |

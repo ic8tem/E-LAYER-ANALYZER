@@ -158,12 +158,13 @@ H1|6. ADIF 日志
 TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 报告（用用户名和密码下载，密码从不保存）与日志的 ADIF 文件按呼号、频段、日期和时间合并；确认信息累加。
 TAG|SCELTA|只包括 28 MHz 及以上的频段，每个频段单独列出，不做合并。颜色：橙色 = 已通联，蓝色 = 已通过 QSL 确认，绿色 = 已通过 LoTW 确认。可按传播模式过滤（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。
 H1|7. 配色
-TAG|FONTE|配色方案与 YA-MS 1.5.0 相同，后者沿用 YAEC [26]：浅色、夜间、黑色、八种粉彩和流星余迹。配色方案在右上角选择，窗口立即重建；在等反射线视图中，深色方案使用彩色带，浅色方案使用粗线（4.4）。
-H1|8. 流星散射（YA-MS 1.8.11）与语言
-TAG|FONTE|METEOR SCATTER 选项卡包含完整的 YA-MS 1.8.11 [5]，以及它的“效率计算说明”文档和它的来源。脚本 tools/sync_yams.py 复制 YA-MS 的每个新版本并将其转换为面板，不改动其计算。
+TAG|FONTE|配色方案与 YA-MS 1.5.0 相同，后者沿用 YAEC [26]：浅色、夜间、黑色、八种粉彩和流星余迹。从 0.5.0 版起，应作者要求，还有 IP-TRX-CTRL 的六种主题（浅色、夜间、黑色、蓝色、紫色和绿色），使用该程序的颜色值；蓝色、紫色和绿色也是 YAEC 额外的颜色。在 IP-TRX-CTRL 的主题中，选项卡栏和状态栏使用频率显示屏的深色底色，浅色主题也是如此。配色方案在右上角选择，窗口立即重建；在等反射线视图中，深色方案使用彩色带，浅色方案使用粗线（4.4）。
+H1|8. 流星散射（YA-MS 1.8.15）与语言
+TAG|FONTE|METEOR SCATTER 选项卡包含完整的 YA-MS 1.8.15 [5]，以及它的“效率计算说明”文档和它的来源。脚本 tools/sync_yams.py 复制 YA-MS 的每个新版本并将其转换为面板，不改动其计算。
 TAG|FONTE|YA-MS 1.4.0 新增了“实时流星雨”选项卡（Global Meteor Network 实测的 ZHR 和 CMOR 雷达的辐射点地图）和“数据源地图”选项卡（Collm、Sodankylä、GRAVES 和 CMOR 相对于本台的位置）；YA-MS 1.5.0 新增了“数据收集”（来自 DX cluster、RBN 和 PSKReporter 的流星余迹散射报告，过滤条件为 MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, <MS>）；YA-MS 1.6.0 将各选项卡归入“实况与实时数据”“预报计算”和“技术文档”三组，并加入“实时流星散射通信”。在 E-LAYER ANALYZER 内部，YA-MS 的“数据收集”不显示：数据收集只有一个，即 DATA COLLECTION，它将数据行传给 YA-MS，流星散射的过滤在 DATA COLLECTION 的过滤列中设置；因此不会用同一呼号重复登录。YA-MS 的来源在 YA-MS 中注明。
 TAG|FONTE|YA-MS 1.7.0 和 1.8.0 新增了辐射点与 IAU MDC 星表的比较、Global Meteor Network 按流星雨统计的每日计数、由布居指数得出的 k 指数、Stober 等（2021）的余迹初始半径、各频段之间的 ping 持续时间（默认 λ²，或 NN4SA 的 HamSCI MSQP 测量值），以及与 Sonneberg 的 BRAMS 探测结果的比较（2026 年英仙座流星雨）。在 E-LAYER ANALYZER 内部，YA-MS 的自动更新已关闭，E-LAYER ANALYZER 会从 GitHub 的 Releases 自行更新。
 TAG|FONTE|YA-MS 1.8.1 将天线波瓣作为垂直方向图处理（「天线方向图」复选框，默认开启）：反射点按两副天线的垂直增益加权，长路径上的效率不再消失。新增「无公共区域」警告，突出显示 β 角复选框（影响最大的选择），只用一个计算日期，并加入「使用手册」以及与 2025 年 8 月 HamSCI Meteor Scatter QSO Party 中 181 767 个 50 MHz 真实 spot 的比较：时段和路径的两侧可靠，百分比仅供参考。
+TAG|FONTE|YA-MS 从 1.8.11 到 1.8.15（E-LAYER ANALYZER 0.5.0）：CALL3 每 12 小时从 MMMonVHF 更新，每 30 分钟从 G7VRD 更新，并以 JTDX 层（data/grid_data.bin）作为最后的来源，它从不写入 call3.txt；孤立的 FT8 用 PSKReporter MQTT 核对，去掉 28 MHz 的 FT8；用“流星雨区域”代替云团；“实时通信”地图上方的方框；把网格坐标存入 CALL3 的“保存”按钮；把经 UDP 收到的 MS 解码转发给 PSKReporter；YA-MS 用户之间对发给自己台站的消息进行加密交换（ECDH P-256、AES-256、公共 MQTT 上的 HMAC）。E-LAYER ANALYZER 的数据收集原则不变：只有一个收集，即 DATA COLLECTION，它把数据行传给 YA-MS；只有一个 CALL3 档案；来自 YA-MS 的过滤只对 METEOR SCATTER 选项卡有效。字体、配色、语言和更新在 E-LAYER ANALYZER 的“设置”选项卡中选择，而不是在 YA-MS 的“设置”中。
 TAG|SCELTA|语言：36 种，即 YAEC 的全部语言加上丹麦语和他加禄语，自 0.4.4 版起又增加了巴西葡萄牙语、繁体中文、波兰语、捷克语、罗马尼亚语、匈牙利语、希腊语和泰语（Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어），用于界面（data/lingue/ela-<代码>.txt）、各文档（计算选择摘要、使用手册、技术报告）和来源。在 F.A.I./极光视图中，散射点的轨迹在所有译本中都称为“Scatter trail”。状态栏显示所用的磁场模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 局限
 LI|台站位于网格坐标方格的中心：使用 4 位网格坐标时误差可达 ~80 km。

@@ -28,7 +28,7 @@ Es gibt **nur eine Datensammlung für das ganze Programm**: Jeder Spot läuft du
 
 JTDX-Datenbank **Rufzeichen → Locator** (über eine Million Rufzeichen) in `data/call3.txt`. Schaltflächen **Neu laden** und **Neue CALL3.TXT importieren**. In den Kommentaren der Spots gelesene 6-stellige Locator werden zu `data/call3_nuovi.txt` hinzugefügt.
 
-Ab Version 0.4.16 gibt es eine einzige CALL3-Datenbank für das ganze Programm, die der Datensammlung von YA-MS (Reiter METEOR SCATTER), mit denselben Regeln wie LIVETROPOVHF: Aktualisierung von MMMonVHF, Handeinträge, hinzugefügte Dateien, Cluster-Korrekturen, gelernte Locator und G7VRD alle 6 Stunden; Korrekturen werden in data/call3.txt geschrieben und die Locator aus data/call3_nuovi.txt einmal übernommen. Spots von WSJT-X, JTDX und MSHV kommen auch über UDP (Quelle WSJT-X UDP, Port 2237 mit Weiterleitung an 2238).
+Ab Version 0.4.16 gibt es eine einzige CALL3-Datenbank für das ganze Programm, die der Datensammlung von YA-MS (Reiter METEOR SCATTER), mit denselben Regeln wie LIVETROPOVHF: Aktualisierung von MMMonVHF alle 12 Stunden, Handeinträge, hinzugefügte Dateien, Cluster-Korrekturen, gelernte Locator, G7VRD alle 30 Minuten und als letzte Quelle die JTDX-Schicht (data/grid_data.bin), nie in call3.txt geschrieben; Korrekturen werden in data/call3.txt geschrieben und die Locator aus data/call3_nuovi.txt einmal übernommen. Spots von WSJT-X, JTDX und MSHV kommen auch über UDP (Quelle WSJT-X UDP, Port 2237 mit Weiterleitung an 2238).
 
 Diese Filter aus YA-MS (CW, Mindestentfernung, Frequenzfenster, MS-Modi, Bänder) gelten nur für den Reiter METEOR SCATTER: Sie entscheiden, welche Spots in seine Sammlung kommen. Die anderen Reiter erhalten alle Spots und nutzen ihre eigenen Filter.
 

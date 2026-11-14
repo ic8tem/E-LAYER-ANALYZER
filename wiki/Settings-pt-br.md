@@ -9,7 +9,7 @@ A partir da versão 0.4.18 a aba **CONFIGURAÇÕES** reúne as opções gerais d
 | Seção | O que se configura |
 |---|---|
 | Estação | Indicativo, locator e altitude, os mesmos da barra superior; **Aplicar** confirma-os para todas as abas. |
-| Aspecto | Idioma, esquema de cores e **tamanho da fonte de todo o programa** (85-140 %, como no YA-MS). O idioma e as cores reconstroem a janela: as configurações e os spots são mantidos. |
+| Aspecto | Idioma, esquema de cores (os esquemas do YAEC e do YA-MS e, a partir da versão 0.5.0, os seis temas do IP-TRX-CTRL: Claro, Noite, Preto, Azul, Violeta, Verde) e **tamanho da fonte de todo o programa** (85-140 %, como no YA-MS). O idioma e as cores reconstroem a janela: as configurações e os spots são mantidos. |
 | Mapas e dados de previsão | O continente, o mesmo menu da barra das abas. |
 | Hora | Estado do NTP e diferença entre a hora dos servidores e o relógio do PC. |
 | Atualizações | Verificação no GitHub na inicialização e a cada 6 horas, atualização automática e silenciosa, botão **Verificar agora**. A atualização automática não se aplica aos pacotes de sistema (.deb, .rpm, Arch, Slackware). |

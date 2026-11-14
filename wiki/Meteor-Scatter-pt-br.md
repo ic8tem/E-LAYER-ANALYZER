@@ -2,7 +2,7 @@
 
 [← Home](Home-pt-br)
 
-Esta aba contém o **YA-MS 1.8.11** completo, o programa de meteor scatter de IC8TEM: esfera celeste com os radiantes, fluxo dos radares SKiYMET (Collm, Sodankylä), cálculo da eficiência das chuvas, implementação experimental das previsões, geometria e atenuação, GRAVES, mapa de quadrados, **Chuvas ao vivo** (ZHR medidos pela Global Meteor Network e radiantes do radar CMOR), **Mapa das fontes** (Collm, Sodankylä, GRAVES e CMOR em relação à estação) e o documento **Explicação do cálculo da eficiência** com as fórmulas.
+Esta aba contém o **YA-MS 1.8.15** completo, o programa de meteor scatter de IC8TEM: esfera celeste com os radiantes, fluxo dos radares SKiYMET (Collm, Sodankylä), cálculo da eficiência das chuvas, implementação experimental das previsões, geometria e atenuação, GRAVES, mapa de quadrados, **Chuvas ao vivo** (ZHR medidos pela Global Meteor Network e radiantes do radar CMOR), **Mapa das fontes** (Collm, Sodankylä, GRAVES e CMOR em relação à estação) e o documento **Explicação do cálculo da eficiência** com as fórmulas.
 
 O YA-MS 1.5.0 acrescenta a aba **Coleta de dados** (spots de meteor scatter filtrados por MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). Dentro do E-LAYER ANALYZER ela não abre sessões telnet próprias: recebe as linhas das sessões de DATA COLLECTION, por isso não há logins duplicados com o mesmo indicativo.
 

@@ -28,7 +28,7 @@ Duomenų rinkimas **visai programai yra vienas**: kiekvienas spotas pereina per 
 
 JTDX duomenų bazė **šaukinys → lokatorius** (daugiau nei milijonas šaukinių) faile `data/call3.txt`. Mygtukai **Įkelti iš naujo** ir **Importuoti naują CALL3.TXT...**. Spotų komentaruose perskaityti 6 simbolių lokatoriai pridedami į `data/call3_nuovi.txt`.
 
-Nuo 0.4.16 versijos visai programai yra viena CALL3 duomenų bazė – YA-MS Duomenų rinkimo (kortelė METEOR SCATTER), su tomis pačiomis taisyklėmis kaip LIVETROPOVHF: atnaujinimas iš MMMonVHF, rankiniai įrašai, pridėti failai, klasterio pataisos, išmokti lokatoriai ir G7VRD kas 6 valandas; pataisos įrašomos į data/call3.txt, o data/call3_nuovi.txt lokatoriai importuojami vieną kartą. WSJT-X, JTDX ir MSHV spotai ateina ir per UDP (šaltinis WSJT-X UDP, prievadas 2237 su persiuntimu į 2238).
+Nuo 0.4.16 versijos visai programai yra viena CALL3 duomenų bazė – YA-MS Duomenų rinkimo (kortelė METEOR SCATTER), su tomis pačiomis taisyklėmis kaip LIVETROPOVHF: atnaujinimas iš MMMonVHF kas 12 valandų, rankiniai įrašai, pridėti failai, klasterio pataisos, išmokti lokatoriai, G7VRD kas 30 minučių ir, kaip paskutinis šaltinis, JTDX sluoksnis (data/grid_data.bin), niekada neįrašomas į call3.txt; pataisos įrašomos į data/call3.txt, o data/call3_nuovi.txt lokatoriai importuojami vieną kartą. WSJT-X, JTDX ir MSHV spotai ateina ir per UDP (šaltinis WSJT-X UDP, prievadas 2237 su persiuntimu į 2238).
 
 Šie iš YA-MS kilę filtrai (CW, mažiausias atstumas, dažnių langai, MS režimai, juostos) galioja tik kortelei METEOR SCATTER: jie nusprendžia, kurie spotai patenka į jos rinkinį. Kitos kortelės gauna visus spotus ir naudoja savo filtrus.
 

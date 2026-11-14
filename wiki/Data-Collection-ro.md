@@ -28,7 +28,7 @@ Colectarea datelor este **unică pentru tot programul**: fiecare spot trece prin
 
 Arhiva JTDX **indicativ → locator** (peste un milion de indicative) în `data/call3.txt`. Butoanele **Reîncarcă** și **Importă un nou CALL3.TXT**. Locatorii cu 6 caractere citiți în comentariile spoturilor sunt adăugați în `data/call3_nuovi.txt`.
 
-Începând cu versiunea 0.4.16 există o singură bază CALL3 pentru tot programul, cea din Colectarea datelor YA-MS (fila METEOR SCATTER), cu aceleași reguli ca LIVETROPOVHF: actualizare de la MMMonVHF, intrări manuale, fișiere adăugate, corecturi din cluster, locatoare învățate și G7VRD la fiecare 6 ore; corecturile se scriu în data/call3.txt, iar locatoarele din data/call3_nuovi.txt se importă o singură dată. Spoturile din WSJT-X, JTDX și MSHV sosesc și prin UDP (sursa WSJT-X UDP, portul 2237 cu redirecționare la 2238).
+Începând cu versiunea 0.4.16 există o singură bază CALL3 pentru tot programul, cea din Colectarea datelor YA-MS (fila METEOR SCATTER), cu aceleași reguli ca LIVETROPOVHF: actualizare de la MMMonVHF la fiecare 12 ore, intrări manuale, fișiere adăugate, corecturi din cluster, locatoare învățate, G7VRD la fiecare 30 de minute și, ca ultimă sursă, stratul JTDX (data/grid_data.bin), niciodată scris în call3.txt; corecturile se scriu în data/call3.txt, iar locatoarele din data/call3_nuovi.txt se importă o singură dată. Spoturile din WSJT-X, JTDX și MSHV sosesc și prin UDP (sursa WSJT-X UDP, portul 2237 cu redirecționare la 2238).
 
 Aceste filtre, venite din YA-MS (CW, distanța minimă, ferestre de frecvență, moduri MS, benzi), se aplică doar filei METEOR SCATTER: ele decid ce spoturi intră în colecția ei. Celelalte file primesc toate spoturile și își folosesc propriile filtre.
 
