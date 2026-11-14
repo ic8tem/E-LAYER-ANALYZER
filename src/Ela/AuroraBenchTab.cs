@@ -126,6 +126,11 @@ namespace ELA
 
         static void Compute(BSet s, double h)
         {
+            using (Igrf.At(Igrf.YearOf(s.Date))) ComputeAt(s, h);   // campo IGRF dell'anno del QSO (data non nota: campo di oggi)
+        }
+
+        static void ComputeAt(BSet s, double h)
+        {
             double maxD = Geo.HalfHopKm(0, h, K);
             foreach (BQso q in s.Qso)
             {
@@ -197,6 +202,9 @@ namespace ELA
                 sb.AppendLine(Lang.F("Distanza dichiarata e calcolata dai locator: scarto massimo {0:F0} km.", all.Where(q => q.DeclKm > 0).Select(q => Math.Abs(q.DeclKm - q.Km)).DefaultIfEmpty(0).Max()));
             }
             sb.AppendLine(Lang.T("I log non riportano il puntamento: il confronto è sulla geometria (esiste lo scatter point?), non sul QTF."));
+            sb.AppendLine(Igrf.HasHistory
+                ? Lang.T("Campo magnetico: IGRF-14 dell'anno di ciascun QSO (epoche storiche 1900-2030); con la data non nota, il campo di oggi.")
+                : Lang.T("Campo magnetico: quello di oggi (manca il file data/igrf14_storico.csv)."));
             foreach (BSet s in Shown()) sb.AppendLine(Lang.F("Fonte: {0} {1}, {2}", s.Call, s.Loc, s.Source));
             txtSum.Text = sb.ToString();
         }

@@ -693,20 +693,28 @@ namespace ELA
         // all'orizzonte radio a 110 km. Senza IGRF, o dove la perpendicolarita' non si raggiunge (stazioni sotto l'ovale,
         // inclinazione oltre ~77 gradi), resta la finestra fissa 370-1100 km.
         public const double AuRefLat = 53.47, AuRefLon = 7.73, AuWinH = 110, AuWinTol = 3;
-        static readonly Dictionary<long, double[]> auWin = new Dictionary<long, double[]>();
-        static double auRefKm = double.NaN, auWinEpoch = double.NaN;
+        // una tabella per epoca del campo: i banchi di prova usano l'anno del QSO (Igrf.At) mentre il resto usa il campo di oggi
+        static readonly Dictionary<double, Dictionary<long, double[]>> auWinEp = new Dictionary<double, Dictionary<long, double[]>>();
+        static readonly Dictionary<double, double> auRefEp = new Dictionary<double, double>();
 
         // [0] inizio, [1] fine della finestra (km), [2] inclinazione IGRF-14 della stazione (NaN senza IGRF), [3] 1 se mobile
         public static double[] AuWindow(double lat, double lon)
         {
             if (!Igrf.Loaded) return new[] { AuMinRangeKm, AuMaxRangeKm, double.NaN, 0 };
             long key = (long)Math.Round((lat + 90) * 10) * 100000 + (long)Math.Round((Geo.Norm180(lon) + 180) * 10);
-            lock (auWin)
+            double ep = Igrf.Epoch;
+            lock (auWinEp)
             {
-                if (Igrf.Epoch != auWinEpoch) { auWin.Clear(); auRefKm = double.NaN; auWinEpoch = Igrf.Epoch; }
+                Dictionary<long, double[]> auWin;
+                if (!auWinEp.TryGetValue(ep, out auWin))
+                {
+                    if (auWinEp.Count > 12) { auWinEp.Clear(); auRefEp.Clear(); }
+                    auWin = new Dictionary<long, double[]>(); auWinEp[ep] = auWin;
+                }
                 double[] w;
                 if (auWin.TryGetValue(key, out w)) return w;
-                if (double.IsNaN(auRefKm)) auRefKm = PerpStartKm(AuRefLat, AuRefLon);
+                double auRefKm;
+                if (!auRefEp.TryGetValue(ep, out auRefKm)) { auRefKm = PerpStartKm(AuRefLat, AuRefLon); auRefEp[ep] = auRefKm; }
                 double inc, dec; Igrf.IncDec(lat, lon, out inc, out dec);
                 double d = PerpStartKm(lat, lon), hor = Geo.HalfHopKm(0, AuWinH, 4.0 / 3.0);
                 if (double.IsNaN(d) || double.IsNaN(auRefKm)) w = new[] { AuMinRangeKm, AuMaxRangeKm, inc, 0 };

@@ -365,7 +365,8 @@ namespace ELA
             foreach (BenchQso q in cur)
             {
                 if (q == hover) continue;
-                bool esTep = EsModel.IsEsTepCached(q.LatTx, q.LonTx, q.LatRx, q.LonRx);   // Es che aggancia il TEP: blu elettrico
+                bool esTep;
+                using (Igrf.At(Igrf.YearOf(q.Utc))) esTep = EsModel.IsEsTepCached(q.LatTx, q.LonTx, q.LatRx, q.LonRx);   // Es che aggancia il TEP: blu elettrico (campo IGRF dell'anno del QSO)
                 Color c = esTep ? EsTab.ElectricBlue : fo ? EsTab.FoEsColor(q.Path.FoEsMin) : SetColor(q.Set);
                 MapLine l = new MapLine { Color = Pal.A(fo && !esTep ? 230 : 200, c), Width = esTep ? 2 : 1.4 }; l.Pts.AddRange(geo[q]); map.Lines.Add(l);
                 if (esTep && geo[q].Count > 0)

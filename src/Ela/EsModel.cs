@@ -351,7 +351,7 @@ namespace ELA
         static readonly Dictionary<string, bool> esTepCache = new Dictionary<string, bool>();
         public static bool IsEsTepCached(double latA, double lonA, double latB, double lonB)
         {
-            string k = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F2},{1:F2},{2:F2},{3:F2},{4}", latA, lonA, latB, lonB, UseTepRule);
+            string k = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:F2},{1:F2},{2:F2},{3:F2},{4},{5:F2}", latA, lonA, latB, lonB, UseTepRule, Igrf.Epoch);   // l'epoca: i banchi di prova usano il campo dell'anno del QSO
             bool v;
             lock (esTepCache)
             {

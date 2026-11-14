@@ -23,6 +23,8 @@ namespace ELA
         readonly ElaWindow win;
         readonly DataTab dc;
         TableView tRules;
+        TextBlock lblRule;
+        List<string[]> ruleRows = new List<string[]>();
         TextBlock lblNtpInfo, lblFont;
 
         public SettingsTab(ElaWindow w, DataTab data)
@@ -152,11 +154,16 @@ namespace ELA
             StackPanel head = new StackPanel { Spacing = 4, Margin = new Thickness(10, 8, 10, 4) };
             head.Children.Add(new TextBlock { Text = Lang.T("Smistamento degli spot"), FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
             head.Children.Add(Txt(Lang.T("Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster."), true));
-            tRules = new TableView { Selectable = false };
+            tRules = new TableView { Selectable = true };
             tRules.Columns.AddRange(new[] { "#", Lang.T("Se lo spot..."), Lang.T("Valori"), Lang.T("va a") });
-            tRules.ColumnWidths.AddRange(new double[] { 28, 260, 230, 200 });
+            tRules.ColumnWidths.AddRange(new double[] { 28, 240, 330, 190 });
+            // la riga scelta si legge per intero sotto la tabella (le celle lunghe sono tagliate)
+            lblRule = Txt(Lang.T("Clicca una riga per leggerla per intero."), true);
+            lblRule.Margin = new Thickness(10, 6, 10, 8);
+            tRules.RowClicked += i => ShowRule(i);
             DockPanel left = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(left, head, Dock.Top);
+            Ui.Dock(left, lblRule, Dock.Bottom);
             left.Children.Add(tRules);
             Control right = dc.BuildFilters();
             Grid g = new Grid { ColumnDefinitions = new ColumnDefinitions("55*,45*"), Background = Pal.B(Pal.Back) };
@@ -190,8 +197,18 @@ namespace ELA
             add(Lang.T("è in 144 MHz"), EsModel.Use144Rule ? Lang.F("oltre {0:F0} km, con conferma", EsModel.MinKm144) : Lang.T("regola spenta"), es, EsTab.BandColor("2m"));
             add(Lang.T("non rientra in nessuna regola (tropo, 432 MHz, HF...)"), "", none + " (" + Lang.T("resta in Spot raccolti") + ")", Pal.Muted);
             tRules.Rows.Clear();
-            for (int i = 0; i < r.Count; i++) tRules.Rows.Add(new TableRow { Cells = r[i], Fore = col[i] });
+            for (int i = 0; i < r.Count; i++) tRules.Rows.Add(new TableRow { Cells = r[i], Fore = col[i], CellTips = new[] { "", r[i][1], r[i][2], r[i][3] } });
+            ruleRows = r;
             tRules.Refresh();
+            ShowRule(tRules.SelectedIndex);
+        }
+
+        void ShowRule(int i)
+        {
+            if (lblRule == null) return;
+            if (i < 0 || i >= ruleRows.Count) { lblRule.Text = Lang.T("Clicca una riga per leggerla per intero."); return; }
+            string[] c = ruleRows[i];
+            lblRule.Text = c[0] + ". " + Lang.T("Se lo spot...").TrimEnd('.', '…') + " " + c[1] + (c[2] != "" ? " (" + c[2] + ")" : "") + " → " + c[3];
         }
     }
 }
