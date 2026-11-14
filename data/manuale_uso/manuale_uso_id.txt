@@ -38,7 +38,7 @@ H2|2.5 Berkas program yang hilang
 P|Saat dijalankan, YA-MS memeriksa apakah semua berkasnya ada (terjemahan, katalog, dokumen). Jika ada yang hilang, misalnya setelah penyalinan yang tidak lengkap, jendela "Berkas hilang" menampilkan daftarnya dan menawarkan "Unduh berkas yang hilang" dari GitHub, dalam versi program yang sama, atau "Lanjutkan tanpa itu". Pemeriksaan yang sama diulang dengan menekan "Pembaruan".
 H1|3. Jendela utama
 H2|3.1 Bagian-bagian jendela
-LI|Di atas, tiga baris kontrol yang berlaku untuk semua tab: stasiun dan pita, lapisan E dan antena, waktu perhitungan (bab 4).
+LI|Di atas, dua baris kontrol yang berlaku untuk semua tab: lapisan E dan antena, waktu perhitungan (bab 4). Stasiun Anda (lokator, ketinggian, pita, dan Hitung) ada di kanan atas Lalu lintas langsung.
 LI|Bilah tab utama, dengan di sebelah kanan tombol Kontrol, skema warna (Tema) dan bahasa.
 LI|Sub-tab, dalam baris yang lebih terang, untuk tab yang memilikinya.
 LI|Di bawah, bilah status: pesan perhitungan, peringatan tentang koneksi, dan tombol "Pembaruan".
@@ -51,21 +51,21 @@ H2|3.3 Bahasa, warna, huruf
 LI|Bahasa: 36 bahasa. Saat bahasa diganti, jendela dibangun ulang pada posisi yang sama dan pada tab yang sama, tanpa menjalankan ulang program. Angka dan tanggal mengikuti bahasa yang dipilih (koma desimal dalam bahasa Italia, titik dalam bahasa Inggris).
 LI|Tema: 12 skema warna; Terang adalah bawaan, Malam dan Hitam berguna dalam gelap, Jejak meteor adalah gaya asli YA-MS.
 LI|Huruf (Pengaturan): mengecilkan atau membesarkan semua teks dari 85 sampai 140 %, dengan langkah 5 %. Dengan huruf besar, tab pindah ke beberapa baris.
-LI|Kontrol: melipat dan membuka kembali tiga baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
+LI|Kontrol: melipat dan membuka kembali dua baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
 TAG|NOTA|Hampir setiap kontrol memiliki tooltip: tahan mouse di atas kontrol untuk membaca fungsinya dan dari sumber mana nilai awalnya berasal.
 H1|4. Mengatur stasiun dan lintasan
-H2|4.1 Baris 1: stasiun dan pita
+H2|4.1 Stasiun saya (Lalu lintas langsung)
 LI|Locator saya dan ketinggian m: locator Maidenhead Anda (4, 6 atau 8 karakter; yang dipakai adalah pusat kotak) dan ketinggian stasiun di atas permukaan laut.
 LI|Pita MHz: 28, 50, 70, 144, 222 atau 432 MHz. Digunakan untuk penguatan dan lobus antena, untuk redaman dan anggaran link, serta untuk estimasi fluks.
 LI|Hitung: menghitung ulang lintasan (pengambilan sampel lapisan E, kurang dari satu detik).
-H2|4.2 Baris 2: lapisan E dan antena
+H2|4.2 Baris 1: lapisan E dan antena
 LI|Ketinggian jejak km dan dari radar: ketinggian jejak meteor. Bila "dari radar" dicentang, digunakan ketinggian yang paling sering diukur oleh radar Collm (biasanya 88-90 km); hapus centang untuk menuliskannya secara manual.
 LI|Elevasi lobus °: elevasi puncak lobus vertikal antena Anda. Antena pengarah yang dipasang pada 0° tetap memiliki lobus utama beberapa derajat di atas cakrawala, karena pantulan dari tanah: biasanya 3-8°, tergantung tinggi antena dalam panjang gelombang.
 LI|pola antena: bila aktif (bawaan), titik-titik pantul diperhitungkan dengan penguatan vertikal kedua antena: penuh di sekitar puncak lobus, makin berkurang ke arah cakrawala dan ke arah atas. Bila nonaktif, elevasi lobus menjadi batas tegas: titik yang terlihat lebih rendah tidak diperhitungkan.
 LI|Antena Yagi: boom m: panjang boom. Di sampingnya program menuliskan panjang dalam panjang gelombang, penguatan (kurva DL6WU) dan lebar lobus -3 dB horizontal dan vertikal. Di bawah 2 λ estimasinya kurang tepat.
 LI|Hot spot dari titik tengah km dan otomatis (AMS): jarak Hot A dan Hot B dari titik tengah. Bila "otomatis (AMS)" dicentang, nilai mengikuti tabel J. Richardson yang dikutip oleh DJ5HG (simpangan 13° pada 1000 km, 10° di atas 1500 km); hapus centang untuk menulis 30-400 km secara manual (MSHV memakai 150 km).
 TAG|ATTENZIONE|Dengan "pola antena" nonaktif dan lobus pada beberapa derajat, pada lintasan panjang kedua stasiun bisa tidak melihat satu pun titik bersama di lapisan: semua efisiensi bernilai 0 dan muncul peringatan "TIDAK ADA ZONA BERSAMA" beserta lobus atau ketinggian jejak yang diperlukan. Contoh: JN70CN - JO76QP, 1791 km, lobus pada 3°, jejak pada 88,5 km.
-H2|4.3 Baris 3: waktu perhitungan
+H2|4.3 Baris 2: waktu perhitungan
 LI|Jam: jam UTC.
 LI|Tanggal perhitungan (UTC): hari perhitungan. Berlaku untuk Perhitungan prakiraan, untuk tabel 24 jam di Perhitungan efisiensi dan untuk kronologi di Radar GRAVES. Bawaannya hari ini, dan pada tengah malam berpindah ke hari yang baru.
 LI|Jam (−12 hingga +36 h): menggeser saat perhitungan, dengan langkah 15 menit. Di sampingnya: "Perhitungan untuk: sekarang" atau tanggal dan jam yang dipilih.

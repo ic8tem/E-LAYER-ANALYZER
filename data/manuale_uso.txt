@@ -38,7 +38,7 @@ H2|2.5 File del programma mancanti
 P|All'avvio YA-MS controlla di avere tutti i suoi file (traduzioni, cataloghi, documenti). Se ne manca qualcuno, per esempio dopo una copia incompleta, la finestra "File mancanti" li elenca e propone "Scarica i file mancanti" da GitHub, nella stessa versione del programma, oppure "Continua senza". Lo stesso controllo si ripete premendo "Aggiornamenti".
 H1|3. La finestra principale
 H2|3.1 Le parti della finestra
-LI|In alto, tre righe di comandi valide per tutte le linguette: stazioni e banda, strato E e antenna, ora del calcolo (capitolo 4).
+LI|In alto, due righe di comandi valide per tutte le linguette: strato E e antenna, ora del calcolo (capitolo 4). La tua stazione (locator, quota, banda e Calcola) sta in alto a destra nel Traffico in diretta.
 LI|La barra delle linguette principali, con a destra il pulsante Comandi, lo schema di colori (Tema) e la lingua.
 LI|Le sotto-linguette, in una riga più chiara, per le linguette che ne hanno.
 LI|In basso, la barra di stato: messaggi del calcolo, avvisi sulla connessione, e il pulsante "Aggiornamenti".
@@ -51,21 +51,21 @@ H2|3.3 Lingua, colori, carattere
 LI|Lingua: 36 lingue. Cambiando lingua la finestra si ricostruisce nella stessa posizione e sulla stessa linguetta, senza riavviare. Numeri e date seguono la lingua scelta (virgola decimale in italiano, punto in inglese).
 LI|Tema: 12 schemi di colori; Chiaro è quello di partenza, Notte e Nero servono al buio, Scia meteorica è lo stile originale di YA-MS.
 LI|Carattere (linguetta Impostazioni): rimpicciolisce o ingrandisce tutto il testo dall'85 al 140 %, a passi del 5 %. Con caratteri grandi le linguette vanno a capo.
-LI|Comandi: ripiega e riapre le tre righe di comandi, per dare spazio a mappe e grafici. La scelta viene ricordata.
+LI|Comandi: ripiega e riapre le due righe di comandi, per dare spazio a mappe e grafici. La scelta viene ricordata.
 TAG|NOTA|Quasi ogni comando ha un fumetto: tieni fermo il mouse sopra il comando per leggere a che cosa serve e da quale fonte viene il valore di partenza.
 H1|4. Impostare la stazione e la tratta
-H2|4.1 Riga 1: stazioni e banda
+H2|4.1 La mia stazione (Traffico in diretta, in alto a destra)
 LI|Il mio locator e quota m: il tuo locator Maidenhead (4, 6 o 8 caratteri; si usa il centro del quadrato) e la quota della stazione sul livello del mare.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Serve per il guadagno e il lobo dell'antenna, per l'attenuazione e il bilancio, per la stima del flusso.
 LI|Calcola: ricalcola la tratta (campionamento dello strato E, meno di un secondo).
-H2|4.2 Riga 2: strato E e antenna
+H2|4.2 Riga 1: strato E e antenna
 LI|Quota scie km e dal radar: quota delle scie meteoriche. Con "dal radar" spuntato si usa la quota più frequente misurata dal radar di Collm (di solito 88-90 km); togli la spunta per scriverla a mano.
 LI|Elevazione lobo °: elevazione del massimo del lobo verticale della tua antenna. Una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra l'orizzonte, per la riflessione sul terreno: di solito 3-8°, secondo l'altezza dell'antenna in lunghezze d'onda.
 LI|diagramma d'antenna: accesa (di partenza), i punti di riflessione contano con il guadagno verticale delle due antenne: pieno attorno al massimo del lobo, sempre meno verso l'orizzonte e verso l'alto. Spenta, l'elevazione del lobo è un limite netto: i punti visti più in basso non contano.
 LI|Antenna Yagi: boom m: lunghezza del boom. Accanto il programma scrive la lunghezza in lunghezze d'onda, il guadagno (curva DL6WU) e il lobo a -3 dB orizzontale e verticale. Sotto 2 λ la stima è poco precisa.
 LI|Hot spot dal punto medio km e auto (AMS): distanza di Hot A e Hot B dal punto medio. Con "auto (AMS)" spuntato segue la tabella di J. Richardson citata da DJ5HG (13° di scarto a 1000 km, 10° oltre 1500 km); togli la spunta per scrivere 30-400 km a mano (MSHV usa 150 km).
 TAG|ATTENZIONE|Con "diagramma d'antenna" spento e il lobo a qualche grado, su una tratta lunga le due stazioni possono non vedere nessun punto comune dello strato: tutte le efficienze valgono 0 e compare l'avviso "NESSUNA ZONA COMUNE" con il lobo o la quota delle scie che servirebbero. Esempio: JN70CN - JO76QP, 1791 km, lobo a 3°, scie a 88,5 km.
-H2|4.3 Riga 3: ora del calcolo
+H2|4.3 Riga 2: ora del calcolo
 LI|Ora: orologio UTC.
 LI|Data del calcolo (UTC): il giorno del calcolo. Vale per Calcolo previsionale, per la tabella delle 24 ore di Calcolo dell'efficienza e per la cronologia di Radar GRAVES. Di partenza è oggi e a mezzanotte segue il giorno nuovo.
 LI|Ore (da −12 a +36 h): sposta il momento del calcolo, a passi di 15 minuti. Accanto: "Calcolo per: adesso" oppure la data e l'ora scelte.

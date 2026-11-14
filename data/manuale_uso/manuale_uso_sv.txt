@@ -38,7 +38,7 @@ H2|2.5 Saknade programfiler
 P|Vid start kontrollerar YA-MS att alla dess filer finns (översättningar, kataloger, dokument). Om någon saknas, till exempel efter en ofullständig kopiering, listar fönstret "Saknade filer" dem och erbjuder "Ladda ner saknade filer" från GitHub, i samma version som programmet, eller "Fortsätt utan". Samma kontroll upprepas när du trycker på "Uppdateringar".
 H1|3. Huvudfönstret
 H2|3.1 Fönstrets delar
-LI|Överst tre rader med reglage som gäller för alla flikar: stationer och band, E-skikt och antenn, tidpunkt för beräkningen (kapitel 4).
+LI|Överst två rader med reglage som gäller för alla flikar: E-skikt och antenn, tidpunkt för beräkningen (kapitel 4). Din station (lokator, höjd, band och Beräkna) finns uppe till höger i Trafik i realtid.
 LI|Raden med huvudflikarna, med knappen Reglage, färgschemat (Tema) och språket till höger.
 LI|Underflikarna, i en ljusare rad, för de flikar som har sådana.
 LI|Längst ner statusfältet: meddelanden från beräkningen, varningar om anslutningen och knappen "Uppdateringar".
@@ -51,21 +51,21 @@ H2|3.3 Språk, färger, typsnitt
 LI|Språk: 36 språk. När du byter språk byggs fönstret upp igen på samma position och på samma flik, utan omstart. Tal och datum följer det valda språket (decimalkomma på italienska, punkt på engelska).
 LI|Tema: 12 färgscheman; Ljust är standardschemat, Natt och Svart är till för mörker, Meteorspår är YA-MS ursprungliga stil.
 LI|Teckenstorlek (Inställningar): förminskar eller förstorar all text från 85 till 140 %, i steg om 5 %. Med stora tecken bryts flikarna till flera rader.
-LI|Reglage: fäller ihop och fäller ut de tre raderna med reglage, för att ge plats åt kartor och diagram. Valet sparas.
+LI|Reglage: fäller ihop och fäller ut de två raderna med reglage, för att ge plats åt kartor och diagram. Valet sparas.
 TAG|NOTA|Nästan varje reglage har ett verktygstips: håll musen stilla över reglaget för att läsa vad det används till och från vilken källa standardvärdet kommer.
 H1|4. Ställa in stationen och sträckan
-H2|4.1 Rad 1: stationer och band
+H2|4.1 Min station (Trafik live)
 LI|Min lokator och höjd m: din Maidenhead-lokator (4, 6 eller 8 tecken; rutans mittpunkt används) och stationens höjd över havet.
 LI|Band MHz: 28, 50, 70, 144, 222 eller 432 MHz. Används för antennens förstärkning och lob, för dämpningen och länkbudgeten och för uppskattningen av flödet.
 LI|Beräkna: beräknar sträckan på nytt (sampling av E-skiktet, mindre än en sekund).
-H2|4.2 Rad 2: E-skikt och antenn
+H2|4.2 Rad 1: E-skikt och antenn
 LI|Spårhöjd km och från radar: meteorspårens höjd. Med "från radar" markerad används den vanligaste höjden som uppmätts av radarn i Collm (oftast 88-90 km); avmarkera för att skriva in den för hand.
 LI|Lobelevation °: elevationen för maximum i din antenns vertikala lob. En riktantenn som står på 0° har ändå sin huvudlob några grader över horisonten, på grund av markreflexionen: oftast 3-8°, beroende på antennens höjd i våglängder.
 LI|antenndiagram: påslaget (standard) räknas reflexionspunkterna med de två antennernas vertikala förstärkning: fullt kring lobens maximum, allt mindre mot horisonten och uppåt. Avslaget är lobens elevation en skarp gräns: punkter som ses lägre räknas inte.
 LI|Yagiantenn: bom m: bommens längd. Bredvid skriver programmet längden i våglängder, förstärkningen (DL6WU-kurvan) och den horisontella och vertikala loben vid -3 dB. Under 2 λ är uppskattningen inte särskilt noggrann.
 LI|Hot spot från mittpunkt km och auto (AMS): avståndet från Hot A och Hot B till mittpunkten. Med "auto (AMS)" markerad följs J. Richardsons tabell, citerad av DJ5HG (13° avvikelse vid 1000 km, 10° över 1500 km); avmarkera för att skriva in 30-400 km för hand (MSHV använder 150 km).
 TAG|ATTENZIONE|Med "antenndiagram" avslaget och loben på några grader kan de två stationerna på en lång sträcka sakna gemensamma punkter i skiktet: alla effektiviteter blir 0 och varningen "INGEN GEMENSAM ZON" visas, med den lob eller den spårhöjd som skulle behövas. Exempel: JN70CN - JO76QP, 1791 km, lob på 3°, spår på 88,5 km.
-H2|4.3 Rad 3: tidpunkt för beräkningen
+H2|4.3 Rad 2: tidpunkt för beräkningen
 LI|Tid: UTC-klocka.
 LI|Beräkningsdatum (UTC): beräkningens dag. Gäller för Prognosberäkning, för 24-timmarstabellen i Effektivitetsberäkning och för tidslinjen i GRAVES-radar. Standard är i dag, och vid midnatt följer datumet med till den nya dagen.
 LI|Timmar (−12 till +36 h): flyttar beräkningens tidpunkt i steg om 15 minuter. Bredvid: "Beräkning för: nu" eller det valda datumet och klockslaget.

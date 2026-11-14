@@ -38,7 +38,7 @@ H2|2.5 Manglende programfiler
 P|Ved start kontrollerer YA-MS, at alle dets filer er til stede (oversættelser, kataloger, dokumenter). Hvis nogle mangler, for eksempel efter en ufuldstændig kopiering, oplister vinduet »Manglende filer« dem og tilbyder »Hent de manglende filer« fra GitHub i samme version som programmet, eller »Fortsæt uden«. Den samme kontrol gentages, når du trykker på »Opdateringer«.
 H1|3. Hovedvinduet
 H2|3.1 Vinduets dele
-LI|Øverst tre rækker betjeningselementer, der gælder for alle faner: stationer og bånd, E-lag og antenne, beregningstidspunkt (kapitel 4).
+LI|Øverst to rækker betjeningselementer, der gælder for alle faner: E-lag og antenne, beregningstidspunkt (kapitel 4). Din station (locator, højde, bånd og Beregn) står øverst til højre i Trafik i realtid.
 LI|Linjen med hovedfanerne, med knappen Betjening, farveskemaet (Tema) og sproget til højre.
 LI|Underfanerne, i en lysere række, for de faner, der har dem.
 LI|Nederst statuslinjen: beregningsmeddelelser, advarsler om forbindelsen og knappen »Opdateringer«.
@@ -51,21 +51,21 @@ H2|3.3 Sprog, farver, skrifttype
 LI|Sprog: 36 sprog. Når du skifter sprog, genopbygges vinduet på samme position og på samme fane uden genstart. Tal og datoer følger det valgte sprog (decimalkomma på italiensk, punktum på engelsk).
 LI|Tema: 12 farveskemaer; Lyst er standard, Nat og Sort er beregnet til brug i mørke, Meteorspor er YA-MS' oprindelige stil.
 LI|Skrift (Indstillinger): formindsker eller forstørrer al tekst fra 85 til 140 %, i trin på 5 %. Med stor skrift brydes fanerne over flere linjer.
-LI|Betjening: folder de tre rækker betjeningselementer sammen og ud igen for at give plads til kort og grafer. Valget huskes.
+LI|Betjening: folder de to rækker betjeningselementer sammen og ud igen for at give plads til kort og grafer. Valget huskes.
 TAG|NOTA|Næsten alle betjeningselementer har et værktøjstip: hold musen stille over elementet for at læse, hvad det bruges til, og fra hvilken kilde startværdien kommer.
 H1|4. Indstilling af station og strækning
-H2|4.1 Række 1: stationer og bånd
+H2|4.1 Min station (Live-trafik)
 LI|Min lokator og højde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten af feltet bruges) og stationens højde over havet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Bruges til antennens forstærkning og lap, til dæmpning og linkbudget og til fluxestimatet.
 LI|Beregn: genberegner strækningen (sampling af E-laget, under et sekund).
-H2|4.2 Række 2: E-lag og antenne
+H2|4.2 Række 1: E-lag og antenne
 LI|Sporhøjde km og fra radar: meteorsporenes højde. Med »fra radar« markeret bruges den hyppigste højde målt af Collm-radaren (normalt 88-90 km); fjern markeringen for at indtaste den manuelt.
 LI|Lapelevation °: elevationen af maksimum i din antennes lodrette lap. En retningsantenne, der er fastgjort på 0°, har alligevel hovedlappen nogle grader over horisonten på grund af refleksionen i jorden: normalt 3-8°, afhængigt af antennens højde i bølgelængder.
 LI|antennediagram: slået til (standard) tæller refleksionspunkterne med de to antenners lodrette forstærkning: fuld omkring lappens maksimum og stadig mindre mod horisonten og opad. Slået fra er lapelevationen en skarp grænse: punkter, der ses lavere, tæller ikke.
 LI|Yagi-antenne: bom m: bommens længde. Ved siden af skriver programmet længden i bølgelængder, forstærkningen (DL6WU-kurven) og lappen ved -3 dB vandret og lodret. Under 2 λ er estimatet upræcist.
 LI|Hot spot fra midtpunkt km og auto (AMS): afstanden fra Hot A og Hot B til midtpunktet. Med »auto (AMS)« markeret følges J. Richardsons tabel, citeret af DJ5HG (13° afvigelse ved 1000 km, 10° over 1500 km); fjern markeringen for at indtaste 30-400 km manuelt (MSHV bruger 150 km).
 TAG|ATTENZIONE|Med »antennediagram« slået fra og lappen nogle grader oppe kan de to stationer på en lang strækning risikere ikke at se noget fælles punkt i laget: alle effektiviteter er 0, og advarslen »INGEN FÆLLES ZONE« vises med den lap eller sporhøjde, der ville være nødvendig. Eksempel: JN70CN - JO76QP, 1791 km, lap ved 3°, spor i 88,5 km.
-H2|4.3 Række 3: beregningstidspunkt
+H2|4.3 Række 2: beregningstidspunkt
 LI|Tid: UTC-ur.
 LI|Beregningsdato (UTC): dagen for beregningen. Gælder for Prognoseberegning, for 24-timerstabellen i Effektivitetsberegning og for tidsforløbet i GRAVES-radar. Standard er i dag, og ved midnat følger den den nye dag.
 LI|Timer (−12 til +36 t): flytter beregningstidspunktet i trin på 15 minutter. Ved siden af: »Beregning for: nu« eller den valgte dato og tid.

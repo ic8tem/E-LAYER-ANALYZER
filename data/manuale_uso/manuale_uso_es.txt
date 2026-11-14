@@ -38,7 +38,7 @@ H2|2.5 Archivos del programa que faltan
 P|Al arrancar, YA-MS comprueba que tiene todos sus archivos (traducciones, catálogos, documentos). Si falta alguno, por ejemplo tras una copia incompleta, la ventana "Archivos que faltan" los enumera y propone "Descargar los archivos que faltan" desde GitHub, en la misma versión del programa, o bien "Continuar sin ellos". La misma comprobación se repite pulsando "Actualizaciones".
 H1|3. La ventana principal
 H2|3.1 Las partes de la ventana
-LI|Arriba, tres filas de controles válidas para todas las pestañas: estaciones y banda, capa E y antena, hora del cálculo (capítulo 4).
+LI|Arriba, dos filas de controles válidas para todas las pestañas: capa E y antena, hora del cálculo (capítulo 4). Su estación (locator, altura, banda y Calcular) está arriba a la derecha en Tráfico en directo.
 LI|La barra de las pestañas principales, con a la derecha el botón Controles, el esquema de colores (Tema) y el idioma.
 LI|Las subpestañas, en una fila más clara, para las pestañas que las tienen.
 LI|Abajo, la barra de estado: mensajes del cálculo, avisos sobre la conexión y el botón "Actualizaciones".
@@ -51,21 +51,21 @@ H2|3.3 Idioma, colores, tipo de letra
 LI|Idioma: 36 idiomas. Al cambiar de idioma la ventana se reconstruye en la misma posición y en la misma pestaña, sin reiniciar. Los números y las fechas siguen el idioma elegido (coma decimal en español, punto en inglés).
 LI|Tema: 12 esquemas de colores; Claro es el inicial, Noche y Negro sirven para la oscuridad, Estela meteórica es el estilo original de YA-MS.
 LI|Letra (Ajustes): reduce o amplía todo el texto del 85 al 140 %, en pasos del 5 %. Con letras grandes las pestañas pasan a otra línea.
-LI|Controles: pliega y vuelve a abrir las tres filas de controles, para dejar espacio a mapas y gráficos. La elección se recuerda.
+LI|Controles: pliega y vuelve a abrir las dos filas de controles, para dejar espacio a mapas y gráficos. La elección se recuerda.
 TAG|NOTA|Casi todos los controles tienen una información emergente: deja el ratón quieto sobre el control para leer para qué sirve y de qué fuente procede el valor inicial.
 H1|4. Configurar la estación y el trayecto
-H2|4.1 Fila 1: estaciones y banda
+H2|4.1 Mi estación (Tráfico en directo)
 LI|Mi locator y altitud m: tu locator Maidenhead (4, 6 u 8 caracteres; se usa el centro de la cuadrícula) y la altitud de la estación sobre el nivel del mar.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Sirve para la ganancia y el lóbulo de la antena, para la atenuación y el balance, y para la estimación del flujo.
 LI|Calcular: vuelve a calcular el trayecto (muestreo de la capa E, menos de un segundo).
-H2|4.2 Fila 2: capa E y antena
+H2|4.2 Fila 1: capa E y antena
 LI|Altura estelas km y del radar: altura de las estelas meteóricas. Con "del radar" marcado se usa la altura más frecuente medida por el radar de Collm (normalmente 88-90 km); desmárcalo para escribirla a mano.
 LI|Elevación lóbulo °: elevación del máximo del lóbulo vertical de tu antena. Una directiva fijada a 0° tiene de todos modos el lóbulo principal unos grados por encima del horizonte, debido a la reflexión en el suelo: normalmente 3-8°, según la altura de la antena en longitudes de onda.
 LI|diagrama de antena: activado (opción inicial), los puntos de reflexión cuentan con la ganancia vertical de las dos antenas: plena alrededor del máximo del lóbulo y cada vez menor hacia el horizonte y hacia arriba. Desactivado, la elevación del lóbulo es un límite tajante: los puntos vistos más abajo no cuentan.
 LI|Antena Yagi: boom m: longitud del boom. Al lado el programa escribe la longitud en longitudes de onda, la ganancia (curva DL6WU) y el lóbulo a -3 dB horizontal y vertical. Por debajo de 2 λ la estimación es poco precisa.
 LI|Hot spot desde punto medio km y auto (AMS): distancia de Hot A y Hot B al punto medio. Con "auto (AMS)" marcado sigue la tabla de J. Richardson citada por DJ5HG (13° de desviación a 1000 km, 10° más allá de 1500 km); desmárcalo para escribir 30-400 km a mano (MSHV usa 150 km).
 TAG|ATTENZIONE|Con "diagrama de antena" desactivado y el lóbulo a unos pocos grados, en un trayecto largo las dos estaciones pueden no ver ningún punto común de la capa: todas las eficiencias valen 0 y aparece el aviso "NINGUNA ZONA COMÚN" con el lóbulo o la altura de las estelas que harían falta. Ejemplo: JN70CN - JO76QP, 1791 km, lóbulo a 3°, estelas a 88,5 km.
-H2|4.3 Fila 3: hora del cálculo
+H2|4.3 Fila 2: hora del cálculo
 LI|Hora: reloj UTC.
 LI|Fecha del cálculo (UTC): el día del cálculo. Se aplica a Cálculo de previsión, a la tabla de 24 horas de Cálculo de la eficiencia y a la cronología de Radar GRAVES. Inicialmente es hoy y a medianoche pasa al día nuevo.
 LI|Horas (de −12 a +36 h): desplaza el momento del cálculo, en pasos de 15 minutos. Al lado: "Cálculo para: ahora" o bien la fecha y la hora elegidas.

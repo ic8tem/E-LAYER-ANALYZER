@@ -38,7 +38,7 @@ H2|2.5 Mga nawawalang file ng programa
 P|Sa pagsisimula, tinitingnan ng YA-MS kung kumpleto ang lahat ng file nito (mga salin, katalogo, dokumento). Kung may kulang, halimbawa pagkatapos ng hindi kumpletong pagkopya, inililista ang mga ito ng window na “Mga nawawalang file” at iniaalok ang “I-download ang mga nawawalang file” mula sa GitHub, sa parehong bersyon ng programa, o “Magpatuloy nang wala ang mga ito”. Inuulit ang parehong pagsusuri kapag pinindot ang “Mga update”.
 H1|3. Ang pangunahing window
 H2|3.1 Ang mga bahagi ng window
-LI|Sa itaas, tatlong hanay ng mga kontrol na para sa lahat ng tab: mga istasyon at banda, E layer at antena, oras ng kalkulasyon (kabanata 4).
+LI|Sa itaas, dalawang hanay ng mga kontrol na para sa lahat ng tab: E layer at antena, oras ng kalkulasyon (kabanata 4). Nasa kanang itaas ng Live na trapiko ang iyong istasyon (locator, taas, banda at Kalkulahin).
 LI|Ang bar ng mga pangunahing tab, na may button na Mga kontrol sa kanan, ang color scheme (Tema) at ang wika.
 LI|Ang mga sub-tab, sa isang mas mapusyaw na hanay, para sa mga tab na mayroon nito.
 LI|Sa ibaba, ang status bar: mga mensahe ng kalkulasyon, mga babala tungkol sa koneksiyon, at ang button na “Mga update”.
@@ -51,21 +51,21 @@ H2|3.3 Wika, mga kulay, font
 LI|Wika: 36 na wika. Kapag pinalitan ang wika, binubuo muli ang window sa parehong posisyon at sa parehong tab, nang hindi nagre-restart. Sumusunod ang mga numero at petsa sa napiling wika (decimal comma sa Italyano, tuldok sa Ingles).
 LI|Tema: 12 color scheme; ang Maliwanag ang default, ang Gabi at Itim ay para sa dilim, ang Bakas ng meteor ang orihinal na istilo ng YA-MS.
 LI|Font (Mga setting): pinaliliit o pinalalaki ang lahat ng teksto mula 85 hanggang 140 %, sa hakbang na 5 %. Kapag malaki ang font, bumababa sa ibang linya ang mga tab.
-LI|Mga kontrol: itinitiklop at muling binubuksan ang tatlong hanay ng mga kontrol, para magbigay ng espasyo sa mga mapa at graph. Tinatandaan ang napili.
+LI|Mga kontrol: itinitiklop at muling binubuksan ang dalawang hanay ng mga kontrol, para magbigay ng espasyo sa mga mapa at graph. Tinatandaan ang napili.
 TAG|NOTA|Halos bawat kontrol ay may tooltip: itigil ang mouse sa ibabaw ng kontrol para mabasa kung para saan ito at kung saang source galing ang default na halaga.
 H1|4. Pag-set up ng istasyon at ng landas
-H2|4.1 Hanay 1: mga istasyon at banda
+H2|4.1 Ang istasyon ko (Live na trapiko)
 LI|Ang aking locator at altitude m: ang iyong Maidenhead locator (4, 6 o 8 karakter; ginagamit ang gitna ng square) at ang altitude ng istasyon mula sa antas ng dagat.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Ginagamit para sa gain at lobe ng antena, para sa path loss at link budget, at para sa tantiya ng flux.
 LI|Kalkulahin: kinakalkula muli ang landas (pag-sample ng E layer, wala pang isang segundo).
-H2|4.2 Hanay 2: E layer at antena
+H2|4.2 Hanay 1: E layer at antena
 LI|Taas ng bakas km at mula sa radar: taas ng mga bakas ng meteor. Kapag naka-tsek ang “mula sa radar”, ginagamit ang pinakamadalas na taas na sinukat ng radar ng Collm (karaniwang 88-90 km); alisin ang tsek para isulat ito nang mano-mano.
 LI|Elevation ng lobe °: elevation ng maximum ng patayong lobe ng iyong antena. Ang isang directional na antena na nakapirmi sa 0° ay may pangunahing lobe pa rin na ilang digri sa itaas ng horizon, dahil sa repleksiyon sa lupa: karaniwang 3-8°, depende sa taas ng antena sa wavelength.
 LI|pattern ng antena: kapag naka-on (default), binibilang ang mga punto ng repleksiyon ayon sa patayong gain ng dalawang antena: buo sa paligid ng maximum ng lobe, pakaunti nang pakaunti patungo sa horizon at pataas. Kapag naka-off, ang elevation ng lobe ay isang matigas na hangganan: hindi binibilang ang mga puntong nakikita sa mas mababa.
 LI|Yagi antena: boom m: haba ng boom. Sa tabi nito, isinusulat ng programa ang haba sa wavelength, ang gain (kurba ng DL6WU) at ang pahalang at patayong lobe sa -3 dB. Sa ilalim ng 2 λ, hindi gaanong tumpak ang tantiya.
 LI|Hot spot mula sa gitnang punto km at auto (AMS): distansiya ng Hot A at Hot B mula sa gitnang punto. Kapag naka-tsek ang “auto (AMS)”, sinusunod ang talahanayan ni J. Richardson na binanggit ni DJ5HG (13° na paglihis sa 1000 km, 10° lampas sa 1500 km); alisin ang tsek para isulat nang mano-mano ang 30-400 km (gumagamit ang MSHV ng 150 km).
 TAG|ATTENZIONE|Kapag naka-off ang “pattern ng antena” at ilang digri ang lobe, sa isang mahabang landas ay maaaring walang makitang pinagsasaluhang punto ng layer ang dalawang istasyon: 0 ang lahat ng episyensya at lumalabas ang babalang “WALANG PINAGSASALUHANG SONA” kasama ang lobe o taas ng bakas na kakailanganin. Halimbawa: JN70CN - JO76QP, 1791 km, lobe sa 3°, mga bakas sa 88.5 km.
-H2|4.3 Hanay 3: oras ng kalkulasyon
+H2|4.3 Hanay 2: oras ng kalkulasyon
 LI|Oras: orasang UTC.
 LI|Petsa ng kalkulasyon (UTC): ang araw ng kalkulasyon. Para ito sa Kalkulasyon ng pagtataya, sa talahanayan ng 24 na oras ng Kalkulasyon ng episyensya at sa kronolohiya ng GRAVES radar. Ang default ay ngayon, at sa hatinggabi ay sumusunod ito sa bagong araw.
 LI|Mga oras (mula −12 hanggang +36 h): inililipat ang sandali ng kalkulasyon, nang 15 minuto bawat hakbang. Sa tabi: “Kalkulasyon para sa: ngayon” o ang napiling petsa at oras.

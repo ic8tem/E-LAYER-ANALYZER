@@ -38,7 +38,7 @@ H2|2.5 Fichiers du programme manquants
 P|Au démarrage, YA-MS vérifie qu'il dispose de tous ses fichiers (traductions, catalogues, documents). S'il en manque, par exemple après une copie incomplète, la fenêtre « Fichiers manquants » les énumère et propose « Télécharger les fichiers manquants » depuis GitHub, dans la même version du programme, ou « Continuer sans ». La même vérification est répétée en appuyant sur « Mises à jour ».
 H1|3. La fenêtre principale
 H2|3.1 Les parties de la fenêtre
-LI|En haut, trois rangées de commandes valables pour tous les onglets : stations et bande, couche E et antenne, heure du calcul (chapitre 4).
+LI|En haut, deux rangées de commandes valables pour tous les onglets : couche E et antenne, heure du calcul (chapitre 4). Votre station (locator, altitude, bande et Calculer) est en haut à droite du Trafic en direct.
 LI|La barre des onglets principaux, avec à droite le bouton Commandes, le jeu de couleurs (Thème) et la langue.
 LI|Les sous-onglets, dans une rangée plus claire, pour les onglets qui en ont.
 LI|En bas, la barre d'état : messages du calcul, avertissements sur la connexion et le bouton « Mises à jour ».
@@ -51,21 +51,21 @@ H2|3.3 Langue, couleurs, police
 LI|Langue : 36 langues. Lorsque vous changez de langue, la fenêtre se reconstruit à la même position et sur le même onglet, sans redémarrer. Les nombres et les dates suivent la langue choisie (virgule décimale en italien, point en anglais).
 LI|Thème : 12 jeux de couleurs ; Clair est celui par défaut, Nuit et Noir servent dans l'obscurité, Traînée météorique est le style d'origine de YA-MS.
 LI|Police (Paramètres) : réduit ou agrandit tout le texte de 85 à 140 %, par pas de 5 %. Avec de grands caractères, les onglets passent à la ligne.
-LI|Commandes : replie et rouvre les trois rangées de commandes, pour laisser de la place aux cartes et aux graphiques. Le choix est mémorisé.
+LI|Commandes : replie et rouvre les deux rangées de commandes, pour laisser de la place aux cartes et aux graphiques. Le choix est mémorisé.
 TAG|NOTA|Presque chaque commande a une info-bulle : laissez la souris immobile sur la commande pour lire à quoi elle sert et de quelle source provient la valeur par défaut.
 H1|4. Configurer la station et le trajet
-H2|4.1 Rangée 1 : stations et bande
+H2|4.1 Ma station (Trafic en direct)
 LI|Mon locator et altitude m : votre locator Maidenhead (4, 6 ou 8 caractères ; c'est le centre du carré qui est utilisé) et l'altitude de la station au-dessus du niveau de la mer.
 LI|Bande MHz : 28, 50, 70, 144, 222 ou 432 MHz. Elle sert pour le gain et le lobe de l'antenne, pour l'affaiblissement et le bilan, pour l'estimation du flux.
 LI|Calculer : recalcule le trajet (échantillonnage de la couche E, moins d'une seconde).
-H2|4.2 Rangée 2 : couche E et antenne
+H2|4.2 Rangée 1 : couche E et antenne
 LI|Altitude traînées km et du radar : altitude des traînées météoriques. Avec « du radar » coché, on utilise l'altitude la plus fréquente mesurée par le radar de Collm (en général 88-90 km) ; décochez-la pour la saisir à la main.
 LI|Élévation du lobe ° : élévation du maximum du lobe vertical de votre antenne. Une antenne directive fixée à 0° a quand même son lobe principal quelques degrés au-dessus de l'horizon, à cause de la réflexion sur le sol : en général 3-8°, selon la hauteur de l'antenne en longueurs d'onde.
 LI|diagramme d'antenne : activé (par défaut), les points de réflexion comptent avec le gain vertical des deux antennes : plein autour du maximum du lobe, de moins en moins vers l'horizon et vers le haut. Désactivé, l'élévation du lobe est une limite nette : les points vus plus bas ne comptent pas.
 LI|Antenne Yagi : boom m : longueur du boom. À côté, le programme indique la longueur en longueurs d'onde, le gain (courbe DL6WU) et l'ouverture du lobe à -3 dB horizontale et verticale. En dessous de 2 λ, l'estimation est peu précise.
 LI|Hot spot depuis le point milieu km et auto (AMS) : distance de Hot A et Hot B par rapport au point milieu. Avec « auto (AMS) » coché, elle suit la table de J. Richardson citée par DJ5HG (13° d'écart à 1000 km, 10° au-delà de 1500 km) ; décochez-la pour saisir 30-400 km à la main (MSHV utilise 150 km).
 TAG|ATTENZIONE|Avec « diagramme d'antenne » désactivé et le lobe à quelques degrés, sur un long trajet les deux stations peuvent ne voir aucun point commun de la couche : toutes les efficacités valent 0 et l'avertissement « AUCUNE ZONE COMMUNE » apparaît, avec le lobe ou l'altitude des traînées qui seraient nécessaires. Exemple : JN70CN - JO76QP, 1791 km, lobe à 3°, traînées à 88,5 km.
-H2|4.3 Rangée 3 : heure du calcul
+H2|4.3 Rangée 2 : heure du calcul
 LI|Heure : horloge UTC.
 LI|Date du calcul (UTC) : le jour du calcul. Elle s'applique au Calcul prévisionnel, au tableau des 24 heures du Calcul de l'efficacité et à la chronologie du Radar GRAVES. Par défaut c'est aujourd'hui, et à minuit elle passe au nouveau jour.
 LI|Heures (de −12 à +36 h) : décale le moment du calcul, par pas de 15 minutes. À côté : « Calcul pour : maintenant » ou la date et l'heure choisies.

@@ -38,7 +38,7 @@ H2|2.5 Eksik program dosyaları
 P|Açılışta YA-MS tüm dosyalarının (çeviriler, kataloglar, belgeler) mevcut olup olmadığını denetler. Bazıları eksikse, örneğin eksik bir kopyalamadan sonra, "Eksik dosyalar" penceresi bunları listeler ve programın aynı sürümünden GitHub'dan "Eksik dosyaları indir" ya da "Onlarsız devam et" seçeneğini sunar. Aynı denetim "Güncellemeler" düğmesine basıldığında yinelenir.
 H1|3. Ana pencere
 H2|3.1 Pencerenin bölümleri
-LI|Üstte, tüm sekmeler için geçerli üç sıra kontrol: istasyonlar ve bant, E katmanı ve anten, hesap zamanı (bölüm 4).
+LI|Üstte, tüm sekmeler için geçerli iki sıra kontrol: E katmanı ve anten, hesap zamanı (bölüm 4). İstasyonunuz (lokatör, yükseklik, bant ve Hesapla) Canlı trafik sekmesinin sağ üstündedir.
 LI|Ana sekmelerin çubuğu; sağında Kontroller düğmesi, renk şeması (Tema) ve dil.
 LI|Alt sekmeleri olan sekmeler için, daha açık renkli bir sırada alt sekmeler.
 LI|Altta durum çubuğu: hesap iletileri, bağlantı uyarıları ve "Güncellemeler" düğmesi.
@@ -51,21 +51,21 @@ H2|3.3 Dil, renkler, yazı tipi
 LI|Dil: 36 dil. Dil değiştirildiğinde pencere, yeniden başlatmaya gerek kalmadan aynı konumda ve aynı sekmede yeniden oluşturulur. Sayılar ve tarihler seçilen dili izler (İtalyancada ondalık virgül, İngilizcede nokta).
 LI|Tema: 12 renk şeması; Açık başlangıç şemasıdır, Gece ve Siyah karanlıkta kullanım içindir, Meteor izi YA-MS'in özgün stilidir.
 LI|Yazı boyutu (Ayarlar): tüm metni %85 ile %140 arasında, %5 adımlarla küçültür veya büyütür. Büyük yazıda sekmeler birkaç satıra kayar.
-LI|Kontroller: haritalara ve grafiklere yer açmak için üç kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
+LI|Kontroller: haritalara ve grafiklere yer açmak için iki kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
 TAG|NOTA|Hemen her kontrolün bir ipucu balonu vardır: ne işe yaradığını ve başlangıç değerinin hangi kaynaktan geldiğini okumak için fareyi kontrolün üzerinde tutun.
 H1|4. İstasyonu ve yolu ayarlama
-H2|4.1 Sıra 1: istasyonlar ve bant
+H2|4.1 Benim istasyonum (Canlı trafik)
 LI|Benim lokatörüm ve rakım m: Maidenhead lokatörünüz (4, 6 veya 8 karakter; karenin merkezi kullanılır) ve istasyonun deniz seviyesinden yüksekliği.
 LI|Bant MHz: 28, 50, 70, 144, 222 veya 432 MHz. Anten kazancı ve lobu, yol kaybı ve bağlantı bütçesi ile akı tahmini için kullanılır.
 LI|Hesapla: yolu yeniden hesaplar (E katmanının örneklenmesi, bir saniyeden kısa).
-H2|4.2 Sıra 2: E katmanı ve anten
+H2|4.2 Sıra 1: E katmanı ve anten
 LI|İz yüksekliği km ve radardan: meteor izlerinin yüksekliği. "radardan" işaretliyken Collm radarının ölçtüğü en sık yükseklik (genellikle 88-90 km) kullanılır; elle yazmak için işareti kaldırın.
 LI|Lob elevasyonu °: anteninizin dikey lobunun maksimumunun elevasyonu. 0°'ye sabitlenmiş bir yönlü antenin ana lobu bile, zeminden yansıma nedeniyle ufkun birkaç derece üzerindedir: antenin dalga boyu cinsinden yüksekliğine göre genellikle 3-8°.
 LI|anten diyagramı: açıkken (başlangıç ayarı) yansıma noktaları iki antenin dikey kazancıyla ağırlıklandırılır: lob maksimumu çevresinde tam, ufka doğru ve yukarıya doğru giderek azalan. Kapalıyken lob elevasyonu kesin bir sınırdır: daha aşağıda görülen noktalar hesaba katılmaz.
 LI|Yagi anten: boom m: boom uzunluğu. Program yanına uzunluğu dalga boyu cinsinden, kazancı (DL6WU eğrisi) ve yatay ve dikey -3 dB lobunu yazar. 2 λ'nın altında tahmin pek kesin değildir.
 LI|Orta noktadan hot spot km ve otomatik (AMS): Hot A ve Hot B'nin orta noktaya uzaklığı. "otomatik (AMS)" işaretliyken DJ5HG'nin aktardığı J. Richardson tablosu izlenir (1000 km'de 13°, 1500 km'nin ötesinde 10° sapma); 30-400 km arasını elle yazmak için işareti kaldırın (MSHV 150 km kullanır).
 TAG|ATTENZIONE|"anten diyagramı" kapalı ve lob birkaç derecedeyken, uzun bir yolda iki istasyon katmanın hiçbir ortak noktasını göremeyebilir: tüm verimler 0 olur ve gerekli lob ya da iz yüksekliğini belirten "ORTAK BÖLGE YOK" uyarısı görünür. Örnek: JN70CN - JO76QP, 1791 km, lob 3°'de, izler 88,5 km'de.
-H2|4.3 Sıra 3: hesap zamanı
+H2|4.3 Sıra 2: hesap zamanı
 LI|Saat: UTC saati.
 LI|Hesap tarihi (UTC): hesabın günü. Tahmin hesabı, Verim hesabı'ndaki 24 saatlik tablo ve GRAVES radarı'ndaki kronoloji için geçerlidir. Başlangıçta bugündür ve gece yarısı yeni güne geçer.
 LI|Saatler (−12 ile +36 sa arası): hesap anını 15 dakikalık adımlarla kaydırır. Yanında: "Hesap zamanı: şimdi" ya da seçilen tarih ve saat.

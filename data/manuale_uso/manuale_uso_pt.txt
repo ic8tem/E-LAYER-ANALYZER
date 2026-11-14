@@ -38,7 +38,7 @@ H2|2.5 Ficheiros do programa em falta
 P|Ao arrancar, o YA-MS verifica se tem todos os seus ficheiros (traduções, catálogos, documentos). Se faltar algum, por exemplo após uma cópia incompleta, a janela "Ficheiros em falta" enumera-os e propõe "Descarregar os ficheiros em falta" do GitHub, na mesma versão do programa, ou "Continuar sem eles". A mesma verificação repete-se ao premir "Atualizações".
 H1|3. A janela principal
 H2|3.1 As partes da janela
-LI|Em cima, três linhas de comandos válidas para todos os separadores: estações e banda, camada E e antena, hora do cálculo (capítulo 4).
+LI|Em cima, duas linhas de comandos válidas para todos os separadores: camada E e antena, hora do cálculo (capítulo 4). A sua estação (locator, altitude, banda e Calcular) está em cima à direita no Tráfego em direto.
 LI|A barra dos separadores principais, com, à direita, o botão Comandos, o esquema de cores (Tema) e a língua.
 LI|Os subseparadores, numa linha mais clara, para os separadores que os têm.
 LI|Em baixo, a barra de estado: mensagens do cálculo, avisos sobre a ligação e o botão "Atualizações".
@@ -51,21 +51,21 @@ H2|3.3 Língua, cores, tipo de letra
 LI|Língua: 36 línguas. Ao mudar de língua a janela reconstrói-se na mesma posição e no mesmo separador, sem reiniciar. Os números e as datas seguem a língua escolhida (vírgula decimal em português, ponto em inglês).
 LI|Tema: 12 esquemas de cores; Claro é o inicial, Noite e Preto servem para o escuro, Rasto meteórico é o estilo original do YA-MS.
 LI|Letra (Definições): reduz ou amplia todo o texto de 85 a 140 %, em passos de 5 %. Com letras grandes os separadores passam para outra linha.
-LI|Comandos: recolhe e volta a abrir as três linhas de comandos, para dar espaço a mapas e gráficos. A escolha fica memorizada.
+LI|Comandos: recolhe e volta a abrir as duas linhas de comandos, para dar espaço a mapas e gráficos. A escolha fica memorizada.
 TAG|NOTA|Quase todos os comandos têm uma dica: mantenha o rato parado sobre o comando para ler para que serve e de que fonte vem o valor inicial.
 H1|4. Configurar a estação e o percurso
-H2|4.1 Linha 1: estações e banda
+H2|4.1 A minha estação (Tráfego em direto)
 LI|O meu locator e altitude m: o seu locator Maidenhead (4, 6 ou 8 caracteres; usa-se o centro do quadrado) e a altitude da estação acima do nível do mar.
 LI|Banda MHz: 28, 50, 70, 144, 222 ou 432 MHz. Serve para o ganho e o lóbulo da antena, para a atenuação e o balanço, e para a estimativa do fluxo.
 LI|Calcular: recalcula o percurso (amostragem da camada E, menos de um segundo).
-H2|4.2 Linha 2: camada E e antena
+H2|4.2 Linha 1: camada E e antena
 LI|Altitude dos rastos km e do radar: altitude dos rastos meteóricos. Com "do radar" assinalado usa-se a altitude mais frequente medida pelo radar de Collm (normalmente 88-90 km); retire a marca para a escrever manualmente.
 LI|Elevação do lóbulo °: elevação do máximo do lóbulo vertical da sua antena. Uma antena diretiva fixada a 0° tem mesmo assim o lóbulo principal alguns graus acima do horizonte, devido à reflexão no solo: normalmente 3-8°, conforme a altura da antena em comprimentos de onda.
 LI|diagrama da antena: ativado (inicial), os pontos de reflexão contam com o ganho vertical das duas antenas: pleno em torno do máximo do lóbulo e cada vez menor em direção ao horizonte e para cima. Desativado, a elevação do lóbulo é um limite rígido: os pontos vistos mais abaixo não contam.
 LI|Antena Yagi: boom m: comprimento do boom. Ao lado, o programa escreve o comprimento em comprimentos de onda, o ganho (curva DL6WU) e o lóbulo a -3 dB horizontal e vertical. Abaixo de 2 λ a estimativa é pouco precisa.
 LI|Hot spot desde o ponto médio km e auto (AMS): distância de Hot A e Hot B ao ponto médio. Com "auto (AMS)" assinalado segue a tabela de J. Richardson citada por DJ5HG (13° de desvio a 1000 km, 10° para além de 1500 km); retire a marca para escrever 30-400 km manualmente (o MSHV usa 150 km).
 TAG|ATTENZIONE|Com "diagrama da antena" desativado e o lóbulo a poucos graus, num percurso longo as duas estações podem não ver nenhum ponto comum da camada: todas as eficiências valem 0 e aparece o aviso "NENHUMA ZONA COMUM" com o lóbulo ou a altitude dos rastos que seriam necessários. Exemplo: JN70CN - JO76QP, 1791 km, lóbulo a 3°, rastos a 88,5 km.
-H2|4.3 Linha 3: hora do cálculo
+H2|4.3 Linha 2: hora do cálculo
 LI|Hora: relógio UTC.
 LI|Data do cálculo (UTC): o dia do cálculo. Aplica-se ao Cálculo de previsão, à tabela das 24 horas do Cálculo da eficiência e à cronologia do Radar GRAVES. Inicialmente é hoje e à meia-noite passa para o novo dia.
 LI|Horas (de −12 a +36 h): desloca o momento do cálculo, em passos de 15 minutos. Ao lado: "Cálculo para: agora" ou a data e a hora escolhidas.

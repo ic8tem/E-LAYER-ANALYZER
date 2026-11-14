@@ -38,7 +38,7 @@ H2|2.5 Fișiere ale programului lipsă
 P|La pornire YA-MS verifică dacă are toate fișierele sale (traduceri, cataloage, documente). Dacă lipsește vreunul, de exemplu după o copiere incompletă, fereastra „Fișiere lipsă” le enumeră și propune „Descarcă fișierele lipsă” de pe GitHub, în aceeași versiune a programului, sau „Continuă fără ele”. Aceeași verificare se repetă la apăsarea butonului „Actualizări”.
 H1|3. Fereastra principală
 H2|3.1 Părțile ferestrei
-LI|Sus, trei rânduri de comenzi valabile pentru toate filele: stații și bandă, stratul E și antenă, ora calculului (capitolul 4).
+LI|Sus, două rânduri de comenzi valabile pentru toate filele: stratul E și antenă, ora calculului (capitolul 4). Stația dvs. (locator, altitudine, bandă și Calculează) este în dreapta sus în Trafic în direct.
 LI|Bara filelor principale, cu butonul Comenzi în dreapta, schema de culori (Temă) și limba.
 LI|Sub-filele, pe un rând mai deschis, pentru filele care le au.
 LI|Jos, bara de stare: mesajele calculului, avertismentele privind conexiunea și butonul „Actualizări”.
@@ -51,21 +51,21 @@ H2|3.3 Limbă, culori, font
 LI|Limba: 36 de limbi. La schimbarea limbii fereastra se reconstruiește în aceeași poziție și pe aceeași filă, fără repornire. Numerele și datele urmează limba aleasă (virgulă zecimală în română, punct în engleză).
 LI|Temă: 12 scheme de culori; Luminos este cea implicită, Noapte și Negru sunt pentru întuneric, Dâră meteorică este stilul original al YA-MS.
 LI|Caractere (Setări): micșorează sau mărește tot textul de la 85 la 140 %, în pași de 5 %. Cu caractere mari filele trec pe mai multe rânduri.
-LI|Comenzi: pliază și redeschide cele trei rânduri de comenzi, pentru a face loc hărților și graficelor. Alegerea este memorată.
+LI|Comenzi: pliază și redeschide cele două rânduri de comenzi, pentru a face loc hărților și graficelor. Alegerea este memorată.
 TAG|NOTA|Aproape fiecare comandă are un balon de ajutor: țineți mouse-ul nemișcat deasupra comenzii pentru a citi la ce servește și din ce sursă provine valoarea implicită.
 H1|4. Configurarea stației și a traseului
-H2|4.1 Rândul 1: stații și bandă
+H2|4.1 Stația mea (Trafic în direct)
 LI|Locatorul meu și altitudine m: locatorul dumneavoastră Maidenhead (4, 6 sau 8 caractere; se folosește centrul pătratului) și altitudinea stației deasupra nivelului mării.
 LI|Bandă MHz: 28, 50, 70, 144, 222 sau 432 MHz. Servește pentru câștigul și lobul antenei, pentru atenuare și bilanț și pentru estimarea fluxului.
 LI|Calculează: recalculează traseul (eșantionarea stratului E, sub o secundă).
-H2|4.2 Rândul 2: stratul E și antena
+H2|4.2 Rândul 1: stratul E și antena
 LI|Altitudine dâre km și de la radar: altitudinea dârelor meteorice. Cu „de la radar” bifat se folosește altitudinea cea mai frecventă măsurată de radarul de la Collm (de obicei 88-90 km); debifați pentru a o scrie manual.
 LI|Elevație lob °: elevația maximului lobului vertical al antenei dumneavoastră. O antenă directivă fixată la 0° are totuși lobul principal la câteva grade deasupra orizontului, din cauza reflexiei pe sol: de obicei 3-8°, în funcție de înălțimea antenei în lungimi de undă.
 LI|diagrama antenei: activată (implicit), punctele de reflexie contează cu câștigul vertical al celor două antene: complet în jurul maximului lobului, din ce în ce mai puțin spre orizont și spre în sus. Dezactivată, elevația lobului este o limită netă: punctele văzute mai jos nu contează.
 LI|Antenă Yagi: boom m: lungimea boom-ului. Alături programul afișează lungimea în lungimi de undă, câștigul (curba DL6WU) și lobul la -3 dB orizontal și vertical. Sub 2 λ estimarea este puțin precisă.
 LI|Hot spot de la punctul de mijloc km și auto (AMS): distanța dintre Hot A și Hot B și punctul de mijloc. Cu „auto (AMS)” bifat urmează tabelul lui J. Richardson citat de DJ5HG (abatere de 13° la 1000 km, 10° peste 1500 km); debifați pentru a scrie manual 30-400 km (MSHV folosește 150 km).
 TAG|ATTENZIONE|Cu „diagrama antenei” dezactivată și lobul la câteva grade, pe un traseu lung cele două stații pot să nu vadă niciun punct comun al stratului: toate eficiențele sunt 0 și apare avertismentul „NICIO ZONĂ COMUNĂ” cu lobul sau altitudinea dârelor care ar fi necesare. Exemplu: JN70CN - JO76QP, 1791 km, lob la 3°, dâre la 88,5 km.
-H2|4.3 Rândul 3: ora calculului
+H2|4.3 Rândul 2: ora calculului
 LI|Ora: ceas UTC.
 LI|Data calculului (UTC): ziua calculului. Este valabilă pentru Calcul de prognoză, pentru tabelul de 24 de ore din Calculul eficienței și pentru cronologia din Radar GRAVES. Implicit este ziua de azi, iar la miezul nopții trece la ziua nouă.
 LI|Ore (de la −12 la +36 h): deplasează momentul calculului, în pași de 15 minute. Alături: „Calcul pentru: acum” sau data și ora alese.

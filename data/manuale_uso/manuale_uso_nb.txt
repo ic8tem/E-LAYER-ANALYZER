@@ -38,7 +38,7 @@ H2|2.5 Manglende programfiler
 P|Ved oppstart sjekker YA-MS at alle filene er på plass (oversettelser, kataloger, dokumenter). Hvis noen mangler, for eksempel etter en ufullstendig kopiering, lister vinduet "Manglende filer" dem opp og tilbyr "Last ned manglende filer" fra GitHub, i samme versjon som programmet, eller "Fortsett uten". Den samme sjekken gjentas når du trykker på "Oppdateringer".
 H1|3. Hovedvinduet
 H2|3.1 Vinduets deler
-LI|Øverst tre rader med kontroller som gjelder for alle fanene: stasjoner og bånd, E-lag og antenne, tidspunkt for beregningen (kapittel 4).
+LI|Øverst to rader med kontroller som gjelder for alle fanene: E-lag og antenne, tidspunkt for beregningen (kapittel 4). Stasjonen din (lokator, høyde, bånd og Beregn) står øverst til høyre i Trafikk i sanntid.
 LI|Linjen med hovedfanene, med knappen Kontroller, fargeskjemaet (Tema) og språket til høyre.
 LI|Underfanene, i en lysere rad, for fanene som har dem.
 LI|Nederst statuslinjen: meldinger fra beregningen, varsler om tilkoblingen og knappen "Oppdateringer".
@@ -51,21 +51,21 @@ H2|3.3 Språk, farger, skrift
 LI|Språk: 36 språk. Når du bytter språk, bygges vinduet opp igjen i samme posisjon og på samme fane, uten omstart. Tall og datoer følger det valgte språket (desimalkomma på italiensk, punktum på engelsk).
 LI|Tema: 12 fargeskjemaer; Lys er standardskjemaet, Natt og Svart er beregnet på mørke, Meteorspor er den opprinnelige stilen til YA-MS.
 LI|Skrift (Innstillinger): forminsker eller forstørrer all tekst fra 85 til 140 %, i trinn på 5 %. Med stor skrift brytes fanene over flere linjer.
-LI|Kontroller: slår sammen og åpner igjen de tre radene med kontroller, for å gi plass til kart og diagrammer. Valget huskes.
+LI|Kontroller: slår sammen og åpner igjen de to radene med kontroller, for å gi plass til kart og diagrammer. Valget huskes.
 TAG|NOTA|Nesten hver kontroll har et verktøytips: hold musen i ro over kontrollen for å lese hva den brukes til og fra hvilken kilde standardverdien kommer.
 H1|4. Stille inn stasjonen og strekningen
-H2|4.1 Rad 1: stasjoner og bånd
+H2|4.1 Min stasjon (Trafikk direkte)
 LI|Min lokator og høyde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten av ruten brukes) og stasjonens høyde over havet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Brukes til antennens forsterkning og lobe, til dempingen og linkbudsjettet og til estimatet av fluksen.
 LI|Beregn: beregner strekningen på nytt (sampling av E-laget, under ett sekund).
-H2|4.2 Rad 2: E-lag og antenne
+H2|4.2 Rad 1: E-lag og antenne
 LI|Sporhøyde km og fra radar: høyden til meteorsporene. Med "fra radar" avkrysset brukes den hyppigste høyden målt av radaren i Collm (vanligvis 88-90 km); fjern avkrysningen for å skrive den inn manuelt.
 LI|Lobeelevasjon °: elevasjonen til maksimum i antennens vertikale lobe. En retningsantenne som står på 0°, har likevel hovedloben noen grader over horisonten på grunn av refleksjonen i bakken: vanligvis 3-8°, avhengig av antennens høyde i bølgelengder.
 LI|antennediagram: når det er slått på (standard), teller refleksjonspunktene med den vertikale forsterkningen til de to antennene: fullt rundt lobens maksimum, stadig mindre mot horisonten og oppover. Når det er slått av, er lobens elevasjon en skarp grense: punkter som ses lavere, teller ikke.
 LI|Yagi-antenne: bom m: bommens lengde. Ved siden av skriver programmet lengden i bølgelengder, forsterkningen (DL6WU-kurven) og den horisontale og vertikale loben ved -3 dB. Under 2 λ er estimatet lite nøyaktig.
 LI|Hot spot fra midtpunkt km og auto (AMS): avstanden fra Hot A og Hot B til midtpunktet. Med "auto (AMS)" avkrysset følges tabellen til J. Richardson, sitert av DJ5HG (13° avvik ved 1000 km, 10° over 1500 km); fjern avkrysningen for å skrive inn 30-400 km manuelt (MSHV bruker 150 km).
 TAG|ATTENZIONE|Med "antennediagram" slått av og loben på noen få grader kan de to stasjonene på en lang strekning mangle felles punkter i laget: alle effektivitetene blir 0 og varselet "INGEN FELLES SONE" vises, med den loben eller sporhøyden som ville vært nødvendig. Eksempel: JN70CN - JO76QP, 1791 km, lobe på 3°, spor på 88,5 km.
-H2|4.3 Rad 3: tidspunkt for beregningen
+H2|4.3 Rad 2: tidspunkt for beregningen
 LI|Tid: UTC-klokke.
 LI|Beregningsdato (UTC): dagen for beregningen. Gjelder for Prognoseberegning, for 24-timerstabellen i Effektivitetsberegning og for tidslinjen i GRAVES-radar. Standard er i dag, og ved midnatt følger datoen med til den nye dagen.
 LI|Timer (−12 til +36 t): flytter tidspunktet for beregningen i trinn på 15 minutter. Ved siden av: "Beregning for: nå" eller valgt dato og klokkeslett.

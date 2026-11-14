@@ -59,6 +59,7 @@ namespace YAMS
             Grid.SetColumn(traffic, 0); g.Children.Add(traffic);
 
             StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
+            side.Children.Add(BuildMyStationBox());
             side.Children.Add(new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
             side.Children.Add(new TextBlock
             {
@@ -121,6 +122,26 @@ namespace YAMS
             Border rb = new Border { Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1, 0, 0, 0), Child = right };
             Grid.SetColumn(rb, 1); g.Children.Add(rb);
             ShowTrafficInfo(null);
+        }
+
+        // riquadro "La mia stazione" in cima alla colonna destra (prima era la prima riga dei comandi)
+        Control BuildMyStationBox()
+        {
+            WrapPanel w1 = new WrapPanel { Orientation = Orientation.Horizontal };
+            foreach (Control c in new Control[] { L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt })
+            { c.VerticalAlignment = VerticalAlignment.Center; w1.Children.Add(c); }
+            WrapPanel w2 = new WrapPanel { Orientation = Orientation.Horizontal };
+            foreach (Control c in new Control[] { L(Lang.T("Banda MHz")), cmbBand, btnCalc })
+            { c.VerticalAlignment = VerticalAlignment.Center; w2.Children.Add(c); }
+            StackPanel sp = new StackPanel { Spacing = 2 };
+            string ttl = Lang.T("la mia stazione"); if (ttl.Length > 0) ttl = char.ToUpper(ttl[0]) + ttl.Substring(1);
+            sp.Children.Add(new TextBlock { Text = ttl, FontWeight = FontWeight.SemiBold, FontSize = 14, Foreground = Pal.B(Pal.Red) });
+            sp.Children.Add(w1); sp.Children.Add(w2);
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Red), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Margin = new Thickness(0, 0, 0, 4), Child = sp
+            };
         }
 
         void ShowTrafficInfo(TrafficSpot t)

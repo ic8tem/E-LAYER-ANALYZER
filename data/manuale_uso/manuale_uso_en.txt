@@ -38,7 +38,7 @@ H2|2.5 Missing program files
 P|At startup YA-MS checks that it has all its files (translations, catalogues, documents). If any are missing, for example after an incomplete copy, the "Missing files" window lists them and offers "Download the missing files" from GitHub, in the same version as the program, or "Continue without". The same check is repeated when you press "Updates".
 H1|3. The main window
 H2|3.1 The parts of the window
-LI|At the top, three rows of controls that apply to all tabs: stations and band, E layer and antenna, calculation time (chapter 4).
+LI|At the top, two rows of controls that apply to all tabs: E layer and antenna, calculation time (chapter 4). Your station (locator, height, band and Calculate) is at the top right of Live traffic.
 LI|The bar of the main tabs, with the Controls button, the colour scheme (Theme) and the language on the right.
 LI|The sub-tabs, in a lighter row, for the tabs that have them.
 LI|At the bottom, the status bar: calculation messages, connection warnings, and the "Updates" button.
@@ -51,21 +51,21 @@ H2|3.3 Language, colours, font
 LI|Language: 36 languages. When you change language the window is rebuilt in the same position and on the same tab, without restarting. Numbers and dates follow the chosen language (decimal comma in Italian, point in English).
 LI|Theme: 12 colour schemes; Light is the default, Night and Black are for use in the dark, Meteor trail is the original YA-MS style.
 LI|Font (Settings): shrinks or enlarges all text from 85 to 140 %, in 5 % steps. With large fonts the tabs wrap onto several lines.
-LI|Controls: collapses and reopens the three rows of controls, to make room for maps and charts. The choice is remembered.
+LI|Controls: collapses and reopens the two rows of controls, to make room for maps and charts. The choice is remembered.
 TAG|NOTA|Almost every control has a tooltip: hold the mouse still over the control to read what it is for and which source the default value comes from.
 H1|4. Setting up the station and the path
-H2|4.1 Row 1: stations and band
+H2|4.1 My station (Live traffic)
 LI|My locator and height m: your Maidenhead locator (4, 6 or 8 characters; the centre of the square is used) and the height of the station above sea level.
 LI|Band MHz: 28, 50, 70, 144, 222 or 432 MHz. It is used for the antenna gain and lobe, for the path loss and the link budget, and for the flux estimate.
 LI|Calculate: recalculates the path (sampling of the E layer, less than a second).
-H2|4.2 Row 2: E layer and antenna
+H2|4.2 Row 1: E layer and antenna
 LI|Trail height km and from radar: height of the meteor trails. With "from radar" ticked, the most frequent height measured by the Collm radar is used (usually 88-90 km); untick it to type it in manually.
 LI|Lobe elevation °: elevation of the maximum of your antenna's vertical lobe. A beam fixed at 0° still has its main lobe a few degrees above the horizon, because of the ground reflection: usually 3-8°, depending on the antenna height in wavelengths.
 LI|antenna pattern: when on (default), the reflection points count with the vertical gain of the two antennas: full around the maximum of the lobe, less and less towards the horizon and upwards. When off, the lobe elevation is a hard limit: points seen lower down do not count.
 LI|Yagi antenna: boom m: length of the boom. Next to it the program writes the length in wavelengths, the gain (DL6WU curve) and the horizontal and vertical -3 dB beamwidth. Below 2 λ the estimate is not very accurate.
 LI|Hot spot from midpoint km and auto (AMS): distance of Hot A and Hot B from the midpoint. With "auto (AMS)" ticked it follows J. Richardson's table quoted by DJ5HG (13° offset at 1000 km, 10° beyond 1500 km); untick it to type 30-400 km manually (MSHV uses 150 km).
 TAG|ATTENZIONE|With "antenna pattern" off and the lobe at a few degrees, on a long path the two stations may not see any common point of the layer: all efficiencies are 0 and the warning "NO COMMON ZONE" appears, with the lobe or trail height that would be needed. Example: JN70CN - JO76QP, 1791 km, lobe at 3°, trails at 88.5 km.
-H2|4.3 Row 3: calculation time
+H2|4.3 Row 2: calculation time
 LI|Time: UTC clock.
 LI|Calculation date (UTC): the day of the calculation. It applies to Forecast calculation, to the 24-hour table of Efficiency calculation and to the timeline of GRAVES radar. By default it is today, and at midnight it moves on to the new day.
 LI|Hours (−12 to +36 h): shifts the moment of the calculation, in 15-minute steps. Next to it: "Calculation for: now" or the chosen date and time.

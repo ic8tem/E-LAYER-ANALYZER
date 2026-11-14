@@ -38,7 +38,7 @@ H2|2.5 Brakujące pliki programu
 P|Przy uruchomieniu YA-MS sprawdza, czy ma wszystkie swoje pliki (tłumaczenia, katalogi, dokumenty). Jeśli któregoś brakuje, na przykład po niepełnym kopiowaniu, okno "Brakujące pliki" je wymienia i proponuje "Pobierz brakujące pliki" z serwisu GitHub, w tej samej wersji programu, albo "Kontynuuj bez nich". To samo sprawdzenie powtarza się po naciśnięciu "Aktualizacje".
 H1|3. Okno główne
 H2|3.1 Części okna
-LI|U góry trzy wiersze poleceń wspólnych dla wszystkich kart: stacje i pasmo, warstwa E i antena, czas obliczenia (rozdział 4).
+LI|U góry dwa wiersze poleceń wspólnych dla wszystkich kart: warstwa E i antena, czas obliczenia (rozdział 4). Twoja stacja (lokator, wysokość, pasmo i Oblicz) jest w prawym górnym rogu karty Ruch na żywo.
 LI|Pasek kart głównych, a po jego prawej stronie przycisk Sterowanie, schemat kolorów (Motyw) i język.
 LI|Podkarty, w jaśniejszym wierszu, dla kart, które je mają.
 LI|Na dole pasek stanu: komunikaty z obliczeń, ostrzeżenia o połączeniu i przycisk "Aktualizacje".
@@ -51,21 +51,21 @@ H2|3.3 Język, kolory, czcionka
 LI|Język: 36 języków. Po zmianie języka okno odbudowuje się w tym samym położeniu i na tej samej karcie, bez ponownego uruchamiania. Liczby i daty są zgodne z wybranym językiem (przecinek dziesiętny po polsku i po włosku, kropka po angielsku).
 LI|Motyw: 12 schematów kolorów; Jasny jest domyślny, Noc i Czarny służą do pracy w ciemności, Ślad meteoru to oryginalny styl YA-MS.
 LI|Czcionka (Ustawienia): zmniejsza lub powiększa cały tekst od 85 do 140 %, co 5 %. Przy dużej czcionce zakładki przechodzą do kolejnych wierszy.
-LI|Sterowanie: zwija i ponownie rozwija trzy wiersze poleceń, aby zrobić miejsce dla map i wykresów. Wybór jest zapamiętywany.
+LI|Sterowanie: zwija i ponownie rozwija dwa wiersze poleceń, aby zrobić miejsce dla map i wykresów. Wybór jest zapamiętywany.
 TAG|NOTA|Prawie każde polecenie ma dymek podpowiedzi: przytrzymaj kursor myszy nad poleceniem, aby przeczytać, do czego służy i z jakiego źródła pochodzi wartość domyślna.
 H1|4. Ustawienie stacji i trasy
-H2|4.1 Wiersz 1: stacje i pasmo
+H2|4.1 Moja stacja (Ruch na żywo)
 LI|Mój lokator i wysokość m: twój lokator Maidenhead (4, 6 lub 8 znaków; używany jest środek kwadratu) i wysokość stacji nad poziomem morza.
 LI|Pasmo MHz: 28, 50, 70, 144, 222 lub 432 MHz. Służy do obliczenia zysku i wiązki anteny, tłumienia i bilansu łącza oraz do oszacowania strumienia.
 LI|Oblicz: ponownie oblicza trasę (próbkowanie warstwy E, poniżej jednej sekundy).
-H2|4.2 Wiersz 2: warstwa E i antena
+H2|4.2 Wiersz 1: warstwa E i antena
 LI|Wysokość śladów km i z radaru: wysokość śladów meteorów. Gdy pole "z radaru" jest zaznaczone, używana jest najczęstsza wysokość zmierzona przez radar w Collm (zwykle 88-90 km); odznacz je, aby wpisać wartość ręcznie.
 LI|Elewacja wiązki °: elewacja maksimum pionowej wiązki twojej anteny. Antena kierunkowa ustawiona na 0° i tak ma główną wiązkę kilka stopni nad horyzontem z powodu odbicia od gruntu: zwykle 3-8°, zależnie od wysokości anteny w długościach fali.
 LI|charakterystyka anteny: włączona (domyślnie) - punkty odbicia liczą się z pionowym zyskiem obu anten: w pełni wokół maksimum wiązki, coraz mniej w stronę horyzontu i w górę. Wyłączona - elewacja wiązki jest ostrą granicą: punkty widziane niżej nie są brane pod uwagę.
 LI|Antena Yagi: boom m: długość bumu. Obok program wyświetla długość w długościach fali, zysk (krzywa DL6WU) oraz szerokość wiązki przy -3 dB w poziomie i w pionie. Poniżej 2 λ oszacowanie jest mało dokładne.
 LI|Hot spot od punktu środkowego km i auto (AMS): odległość Hot A i Hot B od punktu środkowego. Gdy pole "auto (AMS)" jest zaznaczone, wartość jest zgodna z tabelą J. Richardsona cytowaną przez DJ5HG (13° odchylenia przy 1000 km, 10° powyżej 1500 km); odznacz je, aby ręcznie wpisać 30-400 km (MSHV używa 150 km).
 TAG|ATTENZIONE|Gdy "charakterystyka anteny" jest wyłączona, a wiązka ustawiona na kilka stopni, na długiej trasie obie stacje mogą nie widzieć żadnego wspólnego punktu warstwy: wszystkie sprawności wynoszą 0 i pojawia się ostrzeżenie "BRAK WSPÓLNEJ STREFY" z elewacją wiązki lub wysokością śladów, które byłyby potrzebne. Przykład: JN70CN - JO76QP, 1791 km, wiązka na 3°, ślady na 88,5 km.
-H2|4.3 Wiersz 3: czas obliczenia
+H2|4.3 Wiersz 2: czas obliczenia
 LI|Godzina: zegar UTC.
 LI|Data obliczenia (UTC): dzień obliczenia. Dotyczy kart Obliczenie prognozy, tabeli 24 godzin w karcie Obliczanie sprawności oraz chronologii w karcie Radar GRAVES. Domyślnie jest to dzień dzisiejszy, a o północy data przechodzi na nowy dzień.
 LI|Godziny (od −12 do +36 h): przesuwa moment obliczenia w krokach co 15 minut. Obok: "Obliczenie dla: teraz" albo wybrana data i godzina.

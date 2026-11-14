@@ -38,7 +38,7 @@ H2|2.5 Ontbrekende programmabestanden
 P|Bij het opstarten controleert YA-MS of al zijn bestanden aanwezig zijn (vertalingen, catalogi, documenten). Als er een ontbreekt, bijvoorbeeld na een onvolledige kopie, somt het venster "Ontbrekende bestanden" ze op en biedt het "Ontbrekende bestanden downloaden" van GitHub aan, in dezelfde versie als het programma, of "Doorgaan zonder". Dezelfde controle wordt herhaald als je op "Updates" drukt.
 H1|3. Het hoofdvenster
 H2|3.1 De onderdelen van het venster
-LI|Bovenaan drie rijen bedieningselementen die voor alle tabbladen gelden: stations en band, E-laag en antenne, tijdstip van de berekening (hoofdstuk 4).
+LI|Bovenaan twee rijen bedieningselementen die voor alle tabbladen gelden: E-laag en antenne, tijdstip van de berekening (hoofdstuk 4). Je station (locator, hoogte, band en Berekenen) staat rechtsboven in Live verkeer.
 LI|De balk met de hoofdtabbladen, met rechts de knop Bediening, het kleurenschema (Kleurenschema) en de taal.
 LI|De subtabbladen, in een lichtere rij, voor de tabbladen die ze hebben.
 LI|Onderaan de statusbalk: berichten van de berekening, waarschuwingen over de verbinding en de knop "Updates".
@@ -51,21 +51,21 @@ H2|3.3 Taal, kleuren, lettertype
 LI|Taal: 36 talen. Bij het wisselen van taal wordt het venster opnieuw opgebouwd op dezelfde positie en op hetzelfde tabblad, zonder herstart. Getallen en datums volgen de gekozen taal (decimale komma in het Italiaans, punt in het Engels).
 LI|Kleurenschema: 12 kleurenschema's; Licht is het standaardschema, Nacht en Zwart zijn bedoeld voor het donker, Meteorenspoor is de oorspronkelijke stijl van YA-MS.
 LI|Lettergrootte (Instellingen): verkleint of vergroot alle tekst van 85 tot 140 %, in stappen van 5 %. Bij grote letters lopen de tabbladen door op een nieuwe regel.
-LI|Bediening: klapt de drie rijen bedieningselementen in en weer uit, om ruimte te maken voor kaarten en grafieken. De keuze wordt onthouden.
+LI|Bediening: klapt de twee rijen bedieningselementen in en weer uit, om ruimte te maken voor kaarten en grafieken. De keuze wordt onthouden.
 TAG|NOTA|Bijna elk bedieningselement heeft een tooltip: houd de muis stil boven het element om te lezen waarvoor het dient en uit welke bron de standaardwaarde komt.
 H1|4. Het station en het traject instellen
-H2|4.1 Rij 1: stations en band
+H2|4.1 Mijn station (Verkeer live)
 LI|Mijn locator en hoogte m: jouw Maidenhead-locator (4, 6 of 8 tekens; het midden van het vak wordt gebruikt) en de hoogte van het station boven zeeniveau.
 LI|Band MHz: 28, 50, 70, 144, 222 of 432 MHz. Wordt gebruikt voor de winst en de bundel van de antenne, voor de demping en het linkbudget en voor de schatting van de flux.
 LI|Bereken: berekent het traject opnieuw (bemonstering van de E-laag, minder dan een seconde).
-H2|4.2 Rij 2: E-laag en antenne
+H2|4.2 Rij 1: E-laag en antenne
 LI|Spoorhoogte km en van de radar: hoogte van de meteorensporen. Met "van de radar" aangevinkt wordt de meest voorkomende hoogte gebruikt die de radar van Collm meet (meestal 88-90 km); haal het vinkje weg om de waarde zelf in te vullen.
 LI|Elevatie bundel °: elevatie van het maximum van de verticale bundel van je antenne. Een richtantenne die op 0° staat, heeft door de reflectie op de grond toch haar hoofdbundel enkele graden boven de horizon: meestal 3-8°, afhankelijk van de hoogte van de antenne in golflengten.
 LI|antennediagram: ingeschakeld (standaard) tellen de reflectiepunten mee met de verticale winst van de twee antennes: volledig rond het maximum van de bundel, steeds minder naar de horizon en naar boven toe. Uitgeschakeld is de elevatie van de bundel een harde grens: punten die lager worden gezien tellen niet mee.
 LI|Yagi-antenne: boom m: lengte van de boom. Ernaast schrijft het programma de lengte in golflengten, de winst (DL6WU-curve) en de horizontale en verticale bundelbreedte bij -3 dB. Onder 2 λ is de schatting weinig nauwkeurig.
 LI|Hotspot vanaf middelpunt km en auto (AMS): afstand van Hot A en Hot B tot het middelpunt. Met "auto (AMS)" aangevinkt volgt het de tabel van J. Richardson, aangehaald door DJ5HG (13° afwijking bij 1000 km, 10° boven 1500 km); haal het vinkje weg om zelf 30-400 km in te vullen (MSHV gebruikt 150 km).
 TAG|ATTENZIONE|Met "antennediagram" uitgeschakeld en de bundel op enkele graden kan het op een lang traject gebeuren dat de twee stations geen enkel gemeenschappelijk punt van de laag zien: alle efficiënties zijn dan 0 en de waarschuwing "GEEN GEMEENSCHAPPELIJKE ZONE" verschijnt, met de bundelelevatie of de spoorhoogte die nodig zou zijn. Voorbeeld: JN70CN - JO76QP, 1791 km, bundel op 3°, sporen op 88,5 km.
-H2|4.3 Rij 3: tijdstip van de berekening
+H2|4.3 Rij 2: tijdstip van de berekening
 LI|Uur: UTC-klok.
 LI|Berekeningsdatum (UTC): de dag van de berekening. Geldt voor Voorspellingsberekening, voor de 24-uurstabel van Efficiëntieberekening en voor de tijdlijn van GRAVES-radar. Standaard is het vandaag, en om middernacht volgt de datum de nieuwe dag.
 LI|Uren (−12 tot +36 u): verschuift het tijdstip van de berekening in stappen van 15 minuten. Ernaast: "Berekening voor: nu" of de gekozen datum en tijd.

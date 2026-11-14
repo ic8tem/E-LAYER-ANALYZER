@@ -543,16 +543,15 @@ namespace YAMS
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
             Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc, L(Lang.T("Ore (da −12 a +36 h)")), trackTime,
                               btnReal, lblSkyTime);
-            // riga 1: stazioni e banda
-            Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
-                       L(Lang.T("Banda MHz")), cmbBand, btnCalc);   // il puntamento sta nel riquadro del corrispondente, il carattere nella linguetta Impostazioni
+            // la mia stazione (locator, quota, banda, Calcola): non piu' nella prima riga ma in cima alla colonna destra del
+            // Traffico in diretta (richiesta dell'autore, 14/11/2026): BuildMyStationBox() in MainWindow.Traffico.cs.
+            // Il puntamento sta nel riquadro del corrispondente, il carattere nella linguetta Impostazioni.
             // il corrispondente (nominativo, locator, quota) sta nel Calcolo previsionale, accanto alla mappa
             // (bozzetto B scelto dall'autore, 13/11/2026): BuildDxPanel()
 
-            DockTop(root, row1);
             DockTop(root, row2);
             DockTop(root, row3);
-            topRows = new[] { row1, row2, row3 };
+            topRows = new[] { row2, row3 };
         }
 
         Border[] topRows;

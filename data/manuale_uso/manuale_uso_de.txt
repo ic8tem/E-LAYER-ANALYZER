@@ -38,7 +38,7 @@ H2|2.5 Fehlende Programmdateien
 P|Beim Start prüft YA-MS, ob alle seine Dateien vorhanden sind (Übersetzungen, Kataloge, Dokumente). Fehlt eine davon, zum Beispiel nach einer unvollständigen Kopie, listet das Fenster „Fehlende Dateien“ sie auf und bietet „Fehlende Dateien herunterladen“ von GitHub in derselben Programmversion an, oder „Ohne weiter“. Dieselbe Prüfung wird beim Drücken von „Aktualisierungen“ wiederholt.
 H1|3. Das Hauptfenster
 H2|3.1 Die Teile des Fensters
-LI|Oben drei Zeilen mit Bedienelementen, die für alle Reiter gelten: Stationen und Band, E-Schicht und Antenne, Berechnungszeitpunkt (Kapitel 4).
+LI|Oben zwei Zeilen mit Bedienelementen, die für alle Reiter gelten: E-Schicht und Antenne, Berechnungszeitpunkt (Kapitel 4). Deine Station (Locator, Höhe, Band und Berechnen) steht oben rechts im Live-Verkehr.
 LI|Die Leiste der Hauptreiter, rechts mit der Schaltfläche Bedienung, der Farbgebung (Farbschema) und der Sprache.
 LI|Die Unterreiter, in einer helleren Zeile, für die Reiter, die welche haben.
 LI|Unten die Statusleiste: Meldungen der Berechnung, Hinweise zur Verbindung und die Schaltfläche „Aktualisierungen“.
@@ -51,21 +51,21 @@ H2|3.3 Sprache, Farben, Schrift
 LI|Sprache: 36 Sprachen. Beim Sprachwechsel wird das Fenster an derselben Position und auf demselben Reiter neu aufgebaut, ohne Neustart. Zahlen und Datumsangaben folgen der gewählten Sprache (Dezimalkomma auf Italienisch, Dezimalpunkt auf Englisch).
 LI|Farbschema: 12 Farbschemata; Hell ist die Voreinstellung, Nacht und Schwarz sind für den Betrieb im Dunkeln gedacht, Meteorspur ist der ursprüngliche Stil von YA-MS.
 LI|Schrift (Einstellungen): verkleinert oder vergrößert den gesamten Text von 85 bis 140 %, in Schritten von 5 %. Bei großer Schrift werden die Reiter umbrochen.
-LI|Bedienung: klappt die drei Bedienzeilen ein und wieder aus, um Platz für Karten und Diagramme zu schaffen. Die Wahl wird gespeichert.
+LI|Bedienung: klappt die zwei Bedienzeilen ein und wieder aus, um Platz für Karten und Diagramme zu schaffen. Die Wahl wird gespeichert.
 TAG|NOTA|Fast jedes Bedienelement hat einen Tooltip: Halte die Maus still über das Element, um zu lesen, wozu es dient und aus welcher Quelle der Ausgangswert stammt.
 H1|4. Station und Strecke einrichten
-H2|4.1 Zeile 1: Stationen und Band
+H2|4.1 Meine Station (Verkehr live)
 LI|Mein Locator und Höhe m: dein Maidenhead-Locator (4, 6 oder 8 Zeichen; verwendet wird die Mitte des Feldes) und die Höhe der Station über dem Meeresspiegel.
 LI|Band MHz: 28, 50, 70, 144, 222 oder 432 MHz. Wird für Gewinn und Keule der Antenne, für Dämpfung und Budget sowie für die Flussschätzung verwendet.
 LI|Berechnen: berechnet die Strecke neu (Abtastung der E-Schicht, weniger als eine Sekunde).
-H2|4.2 Zeile 2: E-Schicht und Antenne
+H2|4.2 Zeile 1: E-Schicht und Antenne
 LI|Spurhöhe km und vom Radar: Höhe der Meteorspuren. Ist „vom Radar“ angehakt, wird die vom Radar Collm gemessene häufigste Höhe verwendet (meist 88-90 km); entferne den Haken, um sie von Hand einzugeben.
 LI|Keulenelev. °: Elevation des Maximums der vertikalen Keule deiner Antenne. Ein auf 0° fest montierter Richtstrahler hat seine Hauptkeule wegen der Bodenreflexion trotzdem einige Grad über dem Horizont: meist 3-8°, je nach Antennenhöhe in Wellenlängen.
 LI|Antennendiagramm: eingeschaltet (Voreinstellung) zählen die Reflexionspunkte mit dem vertikalen Gewinn der beiden Antennen: voll um das Keulenmaximum, immer weniger zum Horizont und nach oben hin. Ausgeschaltet ist die Keulenelevation eine harte Grenze: Tiefer gesehene Punkte zählen nicht.
 LI|Yagi: Boomlänge m: Länge des Booms. Daneben schreibt das Programm die Länge in Wellenlängen, den Gewinn (Kurve nach DL6WU) und die horizontale und vertikale -3-dB-Keulenbreite. Unter 2 λ ist die Schätzung ungenau.
 LI|Hot-Spot ab Mittelpunkt km und auto (AMS): Abstand von Hot A und Hot B vom Mittelpunkt. Ist „auto (AMS)“ angehakt, folgt er der von DJ5HG zitierten Tabelle von J. Richardson (13° Abweichung bei 1000 km, 10° über 1500 km); entferne den Haken, um 30-400 km von Hand einzugeben (MSHV verwendet 150 km).
 TAG|ATTENZIONE|Ist „Antennendiagramm“ ausgeschaltet und liegt die Keule bei einigen Grad, sehen die beiden Stationen auf einer langen Strecke unter Umständen keinen gemeinsamen Punkt der Schicht: Alle Effektivitäten sind 0, und es erscheint der Hinweis „KEINE GEMEINSAME ZONE“ mit der Keulenelevation oder Spurhöhe, die nötig wäre. Beispiel: JN70CN - JO76QP, 1791 km, Keule bei 3°, Spuren in 88,5 km.
-H2|4.3 Zeile 3: Berechnungszeitpunkt
+H2|4.3 Zeile 2: Berechnungszeitpunkt
 LI|Zeit: UTC-Uhr.
 LI|Berechnungsdatum (UTC): der Tag der Berechnung. Gilt für die Vorhersageberechnung, für die 24-Stunden-Tabelle der Effektivitätsberechnung und für den Zeitverlauf des GRAVES-Radars. Voreingestellt ist heute, und um Mitternacht wechselt es auf den neuen Tag.
 LI|Stunden (−12 bis +36 h): verschiebt den Berechnungszeitpunkt in Schritten von 15 Minuten. Daneben: „Berechnung für: jetzt“ oder das gewählte Datum und die gewählte Uhrzeit.
