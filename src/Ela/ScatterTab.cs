@@ -205,6 +205,7 @@ namespace ELA
         // per le fotografie automatiche
         public void ShotPreset(int i) { cmbPreset.SelectedIndex = i; }
         public string ResultText { get { return txtRes.Text ?? ""; } }
+        public void ShotIsoPair(string a, string b, double lat, double lon) { txtA.Text = a; txtB.Text = b; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
         public PerpPoint LastBest;
         public void ShotPair(string a, string b) { txtA.Text = a; txtB.Text = b; cmbMode.SelectedIndex = 0; Recalc(); }
         public void ShotIsoA(string a, double lat, double lon) { txtA.Text = a; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }

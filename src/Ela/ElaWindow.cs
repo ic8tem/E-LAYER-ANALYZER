@@ -470,6 +470,8 @@ namespace ELA
                 try { File.WriteAllText(Path.Combine(dir, "2f_fai_scia_IC8FAX_FA1MXE_1990.txt"), fai.ResultText); } catch { }
                 fai.ShotPreset(4); await Task.Delay(2500); Shot(Path.Combine(dir, "2g_fai_scia_DL5MCG_SV1DH_1987.png"));
                 try { File.WriteAllText(Path.Combine(dir, "2g_fai_scia_DL5MCG_SV1DH_1987.txt"), fai.ResultText); } catch { }
+                fai.ShotIsoPair("DL5MCG JN58KH", "SV1DH KM27AW", 47.50, 19.04); await Task.Delay(2500); Shot(Path.Combine(dir, "2h_fai_isoriflessione_Budapest_1987.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2h_fai_isoriflessione_Budapest_1987.txt"), fai.ResultText); } catch { }
                 fai.ShotPair("IC8FAX JN70CN", "G4LOH IO70JC"); await Task.Delay(1500); fai.ShotVerify(); await Task.Delay(2500); Shot(Path.Combine(dir, "2e_fai_verifica_IC8FAX_G4LOH.png"));
                 tabs.Select(4);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
