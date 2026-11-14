@@ -3,7 +3,7 @@
 ; Nessun file in C:\Users\...\AppData: niente collegamento nel menu Start (che Windows mette in AppData\Roaming),
 ; solo l'icona facoltativa sul desktop. Versioni a 64 bit (x64), 32 bit (x86) e ARM64 (PC con Snapdragon).
 #ifndef AppVersion
-  #define AppVersion "0.4.17"
+  #define AppVersion "0.4.18"
 #endif
 #ifndef Arch
   #define Arch "x64"
