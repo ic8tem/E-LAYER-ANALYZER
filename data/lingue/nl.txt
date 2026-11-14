@@ -749,7 +749,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT niet verbond
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Spots tussen stations die dichter bij elkaar liggen dan (km) direct weggooien, omdat de verbinding op die afstand direct of troposferisch is: ze verschijnen niet in de console en worden niet opgeslagen. Ontbreekt een locator, dan blijft de spot staan.
 spot entro {0} km scartati: {1}	spots binnen {0} km weggegooid: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Spots van alle banden worden getoond, ook van banden die niet in Gegevensverzameling zijn gekozen (die worden niet opgeslagen). CW-spots en spots tussen te dicht bij elkaar liggende stations worden niet getoond als ze in Gegevensverzameling worden weggegooid.
-Aggiorna da solo ogni 7 giorni	Zelf elke 7 dagen bijwerken
+Aggiorna da solo ogni 12 ore	Zelf elke 12 uur bijwerken
 Aggiornamento di CALL3 già in corso.	CALL3-update al bezig.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3-update mislukt: {0}
 Aggiungi un file...	Bestand toevoegen...
@@ -774,7 +774,7 @@ locator	locator
 {0} nel CALL3: {1}	{0} in CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} staat niet in CALL3: typ de locator met de hand
 Cerca su G7VRD i locator mancanti	Ontbrekende locators opzoeken bij G7VRD
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Laatste bron, zoals in LIVETROPOVHF: voor roepletters zonder 6-tekens-locator in enige andere bron vraagt het programma automatisch elke 6 uur de openbare G7VRD-API (api.g7vrd.co.uk), in groepen van 40 roepletters; elke roepletter hooguit eens per dag. Alleen een 6-tekens-locator wordt aanvaard, niet het midden van het vak (LL of MM), in hetzelfde vak als de ontvangen. De resultaten staan in data/CALL3-G7VRD.TXT en worden, zoals alle correcties, ook in data/call3.txt geschreven.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Laatste bron, zoals in LIVETROPOVHF: voor roepletters zonder 6-tekens-locator in enige andere bron vraagt het programma automatisch elke 30 minuten de openbare G7VRD-API (api.g7vrd.co.uk), in groepen van 40 roepletters; elke roepletter hooguit eens per dag. Alleen een 6-tekens-locator wordt aanvaard, niet het midden van het vak (LL of MM), in hetzelfde vak als de ontvangen. De resultaten staan in data/CALL3-G7VRD.TXT en worden, zoals alle correcties, ook in data/call3.txt geschreven.
 Ascolta	Luisteren
 Avvia	Starten
 Avvia all'apertura	Starten bij openen
@@ -794,3 +794,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter-kaart onbereikbaar: {0}
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 boven 1100 km zonder parallelle paden binnen 3 minuten (lichtgroen, de regel knippert altijd)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 boven 1100 km zonder parallelle paden binnen 3 minuten: lijkt niet op sporadische E of tropo, kan meteorscatter zijn
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: de decodering betreft mijn station
+Impostazioni	Instellingen
+Aspetto	Weergave
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Thema en taal staan ook rechtsboven, naast de tabbladen.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Op GitHub naar een nieuwe versie zoeken (bij het starten en elke 30 minuten)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Automatische stille updates: downloaden, installeren en herstarten zonder te vragen
+Controlla adesso	Nu controleren
+Aggiornamenti del programma	Programma-updates
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Zonder automatische updates verschijnt bij een nieuwe versie een venster met «Nu bijwerken», «Later» en «Deze versie overslaan».
+Fonti in diretta	Live bronnen
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Radars van Collm en Sodankylä, Global Meteor Network, CMOR en, indien gekozen, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	De opdrachtregels boven de tabbladen tonen (zoals de knop «Bediening»)
+Programma	Programma
+Cartella dei dati	Gegevensmap
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Gehoord door {0} (YA-MS): het bericht is gericht aan mijn station
+% sciame	% zwerm
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	zwermzone {0}: {1:F0} % van de reflecties, {2:F0} × {3:F0} km, as op {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	zwermzone niet te berekenen voor deze verbinding (te kort of te lang)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Klik op een pad op de kaart of op een tabelregel voor de details van het contact en zijn zwermzone.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spots uit het tabblad "Gegevensverzameling". Voor elk contact geeft de zwermzone aan waar de waarschijnlijkste sporen voor dat pad en dat tijdstip zich concentreren (spiegelende reflectie, som van de actieve zwermen); gestippelde zones = alleen sporadische meteoren. Spots met een station buiten de kaart worden niet getekend; net binnengekomen spots (minder dan 3 minuten) knipperen een minuut lang.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% zwerm: aandeel van de bruikbare reflecties van dat pad, op dat tijdstip, dat in de op de kaart getekende zwermzone valt (spiegelende reflectie, som van de actieve zwermen). Hoe hoger, hoe meer de goede sporen geconcentreerd zijn in één gebied om de antenne op te richten. "sporadisch" = geen actieve zwerm geeft bruikbare reflecties: alleen sporadische meteoren blijven over, aan beide kanten van het pad (gestippelde zones).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	De Mercatorkaart verschuif je door hem met de muis te slepen; dubbelklik: weer gecentreerd op mijn station. De azimutale kaart blijft op mijn station gecentreerd.
+Memorizza	Opslaan
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	De ingevoerde locator wijkt af van die in het CALL3-archief: druk om hem bij te werken en op te slaan (handmatige invoer, meteen ook in call3.txt geschreven).
+{0} memorizzato nel CALL3: {1}	{0} opgeslagen in CALL3: {1}

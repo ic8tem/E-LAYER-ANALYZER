@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.11 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.15 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -26,7 +26,7 @@ P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i g�
 H2|2.3 data klasörü
 P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
 H2|2.4 Otomatik güncellemeler
-P|1.8.11 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
+P|1.8.6 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 30 dakikada bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
 P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
 LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
 LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
@@ -38,7 +38,7 @@ H2|2.5 Eksik program dosyaları
 P|Açılışta YA-MS tüm dosyalarının (çeviriler, kataloglar, belgeler) mevcut olup olmadığını denetler. Bazıları eksikse, örneğin eksik bir kopyalamadan sonra, "Eksik dosyalar" penceresi bunları listeler ve programın aynı sürümünden GitHub'dan "Eksik dosyaları indir" ya da "Onlarsız devam et" seçeneğini sunar. Aynı denetim "Güncellemeler" düğmesine basıldığında yinelenir.
 H1|3. Ana pencere
 H2|3.1 Pencerenin bölümleri
-LI|Üstte, tüm sekmeler için geçerli üç sıra kontrol: istasyonlar ve bant, E katmanı ve anten, hesap zamanı (bölüm 4).
+LI|Üstte, tüm sekmeler için geçerli iki sıra kontrol: E katmanı ve anten, hesap zamanı (bölüm 4). İstasyonunuz (lokatör, yükseklik, bant ve Hesapla) Canlı trafik sekmesinin sağ üstündedir.
 LI|Ana sekmelerin çubuğu; sağında Kontroller düğmesi, renk şeması (Tema) ve dil.
 LI|Alt sekmeleri olan sekmeler için, daha açık renkli bir sırada alt sekmeler.
 LI|Altta durum çubuğu: hesap iletileri, bağlantı uyarıları ve "Güncellemeler" düğmesi.
@@ -50,22 +50,22 @@ LI|Teknik belgeler, en sonda: Kullanım kılavuzu, Kaynaklar, Avrupa radarları 
 H2|3.3 Dil, renkler, yazı tipi
 LI|Dil: 36 dil. Dil değiştirildiğinde pencere, yeniden başlatmaya gerek kalmadan aynı konumda ve aynı sekmede yeniden oluşturulur. Sayılar ve tarihler seçilen dili izler (İtalyancada ondalık virgül, İngilizcede nokta).
 LI|Tema: 12 renk şeması; Açık başlangıç şemasıdır, Gece ve Siyah karanlıkta kullanım içindir, Meteor izi YA-MS'in özgün stilidir.
-LI|Yazı boyutu (ilk denetim satırının sonunda): tüm metni %85 ile %140 arasında, %5 adımlarla küçültür veya büyütür. Büyük yazıda sekmeler birkaç satıra kayar.
-LI|Kontroller: haritalara ve grafiklere yer açmak için üç kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
+LI|Yazı boyutu (Ayarlar): tüm metni %85 ile %140 arasında, %5 adımlarla küçültür veya büyütür. Büyük yazıda sekmeler birkaç satıra kayar.
+LI|Kontroller: haritalara ve grafiklere yer açmak için iki kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
 TAG|NOTA|Hemen her kontrolün bir ipucu balonu vardır: ne işe yaradığını ve başlangıç değerinin hangi kaynaktan geldiğini okumak için fareyi kontrolün üzerinde tutun.
 H1|4. İstasyonu ve yolu ayarlama
-H2|4.1 Sıra 1: istasyonlar ve bant
+H2|4.1 Benim istasyonum (Canlı trafik)
 LI|Benim lokatörüm ve rakım m: Maidenhead lokatörünüz (4, 6 veya 8 karakter; karenin merkezi kullanılır) ve istasyonun deniz seviyesinden yüksekliği.
 LI|Bant MHz: 28, 50, 70, 144, 222 veya 432 MHz. Anten kazancı ve lobu, yol kaybı ve bağlantı bütçesi ile akı tahmini için kullanılır.
 LI|Hesapla: yolu yeniden hesaplar (E katmanının örneklenmesi, bir saniyeden kısa).
-H2|4.2 Sıra 2: E katmanı ve anten
+H2|4.2 Sıra 1: E katmanı ve anten
 LI|İz yüksekliği km ve radardan: meteor izlerinin yüksekliği. "radardan" işaretliyken Collm radarının ölçtüğü en sık yükseklik (genellikle 88-90 km) kullanılır; elle yazmak için işareti kaldırın.
 LI|Lob elevasyonu °: anteninizin dikey lobunun maksimumunun elevasyonu. 0°'ye sabitlenmiş bir yönlü antenin ana lobu bile, zeminden yansıma nedeniyle ufkun birkaç derece üzerindedir: antenin dalga boyu cinsinden yüksekliğine göre genellikle 3-8°.
 LI|anten diyagramı: açıkken (başlangıç ayarı) yansıma noktaları iki antenin dikey kazancıyla ağırlıklandırılır: lob maksimumu çevresinde tam, ufka doğru ve yukarıya doğru giderek azalan. Kapalıyken lob elevasyonu kesin bir sınırdır: daha aşağıda görülen noktalar hesaba katılmaz.
 LI|Yagi anten: boom m: boom uzunluğu. Program yanına uzunluğu dalga boyu cinsinden, kazancı (DL6WU eğrisi) ve yatay ve dikey -3 dB lobunu yazar. 2 λ'nın altında tahmin pek kesin değildir.
 LI|Orta noktadan hot spot km ve otomatik (AMS): Hot A ve Hot B'nin orta noktaya uzaklığı. "otomatik (AMS)" işaretliyken DJ5HG'nin aktardığı J. Richardson tablosu izlenir (1000 km'de 13°, 1500 km'nin ötesinde 10° sapma); 30-400 km arasını elle yazmak için işareti kaldırın (MSHV 150 km kullanır).
 TAG|ATTENZIONE|"anten diyagramı" kapalı ve lob birkaç derecedeyken, uzun bir yolda iki istasyon katmanın hiçbir ortak noktasını göremeyebilir: tüm verimler 0 olur ve gerekli lob ya da iz yüksekliğini belirten "ORTAK BÖLGE YOK" uyarısı görünür. Örnek: JN70CN - JO76QP, 1791 km, lob 3°'de, izler 88,5 km'de.
-H2|4.3 Sıra 3: hesap zamanı
+H2|4.3 Sıra 2: hesap zamanı
 LI|Saat: UTC saati.
 LI|Hesap tarihi (UTC): hesabın günü. Tahmin hesabı, Verim hesabı'ndaki 24 saatlik tablo ve GRAVES radarı'ndaki kronoloji için geçerlidir. Başlangıçta bugündür ve gece yarısı yeni güne geçer.
 LI|Saatler (−12 ile +36 sa arası): hesap anını 15 dakikalık adımlarla kaydırır. Yanında: "Hesap zamanı: şimdi" ya da seçilen tarih ve saat.
@@ -78,7 +78,8 @@ P|Tahmin hesabı grubunun ilk alt sekmesi, yararlı izlerin şu anda nereye dü�
 H2|5.1 Özet şeridi
 P|Haritanın üstündeki bir şerit o anki hesabı özetler: tarih ve saat, yol endeksi (etkin yağmurların ZHR × verim toplamı), ZHR'si ve verimiyle (DJ5HG referansına göre dB olarak da) en yararlı yağmur, ufkun üstündeki yağmurların sayısı ve azimutuyla birlikte önerilen Hot.
 H2|5.2 Plan haritası
-P|Haritanın yanında, sağda tek bir sütun var. Üstte karşı istasyon kutusu: önce anten yönü (Anten az., her zaman karşı istasyona), sonra çağrı işareti (yazıp Enter'a basın: lokatör CALL3 veritabanından alınır, YAEC ve LIVETROPOVHF'deki gibi), lokatör ve yükseklik. Çağrı işareti lokatör kutusuna da yazılabilir. Altta harita sembollerinin açıklaması: başlığa tıklamak onu katlar; radyant renkleri Avrupa haritası kapalıyken görünür.
+P|Haritanın yanında, sağda tek bir sütun var. Üstte karşı istasyon kutusu: önce anten yönü (Anten az., her zaman karşı istasyona), sonra çağrı işareti (yazıp Enter'a basın: lokatör CALL3 veritabanından alınır, YAEC ve LIVETROPOVHF'deki gibi), lokatör ve yükseklik. Çağrı işareti lokatör kutusuna da yazılabilir. Altta harita sembollerinin açıklaması: başlığa tıklamak onu katlar.
+P|O çağrı işareti için arşivdekinden farklı bir lokatör yazarsanız, lokatör kutusunun yanındaki «Kaydet» düğmesi etkinleşir: basınca yeni lokatör elle giriş olur (data/CALL3-MANUALE.TXT, diğer tüm kaynaklardan önce gelir) ve hemen data/call3.txt dosyasına da yazılır.
 P|Solda, yukarıdan görülen Avrupa haritası (doğu sağda), çevresinde derece ölçeğiyle:
 LI|yeşil çizgi: iki lokatör arasındaki gerçek yol;
 LI|Hot A ve Hot B: orta noktanın iki yanındaki iki hot spot. Kırmızı = önerilen, pembe = anten lobunun dışında, gri = zaten lobun içinde (bir uyarıyla);
@@ -150,7 +151,7 @@ LI|Hedef frekans MHz: tahminin frekansı.
 LI|λ^k üssü (3, SM6FHZ) ve İstasyon katsayısı K (1): frekansa göre kural ve istasyonunuz için düzeltme.
 LI|Popülasyon indekslerinden k: etkin yağmurların r popülasyon indekslerinden k önerir (GMN, yoksa IMO; k = 3,75 · log10 r, ZHR ile ağırlıklı) ve uygulamadan önce onay ister.
 LI|Diskten RMOB dosyası yükle ve Üssü RMOB dosyasından çıkar: aylık bir RMOB dosyasını okur ve Collm ile ortak saatlerden k'yi çıkarır.
-LI|RMOB gözlemcisi, RMOB'u şimdi indir ve 5 dakikada bir otomatik indirme: otomatik indirme kapalıdır ve yalnızca RMOB'un izniyle açılmalıdır.
+LI|RMOB gözlemcisi, RMOB'u şimdi indir ve 5 dakikada bir otomatik indirme: otomatik indirme kapalıdır ve yalnızca RMOB'un izniyle açılmalıdır. Bu komutlar Ayarlar sekmesindedir.
 H2|8.2 Sonuçlar
 LI|Dün ve bugünün grafiği: Collm'da saatlik meteorlar, sizin frekansınıza ölçeklenmiş değerler ve, yüklendiyse, RMOB sayımları.
 LI|Sonraki 24 saatin tahmini: önceki günün aynı saati, yolun yağmur endeksindeki değişime göre düzeltilmiş.
@@ -158,18 +159,21 @@ LI|Değerlendirmeli tablo: 24 saatin ortalamasına göre iyi, orta veya zayıf.
 TAG|NOTA|Yansımaların süresi, Geometri ve yol kaybı'ndaki "Bantlar arası ping süresi" seçimini izler; forward scatter'da süre, yolun orta noktasında sec²φ ile de artar.
 H1|9. Canlı ve gerçek zamanlı veriler
 H2|9.1 Canlı trafik
-P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin bulutu. Yeni gelen spot'lar bir dakika boyunca yanıp söner.
+P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin yağmur bölgesi. Yeni gelen spot'lar bir dakika boyunca yanıp söner.
 LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 3, 15 veya 30 dakika, son bir saat, son 3 veya 24 saat.
-LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve bulutun merkezini, yüksekliğini ve boyutlarını gösterir.
+LI|Mercator haritası fareyle sürüklenerek taşınır; çift tıklama: yeniden istasyonuma ortalanır. Azimutal harita istasyonuma ortalı kalır.
+LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve yağmur bölgesi merkezini, yüksekliğini ve boyutlarını gösterir.
+LI|Seçilen bağlantının veya dinleyen istasyonun ayrıntıları, haritanın üzerinde sol üstte, hem azimutal hem Mercator izdüşümünde kabartmalı bir kutuda görünür.
 LI|Kimin dinlediğini göster: bant renginde üçgenler, PSKReporter'a göre seçilen zaman aralığında 28, 50, 70, 144 ve 432 MHz'de MSK144, FSK441, PSK2K veya JTMS alan istasyonları gösterir. Bir üçgene tıklamak çağrı işaretini, lokatörü, modları ve son spotu gösterir. Veri toplama sekmesindeki MQTT akışı bağlı olmalıdır.
 LI|PSKReporter haritasındaki aktif monitörler de: pskreporter.info haritasında MSK144, FSK441, PSK2K veya JTMS ile görünen ama henüz hiç spot almamış istasyonlar için boş üçgenler (MQTT yalnızca bir şey alan istasyonları gönderir). YA-MS, PSKReporter sorgu hizmetini tüm modlar için 5 dakikada bir sorgular, hizmetin kurallarının istediği gibi; bir monitör haritada en az 11 dakika kalır. Üçgene tıklamak çağrı işaretini, lokatörü, kod çözme programını ve monitörün aktif olduğu saati gösterir. Varsayılan olarak açık.
-LI|Paralel hattı olmayan 1100 km üzeri FT8: 1100 km'den uzak istasyonlar arasında, öncesi ve sonrasındaki 3 dakikada paralel hattı olmayan (aynı bant, orta nokta 300 km içinde, yön 20° içinde, başka bir istasyon çifti) bir FT8 spotu (PSKReporter MQTT, kümeler veya UDP üzerinden WSJT-X'ten) açık yeşil çizilir ve sağ alttaki tablodaki satırı her zaman yanıp söner. Sporadik E ve tropo çok sayıda yakın, paralel hat verir; yalnız bir spot bir meteor izi olabilir. Bu yüzden YA-MS, MQTT'den 6 m, 4 m, 2 m, 1,25 m ve 70 cm FT8 spotlarını da alır (10 m'yi değil, çok fazla). Bu spotlar MS arşivine girmez. Varsayılan olarak açık.
+LI|Paralel hattı olmayan 1100 km üzeri FT8: 1100 km'den uzak istasyonlar arasında, öncesi ve sonrasındaki 3 dakikada paralel hattı olmayan (aynı bant, orta nokta 300 km içinde, yön 15° içinde, başka bir istasyon çifti) bir FT8 spotu (PSKReporter MQTT, kümeler veya UDP üzerinden WSJT-X'ten) açık yeşil çizilir ve sağ alttaki tablodaki satırı her zaman yanıp söner. Sporadik E ve tropo çok sayıda yakın, paralel hat verir; yalnız bir spot bir meteor izi olabilir. Bu yüzden YA-MS, MQTT'den 6 m, 4 m, 2 m, 1,25 m ve 70 cm FT8 spotlarını da alır (28 MHz asla). Bu spotlar MS arşivine girmez. Varsayılan olarak açık. PSKReporter MQTT ile ek denetimler: alıcı istasyon MQTT'de 3 dakika içinde aynı bantta 1100 km ötesindeki başka istasyonları duyuyorsa spot yalnız sayılmaz (bant açık); kümelerin ve RBN'nin spotları yalnızca aynı çift MQTT'den de gelirse geçerlidir; RBN skimmer'ları («-#» içeren çağrı işaretleri) asla geçerli değildir.
 LI|İstasyonunuzu ilgilendiren UDP üzerinden WSJT-X spotları (kod çözmede çağrı işaretiniz var: sizi çağıran veya size yanıt veren) her zaman yanıp sönen kesikli çizgiyle çizilir, her modda ve her mesafede.
+LI|YA-MS kullanıcıları arasında değişim: başka bir YA-MS kullanıcısı istasyonunuza yönelik bir mesajı UDP ile çözdüğünde (MSK144, FSK441, PSK2K veya JTMS'de ya da 1100 km üzeri FT8'de), onun YA-MS'i bunu size üç açık MQTT aracısı (HiveMQ, Mosquitto, EMQX) üzerinden şifreli gönderir; bunu her zaman yanıp sönen mor kesikli çizgi ve UDP konsolunda bir satır olarak görürsünüz. Yalnızca siz okuyabilirsiniz (ECDH P-256 anahtarları, AES-256 ve HMAC-SHA256). FT8 spotları yalnızca 3 dakika içinde paralel hatları yoksa gösterilir. Varsayılan olarak açık; data/config.ini içinde yams_scambio=0 kapatır.
 LI|Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
-LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. Bulut sütunundaki ipucu anlamını açıklar.
+LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. yağmur bölgesi sütunundaki ipucu anlamını açıklar.
 H2|9.2 Radar akısı
 P|Collm SKiYMET radarının (36,2 MHz) saatlik meteor sayımları ve iz yükseklikleri ile Sodankylä radarının (36,9 MHz) son görüntüsü.
-LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir.
+LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir. Otomatik güncelleme Ayarlar sekmesinde ayarlanır.
 LI|λ üssü (SM6FHZ): sizin bandınızdaki tahminin üssü (sağ ölçekte turuncu çizgi).
 LI|İz yükseklikleri: mod, ortalama, medyan ve standart sapma ile histogram; "radardan" seçiliyken mod, tüm hesapların yüksekliği olur.
 TAG|ATTENZIONE|Collm grafiğinin ölçeği okunamazsa turuncu bir uyarı görünür ve değerlerin doğrulanması gerekir. Bağlantı yoksa program son kaydedilen verileri kullanır, bunu bir kez bildirir ve her 5 dakikada bir kendiliğinden yeniden dener; bağlantı geri gelene kadar durum çubuğu kırmızı olur.
@@ -187,8 +191,9 @@ LI|Filtre, meteor scatter'a özgü frekanslardaki (50190-50300, 70100-70400, 144
 LI|CW spotları hemen atılır (yorumda CW veya WPM, ya da 28000-28070 kHz): <MS> ile işaretlenmedikçe konsolda görünmez ve kaydedilmez. Kutu kapatılabilir.
 LI|500 km'den yakın istasyonlar arasındaki spotlar hemen atılır, çünkü bu mesafede bağlantı meteor scatter değil, doğrudan veya troposferiktir: konsolda görünmezler ve kaydedilmezler. Bir lokatör eksikse spot korunur. Mesafe kutunun altından değiştirilir.
 LI|Eksik lokatörler CALL3 arşivinden alınır; kabul edilen spot'lar, günde bir dosya olmak üzere data/spot_ms klasörüne ve Canlı trafik haritasına gider.
-LI|LIVETROPOVHF kurallarıyla CALL3 veritabanı. "Şimdi güncelle" CALL3.TXT'yi MMMonVHF'den indirir (en az 100.000 geçerli satır, önceki data/call3.bak içinde kalır); "7 günde bir kendiliğinden güncelle" ile bu başlangıçta yapılır. Dosyanın üstünde sırayla geçerlidir: elle girişler (data/CALL3-MANUALE.TXT), küme düzeltmeleri (spot yapanın kendisi için bildirdiği 6 karakterli lokatör), eklenen dosyalar (data/CALL3-AGGIUNTE), sonra CALL3.TXT ve canlı öğrenilen 6 karakterli lokatörler (data/LOC6.TXT). Alınan 4 karakterli ya da LL veya MM ile biten lokatör veritabanındaki 6 karakterliyle değiştirilir; taşınabilir istasyonlar (eğik çizgili) yalnızca tam girişle.
-LI|Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 6 saatte bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
+LI|LIVETROPOVHF kurallarıyla CALL3 veritabanı. "Şimdi güncelle" CALL3.TXT'yi MMMonVHF'den indirir (en az 100.000 geçerli satır, önceki data/call3.bak içinde kalır); "12 saatte bir kendiliğinden güncelle" ile bu başlangıçta yapılır. Dosyanın üstünde sırayla geçerlidir: elle girişler (data/CALL3-MANUALE.TXT), küme düzeltmeleri (spot yapanın kendisi için bildirdiği 6 karakterli lokatör), eklenen dosyalar (data/CALL3-AGGIUNTE), sonra CALL3.TXT ve canlı öğrenilen 6 karakterli lokatörler (data/LOC6.TXT). Alınan 4 karakterli ya da LL veya MM ile biten lokatör veritabanındaki 6 karakterliyle değiştirilir; taşınabilir istasyonlar (eğik çizgili) yalnızca tam girişle.
+LI|Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 30 dakikada bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
+LI|G7VRD'den sonra JTDX katmanı gelir (data/grid_data.bin, yaklaşık 365.000 çağrı işareti): yalnızca başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için, yalnızca alınanla aynı karede geçerlidir ve data/call3.txt içine asla yazılmaz.
 H1|10. Canlı yağmurlar ve yağmur kataloğu
 H2|10.1 Canlı yağmurlar
 P|Solda, etkin yağmurlar için Global Meteor Network'ün ölçtüğü akı ve ZHR, yağmur başına GMN kameralarının günlük sayımlarıyla (bir sayımdır, akı değildir: açık gökyüzü gören istasyon sayısına bağlıdır); sağda, gündüz yağmurları dahil CMOR radarının radyant haritaları. Dosyalar yalnızca değiştiyse, en fazla 30 dakikada bir ya da Şimdi indir ile yeniden indirilir.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC kataloğu; radar/diretta/: GMN ve CMOR verileri.
 LI|call3.txt: lokatör arşivi; spot_ms/: toplanan meteor scatter spot'ları; adif_quadrati.csv: ADIF'ten gelen kareler.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: teknik belgeler.
 LI|backup/: bir güncellemenin değiştirdiği dosyaların kopyaları; aggiornamento/: indirilen paket (yeniden başlatmada silinir).
+H2|13.3 Ayarlar sekmesi
+P|Ayarlar sekmesi programın genel çalışmasını toplar: Görünüm (yazı tipi, tema ve dil), Program güncellemeleri (açılışta ve 30 dakikada bir GitHub denetimi, otomatik sessiz güncellemeler, Şimdi denetle), Canlı kaynaklar (5 dakikada bir otomatik güncelleme), RMOB (gözlemci, şimdi indir ve otomatik alma) ve Program (komut satırları ve veri klasörü). Hesaplama parametreleri sekmelerin üstündeki komut satırlarında kalır.
 H2|13.2 config.ini'nin bazı anahtarları
 LI|controlla_aggiornamenti=0: yeni sürümleri denetleme; aggiornamenti_salta: atlanan sürüm.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: hesabın onay kutuları.
 LI|raggio_iniziale (0 = ITU değerinin iki katı, 1 = ITU, 2 = hariç), durata_ping (0 = λ², 1 = gözlenen).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: UDP ile alınan MS kod çözümlerinin (MSK144, FSK441, PSK2K, JTMS) PSKReporter'a iletilmesini kapatır. Varsayılan olarak açıktır ve kendi başına çalışır: çağrı işaretiniz PSKReporter'a rapor gönderen istasyonlar arasında 20 dakikadan uzun süredir yoksa (dijital program göndermiyor), YA-MS çözdüğünüz MS istasyonlarını sizi alıcı olarak göstererek 5 dakikada bir gönderir; dijital program yeniden gönderir göndermez YA-MS durur. UDP konsolundaki bir satır başladığını ve durduğunu bildirir.
+LI|psk_rimando=0: UDP ile alınan MS kod çözümlerinin (MSK144, FSK441, PSK2K, JTMS) PSKReporter'a iletilmesini kapatır. Varsayılan olarak açıktır ve kendi başına çalışır: çağrı işaretiniz PSKReporter'a rapor gönderen istasyonlar arasında 20 dakikadan uzun süredir yoksa (dijital program göndermiyor), YA-MS çözdüğünüz MS istasyonlarını sizi alıcı olarak göstererek 5 dakikada bir gönderir; dijital program yeniden gönderir göndermez YA-MS durur. UDP konsolundaki bir satır başladığını ve durduğunu bildirir. WSJT-X.ini (veya JTDX.ini) içinde PSKReporter'a gönderim kapalıysa YA-MS 20 dakika beklemeden hemen iletir.
 TAG|ATTENZIONE|config.ini'yi yalnızca program kapalıyken değiştirin: YA-MS kapanışta onu yeniden yazar.
 H1|14. Tipik yordamlar
 H2|14.1 Bir yağmur için sked hazırlama

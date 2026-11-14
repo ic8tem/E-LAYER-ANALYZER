@@ -321,3 +321,16 @@ s, n2 = re.subn(r'static readonly string\[\]\[\] Cultures =\s*\{.*?\n\s*\};', cu
 if n1 != 1 or n2 != 1: raise SystemExit('NON TROVATO: elenco delle lingue in Lang.cs')
 wr(p, s)
 print('lingue:', len(LANGS))
+
+# --- Linguetta Impostazioni di YA-MS (dalla 1.8.11): dentro E-LAYER ANALYZER carattere, colorazione, lingua e
+#     aggiornamenti stanno nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER; qui resta una nota (dalla 0.5.0)
+p = os.path.join(ui, 'MainWindow.Impostazioni.cs')
+if os.path.exists(p):
+    s = rd(p)
+    A = '            col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Tema e lingua sono anche in alto a destra, accanto alle linguette."), look.ToArray()));'
+    s = rep(s, A, '            if (Hosted) col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.")));   // E-LAYER ANALYZER (tools/sync_yams.py)\n            else ' + A.strip(), 'Aspetto nelle Impostazioni di YA-MS')
+    wr(p, s)
+
+# --- Temi di IP-TRX-CTRL (e colori in piu' di YAEC) aggiunti agli schemi di YA-MS (dalla 0.5.0, tools/temi_ip.py)
+import subprocess
+subprocess.check_call([sys.executable, os.path.join(EL, 'tools', 'temi_ip.py')])

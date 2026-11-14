@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	Hindi nakakonekta
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Itapon agad ang mga spot sa pagitan ng mga istasyong mas malapit kaysa (km), dahil sa layong iyon ang ugnayan ay direkta o troposperiko: hindi lumalabas sa console at hindi iniimbak. Kung kulang ang locator, nananatili ang spot.
 spot entro {0} km scartati: {1}	mga spot sa loob ng {0} km na itinapon: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Ipinapakita ang mga spot ng lahat ng banda, pati ng mga bandang hindi pinili sa Pagkolekta ng data (hindi ito iniimbak). Hindi ipinapakita ang mga CW spot at ang mga spot sa pagitan ng mga istasyong masyadong malapit, kung itinatapon ang mga ito sa Pagkolekta ng data.
-Aggiorna da solo ogni 7 giorni	Kusang mag-update tuwing 7 araw
+Aggiorna da solo ogni 12 ore	Kusang mag-update tuwing 12 oras
 Aggiornamento di CALL3 già in corso.	Kasalukuyang nag-a-update ang CALL3.
 Aggiornamento di CALL3 non riuscito: {0}	Nabigo ang pag-update ng CALL3: {0}
 Aggiungi un file...	Magdagdag ng file...
@@ -772,7 +772,7 @@ locator	locator
 {0} nel CALL3: {1}	{0} sa CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	Wala sa CALL3 ang {0}: i-type nang mano-mano ang locator
 Cerca su G7VRD i locator mancanti	Hanapin sa G7VRD ang mga nawawalang locator
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Huling pinagmulan, gaya ng sa LIVETROPOVHF: para sa mga callsign na walang 6-character na locator sa anumang ibang pinagmulan, awtomatikong nagtatanong ang programa tuwing 6 na oras sa pampublikong API ng G7VRD (api.g7vrd.co.uk), nang tig-40 callsign; bawat callsign hanggang minsan sa isang araw. 6-character na locator lang ang tinatanggap, hindi ang gitna ng parisukat (LL o MM), sa parehong parisukat ng natanggap. Nasa data/CALL3-G7VRD.TXT ang mga resulta at, gaya ng lahat ng pagwawasto, isinusulat din sa data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Huling pinagmulan, gaya ng sa LIVETROPOVHF: para sa mga callsign na walang 6-character na locator sa anumang ibang pinagmulan, awtomatikong nagtatanong ang programa tuwing 30 minuto sa pampublikong API ng G7VRD (api.g7vrd.co.uk), nang tig-40 callsign; bawat callsign hanggang minsan sa isang araw. 6-character na locator lang ang tinatanggap, hindi ang gitna ng parisukat (LL o MM), sa parehong parisukat ng natanggap. Nasa data/CALL3-G7VRD.TXT ang mga resulta at, gaya ng lahat ng pagwawasto, isinusulat din sa data/call3.txt.
 Ascolta	Makinig
 Avvia	Simulan
 Avvia all'apertura	Simulan sa pagbukas
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	hindi maabot ang mapa ng PSKReporter
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 na lampas 1100 km na walang kahilerang daan sa loob ng 3 minuto (mapusyaw na berde, laging kumikislap ang hilera)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 na lampas 1100 km na walang kahilerang daan sa loob ng 3 minuto: hindi mukhang sporadic-E o tropo, maaaring meteor scatter
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: ang decode ay may kinalaman sa aking istasyon
+Impostazioni	Mga setting
+Aspetto	Hitsura
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Nasa kanang itaas din ang tema at wika, katabi ng mga tab.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Maghanap ng bagong bersyon sa GitHub (sa pagsisimula at tuwing 30 minuto)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Awtomatiko at tahimik na update: nagda-download, nag-i-install at nagre-restart nang hindi nagtatanong
+Controlla adesso	Suriin ngayon
+Aggiornamenti del programma	Mga update ng programa
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Kung walang awtomatikong update, kapag may bagong bersyon lalabas ang window na may «I-update ngayon», «Mamaya» at «Laktawan ang bersyong ito».
+Fonti in diretta	Mga live na pinagmulan
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Mga radar ng Collm at Sodankylä, Global Meteor Network, CMOR at, kung pinili, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Ipakita ang mga hilera ng utos sa itaas ng mga tab (gaya ng button na «Mga kontrol»)
+Programma	Programa
+Cartella dei dati	Folder ng data
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Narinig ni {0} (YA-MS): para sa aking istasyon ang mensahe
+% sciame	% ulan
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	sona ng ulan {0}: {1:F0} % ng mga repleksyon, {2:F0} × {3:F0} km, axis sa {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	hindi makalkula ang sona ng ulan para sa landas na ito (masyadong maikli o masyadong mahaba)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	I-click ang isang landas sa mapa o hilera sa talahanayan para sa detalye ng contact at ng sona ng ulan nito.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Mga spot mula sa tab na "Pangangalap ng data". Para sa bawat contact, ipinapakita ng sona ng ulan kung saan nagtitipon ang pinakamalamang na bakas para sa landas at oras na iyon (specular na repleksyon, kabuuan ng mga aktibong ulan); putol-putol na sona = sporadic na bulalakaw lamang. Hindi iginuguhit ang mga spot na may istasyong labas sa mapa; ang kararating (wala pang 3 minuto) ay kumikislap nang isang minuto.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% ulan: bahagi ng magagamit na repleksyon ng landas sa oras na iyon na bumabagsak sa sona ng ulan sa mapa (specular na repleksyon, kabuuan ng mga aktibong ulan). Kung mas mataas, mas nakatipon ang mabubuting bakas sa iisang lugar na tututukan ng antena. "sporadic" = walang aktibong ulan na nagbibigay ng magagamit na repleksyon: sporadic na bulalakaw lamang ang natitira sa magkabilang panig (putol-putol na sona).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Naililipat ang mapang Mercator sa pag-drag gamit ang mouse; double click: muling nakagitna sa aking istasyon. Nananatiling nakagitna sa aking istasyon ang azimuthal.
+Memorizza	I-save
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Iba ang isinulat na locator sa nasa archive ng CALL3: pindutin para i-update at i-save ito (manwal na entry, isinusulat agad din sa call3.txt).
+{0} memorizzato nel CALL3: {1}	Na-save ang {0} sa CALL3: {1}

@@ -38,6 +38,7 @@ namespace YAMS
             replaced = true;
         }
 
+        public static bool Hosted = false;   // true dentro E-LAYER ANALYZER (tools/sync_yams.py)
         string dataDir;
         Config cfg;
         PathModel model;
@@ -543,16 +544,15 @@ namespace YAMS
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
             Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc, L(Lang.T("Ore (da −12 a +36 h)")), trackTime,
                               btnReal, lblSkyTime);
-            // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
-            Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
-                       L(Lang.T("Banda MHz")), cmbBand, btnCalc, L(Lang.T("Carattere")), sldFont, lblFont);   // il puntamento sta nel riquadro del corrispondente
+            // la mia stazione (locator, quota, banda, Calcola): non piu' nella prima riga ma in cima alla colonna destra del
+            // Traffico in diretta (richiesta dell'autore, 14/11/2026): BuildMyStationBox() in MainWindow.Traffico.cs.
+            // Il puntamento sta nel riquadro del corrispondente, il carattere nella linguetta Impostazioni.
             // il corrispondente (nominativo, locator, quota) sta nel Calcolo previsionale, accanto alla mappa
             // (bozzetto B scelto dall'autore, 13/11/2026): BuildDxPanel()
 
-            DockTop(root, row1);
             DockTop(root, row2);
             DockTop(root, row3);
-            topRows = new[] { row1, row2, row3 };
+            topRows = new[] { row2, row3 };
         }
 
         Border[] topRows;
@@ -625,7 +625,7 @@ namespace YAMS
             numExp = N(1, 4, Dm(cfg.GetD("esponente_lambda", 3)), 1, 0.1m, 50);
             numExp.ValueChanged += (s, e) => UpdateFluxTab();
             lblRadar = L("");
-            DockTop(p3, Row(btnFetch, chkAuto, L(Lang.T("Esponente λ (SM6FHZ)")), numExp, lblRadar));
+            DockTop(p3, Row(btnFetch, L(Lang.T("Esponente λ (SM6FHZ)")), numExp, lblRadar));   // chkAuto nella linguetta Impostazioni
             lblScaleNote = new TextBlock { Foreground = Pal.B(Pal.OrangeText), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 4, 6, 4) };
             DockTop(p3, lblScaleNote);
             Grid tl = new Grid { ColumnDefinitions = new ColumnDefinitions("62*,38*"), RowDefinitions = new RowDefinitions("50*,50*") };
@@ -948,6 +948,9 @@ namespace YAMS
             // --- Mappa quadrati da ADIF (MainWindow.Grid.cs)
             BuildGridTab();
 
+            // --- Impostazioni: funzionamento generale del programma (MainWindow.Impostazioni.cs)
+            BuildSettingsTab();
+
             // ===== ultima: Documenti tecnici: fonti, mappa dei radar europei, efficienza - spiegazione
             Group(Lang.T("Documenti tecnici"));
 
@@ -1091,7 +1094,7 @@ namespace YAMS
             item(body, Color.FromRgb(255, 210, 90), Lang.T("scorrimento sciame"));
             item(body, SkyPal.Orange, Lang.T("miglior punt."));
             item(body, Color.FromRgb(235, 225, 190), Lang.T("zona PREV"));
-            // senza la pianta (mappa spenta o vista dal basso) si vedono anche i radianti
+            // colori dei radianti: sempre in legenda
             legendRadiants = new StackPanel { Spacing = 2, Margin = new Thickness(0, 6, 0, 0) };
             item(legendRadiants, SkyPal.Azure, Lang.T("percorso rad."));
             legendRadiants.Children.Add(new TextBlock { Text = Lang.T("Radiante:"), FontWeight = FontWeight.SemiBold, FontSize = 12, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 4, 0, 0) });
@@ -1116,7 +1119,7 @@ namespace YAMS
 
         void UpdateMapLegend()
         {
-            if (legendRadiants != null && sky != null) legendRadiants.IsVisible = !(sky.ShowMap && sky.TopView);
+            if (legendRadiants != null) legendRadiants.IsVisible = true;   // colori dei radianti sempre visibili (richiesta dell'autore, 14/11/2026)
         }
 
         Control BuildDxBox()
@@ -1129,7 +1132,18 @@ namespace YAMS
             sp.Children.Add(L(Lang.T("nominativo")));
             sp.Children.Add(txtDxCall);
             sp.Children.Add(L(Lang.T("locator")));
-            sp.Children.Add(txtDx);
+            // pulsante accanto al locator: un locatore diverso da quello del CALL3 diventa voce a mano e si scrive
+            // subito dentro data/call3.txt (richiesta dell'autore, IC8TEM, 14/11/2026)
+            btnDxSave = new Button { Content = Lang.T("Memorizza"), FontSize = 12, Padding = new Thickness(8, 4), Margin = new Thickness(6, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center, IsEnabled = false };
+            ToolTip.SetTip(btnDxSave, Lang.T("Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt)."));
+            btnDxSave.Click += (s, e) => SaveDxLocator();
+            Detach(txtDx);
+            StackPanel locRow = new StackPanel { Orientation = Orientation.Horizontal };
+            locRow.Children.Add(txtDx); locRow.Children.Add(btnDxSave);
+            sp.Children.Add(locRow);
+            txtDx.TextChanged += (s, e) => UpdateDxSaveButton();
+            txtDxCall.TextChanged += (s, e) => UpdateDxSaveButton();
+            UpdateDxSaveButton();
             sp.Children.Add(L(Lang.T("quota m")));
             sp.Children.Add(numDxAlt);
             lblDxCall3.TextWrapping = TextWrapping.Wrap;
@@ -1145,6 +1159,28 @@ namespace YAMS
         }
 
         string lastDxCall = null;
+        Button btnDxSave;
+
+        // attivo solo con nominativo e locatore validi e diverso da quello che il CALL3 da' per quel nominativo
+        void UpdateDxSaveButton()
+        {
+            if (btnDxSave == null) return;
+            string call = (txtDxCall.Text ?? "").Trim().ToUpperInvariant(), loc = Up(txtDx);
+            btnDxSave.IsEnabled = call.Length >= 3 && CallDb.ValidLoc(loc) && !CallDb.Loading && CallDb.Lookup(call) != loc;
+        }
+
+        void SaveDxLocator()
+        {
+            string call = (txtDxCall.Text ?? "").Trim().ToUpperInvariant(), loc = Up(txtDx);
+            if (!CallDb.SetManual(call, loc)) return;
+            System.Threading.ThreadPool.QueueUserWorkItem(_ => CallDb.WriteCorrectionsToCall3());   // subito dentro call3.txt
+            lastDxCall = call;
+            lblDxCall3.Text = Lang.F("{0} memorizzato nel CALL3: {1}", call, loc);
+            lblDxCall3.Foreground = Pal.B(Pal.Green);
+            status.Text = lblDxCall3.Text;
+            UpdateDxSaveButton();
+            Recalc();
+        }
 
         // nominativo -> locator dal CALL3; con Invio ricalcola sempre
         void ApplyDxCall(bool force)

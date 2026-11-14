@@ -6,6 +6,9 @@
 // elenca chi sta inviando rapporti. Se il mio nominativo c'e' con un programma che non e' YA-MS, l'invio funziona e
 // YA-MS tace; se manca da piu' di 20 minuti (e la richiesta e' andata a buon fine), YA-MS rimanda.
 // Protocollo: IPFIX su UDP verso report.pskreporter.info:4739 (pskreporter.info/pskdev.html), enterprise 30351.
+// In piu' (richiesta dell'autore, 14/11/2026) si legge l'impostazione del programma digitale: in WSJT-X.ini (o JTDX.ini),
+// sezione [Configuration], PSKReporter=false vuol dire che l'invio e' spento e YA-MS rimanda subito, senza aspettare i
+// 20 minuti; con PSKReporter=true decide la lista di PSKReporter (l'impostazione accesa non dice che gli spot arrivano).
 // Invio ogni 5 minuti, una stazione per banda al massimo ogni 5 minuti. Spegnimento: psk_rimando=0 in data/config.ini.
 using System;
 using System.Collections.Generic;
@@ -65,9 +68,46 @@ namespace YAMS
             }
         }
 
+        // impostazione di invio a PSKReporter del programma digitale: true, false o null (file non trovato)
+        public static bool? IniPskReporter;
+        public static string IniPath = "";
+        static bool? ReadIni()
+        {
+            try
+            {
+                List<string> names = new List<string>();
+                if (WsjtxUdp.ProgramId.Length > 0) names.Add(WsjtxUdp.ProgramId);
+                names.Add("WSJT-X"); names.Add("JTDX");
+                string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                foreach (string n in names)
+                {
+                    string b = n; int k = b.IndexOf(" - ", StringComparison.Ordinal); if (k > 0) b = b.Substring(0, k);
+                    foreach (string f in new[] { Path.Combine(local, b, n + ".ini"), Path.Combine(home, ".config", n + ".ini"), Path.Combine(home, "Library", "Preferences", n + ".ini") })
+                    {
+                        if (!File.Exists(f)) continue;
+                        bool inConf = false;
+                        foreach (string raw in File.ReadLines(f))
+                        {
+                            string l = raw.Trim();
+                            if (l.StartsWith("[", StringComparison.Ordinal)) { inConf = string.Equals(l, "[Configuration]", StringComparison.OrdinalIgnoreCase); continue; }
+                            if (!inConf || !l.StartsWith("PSKReporter=", StringComparison.OrdinalIgnoreCase)) continue;
+                            IniPath = f;
+                            string v = l.Substring(12).Trim();
+                            return string.Equals(v, "true", StringComparison.OrdinalIgnoreCase) || v == "1";
+                        }
+                    }
+                }
+            }
+            catch { }
+            return null;
+        }
+
         // il programma digitale sta gia' mandando i miei spot?
         static bool OwnReportsSeen()
         {
+            IniPskReporter = ReadIni();
+            if (IniPskReporter == false) return false;                                // invio spento nel programma digitale
             if (PskActive.LastOkUtc == DateTime.MinValue) return true;              // nessuna risposta ancora: prudenza, non si manda
             if (PskActive.SelfSeenUtc > DateTime.UtcNow.AddMinutes(-20)) return true;
             return (DateTime.UtcNow - started).TotalMinutes < 20;                   // dopo l'avvio si aspetta 20 minuti

@@ -1,5 +1,5 @@
 TITLE|Notendahandbók YA-MS
-SUB|Útgáfa 1.8.11 - umsjón Costantino IC8TEM - nóvember 2026
+SUB|Útgáfa 1.8.15 - umsjón Costantino IC8TEM - nóvember 2026
 H1|1. Inngangur
 H2|1.1 Til hvers YA-MS er
 P|YA-MS hjálpar þér að spá fyrir um og fylgjast í beinni með skilyrðum fyrir meteor scatter milli stöðvarinnar þinnar og mótstöðvar, frá 28 upp í 432 MHz. Fyrir hverja virka loftsteinadrífu segir forritið hversu vel staða geislapunktsins hentar leiðinni þinni (nýtnin), á hvaða tímum, frá hvorri hlið leiðarinnar endurvörpin koma og hvert best er að beina loftnetinu. Við hlið spárinnar sýnir það mæligögn í beinni: talningar loftsteinaratsjárinnar í Collm, myndavélar Global Meteor Network, CMOR-ratsjána, GRAVES-sendinn og meteor scatter-umferðina sem safnað er frá klösunum og frá PSKReporter.
@@ -26,7 +26,7 @@ P|Við ræsingu birtist í nokkrar sekúndur mynd af Persítum yfir VLT-sjónauk
 H2|2.3 Mappan data
 P|Allar stillingar og öll gögn eru í einni möppu, data, við hlið forritsins: engin AppData, engar kerfismöppur. Til að flytja YA-MS á aðra tölvu nægir að afrita forritsmöppuna ásamt möppunni data. Innihaldi möppunnar er lýst í kafla 13.
 H2|2.4 Sjálfvirkar uppfærslur
-P|Frá útgáfu 1.8.11 eru uppfærslur sjálfvirkar og hljóðlausar: við ræsingu og síðan á 6 klukkustunda fresti athugar YA-MS GitHub og, ef ný útgáfa er til, sækir hana, setur hana upp og endurræsir sig sjálft án þess að spyrja (aðeins stöðustikan segir frá því). Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Glugginn sem lýst er hér að neðan birtist aðeins þegar þú ýtir á "Uppfærslur" eða ef þú skrifar aggiornamenti_automatici=0 í skrána data/config.ini.
+P|Frá útgáfu 1.8.6 eru uppfærslur sjálfvirkar og hljóðlausar: við ræsingu og síðan á 30 mínútna fresti athugar YA-MS GitHub og, ef ný útgáfa er til, sækir hana, setur hana upp og endurræsir sig sjálft án þess að spyrja (aðeins stöðustikan segir frá því). Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Glugginn sem lýst er hér að neðan birtist aðeins þegar þú ýtir á "Uppfærslur" eða ef þú skrifar aggiornamenti_automatici=0 í skrána data/config.ini.
 P|Frá útgáfu 1.8.0 athugar YA-MS sjálft á GitHub, við ræsingu og í mesta lagi einu sinni á dag, hvort ný útgáfa sé komin. Ef svo er birtist glugginn „Uppfærsla í boði“ með nýjungunum og þremur hnöppum:
 LI|Uppfæra núna: sækir pakkann sem hentar kerfinu þínu, skiptir út skrám forritsins, heldur möppunni data og endurræsir YA-MS. Forritsskrár í möppunni data sem nýja útgáfan breytir eru fyrst afritaðar í data/backup/v<gamla útgáfan>; skrárnar þínar (stillingar, söfn, spot, ADIF) eru ekki snertar.
 LI|Seinna: lokar glugganum; athugunin er endurtekin daginn eftir.
@@ -38,7 +38,7 @@ H2|2.5 Forritsskrár sem vantar
 P|Við ræsingu athugar YA-MS hvort allar skrár þess séu til staðar (þýðingar, skrár, skjöl). Ef einhverjar vantar, til dæmis eftir ófullkomna afritun, telur glugginn „Skrár sem vantar“ þær upp og býður upp á „Sækja skrárnar sem vantar“ frá GitHub, í sömu útgáfu og forritið, eða „Halda áfram án“. Sama athugun er endurtekin þegar ýtt er á „Uppfærslur“.
 H1|3. Aðalglugginn
 H2|3.1 Hlutar gluggans
-LI|Efst eru þrjár raðir af stýringum sem gilda fyrir alla flipa: stöðvar og band, E-lag og loftnet, tími útreiknings (kafli 4).
+LI|Efst eru tvær raðir af stýringum sem gilda fyrir alla flipa: E-lag og loftnet, tími útreiknings (kafli 4). Stöðin þín (reitur, hæð, band og Reikna) er efst til hægri í Umferð í rauntíma.
 LI|Stika aðalflipanna, með hnappnum Stýringar, litaþemanu (Þema) og tungumálinu til hægri.
 LI|Undirflipar, í ljósari röð, fyrir þá flipa sem hafa þá.
 LI|Neðst er stöðustikan: skilaboð útreikningsins, viðvaranir um tenginguna og hnappurinn „Uppfærslur“.
@@ -50,22 +50,22 @@ LI|Tæknileg skjöl, síðast: Notendahandbók, Heimildir, Kort af evrópskum ra
 H2|3.3 Tungumál, litir, letur
 LI|Tungumál: 36 tungumál. Þegar skipt er um tungumál er glugginn endurbyggður á sama stað og á sama flipa, án endurræsingar. Tölur og dagsetningar fylgja völdu tungumáli (kommu sem tugabrotsmerki á ítölsku, punktur á ensku).
 LI|Þema: 12 litaþemu; Ljóst er sjálfgefið, Nótt og Svart eru ætluð til notkunar í myrkri, Loftsteinaslóð er upprunalegi stíll YA-MS.
-LI|Leturstærð (aftast í fyrstu stjórnlínunni): minnkar eða stækkar allan texta frá 85 upp í 140 %, í 5 % þrepum. Með stóru letri fara flipar í fleiri línur.
-LI|Stýringar: fellir saman og opnar aftur raðirnar þrjár af stýringum, til að gefa kortum og gröfum meira rými. Valið er munað.
+LI|Leturstærð (Stillingar): minnkar eða stækkar allan texta frá 85 upp í 140 %, í 5 % þrepum. Með stóru letri fara flipar í fleiri línur.
+LI|Stýringar: fellir saman og opnar aftur raðirnar tvær af stýringum, til að gefa kortum og gröfum meira rými. Valið er munað.
 TAG|NOTA|Nær allar stýringar hafa skýringartexta: haltu músinni kyrri yfir stýringunni til að lesa til hvers hún er og úr hvaða heimild upphafsgildið kemur.
 H1|4. Stilling stöðvar og leiðar
-H2|4.1 Röð 1: stöðvar og band
+H2|4.1 Stöðin mín (Umferð í beinni)
 LI|Minn locator og hæð m: Maidenhead-locatorinn þinn (4, 6 eða 8 stafir; miðja reitsins er notuð) og hæð stöðvarinnar yfir sjávarmáli.
 LI|Band MHz: 28, 50, 70, 144, 222 eða 432 MHz. Notað fyrir mögnun og geisla loftnetsins, fyrir deyfingu og aflreikning og fyrir mat á flæðinu.
 LI|Reikna: endurreiknar leiðina (úrtak úr E-laginu, innan við sekúnda).
-H2|4.2 Röð 2: E-lag og loftnet
+H2|4.2 Röð 1: E-lag og loftnet
 LI|Hæð slóða km og frá ratsjá: hæð loftsteinaslóðanna. Þegar hakað er við „frá ratsjá“ er notuð algengasta hæðin sem Collm-ratsjáin mælir (venjulega 88-90 km); taktu hakið af til að slá hana inn handvirkt.
 LI|Hæðarhorn geisla °: hæðarhorn hámarks lóðrétta geislans í loftnetinu þínu. Stefnuloftnet sem stillt er á 0° hefur samt aðalgeislann nokkrum gráðum yfir sjóndeildarhring vegna endurvarps frá jörðinni: venjulega 3-8°, eftir hæð loftnetsins í bylgjulengdum.
 LI|geislamynstur loftnets: þegar kveikt er á því (sjálfgefið) gilda endurvarpspunktarnir með lóðréttri mögnun beggja loftnetanna: full í kringum hámark geislans og sífellt minni í átt að sjóndeildarhring og upp á við. Þegar slökkt er á því er hæðarhorn geislans skörp mörk: punktar sem sjást neðar teljast ekki með.
 LI|Yagi-loftnet: bóma m: lengd bómunnar. Við hliðina skrifar forritið lengdina í bylgjulengdum, mögnunina (DL6WU-ferillinn) og geislann við -3 dB lárétt og lóðrétt. Undir 2 λ er matið ónákvæmt.
 LI|Heitur blettur frá miðpunkti km og sjálfv. (AMS): fjarlægð Hot A og Hot B frá miðpunktinum. Þegar hakað er við „sjálfv. (AMS)“ er fylgt töflu J. Richardson sem DJ5HG vitnar í (13° frávik við 1000 km, 10° yfir 1500 km); taktu hakið af til að slá inn 30-400 km handvirkt (MSHV notar 150 km).
 TAG|ATTENZIONE|Þegar slökkt er á „geislamynstur loftnets“ og geislinn er nokkrum gráðum ofar geta stöðvarnar tvær á langri leið lent í því að sjá engan sameiginlegan punkt í laginu: öll nýtnigildi verða 0 og viðvörunin „ENGIN SAMEIGINLEG SVÆÐI“ birtist ásamt þeim geisla eða þeirri hæð slóða sem þyrfti. Dæmi: JN70CN - JO76QP, 1791 km, geisli við 3°, slóðir í 88,5 km.
-H2|4.3 Röð 3: tími útreiknings
+H2|4.3 Röð 2: tími útreiknings
 LI|Tími: UTC-klukka.
 LI|Dagsetning útreiknings (UTC): dagur útreikningsins. Gildir fyrir Spáreikning, fyrir 24 klukkustunda töfluna í Útreikningi nýtni og fyrir tímalínuna í GRAVES-ratsjá. Sjálfgefið er dagurinn í dag og á miðnætti færist hún yfir á nýja daginn.
 LI|Klukkustundir (−12 til +36 klst.): færir tíma útreikningsins í 15 mínútna skrefum. Við hliðina: „Útreikningur fyrir: núna“ eða valin dagsetning og tími.
@@ -78,7 +78,8 @@ P|Fyrsti undirflipinn í hópnum Spáreikningur sýnir á einum skjá hvar nýti
 H2|5.1 Yfirlitsröndin
 P|Fyrir ofan kortið tekur rönd saman útreikninginn fyrir þann tíma: dagsetningu og tíma, leiðarstuðul (summu ZHR × nýtni virku drífanna), gagnlegustu drífuna með ZHR hennar og nýtni (einnig í dB miðað við viðmið DJ5HG), fjölda drífa yfir sjóndeildarhring og Hot sem mælt er með ásamt stefnuhorni þess.
 H2|5.2 Kortið séð ofan frá
-P|Við hlið kortsins, til hægri, er einn dálkur. Efst er reitur mótstöðvarinnar: fyrst stefna loftnetsins (Loftnet az, alltaf að mótstöðinni), svo kallmerkið (skrifaðu það og ýttu á Enter: staðsetningin kemur úr CALL3-gagnagrunninum, eins og í YAEC og LIVETROPOVHF), staðsetningin og hæðin. Einnig má skrifa kallmerkið í staðsetningarreitinn. Neðst er skýring á táknum kortsins: smellur á titilinn fellir hana saman; litir geislapunktanna birtast þegar Evrópukortið er slökkt.
+P|Við hlið kortsins, til hægri, er einn dálkur. Efst er reitur mótstöðvarinnar: fyrst stefna loftnetsins (Loftnet az, alltaf að mótstöðinni), svo kallmerkið (skrifaðu það og ýttu á Enter: staðsetningin kemur úr CALL3-gagnagrunninum, eins og í YAEC og LIVETROPOVHF), staðsetningin og hæðin. Einnig má skrifa kallmerkið í staðsetningarreitinn. Neðst er skýring á táknum kortsins: smellur á titilinn fellir hana saman.
+P|Ef þú skrifar aðra staðsetningu fyrir það kallmerki en í safninu verður hnappurinn «Vista» við hlið staðsetningarreitsins virkur: með því að ýta á hann verður nýja staðsetningin handvirk færsla (data/CALL3-MANUALE.TXT, sem gengur framar öllum öðrum heimildum) og er strax skrifuð líka í data/call3.txt.
 P|Til vinstri er kort af Evrópu séð ofan frá (austur til hægri), með gráðukvarða allan hringinn:
 LI|græn lína: raunveruleg leið milli locatoranna tveggja;
 LI|Hot A og Hot B: heitu blettirnir tveir sitt hvorum megin við miðpunktinn. Rautt = mælt með, bleikt = utan loftnetsgeislans, grátt = þegar innan geislans (með viðvörun);
@@ -150,7 +151,7 @@ LI|Markmiðstíðni MHz: tíðni spárinnar.
 LI|Veldisvísir λ^k (3, SM6FHZ) og Stöðvarstuðull K (1): regla um tíðnina og leiðrétting fyrir stöðina þína.
 LI|k úr fjöldastuðlum: leggur til k út frá fjöldastuðlum r virku drífanna (GMN, annars IMO; k = 3,75 · log10 r, vegið með ZHR) og biður um staðfestingu áður en það er notað.
 LI|Hlaða RMOB-skrá af diski og Finna veldisvísinn út frá RMOB-skránni: lesa mánaðarlega RMOB-skrá og finna k út frá klukkustundunum sem eru sameiginlegar með Collm.
-LI|RMOB-athugandi, Sækja RMOB núna og sjálfvirk sókn á 5 mínútna fresti: slökkt er á sjálfvirku sókninni og aðeins má kveikja á henni með leyfi RMOB.
+LI|RMOB-athugandi, Sækja RMOB núna og sjálfvirk sókn á 5 mínútna fresti: slökkt er á sjálfvirku sókninni og aðeins má kveikja á henni með leyfi RMOB. Þessar skipanir eru í flipanum Stillingar.
 H2|8.2 Niðurstöðurnar
 LI|Grafið fyrir gærdaginn og daginn í dag: loftsteinar á klukkustund í Collm, gildi færð yfir á tíðnina þína og, ef þær hafa verið hlaðnar, RMOB-talningarnar.
 LI|Spáin fyrir næstu 24 klukkustundir: sama klukkustund daginn áður, leiðrétt fyrir breytingu á drífustuðli leiðarinnar.
@@ -158,18 +159,21 @@ LI|Taflan með matinu: gott, miðlungs eða lélegt miðað við meðaltal 24 kl
 TAG|NOTA|Lengd endurvarpanna fylgir valinu „Lengd pinga milli banda“ í Rúmfræði og deyfingu; í forward scatter eykst lengdin einnig með sec²φ í miðpunkti leiðarinnar.
 H1|9. Beint og rauntímagögn
 H2|9.1 Umferð í beinni
-P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þína í miðju og allri meteor scatter-umferð sem safnað hefur verið: fyrir hvert samband er leiðin í lit bandsins (28 brúnt, 50 grænt, 70 blágrænt, 144 appelsínugult, 222 bleikt, 432 fjólublátt), stöðvarnar tvær og ský líklegustu slóðanna á þeim tíma. Nýkomin spot blikka í eina mínútu.
+P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þína í miðju og allri meteor scatter-umferð sem safnað hefur verið: fyrir hvert samband er leiðin í lit bandsins (28 brúnt, 50 grænt, 70 blágrænt, 144 appelsínugult, 222 bleikt, 432 fjólublátt), stöðvarnar tvær og drífusvæði líklegustu slóðanna á þeim tíma. Nýkomin spot blikka í eina mínútu.
 LI|Radíus korts: 600-3500 km. Spot til að sýna: síðustu 3, 15 eða 30 mínútur, síðasta klukkustund, síðustu 3 eða 24 klukkustundir.
-LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju skýsins, hæð þess og stærð.
+LI|Mercator-kortið færist með því að draga það með músinni; tvísmellur: aftur miðjað á stöðina mína. Hornkortið er áfram miðjað á stöðina mína.
+LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju drífusvæði, hæð þess og stærð.
+LI|Upplýsingar um valið samband eða hlustunarstöð birtast í upphækkuðum kassa yfir kortinu, efst til vinstri, bæði með jafnfjarlægðarvörpun og Mercator-vörpun.
 LI|Sýna hverjir hlusta: þríhyrningar í lit bandsins merkja stöðvar sem samkvæmt PSKReporter taka á móti MSK144, FSK441, PSK2K eða JTMS á 28, 50, 70, 144 og 432 MHz í völdum tímaglugga. Smellur á þríhyrning sýnir kallmerki, staðsetningu, hætti og síðasta spot. MQTT-straumurinn í flipanum Gagnasöfnun verður að vera tengdur.
 LI|Einnig virkir hlustendur á korti PSKReporter: tómir þríhyrningar fyrir stöðvar sem birtast á korti pskreporter.info í MSK144, FSK441, PSK2K eða JTMS en hafa ekki enn tekið á móti neinu spotti (MQTT sendir aðeins stöðvar sem taka á móti einhverju). YA-MS spyr fyrirspurnaþjónustu PSKReporter einu sinni á 5 mínútna fresti fyrir alla hætti, eins og reglur þjónustunnar biðja um; hlustandi helst á kortinu í að minnsta kosti 11 mínútur. Smellur á þríhyrninginn sýnir kallmerki, staðsetningu, afkóðunarforrit og tímann sem hlustandinn var virkur. Kveikt sjálfgefið.
-LI|FT8 yfir 1100 km án samsíða leiða: FT8-spott (frá PSKReporter MQTT, klösum eða WSJT-X um UDP) milli stöðva sem eru meira en 1100 km hvor frá annarri og hefur engar samsíða leiðir á 3 mínútum fyrir og eftir (sama band, miðpunktur innan 300 km, stefna innan 20°, annað stöðvapar) er teiknað ljósgrænt og lína þess í töflunni neðst til hægri blikkar alltaf. Sporadískt E og tropo gefa margar nálægar, samsíða leiðir; stakt spott getur verið loftsteinaslóð. Þess vegna tekur YA-MS líka við FT8-spottum frá MQTT á 6 m, 4 m, 2 m, 1,25 m og 70 cm (ekki 10 m, of mörg). Þessi spott fara ekki í MS-safnið. Kveikt sjálfgefið.
+LI|FT8 yfir 1100 km án samsíða leiða: FT8-spott (frá PSKReporter MQTT, klösum eða WSJT-X um UDP) milli stöðva sem eru meira en 1100 km hvor frá annarri og hefur engar samsíða leiðir á 3 mínútum fyrir og eftir (sama band, miðpunktur innan 300 km, stefna innan 15°, annað stöðvapar) er teiknað ljósgrænt og lína þess í töflunni neðst til hægri blikkar alltaf. Sporadískt E og tropo gefa margar nálægar, samsíða leiðir; stakt spott getur verið loftsteinaslóð. Þess vegna tekur YA-MS líka við FT8-spottum frá MQTT á 6 m, 4 m, 2 m, 1,25 m og 70 cm (aldrei 28 MHz, í engu tilviki). Þessi spott fara ekki í MS-safnið. Kveikt sjálfgefið. Viðbótarprófanir með PSKReporter MQTT: spottið er ekki stakt ef móttökustöðin heyrir í MQTT aðrar stöðvar yfir 1100 km á sama bandi innan 3 mínútna (opið band); spott frá klösum og RBN gilda aðeins ef sama par kemur líka um MQTT; RBN-skimmerar (kallmerki með «-#») gilda aldrei.
 LI|WSJT-X-spott um UDP sem varða stöðina þína (afkóðunin inniheldur kallmerkið þitt: sá sem kallar á þig eða svarar þér) eru teiknuð með strikalínu sem blikkar alltaf, í öllum háttum og í hvaða fjarlægð sem er.
+LI|Skipti milli notenda YA-MS: þegar annar notandi YA-MS afkóðar um UDP skilaboð til stöðvar þinnar (í MSK144, FSK441, PSK2K eða JTMS, eða í FT8 yfir 1100 km) sendir YA-MS hans þér þau dulkóðuð um þrjá opinbera MQTT-miðlara (HiveMQ, Mosquitto, EMQX); þú sérð þau sem fjólubláa strikalínu sem blikkar alltaf og sem línu í UDP-stjórnborðinu. Aðeins þú getur lesið þau (ECDH P-256 lyklar, AES-256 og HMAC-SHA256). FT8-spott birtast aðeins ef þau hafa engar samsíða leiðir innan 3 mínútna. Kveikt sjálfgefið; yams_scambio=0 í data/config.ini slekkur á því.
 LI|Spott allra banda eru sýnd, líka banda sem ekki eru valin í Gagnasöfnun (þau eru ekki vistuð). CW-spott og spott milli stöðva sem eru of nálægt eru ekki sýnd ef þeim er hent í Gagnasöfnun.
-LI|Kortið sýnir kallmerki beggja stöðva hvers spotts, einu sinni á hverja stöð. Vörpunin getur verið jafnfjarlæg (miðuð á þína stöð) eða Mercator. Ábendingin á dálknum Ský útskýrir merkingu hans.
+LI|Kortið sýnir kallmerki beggja stöðva hvers spotts, einu sinni á hverja stöð. Vörpunin getur verið jafnfjarlæg (miðuð á þína stöð) eða Mercator. Ábendingin á dálknum drífusvæði útdrífusvæði merkingu hans.
 H2|9.2 Ratsjárflæði
 P|Talningar loftsteina á klukkustund og hæðir slóða frá SKiYMET-ratsjánni í Collm (36,2 MHz) og nýjasta myndin frá ratsjánni í Sodankylä (36,9 MHz).
-LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst.
+LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst. Sjálfvirka uppfærslan er stillt í flipanum Stillingar.
 LI|Veldisvísir λ (SM6FHZ): veldisvísir matsins á þínu bandi (appelsínugul lína á kvarðanum til hægri).
 LI|Hæðir slóða: stuðlarit með tíðasta gildi, meðaltali, miðgildi og staðalfráviki; með „frá ratsjá“ verður tíðasta gildið hæðin í öllum útreikningum.
 TAG|ATTENZIONE|Ef ekki tekst að lesa kvarðann á grafi Collm birtist appelsínugul viðvörun og sannreyna þarf gildin. Án nettengingar notar forritið síðustu vistuðu gögnin, segir frá því einu sinni og reynir sjálft aftur á 5 mínútna fresti; stöðustikan verður rauð þar til tengingin kemst aftur á.
@@ -187,8 +191,9 @@ LI|Sían tekur við spotum á dæmigerðum tíðnum fyrir meteor scatter (50190-
 LI|CW-spotum er hent strax (CW eða WPM í athugasemd, eða 28000-28070 kHz): þau birtast ekki í skjáborðinu og eru ekki vistuð, nema þau séu merkt <MS>. Hægt er að slökkva á reitnum.
 LI|Spottum milli stöðva sem eru nær en 500 km er hent strax, því á þeirri fjarlægð er sambandið beint eða um veðrahvolf en ekki meteor scatter: þau birtast ekki í stjórnborðinu og eru ekki vistuð. Ef staðsetningarreit vantar heldur spottið sér. Fjarlægðinni er breytt undir reitnum.
 LI|Locatorar sem vantar eru sóttir úr CALL3-safninu; samþykkt spot fara í data/spot_ms, ein skrá á dag, og á kortið í Umferð í beinni.
-LI|CALL3-gagnagrunnur með reglum LIVETROPOVHF. „Uppfæra núna" sækir CALL3.TXT frá MMMonVHF (a.m.k. 100.000 gildar línur, sú fyrri verður eftir í data/call3.bak); með „Uppfæra sjálft á 7 daga fresti" gerist það við ræsingu. Ofan á skránni gilda í röð: handskráningar (data/CALL3-MANUALE.TXT), leiðréttingar úr klasa (6 stafa reiturinn sem sá sem spottar gefur upp fyrir sig), viðbættar skrár (data/CALL3-AGGIUNTE), síðan CALL3.TXT og 6 stafa reitir lærðir í beinni (data/LOC6.TXT). Móttekinn 4 stafa reitur, eða sem endar á LL eða MM, er leystur af hólmi með 6 stafa reitnum úr gagnagrunninum; færanlegar stöðvar (með skástriki) aðeins með nákvæmri færslu.
-LI|Síðasta heimild, eins og í LIVETROPOVHF: fyrir kallmerki sem hvergi annars staðar hafa 6 stafa reit spyr forritið sjálfkrafa á 6 klukkustunda fresti opið API G7VRD (api.g7vrd.co.uk), í hópum 40 kallmerkja; hvert kallmerki mest einu sinni á dag. Aðeins 6 stafa reitur er samþykktur, ekki miðja reitsins (LL eða MM), í sama reit og sá sem barst. Niðurstöður eru í data/CALL3-G7VRD.TXT og eru, eins og allar leiðréttingar, einnig skrifaðar í data/call3.txt.
+LI|CALL3-gagnagrunnur með reglum LIVETROPOVHF. „Uppfæra núna" sækir CALL3.TXT frá MMMonVHF (a.m.k. 100.000 gildar línur, sú fyrri verður eftir í data/call3.bak); með „Uppfæra sjálft á 12 klukkustunda fresti" gerist það við ræsingu. Ofan á skránni gilda í röð: handskráningar (data/CALL3-MANUALE.TXT), leiðréttingar úr klasa (6 stafa reiturinn sem sá sem spottar gefur upp fyrir sig), viðbættar skrár (data/CALL3-AGGIUNTE), síðan CALL3.TXT og 6 stafa reitir lærðir í beinni (data/LOC6.TXT). Móttekinn 4 stafa reitur, eða sem endar á LL eða MM, er leystur af hólmi með 6 stafa reitnum úr gagnagrunninum; færanlegar stöðvar (með skástriki) aðeins með nákvæmri færslu.
+LI|Síðasta heimild, eins og í LIVETROPOVHF: fyrir kallmerki sem hvergi annars staðar hafa 6 stafa reit spyr forritið sjálfkrafa á 30 mínútna fresti opið API G7VRD (api.g7vrd.co.uk), í hópum 40 kallmerkja; hvert kallmerki mest einu sinni á dag. Aðeins 6 stafa reitur er samþykktur, ekki miðja reitsins (LL eða MM), í sama reit og sá sem barst. Niðurstöður eru í data/CALL3-G7VRD.TXT og eru, eins og allar leiðréttingar, einnig skrifaðar í data/call3.txt.
+LI|Á eftir G7VRD kemur JTDX-lagið (data/grid_data.bin, um 365.000 kallmerki): það gildir aðeins um kallmerki án 6 stafa reits í öllum öðrum heimildum, aðeins í sama reit og sá sem barst, og er aldrei skrifað í data/call3.txt.
 H1|10. Drífur í beinni og drífuskrá
 H2|10.1 Drífur í beinni
 P|Til vinstri flæði og ZHR mælt af Global Meteor Network fyrir virku drífurnar, með talningum dagsins frá GMN-myndavélunum fyrir hverja drífu (talning, ekki flæði: hún fer eftir því hve margar stöðvar sjá heiðskíran himin); til hægri kort CMOR-ratsjárinnar af geislapunktum, þar á meðal fyrir dagdrífur. Skrárnar eru aðeins sóttar aftur ef þær hafa breyst, í mesta lagi á 30 mínútna fresti, eða með Sækja núna.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC-skráin; radar/diretta/: GMN- og CMOR-gögn.
 LI|call3.txt: locatorasafn; spot_ms/: söfnuð meteor scatter-spot; adif_quadrati.csv: reitir úr ADIF-skránni.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tæknilegu skjölin.
 LI|backup/: afrit af skrám sem uppfærsla skipti út; aggiornamento/: sóttur pakki (eytt við endurræsingu).
+H2|13.3 Flipinn Stillingar
+P|Flipinn Stillingar safnar saman almennri virkni forritsins: Útlit (letur, þema og tungumál), Uppfærslur forritsins (athugun á GitHub við ræsingu og á 30 mínútna fresti, sjálfvirkar hljóðlátar uppfærslur, Athuga núna), Rauntímaheimildir (sjálfvirk uppfærsla á 5 mínútna fresti), RMOB (athugandi, sækja núna og sjálfvirk sókn) og Forrit (skipanalínur og gagnamappa). Reiknistikarnir eru áfram í skipanalínunum fyrir ofan flipana.
 H2|13.2 Nokkrir lyklar í config.ini
 LI|controlla_aggiornamenti=0: ekki leita að nýjum útgáfum; aggiornamenti_salta: útgáfa sem sleppt var.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: gátreitir útreikningsins.
 LI|raggio_iniziale (0 = tvöfalt ITU-gildi, 1 = ITU, 2 = undanskilið), durata_ping (0 = λ², 1 = mæld).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: slekkur á áframsendingu til PSKReporter á MS-afkóðunum (MSK144, FSK441, PSK2K, JTMS) sem berast um UDP. Kveikt er á henni sjálfgefið og hún vinnur sjálf: ef kallmerkið þitt hefur vantað í meira en 20 mínútur meðal stöðva sem senda skýrslur til PSKReporter (stafræna forritið sendir ekki), sendir YA-MS á 5 mínútna fresti MS-stöðvarnar sem þú afkóðar, með þig sem móttakanda; um leið og stafræna forritið sendir aftur hættir YA-MS. Lína í UDP-stjórnborðinu segir hvenær hún byrjar og hættir.
+LI|psk_rimando=0: slekkur á áframsendingu til PSKReporter á MS-afkóðunum (MSK144, FSK441, PSK2K, JTMS) sem berast um UDP. Kveikt er á henni sjálfgefið og hún vinnur sjálf: ef kallmerkið þitt hefur vantað í meira en 20 mínútur meðal stöðva sem senda skýrslur til PSKReporter (stafræna forritið sendir ekki), sendir YA-MS á 5 mínútna fresti MS-stöðvarnar sem þú afkóðar, með þig sem móttakanda; um leið og stafræna forritið sendir aftur hættir YA-MS. Lína í UDP-stjórnborðinu segir hvenær hún byrjar og hættir. Ef slökkt er á sendingu til PSKReporter í WSJT-X.ini (eða JTDX.ini) sendir YA-MS strax áfram, án þess að bíða í 20 mínútur.
 TAG|ATTENZIONE|Breyttu config.ini aðeins þegar forritið er lokað: þegar YA-MS er lokað skrifar það skrána upp á nýtt.
 H1|14. Dæmigert verklag
 H2|14.1 Undirbúningur sked á drífu

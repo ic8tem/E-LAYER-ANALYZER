@@ -47,6 +47,8 @@ namespace YAMS
         string trafficCloudTip;
         // FT8 lunghi e isolati (possibile meteor scatter): verde chiaro
         static readonly Color Ft8IsoColor = Color.FromRgb(134, 239, 172);
+        // messaggi rivolti a me sentiti da altri utenti di YA-MS (scambio cifrato): viola
+        static readonly Color SharedColor = Color.FromRgb(167, 139, 250);
 
         void BuildTrafficTab()
         {
@@ -55,15 +57,24 @@ namespace YAMS
             p.Children.Add(g);
             traffic = new TrafficView { RadiusKm = Math.Max(600, Math.Min(3500, cfg.GetD("traffico_raggio", 2500))) };
             traffic.SpotClicked += t => ShowTrafficInfo(t);
+            traffic.ViewChanged += () => RefreshTraffic(true);   // Mercatore spostato: si ricalcola cosa sta sulla mappa
             traffic.ListenerClicked += l => { if (lblTrafficInfo != null) lblTrafficInfo.Text = l.Info; };
-            Grid.SetColumn(traffic, 0); g.Children.Add(traffic);
+            // la mia stazione: riquadro sopra la mappa, in alto a destra, dove la mappa ha spazio libero (richiesta
+            // dell'autore, 14/11/2026: prima era in cima alla colonna destra)
+            Grid mapHost = new Grid();
+            mapHost.Children.Add(traffic);
+            Control myBox = BuildMyStationBox();
+            myBox.HorizontalAlignment = HorizontalAlignment.Right; myBox.VerticalAlignment = VerticalAlignment.Top;
+            myBox.Margin = new Thickness(0, 8, 10, 0);
+            mapHost.Children.Add(myBox);
+            Grid.SetColumn(mapHost, 0); g.Children.Add(mapHost);
 
             StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
             side.Children.Add(new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
             side.Children.Add(new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
-                Text = Lang.T("Spot MS della linguetta \"Raccolta dati\". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
+                Text = Lang.T("Spot della linguetta \"Raccolta dati\". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
             });
             side.Children.Add(new TextBlock
             {
@@ -73,12 +84,21 @@ namespace YAMS
             sldTrafficRadius = new Slider { Minimum = 600, Maximum = 3500, Value = traffic.RadiusKm, Width = 220, VerticalAlignment = VerticalAlignment.Center };
             lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
             sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
-            side.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
+            // raggio e proiezione: riquadro sopra la mappa, in basso a destra (richiesta dell'autore, 14/11/2026)
+            StackPanel mapOpts = new StackPanel { Spacing = 2 };
+            mapOpts.Children.Add(Row(L(Lang.T("Raggio della mappa")), sldTrafficRadius, lblTrafficRadius));
             ComboBox cmbProj = new ComboBox { ItemsSource = new[] { Lang.T("azimutale (centrata sulla mia stazione)"), Lang.T("Mercatore") }, MinWidth = 220, VerticalAlignment = VerticalAlignment.Center };
             traffic.Mercator = cfg.GetB("traffico_mercatore", false);
             cmbProj.SelectedIndex = traffic.Mercator ? 1 : 0;
+            ToolTip.SetTip(cmbProj, Lang.T("Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione."));
             cmbProj.SelectionChanged += (s, e) => { traffic.Mercator = cmbProj.SelectedIndex == 1; cfg.Set("traffico_mercatore", traffic.Mercator); RefreshTraffic(true); };
-            side.Children.Add(Row(L(Lang.T("Proiezione della mappa")), cmbProj));
+            mapOpts.Children.Add(Row(L(Lang.T("Proiezione della mappa")), cmbProj));
+            mapHost.Children.Add(new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(4), Child = mapOpts,
+                HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, Margin = new Thickness(0, 0, 10, 8)
+            });
             List<string> wn = new List<string>();
             foreach (int m in TrafficMinutes) wn.Add(m < 60 ? Lang.F("ultimi {0} minuti", m) : m == 60 ? Lang.T("ultima ora") : m < 1440 ? Lang.F("ultime {0} ore", m / 60) : Lang.T("ultime 24 ore"));
             cmbTrafficWindow = new ComboBox { ItemsSource = wn, MinWidth = 170, VerticalAlignment = VerticalAlignment.Center };
@@ -102,12 +122,20 @@ namespace YAMS
             side.Children.Add(chkFt8);
             lblTrafficCount = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap };
             side.Children.Add(lblTrafficCount);
+            // dettagli del contatto o della stazione in ascolto: riquadro in rilievo sopra la mappa, in alto a sinistra,
+            // sotto la didascalia, con l'azimutale e con il Mercatore (richiesta dell'autore, 14/11/2026)
             lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
-            side.Children.Add(new Border { Background = Pal.B(Pal.Panel2), CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Child = lblTrafficInfo });
+            mapHost.Children.Add(new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(10, 8), Child = lblTrafficInfo, MaxWidth = 330,
+                BoxShadow = new BoxShadows(new BoxShadow { OffsetX = 2, OffsetY = 4, Blur = 14, Color = Pal.Argb(Tema.Scuro ? (byte)170 : (byte)95, 0, 0, 0) }),
+                HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Top, Margin = new Thickness(10, 30, 0, 0)
+            });
 
-            tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("Nuvola") }, new double[] { 46, 64, 82, 82, 50, 90 });
+            tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("% sciame") }, new double[] { 46, 64, 82, 82, 50, 90 });
             tTraffic.FitWidth = true;
-            trafficCloudTip = Lang.T("Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. \"sporadiche\" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).");
+            trafficCloudTip = Lang.T("% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. \"sporadiche\" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).");
             tTraffic.HeaderTips = new[] { "", "", "", "", "", trafficCloudTip };
             tTraffic.RowClicked += i =>
             {
@@ -123,10 +151,30 @@ namespace YAMS
             ShowTrafficInfo(null);
         }
 
+        // riquadro "La mia stazione" sopra la mappa del Traffico in diretta, in alto a destra (prima era la prima riga dei comandi)
+        Control BuildMyStationBox()
+        {
+            WrapPanel w1 = new WrapPanel { Orientation = Orientation.Horizontal };
+            foreach (Control c in new Control[] { L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt })
+            { c.VerticalAlignment = VerticalAlignment.Center; w1.Children.Add(c); }
+            WrapPanel w2 = new WrapPanel { Orientation = Orientation.Horizontal };
+            foreach (Control c in new Control[] { L(Lang.T("Banda MHz")), cmbBand, btnCalc })
+            { c.VerticalAlignment = VerticalAlignment.Center; w2.Children.Add(c); }
+            StackPanel sp = new StackPanel { Spacing = 2 };
+            string ttl = Lang.T("la mia stazione"); if (ttl.Length > 0) ttl = char.ToUpper(ttl[0]) + ttl.Substring(1);
+            sp.Children.Add(new TextBlock { Text = ttl, FontWeight = FontWeight.SemiBold, FontSize = 14, Foreground = Pal.B(Pal.Red) });
+            sp.Children.Add(w1); sp.Children.Add(w2);
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Red), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Child = sp, MaxWidth = 300
+            };
+        }
+
         void ShowTrafficInfo(TrafficSpot t)
         {
             if (lblTrafficInfo == null) return;
-            lblTrafficInfo.Text = t == null ? Lang.T("Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.") : t.Info;
+            lblTrafficInfo.Text = t == null ? Lang.T("Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.") : t.Info;
         }
 
         // nuvole della concentrazione di scie per la tratta A-B all'ora t (in cache per ogni spot)
@@ -221,7 +269,7 @@ namespace YAMS
             foreach (MsSpot s in all) seen.Add(s.Key);
             if (MsCollector.Ft8Enabled)
                 foreach (MsCollector.Ft8Path fp in MsCollector.Ft8Long)
-                    if (!fp.Parallel && fp.S.Utc >= lim) { ft8Iso.Add(fp.S); if (seen.Add(fp.S.Key)) all.Add(fp.S); }
+                    if (fp.Show && fp.S.Utc >= lim) { ft8Iso.Add(fp.S); if (seen.Add(fp.S.Key)) all.Add(fp.S); }
             foreach (MsSpot s in MsCollector.MyUdp)
                 if (s.Utc >= lim) { mine.Add(s); if (seen.Add(s.Key)) all.Add(s); }
             if (ft8Iso.Count > 0 || mine.Count > 0)
@@ -242,7 +290,7 @@ namespace YAMS
                 bool iso = ft8Iso.Contains(s);
                 TrafficSpot t = new TrafficSpot
                 {
-                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
+                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = s.Shared ? SharedColor : iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
                     Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60,
                     Dashed = mine.Contains(s)
                 };
@@ -252,14 +300,15 @@ namespace YAMS
                 {
                     if (cl.Length > 0) cl += "\n";
                     cl += c.Sporadic ? Lang.F("hot spot (solo sporadiche) {0}", Astro.ToLocator(c.Centre))
-                                     : Lang.F("nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°", Astro.ToLocator(c.Centre), 100 * c.Share, 2 * c.MajorKm, 2 * c.MinorKm, c.AngleDeg);
+                                     : Lang.F("zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°", Astro.ToLocator(c.Centre), 100 * c.Share, 2 * c.MajorKm, 2 * c.MinorKm, c.AngleDeg);
                 }
                 t.Info = s.DxCall + " " + s.LocDx + "  ⇄  " + s.Spotter + " " + s.LocSpotter + "\n" +
                          Lang.F("{0} UTC · {1:F1} kHz · {2:F0} km", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.FreqKHz, Astro.DistanceKm(a, b)) + "\n" +
-                         (cl.Length > 0 ? cl : Lang.T("nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
+                         (cl.Length > 0 ? cl : Lang.T("zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
                          (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment) +
                          (iso ? "\n" + Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter") : "") +
-                         (t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
+                         (s.Shared ? "\n" + Lang.F("Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione", s.Spotter)
+                                   : t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
                 list.Add(t);
                 int nb; perBand.TryGetValue(s.Band, out nb); perBand[s.Band] = nb + 1;
             }

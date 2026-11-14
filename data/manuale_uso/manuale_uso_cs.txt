@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.11 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.15 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -26,7 +26,7 @@ P|Při spuštění se na několik sekund zobrazí úvodní obrazovka s Perseidam
 H2|2.3 Složka data
 P|Všechna nastavení a všechna data jsou v jediné složce data vedle programu: žádné AppData, žádné systémové složky. Chcete-li YA-MS přesunout na jiný počítač, stačí zkopírovat složku programu i s její složkou data. Obsah složky popisuje kapitola 13.
 H2|2.4 Automatické aktualizace
-P|Od verze 1.8.11 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
+P|Od verze 1.8.6 jsou aktualizace automatické a tiché: při spuštění a pak každých 30 minut YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
 P|Od verze 1.8.0 YA-MS sám kontroluje na GitHubu, při spuštění a nejvýše jednou denně, zda vyšla nová verze. Pokud ano, zobrazí se okno „Je k dispozici aktualizace“ s novinkami a třemi tlačítky:
 LI|Aktualizovat nyní: stáhne balíček vhodný pro váš systém, nahradí soubory programu, ponechá složku data a restartuje YA-MS. Soubory programu ve složce data, které nová verze mění, se nejprve zkopírují do data/backup/v<versione vecchia>; vašich souborů (nastavení, archivy, spoty, ADIF) se aktualizace nedotkne.
 LI|Později: zavře okno; kontrola se zopakuje následující den.
@@ -38,7 +38,7 @@ H2|2.5 Chybějící soubory programu
 P|Při spuštění YA-MS kontroluje, zda má všechny své soubory (překlady, katalogy, dokumenty). Pokud některý chybí, například po neúplném zkopírování, okno „Chybějící soubory“ je vypíše a nabídne „Stáhnout chybějící soubory“ z GitHubu, ve stejné verzi programu, nebo „Pokračovat bez nich“. Stejná kontrola se provede po stisknutí tlačítka „Aktualizace“.
 H1|3. Hlavní okno
 H2|3.1 Části okna
-LI|Nahoře tři řádky ovládacích prvků platné pro všechny karty: stanice a pásmo, vrstva E a anténa, čas výpočtu (kapitola 4).
+LI|Nahoře dva řádky ovládacích prvků platné pro všechny karty: vrstva E a anténa, čas výpočtu (kapitola 4). Vaše stanice (lokátor, výška, pásmo a Vypočítat) je vpravo nahoře na záložce Provoz živě.
 LI|Lišta hlavních karet, vpravo s tlačítkem Ovládání, barevným schématem (Motiv) a jazykem.
 LI|Podkarty, ve světlejším řádku, u karet, které je mají.
 LI|Dole stavový řádek: zprávy výpočtu, upozornění na připojení a tlačítko „Aktualizace“.
@@ -50,22 +50,22 @@ LI|Technické dokumenty, poslední: Uživatelská příručka, Zdroje, Mapa evro
 H2|3.3 Jazyk, barvy, písmo
 LI|Jazyk: 36 jazyků. Při změně jazyka se okno znovu sestaví na stejném místě a na stejné kartě, bez restartu. Čísla a data se řídí zvoleným jazykem (desetinná čárka v češtině, tečka v angličtině).
 LI|Motiv: 12 barevných schémat; Světlý je výchozí, Noc a Černý slouží pro práci ve tmě, Meteorická stopa je původní styl YA-MS.
-LI|Písmo (na konci prvního řádku ovládání): zmenší nebo zvětší veškerý text od 85 do 140 %, po krocích 5 %. S velkým písmem se karty zalamují na více řádků.
-LI|Ovládání: sbalí a znovu rozbalí tři řádky ovládacích prvků, aby uvolnily místo mapám a grafům. Volba se pamatuje.
+LI|Písmo (Nastavení): zmenší nebo zvětší veškerý text od 85 do 140 %, po krocích 5 %. S velkým písmem se karty zalamují na více řádků.
+LI|Ovládání: sbalí a znovu rozbalí dva řádky ovládacích prvků, aby uvolnily místo mapám a grafům. Volba se pamatuje.
 TAG|NOTA|Téměř každý ovládací prvek má bublinovou nápovědu: podržte myš nad prvkem a přečtete si, k čemu slouží a z jakého zdroje pochází výchozí hodnota.
 H1|4. Nastavení stanice a trasy
-H2|4.1 Řádek 1: stanice a pásmo
+H2|4.1 Moje stanice (Provoz živě)
 LI|Můj lokátor a výška m: váš lokátor Maidenhead (4, 6 nebo 8 znaků; používá se střed čtverce) a nadmořská výška stanice.
 LI|Pásmo MHz: 28, 50, 70, 144, 222 nebo 432 MHz. Slouží pro zisk a lalok antény, pro útlum a bilanci spoje a pro odhad toku.
 LI|Vypočítat: přepočítá trasu (vzorkování vrstvy E, méně než sekunda).
-H2|4.2 Řádek 2: vrstva E a anténa
+H2|4.2 Řádek 1: vrstva E a anténa
 LI|Výška stop km a z radaru: výška meteorických stop. Při zaškrtnutém „z radaru“ se použije nejčastější výška naměřená radarem Collm (obvykle 88-90 km); zrušte zaškrtnutí, chcete-li ji zadat ručně.
 LI|Elevace laloku °: elevace maxima svislého laloku vaší antény. Směrovka nastavená na 0° má hlavní lalok přesto několik stupňů nad horizontem, kvůli odrazu od země: obvykle 3-8°, podle výšky antény ve vlnových délkách.
 LI|diagram antény: zapnuto (výchozí) – body odrazu se započítávají se svislým ziskem obou antén: plně kolem maxima laloku, stále méně směrem k horizontu a nahoru. Vypnuto – elevace laloku je ostrá mez: body viděné níže se nezapočítávají.
 LI|Anténa Yagi: ráhno m: délka ráhna. Vedle program uvede délku ve vlnových délkách, zisk (křivka DL6WU) a vodorovný a svislý lalok na -3 dB. Pod 2 λ je odhad nepřesný.
 LI|Hot spot od středu trasy km a auto (AMS): vzdálenost Hot A a Hot B od středu trasy. Při zaškrtnutém „auto (AMS)“ se řídí tabulkou J. Richardsona citovanou DJ5HG (odchylka 13° při 1000 km, 10° nad 1500 km); zrušte zaškrtnutí, chcete-li ručně zadat 30-400 km (MSHV používá 150 km).
 TAG|ATTENZIONE|Při vypnutém „diagram antény“ a laloku na několika stupních nemusí na dlouhé trase obě stanice vidět žádný společný bod vrstvy: všechny účinnosti jsou 0 a zobrazí se upozornění „ŽÁDNÁ SPOLEČNÁ ZÓNA“ s lalokem nebo výškou stop, které by byly potřeba. Příklad: JN70CN - JO76QP, 1791 km, lalok na 3°, stopy v 88,5 km.
-H2|4.3 Řádek 3: čas výpočtu
+H2|4.3 Řádek 2: čas výpočtu
 LI|Čas: hodiny UTC.
 LI|Datum výpočtu (UTC): den výpočtu. Platí pro Předpovědní výpočet, pro tabulku 24 hodin ve Výpočtu účinnosti a pro časový průběh v kartě Radar GRAVES. Výchozí je dnešek a o půlnoci se přepne na nový den.
 LI|Hodiny (od −12 do +36 h): posune okamžik výpočtu po krocích 15 minut. Vedle: „Výpočet pro: nyní“ nebo zvolené datum a čas.
@@ -78,7 +78,8 @@ P|První podkarta skupiny Předpovědní výpočet ukazuje na jedné obrazovce, 
 H2|5.1 Souhrnný pruh
 P|Nad mapou pruh shrnuje výpočet pro daný okamžik: datum a čas, index trasy (součet ZHR × účinnost aktivních rojů), nejužitečnější roj s jeho ZHR a účinností (i v dB vůči referenci DJ5HG), počet rojů nad horizontem a doporučený Hot s jeho azimutem.
 H2|5.2 Mapa v půdorysu
-P|Vedle mapy, vpravo, je jediný sloupec. Nahoře rámeček protistanice: nejprve směr antény (Azimut antény, vždy na protistanici), pak značka (napište ji a stiskněte Enter: lokátor se vezme z databáze CALL3, jako v YAEC a LIVETROPOVHF), lokátor a výška. Značku lze napsat i do pole lokátoru. Dole legenda symbolů mapy: klepnutí na nadpis ji sbalí; barvy radiantů se objeví, když je mapa Evropy vypnutá.
+P|Vedle mapy, vpravo, je jediný sloupec. Nahoře rámeček protistanice: nejprve směr antény (Azimut antény, vždy na protistanici), pak značka (napište ji a stiskněte Enter: lokátor se vezme z databáze CALL3, jako v YAEC a LIVETROPOVHF), lokátor a výška. Značku lze napsat i do pole lokátoru. Dole legenda symbolů mapy: klepnutí na nadpis ji sbalí.
+P|Pokud pro tuto značku zadáte jiný lokátor, než je v archivu, rozsvítí se vedle pole lokátoru tlačítko «Uložit»: jeho stisknutím se nový lokátor stane ručním záznamem (data/CALL3-MANUALE.TXT, který má přednost před všemi ostatními zdroji) a ihned se zapíše i do data/call3.txt.
 P|Vlevo mapa Evropy při pohledu shora (východ vpravo), se stupnicí ve stupních po obvodu:
 LI|zelená čára: skutečná trasa mezi oběma lokátory;
 LI|Hot A a Hot B: dva hot spoty po stranách středu trasy. Červená = doporučený, růžová = mimo lalok antény, šedá = již uvnitř laloku (s upozorněním);
@@ -150,7 +151,7 @@ LI|Cílový kmitočet MHz: kmitočet předpovědi.
 LI|Exponent λ^k (3, SM6FHZ) a Faktor stanice K (1): pravidlo pro kmitočet a korekce pro vaši stanici.
 LI|k z populačních indexů: navrhne k z populačních indexů r aktivních rojů (GMN, jinak IMO; k = 3,75 · log10 r, váženo ZHR) a před použitím požádá o potvrzení.
 LI|Načíst soubor RMOB z disku a Odvodit exponent ze souboru RMOB: načtou měsíční soubor RMOB a odvodí k z hodin společných s Collm.
-LI|Pozorovatel RMOB, Stáhnout RMOB nyní a automatické stahování každých 5 minut: automatické stahování je vypnuté a zapínejte ho jen se svolením RMOB.
+LI|Pozorovatel RMOB, Stáhnout RMOB nyní a automatické stahování každých 5 minut: automatické stahování je vypnuté a zapínejte ho jen se svolením RMOB. Tyto příkazy jsou na záložce Nastavení.
 H2|8.2 Výsledky
 LI|Graf včerejška a dneška: meteory za hodinu v Collm, hodnoty převedené na váš kmitočet a, jsou-li načteny, počty RMOB.
 LI|Předpověď na příštích 24 hodin: stejná hodina předchozího dne, korigovaná o změnu indexu rojů pro trasu.
@@ -158,18 +159,21 @@ LI|Tabulka s hodnocením: dobré, střední nebo slabé vzhledem k průměru 24 
 TAG|NOTA|Délka odrazů se řídí volbou „Délka pingů mezi pásmy“ v kartě Geometrie a útlum; při forward scatter roste délka také se sec²φ ve středu trasy.
 H1|9. Živě a data v reálném čase
 H2|9.1 Provoz živě
-P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a oblak nejpravděpodobnějších stop v danou hodinu. Právě přijaté spoty minutu blikají.
+P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a zóna roje nejpravděpodobnějších stop v danou hodinu. Právě přijaté spoty minutu blikají.
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 3, 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
-LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed oblaku, jeho výška a rozměry.
+LI|Mapu v Mercatorově zobrazení lze posouvat tažením myší; dvojklik: znovu vystředěná na mou stanici. Azimutální mapa zůstává vystředěná na mou stanici.
+LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed zóna roje, jeho výška a rozměry.
+LI|Podrobnosti zvoleného spojení nebo poslouchající stanice se zobrazí ve vystouplém rámečku nad mapou vlevo nahoře, v azimutální i Mercatorově projekci.
 LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
 LI|Také aktivní monitory z mapy PSKReporter: prázdné trojúhelníky pro stanice, které jsou na mapě pskreporter.info v MSK144, FSK441, PSK2K nebo JTMS, ale ještě nepřijaly žádný spot (MQTT posílá jen stanice, které něco přijímají). YA-MS se dotazuje vyhledávací služby PSKReporter jednou za 5 minut pro všechny druhy provozu, jak žádají pravidla služby; monitor zůstává na mapě nejméně 11 minut. Klepnutí na trojúhelník ukáže značku, lokátor, dekódovací program a čas, kdy byl monitor aktivní. Ve výchozím stavu zapnuto.
-LI|FT8 nad 1100 km bez souběžných tras: spot FT8 (z PSKReporter MQTT, z clusterů nebo z WSJT-X přes UDP) mezi stanicemi vzdálenými více než 1100 km, který 3 minuty před a po nemá souběžné trasy (stejné pásmo, střed do 300 km, směr do 20°, jiná dvojice stanic), se kreslí světle zeleně a jeho řádek v tabulce vpravo dole stále bliká. Sporadická E a tropo dávají mnoho blízkých souběžných tras; osamocený spot může být meteorická stopa. Proto YA-MS přijímá z MQTT i spoty FT8 z pásem 6 m, 4 m, 2 m, 1,25 m a 70 cm (ne z 10 m, je jich příliš mnoho). Tyto spoty se neukládají do archivu MS. Ve výchozím stavu zapnuto.
+LI|FT8 nad 1100 km bez souběžných tras: spot FT8 (z PSKReporter MQTT, z clusterů nebo z WSJT-X přes UDP) mezi stanicemi vzdálenými více než 1100 km, který 3 minuty před a po nemá souběžné trasy (stejné pásmo, střed do 300 km, směr do 15°, jiná dvojice stanic), se kreslí světle zeleně a jeho řádek v tabulce vpravo dole stále bliká. Sporadická E a tropo dávají mnoho blízkých souběžných tras; osamocený spot může být meteorická stopa. Proto YA-MS přijímá z MQTT i spoty FT8 z pásem 6 m, 4 m, 2 m, 1,25 m a 70 cm (nikdy 28 MHz, v žádném případě). Tyto spoty se neukládají do archivu MS. Ve výchozím stavu zapnuto. Další kontroly s PSKReporter MQTT: spot není osamocený, pokud přijímající stanice slyší v MQTT během 3 minut na stejném pásmu jiné stanice dál než 1100 km (otevřené pásmo); spoty z clusterů a RBN platí jen tehdy, když stejná dvojice přijde i z MQTT; skimmery RBN (značky s «-#») neplatí nikdy.
 LI|Spoty WSJT-X přes UDP, které se týkají vaší stanice (dekódování obsahuje vaši značku: kdo vás volá nebo vám odpovídá), se kreslí stále blikající přerušovanou čarou, v jakémkoli druhu provozu a na jakoukoli vzdálenost.
+LI|Výměna mezi uživateli YA-MS: když jiný uživatel YA-MS dekóduje přes UDP zprávu určenou vaší stanici (v MSK144, FSK441, PSK2K nebo JTMS, nebo v FT8 nad 1100 km), jeho YA-MS vám ji pošle zašifrovanou přes tři veřejné MQTT brokery (HiveMQ, Mosquitto, EMQX); uvidíte ji jako fialovou přerušovanou čáru, která stále bliká, a jako řádek v konzoli UDP. Přečíst ji můžete jen vy (klíče ECDH P-256, AES-256 a HMAC-SHA256). Spoty FT8 se ukazují, jen pokud během 3 minut nemají souběžné trasy. Ve výchozím stavu zapnuto; yams_scambio=0 v data/config.ini vypne.
 LI|Zobrazují se spoty všech pásem, i těch, která nejsou vybrána ve Sběru dat (ty se neukládají). Spoty CW a spoty mezi příliš blízkými stanicemi se nezobrazují, pokud se ve Sběru dat zahazují.
 LI|Na mapě se píší značky obou stanic každého spotu, jednou pro každou stanici. Projekci lze zvolit: azimutální (uprostřed tvoje stanice) nebo Mercatorova. Bublina na sloupci Mrak vysvětluje jeho význam.
 H2|9.2 Tok z radaru
 P|Hodinové počty meteorů a výšky stop z radaru SKiYMET v Collm (36,2 MHz) a poslední snímek z radaru v Sodankylä (36,9 MHz).
-LI|Stáhnout nyní a Automatická aktualizace všech zdrojů každých 5 minut: každý zdroj se znovu stáhne jen tehdy, když se změnil.
+LI|Stáhnout nyní a Automatická aktualizace všech zdrojů každých 5 minut: každý zdroj se znovu stáhne jen tehdy, když se změnil. Automatická aktualizace se nastavuje na záložce Nastavení.
 LI|Exponent λ (SM6FHZ): exponent odhadu pro vaše pásmo (oranžová čára na pravé stupnici).
 LI|Výšky stop: histogram s modem, průměrem, mediánem a směrodatnou odchylkou; se „z radaru“ se modus stane výškou pro všechny výpočty.
 TAG|ATTENZIONE|Pokud nelze přečíst stupnici grafu z Collm, zobrazí se oranžové upozornění a hodnoty je třeba ověřit. Bez připojení program používá naposledy uložená data, jednou to oznámí a sám to každých 5 minut zkouší znovu; stavový řádek zčervená, dokud se připojení neobnoví.
@@ -187,8 +191,9 @@ LI|Filtr přijímá spoty na kmitočtech typických pro meteor scatter (50190-50
 LI|Spoty CW se hned zahazují (CW nebo WPM v komentáři, nebo 28000-28070 kHz): neobjeví se v konzoli a neukládají se, pokud nejsou označené <MS>. Políčko lze vypnout.
 LI|Spoty mezi stanicemi bližšími než 500 km se okamžitě zahazují, protože na tuto vzdálenost je spojení přímé nebo troposférické, nikoli meteor scatter: neobjeví se v konzoli a neukládají se. Chybí-li lokátor, spot zůstane. Vzdálenost se mění pod zaškrtávacím políčkem.
 LI|Chybějící lokátory se doplní z archivu CALL3; přijaté spoty se ukládají do data/spot_ms, jeden soubor za den, a do mapy v kartě Provoz živě.
-LI|Databáze CALL3 s pravidly LIVETROPOVHF. „Aktualizovat teď" stáhne CALL3.TXT z MMMonVHF (aspoň 100 000 platných řádků, předchozí zůstane v data/call3.bak); s volbou „Aktualizovat samo každých 7 dní" se to děje při spuštění. Nad souborem platí v pořadí: ruční záznamy (data/CALL3-MANUALE.TXT), opravy z clusteru (6místný lokátor, který spotující uvádí o sobě), přidané soubory (data/CALL3-AGGIUNTE), pak CALL3.TXT a 6místné lokátory naučené naživo (data/LOC6.TXT). Přijatý 4místný lokátor nebo končící na LL či MM se nahradí 6místným z databáze; přenosné stanice (s lomítkem) jen přesným záznamem.
-LI|Poslední zdroj, jako v LIVETROPOVHF: pro značky, které v žádném jiném zdroji nemají 6místný lokátor, se program automaticky každých 6 hodin ptá veřejného API G7VRD (api.g7vrd.co.uk), po skupinách 40 značek; každou značku nejvýš jednou denně. Přijme se jen 6místný lokátor, ne střed čtverce (LL nebo MM), ve stejném čtverci jako přijatý. Výsledky jsou v data/CALL3-G7VRD.TXT a jako všechny opravy se zapisují i do data/call3.txt.
+LI|Databáze CALL3 s pravidly LIVETROPOVHF. „Aktualizovat teď" stáhne CALL3.TXT z MMMonVHF (aspoň 100 000 platných řádků, předchozí zůstane v data/call3.bak); s volbou „Aktualizovat samo každých 12 hodin" se to děje při spuštění. Nad souborem platí v pořadí: ruční záznamy (data/CALL3-MANUALE.TXT), opravy z clusteru (6místný lokátor, který spotující uvádí o sobě), přidané soubory (data/CALL3-AGGIUNTE), pak CALL3.TXT a 6místné lokátory naučené naživo (data/LOC6.TXT). Přijatý 4místný lokátor nebo končící na LL či MM se nahradí 6místným z databáze; přenosné stanice (s lomítkem) jen přesným záznamem.
+LI|Poslední zdroj, jako v LIVETROPOVHF: pro značky, které v žádném jiném zdroji nemají 6místný lokátor, se program automaticky každých 30 minut ptá veřejného API G7VRD (api.g7vrd.co.uk), po skupinách 40 značek; každou značku nejvýš jednou denně. Přijme se jen 6místný lokátor, ne střed čtverce (LL nebo MM), ve stejném čtverci jako přijatý. Výsledky jsou v data/CALL3-G7VRD.TXT a jako všechny opravy se zapisují i do data/call3.txt.
+LI|Po G7VRD následuje vrstva JTDX (data/grid_data.bin, asi 365 000 značek): platí jen pro značky bez 6místného lokátoru ve všech ostatních zdrojích, jen ve stejném čtverci jako přijatý, a nikdy se nezapisuje do data/call3.txt.
 H1|10. Roje živě a katalog rojů
 H2|10.1 Roje živě
 P|Vlevo tok a ZHR aktivních rojů naměřené sítí Global Meteor Network, s denními počty kamer GMN pro každý roj (počet, nikoli tok: závisí na tom, kolik stanic vidí jasnou oblohu); vpravo mapy radiantů z radaru CMOR, včetně map denních rojů. Soubory se znovu stahují jen při změně, nejvýše každých 30 minut, nebo tlačítkem Stáhnout nyní.
@@ -220,12 +225,14 @@ LI|cataloghi/: katalog IAU MDC; radar/diretta/: data GMN a CMOR.
 LI|call3.txt: archiv lokátorů; spot_ms/: sesbírané spoty meteor scatter; adif_quadrati.csv: čtverce z ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: technické dokumenty.
 LI|backup/: kopie souborů nahrazených aktualizací; aggiornamento/: stažený balíček (smaže se při restartu).
+H2|13.3 Záložka Nastavení
+P|Záložka Nastavení soustřeďuje obecný chod programu: Vzhled (písmo, motiv a jazyk), Aktualizace programu (kontrola na GitHubu při spuštění a každých 30 minut, automatické tiché aktualizace, Zkontrolovat teď), Živé zdroje (automatická aktualizace každých 5 minut), RMOB (pozorovatel, stáhnout teď a automatické stahování) a Program (řádky příkazů a složka dat). Parametry výpočtu zůstávají v řádcích příkazů nad záložkami.
 H2|13.2 Některé klíče v config.ini
 LI|controlla_aggiornamenti=0: nekontrolovat nové verze; aggiornamenti_salta: přeskočená verze.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: zaškrtávací políčka výpočtu.
 LI|raggio_iniziale (0 = dvojnásobek ITU, 1 = ITU, 2 = vyloučeno), durata_ping (0 = λ², 1 = pozorovaná).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: vypne přeposílání dekódování MS (MSK144, FSK441, PSK2K, JTMS) přijatých přes UDP do PSKReporter. Ve výchozím stavu je zapnuté a pracuje samo: pokud vaše značka chybí déle než 20 minut mezi stanicemi posílajícími hlášení do PSKReporter (digitální program neposílá), YA-MS každých 5 minut pošle stanice MS, které dekódujete, s vámi jako přijímačem; jakmile digitální program zase posílá, YA-MS přestane. Řádek v konzoli UDP oznámí začátek a konec.
+LI|psk_rimando=0: vypne přeposílání dekódování MS (MSK144, FSK441, PSK2K, JTMS) přijatých přes UDP do PSKReporter. Ve výchozím stavu je zapnuté a pracuje samo: pokud vaše značka chybí déle než 20 minut mezi stanicemi posílajícími hlášení do PSKReporter (digitální program neposílá), YA-MS každých 5 minut pošle stanice MS, které dekódujete, s vámi jako přijímačem; jakmile digitální program zase posílá, YA-MS přestane. Řádek v konzoli UDP oznámí začátek a konec. Pokud je ve WSJT-X.ini (nebo JTDX.ini) odesílání do PSKReporter vypnuté, YA-MS přeposílá hned, bez čekání 20 minut.
 TAG|ATTENZIONE|config.ini upravujte jen při zavřeném programu: při zavření jej YA-MS přepíše.
 H1|14. Typické postupy
 H2|14.1 Příprava skedu na roj

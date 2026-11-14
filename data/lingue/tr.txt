@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT bağlı değ
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(km) değerinden daha yakın istasyonlar arasındaki spotları hemen at; bu mesafede bağlantı doğrudan veya troposferiktir: konsolda görünmezler ve kaydedilmezler. Bir lokatör eksikse spot korunur.
 spot entro {0} km scartati: {1}	{0} km içinde atılan spotlar: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
-Aggiorna da solo ogni 7 giorni	7 günde bir kendiliğinden güncelle
+Aggiorna da solo ogni 12 ore	12 saatte bir kendiliğinden güncelle
 Aggiornamento di CALL3 già in corso.	CALL3 güncellemesi zaten sürüyor.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 güncellenemedi: {0}
 Aggiungi un file...	Dosya ekle...
@@ -772,7 +772,7 @@ locator	lokatör
 {0} nel CALL3: {1}	CALL3'te {0}: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} CALL3'te yok: lokatörü elle yazın
 Cerca su G7VRD i locator mancanti	Eksik lokatörleri G7VRD'de ara
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 6 saatte bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 30 dakikada bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
 Ascolta	Dinle
 Avvia	Başlat
 Avvia all'apertura	Açılışta başlat
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter haritasına ulaşılamı
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	3 dakika içinde paralel hattı olmayan 1100 km üzeri FT8 (açık yeşil, satır her zaman yanıp söner)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	3 dakika içinde paralel hattı olmayan 1100 km üzeri FT8: sporadik E veya tropo gibi görünmüyor, meteor scatter olabilir
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: kod çözme istasyonumu ilgilendiriyor
+Impostazioni	Ayarlar
+Aspetto	Görünüm
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Tema ve dil sağ üstte, sekmelerin yanında da var.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	GitHub'da yeni sürüm ara (açılışta ve 30 dakikada bir)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Otomatik sessiz güncellemeler: sormadan indirir, kurar ve yeniden başlatır
+Controlla adesso	Şimdi denetle
+Aggiornamenti del programma	Program güncellemeleri
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Otomatik güncelleme olmadan yeni sürüm çıktığında «Şimdi güncelle», «Daha sonra» ve «Bu sürümü atla» içeren bir pencere açılır.
+Fonti in diretta	Canlı kaynaklar
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm ve Sodankylä radarları, Global Meteor Network, CMOR ve seçilirse RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Komut satırlarını sekmelerin üstünde göster («Kontroller» düğmesiyle aynı)
+Programma	Program
+Cartella dei dati	Veri klasörü
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	{0} tarafından duyuldu (YA-MS): mesaj istasyonuma yönelik
+% sciame	% yağmur
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	yağmur bölgesi {0}: yansımaların {1:F0} %'si, {2:F0} × {3:F0} km, eksen {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	bu yol için yağmur bölgesi hesaplanamıyor (çok kısa veya çok uzun)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Bağlantının ve yağmur bölgesinin ayrıntıları için haritada bir yola veya tablo satırına tıklayın.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"Veri toplama" sekmesinden spotlar. Her bağlantı için yağmur bölgesi, o yol ve saat için en olası izlerin nerede yoğunlaştığını gösterir (aynasal yansıma, etkin yağmurların toplamı); kesikli bölgeler = yalnızca sporadik meteorlar. İstasyonu harita dışında kalan spotlar çizilmez; yeni gelenler (3 dakikadan az) bir dakika yanıp söner.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% yağmur: o yolun o saatteki yararlı yansımalarından haritada çizilen yağmur bölgesine düşen pay (aynasal yansıma, etkin yağmurların toplamı). Ne kadar yüksekse iyi izler antenin çevrileceği tek bir bölgede o kadar yoğunlaşır. "sporadik" = hiçbir etkin yağmur yararlı yansıma vermez: yolun iki yanında yalnızca sporadik meteorlar kalır (kesikli bölgeler).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Mercator haritası fareyle sürüklenerek taşınır; çift tıklama: yeniden istasyonuma ortalanır. Azimutal harita istasyonuma ortalı kalır.
+Memorizza	Kaydet
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Yazdığınız lokatör CALL3 arşivindekinden farklı: güncellemek ve kaydetmek için basın (elle giriş, hemen call3.txt dosyasına da yazılır).
+{0} memorizzato nel CALL3: {1}	{0} CALL3'e kaydedildi: {1}

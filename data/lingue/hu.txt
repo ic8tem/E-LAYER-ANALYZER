@@ -748,7 +748,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT nincs csatla
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	A (km)-nél közelebbi állomások közötti spotok azonnali elvetése, mert ekkora távolságon az összeköttetés közvetlen vagy troposzférikus: nem jelennek meg a konzolon és nem tárolódnak. Ha hiányzik egy lokátor, a spot megmarad.
 spot entro {0} km scartati: {1}	{0} km-en belüli elvetett spotok: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Minden sáv spotjai látszanak, azoké is, amelyeket az Adatgyűjtésben nem választottál ki (ezek nem tárolódnak). A CW spotok és a túl közeli állomások közötti spotok nem látszanak, ha az Adatgyűjtésben elvetésre kerülnek.
-Aggiorna da solo ogni 7 giorni	Frissítés magától 7 naponta
+Aggiorna da solo ogni 12 ore	Frissítés magától 12 óránként
 Aggiornamento di CALL3 già in corso.	A CALL3 frissítése már folyamatban van.
 Aggiornamento di CALL3 non riuscito: {0}	A CALL3 frissítése nem sikerült: {0}
 Aggiungi un file...	Fájl hozzáadása...
@@ -773,7 +773,7 @@ locator	lokátor
 {0} nel CALL3: {1}	{0} a CALL3-ban: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} nincs a CALL3-ban: írd be kézzel a lokátort
 Cerca su G7VRD i locator mancanti	Hiányzó lokátorok keresése a G7VRD-n
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Utolsó forrás, mint a LIVETROPOVHF-ben: azokra a hívójelekre, amelyeknek egyetlen más forrásban sincs 6 karakteres lokátora, a program 6 óránként automatikusan a G7VRD nyilvános API-jától (api.g7vrd.co.uk) kérdez, 40 hívójeles csoportokban; mindegyiket legfeljebb naponta egyszer. Csak 6 karakteres lokátort fogad el, nem a négyzet közepét (LL vagy MM), a kapottal azonos négyzetben. Az eredmények a data/CALL3-G7VRD.TXT fájlban vannak, és mint minden javítás, a data/call3.txt fájlba is beíródnak.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Utolsó forrás, mint a LIVETROPOVHF-ben: azokra a hívójelekre, amelyeknek egyetlen más forrásban sincs 6 karakteres lokátora, a program 30 percenként automatikusan a G7VRD nyilvános API-jától (api.g7vrd.co.uk) kérdez, 40 hívójeles csoportokban; mindegyiket legfeljebb naponta egyszer. Csak 6 karakteres lokátort fogad el, nem a négyzet közepét (LL vagy MM), a kapottal azonos négyzetben. Az eredmények a data/CALL3-G7VRD.TXT fájlban vannak, és mint minden javítás, a data/call3.txt fájlba is beíródnak.
 Ascolta	Figyelés
 Avvia	Indítás
 Avvia all'apertura	Indítás megnyitáskor
@@ -793,3 +793,27 @@ mappa di PSKReporter non raggiungibile: {0}	a PSKReporter térkép nem érhető 
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 1100 km felett, párhuzamos útvonal nélkül 3 percen belül (világoszöld, a sor mindig villog)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 1100 km felett, párhuzamos útvonal nélkül 3 percen belül: nem hasonlít sporadikus E-re vagy tropóra, lehet meteorszórás
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: a dekódolás az én állomásomat érinti
+Impostazioni	Beállítások
+Aspetto	Megjelenés
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	A téma és a nyelv jobbra fent is megtalálható, a fülek mellett.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Új verzió keresése a GitHubon (indításkor és 30 percenként)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Automatikus csendes frissítés: letölt, telepít és újraindít kérdés nélkül
+Controlla adesso	Ellenőrzés most
+Aggiornamenti del programma	Programfrissítések
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Automatikus frissítés nélkül új verzió megjelenésekor ablak jelenik meg ezekkel: «Frissítés most», «Később» és «Verzió kihagyása».
+Fonti in diretta	Élő források
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm és Sodankylä radarja, Global Meteor Network, CMOR és, ha be van állítva, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	A parancssorok mutatása a fülek felett (ugyanaz, mint a «Vezérlők» gomb)
+Programma	Program
+Cartella dei dati	Adatmappa
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Hallotta: {0} (YA-MS): az üzenet az állomásomnak szól
+% sciame	% raj
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	rajzóna {0}: a visszaverődések {1:F0} %-a, {2:F0} × {3:F0} km, tengely {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	a rajzóna ezen az útvonalon nem számítható (túl rövid vagy túl hosszú)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Kattints egy útvonalra a térképen vagy egy táblázatsorra az összeköttetés és rajzónája részleteiért.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spotok az "Adatgyűjtés" fülről. Minden összeköttetésnél a rajzóna mutatja, hol sűrűsödnek az adott útvonal és időpont legvalószínűbb nyomai (tükrös visszaverődés, az aktív rajok összege); szaggatott zónák = csak sporadikus meteorok. A térképen kívüli állomással rendelkező spotokat nem rajzolja; a frissen érkezettek (3 percen belül) egy percig villognak.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% raj: az útvonal hasznos visszaverődéseinek az adott időpontban a térképen rajzolt rajzónába eső része (tükrös visszaverődés, az aktív rajok összege). Minél magasabb, annál inkább egy területre összpontosulnak a jó nyomok, ahová az antennát irányítani kell. "sporadikus" = egyik aktív raj sem ad hasznos visszaverődést: csak sporadikus meteorok maradnak az útvonal két oldalán (szaggatott zónák).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	A Mercator-térkép egérrel húzva mozgatható; dupla kattintás: újra az állomásomra középre. Az azimutális térkép az állomásomra középre marad.
+Memorizza	Mentés
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	A beírt lokátor eltér a CALL3 archívumban lévőtől: nyomd meg a frissítéshez és mentéshez (kézi bejegyzés, azonnal a call3.txt fájlba is beíródik).
+{0} memorizzato nel CALL3: {1}	{0} mentve a CALL3-ba: {1}

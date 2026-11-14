@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.11 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.15 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -26,7 +26,7 @@ P|Saat dijalankan, selama beberapa detik muncul layar pembuka bergambar Perseid 
 H2|2.3 Folder data
 P|Semua pengaturan dan semua data berada dalam satu folder data di samping program: tanpa AppData, tanpa folder sistem. Untuk memindahkan YA-MS ke komputer lain cukup salin folder program beserta folder data-nya. Isi folder ini dijelaskan di bab 13.
 H2|2.4 Pembaruan otomatis
-P|Sejak versi 1.8.11 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
+P|Sejak versi 1.8.6 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 30 menit YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
 P|Sejak versi 1.8.0, YA-MS memeriksa sendiri di GitHub, saat dijalankan dan paling banyak sekali sehari, apakah ada versi baru. Jika ada, muncul jendela "Pembaruan tersedia" berisi daftar perubahan dan tiga tombol:
 LI|Perbarui sekarang: mengunduh paket yang sesuai dengan sistem Anda, mengganti berkas program, mempertahankan folder data, lalu menjalankan ulang YA-MS. Berkas program di dalam folder data yang diubah oleh versi baru terlebih dahulu disalin ke data/backup/v<versi lama>; berkas Anda (pengaturan, arsip, spot, ADIF) tidak disentuh.
 LI|Nanti: menutup jendela; pemeriksaan diulang keesokan harinya.
@@ -38,7 +38,7 @@ H2|2.5 Berkas program yang hilang
 P|Saat dijalankan, YA-MS memeriksa apakah semua berkasnya ada (terjemahan, katalog, dokumen). Jika ada yang hilang, misalnya setelah penyalinan yang tidak lengkap, jendela "Berkas hilang" menampilkan daftarnya dan menawarkan "Unduh berkas yang hilang" dari GitHub, dalam versi program yang sama, atau "Lanjutkan tanpa itu". Pemeriksaan yang sama diulang dengan menekan "Pembaruan".
 H1|3. Jendela utama
 H2|3.1 Bagian-bagian jendela
-LI|Di atas, tiga baris kontrol yang berlaku untuk semua tab: stasiun dan pita, lapisan E dan antena, waktu perhitungan (bab 4).
+LI|Di atas, dua baris kontrol yang berlaku untuk semua tab: lapisan E dan antena, waktu perhitungan (bab 4). Stasiun Anda (lokator, ketinggian, pita, dan Hitung) ada di kanan atas Lalu lintas langsung.
 LI|Bilah tab utama, dengan di sebelah kanan tombol Kontrol, skema warna (Tema) dan bahasa.
 LI|Sub-tab, dalam baris yang lebih terang, untuk tab yang memilikinya.
 LI|Di bawah, bilah status: pesan perhitungan, peringatan tentang koneksi, dan tombol "Pembaruan".
@@ -50,22 +50,22 @@ LI|Dokumen teknis, tab terakhir: Panduan penggunaan, Sumber, Peta radar Eropa, P
 H2|3.3 Bahasa, warna, huruf
 LI|Bahasa: 36 bahasa. Saat bahasa diganti, jendela dibangun ulang pada posisi yang sama dan pada tab yang sama, tanpa menjalankan ulang program. Angka dan tanggal mengikuti bahasa yang dipilih (koma desimal dalam bahasa Italia, titik dalam bahasa Inggris).
 LI|Tema: 12 skema warna; Terang adalah bawaan, Malam dan Hitam berguna dalam gelap, Jejak meteor adalah gaya asli YA-MS.
-LI|Huruf (di akhir baris kontrol pertama): mengecilkan atau membesarkan semua teks dari 85 sampai 140 %, dengan langkah 5 %. Dengan huruf besar, tab pindah ke beberapa baris.
-LI|Kontrol: melipat dan membuka kembali tiga baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
+LI|Huruf (Pengaturan): mengecilkan atau membesarkan semua teks dari 85 sampai 140 %, dengan langkah 5 %. Dengan huruf besar, tab pindah ke beberapa baris.
+LI|Kontrol: melipat dan membuka kembali dua baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
 TAG|NOTA|Hampir setiap kontrol memiliki tooltip: tahan mouse di atas kontrol untuk membaca fungsinya dan dari sumber mana nilai awalnya berasal.
 H1|4. Mengatur stasiun dan lintasan
-H2|4.1 Baris 1: stasiun dan pita
+H2|4.1 Stasiun saya (Lalu lintas langsung)
 LI|Locator saya dan ketinggian m: locator Maidenhead Anda (4, 6 atau 8 karakter; yang dipakai adalah pusat kotak) dan ketinggian stasiun di atas permukaan laut.
 LI|Pita MHz: 28, 50, 70, 144, 222 atau 432 MHz. Digunakan untuk penguatan dan lobus antena, untuk redaman dan anggaran link, serta untuk estimasi fluks.
 LI|Hitung: menghitung ulang lintasan (pengambilan sampel lapisan E, kurang dari satu detik).
-H2|4.2 Baris 2: lapisan E dan antena
+H2|4.2 Baris 1: lapisan E dan antena
 LI|Ketinggian jejak km dan dari radar: ketinggian jejak meteor. Bila "dari radar" dicentang, digunakan ketinggian yang paling sering diukur oleh radar Collm (biasanya 88-90 km); hapus centang untuk menuliskannya secara manual.
 LI|Elevasi lobus °: elevasi puncak lobus vertikal antena Anda. Antena pengarah yang dipasang pada 0° tetap memiliki lobus utama beberapa derajat di atas cakrawala, karena pantulan dari tanah: biasanya 3-8°, tergantung tinggi antena dalam panjang gelombang.
 LI|pola antena: bila aktif (bawaan), titik-titik pantul diperhitungkan dengan penguatan vertikal kedua antena: penuh di sekitar puncak lobus, makin berkurang ke arah cakrawala dan ke arah atas. Bila nonaktif, elevasi lobus menjadi batas tegas: titik yang terlihat lebih rendah tidak diperhitungkan.
 LI|Antena Yagi: boom m: panjang boom. Di sampingnya program menuliskan panjang dalam panjang gelombang, penguatan (kurva DL6WU) dan lebar lobus -3 dB horizontal dan vertikal. Di bawah 2 λ estimasinya kurang tepat.
 LI|Hot spot dari titik tengah km dan otomatis (AMS): jarak Hot A dan Hot B dari titik tengah. Bila "otomatis (AMS)" dicentang, nilai mengikuti tabel J. Richardson yang dikutip oleh DJ5HG (simpangan 13° pada 1000 km, 10° di atas 1500 km); hapus centang untuk menulis 30-400 km secara manual (MSHV memakai 150 km).
 TAG|ATTENZIONE|Dengan "pola antena" nonaktif dan lobus pada beberapa derajat, pada lintasan panjang kedua stasiun bisa tidak melihat satu pun titik bersama di lapisan: semua efisiensi bernilai 0 dan muncul peringatan "TIDAK ADA ZONA BERSAMA" beserta lobus atau ketinggian jejak yang diperlukan. Contoh: JN70CN - JO76QP, 1791 km, lobus pada 3°, jejak pada 88,5 km.
-H2|4.3 Baris 3: waktu perhitungan
+H2|4.3 Baris 2: waktu perhitungan
 LI|Jam: jam UTC.
 LI|Tanggal perhitungan (UTC): hari perhitungan. Berlaku untuk Perhitungan prakiraan, untuk tabel 24 jam di Perhitungan efisiensi dan untuk kronologi di Radar GRAVES. Bawaannya hari ini, dan pada tengah malam berpindah ke hari yang baru.
 LI|Jam (−12 hingga +36 h): menggeser saat perhitungan, dengan langkah 15 menit. Di sampingnya: "Perhitungan untuk: sekarang" atau tanggal dan jam yang dipilih.
@@ -78,7 +78,8 @@ P|Sub-tab pertama dari grup Perhitungan prakiraan menampilkan dalam satu layar d
 H2|5.1 Strip ringkasan
 P|Di atas peta, sebuah strip merangkum perhitungan untuk saat itu: tanggal dan jam, indeks lintasan (jumlah ZHR × efisiensi hujan meteor aktif), hujan meteor yang paling berguna dengan ZHR dan efisiensinya (juga dalam dB relatif terhadap acuan DJ5HG), jumlah hujan meteor di atas cakrawala, serta Hot disarankan beserta azimutnya.
 H2|5.2 Peta denah
-P|Di samping peta, di kanan, ada satu kolom. Di atas kotak koresponden: pertama arah antena (Azimut antena, selalu ke koresponden), lalu callsign (ketik dan tekan Enter: lokator diambil dari basis data CALL3, seperti di YAEC dan LIVETROPOVHF), lokator dan ketinggian. Callsign juga bisa diketik di kotak lokator. Di bawah legenda simbol peta: klik pada judulnya untuk melipatnya; warna radian muncul saat peta Eropa dimatikan.
+P|Di samping peta, di kanan, ada satu kolom. Di atas kotak koresponden: pertama arah antena (Azimut antena, selalu ke koresponden), lalu callsign (ketik dan tekan Enter: lokator diambil dari basis data CALL3, seperti di YAEC dan LIVETROPOVHF), lokator dan ketinggian. Callsign juga bisa diketik di kotak lokator. Di bawah legenda simbol peta: klik pada judulnya untuk melipatnya.
+P|Jika Anda mengetik lokator untuk callsign itu yang berbeda dari yang ada di arsip, tombol «Simpan» di samping kotak lokator menjadi aktif: menekannya menjadikan lokator baru sebagai entri manual (data/CALL3-MANUALE.TXT, yang mengungguli semua sumber lain) dan langsung menuliskannya juga ke data/call3.txt.
 P|Di kiri, peta Eropa dilihat dari atas (timur di kanan), dengan skala derajat di sekelilingnya:
 LI|garis hijau: lintasan sebenarnya antara kedua locator;
 LI|Hot A dan Hot B: dua hot spot di sisi-sisi titik tengah. Merah = disarankan, merah muda = di luar lobus antena, abu-abu = sudah berada di dalam lobus (dengan peringatan);
@@ -150,7 +151,7 @@ LI|Frekuensi tujuan MHz: frekuensi prakiraan.
 LI|Eksponen λ^k (3, SM6FHZ) dan Faktor stasiun K (1): aturan frekuensi dan koreksi untuk stasiun Anda.
 LI|k dari indeks populasi: mengusulkan k dari indeks populasi r hujan meteor aktif (GMN, jika tidak ada IMO; k = 3,75 · log10 r, dibobot dengan ZHR) dan meminta konfirmasi sebelum menerapkannya.
 LI|Muat file RMOB dari disk dan Turunkan eksponen dari file RMOB: membaca file bulanan RMOB dan menurunkan k dari jam-jam yang sama dengan Collm.
-LI|Pengamat RMOB, Unduh RMOB sekarang dan pengambilan otomatis setiap 5 menit: pengambilan otomatis nonaktif dan hanya boleh diaktifkan dengan izin RMOB.
+LI|Pengamat RMOB, Unduh RMOB sekarang dan pengambilan otomatis setiap 5 menit: pengambilan otomatis nonaktif dan hanya boleh diaktifkan dengan izin RMOB. Perintah-perintah ini ada di tab Pengaturan.
 H2|8.2 Hasil
 LI|Grafik kemarin dan hari ini: meteor per jam di Collm, nilai yang dikonversi ke frekuensi Anda dan, jika dimuat, hitungan RMOB.
 LI|Prakiraan 24 jam ke depan: jam yang sama pada hari sebelumnya, dikoreksi menurut perubahan indeks hujan meteor lintasan.
@@ -158,18 +159,21 @@ LI|Tabel dengan penilaian: baik, sedang atau buruk dibandingkan rata-rata 24 jam
 TAG|NOTA|Durasi pantulan mengikuti pilihan "Durasi ping antarband" di Geometri dan redaman; pada forward scatter durasi juga bertambah dengan sec²φ di titik tengah lintasan.
 H1|9. Langsung dan data waktu nyata
 H2|9.1 Lalu lintas langsung
-P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu lintas meteor scatter yang terkumpul: untuk setiap kontak, lintasan dalam warna pita (28 cokelat, 50 hijau, 70 sian, 144 oranye, 222 merah muda, 432 ungu), kedua stasiun dan awan jejak yang paling mungkin pada jam itu. Spot yang baru tiba berkedip selama satu menit.
+P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu lintas meteor scatter yang terkumpul: untuk setiap kontak, lintasan dalam warna pita (28 cokelat, 50 hijau, 70 sian, 144 oranye, 222 merah muda, 432 ungu), kedua stasiun dan zona hujan meteor jejak yang paling mungkin pada jam itu. Spot yang baru tiba berkedip selama satu menit.
 LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 3, 15 atau 30 menit terakhir, satu jam terakhir, 3 atau 24 jam terakhir.
-LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat awan, ketinggian, dan ukurannya.
+LI|Peta Mercator digeser dengan menyeretnya memakai mouse; klik ganda: kembali berpusat di stasiun saya. Peta azimutal tetap berpusat di stasiun saya.
+LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat zona hujan meteor, ketinggian, dan ukurannya.
+LI|Rincian kontak atau stasiun pendengar yang dipilih muncul dalam kotak timbul di atas peta, kiri atas, baik pada proyeksi azimutal maupun Mercator.
 LI|Tampilkan siapa yang mendengarkan: segitiga berwarna pita menandai stasiun yang menurut PSKReporter menerima MSK144, FSK441, PSK2K, atau JTMS di 28, 50, 70, 144, dan 432 MHz dalam jendela waktu yang dipilih. Klik pada segitiga menampilkan callsign, locator, mode, dan spot terakhir. Aliran MQTT di tab Pengumpulan data harus terhubung.
 LI|Juga monitor aktif di peta PSKReporter: segitiga kosong untuk stasiun yang tampak di peta pskreporter.info dalam MSK144, FSK441, PSK2K atau JTMS tetapi belum menerima spot apa pun (MQTT hanya mengirim stasiun yang menerima sesuatu). YA-MS menanyai layanan kueri PSKReporter sekali setiap 5 menit untuk semua mode, sesuai aturan layanan; sebuah monitor tetap di peta setidaknya 11 menit. Klik pada segitiga menampilkan callsign, lokator, program dekode, dan waktu monitor aktif. Aktif sejak awal.
-LI|FT8 lebih dari 1100 km tanpa lintasan paralel: spot FT8 (dari PSKReporter MQTT, cluster, atau WSJT-X lewat UDP) antara stasiun yang berjarak lebih dari 1100 km yang tidak memiliki lintasan paralel dalam 3 menit sebelum dan sesudahnya (pita sama, titik tengah dalam 300 km, arah dalam 20°, pasangan stasiun lain) digambar hijau muda dan barisnya di tabel kanan bawah selalu berkedip. E sporadis dan tropo memberi banyak lintasan berdekatan dan paralel; spot yang terisolasi bisa jadi jejak meteor. Karena itu YA-MS juga menerima dari MQTT spot FT8 di 6 m, 4 m, 2 m, 1,25 m, dan 70 cm (bukan 10 m, terlalu banyak). Spot ini tidak masuk arsip MS. Aktif sejak awal.
+LI|FT8 lebih dari 1100 km tanpa lintasan paralel: spot FT8 (dari PSKReporter MQTT, cluster, atau WSJT-X lewat UDP) antara stasiun yang berjarak lebih dari 1100 km yang tidak memiliki lintasan paralel dalam 3 menit sebelum dan sesudahnya (pita sama, titik tengah dalam 300 km, arah dalam 15°, pasangan stasiun lain) digambar hijau muda dan barisnya di tabel kanan bawah selalu berkedip. E sporadis dan tropo memberi banyak lintasan berdekatan dan paralel; spot yang terisolasi bisa jadi jejak meteor. Karena itu YA-MS juga menerima dari MQTT spot FT8 di 6 m, 4 m, 2 m, 1,25 m, dan 70 cm (tidak pernah 28 MHz). Spot ini tidak masuk arsip MS. Aktif sejak awal. Pemeriksaan tambahan dengan PSKReporter MQTT: spot tidak terisolasi jika stasiun penerima mendengar di MQTT stasiun lain lebih dari 1100 km di pita yang sama dalam 3 menit (pita terbuka); spot dari cluster dan RBN hanya dihitung jika pasangan yang sama juga datang dari MQTT; skimmer RBN (callsign dengan «-#») tidak pernah dihitung.
 LI|Spot WSJT-X lewat UDP yang menyangkut stasiun Anda (dekode memuat callsign Anda: yang memanggil atau menjawab Anda) digambar dengan garis putus-putus yang selalu berkedip, dalam mode apa pun dan pada jarak berapa pun.
+LI|Pertukaran antarpengguna YA-MS: ketika pengguna YA-MS lain mendekode lewat UDP pesan yang ditujukan ke stasiun Anda (dalam MSK144, FSK441, PSK2K atau JTMS, atau FT8 lebih dari 1100 km), YA-MS-nya mengirimkannya kepada Anda secara terenkripsi melalui tiga broker MQTT publik (HiveMQ, Mosquitto, EMQX); Anda melihatnya sebagai garis putus-putus ungu yang selalu berkedip dan sebagai baris di konsol UDP. Hanya Anda yang dapat membacanya (kunci ECDH P-256, AES-256, dan HMAC-SHA256). Spot FT8 hanya ditampilkan jika tidak punya lintasan paralel dalam 3 menit. Aktif sejak awal; yams_scambio=0 di data/config.ini mematikannya.
 LI|Spot dari semua pita ditampilkan, termasuk pita yang tidak dipilih di Pengumpulan data (spot ini tidak disimpan). Spot CW dan spot antarstasiun yang terlalu dekat tidak ditampilkan, jika dibuang di Pengumpulan data.
-LI|Peta menuliskan callsign kedua stasiun pada setiap spot, sekali per stasiun. Proyeksi bisa dipilih: azimutal (berpusat di stasiunmu) atau Mercator. Tooltip pada kolom Awan menjelaskan artinya.
+LI|Peta menuliskan callsign kedua stasiun pada setiap spot, sekali per stasiun. Proyeksi bisa dipilih: azimutal (berpusat di stasiunmu) atau Mercator. Tooltip pada kolom zona hujan meteor menjelaskan artinya.
 H2|9.2 Fluks radar
 P|Hitungan meteor per jam dan ketinggian jejak dari radar SKiYMET di Collm (36,2 MHz) serta gambar terbaru radar Sodankylä (36,9 MHz).
-LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah.
+LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah. Pembaruan otomatis diatur di tab Pengaturan.
 LI|Eksponen λ (SM6FHZ): eksponen estimasi pada pita Anda (garis oranye pada skala kanan).
 LI|Ketinggian jejak: histogram dengan modus, rata-rata, median dan simpangan baku; dengan "dari radar" modus menjadi ketinggian untuk semua perhitungan.
 TAG|ATTENZIONE|Jika skala grafik Collm tidak dapat dibaca, muncul peringatan oranye dan nilainya perlu diperiksa. Tanpa koneksi, program memakai data terakhir yang tersimpan, memberi tahu sekali, dan mencoba lagi sendiri setiap 5 menit; bilah status menjadi merah sampai koneksi pulih.
@@ -187,8 +191,9 @@ LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-7
 LI|Spot CW langsung dibuang (CW atau WPM di komentar, atau 28000-28070 kHz): tidak muncul di konsol dan tidak disimpan, kecuali bertanda <MS>. Kotak ini dapat dimatikan.
 LI|Spot antarstasiun yang berjarak kurang dari 500 km langsung dibuang, karena pada jarak itu hubungannya langsung atau troposferik, bukan meteor scatter: tidak muncul di konsol dan tidak disimpan. Jika lokator tidak ada, spot tetap disimpan. Jaraknya dapat diubah di bawah kotak centang.
 LI|Locator yang hilang diambil dari arsip CALL3; spot yang diterima masuk ke data/spot_ms, satu file per hari, dan ke peta Lalu lintas langsung.
-LI|Basis data CALL3 dengan aturan LIVETROPOVHF. "Perbarui sekarang" mengunduh CALL3.TXT dari MMMonVHF (minimal 100.000 baris valid, yang lama tetap di data/call3.bak); dengan "Perbarui sendiri setiap 7 hari" hal itu dilakukan saat mulai. Di atas berkas berlaku berurutan: entri manual (data/CALL3-MANUALE.TXT), koreksi dari cluster (lokator 6 karakter yang dinyatakan pelapor tentang dirinya), berkas tambahan (data/CALL3-AGGIUNTE), lalu CALL3.TXT dan lokator 6 karakter yang dipelajari langsung (data/LOC6.TXT). Lokator diterima 4 karakter, atau berakhiran LL atau MM, diganti dengan yang 6 karakter dari basis data; stasiun portabel (dengan garis miring) hanya dengan entri yang persis.
-LI|Sumber terakhir, seperti di LIVETROPOVHF: untuk callsign yang tidak punya lokator 6 karakter di sumber lain mana pun, program otomatis bertanya setiap 6 jam ke API publik G7VRD (api.g7vrd.co.uk), dalam kelompok 40 callsign; tiap callsign paling banyak sekali sehari. Hanya lokator 6 karakter yang diterima, bukan pusat kotak (LL atau MM), di kotak yang sama dengan yang diterima. Hasilnya disimpan di data/CALL3-G7VRD.TXT dan, seperti semua koreksi, juga ditulis ke dalam data/call3.txt.
+LI|Basis data CALL3 dengan aturan LIVETROPOVHF. "Perbarui sekarang" mengunduh CALL3.TXT dari MMMonVHF (minimal 100.000 baris valid, yang lama tetap di data/call3.bak); dengan "Perbarui sendiri setiap 12 jam" hal itu dilakukan saat mulai. Di atas berkas berlaku berurutan: entri manual (data/CALL3-MANUALE.TXT), koreksi dari cluster (lokator 6 karakter yang dinyatakan pelapor tentang dirinya), berkas tambahan (data/CALL3-AGGIUNTE), lalu CALL3.TXT dan lokator 6 karakter yang dipelajari langsung (data/LOC6.TXT). Lokator diterima 4 karakter, atau berakhiran LL atau MM, diganti dengan yang 6 karakter dari basis data; stasiun portabel (dengan garis miring) hanya dengan entri yang persis.
+LI|Sumber terakhir, seperti di LIVETROPOVHF: untuk callsign yang tidak punya lokator 6 karakter di sumber lain mana pun, program otomatis bertanya setiap 30 menit ke API publik G7VRD (api.g7vrd.co.uk), dalam kelompok 40 callsign; tiap callsign paling banyak sekali sehari. Hanya lokator 6 karakter yang diterima, bukan pusat kotak (LL atau MM), di kotak yang sama dengan yang diterima. Hasilnya disimpan di data/CALL3-G7VRD.TXT dan, seperti semua koreksi, juga ditulis ke dalam data/call3.txt.
+LI|Setelah G7VRD ada lapisan JTDX (data/grid_data.bin, sekitar 365.000 callsign): hanya berlaku untuk callsign tanpa lokator 6 karakter di semua sumber lain, hanya di kotak yang sama dengan yang diterima, dan tidak pernah ditulis ke data/call3.txt.
 H1|10. Hujan meteor langsung dan katalog hujan meteor
 H2|10.1 Hujan meteor langsung
 P|Di kiri, fluks dan ZHR yang diukur oleh Global Meteor Network untuk hujan meteor aktif, dengan hitungan harian kamera GMN per hujan meteor (sebuah hitungan, bukan fluks: tergantung berapa banyak stasiun yang melihat langit cerah); di kanan, peta radian radar CMOR, termasuk hujan meteor siang hari. Berkas diunduh ulang hanya jika berubah, paling sering setiap 30 menit, atau dengan Unduh sekarang.
@@ -220,12 +225,14 @@ LI|cataloghi/: katalog IAU MDC; radar/diretta/: data GMN dan CMOR.
 LI|call3.txt: arsip locator; spot_ms/: spot meteor scatter yang terkumpul; adif_quadrati.csv: kotak dari ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: dokumen teknis.
 LI|backup/: salinan berkas yang diganti oleh pembaruan; aggiornamento/: paket yang diunduh (dihapus saat program dijalankan ulang).
+H2|13.3 Tab Pengaturan
+P|Tab Pengaturan menghimpun cara kerja umum program: Tampilan (huruf, tema, dan bahasa), Pembaruan program (pemeriksaan di GitHub saat mulai dan setiap 30 menit, pembaruan otomatis senyap, Periksa sekarang), Sumber langsung (pembaruan otomatis setiap 5 menit), RMOB (pengamat, unduh sekarang, dan pengambilan otomatis) serta Program (baris perintah dan folder data). Parameter perhitungan tetap di baris perintah di atas tab.
 H2|13.2 Beberapa kunci config.ini
 LI|controlla_aggiornamenti=0: tidak memeriksa versi baru; aggiornamenti_salta: versi yang dilewati.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: kotak-kotak perhitungan.
 LI|raggio_iniziale (0 = dua kali nilai ITU, 1 = ITU, 2 = dikecualikan), durata_ping (0 = λ², 1 = teramati).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: mematikan penerusan ke PSKReporter dekode MS (MSK144, FSK441, PSK2K, JTMS) yang diterima lewat UDP. Aktif sejak awal dan bekerja sendiri: jika callsign Anda tidak muncul lebih dari 20 menit di antara stasiun yang mengirim laporan ke PSKReporter (program digital tidak mengirim), YA-MS mengirim setiap 5 menit stasiun MS yang Anda dekode, dengan Anda sebagai penerima; begitu program digital mengirim lagi, YA-MS berhenti. Satu baris di konsol UDP menunjukkan kapan mulai dan berhenti.
+LI|psk_rimando=0: mematikan penerusan ke PSKReporter dekode MS (MSK144, FSK441, PSK2K, JTMS) yang diterima lewat UDP. Aktif sejak awal dan bekerja sendiri: jika callsign Anda tidak muncul lebih dari 20 menit di antara stasiun yang mengirim laporan ke PSKReporter (program digital tidak mengirim), YA-MS mengirim setiap 5 menit stasiun MS yang Anda dekode, dengan Anda sebagai penerima; begitu program digital mengirim lagi, YA-MS berhenti. Satu baris di konsol UDP menunjukkan kapan mulai dan berhenti. Jika di WSJT-X.ini (atau JTDX.ini) pengiriman ke PSKReporter mati, YA-MS langsung meneruskan, tanpa menunggu 20 menit.
 TAG|ATTENZIONE|Ubah config.ini hanya saat program ditutup: ketika ditutup, YA-MS menulisnya ulang.
 H1|14. Prosedur umum
 H2|14.1 Menyiapkan sked pada suatu hujan meteor

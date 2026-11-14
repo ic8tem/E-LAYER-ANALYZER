@@ -749,7 +749,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT не под�
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Сразу отбрасывать споты между станциями ближе (км), так как на таком расстоянии связь прямая или тропосферная: они не появляются в консоли и не сохраняются. Если нет локатора, спот остаётся.
 spot entro {0} km scartati: {1}	отброшено спотов в пределах {0} км: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Показываются споты всех диапазонов, в том числе не выбранных в Сборе данных (они не сохраняются). Споты CW и споты между слишком близкими станциями не показываются, если они отбрасываются в Сборе данных.
-Aggiorna da solo ogni 7 giorni	Обновлять само каждые 7 дней
+Aggiorna da solo ogni 12 ore	Обновлять само каждые 12 часов
 Aggiornamento di CALL3 già in corso.	Обновление CALL3 уже идёт.
 Aggiornamento di CALL3 non riuscito: {0}	Не удалось обновить CALL3: {0}
 Aggiungi un file...	Добавить файл...
@@ -774,7 +774,7 @@ locator	локатор
 {0} nel CALL3: {1}	{0} в CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} нет в CALL3: введите локатор вручную
 Cerca su G7VRD i locator mancanti	Искать недостающие локаторы на G7VRD
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Последний источник, как в LIVETROPOVHF: для позывных без 6-символьного локатора ни в одном другом источнике программа автоматически каждые 6 часов запрашивает открытый API G7VRD (api.g7vrd.co.uk), группами по 40 позывных; каждый позывной не чаще раза в сутки. Принимается только 6-символьный локатор, не центр квадрата (LL или MM), в том же квадрате, что и полученный. Результаты хранятся в data/CALL3-G7VRD.TXT и, как все поправки, записываются также в data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Последний источник, как в LIVETROPOVHF: для позывных без 6-символьного локатора ни в одном другом источнике программа автоматически каждые 30 минут запрашивает открытый API G7VRD (api.g7vrd.co.uk), группами по 40 позывных; каждый позывной не чаще раза в сутки. Принимается только 6-символьный локатор, не центр квадрата (LL или MM), в том же квадрате, что и полученный. Результаты хранятся в data/CALL3-G7VRD.TXT и, как все поправки, записываются также в data/call3.txt.
 Ascolta	Слушать
 Avvia	Запустить
 Avvia all'apertura	Запускать при открытии
@@ -794,3 +794,27 @@ mappa di PSKReporter non raggiungibile: {0}	карта PSKReporter недост�
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 дальше 1100 км без параллельных трасс в пределах 3 минут (светло-зелёный, строка всегда мигает)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 дальше 1100 км без параллельных трасс в пределах 3 минут: не похоже на спорадический E или тропо, возможно метеорное рассеяние
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: декодирование касается моей станции
+Impostazioni	Настройки
+Aspetto	Внешний вид
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Тема и язык есть также справа вверху, рядом с вкладками.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Искать новую версию на GitHub (при запуске и каждые 30 минут)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Автоматические тихие обновления: скачать, установить и перезапустить без вопросов
+Controlla adesso	Проверить сейчас
+Aggiornamenti del programma	Обновления программы
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Без автоматических обновлений при выходе новой версии появляется окно с «Обновить сейчас», «Позже» и «Пропустить эту версию».
+Fonti in diretta	Источники в реальном времени
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Радары Collm и Sodankylä, Global Meteor Network, CMOR и, если выбрано, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Показывать строки команд над вкладками (как кнопка «Панель»)
+Programma	Программа
+Cartella dei dati	Папка данных
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Услышано {0} (YA-MS): сообщение адресовано моей станции
+% sciame	% потока
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	зона потока {0}: {1:F0} % отражений, {2:F0} × {3:F0} км, ось на {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	зону потока нельзя рассчитать для этой трассы (слишком короткая или слишком длинная)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Щёлкните по трассе на карте или по строке таблицы, чтобы увидеть данные связи и её зоны потока.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Споты из вкладки "Сбор данных". Для каждой связи зона потока показывает, где сосредоточены наиболее вероятные следы для этой трассы и этого времени (зеркальное отражение, сумма активных потоков); пунктирные зоны = только спорадические метеоры. Споты со станцией за пределами карты не рисуются; только что пришедшие (менее 3 минут) мигают одну минуту.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% потока: доля полезных отражений трассы в это время, попадающая в зону потока на карте (зеркальное отражение, сумма активных потоков). Чем она выше, тем сильнее хорошие следы сосредоточены в одной области, куда направить антенну. "спорадические" = ни один активный поток не даёт полезных отражений: остаются только спорадические метеоры по обе стороны трассы (пунктирные зоны).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Карту в проекции Меркатора можно двигать мышью; двойной щелчок: снова по центру моей станции. Азимутальная карта остаётся центрированной на моей станции.
+Memorizza	Сохранить
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Введённый локатор отличается от указанного в базе CALL3: нажмите, чтобы обновить и сохранить его (ручная запись, сразу записывается и в call3.txt).
+{0} memorizzato nel CALL3: {1}	{0} сохранён в CALL3: {1}

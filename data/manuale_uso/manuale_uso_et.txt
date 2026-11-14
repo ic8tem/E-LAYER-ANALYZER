@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.11 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.15 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -26,7 +26,7 @@ P|Käivitamisel kuvatakse mõneks sekundiks pilt Perseiididest ESO VLT kohal. Es
 H2|2.3 Kaust data
 P|Kõik seaded ja kõik andmed asuvad ühes kaustas data programmi kõrval: ei mingit AppData-t ega süsteemikaustu. YA-MS-i teise arvutisse viimiseks piisab programmi kausta kopeerimisest koos selle kaustaga data. Kausta sisu on kirjeldatud peatükis 13.
 H2|2.4 Automaatsed uuendused
-P|Alates versioonist 1.8.11 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 6 tunni järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
+P|Alates versioonist 1.8.6 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 30 minuti järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
 P|Alates versioonist 1.8.0 kontrollib YA-MS ise GitHubist käivitamisel ja kõige rohkem kord päevas, kas on ilmunud uus versioon. Kui on, avaneb aken „Uuendus saadaval“ uuenduste loetelu ja kolme nupuga:
 LI|Uuenda kohe: laadib alla sinu süsteemile sobiva paketi, asendab programmi failid, säilitab kausta data ja taaskäivitab YA-MS-i. Kaustas data olevad programmi failid, mida uus versioon muudab, kopeeritakse enne kausta data/backup/v<vana versioon>; sinu faile (seaded, arhiivid, spotid, ADIF) ei puudutata.
 LI|Hiljem: sulgeb akna; kontroll kordub järgmisel päeval.
@@ -38,7 +38,7 @@ H2|2.5 Puuduvad programmifailid
 P|Käivitamisel kontrollib YA-MS, kas kõik tema failid on olemas (tõlked, kataloogid, dokumendid). Kui mõni puudub, näiteks pärast poolikut kopeerimist, loetleb aken „Puuduvad failid“ need ja pakub võimalusi „Laadi puuduvad failid alla“ GitHubist programmiga samas versioonis või „Jätka ilma“. Sama kontroll kordub nupu „Uuendused“ vajutamisel.
 H1|3. Põhiaken
 H2|3.1 Akna osad
-LI|Üleval kolm rida juhtnuppe, mis kehtivad kõigil sakkidel: jaamad ja sagedusala, E-kiht ja antenn, arvutuse aeg (peatükk 4).
+LI|Üleval kaks rida juhtnuppe, mis kehtivad kõigil sakkidel: E-kiht ja antenn, arvutuse aeg (peatükk 4). Sinu jaam (lokaator, kõrgus, sagedusala ja Arvuta) on paremal üleval vahekaardil Liiklus reaalajas.
 LI|Põhisakkide riba, mille paremas servas on nupp Juhtnupud, värviskeem (Teema) ja keel.
 LI|Alamsakid heledamal real nende sakkide jaoks, millel need on.
 LI|All olekuriba: arvutuse teated, ühenduse hoiatused ja nupp „Uuendused“.
@@ -50,22 +50,22 @@ LI|Tehnilised dokumendid, viimane: Kasutusjuhend, Allikad, Euroopa radarite kaar
 H2|3.3 Keel, värvid, font
 LI|Keel: 36 keelt. Keele vahetamisel ehitatakse aken uuesti üles samas asendis ja samal sakil, ilma taaskäivituseta. Arvud ja kuupäevad järgivad valitud keelt (itaalia keeles kümnendkoma, inglise keeles punkt).
 LI|Teema: 12 värviskeemi; Hele on vaikimisi, Öö ja Must on mõeldud pimedas kasutamiseks, Meteoorijälg on YA-MS-i algne stiil.
-LI|Kiri (esimese juhtrea lõpus): vähendab või suurendab kogu teksti 85 kuni 140 %, 5 % sammuga. Suure kirja korral murduvad sakid mitmele reale.
-LI|Juhtnupud: peidab ja avab uuesti kolm juhtnuppude rida, et anda kaartidele ja graafikutele ruumi. Valik jäetakse meelde.
+LI|Kiri (Seaded): vähendab või suurendab kogu teksti 85 kuni 140 %, 5 % sammuga. Suure kirja korral murduvad sakid mitmele reale.
+LI|Juhtnupud: peidab ja avab uuesti kaks juhtnuppude rida, et anda kaartidele ja graafikutele ruumi. Valik jäetakse meelde.
 TAG|NOTA|Peaaegu igal juhtnupul on kohtspikker: hoia hiirt juhtnupu kohal paigal, et lugeda, milleks see on ja millisest allikast algväärtus pärineb.
 H1|4. Jaama ja trassi seadistamine
-H2|4.1 Rida 1: jaamad ja sagedusala
+H2|4.1 Minu jaam (Liiklus reaalajas)
 LI|Minu lokaator ja kõrgus m: sinu Maidenheadi lokaator (4, 6 või 8 märki; kasutatakse ruudu keskpunkti) ja jaama kõrgus merepinnast.
 LI|Sagedusala MHz: 28, 50, 70, 144, 222 või 432 MHz. Vajalik antenni võimenduse ja peaharu, sumbumise ja lingi eelarve ning voo hinnangu jaoks.
 LI|Arvuta: arvutab trassi uuesti (E-kihi valimi võtmine, alla sekundi).
-H2|4.2 Rida 2: E-kiht ja antenn
+H2|4.2 Rida 1: E-kiht ja antenn
 LI|Jälgede kõrgus km ja radarilt: meteoorijälgede kõrgus. Kui „radarilt“ on märgitud, kasutatakse Collmi radari mõõdetud kõige sagedasemat kõrgust (tavaliselt 88-90 km); eemalda märge, et see käsitsi sisestada.
 LI|Peaharu kõrgusnurk °: sinu antenni vertikaalse peaharu maksimumi kõrgusnurk. 0° peale fikseeritud suunaantenni peaharu on maapinnalt peegeldumise tõttu siiski mõne kraadi võrra horisondist kõrgemal: tavaliselt 3-8°, sõltuvalt antenni kõrgusest lainepikkustes.
 LI|antenni suunadiagramm: sisselülitatuna (vaikimisi) arvestatakse peegelduspunkte mõlema antenni vertikaalse võimendusega: täielikult peaharu maksimumi ümbruses ja üha vähem horisondi suunas ning ülespoole. Väljalülitatuna on peaharu kõrgusnurk terav piir: madalamal nähtavaid punkte ei arvestata.
 LI|Yagi antenn: poom m: poomi pikkus. Selle kõrvale kirjutab programm pikkuse lainepikkustes, võimenduse (DL6WU kõver) ja peaharu laiuse -3 dB juures horisontaalselt ja vertikaalselt. Alla 2 λ on hinnang ebatäpne.
 LI|Hot spot keskpunktist km ja auto (AMS): Hot A ja Hot B kaugus keskpunktist. Kui „auto (AMS)“ on märgitud, järgitakse J. Richardsoni tabelit, mida tsiteerib DJ5HG (13° kõrvalekalle 1000 km juures, 10° üle 1500 km); eemalda märge, et sisestada käsitsi 30-400 km (MSHV kasutab 150 km).
 TAG|ATTENZIONE|Kui „antenni suunadiagramm“ on välja lülitatud ja peaharu on mõne kraadi kõrgusel, ei pruugi kaks jaama pikal trassil näha ühtki kihi ühist punkti: kõik efektiivsused on 0 ja kuvatakse hoiatus „ÜHIST TSOONI POLE“ koos peaharu või jälgede kõrgusega, mida oleks vaja. Näide: JN70CN - JO76QP, 1791 km, peaharu 3°, jäljed 88,5 km kõrgusel.
-H2|4.3 Rida 3: arvutuse aeg
+H2|4.3 Rida 2: arvutuse aeg
 LI|Aeg: UTC kell.
 LI|Arvutuse kuupäev (UTC): arvutuse päev. Kehtib Prognoosarvutuse, Efektiivsuse arvutuse 24 tunni tabeli ja GRAVES-radari ajajoone kohta. Vaikimisi on see tänane päev ja keskööl läheb see üle uuele päevale.
 LI|Tunnid (−12 kuni +36 h): nihutab arvutuse hetke 15-minutiliste sammudega. Kõrval: „Arvutus ajale: praegu“ või valitud kuupäev ja kellaaeg.
@@ -78,7 +78,8 @@ P|Rühma Prognoosarvutus esimene alamsakk näitab ühel ekraanil, kuhu kasulikud
 H2|5.1 Kokkuvõtteriba
 P|Kaardi kohal võtab riba kokku arvutuse selle hetke kohta: kuupäev ja kellaaeg, trassi indeks (aktiivsete meteoorivoolude ZHR × efektiivsus summa), kõige kasulikum meteoorivool koos ZHR-i ja efektiivsusega (ka dB-des DJ5HG etaloni suhtes), horisondist kõrgemal olevate meteoorivoolude arv ning soovitatud Hot koos asimuudiga.
 H2|5.2 Pealtvaate kaart
-P|Kaardi kõrval paremal on üks veerg. Üleval on vastasjaama kast: kõigepealt antenni suund (Antenni az, alati vastasjaama poole), siis kutsung (kirjuta see ja vajuta Enter: lokaator võetakse CALL3 andmebaasist, nagu YAECis ja LIVETROPOVHFis), lokaator ja kõrgus. Kutsungi võib kirjutada ka lokaatori kasti. All on kaardi sümbolite legend: klõps pealkirjal paneb selle kokku; radiantide värvid ilmuvad, kui Euroopa kaart on välja lülitatud.
+P|Kaardi kõrval paremal on üks veerg. Üleval on vastasjaama kast: kõigepealt antenni suund (Antenni az, alati vastasjaama poole), siis kutsung (kirjuta see ja vajuta Enter: lokaator võetakse CALL3 andmebaasist, nagu YAECis ja LIVETROPOVHFis), lokaator ja kõrgus. Kutsungi võib kirjutada ka lokaatori kasti. All on kaardi sümbolite legend: klõps pealkirjal paneb selle kokku.
+P|Kui kirjutad sellele kutsungile arhiivis olevast erineva lokaatori, muutub lokaatorikasti kõrval aktiivseks nupp «Salvesta»: sellele vajutades saab uuest lokaatorist käsitsi kirje (data/CALL3-MANUALE.TXT, mis on kõigist teistest allikatest tähtsam) ja see kirjutatakse kohe ka faili data/call3.txt.
 P|Vasakul Euroopa kaart pealtvaates (ida paremal), ümberringi kraadiskaalaga:
 LI|roheline joon: tegelik trass kahe lokaatori vahel;
 LI|Hot A ja Hot B: kaks hot spot'i keskpunkti mõlemal küljel. Punane = soovitatud, roosa = väljaspool antenni peaharu, hall = juba peaharu sees (koos hoiatusega);
@@ -150,7 +151,7 @@ LI|Sihtsagedus MHz: prognoosi sagedus.
 LI|λ^k astendaja (3, SM6FHZ) ja Jaama tegur K (1): sageduse reegel ja parandus sinu jaama jaoks.
 LI|k populatsiooniindeksitest: pakub k väärtuse aktiivsete meteoorivoolude populatsiooniindeksite r põhjal (GMN, muidu IMO; k = 3,75 · log10 r, kaalutud ZHR-iga) ja küsib enne rakendamist kinnitust.
 LI|Laadi RMOB-fail kettalt ja Leia astendaja RMOB-failist: loevad kuise RMOB-faili ja leiavad k Collmiga ühiste tundide põhjal.
-LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal.
+LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal. Need käsud on vahekaardil Seaded.
 H2|8.2 Tulemused
 LI|Eilse ja tänase päeva graafik: meteoorid tunnis Collmis, sinu sagedusele teisendatud väärtused ja, kui need on laaditud, RMOB-i loendused.
 LI|Järgmise 24 tunni prognoos: eelmise päeva sama tund, parandatuna trassi meteoorivoolude indeksi muutusega.
@@ -158,18 +159,21 @@ LI|Tabel hinnanguga: hea, keskmine või kehv võrreldes 24 tunni keskmisega.
 TAG|NOTA|Peegelduste kestus järgib valikut „Pingide kestus sagedusalade vahel“ sakil Geomeetria ja sumbumine; forward scatteri korral kasvab kestus ka koos sec²φ-ga trassi keskpunktis.
 H1|9. Otse ja reaalajas andmed
 H2|9.1 Liiklus reaalajas
-P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede pilv. Äsja saabunud spotid vilguvad ühe minuti.
+P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede voo tsoon. Äsja saabunud spotid vilguvad ühe minuti.
 LI|Kaardi raadius: 600-3500 km. Näidatavad spotid: viimased 3, 15 või 30 minutit, viimane tund, viimased 3 või 24 tundi.
-LI|Klõps trassil või tabeli real tõstab side esile ja näitab pilve keskpunkti, selle kõrgust ja mõõtmeid.
+LI|Mercatori kaarti saab hiirega lohistades liigutada; topeltklõps: jälle minu jaama keskel. Asimuutkaart jääb minu jaama keskele.
+LI|Klõps trassil või tabeli real tõstab side esile ja näitab voo tsoon keskpunkti, selle kõrgust ja mõõtmeid.
+LI|Valitud side või kuulava jaama üksikasjad ilmuvad esiletõstetud kastis kaardi kohal üleval vasakul, nii asimutaal- kui ka Mercatori projektsiooniga.
 LI|Näita, kes kuulab: riba värvi kolmnurgad märgivad jaamu, mis PSKReporteri järgi võtavad valitud ajaaknas vastu MSK144, FSK441, PSK2K või JTMS režiimis 28, 50, 70, 144 ja 432 MHz sagedusel. Klõps kolmnurgal näitab kutsungit, lokaatorit, režiime ja viimast spotti. Vahekaardi Andmete kogumine MQTT-voog peab olema ühendatud.
 LI|Ka PSKReporteri kaardi aktiivsed monitorid: tühjad kolmnurgad jaamadele, mis on pskreporter.info kaardil MSK144, FSK441, PSK2K või JTMS režiimis, kuid pole veel ühtegi spotti vastu võtnud (MQTT saadab ainult jaamu, mis midagi vastu võtavad). YA-MS pärib PSKReporteri päringuteenust kord 5 minuti jooksul kõigi režiimide kohta, nagu teenuse reeglid nõuavad; monitor jääb kaardile vähemalt 11 minutiks. Klõps kolmnurgal näitab kutsungit, lokaatorit, dekodeerimisprogrammi ja aega, mil monitor oli aktiivne. Vaikimisi sees.
-LI|FT8 üle 1100 km ilma paralleelsete trassideta: FT8-spot (PSKReporteri MQTT-st, klastritest või WSJT-X-ist UDP kaudu) üle 1100 km kaugusel olevate jaamade vahel, millel pole 3 minuti jooksul enne ja pärast paralleelseid trasse (sama sagedusala, keskpunkt 300 km piires, suund 20° piires, teine jaamapaar), joonistatakse helerohelisena ja selle rida paremal all tabelis vilgub alati. Sporaadiline E ja troposfäär annavad palju lähedasi paralleelseid trasse; üksik spot võib olla meteoorijälg. Seepärast võtab YA-MS MQTT-st vastu ka 6 m, 4 m, 2 m, 1,25 m ja 70 cm FT8-spotid (mitte 10 m omi, neid on liiga palju). Need spotid ei lähe MS-arhiivi. Vaikimisi sees.
+LI|FT8 üle 1100 km ilma paralleelsete trassideta: FT8-spot (PSKReporteri MQTT-st, klastritest või WSJT-X-ist UDP kaudu) üle 1100 km kaugusel olevate jaamade vahel, millel pole 3 minuti jooksul enne ja pärast paralleelseid trasse (sama sagedusala, keskpunkt 300 km piires, suund 15° piires, teine jaamapaar), joonistatakse helerohelisena ja selle rida paremal all tabelis vilgub alati. Sporaadiline E ja troposfäär annavad palju lähedasi paralleelseid trasse; üksik spot võib olla meteoorijälg. Seepärast võtab YA-MS MQTT-st vastu ka 6 m, 4 m, 2 m, 1,25 m ja 70 cm FT8-spotid (mitte kunagi 28 MHz). Need spotid ei lähe MS-arhiivi. Vaikimisi sees. Lisakontrollid PSKReporteri MQTT-ga: spot ei ole üksik, kui vastuvõttev jaam kuuleb MQTT-s 3 minuti jooksul samal sagedusalal teisi jaamu üle 1100 km (avatud ala); klastrite ja RBN-i spotid kehtivad ainult siis, kui sama paar tuleb ka MQTT kaudu; RBN-i skimmerid (kutsungid «-#») ei kehti kunagi.
 LI|WSJT-X-i spotid UDP kaudu, mis puudutavad sinu jaama (dekodeering sisaldab sinu kutsungit: kes sind kutsub või sulle vastab), joonistatakse alati vilkuva katkendjoonega, igas režiimis ja igal kaugusel.
+LI|Vahetus YA-MS-i kasutajate vahel: kui mõni teine YA-MS-i kasutaja dekodeerib UDP kaudu sinu jaamale adresseeritud sõnumi (MSK144, FSK441, PSK2K või JTMS režiimis või FT8-s üle 1100 km), saadab tema YA-MS selle sulle krüptitult kolme avaliku MQTT-maakleri kaudu (HiveMQ, Mosquitto, EMQX); näed seda alati vilkuva violetse katkendjoonena ja reana UDP konsoolis. Ainult sina saad seda lugeda (ECDH P-256 võtmed, AES-256 ja HMAC-SHA256). FT8-spotte näidatakse ainult siis, kui neil pole 3 minuti jooksul paralleelseid trasse. Vaikimisi sees; yams_scambio=0 failis data/config.ini lülitab selle välja.
 LI|Näidatakse kõigi sagedusalade spotte, ka nende, mida Andmekogumises ei ole valitud (neid ei salvestata). CW-spotte ja liiga lähedaste jaamade vahelisi spotte ei näidata, kui need Andmekogumises ära visatakse.
-LI|Kaardil kirjutatakse iga spoti mõlema jaama kutsung, üks kord jaama kohta. Projektsioon on valitav: asimuutne (keskel sinu jaam) või Mercator. Veeru Pilv kohtspikker selgitab selle tähendust.
+LI|Kaardil kirjutatakse iga spoti mõlema jaama kutsung, üks kord jaama kohta. Projektsioon on valitav: asimuutne (keskel sinu jaam) või Mercator. Veeru voo tsoon kohtspikker selgitab selle tähendust.
 H2|9.2 Radari voog
 P|Collmi SKiYMET-radari (36,2 MHz) meteooride tunniloendused ja jälgede kõrgused ning Sodankylä radari (36,9 MHz) viimane pilt.
-LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud.
+LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud. Automaatne uuendus seadistatakse vahekaardil Seaded.
 LI|λ astendaja (SM6FHZ): sinu sagedusala hinnangu astendaja (oranž joon parempoolsel skaalal).
 LI|Jälgede kõrgused: histogramm moodi, keskmise, mediaani ja standardhälbega; valikuga „radarilt“ saab moodist kõigi arvutuste kõrgus.
 TAG|ATTENZIONE|Kui Collmi graafiku skaalat ei õnnestu lugeda, kuvatakse oranž hoiatus ja väärtusi tuleb kontrollida. Ühenduseta kasutab programm viimati salvestatud andmeid, ütleb seda üks kord ja proovib ise uuesti iga 5 minuti järel; olekuriba muutub punaseks, kuni ühendus taastub.
@@ -187,8 +191,9 @@ LI|Filter võtab vastu spotid meteor scatterile tüüpilistel sagedustel (50190-
 LI|CW-spotid visatakse kohe ära (CW või WPM kommentaaris või 28000-28070 kHz): need ei ilmu konsooli ega salvestu, välja arvatud <MS> märgiga. Kasti saab välja lülitada.
 LI|Spotid jaamade vahel, mis on lähemal kui 500 km, visatakse kohe ära, sest sellel kaugusel on side otsene või troposfääriline, mitte meteor scatter: need ei ilmu konsooli ega salvestata. Kui lokaator puudub, spot jääb alles. Kaugust saab muuta kasti all.
 LI|Puuduvad lokaatorid võetakse CALL3 arhiivist; vastu võetud spotid salvestatakse kausta data/spot_ms, üks fail päevas, ja kuvatakse Liiklus reaalajas kaardil.
-LI|CALL3 andmebaas LIVETROPOVHF-i reeglitega. „Uuenda kohe" laadib MMMonVHF-ist CALL3.TXT (vähemalt 100 000 kehtivat rida, eelmine jääb faili data/call3.bak); valikuga „Uuenda ise iga 7 päeva järel" tehakse seda käivitamisel. Faili kohal kehtivad järjekorras: käsitsi kirjed (data/CALL3-MANUALE.TXT), klastri parandused (6-märgiline lokaator, mille spottija enda kohta teatab), lisatud failid (data/CALL3-AGGIUNTE), seejärel CALL3.TXT ja otse õpitud 6-märgilised lokaatorid (data/LOC6.TXT). Saadud 4-märgiline lokaator või LL/MM-ga lõppev asendatakse andmebaasi 6-märgilisega; portatiivjaamad (kaldkriipsuga) ainult täpse kirjega.
-LI|Viimane allikas, nagu LIVETROPOVHF-is: kutsungitele, millel üheski teises allikas pole 6-märgilist lokaatorit, küsib programm automaatselt iga 6 tunni järel G7VRD avalikult API-lt (api.g7vrd.co.uk), 40 kutsungi kaupa; iga kutsungit kõige rohkem kord päevas. Aktsepteeritakse ainult 6-märgilist lokaatorit, mitte ruudu keskpunkti (LL või MM), samas ruudus kui saadud. Tulemused on failis data/CALL3-G7VRD.TXT ja need kirjutatakse nagu kõik parandused ka faili data/call3.txt.
+LI|CALL3 andmebaas LIVETROPOVHF-i reeglitega. „Uuenda kohe" laadib MMMonVHF-ist CALL3.TXT (vähemalt 100 000 kehtivat rida, eelmine jääb faili data/call3.bak); valikuga „Uuenda ise iga 12 tunni järel" tehakse seda käivitamisel. Faili kohal kehtivad järjekorras: käsitsi kirjed (data/CALL3-MANUALE.TXT), klastri parandused (6-märgiline lokaator, mille spottija enda kohta teatab), lisatud failid (data/CALL3-AGGIUNTE), seejärel CALL3.TXT ja otse õpitud 6-märgilised lokaatorid (data/LOC6.TXT). Saadud 4-märgiline lokaator või LL/MM-ga lõppev asendatakse andmebaasi 6-märgilisega; portatiivjaamad (kaldkriipsuga) ainult täpse kirjega.
+LI|Viimane allikas, nagu LIVETROPOVHF-is: kutsungitele, millel üheski teises allikas pole 6-märgilist lokaatorit, küsib programm automaatselt iga 30 minuti järel G7VRD avalikult API-lt (api.g7vrd.co.uk), 40 kutsungi kaupa; iga kutsungit kõige rohkem kord päevas. Aktsepteeritakse ainult 6-märgilist lokaatorit, mitte ruudu keskpunkti (LL või MM), samas ruudus kui saadud. Tulemused on failis data/CALL3-G7VRD.TXT ja need kirjutatakse nagu kõik parandused ka faili data/call3.txt.
+LI|Pärast G7VRD-d tuleb JTDX-kiht (data/grid_data.bin, umbes 365 000 kutsungit): see kehtib ainult kutsungitele, millel pole üheski teises allikas 6-märgilist lokaatorit, ainult samas ruudus kui saadud lokaator, ja seda ei kirjutata kunagi faili data/call3.txt.
 H1|10. Meteoorivoolud reaalajas ja meteoorivoolude kataloog
 H2|10.1 Meteoorivoolud reaalajas
 P|Vasakul Global Meteor Networki mõõdetud voog ja ZHR aktiivsete meteoorivoolude kohta koos GMN-i kaamerate päevaste loendustega voolude kaupa (loendus, mitte voog: see sõltub sellest, mitu jaama näeb selget taevast); paremal CMOR-radari radiantide kaardid, sealhulgas päevaste meteoorivoolude omad. Failid laaditakse uuesti alla ainult siis, kui need on muutunud, kõige rohkem iga 30 minuti järel, või nupuga Laadi kohe alla.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC kataloog; radar/diretta/: GMN-i ja CMOR-i andmed.
 LI|call3.txt: lokaatorite arhiiv; spot_ms/: kogutud meteor scatteri spotid; adif_quadrati.csv: ADIF-ist saadud ruudud.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehnilised dokumendid.
 LI|backup/: uuendusega asendatud failide koopiad; aggiornamento/: alla laaditud pakett (kustutatakse taaskäivitamisel).
+H2|13.3 Vahekaart Seaded
+P|Vahekaart Seaded koondab programmi üldise töö: Välimus (kiri, teema ja keel), Programmi uuendused (kontroll GitHubis käivitamisel ja iga 30 minuti järel, automaatsed vaiksed uuendused, Kontrolli kohe), Reaalajas allikad (automaatne uuendus iga 5 minuti järel), RMOB (vaatleja, laadi kohe ja automaatne laadimine) ning Programm (käsuread ja andmekaust). Arvutuse parameetrid jäävad vahekaartide kohal olevatesse käsuridadesse.
 H2|13.2 Mõned config.ini võtmed
 LI|controlla_aggiornamenti=0: ära kontrolli uusi versioone; aggiornamenti_salta: vahele jäetud versioon.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: arvutuse märkeruudud.
 LI|raggio_iniziale (0 = ITU kahekordne, 1 = ITU, 2 = välja jäetud), durata_ping (0 = λ², 1 = vaadeldud).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: lülitab välja UDP kaudu saadud MS-dekodeeringute (MSK144, FSK441, PSK2K, JTMS) edastamise PSKReporterisse. See on vaikimisi sees ja töötab ise: kui sinu kutsung on PSKReporterile raporteid saatvate jaamade seast puudunud üle 20 minuti (digiprogramm ei saada), saadab YA-MS iga 5 minuti järel sinu dekodeeritud MS-jaamad, sina vastuvõtjana; kui digiprogramm jälle saadab, YA-MS lõpetab. Rida UDP konsoolis ütleb, millal see algab ja lõpeb.
+LI|psk_rimando=0: lülitab välja UDP kaudu saadud MS-dekodeeringute (MSK144, FSK441, PSK2K, JTMS) edastamise PSKReporterisse. See on vaikimisi sees ja töötab ise: kui sinu kutsung on PSKReporterile raporteid saatvate jaamade seast puudunud üle 20 minuti (digiprogramm ei saada), saadab YA-MS iga 5 minuti järel sinu dekodeeritud MS-jaamad, sina vastuvõtjana; kui digiprogramm jälle saadab, YA-MS lõpetab. Rida UDP konsoolis ütleb, millal see algab ja lõpeb. Kui WSJT-X.ini (või JTDX.ini) failis on PSKReporterisse saatmine välja lülitatud, edastab YA-MS kohe, ootamata 20 minutit.
 TAG|ATTENZIONE|Muuda faili config.ini ainult siis, kui programm on suletud: sulgemisel kirjutab YA-MS selle üle.
 H1|14. Tüüpilised toimingud
 H2|14.1 Skedi ettevalmistamine meteoorivoolu ajaks

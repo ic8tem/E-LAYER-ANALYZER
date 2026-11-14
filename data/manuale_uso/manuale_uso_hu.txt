@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.11-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.15-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -26,7 +26,7 @@ P|Indításkor néhány másodpercre megjelenik a nyitókép az ESO VLT távcsö
 H2|2.3 A data mappa
 P|Minden beállítás és minden adat egyetlen data mappában van a program mellett: nincs AppData, nincsenek rendszermappák. A YA-MS másik számítógépre költöztetéséhez elég átmásolni a program mappáját a data mappájával együtt. A mappa tartalmát a 13. fejezet írja le.
 H2|2.4 Automatikus frissítések
-P|Az 1.8.11-os verziótól a frissítések automatikusak és csendesek: indításkor, majd 6 óránként a YA-MS megnézi a GitHubot, és ha új verzió van, letölti, telepíti és magától újraindul, semmit sem kérdezve (csak az állapotsor jelzi). A hiányzó fájlokat is kérdés nélkül újratölti. Az alább leírt ablak csak a "Frissítések" gomb megnyomásakor jelenik meg, vagy ha a data/config.ini fájlba beírod: aggiornamenti_automatici=0.
+P|Az 1.8.6-os verziótól a frissítések automatikusak és csendesek: indításkor, majd 30 percenként a YA-MS megnézi a GitHubot, és ha új verzió van, letölti, telepíti és magától újraindul, semmit sem kérdezve (csak az állapotsor jelzi). A hiányzó fájlokat is kérdés nélkül újratölti. Az alább leírt ablak csak a "Frissítések" gomb megnyomásakor jelenik meg, vagy ha a data/config.ini fájlba beírod: aggiornamenti_automatici=0.
 P|Az 1.8.0-s verziótól a YA-MS magától ellenőrzi a GitHubon, indításkor és legfeljebb naponta egyszer, hogy megjelent-e új verzió. Ha igen, megjelenik a „Frissítés érhető el” ablak az újdonságokkal és három gombbal:
 LI|Frissítés most: letölti a rendszerének megfelelő csomagot, lecseréli a program fájljait, megtartja a data mappát, és újraindítja a YA-MS-t. A data mappában lévő programfájlokat, amelyeket az új verzió módosít, előbb a data/backup/v<versione vecchia> mappába másolja; az Ön fájljaihoz (beállítások, archívumok, spotok, ADIF) nem nyúl.
 LI|Később: bezárja az ablakot; az ellenőrzés másnap megismétlődik.
@@ -38,7 +38,7 @@ H2|2.5 Hiányzó programfájlok
 P|Indításkor a YA-MS ellenőrzi, hogy megvan-e minden fájlja (fordítások, katalógusok, dokumentumok). Ha valamelyik hiányzik, például egy hiányos másolás után, a „Hiányzó fájlok” ablak felsorolja őket, és felajánlja a „Hiányzó fájlok letöltése” lehetőséget a GitHubról, a program azonos verziójában, vagy a „Folytatás nélkülük” lehetőséget. Ugyanez az ellenőrzés megismétlődik a „Frissítések” gomb megnyomásakor.
 H1|3. A főablak
 H2|3.1 Az ablak részei
-LI|Felül a vezérlők három sora, amelyek minden fülre érvényesek: állomások és sáv, E-réteg és antenna, a számítás időpontja (4. fejezet).
+LI|Felül a vezérlők két sora, amelyek minden fülre érvényesek: E-réteg és antenna, a számítás időpontja (4. fejezet). Az állomásod (lokátor, magasság, sáv és Számítás) az Élő forgalom jobb felső részén van.
 LI|A fő fülek sávja, jobb oldalán a Vezérlők gombbal, a színsémával (Téma) és a nyelvvel.
 LI|Az alfülek egy világosabb sorban, azoknál a füleknél, amelyeknek vannak.
 LI|Alul az állapotsor: a számítás üzenetei, a kapcsolatra vonatkozó figyelmeztetések és a „Frissítések” gomb.
@@ -50,22 +50,22 @@ LI|Műszaki dokumentumok, az utolsó: Felhasználói kézikönyv, Források, Az 
 H2|3.3 Nyelv, színek, betűtípus
 LI|Nyelv: 36 nyelv. Nyelvváltáskor az ablak ugyanazon a helyen és ugyanazon a fülön épül fel újra, újraindítás nélkül. A számok és dátumok a választott nyelvet követik (tizedesvessző magyarul, tizedespont angolul).
 LI|Téma: 12 színséma; a Világos az alapértelmezett, az Éjszaka és a Fekete sötétben használható, a Meteornyom a YA-MS eredeti stílusa.
-LI|Betűméret (a vezérlők első sorának végén): az összes szöveget 85 és 140 % között kicsinyíti vagy nagyítja, 5 %-os lépésekben. Nagy betűknél a fülek több sorba törnek.
-LI|Vezérlők: összecsukja és újra kinyitja a vezérlők három sorát, hogy helyet adjon a térképeknek és grafikonoknak. A választást a program megjegyzi.
+LI|Betűméret (Beállítások): az összes szöveget 85 és 140 % között kicsinyíti vagy nagyítja, 5 %-os lépésekben. Nagy betűknél a fülek több sorba törnek.
+LI|Vezérlők: összecsukja és újra kinyitja a vezérlők két sorát, hogy helyet adjon a térképeknek és grafikonoknak. A választást a program megjegyzi.
 TAG|NOTA|Szinte minden vezérlőnek van buboréksúgója: tartsa az egeret a vezérlő fölött, és elolvashatja, mire szolgál, és melyik forrásból származik a kezdőérték.
 H1|4. Az állomás és az útvonal beállítása
-H2|4.1 1. sor: állomások és sáv
+H2|4.1 Saját állomásom (Élő forgalom)
 LI|Saját lokátorom és magasság m: az Ön Maidenhead-lokátora (4, 6 vagy 8 karakter; a négyzet középpontja számít) és az állomás tengerszint feletti magassága.
 LI|Sáv MHz: 28, 50, 70, 144, 222 vagy 432 MHz. Az antenna nyereségéhez és lebenyéhez, a csillapításhoz és a mérleghez, valamint a fluxus becsléséhez kell.
 LI|Számítás: újraszámolja az útvonalat (az E-réteg mintavételezése, kevesebb mint egy másodperc).
-H2|4.2 2. sor: E-réteg és antenna
+H2|4.2 1. sor: E-réteg és antenna
 LI|Nyommagasság km és a radarból: a meteornyomok magassága. Bejelölt „a radarból” esetén a Collm radar által mért leggyakoribb magasságot használja (általában 88-90 km); szüntesse meg a jelölést, ha kézzel szeretné megadni.
 LI|Lebeny emelkedése °: antennája függőleges lebenye maximumának emelkedési szöge. A 0°-ra állított irányantenna főlebenye a talajról való visszaverődés miatt mégis néhány fokkal a horizont fölött van: általában 3-8°, az antenna hullámhosszban kifejezett magasságától függően.
 LI|antenna iránykarakterisztika: bekapcsolva (alapértelmezés) a visszaverődési pontok a két antenna függőleges nyereségével súlyozva számítanak: teljes súllyal a lebeny maximuma körül, egyre kevésbé a horizont és felfelé haladva. Kikapcsolva a lebeny emelkedése éles határ: az alacsonyabban látott pontok nem számítanak.
 LI|Yagi antenna: tartócső m: a tartócső (boom) hossza. Mellette a program kiírja a hosszt hullámhosszban, a nyereséget (DL6WU-görbe), valamint a vízszintes és függőleges -3 dB-es lebenyt. 2 λ alatt a becslés pontatlan.
 LI|Hot spot a felezőponttól km és auto (AMS): Hot A és Hot B távolsága a felezőponttól. Bejelölt „auto (AMS)” esetén J. Richardson DJ5HG által idézett táblázatát követi (13° eltérés 1000 km-nél, 10° 1500 km felett); szüntesse meg a jelölést, ha kézzel szeretne 30-400 km-t megadni (az MSHV 150 km-t használ).
 TAG|ATTENZIONE|Kikapcsolt „antenna iránykarakterisztika” és néhány fokos lebeny esetén egy hosszú útvonalon előfordulhat, hogy a két állomás nem lát közös pontot a rétegben: minden hatásfok 0, és megjelenik a „NINCS KÖZÖS ZÓNA” figyelmeztetés a szükséges lebennyel vagy nyommagassággal. Példa: JN70CN - JO76QP, 1791 km, lebeny 3°-on, nyomok 88,5 km-en.
-H2|4.3 3. sor: a számítás időpontja
+H2|4.3 2. sor: a számítás időpontja
 LI|Idő: UTC óra.
 LI|A számítás dátuma (UTC): a számítás napja. Érvényes az Előrejelző számításra, a Hatásfok számítása fül 24 órás táblázatára és a GRAVES radar időrendjére. Alapértelmezés szerint a mai nap, és éjfélkor az új napra vált.
 LI|Órák (−12-től +36 h-ig): 15 perces lépésekben eltolja a számítás időpontját. Mellette: „Számítás ideje: most” vagy a választott dátum és idő.
@@ -78,7 +78,8 @@ P|Az Előrejelző számítás csoport első alfüle egyetlen képernyőn mutatja
 H2|5.1 Az összefoglaló sáv
 P|A térkép fölött egy sáv összefoglalja az adott időpont számítását: dátum és idő, útvonalindex (az aktív rajok ZHR × hatásfok összege), a leghasznosabb raj ZHR-jével és hatásfokával (dB-ben is, DJ5HG referenciájához képest), a horizont feletti rajok száma, valamint a javasolt Hot az azimutjával.
 H2|5.2 Az alaprajzi térkép
-P|A térkép mellett, jobbra, egyetlen oszlop van. Felül az ellenállomás doboza: előbb az antenna iránya (Antenna az., mindig az ellenállomás felé), aztán a hívójel (írd be és nyomj Entert: a lokátor a CALL3 adatbázisból jön, mint a YAEC-ben és a LIVETROPOVHF-ben), a lokátor és a magasság. A hívójel a lokátor mezőjébe is beírható. Alul a térkép jeleinek jelmagyarázata: a címére kattintva összecsukódik; a radiánsok színei akkor jelennek meg, ha az Európa-térkép ki van kapcsolva.
+P|A térkép mellett, jobbra, egyetlen oszlop van. Felül az ellenállomás doboza: előbb az antenna iránya (Antenna az., mindig az ellenállomás felé), aztán a hívójel (írd be és nyomj Entert: a lokátor a CALL3 adatbázisból jön, mint a YAEC-ben és a LIVETROPOVHF-ben), a lokátor és a magasság. A hívójel a lokátor mezőjébe is beírható. Alul a térkép jeleinek jelmagyarázata: a címére kattintva összecsukódik.
+P|Ha ehhez a hívójelhez az archívumban lévőtől eltérő lokátort írsz, a lokátor mező mellett aktívvá válik a «Mentés» gomb: megnyomásával az új lokátor kézi bejegyzés lesz (data/CALL3-MANUALE.TXT, amely minden más forrást megelőz), és azonnal a data/call3.txt fájlba is beíródik.
 P|Bal oldalon Európa térképe felülnézetből (kelet jobbra), körben fokbeosztással:
 LI|zöld vonal: a két lokátor közötti valódi útvonal;
 LI|Hot A és Hot B: a felezőpont két oldalán lévő két hot spot. Piros = javasolt, rózsaszín = az antennalebenyen kívül, szürke = már a lebenyen belül (figyelmeztetéssel);
@@ -150,7 +151,7 @@ LI|Célfrekvencia MHz: az előrejelzés frekvenciája.
 LI|λ^k kitevő (3, SM6FHZ) és K állomástényező (1): frekvenciaszabály és korrekció az Ön állomására.
 LI|k a populációs indexekből: k-t javasol az aktív rajok r populációs indexeiből (GMN, egyébként IMO; k = 3,75 · log10 r, ZHR-rel súlyozva), és alkalmazás előtt megerősítést kér.
 LI|RMOB-fájl betöltése lemezről és Kitevő meghatározása az RMOB-fájlból: beolvasnak egy havi RMOB-fájlt, és a Collm-mal közös órákból meghatározzák k-t.
-LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni.
+LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni. Ezek a parancsok a Beállítások fülön vannak.
 H2|8.2 Az eredmények
 LI|A tegnapi és mai grafikon: óránkénti meteorszám Collmban, az Ön frekvenciájára átszámított értékek és, ha be vannak töltve, az RMOB-számlálások.
 LI|A következő 24 óra előrejelzése: az előző nap ugyanazon órája, az útvonal rajindexének változásával korrigálva.
@@ -158,18 +159,21 @@ LI|A táblázat értékeléssel: jó, közepes vagy gyenge a 24 órás átlaghoz
 TAG|NOTA|A visszaverődések hossza a Geometria és csillapítás fül „Pingek hossza a sávok között” beállítását követi; forward scatter esetén a hossz a felezőpontbeli sec²φ-vel is nő.
 H1|9. Élő és valós idejű adatok
 H2|9.1 Élő forgalom
-P|Az Ön állomására központosított azimutális távolságtartó térkép az összes összegyűjtött meteor scatter forgalommal: minden összeköttetésnél az útvonal a sáv színével (28 barna, 50 zöld, 70 cián, 144 narancssárga, 222 rózsaszín, 432 lila), a két állomás és az adott órában legvalószínűbb nyomok felhője. Az éppen beérkezett spotok egy percig villognak.
+P|Az Ön állomására központosított azimutális távolságtartó térkép az összes összegyűjtött meteor scatter forgalommal: minden összeköttetésnél az útvonal a sáv színével (28 barna, 50 zöld, 70 cián, 144 narancssárga, 222 rózsaszín, 432 lila), a két állomás és az adott órában legvalószínűbb nyomok rajzóna. Az éppen beérkezett spotok egy percig villognak.
 LI|Térkép sugara: 600-3500 km. Megjelenítendő spotok: az utolsó 3, 15 vagy 30 perc, az utolsó óra, az utolsó 3 vagy 24 óra.
-LI|Egy útvonalra vagy a táblázat egy sorára kattintva kiemeli az összeköttetést, és megmutatja a felhő középpontját, magasságát és méreteit.
+LI|A Mercator-térkép egérrel húzva mozgatható; dupla kattintás: újra az állomásomra középre. Az azimutális térkép az állomásomra középre marad.
+LI|Egy útvonalra vagy a táblázat egy sorára kattintva kiemeli az összeköttetést, és megmutatja a rajzóna középpontját, magasságát és méreteit.
+LI|A kiválasztott összeköttetés vagy figyelő állomás részletei egy kiemelt dobozban jelennek meg a térkép fölött, bal felül, azimutális és Mercator-vetületben egyaránt.
 LI|Mutasd, ki figyel: a sáv színű háromszögek jelölik azokat az állomásokat, amelyek a PSKReporter szerint a választott időablakban MSK144, FSK441, PSK2K vagy JTMS módban vesznek 28, 50, 70, 144 és 432 MHz-en. Egy háromszögre kattintva látszik a hívójel, a lokátor, a módok és az utolsó spot. Az Adatgyűjtés fül MQTT-folyamának csatlakoztatva kell lennie.
 LI|A PSKReporter térkép aktív monitorai is: üres háromszögek azoknak az állomásoknak, amelyek MSK144, FSK441, PSK2K vagy JTMS módban látszanak a pskreporter.info térképén, de még nem vettek spotot (az MQTT csak azokat küldi, akik vesznek valamit). A YA-MS 5 percenként egyszer kérdezi le a PSKReporter lekérdező szolgáltatását minden üzemmódra, ahogy a szolgáltatás szabályai kérik; egy monitor legalább 11 percig a térképen marad. A háromszögre kattintva látszik a hívójel, a lokátor, a dekódoló program és az idő, amikor a monitor aktív volt. Alapból bekapcsolva.
-LI|FT8 1100 km felett párhuzamos útvonal nélkül: egy FT8 spot (a PSKReporter MQTT-ből, a clusterekből vagy a WSJT-X-ből UDP-n), két 1100 km-nél távolabbi állomás között, amelynek az előtte és utána lévő 3 percben nincs párhuzamos útvonala (azonos sáv, felezőpont 300 km-en belül, irány 20°-on belül, másik állomáspár), világoszölddel rajzolódik, és a sora a jobb alsó táblázatban mindig villog. A sporadikus E és a tropo sok közeli, párhuzamos útvonalat ad; egy magányos spot meteornyom lehet. Ezért a YA-MS az MQTT-ből a 6 m, 4 m, 2 m, 1,25 m és 70 cm FT8 spotjait is fogadja (a 10 m-eseket nem, túl sok van). Ezek a spotok nem kerülnek az MS archívumba. Alapból bekapcsolva.
+LI|FT8 1100 km felett párhuzamos útvonal nélkül: egy FT8 spot (a PSKReporter MQTT-ből, a clusterekből vagy a WSJT-X-ből UDP-n), két 1100 km-nél távolabbi állomás között, amelynek az előtte és utána lévő 3 percben nincs párhuzamos útvonala (azonos sáv, felezőpont 300 km-en belül, irány 15°-on belül, másik állomáspár), világoszölddel rajzolódik, és a sora a jobb alsó táblázatban mindig villog. A sporadikus E és a tropo sok közeli, párhuzamos útvonalat ad; egy magányos spot meteornyom lehet. Ezért a YA-MS az MQTT-ből a 6 m, 4 m, 2 m, 1,25 m és 70 cm FT8 spotjait is fogadja (28 MHz soha). Ezek a spotok nem kerülnek az MS archívumba. Alapból bekapcsolva. További ellenőrzések a PSKReporter MQTT-vel: a spot nem magányos, ha a vevőállomás az MQTT-ben 3 percen belül ugyanazon a sávon 1100 km-nél távolabbi más állomásokat hall (nyitott sáv); a clusterek és az RBN spotjai csak akkor számítanak, ha ugyanaz a pár MQTT-n is megérkezik; az RBN skimmerek («-#» hívójelek) sosem számítanak.
 LI|Az UDP-n érkező WSJT-X spotok, amelyek az állomásodat érintik (a dekódolásban szerepel a hívójeled: aki hív vagy válaszol neked), mindig villogó szaggatott vonallal rajzolódnak, bármely üzemmódban és bármilyen távolságon.
+LI|Csere a YA-MS felhasználói között: ha egy másik YA-MS-felhasználó UDP-n dekódol egy az állomásodnak szóló üzenetet (MSK144, FSK441, PSK2K vagy JTMS módban, vagy FT8-ban 1100 km felett), az ő YA-MS-e titkosítva elküldi neked három nyilvános MQTT-brókeren át (HiveMQ, Mosquitto, EMQX); mindig villogó lila szaggatott vonalként és egy sorként látod az UDP konzolban. Csak te olvashatod (ECDH P-256 kulcsok, AES-256 és HMAC-SHA256). Az FT8 spotok csak akkor látszanak, ha 3 percen belül nincs párhuzamos útvonaluk. Alapból bekapcsolva; a data/config.ini yams_scambio=0 sora kikapcsolja.
 LI|Minden sáv spotjai látszanak, azoké is, amelyeket az Adatgyűjtésben nem választottál ki (ezek nem tárolódnak). A CW spotok és a túl közeli állomások közötti spotok nem látszanak, ha az Adatgyűjtésben elvetésre kerülnek.
-LI|A térkép minden spot mindkét állomásának hívójelét kiírja, állomásonként egyszer. A vetület választható: azimutális (középen az állomásod) vagy Mercator. A Felhő oszlop buboréksúgója elmagyarázza a jelentését.
+LI|A térkép minden spot mindkét állomásának hívójelét kiírja, állomásonként egyszer. A vetület választható: azimutális (középen az állomásod) vagy Mercator. A rajzóna oszlop buboréksúgója elmagyarázza a jelentését.
 H2|9.2 Radarfluxus
 P|A Collm SKiYMET radar (36,2 MHz) óránkénti meteorszámai és nyommagasságai, valamint a sodankyläi radar (36,9 MHz) legutóbbi képe.
-LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott.
+LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott. Az automatikus frissítést a Beállítások fülön lehet beállítani.
 LI|λ kitevő (SM6FHZ): a sávjára vonatkozó becslés kitevője (narancssárga vonal a jobb oldali skálán).
 LI|Nyommagasságok: hisztogram módusszal, átlaggal, mediánnal és szórással; „a radarból” beállítás mellett a módusz lesz az összes számítás magassága.
 TAG|ATTENZIONE|Ha a Collm-grafikon skálája nem olvasható le, narancssárga figyelmeztetés jelenik meg, és az értékeket ellenőrizni kell. Kapcsolat nélkül a program az utoljára mentett adatokat használja, ezt egyszer jelzi, és 5 percenként magától újra próbálkozik; az állapotsor pirosra vált, amíg a kapcsolat helyre nem áll.
@@ -187,8 +191,9 @@ LI|A szűrő elfogadja a meteor scatterre jellemző frekvenciákon (50190-50300,
 LI|A CW spotokat azonnal eldobja (CW vagy WPM a megjegyzésben, vagy 28000-28070 kHz): nem jelennek meg a konzolon és nem mentődnek, hacsak nincs rajtuk <MS> jelölés. A négyzet kikapcsolható.
 LI|Az 500 km-nél közelebbi állomások közötti spotok azonnal elvetésre kerülnek, mert ekkora távolságon az összeköttetés közvetlen vagy troposzférikus, nem meteor scatter: nem jelennek meg a konzolon és nem tárolódnak. Ha hiányzik egy lokátor, a spot megmarad. A távolság a jelölőnégyzet alatt módosítható.
 LI|A hiányzó lokátorokat a CALL3 archívumból veszi; az elfogadott spotok a data/spot_ms mappába kerülnek, naponta egy fájlba, valamint az Élő forgalom térképére.
-LI|CALL3 adatbázis a LIVETROPOVHF szabályaival. A „Frissítés most" letölti a CALL3.TXT-t az MMMonVHF-ről (legalább 100 000 érvényes sor, az előző a data/call3.bak fájlban marad); a „Frissítés magától 7 naponta" beállítással indításkor történik. A fájl felett sorrendben érvényesek: kézi bejegyzések (data/CALL3-MANUALE.TXT), klaszterjavítások (a spotoló saját magáról megadott 6 karakteres lokátora), hozzáadott fájlok (data/CALL3-AGGIUNTE), majd a CALL3.TXT és az élőben tanult 6 karakteres lokátorok (data/LOC6.TXT). A kapott 4 karakteres vagy LL-re, MM-re végződő lokátort az adatbázis 6 karakteres lokátora váltja fel; a hordozható állomásokat (perjellel) csak pontos bejegyzéssel.
-LI|Utolsó forrás, mint a LIVETROPOVHF-ben: azokra a hívójelekre, amelyeknek egyetlen más forrásban sincs 6 karakteres lokátora, a program 6 óránként automatikusan a G7VRD nyilvános API-jától (api.g7vrd.co.uk) kérdez, 40 hívójeles csoportokban; mindegyiket legfeljebb naponta egyszer. Csak 6 karakteres lokátort fogad el, nem a négyzet közepét (LL vagy MM), a kapottal azonos négyzetben. Az eredmények a data/CALL3-G7VRD.TXT fájlban vannak, és mint minden javítás, a data/call3.txt fájlba is beíródnak.
+LI|CALL3 adatbázis a LIVETROPOVHF szabályaival. A „Frissítés most" letölti a CALL3.TXT-t az MMMonVHF-ről (legalább 100 000 érvényes sor, az előző a data/call3.bak fájlban marad); a „Frissítés magától 12 óránként" beállítással indításkor történik. A fájl felett sorrendben érvényesek: kézi bejegyzések (data/CALL3-MANUALE.TXT), klaszterjavítások (a spotoló saját magáról megadott 6 karakteres lokátora), hozzáadott fájlok (data/CALL3-AGGIUNTE), majd a CALL3.TXT és az élőben tanult 6 karakteres lokátorok (data/LOC6.TXT). A kapott 4 karakteres vagy LL-re, MM-re végződő lokátort az adatbázis 6 karakteres lokátora váltja fel; a hordozható állomásokat (perjellel) csak pontos bejegyzéssel.
+LI|Utolsó forrás, mint a LIVETROPOVHF-ben: azokra a hívójelekre, amelyeknek egyetlen más forrásban sincs 6 karakteres lokátora, a program 30 percenként automatikusan a G7VRD nyilvános API-jától (api.g7vrd.co.uk) kérdez, 40 hívójeles csoportokban; mindegyiket legfeljebb naponta egyszer. Csak 6 karakteres lokátort fogad el, nem a négyzet közepét (LL vagy MM), a kapottal azonos négyzetben. Az eredmények a data/CALL3-G7VRD.TXT fájlban vannak, és mint minden javítás, a data/call3.txt fájlba is beíródnak.
+LI|A G7VRD után jön a JTDX réteg (data/grid_data.bin, mintegy 365 000 hívójel): csak azokra a hívójelekre érvényes, amelyeknek egyik másik forrásban sincs 6 karakteres lokátora, csak a kapott lokátorral azonos négyzetben, és sosem íródik a data/call3.txt fájlba.
 H1|10. Élő rajok és a rajkatalógus
 H2|10.1 Élő rajok
 P|Bal oldalon az aktív rajoknak a Global Meteor Network által mért fluxusa és ZHR-je, a GMN-kamerák rajonkénti napi számlálásaival (ez számlálás, nem fluxus: attól függ, hány állomás lát derült eget); jobb oldalon a CMOR radar radiánstérképei, a nappali rajokéi is. A fájlokat csak változás esetén tölti le újra, legfeljebb 30 percenként, vagy a Letöltés most gombbal.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC katalógus; radar/diretta/: GMN- és CMOR-adatok.
 LI|call3.txt: lokátorarchívum; spot_ms/: összegyűjtött meteor scatter spotok; adif_quadrati.csv: négyzetek az ADIF-ből.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: a műszaki dokumentumok.
 LI|backup/: a frissítés által lecserélt fájlok másolatai; aggiornamento/: a letöltött csomag (újraindításkor törlődik).
+H2|13.3 A Beállítások fül
+P|A Beállítások fül a program általános működését gyűjti össze: Megjelenés (betűméret, téma és nyelv), Programfrissítések (ellenőrzés a GitHubon indításkor és 30 percenként, automatikus csendes frissítés, Ellenőrzés most), Élő források (automatikus frissítés 5 percenként), RMOB (megfigyelő, letöltés most és automatikus letöltés) és Program (parancssorok és adatmappa). A számítás paraméterei a fülek feletti parancssorokban maradnak.
 H2|13.2 Néhány config.ini kulcs
 LI|controlla_aggiornamenti=0: ne ellenőrizze az új verziókat; aggiornamenti_salta: kihagyott verzió.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: a számítás jelölőnégyzetei.
 LI|raggio_iniziale (0 = az ITU kétszerese, 1 = ITU, 2 = kizárva), durata_ping (0 = λ², 1 = megfigyelt).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: kikapcsolja az UDP-n kapott MS dekódolások (MSK144, FSK441, PSK2K, JTMS) továbbítását a PSKReporternek. Alapból be van kapcsolva és magától működik: ha a hívójeled több mint 20 perce hiányzik a PSKReporternek jelentést küldő állomások közül (a digitális program nem küld), a YA-MS 5 percenként elküldi az általad dekódolt MS állomásokat, téged megadva vevőként; amint a digitális program újra küld, a YA-MS leáll. Egy sor az UDP konzolban jelzi az indulást és a leállást.
+LI|psk_rimando=0: kikapcsolja az UDP-n kapott MS dekódolások (MSK144, FSK441, PSK2K, JTMS) továbbítását a PSKReporternek. Alapból be van kapcsolva és magától működik: ha a hívójeled több mint 20 perce hiányzik a PSKReporternek jelentést küldő állomások közül (a digitális program nem küld), a YA-MS 5 percenként elküldi az általad dekódolt MS állomásokat, téged megadva vevőként; amint a digitális program újra küld, a YA-MS leáll. Egy sor az UDP konzolban jelzi az indulást és a leállást. Ha a WSJT-X.ini-ben (vagy JTDX.ini-ben) ki van kapcsolva a küldés a PSKReporternek, a YA-MS azonnal továbbít, 20 perc várakozás nélkül.
 TAG|ATTENZIONE|A config.ini fájlt csak bezárt program mellett módosítsa: bezáráskor a YA-MS újraírja.
 H1|14. Tipikus eljárások
 H2|14.1 Sked előkészítése egy rajra

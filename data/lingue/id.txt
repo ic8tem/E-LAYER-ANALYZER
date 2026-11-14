@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT tidak terhub
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Langsung buang spot antarstasiun yang lebih dekat dari (km), karena pada jarak itu hubungannya langsung atau troposferik: tidak muncul di konsol dan tidak disimpan. Jika lokator tidak ada, spot tetap disimpan.
 spot entro {0} km scartati: {1}	spot dalam {0} km dibuang: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Spot dari semua pita ditampilkan, termasuk pita yang tidak dipilih di Pengumpulan data (spot ini tidak disimpan). Spot CW dan spot antarstasiun yang terlalu dekat tidak ditampilkan, jika dibuang di Pengumpulan data.
-Aggiorna da solo ogni 7 giorni	Perbarui sendiri setiap 7 hari
+Aggiorna da solo ogni 12 ore	Perbarui sendiri setiap 12 jam
 Aggiornamento di CALL3 già in corso.	Pembaruan CALL3 sedang berjalan.
 Aggiornamento di CALL3 non riuscito: {0}	Pembaruan CALL3 gagal: {0}
 Aggiungi un file...	Tambah berkas...
@@ -772,7 +772,7 @@ locator	lokator
 {0} nel CALL3: {1}	{0} di CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} tidak ada di CALL3: ketik lokator secara manual
 Cerca su G7VRD i locator mancanti	Cari lokator yang hilang di G7VRD
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Sumber terakhir, seperti di LIVETROPOVHF: untuk callsign yang tidak punya lokator 6 karakter di sumber lain mana pun, program otomatis bertanya setiap 6 jam ke API publik G7VRD (api.g7vrd.co.uk), dalam kelompok 40 callsign; tiap callsign paling banyak sekali sehari. Hanya lokator 6 karakter yang diterima, bukan pusat kotak (LL atau MM), di kotak yang sama dengan yang diterima. Hasilnya disimpan di data/CALL3-G7VRD.TXT dan, seperti semua koreksi, juga ditulis ke dalam data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Sumber terakhir, seperti di LIVETROPOVHF: untuk callsign yang tidak punya lokator 6 karakter di sumber lain mana pun, program otomatis bertanya setiap 30 menit ke API publik G7VRD (api.g7vrd.co.uk), dalam kelompok 40 callsign; tiap callsign paling banyak sekali sehari. Hanya lokator 6 karakter yang diterima, bukan pusat kotak (LL atau MM), di kotak yang sama dengan yang diterima. Hasilnya disimpan di data/CALL3-G7VRD.TXT dan, seperti semua koreksi, juga ditulis ke dalam data/call3.txt.
 Ascolta	Dengarkan
 Avvia	Mulai
 Avvia all'apertura	Mulai saat dibuka
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	peta PSKReporter tidak dapat dijangk
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 lebih dari 1100 km tanpa lintasan paralel dalam 3 menit (hijau muda, baris selalu berkedip)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 lebih dari 1100 km tanpa lintasan paralel dalam 3 menit: tidak tampak seperti E sporadis atau tropo, bisa jadi meteor scatter
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: dekode ini menyangkut stasiun saya
+Impostazioni	Pengaturan
+Aspetto	Tampilan
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Tema dan bahasa juga ada di kanan atas, di samping tab.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Cari versi baru di GitHub (saat mulai dan setiap 30 menit)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Pembaruan otomatis senyap: unduh, pasang, dan mulai ulang tanpa bertanya
+Controlla adesso	Periksa sekarang
+Aggiornamenti del programma	Pembaruan program
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Tanpa pembaruan otomatis, saat versi baru keluar muncul jendela dengan «Perbarui sekarang», «Nanti», dan «Lewati versi ini».
+Fonti in diretta	Sumber langsung
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Radar Collm dan Sodankylä, Global Meteor Network, CMOR, dan RMOB jika dipilih.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Tampilkan baris perintah di atas tab (sama dengan tombol «Kontrol»)
+Programma	Program
+Cartella dei dati	Folder data
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Didengar oleh {0} (YA-MS): pesan ditujukan ke stasiun saya
+% sciame	% hujan
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	zona hujan meteor {0}: {1:F0} % pantulan, {2:F0} × {3:F0} km, sumbu {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	zona hujan meteor tidak dapat dihitung untuk lintasan ini (terlalu pendek atau terlalu panjang)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Klik lintasan di peta atau baris tabel untuk rincian kontak dan zona hujan meteornya.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spot dari tab "Pengumpulan data". Untuk setiap kontak, zona hujan meteor menunjukkan tempat jejak paling mungkin untuk lintasan dan jam itu terkumpul (pantulan spekular, jumlah hujan meteor aktif); zona putus-putus = hanya meteor sporadis. Spot dengan stasiun di luar peta tidak digambar; yang baru datang (kurang dari 3 menit) berkedip selama satu menit.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% hujan: bagian pantulan berguna lintasan itu pada jam itu yang jatuh di zona hujan meteor pada peta (pantulan spekular, jumlah hujan meteor aktif). Makin tinggi, makin terkumpul jejak yang baik di satu area tempat mengarahkan antena. "sporadis" = tidak ada hujan meteor aktif yang memberi pantulan berguna: hanya meteor sporadis yang tersisa di kedua sisi lintasan (zona putus-putus).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Peta Mercator digeser dengan menyeretnya memakai mouse; klik ganda: kembali berpusat di stasiun saya. Peta azimutal tetap berpusat di stasiun saya.
+Memorizza	Simpan
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Lokator yang diketik berbeda dari yang ada di arsip CALL3: tekan untuk memperbarui dan menyimpannya (entri manual, langsung ditulis juga ke call3.txt).
+{0} memorizzato nel CALL3: {1}	{0} disimpan di CALL3: {1}

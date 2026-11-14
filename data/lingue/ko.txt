@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT 연결 안 �
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(km)보다 가까운 국 사이의 스팟을 즉시 버립니다. 이 거리에서는 직접파 또는 대류권 전파이기 때문입니다. 콘솔에 표시되지 않고 저장되지 않습니다. 로케이터가 없으면 스팟은 유지됩니다.
 spot entro {0} km scartati: {1}	{0} km 이내 버린 스팟: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	데이터 수집에서 선택하지 않은 밴드를 포함해 모든 밴드의 스팟이 표시됩니다(이것들은 저장되지 않습니다). CW 스팟과 너무 가까운 국 사이의 스팟은 데이터 수집에서 버리도록 설정되어 있으면 표시되지 않습니다.
-Aggiorna da solo ogni 7 giorni	7일마다 자동 업데이트
+Aggiorna da solo ogni 12 ore	12시간마다 자동 업데이트
 Aggiornamento di CALL3 già in corso.	CALL3 업데이트가 이미 진행 중입니다.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 업데이트 실패: {0}
 Aggiungi un file...	파일 추가...
@@ -772,7 +772,7 @@ locator	로케이터
 {0} nel CALL3: {1}	CALL3의 {0}: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0}은(는) CALL3에 없습니다: 로케이터를 직접 입력하세요
 Cerca su G7VRD i locator mancanti	G7VRD에서 빠진 로케이터 찾기
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	마지막 출처(LIVETROPOVHF와 같음): 다른 어떤 출처에도 6자리 로케이터가 없는 호출부호에 대해 프로그램이 6시간마다 자동으로 G7VRD 공개 API(api.g7vrd.co.uk)에 40개씩 묻습니다. 각 호출부호는 하루 최대 한 번입니다. 6자리 로케이터만 받으며, 사각형 중심(LL 또는 MM)은 제외하고, 받은 로케이터와 같은 사각형 안에 있어야 합니다. 결과는 data/CALL3-G7VRD.TXT에 저장되고, 다른 모든 수정과 마찬가지로 data/call3.txt에도 기록됩니다.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	마지막 출처(LIVETROPOVHF와 같음): 다른 어떤 출처에도 6자리 로케이터가 없는 호출부호에 대해 프로그램이 30분마다 자동으로 G7VRD 공개 API(api.g7vrd.co.uk)에 40개씩 묻습니다. 각 호출부호는 하루 최대 한 번입니다. 6자리 로케이터만 받으며, 사각형 중심(LL 또는 MM)은 제외하고, 받은 로케이터와 같은 사각형 안에 있어야 합니다. 결과는 data/CALL3-G7VRD.TXT에 저장되고, 다른 모든 수정과 마찬가지로 data/call3.txt에도 기록됩니다.
 Ascolta	수신
 Avvia	시작
 Avvia all'apertura	열 때 시작
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter 지도에 연결할 수 
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	3분 이내에 평행 경로가 없는 1100 km 초과 FT8 (연한 녹색, 행이 항상 깜박임)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	3분 이내에 평행 경로가 없는 1100 km 초과 FT8: 스포라딕 E나 대류권 전파로 보이지 않으며 유성 산란일 수 있음
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: 이 디코드는 내 국과 관련됨
+Impostazioni	설정
+Aspetto	모양
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	테마와 언어는 오른쪽 위 탭 옆에도 있습니다.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	GitHub에서 새 버전 확인(시작 시와 30분마다)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	자동 무음 업데이트: 묻지 않고 다운로드, 설치, 재시작
+Controlla adesso	지금 확인
+Aggiornamenti del programma	프로그램 업데이트
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	자동 업데이트를 쓰지 않으면 새 버전이 나올 때 «지금 업데이트», «나중에», «이 버전 건너뛰기»가 있는 창이 나타납니다.
+Fonti in diretta	실시간 출처
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm과 Sodankylä 레이더, Global Meteor Network, CMOR, 선택 시 RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	탭 위에 명령 행 표시(«조작» 버튼과 같음)
+Programma	프로그램
+Cartella dei dati	데이터 폴더
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	{0}이(가) 수신(YA-MS): 이 메시지는 내 국에 보낸 것입니다
+% sciame	% 유성우
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	유성우 구역 {0}: 반사의 {1:F0} %, {2:F0} × {3:F0} km, 축 {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	이 경로에서는 유성우 구역을 계산할 수 없음 (너무 짧거나 너무 김)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	지도의 경로나 표의 행을 클릭하면 교신과 그 유성우 구역의 자세한 내용을 봅니다.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"데이터 수집" 탭의 스팟. 각 교신에 대해 유성우 구역은 그 경로와 시각에 가장 가능성 높은 유성흔이 모이는 곳을 보여 줍니다(거울 반사, 활동 유성우의 합). 점선 구역 = 산발 유성만. 한쪽 국이 지도 밖에 있는 스팟은 그리지 않으며, 막 도착한 스팟(3분 미만)은 1분 동안 깜박입니다.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% 유성우: 그 경로의 그 시각 유효 반사 중 지도에 그린 유성우 구역에 들어가는 비율(거울 반사, 활동 유성우의 합). 높을수록 좋은 유성흔이 안테나를 향할 한 구역에 모여 있습니다. "산발" = 활동 유성우가 유효한 반사를 주지 않음: 경로 양쪽에 산발 유성만 남습니다(점선 구역).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	메르카토르 지도는 마우스로 끌어 옮길 수 있습니다. 더블클릭: 다시 내 국 중심. 방위 지도는 내 국 중심으로 유지됩니다.
+Memorizza	저장
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	입력한 로케이터가 CALL3 데이터베이스의 것과 다릅니다: 눌러서 업데이트하고 저장합니다(수동 항목, call3.txt에도 바로 기록).
+{0} memorizzato nel CALL3: {1}	{0}을(를) CALL3에 저장함: {1}

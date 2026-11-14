@@ -29,6 +29,7 @@ namespace YAMS
         public string Mode = "";           // modo dichiarato dalla fonte (PSKReporter MQTT: MSK144, FSK441...)
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
+        public bool Shared;                // ricevuto da un altro utente di YA-MS (YamsShare): messaggio rivolto a me
         public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: lampeggio nel traffico in diretta
         public string Band { get { return MsBands.Name(FreqKHz); } }
         public string Key { get { return DxCall + "|" + Spotter + "|" + Math.Round(FreqKHz) + "|" + Utc.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture); } }
@@ -149,7 +150,7 @@ namespace YAMS
 
         // ---- clausola degli FT8 isolati (regola dell'autore, IC8TEM, 14/11/2026) ----
         // Uno spot FT8 oltre i 1100 km che nei 3 minuti intorno non ha tratte parallele (stessa banda, punto medio entro
-        // 300 km e direzione entro 20 gradi, coppia di stazioni diversa) non ha l'aspetto dell'E-sporadico o della tropo,
+        // 300 km e direzione entro 15 gradi, coppia di stazioni diversa) non ha l'aspetto dell'E-sporadico o della tropo,
         // che danno sempre molte tratte vicine e parallele: puo' essere una scia meteorica. Si mostra nel Traffico in
         // diretta in verde chiaro, con la riga della tabella che lampeggia sempre. Non entra nell'archivio MS.
         public class Ft8Path
@@ -158,10 +159,23 @@ namespace YAMS
             public LatLon Mid;
             public double Axis;        // direzione della tratta, 0-180 gradi
             public string Pair = "";
-            public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo)
+            public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo), o ricevente che sente altri
+            public bool NeedsMqtt;     // spot di un cluster o di RBN: vale solo se la stessa coppia arriva anche da PSKReporter MQTT
+            public bool Confirmed;     // stessa coppia vista anche in PSKReporter MQTT entro 3 minuti
+            public string Rx = "", Tx = "";
+            public bool Show { get { return !Parallel && (!NeedsMqtt || Confirmed); } }
         }
+        // nominativo senza suffissi degli skimmer ("EI4HQ-#" -> "EI4HQ")
+        static string BaseCall(string c)
+        {
+            c = (c ?? "").Trim().ToUpperInvariant();
+            int i = c.IndexOf('-'); return i > 0 ? c.Substring(0, i) : c;
+        }
+        // ricezioni FT8 per ricevente e banda viste in PSKReporter MQTT (ultimi 10 minuti): chi sente molte stazioni ha la
+        // banda aperta, il suo spot non e' isolato (regola dell'autore, 14/11/2026)
+        static readonly Dictionary<string, List<KeyValuePair<DateTime, string>>> rxHeard = new Dictionary<string, List<KeyValuePair<DateTime, string>>>();
         public static bool Ft8Enabled = true;
-        public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 20;
+        public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 15;
         public static int Ft8Seen;
         static readonly Dictionary<string, List<Ft8Path>> ft8Recent = new Dictionary<string, List<Ft8Path>>();
         public static readonly List<Ft8Path> Ft8Long = new List<Ft8Path>();   // FT8 oltre i 1100 km (ultimi 2000)
@@ -180,17 +194,20 @@ namespace YAMS
         {
             if (!Ft8Enabled || !IsFt8(s)) return false;
             string band = s.Band;
-            if (band.Length == 0) return false;
+            if (band.Length == 0 || band == "28") return false;   // FT8 sui 28 MHz: tolto in ogni caso (regola dell'autore, 14/11/2026)
             Ft8Seen++;
             Locate(s);
             LatLon a, b;
             if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) return false;
             double km = Astro.DistanceKm(a, b);
             if (km < 50) return false;
+            string rx = BaseCall(s.Spotter), tx = BaseCall(s.DxCall);
+            bool mqtt = s.Source == 3;
             Ft8Path p = new Ft8Path
             {
                 S = s, Mid = Astro.Destination(a, Astro.Bearing(a, b), km / 2), Axis = Astro.Bearing(a, b) % 180,
-                Pair = string.CompareOrdinal(s.Spotter, s.DxCall) < 0 ? s.Spotter + "|" + s.DxCall : s.DxCall + "|" + s.Spotter
+                Pair = string.CompareOrdinal(rx, tx) < 0 ? rx + "|" + tx : tx + "|" + rx, Rx = rx, Tx = tx,
+                NeedsMqtt = s.Source <= 2   // cluster, RBN, cluster con PSKReporter: serve la conferma da MQTT
             };
             List<Ft8Path> l;
             if (!ft8Recent.TryGetValue(band, out l)) { l = new List<Ft8Path>(); ft8Recent[band] = l; }
@@ -200,19 +217,41 @@ namespace YAMS
             if (cut > 0) l.RemoveRange(0, cut);
             foreach (Ft8Path q in l)
             {
-                if (q.Pair == p.Pair || Math.Abs((q.S.Utc - s.Utc).TotalMinutes) > Ft8Minutes) continue;
-                if (AxisDiff(q.Axis, p.Axis) > Ft8Deg || Astro.DistanceKm(q.Mid, p.Mid) > Ft8MidKm) continue;
-                q.Parallel = true; p.Parallel = true;
+                if (Math.Abs((q.S.Utc - s.Utc).TotalMinutes) > Ft8Minutes) continue;
+                if (q.Pair == p.Pair)
+                {
+                    // stessa coppia: conferma da PSKReporter MQTT per gli spot dei cluster e di RBN
+                    if (mqtt) q.Confirmed = true;
+                    if (q.S.Source == 3) p.Confirmed = true;
+                    continue;
+                }
+                if (AxisDiff(q.Axis, p.Axis) <= Ft8Deg && Astro.DistanceKm(q.Mid, p.Mid) <= Ft8MidKm) { q.Parallel = true; p.Parallel = true; }
+            }
+            // ricevente che in MQTT sente altre stazioni lontane (oltre 1100 km) nella stessa banda entro 3 minuti: banda aperta
+            string rk = rx + "|" + band;
+            List<KeyValuePair<DateTime, string>> h;
+            if (!rxHeard.TryGetValue(rk, out h)) { h = new List<KeyValuePair<DateTime, string>>(); rxHeard[rk] = h; }
+            h.RemoveAll(x => x.Key < s.Utc.AddMinutes(-10));
+            foreach (KeyValuePair<DateTime, string> x in h)
+                if (x.Value != tx && Math.Abs((x.Key - s.Utc).TotalMinutes) <= Ft8Minutes) { p.Parallel = true; break; }
+            if (mqtt && km > Ft8MinKm)   // solo le ricezioni lunghe: le stazioni vicine si sentono sempre
+            {
+                h.Add(new KeyValuePair<DateTime, string>(s.Utc, tx));
+                if (h.Count > 500) h.RemoveRange(0, 100);
+                foreach (Ft8Path q in Ft8Long)
+                    if (q.Rx == rx && q.Tx != tx && q.S.Band == band && Math.Abs((q.S.Utc - s.Utc).TotalMinutes) <= Ft8Minutes) q.Parallel = true;
+                if (rxHeard.Count > 20000) rxHeard.Clear();
             }
             s.Received = now;
             l.Add(p);
             if (l.Count > 30000) l.RemoveRange(0, 5000);
             if (km <= Ft8MinKm) return false;
+            if ((s.Spotter ?? "").Contains("-#")) return false;   // skimmer RBN: mai nella clausola degli FT8 isolati
             s.DistKm = km;
             if (!ft8Keys.Add(s.Key + "|" + band)) return false;
             Ft8Long.Add(p);
             if (Ft8Long.Count > 2000) { for (int k = 0; k < 200; k++) ft8Keys.Remove(Ft8Long[k].S.Key + "|" + Ft8Long[k].S.Band); Ft8Long.RemoveRange(0, 200); }
-            return !p.Parallel;
+            return p.Show;
         }
 
         // tutti gli spot da disegnare nel traffico in diretta, in ordine di arrivo
@@ -370,6 +409,8 @@ namespace YAMS
                 PskMqtt.SpotReceived += (sp, line) => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 // decodifiche di WSJT-X / JTDX / MSHV via UDP (fonte 4): un solo ricevitore per tutto il programma
                 WsjtxUdp.SpotDecoded += sp => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
+                // messaggi rivolti a me sentiti da altri utenti di YA-MS (scambio cifrato via MQTT)
+                YamsShare.SpotReceived += sp => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
                 DropCw = cfg.GetB("rd_scarta_cw", true);
@@ -389,6 +430,9 @@ namespace YAMS
                 PskRelay.Enabled = cfg.GetB("psk_rimando", true);
                 cfg.Set("psk_rimando", PskRelay.Enabled);
                 PskRelay.Start();
+                YamsShare.Enabled = cfg.GetB("yams_scambio", true);
+                cfg.Set("yams_scambio", YamsShare.Enabled);
+                YamsShare.Start(dataDir);
                 PskActive.Start();
             }
         }
@@ -427,7 +471,7 @@ namespace YAMS
             WsjtxUdp.Save(cfg);
         }
 
-        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); PskActive.Stop(); }
+        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); PskActive.Stop(); YamsShare.Stop(); }
 
         // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
@@ -472,6 +516,13 @@ namespace YAMS
             // spot di PSKReporter via MQTT (fonte 3) e di WSJT-X via UDP (fonte 4): arrivano gia' letti, passano dallo stesso filtro
             foreach (MsSpot s in gotSpots)
             {
+                if (s.Shared)
+                {
+                    // da un altro utente di YA-MS: FT8 solo se oltre i 1100 km e senza tratte parallele (regola dell'autore)
+                    if (IsFt8(s) && !NoteFt8(s, now)) continue;
+                    if (NoteMine(s, now)) added = true;
+                    continue;
+                }
                 int k = s.Source == 4 ? 4 : 3;
                 Lines[k]++;
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }

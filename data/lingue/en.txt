@@ -749,7 +749,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT not connecte
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Discard at once spots between stations closer than (km), because at that distance the path is direct or tropospheric: they do not appear in the console and are not stored. If a locator is missing the spot is kept.
 spot entro {0} km scartati: {1}	spots within {0} km discarded: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Spots of all bands are shown, including those not chosen in Data collection (these are not stored). CW spots and spots between stations that are too close are not shown, if they are discarded in Data collection.
-Aggiorna da solo ogni 7 giorni	Update by itself every 7 days
+Aggiorna da solo ogni 12 ore	Update by itself every 12 hours
 Aggiornamento di CALL3 già in corso.	CALL3 update already in progress.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 update failed: {0}
 Aggiungi un file...	Add a file...
@@ -774,7 +774,7 @@ locator	locator
 {0} nel CALL3: {1}	{0} in CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} is not in CALL3: type the locator by hand
 Cerca su G7VRD i locator mancanti	Look up missing locators on G7VRD
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Last source, as in LIVETROPOVHF: for callsigns that have no 6-character locator in any other source, the program automatically asks the public G7VRD API (api.g7vrd.co.uk) every 6 hours, in groups of 40 callsigns; each callsign at most once a day. Only a 6-character locator is accepted, not the square centre (LL or MM), in the same square as the received one. The results are kept in data/CALL3-G7VRD.TXT and, like all corrections, are also written into data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Last source, as in LIVETROPOVHF: for callsigns that have no 6-character locator in any other source, the program automatically asks the public G7VRD API (api.g7vrd.co.uk) every 30 minutes, in groups of 40 callsigns; each callsign at most once a day. Only a 6-character locator is accepted, not the square centre (LL or MM), in the same square as the received one. The results are kept in data/CALL3-G7VRD.TXT and, like all corrections, are also written into data/call3.txt.
 Ascolta	Listen
 Avvia	Start
 Avvia all'apertura	Start on opening
@@ -794,3 +794,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter map unreachable: {0}
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 beyond 1100 km with no parallel paths within 3 minutes (light green, the row always blinks)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 beyond 1100 km with no parallel paths within 3 minutes: it does not look like sporadic-E or tropo, it may be meteor scatter
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: the decode concerns my station
+Impostazioni	Settings
+Aspetto	Appearance
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Theme and language are also at the top right, next to the tabs.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Check GitHub for a new version (at start-up and every 30 minutes)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Automatic silent updates: download, install and restart without asking
+Controlla adesso	Check now
+Aggiornamenti del programma	Program updates
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Without automatic updates, when a new version is out a window appears with «Update now», «Later» and «Skip this version».
+Fonti in diretta	Live sources
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm and Sodankylä radars, Global Meteor Network, CMOR and, if chosen, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Show the command rows above the tabs (same as the «Controls» button)
+Programma	Program
+Cartella dei dati	Data folder
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Heard by {0} (YA-MS): the message is addressed to my station
+% sciame	% shower
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	shower zone {0}: {1:F0} % of the reflections, {2:F0} × {3:F0} km, axis at {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	shower zone not computable for this path (too short or too long)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Click a path on the map or a table row for the details of the contact and of its shower zone.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spots from the "Data collection" tab. For each contact the shower zone shows where the most probable trails for that path and time are concentrated (specular reflection, sum of the active showers); dashed zones = sporadic meteors only. Spots with a station outside the map are not drawn; those just arrived (less than 3 minutes) blink for one minute.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% shower: share of the useful reflections of that path, at that time, falling in the shower zone drawn on the map (specular reflection, sum of the active showers). The higher it is, the more the good trails are concentrated in a single area to point the antenna at. "sporadics" = no active shower gives useful reflections: only sporadic meteors remain, on both sides of the path (dashed zones).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	The Mercator map moves by dragging it with the mouse; double click: centred on my station again. The azimuthal map stays centred on my station.
+Memorizza	Save
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	The locator you typed differs from the one in the CALL3 database: press to update and save it (manual entry, also written at once into call3.txt).
+{0} memorizzato nel CALL3: {1}	{0} saved in CALL3: {1}

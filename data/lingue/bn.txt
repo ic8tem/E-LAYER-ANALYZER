@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT সংযু
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(কিমি)-এর চেয়ে কাছের স্টেশনগুলির মধ্যে স্পট সঙ্গে সঙ্গে বাদ দিন, কারণ এই দূরত্বে সংযোগ সরাসরি বা ট্রপোস্ফেরিক: এগুলি কনসোলে দেখা যায় না এবং সংরক্ষিত হয় না। লোকেটর না থাকলে স্পট থেকে যায়।
 spot entro {0} km scartati: {1}	{0} কিমির মধ্যে বাদ দেওয়া স্পট: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	সব ব্যান্ডের স্পট দেখানো হয়, ডেটা সংগ্রহে না বাছা ব্যান্ডেরও (সেগুলি সংরক্ষিত হয় না)। CW স্পট এবং খুব কাছের স্টেশনগুলির মধ্যে স্পট দেখানো হয় না, যদি ডেটা সংগ্রহে সেগুলি বাদ দেওয়া হয়।
-Aggiorna da solo ogni 7 giorni	প্রতি 7 দিনে নিজে আপডেট করুন
+Aggiorna da solo ogni 12 ore	প্রতি 12 ঘণ্টায় নিজে আপডেট করুন
 Aggiornamento di CALL3 già in corso.	CALL3 আপডেট ইতিমধ্যে চলছে।
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 আপডেট ব্যর্থ: {0}
 Aggiungi un file...	ফাইল যোগ করুন...
@@ -772,7 +772,7 @@ locator	লোকেটর
 {0} nel CALL3: {1}	CALL3-এ {0}: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} CALL3-এ নেই: লোকেটর হাতে লিখুন
 Cerca su G7VRD i locator mancanti	অনুপস্থিত লোকেটর G7VRD-এ খুঁজুন
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	শেষ উৎস, LIVETROPOVHF-এর মতো: যে কলসাইনগুলির অন্য কোনো উৎসে 6 অক্ষরের লোকেটর নেই, সেগুলির জন্য প্রোগ্রাম প্রতি 6 ঘণ্টায় স্বয়ংক্রিয়ভাবে G7VRD-এর পাবলিক API (api.g7vrd.co.uk)-কে 40টি কলসাইনের দলে জিজ্ঞেস করে; প্রতিটি কলসাইন দিনে সর্বোচ্চ একবার। শুধু 6 অক্ষরের লোকেটর গ্রহণ করা হয়, বর্গের কেন্দ্র (LL বা MM) নয়, প্রাপ্তটির একই বর্গে। ফলাফল data/CALL3-G7VRD.TXT-এ থাকে এবং সব সংশোধনের মতো data/call3.txt-এও লেখা হয়।
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	শেষ উৎস, LIVETROPOVHF-এর মতো: যে কলসাইনগুলির অন্য কোনো উৎসে 6 অক্ষরের লোকেটর নেই, সেগুলির জন্য প্রোগ্রাম প্রতি 30 মিনিটে স্বয়ংক্রিয়ভাবে G7VRD-এর পাবলিক API (api.g7vrd.co.uk)-কে 40টি কলসাইনের দলে জিজ্ঞেস করে; প্রতিটি কলসাইন দিনে সর্বোচ্চ একবার। শুধু 6 অক্ষরের লোকেটর গ্রহণ করা হয়, বর্গের কেন্দ্র (LL বা MM) নয়, প্রাপ্তটির একই বর্গে। ফলাফল data/CALL3-G7VRD.TXT-এ থাকে এবং সব সংশোধনের মতো data/call3.txt-এও লেখা হয়।
 Ascolta	শুনুন
 Avvia	শুরু করুন
 Avvia all'apertura	খোলার সময় শুরু করুন
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter মানচিত্র
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	3 মিনিটে সমান্তরাল পথ ছাড়া 1100 কিমির বেশি FT8 (হালকা সবুজ, সারি সবসময় জ্বলে-নেভে)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	3 মিনিটে সমান্তরাল পথ ছাড়া 1100 কিমির বেশি FT8: স্পোরাডিক E বা ট্রোপোর মতো দেখায় না, মিটিয়র স্ক্যাটার হতে পারে
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: ডিকোডটি আমার স্টেশন সম্পর্কিত
+Impostazioni	সেটিংস
+Aspetto	চেহারা
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	থিম ও ভাষা উপরে ডানদিকে, ট্যাবের পাশেও আছে।
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	GitHub-এ নতুন সংস্করণ খুঁজুন (চালুর সময় ও প্রতি 30 মিনিটে)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	স্বয়ংক্রিয় নীরব আপডেট: না জিজ্ঞাসা করে ডাউনলোড, ইনস্টল ও পুনরায় চালু
+Controlla adesso	এখন যাচাই করুন
+Aggiornamenti del programma	প্রোগ্রামের আপডেট
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	স্বয়ংক্রিয় আপডেট ছাড়া নতুন সংস্করণ এলে «এখনই আপডেট করুন», «পরে» ও «এই সংস্করণ বাদ দিন» সহ একটি উইন্ডো আসে।
+Fonti in diretta	সরাসরি উৎস
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm ও Sodankylä-র রাডার, Global Meteor Network, CMOR এবং বেছে নিলে RMOB।
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	ট্যাবের উপরে কমান্ডের সারি দেখান («নিয়ন্ত্রণ» বোতামের মতো)
+Programma	প্রোগ্রাম
+Cartella dei dati	ডেটা ফোল্ডার
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	{0} শুনেছেন (YA-MS): বার্তাটি আমার স্টেশনের জন্য
+% sciame	% বৃষ্টি
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	বৃষ্টির অঞ্চল {0}: প্রতিফলনের {1:F0} %, {2:F0} × {3:F0} km, অক্ষ {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	এই পথের জন্য বৃষ্টির অঞ্চল গণনা করা যায় না (খুব ছোট বা খুব দীর্ঘ)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	যোগাযোগ ও তার বৃষ্টির অঞ্চলের বিবরণের জন্য মানচিত্রে একটি পথ বা সারণির একটি সারিতে ক্লিক করুন।
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"ডেটা সংগ্রহ" ট্যাবের স্পট। প্রতিটি যোগাযোগের জন্য বৃষ্টির অঞ্চল দেখায় সেই পথ ও সময়ের সবচেয়ে সম্ভাব্য রেখাগুলো কোথায় জমা (দর্পণ প্রতিফলন, সক্রিয় বৃষ্টির যোগফল); ভাঙা রেখার অঞ্চল = কেবল বিক্ষিপ্ত উল্কা। মানচিত্রের বাইরে স্টেশন থাকলে স্পট আঁকা হয় না; সদ্য আসা (3 মিনিটের কম) এক মিনিট জ্বলে-নেভে।
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% বৃষ্টি: সেই সময়ে পথের উপযোগী প্রতিফলনের যে অংশ মানচিত্রে আঁকা বৃষ্টির অঞ্চলে পড়ে (দর্পণ প্রতিফলন, সক্রিয় বৃষ্টির যোগফল)। যত বেশি, ভালো রেখাগুলো তত এক জায়গায় জমা, যেদিকে অ্যান্টেনা ঘোরাতে হবে। "বিক্ষিপ্ত" = কোনো সক্রিয় বৃষ্টি উপযোগী প্রতিফলন দেয় না: পথের দুই পাশে কেবল বিক্ষিপ্ত উল্কা থাকে (ভাঙা রেখার অঞ্চল)।
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	মার্কেটর মানচিত্র মাউস দিয়ে টেনে সরানো যায়; ডাবল ক্লিক: আবার আমার স্টেশনে কেন্দ্রিত। দিগংশীয় মানচিত্র আমার স্টেশনে কেন্দ্রিত থাকে।
+Memorizza	সংরক্ষণ
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	লেখা লোকেটরটি CALL3 সংগ্রহের থেকে আলাদা: এটি হালনাগাদ ও সংরক্ষণ করতে চাপুন (হাতে লেখা এন্ট্রি, সঙ্গে সঙ্গে call3.txt-এও লেখা হয়)।
+{0} memorizzato nel CALL3: {1}	{0} CALL3-এ সংরক্ষিত: {1}

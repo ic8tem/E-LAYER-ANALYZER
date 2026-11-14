@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Weergawe 1.8.11 - saamgestel deur Costantino IC8TEM - November 2026
+SUB|Weergawe 1.8.15 - saamgestel deur Costantino IC8TEM - November 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor YA-MS dien
 P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
@@ -26,7 +26,7 @@ P|By die aanskakel verskyn vir 'n paar sekondes die skerm met die Perseïede bo 
 H2|2.3 Die data-gids
 P|Al die instellings en al die data is in 'n enkele data-gids langs die program: geen AppData nie, geen stelselgidse nie. Om YA-MS na 'n ander rekenaar te skuif, kopieer jy net die programgids saam met sy data-gids. Die inhoud van die gids word in hoofstuk 13 beskryf.
 H2|2.4 Outomatiese bywerkings
-P|Vanaf weergawe 1.8.11 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
+P|Vanaf weergawe 1.8.6 is opdaterings outomaties en stil: by die begin en daarna elke 30 minute kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
 P|Vanaf weergawe 1.8.0 kontroleer YA-MS self op GitHub, by aanskakel en hoogstens een keer per dag, of 'n nuwe weergawe uitgekom het. As daar een is, verskyn die venster "Bywerking beskikbaar" met die nuwighede en drie knoppies:
 LI|Werk nou by: laai die pakket af wat by jou stelsel pas, vervang die programlêers, behou die data-gids en herbegin YA-MS. Die programlêers in die data-gids wat die nuwe weergawe verander, word eers na data/backup/v<ou weergawe> gekopieer; jou eie lêers (instellings, argiewe, spots, ADIF) word nie aangeraak nie.
 LI|Later: maak die venster toe; die kontrole word die volgende dag herhaal.
@@ -38,7 +38,7 @@ H2|2.5 Ontbrekende programlêers
 P|By die aanskakel kontroleer YA-MS of al sy lêers (vertalings, katalogusse, dokumente) teenwoordig is. As enige ontbreek, byvoorbeeld ná 'n onvolledige kopie, lys die venster "Ontbrekende lêers" hulle en bied "Laai die ontbrekende lêers af" van GitHub aan, in dieselfde weergawe van die program, of "Gaan voort sonder". Dieselfde kontrole word herhaal wanneer jy "Bywerkings" druk.
 H1|3. Die hoofvenster
 H2|3.1 Die dele van die venster
-LI|Bo, drie rye kontroles wat vir alle oortjies geld: stasies en band, E-laag en antenna, berekeningstyd (hoofstuk 4).
+LI|Bo, twee rye kontroles wat vir alle oortjies geld: E-laag en antenna, berekeningstyd (hoofstuk 4). Jou stasie (lokator, hoogte, band en Bereken) is regs bo in Regstreekse verkeer.
 LI|Die balk van die hoofoortjies, met regs die knoppie Kontroles, die kleurskema (Tema) en die taal.
 LI|Die suboortjies, in 'n ligter ry, vir die oortjies wat dit het.
 LI|Onder, die statusbalk: boodskappe van die berekening, waarskuwings oor die verbinding, en die knoppie "Bywerkings".
@@ -50,22 +50,22 @@ LI|Tegniese dokumente, laaste: Gebruikershandleiding, Bronne, Kaart van Europese
 H2|3.3 Taal, kleure, lettertipe
 LI|Taal: 36 tale. Wanneer jy die taal verander, word die venster in dieselfde posisie en op dieselfde oortjie herbou, sonder om te herbegin. Getalle en datums volg die gekose taal (desimale komma in Italiaans, punt in Engels).
 LI|Tema: 12 kleurskemas; Lig is die beginskema, Nag en Swart is vir gebruik in die donker, Meteoorspoor is die oorspronklike styl van YA-MS.
-LI|Lettergrootte (aan die einde van die eerste ry kontroles): verklein of vergroot alle teks van 85 tot 140 %, in stappe van 5 %. Met groot letters loop die oortjies oor verskeie reëls.
-LI|Kontroles: vou die drie rye kontroles in en weer oop, om plek te maak vir kaarte en grafieke. Die keuse word onthou.
+LI|Lettergrootte (Instellings): verklein of vergroot alle teks van 85 tot 140 %, in stappe van 5 %. Met groot letters loop die oortjies oor verskeie reëls.
+LI|Kontroles: vou die twee rye kontroles in en weer oop, om plek te maak vir kaarte en grafieke. Die keuse word onthou.
 TAG|NOTA|Byna elke kontrole het 'n wenkballon: hou die muis stil oor die kontrole om te lees waarvoor dit dien en uit watter bron die beginwaarde kom.
 H1|4. Die stasie en die pad opstel
-H2|4.1 Ry 1: stasies en band
+H2|4.1 My stasie (Regstreekse verkeer)
 LI|My lokator en hoogte m: jou Maidenhead-lokator (4, 6 of 8 karakters; die middel van die vierkant word gebruik) en die hoogte van die stasie bo seespieël.
 LI|Band MHz: 28, 50, 70, 144, 222 of 432 MHz. Dit word gebruik vir die wins en die lob van die antenna, vir die padverlies en die skakelbegroting, en vir die skatting van die vloed.
 LI|Bereken: bereken die pad opnuut (bemonstering van die E-laag, minder as 'n sekonde).
-H2|4.2 Ry 2: E-laag en antenna
+H2|4.2 Ry 1: E-laag en antenna
 LI|Spoorhoogte km en van radar: hoogte van die meteoorspore. Met "van radar" gemerk word die algemeenste hoogte gebruik wat deur die Collm-radar gemeet is (gewoonlik 88-90 km); verwyder die merk om dit met die hand in te tik.
 LI|Lob-elevasie °: elevasie van die maksimum van die vertikale lob van jou antenna. 'n Rigantenna wat op 0° vasgestel is, het tog sy hooflob 'n paar grade bo die horison, weens die refleksie op die grond: gewoonlik 3-8°, afhangende van die hoogte van die antenna in golflengtes.
 LI|antennapatroon: aan (beginwaarde), die refleksiepunte tel met die vertikale wins van die twee antennas: vol rondom die maksimum van die lob, al hoe minder na die horison en na bo. Af, is die lob-elevasie 'n skerp grens: punte wat laer gesien word, tel nie.
 LI|Yagi-antenna: boom m: lengte van die boom. Langsaan skryf die program die lengte in golflengtes, die wins (DL6WU-kurwe) en die -3 dB-lob horisontaal en vertikaal. Onder 2 λ is die skatting nie baie akkuraat nie.
 LI|Hot spot vanaf middelpunt km en outo (AMS): afstand van Hot A en Hot B vanaf die middelpunt. Met "outo (AMS)" gemerk word die tabel van J. Richardson gevolg wat DJ5HG aanhaal (13° afwyking by 1000 km, 10° verder as 1500 km); verwyder die merk om 30-400 km met die hand in te tik (MSHV gebruik 150 km).
 TAG|ATTENZIONE|Met "antennapatroon" af en die lob op 'n paar grade, kan die twee stasies op 'n lang pad geen gemeenskaplike punt van die laag sien nie: al die doeltreffendhede is 0 en die waarskuwing "GEEN GEMEENSKAPLIKE SONE NIE" verskyn, met die lob of die spoorhoogte wat nodig sou wees. Voorbeeld: JN70CN - JO76QP, 1791 km, lob op 3°, spore op 88,5 km.
-H2|4.3 Ry 3: berekeningstyd
+H2|4.3 Ry 2: berekeningstyd
 LI|Tyd: UTC-horlosie.
 LI|Berekeningsdatum (UTC): die dag van die berekening. Dit geld vir Voorspellingsberekening, vir die 24-uur-tabel van Berekening van doeltreffendheid en vir die chronologie van GRAVES-radar. Die beginwaarde is vandag en om middernag volg dit die nuwe dag.
 LI|Ure (−12 tot +36 h): skuif die oomblik van die berekening, in stappe van 15 minute. Langsaan: "Berekening vir: nou" of die gekose datum en tyd.
@@ -78,7 +78,8 @@ P|Die eerste suboortjie van die groep Voorspellingsberekening wys op een skerm w
 H2|5.1 Die opsommingstrook
 P|Bo die kaart som 'n strook die berekening vir daardie oomblik op: datum en tyd, padindeks (som van ZHR × doeltreffendheid van die aktiewe swerms), die nuttigste swerm met sy ZHR en sy doeltreffendheid (ook in dB relatief tot die verwysing van DJ5HG), die aantal swerms bo die horison en die aanbevole Hot met sy azimut.
 H2|5.2 Die plattegrondkaart
-P|Langs die kaart, regs, is een enkele kolom. Bo is die korrespondent se blokkie: eers die antennarigting (Antenna-az., altyd na die korrespondent), dan die roepsein (tik dit en druk Enter: die lokator kom uit die CALL3-databasis, soos in YAEC en LIVETROPOVHF), die lokator en die hoogte. Die roepsein kan ook in die lokatorblokkie getik word. Onder is die sleutel van die kaartsimbole: 'n klik op die titel vou dit toe; die kleure van die radiante verskyn wanneer die kaart van Europa af is.
+P|Langs die kaart, regs, is een enkele kolom. Bo is die korrespondent se blokkie: eers die antennarigting (Antenna-az., altyd na die korrespondent), dan die roepsein (tik dit en druk Enter: die lokator kom uit die CALL3-databasis, soos in YAEC en LIVETROPOVHF), die lokator en die hoogte. Die roepsein kan ook in die lokatorblokkie getik word. Onder is die sleutel van die kaartsimbole: 'n klik op die titel vou dit toe.
+P|As jy vir daardie roepnaam 'n ander lokator as dié in die argief intik, word die «Stoor»-knoppie langs die lokatorblokkie aktief: as jy dit druk, word die nuwe lokator 'n handinskrywing (data/CALL3-MANUALE.TXT, wat bo alle ander bronne geld) en word dit dadelik ook in data/call3.txt geskryf.
 P|Links die kaart van Europa van bo gesien (oos regs), met die gradeskaal rondom:
 LI|groen lyn: die ware pad tussen die twee lokators;
 LI|Hot A en Hot B: die twee hot spots aan weerskante van die middelpunt. Rooi = aanbeveel, pienk = buite die lob van die antenna, grys = reeds binne die lob (met 'n waarskuwing);
@@ -150,7 +151,7 @@ LI|Teikenfrekwensie MHz: frekwensie van die voorspelling.
 LI|λ^k-eksponent (3, SM6FHZ) en Stasiefaktor K (1): reël vir die frekwensie en korreksie vir jou stasie.
 LI|k uit bevolkingsindekse: stel k voor uit die bevolkingsindekse r van die aktiewe swerms (GMN, anders IMO; k = 3,75 · log10 r, geweeg met die ZHR) en vra bevestiging voordat dit toegepas word.
 LI|Laai RMOB-lêer van skyf en Bepaal die eksponent uit die RMOB-lêer: lees 'n maandelikse RMOB-lêer en bepaal k uit die ure wat dit met Collm gemeen het.
-LI|RMOB-waarnemer, Laai RMOB nou af en outomatiese aflaai elke 5 minute: die outomatiese aflaai is af en moet slegs met die toestemming van RMOB aangeskakel word.
+LI|RMOB-waarnemer, Laai RMOB nou af en outomatiese aflaai elke 5 minute: die outomatiese aflaai is af en moet slegs met die toestemming van RMOB aangeskakel word. Hierdie opdragte is op die oortjie Instellings.
 H2|8.2 Die resultate
 LI|Die grafiek van gister en vandag: meteore per uur by Collm, waardes geskaal na jou frekwensie en, indien gelaai, die RMOB-tellings.
 LI|Die voorspelling vir die volgende 24 uur: dieselfde uur van die vorige dag, gekorrigeer vir die verandering in die swermindeks van die pad.
@@ -158,18 +159,21 @@ LI|Die tabel met die beoordeling: goed, gemiddeld of swak relatief tot die gemid
 TAG|NOTA|Die duur van die refleksies volg die keuse "Duur van die pings tussen bande" van Geometrie en padverlies; in forward scatter neem die duur ook toe met sec²φ by die middelpunt van die pad.
 H1|9. Regstreeks en intydse data
 H2|9.1 Regstreekse verkeer
-P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesamelde meteor scatter-verkeer: vir elke verbinding die pad in die kleur van die band (28 bruin, 50 groen, 70 siaan, 144 oranje, 222 pienk, 432 pers), die twee stasies en die wolk van die waarskynlikste spore op daardie uur. Spots wat pas aangekom het, flikker vir een minuut.
+P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesamelde meteor scatter-verkeer: vir elke verbinding die pad in die kleur van die band (28 bruin, 50 groen, 70 siaan, 144 oranje, 222 pienk, 432 pers), die twee stasies en die swermsone van die waarskynlikste spore op daardie uur. Spots wat pas aangekom het, flikker vir een minuut.
 LI|Kaartradius: 600-3500 km. Spots om te wys: laaste 3, 15 of 30 minute, laaste uur, laaste 3 of 24 uur.
-LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die wolk, sy hoogte en sy afmetings.
+LI|Die Mercator-kaart beweeg deur dit met die muis te sleep; dubbelklik: weer op my stasie gesentreer. Die azimutale kaart bly op my stasie gesentreer.
+LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die swermsone, sy hoogte en sy afmetings.
+LI|Die besonderhede van die gekose kontak of luisterstasie verskyn in 'n verhewe blokkie oor die kaart, links bo, met sowel die asimutale as die Mercator-projeksie.
 LI|Wys wie luister: driehoeke in die bandkleur merk die stasies wat volgens PSKReporter in die gekose tydvenster MSK144, FSK441, PSK2K of JTMS op 28, 50, 70, 144 en 432 MHz ontvang. 'n Klik op 'n driehoek wys roepsein, lokator, modusse en laaste spot. Die MQTT-stroom in die oortjie Data-insameling moet gekoppel wees.
 LI|Ook die aktiewe monitors op die PSKReporter-kaart: leë driehoeke vir stasies wat op die kaart van pskreporter.info in MSK144, FSK441, PSK2K of JTMS verskyn maar nog geen spot ontvang het nie (MQTT stuur net stasies wat iets ontvang). YA-MS bevra die navraagdiens van PSKReporter een keer elke 5 minute vir alle modusse, soos die diens se reëls vra; 'n monitor bly minstens 11 minute op die kaart. 'n Klik op die driehoek wys roepsein, lokator, dekodeerprogram en die tyd toe die monitor aktief was. By verstek aan.
-LI|FT8 verder as 1100 km sonder parallelle paaie: 'n FT8-spot (van PSKReporter MQTT, die klusters of WSJT-X via UDP) tussen stasies meer as 1100 km uitmekaar wat geen parallelle paaie in die 3 minute voor en na het nie (dieselfde band, middelpunt binne 300 km, rigting binne 20°, 'n ander stasiepaar), word liggroen geteken en sy ry in die tabel regs onder flikker altyd. Sporadiese E en tropo gee baie nabye, parallelle paaie; 'n alleenstaande spot kan 'n meteoorspoor wees. Daarom ontvang YA-MS van MQTT ook die FT8-spots van 6 m, 4 m, 2 m, 1,25 m en 70 cm (nie dié van 10 m nie, te veel). Hierdie spots gaan nie in die MS-argief nie. By verstek aan.
+LI|FT8 verder as 1100 km sonder parallelle paaie: 'n FT8-spot (van PSKReporter MQTT, die klusters of WSJT-X via UDP) tussen stasies meer as 1100 km uitmekaar wat geen parallelle paaie in die 3 minute voor en na het nie (dieselfde band, middelpunt binne 300 km, rigting binne 15°, 'n ander stasiepaar), word liggroen geteken en sy ry in die tabel regs onder flikker altyd. Sporadiese E en tropo gee baie nabye, parallelle paaie; 'n alleenstaande spot kan 'n meteoorspoor wees. Daarom ontvang YA-MS van MQTT ook die FT8-spots van 6 m, 4 m, 2 m, 1,25 m en 70 cm (nooit 28 MHz nie, in geen geval). Hierdie spots gaan nie in die MS-argief nie. By verstek aan. Ekstra kontroles met PSKReporter MQTT: die spot is nie geïsoleer nie as die ontvangstasie in MQTT binne 3 minute ander stasies verder as 1100 km op dieselfde band hoor (oop band); spots van klusters en RBN tel net as dieselfde paar ook deur MQTT kom; RBN-skimmers (roepseine met «-#») tel nooit nie.
 LI|WSJT-X-spots via UDP wat jou stasie raak (die dekodering bevat jou roepsein: wie jou roep of jou antwoord) word geteken met 'n stippellyn wat altyd flikker, in enige modus en op enige afstand.
+LI|Uitruil tussen YA-MS-gebruikers: wanneer 'n ander YA-MS-gebruiker via UDP 'n boodskap aan jou stasie dekodeer (in MSK144, FSK441, PSK2K of JTMS, of in FT8 verder as 1100 km), stuur sy YA-MS dit geënkripteer aan jou deur drie openbare MQTT-makelaars (HiveMQ, Mosquitto, EMQX); jy sien dit as 'n pers stippellyn wat altyd flikker en as 'n reël in die UDP-konsole. Net jy kan dit lees (ECDH P-256-sleutels, AES-256 en HMAC-SHA256). FT8-spots word net gewys as hulle binne 3 minute geen parallelle paaie het nie. By verstek aan; yams_scambio=0 in data/config.ini skakel dit af.
 LI|Spots van alle bande word gewys, ook van bande wat nie in Data-insameling gekies is nie (dié word nie gestoor nie). CW-spots en spots tussen stasies wat te naby is, word nie gewys nie as hulle in Data-insameling weggegooi word.
-LI|Die kaart wys die roepname van albei stasies van elke spot, een keer per stasie. Die projeksie kan azimutaal (gesentreer op jou stasie) of Mercator wees. Die wenk op die kolom Wolk verduidelik die betekenis.
+LI|Die kaart wys die roepname van albei stasies van elke spot, een keer per stasie. Die projeksie kan azimutaal (gesentreer op jou stasie) of Mercator wees. Die wenk op die kolom swermsone verduidelik die betekenis.
 H2|9.2 Radarvloed
 P|Die uurlikse meteoortellings en die spoorhoogtes van die SKiYMET-radar by Collm (36,2 MHz) en die jongste beeld van die Sodankylä-radar (36,9 MHz).
-LI|Laai nou af en Outomatiese bywerking van alle bronne elke 5 minute: elke bron word slegs weer afgelaai as dit verander het.
+LI|Laai nou af en Outomatiese bywerking van alle bronne elke 5 minute: elke bron word slegs weer afgelaai as dit verander het. Die outomatiese bywerking word op die oortjie Instellings gestel.
 LI|λ-eksponent (SM6FHZ): eksponent van die skatting op jou band (oranje lyn op die regterskaal).
 LI|Spoorhoogtes: histogram met modus, gemiddelde, mediaan en standaardafwyking; met "van radar" word die modus die hoogte vir al die berekeninge.
 TAG|ATTENZIONE|As die skaal van die Collm-grafiek nie gelees kan word nie, verskyn 'n oranje waarskuwing en moet die waardes nagegaan word. Sonder verbinding gebruik die program die laaste gestoorde data, sê dit een keer en probeer self elke 5 minute weer; die statusbalk word rooi totdat die verbinding terugkeer.
@@ -187,8 +191,9 @@ LI|Die filter aanvaar spots op die tipiese meteor scatter-frekwensies (50190-503
 LI|CW-spots word dadelik weggegooi (CW of WPM in die kommentaar, of 28000-28070 kHz): hulle verskyn nie in die konsole nie en word nie gestoor nie, tensy hulle met <MS> gemerk is. Die blokkie kan afgeskakel word.
 LI|Spots tussen stasies nader as 500 km word dadelik weggegooi, want op daardie afstand is die verbinding direk of troposferies en nie meteor scatter nie: hulle verskyn nie in die konsole nie en word nie gestoor nie. As 'n lokator ontbreek, bly die spot. Die afstand word onder die blokkie verander.
 LI|Ontbrekende lokators word uit die CALL3-argief geneem; aanvaarde spots gaan na data/spot_ms, een lêer per dag, en na die kaart van Regstreekse verkeer.
-LI|CALL3-databasis met die reëls van LIVETROPOVHF. "Werk nou by" laai CALL3.TXT van MMMonVHF af (ten minste 100 000 geldige reëls, die vorige bly in data/call3.bak); met "Werk self elke 7 dae by" gebeur dit by die begin. Bo die lêer geld in volgorde: handinskrywings (data/CALL3-MANUALE.TXT), cluster-regstellings (die 6-karakter-lokator wat die spotter vir homself verklaar), bygevoegde lêers (data/CALL3-AGGIUNTE), dan CALL3.TXT en 6-karakter-lokators wat regstreeks geleer is (data/LOC6.TXT). 'n Ontvangde 4-karakter-lokator, of een wat op LL of MM eindig, word deur die 6-karakter-een uit die databasis vervang; draagbares (met 'n skuinsstreep) net met die presiese inskrywing.
-LI|Laaste bron, soos in LIVETROPOVHF: vir roepname sonder 'n 6-karakter-lokator in enige ander bron vra die program outomaties elke 6 uur die openbare G7VRD-API (api.g7vrd.co.uk), in groepe van 40 roepname; elke roepnaam hoogstens een keer per dag. Net 'n 6-karakter-lokator word aanvaar, nie die middel van die vierkant (LL of MM) nie, in dieselfde vierkant as die ontvangde een. Die resultate is in data/CALL3-G7VRD.TXT en word, soos alle regstellings, ook in data/call3.txt geskryf.
+LI|CALL3-databasis met die reëls van LIVETROPOVHF. "Werk nou by" laai CALL3.TXT van MMMonVHF af (ten minste 100 000 geldige reëls, die vorige bly in data/call3.bak); met "Werk self elke 12 uur by" gebeur dit by die begin. Bo die lêer geld in volgorde: handinskrywings (data/CALL3-MANUALE.TXT), cluster-regstellings (die 6-karakter-lokator wat die spotter vir homself verklaar), bygevoegde lêers (data/CALL3-AGGIUNTE), dan CALL3.TXT en 6-karakter-lokators wat regstreeks geleer is (data/LOC6.TXT). 'n Ontvangde 4-karakter-lokator, of een wat op LL of MM eindig, word deur die 6-karakter-een uit die databasis vervang; draagbares (met 'n skuinsstreep) net met die presiese inskrywing.
+LI|Laaste bron, soos in LIVETROPOVHF: vir roepname sonder 'n 6-karakter-lokator in enige ander bron vra die program outomaties elke 30 minute die openbare G7VRD-API (api.g7vrd.co.uk), in groepe van 40 roepname; elke roepnaam hoogstens een keer per dag. Net 'n 6-karakter-lokator word aanvaar, nie die middel van die vierkant (LL of MM) nie, in dieselfde vierkant as die ontvangde een. Die resultate is in data/CALL3-G7VRD.TXT en word, soos alle regstellings, ook in data/call3.txt geskryf.
+LI|Ná G7VRD kom die JTDX-laag (data/grid_data.bin, sowat 365 000 roepseine): dit geld net vir roepseine sonder 'n 6-karakter-lokator in alle ander bronne, net in dieselfde vierkant as die ontvangde een, en word nooit in data/call3.txt geskryf nie.
 H1|10. Regstreekse swerms en swermkatalogus
 H2|10.1 Regstreekse swerms
 P|Links die vloed en die ZHR soos gemeet deur die Global Meteor Network vir die aktiewe swerms, met die daaglikse tellings van die GMN-kameras per swerm ('n telling, nie 'n vloed nie: dit hang af van hoeveel stasies 'n helder hemel sien); regs die radiantkaarte van die CMOR-radar, insluitend dié van die dagswerms. Die lêers word slegs weer afgelaai as hulle verander het, hoogstens elke 30 minute, of met Laai nou af.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC-katalogus; radar/diretta/: GMN- en CMOR-data.
 LI|call3.txt: lokator-argief; spot_ms/: ingesamelde meteor scatter-spots; adif_quadrati.csv: vierkante uit die ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: die tegniese dokumente.
 LI|backup/: kopieë van die lêers wat deur 'n bywerking vervang is; aggiornamento/: afgelaaide pakket (uitgevee by herbegin).
+H2|13.3 Die oortjie Instellings
+P|Die oortjie Instellings versamel die algemene werking van die program: Voorkoms (lettertipe, tema en taal), Programbywerkings (kontrole op GitHub by begin en elke 30 minute, outomatiese stil bywerkings, Kontroleer nou), Regstreekse bronne (outomatiese bywerking elke 5 minute), RMOB (waarnemer, laai nou af en outomatiese haal) en Program (opdragrye en datavouer). Die berekeningsparameters bly in die opdragrye bo die oortjies.
 H2|13.2 'n Paar sleutels van config.ini
 LI|controlla_aggiornamenti=0: moenie na nuwe weergawes soek nie; aggiornamenti_salta: oorgeslaande weergawe.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: die merkblokkies van die berekening.
 LI|raggio_iniziale (0 = dubbel die ITU-waarde, 1 = ITU, 2 = uitgesluit), durata_ping (0 = λ², 1 = waargeneem).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: skakel die aanstuur na PSKReporter af van MS-dekoderings (MSK144, FSK441, PSK2K, JTMS) wat via UDP ontvang word. Dit is by verstek aan en werk vanself: as jou roepsein langer as 20 minute ontbreek onder die stasies wat verslae na PSKReporter stuur (die digitale program stuur nie), stuur YA-MS elke 5 minute die MS-stasies wat jy dekodeer, met jou as ontvanger; sodra die digitale program weer stuur, hou YA-MS op. 'n Reël in die UDP-konsole sê wanneer dit begin en ophou.
+LI|psk_rimando=0: skakel die aanstuur na PSKReporter af van MS-dekoderings (MSK144, FSK441, PSK2K, JTMS) wat via UDP ontvang word. Dit is by verstek aan en werk vanself: as jou roepsein langer as 20 minute ontbreek onder die stasies wat verslae na PSKReporter stuur (die digitale program stuur nie), stuur YA-MS elke 5 minute die MS-stasies wat jy dekodeer, met jou as ontvanger; sodra die digitale program weer stuur, hou YA-MS op. 'n Reël in die UDP-konsole sê wanneer dit begin en ophou. As stuur na PSKReporter in WSJT-X.ini (of JTDX.ini) af is, stuur YA-MS dadelik aan, sonder om 20 minute te wag.
 TAG|ATTENZIONE|Verander config.ini slegs terwyl die program toe is: wanneer YA-MS toegemaak word, skryf dit die lêer oor.
 H1|14. Tipiese prosedures
 H2|14.1 'n Sked op 'n swerm voorberei

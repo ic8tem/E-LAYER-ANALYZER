@@ -1,5 +1,5 @@
 TITLE|Brugervejledning til YA-MS
-SUB|Version 1.8.11 - udarbejdet af Costantino IC8TEM - november 2026
+SUB|Version 1.8.15 - udarbejdet af Costantino IC8TEM - november 2026
 H1|1. Indledning
 H2|1.1 Hvad YA-MS bruges til
 P|YA-MS hjælper dig med at forudsige og følge meteor scatter-forholdene live mellem din station og en modstation, fra 28 til 432 MHz. For hver aktiv meteorsværm fortæller programmet, hvor meget dens radiants position begunstiger din strækning (effektiviteten), på hvilke tidspunkter, fra hvilken side af strækningen refleksionerne kommer, og hvor det er bedst at rette antennen. Ved siden af prognosen viser det live måledata: tællingerne fra meteorradaren i Collm, kameraerne i Global Meteor Network, CMOR-radaren, GRAVES-senderen og den meteor scatter-trafik, der indsamles fra clusterne og fra PSKReporter.
@@ -26,7 +26,7 @@ P|Ved start vises i nogle få sekunder et billede med Perseiderne over ESO's VLT
 H2|2.3 Mappen data
 P|Alle indstillinger og alle data ligger i én enkelt mappe data ved siden af programmet: ingen AppData, ingen systemmapper. For at flytte YA-MS til en anden computer er det nok at kopiere programmappen med dens mappe data. Mappens indhold er beskrevet i kapitel 13.
 H2|2.4 Automatiske opdateringer
-P|Fra version 1.8.11 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
+P|Fra version 1.8.6 er opdateringer automatiske og lydløse: ved start og derefter hvert 30. minut tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Fra version 1.8.0 kontrollerer YA-MS selv på GitHub, ved start og højst én gang om dagen, om der er kommet en ny version. Hvis der er, vises vinduet »Opdatering tilgængelig« med nyhederne og tre knapper:
 LI|Opdater nu: henter den pakke, der passer til dit system, erstatter programfilerne, beholder mappen data og genstarter YA-MS. Programfiler i mappen data, som den nye version ændrer, kopieres først til data/backup/v<gammel version>; dine egne filer (indstillinger, arkiver, spots, ADIF) røres ikke.
 LI|Senere: lukker vinduet; kontrollen gentages næste dag.
@@ -38,7 +38,7 @@ H2|2.5 Manglende programfiler
 P|Ved start kontrollerer YA-MS, at alle dets filer er til stede (oversættelser, kataloger, dokumenter). Hvis nogle mangler, for eksempel efter en ufuldstændig kopiering, oplister vinduet »Manglende filer« dem og tilbyder »Hent de manglende filer« fra GitHub i samme version som programmet, eller »Fortsæt uden«. Den samme kontrol gentages, når du trykker på »Opdateringer«.
 H1|3. Hovedvinduet
 H2|3.1 Vinduets dele
-LI|Øverst tre rækker betjeningselementer, der gælder for alle faner: stationer og bånd, E-lag og antenne, beregningstidspunkt (kapitel 4).
+LI|Øverst to rækker betjeningselementer, der gælder for alle faner: E-lag og antenne, beregningstidspunkt (kapitel 4). Din station (locator, højde, bånd og Beregn) står øverst til højre i Trafik i realtid.
 LI|Linjen med hovedfanerne, med knappen Betjening, farveskemaet (Tema) og sproget til højre.
 LI|Underfanerne, i en lysere række, for de faner, der har dem.
 LI|Nederst statuslinjen: beregningsmeddelelser, advarsler om forbindelsen og knappen »Opdateringer«.
@@ -50,22 +50,22 @@ LI|Tekniske dokumenter, den sidste: Brugervejledning, Kilder, Kort over europæi
 H2|3.3 Sprog, farver, skrifttype
 LI|Sprog: 36 sprog. Når du skifter sprog, genopbygges vinduet på samme position og på samme fane uden genstart. Tal og datoer følger det valgte sprog (decimalkomma på italiensk, punktum på engelsk).
 LI|Tema: 12 farveskemaer; Lyst er standard, Nat og Sort er beregnet til brug i mørke, Meteorspor er YA-MS' oprindelige stil.
-LI|Skrift (sidst i første række af knapper): formindsker eller forstørrer al tekst fra 85 til 140 %, i trin på 5 %. Med stor skrift brydes fanerne over flere linjer.
-LI|Betjening: folder de tre rækker betjeningselementer sammen og ud igen for at give plads til kort og grafer. Valget huskes.
+LI|Skrift (Indstillinger): formindsker eller forstørrer al tekst fra 85 til 140 %, i trin på 5 %. Med stor skrift brydes fanerne over flere linjer.
+LI|Betjening: folder de to rækker betjeningselementer sammen og ud igen for at give plads til kort og grafer. Valget huskes.
 TAG|NOTA|Næsten alle betjeningselementer har et værktøjstip: hold musen stille over elementet for at læse, hvad det bruges til, og fra hvilken kilde startværdien kommer.
 H1|4. Indstilling af station og strækning
-H2|4.1 Række 1: stationer og bånd
+H2|4.1 Min station (Live-trafik)
 LI|Min lokator og højde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten af feltet bruges) og stationens højde over havet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Bruges til antennens forstærkning og lap, til dæmpning og linkbudget og til fluxestimatet.
 LI|Beregn: genberegner strækningen (sampling af E-laget, under et sekund).
-H2|4.2 Række 2: E-lag og antenne
+H2|4.2 Række 1: E-lag og antenne
 LI|Sporhøjde km og fra radar: meteorsporenes højde. Med »fra radar« markeret bruges den hyppigste højde målt af Collm-radaren (normalt 88-90 km); fjern markeringen for at indtaste den manuelt.
 LI|Lapelevation °: elevationen af maksimum i din antennes lodrette lap. En retningsantenne, der er fastgjort på 0°, har alligevel hovedlappen nogle grader over horisonten på grund af refleksionen i jorden: normalt 3-8°, afhængigt af antennens højde i bølgelængder.
 LI|antennediagram: slået til (standard) tæller refleksionspunkterne med de to antenners lodrette forstærkning: fuld omkring lappens maksimum og stadig mindre mod horisonten og opad. Slået fra er lapelevationen en skarp grænse: punkter, der ses lavere, tæller ikke.
 LI|Yagi-antenne: bom m: bommens længde. Ved siden af skriver programmet længden i bølgelængder, forstærkningen (DL6WU-kurven) og lappen ved -3 dB vandret og lodret. Under 2 λ er estimatet upræcist.
 LI|Hot spot fra midtpunkt km og auto (AMS): afstanden fra Hot A og Hot B til midtpunktet. Med »auto (AMS)« markeret følges J. Richardsons tabel, citeret af DJ5HG (13° afvigelse ved 1000 km, 10° over 1500 km); fjern markeringen for at indtaste 30-400 km manuelt (MSHV bruger 150 km).
 TAG|ATTENZIONE|Med »antennediagram« slået fra og lappen nogle grader oppe kan de to stationer på en lang strækning risikere ikke at se noget fælles punkt i laget: alle effektiviteter er 0, og advarslen »INGEN FÆLLES ZONE« vises med den lap eller sporhøjde, der ville være nødvendig. Eksempel: JN70CN - JO76QP, 1791 km, lap ved 3°, spor i 88,5 km.
-H2|4.3 Række 3: beregningstidspunkt
+H2|4.3 Række 2: beregningstidspunkt
 LI|Tid: UTC-ur.
 LI|Beregningsdato (UTC): dagen for beregningen. Gælder for Prognoseberegning, for 24-timerstabellen i Effektivitetsberegning og for tidsforløbet i GRAVES-radar. Standard er i dag, og ved midnat følger den den nye dag.
 LI|Timer (−12 til +36 t): flytter beregningstidspunktet i trin på 15 minutter. Ved siden af: »Beregning for: nu« eller den valgte dato og tid.
@@ -78,7 +78,8 @@ P|Den første underfane i gruppen Prognoseberegning samler på én skærm, hvor 
 H2|5.1 Oversigtsbjælken
 P|Over kortet opsummerer en bjælke beregningen for det tidspunkt: dato og tid, strækningens indeks (summen af ZHR × effektivitet for de aktive sværme), den mest nyttige sværm med dens ZHR og effektivitet (også i dB i forhold til DJ5HG's reference), antallet af sværme over horisonten og det anbefalede Hot med dets azimut.
 H2|5.2 Kortet set ovenfra
-P|Ved siden af kortet, til højre, er der én kolonne. Øverst modstationens felt: først antenneretningen (Antenne-az, altid mod modstationen), så kaldesignalet (skriv det og tryk Enter: lokatoren hentes fra CALL3-databasen, som i YAEC og LIVETROPOVHF), lokatoren og højden. Kaldesignalet kan også skrives i lokatorfeltet. Nederst forklaringen til kortets symboler: et klik på titlen folder den sammen; radianternes farver vises, når Europakortet er slukket.
+P|Ved siden af kortet, til højre, er der én kolonne. Øverst modstationens felt: først antenneretningen (Antenne-az, altid mod modstationen), så kaldesignalet (skriv det og tryk Enter: lokatoren hentes fra CALL3-databasen, som i YAEC og LIVETROPOVHF), lokatoren og højden. Kaldesignalet kan også skrives i lokatorfeltet. Nederst forklaringen til kortets symboler: et klik på titlen folder den sammen.
+P|Skriver du en anden locator for det kaldesignal end den i arkivet, bliver knappen «Gem» ved siden af locatorfeltet aktiv: et tryk gør den nye locator til en manuel post (data/CALL3-MANUALE.TXT, der går forud for alle andre kilder) og skriver den straks også ind i data/call3.txt.
 P|Til venstre Europakortet set ovenfra (øst til højre) med gradskala hele vejen rundt:
 LI|grøn linje: den sande strækning mellem de to lokatorer;
 LI|Hot A og Hot B: de to hot spots på hver side af midtpunktet. Rød = anbefalet, lyserød = uden for antennelappen, grå = allerede inden for lappen (med en advarsel);
@@ -150,7 +151,7 @@ LI|Målfrekvens MHz: prognosens frekvens.
 LI|λ^k-eksponent (3, SM6FHZ) og Stationsfaktor K (1): regel for frekvensen og korrektion for din station.
 LI|k fra populationsindekserne: foreslår k ud fra populationsindekserne r for de aktive sværme (GMN, ellers IMO; k = 3,75 · log10 r, vægtet med ZHR) og beder om bekræftelse, før det anvendes.
 LI|Indlæs RMOB-fil fra disken og Udled eksponenten fra RMOB-filen: læser en månedlig RMOB-fil og udleder k fra de timer, der er fælles med Collm.
-LI|RMOB-observatør, Hent RMOB nu og automatisk hentning hvert 5. minut: den automatiske hentning er slået fra og må kun slås til med tilladelse fra RMOB.
+LI|RMOB-observatør, Hent RMOB nu og automatisk hentning hvert 5. minut: den automatiske hentning er slået fra og må kun slås til med tilladelse fra RMOB. Disse kommandoer er under fanen Indstillinger.
 H2|8.2 Resultaterne
 LI|Grafen for i går og i dag: meteorer pr. time i Collm, værdier skaleret til din frekvens og, hvis de er indlæst, RMOB-tællingerne.
 LI|Prognosen for de næste 24 timer: samme time dagen før, korrigeret for ændringen i strækningens sværmindeks.
@@ -158,18 +159,21 @@ LI|Tabellen med vurderingen: god, middel eller dårlig i forhold til gennemsnitt
 TAG|NOTA|Refleksionernes varighed følger valget »Pingenes varighed mellem båndene« i Geometri og dæmpning; i forward scatter vokser varigheden også med sec²φ i strækningens midtpunkt.
 H1|9. Live og realtidsdata
 H2|9.1 Live-trafik
-P|Et azimutalt ækvidistant kort centreret på din station med al indsamlet meteor scatter-trafik: for hver forbindelse strækningen i båndets farve (28 brun, 50 grøn, 70 cyan, 144 orange, 222 lyserød, 432 violet), de to stationer og skyen af de mest sandsynlige spor på det tidspunkt. Nyankomne spots blinker i et minut.
+P|Et azimutalt ækvidistant kort centreret på din station med al indsamlet meteor scatter-trafik: for hver forbindelse strækningen i båndets farve (28 brun, 50 grøn, 70 cyan, 144 orange, 222 lyserød, 432 violet), de to stationer og sværmzone af de mest sandsynlige spor på det tidspunkt. Nyankomne spots blinker i et minut.
 LI|Kortradius: 600-3500 km. Spots der vises: seneste 3, 15 eller 30 minutter, seneste time, seneste 3 eller 24 timer.
-LI|Et klik på en strækning eller på en række i tabellen fremhæver forbindelsen og viser skyens centrum, dens højde og dens dimensioner.
+LI|Mercatorkortet flyttes ved at trække det med musen; dobbeltklik: centreret på min station igen. Det azimutale kort forbliver centreret på min station.
+LI|Et klik på en strækning eller på en række i tabellen fremhæver forbindelsen og viser sværmzones centrum, dens højde og dens dimensioner.
+LI|Detaljerne for den valgte forbindelse eller lyttende station vises i en hævet boks over kortet, øverst til venstre, både med azimutal- og Mercatorprojektion.
 LI|Vis hvem der lytter: trekanter i båndets farve markerer de stationer, der ifølge PSKReporter modtager MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvindue. Et klik på en trekant viser kaldesignal, lokator, modes og sidste spot. MQTT-strømmen i fanen Dataindsamling skal være forbundet.
 LI|Også de aktive monitorer på PSKReporter-kortet: tomme trekanter for stationer, der ses på kortet hos pskreporter.info i MSK144, FSK441, PSK2K eller JTMS, men endnu ikke har modtaget noget spot (MQTT sender kun stationer, der modtager noget). YA-MS spørger PSKReporters opslagstjeneste én mode ad gangen, hvert 3. YA-MS spørger PSKReporters opslagstjeneste én gang hvert 5. minut for alle modes, som tjenestens regler beder om; en monitor bliver på kortet i mindst 11 minutter. minut, som tjenestens regler beder om. Et klik på trekanten viser kaldesignal, lokator, dekoderprogram og tidspunktet, hvor monitoren var aktiv. Tændt fra start.
-LI|FT8 over 1100 km uden parallelle strækninger: et FT8-spot (fra PSKReporter MQTT, klustrene eller WSJT-X via UDP) mellem stationer mere end 1100 km fra hinanden, som ikke har parallelle strækninger i de 3 minutter før og efter (samme bånd, midtpunkt inden for 300 km, retning inden for 20°, et andet stationspar), tegnes lysegrønt, og dets række i tabellen nederst til højre blinker altid. Sporadisk E og tropo giver mange nære, parallelle strækninger; et enligt spot kan være et meteorspor. Derfor modtager YA-MS også FT8-spots fra MQTT på 6 m, 4 m, 2 m, 1,25 m og 70 cm (ikke 10 m, for mange). Disse spots kommer ikke i MS-arkivet. Tændt fra start.
+LI|FT8 over 1100 km uden parallelle strækninger: et FT8-spot (fra PSKReporter MQTT, klustrene eller WSJT-X via UDP) mellem stationer mere end 1100 km fra hinanden, som ikke har parallelle strækninger i de 3 minutter før og efter (samme bånd, midtpunkt inden for 300 km, retning inden for 15°, et andet stationspar), tegnes lysegrønt, og dets række i tabellen nederst til højre blinker altid. Sporadisk E og tropo giver mange nære, parallelle strækninger; et enligt spot kan være et meteorspor. Derfor modtager YA-MS også FT8-spots fra MQTT på 6 m, 4 m, 2 m, 1,25 m og 70 cm (aldrig 28 MHz, under ingen omstændigheder). Disse spots kommer ikke i MS-arkivet. Tændt fra start. Ekstra kontroller med PSKReporter MQTT: spottet er ikke isoleret, hvis den modtagende station i MQTT hører andre stationer over 1100 km på samme bånd inden for 3 minutter (åbent bånd); spots fra klustre og RBN tæller kun, hvis samme par også kommer via MQTT; RBN-skimmere (kaldesignaler med «-#») tæller aldrig.
 LI|WSJT-X-spots via UDP, der vedrører din station (dekodningen indeholder dit kaldesignal: den, der kalder dig eller svarer dig), tegnes med en stiplet linje, der altid blinker, i alle modes og på alle afstande.
+LI|Udveksling mellem YA-MS-brugere: når en anden YA-MS-bruger via UDP dekoder en besked til din station (i MSK144, FSK441, PSK2K eller JTMS, eller i FT8 over 1100 km), sender hans YA-MS den krypteret til dig via tre offentlige MQTT-mæglere (HiveMQ, Mosquitto, EMQX); du ser den som en violet stiplet linje, der altid blinker, og som en linje i UDP-konsollen. Kun du kan læse den (ECDH P-256-nøgler, AES-256 og HMAC-SHA256). FT8-spots vises kun, hvis de ikke har parallelle strækninger inden for 3 minutter. Tændt fra start; yams_scambio=0 i data/config.ini slår det fra.
 LI|Spots fra alle bånd vises, også fra bånd der ikke er valgt i Dataindsamling (de gemmes ikke). CW-spots og spots mellem stationer, der ligger for tæt, vises ikke, hvis de kasseres i Dataindsamling.
-LI|Kortet viser kaldesignalerne for begge stationer i hvert spot, én gang pr. station. Projektionen kan være azimutal (centreret på din station) eller Mercator. Værktøjstippet på kolonnen Sky forklarer betydningen.
+LI|Kortet viser kaldesignalerne for begge stationer i hvert spot, én gang pr. station. Projektionen kan være azimutal (centreret på din station) eller Mercator. Værktøjstippet på kolonnen sværmzone forklarer betydningen.
 H2|9.2 Radarflux
 P|Timetællingerne af meteorer og sporhøjderne fra SKiYMET-radaren i Collm (36,2 MHz) og det seneste billede fra radaren i Sodankylä (36,9 MHz).
-LI|Hent nu og Automatisk opdatering af alle kilder hvert 5. minut: hver kilde hentes kun igen, hvis den er ændret.
+LI|Hent nu og Automatisk opdatering af alle kilder hvert 5. minut: hver kilde hentes kun igen, hvis den er ændret. Den automatiske opdatering indstilles under fanen Indstillinger.
 LI|λ-eksponent (SM6FHZ): eksponenten for estimatet på dit bånd (orange linje på skalaen til højre).
 LI|Sporhøjder: histogram med typetal, middelværdi, median og standardafvigelse; med »fra radar« bliver typetallet højden i alle beregninger.
 TAG|ATTENZIONE|Hvis skalaen i Collm-grafen ikke kan aflæses, vises en orange advarsel, og værdierne skal kontrolleres. Uden forbindelse bruger programmet de senest gemte data, siger det én gang og prøver selv igen hvert 5. minut; statuslinjen bliver rød, indtil forbindelsen vender tilbage.
@@ -187,8 +191,9 @@ LI|Filteret accepterer spots på de typiske meteor scatter-frekvenser (50190-503
 LI|CW-spots kasseres med det samme (CW eller WPM i kommentaren, eller 28000-28070 kHz): de vises ikke i konsollen og gemmes ikke, undtagen dem der er mærket <MS>. Feltet kan slås fra.
 LI|Spots mellem stationer tættere end 500 km kasseres straks, fordi forbindelsen på den afstand er direkte eller troposfærisk og ikke meteor scatter: de vises ikke i konsollen og gemmes ikke. Mangler en locator, beholdes spottet. Afstanden ændres under feltet.
 LI|Manglende lokatorer hentes fra CALL3-arkivet; accepterede spots gemmes i data/spot_ms, én fil pr. dag, og vises på kortet i Live-trafik.
-LI|CALL3-database med reglerne fra LIVETROPOVHF. »Opdatér nu« henter CALL3.TXT fra MMMonVHF (mindst 100.000 gyldige linjer, den forrige bliver i data/call3.bak); med »Opdatér selv hver 7. dag« sker det ved start. Over filen gælder i rækkefølge: håndindtastninger (data/CALL3-MANUALE.TXT), cluster-rettelser (den 6-tegns locator, som spotteren angiver for sig selv), tilføjede filer (data/CALL3-AGGIUNTE), derefter CALL3.TXT og 6-tegns locatorer lært live (data/LOC6.TXT). En modtaget locator på 4 tegn, eller som ender på LL eller MM, erstattes af den 6-tegns fra databasen; portable (med skråstreg) kun med den præcise indtastning.
-LI|Sidste kilde, som i LIVETROPOVHF: for kaldesignaler uden 6-tegns locator i nogen anden kilde spørger programmet automatisk hver 6. time G7VRD's offentlige API (api.g7vrd.co.uk), i grupper på 40 kaldesignaler; hvert kaldesignal højst én gang om dagen. Kun en 6-tegns locator accepteres, ikke feltets midte (LL eller MM), i samme felt som den modtagne. Resultaterne ligger i data/CALL3-G7VRD.TXT og skrives, som alle rettelser, også ind i data/call3.txt.
+LI|CALL3-database med reglerne fra LIVETROPOVHF. »Opdatér nu« henter CALL3.TXT fra MMMonVHF (mindst 100.000 gyldige linjer, den forrige bliver i data/call3.bak); med »Opdatér selv hver 12. time« sker det ved start. Over filen gælder i rækkefølge: håndindtastninger (data/CALL3-MANUALE.TXT), cluster-rettelser (den 6-tegns locator, som spotteren angiver for sig selv), tilføjede filer (data/CALL3-AGGIUNTE), derefter CALL3.TXT og 6-tegns locatorer lært live (data/LOC6.TXT). En modtaget locator på 4 tegn, eller som ender på LL eller MM, erstattes af den 6-tegns fra databasen; portable (med skråstreg) kun med den præcise indtastning.
+LI|Sidste kilde, som i LIVETROPOVHF: for kaldesignaler uden 6-tegns locator i nogen anden kilde spørger programmet automatisk hvert 30. minut G7VRD's offentlige API (api.g7vrd.co.uk), i grupper på 40 kaldesignaler; hvert kaldesignal højst én gang om dagen. Kun en 6-tegns locator accepteres, ikke feltets midte (LL eller MM), i samme felt som den modtagne. Resultaterne ligger i data/CALL3-G7VRD.TXT og skrives, som alle rettelser, også ind i data/call3.txt.
+LI|Efter G7VRD kommer JTDX-laget (data/grid_data.bin, omkring 365.000 kaldesignaler): det gælder kun kaldesignaler uden 6-tegns locator i alle andre kilder, kun i samme felt som den modtagne, og skrives aldrig ind i data/call3.txt.
 H1|10. Live-sværme og sværmkatalog
 H2|10.1 Live-sværme
 P|Til venstre fluxen og ZHR målt af Global Meteor Network for de aktive sværme, med dagens tællinger fra GMN-kameraerne pr. sværm (en tælling, ikke en flux: den afhænger af, hvor mange stationer der ser en klar himmel); til højre radiantkortene fra CMOR-radaren, også for dagsværmene. Filerne hentes kun igen, hvis de er ændret, højst hvert 30. minut, eller med Hent nu.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC-kataloget; radar/diretta/: GMN- og CMOR-data.
 LI|call3.txt: lokatorarkiv; spot_ms/: indsamlede meteor scatter-spots; adif_quadrati.csv: felter fra ADIF-filen.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de tekniske dokumenter.
 LI|backup/: kopier af filer, der er erstattet af en opdatering; aggiornamento/: hentet pakke (slettes ved genstart).
+H2|13.3 Fanen Indstillinger
+P|Fanen Indstillinger samler programmets generelle funktion: Udseende (skrift, tema og sprog), Programopdateringer (tjek på GitHub ved start og hvert 30. minut, automatiske stille opdateringer, Tjek nu), Kilder i realtid (automatisk opdatering hvert 5. minut), RMOB (observatør, hent nu og automatisk hentning) og Program (kommandolinjer og datamappe). Beregningsparametrene bliver i kommandolinjerne over fanerne.
 H2|13.2 Nogle nøgler i config.ini
 LI|controlla_aggiornamenti=0: kontrollér ikke for nye versioner; aggiornamenti_salta: version, der er sprunget over.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: beregningens afkrydsningsfelter.
 LI|raggio_iniziale (0 = dobbelt ITU-værdi, 1 = ITU, 2 = udeladt), durata_ping (0 = λ², 1 = observeret).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: slår videresendelse til PSKReporter af MS-dekodninger (MSK144, FSK441, PSK2K, JTMS) modtaget via UDP fra. Den er tændt fra start og virker af sig selv: mangler dit kaldesignal i mere end 20 minutter blandt stationerne, der sender rapporter til PSKReporter (det digitale program sender ikke), sender YA-MS hvert 5. minut de MS-stationer, du dekoder, med dig som modtager; så snart det digitale program sender igen, stopper YA-MS. En linje i UDP-konsollen viser, hvornår den starter og stopper.
+LI|psk_rimando=0: slår videresendelse til PSKReporter af MS-dekodninger (MSK144, FSK441, PSK2K, JTMS) modtaget via UDP fra. Den er tændt fra start og virker af sig selv: mangler dit kaldesignal i mere end 20 minutter blandt stationerne, der sender rapporter til PSKReporter (det digitale program sender ikke), sender YA-MS hvert 5. minut de MS-stationer, du dekoder, med dig som modtager; så snart det digitale program sender igen, stopper YA-MS. En linje i UDP-konsollen viser, hvornår den starter og stopper. Er afsendelse til PSKReporter slået fra i WSJT-X.ini (eller JTDX.ini), videresender YA-MS straks uden at vente 20 minutter.
 TAG|ATTENZIONE|Redigér kun config.ini, mens programmet er lukket: når YA-MS lukkes, skriver det filen igen.
 H1|14. Typiske fremgangsmåder
 H2|14.1 Forberede et sked på en sværm

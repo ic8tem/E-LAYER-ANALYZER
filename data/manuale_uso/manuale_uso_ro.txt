@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare YA-MS
-SUB|Versiunea 1.8.11 - realizată de Costantino IC8TEM - noiembrie 2026
+SUB|Versiunea 1.8.15 - realizată de Costantino IC8TEM - noiembrie 2026
 H1|1. Introducere
 H2|1.1 La ce folosește YA-MS
 P|YA-MS vă ajută să prevedeți și să urmăriți în direct condițiile de meteor scatter între stația dumneavoastră și un corespondent, de la 28 la 432 MHz. Pentru fiecare roi meteoric activ arată în ce măsură poziția radiantului său favorizează traseul dumneavoastră (eficiența), în ce ore, din ce parte a traseului sosesc reflexiile și încotro este bine să orientați antena. Pe lângă prognoză, afișează datele măsurate în direct: numărătorile radarului meteoric de la Collm, camerele Global Meteor Network, radarul CMOR, emițătorul GRAVES și traficul meteor scatter colectat din clustere și din PSKReporter.
@@ -26,7 +26,7 @@ P|La pornire apare pentru câteva secunde ecranul cu Perseidele deasupra telesco
 H2|2.3 Dosarul data
 P|Toate setările și toate datele se află într-un singur dosar data lângă program: fără AppData, fără dosare de sistem. Pentru a muta YA-MS pe alt calculator este suficient să copiați dosarul programului împreună cu dosarul său data. Conținutul dosarului este descris în capitolul 13.
 H2|2.4 Actualizări automate
-P|Începând cu versiunea 1.8.11 actualizările sunt automate și silențioase: la pornire și apoi la fiecare 6 ore YA-MS verifică GitHub și, dacă există o versiune nouă, o descarcă, o instalează și repornește singur fără să întrebe nimic (doar bara de stare o spune). Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra descrisă mai jos apare doar apăsând "Actualizări" sau dacă scrii aggiornamenti_automatici=0 în fișierul data/config.ini.
+P|Începând cu versiunea 1.8.6 actualizările sunt automate și silențioase: la pornire și apoi la fiecare 30 de minute YA-MS verifică GitHub și, dacă există o versiune nouă, o descarcă, o instalează și repornește singur fără să întrebe nimic (doar bara de stare o spune). Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra descrisă mai jos apare doar apăsând "Actualizări" sau dacă scrii aggiornamenti_automatici=0 în fișierul data/config.ini.
 P|Începând cu versiunea 1.8.0, YA-MS verifică singur pe GitHub, la pornire și cel mult o dată pe zi, dacă a apărut o versiune nouă. Dacă există, apare fereastra „Actualizare disponibilă” cu noutățile și trei butoane:
 LI|Actualizează acum: descarcă pachetul potrivit pentru sistemul dumneavoastră, înlocuiește fișierele programului, păstrează dosarul data și repornește YA-MS. Fișierele programului din dosarul data pe care noua versiune le modifică sunt mai întâi copiate în data/backup/v<versione vecchia>; fișierele dumneavoastră (setări, arhive, spoturi, ADIF) nu sunt atinse.
 LI|Mai târziu: închide fereastra; verificarea se repetă a doua zi.
@@ -38,7 +38,7 @@ H2|2.5 Fișiere ale programului lipsă
 P|La pornire YA-MS verifică dacă are toate fișierele sale (traduceri, cataloage, documente). Dacă lipsește vreunul, de exemplu după o copiere incompletă, fereastra „Fișiere lipsă” le enumeră și propune „Descarcă fișierele lipsă” de pe GitHub, în aceeași versiune a programului, sau „Continuă fără ele”. Aceeași verificare se repetă la apăsarea butonului „Actualizări”.
 H1|3. Fereastra principală
 H2|3.1 Părțile ferestrei
-LI|Sus, trei rânduri de comenzi valabile pentru toate filele: stații și bandă, stratul E și antenă, ora calculului (capitolul 4).
+LI|Sus, două rânduri de comenzi valabile pentru toate filele: stratul E și antenă, ora calculului (capitolul 4). Stația dvs. (locator, altitudine, bandă și Calculează) este în dreapta sus în Trafic în direct.
 LI|Bara filelor principale, cu butonul Comenzi în dreapta, schema de culori (Temă) și limba.
 LI|Sub-filele, pe un rând mai deschis, pentru filele care le au.
 LI|Jos, bara de stare: mesajele calculului, avertismentele privind conexiunea și butonul „Actualizări”.
@@ -50,22 +50,22 @@ LI|Documente tehnice, ultima: Manual de utilizare, Surse, Harta radarelor europe
 H2|3.3 Limbă, culori, font
 LI|Limba: 36 de limbi. La schimbarea limbii fereastra se reconstruiește în aceeași poziție și pe aceeași filă, fără repornire. Numerele și datele urmează limba aleasă (virgulă zecimală în română, punct în engleză).
 LI|Temă: 12 scheme de culori; Luminos este cea implicită, Noapte și Negru sunt pentru întuneric, Dâră meteorică este stilul original al YA-MS.
-LI|Caractere (la capătul primului rând de comenzi): micșorează sau mărește tot textul de la 85 la 140 %, în pași de 5 %. Cu caractere mari filele trec pe mai multe rânduri.
-LI|Comenzi: pliază și redeschide cele trei rânduri de comenzi, pentru a face loc hărților și graficelor. Alegerea este memorată.
+LI|Caractere (Setări): micșorează sau mărește tot textul de la 85 la 140 %, în pași de 5 %. Cu caractere mari filele trec pe mai multe rânduri.
+LI|Comenzi: pliază și redeschide cele două rânduri de comenzi, pentru a face loc hărților și graficelor. Alegerea este memorată.
 TAG|NOTA|Aproape fiecare comandă are un balon de ajutor: țineți mouse-ul nemișcat deasupra comenzii pentru a citi la ce servește și din ce sursă provine valoarea implicită.
 H1|4. Configurarea stației și a traseului
-H2|4.1 Rândul 1: stații și bandă
+H2|4.1 Stația mea (Trafic în direct)
 LI|Locatorul meu și altitudine m: locatorul dumneavoastră Maidenhead (4, 6 sau 8 caractere; se folosește centrul pătratului) și altitudinea stației deasupra nivelului mării.
 LI|Bandă MHz: 28, 50, 70, 144, 222 sau 432 MHz. Servește pentru câștigul și lobul antenei, pentru atenuare și bilanț și pentru estimarea fluxului.
 LI|Calculează: recalculează traseul (eșantionarea stratului E, sub o secundă).
-H2|4.2 Rândul 2: stratul E și antena
+H2|4.2 Rândul 1: stratul E și antena
 LI|Altitudine dâre km și de la radar: altitudinea dârelor meteorice. Cu „de la radar” bifat se folosește altitudinea cea mai frecventă măsurată de radarul de la Collm (de obicei 88-90 km); debifați pentru a o scrie manual.
 LI|Elevație lob °: elevația maximului lobului vertical al antenei dumneavoastră. O antenă directivă fixată la 0° are totuși lobul principal la câteva grade deasupra orizontului, din cauza reflexiei pe sol: de obicei 3-8°, în funcție de înălțimea antenei în lungimi de undă.
 LI|diagrama antenei: activată (implicit), punctele de reflexie contează cu câștigul vertical al celor două antene: complet în jurul maximului lobului, din ce în ce mai puțin spre orizont și spre în sus. Dezactivată, elevația lobului este o limită netă: punctele văzute mai jos nu contează.
 LI|Antenă Yagi: boom m: lungimea boom-ului. Alături programul afișează lungimea în lungimi de undă, câștigul (curba DL6WU) și lobul la -3 dB orizontal și vertical. Sub 2 λ estimarea este puțin precisă.
 LI|Hot spot de la punctul de mijloc km și auto (AMS): distanța dintre Hot A și Hot B și punctul de mijloc. Cu „auto (AMS)” bifat urmează tabelul lui J. Richardson citat de DJ5HG (abatere de 13° la 1000 km, 10° peste 1500 km); debifați pentru a scrie manual 30-400 km (MSHV folosește 150 km).
 TAG|ATTENZIONE|Cu „diagrama antenei” dezactivată și lobul la câteva grade, pe un traseu lung cele două stații pot să nu vadă niciun punct comun al stratului: toate eficiențele sunt 0 și apare avertismentul „NICIO ZONĂ COMUNĂ” cu lobul sau altitudinea dârelor care ar fi necesare. Exemplu: JN70CN - JO76QP, 1791 km, lob la 3°, dâre la 88,5 km.
-H2|4.3 Rândul 3: ora calculului
+H2|4.3 Rândul 2: ora calculului
 LI|Ora: ceas UTC.
 LI|Data calculului (UTC): ziua calculului. Este valabilă pentru Calcul de prognoză, pentru tabelul de 24 de ore din Calculul eficienței și pentru cronologia din Radar GRAVES. Implicit este ziua de azi, iar la miezul nopții trece la ziua nouă.
 LI|Ore (de la −12 la +36 h): deplasează momentul calculului, în pași de 15 minute. Alături: „Calcul pentru: acum” sau data și ora alese.
@@ -78,7 +78,8 @@ P|Prima sub-filă a grupului Calcul de prognoză arată pe un singur ecran unde 
 H2|5.1 Banda de rezumat
 P|Deasupra hărții, o bandă rezumă calculul pentru acel moment: data și ora, indicele traseului (suma ZHR × eficiență a roiurilor active), roiul cel mai util cu ZHR-ul și eficiența sa (și în dB față de referința DJ5HG), numărul de roiuri deasupra orizontului și Hot-ul recomandat cu azimutul său.
 H2|5.2 Harta în plan
-P|Lângă hartă, în dreapta, este o singură coloană. Sus, caseta corespondentului: întâi orientarea antenei (Azimut antenă, mereu spre corespondent), apoi indicativul (scrieți-l și apăsați Enter: locatorul se ia din baza CALL3, ca în YAEC și LIVETROPOVHF), locatorul și altitudinea. Indicativul se poate scrie și în caseta locatorului. Jos, legenda simbolurilor hărții: un clic pe titlu o pliază; culorile radianților apar când harta Europei este oprită.
+P|Lângă hartă, în dreapta, este o singură coloană. Sus, caseta corespondentului: întâi orientarea antenei (Azimut antenă, mereu spre corespondent), apoi indicativul (scrieți-l și apăsați Enter: locatorul se ia din baza CALL3, ca în YAEC și LIVETROPOVHF), locatorul și altitudinea. Indicativul se poate scrie și în caseta locatorului. Jos, legenda simbolurilor hărții: un clic pe titlu o pliază.
+P|Dacă scrii pentru acel indicativ un locator diferit de cel din arhivă, se activează butonul «Salvează» de lângă caseta locatorului: apăsându-l, noul locator devine o intrare manuală (data/CALL3-MANUALE.TXT, care are prioritate față de toate celelalte surse) și este scris imediat și în data/call3.txt.
 P|În stânga, harta Europei văzută de sus (estul la dreapta), cu scala gradelor de jur împrejur:
 LI|linia verde: traseul real între cei doi locatori;
 LI|Hot A și Hot B: cele două hot spot-uri de o parte și de alta a punctului de mijloc. Roșu = recomandat, roz = în afara lobului antenei, gri = deja în interiorul lobului (cu un avertisment);
@@ -150,7 +151,7 @@ LI|Frecvența țintă MHz: frecvența prognozei.
 LI|Exponent λ^k (3, SM6FHZ) și Factor de stație K (1): regula de frecvență și corecția pentru stația dumneavoastră.
 LI|k din indicii de populație: propune k din indicii de populație r ai roiurilor active (GMN, altfel IMO; k = 3,75 · log10 r, ponderat cu ZHR) și cere confirmare înainte de a-l aplica.
 LI|Încarcă fișier RMOB de pe disc și Obține exponentul din fișierul RMOB: citesc un fișier lunar RMOB și obțin k din orele comune cu Collm.
-LI|Observator RMOB, Descarcă RMOB acum și preluare automată la fiecare 5 minute: preluarea automată este dezactivată și trebuie activată numai cu permisiunea RMOB.
+LI|Observator RMOB, Descarcă RMOB acum și preluare automată la fiecare 5 minute: preluarea automată este dezactivată și trebuie activată numai cu permisiunea RMOB. Aceste comenzi sunt în fila Setări.
 H2|8.2 Rezultatele
 LI|Graficul de ieri și de azi: meteori pe oră la Collm, valorile transpuse pe frecvența dumneavoastră și, dacă sunt încărcate, numărătorile RMOB.
 LI|Prognoza pentru următoarele 24 de ore: aceeași oră din ziua precedentă, corectată cu variația indicelui roiurilor pentru traseu.
@@ -158,18 +159,21 @@ LI|Tabelul cu aprecierea: bun, mediu sau slab față de media celor 24 de ore.
 TAG|NOTA|Durata reflexiilor urmează alegerea „Durata pingurilor între benzi” din Geometrie și atenuare; în forward scatter durata crește și cu sec²φ în punctul de mijloc al traseului.
 H1|9. Live și date în timp real
 H2|9.1 Trafic în direct
-P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot traficul meteor scatter colectat: pentru fiecare legătură, traseul în culoarea benzii (28 maro, 50 verde, 70 cyan, 144 portocaliu, 222 roz, 432 violet), cele două stații și norul dârelor cele mai probabile la acea oră. Spoturile tocmai sosite clipesc timp de un minut.
+P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot traficul meteor scatter colectat: pentru fiecare legătură, traseul în culoarea benzii (28 maro, 50 verde, 70 cyan, 144 portocaliu, 222 roz, 432 violet), cele două stații și zona roiului dârelor cele mai probabile la acea oră. Spoturile tocmai sosite clipesc timp de un minut.
 LI|Raza hărții: 600-3500 km. Spoturi de afișat: ultimele 3, 15 sau 30 de minute, ultima oră, ultimele 3 sau 24 de ore.
+LI|Harta Mercator se mută trăgând-o cu mouse-ul; dublu clic: din nou centrată pe stația mea. Harta azimutală rămâne centrată pe stația mea.
 LI|Un clic pe un traseu sau pe un rând al tabelului evidențiază legătura și arată centrul norului, altitudinea și dimensiunile sale.
+LI|Detaliile legăturii sau ale stației în ascultare alese apar într-un cadru în relief deasupra hărții, sus în stânga, atât cu proiecția azimutală, cât și cu Mercator.
 LI|Arată cine ascultă: triunghiuri în culoarea benzii marchează stațiile care, după PSKReporter, recepționează MSK144, FSK441, PSK2K sau JTMS pe 28, 50, 70, 144 și 432 MHz în fereastra de timp aleasă. Un clic pe un triunghi arată indicativul, locatorul, modurile și ultimul spot. Fluxul MQTT din fila Colectare date trebuie să fie conectat.
 LI|Și monitoarele active de pe harta PSKReporter: triunghiuri goale pentru stațiile care apar pe harta pskreporter.info în MSK144, FSK441, PSK2K sau JTMS dar nu au recepționat încă niciun spot (MQTT trimite doar stațiile care recepționează ceva). YA-MS interoghează serviciul de consultare PSKReporter o dată la 5 minute pentru toate modurile, cum cer regulile serviciului; un monitor rămâne pe hartă cel puțin 11 minute. Un clic pe triunghi arată indicativul, locatorul, programul de decodare și ora la care monitorul era activ. Activat implicit.
-LI|FT8 peste 1100 km fără trasee paralele: un spot FT8 (din PSKReporter MQTT, din clustere sau din WSJT-X prin UDP) între stații aflate la peste 1100 km care nu are trasee paralele în cele 3 minute dinainte și de după (aceeași bandă, punct de mijloc la cel mult 300 km, direcție în 20°, altă pereche de stații) se desenează în verde deschis, iar rândul său din tabelul din dreapta jos clipește mereu. E sporadic și tropo dau multe trasee apropiate și paralele; un spot izolat poate fi o urmă meteorică. De aceea YA-MS primește prin MQTT și spoturile FT8 de pe 6 m, 4 m, 2 m, 1,25 m și 70 cm (nu cele de pe 10 m, prea multe). Aceste spoturi nu intră în arhiva MS. Activat implicit.
+LI|FT8 peste 1100 km fără trasee paralele: un spot FT8 (din PSKReporter MQTT, din clustere sau din WSJT-X prin UDP) între stații aflate la peste 1100 km care nu are trasee paralele în cele 3 minute dinainte și de după (aceeași bandă, punct de mijloc la cel mult 300 km, direcție în 15°, altă pereche de stații) se desenează în verde deschis, iar rândul său din tabelul din dreapta jos clipește mereu. E sporadic și tropo dau multe trasee apropiate și paralele; un spot izolat poate fi o urmă meteorică. De aceea YA-MS primește prin MQTT și spoturile FT8 de pe 6 m, 4 m, 2 m, 1,25 m și 70 cm (niciodată 28 MHz, în niciun caz). Aceste spoturi nu intră în arhiva MS. Activat implicit. Verificări suplimentare cu PSKReporter MQTT: spotul nu este izolat dacă stația receptoare aude în MQTT alte stații de peste 1100 km pe aceeași bandă în 3 minute (bandă deschisă); spoturile din clustere și RBN contează doar dacă aceeași pereche vine și din MQTT; skimmerele RBN (indicative cu «-#») nu contează niciodată.
 LI|Spoturile WSJT-X prin UDP care privesc stația dvs. (decodarea conține indicativul dvs.: cine vă cheamă sau vă răspunde) se desenează cu o linie întreruptă care clipește mereu, în orice mod și la orice distanță.
+LI|Schimb între utilizatorii YA-MS: când un alt utilizator YA-MS decodează prin UDP un mesaj adresat stației dvs. (în MSK144, FSK441, PSK2K sau JTMS, ori în FT8 peste 1100 km), YA-MS-ul lui vi-l trimite criptat prin trei brokeri MQTT publici (HiveMQ, Mosquitto, EMQX); îl vedeți ca linie întreruptă violet care clipește mereu și ca rând în consola UDP. Doar dvs. îl puteți citi (chei ECDH P-256, AES-256 și HMAC-SHA256). Spoturile FT8 apar doar dacă nu au trasee paralele în 3 minute. Activat implicit; yams_scambio=0 în data/config.ini îl oprește.
 LI|Se văd spoturile tuturor benzilor, inclusiv ale celor nealese în Colectarea datelor (acestea nu se memorează). Spoturile CW și cele între stații prea apropiate nu se văd, dacă sunt eliminate în Colectarea datelor.
-LI|Harta scrie indicativele ambelor stații ale fiecărui spot, o singură dată pe stație. Proiecția se alege între azimutală (centrată pe stația ta) și Mercator. Indiciul de pe coloana Nor îi explică semnificația.
+LI|Harta scrie indicativele ambelor stații ale fiecărui spot, o singură dată pe stație. Proiecția se alege între azimutală (centrată pe stația ta) și Mercator. Indiciul de pe coloana zona roiului îi explică semnificația.
 H2|9.2 Flux radar
 P|Numărătorile orare ale meteorilor și altitudinile dârelor de la radarul SKiYMET de la Collm (36,2 MHz) și ultima imagine a radarului de la Sodankylä (36,9 MHz).
-LI|Descarcă acum și Actualizare automată a tuturor surselor la fiecare 5 minute: fiecare sursă este descărcată din nou numai dacă s-a schimbat.
+LI|Descarcă acum și Actualizare automată a tuturor surselor la fiecare 5 minute: fiecare sursă este descărcată din nou numai dacă s-a schimbat. Actualizarea automată se setează în fila Setări.
 LI|Exponent λ (SM6FHZ): exponentul estimării pentru banda dumneavoastră (linia portocalie pe scala din dreapta).
 LI|Altitudinile dârelor: histogramă cu modul, media, mediana și abaterea standard; cu „de la radar”, modul devine altitudinea folosită în toate calculele.
 TAG|ATTENZIONE|Dacă scala graficului de la Collm nu poate fi citită, apare un avertisment portocaliu și valorile trebuie verificate. Fără conexiune, programul folosește ultimele date salvate, anunță acest lucru o dată și reîncearcă singur la fiecare 5 minute; bara de stare devine roșie până când conexiunea revine.
@@ -187,8 +191,9 @@ LI|Filtrul acceptă spoturile pe frecvențele tipice pentru meteor scatter (5019
 LI|Spoturile CW sunt eliminate imediat (CW sau WPM în comentariu, sau 28000-28070 kHz): nu apar în consolă și nu se salvează, cu excepția celor marcate <MS>. Căsuța se poate dezactiva.
 LI|Spoturile între stații aflate la mai puțin de 500 km se elimină imediat, deoarece la această distanță legătura este directă sau troposferică, nu meteor scatter: nu apar în consolă și nu se memorează. Dacă lipsește un locator, spotul rămâne. Distanța se schimbă sub căsuță.
 LI|Locatorii lipsă sunt luați din arhiva CALL3; spoturile acceptate ajung în data/spot_ms, un fișier pe zi, și pe harta din Trafic în direct.
-LI|Baza CALL3 cu regulile LIVETROPOVHF. „Actualizează acum" descarcă CALL3.TXT de la MMMonVHF (cel puțin 100.000 de rânduri valide, cel anterior rămâne în data/call3.bak); cu „Actualizează singur la fiecare 7 zile" se face la pornire. Deasupra fișierului contează, în ordine: intrările manuale (data/CALL3-MANUALE.TXT), corecturile din cluster (locatorul de 6 caractere pe care cel care face spotul îl declară despre sine), fișierele adăugate (data/CALL3-AGGIUNTE), apoi CALL3.TXT și locatoarele de 6 caractere învățate live (data/LOC6.TXT). Un locator primit de 4 caractere, sau terminat în LL ori MM, se înlocuiește cu cel de 6 caractere din bază; stațiile portabile (cu bară) doar cu intrarea exactă.
-LI|Ultima sursă, ca în LIVETROPOVHF: pentru indicativele fără locator de 6 caractere în nicio altă sursă, programul întreabă automat la fiecare 6 ore API-ul public G7VRD (api.g7vrd.co.uk), în grupuri de 40 de indicative; fiecare indicativ cel mult o dată pe zi. Se acceptă doar un locator de 6 caractere, nu centrul pătratului (LL sau MM), în același pătrat cu cel primit. Rezultatele sunt în data/CALL3-G7VRD.TXT și, ca toate corecturile, se scriu și în data/call3.txt.
+LI|Baza CALL3 cu regulile LIVETROPOVHF. „Actualizează acum" descarcă CALL3.TXT de la MMMonVHF (cel puțin 100.000 de rânduri valide, cel anterior rămâne în data/call3.bak); cu „Actualizează singur la fiecare 12 ore" se face la pornire. Deasupra fișierului contează, în ordine: intrările manuale (data/CALL3-MANUALE.TXT), corecturile din cluster (locatorul de 6 caractere pe care cel care face spotul îl declară despre sine), fișierele adăugate (data/CALL3-AGGIUNTE), apoi CALL3.TXT și locatoarele de 6 caractere învățate live (data/LOC6.TXT). Un locator primit de 4 caractere, sau terminat în LL ori MM, se înlocuiește cu cel de 6 caractere din bază; stațiile portabile (cu bară) doar cu intrarea exactă.
+LI|Ultima sursă, ca în LIVETROPOVHF: pentru indicativele fără locator de 6 caractere în nicio altă sursă, programul întreabă automat la fiecare 30 de minute API-ul public G7VRD (api.g7vrd.co.uk), în grupuri de 40 de indicative; fiecare indicativ cel mult o dată pe zi. Se acceptă doar un locator de 6 caractere, nu centrul pătratului (LL sau MM), în același pătrat cu cel primit. Rezultatele sunt în data/CALL3-G7VRD.TXT și, ca toate corecturile, se scriu și în data/call3.txt.
+LI|După G7VRD vine stratul JTDX (data/grid_data.bin, circa 365.000 de indicative): se aplică doar indicativelor fără locator de 6 caractere în toate celelalte surse, doar în același pătrat cu cel primit, și nu se scrie niciodată în data/call3.txt.
 H1|10. Roiuri în direct și catalogul roiurilor
 H2|10.1 Roiuri în direct
 P|În stânga, fluxul și ZHR-ul măsurate de Global Meteor Network pentru roiurile active, cu numărătorile zilnice ale camerelor GMN pe roi (o numărătoare, nu un flux: depinde de câte stații văd cerul senin); în dreapta, hărțile radianților de la radarul CMOR, inclusiv cele ale roiurilor diurne. Fișierele sunt descărcate din nou numai dacă s-au schimbat, cel mult la fiecare 30 de minute, sau cu Descarcă acum.
@@ -220,12 +225,14 @@ LI|cataloghi/: catalogul IAU MDC; radar/diretta/: date GMN și CMOR.
 LI|call3.txt: arhiva locatorilor; spot_ms/: spoturile meteor scatter colectate; adif_quadrati.csv: pătratele din ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: documentele tehnice.
 LI|backup/: copii ale fișierelor înlocuite de o actualizare; aggiornamento/: pachetul descărcat (șters la repornire).
+H2|13.3 Fila Setări
+P|Fila Setări adună funcționarea generală a programului: Aspect (font, temă și limbă), Actualizările programului (verificare pe GitHub la pornire și la fiecare 30 de minute, actualizări automate și silențioase, Verifică acum), Surse în direct (actualizare automată la fiecare 5 minute), RMOB (observator, descărcare imediată și preluare automată) și Program (rândurile de comenzi și dosarul de date). Parametrii calculului rămân în rândurile de comenzi de deasupra filelor.
 H2|13.2 Câteva chei din config.ini
 LI|controlla_aggiornamenti=0: nu verifica versiunile noi; aggiornamenti_salta: versiunea sărită.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: casetele calculului.
 LI|raggio_iniziale (0 = dublul valorii ITU, 1 = ITU, 2 = exclus), durata_ping (0 = λ², 1 = observată).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: oprește retrimiterea către PSKReporter a decodărilor MS (MSK144, FSK441, PSK2K, JTMS) primite prin UDP. Este activă implicit și lucrează singură: dacă indicativul dvs. lipsește de peste 20 de minute dintre stațiile care trimit rapoarte la PSKReporter (programul digital nu trimite), YA-MS trimite la fiecare 5 minute stațiile MS pe care le decodați, cu dvs. ca receptor; imediat ce programul digital trimite din nou, YA-MS se oprește. Un rând în consola UDP arată când pornește și când se oprește.
+LI|psk_rimando=0: oprește retrimiterea către PSKReporter a decodărilor MS (MSK144, FSK441, PSK2K, JTMS) primite prin UDP. Este activă implicit și lucrează singură: dacă indicativul dvs. lipsește de peste 20 de minute dintre stațiile care trimit rapoarte la PSKReporter (programul digital nu trimite), YA-MS trimite la fiecare 5 minute stațiile MS pe care le decodați, cu dvs. ca receptor; imediat ce programul digital trimite din nou, YA-MS se oprește. Un rând în consola UDP arată când pornește și când se oprește. Dacă în WSJT-X.ini (sau JTDX.ini) trimiterea la PSKReporter este oprită, YA-MS retrimite imediat, fără să aștepte 20 de minute.
 TAG|ATTENZIONE|Modificați config.ini numai cu programul închis: la închidere YA-MS îl rescrie.
 H1|14. Proceduri tipice
 H2|14.1 Pregătirea unui sked pe un roi

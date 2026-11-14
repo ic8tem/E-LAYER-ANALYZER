@@ -5,6 +5,8 @@
 # I segnaposto {0}, {1}, ... (anche con formato, es. {0:F1}, {3:+0;-0}) vanno mantenuti nella traduzione, nell'ordine che serve alla lingua.
 # Non tradurre: sigle degli sciami, nominativi, locator, unita' di misura (km, dB, MHz, λ), nomi propri, nomi di file.
 # Voce mancante o traduzione vuota: il programma mostra il testo italiano.
+% sciame
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).
 (confermato)
 (destra)  B →
 (lettura Collm: {0})
@@ -31,8 +33,10 @@ ATTENZIONE: {0} e {1} entrano nel lobo dell'antenna ({2}° a -3 dB attorno a {3}
 ATTENZIONE: {0} entra nel lobo dell'antenna ({1}° a -3 dB attorno a {2}°): con questo puntamento e' gia' coperto. Segnati in grigio sulla mappa.
 Adesso
 Aggiorna adesso
-Aggiorna da solo ogni 7 giorni
+Aggiorna da solo ogni 12 ore
 Aggiornamenti
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere
+Aggiornamenti del programma
 Aggiornamento automatico di tutte le fonti ogni 5 minuti
 Aggiornamento di CALL3 già in corso.
 Aggiornamento di CALL3 non riuscito: {0}
@@ -60,6 +64,7 @@ Argomenti di partenza
 Arietidi di maggio Sud diurne
 Arietidi diurne
 Ascolta
+Aspetto
 Assi del flusso non trovati nella posizione attesa.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB
 Attività
@@ -97,13 +102,14 @@ Capitoli: introduzione, strato E, geometria, radiante, riflessione, efficienza, 
 Carattere
 Carica file ADIF...
 Carica file RMOB dal disco...
+Cartella dei dati
 Catalogo sciami
 Cerca su G7VRD i locator mancanti
 Che cosa fare
 Chiaro
 Chiudi
 Chiuso
-Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.
 Cluster con PSKReporter
 Cluster di DM4X con gli spot di PSKReporter (dm4x.ddns.net, porta 8500): qui arrivano le decodifiche MSK144 di WSJT-X e MSHV. In alternativa HamAlert (hamalert.org 7300, serve un account con i trigger).
 Cluster scelto dall'utente. Su ON0DXK le bande VHF sono filtrate: si abilitano con set/filter dxbm/pass 6 (poi 4, 2...). Altro esempio: hamqth.com 7300.
@@ -127,7 +133,9 @@ Contatori
 Conteggio
 Conteggio delle telecamere, non flusso: dipende da quante stazioni vedono il cielo sereno e di notte.
 Continua senza
+Controlla adesso
 Controlla la connessione a Internet, oppure scarica di nuovo il pacchetto completo dalla pagina delle release.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)
 Controlla su GitHub se c'è una versione più nuova di YA-MS e, se c'è, la installa; controlla anche che non manchino file del programma.
 Controllo degli aggiornamenti su GitHub...
 Controllo le fonti di dati esterne...
@@ -205,6 +213,7 @@ Flusso radar: nessun dato. Premi "Scarica adesso".
 Fonte
 Fonte del massimo
 Fonti
+Fonti in diretta
 Formato del grafico cambiato ({0}x{1}): lettura non possibile.
 Formato file mensile, {0}/{1}.
 Formato tabella del bollettino ({0}/{1}): se il file contiene piu' osservatori vengono letti di seguito, usa un file con un solo osservatore.
@@ -244,14 +253,17 @@ IAU MDC: soluzioni
 IL CIELO VISTO DA GRAVES
 IMO {0} (giorno)
 ITU-R P.843
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.
 Il corrispondente diventa GRAVES (JN27SI, quota 200 m) e la tratta principale viene ricalcolata
 Il file scelto non e' un file locale.
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).
 Il mio locator
 Il programma scarica il pacchetto {0}, sostituisce i suoi file, tiene la cartella data (i file del programma cambiati vengono prima copiati in data/backup) e si riavvia.
 Ilkka Yrjola OH5IY - MS-Soft (concetto di efficienza dello sciame), www.kolumbus.fi/oh5iy (sito storico)
 Importa CALL3.TXT...
 Impossibile leggere {0}: {1}
 Impostazione del calcolo:
+Impostazioni
 In forward scatter la durata cresce anche con sec²φ (φ = {0:F0}° al punto medio della tratta; Collm misura in backscatter, φ = 0): x {1:F1}, quindi un eco di 1 s a Collm dura circa {2:F0} ms sulla tratta.
 Indice della tratta Σ ZHR×η: {0}
 Indice sciami tratta
@@ -310,6 +322,7 @@ Mappa quadrati
 Mappa:
 Mappa: bordo = {0} km dalla stazione. {1}
 Media pesata con lo ZHR: k = {0:F2} (regola SM6FHZ: 3, più prudente).\n\nApplico questo esponente?
+Memorizza
 Mercatore
 Mese non indicato: uso il mese corrente.
 Meteore/ora - ieri {0} e oggi {1} (UTC)
@@ -319,6 +332,7 @@ Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)
 Mondo
 Monocerotidi di dicembre
 Mostra chi è in ascolto in MSK144, FSK441, PSK2K e JTMS (PSKReporter MQTT, triangoli)
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)
 N
 N({0:F0} MHz) = N(Collm {1:F1} MHz) x ({1:F1}/{0:F0})^{2:F2} x K = N x {3:F5} x {4:F2}.  Durata delle riflessioni x ({1:F1}/{0:F0})^2 = x {5:F4}: un eco di 1 s a {1:F1} MHz dura circa {6:F0} ms a {0:F0} MHz (ping massimo IARU a {0:F0} MHz: {7:F0} ms).\nRegole sperimentali di SM6FHZ (VUSHF 2025). Il fattore K tiene conto della stazione ricevente (potenza, antenne): si ricava confrontando con un osservatore RMOB sulla stessa banda.
 NESSUNA ZONA COMUNE: con le scie a {0:F1} km e il lobo d'antenna a {1:F1}° ogni stazione vede lo strato fino a {2:F0} km, ma il punto medio della tratta ({3:F0} km) è a {4:F0} km. Il calcolo tiene solo i punti visti da entrambe le stazioni almeno a quell'elevazione: qui non ce n'è nessuno, quindi tutte le efficienze valgono 0.
@@ -355,8 +369,6 @@ Notte
 Nuovo locator del corrispondente dalla mappa: {0}
 Nuovo locator della stazione dalla mappa: {0}
 Nuovo tentativo tra 30 s
-Nuvola
-Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).
 O
 ORA MIGLIORE DEL GIORNO
 Ora
@@ -398,6 +410,7 @@ Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il me
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}
 Previsione {0} /ora
 Previsione {0} MHz (rifl./ora)
+Programma
 Proiezione della mappa
 Pronto
 Prossimo massimo (UTC)
@@ -434,6 +447,7 @@ RMOB, Radio Meteor Observatories On Line (Pierre Terrier) - www.rmob.org; bollet
 Raccolta dati
 Raccomandazione ITU-R P.843-1 (1997): angolo beta tra scia e piano della tratta, raggio iniziale della scia, quota media in funzione della frequenza
 Radar GRAVES
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.
 Radar meteorico di Collm, Universita' di Lipsia (LIM) e IAP Kuehlungsborn - wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 Radiante:
 Raggio della mappa
@@ -491,6 +505,8 @@ Scrivi il nome dell'osservatore RMOB come compare nel nome del suo file (es. NOM
 Scrivi il nominativo del corrispondente e premi Invio: il locator si prende dall'archivio CALL3 (con le voci a mano, i file aggiunti e le correzioni). Si può scrivere il nominativo anche nella casella del locator.
 Scrivi il nominativo per il login prima di connettere.
 Segnale minimo dBm
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».
 Sequenza del fascio
 Servono scie ad almeno {0:F0} km.
 Servono sia i dati di Collm sia un file RMOB delle stesse ore.
@@ -503,9 +519,9 @@ Sorge
 Sorgente Antielio
 Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perché con il radiante basso cadono meno meteore per km².\nAccesa: come DJ5HG (2004), con il radiante basso le scie sono più lunghe (si conta lo spessore utile dello strato, 15 km, diviso il seno dell'elevazione, fino a 100 km) e soddisfano più spesso la legge di riflessione. Le due cose si compensano sopra circa 9° di elevazione: l'efficienza con il radiante basso sale, quella con il radiante alto non cambia.
 Spiegazione del calcolo dell'efficienza
-Spot MS della linguetta "Raccolta dati". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.
 Spot MS raccolti
 Spot da mostrare
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.
 Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).
 Spot meteor scatter raccolti (i più recenti in alto)
 Stazione
@@ -521,6 +537,7 @@ Tauridi Nord
 Tauridi Sud
 Tavistock, Ontario (Canada)
 Tema
+Tema e lingua sono anche in alto a destra, accanto alle linguette.
 Tempo reale
 Tipo
 Traffico MS in diretta · {0}
@@ -537,7 +554,7 @@ Tratta {0}: {1:F0} km, az. {2:F0}°
 Troppe poche ore in comune ({0}) tra Collm e il file RMOB.
 Tutti i file
 USB su 143,049 MHz (nota a circa 1 kHz) oppure 143,050 MHz, AGC lento o spento, banda audio di almeno 2,4 kHz
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.
 Un file nel formato di CALL3.TXT (nominativo,locatore; vanno bene anche punto e virgola, tabulazione e spazio) si copia in data/CALL3-AGGIUNTE e vale sopra CALL3.TXT; con più file vince l'ultimo in ordine alfabetico.
 Una voce per riga: NOMINATIVO,LOCATORE. Valgono sopra tutto, anche sopra il locatore che la stazione stessa manda.
 Univ. Lipsia / IAP Kühlungsborn
@@ -679,8 +696,6 @@ non in ascolto: {0}
 nuova parola
 nuovo dato
 nuovo dato alle {0} UTC
-nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)
-nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°
 omega-Cetidi Nord diurne
 omega-Cetidi Sud diurne
 orizzonte del fascio
@@ -742,6 +757,8 @@ versione
 visuale
 zeta-Perseidi diurne
 zona PREV
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°
 {0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)
 {0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}
@@ -767,6 +784,7 @@ zona PREV
 {0} h
 {0} h rispetto ad adesso
 {0} km dalla tua stazione
+{0} memorizzato nel CALL3: {1}
 {0} nel CALL3: {1}
 {0} non trovato nel pacchetto
 {0} non è nel CALL3: scrivi il locator a mano

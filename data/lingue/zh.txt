@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT 未连接：
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	立即丢弃距离小于（公里）的电台之间的报告，因为在此距离上通联为直达或对流层传播：它们不会出现在控制台中，也不会被保存。缺少定位符时保留该报告。
 spot entro {0} km scartati: {1}	已丢弃 {0} 公里以内的报告：{1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	显示所有波段的报告，包括数据收集中未选择的波段（这些不会被保存）。如果在数据收集中被丢弃，CW 报告和距离过近的电台之间的报告不会显示。
-Aggiorna da solo ogni 7 giorni	每 7 天自动更新
+Aggiorna da solo ogni 12 ore	每 12 小时自动更新
 Aggiornamento di CALL3 già in corso.	CALL3 正在更新中。
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 更新失败：{0}
 Aggiungi un file...	添加文件...
@@ -772,7 +772,7 @@ locator	定位符
 {0} nel CALL3: {1}	CALL3 中的 {0}：{1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} 不在 CALL3 中：请手工输入定位符
 Cerca su G7VRD i locator mancanti	在 G7VRD 上查找缺失的定位符
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	最后的来源，与 LIVETROPOVHF 相同：对于在其他任何来源中都没有 6 位定位符的呼号，程序每 6 小时自动查询 G7VRD 的公共 API（api.g7vrd.co.uk），每组 40 个呼号；每个呼号每天最多一次。只接受 6 位定位符，不接受方格中心（LL 或 MM），且须与收到的定位符在同一方格内。结果保存在 data/CALL3-G7VRD.TXT，并与所有修正一样，也写入 data/call3.txt。
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	最后的来源，与 LIVETROPOVHF 相同：对于在其他任何来源中都没有 6 位定位符的呼号，程序每 30 分钟自动查询 G7VRD 的公共 API（api.g7vrd.co.uk），每组 40 个呼号；每个呼号每天最多一次。只接受 6 位定位符，不接受方格中心（LL 或 MM），且须与收到的定位符在同一方格内。结果保存在 data/CALL3-G7VRD.TXT，并与所有修正一样，也写入 data/call3.txt。
 Ascolta	监听
 Avvia	启动
 Avvia all'apertura	打开时启动
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	无法访问 PSKReporter 地图：{0
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	超过 1100 公里且 3 分钟内无平行路径的 FT8（浅绿色，该行始终闪烁）
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	超过 1100 公里且 3 分钟内无平行路径的 FT8：不像偶发 E 层或对流层传播，可能是流星余迹散射
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP：该解码与我的电台有关
+Impostazioni	设置
+Aspetto	外观
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	主题和语言也在右上角，标签旁边。
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	在 GitHub 上检查新版本（启动时及每 30 分钟）
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	自动静默更新：无需询问即下载、安装并重启
+Controlla adesso	立即检查
+Aggiornamenti del programma	程序更新
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	不使用自动更新时，新版本发布后会出现带有“立即更新”“稍后”和“跳过此版本”的窗口。
+Fonti in diretta	实时数据源
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Collm 和 Sodankylä 雷达、Global Meteor Network、CMOR，以及（如选择）RMOB。
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	在标签上方显示命令行（与“控制”按钮相同）
+Programma	程序
+Cartella dei dati	数据文件夹
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	由 {0} 收到（YA-MS）：该消息是发给我的电台的
+% sciame	% 流星雨
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	流星雨区 {0}：{1:F0} % 的反射，{2:F0} × {3:F0} km，轴向 {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	此路径无法计算流星雨区（过短或过长）
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	点击地图上的路径或表格中的一行，查看通联及其流星雨区的详情。
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	来自“数据收集”标签页的报告。对每次通联，流星雨区表示该路径在该时刻最可能的余迹集中在何处（镜面反射，活动流星雨之和）；虚线区域 = 仅偶发流星。有一端电台在地图之外的报告不绘制；刚到达的（不到 3 分钟）闪烁一分钟。
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% 流星雨：该路径在该时刻的有用反射中落在地图所绘流星雨区内的比例（镜面反射，活动流星雨之和）。越高，好的余迹越集中在一个可以指向天线的区域。“偶发” = 没有活动流星雨提供有用反射：只剩路径两侧的偶发流星（虚线区域）。
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	墨卡托地图可用鼠标拖动；双击：重新以我的电台为中心。方位等距地图始终以我的电台为中心。
+Memorizza	保存
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	输入的定位符与 CALL3 数据库中的不同：点击以更新并保存（手动条目，同时立即写入 call3.txt）。
+{0} memorizzato nel CALL3: {1}	{0} 已保存到 CALL3：{1}

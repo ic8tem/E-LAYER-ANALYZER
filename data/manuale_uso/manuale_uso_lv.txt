@@ -1,5 +1,5 @@
 TITLE|YA-MS lietošanas rokasgrāmata
-SUB|Versija 1.8.11 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+SUB|Versija 1.8.15 - sagatavojis Costantino IC8TEM - 2026. gada novembris
 H1|1. Ievads
 H2|1.1 Kam paredzēta YA-MS
 P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
@@ -26,7 +26,7 @@ P|Palaižot uz dažām sekundēm parādās ekrāns ar Perseīdām virs ESO VLT t
 H2|2.3 Mape data
 P|Visi iestatījumi un visi dati atrodas vienā mapē data blakus programmai: nekādas AppData, nekādu sistēmas mapju. Lai pārvietotu YA-MS uz citu datoru, pietiek nokopēt programmas mapi kopā ar tās mapi data. Mapes saturs aprakstīts 13. nodaļā.
 H2|2.4 Automātiskie atjauninājumi
-P|Sākot ar versiju 1.8.11, atjauninājumi ir automātiski un klusi: palaižot un pēc tam ik pēc 6 stundām YA-MS pārbauda GitHub un, ja ir jauna versija, to lejupielādē, instalē un pats restartējas, neko nejautājot (to parāda tikai statusa josla). Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Tālāk aprakstītais logs parādās tikai, nospiežot "Atjauninājumi", vai ja failā data/config.ini ieraksti aggiornamenti_automatici=0.
+P|Sākot ar versiju 1.8.6, atjauninājumi ir automātiski un klusi: palaižot un pēc tam ik pēc 30 minūtēm YA-MS pārbauda GitHub un, ja ir jauna versija, to lejupielādē, instalē un pats restartējas, neko nejautājot (to parāda tikai statusa josla). Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Tālāk aprakstītais logs parādās tikai, nospiežot "Atjauninājumi", vai ja failā data/config.ini ieraksti aggiornamenti_automatici=0.
 P|Sākot ar versiju 1.8.0, YA-MS pati pārbauda GitHub, palaišanas brīdī un ne biežāk kā reizi dienā, vai ir iznākusi jauna versija. Ja ir, parādās logs "Pieejams atjauninājums" ar jaunumiem un trim pogām:
 LI|Atjaunināt tagad: lejupielādē tavai sistēmai piemēroto pakotni, aizstāj programmas failus, saglabā mapi data un restartē YA-MS. Programmas faili mapē data, kurus jaunā versija maina, vispirms tiek nokopēti uz data/backup/v<vecā versija>; tavi faili (iestatījumi, arhīvi, spoti, ADIF) netiek aizskarti.
 LI|Vēlāk: aizver logu; pārbaude atkārtojas nākamajā dienā.
@@ -38,7 +38,7 @@ H2|2.5 Trūkstošie programmas faili
 P|Palaižot YA-MS pārbauda, vai tai ir visi savi faili (tulkojumi, katalogi, dokumenti). Ja kāds trūkst, piemēram, pēc nepilnīgas kopēšanas, logs "Trūkstošie faili" tos uzskaita un piedāvā "Lejupielādēt trūkstošos failus" no GitHub tajā pašā programmas versijā vai "Turpināt bez tiem". Tā pati pārbaude atkārtojas, nospiežot "Atjauninājumi".
 H1|3. Galvenais logs
 H2|3.1 Loga daļas
-LI|Augšā trīs vadīklu rindas, kas attiecas uz visām cilnēm: stacijas un diapazons, E slānis un antena, aprēķina laiks (4. nodaļa).
+LI|Augšā divas vadīklu rindas, kas attiecas uz visām cilnēm: E slānis un antena, aprēķina laiks (4. nodaļa). Tava stacija (lokators, augstums, josla un Aprēķināt) ir augšā pa labi cilnē Satiksme tiešsaistē.
 LI|Galveno cilņu josla, kuras labajā pusē ir poga Vadība, krāsu shēma (Tēma) un valoda.
 LI|Apakšcilnes gaišākā rindā tām cilnēm, kurām tās ir.
 LI|Apakšā statusa josla: aprēķina ziņojumi, brīdinājumi par savienojumu un poga "Atjauninājumi".
@@ -50,22 +50,22 @@ LI|Tehniskie dokumenti, pēdējā: Lietošanas rokasgrāmata, Avoti, Eiropas rad
 H2|3.3 Valoda, krāsas, fonts
 LI|Valoda: 36 valodas. Mainot valodu, logs tiek pārbūvēts tajā pašā vietā un tajā pašā cilnē bez restartēšanas. Skaitļi un datumi atbilst izvēlētajai valodai (decimālkomats latviešu un itāļu valodā, punkts angļu valodā).
 LI|Tēma: 12 krāsu shēmas; Gaiša ir noklusējuma shēma, Nakts un Melna paredzētas darbam tumsā, Meteora sliede ir oriģinālais YA-MS stils.
-LI|Burti (pirmās vadības rindas beigās): samazina vai palielina visu tekstu no 85 līdz 140 %, ar 5 % soli. Ar lieliem burtiem cilnes pāriet vairākās rindās.
-LI|Vadība: sakļauj un atkal atver trīs vadīklu rindas, lai atbrīvotu vietu kartēm un grafikiem. Izvēle tiek atcerēta.
+LI|Burti (Iestatījumi): samazina vai palielina visu tekstu no 85 līdz 140 %, ar 5 % soli. Ar lieliem burtiem cilnes pāriet vairākās rindās.
+LI|Vadība: sakļauj un atkal atver divas vadīklu rindas, lai atbrīvotu vietu kartēm un grafikiem. Izvēle tiek atcerēta.
 TAG|NOTA|Gandrīz katrai vadīklai ir uznirstošais padoms: paturi peles kursoru virs vadīklas, lai izlasītu, kam tā paredzēta un no kura avota ņemta noklusējuma vērtība.
 H1|4. Stacijas un trases iestatīšana
-H2|4.1 1. rinda: stacijas un diapazons
+H2|4.1 Mana stacija (Satiksme tiešraidē)
 LI|Mans lokators un augstums m: tavs Maidenhead lokators (4, 6 vai 8 rakstzīmes; izmanto kvadrāta centru) un stacijas augstums virs jūras līmeņa.
 LI|Diapazons MHz: 28, 50, 70, 144, 222 vai 432 MHz. Vajadzīgs antenas pastiprinājumam un ziedlapiņai, vājinājumam un sakaru budžetam, kā arī plūsmas novērtējumam.
 LI|Aprēķināt: no jauna aprēķina trasi (E slāņa izlase, mazāk nekā sekundē).
-H2|4.2 2. rinda: E slānis un antena
+H2|4.2 1. rinda: E slānis un antena
 LI|Sliežu augstums km un no radara: meteoru sliežu augstums. Ja "no radara" ir atzīmēts, izmanto biežāko Collm radara izmērīto augstumu (parasti 88-90 km); noņem atzīmi, lai to ierakstītu manuāli.
 LI|Ziedlapiņas elevācija °: tavas antenas vertikālās ziedlapiņas maksimuma elevācija. Virziena antenai, kas nostiprināta 0° leņķī, galvenā ziedlapiņa tik un tā ir dažus grādus virs horizonta atstarojuma no zemes dēļ: parasti 3-8°, atkarībā no antenas augstuma viļņu garumos.
 LI|antenas diagramma: ieslēgta (noklusējums) - atstarošanas punkti tiek ņemti vērā ar abu antenu vertikālo pastiprinājumu: pilnībā ap ziedlapiņas maksimumu, arvien mazāk uz horizonta pusi un uz augšu. Izslēgta - ziedlapiņas elevācija ir stingra robeža: zemāk redzamie punkti netiek ņemti vērā.
 LI|Yagi antena: traverse m: traverses garums. Blakus programma norāda garumu viļņu garumos, pastiprinājumu (DL6WU līkne) un ziedlapiņas platumu pie -3 dB horizontālajā un vertikālajā plaknē. Zem 2 λ novērtējums ir maz precīzs.
 LI|Hot spot no viduspunkta km un auto (AMS): Hot A un Hot B attālums no viduspunkta. Ja "auto (AMS)" ir atzīmēts, vērtība atbilst J. Richardson tabulai, ko citē DJ5HG (13° novirze pie 1000 km, 10° virs 1500 km); noņem atzīmi, lai manuāli ierakstītu 30-400 km (MSHV izmanto 150 km).
 TAG|ATTENZIONE|Ja "antenas diagramma" ir izslēgta un ziedlapiņa ir dažu grādu augstumā, garā trasē abas stacijas var neredzēt nevienu kopīgu slāņa punktu: visas efektivitātes ir 0 un parādās brīdinājums "NAV KOPĪGAS ZONAS" ar ziedlapiņas elevāciju vai sliežu augstumu, kas būtu vajadzīgs. Piemērs: JN70CN - JO76QP, 1791 km, ziedlapiņa 3°, sliedes 88,5 km.
-H2|4.3 3. rinda: aprēķina laiks
+H2|4.3 2. rinda: aprēķina laiks
 LI|Laiks: UTC pulkstenis.
 LI|Aprēķina datums (UTC): aprēķina diena. Attiecas uz Prognozes aprēķins, uz 24 stundu tabulu cilnē Efektivitātes aprēķins un uz hronoloģiju cilnē GRAVES radars. Noklusējuma vērtība ir šodiena, un pusnaktī datums pāriet uz jauno dienu.
 LI|Stundas (no −12 līdz +36 h): pārbīda aprēķina brīdi ar 15 minūšu soli. Blakus: "Aprēķins uz: tagad" vai izvēlētais datums un laiks.
@@ -78,7 +78,8 @@ P|Grupas Prognozes aprēķins pirmā apakšcilne vienā ekrānā parāda, kur pa
 H2|5.1 Kopsavilkuma josla
 P|Virs kartes josla apkopo aprēķinu šim brīdim: datums un laiks, trases indekss (aktīvo plūsmu ZHR × efektivitāte summa), noderīgākā plūsma ar tās ZHR un efektivitāti (arī dB attiecībā pret DJ5HG atskaites vērtību), plūsmu skaits virs horizonta un ieteicamais Hot ar tā azimutu.
 H2|5.2 Plāna karte
-P|Blakus kartei, pa labi, ir viena kolonna. Augšā korespondenta lodziņš: vispirms antenas pavērsiens (Antenas az, vienmēr uz korespondentu), tad izsaukuma signāls (ieraksti to un nospied Enter: lokators tiek ņemts no CALL3 datubāzes, kā YAEC un LIVETROPOVHF), lokators un augstums. Izsaukuma signālu var ierakstīt arī lokatora lodziņā. Apakšā kartes simbolu leģenda: klikšķis uz virsraksta to sakļauj; radiantu krāsas parādās, kad Eiropas karte ir izslēgta.
+P|Blakus kartei, pa labi, ir viena kolonna. Augšā korespondenta lodziņš: vispirms antenas pavērsiens (Antenas az, vienmēr uz korespondentu), tad izsaukuma signāls (ieraksti to un nospied Enter: lokators tiek ņemts no CALL3 datubāzes, kā YAEC un LIVETROPOVHF), lokators un augstums. Izsaukuma signālu var ierakstīt arī lokatora lodziņā. Apakšā kartes simbolu leģenda: klikšķis uz virsraksta to sakļauj.
+P|Ja šim izsaukumam ieraksti lokatoru, kas atšķiras no arhīvā esošā, blakus lokatora laukam kļūst aktīva poga «Saglabāt»: to nospiežot, jaunais lokators kļūst par manuālu ierakstu (data/CALL3-MANUALE.TXT, kas ir pārāks par visiem citiem avotiem) un uzreiz tiek ierakstīts arī data/call3.txt.
 P|Kreisajā pusē Eiropas karte, skatoties no augšas (austrumi pa labi), ar grādu skalu visapkārt:
 LI|zaļa līnija: patiesā trase starp abiem lokatoriem;
 LI|Hot A un Hot B: divi hot spot abās viduspunkta pusēs. Sarkans = ieteicamais, rozā = ārpus antenas ziedlapiņas, pelēks = jau ziedlapiņā (ar brīdinājumu);
@@ -150,7 +151,7 @@ LI|Mērķa frekvence MHz: prognozes frekvence.
 LI|λ^k kāpinātājs (3, SM6FHZ) un Stacijas koeficients K (1): frekvences pārrēķina likums un korekcija tavai stacijai.
 LI|k no populācijas indeksiem: piedāvā k no aktīvo plūsmu populācijas indeksiem r (GMN, citādi IMO; k = 3,75 · log10 r, svērts ar ZHR) un pirms piemērošanas lūdz apstiprinājumu.
 LI|Ielādēt RMOB failu no diska un Iegūt kāpinātāju no RMOB faila: nolasa mēneša RMOB failu un iegūst k no stundām, kas kopīgas ar Collm.
-LI|RMOB novērotājs, Lejupielādēt RMOB tagad un automātiska lejupielāde ik pēc 5 minūtēm: automātiskā lejupielāde ir izslēgta, un to drīkst ieslēgt tikai ar RMOB atļauju.
+LI|RMOB novērotājs, Lejupielādēt RMOB tagad un automātiska lejupielāde ik pēc 5 minūtēm: automātiskā lejupielāde ir izslēgta, un to drīkst ieslēgt tikai ar RMOB atļauju. Šīs komandas ir cilnē Iestatījumi.
 H2|8.2 Rezultāti
 LI|Vakardienas un šodienas grafiks: meteori stundā Collm, uz tavu frekvenci pārrēķinātās vērtības un, ja ielādēti, RMOB skaitījumi.
 LI|Prognoze nākamajām 24 stundām: tā pati iepriekšējās dienas stunda, koriģēta atbilstoši trases plūsmu indeksa izmaiņai.
@@ -158,18 +159,21 @@ LI|Tabula ar vērtējumu: labs, vidējs vai vājš salīdzinājumā ar 24 stundu
 TAG|NOTA|Atstarojumu ilgums atbilst izvēlei "Pingu ilgums starp joslām" cilnē Ģeometrija un vājinājums; forward scatter gadījumā ilgums pieaug arī ar sec²φ trases viduspunktā.
 H1|9. Tiešsaiste un reāllaika dati
 H2|9.1 Satiksme tiešraidē
-P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto meteor scatter satiksmi: katriem sakariem trase diapazona krāsā (28 brūna, 50 zaļa, 70 ciāna, 144 oranža, 222 rozā, 432 violeta), abas stacijas un visticamāko sliežu mākonis tajā stundā. Tikko saņemtie spoti mirgo vienu minūti.
+P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto meteor scatter satiksmi: katriem sakariem trase diapazona krāsā (28 brūna, 50 zaļa, 70 ciāna, 144 oranža, 222 rozā, 432 violeta), abas stacijas un visticamāko sliežu plūsmas zona tajā stundā. Tikko saņemtie spoti mirgo vienu minūti.
 LI|Kartes rādiuss: 600-3500 km. Rādāmie spoti: pēdējās 3, 15 vai 30 minūtes, pēdējā stunda, pēdējās 3 vai 24 stundas.
-LI|Klikšķis uz trases vai tabulas rindas izceļ sakarus un parāda mākoņa centru, tā augstumu un izmērus.
+LI|Merkatora karti var pārvietot, velkot ar peli; dubultklikšķis: atkal centrēta uz manu staciju. Azimutālā karte paliek centrēta uz manu staciju.
+LI|Klikšķis uz trases vai tabulas rindas izceļ sakarus un parāda plūsmas zona centru, tā augstumu un izmērus.
+LI|Izvēlētā sakara vai klausošās stacijas detaļas parādās izceltā lodziņā virs kartes augšējā kreisajā stūrī gan azimutālajā, gan Merkatora projekcijā.
 LI|Rādīt, kas klausās: joslas krāsas trijstūri iezīmē stacijas, kas pēc PSKReporter datiem izvēlētajā laika logā uztver MSK144, FSK441, PSK2K vai JTMS 28, 50, 70, 144 un 432 MHz joslās. Klikšķis uz trijstūra parāda izsaukuma signālu, lokatoru, režīmus un pēdējo spotu. Cilnes Datu vākšana MQTT plūsmai jābūt pievienotai.
 LI|Arī PSKReporter kartes aktīvie monitori: tukši trīsstūri stacijām, kas redzamas pskreporter.info kartē MSK144, FSK441, PSK2K vai JTMS režīmā, bet vēl nav saņēmušas nevienu spotu (MQTT sūta tikai stacijas, kas kaut ko saņem). YA-MS vaicā PSKReporter vaicājumu pakalpojumam reizi 5 minūtēs par visiem režīmiem, kā prasa pakalpojuma noteikumi; monitors paliek kartē vismaz 11 minūtes. Klikšķis uz trīsstūra parāda izsaukuma signālu, lokatoru, dekodēšanas programmu un laiku, kad monitors bija aktīvs. Ieslēgts pēc noklusējuma.
-LI|FT8 virs 1100 km bez paralēlām trasēm: FT8 spots (no PSKReporter MQTT, klasteriem vai WSJT-X caur UDP) starp stacijām, kas atrodas vairāk nekā 1100 km viena no otras, kuram 3 minūtēs pirms un pēc nav paralēlu trašu (tā pati josla, viduspunkts 300 km robežās, virziens 20° robežās, cits staciju pāris), tiek zīmēts gaiši zaļā krāsā, un tā rinda tabulā apakšā pa labi vienmēr mirgo. Sporādiskais E un tropo dod daudzas tuvas, paralēlas trases; vientuļš spots var būt meteora sliede. Tāpēc YA-MS no MQTT saņem arī 6 m, 4 m, 2 m, 1,25 m un 70 cm FT8 spotus (ne 10 m, to ir pārāk daudz). Šie spoti netiek ierakstīti MS arhīvā. Ieslēgts pēc noklusējuma.
+LI|FT8 virs 1100 km bez paralēlām trasēm: FT8 spots (no PSKReporter MQTT, klasteriem vai WSJT-X caur UDP) starp stacijām, kas atrodas vairāk nekā 1100 km viena no otras, kuram 3 minūtēs pirms un pēc nav paralēlu trašu (tā pati josla, viduspunkts 300 km robežās, virziens 15° robežās, cits staciju pāris), tiek zīmēts gaiši zaļā krāsā, un tā rinda tabulā apakšā pa labi vienmēr mirgo. Sporādiskais E un tropo dod daudzas tuvas, paralēlas trases; vientuļš spots var būt meteora sliede. Tāpēc YA-MS no MQTT saņem arī 6 m, 4 m, 2 m, 1,25 m un 70 cm FT8 spotus (nekad 28 MHz). Šie spoti netiek ierakstīti MS arhīvā. Ieslēgts pēc noklusējuma. Papildu pārbaudes ar PSKReporter MQTT: spots nav vientuļš, ja uztverošā stacija MQTT 3 minūšu laikā tajā pašā joslā dzird citas stacijas tālāk par 1100 km (atvērta josla); klasteru un RBN spoti der tikai tad, ja tas pats pāris nāk arī no MQTT; RBN skimeri (izsaukuma signāli ar «-#») neder nekad.
 LI|WSJT-X spoti caur UDP, kas attiecas uz tavu staciju (dekodējumā ir tavs izsaukuma signāls: kas tevi sauc vai tev atbild), tiek zīmēti ar raustītu līniju, kas vienmēr mirgo, jebkurā režīmā un jebkurā attālumā.
+LI|Apmaiņa starp YA-MS lietotājiem: kad cits YA-MS lietotājs caur UDP dekodē tavai stacijai adresētu ziņojumu (MSK144, FSK441, PSK2K vai JTMS, vai FT8 virs 1100 km), viņa YA-MS to nosūta tev šifrētu caur trim publiskiem MQTT brokeriem (HiveMQ, Mosquitto, EMQX); tu to redzi kā violetu raustītu līniju, kas vienmēr mirgo, un kā rindu UDP konsolē. To vari izlasīt tikai tu (ECDH P-256 atslēgas, AES-256 un HMAC-SHA256). FT8 spoti tiek rādīti tikai tad, ja 3 minūšu laikā tiem nav paralēlu trašu. Ieslēgts pēc noklusējuma; yams_scambio=0 failā data/config.ini to izslēdz.
 LI|Tiek rādīti visu joslu spoti, arī to joslu, kas nav izvēlētas Datu vākšanā (tie netiek saglabāti). CW spoti un spoti starp pārāk tuvām stacijām netiek rādīti, ja Datu vākšanā tie tiek atmesti.
-LI|Kartē tiek rakstīti abu katra spota staciju izsaukuma signāli, vienreiz katrai stacijai. Projekciju var izvēlēties: azimutālā (centrā tava stacija) vai Merkatora. Kolonnas Mākonis padoms izskaidro tās nozīmi.
+LI|Kartē tiek rakstīti abu katra spota staciju izsaukuma signāli, vienreiz katrai stacijai. Projekciju var izvēlēties: azimutālā (centrā tava stacija) vai Merkatora. Kolonnas plūsmas zona padoms izskaidro tās nozīmi.
 H2|9.2 Radara meteoru skaits
 P|Collm SKiYMET radara (36,2 MHz) meteoru skaits stundā un sliežu augstumi, kā arī jaunākais Sodankylä radara (36,9 MHz) attēls.
-LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies.
+LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies. Automātisko atjaunināšanu iestata cilnē Iestatījumi.
 LI|λ kāpinātājs (SM6FHZ): novērtējuma kāpinātājs tavam diapazonam (oranža līnija labajā skalā).
 LI|Sliežu augstumi: histogramma ar modu, vidējo vērtību, mediānu un standartnovirzi; ja atzīmēts "no radara", moda kļūst par augstumu visiem aprēķiniem.
 TAG|ATTENZIONE|Ja Collm grafika skalu neizdodas nolasīt, parādās oranžs brīdinājums, un vērtības jāpārbauda. Bez savienojuma programma izmanto pēdējos saglabātos datus, vienreiz par to paziņo un pati mēģina vēlreiz ik pēc 5 minūtēm; statusa josla kļūst sarkana, līdz savienojums atjaunojas.
@@ -187,8 +191,9 @@ LI|Filtrs pieņem spotus meteor scatter tipiskajās frekvencēs (50190-50300, 70
 LI|CW spoti tiek uzreiz izmesti (CW vai WPM komentārā vai 28000-28070 kHz): tie neparādās konsolē un netiek saglabāti, ja vien nav atzīmēti ar <MS>. Rūtiņu var izslēgt.
 LI|Spoti starp stacijām, kas ir tuvāk par 500 km, tiek uzreiz atmesti, jo šādā attālumā sakari ir tieši vai troposfēriski, nevis meteor scatter: tie neparādās konsolē un netiek saglabāti. Ja trūkst lokatora, spots paliek. Attālumu var mainīt zem rūtiņas.
 LI|Trūkstošie lokatori tiek ņemti no CALL3 arhīva; pieņemtie spoti tiek saglabāti mapē data/spot_ms, pa vienam failam dienā, un parādīti kartē cilnē Satiksme tiešraidē.
-LI|CALL3 datubāze ar LIVETROPOVHF noteikumiem. „Atjaunināt tagad" lejupielādē CALL3.TXT no MMMonVHF (vismaz 100 000 derīgu rindu, iepriekšējais paliek data/call3.bak); ar „Atjaunināt pašam ik pēc 7 dienām" tas notiek palaišanas brīdī. Virs faila secībā darbojas: rokas ieraksti (data/CALL3-MANUALE.TXT), klastera labojumi (6 rakstzīmju lokators, ko spotētājs paziņo par sevi), pievienotie faili (data/CALL3-AGGIUNTE), tad CALL3.TXT un tiešraidē apgūtie 6 rakstzīmju lokatori (data/LOC6.TXT). Saņemts 4 rakstzīmju lokators vai tāds, kas beidzas ar LL vai MM, tiek aizstāts ar 6 rakstzīmju lokatoru no datubāzes; portatīvās (ar slīpsvītru) tikai ar precīzu ierakstu.
-LI|Pēdējais avots, kā LIVETROPOVHF: izsaukuma signāliem, kuriem nevienā citā avotā nav 6 rakstzīmju lokatora, programma automātiski ik pēc 6 stundām vaicā G7VRD publisko API (api.g7vrd.co.uk) grupās pa 40 izsaukumiem; katru izsaukumu ne biežāk kā reizi dienā. Tiek pieņemts tikai 6 rakstzīmju lokators, nevis kvadrāta centrs (LL vai MM), tajā pašā kvadrātā kā saņemtais. Rezultāti ir data/CALL3-G7VRD.TXT un, tāpat kā visi labojumi, tiek ierakstīti arī data/call3.txt.
+LI|CALL3 datubāze ar LIVETROPOVHF noteikumiem. „Atjaunināt tagad" lejupielādē CALL3.TXT no MMMonVHF (vismaz 100 000 derīgu rindu, iepriekšējais paliek data/call3.bak); ar „Atjaunināt pašam ik pēc 12 stundām" tas notiek palaišanas brīdī. Virs faila secībā darbojas: rokas ieraksti (data/CALL3-MANUALE.TXT), klastera labojumi (6 rakstzīmju lokators, ko spotētājs paziņo par sevi), pievienotie faili (data/CALL3-AGGIUNTE), tad CALL3.TXT un tiešraidē apgūtie 6 rakstzīmju lokatori (data/LOC6.TXT). Saņemts 4 rakstzīmju lokators vai tāds, kas beidzas ar LL vai MM, tiek aizstāts ar 6 rakstzīmju lokatoru no datubāzes; portatīvās (ar slīpsvītru) tikai ar precīzu ierakstu.
+LI|Pēdējais avots, kā LIVETROPOVHF: izsaukuma signāliem, kuriem nevienā citā avotā nav 6 rakstzīmju lokatora, programma automātiski ik pēc 30 minūtēm vaicā G7VRD publisko API (api.g7vrd.co.uk) grupās pa 40 izsaukumiem; katru izsaukumu ne biežāk kā reizi dienā. Tiek pieņemts tikai 6 rakstzīmju lokators, nevis kvadrāta centrs (LL vai MM), tajā pašā kvadrātā kā saņemtais. Rezultāti ir data/CALL3-G7VRD.TXT un, tāpat kā visi labojumi, tiek ierakstīti arī data/call3.txt.
+LI|Pēc G7VRD nāk JTDX slānis (data/grid_data.bin, ap 365 000 izsaukuma signālu): tas attiecas tikai uz signāliem bez 6 rakstzīmju lokatora visos citos avotos, tikai tajā pašā kvadrātā kā saņemtais, un nekad netiek ierakstīts data/call3.txt.
 H1|10. Plūsmas tiešraidē un plūsmu katalogs
 H2|10.1 Plūsmas tiešraidē
 P|Kreisajā pusē Global Meteor Network mērītā aktīvo plūsmu plūsma un ZHR ar GMN kameru dienas skaitījumiem katrai plūsmai (tas ir skaits, nevis plūsma: tas atkarīgs no tā, cik stacijām ir skaidras debesis); labajā pusē CMOR radara radiantu kartes, ieskaitot dienas plūsmu kartes. Failus lejupielādē atkārtoti tikai tad, ja tie ir mainījušies, ne biežāk kā ik pēc 30 minūtēm, vai ar pogu Lejupielādēt tagad.
@@ -220,12 +225,14 @@ LI|cataloghi/: IAU MDC katalogs; radar/diretta/: GMN un CMOR dati.
 LI|call3.txt: lokatoru arhīvs; spot_ms/: savāktie meteor scatter spoti; adif_quadrati.csv: kvadrāti no ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehniskie dokumenti.
 LI|backup/: atjauninājuma aizstāto failu kopijas; aggiornamento/: lejupielādētā pakotne (dzēsta pēc restartēšanas).
+H2|13.3 Cilne Iestatījumi
+P|Cilne Iestatījumi apkopo programmas vispārējo darbību: Izskats (fonts, tēma un valoda), Programmas atjauninājumi (pārbaude GitHub, startējot un ik pēc 30 minūtēm, automātiski klusi atjauninājumi, Pārbaudīt tagad), Tiešsaistes avoti (automātiska atjaunināšana ik pēc 5 minūtēm), RMOB (novērotājs, lejupielādēt tagad un automātiska ielāde) un Programma (komandu rindas un datu mape). Aprēķina parametri paliek komandu rindās virs cilnēm.
 H2|13.2 Dažas config.ini atslēgas
 LI|controlla_aggiornamenti=0: nepārbaudīt jaunas versijas; aggiornamenti_salta: izlaistā versija.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: aprēķina izvēles rūtiņas.
 LI|raggio_iniziale (0 = divkārša ITU vērtība, 1 = ITU, 2 = neņemts vērā), durata_ping (0 = λ², 1 = novērotais).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: izslēdz caur UDP saņemto MS dekodējumu (MSK144, FSK441, PSK2K, JTMS) pārsūtīšanu uz PSKReporter. Tā pēc noklusējuma ir ieslēgta un darbojas pati: ja tava izsaukuma signāla vairāk nekā 20 minūtes nav starp stacijām, kas sūta ziņojumus uz PSKReporter (digitālā programma nesūta), YA-MS ik pēc 5 minūtēm nosūta tevis dekodētās MS stacijas, tevi norādot kā uztvērēju; tiklīdz digitālā programma atkal sūta, YA-MS apstājas. Rinda UDP konsolē paziņo, kad tā sākas un apstājas.
+LI|psk_rimando=0: izslēdz caur UDP saņemto MS dekodējumu (MSK144, FSK441, PSK2K, JTMS) pārsūtīšanu uz PSKReporter. Tā pēc noklusējuma ir ieslēgta un darbojas pati: ja tava izsaukuma signāla vairāk nekā 20 minūtes nav starp stacijām, kas sūta ziņojumus uz PSKReporter (digitālā programma nesūta), YA-MS ik pēc 5 minūtēm nosūta tevis dekodētās MS stacijas, tevi norādot kā uztvērēju; tiklīdz digitālā programma atkal sūta, YA-MS apstājas. Rinda UDP konsolē paziņo, kad tā sākas un apstājas. Ja WSJT-X.ini (vai JTDX.ini) sūtīšana uz PSKReporter ir izslēgta, YA-MS pārsūta uzreiz, negaidot 20 minūtes.
 TAG|ATTENZIONE|Labo config.ini tikai tad, kad programma ir aizvērta: aizverot YA-MS to pārraksta.
 H1|14. Tipiskās procedūras
 H2|14.1 Sked sagatavošana plūsmas laikā

@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT ikke forbund
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	Kassér straks spots mellem stationer tættere end (km), fordi forbindelsen på den afstand er direkte eller troposfærisk: de vises ikke i konsollen og gemmes ikke. Mangler en locator, beholdes spottet.
 spot entro {0} km scartati: {1}	spots inden for {0} km kasseret: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Spots fra alle bånd vises, også fra bånd der ikke er valgt i Dataindsamling (de gemmes ikke). CW-spots og spots mellem stationer, der ligger for tæt, vises ikke, hvis de kasseres i Dataindsamling.
-Aggiorna da solo ogni 7 giorni	Opdatér selv hver 7. dag
+Aggiorna da solo ogni 12 ore	Opdatér selv hver 12. time
 Aggiornamento di CALL3 già in corso.	CALL3-opdatering er allerede i gang.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3-opdateringen mislykkedes: {0}
 Aggiungi un file...	Tilføj en fil...
@@ -772,7 +772,7 @@ locator	locator
 {0} nel CALL3: {1}	{0} i CALL3: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} er ikke i CALL3: skriv locatoren i hånden
 Cerca su G7VRD i locator mancanti	Søg manglende locatorer hos G7VRD
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Sidste kilde, som i LIVETROPOVHF: for kaldesignaler uden 6-tegns locator i nogen anden kilde spørger programmet automatisk hver 6. time G7VRD's offentlige API (api.g7vrd.co.uk), i grupper på 40 kaldesignaler; hvert kaldesignal højst én gang om dagen. Kun en 6-tegns locator accepteres, ikke feltets midte (LL eller MM), i samme felt som den modtagne. Resultaterne ligger i data/CALL3-G7VRD.TXT og skrives, som alle rettelser, også ind i data/call3.txt.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Sidste kilde, som i LIVETROPOVHF: for kaldesignaler uden 6-tegns locator i nogen anden kilde spørger programmet automatisk hvert 30. minut G7VRD's offentlige API (api.g7vrd.co.uk), i grupper på 40 kaldesignaler; hvert kaldesignal højst én gang om dagen. Kun en 6-tegns locator accepteres, ikke feltets midte (LL eller MM), i samme felt som den modtagne. Resultaterne ligger i data/CALL3-G7VRD.TXT og skrives, som alle rettelser, også ind i data/call3.txt.
 Ascolta	Lyt
 Avvia	Start
 Avvia all'apertura	Start ved åbning
@@ -792,3 +792,27 @@ mappa di PSKReporter non raggiungibile: {0}	PSKReporter-kortet kan ikke nås: {0
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 over 1100 km uden parallelle strækninger inden for 3 minutter (lysegrøn, rækken blinker altid)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 over 1100 km uden parallelle strækninger inden for 3 minutter: ligner ikke sporadisk E eller tropo, kan være meteorscatter
 WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: dekodningen vedrører min station
+Impostazioni	Indstillinger
+Aspetto	Udseende
+Tema e lingua sono anche in alto a destra, accanto alle linguette.	Tema og sprog findes også øverst til højre ved fanerne.
+Controlla su GitHub se c'è una versione nuova (all'avvio e ogni 30 minuti)	Søg efter ny version på GitHub (ved start og hvert 30. minut)
+Aggiornamenti automatici e silenziosi: scarica, installa e riavvia senza chiedere	Automatiske stille opdateringer: henter, installerer og genstarter uden at spørge
+Controlla adesso	Tjek nu
+Aggiornamenti del programma	Programopdateringer
+Senza aggiornamenti automatici, quando esce una versione nuova compare una finestra con «Aggiorna adesso», «Più tardi» e «Salta questa versione».	Uden automatiske opdateringer vises et vindue med «Opdater nu», «Senere» og «Spring denne version over», når en ny version kommer.
+Fonti in diretta	Kilder i realtid
+Radar di Collm e Sodankylä, Global Meteor Network, CMOR e, se scelto, RMOB.	Radarerne i Collm og Sodankylä, Global Meteor Network, CMOR og, hvis valgt, RMOB.
+Mostra le righe dei comandi sopra le linguette (lo stesso del pulsante «Comandi»)	Vis kommandolinjerne over fanerne (samme som knappen «Betjening»)
+Programma	Program
+Cartella dei dati	Datamappe
+Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Hørt af {0} (YA-MS): beskeden er rettet til min station
+% sciame	% sværm
+zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	sværmzone {0}: {1:F0} % af refleksionerne, {2:F0} × {3:F0} km, akse ved {4:F0}°
+zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	sværmzonen kan ikke beregnes for denne strækning (for kort eller for lang)
+Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Klik på en strækning på kortet eller en række i tabellen for detaljer om forbindelsen og dens sværmzone.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spots fra fanen "Dataindsamling". For hver forbindelse viser sværmzonen, hvor de mest sandsynlige spor for den strækning og det tidspunkt samles (spejlrefleksion, sum af aktive sværme); stiplede zoner = kun sporadiske meteorer. Spots med en station uden for kortet tegnes ikke; netop ankomne (under 3 minutter) blinker i et minut.
+% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% sværm: andelen af strækningens nyttige refleksioner på det tidspunkt, der falder i sværmzonen på kortet (spejlrefleksion, sum af aktive sværme). Jo højere, jo mere er de gode spor samlet i ét område at rette antennen mod. "sporadiske" = ingen aktiv sværm giver nyttige refleksioner: kun sporadiske meteorer er tilbage, på begge sider af strækningen (stiplede zoner).
+Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Mercatorkortet flyttes ved at trække det med musen; dobbeltklik: centreret på min station igen. Det azimutale kort forbliver centreret på min station.
+Memorizza	Gem
+Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Den indtastede locator afviger fra den i CALL3-arkivet: tryk for at opdatere og gemme den (manuel post, skrives straks også ind i call3.txt).
+{0} memorizzato nel CALL3: {1}	{0} gemt i CALL3: {1}
