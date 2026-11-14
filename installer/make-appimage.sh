@@ -34,6 +34,7 @@ DESK
 sed 's#^SRC=/opt/e-layer-analyzer#SRC="$(dirname "$(readlink -f "$0")")/opt/e-layer-analyzer"#' "$ROOT/installer/deb-avvio.sh" > "$A/AppRun"
 grep -q 'readlink' "$A/AppRun"
 chmod 755 "$A/AppRun"
+chmod -R a+rX "$A"   # tutti i file leggibili da ogni utente (avvisi di appimagetool sui permessi)
 T="$(mktemp -d)"
 curl -fsSL -o "$T/appimagetool" "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage"
 chmod +x "$T/appimagetool"
