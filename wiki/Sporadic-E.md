@@ -19,7 +19,7 @@ In the azimuthal views the dashed rings show the **km from the centre** (the ste
 
 ## What it shows
 
-- The **spots** of the last few minutes (15 min - 12 h) on the **28, 50, 70 and 144 MHz** bands, taken from the telnet sessions. Locators come from the spot comment (e.g. `JN70CN<ES>JO62QM`) or from the CALL3 database.
+- The **spots** of the last few minutes (15 min - 12 h) on the **28, 40 (8 m, off by default), 50, 70 and 144 MHz** bands, taken from the telnet sessions. Locators come from the spot comment (e.g. `JN70CN<ES>JO62QM`) or from the CALL3 database.
 - Spots with **<MS>**, **<AU>** or **<TR>** in the text are **discarded**: they do not concern sporadic-E but are useful for meteor scatter, aurora or tropo.
 - **Transequatorial, author's rule (IC8TEM)**: towards Africa and South America, if the midpoint falls in the magnetic dip band between -20° and +20°, the contact is transequatorial (TEP) and not sporadic-E, unless the spot states `<ES>`.
 - **144 MHz, author's rule (IC8TEM)**: sporadic-E on 2 m starts **beyond 900 km** (shorter spots are discarded). A single 144 MHz spot **is not plotted on its own**: it appears when within **5 minutes** a second 144 MHz spot arrives with the cloud in the same place (reflection points within 300 km), or when there is a **short-hop 50 MHz** spot nearby (within 1200 km, in the last 15 minutes). The bar at the top shows how many 144 MHz spots are waiting for confirmation.
@@ -53,3 +53,12 @@ Sporadic-E **does not apply to 432 MHz**: the Es MUF reaches about 150-200 MHz a
 The Maidenhead squares of the reflection points are coloured by the highest spot frequency: **green** up to 29 MHz, **yellow** up to 51, **orange** up to 71, **red** up to 145 MHz. From the square's foEs the probable MUF on the longest hop (2400 km, IK3XTV table) is estimated: if it reaches a higher band, the square **blinks** in that band's colour (principle of IK3XTV and Jacobs-Leinwoll: short skip means high MUF).
 
 At the top right of the map the N0NBH summary appears (E-skip for the chosen continent, SFI, K and A indices).
+
+## Rules by band (version 0.4.18)
+
+- **50 MHz**: no Sporadic-E within 450 km. FT8 and FT4 spots are Sporadic-E only if they belong to a cloud: another 50 MHz spot within 4 minutes with its midpoint within 150 km. An isolated FT8/FT4 spot goes to meteor scatter.
+- **70 MHz**: no Sporadic-E within 450 km. FT8 and FT4 go to Sporadic-E even inside the meteor scatter window of the band plan (the known mode decides first, then the frequency).
+- **40 MHz (8 m)**: minimum distance derived from the 450 km of 50 MHz with the secant law (about 330 km); only distances within the first hop of the E-layer geometry (about 2440 km). Path colour: yellow.
+- **144 MHz**: Sporadic-E from 900 km, with confirmation; Q65 and JT65 spots are EME and are discarded, unless `<ES>` is in the text.
+- G0ISW (Propagation identification, 2024) sees the shortest Sporadic-E beyond 400 km on 50 and 70 MHz and beyond 1400 km on 144 MHz: the author's rules agree on 50 and 70 MHz and are wider on 144 MHz, but ask for a confirmation.
+- The order in which all rules apply, with the values in use, is shown in **[SETTINGS](Settings)** › Spot routing.

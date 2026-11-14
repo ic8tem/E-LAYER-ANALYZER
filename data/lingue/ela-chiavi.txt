@@ -733,3 +733,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).
+in 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter
+punto medio entro (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.
+sì
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}
+IMPOSTAZIONI
+8 m (40 MHz): giallo, solo entro il primo salto
+Generali
+Smistamento degli spot
+Impostazioni generali
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.
+Aspetto
+Lingua
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.
+Mappe e dati previsionali
+Continente
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere
+Controlla adesso
+Versione in uso: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.
+Apri la cartella dei dati
+Dati
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.
+Se lo spot...
+Valori
+va a
+nessuna linguetta
+è fuori dalla gamma del filtro locale
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora
+filtro locale spento
+scartato
+contiene AUE, AU-E o AURORAL E
+contiene una parola dell'aurora (o modo AU)
+contiene una parola del F.A.I. (o modo FAI)
+ha un modo del meteor scatter o <MS>
+cade in una finestra MS del bandplan
+in 50 MHz non esclusiva
+FT8 e FT4 in 50 e 70 MHz esclusi
+è FT8 o FT4 in 50 MHz senza nube
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km
+regola spenta
+meteor scatter (non E-sporadico)
+è Q65 o JT65 in 144 MHz
+salvo <ES> nel testo
+EME: scartato
+contiene una scritta di altra propagazione
+non E-sporadico
+è transequatoriale
+fascia di inclinazione ± {0:F0}°
+non E-sporadico (TEP)
+è in 28 MHz
+da {0:F0} km
+è in 40 MHz
+da {0:F0} a {1:F0} km (primo salto)
+è in 50 MHz
+è in 70 MHz
+è in 144 MHz
+oltre {0:F0} km, con conferma
+non rientra in nessuna regola (tropo, 432 MHz, HF...)
+resta in Spot raccolti
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.

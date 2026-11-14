@@ -19,7 +19,7 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 
 ## Cosa mostra
 
-- Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
+- Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 40 (8 m, spenta di partenza), 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
 - Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano l'E-sporadico ma servono al meteor scatter, all'aurora o al tropo.
 - **Transequatoriale, regola dell'autore (IC8TEM)**: verso l'Africa e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -20° e +20°, il collegamento è transequatoriale (TEP) e non E-sporadico, salvo che lo spot dichiari `<ES>`.
 - **144 MHz, regola dell'autore (IC8TEM)**: l'E-sporadico in 2 m parte da **oltre 900 km** (gli spot più corti si scartano). Uno spot in 144 MHz **da solo non si disegna**: compare quando entro **5 minuti** arriva un secondo spot in 144 MHz con la nube nello stesso posto (punti di riflessione entro 300 km), oppure quando nei dintorni c'è uno spot in **50 MHz di salto corto** (entro 1200 km, nei 15 minuti). La barra in alto dice quanti spot in 144 MHz sono in attesa di conferma.
@@ -53,3 +53,12 @@ L'E-sporadico **non si applica ai 432 MHz**: la MUF dell'Es arriva a circa 150-2
 I quadrati Maidenhead dei punti di riflessione si colorano con la frequenza più alta degli spot: **verde** fino a 29 MHz, **giallo** fino a 51, **arancio** fino a 71, **rosso** fino a 145 MHz. Dalla foEs del quadrato si stima la MUF probabile sul salto più lungo (2400 km, tabella IK3XTV): se raggiunge una banda più alta, il quadrato **lampeggia** con il colore di quella banda (principio di IK3XTV e di Jacobs-Leinwoll: lo skip corto indica una MUF alta).
 
 In alto a destra sulla mappa compare la sintesi di N0NBH (E-skip del continente scelto, SFI, indici K e A).
+
+## Regole per banda (versione 0.4.18)
+
+- **50 MHz**: entro 450 km non è E-sporadico. Gli spot FT8 e FT4 sono E-sporadico solo se fanno parte di una nube: un altro spot in 50 MHz entro 4 minuti con il punto medio entro 150 km. Uno spot FT8/FT4 isolato va al meteor scatter.
+- **70 MHz**: entro 450 km non è E-sporadico. FT8 e FT4 vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (decide prima il modo, se è noto, poi la frequenza).
+- **40 MHz (8 m)**: distanza minima ricavata dai 450 km dei 50 MHz con la legge della secante (circa 330 km); valgono solo le distanze entro il primo salto della geometria dello strato E (circa 2440 km). Colore delle tratte: giallo.
+- **144 MHz**: E-sporadico da 900 km, con conferma; gli spot Q65 e JT65 sono EME e si scartano, salvo `<ES>` nel testo.
+- G0ISW (Propagation identification, 2024) vede l'E-sporadico più corto oltre 400 km in 50 e 70 MHz e oltre 1400 km in 144 MHz: le regole dell'autore concordano in 50 e 70 MHz e sono più larghe in 144 MHz, ma chiedono una conferma.
+- L'ordine in cui si applicano tutte le regole, con i valori in uso, si vede in **[IMPOSTAZIONI](Impostazioni-it)** › Smistamento degli spot.

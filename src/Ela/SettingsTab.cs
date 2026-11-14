@@ -117,7 +117,7 @@ namespace ELA
             bNow.Click += async (s, e) => { await Updater.CheckAsync(); await Updater.ShowDialog(win); };
             root.Children.Add(Section(Lang.T("Aggiornamenti"), Pal.Orange,
                 Ui.Row(Ui.L(Lang.F("Versione in uso: {0}", ElaWindow.Version)), bNow), cChk, cAuto,
-                Txt(Lang.T("L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release."), true)));
+                Txt(Lang.T("L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano."), true)));
 
             // dati
             Button bData = Ui.B(Lang.T("Apri la cartella dei dati"));

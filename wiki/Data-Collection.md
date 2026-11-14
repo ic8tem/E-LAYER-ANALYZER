@@ -18,21 +18,11 @@
 
 The last 2000 spots, with band and source filters. Archive: one CSV file per day in `data/spot`. Every time the program closes, the spot database is emptied (memory and the files in `data/spot`): each session starts from scratch.
 
-**Local filter** (optional box): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. As in YA-MS, meteor scatter (not Sporadic-E) spots are those in the typical MS frequency windows (50190-50300, 70100-70400, 144290-144399 kHz) without tags of another propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), and those with MS-only modes (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) or with `<MS>`. Spots with `<AS>`/`<ACS>` (aircraft scatter) are not used for Sporadic-E.
+**Local filter** (optional box, in SETTINGS): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored; between 430 and 440 MHz only aurora spots pass. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. As in YA-MS, meteor scatter (not Sporadic-E) spots are those in the typical MS frequency windows (50190-50300, 70100-70400, 144290-144399 kHz) without tags of another propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), and those with MS-only modes (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) or with `<MS>`. Exception: FT8 and FT4 on 50 and 70 MHz, where a known mode decides (the 70.154 MHz FT8 goes to Sporadic-E even inside the MS window). Spots with `<AS>`/`<ACS>` (aircraft scatter) are not used for Sporadic-E.
 
-## Filter column (right 40%)
+## Spot filters
 
-Data collection is **one for the whole program**: every spot goes through these filters and on to the tab of each propagation mode (inside E-LAYER ANALYZER the YA-MS Data collection tab is not shown). At the top the **local filter** checkbox; below, five sub-tabs:
-
-| Sub-tab | What you set | Defaults (author's rules) |
-|---|---|---|
-| Meteor scatter | the YA-MS filter: MS frequency windows, other-propagation tags, MS modes and `<MS>`, bands | as in YA-MS |
-| Sporadic-E | `< >` tags that exclude the spot, 144 MHz rule, trans-equatorial rule | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, 50 MHz short hop 1200 km/15 min; ±20° |
-| F.A.I. | F.A.I. words, bands, period on the map | FAI, all bands, 24 hours |
-| Aurora | aurora `< >` tags, bands, period on the map | `AU` `AUR` (with or without `< >`), all bands, 2 hours |
-| Filter test | paste a cluster line and see how all filters classify it | |
-
-The **Restore the author's rules** button brings back the defaults.
+Data collection is **one for the whole program**: every spot goes through the filters and on to the tab of each propagation mode. From version 0.4.18 the filters, the local filter and the filter test are in the **[SETTINGS](Settings)** tab, sub-tab **Spot routing**.
 
 ## CALL3
 
@@ -44,7 +34,7 @@ These filters, which come from YA-MS (CW, minimum distance, frequency windows, M
 
 ## Spot and Propagation data sub-tabs
 
-The tab has two sub-tabs: **Spot** (sessions, collected spots, CALL3 and filter column) and **Propagation data**:
+The tab has two sub-tabs: **Spot** (sessions, PSKReporter MQTT, WSJT-X UDP, collected spots and CALL3) and **Propagation data**:
 
 - **N0NBH** (hamqsl.com): VHF banner and solar data, E-skip Europe and North America (DXrobot), aurora.
 - **Bz for aurora**: NOAA SWPC real-time solar wind (DSCOVR/ACE, L1 point), the best source for Bz.

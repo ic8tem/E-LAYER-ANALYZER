@@ -4,20 +4,27 @@ Windows, Linux, Raspberry Pi e Mac.
 
 INSTALLAZIONE
   Il programma e la sua cartella "data" stanno sempre insieme nella cartella personale E-LAYER-ANALYZER.
-  Windows  E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe (64 bit) o -win-x86-setup.exe (32 bit): installa in
-           C:\E-LAYER-ANALYZER, senza permessi di amministratore e senza scrivere in C:\Users\...\AppData
-           (niente collegamento nel menu Start, solo l'icona facoltativa sul desktop). In alternativa gli zip
-           portatili -win-x64-portatile.zip e -win-x86-portatile.zip.
-  Linux    e-layer-analyzer_x.y.z_amd64.deb: sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb, poi si avvia dal
-           menu (al primo avvio si copia in ~/E-LAYER-ANALYZER). Oppure E-LAYER-ANALYZER-x.y.z-linux-x64-portatile.tar.gz:
-           estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh (installa in ~/E-LAYER-ANALYZER con l'icona nel menu).
+  Windows  E-LAYER-ANALYZER-x.y.z-win-x64-setup.exe (64 bit), -win-x86-setup.exe (32 bit) o -win-arm64-setup.exe
+           (PC con Snapdragon): installa in C:\E-LAYER-ANALYZER, senza permessi di amministratore e senza scrivere in
+           C:\Users\...\AppData (niente collegamento nel menu Start, solo l'icona facoltativa sul desktop).
+           In alternativa gli zip portatili -win-x64-, -win-x86-, -win-arm64-portatile.zip.
+  Debian, Ubuntu, Mint  e-layer-analyzer_x.y.z_amd64.deb: sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb, poi si avvia
+           dal menu (al primo avvio si copia in ~/E-LAYER-ANALYZER).
+  Fedora, openSUSE  e-layer-analyzer-x.y.z.x86_64.rpm (o .aarch64.rpm, .armv7hl.rpm): sudo dnf install ./...rpm.
+  Arch, Manjaro, EndeavourOS, Arch Linux ARM  e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst (o -aarch64): sudo pacman -U ./...
+  Slackware  da root installpkg e-layer-analyzer-x.y.z-x86_64-1_ic8tem.txz (o -aarch64- per Slackware ARM64 sul Raspberry Pi),
+           poi si avvia e-layer-analyzer (al primo avvio si copia in ~/E-LAYER-ANALYZER).
+  Qualsiasi Linux  E-LAYER-ANALYZER-x.y.z-x86_64.AppImage (o -aarch64.AppImage): renderlo eseguibile e avviarlo (al primo
+           avvio si copia in ~/E-LAYER-ANALYZER); oppure E-LAYER-ANALYZER-x.y.z-linux-x64-portatile.tar.gz: estrarre e
+           avviare ./E-LAYER-ANALYZER, oppure ./installa.sh (installa in ~/E-LAYER-ANALYZER con l'icona nel menu).
+  Alpine Linux (musl)  -alpine-x64-portatile.tar.gz o -alpine-arm64-portatile.tar.gz (apk add icu-libs fontconfig).
   Raspberry Pi  Raspberry Pi OS a 64 bit (Pi 3/4/5): e-layer-analyzer_x.y.z_arm64.deb oppure -linux-arm64-portatile.tar.gz;
            Raspberry Pi OS a 32 bit (Pi 2/3/4): e-layer-analyzer_x.y.z_armhf.deb oppure -linux-arm-portatile.tar.gz.
-           Slackware ARM64: da root installpkg e-layer-analyzer-x.y.z-aarch64-1_ic8tem.txz, poi si avvia e-layer-analyzer
-           (al primo avvio si copia in ~/E-LAYER-ANALYZER); oppure -linux-arm64-portatile.tar.gz.
            Consigliati 4 GB di RAM e il desktop.
   Linux armv7l  altre schede ARM a 32 bit: E-LAYER-ANALYZER-x.y.z-linux-armv7l-portatile.tar.gz, come il portatile per Linux.
-  Non disponibili: Linux i686 (PC a 32 bit: .NET non esiste) e FreeBSD (mancano le librerie grafiche di Avalonia).
+  FreeBSD amd64  -freebsd-amd64-sperimentale.tar.gz: PACCHETTO SPERIMENTALE, NON VERIFICATO. Serve il .NET 8 della comunita'
+           (pkg install dotnet) e servono le librerie SkiaSharp e HarfBuzzSharp per FreeBSD (vedi LEGGIMI-FREEBSD.txt).
+  Non disponibili: Linux i686 (PC a 32 bit) e OpenBSD, perche' .NET non esiste per quei sistemi.
   Mac      E-LAYER-ANALYZER-x.y.z-osx-arm64.dmg (Apple Silicon M1-M4) oppure -osx-x64.dmg (Intel); aprire il .dmg,
            clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa -osx-arm64-app.zip / -osx-x64-app.zip
            con la sola applicazione, da estrarre in una propria cartella (per esempio ~/E-LAYER-ANALYZER):
@@ -28,7 +35,9 @@ INSTALLAZIONE
   un clic ("Aggiorna ora"); all'avvio controlla anche che non manchino file e propone di riscaricarli.
   Dalla versione 0.4.12 l'aggiornamento e' automatico e silenzioso: il programma scarica la versione nuova, la
   installa e si riavvia da solo senza chiedere; anche i file mancanti si riscaricano senza chiedere.
-  Per farsi chiedere di nuovo: agg_automatici=0 nel file data/ela.ini.
+  Per farsi chiedere di nuovo: IMPOSTAZIONI > Generali > Aggiornamenti (oppure agg_automatici=0 nel file data/ela.ini).
+  L'aggiornamento automatico NON vale per i pacchetti di sistema (.deb, .rpm, Arch, Slackware): con questi il programma
+  segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release.
 
 PRIMO AVVIO
   1. In alto scrivere nominativo, locator e quota, poi "Applica".
@@ -48,7 +57,9 @@ LINGUETTE
                    avviso "nessuna zona comune", angolo beta in evidenza, Manuale d'uso, confronto con spot reali MSQP 2025).
   AURORA           ovale OVATION, Kp e vento solare NOAA, Scatter trail e iso-riflessione per l'aurora radio,
                    spot <AU>/<AUR> disegnati con il calcolo dello scatter point.
-  DATA COLLECTION  tre sessioni telnet (cluster a scelta, RBN, cluster con PSKReporter), spot raccolti, CALL3.
+  DATA COLLECTION  tre sessioni telnet (cluster a scelta, RBN, cluster con PSKReporter), PSKReporter MQTT, WSJT-X UDP, spot raccolti, CALL3.
+  IMPOSTAZIONI     opzioni generali (stazione, lingua, colori, carattere, continente, ora, aggiornamenti) e
+                   smistamento degli spot tra le linguette, con i filtri e la prova di una riga del cluster.
   FONTI            fonti citate dal programma.
   SINTESI DELLE SCELTE DI CALCOLO, MANUALE D'USO, RELAZIONE TECNICA  formule e scelte di calcolo, manuale
                    d'uso approfondito e relazione tecnica sulle scelte (esportabili in Word).
