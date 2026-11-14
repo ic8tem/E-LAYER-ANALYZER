@@ -23,14 +23,14 @@ namespace ELA
     // c'e' una versione piu' recente la si scarica e installa e il programma si riavvia da solo, senza finestre; anche i
     // file mancanti si riscaricano senza chiedere. Con agg_automatici=0 in data/config.ini torna il comportamento qui sotto.
     // Aggiornamento automatico.
-    // All'avvio (dopo 20 s) e poi ogni 6 ore legge l'ultima Release di GitHub; se e' piu' recente della versione in uso
+    // All'avvio (dopo 20 s) e poi ogni 30 minuti legge l'ultima Release di GitHub; se e' piu' recente della versione in uso
     // lo segnala nella barra in alto (scritta lampeggiante cliccabile) e con una finestra: Aggiorna ora / Più tardi / Salta questa versione.
     // "Aggiorna ora" scarica il pacchetto portatile della propria piattaforma, aggiorna i file del programma nella cartella data
     // (call3.txt dell'utente resta), poi chiude il programma: uno script sostituisce i file e lo riavvia.
     public static class Updater
     {
         public const string Repo = "ic8tem/E-LAYER-ANALYZER";
-        public static readonly TimeSpan Interval = TimeSpan.FromHours(6);
+        public static readonly TimeSpan Interval = TimeSpan.FromMinutes(30);   // ogni 30 minuti (richiesta dell'autore, 14/11/2026; prima 6 ore)
 
         public static string LatestVersion { get; private set; }   // es. "0.4.5", null se non ancora letta
         public static string LatestNotes { get; private set; }
@@ -135,7 +135,7 @@ namespace ELA
             catch { return false; }
         }
 
-        // ---------- avvio: controllo dopo 20 s, poi ogni 6 ore
+        // ---------- avvio: controllo dopo 20 s, poi ogni 30 minuti
         static DispatcherTimer timer;
         public static void Start(Window owner)
         {
@@ -187,7 +187,7 @@ namespace ELA
             TextBlock head = new TextBlock { FontSize = 15, FontWeight = FontWeight.SemiBold, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 0, 0, 8) };
             TextBlock info = new TextBlock { TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 0, 8) };
             ProgressBar bar = new ProgressBar { Minimum = 0, Maximum = 100, Height = 8, IsVisible = false, Margin = new Thickness(0, 4, 0, 8) };
-            CheckBox chk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 6 ore"), Enabled);
+            CheckBox chk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 30 minuti"), Enabled);
             chk.Click += (s, e) => { Station.Cfg.Set("agg_controlla", chk.IsChecked == true); Station.Save(); };
             sp.Children.Add(head);
             bool newer = Newer;

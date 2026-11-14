@@ -22,7 +22,7 @@ Laai die regte lêer van die **[Releases](https://github.com/ic8tem/E-LAYER-ANAL
 
 Installeer die nuwe weergawe oor die ou een: instellings, versamelde spots, logs en `call3.txt` word behou.
 
-**Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 6 uur kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
+**Outomatiese bywerking (vanaf weergawe 0.4.5).** By opstart en daarna elke 30 minute kyk die program na die GitHub Releases. Wanneer 'n nuwe weergawe uit is, maak dit 'n venster oop en wys 'n oranje **▲ x.y.z** langs die NTP-aanwyser in die boonste balk:
 
 **Vanaf weergawe 0.4.12 is opdaterings outomaties en stil**: wanneer daar 'n nuwe weergawe op GitHub is, laai die program dit af, installeer dit en begin self weer sonder om iets te vra. Ontbrekende lêers word ook sonder vra weer afgelaai. Die opdateringsvenster verskyn net met 'n klik op die weergawe bo, of as jy agg_automatici=0 in die lêer data/ela.ini skryf.
 

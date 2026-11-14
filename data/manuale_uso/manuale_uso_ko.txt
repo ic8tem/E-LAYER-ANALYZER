@@ -26,7 +26,7 @@ P|실행하면 ESO의 VLT 위로 떨어지는 페르세우스자리 유성우 �
 H2|2.3 data 폴더
 P|모든 설정과 데이터는 프로그램 옆에 있는 하나의 data 폴더에 저장됩니다. AppData도 시스템 폴더도 사용하지 않습니다. YA-MS를 다른 컴퓨터로 옮기려면 프로그램 폴더를 data 폴더와 함께 복사하기만 하면 됩니다. 폴더의 내용은 13장에서 설명합니다.
 H2|2.4 자동 업데이트
-P|버전 1.8.11부터 업데이트는 자동이며 조용히 진행됩니다. 시작할 때와 그 후 6시간마다 YA-MS가 GitHub를 확인하고, 새 버전이 있으면 내려받아 설치한 뒤 아무것도 묻지 않고 스스로 다시 시작합니다(상태 표시줄에만 표시됩니다). 빠진 파일도 묻지 않고 다시 내려받습니다. 아래에 설명된 창은 "업데이트"를 누르거나 data/config.ini 파일에 aggiornamenti_automatici=0을 쓸 때만 나타납니다.
+P|Dalla versione 1.8.11 gli aggiornamenti sono automatici e silenziosi: all'avvio e poi ogni 6 ore YA-MS controlla GitHub e, se c'è una versione nuova, la scarica, la installa e si riavvia da solo senza chiedere nulla (lo dice solo la barra di stato). Anche i file mancanti si riscaricano senza chiedere. La finestra descritta qui sotto compare solo premendo "Aggiornamenti" oppure se scrivi aggiornamenti_automatici=0 nel file data/config.ini.
 P|버전 1.8.0부터 YA-MS는 실행할 때(하루에 최대 한 번) 새 버전이 나왔는지 GitHub에서 스스로 확인합니다. 새 버전이 있으면 변경 사항과 세 개의 버튼이 있는 "업데이트 있음" 창이 나타납니다.
 LI|지금 업데이트: 사용하는 시스템에 맞는 패키지를 다운로드하고, 프로그램 파일을 교체하고, data 폴더는 그대로 둔 채 YA-MS를 다시 시작합니다. data 폴더 안의 프로그램 파일 중 새 버전에서 바뀌는 파일은 먼저 data/backup/v<이전 버전>에 복사됩니다. 사용자 파일(설정, 기록, 스폿, ADIF)은 건드리지 않습니다.
 LI|나중에: 창을 닫습니다. 확인은 다음 날 다시 이루어집니다.
@@ -78,7 +78,7 @@ P|예보 계산 그룹의 첫 번째 하위 탭은 쓸모 있는 유성 흔적�
 H2|5.1 요약 띠
 P|지도 위의 띠에 그 시각의 계산 결과가 요약됩니다. 날짜와 시각, 경로 지수(활동 중인 유성우의 ZHR × 효율의 합), 가장 유용한 유성우와 그 ZHR 및 효율(DJ5HG 기준 대비 dB 값 포함), 수평선 위에 있는 유성우의 수, 권장 Hot과 그 방위각입니다.
 H2|5.2 평면 지도
-P|지도 오른쪽에는 하나의 열이 있습니다. 위쪽은 상대국 상자입니다: 먼저 안테나 방향 (안테나 방위, 항상 상대국 쪽), 다음으로 호출부호 (입력하고 Enter를 누르면 YAEC와 LIVETROPOVHF처럼 CALL3 데이터베이스에서 로케이터를 가져옴), 로케이터와 고도입니다. 호출부호는 로케이터 칸에도 입력할 수 있습니다. 아래쪽은 지도 기호 범례입니다: 제목을 클릭하면 접힙니다. 유럽 지도를 끄면 복사점 색상이 나타납니다.
+P|지도 오른쪽에는 하나의 열이 있습니다. 위쪽은 상대국 상자입니다: 먼저 안테나 방향 (안테나 방위, 항상 상대국 쪽), 다음으로 호출부호 (입력하고 Enter를 누르면 YAEC와 LIVETROPOVHF처럼 CALL3 데이터베이스에서 로케이터를 가져옴), 로케이터와 고도입니다. 호출부호는 로케이터 칸에도 입력할 수 있습니다. 아래쪽은 지도 기호 범례입니다: 제목을 클릭하면 접힙니다.
 P|왼쪽에는 위에서 본 유럽 지도(동쪽이 오른쪽)가 있고, 둘레에 각도 눈금이 있습니다.
 LI|녹색 선: 두 로케이터 사이의 실제 경로.
 LI|Hot A와 Hot B: 중간점 양쪽에 있는 두 핫스폿. 빨간색 = 권장, 분홍색 = 안테나 로브 밖, 회색 = 이미 로브 안(경고 표시).
@@ -187,8 +187,8 @@ LI|필터는 유성 산란의 대표 주파수(50190~50300, 70100~70400, 144290~
 LI|CW 스폿은 바로 버려집니다(주석에 CW 또는 WPM, 또는 28000-28070 kHz). <MS> 표시가 없으면 콘솔에 표시되지 않고 저장되지 않습니다. 상자는 끌 수 있습니다.
 LI|500 km보다 가까운 국 사이의 스팟은 즉시 버려집니다. 이 거리에서는 meteor scatter가 아니라 직접파 또는 대류권 전파이기 때문입니다. 콘솔에 표시되지 않고 저장되지 않습니다. 로케이터가 없으면 스팟은 유지됩니다. 거리는 체크박스 아래에서 바꿀 수 있습니다.
 LI|없는 로케이터는 CALL3 기록에서 가져옵니다. 받아들인 스폿은 data/spot_ms(하루에 파일 하나)와 실시간 트래픽 지도로 보내집니다.
-LI|LIVETROPOVHF 규칙을 따르는 CALL3 데이터베이스. "지금 업데이트"는 MMMonVHF에서 CALL3.TXT를 내려받습니다(유효한 줄 100,000개 이상, 이전 파일은 data/call3.bak에 남음). "7일마다 자동 업데이트"를 켜면 시작할 때 실행합니다. 파일 위에는 순서대로 손 입력(data/CALL3-MANUALE.TXT), 클러스터 수정(스팟한 국이 자신에 대해 알리는 6자리 로케이터), 추가 파일(data/CALL3-AGGIUNTE), 그다음 CALL3.TXT와 실시간으로 학습한 6자리 로케이터(data/LOC6.TXT)가 적용됩니다. 받은 4자리 로케이터나 LL·MM으로 끝나는 로케이터는 데이터베이스의 6자리 로케이터로 바뀝니다. 이동국(슬래시 포함)은 정확히 일치하는 항목만 사용합니다.
-LI|마지막 출처(LIVETROPOVHF와 같음): 다른 어떤 출처에도 6자리 로케이터가 없는 호출부호에 대해 프로그램이 6시간마다 자동으로 G7VRD 공개 API(api.g7vrd.co.uk)에 40개씩 묻습니다. 각 호출부호는 하루 최대 한 번입니다. 6자리 로케이터만 받으며, 사각형 중심(LL 또는 MM)은 제외하고, 받은 로케이터와 같은 사각형 안에 있어야 합니다. 결과는 data/CALL3-G7VRD.TXT에 저장되고, 다른 모든 수정과 마찬가지로 data/call3.txt에도 기록됩니다.
+LI|LIVETROPOVHF 규칙을 따르는 CALL3 데이터베이스. "지금 업데이트"는 MMMonVHF에서 CALL3.TXT를 내려받습니다(유효한 줄 100,000개 이상, 이전 파일은 data/call3.bak에 남음). "12시간마다 자동 업데이트"를 켜면 시작할 때 실행합니다. 파일 위에는 순서대로 손 입력(data/CALL3-MANUALE.TXT), 클러스터 수정(스팟한 국이 자신에 대해 알리는 6자리 로케이터), 추가 파일(data/CALL3-AGGIUNTE), 그다음 CALL3.TXT와 실시간으로 학습한 6자리 로케이터(data/LOC6.TXT)가 적용됩니다. 받은 4자리 로케이터나 LL·MM으로 끝나는 로케이터는 데이터베이스의 6자리 로케이터로 바뀝니다. 이동국(슬래시 포함)은 정확히 일치하는 항목만 사용합니다.
+LI|마지막 출처(LIVETROPOVHF와 같음): 다른 어떤 출처에도 6자리 로케이터가 없는 호출부호에 대해 프로그램이 30분마다 자동으로 G7VRD 공개 API(api.g7vrd.co.uk)에 40개씩 묻습니다. 각 호출부호는 하루 최대 한 번입니다. 6자리 로케이터만 받으며, 사각형 중심(LL 또는 MM)은 제외하고, 받은 로케이터와 같은 사각형 안에 있어야 합니다. 결과는 data/CALL3-G7VRD.TXT에 저장되고, 다른 모든 수정과 마찬가지로 data/call3.txt에도 기록됩니다.
 H1|10. 실시간 유성우와 유성우 목록
 H2|10.1 실시간 유성우
 P|왼쪽에는 Global Meteor Network가 측정한 활동 중인 유성우의 플럭스와 ZHR, 그리고 유성우별 GMN 카메라의 당일 계수가 표시됩니다(이는 플럭스가 아니라 계수이며, 맑은 하늘을 보는 관측소의 수에 따라 달라집니다). 오른쪽에는 낮 유성우를 포함한 CMOR 레이더의 복사점 지도가 표시됩니다. 파일은 바뀐 경우에만, 최대 30분마다 또는 "지금 다운로드"로 다시 다운로드됩니다.
@@ -225,7 +225,7 @@ LI|controlla_aggiornamenti=0: 새 버전을 확인하지 않음. aggiornamenti_s
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: 계산 확인란.
 LI|raggio_iniziale(0 = ITU의 두 배, 1 = ITU, 2 = 제외), durata_ping(0 = λ², 1 = 관측값).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
-LI|psk_rimando=0: UDP로 받은 MS 디코드(MSK144, FSK441, PSK2K, JTMS)를 PSKReporter로 전달하는 기능을 끕니다. 기본으로 켜져 있으며 스스로 동작합니다: PSKReporter에 보고를 보내는 국 가운데 내 호출부호가 20분 넘게 보이지 않으면(디지털 프로그램이 보내지 않음), YA-MS가 5분마다 나를 수신국으로 하여 내가 디코드한 MS 국을 보냅니다. 디지털 프로그램이 다시 보내기 시작하면 YA-MS는 즉시 멈춥니다. UDP 콘솔의 한 줄이 시작과 정지를 알려 줍니다.
+LI|psk_rimando=0: UDP로 받은 MS 디코드(MSK144, FSK441, PSK2K, JTMS)를 PSKReporter로 전달하는 기능을 끕니다. 기본으로 켜져 있으며 스스로 동작합니다: PSKReporter에 보고를 보내는 국 가운데 내 호출부호가 20분 넘게 보이지 않으면(디지털 프로그램이 보내지 않음), YA-MS가 5분마다 나를 수신국으로 하여 내가 디코드한 MS 국을 보냅니다. 디지털 프로그램이 다시 보내기 시작하면 YA-MS는 즉시 멈춥니다. UDP 콘솔의 한 줄이 시작과 정지를 알려 줍니다. WSJT-X.ini(또는 JTDX.ini)에서 PSKReporter 전송이 꺼져 있으면 YA-MS는 20분을 기다리지 않고 바로 전달합니다.
 TAG|ATTENZIONE|config.ini는 프로그램을 닫은 상태에서만 수정하세요. YA-MS는 종료할 때 이 파일을 다시 씁니다.
 H1|14. 대표적인 절차
 H2|14.1 유성우 스케줄 준비하기

@@ -22,7 +22,7 @@ Unduh file yang tepat dari halaman **[Releases](https://github.com/ic8tem/E-LAYE
 
 Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3.txt` tetap tersimpan.
 
-**Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 6 jam program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
+**Pembaruan otomatis (sejak versi 0.4.5).** Saat mulai lalu setiap 30 menit program memeriksa Releases di GitHub. Jika ada versi baru, program membuka sebuah jendela dan menampilkan **▲ x.y.z** berwarna oranye di samping indikator NTP pada bilah atas:
 
 **Sejak versi 0.4.12 pembaruan berjalan otomatis dan diam-diam**: saat ada versi baru di GitHub, program mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun. Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela pembaruan hanya muncul dengan klik pada versi di bagian atas, atau jika Anda menulis agg_automatici=0 di berkas data/ela.ini.
 

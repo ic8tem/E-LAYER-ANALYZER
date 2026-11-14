@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT bağlı değ
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(km) değerinden daha yakın istasyonlar arasındaki spotları hemen at; bu mesafede bağlantı doğrudan veya troposferiktir: konsolda görünmezler ve kaydedilmezler. Bir lokatör eksikse spot korunur.
 spot entro {0} km scartati: {1}	{0} km içinde atılan spotlar: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
-Aggiorna da solo ogni 7 giorni	7 günde bir kendiliğinden güncelle
+Aggiorna da solo ogni 12 ore	12 saatte bir kendiliğinden güncelle
 Aggiornamento di CALL3 già in corso.	CALL3 güncellemesi zaten sürüyor.
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 güncellenemedi: {0}
 Aggiungi un file...	Dosya ekle...
@@ -772,7 +772,7 @@ locator	lokatör
 {0} nel CALL3: {1}	CALL3'te {0}: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} CALL3'te yok: lokatörü elle yazın
 Cerca su G7VRD i locator mancanti	Eksik lokatörleri G7VRD'de ara
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 6 saatte bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	Son kaynak, LIVETROPOVHF'teki gibi: başka hiçbir kaynakta 6 karakterli lokatörü olmayan çağrı işaretleri için program her 30 dakikada bir otomatik olarak G7VRD'nin açık API'sine (api.g7vrd.co.uk) 40'lık gruplar halinde sorar; her çağrı işareti en fazla günde bir kez. Yalnızca 6 karakterli lokatör kabul edilir, karenin merkezi (LL veya MM) değil, alınanla aynı karede. Sonuçlar data/CALL3-G7VRD.TXT içinde tutulur ve tüm düzeltmeler gibi data/call3.txt içine de yazılır.
 Ascolta	Dinle
 Avvia	Başlat
 Avvia all'apertura	Açılışta başlat

@@ -22,7 +22,7 @@ Laden Sie die passende Datei von der Seite **[Releases](https://github.com/ic8te
 
 Installieren Sie die neue Version über die alte: Einstellungen, gesammelte Spots, Logs und `call3.txt` bleiben erhalten.
 
-**Automatische Aktualisierung (ab Version 0.4.5).** Beim Start und danach alle 6 Stunden prüft das Programm die GitHub-Releases. Ist eine neue Version erschienen, öffnet es ein Fenster und zeigt in der oberen Leiste neben der NTP-Anzeige ein orangefarbenes **▲ x.y.z**:
+**Automatische Aktualisierung (ab Version 0.4.5).** Beim Start und danach alle 30 Minuten prüft das Programm die GitHub-Releases. Ist eine neue Version erschienen, öffnet es ein Fenster und zeigt in der oberen Leiste neben der NTP-Anzeige ein orangefarbenes **▲ x.y.z**:
 
 **Ab Version 0.4.12 erfolgen Updates automatisch und still**: Liegt auf GitHub eine neue Version vor, lädt das Programm sie herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen. Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das Update-Fenster erscheint nur mit einem Klick auf die Version oben oder wenn du agg_automatici=0 in die Datei data/ela.ini schreibst.
 

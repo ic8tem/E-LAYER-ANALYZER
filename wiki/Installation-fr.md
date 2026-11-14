@@ -22,7 +22,7 @@ Téléchargez le bon fichier depuis la page **[Releases](https://github.com/ic8t
 
 Installez la nouvelle version par-dessus l'ancienne : les réglages, les spots collectés, les logs et `call3.txt` sont conservés.
 
-**Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 6 heures, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
+**Mise à jour automatique (depuis la version 0.4.5).** Au démarrage puis toutes les 30 minutes, le programme consulte les Releases GitHub. Quand une nouvelle version est sortie, il ouvre une fenêtre et affiche un **▲ x.y.z** orange à côté de l'indicateur NTP dans la barre du haut :
 
 **Depuis la version 0.4.12, les mises à jour sont automatiques et silencieuses **: quand une nouvelle version est sur GitHub, le programme la télécharge, l'installe et redémarre tout seul sans rien demander. Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre de mise à jour n'apparaît qu'en cliquant sur la version en haut, ou si vous écrivez agg_automatici=0 dans le fichier data/ela.ini.
 

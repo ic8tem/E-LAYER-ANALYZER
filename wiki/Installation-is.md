@@ -22,7 +22,7 @@ Sæktu réttu skrána af síðunni **[Releases](https://github.com/ic8tem/E-LAYE
 
 Settu nýju útgáfuna upp yfir þá gömlu: stillingar, söfnuð spot, dagbækur og `call3.txt` haldast.
 
-**Sjálfvirk uppfærsla (frá útgáfu 0.4.5).** Við ræsingu og síðan á 6 klukkustunda fresti athugar forritið GitHub Releases. Þegar ný útgáfa er komin út opnar það glugga og sýnir appelsínugult **▲ x.y.z** við hlið NTP-vísisins í efri stikunni:
+**Sjálfvirk uppfærsla (frá útgáfu 0.4.5).** Við ræsingu og síðan á 30 mínútna fresti athugar forritið GitHub Releases. Þegar ný útgáfa er komin út opnar það glugga og sýnir appelsínugult **▲ x.y.z** við hlið NTP-vísisins í efri stikunni:
 
 **Frá útgáfu 0.4.12 eru uppfærslur sjálfvirkar og hljóðlausar**: þegar ný útgáfa er á GitHub sækir forritið hana, setur hana upp og endurræsir sig sjálft án þess að spyrja. Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Uppfærsluglugginn birtist aðeins með smelli á útgáfuna efst, eða ef þú skrifar agg_automatici=0 í skrána data/ela.ini.
 

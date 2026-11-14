@@ -55,7 +55,7 @@ namespace YAMS
             Button bC3Upd = B(Lang.T("Aggiorna adesso"));
             ToolTip.SetTip(bC3Upd, Lang.T("Scarica il CALL3.TXT più recente da MMMonVHF (www.mmmonvhf.de), lo controlla (almeno 100.000 righe valide, altrimenti non cambia nulla), salva il precedente in data/call3.bak e lo sostituisce. Voci a mano, file aggiunti, correzioni dal cluster e locatori imparati restano sopra e non si toccano."));
             bC3Upd.Click += async (s, e) => await UpdateCall3Now();
-            chkC3Auto = C(Lang.T("Aggiorna da solo ogni 7 giorni"), cfg.GetB("call3_auto", true));
+            chkC3Auto = C(Lang.T("Aggiorna da solo ogni 12 ore"), cfg.GetB("call3_auto", true));
             chkC3Auto.IsCheckedChanged += (s, e) => cfg.Set("call3_auto", chkC3Auto.IsChecked == true);
             Button bC3Add = B(Lang.T("Aggiungi un file..."));
             ToolTip.SetTip(bC3Add, Lang.T("Un file nel formato di CALL3.TXT (nominativo,locatore; vanno bene anche punto e virgola, tabulazione e spazio) si copia in data/CALL3-AGGIUNTE e vale sopra CALL3.TXT; con più file vince l'ultimo in ordine alfabetico."));
@@ -65,7 +65,7 @@ namespace YAMS
             bC3Man.Click += async (s, e) => await EditCall3Manual();
             lblC3Status = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap };
             CheckBox chkG7 = C(Lang.T("Cerca su G7VRD i locator mancanti"), cfg.GetB("call3_g7vrd", true));
-            ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt."));
+            ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt."));
             CallDb.G7Enabled = chkG7.IsChecked == true;
             chkG7.IsCheckedChanged += (s, e) => { CallDb.G7Enabled = chkG7.IsChecked == true; cfg.Set("call3_g7vrd", CallDb.G7Enabled); };
             Border c3row = Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status);
@@ -481,18 +481,28 @@ namespace YAMS
 
         CheckBox chkC3Auto;
         TextBlock lblC3Status;
-        bool c3AutoTried;
+        bool c3AutoBusy;
+        DateTime c3AutoLastTry = DateTime.MinValue;
+        Avalonia.Threading.DispatcherTimer c3AutoTimer;
 
-        // all'avvio, se scelto e se l'ultimo aggiornamento ha piu' di 7 giorni (come LIVETROPOVHF)
+        // da solo, se scelto e se l'ultimo aggiornamento ha piu' di 12 ore: all'avvio e poi con un controllo ogni 30 minuti
+        // (a programma aperto); dopo un tentativo non riuscito si riprova non prima di un'ora
         async void AutoUpdateCall3()
         {
-            if (c3AutoTried || Program.ScreenshotDir != null) return;
-            c3AutoTried = true;
-            if (!cfg.GetB("call3_auto", true)) return;
+            if (Program.ScreenshotDir != null) return;
+            if (c3AutoTimer == null)
+            {
+                c3AutoTimer = new Avalonia.Threading.DispatcherTimer { Interval = TimeSpan.FromMinutes(30) };
+                c3AutoTimer.Tick += (s, e) => AutoUpdateCall3();
+                c3AutoTimer.Start();
+            }
+            if (c3AutoBusy || !cfg.GetB("call3_auto", true) || CallDb.Loading) return;
+            if (DateTime.UtcNow - c3AutoLastTry < TimeSpan.FromHours(1)) return;
             DateTime last;
             if (DateTime.TryParse(cfg.Get("call3_ultimo", ""), CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out last)
-                && DateTime.UtcNow - last < TimeSpan.FromDays(CallDb.AutoDays)) return;
-            await UpdateCall3Now();
+                && DateTime.UtcNow - last < TimeSpan.FromHours(CallDb.AutoHours)) return;
+            c3AutoBusy = true; c3AutoLastTry = DateTime.UtcNow;
+            try { await UpdateCall3Now(); } finally { c3AutoBusy = false; }
         }
 
         async System.Threading.Tasks.Task UpdateCall3Now()

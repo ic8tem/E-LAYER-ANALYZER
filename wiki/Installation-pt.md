@@ -22,7 +22,7 @@ Descarregue o ficheiro certo da página **[Releases](https://github.com/ic8tem/E
 
 Instale a nova versão por cima da anterior: as definições, os spots recolhidos, os logs e o `call3.txt` são mantidos.
 
-**Atualização automática (a partir da versão 0.4.5).** Ao arrancar e depois a cada 6 horas o programa consulta as Releases do GitHub. Quando sai uma versão nova, abre uma janela e mostra um **▲ x.y.z** laranja ao lado do indicador NTP na barra superior:
+**Atualização automática (a partir da versão 0.4.5).** Ao arrancar e depois a cada 30 minutos o programa consulta as Releases do GitHub. Quando sai uma versão nova, abre uma janela e mostra um **▲ x.y.z** laranja ao lado do indicador NTP na barra superior:
 
 **A partir da versão 0.4.12 as atualizações são automáticas e silenciosas**: quando há uma versão nova no GitHub, o programa descarrega-a, instala-a e reinicia sozinho sem perguntar nada. Também os ficheiros em falta são descarregados de novo sem perguntar. A janela de atualização só aparece com um clique na versão em cima, ou se escrever agg_automatici=0 no ficheiro data/ela.ini.
 

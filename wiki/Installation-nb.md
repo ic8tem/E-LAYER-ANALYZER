@@ -22,7 +22,7 @@ Last ned riktig fil fra siden **[Releases](https://github.com/ic8tem/E-LAYER-ANA
 
 Installer den nye versjonen oppå den gamle: innstillinger, innsamlede spot, logger og `call3.txt` beholdes.
 
-**Automatisk oppdatering (fra versjon 0.4.5).** Ved oppstart og deretter hver 6. time sjekker programmet GitHub Releases. Når en ny versjon er kommet, åpner det et vindu og viser en oransje **▲ x.y.z** ved siden av NTP-indikatoren i linjen øverst:
+**Automatisk oppdatering (fra versjon 0.4.5).** Ved oppstart og deretter hvert 30. minutt sjekker programmet GitHub Releases. Når en ny versjon er kommet, åpner det et vindu og viser en oransje **▲ x.y.z** ved siden av NTP-indikatoren i linjen øverst:
 
 **Fra versjon 0.4.12 er oppdateringene automatiske og stille**: når det finnes en ny versjon på GitHub, laster programmet den ned, installerer den og starter på nytt av seg selv uten å spørre om noe. Manglende filer lastes også ned på nytt uten å spørre. Oppdateringsvinduet vises bare med et klikk på versjonen øverst, eller hvis du skriver agg_automatici=0 i filen data/ela.ini.
 

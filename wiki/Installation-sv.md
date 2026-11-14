@@ -22,7 +22,7 @@ Ladda ned rätt fil från sidan **[Releases](https://github.com/ic8tem/E-LAYER-A
 
 Installera den nya versionen ovanpå den gamla: inställningar, insamlade spots, loggar och `call3.txt` behålls.
 
-**Automatisk uppdatering (från version 0.4.5).** Vid start och sedan var 6:e timme kontrollerar programmet GitHub Releases. När en ny version har kommit ut öppnar det ett fönster och visar ett orange **▲ x.y.z** bredvid NTP-indikatorn i fältet högst upp:
+**Automatisk uppdatering (från version 0.4.5).** Vid start och sedan var 30:e minut kontrollerar programmet GitHub Releases. När en ny version har kommit ut öppnar det ett fönster och visar ett orange **▲ x.y.z** bredvid NTP-indikatorn i fältet högst upp:
 
 **Från version 0.4.12 är uppdateringarna automatiska och tysta**: när en ny version finns på GitHub laddar programmet ner den, installerar den och startar om av sig självt utan att fråga något. Saknade filer laddas också ner igen utan att fråga. Uppdateringsfönstret visas bara med ett klick på versionen högst upp, eller om du skriver agg_automatici=0 i filen data/ela.ini.
 

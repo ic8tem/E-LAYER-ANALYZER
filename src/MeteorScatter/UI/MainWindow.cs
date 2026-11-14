@@ -1091,7 +1091,7 @@ namespace YAMS
             item(body, Color.FromRgb(255, 210, 90), Lang.T("scorrimento sciame"));
             item(body, SkyPal.Orange, Lang.T("miglior punt."));
             item(body, Color.FromRgb(235, 225, 190), Lang.T("zona PREV"));
-            // senza la pianta (mappa spenta o vista dal basso) si vedono anche i radianti
+            // colori dei radianti: sempre in legenda
             legendRadiants = new StackPanel { Spacing = 2, Margin = new Thickness(0, 6, 0, 0) };
             item(legendRadiants, SkyPal.Azure, Lang.T("percorso rad."));
             legendRadiants.Children.Add(new TextBlock { Text = Lang.T("Radiante:"), FontWeight = FontWeight.SemiBold, FontSize = 12, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 4, 0, 0) });
@@ -1116,7 +1116,7 @@ namespace YAMS
 
         void UpdateMapLegend()
         {
-            if (legendRadiants != null && sky != null) legendRadiants.IsVisible = !(sky.ShowMap && sky.TopView);
+            if (legendRadiants != null) legendRadiants.IsVisible = true;   // colori dei radianti sempre visibili (richiesta dell'autore, 14/11/2026)
         }
 
         Control BuildDxBox()

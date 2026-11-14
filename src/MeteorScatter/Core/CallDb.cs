@@ -1,6 +1,6 @@
 // YA-MS - archivio nominativo -> locator (CALL3.TXT) con le stesse regole di LIVETROPOVHF (IC8TEM):
 //  - base: data/call3.txt (formato CALL3 di WSJT-X/JTDX/MSHV: "CALL,LOCATOR,...");
-//  - aggiornamento da MMMonVHF (www.mmmonvhf.de): "Aggiorna adesso" o da solo all'avvio ogni 7 giorni; il file
+//  - aggiornamento da MMMonVHF (www.mmmonvhf.de): "Aggiorna adesso" o da solo ogni 12 ore; il file
 //    scaricato si accetta solo con almeno 100.000 righe valide, il precedente resta in call3.bak;
 //  - strati sopra il file, tutti nella cartella data e mai toccati dall'aggiornamento:
 //      voci a mano (CALL3-MANUALE.TXT)  >  correzioni dal cluster (CALL3-CLUSTER.TXT)  >
@@ -13,7 +13,7 @@
 //    solo a 4 caratteri si ricorda e vale per gli spot dello stesso nominativo nello stesso quadrato; due anni;
 //  - ultima fonte G7VRD (api.g7vrd.co.uk, "locator by callsign"): solo per i nominativi senza locatore a 6 caratteri
 //    in tutte le fonti precedenti; si accetta solo un 6 caratteri valido (non LL/MM) nello stesso quadrato di quello
-//    ricevuto; le ricerche si fanno in automatico ogni 6 ore (richiesta dell'autore, 14/11/2026), in gruppi di 40
+//    ricevuto; le ricerche si fanno in automatico ogni 30 minuti (richiesta dell'autore, 14/11/2026), in gruppi di 40
 //    nominativi, ogni nominativo al massimo una volta al giorno; risultati in data/CALL3-G7VRD.TXT (tenuti un anno);
 //    si spegne con la casella (call3_g7vrd=0);
 //  - le correzioni (voci a mano, cluster, file aggiunti, G7VRD, LOC6) si scrivono anche dentro data/call3.txt
@@ -60,7 +60,7 @@ namespace YAMS
         public static event Action Loaded;
 
         public const string MmmonvhfUrl = "https://www.mmmonvhf.de/dl.php?dl=call3.txt";
-        public const int AutoDays = 7;
+        public const int AutoHours = 12;   // aggiornamento automatico da MMMonVHF ogni 12 ore (richiesta dell'autore, 14/11/2026; prima 7 giorni)
         public static string ManualPath { get { return Path.Combine(DataDir, "CALL3-MANUALE.TXT"); } }
         public static string OverlayDir { get { return Path.Combine(DataDir, "CALL3-AGGIUNTE"); } }
         public static string ClusterPath { get { return Path.Combine(DataDir, "CALL3-CLUSTER.TXT"); } }
@@ -123,7 +123,8 @@ namespace YAMS
             catch { }
         }
 
-        // ogni 6 ore, in sottofondo: tutti i nominativi in attesa, in gruppi di 40 con una pausa tra un gruppo e l'altro
+        static DateTime lastCall3Write = DateTime.UtcNow;
+        // ogni 30 minuti, in sottofondo: tutti i nominativi in attesa, in gruppi di 40 con una pausa tra un gruppo e l'altro
         static async void G7Tick(object state)
         {
             if (Interlocked.Exchange(ref g7Busy, 1) == 1) return;
@@ -138,7 +139,11 @@ namespace YAMS
                     await Task.Delay(TimeSpan.FromSeconds(3));
                 }
                 if (found > 0) G7Save();
-                WriteCorrectionsToCall3();   // ogni 6 ore: correzioni nuove (cluster, LOC6, G7VRD) dentro call3.txt
+                if (DateTime.UtcNow - lastCall3Write >= TimeSpan.FromHours(6))
+                {
+                    lastCall3Write = DateTime.UtcNow;
+                    WriteCorrectionsToCall3();   // ogni 6 ore: correzioni nuove (cluster, LOC6, G7VRD) dentro call3.txt
+                }
             }
             catch (Exception ex) { G7Status = "G7VRD: " + ex.Message; }
             finally { Interlocked.Exchange(ref g7Busy, 0); }
@@ -220,7 +225,7 @@ namespace YAMS
         {
             DataDir = dataDir;
             FilePath = Path.Combine(dataDir, "call3.txt");
-            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromMinutes(2), TimeSpan.FromHours(6)); }
+            if (g7Timer == null) { G7Load(); g7Timer = new Timer(G7Tick, null, TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(30)); }
             if (Loading) return;
             Loading = true;
             ThreadPool.QueueUserWorkItem(_ =>

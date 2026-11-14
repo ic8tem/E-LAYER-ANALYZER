@@ -22,7 +22,7 @@ Stáhněte si správný soubor ze stránky **[Releases](https://github.com/ic8te
 
 Nainstalujte novou verzi přes starou: nastavení, shromážděné spoty, deníky a `call3.txt` zůstanou zachovány.
 
-**Automatická aktualizace (od verze 0.4.5).** Při spuštění a pak každých 6 hodin program kontroluje Releases na GitHubu. Když vyjde nová verze, otevře okno a vedle ukazatele NTP v horní liště zobrazí oranžové **▲ x.y.z**:
+**Automatická aktualizace (od verze 0.4.5).** Při spuštění a pak každých 30 minut program kontroluje Releases na GitHubu. Když vyjde nová verze, otevře okno a vedle ukazatele NTP v horní liště zobrazí oranžové **▲ x.y.z**:
 
 **Od verze 0.4.12 jsou aktualizace automatické a tiché**: když je na GitHubu nová verze, program ji stáhne, nainstaluje a sám se restartuje, aniž by se na cokoli ptal. Chybějící soubory se také znovu stáhnou bez ptaní. Okno aktualizace se objeví jen po kliknutí na verzi nahoře nebo pokud do souboru data/ela.ini zapíšete agg_automatici=0.
 

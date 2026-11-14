@@ -749,7 +749,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT 未連線：
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	立即捨棄距離小於（公里）的電台之間的報告，因為在此距離上通聯為直達或對流層傳播：它們不會出現在主控台中，也不會被儲存。缺少定位碼時保留該報告。
 spot entro {0} km scartati: {1}	已捨棄 {0} 公里以內的報告：{1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	顯示所有波段的報告，包括資料收集中未選擇的波段（這些不會被儲存）。如果在資料收集中被捨棄，CW 報告和距離過近的電台之間的報告不會顯示。
-Aggiorna da solo ogni 7 giorni	每 7 天自動更新
+Aggiorna da solo ogni 12 ore	每 12 小時自動更新
 Aggiornamento di CALL3 già in corso.	CALL3 正在更新中。
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 更新失敗：{0}
 Aggiungi un file...	加入檔案...
@@ -774,7 +774,7 @@ locator	定位碼
 {0} nel CALL3: {1}	CALL3 中的 {0}：{1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} 不在 CALL3 中：請手動輸入定位碼
 Cerca su G7VRD i locator mancanti	在 G7VRD 上查找缺少的定位碼
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	最後的來源，與 LIVETROPOVHF 相同：對於在其他任何來源中都沒有 6 碼定位碼的呼號，程式每 6 小時自動查詢 G7VRD 的公開 API（api.g7vrd.co.uk），每組 40 個呼號；每個呼號每天最多一次。只接受 6 碼定位碼，不接受方格中心（LL 或 MM），且須與收到的定位碼在同一方格內。結果儲存在 data/CALL3-G7VRD.TXT，並與所有修正一樣，也寫入 data/call3.txt。
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	最後的來源，與 LIVETROPOVHF 相同：對於在其他任何來源中都沒有 6 碼定位碼的呼號，程式每 30 分鐘自動查詢 G7VRD 的公開 API（api.g7vrd.co.uk），每組 40 個呼號；每個呼號每天最多一次。只接受 6 碼定位碼，不接受方格中心（LL 或 MM），且須與收到的定位碼在同一方格內。結果儲存在 data/CALL3-G7VRD.TXT，並與所有修正一樣，也寫入 data/call3.txt。
 Ascolta	監聽
 Avvia	啟動
 Avvia all'apertura	開啟時啟動

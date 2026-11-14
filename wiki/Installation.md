@@ -22,7 +22,7 @@ Download the right file from the **[Releases](https://github.com/ic8tem/E-LAYER-
 
 Install the new version over the old one: settings, collected spots, logs and `call3.txt` are kept.
 
-**Automatic update (from version 0.4.5).** At start-up and then every 6 hours the program checks the GitHub Releases. When a new version is out it opens a window and shows an orange **▲ x.y.z** next to the NTP indicator in the top bar:
+**Automatic update (from version 0.4.5).** At start-up and then every 30 minutes the program checks the GitHub Releases. When a new version is out it opens a window and shows an orange **▲ x.y.z** next to the NTP indicator in the top bar:
 
 **From version 0.4.12 updates are automatic and silent**: when a new version is on GitHub the program downloads it, installs it and restarts by itself without asking anything. Missing files are also downloaded again without asking. The update window appears only with a click on the version at the top, or if you write agg_automatici=0 in the file data/ela.ini.
 

@@ -22,7 +22,7 @@ I-download ang tamang file mula sa pahinang **[Releases](https://github.com/ic8t
 
 I-install ang bagong bersyon sa ibabaw ng luma: pinananatili ang mga setting, nakolektang spot, log at `call3.txt`.
 
-**Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 6 na oras, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
+**Awtomatikong update (mula sa bersiyon 0.4.5).** Sa pagbukas at pagkatapos ay bawat 30 minuto, tinitingnan ng programa ang mga Release sa GitHub. Kapag may bagong bersiyon, nagbubukas ito ng window at nagpapakita ng kulay-kahel na **▲ x.y.z** sa tabi ng indicator ng NTP sa bar sa itaas:
 
 **Mula sa bersyon 0.4.12, awtomatiko at tahimik ang mga update**: kapag may bagong bersyon sa GitHub, dina-download ito ng programa, ini-install, at kusang nagre-restart nang walang tinatanong. Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window ng update kapag kinlik ang bersyon sa itaas, o kung isusulat mo ang agg_automatici=0 sa file na data/ela.ini.
 

@@ -22,7 +22,7 @@ Pobierz odpowiedni plik ze strony **[Releases](https://github.com/ic8tem/E-LAYER
 
 Zainstaluj nową wersję na starej: ustawienia, zebrane spoty, logi i `call3.txt` zostają zachowane.
 
-**Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 6 godzin program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
+**Automatyczna aktualizacja (od wersji 0.4.5).** Przy starcie, a potem co 30 minut program sprawdza wydania (Releases) na GitHubie. Gdy ukaże się nowa wersja, otwiera okno i pokazuje pomarańczowe **▲ x.y.z** obok wskaźnika NTP na górnym pasku:
 
 **Od wersji 0.4.12 aktualizacje są automatyczne i ciche**: gdy na GitHubie jest nowa wersja, program ją pobiera, instaluje i sam uruchamia się ponownie, o nic nie pytając. Brakujące pliki również są pobierane ponownie bez pytania. Okno aktualizacji pojawia się tylko po kliknięciu wersji u góry albo jeśli wpiszesz agg_automatici=0 w pliku data/ela.ini.
 

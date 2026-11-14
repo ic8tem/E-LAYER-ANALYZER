@@ -747,7 +747,7 @@ MQTT non connesso: si connette dalla linguetta "Raccolta dati"	MQTT जुड़
 Scarta subito gli spot tra stazioni più vicine di (km), perché a quella distanza il collegamento è diretto o troposferico: non compaiono nella console e non si memorizzano. Se manca un locator lo spot resta.	(किमी) से नज़दीकी स्टेशनों के बीच के स्पॉट तुरंत हटाएँ, क्योंकि इस दूरी पर संपर्क सीधा या ट्रोपोस्फेरिक होता है: वे कंसोल में नहीं दिखते और सहेजे नहीं जाते। लोकेटर न हो तो स्पॉट बना रहता है।
 spot entro {0} km scartati: {1}	{0} किमी के भीतर हटाए गए स्पॉट: {1}
 Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.	सभी बैंडों के स्पॉट दिखाए जाते हैं, उन बैंडों के भी जो डेटा संग्रह में नहीं चुने गए (वे सहेजे नहीं जाते)। CW स्पॉट और बहुत पास के स्टेशनों के बीच के स्पॉट नहीं दिखते, यदि वे डेटा संग्रह में हटाए जाते हैं।
-Aggiorna da solo ogni 7 giorni	हर 7 दिन में स्वयं अपडेट करें
+Aggiorna da solo ogni 12 ore	हर 12 घंटे में स्वयं अपडेट करें
 Aggiornamento di CALL3 già in corso.	CALL3 का अपडेट पहले से चल रहा है।
 Aggiornamento di CALL3 non riuscito: {0}	CALL3 अपडेट विफल: {0}
 Aggiungi un file...	फ़ाइल जोड़ें...
@@ -772,7 +772,7 @@ locator	लोकेटर
 {0} nel CALL3: {1}	CALL3 में {0}: {1}
 {0} non è nel CALL3: scrivi il locator a mano	{0} CALL3 में नहीं है: लोकेटर हाथ से लिखें
 Cerca su G7VRD i locator mancanti	गायब लोकेटर G7VRD पर खोजें
-Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	अंतिम स्रोत, LIVETROPOVHF की तरह: जिन कॉल साइन का किसी अन्य स्रोत में 6 अक्षरों का लोकेटर नहीं है, उनके लिए प्रोग्राम हर 6 घंटे में स्वतः G7VRD के सार्वजनिक API (api.g7vrd.co.uk) से 40 कॉल साइन के समूहों में पूछता है; हर कॉल साइन दिन में अधिकतम एक बार। केवल 6 अक्षरों का लोकेटर स्वीकार होता है, वर्ग का केंद्र (LL या MM) नहीं, उसी वर्ग में जिसमें प्राप्त वाला है। परिणाम data/CALL3-G7VRD.TXT में रहते हैं और सभी सुधारों की तरह data/call3.txt में भी लिखे जाते हैं।
+Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 30 minuti all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	अंतिम स्रोत, LIVETROPOVHF की तरह: जिन कॉल साइन का किसी अन्य स्रोत में 6 अक्षरों का लोकेटर नहीं है, उनके लिए प्रोग्राम हर 30 मिनट में स्वतः G7VRD के सार्वजनिक API (api.g7vrd.co.uk) से 40 कॉल साइन के समूहों में पूछता है; हर कॉल साइन दिन में अधिकतम एक बार। केवल 6 अक्षरों का लोकेटर स्वीकार होता है, वर्ग का केंद्र (LL या MM) नहीं, उसी वर्ग में जिसमें प्राप्त वाला है। परिणाम data/CALL3-G7VRD.TXT में रहते हैं और सभी सुधारों की तरह data/call3.txt में भी लिखे जाते हैं।
 Ascolta	सुनें
 Avvia	शुरू करें
 Avvia all'apertura	खुलने पर शुरू करें

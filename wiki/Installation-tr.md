@@ -22,7 +22,7 @@ Doğru dosyayı **[Releases](https://github.com/ic8tem/E-LAYER-ANALYZER/releases
 
 Yeni sürümü eskisinin üzerine kurun: ayarlar, toplanan spot'lar, loglar ve `call3.txt` korunur.
 
-**Otomatik güncelleme (0.4.5 sürümünden itibaren).** Program başlangıçta ve ardından her 6 saatte bir GitHub Releases'i denetler. Yeni bir sürüm çıktığında bir pencere açar ve üst çubuktaki NTP göstergesinin yanında turuncu bir **▲ x.y.z** gösterir:
+**Otomatik güncelleme (0.4.5 sürümünden itibaren).** Program başlangıçta ve ardından her 30 dakikada bir GitHub Releases'i denetler. Yeni bir sürüm çıktığında bir pencere açar ve üst çubuktaki NTP göstergesinin yanında turuncu bir **▲ x.y.z** gösterir:
 
 **0.4.12 sürümünden itibaren güncellemeler otomatik ve sessizdir**: GitHub'da yeni bir sürüm olduğunda program onu indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır. Eksik dosyalar da sormadan yeniden indirilir. Güncelleme penceresi yalnızca üstteki sürüme tıklayınca ya da data/ela.ini dosyasına agg_automatici=0 yazarsan görünür.
 

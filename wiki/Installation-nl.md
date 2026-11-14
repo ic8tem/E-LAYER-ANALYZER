@@ -22,7 +22,7 @@ Download het juiste bestand van de pagina **[Releases](https://github.com/ic8tem
 
 Installeer de nieuwe versie over de oude heen: instellingen, verzamelde spots, logs en `call3.txt` blijven behouden.
 
-**Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 6 uur controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
+**Automatisch bijwerken (vanaf versie 0.4.5).** Bij het opstarten en daarna elke 30 minuten controleert het programma de GitHub-Releases. Als er een nieuwe versie is, opent het een venster en toont het een oranje **▲ x.y.z** naast de NTP-aanduiding in de bovenste balk:
 
 **Vanaf versie 0.4.12 zijn updates automatisch en stil**: als er een nieuwe versie op GitHub staat, downloadt het programma die, installeert die en herstart vanzelf zonder iets te vragen. Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het updatevenster verschijnt alleen met een klik op de versie bovenaan, of als je agg_automatici=0 in het bestand data/ela.ini schrijft.
 

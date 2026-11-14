@@ -22,7 +22,7 @@ Scarica il file adatto dalla pagina **[Releases](https://github.com/ic8tem/E-LAY
 
 Installa la nuova versione sopra la precedente: impostazioni, spot raccolti, log e `call3.txt` restano.
 
-**Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 6 ore il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
+**Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 30 minuti il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
 
 - **Aggiorna ora** scarica il pacchetto portatile adatto al computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), chiude il programma, sostituisce i file e lo riavvia. Impostazioni, spot raccolti, log e `call3.txt` restano.
 - **Più tardi** lo ripropone al controllo successivo; **Salta questa versione** non propone più quella versione.

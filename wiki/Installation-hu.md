@@ -22,7 +22,7 @@ Töltse le a megfelelő fájlt a **[Releases](https://github.com/ic8tem/E-LAYER-
 
 Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a naplók és a `call3.txt` megmaradnak.
 
-**Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 6 óránként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
+**Automatikus frissítés (a 0.4.5-ös verziótól).** Indításkor, majd 30 percenként a program ellenőrzi a GitHub Releases oldalát. Ha új verzió jelent meg, megnyit egy ablakot, és a felső sávban az NTP-jelző mellett narancssárga **▲ x.y.z** feliratot mutat:
 
 **A 0.4.12-es verziótól a frissítések automatikusak és csendesek**: ha a GitHubon új verzió van, a program letölti, telepíti és magától újraindul, semmit sem kérdezve. A hiányzó fájlokat is kérdés nélkül újratölti. A frissítési ablak csak a fenti verzióra kattintva jelenik meg, vagy ha a data/ela.ini fájlba beírod: agg_automatici=0.
 

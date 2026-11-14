@@ -22,7 +22,7 @@ Descarcă fișierul potrivit de pe pagina **[Releases](https://github.com/ic8tem
 
 Instalează noua versiune peste cea veche: setările, spoturile colectate, logurile și `call3.txt` se păstrează.
 
-**Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 6 ore programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
+**Actualizare automată (de la versiunea 0.4.5).** La pornire și apoi la fiecare 30 de minute programul verifică Releases de pe GitHub. Când apare o versiune nouă, deschide o fereastră și afișează un **▲ x.y.z** portocaliu lângă indicatorul NTP din bara de sus:
 
 **Începând cu versiunea 0.4.12 actualizările sunt automate și silențioase**: când pe GitHub există o versiune nouă, programul o descarcă, o instalează și repornește singur fără să întrebe nimic. Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra de actualizare apare doar cu un clic pe versiunea de sus sau dacă scrii agg_automatici=0 în fișierul data/ela.ini.
 

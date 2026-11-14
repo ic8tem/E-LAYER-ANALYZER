@@ -24,6 +24,6 @@ Die laaste 2000 spots, met band- en bronfilters. Argief: een CSV-lêer per dag i
 
 JTDX se **roepnaam → lokator**-databasis (meer as 'n miljoen roepname) in `data/call3.txt`. Knoppies **Herlaai** en **Voer 'n nuwe CALL3.TXT in**. Lokators van 6 karakters wat in spotkommentare gelees word, word by `data/call3_nuovi.txt` gevoeg.
 
-Vanaf weergawe 0.4.16 is daar een CALL3-databasis vir die hele program, dié van die YA-MS Data-insameling (oortjie METEOR SCATTER), met dieselfde reëls as LIVETROPOVHF: bywerking vanaf MMMonVHF, handinskrywings, bygevoegde lêers, cluster-regstellings, geleerde lokators en G7VRD elke 6 uur; regstellings word in data/call3.txt geskryf en die lokators van data/call3_nuovi.txt word een keer ingevoer. Spots van WSJT-X, JTDX en MSHV kom ook oor UDP (bron WSJT-X UDP, poort 2237 aangestuur na 2238).
+Vanaf weergawe 0.4.16 is daar een CALL3-databasis vir die hele program, dié van die YA-MS Data-insameling (oortjie METEOR SCATTER), met dieselfde reëls as LIVETROPOVHF: bywerking vanaf MMMonVHF, handinskrywings, bygevoegde lêers, cluster-regstellings, geleerde lokators en G7VRD elke 30 minute; regstellings word in data/call3.txt geskryf en die lokators van data/call3_nuovi.txt word een keer ingevoer. Spots van WSJT-X, JTDX en MSHV kom ook oor UDP (bron WSJT-X UDP, poort 2237 aangestuur na 2238).
 
 Hierdie filters uit YA-MS (CW, minimum afstand, frekwensievensters, MS-modusse, bande) geld net vir die oortjie METEOR SCATTER: hulle besluit watter spots in sy versameling kom. Die ander oortjies kry al die spots en gebruik hul eie filters.

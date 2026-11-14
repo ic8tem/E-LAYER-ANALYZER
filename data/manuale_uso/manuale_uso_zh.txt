@@ -26,7 +26,7 @@ P|启动时会显示几秒钟的启动画面：ESO 的 VLT 上空的英仙座流
 H2|2.3 data 文件夹
 P|所有设置和所有数据都保存在程序旁边的同一个 data 文件夹中：不使用 AppData，也不使用系统文件夹。要把 YA-MS 移到另一台计算机，只需复制程序文件夹及其 data 文件夹。该文件夹的内容在第 13 章中介绍。
 H2|2.4 自动更新
-P|从 1.8.11 版起，更新为自动且静默：启动时以及之后每 6 小时，YA-MS 检查 GitHub，如有新版本则下载、安装并自动重新启动，不询问任何问题（仅状态栏提示）。缺失的文件也会在不询问的情况下重新下载。下面描述的窗口只在按下“更新”或在 data/config.ini 文件中写入 aggiornamenti_automatici=0 时出现。
+P|Dalla versione 1.8.11 gli aggiornamenti sono automatici e silenziosi: all'avvio e poi ogni 6 ore YA-MS controlla GitHub e, se c'è una versione nuova, la scarica, la installa e si riavvia da solo senza chiedere nulla (lo dice solo la barra di stato). Anche i file mancanti si riscaricano senza chiedere. La finestra descritta qui sotto compare solo premendo "Aggiornamenti" oppure se scrivi aggiornamenti_automatici=0 nel file data/config.ini.
 P|从 1.8.0 版起，YA-MS 会在启动时自动到 GitHub 检查是否发布了新版本，每天最多一次。如果有新版本，会出现“有可用更新”窗口，显示更新内容和三个按钮：
 LI|立即更新：下载适合你系统的软件包，替换程序文件，保留 data 文件夹并重新启动 YA-MS。新版本要更改的 data 文件夹中的程序文件会先复制到 data/backup/v<旧版本>；你自己的文件（设置、存档、spot、ADIF）不会被改动。
 LI|稍后：关闭窗口；第二天会再次检查。
@@ -78,7 +78,7 @@ P|“预报计算”组的第一个子选项卡在一个画面中显示有用的
 H2|5.1 摘要栏
 P|地图上方的一条摘要栏概括该时刻的计算结果：日期和时间、路径指数（活跃流星雨的 ZHR × 效率之和）、最有用的流星雨及其 ZHR 和效率（也以相对于 DJ5HG 参考值的 dB 表示）、地平线以上的流星雨数量，以及推荐的 Hot 及其方位角。
 H2|5.2 平面地图
-P|地图右侧是一个单独的列。上方是对方电台框：首先是天线指向（天线方位，始终指向对方），然后是呼号（输入后按 Enter：网格定位从 CALL3 数据库获取，与 YAEC 和 LIVETROPOVHF 相同）、网格定位和海拔。呼号也可以输入到网格定位框中。下方是地图符号图例：点击标题可折叠；关闭欧洲地图时会显示辐射点的颜色。
+P|地图右侧是一个单独的列。上方是对方电台框：首先是天线指向（天线方位，始终指向对方），然后是呼号（输入后按 Enter：网格定位从 CALL3 数据库获取，与 YAEC 和 LIVETROPOVHF 相同）、网格定位和海拔。呼号也可以输入到网格定位框中。下方是地图符号图例：点击标题可折叠.
 P|左侧是从上方俯视的欧洲地图（东在右侧），四周有度数刻度：
 LI|绿线：两个网格坐标之间的实际路径；
 LI|Hot A 和 Hot B：中点两侧的两个热点。红色 = 推荐，粉色 = 在天线波瓣之外，灰色 = 已在波瓣之内（并有警告）；
@@ -187,8 +187,8 @@ LI|过滤器接受流星余迹散射典型频率范围内（50190-50300、70100-
 LI|CW 报点会被立即丢弃（注释中有 CW 或 WPM，或 28000-28070 kHz）：除非标有 <MS>，否则不在控制台显示也不保存。可以关闭此复选框。
 LI|距离小于 500 公里的电台之间的报告会立即丢弃，因为在此距离上通联为直达或对流层传播，而不是流星余迹（meteor scatter）：它们不会出现在控制台中，也不会被保存。缺少定位符时保留该报告。距离可在复选框下方修改。
 LI|缺少的网格坐标从 CALL3 存档中获取；被接受的 spot 保存到 data/spot_ms（每天一个文件），并显示在“实时通信”的地图上。
-LI|采用 LIVETROPOVHF 规则的 CALL3 数据库。“立即更新”从 MMMonVHF 下载 CALL3.TXT（至少 100,000 行有效，旧文件留在 data/call3.bak）；勾选“每 7 天自动更新”则在启动时进行。文件之上依次生效：手工条目（data/CALL3-MANUALE.TXT）、集群修正（报告者自报的 6 位定位符）、添加的文件（data/CALL3-AGGIUNTE），然后是 CALL3.TXT 和实时学到的 6 位定位符（data/LOC6.TXT）。收到的 4 位定位符，或以 LL、MM 结尾的定位符，用数据库中的 6 位定位符替换；便携电台（带斜杠）只认完全一致的条目。
-LI|最后的来源，与 LIVETROPOVHF 相同：对于在其他任何来源中都没有 6 位定位符的呼号，程序每 6 小时自动查询 G7VRD 的公共 API（api.g7vrd.co.uk），每组 40 个呼号；每个呼号每天最多一次。只接受 6 位定位符，不接受方格中心（LL 或 MM），且须与收到的定位符在同一方格内。结果保存在 data/CALL3-G7VRD.TXT，并与所有修正一样，也写入 data/call3.txt。
+LI|采用 LIVETROPOVHF 规则的 CALL3 数据库。“立即更新”从 MMMonVHF 下载 CALL3.TXT（至少 100,000 行有效，旧文件留在 data/call3.bak）；勾选“每 12 小时自动更新”则在启动时进行。文件之上依次生效：手工条目（data/CALL3-MANUALE.TXT）、集群修正（报告者自报的 6 位定位符）、添加的文件（data/CALL3-AGGIUNTE），然后是 CALL3.TXT 和实时学到的 6 位定位符（data/LOC6.TXT）。收到的 4 位定位符，或以 LL、MM 结尾的定位符，用数据库中的 6 位定位符替换；便携电台（带斜杠）只认完全一致的条目。
+LI|最后的来源，与 LIVETROPOVHF 相同：对于在其他任何来源中都没有 6 位定位符的呼号，程序每 30 分钟自动查询 G7VRD 的公共 API（api.g7vrd.co.uk），每组 40 个呼号；每个呼号每天最多一次。只接受 6 位定位符，不接受方格中心（LL 或 MM），且须与收到的定位符在同一方格内。结果保存在 data/CALL3-G7VRD.TXT，并与所有修正一样，也写入 data/call3.txt。
 H1|10. 实时流星雨与流星雨星表
 H2|10.1 实时流星雨
 P|左侧是 Global Meteor Network 为活跃流星雨测得的流量和 ZHR，以及 GMN 摄像机当天按流星雨统计的计数（这是计数而不是流量：取决于有多少站点看到晴朗的天空）；右侧是 CMOR 雷达的辐射点地图，包括日间流星雨。文件只有在变化时才重新下载，最多每 30 分钟一次，也可按“立即下载”。
@@ -225,7 +225,7 @@ LI|controlla_aggiornamenti=0：不检查新版本；aggiornamenti_salta：已跳
 LI|lobo_diagramma、angolo_beta、lunghezza_scie、giudizio_classico：计算相关的复选框。
 LI|raggio_iniziale（0 = ITU 值的两倍，1 = ITU，2 = 不计入），durata_ping（0 = λ²，1 = 观测值）。
 LI|rmob_osservatore、rmob_automatico、rmob_url：RMOB。
-LI|psk_rimando=0：关闭将经 UDP 收到的 MS 解码（MSK144、FSK441、PSK2K、JTMS）转发到 PSKReporter。默认开启并自动工作：如果你的呼号在向 PSKReporter 发送报告的电台中缺席超过 20 分钟（数字模式软件没有发送），YA-MS 每 5 分钟以你为接收方发送你解码到的 MS 电台；数字模式软件一旦恢复发送，YA-MS 即停止。UDP 控制台中的一行会提示何时开始、何时停止。
+LI|psk_rimando=0：关闭将经 UDP 收到的 MS 解码（MSK144、FSK441、PSK2K、JTMS）转发到 PSKReporter。默认开启并自动工作：如果你的呼号在向 PSKReporter 发送报告的电台中缺席超过 20 分钟（数字模式软件没有发送），YA-MS 每 5 分钟以你为接收方发送你解码到的 MS 电台；数字模式软件一旦恢复发送，YA-MS 即停止。UDP 控制台中的一行会提示何时开始、何时停止。如果 WSJT-X.ini（或 JTDX.ini）中关闭了向 PSKReporter 发送，YA-MS 会立即转发，无需等待 20 分钟。
 TAG|ATTENZIONE|只能在程序关闭时修改 config.ini：YA-MS 在关闭时会重写该文件。
 H1|14. 典型操作
 H2|14.1 为某个流星雨准备 sked
