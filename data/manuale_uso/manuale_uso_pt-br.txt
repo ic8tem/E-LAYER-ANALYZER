@@ -50,7 +50,7 @@ LI|Documentos técnicos, a última: Manual de uso, Fontes, Mapa dos radares euro
 H2|3.3 Idioma, cores, fonte
 LI|Idioma: 36 idiomas. Ao trocar de idioma, a janela se reconstrói na mesma posição e na mesma aba, sem reiniciar. Números e datas seguem o idioma escolhido (vírgula decimal em português, ponto em inglês).
 LI|Tema: 12 esquemas de cores; Claro é o padrão, Noite e Preto servem para o escuro, Rastro meteórico é o estilo original do YA-MS.
-LI|Fonte (no fim da primeira linha de comandos): reduz ou amplia todo o texto de 85 a 140 %, em passos de 5 %. Com fontes grandes as abas quebram para outra linha.
+LI|Fonte (Configurações): reduz ou amplia todo o texto de 85 a 140 %, em passos de 5 %. Com fontes grandes as abas quebram para outra linha.
 LI|Comandos: recolhe e reabre as três linhas de comandos, para dar espaço a mapas e gráficos. A escolha é lembrada.
 TAG|NOTA|Quase todo comando tem uma dica: deixe o mouse parado sobre o comando para ler para que serve e de qual fonte vem o valor padrão.
 H1|4. Configurar a estação e o trajeto
@@ -150,7 +150,7 @@ LI|Frequência de destino MHz: frequência da previsão.
 LI|Expoente λ^k (3, SM6FHZ) e Fator de estação K (1): regra sobre a frequência e correção para a sua estação.
 LI|k a partir dos índices de população: propõe k a partir dos índices de população r das chuvas ativas (GMN, ou então IMO; k = 3,75 · log10 r, ponderado pelo ZHR) e pede confirmação antes de aplicá-lo.
 LI|Carregar arquivo RMOB do disco e Obter o expoente do arquivo RMOB: leem um arquivo mensal RMOB e obtêm k a partir das horas em comum com Collm.
-LI|Observador RMOB, Baixar RMOB agora e download automático a cada 5 minutos: o download automático vem desligado e só deve ser ativado com a permissão do RMOB.
+LI|Observador RMOB, Baixar RMOB agora e download automático a cada 5 minutos: o download automático vem desligado e só deve ser ativado com a permissão do RMOB. Esses comandos ficam na aba Configurações.
 H2|8.2 Os resultados
 LI|O gráfico de ontem e hoje: meteoros por hora em Collm, valores convertidos para a sua frequência e, se carregadas, as contagens RMOB.
 LI|A previsão das próximas 24 horas: a mesma hora do dia anterior, corrigida pela variação do índice das chuvas do trajeto.
@@ -169,7 +169,7 @@ LI|São mostrados os spots de todas as bandas, também das não escolhidas na Co
 LI|O mapa mostra os indicativos das duas estações de cada spot, uma só vez por estação. A projeção pode ser azimutal (centrada na sua estação) ou Mercator. A dica da coluna Nuvem explica seu significado.
 H2|9.2 Fluxo do radar
 P|As contagens horárias de meteoros e as alturas dos rastros do radar SKiYMET de Collm (36,2 MHz) e a última imagem do radar de Sodankylä (36,9 MHz).
-LI|Baixar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é baixada de novo se tiver mudado.
+LI|Baixar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é baixada de novo se tiver mudado. A atualização automática é definida na aba Configurações.
 LI|Expoente λ (SM6FHZ): expoente da estimativa na sua banda (linha laranja na escala da direita).
 LI|Alturas dos rastros: histograma com moda, média, mediana e desvio padrão; com "do radar", a moda passa a ser a altura de todos os cálculos.
 TAG|ATTENZIONE|Se não for possível ler a escala do gráfico de Collm, aparece um aviso laranja e os valores devem ser verificados. Sem conexão, o programa usa os últimos dados salvos, avisa uma vez e tenta de novo sozinho a cada 5 minutos; a barra de status fica vermelha até a conexão voltar.
@@ -220,6 +220,8 @@ LI|cataloghi/: catálogo IAU MDC; radar/diretta/: dados GMN e CMOR.
 LI|call3.txt: arquivo de locators; spot_ms/: spots de meteor scatter coletados; adif_quadrati.csv: quadrados do ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: os documentos técnicos.
 LI|backup/: cópias dos arquivos substituídos por uma atualização; aggiornamento/: pacote baixado (apagado ao reiniciar).
+H2|13.3 A aba Configurações
+P|A aba Configurações reúne o funcionamento geral do programa: Aparência (fonte, tema e idioma), Atualizações do programa (verificação no GitHub ao iniciar e a cada 30 minutos, atualizações automáticas e silenciosas, Verificar agora), Fontes ao vivo (atualização automática a cada 5 minutos), RMOB (observador, download imediato e coleta automática) e Programa (linhas de comandos e pasta de dados). Os parâmetros do cálculo ficam nas linhas de comandos acima das abas.
 H2|13.2 Algumas chaves do config.ini
 LI|controlla_aggiornamenti=0: não verificar as versões novas; aggiornamenti_salta: versão pulada.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: as caixas do cálculo.

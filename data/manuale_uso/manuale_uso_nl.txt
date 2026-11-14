@@ -50,7 +50,7 @@ LI|Technische documenten, als laatste: Gebruikershandleiding, Bronnen, Kaart van
 H2|3.3 Taal, kleuren, lettertype
 LI|Taal: 36 talen. Bij het wisselen van taal wordt het venster opnieuw opgebouwd op dezelfde positie en op hetzelfde tabblad, zonder herstart. Getallen en datums volgen de gekozen taal (decimale komma in het Italiaans, punt in het Engels).
 LI|Kleurenschema: 12 kleurenschema's; Licht is het standaardschema, Nacht en Zwart zijn bedoeld voor het donker, Meteorenspoor is de oorspronkelijke stijl van YA-MS.
-LI|Lettergrootte (aan het eind van de eerste rij knoppen): verkleint of vergroot alle tekst van 85 tot 140 %, in stappen van 5 %. Bij grote letters lopen de tabbladen door op een nieuwe regel.
+LI|Lettergrootte (Instellingen): verkleint of vergroot alle tekst van 85 tot 140 %, in stappen van 5 %. Bij grote letters lopen de tabbladen door op een nieuwe regel.
 LI|Bediening: klapt de drie rijen bedieningselementen in en weer uit, om ruimte te maken voor kaarten en grafieken. De keuze wordt onthouden.
 TAG|NOTA|Bijna elk bedieningselement heeft een tooltip: houd de muis stil boven het element om te lezen waarvoor het dient en uit welke bron de standaardwaarde komt.
 H1|4. Het station en het traject instellen
@@ -150,7 +150,7 @@ LI|Doelfrequentie MHz: frequentie van de voorspelling.
 LI|Exponent λ^k (3, SM6FHZ) en Stationsfactor K (1): regel voor de frequentie en correctie voor jouw station.
 LI|k uit de populatie-indices: stelt k voor op basis van de populatie-indices r van de actieve zwermen (GMN, anders IMO; k = 3,75 · log10 r, gewogen met de ZHR) en vraagt om bevestiging voordat het wordt toegepast.
 LI|RMOB-bestand van schijf laden en Exponent afleiden uit RMOB-bestand: lezen een maandelijks RMOB-bestand en leiden k af uit de uren die het met Collm gemeen heeft.
-LI|RMOB-waarnemer, RMOB nu downloaden en automatisch ophalen elke 5 minuten: automatisch ophalen staat uit en mag alleen met toestemming van RMOB worden ingeschakeld.
+LI|RMOB-waarnemer, RMOB nu downloaden en automatisch ophalen elke 5 minuten: automatisch ophalen staat uit en mag alleen met toestemming van RMOB worden ingeschakeld. Deze opdrachten staan op het tabblad Instellingen.
 H2|8.2 De resultaten
 LI|De grafiek van gisteren en vandaag: meteoren per uur in Collm, waarden omgerekend naar jouw frequentie en, als ze geladen zijn, de RMOB-tellingen.
 LI|De voorspelling voor de komende 24 uur: hetzelfde uur van de vorige dag, gecorrigeerd voor de verandering van de zwermindex van het traject.
@@ -169,7 +169,7 @@ LI|Spots van alle banden worden getoond, ook van banden die niet in Gegevensverz
 LI|De kaart toont de roepletters van beide stations van elke spot, één keer per station. De projectie is azimutaal (gecentreerd op je station) of Mercator. De tooltip op de kolom Wolk legt de betekenis uit.
 H2|9.2 Radarflux
 P|De uurtellingen van de meteoren en de spoorhoogten van de SKiYMET-radar van Collm (36,2 MHz) en de laatste afbeelding van de radar van Sodankylä (36,9 MHz).
-LI|Nu downloaden en Automatisch bijwerken van alle bronnen elke 5 minuten: elke bron wordt alleen opnieuw gedownload als ze veranderd is.
+LI|Nu downloaden en Automatisch bijwerken van alle bronnen elke 5 minuten: elke bron wordt alleen opnieuw gedownload als ze veranderd is. De automatische update stel je in op het tabblad Instellingen.
 LI|Exponent λ (SM6FHZ): exponent van de schatting op jouw band (oranje lijn op de rechterschaal).
 LI|Spoorhoogten: histogram met modus, gemiddelde, mediaan en standaardafwijking; met "van de radar" wordt de modus de hoogte voor alle berekeningen.
 TAG|ATTENZIONE|Als de schaal van de grafiek van Collm niet kan worden gelezen, verschijnt een oranje waarschuwing en moeten de waarden worden gecontroleerd. Zonder verbinding gebruikt het programma de laatst opgeslagen gegevens, meldt dat één keer en probeert het zelf elke 5 minuten opnieuw; de statusbalk wordt rood tot de verbinding terug is.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC-catalogus; radar/diretta/: GMN- en CMOR-gegevens.
 LI|call3.txt: locatorarchief; spot_ms/: verzamelde meteorscatter-spots; adif_quadrati.csv: vakken uit het ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de technische documenten.
 LI|backup/: kopieën van de bestanden die door een update zijn vervangen; aggiornamento/: gedownload pakket (bij de herstart gewist).
+H2|13.3 Het tabblad Instellingen
+P|Het tabblad Instellingen bundelt de algemene werking van het programma: Weergave (lettergrootte, thema en taal), Programma-updates (controle op GitHub bij het starten en elke 30 minuten, automatische stille updates, Nu controleren), Live bronnen (automatische update elke 5 minuten), RMOB (waarnemer, nu downloaden en automatisch ophalen) en Programma (opdrachtregels en gegevensmap). De rekenparameters blijven in de opdrachtregels boven de tabbladen.
 H2|13.2 Enkele sleutels van config.ini
 LI|controlla_aggiornamenti=0: niet controleren op nieuwe versies; aggiornamenti_salta: overgeslagen versie.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: de selectievakjes van de berekening.

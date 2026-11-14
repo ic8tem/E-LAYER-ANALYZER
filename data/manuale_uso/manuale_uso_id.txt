@@ -50,7 +50,7 @@ LI|Dokumen teknis, tab terakhir: Panduan penggunaan, Sumber, Peta radar Eropa, P
 H2|3.3 Bahasa, warna, huruf
 LI|Bahasa: 36 bahasa. Saat bahasa diganti, jendela dibangun ulang pada posisi yang sama dan pada tab yang sama, tanpa menjalankan ulang program. Angka dan tanggal mengikuti bahasa yang dipilih (koma desimal dalam bahasa Italia, titik dalam bahasa Inggris).
 LI|Tema: 12 skema warna; Terang adalah bawaan, Malam dan Hitam berguna dalam gelap, Jejak meteor adalah gaya asli YA-MS.
-LI|Huruf (di akhir baris kontrol pertama): mengecilkan atau membesarkan semua teks dari 85 sampai 140 %, dengan langkah 5 %. Dengan huruf besar, tab pindah ke beberapa baris.
+LI|Huruf (Pengaturan): mengecilkan atau membesarkan semua teks dari 85 sampai 140 %, dengan langkah 5 %. Dengan huruf besar, tab pindah ke beberapa baris.
 LI|Kontrol: melipat dan membuka kembali tiga baris kontrol, untuk memberi ruang bagi peta dan grafik. Pilihan ini diingat.
 TAG|NOTA|Hampir setiap kontrol memiliki tooltip: tahan mouse di atas kontrol untuk membaca fungsinya dan dari sumber mana nilai awalnya berasal.
 H1|4. Mengatur stasiun dan lintasan
@@ -150,7 +150,7 @@ LI|Frekuensi tujuan MHz: frekuensi prakiraan.
 LI|Eksponen λ^k (3, SM6FHZ) dan Faktor stasiun K (1): aturan frekuensi dan koreksi untuk stasiun Anda.
 LI|k dari indeks populasi: mengusulkan k dari indeks populasi r hujan meteor aktif (GMN, jika tidak ada IMO; k = 3,75 · log10 r, dibobot dengan ZHR) dan meminta konfirmasi sebelum menerapkannya.
 LI|Muat file RMOB dari disk dan Turunkan eksponen dari file RMOB: membaca file bulanan RMOB dan menurunkan k dari jam-jam yang sama dengan Collm.
-LI|Pengamat RMOB, Unduh RMOB sekarang dan pengambilan otomatis setiap 5 menit: pengambilan otomatis nonaktif dan hanya boleh diaktifkan dengan izin RMOB.
+LI|Pengamat RMOB, Unduh RMOB sekarang dan pengambilan otomatis setiap 5 menit: pengambilan otomatis nonaktif dan hanya boleh diaktifkan dengan izin RMOB. Perintah-perintah ini ada di tab Pengaturan.
 H2|8.2 Hasil
 LI|Grafik kemarin dan hari ini: meteor per jam di Collm, nilai yang dikonversi ke frekuensi Anda dan, jika dimuat, hitungan RMOB.
 LI|Prakiraan 24 jam ke depan: jam yang sama pada hari sebelumnya, dikoreksi menurut perubahan indeks hujan meteor lintasan.
@@ -169,7 +169,7 @@ LI|Spot dari semua pita ditampilkan, termasuk pita yang tidak dipilih di Pengump
 LI|Peta menuliskan callsign kedua stasiun pada setiap spot, sekali per stasiun. Proyeksi bisa dipilih: azimutal (berpusat di stasiunmu) atau Mercator. Tooltip pada kolom Awan menjelaskan artinya.
 H2|9.2 Fluks radar
 P|Hitungan meteor per jam dan ketinggian jejak dari radar SKiYMET di Collm (36,2 MHz) serta gambar terbaru radar Sodankylä (36,9 MHz).
-LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah.
+LI|Unduh sekarang dan Pembaruan otomatis semua sumber setiap 5 menit: setiap sumber diunduh ulang hanya jika berubah. Pembaruan otomatis diatur di tab Pengaturan.
 LI|Eksponen λ (SM6FHZ): eksponen estimasi pada pita Anda (garis oranye pada skala kanan).
 LI|Ketinggian jejak: histogram dengan modus, rata-rata, median dan simpangan baku; dengan "dari radar" modus menjadi ketinggian untuk semua perhitungan.
 TAG|ATTENZIONE|Jika skala grafik Collm tidak dapat dibaca, muncul peringatan oranye dan nilainya perlu diperiksa. Tanpa koneksi, program memakai data terakhir yang tersimpan, memberi tahu sekali, dan mencoba lagi sendiri setiap 5 menit; bilah status menjadi merah sampai koneksi pulih.
@@ -220,6 +220,8 @@ LI|cataloghi/: katalog IAU MDC; radar/diretta/: data GMN dan CMOR.
 LI|call3.txt: arsip locator; spot_ms/: spot meteor scatter yang terkumpul; adif_quadrati.csv: kotak dari ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: dokumen teknis.
 LI|backup/: salinan berkas yang diganti oleh pembaruan; aggiornamento/: paket yang diunduh (dihapus saat program dijalankan ulang).
+H2|13.3 Tab Pengaturan
+P|Tab Pengaturan menghimpun cara kerja umum program: Tampilan (huruf, tema, dan bahasa), Pembaruan program (pemeriksaan di GitHub saat mulai dan setiap 30 menit, pembaruan otomatis senyap, Periksa sekarang), Sumber langsung (pembaruan otomatis setiap 5 menit), RMOB (pengamat, unduh sekarang, dan pengambilan otomatis) serta Program (baris perintah dan folder data). Parameter perhitungan tetap di baris perintah di atas tab.
 H2|13.2 Beberapa kunci config.ini
 LI|controlla_aggiornamenti=0: tidak memeriksa versi baru; aggiornamenti_salta: versi yang dilewati.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: kotak-kotak perhitungan.

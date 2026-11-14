@@ -50,7 +50,7 @@ LI|Tehniskie dokumenti, pēdējā: Lietošanas rokasgrāmata, Avoti, Eiropas rad
 H2|3.3 Valoda, krāsas, fonts
 LI|Valoda: 36 valodas. Mainot valodu, logs tiek pārbūvēts tajā pašā vietā un tajā pašā cilnē bez restartēšanas. Skaitļi un datumi atbilst izvēlētajai valodai (decimālkomats latviešu un itāļu valodā, punkts angļu valodā).
 LI|Tēma: 12 krāsu shēmas; Gaiša ir noklusējuma shēma, Nakts un Melna paredzētas darbam tumsā, Meteora sliede ir oriģinālais YA-MS stils.
-LI|Burti (pirmās vadības rindas beigās): samazina vai palielina visu tekstu no 85 līdz 140 %, ar 5 % soli. Ar lieliem burtiem cilnes pāriet vairākās rindās.
+LI|Burti (Iestatījumi): samazina vai palielina visu tekstu no 85 līdz 140 %, ar 5 % soli. Ar lieliem burtiem cilnes pāriet vairākās rindās.
 LI|Vadība: sakļauj un atkal atver trīs vadīklu rindas, lai atbrīvotu vietu kartēm un grafikiem. Izvēle tiek atcerēta.
 TAG|NOTA|Gandrīz katrai vadīklai ir uznirstošais padoms: paturi peles kursoru virs vadīklas, lai izlasītu, kam tā paredzēta un no kura avota ņemta noklusējuma vērtība.
 H1|4. Stacijas un trases iestatīšana
@@ -150,7 +150,7 @@ LI|Mērķa frekvence MHz: prognozes frekvence.
 LI|λ^k kāpinātājs (3, SM6FHZ) un Stacijas koeficients K (1): frekvences pārrēķina likums un korekcija tavai stacijai.
 LI|k no populācijas indeksiem: piedāvā k no aktīvo plūsmu populācijas indeksiem r (GMN, citādi IMO; k = 3,75 · log10 r, svērts ar ZHR) un pirms piemērošanas lūdz apstiprinājumu.
 LI|Ielādēt RMOB failu no diska un Iegūt kāpinātāju no RMOB faila: nolasa mēneša RMOB failu un iegūst k no stundām, kas kopīgas ar Collm.
-LI|RMOB novērotājs, Lejupielādēt RMOB tagad un automātiska lejupielāde ik pēc 5 minūtēm: automātiskā lejupielāde ir izslēgta, un to drīkst ieslēgt tikai ar RMOB atļauju.
+LI|RMOB novērotājs, Lejupielādēt RMOB tagad un automātiska lejupielāde ik pēc 5 minūtēm: automātiskā lejupielāde ir izslēgta, un to drīkst ieslēgt tikai ar RMOB atļauju. Šīs komandas ir cilnē Iestatījumi.
 H2|8.2 Rezultāti
 LI|Vakardienas un šodienas grafiks: meteori stundā Collm, uz tavu frekvenci pārrēķinātās vērtības un, ja ielādēti, RMOB skaitījumi.
 LI|Prognoze nākamajām 24 stundām: tā pati iepriekšējās dienas stunda, koriģēta atbilstoši trases plūsmu indeksa izmaiņai.
@@ -169,7 +169,7 @@ LI|Tiek rādīti visu joslu spoti, arī to joslu, kas nav izvēlētas Datu vāk�
 LI|Kartē tiek rakstīti abu katra spota staciju izsaukuma signāli, vienreiz katrai stacijai. Projekciju var izvēlēties: azimutālā (centrā tava stacija) vai Merkatora. Kolonnas Mākonis padoms izskaidro tās nozīmi.
 H2|9.2 Radara meteoru skaits
 P|Collm SKiYMET radara (36,2 MHz) meteoru skaits stundā un sliežu augstumi, kā arī jaunākais Sodankylä radara (36,9 MHz) attēls.
-LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies.
+LI|Lejupielādēt tagad un Visu avotu automātiska atjaunināšana ik pēc 5 minūtēm: katru avotu lejupielādē atkārtoti tikai tad, ja tas ir mainījies. Automātisko atjaunināšanu iestata cilnē Iestatījumi.
 LI|λ kāpinātājs (SM6FHZ): novērtējuma kāpinātājs tavam diapazonam (oranža līnija labajā skalā).
 LI|Sliežu augstumi: histogramma ar modu, vidējo vērtību, mediānu un standartnovirzi; ja atzīmēts "no radara", moda kļūst par augstumu visiem aprēķiniem.
 TAG|ATTENZIONE|Ja Collm grafika skalu neizdodas nolasīt, parādās oranžs brīdinājums, un vērtības jāpārbauda. Bez savienojuma programma izmanto pēdējos saglabātos datus, vienreiz par to paziņo un pati mēģina vēlreiz ik pēc 5 minūtēm; statusa josla kļūst sarkana, līdz savienojums atjaunojas.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC katalogs; radar/diretta/: GMN un CMOR dati.
 LI|call3.txt: lokatoru arhīvs; spot_ms/: savāktie meteor scatter spoti; adif_quadrati.csv: kvadrāti no ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehniskie dokumenti.
 LI|backup/: atjauninājuma aizstāto failu kopijas; aggiornamento/: lejupielādētā pakotne (dzēsta pēc restartēšanas).
+H2|13.3 Cilne Iestatījumi
+P|Cilne Iestatījumi apkopo programmas vispārējo darbību: Izskats (fonts, tēma un valoda), Programmas atjauninājumi (pārbaude GitHub, startējot un ik pēc 30 minūtēm, automātiski klusi atjauninājumi, Pārbaudīt tagad), Tiešsaistes avoti (automātiska atjaunināšana ik pēc 5 minūtēm), RMOB (novērotājs, lejupielādēt tagad un automātiska ielāde) un Programma (komandu rindas un datu mape). Aprēķina parametri paliek komandu rindās virs cilnēm.
 H2|13.2 Dažas config.ini atslēgas
 LI|controlla_aggiornamenti=0: nepārbaudīt jaunas versijas; aggiornamenti_salta: izlaistā versija.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: aprēķina izvēles rūtiņas.

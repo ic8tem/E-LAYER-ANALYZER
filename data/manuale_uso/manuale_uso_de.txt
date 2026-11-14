@@ -50,7 +50,7 @@ LI|Technische Dokumente, als letzter: Bedienungsanleitung, Quellen, Karte der eu
 H2|3.3 Sprache, Farben, Schrift
 LI|Sprache: 36 Sprachen. Beim Sprachwechsel wird das Fenster an derselben Position und auf demselben Reiter neu aufgebaut, ohne Neustart. Zahlen und Datumsangaben folgen der gewählten Sprache (Dezimalkomma auf Italienisch, Dezimalpunkt auf Englisch).
 LI|Farbschema: 12 Farbschemata; Hell ist die Voreinstellung, Nacht und Schwarz sind für den Betrieb im Dunkeln gedacht, Meteorspur ist der ursprüngliche Stil von YA-MS.
-LI|Schrift (am Ende der ersten Bedienzeile): verkleinert oder vergrößert den gesamten Text von 85 bis 140 %, in Schritten von 5 %. Bei großer Schrift werden die Reiter umbrochen.
+LI|Schrift (Einstellungen): verkleinert oder vergrößert den gesamten Text von 85 bis 140 %, in Schritten von 5 %. Bei großer Schrift werden die Reiter umbrochen.
 LI|Bedienung: klappt die drei Bedienzeilen ein und wieder aus, um Platz für Karten und Diagramme zu schaffen. Die Wahl wird gespeichert.
 TAG|NOTA|Fast jedes Bedienelement hat einen Tooltip: Halte die Maus still über das Element, um zu lesen, wozu es dient und aus welcher Quelle der Ausgangswert stammt.
 H1|4. Station und Strecke einrichten
@@ -150,7 +150,7 @@ LI|Zielfrequenz MHz: Frequenz der Vorhersage.
 LI|Exponent λ^k (3, SM6FHZ) und Stationsfaktor K (1): Frequenzregel und Korrektur für deine Station.
 LI|k aus den Populationsindizes: schlägt k aus den Populationsindizes r der aktiven Ströme vor (GMN, sonst IMO; k = 3,75 · log10 r, mit der ZHR gewichtet) und fragt vor dem Übernehmen nach einer Bestätigung.
 LI|RMOB-Datei von Festplatte laden und Exponent aus RMOB-Datei ermitteln: lesen eine RMOB-Monatsdatei und ermitteln k aus den mit Collm gemeinsamen Stunden.
-LI|RMOB-Beobachter, RMOB jetzt laden und automatischer Abruf alle 5 Minuten: Der automatische Abruf ist ausgeschaltet und darf nur mit Erlaubnis von RMOB eingeschaltet werden.
+LI|RMOB-Beobachter, RMOB jetzt laden und automatischer Abruf alle 5 Minuten: Der automatische Abruf ist ausgeschaltet und darf nur mit Erlaubnis von RMOB eingeschaltet werden. Diese Befehle befinden sich im Reiter Einstellungen.
 H2|8.2 Die Ergebnisse
 LI|Das Diagramm von gestern und heute: Meteore pro Stunde in Collm, auf deine Frequenz umgerechnete Werte und, falls geladen, die RMOB-Zählungen.
 LI|Die Vorhersage der nächsten 24 Stunden: dieselbe Stunde des Vortags, korrigiert um die Änderung des Stromindex der Strecke.
@@ -169,7 +169,7 @@ LI|Es werden die Spots aller Bänder angezeigt, auch der in der Datensammlung ni
 LI|Die Karte zeigt die Rufzeichen beider Stationen jedes Spots, einmal pro Station. Die Projektion ist wählbar: azimutal (auf deine Station zentriert) oder Mercator. Der Tooltip auf der Spalte Wolke erklärt ihre Bedeutung.
 H2|9.2 Radarfluss
 P|Die stündlichen Meteorzählungen und die Spurhöhen des SKiYMET-Radars Collm (36,2 MHz) und das neueste Bild des Radars Sodankylä (36,9 MHz).
-LI|Jetzt laden und Automatische Aktualisierung aller Quellen alle 5 Minuten: Jede Quelle wird nur dann neu geladen, wenn sie sich geändert hat.
+LI|Jetzt laden und Automatische Aktualisierung aller Quellen alle 5 Minuten: Jede Quelle wird nur dann neu geladen, wenn sie sich geändert hat. Die automatische Aktualisierung stellt man im Reiter Einstellungen ein.
 LI|Exponent λ (SM6FHZ): Exponent der Schätzung für dein Band (orange Linie auf der rechten Skala).
 LI|Spurhöhen: Histogramm mit Modalwert, Mittelwert, Median und Standardabweichung; mit „vom Radar“ wird der Modalwert zur Höhe aller Berechnungen.
 TAG|ATTENZIONE|Lässt sich die Skala des Collm-Diagramms nicht lesen, erscheint ein oranger Hinweis, und die Werte müssen überprüft werden. Ohne Verbindung verwendet das Programm die zuletzt gespeicherten Daten, meldet das einmal und versucht es alle 5 Minuten selbst erneut; die Statusleiste wird rot, bis die Verbindung wieder da ist.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU-MDC-Katalog; radar/diretta/: GMN- und CMOR-Daten.
 LI|call3.txt: Locator-Datenbank; spot_ms/: gesammelte Meteorscatter-Spots; adif_quadrati.csv: Felder aus dem ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: die technischen Dokumente.
 LI|backup/: Kopien der durch eine Aktualisierung ersetzten Dateien; aggiornamento/: heruntergeladenes Paket (wird beim Neustart gelöscht).
+H2|13.3 Der Reiter Einstellungen
+P|Der Reiter Einstellungen fasst die allgemeine Arbeitsweise des Programms zusammen: Darstellung (Schrift, Thema und Sprache), Programm-Updates (Prüfung auf GitHub beim Start und alle 30 Minuten, automatische stille Updates, Jetzt prüfen), Live-Quellen (automatische Aktualisierung alle 5 Minuten), RMOB (Beobachter, jetzt herunterladen und automatischer Abruf) und Programm (Befehlszeilen und Datenordner). Die Rechenparameter bleiben in den Befehlszeilen über den Reitern.
 H2|13.2 Einige Schlüssel in config.ini
 LI|controlla_aggiornamenti=0: nicht nach neuen Versionen suchen; aggiornamenti_salta: übersprungene Version.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: die Kästchen der Berechnung.

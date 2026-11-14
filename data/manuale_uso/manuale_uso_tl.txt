@@ -50,7 +50,7 @@ LI|Mga teknikal na dokumento, ang huli: Manwal ng paggamit, Mga source, Mapa ng 
 H2|3.3 Wika, mga kulay, font
 LI|Wika: 36 na wika. Kapag pinalitan ang wika, binubuo muli ang window sa parehong posisyon at sa parehong tab, nang hindi nagre-restart. Sumusunod ang mga numero at petsa sa napiling wika (decimal comma sa Italyano, tuldok sa Ingles).
 LI|Tema: 12 color scheme; ang Maliwanag ang default, ang Gabi at Itim ay para sa dilim, ang Bakas ng meteor ang orihinal na istilo ng YA-MS.
-LI|Font (sa dulo ng unang hanay ng mga kontrol): pinaliliit o pinalalaki ang lahat ng teksto mula 85 hanggang 140 %, sa hakbang na 5 %. Kapag malaki ang font, bumababa sa ibang linya ang mga tab.
+LI|Font (Mga setting): pinaliliit o pinalalaki ang lahat ng teksto mula 85 hanggang 140 %, sa hakbang na 5 %. Kapag malaki ang font, bumababa sa ibang linya ang mga tab.
 LI|Mga kontrol: itinitiklop at muling binubuksan ang tatlong hanay ng mga kontrol, para magbigay ng espasyo sa mga mapa at graph. Tinatandaan ang napili.
 TAG|NOTA|Halos bawat kontrol ay may tooltip: itigil ang mouse sa ibabaw ng kontrol para mabasa kung para saan ito at kung saang source galing ang default na halaga.
 H1|4. Pag-set up ng istasyon at ng landas
@@ -150,7 +150,7 @@ LI|Target na frequency MHz: frequency ng pagtataya.
 LI|Exponent ng λ^k (3, SM6FHZ) at Station factor K (1): patakaran sa frequency at koreksiyon para sa iyong istasyon.
 LI|k mula sa mga population index: nagmumungkahi ng k mula sa mga population index r ng mga aktibong shower (GMN, kung hindi ay IMO; k = 3.75 · log10 r, tinimbang ayon sa ZHR) at humihingi ng kumpirmasyon bago ito ilapat.
 LI|Ikarga ang RMOB file mula sa disk at Kunin ang exponent mula sa RMOB file: binabasa ang isang buwanang RMOB file at kinukuha ang k mula sa mga oras na kapareho ng Collm.
-LI|RMOB observer, I-download ang RMOB ngayon at awtomatikong pag-download bawat 5 minuto: naka-off ang awtomatikong pag-download at dapat lamang i-on kung may pahintulot ng RMOB.
+LI|RMOB observer, I-download ang RMOB ngayon at awtomatikong pag-download bawat 5 minuto: naka-off ang awtomatikong pag-download at dapat lamang i-on kung may pahintulot ng RMOB. Nasa tab na Mga setting ang mga utos na ito.
 H2|8.2 Ang mga resulta
 LI|Ang graph ng kahapon at ngayon: mga meteor bawat oras sa Collm, mga halagang inilipat sa iyong frequency at, kung naikarga, ang mga bilang ng RMOB.
 LI|Ang pagtataya para sa susunod na 24 na oras: ang parehong oras ng nakaraang araw, iwinasto ayon sa pagbabago ng index ng mga shower ng landas.
@@ -169,7 +169,7 @@ LI|Ipinapakita ang mga spot ng lahat ng banda, pati ng mga bandang hindi pinili 
 LI|Isinusulat sa mapa ang mga callsign ng dalawang istasyon ng bawat spot, isang beses bawat istasyon. Mapipili ang projection: azimuthal (nakasentro sa iyong istasyon) o Mercator. Ipinaliliwanag ng tooltip sa kolumnang Ulap ang kahulugan nito.
 H2|9.2 Flux ng radar
 P|Ang mga bilang bawat oras ng mga meteor at ang mga taas ng bakas ng SKiYMET radar ng Collm (36.2 MHz) at ang pinakabagong larawan ng radar ng Sodankylä (36.9 MHz).
-LI|I-download ngayon at Awtomatikong pag-update ng lahat ng source bawat 5 minuto: muling dina-download ang bawat source kung nagbago lamang ito.
+LI|I-download ngayon at Awtomatikong pag-update ng lahat ng source bawat 5 minuto: muling dina-download ang bawat source kung nagbago lamang ito. Itinatakda sa tab na Mga setting ang awtomatikong update.
 LI|Exponent ng λ (SM6FHZ): exponent ng tantiya sa iyong banda (kahel na linya sa iskala sa kanan).
 LI|Mga taas ng bakas: histogram na may moda, mean, median at standard deviation; kapag naka-tsek ang “mula sa radar”, ang moda ang nagiging taas sa lahat ng kalkulasyon.
 TAG|ATTENZIONE|Kung hindi mabasa ang iskala ng graph ng Collm, lumalabas ang isang kahel na babala at kailangang suriin ang mga halaga. Kapag walang koneksiyon, ginagamit ng programa ang huling na-save na datos, sinasabi ito nang isang beses at kusang sumusubok muli bawat 5 minuto; nagiging pula ang status bar hanggang bumalik ang koneksiyon.
@@ -220,6 +220,8 @@ LI|cataloghi/: katalogo ng IAU MDC; radar/diretta/: datos ng GMN at CMOR.
 LI|call3.txt: archive ng mga locator; spot_ms/: mga nakolektang meteor scatter spot; adif_quadrati.csv: mga square mula sa ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: ang mga teknikal na dokumento.
 LI|backup/: mga kopya ng mga file na pinalitan ng isang update; aggiornamento/: na-download na package (binubura sa pag-restart).
+H2|13.3 Ang tab na Mga setting
+P|Tinitipon ng tab na Mga setting ang pangkalahatang takbo ng programa: Hitsura (font, tema at wika), Mga update ng programa (pagsusuri sa GitHub sa pagsisimula at tuwing 30 minuto, awtomatiko at tahimik na update, Suriin ngayon), Mga live na pinagmulan (awtomatikong update tuwing 5 minuto), RMOB (tagamasid, i-download ngayon at awtomatikong pagkuha) at Programa (mga hilera ng utos at folder ng data). Nananatili ang mga parametro ng kalkulasyon sa mga hilera ng utos sa itaas ng mga tab.
 H2|13.2 Ilang susi ng config.ini
 LI|controlla_aggiornamenti=0: huwag tingnan ang mga bagong bersyon; aggiornamenti_salta: nilaktawang bersyon.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: ang mga checkbox ng kalkulasyon.

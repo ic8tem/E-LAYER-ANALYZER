@@ -50,7 +50,7 @@ LI|Dokumenty techniczne, ostatnia: Instrukcja obsługi, Źródła, Mapa radarów
 H2|3.3 Język, kolory, czcionka
 LI|Język: 36 języków. Po zmianie języka okno odbudowuje się w tym samym położeniu i na tej samej karcie, bez ponownego uruchamiania. Liczby i daty są zgodne z wybranym językiem (przecinek dziesiętny po polsku i po włosku, kropka po angielsku).
 LI|Motyw: 12 schematów kolorów; Jasny jest domyślny, Noc i Czarny służą do pracy w ciemności, Ślad meteoru to oryginalny styl YA-MS.
-LI|Czcionka (na końcu pierwszego wiersza poleceń): zmniejsza lub powiększa cały tekst od 85 do 140 %, co 5 %. Przy dużej czcionce zakładki przechodzą do kolejnych wierszy.
+LI|Czcionka (Ustawienia): zmniejsza lub powiększa cały tekst od 85 do 140 %, co 5 %. Przy dużej czcionce zakładki przechodzą do kolejnych wierszy.
 LI|Sterowanie: zwija i ponownie rozwija trzy wiersze poleceń, aby zrobić miejsce dla map i wykresów. Wybór jest zapamiętywany.
 TAG|NOTA|Prawie każde polecenie ma dymek podpowiedzi: przytrzymaj kursor myszy nad poleceniem, aby przeczytać, do czego służy i z jakiego źródła pochodzi wartość domyślna.
 H1|4. Ustawienie stacji i trasy
@@ -150,7 +150,7 @@ LI|Częstotliwość docelowa MHz: częstotliwość prognozy.
 LI|Wykładnik λ^k (3, SM6FHZ) i Współczynnik stacji K (1): reguła przeliczania z częstotliwością i poprawka dla twojej stacji.
 LI|k ze wskaźników populacji: proponuje k na podstawie wskaźników populacji r aktywnych rojów (GMN, a w razie braku IMO; k = 3,75 · log10 r, ważone ZHR) i przed zastosowaniem prosi o potwierdzenie.
 LI|Wczytaj plik RMOB z dysku i Wyznacz wykładnik z pliku RMOB: wczytują miesięczny plik RMOB i wyznaczają k z godzin wspólnych z Collm.
-LI|Obserwator RMOB, Pobierz RMOB teraz i automatyczne pobieranie co 5 minut: automatyczne pobieranie jest wyłączone i należy je włączać tylko za zgodą RMOB.
+LI|Obserwator RMOB, Pobierz RMOB teraz i automatyczne pobieranie co 5 minut: automatyczne pobieranie jest wyłączone i należy je włączać tylko za zgodą RMOB. Te polecenia są w karcie Ustawienia.
 H2|8.2 Wyniki
 LI|Wykres z wczoraj i dzisiaj: meteory na godzinę w Collm, wartości przeliczone na twoją częstotliwość oraz, jeśli zostały wczytane, zliczenia RMOB.
 LI|Prognoza na najbliższe 24 godziny: ta sama godzina z poprzedniego dnia, skorygowana o zmianę indeksu rojów dla trasy.
@@ -169,7 +169,7 @@ LI|Pokazywane są spoty ze wszystkich pasm, także z tych niewybranych w Zbieran
 LI|Na mapie pisane są znaki obu stacji każdego spotu, raz dla każdej stacji. Odwzorowanie można wybrać: azymutalne (w środku twoja stacja) lub Mercatora. Podpowiedź na kolumnie Chmura wyjaśnia jej znaczenie.
 H2|9.2 Strumień radarowy
 P|Godzinowe zliczenia meteorów i wysokości śladów z radaru SKiYMET w Collm (36,2 MHz) oraz najnowszy obraz z radaru w Sodankylä (36,9 MHz).
-LI|Pobierz teraz i Automatyczna aktualizacja wszystkich źródeł co 5 minut: każde źródło jest pobierane ponownie tylko wtedy, gdy się zmieniło.
+LI|Pobierz teraz i Automatyczna aktualizacja wszystkich źródeł co 5 minut: każde źródło jest pobierane ponownie tylko wtedy, gdy się zmieniło. Automatyczną aktualizację ustawia się w karcie Ustawienia.
 LI|Wykładnik λ (SM6FHZ): wykładnik oszacowania dla twojego pasma (pomarańczowa linia na prawej skali).
 LI|Wysokości śladów: histogram z dominantą, średnią, medianą i odchyleniem standardowym; przy zaznaczonym polu "z radaru" dominanta staje się wysokością używaną we wszystkich obliczeniach.
 TAG|ATTENZIONE|Jeśli nie udaje się odczytać skali wykresu z Collm, pojawia się pomarańczowe ostrzeżenie i wartości należy zweryfikować. Bez połączenia program używa ostatnio zapisanych danych, informuje o tym raz i sam ponawia próbę co 5 minut; pasek stanu zmienia kolor na czerwony, dopóki połączenie nie wróci.
@@ -220,6 +220,8 @@ LI|cataloghi/: katalog IAU MDC; radar/diretta/: dane GMN i CMOR.
 LI|call3.txt: archiwum lokatorów; spot_ms/: zebrane spoty meteor scatter; adif_quadrati.csv: kwadraty z pliku ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: dokumenty techniczne.
 LI|backup/: kopie plików zastąpionych podczas aktualizacji; aggiornamento/: pobrany pakiet (usuwany przy ponownym uruchomieniu).
+H2|13.3 Karta Ustawienia
+P|Karta Ustawienia zbiera ogólne działanie programu: Wygląd (czcionka, motyw i język), Aktualizacje programu (sprawdzanie na GitHub przy starcie i co 30 minut, automatyczne ciche aktualizacje, Sprawdź teraz), Źródła na żywo (automatyczna aktualizacja co 5 minut), RMOB (obserwator, pobierz teraz i automatyczne pobieranie) oraz Program (wiersze poleceń i folder danych). Parametry obliczeń zostają w wierszach poleceń nad kartami.
 H2|13.2 Niektóre klucze pliku config.ini
 LI|controlla_aggiornamenti=0: nie sprawdzaj nowych wersji; aggiornamenti_salta: pominięta wersja.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: pola wyboru obliczenia.

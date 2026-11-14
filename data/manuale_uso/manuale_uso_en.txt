@@ -50,7 +50,7 @@ LI|Technical documents, the last one: User manual, Sources, Map of European rada
 H2|3.3 Language, colours, font
 LI|Language: 36 languages. When you change language the window is rebuilt in the same position and on the same tab, without restarting. Numbers and dates follow the chosen language (decimal comma in Italian, point in English).
 LI|Theme: 12 colour schemes; Light is the default, Night and Black are for use in the dark, Meteor trail is the original YA-MS style.
-LI|Font (at the end of the first row of controls): shrinks or enlarges all text from 85 to 140 %, in 5 % steps. With large fonts the tabs wrap onto several lines.
+LI|Font (Settings): shrinks or enlarges all text from 85 to 140 %, in 5 % steps. With large fonts the tabs wrap onto several lines.
 LI|Controls: collapses and reopens the three rows of controls, to make room for maps and charts. The choice is remembered.
 TAG|NOTA|Almost every control has a tooltip: hold the mouse still over the control to read what it is for and which source the default value comes from.
 H1|4. Setting up the station and the path
@@ -150,7 +150,7 @@ LI|Target frequency MHz: frequency of the forecast.
 LI|λ^k exponent (3, SM6FHZ) and Station factor K (1): frequency rule and correction for your station.
 LI|k from population indices: proposes k from the population indices r of the active showers (GMN, otherwise IMO; k = 3.75 · log10 r, weighted by ZHR) and asks for confirmation before applying it.
 LI|Load RMOB file from disk and Derive the exponent from the RMOB file: they read a monthly RMOB file and derive k from the hours in common with Collm.
-LI|RMOB observer, Download RMOB now and automatic download every 5 minutes: the automatic download is off and must be turned on only with RMOB's permission.
+LI|RMOB observer, Download RMOB now and automatic download every 5 minutes: the automatic download is off and must be turned on only with RMOB's permission. These commands are in the Settings tab.
 H2|8.2 The results
 LI|The chart of yesterday and today: meteors per hour at Collm, values scaled to your frequency and, if loaded, the RMOB counts.
 LI|The forecast for the next 24 hours: the same hour of the previous day, corrected for the change in the shower index of the path.
@@ -169,7 +169,7 @@ LI|Spots of all bands are shown, including those not chosen in Data collection (
 LI|The map shows the callsigns of both stations of each spot, once per station. The projection can be azimuthal (centred on your station) or Mercator. The tooltip on the Cloud column explains its meaning.
 H2|9.2 Radar flux
 P|The hourly meteor counts and the trail heights of the Collm SKiYMET radar (36.2 MHz) and the latest image from the Sodankylä radar (36.9 MHz).
-LI|Download now and Automatic update of all sources every 5 minutes: each source is downloaded again only if it has changed.
+LI|Download now and Automatic update of all sources every 5 minutes: each source is downloaded again only if it has changed. The automatic update is set in the Settings tab.
 LI|λ exponent (SM6FHZ): exponent of the estimate on your band (orange line on the right-hand scale).
 LI|Trail heights: histogram with mode, mean, median and standard deviation; with "from radar" the mode becomes the height used in all calculations.
 TAG|ATTENZIONE|If the scale of the Collm chart cannot be read, an orange warning appears and the values must be checked. Without a connection the program uses the last saved data, says so once and tries again by itself every 5 minutes; the status bar turns red until the connection is back.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC catalogue; radar/diretta/: GMN and CMOR data.
 LI|call3.txt: locator database; spot_ms/: collected meteor scatter spots; adif_quadrati.csv: squares from the ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: the technical documents.
 LI|backup/: copies of the files replaced by an update; aggiornamento/: downloaded package (deleted on restart).
+H2|13.3 The Settings tab
+P|The Settings tab gathers the general working of the program: Appearance (font, theme and language), Program updates (check on GitHub at start-up and every 30 minutes, automatic silent updates, Check now), Live sources (automatic update every 5 minutes), RMOB (observer, download now and automatic fetch) and Program (command rows and data folder). The calculation parameters stay in the command rows above the tabs.
 H2|13.2 Some config.ini keys
 LI|controlla_aggiornamenti=0: do not check for new versions; aggiornamenti_salta: skipped version.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: the calculation checkboxes.

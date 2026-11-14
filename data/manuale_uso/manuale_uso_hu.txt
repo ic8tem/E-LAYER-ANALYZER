@@ -50,7 +50,7 @@ LI|Műszaki dokumentumok, az utolsó: Felhasználói kézikönyv, Források, Az 
 H2|3.3 Nyelv, színek, betűtípus
 LI|Nyelv: 36 nyelv. Nyelvváltáskor az ablak ugyanazon a helyen és ugyanazon a fülön épül fel újra, újraindítás nélkül. A számok és dátumok a választott nyelvet követik (tizedesvessző magyarul, tizedespont angolul).
 LI|Téma: 12 színséma; a Világos az alapértelmezett, az Éjszaka és a Fekete sötétben használható, a Meteornyom a YA-MS eredeti stílusa.
-LI|Betűméret (a vezérlők első sorának végén): az összes szöveget 85 és 140 % között kicsinyíti vagy nagyítja, 5 %-os lépésekben. Nagy betűknél a fülek több sorba törnek.
+LI|Betűméret (Beállítások): az összes szöveget 85 és 140 % között kicsinyíti vagy nagyítja, 5 %-os lépésekben. Nagy betűknél a fülek több sorba törnek.
 LI|Vezérlők: összecsukja és újra kinyitja a vezérlők három sorát, hogy helyet adjon a térképeknek és grafikonoknak. A választást a program megjegyzi.
 TAG|NOTA|Szinte minden vezérlőnek van buboréksúgója: tartsa az egeret a vezérlő fölött, és elolvashatja, mire szolgál, és melyik forrásból származik a kezdőérték.
 H1|4. Az állomás és az útvonal beállítása
@@ -150,7 +150,7 @@ LI|Célfrekvencia MHz: az előrejelzés frekvenciája.
 LI|λ^k kitevő (3, SM6FHZ) és K állomástényező (1): frekvenciaszabály és korrekció az Ön állomására.
 LI|k a populációs indexekből: k-t javasol az aktív rajok r populációs indexeiből (GMN, egyébként IMO; k = 3,75 · log10 r, ZHR-rel súlyozva), és alkalmazás előtt megerősítést kér.
 LI|RMOB-fájl betöltése lemezről és Kitevő meghatározása az RMOB-fájlból: beolvasnak egy havi RMOB-fájlt, és a Collm-mal közös órákból meghatározzák k-t.
-LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni.
+LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni. Ezek a parancsok a Beállítások fülön vannak.
 H2|8.2 Az eredmények
 LI|A tegnapi és mai grafikon: óránkénti meteorszám Collmban, az Ön frekvenciájára átszámított értékek és, ha be vannak töltve, az RMOB-számlálások.
 LI|A következő 24 óra előrejelzése: az előző nap ugyanazon órája, az útvonal rajindexének változásával korrigálva.
@@ -169,7 +169,7 @@ LI|Minden sáv spotjai látszanak, azoké is, amelyeket az Adatgyűjtésben nem 
 LI|A térkép minden spot mindkét állomásának hívójelét kiírja, állomásonként egyszer. A vetület választható: azimutális (középen az állomásod) vagy Mercator. A Felhő oszlop buboréksúgója elmagyarázza a jelentését.
 H2|9.2 Radarfluxus
 P|A Collm SKiYMET radar (36,2 MHz) óránkénti meteorszámai és nyommagasságai, valamint a sodankyläi radar (36,9 MHz) legutóbbi képe.
-LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott.
+LI|Letöltés most és Minden forrás automatikus frissítése 5 percenként: minden forrást csak akkor tölt le újra, ha megváltozott. Az automatikus frissítést a Beállítások fülön lehet beállítani.
 LI|λ kitevő (SM6FHZ): a sávjára vonatkozó becslés kitevője (narancssárga vonal a jobb oldali skálán).
 LI|Nyommagasságok: hisztogram módusszal, átlaggal, mediánnal és szórással; „a radarból” beállítás mellett a módusz lesz az összes számítás magassága.
 TAG|ATTENZIONE|Ha a Collm-grafikon skálája nem olvasható le, narancssárga figyelmeztetés jelenik meg, és az értékeket ellenőrizni kell. Kapcsolat nélkül a program az utoljára mentett adatokat használja, ezt egyszer jelzi, és 5 percenként magától újra próbálkozik; az állapotsor pirosra vált, amíg a kapcsolat helyre nem áll.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC katalógus; radar/diretta/: GMN- és CMOR-adatok.
 LI|call3.txt: lokátorarchívum; spot_ms/: összegyűjtött meteor scatter spotok; adif_quadrati.csv: négyzetek az ADIF-ből.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: a műszaki dokumentumok.
 LI|backup/: a frissítés által lecserélt fájlok másolatai; aggiornamento/: a letöltött csomag (újraindításkor törlődik).
+H2|13.3 A Beállítások fül
+P|A Beállítások fül a program általános működését gyűjti össze: Megjelenés (betűméret, téma és nyelv), Programfrissítések (ellenőrzés a GitHubon indításkor és 30 percenként, automatikus csendes frissítés, Ellenőrzés most), Élő források (automatikus frissítés 5 percenként), RMOB (megfigyelő, letöltés most és automatikus letöltés) és Program (parancssorok és adatmappa). A számítás paraméterei a fülek feletti parancssorokban maradnak.
 H2|13.2 Néhány config.ini kulcs
 LI|controlla_aggiornamenti=0: ne ellenőrizze az új verziókat; aggiornamenti_salta: kihagyott verzió.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: a számítás jelölőnégyzetei.

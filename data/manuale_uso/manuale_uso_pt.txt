@@ -50,7 +50,7 @@ LI|Documentos técnicos, o último: Manual de utilização, Fontes, Mapa dos rad
 H2|3.3 Língua, cores, tipo de letra
 LI|Língua: 36 línguas. Ao mudar de língua a janela reconstrói-se na mesma posição e no mesmo separador, sem reiniciar. Os números e as datas seguem a língua escolhida (vírgula decimal em português, ponto em inglês).
 LI|Tema: 12 esquemas de cores; Claro é o inicial, Noite e Preto servem para o escuro, Rasto meteórico é o estilo original do YA-MS.
-LI|Letra (no fim da primeira linha de comandos): reduz ou amplia todo o texto de 85 a 140 %, em passos de 5 %. Com letras grandes os separadores passam para outra linha.
+LI|Letra (Definições): reduz ou amplia todo o texto de 85 a 140 %, em passos de 5 %. Com letras grandes os separadores passam para outra linha.
 LI|Comandos: recolhe e volta a abrir as três linhas de comandos, para dar espaço a mapas e gráficos. A escolha fica memorizada.
 TAG|NOTA|Quase todos os comandos têm uma dica: mantenha o rato parado sobre o comando para ler para que serve e de que fonte vem o valor inicial.
 H1|4. Configurar a estação e o percurso
@@ -150,7 +150,7 @@ LI|Frequência de destino MHz: frequência da previsão.
 LI|Expoente λ^k (3, SM6FHZ) e Fator de estação K (1): regra sobre a frequência e correção para a sua estação.
 LI|k a partir dos índices de população: propõe k a partir dos índices de população r das chuvas ativas (GMN, caso contrário IMO; k = 3,75 · log10 r, ponderado com o ZHR) e pede confirmação antes de o aplicar.
 LI|Carregar ficheiro RMOB do disco e Obter o expoente do ficheiro RMOB: leem um ficheiro mensal RMOB e obtêm k das horas em comum com Collm.
-LI|Observador RMOB, Descarregar RMOB agora e obtenção automática a cada 5 minutos: a obtenção automática está desativada e só deve ser ativada com autorização do RMOB.
+LI|Observador RMOB, Descarregar RMOB agora e obtenção automática a cada 5 minutos: a obtenção automática está desativada e só deve ser ativada com autorização do RMOB. Estes comandos estão no separador Definições.
 H2|8.2 Os resultados
 LI|O gráfico de ontem e hoje: meteoros por hora em Collm, valores transpostos para a sua frequência e, se carregadas, as contagens RMOB.
 LI|A previsão das próximas 24 horas: a mesma hora do dia anterior, corrigida pela variação do índice das chuvas do percurso.
@@ -169,7 +169,7 @@ LI|São mostrados os spots de todas as bandas, também das não escolhidas na Re
 LI|O mapa mostra os indicativos das duas estações de cada spot, uma só vez por estação. A projeção pode ser azimutal (centrada na sua estação) ou Mercator. A dica da coluna Nuvem explica o seu significado.
 H2|9.2 Fluxo radar
 P|As contagens horárias de meteoros e as altitudes dos rastos do radar SKiYMET de Collm (36,2 MHz) e a última imagem do radar de Sodankylä (36,9 MHz).
-LI|Descarregar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é descarregada de novo se tiver mudado.
+LI|Descarregar agora e Atualização automática de todas as fontes a cada 5 minutos: cada fonte só é descarregada de novo se tiver mudado. A atualização automática define-se no separador Definições.
 LI|Expoente λ (SM6FHZ): expoente da estimativa na sua banda (linha cor de laranja na escala da direita).
 LI|Altitudes dos rastos: histograma com moda, média, mediana e desvio padrão; com "do radar" a moda passa a ser a altitude de todos os cálculos.
 TAG|ATTENZIONE|Se não for possível ler a escala do gráfico de Collm, aparece um aviso cor de laranja e os valores devem ser verificados. Sem ligação, o programa usa os últimos dados guardados, informa disso uma vez e volta a tentar sozinho a cada 5 minutos; a barra de estado fica vermelha até a ligação voltar.
@@ -220,6 +220,8 @@ LI|cataloghi/: catálogo IAU MDC; radar/diretta/: dados GMN e CMOR.
 LI|call3.txt: arquivo dos locators; spot_ms/: spots de meteor scatter recolhidos; adif_quadrati.csv: quadrados do ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: os documentos técnicos.
 LI|backup/: cópias dos ficheiros substituídos por uma atualização; aggiornamento/: pacote descarregado (apagado ao reiniciar).
+H2|13.3 O separador Definições
+P|O separador Definições reúne o funcionamento geral do programa: Aspeto (letra, tema e língua), Atualizações do programa (verificação no GitHub no arranque e a cada 30 minutos, atualizações automáticas e silenciosas, Verificar agora), Fontes em direto (atualização automática a cada 5 minutos), RMOB (observador, descarga imediata e recolha automática) e Programa (linhas de comandos e pasta dos dados). Os parâmetros do cálculo ficam nas linhas de comandos acima dos separadores.
 H2|13.2 Algumas chaves de config.ini
 LI|controlla_aggiornamenti=0: não verificar as versões novas; aggiornamenti_salta: versão ignorada.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: as caixas do cálculo.

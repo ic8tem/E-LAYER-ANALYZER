@@ -50,7 +50,7 @@ LI|Documents techniques, le dernier : Manuel d'utilisation, Sources, Carte des r
 H2|3.3 Langue, couleurs, police
 LI|Langue : 36 langues. Lorsque vous changez de langue, la fenêtre se reconstruit à la même position et sur le même onglet, sans redémarrer. Les nombres et les dates suivent la langue choisie (virgule décimale en italien, point en anglais).
 LI|Thème : 12 jeux de couleurs ; Clair est celui par défaut, Nuit et Noir servent dans l'obscurité, Traînée météorique est le style d'origine de YA-MS.
-LI|Police (à la fin de la première ligne de commandes) : réduit ou agrandit tout le texte de 85 à 140 %, par pas de 5 %. Avec de grands caractères, les onglets passent à la ligne.
+LI|Police (Paramètres) : réduit ou agrandit tout le texte de 85 à 140 %, par pas de 5 %. Avec de grands caractères, les onglets passent à la ligne.
 LI|Commandes : replie et rouvre les trois rangées de commandes, pour laisser de la place aux cartes et aux graphiques. Le choix est mémorisé.
 TAG|NOTA|Presque chaque commande a une info-bulle : laissez la souris immobile sur la commande pour lire à quoi elle sert et de quelle source provient la valeur par défaut.
 H1|4. Configurer la station et le trajet
@@ -150,7 +150,7 @@ LI|Fréquence cible MHz : fréquence de la prévision.
 LI|Exposant λ^k (3, SM6FHZ) et Facteur de station K (1) : règle en fonction de la fréquence et correction pour votre station.
 LI|k à partir des indices de population : propose k à partir des indices de population r des essaims actifs (GMN, sinon IMO ; k = 3,75 · log10 r, pondéré par le ZHR) et demande confirmation avant de l'appliquer.
 LI|Charger un fichier RMOB depuis le disque et Déduire l'exposant du fichier RMOB : lisent un fichier mensuel RMOB et en déduisent k à partir des heures communes avec Collm.
-LI|Observateur RMOB, Télécharger RMOB maintenant et récupération automatique toutes les 5 minutes : la récupération automatique est désactivée et ne doit être activée qu'avec l'autorisation de RMOB.
+LI|Observateur RMOB, Télécharger RMOB maintenant et récupération automatique toutes les 5 minutes : la récupération automatique est désactivée et ne doit être activée qu'avec l'autorisation de RMOB. Ces commandes sont dans l'onglet Paramètres.
 H2|8.2 Les résultats
 LI|Le graphique d'hier et d'aujourd'hui : météores par heure à Collm, valeurs transposées à votre fréquence et, s'ils sont chargés, les comptages RMOB.
 LI|La prévision des 24 prochaines heures : la même heure de la veille, corrigée de la variation de l'indice des essaims du trajet.
@@ -169,7 +169,7 @@ LI|Les spots de toutes les bandes sont affichés, y compris ceux des bandes non 
 LI|La carte affiche les indicatifs des deux stations de chaque spot, une seule fois par station. La projection se choisit entre azimutale (centrée sur votre station) et Mercator. L'info-bulle de la colonne Nuage en explique le sens.
 H2|9.2 Flux radar
 P|Les comptages horaires des météores et les altitudes des traînées du radar SKiYMET de Collm (36,2 MHz) et la dernière image du radar de Sodankylä (36,9 MHz).
-LI|Télécharger maintenant et Mise à jour automatique de toutes les sources toutes les 5 minutes : chaque source n'est téléchargée à nouveau que si elle a changé.
+LI|Télécharger maintenant et Mise à jour automatique de toutes les sources toutes les 5 minutes : chaque source n'est téléchargée à nouveau que si elle a changé. La mise à jour automatique se règle dans l'onglet Paramètres.
 LI|Exposant λ (SM6FHZ) : exposant de l'estimation sur votre bande (ligne orange sur l'échelle de droite).
 LI|Altitudes des traînées : histogramme avec mode, moyenne, médiane et écart type ; avec « du radar », le mode devient l'altitude de tous les calculs.
 TAG|ATTENZIONE|Si l'échelle du graphique de Collm ne peut pas être lue, un avertissement orange apparaît et les valeurs doivent être vérifiées. Sans connexion, le programme utilise les dernières données enregistrées, le signale une fois et réessaie de lui-même toutes les 5 minutes ; la barre d'état devient rouge jusqu'au retour de la connexion.
@@ -220,6 +220,8 @@ LI|cataloghi/ : catalogue IAU MDC ; radar/diretta/ : données GMN et CMOR.
 LI|call3.txt : base des locators ; spot_ms/ : spots meteor scatter recueillis ; adif_quadrati.csv : carrés issus de l'ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/ : les documents techniques.
 LI|backup/ : copies des fichiers remplacés par une mise à jour ; aggiornamento/ : paquet téléchargé (effacé au redémarrage).
+H2|13.3 L'onglet Paramètres
+P|L'onglet Paramètres regroupe le fonctionnement général du programme : Apparence (police, thème et langue), Mises à jour du programme (vérification sur GitHub au démarrage et toutes les 30 minutes, mises à jour automatiques et silencieuses, Vérifier maintenant), Sources en direct (mise à jour automatique toutes les 5 minutes), RMOB (observateur, téléchargement immédiat et prélèvement automatique) et Programme (lignes de commandes et dossier des données). Les paramètres du calcul restent dans les lignes de commandes au-dessus des onglets.
 H2|13.2 Quelques clés de config.ini
 LI|controlla_aggiornamenti=0 : ne pas rechercher les nouvelles versions ; aggiornamenti_salta : version ignorée.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico : les cases du calcul.

@@ -50,7 +50,7 @@ LI|Tekniska dokument, sist: Bruksanvisning, Källor, Karta över europeiska rada
 H2|3.3 Språk, färger, typsnitt
 LI|Språk: 36 språk. När du byter språk byggs fönstret upp igen på samma position och på samma flik, utan omstart. Tal och datum följer det valda språket (decimalkomma på italienska, punkt på engelska).
 LI|Tema: 12 färgscheman; Ljust är standardschemat, Natt och Svart är till för mörker, Meteorspår är YA-MS ursprungliga stil.
-LI|Teckenstorlek (i slutet av första raden med kontroller): förminskar eller förstorar all text från 85 till 140 %, i steg om 5 %. Med stora tecken bryts flikarna till flera rader.
+LI|Teckenstorlek (Inställningar): förminskar eller förstorar all text från 85 till 140 %, i steg om 5 %. Med stora tecken bryts flikarna till flera rader.
 LI|Reglage: fäller ihop och fäller ut de tre raderna med reglage, för att ge plats åt kartor och diagram. Valet sparas.
 TAG|NOTA|Nästan varje reglage har ett verktygstips: håll musen stilla över reglaget för att läsa vad det används till och från vilken källa standardvärdet kommer.
 H1|4. Ställa in stationen och sträckan
@@ -150,7 +150,7 @@ LI|Målfrekvens MHz: prognosens frekvens.
 LI|λ^k-exponent (3, SM6FHZ) och Stationsfaktor K (1): regel för frekvensen och korrigering för din station.
 LI|k från populationsindex: föreslår k utifrån populationsindex r för de aktiva svärmarna (GMN, annars IMO; k = 3,75 · log10 r, viktat med ZHR) och ber om bekräftelse innan det tillämpas.
 LI|Läs in RMOB-fil från disk och Härled exponenten från RMOB-filen: läser en månatlig RMOB-fil och härleder k från de timmar som är gemensamma med Collm.
-LI|RMOB-observatör, Hämta RMOB nu och automatisk hämtning var 5:e minut: den automatiska hämtningen är avstängd och får bara slås på med tillstånd från RMOB.
+LI|RMOB-observatör, Hämta RMOB nu och automatisk hämtning var 5:e minut: den automatiska hämtningen är avstängd och får bara slås på med tillstånd från RMOB. Dessa kommandon finns under fliken Inställningar.
 H2|8.2 Resultaten
 LI|Diagrammet för i går och i dag: meteorer per timme i Collm, värden omräknade till din frekvens och, om de är inlästa, RMOB-räkningarna.
 LI|Prognosen för de närmaste 24 timmarna: samma timme dagen före, korrigerad för förändringen i sträckans svärmindex.
@@ -169,7 +169,7 @@ LI|Spottar från alla band visas, även från band som inte valts i Datainsamlin
 LI|Kartan visar anropssignalerna för båda stationerna i varje spott, en gång per station. Projektionen kan vara azimutal (centrerad på din station) eller Mercator. Verktygstipset på kolumnen Moln förklarar vad den betyder.
 H2|9.2 Radarflöde
 P|Timräkningarna av meteorer och spårhöjderna från SKiYMET-radarn i Collm (36,2 MHz) och den senaste bilden från radarn i Sodankylä (36,9 MHz).
-LI|Hämta nu och Automatisk uppdatering av alla källor var 5:e minut: varje källa hämtas på nytt bara om den har ändrats.
+LI|Hämta nu och Automatisk uppdatering av alla källor var 5:e minut: varje källa hämtas på nytt bara om den har ändrats. Den automatiska uppdateringen ställs in under fliken Inställningar.
 LI|λ-exponent (SM6FHZ): exponent för uppskattningen på ditt band (orange linje på den högra skalan).
 LI|Spårhöjder: histogram med typvärde, medelvärde, median och standardavvikelse; med "från radar" blir typvärdet höjden för alla beräkningar.
 TAG|ATTENZIONE|Om skalan i Collm-diagrammet inte kan läsas visas en orange varning och värdena bör kontrolleras. Utan anslutning använder programmet de senast sparade data, säger det en gång och försöker själv igen var 5:e minut; statusfältet blir rött tills anslutningen är tillbaka.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC-katalogen; radar/diretta/: GMN- och CMOR-data.
 LI|call3.txt: lokatorarkiv; spot_ms/: insamlade meteorscatterspots; adif_quadrati.csv: rutor från ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de tekniska dokumenten.
 LI|backup/: kopior av filer som ersatts av en uppdatering; aggiornamento/: nedladdat paket (raderas vid omstart).
+H2|13.3 Fliken Inställningar
+P|Fliken Inställningar samlar programmets allmänna funktion: Utseende (teckenstorlek, tema och språk), Programuppdateringar (kontroll på GitHub vid start och var 30:e minut, automatiska tysta uppdateringar, Kontrollera nu), Källor i realtid (automatisk uppdatering var 5:e minut), RMOB (observatör, hämta nu och automatisk hämtning) och Program (kommandorader och datamapp). Beräkningsparametrarna stannar i kommandoraderna ovanför flikarna.
 H2|13.2 Några nycklar i config.ini
 LI|controlla_aggiornamenti=0: kontrollera inte nya versioner; aggiornamenti_salta: överhoppad version.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: beräkningens kryssrutor.

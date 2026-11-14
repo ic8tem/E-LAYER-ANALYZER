@@ -50,7 +50,7 @@ LI|Teknik belgeler, en sonda: Kullanım kılavuzu, Kaynaklar, Avrupa radarları 
 H2|3.3 Dil, renkler, yazı tipi
 LI|Dil: 36 dil. Dil değiştirildiğinde pencere, yeniden başlatmaya gerek kalmadan aynı konumda ve aynı sekmede yeniden oluşturulur. Sayılar ve tarihler seçilen dili izler (İtalyancada ondalık virgül, İngilizcede nokta).
 LI|Tema: 12 renk şeması; Açık başlangıç şemasıdır, Gece ve Siyah karanlıkta kullanım içindir, Meteor izi YA-MS'in özgün stilidir.
-LI|Yazı boyutu (ilk denetim satırının sonunda): tüm metni %85 ile %140 arasında, %5 adımlarla küçültür veya büyütür. Büyük yazıda sekmeler birkaç satıra kayar.
+LI|Yazı boyutu (Ayarlar): tüm metni %85 ile %140 arasında, %5 adımlarla küçültür veya büyütür. Büyük yazıda sekmeler birkaç satıra kayar.
 LI|Kontroller: haritalara ve grafiklere yer açmak için üç kontrol sırasını katlar ve yeniden açar. Seçim hatırlanır.
 TAG|NOTA|Hemen her kontrolün bir ipucu balonu vardır: ne işe yaradığını ve başlangıç değerinin hangi kaynaktan geldiğini okumak için fareyi kontrolün üzerinde tutun.
 H1|4. İstasyonu ve yolu ayarlama
@@ -150,7 +150,7 @@ LI|Hedef frekans MHz: tahminin frekansı.
 LI|λ^k üssü (3, SM6FHZ) ve İstasyon katsayısı K (1): frekansa göre kural ve istasyonunuz için düzeltme.
 LI|Popülasyon indekslerinden k: etkin yağmurların r popülasyon indekslerinden k önerir (GMN, yoksa IMO; k = 3,75 · log10 r, ZHR ile ağırlıklı) ve uygulamadan önce onay ister.
 LI|Diskten RMOB dosyası yükle ve Üssü RMOB dosyasından çıkar: aylık bir RMOB dosyasını okur ve Collm ile ortak saatlerden k'yi çıkarır.
-LI|RMOB gözlemcisi, RMOB'u şimdi indir ve 5 dakikada bir otomatik indirme: otomatik indirme kapalıdır ve yalnızca RMOB'un izniyle açılmalıdır.
+LI|RMOB gözlemcisi, RMOB'u şimdi indir ve 5 dakikada bir otomatik indirme: otomatik indirme kapalıdır ve yalnızca RMOB'un izniyle açılmalıdır. Bu komutlar Ayarlar sekmesindedir.
 H2|8.2 Sonuçlar
 LI|Dün ve bugünün grafiği: Collm'da saatlik meteorlar, sizin frekansınıza ölçeklenmiş değerler ve, yüklendiyse, RMOB sayımları.
 LI|Sonraki 24 saatin tahmini: önceki günün aynı saati, yolun yağmur endeksindeki değişime göre düzeltilmiş.
@@ -169,7 +169,7 @@ LI|Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları göst
 LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. Bulut sütunundaki ipucu anlamını açıklar.
 H2|9.2 Radar akısı
 P|Collm SKiYMET radarının (36,2 MHz) saatlik meteor sayımları ve iz yükseklikleri ile Sodankylä radarının (36,9 MHz) son görüntüsü.
-LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir.
+LI|Şimdi indir ve Tüm kaynakların 5 dakikada bir otomatik güncellenmesi: her kaynak yalnızca değiştiyse yeniden indirilir. Otomatik güncelleme Ayarlar sekmesinde ayarlanır.
 LI|λ üssü (SM6FHZ): sizin bandınızdaki tahminin üssü (sağ ölçekte turuncu çizgi).
 LI|İz yükseklikleri: mod, ortalama, medyan ve standart sapma ile histogram; "radardan" seçiliyken mod, tüm hesapların yüksekliği olur.
 TAG|ATTENZIONE|Collm grafiğinin ölçeği okunamazsa turuncu bir uyarı görünür ve değerlerin doğrulanması gerekir. Bağlantı yoksa program son kaydedilen verileri kullanır, bunu bir kez bildirir ve her 5 dakikada bir kendiliğinden yeniden dener; bağlantı geri gelene kadar durum çubuğu kırmızı olur.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC kataloğu; radar/diretta/: GMN ve CMOR verileri.
 LI|call3.txt: lokatör arşivi; spot_ms/: toplanan meteor scatter spot'ları; adif_quadrati.csv: ADIF'ten gelen kareler.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: teknik belgeler.
 LI|backup/: bir güncellemenin değiştirdiği dosyaların kopyaları; aggiornamento/: indirilen paket (yeniden başlatmada silinir).
+H2|13.3 Ayarlar sekmesi
+P|Ayarlar sekmesi programın genel çalışmasını toplar: Görünüm (yazı tipi, tema ve dil), Program güncellemeleri (açılışta ve 30 dakikada bir GitHub denetimi, otomatik sessiz güncellemeler, Şimdi denetle), Canlı kaynaklar (5 dakikada bir otomatik güncelleme), RMOB (gözlemci, şimdi indir ve otomatik alma) ve Program (komut satırları ve veri klasörü). Hesaplama parametreleri sekmelerin üstündeki komut satırlarında kalır.
 H2|13.2 config.ini'nin bazı anahtarları
 LI|controlla_aggiornamenti=0: yeni sürümleri denetleme; aggiornamenti_salta: atlanan sürüm.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: hesabın onay kutuları.

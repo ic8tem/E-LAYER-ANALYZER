@@ -50,7 +50,7 @@ LI|Tæknileg skjöl, síðast: Notendahandbók, Heimildir, Kort af evrópskum ra
 H2|3.3 Tungumál, litir, letur
 LI|Tungumál: 36 tungumál. Þegar skipt er um tungumál er glugginn endurbyggður á sama stað og á sama flipa, án endurræsingar. Tölur og dagsetningar fylgja völdu tungumáli (kommu sem tugabrotsmerki á ítölsku, punktur á ensku).
 LI|Þema: 12 litaþemu; Ljóst er sjálfgefið, Nótt og Svart eru ætluð til notkunar í myrkri, Loftsteinaslóð er upprunalegi stíll YA-MS.
-LI|Leturstærð (aftast í fyrstu stjórnlínunni): minnkar eða stækkar allan texta frá 85 upp í 140 %, í 5 % þrepum. Með stóru letri fara flipar í fleiri línur.
+LI|Leturstærð (Stillingar): minnkar eða stækkar allan texta frá 85 upp í 140 %, í 5 % þrepum. Með stóru letri fara flipar í fleiri línur.
 LI|Stýringar: fellir saman og opnar aftur raðirnar þrjár af stýringum, til að gefa kortum og gröfum meira rými. Valið er munað.
 TAG|NOTA|Nær allar stýringar hafa skýringartexta: haltu músinni kyrri yfir stýringunni til að lesa til hvers hún er og úr hvaða heimild upphafsgildið kemur.
 H1|4. Stilling stöðvar og leiðar
@@ -150,7 +150,7 @@ LI|Markmiðstíðni MHz: tíðni spárinnar.
 LI|Veldisvísir λ^k (3, SM6FHZ) og Stöðvarstuðull K (1): regla um tíðnina og leiðrétting fyrir stöðina þína.
 LI|k úr fjöldastuðlum: leggur til k út frá fjöldastuðlum r virku drífanna (GMN, annars IMO; k = 3,75 · log10 r, vegið með ZHR) og biður um staðfestingu áður en það er notað.
 LI|Hlaða RMOB-skrá af diski og Finna veldisvísinn út frá RMOB-skránni: lesa mánaðarlega RMOB-skrá og finna k út frá klukkustundunum sem eru sameiginlegar með Collm.
-LI|RMOB-athugandi, Sækja RMOB núna og sjálfvirk sókn á 5 mínútna fresti: slökkt er á sjálfvirku sókninni og aðeins má kveikja á henni með leyfi RMOB.
+LI|RMOB-athugandi, Sækja RMOB núna og sjálfvirk sókn á 5 mínútna fresti: slökkt er á sjálfvirku sókninni og aðeins má kveikja á henni með leyfi RMOB. Þessar skipanir eru í flipanum Stillingar.
 H2|8.2 Niðurstöðurnar
 LI|Grafið fyrir gærdaginn og daginn í dag: loftsteinar á klukkustund í Collm, gildi færð yfir á tíðnina þína og, ef þær hafa verið hlaðnar, RMOB-talningarnar.
 LI|Spáin fyrir næstu 24 klukkustundir: sama klukkustund daginn áður, leiðrétt fyrir breytingu á drífustuðli leiðarinnar.
@@ -169,7 +169,7 @@ LI|Spott allra banda eru sýnd, líka banda sem ekki eru valin í Gagnasöfnun (
 LI|Kortið sýnir kallmerki beggja stöðva hvers spotts, einu sinni á hverja stöð. Vörpunin getur verið jafnfjarlæg (miðuð á þína stöð) eða Mercator. Ábendingin á dálknum Ský útskýrir merkingu hans.
 H2|9.2 Ratsjárflæði
 P|Talningar loftsteina á klukkustund og hæðir slóða frá SKiYMET-ratsjánni í Collm (36,2 MHz) og nýjasta myndin frá ratsjánni í Sodankylä (36,9 MHz).
-LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst.
+LI|Sækja núna og Sjálfvirk uppfærsla allra gagnalinda á 5 mínútna fresti: hver gagnalind er aðeins sótt aftur ef hún hefur breyst. Sjálfvirka uppfærslan er stillt í flipanum Stillingar.
 LI|Veldisvísir λ (SM6FHZ): veldisvísir matsins á þínu bandi (appelsínugul lína á kvarðanum til hægri).
 LI|Hæðir slóða: stuðlarit með tíðasta gildi, meðaltali, miðgildi og staðalfráviki; með „frá ratsjá“ verður tíðasta gildið hæðin í öllum útreikningum.
 TAG|ATTENZIONE|Ef ekki tekst að lesa kvarðann á grafi Collm birtist appelsínugul viðvörun og sannreyna þarf gildin. Án nettengingar notar forritið síðustu vistuðu gögnin, segir frá því einu sinni og reynir sjálft aftur á 5 mínútna fresti; stöðustikan verður rauð þar til tengingin kemst aftur á.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC-skráin; radar/diretta/: GMN- og CMOR-gögn.
 LI|call3.txt: locatorasafn; spot_ms/: söfnuð meteor scatter-spot; adif_quadrati.csv: reitir úr ADIF-skránni.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tæknilegu skjölin.
 LI|backup/: afrit af skrám sem uppfærsla skipti út; aggiornamento/: sóttur pakki (eytt við endurræsingu).
+H2|13.3 Flipinn Stillingar
+P|Flipinn Stillingar safnar saman almennri virkni forritsins: Útlit (letur, þema og tungumál), Uppfærslur forritsins (athugun á GitHub við ræsingu og á 30 mínútna fresti, sjálfvirkar hljóðlátar uppfærslur, Athuga núna), Rauntímaheimildir (sjálfvirk uppfærsla á 5 mínútna fresti), RMOB (athugandi, sækja núna og sjálfvirk sókn) og Forrit (skipanalínur og gagnamappa). Reiknistikarnir eru áfram í skipanalínunum fyrir ofan flipana.
 H2|13.2 Nokkrir lyklar í config.ini
 LI|controlla_aggiornamenti=0: ekki leita að nýjum útgáfum; aggiornamenti_salta: útgáfa sem sleppt var.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: gátreitir útreikningsins.

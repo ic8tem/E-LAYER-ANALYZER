@@ -50,7 +50,7 @@ LI|Tekniske dokumenter, den sidste: Brugervejledning, Kilder, Kort over europæi
 H2|3.3 Sprog, farver, skrifttype
 LI|Sprog: 36 sprog. Når du skifter sprog, genopbygges vinduet på samme position og på samme fane uden genstart. Tal og datoer følger det valgte sprog (decimalkomma på italiensk, punktum på engelsk).
 LI|Tema: 12 farveskemaer; Lyst er standard, Nat og Sort er beregnet til brug i mørke, Meteorspor er YA-MS' oprindelige stil.
-LI|Skrift (sidst i første række af knapper): formindsker eller forstørrer al tekst fra 85 til 140 %, i trin på 5 %. Med stor skrift brydes fanerne over flere linjer.
+LI|Skrift (Indstillinger): formindsker eller forstørrer al tekst fra 85 til 140 %, i trin på 5 %. Med stor skrift brydes fanerne over flere linjer.
 LI|Betjening: folder de tre rækker betjeningselementer sammen og ud igen for at give plads til kort og grafer. Valget huskes.
 TAG|NOTA|Næsten alle betjeningselementer har et værktøjstip: hold musen stille over elementet for at læse, hvad det bruges til, og fra hvilken kilde startværdien kommer.
 H1|4. Indstilling af station og strækning
@@ -150,7 +150,7 @@ LI|Målfrekvens MHz: prognosens frekvens.
 LI|λ^k-eksponent (3, SM6FHZ) og Stationsfaktor K (1): regel for frekvensen og korrektion for din station.
 LI|k fra populationsindekserne: foreslår k ud fra populationsindekserne r for de aktive sværme (GMN, ellers IMO; k = 3,75 · log10 r, vægtet med ZHR) og beder om bekræftelse, før det anvendes.
 LI|Indlæs RMOB-fil fra disken og Udled eksponenten fra RMOB-filen: læser en månedlig RMOB-fil og udleder k fra de timer, der er fælles med Collm.
-LI|RMOB-observatør, Hent RMOB nu og automatisk hentning hvert 5. minut: den automatiske hentning er slået fra og må kun slås til med tilladelse fra RMOB.
+LI|RMOB-observatør, Hent RMOB nu og automatisk hentning hvert 5. minut: den automatiske hentning er slået fra og må kun slås til med tilladelse fra RMOB. Disse kommandoer er under fanen Indstillinger.
 H2|8.2 Resultaterne
 LI|Grafen for i går og i dag: meteorer pr. time i Collm, værdier skaleret til din frekvens og, hvis de er indlæst, RMOB-tællingerne.
 LI|Prognosen for de næste 24 timer: samme time dagen før, korrigeret for ændringen i strækningens sværmindeks.
@@ -169,7 +169,7 @@ LI|Spots fra alle bånd vises, også fra bånd der ikke er valgt i Dataindsamlin
 LI|Kortet viser kaldesignalerne for begge stationer i hvert spot, én gang pr. station. Projektionen kan være azimutal (centreret på din station) eller Mercator. Værktøjstippet på kolonnen Sky forklarer betydningen.
 H2|9.2 Radarflux
 P|Timetællingerne af meteorer og sporhøjderne fra SKiYMET-radaren i Collm (36,2 MHz) og det seneste billede fra radaren i Sodankylä (36,9 MHz).
-LI|Hent nu og Automatisk opdatering af alle kilder hvert 5. minut: hver kilde hentes kun igen, hvis den er ændret.
+LI|Hent nu og Automatisk opdatering af alle kilder hvert 5. minut: hver kilde hentes kun igen, hvis den er ændret. Den automatiske opdatering indstilles under fanen Indstillinger.
 LI|λ-eksponent (SM6FHZ): eksponenten for estimatet på dit bånd (orange linje på skalaen til højre).
 LI|Sporhøjder: histogram med typetal, middelværdi, median og standardafvigelse; med »fra radar« bliver typetallet højden i alle beregninger.
 TAG|ATTENZIONE|Hvis skalaen i Collm-grafen ikke kan aflæses, vises en orange advarsel, og værdierne skal kontrolleres. Uden forbindelse bruger programmet de senest gemte data, siger det én gang og prøver selv igen hvert 5. minut; statuslinjen bliver rød, indtil forbindelsen vender tilbage.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC-kataloget; radar/diretta/: GMN- og CMOR-data.
 LI|call3.txt: lokatorarkiv; spot_ms/: indsamlede meteor scatter-spots; adif_quadrati.csv: felter fra ADIF-filen.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de tekniske dokumenter.
 LI|backup/: kopier af filer, der er erstattet af en opdatering; aggiornamento/: hentet pakke (slettes ved genstart).
+H2|13.3 Fanen Indstillinger
+P|Fanen Indstillinger samler programmets generelle funktion: Udseende (skrift, tema og sprog), Programopdateringer (tjek på GitHub ved start og hvert 30. minut, automatiske stille opdateringer, Tjek nu), Kilder i realtid (automatisk opdatering hvert 5. minut), RMOB (observatør, hent nu og automatisk hentning) og Program (kommandolinjer og datamappe). Beregningsparametrene bliver i kommandolinjerne over fanerne.
 H2|13.2 Nogle nøgler i config.ini
 LI|controlla_aggiornamenti=0: kontrollér ikke for nye versioner; aggiornamenti_salta: version, der er sprunget over.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: beregningens afkrydsningsfelter.

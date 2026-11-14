@@ -50,7 +50,7 @@ LI|Tehnilised dokumendid, viimane: Kasutusjuhend, Allikad, Euroopa radarite kaar
 H2|3.3 Keel, värvid, font
 LI|Keel: 36 keelt. Keele vahetamisel ehitatakse aken uuesti üles samas asendis ja samal sakil, ilma taaskäivituseta. Arvud ja kuupäevad järgivad valitud keelt (itaalia keeles kümnendkoma, inglise keeles punkt).
 LI|Teema: 12 värviskeemi; Hele on vaikimisi, Öö ja Must on mõeldud pimedas kasutamiseks, Meteoorijälg on YA-MS-i algne stiil.
-LI|Kiri (esimese juhtrea lõpus): vähendab või suurendab kogu teksti 85 kuni 140 %, 5 % sammuga. Suure kirja korral murduvad sakid mitmele reale.
+LI|Kiri (Seaded): vähendab või suurendab kogu teksti 85 kuni 140 %, 5 % sammuga. Suure kirja korral murduvad sakid mitmele reale.
 LI|Juhtnupud: peidab ja avab uuesti kolm juhtnuppude rida, et anda kaartidele ja graafikutele ruumi. Valik jäetakse meelde.
 TAG|NOTA|Peaaegu igal juhtnupul on kohtspikker: hoia hiirt juhtnupu kohal paigal, et lugeda, milleks see on ja millisest allikast algväärtus pärineb.
 H1|4. Jaama ja trassi seadistamine
@@ -150,7 +150,7 @@ LI|Sihtsagedus MHz: prognoosi sagedus.
 LI|λ^k astendaja (3, SM6FHZ) ja Jaama tegur K (1): sageduse reegel ja parandus sinu jaama jaoks.
 LI|k populatsiooniindeksitest: pakub k väärtuse aktiivsete meteoorivoolude populatsiooniindeksite r põhjal (GMN, muidu IMO; k = 3,75 · log10 r, kaalutud ZHR-iga) ja küsib enne rakendamist kinnitust.
 LI|Laadi RMOB-fail kettalt ja Leia astendaja RMOB-failist: loevad kuise RMOB-faili ja leiavad k Collmiga ühiste tundide põhjal.
-LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal.
+LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal. Need käsud on vahekaardil Seaded.
 H2|8.2 Tulemused
 LI|Eilse ja tänase päeva graafik: meteoorid tunnis Collmis, sinu sagedusele teisendatud väärtused ja, kui need on laaditud, RMOB-i loendused.
 LI|Järgmise 24 tunni prognoos: eelmise päeva sama tund, parandatuna trassi meteoorivoolude indeksi muutusega.
@@ -169,7 +169,7 @@ LI|Näidatakse kõigi sagedusalade spotte, ka nende, mida Andmekogumises ei ole 
 LI|Kaardil kirjutatakse iga spoti mõlema jaama kutsung, üks kord jaama kohta. Projektsioon on valitav: asimuutne (keskel sinu jaam) või Mercator. Veeru Pilv kohtspikker selgitab selle tähendust.
 H2|9.2 Radari voog
 P|Collmi SKiYMET-radari (36,2 MHz) meteooride tunniloendused ja jälgede kõrgused ning Sodankylä radari (36,9 MHz) viimane pilt.
-LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud.
+LI|Laadi kohe alla ja Kõigi allikate automaatne uuendus iga 5 minuti järel: iga allikas laaditakse uuesti alla ainult siis, kui see on muutunud. Automaatne uuendus seadistatakse vahekaardil Seaded.
 LI|λ astendaja (SM6FHZ): sinu sagedusala hinnangu astendaja (oranž joon parempoolsel skaalal).
 LI|Jälgede kõrgused: histogramm moodi, keskmise, mediaani ja standardhälbega; valikuga „radarilt“ saab moodist kõigi arvutuste kõrgus.
 TAG|ATTENZIONE|Kui Collmi graafiku skaalat ei õnnestu lugeda, kuvatakse oranž hoiatus ja väärtusi tuleb kontrollida. Ühenduseta kasutab programm viimati salvestatud andmeid, ütleb seda üks kord ja proovib ise uuesti iga 5 minuti järel; olekuriba muutub punaseks, kuni ühendus taastub.
@@ -220,6 +220,8 @@ LI|cataloghi/: IAU MDC kataloog; radar/diretta/: GMN-i ja CMOR-i andmed.
 LI|call3.txt: lokaatorite arhiiv; spot_ms/: kogutud meteor scatteri spotid; adif_quadrati.csv: ADIF-ist saadud ruudud.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehnilised dokumendid.
 LI|backup/: uuendusega asendatud failide koopiad; aggiornamento/: alla laaditud pakett (kustutatakse taaskäivitamisel).
+H2|13.3 Vahekaart Seaded
+P|Vahekaart Seaded koondab programmi üldise töö: Välimus (kiri, teema ja keel), Programmi uuendused (kontroll GitHubis käivitamisel ja iga 30 minuti järel, automaatsed vaiksed uuendused, Kontrolli kohe), Reaalajas allikad (automaatne uuendus iga 5 minuti järel), RMOB (vaatleja, laadi kohe ja automaatne laadimine) ning Programm (käsuread ja andmekaust). Arvutuse parameetrid jäävad vahekaartide kohal olevatesse käsuridadesse.
 H2|13.2 Mõned config.ini võtmed
 LI|controlla_aggiornamenti=0: ära kontrolli uusi versioone; aggiornamenti_salta: vahele jäetud versioon.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: arvutuse märkeruudud.

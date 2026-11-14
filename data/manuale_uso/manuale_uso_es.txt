@@ -50,7 +50,7 @@ LI|Documentos técnicos, la última: Manual de uso, Fuentes, Mapa de los radares
 H2|3.3 Idioma, colores, tipo de letra
 LI|Idioma: 36 idiomas. Al cambiar de idioma la ventana se reconstruye en la misma posición y en la misma pestaña, sin reiniciar. Los números y las fechas siguen el idioma elegido (coma decimal en español, punto en inglés).
 LI|Tema: 12 esquemas de colores; Claro es el inicial, Noche y Negro sirven para la oscuridad, Estela meteórica es el estilo original de YA-MS.
-LI|Letra (al final de la primera fila de controles): reduce o amplía todo el texto del 85 al 140 %, en pasos del 5 %. Con letras grandes las pestañas pasan a otra línea.
+LI|Letra (Ajustes): reduce o amplía todo el texto del 85 al 140 %, en pasos del 5 %. Con letras grandes las pestañas pasan a otra línea.
 LI|Controles: pliega y vuelve a abrir las tres filas de controles, para dejar espacio a mapas y gráficos. La elección se recuerda.
 TAG|NOTA|Casi todos los controles tienen una información emergente: deja el ratón quieto sobre el control para leer para qué sirve y de qué fuente procede el valor inicial.
 H1|4. Configurar la estación y el trayecto
@@ -150,7 +150,7 @@ LI|Frecuencia de destino MHz: frecuencia de la previsión.
 LI|Exponente λ^k (3, SM6FHZ) y Factor de estación K (1): regla sobre la frecuencia y corrección para tu estación.
 LI|k a partir de los índices de población: propone k a partir de los índices de población r de las lluvias activas (GMN, o si no IMO; k = 3,75 · log10 r, ponderado con el ZHR) y pide confirmación antes de aplicarlo.
 LI|Cargar archivo RMOB desde el disco y Obtener el exponente del archivo RMOB: leen un archivo mensual RMOB y obtienen k de las horas en común con Collm.
-LI|Observador RMOB, Descargar RMOB ahora y descarga automática cada 5 minutos: la descarga automática está desactivada y solo debe activarse con el permiso de RMOB.
+LI|Observador RMOB, Descargar RMOB ahora y descarga automática cada 5 minutos: la descarga automática está desactivada y solo debe activarse con el permiso de RMOB. Estos mandos están en la pestaña Ajustes.
 H2|8.2 Los resultados
 LI|El gráfico de ayer y hoy: meteoros por hora en Collm, valores escalados a tu frecuencia y, si se han cargado, los recuentos RMOB.
 LI|La previsión de las próximas 24 horas: la misma hora del día anterior, corregida según la variación del índice de las lluvias del trayecto.
@@ -169,7 +169,7 @@ LI|Se muestran los spots de todas las bandas, también de las no elegidas en Rec
 LI|El mapa muestra los indicativos de las dos estaciones de cada spot, una sola vez por estación. La proyección puede ser azimutal (centrada en tu estación) o Mercator. La ayuda emergente de la columna Nube explica su significado.
 H2|9.2 Flujo radar
 P|Los recuentos horarios de meteoros y las alturas de las estelas del radar SKiYMET de Collm (36,2 MHz) y la última imagen del radar de Sodankylä (36,9 MHz).
-LI|Descargar ahora y Actualización automática de todas las fuentes cada 5 minutos: cada fuente se vuelve a descargar solo si ha cambiado.
+LI|Descargar ahora y Actualización automática de todas las fuentes cada 5 minutos: cada fuente se vuelve a descargar solo si ha cambiado. La actualización automática se configura en la pestaña Ajustes.
 LI|Exponente λ (SM6FHZ): exponente de la estimación en tu banda (línea naranja en la escala de la derecha).
 LI|Alturas de las estelas: histograma con moda, media, mediana y desviación estándar; con "del radar" la moda pasa a ser la altura de todos los cálculos.
 TAG|ATTENZIONE|Si no se consigue leer la escala del gráfico de Collm aparece un aviso naranja y hay que verificar los valores. Sin conexión el programa usa los últimos datos guardados, lo indica una vez y vuelve a intentarlo por sí solo cada 5 minutos; la barra de estado se vuelve roja hasta que vuelve la conexión.
@@ -220,6 +220,8 @@ LI|cataloghi/: catálogo IAU MDC; radar/diretta/: datos GMN y CMOR.
 LI|call3.txt: archivo de locators; spot_ms/: spots de meteor scatter recogidos; adif_quadrati.csv: cuadrículas del ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: los documentos técnicos.
 LI|backup/: copias de los archivos sustituidos por una actualización; aggiornamento/: paquete descargado (se borra al reiniciar).
+H2|13.3 La pestaña Ajustes
+P|La pestaña Ajustes reúne el funcionamiento general del programa: Aspecto (letra, tema e idioma), Actualizaciones del programa (comprobación en GitHub al arrancar y cada 30 minutos, actualizaciones automáticas y silenciosas, Comprobar ahora), Fuentes en directo (actualización automática cada 5 minutos), RMOB (observador, descarga inmediata y recogida automática) y Programa (filas de mandos y carpeta de datos). Los parámetros del cálculo siguen en las filas de mandos sobre las pestañas.
 H2|13.2 Algunas claves de config.ini
 LI|controlla_aggiornamenti=0: no comprobar las versiones nuevas; aggiornamenti_salta: versión omitida.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: las casillas del cálculo.

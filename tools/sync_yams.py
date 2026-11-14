@@ -64,6 +64,8 @@ wr(p, s)
 p = os.path.join(ui, 'MainWindow.cs'); s = rd(p)
 if 'using Avalonia.Platform.Storage;' not in s:
     s = rep(s, 'using Avalonia.Platform;\n', 'using Avalonia.Platform;\nusing Avalonia.Platform.Storage;\n', 'using')
+# dalla 1.8.11 YA-MS ha il suo Hosted = false: qui lo sostituisce quello del pannello
+s = s.replace('        public static bool Hosted = false;   // true dentro E-LAYER ANALYZER (tools/sync_yams.py)\n', '')
 s = rep(s, 'public partial class MainWindow : Window\n    {', '''public partial class MainWindow : UserControl
     {
         // E-LAYER ANALYZER: YA-MS e' un pannello (UserControl) nella linguetta METEOR SCATTER (tools/sync_yams.py)

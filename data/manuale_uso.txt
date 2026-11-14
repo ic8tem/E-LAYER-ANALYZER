@@ -50,7 +50,7 @@ LI|Documenti tecnici, ultima: Manuale d'uso, Fonti, Mappa dei radar europei, Spi
 H2|3.3 Lingua, colori, carattere
 LI|Lingua: 36 lingue. Cambiando lingua la finestra si ricostruisce nella stessa posizione e sulla stessa linguetta, senza riavviare. Numeri e date seguono la lingua scelta (virgola decimale in italiano, punto in inglese).
 LI|Tema: 12 schemi di colori; Chiaro è quello di partenza, Notte e Nero servono al buio, Scia meteorica è lo stile originale di YA-MS.
-LI|Carattere (in fondo alla prima riga di comandi): rimpicciolisce o ingrandisce tutto il testo dall'85 al 140 %, a passi del 5 %. Con caratteri grandi le linguette vanno a capo.
+LI|Carattere (linguetta Impostazioni): rimpicciolisce o ingrandisce tutto il testo dall'85 al 140 %, a passi del 5 %. Con caratteri grandi le linguette vanno a capo.
 LI|Comandi: ripiega e riapre le tre righe di comandi, per dare spazio a mappe e grafici. La scelta viene ricordata.
 TAG|NOTA|Quasi ogni comando ha un fumetto: tieni fermo il mouse sopra il comando per leggere a che cosa serve e da quale fonte viene il valore di partenza.
 H1|4. Impostare la stazione e la tratta
@@ -150,7 +150,7 @@ LI|Frequenza di arrivo MHz: frequenza della previsione.
 LI|Esponente λ^k (3, SM6FHZ) e Fattore di stazione K (1): regola sulla frequenza e correzione per la tua stazione.
 LI|k dagli indici di popolazione: propone k dagli indici di popolazione r degli sciami attivi (GMN, altrimenti IMO; k = 3,75 · log10 r, pesato con lo ZHR) e chiede conferma prima di applicarlo.
 LI|Carica file RMOB dal disco e Ricava l'esponente dal file RMOB: leggono un file mensile RMOB e ricavano k dalle ore in comune con Collm.
-LI|Osservatore RMOB, Scarica RMOB adesso e prelievo automatico ogni 5 minuti: il prelievo automatico è spento e va acceso solo con il permesso di RMOB.
+LI|Osservatore RMOB, Scarica RMOB adesso e prelievo automatico ogni 5 minuti: il prelievo automatico è spento e va acceso solo con il permesso di RMOB. Questi comandi sono nella linguetta Impostazioni.
 H2|8.2 I risultati
 LI|Il grafico di ieri e oggi: meteore all'ora a Collm, valori traslati alla tua frequenza e, se caricati, i conteggi RMOB.
 LI|La previsione delle prossime 24 ore: la stessa ora del giorno prima, corretta per la variazione dell'indice degli sciami della tratta.
@@ -169,7 +169,7 @@ LI|Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccol
 LI|Sulla mappa si scrivono i nominativi di entrambe le stazioni di ogni spot, una volta sola per stazione. La proiezione si sceglie tra azimutale (centrata sulla tua stazione) e Mercatore. Il fumetto sulla colonna Nuvola ne spiega il significato.
 H2|9.2 Flusso radar
 P|I conteggi orari delle meteore e le quote delle scie del radar SKiYMET di Collm (36,2 MHz) e l'ultima immagine del radar di Sodankylä (36,9 MHz).
-LI|Scarica adesso e Aggiornamento automatico di tutte le fonti ogni 5 minuti: ogni fonte viene riscaricata solo se è cambiata.
+LI|Scarica adesso e Aggiornamento automatico di tutte le fonti ogni 5 minuti: ogni fonte viene riscaricata solo se è cambiata. L'aggiornamento automatico si imposta nella linguetta Impostazioni.
 LI|Esponente λ (SM6FHZ): esponente della stima sulla tua banda (linea arancione sulla scala di destra).
 LI|Quote delle scie: istogramma con moda, media, mediana e deviazione standard; con "dal radar" la moda diventa la quota di tutti i calcoli.
 TAG|ATTENZIONE|Se la scala del grafico di Collm non si riesce a leggere compare un avviso arancione e i valori vanno verificati. Senza connessione il programma usa gli ultimi dati salvati, lo dice una volta e riprova da solo ogni 5 minuti; la barra di stato diventa rossa finché la connessione non torna.
@@ -220,6 +220,8 @@ LI|cataloghi/: catalogo IAU MDC; radar/diretta/: dati GMN e CMOR.
 LI|call3.txt: archivio dei locator; spot_ms/: spot meteor scatter raccolti; adif_quadrati.csv: quadrati dall'ADIF.
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: i documenti tecnici.
 LI|backup/: copie dei file sostituiti da un aggiornamento; aggiornamento/: pacchetto scaricato (cancellato al riavvio).
+H2|13.3 La linguetta Impostazioni
+P|La linguetta Impostazioni raccoglie il funzionamento generale del programma: Aspetto (carattere, tema e lingua), Aggiornamenti del programma (controllo su GitHub all'avvio e ogni 30 minuti, aggiornamenti automatici e silenziosi, Controlla adesso), Fonti in diretta (aggiornamento automatico ogni 5 minuti), RMOB (osservatore, scarico adesso e prelievo automatico) e Programma (righe dei comandi e cartella dei dati). I parametri del calcolo restano nelle righe dei comandi sopra le linguette.
 H2|13.2 Alcune chiavi di config.ini
 LI|controlla_aggiornamenti=0: non controllare le versioni nuove; aggiornamenti_salta: versione saltata.
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: le caselle del calcolo.

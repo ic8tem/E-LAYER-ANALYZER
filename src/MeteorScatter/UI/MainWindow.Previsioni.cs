@@ -76,7 +76,8 @@ namespace YAMS
                 }
                 StartFetch(true);
             };
-            DockTop(p, Row(L(Lang.T("Osservatore RMOB")), txtRmobObs, btnRmobNow, chkRmobAuto));
+            // impostazioni di RMOB: nella linguetta Impostazioni (richiesta dell'autore, 14/11/2026)
+            rmobRow = Row(L(Lang.T("Osservatore RMOB")), txtRmobObs, btnRmobNow, chkRmobAuto);
 
             lblPrevNote = new TextBlock { Foreground = Pal.B(Pal.OrangeText), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 4, 6, 4) };
             DockTop(p, lblPrevNote);
@@ -93,6 +94,8 @@ namespace YAMS
             tl.Children.Add(chartPrev48); tl.Children.Add(chartPrev24); tl.Children.Add(gridPrev);
             p.Children.Add(tl);
         }
+
+        Border rmobRow;
 
         void SavePrevConfig()
         {
