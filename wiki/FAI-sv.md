@@ -33,7 +33,10 @@ Detta är den geometriska konstruktion som används för att **kontrollera om en
 | IC8FAX - F6DRO | JN44GH (ovanför Genua) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (sydvästra Tyskland, 28 km från Bryssel) | 0,88° | 338° / 87° |
 | Fyren DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden riktade antennen mot 290° och rapporterade aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (test från 1987 via Budapest, 1569 km) | Budapest på Scatter trail; celler under 1° från 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-fält från 1990) | JN45MV, Scatter trail 40 km från Genève (Genève: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (test från 1987 via Budapest, 1569 km, IGRF-fält från 1987) | Budapest vid 2,53°, strax över 2,5° (2,16° med dagens fält); Scatter trail 26 km bort; mest sannolik KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Från version 0.4.18 använder de två fallen med ett datum (1987 och 1990) IGRF-14-fältet från det året, så länge stationerna är fallets.
 
 Kända scatterpunkter i listan: Genève, Bryssel, Budapest, JN92, JN41/42.
 

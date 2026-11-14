@@ -33,7 +33,10 @@ O F.A.I. (Field Aligned Irregularities) é a dispersão causada por irregularida
 | IC8FAX - F6DRO | JN44GH (sobre Gênova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (SO da Alemanha, a 28 km de Bruxelas) | 0,88° | 338° / 87° |
 | Farol DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden apontava para 290° e declarou aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (teste de 1987 via Budapeste, 1569 km) | Budapeste no Scatter trail; células abaixo de 1° a partir de 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, campo IGRF de 1990) | JN45MV, Scatter trail a 40 km de Genebra (Genebra: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (teste de 1987 via Budapeste, 1569 km, campo IGRF de 1987) | Budapeste a 2,53°, logo acima dos 2,5° (2,16° com o campo de hoje); Scatter trail a 26 km; mais provável KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+A partir da versão 0.4.18 os dois casos com data (1987 e 1990) usam o campo IGRF-14 desse ano, enquanto as estações forem as do caso.
 
 Scatter points conhecidos na lista: Genebra, Bruxelas, Budapeste, JN92, JN41/42.
 
