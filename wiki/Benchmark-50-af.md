@@ -11,7 +11,7 @@ Toetsbank vir **multi-sprong sporadiese E op 50 MHz** met die ADIF-log van een s
 - **Stasie 1**: *Laai ADIF* / *Verwyder ADIF*. Die program neem `STATION_CALLSIGN` en `MY_GRIDSQUARE` uit die log; die uitsaaiposisie is die `MY_GRIDSQUARE` van elke QSO.
 - **Stasie 2** (opsioneel): dieselfde knoppies op die tweede ry; die merkblokkie *Stasie 2* wys of verberg dit. Stasie 1 se paaie is ligblou, stasie 2 se paaie pers.
 - Die program gebruik 50 MHz-QSO's met 'n lokator (ontbrekende lokators of lokators met 4 karakters word uit CALL3 geneem), multi-sprong: verder as 3100 km (outeur se reël; die aantal spronge volg die IK3XTV-tabel).
-- **Transekwatoriale** kontakte word uitgesluit (outeur se reël): na Afrika en Suid-Amerika, met die middelpunt in die magnetiese inklinasieband tussen -20° en +20°, tensy die log `PROP_MODE=ES` het.
+- **Transekwatoriale** kontakte word uitgesluit (outeur se reël): na Afrika en Suid-Amerika, met die middelpunt in die magnetiese inklinasieband tussen -15° en +15°, tensy die log `PROP_MODE=ES` het.
 
 ## Dag en tyd
 

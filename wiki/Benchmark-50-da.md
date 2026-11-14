@@ -11,7 +11,7 @@ Testbænk for **multi-hop sporadisk E på 50 MHz** med ADIF-loggen fra én stati
 - **Station 1**: *Indlæs ADIF* / *Fjern ADIF*. Programmet tager `STATION_CALLSIGN` og `MY_GRIDSQUARE` fra loggen; sendepositionen er `MY_GRIDSQUARE` for hver QSO.
 - **Station 2** (valgfri): samme knapper på anden række; afkrydsningsfeltet *Station 2* viser eller skjuler den. Strækninger for station 1 er lyseblå, for station 2 violette.
 - Programmet bruger QSO'er på 50 MHz med lokator (manglende lokatorer eller lokatorer med 4 tegn hentes fra CALL3), multi-hop: over 3100 km (forfatterens regel; antallet af hop følger IK3XTV-tabellen).
-- **Transækvatoriale** forbindelser udelades (forfatterens regel): mod Afrika og Sydamerika, med midtpunktet i båndet med magnetisk inklination mellem -20° og +20°, medmindre loggen har `PROP_MODE=ES`.
+- **Transækvatoriale** forbindelser udelades (forfatterens regel): mod Afrika og Sydamerika, med midtpunktet i båndet med magnetisk inklination mellem -15° og +15°, medmindre loggen har `PROP_MODE=ES`.
 
 ## Dag og tidsrum
 

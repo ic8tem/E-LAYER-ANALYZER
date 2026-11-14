@@ -11,7 +11,7 @@ Bangku uji untuk **sporadic-E multi-lompatan di 50 MHz** menggunakan log ADIF sa
 - **Stasiun 1**: *Muat ADIF* / *Lepas ADIF*. Program mengambil `STATION_CALLSIGN` dan `MY_GRIDSQUARE` dari log; posisi pemancar adalah `MY_GRIDSQUARE` setiap QSO.
 - **Stasiun 2** (opsional): tombol yang sama di baris kedua; kotak centang *Stasiun 2* menampilkan atau menyembunyikannya. Lintasan stasiun 1 berwarna biru muda, lintasan stasiun 2 ungu.
 - Program memakai QSO 50 MHz dengan locator (locator yang tidak ada atau hanya 4 karakter diambil dari CALL3), yang multi-lompatan: di atas 3100 km (aturan penulis; jumlah lompatan mengikuti tabel IK3XTV).
-- Kontak **transekuatorial** dikecualikan (aturan penulis): ke arah Afrika dan Amerika Selatan, dengan titik tengah di pita inklinasi magnetik antara -20° dan +20°, kecuali log memuat `PROP_MODE=ES`.
+- Kontak **transekuatorial** dikecualikan (aturan penulis): ke arah Afrika dan Amerika Selatan, dengan titik tengah di pita inklinasi magnetik antara -15° dan +15°, kecuali log memuat `PROP_MODE=ES`.
 
 ## Hari dan jam
 

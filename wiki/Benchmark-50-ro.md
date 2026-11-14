@@ -11,7 +11,7 @@ Banc de probă pentru **E-sporadic multi-salt pe 50 MHz** folosind logul ADIF al
 - **Stația 1**: *Încarcă ADIF* / *Descarcă ADIF*. Programul preia `STATION_CALLSIGN` și `MY_GRIDSQUARE` din log; poziția de emisie este `MY_GRIDSQUARE` al fiecărui QSO.
 - **Stația 2** (opțional): aceleași butoane pe al doilea rând; caseta *Stația 2* o arată sau o ascunde. Traseele stației 1 sunt bleu, cele ale stației 2 violet.
 - Programul folosește QSO-urile pe 50 MHz cu locator (locatorii lipsă sau cu 4 caractere se iau din CALL3), multi-salt: peste 3100 km (regula autorului; numărul de salturi urmează tabelul IK3XTV).
-- Legăturile **transecuatoriale** sunt excluse (regula autorului): spre Africa și America de Sud, cu punctul median în banda de înclinație magnetică între -20° și +20°, cu excepția cazului în care logul are `PROP_MODE=ES`.
+- Legăturile **transecuatoriale** sunt excluse (regula autorului): spre Africa și America de Sud, cu punctul median în banda de înclinație magnetică între -15° și +15°, cu excepția cazului în care logul are `PROP_MODE=ES`.
 
 ## Ziua și ora
 

@@ -21,7 +21,7 @@ W widokach azymutalnych przerywane pierścienie pokazują **km od środka** (kro
 
 - **Spoty** z ostatnich minut (15 min - 12 h) na pasmach **28, 40 (8 m, domyślnie wyłączone), 50, 70 i 144 MHz**, pobrane z sesji telnet. Lokatory pochodzą z komentarza spotu (np. `JN70CN<ES>JO62QM`) lub z archiwum CALL3.
 - Spoty z **<MS>**, **<AU>** lub **<TR>** w tekście są **odrzucane**: nie dotyczą E-sporadycznego, ale przydają się do meteor scatter, zorzy lub tropo.
-- **Transrównikowa, reguła autora (IC8TEM)**: w kierunku Afryki i Ameryki Południowej, jeśli punkt środkowy wypada w pasie inklinacji magnetycznej od -20° do +20°, łączność jest transrównikowa (TEP), a nie E-sporadyczna, chyba że spot deklaruje `<ES>`.
+- **Transrównikowa, reguła autora (IC8TEM)**: w kierunku Afryki i Ameryki Południowej, jeśli punkt środkowy wypada w pasie inklinacji magnetycznej od -15° do +15°, łączność jest transrównikowa (TEP), a nie E-sporadyczna, chyba że spot deklaruje `<ES>`.
 - **144 MHz, reguła autora (IC8TEM)**: E-sporadyczne na 2 m zaczyna się **powyżej 900 km** (krótsze spoty są odrzucane). Pojedynczy spot na 144 MHz **nie jest rysowany samodzielnie**: pojawia się, gdy w ciągu **5 minut** nadejdzie drugi spot na 144 MHz z obłokiem w tym samym miejscu (punkty odbicia w promieniu 300 km) lub gdy w pobliżu jest spot na **50 MHz z krótkim skokiem** (do 1200 km, w ciągu ostatnich 15 minut). Pasek u góry pokazuje, ile spotów na 144 MHz czeka na potwierdzenie.
 - Dla każdego spotu: odległość, **liczba skoków** według tabeli **IK3XTV**, elewacja, **minimalna foEs** (prawo secansa).
 - **Pierwszy skok obu stacji**: pomarańczowy kwadrat = pierwszy skok spottera, fioletowy = pierwszy skok DX (skoki równe); żółty = punkt środkowy pojedynczego skoku.

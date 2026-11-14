@@ -11,7 +11,7 @@ Pārbaudes stends **vairāklēcienu sporādiskajam E 50 MHz** joslā, izmantojot
 - **Stacija 1**: *Ielādēt ADIF* / *Izņemt ADIF*. Programma no žurnāla ņem `STATION_CALLSIGN` un `MY_GRIDSQUARE`; raidīšanas vieta ir katra QSO `MY_GRIDSQUARE`.
 - **Stacija 2** (neobligāti): tās pašas pogas otrajā rindā; izvēles rūtiņa *Stacija 2* to parāda vai paslēpj. Stacijas 1 trases ir gaiši zilas, stacijas 2 – violetas.
 - Programma izmanto 50 MHz QSO ar lokatoru (trūkstošie vai 4 rakstzīmju lokatori tiek ņemti no CALL3), vairāklēcienu: virs 3100 km (autora likums; lēcienu skaits atbilst IK3XTV tabulai).
-- **Transekvatoriālie** sakari tiek izslēgti (autora likums): virzienā uz Āfriku un Dienvidameriku, ja viduspunkts ir magnētiskās inklinācijas joslā starp -20° un +20°, ja vien žurnālā nav `PROP_MODE=ES`.
+- **Transekvatoriālie** sakari tiek izslēgti (autora likums): virzienā uz Āfriku un Dienvidameriku, ja viduspunkts ir magnētiskās inklinācijas joslā starp -15° un +15°, ja vien žurnālā nav `PROP_MODE=ES`.
 
 ## Diena un laiks
 

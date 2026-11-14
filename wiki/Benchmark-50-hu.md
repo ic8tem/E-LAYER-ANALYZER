@@ -11,7 +11,7 @@ Tesztpad a **többugrásos 50 MHz-es sporadikus E** vizsgálatához egy állomá
 - **1. állomás**: *ADIF betöltése* / *ADIF eltávolítása*. A program a naplóból veszi a `STATION_CALLSIGN` és a `MY_GRIDSQUARE` értéket; az adó helye az egyes QSO-k `MY_GRIDSQUARE` mezője.
 - **2. állomás** (opcionális): ugyanazok a gombok a második sorban; a *2. állomás* jelölőnégyzet megjeleníti vagy elrejti. Az 1. állomás útvonalai világoskékek, a 2. állomáséi lilák.
 - A program a lokátorral rendelkező 50 MHz-es QSO-kat használja (a hiányzó vagy 4 karakteres lokátorokat a CALL3-ból veszi), többugrásos terjedésnél: 3100 km felett (a szerző szabálya; az ugrások száma az IK3XTV-táblázatot követi).
-- A **transzekvatoriális** összeköttetések ki vannak zárva (a szerző szabálya): Afrika és Dél-Amerika felé, ha a felezőpont a -20° és +20° közötti mágneses inklinációs sávba esik, hacsak a naplóban nem `PROP_MODE=ES` szerepel.
+- A **transzekvatoriális** összeköttetések ki vannak zárva (a szerző szabálya): Afrika és Dél-Amerika felé, ha a felezőpont a -15° és +15° közötti mágneses inklinációs sávba esik, hacsak a naplóban nem `PROP_MODE=ES` szerepel.
 
 ## Nap és időpont
 

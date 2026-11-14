@@ -11,7 +11,7 @@ Test bench para sa **multi-hop na sporadic-E sa 50 MHz** gamit ang ADIF log ng i
 - **Istasyon 1**: *Ikarga ang ADIF* / *Alisin ang ADIF*. Kinukuha ng programa ang `STATION_CALLSIGN` at `MY_GRIDSQUARE` mula sa log; ang posisyon ng nagpapadala ay ang `MY_GRIDSQUARE` ng bawat QSO.
 - **Istasyon 2** (opsiyonal): parehong mga button sa ikalawang hanay; ipinapakita o itinatago ito ng checkbox na *Istasyon 2*. Mapusyaw na asul ang mga landas ng istasyon 1, lila ang mga landas ng istasyon 2.
 - Ginagamit ng programa ang mga QSO sa 50 MHz na may locator (kinukuha mula sa CALL3 ang mga nawawala o 4-character na locator), multi-hop: lampas sa 3100 km (tuntunin ng may-akda; sumusunod sa talahanayan ni IK3XTV ang bilang ng hop).
-- Hindi isinasama ang mga **transequatorial** na contact (tuntunin ng may-akda): patungo sa Africa at South America, kapag ang gitnang punto ay nasa banda ng magnetic dip sa pagitan ng -20° at +20°, maliban kung may `PROP_MODE=ES` ang log.
+- Hindi isinasama ang mga **transequatorial** na contact (tuntunin ng may-akda): patungo sa Africa at South America, kapag ang gitnang punto ay nasa banda ng magnetic dip sa pagitan ng -15° at +15°, maliban kung may `PROP_MODE=ES` ang log.
 
 ## Araw at oras
 

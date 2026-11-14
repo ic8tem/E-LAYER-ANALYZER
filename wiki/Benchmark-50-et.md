@@ -11,7 +11,7 @@ Katsestend **mitmehüppelise sporaadilise E jaoks 50 MHz-l**, kasutades ühe jaa
 - **Jaam 1**: *Laadi ADIF* / *Eemalda ADIF*. Programm võtab logist `STATION_CALLSIGN` ja `MY_GRIDSQUARE`; saatmiskoht on iga QSO `MY_GRIDSQUARE`.
 - **Jaam 2** (valikuline): samad nupud teisel real; märkeruut *Jaam 2* näitab või peidab selle. Jaama 1 trassid on helesinised, jaama 2 trassid lillad.
 - Programm kasutab lokaatoriga 50 MHz QSO-sid (puuduvad või 4-märgilised lokaatorid võetakse CALL3-st), mitmehüppelisi: üle 3100 km (autori reegel; hüpete arv järgib IK3XTV tabelit).
-- **Transekvatoriaalsed** sided jäetakse välja (autori reegel): Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt on magnetilise inklinatsiooni vööndis -20° kuni +20°, välja arvatud juhul, kui logis on `PROP_MODE=ES`.
+- **Transekvatoriaalsed** sided jäetakse välja (autori reegel): Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt on magnetilise inklinatsiooni vööndis -15° kuni +15°, välja arvatud juhul, kui logis on `PROP_MODE=ES`.
 
 ## Päev ja kellaaeg
 

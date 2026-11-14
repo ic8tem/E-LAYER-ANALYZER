@@ -11,7 +11,7 @@ Banc d'essai pour l'**E sporadique multi-bond sur 50 MHz** à partir du log ADIF
 - **Station 1** : *Charger l'ADIF* / *Retirer l'ADIF*. Le programme prend `STATION_CALLSIGN` et `MY_GRIDSQUARE` dans le log ; la position d'émission est le `MY_GRIDSQUARE` de chaque QSO.
 - **Station 2** (facultative) : mêmes boutons sur la deuxième ligne ; la case *Station 2* l'affiche ou la masque. Les trajets de la station 1 sont en bleu clair, ceux de la station 2 en violet.
 - Le programme utilise les QSO 50 MHz avec un locator (les locators manquants ou à 4 caractères sont pris dans CALL3), en multi-bond : au-delà de 3100 km (règle de l'auteur ; le nombre de bonds suit le tableau d'IK3XTV).
-- Les liaisons **transéquatoriales** sont exclues (règle de l'auteur) : vers l'Afrique et l'Amérique du Sud, avec le point milieu dans la bande d'inclinaison magnétique comprise entre -20° et +20°, sauf si le log indique `PROP_MODE=ES`.
+- Les liaisons **transéquatoriales** sont exclues (règle de l'auteur) : vers l'Afrique et l'Amérique du Sud, avec le point milieu dans la bande d'inclinaison magnétique comprise entre -15° et +15°, sauf si le log indique `PROP_MODE=ES`.
 
 ## Jour et heure
 

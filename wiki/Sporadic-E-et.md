@@ -21,7 +21,7 @@ Asimuutsetes vaadetes näitavad katkendlikud ringid **kaugust keskpunktist km-de
 
 - Viimaste minutite **spotid** (15 min - 12 h) sagedusaladel **28, 40 (8 m, vaikimisi väljas), 50, 70 ja 144 MHz**, võetud telneti seanssidest. Lokaatorid võetakse spoti kommentaarist (nt `JN70CN<ES>JO62QM`) või CALL3 andmebaasist.
 - Spotid, mille tekstis on **<MS>**, **<AU>** või **<TR>**, **jäetakse kõrvale**: need ei puuduta sporaadilist E-d, kuid on kasulikud meteor scatteri, aurora või tropo jaoks.
-- **Transekvatoriaalne levi, autori (IC8TEM) reegel**: Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise inklinatsiooni vööndisse -20° kuni +20°, on side transekvatoriaalne (TEP), mitte sporaadiline E, välja arvatud juhul, kui spotis on märgitud `<ES>`.
+- **Transekvatoriaalne levi, autori (IC8TEM) reegel**: Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise inklinatsiooni vööndisse -15° kuni +15°, on side transekvatoriaalne (TEP), mitte sporaadiline E, välja arvatud juhul, kui spotis on märgitud `<ES>`.
 - **144 MHz, autori (IC8TEM) reegel**: sporaadiline E 2 m sagedusalal algab **üle 900 km** (lühemad spotid jäetakse kõrvale). Üksikut 144 MHz spotti **eraldi ei kuvata**: see ilmub, kui **5 minuti** jooksul saabub teine 144 MHz spot, mille pilv on samas kohas (peegelduspunktid kuni 300 km kaugusel), või kui läheduses on **lühikese hüppega 50 MHz** spot (kuni 1200 km, viimase 15 minuti jooksul). Ülemine riba näitab, mitu 144 MHz spotti ootab kinnitust.
 - Iga spoti kohta: kaugus, **hüpete arv** **IK3XTV** tabeli järgi, elevatsioon, **minimaalne foEs** (sekansi seadus).
 - **Mõlema jaama esimene hüpe**: oranž ruut = spotteri esimene hüpe, lilla = DX-i esimene hüpe (võrdsed hüpped); kollane = ühe hüppe keskpunkt.

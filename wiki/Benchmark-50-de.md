@@ -11,7 +11,7 @@ Prüfstand für **Sporadic-E im Mehrfachsprung auf 50 MHz** anhand des ADIF-Logs
 - **Station 1**: *ADIF laden* / *ADIF entladen*. Das Programm übernimmt `STATION_CALLSIGN` und `MY_GRIDSQUARE` aus dem Log; die Sendeposition ist das `MY_GRIDSQUARE` jedes QSOs.
 - **Station 2** (optional): dieselben Schaltflächen in der zweiten Zeile; das Kästchen *Station 2* blendet sie ein oder aus. Die Strecken von Station 1 sind hellblau, die von Station 2 violett.
 - Das Programm verwendet 50-MHz-QSOs mit Locator (fehlende oder 4-stellige Locator werden aus CALL3 genommen) im Mehrfachsprung: jenseits von 3100 km (Regel des Autors; die Anzahl der Sprünge folgt der Tabelle IK3XTV).
-- **Transäquatoriale** Verbindungen werden ausgeschlossen (Regel des Autors): Richtung Afrika und Südamerika, mit dem Mittelpunkt im Band der magnetischen Inklination zwischen -20° und +20°, es sei denn, das Log enthält `PROP_MODE=ES`.
+- **Transäquatoriale** Verbindungen werden ausgeschlossen (Regel des Autors): Richtung Afrika und Südamerika, mit dem Mittelpunkt im Band der magnetischen Inklination zwischen -15° und +15°, es sei denn, das Log enthält `PROP_MODE=ES`.
 
 ## Tag und Uhrzeit
 

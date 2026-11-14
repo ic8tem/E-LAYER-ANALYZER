@@ -11,7 +11,7 @@ Test bench for **multi-hop sporadic-E on 50 MHz** using the ADIF log of one stat
 - **Station 1**: *Load ADIF* / *Unload ADIF*. The program takes `STATION_CALLSIGN` and `MY_GRIDSQUARE` from the log; the transmitting position is the `MY_GRIDSQUARE` of each QSO.
 - **Station 2** (optional): same buttons on the second row; the *Station 2* checkbox shows or hides it. Station 1 paths are light blue, station 2 paths purple.
 - The program uses 50 MHz QSOs with a locator (missing or 4-character locators are taken from CALL3), multi-hop: beyond 3100 km (author's rule; the number of hops follows the IK3XTV table).
-- **Transequatorial** contacts are excluded (author's rule): towards Africa and South America, with the midpoint in the magnetic dip band between -20° and +20°, unless the log has `PROP_MODE=ES`.
+- **Transequatorial** contacts are excluded (author's rule): towards Africa and South America, with the midpoint in the magnetic dip band between -15° and +15°, unless the log has `PROP_MODE=ES`.
 
 ## Day and time
 

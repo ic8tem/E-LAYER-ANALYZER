@@ -11,7 +11,7 @@ Testovací lavice pro **sporadickou vrstvu E s vícenásobným skokem na 50 MHz*
 - **Stanice 1**: *Načíst ADIF* / *Uvolnit ADIF*. Program převezme z deníku `STATION_CALLSIGN` a `MY_GRIDSQUARE`; poloha vysílání je `MY_GRIDSQUARE` každého QSO.
 - **Stanice 2** (volitelná): stejná tlačítka na druhém řádku; zaškrtávací pole *Stanice 2* ji zobrazí nebo skryje. Trasy stanice 1 jsou světle modré, trasy stanice 2 fialové.
 - Program používá QSO na 50 MHz s lokátorem (chybějící nebo 4znakové lokátory se berou z CALL3), s vícenásobným skokem: nad 3100 km (pravidlo autora; počet skoků se řídí tabulkou IK3XTV).
-- **Transekvatoriální** spojení jsou vyloučena (pravidlo autora): směrem do Afriky a Jižní Ameriky, se středem trasy v pásu magnetické inklinace mezi -20° a +20°, pokud deník nemá `PROP_MODE=ES`.
+- **Transekvatoriální** spojení jsou vyloučena (pravidlo autora): směrem do Afriky a Jižní Ameriky, se středem trasy v pásu magnetické inklinace mezi -15° a +15°, pokud deník nemá `PROP_MODE=ES`.
 
 ## Den a čas
 

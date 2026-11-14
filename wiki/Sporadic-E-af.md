@@ -20,7 +20,7 @@ In die azimutale aansigte wys die strepieringe die **km vanaf die middel** (die 
 
 - Die **spots** van die laaste paar minute (15 min - 12 h) op die **28, 40 (8 m, by verstek af), 50, 70 en 144 MHz**-bande, uit die telnet-sessies geneem. Lokators kom uit die spotkommentaar (bv. `JN70CN<ES>JO62QM`) of uit die CALL3-databasis.
 - Spots met **<MS>**, **<AU>** of **<TR>** in die teks word **verwerp**: hulle het nie met sporadiese E te doen nie, maar is nuttig vir meteor scatter, aurora of tropo.
-- **Transekwatoriaal, outeur se reël (IC8TEM)**: na Afrika en Suid-Amerika, as die middelpunt in die magnetiese inklinasieband tussen -20° en +20° val, is die kontak transekwatoriaal (TEP) en nie sporadiese E nie, tensy die spot `<ES>` vermeld.
+- **Transekwatoriaal, outeur se reël (IC8TEM)**: na Afrika en Suid-Amerika, as die middelpunt in die magnetiese inklinasieband tussen -15° en +15° val, is die kontak transekwatoriaal (TEP) en nie sporadiese E nie, tensy die spot `<ES>` vermeld.
 - **144 MHz, outeur se reël (IC8TEM)**: sporadiese E op 2 m begin **verder as 900 km** (korter spots word verwerp). 'n Enkele 144 MHz-spot **word nie op sy eie geplot nie**: dit verskyn wanneer binne **5 minute** 'n tweede 144 MHz-spot aankom met die wolk op dieselfde plek (refleksiepunte binne 300 km), of wanneer daar 'n **kortsprong-50 MHz**-spot naby is (binne 1200 km, in die laaste 15 minute). Die balk bo-aan wys hoeveel 144 MHz-spots op bevestiging wag.
 - Vir elke spot: afstand, **aantal spronge** volgens die **IK3XTV**-tabel, elevasie, **minimum foEs** (sekanswet).
 - **Eerste sprong van albei stasies**: oranje vierkant = die spotter se eerste sprong, pers = die DX se eerste sprong (gelyke spronge); geel = middelpunt van 'n enkele sprong.

@@ -11,7 +11,7 @@ Prófunarbekkur fyrir **fjölstökks-sporadic-E á 50 MHz** út frá ADIF-dagbó
 - **Stöð 1**: *Hlaða ADIF* / *Fjarlægja ADIF*. Forritið tekur `STATION_CALLSIGN` og `MY_GRIDSQUARE` úr dagbókinni; sendistaðurinn er `MY_GRIDSQUARE` hvers QSO.
 - **Stöð 2** (valfrjáls): sömu hnappar í annarri röðinni; gátreiturinn *Stöð 2* sýnir hana eða felur. Leiðir stöðvar 1 eru ljósbláar, leiðir stöðvar 2 fjólubláar.
 - Forritið notar QSO á 50 MHz með locator (locatorar sem vantar eða eru 4 stafa eru sóttir í CALL3), fjölstökk: handan 3100 km (regla höfundar; fjöldi stökka fylgir töflu IK3XTV).
-- **Þvermiðbaugs**-sambönd eru undanskilin (regla höfundar): í átt að Afríku og Suður-Ameríku, með miðpunktinn í beltinu þar sem segulhallinn er milli -20° og +20°, nema dagbókin hafi `PROP_MODE=ES`.
+- **Þvermiðbaugs**-sambönd eru undanskilin (regla höfundar): í átt að Afríku og Suður-Ameríku, með miðpunktinn í beltinu þar sem segulhallinn er milli -15° og +15°, nema dagbókin hafi `PROP_MODE=ES`.
 
 ## Dagur og tími
 

@@ -11,7 +11,7 @@ Stanowisko testowe dla **wieloskokowego E-sporadycznego na 50 MHz** na podstawie
 - **Stacja 1**: *Wczytaj ADIF* / *Zamknij ADIF*. Program pobiera z logu `STATION_CALLSIGN` i `MY_GRIDSQUARE`; pozycją nadawania jest `MY_GRIDSQUARE` każdego QSO.
 - **Stacja 2** (opcjonalnie): te same przyciski w drugim wierszu; pole *Stacja 2* pokazuje ją lub ukrywa. Trasy stacji 1 są błękitne, trasy stacji 2 fioletowe.
 - Program używa QSO na 50 MHz z lokatorem (brakujące lub 4-znakowe lokatory pobierane są z CALL3), wieloskokowych: powyżej 3100 km (reguła autora; liczba skoków jest zgodna z tabelą IK3XTV).
-- Łączności **transrównikowe** są wykluczane (reguła autora): w kierunku Afryki i Ameryki Południowej, z punktem środkowym w pasie inklinacji magnetycznej od -20° do +20°, chyba że log ma `PROP_MODE=ES`.
+- Łączności **transrównikowe** są wykluczane (reguła autora): w kierunku Afryki i Ameryki Południowej, z punktem środkowym w pasie inklinacji magnetycznej od -15° do +15°, chyba że log ma `PROP_MODE=ES`.
 
 ## Dzień i godziny
 

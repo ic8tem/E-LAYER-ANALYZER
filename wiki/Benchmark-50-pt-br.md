@@ -11,7 +11,7 @@ Banco de testes para a **esporádica E multi-salto em 50 MHz** com o log ADIF de
 - **Estação 1**: *Carregar ADIF* / *Remover ADIF*. O programa obtém `STATION_CALLSIGN` e `MY_GRIDSQUARE` do log; a posição de transmissão é o `MY_GRIDSQUARE` de cada QSO.
 - **Estação 2** (opcional): os mesmos botões na segunda linha; a caixa *Estação 2* mostra-a ou oculta-a. Os percursos da estação 1 são azul-claros, os da estação 2 violeta.
 - O programa usa os QSO de 50 MHz com locator (os locators ausentes ou de 4 caracteres são obtidos do CALL3), multi-salto: além de 3100 km (regra do autor; o número de saltos segue a tabela IK3XTV).
-- Os contatos **transequatoriais** são excluídos (regra do autor): em direção à África e à América do Sul, com o ponto médio na faixa de inclinação magnética entre -20° e +20°, a menos que o log tenha `PROP_MODE=ES`.
+- Os contatos **transequatoriais** são excluídos (regra do autor): em direção à África e à América do Sul, com o ponto médio na faixa de inclinação magnética entre -15° e +15°, a menos que o log tenha `PROP_MODE=ES`.
 
 ## Dia e horário
 

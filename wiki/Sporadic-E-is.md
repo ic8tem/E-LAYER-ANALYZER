@@ -21,7 +21,7 @@ Hnappur fyrir ofan kortið velur sýnina:
 
 - **Spot** síðustu mínútna (15 mín. - 12 klst.) á tíðnisviðunum **28, 40 (8 m, sjálfgefið óvirkt), 50, 70 og 144 MHz**, tekin úr telnet-lotunum. Locatorar koma úr athugasemd spotsins (t.d. `JN70CN<ES>JO62QM`) eða úr CALL3-gagnagrunninum.
 - Spotum með **<MS>**, **<AU>** eða **<TR>** í textanum er **hent**: þau varða ekki sporadic-E en eru gagnleg fyrir meteor scatter, norðurljós eða tropo.
-- **Þvermiðbaugsútbreiðsla, regla höfundar (IC8TEM)**: í átt að Afríku og Suður-Ameríku, ef miðpunkturinn lendir í beltinu þar sem segulhallinn er milli -20° og +20°, er sambandið þvermiðbaugs (TEP) en ekki sporadic-E, nema spotið tilgreini `<ES>`.
+- **Þvermiðbaugsútbreiðsla, regla höfundar (IC8TEM)**: í átt að Afríku og Suður-Ameríku, ef miðpunkturinn lendir í beltinu þar sem segulhallinn er milli -15° og +15°, er sambandið þvermiðbaugs (TEP) en ekki sporadic-E, nema spotið tilgreini `<ES>`.
 - **144 MHz, regla höfundar (IC8TEM)**: sporadic-E á 2 m byrjar **handan 900 km** (styttri spotum er hent). Stakt spot á 144 MHz **er ekki teiknað eitt og sér**: það birtist þegar innan **5 mínútna** berst annað spot á 144 MHz með skýið á sama stað (endurvarpspunktar innan 300 km), eða þegar **stutt stökk á 50 MHz** er í grenndinni (innan 1200 km, á síðustu 15 mínútum). Stikan efst sýnir hve mörg spot á 144 MHz bíða staðfestingar.
 - Fyrir hvert spot: fjarlægð, **fjöldi stökka** samkvæmt töflu **IK3XTV**, hæðarhorn, **lágmarks-foEs** (sekantlögmálið).
 - **Fyrsta stökk beggja stöðva**: appelsínugulur ferningur = fyrsta stökk spottarans, fjólublár = fyrsta stökk DX (jöfn stökk); gulur = miðpunktur eins stökks.

@@ -20,7 +20,7 @@ Azimutal görünümlerde kesikli halkalar **merkezden km** değerini gösterir (
 
 - Telnet oturumlarından alınan, **28, 40 (8 m, başlangıçta kapalı), 50, 70 ve 144 MHz** bantlarındaki son birkaç dakikanın (15 dk - 12 sa) **spot'ları**. Lokatörler spot yorumundan (örn. `JN70CN<ES>JO62QM`) ya da CALL3 veritabanından gelir.
 - Metninde **<MS>**, **<AU>** ya da **<TR>** bulunan spot'lar **atılır**: sporadik E ile ilgili değildir, ama meteor scatter, aurora ya da tropo için yararlıdır.
-- **Transekvatoryal, yazarın kuralı (IC8TEM)**: Afrika ve Güney Amerika yönünde, orta nokta -20° ile +20° arasındaki manyetik eğim kuşağına düşüyorsa bağlantı sporadik E değil transekvatoryaldir (TEP); spot `<ES>` belirtmiyorsa.
+- **Transekvatoryal, yazarın kuralı (IC8TEM)**: Afrika ve Güney Amerika yönünde, orta nokta -15° ile +15° arasındaki manyetik eğim kuşağına düşüyorsa bağlantı sporadik E değil transekvatoryaldir (TEP); spot `<ES>` belirtmiyorsa.
 - **144 MHz, yazarın kuralı (IC8TEM)**: 2 m'de sporadik E **900 km'nin ötesinde** başlar (daha kısa spot'lar atılır). Tek bir 144 MHz spot'u **tek başına çizilmez**: **5 dakika** içinde bulutu aynı yerde olan (yansıma noktaları 300 km içinde) ikinci bir 144 MHz spot'u geldiğinde ya da yakınlarda (1200 km içinde, son 15 dakikada) **kısa atlamalı bir 50 MHz** spot'u olduğunda görünür. Üstteki çubuk, doğrulama bekleyen 144 MHz spot'larının sayısını gösterir.
 - Her spot için: mesafe, **IK3XTV** tablosuna göre **atlama sayısı**, elevasyon, **en düşük foEs** (sekant yasası).
 - **İki istasyonun ilk atlaması**: turuncu kare = spotter'ın ilk atlaması, mor = DX'in ilk atlaması (eşit atlamalar); sarı = tek atlamanın orta noktası.

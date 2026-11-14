@@ -21,7 +21,7 @@ Nelle viste azimutali gli anelli tratteggiati riportano i **km dal centro** (il 
 
 - Gli **spot** degli ultimi minuti (15 min - 12 h) sulle bande **28, 40 (8 m, spenta di partenza), 50, 70 e 144 MHz**, presi dalle sessioni telnet. I locator vengono dal commento dello spot (es. `JN70CN<ES>JO62QM`) o dall'archivio CALL3.
 - Gli spot con **<MS>**, **<AU>** o **<TR>** nel testo vengono **scartati**: non riguardano l'E-sporadico ma servono al meteor scatter, all'aurora o al tropo.
-- **Transequatoriale, regola dell'autore (IC8TEM)**: verso l'Africa e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -20° e +20°, il collegamento è transequatoriale (TEP) e non E-sporadico, salvo che lo spot dichiari `<ES>`.
+- **Transequatoriale, regola dell'autore (IC8TEM)**: verso l'Africa e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica tra -15° e +15° (valore ripreso da Cracknell, UKSMG: zone del TEP a circa 5-15° dalla linea di inclinazione zero), il collegamento è transequatoriale (TEP) e non E-sporadico, salvo che lo spot dichiari `<ES>`.
 - **144 MHz, regola dell'autore (IC8TEM)**: l'E-sporadico in 2 m parte da **oltre 900 km** (gli spot più corti si scartano). Uno spot in 144 MHz **da solo non si disegna**: compare quando entro **5 minuti** arriva un secondo spot in 144 MHz con la nube nello stesso posto (punti di riflessione entro 300 km), oppure quando nei dintorni c'è uno spot in **50 MHz di salto corto** (entro 1200 km, nei 15 minuti). La barra in alto dice quanti spot in 144 MHz sono in attesa di conferma.
 - Per ogni spot: distanza, **numero di salti** secondo la tabella di **IK3XTV**, elevazione, **foEs minima** (legge della secante).
 - **Primo salto di entrambe le stazioni**: quadratino arancio = primo salto dello spotter, viola = primo salto del DX (salti uguali); giallo = punto medio del singolo salto.
@@ -50,7 +50,7 @@ L'E-sporadico **non si applica ai 432 MHz**: la MUF dell'Es arriva a circa 150-2
 
 ## Quadrati colorati per frequenza e lampeggio della MUF
 
-I quadrati Maidenhead dei punti di riflessione si colorano con la frequenza più alta degli spot: **verde** fino a 29 MHz, **giallo** fino a 51, **arancio** fino a 71, **rosso** fino a 145 MHz. Dalla foEs del quadrato si stima la MUF probabile sul salto più lungo (2400 km, tabella IK3XTV): se raggiunge una banda più alta, il quadrato **lampeggia** con il colore di quella banda (principio di IK3XTV e di Jacobs-Leinwoll: lo skip corto indica una MUF alta).
+I quadrati Maidenhead dei punti di riflessione si colorano con la frequenza più alta degli spot: **verde** fino a 29 MHz, **giallo** fino a 51, **arancio** fino a 71, **rosso** fino a 145 MHz. Dalla foEs del quadrato si stima la MUF probabile sul salto più lungo (2400 km, tabella IK3XTV): se raggiunge una banda più alta, il quadrato **lampeggia** con il colore di quella banda (principio di IK3XTV e di Jacobs-Leinwoll: lo skip corto indica una MUF alta). Per i 144 MHz vale la regola dell'autore: il quadrato lampeggia in rosso solo se la nube dà un salto singolo in 50 MHz tra 450 e 500 km (450 km con una tolleranza di 50 km).
 
 In alto a destra sulla mappa compare la sintesi di N0NBH (E-skip del continente scelto, SFI, indici K e A).
 

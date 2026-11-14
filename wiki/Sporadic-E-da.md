@@ -21,7 +21,7 @@ I de azimutale visninger viser de stiplede ringe **km fra centrum** (intervallet
 
 - **Spots** fra de seneste minutter (15 min - 12 t) på båndene **28, 40 (8 m, slået fra som standard), 50, 70 og 144 MHz**, hentet fra telnet-sessionerne. Lokatorerne kommer fra spotkommentaren (f.eks. `JN70CN<ES>JO62QM`) eller fra CALL3-databasen.
 - Spots med **<MS>**, **<AU>** eller **<TR>** i teksten **kasseres**: de vedrører ikke sporadisk E, men er nyttige til meteor scatter, nordlys eller tropo.
-- **Transækvatorial, forfatterens regel (IC8TEM)**: mod Afrika og Sydamerika er forbindelsen transækvatorial (TEP) og ikke sporadisk E, hvis midtpunktet falder i båndet med magnetisk inklination mellem -20° og +20°, medmindre spottet angiver `<ES>`.
+- **Transækvatorial, forfatterens regel (IC8TEM)**: mod Afrika og Sydamerika er forbindelsen transækvatorial (TEP) og ikke sporadisk E, hvis midtpunktet falder i båndet med magnetisk inklination mellem -15° og +15°, medmindre spottet angiver `<ES>`.
 - **144 MHz, forfatterens regel (IC8TEM)**: sporadisk E på 2 m begynder **over 900 km** (kortere spots kasseres). Et enkelt 144 MHz-spot **tegnes ikke alene**: det vises, når der inden for **5 minutter** kommer et andet 144 MHz-spot med skyen på samme sted (refleksionspunkter inden for 300 km), eller når der i nærheden er et **50 MHz-spot med kort hop** (inden for 1200 km, inden for de seneste 15 minutter). Bjælken øverst viser, hvor mange 144 MHz-spots der afventer bekræftelse.
 - For hvert spot: afstand, **antal hop** ifølge **IK3XTV**-tabellen, elevation, **mindste foEs** (sekantloven).
 - **Første hop for begge stationer**: orange firkant = spotterens første hop, violet = DX'ens første hop (lige lange hop); gul = midtpunkt for ét hop.

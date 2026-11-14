@@ -11,7 +11,7 @@ Bir istasyonun ve isteğe bağlı olarak ikinci bir istasyonun ADIF loguyla **50
 - **İstasyon 1**: *ADIF yükle* / *ADIF'i kaldır*. Program `STATION_CALLSIGN` ve `MY_GRIDSQUARE` değerlerini logdan alır; gönderen konum her QSO'nun `MY_GRIDSQUARE` alanıdır.
 - **İstasyon 2** (isteğe bağlı): ikinci satırda aynı düğmeler; *İstasyon 2* onay kutusu onu gösterir ya da gizler. İstasyon 1'in yolları açık mavi, istasyon 2'ninkiler mordur.
 - Program lokatörlü 50 MHz QSO'larını kullanır (eksik ya da 4 karakterli lokatörler CALL3'ten alınır), çok atlamalı olanları: 3100 km'nin ötesi (yazarın kuralı; atlama sayısı IK3XTV tablosunu izler).
-- **Transekvatoryal** bağlantılar hariç tutulur (yazarın kuralı): Afrika ve Güney Amerika yönünde, orta nokta -20° ile +20° arasındaki manyetik eğim kuşağındaysa; logda `PROP_MODE=ES` yoksa.
+- **Transekvatoryal** bağlantılar hariç tutulur (yazarın kuralı): Afrika ve Güney Amerika yönünde, orta nokta -15° ile +15° arasındaki manyetik eğim kuşağındaysa; logda `PROP_MODE=ES` yoksa.
 
 ## Gün ve saat
 

@@ -21,7 +21,7 @@ V azimutálních zobrazeních ukazují čárkované kruhy **km od středu** (kro
 
 - **Spoty** posledních minut (15 min - 12 h) na pásmech **28, 40 (8 m, ve výchozím stavu vypnuté), 50, 70 a 144 MHz**, převzaté z relací telnet. Lokátory pocházejí z komentáře spotu (např. `JN70CN<ES>JO62QM`) nebo z databáze CALL3.
 - Spoty s **<MS>**, **<AU>** nebo **<TR>** v textu se **zahazují**: netýkají se sporadické vrstvy E, ale jsou užitečné pro meteor scatter, auroru nebo tropo.
-- **Transekvatoriální, pravidlo autora (IC8TEM)**: směrem do Afriky a Jižní Ameriky, pokud střed trasy padne do pásu magnetické inklinace mezi -20° a +20°, je spojení transekvatoriální (TEP) a ne přes sporadickou vrstvu E, pokud spot neuvádí `<ES>`.
+- **Transekvatoriální, pravidlo autora (IC8TEM)**: směrem do Afriky a Jižní Ameriky, pokud střed trasy padne do pásu magnetické inklinace mezi -15° a +15°, je spojení transekvatoriální (TEP) a ne přes sporadickou vrstvu E, pokud spot neuvádí `<ES>`.
 - **144 MHz, pravidlo autora (IC8TEM)**: sporadická vrstva E na 2 m začíná **nad 900 km** (kratší spoty se zahazují). Jediný spot na 144 MHz **se samostatně nekreslí**: objeví se, když do **5 minut** přijde druhý spot na 144 MHz s oblakem na stejném místě (body odrazu do 300 km), nebo když je poblíž spot **50 MHz s krátkým skokem** (do 1200 km, za posledních 15 minut). Lišta nahoře ukazuje, kolik spotů na 144 MHz čeká na potvrzení.
 - Pro každý spot: vzdálenost, **počet skoků** podle tabulky **IK3XTV**, elevace, **minimální foEs** (zákon sekanty).
 - **První skok obou stanic**: oranžový čtverec = první skok spottera, fialový = první skok DX (stejné skoky); žlutý = střed trasy jednoho skoku.

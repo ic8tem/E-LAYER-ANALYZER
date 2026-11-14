@@ -11,7 +11,7 @@ Bandymų stendas **kelių šuolių sporadiniam E 50 MHz juostoje**, naudojant vi
 - **Stotis 1**: *Įkelti ADIF* / *Pašalinti ADIF*. Programa paima iš žurnalo `STATION_CALLSIGN` ir `MY_GRIDSQUARE`; siuntimo vieta – kiekvieno QSO `MY_GRIDSQUARE`.
 - **Stotis 2** (neprivaloma): tie patys mygtukai antroje eilutėje; žymimasis langelis *Stotis 2* ją rodo arba slepia. Stoties 1 trasos žydros, stoties 2 trasos violetinės.
 - Programa naudoja 50 MHz QSO su lokatoriumi (trūkstami arba 4 simbolių lokatoriai imami iš CALL3), kelių šuolių: toliau nei 3100 km (autoriaus taisyklė; šuolių skaičius pagal IK3XTV lentelę).
-- **Transekvatoriniai** ryšiai neįtraukiami (autoriaus taisyklė): Afrikos ir Pietų Amerikos kryptimi, kai vidurio taškas yra magnetinės inklinacijos juostoje tarp -20° ir +20°, nebent žurnale yra `PROP_MODE=ES`.
+- **Transekvatoriniai** ryšiai neįtraukiami (autoriaus taisyklė): Afrikos ir Pietų Amerikos kryptimi, kai vidurio taškas yra magnetinės inklinacijos juostoje tarp -15° ir +15°, nebent žurnale yra `PROP_MODE=ES`.
 
 ## Diena ir laikas
 

@@ -11,7 +11,7 @@ Testbank voor **sporadische E met meervoudige sprongen op 50 MHz** op basis van 
 - **Station 1**: *ADIF laden* / *ADIF verwijderen*. Het programma haalt `STATION_CALLSIGN` en `MY_GRIDSQUARE` uit het log; de zendpositie is de `MY_GRIDSQUARE` van elke QSO.
 - **Station 2** (optioneel): dezelfde knoppen op de tweede regel; het vakje *Station 2* toont of verbergt hem. Trajecten van station 1 zijn lichtblauw, die van station 2 paars.
 - Het programma gebruikt QSO's op 50 MHz met een locator (ontbrekende locators of locators van 4 tekens worden uit CALL3 gehaald), met meervoudige sprong: voorbij 3100 km (regel van de auteur; het aantal sprongen volgt de tabel IK3XTV).
-- **Transequatoriale** verbindingen worden uitgesloten (regel van de auteur): richting Afrika en Zuid-Amerika, met het middelpunt in de band van magnetische inclinatie tussen -20° en +20°, tenzij het log `PROP_MODE=ES` heeft.
+- **Transequatoriale** verbindingen worden uitgesloten (regel van de auteur): richting Afrika en Zuid-Amerika, met het middelpunt in de band van magnetische inclinatie tussen -15° en +15°, tenzij het log `PROP_MODE=ES` heeft.
 
 ## Dag en tijd
 
