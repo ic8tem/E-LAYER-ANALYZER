@@ -24,7 +24,7 @@ namespace ELA
         static double[,] g = new double[N + 1, N + 1], h = new double[N + 1, N + 1];
         public static bool Loaded;
         // epoca del campo in uso: quella storica impostata con At() nel thread chiamante, altrimenti la data del calcolo
-        public static double Epoch { get { return tg != null ? tEpoch : epochNow; } }
+        public static double Epoch { get { return epG != null ? tEpoch : epochNow; } }
         static double epochNow;
         static string info = "";
         static double epochYear;
@@ -89,7 +89,7 @@ namespace ELA
         // ---------- campo dell'anno del QSO (richiesta dell'autore, 14/11/2026): i banchi di prova usano le epoche storiche
         // IGRF-14 1900-2030 (data/igrf14_storico.csv, DGRF fino al 2020), interpolate linearmente all'anno del collegamento.
         // L'epoca vale solo nel thread che chiama At() e fino al Dispose: il resto del programma continua con il campo di oggi.
-        [ThreadStatic] static double[,] tg, th;
+        [ThreadStatic] static double[,] epG, epH;
         [ThreadStatic] static double tEpoch;
         static double[] hEp; static int[] hN, hM; static double[][] hV;
         static readonly Dictionary<long, double[][,]> hCache = new Dictionary<long, double[][,]>();
@@ -143,16 +143,16 @@ namespace ELA
         // resta il campo attuale. Uso: using (Igrf.At(anno)) { ... }
         public static IDisposable At(double year)
         {
-            Scope sc = new Scope { G = tg, H = th, E = tEpoch };
+            Scope sc = new Scope { G = epG, H = epH, E = tEpoch };
             double[,] gg, hh;
-            if (Loaded && HistoryAt(year, out gg, out hh)) { tg = gg; th = hh; tEpoch = year; }
+            if (Loaded && HistoryAt(year, out gg, out hh)) { epG = gg; epH = hh; tEpoch = year; }
             return sc;
         }
 
         sealed class Scope : IDisposable
         {
             public double[,] G, H; public double E;
-            public void Dispose() { tg = G; th = H; tEpoch = E; }
+            public void Dispose() { epG = G; epH = H; tEpoch = E; }
         }
 
         static bool HistoryAt(double year, out double[,] gg, out double[,] hh)
@@ -289,7 +289,7 @@ namespace ELA
                         }
                     }
                 }
-            double[,] G = tg ?? g, H = th ?? h;   // epoca storica del thread (At) o campo attuale
+            double[,] G = epG ?? g, H = epH ?? h;   // epoca storica del thread (At) o campo attuale
             double br = 0, bt = 0, bp = 0;
             double ratio = RE / r, ar = ratio * ratio;
             for (int n = 1; n <= N; n++)
