@@ -29,6 +29,7 @@ namespace YAMS
         public string Mode = "";           // modo dichiarato dalla fonte (PSKReporter MQTT: MSK144, FSK441...)
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
+        public bool Shared;                // ricevuto da un altro utente di YA-MS (YamsShare): messaggio rivolto a me
         public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: lampeggio nel traffico in diretta
         public string Band { get { return MsBands.Name(FreqKHz); } }
         public string Key { get { return DxCall + "|" + Spotter + "|" + Math.Round(FreqKHz) + "|" + Utc.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture); } }
@@ -370,6 +371,8 @@ namespace YAMS
                 PskMqtt.SpotReceived += (sp, line) => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 // decodifiche di WSJT-X / JTDX / MSHV via UDP (fonte 4): un solo ricevitore per tutto il programma
                 WsjtxUdp.SpotDecoded += sp => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
+                // messaggi rivolti a me sentiti da altri utenti di YA-MS (scambio cifrato via MQTT)
+                YamsShare.SpotReceived += sp => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
                 DropCw = cfg.GetB("rd_scarta_cw", true);
@@ -389,6 +392,9 @@ namespace YAMS
                 PskRelay.Enabled = cfg.GetB("psk_rimando", true);
                 cfg.Set("psk_rimando", PskRelay.Enabled);
                 PskRelay.Start();
+                YamsShare.Enabled = cfg.GetB("yams_scambio", true);
+                cfg.Set("yams_scambio", YamsShare.Enabled);
+                YamsShare.Start(dataDir);
                 PskActive.Start();
             }
         }
@@ -427,7 +433,7 @@ namespace YAMS
             WsjtxUdp.Save(cfg);
         }
 
-        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); PskActive.Stop(); }
+        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); PskActive.Stop(); YamsShare.Stop(); }
 
         // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
@@ -472,6 +478,13 @@ namespace YAMS
             // spot di PSKReporter via MQTT (fonte 3) e di WSJT-X via UDP (fonte 4): arrivano gia' letti, passano dallo stesso filtro
             foreach (MsSpot s in gotSpots)
             {
+                if (s.Shared)
+                {
+                    // da un altro utente di YA-MS: FT8 solo se oltre i 1100 km e senza tratte parallele (regola dell'autore)
+                    if (IsFt8(s) && !NoteFt8(s, now)) continue;
+                    if (NoteMine(s, now)) added = true;
+                    continue;
+                }
                 int k = s.Source == 4 ? 4 : 3;
                 Lines[k]++;
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }

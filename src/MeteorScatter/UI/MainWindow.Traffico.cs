@@ -47,6 +47,8 @@ namespace YAMS
         string trafficCloudTip;
         // FT8 lunghi e isolati (possibile meteor scatter): verde chiaro
         static readonly Color Ft8IsoColor = Color.FromRgb(134, 239, 172);
+        // messaggi rivolti a me sentiti da altri utenti di YA-MS (scambio cifrato): viola
+        static readonly Color SharedColor = Color.FromRgb(167, 139, 250);
 
         void BuildTrafficTab()
         {
@@ -263,7 +265,7 @@ namespace YAMS
                 bool iso = ft8Iso.Contains(s);
                 TrafficSpot t = new TrafficSpot
                 {
-                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
+                    A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = s.Shared ? SharedColor : iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
                     Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60,
                     Dashed = mine.Contains(s)
                 };
@@ -280,7 +282,8 @@ namespace YAMS
                          (cl.Length > 0 ? cl : Lang.T("nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
                          (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment) +
                          (iso ? "\n" + Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter") : "") +
-                         (t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
+                         (s.Shared ? "\n" + Lang.F("Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione", s.Spotter)
+                                   : t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
                 list.Add(t);
                 int nb; perBand.TryGetValue(s.Band, out nb); perBand[s.Band] = nb + 1;
             }
