@@ -66,7 +66,7 @@ namespace YAMS
             side.Children.Add(new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
-                Text = Lang.T("Spot MS della linguetta \"Raccolta dati\". Per ogni contatto la nuvola indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi). Nuvole tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
+                Text = Lang.T("Spot della linguetta \"Raccolta dati\". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
             });
             side.Children.Add(new TextBlock
             {
@@ -108,9 +108,9 @@ namespace YAMS
             lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
             side.Children.Add(new Border { Background = Pal.B(Pal.Panel2), CornerRadius = new CornerRadius(8), Padding = new Thickness(8, 6), Child = lblTrafficInfo });
 
-            tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("Nuvola") }, new double[] { 46, 64, 82, 82, 50, 90 });
+            tTraffic = MakeTable(new[] { "UTC", "MHz", Lang.T("Stazione"), Lang.T("Corrispondente"), "km", Lang.T("% sciame") }, new double[] { 46, 64, 82, 82, 50, 90 });
             tTraffic.FitWidth = true;
-            trafficCloudTip = Lang.T("Nuvola: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella nuvola più probabile disegnata sulla mappa (riflessione speculare sulle scie, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. \"sporadiche\" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, sparse ai due lati della tratta (nuvole tratteggiate).");
+            trafficCloudTip = Lang.T("% sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. \"sporadiche\" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).");
             tTraffic.HeaderTips = new[] { "", "", "", "", "", trafficCloudTip };
             tTraffic.RowClicked += i =>
             {
@@ -149,7 +149,7 @@ namespace YAMS
         void ShowTrafficInfo(TrafficSpot t)
         {
             if (lblTrafficInfo == null) return;
-            lblTrafficInfo.Text = t == null ? Lang.T("Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua nuvola.") : t.Info;
+            lblTrafficInfo.Text = t == null ? Lang.T("Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.") : t.Info;
         }
 
         // nuvole della concentrazione di scie per la tratta A-B all'ora t (in cache per ogni spot)
@@ -275,11 +275,11 @@ namespace YAMS
                 {
                     if (cl.Length > 0) cl += "\n";
                     cl += c.Sporadic ? Lang.F("hot spot (solo sporadiche) {0}", Astro.ToLocator(c.Centre))
-                                     : Lang.F("nuvola {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°", Astro.ToLocator(c.Centre), 100 * c.Share, 2 * c.MajorKm, 2 * c.MinorKm, c.AngleDeg);
+                                     : Lang.F("zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°", Astro.ToLocator(c.Centre), 100 * c.Share, 2 * c.MajorKm, 2 * c.MinorKm, c.AngleDeg);
                 }
                 t.Info = s.DxCall + " " + s.LocDx + "  ⇄  " + s.Spotter + " " + s.LocSpotter + "\n" +
                          Lang.F("{0} UTC · {1:F1} kHz · {2:F0} km", s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.FreqKHz, Astro.DistanceKm(a, b)) + "\n" +
-                         (cl.Length > 0 ? cl : Lang.T("nuvola non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
+                         (cl.Length > 0 ? cl : Lang.T("zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)")) +
                          (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment) +
                          (iso ? "\n" + Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter") : "") +
                          (s.Shared ? "\n" + Lang.F("Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione", s.Spotter)

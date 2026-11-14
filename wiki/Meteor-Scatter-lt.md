@@ -2,7 +2,7 @@
 
 [← Home](Home-lt)
 
-Šioje kortelėje yra visa **YA-MS 1.8.11** – IC8TEM meteor scatter programa: dangaus skliautas su radiantais, SKiYMET radarų srautas (Collm, Sodankylä), srautų efektyvumo skaičiavimas, eksperimentinis prognozių įgyvendinimas, geometrija ir slopinimas, GRAVES, kvadratų žemėlapis, **Srautai realiuoju laiku** (Global Meteor Network išmatuoti ZHR ir CMOR radaro radiantai), **Šaltinių žemėlapis** (Collm, Sodankylä, GRAVES ir CMOR stoties atžvilgiu) bei dokumentas su formulėmis **Efektyvumo skaičiavimo paaiškinimas**.
+Šioje kortelėje yra visa **YA-MS 1.8.12** – IC8TEM meteor scatter programa: dangaus skliautas su radiantais, SKiYMET radarų srautas (Collm, Sodankylä), srautų efektyvumo skaičiavimas, eksperimentinis prognozių įgyvendinimas, geometrija ir slopinimas, GRAVES, kvadratų žemėlapis, **Srautai realiuoju laiku** (Global Meteor Network išmatuoti ZHR ir CMOR radaro radiantai), **Šaltinių žemėlapis** (Collm, Sodankylä, GRAVES ir CMOR stoties atžvilgiu) bei dokumentas su formulėmis **Efektyvumo skaičiavimo paaiškinimas**.
 
 YA-MS 1.5.0 prideda kortelę **Duomenų rinkimas** (meteor scatter spotai, filtruojami pagal MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M, `<MS>`). E-LAYER ANALYZER viduje ji neatveria savų telnet seansų: ji gauna DATA COLLECTION seansų eilutes, todėl nėra dvigubų prisijungimų tuo pačiu šaukiniu.
 

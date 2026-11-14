@@ -281,6 +281,7 @@ namespace YAMS
         {
             try
             {
+                if (MsBands.Name(d.FreqKHz) == "28") return false;   // FT8 sui 28 MHz: mai
                 string tl = CallDb.Refine(d.Grid ?? "", d.Call);
                 LatLon a, b;
                 if (!Astro.TryLocator(tl, out a) || !Astro.TryLocator(WsjtxUdp.DeGrid ?? "", out b)) return false;

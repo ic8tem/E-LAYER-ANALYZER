@@ -181,7 +181,7 @@ namespace YAMS
         {
             if (!Ft8Enabled || !IsFt8(s)) return false;
             string band = s.Band;
-            if (band.Length == 0) return false;
+            if (band.Length == 0 || band == "28") return false;   // FT8 sui 28 MHz: tolto in ogni caso (regola dell'autore, 14/11/2026)
             Ft8Seen++;
             Locate(s);
             LatLon a, b;
