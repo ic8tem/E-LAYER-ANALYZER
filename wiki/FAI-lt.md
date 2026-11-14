@@ -33,7 +33,10 @@ Tai geometrinė konstrukcija, naudojama **patikrinti, ar atspindžio taškas tei
 | IC8FAX - F6DRO | JN44GH (virš Genujos) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (pietvakarių Vokietija, 28 km nuo Briuselio) | 0,88° | 338° / 87° |
 | Švyturys DB0FAI (305°) - Drezdenas per Šefildą (DL5MCG; Drezdenas buvo nukreipęs anteną 290° ir nurodė pašvaistę) | – | 0,3° | – |
-| DL5MCG - SV1DH (1987 m. bandymas per Budapeštą, 1569 km) | Budapeštas ant pėdsako; langeliai žemiau 1° nuo 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, 1990 m. IGRF laukas) | JN45MV, pėdsakas 40 km nuo Ženevos (Ženeva: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (1987 m. bandymas per Budapeštą, 1569 km, 1987 m. IGRF laukas) | Budapeštas ties 2,53°, vos virš 2,5° (2,16° su šiandienos lauku); pėdsakas už 26 km; labiausiai tikėtinas KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Nuo 0.4.18 versijos du atvejai su data (1987 ir 1990) naudoja tų metų IGRF-14 lauką, kol stotys lieka tos pačios kaip atvejo.
 
 Žinomi sklaidos taškai sąraše: Ženeva, Briuselis, Budapeštas, JN92, JN41/42.
 

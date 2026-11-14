@@ -103,7 +103,7 @@ H1|4. BENCHMARK Es (SPORADIC-E apakšcilne)
 H2|4.1 Žurnāla ielāde
 P|Apakšcilne BENCHMARK Es ir sporādiskā E pārbaudes stends veselam ADIF žurnālam, arī citas stacijas. Ielādēt ADIF atver failu (programma to atceras un startējot ielādē no jauna), Izņemt ADIF to noņem. Stacija centrā piedāvā žurnālā biežāko izsaukuma signālu un lokatoru; tos var mainīt un apstiprināt ar Lietot.
 LI|Raidīšanas vieta ir katra QSO MY_GRIDSQUARE; uztveršanas vietas ir GRIDSQUARE (trūkstošos vai 4 rakstzīmju lokatorus ņem no CALL3).
-LI|Var izslēgt QSO ar citu PROP_MODE un tos, kas ir zem 500 km (144 MHz joslā – zem 900 km); transekvatoriālos izslēdz vienmēr, izņemot PROP_MODE=ES.
+LI|Var izslēgt QSO ar citu PROP_MODE un tos, kas ir zem 500 km (144 MHz joslā – zem 900 km); transekvatoriālos izslēdz vienmēr, izņemot PROP_MODE=ES. Magnētiskais ekvators ir QSO gada ekvators (vēsturiskais IGRF-14), tāpat kā BENCHMARK 50 MHz.
 LI|Kartē izplūdis dzeltens punkts atzīmē katra lēciena centru, kur tiek pieņemts sporādiskā E mākonis (arī īsā pirmā lēciena centru, ja šī hipotēze ir ieslēgta).
 H2|4.2 Dienas, stundas un aprēķini
 P|Tabula QSO pa dienām uzskaita dienas ar QSO skaitu, joslām, maksimālo attālumu un vairāklēcienu sakariem; klikšķis uz dienas aizpilda tabulu Dienas stundas ar rindu katrai UTC stundai un rindu Visa diena. Azimutālā karte ar maksimālā attāluma slīdni zīmē skip pa 10° sektoriem (oranžs loks = tuvākais QSO, zaļš sektors = sasniegtie attālumi), mākoņus kvadrātos un, visai dienai, mākoņu pārvietošanos pa stundām (sarkana līnija).
@@ -123,7 +123,7 @@ H1|6. F.A.I.
 H2|6.1 Divi skati
 P|Cilne F.A.I. pēta izkliedi no ar magnētisko lauku saskaņotām nehomogenitātēm (galvenie avoti [1], [2]). Skats Scatter trail (pāris A-B) divām stacijām aprēķina iespējamo scatter point ģeometrisko vietu, iekrāsotu pēc novirzes no atstarošanas nosacījuma, piedāvā varbūtīgāko scatter point un augšā pa labi zīmē lodziņu ar abu staciju QTF un elevācijām (sarkans = A, zaļš = B). Skats Izoatstarošana (punkts) izvēlētam atstarošanas punktam zīmē izoatstarošanas līnijas kā AuroReflex un K9SE SE-PROP: krāsainas joslas tumšajās shēmās, biezas līnijas gaišajās shēmās.
 H2|6.2 Vadīklas
-LI|Stacija A un Stacija B: izsaukuma signāls (meklē CALL3) un/vai lokators; tukša A = sava stacija. Izvēlne Pārbaudes... ielādē testa pārus (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH no 1987. gada caur Budapeštu); izvēlne Zināmie scatter point... izvēlas dokumentētu scatter point (Ženēva, Brisele, Budapešta, JN92, JN41/42).
+LI|Stacija A un Stacija B: izsaukuma signāls (meklē CALL3) un/vai lokators; tukša A = sava stacija. Izvēlne Pārbaudes... ielādē testa pārus (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH no 1987. gada caur Budapeštu); abus gadījumus ar datumu (1990 un 1987) aprēķina ar tā gada IGRF-14 lauku, kas norādīts kartes parakstā, kamēr stacijas ir gadījuma stacijas; izvēlne Zināmie scatter point... izvēlas dokumentētu scatter point (Ženēva, Brisele, Budapešta, JN92, JN41/42).
 LI|Augstums (sākotnēji 110 km), minimālā elevācija un Refrakcija (4/3 Zemes rādiuss), sākotnēji ieslēgta.
 LI|Skata izvēlne ļauj izvēlēties Scatter trail (pāris A-B) vai Izoatstarošana (punkts). Skatā Izoatstarošana līmeņa līknes ir pie 0, ±1, ±2, ±4, ±8 un ±16 grādu novirzes; līkne 0 ir to staciju vieta, kas uztver A caur izvēlēto punktu.
 LI|Kreisais klikšķis kartē: pārbaudāmais atstarošanas punkts (pāriet uz skatu Izoatstarošana); labais klikšķis: stacijas B atrašanās vieta.
@@ -146,7 +146,7 @@ LI|Rezultātos norādīts saules laiks scatter point: 4 stundu robežās no viet
 LI|Papildus varbūtīgākajam scatter point rezultātos norādīts abu staciju QTF intervāls visā sliedes garumā (novirze ≤ 1,5°): aurora var nākt no jebkura intervāla punkta, un varbūtīgākais punkts dod priekšroku īsākajai trasei.
 H2|8.1 BENCHMARK AURORA
 P|Cilnei AURORA ir divas apakšcilnes: REAL-TIME, iepriekš aprakstītais aprēķins, un BENCHMARK AURORA, modeļa pārbaudes stends uz 298 publicētiem reāliem auroras QSO (EI5FK žurnāli 2003-2005 un PA0O žurnāla karte).
-LI|Izvēlne Žurnāls izvēlas vienu žurnālu vai visus kopā; noklusējuma augstums ir 110 km, ar pielaidi 3°, refrakciju 4/3 un IGRF-14.
+LI|Izvēlne Žurnāls izvēlas vienu žurnālu vai visus kopā; noklusējuma augstums ir 110 km, ar pielaidi 3°, refrakciju 4/3 un katra QSO gada IGRF-14 (vēsturiskās epohas 1900-2030; ja datums nav zināms, šodienas lauks).
 LI|Tabulā katram QSO norādīts aprēķinātais scatter point, novirze, stacijas QTF un elevācija un korespondenta QTF. Zaļš: scatter point abu staciju Lange-Hesse logā; dzeltens: izskaidrots, bet ārpus šī loga; oranžs: QSO virs 2000 km; sarkans: nav scatter point, modelis QSO neizskaidro.
 LI|Lauks Augstums km maina aprēķina augstumu (no 80 līdz 160 km) un pārrēķina visus QSO. Tabulas kolonnas ir Diena, UTC, Izsaukuma signāls, WWL, km, Scatter, dev°, žurnāla stacijas QTF un el°, Kor. QTF (korespondenta QTF) un Rezultāts. Lodziņš Izvēlētā QSO detaļas norāda attālumus, virzienus, katras stacijas Lange-Hesse logu un novirzi no tiešā ceļa.
 LI|Kopsavilkums dod procentus, arī ar fiksēto 370-1100 km logu salīdzinājumam, un katram žurnālam aprēķinātā QTF intervālu un mediānu; klikšķis uz rindas uzzīmē trasi un abus antenu virzienus un parāda katras stacijas logu. Žurnālos antenu virziens nav norādīts: salīdzina ģeometriju, nevis QTF.

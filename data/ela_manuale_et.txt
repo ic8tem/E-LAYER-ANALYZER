@@ -103,7 +103,7 @@ H1|4. BENCHMARK Es (SPORADIC-E alamsakk)
 H2|4.1 Logi laadimine
 P|Alamsakk BENCHMARK Es on sporaadilise E katsestend tervel ADIF-logil, ka teise jaama omal. Laadi ADIF avab faili (programm jätab selle meelde ja laadib käivitamisel uuesti), Eemalda ADIF eemaldab selle. Jaam keskel pakub logi kõige sagedasemat kutsungit ja lokaatorit; neid saab muuta ja kinnitada nupuga Rakenda.
 LI|Saatmiskoht on iga QSO MY_GRIDSQUARE; vastuvõtukohad on GRIDSQUARE-id (puuduvad või 4-märgilised lokaatorid võetakse CALL3-st).
-LI|Välja saab jätta muu PROP_MODE-iga QSO-d ja need, mis on alla 500 km (144 MHz-l alla 900 km); transekvatoriaalsed jäetakse alati välja, välja arvatud PROP_MODE=ES.
+LI|Välja saab jätta muu PROP_MODE-iga QSO-d ja need, mis on alla 500 km (144 MHz-l alla 900 km); transekvatoriaalsed jäetakse alati välja, välja arvatud PROP_MODE=ES. Magnetekvaator on QSO aasta oma (ajalooline IGRF-14), nagu BENCHMARK 50 MHz-is.
 LI|Kaardil tähistab hägune kollane täpp iga hüppe keskpunkti, kus eeldatakse sporaadilise E pilve asukohta (ka lühikese esimese hüppe keskpunkti, kui see hüpotees on sisse lülitatud).
 H2|4.2 Päevad, kellaajad ja arvutused
 P|Tabel QSO-d päevade kaupa loetleb päevad koos QSO-de arvu, sagedusalade, suurima kauguse ja mitmehüppeliste sidetega; klõps päeval täidab tabeli Päeva tunnid, kus on rida iga UTC-tunni kohta ja rida Kogu päev. Asimuutne kaart koos maksimaalse kauguse liuguriga joonistab skipi 10° sektorite kaupa (oranž kaar = lähim QSO, roheline sektor = saavutatud kaugused), pilved ruutudel ja kogu päeva puhul pilvede tunnise nihkumise (punane joon).
@@ -123,7 +123,7 @@ H1|6. F.A.I.
 H2|6.1 Kaks vaadet
 P|Sakk F.A.I. uurib magnetväljaga joondunud ebaühtlustelt toimuvat hajumist (peamised allikad [1], [2]). Vaade Scatter trail (paar A-B) arvutab kahe jaama jaoks võimalike hajumispunktide asukoha, värvituna hälbe järgi peegeldustingimusest, pakub välja tõenäolisima hajumispunkti ja joonistab üles paremale mõlema jaama QTF-ide ja elevatsioonide kasti (punane = A, roheline = B). Vaade Isopeegeldus (punkt) joonistab valitud peegelduspunkti jaoks isopeegelduse jooned nagu AuroReflex ja K9SE SE-PROP: värvilised ribad tumedates skeemides, paksud jooned heledates skeemides.
 H2|6.2 Juhtelemendid
-LI|Jaam A ja Jaam B: kutsung (otsitakse CALL3-st) ja/või lokaator; tühi A = oma jaam. Menüü Kontrollid... laadib testpaarid (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH 1987. aastast läbi Budapesti); menüü Teadaolevad hajumispunktid... valib dokumenteeritud hajumispunkti (Genf, Brüssel, Budapest, JN92, JN41/42).
+LI|Jaam A ja Jaam B: kutsung (otsitakse CALL3-st) ja/või lokaator; tühi A = oma jaam. Menüü Kontrollid... laadib testpaarid (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH 1987. aastast läbi Budapesti); kaks kuupäevaga juhtumit (1990 ja 1987) arvutatakse selle aasta IGRF-14 väljaga, mis on kirjas kaardi allkirjas, seni kuni jaamad on juhtumi omad; menüü Teadaolevad hajumispunktid... valib dokumenteeritud hajumispunkti (Genf, Brüssel, Budapest, JN92, JN41/42).
 LI|Kõrgus (vaikimisi 110 km), minimaalne elevatsioon ja Refraktsioon (Maa raadius 4/3), vaikimisi sees.
 LI|Vaate menüü valib Scatter trail (paar A-B) ja Isopeegeldus (punkt) vahel. Vaates Isopeegeldus on samajooned 0, ±1, ±2, ±4, ±8 ja ±16 kraadi hälbe juures; joon 0 on nende jaamade asukoht, mis võtavad A vastu läbi valitud punkti.
 LI|Vasak klõps kaardil: kontrollitav peegelduspunkt (lülitub vaatele Isopeegeldus); parem klõps: jaama B asukoht.
@@ -146,7 +146,7 @@ LI|Tulemused näitavad hajumispunkti päikeseaega: 4 tunni piires kohalikust kes
 LI|Lisaks kõige tõenäolisemale hajumispunktile näitavad tulemused mõlema jaama QTF-i vahemikku kogu jälje ulatuses (hälve ≤ 1,5°): aurora võib tulla vahemiku mis tahes punktist ning kõige tõenäolisem punkt eelistab lühimat trassi.
 H2|8.1 BENCHMARK AURORA
 P|Sakil AURORA on kaks alamsakki: REAL-TIME, eespool kirjeldatud arvutus, ja BENCHMARK AURORA, mudeli katsestend 298 avaldatud tegeliku aurora QSO põhjal (EI5FK logid 2003-2005 ja PA0O logi kaart).
-LI|Menüü Logi valib ühe logi või kõik koos; vaikimisi kõrgus on 110 km, tolerantsiga 3°, murdumisega 4/3 ja IGRF-14-ga.
+LI|Menüü Logi valib ühe logi või kõik koos; vaikimisi kõrgus on 110 km, tolerantsiga 3°, murdumisega 4/3 ja iga QSO aasta IGRF-14-ga (ajaloolised epohhid 1900-2030; tundmatu kuupäeva korral tänane väli).
 LI|Tabel näitab iga QSO kohta arvutatud hajumispunkti, hälvet, jaama QTF-i ja elevatsiooni ning korrespondendi QTF-i. Roheline: hajumispunkt mõlema jaama Lange-Hesse aknas; kollane: seletatud, kuid sellest aknast väljas; oranž: QSO üle 2000 km; punane: hajumispunkti pole, mudel QSO-d ei seleta.
 LI|Väli Kõrgus km muudab arvutuse kõrgust (80 kuni 160 km) ja arvutab kõik QSO-d ümber. Tabeli veerud on Päev, UTC, Kutsung, WWL, km, Scatter, dev°, logi jaama QTF ja el°, Korr. QTF (korrespondendi QTF) ja Tulemus. Kast Valitud QSO üksikasjad näitab kaugusi, suundi, iga jaama Lange-Hesse akent ja kõrvalekallet otseteest.
 LI|Kokkuvõte annab protsendid, ka võrdluseks fikseeritud aknaga 370-1100 km, ning iga logi kohta arvutatud QTF-i vahemiku ja mediaani; klõps real joonistab trassi ja mõlemad suunamised ning näitab iga jaama akent. Logid ei märgi suunamist: võrreldakse geomeetriat, mitte QTF-i.

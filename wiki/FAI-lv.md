@@ -33,7 +33,10 @@ Tā ir ģeometriska konstrukcija, ko izmanto, lai **pārbaudītu, vai atstaroša
 | IC8FAX - F6DRO | JN44GH (virs Dženovas) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (DR Vācija, 28 km no Briseles) | 0,88° | 338° / 87° |
 | Bāka DB0FAI (305°) - Drēzdene caur Šefīldu (DL5MCG; Drēzdene tēmēja uz 290° un pieteica auroru) | – | 0,3° | – |
-| DL5MCG - SV1DH (1987. gada tests caur Budapeštu, 1569 km) | Budapešta uz sliedes; šūnas zem 1° no 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, 1990. gada IGRF lauks) | JN45MV, sliede 40 km no Ženēvas (Ženēva: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (1987. gada tests caur Budapeštu, 1569 km, 1987. gada IGRF lauks) | Budapešta pie 2,53°, nedaudz virs 2,5° (2,16° ar šodienas lauku); sliede 26 km attālumā; varbūtīgākais KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Kopš versijas 0.4.18 abi gadījumi ar datumu (1987 un 1990) izmanto tā gada IGRF-14 lauku, kamēr stacijas ir gadījuma stacijas.
 
 Sarakstā esošie zināmie scatter point: Ženēva, Brisele, Budapešta, JN92, JN41/42.
 

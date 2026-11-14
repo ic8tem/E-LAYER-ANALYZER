@@ -33,7 +33,10 @@ To konstrukcja geometryczna służąca do **sprawdzenia, czy punkt odbicia jest 
 | IC8FAX - F6DRO | JN44GH (nad Genuą) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (płd.-zach. Niemcy, 28 km od Brukseli) | 0,88° | 338° / 87° |
 | Radiolatarnia DB0FAI (305°) - Drezno przez Sheffield (DL5MCG; Drezno kierowało antenę na 290° i zgłosiło zorzę) | – | 0,3° | – |
-| DL5MCG - SV1DH (test z 1987 przez Budapeszt, 1569 km) | Budapeszt na śladzie; komórki poniżej 1° od 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, pole IGRF z 1990) | JN45MV, ślad 40 km od Genewy (Genewa: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (test z 1987 przez Budapeszt, 1569 km, pole IGRF z 1987) | Budapeszt przy 2,53°, tuż powyżej 2,5° (2,16° przy dzisiejszym polu); ślad 26 km dalej; najbardziej prawdopodobny KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Od wersji 0.4.18 dwa przypadki z datą (1987 i 1990) używają pola IGRF-14 z tamtego roku, dopóki stacje pozostają te z danego przypadku.
 
 Znane scatter pointy na liście: Genewa, Bruksela, Budapeszt, JN92, JN41/42.
 
