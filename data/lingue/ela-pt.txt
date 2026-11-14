@@ -735,3 +735,81 @@ Kp {0}: campo perturbato (solo un avviso: nel log in 50 MHz di IC8TEM l'E-sporad
 Intervallo di QTF lungo la scia (deviazione ≤ 1,5°, dentro la finestra di Lange-Hesse di entrambe le stazioni):	Intervalo de QTF ao longo do rasto (desvio ≤ 1,5°, dentro da janela de Lange-Hesse de ambas as estações):
 Finestra dello scatter point (Lange-Hesse: 370-1100 km a 54° geomagnetici, spostata con l'inclinazione IGRF-14 di ogni stazione): {0}; {1}. Quota circa 110 km, perpendicolarità entro ±3°.	Janela do scatter point (Lange-Hesse: 370-1100 km a 54° geomagnéticos, deslocada com a inclinação IGRF-14 de cada estação): {0}; {1}. Altitude de cerca de 110 km, perpendicularidade dentro de ±3°.
 Lo scatter point proposto è fuori dalla finestra di Lange-Hesse per almeno una stazione: è possibile, ma meno probabile.	O scatter point proposto está fora da janela de Lange-Hesse para pelo menos uma estação: é possível, mas menos provável.
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora	Filtro local: descartar as linhas do cluster abaixo de 27990,0 kHz e acima de 145 MHz (não mostradas nem guardadas); em 430-440 MHz passam só os spots de aurora
+La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione.	A recolha de dados é uma só para todo o programa: cada spot recebido em DATA COLLECTION passa por estes filtros e vai para os separadores de cada modo de propagação.
+Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)	Regras dos 28, 40, 50 e 70 MHz (regras do autor e IK3XTV)
+In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).	Em 40 MHz (8 m) a distância mínima obtém-se da mesma forma ({0:F0} km) e só valem as distâncias dentro do primeiro salto da geometria da camada E ({1:F0} km).
+in 70 MHz (km)	em 70 MHz (km)
+FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8).	FT8 e FT4 em 70 MHz vão para a esporádica E mesmo dentro da janela do meteor scatter do plano de banda (70,154 MHz é a frequência do FT8).
+FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter	FT8 e FT4 em 50 MHz: esporádica E só se fizerem parte de uma nuvem, isto é, se houver outro spot em 50 MHz com o ponto médio próximo; um spot isolado vai para o meteor scatter
+punto medio entro (km)	ponto médio até (km)
+Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo.	Q65 e JT65 em 144 MHz são EME e não entram na esporádica E, salvo <ES> no texto.
+sì	sim
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)	Filtro local: linha descartada (fora da gama 27990 kHz - 145 MHz; em 430-440 MHz passam só os spots de aurora)
+(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)	(descartado: além do primeiro salto, {0:F0} km, em 40 MHz)
+(scartato: Q65 o JT65 in 144 MHz = EME)	(descartado: Q65 ou JT65 em 144 MHz = EME)
+(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)	(FT8/FT4 em 50 MHz sem outro spot em {0:F0} min com o ponto médio até {1:F0} km: meteor scatter)
+scartate dal filtro locale: {0}	descartadas pelo filtro local: {0}
+IMPOSTAZIONI	DEFINIÇÕES
+8 m (40 MHz): giallo, solo entro il primo salto	8 m (40 MHz): amarelo, só dentro do primeiro salto
+Generali	Gerais
+Smistamento degli spot	Encaminhamento dos spots
+Impostazioni generali	Definições gerais
+Sono gli stessi dati della riga in alto: valgono per tutte le linguette, anche per METEOR SCATTER.	São os mesmos dados da linha no topo: valem para todos os separadores, também para METEOR SCATTER.
+Aspetto	Aspeto
+Lingua	Idioma
+La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano.	O tamanho do tipo de letra vale para todo o programa, de 85 a 140 %, como no YA-MS. O idioma e o tema reconstroem a janela: as definições e os spots mantêm-se.
+Mappe e dati previsionali	Mapas e dados de previsão
+Continente	Continente
+Sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America). È lo stesso menu della barra delle linguette.	Desloca os mapas de Mercator para o continente escolhido e escolhe os dados de previsão (E-skip de N0NBH para a Europa e a América do Norte). É o mesmo menu da barra dos separadores.
+Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123.	O programa verifica a hora com os servidores NTP ao arrancar e a cada 5 minutos e usa a hora correta nos cálculos. Em Windows, com direitos de administrador, corrige também o relógio do PC. Se a indicação no topo for NTP:FAILED, a rede bloqueia a porta UDP 123.
+Controlla gli aggiornamenti su GitHub (all'avvio e ogni 6 ore)	Procurar atualizações no GitHub (ao arrancar e a cada 6 horas)
+Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere	Atualização automática e silenciosa: descarrega e instala a nova versão sem perguntar
+Controlla adesso	Verificar agora
+Versione in uso: {0}	Versão em uso: {0}
+L'aggiornamento automatico funziona con tutti i pacchetti, perché il programma gira sempre da una cartella dell'utente: la cartella scelta con l'installatore o lo zip su Windows, l'app su Mac, ~/E-LAYER-ANALYZER su Linux. Con i pacchetti .deb, .rpm, Arch, Slackware e con l'AppImage si aggiorna la copia in ~/E-LAYER-ANALYZER: il gestore dei pacchetti continua a mostrare la versione installata la prima volta, finché non installi il pacchetto nuovo. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano dalla pagina delle Release.	A atualização automática funciona com todos os pacotes, porque o programa corre sempre a partir de uma pasta do utilizador: a pasta escolhida com o instalador ou o zip em Windows, a aplicação em Mac, ~/E-LAYER-ANALYZER em Linux. Com os pacotes .deb, .rpm, Arch, Slackware e com a AppImage atualiza-se a cópia em ~/E-LAYER-ANALYZER: o gestor de pacotes continua a mostrar a versão instalada da primeira vez, até instalar o pacote novo. Se não for possível escrever na pasta do programa, o programa indica-o e a nova versão tem de ser descarregada manualmente da página das Releases.
+Apri la cartella dei dati	Abrir a pasta dos dados
+Dati	Dados
+Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione.	Todos os dados do programa estão na pasta data ao lado do programa (nada em AppData). Os spots recolhidos são apagados quando o programa fecha. A chave API do Bureau of Meteorology introduz-se em DATA COLLECTION, Dados de propagação.
+NTP:OK - differenza tra l'ora dei server e quella del PC: {0:+0.00;-0.00;0.00} s	NTP:OK - diferença entre a hora dos servidores e a do PC: {0:+0.00;-0.00;0.00} s
+NTP:FAILED - nessun server NTP raggiungibile: il programma usa l'orologio del PC.	NTP:FAILED - nenhum servidor NTP acessível: o programa usa o relógio do PC.
+Ogni spot ricevuto in DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) si controlla con le regole nell'ordine della tabella: la prima che vale decide la linguetta. A destra i filtri di ciascun modo, con i valori modificabili e la prova di una riga del cluster.	Cada spot recebido em DATA COLLECTION (cluster, RBN, PSKReporter, WSJT-X) é verificado com as regras pela ordem da tabela: a primeira que se aplica decide o separador. À direita, os filtros de cada modo, com os valores modificáveis e o teste de uma linha do cluster.
+Se lo spot...	Se o spot...
+Valori	Valores
+va a	vai para
+nessuna linguetta	nenhum separador
+è fuori dalla gamma del filtro locale	está fora da gama do filtro local
+sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora	abaixo de 27990 kHz ou acima de 145 MHz; em 430-440 MHz só aurora
+filtro locale spento	filtro local desligado
+scartato	descartado
+contiene AUE, AU-E o AURORAL E	contém AUE, AU-E ou AURORAL E
+contiene una parola dell'aurora (o modo AU)	contém uma palavra de aurora (ou modo AU)
+contiene una parola del F.A.I. (o modo FAI)	contém uma palavra de F.A.I. (ou modo FAI)
+ha un modo del meteor scatter o <MS>	tem um modo de meteor scatter ou <MS>
+cade in una finestra MS del bandplan	cai numa janela MS do plano de banda
+in 50 MHz non esclusiva	em 50 MHz não exclusiva
+FT8 e FT4 in 50 e 70 MHz esclusi	FT8 e FT4 em 50 e 70 MHz excluídos
+è FT8 o FT4 in 50 MHz senza nube	é FT8 ou FT4 em 50 MHz sem nuvem
+nessun altro spot entro {0:F0} min con il punto medio entro {1:F0} km	nenhum outro spot em {0:F0} min com o ponto médio até {1:F0} km
+regola spenta	regra desligada
+meteor scatter (non E-sporadico)	meteor scatter (não esporádica E)
+è Q65 o JT65 in 144 MHz	é Q65 ou JT65 em 144 MHz
+salvo <ES> nel testo	salvo <ES> no texto
+EME: scartato	EME: descartado
+contiene una scritta di altra propagazione	contém uma etiqueta de outra propagação
+non E-sporadico	não esporádica E
+è transequatoriale	é transequatorial
+fascia di inclinazione ± {0:F0}°	faixa de inclinação ± {0:F0}°
+non E-sporadico (TEP)	não esporádica E (TEP)
+è in 28 MHz	está em 28 MHz
+da {0:F0} km	a partir de {0:F0} km
+è in 40 MHz	está em 40 MHz
+da {0:F0} a {1:F0} km (primo salto)	de {0:F0} a {1:F0} km (primeiro salto)
+è in 50 MHz	está em 50 MHz
+è in 70 MHz	está em 70 MHz
+è in 144 MHz	está em 144 MHz
+oltre {0:F0} km, con conferma	além de {0:F0} km, com confirmação
+non rientra in nessuna regola (tropo, 432 MHz, HF...)	não corresponde a nenhuma regra (tropo, 432 MHz, HF...)
+resta in Spot raccolti	fica em Spots recolhidos
+Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.	O programa está instalado com o pacote {0}: para o atualizar, descarregue o pacote novo da página da release e instale-o como o primeiro.
+L'aggiornamento automatico vale per l'installatore e lo zip di Windows, l'app del Mac, gli archivi .tar.gz e l'AppImage. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) il programma non si aggiorna da solo: segnala la versione nuova, che si installa scaricando il pacchetto nuovo dalla pagina delle Release. Se la cartella del programma non è scrivibile, il programma lo dice e la nuova versione va scaricata a mano.	A atualização automática vale para o instalador e o zip de Windows, a aplicação do Mac, os arquivos .tar.gz e a AppImage. Com os pacotes de sistema (.deb, .rpm, Arch, Slackware) o programa não se atualiza sozinho: assinala a versão nova, que se instala descarregando o pacote novo da página das Releases. Se não for possível escrever na pasta do programa, o programa indica-o e a nova versão tem de ser descarregada manualmente.

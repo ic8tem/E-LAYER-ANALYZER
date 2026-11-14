@@ -18,7 +18,11 @@
 
 De siste 2000 spottene, med filter for bånd og kilde. Arkiv: én CSV-fil per dag i `data/spot`. Hver gang programmet lukkes, tømmes spotdatabasen (minnet og filene i `data/spot`): hver økt starter på nytt.
 
-**Lokalt filter** (valgfri avkrysningsboks): «DX de»-linjer under 27990,0 kHz eller over 145 MHz forkastes, vises ikke i konsollen og lagres ikke. **Upresise lokatorer** (færre enn 6 tegn) hentes fra CALL3: har CALL3 en lokator med 6 tegn, går den alltid foran. Som i YA-MS er meteor scatter-spot (ikke sporadisk E) de som ligger i de typiske MS-frekvensvinduene (50190-50300, 70100-70400, 144290-144399 kHz) uten tagger for en annen utbredelse (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), og de med modi som bare brukes til MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) eller med `<MS>`. Spot med `<AS>`/`<ACS>` (aircraft scatter) brukes ikke for sporadisk E.
+**Lokalt filter** (valgfri avkrysningsboks i INNSTILLINGER): «DX de»-linjer under 27990,0 kHz eller over 145 MHz forkastes, vises ikke i konsollen og lagres ikke; mellom 430 og 440 MHz slipper bare nordlysspot gjennom. **Upresise lokatorer** (færre enn 6 tegn) hentes fra CALL3: hvis CALL3 har en lokator med 6 tegn, har den alltid forrang. Som i YA-MS er meteor scatter-spot (ikke sporadisk E) de som ligger i de typiske MS-frekvensvinduene (50190-50300, 70100-70400, 144290-144399 kHz) uten merker for annen utbredelse (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), og de med moduser som bare brukes til MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M), eller med `<MS>`. Unntak: FT8 og FT4 på 50 og 70 MHz, der en kjent modus avgjør (FT8 på 70,154 MHz går til sporadisk E også innenfor MS-vinduet). Spot med `<AS>`/`<ACS>` (aircraft scatter) brukes ikke for sporadisk E.
+
+## Spotfiltre
+
+Datainnsamlingen er **én for hele programmet**: hvert spot går gjennom filtrene og videre til fanen for hver utbredelsesmåte. Fra versjon 0.4.18 ligger filtrene, det lokale filteret og test av filtre i fanen **[INNSTILLINGER](Settings-nb)**, underfanen **Fordeling av spot**.
 
 ## CALL3
 
@@ -27,3 +31,13 @@ JTDX-databasen **kallesignal → lokator** (over en million kallesignaler) i `da
 Fra versjon 0.4.16 finnes én CALL3-database for hele programmet, den i YA-MS Datainnsamling (fanen METEOR SCATTER), med samme regler som LIVETROPOVHF: oppdatering fra MMMonVHF, håndoppføringer, tillagte filer, klyngekorreksjoner, lærte lokatorer og G7VRD hver 6. time; korreksjonene skrives inn i data/call3.txt og lokatorene i data/call3_nuovi.txt importeres én gang. Spotter fra WSJT-X, JTDX og MSHV kommer også via UDP (kilde WSJT-X UDP, port 2237 videresendt til 2238).
 
 Disse filtrene fra YA-MS (CW, minsteavstand, frekvensvinduer, MS-moduser, bånd) gjelder bare fanen METEOR SCATTER: de avgjør hvilke spotter som kommer inn i innsamlingen. De andre fanene får alle spotter og bruker sine egne filtre.
+
+## Underfanene Spot og Utbredelsesdata
+
+Fanen har to underfaner: **Spot** (økter, PSKReporter MQTT, WSJT-X UDP, innsamlede spot og CALL3) og **Utbredelsesdata**:
+
+- **N0NBH** (hamqsl.com): VHF-banner og soldata, E-skip Europa og Nord-Amerika (DXrobot), nordlys.
+- **Bz for nordlys**: solvind i sanntid fra NOAA SWPC (DSCOVR/ACE, punktet L1), den beste kilden for Bz.
+- **Meteor scatter**: dagens meteoraktivitet (RMOB) fra Make More Miles on VHF.
+
+De lastes ned høyst én gang i timen. Sammendraget vises på kartene i SPORADIC-E, F.A.I. og AURORA. **Kontinentmenyen**, til høyre i fanelinjen, flytter kartene og velger dataene for det kontinentet.

@@ -18,21 +18,11 @@
 
 Os últimos 2000 spots, com filtros por banda e por fonte. Arquivo: um arquivo CSV por dia em `data/spot`. Sempre que o programa é fechado, a base de dados dos spots é esvaziada (memória e arquivos em `data/spot`): cada sessão começa do zero.
 
-**Filtro local** (caixa opcional): as linhas "DX de" abaixo de 27990,0 kHz ou acima de 145 MHz são descartadas, não aparecem no console e não são salvas. Os **locators imprecisos** (menos de 6 caracteres) são obtidos do CALL3: se o CALL3 tiver um locator de 6 caracteres, este prevalece sempre. Como no YA-MS, os spots de meteor scatter (e não de esporádica E) são os que estão nas janelas de frequência típicas do MS (50190-50300, 70100-70400, 144290-144399 kHz) sem etiquetas de outra propagação (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), e os que têm modos exclusivos de MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ou `<MS>`. Os spots com `<AS>`/`<ACS>` (aircraft scatter) não são usados para a esporádica E.
+**Filtro local** (caixa opcional, em CONFIGURAÇÕES): as linhas "DX de" abaixo de 27990,0 kHz ou acima de 145 MHz são descartadas, não aparecem no console e não são salvas; entre 430 e 440 MHz passam só os spots de aurora. Os **locators imprecisos** (menos de 6 caracteres) são obtidos do CALL3: se o CALL3 tiver um locator de 6 caracteres, este prevalece sempre. Como no YA-MS, os spots de meteor scatter (não de esporádica E) são os que estão nas janelas de frequência típicas de MS (50190-50300, 70100-70400, 144290-144399 kHz) sem etiquetas de outra propagação (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), e os que têm modos exclusivos de MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ou `<MS>`. Exceção: FT8 e FT4 em 50 e 70 MHz, onde decide o modo conhecido (o FT8 de 70,154 MHz vai para a esporádica E mesmo dentro da janela MS). Os spots com `<AS>`/`<ACS>` (aircraft scatter) não são usados para a esporádica E.
 
-## Coluna dos filtros (40% à direita)
+## Filtros dos spots
 
-A coleta de dados é **uma só para todo o programa**: cada spot passa por estes filtros e segue para a aba de cada modo de propagação (dentro do E-LAYER ANALYZER a aba Coleta de dados do YA-MS não é mostrada). No topo, a caixa do **filtro local**; abaixo, cinco subabas:
-
-| Subaba | O que se configura | Padrão (regras do autor) |
-|---|---|---|
-| Meteor scatter | o filtro do YA-MS: janelas de frequência MS, etiquetas de outra propagação, modos MS e `<MS>`, bandas | como no YA-MS |
-| Esporádica E | etiquetas `< >` que excluem o spot, regra dos 144 MHz, regra transequatorial | `<MS> <AU> <TR> <AS> <ACS>`…; 900 km, 5 min, 300 km, salto curto em 50 MHz 1200 km/15 min; ±20° |
-| F.A.I. | palavras F.A.I., bandas, período no mapa | FAI, todas as bandas, 24 horas |
-| Aurora | etiquetas `< >` de aurora, bandas, período no mapa | `AU` `AUR` (com ou sem `< >`), todas as bandas, 2 horas |
-| Teste dos filtros | cole uma linha do cluster e veja como todos os filtros a classificam | |
-
-O botão **Restaurar as regras do autor** restaura os valores padrão.
+A coleta de dados é **uma só para todo o programa**: cada spot passa pelos filtros e segue para a aba de cada modo de propagação. A partir da versão 0.4.18 os filtros, o filtro local e o teste dos filtros estão na aba **[CONFIGURAÇÕES](Settings-pt-br)**, subaba **Encaminhamento dos spots**.
 
 ## CALL3
 
@@ -44,10 +34,10 @@ Estes filtros, que vêm do YA-MS (CW, distância mínima, janelas de frequência
 
 ## Subabas Spots e Dados de propagação
 
-A aba tem duas subabas: **Spots** (sessões, spots coletados, CALL3 e coluna dos filtros) e **Dados de propagação**:
+A aba tem duas subabas: **Spots** (sessões, PSKReporter MQTT, WSJT-X UDP, spots coletados e CALL3) e **Dados de propagação**:
 
 - **N0NBH** (hamqsl.com): banner VHF e dados solares, E-skip da Europa e da América do Norte (DXrobot), aurora.
 - **Bz para a aurora**: vento solar em tempo real da NOAA SWPC (DSCOVR/ACE, ponto L1), a melhor fonte para o Bz.
 - **Meteor scatter**: atividade meteórica do dia (RMOB) de Make More Miles on VHF.
 
-São baixados no máximo uma vez por hora. A síntese aparece nos mapas de SPORADIC-E, F.A.I. e AURORA. O **menu do continente**, à direita na barra de abas, desloca os mapas e escolhe os dados desse continente.
+São baixados no máximo uma vez por hora. A síntese aparece nos mapas de SPORADIC-E, F.A.I. e AURORA. O **menu do continente**, à direita na barra das abas, desloca os mapas e escolhe os dados desse continente.
