@@ -2,7 +2,7 @@
 
 [← Home](Home-fr)
 
-- L'onglet **SOURCES** énumère toutes les sources, numérotées de [1] à [65].
+- L'onglet **SOURCES** énumère toutes les sources, numérotées de [1] à [66].
 - L'onglet **SYNTHÈSE DES CHOIX DE CALCUL** (anciennement *Document technique*) explique chaque calcul avec ses formules et les étiquettes **SOURCE** (étape tirée d'une source), **VÉRIFICATION** (vérifiée sur le programme ou sur un cas réel) et **CHOIX** (un choix fait par le programme, à confirmer sur l'air).
 - L'onglet **MANUEL D'UTILISATION** est le manuel d'utilisation détaillé du programme, onglet par onglet.
 - L'onglet **RAPPORT TECHNIQUE** expose les choix qui ont conduit à la réalisation du programme : architecture, modèles physiques, reconnaissance des données, vérifications, limites et développements futurs.

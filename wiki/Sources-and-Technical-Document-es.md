@@ -2,7 +2,7 @@
 
 [← Home](Home-es)
 
-- La pestaña **FUENTES** enumera todas las fuentes, numeradas de [1] a [65].
+- La pestaña **FUENTES** enumera todas las fuentes, numeradas de [1] a [66].
 - La pestaña **SÍNTESIS DE LAS OPCIONES DE CÁLCULO** (antes *Documento técnico*) explica cada cálculo con sus fórmulas y las etiquetas **FUENTE** (paso tomado de una fuente), **VERIFICACIÓN** (comprobado con el programa o en un caso real) y **ELECCIÓN** (una decisión tomada por el programa, que hay que confirmar en el aire).
 - La pestaña **MANUAL DE USO** es el manual de uso detallado del programa, pestaña por pestaña.
 - La pestaña **INFORME TÉCNICO** expone las decisiones que llevaron a la realización del programa: arquitectura, modelos físicos, reconocimiento de los datos, verificaciones, límites y desarrollos futuros.

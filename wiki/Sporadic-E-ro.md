@@ -21,7 +21,7 @@ Un buton deasupra hărții alege vederea:
 
 - **Spoturile** din ultimele minute (15 min - 12 h) pe benzile **28, 40 (8 m, dezactivată implicit), 50, 70 și 144 MHz**, preluate din sesiunile telnet. Locatorii provin din comentariul spotului (ex. `JN70CN<ES>JO62QM`) sau din arhiva CALL3.
 - Spoturile cu **<MS>**, **<AU>** sau **<TR>** în text sunt **respinse**: nu privesc E-sporadic, dar sunt utile pentru meteor scatter, auroră sau tropo.
-- **Transecuatorial, regula autorului (IC8TEM)**: spre Africa și America de Sud, dacă punctul median cade în banda de înclinație magnetică între -15° și +15°, legătura este transecuatorială (TEP) și nu E-sporadic, cu excepția cazului în care spotul declară `<ES>`.
+- **Transecuatorial, regula autorului (IC8TEM)**: spre Africa și America de Sud, dacă punctul median cade în banda de înclinație magnetică între -15° și +15° (valoare preluată de la Cracknell, UKSMG: zonele TEP la circa 5-15° de linia de înclinație zero), legătura este transecuatorială (TEP) și nu E-sporadic, cu excepția cazului în care spotul declară `<ES>`.
 - **144 MHz, regula autorului (IC8TEM)**: E-sporadic pe 2 m începe **de la peste 900 km** (spoturile mai scurte sunt respinse). Un singur spot pe 144 MHz **nu se desenează singur**: apare când în **5 minute** sosește un al doilea spot pe 144 MHz cu norul în același loc (puncte de reflexie la cel mult 300 km) sau când în apropiere există un spot pe **50 MHz cu salt scurt** (până la 1200 km, în ultimele 15 minute). Bara de sus arată câte spoturi pe 144 MHz așteaptă confirmarea.
 - Pentru fiecare spot: distanța, **numărul de salturi** conform tabelului **IK3XTV**, elevația, **foEs minim** (legea secantei).
 - **Primul salt al ambelor stații**: pătrat portocaliu = primul salt al spotterului, violet = primul salt al DX-ului (salturi egale); galben = punctul median al unui salt unic.
@@ -50,7 +50,7 @@ E-sporadic **nu se aplică la 432 MHz**: MUF-ul Es ajunge la circa 150-200 MHz, 
 
 ## Pătrate colorate după frecvență și MUF care clipește
 
-Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare frecvență a spoturilor: **verde** până la 29 MHz, **galben** până la 51, **portocaliu** până la 71, **roșu** până la 145 MHz. Din foEs al pătratului se estimează MUF-ul probabil pe cel mai lung salt (2400 km, tabelul IK3XTV): dacă acesta atinge o bandă mai înaltă, pătratul **clipește** cu culoarea acelei benzi (principiul lui IK3XTV și Jacobs-Leinwoll: skip scurt înseamnă MUF ridicat).
+Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare frecvență a spoturilor: **verde** până la 29 MHz, **galben** până la 51, **portocaliu** până la 71, **roșu** până la 145 MHz. Din foEs al pătratului se estimează MUF-ul probabil pe cel mai lung salt (2400 km, tabelul IK3XTV): dacă acesta atinge o bandă mai înaltă, pătratul **clipește** cu culoarea acelei benzi (principiul lui IK3XTV și Jacobs-Leinwoll: skip scurt înseamnă MUF ridicat). Pentru 144 MHz se aplică regula autorului: pătratul clipește cu roșu doar dacă norul dă un salt unic pe 50 MHz între 450 și 500 km (450 km cu o toleranță de 50 km).
 
 În dreapta sus pe hartă apare sinteza N0NBH (E-skip pentru continentul ales, SFI, indicii K și A).
 

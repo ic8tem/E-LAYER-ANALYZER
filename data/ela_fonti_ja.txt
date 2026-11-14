@@ -23,7 +23,7 @@ SRC|14. T. Bailey G3WPO, オーロラ伝搬に関する "Newcomers" 欄, Ham Rad
 SRC|15. NOAA Space Weather Prediction Center: OVATION Prime オーロラオーバル (services.swpc.noaa.gov/json/ovation_aurora_latest.json)、惑星 Kp 指数 (products/noaa-planetary-k-index.json)、リアルタイム太陽風 RTSW (json/rtsw/rtsw_mag_1m.json, rtsw_wind_1m.json); 新フォーマットに関する NWS SCN 26-21 の告知。
 H1|地磁気と地図
 SRC|16. IAGA, International Geomagnetic Reference Field, 第 14 世代 (IGRF-14), doi:10.5281/zenodo.14012302 («コンセプト» DOI; 現行版は doi:10.5281/zenodo.14012303); 係数は ppigrf (K. M. Laundal, MIT ライセンス) と共に配布される IGRF14.shc ファイルから読み込み、ppigrf は計算の検証にも使用。 プログラムは以降の世代を NOAA NCEI (https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/) から自動でダウンロードします。
-SRC|28. NOAA NCEI および BGS, World Magnetic Model 2015, 伏角の世界図 (作者提供): 赤道横断伝搬のルール (計算上の選択の概要の 3.6) に用いた磁気赤道を挟む ±20° の帯; プログラムでは伏角を IGRF-14 [16] で計算。
+SRC|28. NOAA NCEI および BGS, World Magnetic Model 2015, 伏角の世界図 (作者提供): 赤道横断伝搬のルール (計算上の選択の概要の 3.6) に用いた磁気赤道を挟む ±15° (2026 年 11 月 14 日までは ±20°) の帯; プログラムでは伏角を IGRF-14 [16] で計算。
 SRC|17. Natural Earth (パブリックドメイン), 縮尺 1:5000 万の海岸線と国境, www.naturalearthdata.com.
 H1|ADIF ログと配色
 SRC|25. C. Cerrotta IC8TEM, LoTW Grid Map v2: ADIF の読み取り、LoTW レポート (lotwreport.adi)、交信済・確認済グリッドの色 (LOG ADIF タブ)。
@@ -71,3 +71,4 @@ SRC|62. EI5FK (IO51RT、アイルランド)、2003-2005 年の 144 MHz と 432 M
 SRC|63. PA0O (JO33HG、オランダ)、DL4MFM の Log Analyzer プログラムによる 144 MHz のオーロラ QSO の地図、作者が送ったもの: ドイツ、チェコ、オーストリア、スイス、イタリア北部、スロベニア、クロアチア、ハンガリー、ルーマニア方面の、ロケーターのある 29 の相手局 (日付の記載なし)。BENCHMARK AURORA 試験台のデータ。
 SRC|64. Q. Tang, H. Sun, Z. Du, J. Zhao, Y. Liu, Z. Zhao, X. Feng, «Unusual Enhancement of Midlatitude Sporadic-E Layers in Response to a Minor Geomagnetic Storm», Atmosphere 13 (2022) 816 (https://www.mdpi.com/2073-4433/13/5/816): 東アジアのイオノゾンデ; 2013 年 7 月の小規模な地磁気嵐で、中緯度の foEs が 3-10 MHz 増加した。見解の分かれる文献をまとめている: Es は Kp とともに増加する (Zhou ほか)、地磁気活動に依存しない (Pietrella と Bianchi)、どちらの向きにも反応する (Maksyutin と Sherstyukov)。
 SRC|65. G0ISW, «Propagation identification» (V3.42、2024 年 10 月、https://www.qsl.net/g0isw/g0iswpropident.htm): 50、70、144 MHz、イギリス; 伝搬モードごとの距離: 最も短いスポラディックE は 50 MHz と 70 MHz で 400 km 超、144 MHz で 1400 km 超 (単一ホップ 1400-2400 km、2 ホップで 3200 km まで)。プログラムはこれを作者の最小距離 (50 MHz と 70 MHz で 450 km、144 MHz で確認付きの 900 km) と比較しています。
+SRC|66. R. G. Cracknell G2AHU, «Equatorial Propagation», UKSMG アーカイブ (https://www.uksmg.org/content/equitorialpropagation.htm)。ZE2JV の観測 (QST、1958 年 12 月)、Salisbury の報告 (1960 年 5 月)、QST 1981 年 11-12 月を含む: 50 MHz (144 MHz の試験はイタリア北部より先では成果なし)、南部アフリカとヨーロッパ; TEP の高密度帯は伏角ゼロの線から約 5-15°、南北方向の交信は 6000 km 前後、分点の頃が最もよく、太陽活動周期の極小期には信頼性が下がる。プログラムは赤道横断伝搬のルールの帯にその 15° という値を採用し、伏角に適用しています (作者の選択)。類似点: Kennewell と Wilkinson [49] と同様、TEP は磁気赤道に垂直で対称。相違点: Cracknell は緯度で 5-15° を示し、[49] はクレストを磁気緯度 ±10-20° としています。

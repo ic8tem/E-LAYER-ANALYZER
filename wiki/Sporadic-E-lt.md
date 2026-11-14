@@ -21,7 +21,7 @@ Azimutiniuose vaizduose brūkšniniai apskritimai rodo **km nuo centro** (žings
 
 - Paskutinių minučių (15 min - 12 h) **spotai** **28, 40 (8 m, pagal nutylėjimą išjungta), 50, 70 ir 144 MHz** juostose, gauti iš telnet seansų. Lokatoriai imami iš spoto komentaro (pvz., `JN70CN<ES>JO62QM`) arba iš CALL3 duomenų bazės.
 - Spotai, kurių tekste yra **<MS>**, **<AU>** arba **<TR>**, **atmetami**: jie nesusiję su sporadiniu E, bet naudingi meteor scatter, pašvaistei arba tropo.
-- **Transekvatorinis sklidimas, autoriaus (IC8TEM) taisyklė**: Afrikos ir Pietų Amerikos kryptimi, jei vidurio taškas patenka į magnetinės inklinacijos juostą tarp -15° ir +15°, ryšys yra transekvatorinis (TEP), o ne sporadinis E, nebent spote nurodyta `<ES>`.
+- **Transekvatorinis sklidimas, autoriaus (IC8TEM) taisyklė**: Afrikos ir Pietų Amerikos kryptimi, jei vidurio taškas patenka į magnetinės inklinacijos juostą tarp -15° ir +15° (reikšmė paimta iš Cracknell, UKSMG: TEP zonos maždaug 5-15° nuo nulinės inklinacijos linijos), ryšys yra transekvatorinis (TEP), o ne sporadinis E, nebent spote nurodyta `<ES>`.
 - **144 MHz, autoriaus (IC8TEM) taisyklė**: sporadinis E 2 m juostoje prasideda **toliau nei 900 km** (trumpesni spotai atmetami). Pavienis 144 MHz spotas **atskirai nerodomas**: jis pasirodo, kai per **5 minutes** ateina antras 144 MHz spotas su debesiu toje pačioje vietoje (atspindžio taškai iki 300 km vienas nuo kito) arba kai netoliese yra **trumpo šuolio 50 MHz** spotas (iki 1200 km, per paskutines 15 minučių). Viršutinė juosta rodo, kiek 144 MHz spotų laukia patvirtinimo.
 - Kiekvienam spotui: atstumas, **šuolių skaičius** pagal **IK3XTV** lentelę, elevacija, **minimali foEs** (sekanto dėsnis).
 - **Abiejų stočių pirmas šuolis**: oranžinis kvadratas = spoterio pirmas šuolis, violetinis = DX pirmas šuolis (vienodi šuoliai); geltonas = vieno šuolio vidurio taškas.
@@ -50,7 +50,7 @@ Sporadinis E **netaikomas 432 MHz**: Es MUF siekia apie 150-200 MHz, o ARRL reko
 
 ## Kvadratai, nuspalvinti pagal dažnį, ir mirksinti MUF
 
-Atspindžio taškų Maidenhead kvadratai nuspalvinami pagal didžiausią spotų dažnį: **žalia** iki 29 MHz, **geltona** iki 51, **oranžinė** iki 71, **raudona** iki 145 MHz. Iš kvadrato foEs įvertinama tikėtina MUF ilgiausiame šuolyje (2400 km, IK3XTV lentelė): jei ji pasiekia aukštesnę juostą, kvadratas **mirksi** tos juostos spalva (IK3XTV ir Jacobs-Leinwoll principas: trumpas skip reiškia aukštą MUF).
+Atspindžio taškų Maidenhead kvadratai nuspalvinami pagal didžiausią spotų dažnį: **žalia** iki 29 MHz, **geltona** iki 51, **oranžinė** iki 71, **raudona** iki 145 MHz. Iš kvadrato foEs įvertinama tikėtina MUF ilgiausiame šuolyje (2400 km, IK3XTV lentelė): jei ji pasiekia aukštesnę juostą, kvadratas **mirksi** tos juostos spalva (IK3XTV ir Jacobs-Leinwoll principas: trumpas skip reiškia aukštą MUF). 144 MHz juostai galioja autoriaus taisyklė: kvadratas mirksi raudonai tik tada, kai debesis duoda vieną 50 MHz šuolį nuo 450 iki 500 km (450 km su 50 km tolerancija).
 
 Žemėlapio viršuje dešinėje rodoma N0NBH santrauka (pasirinkto žemyno E-skip, SFI, K ir A indeksai).
 

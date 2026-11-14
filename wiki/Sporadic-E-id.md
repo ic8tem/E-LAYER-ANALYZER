@@ -21,7 +21,7 @@ Pada tampilan azimutal, cincin putus-putus menunjukkan **km dari tengah** (langk
 
 - **Spot** beberapa menit terakhir (15 menit - 12 jam) pada band **28, 40 (8 m, mati sejak awal), 50, 70 dan 144 MHz**, diambil dari sesi telnet. Locator diambil dari komentar spot (mis. `JN70CN<ES>JO62QM`) atau dari basis data CALL3.
 - Spot dengan **<MS>**, **<AU>** atau **<TR>** di teksnya **dibuang**: spot tersebut tidak berkaitan dengan sporadic-E tetapi berguna untuk meteor scatter, aurora atau tropo.
-- **Transekuatorial, aturan penulis (IC8TEM)**: ke arah Afrika dan Amerika Selatan, jika titik tengah jatuh di pita inklinasi magnetik antara -15° dan +15°, kontak tersebut adalah transekuatorial (TEP), bukan sporadic-E, kecuali spot menyatakan `<ES>`.
+- **Transekuatorial, aturan penulis (IC8TEM)**: ke arah Afrika dan Amerika Selatan, jika titik tengah jatuh di pita inklinasi magnetik antara -15° dan +15° (nilai diambil dari Cracknell, UKSMG: zona TEP sekitar 5-15° dari garis inklinasi nol), kontak tersebut adalah transekuatorial (TEP), bukan sporadic-E, kecuali spot menyatakan `<ES>`.
 - **144 MHz, aturan penulis (IC8TEM)**: sporadic-E di 2 m dimulai **di atas 900 km** (spot yang lebih pendek dibuang). Satu spot 144 MHz **tidak digambar sendirian**: spot itu muncul jika dalam **5 menit** tiba spot 144 MHz kedua dengan awan di tempat yang sama (titik pantul dalam 300 km), atau jika ada spot **50 MHz lompatan pendek** di dekatnya (dalam 1200 km, pada 15 menit terakhir). Bilah di atas menampilkan berapa banyak spot 144 MHz yang menunggu konfirmasi.
 - Untuk setiap spot: jarak, **jumlah lompatan** menurut tabel **IK3XTV**, elevasi, **foEs minimum** (hukum sekan).
 - **Lompatan pertama kedua stasiun**: kotak oranye = lompatan pertama spotter, ungu = lompatan pertama DX (lompatan sama); kuning = titik tengah satu lompatan.
@@ -50,7 +50,7 @@ Sporadic-E **tidak berlaku untuk 432 MHz**: MUF Es mencapai sekitar 150-200 MHz 
 
 ## Kotak berwarna menurut frekuensi dan MUF berkedip
 
-Kotak Maidenhead titik pantul diwarnai menurut frekuensi spot tertinggi: **hijau** hingga 29 MHz, **kuning** hingga 51, **oranye** hingga 71, **merah** hingga 145 MHz. Dari foEs kotak diperkirakan MUF yang mungkin pada lompatan terpanjang (2400 km, tabel IK3XTV): jika mencapai band yang lebih tinggi, kotak **berkedip** dengan warna band itu (prinsip IK3XTV dan Jacobs-Leinwoll: skip pendek berarti MUF tinggi).
+Kotak Maidenhead titik pantul diwarnai menurut frekuensi spot tertinggi: **hijau** hingga 29 MHz, **kuning** hingga 51, **oranye** hingga 71, **merah** hingga 145 MHz. Dari foEs kotak diperkirakan MUF yang mungkin pada lompatan terpanjang (2400 km, tabel IK3XTV): jika mencapai band yang lebih tinggi, kotak **berkedip** dengan warna band itu (prinsip IK3XTV dan Jacobs-Leinwoll: skip pendek berarti MUF tinggi). Untuk 144 MHz berlaku aturan penulis: kotak berkedip merah hanya jika awan memberikan lompatan tunggal di 50 MHz antara 450 dan 500 km (450 km dengan toleransi 50 km).
 
 Di kanan atas peta muncul ringkasan N0NBH (E-skip benua yang dipilih, SFI, indeks K dan A).
 

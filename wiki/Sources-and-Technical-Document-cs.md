@@ -2,7 +2,7 @@
 
 [← Domů](Home-cs)
 
-- Karta **ZDROJE** uvádí všechny zdroje, číslované [1]-[65].
+- Karta **ZDROJE** uvádí všechny zdroje, číslované [1]-[66].
 - Karta **SHRNUTÍ VOLEB VÝPOČTU** (dříve *Technický dokument*) vysvětluje každý výpočet s jeho vzorci a štítky **ZDROJ** (krok převzatý ze zdroje), **ZJIŠTĚNÍ** (ověřeno na programu nebo na skutečném případu) a **VOLBA** (volba programu, kterou je třeba potvrdit v provozu na pásmu).
 - Karta **UŽIVATELSKÁ PŘÍRUČKA** je podrobná uživatelská příručka programu, karta po kartě.
 - Karta **TECHNICKÁ ZPRÁVA** vykládá volby, které vedly ke vzniku programu: architekturu, fyzikální modely, rozpoznávání dat, ověření, omezení a další vývoj.

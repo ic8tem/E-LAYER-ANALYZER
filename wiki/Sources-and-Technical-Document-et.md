@@ -2,7 +2,7 @@
 
 [← Home](Home-et)
 
-- Sakk **ALLIKAD** loetleb kõik allikad, nummerdatud [1]-[65].
+- Sakk **ALLIKAD** loetleb kõik allikad, nummerdatud [1]-[66].
 - Sakk **ARVUTUSVALIKUTE KOKKUVÕTE** (varem *Tehniline dokument*) selgitab iga arvutust koos valemitega ja märgenditega **ALLIKAS** (allikast võetud samm), **KONTROLL** (kontrollitud programmis või reaalsel juhtumil) ja **VALIK** (programmi tehtud valik, mis tuleb eetris kinnitada).
 - Sakk **KASUTUSJUHEND** on programmi põhjalik kasutusjuhend, sakk saki haaval.
 - Sakk **TEHNILINE ARUANNE** esitab valikud, mis viisid programmi loomiseni: arhitektuur, füüsikalised mudelid, andmete tuvastamine, kontrollid, piirangud ja edasine areng.

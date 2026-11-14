@@ -21,7 +21,7 @@ Az azimutális nézetekben a szaggatott gyűrűk a **középponttól mért km-t*
 
 - Az utolsó néhány perc (15 perc - 12 óra) **spotjait** a **28, 40 (8 m, alapértelmezésben kikapcsolva), 50, 70 és 144 MHz-es** sávokon, a telnet-kapcsolatokból. A lokátorok a spot megjegyzéséből (pl. `JN70CN<ES>JO62QM`) vagy a CALL3-adatbázisból származnak.
 - A szövegükben **<MS>**, **<AU>** vagy **<TR>** jelölést tartalmazó spotokat **elveti**: ezek nem a sporadikus E-hez tartoznak, de a meteor scatterhez, az aurorához vagy a tropóhoz hasznosak.
-- **Transzekvatoriális, a szerző (IC8TEM) szabálya**: Afrika és Dél-Amerika felé, ha a felezőpont a -15° és +15° közötti mágneses inklinációs sávba esik, az összeköttetés transzekvatoriális (TEP) és nem sporadikus E, hacsak a spot nem jelez `<ES>`-t.
+- **Transzekvatoriális, a szerző (IC8TEM) szabálya**: Afrika és Dél-Amerika felé, ha a felezőpont a -15° és +15° (az érték Cracknelltől, UKSMG: a TEP zónái a nulla inklinációs vonaltól kb. 5-15°-ra) közötti mágneses inklinációs sávba esik, az összeköttetés transzekvatoriális (TEP) és nem sporadikus E, hacsak a spot nem jelez `<ES>`-t.
 - **144 MHz, a szerző (IC8TEM) szabálya**: a 2 m-es sporadikus E **900 km felett** kezdődik (a rövidebb spotokat elveti). Egyetlen 144 MHz-es spot **önmagában nem jelenik meg**: akkor jelenik meg, ha **5 percen belül** érkezik egy második 144 MHz-es spot ugyanott lévő felhővel (visszaverődési pontok 300 km-en belül), vagy ha a közelben van egy **rövid ugrású 50 MHz-es** spot (1200 km-en belül, az utolsó 15 percben). A felső sáv mutatja, hány 144 MHz-es spot vár megerősítésre.
 - Minden spotra: távolság, az **ugrások száma** az **IK3XTV**-táblázat szerint, eleváció, **minimális foEs** (szekánstörvény).
 - **Mindkét állomás első ugrása**: narancs négyzet = a spottoló első ugrása, lila = a DX első ugrása (egyenlő ugrások); sárga = egyugrásos terjedés felezőpontja.
@@ -50,7 +50,7 @@ A sporadikus E **nem vonatkozik a 432 MHz-re**: az Es-MUF kb. 150-200 MHz-ig ér
 
 ## Frekvencia szerint színezett négyzetek és villogó MUF
 
-A visszaverődési pontok Maidenhead-négyzeteit a spotok legmagasabb frekvenciája szerint színezi: **zöld** 29 MHz-ig, **sárga** 51-ig, **narancs** 71-ig, **piros** 145 MHz-ig. A négyzet foEs-éből becsüli a valószínű MUF-ot a leghosszabb ugrásra (2400 km, IK3XTV-táblázat): ha egy magasabb sávot is elér, a négyzet annak a sávnak a színében **villog** (IK3XTV és Jacobs-Leinwoll elve: rövid holtzóna = magas MUF).
+A visszaverődési pontok Maidenhead-négyzeteit a spotok legmagasabb frekvenciája szerint színezi: **zöld** 29 MHz-ig, **sárga** 51-ig, **narancs** 71-ig, **piros** 145 MHz-ig. A négyzet foEs-éből becsüli a valószínű MUF-ot a leghosszabb ugrásra (2400 km, IK3XTV-táblázat): ha egy magasabb sávot is elér, a négyzet annak a sávnak a színében **villog** (IK3XTV és Jacobs-Leinwoll elve: rövid holtzóna = magas MUF). 144 MHz-re a szerző szabálya érvényes: a négyzet csak akkor villog pirosan, ha a felhő 50 MHz-en egyetlen ugrást ad 450 és 500 km között (450 km 50 km-es tűréssel).
 
 A térkép jobb felső sarkában megjelenik az N0NBH összefoglalója (E-skip a választott kontinensre, SFI, K- és A-index).
 

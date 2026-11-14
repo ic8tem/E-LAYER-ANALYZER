@@ -20,7 +20,7 @@ In die azimutale aansigte wys die strepieringe die **km vanaf die middel** (die 
 
 - Die **spots** van die laaste paar minute (15 min - 12 h) op die **28, 40 (8 m, by verstek af), 50, 70 en 144 MHz**-bande, uit die telnet-sessies geneem. Lokators kom uit die spotkommentaar (bv. `JN70CN<ES>JO62QM`) of uit die CALL3-databasis.
 - Spots met **<MS>**, **<AU>** of **<TR>** in die teks word **verwerp**: hulle het nie met sporadiese E te doen nie, maar is nuttig vir meteor scatter, aurora of tropo.
-- **Transekwatoriaal, outeur se reël (IC8TEM)**: na Afrika en Suid-Amerika, as die middelpunt in die magnetiese inklinasieband tussen -15° en +15° val, is die kontak transekwatoriaal (TEP) en nie sporadiese E nie, tensy die spot `<ES>` vermeld.
+- **Transekwatoriaal, outeur se reël (IC8TEM)**: na Afrika en Suid-Amerika, as die middelpunt in die magnetiese inklinasieband tussen -15° en +15° (waarde van Cracknell, UKSMG: TEP-sones ongeveer 5-15° van die nul-inklinasielyn) val, is die kontak transekwatoriaal (TEP) en nie sporadiese E nie, tensy die spot `<ES>` vermeld.
 - **144 MHz, outeur se reël (IC8TEM)**: sporadiese E op 2 m begin **verder as 900 km** (korter spots word verwerp). 'n Enkele 144 MHz-spot **word nie op sy eie geplot nie**: dit verskyn wanneer binne **5 minute** 'n tweede 144 MHz-spot aankom met die wolk op dieselfde plek (refleksiepunte binne 300 km), of wanneer daar 'n **kortsprong-50 MHz**-spot naby is (binne 1200 km, in die laaste 15 minute). Die balk bo-aan wys hoeveel 144 MHz-spots op bevestiging wag.
 - Vir elke spot: afstand, **aantal spronge** volgens die **IK3XTV**-tabel, elevasie, **minimum foEs** (sekanswet).
 - **Eerste sprong van albei stasies**: oranje vierkant = die spotter se eerste sprong, pers = die DX se eerste sprong (gelyke spronge); geel = middelpunt van 'n enkele sprong.
@@ -49,7 +49,7 @@ Sporadiese E **geld nie vir 432 MHz nie**: die Es-MUF bereik ongeveer 150-200 MH
 
 ## Vierkante gekleur volgens frekwensie en flikkerende MUF
 
-Die Maidenhead-vierkante van die refleksiepunte word gekleur volgens die hoogste frekwensie van die spots: **groen** tot 29 MHz, **geel** tot 51, **oranje** tot 71, **rooi** tot 145 MHz. Uit die foEs van die vierkant word die waarskynlike MUF op die langste sprong (2400 km, IK3XTV-tabel) beraam: as dit 'n hoër band bereik, **flikker** die vierkant in die kleur van daardie band (beginsel van IK3XTV en Jacobs-Leinwoll: kort skip beteken hoë MUF).
+Die Maidenhead-vierkante van die refleksiepunte word gekleur volgens die hoogste frekwensie van die spots: **groen** tot 29 MHz, **geel** tot 51, **oranje** tot 71, **rooi** tot 145 MHz. Uit die foEs van die vierkant word die waarskynlike MUF op die langste sprong (2400 km, IK3XTV-tabel) beraam: as dit 'n hoër band bereik, **flikker** die vierkant in die kleur van daardie band (beginsel van IK3XTV en Jacobs-Leinwoll: kort skip beteken hoë MUF). Vir 144 MHz geld die outeur se reël: die vierkant flikker net rooi as die wolk 'n enkelsprong op 50 MHz tussen 450 en 500 km gee (450 km met 'n toleransie van 50 km).
 
 Regs bo op die kaart verskyn die N0NBH-opsomming (E-skip vir die gekose kontinent, SFI, K- en A-indekse).
 

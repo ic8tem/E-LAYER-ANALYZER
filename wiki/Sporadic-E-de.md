@@ -21,7 +21,7 @@ In den Azimutalansichten zeigen die gestrichelten Ringe die **km von der Mitte**
 
 - Die **Spots** der letzten Minuten (15 min - 12 h) auf den Bändern **28, 40 (8 m, standardmäßig aus), 50, 70 und 144 MHz**, aus den Telnet-Sitzungen. Die Locator stammen aus dem Kommentar des Spots (z. B. `JN70CN<ES>JO62QM`) oder aus der CALL3-Datenbank.
 - Spots mit **<MS>**, **<AU>** oder **<TR>** im Text werden **verworfen**: Sie betreffen nicht Sporadic-E, sind aber für Meteorscatter, Aurora oder Tropo nützlich.
-- **Transäquatorial, Regel des Autors (IC8TEM)**: Richtung Afrika und Südamerika gilt eine Verbindung als transäquatorial (TEP) und nicht als Sporadic-E, wenn der Mittelpunkt im Band der magnetischen Inklination zwischen -15° und +15° liegt, es sei denn, der Spot gibt `<ES>` an.
+- **Transäquatorial, Regel des Autors (IC8TEM)**: Richtung Afrika und Südamerika gilt eine Verbindung als transäquatorial (TEP) und nicht als Sporadic-E, wenn der Mittelpunkt im Band der magnetischen Inklination zwischen -15° und +15° liegt (Wert nach Cracknell, UKSMG: TEP-Zonen etwa 5-15° von der Null-Inklinationslinie), es sei denn, der Spot gibt `<ES>` an.
 - **144 MHz, Regel des Autors (IC8TEM)**: Sporadic-E auf 2 m beginnt **jenseits von 900 km** (kürzere Spots werden verworfen). Ein einzelner 144-MHz-Spot **wird nicht allein eingezeichnet**: Er erscheint, wenn innerhalb von **5 Minuten** ein zweiter 144-MHz-Spot mit der Wolke an derselben Stelle eintrifft (Reflexionspunkte innerhalb von 300 km) oder wenn es in der Nähe einen **50-MHz-Spot mit kurzem Sprung** gibt (innerhalb von 1200 km, in den letzten 15 Minuten). Die Leiste oben zeigt, wie viele 144-MHz-Spots auf Bestätigung warten.
 - Für jeden Spot: Entfernung, **Anzahl der Sprünge** nach der Tabelle **IK3XTV**, Elevation, **minimale foEs** (Sekantengesetz).
 - **Erster Sprung beider Stationen**: oranges Quadrat = erster Sprung des Spotters, violett = erster Sprung des DX (gleiche Sprünge); gelb = Mittelpunkt eines Einzelsprungs.
@@ -50,7 +50,7 @@ Sporadic-E **gilt nicht für 432 MHz**: Die Es-MUF erreicht etwa 150-200 MHz, un
 
 ## Nach Frequenz gefärbte Felder und blinkende MUF
 
-Die Maidenhead-Felder der Reflexionspunkte werden nach der höchsten Frequenz der Spots gefärbt: **grün** bis 29 MHz, **gelb** bis 51, **orange** bis 71, **rot** bis 145 MHz. Aus der foEs des Feldes wird die wahrscheinliche MUF auf dem längsten Sprung (2400 km, Tabelle IK3XTV) geschätzt: Erreicht sie ein höheres Band, **blinkt** das Feld in der Farbe dieses Bandes (Prinzip von IK3XTV und Jacobs-Leinwoll: kurzer Skip bedeutet hohe MUF).
+Die Maidenhead-Felder der Reflexionspunkte werden nach der höchsten Frequenz der Spots gefärbt: **grün** bis 29 MHz, **gelb** bis 51, **orange** bis 71, **rot** bis 145 MHz. Aus der foEs des Feldes wird die wahrscheinliche MUF auf dem längsten Sprung (2400 km, Tabelle IK3XTV) geschätzt: Erreicht sie ein höheres Band, **blinkt** das Feld in der Farbe dieses Bandes (Prinzip von IK3XTV und Jacobs-Leinwoll: kurzer Skip bedeutet hohe MUF). Für 144 MHz gilt die Regel des Autors: Das Feld blinkt nur dann rot, wenn die Wolke einen 50-MHz-Einzelsprung zwischen 450 und 500 km ergibt (450 km mit einer Toleranz von 50 km).
 
 Oben rechts auf der Karte erscheint die Zusammenfassung von N0NBH (E-skip für den gewählten Kontinent, SFI, K- und A-Index).
 

@@ -21,7 +21,7 @@ Sa mga azimuthal na tanaw, ipinapakita ng mga putol-putol na singsing ang **km m
 
 - Ang mga **spot** ng huling ilang minuto (15 min - 12 oras) sa mga bandang **28, 40 (8 m, naka-off sa simula), 50, 70 at 144 MHz**, kinuha mula sa mga telnet session. Nagmumula ang mga locator sa komento ng spot (hal. `JN70CN<ES>JO62QM`) o sa database na CALL3.
 - **Itinatapon** ang mga spot na may **<MS>**, **<AU>** o **<TR>** sa teksto: hindi ito tungkol sa sporadic-E pero kapaki-pakinabang para sa meteor scatter, aurora o tropo.
-- **Transequatorial, tuntunin ng may-akda (IC8TEM)**: patungo sa Africa at South America, kung ang gitnang punto ay nasa banda ng magnetic dip sa pagitan ng -15° at +15°, transequatorial (TEP) ang contact at hindi sporadic-E, maliban kung nakasaad sa spot ang `<ES>`.
+- **Transequatorial, tuntunin ng may-akda (IC8TEM)**: patungo sa Africa at South America, kung ang gitnang punto ay nasa banda ng magnetic dip sa pagitan ng -15° at +15° (halagang kinuha kay Cracknell, UKSMG: mga sona ng TEP sa mga 5-15° mula sa linya ng zero inclination), transequatorial (TEP) ang contact at hindi sporadic-E, maliban kung nakasaad sa spot ang `<ES>`.
 - **144 MHz, tuntunin ng may-akda (IC8TEM)**: nagsisimula ang sporadic-E sa 2 m **lampas sa 900 km** (itinatapon ang mas maiikling spot). Ang isang spot sa 144 MHz ay **hindi iginuguhit nang mag-isa**: lumalabas ito kapag sa loob ng **5 minuto** ay may dumating na ikalawang spot sa 144 MHz na ang ulap ay nasa parehong lugar (mga punto ng repleksiyon sa loob ng 300 km), o kapag may malapit na spot na **maikling hop sa 50 MHz** (sa loob ng 1200 km, sa huling 15 minuto). Ipinapakita ng bar sa itaas kung ilang spot sa 144 MHz ang naghihintay ng kumpirmasyon.
 - Para sa bawat spot: distansiya, **bilang ng hop** ayon sa talahanayan ni **IK3XTV**, elebasyon, **pinakamababang foEs** (secant law).
 - **Unang hop ng dalawang istasyon**: kahel na parisukat = unang hop ng spotter, lila = unang hop ng DX (pantay na hop); dilaw = gitnang punto ng iisang hop.
@@ -50,7 +50,7 @@ Sa mga azimuthal na tanaw, ipinapakita ng mga putol-putol na singsing ang **km m
 
 ## Mga grid square na kinukulayan ayon sa frequency at kumikislap na MUF
 
-Kinukulayan ang mga Maidenhead square ng mga reflection point ayon sa pinakamataas na frequency ng mga spot: **berde** hanggang 29 MHz, **dilaw** hanggang 51, **kahel** hanggang 71, **pula** hanggang 145 MHz. Mula sa foEs ng square, tinatantya ang malamang na MUF sa pinakamahabang hop (2400 km, talahanayan ni IK3XTV): kung umaabot ito sa mas mataas na banda, **kumikislap** ang square sa kulay ng bandang iyon (prinsipyo nina IK3XTV at Jacobs-Leinwoll: maikling skip ay mataas na MUF).
+Kinukulayan ang mga Maidenhead square ng mga reflection point ayon sa pinakamataas na frequency ng mga spot: **berde** hanggang 29 MHz, **dilaw** hanggang 51, **kahel** hanggang 71, **pula** hanggang 145 MHz. Mula sa foEs ng square, tinatantya ang malamang na MUF sa pinakamahabang hop (2400 km, talahanayan ni IK3XTV): kung umaabot ito sa mas mataas na banda, **kumikislap** ang square sa kulay ng bandang iyon (prinsipyo nina IK3XTV at Jacobs-Leinwoll: maikling skip ay mataas na MUF). Para sa 144 MHz, umiiral ang patakaran ng may-akda: kumikislap nang pula ang square lamang kung nagbibigay ang ulap ng iisang hop sa 50 MHz sa pagitan ng 450 at 500 km (450 km na may tolerance na 50 km).
 
 Sa kanang itaas ng mapa lumalabas ang buod ni N0NBH (E-skip ng napiling kontinente, SFI, mga index na K at A).
 

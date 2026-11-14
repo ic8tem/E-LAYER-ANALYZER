@@ -23,7 +23,7 @@ SRC|14. T. Bailey G3WPO, 오로라 전파에 관한 "Newcomers" 칼럼, Ham Radi
 SRC|15. NOAA Space Weather Prediction Center: OVATION Prime 오로라 오벌 (services.swpc.noaa.gov/json/ovation_aurora_latest.json), 행성 Kp 지수 (products/noaa-planetary-k-index.json), 실시간 태양풍 RTSW (json/rtsw/rtsw_mag_1m.json, rtsw_wind_1m.json); 새 형식에 관한 NWS SCN 26-21 공지.
 H1|지자기장과 지도
 SRC|16. IAGA, International Geomagnetic Reference Field, 14세대 (IGRF-14), doi:10.5281/zenodo.14012302 («개념» DOI; 현재 버전 doi:10.5281/zenodo.14012303); 계수는 ppigrf(K. M. Laundal, MIT 라이선스)와 함께 배포되는 IGRF14.shc 파일에서 읽음, ppigrf는 계산 검증에도 사용. 프로그램은 이후 세대를 NOAA NCEI(https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/)에서 스스로 내려받습니다.
-SRC|28. NOAA NCEI 및 BGS, World Magnetic Model 2015, 세계 복각 지도(저자 제공): 적도 횡단 규칙(계산 선택 요약 3.6)에 사용한 자기 적도 주위 ±20° 띠; 프로그램에서는 복각을 IGRF-14 [16]로 계산.
+SRC|28. NOAA NCEI 및 BGS, World Magnetic Model 2015, 세계 복각 지도(저자 제공): 적도 횡단 규칙(계산 선택 요약 3.6)에 사용한 자기 적도 주위 ±15°(2026년 11월 14일까지는 ±20°) 띠; 프로그램에서는 복각을 IGRF-14 [16]로 계산.
 SRC|17. Natural Earth (퍼블릭 도메인), 1:5천만 축척 해안선과 국경, www.naturalearthdata.com.
 H1|Log ADIF와 색 구성
 SRC|25. C. Cerrotta IC8TEM, LoTW Grid Map v2: ADIF 읽기, LoTW 리포트 (lotwreport.adi), 교신 및 확인 그리드의 색 (LOG ADIF 탭).
@@ -71,3 +71,4 @@ SRC|62. EI5FK (IO51RT, 아일랜드), 2003-2005년 144 및 432 MHz 오로라 로
 SRC|63. PA0O (JO33HG, 네덜란드), DL4MFM의 Log Analyzer 프로그램으로 만든 144 MHz 오로라 QSO 지도, 저자가 보낸 것: 독일, 체코, 오스트리아, 스위스, 이탈리아 북부, 슬로베니아, 크로아티아, 헝가리, 루마니아 방면의 로케이터가 있는 상대국 29곳(날짜 표시 없음). BENCHMARK AURORA 시험대의 데이터.
 SRC|64. Q. Tang, H. Sun, Z. Du, J. Zhao, Y. Liu, Z. Zhao, X. Feng, «Unusual Enhancement of Midlatitude Sporadic-E Layers in Response to a Minor Geomagnetic Storm», Atmosphere 13 (2022) 816 (https://www.mdpi.com/2073-4433/13/5/816): 동아시아의 이오노존데; 2013년 7월의 약한 지자기 폭풍에서 중위도의 foEs가 3-10 MHz 증가. 엇갈리는 문헌을 요약함: Es는 Kp와 함께 증가한다(Zhou 외), 지자기 활동과 무관하다(Pietrella와 Bianchi), 어느 쪽으로든 반응한다(Maksyutin과 Sherstyukov).
 SRC|65. G0ISW, «Propagation identification» (V3.42, 2024년 10월, https://www.qsl.net/g0isw/g0iswpropident.htm): 50, 70, 144 MHz, 영국; 전파 모드별 거리: 가장 짧은 스포라딕 E는 50·70 MHz에서 400 km 초과, 144 MHz에서 1400 km 초과(단일 홉 1400-2400 km, 2홉은 3200 km까지). 프로그램은 이를 저자의 최소 거리(50·70 MHz에서 450 km, 144 MHz에서 확인 조건부 900 km)와 비교합니다.
+SRC|66. R. G. Cracknell G2AHU, «Equatorial Propagation», UKSMG 아카이브 (https://www.uksmg.org/content/equitorialpropagation.htm), ZE2JV의 관측(QST, 1958년 12월), Salisbury의 보고(1960년 5월), QST 1981년 11-12월 포함: 50 MHz(144 MHz 시험은 이탈리아 북부 너머로는 성과 없음), 남부 아프리카와 유럽; TEP의 고밀도 영역은 복각 0인 선에서 약 5-15°, 남북 교신은 6000 km 안팎, 춘분·추분 무렵에 가장 좋고 태양 활동 주기 극소기에는 신뢰도가 떨어짐. 프로그램은 15°라는 값을 적도 횡단 규칙의 띠에 가져와 복각에 적용합니다(저자의 선택). 유사점: Kennewell과 Wilkinson [49]처럼 TEP는 자기 적도에 수직이고 대칭. 차이점: Cracknell은 위도 5-15°를, [49]는 자기 위도 ±10-20°의 마루를 제시합니다.

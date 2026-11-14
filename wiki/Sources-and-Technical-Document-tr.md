@@ -2,7 +2,7 @@
 
 [← Home](Home-tr)
 
-- **KAYNAKLAR** sekmesi tüm kaynakları [1]-[65] numaralarıyla listeler.
+- **KAYNAKLAR** sekmesi tüm kaynakları [1]-[66] numaralarıyla listeler.
 - **HESAPLAMA SEÇİMLERİNİN ÖZETİ** sekmesi (eski adıyla *Teknik belge*) her hesabı formülleriyle ve şu etiketlerle açıklar: **KAYNAK** (bir kaynaktan alınan adım), **DOĞRULAMA** (program üzerinde ya da gerçek bir durumda doğrulanmış) ve **SEÇİM** (programın yaptığı, havada doğrulanması gereken bir seçim).
 - **KULLANIM KILAVUZU** sekmesi programın sekme sekme ayrıntılı kullanım kılavuzudur.
 - **TEKNİK RAPOR** sekmesi programın yapılmasına yol açan seçimleri ortaya koyar: mimari, fiziksel modeller, verilerin tanınması, doğrulamalar, sınırlar ve gelecekteki gelişmeler.

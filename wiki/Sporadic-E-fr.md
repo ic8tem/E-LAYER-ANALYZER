@@ -21,7 +21,7 @@ Dans les vues azimutales, les anneaux en tirets indiquent les **km depuis le cen
 
 - Les **spots** des dernières minutes (15 min - 12 h) sur les bandes **28, 40 (8 m, désactivée par défaut), 50, 70 et 144 MHz**, provenant des sessions telnet. Les locators sont tirés du commentaire du spot (par ex. `JN70CN<ES>JO62QM`) ou de la base CALL3.
 - Les spots portant **<MS>**, **<AU>** ou **<TR>** dans le texte sont **écartés** : ils ne relèvent pas de l'E sporadique, mais servent pour le meteor scatter, l'aurore ou la tropo.
-- **Transéquatorial, règle de l'auteur (IC8TEM)** : vers l'Afrique et l'Amérique du Sud, si le point milieu tombe dans la bande d'inclinaison magnétique comprise entre -15° et +15°, la liaison est transéquatoriale (TEP) et non en E sporadique, sauf si le spot indique `<ES>`.
+- **Transéquatorial, règle de l'auteur (IC8TEM)** : vers l'Afrique et l'Amérique du Sud, si le point milieu tombe dans la bande d'inclinaison magnétique comprise entre -15° et +15° (valeur reprise de Cracknell, UKSMG : zones du TEP à environ 5-15° de la ligne d'inclinaison nulle), la liaison est transéquatoriale (TEP) et non en E sporadique, sauf si le spot indique `<ES>`.
 - **144 MHz, règle de l'auteur (IC8TEM)** : l'E sporadique sur 2 m commence **au-delà de 900 km** (les spots plus courts sont écartés). Un spot isolé sur 144 MHz **n'est pas tracé seul** : il apparaît quand, dans les **5 minutes**, arrive un second spot 144 MHz avec le nuage au même endroit (points de réflexion à moins de 300 km), ou quand il existe à proximité un spot **50 MHz à bond court** (dans un rayon de 1200 km, au cours des 15 dernières minutes). La barre du haut indique combien de spots 144 MHz attendent une confirmation.
 - Pour chaque spot : distance, **nombre de bonds** selon le tableau d'**IK3XTV**, élévation, **foEs minimale** (loi de la sécante).
 - **Premier bond des deux stations** : carré orange = premier bond du spotter, violet = premier bond du DX (bonds égaux) ; jaune = point milieu d'un bond unique.
@@ -50,7 +50,7 @@ L'E sporadique **ne s'applique pas au 432 MHz** : la MUF de l'Es atteint environ
 
 ## Carrés colorés selon la fréquence et MUF clignotante
 
-Les carrés Maidenhead des points de réflexion sont colorés selon la fréquence la plus haute des spots : **vert** jusqu'à 29 MHz, **jaune** jusqu'à 51, **orange** jusqu'à 71, **rouge** jusqu'à 145 MHz. À partir de la foEs du carré, on estime la MUF probable sur le bond le plus long (2400 km, table IK3XTV) : si elle atteint une bande plus haute, le carré **clignote** dans la couleur de cette bande (principe d'IK3XTV et de Jacobs-Leinwoll : skip court signifie MUF élevée).
+Les carrés Maidenhead des points de réflexion sont colorés selon la fréquence la plus haute des spots : **vert** jusqu'à 29 MHz, **jaune** jusqu'à 51, **orange** jusqu'à 71, **rouge** jusqu'à 145 MHz. À partir de la foEs du carré, on estime la MUF probable sur le bond le plus long (2400 km, table IK3XTV) : si elle atteint une bande plus haute, le carré **clignote** dans la couleur de cette bande (principe d'IK3XTV et de Jacobs-Leinwoll : skip court signifie MUF élevée). Pour le 144 MHz, la règle de l'auteur s'applique : le carré ne clignote en rouge que si le nuage donne un bond simple en 50 MHz entre 450 et 500 km (450 km avec une tolérance de 50 km).
 
 En haut à droite de la carte apparaît la synthèse de N0NBH (E-skip pour le continent choisi, SFI, indices K et A).
 

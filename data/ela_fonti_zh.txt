@@ -23,7 +23,7 @@ SRC|14. T. Bailey G3WPO，关于极光传播的 "Newcomers" 专栏，Ham Radio T
 SRC|15. NOAA Space Weather Prediction Center：OVATION Prime 极光椭圆（services.swpc.noaa.gov/json/ovation_aurora_latest.json）、行星 Kp 指数（products/noaa-planetary-k-index.json）、实时太阳风 RTSW（json/rtsw/rtsw_mag_1m.json、rtsw_wind_1m.json）；关于新格式的 NWS SCN 26-21 通告。
 H1|地磁场与制图
 SRC|16. IAGA, International Geomagnetic Reference Field，第 14 代（IGRF-14），doi:10.5281/zenodo.14012302（«概念» DOI；当前版本 doi:10.5281/zenodo.14012303）；系数读自随 ppigrf（K. M. Laundal，MIT 许可证）分发的 IGRF14.shc 文件，ppigrf 也用于验证计算。程序会自动从 NOAA NCEI (https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/) 下载后续各代系数。
-SRC|28. NOAA NCEI 和 BGS，World Magnetic Model 2015，世界磁倾角图（由作者提供）：磁赤道两侧 ±20° 的带用于跨赤道传播规则（计算选择摘要 3.6）；程序中磁倾角用 IGRF-14 [16] 计算。
+SRC|28. NOAA NCEI 和 BGS，World Magnetic Model 2015，世界磁倾角图（由作者提供）：磁赤道两侧 ±15°（2026 年 11 月 14 日前为 ±20°） 的带用于跨赤道传播规则（计算选择摘要 3.6）；程序中磁倾角用 IGRF-14 [16] 计算。
 SRC|17. Natural Earth（公共领域），1:5000 万比例尺海岸线与边界，www.naturalearthdata.com。
 H1|ADIF 日志与配色
 SRC|25. C. Cerrotta IC8TEM, LoTW Grid Map v2：ADIF 读取、LoTW 报告（lotwreport.adi）、已通联和已确认方格的颜色（LOG ADIF 选项卡）。
@@ -71,3 +71,4 @@ SRC|62. EI5FK（IO51RT，爱尔兰），2003-2005 年 144 和 432 MHz 极光日�
 SRC|63. PA0O（JO33HG，荷兰），由 DL4MFM 的 Log Analyzer 程序生成的 144 MHz 极光 QSO 地图，由作者寄来：29 个带网格坐标的对方电台，分布在德国、捷克、奥地利、瑞士、意大利北部、斯洛文尼亚、克罗地亚、匈牙利和罗马尼亚方向（未注明日期）。BENCHMARK AURORA 试验台的数据。
 SRC|64. Q. Tang, H. Sun, Z. Du, J. Zhao, Y. Liu, Z. Zhao, X. Feng, «Unusual Enhancement of Midlatitude Sporadic-E Layers in Response to a Minor Geomagnetic Storm», Atmosphere 13 (2022) 816（https://www.mdpi.com/2073-4433/13/5/816）：东亚的电离层测高仪；在 2013 年 7 月的一次小地磁暴中，中纬度 foEs 增加 3-10 MHz。文中总结了看法不一的文献：Es 随 Kp 增强（Zhou 等），与地磁活动无关（Pietrella 和 Bianchi），可向任一方向响应（Maksyutin 和 Sherstyukov）。
 SRC|65. G0ISW, «Propagation identification»（V3.42，2024 年 10 月，https://www.qsl.net/g0isw/g0iswpropident.htm）：50、70 和 144 MHz，英国；按传播方式的距离：最短的偶发 E 层在 50 和 70 MHz 超过 400 km，在 144 MHz 超过 1400 km（单跳 1400-2400 km，双跳可达 3200 km）。程序将其与作者的最小距离（50 和 70 MHz 为 450 km，144 MHz 为需确认的 900 km）进行比较。
+SRC|66. R. G. Cracknell G2AHU, «Equatorial Propagation»，UKSMG 档案（https://www.uksmg.org/content/equitorialpropagation.htm），含 ZE2JV 的观测（QST，1958 年 12 月）、Salisbury 的报告（1960 年 5 月）以及 QST 1981 年 11-12 月：50 MHz（144 MHz 的试验在意大利北部以远没有结果），南部非洲和欧洲；TEP 高密度区位于距零倾角线约 5-15° 处，南北向通联约 6000 km，春分秋分前后最好，太阳周期极小期可靠性较低。程序采用其 15° 的数值作为跨赤道传播规则的带宽，并用于倾角（作者的选择）。相同点：与 Kennewell 和 Wilkinson [49] 一样，TEP 垂直于磁赤道且对称。不同点：Cracknell 给出的是 5-15° 纬度，[49] 给出的是 ±10-20° 磁纬的峰脊。

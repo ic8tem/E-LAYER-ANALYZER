@@ -21,7 +21,7 @@ I de asimutale visningene viser de stiplede ringene **km fra sentrum** (interval
 
 - **Spot** fra de siste minuttene (15 min - 12 t) på båndene **28, 40 (8 m, slått av fra start), 50, 70 og 144 MHz**, hentet fra telnet-øktene. Lokatorene kommer fra spotkommentaren (f.eks. `JN70CN<ES>JO62QM`) eller fra CALL3-databasen.
 - Spot med **<MS>**, **<AU>** eller **<TR>** i teksten **forkastes**: de gjelder ikke sporadisk E, men er nyttige for meteor scatter, nordlys eller tropo.
-- **Transekvatorial, forfatterens regel (IC8TEM)**: mot Afrika og Sør-Amerika er forbindelsen transekvatorial (TEP) og ikke sporadisk E hvis midtpunktet ligger i beltet med magnetisk inklinasjon mellom -15° og +15°, med mindre spottet oppgir `<ES>`.
+- **Transekvatorial, forfatterens regel (IC8TEM)**: mot Afrika og Sør-Amerika er forbindelsen transekvatorial (TEP) og ikke sporadisk E hvis midtpunktet ligger i beltet med magnetisk inklinasjon mellom -15° og +15° (verdi hentet fra Cracknell, UKSMG: TEP-soner ca. 5-15° fra linjen med inklinasjon null), med mindre spottet oppgir `<ES>`.
 - **144 MHz, forfatterens regel (IC8TEM)**: sporadisk E på 2 m begynner **over 900 km** (kortere spot forkastes). Et enkelt 144 MHz-spot **tegnes ikke alene**: det vises når det innen **5 minutter** kommer et andre 144 MHz-spot med skyen på samme sted (refleksjonspunkter innenfor 300 km), eller når det finnes et **50 MHz-spot med kort hopp** i nærheten (innenfor 1200 km, de siste 15 minuttene). Linjen øverst viser hvor mange 144 MHz-spot som venter på bekreftelse.
 - For hvert spot: avstand, **antall hopp** ifølge **IK3XTV**-tabellen, elevasjon, **minste foEs** (sekantloven).
 - **Første hopp for begge stasjonene**: oransje firkant = spotterens første hopp, fiolett = DX-stasjonens første hopp (like hopp); gul = midtpunkt for enkelthopp.
@@ -50,7 +50,7 @@ Sporadisk E **gjelder ikke for 432 MHz**: Es-MUF når ca. 150-200 MHz, og ARRL-r
 
 ## Ruter farget etter frekvens og blinkende MUF
 
-Maidenhead-rutene for refleksjonspunktene farges etter den høyeste frekvensen blant spotene: **grønn** opp til 29 MHz, **gul** opp til 51, **oransje** opp til 71, **rød** opp til 145 MHz. Ut fra rutens foEs anslås den sannsynlige MUF-en på det lengste hoppet (2400 km, IK3XTV-tabellen): når den når et høyere bånd, **blinker** ruten i fargen til det båndet (prinsipp fra IK3XTV og Jacobs-Leinwoll: kort skip betyr høy MUF).
+Maidenhead-rutene for refleksjonspunktene farges etter den høyeste frekvensen blant spotene: **grønn** opp til 29 MHz, **gul** opp til 51, **oransje** opp til 71, **rød** opp til 145 MHz. Ut fra rutens foEs anslås den sannsynlige MUF-en på det lengste hoppet (2400 km, IK3XTV-tabellen): når den når et høyere bånd, **blinker** ruten i fargen til det båndet (prinsipp fra IK3XTV og Jacobs-Leinwoll: kort skip betyr høy MUF). For 144 MHz gjelder forfatterens regel: ruten blinker rødt bare hvis skyen gir et enkelthopp på 50 MHz mellom 450 og 500 km (450 km med en toleranse på 50 km).
 
 Øverst til høyre på kartet vises sammendraget fra N0NBH (E-skip for det valgte kontinentet, SFI, K- og A-indeks).
 

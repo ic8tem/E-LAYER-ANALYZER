@@ -21,7 +21,7 @@ Asimuutsetes vaadetes näitavad katkendlikud ringid **kaugust keskpunktist km-de
 
 - Viimaste minutite **spotid** (15 min - 12 h) sagedusaladel **28, 40 (8 m, vaikimisi väljas), 50, 70 ja 144 MHz**, võetud telneti seanssidest. Lokaatorid võetakse spoti kommentaarist (nt `JN70CN<ES>JO62QM`) või CALL3 andmebaasist.
 - Spotid, mille tekstis on **<MS>**, **<AU>** või **<TR>**, **jäetakse kõrvale**: need ei puuduta sporaadilist E-d, kuid on kasulikud meteor scatteri, aurora või tropo jaoks.
-- **Transekvatoriaalne levi, autori (IC8TEM) reegel**: Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise inklinatsiooni vööndisse -15° kuni +15°, on side transekvatoriaalne (TEP), mitte sporaadiline E, välja arvatud juhul, kui spotis on märgitud `<ES>`.
+- **Transekvatoriaalne levi, autori (IC8TEM) reegel**: Aafrika ja Lõuna-Ameerika suunas, kui keskpunkt jääb magnetilise inklinatsiooni vööndisse -15° kuni +15° (väärtus võetud Cracknellilt, UKSMG: TEP-i tsoonid umbes 5-15° nullinklinatsiooni joonest), on side transekvatoriaalne (TEP), mitte sporaadiline E, välja arvatud juhul, kui spotis on märgitud `<ES>`.
 - **144 MHz, autori (IC8TEM) reegel**: sporaadiline E 2 m sagedusalal algab **üle 900 km** (lühemad spotid jäetakse kõrvale). Üksikut 144 MHz spotti **eraldi ei kuvata**: see ilmub, kui **5 minuti** jooksul saabub teine 144 MHz spot, mille pilv on samas kohas (peegelduspunktid kuni 300 km kaugusel), või kui läheduses on **lühikese hüppega 50 MHz** spot (kuni 1200 km, viimase 15 minuti jooksul). Ülemine riba näitab, mitu 144 MHz spotti ootab kinnitust.
 - Iga spoti kohta: kaugus, **hüpete arv** **IK3XTV** tabeli järgi, elevatsioon, **minimaalne foEs** (sekansi seadus).
 - **Mõlema jaama esimene hüpe**: oranž ruut = spotteri esimene hüpe, lilla = DX-i esimene hüpe (võrdsed hüpped); kollane = ühe hüppe keskpunkt.
@@ -50,7 +50,7 @@ Sporaadiline E **ei kehti 432 MHz kohta**: Es-i MUF ulatub umbes 150-200 MHz-ni 
 
 ## Sageduse järgi värvitud ruudud ja vilkuv MUF
 
-Peegelduspunktide Maidenheadi ruudud värvitakse spottide kõrgeima sageduse järgi: **roheline** kuni 29 MHz, **kollane** kuni 51, **oranž** kuni 71, **punane** kuni 145 MHz. Ruudu foEs-ist hinnatakse tõenäoline MUF pikimal hüppel (2400 km, IK3XTV tabel): kui see ulatub kõrgemale sagedusalale, siis ruut **vilgub** selle sagedusala värviga (IK3XTV ja Jacobs-Leinwolli põhimõte: lühike skip tähendab kõrget MUF-i).
+Peegelduspunktide Maidenheadi ruudud värvitakse spottide kõrgeima sageduse järgi: **roheline** kuni 29 MHz, **kollane** kuni 51, **oranž** kuni 71, **punane** kuni 145 MHz. Ruudu foEs-ist hinnatakse tõenäoline MUF pikimal hüppel (2400 km, IK3XTV tabel): kui see ulatub kõrgemale sagedusalale, siis ruut **vilgub** selle sagedusala värviga (IK3XTV ja Jacobs-Leinwolli põhimõte: lühike skip tähendab kõrget MUF-i). 144 MHz puhul kehtib autori reegel: ruut vilgub punaselt ainult siis, kui pilv annab 50 MHz ühe hüppe 450 ja 500 km vahel (450 km 50 km tolerantsiga).
 
 Kaardi paremas ülanurgas kuvatakse N0NBH kokkuvõte (valitud kontinendi E-skip, SFI, K- ja A-indeks).
 

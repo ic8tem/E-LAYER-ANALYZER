@@ -21,7 +21,7 @@ Azimutālajos skatos raustītie gredzeni rāda **km no centra** (solis mainās l
 
 - Pēdējo minūšu (15 min - 12 h) **spotus** joslās **28, 40 (8 m, sākotnēji izslēgta), 50, 70 un 144 MHz**, ņemtus no telnet sesijām. Lokatori tiek ņemti no spota komentāra (piem. `JN70CN<ES>JO62QM`) vai no CALL3 arhīva.
 - Spoti ar **<MS>**, **<AU>** vai **<TR>** tekstā tiek **atmesti**: tie neattiecas uz sporādisko E, bet noder meteor scatter, aurorai vai tropo.
-- **Transekvatoriālie, autora likums (IC8TEM)**: virzienā uz Āfriku un Dienvidameriku, ja viduspunkts krīt magnētiskās inklinācijas joslā starp -15° un +15°, sakars ir transekvatoriāls (TEP), nevis sporādiskais E, ja vien spotā nav norādīts `<ES>`.
+- **Transekvatoriālie, autora likums (IC8TEM)**: virzienā uz Āfriku un Dienvidameriku, ja viduspunkts krīt magnētiskās inklinācijas joslā starp -15° un +15° (vērtība ņemta no Cracknell, UKSMG: TEP zonas aptuveni 5-15° no nulles inklinācijas līnijas), sakars ir transekvatoriāls (TEP), nevis sporādiskais E, ja vien spotā nav norādīts `<ES>`.
 - **144 MHz, autora likums (IC8TEM)**: sporādiskais E 2 m joslā sākas **virs 900 km** (īsāki spoti tiek atmesti). Viens 144 MHz spots **netiek zīmēts atsevišķi**: tas parādās, kad **5 minūšu** laikā pienāk otrs 144 MHz spots ar mākoni tajā pašā vietā (atstarošanas punkti 300 km robežās) vai kad tuvumā ir **īsa lēciena 50 MHz** spots (1200 km robežās, pēdējās 15 minūtēs). Josla augšā rāda, cik 144 MHz spotu gaida apstiprinājumu.
 - Katram spotam: attālums, **lēcienu skaits** pēc **IK3XTV** tabulas, elevācija, **minimālā foEs** (sekanses likums).
 - **Abu staciju pirmais lēciens**: oranžs kvadrāts = spotera pirmais lēciens, violets = DX pirmais lēciens (vienādi lēcieni); dzeltens = viena lēciena viduspunkts.
@@ -50,7 +50,7 @@ Sporādiskais E **neattiecas uz 432 MHz**: Es MUF sasniedz ap 150-200 MHz, un AR
 
 ## Kvadrāti, iekrāsoti pēc frekvences, un mirgojošā MUF
 
-Atstarošanas punktu Maidenhead kvadrātus iekrāso pēc spotu augstākās frekvences: **zaļš** līdz 29 MHz, **dzeltens** līdz 51, **oranžs** līdz 71, **sarkans** līdz 145 MHz. No kvadrāta foEs novērtē varbūtējo MUF garākajā lēcienā (2400 km, IK3XTV tabula): ja tā sasniedz augstāku joslu, kvadrāts **mirgo** šīs joslas krāsā (IK3XTV un Jacobs-Leinwoll princips: īss skip nozīmē augstu MUF).
+Atstarošanas punktu Maidenhead kvadrātus iekrāso pēc spotu augstākās frekvences: **zaļš** līdz 29 MHz, **dzeltens** līdz 51, **oranžs** līdz 71, **sarkans** līdz 145 MHz. No kvadrāta foEs novērtē varbūtējo MUF garākajā lēcienā (2400 km, IK3XTV tabula): ja tā sasniedz augstāku joslu, kvadrāts **mirgo** šīs joslas krāsā (IK3XTV un Jacobs-Leinwoll princips: īss skip nozīmē augstu MUF). 144 MHz joslai der autora noteikums: kvadrāts mirgo sarkanā krāsā tikai tad, ja mākonis dod vienu 50 MHz lēcienu no 450 līdz 500 km (450 km ar 50 km pielaidi).
 
 Kartes augšējā labajā stūrī parādās N0NBH kopsavilkums (izvēlētā kontinenta E-skip, SFI, K un A indeksi).
 
