@@ -218,7 +218,12 @@ namespace ELA
         // inclinazione magnetica tra -20° e +20° (equatore magnetico; carta dell'inclinazione WMM 2015 fornita
         // dall'autore, calcolo con IGRF-14), il collegamento non e' E-sporadico ma transequatoriale, salvo che lo
         // spot (o il PROP_MODE del log) dichiari esplicitamente ES.
-        public static double TepInclinationDeg = 20;
+        // fascia di inclinazione magnetica del punto medio: ±15° (scelta dell'autore del 14/11/2026, valore ripreso da Cracknell
+        // G2AHU/ZE2JV, che colloca le zone del TEP a circa 5-15° dalla linea di inclinazione zero; prima ±20°)
+        public static double TepInclinationDeg = 15;
+        // nube che puo' aprire i 144 MHz (regola dell'autore, 14/11/2026): spot Es in 50 MHz a singolo salto tra la distanza
+        // minima dell'E-sporadico (MinKm50, 450 km) e MinKm50 + Skip144TolKm (tolleranza di 50 km)
+        public static double Skip144TolKm = 50;
         public static bool UseTepRule = true;
 
         // Africa (con il Madagascar; senza Canarie, Madeira, Capo Verde e penisola arabica) e Sud America: riquadri geografici approssimati

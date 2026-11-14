@@ -83,7 +83,12 @@ namespace ELA
             EsModel.Ft8CloudMin = c.GetD("flt_es_ft8_minuti", 4);
             EsModel.Ft8CloudKm = c.GetD("flt_es_ft8_km", 150);
             EsModel.UseTepRule = c.GetB("flt_es_tep", true);
-            EsModel.TepInclinationDeg = c.GetD("flt_es_tep_gradi", 20);
+            EsModel.TepInclinationDeg = c.GetD("flt_es_tep_gradi", 15);
+            if (c.Get("flt_es_tep_v2", "") == "")   // una sola volta: il vecchio valore di partenza (20°) passa a 15° (regola dell'autore, 14/11/2026)
+            {
+                if (Math.Abs(EsModel.TepInclinationDeg - 20) < 0.01) EsModel.TepInclinationDeg = 15;
+                c.Set("flt_es_tep_v2", "1");
+            }
             SetFaiTags(c.Get("flt_fai_scritte", FaiTagsDefault));
             LoadBands(c.Get("flt_fai_bande", string.Join(" ", FaiBandNames)), FaiBands);
             FaiBands.Remove("70cm");
@@ -130,7 +135,7 @@ namespace ELA
             SetEsTags(EsTagsDefault);
             EsModel.MinKm50 = 450; Es50WindowNotExclusive = true;
             EsModel.Use144Rule = true; EsModel.MinKm144 = 900; EsModel.Confirm144Min = 5; EsModel.CloudMatchKm = 300;
-            EsModel.Near50Min = 15; EsModel.Short50Km = 1200; EsModel.UseTepRule = true; EsModel.TepInclinationDeg = 20;
+            EsModel.Near50Min = 15; EsModel.Short50Km = 1200; EsModel.UseTepRule = true; EsModel.TepInclinationDeg = 15;
             EsModel.MinKm70 = 450; EsModel.UseFt8CloudRule = true; EsModel.Ft8CloudMin = 4; EsModel.Ft8CloudKm = 150;
         }
         public static void ResetFai() { SetFaiTags(FaiTagsDefault); FaiBands.Clear(); FaiBands.UnionWith(FaiBandNames); FaiMinutes = 24 * 60; }

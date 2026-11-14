@@ -44,7 +44,7 @@ namespace ELA
         int short144, held144, tep, heldAtl;
         List<EsModel.EsTropo> esTropo = new List<EsModel.EsTropo>();   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
-        class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf, MaxMHz, MufMax; public int N; public List<string> Calls = new List<string>(); }
+        class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf, MaxMHz, MufMax; public int N; public bool Open144; public List<string> Calls = new List<string>(); }
 
         public EsTab()
         {
@@ -308,6 +308,8 @@ namespace ELA
                     c.N++;
                     if (kv.Value > c.FoEs) c.FoEs = kv.Value;
                     if (p.Spot.FreqMHz > c.MaxMHz) c.MaxMHz = p.Spot.FreqMHz;
+                    // regola dell'autore: salto singolo in 50 MHz tra 450 e 500 km = la nube puo' aprire i 144 MHz
+                    if (p.Hops == 1 && p.Spot.Band == "6m" && p.DistKm >= EsModel.MinKm50 && p.DistKm <= EsModel.MinKm50 + EsModel.Skip144TolKm) c.Open144 = true;
                     if (c.Calls.Count < 6) c.Calls.Add(p.Spot.Spotter + "-" + p.Spot.DxCall);
                 }
             }
@@ -395,8 +397,12 @@ namespace ELA
                 {
                     double la0 = Math.Floor(c.Lat), lo0 = Math.Floor(c.Lon / 2) * 2;
                     int kf = FreqClass(c.MaxMHz), km = FreqClass(c.MufMax);
+                    // i 144 MHz (classe 3) si segnalano solo con la regola dell'autore del salto corto in 50 MHz, non con la secante
+                    if (km >= 3 && !c.Open144) km = 2;
+                    if (c.Open144) km = 3;
                     MapCell mc = new MapCell { Lat0 = la0, Lon0 = lo0, DLat = 1, DLon = 2, Fill = FreqClassColor(kf, 150),
-                        Tip = Lang.F("{0}: spot fino a {1:F1} MHz, foEs ≥ {2:F1} MHz, MUF probabile fino a {3:F0} MHz", c.Sq, c.MaxMHz, c.FoEs, c.MufMax) };
+                        Tip = Lang.F("{0}: spot fino a {1:F1} MHz, foEs ≥ {2:F1} MHz, MUF probabile fino a {3:F0} MHz", c.Sq, c.MaxMHz, c.FoEs, c.MufMax)
+                          + (c.Open144 ? "\n" + Lang.F("Salto in 50 MHz tra {0:F0} e {1:F0} km: la nube può aprire i 144 MHz (regola dell'autore)", EsModel.MinKm50, EsModel.MinKm50 + EsModel.Skip144TolKm) : "") };
                     map.Cells.Add(mc);
                     if (km > kf) blink.Add(new KeyValuePair<MapCell, Color>(mc, FreqClassColor(km, 210)));   // lampeggia con il colore della banda raggiunta
                 }
@@ -469,7 +475,7 @@ namespace ELA
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto del DX (salti uguali)"), Pal.Violet));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("○ primo salto corto (ipotesi IC8TEM)"), Pal.Orange));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("cerchio verde: portata del singolo salto dalla mia stazione"), Pal.Green));
-            map.LegendTitle = Lang.T("Quadrati: spot fino a 29 / 51 / 71 / 145 MHz = verde, giallo, arancio, rosso; lampeggia se la MUF probabile raggiunge una banda più alta");
+            map.LegendTitle = Lang.T("Quadrati: spot fino a 29 / 51 / 71 / 145 MHz = verde, giallo, arancio, rosso; lampeggia se la MUF probabile raggiunge una banda più alta (rosso, 144 MHz: salto in 50 MHz tra 450 e 500 km)");
             map.InvalidateVisual();
         }
 
