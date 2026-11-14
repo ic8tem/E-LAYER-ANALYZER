@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.9 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.10 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -26,7 +26,7 @@ P|Saat dijalankan, selama beberapa detik muncul layar pembuka bergambar Perseid 
 H2|2.3 Folder data
 P|Semua pengaturan dan semua data berada dalam satu folder data di samping program: tanpa AppData, tanpa folder sistem. Untuk memindahkan YA-MS ke komputer lain cukup salin folder program beserta folder data-nya. Isi folder ini dijelaskan di bab 13.
 H2|2.4 Pembaruan otomatis
-P|Sejak versi 1.8.9 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
+P|Sejak versi 1.8.10 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
 P|Sejak versi 1.8.0, YA-MS memeriksa sendiri di GitHub, saat dijalankan dan paling banyak sekali sehari, apakah ada versi baru. Jika ada, muncul jendela "Pembaruan tersedia" berisi daftar perubahan dan tiga tombol:
 LI|Perbarui sekarang: mengunduh paket yang sesuai dengan sistem Anda, mengganti berkas program, mempertahankan folder data, lalu menjalankan ulang YA-MS. Berkas program di dalam folder data yang diubah oleh versi baru terlebih dahulu disalin ke data/backup/v<versi lama>; berkas Anda (pengaturan, arsip, spot, ADIF) tidak disentuh.
 LI|Nanti: menutup jendela; pemeriksaan diulang keesokan harinya.
@@ -179,6 +179,7 @@ LI|Rekonstruksi kronologis hari itu dan rincian beberapa detik berikutnya.
 TAG|PROCEDURA|Untuk mendengarkan GRAVES: USB pada 143,049 MHz (nada sekitar 1 kHz), AGC lambat atau mati, lebar pita audio minimal 2,4 kHz; antena ke arah hot spot yang disarankan pada kartu LINTASAN, dengan elevasi rendah; jam PC tersinkronisasi. Ping tampak sebagai garis pendek di dekat pembawa pada waterfall.
 H2|9.4 Pengumpulan data
 P|Mengumpulkan spot meteor scatter dari tiga aliran telnet (DX cluster, RBN, DM4X dengan spot PSKReporter) dan dari aliran MQTT PSKReporter, masing-masing di sub-tabnya sendiri, lalu menyaringnya.
+P|Seperti di LIVETROPOVHF: program mendengarkan pesan UDP dari program digital (di WSJT-X: Pengaturan, Reporting, UDP Server 127.0.0.1 port 2237) dan mengulanginya tanpa perubahan ke port penerusan untuk program lain (GridTracker, JTAlert, log). Setiap stasiun yang terdekode menjadi spot yang didengar stasiunmu; pesan penutup (RR73, 73, RRR) antara dua stasiun lain menjadi lintasan QSO mereka. Spot melewati filter yang sama dengan yang lain.
 LI|Tulis callsign Anda di bagian atas untuk login. Setiap aliran memiliki host, port, perintah setelah login, Sambung ulang, Sambung saat mulai, dan sebuah konsol.
 LI|Filter menerima spot pada frekuensi khas meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) atau dengan mode MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), dan menolak spot yang menyatakan propagasi lain. Jendela frekuensi dan kata-kata dapat diubah; masing-masing memiliki penghitungnya sendiri.
 LI|Spot CW langsung dibuang (CW atau WPM di komentar, atau 28000-28070 kHz): tidak muncul di konsol dan tidak disimpan, kecuali bertanda <MS>. Kotak ini dapat dimatikan.

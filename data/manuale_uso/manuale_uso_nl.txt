@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Versie 1.8.9 - door Costantino IC8TEM - november 2026
+SUB|Versie 1.8.10 - door Costantino IC8TEM - november 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor dient YA-MS
 P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
@@ -26,7 +26,7 @@ P|Bij het opstarten verschijnt enkele seconden het startscherm met de Perseïden
 H2|2.3 De map data
 P|Alle instellingen en alle gegevens staan in één map data naast het programma: geen AppData, geen systeemmappen. Om YA-MS naar een andere computer te verplaatsen kopieer je gewoon de programmamap met de map data erin. De inhoud van de map wordt beschreven in hoofdstuk 13.
 H2|2.4 Automatische updates
-P|Vanaf versie 1.8.9 zijn updates automatisch en stil: bij het starten en daarna elke 6 uur controleert YA-MS GitHub en, als er een nieuwe versie is, downloadt en installeert die en herstart vanzelf zonder iets te vragen (alleen de statusbalk meldt het). Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het hieronder beschreven venster verschijnt alleen als je op "Updates" drukt of als je aggiornamenti_automatici=0 in het bestand data/config.ini schrijft.
+P|Vanaf versie 1.8.10 zijn updates automatisch en stil: bij het starten en daarna elke 6 uur controleert YA-MS GitHub en, als er een nieuwe versie is, downloadt en installeert die en herstart vanzelf zonder iets te vragen (alleen de statusbalk meldt het). Ontbrekende bestanden worden ook zonder vragen opnieuw gedownload. Het hieronder beschreven venster verschijnt alleen als je op "Updates" drukt of als je aggiornamenti_automatici=0 in het bestand data/config.ini schrijft.
 P|Vanaf versie 1.8.0 controleert YA-MS zelf op GitHub, bij het opstarten en hooguit eenmaal per dag, of er een nieuwe versie is verschenen. Als dat zo is, verschijnt het venster "Update beschikbaar" met de nieuwigheden en drie knoppen:
 LI|Nu bijwerken: downloadt het pakket dat bij jouw systeem past, vervangt de programmabestanden, behoudt de map data en start YA-MS opnieuw. Programmabestanden in de map data die de nieuwe versie wijzigt, worden eerst gekopieerd naar data/backup/v<oude versie>; jouw eigen bestanden (instellingen, archieven, spots, ADIF) worden niet aangeraakt.
 LI|Later: sluit het venster; de controle wordt de volgende dag herhaald.
@@ -179,6 +179,7 @@ LI|De chronologische reconstructie van de dag en het detail van de komende secon
 TAG|PROCEDURA|Om GRAVES te beluisteren: USB op 143,049 MHz (toon op ongeveer 1 kHz), AGC langzaam of uit, audiobandbreedte van minstens 2,4 kHz; antenne naar de aanbevolen hotspot van de kaart TRAJECT, met lage elevatie; pc-klok gesynchroniseerd. De pings zijn korte lijnen dicht bij de draaggolf in de waterval.
 H2|9.4 Gegevensverzameling
 P|Verzamelt de meteorscatter-spots uit drie telnetstromen (DX-cluster, RBN, DM4X met de spots van PSKReporter) en uit de MQTT-stroom van PSKReporter, elk in een eigen subtabblad, en filtert ze.
+P|Zoals in LIVETROPOVHF: het programma luistert naar de UDP-berichten van het digitale programma (in WSJT-X: Instellingen, Reporting, UDP Server 127.0.0.1 poort 2237) en herhaalt ze ongewijzigd op de doorstuurpoort voor de andere programma's (GridTracker, JTAlert, log). Elk gedecodeerd station wordt een spot gehoord door jouw station; afsluitberichten (RR73, 73, RRR) tussen twee andere stations worden het traject van hun QSO. De spots gaan door dezelfde filters als de andere.
 LI|Vul bovenaan je roepnaam in voor het inloggen. Elke stroom heeft host, poort, commando's na het inloggen, Opnieuw verbinden, Verbinden bij opstarten en een console.
 LI|Het filter accepteert de spots op de typische meteorscatter-frequenties (50190-50300, 70100-70400, 144290-144399 kHz) of met een MS-mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerpt de spots die een andere propagatie vermelden. Vensters en woorden kunnen worden aangepast; elk heeft een eigen teller.
 LI|CW-spots worden meteen weggegooid (CW of WPM in het commentaar, of 28000-28070 kHz): ze verschijnen niet in de console en worden niet opgeslagen, tenzij ze met <MS> gemarkeerd zijn. Het vakje kan uit.

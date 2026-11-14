@@ -24,7 +24,7 @@ namespace YAMS
         public DateTime Utc;
         public double FreqKHz;
         public string DxCall = "", Spotter = "", Comment = "", Line = "";
-        public int Source;                 // 0 = cluster, 1 = RBN, 2 = PSKReporter (cluster DM4X), 3 = PSKReporter MQTT
+        public int Source;                 // 0 = cluster, 1 = RBN, 2 = PSKReporter (cluster DM4X), 3 = PSKReporter MQTT, 4 = WSJT-X UDP
         public string Match = "";          // parola del filtro trovata (MSK144, <MS>, ...)
         public string Mode = "";           // modo dichiarato dalla fonte (PSKReporter MQTT: MSK144, FSK441...)
         public string LocSpotter = "", LocDx = "";
@@ -83,7 +83,7 @@ namespace YAMS
 
     public static class MsCollector
     {
-        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter", "PSKR MQTT" };
+        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter", "PSKR MQTT", "WSJT-X UDP" };
         public static readonly string[] BuiltInWords = { "MSK144", "FSK441", "FSK41", "PSK2K", "JTMS", "JT6M", "<MS>" };   // FSK41: grafia abbreviata di FSK441 indicata dall'autore
 
         // valori di partenza delle tre sessioni: nome, host, porta, comandi iniziali, nota
@@ -100,8 +100,8 @@ namespace YAMS
         public static readonly List<MsSpot> Spots = new List<MsSpot>();          // accettati (ultimi 5000)
         public static readonly List<MsFilterWord> Words = new List<MsFilterWord>();
         public static readonly HashSet<string> Bands = new HashSet<string>(MsBands.Names);
-        public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>() };
-        public static int[] Lines = new int[4], Parsed = new int[4], Accepted = new int[4];
+        public static readonly Queue<string>[] ConsoleLines = { new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>(), new Queue<string>() };
+        public static int[] Lines = new int[5], Parsed = new int[5], Accepted = new int[5];
         public static int RejectedNoWord, RejectedBand, DroppedLow, DroppedCw, DroppedNear;
         // regola dell'autore (IC8TEM, 13/11/2026): gli spot CW si scartano subito, come quelli sotto 27990 kHz (non vanno nella
         // console e non si memorizzano). CW = parola CW o WPM nel commento (formato RBN "CW 12 dB 25 WPM"), oppure
@@ -261,6 +261,8 @@ namespace YAMS
                     Sessions[i].StateChanged += st => { StateText[k] = st; };
                 }
                 PskMqtt.SpotReceived += (sp, line) => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
+                // decodifiche di WSJT-X / JTDX / MSHV via UDP (fonte 4): un solo ricevitore per tutto il programma
+                WsjtxUdp.SpotDecoded += sp => { lock (lk) { pendingSpots.Enqueue(sp); while (pendingSpots.Count > 20000) pendingSpots.Dequeue(); } };
                 LoadWords(cfg);
                 DropLow = cfg.GetB("rd_scarta_sotto_28", true);
                 DropCw = cfg.GetB("rd_scarta_cw", true);
@@ -272,6 +274,8 @@ namespace YAMS
                 string b = cfg.Get("rd_bande", "");
                 if (b.Length > 0) { Bands.Clear(); foreach (string x in b.Split(',')) if (x.Trim().Length > 0) Bands.Add(x.Trim()); }
                 LoadRecent();
+                WsjtxUdp.Load(cfg);
+                if (WsjtxUdp.AutoStart && !WsjtxUdp.Running) WsjtxUdp.Start();
             }
         }
 
@@ -306,9 +310,10 @@ namespace YAMS
             cfg.Set("rd_finestre_attive", UseWindows);
             cfg.Set("rd_finestre", WindowsText);
             cfg.Set("rd_altre_propagazioni", OtherTagsText);
+            WsjtxUdp.Save(cfg);
         }
 
-        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); }
+        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); }
 
         // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
@@ -348,18 +353,19 @@ namespace YAMS
                 Parsed[i]++;
                 if (Accept(s, i)) added = true;
             }
-            // spot di PSKReporter via MQTT: arrivano gia' letti (fonte 3), passano dallo stesso filtro
+            // spot di PSKReporter via MQTT (fonte 3) e di WSJT-X via UDP (fonte 4): arrivano gia' letti, passano dallo stesso filtro
             foreach (MsSpot s in gotSpots)
             {
-                Lines[3]++;
+                int k = s.Source == 4 ? 4 : 3;
+                Lines[k]++;
                 if (DropLow && s.FreqKHz < MinKHz) { DroppedLow++; continue; }
                 if (DropCw && IsCw(s)) { DroppedCw++; continue; }
                 NoteListener(s);   // chi ascolta resta sulla mappa anche se lo spot e' vicino
                 if (DropNear && IsNear(s)) { DroppedNear++; continue; }
-                ConsoleLines[3].Enqueue(s.Line);
-                while (ConsoleLines[3].Count > 200) ConsoleLines[3].Dequeue();
-                Parsed[3]++;
-                if (Accept(s, 3)) added = true;
+                ConsoleLines[k].Enqueue(s.Line);
+                while (ConsoleLines[k].Count > 200) ConsoleLines[k].Dequeue();
+                Parsed[k]++;
+                if (Accept(s, k)) added = true;
             }
             return added;
         }

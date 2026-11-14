@@ -1,5 +1,5 @@
 TITLE|Notendahandbók E-LAYER ANALYZER
-SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.4.15, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
+SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.4.16, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
 H1|1. Áður en hafist er handa
 H2|1.1 Hvað forritið gerir
 P|E-LAYER ANALYZER sameinar í einu forriti verkfærin til að rannsaka þær útbreiðsluaðferðir á VHF sem fara um E-lag jónhvolfsins: sporadic-E, einnig fjölstökk og milli heimsálfa, F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter, með innbyggða forritinu YA-MS, og radíónorðurljós. Það vinnur með spot frá DX-klösum í rauntíma og með ADIF-dagbækur, og sýnir hverja niðurstöðu á korti sem tekur tvo þriðju gluggans, með gögnum og útreikningum í hægri þriðjungnum.
@@ -53,6 +53,7 @@ H2|2.4 Söfnuð spot og CALL3-safnið
 P|Síðan Söfnuð spot sýnir nýjustu spotin með síu eftir tíðnisviði og uppruna; hnappurinn Opna möppu spotanna opnar data/spot. Síðan CALL3 sýnir safnið kallmerki -> locator (JTDX/WSJT-snið): þar má leita að kallmerki, endurhlaða safninu eða flytja inn nýja CALL3.TXT-skrá, sem kemur í stað þeirrar sem er í notkun (sú gamla er geymd sem öryggisafrit).
 LI|Dálkar safnaðra spota eru: UTC, Lind (cluster, RBN eða PSKReporter), MHz, Tíðnisvið, DX með locator sínum, Spotter með locator sínum, km, Prop (útbreiðsluháttur, uppgefinn eða greindur) og Athugasemd. Valmyndin Allar lindir takmarkar töfluna við eina lotu.
 LI|Síðan CALL3 sýnir skrána í notkun, dagsetningu hennar, hausinn og fjölda hlaðinna kallmerkja (meira en milljón með safninu sem fylgir forritinu).
+LI|Frá útgáfu 0.4.16 er einn CALL3-gagnagrunnur fyrir allt forritið, sá úr Gagnasöfnun YA-MS (flipinn METEOR SCATTER), með sömu reglum og LIVETROPOVHF: uppfærsla frá MMMonVHF, handskráningar, viðbættar skrár, leiðréttingar úr klasa, lærðir reitir og G7VRD á 6 klukkustunda fresti; leiðréttingar eru skrifaðar í data/call3.txt og reitirnir úr data/call3_nuovi.txt fluttir inn einu sinni. Spott frá WSJT-X, JTDX og MSHV koma líka um UDP (heimild WSJT-X UDP, gátt 2237 framsend á 2238).
 H2|2.5 Útbreiðslugögn
 P|Undirflipinn Útbreiðslugögn safnar gögnum sem hjálpa til við að meta hvort tíðnisvið geti opnast. Þau uppfærast sjálfkrafa í mesta lagi einu sinni á klukkustund; hnappurinn Uppfæra núna sækir þau strax.
 LI|N0NBH (hamqsl.com): borði VHF-skilyrða og sólargögnin (sólflæði, A- og K-stuðlar, röntgengeislar, sólvindur, Bz, norðurljós og norðurljósabreidd) með E-skip fyrir Evrópu og Norður-Ameríku (DXrobot-gögn).

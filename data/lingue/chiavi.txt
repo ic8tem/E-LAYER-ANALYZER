@@ -58,11 +58,14 @@ Apri la pagina delle release
 Argomenti di partenza
 Arietidi di maggio Sud diurne
 Arietidi diurne
+Ascolta
 Assi del flusso non trovati nella posizione attesa.
 Attenuazione {0:F1} dB -> segnale in antenna {1:F1} dBm, minimo ricevibile {2:F0} dBm, margine {3:+0.0;-0.0} dB
 Attività
 Attuazione sperimentale previsioni
 Aurigidi
+Avvia
+Avvia all'apertura
 Azimut
 BILANCIO A {0:F0} MHz (punto medio)
 Banda MHz
@@ -110,6 +113,7 @@ Comandi
 Come DJ5HG
 Come cambia la durata dei ping da una banda all'altra.\nTeorica (prudente, di partenza): durata proporzionale a λ² (McKinley 1961; regola di SM6FHZ): da 50 a 144 MHz i ping si accorciano di 8 volte.\nOsservata: mediane misurate da NN4SA (EM64) durante le Perseidi 2026 nel MSQP di HamSCI (R. Suggs NN4NT): 148 ms a 28 MHz, 78 ms a 50 MHz, 53 ms a 144 MHz; da 50 a 144 MHz i ping si accorciano solo di 1,5 volte. Una sola stazione ricevente, analisi preliminare; sopra 144 MHz non ci sono misure e si usa λ².
 Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.
+Come in LIVETROPOVHF: il programma ascolta i messaggi UDP del programma digitale (in WSJT-X: Impostazioni, Reporting, UDP Server 127.0.0.1 porta 2237) e li ripete identici sulla porta di inoltro per gli altri programmi (GridTracker, JTAlert, log). Ogni stazione decodificata diventa uno spot sentito dalla tua stazione; i messaggi di chiusura (RR73, 73, RRR) tra due altre stazioni diventano la tratta del loro QSO. Gli spot passano dagli stessi filtri degli altri.
 Commento
 Con l'attenuazione media di OH5IY (200 dB a 144 MHz, scalata con λ³: {0:F1} dB a {1:F0} MHz) il margine sarebbe {2:+0.0;-0.0} dB
 Connessione a {0}...
@@ -182,6 +186,7 @@ FONTE
 FONTE PRINCIPALE
 FONTI
 Fattore di stazione K
+Ferma
 File ADIF
 File ADIF del log
 File RMOB
@@ -251,6 +256,7 @@ Indice tratta (ZHR×eff.)
 Indirizzo mancante
 Ingolf SM6FHZ - "432 MHz Meteorscatter, Challenges and Techniques", 45th Nordic VUSHF, maggio 2025 (regole lambda^3 e lambda^2, punto medio, direzione migliore)
 Ingolf SM6FHZ - RadiantCalc (grafico polare con la direzione migliore)
+Inoltra i pacchetti a
 Installazione dell'aggiornamento...
 International Meteor Organization - Meteor Shower Calendar 2026, www.imo.net (tabelle 5, 6 e 7)
 Invia
@@ -541,6 +547,7 @@ Verso l'hot spot consigliato della tratta GRAVES → te (riquadro Tratta), con b
 Vista dall'alto (E a destra)
 Voci a mano
 Voci a mano...
+WSJT-X / JTDX / MSHV via UDP
 Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)
 YA-MS - nessuna connessione
@@ -606,6 +613,7 @@ escluso
 eta-Aquaridi
 eta-Eridanidi
 eta-Liridi
+fermo
 finestra {0} kHz
 fuori dal lobo
 gamma-Draconidi di luglio
@@ -613,6 +621,7 @@ gamma-Ursae Minoridi
 gradi
 hot spot (solo sporadiche) {0}
 il giorno scelto non è oggi
+in ascolto su {0}:{1}
 indice
 indice sciami tratta (scala a destra)
 indice tratta
@@ -660,6 +669,7 @@ nessuno sciame utile adesso: hot spot più adatto al fascio
 nessuno sciame utile in questo giorno
 nessuno sciame utile in questo momento
 nominativo
+non in ascolto: {0}
 nuova parola
 nuovo dato
 nuovo dato alle {0} UTC
@@ -671,6 +681,7 @@ orizzonte del fascio
 orologio del PC sincronizzato
 osservata (HamSCI MSQP, NN4SA 2026)
 osservatori RMOB che ascoltano GRAVES
+pacchetti {0}, decodifiche {1}, QSO {2}, MS {3}
 parola aggiunta
 passi
 passo {0}{1} ogni {2:F1} s · alle {3} ...\nscia colta ≈ {4:F0} % = ({5:F1} + {6:F1}) / {2:F1}

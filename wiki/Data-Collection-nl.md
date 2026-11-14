@@ -23,3 +23,5 @@ De laatste 2000 spots, met filters op band en bron. Archief: één CSV-bestand p
 ## CALL3
 
 JTDX-database **roepnaam → locator** (ruim een miljoen roepnamen) in `data/call3.txt`. Knoppen **Herladen** en **Nieuw CALL3.TXT importeren**. Locators van 6 tekens die in het commentaar van spots worden gelezen, worden toegevoegd aan `data/call3_nuovi.txt`.
+
+Vanaf versie 0.4.16 is er één CALL3-database voor het hele programma, die van de Gegevensverzameling van YA-MS (tabblad METEOR SCATTER), met dezelfde regels als LIVETROPOVHF: bijwerken vanaf MMMonVHF, handmatige invoer, toegevoegde bestanden, clustercorrecties, geleerde locators en G7VRD elke 6 uur; correcties worden in data/call3.txt geschreven en de locators uit data/call3_nuovi.txt worden één keer overgenomen. Spots van WSJT-X, JTDX en MSHV komen ook via UDP binnen (bron WSJT-X UDP, poort 2237 doorgestuurd naar 2238).

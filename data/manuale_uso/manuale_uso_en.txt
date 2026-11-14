@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.9 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.10 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -26,7 +26,7 @@ P|At startup the splash screen with the Perseids above ESO's VLT appears for a f
 H2|2.3 The data folder
 P|All settings and all data are in a single data folder next to the program: no AppData, no system folders. To move YA-MS to another computer, just copy the program folder together with its data folder. The contents of the folder are described in chapter 13.
 H2|2.4 Automatic updates
-P|From version 1.8.9 updates are automatic and silent: at start-up and then every 6 hours YA-MS checks GitHub and, if there is a new version, downloads it, installs it and restarts by itself without asking anything (only the status bar says so). Missing files are also downloaded again without asking. The window described below appears only when you press "Updates" or if you write aggiornamenti_automatici=0 in the file data/config.ini.
+P|From version 1.8.10 updates are automatic and silent: at start-up and then every 6 hours YA-MS checks GitHub and, if there is a new version, downloads it, installs it and restarts by itself without asking anything (only the status bar says so). Missing files are also downloaded again without asking. The window described below appears only when you press "Updates" or if you write aggiornamenti_automatici=0 in the file data/config.ini.
 P|Since version 1.8.0 YA-MS checks GitHub by itself, at startup and at most once a day, for a new version. If there is one, the "Update available" window appears with the release notes and three buttons:
 LI|Update now: downloads the package suited to your system, replaces the program files, keeps the data folder and restarts YA-MS. Program files in the data folder that the new version changes are first copied to data/backup/v<old version>; your own files (settings, archives, spots, ADIF) are not touched.
 LI|Later: closes the window; the check is repeated the next day.
@@ -179,6 +179,7 @@ LI|The chronological reconstruction of the day and the details of the next few s
 TAG|PROCEDURA|To listen to GRAVES: USB on 143.049 MHz (tone at about 1 kHz), AGC slow or off, audio bandwidth of at least 2.4 kHz; antenna towards the recommended hot spot of the PATH card, at low elevation; PC clock synchronised. The pings are short lines near the carrier in the waterfall.
 H2|9.4 Data collection
 P|It collects meteor scatter spots from three telnet feeds (DX cluster, RBN, DM4X with the PSKReporter spots) and from the PSKReporter MQTT feed, each in its own sub-tab, and filters them.
+P|As in LIVETROPOVHF: the program listens to the UDP messages of the digital-mode program (in WSJT-X: Settings, Reporting, UDP Server 127.0.0.1 port 2237) and repeats them unchanged on the forwarding port for the other programs (GridTracker, JTAlert, log). Every decoded station becomes a spot heard by your station; closing messages (RR73, 73, RRR) between two other stations become the path of their QSO. The spots go through the same filters as the others.
 LI|Enter your callsign for the login at the top. Each feed has host, port, commands after login, Reconnect, Connect at startup and a console.
 LI|The filter accepts spots on the typical meteor scatter frequencies (50190-50300, 70100-70400, 144290-144399 kHz) or with an MS mode (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), and discards those that declare another propagation mode. Windows and words can be edited; each has its own counter.
 LI|CW spots are discarded straight away (CW or WPM in the comment, or 28000-28070 kHz): they do not appear in the console and are not stored, unless they are marked <MS>. The box can be switched off.

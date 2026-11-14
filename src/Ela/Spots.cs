@@ -13,7 +13,7 @@ namespace ELA
         public DateTime Utc;          // ora dello spot (dal cluster) o di ricezione
         public double FreqKHz;
         public string DxCall = "", Spotter = "", Comment = "";
-        public int Source;            // 0 = cluster a scelta, 1 = RBN, 2 = cluster con PSKReporter, 9 = prova
+        public int Source;            // 0 = cluster a scelta, 1 = RBN, 2 = cluster con PSKReporter, 3 = WSJT-X UDP, 9 = prova
         public string Prop = "";      // modo di propagazione dichiarato: ES, FAI, AU, MS, TR, EME, F2, TEP
         public string LocSpotter = "", LocDx = "";
         public bool LocFromComment;   // due locator letti nel commento nella forma LOC<modo>LOC (si imparano per CALL3)
@@ -195,7 +195,7 @@ namespace ELA
         public static string Dir;
         public static event Action<Spot> Added;
         public static bool SaveToDisk = true;
-        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter" };
+        public static readonly string[] SourceNames = { "Cluster", "RBN", "PSKReporter", "WSJT-X UDP" };
 
         public static void Init(string dataDir)
         {
@@ -234,7 +234,7 @@ namespace ELA
                   .Append(s.LocDx).Append(';').Append(s.LocSpotter).Append(';')
                   .Append(s.Prop).Append(';').Append(s.DigiMode).Append(';')
                   .Append(double.IsNaN(s.Snr) ? "" : s.Snr.ToString("F0", CultureInfo.InvariantCulture)).Append(';')
-                  .Append(SourceNames[Math.Max(0, Math.Min(2, s.Source))]).Append(';')
+                  .Append(SourceNames[Math.Max(0, Math.Min(3, s.Source))]).Append(';')
                   .Append((s.Comment ?? "").Replace(';', ',')).AppendLine();
                 File.AppendAllText(f, sb.ToString());
             }

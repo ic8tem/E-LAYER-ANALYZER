@@ -1,5 +1,5 @@
 TITLE|Az E-LAYER ANALYZER felhasználói kézikönyve
-SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.4.15-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
+SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.4.16-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
 H1|1. Mielőtt elkezdené
 H2|1.1 Mit csinál a program
 P|Az E-LAYER ANALYZER egyetlen programban egyesíti az ionoszféra E-rétegén áthaladó VHF terjedési módok vizsgálatának eszközeit: sporadikus E, a többugrásos és a kontinensen kívüli terjedést is beleértve, F.A.I. (field-aligned irregularities, az erővonalak mentén rendeződött irregularitások), meteor scatter az integrált YA-MS programmal, valamint rádióaurora. Valós idejű DX cluster spotokkal és ADIF-naplókkal dolgozik, és minden eredményt az ablak kétharmadát elfoglaló térképen mutat, az adatokkal és számításokkal a jobb oldali harmadban.
@@ -53,6 +53,7 @@ H2|2.4 Gyűjtött spotok és CALL3-adatbázis
 P|A Gyűjtött spotok oldal a legutóbbi spotokat listázza sáv és forrás szerinti szűrővel; A spotmappa megnyitása gomb a data/spot mappát nyitja meg. A CALL3 oldal a hívójel -> lokátor adatbázist mutatja (JTDX/WSJT formátum): kereshet egy hívójelre, újratöltheti az adatbázist, vagy importálhat egy új CALL3.TXT fájlt, amely a használatban lévőt váltja fel (a régit biztonsági másolatként megőrzi).
 LI|A gyűjtött spotok oszlopai: UTC, Forrás (cluster, RBN vagy PSKReporter), MHz, Sáv, DX a lokátorával, Spotter a lokátorával, km, Prop (a bejelentett vagy felismert terjedési mód) és Megjegyzés. A Minden forrás menü a táblázatot egyetlen munkamenetre szűkíti.
 LI|A CALL3 oldal megadja a használt fájlt, annak dátumát, fejlécét és a betöltött hívójelek számát (a terjesztett archívummal több mint egymillió).
+LI|A 0.4.16-os verziótól az egész programnak egyetlen CALL3 adatbázisa van, a YA-MS Adatgyűjtéséé (METEOR SCATTER fül), a LIVETROPOVHF szabályaival: frissítés az MMMonVHF-ről, kézi bejegyzések, hozzáadott fájlok, klaszterjavítások, tanult lokátorok és G7VRD 6 óránként; a javítások a data/call3.txt fájlba íródnak, a data/call3_nuovi.txt lokátorai egyszer átkerülnek. A WSJT-X, JTDX és MSHV spotjai UDP-n is érkeznek (forrás: WSJT-X UDP, 2237-es port, továbbítás a 2238-ra).
 H2|2.5 Terjedési adatok
 P|A Terjedési adatok allap azokat az adatokat gyűjti össze, amelyek segítenek megérteni, kinyithat-e egy sáv. Legfeljebb óránként egyszer maguktól frissülnek; a Frissítés most gomb azonnal letölti őket.
 LI|N0NBH (hamqsl.com): a VHF-viszonyok bannere és a napadatok (napfluxus, A- és K-index, röntgensugárzás, napszél, Bz, aurora és aurora-szélesség) az E-skip adatokkal Európára és Észak-Amerikára (DXrobot-adatok).

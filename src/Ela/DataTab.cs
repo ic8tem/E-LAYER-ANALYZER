@@ -70,7 +70,7 @@ namespace ELA
 
             // --- spot raccolti
             cmbBand = Ui.Combo(new[] { Lang.T("Tutte"), "10m", "8m", "6m", "4m", "2m", "70cm", "HF" }, 0);
-            cmbSrc = Ui.Combo(new[] { Lang.T("Tutte le fonti"), "Cluster", "RBN", "PSKReporter" }, 0, 120);
+            cmbSrc = Ui.Combo(new[] { Lang.T("Tutte le fonti"), "Cluster", "RBN", "PSKReporter", "WSJT-X UDP" }, 0, 120);
             cmbBand.SelectionChanged += (s, e) => { dirty = true; FillAll(); };
             cmbSrc.SelectionChanged += (s, e) => { dirty = true; FillAll(); };
             lblCount = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0) };
@@ -121,12 +121,41 @@ namespace ELA
             CallDb.Loaded += () => Dispatcher.UIThread.Post(UpdateCall3);
             UpdateCall3();
             DispatcherTimer t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            if (!udpHooked)   // un solo ricevitore UDP per tutto il programma (nucleo di YA-MS): qui gli spot vanno all'archivio di E-LAYER
+            {
+                udpHooked = true;
+                YAMS.WsjtxUdp.SpotDecoded += sp => { lock (udpQ) { udpQ.Enqueue(sp); while (udpQ.Count > 5000) udpQ.Dequeue(); } };
+            }
             t.Tick += (s, e) =>
             {
                 foreach (SessionPanel p in sessions) p.FlushConsole();
+                if (FlushUdp()) dirty = true;
                 if (dirty && Root.IsEffectivelyVisible) FillAll();
             };
             t.Start();
+        }
+
+        // ---------------- spot di WSJT-X / JTDX / MSHV via UDP (fonte 3 dell'archivio di E-LAYER)
+        static bool udpHooked;
+        static readonly Queue<YAMS.MsSpot> udpQ = new Queue<YAMS.MsSpot>();
+
+        static bool FlushUdp()
+        {
+            List<YAMS.MsSpot> got = new List<YAMS.MsSpot>();
+            lock (udpQ) { while (udpQ.Count > 0) got.Add(udpQ.Dequeue()); }
+            bool any = false;
+            foreach (YAMS.MsSpot m in got)
+            {
+                if (VhfOnly && (m.FreqKHz < MinKHz || m.FreqKHz > MaxKHz)) continue;
+                Spot s = new Spot
+                {
+                    Utc = m.Utc, FreqKHz = m.FreqKHz, DxCall = m.DxCall, Spotter = m.Spotter, Comment = m.Comment, Source = 3,
+                    LocDx = m.LocDx ?? "", LocSpotter = m.LocSpotter ?? "", DigiMode = m.Mode ?? ""
+                };
+                SpotParser.Locate(s);
+                if (SpotStore.Add(s)) any = true;
+            }
+            return any;
         }
 
         // ---------------- colonna dei filtri (40 %)
@@ -488,7 +517,7 @@ namespace ELA
                 n++;
                 tAll.Rows.Add(new TableRow
                 {
-                    Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.Source == 9 ? Lang.T("prova") : SpotStore.SourceNames[Math.Max(0, Math.Min(2, s.Source))],
+                    Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.Source == 9 ? Lang.T("prova") : SpotStore.SourceNames[Math.Max(0, Math.Min(3, s.Source))],
                         s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), s.Band, s.DxCall, s.LocDx, s.Spotter, s.LocSpotter, Geo.Fmt(s.DistanceKm, 0), s.Prop, s.Comment },
                     Fore = EsTab.BandColor(s.Band)
                 });

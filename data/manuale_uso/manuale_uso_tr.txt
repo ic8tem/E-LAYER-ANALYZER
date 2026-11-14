@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.9 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.10 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -26,7 +26,7 @@ P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i g�
 H2|2.3 data klasörü
 P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
 H2|2.4 Otomatik güncellemeler
-P|1.8.9 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
+P|1.8.10 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
 P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
 LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
 LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
@@ -179,6 +179,7 @@ LI|Günün kronolojik yeniden yapılandırması ve sonraki saniyelerin ayrıntı
 TAG|PROCEDURA|GRAVES'i dinlemek için: 143,049 MHz'de USB (yaklaşık 1 kHz ton), yavaş veya kapalı AGC, en az 2,4 kHz ses bant genişliği; anten, YOL kartındaki önerilen hot spot'a doğru, düşük elevasyonda; PC saati senkronize. Pingler, waterfall'da taşıyıcının yanında kısa çizgilerdir.
 H2|9.4 Veri toplama
 P|Meteor scatter spot'larını üç telnet akışından (DX cluster, RBN, PSKReporter spot'larıyla DM4X) ve PSKReporter'ın MQTT akışından, her birini kendi alt sekmesinde toplar ve filtreler.
+P|LIVETROPOVHF'teki gibi: program dijital programın UDP mesajlarını dinler (WSJT-X'te: Ayarlar, Reporting, UDP Server 127.0.0.1 port 2237) ve bunları diğer programlar için (GridTracker, JTAlert, log) yönlendirme portunda aynen tekrarlar. Çözülen her istasyon, istasyonunun duyduğu bir spot olur; iki başka istasyon arasındaki kapanış mesajları (RR73, 73, RRR) onların QSO hattı olur. Spotlar diğerleriyle aynı filtrelerden geçer.
 LI|Oturum için çağrı işaretinizi en üste yazın. Her akışın host'u, portu, oturum açtıktan sonraki komutları, Yeniden bağlan, Açılışta bağlan seçenekleri ve bir konsolu vardır.
 LI|Filtre, meteor scatter'a özgü frekanslardaki (50190-50300, 70100-70400, 144290-144399 kHz) veya bir MS moduna sahip (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) spot'ları kabul eder ve başka bir yayılım bildirenleri reddeder. Pencereler ve sözcükler değiştirilebilir; her birinin kendi sayacı vardır.
 LI|CW spotları hemen atılır (yorumda CW veya WPM, ya da 28000-28070 kHz): <MS> ile işaretlenmedikçe konsolda görünmez ve kaydedilmez. Kutu kapatılabilir.

@@ -21,7 +21,7 @@ namespace ELA
     public class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.4.15";
+        public const string Version = "0.4.16";
 
         readonly PillTabs tabs = new PillTabs(true);
         TextBlock lblNtp, lblUpd;

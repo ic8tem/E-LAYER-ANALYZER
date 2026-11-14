@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER kullanım kılavuzu
-SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.4.15, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
+SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.4.16, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
 H1|1. Başlamadan önce
 H2|1.1 Program ne yapar
 P|E-LAYER ANALYZER, iyonosferin E katmanından geçen VHF yayılım modlarını incelemek için gereken araçları tek bir programda toplar: çok atlamalı ve kıtalararası olanlar dahil sporadik E, F.A.I. (manyetik alana hizalı düzensizlikler), entegre YA-MS programıyla meteor scatter ve radyo aurorası. Gerçek zamanlı DX cluster spot'ları ve ADIF logları üzerinde çalışır ve her sonucu pencerenin üçte ikisini kaplayan bir haritada gösterir; veriler ve hesaplar sağdaki üçte birlik bölümdedir.
@@ -53,6 +53,7 @@ H2|2.4 Toplanan spot'lar ve CALL3 arşivi
 P|Toplanan spot'lar sayfası son spot'ları bant ve kaynak filtresiyle listeler; Spot klasörünü aç düğmesi data/spot klasörünü açar. CALL3 sayfası çağrı işareti -> lokatör arşivini (JTDX/WSJT biçimi) gösterir: bir çağrı işareti aranabilir, arşiv yeniden yüklenebilir ya da kullanılanın yerine geçen yeni bir CALL3.TXT dosyası içe aktarılabilir (eskisi yedek kopya olarak kalır).
 LI|Toplanan spot'ların sütunları şunlardır: UTC, Kaynak (cluster, RBN ya da PSKReporter), MHz, Bant, lokatörüyle DX, lokatörüyle Spotter, km, Prop (bildirilen ya da tanınan yayılım modu) ve Yorum. Tüm kaynaklar menüsü tabloyu tek bir oturumla sınırlar.
 LI|CALL3 sayfası kullanılan dosyayı, tarihini, başlığını ve yüklenen çağrı işaretlerinin sayısını verir (dağıtılan arşivle bir milyondan fazla).
+LI|0.4.16 sürümünden itibaren tüm program için tek bir CALL3 veritabanı vardır: YA-MS Veri toplama'nınki (METEOR SCATTER sekmesi), LIVETROPOVHF ile aynı kurallarla: MMMonVHF'den güncelleme, elle girişler, eklenen dosyalar, küme düzeltmeleri, öğrenilen lokatörler ve 6 saatte bir G7VRD; düzeltmeler data/call3.txt içine yazılır ve data/call3_nuovi.txt lokatörleri bir kez içe aktarılır. WSJT-X, JTDX ve MSHV spotları UDP ile de gelir (kaynak WSJT-X UDP, 2237 portu, 2238'e yönlendirme).
 H2|2.5 Yayılım verileri
 P|Yayılım verileri alt sekmesi, bir bandın açılıp açılamayacağını anlamaya yardım eden verileri toplar. En fazla saatte bir kendiliğinden güncellenir; Şimdi güncelle düğmesi onları hemen indirir.
 LI|N0NBH (hamqsl.com): VHF koşulları afişi ve güneş verileri (güneş akısı, A ve K indeksleri, X ışınları, güneş rüzgârı, Bz, aurora ve aurora enlemi) ile Avrupa ve Kuzey Amerika E-skip'i (DXrobot verileri).

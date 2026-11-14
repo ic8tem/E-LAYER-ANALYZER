@@ -38,6 +38,8 @@ Il pulsante **Ripristina le regole dell'autore** riporta i valori di partenza.
 
 Archivio **nominativo → locator** di JTDX (oltre un milione di nominativi) in `data/call3.txt`. Pulsanti **Ricarica** e **Importa un nuovo CALL3.TXT**. I locator a 6 caratteri letti nei commenti degli spot si aggiungono a `data/call3_nuovi.txt`.
 
+Dalla versione 0.4.16 l'archivio CALL3 è uno solo per tutto il programma, quello della Raccolta dati di YA-MS (linguetta METEOR SCATTER), con le stesse regole di LIVETROPOVHF: aggiornamento da MMMonVHF, voci a mano, file aggiunti, correzioni dal cluster, locatori imparati e G7VRD ogni 6 ore; le correzioni si scrivono dentro data/call3.txt e i locatori di data/call3_nuovi.txt si importano una volta. Gli spot di WSJT-X, JTDX e MSHV arrivano anche via UDP (fonte WSJT-X UDP, porta 2237 con inoltro alla 2238).
+
 ## Sottolinguette Spot e Dati di propagazione
 
 La linguetta ha due sottolinguette: **Spot** (sessioni, spot raccolti, CALL3 e colonna dei filtri) e **Dati di propagazione**:

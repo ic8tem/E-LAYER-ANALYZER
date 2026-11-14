@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan E-LAYER ANALYZER
-SUB|Panduan penggunaan lengkap - disusun oleh Costantino IC8TEM - versi 0.4.15, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER; rumus dan pilihan perhitungan ada di tab RINGKASAN PILIHAN PERHITUNGAN.
+SUB|Panduan penggunaan lengkap - disusun oleh Costantino IC8TEM - versi 0.4.16, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER; rumus dan pilihan perhitungan ada di tab RINGKASAN PILIHAN PERHITUNGAN.
 H1|1. Sebelum memulai
 H2|1.1 Apa yang dilakukan program ini
 P|E-LAYER ANALYZER menghimpun dalam satu program alat-alat untuk mempelajari mode propagasi VHF yang melewati lapisan E ionosfer: sporadic-E, termasuk multi-lompatan dan antarbenua, F.A.I. (ketidakteraturan yang searah dengan medan magnet), meteor scatter, dengan program YA-MS yang terintegrasi, dan aurora radio. Program bekerja dengan spot DX cluster secara langsung dan dengan log ADIF, dan menampilkan setiap hasil pada peta yang menempati dua pertiga jendela, dengan data dan perhitungan di sepertiga bagian kanan.
@@ -53,6 +53,7 @@ H2|2.4 Spot terkumpul dan basis data CALL3
 P|Halaman Spot terkumpul menampilkan spot terakhir dengan filter per band dan per sumber; tombol Buka folder spot membuka data/spot. Halaman CALL3 menampilkan basis data callsign -> locator (format JTDX/WSJT): Anda dapat mencari callsign, memuat ulang basis data atau mengimpor file CALL3.TXT baru, yang menggantikan file yang sedang dipakai (file lama disimpan sebagai cadangan).
 LI|Kolom spot terkumpul adalah: UTC, Sumber (cluster, RBN atau PSKReporter), MHz, Band, DX dengan locator-nya, Spotter dengan locator-nya, km, Prop (mode propagasi yang dinyatakan atau dikenali) dan Komentar. Menu Semua sumber membatasi tabel pada satu sesi saja.
 LI|Halaman CALL3 menampilkan file yang dipakai, tanggalnya, header-nya dan jumlah callsign yang dimuat (lebih dari satu juta dengan basis data yang disertakan).
+LI|Sejak versi 0.4.16 hanya ada satu basis data CALL3 untuk seluruh program, yaitu milik Pengumpulan data YA-MS (tab METEOR SCATTER), dengan aturan yang sama seperti LIVETROPOVHF: pembaruan dari MMMonVHF, entri manual, berkas tambahan, koreksi dari cluster, lokator yang dipelajari dan G7VRD setiap 6 jam; koreksi ditulis ke data/call3.txt dan lokator dari data/call3_nuovi.txt diimpor sekali. Spot dari WSJT-X, JTDX dan MSHV juga datang lewat UDP (sumber WSJT-X UDP, port 2237 diteruskan ke 2238).
 H2|2.5 Data propagasi
 P|Subtab Data propagasi mengumpulkan data yang membantu memahami apakah sebuah band dapat terbuka. Data diperbarui sendiri paling banyak sekali per jam; tombol Perbarui sekarang langsung mengunduhnya.
 LI|N0NBH (hamqsl.com): banner kondisi VHF dan data matahari (fluks matahari, indeks A dan K, sinar X, angin matahari, Bz, aurora dan lintang aurora) dengan E-skip Eropa dan Amerika Utara (data DXrobot).

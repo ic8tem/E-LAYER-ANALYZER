@@ -1,5 +1,5 @@
 TITLE|Användarhandbok för E-LAYER ANALYZER
-SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.4.15, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
+SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.4.16, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
 H1|1. Innan du börjar
 H2|1.1 Vad programmet gör
 P|E-LAYER ANALYZER samlar i ett enda program verktygen för att studera de VHF-utbredningssätt som går via jonosfärens E-skikt: sporadiskt E, även multihopp och interkontinentalt, F.A.I. (fältlinjeorienterade irreguljäriteter), meteor scatter, med det integrerade programmet YA-MS, och radioaurora. Programmet arbetar med spots från DX-kluster i realtid och med ADIF-loggar, och visar varje resultat på en karta som upptar två tredjedelar av fönstret, med data och beräkningar i den högra tredjedelen.
@@ -53,6 +53,7 @@ H2|2.4 Insamlade spots och CALL3-databasen
 P|Sidan Insamlade spots listar de senaste spotsen med filter för band och källa; knappen Öppna spotmappen öppnar data/spot. Sidan CALL3 visar databasen anropssignal -> lokator (JTDX/WSJT-format): du kan söka efter en anropssignal, läsa in databasen på nytt eller importera en ny CALL3.TXT-fil, som ersätter den som används (den gamla sparas som säkerhetskopia).
 LI|Kolumnerna för de insamlade spotsen är: UTC, Källa (cluster, RBN eller PSKReporter), MHz, Band, DX med sin lokator, Spotter med sin lokator, km, Prop (det angivna eller igenkända utbredningssättet) och Kommentar. Menyn Alla källor begränsar tabellen till en enda session.
 LI|Sidan CALL3 visar filen som används, dess datum, rubriken och antalet inlästa anropssignaler (över en miljon med den medföljande databasen).
+LI|Från version 0.4.16 finns en enda CALL3-databas för hela programmet, den i YA-MS Datainsamling (fliken METEOR SCATTER), med samma regler som LIVETROPOVHF: uppdatering från MMMonVHF, handposter, tillagda filer, klusterkorrigeringar, inlärda lokatorer och G7VRD var 6:e timme; korrigeringarna skrivs in i data/call3.txt och lokatorerna i data/call3_nuovi.txt importeras en gång. Spottar från WSJT-X, JTDX och MSHV kommer också via UDP (källa WSJT-X UDP, port 2237 vidarebefordrad till 2238).
 H2|2.5 Utbredningsdata
 P|Underfliken Utbredningsdata samlar de data som hjälper att förstå om ett band kan öppna. De uppdateras av sig själva högst en gång i timmen; knappen Uppdatera nu hämtar dem direkt.
 LI|N0NBH (hamqsl.com): bannern med VHF-förhållandena och soldata (solflöde, A- och K-index, röntgenstrålning, solvind, Bz, aurora och aurorabredd) med E-skip för Europa och Nordamerika (data från DXrobot).

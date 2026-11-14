@@ -23,3 +23,5 @@ De senaste 2000 spotsen, med filter för band och källa. Arkiv: en CSV-fil per 
 ## CALL3
 
 JTDX-databas för **anropssignal → lokator** (över en miljon anropssignaler) i `data/call3.txt`. Knapparna **Läs om** och **Importera en ny CALL3.TXT**. Lokatorer med 6 tecken som läses i spotkommentarer läggs till i `data/call3_nuovi.txt`.
+
+Från version 0.4.16 finns en enda CALL3-databas för hela programmet, den i YA-MS Datainsamling (fliken METEOR SCATTER), med samma regler som LIVETROPOVHF: uppdatering från MMMonVHF, handposter, tillagda filer, klusterkorrigeringar, inlärda lokatorer och G7VRD var 6:e timme; korrigeringarna skrivs in i data/call3.txt och lokatorerna i data/call3_nuovi.txt importeras en gång. Spottar från WSJT-X, JTDX och MSHV kommer också via UDP (källa WSJT-X UDP, port 2237 vidarebefordrad till 2238).

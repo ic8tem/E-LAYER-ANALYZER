@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi YA-MS
-SUB|Wersja 1.8.9 - opracował Costantino IC8TEM - listopad 2026
+SUB|Wersja 1.8.10 - opracował Costantino IC8TEM - listopad 2026
 H1|1. Wprowadzenie
 H2|1.1 Do czego służy YA-MS
 P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
@@ -26,7 +26,7 @@ P|Przy uruchomieniu przez kilka sekund pojawia się ekran z Perseidami nad teles
 H2|2.3 Folder data
 P|Wszystkie ustawienia i wszystkie dane znajdują się w jednym folderze data obok programu: bez AppData, bez folderów systemowych. Aby przenieść YA-MS na inny komputer, wystarczy skopiować folder programu razem z jego folderem data. Zawartość folderu opisano w rozdziale 13.
 H2|2.4 Automatyczne aktualizacje
-P|Od wersji 1.8.9 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
+P|Od wersji 1.8.10 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
 P|Od wersji 1.8.0 YA-MS sam sprawdza w serwisie GitHub, przy uruchomieniu i najwyżej raz dziennie, czy pojawiła się nowa wersja. Jeśli tak, pojawia się okno "Dostępna aktualizacja" z listą nowości i trzema przyciskami:
 LI|Aktualizuj teraz: pobiera pakiet odpowiedni dla twojego systemu, zastępuje pliki programu, zachowuje folder data i ponownie uruchamia YA-MS. Pliki programu w folderze data, które nowa wersja zmienia, są najpierw kopiowane do data/backup/v<stara wersja>; twoje pliki (ustawienia, archiwa, spoty, ADIF) nie są zmieniane.
 LI|Później: zamyka okno; sprawdzenie powtarza się następnego dnia.
@@ -179,6 +179,7 @@ LI|Chronologiczna rekonstrukcja dnia i szczegóły najbliższych sekund.
 TAG|PROCEDURA|Aby słuchać GRAVES: USB na 143,049 MHz (ton około 1 kHz), AGC wolne lub wyłączone, pasmo audio co najmniej 2,4 kHz; antena skierowana na zalecany hot spot z panelu TRASA, przy niskiej elewacji; zegar komputera zsynchronizowany. Pingi to krótkie kreski obok nośnej na wodospadzie.
 H2|9.4 Zbieranie danych
 P|Zbiera spoty meteor scatter z trzech strumieni telnet (DX cluster, RBN, DM4X ze spotami z PSKReporter) i ze strumienia MQTT PSKReporter, każdy w osobnej podkarcie, i je filtruje.
+P|Jak w LIVETROPOVHF: program nasłuchuje komunikatów UDP programu cyfrowego (w WSJT-X: Ustawienia, Reporting, UDP Server 127.0.0.1 port 2237) i powtarza je bez zmian na porcie przekazywania dla innych programów (GridTracker, JTAlert, log). Każda zdekodowana stacja staje się spotem usłyszanym przez twoją stację; komunikaty kończące (RR73, 73, RRR) między dwiema innymi stacjami stają się trasą ich QSO. Spoty przechodzą przez te same filtry co pozostałe.
 LI|Wpisz u góry swój znak wywoławczy do logowania. Każdy strumień ma host, port, polecenia po zalogowaniu, Połącz ponownie, Połącz przy starcie oraz konsolę.
 LI|Filtr przyjmuje spoty w częstotliwościach typowych dla meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) lub z emisją MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) i odrzuca te, które deklarują inny rodzaj propagacji. Okna częstotliwości i słowa można zmieniać; każde ma własny licznik.
 LI|Spoty CW są od razu odrzucane (CW lub WPM w komentarzu albo 28000-28070 kHz): nie pojawiają się w konsoli i nie są zapisywane, chyba że są oznaczone <MS>. Pole można wyłączyć.

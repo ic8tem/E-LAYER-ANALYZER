@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Weergawe 1.8.9 - saamgestel deur Costantino IC8TEM - November 2026
+SUB|Weergawe 1.8.10 - saamgestel deur Costantino IC8TEM - November 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor YA-MS dien
 P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
@@ -26,7 +26,7 @@ P|By die aanskakel verskyn vir 'n paar sekondes die skerm met die Perseïede bo 
 H2|2.3 Die data-gids
 P|Al die instellings en al die data is in 'n enkele data-gids langs die program: geen AppData nie, geen stelselgidse nie. Om YA-MS na 'n ander rekenaar te skuif, kopieer jy net die programgids saam met sy data-gids. Die inhoud van die gids word in hoofstuk 13 beskryf.
 H2|2.4 Outomatiese bywerkings
-P|Vanaf weergawe 1.8.9 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
+P|Vanaf weergawe 1.8.10 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
 P|Vanaf weergawe 1.8.0 kontroleer YA-MS self op GitHub, by aanskakel en hoogstens een keer per dag, of 'n nuwe weergawe uitgekom het. As daar een is, verskyn die venster "Bywerking beskikbaar" met die nuwighede en drie knoppies:
 LI|Werk nou by: laai die pakket af wat by jou stelsel pas, vervang die programlêers, behou die data-gids en herbegin YA-MS. Die programlêers in die data-gids wat die nuwe weergawe verander, word eers na data/backup/v<ou weergawe> gekopieer; jou eie lêers (instellings, argiewe, spots, ADIF) word nie aangeraak nie.
 LI|Later: maak die venster toe; die kontrole word die volgende dag herhaal.
@@ -179,6 +179,7 @@ LI|Die chronologiese rekonstruksie van die dag en die besonderhede van die volge
 TAG|PROCEDURA|Om na GRAVES te luister: USB op 143,049 MHz (toon van ongeveer 1 kHz), stadige of afgeskakelde AGC, oudiobandwydte van minstens 2,4 kHz; antenna na die aanbevole hot spot van die PAD-kaart, op lae elevasie; rekenaarhorlosie gesinchroniseer. Die pings is kort strepies naby die draer in die waterfall.
 H2|9.4 Data-insameling
 P|Samel die meteor scatter-spots in uit drie telnet-strome (DX cluster, RBN, DM4X met die spots van PSKReporter) en uit die MQTT-stroom van PSKReporter, elkeen in sy eie suboortjie, en filtreer hulle.
+P|Soos in LIVETROPOVHF: die program luister na die UDP-boodskappe van die digitale program (in WSJT-X: Instellings, Reporting, UDP Server 127.0.0.1 poort 2237) en herhaal hulle onveranderd op die aanstuurpoort vir die ander programme (GridTracker, JTAlert, log). Elke gedekodeerde stasie word 'n spot wat jou stasie gehoor het; afsluitboodskappe (RR73, 73, RRR) tussen twee ander stasies word die roete van hul QSO. Die spots gaan deur dieselfde filters as die ander.
 LI|Tik bo jou roepsein vir die aanmelding in. Elke stroom het host, poort, opdragte ná aanmelding, Herkoppel, Koppel by aanskakel en 'n konsole.
 LI|Die filter aanvaar spots op die tipiese meteor scatter-frekwensies (50190-50300, 70100-70400, 144290-144399 kHz) of met 'n MS-modus (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>), en verwerp dié wat 'n ander voortplanting aandui. Die vensters en woorde kan verander word; elkeen het sy eie teller.
 LI|CW-spots word dadelik weggegooi (CW of WPM in die kommentaar, of 28000-28070 kHz): hulle verskyn nie in die konsole nie en word nie gestoor nie, tensy hulle met <MS> gemerk is. Die blokkie kan afgeskakel word.

@@ -1,5 +1,5 @@
 TITLE|Manual do usuário do E-LAYER ANALYZER
-SUB|Manual do usuário detalhado - por Costantino IC8TEM - versão 0.4.15, novembro de 2026. Os números entre colchetes remetem à aba FONTES; as fórmulas e as escolhas de cálculo estão na aba SÍNTESE DAS ESCOLHAS DE CÁLCULO.
+SUB|Manual do usuário detalhado - por Costantino IC8TEM - versão 0.4.16, novembro de 2026. Os números entre colchetes remetem à aba FONTES; as fórmulas e as escolhas de cálculo estão na aba SÍNTESE DAS ESCOLHAS DE CÁLCULO.
 H1|1. Antes de começar
 H2|1.1 O que faz o programa
 P|O E-LAYER ANALYZER reúne em um só programa as ferramentas para estudar os modos de propagação VHF que passam pela camada E da ionosfera: a esporádica E, também multi-salto e extracontinental, o F.A.I. (irregularidades alinhadas com o campo magnético), o meteor scatter, com o programa YA-MS integrado, e a aurora rádio. Trabalha com os spots dos DX clusters em tempo real e com os logs ADIF, e mostra cada resultado em um mapa que ocupa dois terços da janela, com os dados e os cálculos no terço direito.
@@ -53,6 +53,7 @@ H2|2.4 Spots coletados e arquivo CALL3
 P|A página Spots coletados lista os últimos spots com o filtro por banda e por fonte; o botão Abrir a pasta dos spots abre data/spot. A página CALL3 mostra o arquivo indicativo -> locator (formato JTDX/WSJT): é possível procurar um indicativo, recarregar o arquivo ou importar um novo arquivo CALL3.TXT, que substitui o que está em uso (o anterior fica como backup).
 LI|As colunas dos spots coletados são: UTC, Fonte (cluster, RBN ou PSKReporter), MHz, Banda, DX com o seu locator, Spotter com o seu locator, km, Prop (o modo de propagação declarado ou reconhecido) e Comentário. O menu Todas as fontes limita a tabela a uma só sessão.
 LI|A página CALL3 mostra o arquivo em uso, a sua data, o cabeçalho e o número de indicativos carregados (mais de um milhão com o arquivo distribuído).
+LI|A partir da versão 0.4.16 há uma única base CALL3 para todo o programa, a da Coleta de dados do YA-MS (aba METEOR SCATTER), com as mesmas regras do LIVETROPOVHF: atualização a partir do MMMonVHF, entradas manuais, arquivos adicionados, correções do cluster, locators aprendidos e G7VRD a cada 6 horas; as correções são gravadas em data/call3.txt e os locators de data/call3_nuovi.txt são importados uma vez. Os spots do WSJT-X, JTDX e MSHV chegam também por UDP (fonte WSJT-X UDP, porta 2237 com reenvio para a 2238).
 H2|2.5 Dados de propagação
 P|A subaba Dados de propagação reúne os dados que ajudam a entender se uma banda pode abrir. Atualizam-se sozinhos no máximo uma vez por hora; o botão Atualizar agora baixa-os de imediato.
 LI|N0NBH (hamqsl.com): o banner das condições VHF e os dados solares (fluxo solar, índices A e K, raios X, vento solar, Bz, aurora e latitude auroral) com o E-skip da Europa e da América do Norte (dados DXrobot).

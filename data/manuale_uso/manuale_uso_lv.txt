@@ -1,5 +1,5 @@
 TITLE|YA-MS lietošanas rokasgrāmata
-SUB|Versija 1.8.9 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+SUB|Versija 1.8.10 - sagatavojis Costantino IC8TEM - 2026. gada novembris
 H1|1. Ievads
 H2|1.1 Kam paredzēta YA-MS
 P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
@@ -26,7 +26,7 @@ P|Palaižot uz dažām sekundēm parādās ekrāns ar Perseīdām virs ESO VLT t
 H2|2.3 Mape data
 P|Visi iestatījumi un visi dati atrodas vienā mapē data blakus programmai: nekādas AppData, nekādu sistēmas mapju. Lai pārvietotu YA-MS uz citu datoru, pietiek nokopēt programmas mapi kopā ar tās mapi data. Mapes saturs aprakstīts 13. nodaļā.
 H2|2.4 Automātiskie atjauninājumi
-P|Sākot ar versiju 1.8.9, atjauninājumi ir automātiski un klusi: palaižot un pēc tam ik pēc 6 stundām YA-MS pārbauda GitHub un, ja ir jauna versija, to lejupielādē, instalē un pats restartējas, neko nejautājot (to parāda tikai statusa josla). Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Tālāk aprakstītais logs parādās tikai, nospiežot "Atjauninājumi", vai ja failā data/config.ini ieraksti aggiornamenti_automatici=0.
+P|Sākot ar versiju 1.8.10, atjauninājumi ir automātiski un klusi: palaižot un pēc tam ik pēc 6 stundām YA-MS pārbauda GitHub un, ja ir jauna versija, to lejupielādē, instalē un pats restartējas, neko nejautājot (to parāda tikai statusa josla). Arī trūkstošie faili tiek lejupielādēti atkārtoti bez jautāšanas. Tālāk aprakstītais logs parādās tikai, nospiežot "Atjauninājumi", vai ja failā data/config.ini ieraksti aggiornamenti_automatici=0.
 P|Sākot ar versiju 1.8.0, YA-MS pati pārbauda GitHub, palaišanas brīdī un ne biežāk kā reizi dienā, vai ir iznākusi jauna versija. Ja ir, parādās logs "Pieejams atjauninājums" ar jaunumiem un trim pogām:
 LI|Atjaunināt tagad: lejupielādē tavai sistēmai piemēroto pakotni, aizstāj programmas failus, saglabā mapi data un restartē YA-MS. Programmas faili mapē data, kurus jaunā versija maina, vispirms tiek nokopēti uz data/backup/v<vecā versija>; tavi faili (iestatījumi, arhīvi, spoti, ADIF) netiek aizskarti.
 LI|Vēlāk: aizver logu; pārbaude atkārtojas nākamajā dienā.
@@ -179,6 +179,7 @@ LI|Dienas hronoloģiskā rekonstrukcija un nākamo sekunžu detaļas.
 TAG|PROCEDURA|Lai klausītos GRAVES: USB 143,049 MHz (tonis ap 1 kHz), AGC lēns vai izslēgts, audio josla vismaz 2,4 kHz; antena vērsta uz paneļa TRASE ieteikto hot spot ar zemu elevāciju; datora pulkstenis sinhronizēts. Pingi ir īsas svītras pie nesēja ūdenskritumā (waterfall).
 H2|9.4 Datu vākšana
 P|Vāc meteor scatter spotus no trim telnet plūsmām (DX klasteris, RBN, DM4X ar PSKReporter spotiem) un no PSKReporter MQTT plūsmas, katru savā apakšcilnē, un tos filtrē.
+P|Kā LIVETROPOVHF: programma klausās digitālās programmas UDP ziņojumus (WSJT-X: Iestatījumi, Reporting, UDP Server 127.0.0.1 ports 2237) un atkārto tos nemainītus pārsūtīšanas portā citām programmām (GridTracker, JTAlert, žurnāls). Katra dekodētā stacija kļūst par spotu, ko dzird tava stacija; noslēguma ziņojumi (RR73, 73, RRR) starp divām citām stacijām kļūst par viņu QSO trasi. Spoti iziet caur tiem pašiem filtriem kā citi.
 LI|Augšā ieraksti savu izsaukuma signālu pieteikšanās vajadzībām. Katrai plūsmai ir hosts, ports, komandas pēc pieteikšanās, Savienot vēlreiz, Savienot startējot un konsole.
 LI|Filtrs pieņem spotus meteor scatter tipiskajās frekvencēs (50190-50300, 70100-70400, 144290-144399 kHz) vai ar MS modu (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) un atmet tos, kuros norādīts cits izplatīšanās veids. Frekvenču logus un vārdus var mainīt; katram ir savs skaitītājs.
 LI|CW spoti tiek uzreiz izmesti (CW vai WPM komentārā vai 28000-28070 kHz): tie neparādās konsolē un netiek saglabāti, ja vien nav atzīmēti ar <MS>. Rūtiņu var izslēgt.

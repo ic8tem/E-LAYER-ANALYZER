@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.9 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.10 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -26,7 +26,7 @@ P|Při spuštění se na několik sekund zobrazí úvodní obrazovka s Perseidam
 H2|2.3 Složka data
 P|Všechna nastavení a všechna data jsou v jediné složce data vedle programu: žádné AppData, žádné systémové složky. Chcete-li YA-MS přesunout na jiný počítač, stačí zkopírovat složku programu i s její složkou data. Obsah složky popisuje kapitola 13.
 H2|2.4 Automatické aktualizace
-P|Od verze 1.8.9 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
+P|Od verze 1.8.10 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
 P|Od verze 1.8.0 YA-MS sám kontroluje na GitHubu, při spuštění a nejvýše jednou denně, zda vyšla nová verze. Pokud ano, zobrazí se okno „Je k dispozici aktualizace“ s novinkami a třemi tlačítky:
 LI|Aktualizovat nyní: stáhne balíček vhodný pro váš systém, nahradí soubory programu, ponechá složku data a restartuje YA-MS. Soubory programu ve složce data, které nová verze mění, se nejprve zkopírují do data/backup/v<versione vecchia>; vašich souborů (nastavení, archivy, spoty, ADIF) se aktualizace nedotkne.
 LI|Později: zavře okno; kontrola se zopakuje následující den.
@@ -179,6 +179,7 @@ LI|Časová rekonstrukce dne a podrobnosti o příštích sekundách.
 TAG|PROCEDURA|Poslech GRAVES: USB na 143,049 MHz (tón asi 1 kHz), AGC pomalé nebo vypnuté, šířka audio pásma alespoň 2,4 kHz; anténa směrem k doporučenému hot spotu z panelu TRASA, s nízkou elevací; hodiny PC synchronizované. Pingy jsou krátké čárky u nosné ve waterfallu.
 H2|9.4 Sběr dat
 P|Sbírá spoty meteor scatter ze tří telnetových toků (DX cluster, RBN, DM4X se spoty z PSKReporter) a z toku MQTT od PSKReporter, každý ve své podkartě, a filtruje je.
+P|Jako v LIVETROPOVHF: program poslouchá UDP zprávy digitálního programu (ve WSJT-X: Nastavení, Reporting, UDP Server 127.0.0.1 port 2237) a opakuje je beze změny na přeposílacím portu pro ostatní programy (GridTracker, JTAlert, deník). Každá dekódovaná stanice se stane spotem slyšeným tvou stanicí; závěrečné zprávy (RR73, 73, RRR) mezi dvěma jinými stanicemi se stanou trasou jejich QSO. Spoty procházejí stejnými filtry jako ostatní.
 LI|Nahoře zadejte svou značku pro přihlášení. Každý tok má hostitele, port, příkazy po přihlášení, Znovu připojit, Připojit při spuštění a konzoli.
 LI|Filtr přijímá spoty na kmitočtech typických pro meteor scatter (50190-50300, 70100-70400, 144290-144399 kHz) nebo s druhem provozu MS (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) a vyřazuje ty, které uvádějí jiný druh šíření. Okna i slova lze upravit; každé má vlastní počítadlo.
 LI|Spoty CW se hned zahazují (CW nebo WPM v komentáři, nebo 28000-28070 kHz): neobjeví se v konzoli a neukládají se, pokud nejsou označené <MS>. Políčko lze vypnout.

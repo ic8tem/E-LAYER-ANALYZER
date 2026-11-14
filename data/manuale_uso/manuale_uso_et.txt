@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.9 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.10 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -26,7 +26,7 @@ P|Käivitamisel kuvatakse mõneks sekundiks pilt Perseiididest ESO VLT kohal. Es
 H2|2.3 Kaust data
 P|Kõik seaded ja kõik andmed asuvad ühes kaustas data programmi kõrval: ei mingit AppData-t ega süsteemikaustu. YA-MS-i teise arvutisse viimiseks piisab programmi kausta kopeerimisest koos selle kaustaga data. Kausta sisu on kirjeldatud peatükis 13.
 H2|2.4 Automaatsed uuendused
-P|Alates versioonist 1.8.9 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 6 tunni järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
+P|Alates versioonist 1.8.10 on uuendused automaatsed ja vaiksed: käivitamisel ja seejärel iga 6 tunni järel kontrollib YA-MS GitHubi ning uue versiooni olemasolul laadib selle alla, paigaldab ja käivitub ise uuesti midagi küsimata (seda näitab ainult olekuriba). Ka puuduvad failid laaditakse uuesti alla küsimata. Allpool kirjeldatud aken ilmub ainult nupule "Uuendused" vajutades või kui kirjutad faili data/config.ini rea aggiornamenti_automatici=0.
 P|Alates versioonist 1.8.0 kontrollib YA-MS ise GitHubist käivitamisel ja kõige rohkem kord päevas, kas on ilmunud uus versioon. Kui on, avaneb aken „Uuendus saadaval“ uuenduste loetelu ja kolme nupuga:
 LI|Uuenda kohe: laadib alla sinu süsteemile sobiva paketi, asendab programmi failid, säilitab kausta data ja taaskäivitab YA-MS-i. Kaustas data olevad programmi failid, mida uus versioon muudab, kopeeritakse enne kausta data/backup/v<vana versioon>; sinu faile (seaded, arhiivid, spotid, ADIF) ei puudutata.
 LI|Hiljem: sulgeb akna; kontroll kordub järgmisel päeval.
@@ -179,6 +179,7 @@ LI|Päeva kronoloogiline rekonstruktsioon ja järgmiste sekundite üksikasjad.
 TAG|PROCEDURA|GRAVESi kuulamiseks: USB sagedusel 143,049 MHz (toon umbes 1 kHz juures), aeglane või välja lülitatud AGC, helisagedusriba vähemalt 2,4 kHz; antenn kaardil TRASS soovitatud hot spot'i suunas madala kõrgusnurgaga; arvuti kell sünkroniseeritud. Pingid on kosejoonisel (waterfall) lühikesed jooned kandesageduse lähedal.
 H2|9.4 Andmete kogumine
 P|Kogub meteor scatteri spotte kolmest telneti voost (DX-klaster, RBN, DM4X PSKReporteri spottidega) ja PSKReporteri MQTT voost, igaüks oma alamsakil, ning filtreerib neid.
+P|Nagu LIVETROPOVHF-is: programm kuulab digiprogrammi UDP-sõnumeid (WSJT-X-is: Seaded, Reporting, UDP Server 127.0.0.1 port 2237) ja kordab neid muutmata edastusportis teistele programmidele (GridTracker, JTAlert, logi). Iga dekodeeritud jaam muutub sinu jaama kuuldud spotiks; lõpetussõnumid (RR73, 73, RRR) kahe teise jaama vahel muutuvad nende QSO trassiks. Spotid läbivad samad filtrid kui teised.
 LI|Kirjuta üles sisselogimiseks oma kutsung. Igal vool on host, port, käsud pärast sisselogimist, Ühenda uuesti, Ühenda käivitamisel ja konsool.
 LI|Filter võtab vastu spotid meteor scatterile tüüpilistel sagedustel (50190-50300, 70100-70400, 144290-144399 kHz) või MS-moodiga (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ja jätab kõrvale need, mis märgivad teist levi. Aknaid ja sõnu saab muuta; igaühel on oma loendur.
 LI|CW-spotid visatakse kohe ära (CW või WPM kommentaaris või 28000-28070 kHz): need ei ilmu konsooli ega salvestu, välja arvatud <MS> märgiga. Kasti saab välja lülitada.

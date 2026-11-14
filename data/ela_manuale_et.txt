@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZERi kasutusjuhend
-SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.4.15, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
+SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.4.16, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
 H1|1. Enne alustamist
 H2|1.1 Mida programm teeb
 P|E-LAYER ANALYZER koondab ühte programmi tööriistad nende VHF leviviiside uurimiseks, mis kulgevad läbi ionosfääri E-kihi: sporaadiline E, ka mitmehüppeline ja mandritevaheline, F.A.I. (magnetväljaga joondunud ebaühtlused), meteoorhajumine koos integreeritud programmiga YA-MS ning raadioaurora. Programm töötab DX-klastrite reaalajas spotide ja ADIF-logidega ning näitab iga tulemust kaardil, mis võtab enda alla kaks kolmandikku aknast; andmed ja arvutused on paremas kolmandikus.
@@ -53,6 +53,7 @@ H2|2.4 Kogutud spotid ja CALL3 arhiiv
 P|Leht Kogutud spotid loetleb viimased spotid koos sagedusala- ja allikafiltriga; nupp Ava spotide kaust avab kausta data/spot. Leht CALL3 näitab arhiivi kutsung -> lokaator (JTDX/WSJT vorming): saab otsida kutsungit, arhiivi uuesti laadida või importida uue CALL3.TXT faili, mis asendab kasutusel oleva (vana jääb varukoopiaks).
 LI|Kogutud spotide veerud on: UTC, Allikas (klaster, RBN või PSKReporter), MHz, Sagedusala, DX koos lokaatoriga, Spotter koos lokaatoriga, km, Prop (deklareeritud või tuvastatud leviviis) ja Kommentaar. Menüü Kõik allikad piirab tabeli ühe seansiga.
 LI|Leht CALL3 näitab kasutusel olevat faili, selle kuupäeva, päist ja laaditud kutsungite arvu (kaasasoleva arhiiviga üle miljoni).
+LI|Alates versioonist 0.4.16 on kogu programmil üks CALL3 andmebaas, YA-MS-i Andmekogumise oma (sakk METEOR SCATTER), samade reeglitega nagu LIVETROPOVHF: uuendamine MMMonVHF-ist, käsitsi kirjed, lisatud failid, klastri parandused, õpitud lokaatorid ja G7VRD iga 6 tunni järel; parandused kirjutatakse faili data/call3.txt ja failist data/call3_nuovi.txt imporditakse lokaatorid üks kord. WSJT-X-i, JTDX-i ja MSHV spotid tulevad ka UDP kaudu (allikas WSJT-X UDP, port 2237 edastusega porti 2238).
 H2|2.5 Levi andmed
 P|Alamsakk Levi andmed kogub andmeid, mis aitavad mõista, kas sagedusala võib avaneda. Need värskenevad ise kõige rohkem kord tunnis; nupp Värskenda kohe laadib need kohe alla.
 LI|N0NBH (hamqsl.com): VHF-tingimuste banner ja päikeseandmed (päikesevoog, A- ja K-indeks, röntgenkiirgus, päikesetuul, Bz, aurora ja aurora laius) koos Euroopa ja Põhja-Ameerika E-skipiga (DXroboti andmed).

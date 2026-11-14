@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER lietošanas rokasgrāmata
-SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.4.15, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
+SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.4.16, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
 H1|1. Pirms sākt
 H2|1.1 Ko programma dara
 P|E-LAYER ANALYZER apvieno vienā programmā rīkus to VHF izplatīšanās veidu izpētei, kas norit caur jonosfēras E slāni: sporādisko E, arī vairāklēcienu un starpkontinentālo, F.A.I. (ar magnētisko lauku saskaņotās nehomogenitātes), meteor scatter ar iebūvēto programmu YA-MS un radio auroru. Tā strādā ar DX klasteru spotiem reāllaikā un ar ADIF žurnāliem un parāda katru rezultātu kartē, kas aizņem divas trešdaļas loga, bet dati un aprēķini ir labajā trešdaļā.
@@ -53,6 +53,7 @@ H2|2.4 Savāktie spoti un CALL3 arhīvs
 P|Lapa Savāktie spoti uzskaita pēdējos spotus ar filtru pēc joslas un avota; poga Atvērt spotu mapi atver data/spot. Lapa CALL3 rāda arhīvu izsaukuma signāls -> lokators (JTDX/WSJT formāts): var meklēt izsaukuma signālu, pārlādēt arhīvu vai importēt jaunu CALL3.TXT failu, kas aizstāj lietoto (vecais paliek kā rezerves kopija).
 LI|Savākto spotu kolonnas ir: UTC, Avots (klasteris, RBN vai PSKReporter), MHz, Josla, DX ar tā lokatoru, Spotter ar tā lokatoru, km, Prop (deklarētais vai atpazītais izplatīšanās veids) un Komentārs. Izvēlne Visi avoti ierobežo tabulu ar vienu sesiju.
 LI|Lapa CALL3 rāda lietoto failu, tā datumu, galveni un ielādēto izsaukuma signālu skaitu (ar izplatīto arhīvu vairāk nekā miljons).
+LI|Sākot ar versiju 0.4.16, visai programmai ir viena CALL3 datubāze, YA-MS Datu vākšanas (cilne METEOR SCATTER), ar tiem pašiem noteikumiem kā LIVETROPOVHF: atjaunināšana no MMMonVHF, rokas ieraksti, pievienotie faili, klastera labojumi, apgūtie lokatori un G7VRD ik pēc 6 stundām; labojumi tiek ierakstīti data/call3.txt, un data/call3_nuovi.txt lokatori tiek importēti vienreiz. WSJT-X, JTDX un MSHV spoti nāk arī caur UDP (avots WSJT-X UDP, ports 2237 ar pārsūtīšanu uz 2238).
 H2|2.5 Izplatīšanās dati
 P|Apakšcilne Izplatīšanās dati apkopo datus, kas palīdz saprast, vai josla var atvērties. Tie paši atjauninās ne biežāk kā reizi stundā; poga Atjaunināt tagad tos lejupielādē uzreiz.
 LI|N0NBH (hamqsl.com): VHF apstākļu baneris un saules dati (saules plūsma, A un K indekss, rentgenstari, saules vējš, Bz, aurora un auroras platums) ar Eiropas un Ziemeļamerikas E-skip (DXrobot dati).

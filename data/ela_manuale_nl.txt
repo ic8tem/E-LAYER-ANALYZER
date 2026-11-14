@@ -1,5 +1,5 @@
 TITLE|Handleiding van E-LAYER ANALYZER
-SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.4.15, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
+SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.4.16, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
 H1|1. Voordat je begint
 H2|1.1 Wat het programma doet
 P|E-LAYER ANALYZER brengt in één programma de hulpmiddelen samen om de VHF-propagatiemodi te bestuderen die via de E-laag van de ionosfeer verlopen: sporadische E, ook met meervoudige sprong en intercontinentaal, F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter, met het ingebouwde programma YA-MS, en radio-aurora. Het werkt met de spots van de DX-clusters in realtime en met ADIF-logs, en toont elk resultaat op een kaart die twee derde van het venster beslaat, met de gegevens en berekeningen in het rechterderde.
@@ -53,6 +53,7 @@ H2|2.4 Verzamelde spots en CALL3-archief
 P|De pagina Verzamelde spots toont de laatste spots met een filter per band en per bron; de knop Spotmap openen opent data/spot. De pagina CALL3 toont het archief roepnaam -> locator (JTDX/WSJT-formaat): je kunt een roepnaam zoeken, het archief herladen of een nieuw CALL3.TXT-bestand importeren, dat het gebruikte bestand vervangt (het oude blijft als reservekopie bewaard).
 LI|De kolommen van de verzamelde spots zijn: UTC, Bron (cluster, RBN of PSKReporter), MHz, Band, DX met zijn locator, Spotter met zijn locator, km, Prop (de opgegeven of herkende propagatiemode) en Commentaar. Het menu Alle bronnen beperkt de tabel tot één sessie.
 LI|De pagina CALL3 toont het gebruikte bestand, de datum ervan, de kop en het aantal geladen roepnamen (meer dan een miljoen met het meegeleverde archief).
+LI|Vanaf versie 0.4.16 is er één CALL3-database voor het hele programma, die van de Gegevensverzameling van YA-MS (tabblad METEOR SCATTER), met dezelfde regels als LIVETROPOVHF: bijwerken vanaf MMMonVHF, handmatige invoer, toegevoegde bestanden, clustercorrecties, geleerde locators en G7VRD elke 6 uur; correcties worden in data/call3.txt geschreven en de locators uit data/call3_nuovi.txt worden één keer overgenomen. Spots van WSJT-X, JTDX en MSHV komen ook via UDP binnen (bron WSJT-X UDP, poort 2237 doorgestuurd naar 2238).
 H2|2.5 Propagatiegegevens
 P|De subtab Propagatiegegevens verzamelt de gegevens die helpen te begrijpen of een band open kan gaan. Ze worden hoogstens eenmaal per uur vanzelf bijgewerkt; de knop Nu bijwerken downloadt ze meteen.
 LI|N0NBH (hamqsl.com): de banner met de VHF-condities en de zonnegegevens (zonneflux, A- en K-index, röntgenstraling, zonnewind, Bz, aurora en aurorabreedte) met de E-skip van Europa en Noord-Amerika (gegevens van DXrobot).

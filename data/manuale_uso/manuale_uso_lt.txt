@@ -1,5 +1,5 @@
 TITLE|YA-MS naudotojo vadovas
-SUB|1.8.9 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+SUB|1.8.10 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
 H1|1. Įvadas
 H2|1.1 Kam skirta YA-MS
 P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
@@ -26,7 +26,7 @@ P|Paleidžiant kelioms sekundėms parodomas ekranas su Perseidais virš ESO VLT 
 H2|2.3 Aplankas data
 P|Visi nustatymai ir visi duomenys saugomi viename aplanke data šalia programos: jokio AppData, jokių sistemos aplankų. Norint perkelti YA-MS į kitą kompiuterį, pakanka nukopijuoti programos aplanką kartu su jo aplanku data. Aplanko turinys aprašytas 13 skyriuje.
 H2|2.4 Automatiniai atnaujinimai
-P|Nuo 1.8.9 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
+P|Nuo 1.8.10 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
 P|Nuo 1.8.0 versijos YA-MS pati tikrina GitHub, paleidžiant ir ne dažniau kaip kartą per dieną, ar išleista nauja versija. Jei taip, atsiranda langas „Yra atnaujinimas“ su naujovėmis ir trimis mygtukais:
 LI|Atnaujinti dabar: atsisiunčia jūsų sistemai tinkamą paketą, pakeičia programos failus, išsaugo aplanką data ir iš naujo paleidžia YA-MS. Programos failai aplanke data, kuriuos nauja versija keičia, pirmiausia nukopijuojami į data/backup/v<sena versija>; jūsų failai (nustatymai, archyvai, spotai, ADIF) neliečiami.
 LI|Vėliau: uždaro langą; tikrinimas pakartojamas kitą dieną.
@@ -179,6 +179,7 @@ LI|Chronologinė dienos rekonstrukcija ir artimiausių sekundžių detalės.
 TAG|PROCEDURA|GRAVES klausytis: USB 143,049 MHz (apie 1 kHz tonas), AGC lėtas arba išjungtas, garso juosta ne siauresnė kaip 2,4 kHz; antena nukreipta į skydelyje TRASA rekomenduojamą hot spot, maža elevacija; kompiuterio laikrodis sinchronizuotas. Pingai yra trumpi brūkšneliai šalia nešlio krioklio (waterfall) vaizde.
 H2|9.4 Duomenų rinkimas
 P|Renka meteor scatter spotus iš trijų telnet srautų (DX klasteris, RBN, DM4X su PSKReporter spotais) ir iš PSKReporter MQTT srauto, kiekvieną savo antrinėje kortelėje, ir juos filtruoja.
+P|Kaip LIVETROPOVHF: programa klausosi skaitmeninės programos UDP pranešimų (WSJT-X: Nustatymai, Reporting, UDP Server 127.0.0.1 prievadas 2237) ir pakartoja juos nepakeistus persiuntimo prievade kitoms programoms (GridTracker, JTAlert, žurnalas). Kiekviena iškoduota stotis tampa tavo stoties girdėtu spotu; uždarymo pranešimai (RR73, 73, RRR) tarp dviejų kitų stočių tampa jų QSO trasa. Spotai eina per tuos pačius filtrus kaip ir kiti.
 LI|Viršuje įrašykite savo šaukinį prisijungimui. Kiekvienas srautas turi serverį, prievadą, komandas po prisijungimo, Prisijungti iš naujo, Prisijungti paleidžiant ir konsolę.
 LI|Filtras priima spotus meteor scatter būdinguose dažniuose (50190-50300, 70100-70400, 144290-144399 kHz) arba su MS moda (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) ir atmeta tuos, kuriuose nurodytas kitas sklidimo būdas. Dažnių langus ir žodžius galima keisti; kiekvienas turi savo skaitiklį.
 LI|CW spotai iškart atmetami (CW ar WPM komentare arba 28000-28070 kHz): jie nerodomi konsolėje ir neišsaugomi, nebent pažymėti <MS>. Langelį galima išjungti.

@@ -23,3 +23,5 @@ Viimased 2000 spotti, sagedusala ja allika filtritega. Arhiiv: üks CSV-fail pä
 ## CALL3
 
 JTDX-i andmebaas **kutsung → lokaator** (üle miljoni kutsungi) failis `data/call3.txt`. Nupud **Laadi uuesti** ja **Impordi uus CALL3.TXT...**. Spotide kommentaaridest loetud 6-märgilised lokaatorid lisatakse faili `data/call3_nuovi.txt`.
+
+Alates versioonist 0.4.16 on kogu programmil üks CALL3 andmebaas, YA-MS-i Andmekogumise oma (sakk METEOR SCATTER), samade reeglitega nagu LIVETROPOVHF: uuendamine MMMonVHF-ist, käsitsi kirjed, lisatud failid, klastri parandused, õpitud lokaatorid ja G7VRD iga 6 tunni järel; parandused kirjutatakse faili data/call3.txt ja failist data/call3_nuovi.txt imporditakse lokaatorid üks kord. WSJT-X-i, JTDX-i ja MSHV spotid tulevad ka UDP kaudu (allikas WSJT-X UDP, port 2237 edastusega porti 2238).

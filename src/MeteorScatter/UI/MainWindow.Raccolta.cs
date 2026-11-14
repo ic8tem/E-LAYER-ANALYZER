@@ -94,6 +94,8 @@ namespace YAMS
             }
             mqDot = new TextBlock { Text = "4. " + Lang.T("PSKReporter MQTT") + " ●", FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 18, 0) };
             rdStrip.Children.Add(mqDot);
+            udDot = new TextBlock { Text = "5. WSJT-X UDP ●", FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Muted), Margin = new Thickness(0, 0, 18, 0) };
+            rdStrip.Children.Add(udDot);
             DockTop(left, rdStrip);
             // una sottolinguetta per ciascuno dei tre flussi di cluster (richiesta IC8TEM), poi gli spot raccolti
             PillTabs inner = new PillTabs(true);
@@ -101,6 +103,7 @@ namespace YAMS
             // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio
             for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }
             inner.Add("4. " + Lang.T("PSKReporter MQTT"), MqttBox(Pal.Green));
+            inner.Add("5. WSJT-X UDP", UdpBox(Pal.Azure));
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);
@@ -307,6 +310,59 @@ namespace YAMS
                 Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(10), Padding = new Thickness(6, 3), Margin = new Thickness(4), Child = sp
             };
+        }
+
+        // ---- 5. WSJT-X / JTDX / MSHV via UDP (come in LIVETROPOVHF)
+        TextBox udIn, udOut;
+        NumericUpDown udInPort, udOutPort;
+        CheckBox udFwd, udAuto;
+        TextBlock udState, udCounts, udDot;
+        SelectableTextBlock udConsole;
+        ScrollViewer udSv;
+
+        Border UdpBox(Color tc)
+        {
+            udIn = T(WsjtxUdp.ListenAddress, 130, false);
+            udInPort = N(1, 65535, WsjtxUdp.ListenPort, 0, 1, 70);
+            udOut = T(WsjtxUdp.ForwardAddress, 130, false);
+            udOutPort = N(1, 65535, WsjtxUdp.ForwardPort, 0, 1, 70);
+            udFwd = C(Lang.T("Inoltra i pacchetti a"), WsjtxUdp.Forward);
+            udAuto = C(Lang.T("Avvia all'apertura"), WsjtxUdp.AutoStart);
+            Button bs = B(Lang.T("Avvia")); bs.Classes.Add("accent");
+            Button bt = B(Lang.T("Ferma"));
+            bs.Click += (s, e) => { UdApply(); WsjtxUdp.Start(); };
+            bt.Click += (s, e) => WsjtxUdp.Stop();
+            udFwd.IsCheckedChanged += (s, e) => WsjtxUdp.Forward = udFwd.IsChecked == true;
+            udAuto.IsCheckedChanged += (s, e) => WsjtxUdp.AutoStart = udAuto.IsChecked == true;
+            udState = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
+            udCounts = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
+            udConsole = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.NoWrap };
+            udSv = new ScrollViewer { Content = udConsole, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = ScrollBarVisibility.Auto };
+            DockPanel sp = new DockPanel();
+            DockTop(sp, new TextBlock { Text = "5. " + Lang.T("WSJT-X / JTDX / MSHV via UDP"), FontWeight = FontWeight.Bold, FontSize = 15, Foreground = Pal.B(tc), Margin = new Thickness(4, 2, 12, 2) });
+            DockTop(sp, new TextBlock
+            {
+                Text = Lang.T("Come in LIVETROPOVHF: il programma ascolta i messaggi UDP del programma digitale (in WSJT-X: Impostazioni, Reporting, UDP Server 127.0.0.1 porta 2237) e li ripete identici sulla porta di inoltro per gli altri programmi (GridTracker, JTAlert, log). Ogni stazione decodificata diventa uno spot sentito dalla tua stazione; i messaggi di chiusura (RR73, 73, RRR) tra due altre stazioni diventano la tratta del loro QSO. Gli spot passano dagli stessi filtri degli altri."),
+                Foreground = Pal.B(Pal.Muted), FontSize = 12, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 0, 6, 4)
+            });
+            DockTop(sp, Row(L(Lang.T("Ascolta")), udIn, L(Lang.T("Porta")), udInPort, udFwd, udOut, L(Lang.T("Porta")), udOutPort));
+            DockTop(sp, Row(bs, bt, udAuto, udState, udCounts));
+            sp.Children.Add(udSv);
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(10), Padding = new Thickness(6, 3), Margin = new Thickness(4), Child = sp
+            };
+        }
+
+        void UdApply()
+        {
+            WsjtxUdp.ListenAddress = (udIn.Text ?? "").Trim();
+            WsjtxUdp.ListenPort = (int)V(udInPort);
+            WsjtxUdp.ForwardAddress = (udOut.Text ?? "").Trim();
+            WsjtxUdp.ForwardPort = (int)V(udOutPort);
+            WsjtxUdp.Forward = udFwd.IsChecked == true;
+            WsjtxUdp.AutoStart = udAuto.IsChecked == true;
         }
 
         void MqConnect()
@@ -549,8 +605,23 @@ namespace YAMS
                     if (mqConsole.Text != txt) { mqConsole.Text = txt; mqSv.ScrollToEnd(); }
                 }
             }
+            if (udState != null)
+            {
+                bool on = WsjtxUdp.Running;
+                udState.Text = on ? Lang.F("in ascolto su {0}:{1}", WsjtxUdp.ListenAddress, WsjtxUdp.ListenPort) + (WsjtxUdp.ProgramId.Length > 0 ? " · " + WsjtxUdp.ProgramId + " " + WsjtxUdp.ProgramVersion : "") + (WsjtxUdp.DeCall.Length > 0 ? " · " + WsjtxUdp.DeCall + " " + WsjtxUdp.DeGrid : "")
+                                 : (WsjtxUdp.LastError.Length > 0 ? Lang.F("non in ascolto: {0}", WsjtxUdp.LastError) : Lang.T("fermo"));
+                udState.Foreground = Pal.B(on ? Pal.Green : (WsjtxUdp.LastError.Length > 0 ? Pal.Orange : Pal.Muted));
+                udDot.Foreground = Pal.B(on ? Pal.Green : Pal.Muted);
+                ToolTip.SetTip(udDot, udState.Text);
+                udCounts.Text = Lang.F("pacchetti {0}, decodifiche {1}, QSO {2}, MS {3}", WsjtxUdp.Packets, WsjtxUdp.Decodes, WsjtxUdp.Qsos, MsCollector.Accepted[4]);
+                if (udSv.IsEffectivelyVisible)
+                {
+                    string txt = WsjtxUdp.LogText();
+                    if (udConsole.Text != txt) { udConsole.Text = txt; udSv.ScrollToEnd(); }
+                }
+            }
             int lines = 0, parsed = 0, acc = 0;
-            for (int i = 0; i < 4; i++) { lines += MsCollector.Lines[i]; parsed += MsCollector.Parsed[i]; acc += MsCollector.Accepted[i]; }
+            for (int i = 0; i < 5; i++) { lines += MsCollector.Lines[i]; parsed += MsCollector.Parsed[i]; acc += MsCollector.Accepted[i]; }
             int lastHour = 0; DateTime lim = DateTime.UtcNow.AddHours(-1);
             foreach (MsSpot s in MsCollector.Spots) if (s.Utc >= lim) lastHour++;
             lblRdStats.Text = Lang.F("righe ricevute      {0}\nspot letti          {1}\nspot MS accettati   {2}\nscartati (parola)   {3}\nscartati (banda)    {4}\nspot MS ultima ora  {5}",
@@ -603,6 +674,7 @@ namespace YAMS
                 cfg.Set("rd4_host", mqHost.Text ?? ""); cfg.Set("rd4_porta", V(mqPort)); cfg.Set("rd4_argomenti", mqTopics.Text ?? "");
                 cfg.Set("rd4_riconnetti", mqAuto.IsChecked == true); cfg.Set("rd4_avvio", mqStart.IsChecked == true);
             }
+            if (udIn != null) UdApply();
             MsCollector.Save(cfg);
         }
     }

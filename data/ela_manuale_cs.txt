@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka E-LAYER ANALYZER
-SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.4.15, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
+SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.4.16, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
 H1|1. Než začnete
 H2|1.1 Co program dělá
 P|E-LAYER ANALYZER shromažďuje v jediném programu nástroje ke studiu druhů šíření na VKV, které procházejí vrstvou E ionosféry: sporadickou vrstvu E, i vícenásobným skokem a mimokontinentální, F.A.I. (nehomogenity orientované podél magnetického pole), meteor scatter se začleněným programem YA-MS a rádiovou auroru. Pracuje se spoty z DX clusterů v reálném čase a s deníky ADIF a každý výsledek zobrazuje na mapě, která zabírá dvě třetiny okna, s daty a výpočty v pravé třetině.
@@ -53,6 +53,7 @@ H2|2.4 Shromážděné spoty a archiv CALL3
 P|Stránka Shromážděné spoty uvádí poslední spoty s filtrem podle pásma a zdroje; tlačítko Otevřít složku spotů otevře data/spot. Stránka CALL3 zobrazuje archiv značka -> lokátor (formát JTDX/WSJT): lze vyhledat značku, znovu načíst archiv nebo importovat nový soubor CALL3.TXT, který nahradí používaný (starý zůstane jako záložní kopie).
 LI|Sloupce shromážděných spotů jsou: UTC, Zdroj (cluster, RBN nebo PSKReporter), MHz, Pásmo, DX s jeho lokátorem, Spotter s jeho lokátorem, km, Prop (deklarovaný nebo rozpoznaný druh šíření) a Komentář. Nabídka Všechny zdroje omezí tabulku na jedinou relaci.
 LI|Stránka CALL3 uvádí používaný soubor, jeho datum, záhlaví a počet načtených značek (s distribuovaným archivem více než milion).
+LI|Od verze 0.4.16 má celý program jedinou databázi CALL3, tu ze Sběru dat YA-MS (karta METEOR SCATTER), se stejnými pravidly jako LIVETROPOVHF: aktualizace z MMMonVHF, ruční záznamy, přidané soubory, opravy z clusteru, naučené lokátory a G7VRD každých 6 hodin; opravy se zapisují do data/call3.txt a lokátory z data/call3_nuovi.txt se jednou importují. Spoty z WSJT-X, JTDX a MSHV přicházejí i přes UDP (zdroj WSJT-X UDP, port 2237 s přeposíláním na 2238).
 H2|2.5 Data o šíření
 P|Podkarta Data o šíření shromažďuje data, která pomáhají pochopit, zda se pásmo může otevřít. Aktualizují se sama nejvýše jednou za hodinu; tlačítko Aktualizovat nyní je stáhne okamžitě.
 LI|N0NBH (hamqsl.com): banner podmínek VKV a sluneční data (sluneční tok, indexy A a K, rentgenové záření, sluneční vítr, Bz, aurora a aurorální šířka) s E-skipem pro Evropu a Severní Ameriku (data DXrobot).

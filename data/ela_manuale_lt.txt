@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER naudotojo vadovas
-SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.4.15 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
+SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.4.16 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
 H1|1. Prieš pradedant
 H2|1.1 Ką daro programa
 P|E-LAYER ANALYZER vienoje programoje sujungia priemones VHF sklidimo būdams, vykstantiems per jonosferos E sluoksnį, tirti: sporadinį E, taip pat kelių šuolių ir tarpžemyninį, F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter su integruota programa YA-MS ir radijo pašvaistę. Ji dirba su DX klasterių spotais realiuoju laiku ir su ADIF žurnalais, o kiekvieną rezultatą rodo žemėlapyje, užimančiame du trečdalius lango; duomenys ir skaičiavimai pateikiami dešiniajame trečdalyje.
@@ -53,6 +53,7 @@ H2|2.4 Surinkti spotai ir CALL3 archyvas
 P|Puslapyje Surinkti spotai pateikiami paskutiniai spotai su filtru pagal juostą ir šaltinį; mygtukas Atverti spotų aplanką atveria data/spot. Puslapyje CALL3 rodomas archyvas šaukinys -> lokatorius (JTDX/WSJT formatas): galima ieškoti šaukinio, iš naujo įkelti archyvą arba importuoti naują CALL3.TXT failą, kuris pakeičia naudojamąjį (senasis lieka kaip atsarginė kopija).
 LI|Surinktų spotų stulpeliai yra: UTC, Šaltinis (klasteris, RBN arba PSKReporter), MHz, Juosta, DX su savo lokatoriumi, Spotter su savo lokatoriumi, km, Prop (deklaruotas arba atpažintas sklidimo būdas) ir Komentaras. Meniu Visi šaltiniai apriboja lentelę vienu seansu.
 LI|Puslapyje CALL3 nurodomas naudojamas failas, jo data, antraštė ir įkeltų šaukinių skaičius (su platinamu archyvu – daugiau nei milijonas).
+LI|Nuo 0.4.16 versijos visai programai yra viena CALL3 duomenų bazė – YA-MS Duomenų rinkimo (kortelė METEOR SCATTER), su tomis pačiomis taisyklėmis kaip LIVETROPOVHF: atnaujinimas iš MMMonVHF, rankiniai įrašai, pridėti failai, klasterio pataisos, išmokti lokatoriai ir G7VRD kas 6 valandas; pataisos įrašomos į data/call3.txt, o data/call3_nuovi.txt lokatoriai importuojami vieną kartą. WSJT-X, JTDX ir MSHV spotai ateina ir per UDP (šaltinis WSJT-X UDP, prievadas 2237 su persiuntimu į 2238).
 H2|2.5 Sklidimo duomenys
 P|Pakortelė Sklidimo duomenys renka duomenis, padedančius suprasti, ar juosta gali atsiverti. Jie patys atsinaujina ne dažniau kaip kartą per valandą; mygtukas Atnaujinti dabar juos atsisiunčia iš karto.
 LI|N0NBH (hamqsl.com): VHF sąlygų reklamjuostė ir saulės duomenys (saulės srautas, A ir K indeksai, rentgeno spinduliai, saulės vėjas, Bz, pašvaistė ir pašvaistės platuma) su Europos ir Šiaurės Amerikos E-skip (DXrobot duomenys).

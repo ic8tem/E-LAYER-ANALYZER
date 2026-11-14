@@ -38,6 +38,8 @@ O botão **Restaurar as regras do autor** restaura os valores padrão.
 
 Base de dados **indicativo → locator** do JTDX (mais de um milhão de indicativos) em `data/call3.txt`. Botões **Recarregar** e **Importar um novo CALL3.TXT**. Os locators de 6 caracteres lidos nos comentários dos spots são acrescentados a `data/call3_nuovi.txt`.
 
+A partir da versão 0.4.16 há uma única base CALL3 para todo o programa, a da Coleta de dados do YA-MS (aba METEOR SCATTER), com as mesmas regras do LIVETROPOVHF: atualização a partir do MMMonVHF, entradas manuais, arquivos adicionados, correções do cluster, locators aprendidos e G7VRD a cada 6 horas; as correções são gravadas em data/call3.txt e os locators de data/call3_nuovi.txt são importados uma vez. Os spots do WSJT-X, JTDX e MSHV chegam também por UDP (fonte WSJT-X UDP, porta 2237 com reenvio para a 2238).
+
 ## Subabas Spots e Dados de propagação
 
 A aba tem duas subabas: **Spots** (sessões, spots coletados, CALL3 e coluna dos filtros) e **Dados de propagação**:

@@ -775,3 +775,14 @@ locator	定位碼
 {0} non è nel CALL3: scrivi il locator a mano	{0} 不在 CALL3 中：請手動輸入定位碼
 Cerca su G7VRD i locator mancanti	在 G7VRD 上查找缺少的定位碼
 Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt.	最後的來源，與 LIVETROPOVHF 相同：對於在其他任何來源中都沒有 6 碼定位碼的呼號，程式每 6 小時自動查詢 G7VRD 的公開 API（api.g7vrd.co.uk），每組 40 個呼號；每個呼號每天最多一次。只接受 6 碼定位碼，不接受方格中心（LL 或 MM），且須與收到的定位碼在同一方格內。結果儲存在 data/CALL3-G7VRD.TXT，並與所有修正一樣，也寫入 data/call3.txt。
+Ascolta	監聽
+Avvia	啟動
+Avvia all'apertura	開啟時啟動
+Come in LIVETROPOVHF: il programma ascolta i messaggi UDP del programma digitale (in WSJT-X: Impostazioni, Reporting, UDP Server 127.0.0.1 porta 2237) e li ripete identici sulla porta di inoltro per gli altri programmi (GridTracker, JTAlert, log). Ogni stazione decodificata diventa uno spot sentito dalla tua stazione; i messaggi di chiusura (RR73, 73, RRR) tra due altre stazioni diventano la tratta del loro QSO. Gli spot passano dagli stessi filtri degli altri.	與 LIVETROPOVHF 相同：程式監聽數位模式程式的 UDP 訊息（在 WSJT-X 中：設定、Reporting、UDP Server 127.0.0.1 連接埠 2237），並原樣轉送到轉送連接埠，供其他程式使用（GridTracker、JTAlert、日誌）。每個解碼出的電台都成為你的電台收到的報告；另外兩個電台之間的結束訊息（RR73、73、RRR）成為它們 QSO 的路徑。這些報告與其他報告經過相同的過濾。
+Ferma	停止
+Inoltra i pacchetti a	轉送封包到
+WSJT-X / JTDX / MSHV via UDP	透過 UDP 的 WSJT-X / JTDX / MSHV
+fermo	已停止
+in ascolto su {0}:{1}	正在監聽 {0}:{1}
+non in ascolto: {0}	未監聽：{0}
+pacchetti {0}, decodifiche {1}, QSO {2}, MS {3}	封包 {0}，解碼 {1}，QSO {2}，MS {3}

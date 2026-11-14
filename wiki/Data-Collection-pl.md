@@ -38,6 +38,8 @@ Przycisk **Przywróć reguły autora** przywraca wartości domyślne.
 
 Archiwum JTDX **znak wywoławczy → lokator** (ponad milion znaków) w `data/call3.txt`. Przyciski **Wczytaj ponownie** i **Importuj nowy CALL3.TXT**. Lokatory 6-znakowe odczytane z komentarzy spotów są dodawane do `data/call3_nuovi.txt`.
 
+Od wersji 0.4.16 cały program ma jedną bazę CALL3, tę ze Zbierania danych YA-MS (zakładka METEOR SCATTER), z tymi samymi regułami co LIVETROPOVHF: aktualizacja z MMMonVHF, wpisy ręczne, dodane pliki, poprawki z klastra, nauczone lokatory i G7VRD co 6 godzin; poprawki są zapisywane w data/call3.txt, a lokatory z data/call3_nuovi.txt importuje się raz. Spoty z WSJT-X, JTDX i MSHV przychodzą też przez UDP (źródło WSJT-X UDP, port 2237 z przekazywaniem na 2238).
+
 ## Podzakładki Spoty i Dane propagacyjne
 
 Zakładka ma dwie podzakładki: **Spoty** (sesje, zebrane spoty, CALL3 i kolumna filtrów) oraz **Dane propagacyjne**:

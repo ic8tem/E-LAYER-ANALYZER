@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.9-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.10-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -26,7 +26,7 @@ P|Indításkor néhány másodpercre megjelenik a nyitókép az ESO VLT távcsö
 H2|2.3 A data mappa
 P|Minden beállítás és minden adat egyetlen data mappában van a program mellett: nincs AppData, nincsenek rendszermappák. A YA-MS másik számítógépre költöztetéséhez elég átmásolni a program mappáját a data mappájával együtt. A mappa tartalmát a 13. fejezet írja le.
 H2|2.4 Automatikus frissítések
-P|Az 1.8.9-os verziótól a frissítések automatikusak és csendesek: indításkor, majd 6 óránként a YA-MS megnézi a GitHubot, és ha új verzió van, letölti, telepíti és magától újraindul, semmit sem kérdezve (csak az állapotsor jelzi). A hiányzó fájlokat is kérdés nélkül újratölti. Az alább leírt ablak csak a "Frissítések" gomb megnyomásakor jelenik meg, vagy ha a data/config.ini fájlba beírod: aggiornamenti_automatici=0.
+P|Az 1.8.10-os verziótól a frissítések automatikusak és csendesek: indításkor, majd 6 óránként a YA-MS megnézi a GitHubot, és ha új verzió van, letölti, telepíti és magától újraindul, semmit sem kérdezve (csak az állapotsor jelzi). A hiányzó fájlokat is kérdés nélkül újratölti. Az alább leírt ablak csak a "Frissítések" gomb megnyomásakor jelenik meg, vagy ha a data/config.ini fájlba beírod: aggiornamenti_automatici=0.
 P|Az 1.8.0-s verziótól a YA-MS magától ellenőrzi a GitHubon, indításkor és legfeljebb naponta egyszer, hogy megjelent-e új verzió. Ha igen, megjelenik a „Frissítés érhető el” ablak az újdonságokkal és három gombbal:
 LI|Frissítés most: letölti a rendszerének megfelelő csomagot, lecseréli a program fájljait, megtartja a data mappát, és újraindítja a YA-MS-t. A data mappában lévő programfájlokat, amelyeket az új verzió módosít, előbb a data/backup/v<versione vecchia> mappába másolja; az Ön fájljaihoz (beállítások, archívumok, spotok, ADIF) nem nyúl.
 LI|Később: bezárja az ablakot; az ellenőrzés másnap megismétlődik.
@@ -179,6 +179,7 @@ LI|A nap időrendi rekonstrukciója és a következő másodpercek részletei.
 TAG|PROCEDURA|A GRAVES vételéhez: USB 143,049 MHz-en (kb. 1 kHz-es hang), lassú vagy kikapcsolt AGC, legalább 2,4 kHz-es hangfrekvenciás sávszélesség; az antenna az ÚTVONAL panelen javasolt hot spot felé, alacsony emelkedési szöggel; a PC órája szinkronizálva. A pingek rövid vonalkák a vivő közelében a waterfallon.
 H2|9.4 Adatgyűjtés
 P|Meteor scatter spotokat gyűjt három telnet-folyamból (DX cluster, RBN, DM4X a PSKReporter spotjaival) és a PSKReporter MQTT-folyamából, mindegyiket a saját alfülén, és szűri őket.
+P|Mint a LIVETROPOVHF-ben: a program figyeli a digitális program UDP üzeneteit (WSJT-X-ben: Beállítások, Reporting, UDP Server 127.0.0.1 port 2237), és változatlanul továbbítja őket a továbbító porton a többi programnak (GridTracker, JTAlert, napló). Minden dekódolt állomás az állomásod által hallott spot lesz; két másik állomás közötti záró üzenetek (RR73, 73, RRR) a QSO-juk útvonalává válnak. A spotok ugyanazokon a szűrőkön mennek át, mint a többi.
 LI|Felül adja meg a hívójelét a bejelentkezéshez. Minden folyamnak van hosztja, portja, bejelentkezés utáni parancsai, Újracsatlakozás és Csatlakozás indításkor beállítása, valamint konzolja.
 LI|A szűrő elfogadja a meteor scatterre jellemző frekvenciákon (50190-50300, 70100-70400, 144290-144399 kHz) vagy MS üzemmóddal (MSK144, FSK441, PSK2K, JTMS, JT6M, <MS>) érkező spotokat, és elveti azokat, amelyek más terjedési módot jelölnek meg. Az ablakok és a szavak módosíthatók; mindegyiknek saját számlálója van.
 LI|A CW spotokat azonnal eldobja (CW vagy WPM a megjegyzésben, vagy 28000-28070 kHz): nem jelennek meg a konzolon és nem mentődnek, hacsak nincs rajtuk <MS> jelölés. A négyzet kikapcsolható.

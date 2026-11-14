@@ -23,3 +23,5 @@
 ## CALL3
 
 Basis data **callsign → locator** JTDX (lebih dari satu juta callsign) di `data/call3.txt`. Tombol **Muat ulang** dan **Impor CALL3.TXT baru**. Locator 6 karakter yang terbaca di komentar spot ditambahkan ke `data/call3_nuovi.txt`.
+
+Sejak versi 0.4.16 hanya ada satu basis data CALL3 untuk seluruh program, yaitu milik Pengumpulan data YA-MS (tab METEOR SCATTER), dengan aturan yang sama seperti LIVETROPOVHF: pembaruan dari MMMonVHF, entri manual, berkas tambahan, koreksi dari cluster, lokator yang dipelajari dan G7VRD setiap 6 jam; koreksi ditulis ke data/call3.txt dan lokator dari data/call3_nuovi.txt diimpor sekali. Spot dari WSJT-X, JTDX dan MSHV juga datang lewat UDP (sumber WSJT-X UDP, port 2237 diteruskan ke 2238).

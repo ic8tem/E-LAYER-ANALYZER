@@ -23,3 +23,5 @@ Ang huling 2000 spot, may filter ayon sa banda at sanggunian. Archive: isang CSV
 ## CALL3
 
 Database ng JTDX na **callsign → locator** (mahigit isang milyong callsign) sa `data/call3.txt`. Mga button na **I-reload** at **Mag-import ng bagong CALL3.TXT**. Idinadagdag sa `data/call3_nuovi.txt` ang mga 6-character na locator na nabasa sa mga komento ng spot.
+
+Mula sa bersyon 0.4.16, iisa na lang ang database ng CALL3 para sa buong programa, ang sa Pagkolekta ng data ng YA-MS (tab na METEOR SCATTER), na may parehong mga patakaran ng LIVETROPOVHF: pag-update mula sa MMMonVHF, mano-manong entry, idinagdag na file, pagwawasto mula sa cluster, natutunang locator at G7VRD tuwing 6 na oras; isinusulat ang mga pagwawasto sa data/call3.txt at minsang ini-import ang mga locator ng data/call3_nuovi.txt. Dumarating din sa UDP ang mga spot mula sa WSJT-X, JTDX at MSHV (pinagmulang WSJT-X UDP, port 2237 na ipinapasa sa 2238).
