@@ -71,7 +71,6 @@ s = rep(s, 'public partial class MainWindow : Window\n    {', '''public partial 
         IStorageProvider StorageProvider { get { TopLevel t = TopLevel.GetTopLevel(this); return t != null ? t.StorageProvider : null; } }
         public static Action<string> LanguageRequested;   // cambio di lingua: lo esegue la finestra di E-LAYER ANALYZER
         public static Action<int> ThemeRequested;         // cambio dello schema di colori: idem
-        public static bool Hosted = true;                 // dentro E-LAYER ANALYZER: le righe telnet arrivano da DATA COLLECTION
         bool openedOnce;
         public void SelectTab(int i) { if (tabs != null) tabs.Select(i); }
         public void SaveSettings() { SaveConfig(); }
@@ -82,6 +81,11 @@ s = rep(s, 'public partial class MainWindow : Window\n    {', '''public partial 
             replaced = true;
         }
 ''', 'classe')
+# Hosted: dentro E-LAYER ANALYZER le righe telnet arrivano da DATA COLLECTION (dalla 1.8.11 YA-MS dichiara gia' il campo)
+if re.search(r'public static bool Hosted = false;', s):
+    s = re.sub(r'public static bool Hosted = false;', 'public static bool Hosted = true; ', s, count=1)
+elif 'public static bool Hosted' not in s:
+    s = rep(s, '        bool openedOnce;\n', '        public static bool Hosted = true;                 // dentro E-LAYER ANALYZER: le righe telnet arrivano da DATA COLLECTION\n        bool openedOnce;\n', 'Hosted')
 s = re.sub(r'\n[ \t]*Title = AppPaths\.AppName[^\n]*', '', s)
 s = re.sub(r'\n[ \t]*Width = 1600; Height = 980;', '', s)
 s = re.sub(r'\n[ \t]*WindowStartupLocation = WindowStartupLocation\.CenterScreen;', '', s)
