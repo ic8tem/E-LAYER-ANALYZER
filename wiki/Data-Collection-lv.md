@@ -25,3 +25,5 @@ Pēdējie 2000 spoti ar joslu un avotu filtriem. Arhīvs: viens CSV fails dienā
 JTDX **izsaukuma signāls → lokators** arhīvs (vairāk nekā miljons izsaukuma signālu) failā `data/call3.txt`. Pogas **Pārlādēt** un **Importēt jaunu CALL3.TXT**. Spotu komentāros nolasītie 6 rakstzīmju lokatori tiek pievienoti failam `data/call3_nuovi.txt`.
 
 Sākot ar versiju 0.4.16, visai programmai ir viena CALL3 datubāze, YA-MS Datu vākšanas (cilne METEOR SCATTER), ar tiem pašiem noteikumiem kā LIVETROPOVHF: atjaunināšana no MMMonVHF, rokas ieraksti, pievienotie faili, klastera labojumi, apgūtie lokatori un G7VRD ik pēc 6 stundām; labojumi tiek ierakstīti data/call3.txt, un data/call3_nuovi.txt lokatori tiek importēti vienreiz. WSJT-X, JTDX un MSHV spoti nāk arī caur UDP (avots WSJT-X UDP, ports 2237 ar pārsūtīšanu uz 2238).
+
+Šie filtri no YA-MS (CW, minimālais attālums, frekvenču logi, MS režīmi, joslas) attiecas tikai uz cilni METEOR SCATTER: tie nosaka, kuri spoti nonāk tās krājumā. Pārējās cilnes saņem visus spotus un izmanto savus filtrus.

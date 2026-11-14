@@ -25,3 +25,5 @@ Os últimos 2000 spots, com filtros por banda e por fonte. Arquivo: um ficheiro 
 Base de dados **indicativo → locator** do JTDX (mais de um milhão de indicativos) em `data/call3.txt`. Botões **Recarregar** e **Importar um novo CALL3.TXT**. Os locators de 6 caracteres lidos nos comentários dos spots são acrescentados a `data/call3_nuovi.txt`.
 
 A partir da versão 0.4.16 há uma só base CALL3 para todo o programa, a da Recolha de dados do YA-MS (separador METEOR SCATTER), com as mesmas regras do LIVETROPOVHF: atualização a partir do MMMonVHF, entradas manuais, ficheiros adicionados, correções do cluster, locators aprendidos e G7VRD a cada 6 horas; as correções são escritas em data/call3.txt e os locators de data/call3_nuovi.txt são importados uma vez. Os spots do WSJT-X, JTDX e MSHV chegam também por UDP (fonte WSJT-X UDP, porta 2237 com reenvio para a 2238).
+
+Estes filtros, que vêm do YA-MS (CW, distância mínima, janelas de frequência, modos MS, bandas), valem só para o separador METEOR SCATTER: decidem que spots entram na sua recolha. Os outros separadores recebem todos os spots e usam os seus próprios filtros.

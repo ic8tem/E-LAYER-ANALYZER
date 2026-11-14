@@ -40,6 +40,8 @@ A JTDX **hívójel → lokátor** adatbázisa (több mint egymillió hívójel) 
 
 A 0.4.16-os verziótól az egész programnak egyetlen CALL3 adatbázisa van, a YA-MS Adatgyűjtéséé (METEOR SCATTER fül), a LIVETROPOVHF szabályaival: frissítés az MMMonVHF-ről, kézi bejegyzések, hozzáadott fájlok, klaszterjavítások, tanult lokátorok és G7VRD 6 óránként; a javítások a data/call3.txt fájlba íródnak, a data/call3_nuovi.txt lokátorai egyszer átkerülnek. A WSJT-X, JTDX és MSHV spotjai UDP-n is érkeznek (forrás: WSJT-X UDP, 2237-es port, továbbítás a 2238-ra).
 
+Ezek a YA-MS-ből származó szűrők (CW, legkisebb távolság, frekvenciaablakok, MS módok, sávok) csak a METEOR SCATTER fülre vonatkoznak: ők döntik el, mely spotok kerülnek a gyűjteményébe. A többi fül minden spotot megkap, és a saját szűrőit használja.
+
 ## Spotok és Terjedési adatok allapok
 
 A fülnek két allapja van: **Spotok** (kapcsolatok, gyűjtött spotok, CALL3 és szűrőoszlop) és **Terjedési adatok**:

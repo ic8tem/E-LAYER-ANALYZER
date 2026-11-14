@@ -40,6 +40,8 @@ Base de dados **indicativo → locator** do JTDX (mais de um milhão de indicati
 
 A partir da versão 0.4.16 há uma única base CALL3 para todo o programa, a da Coleta de dados do YA-MS (aba METEOR SCATTER), com as mesmas regras do LIVETROPOVHF: atualização a partir do MMMonVHF, entradas manuais, arquivos adicionados, correções do cluster, locators aprendidos e G7VRD a cada 6 horas; as correções são gravadas em data/call3.txt e os locators de data/call3_nuovi.txt são importados uma vez. Os spots do WSJT-X, JTDX e MSHV chegam também por UDP (fonte WSJT-X UDP, porta 2237 com reenvio para a 2238).
 
+Estes filtros, que vêm do YA-MS (CW, distância mínima, janelas de frequência, modos MS, bandas), valem só para a aba METEOR SCATTER: decidem quais spots entram na sua coleta. As outras abas recebem todos os spots e usam seus próprios filtros.
+
 ## Subabas Spots e Dados de propagação
 
 A aba tem duas subabas: **Spots** (sessões, spots coletados, CALL3 e coluna dos filtros) e **Dados de propagação**:

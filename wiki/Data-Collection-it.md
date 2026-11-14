@@ -40,6 +40,8 @@ Archivio **nominativo → locator** di JTDX (oltre un milione di nominativi) in 
 
 Dalla versione 0.4.16 l'archivio CALL3 è uno solo per tutto il programma, quello della Raccolta dati di YA-MS (linguetta METEOR SCATTER), con le stesse regole di LIVETROPOVHF: aggiornamento da MMMonVHF, voci a mano, file aggiunti, correzioni dal cluster, locatori imparati e G7VRD ogni 6 ore; le correzioni si scrivono dentro data/call3.txt e i locatori di data/call3_nuovi.txt si importano una volta. Gli spot di WSJT-X, JTDX e MSHV arrivano anche via UDP (fonte WSJT-X UDP, porta 2237 con inoltro alla 2238).
 
+Questi filtri, che vengono da YA-MS (CW, distanza minima, finestre di frequenza, modi MS, bande), valgono solo per la linguetta METEOR SCATTER: decidono quali spot entrano nella sua raccolta. Le altre linguette ricevono tutti gli spot e usano i propri filtri.
+
 ## Sottolinguette Spot e Dati di propagazione
 
 La linguetta ha due sottolinguette: **Spot** (sessioni, spot raccolti, CALL3 e colonna dei filtri) e **Dati di propagazione**:

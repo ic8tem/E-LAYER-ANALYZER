@@ -40,6 +40,8 @@ Archiwum JTDX **znak wywoławczy → lokator** (ponad milion znaków) w `data/ca
 
 Od wersji 0.4.16 cały program ma jedną bazę CALL3, tę ze Zbierania danych YA-MS (zakładka METEOR SCATTER), z tymi samymi regułami co LIVETROPOVHF: aktualizacja z MMMonVHF, wpisy ręczne, dodane pliki, poprawki z klastra, nauczone lokatory i G7VRD co 6 godzin; poprawki są zapisywane w data/call3.txt, a lokatory z data/call3_nuovi.txt importuje się raz. Spoty z WSJT-X, JTDX i MSHV przychodzą też przez UDP (źródło WSJT-X UDP, port 2237 z przekazywaniem na 2238).
 
+Te filtry z YA-MS (CW, minimalna odległość, okna częstotliwości, tryby MS, pasma) dotyczą tylko zakładki METEOR SCATTER: decydują, które spoty trafiają do jej zbioru. Pozostałe zakładki dostają wszystkie spoty i używają własnych filtrów.
+
 ## Podzakładki Spoty i Dane propagacyjne
 
 Zakładka ma dwie podzakładki: **Spoty** (sesje, zebrane spoty, CALL3 i kolumna filtrów) oraz **Dane propagacyjne**:

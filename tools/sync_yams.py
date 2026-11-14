@@ -192,7 +192,32 @@ if os.path.exists(p):
             '            Grid.SetColumn(right, 1); g.Children.Add(right);\n'
             '            if (Hosted) { ((ScrollViewer)right.Child).Content = null; MsFilterPanel = fp; }',
             'filtro in DATA COLLECTION')
-    s = rep(s, '            if (MsCollector.Started) return;', '            if (Hosted || MsCollector.Started) return;', 'RdAutoStart')
+    # dalla 1.8.10: PSKReporter MQTT, WSJT-X UDP e i comandi di CALL3 si mostrano in DATA COLLECTION (raccolta unica);
+    # all'avvio si connette solo MQTT (le sessioni telnet le apre DATA COLLECTION)
+    s = rep(s, '            inner.Add("4. " + Lang.T("PSKReporter MQTT"), MqttBox(Pal.Green));\n            inner.Add("5. WSJT-X UDP", UdpBox(Pal.Azure));',
+            '            Border mqb = MqttBox(Pal.Green), udb = UdpBox(Pal.Azure);\n'
+            '            if (Hosted) { MqttPanel = mqb; UdpPanel = udb; }   // E-LAYER ANALYZER: in DATA COLLECTION\n'
+            '            else { inner.Add("4. " + Lang.T("PSKReporter MQTT"), mqb); inner.Add("5. WSJT-X UDP", udb); }',
+            'MQTT e UDP in DATA COLLECTION')
+    s = rep(s, '        public static Control MsFilterPanel;',
+            '        public static Control MsFilterPanel, MqttPanel, UdpPanel, Call3Panel;', 'pannelli statici')
+    s = rep(s, '            DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status));',
+            '            Border c3row = Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status);\n'
+            '            if (Hosted) { lblRdCall3.Margin = new Thickness(8, 4); Call3Panel = new StackPanel { Children = { c3row, lblRdCall3 } }; }   // E-LAYER ANALYZER: pagina CALL3\n'
+            '            else DockTop(left, c3row);',
+            'CALL3 in DATA COLLECTION')
+    s = rep(s, '            DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));',
+            '            if (!Hosted) DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));',
+            'riga login nascosta')
+    # in E-LAYER ANALYZER una scritta in cima al filtro MS: vale solo per la linguetta METEOR SCATTER
+    s = rep(s, '            fp.Children.Add(new TextBlock { Text = Lang.T("Filtro degli spot meteor scatter"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });',
+            '            fp.Children.Add(new TextBlock { Text = Lang.T("Filtro degli spot meteor scatter"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });\n'
+            '            if (Hosted) fp.Children.Add(new TextBlock { Text = Lang.T("Questi filtri, che vengono da YA-MS (CW, distanza minima, finestre di frequenza, modi MS, bande), valgono solo per la linguetta METEOR SCATTER: decidono quali spot entrano nella sua raccolta. Le altre linguette ricevono tutti gli spot e usano i propri filtri."), TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Orange) });',
+            'nota filtro MS')
+    s = rep(s, '            if (MsCollector.Started) return;\n            MsCollector.Started = true;\n',
+            '            if (MsCollector.Started) return;\n            MsCollector.Started = true;\n'
+            '            if (Hosted) { if (mqStart != null && mqStart.IsChecked == true) MqConnect(); return; }   // E-LAYER ANALYZER: telnet da DATA COLLECTION\n',
+            'RdAutoStart')
     wr(p, s)
     p = os.path.join(DST, 'Core', 'MsSpots.cs'); s = rd(p)
     m = re.search(r'\n        public static void Shutdown\(\) \{[^\n]*\}', s)   # dalla 1.8.0 chiude anche PskMqtt

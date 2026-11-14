@@ -25,3 +25,5 @@
 `data/call3.txt`의 JTDX **호출부호 → 로케이터** 데이터베이스(호출부호 100만 개 이상). **다시 불러오기**와 **새 CALL3.TXT 가져오기** 버튼. 스폿 코멘트에서 읽은 6자리 로케이터는 `data/call3_nuovi.txt`에 추가됩니다.
 
 버전 0.4.16부터 프로그램 전체에 CALL3 데이터베이스는 하나뿐이며, YA-MS 데이터 수집(METEOR SCATTER 탭)의 것으로 LIVETROPOVHF와 같은 규칙을 따릅니다: MMMonVHF에서 업데이트, 손 입력, 추가 파일, 클러스터 수정, 학습한 로케이터, 6시간마다 G7VRD. 수정은 data/call3.txt에 기록되고 data/call3_nuovi.txt의 로케이터는 한 번 가져옵니다. WSJT-X, JTDX, MSHV의 스팟은 UDP로도 들어옵니다(출처 WSJT-X UDP, 포트 2237, 2238로 전달).
+
+YA-MS에서 온 이 필터(CW, 최소 거리, 주파수 창, MS 모드, 밴드)는 METEOR SCATTER 탭에만 적용되며, 어떤 스팟이 그 수집에 들어갈지 정합니다. 다른 탭은 모든 스팟을 받아 각자의 필터를 사용합니다.

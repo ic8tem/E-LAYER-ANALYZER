@@ -40,6 +40,8 @@ JTDX 的**呼號 → 網格座標**資料庫（超過一百萬個呼號），位
 
 從 0.4.16 版起，整個程式只有一個 CALL3 資料庫，即 YA-MS 資料收集（METEOR SCATTER 分頁）中的資料庫，規則與 LIVETROPOVHF 相同：從 MMMonVHF 更新、手動條目、加入的檔案、叢集修正、學到的定位碼以及每 6 小時一次的 G7VRD；修正寫入 data/call3.txt，data/call3_nuovi.txt 中的定位碼匯入一次。WSJT-X、JTDX 和 MSHV 的報告也可透過 UDP 接收（來源 WSJT-X UDP，連接埠 2237，轉送到 2238）。
 
+這些來自 YA-MS 的過濾條件（CW、最小距離、頻率視窗、MS 模式、波段）只適用於 METEOR SCATTER 分頁：它們決定哪些報告進入該分頁的收集。其他分頁接收全部報告並使用各自的過濾條件。
+
 ## spot 與 傳播資料 子頁籤
 
 此頁籤有兩個子頁籤：**spot**（連線階段、已收集的 spot、CALL3 與篩選器欄）與 **傳播資料**：

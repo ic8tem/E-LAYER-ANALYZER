@@ -67,6 +67,10 @@ namespace ELA
             DockPanel sessPage = new DockPanel();   // il filtro locale delle righe sta nella colonna dei filtri (40 %)
             sessPage.Children.Add(new ScrollViewer { Content = sp, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto });
             Inner.Add(Lang.T("Sessioni telnet"), sessPage);
+            // PSKReporter MQTT e WSJT-X / JTDX / MSHV via UDP: i pannelli del nucleo di YA-MS, una sola raccolta per tutto il programma
+            Control mq = Detach(YAMS.MainWindow.MqttPanel), ud = Detach(YAMS.MainWindow.UdpPanel);
+            if (mq != null) Inner.Add(Lang.T("PSKReporter MQTT"), mq);
+            if (ud != null) Inner.Add("WSJT-X UDP", ud);
 
             // --- spot raccolti
             cmbBand = Ui.Combo(new[] { Lang.T("Tutte"), "10m", "8m", "6m", "4m", "2m", "70cm", "HF" }, 0);
@@ -96,6 +100,8 @@ namespace ELA
             Button bImport = Ui.B(Lang.T("Importa un nuovo CALL3.TXT..."));
             bImport.Click += async (s, e) => await ImportCall3();
             DockPanel callPage = new DockPanel();
+            Control c3 = Detach(YAMS.MainWindow.Call3Panel);   // archivio unico: aggiornamento MMMonVHF, G7VRD, file aggiunti, voci a mano
+            if (c3 != null) Ui.Dock(callPage, c3, Dock.Top);
             Ui.Dock(callPage, Ui.Row(Ui.L(Lang.T("Nominativo")), txtSearch, bFind, lblSearch), Dock.Top);
             Ui.Dock(callPage, Ui.Row(bReload, bImport), Dock.Top);
             callPage.Children.Add(new ScrollViewer { Content = lblCall3 });
@@ -133,6 +139,16 @@ namespace ELA
                 if (dirty && Root.IsEffectivelyVisible) FillAll();
             };
             t.Start();
+        }
+
+        // un pannello di YA-MS si toglie dal genitore precedente (finestra ricostruita, cambio di lingua) prima di riusarlo
+        static Control Detach(Control c)
+        {
+            if (c == null) return null;
+            if (c.Parent is Panel pp) pp.Children.Remove(c);
+            else if (c.Parent is ContentControl cc) cc.Content = null;
+            else if (c.Parent is Decorator dd) dd.Child = null;
+            return c;
         }
 
         // ---------------- spot di WSJT-X / JTDX / MSHV via UDP (fonte 3 dell'archivio di E-LAYER)

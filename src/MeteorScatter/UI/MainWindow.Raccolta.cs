@@ -16,7 +16,7 @@ namespace YAMS
 {
     public partial class MainWindow
     {
-        public static Control MsFilterPanel;   // E-LAYER ANALYZER: filtro MS mostrato in DATA COLLECTION
+        public static Control MsFilterPanel, MqttPanel, UdpPanel, Call3Panel;   // E-LAYER ANALYZER: filtro MS mostrato in DATA COLLECTION
         TextBox txtRdLogin, txtRdTest;
         TextBlock lblRdStats, lblRdTest, lblRdCall3, lblRdCount;
         TableView tRd;
@@ -50,7 +50,7 @@ namespace YAMS
             lblRdCall3 = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             Button bImp = B(Lang.T("Importa CALL3.TXT..."));
             bImp.Click += async (s, e) => await ImportCall3();
-            DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));
+            if (!Hosted) DockTop(left, Row(L(Lang.T("Nominativo per il login")), txtRdLogin, bImp, lblRdCall3));
             // CALL3 con le regole di LIVETROPOVHF: aggiornamento da MMMonVHF, voci a mano, file aggiunti
             Button bC3Upd = B(Lang.T("Aggiorna adesso"));
             ToolTip.SetTip(bC3Upd, Lang.T("Scarica il CALL3.TXT più recente da MMMonVHF (www.mmmonvhf.de), lo controlla (almeno 100.000 righe valide, altrimenti non cambia nulla), salva il precedente in data/call3.bak e lo sostituisce. Voci a mano, file aggiunti, correzioni dal cluster e locatori imparati restano sopra e non si toccano."));
@@ -68,7 +68,9 @@ namespace YAMS
             ToolTip.SetTip(chkG7, Lang.T("Ultima fonte, come in LIVETROPOVHF: per i nominativi che in nessun'altra fonte hanno un locatore a 6 caratteri il programma lo chiede in automatico ogni 6 ore all'API pubblica di G7VRD (api.g7vrd.co.uk), in gruppi di 40 nominativi; ogni nominativo al massimo una volta al giorno. Si accetta solo un locatore a 6 caratteri, non il centro del quadrato (LL o MM), nello stesso quadrato di quello ricevuto. I risultati stanno in data/CALL3-G7VRD.TXT e, come tutte le correzioni, vengono scritti anche dentro data/call3.txt."));
             CallDb.G7Enabled = chkG7.IsChecked == true;
             chkG7.IsCheckedChanged += (s, e) => { CallDb.G7Enabled = chkG7.IsChecked == true; cfg.Set("call3_g7vrd", CallDb.G7Enabled); };
-            DockTop(left, Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status));
+            Border c3row = Row(L("CALL3"), bC3Upd, chkC3Auto, chkG7, bC3Add, bC3Man, lblC3Status);
+            if (Hosted) { lblRdCall3.Margin = new Thickness(8, 4); Call3Panel = new StackPanel { Children = { c3row, lblRdCall3 } }; }   // E-LAYER ANALYZER: pagina CALL3
+            else DockTop(left, c3row);
 
             Color[] cols = { Pal.Azure, Pal.Violet, Pal.Orange };
 
@@ -102,8 +104,9 @@ namespace YAMS
             string[] shortName = { Lang.T("DX cluster"), "RBN", Lang.T("DM4X (PSKReporter)") };
             // i riquadri si creano sempre: i loro campi servono all'aggiornamento e al salvataggio
             for (int i = 0; i < 3; i++) { Border sbx = SessionBox(i, cols[i]); if (!Hosted) inner.Add((i + 1) + ". " + shortName[i], sbx); }
-            inner.Add("4. " + Lang.T("PSKReporter MQTT"), MqttBox(Pal.Green));
-            inner.Add("5. WSJT-X UDP", UdpBox(Pal.Azure));
+            Border mqb = MqttBox(Pal.Green), udb = UdpBox(Pal.Azure);
+            if (Hosted) { MqttPanel = mqb; UdpPanel = udb; }   // E-LAYER ANALYZER: in DATA COLLECTION
+            else { inner.Add("4. " + Lang.T("PSKReporter MQTT"), mqb); inner.Add("5. WSJT-X UDP", udb); }
             inner.Add(Lang.T("Spot MS raccolti"), spotPane);
             DockTop(left, inner.Bar);
             left.Children.Add(inner.Host);
@@ -112,6 +115,7 @@ namespace YAMS
             // ---------------- destra (40 %): filtro
             StackPanel fp = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
             fp.Children.Add(new TextBlock { Text = Lang.T("Filtro degli spot meteor scatter"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
+            if (Hosted) fp.Children.Add(new TextBlock { Text = Lang.T("Questi filtri, che vengono da YA-MS (CW, distanza minima, finestre di frequenza, modi MS, bande), valgono solo per la linguetta METEOR SCATTER: decidono quali spot entrano nella sua raccolta. Le altre linguette ricevono tutti gli spot e usano i propri filtri."), TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Orange) });
             // 1° criterio: finestre di frequenza tipiche del MS
             CheckBox chkWin = C(Lang.T("1° criterio: frequenze tipiche degli spot meteor scatter (kHz)"), MsCollector.UseWindows);
             chkWin.FontWeight = FontWeight.Bold; chkWin.Margin = new Thickness(0, 2, 0, 0);
@@ -389,8 +393,9 @@ namespace YAMS
         // all'apertura del programma: sessioni con "Connetti all'avvio" (una sola volta, non dopo il cambio di lingua)
         void RdAutoStart()
         {
-            if (Hosted || MsCollector.Started) return;
+            if (MsCollector.Started) return;
             MsCollector.Started = true;
+            if (Hosted) { if (mqStart != null && mqStart.IsChecked == true) MqConnect(); return; }   // E-LAYER ANALYZER: telnet da DATA COLLECTION
             for (int i = 0; i < 3; i++) if (rdStart[i].IsChecked == true) RdConnect(i);
             if (mqStart != null && mqStart.IsChecked == true) MqConnect();
         }
