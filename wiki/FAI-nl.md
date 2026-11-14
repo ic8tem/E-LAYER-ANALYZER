@@ -33,7 +33,10 @@ Dit is de geometrische constructie waarmee je **controleert of een reflectiepunt
 | IC8FAX - F6DRO | JN44GH (boven Genua) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (Zuidwest-Duitsland, 28 km van Brussel) | 0,88° | 338° / 87° |
 | Baken DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden richtte op 290° en meldde aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (test van 1987 via Boedapest, 1569 km) | Boedapest op het spoor; cellen onder 1° vanaf 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-veld van 1990) | JN45MV, spoor op 40 km van Genève (Genève: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (test van 1987 via Boedapest, 1569 km, IGRF-veld van 1987) | Boedapest op 2,53°, net boven 2,5° (2,16° met het veld van vandaag); spoor op 26 km; meest waarschijnlijk KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Vanaf versie 0.4.18 gebruiken de twee gevallen met een datum (1987 en 1990) het IGRF-14-veld van dat jaar, zolang de stations die van het geval blijven.
 
 Bekende scatterpunten in de lijst: Genève, Brussel, Boedapest, JN92, JN41/42.
 

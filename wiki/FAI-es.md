@@ -33,7 +33,10 @@ Es la construcción geométrica que sirve para **verificar si un punto de reflex
 | IC8FAX - F6DRO | JN44GH (sobre Génova) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (SO de Alemania, a 28 km de Bruselas) | 0,88° | 338° / 87° |
 | Baliza DB0FAI (305°) - Dresde vía Sheffield (DL5MCG; Dresde apuntaba a 290° y había declarado aurora) | – | 0,3° | – |
-| DL5MCG - SV1DH (prueba de 1987 vía Budapest, 1569 km) | Budapest sobre la estela; celdas por debajo de 1° desde 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, campo IGRF de 1990) | JN45MV, estela a 40 km de Ginebra (Ginebra: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (prueba de 1987 vía Budapest, 1569 km, campo IGRF de 1987) | Budapest a 2,53°, apenas por encima de los 2,5° (2,16° con el campo de hoy); estela a 26 km; más probable KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Desde la versión 0.4.18 los dos casos con fecha (1987 y 1990) usan el campo IGRF-14 de ese año, mientras las estaciones sigan siendo las del caso.
 
 Scatter points conocidos en la lista: Ginebra, Bruselas, Budapest, JN92, JN41/42.
 

@@ -33,7 +33,10 @@ C'est la construction géométrique qui sert à **vérifier si un point de réfl
 | IC8FAX - F6DRO | JN44GH (au-dessus de Gênes) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (sud-ouest de l'Allemagne, à 28 km de Bruxelles) | 0,88° | 338° / 87° |
 | Balise DB0FAI (305°) - Dresde via Sheffield (DL5MCG ; Dresde pointait à 290° et avait déclaré une aurore) | – | 0,3° | – |
-| DL5MCG - SV1DH (essai de 1987 via Budapest, 1569 km) | Budapest sur la traînée ; cellules sous 1° à partir de 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, champ IGRF de 1990) | JN45MV, traînée à 40 km de Genève (Genève : 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (essai de 1987 via Budapest, 1569 km, champ IGRF de 1987) | Budapest à 2,53°, juste au-delà des 2,5° (2,16° avec le champ d'aujourd'hui) ; traînée à 26 km ; le plus probable KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Depuis la version 0.4.18, les deux cas datés (1987 et 1990) utilisent le champ IGRF-14 de cette année-là, tant que les stations restent celles du cas.
 
 Scatter points connus dans la liste : Genève, Bruxelles, Budapest, JN92, JN41/42.
 
