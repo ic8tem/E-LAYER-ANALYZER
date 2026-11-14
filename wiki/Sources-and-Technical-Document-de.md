@@ -2,7 +2,7 @@
 
 [← Home](Home-de)
 
-- Der Reiter **QUELLEN** listet alle Quellen auf, nummeriert [1]-[64].
+- Der Reiter **QUELLEN** listet alle Quellen auf, nummeriert [1]-[65].
 - Der Reiter **ZUSAMMENFASSUNG DER BERECHNUNGSENTSCHEIDUNGEN** (früher *Technisches Dokument*) erklärt jede Berechnung mit ihren Formeln und den Kennzeichen **QUELLE** (Schritt aus einer Quelle übernommen), **PRÜFUNG** (am Programm oder an einem realen Fall verifiziert) und **WAHL** (eine Entscheidung des Programms, im Funkbetrieb zu bestätigen).
 - Der Reiter **BEDIENUNGSANLEITUNG** ist die ausführliche Bedienungsanleitung des Programms, Reiter für Reiter.
 - Der Reiter **TECHNISCHER BERICHT** legt die Entscheidungen dar, die zur Entwicklung des Programms geführt haben: Architektur, physikalische Modelle, Datenerkennung, Prüfungen, Grenzen und künftige Entwicklungen.

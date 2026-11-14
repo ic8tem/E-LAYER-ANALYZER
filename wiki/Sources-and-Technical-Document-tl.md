@@ -2,7 +2,7 @@
 
 [← Home](Home-tl)
 
-- Inililista ng tab na **MGA SANGGUNIAN** ang lahat ng sanggunian, may bilang na [1]-[64].
+- Inililista ng tab na **MGA SANGGUNIAN** ang lahat ng sanggunian, may bilang na [1]-[65].
 - Ipinapaliwanag ng tab na **BUOD NG MGA PAGPILI SA KALKULASYON** (dating *Teknikal na dokumento*) ang bawat kalkulasyon kasama ang mga pormula nito at ang mga label na **SANGGUNIAN** (hakbang na kinuha mula sa isang sanggunian), **PAGSUSURI** (beripikado sa programa o sa totoong kaso) at **PAGPILI** (pagpiling ginawa ng programa, na dapat kumpirmahin sa ere).
 - Ang tab na **MANWAL NG PAGGAMIT** ang malalim na manwal ng paggamit ng programa, bawat tab.
 - Inilalahad ng tab na **TEKNIKAL NA ULAT** ang mga pagpiling humantong sa pagbuo ng programa: arkitektura, mga pisikal na modelo, pagkilala ng datos, mga pagsusuri, mga limitasyon at mga susunod na pag-unlad.

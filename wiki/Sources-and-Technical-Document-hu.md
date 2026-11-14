@@ -2,7 +2,7 @@
 
 [← Kezdőlap](Home-hu)
 
-- A **FORRÁSOK** fül az összes forrást felsorolja, [1]-[64] számozással.
+- A **FORRÁSOK** fül az összes forrást felsorolja, [1]-[65] számozással.
 - A **SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA** fül (korábban *Műszaki dokumentum*) minden számítást képleteivel együtt ismertet, a következő jelölésekkel: **FORRÁS** (forrásból vett lépés), **ELLENŐRZÉS** (a programon vagy egy valódi eseten ellenőrizve) és **VÁLASZTÁS** (a program döntése, amelyet a forgalomban kell megerősíteni).
 - A **FELHASZNÁLÓI KÉZIKÖNYV** fül a program részletes, fülenkénti felhasználói kézikönyve.
 - A **MŰSZAKI JELENTÉS** fül a program létrehozásához vezető döntéseket ismerteti: felépítés, fizikai modellek, adatfelismerés, ellenőrzések, korlátok és jövőbeli fejlesztések.

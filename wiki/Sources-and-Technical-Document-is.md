@@ -2,7 +2,7 @@
 
 [← Home](Home-is)
 
-- Flipinn **HEIMILDIR** telur upp allar heimildir, tölusettar [1]-[64].
+- Flipinn **HEIMILDIR** telur upp allar heimildir, tölusettar [1]-[65].
 - Flipinn **YFIRLIT YFIR VAL ÚTREIKNINGA** (áður *Tæknilegt skjal*) skýrir hvern útreikning með formúlum hans og merkingunum **HEIMILD** (skref tekið úr heimild), **PRÓFUN** (sannreynt á forritinu eða á raunverulegu tilviki) og **VAL** (val forritsins, sem staðfesta þarf í loftinu).
 - Flipinn **NOTENDAHANDBÓK** er ítarleg notendahandbók forritsins, flipa fyrir flipa.
 - Flipinn **TÆKNISKÝRSLA** lýsir þeim ákvörðunum sem leiddu til gerðar forritsins: högun, eðlisfræðileg líkön, greining gagna, prófanir, takmarkanir og framtíðarþróun.

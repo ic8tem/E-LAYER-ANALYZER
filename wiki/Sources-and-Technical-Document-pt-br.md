@@ -2,7 +2,7 @@
 
 [← Home](Home-pt-br)
 
-- A aba **FONTES** lista todas as fontes, numeradas de [1] a [64].
+- A aba **FONTES** lista todas as fontes, numeradas de [1] a [65].
 - A aba **SÍNTESE DAS ESCOLHAS DE CÁLCULO** (antes *Documento técnico*) explica cada cálculo com as suas fórmulas e as etiquetas **FONTE** (passo tirado de uma fonte), **VERIFICAÇÃO** (verificado no programa ou em um caso real) e **ESCOLHA** (uma escolha feita pelo programa, a ser confirmada no ar).
 - A aba **MANUAL DO USUÁRIO** é o manual do usuário detalhado do programa, aba por aba.
 - A aba **RELATÓRIO TÉCNICO** expõe as escolhas que levaram à realização do programa: arquitetura, modelos físicos, reconhecimento dos dados, verificações, limites e desenvolvimentos futuros.
