@@ -281,7 +281,9 @@ namespace ELA
                     Spot s = new Spot { Utc = dt, FreqKHz = q.FreqMHz * 1000, DxCall = q.Call, Spotter = q.MyCall, LocSpotter = q.MyGrid, LocDx = q.Grid, LatS = q.LatTx, LonS = q.LonTx, LatD = la, LonD = lo, Prop = "ES" };
                     q.Path = EsModel.Build(s, H);
                     if (q.Path == null) { ignored++; continue; }
-                    if (prop != "ES" && (EsModel.IsTransEquatorial(q.LatTx, q.LonTx, q.LatRx, q.LonRx) || EsModel.IsTransEquatorialWorld(q.LatTx, q.LonTx, q.LatRx, q.LonRx))) { tepN++; continue; }   // transequatoriale (regola IC8TEM)
+                    bool teq = false;
+                    if (prop != "ES") using (Igrf.At(Igrf.YearOf(dt))) teq = EsModel.IsTransEquatorial(q.LatTx, q.LonTx, q.LatRx, q.LonRx) || EsModel.IsTransEquatorialWorld(q.LatTx, q.LonTx, q.LatRx, q.LonRx);   // campo IGRF dell'anno del QSO
+                    if (teq) { tepN++; continue; }   // transequatoriale (regola IC8TEM)
                     if (chkMin.IsChecked == true && (q.Path.Hops == 0 || (band == "2m" && q.Path.DistKm < EsModel.MinKm144))) { tooShort++; continue; }   // 144 MHz: Es sopra i 900 km (regola IC8TEM)
                     list.Add(q);
                 }
