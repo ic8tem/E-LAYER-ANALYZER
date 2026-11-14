@@ -159,8 +159,21 @@ namespace YAMS
             public LatLon Mid;
             public double Axis;        // direzione della tratta, 0-180 gradi
             public string Pair = "";
-            public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo)
+            public bool Parallel;      // trovata almeno una tratta parallela entro 3 minuti (prima o dopo), o ricevente che sente altri
+            public bool NeedsMqtt;     // spot di un cluster o di RBN: vale solo se la stessa coppia arriva anche da PSKReporter MQTT
+            public bool Confirmed;     // stessa coppia vista anche in PSKReporter MQTT entro 3 minuti
+            public string Rx = "", Tx = "";
+            public bool Show { get { return !Parallel && (!NeedsMqtt || Confirmed); } }
         }
+        // nominativo senza suffissi degli skimmer ("EI4HQ-#" -> "EI4HQ")
+        static string BaseCall(string c)
+        {
+            c = (c ?? "").Trim().ToUpperInvariant();
+            int i = c.IndexOf('-'); return i > 0 ? c.Substring(0, i) : c;
+        }
+        // ricezioni FT8 per ricevente e banda viste in PSKReporter MQTT (ultimi 10 minuti): chi sente molte stazioni ha la
+        // banda aperta, il suo spot non e' isolato (regola dell'autore, 14/11/2026)
+        static readonly Dictionary<string, List<KeyValuePair<DateTime, string>>> rxHeard = new Dictionary<string, List<KeyValuePair<DateTime, string>>>();
         public static bool Ft8Enabled = true;
         public const double Ft8MinKm = 1100, Ft8Minutes = 3, Ft8MidKm = 300, Ft8Deg = 15;
         public static int Ft8Seen;
@@ -188,10 +201,13 @@ namespace YAMS
             if (!Astro.TryLocator(s.LocSpotter, out a) || !Astro.TryLocator(s.LocDx, out b)) return false;
             double km = Astro.DistanceKm(a, b);
             if (km < 50) return false;
+            string rx = BaseCall(s.Spotter), tx = BaseCall(s.DxCall);
+            bool mqtt = s.Source == 3;
             Ft8Path p = new Ft8Path
             {
                 S = s, Mid = Astro.Destination(a, Astro.Bearing(a, b), km / 2), Axis = Astro.Bearing(a, b) % 180,
-                Pair = string.CompareOrdinal(s.Spotter, s.DxCall) < 0 ? s.Spotter + "|" + s.DxCall : s.DxCall + "|" + s.Spotter
+                Pair = string.CompareOrdinal(rx, tx) < 0 ? rx + "|" + tx : tx + "|" + rx, Rx = rx, Tx = tx,
+                NeedsMqtt = s.Source <= 2   // cluster, RBN, cluster con PSKReporter: serve la conferma da MQTT
             };
             List<Ft8Path> l;
             if (!ft8Recent.TryGetValue(band, out l)) { l = new List<Ft8Path>(); ft8Recent[band] = l; }
@@ -201,19 +217,41 @@ namespace YAMS
             if (cut > 0) l.RemoveRange(0, cut);
             foreach (Ft8Path q in l)
             {
-                if (q.Pair == p.Pair || Math.Abs((q.S.Utc - s.Utc).TotalMinutes) > Ft8Minutes) continue;
-                if (AxisDiff(q.Axis, p.Axis) > Ft8Deg || Astro.DistanceKm(q.Mid, p.Mid) > Ft8MidKm) continue;
-                q.Parallel = true; p.Parallel = true;
+                if (Math.Abs((q.S.Utc - s.Utc).TotalMinutes) > Ft8Minutes) continue;
+                if (q.Pair == p.Pair)
+                {
+                    // stessa coppia: conferma da PSKReporter MQTT per gli spot dei cluster e di RBN
+                    if (mqtt) q.Confirmed = true;
+                    if (q.S.Source == 3) p.Confirmed = true;
+                    continue;
+                }
+                if (AxisDiff(q.Axis, p.Axis) <= Ft8Deg && Astro.DistanceKm(q.Mid, p.Mid) <= Ft8MidKm) { q.Parallel = true; p.Parallel = true; }
+            }
+            // ricevente che in MQTT sente altre stazioni lontane (oltre 1100 km) nella stessa banda entro 3 minuti: banda aperta
+            string rk = rx + "|" + band;
+            List<KeyValuePair<DateTime, string>> h;
+            if (!rxHeard.TryGetValue(rk, out h)) { h = new List<KeyValuePair<DateTime, string>>(); rxHeard[rk] = h; }
+            h.RemoveAll(x => x.Key < s.Utc.AddMinutes(-10));
+            foreach (KeyValuePair<DateTime, string> x in h)
+                if (x.Value != tx && Math.Abs((x.Key - s.Utc).TotalMinutes) <= Ft8Minutes) { p.Parallel = true; break; }
+            if (mqtt && km > Ft8MinKm)   // solo le ricezioni lunghe: le stazioni vicine si sentono sempre
+            {
+                h.Add(new KeyValuePair<DateTime, string>(s.Utc, tx));
+                if (h.Count > 500) h.RemoveRange(0, 100);
+                foreach (Ft8Path q in Ft8Long)
+                    if (q.Rx == rx && q.Tx != tx && q.S.Band == band && Math.Abs((q.S.Utc - s.Utc).TotalMinutes) <= Ft8Minutes) q.Parallel = true;
+                if (rxHeard.Count > 20000) rxHeard.Clear();
             }
             s.Received = now;
             l.Add(p);
             if (l.Count > 30000) l.RemoveRange(0, 5000);
             if (km <= Ft8MinKm) return false;
+            if ((s.Spotter ?? "").Contains("-#")) return false;   // skimmer RBN: mai nella clausola degli FT8 isolati
             s.DistKm = km;
             if (!ft8Keys.Add(s.Key + "|" + band)) return false;
             Ft8Long.Add(p);
             if (Ft8Long.Count > 2000) { for (int k = 0; k < 200; k++) ft8Keys.Remove(Ft8Long[k].S.Key + "|" + Ft8Long[k].S.Band); Ft8Long.RemoveRange(0, 200); }
-            return !p.Parallel;
+            return p.Show;
         }
 
         // tutti gli spot da disegnare nel traffico in diretta, in ordine di arrivo

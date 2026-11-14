@@ -244,7 +244,7 @@ namespace YAMS
             foreach (MsSpot s in all) seen.Add(s.Key);
             if (MsCollector.Ft8Enabled)
                 foreach (MsCollector.Ft8Path fp in MsCollector.Ft8Long)
-                    if (!fp.Parallel && fp.S.Utc >= lim) { ft8Iso.Add(fp.S); if (seen.Add(fp.S.Key)) all.Add(fp.S); }
+                    if (fp.Show && fp.S.Utc >= lim) { ft8Iso.Add(fp.S); if (seen.Add(fp.S.Key)) all.Add(fp.S); }
             foreach (MsSpot s in MsCollector.MyUdp)
                 if (s.Utc >= lim) { mine.Add(s); if (seen.Add(s.Key)) all.Add(s); }
             if (ft8Iso.Count > 0 || mine.Count > 0)
