@@ -1,5 +1,5 @@
 TITLE|Notendahandbók YA-MS
-SUB|Útgáfa 1.8.10 - umsjón Costantino IC8TEM - nóvember 2026
+SUB|Útgáfa 1.8.11 - umsjón Costantino IC8TEM - nóvember 2026
 H1|1. Inngangur
 H2|1.1 Til hvers YA-MS er
 P|YA-MS hjálpar þér að spá fyrir um og fylgjast í beinni með skilyrðum fyrir meteor scatter milli stöðvarinnar þinnar og mótstöðvar, frá 28 upp í 432 MHz. Fyrir hverja virka loftsteinadrífu segir forritið hversu vel staða geislapunktsins hentar leiðinni þinni (nýtnin), á hvaða tímum, frá hvorri hlið leiðarinnar endurvörpin koma og hvert best er að beina loftnetinu. Við hlið spárinnar sýnir það mæligögn í beinni: talningar loftsteinaratsjárinnar í Collm, myndavélar Global Meteor Network, CMOR-ratsjána, GRAVES-sendinn og meteor scatter-umferðina sem safnað er frá klösunum og frá PSKReporter.
@@ -26,7 +26,7 @@ P|Við ræsingu birtist í nokkrar sekúndur mynd af Persítum yfir VLT-sjónauk
 H2|2.3 Mappan data
 P|Allar stillingar og öll gögn eru í einni möppu, data, við hlið forritsins: engin AppData, engar kerfismöppur. Til að flytja YA-MS á aðra tölvu nægir að afrita forritsmöppuna ásamt möppunni data. Innihaldi möppunnar er lýst í kafla 13.
 H2|2.4 Sjálfvirkar uppfærslur
-P|Frá útgáfu 1.8.10 eru uppfærslur sjálfvirkar og hljóðlausar: við ræsingu og síðan á 6 klukkustunda fresti athugar YA-MS GitHub og, ef ný útgáfa er til, sækir hana, setur hana upp og endurræsir sig sjálft án þess að spyrja (aðeins stöðustikan segir frá því). Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Glugginn sem lýst er hér að neðan birtist aðeins þegar þú ýtir á "Uppfærslur" eða ef þú skrifar aggiornamenti_automatici=0 í skrána data/config.ini.
+P|Frá útgáfu 1.8.11 eru uppfærslur sjálfvirkar og hljóðlausar: við ræsingu og síðan á 6 klukkustunda fresti athugar YA-MS GitHub og, ef ný útgáfa er til, sækir hana, setur hana upp og endurræsir sig sjálft án þess að spyrja (aðeins stöðustikan segir frá því). Skrár sem vantar eru líka sóttar aftur án þess að spyrja. Glugginn sem lýst er hér að neðan birtist aðeins þegar þú ýtir á "Uppfærslur" eða ef þú skrifar aggiornamenti_automatici=0 í skrána data/config.ini.
 P|Frá útgáfu 1.8.0 athugar YA-MS sjálft á GitHub, við ræsingu og í mesta lagi einu sinni á dag, hvort ný útgáfa sé komin. Ef svo er birtist glugginn „Uppfærsla í boði“ með nýjungunum og þremur hnöppum:
 LI|Uppfæra núna: sækir pakkann sem hentar kerfinu þínu, skiptir út skrám forritsins, heldur möppunni data og endurræsir YA-MS. Forritsskrár í möppunni data sem nýja útgáfan breytir eru fyrst afritaðar í data/backup/v<gamla útgáfan>; skrárnar þínar (stillingar, söfn, spot, ADIF) eru ekki snertar.
 LI|Seinna: lokar glugganum; athugunin er endurtekin daginn eftir.
@@ -58,7 +58,6 @@ H2|4.1 Röð 1: stöðvar og band
 LI|Minn locator og hæð m: Maidenhead-locatorinn þinn (4, 6 eða 8 stafir; miðja reitsins er notuð) og hæð stöðvarinnar yfir sjávarmáli.
 LI|Band MHz: 28, 50, 70, 144, 222 eða 432 MHz. Notað fyrir mögnun og geisla loftnetsins, fyrir deyfingu og aflreikning og fyrir mat á flæðinu.
 LI|Reikna: endurreiknar leiðina (úrtak úr E-laginu, innan við sekúnda).
-LI|Loftnet az: stefnuhorn loftnetsins, alltaf í átt að mótstöðinni.
 H2|4.2 Röð 2: E-lag og loftnet
 LI|Hæð slóða km og frá ratsjá: hæð loftsteinaslóðanna. Þegar hakað er við „frá ratsjá“ er notuð algengasta hæðin sem Collm-ratsjáin mælir (venjulega 88-90 km); taktu hakið af til að slá hana inn handvirkt.
 LI|Hæðarhorn geisla °: hæðarhorn hámarks lóðrétta geislans í loftnetinu þínu. Stefnuloftnet sem stillt er á 0° hefur samt aðalgeislann nokkrum gráðum yfir sjóndeildarhring vegna endurvarps frá jörðinni: venjulega 3-8°, eftir hæð loftnetsins í bylgjulengdum.
@@ -79,7 +78,7 @@ P|Fyrsti undirflipinn í hópnum Spáreikningur sýnir á einum skjá hvar nýti
 H2|5.1 Yfirlitsröndin
 P|Fyrir ofan kortið tekur rönd saman útreikninginn fyrir þann tíma: dagsetningu og tíma, leiðarstuðul (summu ZHR × nýtni virku drífanna), gagnlegustu drífuna með ZHR hennar og nýtni (einnig í dB miðað við viðmið DJ5HG), fjölda drífa yfir sjóndeildarhring og Hot sem mælt er með ásamt stefnuhorni þess.
 H2|5.2 Kortið séð ofan frá
-P|Við hlið kortsins, til hægri, er reitur mótstöðvarinnar: skrifaðu kallmerkið og ýttu á Enter, reiturinn er sóttur í CALL3-gagnagrunninn (eins og í YAEC og LIVETROPOVHF); fyrir neðan eru reitur og hæð. Einnig má skrifa kallmerkið í reitarboxið.
+P|Við hlið kortsins, til hægri, er einn dálkur. Efst er reitur mótstöðvarinnar: fyrst stefna loftnetsins (Loftnet az, alltaf að mótstöðinni), svo kallmerkið (skrifaðu það og ýttu á Enter: staðsetningin kemur úr CALL3-gagnagrunninum, eins og í YAEC og LIVETROPOVHF), staðsetningin og hæðin. Einnig má skrifa kallmerkið í staðsetningarreitinn. Neðst er skýring á táknum kortsins: smellur á titilinn fellir hana saman; litir geislapunktanna birtast þegar Evrópukortið er slökkt.
 P|Til vinstri er kort af Evrópu séð ofan frá (austur til hægri), með gráðukvarða allan hringinn:
 LI|græn lína: raunveruleg leið milli locatoranna tveggja;
 LI|Hot A og Hot B: heitu blettirnir tveir sitt hvorum megin við miðpunktinn. Rautt = mælt með, bleikt = utan loftnetsgeislans, grátt = þegar innan geislans (með viðvörun);
@@ -87,7 +86,7 @@ LI|loftnetsgeisli: geirinn við -3 dB umhverfis stefnuhorn loftnetsins;
 LI|Mörk A og Mörk B, dauflega dregin: fjarlægustu jaðrar himinsins sem báðar stöðvar sjá, ekki punktar til að beina loftnetinu að;
 LI|gul lína: stefnan sem valda drífan (eða sú hagstæðasta) sópar himininn í; appelsínugulir punktar: stefnurnar tvær hornrétt á hana (stefnuhorn geislapunktsins ±90°);
 LI|PREV-svæði, ljósar sporbaugar: hvar líklegustu slóðirnar falla núna, einn hvorum megin við leiðina.
-P|Vinstri smellur á kortið = locator mótstöðvarinnar, hægri smellur = locator stöðvarinnar þinnar; leiðin er endurreiknuð strax. Skýringarnar eru í samfellanlegum dálki hægra megin við kortið. Gátreitirnir fyrir ofan drífulistann kveikja og slökkva á Hot-stefnunum, korti af Evrópu og sýninni ofan frá.
+P|Vinstri smellur á kortið = locator mótstöðvarinnar, hægri smellur = locator stöðvarinnar þinnar; leiðin er endurreiknuð strax. Gátreitirnir fyrir ofan drífulistann kveikja og slökkva á Hot-stefnunum, korti af Evrópu og sýninni ofan frá.
 H2|5.3 Drífulistinn
 P|Fyrir hverja drífu: heiti og IMO-kóði, ZHR á þessari stundu, stefnuhorn og hæðarhorn geislapunktsins séð frá stöðinni þinni, nýtni fyrir leiðina, ríkjandi hlið (A eða B), besta stefna loftnets, ris og sest geislapunktsins. Smellur á línu velur drífuna: gula línan og appelsínugulu punktarnir fylgja henni.
 H2|5.4 Litla himinhvelfingin og útreikningstextinn
@@ -163,6 +162,7 @@ P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þ
 LI|Radíus korts: 600-3500 km. Spot til að sýna: síðustu 15 eða 30 mínútur, síðasta klukkustund, síðustu 3 eða 24 klukkustundir.
 LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju skýsins, hæð þess og stærð.
 LI|Sýna hverjir hlusta: þríhyrningar í lit bandsins merkja stöðvar sem samkvæmt PSKReporter taka á móti MSK144, FSK441, PSK2K eða JTMS á 28, 50, 70, 144 og 432 MHz í völdum tímaglugga. Smellur á þríhyrning sýnir kallmerki, staðsetningu, hætti og síðasta spot. MQTT-straumurinn í flipanum Gagnasöfnun verður að vera tengdur.
+LI|Einnig virkir hlustendur á korti PSKReporter: tómir þríhyrningar fyrir stöðvar sem birtast á korti pskreporter.info í MSK144, FSK441, PSK2K eða JTMS en hafa ekki enn tekið á móti neinu spotti (MQTT sendir aðeins stöðvar sem taka á móti einhverju). YA-MS spyr fyrirspurnaþjónustu PSKReporter um einn hátt í einu, á 3 mínútna fresti, svo hver háttur uppfærist á 12 mínútna fresti, eins og reglur þjónustunnar biðja um. Smellur á þríhyrninginn sýnir kallmerki, staðsetningu, afkóðunarforrit og tímann sem hlustandinn var virkur. Kveikt sjálfgefið.
 LI|Spott allra banda eru sýnd, líka banda sem ekki eru valin í Gagnasöfnun (þau eru ekki vistuð). CW-spott og spott milli stöðva sem eru of nálægt eru ekki sýnd ef þeim er hent í Gagnasöfnun.
 LI|Kortið sýnir kallmerki beggja stöðva hvers spotts, einu sinni á hverja stöð. Vörpunin getur verið jafnfjarlæg (miðuð á þína stöð) eða Mercator. Ábendingin á dálknum Ský útskýrir merkingu hans.
 H2|9.2 Ratsjárflæði

@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.10 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.11 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -26,7 +26,7 @@ P|Açılışta birkaç saniye boyunca ESO'nun VLT'si üzerindeki Perseidler'i g�
 H2|2.3 data klasörü
 P|Tüm ayarlar ve tüm veriler, programın yanındaki tek bir data klasöründe durur: AppData yok, sistem klasörü yok. YA-MS'i başka bir bilgisayara taşımak için program klasörünü data klasörüyle birlikte kopyalamanız yeterlidir. Klasörün içeriği bölüm 13'te anlatılmıştır.
 H2|2.4 Otomatik güncellemeler
-P|1.8.10 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
+P|1.8.11 sürümünden itibaren güncellemeler otomatik ve sessizdir: başlangıçta ve ardından her 6 saatte bir YA-MS GitHub'ı denetler ve yeni bir sürüm varsa indirir, kurar ve hiçbir şey sormadan kendini yeniden başlatır (bunu yalnızca durum çubuğu bildirir). Eksik dosyalar da sormadan yeniden indirilir. Aşağıda anlatılan pencere yalnızca "Güncellemeler"e basınca ya da data/config.ini dosyasına aggiornamenti_automatici=0 yazarsan görünür.
 P|1.8.0 sürümünden itibaren YA-MS, açılışta ve günde en fazla bir kez, yeni bir sürüm çıkıp çıkmadığını GitHub'da kendiliğinden denetler. Varsa, yenilikleri ve üç düğmeyi içeren "Güncelleme mevcut" penceresi görünür:
 LI|Şimdi güncelle: sisteminize uygun paketi indirir, program dosyalarını değiştirir, data klasörünü korur ve YA-MS'i yeniden başlatır. data klasöründeki, yeni sürümün değiştirdiği program dosyaları önce data/backup/v<eski sürüm> klasörüne kopyalanır; sizin dosyalarınıza (ayarlar, arşivler, spot'lar, ADIF) dokunulmaz.
 LI|Daha sonra: pencereyi kapatır; denetim ertesi gün yinelenir.
@@ -58,7 +58,6 @@ H2|4.1 Sıra 1: istasyonlar ve bant
 LI|Benim lokatörüm ve rakım m: Maidenhead lokatörünüz (4, 6 veya 8 karakter; karenin merkezi kullanılır) ve istasyonun deniz seviyesinden yüksekliği.
 LI|Bant MHz: 28, 50, 70, 144, 222 veya 432 MHz. Anten kazancı ve lobu, yol kaybı ve bağlantı bütçesi ile akı tahmini için kullanılır.
 LI|Hesapla: yolu yeniden hesaplar (E katmanının örneklenmesi, bir saniyeden kısa).
-LI|Anten az: antenin azimutu, her zaman karşı istasyona doğru.
 H2|4.2 Sıra 2: E katmanı ve anten
 LI|İz yüksekliği km ve radardan: meteor izlerinin yüksekliği. "radardan" işaretliyken Collm radarının ölçtüğü en sık yükseklik (genellikle 88-90 km) kullanılır; elle yazmak için işareti kaldırın.
 LI|Lob elevasyonu °: anteninizin dikey lobunun maksimumunun elevasyonu. 0°'ye sabitlenmiş bir yönlü antenin ana lobu bile, zeminden yansıma nedeniyle ufkun birkaç derece üzerindedir: antenin dalga boyu cinsinden yüksekliğine göre genellikle 3-8°.
@@ -79,7 +78,7 @@ P|Tahmin hesabı grubunun ilk alt sekmesi, yararlı izlerin şu anda nereye dü�
 H2|5.1 Özet şeridi
 P|Haritanın üstündeki bir şerit o anki hesabı özetler: tarih ve saat, yol endeksi (etkin yağmurların ZHR × verim toplamı), ZHR'si ve verimiyle (DJ5HG referansına göre dB olarak da) en yararlı yağmur, ufkun üstündeki yağmurların sayısı ve azimutuyla birlikte önerilen Hot.
 H2|5.2 Plan haritası
-P|Haritanın yanında, sağda karşı istasyon kutusu vardır: çağrı işaretini yaz ve Enter'a bas, lokatör CALL3 veritabanından alınır (YAEC ve LIVETROPOVHF'teki gibi); altında lokatör ve yükseklik bulunur. Çağrı işareti lokatör kutusuna da yazılabilir.
+P|Haritanın yanında, sağda tek bir sütun var. Üstte karşı istasyon kutusu: önce anten yönü (Anten az., her zaman karşı istasyona), sonra çağrı işareti (yazıp Enter'a basın: lokatör CALL3 veritabanından alınır, YAEC ve LIVETROPOVHF'deki gibi), lokatör ve yükseklik. Çağrı işareti lokatör kutusuna da yazılabilir. Altta harita sembollerinin açıklaması: başlığa tıklamak onu katlar; radyant renkleri Avrupa haritası kapalıyken görünür.
 P|Solda, yukarıdan görülen Avrupa haritası (doğu sağda), çevresinde derece ölçeğiyle:
 LI|yeşil çizgi: iki lokatör arasındaki gerçek yol;
 LI|Hot A ve Hot B: orta noktanın iki yanındaki iki hot spot. Kırmızı = önerilen, pembe = anten lobunun dışında, gri = zaten lobun içinde (bir uyarıyla);
@@ -87,7 +86,7 @@ LI|anten lobu: anten azimutu çevresindeki -3 dB sektörü;
 LI|A sınırı ve B sınırı, soluk: her iki istasyonun da gördüğü gökyüzünün en uzak kenarları; yönlendirilecek noktalar değildir;
 LI|sarı çizgi: seçilen yağmurun (veya en elverişli olanın) gökyüzünü taradığı yön; turuncu noktalar: iki dik yönlendirme (radyant azimutu ±90°);
 LI|PREV bölgeleri, açık renkli elipsler: en olası izlerin şu anda düştüğü yerler, yolun her iki yanı için bir tane.
-P|Haritada sol tık = karşı istasyonun lokatörü, sağ tık = sizin istasyonunuzun lokatörü; yol hemen yeniden hesaplanır. Lejant, haritanın sağında katlanabilen bir sütundur. Yağmur listesinin üstündeki onay kutuları Hot yönlerini, Avrupa haritasını ve üstten görünümü açar ve kapatır.
+P|Haritada sol tık = karşı istasyonun lokatörü, sağ tık = sizin istasyonunuzun lokatörü; yol hemen yeniden hesaplanır. Yağmur listesinin üstündeki onay kutuları Hot yönlerini, Avrupa haritasını ve üstten görünümü açar ve kapatır.
 H2|5.3 Yağmur listesi
 P|Her yağmur için: adı ve IMO kodu, bu andaki ZHR, istasyonunuzdan radyantın azimutu ve elevasyonu, yol için verim, baskın taraf (A veya B), en iyi yön, radyantın doğuşu ve batışı. Bir satıra tıklamak yağmuru seçer: sarı çizgi ve turuncu noktalar onu izler.
 H2|5.4 Küçük gök kubbesi ve hesap metni
@@ -163,6 +162,7 @@ P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren 
 LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 15 veya 30 dakika, son bir saat, son 3 veya 24 saat.
 LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve bulutun merkezini, yüksekliğini ve boyutlarını gösterir.
 LI|Kimin dinlediğini göster: bant renginde üçgenler, PSKReporter'a göre seçilen zaman aralığında 28, 50, 70, 144 ve 432 MHz'de MSK144, FSK441, PSK2K veya JTMS alan istasyonları gösterir. Bir üçgene tıklamak çağrı işaretini, lokatörü, modları ve son spotu gösterir. Veri toplama sekmesindeki MQTT akışı bağlı olmalıdır.
+LI|PSKReporter haritasındaki aktif monitörler de: pskreporter.info haritasında MSK144, FSK441, PSK2K veya JTMS ile görünen ama henüz hiç spot almamış istasyonlar için boş üçgenler (MQTT yalnızca bir şey alan istasyonları gönderir). YA-MS, PSKReporter sorgu hizmetini her seferinde bir mod için, 3 dakikada bir sorgular; böylece her mod 12 dakikada bir güncellenir, hizmetin kurallarının istediği gibi. Üçgene tıklamak çağrı işaretini, lokatörü, kod çözme programını ve monitörün aktif olduğu saati gösterir. Varsayılan olarak açık.
 LI|Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
 LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. Bulut sütunundaki ipucu anlamını açıklar.
 H2|9.2 Radar akısı

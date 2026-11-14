@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi YA-MS
-SUB|Wersja 1.8.10 - opracował Costantino IC8TEM - listopad 2026
+SUB|Wersja 1.8.11 - opracował Costantino IC8TEM - listopad 2026
 H1|1. Wprowadzenie
 H2|1.1 Do czego służy YA-MS
 P|YA-MS pomaga przewidywać i śledzić na bieżąco warunki meteor scatter między twoją stacją a korespondentem, od 28 do 432 MHz. Dla każdego aktywnego roju meteorów pokazuje, w jakim stopniu położenie jego radiantu sprzyja twojej trasie (sprawność), w jakich godzinach, z której strony trasy przychodzą odbicia i gdzie najlepiej skierować antenę. Obok prognozy pokazuje dane mierzone na żywo: zliczenia radaru meteorowego w Collm, kamery Global Meteor Network, radar CMOR, nadajnik GRAVES oraz ruch meteor scatter zbierany z klastrów i z PSKReporter.
@@ -26,7 +26,7 @@ P|Przy uruchomieniu przez kilka sekund pojawia się ekran z Perseidami nad teles
 H2|2.3 Folder data
 P|Wszystkie ustawienia i wszystkie dane znajdują się w jednym folderze data obok programu: bez AppData, bez folderów systemowych. Aby przenieść YA-MS na inny komputer, wystarczy skopiować folder programu razem z jego folderem data. Zawartość folderu opisano w rozdziale 13.
 H2|2.4 Automatyczne aktualizacje
-P|Od wersji 1.8.10 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
+P|Od wersji 1.8.11 aktualizacje są automatyczne i ciche: przy uruchomieniu, a potem co 6 godzin YA-MS sprawdza GitHub i, jeśli jest nowa wersja, pobiera ją, instaluje i sam się uruchamia ponownie, o nic nie pytając (informuje o tym tylko pasek stanu). Brakujące pliki również są pobierane ponownie bez pytania. Okno opisane poniżej pojawia się tylko po naciśnięciu "Aktualizacje" albo jeśli wpiszesz aggiornamenti_automatici=0 w pliku data/config.ini.
 P|Od wersji 1.8.0 YA-MS sam sprawdza w serwisie GitHub, przy uruchomieniu i najwyżej raz dziennie, czy pojawiła się nowa wersja. Jeśli tak, pojawia się okno "Dostępna aktualizacja" z listą nowości i trzema przyciskami:
 LI|Aktualizuj teraz: pobiera pakiet odpowiedni dla twojego systemu, zastępuje pliki programu, zachowuje folder data i ponownie uruchamia YA-MS. Pliki programu w folderze data, które nowa wersja zmienia, są najpierw kopiowane do data/backup/v<stara wersja>; twoje pliki (ustawienia, archiwa, spoty, ADIF) nie są zmieniane.
 LI|Później: zamyka okno; sprawdzenie powtarza się następnego dnia.
@@ -58,7 +58,6 @@ H2|4.1 Wiersz 1: stacje i pasmo
 LI|Mój lokator i wysokość m: twój lokator Maidenhead (4, 6 lub 8 znaków; używany jest środek kwadratu) i wysokość stacji nad poziomem morza.
 LI|Pasmo MHz: 28, 50, 70, 144, 222 lub 432 MHz. Służy do obliczenia zysku i wiązki anteny, tłumienia i bilansu łącza oraz do oszacowania strumienia.
 LI|Oblicz: ponownie oblicza trasę (próbkowanie warstwy E, poniżej jednej sekundy).
-LI|Antena az: azymut anteny, zawsze w kierunku korespondenta.
 H2|4.2 Wiersz 2: warstwa E i antena
 LI|Wysokość śladów km i z radaru: wysokość śladów meteorów. Gdy pole "z radaru" jest zaznaczone, używana jest najczęstsza wysokość zmierzona przez radar w Collm (zwykle 88-90 km); odznacz je, aby wpisać wartość ręcznie.
 LI|Elewacja wiązki °: elewacja maksimum pionowej wiązki twojej anteny. Antena kierunkowa ustawiona na 0° i tak ma główną wiązkę kilka stopni nad horyzontem z powodu odbicia od gruntu: zwykle 3-8°, zależnie od wysokości anteny w długościach fali.
@@ -79,7 +78,7 @@ P|Pierwsza podkarta grupy Obliczenie prognozy pokazuje na jednym ekranie, gdzie 
 H2|5.1 Pasek podsumowania
 P|Nad mapą pasek podsumowuje obliczenie dla tej chwili: data i godzina, indeks trasy (suma ZHR × sprawność aktywnych rojów), najbardziej użyteczny rój z jego ZHR i sprawnością (także w dB względem odniesienia DJ5HG), liczba rojów nad horyzontem oraz zalecany Hot z jego azymutem.
 H2|5.2 Mapa w rzucie
-P|Obok mapy, po prawej, jest ramka korespondenta: wpisz znak i naciśnij Enter, lokator jest brany z bazy CALL3 (jak w YAEC i LIVETROPOVHF); poniżej są lokator i wysokość. Znak można też wpisać w polu lokatora.
+P|Obok mapy, po prawej, jest jedna kolumna. Na górze ramka korespondenta: najpierw kierunek anteny (Azymut anteny, zawsze na korespondenta), potem znak (wpisz go i naciśnij Enter: lokator jest brany z bazy CALL3, jak w YAEC i LIVETROPOVHF), lokator i wysokość. Znak można też wpisać w polu lokatora. Na dole legenda symboli mapy: kliknięcie tytułu ją zwija; kolory radiantów pojawiają się, gdy mapa Europy jest wyłączona.
 P|Po lewej mapa Europy widziana z góry (wschód po prawej), z podziałką stopni dookoła:
 LI|zielona linia: rzeczywista trasa między dwoma lokatorami;
 LI|Hot A i Hot B: dwa hot spoty po obu stronach punktu środkowego. Czerwony = zalecany, różowy = poza wiązką anteny, szary = już w wiązce (z ostrzeżeniem);
@@ -87,7 +86,7 @@ LI|wiązka anteny: sektor -3 dB wokół azymutu anteny;
 LI|Granica A i Granica B, blade: najdalsze krawędzie nieba widzianego przez obie stacje, a nie punkty, na które należy kierować antenę;
 LI|żółta linia: kierunek, w którym wybrany rój (lub najkorzystniejszy) przemiata niebo; pomarańczowe punkty: dwa kierunki prostopadłe (azymut radiantu ±90°);
 LI|strefy PREV, jasne elipsy: miejsca, w których teraz padają najbardziej prawdopodobne ślady, po jednej z każdej strony trasy.
-P|Lewe kliknięcie na mapie = lokator korespondenta, prawe kliknięcie = lokator twojej stacji; trasa jest natychmiast przeliczana. Legenda jest zwijaną kolumną po prawej stronie mapy. Pola wyboru nad listą rojów włączają i wyłączają kierunki Hot, mapę Europy i widok z góry.
+P|Lewe kliknięcie na mapie = lokator korespondenta, prawe kliknięcie = lokator twojej stacji; trasa jest natychmiast przeliczana. Pola wyboru nad listą rojów włączają i wyłączają kierunki Hot, mapę Europy i widok z góry.
 H2|5.3 Lista rojów
 P|Dla każdego roju: nazwa i skrót IMO, ZHR w tej chwili, azymut i elewacja radiantu widzianego z twojej stacji, sprawność dla trasy, przeważająca strona (A lub B), najlepszy kierunek anteny, wschód i zachód radiantu. Kliknięcie wiersza wybiera rój: żółta linia i pomarańczowe punkty podążają za nim.
 H2|5.4 Małe sklepienie nieba i tekst obliczenia
@@ -163,6 +162,7 @@ P|Mapa azymutalna równoodległościowa wyśrodkowana na twojej stacji z całym 
 LI|Promień mapy: 600-3500 km. Spoty do wyświetlenia: ostatnie 15 lub 30 minut, ostatnia godzina, ostatnie 3 lub 24 godziny.
 LI|Kliknięcie trasy lub wiersza tabeli wyróżnia łączność i pokazuje środek chmury, jej wysokość i rozmiary.
 LI|Pokaż, kto nasłuchuje: trójkąty w kolorze pasma oznaczają stacje, które według PSKReportera odbierają MSK144, FSK441, PSK2K lub JTMS na 28, 50, 70, 144 i 432 MHz w wybranym oknie czasu. Kliknięcie trójkąta pokazuje znak, lokator, emisje i ostatni spot. Strumień MQTT z zakładki Zbieranie danych musi być połączony.
+LI|Również aktywne monitory z mapy PSKReporter: puste trójkąty dla stacji widocznych na mapie pskreporter.info w MSK144, FSK441, PSK2K lub JTMS, które nie odebrały jeszcze żadnego spotu (MQTT wysyła tylko stacje, które coś odbierają). YA-MS odpytuje usługę wyszukiwania PSKReporter po jednej emisji, co 3 minuty, więc każda emisja odświeża się co 12 minut, jak wymagają zasady usługi. Kliknięcie trójkąta pokazuje znak, lokator, program dekodujący i godzinę, o której monitor był aktywny. Domyślnie włączone.
 LI|Pokazywane są spoty ze wszystkich pasm, także z tych niewybranych w Zbieraniu danych (tych się nie zapisuje). Spoty CW i spoty między zbyt bliskimi stacjami nie są pokazywane, jeśli są odrzucane w Zbieraniu danych.
 LI|Na mapie pisane są znaki obu stacji każdego spotu, raz dla każdej stacji. Odwzorowanie można wybrać: azymutalne (w środku twoja stacja) lub Mercatora. Podpowiedź na kolumnie Chmura wyjaśnia jej znaczenie.
 H2|9.2 Strumień radarowy

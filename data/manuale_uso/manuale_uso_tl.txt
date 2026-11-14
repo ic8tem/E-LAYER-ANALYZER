@@ -1,5 +1,5 @@
 TITLE|Manwal ng paggamit ng YA-MS
-SUB|Bersyon 1.8.10 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+SUB|Bersyon 1.8.11 - inihanda ni Costantino IC8TEM - Nobyembre 2026
 H1|1. Panimula
 H2|1.1 Para saan ang YA-MS
 P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
@@ -26,7 +26,7 @@ P|Sa pagsisimula, lumalabas nang ilang segundo ang screen na may Perseids sa ita
 H2|2.3 Ang folder na data
 P|Lahat ng setting at lahat ng datos ay nasa iisang folder na data sa tabi ng programa: walang AppData, walang system folder. Para ilipat ang YA-MS sa ibang computer, kopyahin lang ang folder ng programa kasama ang folder na data nito. Inilalarawan sa kabanata 13 ang laman ng folder.
 H2|2.4 Mga awtomatikong update
-P|Mula sa bersyon 1.8.10, awtomatiko at tahimik ang mga update: sa pagsisimula at pagkatapos ay bawat 6 na oras, tinitingnan ng YA-MS ang GitHub at, kung may bagong bersyon, dina-download ito, ini-install, at kusang nagre-restart nang walang tinatanong (ang status bar lang ang nagsasabi). Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window na inilarawan sa ibaba kapag pinindot ang "Mga update" o kung isusulat mo ang aggiornamenti_automatici=0 sa file na data/config.ini.
+P|Mula sa bersyon 1.8.11, awtomatiko at tahimik ang mga update: sa pagsisimula at pagkatapos ay bawat 6 na oras, tinitingnan ng YA-MS ang GitHub at, kung may bagong bersyon, dina-download ito, ini-install, at kusang nagre-restart nang walang tinatanong (ang status bar lang ang nagsasabi). Ang mga nawawalang file ay muling dina-download din nang hindi nagtatanong. Lumalabas lang ang window na inilarawan sa ibaba kapag pinindot ang "Mga update" o kung isusulat mo ang aggiornamenti_automatici=0 sa file na data/config.ini.
 P|Mula sa bersyon 1.8.0, kusang tinitingnan ng YA-MS sa GitHub, sa pagsisimula at hindi hihigit sa isang beses bawat araw, kung may lumabas na bagong bersyon. Kung mayroon, lumalabas ang window na “May available na update” na may mga bagong feature at tatlong button:
 LI|I-update ngayon: dina-download ang package na angkop sa iyong system, pinapalitan ang mga file ng programa, pinapanatili ang folder na data at nire-restart ang YA-MS. Ang mga file ng programa sa folder na data na binabago ng bagong bersyon ay kinokopya muna sa data/backup/v<lumang bersyon>; hindi ginagalaw ang iyong mga file (mga setting, archive, spot, ADIF).
 LI|Mamaya: isinasara ang window; uulitin ang pagsusuri sa susunod na araw.
@@ -58,7 +58,6 @@ H2|4.1 Hanay 1: mga istasyon at banda
 LI|Ang aking locator at altitude m: ang iyong Maidenhead locator (4, 6 o 8 karakter; ginagamit ang gitna ng square) at ang altitude ng istasyon mula sa antas ng dagat.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Ginagamit para sa gain at lobe ng antena, para sa path loss at link budget, at para sa tantiya ng flux.
 LI|Kalkulahin: kinakalkula muli ang landas (pag-sample ng E layer, wala pang isang segundo).
-LI|Antena az: azimuth ng antena, laging patungo sa DX station.
 H2|4.2 Hanay 2: E layer at antena
 LI|Taas ng bakas km at mula sa radar: taas ng mga bakas ng meteor. Kapag naka-tsek ang “mula sa radar”, ginagamit ang pinakamadalas na taas na sinukat ng radar ng Collm (karaniwang 88-90 km); alisin ang tsek para isulat ito nang mano-mano.
 LI|Elevation ng lobe °: elevation ng maximum ng patayong lobe ng iyong antena. Ang isang directional na antena na nakapirmi sa 0° ay may pangunahing lobe pa rin na ilang digri sa itaas ng horizon, dahil sa repleksiyon sa lupa: karaniwang 3-8°, depende sa taas ng antena sa wavelength.
@@ -79,7 +78,7 @@ P|Ipinapakita ng unang sub-tab ng grupong Kalkulasyon ng pagtataya sa iisang scr
 H2|5.1 Ang buod na strip
 P|Sa itaas ng mapa, isang strip ang nagbubuod ng kalkulasyon para sa sandaling iyon: petsa at oras, index ng landas (kabuuan ng ZHR × episyensya ng mga aktibong shower), ang pinakakapaki-pakinabang na shower kasama ang ZHR at episyensya nito (pati sa dB kumpara sa reference ni DJ5HG), ang bilang ng mga shower sa itaas ng horizon at ang inirerekomendang Hot kasama ang azimuth nito.
 H2|5.2 Ang mapa mula sa itaas
-P|Sa tabi ng mapa, sa kanan, ang kahon ng kausap: i-type ang callsign at pindutin ang Enter, kinukuha ang locator mula sa database ng CALL3 (tulad ng sa YAEC at LIVETROPOVHF); sa ilalim ang locator at ang taas. Maaari ring i-type ang callsign sa kahon ng locator.
+P|Sa tabi ng mapa, sa kanan, may iisang kolum. Sa itaas ang kahon ng kausap: una ang direksiyon ng antena (Antena az, laging patungo sa kausap), sunod ang callsign (i-type at pindutin ang Enter: kinukuha ang locator sa database ng CALL3, gaya sa YAEC at LIVETROPOVHF), ang locator at ang taas. Puwede ring i-type ang callsign sa kahon ng locator. Sa ibaba ang alamat ng mga simbolo ng mapa: isang click sa pamagat ang nagtitiklop dito; lumalabas ang mga kulay ng radiant kapag nakapatay ang mapa ng Europa.
 P|Sa kaliwa, ang mapa ng Europa na tinitingnan mula sa itaas (silangan sa kanan), na may iskala ng mga digri sa paligid:
 LI|berdeng linya: ang tunay na landas sa pagitan ng dalawang locator;
 LI|Hot A at Hot B: ang dalawang hot spot sa magkabilang panig ng gitnang punto. Pula = inirerekomenda, rosas = labas sa lobe ng antena, abo = nasa loob na ng lobe (may babala);
@@ -87,7 +86,7 @@ LI|lobe ng antena: ang sektor sa -3 dB sa paligid ng azimuth ng antena;
 LI|Hangganan A at Hangganan B, malabo: ang pinakamalayong gilid ng langit na nakikita ng parehong istasyon, hindi mga puntong tututukan;
 LI|dilaw na linya: ang direksiyon kung saan winawalis ng napiling shower (o ng pinakapaborable) ang langit; mga kahel na tuldok: ang dalawang patayong pagtutok (azimuth ng radiant ±90°);
 LI|mga sonang PREV, mapusyaw na ellipse: kung saan bumabagsak ngayon ang mga pinaka-malamang na bakas, isa sa bawat panig ng landas.
-P|Left-click sa mapa = locator ng DX station, right-click = locator ng iyong istasyon; kinakalkula agad muli ang landas. Ang legend ay isang naitutuping column sa kanan ng mapa. Ang mga checkbox sa itaas ng listahan ng mga shower ay nag-o-on at nag-o-off sa mga direksiyon ng Hot, sa mapa ng Europa at sa tanaw mula sa itaas.
+P|Left-click sa mapa = locator ng DX station, right-click = locator ng iyong istasyon; kinakalkula agad muli ang landas. Ang mga checkbox sa itaas ng listahan ng mga shower ay nag-o-on at nag-o-off sa mga direksiyon ng Hot, sa mapa ng Europa at sa tanaw mula sa itaas.
 H2|5.3 Ang listahan ng mga shower
 P|Para sa bawat shower: pangalan at code ng IMO, ZHR sa sandaling ito, azimuth at elevation ng radiant mula sa iyong istasyon, episyensya para sa landas, nangingibabaw na panig (A o B), pinakamahusay na pagtutok, pagsikat at paglubog ng radiant. Ang pag-click sa isang hilera ay pumipili sa shower: sumusunod dito ang dilaw na linya at ang mga kahel na tuldok.
 H2|5.4 Ang maliit na celestial dome at ang teksto ng kalkulasyon
@@ -163,6 +162,7 @@ P|Isang azimuthal equidistant na mapa na nakasentro sa iyong istasyon na may lah
 LI|Radius ng mapa: 600-3500 km. Mga spot na ipapakita: huling 15 o 30 minuto, huling oras, huling 3 o 24 na oras.
 LI|Ang pag-click sa isang landas o sa isang hilera ng talahanayan ay nagha-highlight sa QSO at nagpapakita ng gitna ng ulap, ng taas nito at ng laki nito.
 LI|Ipakita kung sino ang nakikinig: mga tatsulok na kulay ng banda ang nagmamarka sa mga istasyong, ayon sa PSKReporter, tumatanggap ng MSK144, FSK441, PSK2K o JTMS sa 28, 50, 70, 144 at 432 MHz sa napiling panahon. Ang pag-click sa tatsulok ay nagpapakita ng call sign, locator, mga mode at huling spot. Dapat nakakonekta ang daloy na MQTT sa tab na Pangongolekta ng data.
+LI|Pati ang mga aktibong monitor sa mapa ng PSKReporter: mga hungkag na tatsulok para sa mga istasyong lumalabas sa mapa ng pskreporter.info sa MSK144, FSK441, PSK2K o JTMS pero wala pang natatanggap na spot (ang MQTT ay nagpapadala lang ng mga istasyong may natatanggap). Tinatanong ng YA-MS ang serbisyong pang-query ng PSKReporter nang isang mode bawat pagkakataon, tuwing 3 minuto, kaya bawat mode ay naa-update tuwing 12 minuto, ayon sa patakaran ng serbisyo. Ang click sa tatsulok ay nagpapakita ng callsign, locator, programang pang-decode at oras na aktibo ang monitor. Naka-on mula sa simula.
 LI|Ipinapakita ang mga spot ng lahat ng banda, pati ng mga bandang hindi pinili sa Pagkolekta ng data (hindi ito iniimbak). Hindi ipinapakita ang mga CW spot at ang mga spot sa pagitan ng mga istasyong masyadong malapit, kung itinatapon ang mga ito sa Pagkolekta ng data.
 LI|Isinusulat sa mapa ang mga callsign ng dalawang istasyon ng bawat spot, isang beses bawat istasyon. Mapipili ang projection: azimuthal (nakasentro sa iyong istasyon) o Mercator. Ipinaliliwanag ng tooltip sa kolumnang Ulap ang kahulugan nito.
 H2|9.2 Flux ng radar

@@ -1,5 +1,5 @@
 TITLE|Brugervejledning til YA-MS
-SUB|Version 1.8.10 - udarbejdet af Costantino IC8TEM - november 2026
+SUB|Version 1.8.11 - udarbejdet af Costantino IC8TEM - november 2026
 H1|1. Indledning
 H2|1.1 Hvad YA-MS bruges til
 P|YA-MS hjælper dig med at forudsige og følge meteor scatter-forholdene live mellem din station og en modstation, fra 28 til 432 MHz. For hver aktiv meteorsværm fortæller programmet, hvor meget dens radiants position begunstiger din strækning (effektiviteten), på hvilke tidspunkter, fra hvilken side af strækningen refleksionerne kommer, og hvor det er bedst at rette antennen. Ved siden af prognosen viser det live måledata: tællingerne fra meteorradaren i Collm, kameraerne i Global Meteor Network, CMOR-radaren, GRAVES-senderen og den meteor scatter-trafik, der indsamles fra clusterne og fra PSKReporter.
@@ -26,7 +26,7 @@ P|Ved start vises i nogle få sekunder et billede med Perseiderne over ESO's VLT
 H2|2.3 Mappen data
 P|Alle indstillinger og alle data ligger i én enkelt mappe data ved siden af programmet: ingen AppData, ingen systemmapper. For at flytte YA-MS til en anden computer er det nok at kopiere programmappen med dens mappe data. Mappens indhold er beskrevet i kapitel 13.
 H2|2.4 Automatiske opdateringer
-P|Fra version 1.8.10 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
+P|Fra version 1.8.11 er opdateringer automatiske og lydløse: ved start og derefter hver 6. time tjekker YA-MS GitHub og, hvis der er en ny version, henter den, installerer den og genstarter af sig selv uden at spørge om noget (kun statuslinjen siger det). Manglende filer hentes også igen uden at spørge. Vinduet beskrevet nedenfor vises kun, når du trykker på "Opdateringer", eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Fra version 1.8.0 kontrollerer YA-MS selv på GitHub, ved start og højst én gang om dagen, om der er kommet en ny version. Hvis der er, vises vinduet »Opdatering tilgængelig« med nyhederne og tre knapper:
 LI|Opdater nu: henter den pakke, der passer til dit system, erstatter programfilerne, beholder mappen data og genstarter YA-MS. Programfiler i mappen data, som den nye version ændrer, kopieres først til data/backup/v<gammel version>; dine egne filer (indstillinger, arkiver, spots, ADIF) røres ikke.
 LI|Senere: lukker vinduet; kontrollen gentages næste dag.
@@ -58,7 +58,6 @@ H2|4.1 Række 1: stationer og bånd
 LI|Min lokator og højde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten af feltet bruges) og stationens højde over havet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Bruges til antennens forstærkning og lap, til dæmpning og linkbudget og til fluxestimatet.
 LI|Beregn: genberegner strækningen (sampling af E-laget, under et sekund).
-LI|Antenne az: antennens azimut, altid mod modstationen.
 H2|4.2 Række 2: E-lag og antenne
 LI|Sporhøjde km og fra radar: meteorsporenes højde. Med »fra radar« markeret bruges den hyppigste højde målt af Collm-radaren (normalt 88-90 km); fjern markeringen for at indtaste den manuelt.
 LI|Lapelevation °: elevationen af maksimum i din antennes lodrette lap. En retningsantenne, der er fastgjort på 0°, har alligevel hovedlappen nogle grader over horisonten på grund af refleksionen i jorden: normalt 3-8°, afhængigt af antennens højde i bølgelængder.
@@ -79,7 +78,7 @@ P|Den første underfane i gruppen Prognoseberegning samler på én skærm, hvor 
 H2|5.1 Oversigtsbjælken
 P|Over kortet opsummerer en bjælke beregningen for det tidspunkt: dato og tid, strækningens indeks (summen af ZHR × effektivitet for de aktive sværme), den mest nyttige sværm med dens ZHR og effektivitet (også i dB i forhold til DJ5HG's reference), antallet af sværme over horisonten og det anbefalede Hot med dets azimut.
 H2|5.2 Kortet set ovenfra
-P|Ved siden af kortet, til højre, er modstationens felt: skriv kaldesignalet og tryk Enter, locatoren hentes fra CALL3-databasen (som i YAEC og LIVETROPOVHF); nedenunder står locator og højde. Kaldesignalet kan også skrives i locator-feltet.
+P|Ved siden af kortet, til højre, er der én kolonne. Øverst modstationens felt: først antenneretningen (Antenne-az, altid mod modstationen), så kaldesignalet (skriv det og tryk Enter: lokatoren hentes fra CALL3-databasen, som i YAEC og LIVETROPOVHF), lokatoren og højden. Kaldesignalet kan også skrives i lokatorfeltet. Nederst forklaringen til kortets symboler: et klik på titlen folder den sammen; radianternes farver vises, når Europakortet er slukket.
 P|Til venstre Europakortet set ovenfra (øst til højre) med gradskala hele vejen rundt:
 LI|grøn linje: den sande strækning mellem de to lokatorer;
 LI|Hot A og Hot B: de to hot spots på hver side af midtpunktet. Rød = anbefalet, lyserød = uden for antennelappen, grå = allerede inden for lappen (med en advarsel);
@@ -87,7 +86,7 @@ LI|antennelap: sektoren ved -3 dB omkring antennens azimut;
 LI|Grænse A og Grænse B, svagt tegnet: de fjerneste kanter af den himmel, som begge stationer ser, ikke punkter at rette antennen mod;
 LI|gul linje: den retning, hvori den valgte (eller den mest gunstige) sværm fejer over himlen; orange punkter: de to vinkelrette antenneretninger (radiantens azimut ±90°);
 LI|PREV-zoner, lyse ellipser: hvor de mest sandsynlige spor falder lige nu, én på hver side af strækningen.
-P|Venstreklik på kortet = modstationens lokator, højreklik = din stations lokator; strækningen genberegnes straks. Signaturforklaringen er en sammenfoldelig kolonne til højre for kortet. Afkrydsningsfelterne over listen over sværme slår Hot-retningerne, Europakortet og visningen ovenfra til og fra.
+P|Venstreklik på kortet = modstationens lokator, højreklik = din stations lokator; strækningen genberegnes straks. Afkrydsningsfelterne over listen over sværme slår Hot-retningerne, Europakortet og visningen ovenfra til og fra.
 H2|5.3 Listen over sværme
 P|For hver sværm: navn og IMO-kode, ZHR i dette øjeblik, radiantens azimut og elevation set fra din station, effektivitet for strækningen, dominerende side (A eller B), bedste antenneretning, radiantens op- og nedgang. Et klik på en række vælger sværmen: den gule linje og de orange punkter følger den.
 H2|5.4 Den lille himmelhvælving og beregningsteksten
@@ -163,6 +162,7 @@ P|Et azimutalt ækvidistant kort centreret på din station med al indsamlet mete
 LI|Kortradius: 600-3500 km. Spots der vises: seneste 15 eller 30 minutter, seneste time, seneste 3 eller 24 timer.
 LI|Et klik på en strækning eller på en række i tabellen fremhæver forbindelsen og viser skyens centrum, dens højde og dens dimensioner.
 LI|Vis hvem der lytter: trekanter i båndets farve markerer de stationer, der ifølge PSKReporter modtager MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvindue. Et klik på en trekant viser kaldesignal, lokator, modes og sidste spot. MQTT-strømmen i fanen Dataindsamling skal være forbundet.
+LI|Også de aktive monitorer på PSKReporter-kortet: tomme trekanter for stationer, der ses på kortet hos pskreporter.info i MSK144, FSK441, PSK2K eller JTMS, men endnu ikke har modtaget noget spot (MQTT sender kun stationer, der modtager noget). YA-MS spørger PSKReporters opslagstjeneste én mode ad gangen, hvert 3. minut, så hver mode opdateres hvert 12. minut, som tjenestens regler beder om. Et klik på trekanten viser kaldesignal, lokator, dekoderprogram og tidspunktet, hvor monitoren var aktiv. Tændt fra start.
 LI|Spots fra alle bånd vises, også fra bånd der ikke er valgt i Dataindsamling (de gemmes ikke). CW-spots og spots mellem stationer, der ligger for tæt, vises ikke, hvis de kasseres i Dataindsamling.
 LI|Kortet viser kaldesignalerne for begge stationer i hvert spot, én gang pr. station. Projektionen kan være azimutal (centreret på din station) eller Mercator. Værktøjstippet på kolonnen Sky forklarer betydningen.
 H2|9.2 Radarflux

@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.10 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.11 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -26,7 +26,7 @@ P|Při spuštění se na několik sekund zobrazí úvodní obrazovka s Perseidam
 H2|2.3 Složka data
 P|Všechna nastavení a všechna data jsou v jediné složce data vedle programu: žádné AppData, žádné systémové složky. Chcete-li YA-MS přesunout na jiný počítač, stačí zkopírovat složku programu i s její složkou data. Obsah složky popisuje kapitola 13.
 H2|2.4 Automatické aktualizace
-P|Od verze 1.8.10 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
+P|Od verze 1.8.11 jsou aktualizace automatické a tiché: při spuštění a pak každých 6 hodin YA-MS kontroluje GitHub a pokud je k dispozici nová verze, stáhne ji, nainstaluje a sám se restartuje, aniž by se na cokoli ptal (ukáže to jen stavový řádek). Chybějící soubory se také znovu stáhnou bez ptaní. Okno popsané níže se objeví jen po stisknutí "Aktualizace" nebo pokud do souboru data/config.ini zapíšete aggiornamenti_automatici=0.
 P|Od verze 1.8.0 YA-MS sám kontroluje na GitHubu, při spuštění a nejvýše jednou denně, zda vyšla nová verze. Pokud ano, zobrazí se okno „Je k dispozici aktualizace“ s novinkami a třemi tlačítky:
 LI|Aktualizovat nyní: stáhne balíček vhodný pro váš systém, nahradí soubory programu, ponechá složku data a restartuje YA-MS. Soubory programu ve složce data, které nová verze mění, se nejprve zkopírují do data/backup/v<versione vecchia>; vašich souborů (nastavení, archivy, spoty, ADIF) se aktualizace nedotkne.
 LI|Později: zavře okno; kontrola se zopakuje následující den.
@@ -58,7 +58,6 @@ H2|4.1 Řádek 1: stanice a pásmo
 LI|Můj lokátor a výška m: váš lokátor Maidenhead (4, 6 nebo 8 znaků; používá se střed čtverce) a nadmořská výška stanice.
 LI|Pásmo MHz: 28, 50, 70, 144, 222 nebo 432 MHz. Slouží pro zisk a lalok antény, pro útlum a bilanci spoje a pro odhad toku.
 LI|Vypočítat: přepočítá trasu (vzorkování vrstvy E, méně než sekunda).
-LI|Anténa az: azimut antény, vždy směrem k protistanici.
 H2|4.2 Řádek 2: vrstva E a anténa
 LI|Výška stop km a z radaru: výška meteorických stop. Při zaškrtnutém „z radaru“ se použije nejčastější výška naměřená radarem Collm (obvykle 88-90 km); zrušte zaškrtnutí, chcete-li ji zadat ručně.
 LI|Elevace laloku °: elevace maxima svislého laloku vaší antény. Směrovka nastavená na 0° má hlavní lalok přesto několik stupňů nad horizontem, kvůli odrazu od země: obvykle 3-8°, podle výšky antény ve vlnových délkách.
@@ -79,7 +78,7 @@ P|První podkarta skupiny Předpovědní výpočet ukazuje na jedné obrazovce, 
 H2|5.1 Souhrnný pruh
 P|Nad mapou pruh shrnuje výpočet pro daný okamžik: datum a čas, index trasy (součet ZHR × účinnost aktivních rojů), nejužitečnější roj s jeho ZHR a účinností (i v dB vůči referenci DJ5HG), počet rojů nad horizontem a doporučený Hot s jeho azimutem.
 H2|5.2 Mapa v půdorysu
-P|Vedle mapy vpravo je rámeček protistanice: napiš značku a stiskni Enter, lokátor se vezme z databáze CALL3 (jako v YAEC a LIVETROPOVHF); pod ní jsou lokátor a výška. Značku lze napsat i do pole lokátoru.
+P|Vedle mapy, vpravo, je jediný sloupec. Nahoře rámeček protistanice: nejprve směr antény (Azimut antény, vždy na protistanici), pak značka (napište ji a stiskněte Enter: lokátor se vezme z databáze CALL3, jako v YAEC a LIVETROPOVHF), lokátor a výška. Značku lze napsat i do pole lokátoru. Dole legenda symbolů mapy: klepnutí na nadpis ji sbalí; barvy radiantů se objeví, když je mapa Evropy vypnutá.
 P|Vlevo mapa Evropy při pohledu shora (východ vpravo), se stupnicí ve stupních po obvodu:
 LI|zelená čára: skutečná trasa mezi oběma lokátory;
 LI|Hot A a Hot B: dva hot spoty po stranách středu trasy. Červená = doporučený, růžová = mimo lalok antény, šedá = již uvnitř laloku (s upozorněním);
@@ -87,7 +86,7 @@ LI|lalok antény: výseč na -3 dB kolem azimutu antény;
 LI|Mez A a Mez B, slabě: nejvzdálenější okraje oblohy viditelné z obou stanic, nikoli body, na které mířit;
 LI|žlutá čára: směr, ve kterém vybraný (nebo nejpříznivější) roj přechází oblohou; oranžové body: dvě kolmá nasměrování (azimut radiantu ±90°);
 LI|zóny PREV, světlé elipsy: kam právě dopadají nejpravděpodobnější stopy, jedna na každé straně trasy.
-P|Levé tlačítko na mapě = lokátor protistanice, pravé tlačítko = lokátor vaší stanice; trasa se okamžitě přepočítá. Legenda je sbalitelný sloupec vpravo od mapy. Zaškrtávací políčka nad seznamem rojů zapínají a vypínají směry Hot, mapu Evropy a pohled shora.
+P|Levé tlačítko na mapě = lokátor protistanice, pravé tlačítko = lokátor vaší stanice; trasa se okamžitě přepočítá. Zaškrtávací políčka nad seznamem rojů zapínají a vypínají směry Hot, mapu Evropy a pohled shora.
 H2|5.3 Seznam rojů
 P|Pro každý roj: název a zkratka IMO, ZHR v tomto okamžiku, azimut a elevace radiantu z vaší stanice, účinnost pro trasu, převládající strana (A nebo B), nejlepší nasměrování, východ a západ radiantu. Kliknutím na řádek se roj vybere: žlutá čára a oranžové body jej sledují.
 H2|5.4 Malá nebeská klenba a text výpočtu
@@ -163,6 +162,7 @@ P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachy
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
 LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed oblaku, jeho výška a rozměry.
 LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
+LI|Také aktivní monitory z mapy PSKReporter: prázdné trojúhelníky pro stanice, které jsou na mapě pskreporter.info v MSK144, FSK441, PSK2K nebo JTMS, ale ještě nepřijaly žádný spot (MQTT posílá jen stanice, které něco přijímají). YA-MS se dotazuje vyhledávací služby PSKReporter po jednom druhu provozu, každé 3 minuty, takže každý druh provozu se obnoví každých 12 minut, jak žádají pravidla služby. Klepnutí na trojúhelník ukáže značku, lokátor, dekódovací program a čas, kdy byl monitor aktivní. Ve výchozím stavu zapnuto.
 LI|Zobrazují se spoty všech pásem, i těch, která nejsou vybrána ve Sběru dat (ty se neukládají). Spoty CW a spoty mezi příliš blízkými stanicemi se nezobrazují, pokud se ve Sběru dat zahazují.
 LI|Na mapě se píší značky obou stanic každého spotu, jednou pro každou stanici. Projekci lze zvolit: azimutální (uprostřed tvoje stanice) nebo Mercatorova. Bublina na sloupci Mrak vysvětluje jeho význam.
 H2|9.2 Tok z radaru

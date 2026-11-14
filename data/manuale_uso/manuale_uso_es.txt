@@ -1,5 +1,5 @@
 TITLE|Manual de uso de YA-MS
-SUB|Versión 1.8.10 - a cargo de Costantino IC8TEM - noviembre de 2026
+SUB|Versión 1.8.11 - a cargo de Costantino IC8TEM - noviembre de 2026
 H1|1. Introducción
 H2|1.1 Para qué sirve YA-MS
 P|YA-MS ayuda a prever y a seguir en directo las condiciones de meteor scatter entre tu estación y un corresponsal, de 28 a 432 MHz. Para cada lluvia de meteoros activa indica en qué medida la posición de su radiante favorece tu trayecto (la eficiencia), en qué horas, desde qué lado del trayecto llegan las reflexiones y hacia dónde conviene apuntar la antena. Junto a la previsión muestra los datos medidos en directo: los recuentos del radar de meteoros de Collm, las cámaras de la Global Meteor Network, el radar CMOR, el transmisor GRAVES y el tráfico de meteor scatter recogido de los clústeres y de PSKReporter.
@@ -26,7 +26,7 @@ P|Al arrancar aparece durante unos segundos la pantalla con las Perseidas sobre 
 H2|2.3 La carpeta data
 P|Todos los ajustes y todos los datos están en una única carpeta data junto al programa: nada de AppData ni de carpetas del sistema. Para pasar YA-MS a otro ordenador basta con copiar la carpeta del programa con su carpeta data. El contenido de la carpeta se describe en el capítulo 13.
 H2|2.4 Actualizaciones automáticas
-P|Desde la versión 1.8.10 las actualizaciones son automáticas y silenciosas: al arrancar y luego cada 6 horas YA-MS consulta GitHub y, si hay una versión nueva, la descarga, la instala y se reinicia solo sin preguntar nada (solo lo indica la barra de estado). También los archivos que faltan se vuelven a descargar sin preguntar. La ventana descrita abajo aparece solo al pulsar "Actualizaciones" o si escribes aggiornamenti_automatici=0 en el archivo data/config.ini.
+P|Desde la versión 1.8.11 las actualizaciones son automáticas y silenciosas: al arrancar y luego cada 6 horas YA-MS consulta GitHub y, si hay una versión nueva, la descarga, la instala y se reinicia solo sin preguntar nada (solo lo indica la barra de estado). También los archivos que faltan se vuelven a descargar sin preguntar. La ventana descrita abajo aparece solo al pulsar "Actualizaciones" o si escribes aggiornamenti_automatici=0 en el archivo data/config.ini.
 P|Desde la versión 1.8.0, YA-MS comprueba por sí solo en GitHub, al arrancar y como mucho una vez al día, si ha salido una versión nueva. Si la hay, aparece la ventana "Actualización disponible" con las novedades y tres botones:
 LI|Actualizar ahora: descarga el paquete adecuado para tu sistema, sustituye los archivos del programa, conserva la carpeta data y reinicia YA-MS. Los archivos del programa de la carpeta data que la nueva versión modifica se copian antes en data/backup/v<versión anterior>; tus archivos (ajustes, archivos históricos, spots, ADIF) no se tocan.
 LI|Más tarde: cierra la ventana; la comprobación se repite al día siguiente.
@@ -58,7 +58,6 @@ H2|4.1 Fila 1: estaciones y banda
 LI|Mi locator y altitud m: tu locator Maidenhead (4, 6 u 8 caracteres; se usa el centro de la cuadrícula) y la altitud de la estación sobre el nivel del mar.
 LI|Banda MHz: 28, 50, 70, 144, 222 o 432 MHz. Sirve para la ganancia y el lóbulo de la antena, para la atenuación y el balance, y para la estimación del flujo.
 LI|Calcular: vuelve a calcular el trayecto (muestreo de la capa E, menos de un segundo).
-LI|Antena az: acimut de la antena, siempre hacia el corresponsal.
 H2|4.2 Fila 2: capa E y antena
 LI|Altura estelas km y del radar: altura de las estelas meteóricas. Con "del radar" marcado se usa la altura más frecuente medida por el radar de Collm (normalmente 88-90 km); desmárcalo para escribirla a mano.
 LI|Elevación lóbulo °: elevación del máximo del lóbulo vertical de tu antena. Una directiva fijada a 0° tiene de todos modos el lóbulo principal unos grados por encima del horizonte, debido a la reflexión en el suelo: normalmente 3-8°, según la altura de la antena en longitudes de onda.
@@ -79,7 +78,7 @@ P|La primera subpestaña del grupo Cálculo de previsión reúne en una sola pan
 H2|5.1 La franja de resumen
 P|Encima del mapa una franja resume el cálculo para ese momento: fecha y hora, índice del trayecto (suma de ZHR × eficiencia de las lluvias activas), la lluvia más útil con su ZHR y su eficiencia (también en dB respecto a la referencia de DJ5HG), el número de lluvias por encima del horizonte y el Hot recomendado con su acimut.
 H2|5.2 El mapa en planta
-P|Junto al mapa, a la derecha, está el recuadro del corresponsal: escribe el indicativo y pulsa Intro, el locator se toma de la base CALL3 (como en YAEC y LIVETROPOVHF); debajo están el locator y la altura. El indicativo también puede escribirse en la casilla del locator.
+P|Junto al mapa, a la derecha, hay una sola columna. Arriba, el recuadro del corresponsal: primero el apuntamiento de la antena (Azimut antena, siempre hacia el corresponsal), luego el indicativo (escríbalo y pulse Intro: el locator se toma de la base CALL3, como en YAEC y LIVETROPOVHF), el locator y la altura. El indicativo también puede escribirse en la casilla del locator. Abajo, la leyenda de los símbolos del mapa: un clic en su título la pliega; los colores de los radiantes aparecen cuando el mapa de Europa está apagado.
 P|A la izquierda, el mapa de Europa visto desde arriba (este a la derecha), con la escala de grados alrededor:
 LI|línea verde: el trayecto real entre los dos locators;
 LI|Hot A y Hot B: los dos hot spots a los lados del punto medio. Rojo = recomendado, rosa = fuera del lóbulo de la antena, gris = ya dentro del lóbulo (con un aviso);
@@ -87,7 +86,7 @@ LI|lóbulo de la antena: el sector a -3 dB alrededor del acimut de la antena;
 LI|Límite A y Límite B, tenues: los bordes más lejanos del cielo visto por ambas estaciones, no los puntos hacia los que apuntar;
 LI|línea amarilla: la dirección en la que la lluvia seleccionada (o la más favorable) barre el cielo; puntos naranjas: los dos apuntamientos perpendiculares (acimut del radiante ±90°);
 LI|zonas PREV, elipses claras: dónde caen ahora las estelas más probables, una por cada lado del trayecto.
-P|Clic izquierdo en el mapa = locator del corresponsal, clic derecho = locator de tu estación; el trayecto se recalcula enseguida. La leyenda es una columna plegable a la derecha del mapa. Las casillas encima de la lista de lluvias activan y desactivan las direcciones de los Hot, el mapa de Europa y la vista desde arriba.
+P|Clic izquierdo en el mapa = locator del corresponsal, clic derecho = locator de tu estación; el trayecto se recalcula enseguida. Las casillas encima de la lista de lluvias activan y desactivan las direcciones de los Hot, el mapa de Europa y la vista desde arriba.
 H2|5.3 La lista de lluvias
 P|Para cada lluvia: nombre y código IMO, ZHR en este momento, acimut y elevación del radiante desde tu estación, eficiencia para el trayecto, lado predominante (A o B), mejor apuntamiento, salida y puesta del radiante. Un clic en una fila selecciona la lluvia: la línea amarilla y los puntos naranjas la siguen.
 H2|5.4 La pequeña bóveda celeste y el texto del cálculo
@@ -163,6 +162,7 @@ P|Un mapa acimutal equidistante centrado en tu estación con todo el tráfico de
 LI|Radio del mapa: 600-3500 km. Spots a mostrar: últimos 15 o 30 minutos, última hora, últimas 3 o 24 horas.
 LI|Un clic en un trayecto o en una fila de la tabla resalta el contacto y muestra el centro de la nube, su altura y sus dimensiones.
 LI|Mostrar quién escucha: triángulos del color de la banda marcan las estaciones que, según PSKReporter, reciben en MSK144, FSK441, PSK2K o JTMS en 28, 50, 70, 144 y 432 MHz en la ventana de tiempo elegida. Un clic en un triángulo muestra indicativo, locator, modos y último spot. El flujo MQTT de la pestaña Recogida de datos debe estar conectado.
+LI|También los monitores activos del mapa de PSKReporter: triángulos vacíos para las estaciones que aparecen en el mapa de pskreporter.info en MSK144, FSK441, PSK2K o JTMS pero aún no han recibido ningún spot (MQTT solo envía las estaciones que reciben algo). YA-MS consulta el servicio de consulta de PSKReporter un modo cada vez, cada 3 minutos, así que cada modo se actualiza cada 12 minutos, como piden las normas del servicio. Un clic en el triángulo muestra indicativo, locator, programa de decodificación y la hora en que el monitor estaba activo. Activado de serie.
 LI|Se muestran los spots de todas las bandas, también de las no elegidas en Recogida de datos (estos no se guardan). Los spots CW y los de estaciones demasiado cercanas no se muestran si se descartan en Recogida de datos.
 LI|El mapa muestra los indicativos de las dos estaciones de cada spot, una sola vez por estación. La proyección puede ser azimutal (centrada en tu estación) o Mercator. La ayuda emergente de la columna Nube explica su significado.
 H2|9.2 Flujo radar

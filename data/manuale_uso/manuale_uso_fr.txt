@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de YA-MS
-SUB|Version 1.8.10 - réalisé par Costantino IC8TEM - novembre 2026
+SUB|Version 1.8.11 - réalisé par Costantino IC8TEM - novembre 2026
 H1|1. Introduction
 H2|1.1 À quoi sert YA-MS
 P|YA-MS vous aide à prévoir et à suivre en direct les conditions de meteor scatter entre votre station et un correspondant, de 28 à 432 MHz. Pour chaque essaim météorique actif, il indique dans quelle mesure la position de son radiant favorise votre trajet (l'efficacité), à quelles heures, de quel côté du trajet arrivent les réflexions et où il convient de pointer l'antenne. À côté de la prévision, il affiche les données mesurées en direct : les comptages du radar météorique de Collm, les caméras du Global Meteor Network, le radar CMOR, l'émetteur GRAVES et le trafic meteor scatter recueilli sur les clusters et sur PSKReporter.
@@ -26,7 +26,7 @@ P|Au démarrage apparaît pendant quelques secondes l'écran d'accueil avec les 
 H2|2.3 Le dossier data
 P|Tous les réglages et toutes les données se trouvent dans un dossier data unique, à côté du programme : pas d'AppData, pas de dossiers système. Pour transférer YA-MS sur un autre ordinateur, il suffit de copier le dossier du programme avec son dossier data. Le contenu du dossier est décrit au chapitre 13.
 H2|2.4 Mises à jour automatiques
-P|Depuis la version 1.8.10, les mises à jour sont automatiques et silencieuses : au démarrage puis toutes les 6 heures, YA-MS consulte GitHub et, s'il y a une nouvelle version, la télécharge, l'installe et redémarre tout seul sans rien demander (seule la barre d'état l'indique). Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre décrite ci-dessous n'apparaît qu'en appuyant sur "Mises à jour" ou si vous écrivez aggiornamenti_automatici=0 dans le fichier data/config.ini.
+P|Depuis la version 1.8.11, les mises à jour sont automatiques et silencieuses : au démarrage puis toutes les 6 heures, YA-MS consulte GitHub et, s'il y a une nouvelle version, la télécharge, l'installe et redémarre tout seul sans rien demander (seule la barre d'état l'indique). Les fichiers manquants sont aussi retéléchargés sans demander. La fenêtre décrite ci-dessous n'apparaît qu'en appuyant sur "Mises à jour" ou si vous écrivez aggiornamenti_automatici=0 dans le fichier data/config.ini.
 P|Depuis la version 1.8.0, YA-MS vérifie de lui-même sur GitHub, au démarrage et au plus une fois par jour, si une nouvelle version est sortie. Si c'est le cas, la fenêtre « Mise à jour disponible » apparaît avec les nouveautés et trois boutons :
 LI|Mettre à jour maintenant : télécharge le paquet adapté à votre système, remplace les fichiers du programme, conserve le dossier data et redémarre YA-MS. Les fichiers du programme situés dans le dossier data que la nouvelle version modifie sont d'abord copiés dans data/backup/v<ancienne version> ; vos fichiers (réglages, archives, spots, ADIF) ne sont pas touchés.
 LI|Plus tard : ferme la fenêtre ; la vérification est répétée le lendemain.
@@ -58,7 +58,6 @@ H2|4.1 Rangée 1 : stations et bande
 LI|Mon locator et altitude m : votre locator Maidenhead (4, 6 ou 8 caractères ; c'est le centre du carré qui est utilisé) et l'altitude de la station au-dessus du niveau de la mer.
 LI|Bande MHz : 28, 50, 70, 144, 222 ou 432 MHz. Elle sert pour le gain et le lobe de l'antenne, pour l'affaiblissement et le bilan, pour l'estimation du flux.
 LI|Calculer : recalcule le trajet (échantillonnage de la couche E, moins d'une seconde).
-LI|Antenne az : azimut de l'antenne, toujours vers le correspondant.
 H2|4.2 Rangée 2 : couche E et antenne
 LI|Altitude traînées km et du radar : altitude des traînées météoriques. Avec « du radar » coché, on utilise l'altitude la plus fréquente mesurée par le radar de Collm (en général 88-90 km) ; décochez-la pour la saisir à la main.
 LI|Élévation du lobe ° : élévation du maximum du lobe vertical de votre antenne. Une antenne directive fixée à 0° a quand même son lobe principal quelques degrés au-dessus de l'horizon, à cause de la réflexion sur le sol : en général 3-8°, selon la hauteur de l'antenne en longueurs d'onde.
@@ -79,7 +78,7 @@ P|Le premier sous-onglet du groupe Calcul prévisionnel montre sur un seul écra
 H2|5.1 La bande de résumé
 P|Au-dessus de la carte, une bande résume le calcul pour ce moment : date et heure, indice du trajet (somme de ZHR × efficacité des essaims actifs), l'essaim le plus utile avec son ZHR et son efficacité (aussi en dB par rapport à la référence de DJ5HG), le nombre d'essaims au-dessus de l'horizon et le Hot recommandé avec son azimut.
 H2|5.2 La carte en plan
-P|À côté de la carte, à droite, se trouve le cadre du correspondant : saisissez l'indicatif et appuyez sur Entrée, le locator est pris dans la base CALL3 (comme dans YAEC et LIVETROPOVHF) ; en dessous figurent le locator et l'altitude. L'indicatif peut aussi être saisi dans la case du locator.
+P|À droite de la carte se trouve une colonne unique. En haut, le cadre du correspondant : d'abord le pointage de l'antenne (Azimut antenne, toujours vers le correspondant), puis l'indicatif (tapez-le et appuyez sur Entrée : le locator est pris dans la base CALL3, comme dans YAEC et LIVETROPOVHF), le locator et l'altitude. L'indicatif peut aussi être tapé dans la case du locator. En bas, la légende des symboles de la carte : un clic sur son titre la replie ; les couleurs des radiants apparaissent quand la carte d'Europe est éteinte.
 P|À gauche, la carte d'Europe vue d'en haut (est à droite), avec l'échelle des degrés tout autour :
 LI|ligne verte : le trajet réel entre les deux locators ;
 LI|Hot A et Hot B : les deux hot spots de part et d'autre du point milieu. Rouge = recommandé, rose = hors du lobe de l'antenne, gris = déjà dans le lobe (avec un avertissement) ;
@@ -87,7 +86,7 @@ LI|lobe de l'antenne : le secteur à -3 dB autour de l'azimut de l'antenne ;
 LI|Limite A et Limite B, en traits pâles : les bords les plus éloignés du ciel vu par les deux stations, pas des points à viser ;
 LI|ligne jaune : la direction dans laquelle l'essaim sélectionné (ou le plus favorable) balaie le ciel ; points orange : les deux pointages perpendiculaires (azimut du radiant ±90°) ;
 LI|zones PREV, ellipses claires : là où tombent en ce moment les traînées les plus probables, une de chaque côté du trajet.
-P|Clic gauche sur la carte = locator du correspondant, clic droit = locator de votre station ; le trajet est recalculé immédiatement. La légende est une colonne repliable à droite de la carte. Les cases au-dessus de la liste des essaims activent et désactivent les directions des Hot, la carte d'Europe et la vue de dessus.
+P|Clic gauche sur la carte = locator du correspondant, clic droit = locator de votre station ; le trajet est recalculé immédiatement. Les cases au-dessus de la liste des essaims activent et désactivent les directions des Hot, la carte d'Europe et la vue de dessus.
 H2|5.3 La liste des essaims
 P|Pour chaque essaim : nom et code IMO, ZHR à cet instant, azimut et élévation du radiant depuis votre station, efficacité pour le trajet, côté prépondérant (A ou B), meilleur pointage, lever et coucher du radiant. Un clic sur une ligne sélectionne l'essaim : la ligne jaune et les points orange le suivent.
 H2|5.4 La petite voûte céleste et le texte du calcul
@@ -163,6 +162,7 @@ P|Une carte azimutale équidistante centrée sur votre station avec tout le traf
 LI|Rayon de la carte : 600-3500 km. Spots à afficher : 15 ou 30 dernières minutes, dernière heure, 3 ou 24 dernières heures.
 LI|Un clic sur un trajet ou sur une ligne du tableau met la liaison en évidence et affiche le centre du nuage, son altitude et ses dimensions.
 LI|Afficher qui écoute : des triangles de la couleur de la bande marquent les stations qui, selon PSKReporter, reçoivent en MSK144, FSK441, PSK2K ou JTMS sur 28, 50, 70, 144 et 432 MHz dans la fenêtre de temps choisie. Un clic sur un triangle affiche indicatif, locator, modes et dernier spot. Le flux MQTT de l'onglet Collecte de données doit être connecté.
+LI|Aussi les moniteurs actifs de la carte PSKReporter : triangles vides pour les stations qui apparaissent sur la carte de pskreporter.info en MSK144, FSK441, PSK2K ou JTMS mais n'ont encore reçu aucun spot (MQTT n'envoie que les stations qui reçoivent quelque chose). YA-MS interroge le service de consultation de PSKReporter un mode à la fois, toutes les 3 minutes, donc chaque mode est mis à jour toutes les 12 minutes, comme le demandent les règles du service. Un clic sur le triangle montre l'indicatif, le locator, le logiciel de décodage et l'heure à laquelle le moniteur était actif. Activé par défaut.
 LI|Les spots de toutes les bandes sont affichés, y compris ceux des bandes non choisies dans Collecte de données (ceux-ci ne sont pas enregistrés). Les spots CW et ceux entre stations trop proches ne sont pas affichés s'ils sont rejetés dans Collecte de données.
 LI|La carte affiche les indicatifs des deux stations de chaque spot, une seule fois par station. La projection se choisit entre azimutale (centrée sur votre station) et Mercator. L'info-bulle de la colonne Nuage en explique le sens.
 H2|9.2 Flux radar

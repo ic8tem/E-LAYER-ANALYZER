@@ -545,7 +545,7 @@ namespace YAMS
                               btnReal, lblSkyTime);
             // riga 1: stazioni e banda, azimut d'antenna e cursore del carattere (la prima riga ha spazio)
             Border row1 = Row(L(Lang.T("Il mio locator")), txtHome, L(Lang.T("quota m")), numHomeAlt,
-                       L(Lang.T("Banda MHz")), cmbBand, btnCalc, lblAntAz, L(Lang.T("Carattere")), sldFont, lblFont);
+                       L(Lang.T("Banda MHz")), cmbBand, btnCalc, L(Lang.T("Carattere")), sldFont, lblFont);   // il puntamento sta nel riquadro del corrispondente
             // il corrispondente (nominativo, locator, quota) sta nel Calcolo previsionale, accanto alla mappa
             // (bozzetto B scelto dall'autore, 13/11/2026): BuildDxPanel()
 
@@ -657,7 +657,8 @@ namespace YAMS
             Grid sc = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*") };
             p1.Children.Add(sc);
             // pianta: mappa con tratta, Hot, lobo, zone PREV, linea di scorrimento dello sciame e scala dei gradi
-            sky = new SkyView { ShowRadiants = false, ShowSkyRings = false, ShowDial = true, DrawCaption = false };
+            // la legenda non e' piu' disegnata dentro la mappa: sta nella colonna a destra, sotto il corrispondente
+            sky = new SkyView { ShowRadiants = false, ShowSkyRings = false, ShowDial = true, DrawCaption = false, ShowLegend = false };
             EventHandler<PointerReleasedEventArgs> onSky = (s, e) => OnSkyClick(e);
             sky.AddHandler(InputElement.PointerReleasedEvent, onSky, RoutingStrategies.Bubble, true);
             // didascalia sotto la pianta (non piu' disegnata dentro la mappa), va a capo
@@ -710,6 +711,7 @@ namespace YAMS
             {
                 sky.ShowMap = chkMap.IsChecked == true;
                 if (chkMap.IsChecked == true) chkTopView.IsChecked = true;
+                UpdateMapLegend();
                 sky.InvalidateVisual();
             });
             chkTopView = C(Lang.T("Vista dall'alto (E a destra)"), cfg.GetB("vista_alto", true));
@@ -717,6 +719,7 @@ namespace YAMS
             {
                 sky.TopView = chkTopView.IsChecked == true; skySmall.TopView = chkTopView.IsChecked == true;
                 if (chkTopView.IsChecked != true) chkMap.IsChecked = false;
+                UpdateMapLegend();
                 sky.InvalidateHeat(); skySmall.InvalidateVisual();
             });
             Border opt = Row(chkHot, chkMap, chkTopView);
@@ -1053,10 +1056,76 @@ namespace YAMS
         }
 
         // riquadro del corrispondente accanto alla mappa del Calcolo previsionale
+        // colonna unica accanto alla mappa (richiesta dell'autore, 14/11/2026): in alto il corrispondente con il
+        // puntamento dell'antenna, in basso la legenda dei simboli della mappa
         Control BuildDxPanel()
+        {
+            StackPanel col = new StackPanel { Spacing = 0, Width = 200 };
+            col.Children.Add(BuildDxBox());
+            col.Children.Add(BuildMapLegend());
+            return new ScrollViewer { Content = col, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled };
+        }
+
+        StackPanel legendRadiants;
+
+        Control BuildMapLegend()
+        {
+            StackPanel sp = new StackPanel { Spacing = 2, Margin = new Thickness(10, 8) };
+            StackPanel body = new StackPanel { Spacing = 2 };
+            TextBlock head = new TextBlock { Text = Lang.T("Legenda") + " ▾", FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore), FontSize = 14, Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand), Margin = new Thickness(0, 0, 0, 4) };
+            head.PointerPressed += (s, e) => { body.IsVisible = !body.IsVisible; head.Text = Lang.T("Legenda") + (body.IsVisible ? " ▾" : " ▸"); };
+            sp.Children.Add(head);
+            Action<StackPanel, Color, string> item = (into, c, text) =>
+            {
+                StackPanel r = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 7 };
+                r.Children.Add(new Avalonia.Controls.Shapes.Ellipse { Width = 9, Height = 9, Fill = Pal.B(c), Stroke = Tema.Scuro ? null : Pal.B(Pal.A(110, Pal.Fore)), StrokeThickness = 0.7, VerticalAlignment = VerticalAlignment.Center });
+                r.Children.Add(new TextBlock { Text = text, FontSize = 12, Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap, MaxWidth = 160 });
+                into.Children.Add(r);
+            };
+            item(body, SkyPal.Green, Lang.T("tratta / DX"));
+            item(body, SkyPal.Red, Lang.T("Hot consigliato"));
+            item(body, Pal.HotPink, Lang.T("Hot fuori lobo"));
+            item(body, Color.FromRgb(150, 150, 210), Lang.T("limiti zona comune"));
+            item(body, Pal.HotGrey, Lang.T("Hot nel lobo"));
+            item(body, Color.FromRgb(255, 240, 200), Lang.T("lobo antenna"));
+            item(body, Color.FromRgb(255, 210, 90), Lang.T("scorrimento sciame"));
+            item(body, SkyPal.Orange, Lang.T("miglior punt."));
+            item(body, Color.FromRgb(235, 225, 190), Lang.T("zona PREV"));
+            // senza la pianta (mappa spenta o vista dal basso) si vedono anche i radianti
+            legendRadiants = new StackPanel { Spacing = 2, Margin = new Thickness(0, 6, 0, 0) };
+            item(legendRadiants, SkyPal.Azure, Lang.T("percorso rad."));
+            legendRadiants.Children.Add(new TextBlock { Text = Lang.T("Radiante:"), FontWeight = FontWeight.SemiBold, FontSize = 12, Foreground = Pal.B(Pal.Fore), Margin = new Thickness(0, 4, 0, 0) });
+            item(legendRadiants, SkyPal.Yellow, Lang.T("effic. >= 50%"));
+            item(legendRadiants, SkyPal.Orange, Lang.T("effic. >= 20%"));
+            item(legendRadiants, Color.FromRgb(194, 65, 12), Lang.T("effic. < 20%"));
+            item(legendRadiants, Color.FromRgb(130, 130, 130), Lang.T("quasi inattivo"));
+            body.Children.Add(legendRadiants);
+            body.Children.Add(new TextBlock
+            {
+                Text = Lang.T("Mappa:") + " " + Lang.T("clic sinistro =") + " " + Lang.T("corrispondente") + ", " + Lang.T("clic destro =") + " " + Lang.T("la mia stazione"),
+                FontSize = 11.5, Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, MaxWidth = 175, Margin = new Thickness(0, 8, 0, 0)
+            });
+            sp.Children.Add(body);
+            UpdateMapLegend();
+            return new Border
+            {
+                Background = Pal.B(Pal.Panel), BorderBrush = Pal.B(Pal.Border), BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8), Margin = new Thickness(6, 0, 8, 8), Child = sp
+            };
+        }
+
+        void UpdateMapLegend()
+        {
+            if (legendRadiants != null && sky != null) legendRadiants.IsVisible = !(sky.ShowMap && sky.TopView);
+        }
+
+        Control BuildDxBox()
         {
             StackPanel sp = new StackPanel { Spacing = 4, Margin = new Thickness(10, 8) };
             sp.Children.Add(new TextBlock { Text = Lang.T("Corrispondente"), FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Azure), FontSize = 14 });
+            // puntamento dell'antenna verso il corrispondente (prima era nella prima riga dei comandi)
+            lblAntAz.TextWrapping = TextWrapping.Wrap; lblAntAz.MaxWidth = 175; lblAntAz.FontWeight = FontWeight.SemiBold; lblAntAz.Margin = new Thickness(0, 0, 0, 4);
+            sp.Children.Add(lblAntAz);
             sp.Children.Add(L(Lang.T("nominativo")));
             sp.Children.Add(txtDxCall);
             sp.Children.Add(L(Lang.T("locator")));
@@ -1071,7 +1140,7 @@ namespace YAMS
             return new Border
             {
                 Background = Pal.B(Pal.Panel2), BorderBrush = Pal.B(Pal.Azure), BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(8), Margin = new Thickness(6, 8, 8, 8), VerticalAlignment = VerticalAlignment.Top, Child = sp
+                CornerRadius = new CornerRadius(8), Margin = new Thickness(6, 8, 8, 8), Child = sp
             };
         }
 

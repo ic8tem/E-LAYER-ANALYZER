@@ -53,9 +53,11 @@ namespace YAMS
     // stazione in ascolto nei modi MS secondo PSKReporter (chi riceve negli spot MQTT)
     public class MsListener
     {
-        public string Call = "", Loc = "", Band = "", Modes = "";
-        public DateTime LastUtc;
-        public int Count;
+        public string Call = "", Loc = "", Band = "", Modes = "", Soft = "";
+        public DateTime LastUtc;          // ultimo spot ricevuto (MQTT)
+        public DateTime SeenUtc;          // ultima volta tra i monitor attivi della mappa di PSKReporter
+        public int Count;                 // spot ricevuti; 0 = solo monitor attivo, nessuno spot MS ancora
+        public DateTime Latest { get { return LastUtc > SeenUtc ? LastUtc : SeenUtc; } }
     }
 
     public class MsFilterWord
@@ -158,13 +160,29 @@ namespace YAMS
             if (s.Utc > l.LastUtc) l.LastUtc = s.Utc;
             l.Count++;
             if (l.Modes.IndexOf(s.Mode, StringComparison.Ordinal) < 0) l.Modes = l.Modes.Length == 0 ? s.Mode : l.Modes + " " + s.Mode;
-            if (Listeners.Count > 20000)
-            {
-                DateTime lim = DateTime.UtcNow.AddHours(-24);
-                List<string> old = new List<string>();
-                foreach (KeyValuePair<string, MsListener> kv in Listeners) if (kv.Value.LastUtc < lim) old.Add(kv.Key);
-                foreach (string o in old) Listeners.Remove(o);
-            }
+            PruneListeners();
+        }
+        static void PruneListeners()
+        {
+            if (Listeners.Count <= 20000) return;
+            DateTime lim = DateTime.UtcNow.AddHours(-24);
+            List<string> old = new List<string>();
+            foreach (KeyValuePair<string, MsListener> kv in Listeners) if (kv.Value.Latest < lim) old.Add(kv.Key);
+            foreach (string o in old) Listeners.Remove(o);
+        }
+        // monitor attivi della mappa di PSKReporter (anche senza spot ricevuti): stessa chiave nominativo|banda
+        static void NoteMonitor(PskMonitor m)
+        {
+            if (Array.IndexOf(ListenerBands, m.Band) < 0) return;
+            string k = m.Call + "|" + m.Band;
+            MsListener l;
+            if (!Listeners.TryGetValue(k, out l)) { l = new MsListener { Call = m.Call, Band = m.Band }; Listeners[k] = l; }
+            string loc = Refine(m.Loc, m.Call);
+            if (loc.Length > 0) l.Loc = loc; else if (l.Loc.Length == 0) l.Loc = m.Loc;
+            if (m.SeenUtc > l.SeenUtc) l.SeenUtc = m.SeenUtc;
+            if (m.Soft.Length > 0) l.Soft = m.Soft;
+            if (l.Modes.IndexOf(m.Mode, StringComparison.Ordinal) < 0) l.Modes = l.Modes.Length == 0 ? m.Mode : l.Modes + " " + m.Mode;
+            PruneListeners();
         }
         // regola dell'autore (IC8TEM): le righe "DX de" con frequenza sotto 27990,0 kHz si scartano subito, in locale:
         // non vanno nella console, non si contano come spot e non si memorizzano
@@ -276,6 +294,8 @@ namespace YAMS
                 LoadRecent();
                 WsjtxUdp.Load(cfg);
                 if (WsjtxUdp.AutoStart && !WsjtxUdp.Running) WsjtxUdp.Start();
+                PskActive.Enabled = cfg.GetB("psk_monitor_attivi", true);
+                PskActive.Start();
             }
         }
 
@@ -313,7 +333,7 @@ namespace YAMS
             WsjtxUdp.Save(cfg);
         }
 
-        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); }
+        public static void Shutdown() { foreach (TelnetSession s in Sessions) s.Disconnect(); PskMqtt.Disconnect(); WsjtxUdp.Stop(); PskActive.Stop(); }
 
         // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)
         public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }
@@ -339,6 +359,7 @@ namespace YAMS
             lock (lk) { while (pending.Count > 0) got.Add(pending.Dequeue()); while (pendingSpots.Count > 0) gotSpots.Add(pendingSpots.Dequeue()); }
             bool added = false;
             DateTime now = DateTime.UtcNow;
+            foreach (PskMonitor m in PskActive.Take()) NoteMonitor(m);
             foreach (KeyValuePair<int, string> kv in got)
             {
                 int i = kv.Key;

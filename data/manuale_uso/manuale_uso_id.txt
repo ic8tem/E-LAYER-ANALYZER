@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan YA-MS
-SUB|Versi 1.8.10 - disusun oleh Costantino IC8TEM - November 2026
+SUB|Versi 1.8.11 - disusun oleh Costantino IC8TEM - November 2026
 H1|1. Pendahuluan
 H2|1.1 Untuk apa YA-MS
 P|YA-MS membantu Anda memprakirakan dan memantau secara langsung kondisi meteor scatter antara stasiun Anda dan stasiun DX, dari 28 hingga 432 MHz. Untuk setiap hujan meteor yang aktif, program ini menunjukkan seberapa besar posisi radiannya menguntungkan lintasan Anda (efisiensi), pada jam berapa, dari sisi lintasan mana pantulan datang, dan ke mana sebaiknya antena diarahkan. Di samping prakiraan, program menampilkan data yang diukur secara langsung: hitungan radar meteor Collm, kamera Global Meteor Network, radar CMOR, pemancar GRAVES, serta lalu lintas meteor scatter yang dikumpulkan dari cluster dan PSKReporter.
@@ -26,7 +26,7 @@ P|Saat dijalankan, selama beberapa detik muncul layar pembuka bergambar Perseid 
 H2|2.3 Folder data
 P|Semua pengaturan dan semua data berada dalam satu folder data di samping program: tanpa AppData, tanpa folder sistem. Untuk memindahkan YA-MS ke komputer lain cukup salin folder program beserta folder data-nya. Isi folder ini dijelaskan di bab 13.
 H2|2.4 Pembaruan otomatis
-P|Sejak versi 1.8.10 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
+P|Sejak versi 1.8.11 pembaruan berjalan otomatis dan diam-diam: saat mulai lalu setiap 6 jam YA-MS memeriksa GitHub dan, jika ada versi baru, mengunduhnya, memasangnya, dan memulai ulang sendiri tanpa menanyakan apa pun (hanya bilah status yang memberi tahu). Berkas yang hilang juga diunduh ulang tanpa bertanya. Jendela yang dijelaskan di bawah hanya muncul saat menekan "Pembaruan" atau jika Anda menulis aggiornamenti_automatici=0 di berkas data/config.ini.
 P|Sejak versi 1.8.0, YA-MS memeriksa sendiri di GitHub, saat dijalankan dan paling banyak sekali sehari, apakah ada versi baru. Jika ada, muncul jendela "Pembaruan tersedia" berisi daftar perubahan dan tiga tombol:
 LI|Perbarui sekarang: mengunduh paket yang sesuai dengan sistem Anda, mengganti berkas program, mempertahankan folder data, lalu menjalankan ulang YA-MS. Berkas program di dalam folder data yang diubah oleh versi baru terlebih dahulu disalin ke data/backup/v<versi lama>; berkas Anda (pengaturan, arsip, spot, ADIF) tidak disentuh.
 LI|Nanti: menutup jendela; pemeriksaan diulang keesokan harinya.
@@ -58,7 +58,6 @@ H2|4.1 Baris 1: stasiun dan pita
 LI|Locator saya dan ketinggian m: locator Maidenhead Anda (4, 6 atau 8 karakter; yang dipakai adalah pusat kotak) dan ketinggian stasiun di atas permukaan laut.
 LI|Pita MHz: 28, 50, 70, 144, 222 atau 432 MHz. Digunakan untuk penguatan dan lobus antena, untuk redaman dan anggaran link, serta untuk estimasi fluks.
 LI|Hitung: menghitung ulang lintasan (pengambilan sampel lapisan E, kurang dari satu detik).
-LI|Az antena: azimut antena, selalu ke arah stasiun DX.
 H2|4.2 Baris 2: lapisan E dan antena
 LI|Ketinggian jejak km dan dari radar: ketinggian jejak meteor. Bila "dari radar" dicentang, digunakan ketinggian yang paling sering diukur oleh radar Collm (biasanya 88-90 km); hapus centang untuk menuliskannya secara manual.
 LI|Elevasi lobus °: elevasi puncak lobus vertikal antena Anda. Antena pengarah yang dipasang pada 0° tetap memiliki lobus utama beberapa derajat di atas cakrawala, karena pantulan dari tanah: biasanya 3-8°, tergantung tinggi antena dalam panjang gelombang.
@@ -79,7 +78,7 @@ P|Sub-tab pertama dari grup Perhitungan prakiraan menampilkan dalam satu layar d
 H2|5.1 Strip ringkasan
 P|Di atas peta, sebuah strip merangkum perhitungan untuk saat itu: tanggal dan jam, indeks lintasan (jumlah ZHR × efisiensi hujan meteor aktif), hujan meteor yang paling berguna dengan ZHR dan efisiensinya (juga dalam dB relatif terhadap acuan DJ5HG), jumlah hujan meteor di atas cakrawala, serta Hot disarankan beserta azimutnya.
 H2|5.2 Peta denah
-P|Di samping peta, di kanan, ada kotak stasiun lawan: ketik callsign dan tekan Enter, lokator diambil dari basis data CALL3 (seperti di YAEC dan LIVETROPOVHF); di bawahnya ada lokator dan ketinggian. Callsign juga bisa diketik di kotak lokator.
+P|Di samping peta, di kanan, ada satu kolom. Di atas kotak koresponden: pertama arah antena (Azimut antena, selalu ke koresponden), lalu callsign (ketik dan tekan Enter: lokator diambil dari basis data CALL3, seperti di YAEC dan LIVETROPOVHF), lokator dan ketinggian. Callsign juga bisa diketik di kotak lokator. Di bawah legenda simbol peta: klik pada judulnya untuk melipatnya; warna radian muncul saat peta Eropa dimatikan.
 P|Di kiri, peta Eropa dilihat dari atas (timur di kanan), dengan skala derajat di sekelilingnya:
 LI|garis hijau: lintasan sebenarnya antara kedua locator;
 LI|Hot A dan Hot B: dua hot spot di sisi-sisi titik tengah. Merah = disarankan, merah muda = di luar lobus antena, abu-abu = sudah berada di dalam lobus (dengan peringatan);
@@ -87,7 +86,7 @@ LI|lobus antena: sektor -3 dB di sekitar azimut antena;
 LI|Batas A dan Batas B, samar: tepi terjauh langit yang terlihat dari kedua stasiun, bukan titik yang harus dituju;
 LI|garis kuning: arah hujan meteor yang dipilih (atau yang paling menguntungkan) menyapu langit; titik oranye: dua arah bidik yang tegak lurus (azimut radian ±90°);
 LI|zona PREV, elips terang: tempat jejak yang paling mungkin jatuh saat ini, satu untuk setiap sisi lintasan.
-P|Klik kiri pada peta = locator stasiun DX, klik kanan = locator stasiun Anda; lintasan langsung dihitung ulang. Legenda berupa kolom yang dapat dilipat di sebelah kanan peta. Kotak centang di atas daftar hujan meteor menyalakan dan mematikan arah Hot, peta Eropa, dan tampilan dari atas.
+P|Klik kiri pada peta = locator stasiun DX, klik kanan = locator stasiun Anda; lintasan langsung dihitung ulang. Kotak centang di atas daftar hujan meteor menyalakan dan mematikan arah Hot, peta Eropa, dan tampilan dari atas.
 H2|5.3 Daftar hujan meteor
 P|Untuk setiap hujan meteor: nama dan kode IMO, ZHR saat ini, azimut dan elevasi radian dari stasiun Anda, efisiensi untuk lintasan, sisi dominan (A atau B), arah bidik terbaik, terbit dan terbenam radian. Klik pada sebuah baris untuk memilih hujan meteor tersebut: garis kuning dan titik oranye mengikutinya.
 H2|5.4 Kubah langit kecil dan teks perhitungan
@@ -163,6 +162,7 @@ P|Peta azimutal berjarak sama yang berpusat pada stasiun Anda dengan semua lalu 
 LI|Radius peta: 600-3500 km. Spot yang ditampilkan: 15 atau 30 menit terakhir, satu jam terakhir, 3 atau 24 jam terakhir.
 LI|Klik pada sebuah lintasan atau baris tabel untuk menyorot kontak dan menampilkan pusat awan, ketinggian, dan ukurannya.
 LI|Tampilkan siapa yang mendengarkan: segitiga berwarna pita menandai stasiun yang menurut PSKReporter menerima MSK144, FSK441, PSK2K, atau JTMS di 28, 50, 70, 144, dan 432 MHz dalam jendela waktu yang dipilih. Klik pada segitiga menampilkan callsign, locator, mode, dan spot terakhir. Aliran MQTT di tab Pengumpulan data harus terhubung.
+LI|Juga monitor aktif di peta PSKReporter: segitiga kosong untuk stasiun yang tampak di peta pskreporter.info dalam MSK144, FSK441, PSK2K atau JTMS tetapi belum menerima spot apa pun (MQTT hanya mengirim stasiun yang menerima sesuatu). YA-MS menanyai layanan kueri PSKReporter satu mode setiap kali, setiap 3 menit, sehingga setiap mode diperbarui setiap 12 menit, sesuai aturan layanan. Klik pada segitiga menampilkan callsign, lokator, program dekode, dan waktu monitor aktif. Aktif sejak awal.
 LI|Spot dari semua pita ditampilkan, termasuk pita yang tidak dipilih di Pengumpulan data (spot ini tidak disimpan). Spot CW dan spot antarstasiun yang terlalu dekat tidak ditampilkan, jika dibuang di Pengumpulan data.
 LI|Peta menuliskan callsign kedua stasiun pada setiap spot, sekali per stasiun. Proyeksi bisa dipilih: azimutal (berpusat di stasiunmu) atau Mercator. Tooltip pada kolom Awan menjelaskan artinya.
 H2|9.2 Fluks radar

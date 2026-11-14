@@ -25,7 +25,7 @@ namespace YAMS
         TextBlock lblTrafficInfo, lblTrafficCount, lblTrafficRadius;
         Slider sldTrafficRadius;
         ComboBox cmbTrafficWindow;
-        CheckBox chkTrafficListeners;
+        CheckBox chkTrafficListeners, chkPskMonitors;
         static readonly int[] TrafficMinutes = { 15, 30, 60, 180, 1440 };
         readonly Dictionary<MsSpot, List<TrafficCloud>> cloudCache = new Dictionary<MsSpot, List<TrafficCloud>>();
         int trafficSpotCount = -1;
@@ -88,6 +88,11 @@ namespace YAMS
             if (chkTrafficListeners.Content is string tls) chkTrafficListeners.Content = new TextBlock { Text = tls, TextWrapping = TextWrapping.Wrap };
             chkTrafficListeners.IsCheckedChanged += (s, e) => { cfg.Set("traffico_ascolto", chkTrafficListeners.IsChecked == true); RefreshTraffic(true); };
             side.Children.Add(chkTrafficListeners);
+            // anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (interrogazione periodica)
+            chkPskMonitors = C(Lang.T("Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (triangoli vuoti, aggiornati ogni 12 minuti)"), PskActive.Enabled);
+            if (chkPskMonitors.Content is string pms) chkPskMonitors.Content = new TextBlock { Text = pms, TextWrapping = TextWrapping.Wrap };
+            chkPskMonitors.IsCheckedChanged += (s, e) => { PskActive.Enabled = chkPskMonitors.IsChecked == true; cfg.Set("psk_monitor_attivi", PskActive.Enabled); RefreshTraffic(true); };
+            side.Children.Add(chkPskMonitors);
             lblTrafficCount = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap };
             side.Children.Add(lblTrafficCount);
             lblTrafficInfo = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Foreground = Pal.B(Pal.Fore) };
@@ -239,20 +244,25 @@ namespace YAMS
             traffic.Spots = list;
             // stazioni in ascolto nei modi MS (PSKReporter MQTT) nella stessa finestra di tempo, 28-50-70-144-432 MHz
             List<TrafficListener> lis = new List<TrafficListener>();
-            int nLis = 0;
+            int nLis = 0, nMon = 0;
             if (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true)
                 foreach (MsListener ml in MsCollector.Listeners.Values)
                 {
-                    if (ml.LastUtc < lim) continue;   // tutte le bande, anche quelle non scelte nella Raccolta dati
+                    bool monOnly = ml.Count == 0;   // monitor attivo di PSKReporter che non ha ancora ricevuto spot MS
+                    if (monOnly && !PskActive.Enabled) continue;
+                    if ((monOnly ? ml.SeenUtc : ml.Latest) < lim) continue;   // tutte le bande, anche quelle non scelte nella Raccolta dati
                     LatLon q;
                     if (!Astro.TryLocator(ml.Loc, out q) || !traffic.Inside(q)) continue;
                     nLis++;
-                    if (lis.Count >= 600) continue;
+                    if (monOnly) nMon++;
+                    if (lis.Count >= 1500) continue;
                     lis.Add(new TrafficListener
                     {
-                        Pos = q, Call = ml.Call, Color = BandColor(ml.Band),
+                        Pos = q, Call = ml.Call, Color = BandColor(ml.Band), Hollow = monOnly,
                         Info = Lang.F("{0} {1} in ascolto su {2} MHz ({3})", ml.Call, ml.Loc, ml.Band, ml.Modes) + "\n" +
-                               Lang.F("ultimo spot ricevuto {0} UTC · {1} spot", ml.LastUtc.ToString("HH:mm", CultureInfo.InvariantCulture), ml.Count) + "\n" +
+                               (monOnly ? Lang.F("monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto", ml.SeenUtc.ToString("HH:mm", CultureInfo.InvariantCulture))
+                                        : Lang.F("ultimo spot ricevuto {0} UTC · {1} spot", ml.LastUtc.ToString("HH:mm", CultureInfo.InvariantCulture), ml.Count)) + "\n" +
+                               (ml.Soft.Length > 0 ? ml.Soft + "\n" : "") +
                                Lang.F("{0:F0} km · azimut {1:F0}°", Astro.DistanceKm(traffic.Home, q), Astro.Bearing(traffic.Home, q))
                     });
                 }
@@ -267,7 +277,9 @@ namespace YAMS
             traffic.InvalidateVisual();
             lblTrafficCount.Text = Lang.F("{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator", list.Count, outside, noLoc)
                                    + (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true
-                                      ? "\n" + Lang.F("{0} stazioni in ascolto (PSKReporter MQTT)", nLis) + (PskMqtt.Connected ? "" : " · " + Lang.T("MQTT non connesso: si connette dalla linguetta \"Raccolta dati\"")) : "");
+                                      ? "\n" + Lang.F("{0} stazioni in ascolto (PSKReporter MQTT)", nLis)
+                                        + (PskActive.Enabled ? " · " + Lang.F("{0} solo monitor attivi", nMon) + (PskActive.LastError.Length > 0 ? " · " + Lang.F("mappa di PSKReporter non raggiungibile: {0}", PskActive.LastError) : "") : "")
+                                        + (PskMqtt.Connected ? "" : " · " + Lang.T("MQTT non connesso: si connette dalla linguetta \"Raccolta dati\"")) : "");
             if (list.Count != trafficSpotCount || force)
             {
                 trafficSpotCount = list.Count;
@@ -327,6 +339,10 @@ namespace YAMS
                               new[] { "OZ1BEF", "JO55WM", "70" }, new[] { "YO3JW", "KN34BK", "432" }, new[] { "G3WOS", "IO91IL", "28" } };
             foreach (string[] r in ls)
                 MsCollector.Listeners[r[0] + "|" + r[2]] = new MsListener { Call = r[0], Loc = r[1], Band = r[2], Modes = "MSK144", LastUtc = now.AddMinutes(-5), Count = 3 };
+            // monitor attivi di esempio (mappa di PSKReporter, nessuno spot ricevuto: triangoli vuoti)
+            string[][] ms = { new[] { "IK0XYZ", "JN61HT", "144" }, new[] { "S51DI", "JN76HD", "50" }, new[] { "SM6FHZ", "JO57XQ", "144" } };
+            foreach (string[] r in ms)
+                MsCollector.Listeners[r[0] + "|" + r[2]] = new MsListener { Call = r[0], Loc = r[1], Band = r[2], Modes = "MSK144", SeenUtc = now.AddMinutes(-4), Soft = "WSJT-X v2.7.0" };
             rdDirty = true;
         }
     }

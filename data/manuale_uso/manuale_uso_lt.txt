@@ -1,5 +1,5 @@
 TITLE|YA-MS naudotojo vadovas
-SUB|1.8.10 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+SUB|1.8.11 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
 H1|1. Įvadas
 H2|1.1 Kam skirta YA-MS
 P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
@@ -26,7 +26,7 @@ P|Paleidžiant kelioms sekundėms parodomas ekranas su Perseidais virš ESO VLT 
 H2|2.3 Aplankas data
 P|Visi nustatymai ir visi duomenys saugomi viename aplanke data šalia programos: jokio AppData, jokių sistemos aplankų. Norint perkelti YA-MS į kitą kompiuterį, pakanka nukopijuoti programos aplanką kartu su jo aplanku data. Aplanko turinys aprašytas 13 skyriuje.
 H2|2.4 Automatiniai atnaujinimai
-P|Nuo 1.8.10 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
+P|Nuo 1.8.11 versijos atnaujinimai yra automatiniai ir tylūs: paleidžiant ir vėliau kas 6 valandas YA-MS tikrina GitHub ir, jei yra nauja versija, ją atsisiunčia, įdiegia ir pats paleidžiamas iš naujo nieko neklausdamas (tai parodo tik būsenos juosta). Trūkstami failai taip pat atsisiunčiami iš naujo neklausiant. Toliau aprašytas langas atsiranda tik paspaudus "Atnaujinimai" arba jei faile data/config.ini įrašai aggiornamenti_automatici=0.
 P|Nuo 1.8.0 versijos YA-MS pati tikrina GitHub, paleidžiant ir ne dažniau kaip kartą per dieną, ar išleista nauja versija. Jei taip, atsiranda langas „Yra atnaujinimas“ su naujovėmis ir trimis mygtukais:
 LI|Atnaujinti dabar: atsisiunčia jūsų sistemai tinkamą paketą, pakeičia programos failus, išsaugo aplanką data ir iš naujo paleidžia YA-MS. Programos failai aplanke data, kuriuos nauja versija keičia, pirmiausia nukopijuojami į data/backup/v<sena versija>; jūsų failai (nustatymai, archyvai, spotai, ADIF) neliečiami.
 LI|Vėliau: uždaro langą; tikrinimas pakartojamas kitą dieną.
@@ -58,7 +58,6 @@ H2|4.1 1 eilutė: stotys ir diapazonas
 LI|Mano lokatorius ir aukštis m: jūsų Maidenhead lokatorius (4, 6 arba 8 simboliai; naudojamas kvadrato centras) ir stoties aukštis virš jūros lygio.
 LI|Diapazonas MHz: 28, 50, 70, 144, 222 arba 432 MHz. Naudojamas antenos stiprinimui ir lapeliui, slopinimui ir ryšio biudžetui bei srauto įvertinimui.
 LI|Skaičiuoti: iš naujo apskaičiuoja trasą (E sluoksnio imtis, greičiau nei per sekundę).
-LI|Antenos az: antenos azimutas, visada korespondento kryptimi.
 H2|4.2 2 eilutė: E sluoksnis ir antena
 LI|Pėdsakų aukštis km ir iš radaro: meteorų pėdsakų aukštis. Pažymėjus „iš radaro“, naudojamas dažniausias Collm radaru išmatuotas aukštis (paprastai 88-90 km); nuimkite žymą, kad įrašytumėte jį rankiniu būdu.
 LI|Lapelio elevacija °: jūsų antenos vertikaliojo lapelio maksimumo elevacija. Kryptinės antenos, nustatytos 0° kampu, pagrindinis lapelis vis tiek yra keliais laipsniais virš horizonto dėl atspindžio nuo žemės: paprastai 3-8°, priklausomai nuo antenos aukščio bangos ilgiais.
@@ -79,7 +78,7 @@ P|Pirmoji grupės Prognozės skaičiavimas antrinė kortelė viename ekrane paro
 H2|5.1 Suvestinės juosta
 P|Virš žemėlapio juosta apibendrina skaičiavimą tam momentui: data ir laikas, trasos indeksas (aktyvių srautų ZHR × efektyvumas suma), naudingiausias srautas su jo ZHR ir efektyvumu (taip pat dB, palyginti su DJ5HG atskaitos verte), srautų virš horizonto skaičius ir rekomenduojamas Hot su jo azimutu.
 H2|5.2 Planinis žemėlapis
-P|Šalia žemėlapio, dešinėje, yra korespondento langelis: įrašyk šaukinį ir paspausk Enter, lokatorius imamas iš CALL3 duomenų bazės (kaip YAEC ir LIVETROPOVHF); žemiau yra lokatorius ir aukštis. Šaukinį galima rašyti ir lokatoriaus langelyje.
+P|Šalia žemėlapio, dešinėje, yra vienas stulpelis. Viršuje korespondento langelis: pirmiausia antenos kryptis (Antenos az, visada į korespondentą), tada šaukinys (įrašykite jį ir paspauskite Enter: lokatorius imamas iš CALL3 duomenų bazės, kaip YAEC ir LIVETROPOVHF), lokatorius ir aukštis. Šaukinį galima įrašyti ir lokatoriaus langelyje. Apačioje žemėlapio simbolių legenda: spustelėjus pavadinimą ji suskleidžiama; radiantų spalvos rodomos, kai Europos žemėlapis išjungtas.
 P|Kairėje Europos žemėlapis, matomas iš viršaus (rytai dešinėje), su laipsnių skale aplink:
 LI|žalia linija: tikroji trasa tarp dviejų lokatorių;
 LI|Hot A ir Hot B: du hot spot abiejose vidurio taško pusėse. Raudona = rekomenduojamas, rožinė = už antenos lapelio ribų, pilka = jau lapelyje (su įspėjimu);
@@ -87,7 +86,7 @@ LI|antenos lapelis: -3 dB sektorius aplink antenos azimutą;
 LI|Riba A ir Riba B, blyškios: tolimiausi dangaus, matomo iš abiejų stočių, kraštai, o ne taškai, į kuriuos reikia nukreipti anteną;
 LI|geltona linija: kryptis, kuria pasirinktas (arba palankiausias) srautas brauko per dangų; oranžiniai taškai: dvi statmenos antenos kryptys (radianto azimutas ±90°);
 LI|PREV zonos, šviesios elipsės: kur dabar krenta labiausiai tikėtini pėdsakai, po vieną kiekvienoje trasos pusėje.
-P|Kairysis spustelėjimas žemėlapyje = korespondento lokatorius, dešinysis spustelėjimas = jūsų stoties lokatorius; trasa iškart perskaičiuojama. Legenda yra suskleidžiamas stulpelis žemėlapio dešinėje. Žymimieji langeliai virš srautų sąrašo įjungia ir išjungia Hot kryptis, Europos žemėlapį ir vaizdą iš viršaus.
+P|Kairysis spustelėjimas žemėlapyje = korespondento lokatorius, dešinysis spustelėjimas = jūsų stoties lokatorius; trasa iškart perskaičiuojama. Žymimieji langeliai virš srautų sąrašo įjungia ir išjungia Hot kryptis, Europos žemėlapį ir vaizdą iš viršaus.
 H2|5.3 Srautų sąrašas
 P|Kiekvienam srautui: pavadinimas ir IMO santrumpa, ZHR šiuo momentu, radianto azimutas ir elevacija iš jūsų stoties, efektyvumas trasai, vyraujanti pusė (A arba B), geriausia antenos kryptis, radianto patekėjimas ir nusileidimas. Spustelėjus eilutę pasirenkamas srautas: geltona linija ir oranžiniai taškai seka jį.
 H2|5.4 Mažasis dangaus skliautas ir skaičiavimo tekstas
@@ -163,6 +162,7 @@ P|Azimutinis vienodų atstumų žemėlapis, kurio centras yra jūsų stotis, su 
 LI|Žemėlapio spindulys: 600-3500 km. Rodomi spotai: paskutinės 15 arba 30 minučių, paskutinė valanda, paskutinės 3 arba 24 valandos.
 LI|Spustelėjus trasą arba lentelės eilutę ryšys paryškinamas ir parodomas debesies centras, jo aukštis ir matmenys.
 LI|Rodyti, kas klausosi: juostos spalvos trikampiai žymi stotis, kurios, pasak PSKReporter, pasirinktame laiko lange priima MSK144, FSK441, PSK2K ar JTMS 28, 50, 70, 144 ir 432 MHz juostose. Spustelėjus trikampį rodomas šaukinys, lokatorius, režimai ir paskutinis spotas. Kortelės Duomenų rinkimas MQTT srautas turi būti prijungtas.
+LI|Taip pat aktyvūs PSKReporter žemėlapio monitoriai: tušti trikampiai stotims, kurios matomos pskreporter.info žemėlapyje MSK144, FSK441, PSK2K ar JTMS režimu, bet dar negavo nė vieno spoto (MQTT siunčia tik stotis, kurios ką nors gauna). YA-MS kreipiasi į PSKReporter užklausų paslaugą po vieną režimą, kas 3 minutes, todėl kiekvienas režimas atnaujinamas kas 12 minučių, kaip reikalauja paslaugos taisyklės. Spustelėjus trikampį rodomas šaukinys, lokatorius, dekodavimo programa ir laikas, kai monitorius buvo aktyvus. Įjungta iš pradžių.
 LI|Rodomi visų juostų spotai, taip pat ir juostų, nepasirinktų Duomenų rinkime (jie neišsaugomi). CW spotai ir spotai tarp per arti esančių stočių nerodomi, jei Duomenų rinkime jie atmetami.
 LI|Žemėlapyje rašomi abiejų kiekvieno spoto stočių šaukiniai, po vieną kartą kiekvienai stočiai. Projekciją galima pasirinkti: azimutinė (centre tavo stotis) arba Merkatoriaus. Stulpelio Debesis patarimas paaiškina jo reikšmę.
 H2|9.2 Radaro srautas

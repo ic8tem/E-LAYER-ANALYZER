@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.10 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.11 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -26,7 +26,7 @@ P|At startup the splash screen with the Perseids above ESO's VLT appears for a f
 H2|2.3 The data folder
 P|All settings and all data are in a single data folder next to the program: no AppData, no system folders. To move YA-MS to another computer, just copy the program folder together with its data folder. The contents of the folder are described in chapter 13.
 H2|2.4 Automatic updates
-P|From version 1.8.10 updates are automatic and silent: at start-up and then every 6 hours YA-MS checks GitHub and, if there is a new version, downloads it, installs it and restarts by itself without asking anything (only the status bar says so). Missing files are also downloaded again without asking. The window described below appears only when you press "Updates" or if you write aggiornamenti_automatici=0 in the file data/config.ini.
+P|From version 1.8.11 updates are automatic and silent: at start-up and then every 6 hours YA-MS checks GitHub and, if there is a new version, downloads it, installs it and restarts by itself without asking anything (only the status bar says so). Missing files are also downloaded again without asking. The window described below appears only when you press "Updates" or if you write aggiornamenti_automatici=0 in the file data/config.ini.
 P|Since version 1.8.0 YA-MS checks GitHub by itself, at startup and at most once a day, for a new version. If there is one, the "Update available" window appears with the release notes and three buttons:
 LI|Update now: downloads the package suited to your system, replaces the program files, keeps the data folder and restarts YA-MS. Program files in the data folder that the new version changes are first copied to data/backup/v<old version>; your own files (settings, archives, spots, ADIF) are not touched.
 LI|Later: closes the window; the check is repeated the next day.
@@ -58,7 +58,6 @@ H2|4.1 Row 1: stations and band
 LI|My locator and height m: your Maidenhead locator (4, 6 or 8 characters; the centre of the square is used) and the height of the station above sea level.
 LI|Band MHz: 28, 50, 70, 144, 222 or 432 MHz. It is used for the antenna gain and lobe, for the path loss and the link budget, and for the flux estimate.
 LI|Calculate: recalculates the path (sampling of the E layer, less than a second).
-LI|Antenna az: antenna azimuth, always towards the DX station.
 H2|4.2 Row 2: E layer and antenna
 LI|Trail height km and from radar: height of the meteor trails. With "from radar" ticked, the most frequent height measured by the Collm radar is used (usually 88-90 km); untick it to type it in manually.
 LI|Lobe elevation °: elevation of the maximum of your antenna's vertical lobe. A beam fixed at 0° still has its main lobe a few degrees above the horizon, because of the ground reflection: usually 3-8°, depending on the antenna height in wavelengths.
@@ -79,7 +78,7 @@ P|The first sub-tab of the Forecast calculation group shows on one screen where 
 H2|5.1 The summary strip
 P|Above the map a strip summarises the calculation for that moment: date and time, path index (sum of ZHR × efficiency of the active showers), the most useful shower with its ZHR and its efficiency (also in dB relative to DJ5HG's reference), the number of showers above the horizon and the recommended Hot with its azimuth.
 H2|5.2 The plan map
-P|Next to the map, on the right, is the correspondent box: type the callsign and press Enter, the locator is taken from the CALL3 database (as in YAEC and LIVETROPOVHF); below are the locator and the height. The callsign can also be typed in the locator box.
+P|Next to the map, on the right, is a single column. At the top is the correspondent box: first the antenna pointing (Antenna az, always towards the correspondent), then the callsign (type it and press Enter: the locator is taken from the CALL3 database, as in YAEC and LIVETROPOVHF), the locator and the height. The callsign can also be typed in the locator box. At the bottom is the legend of the map symbols: a click on its title folds it; the radiant colours appear when the map of Europe is off.
 P|On the left, the map of Europe seen from above (east to the right), with the degree scale all around:
 LI|green line: the true path between the two locators;
 LI|Hot A and Hot B: the two hot spots on either side of the midpoint. Red = recommended, pink = outside the antenna lobe, grey = already inside the lobe (with a warning);
@@ -87,7 +86,7 @@ LI|antenna lobe: the -3 dB sector around the antenna azimuth;
 LI|Limit A and Limit B, faint: the farthest edges of the sky seen by both stations, not points to aim at;
 LI|yellow line: the direction in which the selected shower (or the most favourable one) sweeps the sky; orange dots: the two perpendicular pointings (radiant azimuth ±90°);
 LI|PREV zones, light ellipses: where the most probable trails are falling right now, one for each side of the path.
-P|Left click on the map = locator of the DX station, right click = locator of your station; the path is recalculated immediately. The legend is a collapsible column to the right of the map. The checkboxes above the shower list turn on and off the Hot directions, the map of Europe and the top view.
+P|Left click on the map = locator of the DX station, right click = locator of your station; the path is recalculated immediately. The checkboxes above the shower list turn on and off the Hot directions, the map of Europe and the top view.
 H2|5.3 The shower list
 P|For each shower: name and IMO code, ZHR at this moment, azimuth and elevation of the radiant from your station, efficiency for the path, prevailing side (A or B), best pointing, rise and set of the radiant. Clicking a row selects the shower: the yellow line and the orange dots follow it.
 H2|5.4 The small sky dome and the calculation text
@@ -163,6 +162,7 @@ P|An azimuthal equidistant map centred on your station with all the meteor scatt
 LI|Map radius: 600-3500 km. Spots to show: last 15 or 30 minutes, last hour, last 3 or 24 hours.
 LI|Clicking a path or a row of the table highlights the contact and shows the centre of the cloud, its height and its size.
 LI|Show who is listening: triangles in the band colour mark the stations that, according to PSKReporter, are receiving in MSK144, FSK441, PSK2K or JTMS on 28, 50, 70, 144 and 432 MHz in the chosen time window. A click on a triangle shows call, locator, modes and last spot. The MQTT feed of the Data collection tab must be connected.
+LI|Also the active monitors of the PSKReporter map: hollow triangles for the stations that appear on the pskreporter.info map in MSK144, FSK441, PSK2K or JTMS but have not received any spot yet (MQTT only sends stations that receive something). YA-MS queries the PSKReporter retrieval service one mode at a time, every 3 minutes, so each mode is refreshed every 12 minutes, as the service rules ask. A click on the triangle shows callsign, locator, decoding software and the time the monitor was active. On by default.
 LI|Spots of all bands are shown, including those not chosen in Data collection (these are not stored). CW spots and spots between stations that are too close are not shown, if they are discarded in Data collection.
 LI|The map shows the callsigns of both stations of each spot, once per station. The projection can be azimuthal (centred on your station) or Mercator. The tooltip on the Cloud column explains its meaning.
 H2|9.2 Radar flux

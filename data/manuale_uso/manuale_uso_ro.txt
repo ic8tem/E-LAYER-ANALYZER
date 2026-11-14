@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare YA-MS
-SUB|Versiunea 1.8.10 - realizată de Costantino IC8TEM - noiembrie 2026
+SUB|Versiunea 1.8.11 - realizată de Costantino IC8TEM - noiembrie 2026
 H1|1. Introducere
 H2|1.1 La ce folosește YA-MS
 P|YA-MS vă ajută să prevedeți și să urmăriți în direct condițiile de meteor scatter între stația dumneavoastră și un corespondent, de la 28 la 432 MHz. Pentru fiecare roi meteoric activ arată în ce măsură poziția radiantului său favorizează traseul dumneavoastră (eficiența), în ce ore, din ce parte a traseului sosesc reflexiile și încotro este bine să orientați antena. Pe lângă prognoză, afișează datele măsurate în direct: numărătorile radarului meteoric de la Collm, camerele Global Meteor Network, radarul CMOR, emițătorul GRAVES și traficul meteor scatter colectat din clustere și din PSKReporter.
@@ -26,7 +26,7 @@ P|La pornire apare pentru câteva secunde ecranul cu Perseidele deasupra telesco
 H2|2.3 Dosarul data
 P|Toate setările și toate datele se află într-un singur dosar data lângă program: fără AppData, fără dosare de sistem. Pentru a muta YA-MS pe alt calculator este suficient să copiați dosarul programului împreună cu dosarul său data. Conținutul dosarului este descris în capitolul 13.
 H2|2.4 Actualizări automate
-P|Începând cu versiunea 1.8.10 actualizările sunt automate și silențioase: la pornire și apoi la fiecare 6 ore YA-MS verifică GitHub și, dacă există o versiune nouă, o descarcă, o instalează și repornește singur fără să întrebe nimic (doar bara de stare o spune). Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra descrisă mai jos apare doar apăsând "Actualizări" sau dacă scrii aggiornamenti_automatici=0 în fișierul data/config.ini.
+P|Începând cu versiunea 1.8.11 actualizările sunt automate și silențioase: la pornire și apoi la fiecare 6 ore YA-MS verifică GitHub și, dacă există o versiune nouă, o descarcă, o instalează și repornește singur fără să întrebe nimic (doar bara de stare o spune). Și fișierele lipsă se descarcă din nou fără să întrebe. Fereastra descrisă mai jos apare doar apăsând "Actualizări" sau dacă scrii aggiornamenti_automatici=0 în fișierul data/config.ini.
 P|Începând cu versiunea 1.8.0, YA-MS verifică singur pe GitHub, la pornire și cel mult o dată pe zi, dacă a apărut o versiune nouă. Dacă există, apare fereastra „Actualizare disponibilă” cu noutățile și trei butoane:
 LI|Actualizează acum: descarcă pachetul potrivit pentru sistemul dumneavoastră, înlocuiește fișierele programului, păstrează dosarul data și repornește YA-MS. Fișierele programului din dosarul data pe care noua versiune le modifică sunt mai întâi copiate în data/backup/v<versione vecchia>; fișierele dumneavoastră (setări, arhive, spoturi, ADIF) nu sunt atinse.
 LI|Mai târziu: închide fereastra; verificarea se repetă a doua zi.
@@ -58,7 +58,6 @@ H2|4.1 Rândul 1: stații și bandă
 LI|Locatorul meu și altitudine m: locatorul dumneavoastră Maidenhead (4, 6 sau 8 caractere; se folosește centrul pătratului) și altitudinea stației deasupra nivelului mării.
 LI|Bandă MHz: 28, 50, 70, 144, 222 sau 432 MHz. Servește pentru câștigul și lobul antenei, pentru atenuare și bilanț și pentru estimarea fluxului.
 LI|Calculează: recalculează traseul (eșantionarea stratului E, sub o secundă).
-LI|Antenă az: azimutul antenei, întotdeauna spre corespondent.
 H2|4.2 Rândul 2: stratul E și antena
 LI|Altitudine dâre km și de la radar: altitudinea dârelor meteorice. Cu „de la radar” bifat se folosește altitudinea cea mai frecventă măsurată de radarul de la Collm (de obicei 88-90 km); debifați pentru a o scrie manual.
 LI|Elevație lob °: elevația maximului lobului vertical al antenei dumneavoastră. O antenă directivă fixată la 0° are totuși lobul principal la câteva grade deasupra orizontului, din cauza reflexiei pe sol: de obicei 3-8°, în funcție de înălțimea antenei în lungimi de undă.
@@ -79,7 +78,7 @@ P|Prima sub-filă a grupului Calcul de prognoză arată pe un singur ecran unde 
 H2|5.1 Banda de rezumat
 P|Deasupra hărții, o bandă rezumă calculul pentru acel moment: data și ora, indicele traseului (suma ZHR × eficiență a roiurilor active), roiul cel mai util cu ZHR-ul și eficiența sa (și în dB față de referința DJ5HG), numărul de roiuri deasupra orizontului și Hot-ul recomandat cu azimutul său.
 H2|5.2 Harta în plan
-P|Lângă hartă, în dreapta, este caseta corespondentului: scrie indicativul și apasă Enter, locatorul se ia din baza CALL3 (ca în YAEC și LIVETROPOVHF); dedesubt sunt locatorul și altitudinea. Indicativul se poate scrie și în căsuța locatorului.
+P|Lângă hartă, în dreapta, este o singură coloană. Sus, caseta corespondentului: întâi orientarea antenei (Azimut antenă, mereu spre corespondent), apoi indicativul (scrieți-l și apăsați Enter: locatorul se ia din baza CALL3, ca în YAEC și LIVETROPOVHF), locatorul și altitudinea. Indicativul se poate scrie și în caseta locatorului. Jos, legenda simbolurilor hărții: un clic pe titlu o pliază; culorile radianților apar când harta Europei este oprită.
 P|În stânga, harta Europei văzută de sus (estul la dreapta), cu scala gradelor de jur împrejur:
 LI|linia verde: traseul real între cei doi locatori;
 LI|Hot A și Hot B: cele două hot spot-uri de o parte și de alta a punctului de mijloc. Roșu = recomandat, roz = în afara lobului antenei, gri = deja în interiorul lobului (cu un avertisment);
@@ -87,7 +86,7 @@ LI|lobul antenei: sectorul la -3 dB în jurul azimutului antenei;
 LI|Limita A și Limita B, estompate: marginile cele mai îndepărtate ale cerului văzut de ambele stații, nu punctele spre care trebuie orientată antena;
 LI|linia galbenă: direcția în care roiul selectat (sau cel mai favorabil) mătură cerul; punctele portocalii: cele două orientări perpendiculare (azimutul radiantului ±90°);
 LI|zonele PREV, elipse deschise la culoare: unde cad acum dârele cele mai probabile, câte una de fiecare parte a traseului.
-P|Clic stânga pe hartă = locatorul corespondentului, clic dreapta = locatorul stației dumneavoastră; traseul se recalculează imediat. Legenda este o coloană pliabilă în dreapta hărții. Casetele de deasupra listei de roiuri activează și dezactivează direcțiile Hot, harta Europei și vederea de sus.
+P|Clic stânga pe hartă = locatorul corespondentului, clic dreapta = locatorul stației dumneavoastră; traseul se recalculează imediat. Casetele de deasupra listei de roiuri activează și dezactivează direcțiile Hot, harta Europei și vederea de sus.
 H2|5.3 Lista roiurilor
 P|Pentru fiecare roi: numele și codul IMO, ZHR-ul în acest moment, azimutul și elevația radiantului de la stația dumneavoastră, eficiența pentru traseu, latura predominantă (A sau B), orientarea optimă, răsăritul și apusul radiantului. Un clic pe un rând selectează roiul: linia galbenă și punctele portocalii îl urmăresc.
 H2|5.4 Mica boltă cerească și textul calculului
@@ -163,6 +162,7 @@ P|O hartă azimutală echidistantă centrată pe stația dumneavoastră cu tot t
 LI|Raza hărții: 600-3500 km. Spoturi de afișat: ultimele 15 sau 30 de minute, ultima oră, ultimele 3 sau 24 de ore.
 LI|Un clic pe un traseu sau pe un rând al tabelului evidențiază legătura și arată centrul norului, altitudinea și dimensiunile sale.
 LI|Arată cine ascultă: triunghiuri în culoarea benzii marchează stațiile care, după PSKReporter, recepționează MSK144, FSK441, PSK2K sau JTMS pe 28, 50, 70, 144 și 432 MHz în fereastra de timp aleasă. Un clic pe un triunghi arată indicativul, locatorul, modurile și ultimul spot. Fluxul MQTT din fila Colectare date trebuie să fie conectat.
+LI|Și monitoarele active de pe harta PSKReporter: triunghiuri goale pentru stațiile care apar pe harta pskreporter.info în MSK144, FSK441, PSK2K sau JTMS dar nu au recepționat încă niciun spot (MQTT trimite doar stațiile care recepționează ceva). YA-MS interoghează serviciul de consultare PSKReporter câte un mod pe rând, la fiecare 3 minute, deci fiecare mod se actualizează la fiecare 12 minute, cum cer regulile serviciului. Un clic pe triunghi arată indicativul, locatorul, programul de decodare și ora la care monitorul era activ. Activat implicit.
 LI|Se văd spoturile tuturor benzilor, inclusiv ale celor nealese în Colectarea datelor (acestea nu se memorează). Spoturile CW și cele între stații prea apropiate nu se văd, dacă sunt eliminate în Colectarea datelor.
 LI|Harta scrie indicativele ambelor stații ale fiecărui spot, o singură dată pe stație. Proiecția se alege între azimutală (centrată pe stația ta) și Mercator. Indiciul de pe coloana Nor îi explică semnificația.
 H2|9.2 Flux radar

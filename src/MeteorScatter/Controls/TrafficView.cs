@@ -40,6 +40,7 @@ namespace YAMS
         public LatLon Pos;
         public string Call = "", Info = "";
         public Color Color;
+        public bool Hollow;   // monitor attivo di PSKReporter senza spot ricevuti: triangolo vuoto
     }
 
     public class TrafficView : Control
@@ -195,7 +196,8 @@ namespace YAMS
                 }
                 // nuvole, poi tratte e stazioni (gli spot selezionati e lampeggianti sopra gli altri)
                 foreach (TrafficSpot s in Spots) DrawClouds(ctx, s, false);
-                foreach (TrafficListener l in Listeners) DrawListener(ctx, l, box, Listeners.Count <= 40);
+                foreach (TrafficListener l in Listeners) if (l.Hollow) DrawListener(ctx, l, box, Listeners.Count <= 40);
+                foreach (TrafficListener l in Listeners) if (!l.Hollow) DrawListener(ctx, l, box, Listeners.Count <= 40);
                 labeled.Clear();
                 foreach (TrafficSpot s in Spots) DrawPath(ctx, s, box);
                 if (Selected != null && Spots.Contains(Selected)) { DrawClouds(ctx, Selected, true); DrawPath(ctx, Selected, box); }
@@ -304,7 +306,7 @@ namespace YAMS
                 s.LineTo(new Point(c.X + 5.5, c.Y + 4)); s.LineTo(new Point(c.X - 5.5, c.Y + 4));
                 s.EndFigure(true);
             }
-            ctx.DrawGeometry(new ImmutableSolidColorBrush(Color.FromArgb(150, l.Color.R, l.Color.G, l.Color.B)), new Pen(new ImmutableSolidColorBrush(l.Color), 1.4), g);
+            ctx.DrawGeometry(l.Hollow ? null : new ImmutableSolidColorBrush(Color.FromArgb(150, l.Color.R, l.Color.G, l.Color.B)), new Pen(new ImmutableSolidColorBrush(l.Color), l.Hollow ? 1.2 : 1.4), g);
             if (label)
             {
                 Color ink = Tema.Scuro ? Color.FromRgb(200, 208, 222) : Color.FromRgb(71, 85, 105);

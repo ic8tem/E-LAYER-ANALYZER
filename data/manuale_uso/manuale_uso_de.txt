@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von YA-MS
-SUB|Version 1.8.10 - von Costantino IC8TEM - November 2026
+SUB|Version 1.8.11 - von Costantino IC8TEM - November 2026
 H1|1. Einführung
 H2|1.1 Wozu YA-MS dient
 P|YA-MS hilft dir, die Meteorscatter-Bedingungen zwischen deiner Station und einer Gegenstation von 28 bis 432 MHz vorherzusagen und live zu verfolgen. Für jeden aktiven Meteorstrom zeigt es, wie stark die Lage seines Radianten deine Strecke begünstigt (die Effektivität), zu welchen Uhrzeiten, von welcher Seite der Strecke die Reflexionen kommen und wohin du die Antenne am besten richtest. Neben der Vorhersage zeigt es live gemessene Daten: die Zählungen des Meteorradars Collm, die Kameras des Global Meteor Network, das CMOR-Radar, den Sender GRAVES und den Meteorscatter-Verkehr, der aus den Clustern und von PSKReporter gesammelt wird.
@@ -26,7 +26,7 @@ P|Beim Start erscheint für einige Sekunden der Startbildschirm mit den Perseide
 H2|2.3 Der Ordner data
 P|Alle Einstellungen und alle Daten liegen in einem einzigen Ordner data neben dem Programm: kein AppData, keine Systemordner. Um YA-MS auf einen anderen Computer zu übertragen, genügt es, den Programmordner mit seinem Ordner data zu kopieren. Der Inhalt des Ordners ist in Kapitel 13 beschrieben.
 H2|2.4 Automatische Aktualisierungen
-P|Ab Version 1.8.10 erfolgen Updates automatisch und still: beim Start und dann alle 6 Stunden prüft YA-MS GitHub und lädt eine neue Version, falls vorhanden, herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen (nur die Statusleiste meldet es). Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das unten beschriebene Fenster erscheint nur beim Drücken von "Aktualisierungen" oder wenn du aggiornamenti_automatici=0 in die Datei data/config.ini schreibst.
+P|Ab Version 1.8.11 erfolgen Updates automatisch und still: beim Start und dann alle 6 Stunden prüft YA-MS GitHub und lädt eine neue Version, falls vorhanden, herunter, installiert sie und startet sich selbst neu, ohne etwas zu fragen (nur die Statusleiste meldet es). Auch fehlende Dateien werden ohne Rückfrage neu geladen. Das unten beschriebene Fenster erscheint nur beim Drücken von "Aktualisierungen" oder wenn du aggiornamenti_automatici=0 in die Datei data/config.ini schreibst.
 P|Ab Version 1.8.0 prüft YA-MS selbstständig bei GitHub, beim Start und höchstens einmal am Tag, ob eine neue Version erschienen ist. Wenn ja, erscheint das Fenster „Aktualisierung verfügbar“ mit den Neuerungen und drei Schaltflächen:
 LI|Jetzt aktualisieren: lädt das für dein System passende Paket herunter, ersetzt die Programmdateien, behält den Ordner data und startet YA-MS neu. Programmdateien im Ordner data, die die neue Version ändert, werden vorher nach data/backup/v<alte Version> kopiert; deine eigenen Dateien (Einstellungen, Archive, Spots, ADIF) werden nicht angetastet.
 LI|Später: schließt das Fenster; die Prüfung wird am nächsten Tag wiederholt.
@@ -58,7 +58,6 @@ H2|4.1 Zeile 1: Stationen und Band
 LI|Mein Locator und Höhe m: dein Maidenhead-Locator (4, 6 oder 8 Zeichen; verwendet wird die Mitte des Feldes) und die Höhe der Station über dem Meeresspiegel.
 LI|Band MHz: 28, 50, 70, 144, 222 oder 432 MHz. Wird für Gewinn und Keule der Antenne, für Dämpfung und Budget sowie für die Flussschätzung verwendet.
 LI|Berechnen: berechnet die Strecke neu (Abtastung der E-Schicht, weniger als eine Sekunde).
-LI|Antennen-Az.: Azimut der Antenne, immer in Richtung Gegenstation.
 H2|4.2 Zeile 2: E-Schicht und Antenne
 LI|Spurhöhe km und vom Radar: Höhe der Meteorspuren. Ist „vom Radar“ angehakt, wird die vom Radar Collm gemessene häufigste Höhe verwendet (meist 88-90 km); entferne den Haken, um sie von Hand einzugeben.
 LI|Keulenelev. °: Elevation des Maximums der vertikalen Keule deiner Antenne. Ein auf 0° fest montierter Richtstrahler hat seine Hauptkeule wegen der Bodenreflexion trotzdem einige Grad über dem Horizont: meist 3-8°, je nach Antennenhöhe in Wellenlängen.
@@ -79,7 +78,7 @@ P|Der erste Unterreiter der Gruppe Vorhersageberechnung zeigt auf einem Bildschi
 H2|5.1 Der Übersichtsstreifen
 P|Über der Karte fasst ein Streifen die Berechnung für diesen Zeitpunkt zusammen: Datum und Uhrzeit, Streckenindex (Summe aus ZHR × Effektivität der aktiven Ströme), der nützlichste Strom mit seiner ZHR und seiner Effektivität (auch in dB gegenüber der Referenz von DJ5HG), die Zahl der Ströme über dem Horizont und der empfohlene Hot mit seinem Azimut.
 H2|5.2 Die Karte in Draufsicht
-P|Neben der Karte, rechts, ist das Feld der Gegenstation: Rufzeichen eingeben und Enter drücken, der Locator kommt aus der CALL3-Datenbank (wie in YAEC und LIVETROPOVHF); darunter stehen Locator und Höhe. Das Rufzeichen kann auch ins Locator-Feld geschrieben werden.
+P|Neben der Karte, rechts, steht eine einzige Spalte. Oben das Feld der Gegenstation: zuerst die Antennenrichtung (Antennen-Az., immer zur Gegenstation), dann das Rufzeichen (eingeben und Enter drücken: der Locator kommt aus der CALL3-Datenbank, wie in YAEC und LIVETROPOVHF), der Locator und die Höhe. Das Rufzeichen kann auch in das Locatorfeld geschrieben werden. Unten die Legende der Kartensymbole: ein Klick auf den Titel klappt sie zu; die Farben der Radianten erscheinen, wenn die Europakarte ausgeschaltet ist.
 P|Links die Europakarte von oben gesehen (Osten rechts), mit der Gradskala ringsum:
 LI|grüne Linie: die tatsächliche Strecke zwischen den beiden Locatoren;
 LI|Hot A und Hot B: die beiden Hot-Spots seitlich des Mittelpunkts. Rot = empfohlen, rosa = außerhalb der Antennenkeule, grau = bereits innerhalb der Keule (mit einem Hinweis);
@@ -87,7 +86,7 @@ LI|Antennenkeule: der -3-dB-Sektor um den Antennenazimut;
 LI|Grenze A und Grenze B, blass: die entferntesten Ränder des von beiden Stationen gesehenen Himmels, keine Punkte zum Anpeilen;
 LI|gelbe Linie: die Richtung, in der der gewählte (oder der günstigste) Strom den Himmel überstreicht; orange Punkte: die beiden senkrechten Ausrichtungen (Azimut des Radianten ±90°);
 LI|Zonen PREV, helle Ellipsen: wo die wahrscheinlichsten Spuren gerade fallen, eine für jede Seite der Strecke.
-P|Linksklick auf die Karte = Locator der Gegenstation, Rechtsklick = Locator deiner Station; die Strecke wird sofort neu berechnet. Die Legende ist eine einklappbare Spalte rechts von der Karte. Die Kästchen über der Stromliste schalten die Hot-Richtungen, die Europakarte und die Draufsicht ein und aus.
+P|Linksklick auf die Karte = Locator der Gegenstation, Rechtsklick = Locator deiner Station; die Strecke wird sofort neu berechnet. Die Kästchen über der Stromliste schalten die Hot-Richtungen, die Europakarte und die Draufsicht ein und aus.
 H2|5.3 Die Liste der Ströme
 P|Für jeden Strom: Name und IMO-Kürzel, ZHR in diesem Moment, Azimut und Elevation des Radianten von deiner Station aus, Effektivität für die Strecke, vorherrschende Seite (A oder B), beste Ausrichtung, Auf- und Untergang des Radianten. Ein Klick auf eine Zeile wählt den Strom aus: Die gelbe Linie und die orangen Punkte folgen ihm.
 H2|5.4 Das kleine Himmelsgewölbe und der Berechnungstext
@@ -163,6 +162,7 @@ P|Eine mittabstandstreue Azimutalkarte, zentriert auf deine Station, mit dem ges
 LI|Kartenradius: 600-3500 km. Anzuzeigende Spots: letzte 15 oder 30 Minuten, letzte Stunde, letzte 3 oder 24 Stunden.
 LI|Ein Klick auf eine Strecke oder auf eine Zeile der Tabelle hebt die Verbindung hervor und zeigt den Mittelpunkt der Wolke, ihre Höhe und ihre Ausdehnung.
 LI|Zeigen, wer hört: Dreiecke in der Bandfarbe markieren die Stationen, die laut PSKReporter im gewählten Zeitfenster MSK144, FSK441, PSK2K oder JTMS auf 28, 50, 70, 144 und 432 MHz empfangen. Ein Klick auf ein Dreieck zeigt Rufzeichen, Locator, Betriebsarten und letzten Spot. Der MQTT-Strom im Reiter Datensammlung muss verbunden sein.
+LI|Auch die aktiven Monitore der PSKReporter-Karte: leere Dreiecke für die Stationen, die auf der Karte von pskreporter.info in MSK144, FSK441, PSK2K oder JTMS erscheinen, aber noch keinen Spot empfangen haben (MQTT sendet nur Stationen, die etwas empfangen). YA-MS fragt den Abfragedienst von PSKReporter eine Betriebsart nach der anderen ab, alle 3 Minuten, sodass jede Betriebsart alle 12 Minuten aktualisiert wird, wie es die Regeln des Dienstes verlangen. Ein Klick auf das Dreieck zeigt Rufzeichen, Locator, Dekodierprogramm und die Uhrzeit, zu der der Monitor aktiv war. Standardmäßig eingeschaltet.
 LI|Es werden die Spots aller Bänder angezeigt, auch der in der Datensammlung nicht gewählten (diese werden nicht gespeichert). CW-Spots und Spots zwischen zu nahe liegenden Stationen werden nicht angezeigt, wenn sie in der Datensammlung verworfen werden.
 LI|Die Karte zeigt die Rufzeichen beider Stationen jedes Spots, einmal pro Station. Die Projektion ist wählbar: azimutal (auf deine Station zentriert) oder Mercator. Der Tooltip auf der Spalte Wolke erklärt ihre Bedeutung.
 H2|9.2 Radarfluss

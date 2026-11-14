@@ -1,5 +1,5 @@
 TITLE|Brukerveiledning for YA-MS
-SUB|Versjon 1.8.10 - av Costantino IC8TEM - november 2026
+SUB|Versjon 1.8.11 - av Costantino IC8TEM - november 2026
 H1|1. Innledning
 H2|1.1 Hva YA-MS brukes til
 P|YA-MS hjelper deg med å forutsi og følge direkte meteorscatter-forholdene mellom stasjonen din og en motstasjon, fra 28 til 432 MHz. For hver aktive meteorsverm forteller programmet hvor mye radiantens posisjon begunstiger strekningen din (effektiviteten), i hvilke timer, fra hvilken side av strekningen refleksjonene kommer og hvor det lønner seg å rette antennen. Ved siden av prognosen viser det data målt direkte: tellingene fra meteorradaren i Collm, kameraene i Global Meteor Network, CMOR-radaren, GRAVES-senderen og meteorscatter-trafikken samlet inn fra clusterne og fra PSKReporter.
@@ -26,7 +26,7 @@ P|Ved oppstart vises i noen sekunder startbildet med Perseidene over ESOs VLT. V
 H2|2.3 Mappen data
 P|Alle innstillinger og alle data ligger i én enkelt mappe data ved siden av programmet: ingen AppData, ingen systemmapper. For å flytte YA-MS til en annen datamaskin holder det å kopiere programmappen med mappen data. Innholdet i mappen er beskrevet i kapittel 13.
 H2|2.4 Automatiske oppdateringer
-P|Fra versjon 1.8.10 er oppdateringene automatiske og stille: ved oppstart og deretter hver 6. time sjekker YA-MS GitHub og, hvis det finnes en ny versjon, laster den ned, installerer den og starter på nytt av seg selv uten å spørre om noe (bare statuslinjen sier det). Manglende filer lastes også ned på nytt uten å spørre. Vinduet som er beskrevet nedenfor vises bare når du trykker på "Oppdateringer" eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
+P|Fra versjon 1.8.11 er oppdateringene automatiske og stille: ved oppstart og deretter hver 6. time sjekker YA-MS GitHub og, hvis det finnes en ny versjon, laster den ned, installerer den og starter på nytt av seg selv uten å spørre om noe (bare statuslinjen sier det). Manglende filer lastes også ned på nytt uten å spørre. Vinduet som er beskrevet nedenfor vises bare når du trykker på "Oppdateringer" eller hvis du skriver aggiornamenti_automatici=0 i filen data/config.ini.
 P|Fra versjon 1.8.0 sjekker YA-MS selv på GitHub, ved oppstart og høyst én gang om dagen, om det er kommet en ny versjon. Hvis det finnes en, vises vinduet "Oppdatering tilgjengelig" med nyhetene og tre knapper:
 LI|Oppdater nå: laster ned pakken som passer til systemet ditt, erstatter programfilene, beholder mappen data og starter YA-MS på nytt. Programfiler i mappen data som den nye versjonen endrer, kopieres først til data/backup/v<gammel versjon>; dine egne filer (innstillinger, arkiver, spot, ADIF) blir ikke rørt.
 LI|Senere: lukker vinduet; sjekken gjentas neste dag.
@@ -58,7 +58,6 @@ H2|4.1 Rad 1: stasjoner og bånd
 LI|Min lokator og høyde m: din Maidenhead-lokator (4, 6 eller 8 tegn; midten av ruten brukes) og stasjonens høyde over havet.
 LI|Bånd MHz: 28, 50, 70, 144, 222 eller 432 MHz. Brukes til antennens forsterkning og lobe, til dempingen og linkbudsjettet og til estimatet av fluksen.
 LI|Beregn: beregner strekningen på nytt (sampling av E-laget, under ett sekund).
-LI|Antenne az: antennens asimut, alltid mot motstasjonen.
 H2|4.2 Rad 2: E-lag og antenne
 LI|Sporhøyde km og fra radar: høyden til meteorsporene. Med "fra radar" avkrysset brukes den hyppigste høyden målt av radaren i Collm (vanligvis 88-90 km); fjern avkrysningen for å skrive den inn manuelt.
 LI|Lobeelevasjon °: elevasjonen til maksimum i antennens vertikale lobe. En retningsantenne som står på 0°, har likevel hovedloben noen grader over horisonten på grunn av refleksjonen i bakken: vanligvis 3-8°, avhengig av antennens høyde i bølgelengder.
@@ -79,7 +78,7 @@ P|Den første underfanen i gruppen Prognoseberegning viser på én skjerm hvor d
 H2|5.1 Sammendragslinjen
 P|Over kartet oppsummerer en linje beregningen for det tidspunktet: dato og klokkeslett, strekningsindeks (summen av ZHR × effektivitet for de aktive svermene), den mest nyttige svermen med ZHR og effektivitet (også i dB i forhold til referansen til DJ5HG), antall svermer over horisonten og anbefalt Hot med asimut.
 H2|5.2 Kartet i grunnriss
-P|Ved siden av kartet, til høyre, er motstasjonens rute: skriv kallesignalet og trykk Enter, lokatoren hentes fra CALL3-databasen (som i YAEC og LIVETROPOVHF); under står lokator og høyde. Kallesignalet kan også skrives i lokatorfeltet.
+P|Ved siden av kartet, til høyre, er det én kolonne. Øverst motstasjonens boks: først antenneretningen (Antenne-az, alltid mot motstasjonen), så kallesignalet (skriv det og trykk Enter: lokatoren hentes fra CALL3-databasen, som i YAEC og LIVETROPOVHF), lokatoren og høyden. Kallesignalet kan også skrives i lokatorboksen. Nederst forklaringen til kartsymbolene: et klikk på tittelen slår den sammen; radiantfargene vises når Europakartet er slått av.
 P|Til venstre Europakartet sett ovenfra (øst til høyre), med gradskalaen rundt:
 LI|grønn linje: den virkelige strekningen mellom de to lokatorene;
 LI|Hot A og Hot B: de to hot spot-ene på hver side av midtpunktet. Rød = anbefalt, rosa = utenfor antenneloben, grå = allerede innenfor loben (med et varsel);
@@ -87,7 +86,7 @@ LI|antenneloben: sektoren ved -3 dB rundt antennens asimut;
 LI|Grense A og Grense B, svake: de fjerneste kantene av himmelen som begge stasjonene ser, ikke punkter å rette mot;
 LI|gul linje: retningen som den valgte svermen (eller den gunstigste) feier over himmelen i; oransje punkter: de to vinkelrette retningene (radiantens asimut ±90°);
 LI|PREV-soner, lyse ellipser: der de mest sannsynlige sporene faller nå, én på hver side av strekningen.
-P|Venstreklikk på kartet = motstasjonens lokator, høyreklikk = din stasjons lokator; strekningen beregnes på nytt med en gang. Tegnforklaringen er en sammenleggbar kolonne til høyre for kartet. Avkrysningsboksene over svermlisten slår av og på Hot-retningene, Europakartet og visningen ovenfra.
+P|Venstreklikk på kartet = motstasjonens lokator, høyreklikk = din stasjons lokator; strekningen beregnes på nytt med en gang. Avkrysningsboksene over svermlisten slår av og på Hot-retningene, Europakartet og visningen ovenfra.
 H2|5.3 Svermlisten
 P|For hver sverm: navn og IMO-kode, ZHR akkurat nå, radiantens asimut og elevasjon fra stasjonen din, effektivitet for strekningen, dominerende side (A eller B), beste retning, radiantens oppgang og nedgang. Et klikk på en rad velger svermen: den gule linjen og de oransje punktene følger den.
 H2|5.4 Den lille himmelhvelvingen og beregningsteksten
@@ -163,6 +162,7 @@ P|Et asimutalt ekvidistant kart sentrert på stasjonen din med all innsamlet met
 LI|Kartradius: 600-3500 km. Spot som vises: siste 15 eller 30 minutter, siste time, siste 3 eller 24 timer.
 LI|Et klikk på en strekning eller på en rad i tabellen markerer forbindelsen og viser sentrum av skyen, høyden og størrelsen.
 LI|Vis hvem som lytter: trekanter i båndets farge markerer stasjonene som ifølge PSKReporter tar imot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 og 432 MHz i det valgte tidsvinduet. Et klikk på en trekant viser kallesignal, lokator, moduser og siste spot. MQTT-strømmen i fanen Datainnsamling må være tilkoblet.
+LI|Også de aktive monitorene på PSKReporter-kartet: tomme trekanter for stasjoner som vises på kartet til pskreporter.info i MSK144, FSK441, PSK2K eller JTMS, men som ennå ikke har mottatt noen spot (MQTT sender bare stasjoner som mottar noe). YA-MS spør PSKReporters oppslagstjeneste én modus om gangen, hvert 3. minutt, så hver modus oppdateres hvert 12. minutt, slik tjenestens regler ber om. Et klikk på trekanten viser kallesignal, lokator, dekodingsprogram og tidspunktet monitoren var aktiv. På fra start.
 LI|Spotter fra alle bånd vises, også fra bånd som ikke er valgt i Datainnsamling (de lagres ikke). CW-spotter og spotter mellom stasjoner som ligger for nær hverandre vises ikke, hvis de forkastes i Datainnsamling.
 LI|Kartet viser kallesignalene til begge stasjonene i hver spot, én gang per stasjon. Projeksjonen kan være asimutal (sentrert på din stasjon) eller Mercator. Verktøytipset på kolonnen Sky forklarer hva den betyr.
 H2|9.2 Radarfluks

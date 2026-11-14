@@ -9,7 +9,7 @@ namespace YAMS
     {
         public const string AppName = "YA-MS";
         // versione dal file VERSION (scritta nell'eseguibile durante la compilazione), senza il codice del commit
-        public static readonly string Version = "1.8.10";   // E-LAYER ANALYZER: versione di YA-MS incorporata (tools/sync_yams.py)
+        public static readonly string Version = "1.8.11";   // E-LAYER ANALYZER: versione di YA-MS incorporata (tools/sync_yams.py)
         static string ReadVersion()
         {
             try

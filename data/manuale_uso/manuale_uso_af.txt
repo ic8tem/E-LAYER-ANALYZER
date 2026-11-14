@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Weergawe 1.8.10 - saamgestel deur Costantino IC8TEM - November 2026
+SUB|Weergawe 1.8.11 - saamgestel deur Costantino IC8TEM - November 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor YA-MS dien
 P|YA-MS help jou om die meteor scatter-toestande tussen jou stasie en 'n DX-stasie van 28 tot 432 MHz te voorspel en regstreeks te volg. Vir elke aktiewe meteoorswerm sê dit hoe gunstig die posisie van sy radiant vir jou pad is (die doeltreffendheid), op watter ure, van watter kant van die pad die refleksies kom en waarheen jy die antenna moet rig. Langs die voorspelling wys dit regstreeks gemete data: die tellings van die Collm-meteoorradar, die kameras van die Global Meteor Network, die CMOR-radar, die GRAVES-sender en die meteor scatter-verkeer wat deur die clusters en PSKReporter ingesamel word.
@@ -26,7 +26,7 @@ P|By die aanskakel verskyn vir 'n paar sekondes die skerm met die Perseïede bo 
 H2|2.3 Die data-gids
 P|Al die instellings en al die data is in 'n enkele data-gids langs die program: geen AppData nie, geen stelselgidse nie. Om YA-MS na 'n ander rekenaar te skuif, kopieer jy net die programgids saam met sy data-gids. Die inhoud van die gids word in hoofstuk 13 beskryf.
 H2|2.4 Outomatiese bywerkings
-P|Vanaf weergawe 1.8.10 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
+P|Vanaf weergawe 1.8.11 is opdaterings outomaties en stil: by die begin en daarna elke 6 uur kyk YA-MS op GitHub en, as daar 'n nuwe weergawe is, laai dit af, installeer dit en begin self weer sonder om iets te vra (net die statusbalk sê dit). Ontbrekende lêers word ook sonder vra weer afgelaai. Die venster wat hieronder beskryf word, verskyn net as jy "Opdaterings" druk of as jy aggiornamenti_automatici=0 in die lêer data/config.ini skryf.
 P|Vanaf weergawe 1.8.0 kontroleer YA-MS self op GitHub, by aanskakel en hoogstens een keer per dag, of 'n nuwe weergawe uitgekom het. As daar een is, verskyn die venster "Bywerking beskikbaar" met die nuwighede en drie knoppies:
 LI|Werk nou by: laai die pakket af wat by jou stelsel pas, vervang die programlêers, behou die data-gids en herbegin YA-MS. Die programlêers in die data-gids wat die nuwe weergawe verander, word eers na data/backup/v<ou weergawe> gekopieer; jou eie lêers (instellings, argiewe, spots, ADIF) word nie aangeraak nie.
 LI|Later: maak die venster toe; die kontrole word die volgende dag herhaal.
@@ -58,7 +58,6 @@ H2|4.1 Ry 1: stasies en band
 LI|My lokator en hoogte m: jou Maidenhead-lokator (4, 6 of 8 karakters; die middel van die vierkant word gebruik) en die hoogte van die stasie bo seespieël.
 LI|Band MHz: 28, 50, 70, 144, 222 of 432 MHz. Dit word gebruik vir die wins en die lob van die antenna, vir die padverlies en die skakelbegroting, en vir die skatting van die vloed.
 LI|Bereken: bereken die pad opnuut (bemonstering van die E-laag, minder as 'n sekonde).
-LI|Antenna az: azimut van die antenna, altyd na die DX-stasie.
 H2|4.2 Ry 2: E-laag en antenna
 LI|Spoorhoogte km en van radar: hoogte van die meteoorspore. Met "van radar" gemerk word die algemeenste hoogte gebruik wat deur die Collm-radar gemeet is (gewoonlik 88-90 km); verwyder die merk om dit met die hand in te tik.
 LI|Lob-elevasie °: elevasie van die maksimum van die vertikale lob van jou antenna. 'n Rigantenna wat op 0° vasgestel is, het tog sy hooflob 'n paar grade bo die horison, weens die refleksie op die grond: gewoonlik 3-8°, afhangende van die hoogte van die antenna in golflengtes.
@@ -79,7 +78,7 @@ P|Die eerste suboortjie van die groep Voorspellingsberekening wys op een skerm w
 H2|5.1 Die opsommingstrook
 P|Bo die kaart som 'n strook die berekening vir daardie oomblik op: datum en tyd, padindeks (som van ZHR × doeltreffendheid van die aktiewe swerms), die nuttigste swerm met sy ZHR en sy doeltreffendheid (ook in dB relatief tot die verwysing van DJ5HG), die aantal swerms bo die horison en die aanbevole Hot met sy azimut.
 H2|5.2 Die plattegrondkaart
-P|Langs die kaart, regs, is die teenstasie se blok: tik die roepnaam en druk Enter, die lokator kom uit die CALL3-databasis (soos in YAEC en LIVETROPOVHF); daaronder is die lokator en die hoogte. Die roepnaam kan ook in die lokatorblok getik word.
+P|Langs die kaart, regs, is een enkele kolom. Bo is die korrespondent se blokkie: eers die antennarigting (Antenna-az., altyd na die korrespondent), dan die roepsein (tik dit en druk Enter: die lokator kom uit die CALL3-databasis, soos in YAEC en LIVETROPOVHF), die lokator en die hoogte. Die roepsein kan ook in die lokatorblokkie getik word. Onder is die sleutel van die kaartsimbole: 'n klik op die titel vou dit toe; die kleure van die radiante verskyn wanneer die kaart van Europa af is.
 P|Links die kaart van Europa van bo gesien (oos regs), met die gradeskaal rondom:
 LI|groen lyn: die ware pad tussen die twee lokators;
 LI|Hot A en Hot B: die twee hot spots aan weerskante van die middelpunt. Rooi = aanbeveel, pienk = buite die lob van die antenna, grys = reeds binne die lob (met 'n waarskuwing);
@@ -87,7 +86,7 @@ LI|antennalob: die -3 dB-sektor rondom die azimut van die antenna;
 LI|Grens A en Grens B, flou: die verste rande van die hemel wat deur albei stasies gesien word, nie die punte om na te rig nie;
 LI|geel lyn: die rigting waarin die gekose swerm (of die gunstigste) die hemel deurkruis; oranje punte: die twee loodregte rigtings (azimut van die radiant ±90°);
 LI|PREV-sones, ligte ellipse: waar die waarskynlikste spore nou val, een aan elke kant van die pad.
-P|Linkerklik op die kaart = lokator van die DX-stasie, regterklik = lokator van jou stasie; die pad word dadelik herbereken. Die legende is 'n opvoubare kolom regs van die kaart. Die merkblokkies bo die lys van swerms skakel die Hot-rigtings, die kaart van Europa en die bo-aansig aan en af.
+P|Linkerklik op die kaart = lokator van die DX-stasie, regterklik = lokator van jou stasie; die pad word dadelik herbereken. Die merkblokkies bo die lys van swerms skakel die Hot-rigtings, die kaart van Europa en die bo-aansig aan en af.
 H2|5.3 Die lys van swerms
 P|Vir elke swerm: naam en IMO-kode, ZHR op hierdie oomblik, azimut en elevasie van die radiant vanaf jou stasie, doeltreffendheid vir die pad, oorheersende kant (A of B), beste rigting, opkoms en ondergang van die radiant. 'n Klik op 'n ry kies die swerm: die geel lyn en die oranje punte volg dit.
 H2|5.4 Die klein hemelkoepel en die berekeningsteks
@@ -163,6 +162,7 @@ P|'n Azimutale ekwidistante kaart gesentreer op jou stasie met al die ingesameld
 LI|Kaartradius: 600-3500 km. Spots om te wys: laaste 15 of 30 minute, laaste uur, laaste 3 of 24 uur.
 LI|'n Klik op 'n pad of op 'n ry van die tabel lig die verbinding uit en wys die middel van die wolk, sy hoogte en sy afmetings.
 LI|Wys wie luister: driehoeke in die bandkleur merk die stasies wat volgens PSKReporter in die gekose tydvenster MSK144, FSK441, PSK2K of JTMS op 28, 50, 70, 144 en 432 MHz ontvang. 'n Klik op 'n driehoek wys roepsein, lokator, modusse en laaste spot. Die MQTT-stroom in die oortjie Data-insameling moet gekoppel wees.
+LI|Ook die aktiewe monitors op die PSKReporter-kaart: leë driehoeke vir stasies wat op die kaart van pskreporter.info in MSK144, FSK441, PSK2K of JTMS verskyn maar nog geen spot ontvang het nie (MQTT stuur net stasies wat iets ontvang). YA-MS bevra die navraagdiens van PSKReporter een modus op 'n slag, elke 3 minute, sodat elke modus elke 12 minute bygewerk word, soos die diens se reëls vra. 'n Klik op die driehoek wys roepsein, lokator, dekodeerprogram en die tyd toe die monitor aktief was. By verstek aan.
 LI|Spots van alle bande word gewys, ook van bande wat nie in Data-insameling gekies is nie (dié word nie gestoor nie). CW-spots en spots tussen stasies wat te naby is, word nie gewys nie as hulle in Data-insameling weggegooi word.
 LI|Die kaart wys die roepname van albei stasies van elke spot, een keer per stasie. Die projeksie kan azimutaal (gesentreer op jou stasie) of Mercator wees. Die wenk op die kolom Wolk verduidelik die betekenis.
 H2|9.2 Radarvloed
