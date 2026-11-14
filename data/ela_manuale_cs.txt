@@ -103,7 +103,7 @@ H1|4. BENCHMARK Es (podkarta SPORADIC-E)
 H2|4.1 Načtení deníku
 P|Podkarta BENCHMARK Es je testovací lavicí sporadické vrstvy E na celém deníku ADIF, i jiné stanice. Načíst ADIF otevře soubor (program si jej zapamatuje a při spuštění znovu načte), Uvolnit ADIF jej odebere. Stanice ve středu nabídne nejčastější značku a lokátor z deníku; lze je změnit a potvrdit tlačítkem Použít.
 LI|Poloha vysílání je MY_GRIDSQUARE každého QSO; polohy příjmu jsou GRIDSQUARE (chybějící nebo 4znakové lokátory se berou z CALL3).
-LI|Lze vyloučit QSO s jiným PROP_MODE a ta pod 500 km (900 km na 144 MHz); transekvatoriální se vylučují vždy, kromě PROP_MODE=ES.
+LI|Lze vyloučit QSO s jiným PROP_MODE a ta pod 500 km (900 km na 144 MHz); transekvatoriální se vylučují vždy, kromě PROP_MODE=ES. Magnetický rovník je ten z roku QSO (historický IGRF-14), stejně jako v BENCHMARK 50 MHz.
 LI|Na mapě rozmazaná žlutá tečka označuje střed každého skoku, kde se předpokládá oblak sporadické vrstvy E (také střed krátkého prvního skoku, pokud je hypotéza aktivní).
 H2|4.2 Dny, hodiny a výpočty
 P|Tabulka QSO za den uvádí dny s počtem QSO, pásmy, maximální vzdáleností a vícenásobnými skoky; kliknutí na den vyplní tabulku Hodiny dne, s řádkem pro každou hodinu UTC a řádkem Celý den. Azimutální mapa s posuvníkem maximální vzdálenosti kreslí skip po sektorech 10° (oranžový oblouk = nejbližší QSO, zelený sektor = dosažené vzdálenosti), oblaka na čtvercích a pro celý den hodinový posun oblaků (červená čára).
@@ -123,7 +123,7 @@ H1|6. F.A.I.
 H2|6.1 Dvě zobrazení
 P|Karta F.A.I. studuje rozptyl na nehomogenitách orientovaných podél magnetického pole (hlavní zdroj [1], [2]). Zobrazení Scatter trail (dvojice A-B) vypočítá pro dvě stanice místo možných bodů rozptylu, obarvené podle odchylky od podmínky odrazu, navrhne nejpravděpodobnější bod rozptylu a vpravo nahoře nakreslí rámeček QTF a elevací obou stanic (červená = A, zelená = B). Zobrazení Izoflexe (bod) kreslí pro zvolený bod odrazu čáry izoflexe jako AuroReflex a SE-PROP od K9SE: barevné pásy v tmavých schématech, silné čáry ve světlých schématech.
 H2|6.2 Ovládací prvky
-LI|Stanice A a Stanice B: značka (hledaná v CALL3) a/nebo lokátor; prázdné A = vlastní stanice. Nabídka Kontroly… načte zkušební dvojice (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH z roku 1987 přes Budapešť); nabídka Známé body rozptylu… vybere doložený bod rozptylu (Ženeva, Brusel, Budapešť, JN92, JN41/42).
+LI|Stanice A a Stanice B: značka (hledaná v CALL3) a/nebo lokátor; prázdné A = vlastní stanice. Nabídka Kontroly… načte zkušební dvojice (IC8FAX-F6DRO, IC8FAX-G4LOH, IC8FAX-FA1MXE, DL5MCG-SV1DH z roku 1987 přes Budapešť); oba případy s datem (1990 a 1987) se počítají s polem IGRF-14 z toho roku, uvedeným v popisku mapy, dokud zůstávají stanice případu; nabídka Známé body rozptylu… vybere doložený bod rozptylu (Ženeva, Brusel, Budapešť, JN92, JN41/42).
 LI|Výška (výchozí 110 km), minimální elevace a Refrakce (poloměr Země 4/3), ve výchozím stavu zapnutá.
 LI|Nabídka zobrazení volí mezi Scatter trail (dvojice A-B) a Izoflexe (bod). V zobrazení Izoflexe jsou vrstevnice na 0, ±1, ±2, ±4, ±8 a ±16 stupních odchylky; křivka 0 je místem stanic, které přijímají A přes zvolený bod.
 LI|Levé kliknutí na mapu: bod odrazu k ověření (přepne do zobrazení Izoflexe); pravé kliknutí: poloha stanice B.
@@ -146,7 +146,7 @@ LI|Výsledky uvádějí sluneční čas v bodě rozptylu: do 4 hodin od místní
 LI|Kromě nejpravděpodobnějšího bodu rozptylu výsledky uvádějí rozsah QTF obou stanic podél celé stopy (odchylka ≤ 1,5°): aurora může přicházet z kteréhokoli bodu rozsahu a nejpravděpodobnější bod upřednostňuje nejkratší trasu.
 H2|8.1 BENCHMARK AURORA
 P|Karta AURORA má dvě podkarty: REAL-TIME, výpočet popsaný výše, a BENCHMARK AURORA, testovací lavici modelu na 298 skutečných publikovaných QSO přes auroru (deníky EI5FK 2003-2005 a mapa deníku PA0O).
-LI|Nabídka Deník volí jeden deník nebo všechny dohromady; výchozí výška je 110 km, s tolerancí 3°, refrakcí 4/3 a IGRF-14.
+LI|Nabídka Deník volí jeden deník nebo všechny dohromady; výchozí výška je 110 km, s tolerancí 3°, refrakcí 4/3 a IGRF-14 roku každého QSO (historické epochy 1900-2030; pokud datum není známo, dnešní pole).
 LI|Tabulka uvádí pro každé QSO vypočtený bod rozptylu, odchylku, QTF a elevaci stanice a QTF protistanice. Zelená: bod rozptylu uvnitř okna Lange-Hesse obou stanic; žlutá: vysvětleno, ale mimo toto okno; oranžová: QSO nad 2000 km; červená: žádný bod rozptylu, QSO nevysvětlené modelem.
 LI|Pole Výška km mění výšku výpočtu (od 80 do 160 km) a přepočítá všechna QSO. Sloupce tabulky jsou Den, UTC, Značka, WWL, km, Scatter, dev°, QTF a el° stanice deníku, QTF opr. (QTF protistanice) a Výsledek. Rámeček Podrobnosti o vybraném QSO uvádí vzdálenosti, směrování, okno Lange-Hesse každé stanice a odchylku od přímé trasy.
 LI|Souhrn dává procenta, také s pevným oknem 370-1100 km pro srovnání, a pro každý deník rozsah a medián vypočteného QTF; kliknutí na řádek nakreslí trasu a obě směrování a uvede okno každé stanice. Deníky neuvádějí směrování antény: porovnání se týká geometrie, ne QTF.

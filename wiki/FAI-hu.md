@@ -33,7 +33,10 @@ Ez az a geometriai szerkesztés, amellyel **ellenőrizhető, hogy egy visszaver�
 | IC8FAX - F6DRO | JN44GH (Genova felett) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (DNy-Németország, 28 km-re Brüsszeltől) | 0,88° | 338° / 87° |
 | DB0FAI jeladó (305°) - Drezda Sheffielden át (DL5MCG; Drezda 290°-ra irányzott és aurorát jelentett) | – | 0,3° | – |
-| DL5MCG - SV1DH (1987-es teszt Budapesten át, 1569 km) | Budapest a nyomon; 1° alatti cellák 35 km-től | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, az 1990-es IGRF-tér) | JN45MV, a nyom 40 km-re Genftől (Genf: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (1987-es teszt Budapesten át, 1569 km, az 1987-es IGRF-tér) | Budapest 2,53°-on, épp a 2,5° felett (a mai térrel 2,16°); a nyom 26 km-re; legvalószínűbb KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+A 0.4.18-as verziótól a két dátummal rendelkező eset (1987 és 1990) az adott év IGRF-14 terét használja, amíg az állomások az esetéi maradnak.
 
 A listában szereplő ismert szórási pontok: Genf, Brüsszel, Budapest, JN92, JN41/42.
 

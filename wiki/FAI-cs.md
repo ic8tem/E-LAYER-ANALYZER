@@ -33,7 +33,10 @@ Je to geometrická konstrukce sloužící k **ověření, zda je bod odrazu spr�
 | IC8FAX - F6DRO | JN44GH (nad Janovem) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (JZ Německo, 28 km od Bruselu) | 0,88° | 338° / 87° |
 | Maják DB0FAI (305°) - Drážďany přes Sheffield (DL5MCG; Drážďany směřovaly na 290° a ohlásily auroru) | – | 0,3° | – |
-| DL5MCG - SV1DH (test z roku 1987 přes Budapešť, 1569 km) | Budapešť na stopě; body pod 1° od 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, pole IGRF z roku 1990) | JN45MV, stopa 40 km od Ženevy (Ženeva: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (test z roku 1987 přes Budapešť, 1569 km, pole IGRF z roku 1987) | Budapešť na 2,53°, těsně nad 2,5° (2,16° s dnešním polem); stopa 26 km daleko; nejpravděpodobnější KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Od verze 0.4.18 používají oba případy s datem (1987 a 1990) pole IGRF-14 z toho roku, dokud zůstávají stanice případu.
 
 Známé body rozptylu v seznamu: Ženeva, Brusel, Budapešť, JN92, JN41/42.
 

@@ -33,7 +33,10 @@ Este construcția geometrică folosită pentru a **verifica dacă un punct de re
 | IC8FAX - F6DRO | JN44GH (deasupra Genovei) | 0,97° | 314° / 77° |
 | IC8FAX - G4LOH | JN49FR (sud-vestul Germaniei, la 28 km de Bruxelles) | 0,88° | 338° / 87° |
 | Beaconul DB0FAI (305°) - Dresda via Sheffield (DL5MCG; Dresda avea antena la 290° și a declarat auroră) | – | 0,3° | – |
-| DL5MCG - SV1DH (testul din 1987 via Budapesta, 1569 km) | Budapesta pe scatter trail; celule sub 1° de la 35 km | 2,16° | 95° / 341° |
+| IC8FAX - FA1MXE (1990, câmpul IGRF din 1990) | JN45MV, scatter trail la 40 km de Geneva (Geneva: 4,10°) | 0,76° | 326° / 85° |
+| DL5MCG - SV1DH (testul din 1987 via Budapesta, 1569 km, câmpul IGRF din 1987) | Budapesta la 2,53°, imediat peste 2,5° (2,16° cu câmpul de azi); scatter trail la 26 km; cel mai probabil KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+
+Din versiunea 0.4.18 cele două cazuri cu dată (1987 și 1990) folosesc câmpul IGRF-14 din acel an, cât timp stațiile rămân cele ale cazului.
 
 Scatter point-uri cunoscute în listă: Geneva, Bruxelles, Budapesta, JN92, JN41/42.
 
