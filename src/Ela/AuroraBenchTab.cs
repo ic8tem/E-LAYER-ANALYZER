@@ -258,5 +258,6 @@ namespace ELA
 
         public void ShotSelect() { if (tQso.Rows.Count > 0) { sel = tQso.Rows[0].Tag as BQso; Draw(); Details(); } }
         public bool Busy { get { return busy; } }
+        public string SummaryText { get { return txtSum.Text ?? ""; } }
     }
 }

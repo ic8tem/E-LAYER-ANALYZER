@@ -479,6 +479,7 @@ namespace ELA
                 tabs.Select(3); auTabs.Select(1);
                 for (int k = 0; k < 120 && auBench.Busy; k++) await Task.Delay(1000);
                 auBench.ShotSelect(); await Task.Delay(2500); Shot(Path.Combine(dir, "4k_benchmark_aurora.png"));
+                try { File.WriteAllText(Path.Combine(dir, "4k_benchmark_aurora.txt"), auBench.SummaryText); } catch { }   // riepilogo intero, per i documenti
                 auTabs.Select(0);
                 // tutte le linguette di YA-MS
                 tabs.Select(2);
