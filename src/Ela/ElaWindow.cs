@@ -284,6 +284,7 @@ namespace ELA
                 startedOnce = true;
                 string dataDir = AppPaths.DataDir;
                 Igrf.Load(dataDir, DateTime.UtcNow);
+                if (Program.ScreenshotDir == null) Igrf.CheckUpdateSilent(dataDir, Station.Cfg);   // nuova generazione IGRF, senza chiedere
                 SpotStore.Init(dataDir);
                 SpotStore.LoadRecent();
                 CallDb.StartLoad(dataDir);
