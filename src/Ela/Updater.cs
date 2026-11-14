@@ -99,8 +99,11 @@ namespace ELA
         public static string AssetSuffix()
         {
             Architecture a = RuntimeInformation.ProcessArchitecture;
-            if (OperatingSystem.IsWindows()) return a == Architecture.X86 ? "-win-x86-portatile.zip" : "-win-x64-portatile.zip";
+            if (OperatingSystem.IsWindows()) return a == Architecture.X86 ? "-win-x86-portatile.zip" : a == Architecture.Arm64 ? "-win-arm64-portatile.zip" : "-win-x64-portatile.zip";
             if (OperatingSystem.IsMacOS()) return a == Architecture.Arm64 ? "-osx-arm64-app.zip" : "-osx-x64-app.zip";
+            if (OperatingSystem.IsFreeBSD()) return "-freebsd-amd64-sperimentale.tar.gz";
+            // Alpine e altri Linux con musl: il programma e' compilato per linux-musl-*
+            if (RuntimeInformation.RuntimeIdentifier.Contains("musl")) return a == Architecture.Arm64 ? "-alpine-arm64-portatile.tar.gz" : "-alpine-x64-portatile.tar.gz";
             if (a == Architecture.Arm64) return "-linux-arm64-portatile.tar.gz";
             if (a == Architecture.Arm) return "-linux-arm-portatile.tar.gz";
             return "-linux-x64-portatile.tar.gz";
@@ -112,6 +115,19 @@ namespace ELA
             foreach (KeyValuePair<string, string> kv in assets)
                 if (kv.Key.EndsWith(suf, StringComparison.OrdinalIgnoreCase)) { name = kv.Key; return kv.Value; }
             name = null;
+            return null;
+        }
+
+        // Pacchetti dei gestori di sistema (.deb, .rpm, Arch, Slackware): niente aggiornamento automatico (scelta dell'autore,
+        // 14/11/2026); il file .pacchetto, scritto da installer/make-*.sh accanto al programma, dice quale. null = altri pacchetti.
+        public static string PackageKind()
+        {
+            try
+            {
+                string f = Path.Combine(AppPaths.AppDir, ".pacchetto");
+                if (File.Exists(f)) { string k = File.ReadAllText(f).Trim(); return k.Length > 0 ? k : null; }
+            }
+            catch { }
             return null;
         }
 
@@ -146,7 +162,7 @@ namespace ELA
                 timer.Interval = Interval;
                 if (!Enabled) return;
                 bool n = await CheckAsync();
-                if (n && Silent)
+                if (n && Silent && PackageKind() == null)
                 {
                     // scarica, installa e riavvia senza chiedere; se non si puo' (nessun pacchetto, cartella non
                     // scrivibile, rete) resta solo la scritta in alto e si riprova al controllo successivo
@@ -285,6 +301,8 @@ namespace ELA
         static string script;
         static async Task<string> Install(string ver, Action<double> progress, Action<string> say)
         {
+            string kind = PackageKind();
+            if (kind != null) return Lang.F("Il programma è installato con il pacchetto {0}: per aggiornarlo scarica il pacchetto nuovo dalla pagina della release e installalo come il primo.", kind);
             string name, url = FindAsset(out name);
             if (url == null) return Lang.F("Nella release {0} manca il pacchetto per questo computer ({1}): scaricalo a mano dalla pagina della release.", ver, AssetSuffix().TrimStart('-'));
             string appDir = AppPaths.AppDir, dataDir = AppPaths.DataDir;

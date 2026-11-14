@@ -1,4 +1,5 @@
-# E-LAYER ANALYZER - compilazione e installatori per Windows (64 e 32 bit), Linux (x64, ARM64, ARM 32 bit/armv7l, pacchetti .deb e Slackware ARM64),
+# E-LAYER ANALYZER - compilazione e installatori per Windows (64 bit, 32 bit, ARM64), Linux (x64, ARM64, ARM 32 bit/armv7l, Alpine; pacchetti
+# .deb, .rpm, Arch, Slackware, AppImage), FreeBSD (sperimentale),
 # Raspberry Pi e Mac (Apple Silicon e Intel: .dmg e .app in zip).
 # A ogni push sul ramo main: solo compilazione di controllo su Linux (i minuti Mac costano 10 volte, Windows 2 volte).
 # Con un push sul ramo release (o un tag vX.Y.Z, o avviandolo a mano): installatori per Windows, Linux e Mac;
@@ -29,6 +30,8 @@ jobs:
             arch: x64
           - rid: win-x86
             arch: x86
+          - rid: win-arm64    # Windows su ARM (PC con Snapdragon)
+            arch: arm64
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
@@ -111,56 +114,24 @@ jobs:
             # stesso programma con il nome dell'architettura, per le altre schede ARM a 32 bit (armv7l)
             [ "$R" = linux-arm ] && cp dist/E-LAYER-ANALYZER-$VER-linux-arm-portatile.tar.gz dist/E-LAYER-ANALYZER-$VER-linux-armv7l-portatile.tar.gz
           done
-          # .deb per PC (amd64) e Raspberry Pi OS 64 bit (arm64) e 32 bit (armhf): programma in /opt/e-layer-analyzer; al primo avvio
-          # (e dopo ogni aggiornamento) si copia in ~/E-LAYER-ANALYZER, perche' la cartella data deve stare accanto al programma
-          for P in "linux-x64 amd64" "linux-arm64 arm64" "linux-arm armhf"; do
-            set -- $P; R=$1; A=$2
-            [ -d publish/$R ] || continue
-            D=deb-$A; rm -rf $D
-            mkdir -p $D/DEBIAN $D/opt/e-layer-analyzer $D/usr/bin $D/usr/share/applications $D/usr/share/icons/hicolor/256x256/apps
-            cp -R publish/$R/. $D/opt/e-layer-analyzer/
-            echo "$VER" > $D/opt/e-layer-analyzer/.versione
-            chmod +x $D/opt/e-layer-analyzer/E-LAYER-ANALYZER
-            cp installer/deb-avvio.sh $D/usr/bin/e-layer-analyzer && chmod 755 $D/usr/bin/e-layer-analyzer
-            cp src/Assets/ela-256.png $D/usr/share/icons/hicolor/256x256/apps/e-layer-analyzer.png
-            printf '%s\n' "[Desktop Entry]" "Type=Application" "Name=E-LAYER ANALYZER" \
-              "Comment=Propagazione dello strato E: E-sporadico, F.A.I., meteor scatter, aurora" \
-              "Exec=e-layer-analyzer" "Icon=e-layer-analyzer" "Terminal=false" "Categories=HamRadio;Science;Utility;" \
-              > $D/usr/share/applications/e-layer-analyzer.desktop
-            SIZE=$(du -sk $D/opt | cut -f1)
-            printf '%s\n' "Package: e-layer-analyzer" "Version: $VER" "Section: hamradio" "Priority: optional" "Architecture: $A" \
-              "Installed-Size: $SIZE" "Maintainer: Costantino Cerrotta IC8TEM <ic8tem@gmail.com>" \
-              "Depends: libc6, libfontconfig1, libx11-6, libice6, libsm6, libicu74 | libicu72 | libicu71 | libicu70 | libicu67 | libicu66 | libicu63" \
-              "Homepage: https://github.com/${GITHUB_REPOSITORY}" \
-              "Description: E-LAYER ANALYZER - propagazione dello strato E" \
-              " E-sporadico, F.A.I., meteor scatter (YA-MS) e aurora in VHF, a cura di Costantino IC8TEM." \
-              > $D/DEBIAN/control
-            dpkg-deb --root-owner-group --build $D dist/e-layer-analyzer_${VER}_$A.deb
+          # pacchetti di sistema e AppImage (installer/make-*.sh): .deb per PC (amd64) e Raspberry Pi OS 64 bit (arm64) e 32 bit (armhf),
+          # .rpm (Fedora, openSUSE), Arch (.pkg.tar.zst), Slackware (.txz), AppImage x86_64. Il programma va in /opt/e-layer-analyzer
+          # e al primo avvio si copia in ~/E-LAYER-ANALYZER, perche' la cartella data deve stare accanto al programma.
+          for R in linux-x64 linux-arm64 linux-arm; do
+            [ -d publish/$R ] && bash installer/make-deb.sh $R "$VER" publish/$R dist
           done
-          # pacchetto Slackware ARM64 (Raspberry Pi con Slackware AArch64): installpkg mette il programma in /opt/e-layer-analyzer
-          # con lo stesso avvio del .deb (al primo avvio si copia in ~/E-LAYER-ANALYZER)
-          if [ -d publish/linux-arm64 ]; then
-            S=slack; rm -rf $S
-            mkdir -p $S/install $S/opt/e-layer-analyzer $S/usr/bin $S/usr/share/applications $S/usr/share/icons/hicolor/256x256/apps
-            cp -R deb-arm64/opt/e-layer-analyzer/. $S/opt/e-layer-analyzer/
-            cp deb-arm64/usr/bin/e-layer-analyzer $S/usr/bin/
-            cp deb-arm64/usr/share/applications/e-layer-analyzer.desktop $S/usr/share/applications/
-            cp deb-arm64/usr/share/icons/hicolor/256x256/apps/e-layer-analyzer.png $S/usr/share/icons/hicolor/256x256/apps/
-            printf '%s\n' \
-              "                 |-----handy-ruler------------------------------------------------------|" \
-              "e-layer-analyzer: e-layer-analyzer (propagazione dello strato E)" \
-              "e-layer-analyzer:" \
-              "e-layer-analyzer: E-sporadico, F.A.I., meteor scatter (YA-MS) e aurora in VHF." \
-              "e-layer-analyzer: A cura di Costantino IC8TEM." \
-              "e-layer-analyzer: Al primo avvio il programma si copia in ~/E-LAYER-ANALYZER," \
-              "e-layer-analyzer: con la cartella data accanto." \
-              "e-layer-analyzer:" \
-              "e-layer-analyzer: https://github.com/ic8tem/E-LAYER-ANALYZER" \
-              "e-layer-analyzer:" "e-layer-analyzer:" "e-layer-analyzer:" > $S/install/slack-desc
-            printf '%s\n' "if [ -x /usr/bin/update-desktop-database ]; then /usr/bin/update-desktop-database -q usr/share/applications >/dev/null 2>&1; fi" \
-              "if [ -x /usr/bin/gtk-update-icon-cache ]; then /usr/bin/gtk-update-icon-cache -q usr/share/icons/hicolor >/dev/null 2>&1; fi" > $S/install/doinst.sh
-            tar -C $S --owner=0 --group=0 -cJf dist/e-layer-analyzer-$VER-aarch64-1_ic8tem.txz install opt usr
-            tar -tJf dist/e-layer-analyzer-$VER-aarch64-1_ic8tem.txz | head -5
+          if [ "${{ github.event_name }}" != "push" ] || [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            sudo apt-get install -y -qq rpm >/dev/null
+            bash installer/make-rpm.sh linux-x64 "$VER" dist/e-layer-analyzer_${VER}_amd64.deb dist
+            bash installer/make-txz.sh linux-x64 "$VER" dist/e-layer-analyzer_${VER}_amd64.deb dist
+            bash installer/make-arch.sh linux-x64 "$VER" dist/e-layer-analyzer_${VER}_amd64.deb dist
+            bash installer/make-appimage.sh linux-x64 "$VER" publish/linux-x64 dist
+            if [ -d publish/linux-arm64 ]; then
+              bash installer/make-rpm.sh linux-arm64 "$VER" dist/e-layer-analyzer_${VER}_arm64.deb dist
+              bash installer/make-txz.sh linux-arm64 "$VER" dist/e-layer-analyzer_${VER}_arm64.deb dist
+              bash installer/make-arch.sh linux-arm64 "$VER" dist/e-layer-analyzer_${VER}_arm64.deb dist
+            fi
+            [ -d publish/linux-arm ] && bash installer/make-rpm.sh linux-arm "$VER" dist/e-layer-analyzer_${VER}_armhf.deb dist
           fi
           ls -la dist
       - name: Fotografie delle linguette (schermo virtuale)
@@ -191,6 +162,77 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: linux
+          path: dist/*
+
+  linux-extra:
+    # su un processore ARM vero: AppImage aarch64 e Alpine (musl) aarch64; Alpine x86_64 e FreeBSD (sperimentale) sul runner x86
+    runs-on: ${{ matrix.os }}
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release' || github.event_name == 'workflow_dispatch'
+    strategy:
+      matrix:
+        include:
+          - what: appimage-arm64
+            os: ubuntu-24.04-arm
+          - what: alpine-arm64
+            os: ubuntu-24.04-arm
+          - what: alpine-x64
+            os: ubuntu-latest
+          - what: freebsd
+            os: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Versione
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
+          echo "VER=$V" >> $GITHUB_ENV
+      - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
+        shell: bash
+        run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
+      - name: Compila e impacchetta
+        run: |
+          set -eo pipefail
+          mkdir -p dist
+          portable() {   # $1 = cartella pubblicata, $2 = nome del pacchetto
+            rm -rf pkg && mkdir -p pkg
+            cp -R "$1" pkg/E-LAYER-ANALYZER
+            cp installer/linux-install.sh pkg/E-LAYER-ANALYZER/installa.sh
+            cp src/Assets/ela-256.png pkg/E-LAYER-ANALYZER/ela.png
+            chmod +x pkg/E-LAYER-ANALYZER/installa.sh
+            [ -f pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER ] && chmod +x pkg/E-LAYER-ANALYZER/E-LAYER-ANALYZER
+            tar -C pkg -czf "dist/E-LAYER-ANALYZER-$VER-$2.tar.gz" E-LAYER-ANALYZER
+          }
+          case "${{ matrix.what }}" in
+            appimage-arm64)
+              dotnet publish E-LAYER-ANALYZER.csproj -c Release -r linux-arm64 --self-contained true -p:Version=$VER -p:DebugType=none -o publish/linux-arm64 2>&1 | tail -3
+              bash installer/make-appimage.sh linux-arm64 "$VER" publish/linux-arm64 dist ;;
+            alpine-arm64|alpine-x64)
+              R=$([ "${{ matrix.what }}" = alpine-arm64 ] && echo linux-musl-arm64 || echo linux-musl-x64)
+              dotnet publish E-LAYER-ANALYZER.csproj -c Release -r $R --self-contained true -p:Version=$VER -p:DebugType=none -o publish/$R 2>&1 | tail -3
+              file publish/$R/E-LAYER-ANALYZER
+              portable publish/$R "${{ matrix.what }}-portatile" ;;
+            freebsd)
+              # SPERIMENTALE, NON VERIFICATO (scelta dell'autore, 12/11/2026): Microsoft non distribuisce .NET per FreeBSD,
+              # quindi si pubblica il programma "portabile" (senza runtime) da avviare con il .NET 8 della comunita'
+              # (pkg install dotnet) e con le librerie native SkiaSharp e HarfBuzzSharp per FreeBSD, che Avalonia non fornisce.
+              dotnet publish E-LAYER-ANALYZER.csproj -c Release --self-contained false -p:UseAppHost=false -p:Version=$VER -p:DebugType=none -o publish/freebsd 2>&1 | tail -3
+              printf '%s\n' '#!/bin/sh' '# E-LAYER ANALYZER su FreeBSD (sperimentale, non verificato): serve .NET 8 (pkg install dotnet)' \
+                'cd "$(dirname "$0")" && exec dotnet E-LAYER-ANALYZER.dll "$@"' > publish/freebsd/E-LAYER-ANALYZER
+              chmod +x publish/freebsd/E-LAYER-ANALYZER
+              printf '%s\n' "E-LAYER ANALYZER $VER per FreeBSD amd64 - PACCHETTO SPERIMENTALE, NON VERIFICATO" "" \
+                "Microsoft non distribuisce .NET per FreeBSD e la grafica Avalonia non ha le librerie native per FreeBSD." \
+                "Serve il .NET 8 della comunita': pkg install dotnet" \
+                "Servono le librerie native di SkiaSharp e HarfBuzzSharp compilate per FreeBSD (libSkiaSharp.so, libHarfBuzzSharp.so)," \
+                "da mettere accanto al programma: senza di loro il programma non parte." \
+                "Avvio: ./E-LAYER-ANALYZER (script che esegue: dotnet E-LAYER-ANALYZER.dll)" > publish/freebsd/LEGGIMI-FREEBSD.txt
+              portable publish/freebsd "freebsd-amd64-sperimentale" ;;
+          esac
+          ls -la dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extra-${{ matrix.what }}
           path: dist/*
 
   macos:
@@ -235,7 +277,7 @@ jobs:
 
   release:
     if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release'
-    needs: [ windows, linux, macos ]
+    needs: [ windows, linux, linux-extra, macos ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -269,15 +311,20 @@ jobs:
             manuale d'uso di YA-MS in 36 lingue nella linguetta METEOR SCATTER; manuale e wiki aggiornati in 36 lingue.
 
             - Windows 64 bit: E-LAYER-ANALYZER-...-win-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure ...-win-x64-portatile.zip.
-            - Windows 32 bit: E-LAYER-ANALYZER-...-win-x86-setup.exe oppure ...-win-x86-portatile.zip.
-            - Linux 64 bit: e-layer-analyzer_..._amd64.deb (sudo apt install ./e-layer-analyzer_..._amd64.deb) oppure ...-linux-x64-portatile.tar.gz.
-            - Raspberry Pi OS 64 bit: e-layer-analyzer_..._arm64.deb oppure ...-linux-arm64-portatile.tar.gz.
-            - Raspberry Pi OS 32 bit: e-layer-analyzer_..._armhf.deb oppure ...-linux-arm-portatile.tar.gz.
-            - Raspberry Pi con Slackware ARM64: da root installpkg e-layer-analyzer-...-aarch64-1_ic8tem.txz, poi si avvia e-layer-analyzer; oppure ...-linux-arm64-portatile.tar.gz.
-            - Linux armv7l (altre schede ARM a 32 bit): ...-linux-armv7l-portatile.tar.gz.
+            - Windows 32 bit: ...-win-x86-setup.exe oppure ...-win-x86-portatile.zip. Windows su ARM (PC con Snapdragon): ...-win-arm64-setup.exe oppure ...-win-arm64-portatile.zip.
+            - Debian, Ubuntu, Mint: e-layer-analyzer_..._amd64.deb (sudo apt install ./e-layer-analyzer_..._amd64.deb).
+            - Fedora, openSUSE: e-layer-analyzer-....x86_64.rpm (o .aarch64.rpm, .armv7hl.rpm).
+            - Arch, Manjaro, EndeavourOS, Arch Linux ARM: e-layer-analyzer-...-x86_64.pkg.tar.zst (o -aarch64), con sudo pacman -U.
+            - Slackware: da root installpkg e-layer-analyzer-...-x86_64-1_ic8tem.txz (o -aarch64- per Slackware ARM64 sul Raspberry Pi).
+            - Qualsiasi Linux: E-LAYER-ANALYZER-...-x86_64.AppImage (o -aarch64.AppImage), oppure ...-linux-x64-portatile.tar.gz.
+            - Alpine Linux e altri Linux con musl: ...-alpine-x64-portatile.tar.gz o ...-alpine-arm64-portatile.tar.gz (serve apk add icu-libs fontconfig).
+            - Raspberry Pi OS 64 bit: e-layer-analyzer_..._arm64.deb oppure ...-linux-arm64-portatile.tar.gz; 32 bit: e-layer-analyzer_..._armhf.deb oppure ...-linux-arm-portatile.tar.gz.
+            - Altri Linux ARM (schede armv7l): ...-linux-armv7l-portatile.tar.gz.
             - Portatili Linux: estrarre e avviare ./E-LAYER-ANALYZER, oppure ./installa.sh per installare in ~/E-LAYER-ANALYZER con l'icona nel menu.
-            - Con il .deb il programma si avvia dal menu: al primo avvio si copia in ~/E-LAYER-ANALYZER, con la cartella data accanto.
-            - Non disponibili: Linux i686 (PC a 32 bit, .NET non esiste per quel sistema) e FreeBSD (mancano le librerie grafiche di Avalonia).
+            - Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) e con l'AppImage il programma si avvia dal menu e al primo avvio si copia in ~/E-LAYER-ANALYZER, con la cartella data accanto.
+            - FreeBSD amd64: ...-freebsd-amd64-sperimentale.tar.gz, PACCHETTO SPERIMENTALE E NON VERIFICATO: serve il .NET 8 della comunità (pkg install dotnet) e servono le librerie SkiaSharp e HarfBuzzSharp per FreeBSD (vedi LEGGIMI-FREEBSD.txt).
+            - Non disponibili: Linux i686 (PC a 32 bit) e OpenBSD, perché .NET non esiste per quei sistemi.
+            - Aggiornamento automatico: con l'installatore o lo zip di Windows, l'app del Mac, i portatili tar.gz e l'AppImage il programma si aggiorna da solo dalle Release. Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware) no: si aggiorna installando il pacchetto nuovo.
             - Nessun dato in AppData: tutto sta nella cartella data accanto al programma.
             - Mac: E-LAYER-ANALYZER-...-osx-arm64.dmg (Apple Silicon M1-M4) o ...-osx-x64.dmg (Intel); aprire il .dmg, clic destro su "Installa E-LAYER-ANALYZER.command" > Apri. In alternativa ...-osx-arm64-app.zip / ...-osx-x64-app.zip con la sola applicazione.
           files: dist/*

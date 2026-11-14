@@ -39,9 +39,22 @@ namespace ELA
             get
             {
                 if (Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? ""))) return true;
+                // FT8 e FT4 in 50 e 70 MHz non sono meteor scatter per la sola finestra del bandplan (regola dell'autore,
+                // 14/11/2026): in 70 MHz l'FT8 sta a 70,154 MHz, dentro la finestra MS 70100-70400 kHz
+                if (IsFt8Ft4 && (Band == "6m" || Band == "4m")) return false;
                 return YAMS.MsCollector.UseWindows && YAMS.MsCollector.OtherTag(Comment) == null && YAMS.MsCollector.WindowOf(FreqKHz) != null;
             }
         }
+        // FT8 o FT4 (modo dato da RBN, PSKReporter o WSJT-X, oppure scritto nel commento)
+        static readonly System.Text.RegularExpressions.Regex rxFt = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(FT8|FT4)(?![A-Z0-9])",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool IsFt8Ft4 { get { return rxFt.IsMatch((DigiMode ?? "") + " " + (Comment ?? "")); } }
+        // Q65 e JT65 in 144 MHz sono EME (regola dell'autore, 14/11/2026), salvo <ES> nel testo
+        static readonly System.Text.RegularExpressions.Regex rxEmeMode = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(Q65[A-E]?|JT65[A-C]?)(?![A-Z0-9])",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        static readonly System.Text.RegularExpressions.Regex rxEsTag = new System.Text.RegularExpressions.Regex(@"<\s*ES\s*>",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
+        public bool IsEme144 { get { return Band == "2m" && Prop != "ES" && !rxEsTag.IsMatch(Comment ?? "") && rxEmeMode.IsMatch((DigiMode ?? "") + " " + (Comment ?? "")); } }
         // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
@@ -57,9 +70,12 @@ namespace ELA
         public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || (Band == "6m" && Filters.Es50WindowNotExclusive ? IsMeteorScatterSure : IsMeteorScatter); } }
         // In 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore);
         // in 28 MHz la distanza minima si scala da quella dei 50 MHz seguendo IK3XTV (EsModel.MinKm28)
-        public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "10m" && DistanceKm < EsModel.MinKm28)); } }
+        // in 70 MHz entro EsModel.MinKm70 (450 km, regola dell'autore del 14/11/2026); in 40 MHz la distanza minima si scala da
+        // quella dei 50 MHz come per i 28 MHz e vale solo il primo salto della geometria dello strato E (EsModel.MaxKm40)
+        public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "4m" && DistanceKm < EsModel.MinKm70) || (Band == "10m" && DistanceKm < EsModel.MinKm28) || (Band == "8m" && DistanceKm < EsModel.MinKm40)); } }
+        public bool TooLongForEs { get { return HasBoth && Band == "8m" && DistanceKm > EsModel.MaxKm40; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !TooLongForEs && !IsEme144 && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
         // e per la regola generale di tutto il mondo (EsModel.IsTransEquatorialWorld, Kennewell e Wilkinson)
         // Es che aggancia il TEP (ombra del TEP): resta tra gli spot Es, si disegna in blu elettrico con la scritta TEP
@@ -285,6 +301,21 @@ namespace ELA
                 }
                 catch { }
             }
+        }
+
+        // spot con ora tra 'from' e 'to'; l'archivio e' in ordine di arrivo, quindi si scorre dalla fine e ci si ferma
+        // quando gli spot sono piu' vecchi di 'from' di oltre 15 minuti (margine per gli spot arrivati in ritardo)
+        public static List<Spot> Window(DateTime from, DateTime to)
+        {
+            List<Spot> r = new List<Spot>();
+            DateTime stop = from.AddMinutes(-15);
+            for (int i = All.Count - 1; i >= 0; i--)
+            {
+                Spot s = All[i];
+                if (s.Utc < stop) break;
+                if (s.Utc >= from && s.Utc <= to) r.Add(s);
+            }
+            return r;
         }
 
         // spot recenti (ultimi 'minutes' minuti) di una banda, con entrambe le stazioni localizzate

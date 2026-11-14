@@ -32,7 +32,7 @@ namespace ELA
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; BenchTab bench; BenchMultiTab bench50; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log;
+        EsTab es; BenchTab bench; BenchMultiTab bench50; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log; SettingsTab settings;
         readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
@@ -142,6 +142,9 @@ namespace ELA
             tabs.Add(Lang.T("AURORA"), auPage);
             tabs.Add(Lang.T("DATA COLLECTION"), dc.Root);
             tabs.Add(Lang.T("LOG ADIF"), log.Root);
+            // IMPOSTAZIONI: opzioni generali e smistamento degli spot (i filtri, prima nella colonna destra di DATA COLLECTION)
+            settings = new SettingsTab(this, dc);
+            tabs.Add(Lang.T("IMPOSTAZIONI"), settings.Root);
             tabs.Add(Lang.T("FONTI"), DocTab.Build(LocFile(dataDir, "ela_fonti", ".txt"), null, null, Lang.T("Fonti citate dal programma, linguetta per linguetta")));
             tabs.Add(Lang.T("SINTESI DELLE SCELTE DI CALCOLO"), DocTab.Build(LocFile(dataDir, "ela_documento_tecnico", ".txt"), LocFile(dataDir, "ela_documento_tecnico", ".docx"),
                 "E-LAYER ANALYZER - sintesi delle scelte di calcolo.docx", Lang.T("Come il programma calcola: formule e fonti a ogni passo")));
@@ -155,6 +158,7 @@ namespace ELA
                 else if (i == 1) fai.Recalc();
                 else if (i == 3) { if (auTabs.Selected == 0) au.Recalc(); }
                 else if (i == 5) log.Refresh();
+                UiScale.Apply(this);   // dimensione del carattere anche sulle pagine appena mostrate
             };
             // menu dei sei continenti, a destra nella barra delle linguette: cambia le viste delle mappe e i dati previsionali
             ComboBox cmbCont = Ui.Combo(Array.ConvertAll(Continents.Names, n => Lang.T(n)), Continents.Index, 150);
@@ -162,6 +166,7 @@ namespace ELA
             cmbCont.Margin = new Thickness(8, 0, 0, 0);
             ToolTip.SetTip(cmbCont, Lang.T("Continente: sposta le mappe di Mercatore sul continente scelto e sceglie i dati previsionali (E-skip di N0NBH per Europa e Nord America)."));
             cmbCont.SelectionChanged += (s2, e2) => Continents.Set(Math.Max(0, cmbCont.SelectedIndex));
+            Continents.Changed += () => { if (cmbCont.SelectedIndex != Continents.Index) cmbCont.SelectedIndex = Continents.Index; };   // anche da IMPOSTAZIONI
             DockPanel.SetDock(cmbCont, Dock.Right);
             tabs.Line.Children.Insert(0, cmbCont);
             int sel = (int)Station.Cfg.GetD("linguetta2", 0);   // "linguetta2": numerazione con le sottolinguette di SPORADIC-E
@@ -243,6 +248,15 @@ namespace ELA
             }
             return Path.Combine(dataDir, name + ext);
         }
+
+        // dalla linguetta IMPOSTAZIONI (Generali): stessi dati della riga in alto
+        internal void SetStation(string call, string loc, double alt)
+        {
+            txtCall.Text = call; txtLoc.Text = loc; numAlt.Value = Ui.Dm(alt);
+            ApplyStation();
+        }
+        internal void RequestLanguage(string code) { Dispatcher.UIThread.Post(() => SwitchLanguage(code)); }
+        internal void RequestTheme(int schema) { Dispatcher.UIThread.Post(() => SwitchTheme(schema)); }
 
         void ApplyStation()
         {
@@ -407,7 +421,7 @@ namespace ELA
                 string b50demo2 = Path.Combine(LogStore.Dir, "benchmark50_prova2.adi");
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
-                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
+                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "6b_impostazioni", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
                 string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50" };
                 for (int i = 0; i < tabs.Count; i++)
                 {
@@ -451,11 +465,13 @@ namespace ELA
                 tabs.Select(4);
                 for (int j = 1; j < dc.Inner.Count; j++) { dc.Inner.Select(j); await Task.Delay(1500); Shot(Path.Combine(dir, "5" + (char)('a' + j) + "_data_collection.png")); }
                 dc.Inner.Select(0);
-                string[] fn = { "ms", "es", "fai", "aurora", "prova" };
-                for (int j = 1; j < dc.FilterTabs.Count; j++) { dc.FilterTabs.Select(j); await Task.Delay(1200); Shot(Path.Combine(dir, "5f_filtri_" + fn[Math.Min(j, fn.Length - 1)] + ".png")); }
-                dc.FilterTabs.Select(0);
                 dc.Outer.Select(1); await Task.Delay(2500); Shot(Path.Combine(dir, "5g_dati_propagazione.png"));
                 dc.Outer.Select(0);
+                // IMPOSTAZIONI: smistamento degli spot con i filtri di ciascun modo
+                tabs.Select(6); settings.Inner.Select(1);
+                string[] fn = { "ms", "es", "fai", "aurora", "prova" };
+                for (int j = 0; j < dc.FilterTabs.Count; j++) { dc.FilterTabs.Select(j); await Task.Delay(1200); Shot(Path.Combine(dir, "6c_smistamento_" + fn[Math.Min(j, fn.Length - 1)] + ".png")); }
+                dc.FilterTabs.Select(0); settings.Inner.Select(0);
                 // AURORA: banco di prova sui QSO reali (EI5FK, PA0O)
                 tabs.Select(3); auTabs.Select(1);
                 for (int k = 0; k < 120 && auBench.Busy; k++) await Task.Delay(1000);

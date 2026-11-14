@@ -30,6 +30,11 @@ namespace ELA
         bool dirty = true;
         public static bool VhfOnly = true;
         public const double MinKHz = 27990.0, MaxKHz = 145000.0;   // limiti del filtro locale delle righe del cluster (kHz; massimo 145 MHz, regola dell'autore)
+        // 430-440 MHz: solo per l'aurora (regola dell'autore, 14/11/2026: l'E-sporadico e il F.A.I. non arrivano a 432 MHz)
+        public const double MinKHz70 = 430000.0, MaxKHz70 = 440000.0;
+        public static bool InVhfRange(double kHz) { return kHz >= MinKHz && kHz <= MaxKHz; }
+        // il filtro locale lascia passare lo spot? (nella gamma 27990 kHz - 145 MHz, oppure aurora in 430-440 MHz)
+        public static bool KeepSpot(Spot s) { return s != null && (!VhfOnly || InVhfRange(s.FreqKHz) || (s.FreqKHz >= MinKHz70 && s.FreqKHz <= MaxKHz70 && s.IsAurora)); }
         static readonly System.Text.RegularExpressions.Regex rxDxFreq = new System.Text.RegularExpressions.Regex(@"DX de\s+\S+?:?\s+(\d+(?:\.\d+)?)",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         // frequenza (kHz) di una riga "DX de ..."; NaN se la riga non e' uno spot
@@ -62,8 +67,8 @@ namespace ELA
                 sessions.Add(p);
                 sp.Children.Add(p.Root);
             }
-            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate)"), VhfOnly);
-            chkVhfOnly.IsCheckedChanged += (s, e) => VhfOnly = chkVhfOnly.IsChecked == true;
+            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora"), VhfOnly);
+            chkVhfOnly.IsCheckedChanged += (s, e) => { VhfOnly = chkVhfOnly.IsChecked == true; Changed(); };
             DockPanel sessPage = new DockPanel();   // il filtro locale delle righe sta nella colonna dei filtri (40 %)
             sessPage.Children.Add(new ScrollViewer { Content = sp, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto });
             Inner.Add(Lang.T("Sessioni telnet"), sessPage);
@@ -107,16 +112,13 @@ namespace ELA
             callPage.Children.Add(new ScrollViewer { Content = lblCall3 });
             Inner.Add("CALL3", callPage);
 
-            // 60 % a sinistra: sessioni, spot raccolti, CALL3; 40 % a destra: i filtri di tutti i modi di propagazione.
+            // sessioni, spot raccolti, CALL3 a tutta larghezza; i filtri di tutti i modi di propagazione stanno nella
+            // linguetta IMPOSTAZIONI, sottolinguetta "Smistamento degli spot" (richiesta dell'autore, 14/11/2026).
             // La raccolta dei dati e' una sola per tutto il programma: anche YA-MS (METEOR SCATTER) riceve le righe da qui.
-            DockPanel left = new DockPanel { Background = Pal.B(Pal.Back) };
-            Ui.Dock(left, Inner.Bar, Dock.Top);
-            left.Children.Add(Inner.Host);
-            Grid root = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*"), Background = Pal.B(Pal.Back) };
-            Grid.SetColumn(left, 0); root.Children.Add(left);
-            Control right = BuildFilters();
-            Grid.SetColumn(right, 1); root.Children.Add(right);
-            // due sottolinguette: gli spot (sessioni, spot raccolti, CALL3 e filtri) e i dati di propagazione
+            DockPanel root = new DockPanel { Background = Pal.B(Pal.Back) };
+            Ui.Dock(root, Inner.Bar, Dock.Top);
+            root.Children.Add(Inner.Host);
+            // due sottolinguette: gli spot (sessioni, spot raccolti, CALL3) e i dati di propagazione
             Outer.Add(Lang.T("Spot"), root);
             Outer.Add(Lang.T("Dati di propagazione"), BuildPropPanel());
             DockPanel outer = new DockPanel { Background = Pal.B(Pal.Back) };
@@ -162,13 +164,14 @@ namespace ELA
             bool any = false;
             foreach (YAMS.MsSpot m in got)
             {
-                if (VhfOnly && (m.FreqKHz < MinKHz || m.FreqKHz > MaxKHz)) continue;
+                if (VhfOnly && !InVhfRange(m.FreqKHz) && !(m.FreqKHz >= MinKHz70 && m.FreqKHz <= MaxKHz70)) continue;
                 Spot s = new Spot
                 {
                     Utc = m.Utc, FreqKHz = m.FreqKHz, DxCall = m.DxCall, Spotter = m.Spotter, Comment = m.Comment, Source = 3,
                     LocDx = m.LocDx ?? "", LocSpotter = m.LocSpotter ?? "", DigiMode = m.Mode ?? ""
                 };
                 SpotParser.Locate(s);
+                if (!KeepSpot(s)) continue;
                 if (SpotStore.Add(s)) any = true;
             }
             return any;
@@ -212,12 +215,13 @@ namespace ELA
         }
         void Changed() { Filters.NotifyChanged(); TestFilters(); }
 
-        Control BuildFilters()
+        // colonna dei filtri per la sottolinguetta "Smistamento degli spot" di IMPOSTAZIONI (da chiamare una volta sola)
+        public Control BuildFilters()
         {
             // filtro generale delle righe del cluster (vale per tutto il programma)
             StackPanel head = new StackPanel { Spacing = 4, Margin = new Thickness(10, 8, 10, 4) };
             head.Children.Add(new TextBlock { Text = Lang.T("Filtri degli spot"), FontSize = 18, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
-            head.Children.Add(FText(Lang.T("La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto dalle sessioni telnet passa per questi filtri e va alle linguette di ciascun modo di propagazione."), true));
+            head.Children.Add(FText(Lang.T("La raccolta dei dati è una sola per tutto il programma: ogni spot ricevuto in DATA COLLECTION passa per questi filtri e va alle linguette di ciascun modo di propagazione."), true));
             if (chkVhfOnly.Content is string cs) chkVhfOnly.Content = new TextBlock { Text = cs, TextWrapping = TextWrapping.Wrap };
             head.Children.Add(chkVhfOnly);
 
@@ -247,13 +251,21 @@ namespace ELA
             fp.Children.Add(tags);
             fp.Children.Add(FText(Lang.T("Sono esclusi anche gli spot riconosciuti come meteor scatter dal filtro della sottolinguetta Meteor scatter, e quelli con il modo dichiarato MS, FAI, AU, TR, EME o TEP."), true));
 
-            fp.Children.Add(FHead(Lang.T("Regole dei 28 e 50 MHz (regole dell'autore e IK3XTV)")));
+            fp.Children.Add(FHead(Lang.T("Regole dei 28, 40, 50 e 70 MHz (regole dell'autore e IK3XTV)")));
             NumericUpDown n50 = Ui.N(0, 1500, Ui.Dm(EsModel.MinKm50), 0, 50, 90);
             TextBlock l28 = FText("", true);
-            Action upd28 = () => l28.Text = Lang.F("In 28 MHz la distanza minima segue IK3XTV (lo skip si accorcia al diminuire della frequenza): con la stessa nube corrisponde a {0:F0} km (legge della secante).", EsModel.MinKm28);
+            Action upd28 = () => l28.Text = Lang.F("In 28 MHz la distanza minima segue IK3XTV (lo skip si accorcia al diminuire della frequenza): con la stessa nube corrisponde a {0:F0} km (legge della secante).", EsModel.MinKm28)
+                + " " + Lang.F("In 40 MHz (8 m) la distanza minima si ricava allo stesso modo ({0:F0} km) e valgono solo le distanze entro il primo salto della geometria dello strato E ({1:F0} km).", EsModel.MinKm40, EsModel.MaxKm40);
             upd28();
-            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 50 MHz (km)")), n50));
+            NumericUpDown n70 = Ui.N(0, 1500, Ui.Dm(EsModel.MinKm70), 0, 50, 90);
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("Distanza minima in 50 MHz (km)")), n50, Ui.L(Lang.T("in 70 MHz (km)")), n70));
             fp.Children.Add(l28);
+            fp.Children.Add(FText(Lang.T("FT8 e FT4 in 70 MHz vanno all'E-sporadico anche dentro la finestra del meteor scatter del bandplan (70,154 MHz è la frequenza dell'FT8)."), true));
+            CheckBox cFt8 = FCheck(Lang.T("FT8 e FT4 in 50 MHz: E-sporadico solo se fanno parte di una nube, cioè se c'è un altro spot in 50 MHz con il punto medio vicino; uno spot isolato va al meteor scatter"), EsModel.UseFt8CloudRule);
+            fp.Children.Add(cFt8);
+            NumericUpDown nFtMin = Ui.N(1, 30, Ui.Dm(EsModel.Ft8CloudMin), 0, 1, 70);
+            NumericUpDown nFtKm = Ui.N(25, 1000, Ui.Dm(EsModel.Ft8CloudKm), 0, 25, 90);
+            fp.Children.Add(Ui.Row(Ui.L(Lang.T("entro (minuti)")), nFtMin, Ui.L(Lang.T("punto medio entro (km)")), nFtKm));
             CheckBox cBp = FCheck(Lang.T("Il bandplan non è un criterio esclusivo: in 50 MHz uno spot nella finestra del meteor scatter resta nell'E-sporadico, salvo modo digitale MS o <MS>"), Filters.Es50WindowNotExclusive);
             fp.Children.Add(cBp);
 
@@ -270,6 +282,7 @@ namespace ELA
             fp.Children.Add(Ui.Row(Ui.L(Lang.T("entro (minuti)")), nConf, Ui.L(Lang.T("nube entro (km)")), nCloud));
             fp.Children.Add(FText(Lang.T("Oppure con uno spot in 50 MHz di salto corto nei dintorni:")));
             fp.Children.Add(Ui.Row(Ui.L(Lang.T("salto corto fino a (km)")), nShort, Ui.L(Lang.T("entro (minuti)")), nNear));
+            fp.Children.Add(FText(Lang.T("Q65 e JT65 in 144 MHz sono EME e non entrano nell'E-sporadico, salvo <ES> nel testo."), true));
 
             fp.Children.Add(FHead(Lang.T("Regola transequatoriale (regola dell'autore)")));
             CheckBox cTep = FCheck(Lang.T("Verso l'Africa (Madagascar compreso; senza Canarie, Madeira, Capo Verde e penisola arabica) e il Sud America, se il punto medio cade nella fascia di inclinazione magnetica indicata il collegamento è transequatoriale, salvo che lo spot dichiari ES"), EsModel.UseTepRule);
@@ -280,18 +293,20 @@ namespace ELA
             Action read = () =>
             {
                 EsModel.MinKm50 = Ui.V(n50); Filters.Es50WindowNotExclusive = cBp.IsChecked == true; upd28();
+                EsModel.MinKm70 = Ui.V(n70); EsModel.UseFt8CloudRule = cFt8.IsChecked == true; EsModel.Ft8CloudMin = Ui.V(nFtMin); EsModel.Ft8CloudKm = Ui.V(nFtKm);
                 EsModel.Use144Rule = c144.IsChecked == true; EsModel.MinKm144 = Ui.V(nMin); EsModel.Confirm144Min = Ui.V(nConf);
                 EsModel.CloudMatchKm = Ui.V(nCloud); EsModel.Short50Km = Ui.V(nShort); EsModel.Near50Min = Ui.V(nNear);
                 EsModel.UseTepRule = cTep.IsChecked == true; EsModel.TepInclinationDeg = Ui.V(nTep);
                 Changed();
             };
-            c144.IsCheckedChanged += (s, e) => read(); cTep.IsCheckedChanged += (s, e) => read(); cBp.IsCheckedChanged += (s, e) => read();
-            foreach (NumericUpDown n in new[] { n50, nMin, nConf, nCloud, nShort, nNear, nTep }) n.ValueChanged += (s, e) => read();
+            c144.IsCheckedChanged += (s, e) => read(); cTep.IsCheckedChanged += (s, e) => read(); cBp.IsCheckedChanged += (s, e) => read(); cFt8.IsCheckedChanged += (s, e) => read();
+            foreach (NumericUpDown n in new[] { n50, n70, nFtMin, nFtKm, nMin, nConf, nCloud, nShort, nNear, nTep }) n.ValueChanged += (s, e) => read();
             Button bReset = Ui.B(Lang.T("Ripristina le regole dell'autore"));
             bReset.Click += (s, e) =>
             {
                 Filters.ResetEs();
                 n50.Value = Ui.Dm(EsModel.MinKm50); cBp.IsChecked = Filters.Es50WindowNotExclusive;
+                n70.Value = Ui.Dm(EsModel.MinKm70); cFt8.IsChecked = EsModel.UseFt8CloudRule; nFtMin.Value = Ui.Dm(EsModel.Ft8CloudMin); nFtKm.Value = Ui.Dm(EsModel.Ft8CloudKm);
                 tags.Text = Filters.EsTags; c144.IsChecked = EsModel.Use144Rule; cTep.IsChecked = EsModel.UseTepRule;
                 nMin.Value = Ui.Dm(EsModel.MinKm144); nConf.Value = Ui.Dm(EsModel.Confirm144Min); nCloud.Value = Ui.Dm(EsModel.CloudMatchKm);
                 nShort.Value = Ui.Dm(EsModel.Short50Km); nNear.Value = Ui.Dm(EsModel.Near50Min); nTep.Value = Ui.Dm(EsModel.TepInclinationDeg);
@@ -302,10 +317,10 @@ namespace ELA
             return fp;
         }
 
-        static WrapPanel BandChecks(HashSet<string> set, Action changed, List<CheckBox> list)
+        static WrapPanel BandChecks(HashSet<string> set, Action changed, List<CheckBox> list, string[] names = null)
         {
             WrapPanel w = new WrapPanel();
-            foreach (string b in Filters.BandNames)
+            foreach (string b in names ?? Filters.BandNames)
             {
                 string bn = b;
                 CheckBox c = Ui.C(bn, set.Contains(bn));
@@ -324,7 +339,7 @@ namespace ELA
             fp.Children.Add(tags);
             fp.Children.Add(FHead(Lang.T("Bande")));
             List<CheckBox> bl = new List<CheckBox>();
-            fp.Children.Add(BandChecks(Filters.FaiBands, Changed, bl));
+            fp.Children.Add(BandChecks(Filters.FaiBands, Changed, bl, Filters.FaiBandNames));
             NumericUpDown nMin = Ui.N(15, 2880, Ui.Dm(Filters.FaiMinutes), 0, 15, 90);
             nMin.ValueChanged += (s, e) => { Filters.FaiMinutes = Ui.V(nMin); Changed(); };
             fp.Children.Add(Ui.Row(Ui.L(Lang.T("Spot sulla mappa degli ultimi (minuti)")), nMin));
@@ -388,7 +403,7 @@ namespace ELA
             double f = s.FreqKHz;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Lang.F("Banda: {0}   frequenza: {1:F1} kHz", s.Band, f));
-            if (VhfOnly && (f < MinKHz || f > MaxKHz)) sb.AppendLine(Lang.T("Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz)"));
+            if (VhfOnly && !KeepSpot(s)) sb.AppendLine(Lang.T("Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)"));
             sb.AppendLine(Lang.F("Locator: {0} - {1}", s.LocSpotter.Length > 0 ? s.LocSpotter : "?", s.LocDx.Length > 0 ? s.LocDx : "?"));
             if (s.HasBoth) sb.AppendLine(Lang.F("Distanza: {0:F0} km", s.DistanceKm));
             sb.AppendLine(Lang.F("Propagazione dichiarata: {0}", s.Prop.Length > 0 ? s.Prop : "-"));
@@ -401,7 +416,19 @@ namespace ELA
             sb.AppendLine(Lang.F("Transequatoriale: {0}", yn(tep)));
             bool es = s.EsCandidate && !tep;
             string esNote = "";
-            if (!es && s.TooShortForEs && !tep) esNote = " " + Lang.F("(scartato: entro {0:F0} km in {1})", s.Band == "10m" ? EsModel.MinKm28 : EsModel.MinKm50, s.Band == "10m" ? "28 MHz" : "50 MHz");
+            if (!es && s.TooShortForEs && !tep)
+            {
+                double mk = s.Band == "10m" ? EsModel.MinKm28 : s.Band == "8m" ? EsModel.MinKm40 : s.Band == "4m" ? EsModel.MinKm70 : EsModel.MinKm50;
+                string bn = s.Band == "10m" ? "28 MHz" : s.Band == "8m" ? "40 MHz" : s.Band == "4m" ? "70 MHz" : "50 MHz";
+                esNote = " " + Lang.F("(scartato: entro {0:F0} km in {1})", mk, bn);
+            }
+            else if (!es && s.TooLongForEs && !tep) esNote = " " + Lang.F("(scartato: oltre il primo salto, {0:F0} km, in 40 MHz)", EsModel.MaxKm40);
+            else if (!es && s.IsEme144) esNote = " " + Lang.T("(scartato: Q65 o JT65 in 144 MHz = EME)");
+            if (es && EsModel.Ft8Isolated50(s))
+            {
+                es = false;
+                esNote = " " + Lang.F("(FT8/FT4 in 50 MHz senza un altro spot entro {0:F0} min con il punto medio entro {1:F0} km: meteor scatter)", EsModel.Ft8CloudMin, EsModel.Ft8CloudKm);
+            }
             if (es && s.Band == "2m" && EsModel.Use144Rule)
                 esNote = s.HasBoth && s.DistanceKm < EsModel.MinKm144 ? " " + Lang.F("(scartato: sotto {0:F0} km in 144 MHz)", EsModel.MinKm144)
                                                                       : " " + Lang.T("(in 144 MHz si disegna solo con una conferma)");
@@ -685,10 +712,10 @@ namespace ELA
             {
                 // filtro locale (facoltativo): le righe "DX de" sotto 27990,0 kHz o sopra 145 MHz si scartano, non vanno in console ne' in memoria
                 double fk = DataTab.LineFreqKHz(l);
-                if (DataTab.VhfOnly && !double.IsNaN(fk) && (fk < DataTab.MinKHz || fk > DataTab.MaxKHz)) { dropped++; continue; }
-                lines.Enqueue(l);
                 Spot s = SpotParser.Parse(l, index, now);
-                if (s != null && (!DataTab.VhfOnly || (s.FreqKHz >= DataTab.MinKHz && s.FreqKHz <= DataTab.MaxKHz)))
+                if (DataTab.VhfOnly && !double.IsNaN(fk) && !DataTab.InVhfRange(fk) && !(s != null && DataTab.KeepSpot(s))) { dropped++; continue; }
+                lines.Enqueue(l);
+                if (s != null && DataTab.KeepSpot(s))
                 {
                     if (SpotStore.Add(s)) spots++;
                 }
@@ -696,7 +723,7 @@ namespace ELA
             while (lines.Count > 300) lines.Dequeue();
             console.Text = string.Join("\n", lines);
             sv.ScrollToEnd();
-            lblCounts.Text = Lang.F("righe {0}, spot salvati {1}", Session.LinesIn, spots) + (dropped > 0 ? ", " + Lang.F("scartate fuori da 27990 kHz - 145 MHz: {0}", dropped) : "");
+            lblCounts.Text = Lang.F("righe {0}, spot salvati {1}", Session.LinesIn, spots) + (dropped > 0 ? ", " + Lang.F("scartate dal filtro locale: {0}", dropped) : "");
             if (SpotArrived != null) SpotArrived();
         }
 

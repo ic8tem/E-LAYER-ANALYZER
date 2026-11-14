@@ -102,6 +102,49 @@ namespace ELA
         // 28 MHz: si segue IK3XTV (lo skip si accorcia al diminuire della frequenza): stessa nube (stessa foEs), quindi
         // la distanza minima dei 28 MHz e' quella in cui sec(phi) vale sec(phi a MinKm50) x 28,5 / 50,2 (legge della secante)
         public static double MinKm28 { get { return ScaledMinKm(MinKm50, 50.2, 28.5, DefaultH); } }
+        // 70 MHz: regola dell'autore (14/11/2026), 450 km come in 50 MHz (G0ISW: E-sporadico piu' corto oltre 400 km in 50 e 70 MHz)
+        public static double MinKm70 = 450;
+        // 40 MHz (8 m): distanza minima scalata dai 50 MHz con la legge della secante (come i 28 MHz); si accettano solo le
+        // distanze entro il primo salto della geometria dello strato E (regola dell'autore, 14/11/2026)
+        public static double MinKm40 { get { return ScaledMinKm(MinKm50, 50.2, 40.68, DefaultH); } }
+        public static double MaxKm40 { get { return Math.Round(2 * Geo.HalfHopKm(DefaultElevMin, DefaultH, EsK) / 10) * 10; } }
+
+        // 50 MHz, FT8 e FT4 (regola dell'autore, 14/11/2026): sono E-sporadico solo se fanno parte di una nube, cioe' se entro
+        // Ft8CloudMin minuti c'e' almeno un altro spot in 50 MHz (altra coppia di stazioni) con il punto medio entro
+        // Ft8CloudKm km; uno spot FT8/FT4 isolato va al meteor scatter.
+        public static double Ft8CloudMin = 4, Ft8CloudKm = 150;
+        public static bool UseFt8CloudRule = true;
+        static readonly Dictionary<string, bool> ft8Cache = new Dictionary<string, bool>();
+        public static bool Ft8Isolated50(Spot s)
+        {
+            if (!UseFt8CloudRule || s == null || s.Band != "6m" || !s.HasBoth || !s.IsFt8Ft4) return false;
+            // dopo la finestra (piu' un margine) il risultato non cambia piu': si tiene in memoria
+            bool settled = DateTime.UtcNow > s.Utc.AddMinutes(Ft8CloudMin + 5);
+            string ck = s.Key + "|" + Ft8CloudMin.ToString(System.Globalization.CultureInfo.InvariantCulture) + "|" + Ft8CloudKm.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            bool cached;
+            if (settled && ft8Cache.TryGetValue(ck, out cached)) return cached;
+            bool iso = Ft8IsolatedNow(s);
+            if (settled) { if (ft8Cache.Count > 100000) ft8Cache.Clear(); ft8Cache[ck] = iso; }
+            return iso;
+        }
+        static bool Ft8IsolatedNow(Spot s)
+        {
+            double mla, mlo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out mla, out mlo);
+            string pair = Pair(s);
+            List<Spot> near = SpotStore.Window(s.Utc.AddMinutes(-Ft8CloudMin), s.Utc.AddMinutes(Ft8CloudMin));
+            foreach (Spot q in near)
+            {
+                if (ReferenceEquals(q, s) || q.Band != "6m" || !q.HasBoth || Pair(q) == pair) continue;
+                double qa, qo; Geo.Intermediate(q.LatS, q.LonS, q.LatD, q.LonD, 0.5, out qa, out qo);
+                if (Geo.DistanceKm(mla, mlo, qa, qo) <= Ft8CloudKm) return false;
+            }
+            return true;
+        }
+        static string Pair(Spot s)
+        {
+            string a = s.Spotter ?? "", b = s.DxCall ?? "";
+            return string.CompareOrdinal(a, b) < 0 ? a + "|" + b : b + "|" + a;
+        }
 
         // Quota dell'E-sporadico e rifrazione troposferica (correzione approvata dall'autore): con 110 km, raggio terrestre
         // equivalente 4/3 ed elevazione minima di 1 grado il singolo salto arriva a ~2440 km, quindi anche i 2400 km della

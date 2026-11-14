@@ -1,7 +1,7 @@
 ; E-LAYER ANALYZER - installatore per Windows (Inno Setup 6)
 ; Installa nella cartella personale C:\E-LAYER-ANALYZER (programma e cartella data insieme), senza permessi di amministratore.
 ; Nessun file in C:\Users\...\AppData: niente collegamento nel menu Start (che Windows mette in AppData\Roaming),
-; solo l'icona facoltativa sul desktop. Versioni a 64 bit (x64) e 32 bit (x86).
+; solo l'icona facoltativa sul desktop. Versioni a 64 bit (x64), 32 bit (x86) e ARM64 (PC con Snapdragon).
 #ifndef AppVersion
   #define AppVersion "0.4.17"
 #endif
@@ -25,6 +25,10 @@ PrivilegesRequired=lowest
 #if Arch == "x64"
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
+#endif
+#if Arch == "arm64"
+ArchitecturesAllowed=arm64
+ArchitecturesInstallIn64BitMode=arm64
 #endif
 OutputDir=..\dist
 OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-win-{#Arch}-setup

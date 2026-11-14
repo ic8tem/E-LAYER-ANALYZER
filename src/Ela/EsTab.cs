@@ -20,7 +20,7 @@ namespace ELA
     {
         public readonly Control Root;
         readonly MapView map = new MapView();
-        readonly CheckBox c10, c6, c4, c2, chkFirst, chkShort, chkCells;
+        readonly CheckBox c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells;
         readonly ComboBox cmbWin;
         readonly NumericUpDown numH, numElev, numShort;
         readonly TextBlock lblSummary;
@@ -49,7 +49,7 @@ namespace ELA
         public EsTab()
         {
             Config cf = Station.Cfg;
-            c10 = Ui.C("10 m", cf.GetB("es_10m", false)); c6 = Ui.C("6 m", cf.GetB("es_6m", true));
+            c10 = Ui.C("10 m", cf.GetB("es_10m", false)); c8 = Ui.C("8 m", cf.GetB("es_8m", false)); c6 = Ui.C("6 m", cf.GetB("es_6m", true));
             c4 = Ui.C("4 m", cf.GetB("es_4m", true)); c2 = Ui.C("2 m", cf.GetB("es_2m", true));
             List<string> wn = new List<string>();
             foreach (int w in Windows) wn.Add(Lang.F("ultimi {0} min", w));
@@ -75,7 +75,7 @@ namespace ELA
             // continente scelto nella barra delle linguette e sintesi dei dati di propagazione in sovraimpressione
             PropData.Updated += () => Avalonia.Threading.Dispatcher.UIThread.Post(() => map.InvalidateVisual());
             Continents.Changed += () => { if (cmbMap.SelectedIndex == 1) Continents.Apply(map); };
-            foreach (CheckBox c in new[] { c10, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
+            foreach (CheckBox c in new[] { c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
             foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { dirty = true; Refresh(); };
 
@@ -122,7 +122,7 @@ namespace ELA
             ScrollViewer svDet = new ScrollViewer { Content = txtDet, Height = 250, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
-            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Bande")), c10, c6, c4, c2, cmbWin), Dock.Top);
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Bande")), c10, c8, c6, c4, c2, cmbWin), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, bView, bWorld), Dock.Top);
             Ui.Dock(right, Ui.Row(chkFirst, chkShort, numShort, Ui.L("km"), chkCells), Dock.Top);
             Ui.Dock(right, lblSummary, Dock.Top);
@@ -168,7 +168,7 @@ namespace ELA
         public void Save()
         {
             Config cf = Station.Cfg;
-            cf.Set("es_10m", c10.IsChecked == true); cf.Set("es_6m", c6.IsChecked == true); cf.Set("es_4m", c4.IsChecked == true); cf.Set("es_2m", c2.IsChecked == true);
+            cf.Set("es_10m", c10.IsChecked == true); cf.Set("es_8m", c8.IsChecked == true); cf.Set("es_6m", c6.IsChecked == true); cf.Set("es_4m", c4.IsChecked == true); cf.Set("es_2m", c2.IsChecked == true);
             cf.Set("es_minuti", Windows[Math.Max(0, cmbWin.SelectedIndex)]);
             cf.Set("es_quota_km2", Ui.V(numH)); cf.Set("es_elev_min2", Ui.V(numElev));
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
@@ -196,7 +196,7 @@ namespace ELA
         bool BandOn(Spot s)
         {
             string b = s.Band;
-            return (b == "10m" && c10.IsChecked == true) || (b == "6m" && c6.IsChecked == true) || (b == "4m" && c4.IsChecked == true) || (b == "2m" && c2.IsChecked == true);
+            return (b == "10m" && c10.IsChecked == true) || (b == "8m" && c8.IsChecked == true) || (b == "6m" && c6.IsChecked == true) || (b == "4m" && c4.IsChecked == true) || (b == "2m" && c2.IsChecked == true);
         }
 
         public static Color BandColor(string b)
@@ -204,6 +204,7 @@ namespace ELA
             switch (b)
             {
                 case "10m": return Pal.Green;
+                case "8m": return Pal.Yellow;
                 case "6m": return Pal.Azure;
                 case "4m": return Pal.Violet;
                 case "2m": return Pal.Orange;
@@ -245,7 +246,7 @@ namespace ELA
             dirty = false;
             EsModel.ShortHopKm = chkShort.IsChecked == true ? Ui.V(numShort) : 0;
             int minutes = Windows[Math.Max(0, cmbWin.SelectedIndex)];
-            List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate);
+            List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate && !EsModel.Ft8Isolated50(s));   // FT8/FT4 isolati in 50 MHz: meteor scatter
             tep = 0;
             sp = sp.FindAll(s => { if (s.IsTep) { tep++; return false; } return true; });   // transequatoriali: non E-sporadico (regola IC8TEM)
             // 144 MHz verso Canarie, Madeira e Azzorre oltre il singolo salto: Es + tropo, con conferma di due o piu' spot (regola IC8TEM)
@@ -264,7 +265,7 @@ namespace ELA
             }
             // regola dell'autore per i 144 MHz (EsModel.Apply144Rule): conferma con un secondo spot o con un salto corto in 50 MHz
             List<EsPath> six = new List<EsPath>();
-            foreach (Spot s in SpotStore.Recent(minutes + EsModel.Near50Min, x => x.HasBoth && x.Band == "6m" && x.EsCandidate))
+            foreach (Spot s in SpotStore.Recent(minutes + EsModel.Near50Min, x => x.HasBoth && x.Band == "6m" && x.EsCandidate && !EsModel.Ft8Isolated50(x)))
             {
                 EsPath p = EsModel.Build(s, H);
                 if (p != null && p.Hops == 1) six.Add(p);
@@ -462,6 +463,7 @@ namespace ELA
             DrawAlerts();
             if (paths.Exists(x => x.Spot.IsEsTep)) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("blu elettrico, scritta TEP: Es che può agganciare il TEP (non si può sapere dallo spot)"), ElectricBlue));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("10 m / 6 m / 4 m / 2 m: verde, azzurro, viola, arancio"), Pal.Azure));
+            if (c8.IsChecked == true) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("8 m (40 MHz): giallo, solo entro il primo salto"), Pal.Yellow));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ giallo: punto medio (singolo salto)"), Pal.Yellow));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto dello spotter (salti uguali)"), Pal.Orange));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ primo salto del DX (salti uguali)"), Pal.Violet));

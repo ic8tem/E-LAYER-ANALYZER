@@ -3,7 +3,8 @@
 # Il pacchetto mette il programma in /opt/e-layer-analyzer (sola lettura). La cartella data deve stare accanto al
 # programma ed essere scrivibile, quindi al primo avvio e dopo ogni aggiornamento il programma si copia in
 # ~/E-LAYER-ANALYZER, come fa installa.sh dei pacchetti portatili; il file call3.txt dell'utente non si sovrascrive.
-# Il programma puo' anche aggiornarsi da solo dalle Release di GitHub (scrive la nuova versione in ~/E-LAYER-ANALYZER/.versione).
+# Con i pacchetti di sistema (.deb, .rpm, Arch, Slackware; file .pacchetto) il programma non si aggiorna da solo: si installa
+# il pacchetto nuovo e qui la nuova versione si copia in ~/E-LAYER-ANALYZER. Con l'AppImage (stesso lanciatore) si aggiorna da solo.
 SRC=/opt/e-layer-analyzer
 DEST="$HOME/E-LAYER-ANALYZER"
 # si copia se manca o se il pacchetto e' piu' recente; se il programma si e' gia' aggiornato da solo (versione in ~ piu'

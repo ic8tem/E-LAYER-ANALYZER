@@ -68,7 +68,7 @@ namespace ELA
             if (!Station.Valid) { Last = res; return res; }
             // nubi attive: punti medi degli spot Es in singolo salto (stazioni qualunque, tutto il mondo)
             List<Active> act = new List<Active>();
-            foreach (Spot s in SpotStore.Recent(WindowMin, x => x.HasBoth && x.EsCandidate && !x.IsTep))
+            foreach (Spot s in SpotStore.Recent(WindowMin, x => x.HasBoth && x.EsCandidate && !x.IsTep && !EsModel.Ft8Isolated50(x)))
             {
                 double d = s.DistanceKm;
                 if (d > MaxHopKm || d < 400) continue;

@@ -12,6 +12,8 @@ namespace ELA
     public static class Filters
     {
         public static readonly string[] BandNames = { "6m", "4m", "2m", "70cm" };
+        // il F.A.I. non arriva a 432 MHz (regola dell'autore, 14/11/2026): bande del F.A.I. senza i 70 cm
+        public static readonly string[] FaiBandNames = { "6m", "4m", "2m" };
 
         // ---- E-sporadico
         public const string EsTagsDefault = "MS AURORA AUR AUE AU TR TROPO AS ACS";
@@ -22,7 +24,7 @@ namespace ELA
         public const string FaiTagsDefault = "FAI";
         public static string FaiTags = FaiTagsDefault;          // parole che indicano uno spot di F.A.I. (anche senza <>)
         static Regex rxFai = Build(FaiTagsDefault, false);
-        public static readonly HashSet<string> FaiBands = new HashSet<string>(BandNames);
+        public static readonly HashSet<string> FaiBands = new HashSet<string>(FaiBandNames);
         public static double FaiMinutes = 24 * 60;
 
         // ---- aurora
@@ -76,10 +78,15 @@ namespace ELA
             EsModel.CloudMatchKm = c.GetD("flt_es_nube_km", 300);
             EsModel.Near50Min = c.GetD("flt_es_50_min", 15);
             EsModel.Short50Km = c.GetD("flt_es_50_km", 1200);
+            EsModel.MinKm70 = c.GetD("flt_es_70_min_km", 450);
+            EsModel.UseFt8CloudRule = c.GetB("flt_es_ft8_nube", true);
+            EsModel.Ft8CloudMin = c.GetD("flt_es_ft8_minuti", 4);
+            EsModel.Ft8CloudKm = c.GetD("flt_es_ft8_km", 150);
             EsModel.UseTepRule = c.GetB("flt_es_tep", true);
             EsModel.TepInclinationDeg = c.GetD("flt_es_tep_gradi", 20);
             SetFaiTags(c.Get("flt_fai_scritte", FaiTagsDefault));
-            LoadBands(c.Get("flt_fai_bande", string.Join(" ", BandNames)), FaiBands);
+            LoadBands(c.Get("flt_fai_bande", string.Join(" ", FaiBandNames)), FaiBands);
+            FaiBands.Remove("70cm");
             FaiMinutes = c.GetD("flt_fai_minuti", 24 * 60);
             SetAuTags(c.Get("flt_au_scritte", AuTagsDefault));
             LoadBands(c.Get("flt_au_bande", string.Join(" ", BandNames)), AuBands);
@@ -103,10 +110,14 @@ namespace ELA
             c.Set("flt_es_nube_km", EsModel.CloudMatchKm);
             c.Set("flt_es_50_min", EsModel.Near50Min);
             c.Set("flt_es_50_km", EsModel.Short50Km);
+            c.Set("flt_es_70_min_km", EsModel.MinKm70);
+            c.Set("flt_es_ft8_nube", EsModel.UseFt8CloudRule);
+            c.Set("flt_es_ft8_minuti", EsModel.Ft8CloudMin);
+            c.Set("flt_es_ft8_km", EsModel.Ft8CloudKm);
             c.Set("flt_es_tep", EsModel.UseTepRule);
             c.Set("flt_es_tep_gradi", EsModel.TepInclinationDeg);
             c.Set("flt_fai_scritte", FaiTags);
-            c.Set("flt_fai_bande", string.Join(" ", BandNames.Where(FaiBands.Contains)));
+            c.Set("flt_fai_bande", string.Join(" ", FaiBandNames.Where(FaiBands.Contains)));
             c.Set("flt_fai_minuti", FaiMinutes);
             c.Set("flt_au_scritte", AuTags);
             c.Set("flt_au_bande", string.Join(" ", BandNames.Where(AuBands.Contains)));
@@ -120,8 +131,9 @@ namespace ELA
             EsModel.MinKm50 = 450; Es50WindowNotExclusive = true;
             EsModel.Use144Rule = true; EsModel.MinKm144 = 900; EsModel.Confirm144Min = 5; EsModel.CloudMatchKm = 300;
             EsModel.Near50Min = 15; EsModel.Short50Km = 1200; EsModel.UseTepRule = true; EsModel.TepInclinationDeg = 20;
+            EsModel.MinKm70 = 450; EsModel.UseFt8CloudRule = true; EsModel.Ft8CloudMin = 4; EsModel.Ft8CloudKm = 150;
         }
-        public static void ResetFai() { SetFaiTags(FaiTagsDefault); FaiBands.Clear(); FaiBands.UnionWith(BandNames); FaiMinutes = 24 * 60; }
+        public static void ResetFai() { SetFaiTags(FaiTagsDefault); FaiBands.Clear(); FaiBands.UnionWith(FaiBandNames); FaiMinutes = 24 * 60; }
         public static void ResetAu() { SetAuTags(AuTagsDefault); AuBands.Clear(); AuBands.UnionWith(BandNames); AuMinutes = 120; }
     }
 }
