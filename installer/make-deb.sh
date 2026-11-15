@@ -23,6 +23,7 @@ chmod +x $D/opt/e-layer-analyzer/E-LAYER-ANALYZER
 cp "$ROOT/installer/deb-avvio.sh" $D/usr/bin/e-layer-analyzer && chmod 755 $D/usr/bin/e-layer-analyzer
 cp "$ROOT/src/Assets/ela-256.png" $D/usr/share/icons/hicolor/256x256/apps/e-layer-analyzer.png
 cp "$ROOT/LEGGIMI.txt" $D/usr/share/doc/e-layer-analyzer/LEGGIMI.txt
+cp "$ROOT/COPYING" $D/usr/share/doc/e-layer-analyzer/copyright
 printf '%s\n' "[Desktop Entry]" "Type=Application" "Name=E-LAYER ANALYZER" \
   "Comment=Propagazione dello strato E: E-sporadico, F.A.I., meteor scatter, aurora" \
   "Exec=e-layer-analyzer" "Icon=e-layer-analyzer" "Terminal=false" "Categories=HamRadio;Science;Utility;" \
