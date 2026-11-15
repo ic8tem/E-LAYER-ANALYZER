@@ -8,7 +8,7 @@ Sous-onglet de **SPORADIC-E** (depuis la version 0.5.2) : la **foEs mesurée** p
 
 ## Les données
 
-- 63 ionosondes GIRO (liste ULCAR), avec la dernière **foEs**, **foF2** et **MUF(D)** lues automatiquement sur les ionogrammes.
+- 62 ionosondes GIRO (liste ULCAR), avec la dernière **foEs**, **foF2** et **MUF(D)** lues automatiquement sur les ionogrammes.
 - Les données arrivent la première fois que l'on ouvre l'onglet, puis **toutes les 15 minutes**, toutes seules (case *Mise à jour automatique toutes les 15 minutes*) ; *Mettre à jour maintenant* les demande tout de suite. L'archive garde les 48 dernières heures dans le dossier `giro` des données.
 - Données de **GIRO** (Reinisch et Galkin 2011), licence **CC BY-NC-SA 4.0** : usage non commercial uniquement. Le service est le même que dans *MUF Muncher* de DM6AX.
 

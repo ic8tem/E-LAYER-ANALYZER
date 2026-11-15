@@ -8,7 +8,7 @@ Suboortjie van **SPORADIC-E** (vanaf weergawe 0.5.2): die **gemete foEs** van di
 
 ## Die data
 
-- 63 GIRO-ionosondes (ULCAR-lys), met die jongste **foEs**, **foF2** en **MUF(D)** outomaties uit die ionogramme gelees.
+- 62 GIRO-ionosondes (ULCAR-lys), met die jongste **foEs**, **foF2** en **MUF(D)** outomaties uit die ionogramme gelees.
 - Die data kom die eerste keer wat die oortjie oopgemaak word en daarna **elke 15 minute** vanself (blokkie *Werk self elke 15 minute by*); *Werk nou by* vra dit dadelik. Die argief hou die laaste 48 uur in die `giro`-gids van die data.
 - Data van **GIRO** (Reinisch en Galkin 2011), lisensie **CC BY-NC-SA 4.0**: slegs nie-kommersiële gebruik. Die diens is dieselfde as dié van *MUF Muncher* van DM6AX.
 

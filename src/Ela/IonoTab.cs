@@ -80,7 +80,7 @@ namespace ELA
             Border detBox = Ui.Box(Lang.T("MUF dell'E-sporadico e bande (legge della secante)"), Pal.Yellow, svDet);
             Grid.SetRow(detBox, 1); bottom.Children.Add(detBox);
 
-            Grid right = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto,Auto,Auto,*,5,1.3*,Auto"), Background = Pal.B(Pal.Back) };
+            Grid right = new Grid { RowDefinitions = new RowDefinitions("Auto,Auto,Auto,Auto,*,5,1.6*,Auto"), Background = Pal.B(Pal.Back) };
             Control r0 = Ui.Row(bNow, chkAuto, chkOld);
             Control r1 = Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, Ui.L(Lang.T("Spot entro km")), numRadius);
             Grid.SetRow(r0, 0); Grid.SetRow(r1, 1); Grid.SetRow(lblStatus, 2);
@@ -231,7 +231,7 @@ namespace ELA
                 bool has = !double.IsNaN(r.FoEs);
                 Color fill = has ? Opaque(EsTab.FoEsColor(r.FoEs)) : r.St.Fresh ? Pal.Silver : Pal.Muted;
                 string lab = isSel ? r.St.Code + (has ? " " + r.FoEs.ToString("F1", CultureInfo.CurrentCulture) : "") : has ? r.FoEs.ToString("F1", CultureInfo.CurrentCulture) : null;
-                map.Markers.Add(new MapMarker { Lat = r.St.Lat, Lon = r.St.Lon, Radius = isSel ? 7 : has ? 5.5 : 3.5, Fill = fill, Stroke = isSel ? Pal.Fore : Colors.Black, Ring = !r.St.Fresh, Label = lab, LabelColor = has ? fill : Pal.Muted, Glow = isSel });
+                map.Markers.Add(new MapMarker { Lat = r.St.Lat, Lon = r.St.Lon, Radius = isSel ? 7 : has ? 5.5 : 3.5, Fill = fill, Stroke = isSel ? Pal.Fore : Colors.Black, Ring = !r.St.Fresh, Label = lab, LabelColor = has || isSel ? Pal.Fore : Pal.Muted, Glow = isSel });   // scritta chiara: i blu della scala foEs si leggono male sul fondo
                 if (isSel) map.Lines.Add(MapView.Circle(r.St.Lat, r.St.Lon, Ui.V(numRadius), Pal.A(160, Pal.Yellow), 1.2));
             }
             if (Station.Valid)

@@ -8,7 +8,7 @@
 
 ## Andmed
 
-- 63 GIRO ionosondi (ULCAR-i loend), ionogrammidelt automaatselt loetud viimase **foEs**, **foF2** ja **MUF(D)**-ga.
+- 62 GIRO ionosondi (ULCAR-i loend), ionogrammidelt automaatselt loetud viimase **foEs**, **foF2** ja **MUF(D)**-ga.
 - Andmed saabuvad saki esimesel avamisel ja seejärel **iga 15 minuti järel** ise (märkeruut *Värskenda ise iga 15 minuti järel*); *Värskenda kohe* küsib need kohe. Arhiiv hoiab viimase 48 tunni andmeid andmekaustas `giro`.
 - **GIRO** andmed (Reinisch ja Galkin 2011), litsents **CC BY-NC-SA 4.0**: ainult mitteäriline kasutus. Teenus on sama mis DM6AX-i programmis *MUF Muncher*.
 

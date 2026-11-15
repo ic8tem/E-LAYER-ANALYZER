@@ -44,7 +44,7 @@ namespace ELA
         // collegamenti caricati (sessione o file) e calcolo per passi
         List<Spot> src = new List<Spot>();
         string srcName = "";
-        bool fromFile;
+        bool fromFile, fromAdif;   // fromAdif: QSO di un log, la regola degli FT8 isolati non si applica (come in BENCHMARK Es)
         int excl, exclTep, exclShort, exclFt8, exclBand;
         class Link { public Spot S; public EsPath P; public int Step; }
         class Cell { public int Step; public double Lat0, Lon0; public double FoEs; public int N; public HashSet<string> Bands = new HashSet<string>(); public Link Best; }
@@ -164,7 +164,7 @@ namespace ELA
         {
             List<Spot> l;
             lock (SpotStore.All) l = new List<Spot>(SpotStore.All);
-            src = l; fromFile = false;
+            src = l; fromFile = false; fromAdif = false;
             srcName = Lang.T("spot della sessione");
             Rebuild();
         }
@@ -194,7 +194,7 @@ namespace ELA
                 catch (Exception ex) { err = ex.Message; }
             });
             if (l == null) { lblSrc.Text = Lang.F("Errore: {0}", err ?? ""); return; }
-            src = l; fromFile = true; srcName = Path.GetFileName(path);
+            src = l; fromFile = true; fromAdif = !path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase); srcName = Path.GetFileName(path);
             Rebuild();
         }
 
@@ -321,7 +321,7 @@ namespace ELA
                 bool tep;
                 using (Igrf.At(Igrf.YearOf(s.Utc))) tep = s.Prop != "ES" && s.IsTep;   // campo IGRF dell'anno dello spot
                 if (tep) { exclTep++; continue; }
-                bool iso = fromFile ? Ft8IsolatedIn(s, sorted, ticks) : EsModel.Ft8Isolated50(s);
+                bool iso = fromAdif ? false : fromFile ? Ft8IsolatedIn(s, sorted, ticks) : EsModel.Ft8Isolated50(s);
                 if (iso) { exclFt8++; continue; }
                 EsPath p = EsModel.Build(s, H);
                 if (p == null || p.Hops == 0 || (s.Band == "2m" && p.DistKm < EsModel.MinKm144)) { exclShort++; continue; }
@@ -399,8 +399,9 @@ namespace ELA
             }
             chart.XLabels = xl; chart.XLabelEvery = every;
             chart.Title = nSteps > 0 ? t0.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + " UTC" : "";
-            chart.Series.Add(new ChartSeries { Name = Lang.T("celle"), Color = Pal.A(150, Pal.Azure), Values = nc, Bars = true, RightAxis = true });
-            chart.Series.Add(new ChartSeries { Name = "foEs≥", Color = Pal.Yellow, Values = fe, LineWidth = 2 });
+            // foEs a barre: i passi isolati (con i passi vuoti intorno) restano visibili; le celle a linea sull'asse destro
+            chart.Series.Add(new ChartSeries { Name = "foEs≥", Color = Pal.Yellow, Values = fe, Bars = true });
+            chart.Series.Add(new ChartSeries { Name = Lang.T("celle"), Color = Pal.Azure, Values = nc, RightAxis = true, LineWidth = 1.5 });
             chart.MarkIndex = cur;
             chart.InvalidateVisual();
         }

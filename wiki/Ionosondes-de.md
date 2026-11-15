@@ -8,7 +8,7 @@ Unterreiter von **SPORADIC-E** (ab Version 0.5.2): die von den Ionosonden des **
 
 ## Die Daten
 
-- 63 GIRO-Ionosonden (ULCAR-Liste), mit der letzten **foEs**, **foF2** und **MUF(D)**, automatisch aus den Ionogrammen gelesen.
+- 62 GIRO-Ionosonden (ULCAR-Liste), mit der letzten **foEs**, **foF2** und **MUF(D)**, automatisch aus den Ionogrammen gelesen.
 - Die Daten kommen beim ersten Öffnen des Reiters und danach **alle 15 Minuten** von selbst (Kontrollkästchen *Alle 15 Minuten selbst aktualisieren*); *Jetzt aktualisieren* fordert sie sofort an. Das Archiv hält die letzten 48 Stunden im Ordner `giro` der Daten.
 - Daten von **GIRO** (Reinisch und Galkin 2011), Lizenz **CC BY-NC-SA 4.0**: nur nichtkommerzielle Nutzung. Der Dienst ist derselbe wie in *MUF Muncher* von DM6AX.
 

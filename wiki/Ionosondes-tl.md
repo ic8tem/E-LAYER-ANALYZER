@@ -8,7 +8,7 @@ Sub-tab ng **SPORADIC-E** (mula sa bersiyon 0.5.2): ang **sinukat na foEs** ng m
 
 ## Ang datos
 
-- 63 GIRO ionosonde (listahan ng ULCAR), na may huling **foEs**, **foF2** at **MUF(D)** na awtomatikong binasa mula sa mga ionogram.
+- 62 GIRO ionosonde (listahan ng ULCAR), na may huling **foEs**, **foF2** at **MUF(D)** na awtomatikong binasa mula sa mga ionogram.
 - Kusang dumarating ang datos sa unang pagbukas ng tab at pagkatapos ay **tuwing 15 minuto** (kahon na *Kusang i-update tuwing 15 minuto*); hinihingi ito agad ng *I-update ngayon*. Iniingatan ng archive ang huling 48 oras sa folder na `giro` ng datos.
 - Datos ng **GIRO** (Reinisch at Galkin 2011), lisensiyang **CC BY-NC-SA 4.0**: para lamang sa hindi pangkomersiyal na gamit. Ang serbisyo ay pareho sa *MUF Muncher* ni DM6AX.
 

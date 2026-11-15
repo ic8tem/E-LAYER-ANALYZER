@@ -8,7 +8,7 @@ Podzakładka **SPORADIC-E** (od wersji 0.5.2): **foEs zmierzona** przez jonosond
 
 ## Dane
 
-- 63 jonosondy GIRO (lista ULCAR), z ostatnią **foEs**, **foF2** i **MUF(D)** odczytanymi automatycznie z jonogramów.
+- 62 jonosondy GIRO (lista ULCAR), z ostatnią **foEs**, **foF2** i **MUF(D)** odczytanymi automatycznie z jonogramów.
 - Dane przychodzą przy pierwszym otwarciu zakładki, a potem **co 15 minut**, automatycznie (pole *Aktualizuj automatycznie co 15 minut*); *Aktualizuj teraz* pobiera je od razu. Archiwum przechowuje ostatnie 48 godzin w folderze `giro` danych.
 - Dane **GIRO** (Reinisch i Galkin 2011), licencja **CC BY-NC-SA 4.0**: tylko użytek niekomercyjny. Serwis jest ten sam co w *MUF Muncher* DM6AX.
 

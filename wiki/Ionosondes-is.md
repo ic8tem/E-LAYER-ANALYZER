@@ -8,7 +8,7 @@ Undirflipi **SPORADIC-E** (frá útgáfu 0.5.2): **foEs mæld** af jónósöndum
 
 ## Gögnin
 
-- 63 GIRO-jónósöndur (ULCAR-listinn), með síðustu **foEs**, **foF2** og **MUF(D)** lesin sjálfvirkt úr jónóritunum.
+- 62 GIRO-jónósöndur (ULCAR-listinn), með síðustu **foEs**, **foF2** og **MUF(D)** lesin sjálfvirkt úr jónóritunum.
 - Gögnin berast þegar flipinn er fyrst opnaður og síðan **á 15 mínútna fresti**, sjálfkrafa (reiturinn *Uppfæra sjálfkrafa á 15 mínútna fresti*); *Uppfæra núna* sækir þau strax. Safnið geymir síðustu 48 klukkustundir í möppunni `giro` í gögnunum.
 - Gögn frá **GIRO** (Reinisch og Galkin 2011), leyfi **CC BY-NC-SA 4.0**: aðeins til notkunar í öðrum en viðskiptalegum tilgangi. Þjónustan er sú sama og í *MUF Muncher* eftir DM6AX.
 

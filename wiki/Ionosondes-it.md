@@ -8,7 +8,7 @@ Sottolinguetta di **SPORADIC-E** (dalla versione 0.5.2): la **foEs misurata** da
 
 ## I dati
 
-- 63 ionosonde GIRO (elenco ULCAR), con l'ultima **foEs**, **foF2** e **MUF(D)** lette in automatico dagli ionogrammi.
+- 62 ionosonde GIRO (elenco ULCAR), con l'ultima **foEs**, **foF2** e **MUF(D)** lette in automatico dagli ionogrammi.
 - I dati arrivano la prima volta che si apre la linguetta e poi **ogni 15 minuti**, da soli (casella *Aggiorna da solo ogni 15 minuti*); *Aggiorna adesso* li chiede subito. L'archivio tiene le ultime 48 ore nella cartella `giro` dei dati.
 - Dati di **GIRO** (Reinisch e Galkin 2011), licenza **CC BY-NC-SA 4.0**: solo uso non commerciale. Il servizio è lo stesso di *MUF Muncher* di DM6AX.
 

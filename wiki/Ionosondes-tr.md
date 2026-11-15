@@ -8,7 +8,7 @@
 
 ## Veriler
 
-- İyonogramlardan otomatik olarak okunan son **foEs**, **foF2** ve **MUF(D)** ile 63 GIRO iyonosondu (ULCAR listesi).
+- İyonogramlardan otomatik olarak okunan son **foEs**, **foF2** ve **MUF(D)** ile 62 GIRO iyonosondu (ULCAR listesi).
 - Veriler sekme ilk açıldığında ve ardından **her 15 dakikada bir** kendiliğinden gelir (*Her 15 dakikada bir kendiliğinden güncelle* kutusu); *Şimdi güncelle* onları hemen ister. Arşiv son 48 saati verilerin `giro` klasöründe tutar.
 - **GIRO** verileri (Reinisch ve Galkin 2011), **CC BY-NC-SA 4.0** lisansı: yalnızca ticari olmayan kullanım. Servis, DM6AX'in *MUF Muncher* programındakiyle aynıdır.
 

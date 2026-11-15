@@ -8,7 +8,7 @@
 
 ## Duomenys
 
-- 63 GIRO jonozondai (ULCAR sąrašas), su paskutine **foEs**, **foF2** ir **MUF(D)**, automatiškai nuskaitytomis iš jonogramų.
+- 62 GIRO jonozondai (ULCAR sąrašas), su paskutine **foEs**, **foF2** ir **MUF(D)**, automatiškai nuskaitytomis iš jonogramų.
 - Duomenys gaunami pirmą kartą atvėrus kortelę, o vėliau **kas 15 minučių**, automatiškai (žymimasis langelis *Atnaujinti automatiškai kas 15 minučių*); *Atnaujinti dabar* juos užklausia iš karto. Archyve saugomos paskutinės 48 valandos duomenų aplanke `giro`.
 - **GIRO** duomenys (Reinisch ir Galkin 2011), licencija **CC BY-NC-SA 4.0**: tik nekomerciniam naudojimui. Paslauga ta pati kaip DM6AX programoje *MUF Muncher*.
 

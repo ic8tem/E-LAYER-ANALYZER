@@ -8,7 +8,7 @@
 
 ## Dati
 
-- 63 GIRO jonozondi (ULCAR saraksts) ar pēdējo **foEs**, **foF2** un **MUF(D)**, kas automātiski nolasīti no jonogrammām.
+- 62 GIRO jonozondi (ULCAR saraksts) ar pēdējo **foEs**, **foF2** un **MUF(D)**, kas automātiski nolasīti no jonogrammām.
 - Dati tiek iegūti, pirmo reizi atverot cilni, un pēc tam **ik pēc 15 minūtēm**, automātiski (izvēles rūtiņa *Atjaunināt automātiski ik pēc 15 minūtēm*); *Atjaunināt tagad* tos pieprasa nekavējoties. Arhīvs glabā pēdējās 48 stundas mapē `giro`.
 - **GIRO** dati (Reinisch un Galkin 2011), licence **CC BY-NC-SA 4.0**: tikai nekomerciālai lietošanai. Pakalpojums ir tas pats, ko izmanto DM6AX programma *MUF Muncher*.
 

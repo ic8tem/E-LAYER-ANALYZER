@@ -8,7 +8,7 @@ A **SPORADIC-E** allapja (a 0.5.2-es verziótól): a **GIRO** hálózat ionoszon
 
 ## Az adatok
 
-- 63 GIRO ionoszonda (ULCAR-lista), az ionogramokból automatikusan kiolvasott utolsó **foEs**, **foF2** és **MUF(D)** értékkel.
+- 62 GIRO ionoszonda (ULCAR-lista), az ionogramokból automatikusan kiolvasott utolsó **foEs**, **foF2** és **MUF(D)** értékkel.
 - Az adatok a fül első megnyitásakor érkeznek, majd **15 percenként**, maguktól (*Automatikus frissítés 15 percenként* jelölőnégyzet); a *Frissítés most* azonnal lekéri őket. Az archívum az utolsó 48 órát tartja az adatok `giro` mappájában.
 - A **GIRO** adatai (Reinisch és Galkin 2011), **CC BY-NC-SA 4.0** licenc: csak nem kereskedelmi használatra. A szolgáltatás ugyanaz, mint DM6AX *MUF Muncher* programjában.
 

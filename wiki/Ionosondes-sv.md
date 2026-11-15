@@ -8,7 +8,7 @@ Underflik till **SPORADIC-E** (från version 0.5.2): den **uppmätta foEs** frå
 
 ## Data
 
-- 63 GIRO-jonosonder (ULCAR-listan), med den senaste **foEs**, **foF2** och **MUF(D)** avlästa automatiskt från jonogrammen.
+- 62 GIRO-jonosonder (ULCAR-listan), med den senaste **foEs**, **foF2** och **MUF(D)** avlästa automatiskt från jonogrammen.
 - Data kommer första gången fliken öppnas och sedan **var 15:e minut** av sig själva (kryssrutan *Uppdatera automatiskt var 15:e minut*); *Uppdatera nu* hämtar dem direkt. Arkivet sparar de senaste 48 timmarna i mappen `giro` bland data.
 - Data från **GIRO** (Reinisch och Galkin 2011), licens **CC BY-NC-SA 4.0**: endast icke-kommersiell användning. Tjänsten är densamma som i *MUF Muncher* av DM6AX.
 

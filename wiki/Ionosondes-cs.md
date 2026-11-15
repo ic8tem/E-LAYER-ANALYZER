@@ -8,7 +8,7 @@ Podkarta **SPORADIC-E** (od verze 0.5.2): **foEs měřená** ionosondami sítě 
 
 ## Data
 
-- 63 ionosond GIRO (seznam ULCAR) s poslední **foEs**, **foF2** a **MUF(D)** čtenými automaticky z ionogramů.
+- 62 ionosond GIRO (seznam ULCAR) s poslední **foEs**, **foF2** a **MUF(D)** čtenými automaticky z ionogramů.
 - Data přicházejí při prvním otevření karty a pak **každých 15 minut**, sama (pole *Aktualizovat automaticky každých 15 minut*); *Aktualizovat nyní* si je vyžádá okamžitě. Archiv uchovává posledních 48 hodin ve složce `giro` v datech.
 - Data **GIRO** (Reinisch a Galkin 2011), licence **CC BY-NC-SA 4.0**: jen pro nekomerční použití. Služba je stejná jako u *MUF Muncher* od DM6AX.
 

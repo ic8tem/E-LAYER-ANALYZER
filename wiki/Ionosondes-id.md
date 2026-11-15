@@ -8,7 +8,7 @@ Subtab **SPORADIC-E** (sejak versi 0.5.2): **foEs yang diukur** oleh ionosonde j
 
 ## Data
 
-- 63 ionosonde GIRO (daftar ULCAR), dengan **foEs**, **foF2**, dan **MUF(D)** terakhir yang dibaca otomatis dari ionogram.
+- 62 ionosonde GIRO (daftar ULCAR), dengan **foEs**, **foF2**, dan **MUF(D)** terakhir yang dibaca otomatis dari ionogram.
 - Data datang saat tab pertama kali dibuka lalu **setiap 15 menit**, dengan sendirinya (kotak *Perbarui otomatis setiap 15 menit*); *Perbarui sekarang* memintanya segera. Arsip menyimpan 48 jam terakhir di folder `giro` dari data.
 - Data **GIRO** (Reinisch dan Galkin 2011), lisensi **CC BY-NC-SA 4.0**: hanya penggunaan nonkomersial. Layanannya sama dengan *MUF Muncher* dari DM6AX.
 

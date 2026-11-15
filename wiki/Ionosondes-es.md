@@ -8,7 +8,7 @@ Subpestaña de **SPORADIC-E** (desde la versión 0.5.2): la **foEs medida** por 
 
 ## Los datos
 
-- 63 ionosondas GIRO (lista ULCAR), con la última **foEs**, **foF2** y **MUF(D)** leídas automáticamente de los ionogramas.
+- 62 ionosondas GIRO (lista ULCAR), con la última **foEs**, **foF2** y **MUF(D)** leídas automáticamente de los ionogramas.
 - Los datos llegan la primera vez que se abre la pestaña y luego **cada 15 minutos**, solos (casilla *Actualizar solo cada 15 minutos*); *Actualizar ahora* los pide de inmediato. El archivo guarda las últimas 48 horas en la carpeta `giro` de los datos.
 - Datos de **GIRO** (Reinisch y Galkin 2011), licencia **CC BY-NC-SA 4.0**: solo uso no comercial. El servicio es el mismo de *MUF Muncher* de DM6AX.
 

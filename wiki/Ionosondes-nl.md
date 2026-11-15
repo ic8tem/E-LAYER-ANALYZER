@@ -8,7 +8,7 @@ Subtab van **SPORADIC-E** (vanaf versie 0.5.2): de **gemeten foEs** van de ionos
 
 ## De gegevens
 
-- 63 GIRO-ionosondes (ULCAR-lijst), met de laatste **foEs**, **foF2** en **MUF(D)**, automatisch uit de ionogrammen gelezen.
+- 62 GIRO-ionosondes (ULCAR-lijst), met de laatste **foEs**, **foF2** en **MUF(D)**, automatisch uit de ionogrammen gelezen.
 - De gegevens komen binnen bij het eerste openen van het tabblad en daarna **elke 15 minuten**, vanzelf (vakje *Elke 15 minuten vanzelf bijwerken*); *Nu bijwerken* vraagt ze meteen op. Het archief bewaart de laatste 48 uur in de map `giro` van de gegevens.
 - Gegevens van **GIRO** (Reinisch en Galkin 2011), licentie **CC BY-NC-SA 4.0**: alleen niet-commercieel gebruik. De dienst is dezelfde als in *MUF Muncher* van DM6AX.
 

@@ -8,7 +8,7 @@ Subseparador de **SPORADIC-E** (a partir da versão 0.5.2): a **foEs medida** pe
 
 ## Os dados
 
-- 63 ionossondas GIRO (lista ULCAR), com a última **foEs**, **foF2** e **MUF(D)** lidas automaticamente dos ionogramas.
+- 62 ionossondas GIRO (lista ULCAR), com a última **foEs**, **foF2** e **MUF(D)** lidas automaticamente dos ionogramas.
 - Os dados chegam na primeira vez que se abre o separador e depois **a cada 15 minutos**, sozinhos (caixa *Atualizar sozinho a cada 15 minutos*); *Atualizar agora* pede-os de imediato. O arquivo guarda as últimas 48 horas na pasta `giro` dos dados.
 - Dados da **GIRO** (Reinisch e Galkin 2011), licença **CC BY-NC-SA 4.0**: apenas uso não comercial. O serviço é o mesmo do *MUF Muncher* de DM6AX.
 

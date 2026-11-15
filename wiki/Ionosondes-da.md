@@ -8,7 +8,7 @@ Underfane til **SPORADIC-E** (fra version 0.5.2): den **målte foEs** fra ionoso
 
 ## Dataene
 
-- 63 GIRO-ionosonder (ULCAR-listen) med den seneste **foEs**, **foF2** og **MUF(D)** aflæst automatisk fra ionogrammerne.
+- 62 GIRO-ionosonder (ULCAR-listen) med den seneste **foEs**, **foF2** og **MUF(D)** aflæst automatisk fra ionogrammerne.
 - Dataene kommer, første gang fanen åbnes, og derefter **hvert 15. minut** af sig selv (afkrydsningsfeltet *Opdater selv hvert 15. minut*); *Opdater nu* henter dem straks. Arkivet gemmer de seneste 48 timer i mappen `giro` blandt dataene.
 - Data fra **GIRO** (Reinisch og Galkin 2011), licens **CC BY-NC-SA 4.0**: kun ikke-kommerciel brug. Tjenesten er den samme som i *MUF Muncher* af DM6AX.
 
