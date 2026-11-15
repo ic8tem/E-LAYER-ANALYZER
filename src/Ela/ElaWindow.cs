@@ -105,7 +105,9 @@ namespace ELA
             DockPanel.SetDock(lblNtp, Dock.Right); top.Children.Add(lblNtp);
             DockPanel.SetDock(lblUpd, Dock.Right); top.Children.Add(lblUpd);
             DockPanel.SetDock(lblClock, Dock.Right); top.Children.Add(lblClock);
-            top.Children.Add(Ui.Row(brand, Ui.L(Lang.T("Nominativo")), txtCall, Ui.L(Lang.T("Locator")), txtLoc, Ui.L(Lang.T("Quota m")), numAlt, bApply));
+            // modalita' compatta: le scritte spariscono (restano nei fumetti dei campi), cosi' la riga non va a capo a 1366 pixel
+            ToolTip.SetTip(txtCall, Lang.T("Nominativo")); ToolTip.SetTip(txtLoc, Lang.T("Locator")); ToolTip.SetTip(numAlt, Lang.T("Quota m"));
+            top.Children.Add(Ui.Row(brand, Ui.HideCompact(Ui.L(Lang.T("Nominativo"))), txtCall, Ui.HideCompact(Ui.L(Lang.T("Locator"))), txtLoc, Ui.HideCompact(Ui.L(Lang.T("Quota m"))), numAlt, bApply));
             Border topB = new Border { Background = Pal.B(Pal.Panel2), Child = top };
 
             // --- linguette

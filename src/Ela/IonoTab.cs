@@ -65,7 +65,7 @@ namespace ELA
                 if (sel != null) cf.Set("iono_scelta", sel.Code);
                 Draw(); Details();
             };
-            chart = Ui.Fit(new SimpleChart { Title = "", YLabel = "MHz" }, 190, 120);
+            chart = Ui.Fit(new SimpleChart { Title = "", YLabel = "MHz" }, 190, 100);
             txtDet = Ui.Text(12.5);
             ScrollViewer svDet = new ScrollViewer { Content = txtDet, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
             TextBlock credit = new TextBlock
@@ -75,6 +75,7 @@ namespace ELA
             };
 
             Grid bottom = new Grid { RowDefinitions = new RowDefinitions("Auto,*") };
+            bottom.RowDefinitions[1].MinHeight = 110;   // la MUF dell'E-sporadico resta leggibile anche in modalita' compatta
             Border chartBox = Ui.Box(Lang.T("Ultime 24 ore della ionosonda scelta"), Pal.Azure, chart);
             Grid.SetRow(chartBox, 0); bottom.Children.Add(chartBox);
             Border detBox = Ui.Box(Lang.T("MUF dell'E-sporadico e bande (legge della secante)"), Pal.Yellow, svDet);
