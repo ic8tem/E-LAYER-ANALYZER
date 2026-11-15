@@ -72,7 +72,8 @@ namespace ELA
                 Draw(); Detail();
             };
             txtSq = Ui.Text(12.5);
-            ScrollViewer svSq = new ScrollViewer { Content = txtSq, Height = 210, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
+            ScrollViewer svSq = new ScrollViewer { Content = txtSq, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
+            Ui.Fit(svSq, 210, 130);
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(bOpen, bLotw, bClear), Dock.Top);

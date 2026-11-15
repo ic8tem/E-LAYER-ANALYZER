@@ -71,17 +71,22 @@ namespace YAMS
             Grid.SetColumn(mapHost, 0); g.Children.Add(mapHost);
 
             StackPanel side = new StackPanel { Spacing = 6, Margin = new Thickness(10, 8, 10, 8) };
-            side.Children.Add(new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) });
-            side.Children.Add(new TextBlock
+            TextBlock trTitle = new TextBlock { Text = Lang.T("Traffico meteor scatter in diretta"), FontSize = 17, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Azure) };
+            side.Children.Add(trTitle);
+            TextBlock trDesc1, trDesc2;
+            side.Children.Add(trDesc1 = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
                 Text = Lang.T("Spot della linguetta \"Raccolta dati\". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.")
             });
-            side.Children.Add(new TextBlock
+            side.Children.Add(trDesc2 = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Muted), FontSize = 12,
                 Text = Lang.T("Si vedono gli spot di tutte le bande, anche di quelle non scelte nella Raccolta dati (quelli non si memorizzano). Gli spot CW e quelli tra stazioni troppo vicine non si vedono, se sono scartati nella Raccolta dati.")
             });
+            // modalita' compatta: le due descrizioni spariscono e restano nel fumetto del titolo (MainWindow.Compatta.cs)
+            ToolTip.SetTip(trTitle, new TextBlock { Text = trDesc1.Text + "\n\n" + trDesc2.Text, TextWrapping = TextWrapping.Wrap, MaxWidth = 460 });
+            compactHidden.Add(trDesc1); compactHidden.Add(trDesc2);
             sldTrafficRadius = new Slider { Minimum = 600, Maximum = 3500, Value = traffic.RadiusKm, Width = 220, VerticalAlignment = VerticalAlignment.Center };
             lblTrafficRadius = new TextBlock { VerticalAlignment = VerticalAlignment.Center, FontWeight = FontWeight.SemiBold, Foreground = Pal.B(Pal.Fore) };
             sldTrafficRadius.ValueChanged += (s, e) => { traffic.RadiusKm = Math.Round(sldTrafficRadius.Value / 50) * 50; RefreshTraffic(true); };
@@ -358,7 +363,7 @@ namespace YAMS
             lblTrafficCount.Text = Lang.F("{0} contatti sulla mappa · {1} fuori dalla mappa · {2} senza locator", list.Count, outside, noLoc)
                                    + (chkTrafficListeners != null && chkTrafficListeners.IsChecked == true
                                       ? "\n" + Lang.F("{0} stazioni in ascolto (PSKReporter MQTT)", nLis)
-                                        + (PskActive.Enabled ? " · " + Lang.F("{0} solo monitor attivi", nMon) + (PskActive.LastError.Length > 0 ? " · " + Lang.F("mappa di PSKReporter non raggiungibile: {0}", PskActive.LastError) : "") : "")
+                                        + (PskActive.Enabled ? " · " + Lang.F("{0} solo monitor attivi", nMon) + (PskActive.LastError.Length > 0 ? " · " + ((PskActive.OtherInstance || DateTime.UtcNow < PskActive.PauseUntilUtc) ? "PSKReporter: " + PskActive.LastError : Lang.F("mappa di PSKReporter non raggiungibile: {0}", PskActive.LastError)) : "") : "")
                                         + (PskMqtt.Connected ? "" : " · " + Lang.T("MQTT non connesso: si connette dalla linguetta \"Raccolta dati\"")) : "");
             int sig = list.Count; foreach (TrafficSpot t in list) if (t.Color == Ft8IsoColor) sig += 100000;
             if (sig != trafficSpotCount || force)

@@ -59,8 +59,8 @@ namespace ELA
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Log")), cmbSet), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("tolleranza 3°, rifrazione 4/3, IGRF-14"))), Dock.Top);
-            Ui.Dock(right, Ui.Box(Lang.T("Riepilogo"), Pal.Green, new ScrollViewer { Content = txtSum, Height = 190 }), Dock.Top);
-            Ui.Dock(right, Ui.Box(Lang.T("Dettagli del QSO scelto"), Pal.Azure, new ScrollViewer { Content = txtDet, Height = 150 }), Dock.Bottom);
+            Ui.Dock(right, Ui.Box(Lang.T("Riepilogo"), Pal.Green, Ui.Fit(new ScrollViewer { Content = txtSum }, 190, 120)), Dock.Top);
+            Ui.Dock(right, Ui.Box(Lang.T("Dettagli del QSO scelto"), Pal.Azure, Ui.Fit(new ScrollViewer { Content = txtDet }, 150, 100)), Dock.Bottom);
             right.Children.Add(Ui.Box(Lang.T("QSO di aurora (dati del banco di prova)"), Pal.Azure, tQso));
 
             map.SetView(-25, 35, 40, 68);

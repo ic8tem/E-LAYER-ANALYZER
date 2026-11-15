@@ -13,6 +13,44 @@ namespace ELA
 {
     public static class Ui
     {
+        // --- modalita' compatta per schermi bassi (dalla 0.5.2, come la modalita' compatta di YA-MS 1.8.20; richiesta
+        //     dell'autore, 15/11/2026, per i notebook da 13-15 pollici): i riquadri di altezza fissa si accorciano e le
+        //     righe di sola spiegazione spariscono. La decisione la prende ElaWindow (finestra bassa meno di 850 pixel).
+        public static bool Compact;
+        static readonly List<Tuple<WeakReference<Control>, double, double>> fits = new List<Tuple<WeakReference<Control>, double, double>>();
+        static readonly List<WeakReference<Control>> hides = new List<WeakReference<Control>>();
+
+        // altezza normale e altezza compatta di un riquadro
+        public static T Fit<T>(T c, double normal, double compact) where T : Control
+        {
+            c.Height = Compact ? compact : normal;
+            lock (fits) fits.Add(Tuple.Create(new WeakReference<Control>(c), normal, compact));
+            return c;
+        }
+
+        // riga di sola spiegazione: nascosta in modalita' compatta
+        public static T HideCompact<T>(T c) where T : Control
+        {
+            c.IsVisible = !Compact;
+            lock (hides) hides.Add(new WeakReference<Control>(c));
+            return c;
+        }
+
+        public static void SetCompact(bool on)
+        {
+            Compact = on;
+            lock (fits)
+            {
+                fits.RemoveAll(t => { Control c; return !t.Item1.TryGetTarget(out c); });
+                foreach (Tuple<WeakReference<Control>, double, double> t in fits) { Control c; if (t.Item1.TryGetTarget(out c)) c.Height = on ? t.Item3 : t.Item2; }
+            }
+            lock (hides)
+            {
+                hides.RemoveAll(w => { Control c; return !w.TryGetTarget(out c); });
+                foreach (WeakReference<Control> w in hides) { Control c; if (w.TryGetTarget(out c)) c.IsVisible = !on; }
+            }
+        }
+
         public static TextBlock L(string t)
         {
             TextBlock l = new TextBlock { Text = t };

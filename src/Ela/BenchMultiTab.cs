@@ -94,7 +94,8 @@ namespace ELA
             tQso.ColumnWidths.AddRange(new double[] { 28, 84, 46, 84, 70, 54, 40, 52 });
             tQso.RowClicked += i => { if (i >= 0 && i < tQso.Rows.Count) { sel = tQso.Rows[i].Tag as BenchQso; hover = sel; Draw(); Details(); } };
             txtDet = Ui.Text(12.5);
-            ScrollViewer svDet = new ScrollViewer { Content = txtDet, Height = 230, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            ScrollViewer svDet = new ScrollViewer { Content = txtDet, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            Ui.Fit(svDet, 230, 140);
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             TextBlock st1 = Ui.L(Lang.T("Stazione 1")); st1.Foreground = Pal.B(SetColor(0)); chk2.Foreground = Pal.B(SetColor(1));

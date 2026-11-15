@@ -7,11 +7,17 @@
 // 5 minuti voluto dall'autore, 14/11/2026), solo da 28 a 440 MHz (frange), ultimi 15 minuti; rptlimit=1 perche' i
 // rapporti arrivano gia' da MQTT. Dei monitor si tengono quelli in MSK144, FSK441, PSK2K e JTMS.
 // I monitor trovati entrano in MsCollector.Listeners (triangoli del Traffico in diretta) con Count = 0.
+// Rispetto del servizio (15/11/2026, errore 429 "Too Many Requests" visto sul notebook dell'autore):
+//  - dopo un 429 le richieste si sospendono per 30 minuti; la pausa e' scritta in data/pskreporter_pausa.txt e vale
+//    anche se il programma viene riavviato;
+//  - una sola copia di YA-MS per utente interroga il servizio (mutex con nome): se ne gira gia' un'altra (anche
+//    dentro E-LAYER ANALYZER) questa non manda richieste.
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
+using System.Net;
 using System.Threading;
 using System.Xml;
 
@@ -31,6 +37,10 @@ namespace YAMS
         public static DateTime LastOkUtc;
         public static DateTime SelfSeenUtc;   // il mio nominativo tra chi manda rapporti, con un programma che non e' YA-MS (PskRelay)
         public static string LastError = "";
+        public static DateTime PauseUntilUtc;     // dopo un 429: niente richieste fino a quest'ora
+        public static bool OtherInstance;         // un'altra copia di YA-MS fa gia' le richieste
+        static Mutex single;
+        static string PauseFile { get { return Path.Combine(AppPaths.DataDir, "pskreporter_pausa.txt"); } }
 
         static readonly object lk = new object();
         static readonly List<PskMonitor> pending = new List<PskMonitor>();
@@ -40,6 +50,20 @@ namespace YAMS
         public static void Start()
         {
             if (timer != null) return;
+            try
+            {
+                bool created;
+                single = new Mutex(true, "YA-MS-PskActive-" + Environment.UserName, out created);
+                if (!created) { single.Dispose(); single = null; OtherInstance = true; }
+            }
+            catch { }
+            try
+            {
+                DateTime t;
+                if (File.Exists(PauseFile) && DateTime.TryParse(File.ReadAllText(PauseFile).Trim(), CultureInfo.InvariantCulture,
+                        DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out t)) PauseUntilUtc = t;
+            }
+            catch { }
             timer = new Timer(Tick, null, TimeSpan.FromSeconds(20), TimeSpan.FromMinutes(5));
         }
 
@@ -47,6 +71,7 @@ namespace YAMS
         {
             Timer t = timer; timer = null;
             if (t != null) t.Dispose();
+            try { if (single != null) { single.ReleaseMutex(); single.Dispose(); single = null; } } catch { }
         }
 
         // monitor arrivati dall'ultima chiamata (thread dell'interfaccia, da MsCollector.Process)
@@ -62,7 +87,14 @@ namespace YAMS
 
         static void Tick(object st)
         {
-            if (!(Enabled || PskRelay.Enabled) || Interlocked.Exchange(ref busy, 1) == 1) return;
+            if (!(Enabled || PskRelay.Enabled)) return;
+            if (OtherInstance) { LastError = Lang.T("un'altra copia di YA-MS sta già interrogando PSKReporter"); return; }
+            if (DateTime.UtcNow < PauseUntilUtc)
+            {
+                LastError = Lang.F("troppe richieste (429): nuova prova alle {0} UTC", PauseUntilUtc.ToString("HH:mm", CultureInfo.InvariantCulture));
+                return;
+            }
+            if (Interlocked.Exchange(ref busy, 1) == 1) return;
             try { Fetch(); }
             finally { busy = 0; }
         }
@@ -87,6 +119,13 @@ namespace YAMS
                     if (pending.Count > 20000) pending.RemoveRange(0, pending.Count - 20000);
                 }
                 LastOkUtc = DateTime.UtcNow; LastError = "";
+            }
+            catch (HttpRequestException hx) when (hx.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                Errors++;
+                PauseUntilUtc = DateTime.UtcNow.AddMinutes(30);
+                LastError = Lang.F("troppe richieste (429): nuova prova alle {0} UTC", PauseUntilUtc.ToString("HH:mm", CultureInfo.InvariantCulture));
+                try { File.WriteAllText(PauseFile, PauseUntilUtc.ToString("o", CultureInfo.InvariantCulture)); } catch { }
             }
             catch (Exception ex) { Errors++; LastError = ex.Message; }
         }

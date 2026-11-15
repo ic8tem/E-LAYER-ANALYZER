@@ -153,11 +153,11 @@ namespace ELA
                 Text = Lang.T("A e B: nominativo (cercato in CALL3) e/o locator; A vuoto = la mia stazione. Clic sinistro sulla mappa = punto di riflessione da verificare (iso-riflessione); clic destro = posizione di B. \"Verifica il punto consigliato\" mostra le linee di iso-riflessione sullo scatter point proposto dal programma."),
                 Foreground = Pal.B(Pal.Muted), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3), FontSize = 11.5
             };
-            Ui.Dock(right, help, Dock.Top);
+            Ui.Dock(right, Ui.HideCompact(help), Dock.Top);   // modalita' compatta: la spiegazione sparisce
             if (aurora)
             {
                 lblSw = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3) };
-                kpChart = new SimpleChart { Height = 120, Title = "Kp" };
+                kpChart = Ui.Fit(new SimpleChart { Title = "Kp" }, 120, 80);
                 Button bFetch = Ui.B(Lang.T("Scarica NOAA adesso"));
                 bFetch.Click += (s, e) => StartFetch();
                 StackPanel sw = new StackPanel();
@@ -167,7 +167,7 @@ namespace ELA
             }
             ScrollViewer svRes = new ScrollViewer { Content = txtRes, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
             Border spotBox = Ui.Box(aurora ? Lang.T("Spot aurora (AU)") : Lang.T("Spot F.A.I."), Pal.Orange, tSpots);
-            spotBox.Height = 190;
+            Ui.Fit(spotBox, 190, 120);
             Ui.Dock(right, spotBox, Dock.Bottom);
             right.Children.Add(Ui.Box(Lang.T("Risultati"), Pal.Azure, svRes));
 

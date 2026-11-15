@@ -179,6 +179,7 @@ namespace YAMS
             BuildTabs();
             root.Children.Add(tabs.Host);   // riempie lo spazio restante
             Content = root;
+            if (!Hosted) InitCompact(root);   // E-LAYER ANALYZER: decide la finestra di E-LAYER (HostCompact)   // modalita' compatta per schermi bassi (MainWindow.Compatta.cs)
 
             timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             timer.Tick += OnTick;
@@ -967,6 +968,9 @@ namespace YAMS
 
             // --- Spiegazione del calcolo dell'efficienza (MainWindow.Spiegazione.cs)
             BuildExplainTab();
+
+            // --- Crediti: autore, contatti, licenza GPL-3.0 e schede dei crediti (MainWindow.Crediti.cs)
+            BuildCreditsTab();
 
             EndGroup();
 

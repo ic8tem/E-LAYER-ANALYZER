@@ -94,7 +94,9 @@ namespace ELA
             root.Children.Add(Section(Lang.T("Aspetto"), Pal.Violet,
                 Ui.Row(Ui.L(Lang.T("Lingua")), cLang, Ui.L(Lang.T("Tema")), cTheme),
                 Ui.Row(Ui.L(Lang.T("Carattere")), sFont, lblFont),
-                Txt(Lang.T("La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano."), true)));
+                Ui.Row(Ui.L(Lang.T("Modalità compatta")), CompactCombo()),
+                Txt(Lang.T("La dimensione del carattere vale per tutto il programma, dall'85 al 140 %, come in YA-MS. Lingua e tema ricostruiscono la finestra: le impostazioni e gli spot restano."), true),
+                Txt(Lang.T("La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel."), true)));
 
             // continente
             ComboBox cCont = Ui.Combo(Array.ConvertAll(Continents.Names, n => Lang.T(n)), Continents.Index, 170);
@@ -128,6 +130,19 @@ namespace ELA
                 Ui.Row(bData, Ui.L(AppPaths.DataDir)),
                 Txt(Lang.T("Tutti i dati del programma stanno nella cartella data accanto al programma (niente in AppData). Gli spot raccolti si cancellano alla chiusura del programma. La chiave API del Bureau of Meteorology si inserisce in DATA COLLECTION, Dati di propagazione."), true)));
             return root;
+        }
+
+        // modalita' compatta (dalla 0.5.2): stessa chiave e stesse scelte della modalita' compatta di YA-MS 1.8.20
+        ComboBox CompactCombo()
+        {
+            ComboBox c = Ui.Combo(new[] { Lang.T("automatica (finestra alta meno di 850 pixel)"), Lang.T("sempre"), Lang.T("mai") }, Math.Max(0, Math.Min(2, ElaWindow.CompactMode)), 260);
+            c.SelectionChanged += (s, e) =>
+            {
+                if (c.SelectedIndex < 0) return;
+                Station.Cfg.Set("modalita_compatta", c.SelectedIndex); Station.Save();
+                win.CompactModeChanged();
+            };
+            return c;
         }
 
         void SetFont(double pct)

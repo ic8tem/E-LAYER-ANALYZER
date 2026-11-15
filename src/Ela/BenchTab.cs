@@ -107,8 +107,8 @@ namespace ELA
             inner.Add(Lang.T("Calcoli proposti"), svCalc);
             inner.Add("QSO", tQso);
 
-            Border boxDays = Ui.Box(Lang.T("QSO per giornata"), Pal.Azure, tDays); boxDays.Height = 175;
-            Border boxHours = Ui.Box(Lang.T("Orari della giornata (clic: QSO di quell'ora)"), Pal.Azure, tHours); boxHours.Height = 175;
+            Border boxDays = Ui.Box(Lang.T("QSO per giornata"), Pal.Azure, tDays); Ui.Fit(boxDays, 175, 120);
+            Border boxHours = Ui.Box(Lang.T("Orari della giornata (clic: QSO di quell'ora)"), Pal.Azure, tHours); Ui.Fit(boxHours, 175, 120);
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(bLoad, bUnload, lblFile), Dock.Top);

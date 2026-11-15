@@ -663,7 +663,8 @@ namespace ELA
             lblState = new TextBlock { Text = Lang.T("Non connesso"), Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             lblCounts = new TextBlock { Foreground = Pal.B(Pal.Green), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
             console = new SelectableTextBlock { FontFamily = Pal.Mono, FontSize = 11.5, Foreground = Pal.B(Pal.CodeText), TextWrapping = TextWrapping.NoWrap };
-            sv = new ScrollViewer { Content = console, Height = 170, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            sv = new ScrollViewer { Content = console, Background = Pal.B(Pal.CodeBack), HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            Ui.Fit(sv, 170, 110);
             txtSend = Ui.T("", 300, false);
             txtSend.Watermark = Lang.T("comando da inviare (es. sh/dx 20)");
             Button bSend = Ui.B(Lang.T("Invia"));
@@ -673,7 +674,7 @@ namespace ELA
             StackPanel sp = new StackPanel();
             sp.Children.Add(Ui.Row(Ui.L(Lang.T("Host")), txtHost, Ui.L(Lang.T("Porta")), numPort, Ui.L(Lang.T("Login")), txtLogin, Ui.L(Lang.T("Comandi dopo il login")), txtCmds));
             sp.Children.Add(Ui.Row(bConn, bDisc, chkAuto, chkStart, lblState, lblCounts));
-            sp.Children.Add(new TextBlock { Text = Lang.T(def[4]), Foreground = Pal.B(Pal.Muted), FontSize = 11.5, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) });
+            sp.Children.Add(Ui.HideCompact(new TextBlock { Text = Lang.T(def[4]), Foreground = Pal.B(Pal.Muted), FontSize = 11.5, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) }));
             sp.Children.Add(sv);
             sp.Children.Add(Ui.Row(txtSend, bSend));
             Color[] cols = { Pal.Azure, Pal.Violet, Pal.Orange };

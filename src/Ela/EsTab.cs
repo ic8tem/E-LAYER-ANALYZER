@@ -119,7 +119,8 @@ namespace ELA
             inner.Add(Lang.T("Precursori multi-salto"), tPre);
 
             txtDet = Ui.Text(12.5);
-            ScrollViewer svDet = new ScrollViewer { Content = txtDet, Height = 250, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            ScrollViewer svDet = new ScrollViewer { Content = txtDet, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
+            Ui.Fit(svDet, 250, 150);
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Bande")), c10, c8, c6, c4, c2, cmbWin), Dock.Top);

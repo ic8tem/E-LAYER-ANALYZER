@@ -20,6 +20,7 @@ namespace YAMS
         static readonly int[] Horizons = { 0, 1, 3, 6, 12, 24 };
         TextBlock[] hzText;
         Border[] hzCard;
+        string hzTip = "";
 
         Control BuildHorizonBand()
         {
@@ -37,6 +38,7 @@ namespace YAMS
                 string title = h == 0 ? Lang.T("ADESSO") : h == 1 ? Lang.T("TRA 1 ORA") : Lang.F("TRA {0} ORE", h);
                 Border c = Card(title, h == 0 ? Pal.Green : Pal.Orange, out hzText[k]);
                 ToolTip.SetTip(c, tip);
+                hzTip = tip;
                 hzCard[k] = c;
                 Grid.SetColumn(c, 2 + k);
                 g.Children.Add(c);
@@ -78,7 +80,15 @@ namespace YAMS
                 string l2 = idx > 0.05 ? Lang.F("lato {0} · {1}", wa >= wb ? "A" : "B", top) : Lang.T("nessuno sciame utile");
                 double fc = ForecastAt(hNow.AddHours(Horizons[k]));
                 string l3 = fc >= 0 ? Lang.F("{0:F0} rifl./ora previste", fc) : (k == 0 && recommendShort.Length > 0 ? recommendShort.Trim() : "");
-                hzText[k].Text = when + " UTC\n" + Lang.F("indice {0:F1}", idx) + "\n" + l2 + (l3.Length > 0 ? "\n" + l3 : "");
+                string full = when + " UTC\n" + Lang.F("indice {0:F1}", idx) + "\n" + l2 + (l3.Length > 0 ? "\n" + l3 : "");
+                if (compact)
+                {
+                    // modalita' compatta (MainWindow.Compatta.cs): due righe brevi, il testo completo nel fumetto
+                    string side = idx > 0.05 ? (wa >= wb ? "A" : "B") + " · " + top : "-";
+                    hzText[k].Text = when + " · " + idx.ToString("F1") + "\n" + side + (fc >= 0 ? " · " + fc.ToString("F0") + "/h" : "");
+                }
+                else hzText[k].Text = full;
+                ToolTip.SetTip(hzCard[k], new TextBlock { Text = full + "\n\n" + hzTip, TextWrapping = TextWrapping.Wrap, MaxWidth = 380 });
             }
         }
     }

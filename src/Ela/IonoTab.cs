@@ -65,7 +65,7 @@ namespace ELA
                 if (sel != null) cf.Set("iono_scelta", sel.Code);
                 Draw(); Details();
             };
-            chart = new SimpleChart { Height = 190, Title = "", YLabel = "MHz" };
+            chart = Ui.Fit(new SimpleChart { Title = "", YLabel = "MHz" }, 190, 120);
             txtDet = Ui.Text(12.5);
             ScrollViewer svDet = new ScrollViewer { Content = txtDet, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
             TextBlock credit = new TextBlock
@@ -85,7 +85,7 @@ namespace ELA
             Control r1 = Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, Ui.L(Lang.T("Spot entro km")), numRadius);
             Grid.SetRow(r0, 0); Grid.SetRow(r1, 1); Grid.SetRow(lblStatus, 2);
             TextBlock hint = new TextBlock { Text = Lang.T("Clic su una ionosonda (tabella o mappa) per il grafico e la MUF dell'E-sporadico."), Foreground = Pal.B(Pal.Muted), Margin = new Thickness(6, 0, 6, 2), TextWrapping = TextWrapping.Wrap };
-            Grid.SetRow(hint, 3);
+            Grid.SetRow(Ui.HideCompact(hint), 3);
             Grid.SetRow(tSt, 4);
             GridSplitter sp = new GridSplitter { Background = Pal.B(Pal.Track), ResizeDirection = GridResizeDirection.Rows };
             Grid.SetRow(sp, 5);

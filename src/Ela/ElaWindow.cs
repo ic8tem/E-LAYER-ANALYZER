@@ -44,6 +44,7 @@ namespace ELA
             if (Station.Cfg == null) Station.Load(dataDir);
             Title = AppName + " " + Version + " - " + Lang.T("a cura di Costantino IC8TEM") + (Station.Call.Length > 0 && Station.Call != "IC8TEM" ? " " + Lang.F("per {0}", Station.Call) : "");
             Width = 1600; Height = 980;
+            if (Program.ShotW > 0) { Width = Program.ShotW; Height = Program.ShotH; }
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Background = Pal.B(Pal.Back);
             Foreground = Pal.B(Pal.Fore);
@@ -188,6 +189,7 @@ namespace ELA
             DockPanel.SetDock(sb, Dock.Bottom); root.Children.Add(sb);
             root.Children.Add(tabs.Host);
             Content = root;
+            root.SizeChanged += (s, e) => EvalCompact(e.NewSize.Height);   // modalita' compatta (dalla 0.5.2)
             Tips.Apply(root);   // fumetti esplicativi su linguette, pulsanti, caselle ed etichette
             tabs.Select(Math.Max(0, Math.Min(tabs.Count - 1, sel)));
 
@@ -283,12 +285,50 @@ namespace ELA
             catch { }
         }
 
+        // --- modalita' compatta per schermi bassi (dalla 0.5.2, come YA-MS 1.8.20): automatica quando la finestra e' alta meno
+        //     di 850 pixel (si spegne sopra 900), oppure sempre o mai (IMPOSTAZIONI > Aspetto). Vale anche per METEOR SCATTER.
+        public const double CompactOn = 850, CompactOff = 900;
+        public static int CompactMode { get { return Station.Cfg != null ? (int)Station.Cfg.GetD("modalita_compatta", 0) : 0; } }
+        bool compactDecided;
+
+        void EvalCompact(double h)
+        {
+            if (h <= 0) return;
+            int m = CompactMode;
+            bool on = m == 1 || (m == 0 && (Ui.Compact ? h < CompactOff : h < CompactOn));
+            if (on == Ui.Compact && compactDecided) return;
+            compactDecided = true;
+            Dispatcher.UIThread.Post(() => ApplyCompact(on));
+        }
+
+        void ApplyCompact(bool on)
+        {
+            Ui.SetCompact(on);
+            try { if (ms != null) ms.HostCompact(on); } catch { }
+        }
+
+        // cambio dell'impostazione (IMPOSTAZIONI > Aspetto)
+        public void CompactModeChanged()
+        {
+            int m = CompactMode;
+            double h = Content is Control c ? c.Bounds.Height : 0;
+            ApplyCompact(m == 1 || (m == 0 && h > 0 && h < CompactOn));
+        }
+
         void OnOpened(object sender, EventArgs e)
         {
             UiScale.Apply(this);
             if (!startedOnce)
             {
                 startedOnce = true;
+                // schermo piu' piccolo della finestra (notebook da 13-15 pollici): finestra ingrandita a tutto schermo
+                try
+                {
+                    Avalonia.Platform.Screen sc = Program.ScreenshotDir == null ? (Screens.ScreenFromVisual(this) ?? Screens.Primary) : null;
+                    if (sc != null && WindowState == WindowState.Normal && (Height > sc.WorkingArea.Height / sc.Scaling || Width > sc.WorkingArea.Width / sc.Scaling))
+                        WindowState = WindowState.Maximized;
+                }
+                catch { }
                 string dataDir = AppPaths.DataDir;
                 if (!Igrf.Loaded) Igrf.Load(dataDir, DateTime.UtcNow);
                 if (Program.ScreenshotDir == null) Igrf.CheckUpdateSilent(dataDir, Station.Cfg);   // nuova generazione IGRF, senza chiedere

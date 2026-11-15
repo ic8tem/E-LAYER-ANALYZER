@@ -8,6 +8,7 @@ namespace ELA
     internal static class Program
     {
         public static string ScreenshotDir, ScreenshotLoc, ThemeArg, AuroraA, AuroraB;
+        public static int ShotW, ShotH;   // --dimensione LxA: finestra di prova (fotografie della modalita' compatta)
 
         [STAThread]
         public static void Main(string[] args)
@@ -19,6 +20,12 @@ namespace ELA
                 if (args[i] == "--aurora" && i + 2 < args.Length) { AuroraA = args[i + 1]; AuroraB = args[i + 2]; }
                 if (args[i] == "--colori") ThemeArg = args[i + 1];
                 if (args[i] == "--lingua") YAMS.Program.ScreenshotLang = args[i + 1];
+                if (args[i] == "--dimensione")
+                {
+                    string[] p = args[i + 1].ToLowerInvariant().Split('x');
+                    int w, h;
+                    if (p.Length == 2 && int.TryParse(p[0], out w) && int.TryParse(p[1], out h)) { ShotW = w; ShotH = h; }
+                }
             }
             try
             {

@@ -55,6 +55,19 @@ namespace YAMS
                 lg.SelectionChanged += (s, e) => { if (lg.SelectedIndex >= 0 && lg.SelectedIndex != cmbLang.SelectedIndex) cmbLang.SelectedIndex = lg.SelectedIndex; };
                 look.Add(Row(L(Lang.T("Tema")), th, L(Lang.T("Lingua dell'interfaccia")), lg));
             }
+            // modalita' compatta per schermi bassi (MainWindow.Compatta.cs)
+            ComboBox cmp = new ComboBox { ItemsSource = new[] { Lang.T("automatica (finestra alta meno di 850 pixel)"), Lang.T("sempre"), Lang.T("mai") }, MinWidth = 260 };
+            cmp.SelectedIndex = Math.Max(0, Math.Min(2, CompactMode));
+            ToolTip.SetTip(cmp, Lang.T("La modalità compatta ripiega all'avvio le righe dei comandi, accorcia la fascia degli orizzonti e nasconde le descrizioni lunghe (restano nei fumetti): utile sui notebook da 13-15 pollici."));
+            cmp.SelectionChanged += (s, e) =>
+            {
+                if (cmp.SelectedIndex < 0) return;
+                cfg.Set("modalita_compatta", cmp.SelectedIndex);
+                double h = compactRoot != null ? compactRoot.Bounds.Height : 0;
+                int m = cmp.SelectedIndex;
+                ApplyCompact(m == 1 || (m == 0 && h > 0 && h < CompactOn));
+            };
+            look.Add(Row(L(Lang.T("Modalità compatta")), cmp));
             if (Hosted) col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.")));   // E-LAYER ANALYZER (tools/sync_yams.py)
             else col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Tema e lingua sono anche in alto a destra, accanto alle linguette."), look.ToArray()));
 

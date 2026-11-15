@@ -96,7 +96,7 @@ namespace ELA
             tCells.HeaderTips = new[] { Lang.T("Angolo sud-ovest della cella (latitudine, longitudine) e locator del centro"), Lang.T("La foEs minima più alta fra i collegamenti che riflettono nella cella (MHz)"),
                 Lang.T("Densità elettronica minima dello strato, 1,24e10 x foEs^2 elettroni al metro cubo"), Lang.T("Collegamenti con un punto di riflessione nella cella in questo passo"), "" };
             tCells.RowClicked += i => { if (i >= 0 && i < tCells.Rows.Count) { selCell = tCells.Rows[i].Tag as Cell; Draw(); } };
-            chart = new SimpleChart { Height = 160, YLabel = "MHz", Y2Label = Lang.T("celle") };
+            chart = Ui.Fit(new SimpleChart { YLabel = "MHz", Y2Label = Lang.T("celle") }, 160, 110);
             txtSum = Ui.Text(12.5);
             ScrollViewer svSum = new ScrollViewer { Content = txtSum, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
 

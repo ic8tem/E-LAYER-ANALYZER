@@ -337,6 +337,28 @@ if os.path.exists(p):
     s = rep(s, A, '            if (Hosted) col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.")));   // E-LAYER ANALYZER (tools/sync_yams.py)\n            else ' + A.strip(), 'Aspetto nelle Impostazioni di YA-MS')
     wr(p, s)
 
+# --- Modalita' compatta di YA-MS (dalla 1.8.20, E-LAYER 0.5.2): dentro E-LAYER ANALYZER decide la finestra di E-LAYER
+#     (altezza della finestra intera, non del pannello METEOR SCATTER) e la passa al pannello con HostCompact
+p = os.path.join(ui, 'MainWindow.Compatta.cs')
+if os.path.exists(p):
+    s = rd(p)
+    s = rep(s, '        void EvalCompact(double h)\n', """        // E-LAYER ANALYZER (tools/sync_yams.py): dentro E-LAYER la modalita' compatta la decide la finestra di E-LAYER
+        // (altezza della finestra intera, impostazione in IMPOSTAZIONI > Aspetto) e arriva qui
+        public void HostCompact(bool on)
+        {
+            bool first = !compactDecided;
+            compactDecided = true;
+            if (first && on) SetRowsVisible(false, false);   // solo la prima volta: poi decide "Comandi"
+            if (on != compact || first) ApplyCompact(on);
+        }
+
+        void EvalCompact(double h)
+""", 'HostCompact in MainWindow.Compatta.cs')
+    wr(p, s)
+    p = os.path.join(ui, 'MainWindow.cs'); s = rd(p)
+    s = rep(s, '            InitCompact(root);', '            if (!Hosted) InitCompact(root);   // E-LAYER ANALYZER: decide la finestra di E-LAYER (HostCompact)', 'InitCompact in MainWindow.cs')
+    wr(p, s)
+
 # --- Temi di IP-TRX-CTRL (e colori in piu' di YAEC) aggiunti agli schemi di YA-MS (dalla 0.5.0, tools/temi_ip.py)
 import subprocess
 subprocess.check_call([sys.executable, os.path.join(EL, 'tools', 'temi_ip.py')])
