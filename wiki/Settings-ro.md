@@ -9,7 +9,7 @@ Din versiunea 0.4.18 fila **SETĂRI** reunește opțiunile generale ale programu
 | Secțiune | Ce se setează |
 |---|---|
 | Stație | Indicativul, locatorul și altitudinea, aceleași ca în bara de sus; **Aplică** le confirmă pentru toate filele. |
-| Aspect | Limba, schema de culori (schemele YAEC și YA-MS și, din versiunea 0.5.0, cele șase teme ale IP-TRX-CTRL: Luminos, Noapte, Negru, Albastru, Violet, Verde) și **dimensiunea fontului întregului program** (85-140 %, ca în YA-MS). Limba și culorile reconstruiesc fereastra: setările și spoturile se păstrează. |
+| Aspect | Limba, schema de culori (schemele YAEC și YA-MS și, din versiunea 0.5.0, cele șase teme ale IP-TRX-CTRL: Luminos, Noapte, Negru, Albastru, Violet, Verde), **modul compact** pentru laptopurile de 13-15 inci (din 0.5.2: automat sub 850 de pixeli înălțime, întotdeauna sau niciodată) și **dimensiunea fontului întregului program** (85-140 %, ca în YA-MS). Limba și culorile reconstruiesc fereastra: setările și spoturile se păstrează. |
 | Hărți și date de prognoză | Continentul, același meniu ca în bara filelor. |
 | Ora | Starea NTP și diferența dintre ora serverelor și ceasul PC-ului. |
 | Actualizări | Verificarea pe GitHub la pornire și la fiecare 30 de minute, actualizarea automată și silențioasă, butonul **Verifică acum**. Actualizările automate nu sunt valabile pentru pachetele de sistem (.deb, .rpm, Arch, Slackware). |

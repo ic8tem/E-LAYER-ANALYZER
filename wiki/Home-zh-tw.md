@@ -38,3 +38,7 @@
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER*（YA-MS 的資料來源）。
 
 完整清單在程式的 資料來源 頁籤中。
+
+## 授權
+
+E-LAYER ANALYZER 是自由軟體，授權為 **GNU GPL-3.0**（COPYING 檔案），與 YA-MS 相同。不提供任何擔保。外部來源的資料仍屬於各自的機構，並依其條件使用（例如 GIRO 資料：CC BY-NC-SA 4.0，僅限非商業用途）。

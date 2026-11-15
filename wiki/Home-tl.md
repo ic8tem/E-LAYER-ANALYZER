@@ -38,3 +38,7 @@ Ang **E-LAYER ANALYZER** ay isang libreng programa para sa mga radio amateur na 
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (sanggunian ng YA-MS).
 
 Nasa tab na MGA SANGGUNIAN ng programa ang buong listahan.
+
+## Lisensiya
+
+Ang E-LAYER ANALYZER ay malayang software, may lisensiyang **GNU GPL-3.0** (file na COPYING), kapareho ng YA-MS. Ipinamamahagi ito nang walang anumang garantiya. Ang datos ng mga panlabas na sanggunian ay nananatiling pag-aari ng kani-kaniyang institusyon, ayon sa sarili nilang mga kondisyon (halimbawa, ang datos ng GIRO: CC BY-NC-SA 4.0, para lamang sa hindi pangkomersiyal na gamit).

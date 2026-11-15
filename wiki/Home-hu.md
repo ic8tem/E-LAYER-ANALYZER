@@ -38,3 +38,7 @@ Az **E-LAYER ANALYZER** ingyenes program rádióamatőrök számára, amely az i
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (a YA-MS forrása).
 
 A teljes lista a program FORRÁSOK fülén található.
+
+## Licenc
+
+Az E-LAYER ANALYZER szabad szoftver, **GNU GPL-3.0** licenccel (COPYING fájl), ugyanazzal, mint a YA-MS. Mindenféle garancia nélkül terjesztik. A külső források adatai az illetékes intézményeké maradnak, saját feltételeikkel (például a GIRO-adatok: CC BY-NC-SA 4.0, csak nem kereskedelmi használatra).
