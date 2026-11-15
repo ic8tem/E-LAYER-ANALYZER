@@ -96,7 +96,7 @@ namespace ELA
             tCells.HeaderTips = new[] { Lang.T("Angolo sud-ovest della cella (latitudine, longitudine) e locator del centro"), Lang.T("La foEs minima più alta fra i collegamenti che riflettono nella cella (MHz)"),
                 Lang.T("Densità elettronica minima dello strato, 1,24e10 x foEs^2 elettroni al metro cubo"), Lang.T("Collegamenti con un punto di riflessione nella cella in questo passo"), "" };
             tCells.RowClicked += i => { if (i >= 0 && i < tCells.Rows.Count) { selCell = tCells.Rows[i].Tag as Cell; Draw(); } };
-            chart = Ui.Fit(new SimpleChart { YLabel = "MHz", Y2Label = Lang.T("celle") }, 160, 110);
+            chart = new SimpleChart { Height = 160, YLabel = "MHz", Y2Label = Lang.T("celle") };
             txtSum = Ui.Text(12.5);
             ScrollViewer svSum = new ScrollViewer { Content = txtSum, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto };
 
@@ -111,7 +111,7 @@ namespace ELA
             GridSplitter sp = new GridSplitter { Background = Pal.B(Pal.Track), ResizeDirection = GridResizeDirection.Rows };
             Grid.SetRow(sp, 6);
             Border chartBox = Ui.Box(Lang.T("foEs minima più alta e celle attive, passo per passo"), Pal.Yellow, chart);
-            Grid.SetRow(chartBox, 7);
+            Grid.SetRow(Ui.HideCompact(chartBox), 7);   // modalita' compatta: niente grafico, celle e sintesi prendono lo spazio
             Border sumBox = Ui.Box(Lang.T("Sintesi"), Pal.Green, svSum);
             Grid.SetRow(sumBox, 8);
             foreach (Control c in new Control[] { r0, r1, lblSrc, r2, r3, cellBox, sp, chartBox, sumBox }) right.Children.Add(c);
