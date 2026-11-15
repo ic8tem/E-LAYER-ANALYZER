@@ -10,6 +10,7 @@
 | Windows 32 位 | `...-win-x86-setup.exe` | 同上，适用于 32 位 Windows。 |
 | Windows on ARM（Snapdragon 电脑） | `...-win-arm64-setup.exe` | 同上，适用于 ARM 处理器的 Windows。 |
 | Windows 便携版 | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | 解压到任意位置，运行 `E-LAYER-ANALYZER.exe`。 |
+| Windows 7 SP1、8 和 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` 或 `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | 用 .NET 6 编译（自 0.5.1 版起）。其他 Windows 软件包需要 Windows 10 或 11：在 Windows 7 上会因“GetSystemTimePreciseAsFileTime”错误而停止，其安装程序不会启动。 |
 | Debian、Ubuntu、Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`，然后从菜单启动：首次启动时程序会将自身复制到 `~/E-LAYER-ANALYZER`，`data` 文件夹位于其旁边。 |
 | Fedora、openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm`（另有 `.aarch64.rpm`、`.armv7hl.rpm`） | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm`（或 `zypper install`），之后同 .deb。 |
 | Arch、Manjaro、EndeavourOS、Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`（或 `-aarch64`） | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`，之后同 .deb。 |

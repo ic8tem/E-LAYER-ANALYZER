@@ -10,6 +10,7 @@
 | Windows 32 ビット | `...-win-x86-setup.exe` | 上と同じ、32 ビット版 Windows 用。 |
 | Windows on ARM (Snapdragon PC) | `...-win-arm64-setup.exe` | 上と同じ、ARM プロセッサーの Windows 用。 |
 | Windows ポータブル | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | 任意の場所に展開し、`E-LAYER-ANALYZER.exe` を起動します。 |
+| Windows 7 SP1、8、8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` または `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | .NET 6 でビルド (バージョン 0.5.1 から)。その他の Windows パッケージは Windows 10 または 11 が必要です: Windows 7 では «GetSystemTimePreciseAsFileTime» のエラーで停止し、そのインストーラーは起動しません。 |
 | Debian、Ubuntu、Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` の後、メニューから起動します。初回起動時にプログラムは自身を `~/E-LAYER-ANALYZER` にコピーし、その隣に `data` フォルダーを置きます。 |
 | Fedora、openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (`.aarch64.rpm`、`.armv7hl.rpm` もあり) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (または `zypper install`)、その後は .deb と同じ。 |
 | Arch、Manjaro、EndeavourOS、Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (または `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`、その後は .deb と同じ。 |

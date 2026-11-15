@@ -10,6 +10,7 @@
 | Windows 32비트 | `...-win-x86-setup.exe` | 위와 같음, 32비트 Windows용. |
 | Windows on ARM (Snapdragon PC) | `...-win-arm64-setup.exe` | 위와 같음, ARM 프로세서의 Windows용. |
 | Windows 포터블 | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | 아무 곳에나 압축 해제하고 `E-LAYER-ANALYZER.exe`를 실행. |
+| Windows 7 SP1, 8, 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` 또는 `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | .NET 6으로 컴파일(버전 0.5.1부터). 다른 Windows 패키지는 Windows 10 또는 11이 필요합니다: Windows 7에서는 «GetSystemTimePreciseAsFileTime» 오류로 멈추며, 그 설치 프로그램은 시작되지 않습니다. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` 후 메뉴에서 실행: 첫 실행 시 프로그램이 자신을 `~/E-LAYER-ANALYZER`에 복사하며, `data` 폴더는 그 옆에 있습니다. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (`.aarch64.rpm`, `.armv7hl.rpm`도 있음) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm`(또는 `zypper install`), 이후는 .deb와 같음. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (또는 `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, 이후는 .deb와 같음. |

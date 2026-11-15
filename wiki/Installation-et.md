@@ -10,6 +10,7 @@ Laadi õige fail alla lehelt **[Releases](https://github.com/ic8tem/E-LAYER-ANAL
 | Windows 32 bitti | `...-win-x86-setup.exe` | Nagu eespool, 32-bitise Windowsi jaoks. |
 | Windows ARM-il (Snapdragoni arvutid) | `...-win-arm64-setup.exe` | Nagu eespool, ARM-protsessoriga Windowsi jaoks. |
 | Windows, kaasaskantav | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Paki lahti ükskõik kuhu ja käivita `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 ja 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` või `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Kompileeritud .NET 6-ga (alates versioonist 0.5.1). Teised Windowsi paketid nõuavad Windows 10 või 11: Windows 7-s peatuksid need veaga «GetSystemTimePreciseAsFileTime» ja nende paigaldaja ei käivitu. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, seejärel käivita menüüst: esimesel käivitusel kopeerib programm end kausta `~/E-LAYER-ANALYZER`, kaust `data` selle kõrval. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (ka `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (või `zypper install`), edasi nagu .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (või `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, edasi nagu .deb. |

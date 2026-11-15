@@ -10,6 +10,7 @@ Download the right file from the **[Releases](https://github.com/ic8tem/E-LAYER-
 | Windows 32 bit | `...-win-x86-setup.exe` | As above, for 32-bit Windows. |
 | Windows on ARM (Snapdragon PCs) | `...-win-arm64-setup.exe` | As above, for Windows on ARM processors. |
 | Windows portable | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Extract anywhere and run `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 and 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` or `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Built with .NET 6 (from version 0.5.1). The other Windows packages require Windows 10 or 11: on Windows 7 they would stop with the error «GetSystemTimePreciseAsFileTime», and their installer does not start. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, then start it from the menu: on first start the program copies itself to `~/E-LAYER-ANALYZER`, with the `data` folder next to it. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (also `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (or `zypper install`), then as the .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (or `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, then as the .deb. |

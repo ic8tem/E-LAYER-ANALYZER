@@ -10,6 +10,7 @@
 | Windows ‏32 ביט | `...-win-x86-setup.exe` | כנ״ל, עבור Windows ‏32 ביט. |
 | Windows על ARM ‏(מחשבי Snapdragon) | `...-win-arm64-setup.exe` | כנ״ל, עבור Windows על מעבדי ARM. |
 | Windows נייד | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | חלצו בכל מקום והפעילו את `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, ‏8 ו-8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` או `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | נבנו עם ‎.NET 6 (מגרסה 0.5.1). שאר חבילות Windows דורשות Windows 10 או 11: ב-Windows 7 הן היו נעצרות עם השגיאה «GetSystemTimePreciseAsFileTime», והמתקין שלהן אינו עולה. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ואז הפעילו מהתפריט: בהפעלה הראשונה התוכנה מעתיקה את עצמה ל-`~/E-LAYER-ANALYZER`, עם תיקיית ה-`data` לצידה. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (וגם `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (או `zypper install`), ואז כמו ה-‎.deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (או `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, ואז כמו ה-‎.deb. |

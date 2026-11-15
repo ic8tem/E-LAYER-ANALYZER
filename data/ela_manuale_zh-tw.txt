@@ -6,6 +6,7 @@ P|E-LAYER ANALYZER 將研究經由電離層 E 層的 VHF 傳播模式所需的�
 H2|1.2 安裝與資料資料夾
 P|本程式可在 Windows（64 位元、32 位元與 ARM64）、Linux（x86_64、ARM64、armv7l 與 Alpine）、Raspberry Pi（64 與 32 位元的 Raspberry Pi OS、Slackware ARM64）與 Mac（Apple Silicon 與 Intel）上執行；FreeBSD amd64 有一個實驗性套件。請從 GitHub 儲存庫的 Releases 頁面下載：Windows 有安裝程式及 .zip 檔的免安裝版；Linux 有 .deb、.rpm、Arch 與 Slackware 套件、AppImage，以及附安裝腳本的 .tar.gz 壓縮檔；Mac 為 .dmg 映像檔。沒有適用於 Linux i686（32 位元 PC）與 OpenBSD 的版本，因為這些系統沒有 .NET。
 LI|Windows：安裝程式會將程式安裝在 C:\E-LAYER-ANALYZER，data 資料夾就在旁邊；可攜版可解壓縮到任一資料夾，以 E-LAYER-ANALYZER.exe 啟動。使用 ARM 處理器（Snapdragon）的電腦有 -win-arm64- 檔案。
+LI|Windows 7 SP1、8 與 8.1（自 0.5.1 版起）：需要以 .NET 6 編譯的 -win7-x64- 或 -win7-x86- 套件（安裝程式或免安裝 zip）。其他 Windows 套件使用 .NET 8，需要 Windows 10 或 11：在 Windows 7 上會因錯誤「找不到進入點 GetSystemTimePreciseAsFileTime」而停止，因此其安裝程式在 Windows 7 與 8 上不會啟動。自動更新在這些系統上會自行選擇 win7 套件。
 LI|Linux 與 Raspberry Pi：使用 .deb 套件（sudo apt install ./e-layer-analyzer_..._amd64.deb，或 64 位元 Raspberry Pi OS 用的 _arm64.deb 與 32 位元用的 _armhf.deb）時，程式從選單啟動，首次啟動時會複製到 ~/E-LAYER-ANALYZER；使用 .tar.gz 壓縮檔（linux-x64、linux-arm64、linux-arm 或 linux-armv7l）時，解壓縮後執行 ./E-LAYER-ANALYZER，或以 ./installa.sh 將其安裝到 ~/E-LAYER-ANALYZER 並在選單中加入圖示。
 LI|Slackware（x86_64 與 ARM64）：以 root 身分用 installpkg e-layer-analyzer-...-x86_64-1_ic8tem.txz（或 -aarch64-）安裝套件；程式從選單或終端機以 e-layer-analyzer 啟動，首次啟動時會複製到 ~/E-LAYER-ANALYZER，與 .deb 相同。
 LI|Fedora 與 openSUSE：sudo dnf install ./e-layer-analyzer-....x86_64.rpm（或 zypper install；另有 .aarch64.rpm 與 .armv7hl.rpm）。Arch、Manjaro、EndeavourOS 與 Arch Linux ARM：sudo pacman -U e-layer-analyzer-...-x86_64.pkg.tar.zst（或 -aarch64）。使用這些套件時，程式同樣會在首次啟動時複製到 ~/E-LAYER-ANALYZER。
@@ -135,7 +136,8 @@ LI|地圖與表格中的 F.A.I. spot 是在 設定 的篩選器中所選時段�
 H1|7. METEOR SCATTER
 P|此頁籤包含完整的 YA-MS 程式及其各頁籤（Live 與即時資料：即時流星散射通訊、雷達通量、GRAVES 雷達；預報計算：天球與計算、幾何與路徑損耗、效率計算、預報（實驗性）；技術文件：流星雨、資料來源、資料來源地圖、效率計算說明、使用手冊、網格地圖），以及其計算手冊。語言與配色與上方所選的相同。在 E-LAYER ANALYZER 內不會出現 YA-MS 的 資料收集：資料收集只有一套，就是 DATA COLLECTION 的那一套，它把資料行傳給 YA-MS，而流星散射 spot 篩選器則在 DATA COLLECTION 的篩選器欄中設定。
 P|YA-MS 1.8.1 將天線波瓣當作垂直場型處理（「天線場型」核取方塊，預設開啟）：反射點依兩副天線的垂直增益加權，長路徑上的效率不再消失。新增「無共同區域」警告，突顯 β 角核取方塊（影響最大的選擇），只用一個計算日期，並加入「使用手冊」以及與 2025 年 8 月 HamSCI Meteor Scatter QSO Party 中 181 767 個 50 MHz 真實 spot 的比較：時段和路徑的兩側可靠，百分比僅供參考。
-P|自 0.5.0 版起，此頁籤包含 YA-MS 1.8.15：預測計算 地圖旁的單欄（對方電台與天線指向、圖例）；在 即時流量 中，本台、半徑與投影以及 spot 詳細資訊位於地圖上方的方框，麥卡托地圖可拖曳移動（按兩下：回到本台），並顯示 PSKReporter 運作中的監聽站；孤立的 FT8 以 PSKReporter MQTT 核對，移除 28 MHz 的 FT8，以「流星雨區域」與「% 流星雨」取代雲團；「儲存」按鈕可將對方電台不同的定位碼存入 CALL3；將經 UDP 收到的 MS 解碼轉送給 PSKReporter，以及 YA-MS 使用者之間對發給自己電台的訊息進行加密交換。YA-MS 的 設定 頁籤保留即時來源、RMOB 與命令列；字型、配色、語言與更新在 E-LAYER ANALYZER 的 設定 頁籤中選擇。spot 收集仍然只有一套，即 DATA COLLECTION。
+P|自 0.5.1 版起，此頁籤包含 YA-MS 1.8.19（自 0.5.0 版起為 YA-MS 1.8.15）：預測計算 地圖旁的單欄（對方電台與天線指向、圖例）；在 即時流量 中，本台、半徑與投影以及 spot 詳細資訊位於地圖上方的方框，麥卡托地圖可拖曳移動（按兩下：回到本台），並顯示 PSKReporter 運作中的監聽站；孤立的 FT8 以 PSKReporter MQTT 核對，移除 28 MHz 的 FT8，以「流星雨區域」與「% 流星雨」取代雲團；「儲存」按鈕可將對方電台不同的定位碼存入 CALL3；將經 UDP 收到的 MS 解碼轉送給 PSKReporter，以及 YA-MS 使用者之間對發給自己電台的訊息進行加密交換。YA-MS 的 設定 頁籤保留即時來源、RMOB 與命令列；字型、配色、語言與更新在 E-LAYER ANALYZER 的 設定 頁籤中選擇。spot 收集仍然只有一套，即 DATA COLLECTION。
+P|YA-MS 1.8.16-1.8.19 新增：頁籤上方的橫條，顯示當天最佳時刻、最有利的流星雨與六個預報時點（現在，1、3、6、12 與 24 小時後）；預測計算 頂端的時間軸；在 即時流量 中只對對方電台回覆的、來自本台 WSJT-X 的解碼閃爍；套件中已包含的流星雨 IAU MDC 目錄。
 H1|8. AURORA
 P|AURORA 頁籤使用與 F.A.I. 相同的檢視（預設高度 110 km，Lange-Hesse [12]），並搭配 NOAA 的太空天氣資料 [15]：OVATION 極光橢圓區（在地圖上以漸層顯示）、最近三天的 Kp 指數與太陽風，每 5 分鐘下載到 data/swpc，或按 立即下載 NOAA 立即下載。程式會為兩個電台建議指向。
 LI|此頁籤特有的控制項：極光橢圓區（NOAA OVATION） 核取方塊預設開啟，會在地圖上以漸層顯示橢圓區，並在選擇散射點時作為權重；立即下載 NOAA 會立即更新資料。太空天氣（NOAA SWPC） 框顯示最近 3 天每 3 小時的行星 Kp 圖表，以及橢圓區的時間與最近一次下載的時間。Scatter trail 與等反射線檢視的用法與 F.A.I. 相同（第 6 章），容許 3°。

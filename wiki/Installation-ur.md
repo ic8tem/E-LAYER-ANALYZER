@@ -10,6 +10,7 @@
 | Windows 32 بٹ | `...-win-x86-setup.exe` | اوپر کی طرح، 32 بٹ Windows کے لیے۔ |
 | ARM پر Windows (Snapdragon PC) | `...-win-arm64-setup.exe` | اوپر کی طرح، ARM پروسیسر والے Windows کے لیے۔ |
 | Windows پورٹیبل | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | کہیں بھی نکالیں اور `E-LAYER-ANALYZER.exe` چلائیں۔ |
+| Windows 7 SP1، 8 اور 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` یا `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | .NET 6 سے بنائے گئے (ورژن 0.5.1 سے)۔ باقی Windows پیکیج Windows 10 یا 11 مانگتے ہیں: Windows 7 پر وہ «GetSystemTimePreciseAsFileTime» کی خرابی کے ساتھ رک جاتے، اور ان کا انسٹالر نہیں چلتا۔ |
 | Debian، Ubuntu، Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`، پھر مینو سے چلائیں: پہلی بار چلانے پر پروگرام خود کو `~/E-LAYER-ANALYZER` میں کاپی کر لیتا ہے، اور `data` فولڈر اس کے ساتھ ہوتا ہے۔ |
 | Fedora، openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (نیز `.aarch64.rpm`، `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (یا `zypper install`)، پھر .deb کی طرح۔ |
 | Arch، Manjaro، EndeavourOS، Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (یا `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`، پھر .deb کی طرح۔ |

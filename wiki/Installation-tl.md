@@ -10,6 +10,7 @@ I-download ang tamang file mula sa pahinang **[Releases](https://github.com/ic8t
 | Windows 32 bit | `...-win-x86-setup.exe` | Gaya ng nasa itaas, para sa Windows na 32-bit. |
 | Windows on ARM (mga PC na Snapdragon) | `...-win-arm64-setup.exe` | Gaya ng nasa itaas, para sa Windows na may ARM processor. |
 | Windows portable | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | I-extract kahit saan at patakbuhin ang `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 at 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` o `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Kinompile gamit ang .NET 6 (mula sa bersiyon 0.5.1). Nangangailangan ng Windows 10 o 11 ang iba pang package ng Windows: sa Windows 7, titigil ang mga ito na may error na «GetSystemTimePreciseAsFileTime», at hindi tumatakbo ang installer nila. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, saka simulan ito mula sa menu: sa unang pagsisimula, kinokopya ng programa ang sarili nito sa `~/E-LAYER-ANALYZER`, kasama ang `data` folder sa tabi nito. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (pati `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (o `zypper install`), saka gaya ng .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (o `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, saka gaya ng .deb. |

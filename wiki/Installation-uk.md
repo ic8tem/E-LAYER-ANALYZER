@@ -10,6 +10,7 @@
 | Windows 32 біт | `...-win-x86-setup.exe` | Як вище, для 32-бітної Windows. |
 | Windows на ARM (ПК зі Snapdragon) | `...-win-arm64-setup.exe` | Як вище, для Windows на процесорах ARM. |
 | Windows портативна | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Розпакуйте будь-куди й запустіть `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 і 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` або `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Зібрані з .NET 6 (починаючи з версії 0.5.1). Інші пакети Windows вимагають Windows 10 або 11: у Windows 7 вони зупинилися б з помилкою «GetSystemTimePreciseAsFileTime», і їхній інсталятор не запускається. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, потім запустіть із меню: під час першого запуску програма копіює себе в `~/E-LAYER-ANALYZER`, з текою `data` поруч. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (також `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (або `zypper install`), далі як із .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (або `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, далі як із .deb. |

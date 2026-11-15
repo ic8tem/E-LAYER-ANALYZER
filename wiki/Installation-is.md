@@ -10,6 +10,7 @@ Sæktu réttu skrána af síðunni **[Releases](https://github.com/ic8tem/E-LAYE
 | Windows 32 bita | `...-win-x86-setup.exe` | Eins og hér að ofan, fyrir 32 bita Windows. |
 | Windows á ARM (Snapdragon-tölvur) | `...-win-arm64-setup.exe` | Eins og hér að ofan, fyrir Windows á ARM-örgjörvum. |
 | Windows færanleg útgáfa | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Afþjappaðu hvar sem er og keyrðu `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 og 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` eða `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Þýddir með .NET 6 (frá útgáfu 0.5.1). Hinir Windows-pakkarnir krefjast Windows 10 eða 11: á Windows 7 myndu þeir stöðvast með villunni «GetSystemTimePreciseAsFileTime», og uppsetningarforrit þeirra ræsist ekki. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, ræstu það síðan úr valmyndinni: við fyrstu ræsingu afritar forritið sig í `~/E-LAYER-ANALYZER`, með möppuna `data` við hliðina. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (einnig `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (eða `zypper install`), síðan eins og .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (eða `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, síðan eins og .deb. |

@@ -10,6 +10,7 @@
 | Windows 32 บิต | `...-win-x86-setup.exe` | เหมือนข้างต้น สำหรับ Windows 32 บิต |
 | Windows บน ARM (PC Snapdragon) | `...-win-arm64-setup.exe` | เหมือนข้างต้น สำหรับ Windows บนโปรเซสเซอร์ ARM |
 | Windows แบบพกพา | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | แตกไฟล์ไว้ที่ใดก็ได้ แล้วเรียกใช้ `E-LAYER-ANALYZER.exe` |
+| Windows 7 SP1, 8 และ 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` หรือ `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | คอมไพล์ด้วย .NET 6 (ตั้งแต่เวอร์ชัน 0.5.1) แพ็กเกจ Windows อื่น ๆ ต้องใช้ Windows 10 หรือ 11: บน Windows 7 จะหยุดทำงานพร้อมข้อผิดพลาด «GetSystemTimePreciseAsFileTime» และตัวติดตั้งจะไม่เริ่มทำงาน |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb` แล้วเปิดจากเมนู: เมื่อเริ่มครั้งแรก โปรแกรมจะคัดลอกตัวเองไปที่ `~/E-LAYER-ANALYZER` โดยมีโฟลเดอร์ `data` อยู่ข้างกัน |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (มี `.aarch64.rpm`, `.armv7hl.rpm` ด้วย) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (หรือ `zypper install`) จากนั้นเหมือน .deb |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (หรือ `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` จากนั้นเหมือน .deb |

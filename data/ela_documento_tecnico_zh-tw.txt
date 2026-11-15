@@ -48,7 +48,7 @@ EQ|MUF_prob = foEs_nube · sec φ(2400 km)
 TAG|SCELTA|若可能的 MUF 達到比 spot 更高的頻率等級（例如 50 MHz 的 spot 而可能 MUF 超過 51 MHz），網格會以所達等級的顏色閃爍：這表示同一片雲可能開通更高的頻段。對於 144 MHz，依作者的選擇不使用正割定律（正割定律要求 50 MHz 約 360 km 的跳距，而 IK3XTV [3] 與 Pocock [35] 說的是 500-700 km）：只有當雲在 50 MHz 給出介於散塊 E 層最短距離（450 km）與 500 km 之間的單跳時，也就是 450 km 加上 50 km 容許，網格才會以紅色閃爍。
 TAG|FONTE|這是 IK3XTV [3]、[29] 指出的原則：skip 縮短表示 MUF 上升（28 MHz 的 skip 為 400-500 km 時 MUF 達到 50 MHz，50 MHz 的 skip 為 500-700 km 時 MUF 足以維持 144 MHz）。Jacobs 與 Leinwoll [30] 也描述了相同的方法：由 28 MHz 的最短 skip 距離可推得 MUF，而 28 MHz 的 skip 低於 500 英里（約 800 km）表示 50 MHz 將朝同一方向開通。
 H2|3.4 散塊 E 層不適用於 432 MHz
-TAG|FONTE|中緯度散塊 E 層的 MUF 可達 150 MHz 以上（Whitehead [23]）；要使掠射波偏折到 200 MHz 需要非常稠密的雲（IK3XTV [22]）。ARRL 紀錄 [24] 只列出 50 與 144 MHz 的散塊 E 層通聯，222 與 432 MHz 則沒有。
+TAG|FONTE|中緯度散塊 E 層的 MUF 可達 150 MHz 以上（Whitehead [23]）；要使掠射波偏折到 200 MHz 需要非常稠密的雲（IK3XTV [22]）。ARRL 紀錄 [24] 只列出 50 與 144 MHz 的散塊 E 層通聯，222 與 432 MHz 則沒有。Chartier、Hanley 與 Emmons [67] 在 162 MHz 觀測到散塊 E 層（船舶 AIS 訊號傳到 1000 km 以外，美國東部，2021 年 7 月），推得的 foEs 至少為 27 MHz，並經電離層探測儀與 COSMIC-2 證實：該研究談的是 162 MHz，而不是 50 或 144 MHz，但證實了散塊 E 層可以超過 144 MHz。
 TAG|SCELTA|因此 SPORADIC-E 頁籤只分析 28、40（8 m）、50、70 與 144 MHz：432 MHz 的 spot 永遠不會被當作散塊 E 層處理（有些一般性的資料來源，包括人工智慧產生的，在沒有文獻佐證的情況下如此主張）。F.A.I. 也到不了 432 MHz（作者規則，2026 年 11 月 14 日）：它的頻段是 50、70 與 144 MHz。在 430 至 440 MHz 之間，本機篩選只放行極光 spot。
 H2|3.5 作者的 144 MHz 規則
 TAG|FONTE|作者（IC8TEM）為 144 MHz 訂定的規則：散塊 E 層的最短距離在 900 km 以上（較短的 spot 予以捨棄）；只收到一筆 spot 時程式不繪出任何東西；若 5 分鐘內有第二筆 144 MHz spot 且雲的位置吻合，則兩筆都繪出；當附近至少有一筆 50 MHz 短跳 spot 時，也會繪出 900 km 以上的 144 MHz spot。在 BENCHMARK Es 中，900 km 以下的 144 MHz 通聯會被排除。
@@ -159,12 +159,13 @@ TAG|FONTE|移植自 LoTW Grid Map v2 [25]：LoTW 報告（以使用者名稱與�
 TAG|SCELTA|只處理 28 MHz 以上的頻段，每個頻段單獨處理，不合併。顏色：橘色 = 已通聯，藍色 = 以 QSL 確認，綠色 = 經由 LoTW 確認。可依傳播模式篩選（ADIF 的 PROP_MODE：ES、FAI、AUR/AUE、MS、TR、EME、F2）。
 H1|7. 配色
 TAG|FONTE|配色方案與 YA-MS 1.5.0 相同，沿用自 YAEC [26]：淺色、夜間、黑色、八種粉彩與流星餘跡。自 0.5.0 版起，應作者要求，另有 IP-TRX-CTRL 的六種主題（淺色、夜間、黑色、藍色、紫色與綠色），使用該程式的顏色值；藍色、紫色與綠色也是 YAEC 額外的顏色。在 IP-TRX-CTRL 的主題中，頁籤列與狀態列使用頻率顯示器的深色底色，淺色主題也一樣。方案在右上方選擇，視窗會立即重建；在等反射線檢視中，深色方案使用彩色帶，淺色方案使用粗線（4.4）。
-H1|8. 流星散射（YA-MS 1.8.15）與語言
-TAG|FONTE|METEOR SCATTER 頁籤包含完整的 YA-MS 1.8.15 [5]，以及其「效率計算說明」文件與資料來源。tools/sync_yams.py 腳本會複製每個新版的 YA-MS，並將其轉換為面板而不更動其計算。
+H1|8. 流星散射（YA-MS 1.8.19）與語言
+TAG|FONTE|METEOR SCATTER 頁籤包含完整的 YA-MS 1.8.19 [5]，以及其「效率計算說明」文件與資料來源。tools/sync_yams.py 腳本會複製每個新版的 YA-MS，並將其轉換為面板而不更動其計算。
 TAG|FONTE|YA-MS 1.4.0 加入了 即時流星雨（Global Meteor Network 量測的 ZHR 與 CMOR 雷達的輻射點地圖）與 資料來源地圖（Collm、Sodankylä、GRAVES 與 CMOR 相對於電台的位置）頁籤；YA-MS 1.5.0 加入 資料收集（來自 DX cluster、RBN 與 PSKReporter 的流星散射 spot，以 MSK144、FSK441、FSK41、PSK2K、JTMS、JT6M、<MS> 篩選）；YA-MS 1.6.0 將各頁籤整合為 Live 與即時資料、預報計算 與 技術文件 三組，並加入即時流星散射通訊。在 E-LAYER ANALYZER 內不會出現 YA-MS 的 資料收集：資料收集只有一套，就是 DATA COLLECTION 的那一套，它把資料行傳給 YA-MS，而流星散射篩選器在 DATA COLLECTION 的篩選器欄中設定；如此就不會以同一呼號重複登入。YA-MS 的資料來源在 YA-MS 內引用。
 TAG|FONTE|YA-MS 1.7.0 與 1.8.0 加入了輻射點與 IAU MDC 目錄的比較、Global Meteor Network 各流星雨的每日計數、由族群指數求得的 k 指數、Stober 等人（2021）的餘跡初始半徑、各頻段之間的 ping 持續時間（預設 λ²，或 NN4SA 的 HamSCI MSQP 量測值），以及與 Sonneberg 的 BRAMS 偵測結果的比較（2026 年英仙座流星雨）。在 E-LAYER ANALYZER 內，YA-MS 的自動更新已關閉，E-LAYER ANALYZER 會從 GitHub 的 Releases 自行更新。
 TAG|FONTE|YA-MS 1.8.1 將天線波瓣當作垂直場型處理（「天線場型」核取方塊，預設開啟）：反射點依兩副天線的垂直增益加權，長路徑上的效率不再消失。新增「無共同區域」警告，突顯 β 角核取方塊（影響最大的選擇），只用一個計算日期，並加入「使用手冊」以及與 2025 年 8 月 HamSCI Meteor Scatter QSO Party 中 181 767 個 50 MHz 真實 spot 的比較：時段和路徑的兩側可靠，百分比僅供參考。
 TAG|FONTE|YA-MS 從 1.8.11 到 1.8.15（E-LAYER ANALYZER 0.5.0）：CALL3 每 12 小時從 MMMonVHF 更新，每 30 分鐘從 G7VRD 更新，並以 JTDX 層（data/grid_data.bin）作為最後的來源，它從不寫入 call3.txt；孤立的 FT8 以 PSKReporter MQTT 核對，移除 28 MHz 的 FT8；以「流星雨區域」取代雲團；即時流量 地圖上方的方框；將網格座標存入 CALL3 的「儲存」按鈕；將經 UDP 收到的 MS 解碼轉送給 PSKReporter；YA-MS 使用者之間對發給自己電台的訊息進行加密交換（ECDH P-256、AES-256、公共 MQTT 上的 HMAC）。E-LAYER ANALYZER 的資料收集原則不變：只有一套收集，即 DATA COLLECTION，它將資料行傳給 YA-MS；只有一個 CALL3 資料庫；來自 YA-MS 的篩選器只對 METEOR SCATTER 頁籤有效。字型、配色、語言與更新在 E-LAYER ANALYZER 的 設定 頁籤中選擇，而不是在 YA-MS 的 設定 中。
+TAG|FONTE|YA-MS 從 1.8.16 到 1.8.19（E-LAYER ANALYZER 0.5.1）：已確立流星雨的 IAU MDC 目錄隨套件提供；頁籤上方一直可見的橫條，顯示當天最佳時刻、最有利的流星雨與六個預報時點（現在，1、3、6、12 與 24 小時後）；預測計算 頂端的時間軸；在 即時流量 中，只有對方電台回覆的、來自本台 WSJT-X 的解碼才會閃爍。自同一版起，與 YA-MS 1.8.19 一樣，提供以 .NET 6 編譯的 Windows 7 SP1、8 與 8.1 套件（-win7-x64-、-win7-x86-），因為 .NET 8 在 Windows 7 上會立即停止（缺少 Windows 的 GetSystemTimePreciseAsFileTime 函式）；其他 Windows 套件需要 Windows 10 或 11，安裝程式會進行檢查。
 TAG|SCELTA|語言：36 種，即 YAEC 的所有語言，加上丹麥文與他加祿文，自 0.4.4 版起另增巴西葡萄牙文、繁體中文、波蘭文、捷克文、羅馬尼亞文、匈牙利文、希臘文與泰文（Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어），適用於介面（data/lingue/ela-<代碼>.txt）、文件（計算選擇摘要、使用手冊、技術報告）與資料來源。在 F.A.I./極光檢視中，散射點的軌跡在所有翻譯中都稱為 "Scatter trail"。狀態列會顯示使用中的磁場模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 限制
 LI|電台位於網格座標方格的中心：使用 4 碼網格座標時，誤差可達約 80 km。

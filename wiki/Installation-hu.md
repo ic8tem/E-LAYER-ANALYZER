@@ -10,6 +10,7 @@ Töltse le a megfelelő fájlt a **[Releases](https://github.com/ic8tem/E-LAYER-
 | Windows 32 bit | `...-win-x86-setup.exe` | Mint fent, 32 bites Windowsra. |
 | Windows ARM-on (Snapdragon PC-k) | `...-win-arm64-setup.exe` | Mint fent, ARM processzoros Windowsra. |
 | Windows hordozható | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Csomagolja ki bárhová, és indítsa el az `E-LAYER-ANALYZER.exe` fájlt. |
+| Windows 7 SP1, 8 és 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` vagy `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | .NET 6-tal fordítva (a 0.5.1-es verziótól). A többi Windows-csomag Windows 10-et vagy 11-et igényel: Windows 7-en „GetSystemTimePreciseAsFileTime” hibával állnának le, és a telepítőjük nem indul el. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, majd indítsa el a menüből: első indításkor a program átmásolja magát a `~/E-LAYER-ANALYZER` mappába, mellette a `data` mappával. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (van `.aarch64.rpm`, `.armv7hl.rpm` is) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (vagy `zypper install`), majd mint a .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (vagy `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, majd mint a .deb. |

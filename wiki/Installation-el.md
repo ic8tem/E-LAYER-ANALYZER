@@ -10,6 +10,7 @@
 | Windows 32 bit | `...-win-x86-setup.exe` | Όπως παραπάνω, για Windows 32 bit. |
 | Windows σε ARM (PC με Snapdragon) | `...-win-arm64-setup.exe` | Όπως παραπάνω, για Windows σε επεξεργαστές ARM. |
 | Windows φορητό | `...-win-x64-portatile.zip` / `...-win-x86-portatile.zip` / `...-win-arm64-portatile.zip` | Αποσυμπιέστε οπουδήποτε και εκτελέστε το `E-LAYER-ANALYZER.exe`. |
+| Windows 7 SP1, 8 και 8.1 | `...-win7-x64-setup.exe` / `...-win7-x86-setup.exe` ή `...-win7-x64-portatile.zip` / `...-win7-x86-portatile.zip` | Μεταγλωττισμένα με .NET 6 (από την έκδοση 0.5.1). Τα άλλα πακέτα Windows απαιτούν Windows 10 ή 11: στα Windows 7 θα σταματούσαν με το σφάλμα «GetSystemTimePreciseAsFileTime» και το πρόγραμμα εγκατάστασής τους δεν ξεκινά. |
 | Debian, Ubuntu, Mint | `e-layer-analyzer_x.y.z_amd64.deb` | `sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb`, μετά ξεκινήστε το από το μενού: στην πρώτη εκκίνηση το πρόγραμμα αντιγράφεται στο `~/E-LAYER-ANALYZER`, με τον φάκελο `data` δίπλα του. |
 | Fedora, openSUSE | `e-layer-analyzer-x.y.z.x86_64.rpm` (και `.aarch64.rpm`, `.armv7hl.rpm`) | `sudo dnf install ./e-layer-analyzer-x.y.z.x86_64.rpm` (ή `zypper install`), μετά όπως το .deb. |
 | Arch, Manjaro, EndeavourOS, Arch Linux ARM | `e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst` (ή `-aarch64`) | `sudo pacman -U ./e-layer-analyzer-x.y.z-1-x86_64.pkg.tar.zst`, μετά όπως το .deb. |
