@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare E-LAYER ANALYZER
-SUB|Manual de utilizare detaliat - realizat de Costantino IC8TEM - versiunea 0.5.1, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE; formulele și alegerile de calcul se află în fila SINTEZA ALEGERILOR DE CALCUL.
+SUB|Manual de utilizare detaliat - realizat de Costantino IC8TEM - versiunea 0.5.2, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE; formulele și alegerile de calcul se află în fila SINTEZA ALEGERILOR DE CALCUL.
 H1|1. Înainte de a începe
 H2|1.1 Ce face programul
 P|E-LAYER ANALYZER reunește într-un singur program instrumentele pentru studiul modurilor de propagare VHF care trec prin stratul E al ionosferei: E-sporadic, inclusiv multi-salt și extracontinental, F.A.I. (neregularități aliniate cu câmpul magnetic), meteor scatter, cu programul YA-MS integrat, și aurora radio. Lucrează pe spoturile DX clusterelor în timp real și pe logurile ADIF și arată fiecare rezultat pe o hartă care ocupă două treimi din fereastră, cu datele și calculele în treimea din dreapta.
@@ -67,7 +67,7 @@ LI|Nivelul Dst se citește astfel: liniște peste -30 nT, perturbație slabă î
 LI|Meteor scatter: graficul activității meteorice a zilei (date RMOB) de la Make More Miles on VHF; roiurile, eficiența și traficul în direct se află în fila METEOR SCATTER.
 P|Sinteza acestor date apare în dreapta sus pe hărțile SPORADIC-E și F.A.I. (E-skip pentru continentul ales) și AURORA (aurora de la N0NBH și Bz de la NOAA).
 H1|3. E-sporadic (SPORADIC-E)
-P|Fila SPORADIC-E are trei sub-file: REAL-TIME, spoturile în direct descrise în acest capitol; BENCHMARK Es (capitolul 4) și BENCHMARK 50 MHz (capitolul 5).
+P|Fila SPORADIC-E are cinci sub-file: REAL-TIME, spoturile în direct descrise în acest capitol; BENCHMARK Es (capitolul 4), BENCHMARK 50 MHz (capitolul 5), IONOSONDE (capitolul 5b) și NORI Es ÎN TIMP (capitolul 5c).
 H2|3.1 Harta
 P|Meniul Hartă alege proiecția. Azimutală: hartă azimutală echidistantă centrată pe propria stație, cu cursorul de zoom (de la 300 la 20000 km de la centru, și cu rotița mouse-ului). Mercator: harta lumii, cu butoanele Europa și Lume. În ambele proiecții se desenează în jurul stației cercurile distanțelor din tabelul lui IK3XTV [3]: 500 km (minimul saltului unic), 1500-2000 km (optim), 2400 km (maximul saltului unic), 5000 km (maximul saltului dublu) și 6900 km (maximul saltului triplu).
 P|Tabelul lungimilor salturilor pe 50 MHz este cel al lui Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; norii Es se află la circa 100 km altitudine, iar aceasta limitează saltul unic în jurul a 2000 km [29]. Coroanele hărților și numărul salturilor urmează aceste distanțe:
@@ -120,6 +120,21 @@ LI|Punctul galben estompat marchează centrul fiecărui salt, unde se presupune 
 LI|Tabelul enumeră QSO-urile afișate cu St. (stația 1 sau 2), Ziua, UTC, Indicativ, WWL, km, Salturi și foEs≥. Cu foEs activă, punctele de salt indică foEs minimă; un locator de 4 caractere care lipsește din CALL3 este semnalat lângă WWL.
 H2|5.2 Harta Mercator
 P|Harta este Mercator cu centru liber. Apropiind mouse-ul de un traseu, linia și pictogramele se măresc și apare pătratul WWL cu 6 caractere al corespondentului. Cu clic stânga pe acel traseu o fereastră popup întreabă dacă să fie afișate toate QSO-urile din fișier, din toate zilele, cu poziția terminală la cel mult 150 km: Da golește harta și arată acele QSO-uri în cercul portocaliu, Nu lasă harta neschimbată. Butonul Înapoi la zi și interval orar revine la alegerea anterioară.
+H1|5b. IONOSONDE (sub-filă a SPORADIC-E)
+P|Sub-fila IONOSONDE arată foEs măsurată de ionosondele rețelei GIRO din toată lumea. Datele sosesc prima dată când se deschide fila și apoi la fiecare 15 minute, singure (caseta Actualizează singur la fiecare 15 minute); butonul Actualizează acum le cere imediat.
+LI|Harta: fiecare ionosondă este un punct colorat cu ultima foEs (aceleași culori ca norii Es) și valoarea în MHz; gri dacă nu are date recente, cu inel dacă ultima ionogramă are peste 90 de minute. Caseta Arată și ionosondele fără date recente le ascunde sau le arată.
+LI|Tabelul: Cod, Ionosondă, km de propria stație, UTC al ultimei ionograme, foEs, foF2, MUF(D) și Spoturi foEs≥, foEs minimă obținută din spoturile Es din ultimele 30 de minute care se reflectă în limita a 500 km de ionosondă (caseta Spoturi în limita a km), cu numărul de spoturi între paranteze.
+LI|Clic pe un rând sau lângă o ionosondă pe hartă: graficul ultimelor 24 de ore (foEs galben, foF2 albastru-deschis, MUF(D) violet punctat) și, dedesubt, MUF-ul E-sporadic la 1000, 1500, 2000 și 2400 km cu benzile care se deschid, la altitudinea Es aleasă.
+LI|Dacă spoturile cer o foEs mai mare decât cea măsurată, programul semnalează acest lucru: norul poate fi departe de ionosondă, sau ionosonda a atins limita domeniului său de frecvență.
+P|Datele sunt de la GIRO (Reinisch și Galkin 2011), licență CC BY-NC-SA 4.0, doar pentru uz necomercial.
+H1|5c. NORI Es ÎN TIMP (sub-filă a SPORADIC-E)
+P|Sub-fila NORI Es ÎN TIMP arată cum se mișcă și se schimbă norii de E-sporadic, pas cu pas, cu metoda lui Chartier (2022): fiecare legătură dă foEs minimă în punctul de reflexie, iar fiecare celulă a grilei ia valoarea cea mai mare a pasului.
+LI|Sursa: Spoturile sesiunii (se actualizează la fiecare deschidere a filei) sau Încarcă un log ADIF sau spoturi CSV. Exportă spoturile sesiunii (CSV) le salvează pentru a le revedea după închiderea programului, care golește arhiva spoturilor.
+LI|Benzi MHz (28, 40, 50, 70, 144), Pas (5, 10 sau 15 minute), Celulă (1°, 2° sau 4°) și Altitudine Es km.
+LI|Bara timpului: ⏮ ◀ Pornește/Oprește ▶ ⏭ și cursorul; la deschidere se pornește de la pasul cu cele mai multe celule. Pașii anteriori estompați arată cei trei pași dinaintea celui ales, mai palizi; Legături desenează traseele pasului cu culorile benzilor.
+LI|Tabelul celulelor: Celulă (colțul de sud-vest și locatorul centrului), foEs≥, NmE≥ (densitatea electronică minimă), Legături și Benzi. Clic pe o celulă (tabel sau hartă): îi evidențiază legăturile și indicativele.
+LI|Graficul: cea mai mare foEs minimă (linia galbenă) și numărul de celule (bare) pentru fiecare pas, cu linia pasului afișat. Dedesubt, rezumatul cu valoarea cea mai mare a sursei.
+P|Valoarea este o limită inferioară: norul poate fi mai dens decât arată legăturile, iar o celulă goală înseamnă doar că nu există nicio legătură.
 H1|6. F.A.I.
 H2|6.1 Cele două vederi
 P|Fila F.A.I. studiază scatter-ul pe neregularități aliniate cu câmpul magnetic (sursa principală [1], [2]). Vederea Scatter trail (perechea A-B) calculează, pentru două stații, locul scatter point-urilor posibile, colorat după abaterea de la condiția de reflexie, propune scatter point-ul cel mai probabil și desenează în dreapta sus caseta cu QTF-urile și elevațiile ambelor stații (roșu = A, verde = B). Vederea Izo-reflexie (punct) desenează, pentru un punct de reflexie ales, liniile de izo-reflexie ca AuroReflex și SE-PROP al lui K9SE: benzi colorate în schemele întunecate, linii groase în schemele luminoase.

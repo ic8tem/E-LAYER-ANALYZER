@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-lv) | Es spoti kartē, abu staciju pirmais lēciens, Es mākoņi Maidenhead kvadrātos, MUF tavai stacijai |
 | [BENCHMARK Es](Benchmark-Es-lv) | Pārbaudes stends veselam ADIF žurnālam (arī citas stacijas): QSO pa dienām un stundām, skip pa sektoriem, novērtētā foEs, vairāklēcienu pārbaude, mākoņu pārvietošanās |
 | [BENCHMARK 50 MHz](Benchmark-50-lv) | Vairāklēcienu sporādiskais E 50 MHz no viena vai diviem ADIF žurnāliem: Merkatora karte, diena un laiks, neobligāta foEs, palielināta trase ar WWL, QSO 150 km rādiusā |
+| [JONOZONDI](Ionosondes-lv) | GIRO jonozondu foEs, foF2 un MUF(D) reāllaikā, 24 stundu grafiks, sporādiskā E MUF ar joslām, kas atveras, salīdzinājums ar spotiem |
+| [Es MĀKOŅI LAIKĀ](Es-Clouds-Over-Time-lv) | Es mākoņi solis pa solim pēc Chartier 2022 metodes: minimālā foEs un NmE šūnā no sesijas spotiem, ADIF žurnāla vai CSV spotiem |
 | [F.A.I.](FAI-lv) | Scatter trail – scatter point līnija staciju pārim un izoatstarošanas līknes punkta pārbaudei |
 | [METEOR SCATTER](Meteor-Scatter-lv) | Pilna programma YA-MS (plūsmu efektivitāte, radari, prognozes) |
 | [AURORA](Aurora-lv) | Aurorālais ovāls, NOAA Kp un Saules vējš, auroras scatter trail un izoatstarošana, ieteicamais antenas virziens |

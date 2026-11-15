@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER lietošanas rokasgrāmata
-SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.5.1, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
+SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.5.2, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
 H1|1. Pirms sākt
 H2|1.1 Ko programma dara
 P|E-LAYER ANALYZER apvieno vienā programmā rīkus to VHF izplatīšanās veidu izpētei, kas norit caur jonosfēras E slāni: sporādisko E, arī vairāklēcienu un starpkontinentālo, F.A.I. (ar magnētisko lauku saskaņotās nehomogenitātes), meteor scatter ar iebūvēto programmu YA-MS un radio auroru. Tā strādā ar DX klasteru spotiem reāllaikā un ar ADIF žurnāliem un parāda katru rezultātu kartē, kas aizņem divas trešdaļas loga, bet dati un aprēķini ir labajā trešdaļā.
@@ -67,7 +67,7 @@ LI|Dst līmeni nolasa šādi: mierīgs virs -30 nT, vājš traucējums no -30 l�
 LI|Meteor scatter: Make More Miles on VHF dienas meteoru aktivitātes grafiks (RMOB dati); plūsmas, efektivitāte un trafiks reāllaikā ir cilnē METEOR SCATTER.
 P|Šo datu kopsavilkums parādās augšā pa labi SPORADIC-E un F.A.I. kartēs (izvēlētā kontinenta E-skip) un AURORA kartē (N0NBH aurora un NOAA Bz).
 H1|3. Sporādiskais E (SPORADIC-E)
-P|Cilnei SPORADIC-E ir trīs apakšcilnes: REAL-TIME, šajā nodaļā aprakstītie spoti reāllaikā; BENCHMARK Es (4. nodaļa) un BENCHMARK 50 MHz (5. nodaļa).
+P|Cilnei SPORADIC-E ir piecas apakšcilnes: REAL-TIME, šajā nodaļā aprakstītie spoti reāllaikā; BENCHMARK Es (4. nodaļa), BENCHMARK 50 MHz (5. nodaļa), JONOZONDI (5b nodaļa) un Es MĀKOŅI LAIKĀ (5c nodaļa).
 H2|3.1 Karte
 P|Izvēlne Karte izvēlas projekciju. Azimutālā: azimutāla vienādattāluma karte ar savu staciju centrā, ar tālummaiņas slīdni (no 300 līdz 20000 km no centra, arī ar peles ritenīti). Merkatora: pasaules karte ar pogām Eiropa un Pasaule. Abās projekcijās ap staciju tiek zīmēti IK3XTV tabulas [3] attālumu apļi: 500 km (viena lēciena minimālais), 1500-2000 km (optimālais), 2400 km (viena lēciena maksimālais), 5000 km (dubultā lēciena maksimālais) un 6900 km (trīskāršā lēciena maksimālais).
 P|50 MHz lēcienu garumu tabula ir Flavio Egano IK3XTV tabula, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es mākoņi atrodas aptuveni 100 km augstumā, un tas ierobežo vienu lēcienu ap 2000 km [29]. Karšu gredzeni un lēcienu skaits atbilst šiem attālumiem:
@@ -120,6 +120,21 @@ LI|Izplūdis dzeltens punkts atzīmē katra lēciena centru, kur tiek pieņemts 
 LI|Tabulā uzskaitīti parādītie QSO ar St. (stacija 1 vai 2), Diena, UTC, Izsaukuma signāls, WWL, km, Lēcieni un foEs≥. Ar ieslēgtu foEs lēcienu punktos norādīts minimālais foEs; 4 rakstzīmju lokators, kura nav CALL3, tiek atzīmēts blakus WWL.
 H2|5.2 Merkatora karte
 P|Karte ir Merkatora projekcijā ar brīvu centru. Kad pele tuvojas trasei, līnija un ikonas palielinās un parādās korespondenta 6 rakstzīmju WWL kvadrāts. Ar kreiso klikšķi uz šīs trases uznirstošais logs jautā, vai rādīt visus faila QSO no visām dienām, kuru gala atrašanās vieta ir 150 km robežās: Jā iztīra karti un rāda šos QSO oranžajā aplī, Nē atstāj karti nemainītu. Poga Atpakaļ uz dienu un laiku atgriež iepriekšējo izvēli.
+H1|5b. JONOZONDI (SPORADIC-E apakšcilne)
+P|Apakšcilne JONOZONDI rāda GIRO tīkla jonozondu izmērīto foEs visā pasaulē. Dati tiek iegūti, pirmo reizi atverot cilni, un pēc tam ik pēc 15 minūtēm, automātiski (izvēles rūtiņa Atjaunināt automātiski ik pēc 15 minūtēm); poga Atjaunināt tagad tos pieprasa nekavējoties.
+LI|Karte: katrs jonozonds ir krāsains punkts ar pēdējo foEs (tās pašas krāsas kā Es mākoņiem) un vērtību MHz; pelēks, ja nav svaigu datu, ar apli, ja pēdējā jonogramma ir vecāka par 90 minūtēm. Izvēles rūtiņa Rādīt arī jonozondus bez svaigiem datiem tos paslēpj vai parāda.
+LI|Tabula: Kods, Jonozonds, km no savas stacijas, pēdējās jonogrammas UTC, foEs, foF2, MUF(D) un Spoti foEs≥, minimālā foEs, kas secināta no pēdējo 30 minūšu Es spotiem, kas atstarojas līdz 500 km no jonozonda (lauks Spoti līdz km), iekavās norādot spotu skaitu.
+LI|Noklikšķinot uz rindas vai jonozonda tuvumā kartē: pēdējo 24 stundu grafiks (foEs dzeltena, foF2 ciānzila, MUF(D) violeta punktēta) un zem tā sporādiskā E MUF 1000, 1500, 2000 un 2400 km attālumā ar joslām, kas atveras, izvēlētajā Es augstumā.
+LI|Ja spotiem vajag lielāku foEs nekā izmērītā, programma to norāda: mākonis var būt tālu no jonozonda vai jonozonds ir sasniedzis sava frekvenču diapazona robežu.
+P|Dati ir GIRO (Reinisch un Galkin 2011), licence CC BY-NC-SA 4.0, tikai nekomerciālai lietošanai.
+H1|5c. Es MĀKOŅI LAIKĀ (SPORADIC-E apakšcilne)
+P|Apakšcilne Es MĀKOŅI LAIKĀ solis pa solim rāda, kā sporādiskā E mākoņi pārvietojas un mainās, izmantojot Chartier (2022) metodi: katrs sakars dod minimālo foEs atstarošanas punktā, un katra režģa šūna saņem soļa lielāko vērtību.
+LI|Avots: Sesijas spoti (atjaunināti katru reizi, kad atver cilni) vai Ielādēt ADIF žurnālu vai CSV spotus. Eksportēt sesijas spotus (CSV) tos saglabā, lai tos varētu pārskatīt pēc programmas aizvēršanas, kas iztukšo spotu arhīvu.
+LI|Joslas MHz (28, 40, 50, 70, 144), Solis (5, 10 vai 15 min), Šūna (1°, 2° vai 4°) un Es augstums km.
+LI|Laika josla: ⏮ ◀ Sākt/Apturēt ▶ ⏭ un slīdnis; atverot sāk no soļa ar visvairāk šūnām. Iepriekšējie soļi blāvi rāda trīs soļus pirms izvēlētā ar blāvākām krāsām; Sakari zīmē soļa trases joslu krāsās.
+LI|Šūnu tabula: Šūna (dienvidrietumu stūris un centra lokators), foEs≥, NmE≥ (minimālais elektronu blīvums), Sakari un Joslas. Noklikšķinot uz šūnas (tabulā vai kartē), tiek izcelti tās sakari un izsaukuma signāli.
+LI|Grafiks: lielākā minimālā foEs (dzeltena līnija) un šūnu skaits (stabiņi) katram solim, ar rādītā soļa līniju. Zem tā kopsavilkums ar avota maksimumu.
+P|Vērtība ir apakšējā robeža: mākonis var būt blīvāks, nekā rāda sakari, un tukša šūna nozīmē tikai to, ka nav sakaru.
 H1|6. F.A.I.
 H2|6.1 Divi skati
 P|Cilne F.A.I. pēta izkliedi no ar magnētisko lauku saskaņotām nehomogenitātēm (galvenie avoti [1], [2]). Skats Scatter trail (pāris A-B) divām stacijām aprēķina iespējamo scatter point ģeometrisko vietu, iekrāsotu pēc novirzes no atstarošanas nosacījuma, piedāvā varbūtīgāko scatter point un augšā pa labi zīmē lodziņu ar abu staciju QTF un elevācijām (sarkans = A, zaļš = B). Skats Izoatstarošana (punkts) izvēlētam atstarošanas punktam zīmē izoatstarošanas līnijas kā AuroReflex un K9SE SE-PROP: krāsainas joslas tumšajās shēmās, biezas līnijas gaišajās shēmās.

@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-cs) | Spoty Es na mapě, první skok obou stanic, oblaka Es na čtvercích Maidenhead, MUF pro vaši stanici |
 | [BENCHMARK Es](Benchmark-Es-cs) | Testovací lavice na celém deníku ADIF (i jiné stanice): QSO za den a za hodinu, skip po sektorech, odhadnutá foEs, ověření vícenásobného skoku, posun oblaků |
 | [BENCHMARK 50 MHz](Benchmark-50-cs) | Sporadická vrstva E s vícenásobným skokem na 50 MHz z jednoho nebo dvou deníků ADIF: Mercatorova mapa, den a čas, volitelná foEs, zvětšená trasa s WWL, QSO do 150 km |
+| [IONOSONDY](Ionosondes-cs) | foEs, foF2 a MUF(D) živě z ionosond GIRO, graf za 24 hodin, MUF sporadické vrstvy E s pásmy, která se otevírají, srovnání se spoty |
+| [OBLAKA Es V ČASE](Es-Clouds-Over-Time-cs) | Oblaka Es krok za krokem metodou Chartiera 2022: minimální foEs a NmE na buňku, ze spotů relace, deníku ADIF nebo spotů CSV |
 | [F.A.I.](FAI-cs) | Scatter trail bodů rozptylu pro dvojici stanic a izoflexe k ověření bodu |
 | [METEOR SCATTER](Meteor-Scatter-cs) | Kompletní program YA-MS (účinnost rojů, radary, předpovědi) |
 | [AURORA](Aurora-cs) | Polární ovál, Kp a sluneční vítr od NOAA, aurorální scatter trail a izoflexe, doporučené směrování antény |

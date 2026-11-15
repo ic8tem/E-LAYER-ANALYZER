@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-nb) | Es-spot på kartet, første hopp for begge stasjonene, Es-skyer på Maidenhead-ruter, MUF for din stasjon |
 | [BENCHMARK Es](Benchmark-Es-nb) | Testbenk for en hel ADIF-logg (også fra en annen stasjon): QSO-er per dag og per time, skip per sektor, estimert foEs, kontroll av multihopp, skyenes forflytning |
 | [BENCHMARK 50 MHz](Benchmark-50-nb) | Multihopp sporadisk E på 50 MHz fra én eller to ADIF-logger: Mercator-kart, dag og tid, valgfri foEs, forstørret strekning med WWL, QSO-er innenfor 150 km |
+| [IONOSONDER](Ionosondes-nb) | foEs, foF2 og MUF(D) i sanntid fra GIRO-ionosondene, graf over 24 timer, MUF for sporadisk E med båndene som åpner, sammenligning med spotene |
+| [Es-SKYER OVER TID](Es-Clouds-Over-Time-nb) | Es-skyer steg for steg med Chartiers metode 2022: minste foEs og NmE per celle, fra spot fra økten, en ADIF-logg eller CSV-spot |
 | [F.A.I.](FAI-nb) | Scatter trail for scatter-punktene til et stasjonspar, og isorefleksjonskurver for å kontrollere et punkt |
 | [METEOR SCATTER](Meteor-Scatter-nb) | Hele programmet YA-MS (svermeffektivitet, radarer, prognoser) |
 | [AURORA](Aurora-nb) | Nordlysoval, Kp og solvind fra NOAA, scatter trail og isorefleksjon for nordlys, anbefalt antenneretning |

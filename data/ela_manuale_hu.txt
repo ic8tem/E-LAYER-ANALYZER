@@ -1,5 +1,5 @@
 TITLE|Az E-LAYER ANALYZER felhasználói kézikönyve
-SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.5.1-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
+SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.5.2-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
 H1|1. Mielőtt elkezdené
 H2|1.1 Mit csinál a program
 P|Az E-LAYER ANALYZER egyetlen programban egyesíti az ionoszféra E-rétegén áthaladó VHF terjedési módok vizsgálatának eszközeit: sporadikus E, a többugrásos és a kontinensen kívüli terjedést is beleértve, F.A.I. (field-aligned irregularities, az erővonalak mentén rendeződött irregularitások), meteor scatter az integrált YA-MS programmal, valamint rádióaurora. Valós idejű DX cluster spotokkal és ADIF-naplókkal dolgozik, és minden eredményt az ablak kétharmadát elfoglaló térképen mutat, az adatokkal és számításokkal a jobb oldali harmadban.
@@ -67,7 +67,7 @@ LI|A Dst szintje így olvasható: nyugalom -30 nT felett, gyenge zavar -30 és -
 LI|Meteor scatter: a mai meteoraktivitás diagramja (RMOB-adatok) a Make More Miles on VHF-től; a rajok, a hatékonyság és az élő forgalom a METEOR SCATTER fülön található.
 P|Ezen adatok összefoglalója a SPORADIC-E és az F.A.I. térképek (E-skip a választott kontinensre), valamint az AURORA térkép (N0NBH aurora és NOAA Bz) jobb felső sarkában jelenik meg.
 H1|3. Sporadikus E (SPORADIC-E)
-P|A SPORADIC-E fülnek három allapja van: REAL-TIME, az ebben a fejezetben leírt élő spotok; BENCHMARK Es (4. fejezet) és BENCHMARK 50 MHz (5. fejezet).
+P|A SPORADIC-E fülnek öt allapja van: REAL-TIME, az ebben a fejezetben leírt élő spotok; BENCHMARK Es (4. fejezet), BENCHMARK 50 MHz (5. fejezet), IONOSZONDÁK (5b. fejezet) és Es-FELHŐK AZ IDŐBEN (5c. fejezet).
 H2|3.1 A térkép
 P|A Térkép menü választja ki a vetületet. Azimutális: a saját állomásra középpontozott azimutális távolságtartó térkép, nagyítási csúszkával (a középponttól 300 és 20000 km között, az egérgörgővel is). Mercator: a világtérkép, az Európa és a Világ gombbal. Mindkét vetületben az állomás köré rajzolja az IK3XTV-táblázat [3] távolságköreit: 500 km (egyugrásos minimum), 1500-2000 km (optimum), 2400 km (egyugrásos maximum), 5000 km (kétugrásos maximum) és 6900 km (háromugrásos maximum).
 P|Az 50 MHz-es ugráshosszak táblázata Flavio Egano IK3XTV-é, «Propagazione sui 6 metri - Caratteristiche generali» (Terjedés a 6 méteren - Általános jellemzők) [3]; az Es-felhők kb. 100 km magasságban vannak, és ez kb. 2000 km-re korlátozza az egyugrásos terjedést [29]. A térképek gyűrűi és az ugrások száma ezeket a távolságokat követi:
@@ -120,6 +120,21 @@ LI|Az elmosódott sárga pötty jelöli minden ugrás közepét, ahol a sporadik
 LI|A táblázat a megjelenített QSO-kat sorolja fel St. (1. vagy 2. állomás), Nap, UTC, Hívójel, WWL, km, Ugrások és foEs≥ oszlopokkal. Bekapcsolt foEs esetén az ugráspontok a legkisebb foEs-t mutatják; a CALL3-ból hiányzó 4 karakteres lokátort a WWL mellett jelzi.
 H2|5.2 A Mercator-térkép
 P|A térkép szabad középpontú Mercator-vetület. Amikor az egér egy útvonalhoz közelít, a vonal és az ikonok kinagyítódnak, és megjelenik az ellenállomás 6 karakteres WWL-négyzete. Az adott útvonalra bal kattintással egy felugró ablak megkérdezi, megjelenítse-e a fájl összes QSO-ját, minden napról, amelynek végpontja 150 km-en belül van: az Igen törli a térképet, és a narancs körön belüli QSO-kat mutatja, a Nem változatlanul hagyja a térképet. A Vissza a naphoz és időponthoz gomb visszatér az előző kijelöléshez.
+H1|5b. IONOSZONDÁK (a SPORADIC-E allapja)
+P|Az IONOSZONDÁK allap a GIRO hálózat ionoszondái által világszerte mért foEs-t mutatja. Az adatok a fül első megnyitásakor érkeznek, majd 15 percenként, maguktól (Automatikus frissítés 15 percenként jelölőnégyzet); a Frissítés most gomb azonnal lekéri őket.
+LI|Térkép: minden ionoszonda egy színes pont az utolsó foEs-sel (ugyanazok a színek, mint az Es-felhőknél) és az MHz-ben kifejezett értékkel; szürke, ha nincs aktuális adata, gyűrűvel, ha az utolsó ionogram 90 percnél régebbi. Az „Az aktuális adatok nélküli ionoszondák megjelenítése is” jelölőnégyzet elrejti vagy megmutatja őket.
+LI|Táblázat: Kód, Ionoszonda, km a saját állomástól, az utolsó ionogram UTC-ideje, foEs, foF2, MUF(D) és Spotok foEs≥, az utolsó 30 perc azon Es-spotjaiból származtatott minimális foEs, amelyek az ionoszondától 500 km-en belül verődnek vissza (Spotok km-en belül mező), a spotok számával zárójelben.
+LI|Kattintás egy sorra vagy egy ionoszonda közelében a térképen: az utolsó 24 óra grafikonja (foEs sárga, foF2 világoskék, MUF(D) lila pontozott) és alatta a sporadikus E MUF-ja 1000, 1500, 2000 és 2400 km-en a megnyíló sávokkal, a választott Es-magasságon.
+LI|Ha a spotok magasabb foEs-t kívánnak a mértnél, a program jelzi: a felhő messze lehet az ionoszondától, vagy az ionoszonda elérte frekvenciatartománya határát.
+P|Az adatok a GIRO-tól származnak (Reinisch és Galkin 2011), CC BY-NC-SA 4.0 licenc, csak nem kereskedelmi használatra.
+H1|5c. Es-FELHŐK AZ IDŐBEN (a SPORADIC-E allapja)
+P|Az Es-FELHŐK AZ IDŐBEN allap azt mutatja meg, hogyan mozognak és változnak a sporadikus E felhői, lépésről lépésre, Chartier (2022) módszerével: minden összeköttetés megadja a minimális foEs-t a visszaverődési pontban, és a rács minden cellája a lépés legmagasabb értékét kapja.
+LI|Forrás: A munkamenet spotjai (a fül minden megnyitásakor frissülnek), vagy ADIF-napló vagy CSV-spotok betöltése. A munkamenet spotjainak exportálása (CSV) elmenti őket, hogy a program bezárása után, amely kiüríti a spotarchívumot, is meg lehessen nézni őket.
+LI|Sávok MHz (28, 40, 50, 70, 144), Lépés (5, 10 vagy 15 perc), Cella (1°, 2° vagy 4°) és Es-magasság km.
+LI|Idősáv: ⏮ ◀ Indítás/Leállítás ▶ ⏭ és a csúszka; megnyitáskor a legtöbb cellát tartalmazó lépéstől indul. Az Előző lépések halványan a kiválasztott előtti három lépést mutatja halványabban; az Összeköttetések a lépés útvonalait a sávok színeivel rajzolja ki.
+LI|Cellatáblázat: Cella (délnyugati sarok és a középpont lokátora), foEs≥, NmE≥ (minimális elektronsűrűség), Összeköttetések és Sávok. Kattintás egy cellára (táblázat vagy térkép): kiemeli az összeköttetéseit és a hívójeleket.
+LI|Grafikon: a legmagasabb minimális foEs (sárga vonal) és a cellák száma (oszlopok) lépésenként, a megjelenített lépés vonalával. Alatta az összefoglaló a forrás legmagasabb értékével.
+P|Az érték alsó korlát: a felhő sűrűbb lehet, mint amit az összeköttetések mutatnak, és az üres cella csak annyit jelent, hogy nincs összeköttetés.
 H1|6. F.A.I.
 H2|6.1 A két nézet
 P|Az F.A.I. fül az erővonalak mentén rendeződött irregularitásokon történő szórást vizsgálja (fő források [1], [2]). A Scatter trail (A-B pár) nézet két állomásra kiszámítja a lehetséges szórási pontok mértani helyét, a visszaverődési feltételtől való eltérés szerint színezve, javasolja a legvalószínűbb szórási pontot, és jobb felül kirajzolja mindkét állomás QTF- és elevációs mezőjét (piros = A, zöld = B). Az Izoflexió (pont) nézet egy kiválasztott visszaverődési pontra kirajzolja az izoflexiós vonalakat, mint az AuroReflex és K9SE SE-PROP programja: színes sávok a sötét sémákban, vastag vonalak a világos sémákban.

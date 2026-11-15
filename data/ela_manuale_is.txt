@@ -1,5 +1,5 @@
 TITLE|Notendahandbók E-LAYER ANALYZER
-SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.5.1, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
+SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.5.2, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
 H1|1. Áður en hafist er handa
 H2|1.1 Hvað forritið gerir
 P|E-LAYER ANALYZER sameinar í einu forriti verkfærin til að rannsaka þær útbreiðsluaðferðir á VHF sem fara um E-lag jónhvolfsins: sporadic-E, einnig fjölstökk og milli heimsálfa, F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter, með innbyggða forritinu YA-MS, og radíónorðurljós. Það vinnur með spot frá DX-klösum í rauntíma og með ADIF-dagbækur, og sýnir hverja niðurstöðu á korti sem tekur tvo þriðju gluggans, með gögnum og útreikningum í hægri þriðjungnum.
@@ -67,7 +67,7 @@ LI|Stig Dst lesast þannig: rólegt yfir -30 nT, væg truflun milli -30 og -50 n
 LI|Meteor scatter: graf loftsteinavirkni dagsins (RMOB-gögn) frá Make More Miles on VHF; loftsteinadrífur, skilvirkni og umferð í rauntíma eru á flipanum METEOR SCATTER.
 P|Samantekt þessara gagna birtist efst til hægri á kortum SPORADIC-E og F.A.I. (E-skip valdrar heimsálfu) og AURORA (norðurljós frá N0NBH og Bz frá NOAA).
 H1|3. Sporadic-E (SPORADIC-E)
-P|Flipinn SPORADIC-E hefur þrjá undirflipa: REAL-TIME, spot í rauntíma sem lýst er í þessum kafla; BENCHMARK Es (kafli 4) og BENCHMARK 50 MHz (kafli 5).
+P|Flipinn SPORADIC-E hefur fimm undirflipa: REAL-TIME, spot í rauntíma sem lýst er í þessum kafla; BENCHMARK Es (kafli 4), BENCHMARK 50 MHz (kafli 5), JÓNÓSÖNDUR (kafli 5b) og Es-SKÝ Í TÍMANS RÁS (kafli 5c).
 H2|3.1 Kortið
 P|Valmyndin Kort velur vörpunina. Áttarhornskort: jafnfjarlægt áttarhornskort með eigin stöð í miðju, með aðdráttarsleðanum (frá 300 til 20000 km frá miðju, einnig með músarhjólinu). Mercator: heimskortið með hnöppunum Evrópa og Heimurinn. Í báðum vörpununum eru fjarlægðarhringir töflu IK3XTV [3] teiknaðir umhverfis stöðina: 500 km (lágmark eins stökks), 1500-2000 km (best), 2400 km (hámark eins stökks), 5000 km (hámark tvöfalds stökks) og 6900 km (hámark þrefalds stökks).
 P|Tafla stökklengda á 50 MHz er tafla Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es-skýin eru í um 100 km hæð og það takmarkar eitt stökk við um 2000 km [29]. Hringir kortanna og fjöldi stökka fylgja þessum fjarlægðum:
@@ -120,6 +120,21 @@ LI|Óskýri guli depillinn merkir miðju hvers stökks, þar sem sporadic-E-ský
 LI|Taflan sýnir birtu QSO með St. (stöð 1 eða 2), Dagur, UTC, Kallmerki, WWL, km, Stökk og foEs≥. Með virkri foEs sýna stökkpunktarnir lágmarks-foEs; 4 stafa locator sem vantar í CALL3 er merktur við hlið WWL.
 H2|5.2 Mercator-kortið
 P|Kortið er Mercator-kort með frjálsri miðju. Þegar músin nálgast leið stækka lína og tákn og 6 stafa WWL-reitur mótstöðvarinnar birtist. Með vinstri smelli á þá leið spyr sprettigluggi hvort sýna eigi öll QSO í skránni, frá öllum dögum, með endastaðsetningu innan 150 km: Já tæmir kortið og sýnir þau QSO innan appelsínugula hringsins, Nei skilur kortið eftir óbreytt. Hnappurinn Aftur í dag og tíma færir aftur í fyrra val.
+H1|5b. JÓNÓSÖNDUR (undirflipi SPORADIC-E)
+P|Undirflipinn JÓNÓSÖNDUR sýnir foEs mælda af jónósöndum GIRO-netsins um allan heim. Gögnin berast þegar flipinn er fyrst opnaður og síðan á 15 mínútna fresti, sjálfkrafa (reiturinn Uppfæra sjálfkrafa á 15 mínútna fresti); hnappurinn Uppfæra núna sækir þau strax.
+LI|Kort: hver jónósanda er litaður punktur með síðustu foEs (sömu litir og Es-skýin) og gildinu í MHz; grá ef hún hefur engin nýleg gögn, með hring ef síðasta jónóritið er eldra en 90 mínútna. Reiturinn Sýna einnig jónósöndur án nýlegra gagna felur þær eða sýnir.
+LI|Tafla: Kóði, Jónósanda, km frá eigin stöð, UTC síðasta jónórits, foEs, foF2, MUF(D) og Spot foEs≥, lágmarks-foEs leidd af Es-spotum síðustu 30 mínútna sem endurvarpast innan 500 km frá jónósöndunni (reiturinn Spot innan km), með fjölda spotanna innan sviga.
+LI|Smellur á línu eða nálægt jónósöndu á kortinu: graf síðustu 24 klukkustunda (foEs gul, foF2 ljósblá, MUF(D) fjólublá punktalína) og fyrir neðan MUF sporadic-E á 1000, 1500, 2000 og 2400 km með tíðnisviðunum sem opnast, í valinni Es-hæð.
+LI|Ef spotin krefjast hærri foEs en þeirrar mældu lætur forritið vita: skýið getur verið fjarri jónósöndunni, eða jónósandan er komin að mörkum tíðnisviðs síns.
+P|Gögnin eru frá GIRO (Reinisch og Galkin 2011), leyfi CC BY-NC-SA 4.0, aðeins til notkunar í öðrum en viðskiptalegum tilgangi.
+H1|5c. Es-SKÝ Í TÍMANS RÁS (undirflipi SPORADIC-E)
+P|Undirflipinn Es-SKÝ Í TÍMANS RÁS sýnir hvernig sporadic-E-skýin hreyfast og breytast, skref fyrir skref, með aðferð Chartier (2022): hvert samband gefur lágmarks-foEs í endurvarpspunktinum, og hvert hólf netsins tekur hæsta gildi skrefsins.
+LI|Uppspretta: Spot lotunnar (uppfærð í hvert sinn sem flipinn er opnaður), eða Hlaða ADIF-dagbók eða CSV-spotum. Flytja út spot lotunnar (CSV) vistar þau til að skoða eftir að forritinu er lokað, en þá tæmist spotasafnið.
+LI|Tíðnisvið MHz (28, 40, 50, 70, 144), Skref (5, 10 eða 15 mínútur), Hólf (1°, 2° eða 4°) og Es-hæð km.
+LI|Tímastika: ⏮ ◀ Ræsa/Stöðva ▶ ⏭ og sleðinn; við opnun er byrjað á skrefinu með flest hólf. Fyrri skref dofnuð sýnir þrjú skref á undan því valda, daufari; Sambönd teiknar leiðir skrefsins í litum tíðnisviðanna.
+LI|Tafla hólfanna: Hólf (suðvesturhorn og locator miðjunnar), foEs≥, NmE≥ (lágmarks-rafeindaþéttleiki), Sambönd og Tíðnisvið. Smellur á hólf (í töflunni eða á kortinu) auðkennir sambönd hans og kallmerkin.
+LI|Graf: hæsta lágmarks-foEs (gul lína) og fjöldi hólfa (súlur) fyrir hvert skref, með línu skrefsins sem sýnt er. Fyrir neðan samantektin með hæsta gildi uppsprettunnar.
+P|Gildið er neðri mörk: skýið getur verið þéttara en samböndin sýna, og tómt hólf þýðir aðeins að engin sambönd séu.
 H1|6. F.A.I.
 H2|6.1 Sýnirnar tvær
 P|Flipinn F.A.I. rannsakar scatter frá óreglum sem raðast eftir segulsviðinu (aðalheimild [1], [2]). Sýnin Scatter trail (par A-B) reiknar, fyrir tvær stöðvar, feril mögulegra scatter point, litaðan eftir fráviki frá endurvarpsskilyrðinu, leggur til líklegasta scatter point og teiknar efst til hægri ramma með QTF og hæðarhornum beggja stöðva (rautt = A, grænt = B). Sýnin Jafnendurvarp (punktur) teiknar, fyrir valinn endurvarpspunkt, jafnendurvarpslínur eins og AuroReflex og SE-PROP eftir K9SE: litaðar ræmur í dökkum stefjum, þykkar línur í ljósum stefjum.

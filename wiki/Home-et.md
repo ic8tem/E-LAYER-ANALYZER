@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-et) | Es-spotid kaardil, mõlema jaama esimene hüpe, Es-pilved Maidenheadi ruutudel, MUF sinu jaama jaoks |
 | [BENCHMARK Es](Benchmark-Es-et) | Katsestend terve ADIF-logi peal (ka teise jaama oma): QSO-d päevade ja tundide kaupa, skip sektorite kaupa, hinnanguline foEs, mitmehüppelise levi kontroll, pilvede nihkumine |
 | [BENCHMARK 50 MHz](Benchmark-50-et) | Mitmehüppeline sporaadiline E 50 MHz-l ühe või kahe ADIF-logi põhjal: Mercatori kaart, päev ja kellaaeg, valikuline foEs, suurendatud trass koos WWL-iga, QSO-d 150 km raadiuses |
+| [IONOSONDID](Ionosondes-et) | GIRO ionosondide foEs, foF2 ja MUF(D) reaalajas, 24 tunni graafik, sporaadilise E MUF koos avanevate sagedusaladega, võrdlus spotidega |
+| [Es-PILVED AJAS](Es-Clouds-Over-Time-et) | Es-pilved samm-sammult Chartieri 2022 meetodiga: minimaalne foEs ja NmE lahtri kohta seansi spotidest, ADIF-logist või CSV-spotidest |
 | [F.A.I.](FAI-et) | Jaamapaari hajumispunktide Scatter trail ja isopeegelduse jooned punkti kontrollimiseks |
 | [METEOR SCATTER](Meteor-Scatter-et) | Täielik programm YA-MS (meteoorivoolude efektiivsus, radarid, prognoosid) |
 | [AURORA](Aurora-et) | Aurora ovaal, NOAA Kp ja päikesetuul, aurora Scatter trail ja isopeegeldus, soovitatud antenni suund |

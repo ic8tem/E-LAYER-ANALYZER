@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-nl) | Es-spots op de kaart, eerste sprong van beide stations, Es-wolken op Maidenhead-vakken, MUF voor jouw station |
 | [BENCHMARK Es](Benchmark-Es-nl) | Testbank op een volledig ADIF-log (ook van een ander station): QSO's per dag en per uur, skip per sector, geschatte foEs, controle van meervoudige sprongen, drift van de wolken |
 | [BENCHMARK 50 MHz](Benchmark-50-nl) | Sporadische E met meervoudige sprongen op 50 MHz uit een of twee ADIF-logs: Mercator-kaart, dag en tijd, optionele foEs, vergroot traject met de WWL, QSO's binnen 150 km |
+| [IONOSONDES](Ionosondes-nl) | foEs, foF2 en MUF(D) live van de GIRO-ionosondes, grafiek van 24 uur, MUF van de sporadische E met de banden die opengaan, vergelijking met de spots |
+| [Es-WOLKEN IN DE TIJD](Es-Clouds-Over-Time-nl) | Es-wolken stap voor stap met de methode van Chartier 2022: minimale foEs en NmE per cel, uit spots van de sessie, ADIF-log of CSV-spots |
 | [F.A.I.](FAI-nl) | Scatter trail van de scatterpunten voor een paar stations, en iso-reflectielijnen om een punt te controleren |
 | [METEOR SCATTER](Meteor-Scatter-nl) | Het volledige programma YA-MS (efficiëntie van de zwermen, radars, voorspellingen) |
 | [AURORA](Aurora-nl) | Aurora-ovaal, Kp van NOAA en zonnewind, scatter trail en iso-reflectie voor aurora, aanbevolen antennerichting |

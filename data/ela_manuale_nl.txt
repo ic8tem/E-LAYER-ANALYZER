@@ -1,5 +1,5 @@
 TITLE|Handleiding van E-LAYER ANALYZER
-SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.5.1, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
+SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.5.2, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
 H1|1. Voordat je begint
 H2|1.1 Wat het programma doet
 P|E-LAYER ANALYZER brengt in één programma de hulpmiddelen samen om de VHF-propagatiemodi te bestuderen die via de E-laag van de ionosfeer verlopen: sporadische E, ook met meervoudige sprong en intercontinentaal, F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter, met het ingebouwde programma YA-MS, en radio-aurora. Het werkt met de spots van de DX-clusters in realtime en met ADIF-logs, en toont elk resultaat op een kaart die twee derde van het venster beslaat, met de gegevens en berekeningen in het rechterderde.
@@ -67,7 +67,7 @@ LI|Het niveau van de Dst leest men zo: rustig boven -30 nT, zwakke verstoring tu
 LI|Meteorscatter: de grafiek van de meteoractiviteit van de dag (RMOB-gegevens) van Make More Miles on VHF; zwermen, efficiëntie en live verkeer staan in de tab METEOR SCATTER.
 P|De samenvatting van deze gegevens verschijnt rechtsboven op de kaarten SPORADIC-E en F.A.I. (E-skip van het gekozen continent) en AURORA (aurora van N0NBH en Bz van de NOAA).
 H1|3. Sporadische E (SPORADIC-E)
-P|De tab SPORADIC-E heeft drie subtabs: REAL-TIME, de live spots die in dit hoofdstuk worden beschreven; BENCHMARK Es (hoofdstuk 4) en BENCHMARK 50 MHz (hoofdstuk 5).
+P|De tab SPORADIC-E heeft vijf subtabs: REAL-TIME, de live spots die in dit hoofdstuk worden beschreven; BENCHMARK Es (hoofdstuk 4), BENCHMARK 50 MHz (hoofdstuk 5), IONOSONDES (hoofdstuk 5b) en Es-WOLKEN IN DE TIJD (hoofdstuk 5c).
 H2|3.1 De kaart
 P|Het menu Kaart kiest de projectie. Azimutaal: azimutale equidistante kaart gecentreerd op het eigen station, met de zoomschuifregelaar (van 300 tot 20000 km vanaf het midden, ook met het muiswiel). Mercator: de wereldkaart, met de knoppen Europa en Wereld. In beide projecties worden rond het station de afstandscirkels van de tabel van IK3XTV [3] getekend: 500 km (minimum van de enkele sprong), 1500-2000 km (optimaal), 2400 km (maximum van de enkele sprong), 5000 km (maximum van de dubbele sprong) en 6900 km (maximum van de drievoudige sprong).
 P|De tabel van de sprongafstanden op 50 MHz is die van Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Propagatie op 6 meter - Algemene kenmerken) [3]; de Es-wolken liggen op ongeveer 100 km hoogte, en dat beperkt de enkele sprong tot ongeveer 2000 km [29]. De ringen op de kaarten en het aantal sprongen volgen deze afstanden:
@@ -120,6 +120,21 @@ LI|De vage gele stip markeert het midden van elke sprong, waar de sporadische-E-
 LI|De tabel somt de getoonde QSO's op met St. (station 1 of 2), Dag, UTC, Roepnaam, WWL, km, Sprongen en foEs≥. Met foEs aan geven de sprongpunten de minimale foEs; een locator van 4 tekens die in CALL3 ontbreekt, wordt naast de WWL gemeld.
 H2|5.2 De Mercatorkaart
 P|De kaart is een Mercatorkaart met vrij midden. Als de muis bij een traject komt, worden lijn en pictogrammen vergroot en verschijnt het WWL-vak van 6 tekens van het tegenstation. Met een linksklik op dat traject vraagt een pop-up of alle QSO's in het bestand, van alle dagen, met het eindpunt binnen 150 km getoond moeten worden: Ja maakt de kaart leeg en toont die QSO's binnen de oranje cirkel, Nee laat de kaart zoals ze is. De knop Terug naar dag en tijd keert terug naar de vorige keuze.
+H1|5b. IONOSONDES (subtab van SPORADIC-E)
+P|De subtab IONOSONDES toont de foEs die de ionosondes van het GIRO-netwerk over de hele wereld meten. De gegevens komen binnen bij het eerste openen van het tabblad en daarna elke 15 minuten, vanzelf (vakje Elke 15 minuten vanzelf bijwerken); de knop Nu bijwerken vraagt ze meteen op.
+LI|Kaart: elke ionosonde is een gekleurde stip met de laatste foEs (dezelfde kleuren als de Es-wolken) en de waarde in MHz; grijs als ze geen recente gegevens heeft, met de ring als het laatste ionogram ouder is dan 90 minuten. Het vakje Ook ionosondes zonder recente gegevens tonen verbergt of toont ze.
+LI|Tabel: Code, Ionosonde, km vanaf het eigen station, UTC van het laatste ionogram, foEs, foF2, MUF(D) en Spot foEs≥, de minimale foEs afgeleid uit de Es-spots van de laatste 30 minuten die binnen 500 km van de ionosonde reflecteren (vak Spots binnen km), met het aantal spots tussen haakjes.
+LI|Klik op een rij of naast een ionosonde op de kaart: de grafiek van de laatste 24 uur (foEs geel, foF2 lichtblauw, MUF(D) paars gestippeld) en daaronder de MUF van de sporadische E op 1000, 1500, 2000 en 2400 km met de banden die opengaan, op de gekozen Es-hoogte.
+LI|Als de spots een hogere foEs vragen dan de gemeten, meldt het programma dat: de wolk kan ver van de ionosonde liggen, of de ionosonde heeft de grens van haar frequentiebereik bereikt.
+P|De gegevens zijn van GIRO (Reinisch en Galkin 2011), licentie CC BY-NC-SA 4.0, alleen voor niet-commercieel gebruik.
+H1|5c. Es-WOLKEN IN DE TIJD (subtab van SPORADIC-E)
+P|De subtab Es-WOLKEN IN DE TIJD toont stap voor stap hoe de wolken van sporadische E bewegen en veranderen, met de methode van Chartier (2022): elke verbinding geeft de minimale foEs in het reflectiepunt, en elke cel van het raster neemt de hoogste waarde van de stap.
+LI|Bron: Spots van de sessie (bijgewerkt bij elk openen van het tabblad), of ADIF-log of CSV-spots laden. Spots van de sessie exporteren (CSV) slaat ze op om ze terug te zien na het sluiten van het programma, dat het spotarchief leegt.
+LI|Banden MHz (28, 40, 50, 70, 144), Stap (5, 10 of 15 minuten), Cel (1°, 2° of 4°) en Es-hoogte km.
+LI|Tijdbalk: ⏮ ◀ Starten/Stoppen ▶ ⏭ en de schuifregelaar; bij het openen begint hij bij de stap met de meeste cellen. Eerdere stappen vervaagd toont de drie stappen vóór de gekozen stap, lichter; Verbindingen tekent de trajecten van de stap in de kleuren van de banden.
+LI|Tabel van de cellen: Cel (zuidwestelijke hoek en locator van het midden), foEs≥, NmE≥ (minimale elektronendichtheid), Verbindingen en Banden. Klik op een cel (tabel of kaart): de verbindingen en roepnamen ervan worden gemarkeerd.
+LI|Grafiek: hoogste minimale foEs (gele lijn) en aantal cellen (staven) voor elke stap, met de lijn van de getoonde stap. Daaronder de samenvatting met de hoogste waarde van de bron.
+P|De waarde is een ondergrens: de wolk kan dichter zijn dan de verbindingen laten zien, en een lege cel betekent alleen dat er geen verbinding is.
 H1|6. F.A.I.
 H2|6.1 De twee weergaven
 P|De tab F.A.I. bestudeert de scatter op veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld (hoofdbron [1], [2]). De weergave Scatter trail (paar A-B) berekent voor twee stations de verzameling mogelijke scatterpunten, gekleurd naar de afwijking van de reflectievoorwaarde, stelt het meest waarschijnlijke scatterpunt voor en tekent rechtsboven het kader met de QTF's en elevaties van beide stations (rood = A, groen = B). De weergave Iso-reflectie (punt) tekent voor een gekozen reflectiepunt de iso-reflectielijnen, zoals AuroReflex en SE-PROP van K9SE: gekleurde banden in de donkere schema's, dikke lijnen in de lichte schema's.

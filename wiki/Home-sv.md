@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-sv) | Es-spots på kartan, båda stationernas första hopp, Es-moln på Maidenhead-rutor, MUF för din station |
 | [BENCHMARK Es](Benchmark-Es-sv) | Testbänk för en hel ADIF-logg (även från en annan station): QSO per dag och per timme, skip per sektor, uppskattad foEs, kontroll av multihopp, molnens drift |
 | [BENCHMARK 50 MHz](Benchmark-50-sv) | Sporadiskt E med multihopp på 50 MHz från en eller två ADIF-loggar: Mercatorkarta, dag och tid, valfri foEs, förstorad sträcka med WWL, QSO inom 150 km |
+| [JONOSONDER](Ionosondes-sv) | foEs, foF2 och MUF(D) i realtid från GIRO-jonosonderna, diagram över 24 timmar, MUF för sporadiskt E med de band som öppnar, jämförelse med spotsen |
+| [Es-MOLN ÖVER TID](Es-Clouds-Over-Time-sv) | Es-moln steg för steg med Chartiers metod 2022: minsta foEs och NmE per cell, från sessionens spots, en ADIF-logg eller CSV-spots |
 | [F.A.I.](FAI-sv) | Scatter trail för scatterpunkterna för ett par stationer, och isoreflexionslinjer för att kontrollera en punkt |
 | [METEOR SCATTER](Meteor-Scatter-sv) | Hela programmet YA-MS (svärmarnas effektivitet, radarer, prognoser) |
 | [AURORA](Aurora-sv) | Norrskensoval, Kp och solvind från NOAA, scatter trail och isoreflexion för aurora, rekommenderad antennriktning |

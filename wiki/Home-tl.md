@@ -13,6 +13,8 @@ Ang **E-LAYER ANALYZER** ay isang libreng programa para sa mga radio amateur na 
 | [SPORADIC-E](Sporadic-E-tl) | Mga spot ng Es sa mapa, unang hop ng dalawang istasyon, mga ulap ng Es sa mga Maidenhead grid square, MUF para sa iyong istasyon |
 | [BENCHMARK Es](Benchmark-Es-tl) | Test bench sa isang buong ADIF log (kahit mula sa ibang istasyon): mga QSO bawat araw at bawat oras, skip ayon sa sektor, tinatayang foEs, pagsusuri ng multi-hop, pag-usad ng mga ulap |
 | [BENCHMARK 50 MHz](Benchmark-50-tl) | Multi-hop na sporadic-E sa 50 MHz mula sa isa o dalawang ADIF log: mapang Mercator, araw at oras, opsiyonal na foEs, pinalaking landas na may WWL, mga QSO sa loob ng 150 km |
+| [MGA IONOSONDE](Ionosondes-tl) | foEs, foF2 at MUF(D) nang live mula sa mga GIRO ionosonde, graph ng 24 oras, MUF ng E-sporadic kasama ang mga bandang nagbubukas, paghahambing sa mga spot |
+| [MGA ULAP NG Es SA PAGLIPAS NG ORAS](Es-Clouds-Over-Time-tl) | Mga ulap ng Es hakbang-hakbang gamit ang paraan ni Chartier 2022: pinakamababang foEs at NmE bawat cell, mula sa mga spot ng session, ADIF log o CSV spot |
 | [F.A.I.](FAI-tl) | Scatter trail ng mga scatter point para sa isang pares ng istasyon, at mga iso-repleksiyong locus para suriin ang isang punto |
 | [METEOR SCATTER](Meteor-Scatter-tl) | Ang buong programang YA-MS (episyensya ng mga shower, mga radar, mga pagtataya) |
 | [AURORA](Aurora-tl) | Auroral oval, Kp ng NOAA at solar wind, auroral na scatter trail at iso-repleksiyon, inirerekomendang tutok ng beam |

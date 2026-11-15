@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-is) | Es-spot á kortinu, fyrsta stökk beggja stöðva, Es-ský á Maidenhead-reitum, MUF fyrir þína stöð |
 | [BENCHMARK Es](Benchmark-Es-is) | Prófunarbekkur fyrir heila ADIF-dagbók (líka frá annarri stöð): QSO eftir dögum og klukkustundum, skip eftir geirum, áætlað foEs, prófun fjölstökka, rek skýjanna |
 | [BENCHMARK 50 MHz](Benchmark-50-is) | Fjölstökks-sporadic-E á 50 MHz úr einni eða tveimur ADIF-dagbókum: Mercator-kort, dagur og tími, valfrjálst foEs, stækkuð leið með WWL, QSO innan 150 km |
+| [JÓNÓSÖNDUR](Ionosondes-is) | foEs, foF2 og MUF(D) í rauntíma frá GIRO-jónósöndum, graf 24 klukkustunda, MUF sporadic-E með tíðnisviðunum sem opnast, samanburður við spotin |
+| [Es-SKÝ Í TÍMANS RÁS](Es-Clouds-Over-Time-is) | Es-ský skref fyrir skref með aðferð Chartier 2022: lágmarks-foEs og NmE á hólf, úr spotum lotunnar, ADIF-dagbók eða CSV-spotum |
 | [F.A.I.](FAI-is) | Scatter trail scatter point-anna fyrir par stöðva, og jafnendurvarpslínur til að prófa punkt |
 | [METEOR SCATTER](Meteor-Scatter-is) | Allt forritið YA-MS (nýtni drífa, ratsjár, spár) |
 | [AURORA](Aurora-is) | Norðurljósasporbaugur, Kp og sólvindur frá NOAA, scatter trail og jafnendurvarp fyrir norðurljós, ráðlögð loftnetsstefna |

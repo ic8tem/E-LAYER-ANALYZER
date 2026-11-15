@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka E-LAYER ANALYZER
-SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.5.1, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
+SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.5.2, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
 H1|1. Než začnete
 H2|1.1 Co program dělá
 P|E-LAYER ANALYZER shromažďuje v jediném programu nástroje ke studiu druhů šíření na VKV, které procházejí vrstvou E ionosféry: sporadickou vrstvu E, i vícenásobným skokem a mimokontinentální, F.A.I. (nehomogenity orientované podél magnetického pole), meteor scatter se začleněným programem YA-MS a rádiovou auroru. Pracuje se spoty z DX clusterů v reálném čase a s deníky ADIF a každý výsledek zobrazuje na mapě, která zabírá dvě třetiny okna, s daty a výpočty v pravé třetině.
@@ -67,7 +67,7 @@ LI|Úroveň Dst se čte takto: klid nad -30 nT, slabá porucha mezi -30 a -50 nT
 LI|Meteor scatter: graf dnešní meteorické aktivity (data RMOB) z Make More Miles on VHF; roje, účinnost a živý provoz jsou v kartě METEOR SCATTER.
 P|Souhrn těchto dat se zobrazuje vpravo nahoře na mapách SPORADIC-E a F.A.I. (E-skip zvoleného kontinentu) a AURORA (aurora od N0NBH a Bz od NOAA).
 H1|3. Sporadická vrstva E (SPORADIC-E)
-P|Karta SPORADIC-E má tři podkarty: REAL-TIME, živé spoty popsané v této kapitole; BENCHMARK Es (kapitola 4) a BENCHMARK 50 MHz (kapitola 5).
+P|Karta SPORADIC-E má pět podkaret: REAL-TIME, živé spoty popsané v této kapitole; BENCHMARK Es (kapitola 4), BENCHMARK 50 MHz (kapitola 5), IONOSONDY (kapitola 5b) a OBLAKA Es V ČASE (kapitola 5c).
 H2|3.1 Mapa
 P|Nabídka Mapa volí projekci. Azimutální: azimutální ekvidistantní mapa se středem ve vlastní stanici, s posuvníkem zvětšení (od 300 do 20000 km od středu, také kolečkem myši). Mercator: mapa světa s tlačítky Evropa a Svět. V obou projekcích se kolem stanice kreslí kruhy vzdáleností z tabulky IK3XTV [3]: 500 km (minimum jednoho skoku), 1500-2000 km (optimum), 2400 km (maximum jednoho skoku), 5000 km (maximum dvojitého skoku) a 6900 km (maximum trojitého skoku).
 P|Tabulka délek skoků na 50 MHz pochází od Flavia Egana IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; oblaka Es se nacházejí ve výšce asi 100 km, což omezuje jeden skok na zhruba 2000 km [29]. Mezikruží na mapách a počet skoků se řídí těmito vzdálenostmi:
@@ -120,6 +120,21 @@ LI|Rozmazaná žlutá tečka označuje střed každého skoku, kde se předpokl�
 LI|Tabulka uvádí zobrazená QSO se sloupci St. (stanice 1 nebo 2), Den, UTC, Značka, WWL, km, Skoky a foEs≥. Se zapnutou foEs uvádějí body skoku minimální foEs; 4znakový lokátor, který chybí v CALL3, je označen vedle WWL.
 H2|5.2 Mercatorova mapa
 P|Mapa je Mercatorova s volným středem. Když se myš přiblíží k trase, čára a ikony se zvětší a zobrazí se 6znakový čtverec WWL protistanice. Levým kliknutím na tuto trasu se objeví okno s dotazem, zda zobrazit všechna QSO v souboru, ze všech dnů, s koncovou polohou do 150 km: Ano vyprázdní mapu a zobrazí tato QSO uvnitř oranžového kruhu, Ne nechá mapu, jak je. Tlačítko Zpět na den a čas vrátí předchozí volbu.
+H1|5b. IONOSONDY (podkarta SPORADIC-E)
+P|Podkarta IONOSONDY ukazuje foEs měřenou ionosondami sítě GIRO po celém světě. Data přicházejí při prvním otevření karty a pak každých 15 minut, sama (pole Aktualizovat automaticky každých 15 minut); tlačítko Aktualizovat nyní si je vyžádá okamžitě.
+LI|Mapa: každá ionosonda je barevná tečka s poslední foEs (stejné barvy jako oblaka Es) a hodnotou v MHz; šedá, pokud nemá aktuální data, s kroužkem, pokud je poslední ionogram starší než 90 minut. Pole Zobrazit i ionosondy bez aktuálních dat je skryje nebo zobrazí.
+LI|Tabulka: Kód, Ionosonda, km od vlastní stanice, UTC posledního ionogramu, foEs, foF2, MUF(D) a Spoty foEs≥, minimální foEs odvozená ze spotů Es za posledních 30 minut, které se odrážejí do 500 km od ionosondy (pole Spoty do km), s počtem spotů v závorce.
+LI|Kliknutí na řádek nebo poblíž ionosondy na mapě: graf posledních 24 hodin (foEs žlutá, foF2 světle modrá, MUF(D) fialová tečkovaná) a pod ním MUF sporadické vrstvy E na 1000, 1500, 2000 a 2400 km s pásmy, která se otevírají, ve zvolené výšce Es.
+LI|Pokud spoty vyžadují vyšší foEs, než je naměřená, program to oznámí: oblak může být daleko od ionosondy, nebo ionosonda dosáhla hranice svého kmitočtového rozsahu.
+P|Data pocházejí z GIRO (Reinisch a Galkin 2011), licence CC BY-NC-SA 4.0, jen pro nekomerční použití.
+H1|5c. OBLAKA Es V ČASE (podkarta SPORADIC-E)
+P|Podkarta OBLAKA Es V ČASE ukazuje, jak se oblaka sporadické vrstvy E pohybují a mění, krok za krokem, metodou Chartiera (2022): každé spojení dává minimální foEs v bodě odrazu a každá buňka mřížky převezme nejvyšší hodnotu kroku.
+LI|Zdroj: Spoty relace (aktualizují se při každém otevření karty), nebo Načíst deník ADIF nebo spoty CSV. Exportovat spoty relace (CSV) je uloží, aby je bylo možné prohlédnout po zavření programu, které archiv spotů vyprázdní.
+LI|Pásma MHz (28, 40, 50, 70, 144), Krok (5, 10 nebo 15 minut), Buňka (1°, 2° nebo 4°) a Výška Es km.
+LI|Časová lišta: ⏮ ◀ Spustit/Zastavit ▶ ⏭ a posuvník; po otevření se začíná krokem s nejvíce buňkami. Vybledlé předchozí kroky ukazuje tři kroky před zvoleným, slaběji; Spojení kreslí trasy kroku barvami pásem.
+LI|Tabulka buněk: Buňka (jihozápadní roh a lokátor středu), foEs≥, NmE≥ (minimální elektronová hustota), Spojení a Pásma. Kliknutí na buňku (v tabulce nebo na mapě): zvýrazní její spojení a značky.
+LI|Graf: nejvyšší minimální foEs (žlutá čára) a počet buněk (sloupce) pro každý krok, s čarou zobrazeného kroku. Pod ním souhrn s nejvyšší hodnotou zdroje.
+P|Hodnota je dolní mez: oblak může být hustší, než ukazují spojení, a prázdná buňka znamená jen to, že není žádné spojení.
 H1|6. F.A.I.
 H2|6.1 Dvě zobrazení
 P|Karta F.A.I. studuje rozptyl na nehomogenitách orientovaných podél magnetického pole (hlavní zdroj [1], [2]). Zobrazení Scatter trail (dvojice A-B) vypočítá pro dvě stanice místo možných bodů rozptylu, obarvené podle odchylky od podmínky odrazu, navrhne nejpravděpodobnější bod rozptylu a vpravo nahoře nakreslí rámeček QTF a elevací obou stanic (červená = A, zelená = B). Zobrazení Izoflexe (bod) kreslí pro zvolený bod odrazu čáry izoflexe jako AuroReflex a SE-PROP od K9SE: barevné pásy v tmavých schématech, silné čáry ve světlých schématech.

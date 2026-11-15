@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-pl) | Spoty Es na mapie, pierwszy skok obu stacji, obłoki Es na kwadratach Maidenhead, MUF dla twojej stacji |
 | [BENCHMARK Es](Benchmark-Es-pl) | Stanowisko testowe na całym logu ADIF (także innej stacji): QSO na dzień i na godzinę, skip według sektorów, szacowana foEs, weryfikacja wieloskoku, przemieszczanie się obłoków |
 | [BENCHMARK 50 MHz](Benchmark-50-pl) | Wieloskokowe E-sporadyczne na 50 MHz z jednego lub dwóch logów ADIF: mapa Merkatora, dzień i godziny, opcjonalna foEs, powiększona trasa z WWL, QSO w promieniu 150 km |
+| [JONOSONDY](Ionosondes-pl) | foEs, foF2 i MUF(D) na żywo z jonosond GIRO, wykres 24 godzin, MUF E-sporadycznego z pasmami, które się otwierają, porównanie ze spotami |
+| [OBŁOKI Es W CZASIE](Es-Clouds-Over-Time-pl) | Obłoki Es krok po kroku metodą Chartiera 2022: minimalna foEs i NmE na komórkę, ze spotów z sesji, logu ADIF lub spotów CSV |
 | [F.A.I.](FAI-pl) | Scatter trail scatter pointów dla pary stacji oraz izorefleksja do sprawdzenia punktu |
 | [METEOR SCATTER](Meteor-Scatter-pl) | Pełny program YA-MS (efektywność rojów, radary, prognozy) |
 | [AURORA](Aurora-pl) | Owal zorzowy, Kp i wiatr słoneczny z NOAA, zorzowy scatter trail i izorefleksja, zalecany kierunek anteny |

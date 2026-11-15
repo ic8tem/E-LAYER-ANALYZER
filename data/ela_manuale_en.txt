@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER user manual
-SUB|In-depth user manual - by Costantino IC8TEM - version 0.5.1, November 2026. Numbers in square brackets refer to the SOURCES tab; the formulas and calculation choices are in the SUMMARY OF THE CALCULATION CHOICES tab.
+SUB|In-depth user manual - by Costantino IC8TEM - version 0.5.2, November 2026. Numbers in square brackets refer to the SOURCES tab; the formulas and calculation choices are in the SUMMARY OF THE CALCULATION CHOICES tab.
 H1|1. Before you start
 H2|1.1 What the program does
 P|E-LAYER ANALYZER brings together in a single program the tools for studying the VHF propagation modes that pass through the E layer of the ionosphere: sporadic-E, including multi-hop and extra-continental, F.A.I. (field-aligned irregularities), meteor scatter, with the integrated YA-MS program, and radio aurora. It works on DX cluster spots in real time and on ADIF logs, and shows every result on a map that takes up two thirds of the window, with the data and calculations in the right-hand third.
@@ -67,7 +67,7 @@ LI|The Dst level reads as follows: quiet above -30 nT, weak disturbance between 
 LI|Meteor scatter: the chart of today's meteor activity (RMOB data) from Make More Miles on VHF; showers, efficiency and live traffic are in the METEOR SCATTER tab.
 P|The summary of these data appears at the top right of the SPORADIC-E and F.A.I. maps (E-skip for the chosen continent) and of the AURORA map (N0NBH aurora and NOAA Bz).
 H1|3. Sporadic-E (SPORADIC-E)
-P|The SPORADIC-E tab has three sub-tabs: REAL-TIME, the live spots described in this chapter; BENCHMARK Es (chapter 4) and BENCHMARK 50 MHz (chapter 5).
+P|The SPORADIC-E tab has five sub-tabs: REAL-TIME, the live spots described in this chapter; BENCHMARK Es (chapter 4), BENCHMARK 50 MHz (chapter 5), IONOSONDES (chapter 5b) and Es CLOUDS OVER TIME (chapter 5c).
 H2|3.1 The map
 P|The Map menu chooses the projection. Azimuthal: azimuthal equidistant map centred on your own station, with the zoom slider (from 300 to 20000 km from the centre, also with the mouse wheel). Mercator: the world map, with the Europe and World buttons. In both projections the distance circles of the IK3XTV table [3] are drawn around the station: 500 km (single-hop minimum), 1500-2000 km (optimum), 2400 km (single-hop maximum), 5000 km (double-hop maximum) and 6900 km (triple-hop maximum).
 P|The table of hop lengths on 50 MHz is the one by Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Propagation on 6 metres - General characteristics) [3]; Es clouds lie at a height of about 100 km, and this limits the single hop to around 2000 km [29]. The rings on the maps and the number of hops follow these distances:
@@ -120,6 +120,21 @@ LI|The blurred yellow dot marks the centre of every hop, where the sporadic-E cl
 LI|The table lists the QSOs shown with St. (station 1 or 2), Day, UTC, Callsign, WWL, km, Hops and foEs≥. With foEs on, the hop points give the minimum foEs; a 4-character locator missing from CALL3 is flagged next to the WWL.
 H2|5.2 The Mercator map
 P|The map is a Mercator projection with a free centre. When the mouse approaches a path, the line and icons are enlarged and the 6-character WWL square of the correspondent appears. With a left click on that path a popup asks whether to show all the QSOs in the file, from all days, with the end position within 150 km: Yes clears the map and shows those QSOs inside the orange circle, No leaves the map as it is. The Back to day and time button returns to the previous selection.
+H1|5b. IONOSONDES (sub-tab of SPORADIC-E)
+P|The IONOSONDES sub-tab shows the foEs measured by the ionosondes of the GIRO network all over the world. The data arrive the first time the tab is opened and then every 15 minutes, by themselves (Update by itself every 15 minutes checkbox); the Update now button requests them at once.
+LI|Map: each ionosonde is a coloured dot with the latest foEs (same colours as the Es clouds) and the value in MHz; grey if it has no recent data, with the ring if the last ionogram is more than 90 minutes old. The Also show the ionosondes without recent data checkbox hides or shows them.
+LI|Table: Code, Ionosonde, km from your own station, UTC of the last ionogram, foEs, foF2, MUF(D) and Spot foEs≥, the minimum foEs derived from the Es spots of the last 30 minutes that reflect within 500 km of the ionosonde (Spots within km box), with the number of spots in brackets.
+LI|Click on a row or near an ionosonde on the map: the chart of the last 24 hours (foEs yellow, foF2 light blue, MUF(D) violet dotted) and, below, the sporadic-E MUF at 1000, 1500, 2000 and 2400 km with the bands that open, at the chosen Es height.
+LI|If the spots require a higher foEs than the measured one, the program flags it: the cloud may be far from the ionosonde, or the ionosonde has reached the limit of its frequency range.
+P|The data are from GIRO (Reinisch and Galkin 2011), licence CC BY-NC-SA 4.0, for non-commercial use only.
+H1|5c. Es CLOUDS OVER TIME (sub-tab of SPORADIC-E)
+P|The Es CLOUDS OVER TIME sub-tab shows how the sporadic-E clouds move and change, step by step, with the Chartier (2022) method: each link gives the minimum foEs at the reflection point, and each cell of the grid takes the highest value of the step.
+LI|Source: Session spots (refreshed every time the tab is opened), or Load ADIF log or CSV spots. Export the session spots (CSV) saves them so they can be reviewed after the program is closed, which empties the spot archive.
+LI|Bands MHz (28, 40, 50, 70, 144), Step (5, 10 or 15 minutes), Cell (1°, 2° or 4°) and Es height km.
+LI|Time bar: ⏮ ◀ Start/Stop ▶ ⏭ and the slider; on opening it starts from the step with the most cells. Earlier steps faded shows the three steps before the selected one, paler; Links draws the paths of the step in the band colours.
+LI|Table of the cells: Cell (south-west corner and locator of the centre), foEs≥, NmE≥ (minimum electron density), Links and Bands. Click on a cell (table or map): its links and callsigns are highlighted.
+LI|Chart: highest minimum foEs (yellow line) and number of cells (bars) for each step, with the line of the step shown. Below, the summary with the highest value of the source.
+P|The value is a lower limit: the cloud may be denser than the links show, and an empty cell only means no link.
 H1|6. F.A.I.
 H2|6.1 The two views
 P|The F.A.I. tab studies scatter from field-aligned irregularities (main source [1], [2]). The Scatter trail (A-B pair) view calculates, for two stations, the locus of possible scatter points, coloured according to the deviation from the reflection condition, proposes the most probable scatter point and draws at the top right the box of QTFs and elevations of both stations (red = A, green = B). The Isoflection (point) view draws, for a chosen reflection point, the isoflection lines like AuroReflex and SE-PROP by K9SE: coloured bands in the dark schemes, thick lines in the light schemes.

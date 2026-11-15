@@ -13,6 +13,8 @@ O **E-LAYER ANALYZER** é um programa gratuito para radioamadores que analisa to
 | [SPORADIC-E](Sporadic-E-pt-br) | Spots Es no mapa, primeiro salto de ambas as estações, nuvens Es nos quadrados Maidenhead, MUF para a sua estação |
 | [BENCHMARK Es](Benchmark-Es-pt-br) | Banco de testes sobre um log ADIF completo (mesmo de outra estação): QSO por dia e por hora, skip por setores, foEs estimada, verificação do multi-salto, deslocamento das nuvens |
 | [BENCHMARK 50 MHz](Benchmark-50-pt-br) | Esporádica E multi-salto em 50 MHz a partir de um ou dois logs ADIF: mapa de Mercator, dia e horário, foEs opcional, percurso ampliado com o WWL, QSO em um raio de 150 km |
+| [IONOSSONDAS](Ionosondes-pt-br) | foEs, foF2 e MUF(D) ao vivo das ionossondas GIRO, gráfico de 24 horas, MUF da esporádica E com as bandas que se abrem, comparação com os spots |
+| [NUVENS Es NO TEMPO](Es-Clouds-Over-Time-pt-br) | Nuvens Es passo a passo com o método de Chartier 2022: foEs mínima e NmE por célula, a partir dos spots da sessão, de um log ADIF ou de spots CSV |
 | [F.A.I.](FAI-pt-br) | Scatter trail dos scatter points para um par de estações, e lugares de iso-reflexão para verificar um ponto |
 | [METEOR SCATTER](Meteor-Scatter-pt-br) | O programa YA-MS completo (eficiência das chuvas, radares, previsões) |
 | [AURORA](Aurora-pt-br) | Oval auroral, Kp da NOAA e vento solar, scatter trail auroral e iso-reflexão, apontamento recomendado |

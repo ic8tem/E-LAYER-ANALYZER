@@ -1,5 +1,5 @@
 TITLE|Brukerhåndbok for E-LAYER ANALYZER
-SUB|Utførlig brukerhåndbok - ved Costantino IC8TEM - versjon 0.5.1, november 2026. Tallene i hakeparentes viser til fanen KILDER; formlene og beregningsvalgene finnes i fanen SAMMENDRAG AV BEREGNINGSVALGENE.
+SUB|Utførlig brukerhåndbok - ved Costantino IC8TEM - versjon 0.5.2, november 2026. Tallene i hakeparentes viser til fanen KILDER; formlene og beregningsvalgene finnes i fanen SAMMENDRAG AV BEREGNINGSVALGENE.
 H1|1. Før du begynner
 H2|1.1 Hva programmet gjør
 P|E-LAYER ANALYZER samler i ett program verktøyene for å studere de VHF-utbredelsesmåtene som går via ionosfærens E-lag: sporadisk E, også multihopp og interkontinental, F.A.I. (feltlinjeorienterte irregulariteter), meteor scatter, med det integrerte programmet YA-MS, og radionordlys. Programmet arbeider med spot fra DX-klynger i sanntid og med ADIF-logger, og viser hvert resultat på et kart som opptar to tredjedeler av vinduet, med data og beregninger i den høyre tredjedelen.
@@ -67,7 +67,7 @@ LI|Dst-nivået leses slik: rolig over -30 nT, svak forstyrrelse mellom -30 og -5
 LI|Meteor scatter: grafen over dagens meteoraktivitet (RMOB-data) fra Make More Miles on VHF; svermer, effektivitet og direkte trafikk finnes i fanen METEOR SCATTER.
 P|Sammendraget av disse dataene vises øverst til høyre på kartene SPORADIC-E og F.A.I. (E-skip for valgt kontinent) og AURORA (nordlys fra N0NBH og Bz fra NOAA).
 H1|3. Sporadisk E (SPORADIC-E)
-P|Fanen SPORADIC-E har tre underfaner: REAL-TIME, spot i sanntid som beskrives i dette kapitlet; BENCHMARK Es (kapittel 4) og BENCHMARK 50 MHz (kapittel 5).
+P|Fanen SPORADIC-E har fem underfaner: REAL-TIME, spot i sanntid som beskrives i dette kapitlet; BENCHMARK Es (kapittel 4), BENCHMARK 50 MHz (kapittel 5), IONOSONDER (kapittel 5b) og Es-SKYER OVER TID (kapittel 5c).
 H2|3.1 Kartet
 P|Menyen Kart velger projeksjonen. Asimutal: asimutalt ekvidistant kart sentrert på egen stasjon, med zoomglidebryteren (fra 300 til 20000 km fra sentrum, også med musehjulet). Mercator: verdenskartet med knappene Europa og Verden. I begge projeksjonene tegnes avstandssirklene fra tabellen til IK3XTV [3] rundt stasjonen: 500 km (minst for enkelthopp), 1500-2000 km (optimalt), 2400 km (høyst for enkelthopp), 5000 km (høyst for dobbelthopp) og 6900 km (høyst for trippelhopp).
 P|Tabellen over hopplengder på 50 MHz er den til Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Utbredelse på 6 meter - Generelle egenskaper) [3]; Es-skyene ligger i omkring 100 km høyde, og dette begrenser enkelthoppet til rundt 2000 km [29]. Ringene på kartene og antallet hopp følger disse avstandene:
@@ -120,6 +120,21 @@ LI|Den uskarpe gule prikken markerer midten av hvert hopp, der skyen av sporadis
 LI|Tabellen lister de viste QSO-ene med St. (stasjon 1 eller 2), Dag, UTC, Kallesignal, WWL, km, Hopp og foEs≥. Med foEs slått på viser hoppunktene minste foEs; en lokator på 4 tegn som mangler i CALL3, markeres ved siden av WWL.
 H2|5.2 Mercator-kartet
 P|Kartet er et Mercator-kart med fritt sentrum. Når musen nærmer seg en strekning, forstørres linjen og ikonene, og motstasjonens WWL-rute med 6 tegn vises. Ved venstreklikk på strekningen spør en dialogboks om alle QSO-er i filen, fra alle dager, med endeposisjon innenfor 150 km skal vises: Ja tømmer kartet og viser disse QSO-ene innenfor den oransje sirkelen, Nei lar kartet være som det er. Knappen Tilbake til dag og tid går tilbake til forrige valg.
+H1|5b. IONOSONDER (underfane i SPORADIC-E)
+P|Underfanen IONOSONDER viser foEs målt av ionosondene i GIRO-nettet over hele verden. Dataene kommer første gang fanen åpnes, og deretter hvert 15. minutt av seg selv (avkrysningsboksen Oppdater selv hvert 15. minutt); knappen Oppdater nå henter dem med en gang.
+LI|Kart: hver ionosonde er en farget prikk med siste foEs (samme farger som Es-skyene) og verdien i MHz; grå hvis den ikke har nye data, med ring hvis det siste ionogrammet er over 90 minutter gammelt. Avkrysningsboksen Vis også ionosonder uten nye data skjuler eller viser dem.
+LI|Tabell: Kode, Ionosonde, km fra egen stasjon, UTC for siste ionogram, foEs, foF2, MUF(D) og Spot foEs≥, den minste foEs utledet av Es-spot fra de siste 30 minuttene som reflekteres innenfor 500 km fra ionosonden (feltet Spot innenfor km), med antall spot i parentes.
+LI|Klikk på en rad eller nær en ionosonde på kartet: grafen for de siste 24 timene (foEs gul, foF2 lyseblå, MUF(D) lilla prikket) og under den MUF for sporadisk E ved 1000, 1500, 2000 og 2400 km med båndene som åpner, i den valgte Es-høyden.
+LI|Hvis spotene krever en høyere foEs enn den målte, sier programmet fra: skyen kan ligge langt fra ionosonden, eller ionosonden har nådd grensen for frekvensområdet sitt.
+P|Dataene kommer fra GIRO (Reinisch og Galkin 2011), lisens CC BY-NC-SA 4.0, bare for ikke-kommersiell bruk.
+H1|5c. Es-SKYER OVER TID (underfane i SPORADIC-E)
+P|Underfanen Es-SKYER OVER TID viser hvordan skyene av sporadisk E beveger seg og endrer seg, steg for steg, med Chartiers metode (2022): hver forbindelse gir den minste foEs i refleksjonspunktet, og hver celle i rutenettet får den høyeste verdien i steget.
+LI|Kilde: Spot fra økten (oppdateres hver gang fanen åpnes), eller Last inn ADIF-logg eller CSV-spot. Eksporter spotene fra økten (CSV) lagrer dem slik at de kan ses på igjen etter at programmet er lukket, som tømmer spotarkivet.
+LI|Bånd MHz (28, 40, 50, 70, 144), Steg (5, 10 eller 15 minutter), Celle (1°, 2° eller 4°) og Es-høyde km.
+LI|Tidslinje: ⏮ ◀ Start/Stopp ▶ ⏭ og glidebryteren; ved åpning starter visningen på steget med flest celler. Tidligere steg falmet viser de tre stegene før det valgte, svakere; Forbindelser tegner strekningene i steget med båndenes farger.
+LI|Celletabell: Celle (sørvestlige hjørne og lokatoren for sentrum), foEs≥, NmE≥ (minste elektrontetthet), Forbindelser og Bånd. Klikk på en celle (tabell eller kart): forbindelsene og kallesignalene i den framheves.
+LI|Graf: høyeste minste foEs (gul linje) og antall celler (søyler) for hvert steg, med linjen for steget som vises. Under den oversikten med den høyeste verdien i kilden.
+P|Verdien er en nedre grense: skyen kan være tettere enn forbindelsene viser, og en tom celle betyr bare at det ikke finnes noen forbindelser.
 H1|6. F.A.I.
 H2|6.1 De to visningene
 P|Fanen F.A.I. studerer scatter fra feltlinjeorienterte irregulariteter (hovedkilder [1], [2]). Visningen Scatter trail (par A-B) beregner, for to stasjoner, det geometriske stedet for mulige scatter-punkter, farget etter avviket fra refleksjonsbetingelsen, foreslår det mest sannsynlige scatter-punktet og tegner øverst til høyre boksen med QTF og elevasjon for begge stasjonene (rød = A, grønn = B). Visningen Isorefleksjon (punkt) tegner, for et valgt refleksjonspunkt, isorefleksjonslinjene på samme måte som AuroReflex og SE-PROP fra K9SE: fargede belter i de mørke temaene, tykke linjer i de lyse.

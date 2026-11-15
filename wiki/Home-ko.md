@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-ko) | 지도 위의 Es 스폿, 두 국의 첫 홉, Maidenhead 그리드의 Es 구름, 내 국의 MUF |
 | [BENCHMARK Es](Benchmark-Es-ko) | ADIF 로그 전체(다른 국의 로그도 가능)에 대한 시험대: 날짜별·시간별 QSO, 섹터별 스킵, 추정 foEs, 멀티홉 검증, 구름 이동 |
 | [BENCHMARK 50 MHz](Benchmark-50-ko) | 하나 또는 두 개의 ADIF 로그로 보는 50 MHz 멀티홉 스포라딕 E: 메르카토르 지도, 날짜와 시간대, 선택적 foEs, WWL이 표시된 확대 경로, 150 km 이내의 QSO |
+| [이오노존데](Ionosondes-ko) | GIRO 이오노존데의 실시간 foEs, foF2, MUF(D), 24시간 그래프, 열리는 밴드와 함께 스포라딕 E의 MUF, 스폿과의 비교 |
+| [시간에 따른 Es 구름](Es-Clouds-Over-Time-ko) | Chartier 2022의 방법에 따른 스텝별 Es 구름: 셀마다 최소 foEs와 NmE, 세션의 스폿, ADIF 로그 또는 CSV 스폿에서 |
 | [F.A.I.](FAI-ko) | 국 쌍에 대한 스캐터 포인트의 Scatter trail, 그리고 한 점을 검증하는 등반사 궤적 |
 | [METEOR SCATTER](Meteor-Scatter-ko) | YA-MS 프로그램 전체(유성우 효율, 레이더, 예보) |
 | [AURORA](Aurora-ko) | 오로라 오벌, NOAA Kp와 태양풍, 오로라 Scatter trail과 등반사, 추천 빔 지향 |

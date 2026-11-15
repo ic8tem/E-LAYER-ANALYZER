@@ -1,5 +1,5 @@
 TITLE|Användarhandbok för E-LAYER ANALYZER
-SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.5.1, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
+SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.5.2, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
 H1|1. Innan du börjar
 H2|1.1 Vad programmet gör
 P|E-LAYER ANALYZER samlar i ett enda program verktygen för att studera de VHF-utbredningssätt som går via jonosfärens E-skikt: sporadiskt E, även multihopp och interkontinentalt, F.A.I. (fältlinjeorienterade irreguljäriteter), meteor scatter, med det integrerade programmet YA-MS, och radioaurora. Programmet arbetar med spots från DX-kluster i realtid och med ADIF-loggar, och visar varje resultat på en karta som upptar två tredjedelar av fönstret, med data och beräkningar i den högra tredjedelen.
@@ -67,7 +67,7 @@ LI|Dst-nivån läses så här: lugnt över -30 nT, svag störning mellan -30 och
 LI|Meteor scatter: diagrammet över dagens meteoraktivitet (RMOB-data) från Make More Miles on VHF; svärmar, effektivitet och trafik i realtid finns under fliken METEOR SCATTER.
 P|Sammanfattningen av dessa data visas uppe till höger på kartorna SPORADIC-E och F.A.I. (E-skip för vald kontinent) och AURORA (aurora från N0NBH och Bz från NOAA).
 H1|3. Sporadiskt E (SPORADIC-E)
-P|Fliken SPORADIC-E har tre underflikar: REAL-TIME, spots i realtid som beskrivs i detta kapitel; BENCHMARK Es (kapitel 4) och BENCHMARK 50 MHz (kapitel 5).
+P|Fliken SPORADIC-E har fem underflikar: REAL-TIME, spots i realtid som beskrivs i detta kapitel; BENCHMARK Es (kapitel 4), BENCHMARK 50 MHz (kapitel 5), JONOSONDER (kapitel 5b) och Es-MOLN ÖVER TID (kapitel 5c).
 H2|3.1 Kartan
 P|Menyn Karta väljer projektionen. Azimutal: azimutal ekvidistant karta centrerad på den egna stationen, med zoomreglaget (från 300 till 20000 km från mitten, även med mushjulet). Mercator: världskartan med knapparna Europa och Världen. I båda projektionerna ritas avståndscirklarna från IK3XTV:s tabell [3] runt stationen: 500 km (minsta för enkelt hopp), 1500-2000 km (optimalt), 2400 km (största för enkelt hopp), 5000 km (största för dubbelhopp) och 6900 km (största för trippelhopp).
 P|Tabellen över hopplängder på 50 MHz är Flavio Eganos (IK3XTV), «Propagazione sui 6 metri - Caratteristiche generali» (Utbredning på 6 meter - Allmänna egenskaper) [3]; Es-molnen ligger på ungefär 100 km höjd, och det begränsar enkelt hopp till runt 2000 km [29]. Kartornas ringar och antalet hopp följer dessa avstånd:
@@ -120,6 +120,21 @@ LI|Den suddiga gula pricken markerar mitten av varje hopp, där molnet av sporad
 LI|Tabellen listar de visade QSO:na med St. (station 1 eller 2), Dag, UTC, Anropssignal, WWL, km, Hopp och foEs≥. Med foEs påslagen anger hopp-punkterna minsta foEs; en lokator med 4 tecken som saknas i CALL3 markeras bredvid WWL.
 H2|5.2 Mercatorkartan
 P|Kartan är en Mercatorkarta med fritt centrum. När musen närmar sig en sträcka förstoras linjen och ikonerna, och motstationens WWL-ruta med 6 tecken visas. Vid vänsterklick på sträckan frågar en dialogruta om alla QSO i filen, från alla dagar, med slutposition inom 150 km ska visas: Ja tömmer kartan och visar dessa QSO inom den orange cirkeln, Nej lämnar kartan som den är. Knappen Tillbaka till dag och tid återgår till det tidigare valet.
+H1|5b. JONOSONDER (underflik till SPORADIC-E)
+P|Underfliken JONOSONDER visar foEs uppmätt av jonosonderna i GIRO-nätet i hela världen. Data kommer första gången fliken öppnas och sedan var 15:e minut av sig själva (kryssrutan Uppdatera automatiskt var 15:e minut); knappen Uppdatera nu hämtar dem direkt.
+LI|Karta: varje jonosond är en färgad prick med den senaste foEs (samma färger som Es-molnen) och värdet i MHz; grå om den inte har nya data, med ring om det senaste jonogrammet är äldre än 90 minuter. Kryssrutan Visa även jonosonder utan nya data döljer eller visar dem.
+LI|Tabell: Kod, Jonosond, km från den egna stationen, UTC för det senaste jonogrammet, foEs, foF2, MUF(D) och Spots foEs≥, den minsta foEs härledd ur Es-spots från de senaste 30 minuterna som reflekteras inom 500 km från jonosonden (rutan Spots inom km), med antalet spots inom parentes.
+LI|Klicka på en rad eller nära en jonosond på kartan: diagrammet för de senaste 24 timmarna (foEs gul, foF2 ljusblå, MUF(D) lila prickad) och under det MUF för sporadiskt E vid 1000, 1500, 2000 och 2400 km med de band som öppnar, på den valda Es-höjden.
+LI|Om spotsen kräver en högre foEs än den uppmätta påpekar programmet det: molnet kan ligga långt från jonosonden, eller så har jonosonden nått gränsen för sitt frekvensområde.
+P|Data kommer från GIRO (Reinisch och Galkin 2011), licens CC BY-NC-SA 4.0, endast för icke-kommersiell användning.
+H1|5c. Es-MOLN ÖVER TID (underflik till SPORADIC-E)
+P|Underfliken Es-MOLN ÖVER TID visar hur molnen av sporadiskt E rör sig och förändras, steg för steg, med Chartiers metod (2022): varje förbindelse ger den minsta foEs i reflexionspunkten, och varje cell i rutnätet får stegets högsta värde.
+LI|Källa: Sessionens spots (uppdateras varje gång fliken öppnas), eller Läs in ADIF-logg eller CSV-spots. Exportera sessionens spots (CSV) sparar dem så att de kan ses igen efter att programmet stängts, eftersom det tömmer spotarkivet.
+LI|Band MHz (28, 40, 50, 70, 144), Steg (5, 10 eller 15 minuter), Cell (1°, 2° eller 4°) och Es-höjd km.
+LI|Tidslinje: ⏮ ◀ Starta/Stoppa ▶ ⏭ och reglaget; vid öppning börjar visningen med steget som har flest celler. Tidigare steg nedtonade visar de tre stegen före det valda, svagare; Förbindelser ritar stegets sträckor i bandens färger.
+LI|Celltabell: Cell (sydvästra hörnet och lokatorn för mitten), foEs≥, NmE≥ (minsta elektrontäthet), Förbindelser och Band. Klicka på en cell (tabell eller karta): dess förbindelser och anropssignaler markeras.
+LI|Diagram: högsta minsta foEs (gul linje) och antal celler (staplar) för varje steg, med linjen för det visade steget. Under det översikten med källans högsta värde.
+P|Värdet är en nedre gräns: molnet kan vara tätare än förbindelserna visar, och en tom cell betyder bara att det inte finns några förbindelser.
 H1|6. F.A.I.
 H2|6.1 De två vyerna
 P|Fliken F.A.I. studerar scatter från fältlinjeorienterade irreguljäriteter (huvudkällor [1], [2]). Vyn Scatter trail (paret A-B) beräknar, för två stationer, orten för möjliga scatterpunkter, färgad efter avvikelsen från reflexionsvillkoret, föreslår den mest sannolika scatterpunkten och ritar uppe till höger rutan med QTF och elevation för båda stationerna (röd = A, grön = B). Vyn Isoreflexion (punkt) ritar, för en vald reflexionspunkt, isoreflexionslinjerna i likhet med AuroReflex och K9SE:s SE-PROP: färgade band i de mörka schemana, tjocka linjer i de ljusa.

@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-ur) | نقشے پر Es اسپاٹ، دونوں اسٹیشنوں کا پہلا ہاپ، Maidenhead مربعوں پر Es بادل، آپ کے اسٹیشن کی MUF |
 | [BENCHMARK Es](Benchmark-Es-ur) | پوری ADIF لاگ پر آزمائشی بینچ (کسی دوسرے اسٹیشن کی بھی): دن اور گھنٹے کے لحاظ سے QSO، سیکٹر وار اسکپ، تخمینی foEs، کثیر ہاپ کی جانچ، بادلوں کی حرکت |
 | [BENCHMARK 50 MHz](Benchmark-50-ur) | ایک یا دو ADIF لاگوں سے 50 MHz پر کثیر ہاپ sporadic-E: Mercator نقشہ، دن اور وقت، اختیاری foEs، WWL کے ساتھ بڑا کیا گیا راستہ، 150 km کے اندر QSO |
+| [آئنوسونڈ](Ionosondes-ur) | GIRO آئنوسونڈز سے براہِ راست foEs، foF2 اور MUF(D)، 24 گھنٹے کا گراف، کھلنے والے بینڈوں کے ساتھ sporadic-E کی MUF، اسپاٹس سے موازنہ |
+| [وقت کے ساتھ Es بادل](Es-Clouds-Over-Time-ur) | Chartier 2022 کے طریقے سے قدم بہ قدم Es بادل: ہر خانے کی کم از کم foEs اور NmE، سیشن کے اسپاٹس، ADIF لاگ یا CSV اسپاٹس سے |
 | [F.A.I.](FAI-ur) | اسٹیشنوں کے ایک جوڑے کے لیے scatter points کی Scatter trail، اور کسی نقطے کی جانچ کے لیے یکساں انعکاس کی لکیریں |
 | [METEOR SCATTER](Meteor-Scatter-ur) | مکمل YA-MS پروگرام (شہابی بارشوں کی کارکردگی، ریڈار، پیش گوئیاں) |
 | [AURORA](Aurora-ur) | شفقی بیضوی حلقہ، NOAA Kp اور شمسی ہوا، aurora کی Scatter trail اور یکساں انعکاس، تجویز کردہ بیم کا رخ |

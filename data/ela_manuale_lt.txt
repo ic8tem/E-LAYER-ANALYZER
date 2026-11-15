@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER naudotojo vadovas
-SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.5.1 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
+SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.5.2 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
 H1|1. Prieš pradedant
 H2|1.1 Ką daro programa
 P|E-LAYER ANALYZER vienoje programoje sujungia priemones VHF sklidimo būdams, vykstantiems per jonosferos E sluoksnį, tirti: sporadinį E, taip pat kelių šuolių ir tarpžemyninį, F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter su integruota programa YA-MS ir radijo pašvaistę. Ji dirba su DX klasterių spotais realiuoju laiku ir su ADIF žurnalais, o kiekvieną rezultatą rodo žemėlapyje, užimančiame du trečdalius lango; duomenys ir skaičiavimai pateikiami dešiniajame trečdalyje.
@@ -67,7 +67,7 @@ LI|Dst lygis skaitomas taip: ramu aukščiau -30 nT, silpnas trikdys nuo -30 iki
 LI|Meteor scatter: Make More Miles on VHF dienos meteorų aktyvumo grafikas (RMOB duomenys); srautai, efektyvumas ir ryšiai realiuoju laiku yra kortelėje METEOR SCATTER.
 P|Šių duomenų santrauka rodoma viršuje dešinėje SPORADIC-E ir F.A.I. žemėlapiuose (pasirinkto žemyno E-skip) ir AURORA žemėlapyje (N0NBH pašvaistė ir NOAA Bz).
 H1|3. Sporadinis E (SPORADIC-E)
-P|Kortelė SPORADIC-E turi tris vidines korteles: REAL-TIME – šiame skyriuje aprašyti tiesioginiai spotai; BENCHMARK Es (4 skyrius) ir BENCHMARK 50 MHz (5 skyrius).
+P|Kortelė SPORADIC-E turi penkias vidines korteles: REAL-TIME – šiame skyriuje aprašyti tiesioginiai spotai; BENCHMARK Es (4 skyrius), BENCHMARK 50 MHz (5 skyrius), JONOZONDAI (5b skyrius) ir Es DEBESYS LAIKE (5c skyrius).
 H2|3.1 Žemėlapis
 P|Meniu Žemėlapis leidžia pasirinkti projekciją. Azimutinis: azimutinis lygiatolis žemėlapis, centruotas į savo stotį, su mastelio slankikliu (nuo 300 iki 20000 km nuo centro, taip pat pelės ratuku). Merkatoriaus: pasaulio žemėlapis su mygtukais Europa ir Pasaulis. Abiejose projekcijose aplink stotį braižomi IK3XTV lentelės [3] atstumų apskritimai: 500 km (vieno šuolio mažiausias), 1500-2000 km (optimalus), 2400 km (vieno šuolio didžiausias), 5000 km (dvigubo šuolio didžiausias) ir 6900 km (trigubo šuolio didžiausias).
 P|50 MHz šuolių ilgių lentelė yra Flavio Egano IK3XTV lentelė, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es debesys yra maždaug 100 km aukštyje, ir tai riboja vieną šuolį maždaug iki 2000 km [29]. Žemėlapių žiedai ir šuolių skaičius atitinka šiuos atstumus:
@@ -120,6 +120,21 @@ LI|Išsiliejęs geltonas taškelis pažymi kiekvieno šuolio centrą, kur spėja
 LI|Lentelėje pateikiami rodomi QSO su St. (1 ar 2 stotis), Diena, UTC, Šaukinys, WWL, km, Šuoliai ir foEs≥. Įjungus foEs, šuolio taškuose nurodoma minimali foEs; 4 simbolių lokatorius, kurio nėra CALL3, pažymimas šalia WWL.
 H2|5.2 Merkatoriaus žemėlapis
 P|Žemėlapis yra Merkatoriaus projekcijos su laisvai pasirenkamu centru. Priartinus pelę prie trasos, linija ir piktogramos padidėja ir parodomas korespondento 6 simbolių WWL kvadratas. Kairiuoju pelės mygtuku spustelėjus tą trasą, iškylantis langas klausia, ar parodyti visus failo QSO iš visų dienų, kurių galinis taškas yra ne toliau kaip 150 km: Taip išvalo žemėlapį ir parodo tuos QSO oranžiniame apskritime, Ne palieka žemėlapį nepakeistą. Mygtukas Grįžti į dieną ir laiką grąžina ankstesnį pasirinkimą.
+H1|5b. JONOZONDAI (SPORADIC-E vidinė kortelė)
+P|Vidinė kortelė JONOZONDAI rodo GIRO tinklo jonozondų išmatuotą foEs visame pasaulyje. Duomenys gaunami pirmą kartą atvėrus kortelę, o vėliau kas 15 minučių, automatiškai (žymimasis langelis Atnaujinti automatiškai kas 15 minučių); mygtukas Atnaujinti dabar juos užklausia iš karto.
+LI|Žemėlapis: kiekvienas jonozondas yra spalvotas taškas su paskutine foEs (tos pačios spalvos kaip Es debesų) ir reikšme MHz; pilkas, jei naujų duomenų nėra, su žiedu, jei paskutinė jonograma senesnė nei 90 minučių. Žymimasis langelis Rodyti ir jonozondus be naujų duomenų juos paslepia arba parodo.
+LI|Lentelė: Kodas, Jonozondas, km nuo savo stoties, paskutinės jonogramos UTC, foEs, foF2, MUF(D) ir Spotai foEs≥ – mažiausia foEs, išvesta iš paskutinių 30 minučių Es spotų, atsispindinčių iki 500 km nuo jonozondo (laukelis Spotai iki km), skliaustuose nurodant spotų skaičių.
+LI|Spustelėjus eilutę arba šalia jonozondo žemėlapyje: paskutinių 24 valandų grafikas (foEs geltona, foF2 žydra, MUF(D) violetinė taškinė), o po juo – sporadinio E MUF 1000, 1500, 2000 ir 2400 km atstumu su atsiveriančiomis juostomis, pasirinktame Es aukštyje.
+LI|Jei spotams reikia didesnės foEs nei išmatuota, programa tai praneša: debesis gali būti toli nuo jonozondo arba jonozondas pasiekė savo dažnių diapazono ribą.
+P|Duomenys yra GIRO (Reinisch ir Galkin 2011), licencija CC BY-NC-SA 4.0, tik nekomerciniam naudojimui.
+H1|5c. Es DEBESYS LAIKE (SPORADIC-E vidinė kortelė)
+P|Vidinė kortelė Es DEBESYS LAIKE žingsnis po žingsnio rodo, kaip juda ir keičiasi sporadinio E debesys, taikant Chartier (2022) metodą: kiekvienas ryšys duoda mažiausią foEs atspindžio taške, o kiekvienas tinklelio langelis gauna didžiausią žingsnio reikšmę.
+LI|Šaltinis: Sesijos spotai (atnaujinami kaskart atvėrus kortelę) arba Įkelti ADIF žurnalą arba CSV spotus. Eksportuoti sesijos spotus (CSV) juos išsaugo, kad būtų galima peržiūrėti uždarius programą, kuri ištuština spotų archyvą.
+LI|Juostos MHz (28, 40, 50, 70, 144), Žingsnis (5, 10 arba 15 min.), Langelis (1°, 2° arba 4°) ir Es aukštis km.
+LI|Laiko juosta: ⏮ ◀ Paleisti/Sustabdyti ▶ ⏭ ir slankiklis; atvėrus pradedama nuo žingsnio su daugiausia langelių. Ankstesni žingsniai blankiai rodo tris žingsnius prieš pasirinktą, blankesnėmis spalvomis; Ryšiai nubraižo žingsnio trasas juostų spalvomis.
+LI|Langelių lentelė: Langelis (pietvakarių kampas ir centro lokatorius), foEs≥, NmE≥ (mažiausias elektronų tankis), Ryšiai ir Juostos. Spustelėjus langelį (lentelėje arba žemėlapyje) paryškinami jo ryšiai ir šaukiniai.
+LI|Grafikas: didžiausia mažiausia foEs (geltona linija) ir langelių skaičius (stulpeliai) kiekvienam žingsniui, su rodomo žingsnio linija. Po juo – santrauka su didžiausia šaltinio reikšme.
+P|Reikšmė yra apatinė riba: debesis gali būti tankesnis, nei rodo ryšiai, o tuščias langelis reiškia tik tai, kad ryšių nėra.
 H1|6. F.A.I.
 H2|6.1 Du vaizdai
 P|Kortelėje F.A.I. tiriama sklaida nuo išilgai magnetinio lauko išsidėsčiusių netolygumų (pagrindinis šaltinis [1], [2]). Vaizdas Scatter trail (pora A-B) dviem stotims apskaičiuoja galimų sklaidos taškų (scatter point) vietą, nuspalvintą pagal nuokrypį nuo atspindžio sąlygos, siūlo labiausiai tikėtiną sklaidos tašką ir viršuje dešinėje braižo abiejų stočių QTF ir elevacijų skydelį (raudona = A, žalia = B). Vaizdas Izoatspindys (taškas) pasirinktam atspindžio taškui braižo izoatspindžio linijas, kaip AuroReflex ir K9SE SE-PROP: spalvotos juostos tamsiose schemose, storos linijos šviesiose schemose.

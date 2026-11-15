@@ -1,5 +1,5 @@
 TITLE|Manual do usuário do E-LAYER ANALYZER
-SUB|Manual do usuário detalhado - por Costantino IC8TEM - versão 0.5.1, novembro de 2026. Os números entre colchetes remetem à aba FONTES; as fórmulas e as escolhas de cálculo estão na aba SÍNTESE DAS ESCOLHAS DE CÁLCULO.
+SUB|Manual do usuário detalhado - por Costantino IC8TEM - versão 0.5.2, novembro de 2026. Os números entre colchetes remetem à aba FONTES; as fórmulas e as escolhas de cálculo estão na aba SÍNTESE DAS ESCOLHAS DE CÁLCULO.
 H1|1. Antes de começar
 H2|1.1 O que faz o programa
 P|O E-LAYER ANALYZER reúne em um só programa as ferramentas para estudar os modos de propagação VHF que passam pela camada E da ionosfera: a esporádica E, também multi-salto e extracontinental, o F.A.I. (irregularidades alinhadas com o campo magnético), o meteor scatter, com o programa YA-MS integrado, e a aurora rádio. Trabalha com os spots dos DX clusters em tempo real e com os logs ADIF, e mostra cada resultado em um mapa que ocupa dois terços da janela, com os dados e os cálculos no terço direito.
@@ -67,7 +67,7 @@ LI|O nível do Dst é lido assim: calmo acima de -30 nT, perturbação fraca ent
 LI|Meteor scatter: o gráfico da atividade meteórica do dia (dados RMOB) de Make More Miles on VHF; chuvas, eficiência e tráfego ao vivo estão na aba METEOR SCATTER.
 P|A síntese destes dados aparece acima à direita nos mapas de SPORADIC-E e F.A.I. (E-skip do continente escolhido) e de AURORA (aurora de N0NBH e Bz da NOAA).
 H1|3. Esporádica E (SPORADIC-E)
-P|A aba SPORADIC-E tem três subabas: REAL-TIME, os spots ao vivo descritos neste capítulo; BENCHMARK Es (capítulo 4) e BENCHMARK 50 MHz (capítulo 5).
+P|A aba SPORADIC-E tem cinco subabas: REAL-TIME, os spots ao vivo descritos neste capítulo; BENCHMARK Es (capítulo 4), BENCHMARK 50 MHz (capítulo 5), IONOSSONDAS (capítulo 5b) e NUVENS Es NO TEMPO (capítulo 5c).
 H2|3.1 O mapa
 P|O menu Mapa escolhe a projeção. Azimutal: mapa azimutal equidistante centrado na própria estação, com o cursor do zoom (de 300 a 20000 km a partir do centro, também com a roda do mouse). Mercator: o mapa do mundo, com os botões Europa e Mundo. Em ambas as projeções desenham-se ao redor da estação os círculos de distância da tabela de IK3XTV [3]: 500 km (mínima do salto único), 1500-2000 km (ótima), 2400 km (máxima do salto único), 5000 km (máxima do salto duplo) e 6900 km (máxima do salto triplo).
 P|A tabela dos comprimentos dos saltos em 50 MHz é a de Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» (Propagação nos 6 metros - Características gerais) [3]; as nuvens Es encontram-se a cerca de 100 km de altitude, e isto limita o salto único a cerca de 2000 km [29]. As coroas dos mapas e o número de saltos seguem estas distâncias:
@@ -120,6 +120,21 @@ LI|O ponto amarelo desfocado marca o centro de cada salto, onde se presume a nuv
 LI|A tabela lista os QSO mostrados com St. (estação 1 ou 2), Dia, UTC, Indicativo, WWL, km, Saltos e foEs≥. Com a foEs ativa, os pontos de salto indicam a foEs mínima; um locator de 4 caracteres ausente no CALL3 é assinalado ao lado do WWL.
 H2|5.2 O mapa de Mercator
 P|O mapa é de Mercator com centro livre. Ao aproximar o mouse de um percurso, a linha e os ícones são ampliados e aparece o quadrado WWL de 6 caracteres do correspondente. Com o clique esquerdo nesse percurso, uma janela pergunta se devem ser mostrados todos os QSO do arquivo, de todos os dias, com a posição final a menos de 150 km: Sim limpa o mapa e mostra esses QSO dentro do círculo laranja; Não deixa o mapa como está. O botão Voltar ao dia e horário volta à escolha anterior.
+H1|5b. IONOSSONDAS (subaba de SPORADIC-E)
+P|A subaba IONOSSONDAS mostra a foEs medida pelas ionossondas da rede GIRO em todo o mundo. Os dados chegam na primeira vez que se abre a aba e depois a cada 15 minutos, sozinhos (caixa Atualizar sozinho a cada 15 minutos); o botão Atualizar agora os solicita imediatamente.
+LI|Mapa: cada ionossonda é um ponto colorido com a última foEs (mesmas cores das nuvens Es) e o valor em MHz; cinza se não tiver dados recentes, com o anel se o último ionograma tiver mais de 90 minutos. A caixa Mostrar também as ionossondas sem dados recentes as esconde ou as mostra.
+LI|Tabela: Código, Ionossonda, km a partir da própria estação, UTC do último ionograma, foEs, foF2, MUF(D) e Spots foEs≥, a foEs mínima obtida a partir dos spots Es dos últimos 30 minutos que refletem a menos de 500 km da ionossonda (caixa Spots até km), com o número de spots entre parênteses.
+LI|Clique em uma linha ou perto de uma ionossonda no mapa: o gráfico das últimas 24 horas (foEs amarela, foF2 azul-clara, MUF(D) violeta pontilhada) e, abaixo, a MUF da esporádica E a 1000, 1500, 2000 e 2400 km com as bandas que se abrem, à altitude Es escolhida.
+LI|Se os spots pedirem uma foEs mais alta do que a medida, o programa sinaliza isso: a nuvem pode estar longe da ionossonda, ou então a ionossonda atingiu o limite da sua faixa de frequências.
+P|Os dados são da GIRO (Reinisch e Galkin 2011), licença CC BY-NC-SA 4.0, apenas para uso não comercial.
+H1|5c. NUVENS Es NO TEMPO (subaba de SPORADIC-E)
+P|A subaba NUVENS Es NO TEMPO mostra como as nuvens de esporádica E se movem e mudam, passo a passo, com o método de Chartier (2022): cada enlace dá a foEs mínima no ponto de reflexão, e cada célula da grade fica com o valor mais alto do passo.
+LI|Origem: Spots da sessão (são atualizados a cada abertura da aba), ou então Carregar log ADIF ou spots CSV. Exportar os spots da sessão (CSV) salva-os para revê-los depois de fechar o programa, que esvazia o arquivo dos spots.
+LI|Bandas MHz (28, 40, 50, 70, 144), Passo (5, 10 ou 15 minutos), Célula (1°, 2° ou 4°) e Altitude Es km.
+LI|Barra do tempo: ⏮ ◀ Iniciar/Parar ▶ ⏭ e o cursor; na abertura começa-se pelo passo com mais células. Passos anteriores esmaecidos mostra os três passos antes do escolhido, mais tênues; Enlaces desenha os percursos do passo com as cores das bandas.
+LI|Tabela das células: Célula (canto sudoeste e locator do centro), foEs≥, NmE≥ (densidade eletrônica mínima), Enlaces e Bandas. Clique em uma célula (tabela ou mapa): destaca os seus enlaces e os indicativos.
+LI|Gráfico: foEs mínima mais alta (linha amarela) e número de células (barras) para cada passo, com a linha do passo mostrado. Abaixo, a síntese com o valor mais alto da origem.
+P|O valor é um limite inferior: a nuvem pode ser mais densa do que mostram os enlaces, e uma célula vazia significa apenas nenhum enlace.
 H1|6. F.A.I.
 H2|6.1 As duas vistas
 P|A aba F.A.I. estuda o scatter em irregularidades alinhadas com o campo magnético (fonte principal [1], [2]). A vista Scatter trail (par A-B) calcula, para duas estações, o lugar dos scatter points possíveis, colorido conforme o desvio em relação à condição de reflexão, propõe o scatter point mais provável e desenha acima, à direita, o quadro dos QTF e elevações de ambas as estações (vermelho = A, verde = B). A vista Iso-reflexão (ponto) desenha, para um ponto de reflexão escolhido, as linhas de iso-reflexão como o AuroReflex e o SE-PROP de K9SE: faixas coloridas nos esquemas escuros, linhas grossas nos esquemas claros.

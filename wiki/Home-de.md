@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-de) | Es-Spots auf der Karte, erster Sprung beider Stationen, Es-Wolken auf Maidenhead-Feldern, MUF für Ihre Station |
 | [BENCHMARK Es](Benchmark-Es-de) | Prüfstand an einem ganzen ADIF-Log (auch einer anderen Station): QSOs pro Tag und pro Stunde, Skip nach Sektoren, geschätzte foEs, Prüfung des Mehrfachsprungs, Drift der Wolken |
 | [BENCHMARK 50 MHz](Benchmark-50-de) | Sporadic-E im Mehrfachsprung auf 50 MHz aus einem oder zwei ADIF-Logs: Mercator-Karte, Tag und Uhrzeit, optionale foEs, vergrößerte Strecke mit dem WWL, QSOs im Umkreis von 150 km |
+| [IONOSONDEN](Ionosondes-de) | foEs, foF2 und MUF(D) live von den GIRO-Ionosonden, 24-Stunden-Diagramm, MUF des Sporadic-E mit den Bändern, die sich öffnen, Vergleich mit den Spots |
+| [Es-WOLKEN IM ZEITVERLAUF](Es-Clouds-Over-Time-de) | Es-Wolken Schritt für Schritt mit der Methode von Chartier 2022: minimale foEs und NmE je Zelle, aus Spots der Sitzung, ADIF-Log oder CSV-Spots |
 | [F.A.I.](FAI-de) | Scatter trail der Streupunkte für ein Stationspaar und Iso-Reflexionslinien zum Prüfen eines Punktes |
 | [METEOR SCATTER](Meteor-Scatter-de) | Das vollständige Programm YA-MS (Effektivität der Meteorströme, Radare, Vorhersagen) |
 | [AURORA](Aurora-de) | Auroraoval, NOAA-Kp und Sonnenwind, Scatter trail und Iso-Reflexion für Aurora, empfohlene Antennenrichtung |

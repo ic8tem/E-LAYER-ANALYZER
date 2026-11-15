@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZERi kasutusjuhend
-SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.5.1, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
+SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.5.2, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
 H1|1. Enne alustamist
 H2|1.1 Mida programm teeb
 P|E-LAYER ANALYZER koondab ühte programmi tööriistad nende VHF leviviiside uurimiseks, mis kulgevad läbi ionosfääri E-kihi: sporaadiline E, ka mitmehüppeline ja mandritevaheline, F.A.I. (magnetväljaga joondunud ebaühtlused), meteoorhajumine koos integreeritud programmiga YA-MS ning raadioaurora. Programm töötab DX-klastrite reaalajas spotide ja ADIF-logidega ning näitab iga tulemust kaardil, mis võtab enda alla kaks kolmandikku aknast; andmed ja arvutused on paremas kolmandikus.
@@ -67,7 +67,7 @@ LI|Dst taset loetakse nii: vaikne üle -30 nT, nõrk häiring -30 ja -50 nT vahe
 LI|Meteoorhajumine: Make More Miles on VHF-i päeva meteoorite aktiivsuse graafik (RMOB andmed); voolud, tõhusus ja reaalajas liiklus on sakil METEOR SCATTER.
 P|Nende andmete kokkuvõte kuvatakse üleval paremal SPORADIC-E ja F.A.I. kaartidel (valitud kontinendi E-skip) ning AURORA kaardil (N0NBH aurora ja NOAA Bz).
 H1|3. Sporaadiline E (SPORADIC-E)
-P|Sakil SPORADIC-E on kolm alamsakki: REAL-TIME, selles peatükis kirjeldatud reaalajas spotid; BENCHMARK Es (peatükk 4) ja BENCHMARK 50 MHz (peatükk 5).
+P|Sakil SPORADIC-E on viis alamsakki: REAL-TIME, selles peatükis kirjeldatud reaalajas spotid; BENCHMARK Es (peatükk 4), BENCHMARK 50 MHz (peatükk 5), IONOSONDID (peatükk 5b) ja Es-PILVED AJAS (peatükk 5c).
 H2|3.1 Kaart
 P|Menüü Kaart valib projektsiooni. Asimuutne: oma jaama keskmega asimuutne võrdkauguskaart suurenduse liuguriga (keskpunktist 300 kuni 20000 km, ka hiire rattaga). Mercator: maailmakaart nuppudega Euroopa ja Maailm. Mõlemas projektsioonis joonistatakse jaama ümber IK3XTV tabeli [3] kauguste ringid: 500 km (ühe hüppe minimaalne), 1500-2000 km (optimaalne), 2400 km (ühe hüppe maksimaalne), 5000 km (kahe hüppe maksimaalne) ja 6900 km (kolme hüppe maksimaalne).
 P|50 MHz hüpete pikkuste tabel on Flavio Egano IK3XTV tabel, «Propagazione sui 6 metri - Caratteristiche generali» [3]; Es-pilved asuvad umbes 100 km kõrgusel ja see piirab ühe hüppe umbes 2000 km-ga [29]. Kaartide rõngad ja hüpete arv järgivad neid kaugusi:
@@ -120,6 +120,21 @@ LI|Hägune kollane täpp tähistab iga hüppe keskpunkti, kus eeldatakse sporaad
 LI|Tabel loetleb kuvatud QSO-d veergudega St. (jaam 1 või 2), Päev, UTC, Kutsung, WWL, km, Hüpped ja foEs≥. Kui foEs on sees, näitavad hüppepunktid minimaalset foEs-i; CALL3-st puuduv 4-märgiline lokaator märgitakse WWL-i kõrvale.
 H2|5.2 Mercatori kaart
 P|Kaart on vaba keskpunktiga Mercatori projektsioonis. Kui hiir läheneb trassile, suurenevad joon ja ikoonid ning ilmub korrespondendi 6-märgiline WWL-ruut. Vasaku klõpsuga sellel trassil küsib hüpikaken, kas näidata kõiki faili QSO-sid kõigist päevadest, mille lõpp-punkt on kuni 150 km kaugusel: Jah tühjendab kaardi ja näitab neid QSO-sid oranži ringi sees, Ei jätab kaardi samaks. Nupp Tagasi päeva ja kellaaja juurde taastab eelmise valiku.
+H1|5b. IONOSONDID (SPORADIC-E alamsakk)
+P|Alamsakk IONOSONDID näitab GIRO võrgu ionosondide mõõdetud foEs-i kogu maailmas. Andmed saabuvad saki esimesel avamisel ja seejärel iga 15 minuti järel ise (märkeruut Värskenda ise iga 15 minuti järel); nupp Värskenda kohe küsib need kohe.
+LI|Kaart: iga ionosond on värviline täpp viimase foEs-iga (samad värvid nagu Es-pilvedel) ja väärtusega MHz-des; hall, kui hiljutisi andmeid pole, rõngaga, kui viimane ionogramm on vanem kui 90 minutit. Märkeruut Näita ka ionosonde ilma hiljutiste andmeteta peidab või näitab neid.
+LI|Tabel: Kood, Ionosond, km oma jaamast, viimase ionogrammi UTC, foEs, foF2, MUF(D) ja Spotid foEs≥, viimase 30 minuti Es-spotidest tuletatud minimaalne foEs, mille peegeldus on ionosondist 500 km piires (lahter Spotid km piires), sulgudes spottide arv.
+LI|Klõps real või ionosondi lähedal kaardil: viimase 24 tunni graafik (foEs kollane, foF2 helesinine, MUF(D) lilla punktiir) ja selle all sporaadilise E MUF 1000, 1500, 2000 ja 2400 km juures koos avanevate sagedusaladega, valitud Es-kõrgusel.
+LI|Kui spotid nõuavad mõõdetust kõrgemat foEs-i, annab programm sellest teada: pilv võib olla ionosondist kaugel või on ionosond jõudnud oma sagedusvahemiku piirini.
+P|Andmed on pärit GIRO-lt (Reinisch ja Galkin 2011), litsents CC BY-NC-SA 4.0, ainult mitteäriliseks kasutamiseks.
+H1|5c. Es-PILVED AJAS (SPORADIC-E alamsakk)
+P|Alamsakk Es-PILVED AJAS näitab samm-sammult, kuidas sporaadilise E pilved liiguvad ja muutuvad, Chartieri (2022) meetodiga: iga side annab peegelduspunktis minimaalse foEs-i ja iga võrgu lahter võtab sammu kõrgeima väärtuse.
+LI|Allikas: Seansi spotid (värskenduvad saki igal avamisel) või Laadi ADIF-logi või CSV-spotid. Ekspordi seansi spotid (CSV) salvestab need, et neid saaks vaadata ka pärast programmi sulgemist, mis tühjendab spotiarhiivi.
+LI|Sagedusalad MHz (28, 40, 50, 70, 144), Samm (5, 10 või 15 minutit), Lahter (1°, 2° või 4°) ja Es kõrgus km.
+LI|Ajariba: ⏮ ◀ Käivita/Peata ▶ ⏭ ja liugur; avamisel alustatakse sammust, kus on kõige rohkem lahtreid. Eelmised sammud tuhmilt näitab kolme valitud sammule eelnevat sammu nõrgemalt; Sided joonistab sammu trassid sagedusalade värvidega.
+LI|Lahtrite tabel: Lahter (edelanurk ja keskpunkti lokaator), foEs≥, NmE≥ (minimaalne elektrontihedus), Sided ja Sagedusalad. Klõps lahtril (tabelis või kaardil) tõstab esile selle sided ja kutsungid.
+LI|Graafik: kõrgeim minimaalne foEs (kollane joon) ja lahtrite arv (tulbad) iga sammu kohta koos näidatud sammu joonega. Selle all kokkuvõte allika kõrgeima väärtusega.
+P|Väärtus on alampiir: pilv võib olla tihedam, kui sided näitavad, ning tühi lahter tähendab ainult seda, et sidesid pole.
 H1|6. F.A.I.
 H2|6.1 Kaks vaadet
 P|Sakk F.A.I. uurib magnetväljaga joondunud ebaühtlustelt toimuvat hajumist (peamised allikad [1], [2]). Vaade Scatter trail (paar A-B) arvutab kahe jaama jaoks võimalike hajumispunktide asukoha, värvituna hälbe järgi peegeldustingimusest, pakub välja tõenäolisima hajumispunkti ja joonistab üles paremale mõlema jaama QTF-ide ja elevatsioonide kasti (punane = A, roheline = B). Vaade Isopeegeldus (punkt) joonistab valitud peegelduspunkti jaoks isopeegelduse jooned nagu AuroReflex ja K9SE SE-PROP: värvilised ribad tumedates skeemides, paksud jooned heledates skeemides.

@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER kullanım kılavuzu
-SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.5.1, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
+SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.5.2, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
 H1|1. Başlamadan önce
 H2|1.1 Program ne yapar
 P|E-LAYER ANALYZER, iyonosferin E katmanından geçen VHF yayılım modlarını incelemek için gereken araçları tek bir programda toplar: çok atlamalı ve kıtalararası olanlar dahil sporadik E, F.A.I. (manyetik alana hizalı düzensizlikler), entegre YA-MS programıyla meteor scatter ve radyo aurorası. Gerçek zamanlı DX cluster spot'ları ve ADIF logları üzerinde çalışır ve her sonucu pencerenin üçte ikisini kaplayan bir haritada gösterir; veriler ve hesaplar sağdaki üçte birlik bölümdedir.
@@ -67,7 +67,7 @@ LI|Dst seviyesi şöyle okunur: -30 nT'nin üstünde sakin, -30 ile -50 nT aras�
 LI|Meteor scatter: Make More Miles on VHF'nin günün meteor etkinliği grafiği (RMOB verileri); yağmurlar, verimlilik ve canlı trafik METEOR SCATTER sekmesindedir.
 P|Bu verilerin özeti SPORADIC-E ve F.A.I. haritalarında (seçilen kıtanın E-skip'i) ve AURORA haritasında (N0NBH aurorası ve NOAA Bz'si) sağ üstte görünür.
 H1|3. Sporadik E (SPORADIC-E)
-P|SPORADIC-E sekmesinin üç alt sekmesi vardır: REAL-TIME, bu bölümde anlatılan canlı spot'lar; BENCHMARK Es (bölüm 4) ve BENCHMARK 50 MHz (bölüm 5).
+P|SPORADIC-E sekmesinin beş alt sekmesi vardır: REAL-TIME, bu bölümde anlatılan canlı spot'lar; BENCHMARK Es (bölüm 4), BENCHMARK 50 MHz (bölüm 5), İYONOSONDLAR (bölüm 5b) ve ZAMAN İÇİNDE Es BULUTLARI (bölüm 5c).
 H2|3.1 Harita
 P|Harita menüsü projeksiyonu seçer. Azimutal: kendi istasyonunuzu merkez alan, yakınlaştırma kaydırıcılı (merkezden 300 ile 20000 km arası, fare tekerleğiyle de) azimutal eşit uzaklıklı harita. Mercator: Avrupa ve Dünya düğmeleriyle dünya haritası. Her iki projeksiyonda da istasyonun çevresine IK3XTV tablosunun [3] mesafe çemberleri çizilir: 500 km (tek atlamanın en azı), 1500-2000 km (en uygun), 2400 km (tek atlamanın en çoğu), 5000 km (çift atlamanın en çoğu) ve 6900 km (üçlü atlamanın en çoğu).
 P|50 MHz'deki atlama uzunlukları tablosu, Flavio Egano IK3XTV'nin «Propagazione sui 6 metri - Caratteristiche generali» [3] çalışmasındaki tablodur; Es bulutları yaklaşık 100 km yükseklikte bulunur ve bu, tek atlamayı yaklaşık 2000 km ile sınırlar [29]. Haritalardaki halkalar ve atlama sayısı bu mesafeleri izler:
@@ -120,6 +120,21 @@ LI|Bulanık sarı nokta, sporadik E bulutunun bulunduğu varsayılan her atlaman
 LI|Tablo gösterilen QSO'ları St. (istasyon 1 ya da 2), Gün, UTC, Çağrı işareti, WWL, km, Atlamalar ve foEs≥ ile listeler. foEs etkinken atlama noktaları en küçük foEs'i gösterir; CALL3'te bulunmayan 4 karakterli bir lokatör WWL'nin yanında işaretlenir.
 H2|5.2 Mercator haritası
 P|Harita serbest merkezli bir Mercator haritasıdır. Fare bir yola yaklaştığında çizgi ve simgeler büyür ve karşı istasyonun 6 karakterlik WWL karesi görünür. O yola sol tıklandığında bir açılır pencere, dosyadaki tüm günlerden uç konumu 150 km içinde olan tüm QSO'ların gösterilip gösterilmeyeceğini sorar: Evet haritayı boşaltır ve bu QSO'ları turuncu çemberin içinde gösterir, Hayır haritayı olduğu gibi bırakır. Gün ve saate dön düğmesi önceki seçime geri döner.
+H1|5b. İYONOSONDLAR (SPORADIC-E alt sekmesi)
+P|İYONOSONDLAR alt sekmesi, dünya genelinde GIRO ağının iyonosondlarının ölçtüğü foEs'i gösterir. Veriler sekme ilk açıldığında ve ardından her 15 dakikada bir kendiliğinden gelir (Her 15 dakikada bir kendiliğinden güncelle kutusu); Şimdi güncelle düğmesi onları hemen ister.
+LI|Harita: her iyonosond son foEs'le (Es bulutlarıyla aynı renkler) renklendirilmiş bir nokta ve MHz değeridir; güncel verisi yoksa gri, son iyonogram 90 dakikadan eskiyse halkalıdır. Güncel verisi olmayan iyonosondları da göster kutusu onları gizler ya da gösterir.
+LI|Tablo: Kod, İyonosond, kendi istasyonunuzdan km, son iyonogramın UTC saati, foEs, foF2, MUF(D) ve Spot foEs≥, yani son 30 dakikanın, iyonosonda 500 km içinde yansıyan Es spot'larından elde edilen en küçük foEs (Spot'lar en çok km kutusu), parantez içinde spot sayısıyla.
+LI|Bir satıra ya da haritada bir iyonosondun yakınına tıklayınca: son 24 saatin grafiği (foEs sarı, foF2 açık mavi, MUF(D) noktalı mor) ve altında, seçilen Es yüksekliğinde, 1000, 1500, 2000 ve 2400 km'de sporadik E MUF'u ve açılan bantlar.
+LI|Spot'lar ölçülenden daha yüksek bir foEs gerektiriyorsa program bunu bildirir: bulut iyonosonddan uzak olabilir ya da iyonosond frekans aralığının sınırına ulaşmıştır.
+P|Veriler GIRO'nundur (Reinisch ve Galkin 2011), CC BY-NC-SA 4.0 lisansı, yalnızca ticari olmayan kullanım için.
+H1|5c. ZAMAN İÇİNDE Es BULUTLARI (SPORADIC-E alt sekmesi)
+P|ZAMAN İÇİNDE Es BULUTLARI alt sekmesi, sporadik E bulutlarının adım adım nasıl hareket ettiğini ve değiştiğini Chartier (2022) yöntemiyle gösterir: her bağlantı yansıma noktasındaki en küçük foEs'i verir ve ızgaranın her hücresi adımın en yüksek değerini alır.
+LI|Kaynak: Oturumun spot'ları (sekme her açıldığında güncellenir) ya da ADIF logu ya da CSV spot'ları yükle. Oturumun spot'larını dışa aktar (CSV), spot arşivini boşaltan programın kapanmasından sonra yeniden görmek için onları kaydeder.
+LI|Bantlar MHz (28, 40, 50, 70, 144), Adım (5, 10 ya da 15 dakika), Hücre (1°, 2° ya da 4°) ve Es yüksekliği km.
+LI|Zaman çubuğu: ⏮ ◀ Başlat/Durdur ▶ ⏭ ve kaydırıcı; açılışta en çok hücresi olan adımdan başlanır. Önceki adımlar soluk, seçilenden önceki üç adımı daha soluk gösterir; Bağlantılar, adımın yollarını bant renkleriyle çizer.
+LI|Hücre tablosu: Hücre (güneybatı köşesi ve merkezin lokatörü), foEs≥, NmE≥ (en küçük elektron yoğunluğu), Bağlantılar ve Bantlar. Bir hücreye tıklamak (tabloda ya da haritada) onun bağlantılarını ve çağrı işaretlerini vurgular.
+LI|Grafik: her adım için en yüksek en küçük foEs (sarı çizgi) ve hücre sayısı (çubuklar), gösterilen adımın çizgisiyle. Altında, kaynağın en yüksek değeriyle özet.
+P|Değer bir alt sınırdır: bulut, bağlantıların gösterdiğinden daha yoğun olabilir; boş bir hücre yalnızca bağlantı olmadığı anlamına gelir.
 H1|6. F.A.I.
 H2|6.1 İki görünüm
 P|F.A.I. sekmesi manyetik alana hizalı düzensizliklerden saçılmayı inceler (ana kaynak [1], [2]). Scatter trail (A-B çifti) görünümü iki istasyon için olası scatter point'lerin yerini hesaplar, bunu yansıma koşulundan sapmaya göre renklendirir, en olası scatter point'i önerir ve sağ üstte iki istasyonun QTF ve elevasyonlarını gösteren kutuyu çizer (kırmızı = A, yeşil = B). İzo-yansıma (nokta) görünümü seçilen bir yansıma noktası için AuroReflex ve K9SE'nin SE-PROP programındaki gibi izo-yansıma çizgilerini çizer: koyu şemalarda renkli kuşaklar, açık şemalarda kalın çizgiler.

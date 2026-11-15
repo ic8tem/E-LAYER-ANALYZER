@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding vir E-LAYER ANALYZER
-SUB|Uitgebreide gebruikershandleiding - deur Costantino IC8TEM - weergawe 0.5.1, November 2026. Die getalle tussen vierkantige hakies verwys na die oortjie BRONNE; die formules en die berekeningskeuses staan in die oortjie OPSOMMING VAN DIE BEREKENINGSKEUSES.
+SUB|Uitgebreide gebruikershandleiding - deur Costantino IC8TEM - weergawe 0.5.2, November 2026. Die getalle tussen vierkantige hakies verwys na die oortjie BRONNE; die formules en die berekeningskeuses staan in die oortjie OPSOMMING VAN DIE BEREKENINGSKEUSES.
 H1|1. Voordat jy begin
 H2|1.1 Wat die program doen
 P|E-LAYER ANALYZER bring in een enkele program die gereedskap saam om die VHF-voortplantingsmodusse te bestudeer wat deur die E-laag van die ionosfeer gaan: sporadiese E, ook multi-sprong en interkontinentaal, F.A.I. (veldbelynde onreëlmatighede), meteor scatter, met die geïntegreerde program YA-MS, en radio-aurora. Dit werk met die spots van DX-klusters in reële tyd en met ADIF-logs, en wys elke resultaat op 'n kaart wat twee derdes van die venster beslaan, met die data en berekeninge in die regterderde.
@@ -67,7 +67,7 @@ LI|Die Dst-vlak word so gelees: rustig bo -30 nT, swak versteuring tussen -30 en
 LI|Meteor scatter: die grafiek van die dag se meteooraktiwiteit (RMOB-data) van Make More Miles on VHF; swerms, doeltreffendheid en intydse verkeer is in die oortjie METEOR SCATTER.
 P|Die opsomming van hierdie data verskyn regs bo op die SPORADIC-E- en F.A.I.-kaarte (E-skip van die gekose kontinent) en op AURORA (aurora van N0NBH en Bz van NOAA).
 H1|3. Sporadiese E (SPORADIC-E)
-P|Die oortjie SPORADIC-E het drie suboortjies: REAL-TIME, die regstreekse spots wat in hierdie hoofstuk beskryf word; BENCHMARK Es (hoofstuk 4) en BENCHMARK 50 MHz (hoofstuk 5).
+P|Die oortjie SPORADIC-E het vyf suboortjies: REAL-TIME, die regstreekse spots wat in hierdie hoofstuk beskryf word; BENCHMARK Es (hoofstuk 4), BENCHMARK 50 MHz (hoofstuk 5), IONOSONDES (hoofstuk 5b) en Es-WOLKE OOR TYD (hoofstuk 5c).
 H2|3.1 Die kaart
 P|Die Kaart-kieslys kies die projeksie. Azimutaal: azimutaal ewe-afstandige kaart gesentreer op jou eie stasie, met die zoem-skuifbalk (van 300 tot 20000 km vanaf die middel, ook met die muiswiel). Mercator: die wêreldkaart met die knoppies Europa en Wêreld. In albei projeksies word die afstandsirkels van die IK3XTV-tabel [3] rondom die stasie geteken: 500 km (minimum van die enkele sprong), 1500-2000 km (optimaal), 2400 km (maksimum van die enkele sprong), 5000 km (maksimum van die dubbele sprong) en 6900 km (maksimum van die driedubbele sprong).
 P|Die tabel van die spronglengtes op 50 MHz is dié van Flavio Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; die Es-wolke lê op ongeveer 100 km hoogte, en dit beperk die enkele sprong tot ongeveer 2000 km [29]. Die ringe van die kaarte en die aantal spronge volg hierdie afstande:
@@ -120,6 +120,21 @@ LI|Die vaag geel kolletjie merk die middel van elke sprong, waar die sporadiese-
 LI|Die tabel lys die gewyste QSO's met St. (stasie 1 of 2), Dag, UTC, Roepnaam, WWL, km, Spronge en foEs≥. Met foEs aktief gee die sprongpunte die minimum foEs; 'n lokator van 4 karakters wat in CALL3 ontbreek, word langs die WWL aangedui.
 H2|5.2 Die Mercator-kaart
 P|Die kaart is 'n Mercator-kaart met 'n vrye middelpunt. As die muis 'n pad nader, word die lyn en ikone groter en verskyn die 6-karakter-WWL-vierkant van die DX-stasie. Met 'n linksklik op daardie pad vra 'n opspringvenster of al die QSO's in die lêer, van alle dae, met die eindposisie binne 150 km gewys moet word: Ja maak die kaart leeg en wys daardie QSO's binne die oranje sirkel, Nee laat die kaart soos dit is. Die knoppie Terug na dag en tyd keer terug na die vorige keuse.
+H1|5b. IONOSONDES (suboortjie van SPORADIC-E)
+P|Die suboortjie IONOSONDES wys die foEs wat deur die ionosondes van die GIRO-netwerk wêreldwyd gemeet word. Die data kom die eerste keer wat die oortjie oopgemaak word en daarna elke 15 minute vanself (blokkie Werk self elke 15 minute by); die knoppie Werk nou by vra dit dadelik.
+LI|Kaart: elke ionosonde is 'n gekleurde kolletjie met die jongste foEs (dieselfde kleure as die Es-wolke) en die waarde in MHz; grys as dit geen onlangse data het nie, met die ring as die laaste ionogram ouer as 90 minute is. Die blokkie Wys ook die ionosondes sonder onlangse data versteek of wys hulle.
+LI|Tabel: Kode, Ionosonde, km vanaf jou eie stasie, UTC van die laaste ionogram, foEs, foF2, MUF(D) en Spots foEs≥, die minimum foEs afgelei van die Es-spots van die laaste 30 minute wat binne 500 km van die ionosonde weerkaats (blokkie Spots binne km), met die aantal spots tussen hakies.
+LI|Klik op 'n ry of naby 'n ionosonde op die kaart: die grafiek van die laaste 24 uur (foEs geel, foF2 ligblou, MUF(D) pers gestippeld) en, daaronder, die sporadiese-E-MUF op 1000, 1500, 2000 en 2400 km met die bande wat oopgaan, op die gekose Es-hoogte.
+LI|As die spots 'n hoër foEs vra as die gemete een, dui die program dit aan: die wolk kan ver van die ionosonde wees, of die ionosonde het die grens van sy frekwensiebereik bereik.
+P|Die data is van GIRO (Reinisch en Galkin 2011), lisensie CC BY-NC-SA 4.0, slegs vir nie-kommersiële gebruik.
+H1|5c. Es-WOLKE OOR TYD (suboortjie van SPORADIC-E)
+P|Die suboortjie Es-WOLKE OOR TYD wys hoe die sporadiese-E-wolke stap vir stap beweeg en verander, met die metode van Chartier (2022): elke verbinding gee die minimum foEs by die refleksiepunt, en elke sel van die rooster neem die hoogste waarde van die stap.
+LI|Bron: Spots van die sessie (word by elke opening van die oortjie bygewerk), of Laai ADIF-log of CSV-spots. Voer die spots van die sessie uit (CSV) stoor hulle om dit na die sluiting van die program, wat die spotargief leegmaak, weer te bekyk.
+LI|Bande MHz (28, 40, 50, 70, 144), Stap (5, 10 of 15 minute), Sel (1°, 2° of 4°) en Es-hoogte km.
+LI|Tydbalk: ⏮ ◀ Begin/Stop ▶ ⏭ en die skuifbalk; by opening begin dit by die stap met die meeste selle. Vorige stappe vaag wys die drie stappe voor die gekose een, flouer; Verbindings teken die paaie van die stap in die kleure van die bande.
+LI|Seltabel: Sel (suidwestelike hoek en lokator van die middel), foEs≥, NmE≥ (minimum elektrondigtheid), Verbindings en Bande. 'n Klik op 'n sel (tabel of kaart) lig die verbindings en roepname daarvan uit.
+LI|Grafiek: hoogste minimum foEs (geel lyn) en aantal selle (stawe) vir elke stap, met die lyn van die gewysde stap. Daaronder die opsomming met die hoogste waarde van die bron.
+P|Die waarde is 'n ondergrens: die wolk kan digter wees as wat die verbindings wys, en 'n leë sel beteken net geen verbinding nie.
 H1|6. F.A.I.
 H2|6.1 Die twee aansigte
 P|Die oortjie F.A.I. bestudeer verstrooiing deur veldbelynde onreëlmatighede (hoofbron [1], [2]). Die aansig Scatter trail (paar A-B) bereken vir twee stasies die ligging van die moontlike scatter points, gekleur volgens die afwyking van die refleksievoorwaarde, stel die waarskynlikste scatter point voor en teken regs bo die blokkie met die QTF's en elevasies van albei stasies (rooi = A, groen = B). Die aansig Iso-refleksie (punt) teken vir 'n gekose refleksiepunt die iso-refleksielyne soos AuroReflex en SE-PROP van K9SE: gekleurde bande in die donker skemas, dik lyne in die ligte skemas.

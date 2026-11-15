@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-zh) | 地图上的 Es spot、双方电台的首跳、Maidenhead 方格上的 Es 云、本台 MUF |
 | [BENCHMARK Es](Benchmark-Es-zh) | 针对整份 ADIF 日志（也可以是其他台站的）的测试平台：每日和每小时 QSO、按扇区统计静区（skip）、估算 foEs、多跳验证、云的漂移 |
 | [BENCHMARK 50 MHz](Benchmark-50-zh) | 基于一份或两份 ADIF 日志的 50 MHz 多跳偶发 E 层：墨卡托地图、日期和时段、可选 foEs、带 WWL 的放大路径、150 km 范围内的 QSO |
+| [电离层测高仪](Ionosondes-zh) | GIRO 测高仪的实时 foEs、foF2 和 MUF(D)，24 小时图表，偶发 E 层的 MUF 及打开的频段，与 spot 的比较 |
+| [Es 云随时间变化](Es-Clouds-Over-Time-zh) | 用 Chartier 2022 方法逐步显示的 Es 云：每格的最低 foEs 和 NmE，来源为本次会话的 spot、ADIF 日志或 CSV spot |
 | [F.A.I.](FAI-zh) | 一对台站散射点的 Scatter trail，以及用于验证某一点的等反射线 |
 | [METEOR SCATTER](Meteor-Scatter-zh) | 完整的 YA-MS 程序（流星雨效率、雷达、预报） |
 | [AURORA](Aurora-zh) | 极光椭圆、NOAA Kp 和太阳风、极光 Scatter trail 与等反射线、推荐天线指向 |

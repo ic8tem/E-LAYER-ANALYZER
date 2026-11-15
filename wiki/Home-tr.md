@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-tr) | Haritada Es spot'ları, iki istasyonun ilk atlaması, Maidenhead kareleri üzerinde Es bulutları, istasyonunuz için MUF |
 | [BENCHMARK Es](Benchmark-Es-tr) | Bütün bir ADIF logu üzerinde (başka bir istasyonun logu da olabilir) deney tezgâhı: günlere ve saatlere göre QSO'lar, sektörlere göre skip, tahmini foEs, çok atlama denetimi, bulut kayması |
 | [BENCHMARK 50 MHz](Benchmark-50-tr) | Bir ya da iki ADIF logundan 50 MHz'de çok atlamalı sporadik E: Mercator haritası, gün ve saat, isteğe bağlı foEs, WWL ile büyütülmüş yol, 150 km içindeki QSO'lar |
+| [İYONOSONDLAR](Ionosondes-tr) | GIRO iyonosondlarından canlı foEs, foF2 ve MUF(D), 24 saatlik grafik, açılan bantlarla sporadik E MUF'u, spot'larla karşılaştırma |
+| [ZAMAN İÇİNDE Es BULUTLARI](Es-Clouds-Over-Time-tr) | Chartier 2022 yöntemiyle adım adım Es bulutları: hücre başına en küçük foEs ve NmE, oturumun spot'larından, ADIF logundan ya da CSV spot'larından |
 | [F.A.I.](FAI-tr) | Bir istasyon çifti için scatter point'lerin scatter trail'i ve bir noktayı doğrulamak için izo-yansıma eğrileri |
 | [METEOR SCATTER](Meteor-Scatter-tr) | YA-MS programının tamamı (yağmur verimi, radarlar, tahminler) |
 | [AURORA](Aurora-tr) | Aurora ovali, NOAA Kp ve güneş rüzgârı, aurora scatter trail'i ve izo-yansıma, önerilen anten yönü |

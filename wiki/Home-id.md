@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-id) | Spot Es di peta, lompatan pertama kedua stasiun, awan Es pada kotak Maidenhead, MUF untuk stasiun Anda |
 | [BENCHMARK Es](Benchmark-Es-id) | Bangku uji pada satu log ADIF utuh (bahkan dari stasiun lain): QSO per hari dan per jam, skip per sektor, perkiraan foEs, pemeriksaan multi-lompatan, pergeseran awan |
 | [BENCHMARK 50 MHz](Benchmark-50-id) | Sporadic-E multi-lompatan di 50 MHz dari satu atau dua log ADIF: peta Mercator, hari dan jam, foEs opsional, lintasan diperbesar dengan WWL, QSO dalam radius 150 km |
+| [IONOSONDE](Ionosondes-id) | foEs, foF2, dan MUF(D) langsung dari ionosonde GIRO, grafik 24 jam, MUF E-sporadis dengan band yang terbuka, perbandingan dengan spot |
+| [AWAN Es DARI WAKTU KE WAKTU](Es-Clouds-Over-Time-id) | Awan Es langkah demi langkah dengan metode Chartier 2022: foEs minimum dan NmE per sel, dari spot sesi, log ADIF, atau spot CSV |
 | [F.A.I.](FAI-id) | Scatter trail dari scatter point untuk sepasang stasiun, dan kurva iso-refleksi untuk memverifikasi sebuah titik |
 | [METEOR SCATTER](Meteor-Scatter-id) | Program YA-MS lengkap (efisiensi hujan meteor, radar, prakiraan) |
 | [AURORA](Aurora-id) | Oval aurora, Kp NOAA dan angin surya, scatter trail aurora dan iso-refleksi, arah antena yang disarankan |

@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-ro) | Spoturi Es pe hartă, primul salt al ambelor stații, nori Es pe pătratele Maidenhead, MUF pentru stația ta |
 | [BENCHMARK Es](Benchmark-Es-ro) | Banc de probă pe un log ADIF întreg (chiar și al altei stații): QSO-uri pe zi și pe oră, skip pe sectoare, foEs estimat, verificarea multi-saltului, deplasarea norilor |
 | [BENCHMARK 50 MHz](Benchmark-50-ro) | E-sporadic multi-salt pe 50 MHz din unul sau două loguri ADIF: hartă Mercator, zi și oră, foEs opțional, traseu mărit cu WWL, QSO-uri în limita a 150 km |
+| [IONOSONDE](Ionosondes-ro) | foEs, foF2 și MUF(D) în direct de la ionosondele GIRO, grafic pe 24 de ore, MUF-ul E-sporadic cu benzile care se deschid, comparație cu spoturile |
+| [NORI Es ÎN TIMP](Es-Clouds-Over-Time-ro) | Nori Es pas cu pas cu metoda lui Chartier 2022: foEs minimă și NmE pe celulă, din spoturile sesiunii, log ADIF sau spoturi CSV |
 | [F.A.I.](FAI-ro) | Scatter trail al scatter point-urilor pentru o pereche de stații și liniile de izo-reflexie pentru verificarea unui punct |
 | [METEOR SCATTER](Meteor-Scatter-ro) | Programul YA-MS complet (eficiența roiurilor, radare, prognoze) |
 | [AURORA](Aurora-ro) | Ovalul auroral, Kp de la NOAA și vântul solar, scatter trail auroral și izo-reflexie, orientarea recomandată a antenei |

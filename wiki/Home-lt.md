@@ -13,6 +13,8 @@
 | [SPORADIC-E](Sporadic-E-lt) | Es spotai žemėlapyje, abiejų stočių pirmas šuolis, Es debesys Maidenhead kvadratuose, MUF jūsų stočiai |
 | [BENCHMARK Es](Benchmark-Es-lt) | Bandymų stendas visam ADIF žurnalui (ir kitos stoties): QSO pagal dienas ir valandas, skip pagal sektorius, įvertinta foEs, kelių šuolių patikra, debesų slinkimas |
 | [BENCHMARK 50 MHz](Benchmark-50-lt) | Kelių šuolių sporadinis E 50 MHz juostoje pagal vieną ar du ADIF žurnalus: Merkatoriaus žemėlapis, diena ir laikas, neprivaloma foEs, padidinta trasa su WWL, QSO 150 km spinduliu |
+| [JONOZONDAI](Ionosondes-lt) | GIRO jonozondų foEs, foF2 ir MUF(D) realiuoju laiku, 24 valandų grafikas, sporadinio E MUF su atsiveriančiomis juostomis, palyginimas su spotais |
+| [Es DEBESYS LAIKE](Es-Clouds-Over-Time-lt) | Es debesys žingsnis po žingsnio pagal Chartier 2022 metodą: mažiausia foEs ir NmE langelyje, iš sesijos spotų, ADIF žurnalo arba CSV spotų |
 | [F.A.I.](FAI-lt) | Stočių poros sklaidos taškų Scatter trail ir izoatspindžio linijos taškui patikrinti |
 | [METEOR SCATTER](Meteor-Scatter-lt) | Visa programa YA-MS (srautų efektyvumas, radarai, prognozės) |
 | [AURORA](Aurora-lt) | Pašvaistės ovalas, NOAA Kp ir Saulės vėjas, pašvaistės Scatter trail ir izoatspindys, rekomenduojama antenos kryptis |

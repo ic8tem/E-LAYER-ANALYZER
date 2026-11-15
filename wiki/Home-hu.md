@@ -13,6 +13,8 @@ Az **E-LAYER ANALYZER** ingyenes program rádióamatőrök számára, amely az i
 | [SPORADIC-E](Sporadic-E-hu) | Es-spotok a térképen, mindkét állomás első ugrása, Es-felhők Maidenhead-négyzeteken, MUF a saját állomásra |
 | [BENCHMARK Es](Benchmark-Es-hu) | Tesztpad egy teljes ADIF-naplón (akár más állomásén is): QSO-k naponta és óránként, holtzóna szektoronként, becsült foEs, többugrásos ellenőrzés, a felhők vándorlása |
 | [BENCHMARK 50 MHz](Benchmark-50-hu) | Többugrásos sporadikus E 50 MHz-en egy vagy két ADIF-naplóból: Mercator-térkép, nap és időpont, opcionális foEs, kinagyított útvonal a WWL-lel, QSO-k 150 km-en belül |
+| [IONOSZONDÁK](Ionosondes-hu) | foEs, foF2 és MUF(D) élőben a GIRO ionoszondáktól, 24 órás grafikon, a sporadikus E MUF-ja a megnyíló sávokkal, összevetés a spotokkal |
+| [Es-FELHŐK AZ IDŐBEN](Es-Clouds-Over-Time-hu) | Es-felhők lépésről lépésre Chartier 2022 módszerével: minimális foEs és NmE cellánként, a munkamenet spotjaiból, ADIF-naplóból vagy CSV-spotokból |
 | [F.A.I.](FAI-hu) | Egy állomáspár szórási pontjainak Scatter trailje, valamint izoflexiós helyek egy pont ellenőrzéséhez |
 | [METEOR SCATTER](Meteor-Scatter-hu) | A teljes YA-MS program (rajhatékonyság, radarok, előrejelzések) |
 | [AURORA](Aurora-hu) | Aurora-ovális, NOAA Kp és napszél, aurorás Scatter trail és izoflexió, ajánlott antennairány |

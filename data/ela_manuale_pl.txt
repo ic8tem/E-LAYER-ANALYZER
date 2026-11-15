@@ -1,5 +1,5 @@
 TITLE|Instrukcja obsługi E-LAYER ANALYZER
-SUB|Szczegółowa instrukcja obsługi - opracował Costantino IC8TEM - wersja 0.5.1, listopad 2026. Liczby w nawiasach kwadratowych odsyłają do zakładki ŹRÓDŁA; wzory i wybory obliczeniowe znajdują się w zakładce PODSUMOWANIE WYBORÓW OBLICZENIOWYCH.
+SUB|Szczegółowa instrukcja obsługi - opracował Costantino IC8TEM - wersja 0.5.2, listopad 2026. Liczby w nawiasach kwadratowych odsyłają do zakładki ŹRÓDŁA; wzory i wybory obliczeniowe znajdują się w zakładce PODSUMOWANIE WYBORÓW OBLICZENIOWYCH.
 H1|1. Zanim zaczniesz
 H2|1.1 Co robi program
 P|E-LAYER ANALYZER łączy w jednym programie narzędzia do badania rodzajów propagacji VHF, które przechodzą przez warstwę E jonosfery: E-sporadycznego, także wieloskokowego i pozakontynentalnego, F.A.I. (nieregularności zorientowanych wzdłuż pola magnetycznego), meteor scatter, ze zintegrowanym programem YA-MS, oraz zorzy radiowej. Pracuje na spotach z DX clusterów w czasie rzeczywistym i na logach ADIF, a każdy wynik pokazuje na mapie zajmującej dwie trzecie okna, z danymi i obliczeniami w prawej jednej trzeciej.
@@ -67,7 +67,7 @@ LI|Poziom Dst odczytuje się tak: spokój powyżej -30 nT, słabe zaburzenie od 
 LI|Meteor scatter: wykres dzisiejszej aktywności meteorowej (dane RMOB) z Make More Miles on VHF; roje, efektywność i ruch na żywo znajdują się w zakładce METEOR SCATTER.
 P|Podsumowanie tych danych pojawia się w prawym górnym rogu map SPORADIC-E i F.A.I. (E-skip wybranego kontynentu) oraz AURORA (zorza wg N0NBH i Bz z NOAA).
 H1|3. E-sporadyczne (SPORADIC-E)
-P|Zakładka SPORADIC-E ma trzy podzakładki: REAL-TIME, spoty na żywo opisane w tym rozdziale; BENCHMARK Es (rozdział 4) i BENCHMARK 50 MHz (rozdział 5).
+P|Zakładka SPORADIC-E ma pięć podzakładek: REAL-TIME, spoty na żywo opisane w tym rozdziale; BENCHMARK Es (rozdział 4), BENCHMARK 50 MHz (rozdział 5), JONOSONDY (rozdział 5b) i OBŁOKI Es W CZASIE (rozdział 5c).
 H2|3.1 Mapa
 P|Menu Mapa wybiera odwzorowanie. Azymutalna: mapa azymutalna równoodległościowa wyśrodkowana na własnej stacji, z suwakiem powiększenia (od 300 do 20000 km od środka, także kółkiem myszy). Merkator: mapa świata, z przyciskami Europa i Świat. W obu odwzorowaniach wokół stacji rysowane są okręgi odległości z tabeli IK3XTV [3]: 500 km (minimum pojedynczego skoku), 1500-2000 km (optymalna), 2400 km (maksimum pojedynczego skoku), 5000 km (maksimum podwójnego skoku) i 6900 km (maksimum potrójnego skoku).
 P|Tabela długości skoków na 50 MHz pochodzi od Flavia Egano IK3XTV, «Propagazione sui 6 metri - Caratteristiche generali» [3]; obłoki Es znajdują się na wysokości około 100 km, co ogranicza pojedynczy skok do około 2000 km [29]. Pierścienie na mapach i liczba skoków są zgodne z tymi odległościami:
@@ -120,6 +120,21 @@ LI|Rozmyta żółta kropka oznacza środek każdego skoku, gdzie przypuszczalnie
 LI|Tabela wyświetla pokazane QSO z kolumnami St. (stacja 1 lub 2), Dzień, UTC, Znak wywoławczy, WWL, km, Skoki i foEs≥. Przy włączonej foEs punkty skoku podają minimalną foEs; 4-znakowy lokator, którego brak w CALL3, jest zaznaczony obok WWL.
 H2|5.2 Mapa Merkatora
 P|Mapa jest w odwzorowaniu Merkatora z dowolnym środkiem. Po zbliżeniu myszy do trasy linia i ikony powiększają się i pojawia się 6-znakowy kwadrat WWL korespondenta. Po lewym kliknięciu tej trasy okienko pyta, czy pokazać wszystkie QSO z pliku, ze wszystkich dni, z punktem końcowym w promieniu 150 km: Tak czyści mapę i pokazuje te QSO wewnątrz pomarańczowego koła, Nie pozostawia mapę bez zmian. Przycisk Powrót do dnia i godziny przywraca poprzedni wybór.
+H1|5b. JONOSONDY (podzakładka SPORADIC-E)
+P|Podzakładka JONOSONDY pokazuje foEs zmierzoną przez jonosondy sieci GIRO na całym świecie. Dane przychodzą przy pierwszym otwarciu zakładki, a potem co 15 minut, automatycznie (pole Aktualizuj automatycznie co 15 minut); przycisk Aktualizuj teraz pobiera je od razu.
+LI|Mapa: każda jonosonda to kolorowa kropka z ostatnią foEs (te same kolory co obłoki Es) i wartością w MHz; szara, jeśli nie ma aktualnych danych, z pierścieniem, jeśli ostatni jonogram ma ponad 90 minut. Pole Pokaż także jonosondy bez aktualnych danych ukrywa je lub pokazuje.
+LI|Tabela: Kod, Jonosonda, km od własnej stacji, UTC ostatniego jonogramu, foEs, foF2, MUF(D) i Spoty foEs≥, czyli minimalna foEs wyznaczona ze spotów Es z ostatnich 30 minut, które odbijają się w promieniu 500 km od jonosondy (pole Spoty w promieniu km), z liczbą spotów w nawiasie.
+LI|Kliknięcie wiersza lub miejsca obok jonosondy na mapie: wykres ostatnich 24 godzin (foEs żółta, foF2 błękitna, MUF(D) fioletowa kropkowana), a pod nim MUF E-sporadycznego na 1000, 1500, 2000 i 2400 km z pasmami, które się otwierają, przy wybranej wysokości Es.
+LI|Jeśli spoty wymagają wyższej foEs niż zmierzona, program to sygnalizuje: obłok może być daleko od jonosondy albo jonosonda osiągnęła granicę swojego zakresu częstotliwości.
+P|Dane pochodzą z GIRO (Reinisch i Galkin 2011), licencja CC BY-NC-SA 4.0, tylko do użytku niekomercyjnego.
+H1|5c. OBŁOKI Es W CZASIE (podzakładka SPORADIC-E)
+P|Podzakładka OBŁOKI Es W CZASIE pokazuje, jak przesuwają się i zmieniają obłoki E-sporadycznego, krok po kroku, metodą Chartiera (2022): każda łączność daje minimalną foEs w punkcie odbicia, a każda komórka siatki przyjmuje najwyższą wartość z kroku.
+LI|Źródło: Spoty z sesji (odświeżane przy każdym otwarciu zakładki) albo Wczytaj log ADIF lub spoty CSV. Eksportuj spoty z sesji (CSV) zapisuje je, aby można je było obejrzeć po zamknięciu programu, które opróżnia archiwum spotów.
+LI|Pasma MHz (28, 40, 50, 70, 144), Krok (5, 10 lub 15 minut), Komórka (1°, 2° lub 4°) i Wysokość Es km.
+LI|Pasek czasu: ⏮ ◀ Uruchom/Zatrzymaj ▶ ⏭ i suwak; po otwarciu startuje się od kroku z największą liczbą komórek. Poprzednie kroki wyblakłe pokazuje trzy kroki przed wybranym, słabszymi kolorami; Łączności rysuje trasy kroku w kolorach pasm.
+LI|Tabela komórek: Komórka (południowo-zachodni róg i lokator środka), foEs≥, NmE≥ (minimalna gęstość elektronowa), Łączności i Pasma. Kliknięcie komórki (w tabeli lub na mapie) wyróżnia jej łączności i znaki wywoławcze.
+LI|Wykres: najwyższa minimalna foEs (żółta linia) i liczba komórek (słupki) dla każdego kroku, z linią pokazanego kroku. Poniżej podsumowanie z najwyższą wartością źródła.
+P|Wartość jest dolną granicą: obłok może być gęstszy, niż pokazują łączności, a pusta komórka oznacza tylko brak łączności.
 H1|6. F.A.I.
 H2|6.1 Dwa widoki
 P|Zakładka F.A.I. bada rozpraszanie na nieregularnościach zorientowanych wzdłuż pola magnetycznego (główne źródło [1], [2]). Widok Scatter trail (para A-B) oblicza dla dwóch stacji miejsce geometryczne możliwych scatter pointów, pokolorowane według odchylenia od warunku odbicia, proponuje najbardziej prawdopodobny scatter point i rysuje w prawym górnym rogu ramkę z QTF i elewacjami obu stacji (czerwony = A, zielony = B). Widok Izorefleksja (punkt) rysuje dla wybranego punktu odbicia linie izorefleksji, podobnie jak AuroReflex i SE-PROP K9SE: kolorowe pasy w schematach ciemnych, grube linie w schematach jasnych.
