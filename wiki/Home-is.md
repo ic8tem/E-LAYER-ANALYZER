@@ -38,3 +38,7 @@
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (heimild YA-MS).
 
 Heildarlistinn er á flipanum HEIMILDIR í forritinu.
+
+## Leyfi
+
+E-LAYER ANALYZER er frjáls hugbúnaður með leyfinu **GNU GPL-3.0** (skráin COPYING), sama leyfi og YA-MS. Honum er dreift án nokkurrar ábyrgðar. Gögn ytri heimilda tilheyra áfram viðkomandi stofnunum, með þeirra skilmálum (til dæmis GIRO-gögn: CC BY-NC-SA 4.0, eingöngu til notkunar í óviðskiptalegum tilgangi).

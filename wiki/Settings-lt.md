@@ -9,7 +9,7 @@ Nuo 0.4.18 versijos kortelėje **NUSTATYMAI** surinktos bendrosios programos par
 | Skyrius | Ką nustatote |
 |---|---|
 | Stotis | Šaukinys, lokatorius ir aukštis, tie patys kaip viršutinėje juostoje; **Taikyti** juos patvirtina visoms kortelėms. |
-| Išvaizda | Kalba, spalvų schema (YAEC ir YA-MS schemos ir, nuo 0.5.0 versijos, šešios IP-TRX-CTRL temos: Šviesi, Naktinė, Juoda, Mėlyna, Violetinė, Žalia) ir **visos programos šrifto dydis** (85-140 %, kaip YA-MS). Kalba ir spalvos perkuria langą: nustatymai ir spotai išlieka. |
+| Išvaizda | Kalba, spalvų schema (YAEC ir YA-MS schemos ir, nuo 0.5.0 versijos, šešios IP-TRX-CTRL temos: Šviesi, Naktinė, Juoda, Mėlyna, Violetinė, Žalia), **kompaktiškas režimas** 13-15 colių nešiojamiesiems kompiuteriams (nuo 0.5.2: automatinis, kai aukštis mažesnis nei 850 taškų, visada arba niekada) ir **visos programos šrifto dydis** (85-140 %, kaip YA-MS). Kalba ir spalvos perkuria langą: nustatymai ir spotai išlieka. |
 | Žemėlapiai ir prognozių duomenys | Žemynas, tas pats meniu kaip kortelių juostoje. |
 | Laikas | NTP būsena ir serverių laiko bei kompiuterio laikrodžio skirtumas. |
 | Atnaujinimai | Patikra GitHub paleidžiant ir kas 30 minučių, automatinis ir tylus atnaujinimas, mygtukas **Tikrinti dabar**. Automatiniai atnaujinimai netaikomi sistemos paketams (.deb, .rpm, Arch, Slackware). |

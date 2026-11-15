@@ -38,3 +38,7 @@
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (YA-MS avots).
 
 Pilnais saraksts ir programmas cilnē AVOTI.
+
+## Licence
+
+E-LAYER ANALYZER ir brīvā programmatūra ar licenci **GNU GPL-3.0** (fails COPYING), to pašu, kas YA-MS. Tā tiek izplatīta bez jebkādas garantijas. Ārējo avotu dati paliek attiecīgo iestāžu īpašumā, ar to nosacījumiem (piemēram, GIRO dati: CC BY-NC-SA 4.0, tikai nekomerciālai lietošanai).
