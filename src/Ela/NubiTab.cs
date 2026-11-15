@@ -93,8 +93,8 @@ namespace ELA
             tCells = new TableView();
             tCells.Columns.AddRange(new[] { Lang.T("Cella"), "foEs≥", "NmE≥", Lang.T("Collegamenti"), Lang.T("Bande") });
             tCells.ColumnWidths.AddRange(new double[] { 120, 56, 86, 90, 120 });
-            tCells.HeaderTips = new[] { Lang.T("Angolo sud-ovest della cella (latitudine, longitudine) e locator del centro"), Lang.T("La foEs minima piu' alta fra i collegamenti che riflettono nella cella (MHz)"),
-                Lang.T("Densita' elettronica minima dello strato, 1,24e10 x foEs^2 elettroni al metro cubo"), Lang.T("Collegamenti con un punto di riflessione nella cella in questo passo"), "" };
+            tCells.HeaderTips = new[] { Lang.T("Angolo sud-ovest della cella (latitudine, longitudine) e locator del centro"), Lang.T("La foEs minima più alta fra i collegamenti che riflettono nella cella (MHz)"),
+                Lang.T("Densità elettronica minima dello strato, 1,24e10 x foEs^2 elettroni al metro cubo"), Lang.T("Collegamenti con un punto di riflessione nella cella in questo passo"), "" };
             tCells.RowClicked += i => { if (i >= 0 && i < tCells.Rows.Count) { selCell = tCells.Rows[i].Tag as Cell; Draw(); } };
             chart = new SimpleChart { Height = 160, YLabel = "MHz", Y2Label = Lang.T("celle") };
             txtSum = Ui.Text(12.5);
@@ -110,7 +110,7 @@ namespace ELA
             Grid.SetRow(cellBox, 5);
             GridSplitter sp = new GridSplitter { Background = Pal.B(Pal.Track), ResizeDirection = GridResizeDirection.Rows };
             Grid.SetRow(sp, 6);
-            Border chartBox = Ui.Box(Lang.T("foEs minima piu' alta e celle attive, passo per passo"), Pal.Yellow, chart);
+            Border chartBox = Ui.Box(Lang.T("foEs minima più alta e celle attive, passo per passo"), Pal.Yellow, chart);
             Grid.SetRow(chartBox, 7);
             Border sumBox = Ui.Box(Lang.T("Sintesi"), Pal.Green, svSum);
             Grid.SetRow(sumBox, 8);
@@ -511,10 +511,10 @@ namespace ELA
                 foreach (List<Cell> l in cells.Values) foreach (Cell c in l) if (peak == null || c.FoEs > peak.FoEs) peak = c;
                 sb.AppendLine(Lang.F("Dal {0:yyyy-MM-dd HH:mm} al {1:yyyy-MM-dd HH:mm} UTC: {2} passi di {3} minuti, {4} con almeno una cella.", t0, t0.AddMinutes(StepMin * nSteps), nSteps, StepMin, active));
                 if (peak != null)
-                    sb.AppendLine(Lang.F("Valore piu' alto: foEs ≥ {0:F1} MHz (NmE ≥ {1:0.00E+0} el/m³) nella cella {2} alle {3:HH:mm} UTC.", peak.FoEs, NmeK * peak.FoEs * peak.FoEs, CellName(peak, Grid0), t0.AddMinutes(StepMin * peak.Step)));
+                    sb.AppendLine(Lang.F("Valore più alto: foEs ≥ {0:F1} MHz (NmE ≥ {1:0.00E+0} el/m³) nella cella {2} alle {3:HH:mm} UTC.", peak.FoEs, NmeK * peak.FoEs * peak.FoEs, CellName(peak, Grid0), t0.AddMinutes(StepMin * peak.Step)));
                 List<Cell> lc;
                 if (cells.TryGetValue(cur, out lc) && lc.Count > 0)
-                    sb.AppendLine(Lang.F("Passo mostrato: {0} celle, foEs minima piu' alta {1:F1} MHz.", lc.Count, lc[0].FoEs));
+                    sb.AppendLine(Lang.F("Passo mostrato: {0} celle, foEs minima più alta {1:F1} MHz.", lc.Count, lc[0].FoEs));
                 else sb.AppendLine(Lang.T("Passo mostrato: nessun collegamento."));
                 if (selCell != null && selCell.Best != null)
                 {
@@ -523,7 +523,7 @@ namespace ELA
                 }
             }
             sb.AppendLine();
-            sb.AppendLine(Lang.T("Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs e' almeno f / sec φ; la cella prende il valore piu' alto del passo. E' un limite inferiore: la nube puo' essere piu' densa e piu' estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico."));
+            sb.AppendLine(Lang.T("Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico."));
             txtSum.Text = sb.ToString();
         }
 

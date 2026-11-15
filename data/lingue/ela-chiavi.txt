@@ -821,3 +821,76 @@ Blu
 Viola
 Verde
 Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.
+IONOSONDE
+NUBI Es NEL TEMPO
+Aggiorna da solo ogni 15 minuti
+Mostra anche le ionosonde senza dati recenti
+Codice
+Ionosonda
+Spot foEs≥
+Distanza dalla propria stazione
+Ora dell'ultimo ionogramma
+Frequenza critica dello strato E sporadico (MHz)
+Frequenza critica dello strato F2 (MHz)
+MUF a 3000 km dello strato F2 (MHz)
+foEs minima ricavata dagli spot Es degli ultimi 30 minuti con un punto di riflessione vicino alla ionosonda
+Dati: GIRO, Global Ionosphere Radio Observatory (Reinisch e Galkin 2011), licenza CC BY-NC-SA 4.0, solo uso non commerciale. Servizio lgdc.uml.edu/fastchar/getbest, come in MUF Muncher di DM6AX.
+Ultime 24 ore della ionosonda scelta
+MUF dell'E-sporadico e bande (legge della secante)
+Spot entro km
+Clic su una ionosonda (tabella o mappa) per il grafico e la MUF dell'E-sporadico.
+Scarico i dati delle ionosonde GIRO...
+Nessun dato ancora: i dati arrivano alla prima apertura della linguetta e poi ogni 15 minuti.
+Ionosonde con un ionogramma negli ultimi 90 minuti: {0} su {1}.
+Ultimo aggiornamento {0}.
+Senza risposta: {0}.
+Ultimo errore: {0}
+IONOSONDE GIRO - ultima foEs (MHz)
+foEs della ionosonda
+grigio: nessun dato recente (anello: oltre 90 minuti)
+cerchio giallo: spot entro {0:F0} km dalla ionosonda scelta
+Nessuna ionosonda scelta.
+{0:F0} km dalla stazione
+Nessuna foEs negli ultimi 90 minuti: niente E-sporadico sopra la ionosonda, oppure la ionosonda non trasmette.
+foEs {0:F1} MHz alle {1:HH:mm} UTC.
+MUF dell'E-sporadico per un salto con la riflessione sopra la ionosonda (quota {0:F0} km):
+{0:F0} km: MUF {1:F1} MHz
+nessuna banda
+Per i 50 MHz a 2000 km serve una foEs di almeno {0:F1} MHz; per i 144 MHz a 2000 km almeno {1:F1} MHz.
+Spot Es degli ultimi 30 minuti con un punto di riflessione entro {0:F0} km: {1}; foEs minima ricavata dagli spot {2:F1} MHz.
+Gli spot chiedono più della foEs misurata: la nube può essere lontana dalla verticale della ionosonda, oppure la ionosonda è arrivata al limite del suo campo di frequenza (6,5-10 MHz secondo Chartier 2022) e la foEs vera è più alta.
+La foEs della ionosonda vale per la verticale della stazione; i valori sono letti in automatico dagli ionogrammi (ARTIST) e possono avere errori. La MUF usa la stessa legge della secante della linguetta REAL-TIME.
+{0} minuti
+{0:F0}° x {0:F0}°
+Passi precedenti sbiaditi
+Collegamenti
+Spot della sessione
+Carica log ADIF o spot CSV
+Esporta gli spot della sessione (CSV)
+Cella
+Angolo sud-ovest della cella (latitudine, longitudine) e locator del centro
+La foEs minima più alta fra i collegamenti che riflettono nella cella (MHz)
+Densità elettronica minima dello strato, 1,24e10 x foEs^2 elettroni al metro cubo
+Collegamenti con un punto di riflessione nella cella in questo passo
+celle
+Bande MHz
+Celle del passo (clic per i collegamenti della cella)
+foEs minima più alta e celle attive, passo per passo
+Sintesi
+spot della sessione
+Log ADIF o file di spot CSV del programma
+Esportati {0} spot in {1}.
+{0}: {1} spot o QSO, {2} collegamenti E-sporadico usati.
+Esclusi: {0} di altre bande, {1} non E-sporadico o senza locator, {2} sotto la distanza minima, {3} FT8/FT4 isolati in 50 MHz, {4} transequatoriali.
+NUBI Es NEL TEMPO - foEs minima per cella (metodo di Chartier 2022)
+foEs minima della cella
+{0} minuti prima: foEs ≥ {1:F1} MHz
+foEs ≥ {0:F1} MHz, NmE ≥ {1:0.00E+0} el/m³
+{0} collegamenti, bande {1} MHz
+Nessun collegamento E-sporadico nella sorgente scelta. Con gli spot della sessione, la mappa si riempie mentre arrivano gli spot (premi di nuovo "Spot della sessione" per aggiornare); in alternativa carica un log ADIF o un file di spot CSV esportato in precedenza.
+Dal {0:yyyy-MM-dd HH:mm} al {1:yyyy-MM-dd HH:mm} UTC: {2} passi di {3} minuti, {4} con almeno una cella.
+Valore più alto: foEs ≥ {0:F1} MHz (NmE ≥ {1:0.00E+0} el/m³) nella cella {2} alle {3:HH:mm} UTC.
+Passo mostrato: {0} celle, foEs minima più alta {1:F1} MHz.
+Passo mostrato: nessun collegamento.
+Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.
+Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.
