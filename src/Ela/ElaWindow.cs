@@ -32,7 +32,7 @@ namespace ELA
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; BenchTab bench; BenchMultiTab bench50; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log; SettingsTab settings;
+        EsTab es; BenchTab bench; BenchMultiTab bench50; IonoTab iono; NubiTab nubi; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log; SettingsTab settings;
         readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
@@ -115,6 +115,8 @@ namespace ELA
             es = new EsTab();
             bench = new BenchTab();
             bench50 = new BenchMultiTab();
+            iono = new IonoTab();
+            nubi = new NubiTab();
             fai = new ScatterTab(false);
             YAMS.MainWindow.LanguageRequested = code => Dispatcher.UIThread.Post(() => SwitchLanguage(code));
             YAMS.MainWindow.ThemeRequested = th => Dispatcher.UIThread.Post(() => SwitchTheme(th));
@@ -122,11 +124,14 @@ namespace ELA
             au = new ScatterTab(true);
             dc = new DataTab();
             log = new LogTab();
-            // SPORADIC-E: tre sottolinguette (REAL-TIME, BENCHMARK Es, BENCHMARK 50 MHz)
+            // SPORADIC-E: cinque sottolinguette (REAL-TIME, BENCHMARK Es, BENCHMARK 50 MHz, IONOSONDE, NUBI Es NEL TEMPO);
+            // le ultime due in coda, cosi' i numeri salvati delle prime tre non cambiano
             esTabs.Add(Lang.T("REAL-TIME"), es.Root);
             esTabs.Add(Lang.T("BENCHMARK Es"), bench.Root);
             esTabs.Add(Lang.T("BENCHMARK 50 MHz"), bench50.Root);
-            esTabs.SelectionChanged += i => { if (i == 0) es.Refresh(); };
+            esTabs.Add(Lang.T("IONOSONDE"), iono.Root);
+            esTabs.Add(Lang.T("NUBI Es NEL TEMPO"), nubi.Root);
+            esTabs.SelectionChanged += i => { if (i == 0) es.Refresh(); else if (i == 3) iono.Activate(); else if (i == 4) nubi.OnShow(); };
             DockPanel esPage = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(esPage, esTabs.Bar, Dock.Top);
             esPage.Children.Add(esTabs.Host);
@@ -156,7 +161,7 @@ namespace ELA
                 "E-LAYER ANALYZER - relazione tecnica.docx", Lang.T("Le scelte che hanno portato alla realizzazione del programma")));
             tabs.SelectionChanged += i =>
             {
-                if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); }
+                if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); else if (esTabs.Selected == 3) iono.Activate(); else if (esTabs.Selected == 4) nubi.OnShow(); }
                 else if (i == 1) fai.Recalc();
                 else if (i == 3) { if (auTabs.Selected == 0) au.Recalc(); }
                 else if (i == 5) log.Refresh();
@@ -289,6 +294,9 @@ namespace ELA
                 if (Program.ScreenshotDir == null) Igrf.CheckUpdateSilent(dataDir, Station.Cfg);   // nuova generazione IGRF, senza chiedere
                 SpotStore.Init(dataDir);
                 SpotStore.LoadRecent();
+                Giro.Init(dataDir);   // archivio delle ionosonde GIRO (ultime 48 ore); i dati nuovi arrivano all'apertura di IONOSONDE
+                iono.Refresh();
+                if (tabs.Selected == 0 && esTabs.Selected == 3) iono.Activate();   // IONOSONDE riaperta all'avvio
                 CallDb.StartLoad(dataDir);
                 SpaceWeather.LoadCached(dataDir);
                 LogStore.Init(dataDir);
@@ -425,7 +433,8 @@ namespace ELA
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
                 string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "6b_impostazioni", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
-                string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50" };
+                string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "1m_ionosonde", "1l_nubi_es_nel_tempo" };
+                await nubi.LoadFile(bdemo);   // NUBI Es NEL TEMPO: il log di prova del BENCHMARK Es
                 for (int i = 0; i < tabs.Count; i++)
                 {
                     tabs.Select(i);
@@ -435,7 +444,9 @@ namespace ELA
                         {
                             esTabs.Select(j);
                             if (j == 0) { es.Refresh(); es.SelectFirst(); }
+                            if (j == 3) { await iono.ShotWait(90); try { File.WriteAllText(Path.Combine(dir, "1m_ionosonde.txt"), iono.ShotText()); } catch { } }
                             await Task.Delay(2500);
+                            if (j == 4) { try { File.WriteAllText(Path.Combine(dir, "1l_nubi_es_nel_tempo.txt"), nubi.ShotText()); } catch { } }
                             Shot(Path.Combine(dir, esNames[j] + ".png"));
                         }
                         esTabs.Select(0);

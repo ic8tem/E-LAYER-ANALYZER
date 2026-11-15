@@ -243,18 +243,47 @@ namespace ELA
                 string f = Path.Combine(Dir, s.Utc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + ".csv");
                 bool head = !File.Exists(f);
                 StringBuilder sb = new StringBuilder();
-                if (head) sb.AppendLine("utc;freq_khz;dx;spotter;loc_dx;loc_spotter;prop;modo;snr;fonte;commento");
-                sb.Append(s.Utc.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)).Append(';')
-                  .Append(s.FreqKHz.ToString("F1", CultureInfo.InvariantCulture)).Append(';')
-                  .Append(s.DxCall).Append(';').Append(s.Spotter).Append(';')
-                  .Append(s.LocDx).Append(';').Append(s.LocSpotter).Append(';')
-                  .Append(s.Prop).Append(';').Append(s.DigiMode).Append(';')
-                  .Append(double.IsNaN(s.Snr) ? "" : s.Snr.ToString("F0", CultureInfo.InvariantCulture)).Append(';')
-                  .Append(SourceNames[Math.Max(0, Math.Min(3, s.Source))]).Append(';')
-                  .Append((s.Comment ?? "").Replace(';', ',')).AppendLine();
+                if (head) sb.AppendLine(CsvHeader);
+                sb.AppendLine(CsvLine(s));
                 File.AppendAllText(f, sb.ToString());
             }
             catch { }
+        }
+
+        // formato dei file di data/spot (anche per salvare e ricaricare gli spot di una sessione, linguetta NUBI Es NEL TEMPO)
+        public const string CsvHeader = "utc;freq_khz;dx;spotter;loc_dx;loc_spotter;prop;modo;snr;fonte;commento";
+        public static string CsvLine(Spot s)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(s.Utc.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)).Append(';')
+              .Append(s.FreqKHz.ToString("F1", CultureInfo.InvariantCulture)).Append(';')
+              .Append(s.DxCall).Append(';').Append(s.Spotter).Append(';')
+              .Append(s.LocDx).Append(';').Append(s.LocSpotter).Append(';')
+              .Append(s.Prop).Append(';').Append(s.DigiMode).Append(';')
+              .Append(double.IsNaN(s.Snr) ? "" : s.Snr.ToString("F0", CultureInfo.InvariantCulture)).Append(';')
+              .Append(SourceNames[Math.Max(0, Math.Min(3, s.Source))]).Append(';')
+              .Append((s.Comment ?? "").Replace(';', ',').Replace('\n', ' ').Replace('\r', ' '));
+            return sb.ToString();
+        }
+
+        // una riga di un file di spot; null se non valida
+        public static Spot ParseCsvLine(string line)
+        {
+            string[] p = (line ?? "").Split(';');
+            if (p.Length < 11 || p[0] == "utc") return null;
+            Spot s = new Spot();
+            DateTime t;
+            if (!DateTime.TryParseExact(p[0], "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out t)) return null;
+            s.Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc);
+            double fr; double.TryParse(p[1], NumberStyles.Float, CultureInfo.InvariantCulture, out fr); s.FreqKHz = fr;
+            s.DxCall = p[2]; s.Spotter = p[3]; s.LocDx = p[4]; s.LocSpotter = p[5]; s.Prop = p[6]; s.DigiMode = p[7];
+            double sn; s.Snr = double.TryParse(p[8], NumberStyles.Float, CultureInfo.InvariantCulture, out sn) ? sn : double.NaN;
+            s.Source = Array.IndexOf(SourceNames, p[9]); if (s.Source < 0) s.Source = 0;
+            s.Comment = p[10];
+            double la, lo;
+            if (Geo.LocToLatLon(s.LocSpotter, out la, out lo)) { s.LatS = la; s.LonS = lo; }
+            if (Geo.LocToLatLon(s.LocDx, out la, out lo)) { s.LatD = la; s.LonD = lo; }
+            return s;
         }
 
         // svuota il database degli spot: memoria e file CSV di data/spot (alla chiusura del programma, regola dell'autore)
@@ -282,20 +311,8 @@ namespace ELA
                 {
                     foreach (string line in File.ReadAllLines(f))
                     {
-                        string[] p = line.Split(';');
-                        if (p.Length < 11 || p[0] == "utc") continue;
-                        Spot s = new Spot();
-                        DateTime t;
-                        if (!DateTime.TryParseExact(p[0], "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out t)) continue;
-                        s.Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc);
-                        double fr; double.TryParse(p[1], NumberStyles.Float, CultureInfo.InvariantCulture, out fr); s.FreqKHz = fr;
-                        s.DxCall = p[2]; s.Spotter = p[3]; s.LocDx = p[4]; s.LocSpotter = p[5]; s.Prop = p[6]; s.DigiMode = p[7];
-                        double sn; s.Snr = double.TryParse(p[8], NumberStyles.Float, CultureInfo.InvariantCulture, out sn) ? sn : double.NaN;
-                        s.Source = Array.IndexOf(SourceNames, p[9]); if (s.Source < 0) s.Source = 0;
-                        s.Comment = p[10];
-                        double la, lo;
-                        if (Geo.LocToLatLon(s.LocSpotter, out la, out lo)) { s.LatS = la; s.LonS = lo; }
-                        if (Geo.LocToLatLon(s.LocDx, out la, out lo)) { s.LatD = la; s.LonD = lo; }
+                        Spot s = ParseCsvLine(line);
+                        if (s == null) continue;
                         if (keys.Add(s.Key)) All.Add(s);
                     }
                 }
