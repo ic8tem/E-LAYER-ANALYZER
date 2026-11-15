@@ -1,5 +1,5 @@
 TITLE|Bruksanvisning för YA-MS
-SUB|Version 1.8.15 - av Costantino IC8TEM - november 2026
+SUB|Version 1.8.19 - av Costantino IC8TEM - november 2026
 H1|1. Inledning
 H2|1.1 Vad YA-MS används till
 P|YA-MS hjälper dig att förutsäga och live följa meteorscatterförhållandena mellan din station och en motstation, från 28 till 432 MHz. För varje aktiv meteorsvärm anger programmet hur mycket radiantens läge gynnar din sträcka (effektiviteten), vilka timmar, från vilken sida av sträckan reflexerna kommer och vart du bör rikta antennen. Bredvid prognosen visar det data som mäts live: räkningarna från meteorradarn i Collm, kamerorna i Global Meteor Network, CMOR-radarn, GRAVES-sändaren och meteorscattertrafiken som samlas in från klustren och från PSKReporter.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): .deb-paketet, som installeras med sudo apt inst
 LI|Raspberry Pi 3, 4, 5, 400 och 500: paketet raspberry-pi-64bit (Raspberry Pi OS 64 bitar) eller raspberry-pi-32bit, som .tar.gz eller .deb.
 LI|Andra ARM-Linuxsystem (till exempel Slackware ARM64 eller armv7l-kort): paketet linux-arm64 eller linux-armv7l, som .tar.gz, som för Linux.
 LI|Windows på ARM (datorer med Snapdragon): paketet windows-arm64. Fedora och openSUSE: .rpm-paketet (x86_64 eller aarch64), med sudo dnf install eller sudo zypper install.
+LI|Windows 7 SP1, 8 och 8.1: paketen windows7-x64 och windows7-x86 (installation eller portabel zip), byggda med .NET 6, den sista som körs på dessa system. Windows 7 behöver uppdateringarna KB2533623 och KB2999226. De andra Windows-paketen kräver Windows 10 eller 11: på ett äldre Windows säger installationsprogrammet det direkt.
 LI|Arch, Manjaro och Arch Linux ARM: paketet .pkg.tar.zst, med sudo pacman -U. Slackware64 och Slackware ARM64: paketet .txz, med installpkg som root. Valfri Linux: AppImage-filen (x86_64 eller aarch64), görs körbar och startas. Alpine Linux: paketet alpine-x64 eller alpine-arm64, som .tar.gz.
 LI|macOS: .dmg-filen för Apple Silicon (M1 och senare) eller för Intel, eller app.zip. Dra YA-MS.app till en egen mapp (till exempel ~/YA-MS): mappen data skapas bredvid appen.
 TAG|ATTENZIONE|Windows kan visa "Windows skyddade datorn": välj "Mer information" och sedan "Kör ändå". På macOS öppnar du appen första gången med högerklick och "Öppna". Programmet är inte signerat med ett betalt certifikat.
@@ -70,6 +71,7 @@ LI|Tid: UTC-klocka.
 LI|Beräkningsdatum (UTC): beräkningens dag. Gäller för Prognosberäkning, för 24-timmarstabellen i Effektivitetsberäkning och för tidslinjen i GRAVES-radar. Standard är i dag, och vid midnatt följer datumet med till den nya dagen.
 LI|Timmar (−12 till +36 h): flyttar beräkningens tidpunkt i steg om 15 minuter. Bredvid: "Beräkning för: nu" eller det valda datumet och klockslaget.
 LI|Realtid: återgår till aktuell tidpunkt.
+LI|Tidslinjen («Timmar (−12 till +36 h)» och «Realtid») ligger överst i fliken Prognosberäkning, eftersom den bara gäller den beräkningen.
 H2|4.4 Ställa in den egna stationen
 TAG|PROCEDURA|1) Skriv in Min lokator och höjden. 2) Skriv in motstationens lokator och höjd, eller klicka på kartan i Prognosberäkning: vänsterklick = motstation, högerklick = din station. 3) Välj band. 4) Skriv in bomlängden och lobelevationen för din antenn. 5) Tryck på Beräkna: statusfältet bekräftar "Sträcka beräknad: ... km, ... reflexionspunkter samplade".
 TAG|NOTA|Inställningarna sparas i data/config.ini när programmet stängs och vid varje beräkning: vid nästa start hittar du samma sträcka.
@@ -116,11 +118,11 @@ LI|EXPERIMENTELLA REGLER MELLAN BANDEN: antal, styrka och längd för reflexione
 TAG|NOTA|En positiv marginal betyder att ett genomsnittligt underdenst spår räcker för att klara sträckan med din station; en negativ marginal betyder att det behövs tätare spår eller överdensa meteorer. Det är en uppskattning: referensen är fortfarande erfarenheten på bandet.
 H1|7. Effektivitetsberäkning
 P|Effektiviteten anger i procent hur mycket radiantens läge för en svärm möjliggör reflexioner på din sträcka: 100 % är det mest gynnsamma läget för den sträckan. Den här underfliken visar den timme för timme för dagen i "Beräkningsdatum", med värdena vid varje halvtimme.
-H2|7.1 De fyra rutorna
+H2|7.1 Bandet ovanför flikarna
+P|Rutorna ligger i ett band under tidsraden, ovanför flikarna, alltid synligt även med kommandoraderna hopfällda: till vänster de två rutorna för vald dag, sedan de sex prognoshorisonterna, som börjar nu.
 LI|DAGENS BÄSTA TID: timmen med högst sträckindex och den dominerande sidan.
 LI|MEST GYNNSAM SVÄRM: den svärm som bidrar mest, med timme, sida och de två bästa riktningarna.
-LI|NU: index och sida under den här timmen och den rekommenderade Hot (endast om den valda dagen är i dag).
-LI|EXPERIMENTELL PROGNOS: förväntade reflexioner per timme nu, om 1 och om 2 timmar (kapitel 8).
+LI|NU · OM 1, 3, 6, 12 OCH 24 TIMMAR: för varje horisont medelvärdet för timmen som börjar där (fyra stickprov): sträckindex, dominerande sida, svärmen som bidrar mest och, när radardata finns, reflexer per timme från den experimentella prognosen. I NU visas utan radardata den rekommenderade Hot. Uppdateras varje minut.
 P|När en ruta saknar värden anges varför: ingen gemensam zon, ingen aktiv svärm eller ogynnsamma radianter hela dagen. Verktygstipset för varje ruta förklarar vad den visar. Under rutorna visas vid behov varningen INGEN GEMENSAM ZON och ett band som förklarar bokstäverna A och B.
 H2|7.2 Beräkningens inställning
 LI|Försiktig (standard): spårhöjd från radarn, normala spår, vinkel β påslagen. Ger de lägsta värdena.
@@ -159,16 +161,16 @@ LI|Tabellen med bedömningen: bra, medel eller dålig i förhållande till medel
 TAG|NOTA|Reflexionernas längd följer valet "Pingarnas längd mellan banden" i Geometri och dämpning; vid forward scatter ökar längden också med sec²φ i sträckans mittpunkt.
 H1|9. Live och realtidsdata
 H2|9.1 Trafik live
-P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteorscattertrafik: för varje förbindelse sträckan i bandets färg (28 brun, 50 grön, 70 cyan, 144 orange, 222 rosa, 432 lila), de två stationerna och svärmzon av de mest sannolika spåren vid den tiden. Nyss inkomna spots blinkar i en minut.
+P|En azimutal ekvidistant karta centrerad på din station med all insamlad meteorscattertrafik: för varje förbindelse sträckan i bandets färg (28 brun, 50 grön, 70 cyan, 144 orange, 222 rosa, 432 lila), de två stationerna och svärmzon av de mest sannolika spåren vid den tiden. Endast avkodningar i din WSJT-X (UDP) där en motstation svarar dig blinkar.
 LI|Kartradie: 600-3500 km. Spots att visa: senaste 3, 15 eller 30 minuterna, senaste timmen, senaste 3 eller 24 timmarna.
 LI|Mercatorkartan flyttas genom att dra den med musen; dubbelklick: centrerad på min station igen. Den azimutala kartan förblir centrerad på min station.
 LI|Ett klick på en sträcka eller på en rad i tabellen markerar förbindelsen och visar svärmzons centrum, dess höjd och dess storlek.
 LI|Detaljerna för vald förbindelse eller lyssnande station visas i en upphöjd ruta över kartan, uppe till vänster, både med azimutal- och Mercatorprojektion.
 LI|Visa vem som lyssnar: trianglar i bandets färg markerar stationer som enligt PSKReporter tar emot MSK144, FSK441, PSK2K eller JTMS på 28, 50, 70, 144 och 432 MHz i det valda tidsfönstret. Ett klick på en triangel visar anropssignal, lokator, moder och senaste spot. MQTT-flödet i fliken Datainsamling måste vara anslutet.
 LI|Även de aktiva monitorerna på PSKReporter-kartan: tomma trianglar för stationer som syns på kartan på pskreporter.info i MSK144, FSK441, PSK2K eller JTMS men ännu inte har tagit emot någon spot (MQTT skickar bara stationer som tar emot något). YA-MS frågar PSKReporters söktjänst en gång var 5:e minut för alla trafiksätt, som tjänstens regler kräver; en monitor stannar på kartan minst 11 minuter. Ett klick på triangeln visar anropssignal, lokator, avkodningsprogram och tiden då monitorn var aktiv. På från början.
-LI|FT8 över 1100 km utan parallella sträckor: en FT8-spot (från PSKReporter MQTT, klustren eller WSJT-X via UDP) mellan stationer mer än 1100 km ifrån varandra som inte har några parallella sträckor under 3 minuter före och efter (samma band, mittpunkt inom 300 km, riktning inom 15°, ett annat stationspar) ritas ljusgrön och dess rad i tabellen nere till höger blinkar alltid. Sporadiskt E och tropo ger många närliggande, parallella sträckor; en ensam spot kan vara ett meteorspår. Därför tar YA-MS också emot FT8-spotar från MQTT på 6 m, 4 m, 2 m, 1,25 m och 70 cm (aldrig 28 MHz, i inget fall). Dessa spotar hamnar inte i MS-arkivet. På från början. Extra kontroller med PSKReporter MQTT: spoten är inte isolerad om den mottagande stationen i MQTT hör andra stationer över 1100 km på samma band inom 3 minuter (öppet band); spotar från kluster och RBN räknas bara om samma par också kommer via MQTT; RBN-skimmers (anropssignaler med «-#») räknas aldrig.
-LI|WSJT-X-spotar via UDP som gäller din station (avkodningen innehåller din anropssignal: den som anropar dig eller svarar dig) ritas med en streckad linje som alltid blinkar, i alla trafiksätt och på alla avstånd.
-LI|Utbyte mellan YA-MS-användare: när en annan YA-MS-användare avkodar ett meddelande till din station via UDP (i MSK144, FSK441, PSK2K eller JTMS, eller i FT8 över 1100 km) skickar hans YA-MS det krypterat till dig via tre öppna MQTT-mäklare (HiveMQ, Mosquitto, EMQX); du ser det som en violett streckad linje som alltid blinkar och som en rad i UDP-konsolen. Bara du kan läsa det (ECDH P-256-nycklar, AES-256 och HMAC-SHA256). FT8-spotar visas bara om de saknar parallella sträckor inom 3 minuter. På från början; yams_scambio=0 i data/config.ini stänger av det.
+LI|FT8 över 1100 km utan parallella sträckor: en FT8-spot (från PSKReporter MQTT, klustren eller WSJT-X via UDP) mellan stationer mer än 1100 km ifrån varandra som inte har några parallella sträckor under 3 minuter före och efter (samma band, mittpunkt inom 300 km, riktning inom 15°, ett annat stationspar) ritas ljusgrön, liksom dess rad i tabellen nere till höger (utan blinkning). Sporadiskt E och tropo ger många närliggande, parallella sträckor; en ensam spot kan vara ett meteorspår. Därför tar YA-MS också emot FT8-spotar från MQTT på 6 m, 4 m, 2 m, 1,25 m och 70 cm (aldrig 28 MHz, i inget fall). Dessa spotar hamnar inte i MS-arkivet. På från början. Extra kontroller med PSKReporter MQTT: spoten är inte isolerad om den mottagande stationen i MQTT hör andra stationer över 1100 km på samma band inom 3 minuter (öppet band); spotar från kluster och RBN räknas bara om samma par också kommer via MQTT; RBN-skimmers (anropssignaler med «-#») räknas aldrig.
+LI|Avkodningar i din WSJT-X via UDP där en motstation svarar dig (meddelandets första anropssignal är din) ritas med en blinkande streckad linje, i alla trafiksätt och på alla avstånd, och deras rad i tabellen blinkar på gul bakgrund. Det är det enda fallet där något blinkar.
+LI|Utbyte mellan YA-MS-användare: när en annan YA-MS-användare avkodar ett meddelande till din station via UDP (i MSK144, FSK441, PSK2K eller JTMS, eller i FT8 över 1100 km) skickar hans YA-MS det krypterat till dig via tre öppna MQTT-mäklare (HiveMQ, Mosquitto, EMQX); du ser det som en fast violett streckad linje och som en rad i UDP-konsolen. Bara du kan läsa det (ECDH P-256-nycklar, AES-256 och HMAC-SHA256). FT8-spotar visas bara om de saknar parallella sträckor inom 3 minuter. På från början; yams_scambio=0 i data/config.ini stänger av det.
 LI|Spottar från alla band visas, även från band som inte valts i Datainsamling (de sparas inte). CW-spottar och spottar mellan för närliggande stationer visas inte, om de kastas i Datainsamling.
 LI|Kartan visar anropssignalerna för båda stationerna i varje spott, en gång per station. Projektionen kan vara azimutal (centrerad på din station) eller Mercator. Verktygstipset på kolumnen svärmzon förklarar vad den betyder.
 H2|9.2 Radarflöde
@@ -202,6 +204,7 @@ P|Katalogen som används av alla beräkningar: svärmarna i IMO:s kalender för 
 LI|Kod, namn, aktivitetsperiod, solens longitud vid maximum, nästa maximum (UTC) och dess källa (IMO eller beräknat), radiant, hastighet, populationsindex r, ZHR, typ (visuell eller dagradio).
 LI|k: exponent för frekvensomräkningen utifrån populationsindexet (GMN om det finns, annars IMO).
 LI|IAU MDC: lösningar, Δ radiant, Δλ, Δv: jämförelse med katalogen från IAU Meteor Data Center (publicerade lösningar och skillnaderna mellan programmets katalog och deras median).
+LI|IAU MDC-katalogen följer redan med i paketen (data/cataloghi), så jämförelsen fungerar från första start även utan livekällor; med livekällor påslagna laddas den tyst ner igen högst en gång i månaden.
 LI|GMN i dag: bekräftade banor i den senaste dagliga filen från Global Meteor Network.
 TAG|NOTA|Katalogen är filen data/sciami.csv och IMO-maxima finns i data/massimi_imo.csv: de kan ändras med en textredigerare. En felaktig rad rapporteras vid start och ignoreras.
 H1|11. Rutkarta

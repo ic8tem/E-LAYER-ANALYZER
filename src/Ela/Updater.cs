@@ -99,6 +99,9 @@ namespace ELA
         public static string AssetSuffix()
         {
             Architecture a = RuntimeInformation.ProcessArchitecture;
+            // Windows 7 SP1, 8 e 8.1 (prima di Windows 10): pacchetto win7, compilato con .NET 6 come in YA-MS 1.8.19
+            if (OperatingSystem.IsWindows() && Environment.OSVersion.Version < new Version(10, 0))
+                return a == Architecture.X86 ? "-win7-x86-portatile.zip" : "-win7-x64-portatile.zip";
             if (OperatingSystem.IsWindows()) return a == Architecture.X86 ? "-win-x86-portatile.zip" : a == Architecture.Arm64 ? "-win-arm64-portatile.zip" : "-win-x64-portatile.zip";
             if (OperatingSystem.IsMacOS()) return a == Architecture.Arm64 ? "-osx-arm64-app.zip" : "-osx-x64-app.zip";
             if (OperatingSystem.IsFreeBSD()) return "-freebsd-amd64-sperimentale.tar.gz";

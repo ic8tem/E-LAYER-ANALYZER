@@ -790,9 +790,9 @@ Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (tri
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto	monitor activ pe harta PSKReporter la {0} UTC, niciun spot recepționat
 {0} solo monitor attivi	{0} doar monitoare active
 mappa di PSKReporter non raggiungibile: {0}	harta PSKReporter nu poate fi accesată: {0}
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 peste 1100 km fără trasee paralele în 3 minute (verde deschis, rândul clipește mereu)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)	FT8 peste 1100 km fără trasee paralele în 3 minute (verde deschis)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 peste 1100 km fără trasee paralele în 3 minute: nu arată a E sporadic sau tropo, poate fi meteor scatter
-WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: decodarea privește stația mea
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)	WSJT-X UDP: un corespondent îmi răspunde (mesaj adresat stației mele)
 Impostazioni	Setări
 Aspetto	Aspect
 Tema e lingua sono anche in alto a destra, accanto alle linguette.	Tema și limba sunt și în dreapta sus, lângă file.
@@ -811,9 +811,16 @@ Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Auzit de {0} (
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	zona roiului {0}: {1:F0} % din reflexii, {2:F0} × {3:F0} km, axă la {4:F0}°
 zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	zona roiului nu poate fi calculată pentru acest traseu (prea scurt sau prea lung)
 Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Clic pe un traseu de pe hartă sau pe un rând din tabel pentru detaliile legăturii și ale zonei roiului.
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spoturi din fila "Colectare date". Pentru fiecare legătură, zona roiului arată unde se concentrează urmele cele mai probabile pentru acel traseu și acea oră (reflexie speculară, suma roiurilor active); zone întrerupte = doar meteori sporadici. Spoturile cu o stație în afara hărții nu se desenează; cele abia sosite (sub 3 minute) clipesc un minut.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.	Spoturi din fila "Colectare date". Pentru fiecare legătură, zona roiului arată unde se concentrează urmele cele mai probabile pentru acel traseu și acea oră (reflexie speculară, suma roiurilor active); zone întrerupte = doar meteori sporadici. Spoturile cu o stație în afara hărții nu se desenează. Clipesc doar decodările WSJT-X-ului meu (UDP) în care un corespondent îmi răspunde.
 % sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% roi: partea reflexiilor utile ale acelui traseu, la acea oră, care cade în zona roiului desenată pe hartă (reflexie speculară, suma roiurilor active). Cu cât e mai mare, cu atât urmele bune sunt concentrate într-o singură zonă spre care să îndreptați antena. "sporadici" = niciun roi activ nu dă reflexii utile: rămân doar meteorii sporadici, de ambele părți ale traseului (zone întrerupte).
 Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Harta Mercator se mută trăgând-o cu mouse-ul; dublu clic: din nou centrată pe stația mea. Harta azimutală rămâne centrată pe stația mea.
 Memorizza	Salvează
 Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Locatorul scris diferă de cel din arhiva CALL3: apasă pentru a-l actualiza și salva (intrare manuală, scrisă imediat și în call3.txt).
 {0} memorizzato nel CALL3: {1}	{0} salvat în CALL3: {1}
+TRA 1 ORA	PESTE 1 ORĂ
+TRA {0} ORE	PESTE {0} ORE
+lato {0} · {1}	latura {0} · {1}
+nessuno sciame utile	niciun roi util
+{0:F0} rifl./ora previste	{0:F0} refl./oră prevăzute
+indice {0:F1}	indice {0:F1}
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.	Prognoză pentru traseul ales: media orei care începe la acel orizont (patru eșantioane în oră). Indicele traseului = suma ZHR × eficiența roiurilor active; apoi latura predominantă a traseului și roiul care contribuie cel mai mult. Reflexiile pe oră vin din prognoza experimentală (radarul Collm, regulile SM6FHZ), când există date radar.

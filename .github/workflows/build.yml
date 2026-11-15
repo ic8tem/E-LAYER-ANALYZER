@@ -28,15 +28,33 @@ jobs:
         include:
           - rid: win-x64
             arch: x64
+            nome: win
+            w7: false
           - rid: win-x86
             arch: x86
+            nome: win
+            w7: false
           - rid: win-arm64    # Windows su ARM (PC con Snapdragon)
             arch: arm64
+            nome: win
+            w7: false
+          # Windows 7 SP1, 8 e 8.1: .NET 8 non parte (manca GetSystemTimePreciseAsFileTime in KERNEL32), quindi .NET 6,
+          # l'ultimo che gira su Windows 7, come YA-MS 1.8.19. Si compila sempre (richiesta dell'autore, IC8TEM, 15/11/2026).
+          - rid: win-x64
+            arch: x64
+            nome: win7
+            w7: true
+          - rid: win-x86
+            arch: x86
+            nome: win7
+            w7: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: |
+            6.0.x
+            8.0.x
       - name: Versione
         shell: bash
         run: |
@@ -45,23 +63,31 @@ jobs:
       - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
         shell: bash
         run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
+      - name: Catalogo IAU MDC degli sciami stabiliti (dentro i pacchetti, per il confronto dei radianti di YA-MS)
+        shell: bash
+        continue-on-error: true
+        run: |
+          mkdir -p data/cataloghi; f=data/cataloghi/iau_mdc_stabiliti.txt; Y=$(date -u +%Y)
+          for u in "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$Y.txt" "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$((Y-1)).txt" "https://iaumdc.ta3.sk/downloads/lists_shw_data/streamestablisheddata.txt"; do
+            if curl -fsSL -m 60 -o "$f.tmp" "$u" && [ "$(grep -c '^"' "$f.tmp")" -gt 50 ]; then mv "$f.tmp" "$f"; echo "IAU MDC: $u"; break; fi
+          done; rm -f "$f.tmp"
       - name: Compila
-        run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Version=${{ env.VER }} -p:DebugType=none -o publish/${{ matrix.rid }}
+        run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Windows7=${{ matrix.w7 }} -p:Version=${{ env.VER }} -p:DebugType=none -o publish/${{ matrix.nome }}-${{ matrix.rid }}
       - name: Installatore (Inno Setup)
         shell: pwsh
         run: |
           $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
           if (-not (Test-Path $iscc)) { choco install innosetup --no-progress -y; }
-          & $iscc "/DAppVersion=${{ env.VER }}" "/DSourceDir=..\publish\${{ matrix.rid }}" "/DArch=${{ matrix.arch }}" installer\E-LAYER-ANALYZER.iss
+          & $iscc "/DAppVersion=${{ env.VER }}" "/DSourceDir=..\publish\${{ matrix.nome }}-${{ matrix.rid }}" "/DArch=${{ matrix.arch }}" "/DNome=${{ matrix.nome }}" installer\E-LAYER-ANALYZER.iss
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Zip portatile
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force dist | Out-Null
-          Compress-Archive -Path publish\${{ matrix.rid }}\* -DestinationPath dist\E-LAYER-ANALYZER-${{ env.VER }}-win-${{ matrix.arch }}-portatile.zip
+          Compress-Archive -Path publish\${{ matrix.nome }}-${{ matrix.rid }}\* -DestinationPath dist\E-LAYER-ANALYZER-${{ env.VER }}-${{ matrix.nome }}-${{ matrix.arch }}-portatile.zip
       - uses: actions/upload-artifact@v4
         with:
-          name: windows-${{ matrix.arch }}
+          name: ${{ matrix.nome }}-${{ matrix.arch }}
           path: dist/*
 
   linux:
@@ -70,7 +96,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: |
+            6.0.x
+            8.0.x
       - name: Versione
         run: |
           if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF#refs/tags/v}"; else V="$(tr -d ' \r\n' < VERSION)"; fi
@@ -78,6 +106,14 @@ jobs:
       - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
         shell: bash
         run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
+      - name: Catalogo IAU MDC degli sciami stabiliti (dentro i pacchetti, per il confronto dei radianti di YA-MS)
+        shell: bash
+        continue-on-error: true
+        run: |
+          mkdir -p data/cataloghi; f=data/cataloghi/iau_mdc_stabiliti.txt; Y=$(date -u +%Y)
+          for u in "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$Y.txt" "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$((Y-1)).txt" "https://iaumdc.ta3.sk/downloads/lists_shw_data/streamestablisheddata.txt"; do
+            if curl -fsSL -m 60 -o "$f.tmp" "$u" && [ "$(grep -c '^"' "$f.tmp")" -gt 50 ]; then mv "$f.tmp" "$f"; echo "IAU MDC: $u"; break; fi
+          done; rm -f "$f.tmp"
       - name: Compila
         run: |
           set -o pipefail
@@ -92,6 +128,11 @@ jobs:
           git config user.name "github-actions"; git config user.email "actions@github.com"
           git add -A && git commit -q -m "registro ${GITHUB_SHA::7}"
           git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" ci-log
+      - name: Controllo per Windows 7 (.NET 6)
+        if: github.ref != 'refs/heads/release'
+        run: |
+          rm -rf /tmp/w7 && mkdir /tmp/w7 && git archive HEAD | tar -x -C /tmp/w7   # cartella pulita: niente obj della compilazione .NET 8
+          dotnet build /tmp/w7/E-LAYER-ANALYZER.csproj -c Release -p:Windows7=true -o /tmp/ela-net6
       - name: Compila per Linux ARM64 e ARM 32 bit (Raspberry Pi)
         if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/release' || github.event_name == 'workflow_dispatch'
         run: |
@@ -193,6 +234,14 @@ jobs:
       - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
         shell: bash
         run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
+      - name: Catalogo IAU MDC degli sciami stabiliti (dentro i pacchetti, per il confronto dei radianti di YA-MS)
+        shell: bash
+        continue-on-error: true
+        run: |
+          mkdir -p data/cataloghi; f=data/cataloghi/iau_mdc_stabiliti.txt; Y=$(date -u +%Y)
+          for u in "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$Y.txt" "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$((Y-1)).txt" "https://iaumdc.ta3.sk/downloads/lists_shw_data/streamestablisheddata.txt"; do
+            if curl -fsSL -m 60 -o "$f.tmp" "$u" && [ "$(grep -c '^"' "$f.tmp")" -gt 50 ]; then mv "$f.tmp" "$f"; echo "IAU MDC: $u"; break; fi
+          done; rm -f "$f.tmp"
       - name: Compila e impacchetta
         run: |
           set -eo pipefail
@@ -255,6 +304,14 @@ jobs:
       - name: Elenco dei file distribuiti (data/manifest.txt, per il controllo dei file mancanti)
         shell: bash
         run: git ls-files data doc LEGGIMI.txt | grep -v '^data/manifest.txt$' > data/manifest.txt && wc -l data/manifest.txt
+      - name: Catalogo IAU MDC degli sciami stabiliti (dentro i pacchetti, per il confronto dei radianti di YA-MS)
+        shell: bash
+        continue-on-error: true
+        run: |
+          mkdir -p data/cataloghi; f=data/cataloghi/iau_mdc_stabiliti.txt; Y=$(date -u +%Y)
+          for u in "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$Y.txt" "https://www.ta3.sk/IAUC22DB/MDC2022/Etc/streamestablisheddata$((Y-1)).txt" "https://iaumdc.ta3.sk/downloads/lists_shw_data/streamestablisheddata.txt"; do
+            if curl -fsSL -m 60 -o "$f.tmp" "$u" && [ "$(grep -c '^"' "$f.tmp")" -gt 50 ]; then mv "$f.tmp" "$f"; echo "IAU MDC: $u"; break; fi
+          done; rm -f "$f.tmp"
       - name: Compila
         run: dotnet publish E-LAYER-ANALYZER.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:Version=$VER -p:DebugType=none -o publish/${{ matrix.rid }}
       - name: Pacchetto YA-MS.app e immagine disco
@@ -315,7 +372,8 @@ jobs:
             manuale d'uso di YA-MS in 36 lingue nella linguetta METEOR SCATTER; manuale e wiki aggiornati in 36 lingue.
 
             - Windows 64 bit: E-LAYER-ANALYZER-...-win-x64-setup.exe (installa in C:\E-LAYER-ANALYZER) oppure ...-win-x64-portatile.zip.
-            - Windows 32 bit: ...-win-x86-setup.exe oppure ...-win-x86-portatile.zip. Windows su ARM (PC con Snapdragon): ...-win-arm64-setup.exe oppure ...-win-arm64-portatile.zip.
+            - Windows 32 bit: ...-win-x86-setup.exe oppure ...-win-x86-portatile.zip. Windows su ARM (PC con Snapdragon): ...-win-arm64-setup.exe oppure ...-win-arm64-portatile.zip. Questi pacchetti richiedono Windows 10 o 11.
+            - Windows 7 SP1, 8 e 8.1 (.NET 6): ...-win7-x64-setup.exe, ...-win7-x86-setup.exe oppure gli zip ...-win7-x64-portatile.zip, ...-win7-x86-portatile.zip.
             - Debian, Ubuntu, Mint: e-layer-analyzer_..._amd64.deb (sudo apt install ./e-layer-analyzer_..._amd64.deb).
             - Fedora, openSUSE: e-layer-analyzer-....x86_64.rpm (o .aarch64.rpm, .armv7hl.rpm).
             - Arch, Manjaro, EndeavourOS, Arch Linux ARM: e-layer-analyzer-...-x86_64.pkg.tar.zst (o -aarch64), con sudo pacman -U.

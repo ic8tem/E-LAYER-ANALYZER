@@ -45,7 +45,8 @@ namespace YAMS
             {
                 try
                 {
-                    foreach (string line in File.ReadAllLines(f))
+                    // il file del MDC e' in latin-1: letto come UTF-8 gli accenti dei nomi degli autori si storpiano
+                    foreach (string line in File.ReadAllLines(f, System.Text.Encoding.Latin1))
                     {
                         if (line.StartsWith(":"))
                         {

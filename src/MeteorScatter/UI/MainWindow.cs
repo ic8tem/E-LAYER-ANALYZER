@@ -62,8 +62,8 @@ namespace YAMS
         double antGainDbi, antHpbw, antHpbwV;   // lobo orizzontale (E) e verticale (H)
         string recommendText = "";
         string recommendShort = "";   // consiglio senza la parte tra parentesi (riquadro "Adesso")
-        TextBlock glBest, glShower, glNow, glFore;
-        Border cardBest, cardShower, cardNow, cardFore;   // riquadri del colpo d'occhio (per i fumetti)
+        TextBlock glBest, glShower;
+        Border cardBest, cardShower;   // riquadri del colpo d'occhio (per i fumetti)
         Border boxNoZone, boxNoZoneSky; TextBlock lblNoZone, lblNoZoneSky;   // avviso: nessuna zona comune della tratta
         CheckBox chkHot, chkMap, chkTopView;
         Button btnCalc, btnReal;
@@ -160,6 +160,7 @@ namespace YAMS
             DockPanel.SetDock(lblTheme, Dock.Right);
             tabs.Line.Children.Insert(2, lblTheme);
             cmbTheme.IsVisible = false; lblTheme.IsVisible = false;
+            DockTop(root, BuildHorizonBand());   // fascia sempre visibile sotto la riga dell'orario, sopra le linguette
             DockTop(root, tabs.Bar);
             SetRowsVisible(cfg.GetD("comandi_visibili", 1) != 0, false);
             status = new TextBlock { Text = Lang.T("Pronto"), Foreground = Pal.B(Pal.BarMuted), TextTrimming = TextTrimming.CharacterEllipsis };
@@ -541,8 +542,10 @@ namespace YAMS
                                    IsSnapToTickEnabled = true, Width = 160, Margin = new Thickness(4, 0) };
             UiScale.Set(pct0 / 100.0);
             WhenChanged(sldFont, RangeBase.ValueProperty, () => SetFontPercent(sldFont.Value));
-            Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc, L(Lang.T("Ore (da −12 a +36 h)")), trackTime,
-                              btnReal, lblSkyTime);
+            Border row3 = Row(L(Lang.T("Ora")), lblClock, L(Lang.T("Data del calcolo (UTC)")), dtCalc);
+            // la linea del tempo (ore da -12 a +36, Tempo reale) vale solo per il Calcolo previsionale: sta in cima a quella
+            // linguetta (richiesta dell'autore, 14/11/2026)
+            calcTimeRow = Row(L(Lang.T("Ore (da −12 a +36 h)")), trackTime, btnReal, lblSkyTime);
             // la mia stazione (locator, quota, banda, Calcola): non piu' nella prima riga ma in cima alla colonna destra del
             // Traffico in diretta (richiesta dell'autore, 14/11/2026): BuildMyStationBox() in MainWindow.Traffico.cs.
             // Il puntamento sta nel riquadro del corrispondente, il carattere nella linguetta Impostazioni.
@@ -555,6 +558,7 @@ namespace YAMS
         }
 
         Border[] topRows;
+        Border calcTimeRow;
         Button btnRows;
 
         void SetRowsVisible(bool v, bool save)
@@ -653,6 +657,7 @@ namespace YAMS
 
             // --- Calcolo previsionale (ex "Volta celeste")
             DockPanel p1 = Page(Lang.T("Calcolo previsionale"));   // ex linguetta "Volta celeste"
+            DockTop(p1, calcTimeRow);   // linea del tempo del calcolo
             Grid sc = new Grid { ColumnDefinitions = new ColumnDefinitions("60*,40*") };
             p1.Children.Add(sc);
             // pianta: mappa con tratta, Hot, lobo, zone PREV, linea di scorrimento dello sciame e scala dei gradi
@@ -810,16 +815,7 @@ namespace YAMS
 
             // --- Calcolo dell'efficienza (ex "Efficienza 24 h")
             DockPanel p2 = Page(Lang.T("Calcolo dell'efficienza"));
-            // colpo d'occhio: quattro riquadri riassuntivi sopra il grafico
-            // altezza minima 100: con caratteri grandi i riquadri crescono
-            Grid glance = new Grid { ColumnDefinitions = new ColumnDefinitions("*,*,*,*"), MinHeight = 100, Margin = new Thickness(6, 6, 6, 2) };
-            Border c0 = cardBest = Card(Lang.T("ORA MIGLIORE DEL GIORNO"), Pal.Azure, out glBest);
-            Border c1 = cardShower = Card(Lang.T("SCIAME PIÙ FAVOREVOLE"), Pal.Yellow, out glShower);
-            Border c2 = cardNow = Card(Lang.T("ADESSO"), Pal.Green, out glNow);
-            Border c3 = cardFore = Card(Lang.T("PREVISIONE SPERIMENTALE"), Pal.Orange, out glFore);
-            Grid.SetColumn(c0, 0); Grid.SetColumn(c1, 1); Grid.SetColumn(c2, 2); Grid.SetColumn(c3, 3);
-            glance.Children.Add(c0); glance.Children.Add(c1); glance.Children.Add(c2); glance.Children.Add(c3);
-            DockTop(p2, glance);
+            // i riquadri del colpo d'occhio stanno nella fascia sopra le linguette (BuildHorizonBand, MainWindow.Orizzonti.cs)
             boxNoZone = Warn(Pal.OrangeDark, Pal.OrangeText, out lblNoZone);
             boxNoZone.Margin = new Thickness(6, 0, 6, 4);
             DockTop(p2, boxNoZone);
@@ -1811,24 +1807,7 @@ namespace YAMS
             string tipWhy = index[hb] > 0 ? "" : "\n\n" + (noZone ?? why);
             ToolTip.SetTip(cardBest, Lang.T("L'ora del giorno scelto con l'indice della tratta più alto (somma di ZHR × efficienza di tutti gli sciami attivi) e il lato della tratta da cui arriva la maggior parte delle riflessioni.") + tipWhy);
             ToolTip.SetTip(cardShower, Lang.T("Lo sciame che dà il contributo più alto (ZHR × efficienza) nel giorno scelto, con l'ora, il lato e le due direzioni d'antenna migliori.") + (bestScore > 0 ? "" : "\n\n" + (noZone ?? why)));
-            DateTime nowU = DateTime.UtcNow;
-            if (nowU.Date == day.Date)
-            {
-                int hn = nowU.Hour;
-                glNow.Text = Lang.F("{0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}", hn, nowU.Minute, index[hn],
-                    index[hn] > 0.05 ? (wA[hn] >= wB[hn] ? "A" : "B") : "-", recommendShort.Trim());
-            }
-            else glNow.Text = Lang.T("il giorno scelto non è oggi");
-            ToolTip.SetTip(cardNow, Lang.T("L'indice della tratta nell'ora attuale, il lato prevalente e l'Hot consigliato. Compare solo se il giorno scelto è oggi.") +
-                (nowU.Date == day.Date && index[nowU.Hour] <= 0 ? "\n\n" + (noZone ?? why) : ""));
-            DateTime hNow = new DateTime(nowU.Year, nowU.Month, nowU.Day, nowU.Hour, 0, 0, DateTimeKind.Utc);
-            double f1 = ForecastAt(hNow);
-            double f2 = ForecastAt(hNow.AddHours(1));
-            double f3 = ForecastAt(hNow.AddHours(2));
-            glFore.Text = f1 < 0 ? Lang.T("nessun dato radar: vedi Live e dati real-time › Flusso radar")
-                : Lang.F("{0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)", PrevFreqMHz, f1,
-                    f2 < 0 ? "-" : f2.ToString("F0"), f3 < 0 ? "-" : f3.ToString("F0"));
-            ToolTip.SetTip(cardFore, Lang.T("Riflessioni all'ora previste sulla banda scelta, ottenute traslando i conteggi del radar di Collm con le regole di SM6FHZ. Serve il dato del radar (Live e dati real-time › Flusso radar). È indipendente dalla geometria della tratta."));
+            UpdateHorizons();   // fascia degli orizzonti (adesso, +1, +3, +6, +12, +24 h)
             ChartSeries ix = new ChartSeries(); ix.Name = Lang.T("indice tratta"); ix.Color = Pal.Ink(Pal.Rgb(90, 110, 200)); ix.Values = index; ix.Bars = true; ix.RightAxis = true;
             chart24.Series.Insert(0, ix);
             chart24.Title = Lang.F("Efficienza oraria per {0} del {1} (UTC, valori a metà ora)", PathLabel(), day.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
@@ -2239,6 +2218,7 @@ namespace YAMS
             RefreshCollect(false);   // raccolta dati: righe telnet nuove, contatori, tabella
             if (now.Second == 0)
             {
+                UpdateHorizons();   // fascia degli orizzonti, ogni minuto
                 if (IsRealTime) UpdateSky();
                 else if (now.Minute % 15 == 0) UpdateSky();   // la data scelta segue l'ora attuale
                 // a mezzanotte la data del calcolo segue il giorno nuovo, se era quella di oggi

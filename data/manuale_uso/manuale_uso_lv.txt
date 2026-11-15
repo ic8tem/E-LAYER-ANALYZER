@@ -1,5 +1,5 @@
 TITLE|YA-MS lietošanas rokasgrāmata
-SUB|Versija 1.8.15 - sagatavojis Costantino IC8TEM - 2026. gada novembris
+SUB|Versija 1.8.19 - sagatavojis Costantino IC8TEM - 2026. gada novembris
 H1|1. Ievads
 H2|1.1 Kam paredzēta YA-MS
 P|YA-MS palīdz prognozēt un tiešsaistē sekot meteor scatter apstākļiem starp tavu staciju un korespondentu no 28 līdz 432 MHz. Katrai aktīvajai meteoru plūsmai tā parāda, cik lielā mērā tās radianta novietojums ir labvēlīgs tavai trasei (efektivitāte), kurās stundās, no kuras trases puses nāk atstarojumi un kur vislabāk vērst antenu. Blakus prognozei tā parāda tiešsaistē mērītos datus: Collm meteoru radara skaitījumus, Global Meteor Network kameras, CMOR radaru, GRAVES raidītāju un meteor scatter satiksmi, kas savākta no klasteriem un PSKReporter.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): .deb pakotne, ko instalē ar komandu sudo apt i
 LI|Raspberry Pi 3, 4, 5, 400 un 500: pakotne raspberry-pi-64bit (Raspberry Pi OS 64 biti) vai raspberry-pi-32bit, .tar.gz vai .deb formātā.
 LI|Citas ARM Linux sistēmas (piemēram, Slackware ARM64 vai armv7l plates): pakotne linux-arm64 vai linux-armv7l, .tar.gz formātā, kā Linux gadījumā.
 LI|Windows uz ARM (datori ar Snapdragon): pakotne windows-arm64. Fedora un openSUSE: .rpm pakotne (x86_64 vai aarch64), ar sudo dnf install vai sudo zypper install.
+LI|Windows 7 SP1, 8 un 8.1: pakotnes windows7-x64 un windows7-x86 (instalētājs vai pārnēsājams zip), veidotas ar .NET 6, pēdējo, kas darbojas šajās sistēmās. Windows 7 vajag atjauninājumus KB2533623 un KB2999226. Pārējām Windows pakotnēm vajag Windows 10 vai 11: vecākā Windows instalētājs to uzreiz pasaka.
 LI|Arch, Manjaro un Arch Linux ARM: pakotne .pkg.tar.zst, ar sudo pacman -U. Slackware64 un Slackware ARM64: pakotne .txz, ar installpkg kā root. Jebkurš Linux: AppImage (x86_64 vai aarch64), ko padara izpildāmu un palaiž. Alpine Linux: pakotne alpine-x64 vai alpine-arm64, .tar.gz formātā.
 LI|macOS: .dmg fails Apple Silicon (M1 un jaunākiem) vai Intel datoriem, vai app.zip. Ievelc YA-MS.app savā mapē (piemēram, ~/YA-MS): mape data tiek izveidota blakus lietotnei.
 TAG|ATTENZIONE|Windows var parādīt paziņojumu "Windows aizsargāja jūsu datoru": izvēlies "Papildinformācija" un pēc tam "Tik un tā palaist". macOS pirmajā reizē atver lietotni ar peles labo pogu un "Atvērt". Programma nav parakstīta ar maksas sertifikātu.
@@ -70,6 +71,7 @@ LI|Laiks: UTC pulkstenis.
 LI|Aprēķina datums (UTC): aprēķina diena. Attiecas uz Prognozes aprēķins, uz 24 stundu tabulu cilnē Efektivitātes aprēķins un uz hronoloģiju cilnē GRAVES radars. Noklusējuma vērtība ir šodiena, un pusnaktī datums pāriet uz jauno dienu.
 LI|Stundas (no −12 līdz +36 h): pārbīda aprēķina brīdi ar 15 minūšu soli. Blakus: "Aprēķins uz: tagad" vai izvēlētais datums un laiks.
 LI|Reālais laiks: atgriežas pašreizējā brīdī.
+LI|Laika līnija («Stundas (no −12 līdz +36 h)» un «Reālais laiks») ir cilnes Prognozes aprēķins augšā, jo tā attiecas tikai uz šo aprēķinu.
 H2|4.4 Savas stacijas iestatīšana
 TAG|PROCEDURA|1) Ieraksti Mans lokators un augstumu. 2) Ieraksti korespondenta lokatoru un augstumu vai noklikšķini uz kartes cilnē Prognozes aprēķins: kreisais klikšķis = korespondents, labais klikšķis = tava stacija. 3) Izvēlies diapazonu. 4) Ieraksti savas antenas traverses garumu un ziedlapiņas elevāciju. 5) Nospied Aprēķināt: statusa josla apstiprina "Trase aprēķināta: ... km, ... atstarošanas punktu izlase".
 TAG|NOTA|Iestatījumi tiek saglabāti failā data/config.ini, aizverot programmu, un pēc katra aprēķina: nākamajā palaišanas reizē atradīsi to pašu trasi.
@@ -116,11 +118,11 @@ LI|EKSPERIMENTĀLIE LIKUMI STARP JOSLĀM: atstarojumu skaits, intensitāte un il
 TAG|NOTA|Pozitīva rezerve nozīmē, ka vidēja zema blīvuma sliede ir pietiekama, lai ar tavu staciju noslēgtu sakarus šajā trasē; negatīva rezerve nozīmē, ka vajadzīgas blīvākas sliedes vai augsta blīvuma meteori. Tas ir novērtējums: atskaites punkts joprojām ir pieredze ēterā.
 H1|7. Efektivitātes aprēķins
 P|Efektivitāte procentos parāda, cik lielā mērā plūsmas radianta novietojums ļauj atstarojumus tavā trasē: 100 % ir šai trasei vislabvēlīgākais novietojums. Šī apakšcilne to parāda pa stundām dienai, kas norādīta laukā "Aprēķina datums (UTC)", ar vērtībām katras stundas vidū.
-H2|7.1 Četri rāmji
+H2|7.1 Josla virs cilnēm
+P|Šie lodziņi ir joslā zem laika rindas, virs cilnēm, vienmēr redzami arī ar sakļautām komandu rindām: pa kreisi divi izvēlētās dienas lodziņi, tad seši prognozes horizonti, kas sākas no tagad.
 LI|LABĀKAIS DIENAS LAIKS: stunda ar augstāko trases indeksu un dominējošā puse.
 LI|VISIZDEVĪGĀKĀ PLŪSMA: plūsma, kas dod lielāko ieguldījumu, ar stundu, pusi un diviem labākajiem antenas virzieniem.
-LI|TAGAD: indekss un puse šajā stundā un ieteicamais Hot (tikai tad, ja izvēlētā diena ir šodiena).
-LI|EKSPERIMENTĀLA PROGNOZE: paredzamie atstarojumi stundā tagad, pēc 1 un pēc 2 stundām (8. nodaļa).
+LI|TAGAD · PĒC 1, 3, 6, 12 UN 24 STUNDĀM: katram horizontam tur sākošās stundas vidējā vērtība (četri paraugi): ceļa indekss, dominējošā puse, plūsma ar lielāko ieguldījumu un, ja ir radara dati, eksperimentālās prognozes atstarojumi stundā. Lodziņā TAGAD bez radara datiem parādās ieteiktais Hot. Atjaunojas katru minūti.
 P|Ja rāmim nav vērtību, tas norāda iemeslu: nav kopīgas zonas, nav aktīvas plūsmas vai radianti visu dienu ir nelabvēlīgi. Katra rāmja uznirstošais padoms paskaidro, ko tas parāda. Zem rāmjiem, ja vajadzīgs, brīdinājums NAV KOPĪGAS ZONAS un josla, kas paskaidro burtus A un B.
 H2|7.2 Aprēķina iestatījumi
 LI|Piesardzīgs (noklusējums): sliežu augstums no radara, parastas sliedes, leņķis β ieslēgts. Dod viszemākās vērtības.
@@ -159,16 +161,16 @@ LI|Tabula ar vērtējumu: labs, vidējs vai vājš salīdzinājumā ar 24 stundu
 TAG|NOTA|Atstarojumu ilgums atbilst izvēlei "Pingu ilgums starp joslām" cilnē Ģeometrija un vājinājums; forward scatter gadījumā ilgums pieaug arī ar sec²φ trases viduspunktā.
 H1|9. Tiešsaiste un reāllaika dati
 H2|9.1 Satiksme tiešraidē
-P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto meteor scatter satiksmi: katriem sakariem trase diapazona krāsā (28 brūna, 50 zaļa, 70 ciāna, 144 oranža, 222 rozā, 432 violeta), abas stacijas un visticamāko sliežu plūsmas zona tajā stundā. Tikko saņemtie spoti mirgo vienu minūti.
+P|Azimutāla vienāda attāluma karte ar centru tavā stacijā ar visu savākto meteor scatter satiksmi: katriem sakariem trase diapazona krāsā (28 brūna, 50 zaļa, 70 ciāna, 144 oranža, 222 rozā, 432 violeta), abas stacijas un visticamāko sliežu plūsmas zona tajā stundā. Mirgo tikai tava WSJT-X (UDP) dekodējumi, kuros korespondents tev atbild.
 LI|Kartes rādiuss: 600-3500 km. Rādāmie spoti: pēdējās 3, 15 vai 30 minūtes, pēdējā stunda, pēdējās 3 vai 24 stundas.
 LI|Merkatora karti var pārvietot, velkot ar peli; dubultklikšķis: atkal centrēta uz manu staciju. Azimutālā karte paliek centrēta uz manu staciju.
 LI|Klikšķis uz trases vai tabulas rindas izceļ sakarus un parāda plūsmas zona centru, tā augstumu un izmērus.
 LI|Izvēlētā sakara vai klausošās stacijas detaļas parādās izceltā lodziņā virs kartes augšējā kreisajā stūrī gan azimutālajā, gan Merkatora projekcijā.
 LI|Rādīt, kas klausās: joslas krāsas trijstūri iezīmē stacijas, kas pēc PSKReporter datiem izvēlētajā laika logā uztver MSK144, FSK441, PSK2K vai JTMS 28, 50, 70, 144 un 432 MHz joslās. Klikšķis uz trijstūra parāda izsaukuma signālu, lokatoru, režīmus un pēdējo spotu. Cilnes Datu vākšana MQTT plūsmai jābūt pievienotai.
 LI|Arī PSKReporter kartes aktīvie monitori: tukši trīsstūri stacijām, kas redzamas pskreporter.info kartē MSK144, FSK441, PSK2K vai JTMS režīmā, bet vēl nav saņēmušas nevienu spotu (MQTT sūta tikai stacijas, kas kaut ko saņem). YA-MS vaicā PSKReporter vaicājumu pakalpojumam reizi 5 minūtēs par visiem režīmiem, kā prasa pakalpojuma noteikumi; monitors paliek kartē vismaz 11 minūtes. Klikšķis uz trīsstūra parāda izsaukuma signālu, lokatoru, dekodēšanas programmu un laiku, kad monitors bija aktīvs. Ieslēgts pēc noklusējuma.
-LI|FT8 virs 1100 km bez paralēlām trasēm: FT8 spots (no PSKReporter MQTT, klasteriem vai WSJT-X caur UDP) starp stacijām, kas atrodas vairāk nekā 1100 km viena no otras, kuram 3 minūtēs pirms un pēc nav paralēlu trašu (tā pati josla, viduspunkts 300 km robežās, virziens 15° robežās, cits staciju pāris), tiek zīmēts gaiši zaļā krāsā, un tā rinda tabulā apakšā pa labi vienmēr mirgo. Sporādiskais E un tropo dod daudzas tuvas, paralēlas trases; vientuļš spots var būt meteora sliede. Tāpēc YA-MS no MQTT saņem arī 6 m, 4 m, 2 m, 1,25 m un 70 cm FT8 spotus (nekad 28 MHz). Šie spoti netiek ierakstīti MS arhīvā. Ieslēgts pēc noklusējuma. Papildu pārbaudes ar PSKReporter MQTT: spots nav vientuļš, ja uztverošā stacija MQTT 3 minūšu laikā tajā pašā joslā dzird citas stacijas tālāk par 1100 km (atvērta josla); klasteru un RBN spoti der tikai tad, ja tas pats pāris nāk arī no MQTT; RBN skimeri (izsaukuma signāli ar «-#») neder nekad.
-LI|WSJT-X spoti caur UDP, kas attiecas uz tavu staciju (dekodējumā ir tavs izsaukuma signāls: kas tevi sauc vai tev atbild), tiek zīmēti ar raustītu līniju, kas vienmēr mirgo, jebkurā režīmā un jebkurā attālumā.
-LI|Apmaiņa starp YA-MS lietotājiem: kad cits YA-MS lietotājs caur UDP dekodē tavai stacijai adresētu ziņojumu (MSK144, FSK441, PSK2K vai JTMS, vai FT8 virs 1100 km), viņa YA-MS to nosūta tev šifrētu caur trim publiskiem MQTT brokeriem (HiveMQ, Mosquitto, EMQX); tu to redzi kā violetu raustītu līniju, kas vienmēr mirgo, un kā rindu UDP konsolē. To vari izlasīt tikai tu (ECDH P-256 atslēgas, AES-256 un HMAC-SHA256). FT8 spoti tiek rādīti tikai tad, ja 3 minūšu laikā tiem nav paralēlu trašu. Ieslēgts pēc noklusējuma; yams_scambio=0 failā data/config.ini to izslēdz.
+LI|FT8 virs 1100 km bez paralēlām trasēm: FT8 spots (no PSKReporter MQTT, klasteriem vai WSJT-X caur UDP) starp stacijām, kas atrodas vairāk nekā 1100 km viena no otras, kuram 3 minūtēs pirms un pēc nav paralēlu trašu (tā pati josla, viduspunkts 300 km robežās, virziens 15° robežās, cits staciju pāris), tiek zīmēts gaiši zaļā krāsā, tāpat kā tā rinda tabulā apakšā pa labi (bez mirgošanas). Sporādiskais E un tropo dod daudzas tuvas, paralēlas trases; vientuļš spots var būt meteora sliede. Tāpēc YA-MS no MQTT saņem arī 6 m, 4 m, 2 m, 1,25 m un 70 cm FT8 spotus (nekad 28 MHz). Šie spoti netiek ierakstīti MS arhīvā. Ieslēgts pēc noklusējuma. Papildu pārbaudes ar PSKReporter MQTT: spots nav vientuļš, ja uztverošā stacija MQTT 3 minūšu laikā tajā pašā joslā dzird citas stacijas tālāk par 1100 km (atvērta josla); klasteru un RBN spoti der tikai tad, ja tas pats pāris nāk arī no MQTT; RBN skimeri (izsaukuma signāli ar «-#») neder nekad.
+LI|Tava WSJT-X dekodējumi caur UDP, kuros korespondents tev atbild (ziņas pirmais izsaukums ir tavs), tiek zīmēti ar mirgojošu raustītu līniju jebkurā režīmā un jebkurā attālumā, un to rinda tabulā mirgo uz dzeltena fona. Tas ir vienīgais gadījums, kad kaut kas mirgo.
+LI|Apmaiņa starp YA-MS lietotājiem: kad cits YA-MS lietotājs caur UDP dekodē tavai stacijai adresētu ziņojumu (MSK144, FSK441, PSK2K vai JTMS, vai FT8 virs 1100 km), viņa YA-MS to nosūta tev šifrētu caur trim publiskiem MQTT brokeriem (HiveMQ, Mosquitto, EMQX); tu to redzi kā nemainīgu violetu raustītu līniju un kā rindu UDP konsolē. To vari izlasīt tikai tu (ECDH P-256 atslēgas, AES-256 un HMAC-SHA256). FT8 spoti tiek rādīti tikai tad, ja 3 minūšu laikā tiem nav paralēlu trašu. Ieslēgts pēc noklusējuma; yams_scambio=0 failā data/config.ini to izslēdz.
 LI|Tiek rādīti visu joslu spoti, arī to joslu, kas nav izvēlētas Datu vākšanā (tie netiek saglabāti). CW spoti un spoti starp pārāk tuvām stacijām netiek rādīti, ja Datu vākšanā tie tiek atmesti.
 LI|Kartē tiek rakstīti abu katra spota staciju izsaukuma signāli, vienreiz katrai stacijai. Projekciju var izvēlēties: azimutālā (centrā tava stacija) vai Merkatora. Kolonnas plūsmas zona padoms izskaidro tās nozīmi.
 H2|9.2 Radara meteoru skaits
@@ -202,6 +204,7 @@ P|Katalogs, ko izmanto visi aprēķini: IMO 2026. un 2027. gada kalendāra plūs
 LI|Saīsinājums, nosaukums, aktivitātes periods, Saules garums maksimumā, nākamais maksimums (UTC) un tā avots (IMO vai aprēķināts), radiants, ātrums, populācijas indekss r, ZHR, veids (vizuāla vai dienas radio plūsma).
 LI|k: frekvences pārrēķina kāpinātājs no populācijas indeksa (GMN, ja pieejams, citādi IMO).
 LI|IAU MDC: risinājumi, Δ radiants, Δλ, Δv: salīdzinājums ar IAU Meteor Data Center katalogu (publicētie risinājumi un programmas kataloga atšķirības no to mediānas).
+LI|IAU MDC katalogs jau ir iekļauts pakotnēs (data/cataloghi), tāpēc salīdzināšana darbojas jau no pirmās palaišanas arī bez tiešraides avotiem; ar ieslēgtiem tiešraides avotiem tas klusi tiek lejupielādēts no jauna ne biežāk kā reizi mēnesī.
 LI|GMN šodien: trajektorijas, kas apstiprinātas jaunākajā Global Meteor Network dienas failā.
 TAG|NOTA|Katalogs ir fails data/sciami.csv, un IMO maksimumi ir failā data/massimi_imo.csv: tos var labot ar teksta redaktoru. Kļūdaina rinda tiek norādīta palaišanas brīdī un ignorēta.
 H1|11. Kvadrātu karte

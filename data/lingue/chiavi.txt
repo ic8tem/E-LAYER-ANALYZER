@@ -194,7 +194,7 @@ Europa
 FONTE
 FONTE PRINCIPALE
 FONTI
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter
 Fattore di stazione K
 Ferma
@@ -282,7 +282,6 @@ John GM8JBJ - Meteor scatter path loss, hamradio.engineering (da Kaiser & Closs 
 Klaus von der Heide DJ5HG - "Die Geometrie von Meteorscatterverbindungen" (2004): riferimento fisso in dB, scie lunghe con il radiante basso,\n    curve delle tratte da Amburgo e da Monaco; tabella AMS di J. Richardson per la distanza degli hot spot
 Klaus von der Heide DJ5HG - QTFGUI (aurora, FAI e meteor scatter) e manuale "QTFGUI Help" 2007: legge di diffusione a cono,\n    caso di prova Amburgo - Barcellona nelle Quadrantidi, usato per verificare il modello
 L'aggiornamento non è riuscito: {0}
-L'indice della tratta nell'ora attuale, il lato prevalente e l'Hot consigliato. Compare solo se il giorno scelto è oggi.
 L'ora del giorno scelto con l'indice della tratta più alto (somma di ZHR × efficienza di tutti gli sciami attivi) e il lato della tratta da cui arriva la maggior parte delle riflessioni.
 L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data (verifica delle due regole);\n    Appreciating DL6WU Wide-Band Long-Boom Yagi Design e 70-CM Yagi Stacks Part 2 (Yagi VK3AUU di David Tanner):\n    simulazioni NEC usate per verificare la curva del guadagno e correggere il lobo orizzontale (0,93 x Kraus)
 LIMITI DELLA ZONA COMUNE (incroci delle curve dove l'orizzonte di ciascuna stazione incontra lo strato E, articolo)
@@ -378,7 +377,6 @@ Ore in comune: {0}. Rapporto mediano RMOB/Collm = {1:F4}.\nEsponente empirico (c
 Orionidi
 Orionidi di novembre
 Osservatore RMOB
-PREVISIONE SPERIMENTALE
 PROCEDURA
 PROSSIMO PASSAGGIO DEL FASCIO SULLA ZONA
 PSKReporter MQTT
@@ -407,6 +405,7 @@ Potenza W
 Potenza {0:F0} W = {1:F1} dBm, EIRP = {2:F1} dBm (guadagno in dBi)
 Previsione /ora
 Previsione e calcolo in diretta dell'efficienza degli sciami meteorici per il meteor scatter
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.
 Previsione sperimentale delle prossime 24 ore a {0} MHz per {1}
 Previsione {0} /ora
 Previsione {0} MHz (rifl./ora)
@@ -461,7 +460,6 @@ Ricevitore
 Riconnessione tra {0} s
 Riconnetti
 Riepilogo dell'anno (ZHR misurati, GMN)
-Riflessioni all'ora previste sulla banda scelta, ottenute traslando i conteggi del radar di Collm con le regole di SM6FHZ. Serve il dato del radar (Live e dati real-time › Flusso radar). È indipendente dalla geometria della tratta.
 Riga {0} ignorata (colonne insufficienti)
 Riga {0}: {1}
 Riporta il momento del calcolo al tempo reale
@@ -521,7 +519,7 @@ Spenta (prudente): ogni scia pesa con il seno dell'elevazione del radiante, perc
 Spiegazione del calcolo dell'efficienza
 Spot MS raccolti
 Spot da mostrare
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.
 Spot di PSKReporter in diretta via MQTT (mqtt.pskreporter.info, servizio di M0LTE): nessun login, arrivano gia' con i locator di chi trasmette e di chi riceve. Un argomento per riga o separati da ;  formato pskr/filter/v2/banda/modo/call tx/call rx/... (+ = qualsiasi, # = il resto).
 Spot meteor scatter raccolti (i più recenti in alto)
 Stazione
@@ -531,6 +529,8 @@ Svuota la tabella
 Swan Meteor Skyview di DL1DBC - swan.ms (riferimento per la grafica della volta celeste)
 Sì
 Sì · settore {0}
+TRA 1 ORA
+TRA {0} ORE
 TRATTA
 TRATTA OLTRE L'ORIZZONTE DELLA SCIA: con le scie a {0:F1} km il punto medio è {1:F1}° sotto l'orizzonte. Servono scie ad almeno {2:F0} km di quota: collegamento possibile solo con le scie più alte, efficienze e attenuazioni sono al limite del modello.
 Tauridi Nord
@@ -568,7 +568,7 @@ Vista dall'alto (E a destra)
 Voci a mano
 Voci a mano...
 WSJT-X / JTDX / MSHV via UDP
-WSJT-X UDP: la decodifica riguarda la mia stazione
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)
 Waterfall
 Wikipedia, "GRAVES (system)" – trasmettitore a Broye-lès-Pesmes (47,348° N 5,515° E)
 YA-MS - nessuna connessione
@@ -641,11 +641,11 @@ gamma-Draconidi di luglio
 gamma-Ursae Minoridi
 gradi
 hot spot (solo sporadiche) {0}
-il giorno scelto non è oggi
 in ascolto su {0}:{1}
 indice
 indice sciami tratta (scala a destra)
 indice tratta
+indice {0:F1}
 invariato
 invariato (controllato alle {0} UTC)
 k = 3,75·log10 r = {0}, con r = {1} ({2}). La regola sperimentale di SM6FHZ usa k = 3, più prudente.
@@ -657,6 +657,7 @@ la mia stazione
 la scelta che pesa di più
 la tua stazione
 lato prevalente {0} ({1:F0}%)
+lato {0} · {1}
 lavorato
 lim. A
 lim. B
@@ -681,13 +682,13 @@ mobile
 modo digitale MS
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto
 nessun ADIF caricato
-nessun dato radar: vedi Live e dati real-time › Flusso radar
 nessun file RMOB caricato
 nessun passo del fascio illumina la zona utile\nogni scia colta ≈ {0:F0} % ({1:F1} + {2:F1}) / {3:F1}
 nessun valore: i {0} sciami attivi hanno per tutto il giorno il radiante sotto l'orizzonte o in posizione sfavorevole per questa tratta (efficienza sotto l'1 %)
 nessun valore: in questo giorno non c'è nessuno sciame attivo con ZHR di almeno 1 (catalogo IMO)
 nessun valore: le due stazioni non vedono una zona comune dello strato E (vedi l'avviso qui sotto)
 nessuna rete attiva
+nessuno sciame utile
 nessuno sciame utile adesso: hot spot più adatto al fascio
 nessuno sciame utile in questo giorno
 nessuno sciame utile in questo momento
@@ -761,11 +762,10 @@ zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°
 {0:00}:00 → {1:00}:00 UTC · {2} h
 {0:00}:00-{0:00}:59 UTC\nindice della tratta {1:F1}\nlato prevalente {2} ({3:F0}%)
-{0:00}:{1:00} UTC - indice {2:F1}\nlato prevalente {3}\n{4}
 {0:F0} % delle riflessioni arriva da questo lato
-{0:F0} MHz, riflessioni/ora previste\nora {1:F0} - tra 1 h {2} - tra 2 h {3}\nsperimentale (Collm, regole SM6FHZ)
 {0:F0} km
 {0:F0} km · azimut {1:F0}°
+{0:F0} rifl./ora previste
 {0} (dal radiante, az. {1}°)
 {0} (in rosso sulla mappa)
 {0} (~{1} calc.)

@@ -8,6 +8,9 @@
 #ifndef Arch
   #define Arch "x64"
 #endif
+#ifndef Nome
+  #define Nome "win"
+#endif
 #ifndef SourceDir
   #define SourceDir "..\publish\win-x64"
 #endif
@@ -31,7 +34,14 @@ ArchitecturesAllowed=arm64
 ArchitecturesInstallIn64BitMode=arm64
 #endif
 OutputDir=..\dist
-OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-win-{#Arch}-setup
+OutputBaseFilename=E-LAYER-ANALYZER-{#AppVersion}-{#Nome}-{#Arch}-setup
+; .NET 8 richiede Windows 10 (su Windows 7 manca GetSystemTimePreciseAsFileTime in KERNEL32): l'installatore lo dice subito;
+; per Windows 7 SP1, 8 e 8.1 c'e' il pacchetto win7 (.NET 6), come in YA-MS 1.8.19
+#if Nome == "win7"
+MinVersion=6.1sp1
+#else
+MinVersion=10.0
+#endif
 SetupIconFile=..\src\Assets\ela.ico
 UninstallDisplayIcon={app}\E-LAYER-ANALYZER.exe
 Compression=lzma2

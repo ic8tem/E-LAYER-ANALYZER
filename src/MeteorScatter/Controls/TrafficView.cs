@@ -3,7 +3,8 @@
 // e' l'azimut. Per ogni spot raccolto: tratta tra le due stazioni (colore della banda), stazioni agli estremi e la
 // "nuvola" dove si concentrano le scie piu' probabili per quella tratta e quell'ora (calcolata in MainWindow.Traffico.cs
 // con lo stesso modello di riflessione speculare della volta celeste). Gli spot con una stazione fuori dalla mappa
-// non si disegnano. Gli spot arrivati da meno di un minuto (e non piu' vecchi di 3 minuti) lampeggiano.
+// non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde
+// (regola dell'autore, IC8TEM, 14/11/2026).
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -30,7 +31,7 @@ namespace YAMS
         public string CallA = "", CallB = "", Band = "", Info = "";
         public Color Color;
         public bool Blink;
-        public bool Dashed;    // spot WSJT-X UDP che riguarda la mia stazione: tratteggio che lampeggia sempre
+        public bool Dashed;    // messaggio rivolto alla mia stazione (mia WSJT-X o altro utente di YA-MS): tratteggio; lampeggia solo con Blink
         public List<TrafficCloud> Clouds = new List<TrafficCloud>();
         public object Tag;
     }
@@ -78,7 +79,7 @@ namespace YAMS
             ClipToBounds = true;
             blink.Tick += (s, e) =>
             {
-                bool any = false; foreach (TrafficSpot t in Spots) if (t.Blink || t.Dashed) { any = true; break; }
+                bool any = false; foreach (TrafficSpot t in Spots) if (t.Blink) { any = true; break; }
                 if (!any) { phase = true; return; }
                 phase = !phase;
                 if (IsEffectivelyVisible) InvalidateVisual();
@@ -319,7 +320,7 @@ namespace YAMS
         void DrawPath(DrawingContext ctx, TrafficSpot s, Color box)
         {
             bool sel = s == Selected;
-            if ((s.Blink || s.Dashed) && !phase && !sel) return;
+            if (s.Blink && !phase && !sel) return;
             Point a = P(s.A), b = P(s.B);
             if (sel) Seg(ctx, new Pen(new ImmutableSolidColorBrush(Color.FromArgb(120, 255, 255, 255)), 7), s.A, s.B);
             if (s.Dashed)

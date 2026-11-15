@@ -8,6 +8,10 @@ INSTALLAZIONE
            (PC con Snapdragon): installa in C:\E-LAYER-ANALYZER, senza permessi di amministratore e senza scrivere in
            C:\Users\...\AppData (niente collegamento nel menu Start, solo l'icona facoltativa sul desktop).
            In alternativa gli zip portatili -win-x64-, -win-x86-, -win-arm64-portatile.zip.
+           Questi pacchetti richiedono Windows 10 o 11 (.NET 8): l'installatore lo controlla subito.
+  Windows 7 SP1, 8 e 8.1  -win7-x64-setup.exe o -win7-x86-setup.exe (o gli zip -win7-...-portatile.zip), compilati
+           con .NET 6, l'ultimo che gira su Windows 7 (dalla 0.5.1, come YA-MS 1.8.19). Su Windows 7 gli altri pacchetti
+           si fermano con l'errore «Impossibile trovare il punto di ingresso GetSystemTimePreciseAsFileTime».
   Debian, Ubuntu, Mint  e-layer-analyzer_x.y.z_amd64.deb: sudo apt install ./e-layer-analyzer_x.y.z_amd64.deb, poi si avvia
            dal menu (al primo avvio si copia in ~/E-LAYER-ANALYZER).
   Fedora, openSUSE  e-layer-analyzer-x.y.z.x86_64.rpm (o .aarch64.rpm, .armv7hl.rpm): sudo dnf install ./...rpm.

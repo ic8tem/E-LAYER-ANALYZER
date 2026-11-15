@@ -791,9 +791,9 @@ Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (tri
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto	активный монитор на карте PSKReporter в {0} UTC, спотов не принято
 {0} solo monitor attivi	{0} только активные мониторы
 mappa di PSKReporter non raggiungibile: {0}	карта PSKReporter недоступна: {0}
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 дальше 1100 км без параллельных трасс в пределах 3 минут (светло-зелёный, строка всегда мигает)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)	FT8 дальше 1100 км без параллельных трасс в пределах 3 минут (светло-зелёный)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 дальше 1100 км без параллельных трасс в пределах 3 минут: не похоже на спорадический E или тропо, возможно метеорное рассеяние
-WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: декодирование касается моей станции
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)	WSJT-X UDP: мне отвечает корреспондент (сообщение моей станции)
 Impostazioni	Настройки
 Aspetto	Внешний вид
 Tema e lingua sono anche in alto a destra, accanto alle linguette.	Тема и язык есть также справа вверху, рядом с вкладками.
@@ -812,9 +812,16 @@ Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Услышан
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	зона потока {0}: {1:F0} % отражений, {2:F0} × {3:F0} км, ось на {4:F0}°
 zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	зону потока нельзя рассчитать для этой трассы (слишком короткая или слишком длинная)
 Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Щёлкните по трассе на карте или по строке таблицы, чтобы увидеть данные связи и её зоны потока.
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Споты из вкладки "Сбор данных". Для каждой связи зона потока показывает, где сосредоточены наиболее вероятные следы для этой трассы и этого времени (зеркальное отражение, сумма активных потоков); пунктирные зоны = только спорадические метеоры. Споты со станцией за пределами карты не рисуются; только что пришедшие (менее 3 минут) мигают одну минуту.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.	Споты из вкладки "Сбор данных". Для каждой связи зона потока показывает, где сосредоточены наиболее вероятные следы для этой трассы и этого времени (зеркальное отражение, сумма активных потоков); пунктирные зоны = только спорадические метеоры. Споты со станцией за пределами карты не рисуются. Мигают только декодирования моего WSJT-X (UDP), в которых мне отвечает корреспондент.
 % sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% потока: доля полезных отражений трассы в это время, попадающая в зону потока на карте (зеркальное отражение, сумма активных потоков). Чем она выше, тем сильнее хорошие следы сосредоточены в одной области, куда направить антенну. "спорадические" = ни один активный поток не даёт полезных отражений: остаются только спорадические метеоры по обе стороны трассы (пунктирные зоны).
 Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Карту в проекции Меркатора можно двигать мышью; двойной щелчок: снова по центру моей станции. Азимутальная карта остаётся центрированной на моей станции.
 Memorizza	Сохранить
 Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Введённый локатор отличается от указанного в базе CALL3: нажмите, чтобы обновить и сохранить его (ручная запись, сразу записывается и в call3.txt).
 {0} memorizzato nel CALL3: {1}	{0} сохранён в CALL3: {1}
+TRA 1 ORA	ЧЕРЕЗ 1 ЧАС
+TRA {0} ORE	ЧЕРЕЗ {0} Ч
+lato {0} · {1}	сторона {0} · {1}
+nessuno sciame utile	нет полезного потока
+{0:F0} rifl./ora previste	{0:F0} отраж./ч ожидается
+indice {0:F1}	индекс {0:F1}
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.	Прогноз для выбранной трассы: среднее за час, начинающийся на этом горизонте (четыре выборки за час). Индекс трассы = сумма ZHR × эффективность активных потоков; затем преобладающая сторона трассы и поток с наибольшим вкладом. Отражения в час берутся из экспериментального прогноза (радар Коллм, правила SM6FHZ), когда есть данные радара.

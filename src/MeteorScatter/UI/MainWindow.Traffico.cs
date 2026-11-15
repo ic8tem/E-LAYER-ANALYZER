@@ -5,8 +5,8 @@
 // stesso calcolo delle zone PREV della volta celeste) e per ciascun lato della tratta si disegna l'ellisse con centro
 // e assi dati dalla media e dalla dispersione pesata dei punti di riflessione (1,5 deviazioni standard).
 // Senza sciami utili (solo sporadiche) le nuvole sono gli hot spot classici, tratteggiate.
-// Colori per banda; spot con una stazione fuori dalla mappa scartati; spot arrivati da meno di un minuto e
-// non piu' vecchi di 3 minuti lampeggiano.
+// Colori per banda; spot con una stazione fuori dalla mappa scartati. Lampeggiano solo le decodifiche della mia
+// WSJT-X (UDP) in cui un corrispondente mi risponde (regola dell'autore, 14/11/2026).
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -49,6 +49,7 @@ namespace YAMS
         static readonly Color Ft8IsoColor = Color.FromRgb(134, 239, 172);
         // messaggi rivolti a me sentiti da altri utenti di YA-MS (scambio cifrato): viola
         static readonly Color SharedColor = Color.FromRgb(167, 139, 250);
+        static readonly Color ReplyColor = Color.FromRgb(253, 224, 71);   // fondo della riga che lampeggia: un corrispondente mi risponde
 
         void BuildTrafficTab()
         {
@@ -74,7 +75,7 @@ namespace YAMS
             side.Children.Add(new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap, Foreground = Pal.B(Pal.Fore), FontSize = 12.5,
-                Text = Lang.T("Spot della linguetta \"Raccolta dati\". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.")
+                Text = Lang.T("Spot della linguetta \"Raccolta dati\". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.")
             });
             side.Children.Add(new TextBlock
             {
@@ -116,7 +117,7 @@ namespace YAMS
             chkPskMonitors.IsCheckedChanged += (s, e) => { PskActive.Enabled = chkPskMonitors.IsChecked == true; cfg.Set("psk_monitor_attivi", PskActive.Enabled); RefreshTraffic(true); };
             side.Children.Add(chkPskMonitors);
             // FT8 lunghi e isolati: possibile meteor scatter (regola dell'autore, 14/11/2026)
-            CheckBox chkFt8 = C(Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)"), cfg.GetB("ft8_isolati", true));
+            CheckBox chkFt8 = C(Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)"), cfg.GetB("ft8_isolati", true));
             if (chkFt8.Content is string f8) chkFt8.Content = new TextBlock { Text = f8, TextWrapping = TextWrapping.Wrap };
             chkFt8.IsCheckedChanged += (s, e) => { MsCollector.Ft8Enabled = chkFt8.IsChecked == true; cfg.Set("ft8_isolati", MsCollector.Ft8Enabled); RefreshTraffic(true); };
             side.Children.Add(chkFt8);
@@ -262,8 +263,9 @@ namespace YAMS
             int outside = 0, noLoc = 0;
             Dictionary<string, int> perBand = new Dictionary<string, int>();
             List<MsSpot> all = MsCollector.MapSpots();   // tutte le bande, senza CW e spot troppo vicini
-            // in piu': FT8 oltre i 1100 km senza tratte parallele (verde chiaro, riga che lampeggia sempre) e spot WSJT-X UDP
-            // che riguardano la mia stazione (tratteggio che lampeggia sempre)
+            // in piu': FT8 oltre i 1100 km senza tratte parallele (verde chiaro) e messaggi rivolti alla mia stazione
+            // (tratteggio). Lampeggiano, sulla mappa e nella tabella, SOLO le decodifiche della mia WSJT-X (UDP) in cui un
+            // corrispondente mi risponde (regola dell'autore, 14/11/2026)
             HashSet<MsSpot> ft8Iso = new HashSet<MsSpot>(), mine = new HashSet<MsSpot>();
             HashSet<string> seen = new HashSet<string>();
             foreach (MsSpot s in all) seen.Add(s.Key);
@@ -291,8 +293,8 @@ namespace YAMS
                 TrafficSpot t = new TrafficSpot
                 {
                     A = a, B = b, CallA = s.Spotter, CallB = s.DxCall, Band = s.Band, Color = s.Shared ? SharedColor : iso ? Ft8IsoColor : BandColor(s.Band), Tag = s,
-                    Blink = (now - s.Utc).TotalMinutes <= 3 && (now - s.Received).TotalSeconds <= 60,
-                    Dashed = mine.Contains(s)
+                    Dashed = mine.Contains(s),
+                    Blink = mine.Contains(s) && !s.Shared
                 };
                 t.Clouds = CloudsFor(s, a, b);
                 string cl = "";
@@ -308,7 +310,7 @@ namespace YAMS
                          (string.IsNullOrEmpty(s.Comment) ? "" : "\n" + s.Comment) +
                          (iso ? "\n" + Lang.T("FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter") : "") +
                          (s.Shared ? "\n" + Lang.F("Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione", s.Spotter)
-                                   : t.Dashed ? "\n" + Lang.T("WSJT-X UDP: la decodifica riguarda la mia stazione") : "");
+                                   : t.Dashed ? "\n" + Lang.T("WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)") : "");
                 list.Add(t);
                 int nb; perBand.TryGetValue(s.Band, out nb); perBand[s.Band] = nb + 1;
             }
@@ -374,7 +376,7 @@ namespace YAMS
                         Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), (s.FreqKHz / 1000).ToString("F3", CultureInfo.CurrentCulture), s.Spotter, s.DxCall,
                                         Astro.DistanceKm(t.A, t.B).ToString("F0", CultureInfo.CurrentCulture), side },
                         Fore = t.Color == Ft8IsoColor && !Tema.Scuro ? Color.FromRgb(21, 128, 61) : t.Color, Tag = t, CellTips = new[] { "", "", "", "", "", trafficCloudTip },
-                        Blink = t.Color == Ft8IsoColor, Back = t.Color == Ft8IsoColor ? Ft8IsoColor : (Color?)null
+                        Blink = t.Blink, Back = t.Blink ? ReplyColor : t.Color == Ft8IsoColor ? Ft8IsoColor : (Color?)null
                     });
                 }
                 tTraffic.Rows = rows;
@@ -419,7 +421,7 @@ namespace YAMS
                               new[] { "OZ1BEF", "JO55WM", "70" }, new[] { "YO3JW", "KN34BK", "432" }, new[] { "G3WOS", "IO91IL", "28" } };
             foreach (string[] r in ls)
                 MsCollector.Listeners[r[0] + "|" + r[2]] = new MsListener { Call = r[0], Loc = r[1], Band = r[2], Modes = "MSK144", LastUtc = now.AddMinutes(-5), Count = 3 };
-            // FT8 lungo e isolato di esempio (verde chiaro, riga che lampeggia) e spot UDP che mi riguarda (tratteggio)
+            // FT8 lungo e isolato di esempio (verde chiaro) e risposta di un corrispondente dalla mia WSJT-X (tratteggio che lampeggia)
             MsSpot f8 = new MsSpot { Spotter = "EA4EOZ", LocSpotter = "IN80DJ", DxCall = "OK1TEH", LocDx = "JO70FD", FreqKHz = 144174, Utc = now.AddMinutes(-1), Source = 3, Mode = "FT8", Comment = "FT8 -18 dB", Received = now };
             LatLon fa, fb;
             if (Astro.TryLocator(f8.LocSpotter, out fa) && Astro.TryLocator(f8.LocDx, out fb)) f8.DistKm = Astro.DistanceKm(fa, fb);

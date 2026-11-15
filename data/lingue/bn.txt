@@ -789,9 +789,9 @@ Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (tri
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto	PSKReporter মানচিত্রে {0} UTC-তে সক্রিয় মনিটর, কোনো স্পট পাওয়া যায়নি
 {0} solo monitor attivi	{0}টি শুধু সক্রিয় মনিটর
 mappa di PSKReporter non raggiungibile: {0}	PSKReporter মানচিত্রে পৌঁছানো যাচ্ছে না: {0}
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	3 মিনিটে সমান্তরাল পথ ছাড়া 1100 কিমির বেশি FT8 (হালকা সবুজ, সারি সবসময় জ্বলে-নেভে)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)	3 মিনিটে সমান্তরাল পথ ছাড়া 1100 কিমির বেশি FT8 (হালকা সবুজ)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	3 মিনিটে সমান্তরাল পথ ছাড়া 1100 কিমির বেশি FT8: স্পোরাডিক E বা ট্রোপোর মতো দেখায় না, মিটিয়র স্ক্যাটার হতে পারে
-WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: ডিকোডটি আমার স্টেশন সম্পর্কিত
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)	WSJT-X UDP: কোনো সহকর্মী আমাকে উত্তর দিচ্ছেন (আমার স্টেশনের উদ্দেশে বার্তা)
 Impostazioni	সেটিংস
 Aspetto	চেহারা
 Tema e lingua sono anche in alto a destra, accanto alle linguette.	থিম ও ভাষা উপরে ডানদিকে, ট্যাবের পাশেও আছে।
@@ -810,9 +810,16 @@ Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	{0} শুন�
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	বৃষ্টির অঞ্চল {0}: প্রতিফলনের {1:F0} %, {2:F0} × {3:F0} km, অক্ষ {4:F0}°
 zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	এই পথের জন্য বৃষ্টির অঞ্চল গণনা করা যায় না (খুব ছোট বা খুব দীর্ঘ)
 Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	যোগাযোগ ও তার বৃষ্টির অঞ্চলের বিবরণের জন্য মানচিত্রে একটি পথ বা সারণির একটি সারিতে ক্লিক করুন।
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	"ডেটা সংগ্রহ" ট্যাবের স্পট। প্রতিটি যোগাযোগের জন্য বৃষ্টির অঞ্চল দেখায় সেই পথ ও সময়ের সবচেয়ে সম্ভাব্য রেখাগুলো কোথায় জমা (দর্পণ প্রতিফলন, সক্রিয় বৃষ্টির যোগফল); ভাঙা রেখার অঞ্চল = কেবল বিক্ষিপ্ত উল্কা। মানচিত্রের বাইরে স্টেশন থাকলে স্পট আঁকা হয় না; সদ্য আসা (3 মিনিটের কম) এক মিনিট জ্বলে-নেভে।
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.	"ডেটা সংগ্রহ" ট্যাবের স্পট। প্রতিটি যোগাযোগের জন্য বৃষ্টির অঞ্চল দেখায় সেই পথ ও সময়ের সবচেয়ে সম্ভাব্য রেখাগুলো কোথায় জমা (দর্পণ প্রতিফলন, সক্রিয় বৃষ্টির যোগফল); ভাঙা রেখার অঞ্চল = কেবল বিক্ষিপ্ত উল্কা। মানচিত্রের বাইরে স্টেশন থাকলে স্পট আঁকা হয় না। কেবল আমার WSJT-X (UDP)-এর সেই ডিকোডগুলো জ্বলে-নেভে, যেখানে কোনো সহকর্মী আমাকে উত্তর দেন।
 % sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% বৃষ্টি: সেই সময়ে পথের উপযোগী প্রতিফলনের যে অংশ মানচিত্রে আঁকা বৃষ্টির অঞ্চলে পড়ে (দর্পণ প্রতিফলন, সক্রিয় বৃষ্টির যোগফল)। যত বেশি, ভালো রেখাগুলো তত এক জায়গায় জমা, যেদিকে অ্যান্টেনা ঘোরাতে হবে। "বিক্ষিপ্ত" = কোনো সক্রিয় বৃষ্টি উপযোগী প্রতিফলন দেয় না: পথের দুই পাশে কেবল বিক্ষিপ্ত উল্কা থাকে (ভাঙা রেখার অঞ্চল)।
 Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	মার্কেটর মানচিত্র মাউস দিয়ে টেনে সরানো যায়; ডাবল ক্লিক: আবার আমার স্টেশনে কেন্দ্রিত। দিগংশীয় মানচিত্র আমার স্টেশনে কেন্দ্রিত থাকে।
 Memorizza	সংরক্ষণ
 Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	লেখা লোকেটরটি CALL3 সংগ্রহের থেকে আলাদা: এটি হালনাগাদ ও সংরক্ষণ করতে চাপুন (হাতে লেখা এন্ট্রি, সঙ্গে সঙ্গে call3.txt-এও লেখা হয়)।
 {0} memorizzato nel CALL3: {1}	{0} CALL3-এ সংরক্ষিত: {1}
+TRA 1 ORA	১ ঘণ্টা পরে
+TRA {0} ORE	{0} ঘণ্টা পরে
+lato {0} · {1}	দিক {0} · {1}
+nessuno sciame utile	কোনো কাজের বর্ষণ নেই
+{0:F0} rifl./ora previste	{0:F0} প্রতিফলন/ঘণ্টা প্রত্যাশিত
+indice {0:F1}	সূচক {0:F1}
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.	বাছাই করা পথের পূর্বাভাস: সেই দিগন্তে শুরু হওয়া ঘণ্টার গড় (ঘণ্টায় চারটি নমুনা)। পথ সূচক = সক্রিয় বর্ষণগুলোর ZHR × দক্ষতার যোগফল; তারপর পথের প্রধান দিক আর সবচেয়ে বেশি অবদান রাখা বর্ষণ। ঘণ্টাপ্রতি প্রতিফলন আসে পরীক্ষামূলক পূর্বাভাস থেকে (Collm রাডার, SM6FHZ-এর নিয়ম), যখন রাডারের তথ্য থাকে।

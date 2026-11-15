@@ -1,5 +1,5 @@
 TITLE|Notendahandbók YA-MS
-SUB|Útgáfa 1.8.15 - umsjón Costantino IC8TEM - nóvember 2026
+SUB|Útgáfa 1.8.19 - umsjón Costantino IC8TEM - nóvember 2026
 H1|1. Inngangur
 H2|1.1 Til hvers YA-MS er
 P|YA-MS hjálpar þér að spá fyrir um og fylgjast í beinni með skilyrðum fyrir meteor scatter milli stöðvarinnar þinnar og mótstöðvar, frá 28 upp í 432 MHz. Fyrir hverja virka loftsteinadrífu segir forritið hversu vel staða geislapunktsins hentar leiðinni þinni (nýtnin), á hvaða tímum, frá hvorri hlið leiðarinnar endurvörpin koma og hvert best er að beina loftnetinu. Við hlið spárinnar sýnir það mæligögn í beinni: talningar loftsteinaratsjárinnar í Collm, myndavélar Global Meteor Network, CMOR-ratsjána, GRAVES-sendinn og meteor scatter-umferðina sem safnað er frá klösunum og frá PSKReporter.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): .deb-pakkinn, sem settur er upp með sudo apt i
 LI|Raspberry Pi 3, 4, 5, 400 og 500: pakkinn raspberry-pi-64bit (Raspberry Pi OS 64 bita) eða raspberry-pi-32bit, sem .tar.gz eða .deb.
 LI|Önnur ARM-Linux-kerfi (til dæmis Slackware ARM64 eða armv7l-borð): pakkinn linux-arm64 eða linux-armv7l, sem .tar.gz, eins og fyrir Linux.
 LI|Windows á ARM (tölvur með Snapdragon): pakkinn windows-arm64. Fedora og openSUSE: .rpm-pakkinn (x86_64 eða aarch64), með sudo dnf install eða sudo zypper install.
+LI|Windows 7 SP1, 8 og 8.1: pakkarnir windows7-x64 og windows7-x86 (uppsetning eða færanlegt zip), smíðaðir með .NET 6, því síðasta sem keyrir á þessum kerfum. Windows 7 þarf uppfærslurnar KB2533623 og KB2999226. Hinir Windows-pakkarnir krefjast Windows 10 eða 11: á eldra Windows segir uppsetningarforritið það strax.
 LI|Arch, Manjaro og Arch Linux ARM: pakkinn .pkg.tar.zst, með sudo pacman -U. Slackware64 og Slackware ARM64: pakkinn .txz, með installpkg sem root. Hvaða Linux sem er: AppImage-skráin (x86_64 eða aarch64), gerð keyranleg og ræst. Alpine Linux: pakkinn alpine-x64 eða alpine-arm64, sem .tar.gz.
 LI|macOS: .dmg-skráin fyrir Apple Silicon (M1 og nýrri) eða fyrir Intel, eða app.zip. Dragðu YA-MS.app í eigin möppu (til dæmis ~/YA-MS): mappan data verður til við hlið forritsins.
 TAG|ATTENZIONE|Windows getur birt „Windows verndaði tölvuna þína“: veldu „Frekari upplýsingar“ og síðan „Keyra samt“. Á macOS skaltu í fyrsta skipti opna forritið með hægri músarhnappi og „Opna“. Forritið er ekki undirritað með greiddu skilríki.
@@ -70,6 +71,7 @@ LI|Tími: UTC-klukka.
 LI|Dagsetning útreiknings (UTC): dagur útreikningsins. Gildir fyrir Spáreikning, fyrir 24 klukkustunda töfluna í Útreikningi nýtni og fyrir tímalínuna í GRAVES-ratsjá. Sjálfgefið er dagurinn í dag og á miðnætti færist hún yfir á nýja daginn.
 LI|Klukkustundir (−12 til +36 klst.): færir tíma útreikningsins í 15 mínútna skrefum. Við hliðina: „Útreikningur fyrir: núna“ eða valin dagsetning og tími.
 LI|Rauntími: fer aftur á núverandi tíma.
+LI|Tímalínan («Klukkustundir (−12 til +36 klst.)» og «Rauntími») er efst í flipanum Spáreikningur, því hún gildir aðeins fyrir þann útreikning.
 H2|4.4 Að stilla eigin stöð
 TAG|PROCEDURA|1) Skrifaðu Minn locator og hæðina. 2) Skrifaðu locator og hæð mótstöðvarinnar, eða smelltu á kortið í Spáreikningi: vinstri smellur = mótstöð, hægri smellur = stöðin þín. 3) Veldu bandið. 4) Skrifaðu lengd bómunnar og hæðarhorn geisla loftnetsins þíns. 5) Ýttu á Reikna: stöðustikan staðfestir „Leið reiknuð: ... km, ... endurvarpspunktar teknir í úrtak“.
 TAG|NOTA|Stillingarnar eru vistaðar í data/config.ini þegar forritinu er lokað og við hvern útreikning: við næstu ræsingu finnur þú sömu leið.
@@ -116,11 +118,11 @@ LI|TILRAUNAREGLUR MILLI TÍÐNISVIÐA: fjöldi, styrkur og lengd endurvarpa mið
 TAG|NOTA|Jákvæð vikmörk þýða að meðal undirþétt slóð nægir til að ná leiðinni með stöðinni þinni; neikvæð vikmörk þýða að þéttari slóðir eða yfirþéttir loftsteinar eru nauðsynlegir. Þetta er mat: viðmiðið er áfram reynslan á bandinu.
 H1|7. Útreikningur nýtni
 P|Nýtnin segir í prósentum hversu vel staða geislapunkts drífu leyfir endurvörp á leiðinni þinni: 100 % er hagstæðasta staðan fyrir þá leið. Þessi undirflipi sýnir hana klukkustund fyrir klukkustund fyrir daginn í „Dagsetning útreiknings“, með gildunum á miðri hverri klukkustund.
-H2|7.1 Reitirnir fjórir
+H2|7.1 Borðinn ofan við flipana
+P|Þessir reitir eru í borða undir tímalínunni, ofan við flipana, alltaf sýnilegir líka þegar skipanalínur eru felldar saman: til vinstri tveir reitir valins dags, síðan sex spátímarammar sem hefjast núna.
 LI|BESTI TÍMI DAGSINS: klukkustundin með hæsta leiðarstuðulinn og ríkjandi hlið.
 LI|HAGSTÆÐASTA DRÍFAN: drífan sem leggur mest af mörkum, með klukkustund, hlið og tveimur bestu stefnunum.
-LI|NÚNA: stuðull og hlið á þessari klukkustund og Hot sem mælt er með (aðeins ef valinn dagur er í dag).
-LI|TILRAUNASPÁ: vænt endurvörp á klukkustund núna, eftir 1 og eftir 2 klukkustundir (kafli 8).
+LI|NÚNA · EFTIR 1, 3, 6, 12 OG 24 KLST.: fyrir hvern tímaramma meðaltal klukkustundarinnar sem hefst þar (fjögur sýni): leiðarstuðull, ríkjandi hlið, drífan sem leggur mest til og, þegar ratsjárgögn eru til, endurkast á klukkustund úr tilraunaspánni. Í NÚNA birtist ráðlagður Hot þegar ratsjárgögn vantar. Uppfært á hverri mínútu.
 P|Þegar reitur hefur engin gildi segir hann hvers vegna: ekkert sameiginlegt svæði, engin virk drífa eða óhagstæðir geislapunktar allan daginn. Skýringartexti hvers reits útskýrir hvað hann sýnir. Fyrir neðan reitina birtist, þegar þörf er á, viðvörunin ENGIN SAMEIGINLEG SVÆÐI og rönd sem útskýrir bókstafina A og B.
 H2|7.2 Stilling útreikningsins
 LI|Varfærin (sjálfgefin): hæð slóða frá ratsjá, venjulegar slóðir, kveikt á horni β. Gefur lægstu gildin.
@@ -159,16 +161,16 @@ LI|Taflan með matinu: gott, miðlungs eða lélegt miðað við meðaltal 24 kl
 TAG|NOTA|Lengd endurvarpanna fylgir valinu „Lengd pinga milli banda“ í Rúmfræði og deyfingu; í forward scatter eykst lengdin einnig með sec²φ í miðpunkti leiðarinnar.
 H1|9. Beint og rauntímagögn
 H2|9.1 Umferð í beinni
-P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þína í miðju og allri meteor scatter-umferð sem safnað hefur verið: fyrir hvert samband er leiðin í lit bandsins (28 brúnt, 50 grænt, 70 blágrænt, 144 appelsínugult, 222 bleikt, 432 fjólublátt), stöðvarnar tvær og drífusvæði líklegustu slóðanna á þeim tíma. Nýkomin spot blikka í eina mínútu.
+P|Kort í jafnfjarlægri stefnuvörpun (azimuthal equidistant) með stöðina þína í miðju og allri meteor scatter-umferð sem safnað hefur verið: fyrir hvert samband er leiðin í lit bandsins (28 brúnt, 50 grænt, 70 blágrænt, 144 appelsínugult, 222 bleikt, 432 fjólublátt), stöðvarnar tvær og drífusvæði líklegustu slóðanna á þeim tíma. Aðeins afkóðanir úr þínu WSJT-X (UDP) þar sem mótstöð svarar þér blikka.
 LI|Radíus korts: 600-3500 km. Spot til að sýna: síðustu 3, 15 eða 30 mínútur, síðasta klukkustund, síðustu 3 eða 24 klukkustundir.
 LI|Mercator-kortið færist með því að draga það með músinni; tvísmellur: aftur miðjað á stöðina mína. Hornkortið er áfram miðjað á stöðina mína.
 LI|Smellur á leið eða á línu í töflunni auðkennir sambandið og sýnir miðju drífusvæði, hæð þess og stærð.
 LI|Upplýsingar um valið samband eða hlustunarstöð birtast í upphækkuðum kassa yfir kortinu, efst til vinstri, bæði með jafnfjarlægðarvörpun og Mercator-vörpun.
 LI|Sýna hverjir hlusta: þríhyrningar í lit bandsins merkja stöðvar sem samkvæmt PSKReporter taka á móti MSK144, FSK441, PSK2K eða JTMS á 28, 50, 70, 144 og 432 MHz í völdum tímaglugga. Smellur á þríhyrning sýnir kallmerki, staðsetningu, hætti og síðasta spot. MQTT-straumurinn í flipanum Gagnasöfnun verður að vera tengdur.
 LI|Einnig virkir hlustendur á korti PSKReporter: tómir þríhyrningar fyrir stöðvar sem birtast á korti pskreporter.info í MSK144, FSK441, PSK2K eða JTMS en hafa ekki enn tekið á móti neinu spotti (MQTT sendir aðeins stöðvar sem taka á móti einhverju). YA-MS spyr fyrirspurnaþjónustu PSKReporter einu sinni á 5 mínútna fresti fyrir alla hætti, eins og reglur þjónustunnar biðja um; hlustandi helst á kortinu í að minnsta kosti 11 mínútur. Smellur á þríhyrninginn sýnir kallmerki, staðsetningu, afkóðunarforrit og tímann sem hlustandinn var virkur. Kveikt sjálfgefið.
-LI|FT8 yfir 1100 km án samsíða leiða: FT8-spott (frá PSKReporter MQTT, klösum eða WSJT-X um UDP) milli stöðva sem eru meira en 1100 km hvor frá annarri og hefur engar samsíða leiðir á 3 mínútum fyrir og eftir (sama band, miðpunktur innan 300 km, stefna innan 15°, annað stöðvapar) er teiknað ljósgrænt og lína þess í töflunni neðst til hægri blikkar alltaf. Sporadískt E og tropo gefa margar nálægar, samsíða leiðir; stakt spott getur verið loftsteinaslóð. Þess vegna tekur YA-MS líka við FT8-spottum frá MQTT á 6 m, 4 m, 2 m, 1,25 m og 70 cm (aldrei 28 MHz, í engu tilviki). Þessi spott fara ekki í MS-safnið. Kveikt sjálfgefið. Viðbótarprófanir með PSKReporter MQTT: spottið er ekki stakt ef móttökustöðin heyrir í MQTT aðrar stöðvar yfir 1100 km á sama bandi innan 3 mínútna (opið band); spott frá klösum og RBN gilda aðeins ef sama par kemur líka um MQTT; RBN-skimmerar (kallmerki með «-#») gilda aldrei.
-LI|WSJT-X-spott um UDP sem varða stöðina þína (afkóðunin inniheldur kallmerkið þitt: sá sem kallar á þig eða svarar þér) eru teiknuð með strikalínu sem blikkar alltaf, í öllum háttum og í hvaða fjarlægð sem er.
-LI|Skipti milli notenda YA-MS: þegar annar notandi YA-MS afkóðar um UDP skilaboð til stöðvar þinnar (í MSK144, FSK441, PSK2K eða JTMS, eða í FT8 yfir 1100 km) sendir YA-MS hans þér þau dulkóðuð um þrjá opinbera MQTT-miðlara (HiveMQ, Mosquitto, EMQX); þú sérð þau sem fjólubláa strikalínu sem blikkar alltaf og sem línu í UDP-stjórnborðinu. Aðeins þú getur lesið þau (ECDH P-256 lyklar, AES-256 og HMAC-SHA256). FT8-spott birtast aðeins ef þau hafa engar samsíða leiðir innan 3 mínútna. Kveikt sjálfgefið; yams_scambio=0 í data/config.ini slekkur á því.
+LI|FT8 yfir 1100 km án samsíða leiða: FT8-spott (frá PSKReporter MQTT, klösum eða WSJT-X um UDP) milli stöðva sem eru meira en 1100 km hvor frá annarri og hefur engar samsíða leiðir á 3 mínútum fyrir og eftir (sama band, miðpunktur innan 300 km, stefna innan 15°, annað stöðvapar) er teiknað ljósgrænt, eins og lína þess í töflunni neðst til hægri (án blikks). Sporadískt E og tropo gefa margar nálægar, samsíða leiðir; stakt spott getur verið loftsteinaslóð. Þess vegna tekur YA-MS líka við FT8-spottum frá MQTT á 6 m, 4 m, 2 m, 1,25 m og 70 cm (aldrei 28 MHz, í engu tilviki). Þessi spott fara ekki í MS-safnið. Kveikt sjálfgefið. Viðbótarprófanir með PSKReporter MQTT: spottið er ekki stakt ef móttökustöðin heyrir í MQTT aðrar stöðvar yfir 1100 km á sama bandi innan 3 mínútna (opið band); spott frá klösum og RBN gilda aðeins ef sama par kemur líka um MQTT; RBN-skimmerar (kallmerki með «-#») gilda aldrei.
+LI|Afkóðanir úr þínu WSJT-X um UDP þar sem mótstöð svarar þér (fyrsta kallmerki skilaboðanna er þitt) eru teiknaðar með blikkandi strikalínu, í hvaða sendiham og fjarlægð sem er, og lína þeirra í töflunni blikkar á gulum grunni. Þetta er eina tilvikið þar sem eitthvað blikkar.
+LI|Skipti milli notenda YA-MS: þegar annar notandi YA-MS afkóðar um UDP skilaboð til stöðvar þinnar (í MSK144, FSK441, PSK2K eða JTMS, eða í FT8 yfir 1100 km) sendir YA-MS hans þér þau dulkóðuð um þrjá opinbera MQTT-miðlara (HiveMQ, Mosquitto, EMQX); þú sérð þau sem fasta fjólubláa strikalínu og sem línu í UDP-stjórnborðinu. Aðeins þú getur lesið þau (ECDH P-256 lyklar, AES-256 og HMAC-SHA256). FT8-spott birtast aðeins ef þau hafa engar samsíða leiðir innan 3 mínútna. Kveikt sjálfgefið; yams_scambio=0 í data/config.ini slekkur á því.
 LI|Spott allra banda eru sýnd, líka banda sem ekki eru valin í Gagnasöfnun (þau eru ekki vistuð). CW-spott og spott milli stöðva sem eru of nálægt eru ekki sýnd ef þeim er hent í Gagnasöfnun.
 LI|Kortið sýnir kallmerki beggja stöðva hvers spotts, einu sinni á hverja stöð. Vörpunin getur verið jafnfjarlæg (miðuð á þína stöð) eða Mercator. Ábendingin á dálknum drífusvæði útdrífusvæði merkingu hans.
 H2|9.2 Ratsjárflæði
@@ -202,6 +204,7 @@ P|Skráin sem allir útreikningar nota: drífurnar í dagatali IMO fyrir 2026 og
 LI|Kóði, heiti, virknitímabil, sólarlengd hámarksins, næsta hámark (UTC) og heimild þess (IMO eða reiknað), geislapunktur, hraði, fjöldastuðull r, ZHR, tegund (sjónræn eða dagdrífa á radíó).
 LI|k: veldisvísir tíðniyfirfærslunnar út frá fjöldastuðlinum (GMN ef til staðar, annars IMO).
 LI|IAU MDC: lausnir, Δ geislapunktur, Δλ, Δv: samanburður við skrá IAU Meteor Data Center (birtar lausnir og frávik drífuskrár forritsins frá miðgildi þeirra).
+LI|IAU MDC-skráin fylgir nú þegar pökkunum (data/cataloghi), svo samanburðurinn virkar frá fyrstu ræsingu, líka án beinna heimilda; með beinar heimildir virkar er hún sótt aftur hljóðlega í mesta lagi einu sinni í mánuði.
 LI|GMN í dag: staðfestar brautir í nýjustu daglegu skrá Global Meteor Network.
 TAG|NOTA|Skráin er skráin data/sciami.csv og hámörk IMO eru í data/massimi_imo.csv: breyta má þeim með textaritli. Röng lína er tilkynnt við ræsingu og hunsuð.
 H1|11. Reitakort

@@ -1,5 +1,5 @@
 TITLE|YA-MS Kullanım Kılavuzu
-SUB|Sürüm 1.8.15 - hazırlayan: Costantino IC8TEM - Kasım 2026
+SUB|Sürüm 1.8.19 - hazırlayan: Costantino IC8TEM - Kasım 2026
 H1|1. Giriş
 H2|1.1 YA-MS ne işe yarar
 P|YA-MS, istasyonunuz ile bir karşı istasyon arasındaki meteor scatter koşullarını 28'den 432 MHz'e kadar önceden tahmin etmenize ve canlı olarak izlemenize yardımcı olur. Etkin her meteor yağmuru için, radyantının konumunun yolunuzu ne kadar desteklediğini (verim), hangi saatlerde, yansımaların yolun hangi tarafından geldiğini ve antenin nereye yönlendirilmesi gerektiğini söyler. Tahminin yanında canlı ölçülen verileri gösterir: Collm meteor radarının sayımları, Global Meteor Network kameraları, CMOR radarı, GRAVES vericisi ve cluster'lardan ve PSKReporter'dan toplanan meteor scatter trafiği.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): sudo apt install ./ya-ms_<sürüm>_amd64.deb il
 LI|Raspberry Pi 3, 4, 5, 400 ve 500: raspberry-pi-64bit paketi (Raspberry Pi OS 64 bit) veya raspberry-pi-32bit, .tar.gz ya da .deb olarak.
 LI|Diğer ARM Linux sistemleri (örneğin Slackware ARM64 veya armv7l kartlar): Linux'taki gibi .tar.gz biçiminde linux-arm64 veya linux-armv7l paketi.
 LI|ARM üzerinde Windows (Snapdragon'lu PC'ler): windows-arm64 paketi. Fedora ve openSUSE: sudo dnf install veya sudo zypper install ile .rpm paketi (x86_64 veya aarch64).
+LI|Windows 7 SP1, 8 ve 8.1: windows7-x64 ve windows7-x86 paketleri (kurulum ya da taşınabilir zip), bu sistemlerde çalışan son sürüm olan .NET 6 ile derlenmiştir. Windows 7 için KB2533623 ve KB2999226 güncelleştirmeleri gerekir. Diğer Windows paketleri Windows 10 veya 11 ister: daha eski bir Windows'ta kurulum programı bunu hemen söyler.
 LI|Arch, Manjaro ve Arch Linux ARM: sudo pacman -U ile .pkg.tar.zst paketi. Slackware64 ve Slackware ARM64: root olarak installpkg ile .txz paketi. Herhangi bir Linux: çalıştırılabilir yapılıp başlatılan AppImage (x86_64 veya aarch64). Alpine Linux: .tar.gz biçiminde alpine-x64 veya alpine-arm64 paketi.
 LI|macOS: Apple Silicon (M1 ve sonrası) veya Intel için .dmg ya da app.zip. YA-MS.app'i kendinize ait bir klasöre sürükleyin (örneğin ~/YA-MS): data klasörü uygulamanın yanında oluşturulur.
 TAG|ATTENZIONE|Windows "Windows kişisel bilgisayarınızı korudu" iletisini gösterebilir: "Ek bilgi"yi, ardından "Yine de çalıştır"ı seçin. macOS'ta ilk seferde uygulamayı sağ tıklayıp "Aç" ile açın. Program ücretli bir sertifikayla imzalanmamıştır.
@@ -70,6 +71,7 @@ LI|Saat: UTC saati.
 LI|Hesap tarihi (UTC): hesabın günü. Tahmin hesabı, Verim hesabı'ndaki 24 saatlik tablo ve GRAVES radarı'ndaki kronoloji için geçerlidir. Başlangıçta bugündür ve gece yarısı yeni güne geçer.
 LI|Saatler (−12 ile +36 sa arası): hesap anını 15 dakikalık adımlarla kaydırır. Yanında: "Hesap zamanı: şimdi" ya da seçilen tarih ve saat.
 LI|Gerçek zaman: şu ana döner.
+LI|Zaman çizgisi («Saatler (−12 ile +36 sa arası)» ve «Gerçek zaman») Tahmin hesabı sekmesinin en üstündedir, çünkü yalnızca o hesap için geçerlidir.
 H2|4.4 Kendi istasyonunuzu ayarlama
 TAG|PROCEDURA|1) Benim lokatörüm ve rakımı yazın. 2) Karşı istasyonun lokatörünü ve rakımını yazın ya da Tahmin hesabı haritasına tıklayın: sol tık = karşı istasyon, sağ tık = sizin istasyonunuz. 3) Bandı seçin. 4) Anteninizin boom uzunluğunu ve lob elevasyonunu yazın. 5) Hesapla'ya basın: durum çubuğu "Yol hesaplandı: ... km, ... yansıma noktası örneklendi" ile onaylar.
 TAG|NOTA|Ayarlar kapanışta ve her hesapta data/config.ini dosyasına kaydedilir: bir sonraki açılışta aynı yolu bulursunuz.
@@ -116,11 +118,11 @@ LI|BANTLAR ARASI DENEYSEL KURALLAR: 144 MHz'e göre yansımaların sayısı, şi
 TAG|NOTA|Pozitif bir pay, ortalama düşük yoğunluklu bir izin istasyonunuzla yolu kapatmaya yettiğini; negatif bir pay ise daha yoğun izlere veya yüksek yoğunluklu meteorlara ihtiyaç olduğunu söyler. Bu bir tahmindir: asıl ölçüt banttaki deneyimdir.
 H1|7. Verim hesabı
 P|Verim, bir yağmurun radyant konumunun yolunuzda yansımaya ne ölçüde olanak tanıdığını yüzde olarak söyler: %100, o yol için en elverişli konumdur. Bu alt sekme verimi, "Hesap tarihi" gününün her saati için, saat ortasındaki değerlerle gösterir.
-H2|7.1 Dört kutu
+H2|7.1 Sekmelerin üstündeki şerit
+P|Bu kutular saat satırının altında, sekmelerin üstündeki bir şeritte durur; komut satırları katlansa bile her zaman görünür: solda seçilen günün iki kutusu, ardından şimdiden başlayan altı tahmin ufku.
 LI|GÜNÜN EN İYİ SAATİ: yol endeksinin en yüksek olduğu saat ve baskın taraf.
 LI|EN ELVERİŞLİ YAĞMUR: en çok katkı yapan yağmur; saati, tarafı ve iki en iyi yönlendirmesiyle.
-LI|ŞİMDİ: bu saatteki endeks ve taraf ile önerilen Hot (yalnızca seçilen gün bugünse).
-LI|DENEYSEL TAHMİN: şimdi, 1 saat sonra ve 2 saat sonra beklenen saatlik yansıma sayısı (bölüm 8).
+LI|ŞİMDİ · 1, 3, 6, 12 VE 24 SAAT SONRA: her ufuk için orada başlayan saatin ortalaması (dört örnek): hat indeksi, baskın taraf, en çok katkı yapan yağmur ve radar verisi varsa deneysel tahminin saatlik yansımaları. ŞİMDİ kutusunda radar verisi yoksa önerilen Hot gösterilir. Her dakika güncellenir.
 P|Bir kutuda değer yoksa nedenini söyler: ortak bölge yok, etkin yağmur yok ya da radyantlar bütün gün elverişsiz. Her kutunun ipucu balonu ne gösterdiğini açıklar. Kutuların altında, gerektiğinde ORTAK BÖLGE YOK uyarısı ve A ile B harflerini açıklayan bir şerit bulunur.
 H2|7.2 Hesap ayarı
 LI|Temkinli (başlangıç ayarı): iz yüksekliği radardan, normal izler, β açısı açık. En düşük değerleri verir.
@@ -159,16 +161,16 @@ LI|Değerlendirmeli tablo: 24 saatin ortalamasına göre iyi, orta veya zayıf.
 TAG|NOTA|Yansımaların süresi, Geometri ve yol kaybı'ndaki "Bantlar arası ping süresi" seçimini izler; forward scatter'da süre, yolun orta noktasında sec²φ ile de artar.
 H1|9. Canlı ve gerçek zamanlı veriler
 H2|9.1 Canlı trafik
-P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin yağmur bölgesi. Yeni gelen spot'lar bir dakika boyunca yanıp söner.
+P|İstasyonunuzu merkez alan, toplanan tüm meteor scatter trafiğini gösteren bir azimutal eşit uzaklıklı harita: her bağlantı için bant renginde yol (28 kahverengi, 50 yeşil, 70 camgöbeği, 144 turuncu, 222 pembe, 432 mor), iki istasyon ve o saatteki en olası izlerin yağmur bölgesi. Yalnızca bir muhabirin size cevap verdiği WSJT-X (UDP) kod çözmeleriniz yanıp söner.
 LI|Harita yarıçapı: 600-3500 km. Gösterilecek spot'lar: son 3, 15 veya 30 dakika, son bir saat, son 3 veya 24 saat.
 LI|Mercator haritası fareyle sürüklenerek taşınır; çift tıklama: yeniden istasyonuma ortalanır. Azimutal harita istasyonuma ortalı kalır.
 LI|Bir yola veya tablonun bir satırına tıklamak bağlantıyı vurgular ve yağmur bölgesi merkezini, yüksekliğini ve boyutlarını gösterir.
 LI|Seçilen bağlantının veya dinleyen istasyonun ayrıntıları, haritanın üzerinde sol üstte, hem azimutal hem Mercator izdüşümünde kabartmalı bir kutuda görünür.
 LI|Kimin dinlediğini göster: bant renginde üçgenler, PSKReporter'a göre seçilen zaman aralığında 28, 50, 70, 144 ve 432 MHz'de MSK144, FSK441, PSK2K veya JTMS alan istasyonları gösterir. Bir üçgene tıklamak çağrı işaretini, lokatörü, modları ve son spotu gösterir. Veri toplama sekmesindeki MQTT akışı bağlı olmalıdır.
 LI|PSKReporter haritasındaki aktif monitörler de: pskreporter.info haritasında MSK144, FSK441, PSK2K veya JTMS ile görünen ama henüz hiç spot almamış istasyonlar için boş üçgenler (MQTT yalnızca bir şey alan istasyonları gönderir). YA-MS, PSKReporter sorgu hizmetini tüm modlar için 5 dakikada bir sorgular, hizmetin kurallarının istediği gibi; bir monitör haritada en az 11 dakika kalır. Üçgene tıklamak çağrı işaretini, lokatörü, kod çözme programını ve monitörün aktif olduğu saati gösterir. Varsayılan olarak açık.
-LI|Paralel hattı olmayan 1100 km üzeri FT8: 1100 km'den uzak istasyonlar arasında, öncesi ve sonrasındaki 3 dakikada paralel hattı olmayan (aynı bant, orta nokta 300 km içinde, yön 15° içinde, başka bir istasyon çifti) bir FT8 spotu (PSKReporter MQTT, kümeler veya UDP üzerinden WSJT-X'ten) açık yeşil çizilir ve sağ alttaki tablodaki satırı her zaman yanıp söner. Sporadik E ve tropo çok sayıda yakın, paralel hat verir; yalnız bir spot bir meteor izi olabilir. Bu yüzden YA-MS, MQTT'den 6 m, 4 m, 2 m, 1,25 m ve 70 cm FT8 spotlarını da alır (28 MHz asla). Bu spotlar MS arşivine girmez. Varsayılan olarak açık. PSKReporter MQTT ile ek denetimler: alıcı istasyon MQTT'de 3 dakika içinde aynı bantta 1100 km ötesindeki başka istasyonları duyuyorsa spot yalnız sayılmaz (bant açık); kümelerin ve RBN'nin spotları yalnızca aynı çift MQTT'den de gelirse geçerlidir; RBN skimmer'ları («-#» içeren çağrı işaretleri) asla geçerli değildir.
-LI|İstasyonunuzu ilgilendiren UDP üzerinden WSJT-X spotları (kod çözmede çağrı işaretiniz var: sizi çağıran veya size yanıt veren) her zaman yanıp sönen kesikli çizgiyle çizilir, her modda ve her mesafede.
-LI|YA-MS kullanıcıları arasında değişim: başka bir YA-MS kullanıcısı istasyonunuza yönelik bir mesajı UDP ile çözdüğünde (MSK144, FSK441, PSK2K veya JTMS'de ya da 1100 km üzeri FT8'de), onun YA-MS'i bunu size üç açık MQTT aracısı (HiveMQ, Mosquitto, EMQX) üzerinden şifreli gönderir; bunu her zaman yanıp sönen mor kesikli çizgi ve UDP konsolunda bir satır olarak görürsünüz. Yalnızca siz okuyabilirsiniz (ECDH P-256 anahtarları, AES-256 ve HMAC-SHA256). FT8 spotları yalnızca 3 dakika içinde paralel hatları yoksa gösterilir. Varsayılan olarak açık; data/config.ini içinde yams_scambio=0 kapatır.
+LI|Paralel hattı olmayan 1100 km üzeri FT8: 1100 km'den uzak istasyonlar arasında, öncesi ve sonrasındaki 3 dakikada paralel hattı olmayan (aynı bant, orta nokta 300 km içinde, yön 15° içinde, başka bir istasyon çifti) bir FT8 spotu (PSKReporter MQTT, kümeler veya UDP üzerinden WSJT-X'ten) açık yeşil çizilir; sağ alttaki tablodaki satırı da öyledir (yanıp sönmeden). Sporadik E ve tropo çok sayıda yakın, paralel hat verir; yalnız bir spot bir meteor izi olabilir. Bu yüzden YA-MS, MQTT'den 6 m, 4 m, 2 m, 1,25 m ve 70 cm FT8 spotlarını da alır (28 MHz asla). Bu spotlar MS arşivine girmez. Varsayılan olarak açık. PSKReporter MQTT ile ek denetimler: alıcı istasyon MQTT'de 3 dakika içinde aynı bantta 1100 km ötesindeki başka istasyonları duyuyorsa spot yalnız sayılmaz (bant açık); kümelerin ve RBN'nin spotları yalnızca aynı çift MQTT'den de gelirse geçerlidir; RBN skimmer'ları («-#» içeren çağrı işaretleri) asla geçerli değildir.
+LI|WSJT-X'inizin UDP üzerinden gelen ve bir muhabirin size cevap verdiği kod çözmeleri (mesajın ilk çağrı işareti sizinkidir) her modda ve her mesafede yanıp sönen kesikli bir çizgiyle çizilir; tablodaki satırları da sarı zemin üzerinde yanıp söner. Bir şeyin yanıp söndüğü tek durum budur.
+LI|YA-MS kullanıcıları arasında değişim: başka bir YA-MS kullanıcısı istasyonunuza yönelik bir mesajı UDP ile çözdüğünde (MSK144, FSK441, PSK2K veya JTMS'de ya da 1100 km üzeri FT8'de), onun YA-MS'i bunu size üç açık MQTT aracısı (HiveMQ, Mosquitto, EMQX) üzerinden şifreli gönderir; bunu sabit mor kesikli çizgi ve UDP konsolunda bir satır olarak görürsünüz. Yalnızca siz okuyabilirsiniz (ECDH P-256 anahtarları, AES-256 ve HMAC-SHA256). FT8 spotları yalnızca 3 dakika içinde paralel hatları yoksa gösterilir. Varsayılan olarak açık; data/config.ini içinde yams_scambio=0 kapatır.
 LI|Veri toplama'da seçilmemiş olanlar da dahil tüm bantların spotları gösterilir (bunlar kaydedilmez). CW spotları ve birbirine çok yakın istasyonlar arasındaki spotlar, Veri toplama'da atılıyorsa gösterilmez.
 LI|Haritada her spotun iki istasyonunun çağrı işareti yazılır, istasyon başına bir kez. İzdüşüm seçilebilir: azimutal (merkezde istasyonun) veya Mercator. yağmur bölgesi sütunundaki ipucu anlamını açıklar.
 H2|9.2 Radar akısı
@@ -202,6 +204,7 @@ P|Tüm hesapların kullandığı katalog: IMO 2026 ve 2027 takvimindeki yağmurl
 LI|Kod, ad, etkinlik dönemi, maksimumun güneş boylamı, sonraki maksimum (UTC) ve kaynağı (IMO veya hesaplanmış), radyant, hız, r popülasyon indeksi, ZHR, tür (görsel veya gündüz radyo).
 LI|k: popülasyon indeksinden frekans ölçeklemesinin üssü (varsa GMN, yoksa IMO).
 LI|IAU MDC: çözümler, Δ radyant, Δλ, Δv: IAU Meteor Data Center kataloğuyla karşılaştırma (yayımlanmış çözümler ve program kataloğunun bunların medyanından farkları).
+LI|IAU MDC kataloğu paketlerin içinde zaten geliyor (data/cataloghi), böylece karşılaştırma canlı kaynaklar olmadan da ilk açılıştan itibaren çalışır; canlı kaynaklar açıkken ayda en fazla bir kez sessizce yeniden indirilir.
 LI|GMN bugün: Global Meteor Network'ün son günlük dosyasında doğrulanmış yörüngeler.
 TAG|NOTA|Katalog data/sciami.csv dosyasıdır ve IMO maksimumları data/massimi_imo.csv dosyasındadır: bir metin düzenleyiciyle değiştirilebilirler. Hatalı bir satır açılışta bildirilir ve yok sayılır.
 H1|11. Kare haritası

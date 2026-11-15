@@ -9,7 +9,8 @@ Nessun dato in AppData: tutto sta nella cartella `data` accanto al programma.
 
 | Sistema | Pacchetto (pagina Releases) | Aggiornamento automatico |
 |---|---|---|
-| Windows 64 bit, 32 bit, ARM64 (Snapdragon) | `-win-x64-setup.exe`, `-win-x86-`, `-win-arm64-` oppure gli zip portatili | sì |
+| Windows 10 e 11: 64 bit, 32 bit, ARM64 (Snapdragon) | `-win-x64-setup.exe`, `-win-x86-`, `-win-arm64-` oppure gli zip portatili | sì |
+| Windows 7 SP1, 8 e 8.1 (64 e 32 bit, .NET 6) | `-win7-x64-setup.exe`, `-win7-x86-` oppure gli zip portatili `-win7-...` | sì |
 | Mac Apple Silicon e Intel | `-osx-arm64.dmg`, `-osx-x64.dmg` oppure `-app.zip` | sì |
 | Qualsiasi Linux x86_64 e aarch64 | `.AppImage` oppure `-linux-x64-portatile.tar.gz`, `-linux-arm64-portatile.tar.gz` | sì |
 | Raspberry Pi OS 64 e 32 bit, Linux armv7l | `-linux-arm64-`, `-linux-arm-`, `-linux-armv7l-portatile.tar.gz` | sì |

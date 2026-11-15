@@ -791,9 +791,9 @@ Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (tri
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto	สถานีเฝ้าฟังที่ใช้งานอยู่บนแผนที่ PSKReporter เวลา {0} UTC ยังไม่ได้รับสปอต
 {0} solo monitor attivi	{0} สถานีเฝ้าฟังเท่านั้น
 mappa di PSKReporter non raggiungibile: {0}	เข้าถึงแผนที่ PSKReporter ไม่ได้: {0}
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 ไกลกว่า 1100 กม. ที่ไม่มีเส้นทางขนานภายใน 3 นาที (สีเขียวอ่อน แถวกะพริบตลอด)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)	FT8 ไกลกว่า 1100 กม. ที่ไม่มีเส้นทางขนานภายใน 3 นาที (สีเขียวอ่อน)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 ไกลกว่า 1100 กม. ที่ไม่มีเส้นทางขนานภายใน 3 นาที: ไม่เหมือน E แบบสุ่มหรือโทรโป อาจเป็นการกระเจิงจากดาวตก
-WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: การถอดรหัสเกี่ยวกับสถานีของฉัน
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)	WSJT-X UDP: คู่สถานีตอบกลับฉัน (ข้อความถึงสถานีของฉัน)
 Impostazioni	การตั้งค่า
 Aspetto	ลักษณะ
 Tema e lingua sono anche in alto a destra, accanto alle linguette.	ธีมและภาษาอยู่มุมขวาบนข้างแท็บด้วย
@@ -812,9 +812,16 @@ Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	{0} ได้�
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	เขตฝนดาวตก {0}: {1:F0} % ของการสะท้อน, {2:F0} × {3:F0} km, แกนที่ {4:F0}°
 zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	คำนวณเขตฝนดาวตกสำหรับเส้นทางนี้ไม่ได้ (สั้นหรือยาวเกินไป)
 Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	คลิกเส้นทางบนแผนที่หรือแถวในตารางเพื่อดูรายละเอียดของการติดต่อและเขตฝนดาวตก
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	สปอตจากแท็บ "การเก็บข้อมูล" สำหรับแต่ละการติดต่อ เขตฝนดาวตกแสดงว่ารอยดาวตกที่น่าจะเป็นที่สุดของเส้นทางและเวลานั้นรวมกันอยู่ที่ใด (การสะท้อนแบบกระจก ผลรวมของฝนดาวตกที่ใช้งานอยู่) เขตเส้นประ = ดาวตกประปรายเท่านั้น สปอตที่มีสถานีอยู่นอกแผนที่จะไม่ถูกวาด สปอตที่เพิ่งมาถึง (น้อยกว่า 3 นาที) จะกะพริบหนึ่งนาที
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.	สปอตจากแท็บ "การเก็บข้อมูล" สำหรับแต่ละการติดต่อ เขตฝนดาวตกแสดงว่ารอยดาวตกที่น่าจะเป็นที่สุดของเส้นทางและเวลานั้นรวมกันอยู่ที่ใด (การสะท้อนแบบกระจก ผลรวมของฝนดาวตกที่ใช้งานอยู่) เขตเส้นประ = ดาวตกประปรายเท่านั้น สปอตที่มีสถานีอยู่นอกแผนที่จะไม่ถูกวาด จะกะพริบเฉพาะการถอดรหัสจาก WSJT-X ของฉัน (UDP) ที่คู่สถานีตอบกลับฉันเท่านั้น
 % sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% ฝน: สัดส่วนการสะท้อนที่ใช้ได้ของเส้นทางนั้นในเวลานั้นที่ตกอยู่ในเขตฝนดาวตกบนแผนที่ (การสะท้อนแบบกระจก ผลรวมของฝนดาวตกที่ใช้งานอยู่) ยิ่งสูง รอยดาวตกที่ดียิ่งรวมอยู่ในพื้นที่เดียวที่ควรหันสายอากาศไป "ประปราย" = ไม่มีฝนดาวตกใดให้การสะท้อนที่ใช้ได้ เหลือเพียงดาวตกประปรายทั้งสองข้างของเส้นทาง (เขตเส้นประ)
 Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	แผนที่เมอร์เคเตอร์เลื่อนได้โดยลากด้วยเมาส์ ดับเบิลคลิก: กลับมาอยู่กึ่งกลางที่สถานีของฉัน แผนที่แบบแอซิมัททัลยังอยู่กึ่งกลางที่สถานีของฉัน
 Memorizza	บันทึก
 Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	โลเคเตอร์ที่พิมพ์ต่างจากในฐานข้อมูล CALL3: กดเพื่ออัปเดตและบันทึก (รายการกรอกเอง เขียนลงใน call3.txt ทันทีด้วย)
 {0} memorizzato nel CALL3: {1}	บันทึก {0} ใน CALL3 แล้ว: {1}
+TRA 1 ORA	อีก 1 ชั่วโมง
+TRA {0} ORE	อีก {0} ชั่วโมง
+lato {0} · {1}	ด้าน {0} · {1}
+nessuno sciame utile	ไม่มีฝนดาวตกที่ใช้ได้
+{0:F0} rifl./ora previste	คาด {0:F0} การสะท้อน/ชั่วโมง
+indice {0:F1}	ดัชนี {0:F1}
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.	พยากรณ์สำหรับเส้นทางที่เลือก: ค่าเฉลี่ยของชั่วโมงที่เริ่มที่ช่วงเวลานั้น (สี่ตัวอย่างต่อชั่วโมง) ดัชนีเส้นทาง = ผลรวมของ ZHR × ประสิทธิภาพของฝนดาวตกที่ยังมีอยู่ จากนั้นคือด้านหลักของเส้นทางและฝนดาวตกที่มีส่วนมากที่สุด การสะท้อนต่อชั่วโมงมาจากการพยากรณ์ทดลอง (เรดาร์ Collm กฎของ SM6FHZ) เมื่อมีข้อมูลเรดาร์

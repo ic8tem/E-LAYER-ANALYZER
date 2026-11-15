@@ -789,9 +789,9 @@ Anche i monitor attivi della mappa di PSKReporter, pure senza spot ricevuti (tri
 monitor attivo sulla mappa di PSKReporter alle {0} UTC, nessuno spot ricevuto	aktiv monitor på PSKReporter-kortet kl. {0} UTC, ingen spots modtaget
 {0} solo monitor attivi	{0} kun aktive monitorer
 mappa di PSKReporter non raggiungibile: {0}	PSKReporter-kortet kan ikke nås: {0}
-FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro, la riga lampeggia sempre)	FT8 over 1100 km uden parallelle strækninger inden for 3 minutter (lysegrøn, rækken blinker altid)
+FT8 oltre i 1100 km senza tratte parallele nei 3 minuti (verde chiaro)	FT8 over 1100 km uden parallelle strækninger inden for 3 minutter (lysegrøn)
 FT8 oltre i 1100 km senza tratte parallele nei 3 minuti: non ha l'aspetto dell'E-sporadico o della tropo, può essere meteor scatter	FT8 over 1100 km uden parallelle strækninger inden for 3 minutter: ligner ikke sporadisk E eller tropo, kan være meteorscatter
-WSJT-X UDP: la decodifica riguarda la mia stazione	WSJT-X UDP: dekodningen vedrører min station
+WSJT-X UDP: un corrispondente mi risponde (messaggio rivolto alla mia stazione)	WSJT-X UDP: en modstation svarer mig (besked til min station)
 Impostazioni	Indstillinger
 Aspetto	Udseende
 Tema e lingua sono anche in alto a destra, accanto alle linguette.	Tema og sprog findes også øverst til højre ved fanerne.
@@ -810,9 +810,16 @@ Sentito da {0} (YA-MS): il messaggio è rivolto alla mia stazione	Hørt af {0} (
 zona dello sciame {0}: {1:F0} % delle riflessioni, {2:F0} × {3:F0} km, asse a {4:F0}°	sværmzone {0}: {1:F0} % af refleksionerne, {2:F0} × {3:F0} km, akse ved {4:F0}°
 zona dello sciame non calcolabile per questa tratta (troppo corta o troppo lunga)	sværmzonen kan ikke beregnes for denne strækning (for kort eller for lang)
 Clic su una tratta della mappa o su una riga della tabella per i dettagli del contatto e della sua zona dello sciame.	Klik på en strækning på kortet eller en række i tabellen for detaljer om forbindelsen og dens sværmzone.
-Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano; quelli appena arrivati (meno di 3 minuti) lampeggiano per un minuto.	Spots fra fanen "Dataindsamling". For hver forbindelse viser sværmzonen, hvor de mest sandsynlige spor for den strækning og det tidspunkt samles (spejlrefleksion, sum af aktive sværme); stiplede zoner = kun sporadiske meteorer. Spots med en station uden for kortet tegnes ikke; netop ankomne (under 3 minutter) blinker i et minut.
+Spot della linguetta "Raccolta dati". Per ogni contatto la zona dello sciame indica dove si concentrano le scie più probabili per quella tratta e quell'ora (riflessione speculare, somma degli sciami attivi); zone tratteggiate = solo meteore sporadiche. Gli spot con una stazione fuori dalla mappa non si disegnano. Lampeggiano solo le decodifiche della mia WSJT-X (UDP) in cui un corrispondente mi risponde.	Spots fra fanen "Dataindsamling". For hver forbindelse viser sværmzonen, hvor de mest sandsynlige spor for den strækning og det tidspunkt samles (spejlrefleksion, sum af aktive sværme); stiplede zoner = kun sporadiske meteorer. Spots med en station uden for kortet tegnes ikke. Kun dekodninger i min WSJT-X (UDP), hvor en modstation svarer mig, blinker.
 % sciame: quota delle riflessioni utili di quella tratta, a quell'ora, che cade nella zona dello sciame disegnata sulla mappa (riflessione speculare, somma degli sciami attivi). Più è alta, più le scie buone sono concentrate in un'unica zona verso cui puntare l'antenna. "sporadiche" = nessuno sciame attivo dà riflessioni utili: restano solo le meteore sporadiche, ai due lati della tratta (zone tratteggiate).	% sværm: andelen af strækningens nyttige refleksioner på det tidspunkt, der falder i sværmzonen på kortet (spejlrefleksion, sum af aktive sværme). Jo højere, jo mere er de gode spor samlet i ét område at rette antennen mod. "sporadiske" = ingen aktiv sværm giver nyttige refleksioner: kun sporadiske meteorer er tilbage, på begge sider af strækningen (stiplede zoner).
 Il Mercatore si sposta trascinandolo con il mouse; doppio clic: di nuovo centrato sulla mia stazione. L'azimutale resta centrata sulla mia stazione.	Mercatorkortet flyttes ved at trække det med musen; dobbeltklik: centreret på min station igen. Det azimutale kort forbliver centreret på min station.
 Memorizza	Gem
 Il locator scritto è diverso da quello dell'archivio CALL3: premi per aggiornarlo e memorizzarlo (voce a mano, scritta subito anche dentro call3.txt).	Den indtastede locator afviger fra den i CALL3-arkivet: tryk for at opdatere og gemme den (manuel post, skrives straks også ind i call3.txt).
 {0} memorizzato nel CALL3: {1}	{0} gemt i CALL3: {1}
+TRA 1 ORA	OM 1 TIME
+TRA {0} ORE	OM {0} TIMER
+lato {0} · {1}	side {0} · {1}
+nessuno sciame utile	ingen brugbar sværm
+{0:F0} rifl./ora previste	{0:F0} refl./time ventet
+indice {0:F1}	indeks {0:F1}
+Previsione per la tratta scelta: media dell'ora che comincia a quell'orizzonte (quattro campioni nell'ora). Indice della tratta = somma di ZHR × efficienza degli sciami attivi; poi il lato prevalente della tratta e lo sciame che contribuisce di più. Le riflessioni all'ora vengono dalla previsione sperimentale (radar di Collm, regole SM6FHZ), quando c'è il dato del radar.	Prognose for den valgte strækning: gennemsnit for timen, der starter ved den horisont (fire prøver i timen). Strækningsindeks = summen af ZHR × effektivitet for de aktive sværme; derefter strækningens dominerende side og den sværm, der bidrager mest. Refleksioner pr. time kommer fra den eksperimentelle prognose (Collm-radaren, SM6FHZ's regler), når der er radardata.

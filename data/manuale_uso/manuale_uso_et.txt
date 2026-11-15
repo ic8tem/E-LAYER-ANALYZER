@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.15 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.19 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): .deb-pakett, mis paigaldatakse käsuga sudo apt
 LI|Raspberry Pi 3, 4, 5, 400 ja 500: pakett raspberry-pi-64bit (Raspberry Pi OS 64-bitine) või raspberry-pi-32bit, .tar.gz- või .deb-vormingus.
 LI|Muud ARM-Linuxi süsteemid (näiteks Slackware ARM64 või armv7l plaadid): pakett linux-arm64 või linux-armv7l, .tar.gz kujul, nagu Linuxi puhul.
 LI|Windows ARM-il (Snapdragoniga arvutid): pakett windows-arm64. Fedora ja openSUSE: .rpm-pakett (x86_64 või aarch64), käsuga sudo dnf install või sudo zypper install.
+LI|Windows 7 SP1, 8 ja 8.1: paketid windows7-x64 ja windows7-x86 (paigaldaja või kaasaskantav zip), koostatud .NET 6-ga, mis on viimane neil süsteemidel töötav. Windows 7 vajab uuendusi KB2533623 ja KB2999226. Teised Windowsi paketid nõuavad Windows 10 või 11: vanemas Windowsis ütleb paigaldaja seda kohe.
 LI|Arch, Manjaro ja Arch Linux ARM: pakett .pkg.tar.zst, käsuga sudo pacman -U. Slackware64 ja Slackware ARM64: pakett .txz, käsuga installpkg root-kasutajana. Mis tahes Linux: AppImage (x86_64 või aarch64), mis tehakse käivitatavaks ja käivitatakse. Alpine Linux: pakett alpine-x64 või alpine-arm64, .tar.gz kujul.
 LI|macOS: .dmg-fail Apple Siliconi (M1 ja uuemad) või Inteli jaoks või app.zip. Lohista YA-MS.app oma kausta (näiteks ~/YA-MS): kaust data luuakse rakenduse kõrvale.
 TAG|ATTENZIONE|Windows võib näidata teadet „Windows kaitses teie arvutit“: vali „Rohkem teavet“ ja seejärel „Käivita siiski“. macOS-is ava rakendus esimesel korral paremklõpsuga ja vali „Ava“. Programm pole allkirjastatud tasulise sertifikaadiga.
@@ -70,6 +71,7 @@ LI|Aeg: UTC kell.
 LI|Arvutuse kuupäev (UTC): arvutuse päev. Kehtib Prognoosarvutuse, Efektiivsuse arvutuse 24 tunni tabeli ja GRAVES-radari ajajoone kohta. Vaikimisi on see tänane päev ja keskööl läheb see üle uuele päevale.
 LI|Tunnid (−12 kuni +36 h): nihutab arvutuse hetke 15-minutiliste sammudega. Kõrval: „Arvutus ajale: praegu“ või valitud kuupäev ja kellaaeg.
 LI|Reaalaeg: naaseb praegusele hetkele.
+LI|Ajajoon («Tunnid (−12 kuni +36 h)» ja «Reaalaeg») on saki Prognoosarvutus ülaosas, sest see kehtib ainult selle arvutuse kohta.
 H2|4.4 Oma jaama seadistamine
 TAG|PROCEDURA|1) Kirjuta Minu lokaator ja kõrgus. 2) Kirjuta korrespondendi lokaator ja kõrgus või klõpsa Prognoosarvutuse kaardil: vasak klõps = korrespondent, parem klõps = sinu jaam. 3) Vali sagedusala. 4) Kirjuta oma antenni poomi pikkus ja peaharu kõrgusnurk. 5) Vajuta Arvuta: olekuriba kinnitab „Trass arvutatud: ... km, ... peegelduspunkti valimiga“.
 TAG|NOTA|Seaded salvestatakse faili data/config.ini programmi sulgemisel ja iga arvutuse järel: järgmisel käivitamisel leiad eest sama trassi.
@@ -116,11 +118,11 @@ LI|EKSPERIMENTAALSED REEGLID SAGEDUSALADE VAHEL: peegelduste arv, tugevus ja kes
 TAG|NOTA|Positiivne varu tähendab, et keskmisest alatihedast jäljest piisab trassi läbimiseks sinu jaamaga; negatiivne varu tähendab, et vaja on tihedamaid jälgi või ületihedaid meteoore. See on hinnang: aluseks jääb kogemus sagedusalal.
 H1|7. Efektiivsuse arvutus
 P|Efektiivsus näitab protsentides, kui palju meteoorivoolu radiandi asend võimaldab peegeldusi sinu trassil: 100 % on selle trassi jaoks kõige soodsam asend. See alamsakk näitab seda tund-tunnilt „Arvutuse kuupäeva“ päeva kohta, väärtustega iga tunni keskel.
-H2|7.1 Neli kasti
+H2|7.1 Riba sakkide kohal
+P|Need kastid on ribas ajarea all, sakkide kohal, alati nähtaval ka kokku volditud käsuridade korral: vasakul valitud päeva kaks kasti, siis kuus prognoosihorisonti, mis algavad praegusest hetkest.
 LI|PÄEVA PARIM AEG: kõrgeima trassi indeksiga tund ja valdav pool.
 LI|KÕIGE SOODSAM METEOORIVOOL: kõige suurema panusega meteoorivool koos tunni, poole ja kahe parima antennisuunaga.
-LI|PRAEGU: indeks ja pool selles tunnis ning soovitatud Hot (ainult siis, kui valitud päev on täna).
-LI|EKSPERIMENTAALNE PROGNOOS: oodatavad peegeldused tunnis praegu, 1 ja 2 tunni pärast (peatükk 8).
+LI|PRAEGU · 1, 3, 6, 12 JA 24 TUNNI PÄRAST: iga horisondi jaoks seal algava tunni keskmine (neli proovi): teekonna indeks, valdav pool, kõige rohkem panustav vool ja radari andmete olemasolul eksperimentaalse prognoosi peegeldused tunnis. Kastis PRAEGU näidatakse radari andmeteta soovitatud Hot. Uueneb iga minut.
 P|Kui kastis pole väärtusi, ütleb see põhjuse: ühisala puudub, aktiivset meteoorivoolu pole või radiandid on terve päeva ebasoodsad. Iga kasti kohtspikker selgitab, mida see näitab. Kastide all kuvatakse vajadusel hoiatus ÜHIST TSOONI POLE ja riba, mis selgitab tähti A ja B.
 H2|7.2 Arvutuse seadistus
 LI|Ettevaatlik (vaikimisi): jälgede kõrgus radarilt, tavalised jäljed, nurk β sisse lülitatud. Annab kõige madalamad väärtused.
@@ -159,16 +161,16 @@ LI|Tabel hinnanguga: hea, keskmine või kehv võrreldes 24 tunni keskmisega.
 TAG|NOTA|Peegelduste kestus järgib valikut „Pingide kestus sagedusalade vahel“ sakil Geomeetria ja sumbumine; forward scatteri korral kasvab kestus ka koos sec²φ-ga trassi keskpunktis.
 H1|9. Otse ja reaalajas andmed
 H2|9.1 Liiklus reaalajas
-P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede voo tsoon. Äsja saabunud spotid vilguvad ühe minuti.
+P|Sinu jaamale tsentreeritud asimuutne võrdkaugusprojektsioonis kaart kogu kogutud meteor scatteri liiklusega: iga side kohta trass sagedusala värvis (28 pruun, 50 roheline, 70 tsüaan, 144 oranž, 222 roosa, 432 violetne), kaks jaama ja selle tunni kõige tõenäolisemate jälgede voo tsoon. Vilguvad ainult sinu WSJT-X-i (UDP) dekodeeringud, milles korrespondent sulle vastab.
 LI|Kaardi raadius: 600-3500 km. Näidatavad spotid: viimased 3, 15 või 30 minutit, viimane tund, viimased 3 või 24 tundi.
 LI|Mercatori kaarti saab hiirega lohistades liigutada; topeltklõps: jälle minu jaama keskel. Asimuutkaart jääb minu jaama keskele.
 LI|Klõps trassil või tabeli real tõstab side esile ja näitab voo tsoon keskpunkti, selle kõrgust ja mõõtmeid.
 LI|Valitud side või kuulava jaama üksikasjad ilmuvad esiletõstetud kastis kaardi kohal üleval vasakul, nii asimutaal- kui ka Mercatori projektsiooniga.
 LI|Näita, kes kuulab: riba värvi kolmnurgad märgivad jaamu, mis PSKReporteri järgi võtavad valitud ajaaknas vastu MSK144, FSK441, PSK2K või JTMS režiimis 28, 50, 70, 144 ja 432 MHz sagedusel. Klõps kolmnurgal näitab kutsungit, lokaatorit, režiime ja viimast spotti. Vahekaardi Andmete kogumine MQTT-voog peab olema ühendatud.
 LI|Ka PSKReporteri kaardi aktiivsed monitorid: tühjad kolmnurgad jaamadele, mis on pskreporter.info kaardil MSK144, FSK441, PSK2K või JTMS režiimis, kuid pole veel ühtegi spotti vastu võtnud (MQTT saadab ainult jaamu, mis midagi vastu võtavad). YA-MS pärib PSKReporteri päringuteenust kord 5 minuti jooksul kõigi režiimide kohta, nagu teenuse reeglid nõuavad; monitor jääb kaardile vähemalt 11 minutiks. Klõps kolmnurgal näitab kutsungit, lokaatorit, dekodeerimisprogrammi ja aega, mil monitor oli aktiivne. Vaikimisi sees.
-LI|FT8 üle 1100 km ilma paralleelsete trassideta: FT8-spot (PSKReporteri MQTT-st, klastritest või WSJT-X-ist UDP kaudu) üle 1100 km kaugusel olevate jaamade vahel, millel pole 3 minuti jooksul enne ja pärast paralleelseid trasse (sama sagedusala, keskpunkt 300 km piires, suund 15° piires, teine jaamapaar), joonistatakse helerohelisena ja selle rida paremal all tabelis vilgub alati. Sporaadiline E ja troposfäär annavad palju lähedasi paralleelseid trasse; üksik spot võib olla meteoorijälg. Seepärast võtab YA-MS MQTT-st vastu ka 6 m, 4 m, 2 m, 1,25 m ja 70 cm FT8-spotid (mitte kunagi 28 MHz). Need spotid ei lähe MS-arhiivi. Vaikimisi sees. Lisakontrollid PSKReporteri MQTT-ga: spot ei ole üksik, kui vastuvõttev jaam kuuleb MQTT-s 3 minuti jooksul samal sagedusalal teisi jaamu üle 1100 km (avatud ala); klastrite ja RBN-i spotid kehtivad ainult siis, kui sama paar tuleb ka MQTT kaudu; RBN-i skimmerid (kutsungid «-#») ei kehti kunagi.
-LI|WSJT-X-i spotid UDP kaudu, mis puudutavad sinu jaama (dekodeering sisaldab sinu kutsungit: kes sind kutsub või sulle vastab), joonistatakse alati vilkuva katkendjoonega, igas režiimis ja igal kaugusel.
-LI|Vahetus YA-MS-i kasutajate vahel: kui mõni teine YA-MS-i kasutaja dekodeerib UDP kaudu sinu jaamale adresseeritud sõnumi (MSK144, FSK441, PSK2K või JTMS režiimis või FT8-s üle 1100 km), saadab tema YA-MS selle sulle krüptitult kolme avaliku MQTT-maakleri kaudu (HiveMQ, Mosquitto, EMQX); näed seda alati vilkuva violetse katkendjoonena ja reana UDP konsoolis. Ainult sina saad seda lugeda (ECDH P-256 võtmed, AES-256 ja HMAC-SHA256). FT8-spotte näidatakse ainult siis, kui neil pole 3 minuti jooksul paralleelseid trasse. Vaikimisi sees; yams_scambio=0 failis data/config.ini lülitab selle välja.
+LI|FT8 üle 1100 km ilma paralleelsete trassideta: FT8-spot (PSKReporteri MQTT-st, klastritest või WSJT-X-ist UDP kaudu) üle 1100 km kaugusel olevate jaamade vahel, millel pole 3 minuti jooksul enne ja pärast paralleelseid trasse (sama sagedusala, keskpunkt 300 km piires, suund 15° piires, teine jaamapaar), joonistatakse helerohelisena, nagu ka selle rida paremal all tabelis (ilma vilkumiseta). Sporaadiline E ja troposfäär annavad palju lähedasi paralleelseid trasse; üksik spot võib olla meteoorijälg. Seepärast võtab YA-MS MQTT-st vastu ka 6 m, 4 m, 2 m, 1,25 m ja 70 cm FT8-spotid (mitte kunagi 28 MHz). Need spotid ei lähe MS-arhiivi. Vaikimisi sees. Lisakontrollid PSKReporteri MQTT-ga: spot ei ole üksik, kui vastuvõttev jaam kuuleb MQTT-s 3 minuti jooksul samal sagedusalal teisi jaamu üle 1100 km (avatud ala); klastrite ja RBN-i spotid kehtivad ainult siis, kui sama paar tuleb ka MQTT kaudu; RBN-i skimmerid (kutsungid «-#») ei kehti kunagi.
+LI|Sinu WSJT-X-i UDP kaudu tulnud dekodeeringud, milles korrespondent sulle vastab (sõnumi esimene kutsung on sinu oma), joonistatakse vilkuva katkendjoonena igas modulatsioonis ja igal kaugusel ning nende rida tabelis vilgub kollasel taustal. See on ainus juhtum, kus midagi vilgub.
+LI|Vahetus YA-MS-i kasutajate vahel: kui mõni teine YA-MS-i kasutaja dekodeerib UDP kaudu sinu jaamale adresseeritud sõnumi (MSK144, FSK441, PSK2K või JTMS režiimis või FT8-s üle 1100 km), saadab tema YA-MS selle sulle krüptitult kolme avaliku MQTT-maakleri kaudu (HiveMQ, Mosquitto, EMQX); näed seda püsiva violetse katkendjoonena ja reana UDP konsoolis. Ainult sina saad seda lugeda (ECDH P-256 võtmed, AES-256 ja HMAC-SHA256). FT8-spotte näidatakse ainult siis, kui neil pole 3 minuti jooksul paralleelseid trasse. Vaikimisi sees; yams_scambio=0 failis data/config.ini lülitab selle välja.
 LI|Näidatakse kõigi sagedusalade spotte, ka nende, mida Andmekogumises ei ole valitud (neid ei salvestata). CW-spotte ja liiga lähedaste jaamade vahelisi spotte ei näidata, kui need Andmekogumises ära visatakse.
 LI|Kaardil kirjutatakse iga spoti mõlema jaama kutsung, üks kord jaama kohta. Projektsioon on valitav: asimuutne (keskel sinu jaam) või Mercator. Veeru voo tsoon kohtspikker selgitab selle tähendust.
 H2|9.2 Radari voog
@@ -202,6 +204,7 @@ P|Kõigi arvutuste kasutatav kataloog: IMO 2026. ja 2027. aasta kalendri meteoor
 LI|Kood, nimi, aktiivsusperiood, maksimumi päikesepikkus, järgmine maksimum (UTC) ja selle allikas (IMO või arvutatud), radiant, kiirus, populatsiooniindeks r, ZHR, tüüp (visuaalne või päevane raadio).
 LI|k: sageduse teisenduse astendaja populatsiooniindeksist (GMN, kui on saadaval, muidu IMO).
 LI|IAU MDC: lahendused, Δ radiant, Δλ, Δv: võrdlus IAU Meteor Data Centeri kataloogiga (avaldatud lahendused ja programmi kataloogi erinevused nende mediaanist).
+LI|IAU MDC kataloog on juba pakettides kaasas (data/cataloghi), nii et võrdlus töötab esimesest käivitusest alates ka ilma otseallikateta; sisselülitatud otseallikatega laaditakse see vaikselt uuesti alla kõige rohkem kord kuus.
 LI|GMN täna: kinnitatud trajektoorid Global Meteor Networki viimases päevafailis.
 TAG|NOTA|Kataloog on fail data/sciami.csv ja IMO maksimumid on failis data/massimi_imo.csv: neid saab muuta tekstiredaktoriga. Vigane rida märgitakse käivitamisel ära ja jäetakse arvestamata.
 H1|11. Ruutude kaart

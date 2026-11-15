@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka YA-MS
-SUB|Verze 1.8.15 - připravil Costantino IC8TEM - listopad 2026
+SUB|Verze 1.8.19 - připravil Costantino IC8TEM - listopad 2026
 H1|1. Úvod
 H2|1.1 K čemu slouží YA-MS
 P|YA-MS pomáhá předpovídat a živě sledovat podmínky pro meteor scatter mezi vaší stanicí a protistanicí, od 28 do 432 MHz. Pro každý aktivní meteorický roj udává, nakolik poloha jeho radiantu podporuje vaši trasu (účinnost), v kterých hodinách, z které strany trasy přicházejí odrazy a kam je vhodné nasměrovat anténu. Vedle předpovědi zobrazuje živě naměřená data: počty z meteorického radaru Collm, kamery sítě Global Meteor Network, radar CMOR, vysílač GRAVES a provoz meteor scatter sbíraný z clusterů a z PSKReporter.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): balíček .deb, který nainstalujete příkazem
 LI|Raspberry Pi 3, 4, 5, 400 a 500: balíček raspberry-pi-64bit (Raspberry Pi OS 64 bit) nebo raspberry-pi-32bit, ve formátu .tar.gz nebo .deb.
 LI|Jiné systémy Linux ARM (například Slackware ARM64 nebo desky armv7l): balíček linux-arm64 nebo linux-armv7l, jako .tar.gz, stejně jako pro Linux.
 LI|Windows na ARM (PC se Snapdragonem): balíček windows-arm64. Fedora a openSUSE: balíček .rpm (x86_64 nebo aarch64), příkazem sudo dnf install nebo sudo zypper install.
+LI|Windows 7 SP1, 8 a 8.1: balíčky windows7-x64 a windows7-x86 (instalátor nebo přenosný zip), sestavené s .NET 6, posledním, který na těchto systémech běží. Windows 7 potřebují aktualizace KB2533623 a KB2999226. Ostatní balíčky pro Windows vyžadují Windows 10 nebo 11: na starších Windows to instalátor hned oznámí.
 LI|Arch, Manjaro a Arch Linux ARM: balíček .pkg.tar.zst, příkazem sudo pacman -U. Slackware64 a Slackware ARM64: balíček .txz, příkazem installpkg jako root. Libovolný Linux: AppImage (x86_64 nebo aarch64), stačí ho označit jako spustitelný a spustit. Alpine Linux: balíček alpine-x64 nebo alpine-arm64, jako .tar.gz.
 LI|macOS: .dmg pro Apple Silicon (M1 a novější) nebo pro Intel, případně app.zip. Přetáhněte YA-MS.app do vlastní složky (například ~/YA-MS): složka data se vytvoří vedle aplikace.
 TAG|ATTENZIONE|Windows může zobrazit „Systém Windows ochránil váš počítač“: zvolte „Další informace“ a potom „Přesto spustit“. Na macOS aplikaci poprvé otevřete pravým tlačítkem myši a volbou „Otevřít“. Program není podepsán placeným certifikátem.
@@ -70,6 +71,7 @@ LI|Čas: hodiny UTC.
 LI|Datum výpočtu (UTC): den výpočtu. Platí pro Předpovědní výpočet, pro tabulku 24 hodin ve Výpočtu účinnosti a pro časový průběh v kartě Radar GRAVES. Výchozí je dnešek a o půlnoci se přepne na nový den.
 LI|Hodiny (od −12 do +36 h): posune okamžik výpočtu po krocích 15 minut. Vedle: „Výpočet pro: nyní“ nebo zvolené datum a čas.
 LI|Reálný čas: vrátí se k aktuálnímu okamžiku.
+LI|Časová osa («Hodiny (od −12 do +36 h)» a «Reálný čas») je nahoře v záložce Předpovědní výpočet, protože platí jen pro tento výpočet.
 H2|4.4 Nastavení vlastní stanice
 TAG|PROCEDURA|1) Zadejte Můj lokátor a výšku. 2) Zadejte lokátor a výšku protistanice, nebo klikněte do mapy v Předpovědním výpočtu: levé tlačítko = protistanice, pravé tlačítko = vaše stanice. 3) Zvolte pásmo. 4) Zadejte délku ráhna a elevaci laloku vaší antény. 5) Stiskněte Vypočítat: stavový řádek potvrdí „Trasa vypočtena: ... km, ... bodů odrazu vzorkováno“.
 TAG|NOTA|Nastavení se ukládají do data/config.ini při zavření a při každém výpočtu: při příštím spuštění najdete stejnou trasu.
@@ -116,11 +118,11 @@ LI|EXPERIMENTÁLNÍ PRAVIDLA MEZI PÁSMY: počet, síla a délka odrazů vzhlede
 TAG|NOTA|Kladná rezerva znamená, že průměrná podhustá stopa stačí k uskutečnění spojení na trase s vaší stanicí; záporná rezerva znamená, že jsou potřeba hustší stopy nebo nadhusté meteory. Jde o odhad: měřítkem zůstává zkušenost z pásma.
 H1|7. Výpočet účinnosti
 P|Účinnost udává v procentech, nakolik poloha radiantu roje umožňuje odrazy na vaší trase: 100 % je nejpříznivější poloha pro danou trasu. Tato podkarta ji zobrazuje hodinu po hodině pro den nastavený v „Datum výpočtu“, s hodnotami v polovině každé hodiny.
-H2|7.1 Čtyři panely
+H2|7.1 Pás nad záložkami
+P|Tyto rámečky jsou v pásu pod řádkem času, nad záložkami, vždy viditelné i se sbalenými řádky příkazů: vlevo dva rámečky zvoleného dne, pak šest horizontů předpovědi, které začínají teď.
 LI|NEJLEPŠÍ DOBA DNE: hodina s nejvyšším indexem trasy a převládající strana.
 LI|NEJPŘÍZNIVĚJŠÍ ROJ: roj, který přispívá nejvíce, s hodinou, stranou a dvěma nejlepšími nasměrováními.
-LI|NYNÍ: index a strana v této hodině a doporučený Hot (pouze pokud je zvolený den dnešek).
-LI|EXPERIMENTÁLNÍ PŘEDPOVĚĎ: odrazy za hodinu předpokládané nyní, za 1 a za 2 hodiny (kapitola 8).
+LI|NYNÍ · ZA 1, 3, 6, 12 A 24 HOD.: pro každý horizont průměr hodiny, která tam začíná (čtyři vzorky): index trasy, převládající strana, roj s největším příspěvkem a, jsou-li radarová data, odrazy za hodinu z experimentální předpovědi. V NYNÍ se bez radarových dat zobrazí doporučený Hot. Aktualizuje se každou minutu.
 P|Když panel nemá hodnoty, uvádí proč: žádná společná zóna, žádný aktivní roj nebo nepříznivé radianty po celý den. Bublinová nápověda každého panelu vysvětluje, co zobrazuje. Pod panely je v případě potřeby upozornění ŽÁDNÁ SPOLEČNÁ ZÓNA a pruh s vysvětlením písmen A a B.
 H2|7.2 Nastavení výpočtu
 LI|Opatrné (výchozí): výška stop z radaru, normální stopy, úhel β zapnut. Dává nejnižší hodnoty.
@@ -159,16 +161,16 @@ LI|Tabulka s hodnocením: dobré, střední nebo slabé vzhledem k průměru 24 
 TAG|NOTA|Délka odrazů se řídí volbou „Délka pingů mezi pásmy“ v kartě Geometrie a útlum; při forward scatter roste délka také se sec²φ ve středu trasy.
 H1|9. Živě a data v reálném čase
 H2|9.1 Provoz živě
-P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a zóna roje nejpravděpodobnějších stop v danou hodinu. Právě přijaté spoty minutu blikají.
+P|Azimutální ekvidistantní mapa se středem ve vaší stanici se všemi zachycenými spojeními meteor scatter: pro každé spojení trasa v barvě pásma (28 hnědá, 50 zelená, 70 azurová, 144 oranžová, 222 růžová, 432 fialová), obě stanice a zóna roje nejpravděpodobnějších stop v danou hodinu. Blikají jen dekódování vašeho WSJT-X (UDP), v nichž vám protistanice odpovídá.
 LI|Poloměr mapy: 600-3500 km. Spoty k zobrazení: posledních 3, 15 nebo 30 minut, poslední hodina, poslední 3 nebo 24 hodiny.
 LI|Mapu v Mercatorově zobrazení lze posouvat tažením myší; dvojklik: znovu vystředěná na mou stanici. Azimutální mapa zůstává vystředěná na mou stanici.
 LI|Kliknutím na trasu nebo na řádek tabulky se spojení zvýrazní a zobrazí se střed zóna roje, jeho výška a rozměry.
 LI|Podrobnosti zvoleného spojení nebo poslouchající stanice se zobrazí ve vystouplém rámečku nad mapou vlevo nahoře, v azimutální i Mercatorově projekci.
 LI|Ukázat, kdo poslouchá: trojúhelníky v barvě pásma označují stanice, které podle PSKReporteru ve zvoleném časovém okně přijímají MSK144, FSK441, PSK2K nebo JTMS na 28, 50, 70, 144 a 432 MHz. Klepnutí na trojúhelník ukáže značku, lokátor, druhy provozu a poslední spot. Proud MQTT na kartě Sběr dat musí být připojen.
 LI|Také aktivní monitory z mapy PSKReporter: prázdné trojúhelníky pro stanice, které jsou na mapě pskreporter.info v MSK144, FSK441, PSK2K nebo JTMS, ale ještě nepřijaly žádný spot (MQTT posílá jen stanice, které něco přijímají). YA-MS se dotazuje vyhledávací služby PSKReporter jednou za 5 minut pro všechny druhy provozu, jak žádají pravidla služby; monitor zůstává na mapě nejméně 11 minut. Klepnutí na trojúhelník ukáže značku, lokátor, dekódovací program a čas, kdy byl monitor aktivní. Ve výchozím stavu zapnuto.
-LI|FT8 nad 1100 km bez souběžných tras: spot FT8 (z PSKReporter MQTT, z clusterů nebo z WSJT-X přes UDP) mezi stanicemi vzdálenými více než 1100 km, který 3 minuty před a po nemá souběžné trasy (stejné pásmo, střed do 300 km, směr do 15°, jiná dvojice stanic), se kreslí světle zeleně a jeho řádek v tabulce vpravo dole stále bliká. Sporadická E a tropo dávají mnoho blízkých souběžných tras; osamocený spot může být meteorická stopa. Proto YA-MS přijímá z MQTT i spoty FT8 z pásem 6 m, 4 m, 2 m, 1,25 m a 70 cm (nikdy 28 MHz, v žádném případě). Tyto spoty se neukládají do archivu MS. Ve výchozím stavu zapnuto. Další kontroly s PSKReporter MQTT: spot není osamocený, pokud přijímající stanice slyší v MQTT během 3 minut na stejném pásmu jiné stanice dál než 1100 km (otevřené pásmo); spoty z clusterů a RBN platí jen tehdy, když stejná dvojice přijde i z MQTT; skimmery RBN (značky s «-#») neplatí nikdy.
-LI|Spoty WSJT-X přes UDP, které se týkají vaší stanice (dekódování obsahuje vaši značku: kdo vás volá nebo vám odpovídá), se kreslí stále blikající přerušovanou čarou, v jakémkoli druhu provozu a na jakoukoli vzdálenost.
-LI|Výměna mezi uživateli YA-MS: když jiný uživatel YA-MS dekóduje přes UDP zprávu určenou vaší stanici (v MSK144, FSK441, PSK2K nebo JTMS, nebo v FT8 nad 1100 km), jeho YA-MS vám ji pošle zašifrovanou přes tři veřejné MQTT brokery (HiveMQ, Mosquitto, EMQX); uvidíte ji jako fialovou přerušovanou čáru, která stále bliká, a jako řádek v konzoli UDP. Přečíst ji můžete jen vy (klíče ECDH P-256, AES-256 a HMAC-SHA256). Spoty FT8 se ukazují, jen pokud během 3 minut nemají souběžné trasy. Ve výchozím stavu zapnuto; yams_scambio=0 v data/config.ini vypne.
+LI|FT8 nad 1100 km bez souběžných tras: spot FT8 (z PSKReporter MQTT, z clusterů nebo z WSJT-X přes UDP) mezi stanicemi vzdálenými více než 1100 km, který 3 minuty před a po nemá souběžné trasy (stejné pásmo, střed do 300 km, směr do 15°, jiná dvojice stanic), se kreslí světle zeleně, stejně jako jeho řádek v tabulce vpravo dole (bez blikání). Sporadická E a tropo dávají mnoho blízkých souběžných tras; osamocený spot může být meteorická stopa. Proto YA-MS přijímá z MQTT i spoty FT8 z pásem 6 m, 4 m, 2 m, 1,25 m a 70 cm (nikdy 28 MHz, v žádném případě). Tyto spoty se neukládají do archivu MS. Ve výchozím stavu zapnuto. Další kontroly s PSKReporter MQTT: spot není osamocený, pokud přijímající stanice slyší v MQTT během 3 minut na stejném pásmu jiné stanice dál než 1100 km (otevřené pásmo); spoty z clusterů a RBN platí jen tehdy, když stejná dvojice přijde i z MQTT; skimmery RBN (značky s «-#») neplatí nikdy.
+LI|Dekódování vašeho WSJT-X přes UDP, v nichž vám protistanice odpovídá (první značka zprávy je vaše), se kreslí blikající přerušovanou čarou v jakémkoli druhu provozu a na jakoukoli vzdálenost a jejich řádek v tabulce bliká na žlutém podkladu. Je to jediný případ, kdy něco bliká.
+LI|Výměna mezi uživateli YA-MS: když jiný uživatel YA-MS dekóduje přes UDP zprávu určenou vaší stanici (v MSK144, FSK441, PSK2K nebo JTMS, nebo v FT8 nad 1100 km), jeho YA-MS vám ji pošle zašifrovanou přes tři veřejné MQTT brokery (HiveMQ, Mosquitto, EMQX); uvidíte ji jako stálou fialovou přerušovanou čáru a jako řádek v konzoli UDP. Přečíst ji můžete jen vy (klíče ECDH P-256, AES-256 a HMAC-SHA256). Spoty FT8 se ukazují, jen pokud během 3 minut nemají souběžné trasy. Ve výchozím stavu zapnuto; yams_scambio=0 v data/config.ini vypne.
 LI|Zobrazují se spoty všech pásem, i těch, která nejsou vybrána ve Sběru dat (ty se neukládají). Spoty CW a spoty mezi příliš blízkými stanicemi se nezobrazují, pokud se ve Sběru dat zahazují.
 LI|Na mapě se píší značky obou stanic každého spotu, jednou pro každou stanici. Projekci lze zvolit: azimutální (uprostřed tvoje stanice) nebo Mercatorova. Bublina na sloupci Mrak vysvětluje jeho význam.
 H2|9.2 Tok z radaru
@@ -202,6 +204,7 @@ P|Katalog používaný všemi výpočty: roje z kalendáře IMO 2026 a 2027 plus
 LI|Zkratka, název, období aktivity, sluneční délka maxima, příští maximum (UTC) a jeho zdroj (IMO nebo vypočteno), radiant, rychlost, populační index r, ZHR, typ (vizuální nebo denní rádiový).
 LI|k: exponent převodu kmitočtu z populačního indexu (GMN, je-li k dispozici, jinak IMO).
 LI|IAU MDC: řešení, Δ radiant, Δλ, Δv: srovnání s katalogem IAU Meteor Data Center (publikovaná řešení a odchylky katalogu programu od jejich mediánu).
+LI|Katalog IAU MDC je už součástí balíčků (data/cataloghi), takže srovnání funguje od prvního spuštění i bez živých zdrojů; se zapnutými živými zdroji se tiše stahuje znovu nejvýše jednou za měsíc.
 LI|GMN dnes: dráhy potvrzené v posledním denním souboru sítě Global Meteor Network.
 TAG|NOTA|Katalog je soubor data/sciami.csv a maxima IMO jsou v data/massimi_imo.csv: lze je upravit textovým editorem. Chybný řádek je při spuštění nahlášen a ignorován.
 H1|11. Mapa čtverců

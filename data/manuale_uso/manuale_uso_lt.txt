@@ -1,5 +1,5 @@
 TITLE|YA-MS naudotojo vadovas
-SUB|1.8.15 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
+SUB|1.8.19 versija - parengė Costantino IC8TEM - 2026 m. lapkritis
 H1|1. Įvadas
 H2|1.1 Kam skirta YA-MS
 P|YA-MS padeda prognozuoti ir tiesiogiai stebėti meteor scatter sąlygas tarp jūsų stoties ir korespondento nuo 28 iki 432 MHz. Kiekvienam aktyviam meteorų srautui ji parodo, kiek jo radianto padėtis palanki jūsų trasai (efektyvumas), kuriomis valandomis, iš kurios trasos pusės ateina atspindžiai ir kur geriausia nukreipti anteną. Šalia prognozės ji rodo tiesiogiai matuojamus duomenis: Collm meteorų radaro skaičius, Global Meteor Network kameras, CMOR radarą, GRAVES siųstuvą ir meteor scatter srautą, surinktą iš klasterių ir PSKReporter.
@@ -18,6 +18,7 @@ LI|Linux (Debian, Ubuntu, Mint): .deb paketas, diegiamas komanda sudo apt instal
 LI|Raspberry Pi 3, 4, 5, 400 ir 500: paketas raspberry-pi-64bit (Raspberry Pi OS 64 bitų) arba raspberry-pi-32bit, .tar.gz arba .deb formatu.
 LI|Kitos ARM Linux sistemos (pavyzdžiui, Slackware ARM64 ar armv7l plokštės): paketas linux-arm64 arba linux-armv7l, .tar.gz formatu, kaip Linux atveju.
 LI|Windows ARM (kompiuteriai su Snapdragon): paketas windows-arm64. Fedora ir openSUSE: .rpm paketas (x86_64 arba aarch64), su sudo dnf install arba sudo zypper install.
+LI|Windows 7 SP1, 8 ir 8.1: paketai windows7-x64 ir windows7-x86 (diegimo programa arba nešiojamas zip), sukurti su .NET 6 – paskutiniu, kuris veikia šiose sistemose. Windows 7 reikia naujinimų KB2533623 ir KB2999226. Kiti Windows paketai reikalauja Windows 10 arba 11: senesnėje Windows diegimo programa tai iš karto praneša.
 LI|Arch, Manjaro ir Arch Linux ARM: paketas .pkg.tar.zst, su sudo pacman -U. Slackware64 ir Slackware ARM64: paketas .txz, su installpkg kaip root. Bet kuri Linux: AppImage (x86_64 arba aarch64), padaromas vykdomu ir paleidžiamas. Alpine Linux: paketas alpine-x64 arba alpine-arm64, .tar.gz formatu.
 LI|macOS: .dmg failas Apple Silicon (M1 ir naujesniems) arba Intel kompiuteriams, arba app.zip. Nuvilkite YA-MS.app į savo aplanką (pavyzdžiui, ~/YA-MS): aplankas data sukuriamas šalia programėlės.
 TAG|ATTENZIONE|Windows gali parodyti pranešimą „Windows apsaugojo jūsų kompiuterį“: pasirinkite „Daugiau informacijos“, o tada „Vis tiek vykdyti“. macOS sistemoje pirmą kartą atidarykite programėlę dešiniuoju pelės mygtuku ir „Atidaryti“. Programa nepasirašyta mokamu sertifikatu.
@@ -70,6 +71,7 @@ LI|Laikas: UTC laikrodis.
 LI|Skaičiavimo data (UTC): skaičiavimo diena. Taikoma kortelei Prognozės skaičiavimas, 24 valandų lentelei kortelėje Efektyvumo skaičiavimas ir chronologijai kortelėje GRAVES radaras. Numatytoji vertė yra šiandiena, o vidurnaktį data pereina į naują dieną.
 LI|Valandos (nuo −12 iki +36 h): perkelia skaičiavimo momentą 15 minučių žingsniais. Šalia: „Skaičiavimas: dabar“ arba pasirinkta data ir laikas.
 LI|Realus laikas: grįžta į dabartinį momentą.
+LI|Laiko linija («Valandos (nuo −12 iki +36 h)» ir «Realus laikas») yra kortelės Prognozės skaičiavimas viršuje, nes ji galioja tik tam skaičiavimui.
 H2|4.4 Savo stoties nustatymas
 TAG|PROCEDURA|1) Įrašykite Mano lokatorius ir aukštį. 2) Įrašykite korespondento lokatorių ir aukštį arba spustelėkite žemėlapį kortelėje Prognozės skaičiavimas: kairysis spustelėjimas = korespondentas, dešinysis spustelėjimas = jūsų stotis. 3) Pasirinkite diapazoną. 4) Įrašykite savo antenos strėlės ilgį ir lapelio elevaciją. 5) Paspauskite Skaičiuoti: būsenos juosta patvirtina „Trasa apskaičiuota: ... km, ... atspindžio taškų imtis“.
 TAG|NOTA|Nustatymai išsaugomi faile data/config.ini uždarant programą ir po kiekvieno skaičiavimo: kitą kartą paleidę rasite tą pačią trasą.
@@ -116,11 +118,11 @@ LI|EKSPERIMENTINĖS TAISYKLĖS TARP JUOSTŲ: atspindžių skaičius, intensyvuma
 TAG|NOTA|Teigiama atsarga reiškia, kad vidutinio retojo pėdsako pakanka užmegzti ryšį šioje trasoje su jūsų stotimi; neigiama atsarga reiškia, kad reikia tankesnių pėdsakų arba tankiųjų meteorų. Tai yra įvertinimas: atskaitos taškas lieka patirtis eteryje.
 H1|7. Efektyvumo skaičiavimas
 P|Efektyvumas procentais parodo, kiek srauto radianto padėtis leidžia atspindžius jūsų trasoje: 100 % yra šiai trasai palankiausia padėtis. Ši antrinė kortelė jį rodo valanda po valandos dienai, nurodytai lauke „Skaičiavimo data (UTC)“, su vertėmis kiekvienos valandos viduryje.
-H2|7.1 Keturi langeliai
+H2|7.1 Juosta virš kortelių
+P|Šie langeliai yra juostoje po laiko eilute, virš kortelių, visada matomi net su suskleistomis komandų eilutėmis: kairėje du pasirinktos dienos langeliai, tada šeši prognozės horizontai, prasidedantys nuo dabar.
 LI|GERIAUSIAS DIENOS LAIKAS: valanda su didžiausiu trasos indeksu ir vyraujanti pusė.
 LI|PALANKIAUSIAS SRAUTAS: srautas, kurio indėlis didžiausias, su valanda, puse ir dviem geriausiomis antenos kryptimis.
-LI|DABAR: indeksas ir pusė šią valandą bei rekomenduojamas Hot (tik jei pasirinkta diena yra šiandien).
-LI|EKSPERIMENTINĖ PROGNOZĖ: numatomi atspindžiai per valandą dabar, po 1 ir po 2 valandų (8 skyrius).
+LI|DABAR · PO 1, 3, 6, 12 IR 24 VALANDŲ: kiekvienam horizontui ten prasidedančios valandos vidurkis (keturi mėginiai): trasos indeksas, vyraujanti pusė, daugiausia prisidedantis srautas ir, kai yra radaro duomenų, eksperimentinės prognozės atspindžiai per valandą. Langelyje DABAR, kai nėra radaro duomenų, rodomas rekomenduojamas Hot. Atnaujinama kas minutę.
 P|Kai langelis neturi verčių, jis nurodo priežastį: nėra bendros zonos, nėra aktyvaus srauto arba radiantai visą dieną nepalankūs. Kiekvieno langelio patarimas paaiškina, ką jis rodo. Po langeliais, kai reikia, rodomas įspėjimas NĖRA BENDROS ZONOS ir juosta, paaiškinanti raides A ir B.
 H2|7.2 Skaičiavimo nustatymai
 LI|Atsargi (numatytoji): pėdsakų aukštis iš radaro, įprasti pėdsakai, kampas β įjungtas. Duoda mažiausias vertes.
@@ -159,16 +161,16 @@ LI|Lentelė su įvertinimu: geras, vidutinis arba silpnas, palyginti su 24 valan
 TAG|NOTA|Atspindžių trukmė atitinka pasirinkimą „Pingų trukmė tarp juostų“ kortelėje Geometrija ir slopinimas; forward scatter atveju trukmė didėja ir su sec²φ trasos vidurio taške.
 H1|9. Tiesiogiai ir realiojo laiko duomenys
 H2|9.1 Eismas tiesiogiai
-P|Azimutinis vienodų atstumų žemėlapis, kurio centras yra jūsų stotis, su visu surinktu meteor scatter srautu: kiekvienam ryšiui trasa diapazono spalva (28 ruda, 50 žalia, 70 žydra, 144 oranžinė, 222 rožinė, 432 violetinė), abi stotys ir labiausiai tikėtinų pėdsakų srauto zona tą valandą. Ką tik gauti spotai mirksi vieną minutę.
+P|Azimutinis vienodų atstumų žemėlapis, kurio centras yra jūsų stotis, su visu surinktu meteor scatter srautu: kiekvienam ryšiui trasa diapazono spalva (28 ruda, 50 žalia, 70 žydra, 144 oranžinė, 222 rožinė, 432 violetinė), abi stotys ir labiausiai tikėtinų pėdsakų srauto zona tą valandą. Mirksi tik jūsų WSJT-X (UDP) dekodavimai, kuriuose korespondentas jums atsako.
 LI|Žemėlapio spindulys: 600-3500 km. Rodomi spotai: paskutinės 3, 15 arba 30 minučių, paskutinė valanda, paskutinės 3 arba 24 valandos.
 LI|Merkatoriaus žemėlapį galima tempti pele; dukart spustelėjus: vėl centruojamas į mano stotį. Azimutinis žemėlapis lieka centruotas į mano stotį.
 LI|Spustelėjus trasą arba lentelės eilutę ryšys paryškinamas ir parodomas srauto zona centras, jo aukštis ir matmenys.
 LI|Pasirinkto ryšio ar klausančios stoties duomenys rodomi iškiliame langelyje virš žemėlapio, viršuje kairėje, tiek azimutinėje, tiek Merkatoriaus projekcijoje.
 LI|Rodyti, kas klausosi: juostos spalvos trikampiai žymi stotis, kurios, pasak PSKReporter, pasirinktame laiko lange priima MSK144, FSK441, PSK2K ar JTMS 28, 50, 70, 144 ir 432 MHz juostose. Spustelėjus trikampį rodomas šaukinys, lokatorius, režimai ir paskutinis spotas. Kortelės Duomenų rinkimas MQTT srautas turi būti prijungtas.
 LI|Taip pat aktyvūs PSKReporter žemėlapio monitoriai: tušti trikampiai stotims, kurios matomos pskreporter.info žemėlapyje MSK144, FSK441, PSK2K ar JTMS režimu, bet dar negavo nė vieno spoto (MQTT siunčia tik stotis, kurios ką nors gauna). YA-MS kreipiasi į PSKReporter užklausų paslaugą kartą per 5 minutes dėl visų režimų, kaip reikalauja paslaugos taisyklės; monitorius žemėlapyje lieka bent 11 minučių. Spustelėjus trikampį rodomas šaukinys, lokatorius, dekodavimo programa ir laikas, kai monitorius buvo aktyvus. Įjungta iš pradžių.
-LI|FT8 virš 1100 km be lygiagrečių trasų: FT8 spotas (iš PSKReporter MQTT, klasterių ar WSJT-X per UDP) tarp stočių, nutolusių daugiau nei 1100 km, kuris per 3 minutes prieš ir po neturi lygiagrečių trasų (ta pati juosta, vidurio taškas 300 km ribose, kryptis 15° ribose, kita stočių pora), piešiamas šviesiai žaliai, o jo eilutė lentelėje apačioje dešinėje visada mirksi. Sporadinis E ir tropo duoda daug artimų, lygiagrečių trasų; pavienis spotas gali būti meteoro pėdsakas. Todėl YA-MS iš MQTT gauna ir 6 m, 4 m, 2 m, 1,25 m bei 70 cm FT8 spotus (niekada 28 MHz). Šie spotai nepatenka į MS archyvą. Įjungta iš pradžių. Papildomi patikrinimai su PSKReporter MQTT: spotas nėra pavienis, jei priimanti stotis MQTT per 3 minutes toje pačioje juostoje girdi kitas stotis toliau nei 1100 km (atvira juosta); klasterių ir RBN spotai galioja tik jei ta pati pora ateina ir per MQTT; RBN skimeriai (šaukiniai su «-#») niekada negalioja.
-LI|WSJT-X spotai per UDP, susiję su jūsų stotimi (dekoduotame tekste yra jūsų šaukinys: kas jus šaukia ar jums atsako), piešiami visada mirksinčia brūkšnine linija, bet kuriuo režimu ir bet kokiu atstumu.
-LI|Mainai tarp YA-MS naudotojų: kai kitas YA-MS naudotojas per UDP dekoduoja jūsų stočiai skirtą pranešimą (MSK144, FSK441, PSK2K ar JTMS, arba FT8 virš 1100 km), jo YA-MS siunčia jį jums užšifruotą per tris viešus MQTT tarpininkus (HiveMQ, Mosquitto, EMQX); jį matote kaip visada mirksinčią violetinę brūkšninę liniją ir kaip eilutę UDP konsolėje. Perskaityti galite tik jūs (ECDH P-256 raktai, AES-256 ir HMAC-SHA256). FT8 spotai rodomi tik jei per 3 minutes neturi lygiagrečių trasų. Iš pradžių įjungta; yams_scambio=0 faile data/config.ini išjungia.
+LI|FT8 virš 1100 km be lygiagrečių trasų: FT8 spotas (iš PSKReporter MQTT, klasterių ar WSJT-X per UDP) tarp stočių, nutolusių daugiau nei 1100 km, kuris per 3 minutes prieš ir po neturi lygiagrečių trasų (ta pati juosta, vidurio taškas 300 km ribose, kryptis 15° ribose, kita stočių pora), piešiamas šviesiai žaliai, kaip ir jo eilutė lentelėje apačioje dešinėje (nemirksi). Sporadinis E ir tropo duoda daug artimų, lygiagrečių trasų; pavienis spotas gali būti meteoro pėdsakas. Todėl YA-MS iš MQTT gauna ir 6 m, 4 m, 2 m, 1,25 m bei 70 cm FT8 spotus (niekada 28 MHz). Šie spotai nepatenka į MS archyvą. Įjungta iš pradžių. Papildomi patikrinimai su PSKReporter MQTT: spotas nėra pavienis, jei priimanti stotis MQTT per 3 minutes toje pačioje juostoje girdi kitas stotis toliau nei 1100 km (atvira juosta); klasterių ir RBN spotai galioja tik jei ta pati pora ateina ir per MQTT; RBN skimeriai (šaukiniai su «-#») niekada negalioja.
+LI|Jūsų WSJT-X per UDP dekodavimai, kuriuose korespondentas jums atsako (pirmasis žinutės šaukinys yra jūsų), piešiami mirksinčia brūkšnine linija bet kuria moduliacija ir bet kokiu atstumu, o jų eilutė lentelėje mirksi geltoname fone. Tai vienintelis atvejis, kai kas nors mirksi.
+LI|Mainai tarp YA-MS naudotojų: kai kitas YA-MS naudotojas per UDP dekoduoja jūsų stočiai skirtą pranešimą (MSK144, FSK441, PSK2K ar JTMS, arba FT8 virš 1100 km), jo YA-MS siunčia jį jums užšifruotą per tris viešus MQTT tarpininkus (HiveMQ, Mosquitto, EMQX); jį matote kaip pastovią violetinę brūkšninę liniją ir kaip eilutę UDP konsolėje. Perskaityti galite tik jūs (ECDH P-256 raktai, AES-256 ir HMAC-SHA256). FT8 spotai rodomi tik jei per 3 minutes neturi lygiagrečių trasų. Iš pradžių įjungta; yams_scambio=0 faile data/config.ini išjungia.
 LI|Rodomi visų juostų spotai, taip pat ir juostų, nepasirinktų Duomenų rinkime (jie neišsaugomi). CW spotai ir spotai tarp per arti esančių stočių nerodomi, jei Duomenų rinkime jie atmetami.
 LI|Žemėlapyje rašomi abiejų kiekvieno spoto stočių šaukiniai, po vieną kartą kiekvienai stočiai. Projekciją galima pasirinkti: azimutinė (centre tavo stotis) arba Merkatoriaus. Stulpelio srauto zona patarimas paaiškina jo reikšmę.
 H2|9.2 Radaro srautas
@@ -202,6 +204,7 @@ P|Katalogas, naudojamas visuose skaičiavimuose: IMO 2026 ir 2027 metų kalendor
 LI|Santrumpa, pavadinimas, aktyvumo laikotarpis, Saulės ilguma maksimumo metu, kitas maksimumas (UTC) ir jo šaltinis (IMO arba apskaičiuotas), radiantas, greitis, populiacijos indeksas r, ZHR, tipas (vizualinis arba dieninis radijo).
 LI|k: dažnio perskaičiavimo rodiklis pagal populiacijos indeksą (GMN, jei yra, kitaip IMO).
 LI|IAU MDC: sprendiniai, Δ radianto, Δλ, Δv: palyginimas su IAU Meteor Data Center katalogu (paskelbti sprendiniai ir programos katalogo skirtumai nuo jų medianos).
+LI|IAU MDC katalogas jau įdėtas į paketus (data/cataloghi), todėl palyginimas veikia nuo pirmo paleidimo net be tiesioginių šaltinių; įjungus tiesioginius šaltinius jis tyliai atsisiunčiamas iš naujo ne dažniau kaip kartą per mėnesį.
 LI|GMN šiandien: trajektorijos, patvirtintos naujausiame Global Meteor Network dienos faile.
 TAG|NOTA|Katalogas yra failas data/sciami.csv, o IMO maksimumai yra faile data/massimi_imo.csv: juos galima redaguoti teksto redaktoriumi. Klaidinga eilutė paleidžiant nurodoma ir ignoruojama.
 H1|11. Kvadratų žemėlapis

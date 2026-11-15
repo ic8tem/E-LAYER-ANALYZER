@@ -30,7 +30,7 @@ namespace YAMS
         public string LocSpotter = "", LocDx = "";
         public double DistKm = double.NaN;
         public bool Shared;                // ricevuto da un altro utente di YA-MS (YamsShare): messaggio rivolto a me
-        public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: lampeggio nel traffico in diretta
+        public DateTime Received = DateTime.MinValue;   // ora (UTC del computer) in cui lo spot e' arrivato: non piu' usato per il lampeggio (14/11/2026)
         public string Band { get { return MsBands.Name(FreqKHz); } }
         public string Key { get { return DxCall + "|" + Spotter + "|" + Math.Round(FreqKHz) + "|" + Utc.ToString("yyyyMMddHHmm", CultureInfo.InvariantCulture); } }
     }
@@ -127,17 +127,22 @@ namespace YAMS
         // Traffico in diretta (richiesta dell'autore, 13/11/2026); ultimi 2000
         public static readonly List<MsSpot> OtherBandSpots = new List<MsSpot>();
         static readonly HashSet<string> otherKeys = new HashSet<string>();
-        // ---- spot WSJT-X UDP che riguardano la mia stazione (regola dell'autore, 14/11/2026): la decodifica contiene il
-        // mio nominativo (chi mi chiama o mi risponde). Si disegnano nel Traffico in diretta con un tratteggio che
-        // lampeggia sempre, in qualsiasi modo e a qualsiasi distanza. Ultimi 500, non si memorizzano.
+        // ---- messaggi rivolti alla mia stazione (regola dell'autore, 14/11/2026): il primo nominativo del messaggio
+        // (il destinatario) e' il mio, cioe' un corrispondente mi risponde. Si disegnano nel Traffico in diretta con un
+        // tratteggio, in qualsiasi modo e a qualsiasi distanza; LAMPEGGIANO solo quelli decodificati dalla mia WSJT-X
+        // via UDP (IsMineLocal), non quelli passati da altri utenti di YA-MS. Ultimi 500, non si memorizzano.
         public static readonly List<MsSpot> MyUdp = new List<MsSpot>();
         public static bool IsMine(MsSpot s)
         {
             if (s.Source != 4) return false;
             string me = WsjtxUdp.DeCall;
             if (string.IsNullOrEmpty(me)) return false;
-            return Regex.IsMatch(s.Comment ?? "", @"(?<![A-Z0-9/])" + Regex.Escape(me) + @"(?![A-Z0-9])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+            if (string.Equals(s.DxCall, me, StringComparison.OrdinalIgnoreCase)) return false;   // la mia trasmissione
+            // Comment = "<modo> <snr> dB  <messaggio>  (WSJT-X UDP)": il primo nominativo del messaggio e' il destinatario
+            return Regex.IsMatch(s.Comment ?? "", @"dB\s+<?" + Regex.Escape(me) + @">?(\s|$)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         }
+        // decodificato dalla mia WSJT-X (non passato da un altro utente di YA-MS): il solo caso che lampeggia
+        public static bool IsMineLocal(MsSpot s) { return !s.Shared && IsMine(s); }
         static bool NoteMine(MsSpot s, DateTime now)
         {
             if (!IsMine(s)) return false;
