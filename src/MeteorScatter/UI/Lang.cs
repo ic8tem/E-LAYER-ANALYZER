@@ -34,6 +34,7 @@ namespace YAMS
             new[] { "lt", "Lietuvių" },
             new[] { "pl", "Polski" },
             new[] { "cs", "Čeština" },
+            new[] { "sk", "Slovenčina" },   // armonizzazione 15/11/2026: 37 lingue come YAEC
             new[] { "hu", "Magyar" },
             new[] { "ro", "Română" },
             new[] { "el", "Ελληνικά" },
@@ -75,6 +76,7 @@ namespace YAMS
             new[] { "lt", "lt-LT" },
             new[] { "pl", "pl-PL" },
             new[] { "cs", "cs-CZ" },
+            new[] { "sk", "sk-SK" },
             new[] { "hu", "hu-HU" },
             new[] { "ro", "ro-RO" },
             new[] { "el", "el-GR" },
