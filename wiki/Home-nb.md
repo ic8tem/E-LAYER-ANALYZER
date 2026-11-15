@@ -38,3 +38,7 @@
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (kilde for YA-MS).
 
 Den fullstendige listen står i programmets fane KILDER.
+
+## Lisens
+
+E-LAYER ANALYZER er fri programvare med lisensen **GNU GPL-3.0** (filen COPYING), den samme som YA-MS. Det distribueres uten noen garanti. Data fra eksterne kilder tilhører fortsatt de respektive institusjonene, med deres vilkår (for eksempel GIRO-dataene: CC BY-NC-SA 4.0, bare ikke-kommersiell bruk).

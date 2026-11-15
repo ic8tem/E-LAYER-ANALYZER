@@ -9,7 +9,7 @@ Ab Version 0.4.18 fasst der Reiter **EINSTELLUNGEN** die allgemeinen Optionen de
 | Bereich | Was man einstellt |
 |---|---|
 | Station | Rufzeichen, Locator und Höhe, dieselben wie in der oberen Leiste; **Übernehmen** bestätigt sie für alle Reiter. |
-| Darstellung | Sprache, Farbschema (die Schemata von YAEC und YA-MS und ab Version 0.5.0 die sechs Themen von IP-TRX-CTRL: Hell, Nacht, Schwarz, Blau, Violett, Grün) und **Schriftgröße des ganzen Programms** (85-140 %, wie in YA-MS). Sprache und Farben bauen das Fenster neu auf: Einstellungen und Spots bleiben erhalten. |
+| Darstellung | Sprache, Farbschema (die Schemata von YAEC und YA-MS und ab Version 0.5.0 die sechs Themen von IP-TRX-CTRL: Hell, Nacht, Schwarz, Blau, Violett, Grün) **Kompaktmodus** für 13-15-Zoll-Notebooks (ab 0.5.2: automatisch unter 850 Pixel Höhe, immer oder nie) und **Schriftgröße des ganzen Programms** (85-140 %, wie in YA-MS). Sprache und Farben bauen das Fenster neu auf: Einstellungen und Spots bleiben erhalten. |
 | Karten und Vorhersagedaten | Der Kontinent, dasselbe Menü wie in der Reiterleiste. |
 | Zeit | NTP-Status und Differenz zwischen der Serverzeit und der PC-Uhr. |
 | Aktualisierungen | Prüfung auf GitHub beim Start und alle 30 Minuten, automatische und stille Aktualisierung, Schaltfläche **Jetzt prüfen**. Die automatische Aktualisierung gilt nicht für Systempakete (.deb, .rpm, Arch, Slackware). |

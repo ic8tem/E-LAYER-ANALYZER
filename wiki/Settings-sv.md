@@ -9,7 +9,7 @@ Från version 0.4.18 samlar fliken **INSTÄLLNINGAR** programmets allmänna alte
 | Avsnitt | Vad du ställer in |
 |---|---|
 | Station | Anropssignal, lokator och höjd, samma som i fältet högst upp; **Verkställ** bekräftar dem för alla flikar. |
-| Utseende | Språk, färgschema (schemana från YAEC och YA-MS och, från version 0.5.0, de sex temana från IP-TRX-CTRL: Ljust, Natt, Svart, Blå, Lila, Grön) och **teckenstorlek för hela programmet** (85-140 %, som i YA-MS). Språk och färger bygger om fönstret: inställningar och spots behålls. |
+| Utseende | Språk, färgschema (schemana från YAEC och YA-MS och, från version 0.5.0, de sex temana från IP-TRX-CTRL: Ljust, Natt, Svart, Blå, Lila, Grön), **kompakt läge** för bärbara datorer med 13-15 tum (från 0.5.2: automatiskt under 850 pixlars höjd, alltid eller aldrig) och **teckenstorlek för hela programmet** (85-140 %, som i YA-MS). Språk och färger bygger om fönstret: inställningar och spots behålls. |
 | Kartor och prognosdata | Kontinenten, samma meny som i flikraden. |
 | Tid | NTP-status och skillnaden mellan servertiden och datorns klocka. |
 | Uppdateringar | Kontroll på GitHub vid start och var 30:e minut, automatisk och tyst uppdatering, knappen **Kontrollera nu**. Automatisk uppdatering gäller inte systempaket (.deb, .rpm, Arch, Slackware). |

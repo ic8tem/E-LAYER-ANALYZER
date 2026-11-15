@@ -9,7 +9,7 @@ Vanaf versie 0.4.18 verzamelt het tabblad **INSTELLINGEN** de algemene opties va
 | Onderdeel | Wat je instelt |
 |---|---|
 | Station | Roepnaam, locator en hoogte, dezelfde als in de bovenste balk; **Toepassen** bevestigt ze voor alle tabbladen. |
-| Weergave | Taal, kleurenschema (de schema's van YAEC en YA-MS en, vanaf versie 0.5.0, de zes thema's van IP-TRX-CTRL: Licht, Nacht, Zwart, Blauw, Paars, Groen) en **lettergrootte van het hele programma** (85-140 %, zoals in YA-MS). Taal en kleuren bouwen het venster opnieuw op: instellingen en spots blijven behouden. |
+| Weergave | Taal, kleurenschema (de schema's van YAEC en YA-MS en, vanaf versie 0.5.0, de zes thema's van IP-TRX-CTRL: Licht, Nacht, Zwart, Blauw, Paars, Groen) **compacte modus** voor laptops van 13-15 inch (vanaf 0.5.2: automatisch onder 850 pixels hoogte, altijd of nooit) en **lettergrootte van het hele programma** (85-140 %, zoals in YA-MS). Taal en kleuren bouwen het venster opnieuw op: instellingen en spots blijven behouden. |
 | Kaarten en voorspellingsgegevens | Het continent, hetzelfde menu als in de tabbladbalk. |
 | Tijd | NTP-status en het verschil tussen de tijd van de servers en de pc-klok. |
 | Updates | Controle op GitHub bij het opstarten en elke 30 minuten, automatische en stille update, knop **Nu controleren**. Automatische updates gelden niet voor systeempakketten (.deb, .rpm, Arch, Slackware). |

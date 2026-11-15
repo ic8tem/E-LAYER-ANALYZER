@@ -38,3 +38,7 @@ O **E-LAYER ANALYZER** é um programa gratuito para radioamadores que analisa to
 - C. Cerrotta IC8TEM, G. Sartori IV3GTH, *METEOR-SCATTER* (fonte do YA-MS).
 
 A lista completa está no separador FONTES do programa.
+
+## Licença
+
+O E-LAYER ANALYZER é software livre, com licença **GNU GPL-3.0** (ficheiro COPYING), a mesma do YA-MS. É distribuído sem qualquer garantia. Os dados das fontes externas continuam a pertencer às respetivas entidades, com as suas condições (por exemplo, os dados GIRO: CC BY-NC-SA 4.0, apenas uso não comercial).

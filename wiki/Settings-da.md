@@ -9,7 +9,7 @@ Fra version 0.4.18 samler fanen **INDSTILLINGER** programmets generelle indstill
 | Afsnit | Hvad du indstiller |
 |---|---|
 | Station | Kaldesignal, lokator og højde, de samme som i linjen øverst; **Anvend** bekræfter dem for alle faner. |
-| Udseende | Sprog, farveskema (skemaerne fra YAEC og YA-MS og fra version 0.5.0 de seks temaer fra IP-TRX-CTRL: Lys, Nat, Sort, Blå, Lilla, Grøn) og **skriftstørrelse for hele programmet** (85-140 %, som i YA-MS). Sprog og farver genopbygger vinduet: indstillinger og spots bevares. |
+| Udseende | Sprog, farveskema (skemaerne fra YAEC og YA-MS og fra version 0.5.0 de seks temaer fra IP-TRX-CTRL: Lys, Nat, Sort, Blå, Lilla, Grøn), **kompakt tilstand** til bærbare med 13-15 tommer (fra 0.5.2: automatisk under 850 pixel i højden, altid eller aldrig) og **skriftstørrelse for hele programmet** (85-140 %, som i YA-MS). Sprog og farver genopbygger vinduet: indstillinger og spots bevares. |
 | Kort og prognosedata | Kontinentet, den samme menu som i fanelinjen. |
 | Tid | NTP-status og forskellen mellem servertiden og pc'ens ur. |
 | Opdateringer | Kontrol på GitHub ved opstart og hvert 30. minut, automatisk og lydløs opdatering, knappen **Kontrollér nu**. Automatisk opdatering gælder ikke for systempakker (.deb, .rpm, Arch, Slackware). |
