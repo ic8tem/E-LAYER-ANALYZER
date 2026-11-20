@@ -75,5 +75,7 @@ Sa sub-tab na **Mga paunang tanda ng multi-hop**, hinahanap ng programa ang mga 
 - **Hanapin ang ulap**: ang maikling unang hop lamang ang naroon; sinasabi ng mga mapusyaw na asul na sona kung saan dapat naroon ang ulap ng huling maikling hop.
 - **BABALA** kung sakop ng mga ulap ang mga gitnang hop, **PAUNANG TANDA** kung mga sonang walang tagamasid lamang ang kulang.
 - Sa MGA SETTING may **abiso** sa itaas (at opsiyonal, isang window) para sa mga BABALA na may kinalaman sa iyo.
+- Hindi ipinapakita ang mga kadenang umaabot **sa laot** o kung saan walang istasyon (CALL3 at spot).
+- **Abot ng aking signal sa 6 m** (mga rosas na tuldok): kung saan lumalapag ang iyong signal sa 50 MHz pagkatapos ng 2-5 hop, sa ibabaw ng mga ulap ng huling 30 minuto na tinantiya mula sa mga spot ng lahat ng banda (28-144 MHz) at mula sa mga ionosonde; kung saan lamang may istasyon.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

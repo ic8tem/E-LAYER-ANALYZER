@@ -75,5 +75,7 @@ Di subtab **Prekursor multi-lompatan** program mencari rantai multi-lompatan di 
 - **Cari awan**: hanya ada lompatan pertama pendek; zona biru muda menunjukkan di mana awan lompatan pendek terakhir seharusnya berada.
 - **PERINGATAN** jika lompatan tengah tertutup awan, **PREKURSOR** jika yang kurang hanya zona tanpa pengamat.
 - Di PENGATURAN ada **pemberitahuan** di atas (dan opsional sebuah jendela) untuk PERINGATAN yang menyangkut Anda.
+- Rantai yang berakhir **di laut lepas** atau di tempat tanpa stasiun (CALL3 dan spot) tidak ditampilkan.
+- **Jangkauan sinyal saya di 6 m** (titik merah muda): tempat sinyal Anda di 50 MHz mendarat setelah 2-5 lompatan, di atas awan 30 menit terakhir yang diperkirakan dari spot semua band (28-144 MHz) dan dari ionosonde; hanya di tempat yang ada stasiunnya.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
