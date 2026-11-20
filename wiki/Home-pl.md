@@ -39,6 +39,10 @@
 
 Pełna lista znajduje się w zakładce ŹRÓDŁA programu.
 
+## Podziękowania
+
+Za rozwój E-sporadycznego na 50 MHz: **Johan IW2DNI** i **Fabio IZ7NLJ**.
+
 ## Licencja
 
 E-LAYER ANALYZER jest wolnym oprogramowaniem na licencji **GNU GPL-3.0** (plik COPYING), tej samej co YA-MS. Jest rozpowszechniany bez jakiejkolwiek gwarancji. Dane ze źródeł zewnętrznych pozostają własnością odpowiednich instytucji, na ich warunkach (na przykład dane GIRO: CC BY-NC-SA 4.0, tylko do użytku niekomercyjnego).

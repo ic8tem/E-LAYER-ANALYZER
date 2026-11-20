@@ -62,3 +62,18 @@ A térkép jobb felső sarkában megjelenik az N0NBH összefoglalója (E-skip a 
 - **144 MHz**: sporadikus E 900 km-től, megerősítéssel; a Q65 és JT65 spotok EME-k, és elveti őket, kivéve, ha a szövegben `<ES>` szerepel.
 - G0ISW (Propagation identification, 2024) a legrövidebb sporadikus E-t 50 és 70 MHz-en 400 km felett, 144 MHz-en 1400 km felett látja: a szerző szabályai 50 és 70 MHz-en egyeznek vele, 144 MHz-en tágabbak, de megerősítést kérnek.
 - Az összes szabály alkalmazásának sorrendjét a használt értékekkel a **[BEÁLLÍTÁSOK](Settings-hu)** › Spotok szétosztása mutatja.
+
+## Rövid ugrásos láncok (a 0.6.0-s verziótól)
+
+![Lánc a QTH-ról](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+A **Többugrásos előjelek** allapban a program az 50 MHz-es többugrásos láncokat a szerző három feltételével keresi: **első és utolsó rövid ugrás** (500-1200 km) 50 MHz körüli MUF-fal, amelyek 11-21 MHz foEs-t kívánnak, és **középső ugrások** 2200 km-ig, amelyek kb. 9,3 MHz-et.
+
+- **Erős felhők** (narancs négyzetek): Es-spotok a világ minden részéről és GIRO ionoszondák legalább 11,3 MHz foEs-sel.
+- **A QTH-ról**: első rövid ugrás az Ön állomásától és utolsó rövid ugrás egy másik erős felhőre ugyanabban az irányban, ugyanazon a kontinensen is (például Kazahsztánban); a kör az érkezési zóna.
+- **Folyosó**: bármely két erős felhő, bármely irányban, például **Karib-térség - Ibériai-félsziget** vagy **Európa - Nyugat-Afrika** (TEP kizárva); «érinti Önt», ha az egyik vége 1200 km-en belül van Öntől.
+- **Keresd a felhőt**: csak az első rövid ugrás van meg; a világoskék zónák mutatják, hol kellene lennie az utolsó rövid ugrás felhőjének.
+- **FIGYELMEZTETÉS**, ha a középső ugrásokat felhők fedik le, **ELŐJEL**, ha csak megfigyelők nélküli zónák hiányoznak.
+- A BEÁLLÍTÁSOK fülön van a felső **figyelmeztetés** (és kívánság szerint egy ablak) az Önt érintő FIGYELMEZTETÉSEKHEZ.
+
+![Folyosó](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

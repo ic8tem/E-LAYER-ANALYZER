@@ -62,3 +62,18 @@ Efst til hægri á kortinu birtist samantekt N0NBH (E-skip fyrir valda heimsálf
 - **144 MHz**: sporadic-E frá 900 km, með staðfestingu; Q65- og JT65-spot eru EME og er hent, nema `<ES>` sé í textanum.
 - G0ISW (Propagation identification, 2024) sér stysta sporadic-E yfir 400 km á 50 og 70 MHz og yfir 1400 km á 144 MHz: reglur höfundarins samræmast á 50 og 70 MHz og eru rýmri á 144 MHz, en krefjast staðfestingar.
 - Röðin sem öllum reglunum er beitt í, með gildunum í notkun, sést í **[STILLINGAR](Settings-is)** › Flokkun spota.
+
+## Keðjur með stuttum stökkum (frá útgáfu 0.6.0)
+
+![Keðja frá QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Í undirflipanum **Fyrirboðar fjölstökks** leitar forritið að fjölstökkskeðjum á 50 MHz samkvæmt þremur skilyrðum höfundar: **fyrsta og síðasta stutta stökk** (500-1200 km) með MUF um 50 MHz, sem krefjast foEs upp á 11-21 MHz, og **miðstökk** allt að 2200 km, sem krefjast um 9,3 MHz.
+
+- **Sterk ský** (appelsínugulir ferningar): Es-spot alls staðar að úr heiminum og GIRO-jónósöndur með foEs að minnsta kosti 11,3 MHz.
+- **Frá QTH**: fyrsta stutta stökk frá stöðinni þinni og síðasta stutta stökk á öðru sterku skýi í sömu átt, líka í sömu heimsálfu (til dæmis í Kasakstan); hringurinn er komusvæðið.
+- **Gangur**: hvaða tvö sterk ský sem er, í hvaða átt sem er, til dæmis **Karíbahaf - Íberíuskagi** eða **Evrópa - Vestur-Afríka** (TEP undanskilið); «varðar þig» ef annar endinn er innan 1200 km frá þér.
+- **Leita að skýi**: aðeins fyrsta stutta stökkið er til staðar; ljósbláu svæðin sýna hvar ský síðasta stutta stökksins ætti að vera.
+- **VIÐVÖRUN** ef miðstökkin eru þakin skýjum, **FYRIRBOÐI** ef aðeins vantar svæði án athugenda.
+- Í STILLINGAR er **tilkynning** efst (valfrjálst einnig gluggi) fyrir VIÐVARANIR sem varða þig.
+
+![Gangur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

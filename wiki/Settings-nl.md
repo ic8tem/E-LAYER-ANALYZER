@@ -10,6 +10,7 @@ Vanaf versie 0.4.18 verzamelt het tabblad **INSTELLINGEN** de algemene opties va
 |---|---|
 | Station | Roepnaam, locator en hoogte, dezelfde als in de bovenste balk; **Toepassen** bevestigt ze voor alle tabbladen. |
 | Weergave | Taal, kleurenschema (de schema's van YAEC en YA-MS en, vanaf versie 0.5.0, de zes thema's van IP-TRX-CTRL: Licht, Nacht, Zwart, Blauw, Paars, Groen) **compacte modus** voor laptops van 13-15 inch (vanaf 0.5.2: automatisch onder 850 pixels hoogte, altijd of nooit) en **lettergrootte van het hele programma** (85-140 %, zoals in YA-MS). Taal en kleuren bouwen het venster opnieuw op: instellingen en spots blijven behouden. |
+| Ketens met meervoudige sprong op 50 MHz | Vanaf versie 0.6.0: melding bovenaan (en desgewenst een venster) wanneer er een WAARSCHUWING meervoudige sprong op 50 MHz ontstaat die je station betreft: keten met de eerste korte sprong vanaf jou, of corridor met een einde binnen 1200 km. Dezelfde keten wordt niet binnen een uur herhaald. |
 | Kaarten en voorspellingsgegevens | Het continent, hetzelfde menu als in de tabbladbalk. |
 | Tijd | NTP-status en het verschil tussen de tijd van de servers en de pc-klok. |
 | Updates | Controle op GitHub bij het opstarten en elke 30 minuten, automatische en stille update, knop **Nu controleren**. Automatische updates gelden niet voor systeempakketten (.deb, .rpm, Arch, Slackware). |

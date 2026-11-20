@@ -10,6 +10,7 @@ Ab Version 0.4.18 fasst der Reiter **EINSTELLUNGEN** die allgemeinen Optionen de
 |---|---|
 | Station | Rufzeichen, Locator und Höhe, dieselben wie in der oberen Leiste; **Übernehmen** bestätigt sie für alle Reiter. |
 | Darstellung | Sprache, Farbschema (die Schemata von YAEC und YA-MS und ab Version 0.5.0 die sechs Themen von IP-TRX-CTRL: Hell, Nacht, Schwarz, Blau, Violett, Grün) **Kompaktmodus** für 13-15-Zoll-Notebooks (ab 0.5.2: automatisch unter 850 Pixel Höhe, immer oder nie) und **Schriftgröße des ganzen Programms** (85-140 %, wie in YA-MS). Sprache und Farben bauen das Fenster neu auf: Einstellungen und Spots bleiben erhalten. |
+| Mehrfachsprung-Ketten auf 50 MHz | Ab Version 0.6.0: Hinweis oben (und wahlweise ein Fenster), wenn eine Mehrfachsprung-WARNUNG auf 50 MHz entsteht, die Ihre Station betrifft: Kette mit dem ersten kurzen Sprung von Ihnen oder Korridor mit einem Ende im Umkreis von 1200 km. Dieselbe Kette wird nicht vor Ablauf einer Stunde wiederholt. |
 | Karten und Vorhersagedaten | Der Kontinent, dasselbe Menü wie in der Reiterleiste. |
 | Zeit | NTP-Status und Differenz zwischen der Serverzeit und der PC-Uhr. |
 | Aktualisierungen | Prüfung auf GitHub beim Start und alle 30 Minuten, automatische und stille Aktualisierung, Schaltfläche **Jetzt prüfen**. Die automatische Aktualisierung gilt nicht für Systempakete (.deb, .rpm, Arch, Slackware). |

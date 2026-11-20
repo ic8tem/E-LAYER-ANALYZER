@@ -62,3 +62,18 @@ Oben rechts auf der Karte erscheint die Zusammenfassung von N0NBH (E-skip für d
 - **144 MHz**: Sporadic-E ab 900 km, mit Bestätigung; Q65- und JT65-Spots sind EME und werden verworfen, außer bei `<ES>` im Text.
 - G0ISW (Propagation identification, 2024) sieht das kürzeste Sporadic-E über 400 km auf 50 und 70 MHz und über 1400 km auf 144 MHz: Die Regeln des Autors stimmen auf 50 und 70 MHz überein und sind auf 144 MHz weiter gefasst, verlangen aber eine Bestätigung.
 - Die Reihenfolge, in der alle Regeln angewandt werden, mit den verwendeten Werten, zeigt **[EINSTELLUNGEN](Settings-de)** › Spot-Verteilung.
+
+## Ketten mit kurzen Sprüngen (ab Version 0.6.0)
+
+![Kette vom QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Im Unterreiter **Mehrfachsprung-Vorboten** sucht das Programm die Mehrfachsprung-Ketten auf 50 MHz mit den drei Bedingungen des Autors: **erster und letzter kurzer Sprung** (500-1200 km) mit MUF um 50 MHz, die eine foEs von 11-21 MHz verlangen, und **mittlere Sprünge** bis 2200 km, die etwa 9,3 MHz verlangen.
+
+- **Starke Wolken** (orange Quadrate): Es-Spots aus aller Welt und GIRO-Ionosonden mit einer foEs von mindestens 11,3 MHz.
+- **Vom QTH**: erster kurzer Sprung von Ihrer Station und letzter kurzer Sprung auf einer anderen starken Wolke in derselben Richtung, auch auf demselben Kontinent (zum Beispiel in Kasachstan); der Kreis ist die Ankunftszone.
+- **Korridor**: zwei beliebige starke Wolken, in jeder Richtung, zum Beispiel **Karibik - Iberische Halbinsel** oder **Europa - Westafrika** (TEP ausgeschlossen); «betrifft Sie», wenn ein Ende im Umkreis von 1200 km um Sie liegt.
+- **Wolke suchen**: Es gibt nur den ersten kurzen Sprung; die hellblauen Zonen sagen, wo die Wolke des kurzen letzten Sprungs liegen müsste.
+- **WARNUNG**, wenn die mittleren Sprünge von Wolken abgedeckt sind, **VORBOTE**, wenn nur Zonen ohne Beobachter fehlen.
+- In EINSTELLUNGEN gibt es den **Hinweis** oben (und wahlweise ein Fenster) für die WARNUNGEN, die Sie betreffen.
+
+![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

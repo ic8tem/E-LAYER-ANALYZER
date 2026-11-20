@@ -39,6 +39,10 @@
 
 Lista completă se află în fila SURSE a programului.
 
+## Mulțumiri
+
+Pentru dezvoltarea E-sporadic pe 50 MHz: **Johan IW2DNI** și **Fabio IZ7NLJ**.
+
 ## Licență
 
 E-LAYER ANALYZER este software liber, cu licența **GNU GPL-3.0** (fișierul COPYING), aceeași ca a YA-MS. Este distribuit fără nicio garanție. Datele surselor externe rămân ale instituțiilor respective, cu condițiile lor (de exemplu datele GIRO: CC BY-NC-SA 4.0, doar uz necomercial).

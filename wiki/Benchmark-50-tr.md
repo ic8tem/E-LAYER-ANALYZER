@@ -32,3 +32,9 @@ Serbest merkezli **Mercator** haritası: tekerlek = yakınlaştırma, sürüklem
 ## Ayrıntılar
 
 Seçilen yol için: mesafe ve IK3XTV tablosuna göre değerlendirme, iki yöndeki azimut, yansıma noktalarının kareleriyle eşit atlamalar, 1200 km içinde kısa ilk atlama (IC8TEM'in deneyimi) ve foEs onay kutusuyla en düşük foEs.
+
+## Zincirlerin doğrulanması (0.6.0 sürümünden itibaren)
+
+**Spot, ADIF veya ALL.TXT yükle** (ZAMAN İÇİNDE Es BULUTLARI'ndan dışa aktarılan spot'lar, diğer istasyonların ADIF logları, JTDX veya WSJT-X'in ALL.TXT çözümlemeleri: çağrı işareti gönderim satırlarından tanınır) ve **Zincirleri doğrula**: program, kısa atlamalı zincir kuralını 1. istasyonun çok atlamalı açılışlarına yeniden uygular ve kaç açılışı önceden haber vereceğini (UYARI, ÖNCÜL veya yalnızca ilk kısa atlama), ortanca önceden haber verme süresini ve ardından çok atlamalı QSO gelmeyen uyarıları yazar. Yüklenen kaynak olmadan bulutlar yalnızca logdan gelir ve son kısa atlama neredeyse görünmez: uzak istasyonların verileri gerekir.
+
+![Doğrulama](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

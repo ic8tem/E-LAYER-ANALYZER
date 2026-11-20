@@ -32,3 +32,9 @@ Zvolte **den** (při otevření ten s nejvíce QSO s vícenásobným skokem) a �
 ## Podrobnosti
 
 Pro zvolenou trasu: vzdálenost a hodnocení podle tabulky IK3XTV, azimut v obou směrech, stejné skoky se čtverci bodů odrazu, krátký první skok do 1200 km (zkušenost IC8TEM) a se zaškrtnutým polem foEs minimální foEs.
+
+## Ověření řetězců (od verze 0.6.0)
+
+**Načíst spoty, ADIF nebo ALL.TXT** (spoty exportované z OBLAKA Es V ČASE, deníky ADIF jiných stanic, dekódování ALL.TXT z JTDX nebo WSJT-X: značka se pozná podle vysílacích řádků) a **Ověřit řetězce**: program přehraje na otevřeních s vícenásobným skokem stanice 1 pravidlo řetězců s krátkými skoky a napíše, kolik otevření by předpověděl (VÝSTRAHA, PŘEDZVĚST nebo jen první krátký skok), mediánový předstih a výstrahy, po kterých nenásledovalo QSO s vícenásobným skokem. Bez načtených zdrojů pocházejí oblaka jen z deníku a poslední krátký skok téměř není vidět: jsou potřeba data vzdálených stanic.
+
+![Ověření](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

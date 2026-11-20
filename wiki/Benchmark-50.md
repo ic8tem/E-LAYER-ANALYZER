@@ -32,3 +32,9 @@ Choose the **day** (on opening, the one with the most multi-hop QSOs) and the ti
 ## Details
 
 For the chosen path: distance and IK3XTV table rating, azimuth in both directions, equal hops with the squares of the reflection points, short first hop within 1200 km (IC8TEM experience) and, with the foEs checkbox, the minimum foEs.
+
+## Check of the chains (from version 0.6.0)
+
+**Load spots, ADIF or ALL.TXT** (spots exported by Es CLOUDS OVER TIME, ADIF logs of other stations, ALL.TXT decodes of JTDX or WSJT-X: the callsign is recognised from the transmit lines) and **Check the chains**: the program replays on the multi-hop openings of station 1 the rule of the short-hop chains and writes how many openings it would have anticipated (ALERT, PRECURSOR or only the first short hop), the median lead time and the alerts not followed by multi-hop QSOs. Without loaded sources the clouds come only from the log, and the last short hop can hardly be seen: data from distant stations are needed.
+
+![Check](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

@@ -32,3 +32,9 @@ Carte **Mercator** à centre libre : molette = zoom, glisser = déplacer.
 ## Détails
 
 Pour le trajet choisi : distance et classement selon le tableau d'IK3XTV, azimut dans les deux sens, bonds égaux avec les carrés des points de réflexion, premier bond court à moins de 1200 km (expérience d'IC8TEM) et, avec la case foEs, la foEs minimale.
+
+## Vérification des chaînes (depuis la version 0.6.0)
+
+**Charger des spots, un ADIF ou un ALL.TXT** (spots exportés par NUAGES Es DANS LE TEMPS, logs ADIF d'autres stations, décodages ALL.TXT de JTDX ou WSJT-X : l'indicatif se reconnaît aux lignes d'émission) et **Vérifier les chaînes** : le programme rejoue sur les ouvertures multi-bond de la station 1 la règle des chaînes à bonds courts et indique combien d'ouvertures il aurait anticipées (ALERTE, PRÉCURSEUR ou seulement le premier bond court), l'avance médiane et les alertes non suivies de QSO multi-bond. Sans sources chargées, les nuages viennent seulement du log, et le dernier bond court se voit à peine : il faut des données de stations lointaines.
+
+![Vérification](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

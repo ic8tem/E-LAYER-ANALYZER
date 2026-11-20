@@ -62,3 +62,18 @@ Kaardi paremas ülanurgas kuvatakse N0NBH kokkuvõte (valitud kontinendi E-skip,
 - **144 MHz**: sporaadiline E alates 900 km-st, kinnitusega; Q65 ja JT65 spotid on EME ja jäetakse kõrvale, välja arvatud `<ES>` tekstis.
 - G0ISW (Propagation identification, 2024) näeb lühimat sporaadilist E-d üle 400 km 50 ja 70 MHz-l ning üle 1400 km 144 MHz-l: autori reeglid on 50 ja 70 MHz-l kooskõlas ja 144 MHz-l laiemad, kuid nõuavad kinnitust.
 - Kõigi reeglite rakendamise järjekord koos kasutusel olevate väärtustega on näha sakil **[SEADED](Settings-et)** › Spottide suunamine.
+
+## Lühikeste hüpetega ahelad (alates versioonist 0.6.0)
+
+![Ahel QTH-st](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Alamsakis **Mitmehüppelise levi eelkäijad** otsib programm 50 MHz mitmehüppelisi ahelaid autori kolme tingimuse järgi: **esimene ja viimane lühike hüpe** (500-1200 km) MUF-iga umbes 50 MHz, mis nõuavad foEs-i 11-21 MHz, ning **keskmised hüpped** kuni 2200 km, mis nõuavad umbes 9,3 MHz.
+
+- **Tugevad pilved** (oranžid ruudud): kogu maailma Es-spotid ja GIRO ionosondid foEs-iga vähemalt 11,3 MHz.
+- **QTH-st**: esimene lühike hüpe sinu jaamast ja viimane lühike hüpe teisele tugevale pilvele samas suunas, ka samal mandril (näiteks Kasahstanis); ring on saabumistsoon.
+- **Koridor**: mis tahes kaks tugevat pilve, igas suunas, näiteks **Kariibi meri - Pürenee poolsaar** või **Euroopa - Lääne-Aafrika** (TEP välja arvatud); «puudutab sind», kui üks ots on sinust 1200 km piires.
+- **Otsi pilve**: on ainult esimene lühike hüpe; helesinised tsoonid näitavad, kus peaks olema viimase lühikese hüppe pilv.
+- **HOIATUS**, kui keskmised hüpped on pilvedega kaetud, **EELKÄIJA**, kui puuduvad ainult vaatlejateta tsoonid.
+- SEADETES on üleval **teade** (soovi korral ka aken) sind puudutavate HOIATUSTE kohta.
+
+![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

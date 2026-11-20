@@ -62,3 +62,18 @@
 - **144 MHz**：偶发 E 层从 900 km 起，需确认；Q65 和 JT65 spot 属于 EME，会被丢弃，除非文本中有 `<ES>`。
 - G0ISW（Propagation identification，2024）观测到的最短偶发 E 层在 50 和 70 MHz 超过 400 km，在 144 MHz 超过 1400 km：作者的规则在 50 和 70 MHz 与之一致，在 144 MHz 更宽，但要求确认。
 - 所有规则的应用顺序以及当前使用的数值显示在 **[设置](Settings-zh)** › spot 分流 中。
+
+## 短跳链（从 0.6.0 版起）
+
+![来自 QTH 的链](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+在 **多跳前兆** 子选项卡中，程序按照作者的三个条件寻找 50 MHz 多跳链：**第一个和最后一个短跳**（500-1200 km）的 MUF 在 50 MHz 左右，需要 11-21 MHz 的 foEs；**中间跳** 最长 2200 km，约需 9.3 MHz。
+
+- **强云**（橙色方块）：全世界的 Es spot 和 foEs 至少 11.3 MHz 的 GIRO 电离层测高仪。
+- **来自 QTH**：从你的台站出发的第一个短跳，以及沿同一方向在另一块强云上的最后一个短跳，也可以在同一大洲内（例如哈萨克斯坦）；圆是到达区。
+- **走廊**：任意两块强云、任何方向，例如 **加勒比 - 伊比利亚半岛** 或 **欧洲 - 西非**（不含 TEP）；如果一个端点在你 1200 km 以内，则为 «与你相关»。
+- **寻找云**：只有第一个短跳；浅蓝色区域表示最后一个短跳的云应在何处。
+- 中间跳都有云覆盖时为 **警示**，只缺无人观测的区域时为 **前兆**。
+- 设置 中有顶部 **提示**（也可选择弹出窗口），用于与你相关的警示。
+
+![走廊](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

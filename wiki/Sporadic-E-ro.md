@@ -62,3 +62,18 @@ Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare
 - **144 MHz**: E-sporadic de la 900 km, cu confirmare; spoturile Q65 și JT65 sunt EME și sunt respinse, cu excepția `<ES>` în text.
 - G0ISW (Propagation identification, 2024) vede cel mai scurt E-sporadic peste 400 km pe 50 și 70 MHz și peste 1400 km pe 144 MHz: regulile autorului concordă pe 50 și 70 MHz și sunt mai largi pe 144 MHz, dar cer o confirmare.
 - Ordinea în care se aplică toate regulile, cu valorile în uz, este afișată în **[SETĂRI](Settings-ro)** › Distribuirea spoturilor.
+
+## Lanțuri cu salturi scurte (din versiunea 0.6.0)
+
+![Lanț din QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+În sub-fila **Precursori multi-salt** programul caută lanțurile multi-salt pe 50 MHz cu cele trei condiții ale autorului: **primul și ultimul salt scurt** (500-1200 km) cu MUF în jur de 50 MHz, care cer o foEs de 11-21 MHz, și **salturile centrale** de până la 2200 km, care cer circa 9,3 MHz.
+
+- **Nori puternici** (pătrate portocalii): spoturi Es din toată lumea și ionosonde GIRO cu foEs de cel puțin 11,3 MHz.
+- **Din QTH**: primul salt scurt de la stația ta și ultimul salt scurt pe un alt nor puternic în aceeași direcție, și pe același continent (de exemplu în Kazahstan); cercul este zona de sosire.
+- **Coridor**: oricare doi nori puternici, în orice direcție, de exemplu **Caraibe - Peninsula Iberică** sau **Europa - Africa de Vest** (TEP exclus); «te privește» dacă un capăt este în limita a 1200 km de tine.
+- **Caută norul**: există doar primul salt scurt; zonele albastru-deschis arată unde ar trebui să fie norul saltului scurt final.
+- **ALERTĂ** dacă salturile centrale sunt acoperite de nori, **PRECURSOR** dacă lipsesc doar zone fără observatori.
+- În SETĂRI există **avertismentul** de sus (și opțional o fereastră) pentru ALERTELE care te privesc.
+
+![Coridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

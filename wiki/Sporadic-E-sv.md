@@ -62,3 +62,18 @@ Uppe till höger på kartan visas sammanfattningen från N0NBH (E-skip för den 
 - **144 MHz**: sporadiskt E från 900 km, med bekräftelse; Q65- och JT65-spots är EME och förkastas, utom med `<ES>` i texten.
 - G0ISW (Propagation identification, 2024) ser det kortaste sporadiska E över 400 km på 50 och 70 MHz och över 1400 km på 144 MHz: författarens regler stämmer på 50 och 70 MHz och är vidare på 144 MHz, men kräver en bekräftelse.
 - Ordningen som alla regler tillämpas i, med de värden som används, visas i **[INSTÄLLNINGAR](Settings-sv)** › Fördelning av spots.
+
+## Kedjor med korta hopp (från version 0.6.0)
+
+![Kedja från QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp på 50 MHz med författarens tre villkor: **första och sista korta hoppet** (500-1200 km) med MUF runt 50 MHz, vilket kräver ett foEs på 11-21 MHz, och **mellanhopp** upp till 2200 km, som kräver ca 9,3 MHz.
+
+- **Starka moln** (orange fyrkanter): Es-spots från hela världen och GIRO-jonosonder med foEs på minst 11,3 MHz.
+- **Från QTH**: första korta hoppet från din station och sista korta hoppet via ett annat starkt moln i samma riktning, även på samma kontinent (till exempel i Kazakstan); cirkeln är ankomstzonen.
+- **Korridor**: två godtyckliga starka moln i alla riktningar, till exempel **Karibien - Iberiska halvön** eller **Europa - Västafrika** (TEP uteslutet); «berör dig» om en ände är inom 1200 km från dig.
+- **Sök molnet**: det finns bara det första korta hoppet; de ljusblå zonerna visar var molnet för det sista korta hoppet borde ligga.
+- **LARM** om mellanhoppen är täckta av moln, **FÖREBUD** om det bara saknas zoner utan observatörer.
+- I INSTÄLLNINGAR finns **varningen** överst (och valfritt ett fönster) för de LARM som berör dig.
+
+![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

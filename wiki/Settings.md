@@ -10,6 +10,7 @@ From version 0.4.18 the **SETTINGS** tab gathers the general options of the prog
 |---|---|
 | Station | Callsign, locator and height, the same as in the top bar; **Apply** confirms them for all tabs. |
 | Appearance | Language, colour scheme (the YAEC and YA-MS schemes and, from version 0.5.0, the six IP-TRX-CTRL themes: Light, Night, Black, Blue, Purple, Green) **compact mode** for 13-15 inch notebooks (from 0.5.2: automatic below 850 pixels of height, always or never) and **font size of the whole program** (85-140 %, as in YA-MS). Language and colours rebuild the window: settings and spots are kept. |
+| Multi-hop chains on 50 MHz | From version 0.6.0: warning at the top (and optionally a window) when a multi-hop ALERT on 50 MHz arises that concerns your station: a chain with the first short hop from you, or a corridor with one end within 1200 km. The same chain is not repeated within an hour. |
 | Maps and forecast data | The continent, the same menu as in the tab bar. |
 | Time | NTP status and the difference between the server time and the PC clock. |
 | Updates | Check on GitHub at start-up and every 30 minutes, automatic and silent update, **Check now** button. Automatic updates do not apply to system packages (.deb, .rpm, Arch, Slackware). |

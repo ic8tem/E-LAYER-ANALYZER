@@ -39,6 +39,10 @@
 
 Täielik loetelu on programmi sakil ALLIKAD.
 
+## Tänusõnad
+
+50 MHz sporaadilise E arendamise eest: **Johan IW2DNI** ja **Fabio IZ7NLJ**.
+
 ## Litsents
 
 E-LAYER ANALYZER on vaba tarkvara **GNU GPL-3.0** litsentsiga (fail COPYING), sama mis YA-MS-il. Seda levitatakse ilma igasuguse garantiita. Väliste allikate andmed kuuluvad jätkuvalt vastavatele asutustele ja neile kehtivad nende tingimused (näiteks GIRO andmed: CC BY-NC-SA 4.0, ainult mitteäriliseks kasutamiseks).

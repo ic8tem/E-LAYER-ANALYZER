@@ -61,3 +61,18 @@ Haritanın sağ üstünde N0NBH özeti görünür (seçilen kıta için E-skip, 
 - **144 MHz**: doğrulamayla 900 km'den itibaren Sporadic-E; Q65 ve JT65 spot'ları EME'dir ve metinde `<ES>` yoksa atılır.
 - G0ISW (Propagation identification, 2024) en kısa Sporadic-E'yi 50 ve 70 MHz'de 400 km'nin, 144 MHz'de 1400 km'nin ötesinde görür: yazarın kuralları 50 ve 70 MHz'de örtüşür, 144 MHz'de daha geniştir ama doğrulama ister.
 - Tüm kuralların uygulanma sırası, kullanılan değerlerle birlikte, **[AYARLAR](Settings-tr)** › Spot yönlendirme bölümünde gösterilir.
+
+## Kısa atlamalı zincirler (0.6.0 sürümünden itibaren)
+
+![QTH'den zincir](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+**Çok atlama öncülleri** alt sekmesinde program, 50 MHz'deki çok atlama zincirlerini yazarın üç koşuluyla arar: MUF'u 50 MHz civarında olan, 11-21 MHz foEs gerektiren **ilk ve son kısa atlama** (500-1200 km) ve yaklaşık 9,3 MHz gerektiren, 2200 km'ye kadar **orta atlamalar**.
+
+- **Güçlü bulutlar** (turuncu kareler): tüm dünyanın Es spot'ları ve foEs'i en az 11,3 MHz olan GIRO iyonosondları.
+- **QTH'den**: istasyonunuzdan ilk kısa atlama ve aynı yön boyunca başka bir güçlü buluta son kısa atlama, aynı kıtada da (örneğin Kazakistan'da); daire varış bölgesidir.
+- **Koridor**: herhangi iki güçlü bulut, her yönde, örneğin **Karayipler - İber Yarımadası** veya **Avrupa - Batı Afrika** (TEP hariç); bir uç size 1200 km içindeyse «sizi ilgilendiriyor».
+- **Bulutu ara**: yalnızca ilk kısa atlama var; açık mavi bölgeler son kısa atlamanın bulutunun nerede olması gerektiğini söyler.
+- Orta atlamalar bulutlarla kapsanmışsa **UYARI**, yalnızca gözlemcisiz bölgeler eksikse **ÖNCÜL**.
+- AYARLAR'da sizi ilgilendiren UYARILAR için üstte **bildirim** (isteğe bağlı olarak bir pencere de) vardır.
+
+![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -10,6 +10,7 @@ Fra version 0.4.18 samler fanen **INDSTILLINGER** programmets generelle indstill
 |---|---|
 | Station | Kaldesignal, lokator og højde, de samme som i linjen øverst; **Anvend** bekræfter dem for alle faner. |
 | Udseende | Sprog, farveskema (skemaerne fra YAEC og YA-MS og fra version 0.5.0 de seks temaer fra IP-TRX-CTRL: Lys, Nat, Sort, Blå, Lilla, Grøn), **kompakt tilstand** til bærbare med 13-15 tommer (fra 0.5.2: automatisk under 850 pixel i højden, altid eller aldrig) og **skriftstørrelse for hele programmet** (85-140 %, som i YA-MS). Sprog og farver genopbygger vinduet: indstillinger og spots bevares. |
+| Multi-hop-kæder på 50 MHz | Fra version 0.6.0: advarsel øverst (og valgfrit et vindue), når der opstår en ALARM for multi-hop på 50 MHz, der angår din station: en kæde med det første korte hop fra dig eller en korridor med en ende inden for 1200 km. Den samme kæde gentages ikke inden for en time. |
 | Kort og prognosedata | Kontinentet, den samme menu som i fanelinjen. |
 | Tid | NTP-status og forskellen mellem servertiden og pc'ens ur. |
 | Opdateringer | Kontrol på GitHub ved opstart og hvert 30. minut, automatisk og lydløs opdatering, knappen **Kontrollér nu**. Automatisk opdatering gælder ikke for systempakker (.deb, .rpm, Arch, Slackware). |

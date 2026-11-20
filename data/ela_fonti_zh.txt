@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER 的来源
-SUB|程序所用来源列表，按选项卡列出 - 作者 Costantino IC8TEM - 版本 0.5.3，2026 年 11 月
+SUB|程序所用来源列表，按选项卡列出 - 作者 Costantino IC8TEM - 版本 0.6.0，2026 年 11 月
 H1|主要来源
 SRC|1. G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico. Analisi del modo di propagazione ed esposizione di osservazioni in merito", Capri, 2011 年 5 月。锥面几何、a1 + a2 = 180° 规则、仰角公式、季节与时段、日内瓦散射点。
 SRC|2. G. Cerrotta IC8FAX, "Field Aligned Irregularities"，网页 https://qsl.net/ic8fax/page4.html。反射锥与互补等值线、已知散射点（日内瓦、布鲁塞尔、布达佩斯、JN92、JN41/42）、仰角示例（IW1AZJ 在 ~150 km 处 35°，IC8CQF 在 ~800 km 处 6°）、季节为 5 月至 9 月中旬、16-22 UTC、从 JN70CN 通联的方格、并提及 K9SE 的程序。
@@ -76,3 +76,5 @@ SRC|67. A. T. Chartier, T. R. Hanley, D. J. Emmons, «Long-distance propagation 
 SRC|68. B. W. Reinisch, I. A. Galkin, «Global Ionospheric Radio Observatory (GIRO)», Earth, Planets and Space 63 (2011) 377-381（https://doi.org/10.5047/eps.2011.03.001）：自动判读电离图（ARTIST）的全球 Digisonde 测高仪网络；数据来自服务 lgdc.uml.edu/fastchar/getbest。台站列表：ULCAR, University of Massachusetts Lowell（https://ulcar.uml.edu/stationlist.html）。GIRO 数据以 CC BY-NC-SA 4.0 许可证发布：非商业用途、注明来源、再发布的数据使用相同许可证；本程序免费，并在选项卡中注明 GIRO。用于“电离层测高仪”子选项卡（foEs、foF2、MUF(D)）。经作者于 2026 年 11 月 14 日认可的来源。
 SRC|69. DM6AX, «MUF Muncher»（https://github.com/mooxle/Muf_Muncher，MIT 许可证）：实时读取 GIRO 测高仪 foEs 和 MUF 的程序。本程序只借用了其思路和 GIRO 服务的地址，没有使用其代码。经作者于 2026 年 11 月 14 日认可的来源。
 SRC|70. A. T. Chartier，仓库 «sporadice»（https://github.com/alexchartier/sporadice，脚本 analyze_dx_data.m，未声明许可证）：将论文 [67] 的方法用于 2024 年 5 月 11 日（00-04 UTC）的 28 和 50 MHz spot：每次通联的中点、100 km 高度、用正割定律求最低 foEs、NmE = foEs²/80.6、2° x 2° 网格、5 分钟一步、每格取最高值。本程序描述该方法并用自己的模型（所有跳的反射点）重现；没有复制代码。用于“Es 云随时间变化”子选项卡。经作者于 2026 年 11 月 14 日认可的来源。
+SRC|71. V. Grassmann DF5AI，«Hidden Mode of Sporadic-E?»，UKSMG，1999（https://www.uksmg.org/content/moremagicon6.htm），50 MHz（144 MHz 仅简单提及）：1983 至 1999 年的 979 次通联；短跳模式的峰值约在 950 km，其倍数在 1800-1900 和 2700-2800 km；长跳模式的峰值在 1500-1600 km，其两倍在 3000-3200 km；对短跳假设了较低的反射高度（80-90 km）。比较：证实了 IK3XTV [3] 的最小值（500 km 以下没有，700 km 以下极少）以及 IC8TEM [4] 关于第一个短跳的经验；其最佳距离（1500-1600 km）比 IK3XTV 的（1500-2000 km）短。用于两端为短跳的多跳链。作者于 2026 年 11 月 20 日认可的来源。
+SRC|72. EI7GL，关于 UN7MBH（哈萨克斯坦）的帖子，70 MHz，2019 和 2021 年（https://ei7gl.blogspot.com/search/label/UN7MBH）：UN7MBH 与西班牙相距 4300-4600 km、与加那利群岛相距 6112 km 的通联，被解读为三跳。比较：IK3XTV [3] 的双跳和三跳距离；这是 70 MHz 而不是 50 MHz，跳数是由距离推断的。用作端点在中亚的链的例子。作者于 2026 年 11 月 20 日认可的来源。

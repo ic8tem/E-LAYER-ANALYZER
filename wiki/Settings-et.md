@@ -10,6 +10,7 @@ Alates versioonist 0.4.18 koondab sakk **SEADED** programmi üldised valikud ja 
 |---|---|
 | Jaam | Kutsung, lokaator ja kõrgus, samad mis ülemisel ribal; **Rakenda** kinnitab need kõigile sakkidele. |
 | Välimus | Keel, värviskeem (YAEC-i ja YA-MS-i skeemid ning alates versioonist 0.5.0 kuus IP-TRX-CTRL-i teemat: Hele, Öö, Must, Sinine, Lilla, Roheline), **kompaktne režiim** 13-15-tolliste sülearvutite jaoks (alates 0.5.2-st: automaatne alla 850 piksli kõrguse korral, alati või mitte kunagi) ja **kogu programmi kirjasuurus** (85-140 %, nagu YA-MS-is). Keel ja värvid ehitavad akna uuesti üles: seaded ja spotid säilivad. |
+| Mitmehüppelised ahelad 50 MHz-l | Alates versioonist 0.6.0: teade üleval (ja soovi korral aken), kui tekib sinu jaama puudutav mitmehüppelise levi HOIATUS 50 MHz-l: ahel, mille esimene lühike hüpe on sinu jaamast, või koridor, mille üks ots on 1200 km piires. Sama ahel ei kordu enne tunni möödumist. |
 | Kaardid ja prognoosiandmed | Kontinent, sama menüü mis sakiribal. |
 | Aeg | NTP olek ning serverite aja ja arvuti kella erinevus. |
 | Uuendused | Kontroll GitHubis käivitamisel ja iga 30 minuti järel, automaatne ja vaikne uuendamine, nupp **Kontrolli kohe**. Automaatsed uuendused ei kehti süsteemipakettide (.deb, .rpm, Arch, Slackware) kohta. |

@@ -32,3 +32,9 @@ Mapa **Merkatora** z dowolnym środkiem: kółko = powiększenie, przeciąganie 
 ## Szczegóły
 
 Dla wybranej trasy: odległość i ocena według tabeli IK3XTV, azymut w obu kierunkach, skoki równe z kwadratami punktów odbicia, krótki pierwszy skok do 1200 km (doświadczenie IC8TEM) oraz, przy zaznaczonym polu foEs, minimalna foEs.
+
+## Sprawdzenie łańcuchów (od wersji 0.6.0)
+
+**Wczytaj spoty, ADIF lub ALL.TXT** (spoty wyeksportowane z OBŁOKI Es W CZASIE, logi ADIF innych stacji, dekodowania ALL.TXT z JTDX lub WSJT-X: znak wywoławczy rozpoznaje się po wierszach nadawania) i **Sprawdź łańcuchy**: program odtwarza na otwarciach wieloskokowych stacji 1 regułę łańcuchów z krótkimi skokami i podaje, ile otwarć by przewidział (ALERT, PREKURSOR lub tylko pierwszy krótki skok), medianę wyprzedzenia oraz alerty, po których nie było QSO wieloskokowych. Bez wczytanych źródeł obłoki pochodzą tylko z logu, a ostatni krótki skok jest prawie niewidoczny: potrzebne są dane odległych stacji.
+
+![Sprawdzenie](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

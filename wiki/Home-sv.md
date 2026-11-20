@@ -39,6 +39,10 @@
 
 Den fullständiga listan finns i programmets flik KÄLLOR.
 
+## Tack
+
+För utvecklingen av sporadiskt E på 50 MHz: **Johan IW2DNI** och **Fabio IZ7NLJ**.
+
 ## Licens
 
 E-LAYER ANALYZER är fri programvara med licensen **GNU GPL-3.0** (filen COPYING), samma som YA-MS. Det distribueras utan någon garanti. Data från externa källor tillhör fortfarande respektive organisation, med deras villkor (till exempel GIRO-data: CC BY-NC-SA 4.0, endast icke-kommersiell användning).

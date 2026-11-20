@@ -32,3 +32,9 @@ Vaba keskpunktiga **Mercatori** kaart: rullik = suum, lohistamine = nihutamine.
 ## Üksikasjad
 
 Valitud trassi kohta: kaugus ja hinnang IK3XTV tabeli järgi, asimuut mõlemas suunas, võrdsed hüpped peegelduspunktide ruutudega, lühike esimene hüpe kuni 1200 km (IC8TEM-i kogemus) ning foEs-i märkeruuduga minimaalne foEs.
+
+## Ahelate kontroll (alates versioonist 0.6.0)
+
+**Laadi spotid, ADIF või ALL.TXT** (Es-PILVED AJAS-ist eksporditud spotid, teiste jaamade ADIF-logid, JTDX-i või WSJT-X-i ALL.TXT dekodeeringud: kutsung tuntakse ära saateridade järgi) ja **Kontrolli ahelaid**: programm mängib jaama 1 mitmehüppelistel avanemistel uuesti läbi lühikeste hüpetega ahelate reegli ja kirjutab, mitu avanemist see oleks ette näinud (HOIATUS, EELKÄIJA või ainult esimene lühike hüpe), mediaanse ettehaarde ja hoiatused, millele ei järgnenud mitmehüppelisi QSO-sid. Ilma laaditud allikateta tulevad pilved ainult logist ja viimane lühike hüpe on vaevu nähtav: vaja on kaugete jaamade andmeid.
+
+![Kontroll](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

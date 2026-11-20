@@ -62,3 +62,18 @@ Vpravo nahoře na mapě se zobrazuje souhrn N0NBH (E-skip pro zvolený kontinent
 - **144 MHz**: sporadická vrstva E od 900 km, s potvrzením; spoty Q65 a JT65 jsou EME a zahazují se, pokud text neobsahuje `<ES>`.
 - G0ISW (Propagation identification, 2024) vidí nejkratší sporadickou vrstvu E nad 400 km na 50 a 70 MHz a nad 1400 km na 144 MHz: pravidla autora se shodují na 50 a 70 MHz a na 144 MHz jsou širší, ale vyžadují potvrzení.
 - Pořadí, v jakém se všechna pravidla uplatňují, s používanými hodnotami, ukazuje **[NASTAVENÍ](Settings-cs)** › Třídění spotů.
+
+## Řetězce s krátkými skoky (od verze 0.6.0)
+
+![Řetězec z QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+V podkartě **Předzvěsti vícenásobného skoku** program hledá řetězce vícenásobného skoku na 50 MHz se třemi podmínkami autora: **první a poslední krátký skok** (500-1200 km) s MUF kolem 50 MHz, které vyžadují foEs 11-21 MHz, a **střední skoky** do 2200 km, které vyžadují asi 9,3 MHz.
+
+- **Silná oblaka** (oranžové čtverce): spoty Es z celého světa a ionosondy GIRO s foEs nejméně 11,3 MHz.
+- **Z QTH**: první krátký skok od vaší stanice a poslední krátký skok na jiný silný oblak ve stejném směru, i na stejném kontinentu (například v Kazachstánu); kruh je zóna příchodu.
+- **Koridor**: libovolná dvě silná oblaka v jakémkoli směru, například **Karibik - Pyrenejský poloostrov** nebo **Evropa - západní Afrika** (TEP vyloučeno); «týká se vás», pokud je jeden konec do 1200 km od vás.
+- **Hledej oblak**: je jen první krátký skok; světle modré zóny ukazují, kde by měl ležet oblak krátkého koncového skoku.
+- **VÝSTRAHA**, pokud jsou střední skoky pokryté oblaky, **PŘEDZVĚST**, pokud chybějí jen zóny bez pozorovatelů.
+- V NASTAVENÍ je **upozornění** nahoře (a volitelně okno) pro VÝSTRAHY, které se vás týkají.
+
+![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

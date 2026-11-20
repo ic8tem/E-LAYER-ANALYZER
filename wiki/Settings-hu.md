@@ -10,6 +10,7 @@ A 0.4.18-as verziótól a **BEÁLLÍTÁSOK** fül a program általános beállí
 |---|---|
 | Állomás | Hívójel, lokátor és magasság, ugyanazok, mint a felső sávban; az **Alkalmaz** gomb minden fülre érvényesíti őket. |
 | Megjelenés | Nyelv, színséma (a YAEC és a YA-MS sémái, a 0.5.0-s verziótól pedig az IP-TRX-CTRL hat témája: Világos, Éjszaka, Fekete, Kék, Lila, Zöld), **kompakt mód** a 13-15 colos laptopokhoz (a 0.5.2-től: automatikus 850 pixeles magasság alatt, mindig vagy soha) és **az egész program betűmérete** (85-140 %, mint a YA-MS-ben). A nyelv és a színek újraépítik az ablakot: a beállítások és a spotok megmaradnak. |
+| Többugrásos láncok 50 MHz-en | A 0.6.0-s verziótól: figyelmeztetés felül (és kívánság szerint egy ablak), ha az Ön állomását érintő 50 MHz-es többugrásos FIGYELMEZTETÉS keletkezik: lánc, amelynek első rövid ugrása Öntől indul, vagy folyosó, amelynek egyik vége 1200 km-en belül van. Ugyanaz a lánc egy órán belül nem ismétlődik. |
 | Térképek és előrejelzési adatok | A kontinens, ugyanaz a menü, mint a fülsávban. |
 | Idő | Az NTP állapota és a szerverek ideje és a PC órája közötti különbség. |
 | Frissítések | Ellenőrzés a GitHubon indításkor és 30 percenként, automatikus és csendes frissítés, **Ellenőrzés most** gomb. Az automatikus frissítés a rendszercsomagokra (.deb, .rpm, Arch, Slackware) nem vonatkozik. |

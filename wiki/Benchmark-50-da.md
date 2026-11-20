@@ -32,3 +32,9 @@ Vælg **dagen** (ved åbning den med flest multi-hop-QSO'er) og tidsrummet **fra
 ## Detaljer
 
 For den valgte strækning: afstand og vurdering efter IK3XTV-tabellen, azimut i begge retninger, lige lange hop med felterne for refleksionspunkterne, kort første hop inden for 1200 km (IC8TEM's erfaring) og, med afkrydsningsfeltet foEs, den mindste foEs.
+
+## Kontrol af kæderne (fra version 0.6.0)
+
+**Indlæs spots, ADIF eller ALL.TXT** (spots eksporteret fra Es-SKYER OVER TID, ADIF-logs fra andre stationer, ALL.TXT-dekodninger fra JTDX eller WSJT-X: kaldesignalet genkendes på sendelinjerne) og **Kontrollér kæderne**: programmet afspiller reglen for kæder med korte hop igen på station 1's multi-hop-åbninger og skriver, hvor mange åbninger den ville have forudset (ALARM, FORLØBER eller kun det første korte hop), det mediane forvarsel og de alarmer, der ikke blev fulgt af multi-hop-QSO'er. Uden indlæste kilder kommer skyerne kun fra loggen, og det sidste korte hop ses næsten ikke: der kræves data fra fjerne stationer.
+
+![Kontrol](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

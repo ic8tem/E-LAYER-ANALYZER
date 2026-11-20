@@ -39,6 +39,10 @@
 
 Die volledige lys is in die program se oortjie BRONNE.
 
+## Erkennings
+
+Vir die ontwikkeling van sporadiese E op 50 MHz: **Johan IW2DNI** en **Fabio IZ7NLJ**.
+
 ## Lisensie
 
 E-LAYER ANALYZER is vrye sagteware, met die lisensie **GNU GPL-3.0** (lêer COPYING), dieselfde as dié van YA-MS. Dit word sonder enige waarborg versprei. Die data van die eksterne bronne bly aan die betrokke instansies behoort, met hul eie voorwaardes (byvoorbeeld die GIRO-data: CC BY-NC-SA 4.0, slegs nie-kommersiële gebruik).

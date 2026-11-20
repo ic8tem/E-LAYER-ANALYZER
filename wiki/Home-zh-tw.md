@@ -39,6 +39,10 @@
 
 完整清單在程式的 資料來源 頁籤中。
 
+## 致謝
+
+50 MHz 散塊 E 層的開發：**Johan IW2DNI** 與 **Fabio IZ7NLJ**。
+
 ## 授權
 
 E-LAYER ANALYZER 是自由軟體，授權為 **GNU GPL-3.0**（COPYING 檔案），與 YA-MS 相同。不提供任何擔保。外部來源的資料仍屬於各自的機構，並依其條件使用（例如 GIRO 資料：CC BY-NC-SA 4.0，僅限非商業用途）。

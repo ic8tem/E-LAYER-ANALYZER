@@ -62,3 +62,18 @@ Rechtsboven op de kaart verschijnt de samenvatting van N0NBH (E-skip voor het ge
 - **144 MHz**: sporadische E vanaf 900 km, met bevestiging; Q65- en JT65-spots zijn EME en worden verworpen, behalve met `<ES>` in de tekst.
 - G0ISW (Propagation identification, 2024) ziet de kortste sporadische E boven 400 km op 50 en 70 MHz en boven 1400 km op 144 MHz: de regels van de auteur komen overeen op 50 en 70 MHz en zijn ruimer op 144 MHz, maar vragen een bevestiging.
 - De volgorde waarin alle regels worden toegepast, met de gebruikte waarden, staat in **[INSTELLINGEN](Settings-nl)** › Spotverdeling.
+
+## Ketens met korte sprongen (vanaf versie 0.6.0)
+
+![Keten vanaf de QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+In de subtab **Voorboden meervoudige sprong** zoekt het programma de ketens met meervoudige sprong op 50 MHz met de drie voorwaarden van de auteur: **eerste en laatste korte sprong** (500-1200 km) met MUF rond 50 MHz, die een foEs van 11-21 MHz vragen, en **middelste sprongen** tot 2200 km, die ongeveer 9,3 MHz vragen.
+
+- **Sterke wolken** (oranje vierkanten): Es-spots van over de hele wereld en GIRO-ionosondes met een foEs van minstens 11,3 MHz.
+- **Vanaf de QTH**: eerste korte sprong vanaf je station en laatste korte sprong op een andere sterke wolk in dezelfde richting, ook op hetzelfde continent (bijvoorbeeld in Kazachstan); de cirkel is de aankomstzone.
+- **Corridor**: twee willekeurige sterke wolken, in elke richting, bijvoorbeeld **Caribisch gebied - Iberisch Schiereiland** of **Europa - West-Afrika** (TEP uitgesloten); «betreft jou» als een einde binnen 1200 km van jou ligt.
+- **Zoek de wolk**: er is alleen de eerste korte sprong; de lichtblauwe zones zeggen waar de wolk van de korte laatste sprong zou moeten liggen.
+- **WAARSCHUWING** als de middelste sprongen door wolken gedekt zijn, **VOORBODE** als alleen zones zonder waarnemers ontbreken.
+- In INSTELLINGEN staat de **melding** bovenaan (en desgewenst een venster) voor de WAARSCHUWINGEN die jou betreffen.
+
+![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

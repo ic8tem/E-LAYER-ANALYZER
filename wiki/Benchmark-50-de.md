@@ -32,3 +32,9 @@ Wählen Sie den **Tag** (beim Öffnen der mit den meisten Mehrfachsprung-QSOs) u
 ## Details
 
 Für die gewählte Strecke: Entfernung und Einstufung nach der Tabelle IK3XTV, Azimut in beiden Richtungen, gleiche Sprünge mit den Feldern der Reflexionspunkte, kurzer erster Sprung bis 1200 km (Erfahrung IC8TEM) und, mit dem Kästchen foEs, die minimale foEs.
+
+## Prüfung der Ketten (ab Version 0.6.0)
+
+**Spots, ADIF oder ALL.TXT laden** (von Es-WOLKEN IM ZEITVERLAUF exportierte Spots, ADIF-Logs anderer Stationen, ALL.TXT-Dekodierungen von JTDX oder WSJT-X: Das Rufzeichen wird an den Sendezeilen erkannt) und **Ketten prüfen**: Das Programm spielt auf den Mehrfachsprung-Öffnungen von Station 1 die Regel der Ketten mit kurzen Sprüngen nach und schreibt, wie viele Öffnungen es vorhergesehen hätte (WARNUNG, VORBOTE oder nur der erste kurze Sprung), den medianen Vorlauf und die Warnungen, denen keine Mehrfachsprung-QSOs folgten. Ohne geladene Quellen kommen die Wolken nur aus dem Log, und der letzte kurze Sprung ist kaum zu sehen: Es braucht Daten weit entfernter Stationen.
+
+![Prüfung](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

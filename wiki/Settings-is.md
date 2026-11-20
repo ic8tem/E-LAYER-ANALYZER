@@ -10,6 +10,7 @@ Frá útgáfu 0.4.18 safnar flipinn **STILLINGAR** saman almennum valkostum forr
 |---|---|
 | Stöð | Kallmerki, locator og hæð, þau sömu og í efri stikunni; **Nota** staðfestir þau fyrir alla flipa. |
 | Útlit | Tungumál, litaþema (stef YAEC og YA-MS og, frá útgáfu 0.5.0, sex þemu IP-TRX-CTRL: Ljóst, Nótt, Svart, Blátt, Fjólublátt, Grænt), **þjappaður hamur** fyrir 13-15 tommu fartölvur (frá 0.5.2: sjálfvirkt undir 850 díla hæð, alltaf eða aldrei) og **leturstærð alls forritsins** (85-140 %, eins og í YA-MS). Tungumál og litir endurbyggja gluggann: stillingar og spot haldast. |
+| Fjölstökkskeðjur á 50 MHz | Frá útgáfu 0.6.0: tilkynning efst (og valfrjálst gluggi) þegar fjölstökks-VIÐVÖRUN á 50 MHz kemur upp sem varðar stöðina þína: keðja með fyrsta stutta stökkinu frá þér, eða gangur með annan endann innan 1200 km. Sama keðjan endurtekur sig ekki fyrr en eftir klukkustund. |
 | Kort og spágögn | Heimsálfan, sama valmynd og í flipastikunni. |
 | Tími | Staða NTP og munurinn á tíma þjónanna og klukku tölvunnar. |
 | Uppfærslur | Athugun á GitHub við ræsingu og á 30 mínútna fresti, sjálfvirk og hljóðlaus uppfærsla, hnappurinn **Athuga núna**. Sjálfvirkar uppfærslur gilda ekki fyrir kerfispakka (.deb, .rpm, Arch, Slackware). |

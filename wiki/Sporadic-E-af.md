@@ -61,3 +61,18 @@ Regs bo op die kaart verskyn die N0NBH-opsomming (E-skip vir die gekose kontinen
 - **144 MHz**: Sporadic-E vanaf 900 km, met bevestiging; Q65- en JT65-spots is EME en word weggegooi, tensy `<ES>` in die teks staan.
 - G0ISW (Propagation identification, 2024) sien die kortste Sporadic-E verder as 400 km op 50 en 70 MHz en verder as 1400 km op 144 MHz: die outeur se reëls stem ooreen op 50 en 70 MHz en is wyer op 144 MHz, maar vra 'n bevestiging.
 - Die volgorde waarin al die reëls toegepas word, met die waardes in gebruik, word gewys in **[INSTELLINGS](Settings-af)** › Spotverdeling.
+
+## Kortsprongkettings (vanaf weergawe 0.6.0)
+
+![Ketting vanaf die QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+In die suboortjie **Multi-sprongvoorlopers** soek die program die multi-sprongkettings op 50 MHz met die outeur se drie voorwaardes: **eerste en laaste kort sprong** (500-1200 km) met MUF rondom 50 MHz, wat 'n foEs van 11-21 MHz vereis, en **middelspronge** tot 2200 km, wat ongeveer 9,3 MHz vereis.
+
+- **Sterk wolke** (oranje vierkante): Es-spots uit die hele wêreld en GIRO-ionosondes met foEs van minstens 11,3 MHz.
+- **Vanaf die QTH**: eerste kort sprong vanaf jou stasie en laaste kort sprong na 'n ander sterk wolk in dieselfde rigting, ook op dieselfde kontinent (byvoorbeeld in Kazakstan); die sirkel is die aankomssone.
+- **Korridor**: enige twee sterk wolke, in enige rigting, byvoorbeeld **Karibiese gebied - Iberiese Skiereiland** of **Europa - Wes-Afrika** (TEP uitgesluit); «raak jou» as 'n einde binne 1200 km van jou is.
+- **Soek die wolk**: daar is slegs die eerste kort sprong; die ligblou sones sê waar die wolk van die laaste kort sprong behoort te wees.
+- **WAARSKUWING** as die middelspronge deur wolke gedek is, **VOORLOPER** as slegs sones sonder waarnemers ontbreek.
+- In INSTELLINGS is daar die **kennisgewing** bo (en opsioneel 'n venster) vir die WAARSKUWINGS wat jou raak.
+
+![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

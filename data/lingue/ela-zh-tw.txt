@@ -896,3 +896,67 @@ Passo mostrato: nessun collegamento.	顯示的步階：沒有通聯。
 Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.	格 {0}：該值來自 {1} - {2}，{3:F3} MHz，{4:F0} km，{5} 跳，sec φ {6:F2}。
 Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.	方法（Chartier、Hanley 與 Emmons 2022）：每筆通聯表示在反射點 foEs 至少為 f / sec φ；格取該步階的最高值。這是下限：雲可能比通聯顯示的更濃、更大。空格只表示沒有通聯，並不表示沒有散塊 E 層。
 La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel.	精簡模式適合 13-15 吋筆記型電腦，縮短固定高度的方框並隱藏說明列；在 METEOR SCATTER 中，與 YA-MS 一樣，啟動時收合命令列並縮短時間點橫欄。自動：視窗高度小於 850 像素時開啟。
+Carica spot CSV	載入 CSV spot
+Togli gli spot CSV	移除 CSV spot
+Verifica le catene	驗證鏈
+Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log.	在電台 1 的多跳開通上重演短跳鏈規則（SPORADIC-E，多跳前兆）：雲來自 CSV spot 與日誌中的通聯。
+Spot CSV tolti.	已移除 CSV spot。
+Spot CSV esportati dal programma (NUBI Es NEL TEMPO)	程式匯出的 CSV spot（Es 雲隨時間變化）
+Spot CSV caricati: {0} (+{1}).	已載入 CSV spot：{0}（+{1}）。
+Carica prima il log ADIF della stazione 1.	請先載入電台 1 的 ADIF 日誌。
+Verifica in corso...	驗證中...
+Nessuna apertura multi-salto della stazione 1 nel log.	日誌中沒有電台 1 的多跳開通。
+Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.	短跳鏈驗證：電台 1 的多跳開通 {0} 次（每天每個 30° 扇區中第一筆超過 3100 km 的通聯），從 {1:yyyy-MM-dd} 到 {2:yyyy-MM-dd}。
+Nubi da {0} spot e QSO ({1} dai file CSV).	雲來自 {0} 筆 spot 與通聯（其中 {1} 筆來自 CSV 檔案）。
+Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	之前兩小時內，同一方向（±20°）：警示 {0}（{1:F0}%），前兆 {2}（{3:F0}%），僅有第一個短跳 {4}（{5:F0}%），無 {6}（{7:F0}%）。
+Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	警示與前兆的提前時間中位數：{0:F0} 分鐘。
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	日誌各天中來自 QTH 的警示與前兆：{0}；之後兩小時內沒有多跳通聯的：{1}（{2:F0}%，但電台也可能沒有在線上）。
+Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	沒有 CSV spot 檔案時，雲只來自日誌中的通聯：遙遠的最後一個短跳幾乎看不到。若要真正驗證，請載入從 Es 雲隨時間變化匯出的 spot。
+CERCA LA NUBE	尋找雲
+{0:F0} min prima	{0:F0} 分鐘前
+... e altre {0}.	... 另有 {0} 筆。
+dal QTH	來自 QTH
+cerca la nube	尋找雲
+corridoio, ti riguarda	走廊，與你有關
+corridoio	走廊
+ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.	50 MHz 多跳警示（{0}）：{1}，{2:F0} km。點擊開啟前兆。
+Mostra	顯示
+ALLERTA multi-salto in 50 MHz	50 MHz 多跳警示
+{0}: {1}, {2:F0} km, azimut {3:F0}°	{0}：{1}，{2:F0} km，方位角 {3:F0}°
+Nubi forti per il salto corto in 50 MHz: {0}.	50 MHz 短跳的強雲：{0}。
+■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)	■ 橘色：強雲，可支撐 50 MHz 短跳（foEs，單位 MHz）
+catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube	短跳鏈：實線，圓 = 端點區；淺藍 = 尋找雲
+salto corto finale? foEs ≥ {0:F1}	最後一個短跳？foEs ≥ {0:F1}
+{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)	{0}，foEs ≥ {1:F1} MHz，{2}（{3:F0} 分鐘前）
+{0} - catena a salti corti ({1}): {2}	{0} - 短跳鏈（{1}）：{2}
+Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}	從你的電台到強雲的 {0:F0} km 第一個短跳：{1}
+Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):	沿方位角 {0:F0}° 沒有第二塊強雲：最後一個短跳應位於下列區域之一（foEs ≥ {1:F1} MHz）：
+dopo {0} salti centrali: {1}	{0} 個中間跳之後：{1}
+ionosonda GIRO a {0:F0} km senza foEs recente	{0:F0} km 外的 GIRO 電離層探測儀，沒有近期 foEs
+ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz	{0:F0} km 外的 GIRO 電離層探測儀：foEs {1:F1} MHz
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km	距離 {0:F0} km，方位角 {1:F0}°：短跳 {2:F0} km + {3} 個 {4:F0} km 的中間跳 + 短跳 {5:F0} km
+1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}	1) 第一個短跳，MUF ≥ 50 MHz：強雲 {0}
+2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}	2) 最後一個短跳，MUF ≥ 50 MHz：強雲 {0}
+3) Salti centrali: nessuno, le due nubi sono consecutive.	3) 中間跳：無，兩塊雲相鄰。
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})	{1:F0} km 處 foEs ≥ {0:F1} MHz 的雲（spot {2} - {3}）
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)	{1:F0} km 處 foEs ≥ {0:F1} MHz 的雲（電離層探測儀）
+3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}	3) 中間跳 {0}（{1:F0} km）：{2}，所需 foEs {3:F1} MHz - {4}
+Zona d'arrivo: {0}, entro circa {1:F0} km	到達區：{0}，約 {1:F0} km 以內
+Zone d'estremità: {0} e {1}, entro circa {2:F0} km	端點區：{0} 與 {1}，約 {2:F0} km 以內
+La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.	你的電台距一個端點區 {0:F0} km：與你有關。
+La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.	你的電台距最近的端點區 {0:F0} km。
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti.	作者（IC8TEM）的條件：第一個與最後一個短跳（500-1200 km）的 MUF 在 50 MHz 左右，需要 11-21 MHz 的 foEs；2200 km 以內的中間跳約需 9.3 MHz。使用最近 30 分鐘的雲；雲持續數分鐘到一小時，移動緩慢（Denisowski 2023）：同一等級時較新的排在前面。
+Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione	出現與我的電台有關的 50 MHz 多跳警示時在上方提示
+Anche con una finestra	同時跳出視窗
+Catene multi-salto in 50 MHz	50 MHz 多跳鏈
+L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto.	提示針對第一個短跳從你的電台出發的鏈，以及一個端點在你 1200 km 以內的走廊，且三個條件都成立（警示）：第一個與最後一個短跳的 MUF 在 50 MHz 左右，中間跳有雲覆蓋。同一條鏈一小時內不會重複。點擊上方的文字：開啟 SPORADIC-E 的多跳前兆。
+Carica spot CSV o ADIF	載入 CSV spot 或 ADIF
+Togli gli spot CSV e ADIF	移除 CSV spot 與 ADIF
+Spot CSV esportati dal programma o log ADIF di altre stazioni	程式匯出的 CSV spot 或其他電台的 ADIF 日誌
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso.	作者（IC8TEM）的條件：第一個與最後一個短跳（500-1200 km）的 MUF 在 50 MHz 左右，需要 11-21 MHz 的 foEs；2200 km 以內的中間跳約需 9.3 MHz。使用最近 30 分鐘的雲：同一等級時較新的排在前面。鏈在所有方向都有效，包括南北方向；TEP 仍被排除。
+Carica spot, ADIF o ALL.TXT	載入 spot、ADIF 或 ALL.TXT
+Togli le sorgenti delle nubi	移除雲的來源
+Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni	本程式的 CSV spot、ADIF 日誌或其他電台的 ALL.TXT 解碼（JTDX、WSJT-X）
+Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).	雲來自 {0} 筆 spot、通聯與解碼（其中 {1} 筆來自已載入的來源）。
+Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane.	沒有載入來源時，雲只來自日誌中的通聯：遙遠的最後一個短跳幾乎看不到。若要真正驗證，請載入從 Es 雲隨時間變化匯出的 spot、其他電台（最好是遠方電台）的 ADIF 日誌或 ALL.TXT 解碼。
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km	距離 {0:F0} km，方位角 {1:F0}°：短跳 {2:F0} km + 短跳 {3:F0} km

@@ -62,3 +62,18 @@ Maidenhead-rutene for refleksjonspunktene farges etter den høyeste frekvensen b
 - **144 MHz**: sporadisk E fra 900 km, med bekreftelse; Q65- og JT65-spot er EME og forkastes, med mindre `<ES>` står i teksten.
 - G0ISW (Propagation identification, 2024) ser den korteste sporadiske E over 400 km på 50 og 70 MHz og over 1400 km på 144 MHz: forfatterens regler stemmer på 50 og 70 MHz og er videre på 144 MHz, men krever en bekreftelse.
 - Rekkefølgen som alle reglene brukes i, med verdiene som er i bruk, vises i **[INNSTILLINGER](Settings-nb)** › Fordeling av spot.
+
+## Kjeder med korte hopp (fra versjon 0.6.0)
+
+![Kjede fra QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihopp på 50 MHz med forfatterens tre betingelser: **første og siste korte hopp** (500-1200 km) med MUF rundt 50 MHz, som krever en foEs på 11-21 MHz, og **midtre hopp** opp til 2200 km, som krever ca. 9,3 MHz.
+
+- **Sterke skyer** (oransje firkanter): Es-spot fra hele verden og GIRO-ionosonder med foEs på minst 11,3 MHz.
+- **Fra QTH**: første korte hopp fra din stasjon og siste korte hopp via en annen sterk sky i samme retning, også på samme kontinent (for eksempel i Kasakhstan); sirkelen er ankomstsonen.
+- **Korridor**: to vilkårlige sterke skyer i alle retninger, for eksempel **Karibia - Den iberiske halvøy** eller **Europa - Vest-Afrika** (TEP utelukket); «angår deg» hvis en ende er innenfor 1200 km fra deg.
+- **Finn skyen**: det finnes bare det første korte hoppet; de lyseblå sonene viser hvor skyen for det siste korte hoppet burde ligge.
+- **ALARM** hvis de midtre hoppene er dekket av skyer, **FORLØPER** hvis det bare mangler soner uten observatører.
+- I INNSTILLINGER finnes **varselet** øverst (og valgfritt et vindu) for de ALARMENE som angår deg.
+
+![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

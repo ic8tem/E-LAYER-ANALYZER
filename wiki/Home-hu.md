@@ -39,6 +39,10 @@ Az **E-LAYER ANALYZER** ingyenes program rádióamatőrök számára, amely az i
 
 A teljes lista a program FORRÁSOK fülén található.
 
+## Köszönetnyilvánítás
+
+Az 50 MHz-es sporadikus E fejlesztéséért: **Johan IW2DNI** és **Fabio IZ7NLJ**.
+
 ## Licenc
 
 Az E-LAYER ANALYZER szabad szoftver, **GNU GPL-3.0** licenccel (COPYING fájl), ugyanazzal, mint a YA-MS. Mindenféle garancia nélkül terjesztik. A külső források adatai az illetékes intézményeké maradnak, saját feltételeikkel (például a GIRO-adatok: CC BY-NC-SA 4.0, csak nem kereskedelmi használatra).

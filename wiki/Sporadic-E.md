@@ -62,3 +62,18 @@ At the top right of the map the N0NBH summary appears (E-skip for the chosen con
 - **144 MHz**: Sporadic-E from 900 km, with confirmation; Q65 and JT65 spots are EME and are discarded, unless `<ES>` is in the text.
 - G0ISW (Propagation identification, 2024) sees the shortest Sporadic-E beyond 400 km on 50 and 70 MHz and beyond 1400 km on 144 MHz: the author's rules agree on 50 and 70 MHz and are wider on 144 MHz, but ask for a confirmation.
 - The order in which all rules apply, with the values in use, is shown in **[SETTINGS](Settings)** › Spot routing.
+
+## Short-hop chains (from version 0.6.0)
+
+![Chain from the QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chains on 50 MHz with the author's three conditions: **first and last short hop** (500-1200 km) with MUF around 50 MHz, which require a foEs of 11-21 MHz, and **middle hops** up to 2200 km, which require about 9.3 MHz.
+
+- **Strong clouds** (orange squares): Es spots from all over the world and GIRO ionosondes with foEs of at least 11.3 MHz.
+- **From the QTH**: first short hop from your station and last short hop on another strong cloud along the same direction, also in the same continent (for example in Kazakhstan); the circle is the arrival zone.
+- **Corridor**: any two strong clouds, in any direction, for example **Caribbean - Iberian Peninsula** or **Europe - West Africa** (TEP excluded); «concerns you» if one end is within 1200 km of you.
+- **Find the cloud**: there is only the first short hop; the light-blue zones say where the cloud of the final short hop should be.
+- **ALERT** if the middle hops are covered by clouds, **PRECURSOR** if only zones without observers are missing.
+- In SETTINGS there is the **warning** at the top (and optionally a window) for the ALERTS that concern you.
+
+![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -32,3 +32,9 @@
 ## 詳細資訊
 
 所選路徑的：距離與 IK3XTV 表的分類、雙向方位角、等距跳及各反射點所在網格、1200 km 以內的短首跳（IC8TEM 的經驗），以及勾選 foEs 時的最低 foEs。
+
+## 鏈的驗證（自 0.6.0 版起）
+
+**載入 spot、ADIF 或 ALL.TXT**（從 Es 雲隨時間變化匯出的 spot、其他電台的 ADIF 日誌、JTDX 或 WSJT-X 的 ALL.TXT 解碼：呼號由發射列識別）與 **驗證鏈**：程式在電台 1 的多跳開通上重演短跳鏈規則，寫出能提前指出多少次開通（警示、前兆或僅有第一個短跳）、提前時間中位數，以及之後沒有多跳通聯的警示。沒有載入來源時，雲只來自日誌，最後一個短跳幾乎看不到：需要遠方電台的資料。
+
+![驗證](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

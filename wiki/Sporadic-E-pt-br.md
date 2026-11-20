@@ -62,3 +62,18 @@ No canto superior direito do mapa aparece a síntese de N0NBH (E-skip do contine
 - **144 MHz**: esporádica E a partir de 900 km, com confirmação; os spots Q65 e JT65 são EME e são descartados, salvo `<ES>` no texto.
 - G0ISW (Propagation identification, 2024) vê a esporádica E mais curta acima de 400 km em 50 e 70 MHz e acima de 1400 km em 144 MHz: as regras do autor coincidem em 50 e 70 MHz e são mais largas em 144 MHz, mas pedem uma confirmação.
 - A ordem em que todas as regras se aplicam, com os valores em uso, é mostrada em **[CONFIGURAÇÕES](Settings-pt-br)** › Encaminhamento dos spots.
+
+## Cadeias de saltos curtos (a partir da versão 0.6.0)
+
+![Cadeia a partir do QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+No subaba **Precursores de multi-salto** o programa procura as cadeias do multi-salto em 50 MHz com as três condições do autor: **primeiro e último salto curto** (500-1200 km) com MUF em torno dos 50 MHz, que exigem uma foEs de 11-21 MHz, e **saltos centrais** até 2200 km, que exigem cerca de 9,3 MHz.
+
+- **Nuvens fortes** (quadrados laranja): spots Es de todo o mundo e ionossondas GIRO com foEs de pelo menos 11,3 MHz.
+- **A partir do QTH**: primeiro salto curto a partir da sua estação e último salto curto sobre outra nuvem forte ao longo da mesma direção, também no mesmo continente (por exemplo no Cazaquistão); o círculo é a zona de chegada.
+- **Corredor**: duas nuvens fortes quaisquer, em qualquer direção, por exemplo **Caribe - Península Ibérica** ou **Europa - África Ocidental** (TEP excluído); «diz respeito a você» se uma extremidade estiver a menos de 1200 km de você.
+- **Procurar a nuvem**: há só o primeiro salto curto; as zonas azul-claras dizem onde deveria estar a nuvem do salto curto final.
+- **ALERTA** se os saltos centrais estiverem cobertos por nuvens, **PRECURSOR** se faltarem só zonas sem observadores.
+- Em CONFIGURAÇÕES há o **aviso** no topo (e opcionalmente uma janela) para os ALERTAS que dizem respeito a você.
+
+![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

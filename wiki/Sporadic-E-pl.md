@@ -62,3 +62,18 @@ W prawym górnym rogu mapy pojawia się podsumowanie N0NBH (E-skip dla wybranego
 - **144 MHz**: E-sporadyczne od 900 km, z potwierdzeniem; spoty Q65 i JT65 to EME i są odrzucane, chyba że w tekście jest `<ES>`.
 - G0ISW (Propagation identification, 2024) obserwuje najkrótsze E-sporadyczne powyżej 400 km na 50 i 70 MHz i powyżej 1400 km na 144 MHz: reguły autora zgadzają się na 50 i 70 MHz, a na 144 MHz są szersze, ale wymagają potwierdzenia.
 - Kolejność, w jakiej stosowane są wszystkie reguły, z używanymi wartościami, pokazuje **[USTAWIENIA](Settings-pl)** › Kierowanie spotów.
+
+## Łańcuchy z krótkimi skokami (od wersji 0.6.0)
+
+![Łańcuch z QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+W podzakładce **Prekursory wieloskoku** program szuka łańcuchów wieloskoku na 50 MHz według trzech warunków autora: **pierwszy i ostatni krótki skok** (500-1200 km) z MUF około 50 MHz, wymagające foEs 11-21 MHz, oraz **skoki środkowe** do 2200 km, wymagające około 9,3 MHz.
+
+- **Silne obłoki** (pomarańczowe kwadraty): spoty Es z całego świata i jonosondy GIRO z foEs co najmniej 11,3 MHz.
+- **Z QTH**: pierwszy krótki skok od twojej stacji i ostatni krótki skok na innym silnym obłoku w tym samym kierunku, także na tym samym kontynencie (na przykład w Kazachstanie); okrąg to strefa docelowa.
+- **Korytarz**: dowolne dwa silne obłoki, w każdym kierunku, na przykład **Karaiby - Półwysep Iberyjski** albo **Europa - Afryka Zachodnia** (bez TEP); «dotyczy cię», jeśli jeden koniec jest w promieniu 1200 km od ciebie.
+- **Szukaj obłoku**: jest tylko pierwszy krótki skok; błękitne strefy pokazują, gdzie powinien być obłok końcowego krótkiego skoku.
+- **ALERT**, jeśli skoki środkowe są pokryte obłokami, **PREKURSOR**, jeśli brakuje tylko stref bez obserwatorów.
+- W USTAWIENIACH jest **komunikat** u góry (opcjonalnie także okno) dla ALERTÓW, które cię dotyczą.
+
+![Korytarz](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

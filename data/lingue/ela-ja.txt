@@ -897,3 +897,67 @@ Passo mostrato: nessun collegamento.	表示中のステップ: 交信なし。
 Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.	セル {0}: 値の元は {1} - {2}、{3:F3} MHz、{4:F0} km、ホップ {5}、sec φ {6:F2}。
 Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.	方法 (Chartier、Hanley、Emmons 2022): 各交信は、反射点での foEs が少なくとも f / sec φ であることを示します。セルはそのステップの最高値をとります。これは下限値です: 雲は交信が示すよりも濃く広いことがあります。空のセルは交信がないことを意味するだけで、スポラディックE がないことではありません。
 La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel.	コンパクトモードは 13〜15 インチのノートパソコン向けで、高さが固定の枠を短くし、説明の行を隠します。METEOR SCATTER では YA-MS と同様に、起動時にコマンド行を折りたたみ、予報時点の帯を短くします。自動: ウィンドウの高さが 850 ピクセル未満のときにオンになります。
+Carica spot CSV	CSV スポットを読込
+Togli gli spot CSV	CSV スポットを外す
+Verifica le catene	チェーンを検証
+Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log.	局 1 のマルチホップの開けに対して、短ホップのチェーンのルール (SPORADIC-E、マルチホップの前兆) を再現します: 雲は CSV スポットとログの QSO から求めます。
+Spot CSV tolti.	CSV スポットを外しました。
+Spot CSV esportati dal programma (NUBI Es NEL TEMPO)	プログラムからエクスポートした CSV スポット (Es 雲の時間変化)
+Spot CSV caricati: {0} (+{1}).	読み込んだ CSV スポット: {0} (+{1})。
+Carica prima il log ADIF della stazione 1.	先に局 1 の ADIF ログを読み込んでください。
+Verifica in corso...	検証中...
+Nessuna apertura multi-salto della stazione 1 nel log.	ログに局 1 のマルチホップの開けがありません。
+Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.	短ホップのチェーンの検証: 局 1 のマルチホップの開け {0} 件 (日ごと・30° の方位区分ごとに 3100 km を超えた最初の QSO)、{1:yyyy-MM-dd} から {2:yyyy-MM-dd} まで。
+Nubi da {0} spot e QSO ({1} dai file CSV).	{0} 件のスポットと QSO から求めた雲 (CSV ファイルから {1} 件)。
+Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	直前の 2 時間、同じ方向 (±20°) で: アラート {0} ({1:F0}%)、前兆 {2} ({3:F0}%)、最初の短ホップのみ {4} ({5:F0}%)、なし {6} ({7:F0}%)。
+Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	アラートと前兆の先行時間の中央値: {0:F0} 分。
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	ログの日における QTH からのアラートと前兆: {0}。その後 2 時間にマルチホップの QSO がなかったもの: {1} ({2:F0}%、ただし局が運用していなかった可能性もあります)。
+Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	CSV スポットのファイルがない場合、雲はログの QSO からしか求められず、遠い最後の短ホップはほとんど見えません。本当の検証には、Es 雲の時間変化 からエクスポートしたスポットを読み込んでください。
+CERCA LA NUBE	雲を探す
+{0:F0} min prima	{0:F0} 分前
+... e altre {0}.	... ほか {0} 件。
+dal QTH	QTH から
+cerca la nube	雲を探す
+corridoio, ti riguarda	回廊、自局に関係
+corridoio	回廊
+ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.	50 MHz マルチホップのアラート ({0}): {1}、{2:F0} km。クリックで前兆を開きます。
+Mostra	表示
+ALLERTA multi-salto in 50 MHz	50 MHz マルチホップのアラート
+{0}: {1}, {2:F0} km, azimut {3:F0}°	{0}: {1}、{2:F0} km、方位 {3:F0}°
+Nubi forti per il salto corto in 50 MHz: {0}.	50 MHz の短ホップ用の強い雲: {0}。
+■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)	■ オレンジ: 強い雲、50 MHz の短ホップを支える (foEs、MHz)
+catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube	短ホップのチェーン: 実線、円 = 端点ゾーン。水色 = 雲を探す
+salto corto finale? foEs ≥ {0:F1}	最後の短ホップ? foEs ≥ {0:F1}
+{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)	{0}、foEs ≥ {1:F1} MHz、{2} ({3:F0} 分前)
+{0} - catena a salti corti ({1}): {2}	{0} - 短ホップのチェーン ({1}): {2}
+Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}	自局から強い雲への {0:F0} km の最初の短ホップ: {1}
+Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):	方位 {0:F0}° に沿って 2 つ目の強い雲がありません: 最後の短ホップは次のゾーンのいずれかにあるはずです (foEs ≥ {1:F1} MHz):
+dopo {0} salti centrali: {1}	中間ホップ {0} 回の後: {1}
+ionosonda GIRO a {0:F0} km senza foEs recente	{0:F0} km 先の GIRO イオノゾンデ、最近の foEs なし
+ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz	{0:F0} km 先の GIRO イオノゾンデ: foEs {1:F1} MHz
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km	距離 {0:F0} km、方位 {1:F0}°: 短ホップ {2:F0} km + {4:F0} km の中間ホップ {3} 回 + 短ホップ {5:F0} km
+1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}	1) 最初の短ホップ、MUF ≥ 50 MHz: 強い雲 {0}
+2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}	2) 最後の短ホップ、MUF ≥ 50 MHz: 強い雲 {0}
+3) Salti centrali: nessuno, le due nubi sono consecutive.	3) 中間ホップ: なし、2 つの雲は連続しています。
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})	{1:F0} km 先の foEs ≥ {0:F1} MHz の雲 (スポット {2} - {3})
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)	{1:F0} km 先の foEs ≥ {0:F1} MHz の雲 (イオノゾンデ)
+3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}	3) 中間ホップ {0} ({1:F0} km): {2}、必要な foEs {3:F1} MHz - {4}
+Zona d'arrivo: {0}, entro circa {1:F0} km	到達ゾーン: {0}、約 {1:F0} km 以内
+Zone d'estremità: {0} e {1}, entro circa {2:F0} km	端点ゾーン: {0} と {1}、約 {2:F0} km 以内
+La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.	自局は端点ゾーンから {0:F0} km: 自局に関係します。
+La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.	自局は最も近い端点ゾーンから {0:F0} km です。
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti.	著者 (IC8TEM) の条件: 最初と最後の短ホップ (500-1200 km) は MUF が 50 MHz 前後で、11-21 MHz の foEs を必要とする。2200 km までの中間ホップは約 9.3 MHz を必要とする。直近 30 分の雲を使う。雲は数分から 1 時間続き、ゆっくり移動する (Denisowski 2023): 同じレベルなら新しいものを先に表示する。
+Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione	自局に関係する 50 MHz マルチホップのアラートが発生したら上部に通知
+Anche con una finestra	ウィンドウでも通知
+Catene multi-salto in 50 MHz	50 MHz のマルチホップのチェーン
+L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto.	通知の対象は、最初の短ホップが自局から出るチェーンと、端点の一方が自局から 1200 km 以内にある回廊で、3 つの条件がすべてそろったとき (アラート) です: 最初と最後の短ホップの MUF が 50 MHz 前後で、中間ホップがカバーされていること。同じチェーンは 1 時間以内には繰り返しません。上部の表示をクリックすると SPORADIC-E のマルチホップの前兆が開きます。
+Carica spot CSV o ADIF	CSV スポットまたは ADIF を読込
+Togli gli spot CSV e ADIF	CSV スポットと ADIF を外す
+Spot CSV esportati dal programma o log ADIF di altre stazioni	プログラムからエクスポートした CSV スポット、または他局の ADIF ログ
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso.	著者 (IC8TEM) の条件: 最初と最後の短ホップ (500-1200 km) は MUF が 50 MHz 前後で、11-21 MHz の foEs を必要とする。2200 km までの中間ホップは約 9.3 MHz を必要とする。直近 30 分の雲を使い、同じレベルなら新しいものを先に表示する。チェーンは南北を含むすべての方向で有効。TEP は引き続き除外する。
+Carica spot, ADIF o ALL.TXT	スポット、ADIF、ALL.TXT を読込
+Togli le sorgenti delle nubi	雲のソースを外す
+Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni	プログラムの CSV スポット、ADIF ログ、または他局の ALL.TXT デコード (JTDX、WSJT-X)
+Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).	{0} 件のスポット、QSO、デコードから求めた雲 (読み込んだソースから {1} 件)。
+Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane.	ソースを読み込まない場合、雲はログの QSO からしか求められず、遠い最後の短ホップはほとんど見えません。本当の検証には、Es 雲の時間変化 からエクスポートしたスポット、他局 (できれば遠方の局) の ADIF ログや ALL.TXT デコードを読み込んでください。
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km	距離 {0:F0} km、方位 {1:F0}°: 短ホップ {2:F0} km + 短ホップ {3:F0} km

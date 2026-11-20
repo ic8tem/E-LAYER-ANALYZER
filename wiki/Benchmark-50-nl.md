@@ -32,3 +32,9 @@ Kies de **dag** (bij het openen die met de meeste QSO's met meervoudige sprong) 
 ## Details
 
 Voor het gekozen traject: afstand en beoordeling volgens de tabel IK3XTV, azimut in beide richtingen, gelijke sprongen met de vakken van de reflectiepunten, korte eerste sprong binnen 1200 km (ervaring IC8TEM) en, met het vakje foEs, de minimale foEs.
+
+## Controle van de ketens (vanaf versie 0.6.0)
+
+**Spots, ADIF of ALL.TXT laden** (spots geëxporteerd uit Es-WOLKEN IN DE TIJD, ADIF-logs van andere stations, ALL.TXT-decoderingen van JTDX of WSJT-X: de roepnaam wordt herkend aan de zendregels) en **Ketens controleren**: het programma speelt op de openingen met meervoudige sprong van station 1 de regel van de ketens met korte sprongen opnieuw af en schrijft hoeveel openingen het zou hebben voorzien (WAARSCHUWING, VOORBODE of alleen de eerste korte sprong), de mediane voorsprong en de waarschuwingen die niet door QSO's met meervoudige sprong gevolgd werden. Zonder geladen bronnen komen de wolken alleen uit het log, en de laatste korte sprong is nauwelijks te zien: er zijn gegevens van verre stations nodig.
+
+![Controle](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

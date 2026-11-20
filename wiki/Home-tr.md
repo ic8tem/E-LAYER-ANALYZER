@@ -39,6 +39,10 @@
 
 Tam liste programın KAYNAKLAR sekmesindedir.
 
+## Teşekkürler
+
+50 MHz'de sporadik E'nin geliştirilmesi için: **Johan IW2DNI** ve **Fabio IZ7NLJ**.
+
 ## Lisans
 
 E-LAYER ANALYZER özgür yazılımdır, **GNU GPL-3.0** lisanslıdır (COPYING dosyası), YA-MS ile aynı lisans. Hiçbir garanti olmadan dağıtılır. Dış kaynakların verileri ilgili kuruluşlara aittir ve kendi koşullarına tabidir (örneğin GIRO verileri: CC BY-NC-SA 4.0, yalnızca ticari olmayan kullanım).

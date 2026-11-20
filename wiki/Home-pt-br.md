@@ -39,6 +39,10 @@ O **E-LAYER ANALYZER** é um programa gratuito para radioamadores que analisa to
 
 A lista completa está na aba FONTES do programa.
 
+## Agradecimentos
+
+Pelo desenvolvimento da esporádica E em 50 MHz: **Johan IW2DNI** e **Fabio IZ7NLJ**.
+
 ## Licença
 
 O E-LAYER ANALYZER é software livre, com licença **GNU GPL-3.0** (arquivo COPYING), a mesma do YA-MS. É distribuído sem nenhuma garantia. Os dados das fontes externas continuam pertencendo às respectivas entidades, com as suas condições (por exemplo, os dados GIRO: CC BY-NC-SA 4.0, apenas uso não comercial).

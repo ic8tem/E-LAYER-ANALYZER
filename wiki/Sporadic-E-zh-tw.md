@@ -62,3 +62,18 @@
 - **144 MHz**：散塊 E 層從 900 km 起，須確認；Q65 與 JT65 spot 屬於 EME，會被捨棄，除非文字中有 `<ES>`。
 - G0ISW（Propagation identification，2024）觀測到最短的散塊 E 層在 50 與 70 MHz 超過 400 km，在 144 MHz 超過 1400 km：作者規則在 50 與 70 MHz 與之一致，在 144 MHz 較寬，但要求確認。
 - 所有規則的套用順序與使用中的數值，顯示在 **[設定](Settings-zh-tw)** › spot 分派 中。
+
+## 短跳鏈（自 0.6.0 版起）
+
+![來自 QTH 的鏈](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+在 **多跳前兆** 子頁籤中，程式依照作者的三個條件尋找 50 MHz 多跳鏈：**第一個與最後一個短跳**（500-1200 km）的 MUF 在 50 MHz 左右，需要 11-21 MHz 的 foEs；**中間跳** 最長 2200 km，約需 9.3 MHz。
+
+- **強雲**（橘色方塊）：全世界的 Es spot 與 foEs 至少 11.3 MHz 的 GIRO 電離層探測儀。
+- **來自 QTH**：從你的電台出發的第一個短跳，以及沿同一方向在另一塊強雲上的最後一個短跳，也可以在同一大洲內（例如哈薩克）；圓是到達區。
+- **走廊**：任意兩塊強雲、任何方向，例如 **加勒比 - 伊比利半島** 或 **歐洲 - 西非**（不含 TEP）；若一個端點在你 1200 km 以內，則為 «與你有關»。
+- **尋找雲**：只有第一個短跳；淺藍色區域表示最後一個短跳的雲應在何處。
+- 中間跳都有雲覆蓋時為 **警示**，只缺無人觀測的區域時為 **前兆**。
+- 設定 中有上方 **提示**（也可選擇跳出視窗），用於與你有關的警示。
+
+![走廊](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

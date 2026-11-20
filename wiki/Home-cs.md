@@ -39,6 +39,10 @@
 
 Úplný seznam je v kartě ZDROJE programu.
 
+## Poděkování
+
+Za vývoj sporadické vrstvy E na 50 MHz: **Johan IW2DNI** a **Fabio IZ7NLJ**.
+
 ## Licence
 
 E-LAYER ANALYZER je svobodný software s licencí **GNU GPL-3.0** (soubor COPYING), stejnou jako YA-MS. Je šířen bez jakékoli záruky. Data z externích zdrojů zůstávají majetkem příslušných institucí a platí pro ně jejich podmínky (například data GIRO: CC BY-NC-SA 4.0, jen pro nekomerční použití).

@@ -10,6 +10,7 @@ Din versiunea 0.4.18 fila **SETĂRI** reunește opțiunile generale ale programu
 |---|---|
 | Stație | Indicativul, locatorul și altitudinea, aceleași ca în bara de sus; **Aplică** le confirmă pentru toate filele. |
 | Aspect | Limba, schema de culori (schemele YAEC și YA-MS și, din versiunea 0.5.0, cele șase teme ale IP-TRX-CTRL: Luminos, Noapte, Negru, Albastru, Violet, Verde), **modul compact** pentru laptopurile de 13-15 inci (din 0.5.2: automat sub 850 de pixeli înălțime, întotdeauna sau niciodată) și **dimensiunea fontului întregului program** (85-140 %, ca în YA-MS). Limba și culorile reconstruiesc fereastra: setările și spoturile se păstrează. |
+| Lanțuri multi-salt pe 50 MHz | Din versiunea 0.6.0: avertisment sus (și opțional o fereastră) când apare o ALERTĂ multi-salt pe 50 MHz care privește stația ta: lanț cu primul salt scurt de la tine, sau coridor cu un capăt în limita a 1200 km. Același lanț nu se repetă mai devreme de o oră. |
 | Hărți și date de prognoză | Continentul, același meniu ca în bara filelor. |
 | Ora | Starea NTP și diferența dintre ora serverelor și ceasul PC-ului. |
 | Actualizări | Verificarea pe GitHub la pornire și la fiecare 30 de minute, actualizarea automată și silențioasă, butonul **Verifică acum**. Actualizările automate nu sunt valabile pentru pachetele de sistem (.deb, .rpm, Arch, Slackware). |

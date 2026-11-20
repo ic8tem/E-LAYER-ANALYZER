@@ -62,3 +62,18 @@ En haut à droite de la carte apparaît la synthèse de N0NBH (E-skip pour le co
 - **144 MHz** : E sporadique à partir de 900 km, avec confirmation ; les spots Q65 et JT65 sont de l'EME et sont écartés, sauf `<ES>` dans le texte.
 - G0ISW (Propagation identification, 2024) voit l'E sporadique le plus court au-delà de 400 km en 50 et 70 MHz et au-delà de 1400 km en 144 MHz : les règles de l'auteur concordent en 50 et 70 MHz et sont plus larges en 144 MHz, mais demandent une confirmation.
 - L'ordre dans lequel s'appliquent toutes les règles, avec les valeurs utilisées, est affiché dans **[RÉGLAGES](Settings-fr)** › Aiguillage des spots.
+
+## Chaînes à bonds courts (depuis la version 0.6.0)
+
+![Chaîne depuis le QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Dans le sous-onglet **Précurseurs multi-bond**, le programme cherche les chaînes multi-bond en 50 MHz avec les trois conditions de l'auteur : **premier et dernier bond court** (500-1200 km) avec une MUF autour de 50 MHz, qui demandent une foEs de 11-21 MHz, et **bonds centraux** jusqu'à 2200 km, qui demandent environ 9,3 MHz.
+
+- **Nuages forts** (carrés orange) : spots Es du monde entier et ionosondes GIRO avec une foEs d'au moins 11,3 MHz.
+- **Depuis le QTH** : premier bond court depuis votre station et dernier bond court sur un autre nuage fort dans la même direction, y compris sur le même continent (par exemple au Kazakhstan) ; le cercle est la zone d'arrivée.
+- **Corridor** : deux nuages forts quelconques, dans toutes les directions, par exemple **Caraïbes - Péninsule Ibérique** ou **Europe - Afrique de l'Ouest** (TEP exclu) ; « vous concerne » si une extrémité est à moins de 1200 km de vous.
+- **Chercher le nuage** : il n'y a que le premier bond court ; les zones bleu clair indiquent où devrait se trouver le nuage du bond court final.
+- **ALERTE** si les bonds centraux sont couverts par des nuages, **PRÉCURSEUR** s'il ne manque que des zones sans observateurs.
+- Dans RÉGLAGES, il y a l'**avertissement** en haut (et en option une fenêtre) pour les ALERTES qui vous concernent.
+
+![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

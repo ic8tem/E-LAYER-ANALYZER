@@ -32,3 +32,9 @@
 ## 详情
 
 对所选路径给出：距离及其在 IK3XTV 表中的评级、双向方位、等长跳及各反射点所在方格、1200 km 以内的短首跳（IC8TEM 经验），以及勾选 foEs 复选框时的最低 foEs。
+
+## 链的验证（从 0.6.0 版起）
+
+**载入 spot、ADIF 或 ALL.TXT**（从 Es 云随时间变化导出的 spot、其他台站的 ADIF 日志、JTDX 或 WSJT-X 的 ALL.TXT 解码：呼号通过发射行识别）和 **验证链**：程序在台站 1 的多跳开通上重演短跳链规则，写出能提前指出多少次开通（警示、前兆或仅有第一个短跳）、提前时间中位数，以及之后没有多跳 QSO 的警示。没有载入来源时，云只来自日志，最后一个短跳几乎看不到：需要远方台站的数据。
+
+![验证](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

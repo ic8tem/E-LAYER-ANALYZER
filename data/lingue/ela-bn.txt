@@ -897,3 +897,67 @@ Passo mostrato: nessun collegamento.	দেখানো ধাপ: কোনো 
 Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.	ঘর {0}: মানটি আসে {1} - {2} থেকে, {3:F3} MHz, {4:F0} km, {5}টি হপ, sec φ {6:F2}।
 Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.	পদ্ধতি (Chartier, Hanley ও Emmons 2022): প্রতিটি সংযোগ বলে যে প্রতিফলন বিন্দুতে foEs অন্তত f / sec φ; ঘরটি ধাপের সর্বোচ্চ মান নেয়। এটি নিম্নসীমা: মেঘটি সংযোগগুলো যা দেখায় তার চেয়ে ঘন ও বিস্তৃত হতে পারে। খালি ঘর মানে কোনো সংযোগ নেই, স্পোরাডিক-E-এর অনুপস্থিতি নয়।
 La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel.	সংক্ষিপ্ত মোড, 13-15 ইঞ্চির ল্যাপটপের জন্য, নির্দিষ্ট উচ্চতার বাক্সগুলো ছোট করে এবং ব্যাখ্যার লাইনগুলো লুকিয়ে রাখে; METEOR SCATTER-এ শুরুতে কমান্ডের সারি গুটিয়ে দেয় এবং দিগন্তের পট্টি ছোট করে, YA-MS-এর মতো। স্বয়ংক্রিয়: উইন্ডো 850 পিক্সেলের কম উঁচু হলে চালু হয়।
+Carica spot CSV	CSV স্পট লোড করুন
+Togli gli spot CSV	CSV স্পট সরান
+Verifica le catene	শৃঙ্খল যাচাই করুন
+Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log.	স্টেশন 1-এর মাল্টি-হপ ওপেনিংগুলোর ওপর ছোট হপের শৃঙ্খলের নিয়ম আবার চালায় (SPORADIC-E, মাল্টি-হপ পূর্বলক্ষণ): মেঘ CSV স্পট ও লগের QSO থেকে।
+Spot CSV tolti.	CSV স্পট সরানো হয়েছে।
+Spot CSV esportati dal programma (NUBI Es NEL TEMPO)	প্রোগ্রাম থেকে রপ্তানি করা CSV স্পট (সময়ের সঙ্গে Es মেঘ)
+Spot CSV caricati: {0} (+{1}).	CSV স্পট লোড হয়েছে: {0} (+{1})।
+Carica prima il log ADIF della stazione 1.	আগে স্টেশন 1-এর ADIF লগ লোড করুন।
+Verifica in corso...	যাচাই চলছে...
+Nessuna apertura multi-salto della stazione 1 nel log.	লগে স্টেশন 1-এর কোনো মাল্টি-হপ ওপেনিং নেই।
+Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.	ছোট হপের শৃঙ্খলের যাচাই: স্টেশন 1-এর {0}টি মাল্টি-হপ ওপেনিং (প্রতিদিন ও 30°-এর প্রতিটি সেক্টরে 3100 km-এর বেশি প্রথম QSO), {1:yyyy-MM-dd} থেকে {2:yyyy-MM-dd} পর্যন্ত।
+Nubi da {0} spot e QSO ({1} dai file CSV).	{0}টি স্পট ও QSO থেকে মেঘ ({1}টি CSV ফাইল থেকে)।
+Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	আগের দুই ঘণ্টায়, একই দিকে (±20°): সতর্কতা {0} ({1:F0}%), পূর্বলক্ষণ {2} ({3:F0}%), কেবল ছোট প্রথম হপ {4} ({5:F0}%), কিছুই না {6} ({7:F0}%)।
+Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	সতর্কতা ও পূর্বলক্ষণের মধ্যমা অগ্রিম সময়: {0:F0} মিনিট।
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	লগের দিনগুলোতে QTH থেকে সতর্কতা ও পূর্বলক্ষণ: {0}; পরের দুই ঘণ্টায় মাল্টি-হপ QSO ছাড়া: {1} ({2:F0}%, তবে স্টেশনটি হয়তো তখন অন-এয়ার ছিলই না)।
+Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	CSV স্পট ফাইল ছাড়া মেঘ কেবল লগের QSO থেকে আসে: শেষ ছোট হপ, যা দূরে, প্রায় দেখাই যায় না। সত্যিকারের যাচাইয়ের জন্য সময়ের সঙ্গে Es মেঘ থেকে রপ্তানি করা স্পট লোড করুন।
+CERCA LA NUBE	মেঘ খুঁজুন
+{0:F0} min prima	{0:F0} মিনিট আগে
+... e altre {0}.	... এবং আরও {0}টি।
+dal QTH	QTH থেকে
+cerca la nube	মেঘ খুঁজুন
+corridoio, ti riguarda	করিডর, আপনার সঙ্গে সম্পর্কিত
+corridoio	করিডর
+ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.	50 MHz-এ মাল্টি-হপ সতর্কতা ({0}): {1}, {2:F0} km। পূর্বলক্ষণ খুলতে ক্লিক করুন।
+Mostra	দেখান
+ALLERTA multi-salto in 50 MHz	50 MHz-এ মাল্টি-হপ সতর্কতা
+{0}: {1}, {2:F0} km, azimut {3:F0}°	{0}: {1}, {2:F0} km, অ্যাজিমুথ {3:F0}°
+Nubi forti per il salto corto in 50 MHz: {0}.	50 MHz-এ ছোট হপের জন্য শক্তিশালী মেঘ: {0}।
+■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)	■ কমলা: শক্তিশালী মেঘ, 50 MHz-এ একটি ছোট হপ ধরে রাখে (foEs MHz-এ)
+catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube	ছোট হপের শৃঙ্খল: পূর্ণ রেখা, বৃত্ত = প্রান্তের অঞ্চল; আকাশি = মেঘ খুঁজুন
+salto corto finale? foEs ≥ {0:F1}	শেষ ছোট হপ? foEs ≥ {0:F1}
+{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)	{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} মিনিট আগে)
+{0} - catena a salti corti ({1}): {2}	{0} - ছোট হপের শৃঙ্খল ({1}): {2}
+Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}	আপনার স্টেশন থেকে {0:F0} km-এর ছোট প্রথম হপ একটি শক্তিশালী মেঘে: {1}
+Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):	অ্যাজিমুথ {0:F0}° বরাবর দ্বিতীয় কোনো শক্তিশালী মেঘ নেই: শেষ ছোট হপ এই অঞ্চলগুলোর কোনো একটিতে থাকার কথা (foEs ≥ {1:F1} MHz):
+dopo {0} salti centrali: {1}	{0}টি মধ্যবর্তী হপের পরে: {1}
+ionosonda GIRO a {0:F0} km senza foEs recente	{0:F0} km দূরে GIRO আয়নোসোন্ড, সাম্প্রতিক foEs ছাড়া
+ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz	{0:F0} km দূরে GIRO আয়নোসোন্ড: foEs {1:F1} MHz
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km	দূরত্ব {0:F0} km, অ্যাজিমুথ {1:F0}°: ছোট হপ {2:F0} km + {4:F0} km-এর {3}টি মধ্যবর্তী হপ + ছোট হপ {5:F0} km
+1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}	1) ছোট প্রথম হপ, MUF ≥ 50 MHz: শক্তিশালী মেঘ {0}
+2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}	2) ছোট শেষ হপ, MUF ≥ 50 MHz: শক্তিশালী মেঘ {0}
+3) Salti centrali: nessuno, le due nubi sono consecutive.	3) মধ্যবর্তী হপ: নেই, দুটি মেঘ পরপর।
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})	foEs ≥ {0:F1} MHz-এর মেঘ {1:F0} km দূরে (স্পট {2} - {3})
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)	foEs ≥ {0:F1} MHz-এর মেঘ {1:F0} km দূরে (আয়নোসোন্ড)
+3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}	3) মধ্যবর্তী হপ {0} ({1:F0} km): {2}, প্রয়োজনীয় foEs {3:F1} MHz - {4}
+Zona d'arrivo: {0}, entro circa {1:F0} km	আগমনের অঞ্চল: {0}, প্রায় {1:F0} km-এর মধ্যে
+Zone d'estremità: {0} e {1}, entro circa {2:F0} km	প্রান্তের অঞ্চল: {0} ও {1}, প্রায় {2:F0} km-এর মধ্যে
+La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.	আপনার স্টেশন একটি প্রান্তের অঞ্চল থেকে {0:F0} km দূরে: এটি আপনার সঙ্গে সম্পর্কিত।
+La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.	আপনার স্টেশন নিকটতম প্রান্তের অঞ্চল থেকে {0:F0} km দূরে।
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti.	লেখকের (IC8TEM) শর্ত: ছোট প্রথম ও শেষ হপ (500-1200 km), MUF প্রায় 50 MHz, যার জন্য 11-21 MHz foEs দরকার; 2200 km পর্যন্ত মধ্যবর্তী হপের জন্য প্রায় 9.3 MHz দরকার। শেষ 30 মিনিটের মেঘ; মেঘ কয়েক মিনিট থেকে এক ঘণ্টা থাকে এবং ধীরে সরে (Denisowski 2023): একই স্তরে সবচেয়ে সাম্প্রতিকগুলো আগে আসে।
+Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione	50 MHz-এ আমার স্টেশন সম্পর্কিত মাল্টি-হপ সতর্কতা তৈরি হলে ওপরে বিজ্ঞপ্তি
+Anche con una finestra	একটি উইন্ডোসহও
+Catene multi-salto in 50 MHz	50 MHz-এ মাল্টি-হপ শৃঙ্খল
+L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto.	বিজ্ঞপ্তিটি সেই শৃঙ্খলগুলোর জন্য যাদের ছোট প্রথম হপ আপনার স্টেশন থেকে এবং সেই করিডরগুলোর জন্য যাদের একটি প্রান্ত আপনার থেকে 1200 km-এর মধ্যে, যখন তিনটি শর্তই পূরণ হয় (সতর্কতা): ছোট প্রথম ও শেষ হপ, MUF প্রায় 50 MHz, এবং মধ্যবর্তী হপ আচ্ছাদিত। একই শৃঙ্খল এক ঘণ্টার আগে পুনরাবৃত্তি হয় না। ওপরের লেখায় ক্লিক: SPORADIC-E, মাল্টি-হপ পূর্বলক্ষণ খোলে।
+Carica spot CSV o ADIF	CSV স্পট বা ADIF লোড করুন
+Togli gli spot CSV e ADIF	CSV স্পট ও ADIF সরান
+Spot CSV esportati dal programma o log ADIF di altre stazioni	প্রোগ্রাম থেকে রপ্তানি করা CSV স্পট বা অন্য স্টেশনের ADIF লগ
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso.	লেখকের (IC8TEM) শর্ত: ছোট প্রথম ও শেষ হপ (500-1200 km), MUF প্রায় 50 MHz, যার জন্য 11-21 MHz foEs দরকার; 2200 km পর্যন্ত মধ্যবর্তী হপের জন্য প্রায় 9.3 MHz দরকার। শেষ 30 মিনিটের মেঘ: একই স্তরে সবচেয়ে সাম্প্রতিকগুলো আগে আসে। শৃঙ্খল সব দিকে প্রযোজ্য, উত্তর-দক্ষিণেও; TEP বাদ থাকে।
+Carica spot, ADIF o ALL.TXT	স্পট, ADIF বা ALL.TXT লোড করুন
+Togli le sorgenti delle nubi	মেঘের উৎস সরান
+Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni	প্রোগ্রামের CSV স্পট, ADIF লগ বা অন্য স্টেশনের ALL.TXT ডিকোড (JTDX, WSJT-X)
+Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).	{0}টি স্পট, QSO ও ডিকোড থেকে মেঘ ({1}টি লোড করা উৎস থেকে)।
+Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane.	লোড করা উৎস ছাড়া মেঘ কেবল লগের QSO থেকে আসে: শেষ ছোট হপ, যা দূরে, প্রায় দেখাই যায় না। সত্যিকারের যাচাইয়ের জন্য সময়ের সঙ্গে Es মেঘ থেকে রপ্তানি করা স্পট, ADIF লগ বা অন্য স্টেশনের ALL.TXT ডিকোড লোড করুন, দূরের স্টেশন হলে আরও ভালো।
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km	দূরত্ব {0:F0} km, অ্যাজিমুথ {1:F0}°: ছোট হপ {2:F0} km + ছোট হপ {3:F0} km
