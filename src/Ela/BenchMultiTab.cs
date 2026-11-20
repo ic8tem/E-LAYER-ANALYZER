@@ -95,7 +95,8 @@ namespace ELA
             bAll.Click += (s, e) => { areaMode = false; Fill(); };
 
             Button bCsv = Ui.B(Lang.T("Carica spot, ADIF o ALL.TXT")), bCsvOff = Ui.B(Lang.T("Togli le sorgenti delle nubi")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
-            lblVer = new TextBlock { Foreground = Pal.B(Pal.Orange), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) };
+            lblVer = new TextBlock { Foreground = Pal.B(Pal.Orange), TextWrapping = TextWrapping.NoWrap, TextTrimming = TextTrimming.CharacterEllipsis, Margin = new Thickness(6, 2) };   // una riga sola: il resoconto completo va nei Dettagli, la tabella dei QSO non si schiaccia
+            lblVer.PropertyChanged += (s, e) => { if (e.Property == TextBlock.TextProperty) ToolTip.SetTip(lblVer, lblVer.Text); };
             ToolTip.SetTip(bVer, Lang.T("Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log."));
             bCsv.Click += async (s, e) => await PickCsv();
             bCsvOff.Click += (s, e) => { csvSpots.Clear(); lblVer.Text = Lang.T("Spot CSV tolti."); };

@@ -334,12 +334,17 @@ namespace ELA
             ApplyCompact(m == 1 || (m == 0 && h > 0 && h < CompactOn));
         }
 
+        int chainKind;
+        DateTime chainAt;
+
         void OnChain(ChainAlert c)
         {
             Dispatcher.UIThread.Post(() =>
             {
                 if (!Station.Cfg.GetB("catene_avviso", true)) return;
-                chainKey = c.Key;
+                // una catena dal QTH resta nella testata per un'ora: un corridoio arrivato dopo non la copre
+                if (lblChain.IsVisible && chainKind == ChainAlert.KindQth && c.Kind != ChainAlert.KindQth && (DateTime.UtcNow - chainAt).TotalMinutes < 60) return;
+                chainKey = c.Key; chainKind = c.Kind; chainAt = DateTime.UtcNow;
                 // la zona lontana dalla propria stazione (per il corridoio: l'estremita' opposta a quella vicina)
                 string reg = c.Kind == ChainAlert.KindCorridor && Geo.DistanceKm(Station.Lat, Station.Lon, c.EndBLat, c.EndBLon) < Geo.DistanceKm(Station.Lat, Station.Lon, c.EndALat, c.EndALon) ? c.EndAName : c.EndBName;
                 if (reg.Length > 30) reg = reg.Substring(0, 29) + "…";

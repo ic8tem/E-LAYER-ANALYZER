@@ -663,13 +663,17 @@ namespace ELA
                 sb.AppendLine(Lang.F("Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):", c.Az, Chains.StrongFoEs(H)));
                 int j = 1;
                 foreach (PrecursorPoint z in c.Zones)
-                    sb.AppendLine("  " + Lang.F("dopo {0} salti centrali: {1}", j++, Chains.ZoneName(z.Lat, z.Lon))
+                {
+                    sb.AppendLine("  " + (j == 1 ? Lang.F("dopo 1 salto centrale: {0}", Chains.ZoneName(z.Lat, z.Lon)) : Lang.F("dopo {0} salti centrali: {1}", j, Chains.ZoneName(z.Lat, z.Lon)))
                         + (z.Observed ? "" : ", " + Lang.T("zona senza osservatori"))
                         + (double.IsNaN(z.CloudKm) ? "" : ", " + (double.IsNaN(z.CloudFoEs) ? Lang.F("ionosonda GIRO a {0:F0} km senza foEs recente", z.CloudKm) : Lang.F("ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz", z.CloudKm, z.CloudFoEs))));
+                    j++;
+                }
             }
             else
             {
-                if (c.Middle > 0) sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km", c.DistKm, c.Az, 2 * c.XA, c.Middle, c.MiddleKm, 2 * c.XB));
+                if (c.Middle == 1) sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + 1 salto centrale da {3:F0} km + salto corto {4:F0} km", c.DistKm, c.Az, 2 * c.XA, c.MiddleKm, 2 * c.XB));
+                else if (c.Middle > 1) sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km", c.DistKm, c.Az, 2 * c.XA, c.Middle, c.MiddleKm, 2 * c.XB));
                 else sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km", c.DistKm, c.Az, 2 * c.XA, 2 * c.XB));
                 sb.AppendLine(Lang.F("1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.A)));
                 sb.AppendLine(Lang.F("2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.B)));
@@ -677,7 +681,9 @@ namespace ELA
                 int k = 1;
                 foreach (PrecursorPoint p in c.Points)
                 {
-                    string st = p.Covered ? (p.CloudSpot != null ? Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})", p.CloudFoEs, p.CloudKm, p.CloudSpot.Spotter, p.CloudSpot.DxCall) : Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)", p.CloudFoEs, p.CloudKm))
+                    bool on = p.CloudKm < OnPointKm;   // la nube sta sul punto di salto: niente "a 0 km"
+                    string st = p.Covered ? (p.CloudSpot != null ? (on ? Lang.F("nube con foEs ≥ {0:F1} MHz sul punto di salto (spot {1} - {2})", p.CloudFoEs, p.CloudSpot.Spotter, p.CloudSpot.DxCall) : Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})", p.CloudFoEs, p.CloudKm, p.CloudSpot.Spotter, p.CloudSpot.DxCall))
+                                                                   : (on ? Lang.F("nube con foEs ≥ {0:F1} MHz sul punto di salto (ionosonda)", p.CloudFoEs) : Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)", p.CloudFoEs, p.CloudKm)))
                               : p.Observed ? Lang.T("zona osservata, nessuna nube") : Lang.T("zona senza osservatori");
                     sb.AppendLine(Lang.F("3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}", k++, p.HopKm, Geo.LatLonToLoc(p.Lat, p.Lon, 4), p.FoEsNeed, st));
                 }
@@ -691,6 +697,8 @@ namespace ELA
             sb.AppendLine(Lang.T("Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso."));
         }
 
+        const double OnPointKm = 10;   // sotto questa distanza la nube sta sul punto di salto
+
         void AlertDetails(StringBuilder sb, PrecursorAlert a)
         {
             ChainAlert ca = a as ChainAlert;
@@ -703,7 +711,8 @@ namespace ELA
             int k = 1;
             foreach (PrecursorPoint p in a.Points)
             {
-                string st = p.Covered ? Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3} {4} MHz)", p.CloudFoEs, p.CloudKm, p.CloudSpot.Spotter, p.CloudSpot.DxCall, p.CloudSpot.FreqMHz.ToString("F3", CultureInfo.CurrentCulture))
+                string st = p.Covered ? (p.CloudKm < OnPointKm ? Lang.F("nube con foEs ≥ {0:F1} MHz sul punto di salto (spot {1} - {2} {3} MHz)", p.CloudFoEs, p.CloudSpot.Spotter, p.CloudSpot.DxCall, p.CloudSpot.FreqMHz.ToString("F3", CultureInfo.CurrentCulture))
+                                                       : Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3} {4} MHz)", p.CloudFoEs, p.CloudKm, p.CloudSpot.Spotter, p.CloudSpot.DxCall, p.CloudSpot.FreqMHz.ToString("F3", CultureInfo.CurrentCulture)))
                           : p.Observed ? Lang.T("zona osservata, nessuna nube") : Lang.T("zona senza osservatori");
                 sb.AppendLine(Lang.F("  salto {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}", k++, p.HopKm, Geo.LatLonToLoc(p.Lat, p.Lon, 4), p.FoEsNeed, st));
             }
