@@ -94,7 +94,7 @@ namespace ELA
             bAll = Ui.B(Lang.T("Torna a giorno e orario"));
             bAll.Click += (s, e) => { areaMode = false; Fill(); };
 
-            Button bCsv = Ui.B(Lang.T("Carica spot CSV")), bCsvOff = Ui.B(Lang.T("Togli gli spot CSV")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
+            Button bCsv = Ui.B(Lang.T("Carica spot CSV o ADIF")), bCsvOff = Ui.B(Lang.T("Togli gli spot CSV e ADIF")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
             lblVer = new TextBlock { Foreground = Pal.B(Pal.Orange), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) };
             ToolTip.SetTip(bVer, Lang.T("Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log."));
             bCsv.Click += async (s, e) => await PickCsv();
@@ -445,9 +445,9 @@ namespace ELA
             if (tl == null) return;
             IReadOnlyList<IStorageFile> files = await tl.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
-                Title = Lang.T("Spot CSV esportati dal programma (NUBI Es NEL TEMPO)"),
+                Title = Lang.T("Spot CSV esportati dal programma o log ADIF di altre stazioni"),
                 AllowMultiple = true,
-                FileTypeFilter = new[] { new FilePickerFileType("CSV") { Patterns = new[] { "*.csv", "*.CSV" } } }
+                FileTypeFilter = new[] { new FilePickerFileType("CSV / ADIF") { Patterns = new[] { "*.csv", "*.CSV", "*.adi", "*.adif", "*.ADI", "*.ADIF" } } }
             });
             if (files == null || files.Count == 0) return;
             int before = csvSpots.Count;
@@ -464,7 +464,12 @@ namespace ELA
             List<Spot> l = new List<Spot>();
             await Task.Run(() =>
             {
-                try { foreach (string line in File.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
+                try
+                {
+                    // log ADIF di un'altra stazione (anche una spedizione): i suoi QSO diventano nubi, come quelli dei log caricati
+                    if (path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)) { foreach (string line in File.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
+                    else l.AddRange(NubiTab.FromAdif(path).Where(s => s.HasBoth));
+                }
                 catch { }
             });
             csvSpots.AddRange(l);

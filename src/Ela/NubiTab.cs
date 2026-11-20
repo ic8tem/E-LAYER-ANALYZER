@@ -213,7 +213,7 @@ namespace ELA
         static readonly string[] OtherProp = { "TR", "MS", "FAI", "AUR", "AUE", "EME", "F2", "TEP", "RS", "SAT", "LOS", "ION", "IRL", "INTERNET", "ECH", "BS" };
 
         // QSO del log come "spot" (stazione del log -> corrispondente), stesse regole di BENCHMARK Es
-        static List<Spot> FromAdif(string path)
+        public static List<Spot> FromAdif(string path)
         {
             List<Spot> l = new List<Spot>();
             foreach (Dictionary<string, string> r in Adif.Parse(File.ReadAllBytes(path)))
@@ -228,7 +228,8 @@ namespace ELA
                 if (grid.Length > 6) grid = grid.Substring(0, 6);
                 string my = Field(r, "MY_GRIDSQUARE"); if (my.Length > 6) my = my.Substring(0, 6);
                 string myCall = Field(r, "STATION_CALLSIGN"); if (myCall.Length == 0) myCall = Field(r, "OPERATOR"); if (myCall.Length == 0) myCall = Station.Call;
-                if (my.Length < 4) my = Station.Loc;
+                // locator proprio mancante: quello della stazione solo se il log e' suo, altrimenti CALL3; se non c'e', il QSO si salta
+                if (my.Length < 4) my = myCall.Length == 0 || string.Equals(myCall, Station.Call, StringComparison.OrdinalIgnoreCase) ? Station.Loc : (CallDb.Lookup(myCall) ?? "");
                 double la, lo, mla, mlo;
                 if (grid.Length < 4 || !Geo.IsLocator(grid.Substring(0, 4)) || !Geo.LocToLatLon(grid, out la, out lo)) continue;
                 if (my.Length < 4 || !Geo.LocToLatLon(my, out mla, out mlo)) continue;
