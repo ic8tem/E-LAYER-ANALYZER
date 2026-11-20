@@ -74,5 +74,7 @@ Haritanın sağ üstünde N0NBH özeti görünür (seçilen kıta için E-skip, 
 - **Bulutu ara**: yalnızca ilk kısa atlama var; açık mavi bölgeler son kısa atlamanın bulutunun nerede olması gerektiğini söyler.
 - Orta atlamalar bulutlarla kapsanmışsa **UYARI**, yalnızca gözlemcisiz bölgeler eksikse **ÖNCÜL**.
 - AYARLAR'da sizi ilgilendiren UYARILAR için üstte **bildirim** (isteğe bağlı olarak bir pencere de) vardır.
+- **Açık denize** ya da istasyon olmayan yerlere (CALL3 ve spot'lar) ulaşan zincirler gösterilmez.
+- **6 m'de sinyalimin ayak izi** (pembe noktalar): 50 MHz'deki sinyalinizin 2-5 atlamadan sonra, tüm bantların (28-144 MHz) spot'larından ve iyonosondlardan tahmin edilen son 30 dakikanın bulutları üzerinden düştüğü yer; yalnızca istasyon olan yerlerde.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

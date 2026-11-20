@@ -74,5 +74,7 @@ In die suboortjie **Multi-sprongvoorlopers** soek die program die multi-sprongke
 - **Soek die wolk**: daar is slegs die eerste kort sprong; die ligblou sones sê waar die wolk van die laaste kort sprong behoort te wees.
 - **WAARSKUWING** as die middelspronge deur wolke gedek is, **VOORLOPER** as slegs sones sonder waarnemers ontbreek.
 - In INSTELLINGS is daar die **kennisgewing** bo (en opsioneel 'n venster) vir die WAARSKUWINGS wat jou raak.
+- Kettings wat **in die oop see** aankom of waar daar geen stasies is nie (CALL3 en spots), word nie gewys nie.
+- **Voetspoor van my sein op 6 m** (pienk punte): waar jou sein op 50 MHz ná 2-5 spronge land, oor die wolke van die laaste 30 minute wat uit die spots van alle bande (28-144 MHz) en uit die ionosondes geskat is; slegs waar daar stasies is.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
