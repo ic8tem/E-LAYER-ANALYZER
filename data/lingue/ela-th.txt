@@ -897,3 +897,67 @@ Passo mostrato: nessun collegamento.	ขั้นที่แสดง: ไม�
 Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.	เซลล์ {0}: ค่ามาจาก {1} - {2}, {3:F3} MHz, {4:F0} km, {5} ฮอป, sec φ {6:F2}
 Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.	วิธี (Chartier, Hanley และ Emmons 2022): การติดต่อแต่ละครั้งบอกว่าที่จุดสะท้อน foEs มีค่าอย่างน้อย f / sec φ; เซลล์รับค่าสูงสุดของขั้น นี่คือขีดจำกัดล่าง: เมฆอาจหนาแน่นและกว้างกว่าที่การติดต่อแสดง เซลล์ว่างหมายถึงไม่มีการติดต่อเท่านั้น ไม่ใช่ว่าไม่มี sporadic-E
 La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel.	โหมดกะทัดรัด สำหรับโน้ตบุ๊ก 13-15 นิ้ว ย่อกรอบที่มีความสูงคงที่และซ่อนแถวคำอธิบาย; ใน METEOR SCATTER จะพับแถวคำสั่งตอนเริ่มโปรแกรมและย่อแถบช่วงเวลา เหมือนใน YA-MS อัตโนมัติ: เปิดเมื่อหน้าต่างสูงน้อยกว่า 850 พิกเซล
+Carica spot CSV	โหลดสปอต CSV
+Togli gli spot CSV	นำสปอต CSV ออก
+Verifica le catene	ตรวจสอบสายโซ่
+Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log.	นำกฎของสายโซ่ฮอปสั้น (SPORADIC-E, สัญญาณบ่งชี้ล่วงหน้าของหลายฮอป) มาเล่นซ้ำกับการเปิดหลายฮอปของสถานี 1: เมฆมาจากสปอต CSV และจาก QSO ในล็อก
+Spot CSV tolti.	นำสปอต CSV ออกแล้ว
+Spot CSV esportati dal programma (NUBI Es NEL TEMPO)	สปอต CSV ที่ส่งออกจากโปรแกรม (เมฆ Es ตามเวลา)
+Spot CSV caricati: {0} (+{1}).	สปอต CSV ที่โหลด: {0} (+{1})
+Carica prima il log ADIF della stazione 1.	โหลดล็อก ADIF ของสถานี 1 ก่อน
+Verifica in corso...	กำลังตรวจสอบ...
+Nessuna apertura multi-salto della stazione 1 nel log.	ไม่มีการเปิดหลายฮอปของสถานี 1 ในล็อก
+Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.	การตรวจสอบสายโซ่ฮอปสั้น: การเปิดหลายฮอปของสถานี 1 จำนวน {0} ครั้ง (QSO แรกที่เกิน 3100 km ต่อวันและต่อเซกเตอร์ 30°) ตั้งแต่ {1:yyyy-MM-dd} ถึง {2:yyyy-MM-dd}
+Nubi da {0} spot e QSO ({1} dai file CSV).	เมฆจากสปอตและ QSO {0} รายการ ({1} รายการจากไฟล์ CSV)
+Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	ในสองชั่วโมงก่อนหน้า ทิศทางเดียวกัน (±20°): การแจ้งเตือน {0} ({1:F0}%), สัญญาณบ่งชี้ล่วงหน้า {2} ({3:F0}%), มีเพียงฮอปสั้นแรก {4} ({5:F0}%), ไม่มีเลย {6} ({7:F0}%)
+Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	เวลาล่วงหน้ามัธยฐานของการแจ้งเตือนและสัญญาณบ่งชี้ล่วงหน้า: {0:F0} นาที
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	การแจ้งเตือนและสัญญาณบ่งชี้ล่วงหน้าจาก QTH ในวันที่มีในล็อก: {0}; ที่ไม่มี QSO หลายฮอปในสองชั่วโมงถัดมา: {1} ({2:F0}% แต่สถานีอาจไม่ได้ออกอากาศอยู่ก็ได้)
+Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	หากไม่มีไฟล์สปอต CSV เมฆจะมาจาก QSO ในล็อกเท่านั้น: ฮอปสั้นสุดท้ายที่อยู่ไกลแทบมองไม่เห็น หากต้องการตรวจสอบจริง ให้โหลดสปอตที่ส่งออกจาก เมฆ Es ตามเวลา
+CERCA LA NUBE	ค้นหาเมฆ
+{0:F0} min prima	{0:F0} นาทีก่อน
+... e altre {0}.	... และอีก {0} รายการ
+dal QTH	จาก QTH
+cerca la nube	ค้นหาเมฆ
+corridoio, ti riguarda	ทางเชื่อม เกี่ยวกับสถานีคุณ
+corridoio	ทางเชื่อม
+ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.	การแจ้งเตือนหลายฮอปบน 50 MHz ({0}): {1}, {2:F0} km คลิกเพื่อเปิดสัญญาณบ่งชี้ล่วงหน้า
+Mostra	แสดง
+ALLERTA multi-salto in 50 MHz	การแจ้งเตือนหลายฮอปบน 50 MHz
+{0}: {1}, {2:F0} km, azimut {3:F0}°	{0}: {1}, {2:F0} km, อะซิมุท {3:F0}°
+Nubi forti per il salto corto in 50 MHz: {0}.	เมฆแรงสำหรับฮอปสั้นบน 50 MHz: {0}
+■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)	■ สีส้ม: เมฆแรง รองรับฮอปสั้นบน 50 MHz ได้ (foEs เป็น MHz)
+catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube	สายโซ่ฮอปสั้น: เส้นทึบ วงกลม = โซนปลายสาย; สีฟ้าอ่อน = ค้นหาเมฆ
+salto corto finale? foEs ≥ {0:F1}	ฮอปสั้นสุดท้าย? foEs ≥ {0:F1}
+{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)	{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} นาทีก่อน)
+{0} - catena a salti corti ({1}): {2}	{0} - สายโซ่ฮอปสั้น ({1}): {2}
+Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}	ฮอปสั้นแรก {0:F0} km จากสถานีของคุณไปยังเมฆแรง: {1}
+Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):	ไม่มีเมฆแรงก้อนที่สองตามอะซิมุท {0:F0}°: ฮอปสั้นสุดท้ายควรอยู่ในโซนใดโซนหนึ่งต่อไปนี้ (foEs ≥ {1:F1} MHz):
+dopo {0} salti centrali: {1}	หลังฮอปกลาง {0} ฮอป: {1}
+ionosonda GIRO a {0:F0} km senza foEs recente	ไอโอโนซอนด์ GIRO ที่ระยะ {0:F0} km ไม่มี foEs ล่าสุด
+ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz	ไอโอโนซอนด์ GIRO ที่ระยะ {0:F0} km: foEs {1:F1} MHz
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km	ระยะทาง {0:F0} km, อะซิมุท {1:F0}°: ฮอปสั้น {2:F0} km + ฮอปกลาง {3} ฮอป ฮอปละ {4:F0} km + ฮอปสั้น {5:F0} km
+1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}	1) ฮอปสั้นแรก MUF ≥ 50 MHz: เมฆแรง {0}
+2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}	2) ฮอปสั้นสุดท้าย MUF ≥ 50 MHz: เมฆแรง {0}
+3) Salti centrali: nessuno, le due nubi sono consecutive.	3) ฮอปกลาง: ไม่มี เมฆสองก้อนอยู่ติดกัน
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})	เมฆที่มี foEs ≥ {0:F1} MHz ที่ระยะ {1:F0} km (สปอต {2} - {3})
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)	เมฆที่มี foEs ≥ {0:F1} MHz ที่ระยะ {1:F0} km (ไอโอโนซอนด์)
+3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}	3) ฮอปกลาง {0} ({1:F0} km): {2}, foEs ที่ต้องการ {3:F1} MHz - {4}
+Zona d'arrivo: {0}, entro circa {1:F0} km	โซนปลายทาง: {0} ภายในประมาณ {1:F0} km
+Zone d'estremità: {0} e {1}, entro circa {2:F0} km	โซนปลายสาย: {0} และ {1} ภายในประมาณ {2:F0} km
+La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.	สถานีของคุณอยู่ห่างจากโซนปลายสาย {0:F0} km: เกี่ยวกับสถานีคุณ
+La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.	สถานีของคุณอยู่ห่างจากโซนปลายสายที่ใกล้ที่สุด {0:F0} km
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti.	เงื่อนไขของผู้เขียน (IC8TEM): ฮอปสั้นแรกและฮอปสั้นสุดท้าย (500-1200 km) มี MUF ประมาณ 50 MHz ซึ่งต้องการ foEs 11-21 MHz; ฮอปกลางยาวถึง 2200 km ต้องการประมาณ 9.3 MHz ใช้เมฆใน 30 นาทีล่าสุด; เมฆอยู่ได้ตั้งแต่ไม่กี่นาทีถึงหนึ่งชั่วโมงและเคลื่อนที่ช้า (Denisowski 2023): ถ้าระดับเท่ากัน รายการที่ใหม่กว่าจะมาก่อน
+Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione	แจ้งเตือนด้านบนเมื่อเกิดการแจ้งเตือนหลายฮอปบน 50 MHz ที่เกี่ยวกับสถานีของฉัน
+Anche con una finestra	แสดงหน้าต่างด้วย
+Catene multi-salto in 50 MHz	สายโซ่หลายฮอปบน 50 MHz
+L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto.	การแจ้งเตือนครอบคลุมสายโซ่ที่ฮอปสั้นแรกเริ่มจากสถานีของคุณ และทางเชื่อมที่ปลายด้านหนึ่งอยู่ภายใน 1200 km จากคุณ เมื่อครบทั้งสามเงื่อนไข (การแจ้งเตือน): ฮอปสั้นแรกและฮอปสั้นสุดท้ายมี MUF ประมาณ 50 MHz และฮอปกลางมีเมฆครอบคลุม สายโซ่เดิมจะไม่แจ้งซ้ำภายในหนึ่งชั่วโมง คลิกข้อความด้านบน: จะเปิด SPORADIC-E สัญญาณบ่งชี้ล่วงหน้าของหลายฮอป
+Carica spot CSV o ADIF	โหลดสปอต CSV หรือ ADIF
+Togli gli spot CSV e ADIF	นำสปอต CSV และ ADIF ออก
+Spot CSV esportati dal programma o log ADIF di altre stazioni	สปอต CSV ที่ส่งออกจากโปรแกรม หรือล็อก ADIF ของสถานีอื่น
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso.	เงื่อนไขของผู้เขียน (IC8TEM): ฮอปสั้นแรกและฮอปสั้นสุดท้าย (500-1200 km) มี MUF ประมาณ 50 MHz ซึ่งต้องการ foEs 11-21 MHz; ฮอปกลางยาวถึง 2200 km ต้องการประมาณ 9.3 MHz ใช้เมฆใน 30 นาทีล่าสุด: ถ้าระดับเท่ากัน รายการที่ใหม่กว่าจะมาก่อน สายโซ่ใช้ได้ทุกทิศทาง รวมถึงเหนือ-ใต้; ยังคงไม่รวม TEP
+Carica spot, ADIF o ALL.TXT	โหลดสปอต, ADIF หรือ ALL.TXT
+Togli le sorgenti delle nubi	นำแหล่งข้อมูลเมฆออก
+Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni	สปอต CSV ของโปรแกรม ล็อก ADIF หรือการถอดรหัส ALL.TXT (JTDX, WSJT-X) ของสถานีอื่น
+Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).	เมฆจากสปอต QSO และการถอดรหัส {0} รายการ ({1} รายการจากแหล่งข้อมูลที่โหลด)
+Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane.	หากไม่ได้โหลดแหล่งข้อมูล เมฆจะมาจาก QSO ในล็อกเท่านั้น: ฮอปสั้นสุดท้ายที่อยู่ไกลแทบมองไม่เห็น หากต้องการตรวจสอบจริง ให้โหลดสปอตที่ส่งออกจาก เมฆ Es ตามเวลา ล็อก ADIF หรือการถอดรหัส ALL.TXT ของสถานีอื่น โดยเฉพาะสถานีที่อยู่ไกล
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km	ระยะทาง {0:F0} km, อะซิมุท {1:F0}°: ฮอปสั้น {2:F0} km + ฮอปสั้น {3:F0} km
