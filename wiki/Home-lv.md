@@ -39,6 +39,10 @@
 
 Pilnais saraksts ir programmas cilnē AVOTI.
 
+## Pateicības
+
+Par sporādiskā E izstrādi 50 MHz joslā: **Johan IW2DNI** un **Fabio IZ7NLJ**.
+
 ## Licence
 
 E-LAYER ANALYZER ir brīvā programmatūra ar licenci **GNU GPL-3.0** (fails COPYING), to pašu, kas YA-MS. Tā tiek izplatīta bez jebkādas garantijas. Ārējo avotu dati paliek attiecīgo iestāžu īpašumā, ar to nosacījumiem (piemēram, GIRO dati: CC BY-NC-SA 4.0, tikai nekomerciālai lietošanai).

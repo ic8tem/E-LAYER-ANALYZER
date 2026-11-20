@@ -62,3 +62,18 @@ Kartes augšējā labajā stūrī parādās N0NBH kopsavilkums (izvēlētā kont
 - **144 MHz**: Sporadic-E no 900 km, ar apstiprinājumu; Q65 un JT65 spoti ir EME un tiek atmesti, ja vien tekstā nav `<ES>`.
 - G0ISW (Propagation identification, 2024) īsāko Sporadic-E novēro virs 400 km 50 un 70 MHz joslās un virs 1400 km 144 MHz joslā: autora noteikumi saskan 50 un 70 MHz joslās un ir plašāki 144 MHz joslā, bet prasa apstiprinājumu.
 - Visu noteikumu piemērošanas secība ar lietotajām vērtībām redzama **[IESTATĪJUMI](Settings-lv)** › Spotu sadale.
+
+## Īso lēcienu ķēdes (kopš versijas 0.6.0)
+
+![Ķēde no QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Apakšcilnē **Vairāklēcienu priekšvēstneši** programma meklē vairāklēcienu ķēdes 50 MHz joslā pēc trim autora nosacījumiem: **pirmais un pēdējais īsais lēciens** (500-1200 km) ar MUF ap 50 MHz, kam vajag 11-21 MHz foEs, un **vidējie lēcieni** līdz 2200 km, kam vajag ap 9,3 MHz.
+
+- **Spēcīgi mākoņi** (oranži kvadrāti): visas pasaules Es spoti un GIRO jonozondi ar foEs vismaz 11,3 MHz.
+- **No QTH**: pirmais īsais lēciens no jūsu stacijas un pēdējais īsais lēciens uz cita spēcīga mākoņa tajā pašā virzienā, arī tajā pašā kontinentā (piemēram, Kazahstānā); aplis ir mērķa zona.
+- **Koridors**: jebkuri divi spēcīgi mākoņi, jebkurā virzienā, piemēram, **Karību jūra - Ibērijas pussala** vai **Eiropa - Rietumāfrika** (bez TEP); «attiecas uz jums», ja viens gals ir 1200 km robežās no jums.
+- **Meklēt mākoni**: ir tikai pirmais īsais lēciens; gaiši zilās zonas rāda, kur vajadzētu būt pēdējā īsā lēciena mākonim.
+- **BRĪDINĀJUMS**, ja vidējie lēcieni ir nosegti ar mākoņiem, **PRIEKŠVĒSTNESIS**, ja trūkst tikai zonu bez novērotājiem.
+- IESTATĪJUMOS ir **paziņojums** augšā (pēc izvēles arī logs) par BRĪDINĀJUMIEM, kas attiecas uz jums.
+
+![Koridors](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

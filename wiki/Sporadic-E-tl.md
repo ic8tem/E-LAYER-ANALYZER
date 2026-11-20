@@ -62,3 +62,18 @@ Sa kanang itaas ng mapa lumalabas ang buod ni N0NBH (E-skip ng napiling kontinen
 - **144 MHz**: Sporadic-E mula 900 km, may kumpirmasyon; ang mga spot na Q65 at JT65 ay EME at itinatapon, maliban kung may `<ES>` sa teksto.
 - Nakikita ni G0ISW (Propagation identification, 2024) ang pinakamaikling Sporadic-E na lampas sa 400 km sa 50 at 70 MHz at lampas sa 1400 km sa 144 MHz: tugma ang mga patakaran ng may-akda sa 50 at 70 MHz at mas maluwag sa 144 MHz, pero humihingi ng kumpirmasyon.
 - Ang pagkakasunod ng paglalapat ng lahat ng patakaran, kasama ang mga halagang ginagamit, ay ipinapakita sa **[MGA SETTING](Settings-tl)** › Pamamahagi ng mga spot.
+
+## Mga kadenang may maiikling hop (mula sa bersiyon 0.6.0)
+
+![Catena dal QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Sa sub-tab na **Mga paunang tanda ng multi-hop**, hinahanap ng programa ang mga kadena ng multi-hop sa 50 MHz ayon sa tatlong kondisyon ng may-akda: **maikling una at huling hop** (500-1200 km) na may MUF na mga 50 MHz, na nangangailangan ng foEs na 11-21 MHz, at **mga gitnang hop** hanggang 2200 km, na nangangailangan ng mga 9.3 MHz.
+
+- **Malalakas na ulap** (mga kahel na parisukat): mga Es spot mula sa buong mundo at mga GIRO ionosonde na may foEs na hindi bababa sa 11.3 MHz.
+- **Mula sa QTH**: maikling unang hop mula sa iyong istasyon at maikling huling hop sa isa pang malakas na ulap sa parehong direksyon, pati sa parehong kontinente (halimbawa sa Kazakhstan); ang bilog ang sona ng pagdating.
+- **Koridor**: alinmang dalawang malakas na ulap, sa anumang direksyon, halimbawa **Caribbean - Iberian Peninsula** o **Europa - Kanlurang Africa** (hindi kasama ang TEP); «may kinalaman sa iyo» kung ang isang dulo ay nasa loob ng 1200 km mula sa iyo.
+- **Hanapin ang ulap**: ang maikling unang hop lamang ang naroon; sinasabi ng mga mapusyaw na asul na sona kung saan dapat naroon ang ulap ng huling maikling hop.
+- **BABALA** kung sakop ng mga ulap ang mga gitnang hop, **PAUNANG TANDA** kung mga sonang walang tagamasid lamang ang kulang.
+- Sa MGA SETTING may **abiso** sa itaas (at opsiyonal, isang window) para sa mga BABALA na may kinalaman sa iyo.
+
+![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

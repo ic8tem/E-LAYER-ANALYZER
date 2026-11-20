@@ -32,3 +32,9 @@ Mapang **Mercator** na malaya ang gitna: gulong = zoom, hilahin = ilipat.
 ## Mga detalye
 
 Para sa napiling landas: distansiya at klasipikasyon ayon sa talahanayan ni IK3XTV, azimuth sa dalawang direksiyon, pantay na hop kasama ang mga grid square ng mga punto ng repleksiyon, maikling unang hop sa loob ng 1200 km (karanasan ni IC8TEM) at, kapag naka-tsek ang foEs, ang pinakamababang foEs.
+
+## Pagsusuri ng mga kadena (mula sa bersiyon 0.6.0)
+
+**I-load ang spot, ADIF o ALL.TXT** (mga spot na na-export mula sa MGA ULAP NG Es SA PAGLIPAS NG ORAS, mga ADIF log ng ibang istasyon, mga ALL.TXT decode ng JTDX o WSJT-X: nakikilala ang callsign sa mga linya ng pagpapadala) at **Suriin ang mga kadena**: muling inilalapat ng programa sa mga multi-hop na pagbubukas ng istasyon 1 ang tuntunin ng mga kadenang may maiikling hop at isinusulat kung ilang pagbubukas ang naunahan sana nito (BABALA, PAUNANG TANDA o maikling unang hop lamang), ang median na pagkauna at ang mga babalang hindi sinundan ng multi-hop na QSO. Kung walang na-load na pinagmulan, ang mga ulap ay mula lamang sa log, at halos hindi nakikita ang huling maikling hop: kailangan ang datos ng malalayong istasyon.
+
+![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

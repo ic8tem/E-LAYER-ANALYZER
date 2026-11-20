@@ -10,6 +10,7 @@ Kopš versijas 0.4.18 cilne **IESTATĪJUMI** apkopo programmas vispārīgās opc
 |---|---|
 | Stacija | Izsaukuma signāls, lokators un augstums, tie paši kā augšējā joslā; **Lietot** tos apstiprina visām cilnēm. |
 | Izskats | Valoda, krāsu shēma (YAEC un YA-MS shēmas un, kopš versijas 0.5.0, sešas IP-TRX-CTRL tēmas: Gaiša, Nakts, Melna, Zila, Violeta, Zaļa), **kompaktais režīms** 13-15 collu klēpjdatoriem (kopš 0.5.2: automātiski, ja augstums ir zem 850 pikseļiem, vienmēr vai nekad) un **visas programmas fonta lielums** (85-140 %, tāpat kā YA-MS). Valoda un krāsas pārbūvē logu: iestatījumi un spoti saglabājas. |
+| Vairāklēcienu ķēdes 50 MHz joslā | Kopš versijas 0.6.0: paziņojums augšā (un pēc izvēles logs), kad rodas vairāklēcienu BRĪDINĀJUMS 50 MHz joslā, kas attiecas uz jūsu staciju: ķēde ar pirmo īso lēcienu no jums vai koridors ar vienu galu 1200 km robežās. Tā pati ķēde neatkārtojas ātrāk kā pēc stundas. |
 | Kartes un prognožu dati | Kontinents, tā pati izvēlne kā cilņu joslā. |
 | Laiks | NTP stāvoklis un starpība starp serveru laiku un datora pulksteni. |
 | Atjauninājumi | Pārbaude GitHub startējot un ik pēc 30 minūtēm, automātiska un klusa atjaunināšana, poga **Pārbaudīt tagad**. Automātiskie atjauninājumi neattiecas uz sistēmas pakotnēm (.deb, .rpm, Arch, Slackware). |
