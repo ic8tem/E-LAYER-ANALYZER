@@ -39,6 +39,10 @@
 
 Visas sąrašas pateiktas programos kortelėje ŠALTINIAI.
 
+## Padėkos
+
+Už 50 MHz sporadinio E plėtrą: **Johan IW2DNI** ir **Fabio IZ7NLJ**.
+
 ## Licencija
 
 E-LAYER ANALYZER yra laisva programinė įranga, licencijuota pagal **GNU GPL-3.0** (failas COPYING), tą pačią kaip YA-MS. Ji platinama be jokių garantijų. Išorinių šaltinių duomenys lieka atitinkamų institucijų nuosavybe, taikant jų sąlygas (pavyzdžiui, GIRO duomenys: CC BY-NC-SA 4.0, tik nekomerciniam naudojimui).

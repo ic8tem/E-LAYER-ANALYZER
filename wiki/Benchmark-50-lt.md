@@ -32,3 +32,9 @@ Pasirinkite **dieną** (atidarius – tą, kurioje daugiausia kelių šuolių QS
 ## Detalės
 
 Pasirinktai trasai: atstumas ir įvertinimas pagal IK3XTV lentelę, azimutas abiem kryptimis, vienodi šuoliai su atspindžio taškų kvadratais, trumpas pirmas šuolis iki 1200 km (IC8TEM patirtis) ir, pažymėjus foEs langelį, minimali foEs.
+
+## Grandinių patikra (nuo 0.6.0 versijos)
+
+**Įkelti spotus, ADIF arba ALL.TXT** (iš Es DEBESYS LAIKE eksportuoti spotai, kitų stočių ADIF žurnalai, JTDX ar WSJT-X ALL.TXT dekodavimai: šaukinys atpažįstamas iš siuntimo eilučių) ir **Tikrinti grandines**: programa pakartoja trumpų šuolių grandinių taisyklę su stoties 1 kelių šuolių atsivėrimais ir parašo, kiek atsivėrimų ji būtų numačiusi iš anksto (ĮSPĖJIMAS, PIRMTAKAS ar tik pirmas trumpas šuolis), išankstinio laiko medianą ir įspėjimus, po kurių nebuvo kelių šuolių QSO. Be įkeltų šaltinių debesys gaunami tik iš žurnalo, o paskutinis trumpas šuolis beveik nematomas: reikia tolimų stočių duomenų.
+
+![Patikra](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

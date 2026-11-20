@@ -32,3 +32,9 @@ Mapa **Mercator** con centro libre: rueda = zoom, arrastrar = mover.
 ## Detalles
 
 Para el trayecto elegido: distancia y valoración según la tabla IK3XTV, azimut en ambos sentidos, saltos iguales con las cuadrículas de los puntos de reflexión, primer salto corto dentro de 1200 km (experiencia de IC8TEM) y, con la casilla foEs, la foEs mínima.
+
+## Verificación de las cadenas (desde la versión 0.6.0)
+
+**Cargar spots, ADIF o ALL.TXT** (spots exportados por NUBES Es EN EL TIEMPO, logs ADIF de otras estaciones, decodificaciones ALL.TXT de JTDX o WSJT-X: el indicativo se reconoce por las líneas de transmisión) y **Verificar las cadenas**: el programa repite sobre las aperturas de multisalto de la estación 1 la regla de las cadenas de saltos cortos e indica cuántas aperturas habría anticipado (ALERTA, PRECURSOR o solo el primer salto corto), la anticipación mediana y las alertas no seguidas de QSO de multisalto. Sin fuentes cargadas, las nubes vienen solo del log y el último salto corto apenas se ve: hacen falta datos de estaciones lejanas.
+
+![Verificación](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

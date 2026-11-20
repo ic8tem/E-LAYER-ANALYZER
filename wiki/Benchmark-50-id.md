@@ -32,3 +32,9 @@ Peta **Mercator** dengan pusat bebas: roda = zoom, seret = geser.
 ## Rincian
 
 Untuk lintasan yang dipilih: jarak dan penilaian menurut tabel IK3XTV, azimut di kedua arah, lompatan sama dengan kotak titik-titik pantulnya, lompatan pertama pendek dalam 1200 km (pengalaman IC8TEM) dan, dengan kotak centang foEs, foEs minimum.
+
+## Verifikasi rantai (sejak versi 0.6.0)
+
+**Muat spot, ADIF atau ALL.TXT** (spot yang diekspor dari AWAN Es DARI WAKTU KE WAKTU, log ADIF stasiun lain, dekode ALL.TXT dari JTDX atau WSJT-X: callsign dikenali dari baris pancaran) dan **Verifikasi rantai**: program menjalankan ulang aturan rantai lompatan pendek pada bukaan multi-lompatan stasiun 1 dan menuliskan berapa bukaan yang akan didahuluinya (PERINGATAN, PREKURSOR atau hanya lompatan pertama pendek), waktu mendahului median dan peringatan yang tidak diikuti QSO multi-lompatan. Tanpa sumber yang dimuat, awan hanya berasal dari log, dan lompatan pendek terakhir hampir tidak terlihat: diperlukan data dari stasiun yang jauh.
+
+![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

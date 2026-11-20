@@ -62,3 +62,18 @@ Arriba a la derecha del mapa aparece el resumen de N0NBH (E-skip para el contine
 - **144 MHz**: esporádica E desde 900 km, con confirmación; los spots Q65 y JT65 son EME y se descartan, salvo `<ES>` en el texto.
 - G0ISW (Propagation identification, 2024) ve la esporádica E más corta más allá de 400 km en 50 y 70 MHz y más allá de 1400 km en 144 MHz: las reglas del autor coinciden en 50 y 70 MHz y son más amplias en 144 MHz, pero piden una confirmación.
 - El orden en que se aplican todas las reglas, con los valores en uso, se ve en **[AJUSTES](Settings-es)** › Reparto de los spots.
+
+## Cadenas de saltos cortos (desde la versión 0.6.0)
+
+![Cadena desde el QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+En la subpestaña **Precursores de multisalto**, el programa busca las cadenas de multisalto en 50 MHz con las tres condiciones del autor: **primer y último salto corto** (500-1200 km) con una MUF en torno a 50 MHz, que requieren una foEs de 11-21 MHz, y **saltos centrales** de hasta 2200 km, que requieren unos 9,3 MHz.
+
+- **Nubes fuertes** (cuadrados naranjas): spots Es de todo el mundo e ionosondas GIRO con una foEs de al menos 11,3 MHz.
+- **Desde el QTH**: primer salto corto desde tu estación y último salto corto sobre otra nube fuerte en la misma dirección, también en el mismo continente (por ejemplo en Kazajistán); el círculo es la zona de llegada.
+- **Corredor**: dos nubes fuertes cualesquiera, en todas las direcciones, por ejemplo **Caribe - Península Ibérica** o **Europa - África occidental** (TEP excluido); «te afecta» si un extremo está a menos de 1200 km de ti.
+- **Buscar la nube**: solo está el primer salto corto; las zonas celestes indican dónde debería estar la nube del salto corto final.
+- **ALERTA** si los saltos centrales están cubiertos por nubes, **PRECURSOR** si solo faltan zonas sin observadores.
+- En AJUSTES está el **aviso** arriba (y opcionalmente una ventana) para las ALERTAS que te afectan.
+
+![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

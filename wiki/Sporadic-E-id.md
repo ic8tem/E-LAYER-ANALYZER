@@ -62,3 +62,18 @@ Di kanan atas peta muncul ringkasan N0NBH (E-skip benua yang dipilih, SFI, indek
 - **144 MHz**: Sporadic-E mulai 900 km, dengan konfirmasi; spot Q65 dan JT65 adalah EME dan dibuang, kecuali ada `<ES>` di teks.
 - G0ISW (Propagation identification, 2024) melihat Sporadic-E terpendek di atas 400 km di 50 dan 70 MHz dan di atas 1400 km di 144 MHz: aturan penulis selaras di 50 dan 70 MHz dan lebih longgar di 144 MHz, tetapi meminta konfirmasi.
 - Urutan penerapan semua aturan, dengan nilai yang dipakai, ditampilkan di **[PENGATURAN](Settings-id)** › Distribusi spot.
+
+## Rantai lompatan pendek (sejak versi 0.6.0)
+
+![Catena dal QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Di subtab **Prekursor multi-lompatan** program mencari rantai multi-lompatan di 50 MHz dengan tiga syarat penulis: **lompatan pertama dan terakhir pendek** (500-1200 km) dengan MUF sekitar 50 MHz, yang memerlukan foEs 11-21 MHz, dan **lompatan tengah** hingga 2200 km, yang memerlukan sekitar 9,3 MHz.
+
+- **Awan kuat** (kotak oranye): spot Es dari seluruh dunia dan ionosonde GIRO dengan foEs sedikitnya 11,3 MHz.
+- **Dari QTH**: lompatan pertama pendek dari stasiun Anda dan lompatan terakhir pendek pada awan kuat lain ke arah yang sama, juga di benua yang sama (misalnya di Kazakhstan); lingkaran adalah zona kedatangan.
+- **Koridor**: dua awan kuat mana pun, ke segala arah, misalnya **Karibia - Semenanjung Iberia** atau **Eropa - Afrika Barat** (TEP dikecualikan); «menyangkut Anda» jika salah satu ujung berada dalam 1200 km dari Anda.
+- **Cari awan**: hanya ada lompatan pertama pendek; zona biru muda menunjukkan di mana awan lompatan pendek terakhir seharusnya berada.
+- **PERINGATAN** jika lompatan tengah tertutup awan, **PREKURSOR** jika yang kurang hanya zona tanpa pengamat.
+- Di PENGATURAN ada **pemberitahuan** di atas (dan opsional sebuah jendela) untuk PERINGATAN yang menyangkut Anda.
+
+![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -62,3 +62,18 @@ Atspindžio taškų Maidenhead kvadratai nuspalvinami pagal didžiausią spotų 
 - **144 MHz**: sporadinis E nuo 900 km, su patvirtinimu; Q65 ir JT65 spotai yra EME ir atmetami, nebent tekste yra `<ES>`.
 - G0ISW (Propagation identification, 2024) trumpiausią sporadinį E stebi daugiau nei 400 km 50 ir 70 MHz juostose ir daugiau nei 1400 km 144 MHz juostoje: autoriaus taisyklės sutampa 50 ir 70 MHz juostose, o 144 MHz juostoje yra platesnės, bet reikalauja patvirtinimo.
 - Visų taisyklių taikymo tvarka su naudojamomis reikšmėmis rodoma kortelėje **[NUSTATYMAI](Settings-lt)** › Spotų skirstymas.
+
+## Trumpų šuolių grandinės (nuo 0.6.0 versijos)
+
+![Grandinė iš QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Pakortelėje **Kelių šuolių pirmtakai** programa ieško kelių šuolių grandinių 50 MHz juostoje pagal tris autoriaus sąlygas: **pirmas ir paskutinis trumpas šuolis** (500-1200 km) su MUF apie 50 MHz, kuriems reikia 11-21 MHz foEs, ir **viduriniai šuoliai** iki 2200 km, kuriems reikia apie 9,3 MHz.
+
+- **Stiprūs debesys** (oranžiniai kvadratai): viso pasaulio Es spotai ir GIRO jonozondai, kurių foEs ne mažesnė kaip 11,3 MHz.
+- **Iš QTH**: pirmas trumpas šuolis iš jūsų stoties ir paskutinis trumpas šuolis ant kito stipraus debesies ta pačia kryptimi, taip pat tame pačiame žemyne (pavyzdžiui, Kazachstane); apskritimas – tikslo zona.
+- **Koridorius**: bet kurie du stiprūs debesys, bet kuria kryptimi, pavyzdžiui, **Karibai - Pirėnų pusiasalis** arba **Europa - Vakarų Afrika** (be TEP); «liečia jus», jei vienas galas yra iki 1200 km nuo jūsų.
+- **Ieškoti debesies**: yra tik pirmas trumpas šuolis; žydros zonos rodo, kur turėtų būti paskutinio trumpo šuolio debesis.
+- **ĮSPĖJIMAS**, jei viduriniai šuoliai padengti debesimis, **PIRMTAKAS**, jei trūksta tik zonų be stebėtojų.
+- NUSTATYMUOSE yra **pranešimas** viršuje (pasirinktinai ir langas) apie jus liečiančius ĮSPĖJIMUS.
+
+![Koridorius](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

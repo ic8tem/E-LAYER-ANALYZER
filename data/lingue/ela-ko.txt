@@ -897,3 +897,67 @@ Passo mostrato: nessun collegamento.	표시된 스텝: 교신 없음.
 Cella {0}: il valore viene da {1} - {2}, {3:F3} MHz, {4:F0} km, {5} salti, sec φ {6:F2}.	셀 {0}: 값의 출처는 {1} - {2}, {3:F3} MHz, {4:F0} km, 홉 {5}, sec φ {6:F2}.
 Metodo (Chartier, Hanley ed Emmons 2022): ogni collegamento dice che nel punto di riflessione la foEs è almeno f / sec φ; la cella prende il valore più alto del passo. È un limite inferiore: la nube può essere più densa e più estesa di quanto mostrano i collegamenti. Celle vuote vogliono dire nessun collegamento, non assenza di E-sporadico.	방법(Chartier, Hanley, Emmons 2022): 각 교신은 반사점에서 foEs가 최소 f / sec φ임을 말해 줍니다. 셀은 그 스텝의 가장 높은 값을 가집니다. 이는 하한값입니다: 구름은 교신이 보여 주는 것보다 더 짙고 넓을 수 있습니다. 빈 셀은 교신이 없다는 뜻일 뿐, 스포라딕 E가 없다는 뜻이 아닙니다.
 La modalità compatta, per i notebook da 13-15 pollici, accorcia i riquadri di altezza fissa e nasconde le righe di spiegazione; in METEOR SCATTER ripiega all'avvio le righe dei comandi e accorcia la fascia degli orizzonti, come in YA-MS. Automatica: si accende quando la finestra è alta meno di 850 pixel.	간결 모드는 13-15인치 노트북용으로, 높이가 고정된 상자를 줄이고 설명 줄을 숨깁니다. METEOR SCATTER에서는 YA-MS처럼 시작할 때 명령 줄을 접고 예보 시점 띠를 줄입니다. 자동: 창 높이가 850픽셀 미만이면 켜집니다.
+Carica spot CSV	CSV 스폿 불러오기
+Togli gli spot CSV	CSV 스폿 제거
+Verifica le catene	체인 검증
+Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log.	국 1의 멀티홉 개통에 짧은 홉 체인 규칙(SPORADIC-E, 멀티홉 전조)을 다시 적용합니다: 구름은 CSV 스폿과 로그의 QSO에서 구합니다.
+Spot CSV tolti.	CSV 스폿을 제거했습니다.
+Spot CSV esportati dal programma (NUBI Es NEL TEMPO)	프로그램에서 내보낸 CSV 스폿(시간에 따른 Es 구름)
+Spot CSV caricati: {0} (+{1}).	불러온 CSV 스폿: {0} (+{1}).
+Carica prima il log ADIF della stazione 1.	먼저 국 1의 ADIF 로그를 불러오세요.
+Verifica in corso...	검증 중...
+Nessuna apertura multi-salto della stazione 1 nel log.	로그에 국 1의 멀티홉 개통이 없습니다.
+Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.	짧은 홉 체인 검증: 국 1의 멀티홉 개통 {0}건(하루, 30° 구역마다 3100 km를 넘은 첫 QSO), {1:yyyy-MM-dd}부터 {2:yyyy-MM-dd}까지.
+Nubi da {0} spot e QSO ({1} dai file CSV).	스폿과 QSO {0}건에서 구한 구름(CSV 파일에서 {1}건).
+Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	직전 2시간 동안 같은 방향(±20°): 경보 {0} ({1:F0}%), 전조 {2} ({3:F0}%), 첫 짧은 홉만 {4} ({5:F0}%), 없음 {6} ({7:F0}%).
+Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	경보와 전조의 선행 시간 중앙값: {0:F0}분.
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	로그의 날들에 QTH에서 나온 경보와 전조: {0}; 이후 2시간 동안 멀티홉 QSO가 없었던 것: {1} ({2:F0}%, 다만 국이 운용 중이 아니었을 수도 있음).
+Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	CSV 스폿 파일이 없으면 구름은 로그의 QSO에서만 구해지며, 멀리 있는 마지막 짧은 홉은 거의 보이지 않습니다. 제대로 검증하려면 시간에 따른 Es 구름에서 내보낸 스폿을 불러오세요.
+CERCA LA NUBE	구름 찾기
+{0:F0} min prima	{0:F0}분 전
+... e altre {0}.	... 외 {0}건.
+dal QTH	QTH에서
+cerca la nube	구름 찾기
+corridoio, ti riguarda	회랑, 내 국에 해당
+corridoio	회랑
+ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.	50 MHz 멀티홉 경보({0}): {1}, {2:F0} km. 클릭하면 전조가 열립니다.
+Mostra	표시
+ALLERTA multi-salto in 50 MHz	50 MHz 멀티홉 경보
+{0}: {1}, {2:F0} km, azimut {3:F0}°	{0}: {1}, {2:F0} km, 방위각 {3:F0}°
+Nubi forti per il salto corto in 50 MHz: {0}.	50 MHz 짧은 홉용 강한 구름: {0}.
+■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)	■ 주황색: 강한 구름, 50 MHz 짧은 홉을 지탱함(foEs, MHz)
+catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube	짧은 홉 체인: 실선, 원 = 끝점 구역; 하늘색 = 구름 찾기
+salto corto finale? foEs ≥ {0:F1}	마지막 짧은 홉? foEs ≥ {0:F1}
+{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)	{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0}분 전)
+{0} - catena a salti corti ({1}): {2}	{0} - 짧은 홉 체인({1}): {2}
+Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}	내 국에서 강한 구름까지 {0:F0} km의 첫 짧은 홉: {1}
+Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):	방위각 {0:F0}°를 따라 두 번째 강한 구름이 없습니다: 마지막 짧은 홉은 다음 구역 중 하나에 있어야 합니다(foEs ≥ {1:F1} MHz):
+dopo {0} salti centrali: {1}	중간 홉 {0}회 후: {1}
+ionosonda GIRO a {0:F0} km senza foEs recente	{0:F0} km 거리의 GIRO 이오노존데, 최근 foEs 없음
+ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz	{0:F0} km 거리의 GIRO 이오노존데: foEs {1:F1} MHz
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km	거리 {0:F0} km, 방위각 {1:F0}°: 짧은 홉 {2:F0} km + {4:F0} km 중간 홉 {3}회 + 짧은 홉 {5:F0} km
+1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}	1) 첫 짧은 홉, MUF ≥ 50 MHz: 강한 구름 {0}
+2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}	2) 마지막 짧은 홉, MUF ≥ 50 MHz: 강한 구름 {0}
+3) Salti centrali: nessuno, le due nubi sono consecutive.	3) 중간 홉: 없음, 두 구름이 연속해 있습니다.
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})	{1:F0} km 거리의 foEs ≥ {0:F1} MHz 구름(스폿 {2} - {3})
+nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)	{1:F0} km 거리의 foEs ≥ {0:F1} MHz 구름(이오노존데)
+3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}	3) 중간 홉 {0} ({1:F0} km): {2}, 필요한 foEs {3:F1} MHz - {4}
+Zona d'arrivo: {0}, entro circa {1:F0} km	도착 구역: {0}, 약 {1:F0} km 이내
+Zone d'estremità: {0} e {1}, entro circa {2:F0} km	끝점 구역: {0} 및 {1}, 약 {2:F0} km 이내
+La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.	내 국은 끝점 구역에서 {0:F0} km: 내 국에 해당합니다.
+La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.	내 국은 가장 가까운 끝점 구역에서 {0:F0} km입니다.
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti.	저자(IC8TEM)의 조건: 첫 짧은 홉과 마지막 짧은 홉(500-1200 km)은 MUF가 50 MHz 안팎이며 11-21 MHz의 foEs가 필요하고, 2200 km까지의 중간 홉은 약 9.3 MHz가 필요합니다. 최근 30분의 구름을 사용합니다. 구름은 몇 분에서 한 시간 지속되며 천천히 움직입니다(Denisowski 2023): 같은 수준이면 더 최근 것이 먼저 나옵니다.
+Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione	내 국에 해당하는 50 MHz 멀티홉 경보가 생기면 위쪽에 알림
+Anche con una finestra	창으로도 알림
+Catene multi-salto in 50 MHz	50 MHz 멀티홉 체인
+L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto.	알림 대상은 첫 짧은 홉이 내 국에서 시작하는 체인과, 한쪽 끝점이 내 국에서 1200 km 이내인 회랑이며, 세 조건이 모두 갖춰졌을 때(경보)입니다: 첫 짧은 홉과 마지막 짧은 홉의 MUF가 50 MHz 안팎이고 중간 홉이 구름으로 덮여 있을 것. 같은 체인은 한 시간 안에는 반복되지 않습니다. 위쪽 문구를 클릭하면 SPORADIC-E의 멀티홉 전조가 열립니다.
+Carica spot CSV o ADIF	CSV 스폿 또는 ADIF 불러오기
+Togli gli spot CSV e ADIF	CSV 스폿과 ADIF 제거
+Spot CSV esportati dal programma o log ADIF di altre stazioni	프로그램에서 내보낸 CSV 스폿 또는 다른 국의 ADIF 로그
+Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso.	저자(IC8TEM)의 조건: 첫 짧은 홉과 마지막 짧은 홉(500-1200 km)은 MUF가 50 MHz 안팎이며 11-21 MHz의 foEs가 필요하고, 2200 km까지의 중간 홉은 약 9.3 MHz가 필요합니다. 최근 30분의 구름을 사용하며, 같은 수준이면 더 최근 것이 먼저 나옵니다. 체인은 남북을 포함한 모든 방향에서 유효하며, TEP는 계속 제외됩니다.
+Carica spot, ADIF o ALL.TXT	스폿, ADIF 또는 ALL.TXT 불러오기
+Togli le sorgenti delle nubi	구름 소스 제거
+Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni	프로그램의 CSV 스폿, ADIF 로그 또는 다른 국의 ALL.TXT 디코드(JTDX, WSJT-X)
+Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).	스폿, QSO, 디코드 {0}건에서 구한 구름(불러온 소스에서 {1}건).
+Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane.	소스를 불러오지 않으면 구름은 로그의 QSO에서만 구해지며, 멀리 있는 마지막 짧은 홉은 거의 보이지 않습니다. 제대로 검증하려면 시간에 따른 Es 구름에서 내보낸 스폿, 다른 국(가급적 먼 국)의 ADIF 로그나 ALL.TXT 디코드를 불러오세요.
+Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km	거리 {0:F0} km, 방위각 {1:F0}°: 짧은 홉 {2:F0} km + 짧은 홉 {3:F0} km
