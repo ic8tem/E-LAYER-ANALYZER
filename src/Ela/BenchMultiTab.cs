@@ -50,6 +50,11 @@ namespace ELA
         bool areaMode; double areaLat, areaLon; string areaName = "";
         readonly Dictionary<BenchQso, List<Point>> geo = new Dictionary<BenchQso, List<Point>>();
         bool busyFill;
+        // verifica delle catene a salti corti (ChainReplay.cs): spot CSV del programma come nubi, risultato
+        readonly List<Spot> csvSpots = new List<Spot>();
+        readonly TextBlock lblVer;
+        string verifyText = "";
+        bool verifying;
 
         static string[] BuildTimes()
         {
@@ -89,6 +94,13 @@ namespace ELA
             bAll = Ui.B(Lang.T("Torna a giorno e orario"));
             bAll.Click += (s, e) => { areaMode = false; Fill(); };
 
+            Button bCsv = Ui.B(Lang.T("Carica spot CSV")), bCsvOff = Ui.B(Lang.T("Togli gli spot CSV")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
+            lblVer = new TextBlock { Foreground = Pal.B(Pal.Orange), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) };
+            ToolTip.SetTip(bVer, Lang.T("Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log."));
+            bCsv.Click += async (s, e) => await PickCsv();
+            bCsvOff.Click += (s, e) => { csvSpots.Clear(); lblVer.Text = Lang.T("Spot CSV tolti."); };
+            bVer.Click += async (s, e) => await Verify();
+
             tQso = new TableView();
             tQso.Columns.AddRange(new[] { "St.", Lang.T("Giornata"), "UTC", Lang.T("Nominativo"), "WWL", "km", Lang.T("Salti"), "foEs≥" });
             tQso.ColumnWidths.AddRange(new double[] { 28, 84, 46, 84, 70, 54, 40, 52 });
@@ -103,6 +115,8 @@ namespace ELA
             Ui.Dock(right, Ui.Row(chk2, bLoad[1], bUnload[1], lblFile[1]), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Giorno")), cmbDay, Ui.L(Lang.T("dalle")), cmbFrom, Ui.L(Lang.T("alle")), cmbTo, Ui.L("UTC")), Dock.Top);
             Ui.Dock(right, Ui.Row(chkFoEs, Ui.L(Lang.T("Quota Es km")), numH, chkShort), Dock.Top);
+            Ui.Dock(right, Ui.Row(bCsv, bCsvOff, bVer), Dock.Top);
+            Ui.Dock(right, Ui.HideCompact(lblVer), Dock.Top);
             Ui.Dock(right, lblSel, Dock.Top);
             StackPanel areaRow = new StackPanel { Orientation = Orientation.Horizontal };
             areaRow.Children.Add(lblArea); areaRow.Children.Add(bAll);
@@ -423,11 +437,67 @@ namespace ELA
             map.InvalidateVisual();
         }
 
+        // ---------------------------------------------------------------- verifica delle catene a salti corti
+
+        async Task PickCsv()
+        {
+            TopLevel tl = TopLevel.GetTopLevel(Root);
+            if (tl == null) return;
+            IReadOnlyList<IStorageFile> files = await tl.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = Lang.T("Spot CSV esportati dal programma (NUBI Es NEL TEMPO)"),
+                AllowMultiple = true,
+                FileTypeFilter = new[] { new FilePickerFileType("CSV") { Patterns = new[] { "*.csv", "*.CSV" } } }
+            });
+            if (files == null || files.Count == 0) return;
+            int before = csvSpots.Count;
+            foreach (IStorageFile f in files)
+            {
+                string p = f.TryGetLocalPath();
+                if (p != null) await LoadCsv(p);
+            }
+            lblVer.Text = Lang.F("Spot CSV caricati: {0} (+{1}).", csvSpots.Count, csvSpots.Count - before);
+        }
+
+        public async Task LoadCsv(string path)
+        {
+            List<Spot> l = new List<Spot>();
+            await Task.Run(() =>
+            {
+                try { foreach (string line in File.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
+                catch { }
+            });
+            csvSpots.AddRange(l);
+        }
+
+        public async Task Verify()
+        {
+            if (verifying) return;
+            if (all.Count == 0) { lblVer.Text = Lang.T("Carica prima il log ADIF della stazione 1."); return; }
+            verifying = true;
+            lblVer.Text = Lang.T("Verifica in corso...");
+            List<BenchQso> qs = new List<BenchQso>(all);
+            List<Spot> cs = new List<Spot>(csvSpots);
+            double h = Ui.V(numH);
+            ChainReplay.Result r = null;
+            try { await Task.Run(() => { r = ChainReplay.Run(qs, cs, h, IsMulti); }); }
+            catch (Exception ex) { lblVer.Text = Lang.F("Errore: {0}", ex.Message); verifying = false; return; }
+            verifyText = ChainReplay.Report(r);
+            string[] lines = verifyText.Split('\n');
+            lblVer.Text = lines.Length > 2 ? lines[2].Trim() : lines[0].Trim();
+            hover = sel = null;
+            txtDet.Text = verifyText;
+            verifying = false;
+        }
+
+        public string VerifyText { get { return verifyText; } }
+
         void Details()
         {
             BenchQso q = hover ?? sel;
             if (q == null)
             {
+                if (verifyText.Length > 0) { txtDet.Text = verifyText; return; }
                 if (all.Count > 0) txtDet.Text = Lang.T("Avvicina il mouse a una tratta per ingrandirla e leggere il quadrato WWL a 6 caratteri; con il clic sinistro puoi vedere tutti i QSO del file con il corrispondente entro 150 km.");
                 return;
             }

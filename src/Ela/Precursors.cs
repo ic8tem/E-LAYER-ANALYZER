@@ -34,7 +34,8 @@ namespace ELA
         public int Level;                     // 2 = ALLERTA, 1 = PRECURSORE
         public List<PrecursorPoint> Points = new List<PrecursorPoint>();
         public int Covered { get { return Points.Count(p => p.Covered); } }
-        public string LevelText { get { return Level == 2 ? YAMS.Lang.T("ALLERTA") : YAMS.Lang.T("PRECURSORE"); } }
+        public virtual string LevelText { get { return Level == 2 ? YAMS.Lang.T("ALLERTA") : YAMS.Lang.T("PRECURSORE"); } }
+        public virtual string Key { get { return Region + "|" + Band; } }
     }
 
     public static class Precursors
@@ -61,11 +62,17 @@ namespace ELA
         class Active { public double Lat, Lon, FoEs; public Spot Spot; }
 
         public static List<PrecursorAlert> Last = new List<PrecursorAlert>();
+        public static List<StrongCloud> LastStrong = new List<StrongCloud>();
 
         public static List<PrecursorAlert> Compute(double Hkm)
         {
             List<PrecursorAlert> res = new List<PrecursorAlert>();
-            if (!Station.Valid) { Last = res; return res; }
+            if (!Station.Valid)
+            {
+                List<StrongCloud> st1;
+                List<PrecursorAlert> cor = new List<PrecursorAlert>(Chains.Compute(Hkm, WindowMin, out st1));   // solo i corridoi
+                LastStrong = st1; Last = cor; return cor;
+            }
             // nubi attive: punti medi degli spot Es in singolo salto (stazioni qualunque, tutto il mondo)
             List<Active> act = new List<Active>();
             foreach (Spot s in SpotStore.Recent(WindowMin, x => x.HasBoth && x.EsCandidate && !x.IsTep && !EsModel.Ft8Isolated50(x)))
@@ -79,7 +86,12 @@ namespace ELA
             // stazioni presenti negli spot dell'ultima ora (tutti i modi): dicono dove c'e' chi ascolta
             List<double[]> stations = new List<double[]>();
             foreach (Spot s in SpotStore.Recent(60, x => x.HasBoth)) { stations.Add(new[] { s.LatS, s.LonS }); stations.Add(new[] { s.LatD, s.LonD }); }
-            if (act.Count == 0) { Last = res; return res; }
+            if (act.Count == 0)
+            {
+                List<StrongCloud> st0;
+                List<PrecursorAlert> only = new List<PrecursorAlert>(Chains.Compute(Hkm, WindowMin, out st0));
+                LastStrong = st0; Last = only; return only;
+            }
 
             foreach (var r in Regions)
             {
@@ -110,8 +122,18 @@ namespace ELA
                 }
             }
             res = res.OrderByDescending(a => a.Level).ThenByDescending(a => (double)a.Covered / a.Points.Count).ThenBy(a => a.DistKm).ToList();
-            Last = res;
-            return res;
+            // catene con i salti corti alle estremita' (Chains.cs, dal 20/11/2026): prima quelle dal QTH, poi le regioni,
+            // poi i corridoi (prima quelli che riguardano la propria stazione), infine CERCA LA NUBE
+            List<StrongCloud> strong;
+            List<ChainAlert> ch = Chains.Compute(Hkm, WindowMin, out strong);
+            LastStrong = strong;
+            List<PrecursorAlert> all = new List<PrecursorAlert>();
+            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindQth).OrderByDescending(c => c.Level));
+            all.AddRange(res);
+            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindCorridor));
+            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindSearch));
+            Last = all;
+            return all;
         }
 
         static PrecursorAlert Better(PrecursorAlert a, PrecursorAlert b)

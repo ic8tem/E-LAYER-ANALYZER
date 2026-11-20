@@ -111,6 +111,15 @@ namespace ELA
             root.Children.Add(Section(Lang.T("Ora"), Pal.Yellow, lblNtpInfo,
                 Txt(Lang.T("Il programma controlla l'ora con i server NTP all'avvio e ogni 5 minuti e usa l'ora corretta nei calcoli. Su Windows, con i diritti di amministratore, corregge anche l'orologio del PC. Se la scritta in alto è NTP:FAILED, la rete blocca la porta UDP 123."), true)));
 
+            // avviso delle catene multi-salto in 50 MHz (dalla 0.6.0)
+            CheckBox cCh = Ui.C(Lang.T("Avviso in alto quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la mia stazione"), Station.Cfg.GetB("catene_avviso", true));
+            CheckBox cChW = Ui.C(Lang.T("Anche con una finestra"), Station.Cfg.GetB("catene_finestra", false));
+            cCh.IsCheckedChanged += (s, e) => { Station.Cfg.Set("catene_avviso", cCh.IsChecked == true); cChW.IsEnabled = cCh.IsChecked == true; Station.Save(); };
+            cChW.IsCheckedChanged += (s, e) => { Station.Cfg.Set("catene_finestra", cChW.IsChecked == true); Station.Save(); };
+            cChW.IsEnabled = cCh.IsChecked == true;
+            root.Children.Add(Section(Lang.T("Catene multi-salto in 50 MHz"), Pal.Red, cCh, cChW,
+                Txt(Lang.T("L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto."), true)));
+
             // aggiornamenti
             CheckBox cChk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 30 minuti"), Station.Cfg.GetB("agg_controlla", true));
             CheckBox cAuto = Ui.C(Lang.T("Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere"), Station.Cfg.GetB("agg_automatici", true));

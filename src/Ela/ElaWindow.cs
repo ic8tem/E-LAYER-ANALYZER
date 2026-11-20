@@ -21,10 +21,12 @@ namespace ELA
     public class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.5.3";
+        public const string Version = "0.6.0";
 
         readonly PillTabs tabs = new PillTabs(true);
-        TextBlock lblNtp, lblUpd;
+        TextBlock lblNtp, lblUpd, lblChain;
+        string chainKey;
+        static DispatcherTimer chainTimer;
         static DispatcherTimer ntpTimer;
         readonly PillTabs esTabs = new PillTabs();   // sottolinguette di SPORADIC-E
         readonly PillTabs auTabs = new PillTabs();   // sottolinguette di AURORA
@@ -67,6 +69,20 @@ namespace ELA
             lblUpd.PointerPressed += async (s, e) => { await Updater.CheckAsync(); await Updater.ShowDialog(this); };
             UpdateUpd();
             Updater.Changed += OnUpd;
+            // avviso delle catene multi-salto in 50 MHz che riguardano la propria stazione (dalla 0.6.0): scritta rossa cliccabile
+            lblChain = new TextBlock { FontFamily = Pal.Mono, FontSize = 12, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Red), Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center, IsVisible = false, Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand) };
+            lblChain.PointerPressed += (s, e) => OpenChain();
+            Chains.NewMine += OnChain;
+            Closed += (s, e) => Chains.NewMine -= OnChain;   // la finestra si ricostruisce al cambio di lingua o di tema
+            if (chainTimer == null)
+            {
+                chainTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
+                chainTimer.Tick += (s, e) =>
+                {
+                    try { if (Station.Cfg.GetB("catene_avviso", true) && SpotStore.All.Count > 0) Chains.Notify(Precursors.Compute(es != null ? es.H : EsModel.DefaultH)); } catch { }
+                };
+                chainTimer.Start();
+            }
             if (ntpTimer == null)
             {
                 // allineatore dell'orologio: elemento nascosto, un controllo all'avvio e poi ogni 5 minuti
@@ -104,6 +120,7 @@ namespace ELA
             DockPanel.SetDock(cmbTheme, Dock.Right); top.Children.Add(cmbTheme);
             DockPanel.SetDock(lblNtp, Dock.Right); top.Children.Add(lblNtp);
             DockPanel.SetDock(lblUpd, Dock.Right); top.Children.Add(lblUpd);
+            DockPanel.SetDock(lblChain, Dock.Right); top.Children.Add(lblChain);
             DockPanel.SetDock(lblClock, Dock.Right); top.Children.Add(lblClock);
             // modalita' compatta: le scritte spariscono (restano nei fumetti dei campi), cosi' la riga non va a capo a 1366 pixel
             ToolTip.SetTip(txtCall, Lang.T("Nominativo")); ToolTip.SetTip(txtLoc, Lang.T("Locator")); ToolTip.SetTip(numAlt, Lang.T("Quota m"));
@@ -317,6 +334,49 @@ namespace ELA
             ApplyCompact(m == 1 || (m == 0 && h > 0 && h < CompactOn));
         }
 
+        void OnChain(ChainAlert c)
+        {
+            Dispatcher.UIThread.Post(() =>
+            {
+                if (!Station.Cfg.GetB("catene_avviso", true)) return;
+                chainKey = c.Key;
+                lblChain.Text = "⚠ 6 m: " + c.Region;
+                ToolTip.SetTip(lblChain, Lang.F("ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.", c.KindText, c.Region, c.DistKm));
+                lblChain.IsVisible = true;
+                if (Station.Cfg.GetB("catene_finestra", false) && Program.ScreenshotDir == null) ChainWindow(c);
+            });
+        }
+
+        void OpenChain()
+        {
+            lblChain.IsVisible = false;
+            tabs.Select(0); esTabs.Select(0);
+            if (chainKey != null) es.ShowAlert(chainKey);
+        }
+
+        void ChainWindow(ChainAlert c)
+        {
+            Button bShow = Ui.B(Lang.T("Mostra"), true), bClose = Ui.B(Lang.T("Chiudi"));
+            Window w = new Window
+            {
+                Title = "E-LAYER ANALYZER - " + Lang.T("ALLERTA"), Width = 460, SizeToContent = SizeToContent.Height, CanResize = false, Topmost = true,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner, Background = Pal.B(Pal.Back)
+            };
+            w.Content = new StackPanel
+            {
+                Margin = new Thickness(14), Spacing = 10,
+                Children =
+                {
+                    new TextBlock { Text = Lang.T("ALLERTA multi-salto in 50 MHz"), Foreground = Pal.B(Pal.Red), FontWeight = FontWeight.Bold, FontSize = 16 },
+                    new TextBlock { Text = Lang.F("{0}: {1}, {2:F0} km, azimut {3:F0}°", c.KindText, c.Region, c.DistKm, c.Az), Foreground = Pal.B(Pal.Fore), TextWrapping = TextWrapping.Wrap },
+                    Ui.Row(bShow, bClose)
+                }
+            };
+            bShow.Click += (s, e) => { w.Close(); OpenChain(); };
+            bClose.Click += (s, e) => w.Close();
+            try { w.Show(this); } catch { }
+        }
+
         void OnOpened(object sender, EventArgs e)
         {
             UiScale.Apply(this);
@@ -502,6 +562,11 @@ namespace ELA
                 es.ShotMap(0, 8000); await Task.Delay(2500); Shot(Path.Combine(dir, "1c_sporadic_e_multisalto.png"));
                 es.ShotMap(1, 0); await Task.Delay(2500); Shot(Path.Combine(dir, "1d_sporadic_e_mercatore.png"));
                 es.ShotPrecursors(); await Task.Delay(2500); Shot(Path.Combine(dir, "1k_sporadic_e_precursori.png"));
+                // catene a salti corti: dal QTH (Kazakhstan) e corridoio (Caraibi - Penisola Iberica), con il testo dei dettagli
+                es.ShotChain(ChainAlert.KindQth); await Task.Delay(2500); Shot(Path.Combine(dir, "1n_catena_dal_qth.png"));
+                try { File.WriteAllText(Path.Combine(dir, "1n_catena_dal_qth.txt"), es.DetailsText); } catch { }
+                es.ShotChain(ChainAlert.KindCorridor); await Task.Delay(2500); Shot(Path.Combine(dir, "1o_catena_corridoio.png"));
+                try { File.WriteAllText(Path.Combine(dir, "1o_catena_corridoio.txt"), es.DetailsText); } catch { }
                 es.ShotMap(0, 3000);
                 // BENCHMARK Es: un'ora della giornata e lo zoom
                 esTabs.Select(1);
@@ -512,6 +577,9 @@ namespace ELA
                 bench50.ShotHover(4); await Task.Delay(2000); Shot(Path.Combine(dir, "1h_benchmark_50_tratta.png"));
                 bench50.ShotFoEs(true); await Task.Delay(2000); Shot(Path.Combine(dir, "1i_benchmark_50_foes.png"));
                 bench50.ShotFoEs(false); bench50.ShotHover(4); bench50.ShotArea(4); await Task.Delay(2500); Shot(Path.Combine(dir, "1j_benchmark_50_dintorni.png"));
+                // verifica delle catene a salti corti sul log di prova
+                await bench50.Verify(); await Task.Delay(1500); Shot(Path.Combine(dir, "1p_benchmark_50_verifica_catene.png"));
+                try { File.WriteAllText(Path.Combine(dir, "1p_benchmark_50_verifica_catene.txt"), bench50.VerifyText); } catch { }
                 // F.A.I.: le verifiche richieste (scia) e l'iso-riflessione su Ginevra
                 tabs.Select(1);
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));

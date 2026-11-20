@@ -112,7 +112,7 @@ namespace ELA
             {
                 if (i < 0 || i >= tPre.Rows.Count) return;
                 selAlert = tPre.Rows[i].Tag as PrecursorAlert;
-                selAlertKey = selAlert != null ? selAlert.Region + "|" + selAlert.Band : null;
+                selAlertKey = selAlert != null ? selAlert.Key : null;
                 sel = null; selKey = null; clickLat = clickLon = double.NaN;
                 Draw(); Details();
             };
@@ -237,7 +237,17 @@ namespace ELA
             return Pal.Argb(170, 248, 80, 80);
         }
 
-        double H { get { return Ui.V(numH); } }
+        public double H { get { return Ui.V(numH); } }
+
+        // avviso della testata: apre la sottolinguetta dei precursori sull'allerta scelta
+        public void ShowAlert(string key)
+        {
+            Refresh();
+            inner.Select(2);
+            PrecursorAlert a = alerts.Find(x => x.Key == key);
+            if (a != null) { selAlert = a; selAlertKey = a.Key; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
+            FillTables(); Draw(); Details();
+        }
 
         const double UltraKm = 11000;
         List<EsPath> ultra = new List<EsPath>();
@@ -277,8 +287,9 @@ namespace ELA
             sel = null;
             if (selKey != null) foreach (EsPath p in paths) if (p.Spot.Key == selKey) { sel = p; break; }
             alerts = Precursors.Compute(H);
+            Chains.Notify(alerts);
             selAlert = null;
-            if (selAlertKey != null) foreach (PrecursorAlert a in alerts) if (a.Region + "|" + a.Band == selAlertKey) { selAlert = a; break; }
+            if (selAlertKey != null) foreach (PrecursorAlert a in alerts) if (a.Key == selAlertKey) { selAlert = a; break; }
             BuildClouds();
             FillTables();
             Draw();
@@ -368,6 +379,22 @@ namespace ELA
             tClouds.Refresh();
             tPre.Rows.Clear();
             foreach (PrecursorAlert a in alerts)
+            {
+                ChainAlert ca = a as ChainAlert;
+                if (ca != null)
+                {
+                    // catene con i salti corti alle estremita': salti = corto + centrali + corto
+                    bool mine = ca.Kind == ChainAlert.KindQth || (!double.IsNaN(ca.NearKm) && ca.NearKm <= Chains.NearMeKm);
+                    tPre.Rows.Add(new TableRow
+                    {
+                        Cells = new[] { ca.LevelText, ca.Region, ca.Band, ca.Kind == ChainAlert.KindSearch ? "1+?+1" : "1+" + ca.Middle + "+1", ca.KindText,
+                            ca.DistKm.ToString("F0", CultureInfo.CurrentCulture), ca.Az.ToString("F0", CultureInfo.InvariantCulture) },
+                        Fore = ca.Level == 2 ? Pal.Red : ca.Level == 1 ? Pal.Yellow : Pal.Azure,
+                        CellFore = mine ? null : new Color?[] { null, Pal.Muted, null, null, Pal.Muted, null, null },
+                        Tag = a
+                    });
+                    continue;
+                }
                 tPre.Rows.Add(new TableRow
                 {
                     Cells = new[] { a.LevelText, Lang.T(a.Region), a.Band, a.Covered + "/" + a.Points.Count, a.ShortHyp ? Lang.F("corto {0:F0} km", a.ShortKm) : Lang.T("uguali"),
@@ -375,6 +402,7 @@ namespace ELA
                     Fore = a.Level == 2 ? Pal.Red : Pal.Yellow,
                     Tag = a
                 });
+            }
             tPre.SelectedIndex = selAlert != null ? alerts.IndexOf(selAlert) : -1;
             tPre.Refresh();
             int multi = 0; foreach (EsPath p in paths) if (p.Hops >= 2) multi++;
@@ -385,6 +413,7 @@ namespace ELA
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
                 + (esTropo.Count + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count, heldAtl) : "")
                 + (alerts.Count > 0 ? " " + Lang.F("Multi-salto: {0} allerte e {1} precursori (sottolinguetta Precursori multi-salto).", alerts.Count(a => a.Level == 2), alerts.Count(a => a.Level == 1)) : "")
+                + (Precursors.LastStrong.Count > 0 ? " " + Lang.F("Nubi forti per il salto corto in 50 MHz: {0}.", Precursors.LastStrong.Count) : "")
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }
 
@@ -552,11 +581,19 @@ namespace ELA
 
         void DrawAlerts()
         {
-            if (alerts.Count == 0 || !Station.Valid) return;
+            // nubi forti (reggono un salto corto in 50 MHz): rombi arancioni con la foEs
+            foreach (StrongCloud c in Precursors.LastStrong)
+                map.Markers.Add(new MapMarker { Lat = c.Lat, Lon = c.Lon, Radius = 5, Fill = Pal.Orange, Stroke = Colors.Black, Square = true, Label = c.FoEs.ToString("F0", CultureInfo.CurrentCulture), LabelColor = Pal.Orange });
+            if (Precursors.LastStrong.Count > 0)
+                map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("■ arancione: nube forte, regge un salto corto in 50 MHz (foEs in MHz)"), Pal.Orange));
+            if (alerts.Count == 0) return;
             foreach (PrecursorAlert a in alerts)
             {
                 bool isSel = a == selAlert;
                 if (selAlert != null && !isSel) continue;
+                ChainAlert ca = a as ChainAlert;
+                if (ca != null) { DrawChain(ca, isSel, selAlert != null); continue; }
+                if (!Station.Valid) continue;
                 Color c = a.Level == 2 ? Pal.Red : Pal.Yellow;
                 map.Lines.Add(MapView.GreatCircle(Station.Lat, Station.Lon, a.TargetLat, a.TargetLon, Pal.A(isSel ? 255 : 170, c), isSel ? 2.6 : 1.4, true));
                 map.Markers.Add(new MapMarker { Lat = a.TargetLat, Lon = a.TargetLon, Radius = 0, Fill = c, Stroke = c, Label = Lang.T(a.Region) + " " + a.Band, LabelColor = c });
@@ -569,11 +606,94 @@ namespace ELA
                 }
             }
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("tratteggio rosso / giallo: allerta / precursore del multi-salto"), Pal.Red));
+            if (alerts.Any(a => a is ChainAlert))
+                map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("catena a salti corti: linea piena, cerchio = zona d'estremità; azzurro = cerca la nube"), Pal.Azure));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("● verde: nube attiva sul punto di salto; ○ grigio: zona senza osservatori; ○ rosso: nessuna nube"), Pal.Green));
+        }
+
+        // catena a salti corti: dal QTH e corridoi (linea piena), CERCA LA NUBE (azzurro); i corridoi che non riguardano la
+        // propria stazione restano tenui finche' non si sceglie la riga
+        void DrawChain(ChainAlert c, bool isSel, bool only)
+        {
+            bool mine = c.Kind == ChainAlert.KindQth || (!double.IsNaN(c.NearKm) && c.NearKm <= Chains.NearMeKm);
+            Color col = c.Level == 2 ? Pal.Red : c.Level == 1 ? Pal.Yellow : Pal.Azure;
+            byte alpha = (byte)(isSel ? 255 : mine ? 200 : 80);
+            double w = isSel ? 2.8 : mine ? 1.8 : 1.0;
+            if (c.Kind == ChainAlert.KindSearch)
+            {
+                double eLa, eLo;
+                Geo.Destination(c.EndALat, c.EndALon, c.Az, c.Zones.Count > 0 ? Geo.DistanceKm(c.EndALat, c.EndALon, c.Zones[c.Zones.Count - 1].Lat, c.Zones[c.Zones.Count - 1].Lon) : c.DistKm, out eLa, out eLo);
+                map.Lines.Add(MapView.GreatCircle(c.EndALat, c.EndALon, eLa, eLo, Pal.A(alpha, col), w, true));
+                foreach (PrecursorPoint z in c.Zones)
+                {
+                    map.Lines.Add(MapView.Circle(z.Lat, z.Lon, (Chains.ShortMaxKm - Chains.ShortMinKm) / 4 + Chains.LineKm / 2, Pal.A(alpha, col), w));
+                    if (isSel) map.Markers.Add(new MapMarker { Lat = z.Lat, Lon = z.Lon, Radius = 0, Label = Lang.F("salto corto finale? foEs ≥ {0:F1}", z.FoEsNeed), LabelColor = col });
+                }
+                return;
+            }
+            map.Lines.Add(MapView.GreatCircle(c.EndALat, c.EndALon, c.EndBLat, c.EndBLon, Pal.A(alpha, col), w));
+            if (c.Kind == ChainAlert.KindCorridor) map.Lines.Add(MapView.Circle(c.EndALat, c.EndALon, Chains.LineKm, Pal.A(alpha, col), w));
+            map.Lines.Add(MapView.Circle(c.EndBLat, c.EndBLon, Chains.LineKm, Pal.A(alpha, col), w));
+            if (!isSel && !mine) return;
+            if (c.Kind == ChainAlert.KindCorridor) map.Markers.Add(new MapMarker { Lat = c.EndALat, Lon = c.EndALon, Radius = 0, Label = c.EndAName, LabelColor = col });
+            map.Markers.Add(new MapMarker { Lat = c.EndBLat, Lon = c.EndBLon, Radius = 0, Label = c.EndBName + " 6 m", LabelColor = col });
+            if (!isSel) return;
+            foreach (StrongCloud n in new[] { c.A, c.B })
+                map.Markers.Add(new MapMarker { Lat = n.Lat, Lon = n.Lon, Radius = 8, Fill = Pal.Orange, Stroke = Pal.Fore, Square = true, Glow = true });
+            foreach (PrecursorPoint p in c.Points)
+            {
+                Color pc = p.Covered ? Pal.Green : !p.Observed ? Pal.BarMuted : Pal.Red;
+                map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = 6, Fill = pc, Ring = !p.Covered, Label = Geo.LatLonToLoc(p.Lat, p.Lon, 4) });
+            }
+            if (c.A.Spot != null) map.Lines.Add(MapView.GreatCircle(c.A.Spot.LatS, c.A.Spot.LonS, c.A.Spot.LatD, c.A.Spot.LonD, Pal.A(200, Pal.Orange), 1.2));
+            if (c.B.Spot != null) map.Lines.Add(MapView.GreatCircle(c.B.Spot.LatS, c.B.Spot.LonS, c.B.Spot.LatD, c.B.Spot.LonD, Pal.A(200, Pal.Orange), 1.2));
+        }
+
+        static string CloudText(StrongCloud n)
+        {
+            return Lang.F("{0}, foEs ≥ {1:F1} MHz, {2} ({3:F0} min fa)", Geo.LatLonToLoc(n.Lat, n.Lon, 4), n.FoEs, n.Source, double.IsNaN(n.AgeMin) ? 0 : n.AgeMin);
+        }
+
+        void ChainDetails(StringBuilder sb, ChainAlert c)
+        {
+            sb.AppendLine(Lang.F("{0} - catena a salti corti ({1}): {2}", c.LevelText, c.KindText, c.Region));
+            if (c.Kind == ChainAlert.KindSearch)
+            {
+                sb.AppendLine(Lang.F("Primo salto corto di {0:F0} km dalla tua stazione su una nube forte: {1}", c.ShortKm, CloudText(c.A)));
+                sb.AppendLine(Lang.F("Nessuna seconda nube forte lungo l'azimut {0:F0}°: il salto corto finale dovrebbe stare in una di queste zone (foEs ≥ {1:F1} MHz):", c.Az, Chains.StrongFoEs(H)));
+                int j = 1;
+                foreach (PrecursorPoint z in c.Zones)
+                    sb.AppendLine("  " + Lang.F("dopo {0} salti centrali: {1}", j++, Chains.ZoneName(z.Lat, z.Lon))
+                        + (z.Observed ? "" : ", " + Lang.T("zona senza osservatori"))
+                        + (double.IsNaN(z.CloudKm) ? "" : ", " + (double.IsNaN(z.CloudFoEs) ? Lang.F("ionosonda GIRO a {0:F0} km senza foEs recente", z.CloudKm) : Lang.F("ionosonda GIRO a {0:F0} km: foEs {1:F1} MHz", z.CloudKm, z.CloudFoEs))));
+            }
+            else
+            {
+                sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km", c.DistKm, c.Az, 2 * c.XA, c.Middle, c.MiddleKm, 2 * c.XB));
+                sb.AppendLine(Lang.F("1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.A)));
+                sb.AppendLine(Lang.F("2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.B)));
+                if (c.Points.Count == 0) sb.AppendLine(Lang.T("3) Salti centrali: nessuno, le due nubi sono consecutive."));
+                int k = 1;
+                foreach (PrecursorPoint p in c.Points)
+                {
+                    string st = p.Covered ? (p.CloudSpot != null ? Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (spot {2} - {3})", p.CloudFoEs, p.CloudKm, p.CloudSpot.Spotter, p.CloudSpot.DxCall) : Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km (ionosonda)", p.CloudFoEs, p.CloudKm))
+                              : p.Observed ? Lang.T("zona osservata, nessuna nube") : Lang.T("zona senza osservatori");
+                    sb.AppendLine(Lang.F("3) Salto centrale {0} ({1:F0} km): {2}, foEs necessaria {3:F1} MHz - {4}", k++, p.HopKm, Geo.LatLonToLoc(p.Lat, p.Lon, 4), p.FoEsNeed, st));
+                }
+                if (c.Kind == ChainAlert.KindQth) sb.AppendLine(Lang.F("Zona d'arrivo: {0}, entro circa {1:F0} km", c.EndBName, Chains.LineKm));
+                else
+                {
+                    sb.AppendLine(Lang.F("Zone d'estremità: {0} e {1}, entro circa {2:F0} km", c.EndAName, c.EndBName, Chains.LineKm));
+                    if (!double.IsNaN(c.NearKm)) sb.AppendLine(c.NearKm <= Chains.NearMeKm ? Lang.F("La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.", c.NearKm) : Lang.F("La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.", c.NearKm));
+                }
+            }
+            sb.AppendLine(Lang.T("Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti."));
         }
 
         void AlertDetails(StringBuilder sb, PrecursorAlert a)
         {
+            ChainAlert ca = a as ChainAlert;
+            if (ca != null) { ChainDetails(sb, ca); return; }
             sb.AppendLine(Lang.F("{0}: {1} in {2}, {3:F0} km, azimut {4:F0}°", a.LevelText, Lang.T(a.Region), a.Band, a.DistKm, a.Az));
             sb.AppendLine(a.ShortHyp ? Lang.F("Ipotesi: primo salto corto di {0:F0} km, poi salti uguali (tabella IK3XTV).", a.ShortKm)
                                      : Lang.F("Ipotesi: {0} salti uguali di {1:F0} km (tabella IK3XTV).", a.Points.Count, a.DistKm / a.Points.Count));
@@ -677,6 +797,31 @@ namespace ELA
                 Geo.LocToLatLon(s.LocDx, out la, out lo); s.LatD = la; s.LonD = lo;
                 SpotStore.Add(s);
             }
+            // catene a salti corti (dal 20/11/2026): primo salto corto verso l'Asia centrale, salto centrale coperto da uno spot in
+            // 70 MHz, ultimo salto corto in Kazakhstan; corridoio Caraibi - Penisola Iberica con i salti centrali sull'Atlantico
+            if (Station.Valid)
+            {
+                double az = Geo.Bearing(Station.Lat, Station.Lon, 43, 70);
+                Action<double, double, double, double, string, string, string> add = (la, lo, f, half, c1, c2, tag) =>
+                {
+                    double l1, o1, l2, o2;
+                    Geo.Destination(la, lo, 270, half, out l1, out o1);
+                    Geo.Destination(la, lo, 90, half, out l2, out o2);
+                    Spot s = new Spot
+                    {
+                        Utc = now.AddMinutes(-6), FreqKHz = f, DxCall = c2, Spotter = c1, LocSpotter = Geo.LatLonToLoc(l1, o1, 4), LocDx = Geo.LatLonToLoc(l2, o2, 4),
+                        Prop = "ES", Source = 9, LatS = l1, LonS = o1, LatD = l2, LonD = o2
+                    };
+                    s.Comment = s.LocSpotter + "<ES>" + s.LocDx + " " + tag;
+                    SpotStore.Add(s);
+                };
+                double la0, lo0;
+                Geo.Destination(Station.Lat, Station.Lon, az, 450, out la0, out lo0); add(la0, lo0, 50313.0, 450, "YU1ABC", "LZ1ABC", "PROVA");
+                Geo.Destination(Station.Lat, Station.Lon, az, 1800, out la0, out lo0); add(la0, lo0, 70154.0, 900, "UR5XYZ", "UA6ABC", "PROVA");
+                Geo.Destination(Station.Lat, Station.Lon, az, 3300, out la0, out lo0); add(la0, lo0, 50313.0, 450, "UN7ABC", "UN8XYZ", "PROVA");
+                add(18.5, -64, 50313.0, 400, "KP4ABC", "FG8ABC", "PROVA");
+                add(37.5, -6.5, 50313.0, 450, "CT1ABC", "EA7ABC", "PROVA");
+            }
             // nubi attive lungo la tratta verso il Giappone (precursori del multi-salto in 50 MHz): uno spot est-ovest
             // di 1400 km centrato su ogni punto dei salti uguali
             if (!Station.Valid) return;
@@ -700,12 +845,25 @@ namespace ELA
             }
         }
 
+        public string DetailsText { get { return txtDet.Text ?? ""; } }
+
+        public void ShotChain(int kind)
+        {
+            Refresh();
+            inner.Select(2);
+            PrecursorAlert a = alerts.Find(x => x is ChainAlert && ((ChainAlert)x).Kind == kind);
+            if (a != null) { selAlert = a; selAlertKey = a.Key; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
+            cmbMap.SelectedIndex = 1; MapMode();
+            if (kind == ChainAlert.KindCorridor) map.SetView(-95, 30, 5, 60); else map.SetView(-10, 95, 20, 65);
+            FillTables(); Draw(); Details();
+        }
+
         public void ShotPrecursors()
         {
             Refresh();
             inner.Select(2);
             PrecursorAlert a = alerts.Find(x => x.Region == "Giappone") ?? (alerts.Count > 0 ? alerts[0] : null);
-            if (a != null) { selAlert = a; selAlertKey = a.Region + "|" + a.Band; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
+            if (a != null) { selAlert = a; selAlertKey = a.Key; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
             cmbMap.SelectedIndex = 1; MapMode(); map.SetView(-20, 160, -15, 75);
             FillTables(); Draw(); Details();
         }
