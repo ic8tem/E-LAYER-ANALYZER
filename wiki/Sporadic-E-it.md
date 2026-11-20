@@ -75,5 +75,7 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 - **Cerca la nube**: c'è solo il primo salto corto; le zone azzurre dicono dove dovrebbe stare la nube del salto corto finale.
 - **ALLERTA** se i salti centrali sono coperti da nubi, **PRECURSORE** se mancano solo zone senza osservatori.
 - In IMPOSTAZIONI c'è l'**avviso** in alto (e facoltativamente una finestra) per le ALLERTE che ti riguardano.
+- Le catene che arrivano **in mare aperto** o dove non ci sono stazioni (CALL3 e spot) non si mostrano.
+- **Proiezione del mio segnale in 6 m** (punti rosa): dove atterra il tuo segnale in 50 MHz dopo 2-5 salti, sopra le nubi degli ultimi 30 minuti stimate dagli spot di tutte le bande (28-144 MHz) e dalle ionosonde; solo dove ci sono stazioni.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

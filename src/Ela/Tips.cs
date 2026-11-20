@@ -38,6 +38,7 @@ namespace ELA
             { "Primi salti (salti uguali)", "Ipotesi dei salti tutti uguali: i punti di riflessione dividono la tratta in parti uguali." },
             { "Primo salto corto entro", "Ipotesi dell'autore: nel multi-salto il primo salto si chiude entro la distanza indicata dal proprio QTH." },
             { "Nubi Es sui quadrati Maidenhead", "Raccoglie i punti di riflessione in nubi sui quadrati di 4 caratteri e ne stima la foEs minima." },
+            { "Proiezione del mio segnale in 6 m", "Punti rosa: dove atterra il tuo segnale in 50 MHz dopo 2-5 salti, sopra le nubi stimate negli ultimi 30 minuti dagli spot di tutte le bande (28-144 MHz). Primo salto corto 500-1200 km, poi salti fino a 2200 km. Si mostrano solo i quadrati dove ci sono stazioni (CALL3 e spot): in mare aperto il segnale non serve." },
             { "Quota Es km", "Quota dello strato E sporadico usata nella geometria dei salti (di partenza 110 km)." },
             { "Elev. min °", "Elevazione minima dell'antenna (di partenza 1°): limita la lunghezza massima di un salto; si calcola con la rifrazione troposferica (raggio terrestre 4/3)." },
             { "Mappa", "Vista della mappa: azimutale per il singolo salto, azimutale con distanza massima regolabile per il multi-salto, oppure rettangolare." },

@@ -20,7 +20,7 @@ namespace ELA
     {
         public readonly Control Root;
         readonly MapView map = new MapView();
-        readonly CheckBox c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells;
+        readonly CheckBox c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells, chkProj;
         readonly ComboBox cmbWin;
         readonly NumericUpDown numH, numElev, numShort;
         readonly TextBlock lblSummary;
@@ -60,6 +60,7 @@ namespace ELA
             chkShort = Ui.C(Lang.T("Primo salto corto entro"), cf.GetB("es_salto_corto", true));
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("es_salto_corto_km", 1200)), 0, 50, 55);
             chkCells = Ui.C(Lang.T("Nubi Es sui quadrati Maidenhead"), cf.GetB("es_celle", true));
+            chkProj = Ui.C(Lang.T("Proiezione del mio segnale in 6 m"), cf.GetB("es_proiezione_6m", true));
             Button bView = Ui.B(Lang.T("Europa"));
             bView.Click += (s, e) => { cmbMap.SelectedIndex = 1; map.SetView(-30, 60, 20, 72); };
             Button bWorld = Ui.B(Lang.T("Mondo"));
@@ -75,7 +76,7 @@ namespace ELA
             // continente scelto nella barra delle linguette e sintesi dei dati di propagazione in sovraimpressione
             PropData.Updated += () => Avalonia.Threading.Dispatcher.UIThread.Post(() => map.InvalidateVisual());
             Continents.Changed += () => { if (cmbMap.SelectedIndex == 1) Continents.Apply(map); };
-            foreach (CheckBox c in new[] { c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
+            foreach (CheckBox c in new[] { c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells, chkProj }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
             foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { dirty = true; Refresh(); };
 
@@ -125,7 +126,7 @@ namespace ELA
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Bande")), c10, c8, c6, c4, c2, cmbWin), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, bView, bWorld), Dock.Top);
-            Ui.Dock(right, Ui.Row(chkFirst, chkShort, numShort, Ui.L("km"), chkCells), Dock.Top);
+            Ui.Dock(right, Ui.Row(chkFirst, chkShort, numShort, Ui.L("km"), chkCells, chkProj), Dock.Top);
             Ui.Dock(right, lblSummary, Dock.Top);
             Ui.Dock(right, Ui.Box(Lang.T("Dettagli (clic su uno spot, su una nube o sulla mappa)"), Pal.Azure, svDet), Dock.Bottom);
             Ui.Dock(right, inner.Bar, Dock.Top);
@@ -173,7 +174,7 @@ namespace ELA
             cf.Set("es_minuti", Windows[Math.Max(0, cmbWin.SelectedIndex)]);
             cf.Set("es_quota_km2", Ui.V(numH)); cf.Set("es_elev_min2", Ui.V(numElev));
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
-            cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true);
+            cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true); cf.Set("es_proiezione_6m", chkProj.IsChecked == true);
             cf.Set("es_proiezione", Math.Max(0, cmbMap.SelectedIndex));
             if (!double.IsNaN(multiRange)) cf.Set("es_raggio_km", multiRange);
         }
@@ -414,6 +415,7 @@ namespace ELA
                 + (esTropo.Count + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count, heldAtl) : "")
                 + (alerts.Count > 0 ? " " + Lang.F("Multi-salto: {0} allerte e {1} precursori (sottolinguetta Precursori multi-salto).", alerts.Count(a => a.Level == 2), alerts.Count(a => a.Level == 1)) : "")
                 + (Precursors.LastStrong.Count > 0 ? " " + Lang.F("Nubi forti per il salto corto in 50 MHz: {0}.", Precursors.LastStrong.Count) : "")
+                + ProjText()
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
         }
 
@@ -579,8 +581,49 @@ namespace ELA
         // grigio = zona senza osservatori, rosso vuoto = zona osservata senza nube
         public static readonly Color ElectricBlue = Color.FromRgb(44, 117, 255);   // blu elettrico: Es che aggancia il TEP
 
+        // proiezione del proprio segnale in 50 MHz (Chains.Project): un punto per quadrato Maidenhead, il numero di salti minimo;
+        // i punti in mare aperto o senza stazioni non si disegnano (decisione dell'autore, 20/11/2026)
+        List<Chains.Landing> ProjShown(out int sea)
+        {
+            sea = 0;
+            Dictionary<string, Chains.Landing> best = new Dictionary<string, Chains.Landing>();
+            HashSet<string> wet = new HashSet<string>();
+            foreach (Chains.Landing l in Chains.LastProjection)
+            {
+                string q = Geo.LatLonToLoc(l.Lat, l.Lon, 4);
+                if (!l.Operators) { wet.Add(q); continue; }
+                Chains.Landing o;
+                if (!best.TryGetValue(q, out o) || l.Hops < o.Hops) best[q] = l;
+            }
+            foreach (string q in wet) if (!best.ContainsKey(q)) sea++;
+            return best.Values.ToList();
+        }
+
+        string ProjText()
+        {
+            if (chkProj.IsChecked != true || !Station.Valid || Chains.LastProjection.Count == 0) return "";
+            int sea;
+            List<Chains.Landing> l = ProjShown(out sea);
+            if (l.Count == 0) return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: atterra solo in mare aperto o dove non ci sono stazioni ({0} quadrati).", sea);
+            string zones = string.Join(", ", l.GroupBy(x => Chains.RegionName(x.Lat, x.Lon)).OrderByDescending(g => g.Max(x => x.DistKm)).Take(4)
+                                       .Select(g => g.Key + " (" + (g.Min(x => x.Hops) == g.Max(x => x.Hops) ? g.Min(x => x.Hops).ToString(CultureInfo.InvariantCulture) : g.Min(x => x.Hops) + "-" + g.Max(x => x.Hops)) + ")"));
+            return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: {0} quadrati con stazioni, fino a {1:F0} km; zone (salti): {2}. Non mostrati {3} quadrati in mare aperto o senza stazioni.", l.Count, l.Max(x => x.DistKm), zones, sea);
+        }
+
+        void DrawProjection()
+        {
+            if (chkProj.IsChecked != true || !Station.Valid) return;
+            int sea;
+            List<Chains.Landing> l = ProjShown(out sea);
+            if (l.Count == 0) return;
+            foreach (Chains.Landing p in l)
+                map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = p.Hops <= 2 ? 3 : 4, Fill = Pal.A(p.Hops <= 2 ? 150 : 230, Pal.Pink), Stroke = Pal.A(120, Colors.Black) });
+            map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("● rosa: dove atterra il tuo segnale in 50 MHz sulle nubi stimate (2-5 salti, solo dove ci sono stazioni)"), Pal.Pink));
+        }
+
         void DrawAlerts()
         {
+            DrawProjection();
             // nubi forti (reggono un salto corto in 50 MHz): rombi arancioni con la foEs
             foreach (StrongCloud c in Precursors.LastStrong)
                 map.Markers.Add(new MapMarker { Lat = c.Lat, Lon = c.Lon, Radius = 5, Fill = Pal.Orange, Stroke = Colors.Black, Square = true, Label = c.FoEs.ToString("F0", CultureInfo.CurrentCulture), LabelColor = Pal.Orange });

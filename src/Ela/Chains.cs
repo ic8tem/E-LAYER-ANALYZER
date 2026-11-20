@@ -118,6 +118,14 @@ namespace ELA
         }
 
 
+        // solo la regione (piu' vicina entro 1500 km), altrimenti il campo Maidenhead di 2 caratteri
+        public static string RegionName(double lat, double lon)
+        {
+            string best = null; double bd = 1500;
+            foreach (var r in Precursors.Regions) { double d = Geo.DistanceKm(lat, lon, r.Lat, r.Lon); if (d < bd) { bd = d; best = r.Name; } }
+            return best != null ? YAMS.Lang.T(best) : Geo.LatLonToLoc(lat, lon, 4).Substring(0, 2);
+        }
+
         // nome della zona: regione piu' vicina entro 1500 km, altrimenti il campo Maidenhead
         public static string ZoneName(double lat, double lon)
         {
@@ -173,6 +181,130 @@ namespace ELA
             return res;
         }
 
+        // ------------------------------------------------------------ dove c'e' chi ascolta
+        // quadrati Maidenhead di 4 caratteri con almeno una stazione nota (CALL3 e stazioni degli spot): un segnale che atterra
+        // lontano da tutti (mare aperto, deserti, ghiacci) non serve a nessuno e non si segnala (decisione dell'autore, IC8TEM,
+        // 20/11/2026: «il segnale nostro del multisalto, se cade a mare, è inutile segnalarlo»)
+        public const double OperatorsKm = 300;
+        static bool[] opsSq;
+        static int opsFrom = -1;
+        static volatile bool opsAny;
+        static readonly object opsLk = new object();
+        static int Sq(double lat, double lon)
+        {
+            double l = ((lon + 180) % 360 + 360) % 360;
+            int x = Math.Min(179, Math.Max(0, (int)Math.Floor(l / 2))), y = Math.Min(179, Math.Max(0, (int)Math.Floor(lat + 90)));
+            return y * 180 + x;
+        }
+        static bool[] Ops()
+        {
+            string[] locs = YAMS.CallDb.Locators;
+            lock (opsLk)
+            {
+                if (opsSq != null && opsFrom == locs.Length) return opsSq;
+                bool[] m = opsSq != null ? (bool[])opsSq.Clone() : new bool[180 * 180];
+                foreach (string l in locs)
+                {
+                    if (l == null || l.Length < 4) continue;
+                    string q = l.Substring(0, 4).ToUpperInvariant();
+                    if (q == "RR73" || q == "AA00" || q == "JJ00" || q == "RR99") continue;   // saluto finale o locator di comodo
+                    double la, lo;
+                    if (Geo.LocToLatLon(q, out la, out lo)) m[Sq(la, lo)] = true;
+                }
+                opsSq = m; opsFrom = locs.Length; opsAny = m.Any(x => x);
+                return m;
+            }
+        }
+        // stazione vista negli spot: il suo quadrato conta come abitato
+        public static void AddOperator(double lat, double lon)
+        {
+            if (double.IsNaN(lat) || double.IsNaN(lon)) return;
+            bool[] m = Ops();
+            lock (opsLk) m[Sq(lat, lon)] = true;
+            opsAny = true;
+        }
+        // c'e' almeno un quadrato con stazioni entro km dal punto? (senza CALL3 caricato non si scarta niente)
+        public static bool HasOperators(double lat, double lon, double km)
+        {
+            bool[] m = Ops();
+            if (!opsAny) return true;
+            double dLat = km / 111.0, dLon = Math.Min(180, km / (111.0 * Math.Max(0.05, Math.Cos(lat * Math.PI / 180))));
+            for (double y = Math.Floor(lat - dLat); y <= lat + dLat; y += 1)
+            {
+                if (y < -90 || y >= 90) continue;
+                for (double x = Math.Floor((lon - dLon) / 2) * 2; x <= lon + dLon; x += 2)
+                {
+                    if (!m[Sq(y + 0.5, x + 1)]) continue;
+                    if (Geo.DistanceKm(lat, lon, y + 0.5, x + 1) <= km + 60) return true;   // 60 km: meta' quadrato, la stazione puo' stare sul bordo
+                }
+            }
+            return false;
+        }
+
+        // ------------------------------------------------------------ proiezione del proprio segnale
+        // dove atterra il segnale in 50 MHz della propria stazione dopo 2-5 salti, sopra le nubi stimate degli ultimi 30 minuti
+        // (spot di tutte le bande, 28-144 MHz, convertiti in foEs: il fenomeno e' uno solo, proposta dell'autore del 20/11/2026):
+        // primo salto corto (500-1200 km), poi salti di 500-2200 km, ognuno su una nube che lo regge; ogni 2° di azimut.
+        // Prova sulle decodifiche JTDX dell'autore (409 aperture multi-salto, estati 2024-2026): nei 30 minuti prima dell'apertura
+        // la proiezione andava verso la stazione lontana (entro 10°) nel 49% dei casi contro il 20% degli stessi orari senza apertura.
+        public class Landing { public double Lat, Lon, Az, DistKm; public int Hops; public bool Operators; }
+        public static List<Landing> LastProjection = new List<Landing>();
+        public const double ProjStepDeg = 2;
+        public const int ProjMaxHops = 5;
+
+        static List<Landing> Project(double sLat, double sLon, double Hkm, List<Act> act)
+        {
+            List<Landing> res = new List<Landing>();
+            int n = act.Count;
+            if (n == 0) return res;
+            double[] d13 = new double[n], th13 = new double[n], fo = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                d13[i] = Geo.DistanceKm(sLat, sLon, act[i].Lat, act[i].Lon) / Geo.R;
+                th13[i] = Geo.Bearing(sLat, sLon, act[i].Lat, act[i].Lon) * Math.PI / 180;
+                fo[i] = act[i].FoEs;
+            }
+            List<double[]> on = new List<double[]>();
+            for (double az = 0; az < 360; az += ProjStepDeg)
+            {
+                double t12 = az * Math.PI / 180;
+                on.Clear();
+                for (int i = 0; i < n; i++)
+                {
+                    double xt = Math.Asin(Math.Max(-1, Math.Min(1, Math.Sin(d13[i]) * Math.Sin(th13[i] - t12))));
+                    if (Math.Abs(xt) * Geo.R > LineKm || Math.Cos(th13[i] - t12) <= 0) continue;
+                    double at = Math.Acos(Math.Max(-1, Math.Min(1, Math.Cos(d13[i]) / Math.Max(1e-9, Math.Cos(xt))))) * Geo.R;
+                    on.Add(new[] { at, fo[i] });
+                }
+                if (on.Count == 0) continue;
+                HashSet<int> from = new HashSet<int> { 0 }, seen = new HashSet<int>();
+                for (int k = 1; k <= ProjMaxHops && from.Count > 0; k++)
+                {
+                    HashSet<int> next = new HashSet<int>();
+                    foreach (int L in from)
+                        foreach (double[] c in on)
+                        {
+                            double half = c[0] - L;
+                            if (half < ShortMinKm / 2 || half > (k == 1 ? ShortMaxKm / 2 : MiddleMaxKm / 2)) continue;
+                            if (c[1] * Geo.SecantFactor(2 * half, Hkm) < F50) continue;
+                            int L2 = (int)(Math.Round((2 * c[0] - L) / 100.0) * 100);
+                            if (L2 <= MaxPathKm) next.Add(L2);
+                        }
+                    if (k >= 2)
+                        foreach (int L2 in next)
+                        {
+                            if (!seen.Add(L2)) continue;
+                            double la, lo;
+                            Geo.Destination(sLat, sLon, az, L2, out la, out lo);
+                            if (EsModel.IsTransEquatorialWorld(sLat, sLon, la, lo)) continue;
+                            res.Add(new Landing { Lat = la, Lon = lo, Az = az, DistKm = L2, Hops = k, Operators = HasOperators(la, lo, OperatorsKm) });
+                        }
+                    from = next;
+                }
+            }
+            return res;
+        }
+
         // ------------------------------------------------------------ catene
         class Act { public double Lat, Lon, FoEs; public Spot Spot; }
 
@@ -191,8 +323,9 @@ namespace ELA
                                             bool giro, bool corridors, bool search, Func<Spot, bool> isolated, out List<StrongCloud> strong)
         {
             List<ChainAlert> res = new List<ChainAlert>();
+            foreach (Spot s in hour) { AddOperator(s.LatS, s.LonS); AddOperator(s.LatD, s.LonD); }
             strong = Strong(Hkm, win, now, giro, isolated);
-            if (strong.Count == 0) return res;
+            if (strong.Count == 0) { if (giro) LastProjection = new List<Landing>(); return res; }
             // tutte le nubi Es (anche deboli) per i salti centrali, e le stazioni presenti negli spot (zone osservate)
             List<Act> act = new List<Act>();
             foreach (Spot s in win)
@@ -208,6 +341,7 @@ namespace ELA
             List<double[]> stations = new List<double[]>();
             foreach (Spot s in hour) { stations.Add(new[] { s.LatS, s.LonS }); stations.Add(new[] { s.LatD, s.LonD }); }
 
+            if (giro) LastProjection = hasStation ? Project(sLat, sLon, Hkm, act) : new List<Landing>();   // solo in diretta
             if (hasStation) res.AddRange(FromQth(sLat, sLon, Hkm, strong, act, stations, search, giro));
             if (corridors) res.AddRange(Corridor(Hkm, strong, act, stations, res, hasStation, sLat, sLon));
             return res;
@@ -270,6 +404,7 @@ namespace ELA
                     double tLat, tLon;
                     Geo.Destination(sLat, sLon, az, D, out tLat, out tLon);
                     if (EsModel.IsTransEquatorialWorld(sLat, sLon, tLat, tLon)) continue;
+                    if (!HasOperators(tLat, tLon, LineKm)) continue;                       // atterra dove non c'e' nessuno
                     int k; double hop;
                     List<PrecursorPoint> mid = MiddlePoints(sLat, sLon, az, 2 * dA, along - xb, Hkm, act, stations, out k, out hop);   // condizione 3
                     int lev = LevelOf(mid);
@@ -297,6 +432,7 @@ namespace ELA
                     if (along + ShortMaxKm / 2 > MaxPathKm) break;
                     double la, lo;
                     Geo.Destination(sLat, sLon, az, along, out la, out lo);
+                    if (!HasOperators(la, lo, LineKm)) continue;                           // zona in mare aperto: inutile cercarci la nube
                     PrecursorPoint z = new PrecursorPoint { Lat = la, Lon = lo, HopKm = j, FoEsNeed = StrongFoEs(Hkm) };
                     foreach (double[] st in stations) if (Geo.DistanceKm(la, lo, st[0], st[1]) <= Precursors.ObservedKm) { z.Observed = true; break; }
                     // ionosonda GIRO piu' vicina (entro 1000 km): foEs recente
@@ -308,7 +444,7 @@ namespace ELA
                         z.CloudFoEs = gb.LastValue(r => r.FoEs, Giro.FreshMin, out when);
                         z.CloudKm = gd;
                     }
-                    if (j == 1) { s.TargetLat = la; s.TargetLon = lo; s.DistKm = along + ShortMaxKm / 2; }
+                    if (s.Zones.Count == 0) { s.TargetLat = la; s.TargetLon = lo; s.DistKm = along + ShortMaxKm / 2; }
                     s.Zones.Add(z);
                 }
                 if (s.Zones.Count == 0) continue;
@@ -339,6 +475,7 @@ namespace ELA
                     Geo.Destination(a.Lat, a.Lon, Geo.Norm360(az + 180), xa, out eaLat, out eaLon);
                     Geo.Destination(b.Lat, b.Lon, Geo.Norm360(Geo.Bearing(b.Lat, b.Lon, a.Lat, a.Lon) + 180), xb, out ebLat, out ebLon);
                     if (EsModel.IsTransEquatorialWorld(eaLat, eaLon, ebLat, ebLon)) continue;
+                    if (!HasOperators(eaLat, eaLon, LineKm) || !HasOperators(ebLat, ebLon, LineKm)) continue;   // un'estremita' in mare aperto
                     int k; double hop;
                     List<PrecursorPoint> mid = MiddlePoints(a.Lat, a.Lon, az, xa, dAB - xb, Hkm, act, stations, out k, out hop);
                     int lev = LevelOf(mid);
