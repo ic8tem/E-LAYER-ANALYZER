@@ -75,5 +75,7 @@ Dans le sous-onglet **Précurseurs multi-bond**, le programme cherche les chaîn
 - **Chercher le nuage** : il n'y a que le premier bond court ; les zones bleu clair indiquent où devrait se trouver le nuage du bond court final.
 - **ALERTE** si les bonds centraux sont couverts par des nuages, **PRÉCURSEUR** s'il ne manque que des zones sans observateurs.
 - Dans RÉGLAGES, il y a l'**avertissement** en haut (et en option une fenêtre) pour les ALERTES qui vous concernent.
+- Les chaînes qui arrivent **en pleine mer** ou là où il n'y a pas de stations (CALL3 et spots) ne sont pas affichées.
+- **Empreinte de mon signal sur 6 m** (points roses) : où votre signal 50 MHz atterrit après 2-5 bonds, au-dessus des nuages des 30 dernières minutes estimés à partir des spots de toutes les bandes (28-144 MHz) et des ionosondes ; seulement là où il y a des stations.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

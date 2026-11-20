@@ -75,5 +75,7 @@ En la subpestaña **Precursores de multisalto**, el programa busca las cadenas d
 - **Buscar la nube**: solo está el primer salto corto; las zonas celestes indican dónde debería estar la nube del salto corto final.
 - **ALERTA** si los saltos centrales están cubiertos por nubes, **PRECURSOR** si solo faltan zonas sin observadores.
 - En AJUSTES está el **aviso** arriba (y opcionalmente una ventana) para las ALERTAS que te afectan.
+- Las cadenas que llegan **a mar abierto** o donde no hay estaciones (CALL3 y spots) no se muestran.
+- **Huella de mi señal en 6 m** (puntos rosas): dónde cae tu señal de 50 MHz después de 2-5 saltos, sobre las nubes de los últimos 30 minutos estimadas a partir de los spots de todas las bandas (28-144 MHz) y de las ionosondas; solo donde hay estaciones.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

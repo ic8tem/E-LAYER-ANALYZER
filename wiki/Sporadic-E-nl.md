@@ -75,5 +75,7 @@ In de subtab **Voorboden meervoudige sprong** zoekt het programma de ketens met 
 - **Zoek de wolk**: er is alleen de eerste korte sprong; de lichtblauwe zones zeggen waar de wolk van de korte laatste sprong zou moeten liggen.
 - **WAARSCHUWING** als de middelste sprongen door wolken gedekt zijn, **VOORBODE** als alleen zones zonder waarnemers ontbreken.
 - In INSTELLINGEN staat de **melding** bovenaan (en desgewenst een venster) voor de WAARSCHUWINGEN die jou betreffen.
+- Ketens die **op open zee** eindigen of waar geen stations zijn (CALL3 en spots), worden niet getoond.
+- **Footprint van mijn signaal op 6 m** (roze punten): waar je 50 MHz-signaal landt na 2-5 sprongen, boven de wolken van de laatste 30 minuten die geschat zijn uit de spots van alle banden (28-144 MHz) en uit de ionosondes; alleen waar stations zijn.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

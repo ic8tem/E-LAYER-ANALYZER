@@ -75,5 +75,7 @@ In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chai
 - **Find the cloud**: there is only the first short hop; the light-blue zones say where the cloud of the final short hop should be.
 - **ALERT** if the middle hops are covered by clouds, **PRECURSOR** if only zones without observers are missing.
 - In SETTINGS there is the **warning** at the top (and optionally a window) for the ALERTS that concern you.
+- Chains that end **in the open sea** or where there are no stations (CALL3 and spots) are not shown.
+- **Footprint of my signal on 6 m** (pink dots): where your 50 MHz signal lands after 2-5 hops, over the clouds of the last 30 minutes estimated from the spots of all bands (28-144 MHz) and from the ionosondes; only where there are stations.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

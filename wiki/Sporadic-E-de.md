@@ -75,5 +75,7 @@ Im Unterreiter **Mehrfachsprung-Vorboten** sucht das Programm die Mehrfachsprung
 - **Wolke suchen**: Es gibt nur den ersten kurzen Sprung; die hellblauen Zonen sagen, wo die Wolke des kurzen letzten Sprungs liegen müsste.
 - **WARNUNG**, wenn die mittleren Sprünge von Wolken abgedeckt sind, **VORBOTE**, wenn nur Zonen ohne Beobachter fehlen.
 - In EINSTELLUNGEN gibt es den **Hinweis** oben (und wahlweise ein Fenster) für die WARNUNGEN, die Sie betreffen.
+- Ketten, die **auf offener See** oder dort enden, wo es keine Stationen gibt (CALL3 und Spots), werden nicht gezeigt.
+- **Footprint meines Signals auf 6 m** (rosa Punkte): wo Ihr 50-MHz-Signal nach 2-5 Sprüngen landet, über den Wolken der letzten 30 Minuten, die aus den Spots aller Bänder (28-144 MHz) und aus den Ionosonden geschätzt wurden; nur wo es Stationen gibt.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

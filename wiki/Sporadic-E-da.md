@@ -75,5 +75,7 @@ I underfanen **Multi-hop-forløbere** søger programmet efter kæder af multi-ho
 - **Find skyen**: der er kun det første korte hop; de lyseblå zoner viser, hvor skyen for det sidste korte hop burde ligge.
 - **ALARM**, hvis midterhoppene er dækket af skyer, **FORLØBER**, hvis der kun mangler zoner uden observatører.
 - I INDSTILLINGER findes **advarslen** øverst (og valgfrit et vindue) for de ALARMER, der angår dig.
+- Kæder, der ender **på åbent hav** eller hvor der ikke er stationer (CALL3 og spots), vises ikke.
+- **Hvor mit signal lander på 6 m** (lyserøde punkter): hvor dit signal på 50 MHz lander efter 2-5 hop, over de skyer fra de seneste 30 minutter, der er anslået ud fra spots på alle bånd (28-144 MHz) og fra ionosonderne; kun hvor der er stationer.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -75,5 +75,7 @@ I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihop
 - **Finn skyen**: det finnes bare det første korte hoppet; de lyseblå sonene viser hvor skyen for det siste korte hoppet burde ligge.
 - **ALARM** hvis de midtre hoppene er dekket av skyer, **FORLØPER** hvis det bare mangler soner uten observatører.
 - I INNSTILLINGER finnes **varselet** øverst (og valgfritt et vindu) for de ALARMENE som angår deg.
+- Kjeder som ender **på åpent hav** eller der det ikke finnes stasjoner (CALL3 og spot), vises ikke.
+- **Hvor signalet mitt lander på 6 m** (rosa punkter): hvor signalet ditt på 50 MHz lander etter 2-5 hopp, over skyene fra de siste 30 minuttene som er estimert ut fra spot på alle bånd (28-144 MHz) og fra ionosondene; bare der det finnes stasjoner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

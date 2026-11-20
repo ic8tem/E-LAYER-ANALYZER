@@ -75,5 +75,7 @@ I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp 
 - **Sök molnet**: det finns bara det första korta hoppet; de ljusblå zonerna visar var molnet för det sista korta hoppet borde ligga.
 - **LARM** om mellanhoppen är täckta av moln, **FÖREBUD** om det bara saknas zoner utan observatörer.
 - I INSTÄLLNINGAR finns **varningen** överst (och valfritt ett fönster) för de LARM som berör dig.
+- Kedjor som slutar **på öppet hav** eller där det inte finns stationer (CALL3 och spots) visas inte.
+- **Var min signal landar på 6 m** (rosa punkter): var din signal på 50 MHz landar efter 2-5 hopp, över molnen från de senaste 30 minuterna som uppskattats utifrån spots på alla band (28-144 MHz) och från jonosonderna; bara där det finns stationer.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
