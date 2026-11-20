@@ -75,5 +75,7 @@ A **Többugrásos előjelek** allapban a program az 50 MHz-es többugrásos lán
 - **Keresd a felhőt**: csak az első rövid ugrás van meg; a világoskék zónák mutatják, hol kellene lennie az utolsó rövid ugrás felhőjének.
 - **FIGYELMEZTETÉS**, ha a középső ugrásokat felhők fedik le, **ELŐJEL**, ha csak megfigyelők nélküli zónák hiányoznak.
 - A BEÁLLÍTÁSOK fülön van a felső **figyelmeztetés** (és kívánság szerint egy ablak) az Önt érintő FIGYELMEZTETÉSEKHEZ.
+- A **nyílt tengeren** vagy állomások nélküli helyen (CALL3 és spotok) végződő láncok nem jelennek meg.
+- **Jelem lábnyoma 6 m-en** (rózsaszín pontok): ahová az 50 MHz-es jeled 2-5 ugrás után földet ér, az utolsó 30 perc felhői fölött, amelyeket az összes sáv (28-144 MHz) spotjaiból és az ionoszondákból becsül a program; csak ahol vannak állomások.
 
 ![Folyosó](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

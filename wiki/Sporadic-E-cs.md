@@ -75,5 +75,7 @@ V podkartě **Předzvěsti vícenásobného skoku** program hledá řetězce ví
 - **Hledej oblak**: je jen první krátký skok; světle modré zóny ukazují, kde by měl ležet oblak krátkého koncového skoku.
 - **VÝSTRAHA**, pokud jsou střední skoky pokryté oblaky, **PŘEDZVĚST**, pokud chybějí jen zóny bez pozorovatelů.
 - V NASTAVENÍ je **upozornění** nahoře (a volitelně okno) pro VÝSTRAHY, které se vás týkají.
+- Řetězce, které končí **na otevřeném moři** nebo tam, kde nejsou stanice (CALL3 a spoty), se nezobrazují.
+- **Stopa mého signálu na 6 m** (růžové body): kam dopadá tvůj signál na 50 MHz po 2-5 skocích, nad oblaky za posledních 30 minut odhadnutými ze spotů všech pásem (28-144 MHz) a z ionosond; jen tam, kde jsou stanice.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
