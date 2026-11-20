@@ -53,6 +53,9 @@ e fotografie delle linguette sul ramo `ci-screenshots`.
 In locale: `dotnet publish E-LAYER-ANALYZER.csproj -c Release -r win-x64|win-x86|win-arm64|linux-x64|linux-arm64|linux-arm|linux-musl-x64|linux-musl-arm64|osx-arm64|osx-x64 --self-contained true`; pacchetti Linux con `installer/make-deb.sh`, `make-rpm.sh`, `make-arch.sh`, `make-txz.sh`, `make-appimage.sh`.
 Documenti Word: `python3 tools/txt2docx.py data/ela_documento_tecnico.txt data/ela_documento_tecnico.docx`.
 
+## Ringraziamenti
+Per lo sviluppo dell'E-sporadico in 50 MHz: Johan IW2DNI e Fabio IZ7NLJ.
+
 ## Licenza
 E-LAYER ANALYZER è software libero: puoi ridistribuirlo e modificarlo secondo i termini della GNU General Public License versione 3 ([COPYING](COPYING)), la stessa di YA-MS che il programma contiene. È distribuito senza alcuna garanzia. I dati delle fonti esterne restano dei rispettivi enti, con le loro condizioni (per esempio i dati delle ionosonde GIRO, CC BY-NC-SA 4.0, solo uso non commerciale); l'elenco è nella linguetta FONTI.
 

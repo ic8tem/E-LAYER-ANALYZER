@@ -35,6 +35,6 @@ Per la tratta scelta: distanza e giudizio della tabella IK3XTV, azimut nei due s
 
 ## Verifica delle catene (dalla versione 0.6.0)
 
-**Carica spot CSV** (anche più file esportati da NUBI Es NEL TEMPO) e **Verifica le catene**: il programma rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti e scrive quante aperture avrebbe anticipato (ALLERTA, PRECURSORE o solo il primo salto corto), l'anticipo mediano e le allerte non seguite da QSO multi-salto. Senza spot CSV le nubi vengono solo dal log, e l'ultimo salto corto quasi non si vede.
+**Carica spot, ADIF o ALL.TXT** (spot esportati da NUBI Es NEL TEMPO, log ADIF di altre stazioni, decodifiche ALL.TXT di JTDX o WSJT-X: il nominativo si riconosce dalle righe in trasmissione) e **Verifica le catene**: il programma rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti e scrive quante aperture avrebbe anticipato (ALLERTA, PRECURSORE o solo il primo salto corto), l'anticipo mediano e le allerte non seguite da QSO multi-salto. Senza sorgenti caricate le nubi vengono solo dal log, e l'ultimo salto corto quasi non si vede: servono dati di stazioni lontane.
 
 ![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

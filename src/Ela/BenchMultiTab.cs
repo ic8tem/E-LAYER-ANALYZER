@@ -94,7 +94,7 @@ namespace ELA
             bAll = Ui.B(Lang.T("Torna a giorno e orario"));
             bAll.Click += (s, e) => { areaMode = false; Fill(); };
 
-            Button bCsv = Ui.B(Lang.T("Carica spot CSV o ADIF")), bCsvOff = Ui.B(Lang.T("Togli gli spot CSV e ADIF")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
+            Button bCsv = Ui.B(Lang.T("Carica spot, ADIF o ALL.TXT")), bCsvOff = Ui.B(Lang.T("Togli le sorgenti delle nubi")), bVer = Ui.B(Lang.T("Verifica le catene"), true);
             lblVer = new TextBlock { Foreground = Pal.B(Pal.Orange), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 2) };
             ToolTip.SetTip(bVer, Lang.T("Rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti (SPORADIC-E, Precursori multi-salto): nubi dagli spot CSV e dai QSO dei log."));
             bCsv.Click += async (s, e) => await PickCsv();
@@ -445,9 +445,9 @@ namespace ELA
             if (tl == null) return;
             IReadOnlyList<IStorageFile> files = await tl.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
-                Title = Lang.T("Spot CSV esportati dal programma o log ADIF di altre stazioni"),
+                Title = Lang.T("Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni"),
                 AllowMultiple = true,
-                FileTypeFilter = new[] { new FilePickerFileType("CSV / ADIF") { Patterns = new[] { "*.csv", "*.CSV", "*.adi", "*.adif", "*.ADI", "*.ADIF" } } }
+                FileTypeFilter = new[] { new FilePickerFileType("CSV / ADIF / ALL.TXT") { Patterns = new[] { "*.csv", "*.CSV", "*.adi", "*.adif", "*.ADI", "*.ADIF", "*.txt", "*.TXT" } } }
             });
             if (files == null || files.Count == 0) return;
             int before = csvSpots.Count;
@@ -468,6 +468,7 @@ namespace ELA
                 {
                     // log ADIF di un'altra stazione (anche una spedizione): i suoi QSO diventano nubi, come quelli dei log caricati
                     if (path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)) { foreach (string line in File.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
+                    else if (path.EndsWith(".txt", StringComparison.OrdinalIgnoreCase)) { string own; l.AddRange(AllTxt.Read(path, 28, 148, out own).Where(s => s.HasBoth)); }   // decodifiche di JTDX / WSJT-X
                     else l.AddRange(NubiTab.FromAdif(path).Where(s => s.HasBoth));
                 }
                 catch { }

@@ -159,12 +159,12 @@ namespace ELA
             int a = r.Openings.Count(o => o.Level == 2), p = r.Openings.Count(o => o.Level == 1), s = r.Openings.Count(o => o.Level == 0), z = r.Openings.Count(o => o.Level < 0);
             List<double> leads = r.Openings.Where(o => o.Level >= 1 && !double.IsNaN(o.LeadMin)).Select(o => o.LeadMin).OrderBy(x => x).ToList();
             sb.AppendLine(Lang.F("Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (primo QSO oltre 3100 km per giorno e settore di 30°), dal {1:yyyy-MM-dd} al {2:yyyy-MM-dd}.", n, r.From, r.To));
-            sb.AppendLine(Lang.F("Nubi da {0} spot e QSO ({1} dai file CSV).", r.Spots, r.CsvSpots));
+            sb.AppendLine(Lang.F("Nubi da {0} spot, QSO e decodifiche ({1} dalle sorgenti caricate).", r.Spots, r.CsvSpots));
             sb.AppendLine(Lang.F("Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).",
                 a, 100.0 * a / n, p, 100.0 * p / n, s, 100.0 * s / n, z, 100.0 * z / n));
             if (leads.Count > 0) sb.AppendLine(Lang.F("Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.", leads[leads.Count / 2]));
             if (r.Episodes > 0) sb.AppendLine(Lang.F("ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).", r.Episodes, r.EpisodesMissed, 100.0 * r.EpisodesMissed / r.Episodes));
-            if (r.CsvSpots == 0) sb.AppendLine(Lang.T("Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO."));
+            if (r.CsvSpots == 0) sb.AppendLine(Lang.T("Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane."));
             sb.AppendLine();
             foreach (Opening o in r.Openings.Take(60))
             {

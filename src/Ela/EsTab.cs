@@ -669,7 +669,8 @@ namespace ELA
             }
             else
             {
-                sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km", c.DistKm, c.Az, 2 * c.XA, c.Middle, c.MiddleKm, 2 * c.XB));
+                if (c.Middle > 0) sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + {3} salti centrali da {4:F0} km + salto corto {5:F0} km", c.DistKm, c.Az, 2 * c.XA, c.Middle, c.MiddleKm, 2 * c.XB));
+                else sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: salto corto {2:F0} km + salto corto {3:F0} km", c.DistKm, c.Az, 2 * c.XA, 2 * c.XB));
                 sb.AppendLine(Lang.F("1) Primo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.A)));
                 sb.AppendLine(Lang.F("2) Ultimo salto corto, MUF ≥ 50 MHz: nube forte {0}", CloudText(c.B)));
                 if (c.Points.Count == 0) sb.AppendLine(Lang.T("3) Salti centrali: nessuno, le due nubi sono consecutive."));
@@ -851,7 +852,7 @@ namespace ELA
         {
             Refresh();
             inner.Select(2);
-            PrecursorAlert a = alerts.Find(x => x is ChainAlert && ((ChainAlert)x).Kind == kind);
+            PrecursorAlert a = alerts.Where(x => x is ChainAlert && ((ChainAlert)x).Kind == kind).OrderByDescending(x => x.Level).ThenByDescending(x => x.DistKm).FirstOrDefault();
             if (a != null) { selAlert = a; selAlertKey = a.Key; sel = null; selKey = null; clickLat = clickLon = double.NaN; }
             cmbMap.SelectedIndex = 1; MapMode();
             if (kind == ChainAlert.KindCorridor) map.SetView(-95, 30, 5, 60); else map.SetView(-10, 95, 20, 65);

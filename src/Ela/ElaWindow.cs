@@ -340,7 +340,10 @@ namespace ELA
             {
                 if (!Station.Cfg.GetB("catene_avviso", true)) return;
                 chainKey = c.Key;
-                lblChain.Text = "⚠ 6 m: " + c.Region;
+                // la zona lontana dalla propria stazione (per il corridoio: l'estremita' opposta a quella vicina)
+                string reg = c.Kind == ChainAlert.KindCorridor && Geo.DistanceKm(Station.Lat, Station.Lon, c.EndBLat, c.EndBLon) < Geo.DistanceKm(Station.Lat, Station.Lon, c.EndALat, c.EndALon) ? c.EndAName : c.EndBName;
+                if (reg.Length > 30) reg = reg.Substring(0, 29) + "…";
+                lblChain.Text = "⚠ 6 m " + reg;   // scritta corta: la riga della testata non va a capo
                 ToolTip.SetTip(lblChain, Lang.F("ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.", c.KindText, c.Region, c.DistKm));
                 lblChain.IsVisible = true;
                 if (Station.Cfg.GetB("catene_finestra", false) && Program.ScreenshotDir == null) ChainWindow(c);

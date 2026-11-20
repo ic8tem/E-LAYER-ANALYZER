@@ -334,6 +334,7 @@ namespace ELA
                     double az = Geo.Bearing(a.Lat, a.Lon, b.Lat, b.Lon);
                     double xa = ShortHalf(a.FoEs, Hkm), xb = ShortHalf(b.FoEs, Hkm);
                     if (double.IsNaN(xa) || double.IsNaN(xb)) continue;
+                    if (xa + dAB + xb < Precursors.MinKm) continue;                          // sotto i 2800 km non e' multi-salto (IK3XTV)
                     double eaLat, eaLon, ebLat, ebLon;
                     Geo.Destination(a.Lat, a.Lon, Geo.Norm360(az + 180), xa, out eaLat, out eaLon);
                     Geo.Destination(b.Lat, b.Lon, Geo.Norm360(Geo.Bearing(b.Lat, b.Lon, a.Lat, a.Lon) + 180), xb, out ebLat, out ebLon);
