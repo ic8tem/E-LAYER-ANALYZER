@@ -71,7 +71,7 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 
 - **Nubi forti** (quadrati arancioni): spot Es di tutto il mondo e ionosonde GIRO con foEs di almeno 11,3 MHz.
 - **Dal QTH**: primo salto corto dalla tua stazione e ultimo salto corto su un'altra nube forte lungo la stessa direzione, anche nello stesso continente (per esempio in Kazakhstan); il cerchio è la zona d'arrivo.
-- **Corridoio**: due nubi forti qualunque in senso est-ovest, per esempio **Caraibi - Penisola Iberica**; «ti riguarda» se un'estremità è entro 1200 km da te.
+- **Corridoio**: due nubi forti qualunque, in ogni direzione, per esempio **Caraibi - Penisola Iberica** o **Europa - Africa occidentale** (TEP escluso); «ti riguarda» se un'estremità è entro 1200 km da te.
 - **Cerca la nube**: c'è solo il primo salto corto; le zone azzurre dicono dove dovrebbe stare la nube del salto corto finale.
 - **ALLERTA** se i salti centrali sono coperti da nubi, **PRECURSORE** se mancano solo zone senza osservatori.
 - In IMPOSTAZIONI c'è l'**avviso** in alto (e facoltativamente una finestra) per le ALLERTE che ti riguardano.

@@ -8,15 +8,18 @@
 // e dalle ionosonde GIRO con foEs recente. Tre tipi di catena:
 //   - DAL QTH: primo salto corto dalla propria stazione su una nube forte A, ultimo salto corto su una nube forte B lungo
 //     lo stesso cerchio massimo (anche nello stesso continente, per esempio in Kazakhstan), zona d'arrivo oltre B;
-//   - CORRIDOIO: due nubi forti A e B in qualunque parte del mondo, in senso est-ovest; le due zone d'estremita' sono le
+//   - CORRIDOIO: due nubi forti A e B in qualunque parte del mondo; le due zone d'estremita' sono le
 //     stazioni che possono collegarsi (per esempio Caraibi - Europa); se la propria stazione e' in una zona d'estremita' o vicina,
 //     la riga lo dice;
 //   - CERCA LA NUBE: c'e' solo il primo salto corto; si mostrano le zone dove dovrebbe stare la nube del salto corto finale,
 //     con la ionosonda GIRO piu' vicina.
+// Direzioni: a differenza dei precursori a regioni, le catene valgono in tutte le direzioni, anche nord-sud (decisione
+// dell'autore del 20/11/2026: le aperture Europa - Niger della spedizione 5U5K, giugno 2024, sono doppio e triplo salto);
+// resta l'esclusione del TEP.
 // Livelli: ALLERTA = salti centrali tutti coperti da nubi; PRECURSORE = mancano solo punti centrali senza osservatori
 // (oceano, zone senza stazioni negli spot); le catene con un punto centrale osservato e senza nube non si mostrano.
 // Fonti: tabella IK3XTV [3]; esperienza IC8TEM del primo salto corto [4]; DF5AI (UKSMG 1999) sul modo a salto corto e i suoi
-// multipli; EI7GL (UN7MBH, 70 MHz) per il Kazakhstan; Denisowski (Rohde & Schwarz 2023) per durata e spostamento delle nubi.
+// multipli; EI7GL (UN7MBH, 70 MHz) per il Kazakhstan.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,7 +117,6 @@ namespace ELA
             along = at * Geo.R * (Math.Cos(t13 - t12) >= 0 ? 1 : -1);
         }
 
-        static bool Transverse(double az) { double dev = Math.Abs(((az % 180) + 180) % 180 - 90); return 90 - dev >= Precursors.MinDevFromMeridian; }
 
         // nome della zona: regione piu' vicina entro 1500 km, altrimenti il campo Maidenhead
         public static string ZoneName(double lat, double lon)
@@ -253,8 +255,7 @@ namespace ELA
                 double dA = Geo.DistanceKm(sLat, sLon, a.Lat, a.Lon);
                 if (dA < ShortMinKm / 2 || dA > ShortMaxKm / 2) continue;
                 if (a.FoEs * Geo.SecantFactor(2 * dA, Hkm) < F50) continue;               // condizione 1
-                double az = Geo.Bearing(sLat, sLon, a.Lat, a.Lon);
-                if (!Transverse(az)) continue;
+                double az = Geo.Bearing(sLat, sLon, a.Lat, a.Lon);   // anche nord-sud (Europa - Africa occidentale, decisione dell'autore 20/11/2026)
                 ChainAlert best = null;
                 foreach (StrongCloud b in strong)
                 {
@@ -320,7 +321,7 @@ namespace ELA
             return res;
         }
 
-        // CORRIDOIO: due nubi forti qualunque, in senso est-ovest
+        // CORRIDOIO: due nubi forti qualunque, in ogni direzione (TEP escluso)
         static List<ChainAlert> Corridor(double Hkm, List<StrongCloud> strong, List<Act> act, List<double[]> stations, List<ChainAlert> fromQth, bool hasStation, double sLat, double sLon)
         {
             List<ChainAlert> res = new List<ChainAlert>();
@@ -331,7 +332,6 @@ namespace ELA
                     double dAB = Geo.DistanceKm(a.Lat, a.Lon, b.Lat, b.Lon);
                     if (dAB < CorridorMinKm || dAB > CorridorMaxKm) continue;
                     double az = Geo.Bearing(a.Lat, a.Lon, b.Lat, b.Lon);
-                    if (!Transverse(az)) continue;
                     double xa = ShortHalf(a.FoEs, Hkm), xb = ShortHalf(b.FoEs, Hkm);
                     if (double.IsNaN(xa) || double.IsNaN(xb)) continue;
                     double eaLat, eaLon, ebLat, ebLon;

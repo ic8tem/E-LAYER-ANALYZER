@@ -687,7 +687,7 @@ namespace ELA
                     if (!double.IsNaN(c.NearKm)) sb.AppendLine(c.NearKm <= Chains.NearMeKm ? Lang.F("La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.", c.NearKm) : Lang.F("La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.", c.NearKm));
                 }
             }
-            sb.AppendLine(Lang.T("Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti; le nubi durano da minuti a un'ora e si spostano lentamente (Denisowski 2023): a parità di livello vengono prima le più recenti."));
+            sb.AppendLine(Lang.T("Condizioni dell'autore (IC8TEM): primo e ultimo salto corto (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz; i salti centrali fino a 2200 km chiedono circa 9,3 MHz. Nubi degli ultimi 30 minuti: a parità di livello vengono prima le più recenti. Le catene valgono in tutte le direzioni, anche nord-sud; il TEP resta escluso."));
         }
 
         void AlertDetails(StringBuilder sb, PrecursorAlert a)
