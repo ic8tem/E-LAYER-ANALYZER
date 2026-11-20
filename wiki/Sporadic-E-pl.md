@@ -75,5 +75,7 @@ W podzakładce **Prekursory wieloskoku** program szuka łańcuchów wieloskoku n
 - **Szukaj obłoku**: jest tylko pierwszy krótki skok; błękitne strefy pokazują, gdzie powinien być obłok końcowego krótkiego skoku.
 - **ALERT**, jeśli skoki środkowe są pokryte obłokami, **PREKURSOR**, jeśli brakuje tylko stref bez obserwatorów.
 - W USTAWIENIACH jest **komunikat** u góry (opcjonalnie także okno) dla ALERTÓW, które cię dotyczą.
+- Łańcuchy, które docierają **na otwarte morze** lub tam, gdzie nie ma stacji (CALL3 i spoty), nie są pokazywane.
+- **Zasięg mojego sygnału na 6 m** (różowe punkty): gdzie dociera twój sygnał na 50 MHz po 2-5 skokach, nad obłokami z ostatnich 30 minut szacowanymi ze spotów ze wszystkich pasm (28-144 MHz) i z jonosond; tylko tam, gdzie są stacje.
 
 ![Korytarz](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

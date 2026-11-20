@@ -75,5 +75,7 @@ Alamsakis **Mitmehüppelise levi eelkäijad** otsib programm 50 MHz mitmehüppel
 - **Otsi pilve**: on ainult esimene lühike hüpe; helesinised tsoonid näitavad, kus peaks olema viimase lühikese hüppe pilv.
 - **HOIATUS**, kui keskmised hüpped on pilvedega kaetud, **EELKÄIJA**, kui puuduvad ainult vaatlejateta tsoonid.
 - SEADETES on üleval **teade** (soovi korral ka aken) sind puudutavate HOIATUSTE kohta.
+- Ahelaid, mis jõuavad **avamerele** või sinna, kus jaamu pole (CALL3 ja spotid), ei näidata.
+- **Minu signaali leviala 6 m-l** (roosad punktid): kuhu sinu 50 MHz signaal jõuab pärast 2-5 hüpet, üle viimase 30 minuti pilvede, mis on hinnatud kõigi sagedusalade (28-144 MHz) spottidest ja ionosondidelt; ainult seal, kus on jaamu.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

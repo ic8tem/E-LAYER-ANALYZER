@@ -75,5 +75,7 @@ Pakortelėje **Kelių šuolių pirmtakai** programa ieško kelių šuolių grand
 - **Ieškoti debesies**: yra tik pirmas trumpas šuolis; žydros zonos rodo, kur turėtų būti paskutinio trumpo šuolio debesis.
 - **ĮSPĖJIMAS**, jei viduriniai šuoliai padengti debesimis, **PIRMTAKAS**, jei trūksta tik zonų be stebėtojų.
 - NUSTATYMUOSE yra **pranešimas** viršuje (pasirinktinai ir langas) apie jus liečiančius ĮSPĖJIMUS.
+- Grandinės, pasiekiančios **atvirą jūrą** arba vietas be stočių (CALL3 ir spotai), nerodomos.
+- **Mano signalo aprėptis 6 m juostoje** (rožiniai taškai): kur jūsų 50 MHz signalas nusileidžia po 2-5 šuolių, virš paskutinių 30 minučių debesų, įvertintų iš visų juostų (28-144 MHz) spotų ir jonozondų; tik ten, kur yra stočių.
 
 ![Koridorius](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

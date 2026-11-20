@@ -75,5 +75,7 @@ Efst til hægri á kortinu birtist samantekt N0NBH (E-skip fyrir valda heimsálf
 - **Leita að skýi**: aðeins fyrsta stutta stökkið er til staðar; ljósbláu svæðin sýna hvar ský síðasta stutta stökksins ætti að vera.
 - **VIÐVÖRUN** ef miðstökkin eru þakin skýjum, **FYRIRBOÐI** ef aðeins vantar svæði án athugenda.
 - Í STILLINGAR er **tilkynning** efst (valfrjálst einnig gluggi) fyrir VIÐVARANIR sem varða þig.
+- Keðjur sem enda **á opnu hafi** eða þar sem engar stöðvar eru (CALL3 og spot) eru ekki sýndar.
+- **Lendingarsvæði merkis míns á 6 m** (bleikir punktar): hvar merkið þitt á 50 MHz lendir eftir 2-5 stökk, yfir skýjum síðustu 30 mínútna sem áætluð eru út frá spotum allra banda (28-144 MHz) og jónósöndum; aðeins þar sem stöðvar eru.
 
 ![Gangur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
