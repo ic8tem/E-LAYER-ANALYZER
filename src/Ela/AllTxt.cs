@@ -17,7 +17,9 @@ namespace ELA
 {
     public static class AllTxt
     {
-        static readonly Regex rxGrid = new Regex(@"^[A-R]{2}[0-9]{2}$");
+        static readonly Regex rxGridRaw = new Regex(@"^[A-R]{2}[0-9]{2}$");
+        // "RR73" ha la forma di un locator (Pacifico, vicino al polo nord) ma e' il saluto finale del QSO: non e' mai una posizione
+        static bool IsGrid(string s) { return s != "RR73" && rxGridRaw.IsMatch(s); }
         static readonly Regex rxCall = new Regex(@"^([A-Z0-9]{1,3}[0-9][A-Z0-9]{0,4}[A-Z](/[A-Z0-9]+)?|[A-Z0-9]+/[A-Z0-9]{1,3}[0-9][A-Z0-9]*[A-Z])$");
         static readonly Regex rxJtdxHead = new Regex(@"^(\d{8}_\d{6})\s+([\d.]+) MHz\s");
         static readonly Regex rxWsjt = new Regex(@"^(\d{6}_\d{6})\s+([\d.]+)\s+(Rx|Tx)\s+(\S+)\s+(-?\d+)\s+(-?[\d.]+)\s+(\d+)\s+(.*)$");
@@ -41,9 +43,9 @@ namespace ELA
                 if (t.Length >= 2 && t[0] == "CQ")
                 {
                     int j = 1; if (t.Length > 2 && Array.IndexOf(CqWords, t[1]) >= 0) j = 2;
-                    own = t[j]; if (t.Length > j + 1 && rxGrid.IsMatch(t[j + 1])) og = t[j + 1];
+                    own = t[j]; if (t.Length > j + 1 && IsGrid(t[j + 1])) og = t[j + 1];
                 }
-                else if (t.Length >= 2) { own = t[1]; if (t.Length > 2 && rxGrid.IsMatch(t[2])) og = t[2]; }
+                else if (t.Length >= 2) { own = t[1]; if (t.Length > 2 && IsGrid(t[2])) og = t[2]; }
                 if (own == null || !rxCall.IsMatch(own)) continue;
                 int v; n.TryGetValue(own, out v); n[own] = v + 1;
                 if (og != null) g[own] = og;
@@ -94,9 +96,9 @@ namespace ELA
                 {
                     int j = 1; if (t.Length > 2 && Array.IndexOf(CqWords, t[1]) >= 0) j = 2;
                     if (j >= t.Length) continue;
-                    snd = t[j]; if (t.Length > j + 1 && rxGrid.IsMatch(t[j + 1])) g = t[j + 1];
+                    snd = t[j]; if (t.Length > j + 1 && IsGrid(t[j + 1])) g = t[j + 1];
                 }
-                else { rcv = t[0]; snd = t[1]; if (t.Length > 2 && rxGrid.IsMatch(t[2])) g = t[2]; }
+                else { rcv = t[0]; snd = t[1]; if (t.Length > 2 && IsGrid(t[2])) g = t[2]; }
                 if (snd.StartsWith("<") || !rxCall.IsMatch(snd)) continue;
                 if (rcv != null && (rcv.StartsWith("<") || !rxCall.IsMatch(rcv))) rcv = null;
                 if (g != null) grids[snd] = g;
