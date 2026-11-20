@@ -32,3 +32,9 @@ Mappa di **Mercatore** a centro libero: rotella = zoom, trascina = sposta.
 ## Dettagli
 
 Per la tratta scelta: distanza e giudizio della tabella IK3XTV, azimut nei due sensi, salti uguali con i quadrati dei punti di riflessione, primo salto corto entro 1200 km (esperienza IC8TEM) e, con la casella foEs, la foEs minima.
+
+## Verifica delle catene (dalla versione 0.6.0)
+
+**Carica spot CSV** (anche più file esportati da NUBI Es NEL TEMPO) e **Verifica le catene**: il programma rigioca sulle aperture multi-salto della stazione 1 la regola delle catene a salti corti e scrive quante aperture avrebbe anticipato (ALLERTA, PRECURSORE o solo il primo salto corto), l'anticipo mediano e le allerte non seguite da QSO multi-salto. Senza spot CSV le nubi vengono solo dal log, e l'ultimo salto corto quasi non si vede.
+
+![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

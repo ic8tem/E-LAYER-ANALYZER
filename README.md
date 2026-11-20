@@ -33,6 +33,7 @@ Non esistono versioni per Linux i686 (PC a 32 bit) e OpenBSD, perché .NET non e
 | BENCHMARK Es | log ADIF intero (anche di altre stazioni): QSO per giornata e ora, skip per settori, foEs, verifica del multi-salto, spostamento delle nubi |
 | IONOSONDE | foEs, foF2 e MUF(D) in diretta dalle ionosonde GIRO (ogni 15 minuti), grafico di 24 ore, MUF dell'E-sporadico a 1000-2400 km con le bande che si aprono, confronto con la foEs ricavata dagli spot |
 | NUBI Es NEL TEMPO | nubi Es passo per passo (5-15 minuti) su celle di 1-4°, foEs minima e NmE con il metodo di Chartier 2022, da spot della sessione, log ADIF o spot CSV |
+| Catene multi-salto 50 MHz | dentro SPORADIC-E, Precursori multi-salto: primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali (condizioni di IC8TEM), catene dal QTH, corridoi in tutto il mondo e «cerca la nube», avviso in alto, verifica nel BENCHMARK 50 MHz con gli spot CSV |
 | F.A.I. | Scatter trail degli scatter point per una coppia di stazioni e curve di iso-riflessione (IGRF-14) |
 | METEOR SCATTER | YA-MS completo (ultima versione) |
 | AURORA | ovale OVATION, Kp, vento solare (NOAA SWPC), Scatter trail e iso-riflessione aurorale, spot <AU>/<AUR> con il calcolo |

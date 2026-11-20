@@ -62,3 +62,18 @@ In alto a destra sulla mappa compare la sintesi di N0NBH (E-skip del continente 
 - **144 MHz**: E-sporadico da 900 km, con conferma; gli spot Q65 e JT65 sono EME e si scartano, salvo `<ES>` nel testo.
 - G0ISW (Propagation identification, 2024) vede l'E-sporadico più corto oltre 400 km in 50 e 70 MHz e oltre 1400 km in 144 MHz: le regole dell'autore concordano in 50 e 70 MHz e sono più larghe in 144 MHz, ma chiedono una conferma.
 - L'ordine in cui si applicano tutte le regole, con i valori in uso, si vede in **[IMPOSTAZIONI](Impostazioni-it)** › Smistamento degli spot.
+
+## Catene a salti corti (dalla versione 0.6.0)
+
+![Catena dal QTH](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1n_catena_dal_qth.png)
+
+Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del multi-salto in 50 MHz con le tre condizioni dell'autore: **primo e ultimo salto corto** (500-1200 km) con MUF intorno ai 50 MHz, che chiedono una foEs di 11-21 MHz, e **salti centrali** fino a 2200 km, che chiedono circa 9,3 MHz.
+
+- **Nubi forti** (quadrati arancioni): spot Es di tutto il mondo e ionosonde GIRO con foEs di almeno 11,3 MHz.
+- **Dal QTH**: primo salto corto dalla tua stazione e ultimo salto corto su un'altra nube forte lungo la stessa direzione, anche nello stesso continente (per esempio in Kazakhstan); il cerchio è la zona d'arrivo.
+- **Corridoio**: due nubi forti qualunque in senso est-ovest, per esempio **Caraibi - Penisola Iberica**; «ti riguarda» se un'estremità è entro 1200 km da te.
+- **Cerca la nube**: c'è solo il primo salto corto; le zone azzurre dicono dove dovrebbe stare la nube del salto corto finale.
+- **ALLERTA** se i salti centrali sono coperti da nubi, **PRECURSORE** se mancano solo zone senza osservatori.
+- In IMPOSTAZIONI c'è l'**avviso** in alto (e facoltativamente una finestra) per le ALLERTE che ti riguardano.
+
+![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
