@@ -477,7 +477,7 @@ namespace ELA
                 list.Add("data/lingue/chiavi.txt"); list.Add("data/lingue/ela-chiavi.txt");
                 if (Lang.Code != "it") { list.Add("data/lingue/" + Lang.Code + ".txt"); list.Add("data/lingue/ela-" + Lang.Code + ".txt"); }
                 string suf = Lang.Code == "it" ? "" : "_" + Lang.Code;
-                foreach (string d in new[] { "ela_fonti", "ela_documento_tecnico", "ela_manuale", "ela_relazione" }) list.Add("data/" + d + suf + ".txt");
+                foreach (string d in new[] { "ela_fonti", "ela_documento_tecnico", "ela_manuale", "ela_relazione", "ela_abaco" }) list.Add("data/" + d + suf + ".txt");
                 list.Add("data/igrf14.csv"); list.Add("data/sciami.csv"); list.Add("data/call3.txt"); list.Add("data/aurora_benchmark.txt");
             }
             foreach (string rel in list)

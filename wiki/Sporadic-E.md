@@ -76,6 +76,8 @@ In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chai
 - **ALERT** if the middle hops are covered by clouds, **PRECURSOR** if only zones without observers are missing.
 - In SETTINGS there is the **warning** at the top (and optionally a window) for the ALERTS that concern you.
 - Chains that end **in the open sea** or where there are no stations (CALL3 and spots) are not shown.
+- **Equal double hop** (from version 0.6.3, hops «2 =»): up to about 4700 km, for example towards Kazakhstan, with the cloud at one quarter of the path as in the method ITU-R P.534-6.
+- The **HOP CHART** tab summarises how many hops are needed on 50 MHz from 500 to 12000 km, with the foEs of each hop and the sources.
 - **Footprint of my signal on 6 m** (pink dots): where your 50 MHz signal lands after 2-5 hops, over the clouds of the last 30 minutes estimated from the spots of all bands (28-144 MHz) and from the ionosondes; only where there are stations.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

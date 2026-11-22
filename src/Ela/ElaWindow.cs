@@ -179,6 +179,9 @@ namespace ELA
                 "E-LAYER ANALYZER - manuale d'uso.docx", Lang.T("Come si usa il programma, linguetta per linguetta")));
             tabs.Add(Lang.T("RELAZIONE TECNICA"), DocTab.Build(LocFile(dataDir, "ela_relazione", ".txt"), LocFile(dataDir, "ela_relazione", ".docx"),
                 "E-LAYER ANALYZER - relazione tecnica.docx", Lang.T("Le scelte che hanno portato alla realizzazione del programma")));
+            // ABACO DEI SALTI (dalla 0.6.3, richiesta dell'autore del 22/11/2026): documento di sintesi, 500-12000 km a passo 100 km
+            tabs.Add(Lang.T("ABACO DEI SALTI"), DocTab.Build(LocFile(dataDir, "ela_abaco", ".txt"), LocFile(dataDir, "ela_abaco", ".docx"),
+                "E-LAYER ANALYZER - abaco dei salti.docx", Lang.T("Quanti salti servono in 50 MHz da 500 a 12000 km, e da quali fonti")));
             tabs.SelectionChanged += i =>
             {
                 if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); else if (esTabs.Selected == 3) iono.Activate(); else if (esTabs.Selected == 4) nubi.OnShow(); }
@@ -542,7 +545,7 @@ namespace ELA
                 string b50demo2 = Path.Combine(LogStore.Dir, "benchmark50_prova2.adi");
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
-                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "6b_impostazioni", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione" };
+                string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "6b_impostazioni", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione", "11_abaco" };
                 string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "1m_ionosonde", "1l_nubi_es_nel_tempo" };
                 await nubi.LoadFile(bdemo);   // NUBI Es NEL TEMPO: il log di prova del BENCHMARK Es
                 for (int i = 0; i < tabs.Count; i++)

@@ -76,6 +76,8 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 - **ALLERTA** se i salti centrali sono coperti da nubi, **PRECURSORE** se mancano solo zone senza osservatori.
 - In IMPOSTAZIONI c'è l'**avviso** in alto (e facoltativamente una finestra) per le ALLERTE che ti riguardano.
 - Le catene che arrivano **in mare aperto** o dove non ci sono stazioni (CALL3 e spot) non si mostrano.
+- **Doppio salto uguale** (dalla versione 0.6.3, salti «2 =»): fino a circa 4700 km, per esempio verso il Kazakhstan, con la nube a un quarto della tratta come nel metodo ITU-R P.534-6.
+- La linguetta **ABACO DEI SALTI** riassume quanti salti servono in 50 MHz da 500 a 12000 km, con la foEs di ogni salto e le fonti.
 - **Proiezione del mio segnale in 6 m** (punti rosa): dove atterra il tuo segnale in 50 MHz dopo 2-5 salti, sopra le nubi degli ultimi 30 minuti stimate dagli spot di tutte le bande (28-144 MHz) e dalle ionosonde; solo dove ci sono stazioni.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
