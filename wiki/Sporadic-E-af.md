@@ -76,6 +76,8 @@ In die suboortjie **Multi-sprongvoorlopers** soek die program die multi-sprongke
 - **WAARSKUWING** as die middelspronge deur wolke gedek is, **VOORLOPER** as slegs sones sonder waarnemers ontbreek.
 - In INSTELLINGS is daar die **kennisgewing** bo (en opsioneel 'n venster) vir die WAARSKUWINGS wat jou raak.
 - Kettings wat **in die oop see** aankom of waar daar geen stasies is nie (CALL3 en spots), word nie gewys nie.
+- **Gelyke dubbele sprong** (vanaf weergawe 0.6.3, spronge «2 =»): tot ongeveer 4700 km, byvoorbeeld na Kasakstan, met die wolk op 'n kwart van die roete soos in die metode ITU-R P.534-6.
+- Die oortjie **SPRONGTABEL** som op hoeveel spronge op 50 MHz nodig is van 500 tot 12000 km, met elke sprong se foEs en die bronne.
 - **Voetspoor van my sein op 6 m** (pienk punte): waar jou sein op 50 MHz ná 2-5 spronge land, oor die wolke van die laaste 30 minute wat uit die spots van alle bande (28-144 MHz) en uit die ionosondes geskat is; slegs waar daar stasies is.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
