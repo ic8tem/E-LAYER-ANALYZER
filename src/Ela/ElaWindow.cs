@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -231,7 +232,7 @@ namespace ELA
                 timer.Stop();
                 Ntp.Changed -= OnNtp;
                 Updater.Changed -= OnUpd;
-                if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); SpotStore.ClearAll(); }   // a ogni chiusura il database degli spot si svuota
+                if (!replaced) { SaveAll(); ms.Shutdown(true); dc.Shutdown(); AprsEs.Stop(); SpotStore.ClearAll(); }   // a ogni chiusura il database degli spot si svuota
             };
         }
 
@@ -344,6 +345,7 @@ namespace ELA
 
         // ALLERTA F.A.I. (FaiAlert.cs, dal 22/11/2026): la linguetta F.A.I. lampeggia; il testo va in cima alla linguetta
         static ElaWindow Current;
+        static bool aprsStarted;
         static void FaiTick()
         {
             ElaWindow w = Current;
@@ -352,6 +354,9 @@ namespace ELA
             bool on = Station.Cfg.GetB("fai_avviso", true) && FaiAlert.Level > 0;
             w.fai.SetAlert(FaiAlert.Text);
             w.tabs.SetBlink(1, on, on ? FaiAlert.Text : "");
+            // ALLERTA 144 MHz APRS (AprsEs.cs): lampeggia SPORADIC-E se il salto ripetuto e' entro 2400 km dalla propria stazione
+            List<AprsAlert> ap = AprsEs.Compute().Where(a => double.IsNaN(a.NearKm) || a.NearKm <= AprsEs.MaxKm).ToList();
+            w.tabs.SetBlink(0, ap.Count > 0, ap.Count > 0 ? Lang.F("ALLERTA 144 MHz: salti APRS ripetuti oltre i 900 km su {0} ({1})", ap[0].Region, ap[0].Calls) : "");
         }
 
         void OnChain(ChainAlert c)
@@ -422,6 +427,15 @@ namespace ELA
                 SpotStore.Init(dataDir);
                 SpotStore.Archive = Station.Cfg.GetB("spot_archivio", true);
                 SpotStore.LoadRecent();
+                if (!aprsStarted && Program.ScreenshotDir == null)
+                {
+                    // APRS-IS in sola lettura per l'E-sporadico in 144 MHz (AprsEs.cs, dal 22/11/2026): una sola volta per esecuzione
+                    aprsStarted = true;
+                    AprsEs.Enabled = Station.Cfg.GetB("aprs_es", true);
+                    AprsEs.NewSpot += s => Dispatcher.UIThread.Post(() => SpotStore.Add(s));
+                    Station.Changed += () => { if (AprsEs.Enabled) AprsEs.Start(); };
+                    AprsEs.Start();
+                }
                 Giro.Init(dataDir);   // archivio delle ionosonde GIRO (ultime 48 ore); i dati nuovi arrivano all'apertura di IONOSONDE
                 iono.Refresh();
                 if (tabs.Selected == 0 && esTabs.Selected == 3) iono.Activate();   // IONOSONDE riaperta all'avvio

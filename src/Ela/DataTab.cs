@@ -560,7 +560,7 @@ namespace ELA
                 n++;
                 tAll.Rows.Add(new TableRow
                 {
-                    Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.Source == 9 ? Lang.T("prova") : SpotStore.SourceNames[Math.Max(0, Math.Min(3, s.Source))],
+                    Cells = new[] { s.Utc.ToString("HH:mm", CultureInfo.InvariantCulture), s.Source == 9 ? Lang.T("prova") : SpotStore.SourceNames[Math.Max(0, Math.Min(4, s.Source))],
                         s.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), s.Band, s.DxCall, s.LocDx, s.Spotter, s.LocSpotter, Geo.Fmt(s.DistanceKm, 0), s.Prop, s.Comment },
                     Fore = EsTab.BandColor(s.Band)
                 });

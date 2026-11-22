@@ -126,6 +126,12 @@ namespace ELA
             root.Children.Add(Section(Lang.T("Archivio degli spot"), Pal.Azure, cArc,
                 Txt(Lang.T("Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione."), true)));
 
+            // APRS-IS per l'E-sporadico in 144 MHz (dal 22/11/2026)
+            CheckBox cAprs = Ui.C(Lang.T("APRS-IS in sola lettura: salti APRS in 2 m oltre i 900 km ripetuti a breve tempo = ALLERTA 144 MHz"), Station.Cfg.GetB("aprs_es", true));
+            cAprs.IsCheckedChanged += (s, e) => { Station.Cfg.Set("aprs_es", cAprs.IsChecked == true); AprsEs.Enabled = cAprs.IsChecked == true; if (AprsEs.Enabled) AprsEs.Start(); else AprsEs.Stop(); Station.Save(); };
+            root.Children.Add(Section(Lang.T("APRS in 144 MHz"), Pal.Red, cAprs,
+                Txt(Lang.T("Collegamento a rotate.aprs2.net in sola lettura (senza password), con i pacchetti entro 3000 km dalla tua stazione. Un salto vale solo fra stazioni di posizione nota (sorgente, digipeater, IGate), come in LIVETROPOVHF; conta solo se si ripete entro 10 minuti con il punto medio entro 150 km."), true)));
+
             // ALLERTA F.A.I. dopo l'E-sporadico (dal 22/11/2026)
             CheckBox cFai = Ui.C(Lang.T("La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso"), Station.Cfg.GetB("fai_avviso", true));
             cFai.IsCheckedChanged += (s, e) => { Station.Cfg.Set("fai_avviso", cFai.IsChecked == true); Station.Save(); };

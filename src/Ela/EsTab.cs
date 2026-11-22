@@ -406,6 +406,18 @@ namespace ELA
             tPre.Rows.Clear();
             foreach (PrecursorAlert a in alerts)
             {
+                AprsAlert aa = a as AprsAlert;
+                if (aa != null)
+                {
+                    tPre.Rows.Add(new TableRow
+                    {
+                        Cells = new[] { aa.LevelText, aa.Region, aa.Band, "1", Lang.F("APRS ripetuto ({0})", aa.N),
+                            aa.DistKm.ToString("F0", CultureInfo.CurrentCulture), double.IsNaN(aa.Az) ? "-" : aa.Az.ToString("F0", CultureInfo.InvariantCulture) },
+                        Fore = Pal.Red,
+                        Tag = a
+                    });
+                    continue;
+                }
                 ProdromeAlert pa = a as ProdromeAlert;
                 if (pa != null)
                 {
@@ -638,15 +650,33 @@ namespace ELA
             return best.Values.ToList();
         }
 
+        // verifica in diretta della proiezione (dal 22/11/2026): chi ti ascolta in 50 MHz oltre i 2800 km (PSKReporter, cluster,
+        // RBN: spot con il tuo nominativo come DX) cade entro 500 km da un punto rosa calcolato in quel momento?
+        static readonly HashSet<string> projSeen = new HashSet<string>();
+        static int projHeard, projInside;
+        void ProjCheck()
+        {
+            if (!Station.Valid || Station.Call.Length < 3 || Chains.LastProjection.Count == 0) return;
+            foreach (Spot s in SpotStore.Recent(15, x => x.HasBoth && x.Band == "6m" && string.Equals(x.DxCall, Station.Call, StringComparison.OrdinalIgnoreCase)))
+            {
+                if (Geo.DistanceKm(Station.Lat, Station.Lon, s.LatS, s.LonS) < Precursors.MinKm) continue;
+                if (!projSeen.Add(s.Spotter + "|" + s.Utc.ToString("yyyyMMddHH", CultureInfo.InvariantCulture))) continue;   // una volta per ora e stazione
+                projHeard++;
+                if (Chains.LastProjection.Any(p => Geo.DistanceKm(p.Lat, p.Lon, s.LatS, s.LonS) <= 500)) projInside++;
+            }
+        }
+
         string ProjText()
         {
-            if (chkProj.IsChecked != true || !Station.Valid || Chains.LastProjection.Count == 0) return "";
+            try { ProjCheck(); } catch { }
+            string ver = projHeard > 0 ? " " + Lang.F("Verifica della proiezione in questa sessione: {0} stazioni ti hanno ascoltato in 50 MHz oltre i 2800 km, {1} entro 500 km da un punto rosa.", projHeard, projInside) : "";
+            if (chkProj.IsChecked != true || !Station.Valid || Chains.LastProjection.Count == 0) return ver;
             int sea;
             List<Chains.Landing> l = ProjShown(out sea);
-            if (l.Count == 0) return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: atterra solo in mare aperto o dove non ci sono stazioni ({0} quadrati).", sea);
+            if (l.Count == 0) return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: atterra solo in mare aperto o dove non ci sono stazioni ({0} quadrati).", sea) + ver;
             string zones = string.Join(", ", l.GroupBy(x => Chains.RegionName(x.Lat, x.Lon)).OrderByDescending(g => g.Max(x => x.DistKm)).Take(4)
                                        .Select(g => g.Key + " (" + (g.Min(x => x.Hops) == g.Max(x => x.Hops) ? g.Min(x => x.Hops).ToString(CultureInfo.InvariantCulture) : g.Min(x => x.Hops) + "-" + g.Max(x => x.Hops)) + ")"));
-            return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: {0} quadrati con stazioni, fino a {1:F0} km; zone (salti): {2}. Non mostrati {3} quadrati in mare aperto o senza stazioni.", l.Count, l.Max(x => x.DistKm), zones, sea);
+            return " " + Lang.F("Proiezione del tuo segnale in 50 MHz: {0} quadrati con stazioni, fino a {1:F0} km; zone (salti): {2}. Non mostrati {3} quadrati in mare aperto o senza stazioni.", l.Count, l.Max(x => x.DistKm), zones, sea) + ver;
         }
 
         void DrawProjection()
@@ -675,6 +705,18 @@ namespace ELA
                 if (selAlert != null && !isSel) continue;
                 ChainAlert ca = a as ChainAlert;
                 if (ca != null) { DrawChain(ca, isSel, selAlert != null); continue; }
+                AprsAlert aa = a as AprsAlert;
+                if (aa != null)
+                {
+                    foreach (Spot s in SpotStore.Recent(AprsEs.KeepMin, x => x.Source == 4 && x.HasBoth))
+                    {
+                        double la, lo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                        if (Geo.DistanceKm(la, lo, aa.MidLat, aa.MidLon) > 250) continue;
+                        map.Lines.Add(MapView.GreatCircle(s.LatS, s.LonS, s.LatD, s.LonD, Pal.A((byte)(isSel ? 255 : 170), Pal.Red), isSel ? 2.6 : 1.4));
+                    }
+                    if (isSel) map.Markers.Add(new MapMarker { Lat = aa.MidLat, Lon = aa.MidLon, Radius = 0, Label = Lang.T("APRS 144 MHz"), LabelColor = Pal.Red });
+                    continue;
+                }
                 ProdromeAlert pa = a as ProdromeAlert;
                 if (pa != null)
                 {
@@ -812,6 +854,15 @@ namespace ELA
         {
             ChainAlert ca = a as ChainAlert;
             if (ca != null) { ChainDetails(sb, ca); return; }
+            AprsAlert aa = a as AprsAlert;
+            if (aa != null)
+            {
+                sb.AppendLine(Lang.F("ALLERTA 144 MHz da APRS: {0} salti radio APRS in 2 m oltre i 900 km negli ultimi 30 minuti, punto medio su {1} ({2}), ultimo alle {3:HH:mm} UTC.", aa.N, aa.Region, Geo.LatLonToLoc(aa.MidLat, aa.MidLon, 4), aa.Last));
+                sb.AppendLine(Lang.F("Stazioni: {0}", aa.Calls));
+                if (!double.IsNaN(aa.NearKm)) sb.AppendLine(Lang.F("Il punto medio è a {0:F0} km dalla tua stazione (azimut {1:F0}°).", aa.NearKm, aa.Az));
+                sb.AppendLine(Lang.T("Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura)."));
+                return;
+            }
             ProdromeAlert pa = a as ProdromeAlert;
             if (pa != null)
             {
