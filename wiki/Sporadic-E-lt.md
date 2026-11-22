@@ -76,6 +76,8 @@ Pakortelėje **Kelių šuolių pirmtakai** programa ieško kelių šuolių grand
 - **ĮSPĖJIMAS**, jei viduriniai šuoliai padengti debesimis, **PIRMTAKAS**, jei trūksta tik zonų be stebėtojų.
 - NUSTATYMUOSE yra **pranešimas** viršuje (pasirinktinai ir langas) apie jus liečiančius ĮSPĖJIMUS.
 - Grandinės, pasiekiančios **atvirą jūrą** arba vietas be stočių (CALL3 ir spotai), nerodomos.
+- **Vienodas dvigubas šuolis** (nuo 0.6.3 versijos, šuoliai «2 =»): iki maždaug 4700 km, pavyzdžiui, į Kazachstaną, su debesiu trasos ketvirtadalyje kaip metode ITU-R P.534-6.
+- Kortelė **ŠUOLIŲ LENTELĖ** apibendrina, kiek šuolių reikia 50 MHz juostoje nuo 500 iki 12000 km, su kiekvieno šuolio foEs ir šaltiniais.
 - **Mano signalo aprėptis 6 m juostoje** (rožiniai taškai): kur jūsų 50 MHz signalas nusileidžia po 2-5 šuolių, virš paskutinių 30 minučių debesų, įvertintų iš visų juostų (28-144 MHz) spotų ir jonozondų; tik ten, kur yra stočių.
 
 ![Koridorius](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

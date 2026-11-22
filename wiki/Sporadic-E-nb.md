@@ -76,6 +76,8 @@ I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihop
 - **ALARM** hvis de midtre hoppene er dekket av skyer, **FORLØPER** hvis det bare mangler soner uten observatører.
 - I INNSTILLINGER finnes **varselet** øverst (og valgfritt et vindu) for de ALARMENE som angår deg.
 - Kjeder som ender **på åpent hav** eller der det ikke finnes stasjoner (CALL3 og spot), vises ikke.
+- **Likt dobbelthopp** (fra versjon 0.6.3, hopp «2 =»): opp til rundt 4700 km, for eksempel mot Kasakhstan, med skyen ved en firedel av strekningen som i metoden ITU-R P.534-6.
+- Fanen **HOPPTABELL** oppsummerer hvor mange hopp som trengs på 50 MHz fra 500 til 12000 km, med foEs for hvert hopp og kildene.
 - **Hvor signalet mitt lander på 6 m** (rosa punkter): hvor signalet ditt på 50 MHz lander etter 2-5 hopp, over skyene fra de siste 30 minuttene som er estimert ut fra spot på alle bånd (28-144 MHz) og fra ionosondene; bare der det finnes stasjoner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

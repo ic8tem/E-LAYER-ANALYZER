@@ -76,6 +76,8 @@ I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp 
 - **LARM** om mellanhoppen är täckta av moln, **FÖREBUD** om det bara saknas zoner utan observatörer.
 - I INSTÄLLNINGAR finns **varningen** överst (och valfritt ett fönster) för de LARM som berör dig.
 - Kedjor som slutar **på öppet hav** eller där det inte finns stationer (CALL3 och spots) visas inte.
+- **Lika dubbelhopp** (från version 0.6.3, hopp ”2 =”): upp till ungefär 4700 km, till exempel mot Kazakstan, med molnet vid en fjärdedel av sträckan som i metoden ITU-R P.534-6.
+- Fliken **HOPPTABELL** sammanfattar hur många hopp som behövs på 50 MHz från 500 till 12000 km, med varje hopps foEs och källorna.
 - **Var min signal landar på 6 m** (rosa punkter): var din signal på 50 MHz landar efter 2-5 hopp, över molnen från de senaste 30 minuterna som uppskattats utifrån spots på alla band (28-144 MHz) och från jonosonderna; bara där det finns stationer.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

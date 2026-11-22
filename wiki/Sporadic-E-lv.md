@@ -76,6 +76,8 @@ Apakšcilnē **Vairāklēcienu priekšvēstneši** programma meklē vairāklēci
 - **BRĪDINĀJUMS**, ja vidējie lēcieni ir nosegti ar mākoņiem, **PRIEKŠVĒSTNESIS**, ja trūkst tikai zonu bez novērotājiem.
 - IESTATĪJUMOS ir **paziņojums** augšā (pēc izvēles arī logs) par BRĪDINĀJUMIEM, kas attiecas uz jums.
 - Ķēdes, kas nonāk **atklātā jūrā** vai vietās bez stacijām (CALL3 un spoti), netiek rādītas.
+- **Vienāds dubultlēciens** (kopš versijas 0.6.3, lēcieni «2 =»): līdz aptuveni 4700 km, piemēram, uz Kazahstānu, ar mākoni trases ceturtdaļā kā metodē ITU-R P.534-6.
+- Cilne **LĒCIENU TABULA** apkopo, cik lēcienu vajag 50 MHz joslā no 500 līdz 12000 km, ar katra lēciena foEs un avotiem.
 - **Mana signāla pārklājums 6 m joslā** (rozā punkti): kur jūsu 50 MHz signāls nonāk pēc 2-5 lēcieniem, virs pēdējo 30 minūšu mākoņiem, kas novērtēti no visu joslu (28-144 MHz) spotiem un jonozondiem; tikai tur, kur ir stacijas.
 
 ![Koridors](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
