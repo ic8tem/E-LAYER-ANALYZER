@@ -16,6 +16,7 @@ Sous-onglet de **SPORADIC-E** (depuis la version 0.5.2) : la **foEs mesurée** p
 
 - Chaque ionosonde est un point coloré avec la dernière foEs (mêmes couleurs que les nuages Es) et la valeur en MHz ; **grise** si elle n'a pas de données récentes, avec l'**anneau** si le dernier ionogramme a plus de 90 minutes.
 - Tableau : Code, Ionosonde, km depuis votre station, UTC du dernier ionogramme, foEs, foF2, MUF(D) et **Spot foEs≥** : la foEs minimale déduite des spots Es des 30 dernières minutes qui se réfléchissent à moins de 500 km de l'ionosonde (réglable), avec le nombre de spots.
+- **h'Es GIRO** (à partir de la version 0.6.5, case dans REAL-TIME) : la hauteur Es devient la médiane des h'Es récentes des ionosondes à moins de 2500 km (80-120 km).
 
 ## L'ionosonde choisie
 

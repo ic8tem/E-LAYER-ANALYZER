@@ -37,4 +37,6 @@ Para o percurso escolhido: distância e classificação segundo a tabela IK3XTV,
 
 **Carregar spots, ADIF ou ALL.TXT** (spots exportados de NUVENS Es NO TEMPO, logs ADIF de outras estações, descodificações ALL.TXT do JTDX ou do WSJT-X: o indicativo reconhece-se pelas linhas em transmissão) e **Verificar as cadeias**: o programa repete nas aberturas multi-salto da estação 1 a regra das cadeias de saltos curtos e escreve quantas aberturas teria antecipado (ALERTA, PRECURSOR ou só o primeiro salto curto), a antecedência mediana e os alertas não seguidos de QSO multi-salto. Sem fontes carregadas as nuvens vêm só do log, e o último salto curto quase não se vê: são precisos dados de estações distantes.
 
+**Banco de ensaio dos alertas** (a partir da versão 0.6.5): para os ALERTAS e PRECURSORES repetidos a cada 15 minutos, o relatório diz quantos acertaram (QSO multi-salto na mesma direção nas 2 horas seguintes), os falsos alarmes e a referência nos mesmos setores sem cadeias.
+
 ![Verificação](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

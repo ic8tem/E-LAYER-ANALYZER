@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) er spredning fra uregelmessigheter som er rettet langs det geomagnetiske feltet, typisk for sommerkvelder etter sporadisk E. Det spredte signalet går ut på en **kjegle** med aksen langs feltet: to stasjoner kan kjøre hverandre hvis de ligger på **supplementære konturer** (a1 + a2 = 180°, artikkelen av IC8FAX-IC8TEM; ±c-konturene til K9SE). Magnetfeltet beregnes med modellen **IGRF-14**.
 
+**F.A.I.-alarm** (fra versjon 0.6.5): fra mai til september, mellom 18 og 24 lokal tid, etter en Es-sky 300-1300 km fra stasjonen din **blinker** fanen, og en rød linje øverst sier hvor F.A.I. er mulig (reglene fra artikkelen IC8FAX-IC8TEM); med nye F.A.I.-spot sier den at den pågår. Klikk på linjen: visningen Isorefleksjon på punktet.
+
 ## Visningen Scatter trail (par A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

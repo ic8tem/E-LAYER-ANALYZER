@@ -91,7 +91,7 @@ namespace ELA
             {
                 List<StrongCloud> st0;
                 List<PrecursorAlert> only = new List<PrecursorAlert>(Chains.Compute(Hkm, WindowMin, out st0));
-                try { only.InsertRange(0, AprsEs.Compute()); only.AddRange(Prodromes.Compute(Hkm)); } catch { }
+                try { only.InsertRange(0, AprsEs.Compute()); only.AddRange(Prodromes.Compute(Hkm)); only.AddRange(TepForecast.Compute()); } catch { }
                 LastStrong = st0; Last = only; return only;
             }
 
@@ -137,6 +137,7 @@ namespace ELA
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindCorridor || c.Kind == ChainAlert.KindEqualCorridor).OrderBy(c => Chains.Mine(c) ? 0 : 1).ThenByDescending(c => c.Level));
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindSearch));
             try { all.AddRange(Prodromes.Compute(Hkm)); } catch { }   // prodromi in 24 e 28 MHz (dal 22/11/2026)
+            try { all.AddRange(TepForecast.Compute()); } catch { }    // previsione del TEP (dal 22/11/2026)
             Last = all;
             return all;
         }

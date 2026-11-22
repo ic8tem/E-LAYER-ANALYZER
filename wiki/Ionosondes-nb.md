@@ -16,6 +16,7 @@ Underfane i **SPORADIC-E** (fra versjon 0.5.2): den **målte foEs** fra ionosond
 
 - Hver ionosonde er en farget prikk med siste foEs (samme farger som Es-skyene) og verdien i MHz; **grå** hvis den ikke har nye data, med **ring** hvis det siste ionogrammet er over 90 minutter gammelt.
 - Tabell: Kode, Ionosonde, km fra stasjonen din, UTC for siste ionogram, foEs, foF2, MUF(D) og **Spot foEs≥**: den minste foEs utledet av Es-spot fra de siste 30 minuttene som reflekteres innenfor 500 km fra ionosonden (kan justeres), med antall spot.
+- **h'Es GIRO** (fra versjon 0.6.5, felt i REAL-TIME): Es-høyden blir medianen av de nyeste h'Es fra ionosondene innenfor 2500 km (80-120 km).
 
 ## Den valgte ionosonden
 

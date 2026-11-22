@@ -16,6 +16,7 @@ Sottolinguetta di **SPORADIC-E** (dalla versione 0.5.2): la **foEs misurata** da
 
 - Ogni ionosonda è un pallino colorato con l'ultima foEs (stessi colori delle nubi Es) e il valore in MHz; **grigia** se non ha dati recenti, con l'**anello** se l'ultimo ionogramma ha più di 90 minuti.
 - Tabella: Codice, Ionosonda, km dalla tua stazione, UTC dell'ultimo ionogramma, foEs, foF2, MUF(D) e **Spot foEs≥**: la foEs minima ricavata dagli spot Es degli ultimi 30 minuti che riflettono entro 500 km dalla ionosonda (regolabile), con il numero degli spot.
+- **h'Es GIRO** (dalla versione 0.6.5, casella in REAL-TIME): la quota Es diventa la mediana delle h'Es recenti delle ionosonde entro 2500 km (80-120 km).
 
 ## La ionosonda scelta
 

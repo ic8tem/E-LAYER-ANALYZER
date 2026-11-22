@@ -16,6 +16,7 @@ Podzakładka **SPORADIC-E** (od wersji 0.5.2): **foEs zmierzona** przez jonosond
 
 - Każda jonosonda to kolorowa kropka z ostatnią foEs (te same kolory co obłoki Es) i wartością w MHz; **szara**, jeśli nie ma aktualnych danych, z **pierścieniem**, jeśli ostatni jonogram ma ponad 90 minut.
 - Tabela: Kod, Jonosonda, km od twojej stacji, UTC ostatniego jonogramu, foEs, foF2, MUF(D) i **Spoty foEs≥**: minimalna foEs wyznaczona ze spotów Es z ostatnich 30 minut, które odbijają się w promieniu 500 km od jonosondy (regulowanym), z liczbą spotów.
+- **h'Es GIRO** (od wersji 0.6.5, pole w zakładce REAL-TIME): wysokością Es staje się mediana najnowszych h'Es jonosond w promieniu 2500 km (80-120 km).
 
 ## Wybrana jonosonda
 

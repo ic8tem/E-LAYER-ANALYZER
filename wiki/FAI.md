@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) is scatter from irregularities aligned with the geomagnetic field, typical of summer evenings after sporadic-E. The scattered signal leaves on a **cone** whose axis lies along the field: two stations can work each other if they lie on **supplementary contours** (a1 + a2 = 180°, IC8FAX-IC8TEM article; ±c contours of K9SE). The magnetic field is computed with the **IGRF-14** model.
 
+**F.A.I. alert** (from version 0.6.5): from May to September, between 18 and 24 local time, after an Es cloud at 300-1300 km from your station, the tab **flashes** and a red line at the top says where F.A.I. is possible (rules of the IC8FAX-IC8TEM article); with recent F.A.I. spots it says it is in progress. Click on the line: Isoflection view on the point.
+
 ## Scatter trail view (A-B pair)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

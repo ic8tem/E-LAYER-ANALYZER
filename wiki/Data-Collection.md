@@ -20,6 +20,10 @@ The last 2000 spots, with band and source filters. Archive: one CSV file per day
 
 **Local filter** (optional box, in SETTINGS): "DX de" lines below 27990.0 kHz or above 145 MHz are dropped, not shown in the console and not stored; between 430 and 440 MHz only aurora spots pass. **Imprecise locators** (fewer than 6 characters) are taken from CALL3: if CALL3 has a 6-character locator, it always prevails. As in YA-MS, meteor scatter (not Sporadic-E) spots are those in the typical MS frequency windows (50190-50300, 70100-70400, 144290-144399 kHz) without tags of another propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), and those with MS-only modes (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) or with `<MS>`. Exception: FT8 and FT4 on 50 and 70 MHz, where a known mode decides (the 70.154 MHz FT8 goes to Sporadic-E even inside the MS window). Spots with `<AS>`/`<ACS>` (aircraft scatter) are not used for Sporadic-E.
 
+**Historical archive** (from version 0.6.5): before the database is emptied, on closing each day is added to `data/archivio_spot/YYYY-MM-DD.csv.gz`; Es CLOUDS OVER TIME and BENCHMARK 50 MHz also read these files.
+
+From version 0.6.5 the local filter also lets **24890-24990 kHz** (12 m) through, for the 50 MHz early signs, and the **APRS-IS** source adds the APRS hops on 144 MHz repeated within a short time.
+
 ## Spot filters
 
 Data collection is **one for the whole program**: every spot goes through the filters and on to the tab of each propagation mode. From version 0.4.18 the filters, the local filter and the filter test are in the **[SETTINGS](Settings)** tab, sub-tab **Spot routing**.

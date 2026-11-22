@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) to rozpraszanie na nieregularnościach zorientowanych wzdłuż pola geomagnetycznego, typowe dla letnich wieczorów po E-sporadycznym. Rozproszony sygnał wychodzi na **stożku**, którego oś leży wzdłuż pola: dwie stacje mogą nawiązać łączność, jeśli leżą na **konturach dopełniających** (a1 + a2 = 180°, artykuł IC8FAX-IC8TEM; kontury ±c wg K9SE). Pole magnetyczne jest obliczane modelem **IGRF-14**.
 
+**Alert F.A.I.** (od wersji 0.6.5): od maja do września, między 18 a 24 czasu lokalnego, po obłoku Es w odległości 300-1300 km od twojej stacji zakładka **miga**, a czerwony wiersz na górze mówi, gdzie F.A.I. jest możliwe (reguły artykułu IC8FAX-IC8TEM); przy nowych spotach F.A.I. mówi, że trwa. Kliknięcie wiersza: widok Izorefleksja na tym punkcie.
+
 ## Widok Scatter trail (para A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

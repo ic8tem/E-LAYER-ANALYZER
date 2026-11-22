@@ -16,6 +16,7 @@ Podkarta **SPORADIC-E** (od verze 0.5.2): **foEs měřená** ionosondami sítě 
 
 - Každá ionosonda je barevná tečka s poslední foEs (stejné barvy jako oblaka Es) a hodnotou v MHz; **šedá**, pokud nemá aktuální data, s **kroužkem**, pokud je poslední ionogram starší než 90 minut.
 - Tabulka: Kód, Ionosonda, km od vaší stanice, UTC posledního ionogramu, foEs, foF2, MUF(D) a **Spoty foEs≥**: minimální foEs odvozená ze spotů Es za posledních 30 minut, které se odrážejí do 500 km od ionosondy (nastavitelné), s počtem spotů.
+- **h'Es GIRO** (od verze 0.6.5, políčko na kartě REAL-TIME): výškou Es se stane medián nejnovějších h'Es ionosond do 2500 km (80-120 km).
 
 ## Vybraná ionosonda
 

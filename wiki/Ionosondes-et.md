@@ -16,6 +16,7 @@
 
 - Iga ionosond on värviline täpp viimase foEs-iga (samad värvid nagu Es-pilvedel) ja väärtusega MHz-des; **hall**, kui hiljutisi andmeid pole, **rõngaga**, kui viimane ionogramm on vanem kui 90 minutit.
 - Tabel: Kood, Ionosond, km sinu jaamast, viimase ionogrammi UTC, foEs, foF2, MUF(D) ja **Spotid foEs≥**: viimase 30 minuti Es-spotidest tuletatud minimaalne foEs, mille peegeldus on ionosondist 500 km piires (muudetav), koos spottide arvuga.
+- **h'Es GIRO** (alates versioonist 0.6.5, ruut sakil REAL-TIME): Es-kõrguseks saab 2500 km piires olevate ionosondide värskete h'Es-ide mediaan (80-120 km).
 
 ## Valitud ionosond
 

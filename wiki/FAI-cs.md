@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) je rozptyl na nehomogenitách orientovaných podél geomagnetického pole, typický pro letní večery po sporadické vrstvě E. Rozptýlený signál vychází po **kuželu**, jehož osa leží podél pole: dvě stanice spolu mohou pracovat, pokud leží na **doplňkových obrysech** (a1 + a2 = 180°, článek IC8FAX-IC8TEM; obrysy ±c podle K9SE). Magnetické pole se počítá modelem **IGRF-14**.
 
+**Výstraha F.A.I.** (od verze 0.6.5): od května do září, mezi 18 a 24 místního času, po oblaku Es ve vzdálenosti 300-1300 km od vaší stanice karta **bliká** a červený řádek nahoře říká, kde je F.A.I. možné (pravidla článku IC8FAX-IC8TEM); při nových spotech F.A.I. říká, že probíhá. Kliknutí na řádek: pohled Izoflexe na tomto bodě.
+
 ## Zobrazení Scatter trail (dvojice A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

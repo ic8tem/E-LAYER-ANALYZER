@@ -37,4 +37,6 @@ För den valda sträckan: avstånd och bedömning enligt IK3XTV-tabellen, azimut
 
 **Läs in spots, ADIF eller ALL.TXT** (spots exporterade från Es-MOLN ÖVER TID, ADIF-loggar från andra stationer, ALL.TXT-avkodningar från JTDX eller WSJT-X: anropssignalen känns igen på sändningsraderna) och **Kontrollera kedjorna**: programmet spelar upp regeln för kedjor med korta hopp igen på station 1:s multihoppsöppningar och skriver hur många öppningar den skulle ha förutsett (LARM, FÖREBUD eller bara det första korta hoppet), medianförvarningen och de larm som inte följdes av multihopps-QSO:n. Utan inlästa källor kommer molnen bara från loggen och det sista korta hoppet syns nästan inte: det krävs data från avlägsna stationer.
 
+**Benchmark av larmen** (från version 0.6.5): för LARM och FÖREBUD som spelas upp på nytt var 15:e minut anger rapporten hur många som lyckades (multihopp-QSO i samma riktning under de följande 2 timmarna), de falska larmen och referensen i samma sektorer utan kedjor.
+
 ![Kontroll](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

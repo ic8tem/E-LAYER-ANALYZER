@@ -37,4 +37,6 @@ Fyrir valda leið: fjarlægð og mat samkvæmt töflu IK3XTV, áttarhorn í bá�
 
 **Hlaða spotum, ADIF eða ALL.TXT** (spot flutt út úr Es-SKÝ Í TÍMANS RÁS, ADIF-dagbækur annarra stöðva, ALL.TXT-afkóðanir úr JTDX eða WSJT-X: kallmerkið þekkist á sendilínunum) og **Prófa keðjurnar**: forritið endurspilar regluna um keðjur með stuttum stökkum á fjölstökksopnunum stöðvar 1 og skrifar hversu margar opnanir hún hefði séð fyrir (VIÐVÖRUN, FYRIRBOÐI eða aðeins fyrsta stutta stökkið), miðgildi forskotsins og viðvaranir sem engin fjölstökks-QSO fylgdu. Án hlaðinna uppspretta koma skýin aðeins úr dagbókinni og síðasta stutta stökkið sést varla: það þarf gögn frá fjarlægum stöðvum.
 
+**Prófun viðvarananna** (frá útgáfu 0.6.5): fyrir VIÐVARANIR og FYRIRBOÐA sem endurspilaðir eru á 15 mínútna fresti segir skýrslan hve margir heppnuðust (fjölstökks-QSO í sömu átt á næstu 2 klukkustundum), fölsk viðvörunarmerki og viðmiðið í sömu geirum án keðja.
+
 ![Prófun](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

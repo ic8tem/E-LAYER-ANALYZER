@@ -11,6 +11,9 @@ Fra versjon 0.4.18 samler fanen **INNSTILLINGER** de generelle innstillingene fo
 | Stasjon | Kallesignal, lokator og høyde, de samme som i linjen øverst; **Bruk** bekrefter dem for alle faner. |
 | Utseende | Språk, fargetema (skjemaene fra YAEC og YA-MS og, fra versjon 0.5.0, de seks temaene fra IP-TRX-CTRL: Lys, Natt, Svart, Blå, Lilla, Grønn), **kompakt modus** for bærbare med 13-15 tommer (fra 0.5.2: automatisk under 850 piksler i høyden, alltid eller aldri) og **skriftstørrelse for hele programmet** (85-140 %, som i YA-MS). Språk og farger bygger opp vinduet på nytt: innstillinger og spot beholdes. |
 | Multihopp-kjeder på 50 MHz | Fra versjon 0.6.0: varsel øverst (og valgfritt et vindu) når det oppstår en ALARM for multihopp på 50 MHz som angår din stasjon: en kjede med det første korte hoppet fra deg eller en korridor med en ende innenfor 1200 km. Den samme kjeden gjentas ikke innen en time. |
+| Spotarkiv | Fra versjon 0.6.5: ved lukking komprimeres hver dag i `data/archivio_spot` (slått på som standard). |
+| APRS på 144 MHz | Fra versjon 0.6.5: APRS-IS skrivebeskyttet, uten passord; APRS-hopp på 2 m over 900 km gjentatt på kort tid gir en 144 MHz-ALARM. |
+| F.A.I.-alarm | Fra versjon 0.6.5: fanen F.A.I. blinker når F.A.I. er mulig eller pågår. |
 | Kart og prognosedata | Kontinentet, den samme menyen som i fanelinjen. |
 | Tid | NTP-status og forskjellen mellom servertiden og PC-ens klokke. |
 | Oppdateringer | Sjekk på GitHub ved oppstart og hvert 30. minutt, automatisk og stille oppdatering, knappen **Sjekk nå**. Automatisk oppdatering gjelder ikke for systempakker (.deb, .rpm, Arch, Slackware). |

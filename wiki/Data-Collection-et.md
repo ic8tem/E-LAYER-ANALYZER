@@ -20,6 +20,10 @@ Viimased 2000 spotti, sagedusala ja allika filtritega. Arhiiv: üks CSV-fail pä
 
 **Kohalik filter** (valikuline kast, sakil SEADED): "DX de" read alla 27990,0 kHz või üle 145 MHz jäetakse kõrvale, neid ei näidata konsoolis ega salvestata; 430 ja 440 MHz vahel pääsevad läbi ainult aurora spotid. **Ebatäpsed lokaatorid** (alla 6 märgi) võetakse CALL3-st: kui CALL3-s on 6-märgiline lokaator, on see alati eelistatud. Nagu YA-MS-is, on meteor scatteri (mitte sporaadilise E) spotid need, mis on tüüpilistes MS-sagedusakendes (50190-50300, 70100-70400, 144290-144399 kHz) ilma muu levi märgenditeta (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), ning need, milles on ainult MS-i jaoks kasutatav moodus (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) või `<MS>`. Erand: FT8 ja FT4 50 ja 70 MHz-l, kus otsustab teadaolev viis (70,154 MHz FT8 läheb sporaadilise E alla ka MS-aknas). Spotte märgendiga `<AS>`/`<ACS>` (aircraft scatter) sporaadilise E jaoks ei kasutata.
 
+**Ajalooline arhiiv** (alates versioonist 0.6.5): enne andmebaasi tühjendamist lisatakse sulgemisel iga päev faili `data/archivio_spot/AAAA-KK-PP.csv.gz`; Es-PILVED AJAS ja BENCHMARK 50 MHz loevad ka neid faile.
+
+Alates versioonist 0.6.5 laseb kohalik filter läbi ka **24890-24990 kHz** (12 m), 50 MHz varajaste märkide jaoks, ja allikas **APRS-IS** lisab lühikese aja jooksul korduvad APRS-hüpped 144 MHz-l.
+
 ## Spottide filtrid
 
 Andmete kogumine on **kogu programmi peale üks**: iga spot läbib filtrid ja jõuab iga leviviisi sakile. Alates versioonist 0.4.18 asuvad filtrid, kohalik filter ja filtrite proov sakil **[SEADED](Settings-et)**, alamsakil **Spottide suunamine**.

@@ -16,6 +16,7 @@ Subseparador de **SPORADIC-E** (a partir da versão 0.5.2): a **foEs medida** pe
 
 - Cada ionossonda é um ponto colorido com a última foEs (mesmas cores das nuvens Es) e o valor em MHz; **cinzenta** se não tiver dados recentes, com o **anel** se o último ionograma tiver mais de 90 minutos.
 - Tabela: Código, Ionossonda, km a partir da sua estação, UTC do último ionograma, foEs, foF2, MUF(D) e **Spots foEs≥**: a foEs mínima obtida a partir dos spots Es dos últimos 30 minutos que refletem a menos de 500 km da ionossonda (ajustável), com o número de spots.
+- **h'Es GIRO** (a partir da versão 0.6.5, caixa em REAL-TIME): a altura Es passa a ser a mediana das h'Es recentes das ionossondas a menos de 2500 km (80-120 km).
 
 ## A ionossonda escolhida
 

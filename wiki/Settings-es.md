@@ -11,6 +11,9 @@ Desde la versión 0.4.18 la pestaña **AJUSTES** reúne las opciones generales d
 | Estación | Indicativo, locator y altura, los mismos de la barra superior; **Aplicar** los confirma para todas las pestañas. |
 | Aspecto | Idioma, colores (los esquemas de YAEC y YA-MS y, desde la versión 0.5.0, los seis temas de IP-TRX-CTRL: Claro, Noche, Negro, Azul, Violeta, Verde) **modo compacto** para portátiles de 13-15 pulgadas (desde la 0.5.2: automático por debajo de 850 píxeles de alto, siempre o nunca) y **tamaño de la letra de todo el programa** (85-140 %, como en YA-MS). El idioma y los colores reconstruyen la ventana: los ajustes y los spots se conservan. |
 | Cadenas de multisalto en 50 MHz | Desde la versión 0.6.0: aviso arriba (y opcionalmente una ventana) cuando nace una ALERTA de multisalto en 50 MHz que afecta a tu estación: cadena con el primer salto corto desde tu casa, o corredor con un extremo a menos de 1200 km. La misma cadena no se repite antes de una hora. |
+| Archivo de spots | Desde la versión 0.6.5: al cerrar cada día se comprime en `data/archivio_spot` (activado por defecto). |
+| APRS en 144 MHz | Desde la versión 0.6.5: APRS-IS en solo lectura, sin contraseña; los saltos APRS en 2 m de más de 900 km repetidos en poco tiempo dan una ALERTA de 144 MHz. |
+| Alerta F.A.I. | Desde la versión 0.6.5: la pestaña F.A.I. parpadea cuando el F.A.I. es posible o está en curso. |
 | Mapas y datos de previsión | El continente, el mismo menú de la barra de pestañas. |
 | Hora | Estado NTP y diferencia entre la hora de los servidores y el reloj del PC. |
 | Actualizaciones | Comprobación en GitHub al arrancar y cada 30 minutos, actualización automática y silenciosa, botón **Comprobar ahora**. Las actualizaciones automáticas no valen para los paquetes del sistema (.deb, .rpm, Arch, Slackware). |

@@ -16,6 +16,7 @@ Underflik till **SPORADIC-E** (från version 0.5.2): den **uppmätta foEs** frå
 
 - Varje jonosond är en färgad prick med den senaste foEs (samma färger som Es-molnen) och värdet i MHz; **grå** om den inte har nya data, med **ring** om det senaste jonogrammet är äldre än 90 minuter.
 - Tabell: Kod, Jonosond, km från din station, UTC för det senaste jonogrammet, foEs, foF2, MUF(D) och **Spots foEs≥**: den minsta foEs härledd ur Es-spots från de senaste 30 minuterna som reflekteras inom 500 km från jonosonden (justerbart), med antalet spots.
+- **h'Es GIRO** (från version 0.6.5, ruta i REAL-TIME): Es-höjden blir medianen av de senaste h'Es från jonosonderna inom 2500 km (80-120 km).
 
 ## Den valda jonosonden
 

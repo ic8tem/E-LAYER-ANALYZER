@@ -979,3 +979,48 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	pilv foEs ≥ {0:F1} MHz {1:F0} km kaugusel
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Teine hüpe, punkt kolmel neljandikul teekonnast: {0}, vajalik foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Võrdsete hüpetega topelthüpe (ITU-R P.534-6): autori jaoks tüüpiline juhtum kuni umbes 4700 km, näiteks Kasahstani suunas; kaugemal, teiste mandrite suunas, kehtivad ahelad lühikeste hüpetega otstes.
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Test: {0} HOIATUST, millele järgnes kahe tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}% (valehäired {2:F0}%).
+Riferimento negli stessi settori senza catene: {0:F0}%.	Võrdlusväärtus samades sektorites ilma ahelateta: {0:F0}%.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Test: {0} EELKÄIJAT, millele järgnes kahe tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}%.
+corridoio a salti uguali, ti riguarda	võrdsete hüpetega koridor, puudutab sind
+corridoio a salti uguali	võrdsete hüpetega koridor
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Kohalik filter: jätab kõrvale klastri read alla 27990,0 kHz ja üle 145 MHz (ei kuvata ega salvestata), välja arvatud 24890-24990 kHz (50 MHz varajased märgid); 430-440 MHz-l pääsevad läbi ainult virmaliste spotid
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz e dai 24890-24990 kHz; in 430-440 MHz passano solo gli spot di aurora)	Kohalik filter: rida jäeti kõrvale (väljaspool vahemikku 27990 kHz - 145 MHz ja 24890-24990 kHz; 430-440 MHz-l pääsevad läbi ainult virmaliste spotid)
+ALLERTA 144 MHz: salti APRS ripetuti oltre i 900 km su {0} ({1})	144 MHz HOIATUS: korduvad APRS-hüpped üle 900 km piirkonna {0} kohal ({1})
+h'Es GIRO	h'Es GIRO
+Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta.	Es-kihi kõrgus GIRO ionosondidelt: viimase 90 minuti h'Es-ide mediaan sinu jaamast 2500 km piires. Värskete andmete puudumisel kehtib sisestatud kõrgus.
+Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.	GIRO ionosondidelt pole 2500 km piires värskeid h'Es-e: kehtib sisestatud kõrgus.
+Il servizio GIRO non ha dato le h'Es: vale la quota scritta.	GIRO teenus ei andnud h'Es-e: kehtib sisestatud kõrgus.
+h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})	h'Es GIRO: {0:F0} km, {1} ionosondi mediaan ({2})
+APRS ripetuto ({0})	korduv APRS ({0})
+nube in {0}	pilv sagedusel {0}
+Verifica della proiezione in questa sessione: {0} stazioni ti hanno ascoltato in 50 MHz oltre i 2800 km, {1} entro 500 km da un punto rosa.	Leviala kontroll selles seansis: {0} jaama kuulsid sind 50 MHz-l üle 2800 km, {1} neist roosast punktist 500 km piires.
+APRS 144 MHz	APRS 144 MHz
+prodromo: nube in {0}	varajane märk: pilv sagedusel {0}
+ALLERTA 144 MHz da APRS: {0} salti radio APRS in 2 m oltre i 900 km negli ultimi 30 minuti, punto medio su {1} ({2}), ultimo alle {3:HH:mm} UTC.	144 MHz HOIATUS APRS-ist: {0} APRS-raadiohüpet 2 m-l üle 900 km viimase 30 minuti jooksul, keskpunkt piirkonna {1} kohal ({2}), viimane kell {3:HH:mm} UTC.
+Stazioni: {0}	Jaamad: {0}
+Il punto medio è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	Keskpunkt on sinu jaamast {0:F0} km kaugusel (asimuut {1:F0}°).
+Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura).	Autori reegel: üksik APRS-pakett ei ütle midagi (see võib olla lennuk või meteoorhajumine); loeb kordumine lühikese aja jooksul, vähemalt kaks hüpet keskpunktiga 150 km piires ja kõige rohkem 10-minutilise vahega. Pakettide lugeja nagu LIVETROPOVHF-is (APRS-IS ainult lugemisrežiimis).
+PRODROMO: nube Es in {0} su {1} ({2}), foEs ≥ {3:F1} MHz, {4} spot negli ultimi 15 minuti; in 50 MHz nessuno spot Es entro 300 km negli ultimi 30 minuti.	VARAJANE MÄRK: Es-pilv sagedusel {0} piirkonna {1} kohal ({2}), foEs ≥ {3:F1} MHz, {4} spotti viimase 15 minuti jooksul; 50 MHz-l pole viimase 30 minuti jooksul 300 km piires ühtegi Es-spotti.
+Spot: {0} - {1} {2} MHz, {3:F0} km	Spot: {0} - {1} {2} MHz, {3:F0} km
+La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	Pilv on sinu jaamast {0:F0} km kaugusel (asimuut {1:F0}°).
+Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 9-16 minuti.	Kontroll kolme Itaalia jaama dekodeeringutel (94 päeva): pärast 28 MHz pilve avanes 50 MHz 300 km piires järgmise tunni jooksul 50% juhtudest, võrreldes 30%-ga tsoonides, kus 28 MHz pilve ei olnud; mediaanne ennetus 9-16 minutit.
+Ginevra	Genf
+Budapest	Budapest
+Bruxelles	Brüssel
+Albania	Albaania
+Corsica	Korsika
+F.A.I. IN CORSO: {0} spot F.A.I. negli ultimi 30 minuti (ultimo {1} - {2}, {3} MHz).	F.A.I. KÄIMAS: {0} F.A.I. spotti viimase 30 minuti jooksul (viimane {1} - {2}, {3} MHz).
+F.A.I. POSSIBILE: nube Es su {0} ({1}), {2:F0} km, QTF {3:F0}°, ore {4:00}:{5:00} locali; linea di massima ricezione su {6}.	F.A.I. VÕIMALIK: Es-pilv piirkonna {0} kohal ({1}), {2:F0} km, QTF {3:F0}°, kohaliku aja järgi {4:00}:{5:00}; maksimaalse vastuvõtu joon piirkonna {6} kohal.
+PRODROMO	VARAJANE MÄRK
+Clic: linee di iso-riflessione dalla tua stazione sulla prima nube indicata	Klõps: isopeegelduse jooned sinu jaamast esimesele näidatud pilvele
+Archivio storico degli spot: alla chiusura ogni giorno va compresso in data/archivio_spot	Spottide ajalooline arhiiv: sulgemisel tihendatakse iga päev kausta data/archivio_spot
+Archivio degli spot	Spottide arhiiv
+Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione.	Sulgemisel spottide andmebaas tühjendatakse (autori reegel); kui arhiiv on sees, lisatakse enne tühjendamist iga päev faili AAAA-KK-PP.csv.gz (avanemispäevadel umbes 1 MB päevas). Faile saab hooaja statistika jaoks laadida sakkidel Es-PILVED AJAS ja BENCHMARK 50 MHz.
+APRS-IS in sola lettura: salti APRS in 2 m oltre i 900 km ripetuti a breve tempo = ALLERTA 144 MHz	APRS-IS ainult lugemisrežiimis: lühikese aja jooksul korduvad APRS-hüpped 2 m-l üle 900 km = 144 MHz HOIATUS
+APRS in 144 MHz	APRS 144 MHz-l
+Collegamento a rotate.aprs2.net in sola lettura (senza password), con i pacchetti entro 3000 km dalla tua stazione. Un salto vale solo fra stazioni di posizione nota (sorgente, digipeater, IGate), come in LIVETROPOVHF; conta solo se si ripete entro 10 minuti con il punto medio entro 150 km.	Ainult lugemisrežiimis ühendus serveriga rotate.aprs2.net (ilma paroolita), paketid sinu jaamast kuni 3000 km kaugusel. Hüpe loeb ainult teadaoleva asukohaga jaamade vahel (allikas, digipeater, IGate), nagu LIVETROPOVHF-is; see loeb ainult siis, kui kordub 10 minuti jooksul keskpunktiga 150 km piires.
+La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	Sakk F.A.I. vilgub, kui F.A.I. on võimalik või käimas
+Allerta F.A.I.	F.A.I. hoiatus
+Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Artikli IC8FAX-IC8TEM (2011) reeglid: maist septembrini, kohaliku aja järgi 18 ja 24 vahel, pärast Es-pilve 50, 70 või 144 MHz-l sinu jaamast 300-1300 km kaugusel, kui maksimaalse vastuvõtu joon läbib kohti, kus on jaamu. F.A.I. käimas: F.A.I. spotid viimase 30 minuti jooksul.
+sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	alla 27990 kHz (välja arvatud 24890-24990 kHz) või üle 145 MHz; 430-440 MHz-l ainult virmalised

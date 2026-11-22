@@ -79,5 +79,10 @@ V podkartě **Předzvěsti vícenásobného skoku** program hledá řetězce ví
 - **Stejný dvojitý skok** (od verze 0.6.3, skoky «2 =»): do asi 4700 km, například směrem do Kazachstánu, s oblakem ve čtvrtině trasy jako v metodě ITU-R P.534-6.
 - Karta **TABULKA SKOKŮ** shrnuje, kolik skoků je potřeba na 50 MHz od 500 do 12000 km, s foEs každého skoku a zdroji.
 - **Stopa mého signálu na 6 m** (růžové body): kam dopadá tvůj signál na 50 MHz po 2-5 skocích, nad oblaky za posledních 30 minut odhadnutými ze spotů všech pásem (28-144 MHz) a z ionosond; jen tam, kde jsou stanice.
+- **Koridor se stejnými skoky** (od verze 0.6.5): dvě oblaka 1400-2350 km od sebe spojují dvěma stejnými skoky dvě zóny ve vzdálenosti 2800-4700 km; kontrola na expedici 5U5K potvrzuje hranici asi 4700 km.
+- **ČASNÁ ZNÁMKA** (zelená, od verze 0.6.5): oblak Es v pásmu 28 nebo 24 MHz tam, kde pásmo 50 MHz ještě není otevřené; ve zkouškách se tam pásmo 50 MHz otevřelo do hodiny v 50 % případů (30 % bez ní), 9-16 minut předem.
+- **Opakovaný APRS** (červený, od verze 0.6.5): nejméně dva skoky APRS v pásmu 2 m nad 900 km přes stejný oblak do 10 minut = VÝSTRAHA 144 MHz; karta bliká.
+- **Jakou mají výstrahy hodnotu** (na stanici autora, léta 2024-2026): VÝSTRAHY úspěšné v 46-58 % (QSO vícenásobným skokem ve stejném směru do 2 hodin) proti 8-10 % bez výstrahy; ale 43 % otevření přichází bez varování. Stopa dosáhne do 500 km od vzdálené stanice ve 13,5 % otevření, po otočení ve 2-4 %.
+- Oblaka **se neposouvají**: zkouška z 22. 11. 2026 ukazuje, že jejich posunutí jejich rychlostí nezlepšuje předpověď na 15-45 minut.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

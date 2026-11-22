@@ -4,6 +4,8 @@
 
 Le F.A.I. (Field Aligned Irregularities) est une diffusion sur des irrégularités alignées sur le champ géomagnétique, typique des soirées d'été après l'E sporadique. Le signal diffusé repart sur un **cône** dont l'axe suit le champ : deux stations peuvent se contacter si elles se trouvent sur des **contours supplémentaires** (a1 + a2 = 180°, article IC8FAX-IC8TEM ; contours ±c de K9SE). Le champ magnétique est calculé avec le modèle **IGRF-14**.
 
+**Alerte F.A.I.** (à partir de la version 0.6.5) : de mai à septembre, entre 18 et 24 h heure locale, après un nuage Es à 300-1300 km de votre station, l'onglet **clignote** et une ligne rouge en haut dit où le F.A.I. est possible (règles de l'article IC8FAX-IC8TEM) ; avec des spots F.A.I. récents, elle dit qu'il est en cours. Clic sur la ligne : vue Iso-réflexion sur le point.
+
 ## Vue Scatter trail (paire A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

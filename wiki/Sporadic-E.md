@@ -79,5 +79,10 @@ In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chai
 - **Equal double hop** (from version 0.6.3, hops «2 =»): up to about 4700 km, for example towards Kazakhstan, with the cloud at one quarter of the path as in the method ITU-R P.534-6.
 - The **HOP CHART** tab summarises how many hops are needed on 50 MHz from 500 to 12000 km, with the foEs of each hop and the sources.
 - **Footprint of my signal on 6 m** (pink dots): where your 50 MHz signal lands after 2-5 hops, over the clouds of the last 30 minutes estimated from the spots of all bands (28-144 MHz) and from the ionosondes; only where there are stations.
+- **Equal-hop corridor** (from version 0.6.5): two clouds 1400-2350 km apart connect two zones at 2800-4700 km with two equal hops; the check on the 5U5K expedition confirms the limit of about 4700 km.
+- **EARLY SIGN** (green, from version 0.6.5): Es cloud on 28 or 24 MHz where 50 MHz is not open yet; in the tests 50 MHz opened there within an hour in 50% of cases (30% without), 9-16 minutes ahead.
+- **Repeated APRS** (red, from version 0.6.5): at least two APRS hops on 2 m beyond 900 km on the same cloud within 10 minutes = 144 MHz ALERT; the tab flashes.
+- **How good the alerts are** (on the author's station, summers 2024-2026): ALERTS successful in 46-58% (multi-hop QSO in the same direction within 2 hours) against 8-10% without an alert; but 43% of the openings arrive without warning. The footprint reaches within 500 km of the distant station in 13.5% of the openings, against 2-4% when rotated.
+- The clouds **are not moved**: the test of 22/11/2026 shows that moving them with their velocity does not improve the forecast at 15-45 minutes.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

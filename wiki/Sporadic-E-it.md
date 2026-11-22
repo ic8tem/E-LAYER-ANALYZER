@@ -79,5 +79,10 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 - **Doppio salto uguale** (dalla versione 0.6.3, salti «2 =»): fino a circa 4700 km, per esempio verso il Kazakhstan, con la nube a un quarto della tratta come nel metodo ITU-R P.534-6.
 - La linguetta **ABACO DEI SALTI** riassume quanti salti servono in 50 MHz da 500 a 12000 km, con la foEs di ogni salto e le fonti.
 - **Proiezione del mio segnale in 6 m** (punti rosa): dove atterra il tuo segnale in 50 MHz dopo 2-5 salti, sopra le nubi degli ultimi 30 minuti stimate dagli spot di tutte le bande (28-144 MHz) e dalle ionosonde; solo dove ci sono stazioni.
+- **Corridoio a salti uguali** (dalla versione 0.6.5): due nubi a 1400-2350 km fra loro collegano due zone a 2800-4700 km con due salti uguali; la verifica sulla spedizione 5U5K conferma il limite di circa 4700 km.
+- **PRODROMO** (verde, dalla versione 0.6.5): nube Es in 28 o 24 MHz dove i 50 MHz non sono ancora aperti; nelle prove i 50 MHz hanno aperto lì entro un'ora nel 50% dei casi (30% senza), con 9-16 minuti di anticipo.
+- **APRS ripetuto** (rosso, dalla versione 0.6.5): almeno due salti APRS in 2 m oltre i 900 km sulla stessa nube entro 10 minuti = ALLERTA 144 MHz; la linguetta lampeggia.
+- **Quanto valgono le allerte** (sulla stazione dell'autore, estati 2024-2026): ALLERTE riuscite al 46-58% (QSO multi-salto nella stessa direzione entro 2 ore) contro l'8-10% senza allerta; ma il 43% delle aperture arriva senza preavviso. La proiezione arriva entro 500 km dalla stazione lontana nel 13,5% delle aperture, contro il 2-4% se girata.
+- Le nubi **non si spostano**: la prova del 22/11/2026 mostra che spostarle con la loro velocità non migliora la previsione a 15-45 minuti.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

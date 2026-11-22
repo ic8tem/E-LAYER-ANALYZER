@@ -79,5 +79,10 @@ A **Többugrásos előjelek** allapban a program az 50 MHz-es többugrásos lán
 - **Egyenlő kettős ugrás** (a 0.6.3-as verziótól, „2 =” ugrások): körülbelül 4700 km-ig, például Kazahsztán felé, a felhővel az útvonal negyedénél, mint az ITU-R P.534-6 módszerben.
 - Az **UGRÁSTÁBLÁZAT** fül összefoglalja, hány ugrás kell 50 MHz-en 500 és 12000 km között, az egyes ugrások foEs-ével és a forrásokkal.
 - **Jelem lábnyoma 6 m-en** (rózsaszín pontok): ahová az 50 MHz-es jeled 2-5 ugrás után földet ér, az utolsó 30 perc felhői fölött, amelyeket az összes sáv (28-144 MHz) spotjaiból és az ionoszondákból becsül a program; csak ahol vannak állomások.
+- **Egyenlő ugrású folyosó** (a 0.6.5-ös verziótól): két, egymástól 1400-2350 km-re lévő felhő két egyenlő ugrással két, 2800-4700 km-re lévő zónát köt össze; az 5U5K expedíción végzett ellenőrzés megerősíti a körülbelül 4700 km-es határt.
+- **KORAI JEL** (zöld, a 0.6.5-ös verziótól): Es-felhő 28 vagy 24 MHz-en ott, ahol az 50 MHz még nem nyílt meg; a próbákban az 50 MHz ott egy órán belül az esetek 50%-ában megnyílt (nélküle 30%), 9-16 perccel előbb.
+- **Ismétlődő APRS** (piros, a 0.6.5-ös verziótól): legalább két, 900 km feletti APRS-ugrás a 2 m-es sávban ugyanazon a felhőn 10 percen belül = 144 MHz-es FIGYELMEZTETÉS; a fül villog.
+- **Mennyit érnek a figyelmeztetések** (a szerző állomásán, 2024-2026 nyarai): a FIGYELMEZTETÉSEK 46-58%-ban váltak be (többugrásos QSO ugyanabban az irányban 2 órán belül), szemben a figyelmeztetés nélküli 8-10%-kal; de a nyitások 43%-a figyelmeztetés nélkül érkezik. A lefedettség a nyitások 13,5%-ában ér 500 km-en belülre a távoli állomástól, elforgatva 2-4%-ban.
+- A felhőket **nem mozdítja el**: a 2026.11.22-i próba szerint a saját sebességükkel való elmozdításuk nem javítja a 15-45 perces előrejelzést.
 
 ![Folyosó](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

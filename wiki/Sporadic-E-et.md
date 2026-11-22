@@ -79,5 +79,10 @@ Alamsakis **Mitmehüppelise levi eelkäijad** otsib programm 50 MHz mitmehüppel
 - **Võrdne topelthüpe** (alates versioonist 0.6.3, hüpped «2 =»): kuni umbes 4700 km, näiteks Kasahstani suunas, pilvega teekonna veerandil nagu meetodis ITU-R P.534-6.
 - Sakk **HÜPETE TABEL** võtab kokku, mitu hüpet on 50 MHz-l vaja 500 kuni 12000 km jaoks, iga hüppe foEs-i ja allikatega.
 - **Minu signaali leviala 6 m-l** (roosad punktid): kuhu sinu 50 MHz signaal jõuab pärast 2-5 hüpet, üle viimase 30 minuti pilvede, mis on hinnatud kõigi sagedusalade (28-144 MHz) spottidest ja ionosondidelt; ainult seal, kus on jaamu.
+- **Võrdsete hüpetega koridor** (alates versioonist 0.6.5): kaks teineteisest 1400-2350 km kaugusel olevat pilve ühendavad kaks 2800-4700 km kaugusel olevat tsooni kahe võrdse hüppega; kontroll ekspeditsiooni 5U5K peal kinnitab umbes 4700 km piiri.
+- **VARAJANE MÄRK** (roheline, alates versioonist 0.6.5): Es-pilv 28 või 24 MHz-l, kus 50 MHz pole veel avanenud; katsetes avanes 50 MHz seal tunni jooksul 50% juhtudest (ilma selleta 30%), 9-16 minutit varem.
+- **Korduv APRS** (punane, alates versioonist 0.6.5): vähemalt kaks APRS-hüpet 2 m-l üle 900 km samal pilvel 10 minuti jooksul = 144 MHz HOIATUS; sakk vilgub.
+- **Mida hoiatused väärt on** (autori jaamal, suved 2024-2026): HOIATUSED õnnestuvad 46-58% (mitmehüppeline QSO samas suunas 2 tunni jooksul) võrreldes 8-10%-ga ilma hoiatuseta; kuid 43% avanemistest saabub ette teatamata. Leviala jõuab kaugest jaamast 500 km piiresse 13,5% avanemistest, pööratuna 2-4%.
+- Pilvi **ei nihutata**: 22.11.2026 katse näitab, et nende nihutamine oma kiirusega ei paranda 15-45 minuti prognoosi.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

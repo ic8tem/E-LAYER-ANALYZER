@@ -20,6 +20,10 @@ Síðustu 2000 spotin, með síum eftir tíðnisviði og lind. Safn: ein CSV-skr
 
 **Staðbundin sía** (valfrjáls reitur, í STILLINGAR): "DX de"-línum undir 27990,0 kHz eða yfir 145 MHz er hent, þær ekki sýndar á skjáborðinu og ekki geymdar; milli 430 og 440 MHz fara aðeins norðurljósaspot í gegn. **Ónákvæmir locatorar** (færri en 6 stafir) eru sóttir í CALL3: ef CALL3 hefur 6 stafa locator gengur hann alltaf fyrir. Eins og í YA-MS eru meteor scatter-spot (ekki sporadic-E) þau sem eru í dæmigerðu MS-tíðnigluggunum (50190-50300, 70100-70400, 144290-144399 kHz) án merkja um aðra útbreiðslu (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), og þau sem hafa hætti sem aðeins eru notaðir fyrir MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) eða `<MS>`. Undantekning: FT8 og FT4 á 50 og 70 MHz, þar sem þekktur háttur ræður (FT8 á 70,154 MHz fer í sporadic-E jafnvel innan MS-gluggans). Spot með `<AS>`/`<ACS>` (aircraft scatter) eru ekki notuð fyrir sporadic-E.
 
+**Sögulegt safn** (frá útgáfu 0.6.5): áður en gagnagrunnurinn er tæmdur er hverjum degi bætt við `data/archivio_spot/ÁÁÁÁ-MM-DD.csv.gz` við lokun; Es-SKÝ Í TÍMANS RÁS og BENCHMARK 50 MHz lesa einnig þessar skrár.
+
+Frá útgáfu 0.6.5 hleypir staðbundna sían einnig **24890-24990 kHz** (12 m) í gegn, fyrir fyrstu merki 50 MHz, og uppruninn **APRS-IS** bætir við APRS-stökkum á 144 MHz endurteknum á stuttum tíma.
+
 ## Síur spota
 
 Gagnasöfnunin er **aðeins ein fyrir allt forritið**: hvert spot fer í gegnum síurnar og á flipa hverrar útbreiðsluaðferðar. Frá útgáfu 0.4.18 eru síurnar, staðbundna sían og prófun sía í flipanum **[STILLINGAR](Settings-is)**, undirflipanum **Flokkun spota**.

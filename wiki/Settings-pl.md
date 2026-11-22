@@ -11,6 +11,9 @@ Od wersji 0.4.18 zakładka **USTAWIENIA** zbiera ogólne opcje programu i kierow
 | Stacja | Znak wywoławczy, lokator i wysokość, te same co na górnym pasku; **Zastosuj** zatwierdza je dla wszystkich zakładek. |
 | Wygląd | Język, kolorystyka (schematy YAEC i YA-MS oraz, od wersji 0.5.0, sześć motywów IP-TRX-CTRL: Jasny, Noc, Czarny, Niebieski, Fioletowy, Zielony), **tryb kompaktowy** dla laptopów 13-15 cali (od 0.5.2: automatycznie poniżej 850 pikseli wysokości, zawsze lub nigdy) i **rozmiar czcionki całego programu** (85-140 %, jak w YA-MS). Język i kolory przebudowują okno: ustawienia i spoty zostają zachowane. |
 | Łańcuchy wieloskoku na 50 MHz | Od wersji 0.6.0: komunikat u góry (i opcjonalnie okno), gdy pojawi się ALERT wieloskoku na 50 MHz dotyczący twojej stacji: łańcuch z pierwszym krótkim skokiem od ciebie albo korytarz z końcem w promieniu 1200 km. Ten sam łańcuch nie powtarza się wcześniej niż po godzinie. |
+| Archiwum spotów | Od wersji 0.6.5: przy zamykaniu każdy dzień jest kompresowany do `data/archivio_spot` (domyślnie włączone). |
+| APRS w paśmie 144 MHz | Od wersji 0.6.5: APRS-IS tylko do odczytu, bez hasła; skoki APRS w paśmie 2 m powyżej 900 km powtórzone w krótkim czasie dają ALERT 144 MHz. |
+| Alert F.A.I. | Od wersji 0.6.5: zakładka F.A.I. miga, gdy F.A.I. jest możliwe lub trwa. |
 | Mapy i dane prognostyczne | Kontynent, to samo menu co na pasku zakładek. |
 | Czas | Stan NTP i różnica między czasem serwerów a zegarem PC. |
 | Aktualizacje | Sprawdzanie na GitHubie przy starcie i co 30 minut, automatyczna i cicha aktualizacja, przycisk **Sprawdź teraz**. Automatyczne aktualizacje nie dotyczą pakietów systemowych (.deb, .rpm, Arch, Slackware). |

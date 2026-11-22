@@ -16,6 +16,7 @@ Unterreiter von **SPORADIC-E** (ab Version 0.5.2): die von den Ionosonden des **
 
 - Jede Ionosonde ist ein farbiger Punkt mit der letzten foEs (dieselben Farben wie die Es-Wolken) und dem Wert in MHz; **grau**, wenn sie keine aktuellen Daten hat, mit dem **Ring**, wenn das letzte Ionogramm älter als 90 Minuten ist.
 - Tabelle: Kennung, Ionosonde, km von Ihrer Station, UTC des letzten Ionogramms, foEs, foF2, MUF(D) und **Spot foEs≥**: die minimale foEs aus den Es-Spots der letzten 30 Minuten, die im Umkreis von 500 km um die Ionosonde reflektieren (einstellbar), mit der Zahl der Spots.
+- **h'Es GIRO** (ab Version 0.6.5, Kästchen in REAL-TIME): Die Es-Höhe wird der Median der aktuellen h'Es der Ionosonden im Umkreis von 2500 km (80-120 km).
 
 ## Die gewählte Ionosonde
 

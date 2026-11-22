@@ -16,6 +16,7 @@ A **SPORADIC-E** allapja (a 0.5.2-es verziótól): a **GIRO** hálózat ionoszon
 
 - Minden ionoszonda egy színes pont az utolsó foEs-sel (ugyanazok a színek, mint az Es-felhőknél) és az MHz-ben kifejezett értékkel; **szürke**, ha nincs aktuális adata, **gyűrűvel**, ha az utolsó ionogram 90 percnél régebbi.
 - Táblázat: Kód, Ionoszonda, km a saját állomástól, az utolsó ionogram UTC-ideje, foEs, foF2, MUF(D) és **Spotok foEs≥**: az utolsó 30 perc azon Es-spotjaiból származtatott minimális foEs, amelyek az ionoszondától 500 km-en belül verődnek vissza (állítható), a spotok számával.
+- **h'Es GIRO** (a 0.6.5-ös verziótól, jelölőnégyzet a REAL-TIME fülön): az Es-magasság a 2500 km-en belüli ionoszondák friss h'Es-értékeinek mediánja lesz (80-120 km).
 
 ## A kiválasztott ionoszonda
 

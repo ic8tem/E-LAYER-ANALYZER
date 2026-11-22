@@ -20,6 +20,10 @@ De senaste 2000 spotsen, med filter för band och källa. Arkiv: en CSV-fil per 
 
 **Lokalt filter** (valfri kryssruta, i INSTÄLLNINGAR): "DX de"-rader under 27990,0 kHz eller över 145 MHz kasseras, visas inte i konsolen och sparas inte; mellan 430 och 440 MHz släpps bara auroraspots igenom. **Oprecisa lokatorer** (färre än 6 tecken) hämtas från CALL3: om CALL3 har en lokator med 6 tecken har den alltid företräde. Som i YA-MS är meteor scatter-spots (inte sporadiskt E) de som ligger i de typiska MS-frekvensfönstren (50190-50300, 70100-70400, 144290-144399 kHz) utan märkningar för annan utbredning (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), och de med moder som bara används för MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) eller med `<MS>`. Undantag: FT8 och FT4 på 50 och 70 MHz, där en känd mod avgör (FT8 på 70,154 MHz går till sporadiskt E även inom MS-fönstret). Spots med `<AS>`/`<ACS>` (aircraft scatter) används inte för sporadiskt E.
 
+**Historiskt arkiv** (från version 0.6.5): innan databasen töms läggs varje dag vid stängning till i `data/archivio_spot/ÅÅÅÅ-MM-DD.csv.gz`; Es-MOLN ÖVER TID och BENCHMARK 50 MHz läser också dessa filer.
+
+Från version 0.6.5 släpper det lokala filtret också igenom **24890-24990 kHz** (12 m), för de tidiga tecknen för 50 MHz, och källan **APRS-IS** lägger till APRS-hoppen på 144 MHz upprepade på kort tid.
+
 ## Spotfilter
 
 Det finns **bara en datainsamling för hela programmet**: varje spot passerar filtren och går vidare till fliken för varje utbredningssätt. Från version 0.4.18 finns filtren, det lokala filtret och testet av filtren i fliken **[INSTÄLLNINGAR](Settings-sv)**, underfliken **Fördelning av spots**.

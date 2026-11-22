@@ -20,6 +20,10 @@ Paskutiniai 2000 spotų, su juostos ir šaltinio filtrais. Archyvas: vienas CSV 
 
 **Vietinis filtras** (neprivalomas langelis, kortelėje NUSTATYMAI): "DX de" eilutės žemiau 27990,0 kHz arba aukščiau 145 MHz atmetamos, nerodomos konsolėje ir nesaugomos; tarp 430 ir 440 MHz praleidžiami tik pašvaistės spotai. **Netikslūs lokatoriai** (mažiau nei 6 simboliai) imami iš CALL3: jei CALL3 turi 6 simbolių lokatorių, jis visada turi pirmenybę. Kaip ir YA-MS, meteor scatter (ne sporadinio E) spotai yra tie, kurie patenka į tipinius MS dažnių langus (50190-50300, 70100-70400, 144290-144399 kHz) be kito sklidimo žymų (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), ir tie, kuriuose yra tik MS naudojama moda (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) arba `<MS>`. Išimtis: FT8 ir FT4 50 ir 70 MHz juostose, kur sprendžia žinomas režimas (70,154 MHz FT8 priskiriamas sporadiniam E net MS lange). Spotai su `<AS>`/`<ACS>` (aircraft scatter) sporadiniam E nenaudojami.
 
+**Istorinis archyvas** (nuo 0.6.5 versijos): prieš išvalant duomenų bazę, uždarant kiekviena diena pridedama prie `data/archivio_spot/MMMM-MM-DD.csv.gz`; Es DEBESYS LAIKE ir BENCHMARK 50 MHz skaito ir šiuos failus.
+
+Nuo 0.6.5 versijos vietinis filtras praleidžia ir **24890-24990 kHz** (12 m) – 50 MHz ankstyviesiems ženklams, o šaltinis **APRS-IS** prideda per trumpą laiką pasikartojusius APRS šuolius 144 MHz dažnyje.
+
 ## Spotų filtrai
 
 Duomenų rinkimas **visai programai yra vienas**: kiekvienas spotas pereina per filtrus ir patenka į kiekvieno sklidimo būdo kortelę. Nuo 0.4.18 versijos filtrai, vietinis filtras ir filtrų bandymas yra kortelėje **[NUSTATYMAI](Settings-lt)**, pakortelėje **Spotų skirstymas**.

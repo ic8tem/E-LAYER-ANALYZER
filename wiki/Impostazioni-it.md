@@ -11,6 +11,9 @@ Dalla versione 0.4.18 la linguetta **IMPOSTAZIONI** raccoglie le opzioni general
 | Stazione | Nominativo, locator e quota, gli stessi della riga in alto; **Applica** li conferma per tutte le linguette. |
 | Aspetto | Lingua, colorazione (gli schemi di YAEC e YA-MS e, dalla versione 0.5.0, i sei temi di IP-TRX-CTRL: Chiaro, Notte, Nero, Blu, Viola, Verde), **modalità compatta** per i notebook da 13-15 pollici (dalla 0.5.2: automatica sotto 850 pixel di altezza, sempre o mai) e **dimensione del carattere di tutto il programma** (85-140 %, come in YA-MS). Lingua e colorazione ricostruiscono la finestra: impostazioni e spot restano. |
 | Catene multi-salto in 50 MHz | Dalla versione 0.6.0: avviso in alto (e facoltativamente una finestra) quando nasce un'ALLERTA multi-salto in 50 MHz che riguarda la tua stazione: catena con il primo salto corto da te, oppure corridoio con un'estremità entro 1200 km. La stessa catena non si ripete prima di un'ora. |
+| Archivio degli spot | Dalla versione 0.6.5: alla chiusura ogni giorno va compresso in `data/archivio_spot` (acceso di partenza). |
+| APRS in 144 MHz | Dalla versione 0.6.5: APRS-IS in sola lettura, senza password; i salti APRS in 2 m oltre i 900 km ripetuti a breve tempo danno un'ALLERTA 144 MHz. |
+| Allerta F.A.I. | Dalla versione 0.6.5: la linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso. |
 | Mappe e dati previsionali | Il continente, lo stesso menu della barra delle linguette. |
 | Ora | Stato del controllo NTP e scarto tra l'ora dei server e l'orologio del PC. |
 | Aggiornamenti | Controllo su GitHub all'avvio e ogni 30 minuti, aggiornamento automatico e silenzioso, pulsante **Controlla adesso**. L'aggiornamento automatico non vale per i pacchetti di sistema (.deb, .rpm, Arch, Slackware). |

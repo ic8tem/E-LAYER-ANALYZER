@@ -20,6 +20,10 @@ Die letzten 2000 Spots, mit Filtern nach Band und Quelle. Archiv: eine CSV-Datei
 
 **Lokaler Filter** (optionales Kästchen, in EINSTELLUNGEN): „DX de“-Zeilen unter 27990,0 kHz oder über 145 MHz werden verworfen, nicht in der Konsole angezeigt und nicht gespeichert; zwischen 430 und 440 MHz passieren nur Aurora-Spots. **Ungenaue Locator** (weniger als 6 Zeichen) werden aus CALL3 genommen: Hat CALL3 einen 6-stelligen Locator, hat dieser immer Vorrang. Wie in YA-MS gelten als Meteorscatter-Spots (nicht Sporadic-E) diejenigen in den typischen MS-Frequenzfenstern (50190-50300, 70100-70400, 144290-144399 kHz) ohne Kennzeichen einer anderen Ausbreitung (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) sowie diejenigen mit reinen MS-Betriebsarten (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) oder mit `<MS>`. Ausnahme: FT8 und FT4 auf 50 und 70 MHz, wo eine bekannte Betriebsart entscheidet (das FT8 auf 70,154 MHz geht zu Sporadic-E, auch innerhalb des MS-Fensters). Spots mit `<AS>`/`<ACS>` (Aircraft Scatter) werden für Sporadic-E nicht verwendet.
 
+**Historisches Archiv** (ab Version 0.6.5): Bevor die Datenbank geleert wird, wird beim Schließen jeder Tag an `data/archivio_spot/JJJJ-MM-TT.csv.gz` angefügt; Es-WOLKEN IM ZEITVERLAUF und BENCHMARK 50 MHz lesen auch diese Dateien.
+
+Ab Version 0.6.5 lässt der lokale Filter auch **24890-24990 kHz** (12 m) durch, für die Frühzeichen von 50 MHz, und die Quelle **APRS-IS** fügt die kurzfristig wiederholten APRS-Sprünge auf 144 MHz hinzu.
+
 ## Spot-Filter
 
 Es gibt **nur eine Datensammlung für das ganze Programm**: Jeder Spot läuft durch die Filter und geht an den Reiter der jeweiligen Ausbreitungsart. Ab Version 0.4.18 stehen die Filter, der lokale Filter und der Filtertest im Reiter **[EINSTELLUNGEN](Settings-de)**, Unterreiter **Spot-Verteilung**.

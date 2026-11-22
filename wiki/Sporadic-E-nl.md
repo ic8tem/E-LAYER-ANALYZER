@@ -79,5 +79,10 @@ In de subtab **Voorboden meervoudige sprong** zoekt het programma de ketens met 
 - **Gelijke dubbele sprong** (vanaf versie 0.6.3, sprongen «2 =»): tot ongeveer 4700 km, bijvoorbeeld naar Kazachstan, met de wolk op een kwart van het traject zoals in de methode ITU-R P.534-6.
 - De tab **SPRONGTABEL** vat samen hoeveel sprongen op 50 MHz nodig zijn van 500 tot 12000 km, met de foEs van elke sprong en de bronnen.
 - **Footprint van mijn signaal op 6 m** (roze punten): waar je 50 MHz-signaal landt na 2-5 sprongen, boven de wolken van de laatste 30 minuten die geschat zijn uit de spots van alle banden (28-144 MHz) en uit de ionosondes; alleen waar stations zijn.
+- **Corridor met gelijke sprongen** (vanaf versie 0.6.5): twee wolken op 1400-2350 km van elkaar verbinden twee zones op 2800-4700 km met twee gelijke sprongen; de controle op de expeditie 5U5K bevestigt de grens van ongeveer 4700 km.
+- **VROEG TEKEN** (groen, vanaf versie 0.6.5): Es-wolk op 28 of 24 MHz waar 50 MHz nog niet open is; in de proeven ging 50 MHz daar binnen een uur open in 50% van de gevallen (30% zonder), 9-16 minuten vooraf.
+- **Herhaalde APRS** (rood, vanaf versie 0.6.5): minstens twee APRS-sprongen op 2 m boven 900 km op dezelfde wolk binnen 10 minuten = 144 MHz-WAARSCHUWING; het tabblad knippert.
+- **Wat de waarschuwingen waard zijn** (op het station van de auteur, zomers 2024-2026): WAARSCHUWINGEN geslaagd in 46-58% (meervoudige-sprong-QSO in dezelfde richting binnen 2 uur) tegen 8-10% zonder waarschuwing; maar 43% van de openingen komt zonder voorwaarschuwing. De footprint komt in 13,5% van de openingen binnen 500 km van het verre station, tegen 2-4% als hij gedraaid wordt.
+- De wolken **worden niet verplaatst**: de proef van 22-11-2026 toont dat ze verplaatsen met hun snelheid de voorspelling op 15-45 minuten niet verbetert.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

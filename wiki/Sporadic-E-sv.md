@@ -79,5 +79,10 @@ I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp 
 - **Lika dubbelhopp** (från version 0.6.3, hopp ”2 =”): upp till ungefär 4700 km, till exempel mot Kazakstan, med molnet vid en fjärdedel av sträckan som i metoden ITU-R P.534-6.
 - Fliken **HOPPTABELL** sammanfattar hur många hopp som behövs på 50 MHz från 500 till 12000 km, med varje hopps foEs och källorna.
 - **Var min signal landar på 6 m** (rosa punkter): var din signal på 50 MHz landar efter 2-5 hopp, över molnen från de senaste 30 minuterna som uppskattats utifrån spots på alla band (28-144 MHz) och från jonosonderna; bara där det finns stationer.
+- **Korridor med lika hopp** (från version 0.6.5): två moln 1400-2350 km från varandra förbinder två zoner på 2800-4700 km med två lika hopp; kontrollen mot expeditionen 5U5K bekräftar gränsen på omkring 4700 km.
+- **TIDIGT TECKEN** (grönt, från version 0.6.5): Es-moln på 28 eller 24 MHz där 50 MHz ännu inte är öppet; i proven öppnade 50 MHz där inom en timme i 50 % av fallen (30 % utan), 9-16 minuter i förväg.
+- **Upprepad APRS** (röd, från version 0.6.5): minst två APRS-hopp på 2 m över 900 km på samma moln inom 10 minuter = 144 MHz-LARM; fliken blinkar.
+- **Vad larmen är värda** (på författarens station, somrarna 2024-2026): LARM lyckade i 46-58 % (multihopp-QSO i samma riktning inom 2 timmar) mot 8-10 % utan larm; men 43 % av öppningarna kommer utan förvarning. Mönstret för var signalen landar når inom 500 km från den avlägsna stationen i 13,5 % av öppningarna, mot 2-4 % när det vrids.
+- Molnen **flyttas inte**: provet från 2026-11-22 visar att det inte förbättrar prognosen på 15-45 minuter att flytta dem med deras hastighet.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

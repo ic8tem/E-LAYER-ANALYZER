@@ -20,6 +20,10 @@ Ostatnie 2000 spotów, z filtrami pasma i źródła. Archiwum: jeden plik CSV na
 
 **Filtr lokalny** (pole opcjonalne, w zakładce USTAWIENIA): wiersze "DX de" poniżej 27990,0 kHz lub powyżej 145 MHz są odrzucane, nie są wyświetlane w konsoli ani zapamiętywane; między 430 a 440 MHz przechodzą tylko spoty zorzowe. **Nieprecyzyjne lokatory** (mniej niż 6 znaków) pobierane są z CALL3: jeśli CALL3 ma lokator 6-znakowy, zawsze ma on pierwszeństwo. Tak jak w YA-MS, spotami meteor scatter (a nie E-sporadycznego) są spoty w typowych oknach częstotliwości MS (50190-50300, 70100-70400, 144290-144399 kHz) bez napisów innej propagacji (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) oraz spoty z emisjami wyłącznie MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) lub z `<MS>`. Wyjątek: FT8 i FT4 na 50 i 70 MHz, gdzie decyduje znana emisja (FT8 na 70,154 MHz trafia do E-sporadycznego nawet w oknie MS). Spoty z `<AS>`/`<ACS>` (aircraft scatter) nie są używane dla E-sporadycznego.
 
+**Archiwum historyczne** (od wersji 0.6.5): przed opróżnieniem bazy, przy zamykaniu każdy dzień jest dopisywany do `data/archivio_spot/RRRR-MM-DD.csv.gz`; OBŁOKI Es W CZASIE i BENCHMARK 50 MHz czytają także te pliki.
+
+Od wersji 0.6.5 filtr lokalny przepuszcza także **24890-24990 kHz** (12 m), dla wczesnych sygnałów 50 MHz, a źródło **APRS-IS** dodaje skoki APRS w paśmie 144 MHz powtórzone w krótkim czasie.
+
 ## Filtry spotów
 
 Zbieranie danych jest **jedno dla całego programu**: każdy spot przechodzi przez filtry i trafia do zakładki każdego rodzaju propagacji. Od wersji 0.4.18 filtry, filtr lokalny i test filtrów znajdują się w zakładce **[USTAWIENIA](Settings-pl)**, podzakładka **Kierowanie spotów**.

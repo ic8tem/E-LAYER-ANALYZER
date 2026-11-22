@@ -11,6 +11,9 @@ A partir da versão 0.4.18 o separador **DEFINIÇÕES** reúne as opções gerai
 | Estação | Indicativo, locator e altitude, os mesmos da barra superior; **Aplicar** confirma-os para todos os separadores. |
 | Aspeto | Idioma, esquema de cores (os esquemas do YAEC e do YA-MS e, a partir da versão 0.5.0, os seis temas do IP-TRX-CTRL: Claro, Noite, Preto, Azul, Violeta, Verde), **modo compacto** para os portáteis de 13-15 polegadas (a partir da 0.5.2: automático abaixo de 850 píxeis de altura, sempre ou nunca) e **tamanho do tipo de letra de todo o programa** (85-140 %, como no YA-MS). O idioma e as cores reconstroem a janela: as definições e os spots mantêm-se. |
 | Cadeias multi-salto em 50 MHz | A partir da versão 0.6.0: aviso no topo (e opcionalmente uma janela) quando nasce um ALERTA multi-salto em 50 MHz que diz respeito à sua estação: cadeia com o primeiro salto curto a partir de si, ou corredor com uma extremidade a menos de 1200 km. A mesma cadeia não se repete antes de uma hora. |
+| Arquivo de spots | A partir da versão 0.6.5: ao fechar cada dia é comprimido em `data/archivio_spot` (ligado por omissão). |
+| APRS em 144 MHz | A partir da versão 0.6.5: APRS-IS só em leitura, sem palavra-passe; os saltos APRS em 2 m acima de 900 km repetidos em pouco tempo dão um ALERTA de 144 MHz. |
+| Alerta F.A.I. | A partir da versão 0.6.5: o separador F.A.I. pisca quando o F.A.I. é possível ou está em curso. |
 | Mapas e dados de previsão | O continente, o mesmo menu da barra dos separadores. |
 | Hora | Estado do NTP e diferença entre a hora dos servidores e o relógio do PC. |
 | Atualizações | Verificação no GitHub ao arrancar e a cada 30 minutos, atualização automática e silenciosa, botão **Verificar agora**. A atualização automática não se aplica aos pacotes de sistema (.deb, .rpm, Arch, Slackware). |

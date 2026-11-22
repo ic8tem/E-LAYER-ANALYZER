@@ -37,4 +37,6 @@ Pasirinktai trasai: atstumas ir įvertinimas pagal IK3XTV lentelę, azimutas abi
 
 **Įkelti spotus, ADIF arba ALL.TXT** (iš Es DEBESYS LAIKE eksportuoti spotai, kitų stočių ADIF žurnalai, JTDX ar WSJT-X ALL.TXT dekodavimai: šaukinys atpažįstamas iš siuntimo eilučių) ir **Tikrinti grandines**: programa pakartoja trumpų šuolių grandinių taisyklę su stoties 1 kelių šuolių atsivėrimais ir parašo, kiek atsivėrimų ji būtų numačiusi iš anksto (ĮSPĖJIMAS, PIRMTAKAS ar tik pirmas trumpas šuolis), išankstinio laiko medianą ir įspėjimus, po kurių nebuvo kelių šuolių QSO. Be įkeltų šaltinių debesys gaunami tik iš žurnalo, o paskutinis trumpas šuolis beveik nematomas: reikia tolimų stočių duomenų.
 
+**Įspėjimų bandymas** (nuo 0.6.5 versijos): ĮSPĖJIMAMS ir PIRMTAKAMS, kartojamiems kas 15 minučių, ataskaita nurodo, kiek jų pasitvirtino (kelių šuolių QSO ta pačia kryptimi per kitas 2 valandas), klaidingus pavojus ir atskaitos vertę tuose pačiuose sektoriuose be grandinių.
+
 ![Patikra](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

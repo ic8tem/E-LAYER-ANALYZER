@@ -37,4 +37,6 @@ Pour le trajet choisi : distance et classement selon le tableau d'IK3XTV, azimut
 
 **Charger des spots, un ADIF ou un ALL.TXT** (spots exportés par NUAGES Es DANS LE TEMPS, logs ADIF d'autres stations, décodages ALL.TXT de JTDX ou WSJT-X : l'indicatif se reconnaît aux lignes d'émission) et **Vérifier les chaînes** : le programme rejoue sur les ouvertures multi-bond de la station 1 la règle des chaînes à bonds courts et indique combien d'ouvertures il aurait anticipées (ALERTE, PRÉCURSEUR ou seulement le premier bond court), l'avance médiane et les alertes non suivies de QSO multi-bond. Sans sources chargées, les nuages viennent seulement du log, et le dernier bond court se voit à peine : il faut des données de stations lointaines.
 
+**Banc d'essai des alertes** (à partir de la version 0.6.5) : pour les ALERTES et PRÉCURSEURS rejoués toutes les 15 minutes, le compte rendu dit combien ont réussi (QSO multi-bond dans la même direction dans les 2 heures suivantes), les fausses alertes et la référence dans les mêmes secteurs sans chaînes.
+
 ![Vérification](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

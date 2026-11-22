@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) ist die Streuung an Irregularitäten, die entlang des Erdmagnetfelds ausgerichtet sind, typisch für Sommerabende nach Sporadic-E. Das gestreute Signal verlässt die Irregularität auf einem **Kegel**, dessen Achse entlang des Feldes liegt: Zwei Stationen können miteinander arbeiten, wenn sie auf **supplementären Konturen** liegen (a1 + a2 = 180°, Artikel IC8FAX-IC8TEM; ±c-Konturen von K9SE). Das Magnetfeld wird mit dem Modell **IGRF-14** berechnet.
 
+**F.A.I.-Warnung** (ab Version 0.6.5): Von Mai bis September, zwischen 18 und 24 Uhr Ortszeit, nach einer Es-Wolke in 300-1300 km von Ihrer Station **blinkt** der Reiter, und eine rote Zeile oben sagt, wo F.A.I. möglich ist (Regeln des Artikels IC8FAX-IC8TEM); mit aktuellen F.A.I.-Spots sagt sie, dass er im Gang ist. Klick auf die Zeile: Ansicht Iso-Reflexion auf dem Punkt.
+
 ## Ansicht Scatter trail (Paar A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

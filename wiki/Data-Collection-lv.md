@@ -20,6 +20,10 @@ Pēdējie 2000 spoti ar joslu un avotu filtriem. Arhīvs: viens CSV fails dienā
 
 **Lokālais filtrs** (neobligāta rūtiņa, cilnē IESTATĪJUMI): "DX de" rindas zem 27990,0 kHz vai virs 145 MHz tiek atmestas, netiek rādītas konsolē un netiek saglabātas; starp 430 un 440 MHz iziet tikai auroras spoti. **Neprecīzi lokatori** (mazāk par 6 rakstzīmēm) tiek ņemti no CALL3: ja CALL3 ir 6 rakstzīmju lokators, tas vienmēr ir pārāks. Tāpat kā YA-MS, meteor scatter (nevis Sporadic-E) spoti ir tie, kas ir tipiskajos MS frekvenču logos (50190-50300, 70100-70400, 144290-144399 kHz) bez citas izplatīšanās birkām (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), un tie, kuros ir tikai MS lietotas modas (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) vai `<MS>`. Izņēmums: FT8 un FT4 50 un 70 MHz joslās, kur izšķir zināmais režīms (70,154 MHz FT8 nonāk Sporadic-E pat MS logā). Spoti ar `<AS>`/`<ACS>` (aircraft scatter) netiek izmantoti Sporadic-E.
 
+**Vēsturiskais arhīvs** (no versijas 0.6.5): pirms datu bāzes iztukšošanas aizverot katra diena tiek pievienota `data/archivio_spot/GGGG-MM-DD.csv.gz`; Es MĀKOŅI LAIKĀ un BENCHMARK 50 MHz lasa arī šos failus.
+
+No versijas 0.6.5 vietējais filtrs laiž cauri arī **24890-24990 kHz** (12 m) – 50 MHz agrīnajām pazīmēm, un avots **APRS-IS** pievieno īsā laikā atkārtotus APRS lēcienus 144 MHz joslā.
+
 ## Spotu filtri
 
 Datu vākšana **visai programmai ir viena**: katrs spots iziet caur filtriem un nonāk katra izplatīšanās veida cilnē. Kopš versijas 0.4.18 filtri, lokālais filtrs un filtru pārbaude atrodas cilnē **[IESTATĪJUMI](Settings-lv)**, apakšcilnē **Spotu sadale**.

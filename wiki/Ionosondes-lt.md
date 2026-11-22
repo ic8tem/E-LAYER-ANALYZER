@@ -16,6 +16,7 @@
 
 - Kiekvienas jonozondas yra spalvotas taškas su paskutine foEs (tos pačios spalvos kaip Es debesų) ir reikšme MHz; **pilkas**, jei naujų duomenų nėra, su **žiedu**, jei paskutinė jonograma senesnė nei 90 minučių.
 - Lentelė: Kodas, Jonozondas, km nuo jūsų stoties, paskutinės jonogramos UTC, foEs, foF2, MUF(D) ir **Spotai foEs≥**: mažiausia foEs, išvesta iš paskutinių 30 minučių Es spotų, atsispindinčių iki 500 km nuo jonozondo (keičiama), su spotų skaičiumi.
+- **h'Es GIRO** (nuo 0.6.5 versijos, langelis kortelėje REAL-TIME): Es aukščiu tampa naujausių jonozondų h'Es mediana 2500 km spinduliu (80-120 km).
 
 ## Pasirinktas jonozondas
 

@@ -20,6 +20,10 @@ Az utolsó 2000 spot, sáv- és forrásszűrővel. Archívum: naponta egy CSV-f�
 
 **Helyi szűrő** (opcionális jelölőnégyzet, a BEÁLLÍTÁSOK fülön): a 27990,0 kHz alatti vagy 145 MHz feletti "DX de" sorokat elveti, ezek nem jelennek meg a konzolon, és nem tárolódnak; 430 és 440 MHz között csak az aurora-spotok mennek át. A **pontatlan lokátorokat** (6 karakternél rövidebbeket) a CALL3-ból veszi: ha a CALL3-ban 6 karakteres lokátor van, az mindig elsőbbséget élvez. A YA-MS-hez hasonlóan meteor scatter (nem sporadikus E) spotnak számítanak az MS-re jellemző frekvenciaablakokba (50190-50300, 70100-70400, 144290-144399 kHz) eső, más terjedési mód címkéit (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) nem tartalmazó spotok, valamint a kizárólag MS-üzemmódúak (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) vagy `<MS>` jelölésűek. Kivétel az FT8 és az FT4 50 és 70 MHz-en, ahol az ismert üzemmód dönt (a 70,154 MHz-es FT8 az MS-ablakon belül is a sporadikus E-hez kerül). Az `<AS>`/`<ACS>` (repülőgép-szórás, aircraft scatter) jelölésű spotokat nem használja a sporadikus E-hez.
 
+**Történeti archívum** (a 0.6.5-ös verziótól): az adatbázis kiürítése előtt bezáráskor minden nap hozzáadódik a `data/archivio_spot/ÉÉÉÉ-HH-NN.csv.gz` fájlhoz; az Es-FELHŐK AZ IDŐBEN és a BENCHMARK 50 MHz ezeket a fájlokat is olvassa.
+
+A 0.6.5-ös verziótól a helyi szűrő a **24890-24990 kHz**-et (12 m) is átengedi, az 50 MHz korai jeleihez, és az **APRS-IS** forrás hozzáadja a rövid időn belül ismétlődő 144 MHz-es APRS-ugrásokat.
+
 ## Spotszűrők
 
 Az adatgyűjtés **az egész programra egyetlen**: minden spot átmegy a szűrőkön, és az egyes terjedési módok füleire kerül. A 0.4.18-as verziótól a szűrők, a helyi szűrő és a szűrőpróba a **[BEÁLLÍTÁSOK](Settings-hu)** fülön, a **Spotok szétosztása** allapon vannak.

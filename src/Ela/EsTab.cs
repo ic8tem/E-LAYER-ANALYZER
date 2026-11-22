@@ -54,7 +54,7 @@ namespace ELA
             List<string> wn = new List<string>();
             foreach (int w in Windows) wn.Add(Lang.F("ultimi {0} min", w));
             cmbWin = Ui.Combo(wn, Math.Max(0, Array.IndexOf(Windows, (int)cf.GetD("es_minuti", 60))), 120);
-            numH = Ui.N(90, 130, Ui.Dm(cf.GetD("es_quota_km2", EsModel.DefaultH)), 0, 1, 45);
+            numH = Ui.N(80, 130, Ui.Dm(cf.GetD("es_quota_km2", EsModel.DefaultH)), 0, 1, 45);
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD("es_elev_min2", EsModel.DefaultElevMin)), 1, 0.5m, 45);
             chkHes = Ui.C(Lang.T("h'Es GIRO"), cf.GetB("es_quota_giro", false));
             ToolTip.SetTip(chkHes, Lang.T("Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta."));
@@ -257,7 +257,7 @@ namespace ELA
                 ToolTip.SetTip(numH, Giro.HesAsked ? Lang.T("Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.") : Lang.T("Il servizio GIRO non ha dato le h'Es: vale la quota scritta."));
                 return;
             }
-            h = Math.Max(90, Math.Min(130, Math.Round(h)));
+            h = Math.Max(80, Math.Min(120, Math.Round(h)));   // 80-120 km (autore, 22/11/2026)
             ToolTip.SetTip(numH, Lang.F("h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})", h, n, names));
             if (Math.Abs(Ui.V(numH) - h) >= 0.5) numH.Value = (decimal)h;
         }
@@ -418,6 +418,18 @@ namespace ELA
                     });
                     continue;
                 }
+                TepAlert ta = a as TepAlert;
+                if (ta != null)
+                {
+                    tPre.Rows.Add(new TableRow
+                    {
+                        Cells = new[] { ta.LevelText, ta.Region, ta.Band, "1", Lang.F("{0} {1:00}h, indice {2:F0}", ta.Kind, Math.Floor(ta.LocalHour), ta.Index),
+                            ta.DistKm.ToString("F0", CultureInfo.CurrentCulture), ta.Az.ToString("F0", CultureInfo.InvariantCulture) },
+                        Fore = ElectricBlue,
+                        Tag = a
+                    });
+                    continue;
+                }
                 ProdromeAlert pa = a as ProdromeAlert;
                 if (pa != null)
                 {
@@ -464,7 +476,8 @@ namespace ELA
                 + (tep > 0 ? " " + Lang.F("{0} spot transequatoriali (TEP) esclusi.", tep) : "")
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
                 + (esTropo.Count + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count, heldAtl) : "")
-                + (alerts.Count > 0 ? " " + Lang.F("Multi-salto: {0} allerte e {1} precursori (sottolinguetta Precursori multi-salto).", alerts.Count(a => a.Level == 2), alerts.Count(a => a.Level == 1)) : "")
+                + (alerts.Count > 0 ? " " + Lang.F("Multi-salto: {0} allerte e {1} precursori (sottolinguetta Precursori multi-salto).", alerts.Count(a => a.Level == 2 && !(a is TepAlert)), alerts.Count(a => a.Level == 1 && !(a is TepAlert))) : "")
+                + (alerts.Any(a => a is TepAlert) ? " " + Lang.F("TEP: {0}.", string.Join(", ", alerts.OfType<TepAlert>().Select(t => t.Region + " " + t.Index.ToString("F0", CultureInfo.CurrentCulture)))) : "")
                 + (Precursors.LastStrong.Count > 0 ? " " + Lang.F("Nubi forti per il salto corto in 50 MHz: {0}.", Precursors.LastStrong.Count) : "")
                 + ProjText()
                 + (best != null ? " " + Lang.F("MUF più alta per {0}: {1:F0} MHz via {2} (az {3:F0}°).", Station.Call.Length > 0 ? Station.Call : Station.Loc, best.Muf, best.Sq, best.Az) : "");
@@ -717,6 +730,13 @@ namespace ELA
                     if (isSel) map.Markers.Add(new MapMarker { Lat = aa.MidLat, Lon = aa.MidLon, Radius = 0, Label = Lang.T("APRS 144 MHz"), LabelColor = Pal.Red });
                     continue;
                 }
+                TepAlert tp = a as TepAlert;
+                if (tp != null)
+                {
+                    map.Lines.Add(MapView.GreatCircle(Station.Lat, Station.Lon, tp.EndLat, tp.EndLon, Pal.A((byte)(isSel ? 255 : 150), ElectricBlue), isSel ? 2.6 : 1.4, true));
+                    if (isSel) map.Markers.Add(new MapMarker { Lat = tp.EndLat, Lon = tp.EndLon, Radius = 3, Fill = ElectricBlue, Stroke = ElectricBlue, Label = tp.Kind + " " + tp.Region, LabelColor = ElectricBlue });
+                    continue;
+                }
                 ProdromeAlert pa = a as ProdromeAlert;
                 if (pa != null)
                 {
@@ -863,6 +883,20 @@ namespace ELA
                 sb.AppendLine(Lang.T("Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura)."));
                 return;
             }
+            TepAlert tp = a as TepAlert;
+            if (tp != null)
+            {
+                sb.AppendLine(Lang.F("{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.",
+                    tp.LevelText, tp.Region, tp.DistKm, tp.Az, tp.Kind, Math.Floor(tp.LocalHour), Math.Floor((tp.LocalHour % 1) * 60), tp.Index));
+                sb.AppendLine(Lang.F("Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2}, ora {5:F2}, foF2 delle ionosonde {6:F2}.",
+                    tp.FSeason, double.IsNaN(tp.Sfi) ? "-" : tp.Sfi.ToString("F0", CultureInfo.CurrentCulture), tp.FSfi,
+                    double.IsNaN(tp.Kp) ? "-" : tp.Kp.ToString("F1", CultureInfo.CurrentCulture), tp.FKp, tp.FTime, tp.FGiro));
+                sb.AppendLine(double.IsNaN(tp.FoF2) ? Lang.T("Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.")
+                                                    : Lang.F("foF2 più alta entro 2500 km dal punto medio: {0:F1} MHz ({1}).", tp.FoF2, tp.GiroNames));
+                if (tp.Spots > 0) sb.AppendLine(Lang.F("Spot TEP nell'ultima ora vicino a te o alla zona: {0}.", tp.Spots));
+                sb.AppendLine(Lang.T("aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23, anche 144 MHz e oltre, soprattutto agli equinozi. Il minimo solare rende il TEP raro ma non lo cancella: l'SFI pesa, non azzera (decisione dell'autore). I pesi non sono ancora tarati sui dati."));
+                return;
+            }
             ProdromeAlert pa = a as ProdromeAlert;
             if (pa != null)
             {
@@ -870,7 +904,7 @@ namespace ELA
                     pa.FromBand == "12 m" ? "24 MHz" : "28 MHz", pa.Region, Geo.LatLonToLoc(pa.CloudLat, pa.CloudLon, 4), pa.FoEs, pa.N));
                 if (pa.Spot != null) sb.AppendLine(Lang.F("Spot: {0} - {1} {2} MHz, {3:F0} km", pa.Spot.Spotter, pa.Spot.DxCall, pa.Spot.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), pa.Spot.DistanceKm));
                 if (!double.IsNaN(pa.NearKm)) sb.AppendLine(Lang.F("La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).", pa.NearKm, pa.Az));
-                sb.AppendLine(Lang.T("Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 10-15 minuti."));
+                sb.AppendLine(Lang.T("Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 9-16 minuti."));
                 return;
             }
             sb.AppendLine(Lang.F("{0}: {1} in {2}, {3:F0} km, azimut {4:F0}°", a.LevelText, Lang.T(a.Region), a.Band, a.DistKm, a.Az));

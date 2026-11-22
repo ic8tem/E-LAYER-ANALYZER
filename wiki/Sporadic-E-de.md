@@ -79,5 +79,10 @@ Im Unterreiter **Mehrfachsprung-Vorboten** sucht das Programm die Mehrfachsprung
 - **Gleicher Doppelsprung** (ab Version 0.6.3, Sprünge «2 =»): bis etwa 4700 km, zum Beispiel nach Kasachstan, mit der Wolke bei einem Viertel der Strecke wie in der Methode ITU-R P.534-6.
 - Der Reiter **SPRUNGTAFEL** fasst zusammen, wie viele Sprünge auf 50 MHz von 500 bis 12000 km nötig sind, mit der foEs jedes Sprungs und den Quellen.
 - **Footprint meines Signals auf 6 m** (rosa Punkte): wo Ihr 50-MHz-Signal nach 2-5 Sprüngen landet, über den Wolken der letzten 30 Minuten, die aus den Spots aller Bänder (28-144 MHz) und aus den Ionosonden geschätzt wurden; nur wo es Stationen gibt.
+- **Korridor mit gleichen Sprüngen** (ab Version 0.6.5): Zwei Wolken im Abstand von 1400-2350 km verbinden zwei Zonen in 2800-4700 km mit zwei gleichen Sprüngen; die Prüfung an der Expedition 5U5K bestätigt die Grenze von etwa 4700 km.
+- **FRÜHZEICHEN** (grün, ab Version 0.6.5): Es-Wolke auf 28 oder 24 MHz, wo 50 MHz noch nicht offen ist; in den Prüfungen öffnete 50 MHz dort innerhalb einer Stunde in 50 % der Fälle (30 % ohne), 9-16 Minuten vorher.
+- **Wiederholtes APRS** (rot, ab Version 0.6.5): mindestens zwei APRS-Sprünge auf 2 m über 900 km auf derselben Wolke innerhalb von 10 Minuten = 144-MHz-WARNUNG; der Reiter blinkt.
+- **Wie gut die Warnungen sind** (an der Station des Autors, Sommer 2024-2026): WARNUNGEN erfolgreich zu 46-58 % (Mehrfachsprung-QSO in derselben Richtung innerhalb 2 Stunden) gegenüber 8-10 % ohne Warnung; aber 43 % der Öffnungen kommen ohne Vorwarnung. Der Footprint erreicht in 13,5 % der Öffnungen den Umkreis von 500 km um die ferne Station, gegenüber 2-4 % wenn gedreht.
+- Die Wolken **werden nicht verschoben**: Die Prüfung vom 22.11.2026 zeigt, dass ihr Verschieben mit ihrer Geschwindigkeit die Vorhersage auf 15-45 Minuten nicht verbessert.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) on hajumine geomagnetvälja suunalistelt ebahomogeensustelt, tüüpiline suveõhtutel pärast sporaadilist E-d. Hajunud signaal lahkub **koonusel**, mille telg on välja suunaline: kaks jaama saavad omavahel sidet pidada, kui nad asuvad **täiendavatel kontuuridel** (a1 + a2 = 180°, IC8FAX-i ja IC8TEM-i artikkel; K9SE ±c kontuurid). Magnetväli arvutatakse mudeliga **IGRF-14**.
 
+**F.A.I. hoiatus** (alates versioonist 0.6.5): maist septembrini, kohaliku aja järgi 18 ja 24 vahel, pärast Es-pilve sinu jaamast 300-1300 km kaugusel sakk **vilgub** ja punane rida üleval ütleb, kus F.A.I. on võimalik (artikli IC8FAX-IC8TEM reeglid); värskete F.A.I. spottidega ütleb see, et see on käimas. Klõps real: vaade Isopeegeldus punkti kohal.
+
 ## Vaade Scatter trail (paar A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

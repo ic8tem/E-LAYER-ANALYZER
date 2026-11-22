@@ -978,3 +978,48 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	felhő foEs ≥ {0:F1} MHz értékkel {1:F0} km-re
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Második ugrás, pont az útvonal háromnegyedénél: {0}, szükséges foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Kettős ugrás egyenlő ugrásokkal (ITU-R P.534-6): a szerző szerint ez a tipikus eset körülbelül 4700 km-ig, például Kazahsztán felé; azon túl, a többi kontinens felé, a végeken rövid ugrásokkal induló láncok érvényesek.
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Próba: {0} FIGYELMEZTETÉS, amelyet két órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}% (téves riasztás {2:F0}%).
+Riferimento negli stessi settori senza catene: {0:F0}%.	Viszonyítási érték ugyanazokban a szektorokban láncok nélkül: {0:F0}%.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Próba: {0} ELŐJEL, amelyet két órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}%.
+corridoio a salti uguali, ti riguarda	egyenlő ugrású folyosó, önt érinti
+corridoio a salti uguali	egyenlő ugrású folyosó
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Helyi szűrő: eldobja a klaszter 27990,0 kHz alatti és 145 MHz feletti sorait (nem jelennek meg és nem tárolódnak), kivéve a 24890-24990 kHz-et (az 50 MHz korai jelei); 430-440 MHz-en csak a sarki fény spotjai jutnak át
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz e dai 24890-24990 kHz; in 430-440 MHz passano solo gli spot di aurora)	Helyi szűrő: a sor eldobva (a 27990 kHz - 145 MHz és a 24890-24990 kHz tartományon kívül; 430-440 MHz-en csak a sarki fény spotjai jutnak át)
+ALLERTA 144 MHz: salti APRS ripetuti oltre i 900 km su {0} ({1})	144 MHz-es FIGYELMEZTETÉS: ismétlődő, 900 km feletti APRS-ugrások {0} felett ({1})
+h'Es GIRO	h'Es GIRO
+Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta.	Az Es-réteg magassága a GIRO-ionoszondákból: az utolsó 90 perc h'Es-értékeinek mediánja az állomásától 2500 km-en belül. Friss adatok nélkül a beírt magasság érvényes.
+Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.	Nincs friss h'Es a GIRO-ionoszondáktól 2500 km-en belül: a beírt magasság érvényes.
+Il servizio GIRO non ha dato le h'Es: vale la quota scritta.	A GIRO szolgáltatás nem adott h'Es-t: a beírt magasság érvényes.
+h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})	h'Es GIRO: {0:F0} km, {1} ionoszonda mediánja ({2})
+APRS ripetuto ({0})	ismétlődő APRS ({0})
+nube in {0}	felhő: {0}
+Verifica della proiezione in questa sessione: {0} stazioni ti hanno ascoltato in 50 MHz oltre i 2800 km, {1} entro 500 km da un punto rosa.	A lefedettség ellenőrzése ebben a munkamenetben: {0} állomás hallotta önt 50 MHz-en 2800 km felett, ebből {1} egy rózsaszín ponttól 500 km-en belül.
+APRS 144 MHz	APRS 144 MHz
+prodromo: nube in {0}	korai jel: felhő, {0}
+ALLERTA 144 MHz da APRS: {0} salti radio APRS in 2 m oltre i 900 km negli ultimi 30 minuti, punto medio su {1} ({2}), ultimo alle {3:HH:mm} UTC.	144 MHz-es FIGYELMEZTETÉS APRS-ből: {0} APRS-rádióugrás a 2 m-es sávban 900 km felett az utolsó 30 percben, felezőpont {1} felett ({2}), az utolsó {3:HH:mm} UTC-kor.
+Stazioni: {0}	Állomások: {0}
+Il punto medio è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	A felezőpont {0:F0} km-re van az állomásától (azimut {1:F0}°).
+Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura).	A szerző szabálya: egyetlen APRS-csomag semmit sem mond (lehet repülőgép vagy meteorszórás); a rövid időn belüli ismétlődés számít, legalább két ugrás a felezőponttal 150 km-en belül és legfeljebb 10 perc különbséggel. Csomagolvasó, mint a LIVETROPOVHF-ben (APRS-IS csak olvasásra).
+PRODROMO: nube Es in {0} su {1} ({2}), foEs ≥ {3:F1} MHz, {4} spot negli ultimi 15 minuti; in 50 MHz nessuno spot Es entro 300 km negli ultimi 30 minuti.	KORAI JEL: Es-felhő, {0}, {1} felett ({2}), foEs ≥ {3:F1} MHz, {4} spot az utolsó 15 percben; 50 MHz-en az utolsó 30 percben nincs Es-spot 300 km-en belül.
+Spot: {0} - {1} {2} MHz, {3:F0} km	Spot: {0} - {1} {2} MHz, {3:F0} km
+La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	A felhő {0:F0} km-re van az állomásától (azimut {1:F0}°).
+Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 9-16 minuti.	Ellenőrzés három olasz állomás dekódolásain (94 nap): egy 28 MHz-es felhő után az 50 MHz a következő órában 300 km-en belül az esetek 50%-ában nyílt meg, szemben a 28 MHz-es felhő nélküli zónák 30%-ával; medián előny 9-16 perc.
+Ginevra	Genf
+Budapest	Budapest
+Bruxelles	Brüsszel
+Albania	Albánia
+Corsica	Korzika
+F.A.I. IN CORSO: {0} spot F.A.I. negli ultimi 30 minuti (ultimo {1} - {2}, {3} MHz).	F.A.I. FOLYAMATBAN: {0} F.A.I.-spot az utolsó 30 percben (utolsó {1} - {2}, {3} MHz).
+F.A.I. POSSIBILE: nube Es su {0} ({1}), {2:F0} km, QTF {3:F0}°, ore {4:00}:{5:00} locali; linea di massima ricezione su {6}.	F.A.I. LEHETSÉGES: Es-felhő {0} felett ({1}), {2:F0} km, QTF {3:F0}°, helyi idő {4:00}:{5:00}; a legjobb vétel vonala {6} felett.
+PRODROMO	KORAI JEL
+Clic: linee di iso-riflessione dalla tua stazione sulla prima nube indicata	Kattintás: izoflexiós vonalak az állomásától az első megadott felhőre
+Archivio storico degli spot: alla chiusura ogni giorno va compresso in data/archivio_spot	Történeti spotarchívum: bezáráskor minden nap tömörítve a data/archivio_spot mappába kerül
+Archivio degli spot	Spotarchívum
+Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione.	Bezáráskor a spot-adatbázis kiürül (a szerző szabálya); bekapcsolt archívummal a kiürítés előtt minden nap hozzáadódik az ÉÉÉÉ-HH-NN.csv.gz fájlhoz (nyitási napokon kb. 1 MB naponta). A fájlok az Es-FELHŐK AZ IDŐBEN és a BENCHMARK 50 MHz fülön tölthetők be szezonstatisztikához.
+APRS-IS in sola lettura: salti APRS in 2 m oltre i 900 km ripetuti a breve tempo = ALLERTA 144 MHz	APRS-IS csak olvasásra: rövid időn belül ismétlődő, 900 km feletti 2 m-es APRS-ugrások = 144 MHz-es FIGYELMEZTETÉS
+APRS in 144 MHz	APRS 144 MHz-en
+Collegamento a rotate.aprs2.net in sola lettura (senza password), con i pacchetti entro 3000 km dalla tua stazione. Un salto vale solo fra stazioni di posizione nota (sorgente, digipeater, IGate), come in LIVETROPOVHF; conta solo se si ripete entro 10 minuti con il punto medio entro 150 km.	Csak olvasható kapcsolat a rotate.aprs2.net-hez (jelszó nélkül), az állomásától 3000 km-en belüli csomagokkal. Egy ugrás csak ismert helyzetű állomások között számít (forrás, digipeater, IGate), mint a LIVETROPOVHF-ben; csak akkor számít, ha 10 percen belül megismétlődik a felezőponttal 150 km-en belül.
+La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	Az F.A.I. fül villog, ha az F.A.I. lehetséges vagy folyamatban van
+Allerta F.A.I.	F.A.I.-figyelmeztetés
+Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Az IC8FAX-IC8TEM cikk (2011) szabályai: májustól szeptemberig, helyi idő szerint 18 és 24 óra között, egy 50, 70 vagy 144 MHz-es Es-felhő után az állomásától 300-1300 km-re, ha a legjobb vétel vonala ott halad, ahol állomások vannak. F.A.I. folyamatban: F.A.I.-spotok az utolsó 30 percben.
+sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz alatt (kivéve 24890-24990 kHz) vagy 145 MHz felett; 430-440 MHz-en csak sarki fény

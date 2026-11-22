@@ -16,6 +16,7 @@
 
 - Katrs jonozonds ir krāsains punkts ar pēdējo foEs (tās pašas krāsas kā Es mākoņiem) un vērtību MHz; **pelēks**, ja nav svaigu datu, ar **apli**, ja pēdējā jonogramma ir vecāka par 90 minūtēm.
 - Tabula: Kods, Jonozonds, km no jūsu stacijas, pēdējās jonogrammas UTC, foEs, foF2, MUF(D) un **Spoti foEs≥**: minimālā foEs, kas secināta no pēdējo 30 minūšu Es spotiem, kas atstarojas līdz 500 km no jonozonda (maināms), ar spotu skaitu.
+- **h'Es GIRO** (no versijas 0.6.5, rūtiņa cilnē REAL-TIME): par Es augstumu kļūst jaunāko jonozondu h'Es mediāna 2500 km rādiusā (80-120 km).
 
 ## Izvēlētais jonozonds
 

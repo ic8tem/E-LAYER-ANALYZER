@@ -37,4 +37,6 @@ For valgt strekning: avstand og vurdering etter IK3XTV-tabellen, asimut i begge 
 
 **Last inn spot, ADIF eller ALL.TXT** (spot eksportert fra Es-SKYER OVER TID, ADIF-logger fra andre stasjoner, ALL.TXT-dekodinger fra JTDX eller WSJT-X: kallesignalet gjenkjennes på sendelinjene) og **Kontroller kjedene**: programmet spiller regelen for kjeder med korte hopp av på nytt på stasjon 1s multihopp-åpninger og skriver hvor mange åpninger den ville ha forutsett (ALARM, FORLØPER eller bare det første korte hoppet), median forvarsel og alarmene som ikke ble fulgt av multihopp-QSO-er. Uten innlastede kilder kommer skyene bare fra loggen, og det siste korte hoppet ses nesten ikke: det trengs data fra fjerne stasjoner.
 
+**Benchmark av alarmene** (fra versjon 0.6.5): for ALARMER og FORLØPERE spilt av på nytt hvert 15. minutt sier rapporten hvor mange som lyktes (multihopp-QSO i samme retning de påfølgende 2 timene), de falske alarmene og referansen i samme sektorer uten kjeder.
+
 ![Kontroll](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

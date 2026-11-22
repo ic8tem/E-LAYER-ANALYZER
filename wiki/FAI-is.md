@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) er dreifing frá óreglum sem raðast eftir segulsviði jarðar, dæmigerð á sumarkvöldum eftir sporadic-E. Dreifða merkið fer út eftir **keilu** sem hefur ás sinn eftir sviðinu: tvær stöðvar geta náð sambandi ef þær liggja á **viðbótarferlum** (a1 + a2 = 180°, grein IC8FAX-IC8TEM; ±c-ferlar K9SE). Segulsviðið er reiknað með líkaninu **IGRF-14**.
 
+**F.A.I.-viðvörun** (frá útgáfu 0.6.5): frá maí til september, á milli 18 og 24 að staðartíma, eftir Es-ský í 300-1300 km frá stöðinni þinni **blikkar** flipinn og rauð lína efst segir hvar F.A.I. er mögulegt (reglur greinarinnar IC8FAX-IC8TEM); með nýlegum F.A.I.-spotum segir hún að það sé í gangi. Smellur á línuna: sýnin Jafnendurvarp á punktinum.
+
 ## Sýnin Scatter trail (par A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

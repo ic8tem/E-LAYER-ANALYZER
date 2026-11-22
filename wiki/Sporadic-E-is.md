@@ -79,5 +79,10 @@ Efst til hægri á kortinu birtist samantekt N0NBH (E-skip fyrir valda heimsálf
 - **Jafnt tvístökk** (frá útgáfu 0.6.3, stökk «2 =»): upp að um 4700 km, til dæmis til Kasakstan, með skýið á fjórðungi leiðarinnar eins og í aðferðinni ITU-R P.534-6.
 - Flipinn **STÖKKATAFLA** dregur saman hve mörg stökk þarf á 50 MHz frá 500 til 12000 km, með foEs hvers stökks og heimildunum.
 - **Lendingarsvæði merkis míns á 6 m** (bleikir punktar): hvar merkið þitt á 50 MHz lendir eftir 2-5 stökk, yfir skýjum síðustu 30 mínútna sem áætluð eru út frá spotum allra banda (28-144 MHz) og jónósöndum; aðeins þar sem stöðvar eru.
+- **Gangur með jöfnum stökkum** (frá útgáfu 0.6.5): tvö ský í 1400-2350 km fjarlægð hvort frá öðru tengja tvö svæði í 2800-4700 km með tveimur jöfnum stökkum; athugunin á leiðangrinum 5U5K staðfestir mörkin um 4700 km.
+- **FYRSTA MERKI** (grænt, frá útgáfu 0.6.5): Es-ský á 28 eða 24 MHz þar sem 50 MHz hefur ekki enn opnast; í prófununum opnaðist 50 MHz þar innan klukkustundar í 50% tilvika (30% án þess), 9-16 mínútum fyrr.
+- **Endurtekið APRS** (rautt, frá útgáfu 0.6.5): að minnsta kosti tvö APRS-stökk á 2 m yfir 900 km á sama skýi innan 10 mínútna = 144 MHz-VIÐVÖRUN; flipinn blikkar.
+- **Hvers virði viðvaranirnar eru** (á stöð höfundar, sumrin 2024-2026): VIÐVARANIR heppnaðar í 46-58% (fjölstökks-QSO í sömu átt innan 2 klukkustunda) á móti 8-10% án viðvörunar; en 43% opnana koma án fyrirvara. Lendingarsvæðið nær innan 500 km frá fjarlægu stöðinni í 13,5% opnana, á móti 2-4% þegar því er snúið.
+- Skýin **eru ekki færð**: prófunin frá 22.11.2026 sýnir að það bætir ekki spána á 15-45 mínútum að færa þau með hraða sínum.
 
 ![Gangur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

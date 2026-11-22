@@ -97,7 +97,7 @@ namespace ELA
 
         // h'Es (dal 22/11/2026, richiesta dell'autore): si chiede anche la quota virtuale minima della traccia Es (codice URSI 34)
         public static volatile bool HesAsked = true;
-        // quota dello strato Es vicino a un punto: mediana delle h'Es recenti (90 minuti) delle ionosonde entro km, fra 85 e 140 km
+        // quota dello strato Es vicino a un punto: mediana delle h'Es recenti (90 minuti) delle ionosonde entro km, fra 80 e 140 km, limitata a 80-120 km
         public static double EsHeight(double lat, double lon, double km, out int n, out string names)
         {
             n = 0; names = "";
@@ -107,7 +107,7 @@ namespace ELA
                 if (Geo.DistanceKm(lat, lon, s.Lat, s.Lon) > km) continue;
                 DateTime when;
                 double h = s.LastValue(r => r.HEs, FreshMin, out when);
-                if (double.IsNaN(h) || h < 85 || h > 140) continue;
+                if (double.IsNaN(h) || h < 80 || h > 140) continue;
                 v.Add(h);
                 if (names.Length < 60) names += (names.Length > 0 ? ", " : "") + s.Name + " " + h.ToString("F0", CultureInfo.InvariantCulture);
             }

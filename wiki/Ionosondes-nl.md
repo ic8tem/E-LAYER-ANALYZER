@@ -16,6 +16,7 @@ Subtab van **SPORADIC-E** (vanaf versie 0.5.2): de **gemeten foEs** van de ionos
 
 - Elke ionosonde is een gekleurde stip met de laatste foEs (dezelfde kleuren als de Es-wolken) en de waarde in MHz; **grijs** als ze geen recente gegevens heeft, met de **ring** als het laatste ionogram ouder is dan 90 minuten.
 - Tabel: Code, Ionosonde, km vanaf je station, UTC van het laatste ionogram, foEs, foF2, MUF(D) en **Spot foEs≥**: de minimale foEs afgeleid uit de Es-spots van de laatste 30 minuten die binnen 500 km van de ionosonde reflecteren (instelbaar), met het aantal spots.
+- **h'Es GIRO** (vanaf versie 0.6.5, vakje in REAL-TIME): de Es-hoogte wordt de mediaan van de recente h'Es van de ionosondes binnen 2500 km (80-120 km).
 
 ## De gekozen ionosonde
 

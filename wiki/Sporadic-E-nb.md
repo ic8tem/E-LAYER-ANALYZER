@@ -79,5 +79,10 @@ I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihop
 - **Likt dobbelthopp** (fra versjon 0.6.3, hopp «2 =»): opp til rundt 4700 km, for eksempel mot Kasakhstan, med skyen ved en firedel av strekningen som i metoden ITU-R P.534-6.
 - Fanen **HOPPTABELL** oppsummerer hvor mange hopp som trengs på 50 MHz fra 500 til 12000 km, med foEs for hvert hopp og kildene.
 - **Hvor signalet mitt lander på 6 m** (rosa punkter): hvor signalet ditt på 50 MHz lander etter 2-5 hopp, over skyene fra de siste 30 minuttene som er estimert ut fra spot på alle bånd (28-144 MHz) og fra ionosondene; bare der det finnes stasjoner.
+- **Korridor med like hopp** (fra versjon 0.6.5): to skyer 1400-2350 km fra hverandre forbinder to soner på 2800-4700 km med to like hopp; kontrollen mot ekspedisjonen 5U5K bekrefter grensen på omkring 4700 km.
+- **TIDLIG TEGN** (grønn, fra versjon 0.6.5): Es-sky på 28 eller 24 MHz der 50 MHz ennå ikke er åpen; i prøvene åpnet 50 MHz der innen en time i 50 % av tilfellene (30 % uten), 9-16 minutter før.
+- **Gjentatt APRS** (rød, fra versjon 0.6.5): minst to APRS-hopp på 2 m over 900 km på samme sky innen 10 minutter = 144 MHz-ALARM; fanen blinker.
+- **Hva alarmene er verdt** (på forfatterens stasjon, somrene 2024-2026): ALARMER vellykkede i 46-58 % (multihopp-QSO i samme retning innen 2 timer) mot 8-10 % uten alarm; men 43 % av åpningene kommer uten varsel. Mønsteret for hvor signalet lander når innenfor 500 km fra den fjerne stasjonen i 13,5 % av åpningene, mot 2-4 % når det dreies.
+- Skyene **flyttes ikke**: prøven fra 22.11.2026 viser at det ikke forbedrer prognosen på 15-45 minutter å flytte dem med hastigheten deres.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

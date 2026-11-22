@@ -37,4 +37,6 @@ A választott útvonalra: távolság és besorolás az IK3XTV-táblázat szerint
 
 **Spotok, ADIF vagy ALL.TXT betöltése** (az Es-FELHŐK AZ IDŐBEN fülről exportált spotok, más állomások ADIF-naplói, JTDX vagy WSJT-X ALL.TXT dekódolásai: a hívójelet az adási sorokról ismeri fel) és **A láncok ellenőrzése**: a program az 1. állomás többugrásos nyitásain újrajátssza a rövid ugrásos láncok szabályát, és kiírja, hány nyitást jelzett volna előre (FIGYELMEZTETÉS, ELŐJEL vagy csak az első rövid ugrás), a medián előnyt és azokat a figyelmeztetéseket, amelyeket nem követett többugrásos QSO. Betöltött források nélkül a felhők csak a naplóból származnak, és az utolsó rövid ugrás alig látszik: távoli állomások adatai kellenek.
 
+**A figyelmeztetések próbája** (a 0.6.5-ös verziótól): a 15 percenként lejátszott FIGYELMEZTETÉSEKRE és ELŐJELEKRE a jelentés megadja, hány vált be (többugrásos QSO ugyanabban az irányban a következő 2 órában), a téves riasztásokat és a viszonyítási értéket ugyanazokban a szektorokban láncok nélkül.
+
 ![Ellenőrzés](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

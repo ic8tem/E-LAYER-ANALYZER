@@ -79,5 +79,10 @@ En la subpestaña **Precursores de multisalto**, el programa busca las cadenas d
 - **Doble salto igual** (desde la versión 0.6.3, saltos «2 =»): hasta unos 4700 km, por ejemplo hacia Kazajistán, con la nube a un cuarto del trayecto como en el método UIT-R P.534-6.
 - La pestaña **ÁBACO DE SALTOS** resume cuántos saltos hacen falta en 50 MHz de 500 a 12000 km, con la foEs de cada salto y las fuentes.
 - **Huella de mi señal en 6 m** (puntos rosas): dónde cae tu señal de 50 MHz después de 2-5 saltos, sobre las nubes de los últimos 30 minutos estimadas a partir de los spots de todas las bandas (28-144 MHz) y de las ionosondas; solo donde hay estaciones.
+- **Corredor de saltos iguales** (desde la versión 0.6.5): dos nubes a 1400-2350 km una de otra enlazan dos zonas a 2800-4700 km con dos saltos iguales; la comprobación con la expedición 5U5K confirma el límite de unos 4700 km.
+- **SEÑAL TEMPRANA** (verde, desde la versión 0.6.5): nube Es en 28 o 24 MHz donde los 50 MHz aún no han abierto; en las pruebas los 50 MHz abrieron allí en menos de una hora en el 50% de los casos (30% sin ella), con 9-16 minutos de anticipo.
+- **APRS repetido** (rojo, desde la versión 0.6.5): al menos dos saltos APRS en 2 m de más de 900 km sobre la misma nube en 10 minutos = ALERTA de 144 MHz; la pestaña parpadea.
+- **Cuánto valen las alertas** (en la estación del autor, veranos 2024-2026): ALERTAS acertadas en el 46-58% (QSO multisalto en la misma dirección en 2 horas) frente al 8-10% sin alerta; pero el 43% de las aperturas llega sin aviso. La huella llega a menos de 500 km de la estación lejana en el 13,5% de las aperturas, frente al 2-4% si se gira.
+- Las nubes **no se desplazan**: la prueba del 22/11/2026 muestra que desplazarlas con su velocidad no mejora la previsión a 15-45 minutos.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

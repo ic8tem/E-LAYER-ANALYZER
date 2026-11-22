@@ -37,4 +37,6 @@ Für die gewählte Strecke: Entfernung und Einstufung nach der Tabelle IK3XTV, A
 
 **Spots, ADIF oder ALL.TXT laden** (von Es-WOLKEN IM ZEITVERLAUF exportierte Spots, ADIF-Logs anderer Stationen, ALL.TXT-Dekodierungen von JTDX oder WSJT-X: Das Rufzeichen wird an den Sendezeilen erkannt) und **Ketten prüfen**: Das Programm spielt auf den Mehrfachsprung-Öffnungen von Station 1 die Regel der Ketten mit kurzen Sprüngen nach und schreibt, wie viele Öffnungen es vorhergesehen hätte (WARNUNG, VORBOTE oder nur der erste kurze Sprung), den medianen Vorlauf und die Warnungen, denen keine Mehrfachsprung-QSOs folgten. Ohne geladene Quellen kommen die Wolken nur aus dem Log, und der letzte kurze Sprung ist kaum zu sehen: Es braucht Daten weit entfernter Stationen.
 
+**Benchmark der Warnungen** (ab Version 0.6.5): Für die alle 15 Minuten nachgespielten WARNUNGEN und VORBOTEN sagt der Bericht, wie viele erfolgreich waren (Mehrfachsprung-QSO in derselben Richtung in den 2 Stunden danach), die Fehlalarme und die Referenz in denselben Sektoren ohne Ketten.
+
 ![Prüfung](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

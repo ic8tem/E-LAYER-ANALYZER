@@ -20,6 +20,10 @@ Les 2000 derniers spots, avec des filtres par bande et par source. Archive : un 
 
 **Filtre local** (case facultative, dans RÉGLAGES) : les lignes « DX de » sous 27990,0 kHz ou au-dessus de 145 MHz sont écartées, ni affichées dans la console, ni enregistrées ; entre 430 et 440 MHz, seuls les spots d'aurore passent. Les **locators imprécis** (moins de 6 caractères) sont pris dans CALL3 : si CALL3 a un locator à 6 caractères, il l'emporte toujours. Comme dans YA-MS, les spots meteor scatter (et non Sporadic-E) sont ceux situés dans les fenêtres de fréquences typiques du MS (50190-50300, 70100-70400, 144290-144399 kHz) sans balise d'une autre propagation (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), ainsi que ceux portant des modes propres au MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ou `<MS>`. Exception : FT8 et FT4 en 50 et 70 MHz, où un mode connu décide (le FT8 de 70,154 MHz va au Sporadic-E même dans la fenêtre MS). Les spots avec `<AS>`/`<ACS>` (aircraft scatter) ne sont pas utilisés pour le Sporadic-E.
 
+**Archive historique** (à partir de la version 0.6.5) : avant de vider la base, à la fermeture chaque jour est ajouté à `data/archivio_spot/AAAA-MM-JJ.csv.gz` ; NUAGES Es DANS LE TEMPS et BENCHMARK 50 MHz lisent aussi ces fichiers.
+
+À partir de la version 0.6.5, le filtre local laisse aussi passer **24890-24990 kHz** (12 m), pour les signes précoces du 50 MHz, et la source **APRS-IS** ajoute les bonds APRS en 144 MHz répétés à court terme.
+
 ## Filtres des spots
 
 La collecte des données est **unique pour tout le programme** : chaque spot passe par les filtres et va à l'onglet de chaque mode de propagation. Depuis la version 0.4.18, les filtres, le filtre local et le test des filtres se trouvent dans l'onglet **[RÉGLAGES](Settings-fr)**, sous-onglet **Aiguillage des spots**.

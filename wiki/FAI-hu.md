@@ -4,6 +4,8 @@
 
 Az F.A.I. (Field Aligned Irregularities) a geomágneses tér mentén rendeződött irregularitásokon történő szórás, amely a nyári estékre jellemző, a sporadikus E után. A szórt jel egy **kúpon** távozik, amelynek tengelye a tér irányába esik: két állomás akkor tud összeköttetést létesíteni, ha **kiegészítő kontúrokon** helyezkedik el (a1 + a2 = 180°, IC8FAX-IC8TEM cikk; K9SE ±c kontúrjai). A mágneses teret az **IGRF-14** modellel számolja.
 
+**F.A.I.-figyelmeztetés** (a 0.6.5-ös verziótól): májustól szeptemberig, helyi idő szerint 18 és 24 óra között, egy az állomásától 300-1300 km-re lévő Es-felhő után a fül **villog**, és felül egy piros sor megmondja, hol lehetséges az F.A.I. (az IC8FAX-IC8TEM cikk szabályai); friss F.A.I.-spotokkal azt írja, hogy folyamatban van. Kattintás a sorra: Izoflexió nézet a pontra.
+
 ## Scatter trail nézet (A-B pár)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

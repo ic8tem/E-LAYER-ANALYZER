@@ -79,5 +79,10 @@ Dans le sous-onglet **Précurseurs multi-bond**, le programme cherche les chaîn
 - **Double bond égal** (depuis la version 0.6.3, bonds « 2 = ») : jusqu'à environ 4700 km, par exemple vers le Kazakhstan, avec le nuage au quart du trajet comme dans la méthode UIT-R P.534-6.
 - L'onglet **ABAQUE DES BONDS** résume combien de bonds il faut sur 50 MHz de 500 à 12000 km, avec la foEs de chaque bond et les sources.
 - **Empreinte de mon signal sur 6 m** (points roses) : où votre signal 50 MHz atterrit après 2-5 bonds, au-dessus des nuages des 30 dernières minutes estimés à partir des spots de toutes les bandes (28-144 MHz) et des ionosondes ; seulement là où il y a des stations.
+- **Corridor à bonds égaux** (à partir de la version 0.6.5) : deux nuages à 1400-2350 km l'un de l'autre relient deux zones à 2800-4700 km par deux bonds égaux ; la vérification sur l'expédition 5U5K confirme la limite d'environ 4700 km.
+- **SIGNE PRÉCOCE** (vert, à partir de la version 0.6.5) : nuage Es en 28 ou 24 MHz là où le 50 MHz n'est pas encore ouvert ; dans les essais le 50 MHz s'y est ouvert dans l'heure dans 50 % des cas (30 % sans), 9-16 minutes à l'avance.
+- **APRS répété** (rouge, à partir de la version 0.6.5) : au moins deux bonds APRS en 2 m au-delà de 900 km sur le même nuage en 10 minutes = ALERTE 144 MHz ; l'onglet clignote.
+- **Ce que valent les alertes** (sur la station de l'auteur, étés 2024-2026) : ALERTES réussies à 46-58 % (QSO multi-bond dans la même direction en 2 heures) contre 8-10 % sans alerte ; mais 43 % des ouvertures arrivent sans préavis. L'empreinte arrive à moins de 500 km de la station lointaine dans 13,5 % des ouvertures, contre 2-4 % une fois tournée.
+- Les nuages **ne sont pas déplacés** : l'essai du 22/11/2026 montre que les déplacer avec leur vitesse n'améliore pas la prévision à 15-45 minutes.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

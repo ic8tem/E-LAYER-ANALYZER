@@ -16,6 +16,7 @@ Undirflipi **SPORADIC-E** (frá útgáfu 0.5.2): **foEs mæld** af jónósöndum
 
 - Hver jónósanda er litaður punktur með síðustu foEs (sömu litir og Es-skýin) og gildinu í MHz; **grá** ef hún hefur engin nýleg gögn, með **hring** ef síðasta jónóritið er eldra en 90 mínútna.
 - Tafla: Kóði, Jónósanda, km frá stöðinni þinni, UTC síðasta jónórits, foEs, foF2, MUF(D) og **Spot foEs≥**: lágmarks-foEs leidd af Es-spotum síðustu 30 mínútna sem endurvarpast innan 500 km frá jónósöndunni (stillanlegt), með fjölda spotanna.
+- **h'Es GIRO** (frá útgáfu 0.6.5, reitur í REAL-TIME): Es-hæðin verður miðgildi nýlegra h'Es jónósandanna innan 2500 km (80-120 km).
 
 ## Valin jónósanda
 

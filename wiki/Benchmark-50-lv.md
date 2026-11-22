@@ -37,4 +37,6 @@ Izvēlētajai trasei: attālums un vērtējums pēc IK3XTV tabulas, azimuts abos
 
 **Ielādēt spotus, ADIF vai ALL.TXT** (no Es MĀKOŅI LAIKĀ eksportēti spoti, citu staciju ADIF žurnāli, JTDX vai WSJT-X ALL.TXT dekodējumi: izsaukuma signālu atpazīst pēc raidīšanas rindām) un **Pārbaudīt ķēdes**: programma atkārto īso lēcienu ķēžu noteikumu stacijas 1 vairāklēcienu atvēršanās gadījumiem un norāda, cik atvēršanās tā būtu paredzējusi iepriekš (BRĪDINĀJUMS, PRIEKŠVĒSTNESIS vai tikai pirmais īsais lēciens), laika priekšrocības mediānu un brīdinājumus, kuriem nesekoja vairāklēcienu QSO. Bez ielādētiem avotiem mākoņi nāk tikai no žurnāla, un pēdējais īsais lēciens gandrīz nav redzams: vajag tālu staciju datus.
 
+**Brīdinājumu pārbaude** (no versijas 0.6.5): BRĪDINĀJUMIEM un PRIEKŠVĒSTNEŠIEM, kas atkārtoti ik pēc 15 minūtēm, atskaite norāda, cik no tiem izdevās (vairāklēcienu QSO tajā pašā virzienā nākamajās 2 stundās), viltus trauksmes un salīdzinājuma vērtību tajos pašos sektoros bez ķēdēm.
+
 ![Pārbaude](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

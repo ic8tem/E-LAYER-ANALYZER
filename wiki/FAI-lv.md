@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) ir izkliede no neregularitātēm, kas orientētas gar ģeomagnētisko lauku; tā raksturīga vasaras vakariem pēc sporādiskā E. Izkliedētais signāls aiziet pa **konusu**, kura ass ir vērsta gar lauku: divas stacijas var sazināties, ja tās atrodas uz **papildinošām kontūrām** (a1 + a2 = 180°, IC8FAX-IC8TEM raksts; K9SE ±c kontūras). Magnētiskais lauks tiek aprēķināts ar modeli **IGRF-14**.
 
+**F.A.I. brīdinājums** (no versijas 0.6.5): no maija līdz septembrim, no 18 līdz 24 pēc vietējā laika, pēc Es mākoņa 300-1300 km no jūsu stacijas cilne **mirgo**, un sarkana rinda augšā norāda, kur F.A.I. ir iespējams (raksta IC8FAX-IC8TEM noteikumi); ja ir jauni F.A.I. spoti, tā norāda, ka tas notiek. Klikšķis uz rindas: skats Izoatstarošana punktā.
+
 ## Skats Scatter trail (pāris A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

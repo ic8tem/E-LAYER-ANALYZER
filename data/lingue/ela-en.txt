@@ -979,3 +979,48 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	cloud with foEs ≥ {0:F1} MHz at {1:F0} km
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Second hop, point at three quarters of the path: {0}, required foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Double hop with equal hops (ITU-R P.534-6): for the author it is the typical case up to about 4700 km, for example towards Kazakhstan; beyond that, towards the other continents, the chains with short hops at the ends apply.
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Benchmark: {0} ALERTS, followed by a multi-hop QSO or decode in the same direction within two hours: {1:F0}% (false alarms {2:F0}%).
+Riferimento negli stessi settori senza catene: {0:F0}%.	Reference in the same sectors without chains: {0:F0}%.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Benchmark: {0} PRECURSORS, followed by a multi-hop QSO or decode in the same direction within two hours: {1:F0}%.
+corridoio a salti uguali, ti riguarda	equal-hop corridor, concerns you
+corridoio a salti uguali	equal-hop corridor
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Local filter: drops cluster lines below 27990.0 kHz and above 145 MHz (not shown and not stored), except 24890-24990 kHz (50 MHz early signs); in 430-440 MHz only aurora spots pass
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz e dai 24890-24990 kHz; in 430-440 MHz passano solo gli spot di aurora)	Local filter: line dropped (outside the 27990 kHz - 145 MHz range and 24890-24990 kHz; in 430-440 MHz only aurora spots pass)
+ALLERTA 144 MHz: salti APRS ripetuti oltre i 900 km su {0} ({1})	144 MHz ALERT: repeated APRS hops beyond 900 km over {0} ({1})
+h'Es GIRO	h'Es GIRO
+Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta.	Es layer height from the GIRO ionosondes: median of the h'Es of the last 90 minutes within 2500 km of your station. Without recent data the typed height applies.
+Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.	No recent h'Es from the GIRO ionosondes within 2500 km: the typed height applies.
+Il servizio GIRO non ha dato le h'Es: vale la quota scritta.	The GIRO service gave no h'Es: the typed height applies.
+h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})	h'Es GIRO: {0:F0} km, median of {1} ionosondes ({2})
+APRS ripetuto ({0})	repeated APRS ({0})
+nube in {0}	cloud on {0}
+Verifica della proiezione in questa sessione: {0} stazioni ti hanno ascoltato in 50 MHz oltre i 2800 km, {1} entro 500 km da un punto rosa.	Footprint check in this session: {0} stations heard you on 50 MHz beyond 2800 km, {1} within 500 km of a pink dot.
+APRS 144 MHz	APRS 144 MHz
+prodromo: nube in {0}	early sign: cloud on {0}
+ALLERTA 144 MHz da APRS: {0} salti radio APRS in 2 m oltre i 900 km negli ultimi 30 minuti, punto medio su {1} ({2}), ultimo alle {3:HH:mm} UTC.	144 MHz ALERT from APRS: {0} APRS radio hops on 2 m beyond 900 km in the last 30 minutes, midpoint over {1} ({2}), last at {3:HH:mm} UTC.
+Stazioni: {0}	Stations: {0}
+Il punto medio è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	The midpoint is {0:F0} km from your station (azimuth {1:F0}°).
+Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura).	Author's rule: a single APRS packet says nothing (it may be an aircraft or a meteor scatter); what counts is the short-term recurrence, at least two hops with the midpoint within 150 km and no more than 10 minutes apart. Packet reader as in LIVETROPOVHF (APRS-IS read-only).
+PRODROMO: nube Es in {0} su {1} ({2}), foEs ≥ {3:F1} MHz, {4} spot negli ultimi 15 minuti; in 50 MHz nessuno spot Es entro 300 km negli ultimi 30 minuti.	EARLY SIGN: Es cloud on {0} over {1} ({2}), foEs ≥ {3:F1} MHz, {4} spots in the last 15 minutes; on 50 MHz no Es spot within 300 km in the last 30 minutes.
+Spot: {0} - {1} {2} MHz, {3:F0} km	Spot: {0} - {1} {2} MHz, {3:F0} km
+La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	The cloud is {0:F0} km from your station (azimuth {1:F0}°).
+Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 9-16 minuti.	Check on the decodes of three Italian stations (94 days): after a cloud on 28 MHz, 50 MHz opened within 300 km in the following hour in 50% of cases, against 30% for the zones without a 28 MHz cloud; median lead 9-16 minutes.
+Ginevra	Geneva
+Budapest	Budapest
+Bruxelles	Brussels
+Albania	Albania
+Corsica	Corsica
+F.A.I. IN CORSO: {0} spot F.A.I. negli ultimi 30 minuti (ultimo {1} - {2}, {3} MHz).	F.A.I. IN PROGRESS: {0} F.A.I. spots in the last 30 minutes (last {1} - {2}, {3} MHz).
+F.A.I. POSSIBILE: nube Es su {0} ({1}), {2:F0} km, QTF {3:F0}°, ore {4:00}:{5:00} locali; linea di massima ricezione su {6}.	F.A.I. POSSIBLE: Es cloud over {0} ({1}), {2:F0} km, QTF {3:F0}°, {4:00}:{5:00} local time; line of maximum reception over {6}.
+PRODROMO	EARLY SIGN
+Clic: linee di iso-riflessione dalla tua stazione sulla prima nube indicata	Click: isoflection lines from your station on the first cloud shown
+Archivio storico degli spot: alla chiusura ogni giorno va compresso in data/archivio_spot	Historical spot archive: on closing each day is compressed into data/archivio_spot
+Archivio degli spot	Spot archive
+Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione.	On closing the spot database is emptied (author's rule); with the archive on, before emptying it, each day is added to the file YYYY-MM-DD.csv.gz (about 1 MB per day on opening days). The files can be loaded in Es CLOUDS OVER TIME and in BENCHMARK 50 MHz for season statistics.
+APRS-IS in sola lettura: salti APRS in 2 m oltre i 900 km ripetuti a breve tempo = ALLERTA 144 MHz	APRS-IS read-only: APRS hops on 2 m beyond 900 km repeated within a short time = 144 MHz ALERT
+APRS in 144 MHz	APRS on 144 MHz
+Collegamento a rotate.aprs2.net in sola lettura (senza password), con i pacchetti entro 3000 km dalla tua stazione. Un salto vale solo fra stazioni di posizione nota (sorgente, digipeater, IGate), come in LIVETROPOVHF; conta solo se si ripete entro 10 minuti con il punto medio entro 150 km.	Connection to rotate.aprs2.net read-only (no password), with the packets within 3000 km of your station. A hop counts only between stations of known position (source, digipeater, IGate), as in LIVETROPOVHF; it counts only if it repeats within 10 minutes with the midpoint within 150 km.
+La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	The F.A.I. tab flashes when F.A.I. is possible or in progress
+Allerta F.A.I.	F.A.I. alert
+Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Rules of the IC8FAX-IC8TEM article (2011): from May to September, between 18 and 24 local time, after an Es cloud on 50, 70 or 144 MHz at 300-1300 km from your station, if the line of maximum reception passes where there are stations. F.A.I. in progress: F.A.I. spots in the last 30 minutes.
+sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	below 27990 kHz (except 24890-24990 kHz) or above 145 MHz; in 430-440 MHz only aurora

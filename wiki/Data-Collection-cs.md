@@ -20,6 +20,10 @@ Posledních 2000 spotů s filtry podle pásma a zdroje. Archiv: jeden soubor CSV
 
 **Místní filtr** (volitelné pole, v NASTAVENÍ): řádky „DX de“ pod 27990,0 kHz nebo nad 145 MHz se zahazují, nezobrazují se v konzoli a neukládají se; mezi 430 a 440 MHz projdou jen spoty aurory. **Nepřesné lokátory** (méně než 6 znaků) se berou z CALL3: pokud má CALL3 6znakový lokátor, má vždy přednost. Stejně jako v YA-MS jsou spoty meteor scatter (ne sporadické vrstvy E) ty v typických kmitočtových oknech MS (50190-50300, 70100-70400, 144290-144399 kHz) bez tagů jiného šíření (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) a ty s druhy provozu výhradně pro MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) nebo s `<MS>`. Výjimka: FT8 a FT4 na 50 a 70 MHz, kde rozhoduje známý druh provozu (FT8 na 70,154 MHz jde do sporadické vrstvy E i uvnitř okna MS). Spoty s `<AS>`/`<ACS>` (aircraft scatter) se pro sporadickou vrstvu E nepoužívají.
 
+**Historický archiv** (od verze 0.6.5): před vyprázdněním databáze se při zavírání každý den připojí k `data/archivio_spot/RRRR-MM-DD.csv.gz`; OBLAKA Es V ČASE a BENCHMARK 50 MHz čtou i tyto soubory.
+
+Od verze 0.6.5 místní filtr propouští i **24890-24990 kHz** (12 m), pro časné známky pásma 50 MHz, a zdroj **APRS-IS** přidává skoky APRS v pásmu 144 MHz opakované v krátkém čase.
+
 ## Filtry spotů
 
 Sběr dat je **jediný pro celý program**: každý spot prochází filtry a dále do karty příslušného druhu šíření. Od verze 0.4.18 jsou filtry, místní filtr a test filtru na kartě **[NASTAVENÍ](Settings-cs)**, podkarta **Třídění spotů**.
