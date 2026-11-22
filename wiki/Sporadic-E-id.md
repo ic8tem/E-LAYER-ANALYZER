@@ -76,6 +76,8 @@ Di subtab **Prekursor multi-lompatan** program mencari rantai multi-lompatan di 
 - **PERINGATAN** jika lompatan tengah tertutup awan, **PREKURSOR** jika yang kurang hanya zona tanpa pengamat.
 - Di PENGATURAN ada **pemberitahuan** di atas (dan opsional sebuah jendela) untuk PERINGATAN yang menyangkut Anda.
 - Rantai yang berakhir **di laut lepas** atau di tempat tanpa stasiun (CALL3 dan spot) tidak ditampilkan.
+- **Lompatan ganda sama** (sejak versi 0.6.3, lompatan «2 =»): sampai sekitar 4700 km, misalnya ke arah Kazakhstan, dengan awan pada seperempat lintasan seperti pada metode ITU-R P.534-6.
+- Tab **TABEL LOMPATAN** merangkum berapa lompatan yang diperlukan di 50 MHz dari 500 sampai 12000 km, dengan foEs setiap lompatan dan sumbernya.
 - **Jangkauan sinyal saya di 6 m** (titik merah muda): tempat sinyal Anda di 50 MHz mendarat setelah 2-5 lompatan, di atas awan 30 menit terakhir yang diperkirakan dari spot semua band (28-144 MHz) dan dari ionosonde; hanya di tempat yang ada stasiunnya.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
