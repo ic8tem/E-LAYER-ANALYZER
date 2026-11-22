@@ -30,12 +30,12 @@ for d in range(500,12001,100):
         sch="Salto singolo al limite geometrico"; geo=f"1 × {d} km: oltre il limite di {HMAX:.0f} km a 110 km di quota (nube più alta)"; src="[3] massimo 2200-2400 km; [23] legge della secante"
     elif d<=2700:
         sch="Zona di passaggio: due salti corti"; geo=f"2 × {d//2} km: foEs ≥ {f1(need(d/2))} MHz per salto"; src="[3] doppio salto da 2800 km; [71] multipli del salto corto a 2700-2800 km; verifica IC8TEM: minimo fra 2400 e 3600 km"
-    elif d<=5100:
+    elif d<=4700:
         h=d/2
         sch="Doppio salto a salti uguali"+(", distanza ottimale" if 3200<=d<=4000 else "")
         geo=f"2 × {d//2} km: foEs ≥ {f1(need(h))} MHz per salto" if h<=HMAX else f"2 × {d//2} km: oltre il limite di {HMAX:.0f} km a 110 km di quota (nubi più alte)"
-        src="[76] doppio salto con i punti a un quarto e tre quarti; [3] doppio 2800-5000 km, ottimale 3200-4000 km; [4] regola del 22/11/2026: tipico fino a circa 5100 km (per esempio Kazakhstan)"
-        if d<=4800: src+="; verifica IC8TEM: nube a un quarto della tratta 74% contro 44%"
+        src="[76] doppio salto con i punti a un quarto e tre quarti; [3] doppio 2800-5000 km, ottimale 3200-4000 km; [4] regola del 22/11/2026: tipico fino a circa 4700 km (per esempio Kazakhstan)"
+        src+="; verifica IC8TEM: nube a un quarto della tratta 74% contro 44%"
     else:
         N=math.ceil((d-1900)/2200); m=(d-1900)/N
         sch=f"Catena: salto corto + {N} salt{'o centrale' if N==1 else 'i centrali'} + salto corto ({N+2} salti)"
@@ -52,8 +52,8 @@ out=[
 f"LI|foEs necessaria: legge della secante [23] con la nube a 110 km di quota, foEs = 50,2 MHz / sec φ, dove φ è l'angolo d'incidenza sulla nube per quel salto. A 110 km il salto più lungo possibile è di circa {HMAX:.0f} km (elevazione 0°); salti più lunghi chiedono nubi più alte.",
 "LI|Fino a 2400 km: salto singolo. I salti corti (500-1200 km) chiedono una foEs alta (21 MHz a 500 km, 11,3 MHz a 1200 km) e sono più rari; il salto più frequente è fra 1500 e 2000 km.",
 "LI|Fra 2400 e 2800 km: zona di passaggio. Il salto singolo non arriva, il doppio salto chiede due salti corti con foEs alta: collegamenti rari.",
-"LI|Da 2800 a circa 5100 km: doppio salto a salti uguali, come nel metodo ITU-R P.534-6 [76]. Per l'autore è il caso tipico fino a circa 5100 km, per esempio dall'Europa verso il Kazakhstan (decisione del 22/11/2026).",
-"LI|Oltre circa 5100 km, verso gli altri continenti: catena con i salti corti alle estremità [4]. L'abaco mostra i salti corti alla lunghezza tipica di 950 km (picco del salto corto di DF5AI [71]) e divide il resto in salti centrali fino a 2200 km. Il numero di salti è quindi di solito più alto di quello della regola del programma, che conta salti uguali.",
+"LI|Da 2800 a circa 4700 km: doppio salto a salti uguali, come nel metodo ITU-R P.534-6 [76]. Per l'autore è il caso tipico, per esempio dall'Europa verso il Kazakhstan (22/11/2026); il limite di 4700 km è quello di due salti da 2350 km, il salto più lungo con la nube a 110 km di quota.",
+"LI|Oltre circa 4700 km, verso gli altri continenti: catena con i salti corti alle estremità [4]. L'abaco mostra i salti corti alla lunghezza tipica di 950 km (picco del salto corto di DF5AI [71]) e divide il resto in salti centrali fino a 2200 km. Il numero di salti è quindi di solito più alto di quello della regola del programma, che conta salti uguali.",
 "LI|Sulle tratte nord-sud che attraversano l'equatore magnetico, oltre circa 5000 km, la propagazione è di solito transequatoriale (TEP, [49] e [66]) e non E-sporadico: l'abaco vale per l'E-sporadico.",
 "H1|2. Abaco",
 "TAB|Distanza (km);Salti (regola 3.1);Schema tipico;Salti e foEs necessaria in 50 MHz;Fonti",

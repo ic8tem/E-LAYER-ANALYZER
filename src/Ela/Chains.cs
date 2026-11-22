@@ -279,7 +279,7 @@ namespace ELA
                 }
                 if (on.Count == 0) continue;
                 HashSet<int> from = new HashSet<int> { 0 }, seen = new HashSet<int>();
-                // doppio salto a salti uguali (fino a circa 5100 km): nube a un quarto e a tre quarti della tratta
+                // doppio salto a salti uguali (fino a circa 4700 km): nube a un quarto e a tre quarti della tratta
                 double hMax = EqualMaxHopKm(Hkm);
                 foreach (double[] c1 in on)
                 {
@@ -414,12 +414,14 @@ namespace ELA
 
         // ------------------------------------------------------------ doppio salto a salti uguali (dal 22/11/2026)
         // Geometria di ITU-R P.534-6 [76]: due salti uguali, punti di riflessione a un quarto e tre quarti della tratta. Per
-        // l'autore (IC8TEM, 22/11/2026) e' l'occorrenza tipica fino a circa 5100 km (per esempio Europa - Kazakhstan); oltre,
+        // l'autore (IC8TEM, 22/11/2026) e' l'occorrenza tipica fino a circa 4700 km (per esempio Europa - Kazakhstan); oltre,
         // verso gli altri continenti, valgono le catene con i salti corti alle estremita'. Prova sulle decodifiche JTDX
         // dell'autore (aperture di 3100-4800 km): nei 30 minuti prima una nube a un quarto della tratta c'era nel 74% dei casi
         // contro il 44% degli stessi orari senza apertura, meglio del solo primo salto corto (82% contro 61%).
-        public const double EqualMaxKm = 5100;
-        public static double EqualMaxHopKm(double Hkm) { return Math.Min(EqualMaxKm / 2, 0.98 * 2 * Geo.R * Math.Acos(Geo.R / (Geo.R + Hkm))); }
+        // 4700 km = due salti da 2350 km, il salto piu' lungo possibile con la nube a 110 km (elevazione 0°): valore scelto il
+        // 22/11/2026 su richiesta dell'autore al posto dei suoi «circa 5100 km», che chiederebbero nubi oltre i 120 km
+        public const double EqualMaxKm = 4700;
+        public static double EqualMaxHopKm(double Hkm) { return Math.Min(EqualMaxKm / 2, 2 * Geo.R * Math.Acos(Geo.R / (Geo.R + Hkm))); }
 
         static List<ChainAlert> EqualDouble(double sLat, double sLon, double Hkm, List<Act> act, List<double[]> stations, DateTime now)
         {

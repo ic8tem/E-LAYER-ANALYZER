@@ -711,7 +711,7 @@ namespace ELA
                     sb.AppendLine(Lang.F("2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}", Geo.LatLonToLoc(f.Lat, f.Lon, 4), f.FoEsNeed, st));
                 }
                 sb.AppendLine(Lang.F("Zona d'arrivo: {0}, entro circa {1:F0} km", c.EndBName, Chains.LineKm));
-                sb.AppendLine(Lang.T("Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 5100 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità."));
+                sb.AppendLine(Lang.T("Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità."));
                 return;
             }
             sb.AppendLine(Lang.F("{0} - catena a salti corti ({1}): {2}", c.LevelText, c.KindText, c.Region));
