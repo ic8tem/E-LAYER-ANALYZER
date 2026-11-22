@@ -76,6 +76,8 @@ In de subtab **Voorboden meervoudige sprong** zoekt het programma de ketens met 
 - **WAARSCHUWING** als de middelste sprongen door wolken gedekt zijn, **VOORBODE** als alleen zones zonder waarnemers ontbreken.
 - In INSTELLINGEN staat de **melding** bovenaan (en desgewenst een venster) voor de WAARSCHUWINGEN die jou betreffen.
 - Ketens die **op open zee** eindigen of waar geen stations zijn (CALL3 en spots), worden niet getoond.
+- **Gelijke dubbele sprong** (vanaf versie 0.6.3, sprongen «2 =»): tot ongeveer 4700 km, bijvoorbeeld naar Kazachstan, met de wolk op een kwart van het traject zoals in de methode ITU-R P.534-6.
+- De tab **SPRONGTABEL** vat samen hoeveel sprongen op 50 MHz nodig zijn van 500 tot 12000 km, met de foEs van elke sprong en de bronnen.
 - **Footprint van mijn signaal op 6 m** (roze punten): waar je 50 MHz-signaal landt na 2-5 sprongen, boven de wolken van de laatste 30 minuten die geschat zijn uit de spots van alle banden (28-144 MHz) en uit de ionosondes; alleen waar stations zijn.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

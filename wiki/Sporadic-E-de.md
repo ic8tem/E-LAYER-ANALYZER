@@ -76,6 +76,8 @@ Im Unterreiter **Mehrfachsprung-Vorboten** sucht das Programm die Mehrfachsprung
 - **WARNUNG**, wenn die mittleren Sprünge von Wolken abgedeckt sind, **VORBOTE**, wenn nur Zonen ohne Beobachter fehlen.
 - In EINSTELLUNGEN gibt es den **Hinweis** oben (und wahlweise ein Fenster) für die WARNUNGEN, die Sie betreffen.
 - Ketten, die **auf offener See** oder dort enden, wo es keine Stationen gibt (CALL3 und Spots), werden nicht gezeigt.
+- **Gleicher Doppelsprung** (ab Version 0.6.3, Sprünge «2 =»): bis etwa 4700 km, zum Beispiel nach Kasachstan, mit der Wolke bei einem Viertel der Strecke wie in der Methode ITU-R P.534-6.
+- Der Reiter **SPRUNGTAFEL** fasst zusammen, wie viele Sprünge auf 50 MHz von 500 bis 12000 km nötig sind, mit der foEs jedes Sprungs und den Quellen.
 - **Footprint meines Signals auf 6 m** (rosa Punkte): wo Ihr 50-MHz-Signal nach 2-5 Sprüngen landet, über den Wolken der letzten 30 Minuten, die aus den Spots aller Bänder (28-144 MHz) und aus den Ionosonden geschätzt wurden; nur wo es Stationen gibt.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -76,6 +76,8 @@ Dans le sous-onglet **Précurseurs multi-bond**, le programme cherche les chaîn
 - **ALERTE** si les bonds centraux sont couverts par des nuages, **PRÉCURSEUR** s'il ne manque que des zones sans observateurs.
 - Dans RÉGLAGES, il y a l'**avertissement** en haut (et en option une fenêtre) pour les ALERTES qui vous concernent.
 - Les chaînes qui arrivent **en pleine mer** ou là où il n'y a pas de stations (CALL3 et spots) ne sont pas affichées.
+- **Double bond égal** (depuis la version 0.6.3, bonds « 2 = ») : jusqu'à environ 4700 km, par exemple vers le Kazakhstan, avec le nuage au quart du trajet comme dans la méthode UIT-R P.534-6.
+- L'onglet **ABAQUE DES BONDS** résume combien de bonds il faut sur 50 MHz de 500 à 12000 km, avec la foEs de chaque bond et les sources.
 - **Empreinte de mon signal sur 6 m** (points roses) : où votre signal 50 MHz atterrit après 2-5 bonds, au-dessus des nuages des 30 dernières minutes estimés à partir des spots de toutes les bandes (28-144 MHz) et des ionosondes ; seulement là où il y a des stations.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

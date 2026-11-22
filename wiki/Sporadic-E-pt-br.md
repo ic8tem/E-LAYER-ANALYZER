@@ -76,6 +76,8 @@ No subaba **Precursores de multi-salto** o programa procura as cadeias do multi-
 - **ALERTA** se os saltos centrais estiverem cobertos por nuvens, **PRECURSOR** se faltarem só zonas sem observadores.
 - Em CONFIGURAÇÕES há o **aviso** no topo (e opcionalmente uma janela) para os ALERTAS que dizem respeito a você.
 - As cadeias que chegam **a mar aberto** ou onde não há estações (CALL3 e spots) não são mostradas.
+- **Salto duplo igual** (desde a versão 0.6.3, saltos «2 =»): até cerca de 4700 km, por exemplo para o Cazaquistão, com a nuvem a um quarto do percurso como no método UIT-R P.534-6.
+- A aba **ÁBACO DOS SALTOS** resume quantos saltos são necessários em 50 MHz de 500 a 12000 km, com a foEs de cada salto e as fontes.
 - **Alcance do meu sinal em 6 m** (pontos rosa): onde o seu sinal em 50 MHz aterrissa após 2-5 saltos, sobre as nuvens dos últimos 30 minutos estimadas a partir dos spots de todas as bandas (28-144 MHz) e das ionossondas; só onde há estações.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

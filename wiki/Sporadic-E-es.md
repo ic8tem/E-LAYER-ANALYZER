@@ -76,6 +76,8 @@ En la subpestaña **Precursores de multisalto**, el programa busca las cadenas d
 - **ALERTA** si los saltos centrales están cubiertos por nubes, **PRECURSOR** si solo faltan zonas sin observadores.
 - En AJUSTES está el **aviso** arriba (y opcionalmente una ventana) para las ALERTAS que te afectan.
 - Las cadenas que llegan **a mar abierto** o donde no hay estaciones (CALL3 y spots) no se muestran.
+- **Doble salto igual** (desde la versión 0.6.3, saltos «2 =»): hasta unos 4700 km, por ejemplo hacia Kazajistán, con la nube a un cuarto del trayecto como en el método UIT-R P.534-6.
+- La pestaña **ÁBACO DE SALTOS** resume cuántos saltos hacen falta en 50 MHz de 500 a 12000 km, con la foEs de cada salto y las fuentes.
 - **Huella de mi señal en 6 m** (puntos rosas): dónde cae tu señal de 50 MHz después de 2-5 saltos, sobre las nubes de los últimos 30 minutos estimadas a partir de los spots de todas las bandas (28-144 MHz) y de las ionosondas; solo donde hay estaciones.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
