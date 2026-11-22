@@ -94,6 +94,11 @@ namespace YAMS
 
         static SelectableTextBlock DocText(string text, double size, Color c, FontWeight w, FontStyle st, Thickness margin)
         {
+            // corsivo e scritture da destra a sinistra (arabo, ebraico, urdu): senza un carattere corsivo per quelle lettere
+            // il testo usciva a quadratini; in quelle lingue il corsivo diventa normale
+            if (st == FontStyle.Italic && text != null)
+                foreach (char ch in text)
+                    if ((ch >= '֐' && ch <= 'ࣿ') || (ch >= 'יִ' && ch <= 'ﻼ')) { st = FontStyle.Normal; break; }
             return new SelectableTextBlock
             {
                 Text = text,
