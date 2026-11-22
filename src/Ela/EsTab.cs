@@ -385,10 +385,10 @@ namespace ELA
                 if (ca != null)
                 {
                     // catene con i salti corti alle estremita': salti = corto + centrali + corto
-                    bool mine = ca.Kind == ChainAlert.KindQth || (!double.IsNaN(ca.NearKm) && ca.NearKm <= Chains.NearMeKm);
+                    bool mine = ca.Kind == ChainAlert.KindQth || ca.Kind == ChainAlert.KindEqual || (!double.IsNaN(ca.NearKm) && ca.NearKm <= Chains.NearMeKm);
                     tPre.Rows.Add(new TableRow
                     {
-                        Cells = new[] { ca.LevelText, ca.Region, ca.Band, ca.Kind == ChainAlert.KindSearch ? "1+?+1" : "1+" + ca.Middle + "+1", ca.KindText,
+                        Cells = new[] { ca.LevelText, ca.Region, ca.Band, ca.Kind == ChainAlert.KindSearch ? "1+?+1" : ca.Kind == ChainAlert.KindEqual ? "2 =" : "1+" + ca.Middle + "+1", ca.KindText,
                             ca.DistKm.ToString("F0", CultureInfo.CurrentCulture), ca.Az.ToString("F0", CultureInfo.InvariantCulture) },
                         Fore = ca.Level == 2 ? Pal.Red : ca.Level == 1 ? Pal.Yellow : Pal.Azure,
                         CellFore = mine ? null : new Color?[] { null, Pal.Muted, null, null, Pal.Muted, null, null },
@@ -658,7 +658,7 @@ namespace ELA
         // propria stazione restano tenui finche' non si sceglie la riga
         void DrawChain(ChainAlert c, bool isSel, bool only)
         {
-            bool mine = c.Kind == ChainAlert.KindQth || (!double.IsNaN(c.NearKm) && c.NearKm <= Chains.NearMeKm);
+            bool mine = c.Kind == ChainAlert.KindQth || c.Kind == ChainAlert.KindEqual || (!double.IsNaN(c.NearKm) && c.NearKm <= Chains.NearMeKm);
             Color col = c.Level == 2 ? Pal.Red : c.Level == 1 ? Pal.Yellow : Pal.Azure;
             byte alpha = (byte)(isSel ? 255 : mine ? 200 : 80);
             double w = isSel ? 2.8 : mine ? 1.8 : 1.0;
@@ -681,7 +681,7 @@ namespace ELA
             if (c.Kind == ChainAlert.KindCorridor) map.Markers.Add(new MapMarker { Lat = c.EndALat, Lon = c.EndALon, Radius = 0, Label = c.EndAName, LabelColor = col });
             map.Markers.Add(new MapMarker { Lat = c.EndBLat, Lon = c.EndBLon, Radius = 0, Label = c.EndBName + " 6 m", LabelColor = col });
             if (!isSel) return;
-            foreach (StrongCloud n in new[] { c.A, c.B })
+            foreach (StrongCloud n in new[] { c.A, c.B }.Where(x => x != null))
                 map.Markers.Add(new MapMarker { Lat = n.Lat, Lon = n.Lon, Radius = 8, Fill = Pal.Orange, Stroke = Pal.Fore, Square = true, Glow = true });
             foreach (PrecursorPoint p in c.Points)
             {
@@ -689,7 +689,7 @@ namespace ELA
                 map.Markers.Add(new MapMarker { Lat = p.Lat, Lon = p.Lon, Radius = 6, Fill = pc, Ring = !p.Covered, Label = Geo.LatLonToLoc(p.Lat, p.Lon, 4) });
             }
             if (c.A.Spot != null) map.Lines.Add(MapView.GreatCircle(c.A.Spot.LatS, c.A.Spot.LonS, c.A.Spot.LatD, c.A.Spot.LonD, Pal.A(200, Pal.Orange), 1.2));
-            if (c.B.Spot != null) map.Lines.Add(MapView.GreatCircle(c.B.Spot.LatS, c.B.Spot.LonS, c.B.Spot.LatD, c.B.Spot.LonD, Pal.A(200, Pal.Orange), 1.2));
+            if (c.B != null && c.B.Spot != null) map.Lines.Add(MapView.GreatCircle(c.B.Spot.LatS, c.B.Spot.LonS, c.B.Spot.LatD, c.B.Spot.LonD, Pal.A(200, Pal.Orange), 1.2));
         }
 
         static string CloudText(StrongCloud n)
@@ -699,6 +699,21 @@ namespace ELA
 
         void ChainDetails(StringBuilder sb, ChainAlert c)
         {
+            if (c.Kind == ChainAlert.KindEqual)
+            {
+                PrecursorPoint f = c.Points.Count > 0 ? c.Points[0] : null;
+                sb.AppendLine(Lang.F("{0} - doppio salto a salti uguali: {1}", c.LevelText, c.Region));
+                sb.AppendLine(Lang.F("Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-6)", c.DistKm, c.Az, c.MiddleKm));
+                sb.AppendLine(Lang.F("1) Primo salto, punto a un quarto della tratta: nube {0}", CloudText(c.A)));
+                if (f != null)
+                {
+                    string st = f.Covered ? Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km", f.CloudFoEs, f.CloudKm) : f.Observed ? Lang.T("zona osservata, nessuna nube") : Lang.T("zona senza osservatori");
+                    sb.AppendLine(Lang.F("2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}", Geo.LatLonToLoc(f.Lat, f.Lon, 4), f.FoEsNeed, st));
+                }
+                sb.AppendLine(Lang.F("Zona d'arrivo: {0}, entro circa {1:F0} km", c.EndBName, Chains.LineKm));
+                sb.AppendLine(Lang.T("Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 5100 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità."));
+                return;
+            }
             sb.AppendLine(Lang.F("{0} - catena a salti corti ({1}): {2}", c.LevelText, c.KindText, c.Region));
             if (c.Kind == ChainAlert.KindSearch)
             {

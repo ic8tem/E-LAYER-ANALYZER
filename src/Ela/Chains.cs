@@ -41,7 +41,7 @@ namespace ELA
 
     public class ChainAlert : PrecursorAlert
     {
-        public const int KindQth = 1, KindCorridor = 2, KindSearch = 3;
+        public const int KindQth = 1, KindCorridor = 2, KindSearch = 3, KindEqual = 4;   // 4 = doppio salto a salti uguali (ITU-R P.534-6)
         public int Kind;
         public StrongCloud A, B;
         public double XA, XB;                      // distanza al suolo fra la stazione d'estremita' e la nube (meta' del salto corto)
@@ -58,6 +58,7 @@ namespace ELA
             get
             {
                 if (Kind == KindQth) return YAMS.Lang.T("dal QTH");
+                if (Kind == KindEqual) return YAMS.Lang.T("doppio salto uguale");
                 if (Kind == KindSearch) return YAMS.Lang.T("cerca la nube");
                 if (!double.IsNaN(NearKm) && NearKm <= Chains.NearMeKm) return YAMS.Lang.T("corridoio, ti riguarda");
                 return YAMS.Lang.T("corridoio");
@@ -79,7 +80,7 @@ namespace ELA
         //     corridoio con un'estremita' entro 1200 km); la stessa catena non si ripete prima di 60 minuti
         public static event Action<ChainAlert> NewMine;
         static readonly Dictionary<string, DateTime> told = new Dictionary<string, DateTime>();
-        public static bool Mine(ChainAlert c) { return c.Kind == ChainAlert.KindQth || (c.Kind == ChainAlert.KindCorridor && !double.IsNaN(c.NearKm) && c.NearKm <= NearMeKm); }
+        public static bool Mine(ChainAlert c) { return c.Kind == ChainAlert.KindQth || c.Kind == ChainAlert.KindEqual || (c.Kind == ChainAlert.KindCorridor && !double.IsNaN(c.NearKm) && c.NearKm <= NearMeKm); }
         public static void Notify(IEnumerable<PrecursorAlert> list)
         {
             DateTime now = DateTime.UtcNow;
@@ -278,6 +279,20 @@ namespace ELA
                 }
                 if (on.Count == 0) continue;
                 HashSet<int> from = new HashSet<int> { 0 }, seen = new HashSet<int>();
+                // doppio salto a salti uguali (fino a circa 5100 km): nube a un quarto e a tre quarti della tratta
+                double hMax = EqualMaxHopKm(Hkm);
+                foreach (double[] c1 in on)
+                {
+                    double h = 2 * c1[0];
+                    if (h < Precursors.MinKm / 2 || h > hMax || c1[1] * Geo.SecantFactor(h, Hkm) < F50) continue;
+                    if (!on.Any(c2 => Math.Abs(c2[0] - 3 * c1[0]) <= LineKm / 2 && c2[1] * Geo.SecantFactor(h, Hkm) >= F50)) continue;
+                    int L2 = (int)(Math.Round(4 * c1[0] / 100.0) * 100);
+                    if (!seen.Add(L2)) continue;
+                    double la, lo;
+                    Geo.Destination(sLat, sLon, az, L2, out la, out lo);
+                    if (EsModel.IsTransEquatorialWorld(sLat, sLon, la, lo)) continue;
+                    res.Add(new Landing { Lat = la, Lon = lo, Az = az, DistKm = L2, Hops = 2, Operators = HasOperators(la, lo, OperatorsKm) });
+                }
                 for (int k = 1; k <= ProjMaxHops && from.Count > 0; k++)
                 {
                     HashSet<int> next = new HashSet<int>();
@@ -325,7 +340,6 @@ namespace ELA
             List<ChainAlert> res = new List<ChainAlert>();
             foreach (Spot s in hour) { AddOperator(s.LatS, s.LonS); AddOperator(s.LatD, s.LonD); }
             strong = Strong(Hkm, win, now, giro, isolated);
-            if (strong.Count == 0) { if (giro) LastProjection = new List<Landing>(); return res; }
             // tutte le nubi Es (anche deboli) per i salti centrali, e le stazioni presenti negli spot (zone osservate)
             List<Act> act = new List<Act>();
             foreach (Spot s in win)
@@ -342,6 +356,8 @@ namespace ELA
             foreach (Spot s in hour) { stations.Add(new[] { s.LatS, s.LonS }); stations.Add(new[] { s.LatD, s.LonD }); }
 
             if (giro) LastProjection = hasStation ? Project(sLat, sLon, Hkm, act) : new List<Landing>();   // solo in diretta
+            if (hasStation) res.AddRange(EqualDouble(sLat, sLon, Hkm, act, stations, now));   // non chiede nubi forti
+            if (strong.Count == 0) return res;
             if (hasStation) res.AddRange(FromQth(sLat, sLon, Hkm, strong, act, stations, search, giro));
             if (corridors) res.AddRange(Corridor(Hkm, strong, act, stations, res, hasStation, sLat, sLon));
             return res;
@@ -378,6 +394,65 @@ namespace ELA
             if (mid.All(p => p.Covered)) return 2;
             if (mid.Where(p => !p.Covered).All(p => !p.Observed)) return 1;
             return 0;
+        }
+
+        // punto di riflessione lungo il cerchio massimo (lat0, lon0, az) a distanza along, per un salto di hopKm
+        static PrecursorPoint PointAt(double lat0, double lon0, double az, double along, double hopKm, double Hkm, List<Act> act, List<double[]> stations)
+        {
+            double la, lo;
+            Geo.Destination(lat0, lon0, az, along, out la, out lo);
+            PrecursorPoint p = new PrecursorPoint { Lat = la, Lon = lo, HopKm = hopKm, FoEsNeed = F50 / Geo.SecantFactor(hopKm, Hkm) };
+            foreach (Act c in act)
+            {
+                double d = Geo.DistanceKm(la, lo, c.Lat, c.Lon);
+                if (d > Precursors.MatchKm || c.FoEs < p.FoEsNeed) continue;
+                if (!p.Covered || c.FoEs > p.CloudFoEs) { p.Covered = true; p.CloudFoEs = c.FoEs; p.CloudKm = d; p.CloudSpot = c.Spot; }
+            }
+            foreach (double[] s in stations) if (Geo.DistanceKm(la, lo, s[0], s[1]) <= Precursors.ObservedKm) { p.Observed = true; break; }
+            return p;
+        }
+
+        // ------------------------------------------------------------ doppio salto a salti uguali (dal 22/11/2026)
+        // Geometria di ITU-R P.534-6 [76]: due salti uguali, punti di riflessione a un quarto e tre quarti della tratta. Per
+        // l'autore (IC8TEM, 22/11/2026) e' l'occorrenza tipica fino a circa 5100 km (per esempio Europa - Kazakhstan); oltre,
+        // verso gli altri continenti, valgono le catene con i salti corti alle estremita'. Prova sulle decodifiche JTDX
+        // dell'autore (aperture di 3100-4800 km): nei 30 minuti prima una nube a un quarto della tratta c'era nel 74% dei casi
+        // contro il 44% degli stessi orari senza apertura, meglio del solo primo salto corto (82% contro 61%).
+        public const double EqualMaxKm = 5100;
+        public static double EqualMaxHopKm(double Hkm) { return Math.Min(EqualMaxKm / 2, 0.98 * 2 * Geo.R * Math.Acos(Geo.R / (Geo.R + Hkm))); }
+
+        static List<ChainAlert> EqualDouble(double sLat, double sLon, double Hkm, List<Act> act, List<double[]> stations, DateTime now)
+        {
+            Dictionary<int, ChainAlert> best = new Dictionary<int, ChainAlert>();
+            double hMax = EqualMaxHopKm(Hkm), hMin = Precursors.MinKm / 2;
+            foreach (Act a in act)
+            {
+                double x = Geo.DistanceKm(sLat, sLon, a.Lat, a.Lon);          // meta' del salto
+                if (2 * x < hMin || 2 * x > hMax) continue;
+                if (a.FoEs * Geo.SecantFactor(2 * x, Hkm) < F50) continue;      // la nube regge il primo salto
+                double az = Geo.Bearing(sLat, sLon, a.Lat, a.Lon), D = 4 * x, tLat, tLon;
+                Geo.Destination(sLat, sLon, az, D, out tLat, out tLon);
+                if (EsModel.IsTransEquatorialWorld(sLat, sLon, tLat, tLon)) continue;
+                if (!HasOperators(tLat, tLon, LineKm)) continue;
+                PrecursorPoint far = PointAt(sLat, sLon, az, 3 * x, 2 * x, Hkm, act, stations);
+                int lev = far.Covered ? 2 : !far.Observed ? 1 : 0;
+                if (lev == 0) continue;
+                StrongCloud A = new StrongCloud { Lat = a.Lat, Lon = a.Lon, FoEs = a.FoEs, N = 1, Spot = a.Spot, Source = a.Spot != null ? a.Spot.Spotter + " - " + a.Spot.DxCall : "GIRO" };
+                if (a.Spot != null) { A.Newest = a.Spot.Utc; A.Age = (now - a.Spot.Utc).TotalMinutes; }
+                StrongCloud B = null;
+                if (far.Covered) B = new StrongCloud { Lat = far.Lat, Lon = far.Lon, FoEs = far.CloudFoEs, N = 1, Spot = far.CloudSpot, Source = far.CloudSpot != null ? far.CloudSpot.Spotter + " - " + far.CloudSpot.DxCall : "GIRO" };
+                ChainAlert c = new ChainAlert
+                {
+                    Kind = ChainAlert.KindEqual, A = A, B = B, XA = x, XB = x, Level = lev, Band = "6 m", FreqMHz = F50,
+                    EndALat = sLat, EndALon = sLon, EndBLat = tLat, EndBLon = tLon, TargetLat = tLat, TargetLon = tLon,
+                    DistKm = D, Az = az, Middle = 0, MiddleKm = 2 * x, Points = new List<PrecursorPoint> { far }
+                };
+                c.EndBName = ZoneName(tLat, tLon); c.Region = c.EndBName;
+                int sec = (int)(az / 10);                                       // una sola per settore di 10°: la migliore, poi la piu' lunga
+                ChainAlert o;
+                if (!best.TryGetValue(sec, out o) || c.Level > o.Level || (c.Level == o.Level && c.DistKm > o.DistKm)) best[sec] = c;
+            }
+            return best.Values.OrderByDescending(c => c.Level).ThenByDescending(c => c.DistKm).ToList();
         }
 
         // primo salto corto dalla propria stazione (A), ultimo salto corto su B lungo lo stesso cerchio massimo

@@ -95,7 +95,7 @@ namespace ELA
                             if (win.Count == 0) continue;
                             List<StrongCloud> st;
                             List<ChainAlert> ch = Chains.Core(Hkm, win, hour, t, true, home.LatTx, home.LonTx, false, false, false, isolated, out st);
-                            foreach (ChainAlert c in ch.Where(x => x.Kind == ChainAlert.KindQth && x.Level >= 1))
+                            foreach (ChainAlert c in ch.Where(x => (x.Kind == ChainAlert.KindQth || x.Kind == ChainAlert.KindEqual) && x.Level >= 1))
                             {
                                 string k = t.ToString("yyyyMMddHH", CultureInfo.InvariantCulture) + "|" + (int)(c.Az / 30);
                                 if (!seen.Add(k)) continue;

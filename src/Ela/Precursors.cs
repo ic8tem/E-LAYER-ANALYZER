@@ -129,6 +129,7 @@ namespace ELA
             LastStrong = strong;
             List<PrecursorAlert> all = new List<PrecursorAlert>();
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindQth).OrderByDescending(c => c.Level));
+            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindEqual));
             all.AddRange(res);
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindCorridor));
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindSearch));
