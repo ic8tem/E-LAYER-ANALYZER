@@ -8,9 +8,10 @@
 
 Haritanın üstündeki bir düğme görünümü seçer:
 
-- **Azimutal - tek atlama**: istasyonunuzu merkez alan, sabit 2500 km yarıçaplı azimutal eşuzaklık haritası; IK3XTV tablosunun bölgeleriyle (en az 500 km, en uygun 1500-2000 km, tek atlamada en çok 2400 km).
-- **Azimutal - en büyük mesafe (çok atlama)**: **En büyük mesafe** kaydırıcısıyla (300 ile 20000 km arası, fare tekerleğiyle de) aynı harita; çift (5000 km) ve üçlü atlamanın (6900 km) sınırları da görünür, böylece çok atlamanın gelişimi izlenebilir.
-- **Dikdörtgen**: Avrupa ve Dünya düğmeleriyle önceki dünya haritası.
+- **Azimutal**: istasyonunuzu merkez alan azimutal eşuzaklık haritası, **yakınlaştırma** kaydırıcısıyla (merkezden 300 ile 20000 km arası, fare tekerleğiyle de).
+- **Mercator**: Avrupa ve Dünya düğmeleriyle dünya haritası.
+
+Her iki izdüşümde de istasyonun çevresine **Flavio IK3XTV'nin mesafe çemberleri** çizilir: 500 km (tek atlamada en az), 1500-2000 km (en uygun), 2400 km (tek atlamada en çok), 5000 km (çift atlamada en çok) ve 6900 km (üçlü atlamada en çok).
 
 Azimutal görünümlerde kesikli halkalar **merkezden km** değerini gösterir (adım yakınlaştırmayla değişir), kenar gösterilen en büyük mesafeyi işaretler ve fare imleci merkezden mesafeyi ve azimutu verir.
 
@@ -75,6 +76,8 @@ Haritanın sağ üstünde N0NBH özeti görünür (seçilen kıta için E-skip, 
 - Orta atlamalar bulutlarla kapsanmışsa **UYARI**, yalnızca gözlemcisiz bölgeler eksikse **ÖNCÜL**.
 - AYARLAR'da sizi ilgilendiren UYARILAR için üstte **bildirim** (isteğe bağlı olarak bir pencere de) vardır.
 - **Açık denize** ya da istasyon olmayan yerlere (CALL3 ve spot'lar) ulaşan zincirler gösterilmez.
+- **Eşit çift atlama** (0.6.3 sürümünden itibaren, «2 =» atlamalar): yaklaşık 4700 km'ye kadar, örneğin Kazakistan'a doğru, ITU-R P.534-6 yöntemindeki gibi bulut yolun dörtte birinde.
+- **ATLAMA TABLOSU** sekmesi, 50 MHz'de 500 ile 12000 km arasında kaç atlama gerektiğini, her atlamanın foEs değeri ve kaynaklarla özetler.
 - **6 m'de sinyalimin ayak izi** (pembe noktalar): 50 MHz'deki sinyalinizin 2-5 atlamadan sonra, tüm bantların (28-144 MHz) spot'larından ve iyonosondlardan tahmin edilen son 30 dakikanın bulutları üzerinden düştüğü yer; yalnızca istasyon olan yerlerde.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

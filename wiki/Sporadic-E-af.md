@@ -8,9 +8,10 @@
 
 'n Knoppie bo die kaart kies die aansig:
 
-- **Azimutaal - enkele sprong**: azimutale ekwidistante kaart gesentreer op jou stasie, vaste radius van 2500 km, met die sones van die IK3XTV-tabel (500 km minimum, 1500-2000 km optimaal, 2400 km maksimum vir 'n enkele sprong).
-- **Azimutaal - maksimum afstand (multi-sprong)**: dieselfde kaart met die skuifbalk **Maksimum afstand** (van 300 tot 20000 km, ook met die muiswieletjie); die grense van die dubbele (5000 km) en driedubbele sprong (6900 km) verskyn ook, sodat die verloop van multi-sprong gevolg kan word.
-- **Reghoekig**: die vorige wêreldkaart, met die knoppies Europa en Wêreld.
+- **Azimutaal**: azimutale ekwidistante kaart gesentreer op jou stasie, met die **zoem**-skuifbalk (300 tot 20000 km vanaf die middel, ook met die muiswiel).
+- **Mercator**: die wêreldkaart, met die knoppies Europa en Wêreld.
+
+In albei projeksies word die **afstandsirkels van Flavio IK3XTV** om die stasie geteken: 500 km (minimum enkele sprong), 1500-2000 km (optimum), 2400 km (maksimum enkele sprong), 5000 km (maksimum dubbele sprong) en 6900 km (maksimum drievoudige sprong).
 
 In die azimutale aansigte wys die strepieringe die **km vanaf die middel** (die stap verander met die zoem), die rand merk die maksimum afstand wat gewys word, en die muiswyser gee die afstand en azimut vanaf die middel.
 
