@@ -20,6 +20,10 @@ Ultimele 2000 de spoturi, cu filtre pe bandă și sursă. Arhivă: câte un fiș
 
 **Filtru local** (casetă opțională, în SETĂRI): rândurile „DX de” sub 27990,0 kHz sau peste 145 MHz sunt eliminate, nu apar în consolă și nu se memorează; între 430 și 440 MHz trec doar spoturile de auroră. **Locatorii impreciși** (sub 6 caractere) se iau din CALL3: dacă CALL3 are un locator cu 6 caractere, acesta prevalează întotdeauna. Ca în YA-MS, sunt spoturi de meteor scatter (nu de E-sporadic) cele din ferestrele de frecvență tipice pentru MS (50190-50300, 70100-70400, 144290-144399 kHz) fără inscripții de altă propagare (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) și cele cu moduri exclusiv MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) sau cu `<MS>`. Excepție: FT8 și FT4 pe 50 și 70 MHz, unde decide modul cunoscut (FT8 de pe 70,154 MHz merge la E-sporadic chiar și în fereastra MS). Spoturile cu `<AS>`/`<ACS>` (aircraft scatter) nu se folosesc pentru E-sporadic.
 
+**Arhivă istorică** (de la versiunea 0.6.5): înainte de golirea bazei de date, la închidere fiecare zi se adaugă la `data/archivio_spot/AAAA-LL-ZZ.csv.gz`; NORI Es ÎN TIMP și BENCHMARK 50 MHz citesc și aceste fișiere.
+
+De la versiunea 0.6.5 filtrul local lasă să treacă și **24890-24990 kHz** (12 m), pentru semnele timpurii ale 50 MHz, iar sursa **APRS-IS** adaugă salturile APRS în 144 MHz repetate în scurt timp.
+
 ## Filtrele spoturilor
 
 Colectarea datelor este **unică pentru tot programul**: fiecare spot trece prin filtre și ajunge la fila fiecărui mod de propagare. Din versiunea 0.4.18 filtrele, filtrul local și testul filtrelor se află în fila **[SETĂRI](Settings-ro)**, sub-fila **Distribuirea spoturilor**.

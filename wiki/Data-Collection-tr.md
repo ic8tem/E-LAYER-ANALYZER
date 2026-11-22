@@ -20,6 +20,10 @@ Bant ve kaynak filtreleriyle son 2000 spot. Arşiv: `data/spot` içinde her gün
 
 **Yerel filtre** (isteğe bağlı kutu, AYARLAR'da): 27990,0 kHz'in altındaki ya da 145 MHz'in üstündeki "DX de" satırları atılır, konsolda gösterilmez ve saklanmaz; 430 ile 440 MHz arasında yalnızca aurora spot'ları geçer. **Belirsiz lokatörler** (6 karakterden az) CALL3'ten alınır: CALL3'te 6 karakterli bir lokatör varsa her zaman o geçerlidir. YA-MS'te olduğu gibi meteor scatter (Sporadic-E değil) spot'ları, tipik MS frekans pencerelerinde (50190-50300, 70100-70400, 144290-144399 kHz) başka bir yayılım etiketi (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`) taşımayanlar ile yalnızca MS'e özgü modlarla (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) ya da `<MS>` ile gelenlerdir. İstisna: 50 ve 70 MHz'de FT8 ve FT4; burada bilinen mod belirler (70,154 MHz'teki FT8, MS penceresinin içinde bile Sporadic-E'ye gider). `<AS>`/`<ACS>` (aircraft scatter) içeren spot'lar Sporadic-E için kullanılmaz.
 
+**Tarihsel arşiv** (0.6.5 sürümünden itibaren): veritabanı boşaltılmadan önce, kapanışta her gün `data/archivio_spot/YYYY-AA-GG.csv.gz` dosyasına eklenir; ZAMAN İÇİNDE Es BULUTLARI ve BENCHMARK 50 MHz bu dosyaları da okur.
+
+0.6.5 sürümünden itibaren yerel süzgeç, 50 MHz'in erken işaretleri için **24890-24990 kHz**'i (12 m) de geçirir ve **APRS-IS** kaynağı kısa sürede tekrarlanan 144 MHz APRS atlamalarını ekler.
+
 ## Spot filtreleri
 
 Veri toplama **tüm program için tektir**: her spot filtrelerden geçer ve her yayılım türünün sekmesine gider. 0.4.18 sürümünden itibaren filtreler, yerel filtre ve filtre testi **[AYARLAR](Settings-tr)** sekmesinde, **Spot yönlendirme** alt sekmesindedir.

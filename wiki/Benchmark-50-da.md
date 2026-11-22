@@ -37,6 +37,6 @@ For den valgte strækning: afstand og vurdering efter IK3XTV-tabellen, azimut i 
 
 **Indlæs spots, ADIF eller ALL.TXT** (spots eksporteret fra Es-SKYER OVER TID, ADIF-logs fra andre stationer, ALL.TXT-dekodninger fra JTDX eller WSJT-X: kaldesignalet genkendes på sendelinjerne) og **Kontrollér kæderne**: programmet afspiller reglen for kæder med korte hop igen på station 1's multi-hop-åbninger og skriver, hvor mange åbninger den ville have forudset (ALARM, FORLØBER eller kun det første korte hop), det mediane forvarsel og de alarmer, der ikke blev fulgt af multi-hop-QSO'er. Uden indlæste kilder kommer skyerne kun fra loggen, og det sidste korte hop ses næsten ikke: der kræves data fra fjerne stationer.
 
-**Benchmark af alarmerne** (fra version 0.6.5): for ALARMER og FORLØBERE genspillet hvert 15. minut siger rapporten, hvor mange der lykkedes (multi-hop-QSO i samme retning i de følgende 2 timer), de falske alarmer og referencen i samme sektorer uden kæder.
+**Benchmark af alarmerne** (fra version 0.6.5): for ALARMER og FORLØBERE genspillet hvert 15. minut siger rapporten, hvor mange der lykkedes (multi-hop-QSO i samme retning i den følgende time), de falske alarmer og referencen i samme sektorer uden kæder.
 
 ![Kontrol](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

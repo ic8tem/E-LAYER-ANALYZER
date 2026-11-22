@@ -37,4 +37,6 @@ Seçilen yol için: mesafe ve IK3XTV tablosuna göre değerlendirme, iki yöndek
 
 **Spot, ADIF veya ALL.TXT yükle** (ZAMAN İÇİNDE Es BULUTLARI'ndan dışa aktarılan spot'lar, diğer istasyonların ADIF logları, JTDX veya WSJT-X'in ALL.TXT çözümlemeleri: çağrı işareti gönderim satırlarından tanınır) ve **Zincirleri doğrula**: program, kısa atlamalı zincir kuralını 1. istasyonun çok atlamalı açılışlarına yeniden uygular ve kaç açılışı önceden haber vereceğini (UYARI, ÖNCÜL veya yalnızca ilk kısa atlama), ortanca önceden haber verme süresini ve ardından çok atlamalı QSO gelmeyen uyarıları yazar. Yüklenen kaynak olmadan bulutlar yalnızca logdan gelir ve son kısa atlama neredeyse görünmez: uzak istasyonların verileri gerekir.
 
+**Uyarıların sınaması** (0.6.5 sürümünden itibaren): her 15 dakikada yeniden oynatılan UYARILAR ve ÖNCÜLLER için rapor kaçının başarılı olduğunu (sonraki saatte aynı yönde çok atlamalı QSO), yanlış alarmları ve zincir olmayan aynı sektörlerdeki referansı söyler.
+
 ![Doğrulama](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

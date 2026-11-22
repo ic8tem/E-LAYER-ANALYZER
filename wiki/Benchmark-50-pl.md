@@ -37,6 +37,6 @@ Dla wybranej trasy: odległość i ocena według tabeli IK3XTV, azymut w obu kie
 
 **Wczytaj spoty, ADIF lub ALL.TXT** (spoty wyeksportowane z OBŁOKI Es W CZASIE, logi ADIF innych stacji, dekodowania ALL.TXT z JTDX lub WSJT-X: znak wywoławczy rozpoznaje się po wierszach nadawania) i **Sprawdź łańcuchy**: program odtwarza na otwarciach wieloskokowych stacji 1 regułę łańcuchów z krótkimi skokami i podaje, ile otwarć by przewidział (ALERT, PREKURSOR lub tylko pierwszy krótki skok), medianę wyprzedzenia oraz alerty, po których nie było QSO wieloskokowych. Bez wczytanych źródeł obłoki pochodzą tylko z logu, a ostatni krótki skok jest prawie niewidoczny: potrzebne są dane odległych stacji.
 
-**Test alertów** (od wersji 0.6.5): dla ALERTÓW i PREKURSORÓW odtwarzanych co 15 minut raport mówi, ile się sprawdziło (QSO wieloskokowe w tym samym kierunku w ciągu następnych 2 godzin), fałszywe alarmy i wartość odniesienia w tych samych sektorach bez łańcuchów.
+**Test alertów** (od wersji 0.6.5): dla ALERTÓW i PREKURSORÓW odtwarzanych co 15 minut raport mówi, ile się sprawdziło (QSO wieloskokowe w tym samym kierunku w ciągu następnej godziny), fałszywe alarmy i wartość odniesienia w tych samych sektorach bez łańcuchów.
 
 ![Sprawdzenie](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

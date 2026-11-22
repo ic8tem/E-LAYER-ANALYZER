@@ -82,7 +82,8 @@ In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chai
 - **Equal-hop corridor** (from version 0.6.5): two clouds 1400-2350 km apart connect two zones at 2800-4700 km with two equal hops; the check on the 5U5K expedition confirms the limit of about 4700 km.
 - **EARLY SIGN** (green, from version 0.6.5): Es cloud on 28 or 24 MHz where 50 MHz is not open yet; in the tests 50 MHz opened there within an hour in 50% of cases (30% without), 9-16 minutes ahead.
 - **Repeated APRS** (red, from version 0.6.5): at least two APRS hops on 2 m beyond 900 km on the same cloud within 10 minutes = 144 MHz ALERT; the tab flashes.
-- **How good the alerts are** (on the author's station, summers 2024-2026): ALERTS successful in 46-58% (multi-hop QSO in the same direction within 2 hours) against 8-10% without an alert; but 43% of the openings arrive without warning. The footprint reaches within 500 km of the distant station in 13.5% of the openings, against 2-4% when rotated.
+- **How good the alerts are** (on the author's station, summers 2024-2026): ALERTS successful in 41-57% (multi-hop QSO in the same direction within an hour) against 5-7% without an alert; but 47% of the openings arrive without warning. The footprint reaches within 500 km of the distant station in 13.5% of the openings, against 2-4% when rotated.
 - The clouds **are not moved**: the test of 22/11/2026 shows that moving them with their velocity does not improve the forecast at 15-45 minutes.
+- **TEP forecast** (blue, from version 0.6.5): index 0-100 towards the zones beyond the magnetic equator = season × SFI × Kp (eTEP only) × local time × foF2 of the GIRO ionosondes; the SFI weighs but does not cancel, because at solar minimum TEP becomes rare but does not disappear.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

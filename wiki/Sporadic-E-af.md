@@ -79,5 +79,11 @@ In die suboortjie **Multi-sprongvoorlopers** soek die program die multi-sprongke
 - **Gelyke dubbele sprong** (vanaf weergawe 0.6.3, spronge «2 =»): tot ongeveer 4700 km, byvoorbeeld na Kasakstan, met die wolk op 'n kwart van die roete soos in die metode ITU-R P.534-6.
 - Die oortjie **SPRONGTABEL** som op hoeveel spronge op 50 MHz nodig is van 500 tot 12000 km, met elke sprong se foEs en die bronne.
 - **Voetspoor van my sein op 6 m** (pienk punte): waar jou sein op 50 MHz ná 2-5 spronge land, oor die wolke van die laaste 30 minute wat uit die spots van alle bande (28-144 MHz) en uit die ionosondes geskat is; slegs waar daar stasies is.
+- **Gang met gelyke spronge** (vanaf weergawe 0.6.5): twee wolke 1400-2350 km van mekaar verbind twee sones op 2800-4700 km met twee gelyke spronge; die kontrole op die 5U5K-ekspedisie bevestig die grens van ongeveer 4700 km.
+- **VROEË TEKEN** (groen, vanaf weergawe 0.6.5): Es-wolk op 28 of 24 MHz waar 50 MHz nog nie oop is nie; in die toetse het 50 MHz daar binne 'n uur oopgegaan in 50% van die gevalle (30% sonder), 9-16 minute vooraf.
+- **Herhaalde APRS** (rooi, vanaf weergawe 0.6.5): minstens twee APRS-spronge op 2 m bo 900 km oor dieselfde wolk binne 10 minute = 144 MHz-WAARSKUWING; die oortjie flikker.
+- **Wat die waarskuwings werd is** (op die skrywer se stasie, somers 2024-2026): WAARSKUWINGS geslaag in 41-57% (multisprong-QSO in dieselfde rigting binne een uur) teenoor 5-7% sonder waarskuwing; maar 47% van die openings kom sonder waarskuwing. Die voetspoor kom in 13,5% van die openings binne 500 km van die verre stasie, teenoor 2-4% wanneer dit gedraai word.
+- Die wolke **word nie geskuif nie**: die toets van 22/11/2026 wys dat om hulle met hul snelheid te skuif nie die voorspelling op 15-45 minute verbeter nie.
+- **TEP-voorspelling** (blou, vanaf weergawe 0.6.5): indeks 0-100 na die sones anderkant die magnetiese ewenaar = seisoen × SFI × Kp (slegs eTEP) × plaaslike tyd × foF2 van die GIRO-ionosondes; SFI weeg mee, maar stel nie op nul nie, want by sonminimum word TEP skaars, maar verdwyn nie.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

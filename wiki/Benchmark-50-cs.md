@@ -37,6 +37,6 @@ Pro zvolenou trasu: vzdálenost a hodnocení podle tabulky IK3XTV, azimut v obou
 
 **Načíst spoty, ADIF nebo ALL.TXT** (spoty exportované z OBLAKA Es V ČASE, deníky ADIF jiných stanic, dekódování ALL.TXT z JTDX nebo WSJT-X: značka se pozná podle vysílacích řádků) a **Ověřit řetězce**: program přehraje na otevřeních s vícenásobným skokem stanice 1 pravidlo řetězců s krátkými skoky a napíše, kolik otevření by předpověděl (VÝSTRAHA, PŘEDZVĚST nebo jen první krátký skok), mediánový předstih a výstrahy, po kterých nenásledovalo QSO s vícenásobným skokem. Bez načtených zdrojů pocházejí oblaka jen z deníku a poslední krátký skok téměř není vidět: jsou potřeba data vzdálených stanic.
 
-**Test výstrah** (od verze 0.6.5): pro VÝSTRAHY a PŘEDZVĚSTI přehrávané každých 15 minut zpráva uvádí, kolik bylo úspěšných (QSO vícenásobným skokem ve stejném směru v následujících 2 hodinách), plané poplachy a referenční hodnotu ve stejných sektorech bez řetězců.
+**Test výstrah** (od verze 0.6.5): pro VÝSTRAHY a PŘEDZVĚSTI přehrávané každých 15 minut zpráva uvádí, kolik bylo úspěšných (QSO vícenásobným skokem ve stejném směru v následující hodině), plané poplachy a referenční hodnotu ve stejných sektorech bez řetězců.
 
 ![Ověření](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

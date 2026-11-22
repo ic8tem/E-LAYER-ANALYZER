@@ -82,7 +82,8 @@ Apakšcilnē **Vairāklēcienu priekšvēstneši** programma meklē vairāklēci
 - **Vienādu lēcienu koridors** (no versijas 0.6.5): divi mākoņi 1400-2350 km attālumā viens no otra ar diviem vienādiem lēcieniem savieno divas zonas 2800-4700 km attālumā; pārbaude ar ekspedīciju 5U5K apstiprina aptuveni 4700 km robežu.
 - **AGRĪNA PAZĪME** (zaļa, no versijas 0.6.5): Es mākonis 28 vai 24 MHz joslā vietā, kur 50 MHz vēl nav atvērusies; pārbaudēs 50 MHz tur atvērās stundas laikā 50% gadījumu (bez tās – 30%), 9-16 minūtes iepriekš.
 - **Atkārtots APRS** (sarkans, no versijas 0.6.5): vismaz divi APRS lēcieni 2 m joslā virs 900 km pār to pašu mākoni 10 minūšu laikā = 144 MHz BRĪDINĀJUMS; cilne mirgo.
-- **Ko vērti brīdinājumi** (autora stacijā, 2024.-2026. g. vasaras): BRĪDINĀJUMI izdevušies 46-58% (vairāklēcienu QSO tajā pašā virzienā 2 stundu laikā), salīdzinot ar 8-10% bez brīdinājuma; bet 43% atvērumu pienāk bez brīdinājuma. Pārklājums sasniedz 500 km rādiusu ap tālo staciju 13,5% atvērumu, pagriezts – 2-4%.
+- **Ko vērti brīdinājumi** (autora stacijā, 2024.-2026. g. vasaras): BRĪDINĀJUMI izdevušies 41-57% (vairāklēcienu QSO tajā pašā virzienā stundas laikā), salīdzinot ar 5-7% bez brīdinājuma; bet 47% atvērumu pienāk bez brīdinājuma. Pārklājums sasniedz 500 km rādiusu ap tālo staciju 13,5% atvērumu, pagriezts – 2-4%.
 - Mākoņi **netiek pārvietoti**: 22.11.2026. pārbaude rāda, ka to pārvietošana ar to ātrumu neuzlabo 15-45 minūšu prognozi.
+- **TEP prognoze** (zila, no versijas 0.6.5): indekss 0-100 zonu virzienā aiz magnētiskā ekvatora = gadalaiks × SFI × Kp (tikai eTEP) × vietējais laiks × GIRO jonozondu foF2; SFI sver, bet nenulle, jo Saules minimumā TEP kļūst rets, bet nepazūd.
 
 ![Koridors](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

@@ -82,7 +82,8 @@ I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihop
 - **Korridor med like hopp** (fra versjon 0.6.5): to skyer 1400-2350 km fra hverandre forbinder to soner på 2800-4700 km med to like hopp; kontrollen mot ekspedisjonen 5U5K bekrefter grensen på omkring 4700 km.
 - **TIDLIG TEGN** (grønn, fra versjon 0.6.5): Es-sky på 28 eller 24 MHz der 50 MHz ennå ikke er åpen; i prøvene åpnet 50 MHz der innen en time i 50 % av tilfellene (30 % uten), 9-16 minutter før.
 - **Gjentatt APRS** (rød, fra versjon 0.6.5): minst to APRS-hopp på 2 m over 900 km på samme sky innen 10 minutter = 144 MHz-ALARM; fanen blinker.
-- **Hva alarmene er verdt** (på forfatterens stasjon, somrene 2024-2026): ALARMER vellykkede i 46-58 % (multihopp-QSO i samme retning innen 2 timer) mot 8-10 % uten alarm; men 43 % av åpningene kommer uten varsel. Mønsteret for hvor signalet lander når innenfor 500 km fra den fjerne stasjonen i 13,5 % av åpningene, mot 2-4 % når det dreies.
+- **Hva alarmene er verdt** (på forfatterens stasjon, somrene 2024-2026): ALARMER vellykkede i 41-57 % (multihopp-QSO i samme retning innen en time) mot 5-7 % uten alarm; men 47 % av åpningene kommer uten varsel. Mønsteret for hvor signalet lander når innenfor 500 km fra den fjerne stasjonen i 13,5 % av åpningene, mot 2-4 % når det dreies.
 - Skyene **flyttes ikke**: prøven fra 22.11.2026 viser at det ikke forbedrer prognosen på 15-45 minutter å flytte dem med hastigheten deres.
+- **TEP-prognose** (blå, fra versjon 0.6.5): indeks 0-100 mot sonene på den andre siden av den magnetiske ekvator = årstid × SFI × Kp (bare eTEP) × lokal tid × foF2 fra GIRO-ionosondene; SFI veier, men nullstiller ikke, fordi TEP ved solminimum blir sjelden, men ikke forsvinner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

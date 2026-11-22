@@ -82,7 +82,8 @@ W podzakładce **Prekursory wieloskoku** program szuka łańcuchów wieloskoku n
 - **Korytarz z równymi skokami** (od wersji 0.6.5): dwa obłoki odległe od siebie o 1400-2350 km łączą dwoma równymi skokami dwie strefy odległe o 2800-4700 km; sprawdzenie na wyprawie 5U5K potwierdza granicę około 4700 km.
 - **WCZESNY SYGNAŁ** (zielony, od wersji 0.6.5): obłok Es w paśmie 28 lub 24 MHz tam, gdzie pasmo 50 MHz jeszcze się nie otworzyło; w próbach 50 MHz otworzyło się tam w ciągu godziny w 50% przypadków (30% bez niego), 9-16 minut wcześniej.
 - **Powtórzony APRS** (czerwony, od wersji 0.6.5): co najmniej dwa skoki APRS w paśmie 2 m powyżej 900 km przez ten sam obłok w ciągu 10 minut = ALERT 144 MHz; zakładka miga.
-- **Ile są warte alerty** (na stacji autora, lata 2024-2026): ALERTY trafne w 46-58% (QSO wieloskokowe w tym samym kierunku w ciągu 2 godzin) wobec 8-10% bez alertu; ale 43% otwarć przychodzi bez ostrzeżenia. Zasięg dochodzi do promienia 500 km wokół odległej stacji w 13,5% otwarć, po obróceniu w 2-4%.
+- **Ile są warte alerty** (na stacji autora, lata 2024-2026): ALERTY trafne w 41-57% (QSO wieloskokowe w tym samym kierunku w ciągu godziny) wobec 5-7% bez alertu; ale 47% otwarć przychodzi bez ostrzeżenia. Zasięg dochodzi do promienia 500 km wokół odległej stacji w 13,5% otwarć, po obróceniu w 2-4%.
 - Obłoki **nie są przesuwane**: próba z 22.11.2026 pokazuje, że przesuwanie ich z ich prędkością nie poprawia prognozy na 15-45 minut.
+- **Prognoza TEP** (niebieska, od wersji 0.6.5): indeks 0-100 w kierunku stref za równikiem magnetycznym = pora roku × SFI × Kp (tylko eTEP) × czas lokalny × foF2 jonosond GIRO; SFI waży, ale nie zeruje, bo w minimum słonecznym TEP staje się rzadki, ale nie znika.
 
 ![Korytarz](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

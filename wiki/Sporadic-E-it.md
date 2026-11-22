@@ -82,7 +82,8 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 - **Corridoio a salti uguali** (dalla versione 0.6.5): due nubi a 1400-2350 km fra loro collegano due zone a 2800-4700 km con due salti uguali; la verifica sulla spedizione 5U5K conferma il limite di circa 4700 km.
 - **PRODROMO** (verde, dalla versione 0.6.5): nube Es in 28 o 24 MHz dove i 50 MHz non sono ancora aperti; nelle prove i 50 MHz hanno aperto lì entro un'ora nel 50% dei casi (30% senza), con 9-16 minuti di anticipo.
 - **APRS ripetuto** (rosso, dalla versione 0.6.5): almeno due salti APRS in 2 m oltre i 900 km sulla stessa nube entro 10 minuti = ALLERTA 144 MHz; la linguetta lampeggia.
-- **Quanto valgono le allerte** (sulla stazione dell'autore, estati 2024-2026): ALLERTE riuscite al 46-58% (QSO multi-salto nella stessa direzione entro 2 ore) contro l'8-10% senza allerta; ma il 43% delle aperture arriva senza preavviso. La proiezione arriva entro 500 km dalla stazione lontana nel 13,5% delle aperture, contro il 2-4% se girata.
+- **Quanto valgono le allerte** (sulla stazione dell'autore, estati 2024-2026): ALLERTE riuscite al 41-57% (QSO multi-salto nella stessa direzione entro un'ora) contro l'5-7% senza allerta; ma il 47% delle aperture arriva senza preavviso. La proiezione arriva entro 500 km dalla stazione lontana nel 13,5% delle aperture, contro il 2-4% se girata.
 - Le nubi **non si spostano**: la prova del 22/11/2026 mostra che spostarle con la loro velocità non migliora la previsione a 15-45 minuti.
+- **Previsione del TEP** (blu, dalla versione 0.6.5): indice 0-100 verso le zone oltre l'equatore magnetico = stagione × SFI × Kp (solo eTEP) × ora locale × foF2 delle ionosonde GIRO; l'SFI pesa ma non azzera, perché al minimo solare il TEP diventa raro ma non sparisce.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

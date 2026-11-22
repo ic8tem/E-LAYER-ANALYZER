@@ -16,6 +16,7 @@
 
 - Her iyonosond son foEs'le (Es bulutlarıyla aynı renkler) renklendirilmiş bir nokta ve MHz değeridir; güncel verisi yoksa **gri**, son iyonogram 90 dakikadan eskiyse **halkalıdır**.
 - Tablo: Kod, İyonosond, istasyonunuzdan km, son iyonogramın UTC saati, foEs, foF2, MUF(D) ve **Spot foEs≥**: son 30 dakikanın, iyonosonda 500 km (ayarlanabilir) içinde yansıyan Es spot'larından elde edilen en küçük foEs, spot sayısıyla.
+- **h'Es GIRO** (0.6.5 sürümünden itibaren, REAL-TIME'da kutu): Es yüksekliği, 2500 km içindeki iyonosondların güncel h'Es medyanı olur (80-120 km).
 
 ## Seçilen iyonosond
 

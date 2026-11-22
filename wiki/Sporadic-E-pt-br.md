@@ -82,7 +82,8 @@ No subaba **Precursores de multi-salto** o programa procura as cadeias do multi-
 - **Corredor de saltos iguais** (a partir da versão 0.6.5): duas nuvens a 1400-2350 km uma da outra ligam duas zonas a 2800-4700 km com dois saltos iguais; a verificação na expedição 5U5K confirma o limite de cerca de 4700 km.
 - **SINAL PRECOCE** (verde, a partir da versão 0.6.5): nuvem Es em 28 ou 24 MHz onde os 50 MHz ainda não abriram; nos ensaios os 50 MHz abriram ali em menos de uma hora em 50% dos casos (30% sem ele), com 9-16 minutos de antecedência.
 - **APRS repetido** (vermelho, a partir da versão 0.6.5): pelo menos dois saltos APRS em 2 m acima de 900 km sobre a mesma nuvem em 10 minutos = ALERTA de 144 MHz; o aba pisca.
-- **Quanto valem os alertas** (na estação do autor, verões 2024-2026): ALERTAS certos em 46-58% (QSO multi-salto na mesma direção em 2 horas) contra 8-10% sem alerta; mas 43% das aberturas chegam sem aviso. O alcance chega a menos de 500 km da estação distante em 13,5% das aberturas, contra 2-4% se rodado.
+- **Quanto valem os alertas** (na estação do autor, verões 2024-2026): ALERTAS certos em 41-57% (QSO multi-salto na mesma direção em uma hora) contra 5-7% sem alerta; mas 47% das aberturas chegam sem aviso. O alcance chega a menos de 500 km da estação distante em 13,5% das aberturas, contra 2-4% se rodado.
 - As nuvens **não se deslocam**: o ensaio de 22/11/2026 mostra que deslocá-las com a sua velocidade não melhora a previsão a 15-45 minutos.
+- **Previsão do TEP** (azul, a partir da versão 0.6.5): índice 0-100 para as zonas para lá do equador magnético = estação do ano × SFI × Kp (só eTEP) × hora local × foF2 das ionossondas GIRO; o SFI pesa mas não anula, porque no mínimo solar o TEP se torna raro mas não desaparece.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

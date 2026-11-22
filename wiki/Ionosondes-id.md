@@ -16,6 +16,7 @@ Subtab **SPORADIC-E** (sejak versi 0.5.2): **foEs yang diukur** oleh ionosonde j
 
 - Setiap ionosonde adalah titik berwarna menurut foEs terakhir (warna yang sama dengan awan Es) dengan nilainya dalam MHz; **abu-abu** jika tidak ada data terbaru, dengan **cincin** jika ionogram terakhir berumur lebih dari 90 menit.
 - Tabel: Kode, Ionosonde, km dari stasiun Anda, UTC ionogram terakhir, foEs, foF2, MUF(D), dan **Spot foEs≥**: foEs minimum yang diturunkan dari spot Es 30 menit terakhir yang memantul dalam 500 km dari ionosonde (dapat diatur), dengan jumlah spot.
+- **h'Es GIRO** (sejak versi 0.6.5, kotak di REAL-TIME): ketinggian Es menjadi median h'Es terbaru ionosonde dalam 2500 km (80-120 km).
 
 ## Ionosonde yang dipilih
 

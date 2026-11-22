@@ -6,7 +6,7 @@
 //  - stagione: massimo agli equinozi (marzo-aprile, settembre-ottobre), 0,35 ai solstizi (ZS6BTE [79]; VK2ZRH [81]: in VHF bassa
 //    le aperture continuano anche nei mesi dei solstizi);
 //  - SFI: da 0,2 (SFI 65 o meno) a 1 (SFI 150 o piu'): le aperture crescono con il massimo solare ma non spariscono al minimo [81];
-//  - Kp: 1 con Kp fino a 3, poi scende (le tempeste disturbano il TEP, BOM/IPS [49]);
+//  - Kp, solo per il TEP serale: 1 con Kp fino a 3, poi scende (BOM/IPS [49]: la quiete geomagnetica favorisce l'eTEP);
 //  - ora solare locale sull'equatore magnetico: TEP pomeridiano (aTEP) con il massimo verso le 17, serale (eTEP) verso le 21 [49];
 //  - foF2 delle ionosonde GIRO entro 2500 km dal punto medio (cresta dell'anomalia equatoriale): da 0,3 (8 MHz o meno) a 1
 //    (14 MHz o piu'); senza ionosonde il fattore vale 1 e la riga lo dice. Lo spread F (Cueva e altri [78]) non e' tra i dati GIRO letti.
@@ -96,8 +96,8 @@ namespace ELA
                 }
                 a.FoF2 = best; a.GiroNames = names;
                 a.FGiro = double.IsNaN(best) ? 1 : 0.3 + 0.7 * Math.Max(0, Math.Min(1, (best - 8) / 6));
-                a.FSeason = fs; a.FSfi = fsfi; a.FKp = fkp; a.Sfi = sfi; a.Kp = kp;
-                a.Index = 100 * fs * fsfi * fkp * a.FTime * a.FGiro;
+                a.FSeason = fs; a.FSfi = fsfi; a.FKp = a.Kind == "eTEP" ? fkp : 1; a.Sfi = sfi; a.Kp = kp;
+                a.Index = 100 * fs * fsfi * a.FKp * a.FTime * a.FGiro;
                 a.Spots = tepSpots.Count(s => Math.Min(Geo.DistanceKm(s.LatS, s.LonS, Station.Lat, Station.Lon), Geo.DistanceKm(s.LatD, s.LonD, Station.Lat, Station.Lon)) <= SpotKm
                                             || Math.Min(Geo.DistanceKm(s.LatS, s.LonS, a.EndLat, a.EndLon), Geo.DistanceKm(s.LatD, s.LonD, a.EndLat, a.EndLon)) <= SpotKm);
                 a.Level = a.Spots > 0 || a.Index >= ProbableIdx ? 2 : a.Index >= PossibleIdx ? 1 : 0;

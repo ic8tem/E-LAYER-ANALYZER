@@ -37,6 +37,6 @@ Valitud trassi kohta: kaugus ja hinnang IK3XTV tabeli järgi, asimuut mõlemas s
 
 **Laadi spotid, ADIF või ALL.TXT** (Es-PILVED AJAS-ist eksporditud spotid, teiste jaamade ADIF-logid, JTDX-i või WSJT-X-i ALL.TXT dekodeeringud: kutsung tuntakse ära saateridade järgi) ja **Kontrolli ahelaid**: programm mängib jaama 1 mitmehüppelistel avanemistel uuesti läbi lühikeste hüpetega ahelate reegli ja kirjutab, mitu avanemist see oleks ette näinud (HOIATUS, EELKÄIJA või ainult esimene lühike hüpe), mediaanse ettehaarde ja hoiatused, millele ei järgnenud mitmehüppelisi QSO-sid. Ilma laaditud allikateta tulevad pilved ainult logist ja viimane lühike hüpe on vaevu nähtav: vaja on kaugete jaamade andmeid.
 
-**Hoiatuste test** (alates versioonist 0.6.5): iga 15 minuti järel läbi mängitud HOIATUSTE ja EELKÄIJATE kohta ütleb aruanne, mitu neist õnnestus (mitmehüppeline QSO samas suunas järgmise 2 tunni jooksul), valehäired ja võrdlusväärtuse samades sektorites ilma ahelateta.
+**Hoiatuste test** (alates versioonist 0.6.5): iga 15 minuti järel läbi mängitud HOIATUSTE ja EELKÄIJATE kohta ütleb aruanne, mitu neist õnnestus (mitmehüppeline QSO samas suunas järgmise tunni jooksul), valehäired ja võrdlusväärtuse samades sektorites ilma ahelateta.
 
 ![Kontroll](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

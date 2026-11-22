@@ -20,6 +20,10 @@ Die laaste 2000 spots, met band- en bronfilters. Argief: een CSV-lêer per dag i
 
 **Plaaslike filter** (opsionele blokkie, in INSTELLINGS): "DX de"-reëls onder 27990,0 kHz of bo 145 MHz word weggegooi, nie in die konsole gewys nie en nie gestoor nie; tussen 430 en 440 MHz gaan net aurora-spots deur. **Onakkurate lokators** (minder as 6 karakters) word uit CALL3 geneem: as CALL3 'n lokator van 6 karakters het, kry dit altyd voorrang. Soos in YA-MS is meteor scatter-spots (nie Sporadic-E nie) dié in die tipiese MS-frekwensievensters (50190-50300, 70100-70400, 144290-144399 kHz) sonder etikette van 'n ander voortplanting (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), en dié met modusse wat slegs vir MS gebruik word (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) of met `<MS>`. Uitsondering: FT8 en FT4 op 50 en 70 MHz, waar 'n bekende modus besluit (die FT8 van 70,154 MHz gaan na Sporadic-E selfs binne die MS-venster). Spots met `<AS>`/`<ACS>` (aircraft scatter) word nie vir Sporadic-E gebruik nie.
 
+**Historiese argief** (vanaf weergawe 0.6.5): voordat die databasis leeggemaak word, word elke dag by afsluiting by `data/archivio_spot/JJJJ-MM-DD.csv.gz` gevoeg; Es-WOLKE OOR TYD en BENCHMARK 50 MHz lees ook hierdie lêers.
+
+Vanaf weergawe 0.6.5 laat die plaaslike filter ook **24890-24990 kHz** (12 m) deur, vir die vroeë tekens van 50 MHz, en die bron **APRS-IS** voeg die APRS-spronge op 144 MHz by wat binne kort tyd herhaal word.
+
 ## Spotfilters
 
 Daar is **net een data-insameling vir die hele program**: elke spot gaan deur die filters en na die oortjie van elke voortplantingsmodus. Vanaf weergawe 0.4.18 is die filters, die plaaslike filter en die filtertoets in die oortjie **[INSTELLINGS](Settings-af)**, suboortjie **Spotverdeling**.

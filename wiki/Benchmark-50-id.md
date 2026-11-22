@@ -37,4 +37,6 @@ Untuk lintasan yang dipilih: jarak dan penilaian menurut tabel IK3XTV, azimut di
 
 **Muat spot, ADIF atau ALL.TXT** (spot yang diekspor dari AWAN Es DARI WAKTU KE WAKTU, log ADIF stasiun lain, dekode ALL.TXT dari JTDX atau WSJT-X: callsign dikenali dari baris pancaran) dan **Verifikasi rantai**: program menjalankan ulang aturan rantai lompatan pendek pada bukaan multi-lompatan stasiun 1 dan menuliskan berapa bukaan yang akan didahuluinya (PERINGATAN, PREKURSOR atau hanya lompatan pertama pendek), waktu mendahului median dan peringatan yang tidak diikuti QSO multi-lompatan. Tanpa sumber yang dimuat, awan hanya berasal dari log, dan lompatan pendek terakhir hampir tidak terlihat: diperlukan data dari stasiun yang jauh.
 
+**Uji peringatan** (sejak versi 0.6.5): untuk PERINGATAN dan PREKURSOR yang diputar ulang setiap 15 menit, laporan menyebutkan berapa yang berhasil (QSO multi-lompatan ke arah yang sama dalam satu jam berikutnya), alarm palsu, dan acuan di sektor yang sama tanpa rantai.
+
 ![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

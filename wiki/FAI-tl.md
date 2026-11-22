@@ -4,6 +4,8 @@
 
 Ang F.A.I. (Field Aligned Irregularities) ay scatter mula sa mga iregularidad na nakahanay sa geomagnetic field, karaniwan sa mga gabi ng tag-init pagkatapos ng sporadic-E. Lumalabas ang na-scatter na signal sa isang **cone** na ang axis ay nasa direksiyon ng field: maaaring magkontak ang dalawang istasyon kung nasa **magkasuplementong contour** sila (a1 + a2 = 180°, artikulo nina IC8FAX-IC8TEM; mga ±c contour ni K9SE). Kinakalkula ang magnetic field gamit ang modelong **IGRF-14**.
 
+**Babala ng F.A.I.** (mula sa bersiyon 0.6.5): mula Mayo hanggang Setyembre, sa pagitan ng 18 at 24 lokal na oras, pagkatapos ng ulap na Es sa 300-1300 km mula sa istasyon mo, **kumikislap** ang tab at sinasabi ng pulang hilera sa itaas kung saan posible ang F.A.I. (mga tuntunin ng artikulong IC8FAX-IC8TEM); kapag may bagong F.A.I. spot, sinasabi nitong nagaganap ito. I-click ang hilera: tanaw na Iso-repleksiyon sa punto.
+
 ## Tanaw na scatter trail (pares A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

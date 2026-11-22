@@ -79,5 +79,11 @@ Haritanın sağ üstünde N0NBH özeti görünür (seçilen kıta için E-skip, 
 - **Eşit çift atlama** (0.6.3 sürümünden itibaren, «2 =» atlamalar): yaklaşık 4700 km'ye kadar, örneğin Kazakistan'a doğru, ITU-R P.534-6 yöntemindeki gibi bulut yolun dörtte birinde.
 - **ATLAMA TABLOSU** sekmesi, 50 MHz'de 500 ile 12000 km arasında kaç atlama gerektiğini, her atlamanın foEs değeri ve kaynaklarla özetler.
 - **6 m'de sinyalimin ayak izi** (pembe noktalar): 50 MHz'deki sinyalinizin 2-5 atlamadan sonra, tüm bantların (28-144 MHz) spot'larından ve iyonosondlardan tahmin edilen son 30 dakikanın bulutları üzerinden düştüğü yer; yalnızca istasyon olan yerlerde.
+- **Eşit atlamalı koridor** (0.6.5 sürümünden itibaren): birbirine 1400-2350 km uzaklıktaki iki bulut, 2800-4700 km'deki iki bölgeyi iki eşit atlamayla bağlar; 5U5K seferindeki kontrol yaklaşık 4700 km'lik sınırı doğrular.
+- **ERKEN İŞARET** (yeşil, 0.6.5 sürümünden itibaren): 50 MHz'in henüz açılmadığı yerde 28 ya da 24 MHz Es bulutu; sınamalarda 50 MHz orada bir saat içinde vakaların %50'sinde açıldı (olmadan %30), 9-16 dakika önce.
+- **Tekrarlanan APRS** (kırmızı, 0.6.5 sürümünden itibaren): 10 dakika içinde aynı bulut üzerinden 2 m'de 900 km'nin ötesinde en az iki APRS atlaması = 144 MHz UYARISI; sekme yanıp söner.
+- **Uyarılar ne kadar değerli** (yazarın istasyonunda, 2024-2026 yazları): UYARILAR %41-57 başarılı (bir saat içinde aynı yönde çok atlamalı QSO), uyarı olmadan %5-7; ama açılımların %47'si uyarısız gelir. Ayak izi açılımların %13,5'inde uzak istasyona 500 km içinde ulaşır, döndürüldüğünde %2-4.
+- Bulutlar **kaydırılmaz**: 22.11.2026 sınaması, onları kendi hızlarıyla kaydırmanın 15-45 dakikalık tahmini iyileştirmediğini gösterir.
+- **TEP tahmini** (mavi, 0.6.5 sürümünden itibaren): manyetik ekvatorun ötesindeki bölgelere doğru 0-100 endeks = mevsim × SFI × Kp (yalnızca eTEP) × yerel saat × GIRO iyonosondlarının foF2'si; SFI ağırlık verir ama sıfırlamaz, çünkü güneş minimumunda TEP seyrekleşir ama kaybolmaz.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

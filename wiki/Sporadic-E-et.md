@@ -82,7 +82,8 @@ Alamsakis **Mitmehüppelise levi eelkäijad** otsib programm 50 MHz mitmehüppel
 - **Võrdsete hüpetega koridor** (alates versioonist 0.6.5): kaks teineteisest 1400-2350 km kaugusel olevat pilve ühendavad kaks 2800-4700 km kaugusel olevat tsooni kahe võrdse hüppega; kontroll ekspeditsiooni 5U5K peal kinnitab umbes 4700 km piiri.
 - **VARAJANE MÄRK** (roheline, alates versioonist 0.6.5): Es-pilv 28 või 24 MHz-l, kus 50 MHz pole veel avanenud; katsetes avanes 50 MHz seal tunni jooksul 50% juhtudest (ilma selleta 30%), 9-16 minutit varem.
 - **Korduv APRS** (punane, alates versioonist 0.6.5): vähemalt kaks APRS-hüpet 2 m-l üle 900 km samal pilvel 10 minuti jooksul = 144 MHz HOIATUS; sakk vilgub.
-- **Mida hoiatused väärt on** (autori jaamal, suved 2024-2026): HOIATUSED õnnestuvad 46-58% (mitmehüppeline QSO samas suunas 2 tunni jooksul) võrreldes 8-10%-ga ilma hoiatuseta; kuid 43% avanemistest saabub ette teatamata. Leviala jõuab kaugest jaamast 500 km piiresse 13,5% avanemistest, pööratuna 2-4%.
+- **Mida hoiatused väärt on** (autori jaamal, suved 2024-2026): HOIATUSED õnnestuvad 41-57% (mitmehüppeline QSO samas suunas tunni jooksul) võrreldes 5-7%-ga ilma hoiatuseta; kuid 47% avanemistest saabub ette teatamata. Leviala jõuab kaugest jaamast 500 km piiresse 13,5% avanemistest, pööratuna 2-4%.
 - Pilvi **ei nihutata**: 22.11.2026 katse näitab, et nende nihutamine oma kiirusega ei paranda 15-45 minuti prognoosi.
+- **TEP-i prognoos** (sinine, alates versioonist 0.6.5): indeks 0-100 magnetekvaatori taguste tsoonide suunas = aastaaeg × SFI × Kp (ainult eTEP) × kohalik aeg × GIRO ionosondide foF2; SFI kaalub, kuid ei nulli, sest päikese miinimumis muutub TEP haruldaseks, kuid ei kao.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

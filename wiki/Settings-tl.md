@@ -11,6 +11,9 @@ Mula sa bersiyon 0.4.18, tinitipon ng tab na **MGA SETTING** ang mga pangkalahat
 | Istasyon | Callsign, locator at taas, ang mga ito rin sa bar sa itaas; kinukumpirma ang mga ito ng **Ilapat** para sa lahat ng tab. |
 | Hitsura | Wika, kulay (ang mga scheme ng YAEC at YA-MS at, mula sa bersiyon 0.5.0, ang anim na tema ng IP-TRX-CTRL: Maliwanag, Gabi, Itim, Asul, Lila, Berde), **siksik na mode** para sa mga laptop na 13-15 pulgada (mula 0.5.2: awtomatiko sa ilalim ng 850 pixel na taas, palagi o hindi kailanman) at **laki ng titik ng buong programa** (85-140 %, gaya ng sa YA-MS). Muling binubuo ng wika at kulay ang window: nananatili ang mga setting at ang mga spot. |
 | Mga multi-hop na kadena sa 50 MHz | Mula sa bersiyon 0.6.0: abiso sa itaas (at opsiyonal, isang window) kapag may lumitaw na multi-hop na BABALA sa 50 MHz na may kinalaman sa iyong istasyon: kadenang ang maikling unang hop ay mula sa iyo, o koridor na may isang dulo sa loob ng 1200 km. Hindi inuulit ang parehong kadena bago ang isang oras. |
+| Arkibo ng mga spot | Mula sa bersiyon 0.6.5: sa pagsasara, kinokompres ang bawat araw sa `data/archivio_spot` (naka-on bilang default). |
+| APRS sa 144 MHz | Mula sa bersiyon 0.6.5: APRS-IS na read-only, walang password; ang mga APRS hop sa 2 m na lampas 900 km na inulit sa maikling panahon ay nagbibigay ng BABALA sa 144 MHz. |
+| Babala ng F.A.I. | Mula sa bersiyon 0.6.5: kumikislap ang tab na F.A.I. kapag posible o nagaganap ang F.A.I. |
 | Mga mapa at datos ng pagtataya | Ang kontinente, ang parehong menu ng bar ng mga tab. |
 | Oras | Kalagayan ng NTP at ang pagkakaiba ng oras ng server at ng orasan ng PC. |
 | Mga update | Pagsusuri sa GitHub sa pagbukas at bawat 30 minuto, awtomatiko at tahimik na update, button na **Suriin ngayon**. Hindi para sa mga package ng sistema (.deb, .rpm, Arch, Slackware) ang awtomatikong update. |

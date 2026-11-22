@@ -82,7 +82,8 @@ Pakortelėje **Kelių šuolių pirmtakai** programa ieško kelių šuolių grand
 - **Lygių šuolių koridorius** (nuo 0.6.5 versijos): du debesys 1400-2350 km vienas nuo kito dviem lygiais šuoliais sujungia dvi zonas 2800-4700 km atstumu; patikrinimas su ekspedicija 5U5K patvirtina maždaug 4700 km ribą.
 - **ANKSTYVASIS ŽENKLAS** (žalias, nuo 0.6.5 versijos): Es debesis 28 arba 24 MHz dažnyje ten, kur 50 MHz dar neatsivėrė; bandymuose 50 MHz ten atsivėrė per valandą 50% atvejų (be jo – 30%), 9-16 minučių anksčiau.
 - **Pasikartojęs APRS** (raudonas, nuo 0.6.5 versijos): bent du APRS šuoliai 2 m dažnyje virš 900 km per tą patį debesį per 10 minučių = 144 MHz ĮSPĖJIMAS; kortelė mirksi.
-- **Ko verti įspėjimai** (autoriaus stotyje, 2024-2026 m. vasaros): ĮSPĖJIMAI pasitvirtino 46-58% (kelių šuolių QSO ta pačia kryptimi per 2 valandas), palyginti su 8-10% be įspėjimo; bet 43% atsivėrimų ateina be perspėjimo. Aprėptis pasiekia 500 km spindulį aplink tolimą stotį 13,5% atsivėrimų, pasukta – 2-4%.
+- **Ko verti įspėjimai** (autoriaus stotyje, 2024-2026 m. vasaros): ĮSPĖJIMAI pasitvirtino 41-57% (kelių šuolių QSO ta pačia kryptimi per valandą), palyginti su 5-7% be įspėjimo; bet 47% atsivėrimų ateina be perspėjimo. Aprėptis pasiekia 500 km spindulį aplink tolimą stotį 13,5% atsivėrimų, pasukta – 2-4%.
 - Debesys **neperkeliami**: 2026-11-22 bandymas rodo, kad jų perkėlimas jų greičiu nepagerina 15-45 minučių prognozės.
+- **TEP prognozė** (mėlyna, nuo 0.6.5 versijos): indeksas 0-100 zonų už magnetinio pusiaujo kryptimi = metų laikas × SFI × Kp (tik eTEP) × vietos laikas × GIRO jonozondų foF2; SFI sveria, bet nenulina, nes per Saulės minimumą TEP tampa retas, bet neišnyksta.
 
 ![Koridorius](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

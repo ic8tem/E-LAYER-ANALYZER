@@ -79,5 +79,11 @@ Di subtab **Prekursor multi-lompatan** program mencari rantai multi-lompatan di 
 - **Lompatan ganda sama** (sejak versi 0.6.3, lompatan «2 =»): sampai sekitar 4700 km, misalnya ke arah Kazakhstan, dengan awan pada seperempat lintasan seperti pada metode ITU-R P.534-6.
 - Tab **TABEL LOMPATAN** merangkum berapa lompatan yang diperlukan di 50 MHz dari 500 sampai 12000 km, dengan foEs setiap lompatan dan sumbernya.
 - **Jangkauan sinyal saya di 6 m** (titik merah muda): tempat sinyal Anda di 50 MHz mendarat setelah 2-5 lompatan, di atas awan 30 menit terakhir yang diperkirakan dari spot semua band (28-144 MHz) dan dari ionosonde; hanya di tempat yang ada stasiunnya.
+- **Koridor lompatan sama** (sejak versi 0.6.5): dua awan berjarak 1400-2350 km satu sama lain menghubungkan dua zona pada 2800-4700 km dengan dua lompatan sama; pemeriksaan pada ekspedisi 5U5K menegaskan batas sekitar 4700 km.
+- **TANDA AWAL** (hijau, sejak versi 0.6.5): awan Es di 28 atau 24 MHz di tempat 50 MHz belum terbuka; dalam uji, 50 MHz terbuka di sana dalam satu jam pada 50% kasus (30% tanpanya), 9-16 menit lebih dahulu.
+- **APRS berulang** (merah, sejak versi 0.6.5): paling sedikit dua lompatan APRS di 2 m di atas 900 km melalui awan yang sama dalam 10 menit = PERINGATAN 144 MHz; tab berkedip.
+- **Seberapa berharga peringatan** (pada stasiun penulis, musim panas 2024-2026): PERINGATAN berhasil 41-57% (QSO multi-lompatan ke arah yang sama dalam satu jam) dibandingkan 5-7% tanpa peringatan; tetapi 47% bukaan datang tanpa peringatan. Jangkauan mencapai radius 500 km dari stasiun jauh pada 13,5% bukaan, dibandingkan 2-4% bila diputar.
+- Awan **tidak digeser**: uji 22/11/2026 menunjukkan bahwa menggesernya dengan kecepatannya tidak memperbaiki prakiraan 15-45 menit.
+- **Prakiraan TEP** (biru, sejak versi 0.6.5): indeks 0-100 ke arah zona di seberang ekuator magnetik = musim × SFI × Kp (hanya eTEP) × waktu setempat × foF2 ionosonde GIRO; SFI ikut menimbang tetapi tidak menolkan, karena saat minimum matahari TEP menjadi jarang tetapi tidak hilang.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

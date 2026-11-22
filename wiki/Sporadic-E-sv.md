@@ -82,7 +82,8 @@ I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp 
 - **Korridor med lika hopp** (från version 0.6.5): två moln 1400-2350 km från varandra förbinder två zoner på 2800-4700 km med två lika hopp; kontrollen mot expeditionen 5U5K bekräftar gränsen på omkring 4700 km.
 - **TIDIGT TECKEN** (grönt, från version 0.6.5): Es-moln på 28 eller 24 MHz där 50 MHz ännu inte är öppet; i proven öppnade 50 MHz där inom en timme i 50 % av fallen (30 % utan), 9-16 minuter i förväg.
 - **Upprepad APRS** (röd, från version 0.6.5): minst två APRS-hopp på 2 m över 900 km på samma moln inom 10 minuter = 144 MHz-LARM; fliken blinkar.
-- **Vad larmen är värda** (på författarens station, somrarna 2024-2026): LARM lyckade i 46-58 % (multihopp-QSO i samma riktning inom 2 timmar) mot 8-10 % utan larm; men 43 % av öppningarna kommer utan förvarning. Mönstret för var signalen landar når inom 500 km från den avlägsna stationen i 13,5 % av öppningarna, mot 2-4 % när det vrids.
+- **Vad larmen är värda** (på författarens station, somrarna 2024-2026): LARM lyckade i 41-57 % (multihopp-QSO i samma riktning inom en timme) mot 5-7 % utan larm; men 47 % av öppningarna kommer utan förvarning. Mönstret för var signalen landar når inom 500 km från den avlägsna stationen i 13,5 % av öppningarna, mot 2-4 % när det vrids.
 - Molnen **flyttas inte**: provet från 2026-11-22 visar att det inte förbättrar prognosen på 15-45 minuter att flytta dem med deras hastighet.
+- **TEP-prognos** (blå, från version 0.6.5): index 0-100 mot zonerna på andra sidan den magnetiska ekvatorn = årstid × SFI × Kp (bara eTEP) × lokal tid × foF2 från GIRO-jonosonderna; SFI väger men nollställer inte, eftersom TEP vid solminimum blir sällsynt men inte försvinner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

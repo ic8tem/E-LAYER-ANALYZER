@@ -11,6 +11,9 @@
 | İstasyon | Çağrı işareti, lokatör ve yükseklik, üst çubuktakilerle aynı; **Uygula** bunları tüm sekmeler için onaylar. |
 | Görünüm | Dil, renk şeması (YAEC ve YA-MS şemaları ve 0.5.0 sürümünden itibaren IP-TRX-CTRL'nin altı teması: Açık, Gece, Siyah, Mavi, Mor, Yeşil), 13-15 inç dizüstüler için **Sıkışık mod** (0.5.2'den itibaren: 850 piksel yüksekliğin altında otomatik, her zaman ya da asla) ve **tüm programın yazı tipi boyutu** (%85-140, YA-MS'teki gibi). Dil ve renkler pencereyi yeniden oluşturur: ayarlar ve spot'lar korunur. |
 | 50 MHz'de çok atlamalı zincirler | 0.6.0 sürümünden itibaren: istasyonunuzu ilgilendiren 50 MHz'de bir çok atlama UYARISI oluştuğunda üstte bildirim (ve isteğe bağlı olarak bir pencere): ilk kısa atlaması sizden olan zincir ya da bir ucu 1200 km içinde olan koridor. Aynı zincir bir saatten önce tekrarlanmaz. |
+| Spot arşivi | 0.6.5 sürümünden itibaren: kapanışta her gün `data/archivio_spot` içine sıkıştırılır (varsayılan olarak açık). |
+| 144 MHz'te APRS | 0.6.5 sürümünden itibaren: APRS-IS yalnızca okuma kipinde, parolasız; kısa sürede tekrarlanan, 900 km'nin ötesindeki 2 m APRS atlamaları bir 144 MHz UYARISI verir. |
+| F.A.I. uyarısı | 0.6.5 sürümünden itibaren: F.A.I. mümkün olduğunda ya da sürdüğünde F.A.I. sekmesi yanıp söner. |
 | Haritalar ve tahmin verileri | Kıta, sekme çubuğundaki menünün aynısı. |
 | Saat | NTP durumu ve sunucu saati ile bilgisayar saati arasındaki fark. |
 | Güncellemeler | Başlangıçta ve her 30 dakikada bir GitHub'da denetim, otomatik ve sessiz güncelleme, **Şimdi denetle** düğmesi. Otomatik güncellemeler sistem paketleri (.deb, .rpm, Arch, Slackware) için geçerli değildir. |

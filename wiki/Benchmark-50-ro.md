@@ -37,4 +37,6 @@ Pentru traseul ales: distanța și încadrarea în tabelul IK3XTV, azimutul în 
 
 **Încarcă spoturi, ADIF sau ALL.TXT** (spoturi exportate din NORI Es ÎN TIMP, loguri ADIF ale altor stații, decodări ALL.TXT din JTDX sau WSJT-X: indicativul se recunoaște după rândurile de emisie) și **Verifică lanțurile**: programul rejoacă pe deschiderile multi-salt ale stației 1 regula lanțurilor cu salturi scurte și scrie câte deschideri ar fi anticipat (ALERTĂ, PRECURSOR sau doar primul salt scurt), avansul median și alertele neurmate de QSO-uri multi-salt. Fără surse încărcate norii vin doar din log, iar ultimul salt scurt aproape nu se vede: sunt necesare date ale unor stații îndepărtate.
 
+**Testul alertelor** (de la versiunea 0.6.5): pentru ALERTELE și PRECURSORII reluați la fiecare 15 minute, raportul spune câți au reușit (QSO multi-salt în aceeași direcție în ora următoare), alarmele false și referința în aceleași sectoare fără lanțuri.
+
 ![Verificare](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

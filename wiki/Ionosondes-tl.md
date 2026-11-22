@@ -16,6 +16,7 @@ Sub-tab ng **SPORADIC-E** (mula sa bersiyon 0.5.2): ang **sinukat na foEs** ng m
 
 - Ang bawat ionosonde ay isang tuldok na may kulay ayon sa huling foEs (parehong mga kulay ng mga ulap ng Es) at ang halaga sa MHz; **abo** kung walang bagong datos, may **singsing** kung higit sa 90 minuto na ang huling ionogram.
 - Talahanayan: Code, Ionosonde, km mula sa iyong istasyon, UTC ng huling ionogram, foEs, foF2, MUF(D) at **Spot foEs≥**: ang pinakamababang foEs na hinango mula sa mga Es spot ng huling 30 minuto na nagre-reflect sa loob ng 500 km mula sa ionosonde (naaayos), kasama ang bilang ng mga spot.
+- **h'Es GIRO** (mula sa bersiyon 0.6.5, kahon sa REAL-TIME): nagiging median ng mga bagong h'Es ng mga ionosonde sa loob ng 2500 km ang taas ng Es (80-120 km).
 
 ## Ang napiling ionosonde
 

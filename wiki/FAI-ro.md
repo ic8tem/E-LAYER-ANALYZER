@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) este scatter-ul pe neregularități aliniate cu câmpul geomagnetic, tipic serilor de vară după E-sporadic. Semnalul difuzat pleacă pe un **con** a cărui axă este orientată de-a lungul câmpului: două stații pot lucra între ele dacă se află pe **contururi suplementare** (a1 + a2 = 180°, articolul IC8FAX-IC8TEM; contururile ±c ale lui K9SE). Câmpul magnetic este calculat cu modelul **IGRF-14**.
 
+**Alertă F.A.I.** (de la versiunea 0.6.5): din mai până în septembrie, între 18 și 24 ora locală, după un nor Es la 300-1300 km de stația ta, fila **clipește**, iar un rând roșu sus spune unde este posibil F.A.I. (regulile articolului IC8FAX-IC8TEM); cu spoturi F.A.I. recente spune că este în desfășurare. Clic pe rând: vederea Izo-reflexie pe punct.
+
 ## Vederea Scatter trail (perechea A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

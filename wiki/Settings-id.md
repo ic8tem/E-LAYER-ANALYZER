@@ -11,6 +11,9 @@ Sejak versi 0.4.18 tab **PENGATURAN** menghimpun opsi umum program dan distribus
 | Stasiun | Callsign, locator dan ketinggian, sama dengan yang di bilah atas; **Terapkan** mengonfirmasinya untuk semua tab. |
 | Tampilan | Bahasa, skema warna (skema YAEC dan YA-MS serta, sejak versi 0.5.0, enam tema IP-TRX-CTRL: Terang, Malam, Hitam, Biru, Ungu, Hijau), **mode ringkas** untuk laptop 13-15 inci (sejak 0.5.2: otomatis di bawah tinggi 850 piksel, selalu atau tidak pernah) dan **ukuran huruf seluruh program** (85-140 %, seperti di YA-MS). Bahasa dan warna membangun ulang jendela: pengaturan dan spot tetap ada. |
 | Rantai multi-lompatan di 50 MHz | Sejak versi 0.6.0: pemberitahuan di atas (dan opsional sebuah jendela) saat muncul PERINGATAN multi-lompatan di 50 MHz yang menyangkut stasiun Anda: rantai dengan lompatan pertama pendek dari Anda, atau koridor dengan salah satu ujung dalam 1200 km. Rantai yang sama tidak diulang sebelum satu jam. |
+| Arsip spot | Sejak versi 0.6.5: saat ditutup setiap hari dikompresi ke `data/archivio_spot` (aktif secara bawaan). |
+| APRS di 144 MHz | Sejak versi 0.6.5: APRS-IS hanya-baca, tanpa kata sandi; lompatan APRS di 2 m di atas 900 km yang berulang dalam waktu singkat memberi PERINGATAN 144 MHz. |
+| Peringatan F.A.I. | Sejak versi 0.6.5: tab F.A.I. berkedip ketika F.A.I. mungkin atau sedang berlangsung. |
 | Peta dan data prakiraan | Benua, menu yang sama dengan yang ada di bilah tab. |
 | Waktu | Status NTP dan selisih antara waktu server dan jam PC. |
 | Pembaruan | Pemeriksaan di GitHub saat mulai dan setiap 30 menit, pembaruan otomatis dan diam-diam, tombol **Periksa sekarang**. Pembaruan otomatis tidak berlaku untuk paket sistem (.deb, .rpm, Arch, Slackware). |

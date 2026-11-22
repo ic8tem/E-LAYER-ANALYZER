@@ -20,6 +20,10 @@
 
 **Filter lokal** (kotak opsional, di PENGATURAN): baris "DX de" di bawah 27990,0 kHz atau di atas 145 MHz dibuang, tidak ditampilkan di konsol dan tidak disimpan; antara 430 dan 440 MHz hanya spot aurora yang lolos. **Locator tidak presisi** (kurang dari 6 karakter) diambil dari CALL3: jika CALL3 memiliki locator 6 karakter, locator itu selalu diutamakan. Seperti di YA-MS, spot meteor scatter (bukan Sporadic-E) adalah spot di jendela frekuensi khas MS (50190-50300, 70100-70400, 144290-144399 kHz) tanpa tag propagasi lain (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), serta spot dengan mode khusus MS (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) atau dengan `<MS>`. Pengecualian: FT8 dan FT4 di 50 dan 70 MHz, di mana mode yang diketahui yang menentukan (FT8 di 70,154 MHz masuk Sporadic-E bahkan di dalam jendela MS). Spot dengan `<AS>`/`<ACS>` (aircraft scatter) tidak dipakai untuk Sporadic-E.
 
+**Arsip historis** (sejak versi 0.6.5): sebelum basis data dikosongkan, saat ditutup setiap hari ditambahkan ke `data/archivio_spot/TTTT-BB-HH.csv.gz`; AWAN Es DARI WAKTU KE WAKTU dan BENCHMARK 50 MHz juga membaca berkas ini.
+
+Sejak versi 0.6.5 filter lokal juga meloloskan **24890-24990 kHz** (12 m), untuk tanda awal 50 MHz, dan sumber **APRS-IS** menambahkan lompatan APRS di 144 MHz yang berulang dalam waktu singkat.
+
 ## Filter spot
 
 Pengumpulan data **hanya satu untuk seluruh program**: setiap spot melewati filter lalu menuju tab setiap mode propagasi. Sejak versi 0.4.18 filter, filter lokal dan uji filter berada di tab **[PENGATURAN](Settings-id)**, subtab **Distribusi spot**.

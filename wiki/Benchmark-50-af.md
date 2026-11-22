@@ -37,4 +37,6 @@ Vir die gekose pad: afstand en gradering volgens die IK3XTV-tabel, azimut in alb
 
 **Laai spots, ADIF of ALL.TXT** (spots uitgevoer uit Es-WOLKE OOR TYD, ADIF-logs van ander stasies, ALL.TXT-dekoderings van JTDX of WSJT-X: die roepnaam word aan die uitsaairye herken) en **Kontroleer die kettings**: die program pas die reël van kortsprongkettings weer toe op die multi-sprongopeninge van stasie 1 en skryf hoeveel openinge dit vooruit sou aangekondig het (WAARSKUWING, VOORLOPER of slegs die eerste kort sprong), die mediaan-voorsprong en die waarskuwings wat nie deur multi-sprong-QSO's gevolg is nie. Sonder gelaaide bronne kom die wolke slegs uit die log, en is die laaste kort sprong amper nie sigbaar nie: data van ver stasies is nodig.
 
+**Toets van die waarskuwings** (vanaf weergawe 0.6.5): vir die WAARSKUWINGS en VOORLOPERS wat elke 15 minute oorgespeel word, sê die verslag hoeveel geslaag het (multisprong-QSO in dieselfde rigting in die volgende uur), die vals alarms en die verwysing in dieselfde sektore sonder kettings.
+
 ![Kontrole](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

@@ -978,9 +978,9 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	sky med foEs ≥ {0:F1} MHz på {1:F0} km
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Andre hopp, punkt ved tre firedeler av strekningen: {0}, nødvendig foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Dobbelthopp med like hopp (ITU-R P.534-6): for forfatteren det typiske tilfellet opp til rundt 4700 km, for eksempel mot Kasakhstan; lenger ut, mot de andre kontinentene, gjelder kjedene med korte hopp i endene.
-Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Benchmark: {0} ALARMER, fulgt av en multihopp-QSO eller -dekoding i samme retning innen to timer: {1:F0} % (falske alarmer {2:F0} %).
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}% (falsi allarmi {2:F0}%).	Benchmark: {0} ALARMER, fulgt av en multihopp-QSO eller -dekoding i samme retning innen en time: {1:F0} % (falske alarmer {2:F0} %).
 Riferimento negli stessi settori senza catene: {0:F0}%.	Referanse i samme sektorer uten kjeder: {0:F0} %.
-Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Benchmark: {0} FORLØPERE, fulgt av en multihopp-QSO eller -dekoding i samme retning innen to timer: {1:F0} %.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}%.	Benchmark: {0} FORLØPERE, fulgt av en multihopp-QSO eller -dekoding i samme retning innen en time: {1:F0} %.
 corridoio a salti uguali, ti riguarda	korridor med like hopp, gjelder deg
 corridoio a salti uguali	korridor med like hopp
 Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Lokalt filter: forkaster clusterlinjer under 27990,0 kHz og over 145 MHz (verken vist eller lagret), unntatt 24890-24990 kHz (tidlige tegn for 50 MHz); i 430-440 MHz slipper bare nordlysspot gjennom
@@ -1023,3 +1023,14 @@ La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	Fanen F.A
 Allerta F.A.I.	F.A.I.-alarm
 Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Regler fra artikkelen IC8FAX-IC8TEM (2011): fra mai til september, mellom 18 og 24 lokal tid, etter en Es-sky på 50, 70 eller 144 MHz 300-1300 km fra stasjonen din, hvis linjen for maksimalt mottak går der det er stasjoner. F.A.I. pågår: F.A.I.-spot de siste 30 minuttene.
 sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	under 27990 kHz (unntatt 24890-24990 kHz) eller over 145 MHz; i 430-440 MHz bare nordlys
+{0} {1:00}h, indice {2:F0}	{0} kl. {1:00}, indeks {2:F0}
+TEP: {0}.	TEP: {0}.
+{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.	{0} mot {1}: {2:F0} km, asimut {3:F0}°, {4} med {5:00}:{6:00} soltid på den magnetiske ekvator; indeks {7:F0} av 100.
+Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2} (solo eTEP), ora {5:F2}, foF2 delle ionosonde {6:F2}.	Faktorer: årstid {0:F2} (maksimum ved jevndøgn), SFI {1} → {2:F2}, Kp {3} → {4:F2} (bare eTEP), klokkeslett {5:F2}, ionosondenes foF2 {6:F2}.
+Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.	Ingen ny GIRO-ionosonde innenfor 2500 km fra midtpunktet: foF2-faktoren er 1.
+foF2 più alta entro 2500 km dal punto medio: {0:F1} MHz ({1}).	Høyeste foF2 innenfor 2500 km fra midtpunktet: {0:F1} MHz ({1}).
+Spot TEP nell'ultima ora vicino a te o alla zona: {0}.	TEP-spot den siste timen nær deg eller sonen: {0}.
+aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23, anche 144 MHz e oltre, soprattutto agli equinozi. Il minimo solare rende il TEP raro ma non lo cancella: l'SFI pesa, non azzera (decisione dell'autore). I pesi non sono ancora tarati sui dati.	aTEP (ettermiddag): 15-19 lokal tid, opptil omkring 60 MHz; eTEP (kveld): 20-23, også 144 MHz og over, særlig ved jevndøgn. Solminimum gjør TEP sjelden, men sletter den ikke: SFI veier, nullstiller ikke (forfatterens beslutning). Vektene er ennå ikke kalibrert mot data.
+TEP IN CORSO	TEP PÅGÅR
+TEP PROBABILE	TEP SANNSYNLIG
+TEP POSSIBILE	TEP MULIG

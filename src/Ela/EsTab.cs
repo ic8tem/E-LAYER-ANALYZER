@@ -888,7 +888,7 @@ namespace ELA
             {
                 sb.AppendLine(Lang.F("{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.",
                     tp.LevelText, tp.Region, tp.DistKm, tp.Az, tp.Kind, Math.Floor(tp.LocalHour), Math.Floor((tp.LocalHour % 1) * 60), tp.Index));
-                sb.AppendLine(Lang.F("Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2}, ora {5:F2}, foF2 delle ionosonde {6:F2}.",
+                sb.AppendLine(Lang.F("Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2} (solo eTEP), ora {5:F2}, foF2 delle ionosonde {6:F2}.",
                     tp.FSeason, double.IsNaN(tp.Sfi) ? "-" : tp.Sfi.ToString("F0", CultureInfo.CurrentCulture), tp.FSfi,
                     double.IsNaN(tp.Kp) ? "-" : tp.Kp.ToString("F1", CultureInfo.CurrentCulture), tp.FKp, tp.FTime, tp.FGiro));
                 sb.AppendLine(double.IsNaN(tp.FoF2) ? Lang.T("Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.")

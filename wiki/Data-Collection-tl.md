@@ -20,6 +20,10 @@ Ang huling 2000 spot, may filter ayon sa banda at sanggunian. Archive: isang CSV
 
 **Lokal na filter** (opsiyonal na kahon, sa MGA SETTING): itinatapon ang mga linyang "DX de" na mas mababa sa 27990.0 kHz o mas mataas sa 145 MHz, hindi ipinapakita sa console at hindi iniimbak; sa pagitan ng 430 at 440 MHz, mga spot ng aurora lamang ang pinapadaan. Ang **hindi tiyak na mga locator** (kulang sa 6 na karakter) ay kinukuha sa CALL3: kung may locator na 6 na karakter ang CALL3, iyon ang laging nananaig. Gaya ng sa YA-MS, mga spot ng meteor scatter (hindi Sporadic-E) ang mga nasa karaniwang frequency window ng MS (50190-50300, 70100-70400, 144290-144399 kHz) na walang tag ng ibang propagasyon (`<TR> <AS> <ACS> <AU> <ES> <FAI> <F2>`), at ang mga may mode na pang-MS lamang (MSK144, FSK441, FSK41, PSK2K, JTMS, JT6M) o may `<MS>`. Eksepsiyon: FT8 at FT4 sa 50 at 70 MHz, kung saan ang kilalang mode ang nagpapasya (napupunta sa Sporadic-E ang FT8 sa 70.154 MHz kahit nasa loob ng MS window). Hindi ginagamit sa Sporadic-E ang mga spot na may `<AS>`/`<ACS>` (aircraft scatter).
 
+**Makasaysayang arkibo** (mula sa bersiyon 0.6.5): bago alisan ng laman ang database, sa pagsasara ay idinaragdag ang bawat araw sa `data/archivio_spot/TTTT-BB-AA.csv.gz`; binabasa rin ng MGA ULAP NG Es SA PAGLIPAS NG ORAS at ng BENCHMARK 50 MHz ang mga file na ito.
+
+Mula sa bersiyon 0.6.5, pinapadaan din ng lokal na filter ang **24890-24990 kHz** (12 m), para sa mga maagang senyales ng 50 MHz, at idinaragdag ng pinagmulang **APRS-IS** ang mga APRS hop sa 144 MHz na inulit sa maikling panahon.
+
 ## Mga filter ng spot
 
 **Iisa lang ang pangongolekta ng data** para sa buong programa: bawat spot ay dumaraan sa mga filter at pumupunta sa tab ng bawat mode ng propagasyon. Mula sa bersiyon 0.4.18, ang mga filter, ang lokal na filter at ang subok ng mga filter ay nasa tab na **[MGA SETTING](Settings-tl)**, sub-tab na **Pamamahagi ng mga spot**.

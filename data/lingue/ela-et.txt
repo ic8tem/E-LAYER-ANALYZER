@@ -911,7 +911,7 @@ Verifica delle catene a salti corti: {0} aperture multi-salto della stazione 1 (
 Nubi da {0} spot e QSO ({1} dai file CSV).	Pilved {0} spotist ja QSO-st ({1} CSV-failidest).
 Nelle due ore prima, nella stessa direzione (±20°): ALLERTA {0} ({1:F0}%), PRECURSORE {2} ({3:F0}%), solo il primo salto corto {4} ({5:F0}%), nulla {6} ({7:F0}%).	Kahe eelneva tunni jooksul, samas suunas (±20°): HOIATUS {0} ({1:F0}%), EELKÄIJA {2} ({3:F0}%), ainult esimene lühike hüpe {4} ({5:F0}%), mitte midagi {6} ({7:F0}%).
 Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.	HOIATUSE ja EELKÄIJA mediaanne ettehaare: {0:F0} minutit.
-ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	HOIATUSED ja EELKÄIJAD QTH-st logi päevadel: {0}; ilma mitmehüppeliste QSO-deta järgmise kahe tunni jooksul: {1} ({2:F0}%, kuid jaam võis ka mitte eetris olla).
+ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).	HOIATUSED ja EELKÄIJAD QTH-st logi päevadel: {0}; ilma mitmehüppeliste QSO-deta järgmise tunni jooksul: {1} ({2:F0}%, kuid jaam võis ka mitte eetris olla).
 Senza file di spot CSV le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO.	Ilma CSV-spotifailideta tulevad pilved ainult logi QSO-dest: viimane, kauge lühike hüpe on vaevu nähtav. Tõeliseks kontrolliks laadi Es-PILVED AJAS-ist eksporditud spotid.
 CERCA LA NUBE	OTSI PILVE
 {0:F0} min prima	{0:F0} min varem
@@ -979,9 +979,9 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	pilv foEs ≥ {0:F1} MHz {1:F0} km kaugusel
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Teine hüpe, punkt kolmel neljandikul teekonnast: {0}, vajalik foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Võrdsete hüpetega topelthüpe (ITU-R P.534-6): autori jaoks tüüpiline juhtum kuni umbes 4700 km, näiteks Kasahstani suunas; kaugemal, teiste mandrite suunas, kehtivad ahelad lühikeste hüpetega otstes.
-Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Test: {0} HOIATUST, millele järgnes kahe tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}% (valehäired {2:F0}%).
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}% (falsi allarmi {2:F0}%).	Test: {0} HOIATUST, millele järgnes tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}% (valehäired {2:F0}%).
 Riferimento negli stessi settori senza catene: {0:F0}%.	Võrdlusväärtus samades sektorites ilma ahelateta: {0:F0}%.
-Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Test: {0} EELKÄIJAT, millele järgnes kahe tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}%.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}%.	Test: {0} EELKÄIJAT, millele järgnes tunni jooksul samas suunas mitmehüppeline QSO või dekodeering: {1:F0}%.
 corridoio a salti uguali, ti riguarda	võrdsete hüpetega koridor, puudutab sind
 corridoio a salti uguali	võrdsete hüpetega koridor
 Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Kohalik filter: jätab kõrvale klastri read alla 27990,0 kHz ja üle 145 MHz (ei kuvata ega salvestata), välja arvatud 24890-24990 kHz (50 MHz varajased märgid); 430-440 MHz-l pääsevad läbi ainult virmaliste spotid
@@ -1024,3 +1024,14 @@ La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	Sakk F.A.
 Allerta F.A.I.	F.A.I. hoiatus
 Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Artikli IC8FAX-IC8TEM (2011) reeglid: maist septembrini, kohaliku aja järgi 18 ja 24 vahel, pärast Es-pilve 50, 70 või 144 MHz-l sinu jaamast 300-1300 km kaugusel, kui maksimaalse vastuvõtu joon läbib kohti, kus on jaamu. F.A.I. käimas: F.A.I. spotid viimase 30 minuti jooksul.
 sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	alla 27990 kHz (välja arvatud 24890-24990 kHz) või üle 145 MHz; 430-440 MHz-l ainult virmalised
+{0} {1:00}h, indice {2:F0}	{0} kell {1:00}, indeks {2:F0}
+TEP: {0}.	TEP: {0}.
+{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.	{0} suunas {1}: {2:F0} km, asimuut {3:F0}°, {4}, päikeseaeg magnetekvaatoril {5:00}:{6:00}; indeks {7:F0} 100-st.
+Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2} (solo eTEP), ora {5:F2}, foF2 delle ionosonde {6:F2}.	Tegurid: aastaaeg {0:F2} (maksimum võrdpäevsuse ajal), SFI {1} → {2:F2}, Kp {3} → {4:F2} (ainult eTEP), kellaaeg {5:F2}, ionosondide foF2 {6:F2}.
+Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.	Keskpunktist 2500 km piires pole värsket GIRO ionosondi: foF2 tegur on 1.
+foF2 più alta entro 2500 km dal punto medio: {0:F1} MHz ({1}).	Kõrgeim foF2 keskpunktist 2500 km piires: {0:F1} MHz ({1}).
+Spot TEP nell'ultima ora vicino a te o alla zona: {0}.	TEP-spotid viimase tunni jooksul sinu või tsooni lähedal: {0}.
+aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23, anche 144 MHz e oltre, soprattutto agli equinozi. Il minimo solare rende il TEP raro ma non lo cancella: l'SFI pesa, non azzera (decisione dell'autore). I pesi non sono ancora tarati sui dati.	aTEP (pärastlõunane): kohaliku aja järgi 15-19, kuni umbes 60 MHz; eTEP (õhtune): 20-23, ka 144 MHz ja kõrgem, eriti võrdpäevsuse ajal. Päikese miinimum muudab TEP-i haruldaseks, kuid ei kustuta seda: SFI kaalub, ei nulli (autori otsus). Kaalud pole veel andmetel kalibreeritud.
+TEP IN CORSO	TEP KÄIMAS
+TEP PROBABILE	TEP TÕENÄOLINE
+TEP POSSIBILE	TEP VÕIMALIK

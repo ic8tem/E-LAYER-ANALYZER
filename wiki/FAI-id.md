@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) adalah hamburan dari iregularitas yang sejajar dengan medan geomagnetik, khas pada sore hari di musim panas setelah sporadic-E. Sinyal yang terhambur keluar pada sebuah **kerucut** yang sumbunya searah medan: dua stasiun dapat saling bekerja jika keduanya berada pada **kontur suplementer** (a1 + a2 = 180°, artikel IC8FAX-IC8TEM; kontur ±c dari K9SE). Medan magnet dihitung dengan model **IGRF-14**.
 
+**Peringatan F.A.I.** (sejak versi 0.6.5): dari Mei sampai September, antara pukul 18 dan 24 waktu setempat, setelah awan Es pada 300-1300 km dari stasiun Anda, tab **berkedip** dan baris merah di atas menyebutkan di mana F.A.I. mungkin (aturan artikel IC8FAX-IC8TEM); dengan spot F.A.I. terbaru disebutkan bahwa sedang berlangsung. Klik pada baris: tampilan Iso-refleksi pada titik itu.
+
 ## Tampilan scatter trail (pasangan A-B)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

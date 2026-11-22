@@ -37,4 +37,6 @@ Para sa napiling landas: distansiya at klasipikasyon ayon sa talahanayan ni IK3X
 
 **I-load ang spot, ADIF o ALL.TXT** (mga spot na na-export mula sa MGA ULAP NG Es SA PAGLIPAS NG ORAS, mga ADIF log ng ibang istasyon, mga ALL.TXT decode ng JTDX o WSJT-X: nakikilala ang callsign sa mga linya ng pagpapadala) at **Suriin ang mga kadena**: muling inilalapat ng programa sa mga multi-hop na pagbubukas ng istasyon 1 ang tuntunin ng mga kadenang may maiikling hop at isinusulat kung ilang pagbubukas ang naunahan sana nito (BABALA, PAUNANG TANDA o maikling unang hop lamang), ang median na pagkauna at ang mga babalang hindi sinundan ng multi-hop na QSO. Kung walang na-load na pinagmulan, ang mga ulap ay mula lamang sa log, at halos hindi nakikita ang huling maikling hop: kailangan ang datos ng malalayong istasyon.
 
+**Pagsubok sa mga babala** (mula sa bersiyon 0.6.5): para sa mga BABALA at PAUNANG TANDA na inuulit bawat 15 minuto, sinasabi ng ulat kung ilan ang nagtagumpay (multi-hop na QSO sa parehong direksiyon sa sumunod na oras), ang mga maling alarma at ang batayan sa parehong mga sektor na walang kadena.
+
 ![Verifica](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

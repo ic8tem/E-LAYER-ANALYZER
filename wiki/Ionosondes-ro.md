@@ -16,6 +16,7 @@ Sub-filă a **SPORADIC-E** (din versiunea 0.5.2): **foEs măsurată** de ionoson
 
 - Fiecare ionosondă este un punct colorat cu ultima foEs (aceleași culori ca norii Es) și valoarea în MHz; **gri** dacă nu are date recente, cu **inel** dacă ultima ionogramă are peste 90 de minute.
 - Tabel: Cod, Ionosondă, km de stația ta, UTC al ultimei ionograme, foEs, foF2, MUF(D) și **Spoturi foEs≥**: foEs minimă obținută din spoturile Es din ultimele 30 de minute care se reflectă în limita a 500 km de ionosondă (reglabil), cu numărul de spoturi.
+- **h'Es GIRO** (de la versiunea 0.6.5, casetă în REAL-TIME): înălțimea Es devine mediana h'Es recente ale ionosondelor în 2500 km (80-120 km).
 
 ## Ionosonda aleasă
 

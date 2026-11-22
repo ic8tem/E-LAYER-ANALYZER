@@ -79,5 +79,11 @@ Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare
 - **Salt dublu egal** (începând cu versiunea 0.6.3, salturi „2 =”): până la circa 4700 km, de exemplu spre Kazahstan, cu norul la un sfert din traseu ca în metoda UIT-R P.534-6.
 - Fila **ABACUL SALTURILOR** rezumă câte salturi sunt necesare pe 50 MHz de la 500 la 12000 km, cu foEs a fiecărui salt și sursele.
 - **Amprenta semnalului meu pe 6 m** (puncte roz): unde ajunge semnalul tău pe 50 MHz după 2-5 salturi, deasupra norilor din ultimele 30 de minute estimați din spoturile tuturor benzilor (28-144 MHz) și din ionosonde; doar unde sunt stații.
+- **Coridor cu salturi egale** (de la versiunea 0.6.5): doi nori la 1400-2350 km unul de altul leagă două zone la 2800-4700 km cu două salturi egale; verificarea pe expediția 5U5K confirmă limita de circa 4700 km.
+- **SEMN TIMPURIU** (verde, de la versiunea 0.6.5): nor Es în 28 sau 24 MHz acolo unde 50 MHz încă nu s-a deschis; în încercări 50 MHz s-a deschis acolo într-o oră în 50% din cazuri (30% fără), cu 9-16 minute înainte.
+- **APRS repetat** (roșu, de la versiunea 0.6.5): cel puțin două salturi APRS în 2 m peste 900 km pe același nor în 10 minute = ALERTĂ 144 MHz; fila clipește.
+- **Cât valorează alertele** (pe stația autorului, verile 2024-2026): ALERTE reușite în 41-57% (QSO multi-salt în aceeași direcție într-o oră) față de 5-7% fără alertă; dar 47% din deschideri vin fără avertisment. Amprenta ajunge în 500 km de stația îndepărtată în 13,5% din deschideri, față de 2-4% când e rotită.
+- Norii **nu se mută**: încercarea din 22.11.2026 arată că mutarea lor cu viteza lor nu îmbunătățește prognoza la 15-45 de minute.
+- **Prognoza TEP** (albastru, de la versiunea 0.6.5): indice 0-100 spre zonele dincolo de ecuatorul magnetic = anotimp × SFI × Kp (numai eTEP) × ora locală × foF2 a ionosondelor GIRO; SFI cântărește, dar nu anulează, pentru că la minimul solar TEP devine rar, dar nu dispare.
 
 ![Coridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

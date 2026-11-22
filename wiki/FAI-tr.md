@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities, alan hizalı düzensizlikler), yer manyetik alanı boyunca hizalanmış düzensizliklerden gelen saçılmadır; yaz akşamlarında sporadik E'nin ardından tipiktir. Saçılan sinyal ekseni alan doğrultusunda olan bir **koni** üzerinde yayılır: iki istasyon **tümler konturlar** üzerinde bulunuyorsa birbiriyle çalışabilir (a1 + a2 = 180°, IC8FAX-IC8TEM makalesi; K9SE'nin ±c konturları). Manyetik alan **IGRF-14** modeliyle hesaplanır.
 
+**F.A.I. uyarısı** (0.6.5 sürümünden itibaren): Mayıs'tan Eylül'e, yerel saatle 18 ile 24 arasında, istasyonunuza 300-1300 km'deki bir Es bulutundan sonra sekme **yanıp söner** ve üstteki kırmızı satır F.A.I.'nin nerede mümkün olduğunu söyler (IC8FAX-IC8TEM makalesinin kuralları); güncel F.A.I. spot'larıyla sürdüğünü söyler. Satıra tıklama: noktada İzo-yansıma görünümü.
+
 ## Scatter trail görünümü (A-B çifti)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

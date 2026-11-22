@@ -37,6 +37,6 @@ Para el trayecto elegido: distancia y valoración según la tabla IK3XTV, azimut
 
 **Cargar spots, ADIF o ALL.TXT** (spots exportados por NUBES Es EN EL TIEMPO, logs ADIF de otras estaciones, decodificaciones ALL.TXT de JTDX o WSJT-X: el indicativo se reconoce por las líneas de transmisión) y **Verificar las cadenas**: el programa repite sobre las aperturas de multisalto de la estación 1 la regla de las cadenas de saltos cortos e indica cuántas aperturas habría anticipado (ALERTA, PRECURSOR o solo el primer salto corto), la anticipación mediana y las alertas no seguidas de QSO de multisalto. Sin fuentes cargadas, las nubes vienen solo del log y el último salto corto apenas se ve: hacen falta datos de estaciones lejanas.
 
-**Banco de pruebas de las alertas** (desde la versión 0.6.5): para las ALERTAS y los PRECURSORES repetidos cada 15 minutos, el informe dice cuántos acertaron (QSO multisalto en la misma dirección en las 2 horas siguientes), las falsas alarmas y la referencia en los mismos sectores sin cadenas.
+**Banco de pruebas de las alertas** (desde la versión 0.6.5): para las ALERTAS y los PRECURSORES repetidos cada 15 minutos, el informe dice cuántos acertaron (QSO multisalto en la misma dirección en la hora siguiente), las falsas alarmas y la referencia en los mismos sectores sin cadenas.
 
 ![Verificación](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

@@ -11,6 +11,9 @@ Vanaf weergawe 0.4.18 bevat die oortjie **INSTELLINGS** die algemene opsies van 
 | Stasie | Roepnaam, lokator en hoogte, dieselfde as op die boonste balk; **Pas toe** bevestig hulle vir al die oortjies. |
 | Voorkoms | Taal, kleurskema (die skemas van YAEC en YA-MS en, vanaf weergawe 0.5.0, die ses temas van IP-TRX-CTRL: Lig, Nag, Swart, Blou, Pers, Groen), **kompakte modus** vir skootrekenaars van 13-15 duim (vanaf 0.5.2: outomaties onder 850 pieksels hoogte, altyd of nooit) en **lettergrootte van die hele program** (85-140 %, soos in YA-MS). Taal en kleure bou die venster weer op: instellings en spots bly behoue. |
 | Multi-sprongkettings op 50 MHz | Vanaf weergawe 0.6.0: kennisgewing bo (en opsioneel 'n venster) wanneer 'n multi-sprong-WAARSKUWING op 50 MHz ontstaan wat jou stasie raak: ketting met die eerste kort sprong vanaf jou, of korridor met 'n einde binne 1200 km. Dieselfde ketting word nie binne 'n uur herhaal nie. |
+| Spotargief | Vanaf weergawe 0.6.5: by afsluiting word elke dag in `data/archivio_spot` saamgepers (by verstek aan). |
+| APRS op 144 MHz | Vanaf weergawe 0.6.5: APRS-IS slegs-lees, sonder wagwoord; APRS-spronge op 2 m bo 900 km wat binne kort tyd herhaal word, gee 'n 144 MHz-WAARSKUWING. |
+| F.A.I.-waarskuwing | Vanaf weergawe 0.6.5: die oortjie F.A.I. flikker wanneer F.A.I. moontlik of aan die gang is. |
 | Kaarte en voorspellingsdata | Die kontinent, dieselfde kieslys as op die oortjiebalk. |
 | Tyd | NTP-status en die verskil tussen die bedienertyd en die rekenaar se klok. |
 | Opdaterings | Kontrole op GitHub by opstart en elke 30 minute, outomatiese en stil opdatering, knoppie **Kyk nou**. Outomatiese opdaterings geld nie vir stelselpakkette (.deb, .rpm, Arch, Slackware) nie. |

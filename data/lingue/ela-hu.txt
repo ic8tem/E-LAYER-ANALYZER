@@ -978,9 +978,9 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	felhő foEs ≥ {0:F1} MHz értékkel {1:F0} km-re
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2) Második ugrás, pont az útvonal háromnegyedénél: {0}, szükséges foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	Kettős ugrás egyenlő ugrásokkal (ITU-R P.534-6): a szerző szerint ez a tipikus eset körülbelül 4700 km-ig, például Kazahsztán felé; azon túl, a többi kontinens felé, a végeken rövid ugrásokkal induló láncok érvényesek.
-Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).	Próba: {0} FIGYELMEZTETÉS, amelyet két órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}% (téves riasztás {2:F0}%).
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}% (falsi allarmi {2:F0}%).	Próba: {0} FIGYELMEZTETÉS, amelyet egy órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}% (téves riasztás {2:F0}%).
 Riferimento negli stessi settori senza catene: {0:F0}%.	Viszonyítási érték ugyanazokban a szektorokban láncok nélkül: {0:F0}%.
-Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.	Próba: {0} ELŐJEL, amelyet két órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}%.
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}%.	Próba: {0} ELŐJEL, amelyet egy órán belül ugyanabban az irányban többugrásos QSO vagy dekódolás követett: {1:F0}%.
 corridoio a salti uguali, ti riguarda	egyenlő ugrású folyosó, önt érinti
 corridoio a salti uguali	egyenlő ugrású folyosó
 Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	Helyi szűrő: eldobja a klaszter 27990,0 kHz alatti és 145 MHz feletti sorait (nem jelennek meg és nem tárolódnak), kivéve a 24890-24990 kHz-et (az 50 MHz korai jelei); 430-440 MHz-en csak a sarki fény spotjai jutnak át
@@ -1023,3 +1023,14 @@ La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	Az F.A.I.
 Allerta F.A.I.	F.A.I.-figyelmeztetés
 Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	Az IC8FAX-IC8TEM cikk (2011) szabályai: májustól szeptemberig, helyi idő szerint 18 és 24 óra között, egy 50, 70 vagy 144 MHz-es Es-felhő után az állomásától 300-1300 km-re, ha a legjobb vétel vonala ott halad, ahol állomások vannak. F.A.I. folyamatban: F.A.I.-spotok az utolsó 30 percben.
 sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	27990 kHz alatt (kivéve 24890-24990 kHz) vagy 145 MHz felett; 430-440 MHz-en csak sarki fény
+{0} {1:00}h, indice {2:F0}	{0} {1:00} óra, index {2:F0}
+TEP: {0}.	TEP: {0}.
+{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.	{0} {1} felé: {2:F0} km, azimut {3:F0}°, {4}, napidő a mágneses egyenlítőn {5:00}:{6:00}; index {7:F0} / 100.
+Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2} (solo eTEP), ora {5:F2}, foF2 delle ionosonde {6:F2}.	Tényezők: évszak {0:F2} (maximum napéjegyenlőségkor), SFI {1} → {2:F2}, Kp {3} → {4:F2} (csak eTEP), idő {5:F2}, ionoszondák foF2-je {6:F2}.
+Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.	A felezőponttól 2500 km-en belül nincs friss GIRO-ionoszonda: az foF2-tényező 1.
+foF2 più alta entro 2500 km dal punto medio: {0:F1} MHz ({1}).	Legmagasabb foF2 a felezőponttól 2500 km-en belül: {0:F1} MHz ({1}).
+Spot TEP nell'ultima ora vicino a te o alla zona: {0}.	TEP-spotok az utolsó órában ön vagy a zóna közelében: {0}.
+aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23, anche 144 MHz e oltre, soprattutto agli equinozi. Il minimo solare rende il TEP raro ma non lo cancella: l'SFI pesa, non azzera (decisione dell'autore). I pesi non sono ancora tarati sui dati.	aTEP (délutáni): helyi idő szerint 15-19 óra, kb. 60 MHz-ig; eTEP (esti): 20-23 óra, 144 MHz-en és fölötte is, főleg napéjegyenlőségkor. A napfoltminimum ritkává teszi a TEP-et, de nem törli el: az SFI súlyoz, nem nulláz (a szerző döntése). A súlyok még nincsenek adatokon kalibrálva.
+TEP IN CORSO	TEP FOLYAMATBAN
+TEP PROBABILE	TEP VALÓSZÍNŰ
+TEP POSSIBILE	TEP LEHETSÉGES

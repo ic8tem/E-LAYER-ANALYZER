@@ -18,6 +18,7 @@ namespace ELA
     public static class ChainReplay
     {
         public const double LookBackMin = 120, StepMin = 10, AzTolDeg = 20, AfterMin = 120;
+        public const double BenchAfterMin = 60;   // benchmark delle allerte (0.6.5): riuscita entro un'ora (autore, 22/11/2026)
 
         public class Opening
         {
@@ -100,14 +101,15 @@ namespace ELA
                             List<StrongCloud> st;
                             List<ChainAlert> ch = Chains.Core(Hkm, win, hour, t, true, home.LatTx, home.LonTx, false, false, false, isolated, out st);
                             List<ChainAlert> mine = ch.Where(x => (x.Kind == ChainAlert.KindQth || x.Kind == ChainAlert.KindEqual) && x.Level >= 1).ToList();
-                            Func<double, bool> hitAz = az => multi.Any(m => m.Utc > t && m.Utc <= t.AddMinutes(AfterMin) && AzDiff(Geo.Bearing(m.LatTx, m.LonTx, m.LatRx, m.LonRx), az) <= AzTolDeg);
+                            Func<double, double, bool> hitIn = (az, min) => multi.Any(m => m.Utc > t && m.Utc <= t.AddMinutes(min) && AzDiff(Geo.Bearing(m.LatTx, m.LonTx, m.LatRx, m.LonRx), az) <= AzTolDeg);
+                            Func<double, bool> hitAz = az => hitIn(az, AfterMin), hit1 = az => hitIn(az, BenchAfterMin);
                             foreach (ChainAlert c in mine)
                             {
                                 string k = t.ToString("yyyyMMddHH", CultureInfo.InvariantCulture) + "|" + (int)(c.Az / 30);
                                 if (!seen.Add(k)) continue;
                                 r.Episodes++;
-                                bool hit = hitAz(c.Az);
-                                if (!hit) r.EpisodesMissed++;
+                                if (!hitAz(c.Az)) r.EpisodesMissed++;
+                                bool hit = hit1(c.Az);
                                 int sec = (int)(Geo.Norm360(c.Az) / 30) % 12;
                                 if (c.Level == 2) { r.AlN++; if (hit) r.AlHit++; r.AlSec[sec]++; }
                                 else { r.PrN++; if (hit) r.PrHit++; r.PrSec[sec]++; }
@@ -118,7 +120,7 @@ namespace ELA
                                 {
                                     double az = sec * 30 + 15;
                                     if (mine.Any(c => AzDiff(c.Az, az) <= AzTolDeg + 15)) continue;
-                                    r.RefN[sec]++; if (hitAz(az)) r.RefHit[sec]++;
+                                    r.RefN[sec]++; if (hit1(az)) r.RefHit[sec]++;
                                 }
                         }
                 }
@@ -191,13 +193,13 @@ namespace ELA
             if (r.AlN > 0)
             {
                 double rf = refPct(r.AlSec);
-                sb.AppendLine(Lang.F("Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).", r.AlN, 100.0 * r.AlHit / r.AlN, 100.0 - 100.0 * r.AlHit / r.AlN)
+                sb.AppendLine(Lang.F("Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}% (falsi allarmi {2:F0}%).", r.AlN, 100.0 * r.AlHit / r.AlN, 100.0 - 100.0 * r.AlHit / r.AlN)
                     + (double.IsNaN(rf) ? "" : " " + Lang.F("Riferimento negli stessi settori senza catene: {0:F0}%.", rf)));
             }
             if (r.PrN > 0)
             {
                 double rf = refPct(r.PrSec);
-                sb.AppendLine(Lang.F("Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.", r.PrN, 100.0 * r.PrHit / r.PrN)
+                sb.AppendLine(Lang.F("Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}%.", r.PrN, 100.0 * r.PrHit / r.PrN)
                     + (double.IsNaN(rf) ? "" : " " + Lang.F("Riferimento negli stessi settori senza catene: {0:F0}%.", rf)));
             }
             if (r.CsvSpots == 0) sb.AppendLine(Lang.T("Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane."));
