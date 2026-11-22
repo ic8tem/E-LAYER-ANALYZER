@@ -76,6 +76,8 @@ Sa sub-tab na **Mga paunang tanda ng multi-hop**, hinahanap ng programa ang mga 
 - **BABALA** kung sakop ng mga ulap ang mga gitnang hop, **PAUNANG TANDA** kung mga sonang walang tagamasid lamang ang kulang.
 - Sa MGA SETTING may **abiso** sa itaas (at opsiyonal, isang window) para sa mga BABALA na may kinalaman sa iyo.
 - Hindi ipinapakita ang mga kadenang umaabot **sa laot** o kung saan walang istasyon (CALL3 at spot).
+- **Pantay na dobleng hop** (mula bersiyon 0.6.3, mga hop na «2 =»): hanggang mga 4700 km, halimbawa patungong Kazakhstan, na ang ulap ay nasa ikaapat na bahagi ng ruta gaya ng sa pamamaraang ITU-R P.534-6.
+- Binubuod ng tab na **TALAAN NG MGA HOP** kung ilang hop ang kailangan sa 50 MHz mula 500 hanggang 12000 km, kasama ang foEs ng bawat hop at ang mga sanggunian.
 - **Abot ng aking signal sa 6 m** (mga rosas na tuldok): kung saan lumalapag ang iyong signal sa 50 MHz pagkatapos ng 2-5 hop, sa ibabaw ng mga ulap ng huling 30 minuto na tinantiya mula sa mga spot ng lahat ng banda (28-144 MHz) at mula sa mga ionosonde; kung saan lamang may istasyon.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
