@@ -145,6 +145,19 @@ namespace ELA
                 spLat = LastBest.Lat; spLon = LastBest.Lon;
                 cmbMode.SelectedIndex = 1; Recalc(true);
             };
+            if (!aurora)
+            {
+                // ALLERTA F.A.I. dopo l'E-sporadico (FaiAlert.cs): righe rosse in alto, clic su una riga = iso-riflessione su quella nube
+                lblAlert = new TextBlock { Foreground = Pal.B(Pal.Red), FontWeight = FontWeight.SemiBold, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 3), IsVisible = false, Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand) };
+                ToolTip.SetTip(lblAlert, Lang.T("Clic: linee di iso-riflessione dalla tua stazione sulla prima nube indicata"));
+                lblAlert.PointerPressed += (s, e) =>
+                {
+                    if (FaiAlert.Candidates.Count == 0) return;
+                    FaiCandidate c = FaiAlert.Candidates[0];
+                    txtA.Text = ""; spLat = c.Lat; spLon = c.Lon; cmbMode.SelectedIndex = 1; Recalc();
+                };
+                Ui.Dock(right, lblAlert, Dock.Top);
+            }
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Vista")), cmbMode, bCalc, bEu, bVerify), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Stazione A")), txtA, Ui.L(Lang.T("Stazione B")), txtB), Dock.Top);
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, aurora ? (Control)chkOval : cmbPreset, cmbSp, chkRefr), Dock.Top);
@@ -207,6 +220,14 @@ namespace ELA
         public string ResultText { get { return txtRes.Text ?? ""; } }
         public void ShotIsoPair(string a, string b, double lat, double lon) { txtA.Text = a; txtB.Text = b; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
         public PerpPoint LastBest;
+        TextBlock lblAlert;
+        public void SetAlert(string text)
+        {
+            if (lblAlert == null) return;
+            lblAlert.Text = text ?? "";
+            lblAlert.IsVisible = !string.IsNullOrEmpty(text);
+        }
+
         public void ShotPair(string a, string b) { txtA.Text = a; txtB.Text = b; cmbMode.SelectedIndex = 0; Recalc(); }
         public void ShotIsoA(string a, double lat, double lon) { txtA.Text = a; spLat = lat; spLon = lon; cmbMode.SelectedIndex = 1; Recalc(); }
         public void View(double w, double e, double s, double n) { map.SetView(w, e, s, n); }

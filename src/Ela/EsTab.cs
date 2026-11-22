@@ -20,7 +20,7 @@ namespace ELA
     {
         public readonly Control Root;
         readonly MapView map = new MapView();
-        readonly CheckBox c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells, chkProj;
+        readonly CheckBox c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells, chkProj, chkHes;
         readonly ComboBox cmbWin;
         readonly NumericUpDown numH, numElev, numShort;
         readonly TextBlock lblSummary;
@@ -56,6 +56,10 @@ namespace ELA
             cmbWin = Ui.Combo(wn, Math.Max(0, Array.IndexOf(Windows, (int)cf.GetD("es_minuti", 60))), 120);
             numH = Ui.N(90, 130, Ui.Dm(cf.GetD("es_quota_km2", EsModel.DefaultH)), 0, 1, 45);
             numElev = Ui.N(0, 10, Ui.Dm(cf.GetD("es_elev_min2", EsModel.DefaultElevMin)), 1, 0.5m, 45);
+            chkHes = Ui.C(Lang.T("h'Es GIRO"), cf.GetB("es_quota_giro", false));
+            ToolTip.SetTip(chkHes, Lang.T("Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta."));
+            chkHes.IsCheckedChanged += (s, e) => { numH.IsEnabled = chkHes.IsChecked != true; dirty = true; Refresh(); };
+            numH.IsEnabled = chkHes.IsChecked != true;
             chkFirst = Ui.C(Lang.T("Primi salti (salti uguali)"), cf.GetB("es_primo_salto", true));
             chkShort = Ui.C(Lang.T("Primo salto corto entro"), cf.GetB("es_salto_corto", true));
             numShort = Ui.N(400, 2400, Ui.Dm(cf.GetD("es_salto_corto_km", 1200)), 0, 50, 55);
@@ -78,7 +82,7 @@ namespace ELA
             Continents.Changed += () => { if (cmbMap.SelectedIndex == 1) Continents.Apply(map); };
             foreach (CheckBox c in new[] { c10, c8, c6, c4, c2, chkFirst, chkShort, chkCells, chkProj }) c.IsCheckedChanged += (s, e) => { dirty = true; Refresh(); };
             cmbWin.SelectionChanged += (s, e) => { dirty = true; Refresh(); };
-            foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { dirty = true; Refresh(); };
+            foreach (NumericUpDown n in new[] { numH, numElev, numShort }) n.ValueChanged += (s, e) => { if (autoSet) return; dirty = true; Refresh(); };
 
             lblSummary = new TextBlock { Foreground = Pal.B(Pal.Green), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 4) };
 
@@ -125,7 +129,7 @@ namespace ELA
 
             DockPanel right = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Bande")), c10, c8, c6, c4, c2, cmbWin), Dock.Top);
-            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, Ui.L(Lang.T("Elev. min °")), numElev, bView, bWorld), Dock.Top);
+            Ui.Dock(right, Ui.Row(Ui.L(Lang.T("Quota Es km")), numH, chkHes, Ui.L(Lang.T("Elev. min °")), numElev, bView, bWorld), Dock.Top);
             Ui.Dock(right, Ui.Row(chkFirst, chkShort, numShort, Ui.L("km"), chkCells, chkProj), Dock.Top);
             Ui.Dock(right, lblSummary, Dock.Top);
             Ui.Dock(right, Ui.Box(Lang.T("Dettagli (clic su uno spot, su una nube o sulla mappa)"), Pal.Azure, svDet), Dock.Bottom);
@@ -172,7 +176,7 @@ namespace ELA
             Config cf = Station.Cfg;
             cf.Set("es_10m", c10.IsChecked == true); cf.Set("es_8m", c8.IsChecked == true); cf.Set("es_6m", c6.IsChecked == true); cf.Set("es_4m", c4.IsChecked == true); cf.Set("es_2m", c2.IsChecked == true);
             cf.Set("es_minuti", Windows[Math.Max(0, cmbWin.SelectedIndex)]);
-            cf.Set("es_quota_km2", Ui.V(numH)); cf.Set("es_elev_min2", Ui.V(numElev));
+            cf.Set("es_quota_km2", Ui.V(numH)); cf.Set("es_elev_min2", Ui.V(numElev)); cf.Set("es_quota_giro", chkHes.IsChecked == true);
             cf.Set("es_primo_salto", chkFirst.IsChecked == true); cf.Set("es_salto_corto", chkShort.IsChecked == true);
             cf.Set("es_salto_corto_km", Ui.V(numShort)); cf.Set("es_celle", chkCells.IsChecked == true); cf.Set("es_proiezione_6m", chkProj.IsChecked == true);
             cf.Set("es_proiezione", Math.Max(0, cmbMap.SelectedIndex));
@@ -240,6 +244,24 @@ namespace ELA
 
         public double H { get { return Ui.V(numH); } }
 
+        // quota da h'Es delle ionosonde GIRO (casella accanto alla quota): aggiorna il campo; senza dati recenti resta la quota scritta
+        void AutoHeight()
+        {
+            if (chkHes == null || chkHes.IsChecked != true) return;
+            if (Giro.Ready && !Giro.Busy && (DateTime.UtcNow - Giro.LastFetch).TotalMinutes > 15) { var _ = Giro.FetchAllAsync(); }
+            if (!Station.Valid) return;
+            int n; string names;
+            double h = Giro.EsHeight(Station.Lat, Station.Lon, 2500, out n, out names);
+            if (double.IsNaN(h))
+            {
+                ToolTip.SetTip(numH, Giro.HesAsked ? Lang.T("Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.") : Lang.T("Il servizio GIRO non ha dato le h'Es: vale la quota scritta."));
+                return;
+            }
+            h = Math.Max(90, Math.Min(130, Math.Round(h)));
+            ToolTip.SetTip(numH, Lang.F("h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})", h, n, names));
+            if (Math.Abs(Ui.V(numH) - h) >= 0.5) numH.Value = (decimal)h;
+        }
+
         // avviso della testata: apre la sottolinguetta dei precursori sull'allerta scelta
         public void ShowAlert(string key)
         {
@@ -253,9 +275,12 @@ namespace ELA
         const double UltraKm = 11000;
         List<EsPath> ultra = new List<EsPath>();
 
+        bool autoSet;
         public void Refresh()
         {
             dirty = false;
+            autoSet = true;
+            try { AutoHeight(); } catch { } finally { autoSet = false; }
             EsModel.ShortHopKm = chkShort.IsChecked == true ? Ui.V(numShort) : 0;
             int minutes = Windows[Math.Max(0, cmbWin.SelectedIndex)];
             List<Spot> sp = SpotStore.Recent(minutes, s => s.HasBoth && BandOn(s) && s.EsCandidate && !EsModel.Ft8Isolated50(s));   // FT8/FT4 isolati in 50 MHz: meteor scatter
@@ -381,6 +406,20 @@ namespace ELA
             tPre.Rows.Clear();
             foreach (PrecursorAlert a in alerts)
             {
+                ProdromeAlert pa = a as ProdromeAlert;
+                if (pa != null)
+                {
+                    bool near = !double.IsNaN(pa.NearKm) && pa.NearKm <= Prodromes.MaxFromStationKm;
+                    tPre.Rows.Add(new TableRow
+                    {
+                        Cells = new[] { pa.LevelText, pa.Region, pa.Band, "1", Lang.F("nube in {0}", pa.FromBand == "12 m" ? "24 MHz" : "28 MHz"),
+                            double.IsNaN(pa.DistKm) ? "-" : pa.DistKm.ToString("F0", CultureInfo.CurrentCulture), double.IsNaN(pa.Az) ? "-" : pa.Az.ToString("F0", CultureInfo.InvariantCulture) },
+                        Fore = Pal.Green,
+                        CellFore = near ? null : new Color?[] { null, Pal.Muted, null, null, Pal.Muted, null, null },
+                        Tag = a
+                    });
+                    continue;
+                }
                 ChainAlert ca = a as ChainAlert;
                 if (ca != null)
                 {
@@ -388,7 +427,7 @@ namespace ELA
                     bool mine = ca.Kind == ChainAlert.KindQth || ca.Kind == ChainAlert.KindEqual || (!double.IsNaN(ca.NearKm) && ca.NearKm <= Chains.NearMeKm);
                     tPre.Rows.Add(new TableRow
                     {
-                        Cells = new[] { ca.LevelText, ca.Region, ca.Band, ca.Kind == ChainAlert.KindSearch ? "1+?+1" : ca.Kind == ChainAlert.KindEqual ? "2 =" : "1+" + ca.Middle + "+1", ca.KindText,
+                        Cells = new[] { ca.LevelText, ca.Region, ca.Band, ca.Kind == ChainAlert.KindSearch ? "1+?+1" : ca.Kind == ChainAlert.KindEqual || ca.Kind == ChainAlert.KindEqualCorridor ? "2 =" : "1+" + ca.Middle + "+1", ca.KindText,
                             ca.DistKm.ToString("F0", CultureInfo.CurrentCulture), ca.Az.ToString("F0", CultureInfo.InvariantCulture) },
                         Fore = ca.Level == 2 ? Pal.Red : ca.Level == 1 ? Pal.Yellow : Pal.Azure,
                         CellFore = mine ? null : new Color?[] { null, Pal.Muted, null, null, Pal.Muted, null, null },
@@ -636,6 +675,13 @@ namespace ELA
                 if (selAlert != null && !isSel) continue;
                 ChainAlert ca = a as ChainAlert;
                 if (ca != null) { DrawChain(ca, isSel, selAlert != null); continue; }
+                ProdromeAlert pa = a as ProdromeAlert;
+                if (pa != null)
+                {
+                    map.Lines.Add(MapView.Circle(pa.CloudLat, pa.CloudLon, Prodromes.NearKm, Pal.A((byte)(isSel ? 255 : 150), Pal.Green), isSel ? 2.4 : 1.2));
+                    if (isSel) map.Markers.Add(new MapMarker { Lat = pa.CloudLat, Lon = pa.CloudLon, Radius = 0, Label = Lang.F("prodromo: nube in {0}", pa.FromBand == "12 m" ? "24 MHz" : "28 MHz"), LabelColor = Pal.Green });
+                    continue;
+                }
                 if (!Station.Valid) continue;
                 Color c = a.Level == 2 ? Pal.Red : Pal.Yellow;
                 map.Lines.Add(MapView.GreatCircle(Station.Lat, Station.Lon, a.TargetLat, a.TargetLon, Pal.A(isSel ? 255 : 170, c), isSel ? 2.6 : 1.4, true));
@@ -675,10 +721,10 @@ namespace ELA
                 return;
             }
             map.Lines.Add(MapView.GreatCircle(c.EndALat, c.EndALon, c.EndBLat, c.EndBLon, Pal.A(alpha, col), w));
-            if (c.Kind == ChainAlert.KindCorridor) map.Lines.Add(MapView.Circle(c.EndALat, c.EndALon, Chains.LineKm, Pal.A(alpha, col), w));
+            if (c.Kind == ChainAlert.KindCorridor || c.Kind == ChainAlert.KindEqualCorridor) map.Lines.Add(MapView.Circle(c.EndALat, c.EndALon, Chains.LineKm, Pal.A(alpha, col), w));
             map.Lines.Add(MapView.Circle(c.EndBLat, c.EndBLon, Chains.LineKm, Pal.A(alpha, col), w));
             if (!isSel && !mine) return;
-            if (c.Kind == ChainAlert.KindCorridor) map.Markers.Add(new MapMarker { Lat = c.EndALat, Lon = c.EndALon, Radius = 0, Label = c.EndAName, LabelColor = col });
+            if (c.Kind == ChainAlert.KindCorridor || c.Kind == ChainAlert.KindEqualCorridor) map.Markers.Add(new MapMarker { Lat = c.EndALat, Lon = c.EndALon, Radius = 0, Label = c.EndAName, LabelColor = col });
             map.Markers.Add(new MapMarker { Lat = c.EndBLat, Lon = c.EndBLon, Radius = 0, Label = c.EndBName + " 6 m", LabelColor = col });
             if (!isSel) return;
             foreach (StrongCloud n in new[] { c.A, c.B }.Where(x => x != null))
@@ -699,7 +745,7 @@ namespace ELA
 
         void ChainDetails(StringBuilder sb, ChainAlert c)
         {
-            if (c.Kind == ChainAlert.KindEqual)
+            if (c.Kind == ChainAlert.KindEqual || c.Kind == ChainAlert.KindEqualCorridor)
             {
                 PrecursorPoint f = c.Points.Count > 0 ? c.Points[0] : null;
                 sb.AppendLine(Lang.F("{0} - doppio salto a salti uguali: {1}", c.LevelText, c.Region));
@@ -710,7 +756,12 @@ namespace ELA
                     string st = f.Covered ? Lang.F("nube con foEs ≥ {0:F1} MHz a {1:F0} km", f.CloudFoEs, f.CloudKm) : f.Observed ? Lang.T("zona osservata, nessuna nube") : Lang.T("zona senza osservatori");
                     sb.AppendLine(Lang.F("2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}", Geo.LatLonToLoc(f.Lat, f.Lon, 4), f.FoEsNeed, st));
                 }
-                sb.AppendLine(Lang.F("Zona d'arrivo: {0}, entro circa {1:F0} km", c.EndBName, Chains.LineKm));
+                if (c.Kind == ChainAlert.KindEqual) sb.AppendLine(Lang.F("Zona d'arrivo: {0}, entro circa {1:F0} km", c.EndBName, Chains.LineKm));
+                else
+                {
+                    sb.AppendLine(Lang.F("Zone d'estremità: {0} e {1}, entro circa {2:F0} km", c.EndAName, c.EndBName, Chains.LineKm));
+                    if (!double.IsNaN(c.NearKm)) sb.AppendLine(c.NearKm <= Chains.NearMeKm ? Lang.F("La tua stazione è a {0:F0} km da una zona d'estremità: ti riguarda.", c.NearKm) : Lang.F("La tua stazione è a {0:F0} km dalla zona d'estremità più vicina.", c.NearKm));
+                }
                 sb.AppendLine(Lang.T("Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità."));
                 return;
             }
@@ -761,6 +812,16 @@ namespace ELA
         {
             ChainAlert ca = a as ChainAlert;
             if (ca != null) { ChainDetails(sb, ca); return; }
+            ProdromeAlert pa = a as ProdromeAlert;
+            if (pa != null)
+            {
+                sb.AppendLine(Lang.F("PRODROMO: nube Es in {0} su {1} ({2}), foEs ≥ {3:F1} MHz, {4} spot negli ultimi 15 minuti; in 50 MHz nessuno spot Es entro 300 km negli ultimi 30 minuti.",
+                    pa.FromBand == "12 m" ? "24 MHz" : "28 MHz", pa.Region, Geo.LatLonToLoc(pa.CloudLat, pa.CloudLon, 4), pa.FoEs, pa.N));
+                if (pa.Spot != null) sb.AppendLine(Lang.F("Spot: {0} - {1} {2} MHz, {3:F0} km", pa.Spot.Spotter, pa.Spot.DxCall, pa.Spot.FreqMHz.ToString("F3", CultureInfo.CurrentCulture), pa.Spot.DistanceKm));
+                if (!double.IsNaN(pa.NearKm)) sb.AppendLine(Lang.F("La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).", pa.NearKm, pa.Az));
+                sb.AppendLine(Lang.T("Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 10-15 minuti."));
+                return;
+            }
             sb.AppendLine(Lang.F("{0}: {1} in {2}, {3:F0} km, azimut {4:F0}°", a.LevelText, Lang.T(a.Region), a.Band, a.DistKm, a.Az));
             sb.AppendLine(a.ShortHyp ? Lang.F("Ipotesi: primo salto corto di {0:F0} km, poi salti uguali (tabella IK3XTV).", a.ShortKm)
                                      : Lang.F("Ipotesi: {0} salti uguali di {1:F0} km (tabella IK3XTV).", a.Points.Count, a.DistKm / a.Points.Count));

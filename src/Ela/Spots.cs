@@ -72,7 +72,7 @@ namespace ELA
         // in 28 MHz la distanza minima si scala da quella dei 50 MHz seguendo IK3XTV (EsModel.MinKm28)
         // in 70 MHz entro EsModel.MinKm70 (450 km, regola dell'autore del 14/11/2026); in 40 MHz la distanza minima si scala da
         // quella dei 50 MHz come per i 28 MHz e vale solo il primo salto della geometria dello strato E (EsModel.MaxKm40)
-        public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "4m" && DistanceKm < EsModel.MinKm70) || (Band == "10m" && DistanceKm < EsModel.MinKm28) || (Band == "8m" && DistanceKm < EsModel.MinKm40)); } }
+        public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "4m" && DistanceKm < EsModel.MinKm70) || (Band == "10m" && DistanceKm < EsModel.MinKm28) || (Band == "12m" && DistanceKm < EsModel.MinKm24) || (Band == "8m" && DistanceKm < EsModel.MinKm40)); } }
         public bool TooLongForEs { get { return HasBoth && Band == "8m" && DistanceKm > EsModel.MaxKm40; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
         public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !TooLongForEs && !IsEme144 && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
@@ -92,6 +92,7 @@ namespace ELA
         // nome della banda dalla frequenza (kHz)
         public static string Name(double kHz)
         {
+            if (kHz >= 24890 && kHz <= 24990) return "12m";   // solo per i prodromi dei 50 MHz (Prodromes.cs)
             if (kHz >= 28000 && kHz <= 29700) return "10m";
             if (kHz >= 40000 && kHz <= 41000) return "8m";
             if (kHz >= 50000 && kHz <= 54000) return "6m";
@@ -286,9 +287,49 @@ namespace ELA
             return s;
         }
 
+        // ARCHIVIO STORICO (dal 22/11/2026, richiesta dell'autore: «adesso che il programma è più stabile, l'archivio spot ha
+        // senso»): alla chiusura, prima di svuotare data/spot, ogni giorno si aggiunge compresso in data/archivio_spot/AAAA-MM-GG.csv.gz
+        // (stesso formato CSV, si carica in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz). Si puo' spegnere in IMPOSTAZIONI.
+        public static bool Archive = true;
+        public static string ArchiveDir { get { return Dir == null ? null : Path.Combine(Path.GetDirectoryName(Dir), "archivio_spot"); } }
+        static void ArchiveDay(string csv)
+        {
+            string ad = ArchiveDir;
+            Directory.CreateDirectory(ad);
+            string gz = Path.Combine(ad, Path.GetFileNameWithoutExtension(csv) + ".csv.gz");
+            List<string> lines = new List<string>();
+            HashSet<string> seen = new HashSet<string>();
+            if (File.Exists(gz)) foreach (string l in ReadLines(gz)) if (l.Length > 0 && seen.Add(l)) lines.Add(l);
+            foreach (string l in File.ReadLines(csv)) if (l.Length > 0 && seen.Add(l)) lines.Add(l);
+            if (lines.Count == 0 || lines[0] != CsvHeader) { lines.Remove(CsvHeader); lines.Insert(0, CsvHeader); }
+            string tmp = gz + ".tmp";
+            using (FileStream fs = File.Create(tmp))
+            using (System.IO.Compression.GZipStream z = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionLevel.Optimal))
+            using (StreamWriter w = new StreamWriter(z, new UTF8Encoding(false)))
+                foreach (string l in lines) w.WriteLine(l);
+            if (File.Exists(gz)) File.Delete(gz);
+            File.Move(tmp, gz);
+        }
+
+        // righe di un file di spot, anche compresso (.gz)
+        public static IEnumerable<string> ReadLines(string path)
+        {
+            if (!path.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) { foreach (string l in File.ReadLines(path)) yield return l; yield break; }
+            using (FileStream fs = File.OpenRead(path))
+            using (System.IO.Compression.GZipStream z = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
+            using (StreamReader r = new StreamReader(z, Encoding.UTF8))
+            {
+                string l;
+                while ((l = r.ReadLine()) != null) yield return l;
+            }
+        }
+        public static bool IsSpotFile(string path) { return path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) || path.EndsWith(".csv.gz", StringComparison.OrdinalIgnoreCase); }
+
         // svuota il database degli spot: memoria e file CSV di data/spot (alla chiusura del programma, regola dell'autore)
         public static void ClearAll()
         {
+            if (Archive && Dir != null && Directory.Exists(Dir))
+                foreach (string f in Directory.GetFiles(Dir, "*.csv")) { try { ArchiveDay(f); } catch { } }
             All.Clear(); keys.Clear();
             try
             {

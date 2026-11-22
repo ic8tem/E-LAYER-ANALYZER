@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Threading;
 using YAMS;
 
 namespace ELA
@@ -208,10 +209,36 @@ namespace ELA
 
         public void SetTitle(int i, string title) { if (i >= 0 && i < buttons.Count) buttons[i].Content = title; }
 
+        // linguetta che lampeggia (dal 22/11/2026: ALLERTA F.A.I.); smette quando la si apre
+        readonly HashSet<int> blinking = new HashSet<int>();
+        DispatcherTimer blinkTimer;
+        bool blinkOn;
+        public void SetBlink(int i, bool on, string tip = null)
+        {
+            if (i < 0 || i >= buttons.Count) return;
+            if (tip != null) ToolTip.SetTip(buttons[i], tip.Length > 0 ? tip : null);
+            if (on && i == Selected) on = false;
+            if (on) blinking.Add(i);
+            else if (blinking.Remove(i)) buttons[i].ClearValue(TemplatedControl.BackgroundProperty);
+            if (blinking.Count > 0 && blinkTimer == null)
+            {
+                blinkTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(650) };
+                blinkTimer.Tick += (s, e) =>
+                {
+                    blinkOn = !blinkOn;
+                    foreach (int k in blinking)
+                        if (blinkOn) buttons[k].Background = Pal.B(Pal.Red); else buttons[k].ClearValue(TemplatedControl.BackgroundProperty);
+                    if (blinking.Count == 0) { blinkTimer.Stop(); blinkTimer = null; }
+                };
+                blinkTimer.Start();
+            }
+        }
+
         public void Select(int i)
         {
             if (i < 0 || i >= pages.Count) return;
             Selected = i;
+            if (blinking.Remove(i)) buttons[i].ClearValue(TemplatedControl.BackgroundProperty);
             for (int k = 0; k < buttons.Count; k++)
             {
                 buttons[k].IsChecked = k == i;

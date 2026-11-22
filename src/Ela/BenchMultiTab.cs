@@ -448,7 +448,7 @@ namespace ELA
             {
                 Title = Lang.T("Spot CSV del programma, log ADIF o decodifiche ALL.TXT (JTDX, WSJT-X) di altre stazioni"),
                 AllowMultiple = true,
-                FileTypeFilter = new[] { new FilePickerFileType("CSV / ADIF / ALL.TXT") { Patterns = new[] { "*.csv", "*.CSV", "*.adi", "*.adif", "*.ADI", "*.ADIF", "*.txt", "*.TXT" } } }
+                FileTypeFilter = new[] { new FilePickerFileType("CSV / ADIF / ALL.TXT") { Patterns = new[] { "*.csv", "*.CSV", "*.gz", "*.adi", "*.adif", "*.ADI", "*.ADIF", "*.txt", "*.TXT" } } }
             });
             if (files == null || files.Count == 0) return;
             int before = csvSpots.Count;
@@ -468,7 +468,7 @@ namespace ELA
                 try
                 {
                     // log ADIF di un'altra stazione (anche una spedizione): i suoi QSO diventano nubi, come quelli dei log caricati
-                    if (path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase)) { foreach (string line in File.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
+                    if (SpotStore.IsSpotFile(path)) { foreach (string line in SpotStore.ReadLines(path)) { Spot s = SpotStore.ParseCsvLine(line); if (s != null && s.HasBoth) l.Add(s); } }
                     else if (path.EndsWith(".txt", StringComparison.OrdinalIgnoreCase)) { string own; l.AddRange(AllTxt.Read(path, 28, 148, out own).Where(s => s.HasBoth)); }   // decodifiche di JTDX / WSJT-X
                     else l.AddRange(NubiTab.FromAdif(path).Where(s => s.HasBoth));
                 }

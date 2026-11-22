@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace ELA
 {
-    public class GiroRec { public DateTime Utc; public double Cs = double.NaN, FoF2 = double.NaN, Muf = double.NaN, FoEs = double.NaN; }
+    public class GiroRec { public DateTime Utc; public double Cs = double.NaN, FoF2 = double.NaN, Muf = double.NaN, FoEs = double.NaN, HEs = double.NaN; }   // HEs = h'Es, quota virtuale minima della traccia Es (km)
 
     public class GiroStation
     {
@@ -95,6 +95,28 @@ namespace ELA
 
         public static GiroStation Find(string code) { foreach (GiroStation s in Stations) if (s.Code == code) return s; return null; }
 
+        // h'Es (dal 22/11/2026, richiesta dell'autore): si chiede anche la quota virtuale minima della traccia Es (codice URSI 34)
+        public static volatile bool HesAsked = true;
+        // quota dello strato Es vicino a un punto: mediana delle h'Es recenti (90 minuti) delle ionosonde entro km, fra 85 e 140 km
+        public static double EsHeight(double lat, double lon, double km, out int n, out string names)
+        {
+            n = 0; names = "";
+            List<double> v = new List<double>();
+            foreach (GiroStation s in Stations)
+            {
+                if (Geo.DistanceKm(lat, lon, s.Lat, s.Lon) > km) continue;
+                DateTime when;
+                double h = s.LastValue(r => r.HEs, FreshMin, out when);
+                if (double.IsNaN(h) || h < 85 || h > 140) continue;
+                v.Add(h);
+                if (names.Length < 60) names += (names.Length > 0 ? ", " : "") + s.Name + " " + h.ToString("F0", CultureInfo.InvariantCulture);
+            }
+            n = v.Count;
+            if (n == 0) return double.NaN;
+            v.Sort();
+            return n % 2 == 1 ? v[n / 2] : (v[n / 2 - 1] + v[n / 2]) / 2;
+        }
+
         // ---------------------------------------------------------------- archivio su disco
 
         public static void Init(string dataDir)
@@ -118,7 +140,7 @@ namespace ELA
                     if (p.Length < 5) continue;
                     DateTime t;
                     if (!DateTime.TryParse(p[0], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out t) || t < lim) continue;
-                    l.Add(new GiroRec { Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc), Cs = D(p[1]), FoF2 = D(p[2]), Muf = D(p[3]), FoEs = D(p[4]) });
+                    l.Add(new GiroRec { Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc), Cs = D(p[1]), FoF2 = D(p[2]), Muf = D(p[3]), FoEs = D(p[4]), HEs = p.Length > 5 ? D(p[5]) : double.NaN });
                 }
                 lock (s.Recs) { s.Recs.Clear(); s.Recs.AddRange(l); }
             }
@@ -133,7 +155,7 @@ namespace ELA
                 lock (s.Recs)
                     foreach (GiroRec r in s.Recs)
                         sb.Append(r.Utc.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture)).Append(';').Append(S(r.Cs)).Append(';')
-                          .Append(S(r.FoF2)).Append(';').Append(S(r.Muf)).Append(';').Append(S(r.FoEs)).Append('\n');
+                          .Append(S(r.FoF2)).Append(';').Append(S(r.Muf)).Append(';').Append(S(r.FoEs)).Append(';').Append(S(r.HEs)).Append('\n');
                 File.WriteAllText(Path.Combine(dir, s.Code + ".csv"), sb.ToString());
             }
             catch { }
@@ -181,14 +203,28 @@ namespace ELA
             DateTime from = now.AddHours(-24);
             GiroRec last = s.Last;
             if (last != null && last.Utc > from) from = last.Utc.AddSeconds(1);
-            string q = "ursiCode=" + Uri.EscapeDataString(s.Code) + "&charName=" + Uri.EscapeDataString("foF2,MUF(D),foEs") +
+            Func<bool, string> query = hes => "ursiCode=" + Uri.EscapeDataString(s.Code) + "&charName=" + Uri.EscapeDataString(hes ? "foF2,MUF(D),foEs,h`Es" : "foF2,MUF(D),foEs") +
                        "&fromDate=" + Uri.EscapeDataString(from.ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture)) +
                        "&toDate=" + Uri.EscapeDataString(now.ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture));
             s.LastAsk = now;
             string txt;
-            try { txt = await http.GetStringAsync(Url + "?" + q); }
-            catch (Exception ex) { s.Error = ex.Message; return false; }
+            bool withHes = HesAsked;
+            try { txt = await http.GetStringAsync(Url + "?" + query(withHes)); }
+            catch (Exception ex)
+            {
+                if (!withHes) { s.Error = ex.Message; return false; }
+                // il servizio non conosce h'Es (o ha rifiutato la richiesta): si torna alle tre caratteristiche di sempre
+                HesAsked = false;
+                try { txt = await http.GetStringAsync(Url + "?" + query(false)); }
+                catch (Exception ex2) { s.Error = ex2.Message; return false; }
+            }
             List<GiroRec> add = Parse(txt);
+            if (withHes && add.Count == 0 && txt != null && txt.IndexOf("rror", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                HesAsked = false;
+                try { txt = await http.GetStringAsync(Url + "?" + query(false)); add = Parse(txt); }
+                catch (Exception ex3) { s.Error = ex3.Message; return false; }
+            }
             s.Error = "";
             DateTime lim = now.AddHours(-HistoryHours);
             lock (s.Recs)
@@ -215,7 +251,7 @@ namespace ELA
                 if (p.Length < 7) continue;
                 DateTime t;
                 if (!DateTime.TryParse(p[0], CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out t)) continue;
-                l.Add(new GiroRec { Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc), Cs = D(p[1]), FoF2 = D(p[2]), Muf = D(p[4]), FoEs = D(p[6]) });
+                l.Add(new GiroRec { Utc = DateTime.SpecifyKind(t, DateTimeKind.Utc), Cs = D(p[1]), FoF2 = D(p[2]), Muf = D(p[4]), FoEs = D(p[6]), HEs = p.Length >= 9 ? D(p[8]) : double.NaN });
             }
             l.Sort((a, b) => a.Utc.CompareTo(b.Utc));
             return l;

@@ -102,6 +102,7 @@ namespace ELA
         // 28 MHz: si segue IK3XTV (lo skip si accorcia al diminuire della frequenza): stessa nube (stessa foEs), quindi
         // la distanza minima dei 28 MHz e' quella in cui sec(phi) vale sec(phi a MinKm50) x 28,5 / 50,2 (legge della secante)
         public static double MinKm28 { get { return ScaledMinKm(MinKm50, 50.2, 28.5, DefaultH); } }
+        public static double MinKm24 { get { return ScaledMinKm(MinKm50, 50.2, 24.94, DefaultH); } }   // 12 m, solo per i prodromi
         // 70 MHz: regola dell'autore (14/11/2026), 450 km come in 50 MHz (G0ISW: E-sporadico piu' corto oltre 400 km in 50 e 70 MHz)
         public static double MinKm70 = 450;
         // 40 MHz (8 m): distanza minima scalata dai 50 MHz con la legge della secante (come i 28 MHz); si accettano solo le

@@ -31,6 +31,10 @@ namespace ELA
         {
             public List<Opening> Openings = new List<Opening>();
             public int Spots, CsvSpots, Episodes, EpisodesMissed;
+            // benchmark delle allerte (dal 22/11/2026): per livello, quante sono seguite da un QSO o una decodifica multi-salto
+            // della stazione 1 nella stessa direzione entro due ore; riferimento = stessi istanti, settori di 30° senza catene
+            public int AlN, AlHit, PrN, PrHit;
+            public readonly int[] RefN = new int[12], RefHit = new int[12], AlSec = new int[12], PrSec = new int[12];
             public DateTime From, To;
         }
 
@@ -95,14 +99,27 @@ namespace ELA
                             if (win.Count == 0) continue;
                             List<StrongCloud> st;
                             List<ChainAlert> ch = Chains.Core(Hkm, win, hour, t, true, home.LatTx, home.LonTx, false, false, false, isolated, out st);
-                            foreach (ChainAlert c in ch.Where(x => (x.Kind == ChainAlert.KindQth || x.Kind == ChainAlert.KindEqual) && x.Level >= 1))
+                            List<ChainAlert> mine = ch.Where(x => (x.Kind == ChainAlert.KindQth || x.Kind == ChainAlert.KindEqual) && x.Level >= 1).ToList();
+                            Func<double, bool> hitAz = az => multi.Any(m => m.Utc > t && m.Utc <= t.AddMinutes(AfterMin) && AzDiff(Geo.Bearing(m.LatTx, m.LonTx, m.LatRx, m.LonRx), az) <= AzTolDeg);
+                            foreach (ChainAlert c in mine)
                             {
                                 string k = t.ToString("yyyyMMddHH", CultureInfo.InvariantCulture) + "|" + (int)(c.Az / 30);
                                 if (!seen.Add(k)) continue;
                                 r.Episodes++;
-                                bool hit = multi.Any(m => m.Utc >= t && m.Utc <= t.AddMinutes(AfterMin) && AzDiff(Geo.Bearing(m.LatTx, m.LonTx, m.LatRx, m.LonRx), c.Az) <= AzTolDeg);
+                                bool hit = hitAz(c.Az);
                                 if (!hit) r.EpisodesMissed++;
+                                int sec = (int)(Geo.Norm360(c.Az) / 30) % 12;
+                                if (c.Level == 2) { r.AlN++; if (hit) r.AlHit++; r.AlSec[sec]++; }
+                                else { r.PrN++; if (hit) r.PrHit++; r.PrSec[sec]++; }
                             }
+                            // riferimento: i settori di 30° senza catene in questo istante (solo se la stazione era in aria nell'ultima ora)
+                            if (multi.Count > 0 && qsos.Any(x => x.Set == 0 && x.Utc <= t && x.Utc > t.AddMinutes(-60)))
+                                for (int sec = 0; sec < 12; sec++)
+                                {
+                                    double az = sec * 30 + 15;
+                                    if (mine.Any(c => AzDiff(c.Az, az) <= AzTolDeg + 15)) continue;
+                                    r.RefN[sec]++; if (hitAz(az)) r.RefHit[sec]++;
+                                }
                         }
                 }
             }
@@ -164,6 +181,25 @@ namespace ELA
                 a, 100.0 * a / n, p, 100.0 * p / n, s, 100.0 * s / n, z, 100.0 * z / n));
             if (leads.Count > 0) sb.AppendLine(Lang.F("Anticipo mediano di ALLERTA e PRECURSORE: {0:F0} minuti.", leads[leads.Count / 2]));
             if (r.Episodes > 0) sb.AppendLine(Lang.F("ALLERTE e PRECURSORI dal QTH nei giorni del log: {0}; senza QSO multi-salto nelle due ore dopo: {1} ({2:F0}%, ma la stazione poteva anche non essere in aria).", r.Episodes, r.EpisodesMissed, 100.0 * r.EpisodesMissed / r.Episodes));
+            // benchmark delle allerte: riuscite contro il riferimento senza catene, pesato sugli stessi settori
+            Func<int[], double> refPct = w =>
+            {
+                double num = 0, den = 0;
+                for (int i = 0; i < 12; i++) if (r.RefN[i] > 0 && w[i] > 0) { num += w[i] * (double)r.RefHit[i] / r.RefN[i]; den += w[i]; }
+                return den > 0 ? 100 * num / den : double.NaN;
+            };
+            if (r.AlN > 0)
+            {
+                double rf = refPct(r.AlSec);
+                sb.AppendLine(Lang.F("Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}% (falsi allarmi {2:F0}%).", r.AlN, 100.0 * r.AlHit / r.AlN, 100.0 - 100.0 * r.AlHit / r.AlN)
+                    + (double.IsNaN(rf) ? "" : " " + Lang.F("Riferimento negli stessi settori senza catene: {0:F0}%.", rf)));
+            }
+            if (r.PrN > 0)
+            {
+                double rf = refPct(r.PrSec);
+                sb.AppendLine(Lang.F("Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro due ore: {1:F0}%.", r.PrN, 100.0 * r.PrHit / r.PrN)
+                    + (double.IsNaN(rf) ? "" : " " + Lang.F("Riferimento negli stessi settori senza catene: {0:F0}%.", rf)));
+            }
             if (r.CsvSpots == 0) sb.AppendLine(Lang.T("Senza sorgenti caricate le nubi vengono solo dai QSO del log: l'ultimo salto corto, lontano, quasi non si vede. Per una verifica vera carica gli spot esportati da NUBI Es NEL TEMPO, i log ADIF o le decodifiche ALL.TXT di altre stazioni, meglio se lontane."));
             sb.AppendLine();
             foreach (Opening o in r.Openings.Take(60))

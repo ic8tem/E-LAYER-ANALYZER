@@ -71,6 +71,7 @@ namespace ELA
             {
                 List<StrongCloud> st1;
                 List<PrecursorAlert> cor = new List<PrecursorAlert>(Chains.Compute(Hkm, WindowMin, out st1));   // solo i corridoi
+                try { cor.AddRange(Prodromes.Compute(Hkm)); } catch { }
                 LastStrong = st1; Last = cor; return cor;
             }
             // nubi attive: punti medi degli spot Es in singolo salto (stazioni qualunque, tutto il mondo)
@@ -90,6 +91,7 @@ namespace ELA
             {
                 List<StrongCloud> st0;
                 List<PrecursorAlert> only = new List<PrecursorAlert>(Chains.Compute(Hkm, WindowMin, out st0));
+                try { only.AddRange(Prodromes.Compute(Hkm)); } catch { }
                 LastStrong = st0; Last = only; return only;
             }
 
@@ -131,8 +133,9 @@ namespace ELA
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindQth).OrderByDescending(c => c.Level));
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindEqual));
             all.AddRange(res);
-            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindCorridor));
+            all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindCorridor || c.Kind == ChainAlert.KindEqualCorridor).OrderBy(c => Chains.Mine(c) ? 0 : 1).ThenByDescending(c => c.Level));
             all.AddRange(ch.Where(c => c.Kind == ChainAlert.KindSearch));
+            try { all.AddRange(Prodromes.Compute(Hkm)); } catch { }   // prodromi in 24 e 28 MHz (dal 22/11/2026)
             Last = all;
             return all;
         }

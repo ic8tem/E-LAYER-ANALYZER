@@ -32,7 +32,7 @@ namespace ELA
         public const double MinKHz = 27990.0, MaxKHz = 145000.0;   // limiti del filtro locale delle righe del cluster (kHz; massimo 145 MHz, regola dell'autore)
         // 430-440 MHz: solo per l'aurora (regola dell'autore, 14/11/2026: l'E-sporadico e il F.A.I. non arrivano a 432 MHz)
         public const double MinKHz70 = 430000.0, MaxKHz70 = 440000.0;
-        public static bool InVhfRange(double kHz) { return kHz >= MinKHz && kHz <= MaxKHz; }
+        public static bool InVhfRange(double kHz) { return (kHz >= MinKHz && kHz <= MaxKHz) || (kHz >= 24890 && kHz <= 24990); }   // 12 m: prodromi dei 50 MHz (22/11/2026)
         // il filtro locale lascia passare lo spot? (nella gamma 27990 kHz - 145 MHz, oppure aurora in 430-440 MHz)
         public static bool KeepSpot(Spot s) { return s != null && (!VhfOnly || InVhfRange(s.FreqKHz) || (s.FreqKHz >= MinKHz70 && s.FreqKHz <= MaxKHz70 && s.IsAurora)); }
         static readonly System.Text.RegularExpressions.Regex rxDxFreq = new System.Text.RegularExpressions.Regex(@"DX de\s+\S+?:?\s+(\d+(?:\.\d+)?)",
@@ -67,7 +67,7 @@ namespace ELA
                 sessions.Add(p);
                 sp.Children.Add(p.Root);
             }
-            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate); in 430-440 MHz passano solo gli spot di aurora"), VhfOnly);
+            chkVhfOnly = Ui.C(Lang.T("Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora"), VhfOnly);
             chkVhfOnly.IsCheckedChanged += (s, e) => { VhfOnly = chkVhfOnly.IsChecked == true; Changed(); };
             DockPanel sessPage = new DockPanel();   // il filtro locale delle righe sta nella colonna dei filtri (40 %)
             sessPage.Children.Add(new ScrollViewer { Content = sp, VerticalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Auto });
@@ -403,7 +403,7 @@ namespace ELA
             double f = s.FreqKHz;
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Lang.F("Banda: {0}   frequenza: {1:F1} kHz", s.Band, f));
-            if (VhfOnly && !KeepSpot(s)) sb.AppendLine(Lang.T("Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz; in 430-440 MHz passano solo gli spot di aurora)"));
+            if (VhfOnly && !KeepSpot(s)) sb.AppendLine(Lang.T("Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz e dai 24890-24990 kHz; in 430-440 MHz passano solo gli spot di aurora)"));
             sb.AppendLine(Lang.F("Locator: {0} - {1}", s.LocSpotter.Length > 0 ? s.LocSpotter : "?", s.LocDx.Length > 0 ? s.LocDx : "?"));
             if (s.HasBoth) sb.AppendLine(Lang.F("Distanza: {0:F0} km", s.DistanceKm));
             sb.AppendLine(Lang.F("Propagazione dichiarata: {0}", s.Prop.Length > 0 ? s.Prop : "-"));

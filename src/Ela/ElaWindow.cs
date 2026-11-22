@@ -73,6 +73,7 @@ namespace ELA
             lblChain = new TextBlock { FontFamily = Pal.Mono, FontSize = 12, FontWeight = FontWeight.Bold, Foreground = Pal.B(Pal.Red), Margin = new Thickness(0, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center, IsVisible = false, Cursor = new Avalonia.Input.Cursor(Avalonia.Input.StandardCursorType.Hand) };
             lblChain.PointerPressed += (s, e) => OpenChain();
             Chains.NewMine += OnChain;
+            Current = this;
             Closed += (s, e) => Chains.NewMine -= OnChain;   // la finestra si ricostruisce al cambio di lingua o di tema
             if (chainTimer == null)
             {
@@ -80,6 +81,7 @@ namespace ELA
                 chainTimer.Tick += (s, e) =>
                 {
                     try { if (Station.Cfg.GetB("catene_avviso", true) && SpotStore.All.Count > 0) Chains.Notify(Precursors.Compute(es != null ? es.H : EsModel.DefaultH)); } catch { }
+                    try { FaiTick(); } catch { }
                 };
                 chainTimer.Start();
             }
@@ -340,6 +342,18 @@ namespace ELA
         int chainKind;
         DateTime chainAt;
 
+        // ALLERTA F.A.I. (FaiAlert.cs, dal 22/11/2026): la linguetta F.A.I. lampeggia; il testo va in cima alla linguetta
+        static ElaWindow Current;
+        static void FaiTick()
+        {
+            ElaWindow w = Current;
+            if (w == null || w.fai == null) return;
+            FaiAlert.Compute(DateTime.UtcNow);
+            bool on = Station.Cfg.GetB("fai_avviso", true) && FaiAlert.Level > 0;
+            w.fai.SetAlert(FaiAlert.Text);
+            w.tabs.SetBlink(1, on, on ? FaiAlert.Text : "");
+        }
+
         void OnChain(ChainAlert c)
         {
             Dispatcher.UIThread.Post(() =>
@@ -349,7 +363,7 @@ namespace ELA
                 if (lblChain.IsVisible && chainKind == ChainAlert.KindQth && c.Kind != ChainAlert.KindQth && (DateTime.UtcNow - chainAt).TotalMinutes < 60) return;
                 chainKey = c.Key; chainKind = c.Kind; chainAt = DateTime.UtcNow;
                 // la zona lontana dalla propria stazione (per il corridoio: l'estremita' opposta a quella vicina)
-                string reg = c.Kind == ChainAlert.KindCorridor && Geo.DistanceKm(Station.Lat, Station.Lon, c.EndBLat, c.EndBLon) < Geo.DistanceKm(Station.Lat, Station.Lon, c.EndALat, c.EndALon) ? c.EndAName : c.EndBName;
+                string reg = (c.Kind == ChainAlert.KindCorridor || c.Kind == ChainAlert.KindEqualCorridor) && Geo.DistanceKm(Station.Lat, Station.Lon, c.EndBLat, c.EndBLon) < Geo.DistanceKm(Station.Lat, Station.Lon, c.EndALat, c.EndALon) ? c.EndAName : c.EndBName;
                 if (reg.Length > 30) reg = reg.Substring(0, 29) + "…";
                 lblChain.Text = "⚠ 6 m " + reg;   // scritta corta: la riga della testata non va a capo
                 ToolTip.SetTip(lblChain, Lang.F("ALLERTA multi-salto in 50 MHz ({0}): {1}, {2:F0} km. Clic per aprire i precursori.", c.KindText, c.Region, c.DistKm));
@@ -406,6 +420,7 @@ namespace ELA
                 if (!Igrf.Loaded) Igrf.Load(dataDir, DateTime.UtcNow);
                 if (Program.ScreenshotDir == null) Igrf.CheckUpdateSilent(dataDir, Station.Cfg);   // nuova generazione IGRF, senza chiedere
                 SpotStore.Init(dataDir);
+                SpotStore.Archive = Station.Cfg.GetB("spot_archivio", true);
                 SpotStore.LoadRecent();
                 Giro.Init(dataDir);   // archivio delle ionosonde GIRO (ultime 48 ore); i dati nuovi arrivano all'apertura di IONOSONDE
                 iono.Refresh();

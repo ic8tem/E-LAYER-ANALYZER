@@ -120,6 +120,18 @@ namespace ELA
             root.Children.Add(Section(Lang.T("Catene multi-salto in 50 MHz"), Pal.Red, cCh, cChW,
                 Txt(Lang.T("L'avviso riguarda le catene con il primo salto corto dalla tua stazione e i corridoi con un'estremità entro 1200 km da te, quando tutte e tre le condizioni ci sono (ALLERTA): primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali coperti. La stessa catena non si ripete prima di un'ora. Clic sulla scritta in alto: si apre SPORADIC-E, Precursori multi-salto."), true)));
 
+            // archivio storico degli spot (dal 22/11/2026)
+            CheckBox cArc = Ui.C(Lang.T("Archivio storico degli spot: alla chiusura ogni giorno va compresso in data/archivio_spot"), Station.Cfg.GetB("spot_archivio", true));
+            cArc.IsCheckedChanged += (s, e) => { Station.Cfg.Set("spot_archivio", cArc.IsChecked == true); SpotStore.Archive = cArc.IsChecked == true; Station.Save(); };
+            root.Children.Add(Section(Lang.T("Archivio degli spot"), Pal.Azure, cArc,
+                Txt(Lang.T("Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione."), true)));
+
+            // ALLERTA F.A.I. dopo l'E-sporadico (dal 22/11/2026)
+            CheckBox cFai = Ui.C(Lang.T("La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso"), Station.Cfg.GetB("fai_avviso", true));
+            cFai.IsCheckedChanged += (s, e) => { Station.Cfg.Set("fai_avviso", cFai.IsChecked == true); Station.Save(); };
+            root.Children.Add(Section(Lang.T("Allerta F.A.I."), Pal.Orange, cFai,
+                Txt(Lang.T("Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti."), true)));
+
             // aggiornamenti
             CheckBox cChk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 30 minuti"), Station.Cfg.GetB("agg_controlla", true));
             CheckBox cAuto = Ui.C(Lang.T("Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere"), Station.Cfg.GetB("agg_automatici", true));
@@ -204,7 +216,7 @@ namespace ELA
             List<string[]> r = new List<string[]>();
             Color[] col = new Color[20]; int k = 0;
             Action<string, string, string, Color> add = (a, b, c, cc) => { r.Add(new[] { (r.Count + 1).ToString(ci), a, b, c }); col[Math.Min(19, k++)] = cc; };
-            add(Lang.T("è fuori dalla gamma del filtro locale"), DataTab.VhfOnly ? Lang.T("sotto 27990 kHz o sopra 145 MHz; in 430-440 MHz solo aurora") : Lang.T("filtro locale spento"), Lang.T("scartato"), Pal.Muted);
+            add(Lang.T("è fuori dalla gamma del filtro locale"), DataTab.VhfOnly ? Lang.T("sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora") : Lang.T("filtro locale spento"), Lang.T("scartato"), Pal.Muted);
             add(Lang.T("contiene AUE, AU-E o AURORAL E"), "", "AURORA (aurora-E)", Pal.Green);
             add(Lang.T("contiene una parola dell'aurora (o modo AU)"), Filters.AuTags + " · " + string.Join(" ", Filters.BandNames).Replace(" ", ", ") , "AURORA", Pal.Green);
             add(Lang.T("contiene una parola del F.A.I. (o modo FAI)"), Filters.FaiTags + " · " + string.Join(", ", Filters.FaiBandNames), "F.A.I.", Pal.Violet);

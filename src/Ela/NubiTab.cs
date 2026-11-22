@@ -177,7 +177,7 @@ namespace ELA
             {
                 Title = Lang.T("Log ADIF o file di spot CSV del programma"),
                 AllowMultiple = false,
-                FileTypeFilter = new[] { new FilePickerFileType("ADIF / CSV") { Patterns = new[] { "*.adi", "*.adif", "*.ADI", "*.ADIF", "*.csv", "*.CSV" } } }
+                FileTypeFilter = new[] { new FilePickerFileType("ADIF / CSV") { Patterns = new[] { "*.adi", "*.adif", "*.ADI", "*.ADIF", "*.csv", "*.CSV", "*.gz" } } }
             });
             if (files == null || files.Count == 0) return;
             string p = files[0].TryGetLocalPath();
@@ -190,18 +190,18 @@ namespace ELA
             List<Spot> l = null; string err = null;
             await Task.Run(() =>
             {
-                try { l = path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase) ? FromCsv(path) : FromAdif(path); }
+                try { l = SpotStore.IsSpotFile(path) ? FromCsv(path) : FromAdif(path); }
                 catch (Exception ex) { err = ex.Message; }
             });
             if (l == null) { lblSrc.Text = Lang.F("Errore: {0}", err ?? ""); return; }
-            src = l; fromFile = true; fromAdif = !path.EndsWith(".csv", StringComparison.OrdinalIgnoreCase); srcName = Path.GetFileName(path);
+            src = l; fromFile = true; fromAdif = !SpotStore.IsSpotFile(path); srcName = Path.GetFileName(path);
             Rebuild();
         }
 
         static List<Spot> FromCsv(string path)
         {
             List<Spot> l = new List<Spot>();
-            foreach (string line in File.ReadAllLines(path))
+            foreach (string line in SpotStore.ReadLines(path))
             {
                 Spot s = SpotStore.ParseCsvLine(line);
                 if (s != null) l.Add(s);
