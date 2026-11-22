@@ -4,6 +4,8 @@
 
 F.A.I.(Field Aligned Irregularities)는 지자기장에 정렬된 불규칙 구조에 의한 산란으로, 여름 저녁 스포라딕 E 뒤에 흔히 나타납니다. 산란된 신호는 자기장 방향을 축으로 하는 **원뿔** 위로 나갑니다: 두 국이 **보각 관계의 등고선** 위에 있으면 교신할 수 있습니다(a1 + a2 = 180°, IC8FAX-IC8TEM 논문; K9SE의 ±c 등고선). 자기장은 **IGRF-14** 모델로 계산합니다.
 
+**F.A.I. 경보** (버전 0.6.5부터): 5~9월 지방시 18~24시에 자국에서 300-1300 km에 Es 구름이 있은 뒤 탭이 **깜박이고**, 위쪽의 빨간 행이 F.A.I.가 가능한 장소를 보여 준다(IC8FAX-IC8TEM 글의 규칙). 최근 F.A.I. 스폿이 있으면 진행 중이라고 표시한다. 행 클릭: 그 지점의 등반사 보기.
+
 ## Scatter trail 보기 (A-B 쌍)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

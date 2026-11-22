@@ -37,4 +37,6 @@
 
 **載入 spot、ADIF 或 ALL.TXT**（從 Es 雲隨時間變化匯出的 spot、其他電台的 ADIF 日誌、JTDX 或 WSJT-X 的 ALL.TXT 解碼：呼號由發射列識別）與 **驗證鏈**：程式在電台 1 的多跳開通上重演短跳鏈規則，寫出能提前指出多少次開通（警示、前兆或僅有第一個短跳）、提前時間中位數，以及之後沒有多跳通聯的警示。沒有載入來源時，雲只來自日誌，最後一個短跳幾乎看不到：需要遠方電台的資料。
 
+**警示的檢驗**（自 0.6.5 版起）：對每 15 分鐘重放的警示和前兆，報告給出成功數（下 1 小時內同一方向的多跳通聯）、誤報，以及沒有鏈的同一扇區的參照值。
+
 ![驗證](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1p_benchmark_50_verifica_catene.png)

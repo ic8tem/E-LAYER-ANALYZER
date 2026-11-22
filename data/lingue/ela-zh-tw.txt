@@ -978,3 +978,59 @@ Distanza {0:F0} km, azimut {1:F0}°: due salti uguali da {2:F0} km (ITU-R P.534-
 nube con foEs ≥ {0:F1} MHz a {1:F0} km	位於 {1:F0} km、foEs ≥ {0:F1} MHz 的雲
 2) Secondo salto, punto a tre quarti della tratta: {0}, foEs necessaria {1:F1} MHz - {2}	2）第二跳，路徑四分之三處的點：{0}，所需 foEs {1:F1} MHz - {2}
 Doppio salto a salti uguali (ITU-R P.534-6): per l'autore è il caso tipico fino a circa 4700 km, per esempio verso il Kazakhstan; oltre, verso gli altri continenti, valgono le catene con i salti corti alle estremità.	等長兩跳的雙跳（ITU-R P.534-6）：作者認為這是約 4700 km 以內的典型情形，例如通往哈薩克；更遠處，通往其他大洲時，適用兩端為短跳的鏈。
+Benchmark: {0} ALLERTE, seguite da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}% (falsi allarmi {2:F0}%).	檢驗：{0} 筆警示中，1 小時內跟著出現同一方向多跳通聯 或解碼的：{1:F0}%（誤報 {2:F0}%）。
+Riferimento negli stessi settori senza catene: {0:F0}%.	沒有鏈的同一扇區的參照值：{0:F0}%。
+Benchmark: {0} PRECURSORI, seguiti da un QSO o una decodifica multi-salto nella stessa direzione entro un'ora: {1:F0}%.	檢驗：{0} 筆前兆中，1 小時內跟著出現同一方向多跳通聯 或解碼的：{1:F0}%。
+corridoio a salti uguali, ti riguarda	等跳走廊，與你有關
+corridoio a salti uguali	等跳走廊
+Filtro locale: scarta le righe del cluster sotto 27990,0 kHz e sopra 145 MHz (non mostrate e non memorizzate), tranne i 24890-24990 kHz (prodromi dei 50 MHz); in 430-440 MHz passano solo gli spot di aurora	本機篩選：丟棄 27990.0 kHz 以下和 145 MHz 以上的Cluster行（既不顯示也不儲存），但 24890-24990 kHz（50 MHz 早期征兆）除外；430-440 MHz 只放行極光 spot
+Filtro locale: riga scartata (fuori dalla gamma 27990 kHz - 145 MHz e dai 24890-24990 kHz; in 430-440 MHz passano solo gli spot di aurora)	本機篩選：行已丟棄（不在 27990 kHz - 145 MHz 和 24890-24990 kHz 範圍內；430-440 MHz 只放行極光 spot）
+ALLERTA 144 MHz: salti APRS ripetuti oltre i 900 km su {0} ({1})	144 MHz 警示：{0} 上空重複出現超過 900 km 的 APRS 跳（{1}）
+h'Es GIRO	h'Es GIRO
+Quota dello strato Es dalle ionosonde GIRO: mediana delle h'Es degli ultimi 90 minuti entro 2500 km dalla tua stazione. Senza dati recenti vale la quota scritta.	來自 GIRO 探測儀的 Es 層高度：本站 2500 km 以內最近 90 分鐘 h'Es 的中位數。沒有最新資料時使用輸入的高度。
+Nessuna h'Es recente dalle ionosonde GIRO entro 2500 km: vale la quota scritta.	2500 km 以內的 GIRO 探測儀沒有最新的 h'Es：使用輸入的高度。
+Il servizio GIRO non ha dato le h'Es: vale la quota scritta.	GIRO 服務沒有返回 h'Es：使用輸入的高度。
+h'Es GIRO: {0:F0} km, mediana di {1} ionosonde ({2})	h'Es GIRO：{0:F0} km，{1} 台探測儀的中位數（{2}）
+APRS ripetuto ({0})	重複 APRS（{0}）
+nube in {0}	{0} 的雲
+Verifica della proiezione in questa sessione: {0} stazioni ti hanno ascoltato in 50 MHz oltre i 2800 km, {1} entro 500 km da un punto rosa.	本連線階段的落點檢驗：在 2800 km 以外於 50 MHz 收到你的電台 {0} 個，其中位於粉色點 500 km 以內的 {1} 個。
+APRS 144 MHz	APRS 144 MHz
+prodromo: nube in {0}	早期征兆：{0} 的雲
+ALLERTA 144 MHz da APRS: {0} salti radio APRS in 2 m oltre i 900 km negli ultimi 30 minuti, punto medio su {1} ({2}), ultimo alle {3:HH:mm} UTC.	來自 APRS 的 144 MHz 警示：最近 30 分鐘 2 m 上超過 900 km 的 APRS 無線跳 {0} 次，中點在 {1} 上空（{2}），最後一次 {3:HH:mm} UTC。
+Stazioni: {0}	電台：{0}
+Il punto medio è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	中點距本站 {0:F0} km（方位 {1:F0}°）。
+Regola dell'autore: un pacchetto APRS da solo non dice nulla (può essere un aereo o un meteor scatter); conta la ricorrenza a breve tempo, almeno due salti con il punto medio entro 150 km e a non più di 10 minuti l'uno dall'altro. Lettore dei pacchetti come in LIVETROPOVHF (APRS-IS in sola lettura).	作者的規則：單個 APRS 封包說明不了什麼（可能來自飛機或流星餘跡散射）；關鍵在於短時間內的重複：至少 2 次跳，中點相距 150 km 以內，彼此相隔 10 分鐘以內。封包讀取器與 LIVETROPOVHF 相同（APRS-IS 唯讀）。
+PRODROMO: nube Es in {0} su {1} ({2}), foEs ≥ {3:F1} MHz, {4} spot negli ultimi 15 minuti; in 50 MHz nessuno spot Es entro 300 km negli ultimi 30 minuti.	早期征兆：{0} 的 Es 雲，在 {1} 上空（{2}），foEs ≥ {3:F1} MHz，最近 15 分鐘 spot {4} 個；50 MHz 最近 30 分鐘在 300 km 以內沒有 Es spot。
+Spot: {0} - {1} {2} MHz, {3:F0} km	spot：{0} - {1} {2} MHz，{3:F0} km
+La nube è a {0:F0} km dalla tua stazione (azimut {1:F0}°).	雲距本站 {0:F0} km（方位 {1:F0}°）。
+Verifica sulle decodifiche di tre stazioni italiane (94 giorni): dopo una nube in 28 MHz i 50 MHz hanno aperto entro 300 km nell'ora dopo nel 50% dei casi, contro il 30% delle zone senza nube in 28 MHz; anticipo mediano 9-16 minuti.	用義大利三個電台的解碼驗證（94 天）：28 MHz 的雲之後，下 1 小時內 300 km 以內 50 MHz 開通的佔 50%，高於沒有 28 MHz 雲的區域的 30%；提前時間中位數 9-16 分鐘。
+Ginevra	日內瓦
+Budapest	布達佩斯
+Bruxelles	布魯塞爾
+Albania	阿爾巴尼亞
+Corsica	科西嘉
+F.A.I. IN CORSO: {0} spot F.A.I. negli ultimi 30 minuti (ultimo {1} - {2}, {3} MHz).	F.A.I. 進行中：最近 30 分鐘有 {0} 個 F.A.I. spot（最後 {1} - {2}，{3} MHz）。
+F.A.I. POSSIBILE: nube Es su {0} ({1}), {2:F0} km, QTF {3:F0}°, ore {4:00}:{5:00} locali; linea di massima ricezione su {6}.	F.A.I. 可能：{0} 上空的 Es 雲（{1}），{2:F0} km，QTF {3:F0}°，地方時 {4:00}:{5:00}。最大接收線經過 {6} 上空。
+PRODROMO	早期征兆
+Clic: linee di iso-riflessione dalla tua stazione sulla prima nube indicata	點選：本站到第一塊所示雲的等反射線
+Archivio storico degli spot: alla chiusura ogni giorno va compresso in data/archivio_spot	spot 歷史存檔：退出時把每一天壓縮到 data/archivio_spot
+Archivio degli spot	spot 存檔
+Alla chiusura il database degli spot si svuota (regola dell'autore); con l'archivio acceso, prima di svuotarlo, ogni giorno si aggiunge al file AAAA-MM-GG.csv.gz (circa 1 MB al giorno nelle giornate di apertura). I file si caricano in NUBI Es NEL TEMPO e nel BENCHMARK 50 MHz per le statistiche di stagione.	退出時 spot 資料庫會被清空（作者的規則）。存檔開啟時，清空前把每一天追加到 YYYY-MM-DD.csv.gz 檔案（有開通的日子每天約 1 MB）。這些檔案可在 Es 雲隨時間變化和 BENCHMARK 50 MHz 中讀取，用於季節統計。
+APRS-IS in sola lettura: salti APRS in 2 m oltre i 900 km ripetuti a breve tempo = ALLERTA 144 MHz	APRS-IS 唯讀：短時間內重複、超過 900 km 的 2 m APRS 跳 = 144 MHz 警示
+APRS in 144 MHz	144 MHz APRS
+Collegamento a rotate.aprs2.net in sola lettura (senza password), con i pacchetti entro 3000 km dalla tua stazione. Un salto vale solo fra stazioni di posizione nota (sorgente, digipeater, IGate), come in LIVETROPOVHF; conta solo se si ripete entro 10 minuti con il punto medio entro 150 km.	唯讀連接 rotate.aprs2.net（無密碼），本站 3000 km 以內的封包。只在位置已知的電台（發送方、digipeater、IGate）之間計算跳，與 LIVETROPOVHF 相同。只有在 10 分鐘內重複、中點相距 150 km 以內時才計數。
+La linguetta F.A.I. lampeggia quando il F.A.I. è possibile o in corso	F.A.I. 可能或正在進行時，F.A.I. 頁籤閃爍
+Allerta F.A.I.	F.A.I. 警示
+Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti.	IC8FAX-IC8TEM 文章（2011）的規則：5-9 月地方時 18-24 時，距本站 300-1300 km 處出現 50、70、144 MHz 的 Es 雲之後，最大接收線經過有電台的地方。F.A.I. 進行中：最近 30 分鐘有 F.A.I. spot。
+sotto 27990 kHz (tranne 24890-24990 kHz) o sopra 145 MHz; in 430-440 MHz solo aurora	低於 27990 kHz（24890-24990 kHz 除外）或高於 145 MHz；430-440 MHz 只放行極光
+{0} {1:00}h, indice {2:F0}	{0} {1:00} 時，指數 {2:F0}
+TEP: {0}.	TEP：{0}。
+{0} verso {1}: {2:F0} km, azimut {3:F0}°, {4} con {5:00}:{6:00} ora solare sull'equatore magnetico; indice {7:F0} su 100.	往 {0} {1}：{2:F0} km，方位 {3:F0}°，{4}，磁赤道上的太陽時 {5:00}:{6:00}。指數 {7:F0} / 100。
+Fattori: stagione {0:F2} (massimo agli equinozi), SFI {1} → {2:F2}, Kp {3} → {4:F2} (solo eTEP), ora {5:F2}, foF2 delle ionosonde {6:F2}.	因子：季節 {0:F2}（春分秋分最大），SFI {1} → {2:F2}，Kp {3} → {4:F2}（僅 eTEP），時刻 {5:F2}，探測儀 foF2 {6:F2}。
+Nessuna ionosonda GIRO recente entro 2500 km dal punto medio: il fattore foF2 vale 1.	中點 2500 km 以內沒有最新的 GIRO 探測儀：foF2 因子為 1。
+foF2 più alta entro 2500 km dal punto medio: {0:F1} MHz ({1}).	中點 2500 km 以內的最大 foF2：{0:F1} MHz（{1}）。
+Spot TEP nell'ultima ora vicino a te o alla zona: {0}.	最近 1 小時你或該區附近的 TEP spot：{0}。
+aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23, anche 144 MHz e oltre, soprattutto agli equinozi. Il minimo solare rende il TEP raro ma non lo cancella: l'SFI pesa, non azzera (decisione dell'autore). I pesi non sono ancora tarati sui dati.	aTEP（午後）：地方時 15-19 時，可達約 60 MHz。eTEP（傍晚）：20-23 時，也可達 144 MHz 以上，尤其在春分秋分。太陽活動極小期使 TEP 變得稀少但不會消除：SFI 作為權重起作用，不會歸零（作者的判斷）。權重尚未用資料校準。
+TEP IN CORSO	TEP 進行中
+TEP PROBABILE	TEP 很可能
+TEP POSSIBILE	TEP 可能

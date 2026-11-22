@@ -4,6 +4,8 @@
 
 F.A.I. (Field Aligned Irregularities) は地磁気の磁力線に沿って並んだ不規則構造による散乱で、夏の夕方、スポラディックE の後によく見られます。散乱された信号は磁力線を軸とする **円錐** 上に出ていきます: 2 局が **補角の等高線** 上にあれば交信できます (a1 + a2 = 180°、IC8FAX-IC8TEM の記事; K9SE の ±c 等高線)。磁場は **IGRF-14** モデルで計算します。
 
+**F.A.I. アラート** (バージョン 0.6.5 から): 5～9 月、地方時 18～24 時に、自局から 300-1300 km に Es 雲があった後、タブが**点滅**し、上部の赤い行が F.A.I. の可能な場所を示す (IC8FAX-IC8TEM の記事の規則)。最新の F.A.I. スポットがあれば発生中と示す。行をクリック: その地点の等反射線表示。
+
 ## Scatter trail 表示 (A-B ペア)
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)

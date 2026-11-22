@@ -4,6 +4,8 @@
 
 F.A.I.（Field Aligned Irregularities，场向不规则体）是由沿地磁场排列的不规则体引起的散射，多见于偶发 E 层之后的夏季傍晚。散射信号沿一个轴线与磁场方向一致的**锥面**射出：如果两个台站位于**互补等值线**上（a1 + a2 = 180°，IC8FAX-IC8TEM 文章；K9SE 的 ±c 等值线），它们就能互相通联。磁场采用 **IGRF-14** 模型计算。
 
+**F.A.I. 警示**（自 0.6.5 版起）：5-9 月地方时 18-24 时，距本站 300-1300 km 处出现 Es 云之后，选项卡**闪烁**，顶部的红色行显示 F.A.I. 可能的位置（IC8FAX-IC8TEM 文章的规则）。若有最近的 F.A.I. spot，则显示正在进行。点击该行：该点的等反射线视图。
+
 ## Scatter trail 视图（A-B 对）
 
 ![Scatter trail](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/2c_fai_scia_IC8FAX_G4LOH.png)
