@@ -76,6 +76,8 @@ Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare
 - **ALERTĂ** dacă salturile centrale sunt acoperite de nori, **PRECURSOR** dacă lipsesc doar zone fără observatori.
 - În SETĂRI există **avertismentul** de sus (și opțional o fereastră) pentru ALERTELE care te privesc.
 - Lanțurile care ajung **în larg** sau unde nu sunt stații (CALL3 și spoturi) nu se afișează.
+- **Salt dublu egal** (începând cu versiunea 0.6.3, salturi „2 =”): până la circa 4700 km, de exemplu spre Kazahstan, cu norul la un sfert din traseu ca în metoda UIT-R P.534-6.
+- Fila **ABACUL SALTURILOR** rezumă câte salturi sunt necesare pe 50 MHz de la 500 la 12000 km, cu foEs a fiecărui salt și sursele.
 - **Amprenta semnalului meu pe 6 m** (puncte roz): unde ajunge semnalul tău pe 50 MHz după 2-5 salturi, deasupra norilor din ultimele 30 de minute estimați din spoturile tuturor benzilor (28-144 MHz) și din ionosonde; doar unde sunt stații.
 
 ![Coridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

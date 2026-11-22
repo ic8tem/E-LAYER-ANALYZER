@@ -76,6 +76,8 @@ W podzakładce **Prekursory wieloskoku** program szuka łańcuchów wieloskoku n
 - **ALERT**, jeśli skoki środkowe są pokryte obłokami, **PREKURSOR**, jeśli brakuje tylko stref bez obserwatorów.
 - W USTAWIENIACH jest **komunikat** u góry (opcjonalnie także okno) dla ALERTÓW, które cię dotyczą.
 - Łańcuchy, które docierają **na otwarte morze** lub tam, gdzie nie ma stacji (CALL3 i spoty), nie są pokazywane.
+- **Równy podwójny skok** (od wersji 0.6.3, skoki «2 =»): do około 4700 km, na przykład w kierunku Kazachstanu, z obłokiem w jednej czwartej trasy jak w metodzie ITU-R P.534-6.
+- Zakładka **TABELA SKOKÓW** podsumowuje, ile skoków potrzeba na 50 MHz od 500 do 12000 km, z foEs każdego skoku i źródłami.
 - **Zasięg mojego sygnału na 6 m** (różowe punkty): gdzie dociera twój sygnał na 50 MHz po 2-5 skokach, nad obłokami z ostatnich 30 minut szacowanymi ze spotów ze wszystkich pasm (28-144 MHz) i z jonosond; tylko tam, gdzie są stacje.
 
 ![Korytarz](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

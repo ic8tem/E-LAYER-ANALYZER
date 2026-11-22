@@ -76,6 +76,8 @@ V podkartě **Předzvěsti vícenásobného skoku** program hledá řetězce ví
 - **VÝSTRAHA**, pokud jsou střední skoky pokryté oblaky, **PŘEDZVĚST**, pokud chybějí jen zóny bez pozorovatelů.
 - V NASTAVENÍ je **upozornění** nahoře (a volitelně okno) pro VÝSTRAHY, které se vás týkají.
 - Řetězce, které končí **na otevřeném moři** nebo tam, kde nejsou stanice (CALL3 a spoty), se nezobrazují.
+- **Stejný dvojitý skok** (od verze 0.6.3, skoky «2 =»): do asi 4700 km, například směrem do Kazachstánu, s oblakem ve čtvrtině trasy jako v metodě ITU-R P.534-6.
+- Karta **TABULKA SKOKŮ** shrnuje, kolik skoků je potřeba na 50 MHz od 500 do 12000 km, s foEs každého skoku a zdroji.
 - **Stopa mého signálu na 6 m** (růžové body): kam dopadá tvůj signál na 50 MHz po 2-5 skocích, nad oblaky za posledních 30 minut odhadnutými ze spotů všech pásem (28-144 MHz) a z ionosond; jen tam, kde jsou stanice.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)

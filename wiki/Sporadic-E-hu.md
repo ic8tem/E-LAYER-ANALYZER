@@ -76,6 +76,8 @@ A **Többugrásos előjelek** allapban a program az 50 MHz-es többugrásos lán
 - **FIGYELMEZTETÉS**, ha a középső ugrásokat felhők fedik le, **ELŐJEL**, ha csak megfigyelők nélküli zónák hiányoznak.
 - A BEÁLLÍTÁSOK fülön van a felső **figyelmeztetés** (és kívánság szerint egy ablak) az Önt érintő FIGYELMEZTETÉSEKHEZ.
 - A **nyílt tengeren** vagy állomások nélküli helyen (CALL3 és spotok) végződő láncok nem jelennek meg.
+- **Egyenlő kettős ugrás** (a 0.6.3-as verziótól, „2 =” ugrások): körülbelül 4700 km-ig, például Kazahsztán felé, a felhővel az útvonal negyedénél, mint az ITU-R P.534-6 módszerben.
+- Az **UGRÁSTÁBLÁZAT** fül összefoglalja, hány ugrás kell 50 MHz-en 500 és 12000 km között, az egyes ugrások foEs-ével és a forrásokkal.
 - **Jelem lábnyoma 6 m-en** (rózsaszín pontok): ahová az 50 MHz-es jeled 2-5 ugrás után földet ér, az utolsó 30 perc felhői fölött, amelyeket az összes sáv (28-144 MHz) spotjaiból és az ionoszondákból becsül a program; csak ahol vannak állomások.
 
 ![Folyosó](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
