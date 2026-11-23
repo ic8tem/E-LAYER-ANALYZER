@@ -32,11 +32,11 @@ Ini adalah konstruksi geometris yang dipakai untuk **memeriksa apakah sebuah tit
 
 | Kontak | Scatter point | Deviasi | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (di atas Genoa) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (Jerman barat daya, 28 km dari Brussel) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (di atas Genoa) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (Jerman barat daya, 18 km dari Brussel) | 0,93° | 337° / 88° |
 | Beacon DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden mengarah ke 290° dan melaporkan aurora) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, medan IGRF tahun 1990) | JN45MV, jejak 40 km dari Jenewa (Jenewa: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (uji 1987 via Budapest, 1569 km, medan IGRF tahun 1987) | Budapest pada 2,53°, sedikit melewati 2,5° (2,16° dengan medan hari ini); jejak pada 26 km; paling mungkin KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, medan IGRF tahun 1990) | JN45QR, jejak 35 km dari Jenewa (Jenewa: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (uji 1987 via Budapest, 1569 km, medan IGRF tahun 1987) | Budapest pada 2,22°, dalam batas 2,5° (1,85° dengan medan hari ini); jejak pada 21 km; paling mungkin KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Sejak versi 0.4.18 kedua kasus bertanggal (1987 dan 1990) memakai medan IGRF-14 tahun tersebut, selama stasiunnya tetap stasiun kasus itu.
 

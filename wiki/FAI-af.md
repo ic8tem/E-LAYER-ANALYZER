@@ -32,11 +32,11 @@ Dit is die geometriese konstruksie wat gebruik word om **na te gaan of 'n reflek
 
 | Kontak | Scatter point | Afwyking | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (bo Genua) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (suidwes-Duitsland, 28 km van Brussel) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (bo Genua) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (suidwes-Duitsland, 18 km van Brussel) | 0,93° | 337° / 88° |
 | Baken DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden het op 290° gerig en aurora aangemeld) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, IGRF-veld van 1990) | JN45MV, spoor 40 km van Genève (Genève: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (toets van 1987 via Boedapest, 1569 km, IGRF-veld van 1987) | Boedapest op 2,53°, net oor 2,5° (2,16° met die huidige veld); spoor op 26 km; mees waarskynlik KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-veld van 1990) | JN45QR, spoor 35 km van Genève (Genève: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (toets van 1987 via Boedapest, 1569 km, IGRF-veld van 1987) | Boedapest op 2,22°, binne 2,5° (1,85° met die huidige veld); spoor op 21 km; mees waarskynlik KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Vanaf weergawe 0.4.18 gebruik die twee gevalle met 'n datum (1987 en 1990) die IGRF-14-veld van daardie jaar, solank die stasies dié van die geval bly.
 

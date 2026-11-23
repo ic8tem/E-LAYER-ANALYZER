@@ -32,11 +32,11 @@ Det er den geometriske konstruktion, der bruges til at **kontrollere, om et refl
 
 | Forbindelse | Scatterpunkt | Afvigelse | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (over Genova) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (det sydvestlige Tyskland, 28 km fra Bruxelles) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (over Genova) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (det sydvestlige Tyskland, 18 km fra Bruxelles) | 0,93° | 337° / 88° |
 | Fyret DB0FAI (305°) - Dresden via Sheffield (DL5MCG; Dresden havde antennen mod 290° og meldte nordlys) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, IGRF-felt fra 1990) | JN45MV, Scatter trail 40 km fra Genève (Genève: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (test fra 1987 via Budapest, 1569 km, IGRF-felt fra 1987) | Budapest ved 2,53°, lige over 2,5° (2,16° med dagens felt); Scatter trail 26 km væk; mest sandsynlige KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-felt fra 1990) | JN45QR, Scatter trail 35 km fra Genève (Genève: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (test fra 1987 via Budapest, 1569 km, IGRF-felt fra 1987) | Budapest ved 2,22°, inden for 2,5° (1,85° med dagens felt); Scatter trail 21 km væk; mest sandsynlige KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Fra version 0.4.18 bruger de to tilfælde med en dato (1987 og 1990) IGRF-14-feltet fra det år, så længe stationerne er tilfældets.
 

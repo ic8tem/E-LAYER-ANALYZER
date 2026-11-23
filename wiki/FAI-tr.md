@@ -32,11 +32,11 @@ Bu, **bir yansıma noktasının doğru olup olmadığını denetlemek** için ku
 
 | Bağlantı | Scatter point | Sapma | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (Cenova üzerinde) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (GB Almanya, Brüksel'e 28 km) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (Cenova üzerinde) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (GB Almanya, Brüksel'e 18 km) | 0,93° | 337° / 88° |
 | DB0FAI beaconı (305°) - Sheffield üzerinden Dresden (DL5MCG; Dresden 290°'ye yönlendirmişti ve aurora bildirmişti) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, 1990 IGRF alanı) | JN45MV, iz Cenevre'ye 40 km (Cenevre: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (Budapeşte üzerinden 1987 testi, 1569 km, 1987 IGRF alanı) | Budapeşte 2,53°'de, 2,5°'nin hemen üzerinde (bugünkü alanla 2,16°); iz 26 km'de; en olası KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, 1990 IGRF alanı) | JN45QR, iz Cenevre'ye 35 km (Cenevre: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (Budapeşte üzerinden 1987 testi, 1569 km, 1987 IGRF alanı) | Budapeşte 2,22°'de, 2,5° sınırı içinde (bugünkü alanla 1,85°); iz 21 km'de; en olası KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 0.4.18 sürümünden itibaren tarihi olan iki örnek (1987 ve 1990), istasyonlar örnektekiler olarak kaldığı sürece o yılın IGRF-14 alanını kullanır.
 

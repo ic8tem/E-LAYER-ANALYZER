@@ -32,11 +32,11 @@ Das ist die geometrische Konstruktion, mit der **geprüft wird, ob ein Reflexion
 
 | Verbindung | Streupunkt | Abweichung | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (über Genua) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (Südwestdeutschland, 28 km von Brüssel) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (über Genua) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (Südwestdeutschland, 18 km von Brüssel) | 0,93° | 337° / 88° |
 | Bake DB0FAI (305°) - Dresden über Sheffield (DL5MCG; Dresden richtete auf 290° und meldete Aurora) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, IGRF-Feld von 1990) | JN45MV, Spur 40 km von Genf (Genf: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (Test von 1987 über Budapest, 1569 km, IGRF-Feld von 1987) | Budapest bei 2,53°, knapp über 2,5° (2,16° mit dem heutigen Feld); Spur 26 km entfernt; wahrscheinlichster Punkt KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-Feld von 1990) | JN45QR, Spur 35 km von Genf (Genf: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (Test von 1987 über Budapest, 1569 km, IGRF-Feld von 1987) | Budapest bei 2,22°, innerhalb von 2,5° (1,85° mit dem heutigen Feld); Spur 21 km entfernt; wahrscheinlichster Punkt KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Ab Version 0.4.18 verwenden die beiden Fälle mit Datum (1987 und 1990) das IGRF-14-Feld jenes Jahres, solange die Stationen die des Falls bleiben.
 

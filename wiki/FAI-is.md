@@ -32,11 +32,11 @@ F.A.I. (Field Aligned Irregularities) er dreifing frá óreglum sem raðast efti
 
 | Samband | Scatter point | Frávik | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (yfir Genúa) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (suðvestur-Þýskaland, 28 km frá Brussel) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (yfir Genúa) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (suðvestur-Þýskaland, 18 km frá Brussel) | 0,93° | 337° / 88° |
 | Viti DB0FAI (305°) - Dresden um Sheffield (DL5MCG; Dresden beindi loftnetinu á 290° og tilkynnti norðurljós) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, IGRF-segulsvið frá 1990) | JN45MV, slóð 40 km frá Genf (Genf: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (prófun 1987 um Búdapest, 1569 km, IGRF-segulsvið frá 1987) | Búdapest við 2,53°, rétt yfir 2,5° (2,16° með segulsviði dagsins í dag); slóð 26 km frá; líklegastur KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, IGRF-segulsvið frá 1990) | JN45QR, slóð 35 km frá Genf (Genf: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (prófun 1987 um Búdapest, 1569 km, IGRF-segulsvið frá 1987) | Búdapest við 2,22°, innan 2,5° (1,85° með segulsviði dagsins í dag); slóð 21 km frá; líklegastur KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Frá útgáfu 0.4.18 nota tilvikin tvö með dagsetningu (1987 og 1990) IGRF-14-segulsvið þess árs, á meðan stöðvarnar eru þær sömu og í tilvikinu.
 

@@ -32,11 +32,11 @@ Es la construcción geométrica que sirve para **verificar si un punto de reflex
 
 | Contacto | Scatter point | Desviación | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (sobre Génova) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (SO de Alemania, a 28 km de Bruselas) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (sobre Génova) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (SO de Alemania, a 18 km de Bruselas) | 0,93° | 337° / 88° |
 | Baliza DB0FAI (305°) - Dresde vía Sheffield (DL5MCG; Dresde apuntaba a 290° y había declarado aurora) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, campo IGRF de 1990) | JN45MV, estela a 40 km de Ginebra (Ginebra: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (prueba de 1987 vía Budapest, 1569 km, campo IGRF de 1987) | Budapest a 2,53°, apenas por encima de los 2,5° (2,16° con el campo de hoy); estela a 26 km; más probable KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, campo IGRF de 1990) | JN45QR, estela a 35 km de Ginebra (Ginebra: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (prueba de 1987 vía Budapest, 1569 km, campo IGRF de 1987) | Budapest a 2,22°, dentro de los 2,5° (1,85° con el campo de hoy); estela a 21 km; más probable KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 Desde la versión 0.4.18 los dos casos con fecha (1987 y 1990) usan el campo IGRF-14 de ese año, mientras las estaciones sigan siendo las del caso.
 

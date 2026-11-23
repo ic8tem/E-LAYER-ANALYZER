@@ -32,11 +32,11 @@ Ez az a geometriai szerkesztés, amellyel **ellenőrizhető, hogy egy visszaver�
 
 | Összeköttetés | Szórási pont | Eltérés | QTF |
 |---|---|---|---|
-| IC8FAX - F6DRO | JN44GH (Genova felett) | 0,97° | 314° / 77° |
-| IC8FAX - G4LOH | JN49FR (DNy-Németország, 28 km-re Brüsszeltől) | 0,88° | 338° / 87° |
+| IC8FAX - F6DRO | JN44EH (Genova felett) | 0,96° | 313° / 77° |
+| IC8FAX - G4LOH | JN49BR (DNy-Németország, 18 km-re Brüsszeltől) | 0,93° | 337° / 88° |
 | DB0FAI jeladó (305°) - Drezda Sheffielden át (DL5MCG; Drezda 290°-ra irányzott és aurorát jelentett) | – | 0,3° | – |
-| IC8FAX - FA1MXE (1990, az 1990-es IGRF-tér) | JN45MV, a nyom 40 km-re Genftől (Genf: 4,10°) | 0,76° | 326° / 85° |
-| DL5MCG - SV1DH (1987-es teszt Budapesten át, 1569 km, az 1987-es IGRF-tér) | Budapest 2,53°-on, épp a 2,5° felett (a mai térrel 2,16°); a nyom 26 km-re; legvalószínűbb KN06RV | 2,53° (KN06RV 0,93°) | 95° / 341° |
+| IC8FAX - FA1MXE (1990, az 1990-es IGRF-tér) | JN45QR, a nyom 35 km-re Genftől (Genf: 3,79°) | 0,92° | 327° / 87° |
+| DL5MCG - SV1DH (1987-es teszt Budapesten át, 1569 km, az 1987-es IGRF-tér) | Budapest 2,22°-on, a 2,5°-on belül (a mai térrel 1,85°); a nyom 21 km-re; legvalószínűbb KN06TQ | 2,22° (KN06TQ 0,92°) | 95° / 341° |
 
 A 0.4.18-as verziótól a két dátummal rendelkező eset (1987 és 1990) az adott év IGRF-14 terét használja, amíg az állomások az esetéi maradnak.
 
