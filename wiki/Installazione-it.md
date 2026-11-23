@@ -34,6 +34,8 @@ Installa la nuova versione sopra la precedente: impostazioni, spot raccolti, log
 
 **Aggiornamento automatico (dalla versione 0.4.5).** All'avvio e poi ogni 30 minuti il programma controlla le Release su GitHub. Quando esce una versione nuova apre una finestra e mostra **▲ x.y.z** in arancione accanto alla scritta NTP nella barra in alto:
 
+**Dalla versione 0.4.12 gli aggiornamenti sono automatici e silenziosi**: quando su GitHub c'è una versione nuova il programma la scarica, la installa e si riavvia da solo senza chiedere nulla. Anche i file mancanti si riscaricano senza chiedere. La finestra di aggiornamento compare solo con un clic sulla versione in alto, oppure se spegni gli aggiornamenti automatici in IMPOSTAZIONI (Generali).
+
 - **Aggiorna ora** scarica il pacchetto portatile adatto al computer (Windows 64/32 bit, Linux, Raspberry Pi, Mac), chiude il programma, sostituisce i file e lo riavvia. Impostazioni, spot raccolti, log e `call3.txt` restano.
 - **Più tardi** lo ripropone al controllo successivo; **Salta questa versione** non propone più quella versione.
 - Un clic sulla versione mostrata nella barra in alto (per esempio `v0.4.5`) controlla subito gli aggiornamenti. Il controllo automatico si spegne con la casella nella stessa finestra.

@@ -17,8 +17,15 @@ if os.path.isfile(_lf):
         _k, _t, _v = _l.rstrip('\n').partition('\t')
         if _t and _k in ('FONTE', 'RILIEVO', 'SCELTA'): TAGNAME[_k] = _v.strip()
 d = Document()
+_landscape = os.path.basename(src).startswith('ela_abaco')   # l'abaco (tabella a 5 colonne) va in orizzontale
 for s in d.sections:
-    s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2)
+    if _landscape:
+        from docx.enum.section import WD_ORIENT
+        s.orientation = WD_ORIENT.LANDSCAPE
+        s.page_width, s.page_height = Cm(29.7), Cm(21.0)   # A4 orizzontale
+        s.left_margin = s.right_margin = Cm(1.8); s.top_margin = s.bottom_margin = Cm(1.6)
+    else:
+        s.left_margin = s.right_margin = Cm(2.2); s.top_margin = s.bottom_margin = Cm(2)
 st = d.styles['Normal']; st.font.name = 'Calibri'; st.font.size = Pt(11)
 COL = {'FONTE': RGBColor(0x1F, 0x5F, 0xAD), 'RILIEVO': RGBColor(0x2E, 0x7D, 0x32), 'SCELTA': RGBColor(0xB4, 0x53, 0x09)}
 tab = None   # tabella in corso (righe TAB|cella;cella;...; la prima e' l'intestazione)
@@ -31,9 +38,18 @@ for raw in open(src, encoding='utf-8'):
         cells = [c.strip() for c in text.split(';')]
         if tab is None:
             tab = d.add_table(rows=0, cols=len(cells)); tab.style = 'Table Grid'; head = True
+            if _landscape and len(cells) == 5:
+                tab.autofit = False
+                for _c, _cw in zip(tab.columns, [2.0, 2.0, 5.6, 7.4, 9.1]): _c.width = Cm(_cw)
         else: head = False
-        row = tab.add_row().cells
+        _r = tab.add_row(); row = _r.cells
+        if head:   # l'intestazione si ripete in cima a ogni pagina
+            from docx.oxml.ns import qn
+            from docx.oxml import OxmlElement
+            _h = OxmlElement('w:tblHeader'); _h.set(qn('w:val'), 'true'); _r._tr.get_or_add_trPr().append(_h)
+        _w = [2.0, 2.0, 5.6, 7.4, 9.1] if _landscape and len(row) == 5 else None   # cm, somma 26,1 = pagina meno i margini
         for i, c in enumerate(cells[:len(row)]):
+            if _w: row[i].width = Cm(_w[i])
             row[i].text = c
             if head or i == 0:
                 for r in row[i].paragraphs[0].runs: r.bold = True
