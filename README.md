@@ -60,5 +60,11 @@ Per lo sviluppo dell'E-sporadico in 50 MHz: Johan IW2DNI e Fabio IZ7NLJ.
 ## Licenza
 E-LAYER ANALYZER è software libero: puoi ridistribuirlo e modificarlo secondo i termini della GNU General Public License versione 3 ([COPYING](COPYING)), la stessa di YA-MS che il programma contiene. È distribuito senza alcuna garanzia. I dati delle fonti esterne restano dei rispettivi enti, con le loro condizioni (per esempio i dati delle ionosonde GIRO, CC BY-NC-SA 4.0, solo uso non commerciale); l'elenco è nella linguetta FONTI.
 
+### Verifica delle licenze (23/11/2026)
+- **Codice**: GNU GPL-3.0; `COPYING` è il testo ufficiale della Free Software Foundation, integro, e GitHub riconosce la licenza.
+- **Librerie incluse**: Avalonia 11.2.3 (MIT), carattere Inter (SIL Open Font License 1.1), runtime .NET (MIT): tutte compatibili con la GPL-3.0.
+- **Dati inclusi nel pacchetto**: coefficienti IGRF-14 (IAGA, distribuiti da NOAA NCEI come materiale governativo non soggetto a copyright); `call3.txt` di JTDX (archivio nominativo → locator, fonte [21]).
+- **Dati scaricati mentre il programma è in uso** (non inclusi nel pacchetto): Natural Earth (pubblico dominio); NOAA SWPC (dati del governo degli Stati Uniti, pubblico dominio); ionosonde GIRO (CC BY-NC-SA 4.0, solo uso non commerciale); APRS-IS in sola lettura, senza password e senza inviare pacchetti; spot di DX cluster, RBN e PSKReporter, pubblici. L'archivio degli spot resta sul computer dell'utente.
+
 ## Sostieni il progetto
 E-LAYER ANALYZER è gratuito. Se ti è utile puoi offrirmi un caffè su **[Ko-fi](https://ko-fi.com/ic8tem)**.
