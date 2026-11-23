@@ -1,4 +1,6 @@
-// E-LAYER ANALYZER - geometria: locator Maidenhead, cerchio massimo, salti nello strato E, campo geomagnetico (dipolo)
+// E-LAYER ANALYZER - geometria: locator Maidenhead, geodetiche dell'ellissoide WGS84, salti nello strato E, campo geomagnetico (dipolo)
+// Dalla versione 0.6.6: ellissoide WGS84 (NGA.STND.0036) per le posizioni e la verticale locale, geodetiche con il metodo di Karney
+// (GeographicLib) per distanze, azimut e punti; le formule sferiche dei salti usano il raggio medio dell'ellissoide.
 // Tutte le formule sono descritte nella Sintesi delle scelte di calcolo (data/ela_documento_tecnico.txt).
 using System;
 using System.Globalization;
@@ -7,7 +9,12 @@ namespace ELA
 {
     public static class Geo
     {
-        public const double R = 6372.7955;          // raggio terrestre medio (km), come nell'articolo F.A.I. [1] e in YA-MS
+        // Ellissoide WGS84 (NGA.STND.0036): semiasse a (km), schiacciamento f, eccentricita' al quadrato e2
+        public const double WgsA = 6378.137, WgsF = 1 / 298.257223563, WgsE2 = WgsF * (2 - WgsF);
+        // Raggio medio dell'ellissoide R1 = (2a + b) / 3 (km): solo per le formule sferiche dei salti e delle elevazioni a distanza data.
+        // Fino alla versione 0.6.5 era la sfera di 6372,7955 km dell'articolo F.A.I. [1] e di YA-MS.
+        public const double R = 6371.0088;
+        static readonly GeographicLib.Geodesic Geod = GeographicLib.Geodesic.WGS84;
         // Fattore del raggio terrestre equivalente per la rifrazione (1 = nessuna; 4/3 = atmosfera standard).
         // Vale solo per elevazioni e orizzonti (F.A.I. e aurora); le distanze al suolo restano quelle vere.
         public static double K = 1.0;
@@ -94,13 +101,23 @@ namespace ELA
             return 2 * Math.Asin(Math.Min(1, Math.Sqrt(h)));
         }
 
+        // Distanza (km) sulla geodetica dell'ellissoide WGS84, metodo di Karney (Journal of Geodesy 87, 2013)
         public static double DistanceKm(double lat1, double lon1, double lat2, double lon2)
+        {
+            double s12;
+            Geod.Inverse(lat1, lon1, lat2, lon2, out s12);
+            return s12 / 1000.0;
+        }
+
+        // Distanza veloce (km) sulla sfera di raggio medio: solo per scartare in fretta i punti lontani nelle griglie
+        public static double DistanceKmFast(double lat1, double lon1, double lat2, double lon2)
         {
             return R * CentralAngle(lat1, lon1, lat2, lon2);
         }
 
-        // azimut iniziale (gradi da nord, senso orario)
-        public static double Bearing(double lat1, double lon1, double lat2, double lon2)
+        // Azimut e punto di arrivo sulla sfera di raggio medio: solo per la proiezione azimutale della mappa (disegno),
+        // che deve essere veloce e invertibile; le posizioni disegnate restano quelle vere.
+        public static double BearingFast(double lat1, double lon1, double lat2, double lon2)
         {
             double p1 = lat1 * D2R, p2 = lat2 * D2R, dl = (lon2 - lon1) * D2R;
             double y = Math.Sin(dl) * Math.Cos(p2);
@@ -108,8 +125,7 @@ namespace ELA
             return Norm360(Math.Atan2(y, x) * R2D);
         }
 
-        // punto a distanza d (km) lungo l'azimut brg
-        public static void Destination(double lat, double lon, double brg, double d, out double lat2, out double lon2)
+        public static void DestinationFast(double lat, double lon, double brg, double d, out double lat2, out double lon2)
         {
             double p1 = lat * D2R, l1 = lon * D2R, t = brg * D2R, dd = d / R;
             double p2 = Math.Asin(Math.Sin(p1) * Math.Cos(dd) + Math.Cos(p1) * Math.Sin(dd) * Math.Cos(t));
@@ -117,8 +133,33 @@ namespace ELA
             lat2 = p2 * R2D; lon2 = Norm180(l2 * R2D);
         }
 
-        // punto intermedio a frazione f (0..1) del cerchio massimo
+        // azimut iniziale (gradi da nord, senso orario) della geodetica
+        public static double Bearing(double lat1, double lon1, double lat2, double lon2)
+        {
+            double azi1, azi2;
+            Geod.Inverse(lat1, lon1, lat2, lon2, out azi1, out azi2);
+            return double.IsNaN(azi1) ? 0 : Norm360(azi1);
+        }
+
+        // punto a distanza d (km) lungo la geodetica che parte con l'azimut brg
+        public static void Destination(double lat, double lon, double brg, double d, out double lat2, out double lon2)
+        {
+            Geod.Direct(lat, lon, brg, d * 1000.0, out lat2, out lon2);
+            lon2 = Norm180(lon2);
+        }
+
+        // punto intermedio a frazione f (0..1) della geodetica
         public static void Intermediate(double lat1, double lon1, double lat2, double lon2, double f, out double lat, out double lon)
+        {
+            double s12, azi1, azi2;
+            Geod.Inverse(lat1, lon1, lat2, lon2, out s12, out azi1, out azi2);
+            if (s12 < 1e-3 || double.IsNaN(azi1)) { lat = lat1; lon = lon1; return; }
+            Geod.Direct(lat1, lon1, azi1, f * s12, out lat, out lon);
+            lon = Norm180(lon);
+        }
+
+        // punto intermedio sulla sfera di raggio medio (versione veloce per i calcoli ripetuti)
+        public static void IntermediateFast(double lat1, double lon1, double lat2, double lon2, double f, out double lat, out double lon)
         {
             double d = CentralAngle(lat1, lon1, lat2, lon2);
             if (d < 1e-9) { lat = lat1; lon = lon1; return; }
@@ -182,10 +223,35 @@ namespace ELA
             public V3 Unit { get { double l = Len; return l > 0 ? new V3(X / l, Y / l, Z / l) : this; } }
         }
 
+        // Punto dell'ellissoide WGS84 (latitudine geodetica, quota hKm sull'ellissoide) in coordinate terrestri (km)
         public static V3 Ecef(double lat, double lon, double hKm)
         {
-            double r = R + hKm, p = lat * D2R, l = lon * D2R;
-            return new V3(r * Math.Cos(p) * Math.Cos(l), r * Math.Cos(p) * Math.Sin(l), r * Math.Sin(p));
+            double p = lat * D2R, l = lon * D2R, sp = Math.Sin(p);
+            double n = WgsA / Math.Sqrt(1 - WgsE2 * sp * sp);   // raggio di curvatura nel primo verticale
+            return new V3((n + hKm) * Math.Cos(p) * Math.Cos(l), (n + hKm) * Math.Cos(p) * Math.Sin(l), (n * (1 - WgsE2) + hKm) * sp);
+        }
+
+        // Versore della verticale locale (normale all'ellissoide) e versore di una direzione geografica sulla sfera unitaria
+        public static V3 Up(double lat, double lon) { return Dir(lat, lon); }
+        public static V3 Dir(double lat, double lon)
+        {
+            double p = lat * D2R, l = lon * D2R;
+            return new V3(Math.Cos(p) * Math.Cos(l), Math.Cos(p) * Math.Sin(l), Math.Sin(p));
+        }
+
+        // Elevazione (gradi) del punto (plat, plon, quota H) visto dalla stazione (lat, lon, quota h) sull'ellissoide WGS84;
+        // con k diverso da 1 si aggiunge la correzione della rifrazione del raggio terrestre equivalente (stessa formula sferica).
+        public static double ElevationTo(double lat, double lon, double hKm, double plat, double plon, double Hkm) { return ElevationTo(lat, lon, hKm, plat, plon, Hkm, K); }
+        public static double ElevationTo(double lat, double lon, double hKm, double plat, double plon, double Hkm, double k)
+        {
+            V3 d = (Ecef(plat, plon, Hkm) - Ecef(lat, lon, hKm)).Unit;
+            double el = Math.Asin(Math.Max(-1, Math.Min(1, d.Dot(Up(lat, lon))))) * R2D;
+            if (Math.Abs(k - 1) > 1e-9)
+            {
+                double dk = DistanceKmFast(lat, lon, plat, plon);
+                el += ElevationDeg(dk, Hkm, hKm, k) - ElevationDeg(dk, Hkm, hKm, 1);
+            }
+            return el;
         }
 
         // Direzione del campo geomagnetico in un punto: IGRF-14 se caricato, altrimenti dipolo centrato inclinato B ~ 3(m.r)r - m.
@@ -193,7 +259,7 @@ namespace ELA
         public static V3 FieldDir(V3 p)
         {
             if (Igrf.Loaded) return Igrf.Dir(p);
-            V3 m = Ecef(PoleLat, PoleLon, -R + 1).Unit;   // versore verso il polo nord geomagnetico
+            V3 m = Dir(PoleLat, PoleLon);   // versore verso il polo nord geomagnetico
             V3 r = p.Unit;
             return (3 * m.Dot(r) * r - m).Unit;
         }
@@ -201,7 +267,7 @@ namespace ELA
         // Latitudine geomagnetica (dipolo) di un punto
         public static double GeomagLat(double lat, double lon)
         {
-            V3 m = Ecef(PoleLat, PoleLon, -R + 1).Unit;
+            V3 m = Dir(PoleLat, PoleLon);
             V3 r = Ecef(lat, lon, 0).Unit;
             return Math.Asin(Math.Max(-1, Math.Min(1, m.Dot(r)))) * R2D;
         }

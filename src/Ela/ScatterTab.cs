@@ -358,8 +358,8 @@ namespace ELA
             foreach (PerpPoint p in loc)
             {
                 map.Cells.Add(new MapCell { Lat0 = p.Lat - step / 2, Lon0 = p.Lon - step / 2, DLat = step, DLon = step, Fill = Dev(p.Off, false) });
-                double dB = Geo.DistanceKm(bLat, bLon, p.Lat, p.Lon);
-                double eB = Geo.ElevationDeg(dB, h, 0);
+                double dB = Geo.DistanceKmFast(bLat, bLon, p.Lat, p.Lon);
+                double eB = Geo.ElevationTo(bLat, bLon, 0, p.Lat, p.Lon, h);
                 double azB = Geo.Bearing(bLat, bLon, p.Lat, p.Lon);
                 qtf.Add(p.Az, p.Elev, azB, eB, p.Off);
                 double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
@@ -382,17 +382,18 @@ namespace ELA
             }
             LastBest = best;
             double dBb = Geo.DistanceKm(bLat, bLon, best.Lat, best.Lon);
+            best.DistKm = Geo.DistanceKm(aLat, aLon, best.Lat, best.Lon);   // nel luogo c'e' la distanza veloce: qui quella sulla geodetica
             sb.AppendLine();
             sb.AppendLine(Lang.T("Scatter point più probabile (deviazione minima e tratta più corta):"));
             sb.AppendLine(Lang.F("  {0}  ({1:F2}°, {2:F2}°)  deviazione {3:F2}°", Geo.LatLonToLoc(best.Lat, best.Lon, 6), best.Lat, best.Lon, best.Off));
             sb.AppendLine(Lang.F("  {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", aName, best.Az, best.Elev, best.DistKm));
-            sb.AppendLine(Lang.F("  {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0), dBb));
+            sb.AppendLine(Lang.F("  {0}: QTF {1:F0}°, elevazione {2:F1}°, distanza {3:F0} km", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationTo(bLat, bLon, 0, best.Lat, best.Lon, h), dBb));
             sb.AppendLine(Lang.F("  Inclinazione magnetica nel punto: {0:F1}°", Geo.InclinationDeg(best.Lat, best.Lon)));
             map.Markers.Add(new MapMarker { Lat = best.Lat, Lon = best.Lon, Radius = 9, Fill = Pal.Yellow, Ring = true, Label = Geo.LatLonToLoc(best.Lat, best.Lon, 4), LabelColor = Pal.Yellow });
             map.Lines.Add(MapView.GreatCircle(aLat, aLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
             map.Lines.Add(MapView.GreatCircle(bLat, bLon, best.Lat, best.Lon, Pal.Yellow, 1.2, true));
             map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", aName, best.Az, best.Elev));
-            map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationDeg(dBb, h, 0)));
+            map.Info.Add(Lang.F("{0}: QTF {1:F0}°  el {2:F0}°", bName, Geo.Bearing(bLat, bLon, best.Lat, best.Lon), Geo.ElevationTo(bLat, bLon, 0, best.Lat, best.Lon, h)));
             if (aurora) QtfRange(sb, loc, best);
             if (aurora) AuroraNotes(sb, best);
             // scatter noti vicini alla scia
@@ -434,12 +435,12 @@ namespace ELA
             Geo.V3 sp = Geo.Ecef(spLat, spLon, h);
             Geo.V3 b = Geo.FieldDir(sp);
             double cA = Contour(sp, b, Geo.Ecef(aLat, aLon, Station.AltKm));   // contorno di A (K9SE)
-            double dA = Geo.DistanceKm(aLat, aLon, spLat, spLon), eA = Geo.ElevationDeg(dA, h, Station.AltKm), azA = Geo.Bearing(aLat, aLon, spLat, spLon);
+            double dA = Geo.DistanceKm(aLat, aLon, spLat, spLon), eA = Geo.ElevationTo(aLat, aLon, Station.AltKm, spLat, spLon, h), azA = Geo.Bearing(aLat, aLon, spLat, spLon);
             if (eA < Ui.V(numElev)) { impossible = Lang.F("Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).", Geo.LatLonToLoc(spLat, spLon, 6), aName, h, eA); return; }
             double dB = double.NaN, eB = double.NaN, azB = double.NaN, devB = double.NaN;
             if (!double.IsNaN(bLat))
             {
-                dB = Geo.DistanceKm(bLat, bLon, spLat, spLon); eB = Geo.ElevationDeg(dB, h, 0); azB = Geo.Bearing(bLat, bLon, spLat, spLon);
+                dB = Geo.DistanceKm(bLat, bLon, spLat, spLon); eB = Geo.ElevationTo(bLat, bLon, 0, spLat, spLon, h); azB = Geo.Bearing(bLat, bLon, spLat, spLon);
                 devB = Math.Abs(cA + Contour(sp, b, Geo.Ecef(bLat, bLon, 0)));
                 if (eB < Ui.V(numElev)) { impossible = Lang.F("Il punto di riflessione {0} è sotto l'orizzonte di {1} alla quota di {2:F0} km (elevazione {3:F1}°).", Geo.LatLonToLoc(spLat, spLon, 6), bName, h, eB); return; }
             }
@@ -670,7 +671,7 @@ namespace ELA
                     double bestScore = double.MaxValue;
                     foreach (PerpPoint p in loc)
                     {
-                        double dB = Geo.DistanceKm(s.LatD, s.LonD, p.Lat, p.Lon);
+                        double dB = Geo.DistanceKmFast(s.LatD, s.LonD, p.Lat, p.Lon);
                         double score = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                         if (w != null) score += 5 * (1 - Math.Max(0, Math.Min(1, w(p.Lat, p.Lon))));
                         if (aurora && !InAuWindow(s.LatS, s.LonS, p.DistKm, s.LatD, s.LonD, dB)) score += 3;
@@ -679,7 +680,7 @@ namespace ELA
                     if (sol.Best != null)
                     {
                         double dB = Geo.DistanceKm(s.LatD, s.LonD, sol.Best.Lat, sol.Best.Lon);
-                        sol.QtfB = Geo.Bearing(s.LatD, s.LonD, sol.Best.Lat, sol.Best.Lon); sol.ElB = Geo.ElevationDeg(dB, h, 0);
+                        sol.QtfB = Geo.Bearing(s.LatD, s.LonD, sol.Best.Lat, sol.Best.Lon); sol.ElB = Geo.ElevationTo(s.LatD, s.LonD, 0, sol.Best.Lat, sol.Best.Lon, h);
                     }
                     auCache[key] = sol;
                 }

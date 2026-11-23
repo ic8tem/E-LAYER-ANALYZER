@@ -23,9 +23,9 @@ namespace ELA
                 double prevOff = double.NaN;
                 for (double d = 50; d <= maxDistKm; d += 10)
                 {
-                    double el = Geo.ElevationDeg(d, Hkm, hKm);
-                    if (el < minElevDeg) break;
                     double la, lo; Geo.Destination(lat, lon, az, d, out la, out lo);
+                    double el = Geo.ElevationTo(lat, lon, hKm, la, lo, Hkm);
+                    if (el < minElevDeg) break;
                     double off = Geo.AspectOffDeg(st, Geo.Ecef(la, lo, Hkm));
                     if (best == null || off < best.Off) best = new PerpPoint { Az = az, DistKm = d, Lat = la, Lon = lo, Elev = el, Off = off };
                     prevOff = off;
@@ -46,9 +46,9 @@ namespace ELA
                 PerpPoint best = null;
                 for (double d = 30; d <= maxDistKm; d += 10)
                 {
-                    double el = Geo.ElevationDeg(d, Hkm, 0);
-                    if (el < minElevDeg) break;
                     double la, lo; Geo.Destination(spLat, spLon, az, d, out la, out lo);
+                    double el = Geo.ElevationTo(la, lo, 0, spLat, spLon, Hkm);
+                    if (el < minElevDeg) break;
                     double off = Geo.AspectOffDeg(Geo.Ecef(la, lo, 0), sp);
                     if (best == null || off < best.Off) best = new PerpPoint { Az = az, DistKm = d, Lat = la, Lon = lo, Elev = el, Off = off };
                 }
@@ -78,9 +78,9 @@ namespace ELA
                 PerpPoint best = null;
                 for (double d = 30; d <= maxDistKm; d += 10)
                 {
-                    double el = Geo.ElevationDeg(d, Hkm, 0);
-                    if (el < minElevDeg) break;
                     double la, lo; Geo.Destination(spLat, spLon, az, d, out la, out lo);
+                    double el = Geo.ElevationTo(la, lo, 0, spLat, spLon, Hkm);
+                    if (el < minElevDeg) break;
                     double off = BraggOffDeg(tx, sp, Geo.Ecef(la, lo, 0));
                     if (best == null || off < best.Off) best = new PerpPoint { Az = az, DistKm = d, Lat = la, Lon = lo, Elev = el, Off = off };
                 }
@@ -107,9 +107,9 @@ namespace ELA
             for (double la = la0; la <= la1; la += step)
                 for (double lo = lo0; lo <= lo1; lo += step)
                 {
-                    double dA = Geo.DistanceKm(latA, lonA, la, lo), dB = Geo.DistanceKm(latB, lonB, la, lo);
+                    double dA = Geo.DistanceKmFast(latA, lonA, la, lo), dB = Geo.DistanceKmFast(latB, lonB, la, lo);
                     if (dA > maxDistKm || dB > maxDistKm) continue;
-                    double eA = Geo.ElevationDeg(dA, Hkm, 0, k), eB = Geo.ElevationDeg(dB, Hkm, 0, k);
+                    double eA = Geo.ElevationTo(latA, lonA, 0, la, lo, Hkm, k), eB = Geo.ElevationTo(latB, lonB, 0, la, lo, Hkm, k);
                     if (eA < minElev || eB < minElev) continue;
                     double off = BraggOffDeg(a, Geo.Ecef(la, lo, Hkm), b);
                     if (off <= tolDeg) res.Add(new PerpPoint { Lat = la, Lon = Geo.Norm180(lo), DistKm = dA, Az = Geo.Bearing(latA, lonA, la, lo), Elev = eA, Off = off });
@@ -126,7 +126,7 @@ namespace ELA
                 Az = Geo.Bearing(lat, lon, spLat, spLon),
                 DistKm = d,
                 Lat = spLat, Lon = spLon,
-                Elev = Geo.ElevationDeg(d, Hkm, hKm),
+                Elev = Geo.ElevationTo(lat, lon, hKm, spLat, spLon, Hkm),
                 Off = Geo.AspectOffDeg(Geo.Ecef(lat, lon, hKm), Geo.Ecef(spLat, spLon, Hkm))
             };
         }
@@ -142,7 +142,7 @@ namespace ELA
             PerpPoint best = null; double bestScore = double.MaxValue;
             foreach (PerpPoint p in loc)
             {
-                double dB = Geo.DistanceKm(latB, lonB, p.Lat, p.Lon);
+                double dB = Geo.DistanceKmFast(latB, lonB, p.Lat, p.Lon);
                 double score = (p.Off <= tolDeg ? 0 : 1000 + p.Off * 100) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                 if (weight != null) score += 5.0 * (1.0 - Math.Max(0, Math.Min(1, weight(p.Lat, p.Lon))));
                 if (score < bestScore) { bestScore = score; best = p; }

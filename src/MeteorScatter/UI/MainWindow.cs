@@ -1833,7 +1833,7 @@ namespace YAMS
             HashSet<string> heads = new HashSet<string>();   // righe dei titoli di sezione (evidenziate)
             Action<string> head = t => { heads.Add(t); sb.Append(t).Append('\n'); };
             Action<string> line = t => sb.Append(t).Append('\n');
-            head(Lang.T("GEOMETRIA DELLA TRATTA (Terra sferica, R = 6372,7955 km)"));
+            head(Lang.T("GEOMETRIA DELLA TRATTA (ellissoide WGS84)"));
             line(Lang.F("Stazione        {0}   quota {1:F0} m", Up(txtHome), V(numHomeAlt)));
             line(Lang.F("Corrispondente  {0}   quota {1:F0} m", Up(txtDx), V(numDxAlt)));
             line(Lang.F("Distanza        {0:F0} km   azimut {1:F1}°   (dal corrispondente {2:F1}°)", model.DistKm, model.BearingHomeToDx, model.BearingDxToHome));

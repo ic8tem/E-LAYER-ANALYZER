@@ -73,15 +73,15 @@ namespace ELA
             for (int k = 1; k <= n; k++)
             {
                 double la, lo;
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, (2.0 * k - 1) / (2.0 * n), out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, (2.0 * k - 1) / (2.0 * n), out la, out lo);
                 p.Points.Add(new EsHop { Lat = la, Lon = lo, Index = k });
             }
             if (p.Hops >= 2 && ShortHopKm > 0 && ShortHopKm < p.HopKm)
             {
                 double f = (ShortHopKm / 2) / p.DistKm, la, lo;
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, f, out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, f, out la, out lo);
                 p.ShortA = new EsHop { Lat = la, Lon = lo, Index = 1 };
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 1 - f, out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 1 - f, out la, out lo);
                 p.ShortB = new EsHop { Lat = la, Lon = lo, Index = n };
                 p.ShortFoEsMin = s.FreqMHz / Geo.SecantFactor(ShortHopKm, Hkm);
             }
@@ -130,14 +130,14 @@ namespace ELA
         }
         static bool Ft8IsolatedNow(Spot s)
         {
-            double mla, mlo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out mla, out mlo);
+            double mla, mlo; Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out mla, out mlo);
             string pair = Pair(s);
             List<Spot> near = SpotStore.Window(s.Utc.AddMinutes(-Ft8CloudMin), s.Utc.AddMinutes(Ft8CloudMin));
             foreach (Spot q in near)
             {
                 if (ReferenceEquals(q, s) || q.Band != "6m" || !q.HasBoth || Pair(q) == pair) continue;
-                double qa, qo; Geo.Intermediate(q.LatS, q.LonS, q.LatD, q.LonD, 0.5, out qa, out qo);
-                if (Geo.DistanceKm(mla, mlo, qa, qo) <= Ft8CloudKm) return false;
+                double qa, qo; Geo.IntermediateFast(q.LatS, q.LonS, q.LatD, q.LonD, 0.5, out qa, out qo);
+                if (Geo.DistanceKmFast(mla, mlo, qa, qo) <= Ft8CloudKm) return false;
             }
             return true;
         }
@@ -173,7 +173,7 @@ namespace ELA
             double best = double.MaxValue;
             foreach (EsHop x in RefPoints(a))
                 foreach (EsHop y in RefPoints(b))
-                    best = Math.Min(best, Geo.DistanceKm(x.Lat, x.Lon, y.Lat, y.Lon));
+                    best = Math.Min(best, Geo.DistanceKmFast(x.Lat, x.Lon, y.Lat, y.Lon));
             return best;
         }
 
@@ -249,11 +249,11 @@ namespace ELA
             bool sIsle = InAtlanticIslands(s.LatS, s.LonS);
             mLat = sIsle ? s.LatD : s.LatS; mLon = sIsle ? s.LonD : s.LonS;
             iLat = sIsle ? s.LatS : s.LatD; iLon = sIsle ? s.LonS : s.LonD;
-            double brg = Geo.Bearing(mLat, mLon, iLat, iLon);
+            double brg = Geo.BearingFast(mLat, mLon, iLat, iLon);
             List<double[]> l = new List<double[]>();
             for (double hop = 1000; hop <= 2300; hop += 100)
             {
-                double la, lo; Geo.Destination(mLat, mLon, brg, hop / 2, out la, out lo);
+                double la, lo; Geo.DestinationFast(mLat, mLon, brg, hop / 2, out la, out lo);
                 l.Add(new[] { la, lo, hop });
             }
             return l;
@@ -277,15 +277,15 @@ namespace ELA
                     List<double[]> cj = CloudCandidates(cands[j], out a, out b, out c, out d);
                     foreach (double[] p in ci) foreach (double[] q in cj)
                     {
-                        double km = Geo.DistanceKm(p[0], p[1], q[0], q[1]);
+                        double km = Geo.DistanceKmFast(p[0], p[1], q[0], q[1]);
                         if (km <= CloudMatchKm && km < best) { best = km; bp = p; }
                     }
                 }
                 if (bp == null) { held++; continue; }
-                double brg = Geo.Bearing(mLa, mLo, iLa, iLo), lLa, lLo;
-                Geo.Destination(mLa, mLo, brg, bp[2], out lLa, out lLo);
+                double brg = Geo.BearingFast(mLa, mLo, iLa, iLo), lLa, lLo;
+                Geo.DestinationFast(mLa, mLo, brg, bp[2], out lLa, out lLo);
                 res.Add(new EsTropo { Spot = cands[i], CloudLat = bp[0], CloudLon = bp[1], LandLat = lLa, LandLon = lLo, IsleLat = iLa, IsleLon = iLo,
-                                      EsKm = bp[2], TropoKm = Geo.DistanceKm(lLa, lLo, iLa, iLo) });
+                                      EsKm = bp[2], TropoKm = Geo.DistanceKmFast(lLa, lLo, iLa, iLo) });
             }
             return res;
         }
@@ -312,7 +312,7 @@ namespace ELA
             bool south = InAfrica(latA, lonA) || InAfrica(latB, lonB) || InSouthAmerica(latA, lonA) || InSouthAmerica(latB, lonB);
             if (!south) return false;
             double la, lo;
-            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            Geo.IntermediateFast(latA, lonA, latB, lonB, 0.5, out la, out lo);
             return Math.Abs(Geo.InclinationDeg(la, lo)) <= TepInclinationDeg;
         }
 
@@ -329,16 +329,16 @@ namespace ELA
             if (!UseTepRule) return false;
             if (TepExcluded(latA, lonA) || TepExcluded(latB, lonB)) return false;
             if (IsEsTep(latA, lonA, latB, lonB)) return false;
-            double d = Geo.DistanceKm(latA, lonA, latB, lonB);
+            double d = Geo.DistanceKmFast(latA, lonA, latB, lonB);
             if (d < TepMinKm || d > TepMaxKm) return false;
             double incA = Geo.InclinationDeg(latA, lonA), incB = Geo.InclinationDeg(latB, lonB);
             if (Math.Sign(incA) == Math.Sign(incB)) return false;                 // non attraversa l'equatore magnetico
             double la, lo;
-            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            Geo.IntermediateFast(latA, lonA, latB, lonB, 0.5, out la, out lo);
             if (Math.Abs(Geo.InclinationDeg(la, lo)) > TepInclinationDeg) return false;   // punto medio lontano dall'equatore magnetico
             double inc, dec;
             Igrf.IncDec(la, lo, out inc, out dec);
-            double brg = Geo.Bearing(la, lo, latB, lonB);
+            double brg = Geo.BearingFast(la, lo, latB, lonB);
             double dev = Math.Abs(((brg - dec) % 180 + 270) % 180 - 90);          // scarto dal meridiano magnetico (0-90 gradi)
             return dev <= TepMeridianDeg;
         }
@@ -368,13 +368,13 @@ namespace ELA
         {
             if (!UseTepRule) return false;
             if (TepExcluded(latA, lonA) || TepExcluded(latB, lonB)) return false;
-            double d = Geo.DistanceKm(latA, lonA, latB, lonB);
+            double d = Geo.DistanceKmFast(latA, lonA, latB, lonB);
             if (d < TepMinKm) return false;
             if (Math.Sign(Geo.InclinationDeg(latA, lonA)) == Math.Sign(Geo.InclinationDeg(latB, lonB))) return false;
             double la, lo, inc, dec;
-            Geo.Intermediate(latA, lonA, latB, lonB, 0.5, out la, out lo);
+            Geo.IntermediateFast(latA, lonA, latB, lonB, 0.5, out la, out lo);
             Igrf.IncDec(la, lo, out inc, out dec);
-            double dev = Math.Abs(((Geo.Bearing(la, lo, latB, lonB) - dec) % 180 + 270) % 180 - 90);
+            double dev = Math.Abs(((Geo.BearingFast(la, lo, latB, lonB) - dec) % 180 + 270) % 180 - 90);
             if (dev > TepMeridianDeg) return false;
             return d > TepMaxKm || Math.Abs(inc) > EsTepMidInclDeg;
         }

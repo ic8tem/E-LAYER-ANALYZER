@@ -140,7 +140,7 @@ namespace ELA
                 double best = double.MaxValue, bestF = double.MaxValue;
                 foreach (PerpPoint p in loc)
                 {
-                    double dB = Geo.DistanceKm(q.Lat, q.Lon, p.Lat, p.Lon);
+                    double dB = Geo.DistanceKmFast(q.Lat, q.Lon, p.Lat, p.Lon);
                     bool inR = ScatterTab.InAuWindow(s.Lat, s.Lon, p.DistKm, q.Lat, q.Lon, dB), inF = ScatterTab.InAuFixed(p.DistKm, dB);
                     double sc0 = (p.Off <= 1 ? 0 : 100 + p.Off * 10) + (p.DistKm * p.DistKm + dB * dB) / 1e6;
                     if (sc0 + (inR ? 0 : 3) < best) { best = sc0 + (inR ? 0 : 3); q.Best = p; q.InRange = inR; q.DistB = dB; }
@@ -150,8 +150,10 @@ namespace ELA
                 if (q.Best != null)
                 {
                     q.QtfB = Geo.Bearing(q.Lat, q.Lon, q.Best.Lat, q.Best.Lon);
-                    q.ElB = Geo.ElevationDeg(q.DistB, h, 0, K);
-                    q.Best.Elev = Geo.ElevationDeg(q.Best.DistKm, h, 0, K);
+                    q.DistB = Geo.DistanceKm(q.Lat, q.Lon, q.Best.Lat, q.Best.Lon);
+                    q.Best.DistKm = Geo.DistanceKm(s.Lat, s.Lon, q.Best.Lat, q.Best.Lon);
+                    q.ElB = Geo.ElevationTo(q.Lat, q.Lon, 0, q.Best.Lat, q.Best.Lon, h, K);
+                    q.Best.Elev = Geo.ElevationTo(s.Lat, s.Lon, 0, q.Best.Lat, q.Best.Lon, h, K);
                 }
             }
         }

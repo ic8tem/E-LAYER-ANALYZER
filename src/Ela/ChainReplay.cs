@@ -63,14 +63,14 @@ namespace ELA
             Dictionary<string, BenchQso> first = new Dictionary<string, BenchQso>();
             foreach (BenchQso q in qsos.Where(x => x.Set == 0 && isMulti(x)).OrderBy(x => x.Utc))
             {
-                double az = Geo.Bearing(q.LatTx, q.LonTx, q.LatRx, q.LonRx);
+                double az = Geo.BearingFast(q.LatTx, q.LonTx, q.LatRx, q.LonRx);
                 string k = q.Day + "|" + (int)(az / 30);
                 if (!first.ContainsKey(k)) first[k] = q;
             }
             foreach (BenchQso q in first.Values.OrderBy(x => x.Utc))
             {
                 Opening o = new Opening { Qso = q };
-                double az = Geo.Bearing(q.LatTx, q.LonTx, q.LatRx, q.LonRx);
+                double az = Geo.BearingFast(q.LatTx, q.LonTx, q.LatRx, q.LonRx);
                 using (Igrf.At(Igrf.YearOf(q.Utc)))
                     for (double m = LookBackMin; m >= 0; m -= StepMin)
                     {
@@ -101,7 +101,7 @@ namespace ELA
                             List<StrongCloud> st;
                             List<ChainAlert> ch = Chains.Core(Hkm, win, hour, t, true, home.LatTx, home.LonTx, false, false, false, isolated, out st);
                             List<ChainAlert> mine = ch.Where(x => (x.Kind == ChainAlert.KindQth || x.Kind == ChainAlert.KindEqual) && x.Level >= 1).ToList();
-                            Func<double, double, bool> hitIn = (az, min) => multi.Any(m => m.Utc > t && m.Utc <= t.AddMinutes(min) && AzDiff(Geo.Bearing(m.LatTx, m.LonTx, m.LatRx, m.LonRx), az) <= AzTolDeg);
+                            Func<double, double, bool> hitIn = (az, min) => multi.Any(m => m.Utc > t && m.Utc <= t.AddMinutes(min) && AzDiff(Geo.BearingFast(m.LatTx, m.LonTx, m.LatRx, m.LonRx), az) <= AzTolDeg);
                             Func<double, bool> hitAz = az => hitIn(az, AfterMin), hit1 = az => hitIn(az, BenchAfterMin);
                             foreach (ChainAlert c in mine)
                             {
@@ -155,7 +155,7 @@ namespace ELA
         static bool Ft8Isolated(Spot s, List<Spot> all, long[] ticks)
         {
             if (!EsModel.UseFt8CloudRule || s.Band != "6m" || !s.IsFt8Ft4) return false;
-            double mla, mlo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out mla, out mlo);
+            double mla, mlo; Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out mla, out mlo);
             long w = TimeSpan.FromMinutes(EsModel.Ft8CloudMin).Ticks;
             int i = Array.BinarySearch(ticks, s.Utc.Ticks - w); if (i < 0) i = ~i;
             while (i > 0 && ticks[i - 1] >= s.Utc.Ticks - w) i--;
@@ -164,8 +164,8 @@ namespace ELA
                 Spot q = all[i];
                 if (q == s || q.Band != "6m" || !q.HasBoth) continue;
                 if ((q.DxCall == s.DxCall && q.Spotter == s.Spotter) || (q.DxCall == s.Spotter && q.Spotter == s.DxCall)) continue;
-                double la, lo; Geo.Intermediate(q.LatS, q.LonS, q.LatD, q.LonD, 0.5, out la, out lo);
-                if (Geo.DistanceKm(mla, mlo, la, lo) <= EsModel.Ft8CloudKm) return false;
+                double la, lo; Geo.IntermediateFast(q.LatS, q.LonS, q.LatD, q.LonD, 0.5, out la, out lo);
+                if (Geo.DistanceKmFast(mla, mlo, la, lo) <= EsModel.Ft8CloudKm) return false;
             }
             return true;
         }

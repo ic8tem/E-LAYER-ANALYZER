@@ -1,5 +1,7 @@
 ﻿// YA-MS - calcoli astronomici e geografici
-// Formule standard (Meeus, Astronomical Algorithms). Terra sferica R = 6372.7955 km (articolo Cerrotta-Sartori).
+// Formule standard (Meeus, Astronomical Algorithms). Dalla versione 1.8.24: ellissoide WGS84 (NGA.STND.0036) per le posizioni,
+// geodetiche con il metodo di Karney (GeographicLib) per distanze, azimut e punti lungo la tratta; le formule sferiche
+// (elevazione dell'articolo Cerrotta-Sartori, portata, rifrazione) usano il raggio medio dell'ellissoide. Prima: sfera R = 6372.7955 km.
 using System;
 using System.Globalization;
 
@@ -27,7 +29,11 @@ namespace YAMS
 
     public static class Astro
     {
-        public const double R = 6372.7955;          // km
+        // Ellissoide WGS84 (NGA.STND.0036): semiasse a, schiacciamento f, eccentricita' al quadrato e2
+        public const double WgsA = 6378.137, WgsF = 1 / 298.257223563, WgsE2 = WgsF * (2 - WgsF);
+        // Raggio medio dell'ellissoide R1 = (2a + b) / 3 (km): solo per le formule sferiche (elevazione, portata, rifrazione)
+        public const double R = 6371.0088;
+        static readonly GeographicLib.Geodesic Geod = GeographicLib.Geodesic.WGS84;
         public const double D2R = Math.PI / 180.0;
         public static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
@@ -134,6 +140,14 @@ namespace YAMS
             return new Vec3(r * Math.Cos(la) * Math.Cos(lo), r * Math.Cos(la) * Math.Sin(lo), r * Math.Sin(la));
         }
 
+        // Punto dell'ellissoide WGS84 (latitudine geodetica, quota sull'ellissoide in km) in coordinate terrestri (km)
+        public static Vec3 Ecef(LatLon p, double altKm)
+        {
+            double la = p.Lat * D2R, lo = p.Lon * D2R, sl = Math.Sin(la);
+            double n = WgsA / Math.Sqrt(1 - WgsE2 * sl * sl);
+            return new Vec3((n + altKm) * Math.Cos(la) * Math.Cos(lo), (n + altKm) * Math.Cos(la) * Math.Sin(lo), (n * (1 - WgsE2) + altKm) * sl);
+        }
+
         public static LatLon ToLatLon(Vec3 v)
         {
             Vec3 u = v.Unit;
@@ -169,27 +183,27 @@ namespace YAMS
             return (Math.Cos(el) * Math.Cos(a)) * n + (Math.Cos(el) * Math.Sin(a)) * e + Math.Sin(el) * up;
         }
 
-        // ---------- cerchio massimo ----------
+        // ---------- geodetica (ex cerchio massimo) ----------
+        // Geodetica dell'ellissoide WGS84 con il metodo di Karney (Journal of Geodesy 87, 2013), libreria GeographicLib
         public static double DistanceKm(LatLon a, LatLon b)
         {
-            double c = Vec(a, 1).Dot(Vec(b, 1));
-            return Math.Acos(Math.Max(-1, Math.Min(1, c))) * R;
+            double s12;
+            Geod.Inverse(a.Lat, a.Lon, b.Lat, b.Lon, out s12);
+            return s12 / 1000.0;
         }
 
         public static double Bearing(LatLon a, LatLon b)
         {
-            double la1 = a.Lat * D2R, la2 = b.Lat * D2R, dl = (b.Lon - a.Lon) * D2R;
-            double y = Math.Sin(dl) * Math.Cos(la2);
-            double x = Math.Cos(la1) * Math.Sin(la2) - Math.Sin(la1) * Math.Cos(la2) * Math.Cos(dl);
-            return Norm360(Math.Atan2(y, x) / D2R);
+            double azi1, azi2;
+            Geod.Inverse(a.Lat, a.Lon, b.Lat, b.Lon, out azi1, out azi2);
+            return double.IsNaN(azi1) ? 0 : Norm360(azi1);
         }
 
         public static LatLon Destination(LatLon a, double bearingDeg, double km)
         {
-            double d = km / R, b = bearingDeg * D2R, la = a.Lat * D2R, lo = a.Lon * D2R;
-            double la2 = Math.Asin(Math.Sin(la) * Math.Cos(d) + Math.Cos(la) * Math.Sin(d) * Math.Cos(b));
-            double lo2 = lo + Math.Atan2(Math.Sin(b) * Math.Sin(d) * Math.Cos(la), Math.Cos(d) - Math.Sin(la) * Math.Sin(la2));
-            return new LatLon(la2 / D2R, Norm180(lo2 / D2R));
+            double la2, lo2;
+            Geod.Direct(a.Lat, a.Lon, bearingDeg, km * 1000.0, out la2, out lo2);
+            return new LatLon(la2, Norm180(lo2));
         }
 
         public static string F(double v, int dec)

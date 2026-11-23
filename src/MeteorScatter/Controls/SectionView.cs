@@ -61,7 +61,7 @@ namespace YAMS
         // azimut (relativo al corrispondente) ed elevazione di un punto ECEF visto dalla stazione
         bool View(Vec3 q, out double daz, out double el)
         {
-            Vec3 pa = Astro.Vec(Model.Home, Astro.R + Model.HomeAltKm);
+            Vec3 pa = Astro.Ecef(Model.Home, Model.HomeAltKm);
             Vec3 r = q - pa;
             double az;
             Astro.AltAz(Model.Home, r.Unit, out az, out el);

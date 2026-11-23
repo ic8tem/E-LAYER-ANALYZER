@@ -111,8 +111,8 @@ namespace ELA
         // distanza dal cerchio massimo (km) e distanza lungo il cerchio massimo (km, negativa se dietro) del punto P
         public static void Track(double lat0, double lon0, double az, double lat, double lon, out double cross, out double along)
         {
-            double d13 = Geo.DistanceKm(lat0, lon0, lat, lon) / Geo.R;
-            double t13 = Geo.Bearing(lat0, lon0, lat, lon) * Math.PI / 180, t12 = az * Math.PI / 180;
+            double d13 = Geo.DistanceKmFast(lat0, lon0, lat, lon) / Geo.R;
+            double t13 = Geo.BearingFast(lat0, lon0, lat, lon) * Math.PI / 180, t12 = az * Math.PI / 180;
             double xt = Math.Asin(Math.Max(-1, Math.Min(1, Math.Sin(d13) * Math.Sin(t13 - t12))));
             double at = Math.Acos(Math.Max(-1, Math.Min(1, Math.Cos(d13) / Math.Max(1e-9, Math.Cos(xt)))));
             cross = Math.Abs(xt) * Geo.R;
@@ -124,7 +124,7 @@ namespace ELA
         public static string RegionName(double lat, double lon)
         {
             string best = null; double bd = 1500;
-            foreach (var r in Precursors.Regions) { double d = Geo.DistanceKm(lat, lon, r.Lat, r.Lon); if (d < bd) { bd = d; best = r.Name; } }
+            foreach (var r in Precursors.Regions) { double d = Geo.DistanceKmFast(lat, lon, r.Lat, r.Lon); if (d < bd) { bd = d; best = r.Name; } }
             return best != null ? YAMS.Lang.T(best) : Geo.LatLonToLoc(lat, lon, 4).Substring(0, 2);
         }
 
@@ -132,7 +132,7 @@ namespace ELA
         public static string ZoneName(double lat, double lon)
         {
             string best = null; double bd = 1500;
-            foreach (var r in Precursors.Regions) { double d = Geo.DistanceKm(lat, lon, r.Lat, r.Lon); if (d < bd) { bd = d; best = r.Name; } }
+            foreach (var r in Precursors.Regions) { double d = Geo.DistanceKmFast(lat, lon, r.Lat, r.Lon); if (d < bd) { bd = d; best = r.Name; } }
             return best != null ? YAMS.Lang.T(best) + " (" + Geo.LatLonToLoc(lat, lon, 4) + ")" : Geo.LatLonToLoc(lat, lon, 4);
         }
 
@@ -156,7 +156,7 @@ namespace ELA
                 double foEs = s.FreqMHz / Geo.SecantFactor(d, Hkm);
                 if (foEs < need) continue;
                 double la, lo;
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
                 raw.Add(new StrongCloud { Lat = la, Lon = lo, FoEs = foEs, N = 1, Newest = s.Utc, Source = s.Spotter + "-" + s.DxCall, Spot = s });
             }
             // ionosonde GIRO con foEs recente sufficiente (solo in diretta)
@@ -172,7 +172,7 @@ namespace ELA
             List<StrongCloud> res = new List<StrongCloud>();
             foreach (StrongCloud c in raw)
             {
-                StrongCloud m = res.FirstOrDefault(x => Geo.DistanceKm(x.Lat, x.Lon, c.Lat, c.Lon) <= ClusterKm);
+                StrongCloud m = res.FirstOrDefault(x => Geo.DistanceKmFast(x.Lat, x.Lon, c.Lat, c.Lon) <= ClusterKm);
                 if (m == null) { res.Add(c); continue; }
                 m.N++;
                 if (c.Newest > m.Newest) m.Newest = c.Newest;
@@ -237,7 +237,7 @@ namespace ELA
                 for (double x = Math.Floor((lon - dLon) / 2) * 2; x <= lon + dLon; x += 2)
                 {
                     if (!m[Sq(y + 0.5, x + 1)]) continue;
-                    if (Geo.DistanceKm(lat, lon, y + 0.5, x + 1) <= km + 60) return true;   // 60 km: meta' quadrato, la stazione puo' stare sul bordo
+                    if (Geo.DistanceKmFast(lat, lon, y + 0.5, x + 1) <= km + 60) return true;   // 60 km: meta' quadrato, la stazione puo' stare sul bordo
                 }
             }
             return false;
@@ -262,8 +262,8 @@ namespace ELA
             double[] d13 = new double[n], th13 = new double[n], fo = new double[n];
             for (int i = 0; i < n; i++)
             {
-                d13[i] = Geo.DistanceKm(sLat, sLon, act[i].Lat, act[i].Lon) / Geo.R;
-                th13[i] = Geo.Bearing(sLat, sLon, act[i].Lat, act[i].Lon) * Math.PI / 180;
+                d13[i] = Geo.DistanceKmFast(sLat, sLon, act[i].Lat, act[i].Lon) / Geo.R;
+                th13[i] = Geo.BearingFast(sLat, sLon, act[i].Lat, act[i].Lon) * Math.PI / 180;
                 fo[i] = act[i].FoEs;
             }
             List<double[]> on = new List<double[]>();
@@ -290,7 +290,7 @@ namespace ELA
                     int L2 = (int)(Math.Round(4 * c1[0] / 100.0) * 100);
                     if (!seen.Add(L2)) continue;
                     double la, lo;
-                    Geo.Destination(sLat, sLon, az, L2, out la, out lo);
+                    Geo.DestinationFast(sLat, sLon, az, L2, out la, out lo);
                     if (EsModel.IsTransEquatorialWorld(sLat, sLon, la, lo)) continue;
                     res.Add(new Landing { Lat = la, Lon = lo, Az = az, DistKm = L2, Hops = 2, Operators = HasOperators(la, lo, OperatorsKm) });
                 }
@@ -311,7 +311,7 @@ namespace ELA
                         {
                             if (!seen.Add(L2)) continue;
                             double la, lo;
-                            Geo.Destination(sLat, sLon, az, L2, out la, out lo);
+                            Geo.DestinationFast(sLat, sLon, az, L2, out la, out lo);
                             if (EsModel.IsTransEquatorialWorld(sLat, sLon, la, lo)) continue;
                             res.Add(new Landing { Lat = la, Lon = lo, Az = az, DistKm = L2, Hops = k, Operators = HasOperators(la, lo, OperatorsKm) });
                         }
@@ -349,7 +349,7 @@ namespace ELA
                 double d = s.DistanceKm;
                 if (d > Precursors.MaxHopKm || d < 400) continue;
                 double la, lo;
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
                 act.Add(new Act { Lat = la, Lon = lo, FoEs = s.FreqMHz / Geo.SecantFactor(d, Hkm), Spot = s });
             }
             foreach (StrongCloud c in strong) if (c.Ionosonde) act.Add(new Act { Lat = c.Lat, Lon = c.Lon, FoEs = c.FoEs });
@@ -377,15 +377,15 @@ namespace ELA
             for (int j = 0; j < k; j++)
             {
                 double la, lo;
-                Geo.Destination(lat0, lon0, az, g1 + (j + 0.5) * hop, out la, out lo);
+                Geo.DestinationFast(lat0, lon0, az, g1 + (j + 0.5) * hop, out la, out lo);
                 PrecursorPoint p = new PrecursorPoint { Lat = la, Lon = lo, HopKm = hop, FoEsNeed = F50 / Geo.SecantFactor(hop, Hkm) };
                 foreach (Act c in act)
                 {
-                    double d = Geo.DistanceKm(la, lo, c.Lat, c.Lon);
+                    double d = Geo.DistanceKmFast(la, lo, c.Lat, c.Lon);
                     if (d > Precursors.MatchKm || c.FoEs < p.FoEsNeed) continue;
                     if (!p.Covered || c.FoEs > p.CloudFoEs) { p.Covered = true; p.CloudFoEs = c.FoEs; p.CloudKm = d; p.CloudSpot = c.Spot; }
                 }
-                foreach (double[] s in stations) if (Geo.DistanceKm(la, lo, s[0], s[1]) <= Precursors.ObservedKm) { p.Observed = true; break; }
+                foreach (double[] s in stations) if (Geo.DistanceKmFast(la, lo, s[0], s[1]) <= Precursors.ObservedKm) { p.Observed = true; break; }
                 pts.Add(p);
             }
             return pts;
@@ -402,15 +402,15 @@ namespace ELA
         static PrecursorPoint PointAt(double lat0, double lon0, double az, double along, double hopKm, double Hkm, List<Act> act, List<double[]> stations)
         {
             double la, lo;
-            Geo.Destination(lat0, lon0, az, along, out la, out lo);
+            Geo.DestinationFast(lat0, lon0, az, along, out la, out lo);
             PrecursorPoint p = new PrecursorPoint { Lat = la, Lon = lo, HopKm = hopKm, FoEsNeed = F50 / Geo.SecantFactor(hopKm, Hkm) };
             foreach (Act c in act)
             {
-                double d = Geo.DistanceKm(la, lo, c.Lat, c.Lon);
+                double d = Geo.DistanceKmFast(la, lo, c.Lat, c.Lon);
                 if (d > Precursors.MatchKm || c.FoEs < p.FoEsNeed) continue;
                 if (!p.Covered || c.FoEs > p.CloudFoEs) { p.Covered = true; p.CloudFoEs = c.FoEs; p.CloudKm = d; p.CloudSpot = c.Spot; }
             }
-            foreach (double[] s in stations) if (Geo.DistanceKm(la, lo, s[0], s[1]) <= Precursors.ObservedKm) { p.Observed = true; break; }
+            foreach (double[] s in stations) if (Geo.DistanceKmFast(la, lo, s[0], s[1]) <= Precursors.ObservedKm) { p.Observed = true; break; }
             return p;
         }
 
@@ -431,11 +431,11 @@ namespace ELA
             double hMax = EqualMaxHopKm(Hkm), hMin = Precursors.MinKm / 2;
             foreach (Act a in act)
             {
-                double x = Geo.DistanceKm(sLat, sLon, a.Lat, a.Lon);          // meta' del salto
+                double x = Geo.DistanceKmFast(sLat, sLon, a.Lat, a.Lon);          // meta' del salto
                 if (2 * x < hMin || 2 * x > hMax) continue;
                 if (a.FoEs * Geo.SecantFactor(2 * x, Hkm) < F50) continue;      // la nube regge il primo salto
-                double az = Geo.Bearing(sLat, sLon, a.Lat, a.Lon), D = 4 * x, tLat, tLon;
-                Geo.Destination(sLat, sLon, az, D, out tLat, out tLon);
+                double az = Geo.BearingFast(sLat, sLon, a.Lat, a.Lon), D = 4 * x, tLat, tLon;
+                Geo.DestinationFast(sLat, sLon, az, D, out tLat, out tLon);
                 if (EsModel.IsTransEquatorialWorld(sLat, sLon, tLat, tLon)) continue;
                 if (!HasOperators(tLat, tLon, LineKm)) continue;
                 PrecursorPoint far = PointAt(sLat, sLon, az, 3 * x, 2 * x, Hkm, act, stations);
@@ -475,7 +475,7 @@ namespace ELA
             {
                 if (reps.Count >= 250) break;
                 if (a.FoEs * Geo.SecantFactor(hMin, Hkm) < F50) break;              // ordinate per foEs: le altre non reggono nemmeno il salto minimo
-                if (reps.Any(r => Geo.DistanceKm(r.Lat, r.Lon, a.Lat, a.Lon) <= 150)) continue;
+                if (reps.Any(r => Geo.DistanceKmFast(r.Lat, r.Lon, a.Lat, a.Lon) <= 150)) continue;
                 reps.Add(a);
             }
             Dictionary<string, ChainAlert> best = new Dictionary<string, ChainAlert>();
@@ -483,19 +483,19 @@ namespace ELA
                 for (int j = i + 1; j < reps.Count; j++)
                 {
                     Act a = reps[i], b = reps[j];
-                    double h = Geo.DistanceKm(a.Lat, a.Lon, b.Lat, b.Lon);
+                    double h = Geo.DistanceKmFast(a.Lat, a.Lon, b.Lat, b.Lon);
                     if (h < hMin || h > hMax) continue;
                     double sec = Geo.SecantFactor(h, Hkm);
                     if (a.FoEs * sec < F50 || b.FoEs * sec < F50) continue;
-                    double az = Geo.Bearing(a.Lat, a.Lon, b.Lat, b.Lon), eaLat, eaLon, ebLat, ebLon;
-                    Geo.Destination(a.Lat, a.Lon, Geo.Norm360(az + 180), h / 2, out eaLat, out eaLon);
-                    Geo.Destination(b.Lat, b.Lon, Geo.Norm360(Geo.Bearing(b.Lat, b.Lon, a.Lat, a.Lon) + 180), h / 2, out ebLat, out ebLon);
+                    double az = Geo.BearingFast(a.Lat, a.Lon, b.Lat, b.Lon), eaLat, eaLon, ebLat, ebLon;
+                    Geo.DestinationFast(a.Lat, a.Lon, Geo.Norm360(az + 180), h / 2, out eaLat, out eaLon);
+                    Geo.DestinationFast(b.Lat, b.Lon, Geo.Norm360(Geo.BearingFast(b.Lat, b.Lon, a.Lat, a.Lon) + 180), h / 2, out ebLat, out ebLon);
                     if (EsModel.IsTransEquatorialWorld(eaLat, eaLon, ebLat, ebLon)) continue;
                     if (!HasOperators(eaLat, eaLon, LineKm) || !HasOperators(ebLat, ebLon, LineKm)) continue;
                     double near = double.NaN;
                     if (hasStation)
                     {
-                        near = Math.Min(Geo.DistanceKm(sLat, sLon, eaLat, eaLon), Geo.DistanceKm(sLat, sLon, ebLat, ebLon));
+                        near = Math.Min(Geo.DistanceKmFast(sLat, sLon, eaLat, eaLon), Geo.DistanceKmFast(sLat, sLon, ebLat, ebLon));
                         if (near <= LineKm) continue;                                   // e' il doppio salto uguale dal QTH, gia' cercato
                     }
                     PrecursorPoint pb = new PrecursorPoint { Lat = b.Lat, Lon = b.Lon, HopKm = h, FoEsNeed = F50 / sec, Covered = true, CloudFoEs = b.FoEs, CloudKm = 0, CloudSpot = b.Spot, Observed = true };
@@ -528,10 +528,10 @@ namespace ELA
             List<ChainAlert> res = new List<ChainAlert>();
             foreach (StrongCloud a in strong)
             {
-                double dA = Geo.DistanceKm(sLat, sLon, a.Lat, a.Lon);
+                double dA = Geo.DistanceKmFast(sLat, sLon, a.Lat, a.Lon);
                 if (dA < ShortMinKm / 2 || dA > ShortMaxKm / 2) continue;
                 if (a.FoEs * Geo.SecantFactor(2 * dA, Hkm) < F50) continue;               // condizione 1
-                double az = Geo.Bearing(sLat, sLon, a.Lat, a.Lon);   // anche nord-sud (Europa - Africa occidentale, decisione dell'autore 20/11/2026)
+                double az = Geo.BearingFast(sLat, sLon, a.Lat, a.Lon);   // anche nord-sud (Europa - Africa occidentale, decisione dell'autore 20/11/2026)
                 ChainAlert best = null;
                 foreach (StrongCloud b in strong)
                 {
@@ -544,7 +544,7 @@ namespace ELA
                     double D = along + xb;
                     if (D > MaxPathKm || D < Precursors.MinKm) continue;
                     double tLat, tLon;
-                    Geo.Destination(sLat, sLon, az, D, out tLat, out tLon);
+                    Geo.DestinationFast(sLat, sLon, az, D, out tLat, out tLon);
                     if (EsModel.IsTransEquatorialWorld(sLat, sLon, tLat, tLon)) continue;
                     if (!HasOperators(tLat, tLon, LineKm)) continue;                       // atterra dove non c'e' nessuno
                     int k; double hop;
@@ -573,13 +573,13 @@ namespace ELA
                     double along = 2 * dA + j * MiddleMaxKm + (ShortMinKm + ShortMaxKm) / 4;
                     if (along + ShortMaxKm / 2 > MaxPathKm) break;
                     double la, lo;
-                    Geo.Destination(sLat, sLon, az, along, out la, out lo);
+                    Geo.DestinationFast(sLat, sLon, az, along, out la, out lo);
                     if (!HasOperators(la, lo, LineKm)) continue;                           // zona in mare aperto: inutile cercarci la nube
                     PrecursorPoint z = new PrecursorPoint { Lat = la, Lon = lo, HopKm = j, FoEsNeed = StrongFoEs(Hkm) };
-                    foreach (double[] st in stations) if (Geo.DistanceKm(la, lo, st[0], st[1]) <= Precursors.ObservedKm) { z.Observed = true; break; }
+                    foreach (double[] st in stations) if (Geo.DistanceKmFast(la, lo, st[0], st[1]) <= Precursors.ObservedKm) { z.Observed = true; break; }
                     // ionosonda GIRO piu' vicina (entro 1000 km): foEs recente
                     GiroStation gb = null; double gd = 1000;
-                    if (giro) foreach (GiroStation g in Giro.Stations) { double d = Geo.DistanceKm(la, lo, g.Lat, g.Lon); if (d < gd) { gd = d; gb = g; } }
+                    if (giro) foreach (GiroStation g in Giro.Stations) { double d = Geo.DistanceKmFast(la, lo, g.Lat, g.Lon); if (d < gd) { gd = d; gb = g; } }
                     if (gb != null)
                     {
                         DateTime when;
@@ -592,7 +592,7 @@ namespace ELA
                 if (s.Zones.Count == 0) continue;
                 s.Region = ZoneName(s.Zones[0].Lat, s.Zones[0].Lon);
                 double eLa, eLo;
-                Geo.Destination(sLat, sLon, az, s.DistKm, out eLa, out eLo);
+                Geo.DestinationFast(sLat, sLon, az, s.DistKm, out eLa, out eLo);
                 if (EsModel.IsTransEquatorialWorld(sLat, sLon, eLa, eLo)) continue;
                 res.Add(s);
             }
@@ -607,15 +607,15 @@ namespace ELA
                 for (int j = i + 1; j < strong.Count; j++)
                 {
                     StrongCloud a = strong[i], b = strong[j];
-                    double dAB = Geo.DistanceKm(a.Lat, a.Lon, b.Lat, b.Lon);
+                    double dAB = Geo.DistanceKmFast(a.Lat, a.Lon, b.Lat, b.Lon);
                     if (dAB < CorridorMinKm || dAB > CorridorMaxKm) continue;
-                    double az = Geo.Bearing(a.Lat, a.Lon, b.Lat, b.Lon);
+                    double az = Geo.BearingFast(a.Lat, a.Lon, b.Lat, b.Lon);
                     double xa = ShortHalf(a.FoEs, Hkm), xb = ShortHalf(b.FoEs, Hkm);
                     if (double.IsNaN(xa) || double.IsNaN(xb)) continue;
                     if (xa + dAB + xb < Precursors.MinKm) continue;                          // sotto i 2800 km non e' multi-salto (IK3XTV)
                     double eaLat, eaLon, ebLat, ebLon;
-                    Geo.Destination(a.Lat, a.Lon, Geo.Norm360(az + 180), xa, out eaLat, out eaLon);
-                    Geo.Destination(b.Lat, b.Lon, Geo.Norm360(Geo.Bearing(b.Lat, b.Lon, a.Lat, a.Lon) + 180), xb, out ebLat, out ebLon);
+                    Geo.DestinationFast(a.Lat, a.Lon, Geo.Norm360(az + 180), xa, out eaLat, out eaLon);
+                    Geo.DestinationFast(b.Lat, b.Lon, Geo.Norm360(Geo.BearingFast(b.Lat, b.Lon, a.Lat, a.Lon) + 180), xb, out ebLat, out ebLon);
                     if (EsModel.IsTransEquatorialWorld(eaLat, eaLon, ebLat, ebLon)) continue;
                     if (!HasOperators(eaLat, eaLon, LineKm) || !HasOperators(ebLat, ebLon, LineKm)) continue;   // un'estremita' in mare aperto
                     int k; double hop;
@@ -632,7 +632,7 @@ namespace ELA
                     c.Region = c.EndAName + " ↔ " + c.EndBName;
                     if (hasStation)
                     {
-                        c.NearKm = Math.Min(Geo.DistanceKm(sLat, sLon, eaLat, eaLon), Geo.DistanceKm(sLat, sLon, ebLat, ebLon));
+                        c.NearKm = Math.Min(Geo.DistanceKmFast(sLat, sLon, eaLat, eaLon), Geo.DistanceKmFast(sLat, sLon, ebLat, ebLon));
                         // la propria stazione e' gia' l'estremita' di una catena DAL QTH con la stessa coppia di nubi: niente doppione
                         if (fromQth.Any(q => (q.A == a && q.B == b) || (q.A == b && q.B == a))) continue;
                     }

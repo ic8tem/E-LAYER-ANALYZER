@@ -308,7 +308,10 @@ namespace ELA
         }
 
         // Versore del campo in un punto (coordinate terrestri, km)
-        public static Geo.V3 Dir(Geo.V3 p)
+        public static Geo.V3 Dir(Geo.V3 p) { return Vec(p).Unit; }
+
+        // Vettore del campo (nT) in un punto (coordinate terrestri, km): latitudine geocentrica e raggio dal punto stesso
+        public static Geo.V3 Vec(Geo.V3 p)
         {
             double r = p.Len;
             double lat = Math.Asin(p.Z / r) * Geo.R2D, lon = Math.Atan2(p.Y, p.X) * Geo.R2D;
@@ -318,14 +321,19 @@ namespace ELA
             Geo.V3 north = new Geo.V3(-Math.Sin(f) * Math.Cos(l), -Math.Sin(f) * Math.Sin(l), Math.Cos(f));
             Geo.V3 east = new Geo.V3(-Math.Sin(l), Math.Cos(l), 0);
             Geo.V3 up = new Geo.V3(Math.Cos(f) * Math.Cos(l), Math.Cos(f) * Math.Sin(l), Math.Sin(f));
-            return (bn * north + be * east + (-bd) * up).Unit;
+            return bn * north + be * east + (-bd) * up;
         }
 
         // Inclinazione e declinazione (gradi) al suolo
+        // (lat geodetica WGS84: il modello si calcola nel punto geocentrico corrispondente e le componenti si riportano
+        //  alla verticale dell'ellissoide, come NOAA e ppigrf; fino alla versione 0.6.5 la latitudine geodetica era usata come geocentrica)
         public static void IncDec(double lat, double lon, out double inc, out double dec)
         {
-            double bn, be, bd;
-            Field(lat, lon, Geo.R, out bn, out be, out bd);
+            Geo.V3 b = Vec(Geo.Ecef(lat, lon, 0));
+            double f = lat * Geo.D2R, l = lon * Geo.D2R;
+            Geo.V3 north = new Geo.V3(-Math.Sin(f) * Math.Cos(l), -Math.Sin(f) * Math.Sin(l), Math.Cos(f));
+            Geo.V3 east = new Geo.V3(-Math.Sin(l), Math.Cos(l), 0);
+            double bn = b.Dot(north), be = b.Dot(east), bd = -b.Dot(Geo.Up(lat, lon));
             inc = Math.Atan2(bd, Math.Sqrt(bn * bn + be * be)) * Geo.R2D;
             dec = Math.Atan2(be, bn) * Geo.R2D;
         }

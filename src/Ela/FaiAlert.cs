@@ -58,7 +58,7 @@ namespace ELA
                     if (lt < 18) continue;
                     double km = Geo.DistanceKm(Station.Lat, Station.Lon, la, lo);
                     if (km < MinKm || km > MaxKm) continue;
-                    if (Geo.ElevationDeg(km, Hkm, Station.AltKm) < minEl) continue;
+                    if (Geo.ElevationTo(Station.Lat, Station.Lon, Station.AltKm, la, lo, Hkm) < minEl) continue;
                     if (res.Any(c => Geo.DistanceKm(c.Lat, c.Lon, la, lo) <= 250)) continue;            // una per zona
                     List<PerpPoint> line = FieldAligned.ConeLine(Station.Lat, Station.Lon, Station.AltKm, la, lo, Hkm, TolDeg, minEl, 1500, 6);
                     List<string> who = new List<string>();

@@ -61,7 +61,7 @@ namespace ELA
         public bool InView(double lat, double lon)
         {
             if (double.IsNaN(lat) || double.IsNaN(lon)) return false;
-            if (Azimuthal) return Geo.DistanceKm(AzLat, AzLon, lat, lon) <= RangeKm * 1.02;
+            if (Azimuthal) return Geo.DistanceKmFast(AzLat, AzLon, lat, lon) <= RangeKm * 1.02;
             if (Bounds.Width < 10) return true;
             Point q = ToScreen(lat, lon);
             return q.X >= 0 && q.X <= Bounds.Width && q.Y >= 0 && q.Y <= Bounds.Height;
@@ -119,7 +119,7 @@ namespace ELA
         {
             if (Azimuthal)
             {
-                double d = Geo.DistanceKm(AzLat, AzLon, lat, lon), az = Geo.Bearing(AzLat, AzLon, lat, lon) * Geo.D2R, k = Kpx;
+                double d = Geo.DistanceKmFast(AzLat, AzLon, lat, lon), az = Geo.BearingFast(AzLat, AzLon, lat, lon) * Geo.D2R, k = Kpx;   // proiezione di disegno (sfera media)
                 return new Point(Bounds.Width / 2 + d * k * Math.Sin(az), Bounds.Height / 2 - d * k * Math.Cos(az));
             }
             double p = Ppd;
@@ -134,7 +134,7 @@ namespace ELA
             {
                 double dx = s.X - Bounds.Width / 2, dy = s.Y - Bounds.Height / 2;
                 double d = Math.Min(Math.PI * Geo.R - 1, Math.Sqrt(dx * dx + dy * dy) / Kpx);
-                Geo.Destination(AzLat, AzLon, Geo.Norm360(Math.Atan2(dx, -dy) * Geo.R2D), d, out lat, out lon);
+                Geo.DestinationFast(AzLat, AzLon, Geo.Norm360(Math.Atan2(dx, -dy) * Geo.R2D), d, out lat, out lon);
                 return;
             }
             double p = Ppd;
@@ -550,7 +550,7 @@ namespace ELA
                         for (int fy = 0; fy < 18; fy++)
                         {
                             double fla = -90 + fy * 10 + 5, flo = -180 + fx * 20 + 10;
-                            if (Geo.DistanceKm(AzLat, AzLon, fla, flo) > RangeKm * 1.05) continue;
+                            if (Geo.DistanceKmFast(AzLat, AzLon, fla, flo) > RangeKm * 1.05) continue;
                             Point c = ToScreen(fla, flo);
                             FormattedText t = Ft("" + (char)('A' + fx) + (char)('A' + fy), fs, Themes.MapField, FontWeight.Bold);
                             ctx.DrawText(t, new Point(c.X - t.Width / 2, c.Y - t.Height / 2));

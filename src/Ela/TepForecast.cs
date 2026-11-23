@@ -65,10 +65,10 @@ namespace ELA
             for (double az = 0; az < 360; az += 4)
                 for (double d = EsModel.TepMinKm; d <= EsModel.TepMaxKm; d += 250)
                 {
-                    double la, lo; Geo.Destination(Station.Lat, Station.Lon, az, d, out la, out lo);
+                    double la, lo; Geo.DestinationFast(Station.Lat, Station.Lon, az, d, out la, out lo);
                     if (!EsModel.IsTransEquatorialWorld(Station.Lat, Station.Lon, la, lo)) continue;
                     if (!Chains.HasOperators(la, lo, 300)) continue;
-                    double ml, mo; Geo.Intermediate(Station.Lat, Station.Lon, la, lo, 0.5, out ml, out mo);
+                    double ml, mo; Geo.IntermediateFast(Station.Lat, Station.Lon, la, lo, 0.5, out ml, out mo);
                     string zone = Chains.ZoneName(la, lo);
                     double sym = Math.Abs(Math.Abs(Geo.InclinationDeg(la, lo)) - Math.Abs(Geo.InclinationDeg(Station.Lat, Station.Lon)));
                     TepAlert old;
@@ -88,7 +88,7 @@ namespace ELA
                 double best = double.NaN; string names = "";
                 foreach (GiroStation g in Giro.Stations)
                 {
-                    if (Geo.DistanceKm(a.MidLat, a.MidLon, g.Lat, g.Lon) > 2500) continue;
+                    if (Geo.DistanceKmFast(a.MidLat, a.MidLon, g.Lat, g.Lon) > 2500) continue;
                     DateTime when; double f = g.LastValue(r => r.FoF2, Giro.FreshMin, out when);
                     if (double.IsNaN(f)) continue;
                     if (double.IsNaN(best) || f > best) best = f;
@@ -98,8 +98,8 @@ namespace ELA
                 a.FGiro = double.IsNaN(best) ? 1 : 0.3 + 0.7 * Math.Max(0, Math.Min(1, (best - 8) / 6));
                 a.FSeason = fs; a.FSfi = fsfi; a.FKp = a.Kind == "eTEP" ? fkp : 1; a.Sfi = sfi; a.Kp = kp;
                 a.Index = 100 * fs * fsfi * a.FKp * a.FTime * a.FGiro;
-                a.Spots = tepSpots.Count(s => Math.Min(Geo.DistanceKm(s.LatS, s.LonS, Station.Lat, Station.Lon), Geo.DistanceKm(s.LatD, s.LonD, Station.Lat, Station.Lon)) <= SpotKm
-                                            || Math.Min(Geo.DistanceKm(s.LatS, s.LonS, a.EndLat, a.EndLon), Geo.DistanceKm(s.LatD, s.LonD, a.EndLat, a.EndLon)) <= SpotKm);
+                a.Spots = tepSpots.Count(s => Math.Min(Geo.DistanceKmFast(s.LatS, s.LonS, Station.Lat, Station.Lon), Geo.DistanceKmFast(s.LatD, s.LonD, Station.Lat, Station.Lon)) <= SpotKm
+                                            || Math.Min(Geo.DistanceKmFast(s.LatS, s.LonS, a.EndLat, a.EndLon), Geo.DistanceKmFast(s.LatD, s.LonD, a.EndLat, a.EndLon)) <= SpotKm);
                 a.Level = a.Spots > 0 || a.Index >= ProbableIdx ? 2 : a.Index >= PossibleIdx ? 1 : 0;
                 if (a.Level > 0) res.Add(a);
             }

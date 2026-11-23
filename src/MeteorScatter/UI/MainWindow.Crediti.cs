@@ -49,6 +49,8 @@ namespace YAMS
             new Credit("MSQP", "Rob Suggs NN4NT, HamSCI Meteor Scatter Working Group", "Un confronto per la previsione degli sciami.", true, "github.com/HamSCI/MSQP", "fonte citata"),
             new Credit("Swan Meteor Skyview", "DL1DBC", "Il riferimento per la grafica della volta celeste.", true, "swan.ms", "solo idee e formule, nessun codice"),
             new Credit("Broker MQTT pubblici", "HiveMQ, Eclipse Mosquitto, EMQX", "Lo scambio cifrato dei messaggi tra gli utenti di YA-MS.", true, "broker.hivemq.com - test.mosquitto.org - broker.emqx.io", "servizio pubblico gratuito"),
+            new Credit("WGS 84", "National Geospatial-Intelligence Agency (NGA)", "L'ellissoide della Terra (semiasse e schiacciamento).", true, "earth-info.nga.mil", "fonte citata"),
+            new Credit("GeographicLib e GeographicLib.NET", "Charles F. F. Karney; i collaboratori di GeographicLib.NET", "Distanze, azimut e punti della tratta sulla geodetica dell'ellissoide WGS84.", true, "geographiclib.sourceforge.io - github.com/noelex/GeographicLib.NET", "MIT"),
             new Credit("Natural Earth", "Natural Earth", "Le coste e i confini delle mappe.", true, "www.naturalearthdata.com", "dominio pubblico"),
             new Credit("Foto della schermata di avvio", "ESO/S. Guisard", "\"The 2010 Perseids over the VLT\".", false, "www.eso.org", "CC BY 4.0"),
             new Credit("Avalonia UI 11.2.3, .NET 8 e .NET 6", "Il gruppo di Avalonia UI; Microsoft e .NET Foundation", "L'interfaccia multipiattaforma (Windows, Linux, Mac) e l'ambiente di esecuzione.", true, "github.com/AvaloniaUI/Avalonia - dotnet.microsoft.com", "MIT"),

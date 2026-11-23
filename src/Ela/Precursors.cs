@@ -81,7 +81,7 @@ namespace ELA
                 double d = s.DistanceKm;
                 if (d > MaxHopKm || d < 400) continue;
                 double la, lo;
-                Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
                 act.Add(new Active { Lat = la, Lon = lo, FoEs = s.FreqMHz / Geo.SecantFactor(d, Hkm), Spot = s });
             }
             // stazioni presenti negli spot dell'ultima ora (tutti i modi): dicono dove c'e' chi ascolta
@@ -97,9 +97,9 @@ namespace ELA
 
             foreach (var r in Regions)
             {
-                double D = Geo.DistanceKm(Station.Lat, Station.Lon, r.Lat, r.Lon);
+                double D = Geo.DistanceKmFast(Station.Lat, Station.Lon, r.Lat, r.Lon);
                 if (D < MinKm || D > MaxKm) continue;
-                double az = Geo.Bearing(Station.Lat, Station.Lon, r.Lat, r.Lon);
+                double az = Geo.BearingFast(Station.Lat, Station.Lon, r.Lat, r.Lon);
                 double dev = Math.Abs(((az % 180) + 180) % 180 - 90);          // 90 = est-ovest, 0 = nord-sud
                 if (90 - dev < MinDevFromMeridian) continue;                    // tratta troppo vicina al nord-sud
                 if (EsModel.IsTransEquatorialWorld(Station.Lat, Station.Lon, r.Lat, r.Lon)) continue;   // TEP, non Es
@@ -172,15 +172,15 @@ namespace ELA
             foreach (double[] h in hops)
             {
                 double la, lo;
-                Geo.Intermediate(Station.Lat, Station.Lon, tLat, tLon, h[0] / D, out la, out lo);
+                Geo.IntermediateFast(Station.Lat, Station.Lon, tLat, tLon, h[0] / D, out la, out lo);
                 PrecursorPoint p = new PrecursorPoint { Lat = la, Lon = lo, HopKm = h[1], FoEsNeed = f / Geo.SecantFactor(h[1], Hkm), Short = shortKm > 0 && a.Points.Count == 0 };
                 foreach (Active c in act)
                 {
-                    double d = Geo.DistanceKm(la, lo, c.Lat, c.Lon);
+                    double d = Geo.DistanceKmFast(la, lo, c.Lat, c.Lon);
                     if (d > MatchKm || c.FoEs < p.FoEsNeed) continue;
                     if (!p.Covered || c.FoEs > p.CloudFoEs) { p.Covered = true; p.CloudFoEs = c.FoEs; p.CloudKm = d; p.CloudSpot = c.Spot; }
                 }
-                foreach (double[] s in stations) if (Geo.DistanceKm(la, lo, s[0], s[1]) <= ObservedKm) { p.Observed = true; break; }
+                foreach (double[] s in stations) if (Geo.DistanceKmFast(la, lo, s[0], s[1]) <= ObservedKm) { p.Observed = true; break; }
                 a.Points.Add(p);
             }
             int cov = a.Covered, miss = a.Points.Count - cov;

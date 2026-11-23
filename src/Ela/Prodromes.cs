@@ -38,16 +38,16 @@ namespace ELA
             List<double[]> six = new List<double[]>();
             foreach (Spot s in SpotStore.Recent(ClosedMin, s => s.HasBoth && s.Band == "6m" && s.EsCandidate && !s.IsTep && !EsModel.Ft8Isolated50(s)))
             {
-                double la, lo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                double la, lo; Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
                 six.Add(new[] { la, lo });
             }
             foreach (Spot s in low.OrderByDescending(x => x.Utc))
             {
                 double d = s.DistanceKm;
                 if (d > Precursors.MaxHopKm) continue;
-                double la, lo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
-                if (six.Any(p => Geo.DistanceKm(la, lo, p[0], p[1]) <= NearKm)) continue;           // i 50 MHz sono gia' aperti li'
-                ProdromeAlert m = res.FirstOrDefault(x => Geo.DistanceKm(x.CloudLat, x.CloudLon, la, lo) <= 250);
+                double la, lo; Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                if (six.Any(p => Geo.DistanceKmFast(la, lo, p[0], p[1]) <= NearKm)) continue;           // i 50 MHz sono gia' aperti li'
+                ProdromeAlert m = res.FirstOrDefault(x => Geo.DistanceKmFast(x.CloudLat, x.CloudLon, la, lo) <= 250);
                 double foEs = s.FreqMHz / Geo.SecantFactor(d, Hkm);
                 if (m != null) { m.N++; if (foEs > m.FoEs) { m.FoEs = foEs; m.Spot = s; } if (s.Band == "12m") m.FromBand = "12 m"; continue; }
                 ProdromeAlert a = new ProdromeAlert
@@ -57,8 +57,8 @@ namespace ELA
                 };
                 if (Station.Valid)
                 {
-                    a.NearKm = Geo.DistanceKm(Station.Lat, Station.Lon, la, lo);
-                    a.DistKm = a.NearKm; a.Az = Geo.Bearing(Station.Lat, Station.Lon, la, lo);
+                    a.NearKm = Geo.DistanceKmFast(Station.Lat, Station.Lon, la, lo);
+                    a.DistKm = a.NearKm; a.Az = Geo.BearingFast(Station.Lat, Station.Lon, la, lo);
                 }
                 res.Add(a);
             }

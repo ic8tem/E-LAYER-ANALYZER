@@ -542,6 +542,7 @@ namespace ELA
                     au.View(-25, 35, 45, 75);
                     au.ShotPair(Program.AuroraA, Program.AuroraB); await Task.Delay(3000);
                     Shot(Path.Combine(dir, "aurora_scia_" + Program.AuroraA + "_" + Program.AuroraB + ".png"));
+                    try { File.WriteAllText(Path.Combine(dir, "aurora_scia_" + Program.AuroraA + "_" + Program.AuroraB + ".txt"), au.ResultText); } catch { }
                     if (au.LastBest != null)
                     {
                         au.ShotIsoA(Program.AuroraA, au.LastBest.Lat, au.LastBest.Lon); await Task.Delay(3000);
@@ -623,7 +624,9 @@ namespace ELA
                 // F.A.I.: le verifiche richieste (scia) e l'iso-riflessione su Ginevra
                 tabs.Select(1);
                 fai.ShotPreset(1); await Task.Delay(2500); Shot(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2b_fai_scia_IC8FAX_F6DRO.txt"), fai.ResultText); } catch { }
                 fai.ShotPreset(2); await Task.Delay(2500); Shot(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.png"));
+                try { File.WriteAllText(Path.Combine(dir, "2c_fai_scia_IC8FAX_G4LOH.txt"), fai.ResultText); } catch { }
                 fai.ShotIso(46.2, 6.15); await Task.Delay(2500); Shot(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.png"));
                 try { File.WriteAllText(Path.Combine(dir, "2d_fai_isoriflessione_Ginevra.txt"), fai.ResultText); } catch { }
                 // casi di verifica con la data: campo IGRF dell'anno (1990, 1987); risultati in testo per i documenti

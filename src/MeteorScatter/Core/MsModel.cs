@@ -161,8 +161,8 @@ namespace YAMS
         {
             samples.Clear();
             double step = 15.0;
-            Vec3 pa = Astro.Vec(Home, Astro.R + HomeAltKm), pb = Astro.Vec(Dx, Astro.R + DxAltKm);
-            Vec3 ua = pa.Unit, ub = pb.Unit;
+            Vec3 pa = Astro.Ecef(Home, HomeAltKm), pb = Astro.Ecef(Dx, DxAltKm);
+            Vec3 ua = Astro.Vec(Home, 1), ub = Astro.Vec(Dx, 1);   // verticali locali (normali all'ellissoide)
             double bm = Astro.Bearing(Mid, Dx);
             double maxCross = Math.Min(1500, HotRadiusKm + 100);
             for (double u = -DistKm / 2 - 900; u <= DistKm / 2 + 900; u += step)
@@ -173,7 +173,7 @@ namespace YAMS
                 for (double v = -maxCross; v <= maxCross; v += step)
                 {
                     LatLon p = v >= 0 ? Astro.Destination(q, bq + 90, v) : Astro.Destination(q, bq - 90, -v);
-                    Vec3 P = Astro.Vec(p, Astro.R + LayerKm);
+                    Vec3 P = Astro.Ecef(p, LayerKm);
                     Vec3 ra = P - pa, rb = P - pb;
                     double Ra = ra.Length, Rb = rb.Length;
                     double ea = Math.Asin(ra.Dot(ua) / Ra) / Astro.D2R;
@@ -291,7 +291,7 @@ namespace YAMS
         // Meta' dell'angolo di scattering (gradi) in un punto alla quota delle scie: 0 = backscatter (radar), verso 90 = radente
         public double HalfScatterAngleDeg(LatLon p)
         {
-            Vec3 pa = Astro.Vec(Home, Astro.R + HomeAltKm), pb = Astro.Vec(Dx, Astro.R + DxAltKm), P = Astro.Vec(p, Astro.R + LayerKm);
+            Vec3 pa = Astro.Ecef(Home, HomeAltKm), pb = Astro.Ecef(Dx, DxAltKm), P = Astro.Ecef(p, LayerKm);
             Vec3 na = (pa - P).Unit, nb = (pb - P).Unit;
             return Math.Acos(Math.Max(-1, Math.Min(1, na.Dot(nb)))) / 2.0 / Astro.D2R;
         }
@@ -404,8 +404,8 @@ namespace YAMS
         public static double PathLossDb(LatLon home, double homeAltKm, LatLon dx, double dxAltKm, LatLon scatter, double layerKm, double freqMHz, double qPerM,
                                         double betaDeg, bool initialRadius)
         {
-            Vec3 pa = Astro.Vec(home, Astro.R + homeAltKm), pb = Astro.Vec(dx, Astro.R + dxAltKm);
-            Vec3 P = Astro.Vec(scatter, Astro.R + layerKm);
+            Vec3 pa = Astro.Ecef(home, homeAltKm), pb = Astro.Ecef(dx, dxAltKm);
+            Vec3 P = Astro.Ecef(scatter, layerKm);
             Vec3 ra = pa - P, rb = pb - P;
             double R1 = ra.Length * 1000, R2 = rb.Length * 1000;
             double phi = Math.Acos(Math.Max(-1, Math.Min(1, ra.Unit.Dot(rb.Unit)))) / 2.0;

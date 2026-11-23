@@ -52,14 +52,14 @@ namespace ELA
         static void OnHop(DateTime t, string band, string a, AprsPos pa, string b, AprsPos pb)
         {
             if (band != "144") return;
-            double la, lo; Geo.Intermediate(pa.Lat, pa.Lon, pb.Lat, pb.Lon, 0.5, out la, out lo);
+            double la, lo; Geo.IntermediateFast(pa.Lat, pa.Lon, pb.Lat, pb.Lon, 0.5, out la, out lo);
             Hop h = new Hop { T = t, A = a, B = b, LatA = pa.Lat, LonA = pa.Lon, LatB = pb.Lat, LonB = pb.Lon, MidLat = la, MidLon = lo };
             List<Hop> confirm = new List<Hop>();
             lock (lk)
             {
                 hops.RemoveAll(x => (t - x.T).TotalMinutes > KeepMin);
                 foreach (Hop x in hops)
-                    if ((t - x.T).TotalMinutes <= RepeatMin && Geo.DistanceKm(x.MidLat, x.MidLon, la, lo) <= PairKm) confirm.Add(x);
+                    if ((t - x.T).TotalMinutes <= RepeatMin && Geo.DistanceKmFast(x.MidLat, x.MidLon, la, lo) <= PairKm) confirm.Add(x);
                 hops.Add(h);
                 if (confirm.Count == 0) return;
                 confirm.Add(h);
@@ -85,8 +85,8 @@ namespace ELA
             List<AprsAlert> res = new List<AprsAlert>();
             foreach (Spot s in SpotStore.Recent(KeepMin, x => x.Source == 4 && x.HasBoth))
             {
-                double la, lo; Geo.Intermediate(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
-                AprsAlert m = res.FirstOrDefault(x => Geo.DistanceKm(x.MidLat, x.MidLon, la, lo) <= 250);
+                double la, lo; Geo.IntermediateFast(s.LatS, s.LonS, s.LatD, s.LonD, 0.5, out la, out lo);
+                AprsAlert m = res.FirstOrDefault(x => Geo.DistanceKmFast(x.MidLat, x.MidLon, la, lo) <= 250);
                 if (m != null)
                 {
                     m.N++; if (s.Utc > m.Last) m.Last = s.Utc;
@@ -98,7 +98,7 @@ namespace ELA
                     MidLat = la, MidLon = lo, N = 1, Last = s.Utc, Calls = s.DxCall + "-" + s.Spotter, Level = 2, Band = "2 m", FreqMHz = 144.8,
                     TargetLat = la, TargetLon = lo, DistKm = s.DistanceKm, Region = Chains.ZoneName(la, lo)
                 };
-                if (Station.Valid) { a.NearKm = Geo.DistanceKm(Station.Lat, Station.Lon, la, lo); a.Az = Geo.Bearing(Station.Lat, Station.Lon, la, lo); }
+                if (Station.Valid) { a.NearKm = Geo.DistanceKmFast(Station.Lat, Station.Lon, la, lo); a.Az = Geo.BearingFast(Station.Lat, Station.Lon, la, lo); }
                 res.Add(a);
             }
             return res.OrderBy(a => double.IsNaN(a.NearKm) ? 1e9 : a.NearKm).ToList();
