@@ -66,7 +66,10 @@ namespace ELA
                     OffsetSec = offs.Average();
                     LastServers = string.Join(", ", used);
                     Ok = true;
-                    if (Math.Abs(OffsetSec) > 1.0) SystemClockSet = TrySetSystemClock(DateTime.UtcNow.AddSeconds(OffsetSec));
+                    // l'orologio del PC si tocca solo se due server diversi concordano entro mezzo secondo (controllo di
+                    // sicurezza, 26/11/2026: una sola risposta, anche falsa, non basta a spostare l'ora del sistema)
+                    bool agree = offs.Count >= 2 && Math.Abs(offs[0] - offs[1]) <= 0.5;
+                    if (Math.Abs(OffsetSec) > 1.0 && agree) SystemClockSet = TrySetSystemClock(DateTime.UtcNow.AddSeconds(OffsetSec));
                     if (SystemClockSet && Math.Abs(OffsetSec) > 1.0) OffsetSec = 0;
                 }
                 else { Ok = false; LastServers = ""; }
@@ -88,6 +91,10 @@ namespace ELA
                 {
                     byte[] req = new byte[48];
                     req[0] = 0x1B;   // LI 0, versione 3, modo client
+                    // controllo di sicurezza (26/11/2026): 8 byte casuali nel campo «transmit»; il server li deve
+                    // restituire nel campo «originate», cosi' una risposta falsificata alla cieca si scarta
+                    byte[] nonce = new byte[8]; System.Security.Cryptography.RandomNumberGenerator.Fill(nonce);
+                    Buffer.BlockCopy(nonce, 0, req, 40, 8);
                     udp.Connect(ip, 123);
                     DateTime t1 = DateTime.UtcNow;
                     await udp.SendAsync(req, req.Length);
@@ -96,6 +103,7 @@ namespace ELA
                     DateTime t4 = DateTime.UtcNow;
                     byte[] r = rx.Result.Buffer;
                     if (r.Length < 48 || (r[0] & 0x07) != 4 || r[1] == 0) return null;   // modo server, stratum valido
+                    for (int k = 0; k < 8; k++) if (r[24 + k] != nonce[k]) return null;    // risposta alla nostra richiesta
                     DateTime t2 = Stamp(r, 32), t3 = Stamp(r, 40);
                     return ((t2 - t1).TotalSeconds + (t3 - t4).TotalSeconds) / 2.0;
                 }

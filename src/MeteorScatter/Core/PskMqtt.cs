@@ -181,6 +181,7 @@ namespace YAMS
                 len += (one[0] & 0x7F) * mul; mul *= 128;
                 if ((one[0] & 0x80) == 0) break;
             }
+            if (len > 1 << 20) throw new IOException("packet too large");   // controllo di sicurezza (26/11/2026): al massimo 1 MB, come in YamsShare
             byte[] body = new byte[len];
             if (len > 0) ReadExact(ns, body, len);
             return body;

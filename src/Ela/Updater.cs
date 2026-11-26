@@ -65,13 +65,24 @@ namespace ELA
                 {
                     JsonElement r = d.RootElement;
                     string tag = r.GetProperty("tag_name").GetString() ?? "";
-                    LatestVersion = tag.TrimStart('v', 'V');
+                    // controllo di sicurezza (26/11/2026): il numero di versione finisce negli script di aggiornamento,
+                    // quindi si accettano solo cifre e punti (es. 0.6.7); altrimenti la release si ignora
+                    string tv = tag.TrimStart('v', 'V');
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(tv, @"^\d{1,4}(\.\d{1,4}){1,3}$")) throw new FormatException("tag");
+                    LatestVersion = tv;
                     LatestNotes = r.TryGetProperty("body", out JsonElement b) ? b.GetString() ?? "" : "";
-                    LatestUrl = r.TryGetProperty("html_url", out JsonElement u) ? u.GetString() : "https://github.com/" + Repo + "/releases/latest";
+                    LatestUrl = r.TryGetProperty("html_url", out JsonElement u) ? u.GetString() : null;
+                    if (LatestUrl == null || !LatestUrl.StartsWith("https://github.com/" + Repo + "/", StringComparison.OrdinalIgnoreCase)) LatestUrl = "https://github.com/" + Repo + "/releases/latest";
                     List<KeyValuePair<string, string>> a = new List<KeyValuePair<string, string>>();
                     if (r.TryGetProperty("assets", out JsonElement arr))
                         foreach (JsonElement x in arr.EnumerateArray())
-                            a.Add(new KeyValuePair<string, string>(x.GetProperty("name").GetString() ?? "", x.GetProperty("browser_download_url").GetString() ?? ""));
+                        {
+                            string an = x.GetProperty("name").GetString() ?? "", au = x.GetProperty("browser_download_url").GetString() ?? "";
+                            // solo pacchetti di questo repository, con un nome di file semplice
+                            if (!au.StartsWith("https://github.com/" + Repo + "/releases/download/", StringComparison.OrdinalIgnoreCase)) continue;
+                            if (an.Length == 0 || an.IndexOfAny(new[] { '/', '\\', '"', '\'', '`', '$', '%' }) >= 0 || an.Contains("..")) continue;
+                            a.Add(new KeyValuePair<string, string>(an, au));
+                        }
                     assets = a;
                 }
                 Newer = IsNewer(LatestVersion, ElaWindow.Version);
@@ -341,8 +352,8 @@ namespace ELA
                     say(Lang.T("Estrazione dei file..."));
                     string ex = Path.Combine(work, "nuovo");
                     Directory.CreateDirectory(ex);
-                    if (name.EndsWith(".tar.gz", StringComparison.OrdinalIgnoreCase)) Run("tar", "-xzf \"" + pkg + "\" -C \"" + ex + "\"");
-                    else if (OperatingSystem.IsMacOS()) Run("ditto", "-x -k \"" + pkg + "\" \"" + ex + "\"");
+                    if (name.EndsWith(".tar.gz", StringComparison.OrdinalIgnoreCase)) Run("tar", "-xzf", pkg, "-C", ex);
+                    else if (OperatingSystem.IsMacOS()) Run("ditto", "-x", "-k", pkg, ex);
                     else ZipFile.ExtractToDirectory(pkg, ex, true);
 
                     // radice dei file nuovi
@@ -387,27 +398,31 @@ namespace ELA
                         StringBuilder sb = new StringBuilder();
                         sb.Append("#!/bin/sh\n");
                         sb.Append("while kill -0 " + pid + " 2>/dev/null; do sleep 1; done\n");
+                        // percorsi tra apici singoli (controllo di sicurezza, 26/11/2026): un percorso con $, ` o " non
+                        // viene interpretato dalla shell
                         if (OperatingSystem.IsMacOS())
                         {
-                            sb.Append("rm -rf \"" + bundle + "\"\n");
-                            sb.Append("ditto \"" + newApp + "\" \"" + bundle + "\"\n");
-                            sb.Append("open \"" + bundle + "\"\n");
+                            sb.Append("rm -rf " + Sq(bundle) + "\n");
+                            sb.Append("ditto " + Sq(newApp) + " " + Sq(bundle) + "\n");
+                            sb.Append("open " + Sq(bundle) + "\n");
                         }
                         else
                         {
-                            sb.Append("cp -R \"" + root + "/.\" \"" + appDir + "/\"\n");
-                            sb.Append("chmod +x \"" + appDir + "/E-LAYER-ANALYZER\"\n");
-                            sb.Append("echo \"" + ver + "\" > \"" + appDir + "/.versione\"\n");   // per l'avvio dal pacchetto .deb
-                            sb.Append("cd \"" + appDir + "\" && nohup \"" + appDir + "/E-LAYER-ANALYZER\" >/dev/null 2>&1 &\n");
+                            sb.Append("cp -R " + Sq(root + "/.") + " " + Sq(appDir + "/") + "\n");
+                            sb.Append("chmod +x " + Sq(appDir + "/E-LAYER-ANALYZER") + "\n");
+                            sb.Append("echo " + Sq(ver) + " > " + Sq(appDir + "/.versione") + "\n");   // per l'avvio dal pacchetto .deb
+                            sb.Append("cd " + Sq(appDir) + " && nohup " + Sq(appDir + "/E-LAYER-ANALYZER") + " >/dev/null 2>&1 &\n");
                         }
                         File.WriteAllText(script, sb.ToString(), new UTF8Encoding(false));
-                        Run("chmod", "+x \"" + script + "\"");
+                        Run("chmod", "+x", script);
                     }
                     return null;
                 }
                 catch (Exception e) { return Lang.F("Aggiornamento non riuscito: {0}", e.Message); }
             });
         }
+
+        static string Sq(string x) { return "'" + (x ?? "").Replace("'", "'\\''") + "'"; }
 
         static void CopyData(string src, string dst)
         {
@@ -421,9 +436,12 @@ namespace ELA
             }
         }
 
-        static void Run(string exe, string args)
+        // argomenti passati uno per uno (nessuna interpretazione di virgolette o spazi nei percorsi)
+        static void Run(string exe, params string[] args)
         {
-            using (Process p = Process.Start(new ProcessStartInfo(exe, args) { UseShellExecute = false, CreateNoWindow = true }))
+            ProcessStartInfo si = new ProcessStartInfo(exe) { UseShellExecute = false, CreateNoWindow = true };
+            foreach (string a in args) si.ArgumentList.Add(a);
+            using (Process p = Process.Start(si))
                 p.WaitForExit(120000);
         }
 
@@ -435,7 +453,11 @@ namespace ELA
                 if (OperatingSystem.IsWindows())
                     Process.Start(new ProcessStartInfo("cmd.exe", "/c \"\"" + script + "\"\"") { UseShellExecute = false, CreateNoWindow = true, WindowStyle = ProcessWindowStyle.Hidden });
                 else
-                    Process.Start(new ProcessStartInfo("/bin/sh", "-c \"nohup '" + script + "' >/dev/null 2>&1 &\"") { UseShellExecute = false });
+                {
+                    ProcessStartInfo si = new ProcessStartInfo("/bin/sh") { UseShellExecute = false };
+                    si.ArgumentList.Add("-c"); si.ArgumentList.Add("nohup " + Sq(script) + " >/dev/null 2>&1 &");
+                    Process.Start(si);
+                }
             }
             catch { return; }
             try
