@@ -1034,3 +1034,11 @@ aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23,
 TEP IN CORSO	TEP 進行中
 TEP PROBABILE	TEP 很可能
 TEP POSSIBILE	TEP 可能
+Rimanda a PSKReporter le stazioni MS che decodifichi, se il programma digitale non lo fa	如果數位程式沒有傳送，就把解碼到的 MS 電台轉送給 PSKReporter
+Scambio cifrato con gli altri utenti di YA-MS dei messaggi MS rivolti a te	與其他 YA-MS 使用者加密交換寄給你的 MS 訊息
+Invii in rete del METEOR SCATTER	METEOR SCATTER 的網路傳送
+PSKReporter: le stazioni in MSK144, FSK441, PSK2K e JTMS ricevute via UDP si mandano col tuo nominativo come ricevitore, solo se il tuo programma digitale non manda già i suoi rapporti. Scambio: i messaggi MS fra due stazioni che decodifichi vanno, cifrati, al destinatario se usa YA-MS o E-LAYER ANALYZER, attraverso tre server MQTT pubblici; tu ricevi quelli rivolti a te. Limiti: chiunque può pubblicare una chiave falsa per un nominativo o mandare messaggi finti, e il nominativo nascosto nell'argomento si ricava da un elenco di nominativi; si tratta comunque di messaggi radio.	PSKReporter：透過 UDP 收到的 MSK144、FSK441、PSK2K 和 JTMS 電台以你的呼號作為接收方傳送，僅當你的數位程式自己沒有傳送報告時。交換：你解碼到的兩電台之間的 MS 訊息，如果收件人使用 YA-MS 或 E-LAYER ANALYZER，會經三個公開 MQTT 伺服器加密送給收件人；你會收到寄給你的訊息。限制：任何人都可以為某個呼號發布假金鑰或傳送假訊息，主題中隱藏的呼號可以用呼號清單查出；無論如何這些都是無線電訊息。
+La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento automatico non si fa. Scarica il programma dalla pagina della release.	此版本不含套件簽章：為安全起見不進行自動更新。請從版本頁面下載程式。
+La firma dei pacchetti non è valida: l'aggiornamento non si fa.	套件簽章無效：不進行更新。
+Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	下載的套件與簽章不符：不進行更新。
+Controllo della firma...	正在檢查簽章...

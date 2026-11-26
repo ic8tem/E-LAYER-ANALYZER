@@ -1035,3 +1035,11 @@ aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23,
 TEP IN CORSO	TEP IN PROGRESS
 TEP PROBABILE	TEP PROBABLE
 TEP POSSIBILE	TEP POSSIBLE
+Rimanda a PSKReporter le stazioni MS che decodifichi, se il programma digitale non lo fa	Report the MS stations you decode to PSKReporter, if your digital program does not
+Scambio cifrato con gli altri utenti di YA-MS dei messaggi MS rivolti a te	Encrypted exchange with other YA-MS users of the MS messages addressed to you
+Invii in rete del METEOR SCATTER	METEOR SCATTER network sending
+PSKReporter: le stazioni in MSK144, FSK441, PSK2K e JTMS ricevute via UDP si mandano col tuo nominativo come ricevitore, solo se il tuo programma digitale non manda già i suoi rapporti. Scambio: i messaggi MS fra due stazioni che decodifichi vanno, cifrati, al destinatario se usa YA-MS o E-LAYER ANALYZER, attraverso tre server MQTT pubblici; tu ricevi quelli rivolti a te. Limiti: chiunque può pubblicare una chiave falsa per un nominativo o mandare messaggi finti, e il nominativo nascosto nell'argomento si ricava da un elenco di nominativi; si tratta comunque di messaggi radio.	PSKReporter: stations in MSK144, FSK441, PSK2K and JTMS received via UDP are sent with your callsign as receiver, only if your digital program does not already send its own reports. Exchange: MS messages between two stations that you decode go, encrypted, to the addressee if he uses YA-MS or E-LAYER ANALYZER, through three public MQTT servers; you receive those addressed to you. Limits: anyone can publish a fake key for a callsign or send fake messages, and the callsign hidden in the topic can be recovered from a list of callsigns; in any case these are radio messages.
+La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento automatico non si fa. Scarica il programma dalla pagina della release.	The release does not contain the package signature: for safety the automatic update is not done. Download the program from the release page.
+La firma dei pacchetti non è valida: l'aggiornamento non si fa.	The package signature is not valid: the update is not done.
+Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	The downloaded package does not match the signature: the update is not done.
+Controllo della firma...	Checking the signature...

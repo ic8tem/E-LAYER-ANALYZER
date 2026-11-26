@@ -347,6 +347,20 @@ jobs:
         with:
           path: dist
           merge-multiple: true
+      - name: Firma dei pacchetti (SHA256SUMS.txt e SHA256SUMS.txt.sig, ECDSA P-256; il programma la verifica prima di aggiornarsi)
+        env:
+          FIRMA: ${{ secrets.ELA_FIRMA_CHIAVE }}
+        run: |
+          test -n "$FIRMA" || { echo "Manca il segreto ELA_FIRMA_CHIAVE: senza firma i programmi dalla 0.6.7 non si aggiornano"; exit 1; }
+          cd dist
+          rm -f SHA256SUMS.txt SHA256SUMS.txt.sig
+          sha256sum -- * > /tmp/SHA256SUMS.txt
+          mv /tmp/SHA256SUMS.txt SHA256SUMS.txt
+          umask 077; printf '%s\n' "$FIRMA" > /tmp/k.pem
+          openssl dgst -sha256 -sign /tmp/k.pem -out SHA256SUMS.txt.sig SHA256SUMS.txt
+          rm -f /tmp/k.pem
+          openssl dgst -sha256 -verify ../installer/firma_pubblica.pem -signature SHA256SUMS.txt.sig SHA256SUMS.txt
+          cat SHA256SUMS.txt
       - uses: softprops/action-gh-release@v2
         with:
           name: E-LAYER ANALYZER ${{ env.VER }}

@@ -1035,3 +1035,11 @@ aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23,
 TEP IN CORSO	TEP กำลังเกิด
 TEP PROBABILE	TEP น่าจะเกิด
 TEP POSSIBILE	TEP เป็นไปได้
+Rimanda a PSKReporter le stazioni MS che decodifichi, se il programma digitale non lo fa	ส่งสถานี MS ที่คุณถอดรหัสได้ไปยัง PSKReporter หากโปรแกรมดิจิทัลของคุณไม่ส่ง
+Scambio cifrato con gli altri utenti di YA-MS dei messaggi MS rivolti a te	แลกเปลี่ยนข้อความ MS ที่ส่งถึงคุณกับผู้ใช้ YA-MS คนอื่นแบบเข้ารหัส
+Invii in rete del METEOR SCATTER	การส่งข้อมูลทางเครือข่ายของ METEOR SCATTER
+PSKReporter: le stazioni in MSK144, FSK441, PSK2K e JTMS ricevute via UDP si mandano col tuo nominativo come ricevitore, solo se il tuo programma digitale non manda già i suoi rapporti. Scambio: i messaggi MS fra due stazioni che decodifichi vanno, cifrati, al destinatario se usa YA-MS o E-LAYER ANALYZER, attraverso tre server MQTT pubblici; tu ricevi quelli rivolti a te. Limiti: chiunque può pubblicare una chiave falsa per un nominativo o mandare messaggi finti, e il nominativo nascosto nell'argomento si ricava da un elenco di nominativi; si tratta comunque di messaggi radio.	PSKReporter: สถานี MSK144, FSK441, PSK2K และ JTMS ที่รับผ่าน UDP จะถูกส่งโดยใช้สัญญาณเรียกขานของคุณเป็นผู้รับ เฉพาะเมื่อโปรแกรมดิจิทัลของคุณยังไม่ได้ส่งรายงานเอง การแลกเปลี่ยน: ข้อความ MS ระหว่างสองสถานีที่คุณถอดรหัสได้จะถูกส่งแบบเข้ารหัสไปยังผู้รับหากเขาใช้ YA-MS หรือ E-LAYER ANALYZER ผ่านเซิร์ฟเวอร์ MQTT สาธารณะสามแห่ง คุณจะได้รับข้อความที่ส่งถึงคุณ ข้อจำกัด: ใครก็ได้สามารถเผยแพร่กุญแจปลอมของสัญญาณเรียกขานหรือส่งข้อความปลอม และสัญญาณเรียกขานที่ซ่อนในหัวข้อสามารถหาได้จากรายชื่อสัญญาณเรียกขาน อย่างไรก็ตามข้อความเหล่านี้เป็นข้อความวิทยุ
+La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento automatico non si fa. Scarica il programma dalla pagina della release.	รุ่นนี้ไม่มีลายเซ็นของแพ็กเกจ: เพื่อความปลอดภัยจึงไม่อัปเดตอัตโนมัติ ดาวน์โหลดโปรแกรมจากหน้ารุ่น
+La firma dei pacchetti non è valida: l'aggiornamento non si fa.	ลายเซ็นของแพ็กเกจไม่ถูกต้อง: ไม่อัปเดต
+Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	แพ็กเกจที่ดาวน์โหลดไม่ตรงกับลายเซ็น: ไม่อัปเดต
+Controllo della firma...	กำลังตรวจสอบลายเซ็น...

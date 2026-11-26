@@ -1035,3 +1035,11 @@ aTEP (pomeridiano): 15-19 ora locale, fino a circa 60 MHz; eTEP (serale): 20-23,
 TEP IN CORSO	TEP 진행 중
 TEP PROBABILE	TEP 유력
 TEP POSSIBILE	TEP 가능
+Rimanda a PSKReporter le stazioni MS che decodifichi, se il programma digitale non lo fa	디지털 프로그램이 보내지 않으면 디코드한 MS 국을 PSKReporter로 보내기
+Scambio cifrato con gli altri utenti di YA-MS dei messaggi MS rivolti a te	나에게 온 MS 메시지를 다른 YA-MS 사용자와 암호화하여 교환
+Invii in rete del METEOR SCATTER	METEOR SCATTER 네트워크 전송
+PSKReporter: le stazioni in MSK144, FSK441, PSK2K e JTMS ricevute via UDP si mandano col tuo nominativo come ricevitore, solo se il tuo programma digitale non manda già i suoi rapporti. Scambio: i messaggi MS fra due stazioni che decodifichi vanno, cifrati, al destinatario se usa YA-MS o E-LAYER ANALYZER, attraverso tre server MQTT pubblici; tu ricevi quelli rivolti a te. Limiti: chiunque può pubblicare una chiave falsa per un nominativo o mandare messaggi finti, e il nominativo nascosto nell'argomento si ricava da un elenco di nominativi; si tratta comunque di messaggi radio.	PSKReporter: UDP로 받은 MSK144, FSK441, PSK2K, JTMS 국은 디지털 프로그램이 직접 보고를 보내지 않을 때만 내 호출부호를 수신국으로 하여 보냅니다. 교환: 내가 디코드한 두 국 사이의 MS 메시지는 수신자가 YA-MS 또는 E-LAYER ANALYZER를 쓰면 세 개의 공개 MQTT 서버를 거쳐 암호화되어 수신자에게 갑니다. 나에게 온 메시지는 내가 받습니다. 한계: 누구나 어떤 호출부호의 가짜 키를 공개하거나 가짜 메시지를 보낼 수 있고, 토픽에 숨긴 호출부호는 호출부호 목록으로 알아낼 수 있습니다. 어쨌든 무선 메시지입니다.
+La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento automatico non si fa. Scarica il programma dalla pagina della release.	릴리스에 패키지 서명이 없습니다. 안전을 위해 자동 업데이트를 하지 않습니다. 릴리스 페이지에서 프로그램을 내려받으세요.
+La firma dei pacchetti non è valida: l'aggiornamento non si fa.	패키지 서명이 유효하지 않습니다. 업데이트를 하지 않습니다.
+Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	내려받은 패키지가 서명과 일치하지 않습니다. 업데이트를 하지 않습니다.
+Controllo della firma...	서명 확인 중...

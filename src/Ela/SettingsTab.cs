@@ -138,6 +138,24 @@ namespace ELA
             root.Children.Add(Section(Lang.T("Allerta F.A.I."), Pal.Orange, cFai,
                 Txt(Lang.T("Regole dell'articolo IC8FAX-IC8TEM (2011): da maggio a settembre, fra le 18 e le 24 ora locale, dopo una nube Es in 50, 70 o 144 MHz a 300-1300 km dalla tua stazione, se la linea di massima ricezione passa dove ci sono stazioni. F.A.I. in corso: spot F.A.I. negli ultimi 30 minuti."), true)));
 
+            // invii in rete della parte YA-MS (attivi di partenza, scelta dell'autore del 26/11/2026; impostazioni in config.ini)
+            Config yc = MsCollector.Cfg;
+            CheckBox cRel = Ui.C(Lang.T("Rimanda a PSKReporter le stazioni MS che decodifichi, se il programma digitale non lo fa"), yc == null || yc.GetB("psk_rimando", true));
+            cRel.IsCheckedChanged += (s, e) =>
+            {
+                PskRelay.Enabled = cRel.IsChecked == true;
+                if (MsCollector.Cfg != null) { MsCollector.Cfg.Set("psk_rimando", PskRelay.Enabled); MsCollector.Cfg.Save(); }
+            };
+            CheckBox cShare = Ui.C(Lang.T("Scambio cifrato con gli altri utenti di YA-MS dei messaggi MS rivolti a te"), yc == null || yc.GetB("yams_scambio", true));
+            cShare.IsCheckedChanged += (s, e) =>
+            {
+                YamsShare.Enabled = cShare.IsChecked == true;
+                if (YamsShare.Enabled) YamsShare.Start(MsCollector.DataDir ?? AppPaths.DataDir); else YamsShare.Stop();
+                if (MsCollector.Cfg != null) { MsCollector.Cfg.Set("yams_scambio", YamsShare.Enabled); MsCollector.Cfg.Save(); }
+            };
+            root.Children.Add(Section(Lang.T("Invii in rete del METEOR SCATTER"), Pal.Azure, cRel, cShare,
+                Txt(Lang.T("PSKReporter: le stazioni in MSK144, FSK441, PSK2K e JTMS ricevute via UDP si mandano col tuo nominativo come ricevitore, solo se il tuo programma digitale non manda già i suoi rapporti. Scambio: i messaggi MS fra due stazioni che decodifichi vanno, cifrati, al destinatario se usa YA-MS o E-LAYER ANALYZER, attraverso tre server MQTT pubblici; tu ricevi quelli rivolti a te. Limiti: chiunque può pubblicare una chiave falsa per un nominativo o mandare messaggi finti, e il nominativo nascosto nell'argomento si ricava da un elenco di nominativi; si tratta comunque di messaggi radio."), true)));
+
             // aggiornamenti
             CheckBox cChk = Ui.C(Lang.T("Controlla gli aggiornamenti all'avvio e ogni 30 minuti"), Station.Cfg.GetB("agg_controlla", true));
             CheckBox cAuto = Ui.C(Lang.T("Aggiornamento automatico e silenzioso: scarica e installa la nuova versione senza chiedere"), Station.Cfg.GetB("agg_automatici", true));

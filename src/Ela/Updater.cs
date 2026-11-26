@@ -123,6 +123,44 @@ namespace ELA
             return "-linux-x64-portatile.tar.gz";
         }
 
+        // ---------- firma dei pacchetti (richiesta dell'autore, 26/11/2026)
+        // La compilazione su GitHub firma l'elenco SHA256SUMS.txt dei pacchetti con una chiave ECDSA P-256 che resta nei
+        // segreti del repository (SHA256SUMS.txt.sig); qui c'e' solo la chiave pubblica. Prima di installare si controllano
+        // la firma dell'elenco e l'impronta SHA-256 del pacchetto scaricato: se non tornano, niente aggiornamento.
+        public const string SignPublicKey = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEDJm6qswCcveM9PRkjWBvia/oV/YBQ65UqO4UVaCEjaCz1lQe11tPBtKoK2D15AbY2klESz1oInvXB6S1jano+g==";
+
+        static string AssetUrl(string name)
+        {
+            foreach (KeyValuePair<string, string> kv in assets) if (kv.Key == name) return kv.Value;
+            return null;
+        }
+
+        // null se il pacchetto e' firmato e integro, altrimenti il messaggio d'errore
+        static async Task<string> CheckSignature(HttpClient h, string pkgName, string pkgPath)
+        {
+            string su = AssetUrl("SHA256SUMS.txt"), gu = AssetUrl("SHA256SUMS.txt.sig");
+            if (su == null || gu == null) return Lang.T("La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento automatico non si fa. Scarica il programma dalla pagina della release.");
+            byte[] sums = await h.GetByteArrayAsync(su), sig = await h.GetByteArrayAsync(gu);
+            bool ok;
+            using (System.Security.Cryptography.ECDsa k = System.Security.Cryptography.ECDsa.Create())
+            {
+                k.ImportSubjectPublicKeyInfo(Convert.FromBase64String(SignPublicKey), out _);
+                ok = k.VerifyData(sums, sig, System.Security.Cryptography.HashAlgorithmName.SHA256, System.Security.Cryptography.DSASignatureFormat.Rfc3279DerSequence);
+            }
+            if (!ok) return Lang.T("La firma dei pacchetti non è valida: l'aggiornamento non si fa.");
+            string want = null;
+            foreach (string line in Encoding.UTF8.GetString(sums).Split('\n'))
+            {
+                string t = line.Trim();
+                int sp = t.IndexOf(' ');
+                if (sp == 64 && t.Substring(sp).Trim().TrimStart('*') == pkgName) { want = t.Substring(0, 64).ToLowerInvariant(); break; }
+            }
+            if (want == null) return Lang.T("La firma dei pacchetti non è valida: l'aggiornamento non si fa.");
+            string got;
+            using (FileStream f = File.OpenRead(pkgPath)) got = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(f)).ToLowerInvariant();
+            return got == want ? null : Lang.T("Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.");
+        }
+
         static string FindAsset(out string name)
         {
             string suf = AssetSuffix();
@@ -349,6 +387,10 @@ namespace ELA
                             }
                         }
                     }
+                    say(Lang.T("Controllo della firma..."));
+                    string serr;
+                    using (HttpClient h = NewClient(2)) serr = await CheckSignature(h, name, pkg);
+                    if (serr != null) { try { File.Delete(pkg); } catch { } return serr; }
                     say(Lang.T("Estrazione dei file..."));
                     string ex = Path.Combine(work, "nuovo");
                     Directory.CreateDirectory(ex);

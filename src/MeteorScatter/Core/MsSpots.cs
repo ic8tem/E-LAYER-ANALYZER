@@ -397,8 +397,12 @@ namespace YAMS
         static readonly object lk = new object();
         static bool hooked;
 
+        public static Config Cfg;   // impostazioni di YA-MS (config.ini), anche per le caselle di E-LAYER ANALYZER
+        public static string DataDir;
+
         public static void Init(string dataDir, Config cfg)
         {
+            Cfg = cfg; DataDir = dataDir;
             Dir = Path.Combine(dataDir, "spot_ms");
             try { Directory.CreateDirectory(Dir); } catch { }
             if (!hooked)
