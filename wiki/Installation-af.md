@@ -49,3 +49,13 @@ Installeer die nuwe weergawe oor die ou een: instellings, versamelde spots, logs
 - Internetverbinding vir die kaart (Natural Earth, by die eerste opstart), die NOAA-auroradata, die YA-MS-radars en die telnet-sessies.
 - Raspberry Pi Zero en Pi 1 word nie ondersteun nie (hul verwerkers word nie deur .NET hanteer nie).
 - Daar is geen weergawes vir Linux i686 (32-bis-rekenaars) en OpenBSD nie, omdat .NET nie vir daardie stelsels bestaan nie. Vir FreeBSD is daar net die eksperimentele pakket.
+
+## Netwerkverbindings en sekuriteit
+
+- **Opdaterings:** die program lees die GitHub-vrystellings by die begin en elke 30 minute. Vanaf 0.6.7 installeer dit net pakkette wat deur die outeur onderteken is (`SHA256SUMS.txt.sig`, ECDSA-handtekening) en met die regte vingerafdruk.
+- **Data wat net gelees word (HTTPS):** NOAA, GIRO-ionosondes, N0NBH, BOM, IGRF-model, kaarte, meteoorradars, CALL3; vir ontbrekende lokators word die roepseine wat opgesoek moet word na G7VRD gestuur.
+- **Telnet-klusters en APRS-IS:** net jou roepsein en die filteropdragte, onversleutel soos hierdie dienste vereis.
+- **PSKReporter:** lees van die spots; daarbenewens stuur die program die MS-stasies wat jy dekodeer, met jou roepsein, as jou digitale program dit nie doen nie (by verstek aan, merkblokkie in INSTELLINGS).
+- **YA-MS-uitruil:** MS-boodskappe aan ander gebruikers gaan geënkripteer deur drie openbare MQTT-bedieners (by verstek aan, merkblokkie in INSTELLINGS). Enigiemand kan vals sleutels of boodskappe publiseer: dit is in elk geval radioboodskappe.
+- **LoTW:** gebruikersnaam en wagwoord net oor HTTPS; die wagwoord word nie gestoor nie.
+- **WSJT-X, JTDX, MSHV:** UDP-ontvangs by verstek net van jou eie rekenaar (127.0.0.1). Die program maak geen poorte na die internet oop nie en stuur geen data aan die outeur nie.

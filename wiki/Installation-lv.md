@@ -49,3 +49,13 @@ Instalē jauno versiju virs vecās: iestatījumi, savāktie spoti, žurnāli un 
 - Interneta savienojums kartei (Natural Earth, pirmajā palaišanā), NOAA auroras datiem, YA-MS radariem un telnet sesijām.
 - Raspberry Pi Zero un Pi 1 netiek atbalstīti (.NET neatbalsta to procesorus).
 - Versiju Linux i686 (32 bitu datoriem) un OpenBSD nav, jo .NET šīm sistēmām neeksistē. FreeBSD ir tikai eksperimentālā pakotne.
+
+## Tīkla savienojumi un drošība
+
+- **Atjauninājumi:** programma lasa GitHub laidienus palaišanas brīdī un ik pēc 30 minūtēm. Kopš 0.6.7 tā instalē tikai autora parakstītas pakotnes (`SHA256SUMS.txt.sig`, ECDSA paraksts) ar pareizo pirkstu nospiedumu.
+- **Tikai lasāmi dati (HTTPS):** NOAA, GIRO jonozondes, N0NBH, BOM, IGRF modelis, kartes, meteoru radari, CALL3; trūkstošajiem lokatoriem meklējamie izsaukuma signāli tiek sūtīti uz G7VRD.
+- **Telnet klasteri un APRS-IS:** tikai jūsu izsaukuma signāls un filtra komandas, nešifrēti, kā to paredz šie pakalpojumi.
+- **PSKReporter:** punktu lasīšana; turklāt programma sūta jūsu dekodētās MS stacijas ar jūsu izsaukuma signālu, ja jūsu digitālā programma to nedara (ieslēgts pēc noklusējuma, izvēles rūtiņa IESTATĪJUMOS).
+- **YA-MS apmaiņa:** citiem lietotājiem adresētie MS ziņojumi ceļo šifrēti caur trim publiskiem MQTT serveriem (ieslēgts pēc noklusējuma, izvēles rūtiņa IESTATĪJUMOS). Jebkurš varētu publicēt viltotas atslēgas vai ziņojumus: tie tomēr ir radio ziņojumi.
+- **LoTW:** lietotājvārds un parole tikai caur HTTPS; parole netiek saglabāta.
+- **WSJT-X, JTDX, MSHV:** UDP uztveršana pēc noklusējuma tikai no jūsu datora (127.0.0.1). Programma neatver portus uz internetu un nesūta datus autoram.

@@ -49,3 +49,13 @@ Installeer de nieuwe versie over de oude heen: instellingen, verzamelde spots, l
 - Internetverbinding voor de kaart (Natural Earth, bij de eerste start), de aurora-gegevens van NOAA, de radars van YA-MS en de telnet-sessies.
 - Raspberry Pi Zero en Pi 1 worden niet ondersteund (hun processors worden door .NET niet ondersteund).
 - Er zijn geen versies voor Linux i686 (32-bit pc's) en OpenBSD, omdat .NET voor die systemen niet bestaat. Voor FreeBSD is er alleen het experimentele pakket.
+
+## Netwerkverbindingen en beveiliging
+
+- **Updates:** het programma leest de GitHub-releases bij het starten en elke 30 minuten. Vanaf 0.6.7 installeert het alleen pakketten die door de auteur ondertekend zijn (`SHA256SUMS.txt.sig`, ECDSA-handtekening) en met de juiste vingerafdruk.
+- **Alleen gelezen gegevens (HTTPS):** NOAA, GIRO-ionosondes, N0NBH, BOM, IGRF-model, kaarten, meteorradars, CALL3; voor ontbrekende locators worden de te zoeken roepnamen naar G7VRD gestuurd.
+- **Telnet-clusters en APRS-IS:** alleen je roepnaam en de filteropdrachten, onversleuteld zoals deze diensten voorschrijven.
+- **PSKReporter:** lezen van de spots; daarnaast meldt het programma de MS-stations die je decodeert, met jouw roepnaam, als je digitale programma dat niet doet (standaard aan, vakje in INSTELLINGEN).
+- **YA-MS-uitwisseling:** MS-berichten voor andere gebruikers gaan versleuteld via drie openbare MQTT-servers (standaard aan, vakje in INSTELLINGEN). Iedereen kan valse sleutels of berichten publiceren: het blijven radioberichten.
+- **LoTW:** gebruikersnaam en wachtwoord alleen via HTTPS; het wachtwoord wordt niet opgeslagen.
+- **WSJT-X, JTDX, MSHV:** UDP-ontvangst standaard alleen van je eigen computer (127.0.0.1). Het programma opent geen poorten naar internet en stuurt geen gegevens naar de auteur.

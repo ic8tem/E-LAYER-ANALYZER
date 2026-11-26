@@ -49,3 +49,13 @@ I-install ang bagong bersyon sa ibabaw ng luma: pinananatili ang mga setting, na
 - Koneksiyon sa internet para sa mapa (Natural Earth, sa unang pagsisimula), ang datos ng aurora ng NOAA, ang mga radar ng YA-MS at ang mga telnet session.
 - Hindi suportado ang Raspberry Pi Zero at Pi 1 (hindi hinahawakan ng .NET ang kanilang mga processor).
 - Walang bersiyon para sa Linux i686 (mga PC na 32-bit) at OpenBSD, dahil walang .NET para sa mga sistemang iyon. Eksperimental na package lamang ang mayroon para sa FreeBSD.
+
+## Mga koneksyon sa network at seguridad
+
+- **Mga update:** binabasa ng programa ang mga Release sa GitHub sa pagsisimula at tuwing 30 minuto. Mula 0.6.7, nag-i-install lamang ito ng mga package na nilagdaan ng may-akda (`SHA256SUMS.txt.sig`, lagdang ECDSA) at may tamang fingerprint.
+- **Datos na binabasa lamang (HTTPS):** NOAA, mga ionosonde ng GIRO, N0NBH, BOM, modelong IGRF, mga mapa, mga radar ng meteor, CALL3; para sa mga nawawalang locator, ipinapadala sa G7VRD ang mga callsign na hahanapin.
+- **Mga telnet cluster at APRS-IS:** ang iyong callsign at ang mga utos ng filter lamang, walang encryption gaya ng hinihingi ng mga serbisyong ito.
+- **PSKReporter:** pagbasa ng mga spot; bukod dito ipinapadala ng programa ang mga istasyong MS na na-decode mo, gamit ang iyong callsign, kung hindi ito ginagawa ng iyong digital na programa (naka-on bilang default, checkbox sa MGA SETTING).
+- **Palitan sa YA-MS:** ang mga mensaheng MS para sa ibang gumagamit ay naglalakbay nang naka-encrypt sa tatlong pampublikong MQTT server (naka-on bilang default, checkbox sa MGA SETTING). Kahit sino ay maaaring maglathala ng pekeng susi o mensahe: gayunpaman, mga mensahe ito sa radyo.
+- **LoTW:** username at password sa HTTPS lamang; hindi sine-save ang password.
+- **WSJT-X, JTDX, MSHV:** pagtanggap sa UDP bilang default mula lamang sa sarili mong computer (127.0.0.1). Hindi nagbubukas ang programa ng anumang port papunta sa internet at hindi nagpapadala ng datos sa may-akda.

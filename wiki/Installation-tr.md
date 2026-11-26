@@ -49,3 +49,13 @@ Yeni sürümü eskisinin üzerine kurun: ayarlar, toplanan spot'lar, loglar ve `
 - Harita (Natural Earth, ilk açılışta), NOAA aurora verileri, YA-MS radarları ve telnet oturumları için internet bağlantısı.
 - Raspberry Pi Zero ve Pi 1 desteklenmez (işlemcileri .NET tarafından desteklenmez).
 - Linux i686 (32 bit PC) ve OpenBSD için sürüm yoktur, çünkü bu sistemler için .NET bulunmaz. FreeBSD için yalnızca deneysel paket vardır.
+
+## Ağ bağlantıları ve güvenlik
+
+- **Güncellemeler:** program GitHub sürümlerini açılışta ve her 30 dakikada bir okur. 0.6.7'den itibaren yalnızca yazar tarafından imzalanmış (`SHA256SUMS.txt.sig`, ECDSA imzası) ve parmak izi doğru paketleri kurar.
+- **Yalnızca okunan veriler (HTTPS):** NOAA, GIRO iyonosondaları, N0NBH, BOM, IGRF modeli, haritalar, meteor radarları, CALL3; eksik lokatörler için aranacak çağrı işaretleri G7VRD'ye gönderilir.
+- **Telnet cluster'ları ve APRS-IS:** yalnızca çağrı işaretin ve filtre komutları, bu hizmetlerin öngördüğü gibi şifresiz.
+- **PSKReporter:** spotların okunması; ayrıca dijital programın yapmıyorsa program çözdüğün MS istasyonlarını senin çağrı işaretinle gönderir (varsayılan olarak açık, AYARLAR'da onay kutusu).
+- **YA-MS değişimi:** diğer kullanıcılara giden MS mesajları üç herkese açık MQTT sunucusu üzerinden şifreli gider (varsayılan olarak açık, AYARLAR'da onay kutusu). Herkes sahte anahtar veya mesaj yayımlayabilir: yine de bunlar radyo mesajlarıdır.
+- **LoTW:** kullanıcı adı ve parola yalnızca HTTPS ile; parola kaydedilmez.
+- **WSJT-X, JTDX, MSHV:** UDP alımı varsayılan olarak yalnızca kendi bilgisayarından (127.0.0.1). Program internete port açmaz ve yazara veri göndermez.

@@ -49,3 +49,13 @@ Installez la nouvelle version par-dessus l'ancienne : les réglages, les spots c
 - Connexion internet pour la carte (Natural Earth, au premier démarrage), les données d'aurore de la NOAA, les radars de YA-MS et les sessions telnet.
 - Les Raspberry Pi Zero et Pi 1 ne sont pas pris en charge (leurs processeurs ne sont pas gérés par .NET).
 - Il n'existe pas de version pour Linux i686 (PC 32 bits) ni pour OpenBSD, car .NET n'existe pas pour ces systèmes. FreeBSD n'a que le paquet expérimental.
+
+## Connexions réseau et sécurité
+
+- **Mises à jour :** le programme lit les Releases de GitHub au démarrage et toutes les 30 minutes. Depuis la 0.6.7 il n'installe que des paquets signés par l'auteur (`SHA256SUMS.txt.sig`, signature ECDSA) et avec la bonne empreinte.
+- **Données en lecture seule (HTTPS) :** NOAA, ionosondes GIRO, N0NBH, BOM, modèle IGRF, cartes, radars météoriques, CALL3 ; pour les locators manquants, les indicatifs à chercher sont envoyés à G7VRD.
+- **Clusters telnet et APRS-IS :** seulement ton indicatif et les commandes du filtre, en clair comme le prévoient ces services.
+- **PSKReporter :** lecture des spots ; en plus le programme renvoie les stations MS que tu décodes, avec ton indicatif, si ton programme numérique ne le fait pas (actif par défaut, case dans RÉGLAGES).
+- **Échange YA-MS :** les messages MS adressés à d'autres utilisateurs passent chiffrés par trois serveurs MQTT publics (actif par défaut, case dans RÉGLAGES). N'importe qui pourrait publier de fausses clés ou de faux messages : ce sont de toute façon des messages radio.
+- **LoTW :** nom d'utilisateur et mot de passe seulement en HTTPS ; le mot de passe n'est pas enregistré.
+- **WSJT-X, JTDX, MSHV :** réception UDP par défaut seulement depuis ton ordinateur (127.0.0.1). Le programme n'ouvre aucun port vers internet et n'envoie aucune donnée à l'auteur.

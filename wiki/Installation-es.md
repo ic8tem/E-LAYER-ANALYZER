@@ -49,3 +49,13 @@ Instala la nueva versión encima de la anterior: se conservan los ajustes, los s
 - Conexión a internet para el mapa (Natural Earth, en el primer arranque), los datos de aurora de NOAA, los radares de YA-MS y las sesiones telnet.
 - La Raspberry Pi Zero y la Pi 1 no son compatibles (.NET no admite sus procesadores).
 - No hay versiones para Linux i686 (PC de 32 bits) ni para OpenBSD, porque .NET no existe para esos sistemas. FreeBSD tiene solo el paquete experimental.
+
+## Conexiones de red y seguridad
+
+- **Actualizaciones:** el programa lee las Releases de GitHub al arrancar y cada 30 minutos. Desde la 0.6.7 solo instala paquetes firmados por el autor (`SHA256SUMS.txt.sig`, firma ECDSA) y con la huella correcta.
+- **Datos de solo lectura (HTTPS):** NOAA, ionosondas GIRO, N0NBH, BOM, modelo IGRF, mapas, radares de meteoros, CALL3; para los locators que faltan se envían a G7VRD los indicativos que hay que buscar.
+- **Clústeres telnet y APRS-IS:** solo tu indicativo y los comandos del filtro, en claro como prevén estos servicios.
+- **PSKReporter:** lectura de los spots; además el programa reenvía las estaciones MS que decodificas, con tu indicativo, si tu programa digital no lo hace (activo por defecto, casilla en AJUSTES).
+- **Intercambio YA-MS:** los mensajes MS dirigidos a otros usuarios viajan cifrados por tres servidores MQTT públicos (activo por defecto, casilla en AJUSTES). Cualquiera podría publicar claves o mensajes falsos: de todos modos son mensajes de radio.
+- **LoTW:** usuario y contraseña solo por HTTPS; la contraseña no se guarda.
+- **WSJT-X, JTDX, MSHV:** recepción UDP por defecto solo desde tu ordenador (127.0.0.1). El programa no abre puertos hacia internet y no envía datos al autor.

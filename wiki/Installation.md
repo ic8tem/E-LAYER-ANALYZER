@@ -49,3 +49,13 @@ Install the new version over the old one: settings, collected spots, logs and `c
 - Internet connection for the map (Natural Earth, on first start), the NOAA aurora data, the YA-MS radars and the telnet sessions.
 - Raspberry Pi Zero and Pi 1 are not supported (their processors are not handled by .NET).
 - There are no versions for Linux i686 (32-bit PCs) and OpenBSD, because .NET does not exist for those systems. FreeBSD has only the experimental package.
+
+## Network connections and security
+
+- **Updates:** the program reads the GitHub Releases at start-up and every 30 minutes. From 0.6.7 it installs only packages signed by the author (`SHA256SUMS.txt.sig`, ECDSA signature) and with the right fingerprint.
+- **Read-only data (HTTPS):** NOAA, GIRO ionosondes, N0NBH, BOM, IGRF model, maps, meteor radars, CALL3; for missing locators the callsigns to look up are sent to G7VRD.
+- **Telnet clusters and APRS-IS:** only your callsign and the filter commands, in clear text as these services require.
+- **PSKReporter:** reading of the spots; in addition the program reports the MS stations you decode, with your callsign, if your digital program does not (on by default, check box in SETTINGS).
+- **YA-MS exchange:** MS messages addressed to other users travel encrypted through three public MQTT servers (on by default, check box in SETTINGS). Anyone could publish fake keys or messages: they are radio messages anyway.
+- **LoTW:** user name and password only over HTTPS; the password is not saved.
+- **WSJT-X, JTDX, MSHV:** UDP reception only from your own computer (127.0.0.1) by default. The program opens no ports towards the internet and sends no data to the author.

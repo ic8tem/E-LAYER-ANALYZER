@@ -49,3 +49,13 @@ Telepítse az új verziót a régire: a beállítások, a gyűjtött spotok, a n
 - Internetkapcsolat a térképhez (Natural Earth, első indításkor), a NOAA aurora-adataihoz, a YA-MS radarjaihoz és a telnet-kapcsolatokhoz.
 - A Raspberry Pi Zero és a Pi 1 nem támogatott (processzorukat a .NET nem kezeli).
 - Linux i686-ra (32 bites PC-k) és OpenBSD-re nincs változat, mert ezekre a rendszerekre nincs .NET. FreeBSD-re csak a kísérleti csomag van.
+
+## Hálózati kapcsolatok és biztonság
+
+- **Frissítések:** a program induláskor és 30 percenként beolvassa a GitHub kiadásait. A 0.6.7-től csak a szerző által aláírt (`SHA256SUMS.txt.sig`, ECDSA aláírás) és helyes ujjlenyomatú csomagokat telepít.
+- **Csak olvasott adatok (HTTPS):** NOAA, GIRO ionoszondák, N0NBH, BOM, IGRF-modell, térképek, meteorradarok, CALL3; a hiányzó lokátorokhoz a keresett hívójeleket a G7VRD-nek küldi.
+- **Telnet-clusterek és APRS-IS:** csak a hívójeled és a szűrőparancsok, titkosítás nélkül, ahogy ezek a szolgáltatások előírják.
+- **PSKReporter:** a spotok olvasása; ezenkívül a program továbbítja a dekódolt MS-állomásokat a hívójeleddel, ha a digitális programod nem teszi (alapból bekapcsolva, jelölőnégyzet a BEÁLLÍTÁSOKBAN).
+- **YA-MS csere:** a más felhasználóknak szóló MS-üzenetek titkosítva mennek három nyilvános MQTT-szerveren át (alapból bekapcsolva, jelölőnégyzet a BEÁLLÍTÁSOKBAN). Bárki közzétehetne hamis kulcsokat vagy üzeneteket: ezek mindenesetre rádióüzenetek.
+- **LoTW:** felhasználónév és jelszó csak HTTPS-en; a jelszót nem menti.
+- **WSJT-X, JTDX, MSHV:** UDP-vétel alapból csak a saját számítógépedről (127.0.0.1). A program nem nyit portot az internet felé, és nem küld adatot a szerzőnek.

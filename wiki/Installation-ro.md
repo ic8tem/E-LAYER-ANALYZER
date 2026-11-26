@@ -49,3 +49,13 @@ Instalează noua versiune peste cea veche: setările, spoturile colectate, logur
 - Conexiune la internet pentru hartă (Natural Earth, la prima pornire), datele de auroră NOAA, radarele YA-MS și sesiunile telnet.
 - Raspberry Pi Zero și Pi 1 nu sunt suportate (procesoarele lor nu sunt suportate de .NET).
 - Nu există versiuni pentru Linux i686 (PC-uri pe 32 de biți) și OpenBSD, pentru că .NET nu există pentru aceste sisteme. Pentru FreeBSD există doar pachetul experimental.
+
+## Conexiuni de rețea și securitate
+
+- **Actualizări:** programul citește Release-urile de pe GitHub la pornire și la fiecare 30 de minute. De la 0.6.7 instalează doar pachete semnate de autor (`SHA256SUMS.txt.sig`, semnătură ECDSA) și cu amprenta corectă.
+- **Date doar citite (HTTPS):** NOAA, ionosonde GIRO, N0NBH, BOM, modelul IGRF, hărți, radare de meteori, CALL3; pentru locatoarele lipsă se trimit la G7VRD indicativele de căutat.
+- **Clustere telnet și APRS-IS:** doar indicativul tău și comenzile filtrului, în clar cum prevăd aceste servicii.
+- **PSKReporter:** citirea spoturilor; în plus programul retrimite stațiile MS pe care le decodezi, cu indicativul tău, dacă programul tău digital nu o face (activ implicit, casetă în SETĂRI).
+- **Schimb YA-MS:** mesajele MS adresate altor utilizatori circulă criptate prin trei servere MQTT publice (activ implicit, casetă în SETĂRI). Oricine ar putea publica chei sau mesaje false: sunt oricum mesaje radio.
+- **LoTW:** utilizator și parolă doar prin HTTPS; parola nu se salvează.
+- **WSJT-X, JTDX, MSHV:** recepție UDP implicit doar de pe calculatorul tău (127.0.0.1). Programul nu deschide porturi spre internet și nu trimite date autorului.

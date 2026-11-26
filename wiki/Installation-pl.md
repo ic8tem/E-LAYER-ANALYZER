@@ -49,3 +49,13 @@ Zainstaluj nową wersję na starej: ustawienia, zebrane spoty, logi i `call3.txt
 - Połączenie z internetem dla mapy (Natural Earth, przy pierwszym uruchomieniu), danych zorzowych NOAA, radarów YA-MS i sesji telnet.
 - Raspberry Pi Zero i Pi 1 nie są obsługiwane (ich procesory nie są obsługiwane przez .NET).
 - Nie ma wersji dla Linux i686 (32-bitowe komputery PC) ani OpenBSD, ponieważ .NET nie istnieje dla tych systemów. FreeBSD ma tylko pakiet eksperymentalny.
+
+## Połączenia sieciowe i bezpieczeństwo
+
+- **Aktualizacje:** program odczytuje wydania z GitHub przy starcie i co 30 minut. Od wersji 0.6.7 instaluje tylko pakiety podpisane przez autora (`SHA256SUMS.txt.sig`, podpis ECDSA) i z właściwym odciskiem.
+- **Dane tylko do odczytu (HTTPS):** NOAA, jonosondy GIRO, N0NBH, BOM, model IGRF, mapy, radary meteorowe, CALL3; dla brakujących lokatorów wyszukiwane znaki wysyłane są do G7VRD.
+- **Klastry telnet i APRS-IS:** tylko twój znak i polecenia filtra, otwartym tekstem, jak przewidują te usługi.
+- **PSKReporter:** odczyt spotów; dodatkowo program przesyła dekodowane przez ciebie stacje MS z twoim znakiem, jeśli twój program cyfrowy tego nie robi (domyślnie włączone, pole wyboru w USTAWIENIACH).
+- **Wymiana YA-MS:** wiadomości MS skierowane do innych użytkowników idą zaszyfrowane przez trzy publiczne serwery MQTT (domyślnie włączone, pole wyboru w USTAWIENIACH). Każdy mógłby opublikować fałszywe klucze lub wiadomości: to jednak wiadomości radiowe.
+- **LoTW:** nazwa użytkownika i hasło tylko przez HTTPS; hasło nie jest zapisywane.
+- **WSJT-X, JTDX, MSHV:** odbiór UDP domyślnie tylko z twojego komputera (127.0.0.1). Program nie otwiera portów do internetu i nie wysyła danych autorowi.

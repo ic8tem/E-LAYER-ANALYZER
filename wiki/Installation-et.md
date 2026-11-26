@@ -49,3 +49,13 @@ Paigalda uus versioon vana peale: seaded, kogutud spotid, logid ja `call3.txt` s
 - Internetiühendus on vajalik kaardi (Natural Earth, esimesel käivitusel), NOAA aurora andmete, YA-MS-i radarite ja telneti seansside jaoks.
 - Raspberry Pi Zero ja Pi 1 ei ole toetatud (.NET ei toeta nende protsessoreid).
 - Linux i686 (32-bitised arvutid) ja OpenBSD jaoks versioone pole, sest .NET-i nende süsteemide jaoks ei ole olemas. FreeBSD jaoks on ainult eksperimentaalne pakett.
+
+## Võrguühendused ja turvalisus
+
+- **Uuendused:** programm loeb GitHubi väljalaskeid käivitamisel ja iga 30 minuti järel. Alates 0.6.7 paigaldab see ainult autori allkirjastatud pakette (`SHA256SUMS.txt.sig`, ECDSA allkiri) õige sõrmejäljega.
+- **Ainult loetavad andmed (HTTPS):** NOAA, GIRO ionosondid, N0NBH, BOM, IGRF mudel, kaardid, meteoorradarid, CALL3; puuduvate lokaatorite jaoks saadetakse otsitavad kutsungid G7VRD-le.
+- **Telnet-klastrid ja APRS-IS:** ainult sinu kutsung ja filtrikäsud, krüpteerimata, nagu need teenused ette näevad.
+- **PSKReporter:** spottide lugemine; lisaks saadab programm sinu dekodeeritud MS-jaamad sinu kutsungiga, kui sinu digiprogramm seda ei tee (vaikimisi sees, märkeruut SEADETES).
+- **YA-MS vahetus:** teistele kasutajatele suunatud MS-sõnumid liiguvad krüpteeritult kolme avaliku MQTT-serveri kaudu (vaikimisi sees, märkeruut SEADETES). Igaüks võib avaldada võltsvõtmeid või -sõnumeid: need on igal juhul raadiosõnumid.
+- **LoTW:** kasutajanimi ja parool ainult HTTPS-i kaudu; parooli ei salvestata.
+- **WSJT-X, JTDX, MSHV:** UDP vastuvõtt vaikimisi ainult sinu enda arvutist (127.0.0.1). Programm ei ava internetti ühtegi porti ega saada autorile andmeid.

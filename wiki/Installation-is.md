@@ -49,3 +49,13 @@ Settu nýju útgáfuna upp yfir þá gömlu: stillingar, söfnuð spot, dagbæku
 - Nettenging fyrir kortið (Natural Earth, við fyrstu ræsingu), norðurljósagögn NOAA, ratsjár YA-MS og telnet-loturnar.
 - Raspberry Pi Zero og Pi 1 eru ekki studd (.NET styður ekki örgjörva þeirra).
 - Engar útgáfur eru til fyrir Linux i686 (32 bita PC-tölvur) og OpenBSD, því .NET er ekki til fyrir þau kerfi. Fyrir FreeBSD er aðeins tilraunapakkinn.
+
+## Nettengingar og öryggi
+
+- **Uppfærslur:** forritið les útgáfur á GitHub við ræsingu og á 30 mínútna fresti. Frá 0.6.7 setur það aðeins upp pakka undirritaða af höfundi (`SHA256SUMS.txt.sig`, ECDSA-undirskrift) með réttu fingrafari.
+- **Gögn sem aðeins eru lesin (HTTPS):** NOAA, GIRO-jónsjár, N0NBH, BOM, IGRF-líkan, kort, loftsteinaratsjár, CALL3; fyrir vantandi reitakóða eru kallmerkin sem leita á send til G7VRD.
+- **Telnet-klasar og APRS-IS:** aðeins kallmerki þitt og síuskipanir, ódulkóðað eins og þessar þjónustur gera ráð fyrir.
+- **PSKReporter:** lestur blettanna; auk þess sendir forritið MS-stöðvarnar sem þú afkóðar, með kallmerki þínu, ef stafræna forritið þitt gerir það ekki (virkt sjálfgefið, gátreitur í STILLINGUM).
+- **YA-MS-skipti:** MS-skilaboð til annarra notenda fara dulkóðuð um þrjá opinbera MQTT-þjóna (virkt sjálfgefið, gátreitur í STILLINGUM). Hver sem er gæti birt falska lykla eða skilaboð: þetta eru hvort sem er útvarpsskilaboð.
+- **LoTW:** notandanafn og lykilorð aðeins um HTTPS; lykilorðið er ekki vistað.
+- **WSJT-X, JTDX, MSHV:** UDP-móttaka sjálfgefið aðeins frá þinni tölvu (127.0.0.1). Forritið opnar engar gáttir að internetinu og sendir engin gögn til höfundar.

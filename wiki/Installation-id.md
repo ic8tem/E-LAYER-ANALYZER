@@ -49,3 +49,13 @@ Pasang versi baru di atas versi lama: pengaturan, spot terkumpul, log dan `call3
 - Koneksi internet untuk peta (Natural Earth, pada start pertama), data aurora NOAA, radar YA-MS dan sesi telnet.
 - Raspberry Pi Zero dan Pi 1 tidak didukung (prosesornya tidak ditangani oleh .NET).
 - Tidak ada versi untuk Linux i686 (PC 32-bit) dan OpenBSD, karena .NET tidak tersedia untuk sistem-sistem itu. Untuk FreeBSD hanya ada paket eksperimental.
+
+## Koneksi jaringan dan keamanan
+
+- **Pembaruan:** program membaca rilis GitHub saat mulai dan setiap 30 menit. Sejak 0.6.7 hanya memasang paket yang ditandatangani penulis (`SHA256SUMS.txt.sig`, tanda tangan ECDSA) dengan sidik jari yang benar.
+- **Data hanya-baca (HTTPS):** NOAA, ionosonde GIRO, N0NBH, BOM, model IGRF, peta, radar meteor, CALL3; untuk locator yang hilang, callsign yang dicari dikirim ke G7VRD.
+- **Kluster telnet dan APRS-IS:** hanya callsign Anda dan perintah filter, tanpa enkripsi sebagaimana layanan ini mensyaratkan.
+- **PSKReporter:** membaca spot; selain itu program mengirim stasiun MS yang Anda dekode, dengan callsign Anda, jika program digital Anda tidak melakukannya (aktif secara bawaan, kotak centang di PENGATURAN).
+- **Pertukaran YA-MS:** pesan MS untuk pengguna lain dikirim terenkripsi melalui tiga server MQTT publik (aktif secara bawaan, kotak centang di PENGATURAN). Siapa pun bisa menerbitkan kunci atau pesan palsu: bagaimanapun ini pesan radio.
+- **LoTW:** nama pengguna dan kata sandi hanya lewat HTTPS; kata sandi tidak disimpan.
+- **WSJT-X, JTDX, MSHV:** penerimaan UDP secara bawaan hanya dari komputer Anda sendiri (127.0.0.1). Program tidak membuka port ke internet dan tidak mengirim data ke penulis.

@@ -49,3 +49,13 @@ Installér den nye version oven i den gamle: indstillinger, indsamlede spots, lo
 - Internetforbindelse til kortet (Natural Earth, ved første opstart), NOAA's nordlysdata, YA-MS' radarer og telnet-sessionerne.
 - Raspberry Pi Zero og Pi 1 understøttes ikke (deres processorer håndteres ikke af .NET).
 - Der findes ingen versioner til Linux i686 (32 bit-pc'er) og OpenBSD, fordi .NET ikke findes til de systemer. Til FreeBSD findes kun den eksperimentelle pakke.
+
+## Netværksforbindelser og sikkerhed
+
+- **Opdateringer:** programmet læser GitHub-releases ved start og hvert 30. minut. Fra 0.6.7 installerer det kun pakker signeret af forfatteren (`SHA256SUMS.txt.sig`, ECDSA-signatur) og med det rigtige fingeraftryk.
+- **Data der kun læses (HTTPS):** NOAA, GIRO-ionosonder, N0NBH, BOM, IGRF-model, kort, meteorradarer, CALL3; for manglende locatorer sendes de kaldesignaler, der skal slås op, til G7VRD.
+- **Telnet-clustre og APRS-IS:** kun dit kaldesignal og filterkommandoerne, i klartekst som disse tjenester kræver.
+- **PSKReporter:** læsning af spots; desuden sender programmet de MS-stationer, du dekoder, med dit kaldesignal, hvis dit digitale program ikke gør det (slået til fra start, afkrydsningsfelt i INDSTILLINGER).
+- **YA-MS-udveksling:** MS-meddelelser til andre brugere sendes krypteret gennem tre offentlige MQTT-servere (slået til fra start, afkrydsningsfelt i INDSTILLINGER). Enhver kunne offentliggøre falske nøgler eller meddelelser: det er under alle omstændigheder radiomeddelelser.
+- **LoTW:** brugernavn og adgangskode kun via HTTPS; adgangskoden gemmes ikke.
+- **WSJT-X, JTDX, MSHV:** UDP-modtagelse fra start kun fra din egen computer (127.0.0.1). Programmet åbner ingen porte mod internettet og sender ingen data til forfatteren.

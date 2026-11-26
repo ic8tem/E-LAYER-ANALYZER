@@ -49,3 +49,13 @@ Atsisiųskite tinkamą failą iš puslapio **[Releases](https://github.com/ic8te
 - Interneto ryšys reikalingas žemėlapiui (Natural Earth, pirmą kartą paleidžiant), NOAA pašvaistės duomenims, YA-MS radarams ir telnet seansams.
 - Raspberry Pi Zero ir Pi 1 nepalaikomi (.NET nepalaiko jų procesorių).
 - Versijų Linux i686 (32 bitų kompiuteriams) ir OpenBSD nėra, nes .NET šioms sistemoms neegzistuoja. FreeBSD turi tik eksperimentinį paketą.
+
+## Tinklo ryšiai ir saugumas
+
+- **Atnaujinimai:** programa skaito GitHub leidimus paleidžiant ir kas 30 minučių. Nuo 0.6.7 ji diegia tik autoriaus pasirašytus paketus (`SHA256SUMS.txt.sig`, ECDSA parašas) su teisingu piršto atspaudu.
+- **Tik skaitomi duomenys (HTTPS):** NOAA, GIRO jonozondai, N0NBH, BOM, IGRF modelis, žemėlapiai, meteorų radarai, CALL3; trūkstamiems lokatoriams ieškomi šaukiniai siunčiami G7VRD.
+- **Telnet klasteriai ir APRS-IS:** tik jūsų šaukinys ir filtro komandos, nešifruotai, kaip numato šios paslaugos.
+- **PSKReporter:** taškų skaitymas; be to, programa siunčia jūsų dekoduotas MS stotis su jūsų šaukiniu, jei jūsų skaitmeninė programa to nedaro (įjungta pagal nutylėjimą, žymimasis langelis NUSTATYMUOSE).
+- **YA-MS mainai:** kitiems naudotojams skirti MS pranešimai keliauja šifruoti per tris viešus MQTT serverius (įjungta pagal nutylėjimą, žymimasis langelis NUSTATYMUOSE). Bet kas galėtų paskelbti netikrus raktus ar pranešimus: vis dėlto tai radijo pranešimai.
+- **LoTW:** naudotojo vardas ir slaptažodis tik per HTTPS; slaptažodis neišsaugomas.
+- **WSJT-X, JTDX, MSHV:** UDP priėmimas pagal nutylėjimą tik iš jūsų kompiuterio (127.0.0.1). Programa neatveria jokių prievadų į internetą ir nesiunčia duomenų autoriui.

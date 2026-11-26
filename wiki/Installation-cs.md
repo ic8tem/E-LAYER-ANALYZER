@@ -49,3 +49,13 @@ Nainstalujte novou verzi přes starou: nastavení, shromážděné spoty, deník
 - Připojení k internetu pro mapu (Natural Earth, při prvním spuštění), data aurory NOAA, radary YA-MS a relace telnet.
 - Raspberry Pi Zero a Pi 1 nejsou podporovány (jejich procesory .NET nepodporuje).
 - Verze pro Linux i686 (32bitová PC) a OpenBSD neexistují, protože pro tyto systémy není .NET. Pro FreeBSD je jen experimentální balíček.
+
+## Síťová spojení a bezpečnost
+
+- **Aktualizace:** program čte vydání na GitHubu při spuštění a každých 30 minut. Od verze 0.6.7 instaluje jen balíčky podepsané autorem (`SHA256SUMS.txt.sig`, podpis ECDSA) se správným otiskem.
+- **Data jen ke čtení (HTTPS):** NOAA, ionosondy GIRO, N0NBH, BOM, model IGRF, mapy, meteorické radary, CALL3; pro chybějící lokátory se hledané značky posílají do G7VRD.
+- **Telnetové clustery a APRS-IS:** jen tvoje značka a příkazy filtru, nešifrovaně, jak tyto služby vyžadují.
+- **PSKReporter:** čtení spotů; navíc program posílá stanice MS, které dekóduješ, s tvou značkou, pokud to tvůj digitální program nedělá (výchozí zapnuto, zaškrtávací pole v NASTAVENÍ).
+- **Výměna YA-MS:** zprávy MS pro ostatní uživatele jdou šifrovaně přes tři veřejné servery MQTT (výchozí zapnuto, zaškrtávací pole v NASTAVENÍ). Kdokoli by mohl zveřejnit falešné klíče nebo zprávy: jde však o rádiové zprávy.
+- **LoTW:** uživatelské jméno a heslo jen přes HTTPS; heslo se neukládá.
+- **WSJT-X, JTDX, MSHV:** příjem UDP ve výchozím stavu jen z tvého počítače (127.0.0.1). Program neotevírá žádné porty do internetu a neposílá autorovi žádná data.

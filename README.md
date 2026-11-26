@@ -47,6 +47,16 @@ Non esistono versioni per Linux i686 (PC a 32 bit) e OpenBSD, perché .NET non e
 Fonti principali: G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico" (2011);
 https://qsl.net/ic8fax/page4.html; tabella dei salti Es di F. Egano IK3XTV.
 
+## Collegamenti in rete e sicurezza
+
+- **Aggiornamenti:** il programma legge le Release di GitHub all'avvio e ogni 30 minuti. Dalla 0.6.7 installa solo pacchetti firmati dall'autore (`SHA256SUMS.txt.sig`, firma ECDSA) e con l'impronta giusta.
+- **Dati in sola lettura (HTTPS):** NOAA, ionosonde GIRO, N0NBH, BOM, modello IGRF, mappe, radar meteorici, CALL3; per i locator mancanti si mandano a G7VRD i nominativi da cercare.
+- **Cluster telnet e APRS-IS:** solo il tuo nominativo e i comandi del filtro, in chiaro come prevedono questi servizi.
+- **PSKReporter:** lettura degli spot; in più il programma rimanda le stazioni MS che decodifichi, col tuo nominativo, se il tuo programma digitale non lo fa (attivo di partenza, casella in IMPOSTAZIONI).
+- **Scambio YA-MS:** i messaggi MS rivolti ad altri utenti viaggiano cifrati su tre server MQTT pubblici (attivo di partenza, casella in IMPOSTAZIONI). Chiunque potrebbe pubblicare chiavi o messaggi falsi: sono comunque messaggi radio.
+- **LoTW:** nome utente e password solo in HTTPS; la password non si salva.
+- **WSJT-X, JTDX, MSHV:** ricezione UDP solo dal tuo computer (127.0.0.1) di partenza. Il programma non apre porte verso internet e non manda dati all'autore.
+
 ## Compilazione
 Gli installatori li produce GitHub Actions (`.github/workflows/build.yml`) a ogni aggiornamento del ramo `release`
 (versione dal file `VERSION`). A ogni push su `main`: compilazione di controllo su Linux, registro sul ramo `ci-log`
