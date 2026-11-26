@@ -157,7 +157,7 @@ namespace ELA
             }
             if (want == null) return Lang.T("La firma dei pacchetti non è valida: l'aggiornamento non si fa.");
             string got;
-            using (FileStream f = File.OpenRead(pkgPath)) got = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(f)).ToLowerInvariant();
+            using (FileStream f = File.OpenRead(pkgPath)) using (System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create()) got = Convert.ToHexString(sha.ComputeHash(f)).ToLowerInvariant();   // anche con .NET 6 (Windows 7)
             return got == want ? null : Lang.T("Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.");
         }
 
