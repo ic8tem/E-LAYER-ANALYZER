@@ -241,6 +241,14 @@ if os.path.exists(p):
             'MsCollector.Cfg')
     wr(p, s)
 
+# --- CallDb: elenco dei locator del CALL3 per le catene di E-LAYER ANALYZER (src/Ela/Chains.cs, dalla 0.6.0)
+p = os.path.join(DST, 'Core', 'CallDb.cs'); s = rd(p)
+s = rep(s, '        public static int Count { get { return calls.Length; } }\n',
+        '        public static int Count { get { return calls.Length; } }\n'
+        '        public static string[] Locators { get { return locs; } }   // locator del CALL3 (E-LAYER ANALYZER: quadrati con stazioni)\n',
+        'CallDb.Locators')
+wr(p, s)
+
 # --- Aggiornamento automatico di YA-MS (dalla 1.8.0): dentro E-LAYER ANALYZER lo fa E-LAYER ANALYZER (src/Ela/Updater.cs),
 #     quindi il pannello non controlla ne' installa le Release di YA-MS e il pulsante Aggiornamenti non compare
 p = os.path.join(ui, 'MainWindow.Aggiornamenti.cs')

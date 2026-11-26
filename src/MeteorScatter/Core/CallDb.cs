@@ -53,6 +53,7 @@ namespace YAMS
 
         public static volatile bool Loading;
         public static int Count { get { return calls.Length; } }
+        public static string[] Locators { get { return locs; } }   // locator del CALL3 (E-LAYER ANALYZER: quadrati con stazioni)
         public static int ManualCount { get { lock (lk) return manual.Count; } }
         public static int OverlayCount { get { lock (lk) return overlay.Count; } }
         public static int ClusterCount { get { lock (lk) return cluster.Count; } }
