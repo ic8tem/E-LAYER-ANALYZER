@@ -296,7 +296,11 @@ namespace ELA
         public static bool InAfrica(double lat, double lon)
         {
             if (InCanarie(lat, lon) || InMadeira(lat, lon)) return false;   // Canarie e Madeira escluse (regola dell'autore); Capo Verde e' gia' fuori dai riquadri
-            if (lat >= -35 && lat <= 37.5 && lon >= -18.5 && lon <= 11) return true;
+            // a ovest di 1,5° O la costa africana sta sotto i 36° N (stretto di Gibilterra): sopra c'e' la Spagna meridionale
+            // (Andalusia, Algarve), che fino alla 0.6.6 cadeva per errore nel riquadro dell'Africa (trovato il 26/11/2026 nella
+            // verifica sulle aperture in 50 MHz dell'autore; nessun effetto sui risultati, perche' il TEP chiede anche il punto
+            // medio entro 15° dall'equatore magnetico)
+            if (lat >= -35 && lat <= (lon < -1.5 ? 36.0 : 37.5) && lon >= -18.5 && lon <= 11) return true;
             if (lat >= -35 && lat <= 32 && lon > 11 && lon <= 35) return !(lon > 34 && lat > 27.5);   // fino al Sinai, senza la costa arabica del golfo di Aqaba
             if (lat >= -27 && lat <= 12.5 && lon > 35 && lon <= 52) return !(lat > 11.8 && lon > 43.3);   // Corno d'Africa, Africa orientale, Madagascar; penisola arabica esclusa (Aden)
             return false;
