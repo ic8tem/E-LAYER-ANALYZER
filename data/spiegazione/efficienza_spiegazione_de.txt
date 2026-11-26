@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm-Diagramm vom 5/11/2026: Modalwert 89,5 km, Mittelwert 88,6 km,
 TAG|RILIEVO|DJ5HG [18] und QTFGUI [17] verwenden eine feste Höhe von 102 km; das Programm bevorzugt den vom Radar gemessenen Wert. Die Empfehlung ITU-R P.843 [24] gibt eine mittlere Höhe h = 124 − 17·log10(f) km an: etwa 97 km bei 36,2 MHz und 87 km bei 144 MHz, im Einklang mit dem Collm-Modalwert (89,5 km am 5/11/2026).
 H1|3. Die Geometrie der Strecke
 H2|3.1 Erde, Stationen und Mittelpunkt
-TAG|FONTE|Kugelförmige Erde mit Radius r = 6372,7955 km [1].
-TAG|SCELTA|Die Strecke ist immer die reale zwischen dem Locator der Station und dem der Gegenstation. Entfernung, Azimut und Mittelpunkt werden mit den Großkreisformeln berechnet.
+TAG|FONTE|WGS84-Ellipsoid [37]: große Halbachse 6378,137 km, Abplattung 1/298,257223563. Für die sphärischen Formeln (Elevation aus dem Artikel, Reichweite, Refraktion) verwendet das Programm den mittleren Radius des Ellipsoids, r = 6371,0088 km; bis Version 1.8.23 verwendete es die Kugel mit Radius 6372,7955 km [1].
+TAG|SCELTA|Die Strecke ist immer die reale zwischen dem Locator der Station und dem der Gegenstation. Ab Version 1.8.27 werden Entfernung, Azimut und Mittelpunkt auf der Geodäte des Ellipsoids mit dem Verfahren von Karney [38] berechnet: gegenüber der Kugel ändern sich die Entfernungen um höchstens 0,5 % und die Azimute um einige Zehntelgrad.
 TAG|FONTE|Die zeitabhängigen Berechnungen beziehen sich auf den Mittelpunkt der Strecke: zwischen den beiden Enden kann die beste Zeit um bis zu 1,5 Stunden abweichen (SM6FHZ [4]).
 H2|3.2 Antennenelevation
 TAG|FONTE|Die Elevation zum Reflexionspunkt wird mit der Formel des Artikels (Bild 7) [1] berechnet, mit x = Entfernung / r, H Spurhöhe, h Stationshöhe:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Mit der AMS-Tabelle: 1000 km → 13°, s ≈ 115 km; 1250 km → 11�
 TAG|SCELTA|Für die in der Himmelsansicht gezeigte Zeit summiert das Programm über alle Ströme über dem Horizont ZHR x Effektivität, aufgeteilt auf Seite A und Seite B (Kapitel 7.1). Der Hot Spot der Seite, die mehr Reflexionen erhält, ist der empfohlene: er erscheint rot auf der Karte.
 TAG|FONTE|Laut DJ5HG, wiedergegeben von DF5HC [16], erfolgt die Reflexion auf einem Kegel um die Spur: bei kürzeren Strecken sind die Antennen seitlich der direkten Richtung auszurichten, beide Stationen auf denselben Punkt, und je nach Position des Radianten ist einer der beiden Punkte (HOT-A oder HOT-B) günstiger. DF5HC nennt außerdem als beste Entfernung 1300-1500 km, mit einem Maximum knapp über 2000 km.
 H2|3.5 Die Antennenkeule
-TAG|FONTE|Gewinn einer langen Yagi aus der Boomlänge (DL6WU-Kurve [10]) und −3-dB-Öffnungswinkel aus dem Gewinn (Regel von Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Gewinn einer Yagi aus der Boomlänge (mittlere Gerade der VE7BQH-Tabellen je Band [36], DL6WU-Kurve [10] zum Vergleich) und −3-dB-Keulenbreite aus dem Gewinn (Kraus-Regel [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Die NEC-Simulationen von W4RNL [12] bestätigen die Gewinnkurve auf 0,1 dB sowohl für die DL6WU-Yagis als auch für die von David Tanner VK3AUU, die bei gleicher Elementzahl einen kürzeren Boom haben: der Gewinn hängt von der Boomlänge ab. Dieselben Simulationen ergeben eine horizontale Keule, die 5-10 % schmaler ist als nach Kraus.
+TAG|RILIEVO|VE7BQH-Mittel minus DL6WU-Kurve: bei 50 MHz innerhalb 0,25 dB von 2 bis 16 λ; bei 144 MHz von −0,04 dB bei 1 λ bis +0,42 dB bei 10 λ; bei 432 MHz von −0,06 dB bei 2 λ bis +0,55 dB bei 10 λ. Bei den von W4RNL bei 432 MHz simulierten DL6WU- und VK3AUU-Yagis liegt das VE7BQH-Mittel 0,15–0,55 dB über NEC: auf langen Booms leisten die rechneroptimierten Yagis der Tabellen mehr als die ursprünglichen Entwürfe.
 TAG|SCELTA|Horizontale Keule (die für die Azimutausrichtung) = 0,93 · θK; vertikale Keule = θK. Yagi mit 14 λ bei 432 MHz: 20,3 dBi, 18,1° horizontal und 19,5° vertikal; die Modelle von W4RNL ergeben 20,4 dBi und 18,4°/18,8°.
+TAG|RILIEVO|Mit dem VE7BQH-Mittel ergibt dieselbe 14-λ-Yagi 21,0 dBi und eine Keule von 16,9° horizontal und 18,1° vertikal; die 20,3 dBi oben stammen aus der DL6WU-Kurve. Die Keulenkorrekturen (0,93 · θK und θK) bleiben die aus den DL6WU-Yagis abgeleiteten.
 TAG|SCELTA|Die Antenne gilt immer als auf die Gegenstation gerichtet. Ein Hot Spot, der innerhalb von ±θ/2 um diese Richtung liegt, ist bereits von der Keule erfasst: er wird grau statt rosa markiert und das Programm gibt einen Hinweis. Der von der Effektivität empfohlene Hot Spot bleibt in jedem Fall rot.
 H1|4. Der Radiant des Stroms
 H2|4.1 Position des Radianten
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. Aufl., Willmann-Bell, 1998.
 SRC|7. Meteorradar Collm, Universität Leipzig (LIM) und IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (nach Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - Gewinnkurve langer Yagis, wiedergegeben von W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, S. 130-138, Bild 1 (Primärquelle); Kurve auch von W8IO wiedergegeben, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, Bulletin vom Juni 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi-Gewinntabellen für 50, 144 und 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (Kopien auf qsl.net/dk7zb und sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

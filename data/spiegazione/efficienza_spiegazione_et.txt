@@ -20,8 +20,8 @@ TAG|RILIEVO|Collmi graafik 5/11/2026: mood 89,5 km, keskmine 88,6 km, standardh�
 TAG|RILIEVO|DJ5HG [18] ja QTFGUI [17] kasutavad fikseeritud kõrgust 102 km; programm eelistab radari mõõdetud väärtust. Soovitus ITU-R P.843 [24] annab keskmise kõrguse h = 124 − 17·log10(f) km: umbes 97 km sagedusel 36,2 MHz ja 87 km sagedusel 144 MHz, kooskõlas Collmi moodiga (89,5 km 5/11/2026).
 H1|3. Trassi geomeetria
 H2|3.1 Maa, jaamad ja keskpunkt
-TAG|FONTE|Sfääriline Maa raadiusega r = 6372,7955 km [1].
-TAG|SCELTA|Trass on alati tegelik trass jaama ja korrespondendi lokaatori vahel. Kaugus, asimuut ja keskpunkt arvutatakse suurringi valemitega.
+TAG|FONTE|WGS84 ellipsoid [37]: suur pooltelg 6378,137 km, lapikus 1/298,257223563. Sfääriliste valemite jaoks (artikli kõrgusnurk, ulatus, murdumine) kasutab programm ellipsoidi keskmist raadiust r = 6371,0088 km; kuni versioonini 1.8.23 kasutas see kera raadiusega 6372,7955 km [1].
+TAG|SCELTA|Trass on alati tegelik trass jaama ja korrespondendi lokaatori vahel. Alates versioonist 1.8.27 arvutatakse kaugus, asimuut ja keskpunkt ellipsoidi geodeetilisel joonel Karney meetodiga [38]: kera suhtes muutuvad kaugused kuni 0,5% ja asimuudid mõne kümnendiku kraadi võrra.
 TAG|FONTE|Ajast sõltuvad arvutused viitavad trassi keskpunktile: kahe otspunkti vahel võib parim aeg erineda kuni 1,5 tundi (SM6FHZ [4]).
 H2|3.2 Antenni kõrgusnurk
 TAG|FONTE|Kõrgusnurk peegelduspunkti suunas arvutatakse artikli valemiga (joonis 7) [1], kus x = kaugus / r, H on jälje kõrgus, h jaama kõrgus:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS-tabeliga: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s �
 TAG|SCELTA|Taevavõlvil näidatud aja jaoks summeerib programm üle kõigi horisondi kohal olevate meteoorivoolude ZHR x efektiivsus, jagatuna poole A ja poole B vahel (peatükk 7.1). Selle poole hot spot, mis saab rohkem peegeldusi, on soovitatud: see kuvatakse kaardil punasena.
 TAG|FONTE|DJ5HG järgi, DF5HC [16] vahendusel, toimub peegeldus jälje ümber oleval koonusel: lühematel trassidel tuleb antennid suunata otsesuunast kõrvale, mõlemad jaamad samasse punkti, ja sõltuvalt radiandi asukohast on üks kahest punktist (HOT-A või HOT-B) soodsam. DF5HC nimetab ka parimaks kauguseks 1300-1500 km, maksimumiga veidi üle 2000 km.
 H2|3.5 Antenni peaharu
-TAG|FONTE|Pika Yagi võimendus poomi pikkuse järgi (DL6WU kõver [10]) ja peaharu laius −3 dB tasemel võimenduse põhjal (Krausi reegel [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Yagi võimendus poomi pikkusest (VE7BQH tabelite keskmine sirge iga sagedusala kohta [36], võrdluseks DL6WU kõver [10]) ja −3 dB peaharu laius võimendusest (Krausi reegel [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL NEC-simulatsioonid [12] kinnitavad võimenduskõverat 0,1 dB piires nii DL6WU Yagide kui ka David Tanner VK3AUU Yagide puhul, millel on sama elementide arvu juures lühem poom: võimendus sõltub poomi pikkusest. Samad simulatsioonid annavad horisontaalse peaharu, mis on Krausist 5-10 % kitsam.
+TAG|RILIEVO|VE7BQH keskmine miinus DL6WU kõver: 50 MHz juures 0,25 dB piires 2 kuni 16 λ; 144 MHz juures −0,04 dB-st (1 λ) kuni +0,42 dB-ni (10 λ); 432 MHz juures −0,06 dB-st (2 λ) kuni +0,55 dB-ni (10 λ). W4RNL-i poolt 432 MHz juures simuleeritud DL6WU ja VK3AUU Yagide puhul on VE7BQH keskmine 0,15–0,55 dB üle NEC-i: pikkadel poomidel annavad tabelite arvutiga optimeeritud Yagid rohkem kui algsed konstruktsioonid.
 TAG|SCELTA|Horisontaalne peaharu (asimuudis suunamise oma) = 0,93 · θK; vertikaalne peaharu = θK. Yagi 14 λ sagedusel 432 MHz: 20,3 dBi, 18,1° horisontaalselt ja 19,5° vertikaalselt; W4RNL mudelid annavad 20,4 dBi ja 18,4°/18,8°.
+TAG|RILIEVO|VE7BQH keskmisega annab sama 14 λ Yagi 21,0 dBi ja peaharu 16,9° horisontaalselt ja 18,1° vertikaalselt; ülaltoodud 20,3 dBi on DL6WU kõverast. Peaharu parandused (0,93 · θK ja θK) jäävad DL6WU Yagidest tuletatuiks.
 TAG|SCELTA|Antenni loetakse alati suunatuks korrespondendile. Hot spot, mis jääb sellest suunast ±θ/2 piiresse, on juba peaharuga kaetud: see märgitakse roosa asemel halliga ja programm hoiatab selle eest. Efektiivsuse järgi soovitatud hot spot jääb igal juhul punaseks.
 H1|4. Meteoorivoolu radiant
 H2|4.1 Radiandi asukoht
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. tr, Willmann-Bell, 1998.
 SRC|7. Collmi meteoorradar, Leipzigi Ülikool (LIM) ja IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 järgi).
-SRC|10. G. Hoch DL6WU - pikkade Yagide võimenduskõver, W8IO vahendusel, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, lk 130-138, joonis 1 (esmane allikas); kõverat esitab ka W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, 2018. aasta juuni bülletään.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi võimendustabelid sagedustele 50, 144 ja 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (koopiad: qsl.net/dk7zb ja sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

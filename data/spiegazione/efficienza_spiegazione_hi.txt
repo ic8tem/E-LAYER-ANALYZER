@@ -20,8 +20,8 @@ TAG|RILIEVO|5/11/2026 का Collm ग्राफ़: बहुलक 89,5 km, 
 TAG|RILIEVO|DJ5HG [18] और QTFGUI [17] 102 km की स्थिर ऊँचाई का उपयोग करते हैं; प्रोग्राम रडार द्वारा मापे गए मान को प्राथमिकता देता है। ITU-R P.843 सिफारिश [24] औसत ऊँचाई h = 124 − 17·log10(f) km देती है: 36,2 MHz पर लगभग 97 km और 144 MHz पर 87 km, जो Collm के बहुलक (5/11/2026 को 89,5 km) के अनुरूप है।
 H1|3. पथ की ज्यामिति
 H2|3.1 पृथ्वी, स्टेशन और मध्य बिंदु
-TAG|FONTE|त्रिज्या r = 6372,7955 km वाली गोलाकार पृथ्वी [1]।
-TAG|SCELTA|पथ हमेशा स्टेशन के locator और DX स्टेशन के locator के बीच का वास्तविक पथ होता है। दूरी, दिगंश और मध्य बिंदु वृहत् वृत्त के सूत्रों से गणना किए जाते हैं।
+TAG|FONTE|WGS84 दीर्घवृत्ताभ [37]: अर्ध-दीर्घ अक्ष 6378,137 km, चपटापन 1/298,257223563। गोलीय सूत्रों (लेख का उन्नयन कोण, पहुँच, अपवर्तन) के लिए प्रोग्राम दीर्घवृत्ताभ की औसत त्रिज्या r = 6371,0088 km का उपयोग करता है; संस्करण 1.8.23 तक यह 6372,7955 km त्रिज्या वाले गोले का उपयोग करता था [1]।
+TAG|SCELTA|पथ हमेशा स्टेशन के locator और DX स्टेशन के locator के बीच का वास्तविक पथ होता है। संस्करण 1.8.27 से दूरी, दिगंश और मध्य बिंदु दीर्घवृत्ताभ की जियोडेसिक पर Karney की विधि [38] से निकाले जाते हैं: गोले की तुलना में दूरियाँ अधिकतम 0,5% और दिगंश डिग्री के कुछ दसवें भाग बदलते हैं।
 TAG|FONTE|समय पर निर्भर गणनाएँ पथ के मध्य बिंदु के लिए की जाती हैं: दोनों सिरों के बीच सर्वोत्तम समय में 1,5 घंटे तक का अंतर हो सकता है (SM6FHZ [4])।
 H2|3.2 एंटेना का उन्नयन
 TAG|FONTE|परावर्तन बिंदु की ओर उन्नयन की गणना लेख के सूत्र (चित्र 7) [1] से की जाती है, जहाँ x = दूरी / r, H ट्रेल की ऊँचाई, h स्टेशन की ऊँचाई:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS तालिका के साथ: 1000 km → 13°, s ≈ 115
 TAG|SCELTA|आकाश गुंबद पर दिखाए गए समय के लिए प्रोग्राम क्षितिज के ऊपर की सभी उल्का वर्षाओं पर ZHR x दक्षता का योग करता है, जो पक्ष A और पक्ष B के बीच बँटा होता है (अध्याय 7.1)। अधिक परावर्तन पाने वाले पक्ष का hot spot अनुशंसित होता है: यह मानचित्र पर लाल रंग में दिखता है।
 TAG|FONTE|DJ5HG के अनुसार, DF5HC [16] द्वारा उद्धृत, परावर्तन ट्रेल के चारों ओर एक शंकु पर होता है: छोटे पथों के लिए एंटेना को सीधी दिशा के किनारे लक्षित करना चाहिए, दोनों स्टेशन एक ही बिंदु की ओर, और रेडिएंट की स्थिति के अनुसार दोनों बिंदुओं (HOT-A या HOT-B) में से एक अधिक अनुकूल होता है। DF5HC सर्वोत्तम दूरी 1300-1500 km भी बताते हैं, जिसका अधिकतम 2000 km से थोड़ा आगे है।
 H2|3.5 एंटेना का लोब
-TAG|FONTE|बूम की लंबाई से लंबे Yagi का गेन (DL6WU वक्र [10]) और गेन से −3 dB लोब-चौड़ाई (Kraus का नियम [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|बूम लंबाई से Yagi का लाभ (प्रत्येक बैंड के लिए VE7BQH तालिकाओं की औसत सरल रेखा [36], तुलना के लिए DL6WU वक्र [10]) और लाभ से −3 dB लोब चौड़ाई (Kraus नियम [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL [12] के NEC सिमुलेशन गेन वक्र की 0,1 dB के भीतर पुष्टि करते हैं, DL6WU Yagi और David Tanner VK3AUU के Yagi दोनों के लिए, जिनमें समान तत्वों पर बूम छोटा होता है: गेन बूम की लंबाई पर निर्भर करता है। वही सिमुलेशन Kraus की तुलना में 5-10 % संकरा क्षैतिज लोब देते हैं।
+TAG|RILIEVO|VE7BQH औसत घटा DL6WU वक्र: 50 MHz पर 2 से 16 λ तक 0,25 dB के भीतर; 144 MHz पर 1 λ पर −0,04 dB से 10 λ पर +0,42 dB तक; 432 MHz पर 2 λ पर −0,06 dB से 10 λ पर +0,55 dB तक। W4RNL द्वारा 432 MHz पर सिम्युलेट किए गए DL6WU और VK3AUU Yagi पर VE7BQH औसत NEC से 0,15–0,55 dB ऊपर है: लंबे बूम पर तालिकाओं के कंप्यूटर-अनुकूलित Yagi मूल डिज़ाइनों से बेहतर प्रदर्शन करते हैं।
 TAG|SCELTA|क्षैतिज लोब (दिगंश में एंटेना दिशा वाला) = 0,93 · θK; ऊर्ध्वाधर लोब = θK। 432 MHz पर 14 λ का Yagi: 20,3 dBi, 18,1° क्षैतिज और 19,5° ऊर्ध्वाधर; W4RNL के मॉडल 20,4 dBi और 18,4°/18,8° देते हैं।
+TAG|RILIEVO|VE7BQH औसत से वही 14 λ Yagi 21,0 dBi और 16,9° क्षैतिज व 18,1° ऊर्ध्वाधर लोब देता है; ऊपर के 20,3 dBi DL6WU वक्र से हैं। लोब सुधार (0,93 · θK और θK) DL6WU Yagi से निकाले गए ही रहते हैं।
 TAG|SCELTA|एंटेना को हमेशा DX स्टेशन की ओर लक्षित माना जाता है। उस दिशा से ±θ/2 के भीतर पड़ने वाला hot spot पहले से लोब द्वारा आच्छादित है: वह गुलाबी के बजाय धूसर रंग में चिह्नित होता है और प्रोग्राम इसकी चेतावनी देता है। दक्षता द्वारा अनुशंसित hot spot फिर भी लाल रंग में रहता है।
 H1|4. उल्का वर्षा का रेडिएंट
 H2|4.1 रेडिएंट की स्थिति
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2रा संस्करण, Willma
 SRC|7. Collm उल्का रडार, लाइपज़िग विश्वविद्यालय (LIM) और IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961।
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 से)।
-SRC|10. G. Hoch DL6WU - लंबे Yagi का गेन वक्र, W8IO द्वारा उद्धृत, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, पृ. 130-138, चित्र 1 (प्राथमिक स्रोत); वक्र W8IO ने भी उद्धृत किया है, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, जून 2018 का बुलेटिन।
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50, 144 और 432 MHz के लिए Yagi लाभ तालिकाएँ: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (प्रतियाँ qsl.net/dk7zb और sm2cew.com पर)।
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

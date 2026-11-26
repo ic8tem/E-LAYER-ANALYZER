@@ -20,8 +20,8 @@ TAG|RILIEVO|График Collm от 5/11/2026: мода 89,5 km, среднее 
 TAG|RILIEVO|DJ5HG [18] и QTFGUI [17] используют фиксированную высоту 102 km; программа предпочитает высоту, измеренную радаром. Рекомендация ITU-R P.843 [24] даёт среднюю высоту h = 124 − 17·log10(f) km: около 97 km на 36,2 MHz и 87 km на 144 MHz, что согласуется с модой Collm (89,5 km 5/11/2026).
 H1|3. Геометрия трассы
 H2|3.1 Земля, станции и середина трассы
-TAG|FONTE|Сферическая Земля радиусом r = 6372,7955 km [1].
-TAG|SCELTA|Трасса всегда реальная, между локатором станции и локатором корреспондента. Расстояние, азимут и середина трассы вычисляются по формулам большого круга.
+TAG|FONTE|Эллипсоид WGS84 [37]: большая полуось 6378,137 km, сжатие 1/298,257223563. Для сферических формул (угол места из статьи, дальность, рефракция) программа использует средний радиус эллипсоида, r = 6371,0088 km; до версии 1.8.23 она использовала сферу радиусом 6372,7955 km [1].
+TAG|SCELTA|Трасса всегда реальная, между локатором станции и локатором корреспондента. С версии 1.8.27 расстояние, азимут и середина трассы вычисляются по геодезической линии эллипсоида методом Карни [38]: по сравнению со сферой расстояния меняются не более чем на 0,5%, а азимуты — на несколько десятых градуса.
 TAG|FONTE|Расчёты, зависящие от времени, относятся к середине трассы: на двух её концах лучшее время может различаться до 1,5 часа (SM6FHZ [4]).
 H2|3.2 Угол места антенны
 TAG|FONTE|Угол места на точку отражения рассчитывается по формуле из статьи (рисунок 7) [1], где x = расстояние / r, H — высота следа, h — высота станции:
@@ -41,10 +41,13 @@ TAG|RILIEVO|По таблице AMS: 1000 km → 13°, s ≈ 115 km; 1250 km →
 TAG|SCELTA|Для времени, показанного на небесной сфере, программа суммирует по всем потокам над горизонтом ZHR x эффективность, разделённую между стороной A и стороной B (глава 7.1). Рекомендуется hot spot той стороны, которая получает больше отражений: он показан на карте красным.
 TAG|FONTE|По DJ5HG, в изложении DF5HC [16], отражение происходит на конусе вокруг следа: на более коротких трассах антенны следует направлять в сторону от прямого направления, обе станции на одну и ту же точку, и в зависимости от положения радианта одна из двух точек (HOT-A или HOT-B) более благоприятна. DF5HC также указывает лучшее расстояние 1300-1500 km с максимумом чуть дальше 2000 km.
 H2|3.5 Лепесток антенны
-TAG|FONTE|Усиление длинной антенны Yagi по длине траверсы (кривая DL6WU [10]) и ширина лепестка по уровню −3 dB из усиления (правило Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Усиление антенны Yagi по длине траверсы (средняя прямая таблиц VE7BQH для каждого диапазона [36], кривая DL6WU [10] для сравнения) и ширина лепестка по уровню −3 dB по усилению (правило Крауса [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|NEC-моделирование W4RNL [12] подтверждает кривую усиления в пределах 0,1 dB как для Yagi DL6WU, так и для Yagi David Tanner VK3AUU, у которых при том же числе элементов траверса короче: усиление зависит от длины траверсы. То же моделирование даёт горизонтальный лепесток на 5-10 % уже, чем по Kraus.
+TAG|RILIEVO|Среднее VE7BQH минус кривая DL6WU: на 50 MHz в пределах 0,25 dB от 2 до 16 λ; на 144 MHz от −0,04 dB при 1 λ до +0,42 dB при 10 λ; на 432 MHz от −0,06 dB при 2 λ до +0,55 dB при 10 λ. Для антенн DL6WU и VK3AUU, смоделированных W4RNL на 432 MHz, среднее VE7BQH на 0,15–0,55 dB выше NEC: на длинных траверсах оптимизированные на компьютере антенны из таблиц дают больше, чем исходные конструкции.
 TAG|SCELTA|Горизонтальный лепесток (для наведения по азимуту) = 0,93 · θK; вертикальный лепесток = θK. Yagi длиной 14 λ на 432 MHz: 20,3 dBi, 18,1° по горизонтали и 19,5° по вертикали; модели W4RNL дают 20,4 dBi и 18,4°/18,8°.
+TAG|RILIEVO|По среднему VE7BQH та же антенна длиной 14 λ даёт 21,0 dBi и лепесток 16,9° по горизонтали и 18,1° по вертикали; 20,3 dBi выше получены по кривой DL6WU. Поправки лепестка (0,93 · θK и θK) остаются выведенными из антенн DL6WU.
 TAG|SCELTA|Антенна всегда считается направленной на корреспондента. Hot spot, лежащий в пределах ±θ/2 от этого направления, уже перекрывается лепестком: он отмечается серым вместо розового, и программа предупреждает об этом. Hot spot, рекомендуемый по эффективности, в любом случае остаётся красным.
 H1|4. Радиант потока
 H2|4.1 Положение радианта
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2-е изд., Willmann-Bell, 1998.
 SRC|7. Метеорный радар Collm, Лейпцигский университет (LIM) и IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (по Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - кривая усиления длинных Yagi, приведённая W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, с. 130-138, рис. 1 (первоисточник); кривую приводит также W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, бюллетень за июнь 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - таблицы усиления антенн Yagi для 50, 144 и 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (копии на qsl.net/dk7zb и sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

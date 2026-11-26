@@ -1,5 +1,5 @@
 TITLE|Gebruikershandleiding van YA-MS
-SUB|Versie 1.8.20 - door Costantino IC8TEM - november 2026
+SUB|Versie 1.8.27 - door Costantino IC8TEM - november 2026
 H1|1. Inleiding
 H2|1.1 Waarvoor dient YA-MS
 P|YA-MS helpt je de meteorscatter-condities tussen jouw station en een tegenstation te voorspellen en live te volgen, van 28 tot 432 MHz. Voor elke actieve meteorenzwerm geeft het aan in hoeverre de positie van de radiant jouw traject begunstigt (de efficiëntie), op welke uren, van welke kant van het traject de reflecties komen en waarheen je de antenne het best richt. Naast de voorspelling toont het de live gemeten gegevens: de tellingen van de meteorradar van Collm, de camera's van het Global Meteor Network, de CMOR-radar, de GRAVES-zender en het meteorscatter-verkeer dat via de clusters en PSKReporter wordt verzameld.
@@ -24,6 +24,7 @@ LI|macOS: de .dmg voor Apple Silicon (M1 en later) of voor Intel, of de app.zip.
 TAG|ATTENZIONE|Windows kan "Windows heeft uw pc beschermd" tonen: kies "Meer informatie" en daarna "Toch uitvoeren". Op macOS open je de app de eerste keer met de rechtermuisknop en "Open". Het programma is niet ondertekend met een betaald certificaat.
 H2|2.2 De eerste start
 P|Bij het opstarten verschijnt enkele seconden het startscherm met de Perseïden boven de VLT van ESO. Bij de eerste start kiest YA-MS de taal van het systeem, als dat een van de 36 is, anders Italiaans; het downloadt de kaart van Europa (Natural Earth) naar de map data/mappa en toont een voorbeeldtraject. Het instellen voor jouw station kost maar een paar minuten (hoofdstuk 4).
+P|YA-MS opent maar één keer: start je het opnieuw terwijl het al open is, dan start de tweede kopie niet en komt het open venster naar voren, ook als het geminimaliseerd was. Zo schrijven nooit twee kopieën tegelijk in dezelfde bestanden van de map data. Na een update wacht de nieuwe kopie tot de oude gesloten is.
 H2|2.3 De map data
 P|Alle instellingen en alle gegevens staan in één map data naast het programma: geen AppData, geen systeemmappen. Om YA-MS naar een andere computer te verplaatsen kopieer je gewoon de programmamap met de map data erin. De inhoud van de map wordt beschreven in hoofdstuk 13.
 H2|2.4 Automatische updates
@@ -40,7 +41,7 @@ P|Bij het opstarten controleert YA-MS of al zijn bestanden aanwezig zijn (vertal
 H1|3. Het hoofdvenster
 H2|3.1 De onderdelen van het venster
 LI|Bovenaan twee rijen bedieningselementen die voor alle tabbladen gelden: E-laag en antenne, tijdstip van de berekening (hoofdstuk 4). Je station (locator, hoogte, band en Berekenen) staat rechtsboven in Live verkeer.
-LI|De balk met de hoofdtabbladen, met rechts de knop Bediening, het kleurenschema (Kleurenschema) en de taal.
+LI|De balk met de hoofdtabbladen, rechts met de knop Opdrachten en de taal. Het kleurenschema (Thema) kies je in het tabblad Instellingen.
 LI|De subtabbladen, in een lichtere rij, voor de tabbladen die ze hebben.
 LI|Onderaan de statusbalk: berichten van de berekening, waarschuwingen over de verbinding en de knop "Updates".
 H2|3.2 De tabbladen
@@ -64,12 +65,13 @@ H2|4.2 Rij 1: E-laag en antenne
 LI|Spoorhoogte km en van de radar: hoogte van de meteorensporen. Met "van de radar" aangevinkt wordt de meest voorkomende hoogte gebruikt die de radar van Collm meet (meestal 88-90 km); haal het vinkje weg om de waarde zelf in te vullen.
 LI|Elevatie bundel °: elevatie van het maximum van de verticale bundel van je antenne. Een richtantenne die op 0° staat, heeft door de reflectie op de grond toch haar hoofdbundel enkele graden boven de horizon: meestal 3-8°, afhankelijk van de hoogte van de antenne in golflengten.
 LI|antennediagram: ingeschakeld (standaard) tellen de reflectiepunten mee met de verticale winst van de twee antennes: volledig rond het maximum van de bundel, steeds minder naar de horizon en naar boven toe. Uitgeschakeld is de elevatie van de bundel een harde grens: punten die lager worden gezien tellen niet mee.
-LI|Yagi-antenne: boom m: lengte van de boom. Ernaast schrijft het programma de lengte in golflengten, de winst (DL6WU-curve) en de horizontale en verticale bundelbreedte bij -3 dB. Onder 2 λ is de schatting weinig nauwkeurig.
-LI|Hotspot vanaf middelpunt km en auto (AMS): afstand van Hot A en Hot B tot het middelpunt. Met "auto (AMS)" aangevinkt volgt het de tabel van J. Richardson, aangehaald door DJ5HG (13° afwijking bij 1000 km, 10° boven 1500 km); haal het vinkje weg om zelf 30-400 km in te vullen (MSHV gebruikt 150 km).
+LI|Yagi-antenne: boom m: lengte van de boom. Ernaast schrijft het programma de lengte in golflengten, de winst (gemiddelde rechte van de VE7BQH-tabellen van de band) en de −3 dB-bundel horizontaal en verticaal. Ligt de boom buiten de VE7BQH-steekproef van de band, dan is de schatting onnauwkeurig.
 TAG|ATTENZIONE|Met "antennediagram" uitgeschakeld en de bundel op enkele graden kan het op een lang traject gebeuren dat de twee stations geen enkel gemeenschappelijk punt van de laag zien: alle efficiënties zijn dan 0 en de waarschuwing "GEEN GEMEENSCHAPPELIJKE ZONE" verschijnt, met de bundelelevatie of de spoorhoogte die nodig zou zijn. Voorbeeld: JN70CN - JO76QP, 1791 km, bundel op 3°, sporen op 88,5 km.
 H2|4.3 Rij 2: tijdstip van de berekening
 LI|Uur: UTC-klok.
 LI|Berekeningsdatum (UTC): de dag van de berekening. Geldt voor Voorspellingsberekening, voor de 24-uurstabel van Efficiëntieberekening en voor de tijdlijn van GRAVES-radar. Standaard is het vandaag, en om middernacht volgt de datum de nieuwe dag.
+LI|Troposferische refractie (GFS): uit bij het starten. Aan haalt het programma uit het GFS-model het temperatuur- en vochtigheidsprofiel boven de twee stations en houdt rekening met de kromming van de straal tot de spoorhoogte: lage punten lijken iets hoger en de gemeenschappelijke zone wordt breder. Als het GFS niet antwoordt, gebruikt het een gemiddelde atmosfeer. Het verslag van Geometrie en demping vermeldt het op de regel "Refractie".
+LI|Hotspot vanaf middelpunt km en auto (AMS): afstand van Hot A en Hot B tot het middelpunt. Met "auto (AMS)" aangevinkt volgt het de tabel van J. Richardson, aangehaald door DJ5HG (13° afwijking bij 1000 km, 10° boven 1500 km); haal het vinkje weg om zelf 30-400 km in te vullen (MSHV gebruikt 150 km).
 LI|Uren (−12 tot +36 u): verschuift het tijdstip van de berekening in stappen van 15 minuten. Ernaast: "Berekening voor: nu" of de gekozen datum en tijd.
 LI|Realtime: keert terug naar het huidige moment.
 LI|De tijdlijn («Uren (−12 tot +36 u)» en «Realtime») staat bovenaan het tabblad Voorspellingsberekening, omdat ze alleen voor die berekening geldt.
@@ -153,12 +155,15 @@ H2|8.1 De bedieningselementen
 LI|Doelfrequentie MHz: frequentie van de voorspelling.
 LI|Exponent λ^k (3, SM6FHZ) en Stationsfactor K (1): regel voor de frequentie en correctie voor jouw station.
 LI|k uit de populatie-indices: stelt k voor op basis van de populatie-indices r van de actieve zwermen (GMN, anders IMO; k = 3,75 · log10 r, gewogen met de ZHR) en vraagt om bevestiging voordat het wordt toegepast.
+LI|Bron van de tellingen: standaard Collm (radar 36,2 MHz). Ligt je station binnen 3500 km van Japan, dan verschijnen ook de items "Japan live" (bakens JA2SDA in Toyokawa en JE3AKE in Otsu, 53 MHz), met de automatische HROFFT-tellingen die Ogaki elke 10 minuten publiceert; de keuze wordt bewaard.
+LI|Japan: maandelijkse HRO-tellingen (IPRMO)...: opent het venster met de uurlijkse handtellingen van de Japanse waarnemers uit de RMOJ-maandbestanden. Kies maand en waarnemer; Bijwerken vanaf IPRMO haalt de nieuwe maanden op. De eerste grafiek is het maandgemiddelde per UTC-uur omgerekend naar jouw frequentie, de tweede de dagtotalen.
 LI|RMOB-bestand van schijf laden en Exponent afleiden uit RMOB-bestand: lezen een maandelijks RMOB-bestand en leiden k af uit de uren die het met Collm gemeen heeft.
 LI|RMOB-waarnemer, RMOB nu downloaden en automatisch ophalen elke 5 minuten: automatisch ophalen staat uit en mag alleen met toestemming van RMOB worden ingeschakeld. Deze opdrachten staan op het tabblad Instellingen.
 H2|8.2 De resultaten
 LI|De grafiek van gisteren en vandaag: meteoren per uur in Collm, waarden omgerekend naar jouw frequentie en, als ze geladen zijn, de RMOB-tellingen.
 LI|De voorspelling voor de komende 24 uur: hetzelfde uur van de vorige dag, gecorrigeerd voor de verandering van de zwermindex van het traject.
 LI|De tabel met het oordeel: goed, matig of zwak ten opzichte van het gemiddelde over 24 uur.
+TAG|NOTA|De automatische tellingen uit Ogaki zijn hoger dan de handtellingen: het zijn relatieve waarden. Om ze te kalibreren vergelijk je ze in het Japan-venster met de RMOJ-maandbestanden van hetzelfde baken.
 TAG|NOTA|De duur van de reflecties volgt de keuze "Duur van de pings tussen de banden" in Geometrie en demping; bij forward scatter neemt de duur ook toe met sec²φ in het middelpunt van het traject.
 H1|9. Live en realtimegegevens
 H2|9.1 Verkeer live
@@ -172,6 +177,7 @@ LI|Ook de actieve monitors van de PSKReporter-kaart: lege driehoeken voor de sta
 LI|FT8 boven 1100 km zonder parallelle paden: een FT8-spot (uit PSKReporter MQTT, de clusters of WSJT-X via UDP) tussen stations die meer dan 1100 km uit elkaar liggen en die in de 3 minuten ervoor en erna geen parallelle paden heeft (zelfde band, middelpunt binnen 300 km, richting binnen 15°, een ander stationspaar) wordt lichtgroen getekend, net als zijn regel in de tabel rechtsonder (zonder knipperen). Sporadische E en tropo geven veel nabije, parallelle paden; een losse spot kan een meteoorspoor zijn. Daarom ontvangt YA-MS via MQTT ook de FT8-spots van 6 m, 4 m, 2 m, 1,25 m en 70 cm (nooit 28 MHz, in geen geval). Deze spots gaan niet in het MS-archief. Standaard aan. Extra controles met PSKReporter MQTT: de spot is niet geïsoleerd als het ontvangende station in MQTT binnen 3 minuten andere stations boven 1100 km op dezelfde band hoort (open band); spots van clusters en RBN tellen alleen als hetzelfde paar ook via MQTT binnenkomt; RBN-skimmers (roepnamen met «-#») tellen nooit.
 LI|Decoderingen van jouw WSJT-X via UDP waarin een tegenstation je antwoordt (de eerste roepnaam van het bericht is de jouwe) worden getekend met een knipperende stippellijn, in elke modus en op elke afstand, en hun regel in de tabel knippert op een gele achtergrond. Dit is het enige geval waarin iets knippert.
 LI|Uitwisseling tussen YA-MS-gebruikers: als een andere YA-MS-gebruiker via UDP een bericht aan jouw station decodeert (in MSK144, FSK441, PSK2K of JTMS, of in FT8 boven 1100 km), stuurt zijn YA-MS het versleuteld naar jou via drie openbare MQTT-brokers (HiveMQ, Mosquitto, EMQX); je ziet het als een vaste violette stippellijn en als een regel in de UDP-console. Alleen jij kunt het lezen (ECDH P-256-sleutels, AES-256 en HMAC-SHA256). FT8-spots worden alleen getoond als ze binnen 3 minuten geen parallelle paden hebben. Standaard aan; yams_scambio=0 in data/config.ini zet het uit.
+LI|De uitwisseling maakt versleuteld verbinding met de brokers (TLS: HiveMQ en EMQX poort 8883, Mosquitto 8886) en valt alleen terug op poort 1883 als een broker TLS weigert. De eerste sleutel die voor een roepnaam wordt gezien, blijft vastgelegd in data/yams_chiavi.txt: verschijnt een station met een andere sleutel, dan blijft het programma de bekende gebruiken en toont het UDP-vak van de Gegevensverzameling de knop «Nieuwe sleutels accepteren», alleen te gebruiken als je weet dat het station YA-MS opnieuw heeft geïnstalleerd.
 LI|Spots van alle banden worden getoond, ook van banden die niet in Gegevensverzameling zijn gekozen (die worden niet opgeslagen). CW-spots en spots tussen te dicht bij elkaar liggende stations worden niet getoond als ze in Gegevensverzameling worden weggegooid.
 LI|De kaart toont de roepletters van beide stations van elke spot, één keer per station. De projectie is azimutaal (gecentreerd op je station) of Mercator. De tooltip op de kolom Wolk legt de betekenis uit.
 H2|9.2 Radarflux
@@ -228,6 +234,7 @@ LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: de zwermencatalogus en de posi
 LI|flusso_collm.csv, quote_collm.csv: archieven van de radar van Collm; radar/: laatste afbeeldingen, RMOB-bestanden en gegevens van de live bronnen; fonti_radar.csv: adressen van de bronnen, elk afzonderlijk in te schakelen.
 LI|cataloghi/: IAU MDC-catalogus; radar/diretta/: GMN- en CMOR-gegevens.
 LI|call3.txt: locatorarchief; spot_ms/: verzamelde meteorscatter-spots; adif_quadrati.csv: vakken uit het ADIF.
+LI|radar/rmoj/: RMOJ-maandbestanden uit Japan; radar/hro_ogaki_*.csv: tellingen uit Ogaki van de laatste 3 dagen; radar/gfs_*.json: GFS-profielen voor de refractie (3 uur geldig).
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: de technische documenten.
 LI|backup/: kopieën van de bestanden die door een update zijn vervangen; aggiornamento/: gedownload pakket (bij de herstart gewist).
 H2|13.3 Het tabblad Instellingen
@@ -237,6 +244,7 @@ LI|controlla_aggiornamenti=0: niet controleren op nieuwe versies; aggiornamenti_
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: de selectievakjes van de berekening.
 LI|raggio_iniziale (0 = dubbel van de ITU, 1 = ITU, 2 = uitgesloten), durata_ping (0 = λ², 1 = waargenomen).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|rifrazione_gfs (0 = uit, 1 = aan), prev_fonte (collm, toyokawa, otsu), rmoj_osservatore: refractie en Japanse bronnen.
 LI|psk_rimando=0: zet het doorsturen naar PSKReporter van de via UDP ontvangen MS-decoderingen (MSK144, FSK441, PSK2K, JTMS) uit. Het staat standaard aan en werkt vanzelf: ontbreekt je roepnaam al meer dan 20 minuten bij de stations die rapporten naar PSKReporter sturen (het digitale programma stuurt niet), dan stuurt YA-MS elke 5 minuten de MS-stations die je decodeert, met jou als ontvanger; zodra het digitale programma weer stuurt, stopt YA-MS. Een regel in de UDP-console meldt start en stop. Staat het verzenden naar PSKReporter in WSJT-X.ini (of JTDX.ini) uit, dan stuurt YA-MS meteen door, zonder 20 minuten te wachten.
 TAG|ATTENZIONE|Wijzig config.ini alleen als het programma gesloten is: bij het afsluiten schrijft YA-MS het opnieuw.
 H1|14. Typische werkwijzen

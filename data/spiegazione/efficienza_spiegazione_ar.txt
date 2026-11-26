@@ -20,8 +20,8 @@ TAG|RILIEVO|رسم Collm بتاريخ 5/11/2026: المنوال 89,5 km، الم
 TAG|RILIEVO|يستخدم DJ5HG [18] و QTFGUI [17] ارتفاعاً ثابتاً قدره 102 km؛ ويفضّل البرنامج القيمة التي يقيسها الرادار. تعطي التوصية ITU-R P.843 [24] ارتفاعاً متوسطاً h = 124 − 17·log10(f) km: نحو 97 km عند 36,2 MHz و 87 km عند 144 MHz، بما يتفق مع منوال Collm (89,5 km في 5/11/2026).
 H1|3. هندسة المسار
 H2|3.1 الأرض والمحطتان ونقطة المنتصف
-TAG|FONTE|أرض كروية نصف قطرها r = 6372,7955 km [1].
-TAG|SCELTA|المسار هو دائماً المسار الحقيقي بين محدد موقع المحطة ومحدد موقع المحطة المقابلة. وتُحسب المسافة والسمت ونقطة المنتصف بصيغ الدائرة العظمى.
+TAG|FONTE|المجسم الإهليلجي WGS84 [37]: نصف المحور الأكبر 6378,137 km، والتفلطح 1/298,257223563. وللصيغ الكروية (زاوية الارتفاع من المقال، والمدى، والانكسار) يستخدم البرنامج نصف القطر المتوسط للمجسم الإهليلجي، r = 6371,0088 km؛ وحتى الإصدار 1.8.23 كان يستخدم كرة نصف قطرها 6372,7955 km [1].
+TAG|SCELTA|المسار هو دائماً المسار الحقيقي بين محدد موقع المحطة ومحدد موقع المحطة المقابلة. ومنذ الإصدار 1.8.27 تُحسب المسافة والسمت ونقطة المنتصف على الخط الجيوديسي للمجسم الإهليلجي بطريقة Karney [38]: مقارنةً بالكرة تتغير المسافات بنسبة 0,5% على الأكثر والسموت ببضعة أعشار الدرجة.
 TAG|FONTE|الحسابات المعتمدة على الوقت منسوبة إلى نقطة منتصف المسار: فقد تختلف أفضل ساعة بين الطرفين حتى 1,5 ساعة (SM6FHZ [4]).
 H2|3.2 الارتفاع الزاوي للهوائي
 TAG|FONTE|يُحسب الارتفاع الزاوي نحو نقطة الانعكاس بصيغة المقال (الصورة 7) [1]، حيث x = المسافة / r، و H ارتفاع الأثر، و h ارتفاع المحطة:
@@ -41,10 +41,13 @@ TAG|RILIEVO|بجدول AMS: 1000 km → 13°، s ≈ 115 km؛ 1250 km → 11°،
 TAG|SCELTA|للساعة المعروضة على قبة السماء يجمع البرنامج، على جميع الزخات فوق الأفق، حاصل ZHR x الكفاءة مقسوماً بين الجانب A والجانب B (الفصل 7.1). والبقعة الساخنة في الجانب الذي يتلقى انعكاسات أكثر هي الموصى بها: وتظهر باللون الأحمر على الخريطة.
 TAG|FONTE|وفقاً لـ DJ5HG، كما ينقل DF5HC [16]، يحدث الانعكاس على مخروط حول الأثر: في المسارات الأقصر يجب توجيه الهوائيات إلى جانب الاتجاه المباشر، والمحطتان كلتاهما نحو النقطة نفسها، وبحسب موقع نقطة الإشعاع تكون إحدى النقطتين (HOT-A أو HOT-B) أكثر ملاءمة. ويذكر DF5HC أيضاً أن أفضل مسافة هي 1300-1500 km، مع حد أقصى يتجاوز 2000 km بقليل.
 H2|3.5 فص الهوائي
-TAG|FONTE|كسب هوائي Yagi طويل من طول الذراع (منحنى DL6WU [10]) وعرض الفص عند −3 dB من الكسب (قاعدة Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|كسب هوائي Yagi من طول الذراع (الخط المستقيم المتوسط لجداول VE7BQH لكل نطاق [36]، ومنحنى DL6WU [10] للمقارنة) وعرض الفص عند −3 dB من الكسب (قاعدة Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|تؤكد محاكاة NEC لـ W4RNL [12] منحنى الكسب في حدود 0,1 dB لهوائيات DL6WU ولهوائيات David Tanner VK3AUU على حد سواء، وهذه الأخيرة لها ذراع أقصر للعدد نفسه من العناصر: فالكسب يعتمد على طول الذراع. وتعطي المحاكاة نفسها فصاً أفقياً أضيق من Kraus بنسبة 5-10 %.
+TAG|RILIEVO|متوسط VE7BQH ناقص منحنى DL6WU: عند 50 MHz ضمن 0,25 dB من 2 إلى 16 λ؛ عند 144 MHz من −0,04 dB عند 1 λ إلى +0,42 dB عند 10 λ؛ عند 432 MHz من −0,06 dB عند 2 λ إلى +0,55 dB عند 10 λ. في هوائيات DL6WU وVK3AUU التي حاكاها W4RNL عند 432 MHz يزيد متوسط VE7BQH بمقدار 0,15–0,55 dB على NEC: على الأذرع الطويلة تعطي هوائيات الجداول المحسّنة بالحاسوب أكثر من التصاميم الأصلية.
 TAG|SCELTA|الفص الأفقي (فص التوجيه في السمت) = 0,93 · θK؛ الفص العمودي = θK. هوائي Yagi طوله 14 λ عند 432 MHz: 20,3 dBi، و 18,1° أفقياً و 19,5° عمودياً؛ وتعطي نماذج W4RNL القيم 20,4 dBi و 18,4°/18,8°.
+TAG|RILIEVO|بمتوسط VE7BQH يعطي هوائي Yagi نفسه بطول 14 λ كسباً قدره 21,0 dBi وفصاً 16,9° أفقياً و18,1° عمودياً؛ أما 20,3 dBi أعلاه فمن منحنى DL6WU. تبقى تصحيحات الفص (0,93 · θK وθK) المستخلصة من هوائيات DL6WU.
 TAG|SCELTA|يُعتبر الهوائي دائماً موجّهاً نحو المحطة المقابلة. والبقعة الساخنة التي تقع ضمن ±θ/2 من ذلك الاتجاه يغطيها الفص أصلاً: فتُعلَّم بالرمادي بدلاً من الوردي وينبّه البرنامج إلى ذلك. أما البقعة الساخنة الموصى بها حسب الكفاءة فتبقى حمراء في كل الأحوال.
 H1|4. نقطة إشعاع الزخة
 H2|4.1 موقع نقطة الإشعاع
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms، الطبعة 2، Willmann-Bell, 1998
 SRC|7. رادار الشهب في Collm، جامعة لايبزيغ (LIM) و IAP Kühlungsborn، wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (عن Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - منحنى كسب هوائيات Yagi الطويلة، كما ينقله W8IO، www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas"، VHF Communications 14، 3/1982، ص 130-138، الشكل 1 (مصدر أولي)؛ ويورد المنحنى أيضاً W8IO، www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org، نشرة يونيو 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - جداول كسب هوائيات Yagi للترددات 50 و144 و432 MHz: dxmaps.com/VE7BQH6.html، dxmaps.com/VE7BQH.html، atlas.dxmaps.com/VE7BQH70.html (نسخ على qsl.net/dk7zb وsm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

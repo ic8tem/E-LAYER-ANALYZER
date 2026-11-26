@@ -20,8 +20,8 @@ TAG|RILIEVO|Graficul de la Collm din 5/11/2026: mod 89,5 km, medie 88,6 km, abat
 TAG|RILIEVO|DJ5HG [18] și QTFGUI [17] folosesc o altitudine fixă de 102 km; programul preferă valoarea măsurată de radar. Recomandarea ITU-R P.843 [24] dă o altitudine medie h = 124 − 17·log10(f) km: circa 97 km la 36,2 MHz și 87 km la 144 MHz, în acord cu modul de la Collm (89,5 km pe 5/11/2026).
 H1|3. Geometria traseului
 H2|3.1 Pământul, stațiile și punctul median
-TAG|FONTE|Pământ sferic cu raza r = 6372,7955 km [1].
-TAG|SCELTA|Traseul este întotdeauna cel real dintre locatorul stației și cel al corespondentului. Distanța, azimutul și punctul median se calculează cu formulele cercului mare.
+TAG|FONTE|Elipsoidul WGS84 [37]: semiaxa mare 6378,137 km, turtire 1/298,257223563. Pentru formulele sferice (elevația din articol, raza de acțiune, refracția) programul folosește raza medie a elipsoidului, r = 6371,0088 km; până la versiunea 1.8.23 folosea sfera cu raza de 6372,7955 km [1].
+TAG|SCELTA|Traseul este întotdeauna cel real dintre locatorul stației și cel al corespondentului. Începând cu versiunea 1.8.27, distanța, azimutul și punctul de mijloc se calculează pe geodezica elipsoidului cu metoda lui Karney [38]: față de sferă, distanțele se schimbă cu cel mult 0,5%, iar azimuturile cu câteva zecimi de grad.
 TAG|FONTE|Calculele care depind de oră se raportează la punctul median al traseului: între cele două capete ora cea mai bună poate diferi cu până la 1,5 ore (SM6FHZ [4]).
 H2|3.2 Elevația antenei
 TAG|FONTE|Elevația spre punctul de reflexie se calculează cu formula din articol (Imaginea 7) [1], cu x = distanța / r, H altitudinea dârei, h altitudinea stației:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Cu tabelul AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s 
 TAG|SCELTA|Pentru ora afișată pe bolta cerească programul însumează, pentru toate roiurile deasupra orizontului, ZHR x eficiență împărțit între latura A și latura B (capitolul 7.1). Hot spot-ul laturii care primește mai multe reflexii este cel recomandat: apare cu roșu pe hartă.
 TAG|FONTE|După DJ5HG, citat de DF5HC [16], reflexia are loc pe un con în jurul dârei: pentru traseele mai scurte antenele trebuie îndreptate lateral față de direcția directă, ambele stații spre același punct, iar în funcție de poziția radiantului unul dintre cele două puncte (HOT-A sau HOT-B) este mai favorabil. DF5HC indică și distanța cea mai bună în 1300-1500 km, cu un maxim puțin peste 2000 km.
 H2|3.5 Lobul antenei
-TAG|FONTE|Câștigul unei Yagi lungi din lungimea boom-ului (curba DL6WU [10]) și deschiderea lobului la −3 dB din câștig (regula lui Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Câștigul unei antene Yagi din lungimea boomului (dreapta medie a tabelelor VE7BQH pe bandă [36], curba DL6WU [10] pentru comparație) și deschiderea lobului la −3 dB din câștig (regula lui Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Simulările NEC ale lui W4RNL [12] confirmă curba câștigului în limita a 0,1 dB atât pentru antenele Yagi DL6WU, cât și pentru cele ale lui David Tanner VK3AUU, care la același număr de elemente au boom-ul mai scurt: câștigul depinde de lungimea boom-ului. Aceleași simulări dau un lob orizontal mai îngust decât Kraus cu 5-10 %.
+TAG|RILIEVO|Media VE7BQH minus curba DL6WU: la 50 MHz în limita a 0,25 dB între 2 și 16 λ; la 144 MHz de la −0,04 dB la 1 λ la +0,42 dB la 10 λ; la 432 MHz de la −0,06 dB la 2 λ la +0,55 dB la 10 λ. Pe antenele DL6WU și VK3AUU simulate de W4RNL la 432 MHz, media VE7BQH este cu 0,15–0,55 dB peste NEC: pe boomuri lungi antenele din tabele, optimizate pe calculator, rândesc mai mult decât proiectele originale.
 TAG|SCELTA|Lob orizontal (cel al orientării în azimut) = 0,93 · θK; lob vertical = θK. Yagi de 14 λ la 432 MHz: 20,3 dBi, 18,1° orizontal și 19,5° vertical; modelele lui W4RNL dau 20,4 dBi și 18,4°/18,8°.
+TAG|RILIEVO|Cu media VE7BQH aceeași antenă Yagi de 14 λ dă 21,0 dBi și un lob de 16,9° orizontal și 18,1° vertical; cei 20,3 dBi de mai sus provin din curba DL6WU. Corecțiile lobului (0,93 · θK și θK) rămân cele deduse din antenele DL6WU.
 TAG|SCELTA|Antena se consideră întotdeauna îndreptată spre corespondent. Un hot spot care cade în limita a ±θ/2 de acea direcție este deja acoperit de lob: este marcat cu gri în loc de roz, iar programul avertizează. Hot spot-ul recomandat pe baza eficienței rămâne în orice caz roșu.
 H1|4. Radiantul roiului
 H2|4.1 Poziția radiantului
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, ed. a 2-a, Willmann-Bell, 1998.
 SRC|7. Radarul meteoric de la Collm, Universitatea din Leipzig (LIM) și IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (după Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - curba câștigului antenelor Yagi lungi, redată de W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, fig. 1 (sursă primară); curbă redată și de W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, buletinul din iunie 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tabele de câștig pentru antene Yagi la 50, 144 și 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (copii pe qsl.net/dk7zb și sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

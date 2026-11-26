@@ -20,8 +20,8 @@ TAG|RILIEVO|Wykres z Collm z 5/11/2026: dominanta 89,5 km, średnia 88,6 km, odc
 TAG|RILIEVO|DJ5HG [18] i QTFGUI [17] używają stałej wysokości 102 km; program preferuje dane zmierzone przez radar. Zalecenie ITU-R P.843 [24] podaje średnią wysokość h = 124 − 17·log10(f) km: ok. 97 km przy 36,2 MHz i 87 km przy 144 MHz, co zgadza się z dominantą z Collm (89,5 km w dniu 5/11/2026).
 H1|3. Geometria trasy
 H2|3.1 Ziemia, stacje i punkt środkowy
-TAG|FONTE|Ziemia sferyczna o promieniu r = 6372,7955 km [1].
-TAG|SCELTA|Trasa jest zawsze rzeczywistą trasą między lokatorem stacji a lokatorem korespondenta. Odległość, azymut i punkt środkowy oblicza się wzorami koła wielkiego.
+TAG|FONTE|Elipsoida WGS84 [37]: duża półoś 6378,137 km, spłaszczenie 1/298,257223563. Do wzorów sferycznych (elewacja z artykułu, zasięg, refrakcja) program używa średniego promienia elipsoidy, r = 6371,0088 km; do wersji 1.8.23 używał sfery o promieniu 6372,7955 km [1].
+TAG|SCELTA|Trasa jest zawsze rzeczywistą trasą między lokatorem stacji a lokatorem korespondenta. Od wersji 1.8.27 odległość, azymut i punkt środkowy oblicza się na linii geodezyjnej elipsoidy metodą Karneya [38]: w porównaniu ze sferą odległości zmieniają się najwyżej o 0,5%, a azymuty o kilka dziesiątych stopnia.
 TAG|FONTE|Obliczenia zależne od godziny odnoszą się do punktu środkowego trasy: między jej końcami najlepsza godzina może się różnić nawet o 1,5 godziny (SM6FHZ [4]).
 H2|3.2 Elewacja anteny
 TAG|FONTE|Elewację w kierunku punktu odbicia oblicza się wzorem z artykułu (Rysunek 7) [1], gdzie x = odległość / r, H wysokość śladu, h wysokość stacji:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Z tabelą AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s �
 TAG|SCELTA|Dla godziny pokazanej na sklepieniu niebieskim program sumuje, po wszystkich rojach nad horyzontem, ZHR x efektywność, podzielone między stronę A i stronę B (rozdział 7.1). Zalecany jest hot spot strony, która otrzymuje więcej odbić: na mapie jest oznaczony na czerwono.
 TAG|FONTE|Według DJ5HG, przytoczonego przez DF5HC [16], odbicie zachodzi na stożku wokół śladu: na krótszych trasach anteny należy skierować w bok od kierunku bezpośredniego, obie stacje na ten sam punkt, a w zależności od położenia radiantu jeden z dwóch punktów (HOT-A lub HOT-B) jest korzystniejszy. DF5HC podaje też najlepszą odległość 1300-1500 km, z maksimum nieco powyżej 2000 km.
 H2|3.5 Wiązka anteny
-TAG|FONTE|Zysk długiej anteny Yagi na podstawie długości boomu (krzywa DL6WU [10]) i szerokość wiązki na poziomie −3 dB na podstawie zysku (reguła Krausa [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Zysk anteny Yagi z długości bomu (prosta średnia tabel VE7BQH dla każdego pasma [36], krzywa DL6WU [10] do porównania) i szerokość wiązki −3 dB z zysku (reguła Krausa [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Symulacje NEC W4RNL [12] potwierdzają krzywą zysku z dokładnością do 0,1 dB zarówno dla anten Yagi DL6WU, jak i dla anten Davida Tannera VK3AUU, które przy tej samej liczbie elementów mają krótszy boom: zysk zależy od długości boomu. Te same symulacje dają wiązkę poziomą węższą niż według Krausa o 5-10 %.
+TAG|RILIEVO|Średnia VE7BQH minus krzywa DL6WU: na 50 MHz w granicach 0,25 dB od 2 do 16 λ; na 144 MHz od −0,04 dB przy 1 λ do +0,42 dB przy 10 λ; na 432 MHz od −0,06 dB przy 2 λ do +0,55 dB przy 10 λ. Dla anten DL6WU i VK3AUU symulowanych przez W4RNL na 432 MHz średnia VE7BQH jest o 0,15–0,55 dB powyżej NEC: na długich bomach optymalizowane komputerowo anteny z tabel dają więcej niż oryginalne konstrukcje.
 TAG|SCELTA|Wiązka pozioma (ta, według której kieruje się antenę w azymucie) = 0,93 · θK; wiązka pionowa = θK. Yagi 14 λ przy 432 MHz: 20,3 dBi, 18,1° w poziomie i 19,5° w pionie; modele W4RNL dają 20,4 dBi i 18,4°/18,8°.
+TAG|RILIEVO|Według średniej VE7BQH ta sama antena 14 λ daje 21,0 dBi i wiązkę 16,9° w poziomie i 18,1° w pionie; 20,3 dBi powyżej pochodzi z krzywej DL6WU. Poprawki wiązki (0,93 · θK i θK) pozostają te wyprowadzone z anten DL6WU.
 TAG|SCELTA|Antenę uważa się zawsze za skierowaną na korespondenta. Hot spot leżący w granicach ±θ/2 od tego kierunku jest już objęty wiązką: jest oznaczony na szaro zamiast na różowo, a program ostrzega o tym. Hot spot zalecany na podstawie efektywności pozostaje w każdym razie czerwony.
 H1|4. Radiant roju
 H2|4.1 Położenie radiantu
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, wyd. 2, Willmann-Bell, 1998.
 SRC|7. Radar meteorowy w Collm, Uniwersytet Lipski (LIM) i IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (według Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - krzywa zysku długich anten Yagi, przytoczona przez W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, s. 130-138, rys. 1 (źródło pierwotne); krzywą podaje też W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, biuletyn z czerwca 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tabele zysku anten Yagi dla 50, 144 i 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopie na qsl.net/dk7zb i sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

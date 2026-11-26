@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm-grafiek van 5/11/2026: modus 89,5 km, gemiddelde 88,6 km, stan
 TAG|RILIEVO|DJ5HG [18] en QTFGUI [17] gebruik 'n vaste hoogte van 102 km; die program verkies die data wat die radar meet. Aanbeveling ITU-R P.843 [24] gee 'n gemiddelde hoogte h = 124 − 17·log10(f) km: ongeveer 97 km by 36,2 MHz en 87 km by 144 MHz, in lyn met die Collm-modus (89,5 km op 5/11/2026).
 H1|3. Die geometrie van die pad
 H2|3.1 Aarde, stasies en middelpunt
-TAG|FONTE|Sferiese Aarde met radius r = 6372,7955 km [1].
-TAG|SCELTA|Die pad is altyd die werklike een tussen die lokator van die stasie en dié van die DX-stasie. Afstand, azimut en middelpunt word met die grootsirkelformules bereken.
+TAG|FONTE|WGS84-ellipsoïed [37]: halwe hoofas 6378,137 km, afplatting 1/298,257223563. Vir die sferiese formules (elevasie uit die artikel, reikwydte, refraksie) gebruik die program die gemiddelde radius van die ellipsoïed, r = 6371,0088 km; tot weergawe 1.8.23 het dit die sfeer met radius 6372,7955 km gebruik [1].
+TAG|SCELTA|Die pad is altyd die werklike een tussen die lokator van die stasie en dié van die DX-stasie. Vanaf weergawe 1.8.27 word afstand, azimut en middelpunt op die geodeet van die ellipsoïed met Karney se metode [38] bereken: vergeleke met die sfeer verander afstande hoogstens 0,5% en azimute 'n paar tiendes van 'n graad.
 TAG|FONTE|Die berekeninge wat van die tyd afhang, verwys na die middelpunt van die pad: tussen die twee eindpunte kan die beste uur tot 1,5 uur verskil (SM6FHZ [4]).
 H2|3.2 Antenna-elevasie
 TAG|FONTE|Die elevasie na die refleksiepunt word bereken met die formule van die artikel (Beeld 7) [1], met x = afstand / r, H hoogte van die spoor, h hoogte van die stasie:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Met die AMS-tabel: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°,
 TAG|SCELTA|Vir die uur wat op die lugaansig getoon word, tel die program oor al die swerms bo die horison ZHR x doeltreffendheid op, verdeel tussen kant A en kant B (hoofstuk 7.1). Die hot spot van die kant wat die meeste refleksies ontvang, is die aanbevole een: dit verskyn rooi op die kaart.
 TAG|FONTE|Volgens DJ5HG, aangehaal deur DF5HC [16], vind die refleksie plaas op 'n keël rondom die spoor: vir korter paaie moet die antennas opsy van die direkte rigting gerig word, albei stasies na dieselfde punt, en na gelang van die posisie van die radiant is een van die twee punte (HOT-A of HOT-B) gunstiger. DF5HC noem ook die beste afstand as 1300-1500 km, met 'n maksimum effens bo 2000 km.
 H2|3.5 Die lob van die antenna
-TAG|FONTE|Wins van 'n lang Yagi uit die boomlengte (DL6WU-kromme [10]) en −3 dB-lobwydte uit die wins (Kraus-reël [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Wins van 'n Yagi uit die boomlengte (gemiddelde reguitlyn van die VE7BQH-tabelle per band [36], DL6WU-kurwe [10] ter vergelyking) en −3 dB-lobwydte uit die wins (Kraus-reël [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Die NEC-simulasies van W4RNL [12] bevestig die winskromme binne 0,1 dB vir sowel die DL6WU-Yagi's as dié van David Tanner VK3AUU, wat by dieselfde aantal elemente 'n korter boom het: die wins hang van die boomlengte af. Dieselfde simulasies gee 'n horisontale lob wat 5-10 % smaller as Kraus is.
+TAG|RILIEVO|VE7BQH-gemiddelde minus DL6WU-kurwe: by 50 MHz binne 0,25 dB van 2 tot 16 λ; by 144 MHz van −0,04 dB by 1 λ tot +0,42 dB by 10 λ; by 432 MHz van −0,06 dB by 2 λ tot +0,55 dB by 10 λ. Op die DL6WU- en VK3AUU-Yagi's wat W4RNL by 432 MHz gesimuleer het, lê die VE7BQH-gemiddelde 0,15–0,55 dB bo NEC: op lang booms presteer die rekenaar-geoptimeerde Yagi's van die tabelle beter as die oorspronklike ontwerpe.
 TAG|SCELTA|Horisontale lob (dié van die azimutrigting) = 0,93 · θK; vertikale lob = θK. Yagi van 14 λ by 432 MHz: 20,3 dBi, 18,1° horisontaal en 19,5° vertikaal; die modelle van W4RNL gee 20,4 dBi en 18,4°/18,8°.
+TAG|RILIEVO|Met die VE7BQH-gemiddelde gee dieselfde Yagi van 14 λ 21,0 dBi en 'n lob van 16,9° horisontaal en 18,1° vertikaal; die 20,3 dBi hierbo kom van die DL6WU-kurwe. Die lobkorreksies (0,93 · θK en θK) bly dié wat van die DL6WU-Yagi's afgelei is.
 TAG|SCELTA|Die antenna word altyd beskou as gerig op die DX-stasie. 'n Hot spot wat binne ±θ/2 van daardie rigting val, word reeds deur die lob gedek: dit word grys in plaas van pienk gemerk en die program waarsku. Die hot spot wat deur die doeltreffendheid aanbeveel word, bly in elk geval rooi.
 H1|4. Die radiant van die swerm
 H2|4.1 Posisie van die radiant
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2de uitg., Willmann-Bell, 1998.
 SRC|7. Collm-meteoorradar, Universiteit van Leipzig (LIM) en IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (uit Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - winskromme van lang Yagi's, aangehaal deur W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, bl. 130-138, fig. 1 (primêre bron); kurwe ook deur W8IO aangehaal, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin van Junie 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi-winstabelle vir 50, 144 en 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopieë op qsl.net/dk7zb en sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

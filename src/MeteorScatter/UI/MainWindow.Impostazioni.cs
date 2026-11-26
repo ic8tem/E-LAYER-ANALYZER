@@ -69,7 +69,7 @@ namespace YAMS
             };
             look.Add(Row(L(Lang.T("Modalità compatta")), cmp));
             if (Hosted) col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.")));   // E-LAYER ANALYZER (tools/sync_yams.py)
-            else col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Tema e lingua sono anche in alto a destra, accanto alle linguette."), look.ToArray()));
+            else col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("La lingua è anche in alto a destra, accanto alle linguette."), look.ToArray()));
 
             // --- Aggiornamenti del programma (dentro E-LAYER ANALYZER li gestisce E-LAYER)
             if (!Hosted)

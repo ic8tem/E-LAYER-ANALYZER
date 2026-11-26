@@ -20,8 +20,8 @@ TAG|RILIEVO|Graf z Collmu z 5/11/2026: modus 89,5 km, průměr 88,6 km, směroda
 TAG|RILIEVO|DJ5HG [18] a QTFGUI [17] používají pevnou výšku 102 km; program dává přednost hodnotě změřené radarem. Doporučení ITU-R P.843 [24] udává střední výšku h = 124 − 17·log10(f) km: asi 97 km na 36,2 MHz a 87 km na 144 MHz, v souladu s modusem z Collmu (89,5 km dne 5/11/2026).
 H1|3. Geometrie trasy
 H2|3.1 Země, stanice a střední bod
-TAG|FONTE|Kulová Země o poloměru r = 6372,7955 km [1].
-TAG|SCELTA|Trasa je vždy skutečná trasa mezi lokátorem stanice a lokátorem protistanice. Vzdálenost, azimut a střední bod se počítají vzorci hlavní kružnice.
+TAG|FONTE|Elipsoid WGS84 [37]: hlavní poloosa 6378,137 km, zploštění 1/298,257223563. Pro sférické vzorce (elevace z článku, dosah, refrakce) program používá střední poloměr elipsoidu, r = 6371,0088 km; do verze 1.8.23 používal kouli o poloměru 6372,7955 km [1].
+TAG|SCELTA|Trasa je vždy skutečná trasa mezi lokátorem stanice a lokátorem protistanice. Od verze 1.8.27 se vzdálenost, azimut a střed trasy počítají na geodetice elipsoidu Karneyho metodou [38]: oproti kouli se vzdálenosti mění nejvýše o 0,5 % a azimuty o několik desetin stupně.
 TAG|FONTE|Výpočty závislé na čase se vztahují ke střednímu bodu trasy: mezi oběma konci se nejlepší čas může lišit až o 1,5 hodiny (SM6FHZ [4]).
 H2|3.2 Elevace antény
 TAG|FONTE|Elevace k bodu odrazu se počítá vzorcem z článku (Obrázek 7) [1], s x = vzdálenost / r, H výškou stopy, h výškou stanice:
@@ -41,10 +41,13 @@ TAG|RILIEVO|S tabulkou AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s 
 TAG|SCELTA|Pro čas zobrazený na nebeské klenbě program sečte přes všechny roje nad horizontem ZHR x účinnost rozdělené mezi stranu A a stranu B (kapitola 7.1). Hot spot strany, která přijímá více odrazů, je doporučený: na mapě se zobrazí červeně.
 TAG|FONTE|Podle DJ5HG, citovaného DF5HC [16], nastává odraz na kuželu kolem stopy: pro kratší trasy se antény mají směrovat stranou od přímého směru, obě stanice na stejný bod, a podle polohy radiantu je jeden ze dvou bodů (HOT-A nebo HOT-B) příznivější. DF5HC také udává nejlepší vzdálenost 1300-1500 km, s maximem těsně nad 2000 km.
 H2|3.5 Lalok antény
-TAG|FONTE|Zisk dlouhé Yagi z délky ráhna (křivka DL6WU [10]) a šířka laloku −3 dB ze zisku (Krausovo pravidlo [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Zisk antény Yagi z délky ráhna (střední přímka tabulek VE7BQH pro každé pásmo [36], křivka DL6WU [10] pro srovnání) a šířka laloku −3 dB ze zisku (Krausovo pravidlo [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Simulace NEC od W4RNL [12] potvrzují křivku zisku do 0,1 dB jak pro Yagi DL6WU, tak pro Yagi Davida Tannera VK3AUU, které mají při stejném počtu prvků kratší ráhno: zisk závisí na délce ráhna. Tytéž simulace dávají vodorovný lalok o 5-10 % užší než Kraus.
+TAG|RILIEVO|Průměr VE7BQH minus křivka DL6WU: na 50 MHz do 0,25 dB od 2 do 16 λ; na 144 MHz od −0,04 dB při 1 λ po +0,42 dB při 10 λ; na 432 MHz od −0,06 dB při 2 λ po +0,55 dB při 10 λ. U antén DL6WU a VK3AUU simulovaných W4RNL na 432 MHz je průměr VE7BQH o 0,15–0,55 dB nad NEC: na dlouhých ráhnech dávají počítačově optimalizované antény z tabulek víc než původní konstrukce.
 TAG|SCELTA|Vodorovný lalok (ten pro nasměrování v azimutu) = 0,93 · θK; svislý lalok = θK. Yagi 14 λ na 432 MHz: 20,3 dBi, 18,1° vodorovně a 19,5° svisle; modely W4RNL dávají 20,4 dBi a 18,4°/18,8°.
+TAG|RILIEVO|S průměrem VE7BQH dává tatáž anténa 14 λ 21,0 dBi a lalok 16,9° vodorovně a 18,1° svisle; 20,3 dBi výše pochází z křivky DL6WU. Korekce laloku (0,93 · θK a θK) zůstávají ty odvozené z antén DL6WU.
 TAG|SCELTA|Anténa se vždy považuje za nasměrovanou na protistanici. Hot spot, který leží do ±θ/2 od tohoto směru, je již pokryt lalokem: je označen šedě místo růžově a program na to upozorní. Hot spot doporučený podle účinnosti zůstává v každém případě červený.
 H1|4. Radiant roje
 H2|4.1 Poloha radiantu
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. vyd., Willmann-Bell, 1998.
 SRC|7. Meteorický radar Collm, Univerzita Lipsko (LIM) a IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (podle Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - křivka zisku dlouhých Yagi, uváděná W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, s. 130-138, obr. 1 (primární zdroj); křivku uvádí také W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin z června 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tabulky zisku antén Yagi pro 50, 144 a 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopie na qsl.net/dk7zb a sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

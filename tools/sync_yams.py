@@ -233,6 +233,12 @@ if os.path.exists(p):
             '        // E-LAYER ANALYZER: riga ricevuta da una sessione di DATA COLLECTION (0 = cluster, 1 = RBN, 2 = PSKReporter)\n'
             '        public static void Feed(int source, string line) { lock (lk) pending.Enqueue(new KeyValuePair<int, string>(source, line)); }',
             'MsCollector.Feed')
+    # impostazioni e cartella dati di YA-MS anche per le caselle degli invii in rete in IMPOSTAZIONI (26/11/2026)
+    s = rep(s, '        public static void Init(string dataDir, Config cfg)\n        {\n',
+            '        public static Config Cfg;   // impostazioni di YA-MS (config.ini), anche per le caselle di E-LAYER ANALYZER\n'
+            '        public static string DataDir;\n\n'
+            '        public static void Init(string dataDir, Config cfg)\n        {\n            Cfg = cfg; DataDir = dataDir;\n',
+            'MsCollector.Cfg')
     wr(p, s)
 
 # --- Aggiornamento automatico di YA-MS (dalla 1.8.0): dentro E-LAYER ANALYZER lo fa E-LAYER ANALYZER (src/Ela/Updater.cs),
@@ -333,7 +339,7 @@ print('lingue:', len(LANGS))
 p = os.path.join(ui, 'MainWindow.Impostazioni.cs')
 if os.path.exists(p):
     s = rd(p)
-    A = '            col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Tema e lingua sono anche in alto a destra, accanto alle linguette."), look.ToArray()));'
+    A = '            col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("La lingua è anche in alto a destra, accanto alle linguette."), look.ToArray()));'
     s = rep(s, A, '            if (Hosted) col.Children.Add(SettingsSection(Lang.T("Aspetto"), Pal.Azure, Lang.T("Dentro E-LAYER ANALYZER carattere, colorazione, lingua e aggiornamenti si scelgono nella linguetta IMPOSTAZIONI di E-LAYER ANALYZER e valgono anche per METEOR SCATTER.")));   // E-LAYER ANALYZER (tools/sync_yams.py)\n            else ' + A.strip(), 'Aspetto nelle Impostazioni di YA-MS')
     wr(p, s)
 

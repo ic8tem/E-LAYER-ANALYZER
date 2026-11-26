@@ -321,6 +321,7 @@ namespace YAMS
         NumericUpDown udInPort, udOutPort;
         CheckBox udFwd, udAuto;
         TextBlock udState, udCounts, udDot;
+        Button udKeys;
         SelectableTextBlock udConsole;
         ScrollViewer udSv;
 
@@ -336,6 +337,9 @@ namespace YAMS
             Button bt = B(Lang.T("Ferma"));
             bs.Click += (s, e) => { UdApply(); WsjtxUdp.Start(); };
             bt.Click += (s, e) => WsjtxUdp.Stop();
+            // scambio tra utenti di YA-MS: chiavi cambiate rispetto a quelle fissate (es. un corrispondente ha reinstallato)
+            udKeys = B(""); udKeys.IsVisible = false;
+            udKeys.Click += (s, e) => { YamsShare.AcceptChangedKeys(); udKeys.IsVisible = false; };
             udFwd.IsCheckedChanged += (s, e) => WsjtxUdp.Forward = udFwd.IsChecked == true;
             udAuto.IsCheckedChanged += (s, e) => WsjtxUdp.AutoStart = udAuto.IsChecked == true;
             udState = new TextBlock { Foreground = Pal.B(Pal.Muted), Margin = new Thickness(8, 0), VerticalAlignment = VerticalAlignment.Center };
@@ -350,7 +354,7 @@ namespace YAMS
                 Foreground = Pal.B(Pal.Muted), FontSize = 12, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(6, 0, 6, 4)
             });
             DockTop(sp, Row(L(Lang.T("Ascolta")), udIn, L(Lang.T("Porta")), udInPort, udFwd, udOut, L(Lang.T("Porta")), udOutPort));
-            DockTop(sp, Row(bs, bt, udAuto, udState, udCounts));
+            DockTop(sp, Row(bs, bt, udAuto, udState, udCounts, udKeys));
             sp.Children.Add(udSv);
             return new Border
             {
@@ -629,6 +633,13 @@ namespace YAMS
                 udDot.Foreground = Pal.B(on ? Pal.Green : Pal.Muted);
                 ToolTip.SetTip(udDot, udState.Text);
                 udCounts.Text = Lang.F("pacchetti {0}, decodifiche {1}, QSO {2}, MS {3}", WsjtxUdp.Packets, WsjtxUdp.Decodes, WsjtxUdp.Qsos, MsCollector.Accepted[4]);
+                List<string> ck = YamsShare.ChangedKeys();
+                udKeys.IsVisible = ck.Count > 0;
+                if (ck.Count > 0)
+                {
+                    udKeys.Content = Lang.F("Accetta le chiavi nuove ({0})", ck.Count);
+                    ToolTip.SetTip(udKeys, Lang.T("Scambio tra utenti di YA-MS: questi nominativi hanno una chiave diversa da quella conosciuta. Accettala solo se sai che il corrispondente ha reinstallato il programma.") + "\n" + string.Join(", ", ck));
+                }
                 if (udSv.IsEffectivelyVisible)
                 {
                     string txt = WsjtxUdp.LogText();

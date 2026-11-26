@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm-diagrammet fra 5/11/2026: typetall 89,5 km, middelverdi 88,6 k
 TAG|RILIEVO|DJ5HG [18] og QTFGUI [17] bruker en fast høyde på 102 km; programmet foretrekker verdien målt av radaren. Anbefaling ITU-R P.843 [24] gir en middelhøyde h = 124 − 17·log10(f) km: omtrent 97 km ved 36,2 MHz og 87 km ved 144 MHz, i tråd med typetallet fra Collm (89,5 km den 5/11/2026).
 H1|3. Strekningens geometri
 H2|3.1 Jorden, stasjonene og midtpunktet
-TAG|FONTE|Kuleformet jord med radius r = 6372,7955 km [1].
-TAG|SCELTA|Strekningen er alltid den virkelige mellom stasjonens lokator og motstasjonens. Avstand, asimut og midtpunkt beregnes med storsirkelformlene.
+TAG|FONTE|WGS84-ellipsoiden [37]: store halvakse 6378,137 km, avflating 1/298,257223563. Til de sfæriske formlene (elevasjon fra artikkelen, rekkevidde, refraksjon) bruker programmet ellipsoidens middelradius, r = 6371,0088 km; til og med versjon 1.8.23 brukte det kulen med radius 6372,7955 km [1].
+TAG|SCELTA|Strekningen er alltid den virkelige mellom stasjonens lokator og motstasjonens. Fra versjon 1.8.27 beregnes avstand, asimut og midtpunkt på ellipsoidens geodet med Karneys metode [38]: sammenlignet med kulen endres avstandene høyst 0,5 % og asimutene noen tideler av en grad.
 TAG|FONTE|Tidsavhengige beregninger gjelder strekningens midtpunkt: mellom de to endene kan beste time avvike med opptil 1,5 timer (SM6FHZ [4]).
 H2|3.2 Antenneelevasjon
 TAG|FONTE|Elevasjonen mot refleksjonspunktet beregnes med artikkelens formel (Bilde 7) [1], med x = avstand / r, H sporets høyde, h stasjonens høyde:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Med AMS-tabellen: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, 
 TAG|SCELTA|For timen som vises på himmelhvelvingen summerer programmet, over alle svermer over horisonten, ZHR x effektivitet fordelt mellom side A og side B (kapittel 7.1). Hot spot på siden som mottar flest refleksjoner er den anbefalte: den vises i rødt på kartet.
 TAG|FONTE|Ifølge DJ5HG, gjengitt av DF5HC [16], skjer refleksjonen på en kjegle rundt sporet: for kortere strekninger skal antennene rettes til siden for den direkte retningen, begge stasjonene mot samme punkt, og avhengig av radiantens posisjon er ett av de to punktene (HOT-A eller HOT-B) gunstigere. DF5HC angir også den beste avstanden til 1300-1500 km, med et maksimum på litt over 2000 km.
 H2|3.5 Antennens lobe
-TAG|FONTE|Forsterkning for en lang Yagi ut fra bomlengden (DL6WU-kurven [10]) og lobens åpningsvinkel ved −3 dB ut fra forsterkningen (Kraus' regel [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Forsterkning for en Yagi ut fra bomlengden (middellinje for VE7BQH-tabellene per bånd [36], DL6WU-kurve [10] til sammenligning) og −3 dB-lobebredde ut fra forsterkningen (Kraus' regel [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNLs NEC-simuleringer [12] bekrefter forsterkningskurven innenfor 0,1 dB både for DL6WU-Yagiene og for David Tanner VK3AUUs, som ved samme antall elementer har kortere bom: forsterkningen avhenger av bomlengden. De samme simuleringene gir en horisontal lobe som er 5-10 % smalere enn etter Kraus.
+TAG|RILIEVO|VE7BQH-middel minus DL6WU-kurve: på 50 MHz innenfor 0,25 dB fra 2 til 16 λ; på 144 MHz fra −0,04 dB ved 1 λ til +0,42 dB ved 10 λ; på 432 MHz fra −0,06 dB ved 2 λ til +0,55 dB ved 10 λ. På DL6WU- og VK3AUU-Yagiene som W4RNL simulerte på 432 MHz, ligger VE7BQH-middelet 0,15–0,55 dB over NEC: på lange bommer yter tabellenes datamaskinoptimaliserte Yagier mer enn de opprinnelige konstruksjonene.
 TAG|SCELTA|Horisontal lobe (den for antenneretning i asimut) = 0,93 · θK; vertikal lobe = θK. Yagi på 14 λ ved 432 MHz: 20,3 dBi, 18,1° horisontalt og 19,5° vertikalt; W4RNLs modeller gir 20,4 dBi og 18,4°/18,8°.
+TAG|RILIEVO|Med VE7BQH-middelet gir den samme Yagien på 14 λ 21,0 dBi og en lobe på 16,9° horisontalt og 18,1° vertikalt; de 20,3 dBi ovenfor kommer fra DL6WU-kurven. Lobekorreksjonene (0,93 · θK og θK) er fortsatt de som er utledet fra DL6WU-Yagiene.
 TAG|SCELTA|Antennen regnes alltid som rettet mot motstasjonen. En hot spot som faller innenfor ±θ/2 fra den retningen, dekkes allerede av loben: den markeres i grått i stedet for rosa, og programmet gir en advarsel. Hot spot anbefalt av effektiviteten forblir uansett rød.
 H1|4. Svermens radiant
 H2|4.1 Radiantens posisjon
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. utg., Willmann-Bell, 1998.
 SRC|7. Meteorradaren i Collm, Universitetet i Leipzig (LIM) og IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (etter Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - forsterkningskurve for lange Yagi-antenner, gjengitt av W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, s. 130-138, fig. 1 (primærkilde); kurven gjengis også av W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin fra juni 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi-forsterkningstabeller for 50, 144 og 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopier på qsl.net/dk7zb og sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

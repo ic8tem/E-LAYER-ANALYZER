@@ -1,5 +1,5 @@
 TITLE|Manwal ng paggamit ng YA-MS
-SUB|Bersyon 1.8.20 - inihanda ni Costantino IC8TEM - Nobyembre 2026
+SUB|Bersyon 1.8.27 - inihanda ni Costantino IC8TEM - Nobyembre 2026
 H1|1. Panimula
 H2|1.1 Para saan ang YA-MS
 P|Tinutulungan ka ng YA-MS na hulaan at subaybayan nang live ang mga kondisyon ng meteor scatter sa pagitan ng iyong istasyon at ng isang DX station, mula 28 hanggang 432 MHz. Para sa bawat aktibong meteor shower, sinasabi nito kung gaano pinapaboran ng posisyon ng radiant nito ang iyong landas (ang episyensya), sa anong mga oras, mula sa aling panig ng landas dumarating ang mga repleksiyon, at saan pinakamainam itutok ang antena. Kasabay ng pagtataya, ipinapakita nito ang mga datos na sinusukat nang live: ang mga bilang ng meteor radar ng Collm, ang mga camera ng Global Meteor Network, ang CMOR radar, ang transmitter na GRAVES at ang trapiko ng meteor scatter na kinokolekta mula sa mga cluster at sa PSKReporter.
@@ -24,6 +24,7 @@ LI|macOS: ang .dmg para sa Apple Silicon (M1 at mas bago) o para sa Intel, o ang
 TAG|ATTENZIONE|Maaaring ipakita ng Windows ang “Pinrotektahan ng Windows ang iyong PC”: piliin ang “Higit pang impormasyon” at pagkatapos ang “Patakbuhin pa rin”. Sa macOS, sa unang pagkakataon, buksan ang app gamit ang right-click at “Open”. Hindi naka-sign ang programa gamit ang bayad na sertipiko.
 H2|2.2 Ang unang pagsisimula
 P|Sa pagsisimula, lumalabas nang ilang segundo ang screen na may Perseids sa itaas ng VLT ng ESO. Sa unang pagsisimula, pinipili ng YA-MS ang wika ng system kung isa ito sa 36, kung hindi ay Italyano; dina-download nito ang mapa ng Europa (Natural Earth) sa folder na data/mappa at nagpapakita ng halimbawang landas. Ilang minuto lang ang kailangan para i-set up ito para sa iyong istasyon (kabanata 4).
+P|Isang beses lang nabubuksan ang YA-MS: kung patakbuhin mo ito ulit habang bukas na, hindi tatakbo ang ikalawang kopya at lalabas sa harap ang bukas na window, kahit naka-minimize ito. Kaya hindi kailanman sabay na sumusulat ang dalawang kopya sa parehong mga file ng folder na data. Pagkatapos ng update, hinihintay ng bagong kopya na magsara ang luma.
 H2|2.3 Ang folder na data
 P|Lahat ng setting at lahat ng datos ay nasa iisang folder na data sa tabi ng programa: walang AppData, walang system folder. Para ilipat ang YA-MS sa ibang computer, kopyahin lang ang folder ng programa kasama ang folder na data nito. Inilalarawan sa kabanata 13 ang laman ng folder.
 H2|2.4 Mga awtomatikong update
@@ -40,7 +41,7 @@ P|Sa pagsisimula, tinitingnan ng YA-MS kung kumpleto ang lahat ng file nito (mga
 H1|3. Ang pangunahing window
 H2|3.1 Ang mga bahagi ng window
 LI|Sa itaas, dalawang hanay ng mga kontrol na para sa lahat ng tab: E layer at antena, oras ng kalkulasyon (kabanata 4). Nasa kanang itaas ng Live na trapiko ang iyong istasyon (locator, taas, banda at Kalkulahin).
-LI|Ang bar ng mga pangunahing tab, na may button na Mga kontrol sa kanan, ang color scheme (Tema) at ang wika.
+LI|Ang bar ng mga pangunahing tab, sa kanan ang button na Mga utos at ang wika. Ang scheme ng kulay (Tema) ay pinipili sa tab na Mga setting.
 LI|Ang mga sub-tab, sa isang mas mapusyaw na hanay, para sa mga tab na mayroon nito.
 LI|Sa ibaba, ang status bar: mga mensahe ng kalkulasyon, mga babala tungkol sa koneksiyon, at ang button na “Mga update”.
 H2|3.2 Ang mga tab
@@ -64,12 +65,13 @@ H2|4.2 Hanay 1: E layer at antena
 LI|Taas ng bakas km at mula sa radar: taas ng mga bakas ng meteor. Kapag naka-tsek ang “mula sa radar”, ginagamit ang pinakamadalas na taas na sinukat ng radar ng Collm (karaniwang 88-90 km); alisin ang tsek para isulat ito nang mano-mano.
 LI|Elevation ng lobe °: elevation ng maximum ng patayong lobe ng iyong antena. Ang isang directional na antena na nakapirmi sa 0° ay may pangunahing lobe pa rin na ilang digri sa itaas ng horizon, dahil sa repleksiyon sa lupa: karaniwang 3-8°, depende sa taas ng antena sa wavelength.
 LI|pattern ng antena: kapag naka-on (default), binibilang ang mga punto ng repleksiyon ayon sa patayong gain ng dalawang antena: buo sa paligid ng maximum ng lobe, pakaunti nang pakaunti patungo sa horizon at pataas. Kapag naka-off, ang elevation ng lobe ay isang matigas na hangganan: hindi binibilang ang mga puntong nakikita sa mas mababa.
-LI|Yagi antena: boom m: haba ng boom. Sa tabi nito, isinusulat ng programa ang haba sa wavelength, ang gain (kurba ng DL6WU) at ang pahalang at patayong lobe sa -3 dB. Sa ilalim ng 2 λ, hindi gaanong tumpak ang tantiya.
-LI|Hot spot mula sa gitnang punto km at auto (AMS): distansiya ng Hot A at Hot B mula sa gitnang punto. Kapag naka-tsek ang “auto (AMS)”, sinusunod ang talahanayan ni J. Richardson na binanggit ni DJ5HG (13° na paglihis sa 1000 km, 10° lampas sa 1500 km); alisin ang tsek para isulat nang mano-mano ang 30-400 km (gumagamit ang MSHV ng 150 km).
+LI|Yagi antenna: boom m: haba ng boom. Sa tabi nito isinusulat ng programa ang haba sa wavelength, ang gain (karaniwang linya ng mga talaan ng VE7BQH para sa band) at ang lobe sa −3 dB, pahalang at patayo. Kung nasa labas ng sample ng VE7BQH ng band ang boom, magaspang ang tantiya.
 TAG|ATTENZIONE|Kapag naka-off ang “pattern ng antena” at ilang digri ang lobe, sa isang mahabang landas ay maaaring walang makitang pinagsasaluhang punto ng layer ang dalawang istasyon: 0 ang lahat ng episyensya at lumalabas ang babalang “WALANG PINAGSASALUHANG SONA” kasama ang lobe o taas ng bakas na kakailanganin. Halimbawa: JN70CN - JO76QP, 1791 km, lobe sa 3°, mga bakas sa 88.5 km.
 H2|4.3 Hanay 2: oras ng kalkulasyon
 LI|Oras: orasang UTC.
 LI|Petsa ng kalkulasyon (UTC): ang araw ng kalkulasyon. Para ito sa Kalkulasyon ng pagtataya, sa talahanayan ng 24 na oras ng Kalkulasyon ng episyensya at sa kronolohiya ng GRAVES radar. Ang default ay ngayon, at sa hatinggabi ay sumusunod ito sa bagong araw.
+LI|Troposperikong repraksyon (GFS): naka-off sa pagsisimula. Kapag naka-on, dina-download ng programa mula sa modelong GFS ang profile ng temperatura at halumigmig sa itaas ng dalawang istasyon at isinasaalang-alang ang pagkurba ng sinag hanggang sa taas ng bakas: bahagyang mas mataas ang tingin sa mabababang punto at lumalapad ang karaniwang zona. Kung hindi sumasagot ang GFS, gumagamit ito ng karaniwang atmospera. Sinasabi ito ng ulat ng Heometriya at path loss sa linyang "Repraksyon".
+LI|Hot spot mula sa gitnang punto km at auto (AMS): distansiya ng Hot A at Hot B mula sa gitnang punto. Kapag naka-tsek ang “auto (AMS)”, sinusunod ang talahanayan ni J. Richardson na binanggit ni DJ5HG (13° na paglihis sa 1000 km, 10° lampas sa 1500 km); alisin ang tsek para isulat nang mano-mano ang 30-400 km (gumagamit ang MSHV ng 150 km).
 LI|Mga oras (mula −12 hanggang +36 h): inililipat ang sandali ng kalkulasyon, nang 15 minuto bawat hakbang. Sa tabi: “Kalkulasyon para sa: ngayon” o ang napiling petsa at oras.
 LI|Real time: bumabalik sa kasalukuyang sandali.
 LI|Ang linya ng oras («Mga oras (mula −12 hanggang +36 h)» at «Real time») ay nasa itaas ng tab na Kalkulasyon ng pagtataya, dahil para lamang ito sa kalkulasyong iyon.
@@ -153,12 +155,15 @@ H2|8.1 Ang mga kontrol
 LI|Target na frequency MHz: frequency ng pagtataya.
 LI|Exponent ng λ^k (3, SM6FHZ) at Station factor K (1): patakaran sa frequency at koreksiyon para sa iyong istasyon.
 LI|k mula sa mga population index: nagmumungkahi ng k mula sa mga population index r ng mga aktibong shower (GMN, kung hindi ay IMO; k = 3.75 · log10 r, tinimbang ayon sa ZHR) at humihingi ng kumpirmasyon bago ito ilapat.
+LI|Pinagmulan ng mga bilang: Collm (radar 36.2 MHz) bilang default. Kung ang iyong istasyon ay nasa loob ng 3500 km mula sa Japan, lumilitaw din ang mga entry na "Japan live" (mga beacon na JA2SDA sa Toyokawa at JE3AKE sa Otsu, 53 MHz), kasama ang awtomatikong bilang ng HROFFT na inilalathala ng Ogaki bawat 10 minuto; nase-save ang pagpili.
+LI|Japan: buwanang bilang ng HRO (IPRMO)...: binubuksan ang window na may manu-manong bilang bawat oras ng mga Hapon na tagamasid mula sa buwanang file ng RMOJ. Piliin ang buwan at tagamasid; dina-download ng I-update mula sa IPRMO ang mga bagong buwan. Ang unang tsart ay ang buwanang karaniwan bawat oras UTC na isinalin sa iyong frequency, ang ikalawa ay ang kabuuan bawat araw.
 LI|Ikarga ang RMOB file mula sa disk at Kunin ang exponent mula sa RMOB file: binabasa ang isang buwanang RMOB file at kinukuha ang k mula sa mga oras na kapareho ng Collm.
 LI|RMOB observer, I-download ang RMOB ngayon at awtomatikong pag-download bawat 5 minuto: naka-off ang awtomatikong pag-download at dapat lamang i-on kung may pahintulot ng RMOB. Nasa tab na Mga setting ang mga utos na ito.
 H2|8.2 Ang mga resulta
 LI|Ang graph ng kahapon at ngayon: mga meteor bawat oras sa Collm, mga halagang inilipat sa iyong frequency at, kung naikarga, ang mga bilang ng RMOB.
 LI|Ang pagtataya para sa susunod na 24 na oras: ang parehong oras ng nakaraang araw, iwinasto ayon sa pagbabago ng index ng mga shower ng landas.
 LI|Ang talahanayan na may hatol: mabuti, katamtaman o mahina kumpara sa average ng 24 na oras.
+TAG|NOTA|Mas mataas ang awtomatikong bilang ng Ogaki kaysa sa manu-mano: relatibong halaga ang mga ito. Upang i-calibrate, ikumpara ang mga ito sa window ng Japan sa buwanang file ng RMOJ ng parehong beacon.
 TAG|NOTA|Sumusunod ang tagal ng mga repleksiyon sa piniling “Tagal ng mga ping sa pagitan ng mga band” sa Heometriya at path loss; sa forward scatter, humahaba rin ang tagal kasabay ng sec²φ sa gitnang punto ng landas.
 H1|9. Live at real-time na datos
 H2|9.1 Live na trapiko
@@ -172,6 +177,7 @@ LI|Pati ang mga aktibong monitor sa mapa ng PSKReporter: mga hungkag na tatsulok
 LI|FT8 na lampas 1100 km na walang kahilerang daan: ang isang FT8 spot (mula sa PSKReporter MQTT, sa mga cluster o sa WSJT-X sa UDP) sa pagitan ng mga istasyong mahigit 1100 km ang layo na walang kahilerang daan sa loob ng 3 minuto bago at pagkatapos (parehong banda, gitnang punto sa loob ng 300 km, direksiyon sa loob ng 15°, ibang pares ng istasyon) ay iginuguhit nang mapusyaw na berde, gaya ng hilera nito sa talahanayan sa kanang ibaba (hindi kumikislap). Ang sporadic-E at tropo ay nagbibigay ng maraming malapit at magkakahilerang daan; ang nag-iisang spot ay maaaring bakas ng bulalakaw. Kaya tumatanggap din ang YA-MS mula sa MQTT ng mga FT8 spot ng 6 m, 4 m, 2 m, 1.25 m at 70 cm (hindi kailanman ang 28 MHz). Hindi pumapasok ang mga spot na ito sa arkibo ng MS. Naka-on mula sa simula. Dagdag na pagsusuri gamit ang PSKReporter MQTT: hindi nag-iisa ang spot kung ang tumatanggap na istasyon ay nakakarinig sa MQTT ng ibang istasyong lampas 1100 km sa parehong banda sa loob ng 3 minuto (bukas ang banda); ang mga spot mula sa cluster at RBN ay bilang lamang kung ang parehong pares ay dumating din sa MQTT; hindi kailanman bilang ang mga skimmer ng RBN (mga callsign na may «-#»).
 LI|Ang mga decode ng iyong WSJT-X sa UDP kung saan sumasagot sa iyo ang isang kausap (ang unang callsign ng mensahe ay sa iyo) ay iginuguhit nang may kumikislap na putol-putol na linya, sa anumang mode at anumang layo, at kumikislap ang hilera nila sa talahanayan sa dilaw na background. Ito lamang ang pagkakataong may kumikislap.
 LI|Palitan sa pagitan ng mga gumagamit ng YA-MS: kapag na-decode ng ibang gumagamit ng YA-MS sa UDP ang mensaheng para sa iyong istasyon (sa MSK144, FSK441, PSK2K o JTMS, o sa FT8 na lampas 1100 km), ipinapadala ito ng kanyang YA-MS sa iyo nang naka-encrypt sa tatlong pampublikong MQTT broker (HiveMQ, Mosquitto, EMQX); nakikita mo ito bilang hindi gumagalaw na lilang putol-putol na linya at bilang linya sa UDP console. Ikaw lang ang makakabasa nito (mga susi na ECDH P-256, AES-256 at HMAC-SHA256). Ipinapakita lang ang mga FT8 spot kung walang kahilerang daan sa loob ng 3 minuto. Naka-on mula sa simula; pinapatay ng yams_scambio=0 sa data/config.ini.
+LI|Kumokonekta ang palitan sa mga broker nang naka-encrypt (TLS: HiveMQ at EMQX port 8883, Mosquitto 8886) at bumabalik lamang sa port 1883 kung tumanggi ang isang broker sa TLS. Ang unang key na nakita para sa bawat callsign ay nananatiling nakatakda sa data/yams_chiavi.txt: kung lumitaw ang isang istasyon na may ibang key, patuloy na ginagamit ng programa ang kilala at lalabas sa UDP box ng Pagkolekta ng data ang button na «Tanggapin ang mga bagong key», na gagamitin lamang kung alam mong muling nag-install ng YA-MS ang istasyon.
 LI|Ipinapakita ang mga spot ng lahat ng banda, pati ng mga bandang hindi pinili sa Pagkolekta ng data (hindi ito iniimbak). Hindi ipinapakita ang mga CW spot at ang mga spot sa pagitan ng mga istasyong masyadong malapit, kung itinatapon ang mga ito sa Pagkolekta ng data.
 LI|Isinusulat sa mapa ang mga callsign ng dalawang istasyon ng bawat spot, isang beses bawat istasyon. Mapipili ang projection: azimuthal (nakasentro sa iyong istasyon) o Mercator. Ipinaliliwanag ng tooltip sa kolumnang sona ng ulan ang kahulugan nito.
 H2|9.2 Flux ng radar
@@ -228,6 +234,7 @@ LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: ang katalogo ng mga shower at 
 LI|flusso_collm.csv, quote_collm.csv: mga archive ng radar ng Collm; radar/: pinakabagong mga larawan, mga RMOB file at datos ng mga live na source; fonti_radar.csv: mga address ng mga source, na maaaring i-enable isa-isa.
 LI|cataloghi/: katalogo ng IAU MDC; radar/diretta/: datos ng GMN at CMOR.
 LI|call3.txt: archive ng mga locator; spot_ms/: mga nakolektang meteor scatter spot; adif_quadrati.csv: mga square mula sa ADIF.
+LI|radar/rmoj/: buwanang file ng RMOJ mula sa Japan; radar/hro_ogaki_*.csv: mga bilang ng Ogaki sa huling 3 araw; radar/gfs_*.json: mga profile ng GFS para sa repraksyon (balido nang 3 oras).
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: ang mga teknikal na dokumento.
 LI|backup/: mga kopya ng mga file na pinalitan ng isang update; aggiornamento/: na-download na package (binubura sa pag-restart).
 H2|13.3 Ang tab na Mga setting
@@ -237,6 +244,7 @@ LI|controlla_aggiornamenti=0: huwag tingnan ang mga bagong bersyon; aggiornament
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: ang mga checkbox ng kalkulasyon.
 LI|raggio_iniziale (0 = doble ng ITU, 1 = ITU, 2 = hindi kasama), durata_ping (0 = λ², 1 = naobserbahan).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|rifrazione_gfs (0 = off, 1 = on), prev_fonte (collm, toyokawa, otsu), rmoj_osservatore: repraksyon at mga pinagmulang Hapon.
 LI|psk_rimando=0: pinapatay ang pagpapasa sa PSKReporter ng mga MS decode (MSK144, FSK441, PSK2K, JTMS) na natanggap sa UDP. Naka-on ito mula sa simula at kusang gumagana: kung wala ang iyong callsign nang mahigit 20 minuto sa mga istasyong nagpapadala ng ulat sa PSKReporter (hindi nagpapadala ang digital na programa), ipinapadala ng YA-MS tuwing 5 minuto ang mga MS na istasyong na-decode mo, ikaw ang tagatanggap; kapag nagpadala muli ang digital na programa, humihinto ang YA-MS. May isang linya sa UDP console na nagsasabi kung kailan ito nagsimula at huminto. Kung nakapatay ang pagpapadala sa PSKReporter sa WSJT-X.ini (o JTDX.ini), agad na nagpapasa ang YA-MS, nang hindi naghihintay ng 20 minuto.
 TAG|ATTENZIONE|Baguhin lamang ang config.ini kapag nakasara ang programa: sa pagsasara, muling isinusulat ito ng YA-MS.
 H1|14. Mga karaniwang pamamaraan

@@ -20,8 +20,8 @@ TAG|RILIEVO|5/11/2026 tarihli Collm grafiği: mod 89,5 km, ortalama 88,6 km, sta
 TAG|RILIEVO|DJ5HG [18] ve QTFGUI [17] sabit 102 km yükseklik kullanır; program radarın ölçtüğü veriyi tercih eder. ITU-R P.843 Tavsiyesi [24] ortalama yüksekliği h = 124 − 17·log10(f) km olarak verir: 36,2 MHz'de yaklaşık 97 km ve 144 MHz'de 87 km; bu, Collm modu ile uyumludur (5/11/2026'da 89,5 km).
 H1|3. Yolun geometrisi
 H2|3.1 Dünya, istasyonlar ve orta nokta
-TAG|FONTE|r = 6372,7955 km yarıçaplı küresel Dünya [1].
-TAG|SCELTA|Yol her zaman istasyonun lokatörü ile karşı istasyonun lokatörü arasındaki gerçek yoldur. Mesafe, azimut ve orta nokta büyük daire formülleriyle hesaplanır.
+TAG|FONTE|WGS84 elipsoidi [37]: büyük yarı eksen 6378,137 km, basıklık 1/298,257223563. Küresel formüller için (makaledeki yükselme açısı, menzil, kırılma) program elipsoidin ortalama yarıçapını kullanır, r = 6371,0088 km; 1.8.23 sürümüne kadar yarıçapı 6372,7955 km olan küreyi kullanıyordu [1].
+TAG|SCELTA|Yol her zaman istasyonun lokatörü ile karşı istasyonun lokatörü arasındaki gerçek yoldur. 1.8.27 sürümünden itibaren mesafe, azimut ve orta nokta, elipsoidin jeodezik eğrisi üzerinde Karney yöntemiyle [38] hesaplanır: küreye göre mesafeler en fazla %0,5, azimutlar ise derecenin birkaç onda biri kadar değişir.
 TAG|FONTE|Saate bağlı hesaplamalar yolun orta noktasına göre yapılır: iki uç arasında en iyi saat 1,5 saate kadar farklı olabilir (SM6FHZ [4]).
 H2|3.2 Anten yükseliş açısı
 TAG|FONTE|Yansıma noktasına doğru yükseliş açısı makaledeki formülle (Resim 7) [1] hesaplanır; x = mesafe / r, H izin yüksekliği, h istasyonun yüksekliği:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS tablosuyla: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s 
 TAG|SCELTA|Gök kubbede gösterilen saat için program, ufkun üstündeki tüm yağmurlar üzerinden ZHR x verim değerini toplar ve A tarafı ile B tarafı arasında böler (bölüm 7.1). Daha çok yansıma alan tarafın hot spot'u önerilendir: haritada kırmızı görünür.
 TAG|FONTE|DF5HC'nin [16] aktardığına göre DJ5HG'ye göre yansıma iz çevresindeki bir koni üzerinde olur: daha kısa yollarda antenler doğrudan yönün yanına, her iki istasyon da aynı noktaya yönlendirilmelidir ve radyantın konumuna göre iki noktadan biri (HOT-A veya HOT-B) daha elverişlidir. DF5HC en iyi mesafeyi 1300-1500 km olarak da belirtir, maksimum menzil 2000 km'nin biraz ötesindedir.
 H2|3.5 Antenin lobu
-TAG|FONTE|Uzun bir Yagi'nin bom uzunluğundan kazancı (DL6WU eğrisi [10]) ve kazançtan −3 dB lob genişliği (Kraus kuralı [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Bir Yagi'nin kazancı bom uzunluğundan (VE7BQH tablolarının bant başına ortalama doğrusu [36], karşılaştırma için DL6WU eğrisi [10]) ve −3 dB lob genişliği kazançtan (Kraus kuralı [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL'nin NEC simülasyonları [12], kazanç eğrisini hem DL6WU Yagi'leri hem de aynı eleman sayısında daha kısa bomlu David Tanner VK3AUU Yagi'leri için 0,1 dB içinde doğrular: kazanç bom uzunluğuna bağlıdır. Aynı simülasyonlar Kraus'tan %5-10 daha dar bir yatay lob verir.
+TAG|RILIEVO|VE7BQH ortalaması eksi DL6WU eğrisi: 50 MHz'de 2–16 λ arasında 0,25 dB içinde; 144 MHz'de 1 λ'da −0,04 dB'den 10 λ'da +0,42 dB'e; 432 MHz'de 2 λ'da −0,06 dB'den 10 λ'da +0,55 dB'e. W4RNL'nin 432 MHz'de benzettiği DL6WU ve VK3AUU Yagilerinde VE7BQH ortalaması NEC'in 0,15–0,55 dB üstündedir: uzun bomlarda tabloların bilgisayarla eniyilenmiş Yagileri özgün tasarımlardan daha fazla verir.
 TAG|SCELTA|Yatay lob (azimut yönlendirmesindeki) = 0,93 · θK; dikey lob = θK. 432 MHz'de 14 λ Yagi: 20,3 dBi, 18,1° yatay ve 19,5° dikey; W4RNL modelleri 20,4 dBi ve 18,4°/18,8° verir.
+TAG|RILIEVO|VE7BQH ortalamasıyla aynı 14 λ Yagi 21,0 dBi ve 16,9° yatay, 18,1° dikey lob verir; yukarıdaki 20,3 dBi DL6WU eğrisinden gelir. Lob düzeltmeleri (0,93 · θK ve θK) DL6WU Yagilerinden türetilenler olarak kalır.
 TAG|SCELTA|Anten her zaman karşı istasyona yönlendirilmiş kabul edilir. O yönden ±θ/2 içine düşen bir hot spot zaten lob tarafından kapsanır: pembe yerine gri işaretlenir ve program uyarır. Verime göre önerilen hot spot yine de kırmızı kalır.
 H1|4. Yağmurun radyantı
 H2|4.1 Radyantın konumu
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. baskı, Willmann-Bell, 1998.
 SRC|7. Collm meteor radarı, Leipzig Üniversitesi (LIM) ve IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952'den).
-SRC|10. G. Hoch DL6WU - uzun Yagi'lerin kazanç eğrisi, W8IO'nun aktardığı, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, s. 130-138, şekil 1 (birincil kaynak); eğri W8IO tarafından da aktarılır, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, haziran 2018 bülteni.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50, 144 ve 432 MHz için Yagi kazanç tabloları: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopyalar qsl.net/dk7zb ve sm2cew.com'da).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

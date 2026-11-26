@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm grafiks 5/11/2026: moda 89,5 km, vidējais 88,6 km, standartno
 TAG|RILIEVO|DJ5HG [18] un QTFGUI [17] izmanto fiksētu 102 km augstumu; programma dod priekšroku radara izmērītajiem datiem. Ieteikums ITU-R P.843 [24] dod vidējo augstumu h = 124 − 17·log10(f) km: aptuveni 97 km pie 36,2 MHz un 87 km pie 144 MHz, kas saskan ar Collm modu (89,5 km 5/11/2026).
 H1|3. Trases ģeometrija
 H2|3.1 Zeme, stacijas un viduspunkts
-TAG|FONTE|Sfēriska Zeme ar rādiusu r = 6372,7955 km [1].
-TAG|SCELTA|Trase vienmēr ir reālā trase starp stacijas lokatoru un korespondenta lokatoru. Attālumu, azimutu un viduspunktu aprēķina ar lielā loka formulām.
+TAG|FONTE|WGS84 elipsoīds [37]: lielā pusass 6378,137 km, saplacinājums 1/298,257223563. Sfēriskajām formulām (raksta pacēluma leņķis, sniedzamība, refrakcija) programma izmanto elipsoīda vidējo rādiusu r = 6371,0088 km; līdz versijai 1.8.23 tā izmantoja sfēru ar rādiusu 6372,7955 km [1].
+TAG|SCELTA|Trase vienmēr ir reālā trase starp stacijas lokatoru un korespondenta lokatoru. No versijas 1.8.27 attālumu, azimutu un viduspunktu aprēķina uz elipsoīda ģeodēziskās līnijas ar Karneja metodi [38]: salīdzinājumā ar sfēru attālumi mainās ne vairāk kā par 0,5% un azimuti par dažām grāda desmitdaļām.
 TAG|FONTE|No laika atkarīgie aprēķini attiecas uz trases viduspunktu: starp abiem galiem labākais laiks var atšķirties līdz 1,5 stundām (SM6FHZ [4]).
 H2|3.2 Antenas elevācija
 TAG|FONTE|Elevāciju uz atstarošanas punktu aprēķina ar raksta formulu (7. attēls) [1], kur x = attālums / r, H – sliedes augstums, h – stacijas augstums:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Ar AMS tabulu: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, s �
 TAG|SCELTA|Debess velvē parādītajai stundai programma summē pa visām plūsmām virs horizonta ZHR x efektivitāte, sadalītu starp pusi A un pusi B (7.1. nodaļa). Ieteiktais ir tās puses hot spot, kura saņem vairāk atstarojumu: tas kartē parādās sarkanā krāsā.
 TAG|FONTE|Pēc DJ5HG, ko citē DF5HC [16], atstarošana notiek uz konusa ap sliedi: īsākās trasēs antenas jāpavērš sāņus no tiešā virziena, abām stacijām uz to pašu punktu, un atkarībā no radianta stāvokļa viens no abiem punktiem (HOT-A vai HOT-B) ir izdevīgāks. DF5HC arī norāda, ka labākais attālums ir 1300-1500 km, ar maksimumu nedaudz virs 2000 km.
 H2|3.5 Antenas ziedlapiņa
-TAG|FONTE|Garas Yagi antenas pastiprinājums atkarībā no traversas garuma (DL6WU līkne [10]) un ziedlapiņas platums −3 dB līmenī atkarībā no pastiprinājuma (Krausa likums [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Yagi pastiprinājums pēc traverses garuma (VE7BQH tabulu vidējā taisne katrai joslai [36], salīdzinājumam DL6WU līkne [10]) un −3 dB ziedlapiņas platums pēc pastiprinājuma (Krausa likums [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL NEC simulācijas [12] apstiprina pastiprinājuma līkni 0,1 dB robežās gan DL6WU Yagi, gan David Tanner VK3AUU Yagi antenām, kurām pie tā paša elementu skaita traversa ir īsāka: pastiprinājums atkarīgs no traversas garuma. Tās pašas simulācijas dod horizontālo ziedlapiņu par 5-10 % šaurāku nekā Krausa likums.
+TAG|RILIEVO|VE7BQH vidējais mīnus DL6WU līkne: pie 50 MHz 0,25 dB robežās no 2 līdz 16 λ; pie 144 MHz no −0,04 dB (1 λ) līdz +0,42 dB (10 λ); pie 432 MHz no −0,06 dB (2 λ) līdz +0,55 dB (10 λ). W4RNL pie 432 MHz modelētajām DL6WU un VK3AUU antenām VE7BQH vidējais ir 0,15–0,55 dB virs NEC: uz gariem traversēm tabulu datorā optimizētās antenas dod vairāk nekā sākotnējās konstrukcijas.
 TAG|SCELTA|Horizontālā ziedlapiņa (tā, pēc kuras tēmē azimutā) = 0,93 · θK; vertikālā ziedlapiņa = θK. 14 λ Yagi pie 432 MHz: 20,3 dBi, 18,1° horizontāli un 19,5° vertikāli; W4RNL modeļi dod 20,4 dBi un 18,4°/18,8°.
+TAG|RILIEVO|Ar VE7BQH vidējo tā pati 14 λ Yagi dod 21,0 dBi un ziedlapiņu 16,9° horizontāli un 18,1° vertikāli; augstāk minētie 20,3 dBi ir no DL6WU līknes. Ziedlapiņas korekcijas (0,93 · θK un θK) paliek tās, kas iegūtas no DL6WU antenām.
 TAG|SCELTA|Antena vienmēr tiek uzskatīta par pavērstu uz korespondentu. Hot spot, kas atrodas ±θ/2 robežās no šī virziena, jau ir ziedlapiņas pārklāts: tas ir atzīmēts pelēkā krāsā, nevis rozā, un programma par to brīdina. Efektivitātes ieteiktais hot spot jebkurā gadījumā paliek sarkanā krāsā.
 H1|4. Plūsmas radiants
 H2|4.1 Radianta stāvoklis
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. izd., Willmann-Bell, 1998.
 SRC|7. Collm meteoru radars, Leipcigas Universitāte (LIM) un IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (pēc Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - garo Yagi antenu pastiprinājuma līkne, ko citē W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, 130.-138. lpp., 1. att. (primārais avots); līkni dod arī W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, 2018. gada jūnija biļetens.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi pastiprinājuma tabulas 50, 144 un 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopijas qsl.net/dk7zb un sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

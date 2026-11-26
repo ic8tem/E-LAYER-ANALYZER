@@ -20,8 +20,8 @@ TAG|RILIEVO|Plot ng Collm noong 5/11/2026: moda 89.5 km, mean 88.6 km, standard 
 TAG|RILIEVO|Ang DJ5HG [18] at ang QTFGUI [17] ay gumagamit ng nakapirming taas na 102 km; mas pinipili ng programa ang halagang sinukat ng radar. Ang Rekomendasyon ITU-R P.843 [24] ay nagbibigay ng karaniwang taas na h = 124 − 17·log10(f) km: mga 97 km sa 36.2 MHz at 87 km sa 144 MHz, kaayon ng moda ng Collm (89.5 km noong 5/11/2026).
 H1|3. Ang heometriya ng landas
 H2|3.1 Daigdig, mga istasyon at gitnang punto
-TAG|FONTE|Pabilog na Daigdig na may radius na r = 6372.7955 km [1].
-TAG|SCELTA|Ang landas ay palaging ang tunay na landas sa pagitan ng locator ng istasyon at ng locator ng DX na istasyon. Kinakalkula ang distansiya, azimuth at gitnang punto gamit ang mga pormula ng great circle.
+TAG|FONTE|WGS84 ellipsoid [37]: semi-major axis na 6378.137 km, flattening na 1/298.257223563. Para sa mga pormulang pabilog (elevation mula sa artikulo, abot, refraction) ginagamit ng programa ang karaniwang radius ng ellipsoid, r = 6371.0088 km; hanggang bersyon 1.8.23 ginamit nito ang globo na may radius na 6372.7955 km [1].
+TAG|SCELTA|Ang landas ay palaging ang tunay na landas sa pagitan ng locator ng istasyon at ng locator ng DX na istasyon. Mula sa bersyon 1.8.27, kinakalkula ang distansya, azimuth at gitnang punto sa geodesic ng ellipsoid gamit ang paraan ni Karney [38]: kumpara sa globo, nagbabago ang mga distansya nang hindi hihigit sa 0.5% at ang mga azimuth nang ilang ikasampu ng digri.
 TAG|FONTE|Ang mga kalkulasyong nakadepende sa oras ay tumutukoy sa gitnang punto ng landas: maaaring magkaiba nang hanggang 1.5 oras ang pinakamagandang oras sa dalawang dulo (SM6FHZ [4]).
 H2|3.2 Elevation ng antena
 TAG|FONTE|Kinakalkula ang elevation patungo sa punto ng repleksiyon gamit ang pormula ng artikulo (Larawan 7) [1], kung saan x = distansiya / r, H ang taas ng bakas, h ang taas ng istasyon:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Sa talahanayan ng AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 1
 TAG|SCELTA|Para sa oras na ipinapakita sa langit, pinagsasama ng programa, para sa lahat ng shower na nasa itaas ng horizon, ang ZHR x episyensya na hinati sa panig A at panig B (kabanata 7.1). Ang hot spot sa panig na tumatanggap ng mas maraming repleksiyon ang inirerekomenda: lumalabas ito na pula sa mapa.
 TAG|FONTE|Ayon kay DJ5HG, na binanggit ni DF5HC [16], nangyayari ang repleksiyon sa isang cone sa paligid ng bakas: para sa mas maiikling landas dapat itutok ang mga antena sa gilid ng tuwirang direksiyon, ang dalawang istasyon sa iisang punto, at depende sa posisyon ng radiant ang isa sa dalawang punto (HOT-A o HOT-B) ang mas paborable. Ibinibigay rin ni DF5HC ang pinakamagandang distansiya na 1300-1500 km, na may maximum na bahagyang lampas sa 2000 km.
 H2|3.5 Ang lobe ng antena
-TAG|FONTE|Gain ng isang mahabang Yagi mula sa haba ng boom (kurba ng DL6WU [10]) at beamwidth sa −3 dB mula sa gain (patakaran ni Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Gain ng Yagi mula sa haba ng boom (karaniwang linya ng mga talaan ni VE7BQH bawat band [36], kurba ng DL6WU [10] para sa paghahambing) at lapad ng lobe sa −3 dB mula sa gain (tuntunin ni Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Kinukumpirma ng mga NEC simulation ni W4RNL [12] ang kurba ng gain sa loob ng 0.1 dB kapwa para sa mga Yagi na DL6WU at sa mga gawa ni David Tanner VK3AUU, na may mas maikling boom para sa parehong bilang ng elemento: nakadepende ang gain sa haba ng boom. Ang parehong mga simulation ay nagbibigay ng pahalang na lobe na 5-10 % na mas makitid kaysa kay Kraus.
+TAG|RILIEVO|Karaniwan ng VE7BQH bawas ang kurba ng DL6WU: sa 50 MHz nasa loob ng 0.25 dB mula 2 hanggang 16 λ; sa 144 MHz mula −0.04 dB sa 1 λ hanggang +0.42 dB sa 10 λ; sa 432 MHz mula −0.06 dB sa 2 λ hanggang +0.55 dB sa 10 λ. Sa mga Yagi na DL6WU at VK3AUU na sinimulate ni W4RNL sa 432 MHz, ang karaniwan ng VE7BQH ay 0.15–0.55 dB sa itaas ng NEC: sa mahahabang boom, mas mataas ang naibibigay ng mga Yagi sa talaan na in-optimize sa computer kaysa sa orihinal na disenyo.
 TAG|SCELTA|Pahalang na lobe (ang para sa pagtutok sa azimuth) = 0.93 · θK; patayong lobe = θK. Yagi na 14 λ sa 432 MHz: 20.3 dBi, 18.1° pahalang at 19.5° patayo; ang mga modelo ni W4RNL ay nagbibigay ng 20.4 dBi at 18.4°/18.8°.
+TAG|RILIEVO|Sa karaniwan ng VE7BQH, ang parehong Yagi na 14 λ ay nagbibigay ng 21.0 dBi at lobe na 16.9° pahalang at 18.1° patayo; ang 20.3 dBi sa itaas ay mula sa kurba ng DL6WU. Ang mga pagwawasto ng lobe (0.93 · θK at θK) ay nananatiling hinango mula sa mga Yagi na DL6WU.
 TAG|SCELTA|Ang antena ay palaging itinuturing na nakatutok sa DX na istasyon. Ang hot spot na nasa loob ng ±θ/2 mula sa direksiyong iyon ay sakop na ng lobe: minamarkahan ito ng abo sa halip na rosas at nagpapakita ng babala ang programa. Gayunman, nananatiling pula ang hot spot na inirerekomenda ng episyensya.
 H1|4. Ang radiant ng shower
 H2|4.1 Posisyon ng radiant
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, ika-2 ed., Willmann-Bell, 1998.
 SRC|7. Meteor radar ng Collm, Leipzig University (LIM) at IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (mula kina Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - kurba ng gain ng mahahabang Yagi, binanggit ni W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, fig. 1 (pangunahing sanggunian); sinisipi rin ang kurba ni W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin ng Hunyo 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - mga talaan ng gain ng Yagi para sa 50, 144 at 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (may kopya sa qsl.net/dk7zb at sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

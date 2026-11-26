@@ -20,8 +20,8 @@ TAG|RILIEVO|Gráfico de Collm de 5/11/2026: moda 89,5 km, média 88,6 km, desvio
 TAG|RILIEVO|DJ5HG [18] e o QTFGUI [17] usam uma altitude fixa de 102 km; o programa prefere o dado medido pelo radar. A Recomendação ITU-R P.843 [24] dá uma altitude média h = 124 − 17·log10(f) km: cerca de 97 km a 36,2 MHz e 87 km a 144 MHz, em linha com a moda de Collm (89,5 km em 5/11/2026).
 H1|3. A geometria do percurso
 H2|3.1 Terra, estações e ponto médio
-TAG|FONTE|Terra esférica de raio r = 6372,7955 km [1].
-TAG|SCELTA|O percurso é sempre o real entre o locator da estação e o do correspondente. Distância, azimute e ponto médio calculam-se com as fórmulas do círculo máximo.
+TAG|FONTE|Elipsoide WGS84 [37]: semieixo maior 6378,137 km, achatamento 1/298,257223563. Para as fórmulas esféricas (elevação do artigo, alcance, refração) o programa usa o raio médio do elipsoide, r = 6371,0088 km; até à versão 1.8.23 usava a esfera de raio 6372,7955 km [1].
+TAG|SCELTA|O percurso é sempre o real entre o locator da estação e o do correspondente. A partir da versão 1.8.27 a distância, o azimute e o ponto médio calculam-se sobre a geodésica do elipsoide com o método de Karney [38]: em relação à esfera, as distâncias mudam no máximo 0,5% e os azimutes algumas décimas de grau.
 TAG|FONTE|Os cálculos que dependem da hora referem-se ao ponto médio do percurso: entre as duas extremidades a melhor hora pode diferir até 1,5 horas (SM6FHZ [4]).
 H2|3.2 Elevação da antena
 TAG|FONTE|A elevação para o ponto de reflexão calcula-se com a fórmula do artigo (Imagem 7) [1], com x = distância / r, H altitude do rasto, h altitude da estação:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Com a tabela AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, 
 TAG|SCELTA|Para a hora mostrada na abóbada celeste o programa soma, sobre todas as chuvas acima do horizonte, ZHR x eficiência repartido entre o lado A e o lado B (capítulo 7.1). O hot spot do lado que recebe mais reflexões é o recomendado: aparece a vermelho no mapa.
 TAG|FONTE|Segundo DJ5HG, citado por DF5HC [16], a reflexão ocorre sobre um cone em torno do rasto: nos percursos mais curtos as antenas devem ser apontadas para o lado da direção direta, ambas as estações para o mesmo ponto, e conforme a posição do radiante um dos dois pontos (HOT-A ou HOT-B) é mais favorável. DF5HC indica também a melhor distância em 1300-1500 km, com um máximo pouco acima de 2000 km.
 H2|3.5 O lóbulo da antena
-TAG|FONTE|Ganho de uma Yagi longa a partir do comprimento do boom (curva DL6WU [10]) e abertura do lóbulo a −3 dB a partir do ganho (regra de Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Ganho de uma Yagi a partir do comprimento do boom (reta média das tabelas de VE7BQH por banda [36], curva DL6WU [10] para comparação) e abertura do lóbulo a −3 dB a partir do ganho (regra de Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|As simulações NEC de W4RNL [12] confirmam a curva do ganho dentro de 0,1 dB tanto para as Yagi DL6WU como para as de David Tanner VK3AUU, que para o mesmo número de elementos têm o boom mais curto: o ganho depende do comprimento do boom. As mesmas simulações dão um lóbulo horizontal mais estreito do que Kraus em 5-10 %.
+TAG|RILIEVO|Média VE7BQH menos curva DL6WU: a 50 MHz dentro de 0,25 dB de 2 a 16 λ; a 144 MHz de −0,04 dB a 1 λ a +0,42 dB a 10 λ; a 432 MHz de −0,06 dB a 2 λ a +0,55 dB a 10 λ. Nas Yagi DL6WU e VK3AUU simuladas por W4RNL a 432 MHz a média VE7BQH fica 0,15–0,55 dB acima do NEC: em booms longos as Yagi das tabelas, otimizadas por computador, rendem mais do que os projetos originais.
 TAG|SCELTA|Lóbulo horizontal (o do apontamento em azimute) = 0,93 · θK; lóbulo vertical = θK. Yagi de 14 λ a 432 MHz: 20,3 dBi, 18,1° horizontal e 19,5° vertical; os modelos de W4RNL dão 20,4 dBi e 18,4°/18,8°.
+TAG|RILIEVO|Com a média VE7BQH a mesma Yagi de 14 λ dá 21,0 dBi e lóbulo de 16,9° horizontal e 18,1° vertical; os 20,3 dBi acima são os da curva DL6WU. As correções do lóbulo (0,93 · θK e θK) continuam as obtidas das Yagi DL6WU.
 TAG|SCELTA|A antena considera-se sempre apontada para o correspondente. Um hot spot que cai dentro de ±θ/2 dessa direção já está coberto pelo lóbulo: é marcado a cinzento em vez de rosa e o programa avisa. O hot spot recomendado pela eficiência continua, em qualquer caso, a vermelho.
 H1|4. O radiante da chuva
 H2|4.1 Posição do radiante
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2.ª ed., Willmann-Bell, 1998.
 SRC|7. Radar de meteoros de Collm, Universidade de Leipzig (LIM) e IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (a partir de Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - curva do ganho das Yagi longas, reproduzida por W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, fig. 1 (fonte primária); curva referida também por W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, boletim de junho de 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tabelas de ganho de Yagi para 50, 144 e 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (cópias em qsl.net/dk7zb e sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

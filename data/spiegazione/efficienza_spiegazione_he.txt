@@ -20,8 +20,8 @@ TAG|RILIEVO|גרף Collm מ-5/11/2026: ערך שכיח 89,5 km, ממוצע 88,6 
 TAG|RILIEVO|DJ5HG [18] ו-QTFGUI [17] משתמשים בגובה קבוע של 102 km; התוכנה מעדיפה את הנתון שנמדד במכ״ם. המלצה ITU-R P.843 [24] נותנת גובה ממוצע h = 124 − 17·log10(f) km: כ-97 km ב-36,2 MHz ו-87 km ב-144 MHz, בהתאמה לערך השכיח של Collm (89,5 km ב-5/11/2026).
 H1|3. הגאומטריה של הנתיב
 H2|3.1 כדור הארץ, התחנות ונקודת האמצע
-TAG|FONTE|כדור ארץ כדורי ברדיוס r = 6372,7955 km [1].
-TAG|SCELTA|הנתיב הוא תמיד הנתיב האמיתי בין ה-locator של התחנה לזה של תחנת ה-DX. המרחק, האזימוט ונקודת האמצע מחושבים בנוסחאות המעגל הגדול.
+TAG|FONTE|אליפסואיד WGS84 [37]: חצי הציר הראשי 6378,137 km, השטחה 1/298.257223563. לנוסחאות הכדוריות (זווית ההגבהה מהמאמר, הטווח, השבירה) התוכנה משתמשת ברדיוס הממוצע של האליפסואיד, r = 6371,0088 km; עד גרסה 1.8.23 השתמשה בכדור ברדיוס 6372,7955 km [1].
+TAG|SCELTA|הנתיב הוא תמיד הנתיב האמיתי בין ה-locator של התחנה לזה של תחנת ה-DX. מגרסה 1.8.27 המרחק, האזימוט ונקודת האמצע מחושבים על הגאודזה של האליפסואיד בשיטת Karney [38]: לעומת הכדור, המרחקים משתנים לכל היותר ב-0,5% והאזימוטים בכמה עשיריות מעלה.
 TAG|FONTE|החישובים התלויים בשעה מתייחסים לנקודת האמצע של הנתיב: בין שני הקצוות השעה הטובה ביותר יכולה להשתנות עד 1,5 שעות (SM6FHZ [4]).
 H2|3.2 הגבהת האנטנה
 TAG|FONTE|ההגבהה לעבר נקודת ההחזרה מחושבת בנוסחת המאמר (תמונה 7) [1], עם x = מרחק / r, H גובה השובל, h גובה התחנה:
@@ -41,10 +41,13 @@ TAG|RILIEVO|עם טבלת AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°,
 TAG|SCELTA|עבור השעה המוצגת על כיפת השמיים התוכנה מסכמת, על פני כל המטרים שמעל האופק, ZHR x יעילות המחולק בין צד A לצד B (פרק 7.1). ה-hot spot של הצד שמקבל יותר החזרות הוא המומלץ: הוא מופיע באדום על המפה.
 TAG|FONTE|לפי DJ5HG, כפי שמביא DF5HC [16], ההחזרה מתרחשת על חרוט סביב השובל: בנתיבים הקצרים יותר יש לכוון את האנטנות לצד הכיוון הישיר, שתי התחנות לעבר אותה נקודה, ובהתאם למיקום הרדיאנט אחת משתי הנקודות (HOT-A או HOT-B) עדיפה. DF5HC מציין גם את המרחק הטוב ביותר ב-1300-1500 km, עם מרבי מעט מעבר ל-2000 km.
 H2|3.5 אונת האנטנה
-TAG|FONTE|רווח של Yagi ארוכה מאורך ה-boom (עקומת DL6WU [10]) ורוחב האונה ב-−3 dB מתוך הרווח (כלל Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|הגבר של אנטנת Yagi מאורך הבום (הקו הישר הממוצע של טבלאות VE7BQH לכל תחום [36], עקומת DL6WU [10] להשוואה) ורוחב האונה ב-−3 dB מההגבר (כלל Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|סימולציות NEC של W4RNL [12] מאשרות את עקומת הרווח בטווח 0,1 dB הן עבור Yagi של DL6WU והן עבור אלה של David Tanner VK3AUU, שלאותו מספר אלמנטים יש boom קצר יותר: הרווח תלוי באורך ה-boom. אותן סימולציות נותנות אונה אופקית צרה יותר מזו של Kraus ב-5-10 %.
+TAG|RILIEVO|ממוצע VE7BQH פחות עקומת DL6WU: ב-50 MHz בטווח 0,25 dB מ-2 עד 16 λ; ב-144 MHz מ-−0,04 dB ב-1 λ עד +0,42 dB ב-10 λ; ב-432 MHz מ-−0,06 dB ב-2 λ עד +0,55 dB ב-10 λ. באנטנות DL6WU ו-VK3AUU שדימה W4RNL ב-432 MHz ממוצע VE7BQH גבוה ב-0,15–0,55 dB מ-NEC: בבומים ארוכים אנטנות הטבלאות, שעברו מיטוב במחשב, מניבות יותר מהתכנונים המקוריים.
 TAG|SCELTA|אונה אופקית (זו של הכיוון באזימוט) = 0,93 · θK; אונה אנכית = θK. Yagi של 14 λ ב-432 MHz: 20,3 dBi, 18,1° אופקית ו-19,5° אנכית; המודלים של W4RNL נותנים 20,4 dBi ו-18,4°/18,8°.
+TAG|RILIEVO|לפי ממוצע VE7BQH אותה אנטנת Yagi של 14 λ נותנת 21,0 dBi ואונה של 16,9° אופקית ו-18,1° אנכית; 20,3 dBi שלמעלה הם מעקומת DL6WU. תיקוני האונה (0,93 · θK ו-θK) נשארים אלה שנגזרו מאנטנות DL6WU.
 TAG|SCELTA|האנטנה נחשבת תמיד מכוונת לעבר תחנת ה-DX. hot spot שנופל בטווח ±θ/2 מכיוון זה כבר מכוסה על ידי האונה: הוא מסומן באפור במקום בוורוד והתוכנה מתריעה על כך. ה-hot spot המומלץ לפי היעילות נשאר בכל מקרה באדום.
 H1|4. רדיאנט המטר
 H2|4.1 מיקום הרדיאנט
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, מהדורה 2, Willmann-Bell, 1998.
 SRC|7. מכ״ם המטאורים של Collm, אוניברסיטת לייפציג (LIM) ו-IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (על פי Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - עקומת הרווח של Yagi ארוכות, כפי שמביא W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, עמ' 130-138, איור 1 (מקור ראשוני); העקומה מובאת גם אצל W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, עלון יוני 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - טבלאות הגבר של אנטנות Yagi ל-50, 144 ו-432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (עותקים ב-qsl.net/dk7zb וב-sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

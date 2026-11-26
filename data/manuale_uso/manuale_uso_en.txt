@@ -1,5 +1,5 @@
 TITLE|YA-MS User Manual
-SUB|Version 1.8.20 - by Costantino IC8TEM - November 2026
+SUB|Version 1.8.27 - by Costantino IC8TEM - November 2026
 H1|1. Introduction
 H2|1.1 What YA-MS is for
 P|YA-MS helps you forecast and follow live the meteor scatter conditions between your station and a DX station, from 28 to 432 MHz. For each active meteor shower it tells you how much the position of its radiant favours your path (the efficiency), at what times, from which side of the path the reflections arrive and where it is best to point the antenna. Alongside the forecast it shows data measured live: the counts of the Collm meteor radar, the cameras of the Global Meteor Network, the CMOR radar, the GRAVES transmitter and the meteor scatter traffic collected from the clusters and from PSKReporter.
@@ -24,6 +24,7 @@ LI|macOS: the .dmg for Apple Silicon (M1 and later) or for Intel, or the app.zip
 TAG|ATTENZIONE|Windows may show "Windows protected your PC": choose "More info" and then "Run anyway". On macOS, the first time, open the app with the right mouse button and "Open". The program is not signed with a paid certificate.
 H2|2.2 First start
 P|At startup the splash screen with the Perseids above ESO's VLT appears for a few seconds. On first start YA-MS chooses the system language, if it is one of the 36, otherwise Italian; it downloads the map of Europe (Natural Earth) into the data/mappa folder and shows an example path. A few minutes are enough to set it up for your station (chapter 4).
+P|YA-MS opens only once: if you start it again while it is already open, the second copy does not start and the open window comes to the front, even if it was minimized. This way two copies never write to the same files in the data folder at once. After an update the new copy waits for the old one to close.
 H2|2.3 The data folder
 P|All settings and all data are in a single data folder next to the program: no AppData, no system folders. To move YA-MS to another computer, just copy the program folder together with its data folder. The contents of the folder are described in chapter 13.
 H2|2.4 Automatic updates
@@ -40,7 +41,7 @@ P|At startup YA-MS checks that it has all its files (translations, catalogues, d
 H1|3. The main window
 H2|3.1 The parts of the window
 LI|At the top, two rows of controls that apply to all tabs: E layer and antenna, calculation time (chapter 4). Your station (locator, height, band and Calculate) is at the top right of Live traffic.
-LI|The bar of the main tabs, with the Controls button, the colour scheme (Theme) and the language on the right.
+LI|The main tab bar, with the Controls button and the language on the right. The colour scheme (Theme) is chosen in the Settings tab.
 LI|The sub-tabs, in a lighter row, for the tabs that have them.
 LI|At the bottom, the status bar: calculation messages, connection warnings, and the "Updates" button.
 H2|3.2 The tabs
@@ -64,12 +65,13 @@ H2|4.2 Row 1: E layer and antenna
 LI|Trail height km and from radar: height of the meteor trails. With "from radar" ticked, the most frequent height measured by the Collm radar is used (usually 88-90 km); untick it to type it in manually.
 LI|Lobe elevation °: elevation of the maximum of your antenna's vertical lobe. A beam fixed at 0° still has its main lobe a few degrees above the horizon, because of the ground reflection: usually 3-8°, depending on the antenna height in wavelengths.
 LI|antenna pattern: when on (default), the reflection points count with the vertical gain of the two antennas: full around the maximum of the lobe, less and less towards the horizon and upwards. When off, the lobe elevation is a hard limit: points seen lower down do not count.
-LI|Yagi antenna: boom m: length of the boom. Next to it the program writes the length in wavelengths, the gain (DL6WU curve) and the horizontal and vertical -3 dB beamwidth. Below 2 λ the estimate is not very accurate.
-LI|Hot spot from midpoint km and auto (AMS): distance of Hot A and Hot B from the midpoint. With "auto (AMS)" ticked it follows J. Richardson's table quoted by DJ5HG (13° offset at 1000 km, 10° beyond 1500 km); untick it to type 30-400 km manually (MSHV uses 150 km).
+LI|Yagi antenna: boom m: boom length. Next to it the program writes the length in wavelengths, the gain (mean line of the VE7BQH tables for the band) and the −3 dB lobe, horizontal and vertical. If the boom is outside the band's VE7BQH sample, the estimate is rough.
 TAG|ATTENZIONE|With "antenna pattern" off and the lobe at a few degrees, on a long path the two stations may not see any common point of the layer: all efficiencies are 0 and the warning "NO COMMON ZONE" appears, with the lobe or trail height that would be needed. Example: JN70CN - JO76QP, 1791 km, lobe at 3°, trails at 88.5 km.
 H2|4.3 Row 2: calculation time
 LI|Time: UTC clock.
 LI|Calculation date (UTC): the day of the calculation. It applies to Forecast calculation, to the 24-hour table of Efficiency calculation and to the timeline of GRAVES radar. By default it is today, and at midnight it moves on to the new day.
+LI|Tropospheric refraction (GFS): off at start. When ticked, the program downloads from the GFS model the temperature and humidity profile above the two stations and takes into account the bending of the ray up to the trail height: low points appear a little higher and the common zone widens. If GFS does not answer it uses an average atmosphere. The Geometry and path loss report states it in the "Refraction" line.
+LI|Hot spot from midpoint km and auto (AMS): distance of Hot A and Hot B from the midpoint. With "auto (AMS)" ticked it follows J. Richardson's table quoted by DJ5HG (13° offset at 1000 km, 10° beyond 1500 km); untick it to type 30-400 km manually (MSHV uses 150 km).
 LI|Hours (−12 to +36 h): shifts the moment of the calculation, in 15-minute steps. Next to it: "Calculation for: now" or the chosen date and time.
 LI|Real time: returns to the current moment.
 LI|The time line («Hours (−12 to +36 h)» and «Real time») is at the top of the Forecast calculation tab, because it applies only to that calculation.
@@ -153,12 +155,15 @@ H2|8.1 The controls
 LI|Target frequency MHz: frequency of the forecast.
 LI|λ^k exponent (3, SM6FHZ) and Station factor K (1): frequency rule and correction for your station.
 LI|k from population indices: proposes k from the population indices r of the active showers (GMN, otherwise IMO; k = 3.75 · log10 r, weighted by ZHR) and asks for confirmation before applying it.
+LI|Source of counts: Collm (radar 36,2 MHz) by default. If your station is within 3500 km of Japan, the "Japan live" entries also appear (beacons JA2SDA at Toyokawa and JE3AKE at Otsu, 53 MHz), with the automatic HROFFT counts published by Ogaki every 10 minutes; the choice is saved.
+LI|Japan: monthly HRO counts (IPRMO)...: opens the window with the hourly hand counts of the Japanese observers from the RMOJ monthly files. Choose the month and the observer; Update from IPRMO downloads the new months. The first chart is the monthly mean per UTC hour translated to your frequency, the second the daily totals.
 LI|Load RMOB file from disk and Derive the exponent from the RMOB file: they read a monthly RMOB file and derive k from the hours in common with Collm.
 LI|RMOB observer, Download RMOB now and automatic download every 5 minutes: the automatic download is off and must be turned on only with RMOB's permission. These commands are in the Settings tab.
 H2|8.2 The results
 LI|The chart of yesterday and today: meteors per hour at Collm, values scaled to your frequency and, if loaded, the RMOB counts.
 LI|The forecast for the next 24 hours: the same hour of the previous day, corrected for the change in the shower index of the path.
 LI|The table with the verdict: good, average or poor compared with the 24-hour average.
+TAG|NOTA|The automatic Ogaki counts are higher than the hand counts: they are relative values. To calibrate them, compare them with the RMOJ monthly files of the same beacon in the Japan window.
 TAG|NOTA|The duration of the reflections follows the "Ping duration between bands" choice in Geometry and path loss; in forward scatter the duration also grows with sec²φ at the midpoint of the path.
 H1|9. Live and real-time data
 H2|9.1 Live traffic
@@ -172,6 +177,7 @@ LI|Also the active monitors of the PSKReporter map: hollow triangles for the sta
 LI|FT8 beyond 1100 km with no parallel paths: an FT8 spot (from PSKReporter MQTT, the clusters or WSJT-X via UDP) between stations more than 1100 km apart that has no parallel paths in the 3 minutes before and after (same band, midpoint within 300 km, direction within 15°, another pair of stations) is drawn in light green, like its row in the table at the bottom right (no blinking). Sporadic-E and tropo give many close, parallel paths; an isolated spot may be a meteor trail. For this YA-MS also receives from MQTT the FT8 spots of 6 m, 4 m, 2 m, 1.25 m and 70 cm (never 28 MHz, in any case). These spots do not go into the MS archive. On by default. Extra checks with PSKReporter MQTT: the spot is not isolated if the receiving station hears in MQTT other stations beyond 1100 km on the same band within 3 minutes (open band); spots from the clusters and RBN count only if the same pair also arrives from MQTT; RBN skimmers (callsigns with «-#») never qualify.
 LI|Decodes of your WSJT-X via UDP in which a correspondent answers you (the first callsign of the message is yours) are drawn with a blinking dashed line, in any mode and at any distance, and their row in the table blinks on a yellow background. This is the only case in which anything blinks.
 LI|Exchange between YA-MS users: when another YA-MS user decodes via UDP a message addressed to your station (in MSK144, FSK441, PSK2K or JTMS, or in FT8 beyond 1100 km), their YA-MS sends it to you encrypted through three public MQTT brokers (HiveMQ, Mosquitto, EMQX); you see it as a steady violet dashed line and as a line in the UDP console. Only you can read it (ECDH P-256 keys, AES-256 and HMAC-SHA256). FT8 spots are shown only if they have no parallel paths within 3 minutes. On by default; yams_scambio=0 in data/config.ini turns it off.
+LI|The exchange connects to the brokers encrypted (TLS: HiveMQ and EMQX port 8883, Mosquitto 8886) and falls back to port 1883 only if a broker refuses TLS. The first key seen for each callsign stays pinned in data/yams_chiavi.txt: if a station appears with a different key, the program keeps using the known one and the UDP box of Data collection shows the button «Accept the new keys», to be used only if you know the station has reinstalled YA-MS.
 LI|Spots of all bands are shown, including those not chosen in Data collection (these are not stored). CW spots and spots between stations that are too close are not shown, if they are discarded in Data collection.
 LI|The map shows the callsigns of both stations of each spot, once per station. The projection can be azimuthal (centred on your station) or Mercator. The tooltip on the shower zone column explains its meaning.
 H2|9.2 Radar flux
@@ -228,6 +234,7 @@ LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: the shower catalogue and the p
 LI|flusso_collm.csv, quote_collm.csv: archives of the Collm radar; radar/: latest images, RMOB files and data from the live sources; fonti_radar.csv: addresses of the sources, which can be enabled one by one.
 LI|cataloghi/: IAU MDC catalogue; radar/diretta/: GMN and CMOR data.
 LI|call3.txt: locator database; spot_ms/: collected meteor scatter spots; adif_quadrati.csv: squares from the ADIF.
+LI|radar/rmoj/: RMOJ monthly files from Japan; radar/hro_ogaki_*.csv: Ogaki counts of the last 3 days; radar/gfs_*.json: GFS profiles for refraction (valid 3 hours).
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: the technical documents.
 LI|backup/: copies of the files replaced by an update; aggiornamento/: downloaded package (deleted on restart).
 H2|13.3 The Settings tab
@@ -237,6 +244,7 @@ LI|controlla_aggiornamenti=0: do not check for new versions; aggiornamenti_salta
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: the calculation checkboxes.
 LI|raggio_iniziale (0 = twice the ITU value, 1 = ITU, 2 = excluded), durata_ping (0 = λ², 1 = observed).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|rifrazione_gfs (0 = off, 1 = on), prev_fonte (collm, toyokawa, otsu), rmoj_osservatore: refraction and Japanese sources.
 LI|psk_rimando=0: turns off the forwarding to PSKReporter of the MS decodes (MSK144, FSK441, PSK2K, JTMS) received via UDP. It is on by default and works by itself: if your callsign has been missing for more than 20 minutes from the stations sending reports to PSKReporter (the digital program is not sending), YA-MS sends every 5 minutes the MS stations you decode, with you as receiver; as soon as the digital program sends again, YA-MS stops. A line in the UDP console says when it starts and stops. If sending to PSKReporter is off in WSJT-X.ini (or JTDX.ini), YA-MS forwards at once, without waiting 20 minutes.
 TAG|ATTENZIONE|Edit config.ini only with the program closed: YA-MS rewrites it when it closes.
 H1|14. Typical procedures

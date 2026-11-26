@@ -20,8 +20,8 @@ TAG|RILIEVO|Grafiek van Collm van 5/11/2026: modus 89,5 km, gemiddelde 88,6 km, 
 TAG|RILIEVO|DJ5HG [18] en QTFGUI [17] gebruiken een vaste hoogte van 102 km; het programma geeft de voorkeur aan de door de radar gemeten waarde. Aanbeveling ITU-R P.843 [24] geeft een gemiddelde hoogte h = 124 − 17·log10(f) km: ongeveer 97 km op 36,2 MHz en 87 km op 144 MHz, in lijn met de modus van Collm (89,5 km op 5/11/2026).
 H1|3. De geometrie van het traject
 H2|3.1 Aarde, stations en middelpunt
-TAG|FONTE|Bolvormige aarde met straal r = 6372,7955 km [1].
-TAG|SCELTA|Het traject is altijd het werkelijke traject tussen de locator van het station en die van het tegenstation. Afstand, azimut en middelpunt worden berekend met de grootcirkelformules.
+TAG|FONTE|WGS84-ellipsoïde [37]: halve lange as 6378,137 km, afplatting 1/298,257223563. Voor de bolvormige formules (elevatie uit het artikel, bereik, refractie) gebruikt het programma de gemiddelde straal van de ellipsoïde, r = 6371,0088 km; tot versie 1.8.23 gebruikte het de bol met straal 6372,7955 km [1].
+TAG|SCELTA|Het traject is altijd het werkelijke traject tussen de locator van het station en die van het tegenstation. Vanaf versie 1.8.27 worden afstand, azimut en middelpunt berekend op de geodeet van de ellipsoïde met de methode van Karney [38]: ten opzichte van de bol veranderen de afstanden hoogstens 0,5% en de azimuts enkele tienden van een graad.
 TAG|FONTE|De tijdsafhankelijke berekeningen zijn betrokken op het middelpunt van het traject: tussen de twee uiteinden kan het beste uur tot 1,5 uur verschillen (SM6FHZ [4]).
 H2|3.2 Antenne-elevatie
 TAG|FONTE|De elevatie naar het reflectiepunt wordt berekend met de formule van het artikel (Afbeelding 7) [1], met x = afstand / r, H hoogte van het spoor, h hoogte van het station:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Met de AMS-tabel: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, 
 TAG|SCELTA|Voor het uur dat op de hemelkoepel wordt getoond, telt het programma over alle zwermen boven de horizon ZHR x efficiëntie op, verdeeld over zijde A en zijde B (hoofdstuk 7.1). De hotspot van de zijde die de meeste reflecties ontvangt, is de aanbevolen hotspot: hij verschijnt in rood op de kaart.
 TAG|FONTE|Volgens DJ5HG, overgenomen door DF5HC [16], vindt de reflectie plaats op een kegel rond het spoor: bij kortere trajecten moeten de antennes naast de directe richting worden gericht, beide stations naar hetzelfde punt, en afhankelijk van de positie van de radiant is een van de twee punten (HOT-A of HOT-B) gunstiger. DF5HC noemt ook de beste afstand: 1300-1500 km, met een maximum van iets meer dan 2000 km.
 H2|3.5 De antennebundel
-TAG|FONTE|Versterking van een lange Yagi uit de boomlengte (curve DL6WU [10]) en openingshoek van de bundel op −3 dB uit de versterking (regel van Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Winst van een Yagi uit de boomlengte (gemiddelde rechte van de VE7BQH-tabellen per band [36], DL6WU-curve [10] ter vergelijking) en −3 dB-bundelbreedte uit de winst (regel van Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|De NEC-simulaties van W4RNL [12] bevestigen de versterkingscurve binnen 0,1 dB, zowel voor de DL6WU-Yagi's als voor die van David Tanner VK3AUU, die bij gelijk aantal elementen een kortere boom hebben: de versterking hangt af van de boomlengte. Dezelfde simulaties geven een horizontale bundel die 5-10 % smaller is dan bij Kraus.
+TAG|RILIEVO|VE7BQH-gemiddelde min DL6WU-curve: op 50 MHz binnen 0,25 dB van 2 tot 16 λ; op 144 MHz van −0,04 dB bij 1 λ tot +0,42 dB bij 10 λ; op 432 MHz van −0,06 dB bij 2 λ tot +0,55 dB bij 10 λ. Bij de door W4RNL op 432 MHz gesimuleerde DL6WU- en VK3AUU-Yagi's ligt het VE7BQH-gemiddelde 0,15–0,55 dB boven NEC: op lange booms presteren de computergeoptimaliseerde Yagi's van de tabellen beter dan de oorspronkelijke ontwerpen.
 TAG|SCELTA|Horizontale bundel (die voor het richten in azimut) = 0,93 · θK; verticale bundel = θK. Yagi van 14 λ op 432 MHz: 20,3 dBi, 18,1° horizontaal en 19,5° verticaal; de modellen van W4RNL geven 20,4 dBi en 18,4°/18,8°.
+TAG|RILIEVO|Met het VE7BQH-gemiddelde geeft dezelfde Yagi van 14 λ 21,0 dBi en een bundel van 16,9° horizontaal en 18,1° verticaal; de 20,3 dBi hierboven komen uit de DL6WU-curve. De bundelcorrecties (0,93 · θK en θK) blijven de uit de DL6WU-Yagi's afgeleide.
 TAG|SCELTA|De antenne wordt altijd beschouwd als gericht op het tegenstation. Een hotspot die binnen ±θ/2 van die richting valt, wordt al door de bundel gedekt: hij wordt in grijs in plaats van roze aangegeven en het programma waarschuwt. De door de efficiëntie aanbevolen hotspot blijft in elk geval rood.
 H1|4. De radiant van de zwerm
 H2|4.1 Positie van de radiant
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2e dr., Willmann-Bell, 1998.
 SRC|7. Meteorradar van Collm, Universiteit Leipzig (LIM) en IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (naar Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - versterkingscurve van lange Yagi's, overgenomen door W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, fig. 1 (primaire bron); curve ook vermeld door W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin van juni 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi-winsttabellen voor 50, 144 en 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopieën op qsl.net/dk7zb en sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

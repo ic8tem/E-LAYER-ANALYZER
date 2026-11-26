@@ -10,7 +10,13 @@
 //    crea una chiave temporanea, calcola il segreto comune con la chiave pubblica del destinatario e cifra con
 //    AES-256-CBC + HMAC-SHA256: solo il destinatario puo' leggere. Gli argomenti usano l'hash del nominativo, mai il
 //    nominativo in chiaro.
-//  - Limiti: chiunque potrebbe pubblicare una chiave falsa per un nominativo (senza un'autorita' che le certifichi);
+//  - Chiavi (1.8.27): la prima chiave vista per un nominativo resta fissata in data/yams_chiavi.txt; una chiave diversa
+//    arrivata dopo non si usa finche' l'utente non la accetta (pulsante nella Raccolta dati, riquadro UDP). Chi trova
+//    sul broker una chiave non sua sotto il proprio nominativo ripubblica la sua.
+//  - Collegamento (1.8.27): cifrato TLS (HiveMQ e EMQX porta 8883, Mosquitto 8886, certificati pubblici controllati);
+//    se un broker rifiuta TLS due volte di fila si torna alla porta 1883 per quel broker. Il broker passa i messaggi
+//    anche tra versioni vecchie (1883) e nuove (TLS).
+//  - Limiti: senza un'autorita' che certifichi le chiavi, la prima chiave vista potrebbe gia' essere falsa;
 //    i broker pubblici non garantiscono il servizio. I messaggi non si conservano sul server.
 //  - Modi MS (MSK144, FSK441, PSK2K, JTMS) e FT8 solo oltre i 1100 km; chi riceve un FT8 lo mostra solo se non ha tratte
 //    parallele nei 3 minuti (stessa clausola degli FT8 isolati). Lo stesso messaggio parte al massimo una volta al minuto.
@@ -20,7 +26,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net.Security;
 using System.Net.Sockets;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -33,17 +41,19 @@ namespace YAMS
     // client MQTT 3.1.1 minimo con pubblicazione (QoS 0, retain) e abbonamenti, riconnessione automatica
     public sealed class MqttLink
     {
-        public readonly string Host; public readonly int Port;
+        public readonly string Host; public readonly int Port, TlsPort;
         public bool Connected { get; private set; }
+        public bool Secure { get; private set; }   // collegamento attuale cifrato TLS
+        int tlsFails;
         public event Action<string, byte[]> Message;
         public event Action Up;
         readonly HashSet<string> subs = new HashSet<string>(StringComparer.Ordinal);
         readonly object wlk = new object();
-        NetworkStream ns; TcpClient tc;
+        Stream ns; TcpClient tc;
         volatile bool want;
         int pid = 1;
 
-        public MqttLink(string host, int port) { Host = host; Port = port; }
+        public MqttLink(string host, int port, int tlsPort = 0) { Host = host; Port = port; TlsPort = tlsPort; }
 
         public void Start() { if (want) return; want = true; Task.Run(Loop); }
         public void Stop() { want = false; try { tc?.Close(); } catch { } }
@@ -81,25 +91,46 @@ namespace YAMS
             {
                 try
                 {
+                    bool tls = TlsPort > 0 && tlsFails < 2;
                     tc = new TcpClient();
-                    using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(20)))
-                        await tc.ConnectAsync(Host, Port, cts.Token);
-                    ns = tc.GetStream();
+                    try
+                    {
+                        using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(20)))
+                            await tc.ConnectAsync(Host, tls ? TlsPort : Port, cts.Token);
+                        tc.ReceiveTimeout = 90000;   // il broker risponde al ping ogni 40 s: 90 s senza nulla = collegamento morto
+                        if (tls)
+                        {
+                            SslStream ssl = new SslStream(tc.GetStream(), false);   // controllo del certificato del sistema
+                            using (CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(20)))
+                                await ssl.AuthenticateAsClientAsync(new SslClientAuthenticationOptions { TargetHost = Host }, cts.Token);
+                            ns = ssl;
+                        }
+                        else ns = tc.GetStream();
+                    }
+                    catch
+                    {
+                        if (tls) tlsFails++;   // due rifiuti TLS di fila: si passa alla porta 1883 per questo broker
+                        throw;
+                    }
+                    Secure = tls;
                     List<byte> c = new List<byte>();
                     c.AddRange(Str("MQTT")); c.Add(4); c.Add(0x02); c.Add(0); c.Add(60);
                     c.AddRange(Str("YA-MS-" + Guid.NewGuid().ToString("N").Substring(0, 12)));
                     Send(Packet(0x10, c));
                     int type; byte[] body = Read(out type);
                     if (type != 2 || body.Length < 2 || body[1] != 0) throw new IOException("refused");
-                    Connected = true; wait = 5;
+                    Connected = true; wait = 5; if (Secure) tlsFails = 0;
                     List<string> all; lock (subs) all = new List<string>(subs);
                     foreach (string s in all) Send(SubPacket(s));
                     Up?.Invoke();
-                    DateTime ping = DateTime.UtcNow;
+                    // ping ogni 40 s in un compito a parte; la lettura qui sotto aspetta i pacchetti (con TLS non c'e' DataAvailable)
+                    TcpClient mine = tc;
+                    _ = Task.Run(async () =>
+                    {
+                        while (want && Connected && tc == mine) { await Task.Delay(40000); if (want && Connected && tc == mine) Send(new byte[] { 0xC0, 0 }); }
+                    });
                     while (want)
                     {
-                        if ((DateTime.UtcNow - ping).TotalSeconds > 40) { Send(new byte[] { 0xC0, 0 }); ping = DateTime.UtcNow; }
-                        if (!ns.DataAvailable) { await Task.Delay(100); continue; }
                         body = Read(out type);
                         if (type == 3 && body.Length >= 2)
                         {
@@ -113,7 +144,7 @@ namespace YAMS
                     }
                 }
                 catch { }
-                finally { Connected = false; try { tc?.Close(); } catch { } lock (wlk) ns = null; }
+                finally { Connected = false; Secure = false; try { ns?.Dispose(); } catch { } try { tc?.Close(); } catch { } lock (wlk) ns = null; }
                 if (!want) break;
                 try { await Task.Delay(wait * 1000); } catch { }
                 wait = Math.Min(300, wait * 2);
@@ -154,6 +185,7 @@ namespace YAMS
     public static class YamsShare
     {
         public static readonly string[] Brokers = { "broker.hivemq.com", "test.mosquitto.org", "broker.emqx.io" };
+        static readonly int[] BrokerTlsPorts = { 8883, 8886, 8883 };   // test.mosquitto.org: 8886 ha il certificato Let's Encrypt
         public const int BrokerPort = 1883;
         public static bool Enabled = true;
         public static int Sent, Received, Keys;
@@ -170,6 +202,62 @@ namespace YAMS
         static Timer timer;
 
         public static int ConnectedBrokers { get { int n = 0; lock (links) foreach (MqttLink l in links) if (l.Connected) n++; return n; } }
+        public static int SecureBrokers { get { int n = 0; lock (links) foreach (MqttLink l in links) if (l.Connected && l.Secure) n++; return n; } }
+
+        // ---- chiavi fissate alla prima vista (data/yams_chiavi.txt: nominativo TAB chiave pubblica in base64)
+        static readonly ConcurrentDictionary<string, string> pinned = new ConcurrentDictionary<string, string>(StringComparer.Ordinal);
+        static readonly ConcurrentDictionary<string, string> changed = new ConcurrentDictionary<string, string>(StringComparer.Ordinal);   // chiavi diverse in attesa
+        static readonly object pinLock = new object();
+        static DateTime lastRepublish = DateTime.MinValue;
+
+        // nominativi la cui chiave e' cambiata rispetto a quella fissata (i messaggi per loro restano fermi)
+        public static List<string> ChangedKeys() { List<string> l = new List<string>(changed.Keys); l.Sort(StringComparer.Ordinal); return l; }
+
+        static string PinFile { get { return Path.Combine(dataDir, "yams_chiavi.txt"); } }
+
+        static void LoadPinned()
+        {
+            try
+            {
+                if (!File.Exists(PinFile)) return;
+                foreach (string line in File.ReadAllLines(PinFile))
+                {
+                    string[] p = line.Split('\t');
+                    if (p.Length == 2 && p[0].Length > 0 && p[1].Length > 0) pinned[p[0]] = p[1];
+                }
+            }
+            catch { }
+        }
+
+        static void SavePinned()
+        {
+            try
+            {
+                lock (pinLock)
+                {
+                    List<string> lines = new List<string>();
+                    foreach (var kv in pinned) lines.Add(kv.Key + "\t" + kv.Value);
+                    lines.Sort(StringComparer.Ordinal);
+                    string tmp = PinFile + ".tmp";
+                    File.WriteAllLines(tmp, lines);
+                    File.Move(tmp, PinFile, true);
+                }
+            }
+            catch { }
+        }
+
+        // l'utente accetta le chiavi nuove (es. un corrispondente ha reinstallato YA-MS)
+        public static void AcceptChangedKeys()
+        {
+            foreach (var kv in changed)
+            {
+                pinned[kv.Key] = kv.Value;
+                try { byte[] k = Convert.FromBase64String(kv.Value); peerKeys[kv.Key] = k; } catch { }
+                WsjtxUdp.Note("YA-MS: " + Lang.F("chiave nuova di {0} accettata", kv.Key));
+            }
+            changed.Clear();
+            SavePinned();
+        }
 
         public static string Hash(string call)
         {
@@ -182,9 +270,11 @@ namespace YAMS
             if (!Enabled || timer != null) return;
             dataDir = dir;
             LoadKey();
-            foreach (string b in Brokers)
+            LoadPinned();
+            for (int bi = 0; bi < Brokers.Length; bi++)
             {
-                MqttLink l = new MqttLink(b, BrokerPort);
+                string b = Brokers[bi];
+                MqttLink l = new MqttLink(b, BrokerPort, BrokerTlsPorts[bi]);
                 l.Message += OnMessage;
                 l.Up += () => PublishMyKey(l);
                 lock (links) links.Add(l);
@@ -239,6 +329,7 @@ namespace YAMS
         {
             if (myCall.Length == 0 || myPub == null) return;
             l.Subscribe("yams/v1/a/" + Hash(myCall));
+            l.Subscribe("yams/v1/k/" + Hash(myCall));   // per accorgersi se qualcuno ha messo un'altra chiave sotto il mio nominativo
             l.Publish("yams/v1/k/" + Hash(myCall), Encoding.ASCII.GetBytes(Convert.ToBase64String(myPub)), true);
         }
 
@@ -310,16 +401,39 @@ namespace YAMS
                 if (topic.StartsWith("yams/v1/k/", StringComparison.Ordinal))
                 {
                     string h = topic.Substring(10), call;
-                    if (keyTopicToCall.TryGetValue(h, out call) && payload.Length > 0)
+                    if (payload.Length == 0 || payload.Length > 1024) return;
+                    string b64 = Encoding.ASCII.GetString(payload).Trim();
+                    // la mia chiave: se sul broker ce n'e' un'altra, ripubblico la mia (al massimo una volta al minuto)
+                    if (myCall.Length > 0 && h == Hash(myCall))
                     {
-                        byte[] k = Convert.FromBase64String(Encoding.ASCII.GetString(payload).Trim());
+                        if (b64 != Convert.ToBase64String(myPub) && (DateTime.UtcNow - lastRepublish).TotalSeconds > 60)
+                        {
+                            lastRepublish = DateTime.UtcNow;
+                            WsjtxUdp.Note("YA-MS: " + Lang.T("sul broker c'era un'altra chiave sotto il tuo nominativo: ho ripubblicato la tua"));
+                            lock (links) foreach (MqttLink l in links) l.Publish("yams/v1/k/" + Hash(myCall), Encoding.ASCII.GetBytes(Convert.ToBase64String(myPub)), true);
+                        }
+                        return;
+                    }
+                    if (keyTopicToCall.TryGetValue(h, out call))
+                    {
+                        byte[] k = Convert.FromBase64String(b64);
                         using (ECDiffieHellman t = ECDiffieHellman.Create()) t.ImportSubjectPublicKeyInfo(k, out _);   // chiave valida?
+                        string have;
+                        if (pinned.TryGetValue(call, out have) && have != b64)
+                        {
+                            // chiave diversa da quella fissata: non si usa finche' l'utente non la accetta
+                            if (changed.TryAdd(call, b64)) WsjtxUdp.Note("YA-MS: " + Lang.F("la chiave di {0} è cambiata: uso ancora quella conosciuta finché non accetti la nuova", call));
+                            else changed[call] = b64;
+                            if (!peerKeys.ContainsKey(call)) { try { peerKeys[call] = Convert.FromBase64String(have); } catch { } }
+                            return;
+                        }
+                        if (have == null) { pinned[call] = b64; SavePinned(); }
                         if (peerKeys.TryAdd(call, k)) Interlocked.Increment(ref Keys); else peerKeys[call] = k;
                     }
                     return;
                 }
                 if (myCall.Length == 0 || topic != "yams/v1/a/" + Hash(myCall)) return;
-                if (payload.Length > 16384) return;   // un messaggio vero e' di circa 1 kB (come YA-MS, 26/11/2026)
+                if (payload.Length > 16384) return;   // un messaggio vero e' di circa 1 kB: niente lavoro di decifratura su pacchetti enormi
                 string id = Convert.ToHexString(SHA256.HashData(payload), 0, 12);
                 if (!seen.TryAdd(id, DateTime.UtcNow)) return;   // stesso messaggio da un altro broker
                 byte[] plain = Decrypt(payload);

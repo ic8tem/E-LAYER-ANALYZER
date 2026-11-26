@@ -20,8 +20,8 @@ TAG|RILIEVO|Graphique de Collm du 5/11/2026 : mode 89,5 km, moyenne 88,6 km, éc
 TAG|RILIEVO|DJ5HG [18] et QTFGUI [17] utilisent une altitude fixe de 102 km ; le programme préfère la valeur mesurée par le radar. La Recommandation ITU-R P.843 [24] donne une altitude moyenne h = 124 − 17·log10(f) km : environ 97 km à 36,2 MHz et 87 km à 144 MHz, en accord avec le mode de Collm (89,5 km le 5/11/2026).
 H1|3. La géométrie du trajet
 H2|3.1 Terre, stations et point milieu
-TAG|FONTE|Terre sphérique de rayon r = 6372,7955 km [1].
-TAG|SCELTA|Le trajet est toujours le trajet réel entre le locator de la station et celui du correspondant. Distance, azimut et point milieu se calculent avec les formules du grand cercle.
+TAG|FONTE|Ellipsoïde WGS84 [37] : demi-grand axe 6378,137 km, aplatissement 1/298,257223563. Pour les formules sphériques (élévation de l'article, portée, réfraction), le programme utilise le rayon moyen de l'ellipsoïde, r = 6371,0088 km ; jusqu'à la version 1.8.23, il utilisait la sphère de rayon 6372,7955 km [1].
+TAG|SCELTA|Le trajet est toujours le trajet réel entre le locator de la station et celui du correspondant. Depuis la version 1.8.27, la distance, l'azimut et le point milieu se calculent sur la géodésique de l'ellipsoïde avec la méthode de Karney [38] : par rapport à la sphère, les distances changent d'au plus 0,5 % et les azimuts de quelques dixièmes de degré.
 TAG|FONTE|Les calculs qui dépendent de l'heure se rapportent au point milieu du trajet : entre les deux extrémités, la meilleure heure peut différer jusqu'à 1,5 heure (SM6FHZ [4]).
 H2|3.2 Élévation d'antenne
 TAG|FONTE|L'élévation vers le point de réflexion se calcule avec la formule de l'article (Image 7) [1], avec x = distance / r, H altitude de la traînée, h altitude de la station :
@@ -41,10 +41,13 @@ TAG|RILIEVO|Avec le tableau AMS : 1000 km → 13°, s ≈ 115 km ; 1250 km → 1
 TAG|SCELTA|Pour l'heure affichée sur la voûte céleste, le programme additionne, sur tous les essaims au-dessus de l'horizon, ZHR x efficacité réparti entre le côté A et le côté B (chapitre 7.1). Le hot spot du côté qui reçoit le plus de réflexions est le hot spot recommandé : il apparaît en rouge sur la carte.
 TAG|FONTE|Selon DJ5HG, cité par DF5HC [16], la réflexion se produit sur un cône autour de la traînée : pour les trajets plus courts, les antennes doivent être pointées sur le côté de la direction directe, les deux stations vers le même point, et selon la position du radiant l'un des deux points (HOT-A ou HOT-B) est plus favorable. DF5HC indique aussi la meilleure distance entre 1300-1500 km, avec un maximum un peu au-delà de 2000 km.
 H2|3.5 Le lobe de l'antenne
-TAG|FONTE|Gain d'une Yagi longue d'après la longueur du boom (courbe DL6WU [10]) et ouverture du lobe à −3 dB d'après le gain (règle de Kraus [11]) :
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Gain d'une Yagi d'après la longueur du boom (droite moyenne des tables de VE7BQH par bande [36], courbe DL6WU [10] pour comparaison) et ouverture du lobe à −3 dB d'après le gain (règle de Kraus [11]) :
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Les simulations NEC de W4RNL [12] confirment la courbe du gain à 0,1 dB près, aussi bien pour les Yagi DL6WU que pour celles de David Tanner VK3AUU, qui à nombre d'éléments égal ont un boom plus court : le gain dépend de la longueur du boom. Les mêmes simulations donnent un lobe horizontal plus étroit que Kraus de 5-10 %.
+TAG|RILIEVO|Moyenne VE7BQH moins courbe DL6WU : à 50 MHz à moins de 0,25 dB de 2 à 16 λ ; à 144 MHz de −0,04 dB à 1 λ à +0,42 dB à 10 λ ; à 432 MHz de −0,06 dB à 2 λ à +0,55 dB à 10 λ. Sur les Yagi DL6WU et VK3AUU simulées par W4RNL à 432 MHz, la moyenne VE7BQH est 0,15–0,55 dB au-dessus du NEC : sur les booms longs, les Yagi des tables, optimisées par ordinateur, rendent plus que les conceptions d'origine.
 TAG|SCELTA|Lobe horizontal (celui du pointage en azimut) = 0,93 · θK ; lobe vertical = θK. Yagi de 14 λ à 432 MHz : 20,3 dBi, 18,1° horizontal et 19,5° vertical ; les modèles de W4RNL donnent 20,4 dBi et 18,4°/18,8°.
+TAG|RILIEVO|Avec la moyenne VE7BQH, la même Yagi de 14 λ donne 21,0 dBi et un lobe de 16,9° horizontal et 18,1° vertical ; les 20,3 dBi ci-dessus sont ceux de la courbe DL6WU. Les corrections du lobe (0,93 · θK et θK) restent celles tirées des Yagi DL6WU.
 TAG|SCELTA|L'antenne est toujours considérée comme pointée vers le correspondant. Un hot spot qui tombe à ±θ/2 de cette direction est déjà couvert par le lobe : il est marqué en gris au lieu de rose et le programme affiche un avertissement. Le hot spot recommandé par l'efficacité reste de toute façon en rouge.
 H1|4. Le radiant de l'essaim
 H2|4.1 Position du radiant
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2e éd., Willmann-Bell, 1998.
 SRC|7. Radar météorique de Collm, Université de Leipzig (LIM) et IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (d'après Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - courbe du gain des Yagi longues, reproduite par W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, p. 130-138, fig. 1 (source primaire) ; courbe reprise aussi par W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, bulletin de juin 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tables de gain des Yagi pour 50, 144 et 432 MHz : dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (copies sur qsl.net/dk7zb et sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

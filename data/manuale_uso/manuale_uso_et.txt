@@ -1,5 +1,5 @@
 TITLE|YA-MS-i kasutusjuhend
-SUB|Versioon 1.8.20 - koostanud Costantino IC8TEM - november 2026
+SUB|Versioon 1.8.27 - koostanud Costantino IC8TEM - november 2026
 H1|1. Sissejuhatus
 H2|1.1 Milleks YA-MS on mõeldud
 P|YA-MS aitab prognoosida ja reaalajas jälgida meteor scatteri tingimusi sinu jaama ja korrespondendi vahel sagedustel 28 kuni 432 MHz. Iga aktiivse meteoorivoolu kohta ütleb see, kui palju selle radiandi asend soosib sinu trassi (efektiivsus), millistel tundidel, trassi kummalt poolt peegeldused saabuvad ja kuhu on kõige parem antenn suunata. Prognoosi kõrval näitab see reaalajas mõõdetud andmeid: Collmi meteoorradari loendusi, Global Meteor Networki kaameraid, CMOR-radarit, GRAVESi saatjat ning klastritest ja PSKReporterist kogutud meteor scatteri liiklust.
@@ -24,6 +24,7 @@ LI|macOS: .dmg-fail Apple Siliconi (M1 ja uuemad) või Inteli jaoks või app.zip
 TAG|ATTENZIONE|Windows võib näidata teadet „Windows kaitses teie arvutit“: vali „Rohkem teavet“ ja seejärel „Käivita siiski“. macOS-is ava rakendus esimesel korral paremklõpsuga ja vali „Ava“. Programm pole allkirjastatud tasulise sertifikaadiga.
 H2|2.2 Esimene käivitamine
 P|Käivitamisel kuvatakse mõneks sekundiks pilt Perseiididest ESO VLT kohal. Esimesel käivitamisel valib YA-MS süsteemi keele, kui see on üks 36-st, muidu itaalia keele; laadib alla Euroopa kaardi (Natural Earth) kausta data/mappa ja näitab näidistrassi. Programmi seadistamine oma jaama jaoks võtab vaid mõne minuti (peatükk 4).
+P|YA-MS avaneb ainult üks kord: kui käivitad selle uuesti, kui see on juba avatud, teine eksemplar ei käivitu ja avatud aken tuleb esiplaanile, isegi kui see oli minimeeritud. Nii ei kirjuta kaks eksemplari kunagi korraga samadesse data-kausta failidesse. Pärast uuendust ootab uus eksemplar, kuni vana on suletud.
 H2|2.3 Kaust data
 P|Kõik seaded ja kõik andmed asuvad ühes kaustas data programmi kõrval: ei mingit AppData-t ega süsteemikaustu. YA-MS-i teise arvutisse viimiseks piisab programmi kausta kopeerimisest koos selle kaustaga data. Kausta sisu on kirjeldatud peatükis 13.
 H2|2.4 Automaatsed uuendused
@@ -40,7 +41,7 @@ P|Käivitamisel kontrollib YA-MS, kas kõik tema failid on olemas (tõlked, kata
 H1|3. Põhiaken
 H2|3.1 Akna osad
 LI|Üleval kaks rida juhtnuppe, mis kehtivad kõigil sakkidel: E-kiht ja antenn, arvutuse aeg (peatükk 4). Sinu jaam (lokaator, kõrgus, sagedusala ja Arvuta) on paremal üleval vahekaardil Liiklus reaalajas.
-LI|Põhisakkide riba, mille paremas servas on nupp Juhtnupud, värviskeem (Teema) ja keel.
+LI|Põhisakkide riba, paremal nupp Käsud ja keel. Värviskeem (Teema) valitakse sakis Seaded.
 LI|Alamsakid heledamal real nende sakkide jaoks, millel need on.
 LI|All olekuriba: arvutuse teated, ühenduse hoiatused ja nupp „Uuendused“.
 H2|3.2 Sakid
@@ -64,12 +65,13 @@ H2|4.2 Rida 1: E-kiht ja antenn
 LI|Jälgede kõrgus km ja radarilt: meteoorijälgede kõrgus. Kui „radarilt“ on märgitud, kasutatakse Collmi radari mõõdetud kõige sagedasemat kõrgust (tavaliselt 88-90 km); eemalda märge, et see käsitsi sisestada.
 LI|Peaharu kõrgusnurk °: sinu antenni vertikaalse peaharu maksimumi kõrgusnurk. 0° peale fikseeritud suunaantenni peaharu on maapinnalt peegeldumise tõttu siiski mõne kraadi võrra horisondist kõrgemal: tavaliselt 3-8°, sõltuvalt antenni kõrgusest lainepikkustes.
 LI|antenni suunadiagramm: sisselülitatuna (vaikimisi) arvestatakse peegelduspunkte mõlema antenni vertikaalse võimendusega: täielikult peaharu maksimumi ümbruses ja üha vähem horisondi suunas ning ülespoole. Väljalülitatuna on peaharu kõrgusnurk terav piir: madalamal nähtavaid punkte ei arvestata.
-LI|Yagi antenn: poom m: poomi pikkus. Selle kõrvale kirjutab programm pikkuse lainepikkustes, võimenduse (DL6WU kõver) ja peaharu laiuse -3 dB juures horisontaalselt ja vertikaalselt. Alla 2 λ on hinnang ebatäpne.
-LI|Hot spot keskpunktist km ja auto (AMS): Hot A ja Hot B kaugus keskpunktist. Kui „auto (AMS)“ on märgitud, järgitakse J. Richardsoni tabelit, mida tsiteerib DJ5HG (13° kõrvalekalle 1000 km juures, 10° üle 1500 km); eemalda märge, et sisestada käsitsi 30-400 km (MSHV kasutab 150 km).
+LI|Yagi antenn: poom m: poomi pikkus. Kõrvale kirjutab programm pikkuse lainepikkustes, võimenduse (sagedusala VE7BQH tabelite keskmine sirge) ning −3 dB peaharu horisontaalselt ja vertikaalselt. Kui poom on väljaspool sagedusala VE7BQH valimit, on hinnang ebatäpne.
 TAG|ATTENZIONE|Kui „antenni suunadiagramm“ on välja lülitatud ja peaharu on mõne kraadi kõrgusel, ei pruugi kaks jaama pikal trassil näha ühtki kihi ühist punkti: kõik efektiivsused on 0 ja kuvatakse hoiatus „ÜHIST TSOONI POLE“ koos peaharu või jälgede kõrgusega, mida oleks vaja. Näide: JN70CN - JO76QP, 1791 km, peaharu 3°, jäljed 88,5 km kõrgusel.
 H2|4.3 Rida 2: arvutuse aeg
 LI|Aeg: UTC kell.
 LI|Arvutuse kuupäev (UTC): arvutuse päev. Kehtib Prognoosarvutuse, Efektiivsuse arvutuse 24 tunni tabeli ja GRAVES-radari ajajoone kohta. Vaikimisi on see tänane päev ja keskööl läheb see üle uuele päevale.
+LI|Troposfääriline refraktsioon (GFS): käivitamisel väljas. Sisse lülitatuna laadib programm GFS-mudelist temperatuuri- ja niiskusprofiili kahe jaama kohal ning arvestab kiire kõverdumist kuni jälgede kõrguseni: madalad punktid paistavad veidi kõrgemal ja ühine tsoon laieneb. Kui GFS ei vasta, kasutab see keskmist atmosfääri. Vahekaardi Geomeetria ja sumbumine aruanne ütleb seda real "Refraktsioon".
+LI|Hot spot keskpunktist km ja auto (AMS): Hot A ja Hot B kaugus keskpunktist. Kui „auto (AMS)“ on märgitud, järgitakse J. Richardsoni tabelit, mida tsiteerib DJ5HG (13° kõrvalekalle 1000 km juures, 10° üle 1500 km); eemalda märge, et sisestada käsitsi 30-400 km (MSHV kasutab 150 km).
 LI|Tunnid (−12 kuni +36 h): nihutab arvutuse hetke 15-minutiliste sammudega. Kõrval: „Arvutus ajale: praegu“ või valitud kuupäev ja kellaaeg.
 LI|Reaalaeg: naaseb praegusele hetkele.
 LI|Ajajoon («Tunnid (−12 kuni +36 h)» ja «Reaalaeg») on saki Prognoosarvutus ülaosas, sest see kehtib ainult selle arvutuse kohta.
@@ -153,12 +155,15 @@ H2|8.1 Juhtnupud
 LI|Sihtsagedus MHz: prognoosi sagedus.
 LI|λ^k astendaja (3, SM6FHZ) ja Jaama tegur K (1): sageduse reegel ja parandus sinu jaama jaoks.
 LI|k populatsiooniindeksitest: pakub k väärtuse aktiivsete meteoorivoolude populatsiooniindeksite r põhjal (GMN, muidu IMO; k = 3,75 · log10 r, kaalutud ZHR-iga) ja küsib enne rakendamist kinnitust.
+LI|Loenduste allikas: vaikimisi Collm (radar 36,2 MHz). Kui sinu jaam on Jaapanist kuni 3500 km kaugusel, ilmuvad ka kirjed "Jaapan otse" (majakad JA2SDA Toyokawas ja JE3AKE Otsus, 53 MHz) HROFFT-i automaatloendustega, mida Ogaki avaldab iga 10 minuti järel; valik salvestatakse.
+LI|Jaapan: igakuised HRO-loendused (IPRMO)...: avab akna Jaapani vaatlejate käsitsi tehtud tunniloendustega RMOJ-kuufailidest. Vali kuu ja vaatleja; Uuenda IPRMO-st laadib uued kuud. Esimene graafik on kuu keskmine UTC-tunni kaupa, teisendatud sinu sagedusele, teine päevasummad.
 LI|Laadi RMOB-fail kettalt ja Leia astendaja RMOB-failist: loevad kuise RMOB-faili ja leiavad k Collmiga ühiste tundide põhjal.
 LI|RMOB-i vaatleja, Laadi RMOB kohe alla ja automaatne allalaadimine iga 5 minuti järel: automaatne allalaadimine on välja lülitatud ja selle võib sisse lülitada ainult RMOB-i loal. Need käsud on vahekaardil Seaded.
 H2|8.2 Tulemused
 LI|Eilse ja tänase päeva graafik: meteoorid tunnis Collmis, sinu sagedusele teisendatud väärtused ja, kui need on laaditud, RMOB-i loendused.
 LI|Järgmise 24 tunni prognoos: eelmise päeva sama tund, parandatuna trassi meteoorivoolude indeksi muutusega.
 LI|Tabel hinnanguga: hea, keskmine või kehv võrreldes 24 tunni keskmisega.
+TAG|NOTA|Ogaki automaatloendused on käsitsi loendustest suuremad: need on suhtelised väärtused. Kalibreerimiseks võrdle neid Jaapani aknas sama majaka RMOJ-kuufailidega.
 TAG|NOTA|Peegelduste kestus järgib valikut „Pingide kestus sagedusalade vahel“ sakil Geomeetria ja sumbumine; forward scatteri korral kasvab kestus ka koos sec²φ-ga trassi keskpunktis.
 H1|9. Otse ja reaalajas andmed
 H2|9.1 Liiklus reaalajas
@@ -172,6 +177,7 @@ LI|Ka PSKReporteri kaardi aktiivsed monitorid: tühjad kolmnurgad jaamadele, mis
 LI|FT8 üle 1100 km ilma paralleelsete trassideta: FT8-spot (PSKReporteri MQTT-st, klastritest või WSJT-X-ist UDP kaudu) üle 1100 km kaugusel olevate jaamade vahel, millel pole 3 minuti jooksul enne ja pärast paralleelseid trasse (sama sagedusala, keskpunkt 300 km piires, suund 15° piires, teine jaamapaar), joonistatakse helerohelisena, nagu ka selle rida paremal all tabelis (ilma vilkumiseta). Sporaadiline E ja troposfäär annavad palju lähedasi paralleelseid trasse; üksik spot võib olla meteoorijälg. Seepärast võtab YA-MS MQTT-st vastu ka 6 m, 4 m, 2 m, 1,25 m ja 70 cm FT8-spotid (mitte kunagi 28 MHz). Need spotid ei lähe MS-arhiivi. Vaikimisi sees. Lisakontrollid PSKReporteri MQTT-ga: spot ei ole üksik, kui vastuvõttev jaam kuuleb MQTT-s 3 minuti jooksul samal sagedusalal teisi jaamu üle 1100 km (avatud ala); klastrite ja RBN-i spotid kehtivad ainult siis, kui sama paar tuleb ka MQTT kaudu; RBN-i skimmerid (kutsungid «-#») ei kehti kunagi.
 LI|Sinu WSJT-X-i UDP kaudu tulnud dekodeeringud, milles korrespondent sulle vastab (sõnumi esimene kutsung on sinu oma), joonistatakse vilkuva katkendjoonena igas modulatsioonis ja igal kaugusel ning nende rida tabelis vilgub kollasel taustal. See on ainus juhtum, kus midagi vilgub.
 LI|Vahetus YA-MS-i kasutajate vahel: kui mõni teine YA-MS-i kasutaja dekodeerib UDP kaudu sinu jaamale adresseeritud sõnumi (MSK144, FSK441, PSK2K või JTMS režiimis või FT8-s üle 1100 km), saadab tema YA-MS selle sulle krüptitult kolme avaliku MQTT-maakleri kaudu (HiveMQ, Mosquitto, EMQX); näed seda püsiva violetse katkendjoonena ja reana UDP konsoolis. Ainult sina saad seda lugeda (ECDH P-256 võtmed, AES-256 ja HMAC-SHA256). FT8-spotte näidatakse ainult siis, kui neil pole 3 minuti jooksul paralleelseid trasse. Vaikimisi sees; yams_scambio=0 failis data/config.ini lülitab selle välja.
+LI|Vahetus ühendub maakleritega krüpteeritult (TLS: HiveMQ ja EMQX port 8883, Mosquitto 8886) ja läheb pordile 1883 tagasi ainult siis, kui maakler TLS-i keelab. Iga kutsungi jaoks esimesena nähtud võti jääb kinnitatuks failis data/yams_chiavi.txt: kui jaam ilmub teise võtmega, kasutab programm edasi tuntud võtit ning Andmekogumise UDP-kastis ilmub nupp «Võta uued võtmed vastu», mida kasuta ainult siis, kui tead, et jaam installis YA-MS-i uuesti.
 LI|Näidatakse kõigi sagedusalade spotte, ka nende, mida Andmekogumises ei ole valitud (neid ei salvestata). CW-spotte ja liiga lähedaste jaamade vahelisi spotte ei näidata, kui need Andmekogumises ära visatakse.
 LI|Kaardil kirjutatakse iga spoti mõlema jaama kutsung, üks kord jaama kohta. Projektsioon on valitav: asimuutne (keskel sinu jaam) või Mercator. Veeru voo tsoon kohtspikker selgitab selle tähendust.
 H2|9.2 Radari voog
@@ -228,6 +234,7 @@ LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: meteoorivoolude kataloog ja An
 LI|flusso_collm.csv, quote_collm.csv: Collmi radari arhiivid; radar/: viimased pildid, RMOB-failid ja reaalajas allikate andmed; fonti_radar.csv: allikate aadressid, mida saab ükshaaval lubada.
 LI|cataloghi/: IAU MDC kataloog; radar/diretta/: GMN-i ja CMOR-i andmed.
 LI|call3.txt: lokaatorite arhiiv; spot_ms/: kogutud meteor scatteri spotid; adif_quadrati.csv: ADIF-ist saadud ruudud.
+LI|radar/rmoj/: RMOJ-kuufailid Jaapanist; radar/hro_ogaki_*.csv: Ogaki loendused viimase 3 päeva kohta; radar/gfs_*.json: GFS-profiilid refraktsiooni jaoks (kehtivad 3 tundi).
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: tehnilised dokumendid.
 LI|backup/: uuendusega asendatud failide koopiad; aggiornamento/: alla laaditud pakett (kustutatakse taaskäivitamisel).
 H2|13.3 Vahekaart Seaded
@@ -237,6 +244,7 @@ LI|controlla_aggiornamenti=0: ära kontrolli uusi versioone; aggiornamenti_salta
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: arvutuse märkeruudud.
 LI|raggio_iniziale (0 = ITU kahekordne, 1 = ITU, 2 = välja jäetud), durata_ping (0 = λ², 1 = vaadeldud).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|rifrazione_gfs (0 = väljas, 1 = sees), prev_fonte (collm, toyokawa, otsu), rmoj_osservatore: refraktsioon ja Jaapani allikad.
 LI|psk_rimando=0: lülitab välja UDP kaudu saadud MS-dekodeeringute (MSK144, FSK441, PSK2K, JTMS) edastamise PSKReporterisse. See on vaikimisi sees ja töötab ise: kui sinu kutsung on PSKReporterile raporteid saatvate jaamade seast puudunud üle 20 minuti (digiprogramm ei saada), saadab YA-MS iga 5 minuti järel sinu dekodeeritud MS-jaamad, sina vastuvõtjana; kui digiprogramm jälle saadab, YA-MS lõpetab. Rida UDP konsoolis ütleb, millal see algab ja lõpeb. Kui WSJT-X.ini (või JTDX.ini) failis on PSKReporterisse saatmine välja lülitatud, edastab YA-MS kohe, ootamata 20 minutit.
 TAG|ATTENZIONE|Muuda faili config.ini ainult siis, kui programm on suletud: sulgemisel kirjutab YA-MS selle üle.
 H1|14. Tüüpilised toimingud

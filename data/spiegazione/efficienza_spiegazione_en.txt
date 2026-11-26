@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm plot of 5/11/2026: mode 89.5 km, mean 88.6 km, standard deviat
 TAG|RILIEVO|DJ5HG [18] and QTFGUI [17] use a fixed height of 102 km; the program prefers the value measured by the radar. Recommendation ITU-R P.843 [24] gives a mean height h = 124 − 17·log10(f) km: about 97 km at 36.2 MHz and 87 km at 144 MHz, in line with the Collm mode (89.5 km on 5/11/2026).
 H1|3. The path geometry
 H2|3.1 Earth, stations and midpoint
-TAG|FONTE|Spherical Earth of radius r = 6372.7955 km [1].
-TAG|SCELTA|The path is always the real one between the station's locator and that of the DX station. Distance, azimuth and midpoint are calculated with the great-circle formulas.
+TAG|FONTE|WGS84 ellipsoid [37]: semi-major axis 6378.137 km, flattening 1/298.257223563. For the spherical formulas (elevation from the article, range, refraction) the program uses the mean radius of the ellipsoid, r = 6371.0088 km; up to version 1.8.23 it used the sphere of radius 6372.7955 km [1].
+TAG|SCELTA|The path is always the real one between the station's locator and that of the DX station. From version 1.8.27 distance, azimuth and midpoint are calculated on the geodesic of the ellipsoid with Karney's method [38]: compared with the sphere, distances change by at most 0.5% and azimuths by a few tenths of a degree.
 TAG|FONTE|Time-dependent calculations refer to the midpoint of the path: the best time can differ by up to 1.5 hours between the two ends (SM6FHZ [4]).
 H2|3.2 Antenna elevation
 TAG|FONTE|The elevation towards the reflection point is calculated with the formula of the article (Image 7) [1], with x = distance / r, H trail height, h station height:
@@ -41,10 +41,13 @@ TAG|RILIEVO|With the AMS table: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°
 TAG|SCELTA|For the time shown on the Sky view the program sums, over all showers above the horizon, ZHR x efficiency split between side A and side B (chapter 7.1). The hot spot on the side receiving more reflections is the recommended one: it appears in red on the map.
 TAG|FONTE|According to DJ5HG, quoted by DF5HC [16], reflection takes place on a cone around the trail: for shorter paths the antennas should be pointed to the side of the direct direction, both stations towards the same point, and depending on the radiant position one of the two points (HOT-A or HOT-B) is more favourable. DF5HC also gives the best distance as 1300-1500 km, with a maximum slightly beyond 2000 km.
 H2|3.5 The antenna lobe
-TAG|FONTE|Gain of a long Yagi from the boom length (DL6WU curve [10]) and −3 dB beamwidth from the gain (Kraus's rule [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Gain of a Yagi from the boom length (mean line of the VE7BQH tables for each band [36], DL6WU curve [10] for comparison) and −3 dB lobe width from the gain (Kraus rule [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL's NEC simulations [12] confirm the gain curve within 0.1 dB both for DL6WU Yagis and for those of David Tanner VK3AUU, which have a shorter boom for the same number of elements: the gain depends on the boom length. The same simulations give a horizontal lobe 5-10 % narrower than Kraus.
+TAG|RILIEVO|VE7BQH mean minus DL6WU curve: at 50 MHz within 0.25 dB from 2 to 16 λ; at 144 MHz from −0.04 dB at 1 λ to +0.42 dB at 10 λ; at 432 MHz from −0.06 dB at 2 λ to +0.55 dB at 10 λ. On the DL6WU and VK3AUU Yagis simulated by W4RNL at 432 MHz the VE7BQH mean is 0.15–0.55 dB above NEC: on long booms the computer-optimised Yagis of the tables perform better than the original designs.
 TAG|SCELTA|Horizontal lobe (the one for azimuth pointing) = 0.93 · θK; vertical lobe = θK. 14 λ Yagi at 432 MHz: 20.3 dBi, 18.1° horizontal and 19.5° vertical; W4RNL's models give 20.4 dBi and 18.4°/18.8°.
+TAG|RILIEVO|With the VE7BQH mean the same 14 λ Yagi gives 21.0 dBi and a lobe of 16.9° horizontal and 18.1° vertical; the 20.3 dBi above come from the DL6WU curve. The lobe corrections (0.93 · θK and θK) remain those derived from the DL6WU Yagis.
 TAG|SCELTA|The antenna is always considered pointed towards the DX station. A hot spot that falls within ±θ/2 of that direction is already covered by the lobe: it is marked in grey instead of pink and the program shows a warning. The hot spot recommended by the efficiency nevertheless stays in red.
 H1|4. The shower radiant
 H2|4.1 Radiant position
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2nd ed., Willmann-Bell, 1998.
 SRC|7. Collm meteor radar, Leipzig University (LIM) and IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (from Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - gain curve of long Yagis, quoted by W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, fig. 1 (primary source); curve also quoted by W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, June 2018 bulletin.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi gain tables for 50, 144 and 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (copies on qsl.net/dk7zb and sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

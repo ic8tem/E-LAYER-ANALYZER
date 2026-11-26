@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm-graf frá 5/11/2026: tíðasta gildi 89,5 km, meðaltal 88,6 k
 TAG|RILIEVO|DJ5HG [18] og QTFGUI [17] nota fasta hæð 102 km; forritið tekur mælt gildi ratsjárinnar fram yfir. Tilmæli ITU-R P.843 [24] gefa meðalhæð h = 124 − 17·log10(f) km: um 97 km við 36,2 MHz og 87 km við 144 MHz, í samræmi við tíðasta gildi Collm (89,5 km þann 5/11/2026).
 H1|3. Rúmfræði leiðarinnar
 H2|3.1 Jörð, stöðvar og miðpunktur
-TAG|FONTE|Kúlulaga jörð með geisla r = 6372,7955 km [1].
-TAG|SCELTA|Leiðin er alltaf hin raunverulega leið milli reitarkóða stöðvarinnar og mótstöðvarinnar. Fjarlægð, stefnuhorn og miðpunktur eru reiknuð með stórbaugsformúlunum.
+TAG|FONTE|WGS84-sporvalan [37]: hálfur langás 6378,137 km, pólfletja 1/298,257223563. Fyrir kúluformúlurnar (hæðarhorn úr greininni, drægni, ljósbrot) notar forritið meðalgeisla sporvölunnar, r = 6371,0088 km; til og með útgáfu 1.8.23 notaði það kúlu með geisla 6372,7955 km [1].
+TAG|SCELTA|Leiðin er alltaf hin raunverulega leið milli reitarkóða stöðvarinnar og mótstöðvarinnar. Frá útgáfu 1.8.27 eru fjarlægð, stefna og miðpunktur reiknuð á jarðlínu sporvölunnar með aðferð Karneys [38]: miðað við kúluna breytast fjarlægðir um mest 0,5% og stefnur um nokkra tíundu hluta úr gráðu.
 TAG|FONTE|Tímaháðir útreikningar miðast við miðpunkt leiðarinnar: besti tíminn getur verið allt að 1,5 klst. mismunandi milli endanna tveggja (SM6FHZ [4]).
 H2|3.2 Hæðarhorn loftnets
 TAG|FONTE|Hæðarhornið að endurvarpspunktinum er reiknað með formúlu greinarinnar (mynd 7) [1], með x = fjarlægð / r, H hæð slóðarinnar, h hæð stöðvarinnar:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Með AMS-töflunni: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°
 TAG|SCELTA|Fyrir tímann sem sýndur er á himinhvelfingunni leggur forritið saman, yfir allar drífur ofan sjóndeildarhrings, ZHR x nýtni skipt milli hliðar A og hliðar B (kafli 7.1). Heiti bletturinn á þeirri hlið sem fær flest endurvörp er sá sem mælt er með: hann birtist rauður á kortinu.
 TAG|FONTE|Samkvæmt DJ5HG, eftir DF5HC [16], verður endurvarpið á keilu umhverfis slóðina: á styttri leiðum skal beina loftnetunum til hliðar við beinu stefnuna, báðum stöðvum að sama punkti, og eftir stöðu geislapunktsins er annar punkturinn (HOT-A eða HOT-B) hagstæðari. DF5HC tilgreinir einnig bestu fjarlægðina 1300-1500 km, með hámark rétt yfir 2000 km.
 H2|3.5 Geisli loftnetsins
-TAG|FONTE|Mögnun langs Yagi-loftnets út frá bómulengd (DL6WU-ferill [10]) og geislabreidd við −3 dB út frá mögnun (regla Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Mögnun Yagi-loftnets út frá bómulengd (meðallína VE7BQH-taflnanna fyrir hvert band [36], DL6WU-ferill [10] til samanburðar) og breidd geislans við −3 dB út frá mögnun (regla Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|NEC-hermanir W4RNL [12] staðfesta mögnunarferilinn innan 0,1 dB bæði fyrir DL6WU Yagi-loftnet og þau eftir David Tanner VK3AUU, sem hafa styttri bómu við sama fjölda eininga: mögnunin ræðst af bómulengdinni. Sömu hermanir gefa láréttan geisla 5-10 % mjórri en Kraus.
+TAG|RILIEVO|VE7BQH-meðaltal mínus DL6WU-ferill: á 50 MHz innan 0,25 dB frá 2 til 16 λ; á 144 MHz frá −0,04 dB við 1 λ upp í +0,42 dB við 10 λ; á 432 MHz frá −0,06 dB við 2 λ upp í +0,55 dB við 10 λ. Á DL6WU- og VK3AUU-loftnetunum sem W4RNL hermdi á 432 MHz er VE7BQH-meðaltalið 0,15–0,55 dB yfir NEC: á löngum bómum skila tölvubestuð Yagi-loftnet taflnanna meiru en upprunalegu hönnunin.
 TAG|SCELTA|Láréttur geisli (sá sem ræður stefnu í stefnuhorni) = 0,93 · θK; lóðréttur geisli = θK. Yagi 14 λ við 432 MHz: 20,3 dBi, 18,1° láréttur og 19,5° lóðréttur; líkön W4RNL gefa 20,4 dBi og 18,4°/18,8°.
+TAG|RILIEVO|Með VE7BQH-meðaltalinu gefur sama 14 λ Yagi-loftnetið 21,0 dBi og geisla 16,9° láréttan og 18,1° lóðréttan; 20,3 dBi hér að ofan eru úr DL6WU-ferlinum. Leiðréttingar geislans (0,93 · θK og θK) eru áfram þær sem leiddar voru af DL6WU-loftnetunum.
 TAG|SCELTA|Loftnetinu er alltaf talið beint að mótstöðinni. Heitur blettur sem lendir innan ±θ/2 frá þeirri stefnu er þegar innan geislans: hann er merktur grár í stað bleiks og forritið varar við því. Heiti bletturinn sem mælt er með út frá nýtni er samt alltaf rauður.
 H1|4. Geislapunktur drífunnar
 H2|4.1 Staða geislapunktsins
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. útg., Willmann-Bell, 1998.
 SRC|7. Loftsteinaratsjáin í Collm, Háskólinn í Leipzig (LIM) og IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (eftir Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - mögnunarferill langra Yagi-loftneta, birtur af W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, bls. 130-138, mynd 1 (frumheimild); ferillinn einnig birtur hjá W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, fréttabréf frá júní 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - mögnunartöflur Yagi-loftneta fyrir 50, 144 og 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (afrit á qsl.net/dk7zb og sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

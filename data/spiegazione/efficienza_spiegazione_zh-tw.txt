@@ -20,8 +20,8 @@ TAG|RILIEVO|2026/11/5 的 Collm 圖：眾數 89.5 km，平均值 88.6 km，標�
 TAG|RILIEVO|DJ5HG [18] 和 QTFGUI [17] 使用 102 km 的固定高度；本程式優先採用雷達實測值。ITU-R P.843 建議書 [24] 給出平均高度 h = 124 − 17·log10(f) km：36.2 MHz 時約 97 km，144 MHz 時約 87 km，與 Collm 的眾數一致（2026/11/5 為 89.5 km）。
 H1|3. 路徑幾何
 H2|3.1 地球、台站與中點
-TAG|FONTE|半徑 r = 6372.7955 km 的球形地球 [1]。
-TAG|SCELTA|路徑始終是本台定位符與 DX 台定位符之間的真實路徑。距離、方位角和中點用大圓公式計算。
+TAG|FONTE|WGS84 橢球 [37]：長半軸 6378.137 km，扁率 1/298.257223563。球面公式（文章中的仰角、可達距離、折射）使用橢球的平均半徑 r = 6371.0088 km；1.8.23 版及以前使用半徑 6372.7955 km 的球 [1]。
+TAG|SCELTA|路徑始終是本台定位符與 DX 台定位符之間的真實路徑。自 1.8.27 版起，距離、方位角和中點用 Karney 方法 [38] 在橢球的測地線上計算：與球面相比，距離最多變化 0.5%，方位角變化零點幾度。
 TAG|FONTE|與時間相關的計算以路徑中點為參照：路徑兩端的最佳時間可能相差多達 1.5 小時（SM6FHZ [4]）。
 H2|3.2 天線仰角
 TAG|FONTE|指向反射點的仰角用文章中的公式（圖 7）[1] 計算，其中 x = 距離 / r，H 為餘跡高度，h 為台站高度：
@@ -41,10 +41,13 @@ TAG|RILIEVO|按 AMS 表：1000 km → 13°，s ≈ 115 km；1250 km → 11°，s
 TAG|SCELTA|對於天球圖上顯示的時刻，程式對地平線以上的所有流星雨累加 ZHR x 效率，並在 A 側和 B 側之間分配（第 7.1 章）。接收反射較多一側的熱點即為推薦熱點：在地圖上以紅色顯示。
 TAG|FONTE|據 DF5HC [16] 引用的 DJ5HG 所述，反射發生在圍繞餘跡的錐面上：對於較短的路徑，天線應指向直射方向的一側，兩台站指向同一點，並且根據輻射點位置，兩個點（HOT-A 或 HOT-B）中的一個更為有利。DF5HC 還給出最佳距離為 1300-1500 km，極大值略超過 2000 km。
 H2|3.5 天線波瓣
-TAG|FONTE|由橫梁長度求長八木天線的增益（DL6WU 曲線 [10]），由增益求 −3 dB 波束寬度（Kraus 規則 [11]）：
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|由主桿長度求八木天線增益（VE7BQH 表格每個波段的平均直線 [36]，DL6WU 曲線 [10] 作比較），由增益求 −3 dB 波瓣寬度（Kraus 規則 [11]）：
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL 的 NEC 模擬 [12] 證實了增益曲線，偏差在 0.1 dB 以內，對 DL6WU 八木天線以及 David Tanner VK3AUU 的八木天線（相同單元數下橫梁較短）均如此：增益取決於橫梁長度。同樣的模擬給出的水平波瓣比 Kraus 窄 5-10 %。
+TAG|RILIEVO|VE7BQH 平均值減 DL6WU 曲線：50 MHz 在 2 至 16 λ 內相差不超過 0.25 dB；144 MHz 從 1 λ 時 −0.04 dB 到 10 λ 時 +0.42 dB；432 MHz 從 2 λ 時 −0.06 dB 到 10 λ 時 +0.55 dB。對 W4RNL 在 432 MHz 模擬的 DL6WU 和 VK3AUU 八木，VE7BQH 平均值比 NEC 高 0.15–0.55 dB：在長主桿上，表中經電腦最佳化的八木比原始設計效能更好。
 TAG|SCELTA|水平波瓣（用於方位指向）= 0.93 · θK；垂直波瓣 = θK。432 MHz 的 14 λ 八木天線：20.3 dBi，水平 18.1°、垂直 19.5°；W4RNL 的模型給出 20.4 dBi 和 18.4°/18.8°。
+TAG|RILIEVO|依 VE7BQH 平均值，同一副 14 λ 八木為 21.0 dBi，波瓣水平 16.9°、垂直 18.1°；上面的 20.3 dBi 來自 DL6WU 曲線。波瓣修正（0.93 · θK 和 θK）仍沿用由 DL6WU 八木得出的值。
 TAG|SCELTA|天線始終被視為指向 DX 台。落在該方向 ±θ/2 以內的熱點已被波瓣覆蓋：以灰色而非粉色標示，程式顯示警告。按效率推薦的熱點仍然為紅色。
 H1|4. 流星雨輻射點
 H2|4.1 輻射點位置
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms，第 2 版，Willmann-Bell，1998。
 SRC|7. Collm 流星雷達，萊比錫大學（LIM）和 IAP Kühlungsborn，wetterdaten.meteo.uni-leipzig.de/radar_flux.php。
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961。
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering（引自 Kaiser & Closs, 1952）。
-SRC|10. G. Hoch DL6WU - 長八木天線增益曲線，W8IO 引用，www.w8io.com。
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas"，VHF Communications 14，3/1982，第 130-138 頁，圖 1（原始來源）；W8IO 也轉載了該曲線，www.w8io.com。
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill。
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data。
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org，2018 年 6 月公報。
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50、144 和 432 MHz 八木天線增益表：dxmaps.com/VE7BQH6.html、dxmaps.com/VE7BQH.html、atlas.dxmaps.com/VE7BQH70.html（副本見 qsl.net/dk7zb 和 sm2cew.com）。
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

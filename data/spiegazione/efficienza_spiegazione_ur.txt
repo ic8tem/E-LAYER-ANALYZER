@@ -20,8 +20,8 @@ TAG|RILIEVO|5/11/2026 کا Collm گراف: موڈ 89,5 km، اوسط 88,6 km، �
 TAG|RILIEVO|DJ5HG [18] اور QTFGUI [17] 102 km کی مقررہ اونچائی استعمال کرتے ہیں؛ پروگرام ریڈار سے ناپی گئی قدر کو ترجیح دیتا ہے۔ ITU-R P.843 سفارش [24] اوسط اونچائی h = 124 − 17·log10(f) km دیتی ہے: 36,2 MHz پر تقریباً 97 km اور 144 MHz پر 87 km، جو Collm کے موڈ (5/11/2026 کو 89,5 km) کے مطابق ہے۔
 H1|3. راستے کی جیومیٹری
 H2|3.1 زمین، اسٹیشن اور وسطی نقطہ
-TAG|FONTE|رداس r = 6372,7955 km والی کروی زمین [1]۔
-TAG|SCELTA|راستہ ہمیشہ اسٹیشن کے locator اور DX اسٹیشن کے locator کے درمیان حقیقی راستہ ہوتا ہے۔ فاصلہ، ازیمتھ اور وسطی نقطہ عظیم دائرے کے فارمولوں سے حساب کیے جاتے ہیں۔
+TAG|FONTE|WGS84 بیضوی کرہ [37]: نیم بڑا محور 6378,137 km، چپٹا پن 1/298,257223563۔ کروی فارمولوں (مضمون کا زاویۂ بلندی، رسائی، انعطاف) کے لیے پروگرام بیضوی کرے کا اوسط رداس r = 6371,0088 km استعمال کرتا ہے؛ ورژن 1.8.23 تک یہ 6372,7955 km رداس والا کرہ استعمال کرتا تھا [1]۔
+TAG|SCELTA|راستہ ہمیشہ اسٹیشن کے locator اور DX اسٹیشن کے locator کے درمیان حقیقی راستہ ہوتا ہے۔ ورژن 1.8.27 سے فاصلہ، سمت اور درمیانی نقطہ بیضوی کرے کی جیوڈیسک پر Karney کے طریقے [38] سے نکالے جاتے ہیں: کرے کے مقابلے میں فاصلے زیادہ سے زیادہ 0,5% اور سمتیں درجے کے چند دسویں حصے بدلتی ہیں۔
 TAG|FONTE|وقت پر منحصر حسابات راستے کے وسطی نقطے کے لیے کیے جاتے ہیں: دونوں سروں کے درمیان بہترین وقت میں 1,5 گھنٹے تک کا فرق ہو سکتا ہے (SM6FHZ [4])۔
 H2|3.2 اینٹینا کی بلندی
 TAG|FONTE|انعکاس کے نقطے کی طرف بلندی کا حساب مضمون کے فارمولے (تصویر 7) [1] سے کیا جاتا ہے، جہاں x = فاصلہ / r، H لکیر کی اونچائی، h اسٹیشن کی اونچائی:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS جدول کے ساتھ: 1000 km → 13°، s ≈ 115 km؛ 1250 k
 TAG|SCELTA|آسمانی گنبد پر دکھائے گئے وقت کے لیے پروگرام افق سے اوپر کی تمام شہابی بارشوں پر ZHR x کارکردگی جمع کرتا ہے، جو جانب A اور جانب B کے درمیان تقسیم ہوتا ہے (باب 7.1)۔ زیادہ انعکاس پانے والی جانب کا hot spot تجویز کردہ ہے: یہ نقشے پر سرخ رنگ میں نظر آتا ہے۔
 TAG|FONTE|DJ5HG کے مطابق، جیسا کہ DF5HC [16] نے نقل کیا، انعکاس لکیر کے گرد ایک مخروط پر ہوتا ہے: چھوٹے راستوں کے لیے اینٹینا کو سیدھی سمت کے پہلو میں رخ کرنا چاہیے، دونوں اسٹیشن ایک ہی نقطے کی طرف، اور ریڈیئنٹ کے مقام کے مطابق دونوں نقطوں (HOT-A یا HOT-B) میں سے ایک زیادہ موزوں ہوتا ہے۔ DF5HC بہترین فاصلہ 1300-1500 km بھی بتاتے ہیں، جس کی زیادہ سے زیادہ قدر 2000 km سے تھوڑا آگے ہے۔
 H2|3.5 اینٹینا کا لوب
-TAG|FONTE|بوم کی لمبائی سے لمبے Yagi کا گین (DL6WU منحنی [10]) اور گین سے −3 dB پر لوب کی چوڑائی (Kraus کا اصول [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|بوم کی لمبائی سے Yagi کا گین (ہر بینڈ کے لیے VE7BQH جدولوں کی اوسط سیدھی لکیر [36]، موازنے کے لیے DL6WU خم [10]) اور گین سے −3 dB لوب کی چوڑائی (Kraus کا قاعدہ [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL [12] کے NEC سمیولیشنز گین منحنی کی 0,1 dB کے اندر تصدیق کرتے ہیں، DL6WU Yagi اور David Tanner VK3AUU کے Yagi دونوں کے لیے، جن کا بوم برابر عناصر پر چھوٹا ہوتا ہے: گین بوم کی لمبائی پر منحصر ہے۔ وہی سمیولیشنز Kraus سے 5-10 % تنگ افقی لوب دیتے ہیں۔
+TAG|RILIEVO|VE7BQH اوسط منفی DL6WU خم: 50 MHz پر 2 سے 16 λ تک 0,25 dB کے اندر؛ 144 MHz پر 1 λ پر −0,04 dB سے 10 λ پر +0,42 dB تک؛ 432 MHz پر 2 λ پر −0,06 dB سے 10 λ پر +0,55 dB تک۔ W4RNL کی 432 MHz پر سمولیٹ کردہ DL6WU اور VK3AUU Yagi پر VE7BQH اوسط NEC سے 0,15–0,55 dB اوپر ہے: لمبے بوم پر جدولوں کے کمپیوٹر سے بہتر بنائے گئے Yagi اصل ڈیزائنوں سے زیادہ دیتے ہیں۔
 TAG|SCELTA|افقی لوب (ازیمتھ میں رخ والا) = 0,93 · θK؛ عمودی لوب = θK۔ 432 MHz پر 14 λ کا Yagi: 20,3 dBi، 18,1° افقی اور 19,5° عمودی؛ W4RNL کے ماڈل 20,4 dBi اور 18,4°/18,8° دیتے ہیں۔
+TAG|RILIEVO|VE7BQH اوسط سے وہی 14 λ Yagi 21,0 dBi اور 16,9° افقی و 18,1° عمودی لوب دیتا ہے؛ اوپر کے 20,3 dBi DL6WU خم سے ہیں۔ لوب کی تصحیحات (0,93 · θK اور θK) وہی رہتی ہیں جو DL6WU Yagi سے اخذ کی گئیں۔
 TAG|SCELTA|اینٹینا کو ہمیشہ DX اسٹیشن کی طرف رخ کیا ہوا مانا جاتا ہے۔ اس سمت سے ±θ/2 کے اندر پڑنے والا hot spot پہلے ہی لوب سے ڈھکا ہوا ہے: وہ گلابی کے بجائے سرمئی رنگ میں نشان زد ہوتا ہے اور پروگرام اس کا انتباہ دیتا ہے۔ کارکردگی کے لحاظ سے تجویز کردہ hot spot پھر بھی سرخ رنگ میں رہتا ہے۔
 H1|4. شہابی بارش کا ریڈیئنٹ
 H2|4.1 ریڈیئنٹ کا مقام
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms، دوسرا ایڈیشن (2)، Willma
 SRC|7. Collm شہابی ریڈار، لائپزگ یونیورسٹی (LIM) اور IAP Kühlungsborn، wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 سے ماخوذ)۔
-SRC|10. G. Hoch DL6WU - لمبے Yagi کا گین منحنی، W8IO کا نقل کردہ، www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas"، VHF Communications 14، 3/1982، ص 130-138، شکل 1 (بنیادی ماخذ)؛ یہ خم W8IO نے بھی نقل کیا ہے، www.w8io.com۔
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org، جون 2018 کا بلیٹن۔
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50، 144 اور 432 MHz کے لیے Yagi گین جدولیں: dxmaps.com/VE7BQH6.html، dxmaps.com/VE7BQH.html، atlas.dxmaps.com/VE7BQH70.html (نقول qsl.net/dk7zb اور sm2cew.com پر)۔
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

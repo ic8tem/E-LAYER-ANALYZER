@@ -53,7 +53,6 @@ namespace YAMS
 
         public static volatile bool Loading;
         public static int Count { get { return calls.Length; } }
-        public static string[] Locators { get { return locs; } }   // locator del CALL3 (E-LAYER ANALYZER: quadrati con stazioni)
         public static int ManualCount { get { lock (lk) return manual.Count; } }
         public static int OverlayCount { get { lock (lk) return overlay.Count; } }
         public static int ClusterCount { get { lock (lk) return cluster.Count; } }
@@ -280,6 +279,7 @@ namespace YAMS
             Loading = true;
             ThreadPool.QueueUserWorkItem(_ =>
             {
+                try { if (!File.Exists(FilePath)) AdoptLocal(dataDir, true); } catch { }   // manca: si cerca sul computer
                 try { Load(); LoadLayers(); LastError = ""; } catch (Exception ex) { LastError = ex.Message; }
                 Loading = false;
                 Action a = Loaded; if (a != null) a();
@@ -660,6 +660,100 @@ namespace YAMS
             StartLoad(dataDir);
         }
 
+        // ---- ricerca di un CALL3.TXT gia' presente sul computer (come LIVETROPOVHF, piu' i programmi che lo usano)
+        // Cartelle: accanto al programma e una/due sopra, la cartella di avvio, Download, i dati di WSJT-X, JTDX, MSHV e
+        // LIVETROPOVHF. Vale solo un file con almeno 100.000 righe valide; si prende il piu' recente. Con soloSeManca=false
+        // (MMMonVHF non da' il file) si usa solo se e' piu' nuovo di data/call3.txt. Restituisce il percorso usato o null.
+        static IEnumerable<string> Call3Candidates()
+        {
+            List<string> dirs = new List<string>();
+            string app = AppPaths.AppDir;
+            dirs.Add(app);
+            try { string up = Path.GetDirectoryName(app); if (up != null) { dirs.Add(up); string up2 = Path.GetDirectoryName(up); if (up2 != null) dirs.Add(up2); } } catch { }
+            try { dirs.Add(Directory.GetCurrentDirectory()); } catch { }
+            string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string roam = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            if (home != "") { dirs.Add(Path.Combine(home, "Downloads")); dirs.Add(Path.Combine(home, "Download")); dirs.Add(Path.Combine(home, "Scaricati")); }
+            foreach (string prog in new[] { "WSJT-X", "JTDX", "MSHV", "LIVETROPOVHF" })
+            {
+                if (local != "") dirs.Add(Path.Combine(local, prog));
+                if (roam != "") dirs.Add(Path.Combine(roam, prog));
+                if (home != "")
+                {
+                    dirs.Add(Path.Combine(home, ".local", "share", prog));
+                    dirs.Add(Path.Combine(home, "Library", "Application Support", prog));
+                }
+            }
+            foreach (string pf in new[] { Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) })
+                if (pf != "") foreach (string prog in new[] { "MSHV", "LIVETROPOVHF" }) { dirs.Add(Path.Combine(pf, prog)); dirs.Add(Path.Combine(pf, prog, "settings", "database")); }
+            HashSet<string> seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string d in dirs)
+            {
+                if (string.IsNullOrEmpty(d)) continue;
+                string[] files;
+                try { if (!Directory.Exists(d)) continue; files = Directory.GetFiles(d); } catch { continue; }
+                foreach (string f in files)
+                {
+                    string n = Path.GetFileName(f);
+                    if (!n.StartsWith("call3", StringComparison.OrdinalIgnoreCase) || !n.EndsWith(".txt", StringComparison.OrdinalIgnoreCase)) continue;
+                    string full; try { full = Path.GetFullPath(f); } catch { continue; }
+                    if (seen.Add(full)) yield return full;
+                }
+            }
+        }
+
+        static int CountValid(string path)
+        {
+            int ok = 0;
+            try
+            {
+                foreach (string line in File.ReadLines(path, Encoding.Latin1))
+                {
+                    if (line.StartsWith("//", StringComparison.Ordinal)) continue;
+                    int c = line.IndexOf(',');
+                    if (c < 3) continue;
+                    int c2 = line.IndexOf(',', c + 1);
+                    string loc = (c2 > c ? line.Substring(c + 1, c2 - c - 1) : line.Substring(c + 1)).Trim();
+                    if (ValidLoc(loc)) ok++;
+                }
+            }
+            catch { return 0; }
+            return ok;
+        }
+
+        static string AdoptLocal(string dataDir, bool soloSeManca)
+        {
+            string dest = Path.Combine(dataDir, "call3.txt");
+            DateTime attuale = File.Exists(dest) ? File.GetLastWriteTimeUtc(dest) : DateTime.MinValue;
+            string best = null; DateTime bestT = DateTime.MinValue;
+            foreach (string f in Call3Candidates())
+            {
+                try
+                {
+                    if (string.Equals(Path.GetFullPath(f), Path.GetFullPath(dest), StringComparison.OrdinalIgnoreCase)) continue;
+                    if (Path.GetFullPath(Path.GetDirectoryName(f)).Equals(Path.GetFullPath(dataDir), StringComparison.OrdinalIgnoreCase)) continue;
+                    DateTime t = File.GetLastWriteTimeUtc(f);
+                    if (!soloSeManca && t <= attuale) continue;
+                    if (t <= bestT || CountValid(f) < 100000) continue;
+                    best = f; bestT = t;
+                }
+                catch { }
+            }
+            if (best == null) return null;
+            string tmp = dest + ".nuovo";
+            File.Copy(best, tmp, true);
+            if (File.Exists(dest))
+            {
+                File.SetAttributes(dest, FileAttributes.Normal);
+                File.Copy(dest, Path.Combine(dataDir, "call3.bak"), true);
+            }
+            File.Move(tmp, dest, true);
+            call3Pending = 1;
+            if (!soloSeManca) { WriteCorrectionsToCall3(); StartLoad(dataDir); }
+            return best;
+        }
+
         // ---- aggiornamento da MMMonVHF: almeno 100.000 righe valide, il precedente in call3.bak; null se riuscito
         static int busy;
         public static async Task<string> UpdateFromMmmonvhf(string dataDir, Action<string> say)
@@ -681,6 +775,13 @@ namespace YAMS
                     if (line.StartsWith("//", StringComparison.Ordinal)) continue;
                     string[] p = line.Split(',');
                     if (p.Length >= 2 && p[0].Trim().Length >= 3 && ValidLoc(p[1].Trim())) ok++;
+                }
+                // dal novembre 2026 MMMonVHF da' il file solo a chi ha fatto l'accesso: senza, arriva una pagina "Login required"
+                if (ok < 100000 && (text.IndexOf("Login required", StringComparison.OrdinalIgnoreCase) >= 0 || text.TrimStart().StartsWith("<", StringComparison.Ordinal)))
+                {
+                    string trovato = AdoptLocal(dataDir, false);
+                    if (trovato != null) return Lang.F("MMMonVHF chiede l'accesso al sito: ho usato il CALL3.TXT più recente trovato sul computer ({0}).", trovato);
+                    return Lang.F("MMMonVHF ora dà CALL3.TXT solo a chi ha fatto l'accesso al sito: CALL3 non cambiato. Entra su www.mmmonvhf.de con il tuo account, scarica CALL3.TXT dalla pagina dei download e caricalo con «{0}».", Lang.T("Importa CALL3.TXT..."));
                 }
                 if (ok < 100000) return Lang.F("File scaricato non valido ({0} righe utili): CALL3 non cambiato.", ok);
                 string dest = Path.Combine(dataDir, "call3.txt"), tmp = dest + ".nuovo";

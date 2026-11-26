@@ -20,8 +20,8 @@ TAG|RILIEVO|Grafik Collm 5/11/2026: modus 89,5 km, rata-rata 88,6 km, simpangan 
 TAG|RILIEVO|DJ5HG [18] dan QTFGUI [17] menggunakan ketinggian tetap 102 km; program lebih memilih data terukur dari radar. Rekomendasi ITU-R P.843 [24] memberikan ketinggian rata-rata h = 124 − 17·log10(f) km: sekitar 97 km pada 36,2 MHz dan 87 km pada 144 MHz, sejalan dengan modus Collm (89,5 km pada 5/11/2026).
 H1|3. Geometri lintasan
 H2|3.1 Bumi, stasiun dan titik tengah
-TAG|FONTE|Bumi berbentuk bola dengan jari-jari r = 6372,7955 km [1].
-TAG|SCELTA|Lintasan selalu lintasan nyata antara locator stasiun dan locator stasiun DX. Jarak, azimut dan titik tengah dihitung dengan rumus lingkaran besar.
+TAG|FONTE|Elipsoid WGS84 [37]: sumbu semi-mayor 6378,137 km, pegepengan 1/298,257223563. Untuk rumus bola (elevasi dari artikel, jangkauan, refraksi) program memakai jari-jari rata-rata elipsoid, r = 6371,0088 km; hingga versi 1.8.23 program memakai bola berjari-jari 6372,7955 km [1].
+TAG|SCELTA|Lintasan selalu lintasan nyata antara locator stasiun dan locator stasiun DX. Sejak versi 1.8.27 jarak, azimut, dan titik tengah dihitung pada geodesik elipsoid dengan metode Karney [38]: dibanding bola, jarak berubah paling banyak 0,5% dan azimut beberapa persepuluh derajat.
 TAG|FONTE|Perhitungan yang bergantung pada jam mengacu pada titik tengah lintasan: di antara kedua ujungnya jam terbaik dapat berbeda hingga 1,5 jam (SM6FHZ [4]).
 H2|3.2 Elevasi antena
 TAG|FONTE|Elevasi ke arah titik pantul dihitung dengan rumus dari artikel (Gambar 7) [1], dengan x = jarak / r, H ketinggian jejak, h ketinggian stasiun:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Dengan tabel AMS: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°, 
 TAG|SCELTA|Untuk jam yang ditampilkan pada kubah langit, program menjumlahkan, atas semua hujan meteor di atas cakrawala, ZHR x efisiensi yang dibagi antara sisi A dan sisi B (bab 7.1). Hot spot pada sisi yang menerima lebih banyak pantulan adalah yang disarankan: tampil merah di peta.
 TAG|FONTE|Menurut DJ5HG, dikutip oleh DF5HC [16], pantulan terjadi pada kerucut di sekitar jejak: untuk lintasan yang lebih pendek antena harus diarahkan ke samping arah langsung, kedua stasiun ke titik yang sama, dan tergantung posisi radian salah satu dari dua titik (HOT-A atau HOT-B) lebih menguntungkan. DF5HC juga menyebut jarak terbaik 1300-1500 km, dengan maksimum sedikit di atas 2000 km.
 H2|3.5 Lobe antena
-TAG|FONTE|Penguatan Yagi panjang dari panjang boom (kurva DL6WU [10]) dan lebar lobe −3 dB dari penguatan (aturan Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Gain Yagi dari panjang boom (garis rata-rata tabel VE7BQH per band [36], kurva DL6WU [10] sebagai pembanding) dan lebar lobe −3 dB dari gain (aturan Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|Simulasi NEC W4RNL [12] mengonfirmasi kurva penguatan dalam 0,1 dB baik untuk Yagi DL6WU maupun untuk Yagi karya David Tanner VK3AUU, yang pada jumlah elemen yang sama memiliki boom lebih pendek: penguatan bergantung pada panjang boom. Simulasi yang sama memberikan lobe horizontal 5-10 % lebih sempit dari Kraus.
+TAG|RILIEVO|Rata-rata VE7BQH dikurangi kurva DL6WU: pada 50 MHz dalam 0,25 dB dari 2 sampai 16 λ; pada 144 MHz dari −0,04 dB pada 1 λ hingga +0,42 dB pada 10 λ; pada 432 MHz dari −0,06 dB pada 2 λ hingga +0,55 dB pada 10 λ. Pada Yagi DL6WU dan VK3AUU yang disimulasikan W4RNL di 432 MHz, rata-rata VE7BQH 0,15–0,55 dB di atas NEC: pada boom panjang Yagi dalam tabel, yang dioptimalkan dengan komputer, memberi lebih dari desain aslinya.
 TAG|SCELTA|Lobe horizontal (untuk pengarahan azimut) = 0,93 · θK; lobe vertikal = θK. Yagi 14 λ pada 432 MHz: 20,3 dBi, 18,1° horizontal dan 19,5° vertikal; model W4RNL memberikan 20,4 dBi dan 18,4°/18,8°.
+TAG|RILIEVO|Dengan rata-rata VE7BQH Yagi 14 λ yang sama memberi 21,0 dBi dan lobe 16,9° horizontal dan 18,1° vertikal; 20,3 dBi di atas berasal dari kurva DL6WU. Koreksi lobe (0,93 · θK dan θK) tetap yang diturunkan dari Yagi DL6WU.
 TAG|SCELTA|Antena selalu dianggap diarahkan ke stasiun DX. Hot spot yang jatuh dalam ±θ/2 dari arah itu sudah tercakup oleh lobe: ditandai abu-abu, bukan merah muda, dan program memberi peringatan. Hot spot yang disarankan oleh efisiensi tetap merah.
 H1|4. Radian hujan meteor
 H2|4.1 Posisi radian
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, edisi ke-2, Willmann-Bell, 1998.
 SRC|7. Radar meteor Collm, Universitas Leipzig (LIM) dan IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (dari Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - kurva penguatan Yagi panjang, dikutip oleh W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, hlm. 130-138, gbr. 1 (sumber primer); kurva juga dikutip oleh W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, buletin Juni 2018.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - tabel gain Yagi untuk 50, 144 dan 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (salinan di qsl.net/dk7zb dan sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

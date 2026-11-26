@@ -20,8 +20,8 @@ TAG|RILIEVO|5/11/2026-এর Collm গ্রাফ: মোড 89.5 km, গড়
 TAG|RILIEVO|DJ5HG [18] ও QTFGUI [17] 102 km-এর স্থির উচ্চতা ব্যবহার করে; প্রোগ্রাম রাডারে মাপা তথ্যকে অগ্রাধিকার দেয়। ITU-R P.843 সুপারিশ [24] গড় উচ্চতা দেয় h = 124 − 17·log10(f) km: 36.2 MHz-এ প্রায় 97 km এবং 144 MHz-এ 87 km, যা Collm-এর মোডের সাথে সঙ্গতিপূর্ণ (5/11/2026-এ 89.5 km)।
 H1|3. পথের জ্যামিতি
 H2|3.1 পৃথিবী, স্টেশন ও মধ্যবিন্দু
-TAG|FONTE|r = 6372.7955 km ব্যাসার্ধের গোলাকার পৃথিবী [1]।
-TAG|SCELTA|পথটি সর্বদা স্টেশনের লোকেটর ও DX স্টেশনের লোকেটরের মধ্যকার প্রকৃত পথ। দূরত্ব, আজিমাথ ও মধ্যবিন্দু মহাবৃত্তের সূত্র দিয়ে গণনা করা হয়।
+TAG|FONTE|WGS84 উপগোলক [37]: অর্ধ-পরাক্ষ 6378.137 km, চ্যাপ্টাভাব 1/298.257223563। গোলকীয় সূত্রের (প্রবন্ধের উন্নতি কোণ, পাল্লা, প্রতিসরণ) জন্য প্রোগ্রাম উপগোলকের গড় ব্যাসার্ধ r = 6371.0088 km ব্যবহার করে; সংস্করণ 1.8.23 পর্যন্ত এটি 6372.7955 km ব্যাসার্ধের গোলক ব্যবহার করত [1]।
+TAG|SCELTA|পথটি সর্বদা স্টেশনের লোকেটর ও DX স্টেশনের লোকেটরের মধ্যকার প্রকৃত পথ। সংস্করণ 1.8.27 থেকে দূরত্ব, দিগংশ ও মধ্যবিন্দু উপগোলকের জিওডেসিকের উপর Karney-র পদ্ধতিতে [38] হিসাব করা হয়: গোলকের তুলনায় দূরত্ব সর্বোচ্চ 0.5% এবং দিগংশ ডিগ্রির কয়েক দশমাংশ বদলায়।
 TAG|FONTE|সময়-নির্ভর গণনাগুলো পথের মধ্যবিন্দুর সাপেক্ষে করা হয়: দুই প্রান্তের মধ্যে সেরা সময় 1.5 ঘণ্টা পর্যন্ত আলাদা হতে পারে (SM6FHZ [4])।
 H2|3.2 অ্যান্টেনার উন্নতি কোণ
 TAG|FONTE|প্রতিফলন বিন্দুর দিকে উন্নতি কোণ প্রবন্ধের সূত্র (চিত্র 7) [1] দিয়ে গণনা করা হয়, যেখানে x = দূরত্ব / r, H উল্কা-রেখার উচ্চতা, h স্টেশনের উচ্চতা:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS সারণি দিয়ে: 1000 km → 13°, s ≈ 115 km;
 TAG|SCELTA|আকাশ-গম্বুজে দেখানো ঘণ্টার জন্য প্রোগ্রাম দিগন্তের উপরের সব উল্কাবৃষ্টির উপর ZHR x দক্ষতা যোগ করে, যা পার্শ্ব A ও পার্শ্ব B-এর মধ্যে ভাগ হয় (অধ্যায় 7.1)। যে পার্শ্ব বেশি প্রতিফলন পায় তার হট স্পটটি প্রস্তাবিত: মানচিত্রে লাল রঙে দেখায়।
 TAG|FONTE|DF5HC [16] উদ্ধৃত DJ5HG-এর মতে, প্রতিফলন ঘটে উল্কা-রেখার চারপাশের একটি শঙ্কুর উপর: ছোট পথের জন্য অ্যান্টেনা সরাসরি দিকের পাশে তাক করতে হয়, দুই স্টেশনই একই বিন্দুর দিকে, এবং বিকিরণ বিন্দুর অবস্থান অনুযায়ী দুটি বিন্দুর একটি (HOT-A বা HOT-B) বেশি অনুকূল। DF5HC সেরা দূরত্ব হিসেবে 1300-1500 km উল্লেখ করেন, সর্বোচ্চ সীমা 2000 km-এর সামান্য বেশি।
 H2|3.5 অ্যান্টেনার লোব
-TAG|FONTE|বুমের দৈর্ঘ্য থেকে দীর্ঘ Yagi-র গেইন (DL6WU বক্ররেখা [10]) এবং গেইন থেকে −3 dB লোবের প্রস্থ (Kraus-এর নিয়ম [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|বুমের দৈর্ঘ্য থেকে Yagi-এর গেইন (প্রতিটি ব্যান্ডের জন্য VE7BQH সারণির গড় সরলরেখা [36], তুলনার জন্য DL6WU বক্ররেখা [10]) এবং গেইন থেকে −3 dB লোবের প্রস্থ (Kraus-এর নিয়ম [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL-এর NEC সিমুলেশন [12] গেইন বক্ররেখা 0.1 dB-এর মধ্যে নিশ্চিত করে, DL6WU Yagi এবং David Tanner VK3AUU-এর Yagi উভয়ের জন্য, যেগুলোর সমান এলিমেন্টে বুম ছোট: গেইন বুমের দৈর্ঘ্যের উপর নির্ভর করে। একই সিমুলেশন Kraus-এর চেয়ে 5-10 % সরু অনুভূমিক লোব দেয়।
+TAG|RILIEVO|VE7BQH গড় বিয়োগ DL6WU বক্ররেখা: 50 MHz-এ 2 থেকে 16 λ পর্যন্ত 0.25 dB-এর মধ্যে; 144 MHz-এ 1 λ-এ −0.04 dB থেকে 10 λ-এ +0.42 dB; 432 MHz-এ 2 λ-এ −0.06 dB থেকে 10 λ-এ +0.55 dB। W4RNL-এর 432 MHz-এ সিমুলেট করা DL6WU ও VK3AUU Yagi-তে VE7BQH গড় NEC-এর চেয়ে 0.15–0.55 dB বেশি: লম্বা বুমে সারণির কম্পিউটার-অপ্টিমাইজড Yagi মূল নকশার চেয়ে বেশি দেয়।
 TAG|SCELTA|অনুভূমিক লোব (আজিমাথে তাক করার লোব) = 0.93 · θK; উল্লম্ব লোব = θK। 432 MHz-এ 14 λ-এর Yagi: 20.3 dBi, 18.1° অনুভূমিক ও 19.5° উল্লম্ব; W4RNL-এর মডেল দেয় 20.4 dBi ও 18.4°/18.8°।
+TAG|RILIEVO|VE7BQH গড়ে একই 14 λ Yagi 21.0 dBi এবং 16.9° অনুভূমিক ও 18.1° উল্লম্ব লোব দেয়; ওপরের 20.3 dBi DL6WU বক্ররেখা থেকে। লোব সংশোধন (0.93 · θK ও θK) DL6WU Yagi থেকে পাওয়াগুলোই থাকে।
 TAG|SCELTA|অ্যান্টেনা সর্বদা DX স্টেশনের দিকে তাক করা বলে ধরা হয়। যে হট স্পট সেই দিক থেকে ±θ/2-এর মধ্যে পড়ে তা আগেই লোবের আওতায়: গোলাপির বদলে ধূসর রঙে চিহ্নিত হয় এবং প্রোগ্রাম সতর্ক করে। দক্ষতা অনুযায়ী প্রস্তাবিত হট স্পট সব ক্ষেত্রেই লাল থাকে।
 H1|4. উল্কাবৃষ্টির বিকিরণ বিন্দু
 H2|4.1 বিকিরণ বিন্দুর অবস্থান
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2য় সংস্করণ, Willma
 SRC|7. Collm উল্কা রাডার, লাইপজিগ বিশ্ববিদ্যালয় (LIM) ও IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961।
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 থেকে)।
-SRC|10. G. Hoch DL6WU - দীর্ঘ Yagi-র গেইন বক্ররেখা, W8IO উদ্ধৃত, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, পৃ. 130-138, চিত্র 1 (প্রাথমিক উৎস); বক্ররেখাটি W8IO-ও উদ্ধৃত করেছে, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill।
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, জুন 2018-এর বুলেটিন।
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50, 144 ও 432 MHz-এর Yagi গেইন সারণি: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (প্রতিলিপি qsl.net/dk7zb ও sm2cew.com-এ)।
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

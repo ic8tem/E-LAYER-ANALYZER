@@ -20,8 +20,8 @@ TAG|RILIEVO|กราฟ Collm วันที่ 5/11/2026: ฐานนิย�
 TAG|RILIEVO|DJ5HG [18] และ QTFGUI [17] ใช้ความสูงคงที่ 102 km โปรแกรมเลือกใช้ข้อมูลที่วัดได้จากเรดาร์มากกว่า ข้อแนะนำ ITU-R P.843 [24] ให้ความสูงเฉลี่ย h = 124 − 17·log10(f) km: ประมาณ 97 km ที่ 36.2 MHz และ 87 km ที่ 144 MHz สอดคล้องกับฐานนิยมของ Collm (89.5 km เมื่อ 5/11/2026)
 H1|3. เรขาคณิตของเส้นทาง
 H2|3.1 โลก สถานี และจุดกึ่งกลาง
-TAG|FONTE|โลกทรงกลมรัศมี r = 6372.7955 km [1]
-TAG|SCELTA|เส้นทางเป็นเส้นทางจริงระหว่าง locator ของสถานีกับ locator ของสถานี DX เสมอ ระยะทาง มุมอะซิมุท และจุดกึ่งกลางคำนวณด้วยสูตรวงกลมใหญ่
+TAG|FONTE|ทรงรี WGS84 [37]: กึ่งแกนเอก 6378.137 km ความแป้น 1/298.257223563 สำหรับสูตรทรงกลม (มุมเงยจากบทความ ระยะ การหักเห) โปรแกรมใช้รัศมีเฉลี่ยของทรงรี r = 6371.0088 km จนถึงรุ่น 1.8.23 โปรแกรมใช้ทรงกลมรัศมี 6372.7955 km [1]
+TAG|SCELTA|เส้นทางเป็นเส้นทางจริงระหว่าง locator ของสถานีกับ locator ของสถานี DX เสมอ ตั้งแต่รุ่น 1.8.27 ระยะทาง มุมทิศ และจุดกึ่งกลางคำนวณบนเส้นจีโอเดสิกของทรงรีด้วยวิธีของ Karney [38] เมื่อเทียบกับทรงกลม ระยะทางเปลี่ยนไม่เกิน 0.5% และมุมทิศเปลี่ยนไม่กี่ทศนิยมขององศา
 TAG|FONTE|การคำนวณที่ขึ้นกับเวลาอ้างอิงจุดกึ่งกลางของเส้นทาง: ระหว่างปลายทั้งสอง ชั่วโมงที่ดีที่สุดอาจต่างกันได้ถึง 1.5 ชั่วโมง (SM6FHZ [4])
 H2|3.2 มุมเงยของเสาอากาศ
 TAG|FONTE|มุมเงยไปยังจุดสะท้อนคำนวณด้วยสูตรจากบทความ (ภาพที่ 7) [1] โดย x = ระยะทาง / r, H คือความสูงของรอยดาวตก, h คือความสูงของสถานี:
@@ -41,10 +41,13 @@ TAG|RILIEVO|ด้วยตาราง AMS: 1000 km → 13°, s ≈ 115 km; 125
 TAG|SCELTA|สำหรับชั่วโมงที่แสดงบนโดมท้องฟ้า โปรแกรมรวม ZHR x ประสิทธิภาพ ของฝนดาวตกทั้งหมดที่อยู่เหนือขอบฟ้า โดยแบ่งระหว่างด้าน A และด้าน B (บทที่ 7.1) hot spot ของด้านที่ได้รับการสะท้อนมากกว่าเป็นจุดที่แนะนำ: แสดงเป็นสีแดงบนแผนที่
 TAG|FONTE|ตามที่ DJ5HG กล่าวไว้ ซึ่ง DF5HC [16] อ้างถึง การสะท้อนเกิดบนกรวยรอบรอยดาวตก: สำหรับเส้นทางที่สั้นกว่า เสาอากาศต้องหันไปด้านข้างของทิศตรง ทั้งสองสถานีหันไปยังจุดเดียวกัน และขึ้นกับตำแหน่งของจุดเรเดียนท์ จุดใดจุดหนึ่งในสองจุด (HOT-A หรือ HOT-B) จะได้เปรียบกว่า DF5HC ยังระบุระยะที่ดีที่สุดคือ 1300-1500 km โดยระยะสูงสุดเกิน 2000 km ไปเล็กน้อย
 H2|3.5 โลบของเสาอากาศ
-TAG|FONTE|อัตราขยายของ Yagi บูมยาวจากความยาวบูม (เส้นโค้ง DL6WU [10]) และความกว้างโลบที่ −3 dB จากอัตราขยาย (กฎของ Kraus [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|อัตราขยายของ Yagi จากความยาวบูม (เส้นตรงเฉลี่ยของตาราง VE7BQH ของแต่ละย่าน [36], เส้นโค้ง DL6WU [10] ใช้เปรียบเทียบ) และความกว้างโลบที่ −3 dB จากอัตราขยาย (กฎของ Kraus [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|การจำลอง NEC ของ W4RNL [12] ยืนยันเส้นโค้งอัตราขยายภายใน 0.1 dB ทั้งสำหรับ Yagi DL6WU และ Yagi ของ David Tanner VK3AUU ซึ่งบูมสั้นกว่าเมื่อจำนวนอีลีเมนต์เท่ากัน: อัตราขยายขึ้นกับความยาวบูม การจำลองเดียวกันให้โลบแนวนอนแคบกว่าของ Kraus 5-10 %
+TAG|RILIEVO|ค่าเฉลี่ย VE7BQH ลบเส้นโค้ง DL6WU: ที่ 50 MHz อยู่ภายใน 0.25 dB จาก 2 ถึง 16 λ; ที่ 144 MHz จาก −0.04 dB ที่ 1 λ ถึง +0.42 dB ที่ 10 λ; ที่ 432 MHz จาก −0.06 dB ที่ 2 λ ถึง +0.55 dB ที่ 10 λ สำหรับ Yagi แบบ DL6WU และ VK3AUU ที่ W4RNL จำลองที่ 432 MHz ค่าเฉลี่ย VE7BQH สูงกว่า NEC 0.15–0.55 dB: บนบูมยาว Yagi ในตารางที่ปรับให้เหมาะด้วยคอมพิวเตอร์ให้ผลดีกว่าแบบดั้งเดิม
 TAG|SCELTA|โลบแนวนอน (โลบสำหรับหันเสาอากาศตามมุมอะซิมุท) = 0.93 · θK; โลบแนวตั้ง = θK Yagi ยาว 14 λ ที่ 432 MHz: 20.3 dBi, 18.1° แนวนอน และ 19.5° แนวตั้ง แบบจำลองของ W4RNL ให้ 20.4 dBi และ 18.4°/18.8°
+TAG|RILIEVO|ตามค่าเฉลี่ย VE7BQH Yagi 14 λ ตัวเดียวกันให้ 21.0 dBi และโลบ 16.9° แนวนอน 18.1° แนวตั้ง; ค่า 20.3 dBi ข้างบนมาจากเส้นโค้ง DL6WU การแก้ไขโลบ (0.93 · θK และ θK) ยังคงเป็นค่าที่ได้จาก Yagi แบบ DL6WU
 TAG|SCELTA|เสาอากาศถือว่าหันไปยังสถานี DX เสมอ hot spot ที่อยู่ภายใน ±θ/2 จากทิศนั้นอยู่ในความครอบคลุมของโลบแล้ว: แสดงเป็นสีเทาแทนสีชมพู และโปรแกรมแจ้งเตือน hot spot ที่แนะนำตามประสิทธิภาพยังคงเป็นสีแดงเสมอ
 H1|4. จุดเรเดียนท์ของฝนดาวตก
 H2|4.1 ตำแหน่งของจุดเรเดียนท์
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms พิมพ์ครั้งที�
 SRC|7. เรดาร์ดาวตก Collm มหาวิทยาลัยไลพ์ซิก (LIM) และ IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (จาก Kaiser & Closs, 1952)
-SRC|10. G. Hoch DL6WU - เส้นโค้งอัตราขยายของ Yagi บูมยาว อ้างโดย W8IO, www.w8io.com
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, หน้า 130-138, รูปที่ 1 (แหล่งข้อมูลปฐมภูมิ); W8IO ก็อ้างเส้นโค้งนี้ด้วย, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org จดหมายข่าวเดือนมิถุนายน 2018
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - ตารางอัตราขยายของ Yagi สำหรับ 50, 144 และ 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (สำเนาที่ qsl.net/dk7zb และ sm2cew.com)
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

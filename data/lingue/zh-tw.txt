@@ -1,4 +1,4 @@
-# YA-MS - Chinese (Traditional, Taiwan) (zh-TW) translation of the user interface. UTF-8.
+﻿# YA-MS - Chinese (Traditional, Taiwan) (zh-TW) translation of the user interface. UTF-8.
 # One entry per line: <Italian key><TAB><translation>. Keys are listed in chiavi.txt (same folder).
 # In both columns the two characters \n mean a line break. Keep the placeholders {0}, {1}, ... (with their format, e.g. {0:F1}).
 # Lines starting with # are comments. Missing entries are shown in Italian.
@@ -6,7 +6,6 @@
 (confermato)	（已確認）
 (destra)  B →	（右側）  B →
 (lettura Collm: {0})	（Collm 讀數：{0}）
-(stima poco precisa sotto 2 λ)	（低於 2 λ 時估算較不精確）
 -> punto medio sotto l'orizzonte alla quota delle scie: tratta oltre la portata geometrica del singolo salto (servono scie ad almeno {0:F0} km)	-> 中點在流星餘跡高度處位於地平線以下：路徑超出單跳的幾何距離（需要至少 {0:F0} km 高的餘跡）
 0,8 s per passo · ciclo 4,8 s (PE1ITR 2021)	每步 0.8 s · 週期 4.8 s（PE1ITR 2021）
 1° criterio: frequenze tipiche degli spot meteor scatter (kHz)	第 1 準則：meteor scatter spot 的典型頻率（kHz）
@@ -33,7 +32,7 @@ Andromedidi	仙女座流星雨
 Angolo β tra scia e tratta (McKinley completo)	餘跡與路徑間的 β 角（完整 McKinley）
 Antenna	天線
 Antenna Yagi: boom m	八木天線：boom m
-Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva DL6WU),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	八木天線：boom {0:F2} m = {1:F2} lambda（{2:F0} MHz）-> 增益 {3:F1} dBi（DL6WU 曲線），\n  -3 dB 波瓣 水平 {4:F0}° / 垂直 {5:F0}°（以 W4RNL 的 NEC 模擬修正 Kraus 公式）
+Antenna Yagi: boom {0:F2} m = {1:F2} lambda a {2:F0} MHz -> guadagno {3:F1} dBi (curva VE7BQH),\n  lobo a -3 dB {4:F0}° orizzontale / {5:F0}° verticale (Kraus corretto con le simulazioni NEC di W4RNL)	八木天線：boom {0:F2} m = {1:F2} lambda（{2:F0} MHz）-> 增益 {3:F1} dBi（VE7BQH 曲線），\n  -3 dB 波瓣 水平 {4:F0}° / 垂直 {5:F0}°（以 W4RNL 的 NEC 模擬修正 Kraus 公式）
 Antenna az: -	天線方位：-
 Antenna az: {0}° (verso il DX)	天線方位：{0}°（朝向 DX）
 Apri in Word	以 Word 開啟
@@ -178,7 +177,6 @@ Gli spot accettati si salvano in data/spot_ms, un file CSV al giorno. I locator 
 Global Meteor Network (GMN)	Global Meteor Network (GMN)
 Global Meteor Network (GMN) - globalmeteornetwork.org/flux: flusso e ZHR misurati degli sciami. Dati CC BY 4.0; Vida et al. 2021, MNRAS 506(4), e Vida et al. 2022, MNRAS 515(2)	Global Meteor Network (GMN) - globalmeteornetwork.org/flux：量測的流星雨通量與 ZHR。資料 CC BY 4.0；Vida et al. 2021, MNRAS 506(4)，及 Vida et al. 2022, MNRAS 515(2)
 Guadagno antenna dBi (tx = rx)	天線增益 dBi（tx = rx）
-Gunter Hoch DL6WU - curva guadagno/lunghezza del boom delle Yagi lunghe, G(dBi) = 7,773 log(L/lambda) + 11,43, riportata da W8IO (w8io.com)	Gunter Hoch DL6WU - 長八木天線的增益/boom 長度曲線，G(dBi) = 7.773 log(L/lambda) + 11.43，由 W8IO 轉載（w8io.com）
 HOT A / HOT B (hot spot classici, per il puntamento d'antenna)	HOT A / HOT B（傳統熱點，用於天線指向）
 Host	主機
 Hot A	Hot A
@@ -722,7 +720,7 @@ Riflessioni all'ora previste sulla banda scelta, ottenute traslando i conteggi d
 nessun valore: i {0} sciami attivi hanno per tutto il giorno il radiante sotto l'orizzonte o in posizione sfavorevole per questa tratta (efficienza sotto l'1 %)	無數值：{0} 個活躍流星雨的輻射點整天都在地平線以下，或處於對此路徑不利的位置（效率低於 1 %）
 nessun valore: in questo giorno non c'è nessuno sciame attivo con ZHR di almeno 1 (catalogo IMO)	無數值：這一天沒有 ZHR 至少為 1 的活躍流星雨（IMO 目錄）
 nessun valore: le due stazioni non vedono una zona comune dello strato E (vedi l'avviso qui sotto)	無數值：兩個電台看不到 E 層的共同區域（見下方警告）
-Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.	波瓣仰角如何計入。\n開啟（預設）：反射點依每個電台天線的垂直場型加權。波瓣最大值位於旁邊填寫的仰角，垂直寬度由天線橫桿長度算出（DL6WU 曲線，Kraus）；在最大值以下，地面使增益在地平線處降為零。低處的點權重較小，但仍計入：在長路徑上效率不會消失。\n關閉：波瓣仰角是硬性界限（與 1.8.0 版之前相同）。任一電台在該仰角以下看到的點都不計入；在長路徑上，若波瓣抬高幾度，所有效率都可能為 0。
+Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva VE7BQH, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.	波瓣仰角如何計入。\n開啟（預設）：反射點依每個電台天線的垂直場型加權。波瓣最大值位於旁邊填寫的仰角，垂直寬度由天線橫桿長度算出（VE7BQH 曲線，Kraus）；在最大值以下，地面使增益在地平線處降為零。低處的點權重較小，但仍計入：在長路徑上效率不會消失。\n關閉：波瓣仰角是硬性界限（與 1.8.0 版之前相同）。任一電台在該仰角以下看到的點都不計入；在長路徑上，若波瓣抬高幾度，所有效率都可能為 0。
 Elevazione del massimo del lobo verticale dell'antenna. Una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra l'orizzonte, per la riflessione sul terreno (di solito 3-8°, secondo l'altezza dell'antenna in lunghezze d'onda).\nCon "diagramma d'antenna" acceso questo valore è il massimo del lobo: i punti sotto pesano sempre meno fino a zero all'orizzonte, quelli sopra seguono il lobo verticale calcolato dal boom. Con la casella spenta è un limite netto: i punti sotto non contano.	天線垂直波瓣最大值的仰角。固定在 0° 的定向天線，由於地面反射，主波瓣仍位於地平線以上幾度（通常 3-8°，取決於以波長計的天線高度）。\n開啟「天線場型」時，此值為波瓣最大值：其下方的點權重越來越小，到地平線處為零；其上方的點依由橫桿算出的垂直波瓣計算。關閉此核取方塊時它是硬性界限：其下方的點不計入。
 NESSUNA ZONA COMUNE: con le scie a {0:F1} km ogni stazione vede lo strato solo fino all'orizzonte, a {1:F0} km, ma il punto medio della tratta ({2:F0} km) è a {3:F0} km. Nessun punto di riflessione è visibile da entrambe le stazioni, quindi tutte le efficienze valgono 0.	無共同區域：餘跡高度 {0:F1} km 時，每個電台只能看到地平線以內的電離層，即 {1:F0} km，而路徑中點（全長 {2:F0} km）距離為 {3:F0} km。沒有任何反射點能被兩個電台同時看到，因此所有效率都是 0。
 Portata alla quota delle scie fino all'orizzonte: {0:F0} km. Lobo d'antenna con il massimo a {1:F1}° e larghezza verticale {2:F0}° a -3 dB: i punti fuori dal lobo pesano meno, quelli sotto il massimo scendono a zero all'orizzonte	餘跡高度處到地平線的距離：{0:F0} km。天線波瓣最大值在 {1:F1}°，-3 dB 垂直寬度 {2:F0}°：波瓣外的點權重較小，最大值以下的點到地平線處降為零
@@ -735,7 +733,7 @@ Capitoli: installazione, finestra, stazione e tratta, calcolo previsionale, geom
 PROCEDURA	操作步驟
 NOTA	說明
 ATTENZIONE	注意
-Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva DL6WU, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.	波瓣仰角如何計入。\n開啟（預設）：反射點依每個電台天線的垂直場型加權。波瓣最大值位於旁邊填寫的仰角，垂直寬度由天線橫桿長度算出（DL6WU 曲線，Kraus）；在最大值以下，地面使增益在地平線處降為零。低處的點權重較小，但仍計入：在長路徑上效率不會消失。 預設開啟，因為它描述的是真實天線：JN70CN – JO76QP（1791 km），波瓣 3°，餘跡 88.5 km，2026/12/14 雙子座流星雨：開啟時 7 %，關閉時無數值。\n關閉：波瓣仰角是硬性界限（與 1.8.0 版之前相同）。任一電台在該仰角以下看到的點都不計入；在長路徑上，若波瓣抬高幾度，所有效率都可能為 0。
+Come conta l'elevazione del lobo.\nAccesa (di partenza): i punti di riflessione pesano con il diagramma verticale dell'antenna di ciascuna stazione. Il lobo ha il massimo all'elevazione scritta accanto e la larghezza verticale calcolata dal boom (curva VE7BQH, Kraus); sotto il massimo il terreno fa scendere il guadagno fino a zero all'orizzonte. Un punto basso conta meno, ma conta: su una tratta lunga l'efficienza non sparisce. È accesa di partenza perché descrive l'antenna reale: JN70CN – JO76QP (1791 km), lobo a 3°, scie a 88,5 km, Geminidi del 14/12/2026: 7 % con la casella accesa, nessun valore con la casella spenta.\nSpenta: l'elevazione del lobo è un limite netto (come fino alla versione 1.8.0). I punti visti sotto quell'elevazione da una delle due stazioni non contano; su una tratta lunga con il lobo a qualche grado tutte le efficienze possono valere 0.	波瓣仰角如何計入。\n開啟（預設）：反射點依每個電台天線的垂直場型加權。波瓣最大值位於旁邊填寫的仰角，垂直寬度由天線橫桿長度算出（VE7BQH 曲線，Kraus）；在最大值以下，地面使增益在地平線處降為零。低處的點權重較小，但仍計入：在長路徑上效率不會消失。 預設開啟，因為它描述的是真實天線：JN70CN – JO76QP（1791 km），波瓣 3°，餘跡 88.5 km，2026/12/14 雙子座流星雨：開啟時 7 %，關閉時無數值。\n關閉：波瓣仰角是硬性界限（與 1.8.0 版之前相同）。任一電台在該仰角以下看到的點都不計入；在長路徑上，若波瓣抬高幾度，所有效率都可能為 0。
 Due tesi sulla geometria, con fonti diverse.\nAccesa (prudente, di partenza): formula completa di McKinley (1961) e dell'ITU-R P.843, 1 / (1 − cos²β sin²φ), dove β è l'angolo tra la scia e il piano della tratta. Le scie che attraversano il piano valgono 10-15 dB meno di quelle che vi giacciono e nessuna scia è sopravvalutata: prevalgono i radianti allineati alla tratta. Con questa scelta YA-MS segue meglio la forma delle curve orarie di DJ5HG (2004).\nSpenta: ogni scia pesa come se stesse nel piano della tratta (β = 0), come fino alla versione 1.6. Vale la regola classica dei radioamatori: il radiante migliore è alto 15-70° e di traverso alla tratta, quello allineato è marginale (SM6FHZ, DH9GCD, meteor-mcp di qso-graph).\nUn primo confronto con i conteggi BRAMS di Sonneberg (Perseidi 2026, 471 km) non le distingue: la casella "Giudizio classico" mostra il verdetto della regola classica sotto l'efficienza, ora per ora.\nQuanto pesa: è la scelta che cambia di più i risultati. Su JN70CN – JO76QP (1791 km), Geminidi del 14/12/2026, l'efficienza massima passa dal 98 % (spenta) al 13 % (accesa), un fattore 7. Gli altri affinamenti sono molto più piccoli: raggio iniziale e durata dei ping valgono pochi dB e solo sopra 144 MHz, il diagramma d'antenna conta sulle tratte vicine al limite dell'orizzonte, la quota delle scie varia di ±7 km da un'ora all'altra. Le ore migliori e il lato restano invece quasi gli stessi con le due scelte.	關於幾何的兩種觀點，來源不同。\n開啟（保守，預設）：McKinley（1961）和 ITU-R P.843 的完整公式 1 / (1 − cos²β sin²φ)，其中 β 是餘跡與路徑平面的夾角。穿過平面的餘跡比位於平面內的餘跡低 10-15 dB，且沒有餘跡被高估：與路徑同向的輻射點占優。此選擇下 YA-MS 更符合 DJ5HG 逐時曲線的形狀（2004）。\n關閉：每條餘跡都按位於路徑平面內計算（β = 0），與 1.6 版之前相同。採用業餘無線電的經典規則：最佳輻射點高 15-70° 且橫跨路徑，同向的輻射點為勉強（SM6FHZ、DH9GCD、qso-graph 的 meteor-mcp）。\n與 Sonneberg 的 BRAMS 計數的初步比較（2026 年英仙座流星雨，471 km）無法區分兩者：「經典判斷」核取方塊逐時在效率下方顯示經典規則的判斷。\n影響有多大：這是對結果影響最大的選項。在 JN70CN – JO76QP（1791 km），2026/12/14 雙子座流星雨，最大效率從 98 %（關閉）變為 13 %（開啟），相差 7 倍。其他細化影響小得多：初始半徑和脈衝持續時間只有幾 dB，且僅在 144 MHz 以上；天線場型只在接近地平線極限的路徑上起作用；餘跡高度每小時變化 ±7 km。而最佳時段和方向在兩種選擇下幾乎相同。
 la scelta che pesa di più	影響最大的選項
 Scarta subito gli spot CW (CW o WPM nel commento, oppure 28000-28070 kHz): non compaiono nella console e non si memorizzano. Restano quelli segnati <MS>.	立即丟棄 CW 報點（註解中有 CW 或 WPM，或 28000-28070 kHz）：不在主控台顯示，也不儲存。標有 <MS> 的報點保留。
@@ -876,5 +874,61 @@ mai	從不
 La modalità compatta ripiega all'avvio le righe dei comandi, accorcia la fascia degli orizzonti e nasconde le descrizioni lunghe (restano nei fumetti): utile sui notebook da 13-15 pollici.	精簡模式在啟動時收合命令列，縮短時間點橫欄，並隱藏較長的說明（仍可在提示中查看）：適合 13-15 吋筆記型電腦。
 un'altra copia di YA-MS sta già interrogando PSKReporter	另一個 YA-MS 副本已在查詢 PSKReporter
 troppe richieste (429): nuova prova alle {0} UTC	請求過多（429）：將於 {0} UTC 重試
+La lingua è anche in alto a destra, accanto alle linguette.	語言也在右上方，分頁旁邊。
+  confronto: curva DL6WU (VHF Communications 3/1982) {0:F1} dBi	  比較：DL6WU 曲線（VHF Communications 3/1982）{0:F1} dBi
+Lionel Edwards VE7BQH - tabelle dei guadagni delle Yagi per 50, 144 e 432 MHz (dxmaps.com): retta media per banda,\n    50 MHz G(dBi) = 7,36 log(L/lambda) + 11,67; 144 MHz 8,27 log + 11,31; 432 MHz 8,68 log + 11,03	Lionel Edwards VE7BQH - 50、144 和 432 MHz 八木天線增益表（dxmaps.com）：每個波段的平均直線，\n    50 MHz G(dBi) = 7.36 log(L/lambda) + 11.67；144 MHz 8.27 log + 11.31；432 MHz 8.68 log + 11.03
+Gunter Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 3/1982, pp. 130-138: curva guadagno/lunghezza del boom,\n    2,35 dB per ottava, G(dBi) = 7,81 log(L/lambda) + 11,35 (W8IO, w8io.com, la riporta come 7,773 log + 11,43); per confronto	Gunter Hoch DL6WU - "Extremely Long Yagi Antennas"，VHF Communications 3/1982，第 130-138 頁：增益與天線主桿長度的曲線，\n    每倍程 2.35 dB，G(dBi) = 7.81 log(L/lambda) + 11.35（W8IO，w8io.com，記作 7.773 log + 11.43）；用於比較
+(stima poco precisa: boom fuori dal campione VE7BQH)	（估算較不精確：主桿超出 VE7BQH 樣本範圍）
+Aggiorna da IPRMO	從 IPRMO 更新
+Collm, Germania (radar 36,2 MHz)	Collm，德國（雷達 36.2 MHz）
+Conteggi a mano degli osservatori giapponesi (HROFFT) sugli echi dei fari HAM per l'osservazione delle meteore, pubblicati da IPRMO ogni mese con alcune settimane di ritardo: servono per la taratura e lo storico, non per la previsione in diretta. Ogni osservatore ha antenna e ricevitore diversi: confronta i mesi dello stesso osservatore, non osservatori diversi. Traslazione con le regole di SM6FHZ (λ^k, fattore K) impostate in questa linguetta.	日本觀測者對流星觀測用業餘無線電信標回波的人工計數（HROFFT），由 IPRMO 每月發布，延遲數週：用於校準和歷史記錄，不用於即時預報。每位觀測者的天線和接收機不同：請比較同一觀測者的不同月份，而不是不同觀測者。依本分頁設定的 SM6FHZ 規則（λ^k、係數 K）換算。
+Conteggi di partenza della previsione. Le voci del Giappone (conteggio automatico di HROFFT a Ogaki sui fari HAM a 53 MHz, ogni 10 minuti) compaiono solo se il QTH è entro 3500 km dal Giappone.	預報的起始計數。日本選項（大垣 HROFFT 對 53 MHz 業餘無線電信標的自動計數，每 10 分鐘一次）只有在 QTH 距日本 3500 km 以內時才會出現。
+Conteggi orari degli osservatori giapponesi sui fari HAM a 53 MHz (JA2SDA, JE3AKE, JJ1RLQ), dai file mensili di IPRMO: media per ora UTC traslata alla frequenza di arrivo e totali giornalieri.	日本觀測者對 53 MHz 業餘無線電信標（JA2SDA、JE3AKE、JJ1RLQ）的逐時計數，來自 IPRMO 月度檔案：換算到到達頻率的每 UTC 小時平均值，以及每日總數。
+Fonte dei conteggi	計數來源
+Fonte: {0}. Conteggio automatico di HROFFT ogni 10 minuti, un po' più alto di quello a mano: valore relativo, da tarare con i file mensili RMOJ (pulsante Giappone).	來源：{0}。HROFFT 每 10 分鐘的自動計數，略高於人工計數：為相對值，需用 RMOJ 月度檔案（日本按鈕）校準。
+GFS non disponibile ({0}): uso l'atmosfera di riferimento ITU-R P.453	GFS 無法使用（{0}）：使用 ITU-R P.453 參考大氣
+GFS {0} UTC	GFS {0} UTC
+Giappone in diretta: {0} {1} {2:F3} MHz (Ogaki)	日本即時：{0} {1} {2:F3} MHz（大垣）
+Giappone: conteggi HRO mensili (IPRMO)	日本：HRO 月度計數（IPRMO）
+Giappone: conteggi HRO mensili (IPRMO)...	日本：HRO 月度計數（IPRMO）...
+Media del mese per ora UTC - {0}	依 UTC 小時的月平均 - {0}
+Mese	月份
+Nessun dato da Ogaki: attendo le immagini di HROFFT (una ogni 10 minuti).	沒有來自大垣的資料：正在等待 HROFFT 影像（每 10 分鐘一張）。
+Nessun dato: premi Aggiorna da IPRMO.	沒有資料：請點擊「從 IPRMO 更新」。
+Ore valide {0}, di cui stimate (meno di 60 minuti) {1}; ore perse o disturbate {2}; ore con sporadico E escluse {3}.	有效小時 {0}，其中估算（不足 60 分鐘）{1}；遺失或受干擾的小時 {2}；因偶發 E 層排除的小時 {3}。
+Osservatore	觀測者
+Osservatore: {0} ({1}). Faro: {2} {3} ({4:F3} MHz). Tabella in {5}, convertita in UTC.	觀測者：{0}（{1}）。信標：{2} {3}（{4:F3} MHz）。表格為 {5}，已換算為 UTC。
+Rifrazione      +{0:F2}° verso il punto medio, portata alla quota delle scie +{1:F0} km ({2})	折射            朝中點 +{0:F2}°，流星餘跡高度處的距離 +{1:F0} km（{2}）
+Rifrazione      non applicata (casella spenta): geometria a raggi diritti	折射            未套用（未勾選）：直線射線幾何
+Rifrazione troposferica (GFS)	對流層折射（GFS）
+Spenta all'avvio (valore prudente). Accesa: il programma scarica dal modello GFS il profilo di temperatura e umidità sopra le due stazioni e traccia il raggio fino alla quota delle scie. I punti bassi si vedono un po' più alti e la zona comune si allarga (circa 60-70 km all'orizzonte); sopra 10° l'effetto è trascurabile. Non usa il k = 4/3, che vale per raggi tutti dentro la troposfera.	啟動時關閉（保守值）。開啟：程式從 GFS 模型下載兩站上空的溫度和濕度剖面，並把射線追蹤到流星餘跡高度。低處的點看起來略高，公共區變寬（地平線處約 60-70 km）；10° 以上影響可忽略。不使用 k = 4/3，它只適用於完全在對流層內傳播的射線。
+Totale giornaliero (giorni con almeno 20 ore di dati, riportati a 24 ore)	每日總數（至少有 20 小時資料的日子，折算到 24 小時）
+Traslazione: x ({0:F3}/{1:F0})^{2:F2} x K {3:F2} = x {4:F4}.	換算：x ({0:F3}/{1:F0})^{2:F2} x K {3:F2} = x {4:F4}。
+Tratta faro → osservatore {0:F0} km, punto medio {1}.	信標 → 觀測者路徑 {0:F0} km，中點 {1}。
+atmosfera di riferimento ITU-R P.453	ITU-R P.453 參考大氣
+conteggio automatico di HROFFT a Ogaki, faro {0} {1}	大垣 HROFFT 自動計數，信標 {0} {1}
+dati GFS incompleti	GFS 資料不完整
+echi al giorno (UTC)	每日回波（UTC）
+echi/giorno	回波/日
+echi/ora	回波/小時
+ora fuori dalla previsione GFS	時間超出 GFS 預報範圍
+profili {0} su {1} e {2}	{1} 和 {2} 上空的 {0} 剖面
+scarico...	正在下載...
+{0} - {1:F3} MHz	{0} - {1:F3} MHz
+{0} immagini lette ora, ultima delle {1} UTC	現在讀取了 {0} 張影像，最新為 {1} UTC
+{0} mesi disponibili, {1} scaricati ora	{0} 個月可用，現在下載 {1} 個
+I conteggi HRO mensili del Giappone (fari JA2SDA, JE3AKE, JJ1RLQ).	日本的 HRO 月度計數（信標 JA2SDA、JE3AKE、JJ1RLQ）。
+Il conteggio automatico in diretta dei fari giapponesi a 53 MHz.	53 MHz 日本信標的即時自動計數。
+I profili di temperatura e umidità per la rifrazione troposferica facoltativa.	用於選用對流層折射的溫度和濕度剖面。
+La formula della rifrattività e l'atmosfera di riferimento.	折射率公式和參考大氣。
 L'ellissoide della Terra (semiasse e schiacciamento).	地球橢球（長半軸和扁率）。
 Distanze, azimut e punti della tratta sulla geodetica dell'ellissoide WGS84.	WGS84 橢球測地線上的距離、方位角和路徑點。
+MMMonVHF ora dà CALL3.TXT solo a chi ha fatto l'accesso al sito: CALL3 non cambiato. Entra su www.mmmonvhf.de con il tuo account, scarica CALL3.TXT dalla pagina dei download e caricalo con «{0}».	MMMonVHF 現在只向已登入網站的使用者提供 CALL3.TXT：CALL3 未變更。請用你的帳號登入 www.mmmonvhf.de，從下載頁面下載 CALL3.TXT，再用「{0}」載入。
+MMMonVHF chiede l'accesso al sito: ho usato il CALL3.TXT più recente trovato sul computer ({0}).	MMMonVHF 要求登入網站：已使用在電腦上找到的最新 CALL3.TXT（{0}）。
+Il pacchetto scaricato non è completo: aggiornamento annullato	下載的套件不完整：已取消更新
+L'impronta del pacchetto scaricato non corrisponde a quella di GitHub: aggiornamento annullato	下載的套件指紋與 GitHub 上的不符：已取消更新
+chiave nuova di {0} accettata	已接受 {0} 的新金鑰
+sul broker c'era un'altra chiave sotto il tuo nominativo: ho ripubblicato la tua	代理伺服器上有另一把使用你呼號的金鑰：已重新發布你的金鑰
+la chiave di {0} è cambiata: uso ancora quella conosciuta finché non accetti la nuova	{0} 的金鑰已變更：在你接受新金鑰之前繼續使用已知金鑰
+Accetta le chiavi nuove ({0})	接受新金鑰 ({0})
+Scambio tra utenti di YA-MS: questi nominativi hanno una chiave diversa da quella conosciuta. Accettala solo se sai che il corrispondente ha reinstallato il programma.	YA-MS 使用者之間的交換：這些呼號的金鑰與已知的不同。只有在你知道對方電台重新安裝了程式時才接受。

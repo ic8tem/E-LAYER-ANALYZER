@@ -1,5 +1,5 @@
 TITLE|A YA-MS felhasználói kézikönyve
-SUB|1.8.20-es verzió - készítette Costantino IC8TEM - 2026. november
+SUB|1.8.27-es verzió - készítette Costantino IC8TEM - 2026. november
 H1|1. Bevezetés
 H2|1.1 Mire szolgál a YA-MS
 P|A YA-MS segít előre jelezni és élőben követni a meteor scatter feltételeit az Ön állomása és egy ellenállomás között, 28 és 432 MHz között. Minden aktív meteorrajnál megmutatja, mennyire kedvez radiánsának helyzete az Ön útvonalának (a hatásfok), mely órákban, az útvonal melyik oldaláról érkeznek a visszaverődések, és merre érdemes az antennát irányítani. Az előrejelzés mellett élőben mért adatokat is mutat: a Collm meteorradar számlálásait, a Global Meteor Network kameráit, a CMOR radart, a GRAVES adót, valamint a clusterekből és a PSKReporterből gyűjtött meteor scatter forgalmat.
@@ -24,6 +24,7 @@ LI|macOS: a .dmg Apple Siliconhoz (M1 és újabb) vagy Intelhez, illetve az app.
 TAG|ATTENZIONE|A Windows megjelenítheti „A Windows megvédte a számítógépet” üzenetet: válassza a „További információ”, majd a „Futtatás mindenképp” lehetőséget. macOS-en az első alkalommal jobb gombbal nyissa meg az alkalmazást, és válassza a „Megnyitás” parancsot. A program nincs fizetős tanúsítvánnyal aláírva.
 H2|2.2 Az első indítás
 P|Indításkor néhány másodpercre megjelenik a nyitókép az ESO VLT távcsöve fölötti Perseidákkal. Az első indításkor a YA-MS a rendszer nyelvét választja, ha az a 36 nyelv egyike, különben az olaszt; letölti Európa térképét (Natural Earth) a data/mappa mappába, és egy példa-útvonalat mutat. Néhány perc elég ahhoz, hogy beállítsa a saját állomására (4. fejezet).
+P|A YA-MS csak egyszer nyílik meg: ha újra elindítod, amíg már nyitva van, a második példány nem indul el, és a nyitott ablak előtérbe kerül, akkor is, ha kis méretre volt állítva. Így két példány soha nem ír egyszerre ugyanazokba a fájlokba a data mappában. Frissítés után az új példány megvárja, amíg a régi bezárul.
 H2|2.3 A data mappa
 P|Minden beállítás és minden adat egyetlen data mappában van a program mellett: nincs AppData, nincsenek rendszermappák. A YA-MS másik számítógépre költöztetéséhez elég átmásolni a program mappáját a data mappájával együtt. A mappa tartalmát a 13. fejezet írja le.
 H2|2.4 Automatikus frissítések
@@ -40,7 +41,7 @@ P|Indításkor a YA-MS ellenőrzi, hogy megvan-e minden fájlja (fordítások, k
 H1|3. A főablak
 H2|3.1 Az ablak részei
 LI|Felül a vezérlők két sora, amelyek minden fülre érvényesek: E-réteg és antenna, a számítás időpontja (4. fejezet). Az állomásod (lokátor, magasság, sáv és Számítás) az Élő forgalom jobb felső részén van.
-LI|A fő fülek sávja, jobb oldalán a Vezérlők gombbal, a színsémával (Téma) és a nyelvvel.
+LI|A fő fülek sávja, jobbra a Parancsok gombbal és a nyelvvel. A színsémát (Téma) a Beállítások fülön lehet kiválasztani.
 LI|Az alfülek egy világosabb sorban, azoknál a füleknél, amelyeknek vannak.
 LI|Alul az állapotsor: a számítás üzenetei, a kapcsolatra vonatkozó figyelmeztetések és a „Frissítések” gomb.
 H2|3.2 A fülek
@@ -64,12 +65,13 @@ H2|4.2 1. sor: E-réteg és antenna
 LI|Nyommagasság km és a radarból: a meteornyomok magassága. Bejelölt „a radarból” esetén a Collm radar által mért leggyakoribb magasságot használja (általában 88-90 km); szüntesse meg a jelölést, ha kézzel szeretné megadni.
 LI|Lebeny emelkedése °: antennája függőleges lebenye maximumának emelkedési szöge. A 0°-ra állított irányantenna főlebenye a talajról való visszaverődés miatt mégis néhány fokkal a horizont fölött van: általában 3-8°, az antenna hullámhosszban kifejezett magasságától függően.
 LI|antenna iránykarakterisztika: bekapcsolva (alapértelmezés) a visszaverődési pontok a két antenna függőleges nyereségével súlyozva számítanak: teljes súllyal a lebeny maximuma körül, egyre kevésbé a horizont és felfelé haladva. Kikapcsolva a lebeny emelkedése éles határ: az alacsonyabban látott pontok nem számítanak.
-LI|Yagi antenna: tartócső m: a tartócső (boom) hossza. Mellette a program kiírja a hosszt hullámhosszban, a nyereséget (DL6WU-görbe), valamint a vízszintes és függőleges -3 dB-es lebenyt. 2 λ alatt a becslés pontatlan.
-LI|Hot spot a felezőponttól km és auto (AMS): Hot A és Hot B távolsága a felezőponttól. Bejelölt „auto (AMS)” esetén J. Richardson DJ5HG által idézett táblázatát követi (13° eltérés 1000 km-nél, 10° 1500 km felett); szüntesse meg a jelölést, ha kézzel szeretne 30-400 km-t megadni (az MSHV 150 km-t használ).
+LI|Yagi antenna: tartócső m: a tartócső hossza. Mellette a program kiírja a hosszt hullámhosszban, a nyereséget (a sáv VE7BQH-táblázatainak átlagegyenese) és a −3 dB-es nyalábot vízszintesen és függőlegesen. Ha a tartócső a sáv VE7BQH-mintáján kívül esik, a becslés durva.
 TAG|ATTENZIONE|Kikapcsolt „antenna iránykarakterisztika” és néhány fokos lebeny esetén egy hosszú útvonalon előfordulhat, hogy a két állomás nem lát közös pontot a rétegben: minden hatásfok 0, és megjelenik a „NINCS KÖZÖS ZÓNA” figyelmeztetés a szükséges lebennyel vagy nyommagassággal. Példa: JN70CN - JO76QP, 1791 km, lebeny 3°-on, nyomok 88,5 km-en.
 H2|4.3 2. sor: a számítás időpontja
 LI|Idő: UTC óra.
 LI|A számítás dátuma (UTC): a számítás napja. Érvényes az Előrejelző számításra, a Hatásfok számítása fül 24 órás táblázatára és a GRAVES radar időrendjére. Alapértelmezés szerint a mai nap, és éjfélkor az új napra vált.
+LI|Troposzférikus refrakció (GFS): induláskor kikapcsolva. Bekapcsolva a program letölti a GFS-modellből a két állomás fölötti hőmérséklet- és nedvességprofilt, és figyelembe veszi a sugár görbülését a nyomok magasságáig: az alacsony pontok kissé magasabbnak látszanak, és a közös zóna kiszélesedik. Ha a GFS nem válaszol, átlagos légkört használ. A Geometria és csillapítás jelentése a "Refrakció" sorban közli.
+LI|Hot spot a felezőponttól km és auto (AMS): Hot A és Hot B távolsága a felezőponttól. Bejelölt „auto (AMS)” esetén J. Richardson DJ5HG által idézett táblázatát követi (13° eltérés 1000 km-nél, 10° 1500 km felett); szüntesse meg a jelölést, ha kézzel szeretne 30-400 km-t megadni (az MSHV 150 km-t használ).
 LI|Órák (−12-től +36 h-ig): 15 perces lépésekben eltolja a számítás időpontját. Mellette: „Számítás ideje: most” vagy a választott dátum és idő.
 LI|Valós idő: visszatér az aktuális időponthoz.
 LI|Az idővonal («Órák (−12-től +36 h-ig)» és «Valós idő») a Előrejelző számítás fül tetején van, mert csak arra a számításra vonatkozik.
@@ -153,12 +155,15 @@ H2|8.1 A vezérlők
 LI|Célfrekvencia MHz: az előrejelzés frekvenciája.
 LI|λ^k kitevő (3, SM6FHZ) és K állomástényező (1): frekvenciaszabály és korrekció az Ön állomására.
 LI|k a populációs indexekből: k-t javasol az aktív rajok r populációs indexeiből (GMN, egyébként IMO; k = 3,75 · log10 r, ZHR-rel súlyozva), és alkalmazás előtt megerősítést kér.
+LI|Számlálások forrása: alapból Collm (radar 36,2 MHz). Ha állomásod legfeljebb 3500 km-re van Japántól, megjelennek a "Japán élőben" tételek is (JA2SDA Tojokavában és JE3AKE Ocuban, 53 MHz) a HROFFT automatikus számlálásaival, amelyeket Ogaki 10 percenként tesz közzé; a választás megmarad.
+LI|Japán: havi HRO-számlálások (IPRMO)...: megnyitja az ablakot a japán megfigyelők óránkénti kézi számlálásaival az RMOJ havi fájljaiból. Válaszd ki a hónapot és a megfigyelőt; a Frissítés az IPRMO-ról letölti az új hónapokat. Az első grafikon a havi átlag UTC-óránként a frekvenciádra átszámítva, a második a napi összegek.
 LI|RMOB-fájl betöltése lemezről és Kitevő meghatározása az RMOB-fájlból: beolvasnak egy havi RMOB-fájlt, és a Collm-mal közös órákból meghatározzák k-t.
 LI|RMOB-megfigyelő, RMOB letöltése most és automatikus letöltés 5 percenként: az automatikus letöltés ki van kapcsolva, és csak az RMOB engedélyével szabad bekapcsolni. Ezek a parancsok a Beállítások fülön vannak.
 H2|8.2 Az eredmények
 LI|A tegnapi és mai grafikon: óránkénti meteorszám Collmban, az Ön frekvenciájára átszámított értékek és, ha be vannak töltve, az RMOB-számlálások.
 LI|A következő 24 óra előrejelzése: az előző nap ugyanazon órája, az útvonal rajindexének változásával korrigálva.
 LI|A táblázat értékeléssel: jó, közepes vagy gyenge a 24 órás átlaghoz képest.
+TAG|NOTA|Az ogakii automatikus számlálások magasabbak a kézieknél: relatív értékek. Kalibráláshoz vesd össze őket a Japán ablakban ugyanannak a jeladónak az RMOJ havi fájljaival.
 TAG|NOTA|A visszaverődések hossza a Geometria és csillapítás fül „Pingek hossza a sávok között” beállítását követi; forward scatter esetén a hossz a felezőpontbeli sec²φ-vel is nő.
 H1|9. Élő és valós idejű adatok
 H2|9.1 Élő forgalom
@@ -172,6 +177,7 @@ LI|A PSKReporter térkép aktív monitorai is: üres háromszögek azoknak az á
 LI|FT8 1100 km felett párhuzamos útvonal nélkül: egy FT8 spot (a PSKReporter MQTT-ből, a clusterekből vagy a WSJT-X-ből UDP-n), két 1100 km-nél távolabbi állomás között, amelynek az előtte és utána lévő 3 percben nincs párhuzamos útvonala (azonos sáv, felezőpont 300 km-en belül, irány 15°-on belül, másik állomáspár), világoszölddel rajzolódik, akárcsak a sora a jobb alsó táblázatban (villogás nélkül). A sporadikus E és a tropo sok közeli, párhuzamos útvonalat ad; egy magányos spot meteornyom lehet. Ezért a YA-MS az MQTT-ből a 6 m, 4 m, 2 m, 1,25 m és 70 cm FT8 spotjait is fogadja (28 MHz soha). Ezek a spotok nem kerülnek az MS archívumba. Alapból bekapcsolva. További ellenőrzések a PSKReporter MQTT-vel: a spot nem magányos, ha a vevőállomás az MQTT-ben 3 percen belül ugyanazon a sávon 1100 km-nél távolabbi más állomásokat hall (nyitott sáv); a clusterek és az RBN spotjai csak akkor számítanak, ha ugyanaz a pár MQTT-n is megérkezik; az RBN skimmerek («-#» hívójelek) sosem számítanak.
 LI|A saját WSJT-X-ed UDP-n érkező dekódolásai, amelyekben egy ellenállomás válaszol neked (az üzenet első hívójele a tiéd), villogó szaggatott vonallal rajzolódnak, bármilyen üzemmódban és bármilyen távolságon, és a sorukat a táblázatban sárga háttéren villogva látod. Ez az egyetlen eset, amikor valami villog.
 LI|Csere a YA-MS felhasználói között: ha egy másik YA-MS-felhasználó UDP-n dekódol egy az állomásodnak szóló üzenetet (MSK144, FSK441, PSK2K vagy JTMS módban, vagy FT8-ban 1100 km felett), az ő YA-MS-e titkosítva elküldi neked három nyilvános MQTT-brókeren át (HiveMQ, Mosquitto, EMQX); állandó lila szaggatott vonalként és egy sorként látod az UDP konzolban. Csak te olvashatod (ECDH P-256 kulcsok, AES-256 és HMAC-SHA256). Az FT8 spotok csak akkor látszanak, ha 3 percen belül nincs párhuzamos útvonaluk. Alapból bekapcsolva; a data/config.ini yams_scambio=0 sora kikapcsolja.
+LI|A csere titkosítva kapcsolódik a brókerekhez (TLS: HiveMQ és EMQX 8883-as port, Mosquitto 8886) és csak akkor tér vissza az 1883-as portra, ha egy bróker elutasítja a TLS-t. Az egyes hívójelekhez elsőként látott kulcs rögzítve marad a data/yams_chiavi.txt fájlban: ha egy állomás más kulccsal jelenik meg, a program továbbra is az ismertet használja, és az Adatgyűjtés UDP-mezőjében megjelenik az «Új kulcsok elfogadása» gomb, amelyet csak akkor használj, ha tudod, hogy az állomás újratelepítette a YA-MS-t.
 LI|Minden sáv spotjai látszanak, azoké is, amelyeket az Adatgyűjtésben nem választottál ki (ezek nem tárolódnak). A CW spotok és a túl közeli állomások közötti spotok nem látszanak, ha az Adatgyűjtésben elvetésre kerülnek.
 LI|A térkép minden spot mindkét állomásának hívójelét kiírja, állomásonként egyszer. A vetület választható: azimutális (középen az állomásod) vagy Mercator. A rajzóna oszlop buboréksúgója elmagyarázza a jelentését.
 H2|9.2 Radarfluxus
@@ -228,6 +234,7 @@ LI|sciami.csv, massimi_imo.csv, ant_radiante.csv: a rajkatalógus és az Antihel
 LI|flusso_collm.csv, quote_collm.csv: a Collm radar archívumai; radar/: legutóbbi képek, RMOB-fájlok és az élő források adatai; fonti_radar.csv: a források címei, egyenként engedélyezhetők.
 LI|cataloghi/: IAU MDC katalógus; radar/diretta/: GMN- és CMOR-adatok.
 LI|call3.txt: lokátorarchívum; spot_ms/: összegyűjtött meteor scatter spotok; adif_quadrati.csv: négyzetek az ADIF-ből.
+LI|radar/rmoj/: RMOJ havi fájlok Japánból; radar/hro_ogaki_*.csv: az utolsó 3 nap ogakii számlálásai; radar/gfs_*.json: GFS-profilok a refrakcióhoz (3 óráig érvényesek).
 LI|efficienza_spiegazione.*, spiegazione/, manuale_uso.*, manuale_uso/: a műszaki dokumentumok.
 LI|backup/: a frissítés által lecserélt fájlok másolatai; aggiornamento/: a letöltött csomag (újraindításkor törlődik).
 H2|13.3 A Beállítások fül
@@ -237,6 +244,7 @@ LI|controlla_aggiornamenti=0: ne ellenőrizze az új verziókat; aggiornamenti_s
 LI|lobo_diagramma, angolo_beta, lunghezza_scie, giudizio_classico: a számítás jelölőnégyzetei.
 LI|raggio_iniziale (0 = az ITU kétszerese, 1 = ITU, 2 = kizárva), durata_ping (0 = λ², 1 = megfigyelt).
 LI|rmob_osservatore, rmob_automatico, rmob_url: RMOB.
+LI|rifrazione_gfs (0 = ki, 1 = be), prev_fonte (collm, toyokawa, otsu), rmoj_osservatore: refrakció és japán források.
 LI|psk_rimando=0: kikapcsolja az UDP-n kapott MS dekódolások (MSK144, FSK441, PSK2K, JTMS) továbbítását a PSKReporternek. Alapból be van kapcsolva és magától működik: ha a hívójeled több mint 20 perce hiányzik a PSKReporternek jelentést küldő állomások közül (a digitális program nem küld), a YA-MS 5 percenként elküldi az általad dekódolt MS állomásokat, téged megadva vevőként; amint a digitális program újra küld, a YA-MS leáll. Egy sor az UDP konzolban jelzi az indulást és a leállást. Ha a WSJT-X.ini-ben (vagy JTDX.ini-ben) ki van kapcsolva a küldés a PSKReporternek, a YA-MS azonnal továbbít, 20 perc várakozás nélkül.
 TAG|ATTENZIONE|A config.ini fájlt csak bezárt program mellett módosítsa: bezáráskor a YA-MS újraírja.
 H1|14. Tipikus eljárások

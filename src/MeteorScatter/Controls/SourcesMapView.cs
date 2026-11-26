@@ -54,7 +54,7 @@ namespace YAMS
         static FormattedText Ft(string s, double size, Color c, FontWeight w = FontWeight.Normal, FontStyle st = FontStyle.Normal)
         {
             return new FormattedText(s ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface(FontFamily.Default, st, w), size * UiScale.Font, new ImmutableSolidColorBrush(c));
+                new Typeface(FontFamily.Default, Corsivo.Per(s, st), w), size * UiScale.Font, new ImmutableSolidColorBrush(c));
         }
 
         public override void Render(DrawingContext ctx)

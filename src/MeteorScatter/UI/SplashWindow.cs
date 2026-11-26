@@ -65,7 +65,7 @@ namespace YAMS
             // autore in corsivo, allineato a destra
             g.Children.Add(new TextBlock
             {
-                Text = Lang.T("a cura di") + " Costantino Cerrotta IC8TEM", FontSize = 22, FontStyle = FontStyle.Italic, FontWeight = FontWeight.SemiBold,
+                Text = Lang.T("a cura di") + " Costantino Cerrotta IC8TEM", FontSize = 22, FontStyle = Corsivo.Per(Lang.T("a cura di")), FontWeight = FontWeight.SemiBold,
                 Foreground = Brushes.White, HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom,
                 TextAlignment = TextAlignment.Right, Margin = new Thickness(40, 0, 40, 64)
             });

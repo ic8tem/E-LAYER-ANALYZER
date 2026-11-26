@@ -20,8 +20,8 @@ TAG|RILIEVO|2026年11月5日の Collm のグラフ: 最頻値 89.5 km、平均 8
 TAG|RILIEVO|DJ5HG [18] と QTFGUI [17] は 102 km の固定高度を用いますが、本プログラムはレーダーの実測値を優先します。ITU-R 勧告 P.843 [24] は平均高度 h = 124 − 17·log10(f) km を与えます: 36.2 MHz で約 97 km、144 MHz で約 87 km となり、Collm の最頻値 (2026年11月5日に 89.5 km) と整合します。
 H1|3. パスの幾何学
 H2|3.1 地球、局、中間点
-TAG|FONTE|半径 r = 6372.7955 km の球形の地球 [1]。
-TAG|SCELTA|パスは常に、自局のロケーターと相手局のロケーターの間の実際のパスです。距離、方位角、中間点は大円の式で計算します。
+TAG|FONTE|WGS84 楕円体 [37]: 長半径 6378.137 km、扁平率 1/298.257223563。球面の式 (論文の仰角、到達距離、屈折) には楕円体の平均半径 r = 6371.0088 km を使う。バージョン 1.8.23 までは半径 6372.7955 km の球を使っていた [1]。
+TAG|SCELTA|パスは常に、自局のロケーターと相手局のロケーターの間の実際のパスです。バージョン 1.8.27 から、距離、方位角、中間点は Karney の方法 [38] により楕円体の測地線上で計算する。球と比べて距離の変化は最大 0.5%、方位角の変化は数十分の一度である。
 TAG|FONTE|時刻に依存する計算はパスの中間点を基準とします: 両端の間で最良の時刻が最大 1.5 時間ずれることがあるためです (SM6FHZ [4])。
 H2|3.2 アンテナ仰角
 TAG|FONTE|反射点への仰角は記事の式 (図 7) [1] で計算します。x = 距離 / r、H は流星痕の高度、h は局の高度:
@@ -41,10 +41,13 @@ TAG|RILIEVO|AMS の表では: 1000 km → 13°、s ≈ 115 km; 1250 km → 11°�
 TAG|SCELTA|天球図に表示している時刻について、プログラムは地平線上のすべての流星群にわたり、ZHR x 効率を A 側と B 側に分けて合計します (7.1 章)。より多くの反射を受ける側のホットスポットが推奨され、地図上に赤で表示されます。
 TAG|FONTE|DF5HC [16] が引用する DJ5HG によれば、反射は流星痕のまわりの円錐上で起こります: 短いパスではアンテナを直接方向から横にずらし、両局とも同じ点に向けるべきであり、放射点の位置によって 2 点 (HOT-A または HOT-B) のいずれかがより有利になります。DF5HC はまた、最良の距離を 1300-1500 km とし、最大は 2000 km を少し超えたところとしています。
 H2|3.5 アンテナのローブ
-TAG|FONTE|ブーム長から求める長い八木アンテナの利得 (DL6WU の曲線 [10]) と、利得から求める −3 dB のローブ幅 (Kraus の規則 [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|ブーム長からの八木の利得 (VE7BQH の表のバンドごとの平均直線 [36]、比較用に DL6WU 曲線 [10]) と利得からの −3 dB ローブ幅 (Kraus の法則 [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL の NEC シミュレーション [12] は、DL6WU 八木についても、同じエレメント数でブームが短い David Tanner VK3AUU の八木についても、利得曲線を 0.1 dB 以内で裏付けています: 利得はブーム長に依存します。同じシミュレーションでは、水平ローブは Kraus より 5-10 % 狭くなります。
+TAG|RILIEVO|VE7BQH 平均 − DL6WU 曲線: 50 MHz では 2～16 λ で 0.25 dB 以内; 144 MHz では 1 λ で −0.04 dB から 10 λ で +0.42 dB; 432 MHz では 2 λ で −0.06 dB から 10 λ で +0.55 dB。W4RNL が 432 MHz でシミュレーションした DL6WU と VK3AUU の八木では、VE7BQH 平均は NEC より 0.15–0.55 dB 高い: 長いブームでは、コンピュータで最適化された表の八木が元の設計より性能が高い。
 TAG|SCELTA|水平ローブ (方位方向の向き決めに関わるもの) = 0.93 · θK、垂直ローブ = θK。432 MHz の 14 λ 八木: 20.3 dBi、水平 18.1°、垂直 19.5°。W4RNL のモデルでは 20.4 dBi と 18.4°/18.8°。
+TAG|RILIEVO|VE7BQH 平均では、同じ 14 λ の八木は 21.0 dBi、ローブは水平 16.9°、垂直 18.1° となる。上の 20.3 dBi は DL6WU 曲線による値。ローブの補正 (0.93 · θK と θK) は DL6WU 八木から導いたものをそのまま使う。
 TAG|SCELTA|アンテナは常に相手局の方向に向けているものとみなします。その方向から ±θ/2 以内に入るホットスポットはすでにローブでカバーされています: ピンクではなく灰色で表示され、プログラムが警告します。効率による推奨ホットスポットはいずれにしても赤で表示されます。
 H1|4. 流星群の放射点
 H2|4.1 放射点の位置
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms、第2版、Willmann-Bell, 1998.
 SRC|7. Collm 流星レーダー、ライプツィヒ大学 (LIM) および IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 による)。
-SRC|10. G. Hoch DL6WU - 長い八木アンテナの利得曲線、W8IO による紹介、www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, pp. 130-138, 図 1 (一次資料); 曲線は W8IO にも掲載, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org、2018年6月の会報。
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - 50、144、432 MHz の八木の利得表: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (qsl.net/dk7zb と sm2cew.com に写し)。
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

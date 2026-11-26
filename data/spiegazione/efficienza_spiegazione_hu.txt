@@ -20,8 +20,8 @@ TAG|RILIEVO|Az 5/11/2026-i Collm-i grafikon: módusz 89,5 km, átlag 88,6 km, sz
 TAG|RILIEVO|DJ5HG [18] és a QTFGUI [17] rögzített 102 km-es magasságot használ; a program a radar által mért adatot részesíti előnyben. Az ITU-R P.843 Ajánlás [24] h = 124 − 17·log10(f) km átlagos magasságot ad: kb. 97 km 36,2 MHz-en és 87 km 144 MHz-en, összhangban a Collm-i módusszal (89,5 km, 5/11/2026).
 H1|3. Az útvonal geometriája
 H2|3.1 A Föld, az állomások és a felezőpont
-TAG|FONTE|Gömb alakú Föld, r = 6372,7955 km sugárral [1].
-TAG|SCELTA|Az útvonal mindig az állomás és az ellenállomás lokátora közötti valós útvonal. A távolságot, az azimutot és a felezőpontot főkör-képletekkel számítjuk.
+TAG|FONTE|WGS84 ellipszoid [37]: fél nagytengely 6378,137 km, lapultság 1/298,257223563. A gömbi képletekhez (a cikk szerinti elevációs szög, hatótáv, refrakció) a program az ellipszoid közepes sugarát használja, r = 6371,0088 km; az 1.8.23-as verzióig 6372,7955 km sugarú gömböt használt [1].
+TAG|SCELTA|Az útvonal mindig az állomás és az ellenállomás lokátora közötti valós útvonal. Az 1.8.27-es verziótól a távolság, az azimut és a felezőpont az ellipszoid geodetikus vonalán, Karney módszerével [38] számítódik: a gömbhöz képest a távolságok legfeljebb 0,5%-kal, az azimutok néhány tized fokkal változnak.
 TAG|FONTE|Az időtől függő számítások az útvonal felezőpontjára vonatkoznak: a két végpont között a legjobb időpont akár 1,5 órával is eltérhet (SM6FHZ [4]).
 H2|3.2 Antennaeleváció
 TAG|FONTE|A visszaverődési pont felé mutató elevációt a cikk képletével (7. kép) [1] számítjuk, ahol x = távolság / r, H a nyom magassága, h az állomás magassága:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Az AMS-táblázattal: 1000 km → 13°, s ≈ 115 km; 1250 km → 11
 TAG|SCELTA|Az égbolton mutatott időpontra a program összegzi a horizont feletti összes rajra a ZHR x hatékonyság értéket, megosztva az A és a B oldal között (7.1 fejezet). Annak az oldalnak a hot spotja az ajánlott, amely több visszaverődést kap: pirossal jelenik meg a térképen.
 TAG|FONTE|DJ5HG szerint, DF5HC [16] közlésében, a visszaverődés a nyom körüli kúpon történik: rövidebb útvonalakon az antennákat a közvetlen iránytól oldalra kell irányítani, mindkét állomást ugyanarra a pontra, és a radiáns helyzetétől függően a két pont egyike (HOT-A vagy HOT-B) kedvezőbb. DF5HC a legjobb távolságot 1300-1500 km-ben adja meg, maximummal valamivel 2000 km felett.
 H2|3.5 Az antenna nyalábja
-TAG|FONTE|Hosszú Yagi nyeresége a gém hosszából (DL6WU-görbe [10]) és a nyaláb −3 dB-es nyílásszöge a nyereségből (Kraus-szabály [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Egy Yagi nyeresége a tartócső hosszából (a VE7BQH-táblázatok sávonkénti átlagegyenese [36], összehasonlításként a DL6WU-görbe [10]) és a −3 dB-es nyalábszélesség a nyereségből (Kraus-szabály [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL NEC-szimulációi [12] 0,1 dB-en belül megerősítik a nyereséggörbét mind a DL6WU Yagikra, mind David Tanner VK3AUU Yagijaira, amelyeknek azonos elemszámnál rövidebb a gémjük: a nyereség a gém hosszától függ. Ugyanezek a szimulációk 5-10 %-kal keskenyebb vízszintes nyalábot adnak, mint Kraus.
+TAG|RILIEVO|VE7BQH-átlag mínusz DL6WU-görbe: 50 MHz-en 0,25 dB-en belül 2 és 16 λ között; 144 MHz-en −0,04 dB-től (1 λ) +0,42 dB-ig (10 λ); 432 MHz-en −0,06 dB-től (2 λ) +0,55 dB-ig (10 λ). A W4RNL által 432 MHz-en szimulált DL6WU és VK3AUU Yagiknál a VE7BQH-átlag 0,15–0,55 dB-lel a NEC fölött van: hosszú tartócsövön a táblázatok számítógéppel optimalizált Yagijai többet adnak az eredeti terveknél.
 TAG|SCELTA|Vízszintes nyaláb (az azimutális irányításé) = 0,93 · θK; függőleges nyaláb = θK. 14 λ-s Yagi 432 MHz-en: 20,3 dBi, 18,1° vízszintesen és 19,5° függőlegesen; W4RNL modelljei 20,4 dBi-t és 18,4°/18,8°-ot adnak.
+TAG|RILIEVO|A VE7BQH-átlaggal ugyanaz a 14 λ-s Yagi 21,0 dBi-t és 16,9° vízszintes, 18,1° függőleges nyalábot ad; a fenti 20,3 dBi a DL6WU-görbéből származik. A nyalábkorrekciók (0,93 · θK és θK) továbbra is a DL6WU Yagikból levezetettek.
 TAG|SCELTA|Az antennát mindig az ellenállomás felé irányítottnak tekintjük. Az az irányhoz képest ±θ/2-n belül eső hot spotot a nyaláb már lefedi: rózsaszín helyett szürkével jelölt, és a program figyelmeztet rá. A hatékonyság alapján ajánlott hot spot minden esetben piros marad.
 H1|4. A raj radiánsa
 H2|4.1 A radiáns helyzete
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2. kiadás, Willmann-Bell, 1998.
 SRC|7. Collm-i meteorradar, Lipcsei Egyetem (LIM) és IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (Kaiser & Closs, 1952 alapján).
-SRC|10. G. Hoch DL6WU - a hosszú Yagik nyereséggörbéje, W8IO közlésében, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, 130-138. o., 1. ábra (elsődleges forrás); a görbét W8IO is közli, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, 2018. júniusi bulletin.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi-nyereségtáblázatok 50, 144 és 432 MHz-re: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (másolatok: qsl.net/dk7zb és sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

@@ -20,8 +20,8 @@ TAG|RILIEVO|Collm grafikas, 5/11/2026: moda 89,5 km, vidurkis 88,6 km, standarti
 TAG|RILIEVO|DJ5HG [18] ir QTFGUI [17] naudoja fiksuotą 102 km aukštį; programa teikia pirmenybę radaro išmatuotiems duomenims. Rekomendacija ITU-R P.843 [24] pateikia vidutinį aukštį h = 124 − 17·log10(f) km: apie 97 km ties 36,2 MHz ir 87 km ties 144 MHz, o tai atitinka Collm modą (89,5 km 5/11/2026).
 H1|3. Trasos geometrija
 H2|3.1 Žemė, stotys ir vidurio taškas
-TAG|FONTE|Sferinė Žemė, kurios spindulys r = 6372,7955 km [1].
-TAG|SCELTA|Trasa visada yra tikroji trasa tarp stoties lokatoriaus ir korespondento lokatoriaus. Atstumas, azimutas ir vidurio taškas apskaičiuojami didžiojo apskritimo formulėmis.
+TAG|FONTE|WGS84 elipsoidas [37]: didysis pusašis 6378,137 km, suplojimas 1/298,257223563. Sferinėms formulėms (straipsnio pakilimo kampas, nuotolis, refrakcija) programa naudoja vidutinį elipsoido spindulį r = 6371,0088 km; iki 1.8.23 versijos ji naudojo 6372,7955 km spindulio sferą [1].
+TAG|SCELTA|Trasa visada yra tikroji trasa tarp stoties lokatoriaus ir korespondento lokatoriaus. Nuo 1.8.27 versijos atstumas, azimutas ir vidurio taškas skaičiuojami elipsoido geodezinėje linijoje Karney metodu [38]: palyginti su sfera, atstumai keičiasi ne daugiau kaip 0,5%, o azimutai – keliomis laipsnio dešimtosiomis.
 TAG|FONTE|Nuo laiko priklausantys skaičiavimai atliekami trasos vidurio taškui: tarp abiejų galų geriausias laikas gali skirtis iki 1,5 valandos (SM6FHZ [4]).
 H2|3.2 Antenos elevacija
 TAG|FONTE|Elevacija į atspindžio tašką apskaičiuojama straipsnio formule (7 paveikslas) [1], kur x = atstumas / r, H – pėdsako aukštis, h – stoties aukštis:
@@ -41,10 +41,13 @@ TAG|RILIEVO|Pagal AMS lentelę: 1000 km → 13°, s ≈ 115 km; 1250 km → 11°
 TAG|SCELTA|Dangaus skliaute rodomai valandai programa sumuoja per visus virš horizonto esančius srautus ZHR x efektyvumas, padalytą tarp pusės A ir pusės B (7.1 skyrius). Rekomenduojamas tos pusės, kuri gauna daugiau atspindžių, hot spot: žemėlapyje jis rodomas raudonai.
 TAG|FONTE|Pasak DJ5HG, cituojamo DF5HC [16], atspindys vyksta kūgyje aplink pėdsaką: trumpesnėse trasose antenas reikia nukreipti į šoną nuo tiesioginės krypties, abiem stotims į tą patį tašką, ir priklausomai nuo radianto padėties vienas iš dviejų taškų (HOT-A arba HOT-B) yra palankesnis. DF5HC taip pat nurodo geriausią atstumą 1300-1500 km, su maksimumu šiek tiek daugiau nei 2000 km.
 H2|3.5 Antenos lapelis
-TAG|FONTE|Ilgos Yagi antenos stiprinimas pagal strėlės ilgį (DL6WU kreivė [10]) ir lapelio plotis −3 dB lygyje pagal stiprinimą (Kraus taisyklė [11]):
-EQ|G = 7,773 · log10(L/λ) + 11,43 dBi          θK = √( 41253 / 10^(G/10) )
+TAG|FONTE|Yagi stiprinimas pagal strėlės ilgį (VE7BQH lentelių vidutinė tiesė kiekvienai juostai [36], palyginimui DL6WU kreivė [10]) ir −3 dB lapelio plotis pagal stiprinimą (Krauso taisyklė [11]):
+EQ|G = a + b · log10(L/λ) dBi:   50 MHz 11,67 + 7,36;   144 MHz 11,31 + 8,27;   432 MHz 11,03 + 8,68
+EQ|DL6WU: G = 11,35 + 7,81 · log10(L/λ) dBi          θK = √( 41253 / 10^(G/10) )
 TAG|RILIEVO|W4RNL NEC modeliavimai [12] patvirtina stiprinimo kreivę 0,1 dB tikslumu tiek DL6WU Yagi, tiek David Tanner VK3AUU Yagi antenoms, kurių strėlė, esant tam pačiam elementų skaičiui, trumpesnė: stiprinimas priklauso nuo strėlės ilgio. Tie patys modeliavimai duoda 5-10 % siauresnį horizontalųjį lapelį nei Kraus.
+TAG|RILIEVO|VE7BQH vidurkis minus DL6WU kreivė: ties 50 MHz 0,25 dB ribose nuo 2 iki 16 λ; ties 144 MHz nuo −0,04 dB (1 λ) iki +0,42 dB (10 λ); ties 432 MHz nuo −0,06 dB (2 λ) iki +0,55 dB (10 λ). W4RNL ties 432 MHz modeliuotoms DL6WU ir VK3AUU antenoms VE7BQH vidurkis yra 0,15–0,55 dB virš NEC: ant ilgų strėlių kompiuteriu optimizuotos lentelių antenos duoda daugiau nei pirminės konstrukcijos.
 TAG|SCELTA|Horizontalusis lapelis (pagal kurį nukreipiama azimutu) = 0,93 · θK; vertikalusis lapelis = θK. 14 λ Yagi ties 432 MHz: 20,3 dBi, 18,1° horizontaliai ir 19,5° vertikaliai; W4RNL modeliai duoda 20,4 dBi ir 18,4°/18,8°.
+TAG|RILIEVO|Pagal VE7BQH vidurkį ta pati 14 λ Yagi duoda 21,0 dBi ir 16,9° horizontalų bei 18,1° vertikalų lapelį; aukščiau nurodyti 20,3 dBi gauti iš DL6WU kreivės. Lapelio pataisos (0,93 · θK ir θK) lieka tos, kurios išvestos iš DL6WU antenų.
 TAG|SCELTA|Antena visada laikoma nukreipta į korespondentą. Hot spot, esantis ±θ/2 ribose nuo šios krypties, jau yra lapelio aprėptyje: jis pažymimas pilkai, o ne rožine spalva, ir programa apie tai įspėja. Efektyvumo rekomenduojamas hot spot bet kuriuo atveju lieka raudonas.
 H1|4. Srauto radiantas
 H2|4.1 Radianto padėtis
@@ -151,7 +154,7 @@ SRC|6. J. Meeus - Astronomical Algorithms, 2-asis leid., Willmann-Bell, 1998.
 SRC|7. Collm meteorų radaras, Leipcigo universitetas (LIM) ir IAP Kühlungsborn, wetterdaten.meteo.uni-leipzig.de/radar_flux.php.
 SRC|8. D.W.R. McKinley - Meteor Science and Engineering, McGraw-Hill, 1961.
 SRC|9. GM8JBJ - Meteor scatter path loss, hamradio.engineering (pagal Kaiser & Closs, 1952).
-SRC|10. G. Hoch DL6WU - ilgų Yagi antenų stiprinimo kreivė, cituojama W8IO, www.w8io.com.
+SRC|10. G. Hoch DL6WU - "Extremely Long Yagi Antennas", VHF Communications 14, 3/1982, p. 130-138, 1 pav. (pirminis šaltinis); kreivę pateikia ir W8IO, www.w8io.com.
 SRC|11. J.D. Kraus - Antennas, McGraw-Hill.
 SRC|12. L.B. Cebik W4RNL - Long-Boom Yagi Rules of Thumb: A Comparison with Modeling Data.
 SRC|13. RMOB, Radio Meteor Observatories On Line - www.rmob.org, 2018 m. birželio biuletenis.
@@ -177,3 +180,6 @@ SRC|32. IAU Meteor Data Center - established showers list, www.ta3.sk/IAUC22DB/M
 SRC|33. Global Meteor Network - shower flux and daily trajectory summary, globalmeteornetwork.org, CC BY 4.0 (Vida et al. 2021, 2022).
 SRC|34. M. Bundscherer - "Meteor Detection based on Forward Scattering with SDR and the BRAMS Beacon", WGN, Journal of the IMO 54(2), April 2026; code and data (Sonneberg, August 2026): github.com/maxbundscherer/meteor-scatter-v2.
 SRC|35. HamSCI Meteor Scatter QSO Party, 11-12 August 2025 - scoring files and cleansed PSKReporter data (G. Mikitin, N. Frissell), Zenodo, DOI 10.5281/zenodo.18109759, CC BY 4.0.
+SRC|36. L. Edwards VE7BQH - Yagi stiprinimo lentelės 50, 144 ir 432 MHz: dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html (kopijos qsl.net/dk7zb ir sm2cew.com).
+SRC|37. National Geospatial-Intelligence Agency - "Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems", NGA.STND.0036_1.0.0_WGS84, 2014 (NIMA TR8350.2).
+SRC|38. C. F. F. Karney - "Algorithms for geodesics", Journal of Geodesy 87 (2013) 43-55, doi:10.1007/s00190-012-0578-z; GeographicLib (MIT).

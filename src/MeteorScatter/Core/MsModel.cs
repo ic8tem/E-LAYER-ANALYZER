@@ -77,7 +77,7 @@ namespace YAMS
         // Lobo verticale dell'antenna (IC8TEM): una direttiva fissata a 0° ha comunque il lobo principale qualche grado sopra
         // l'orizzonte (riflessione sul terreno) e irradia, con meno guadagno, anche sopra e sotto. Con LobePattern = true
         // l'"Elevazione lobo" e' il massimo del lobo: i punti di riflessione pesano con il diagramma verticale di ciascuna
-        // stazione (spazio libero con larghezza VerticalHpbwDeg a -3 dB, dalla curva DL6WU/Kraus; sotto il massimo il
+        // stazione (spazio libero con larghezza VerticalHpbwDeg a -3 dB, dalla media VE7BQH/Kraus; sotto il massimo il
         // fattore del terreno sin^2(pi/2 * sin e / sin e0) scende a zero all'orizzonte). Con LobePattern = false
         // l'elevazione del lobo e' un limite netto: i punti sotto non contano (calcolo fino alla 1.8.0).
         public static bool LobePattern = true;
@@ -106,6 +106,12 @@ namespace YAMS
         struct Sample { public Vec3 Up, N, P, Pn; public LatLon Ll; public double W, Wb, S2; public bool Left; }
         List<Sample> samples = new List<Sample>();
 
+        // Rifrazione troposferica (facoltativa): profili sopra le due stazioni; null = raggi diritti (di partenza, prudente)
+        public static RefrProfile RefrHomeProfile, RefrDxProfile;
+        public static LatLon RefrHomeAt, RefrDxAt;   // la rifrazione vale solo per la tratta di quei due punti (non per GRAVES)
+        Func<double, double> refrHome, refrDx;
+        public double RefrRangeGainKm, RefrCorrMidDeg;   // per il resoconto: portata in piu' e correzione verso il punto medio
+
         public static PathModel Build(LatLon home, double homeAltKm, LatLon dx, double dxAltKm, double layerKm, double minElevDeg)
         {
             PathModel m = new PathModel();
@@ -116,7 +122,18 @@ namespace YAMS
             m.BearingHomeToDx = Astro.Bearing(home, dx);
             m.BearingDxToHome = Astro.Bearing(dx, home);
             m.Mid = Astro.Destination(home, m.BearingHomeToDx, m.DistKm / 2);
+            if (RefrHomeProfile != null && RefrDxProfile != null && Astro.DistanceKm(home, RefrHomeAt) < 30 && Astro.DistanceKm(dx, RefrDxAt) < 30)
+            {
+                m.refrHome = Refraction.Correction(RefrHomeProfile, homeAltKm, layerKm);
+                m.refrDx = Refraction.Correction(RefrDxProfile, dxAltKm, layerKm);
+            }
             m.ElevToMidDeg = MsGeometry.ElevationArticle(m.DistKm / 2, layerKm, homeAltKm);
+            if (m.refrHome != null)
+            {
+                double c = m.refrHome(m.ElevToMidDeg);
+                m.RefrCorrMidDeg = double.IsNaN(c) ? 0 : c;
+                m.ElevToMidDeg += m.RefrCorrMidDeg;
+            }
             m.ComputeHot();
             m.BuildSamples();
             m.BuildField();
@@ -127,6 +144,13 @@ namespace YAMS
         void ComputeHot()
         {
             HotRadiusKm = MsGeometry.LayerRangeKm(LayerKm, LobePattern ? 0 : MinElevDeg, HomeAltKm);
+            if (refrHome != null)
+            {
+                double e0 = LobePattern ? 0 : MinElevDeg;
+                double rr = (Refraction.LayerRangeKm(RefrHomeProfile, HomeAltKm, LayerKm, e0) + Refraction.LayerRangeKm(RefrDxProfile, DxAltKm, LayerKm, e0)) / 2;
+                RefrRangeGainKm = rr - HotRadiusKm;
+                HotRadiusKm = rr;
+            }
             // Hot spot classici: a HotSpotOffsetKm ai lati del punto medio, perpendicolari alla tratta (A a sinistra, B a destra)
             double bMid = Astro.Bearing(Mid, Dx);
             HotOffsetKm = HotOffsetFor(DistKm);
@@ -153,6 +177,7 @@ namespace YAMS
             hp.BearingFromHome = Astro.Bearing(Home, p); hp.DistFromHome = Astro.DistanceKm(Home, p);
             hp.BearingFromDx = Astro.Bearing(Dx, p); hp.DistFromDx = Astro.DistanceKm(Dx, p);
             hp.ElevFromHome = MsGeometry.ElevationArticle(hp.DistFromHome, LayerKm, HomeAltKm);
+            if (refrHome != null) { double c = refrHome(hp.ElevFromHome); if (!double.IsNaN(c)) hp.ElevFromHome += c; }
             hp.SideScatterDeg = Astro.Norm180(hp.BearingFromHome - BearingHomeToDx);
             return hp;
         }
@@ -178,6 +203,13 @@ namespace YAMS
                     double Ra = ra.Length, Rb = rb.Length;
                     double ea = Math.Asin(ra.Dot(ua) / Ra) / Astro.D2R;
                     double eb = Math.Asin(rb.Dot(ub) / Rb) / Astro.D2R;
+                    if (refrHome != null)
+                    {
+                        // elevazione apparente: il punto si vede piu' alto; sotto l'orizzonte rifratto non si vede
+                        double ca = refrHome(ea), cb = refrDx(eb);
+                        ea = double.IsNaN(ca) ? -1 : ea + ca;
+                        eb = double.IsNaN(cb) ? -1 : eb + cb;
+                    }
                     double gl = 1;
                     if (LobePattern)
                     {
@@ -451,13 +483,38 @@ namespace YAMS
         }
 
         // ---- Antenna Yagi ----
-        // Guadagno da lunghezza del boom: curva DL6WU, G(dBi) = 7,773 log10(L/lambda) + 11,43
-        // (riportata da W8IO; valida per Yagi lunghe, boom da circa 2 lambda in su).
+        // Guadagno da lunghezza del boom: retta media delle tabelle VE7BQH (circa 60 Yagi per banda, guadagni NEC),
+        // regressione G(dBi) = a + b log10(L/lambda), con la banda piu' vicina:
+        //   50 MHz  (f < 100 MHz)      G = 11,67 + 7,36 log10(L/lambda)   campione 0,3-5 lambda,  scarto tipo 0,25 dB
+        //   144 MHz (100-300 MHz)      G = 11,31 + 8,27 log10(L/lambda)   campione 0,75-8,9 lambda, scarto tipo 0,15 dB
+        //   432 MHz (f > 300 MHz)      G = 11,03 + 8,68 log10(L/lambda)   campione 1,8-16 lambda, scarto tipo 0,17 dB
+        // (dxmaps.com/VE7BQH6.html, dxmaps.com/VE7BQH.html, atlas.dxmaps.com/VE7BQH70.html).
         public static double YagiGainDbi(double boomM, double freqMHz)
         {
             double lam = 299.792458 / freqMHz;
             double bl = Math.Max(0.3, boomM / lam);
-            return 7.773 * Math.Log10(bl) + 11.43;
+            if (freqMHz < 100) return 11.67 + 7.36 * Math.Log10(bl);
+            if (freqMHz <= 300) return 11.31 + 8.27 * Math.Log10(bl);
+            return 11.03 + 8.68 * Math.Log10(bl);
+        }
+
+        // Intervallo di lunghezze (in lambda) del campione VE7BQH usato per la banda: fuori la stima e' poco precisa.
+        public static bool YagiInSample(double boomM, double freqMHz)
+        {
+            double bl = boomM * freqMHz / 299.792458;
+            if (freqMHz < 100) return bl >= 0.3 && bl <= 5;
+            if (freqMHz <= 300) return bl >= 0.75 && bl <= 8.9;
+            return bl >= 1.8 && bl <= 16;
+        }
+
+        // Curva storica di G. Hoch DL6WU, "Extremely Long Yagi Antennas", VHF Communications 3/1982, fig. 1
+        // (misure a 432 e 1296 MHz, 2,35 dB per ottava, riferimento EIA 7,7 dBd, precisione 0,5 dB):
+        // G = 9,2 + 7,81 log10(L/lambda) dBd = 11,35 + 7,81 log10(L/lambda) dBi. W8IO la riporta come
+        // 7,773 log10(L/lambda) + 11,43 dBi (meno di 0,1 dB di differenza). Solo per confronto nel resoconto.
+        public static double YagiGainDl6wuDbi(double boomM, double freqMHz)
+        {
+            double bl = Math.Max(0.3, boomM * freqMHz / 299.792458);
+            return 11.35 + 7.81 * Math.Log10(bl);
         }
 
         // Apertura a -3 dB dal guadagno. Regola di Kraus G = 41253 / (thetaE x thetaH); con lobo circolare

@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER 如何計算
-SUB|計算選擇摘要 - 作者 Costantino IC8TEM - 版本 0.6.6，2026 年 11 月。方括號中的編號對應 資料來源 頁籤。
+SUB|計算選擇摘要 - 作者 Costantino IC8TEM - 版本 0.6.7，2026 年 11 月。方括號中的編號對應 資料來源 頁籤。
 H1|1. 簡介
 H2|1.1 目的
 P|E-LAYER ANALYZER 分析與 E 層相關的 VHF 傳播模式：散塊 E 層（包括跨洲多跳）、F.A.I.（沿磁場排列的不規則體）、流星散射（使用 YA-MS 程式）與無線電極光。本文件說明每一項計算及其來源。
@@ -224,6 +224,7 @@ TAG|FONTE|YA-MS 從 1.8.11 到 1.8.15（E-LAYER ANALYZER 0.5.0）：CALL3 每 12
 TAG|FONTE|YA-MS 從 1.8.16 到 1.8.19（E-LAYER ANALYZER 0.5.1）：已確立流星雨的 IAU MDC 目錄隨套件提供；頁籤上方一直可見的橫條，顯示當天最佳時刻、最有利的流星雨與六個預報時點（現在，1、3、6、12 與 24 小時後）；預測計算 頂端的時間軸；在 即時流量 中，只有對方電台回覆的、來自本台 WSJT-X 的解碼才會閃爍。自同一版起，與 YA-MS 1.8.19 一樣，提供以 .NET 6 編譯的 Windows 7 SP1、8 與 8.1 套件（-win7-x64-、-win7-x86-），因為 .NET 8 在 Windows 7 上會立即停止（缺少 Windows 的 GetSystemTimePreciseAsFileTime 函式）；其他 Windows 套件需要 Windows 10 或 11，安裝程式會進行檢查。
 TAG|FONTE|YA-MS 1.8.20（E-LAYER ANALYZER 0.5.2）：適合矮螢幕的精簡模式；在 E-LAYER ANALYZER 中由整個視窗決定（低於 850 像素時開啟，高於 900 像素時關閉），所有頁籤使用同一設定，縮短固定高度的方框並隱藏說明列。PSKReporter 回傳 429 錯誤後，對運作中監聽站的請求暫停 30 分鐘（data/pskreporter_pausa.txt），且只有一個副本（YA-MS 或 E-LAYER ANALYZER）查詢該服務。
 TAG|FONTE|YA-MS 1.8.24（E-LAYER ANALYZER 0.6.6）：頁籤中只引入了採用 Karney 測地線的 WGS84 橢球幾何（2.1 節）；YA-MS 1.8.21-1.8.23 的其他新功能尚未包含。
+TAG|FONTE|YA-MS 1.8.27（E-LAYER ANALYZER 0.6.7）：此分頁更新到 YA-MS 最新版本，包含 1.8.21-1.8.27 的新功能：可選的 GFS 對流層折射、日本 HRO 計數（IPRMO 和 Ogaki）、依 VE7BQH 平均值計算的八木天線增益、在電腦上尋找 CALL3.TXT、經過驗證的更新，以及採用 TLS 連線並在首次見到時固定金鑰的使用者間交換。
 TAG|SCELTA|語言：36 種，即 YAEC 的所有語言，加上丹麥文與他加祿文，自 0.4.4 版起另增巴西葡萄牙文、繁體中文、波蘭文、捷克文、羅馬尼亞文、匈牙利文、希臘文與泰文（Italiano, English, Deutsch, Français, Español, Português, Português (Brasil), Nederlands, Svenska, Norsk (bokmål), Dansk, Íslenska, Eesti, Latviešu, Lietuvių, Polski, Čeština, Magyar, Română, Ελληνικά, Русский, Українська, Türkçe, Afrikaans, العربية, עברית, اردو, हिन्दी, বাংলা, Bahasa Indonesia, Tagalog, 中文 (简体), 中文 (繁體), ไทย, 日本語, 한국어），適用於介面（data/lingue/ela-<代碼>.txt）、文件（計算選擇摘要、使用手冊、技術報告）與資料來源。在 F.A.I./極光檢視中，散射點的軌跡在所有翻譯中都稱為 "Scatter trail"。狀態列會顯示使用中的磁場模型（IAGA 的 IGRF-14 [16]）。
 H1|9. 限制
 LI|電台位於網格座標方格的中心：使用 4 碼網格座標時，誤差可達約 80 km。

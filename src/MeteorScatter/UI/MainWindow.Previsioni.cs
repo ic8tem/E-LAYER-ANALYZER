@@ -22,6 +22,9 @@ namespace YAMS
         TableView gridPrev;
         TextBlock lblPrevNote, lblRmob;
         Dictionary<DateTime, double> rmobCounts;
+        ComboBox cmbPrevSrc;
+        Avalonia.Threading.DispatcherTimer hroTimer;
+        bool hroBusy;
         string rmobName = "";
         TextBox txtRmobObs;
         CheckBox chkRmobAuto;
@@ -57,12 +60,19 @@ namespace YAMS
                 "Il valore di partenza resta k = 3 (regola sperimentale di SM6FHZ), più prudente: con k più basso si prevedono più riflessioni alle frequenze alte.\n" +
                 "Attenzione: i conteggi di Collm sono per lo più meteore sporadiche, di cui il GMN non pubblica r."));
             btnKr.Click += async (s, e) => await ExponentFromPopIndex();
+            Button btnJp = B(Lang.T("Giappone: conteggi HRO mensili (IPRMO)..."));
+            ToolTip.SetTip(btnJp, Lang.T("Conteggi orari degli osservatori giapponesi sui fari HAM a 53 MHz (JA2SDA, JE3AKE, JJ1RLQ), dai file mensili di IPRMO: media per ora UTC traslata alla frequenza di arrivo e totali giornalieri."));
+            btnJp.Click += async (s, e) => await ShowJapanHro();
             numPrevFreq.ValueChanged += (s, e) => UpdatePrevTab();
             numPrevK.ValueChanged += (s, e) => UpdatePrevTab();
             numPrevStation.ValueChanged += (s, e) => UpdatePrevTab();
             lblRmob = L(Lang.T("nessun file RMOB caricato"));
-            DockTop(p, Row(L(Lang.T("Frequenza di arrivo MHz")), numPrevFreq, L(Lang.T("Esponente λ^k")), numPrevK,
-                           L(Lang.T("Fattore di stazione K")), numPrevStation, btnRmob, btnK, btnKr, lblRmob));
+            cmbPrevSrc = new ComboBox { MinWidth = 260, Margin = new Thickness(2, 3), VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center };
+            ToolTip.SetTip(cmbPrevSrc, Lang.T("Conteggi di partenza della previsione. Le voci del Giappone (conteggio automatico di HROFFT a Ogaki sui fari HAM a 53 MHz, ogni 10 minuti) compaiono solo se il QTH è entro 3500 km dal Giappone."));
+            RefreshPrevSources();
+            cmbPrevSrc.SelectionChanged += (s, e) => { cfg.Set("prev_fonte", PrevSrcKey); UpdatePrevTab(); if (PrevSrcIndex > 0) StartHroUpdate(); };
+            DockTop(p, Row(L(Lang.T("Fonte dei conteggi")), cmbPrevSrc, L(Lang.T("Frequenza di arrivo MHz")), numPrevFreq, L(Lang.T("Esponente λ^k")), numPrevK,
+                           L(Lang.T("Fattore di stazione K")), numPrevStation, btnRmob, btnK, btnKr, btnJp, lblRmob));
 
             txtRmobObs = T(cfg.Get("rmob_osservatore", ""), 170, false);
             chkRmobAuto = C(Lang.T("prelievo automatico ogni 5 minuti (attivare solo con il permesso di RMOB)"), cfg.GetB("rmob_automatico", false));
@@ -108,7 +118,75 @@ namespace YAMS
             if (cfg.Get("rmob_url", "") == "") cfg.Set("rmob_url", RmobUrlDefault);
         }
 
-        double RadarFreq { get { return collmSrc != null && collmSrc.FreqMHz > 0 ? collmSrc.FreqMHz : 36.2; } }
+        double RadarFreq
+        {
+            get
+            {
+                int i = PrevSrcIndex;
+                if (i > 0) return HroOgaki.Stations[i - 1].FreqMHz;
+                return collmSrc != null && collmSrc.FreqMHz > 0 ? collmSrc.FreqMHz : 36.2;
+            }
+        }
+
+        // ---------------- fonte dei conteggi: Collm oppure Giappone (HRO di Ogaki), solo entro 3500 km ----------------
+        bool QthNearJapan()
+        {
+            LatLon q;
+            return txtHome != null && Astro.TryLocator(Up(txtHome), out q) && HroOgaki.NearJapan(q);
+        }
+
+        // 0 = Collm, 1.. = stazioni di Ogaki
+        int PrevSrcIndex { get { return cmbPrevSrc != null && cmbPrevSrc.SelectedIndex > 0 && QthNearJapan() ? cmbPrevSrc.SelectedIndex : 0; } }
+        string PrevSrcKey { get { int i = PrevSrcIndex; return i > 0 ? HroOgaki.Stations[i - 1].Key : "collm"; } }
+
+        string PrevSrcName
+        {
+            get
+            {
+                int i = PrevSrcIndex;
+                return i > 0 ? HroOgaki.Stations[i - 1].Place + " " + HroOgaki.Stations[i - 1].Beacon : "Collm";
+            }
+        }
+
+        CollmData PrevData { get { int i = PrevSrcIndex; return i > 0 ? HroOgaki.AsHourly(HroOgaki.Stations[i - 1]) : collm; } }
+
+        void RefreshPrevSources()
+        {
+            if (cmbPrevSrc == null) return;
+            List<string> items = new List<string> { Lang.T("Collm, Germania (radar 36,2 MHz)") };
+            bool near = QthNearJapan();
+            if (near)
+                foreach (HroStation st in HroOgaki.Stations)
+                    items.Add(Lang.F("Giappone in diretta: {0} {1} {2:F3} MHz (Ogaki)", st.Place, st.Beacon, st.FreqMHz));
+            string want = cfg.Get("prev_fonte", near ? "toyokawa" : "collm");
+            cmbPrevSrc.ItemsSource = items;
+            int sel = 0;
+            for (int i = 0; near && i < HroOgaki.Stations.Length; i++) if (HroOgaki.Stations[i].Key == want) sel = i + 1;
+            cmbPrevSrc.SelectedIndex = sel;
+            if (near)
+            {
+                if (hroTimer == null)
+                {
+                    try { HroOgaki.Load(dataDir); } catch { }
+                    hroTimer = new Avalonia.Threading.DispatcherTimer { Interval = TimeSpan.FromMinutes(10) };
+                    hroTimer.Tick += (s, e) => StartHroUpdate();
+                    hroTimer.Start();
+                    Avalonia.Threading.DispatcherTimer.RunOnce(StartHroUpdate, TimeSpan.FromSeconds(8));
+                }
+            }
+            else if (hroTimer != null) { hroTimer.Stop(); hroTimer = null; }
+        }
+
+        void StartHroUpdate()
+        {
+            if (hroBusy || !QthNearJapan()) return;
+            hroBusy = true;
+            Task.Run(() =>
+            {
+                try { HroOgaki.Update(dataDir, 18); } catch { }
+                Avalonia.Threading.Dispatcher.UIThread.Post(() => { hroBusy = false; UpdatePrevTab(); });
+            });
+        }
 
         // frequenza di arrivo della previsione (MHz)
         double PrevFreqMHz { get { return numPrevFreq != null ? V(numPrevFreq) : 144; } }
@@ -123,6 +201,8 @@ namespace YAMS
         {
             if (chartPrev48 == null) return;
             double f = V(numPrevFreq), k = V(numPrevK), K = V(numPrevStation), fr = RadarFreq;
+            CollmData collm = PrevData;
+            string srcName = PrevSrcName;
             double scale = MsGeometry.CountScale(fr, f, k);
             double dur = MsGeometry.DurationScale(fr, f);
             lblPrevNote.Text = Lang.F(
@@ -141,12 +221,17 @@ namespace YAMS
                     phi, sec2, 1000 * dur * sec2);
             }
 
+            if (PrevSrcIndex > 0)
+                lblPrevNote.Text = lblPrevNote.Text.Replace("Collm", srcName) + "\n" +
+                    Lang.F("Fonte: {0}. Conteggio automatico di HROFFT ogni 10 minuti, un po' più alto di quello a mano: valore relativo, da tarare con i file mensili RMOJ (pulsante Giappone).",
+                           HroOgaki.Stations[PrevSrcIndex - 1].Status.Length > 0 ? srcName + " - " + HroOgaki.Stations[PrevSrcIndex - 1].Status : srcName);
             chartPrev48.Series.Clear(); chartPrev24.Series.Clear();
-            gridPrev.Columns = new List<string> { Lang.T("Ora UTC"), Lang.T("Collm stessa ora"), Lang.F("Traslato {0}", f.ToString("F0")), Lang.T("Indice sciami tratta"), Lang.F("Previsione {0} /ora", f.ToString("F0")), Lang.T("Giudizio") };
+            gridPrev.Columns = new List<string> { Lang.T("Ora UTC"), Lang.T("Collm stessa ora").Replace("Collm", srcName), Lang.F("Traslato {0}", f.ToString("F0")), Lang.T("Indice sciami tratta"), Lang.F("Previsione {0} /ora", f.ToString("F0")), Lang.T("Giudizio") };
             gridPrev.Rows = new List<TableRow>();
             if (collm == null)
             {
-                chartPrev48.Title = Lang.T("Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.");
+                chartPrev48.Title = PrevSrcIndex > 0 ? Lang.T("Nessun dato da Ogaki: attendo le immagini di HROFFT (una ogni 10 minuti).")
+                                                     : Lang.T("Nessun dato del radar: scaricalo dalla sottolinguetta Live e dati real-time › Flusso radar.");
                 chartPrev48.InvalidateVisual(); chartPrev24.InvalidateVisual(); gridPrev.Refresh(); return;
             }
             DateTime start = collm.DayToday.AddDays(-1);
@@ -161,7 +246,7 @@ namespace YAMS
                 double c;
                 if (rmobCounts != null && rmobCounts.TryGetValue(start.AddHours(i), out c)) { rm[i] = c; anyRmob = true; }
             }
-            ChartSeries a = new ChartSeries(); a.Name = "Collm " + fr.ToString("F1") + " MHz"; a.Color = Pal.Ink(Pal.Rgb(0, 230, 255)); a.Values = collm.Valid; a.Bars = true;
+            ChartSeries a = new ChartSeries(); a.Name = srcName + " " + fr.ToString("F1") + " MHz"; a.Color = Pal.Ink(Pal.Rgb(0, 230, 255)); a.Values = collm.Valid; a.Bars = true;
             ChartSeries b = new ChartSeries(); b.Name = Lang.F("traslato a {0} MHz (scala a destra)", f.ToString("F0")); b.Color = Pal.Ink(Pal.Rgb(255, 170, 40)); b.Values = tr; b.RightAxis = true;
             chartPrev48.Series.Add(a); chartPrev48.Series.Add(b);
             if (anyRmob)
@@ -173,6 +258,7 @@ namespace YAMS
             SetLocalRow(chartPrev48, start, 48);
             chartPrev48.Title = Lang.F("Misurato a Collm e traslato a {0} MHz - ieri {1} e oggi {2} (UTC)", f.ToString("F0"),
                                 start.ToString("dd/MM", CultureInfo.InvariantCulture), collm.DayToday.ToString("dd/MM", CultureInfo.InvariantCulture));
+            chartPrev48.Title = chartPrev48.Title.Replace("Collm", srcName);
             chartPrev48.YLabel = Lang.T("meteore/ora radar"); chartPrev48.Y2Label = Lang.F("riflessioni/ora a {0} MHz", f.ToString("F0"));
             int nowIdx = (int)Math.Floor((DateTime.UtcNow - start).TotalHours);
             chartPrev48.MarkIndex = nowIdx >= 0 && nowIdx < 48 ? nowIdx : -1;
@@ -240,6 +326,7 @@ namespace YAMS
         // corretto con la variazione dell'indice degli sciami. -1 = nessun dato radar per quell'ora.
         double ForecastAt(DateTime hourStartUtc)
         {
+            CollmData collm = PrevData;
             if (collm == null || numPrevFreq == null) return -1;
             DateTime start = collm.DayToday.AddDays(-1);
             double past = -1;
