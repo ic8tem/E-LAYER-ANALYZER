@@ -75,7 +75,7 @@ namespace ELA
                     Log?.Invoke($"APRS-IS: collegato a {Host}:{Port} in sola lettura, filtro {Filter}");
                     while (!ct.IsCancellationRequested)
                     {
-                        var line = await rd.ReadLineAsync();
+                        var line = await ReadLineMax(rd, 2048);   // righe APRS-IS: al massimo 2 kB (controllo di sicurezza, 26/11/2026)
                         if (line == null) break;
                         if (line.Length == 0 || line[0] == '#') continue;
                         Packets++;
@@ -87,6 +87,21 @@ namespace ELA
                 if (ct.IsCancellationRequested) break;
                 try { await Task.Delay(TimeSpan.FromSeconds(wait), ct); } catch { break; }
                 wait = Math.Min(300, wait * 2);
+            }
+        }
+
+        // legge una riga; i caratteri oltre max si scartano (una riga infinita non riempie la memoria)
+        static async Task<string> ReadLineMax(StreamReader rd, int max)
+        {
+            var sb = new StringBuilder();
+            char[] one = new char[1];
+            while (true)
+            {
+                int n = await rd.ReadAsync(one, 0, 1);
+                if (n <= 0) return sb.Length > 0 ? sb.ToString() : null;
+                char c = one[0];
+                if (c == '\n') return sb.ToString();
+                if (c != '\r' && sb.Length < max) sb.Append(c);
             }
         }
 

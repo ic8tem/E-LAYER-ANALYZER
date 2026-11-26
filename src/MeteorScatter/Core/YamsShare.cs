@@ -319,6 +319,7 @@ namespace YAMS
                     return;
                 }
                 if (myCall.Length == 0 || topic != "yams/v1/a/" + Hash(myCall)) return;
+                if (payload.Length > 16384) return;   // un messaggio vero e' di circa 1 kB (come YA-MS, 26/11/2026)
                 string id = Convert.ToHexString(SHA256.HashData(payload), 0, 12);
                 if (!seen.TryAdd(id, DateTime.UtcNow)) return;   // stesso messaggio da un altro broker
                 byte[] plain = Decrypt(payload);

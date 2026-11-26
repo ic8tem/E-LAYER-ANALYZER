@@ -134,7 +134,7 @@ namespace YAMS
                         LinesIn++;
                         Raise(line);
                     }
-                    else if (c != '\0' && c != '\a') cur.Append(c);
+                    else if (c != '\0' && c != '\a' && cur.Length < 8192) cur.Append(c);   // righe del cluster: al massimo 8 kB (come YA-MS, 26/11/2026)
                 }
                 if (reply != null && reply.Count > 0)
                 {
