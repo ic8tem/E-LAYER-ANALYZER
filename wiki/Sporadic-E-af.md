@@ -87,3 +87,7 @@ In die suboortjie **Multi-sprongvoorlopers** soek die program die multi-sprongke
 - **TEP-voorspelling** (blou, vanaf weergawe 0.6.5): indeks 0-100 na die sones anderkant die magnetiese ewenaar = seisoen × SFI × Kp (slegs eTEP) × plaaslike tyd × foF2 van die GIRO-ionosondes; SFI weeg mee, maar stel nie op nul nie, want by sonminimum word TEP skaars, maar verdwyn nie.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## VOORSPELLING (vanaf 0.7.0)
+
+Die suboortjie **VOORSPELLING** herken Es-wolke in vorming (spots van die laaste 30 minute en GIRO-ionosondes) en kontroleer vanaf jou stasie, met 50 en 144 MHz apart: bruikbare eerste sprong, dan dubbele Es-sprong, dan – net as daar geen eerste sprong is nie – tropo + Es met 'n virtuele stasie A′ wat deur 'n kanaal bereik word (tropomodule van LIVETROPOVHF, Open-Meteo-profiele, kritieke hoek volgens ITU-R P.834). In REAL-TIME kan 144 MHz-spots tussen 2400 en 3400 km **TR+ES** word, met die verskuifde wolk.

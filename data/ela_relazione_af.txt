@@ -1,5 +1,5 @@
 TITLE|Tegniese verslag oor E-LAYER ANALYZER
-SUB|Die keuses wat tot die ontwikkeling van die program gelei het - deur Costantino IC8TEM - weergawe 0.6.7, November 2026. Die getalle tussen vierkantige hakies verwys na die oortjie BRONNE.
+SUB|Die keuses wat tot die ontwikkeling van die program gelei het - deur Costantino IC8TEM - weergawe 0.7.0, November 2026. Die getalle tussen vierkantige hakies verwys na die oortjie BRONNE.
 H1|1. Inleiding
 P|E-LAYER ANALYZER het ontstaan uit 'n duidelike behoefte van die VHF-operateur: om in een enkele instrument oor alles te beskik wat nodig is om die voortplantingsmodusse te vertolk waarby die E-laag van die ionosfeer betrokke is. Tot dusver is sporadiese E, F.A.I., meteor scatter en radio-aurora met verskillende programme bestudeer, dikwels vir slegs een bedryfstelsel geskryf, soms nie meer onderhou nie, elk met sy eie geometriese model en sy eie konvensies. Hierdie verslag lê die redes vir die gemaakte keuses uiteen, en onderskei tussen dit wat uit die literatuur kom, dit wat uit die outeur se ervaring op die band kom, en dit wat 'n keuse van die program is wat deur gebruik bevestig moet word.
 H2|1.1 Doelwitte
@@ -68,6 +68,7 @@ LI|Die stasies word in die middel van die lokatorvierkant geplaas: met 4 karakte
 LI|Die foEs is 'n minimum drempel en die sekanswet oorskat die foEs wat op VHF nodig is; die waarde moet as 'n relatiewe vergelyking tussen wolke gelees word.
 LI|Die geografiese kaders van Afrika en Suid-Amerika is benaderd; grensgevalle kan met die aanwysings van operateurs reggestel word.
 LI|Beoogde ontwikkelings: die vergelyking van twee logs van verskillende stasies in al die multisprong-ontledings, 'n al hoe fyner herkenning van spots, en die stelselmatige verifikasie van die reëls oor volledige seisoene.
+P|In 0.7.0 het die skrywer gevra om sporadiese E en tropo te kombineer: wolke uit posisie, deur 'n virtuele stasie via 'n kanaal bereik. Die program neem die kanale uit LIVETROPOVHF en kruis hulle met die wolke; die literatuur is verdeel tussen tropo + Es en dubbele sprong, daarom het die dubbele sprong voorrang en word die gemengde modus net gesoek as daar geen eerste sprong is nie. Die koppelwaardes word aangedui as keuses wat volgens waarnemings ingestel moet word.
 H1|7. Erkennings
 P|Vir die ontwikkeling van sporadiese E op 50 MHz, en in die besonder van die multi-sprongkettings, bedank die outeur Johan IW2DNI en Fabio IZ7NLJ, wat hul logs en dekoderings vir die program se interne kontroles beskikbaar gestel het (die data word nie gepubliseer nie).
 H1|8. Gevolgtrekkings

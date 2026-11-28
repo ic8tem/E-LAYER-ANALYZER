@@ -1043,3 +1043,73 @@ La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento au
 La firma dei pacchetti non è valida: l'aggiornamento non si fa.	패키지 서명이 유효하지 않습니다. 업데이트를 하지 않습니다.
 Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	내려받은 패키지가 서명과 일치하지 않습니다. 업데이트를 하지 않습니다.
 Controllo della firma...	서명 확인 중...
+# 0.7.0
+Scarico {0} profili verticali da Open-Meteo (GFS)...	Open-Meteo(GFS)에서 연직 프로파일 {0}개를 내려받는 중...
+Open-Meteo ha rifiutato per il limite di richieste: si riprova fra 10 minuti.	요청 한도 때문에 Open-Meteo가 거부했습니다: 10분 후 다시 시도합니다.
+Profili verticali in memoria: {0} (Open-Meteo, modello GFS; ultimo aggiornamento {1:HH:mm} UTC).	메모리의 연직 프로파일: {0} (Open-Meteo, GFS 모델; 마지막 갱신 {1:HH:mm} UTC).
+Open-Meteo non risponde: {0}	Open-Meteo가 응답하지 않습니다: {0}
+in formazione: possibile nei prossimi 15-30 minuti	형성 중: 앞으로 15-30분 안에 가능
+in calo: la nube si sta chiudendo	약해지는 중: 구름이 닫히는 중
+stabile: possibile adesso	안정: 지금 가능
+spot tropo {0}-{1} ({2:F0} km)	대류권 spot {0}-{1} ({2:F0} km)
+primo salto utile	쓸 수 있는 첫 홉
+doppio salto Es	Es 2홉
+tropo + Es	대류권 + Es
+Profili verticali da Open-Meteo (condotti previsti)	Open-Meteo의 연직 프로파일(예보된 덕트)
+TR+ES anche in REAL-TIME	REAL-TIME에도 TR+ES 표시
+Nube	구름
+Salto km	홉 km
+Arrivo	도착
+Priorità: primo salto utile, poi doppio salto Es, poi tropo + Es	우선순위: 쓸 수 있는 첫 홉, 다음 Es 2홉, 다음 대류권 + Es
+Quadrato del centro della nube	구름 중심의 격자
+foEs della nube (MHz), dagli spot o dalla ionosonda	구름의 foEs(MHz), spot 또는 이오노존데에서
+Lunghezza dei salti Es (km)	Es 홉의 길이(km)
+MUF del salto (MHz), legge della secante	홉의 MUF(MHz), 시컨트 법칙
+Dove arriva il segnale (quadrato)	신호가 도착하는 곳(격자)
+Abbattimento stimato della tratta (dB)	추정 경로 손실(dB)
+Punteggio dell'ipotesi	가설 점수
+Tendenza	추세
+Profili verticali: Open-Meteo (open-meteo.com, CC BY 4.0), modello GFS di NOAA; calcolo dei condotti di LIVETROPOVHF (ITU-R P.453, Kerr, ITU-R P.834). Abbattimento del salto Es: ITU-R P.534-6.	연직 프로파일: Open-Meteo(open-meteo.com, CC BY 4.0), NOAA GFS 모델; 덕트 계산은 LIVETROPOVHF(ITU-R P.453, Kerr, ITU-R P.834). Es 홉 손실: ITU-R P.534-6.
+Ipotesi dalla mia stazione	내 국에서의 가설
+Nubi Es degli ultimi 30 minuti	최근 30분의 Es 구름
+Dettagli dell'ipotesi	가설 세부 정보
+Imposta il locator della stazione (IMPOSTAZIONI o barra in alto) per le ipotesi dalla tua stazione.	내 국에서의 가설을 얻으려면 국의 로케이터를 설정하세요(설정 또는 상단 막대).
+Nessuna nube Es negli ultimi {0:F0} minuti.	최근 {0:F0}분 동안 Es 구름이 없습니다.
+{0}: nessuna ipotesi utile dalla tua stazione con le nubi attuali.	{0}: 현재 구름으로는 내 국에서 쓸 수 있는 가설이 없습니다.
+in formazione	형성 중
+stabile	안정
+Nube Es {0} su {1} (foEs {2:F1} MHz)	{1} 상공의 Es 구름 {0} (foEs {2:F1} MHz)
+primo salto utile in {0} verso {1}	{0}에서 {1} 방향으로 쓸 수 있는 첫 홉
+possibile doppio salto in {0} verso {1}	{0}에서 {1} 방향으로 가능한 2홉
+possibile tropo + Es in {0} verso {1}	{0}에서 {1} 방향으로 가능한 대류권 + Es
+Nubi: {0}, di cui {1} in formazione. Ipotesi in {2}: {3}.	구름: {0}, 그중 {1}개 형성 중. {2}의 가설: {3}.
+Profili verticali in attesa: {0}.	대기 중인 연직 프로파일: {0}.
+in calo	약해지는 중
+PREVISIONE Es - {0}: nubi in formazione e ipotesi dalla mia stazione	Es 예보 - {0}: 형성 중인 구름과 내 국에서의 가설
+foEs della nube	구름의 foEs
+▲ nube in formazione, ▼ in calo	▲ 형성 중인 구름, ▼ 약해지는 중
+verde: primo salto utile; viola: doppio salto Es	초록: 쓸 수 있는 첫 홉; 보라: Es 2홉
+tratteggio azzurro: tratta in condotto (tropo + Es)	하늘색 점선: 덕트 구간(대류권 + Es)
+giallo: arrivo sulla terra; anello grigio: arrivo in mare	노랑: 육지 도착; 회색 고리: 바다 도착
+Nessuna ipotesi. La linguetta cerca, dalla tua stazione e nell'ordine: primo salto utile, doppio salto Es, tropo + Es (solo se il primo salto non c'è).	가설이 없습니다. 이 탭은 내 국에서 다음 순서로 찾습니다: 쓸 수 있는 첫 홉, Es 2홉, 대류권 + Es(첫 홉이 없을 때만).
+Una nube è «in formazione» quando la foEs degli ultimi 10 minuti supera quella dei 20 minuti prima, o quando è nata negli ultimi 10 minuti con almeno due spot.	최근 10분의 foEs가 그 전 20분보다 높거나, 최근 10분 안에 spot 2개 이상과 함께 나타났을 때 구름을 "형성 중"으로 봅니다.
+Nube {0}: foEs {1:F1} MHz, {2}, {3} spot	구름 {0}: foEs {1:F1} MHz, {2}, spot {3}개
+ionosonda {0} {1:F1} MHz	이오노존데 {0} {1:F1} MHz
+Quando: {0}.	시기: {0}.
+Tratta in condotto dalla stazione ad A′ {0}: {1:F0} km ({2}).	국에서 A′ {0}까지의 덕트 구간: {1:F0} km ({2}).
+Il primo salto diretto non c'è: la nube è fuori dalla geometria del salto dalla tua stazione, ma è a metà di un salto di {0:F0} km da A′.	직접 첫 홉은 없습니다: 구름이 내 국의 홉 기하 밖에 있지만, A′에서 {0:F0} km 홉의 가운데에 있습니다.
+Salto Es di {0:F0} km, azimut {1:F0}°, elevazione {2:F2}°, MUF {3:F1} MHz.	Es 홉 {0:F0} km, 방위각 {1:F0}°, 앙각 {2:F2}°, MUF {3:F1} MHz.
+Secondo salto di {0:F0} km sulla nube {1} (foEs {2:F1} MHz, MUF {3:F1} MHz), arrivo a {4}{5}.	구름 {1}을 거친 두 번째 홉 {0:F0} km (foEs {2:F1} MHz, MUF {3:F1} MHz), 도착 {4}{5}.
+in mare	바다
+Arrivo del primo salto a {0}{1}.	첫 홉의 도착 {0}{1}.
+Accoppiamento nel condotto: elevazione {0:F2}° contro angolo critico {1:F2}° (ITU-R P.834), perdita di accoppiamento {2:F1} dB; condotto {3}.	덕트로의 결합: 앙각 {0:F2}° 대 임계각 {1:F2}° (ITU-R P.834), 결합 손실 {2:F1} dB; 덕트 {3}.
+che intrappola la banda	밴드를 가두는
+«morbido» (Kerr)	"부드러운"(Kerr)
+Dopo l'arrivo il segnale può continuare in condotto per {0:F0} km fino a {1} ({2}).	도착 후 신호는 덕트 안에서 {0:F0} km 더 나아가 {1}까지 갈 수 있습니다({2}).
+Abbattimento stimato: {0:F0} dB (ITU-R P.534-6 per il salto Es{1}).	추정 손실: {0:F0} dB (Es 홉은 ITU-R P.534-6{1}).
+più la tratta in condotto e l'accoppiamento	덕트 구간과 결합 포함
+In 144 MHz le aperture Es sono rare (IK3XTV): serve una nube iperdensa.	144 MHz에서 Es 개방은 드뭅니다(IK3XTV): 초고밀도 구름이 필요합니다.
+Priorità: il doppio salto Es viene prima del tropo + Es (fonte [88]); il tropo + Es si cerca solo se il primo salto utile non c'è. Valori di accoppiamento e di attenuazione nel condotto: scelte di partenza del programma, da tarare.	우선순위: Es 2홉이 대류권 + Es보다 먼저입니다(출처 [88]); 대류권 + Es는 쓸 수 있는 첫 홉이 없을 때만 찾습니다. 결합 및 덕트 감쇠 값: 프로그램의 초기 선택으로, 조정이 필요합니다.
+144 MHz oltre il singolo salto: {0} spot TR+ES (nube ricollocata, condotto dall'altra estremità).	단일 홉을 넘는 144 MHz: TR+ES spot {0}개 (구름 재배치, 반대쪽 끝에서 덕트).
+TR+ES: salto Es (arancio) con la nube ricollocata e tratta in condotto (tratteggio azzurro)	TR+ES: 재배치된 구름이 있는 Es 홉(주황)과 덕트 구간(하늘색 점선)
+PREVISIONE	예보

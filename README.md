@@ -33,6 +33,7 @@ Non esistono versioni per Linux i686 (PC a 32 bit) e OpenBSD, perché .NET non e
 | BENCHMARK Es | log ADIF intero (anche di altre stazioni): QSO per giornata e ora, skip per settori, foEs, verifica del multi-salto, spostamento delle nubi |
 | IONOSONDE | foEs, foF2 e MUF(D) in diretta dalle ionosonde GIRO (ogni 15 minuti), grafico di 24 ore, MUF dell'E-sporadico a 1000-2400 km con le bande che si aprono, confronto con la foEs ricavata dagli spot |
 | NUBI Es NEL TEMPO | nubi Es passo per passo (5-15 minuti) su celle di 1-4°, foEs minima e NmE con il metodo di Chartier 2022, da spot della sessione, log ADIF o spot CSV |
+| PREVISIONE | nubi Es in formazione (spot degli ultimi 30 minuti e ionosonde GIRO) e ipotesi dal proprio QTH, 50 e 144 MHz separati: primo salto utile, doppio salto Es, poi tropo + Es con stazione virtuale in condotto (modulo tropo di LIVETROPOVHF, profili Open-Meteo, angolo critico ITU-R P.834); TR+ES anche in REAL-TIME |
 | Catene multi-salto 50 MHz | dentro SPORADIC-E, Precursori multi-salto: primo e ultimo salto corto con MUF intorno ai 50 MHz e salti centrali (condizioni di IC8TEM), catene dal QTH, corridoi in tutto il mondo e «cerca la nube» (solo dove ci sono stazioni), proiezione del proprio segnale (punti rosa), avviso in alto, verifica nel BENCHMARK 50 MHz con gli spot CSV; doppio salto uguale fino a circa 4700 km (salti «2 =», ITU-R P.534-6) |
 | F.A.I. | Scatter trail degli scatter point per una coppia di stazioni e curve di iso-riflessione (IGRF-14) |
 | METEOR SCATTER | YA-MS completo (ultima versione) |

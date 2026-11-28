@@ -87,3 +87,7 @@ Sa sub-tab na **Mga paunang tanda ng multi-hop**, hinahanap ng programa ang mga 
 - **Hula ng TEP** (asul, mula sa bersiyon 0.6.5): indeks na 0-100 patungo sa mga sona sa kabila ng magnetic equator = panahon × SFI × Kp (eTEP lamang) × lokal na oras × foF2 ng mga ionosonde ng GIRO; may timbang ang SFI ngunit hindi nagpapawala, dahil sa solar minimum nagiging bihira ang TEP ngunit hindi nawawala.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PAGTATAYA (mula 0.7.0)
+
+Kinikilala ng sub-tab na **PAGTATAYA** ang mga nabubuong Es na ulap (mga spot sa huling 30 minuto at mga ionosonde ng GIRO) at sinusuri mula sa iyong istasyon, hiwalay ang 50 at 144 MHz: magagamit na unang hop, saka dobleng Es hop, saka — kung walang unang hop lamang — tropo + Es na may virtual na istasyong A′ na naaabot sa duct (tropo module ng LIVETROPOVHF, mga profile ng Open-Meteo, kritikal na anggulo ng ITU-R P.834). Sa REAL-TIME, ang mga 144 MHz na spot sa pagitan ng 2400 at 3400 km ay maaaring maging **TR+ES**, kasama ang inilipat na ulap.

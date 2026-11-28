@@ -1,5 +1,5 @@
 TITLE|Manual de uso de E-LAYER ANALYZER
-SUB|Manual de uso detallado - a cargo de Costantino IC8TEM - versión 0.6.7, noviembre de 2026. Los números entre corchetes remiten a la pestaña FUENTES; las fórmulas y las opciones de cálculo están en la pestaña SÍNTESIS DE LAS OPCIONES DE CÁLCULO.
+SUB|Manual de uso detallado - a cargo de Costantino IC8TEM - versión 0.7.0, noviembre de 2026. Los números entre corchetes remiten a la pestaña FUENTES; las fórmulas y las opciones de cálculo están en la pestaña SÍNTESIS DE LAS OPCIONES DE CÁLCULO.
 H1|1. Antes de empezar
 H2|1.1 Qué hace el programa
 P|E-LAYER ANALYZER reúne en un solo programa las herramientas para estudiar los modos de propagación VHF que pasan por la capa E de la ionosfera: la esporádica E, también multisalto y extracontinental, el F.A.I. (irregularidades alineadas con el campo magnético), el meteor scatter, con el programa YA-MS integrado, y la aurora radio. Trabaja con los spots de los DX clusters en tiempo real y con los logs ADIF, y muestra cada resultado en un mapa que ocupa dos tercios de la ventana, con los datos y los cálculos en el tercio derecho.
@@ -149,6 +149,12 @@ LI|Barra del tiempo: ⏮ ◀ Iniciar/Detener ▶ ⏭ y el cursor; al abrir se pa
 LI|Tabla de las celdas: Celda (esquina suroeste y locator del centro), foEs≥, NmE≥ (densidad electrónica mínima), Enlaces y Bandas. Clic en una celda (tabla o mapa): resalta sus enlaces y los indicativos.
 LI|Gráfico: foEs mínima más alta (línea amarilla) y número de celdas (barras) para cada paso, con la línea del paso mostrado. Debajo, el resumen con el valor más alto de la fuente.
 P|El valor es un límite inferior: la nube puede ser más densa de lo que muestran los enlaces, y una celda vacía solo quiere decir que no hay ningún enlace.
+H1|5d. PREVISIÓN (subpestaña de SPORADIC-E)
+P|La subpestaña PREVISIÓN reconoce las nubes Es en formación y dice qué pueden dar a su estación: primer salto útil, doble salto Es o, solo si no hay primer salto, tropo + Es.
+LI|Controles: Banda (50 o 144 MHz, siempre por separado), Altura Es km, Actualizar ahora; Perfiles verticales de Open-Meteo activa los conductos previstos; TR+ES también en REAL-TIME lleva el modelo mixto al mapa REAL-TIME.
+LI|Arriba la alerta con la primera hipótesis; debajo la tabla de hipótesis (Hipótesis, Nube, foEs, Salto km, MUF, Llegada, dB, %) y la de las nubes de los últimos 30 minutos con su tendencia (▲ en formación, ● estable, ▼ en descenso).
+LI|Mapa: cuadrículas de las nubes con el color de la foEs; en verde el primer salto, en violeta el doble salto, en discontinua azul claro el tramo en conducto con la estación virtual A′; llegada amarilla sobre tierra, anillo gris en el mar. Clic en un trayecto o una nube para los detalles.
+P|Los detalles indican MUF, elevación, ángulo crítico del conducto, pérdida de acoplamiento y atenuación en dB. En REAL-TIME los spots TR+ES aparecen con la nube reubicada y la etiqueta TR+ES.
 H1|6. F.A.I.
 H2|6.1 Las dos vistas
 P|La pestaña F.A.I. estudia el scatter en irregularidades alineadas con el campo magnético (fuente principal [1], [2]). La vista Scatter trail (pareja A-B) calcula, para dos estaciones, el lugar de los scatter points posibles, coloreado según la desviación respecto a la condición de reflexión, propone el scatter point más probable y dibuja arriba a la derecha el recuadro de QTF y elevaciones de ambas estaciones (rojo = A, verde = B). La vista Isorreflexión (punto) dibuja, para un punto de reflexión elegido, las líneas de isorreflexión como AuroReflex y SE-PROP de K9SE: franjas de color en los esquemas oscuros, líneas gruesas en los esquemas claros.

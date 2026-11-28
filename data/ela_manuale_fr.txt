@@ -1,5 +1,5 @@
 TITLE|Manuel d'utilisation de E-LAYER ANALYZER
-SUB|Manuel d'utilisation détaillé - par Costantino IC8TEM - version 0.6.7, novembre 2026. Les numéros entre crochets renvoient à l'onglet SOURCES ; les formules et les choix de calcul se trouvent dans l'onglet SYNTHÈSE DES CHOIX DE CALCUL.
+SUB|Manuel d'utilisation détaillé - par Costantino IC8TEM - version 0.7.0, novembre 2026. Les numéros entre crochets renvoient à l'onglet SOURCES ; les formules et les choix de calcul se trouvent dans l'onglet SYNTHÈSE DES CHOIX DE CALCUL.
 H1|1. Avant de commencer
 H2|1.1 Ce que fait le programme
 P|E-LAYER ANALYZER réunit en un seul programme les outils pour étudier les modes de propagation VHF qui passent par la couche E de l'ionosphère : l'E sporadique, y compris multi-bond et extracontinental, le F.A.I. (irrégularités alignées sur le champ magnétique), le meteor scatter, avec le programme YA-MS intégré, et l'aurore radio. Il travaille sur les spots des DX clusters en temps réel et sur les logs ADIF, et affiche chaque résultat sur une carte qui occupe les deux tiers de la fenêtre, les données et les calculs se trouvant dans le tiers droit.
@@ -149,6 +149,12 @@ LI|Barre du temps : ⏮ ◀ Démarrer/Arrêter ▶ ⏭ et le curseur ; à l'ouve
 LI|Tableau des cellules : Cellule (coin sud-ouest et locator du centre), foEs≥, NmE≥ (densité électronique minimale), Liaisons et Bandes. Clic sur une cellule (tableau ou carte) : ses liaisons et ses indicatifs sont mis en évidence.
 LI|Graphique : foEs minimale la plus élevée (ligne jaune) et nombre de cellules (barres) pour chaque pas, avec la ligne du pas affiché. En dessous, la synthèse avec la valeur la plus élevée de la source.
 P|La valeur est une limite inférieure : le nuage peut être plus dense que ne le montrent les liaisons, et une cellule vide signifie seulement qu'il n'y a aucune liaison.
+H1|5d. PRÉVISION (sous-onglet de SPORADIC-E)
+P|Le sous-onglet PRÉVISION reconnaît les nuages Es en formation et dit ce qu'ils peuvent donner à votre station : premier bond utile, double bond Es ou, seulement s'il n'y a pas de premier bond, tropo + Es.
+LI|Commandes : Bande (50 ou 144 MHz, toujours séparées), Altitude Es km, Mettre à jour maintenant ; Profils verticaux depuis Open-Meteo active les conduits prévus ; TR+ES aussi en REAL-TIME apporte le modèle mixte sur la carte REAL-TIME.
+LI|En haut l'alerte avec la première hypothèse ; en dessous le tableau des hypothèses (Hypothèse, Nuage, foEs, Bond km, MUF, Arrivée, dB, %) et celui des nuages des 30 dernières minutes avec leur tendance (▲ en formation, ● stable, ▼ en déclin).
+LI|Carte : carrés des nuages à la couleur de la foEs ; en vert le premier bond, en violet le double bond, en tirets bleu clair le trajet en conduit avec la station virtuelle A′ ; arrivée jaune sur terre, anneau gris en mer. Cliquez sur un trajet ou un nuage pour les détails.
+P|Les détails donnent MUF, élévation, angle critique du conduit, perte de couplage et affaiblissement en dB. En REAL-TIME, les spots TR+ES apparaissent avec le nuage déplacé et l'étiquette TR+ES.
 H1|6. F.A.I.
 H2|6.1 Les deux vues
 P|L'onglet F.A.I. étudie le scatter sur les irrégularités alignées sur le champ magnétique (source principale [1], [2]). La vue Scatter trail (paire A-B) calcule, pour deux stations, le lieu des scatter points possibles, coloré selon l'écart par rapport à la condition de réflexion, propose le scatter point le plus probable et dessine en haut à droite le cadre des QTF et des élévations des deux stations (rouge = A, vert = B). La vue Iso-réflexion (point) dessine, pour un point de réflexion choisi, les lignes d'iso-réflexion comme AuroReflex et SE-PROP de K9SE : bandes colorées dans les jeux sombres, lignes épaisses dans les jeux clairs.

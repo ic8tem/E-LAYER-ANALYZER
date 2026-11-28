@@ -87,3 +87,7 @@ I underfliken **Multihoppförebud** söker programmet efter kedjor av multihopp 
 - **TEP-prognos** (blå, från version 0.6.5): index 0-100 mot zonerna på andra sidan den magnetiska ekvatorn = årstid × SFI × Kp (bara eTEP) × lokal tid × foF2 från GIRO-jonosonderna; SFI väger men nollställer inte, eftersom TEP vid solminimum blir sällsynt men inte försvinner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOS (från 0.7.0)
+
+Underfliken **PROGNOS** känner igen Es-moln som bildas (spots de senaste 30 minuterna och GIRO-jonosonder) och kontrollerar från din station, med 50 och 144 MHz åtskilda: användbart första hopp, sedan Es-dubbelhopp, sedan – bara om det inte finns något första hopp – tropo + Es, med en virtuell station A′ som nås genom en dukt (tropomodul från LIVETROPOVHF, Open-Meteo-profiler, kritisk vinkel enligt ITU-R P.834). I REAL-TIME kan 144 MHz-spots mellan 2400 och 3400 km bli **TR+ES**, med det flyttade molnet.

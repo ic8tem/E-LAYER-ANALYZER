@@ -87,3 +87,7 @@
 - **TEP の予測** (青、バージョン 0.6.5 から): 磁気赤道の向こう側のゾーンに向けた 0-100 の指数 = 季節 × SFI × Kp (eTEP のみ) × 地方時 × GIRO イオノゾンデの foF2。SFI は重みとして効くがゼロにはしない。太陽活動の極小期に TEP はまれになるが消えないからである。
 
 ![回廊](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## 予報（0.7.0 から）
+
+サブタブ **予報** は形成中の Es 雲（直近 30 分の spot と GIRO イオノゾンデ）を認識し、自局から 50 MHz と 144 MHz を分けて確認します：使える第1ホップ、次に Es ダブルホップ、次に——第1ホップがない場合に限り——ダクトで到達する仮想局 A′ を介した対流圏 + Es（LIVETROPOVHF の対流圏モジュール、Open-Meteo プロファイル、ITU-R P.834 の臨界角）。REAL-TIME では 2400-3400 km の 144 MHz spot が、再配置した雲とともに **TR+ES** になることがあります。

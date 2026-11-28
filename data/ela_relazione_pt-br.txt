@@ -1,5 +1,5 @@
 TITLE|Relatório técnico sobre o E-LAYER ANALYZER
-SUB|As escolhas que levaram à realização do programa - por Costantino IC8TEM - versão 0.6.7, novembro de 2026. Os números entre colchetes remetem à aba FONTES.
+SUB|As escolhas que levaram à realização do programa - por Costantino IC8TEM - versão 0.7.0, novembro de 2026. Os números entre colchetes remetem à aba FONTES.
 H1|1. Introdução
 P|O E-LAYER ANALYZER nasce de uma necessidade precisa do operador VHF: dispor, em um único instrumento, de tudo o que é necessário para interpretar os modos de propagação que envolvem a camada E da ionosfera. Até hoje, a esporádica E, o F.A.I., o meteor scatter e a aurora rádio estudavam-se com programas diferentes, muitas vezes concebidos para um só sistema operacional, às vezes já sem manutenção, cada um com o seu próprio modelo geométrico e as suas próprias convenções. Este relatório expõe as razões das escolhas feitas, distinguindo o que provém da literatura, o que provém da experiência em banda do autor e o que constitui uma escolha do programa, a ser confirmada com o uso.
 H2|1.1 Objetivos
@@ -68,6 +68,7 @@ LI|As estações são colocadas no centro do quadrado do locator: com 4 caracter
 LI|A foEs é um limiar mínimo e a lei da secante superestima a foEs necessária em VHF; o valor deve ser lido como comparação relativa entre nuvens.
 LI|Os retângulos geográficos da África e da América do Sul são aproximados; os casos de fronteira podem ser corrigidos com as indicações dos operadores.
 LI|Desenvolvimentos previstos: a comparação de dois logs de estações diferentes em todas as análises do multi-salto, um reconhecimento dos spots cada vez mais fino e a verificação sistemática das regras sobre épocas inteiras.
+P|Na 0.7.0 o autor pediu para juntar a esporádica E e a tropo: nuvens fora de posição, alcançadas por uma estação virtual em duto. O programa pega os dutos do LIVETROPOVHF e os cruza com as nuvens; a literatura se divide entre tropo + Es e salto duplo, por isso o salto duplo tem prioridade e o modo misto só é procurado quando não há primeiro salto. Os valores de acoplamento são declarados como escolhas a ajustar com as observações.
 H1|7. Agradecimentos
 P|Pelo desenvolvimento da esporádica E em 50 MHz, e em particular das cadeias multi-salto, o autor agradece a Johan IW2DNI e a Fabio IZ7NLJ, que disponibilizaram os seus logs e as suas decodificações para as verificações internas do programa (os dados não são publicados).
 H1|8. Conclusões

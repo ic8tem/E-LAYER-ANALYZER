@@ -6,12 +6,12 @@
 //    Previsione dell'Es iperdenso di IK3XTV [51]: le aperture in 144 MHz sono rare (circa il 5% delle aperture).
 // 2) Ipotesi dal QTH delle impostazioni, 50 e 144 MHz trattati separatamente (regola dell'autore del 20/11/2026), in ordine di
 //    priorita': a) primo salto utile (singolo salto); b) doppio salto E-sporadico, se dove atterra il primo salto c'e' un'altra
-//    nube che regge la banda (EA6VQ [97]: EA3DXU-RN6BN, 2914 km, due nubi; G0ISW [65]: doppio salto anche in 144 MHz);
+//    nube che regge la banda (EA6VQ [89]: EA3DXU-RN6BN, 2914 km, due nubi; G0ISW [65]: doppio salto anche in 144 MHz);
 //    c) solo se il primo salto non c'e': tropo + E-sporadico, con una "stazione virtuale" A' raggiunta in condotto
-//    (EI7GL [41][98], EA6VQ [97]: EA8-I2 oltre 2900 km). La fonte [96] e' critica sul tropo+Es e preferisce il doppio
+//    (EI7GL [41][90], EA6VQ [89]: EA8-I2 oltre 2900 km). La fonte [88] e' critica sul tropo+Es e preferisce il doppio
 //    salto: per questo il doppio salto viene prima.
 // 3) Accoppiamento nel condotto: il raggio riflesso dall'Es arriva su A' con l'elevazione del salto; resta intrappolato solo
-//    se l'elevazione non supera l'angolo critico di ITU-R P.834 [94] (i modi intrappolati stanno sotto 1 grado [95]).
+//    se l'elevazione non supera l'angolo critico di ITU-R P.834 [86] (i modi intrappolati stanno sotto 1 grado [87]).
 //    Oltre l'angolo critico: perdita di accoppiamento 20 log10(e/alfa) dB, fino a 15 dB l'ipotesi resta (scelta del programma).
 // 4) Abbattimento: salto Es con ITU-R P.534-6 [76] (spazio libero sul percorso obliquo, eq. 5, e attenuazione ionosferica
 //    Gamma1, eq. 3); tratta in condotto: spazio libero sulla lunghezza totale piu' 0,05 dB/km se il condotto intrappola la
@@ -304,7 +304,7 @@ namespace ELA
             return best;
         }
 
-        // dopo l'atterraggio del primo salto il segnale puo' continuare in condotto (es. sul mare, EI7GL [98]: Es fino alla costa
+        // dopo l'atterraggio del primo salto il segnale puo' continuare in condotto (es. sul mare, EI7GL [90]: Es fino alla costa
         // turca, poi condotto fino a Israele): si cerca il primo tratto di 100-800 km con condotto e accoppiamento accettabile
         static void FarEndTropo(EsHypothesis h, double f, double H, List<Spot> tr, ref int waiting)
         {
@@ -334,7 +334,7 @@ namespace ELA
         {
             if (s.Band != "2m" || !s.HasBoth || s.DistanceKm <= TrEsMinKm || s.DistanceKm > TrEsMaxKm) return null;
             double D = s.DistanceKm, hMax = MaxHopKm(H), f = s.FreqMHz;
-            // doppio salto con due nubi note: ha la precedenza (fonte [96])
+            // doppio salto con due nubi note: ha la precedenza (fonte [88])
             List<EsCloud> on = clouds.Where(c => c.BestFoEs > 0 && OffTrackKm(s, c) <= LineKm).ToList();
             foreach (EsCloud a in on)
                 foreach (EsCloud b in on)

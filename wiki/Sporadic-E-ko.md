@@ -87,3 +87,7 @@
 - **TEP 예측** (파랑, 버전 0.6.5부터): 자기 적도 너머 구역을 향한 0-100 지수 = 계절 × SFI × Kp (eTEP만) × 지방시 × GIRO 이오노존데의 foF2. SFI는 가중치로 작용하지만 0으로 만들지는 않는다. 태양 활동 극소기에 TEP는 드물어지지만 사라지지 않기 때문이다.
 
 ![회랑](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## 예보(0.7.0부터)
+
+하위 탭 **예보**는 형성 중인 Es 구름(최근 30분의 spot과 GIRO 이오노존데)을 인식하고, 내 국에서 50 MHz와 144 MHz를 나누어 확인합니다: 쓸 수 있는 첫 홉, 다음 Es 2홉, 다음 — 첫 홉이 없을 때만 — 덕트로 닿는 가상 국 A′를 거친 대류권 + Es(LIVETROPOVHF 대류권 모듈, Open-Meteo 프로파일, ITU-R P.834 임계각). REAL-TIME에서는 2400-3400 km의 144 MHz spot이 재배치된 구름과 함께 **TR+ES**가 될 수 있습니다.

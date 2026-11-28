@@ -87,3 +87,7 @@ W podzakładce **Prekursory wieloskoku** program szuka łańcuchów wieloskoku n
 - **Prognoza TEP** (niebieska, od wersji 0.6.5): indeks 0-100 w kierunku stref za równikiem magnetycznym = pora roku × SFI × Kp (tylko eTEP) × czas lokalny × foF2 jonosond GIRO; SFI waży, ale nie zeruje, bo w minimum słonecznym TEP staje się rzadki, ale nie znika.
 
 ![Korytarz](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOZA (od 0.7.0)
+
+Podzakładka **PROGNOZA** rozpoznaje tworzące się obłoki Es (spoty z ostatnich 30 minut i jonosondy GIRO) i sprawdza z twojej stacji, z 50 i 144 MHz osobno: użyteczny pierwszy skok, potem podwójny skok Es, potem – tylko gdy nie ma pierwszego skoku – tropo + Es z wirtualną stacją A′ osiąganą duktem (moduł tropo z LIVETROPOVHF, profile Open-Meteo, kąt krytyczny ITU-R P.834). W REAL-TIME spoty 144 MHz między 2400 a 3400 km mogą stać się **TR+ES**, z przesuniętym obłokiem.

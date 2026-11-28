@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER kullanım kılavuzu
-SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.6.7, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
+SUB|Ayrıntılı kullanım kılavuzu - hazırlayan: Costantino IC8TEM - sürüm 0.7.0, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar; formüller ve hesaplama seçimleri HESAPLAMA SEÇİMLERİNİN ÖZETİ sekmesindedir.
 H1|1. Başlamadan önce
 H2|1.1 Program ne yapar
 P|E-LAYER ANALYZER, iyonosferin E katmanından geçen VHF yayılım modlarını incelemek için gereken araçları tek bir programda toplar: çok atlamalı ve kıtalararası olanlar dahil sporadik E, F.A.I. (manyetik alana hizalı düzensizlikler), entegre YA-MS programıyla meteor scatter ve radyo aurorası. Gerçek zamanlı DX cluster spot'ları ve ADIF logları üzerinde çalışır ve her sonucu pencerenin üçte ikisini kaplayan bir haritada gösterir; veriler ve hesaplar sağdaki üçte birlik bölümdedir.
@@ -149,6 +149,12 @@ LI|Zaman çubuğu: ⏮ ◀ Başlat/Durdur ▶ ⏭ ve kaydırıcı; açılışta 
 LI|Hücre tablosu: Hücre (güneybatı köşesi ve merkezin lokatörü), foEs≥, NmE≥ (en küçük elektron yoğunluğu), Bağlantılar ve Bantlar. Bir hücreye tıklamak (tabloda ya da haritada) onun bağlantılarını ve çağrı işaretlerini vurgular.
 LI|Grafik: her adım için en yüksek en küçük foEs (sarı çizgi) ve hücre sayısı (çubuklar), gösterilen adımın çizgisiyle. Altında, kaynağın en yüksek değeriyle özet.
 P|Değer bir alt sınırdır: bulut, bağlantıların gösterdiğinden daha yoğun olabilir; boş bir hücre yalnızca bağlantı olmadığı anlamına gelir.
+H1|5d. TAHMİN (SPORADIC-E alt sekmesi)
+P|TAHMİN alt sekmesi oluşan Es bulutlarını tanır ve istasyonunuza neler verebileceklerini söyler: kullanılabilir ilk atlama, çift Es atlaması ya da, yalnızca ilk atlama yoksa, tropo + Es.
+LI|Denetimler: Bant (50 veya 144 MHz, her zaman ayrı), Es yüksekliği km, Şimdi güncelle; Open-Meteo'dan düşey profiller öngörülen kanalları açar; TR+ES REAL-TIME'da da karma modeli REAL-TIME haritasına taşır.
+LI|Üstte ilk hipotezle uyarı; altında hipotezler tablosu (Hipotez, Bulut, foEs, Atlama km, MUF, Varış, dB, %) ve son 30 dakikanın bulutları tablosu, eğilimiyle (▲ oluşuyor, ● kararlı, ▼ zayıflıyor).
+LI|Harita: foEs renginde bulut kareleri; yeşil ilk atlama, mor çift atlama, açık mavi kesikli sanal istasyon A′ ile kanal içi bölüm; sarı karada varış, gri halka denizde. Ayrıntılar için bir yola veya buluta tıklayın.
+P|Ayrıntılar MUF, yükseliş açısı, kanalın kritik açısı, bağlanma kaybı ve dB cinsinden zayıflamayı verir. REAL-TIME'da TR+ES spotları yeniden konumlanmış bulut ve TR+ES etiketiyle görünür.
 H1|6. F.A.I.
 H2|6.1 İki görünüm
 P|F.A.I. sekmesi manyetik alana hizalı düzensizliklerden saçılmayı inceler (ana kaynak [1], [2]). Scatter trail (A-B çifti) görünümü iki istasyon için olası scatter point'lerin yerini hesaplar, bunu yansıma koşulundan sapmaya göre renklendirir, en olası scatter point'i önerir ve sağ üstte iki istasyonun QTF ve elevasyonlarını gösteren kutuyu çizer (kırmızı = A, yeşil = B). İzo-yansıma (nokta) görünümü seçilen bir yansıma noktası için AuroReflex ve K9SE'nin SE-PROP programındaki gibi izo-yansıma çizgilerini çizer: koyu şemalarda renkli kuşaklar, açık şemalarda kalın çizgiler.

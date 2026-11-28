@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZERi kasutusjuhend
-SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.6.7, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
+SUB|Põhjalik kasutusjuhend - koostanud Costantino IC8TEM - versioon 0.7.0, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD; valemid ja arvutusvalikud on sakil ARVUTUSVALIKUTE KOKKUVÕTE.
 H1|1. Enne alustamist
 H2|1.1 Mida programm teeb
 P|E-LAYER ANALYZER koondab ühte programmi tööriistad nende VHF leviviiside uurimiseks, mis kulgevad läbi ionosfääri E-kihi: sporaadiline E, ka mitmehüppeline ja mandritevaheline, F.A.I. (magnetväljaga joondunud ebaühtlused), meteoorhajumine koos integreeritud programmiga YA-MS ning raadioaurora. Programm töötab DX-klastrite reaalajas spotide ja ADIF-logidega ning näitab iga tulemust kaardil, mis võtab enda alla kaks kolmandikku aknast; andmed ja arvutused on paremas kolmandikus.
@@ -149,6 +149,12 @@ LI|Ajariba: ⏮ ◀ Käivita/Peata ▶ ⏭ ja liugur; avamisel alustatakse sammu
 LI|Lahtrite tabel: Lahter (edelanurk ja keskpunkti lokaator), foEs≥, NmE≥ (minimaalne elektrontihedus), Sided ja Sagedusalad. Klõps lahtril (tabelis või kaardil) tõstab esile selle sided ja kutsungid.
 LI|Graafik: kõrgeim minimaalne foEs (kollane joon) ja lahtrite arv (tulbad) iga sammu kohta koos näidatud sammu joonega. Selle all kokkuvõte allika kõrgeima väärtusega.
 P|Väärtus on alampiir: pilv võib olla tihedam, kui sided näitavad, ning tühi lahter tähendab ainult seda, et sidesid pole.
+H1|5d. PROGNOOS (SPORADIC-E alamvaheleht)
+P|Alamvaheleht PROGNOOS tunneb ära tekkivad Es-pilved ja ütleb, mida need sinu jaamale anda võivad: kasutatav esimene hüpe, Es-topelthüpe või, ainult kui esimest hüpet pole, tropo + Es.
+LI|Juhtnupud: Sagedusala (50 või 144 MHz, alati eraldi), Es-kõrgus km, Uuenda kohe; Open-Meteo vertikaalprofiilid lülitab sisse prognoositud kanalid; TR+ES ka REAL-TIME vaates toob segamudeli REAL-TIME kaardile.
+LI|Üleval hoiatus esimese hüpoteesiga; all hüpoteeside tabel (Hüpotees, Pilv, foEs, Hüpe km, MUF, Saabumine, dB, %) ja viimase 30 minuti pilvede tabel koos suunaga (▲ tekkimas, ● stabiilne, ▼ nõrgenemas).
+LI|Kaart: pilvede ruudud foEs-i värvis; roheline esimene hüpe, violetne topelthüpe, helesinine katkendjoon kanalilõik koos virtuaalse jaamaga A′; kollane saabumine maismaale, hall rõngas merele. Klõpsa teekonnal või pilvel üksikasjade nägemiseks.
+P|Üksikasjad näitavad MUF-i, kõrgusnurka, kanali kriitilist nurka, sidestuskadu ja sumbuvust dB-des. REAL-TIME vaates kuvatakse TR+ES-spotid ümberpaigutatud pilvega ja sildiga TR+ES.
 H1|6. F.A.I.
 H2|6.1 Kaks vaadet
 P|Sakk F.A.I. uurib magnetväljaga joondunud ebaühtlustelt toimuvat hajumist (peamised allikad [1], [2]). Vaade Scatter trail (paar A-B) arvutab kahe jaama jaoks võimalike hajumispunktide asukoha, värvituna hälbe järgi peegeldustingimusest, pakub välja tõenäolisima hajumispunkti ja joonistab üles paremale mõlema jaama QTF-ide ja elevatsioonide kasti (punane = A, roheline = B). Vaade Isopeegeldus (punkt) joonistab valitud peegelduspunkti jaoks isopeegelduse jooned nagu AuroReflex ja K9SE SE-PROP: värvilised ribad tumedates skeemides, paksud jooned heledates skeemides.

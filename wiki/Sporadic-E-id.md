@@ -87,3 +87,7 @@ Di subtab **Prekursor multi-lompatan** program mencari rantai multi-lompatan di 
 - **Prakiraan TEP** (biru, sejak versi 0.6.5): indeks 0-100 ke arah zona di seberang ekuator magnetik = musim × SFI × Kp (hanya eTEP) × waktu setempat × foF2 ionosonde GIRO; SFI ikut menimbang tetapi tidak menolkan, karena saat minimum matahari TEP menjadi jarang tetapi tidak hilang.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PRAKIRAAN (sejak 0.7.0)
+
+Subtab **PRAKIRAAN** mengenali awan Es yang sedang terbentuk (spot 30 menit terakhir dan ionosonde GIRO) dan memeriksa dari stasiun Anda, dengan 50 dan 144 MHz terpisah: lompatan pertama yang berguna, lalu lompatan ganda Es, lalu — hanya bila tidak ada lompatan pertama — tropo + Es dengan stasiun virtual A′ yang dicapai lewat saluran (modul tropo LIVETROPOVHF, profil Open-Meteo, sudut kritis ITU-R P.834). Di REAL-TIME spot 144 MHz antara 2400 dan 3400 km dapat menjadi **TR+ES**, dengan awan yang dipindahkan.

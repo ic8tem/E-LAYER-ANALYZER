@@ -87,3 +87,7 @@
 - **TEP 預測**（藍色，自 0.6.5 版起）：指向磁赤道另一側各區的 0-100 指數 = 季節 × SFI × Kp（僅 eTEP）× 地方時 × GIRO 探測儀的 foF2。SFI 作為權重起作用但不會歸零，因為太陽活動極小期 TEP 變得稀少但不會消失。
 
 ![走廊](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## 預報（自 0.7.0 起）
+
+子分頁 **預報** 辨識正在形成的 Es 雲（最近 30 分鐘的 spot 和 GIRO 電離層探測儀），並從你的電台出發、50 與 144 MHz 分開檢查：可用的第一跳，然後是 Es 雙跳，然後——僅在沒有第一跳時——經波導到達虛擬電台 A′ 的對流層 + Es（LIVETROPOVHF 對流層模組、Open-Meteo 剖面、ITU-R P.834 臨界角）。在 REAL-TIME 中，2400 至 3400 km 的 144 MHz spot 可判為 **TR+ES**，並顯示重新定位的雲。

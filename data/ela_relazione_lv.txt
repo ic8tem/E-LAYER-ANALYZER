@@ -1,5 +1,5 @@
 TITLE|Tehniskais ziņojums par E-LAYER ANALYZER
-SUB|Izvēles, kas noveda pie programmas izstrādes - sagatavoja Costantino IC8TEM - versija 0.6.7, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI.
+SUB|Izvēles, kas noveda pie programmas izstrādes - sagatavoja Costantino IC8TEM - versija 0.7.0, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI.
 H1|1. Ievads
 P|E-LAYER ANALYZER radās no skaidras VHF operatora vajadzības: vienā rīkā iegūt visu, kas nepieciešams, lai interpretētu izplatīšanās veidus, kuros piedalās jonosfēras E slānis. Līdz šim sporādiskais E, F.A.I., meteor scatter un radio aurora tika pētīti ar dažādām programmām, kas bieži bija veidotas vienai operētājsistēmai, dažkārt vairs netika uzturētas, un katrai bija savs ģeometriskais modelis un savas konvencijas. Šis ziņojums izklāsta veikto izvēļu iemeslus, nošķirot to, kas izriet no literatūras, to, kas izriet no autora pieredzes ēterā, un to, kas ir programmas izvēle, kura jāapstiprina lietošanā.
 H2|1.1 Mērķi
@@ -68,6 +68,7 @@ LI|Stacijas tiek novietotas lokatora kvadrāta centrā: ar 4 rakstzīmēm kļūd
 LI|foEs ir minimālais slieksnis, un sekansa likums VHF diapazonā pārvērtē nepieciešamo foEs; rezultāts jālasa kā relatīvs mākoņu salīdzinājums.
 LI|Āfrikas un Dienvidamerikas ģeogrāfiskie taisnstūri ir aptuveni; robežgadījumus var labot pēc operatoru norādēm.
 LI|Paredzētā attīstība: divu dažādu staciju žurnālu salīdzināšana visās vairāklēcienu analīzēs, arvien precīzāka spotu atpazīšana, sistemātiska noteikumu pārbaude veselās sezonās.
+P|Versijā 0.7.0 autors lūdza apvienot sporādisko E un tropo: mākoņi ārpus savas vietas, ko sasniedz virtuāla stacija pa kanālu. Programma ņem kanālus no LIVETROPOVHF un krusto tos ar mākoņiem; literatūra dalās starp tropo + Es un dubultlēcienu, tāpēc dubultlēcienam ir prioritāte un jauktais režīms tiek meklēts tikai tad, ja nav pirmā lēciena. Iesaistes vērtības norādītas kā izvēle, kas jāpieskaņo novērojumiem.
 H1|7. Pateicības
 P|Par sporādiskā E izstrādi 50 MHz joslā, īpaši par vairāklēcienu ķēdēm, autors pateicas Johanam IW2DNI un Fabio IZ7NLJ, kuri nodeva savus žurnālus un dekodējumus programmas iekšējām pārbaudēm (dati netiek publicēti).
 H1|8. Secinājumi

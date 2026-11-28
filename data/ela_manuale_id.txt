@@ -1,5 +1,5 @@
 TITLE|Panduan penggunaan E-LAYER ANALYZER
-SUB|Panduan penggunaan lengkap - disusun oleh Costantino IC8TEM - versi 0.6.7, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER; rumus dan pilihan perhitungan ada di tab RINGKASAN PILIHAN PERHITUNGAN.
+SUB|Panduan penggunaan lengkap - disusun oleh Costantino IC8TEM - versi 0.7.0, November 2026. Angka dalam kurung siku merujuk ke tab SUMBER; rumus dan pilihan perhitungan ada di tab RINGKASAN PILIHAN PERHITUNGAN.
 H1|1. Sebelum memulai
 H2|1.1 Apa yang dilakukan program ini
 P|E-LAYER ANALYZER menghimpun dalam satu program alat-alat untuk mempelajari mode propagasi VHF yang melewati lapisan E ionosfer: sporadic-E, termasuk multi-lompatan dan antarbenua, F.A.I. (ketidakteraturan yang searah dengan medan magnet), meteor scatter, dengan program YA-MS yang terintegrasi, dan aurora radio. Program bekerja dengan spot DX cluster secara langsung dan dengan log ADIF, dan menampilkan setiap hasil pada peta yang menempati dua pertiga jendela, dengan data dan perhitungan di sepertiga bagian kanan.
@@ -149,6 +149,12 @@ LI|Bilah waktu: ⏮ ◀ Mulai/Hentikan ▶ ⏭ dan penggeser; saat dibuka dimula
 LI|Tabel sel: Sel (sudut barat daya dan locator pusat), foEs≥, NmE≥ (kerapatan elektron minimum), Hubungan, dan Band. Klik pada sebuah sel (tabel atau peta): hubungan dan callsign-nya disorot.
 LI|Grafik: foEs minimum tertinggi (garis kuning) dan jumlah sel (batang) untuk setiap langkah, dengan garis langkah yang ditampilkan. Di bawahnya, ringkasan dengan nilai tertinggi dari sumber.
 P|Nilainya adalah batas bawah: awan bisa lebih padat daripada yang ditunjukkan hubungan, dan sel kosong hanya berarti tidak ada hubungan.
+H1|5d. PRAKIRAAN (subtab SPORADIC-E)
+P|Subtab PRAKIRAAN mengenali awan Es yang sedang terbentuk dan memberi tahu apa yang dapat diberikannya kepada stasiun Anda: lompatan pertama yang berguna, lompatan ganda Es atau, hanya bila tidak ada lompatan pertama, tropo + Es.
+LI|Kontrol: Pita (50 atau 144 MHz, selalu terpisah), Tinggi Es km, Perbarui sekarang; Profil vertikal dari Open-Meteo menyalakan saluran yang diprakirakan; TR+ES juga di REAL-TIME membawa model campuran ke peta REAL-TIME.
+LI|Di atas peringatan dengan hipotesis pertama; di bawahnya tabel hipotesis (Hipotesis, Awan, foEs, Lompatan km, MUF, Tiba, dB, %) dan tabel awan 30 menit terakhir dengan kecenderungannya (▲ terbentuk, ● stabil, ▼ melemah).
+LI|Peta: kotak awan berwarna foEs; hijau lompatan pertama, ungu lompatan ganda, putus-putus biru muda ruas saluran dengan stasiun virtual A′; kedatangan kuning di darat, cincin abu-abu di laut. Klik lintasan atau awan untuk rinciannya.
+P|Rincian menampilkan MUF, elevasi, sudut kritis saluran, rugi kopling dan redaman dalam dB. Di REAL-TIME spot TR+ES muncul dengan awan yang dipindahkan dan label TR+ES.
 H1|6. F.A.I.
 H2|6.1 Dua tampilan
 P|Tab F.A.I. mempelajari scatter dari ketidakteraturan yang searah dengan medan magnet (sumber utama [1], [2]). Tampilan Scatter trail (pasangan A-B) menghitung, untuk dua stasiun, tempat kedudukan scatter point yang mungkin, diwarnai menurut deviasi dari kondisi pantulan, mengusulkan scatter point yang paling mungkin dan menggambar di kanan atas panel QTF dan elevasi kedua stasiun (merah = A, hijau = B). Tampilan Iso-refleksi (titik) menggambar, untuk titik pantul yang dipilih, garis-garis iso-refleksi seperti AuroReflex dan SE-PROP karya K9SE: pita berwarna pada skema gelap, garis tebal pada skema terang.

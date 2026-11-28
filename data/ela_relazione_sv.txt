@@ -1,5 +1,5 @@
 TITLE|Teknisk rapport om E-LAYER ANALYZER
-SUB|De val som ledde fram till programmet - av Costantino IC8TEM - version 0.6.7, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR.
+SUB|De val som ledde fram till programmet - av Costantino IC8TEM - version 0.7.0, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR.
 H1|1. Inledning
 P|E-LAYER ANALYZER har sitt ursprung i ett tydligt behov hos VHF-operatören: att i ett enda verktyg förfoga över allt som krävs för att tolka de utbredningssätt som involverar jonosfärens E-skikt. Hittills har sporadiskt E, F.A.I., meteor scatter och radioaurora studerats med skilda program, ofta skapade för ett enda operativsystem, ibland inte längre underhållna, vart och ett med sin egen geometriska modell och sina egna konventioner. Denna rapport redogör för skälen bakom de val som gjorts och skiljer mellan det som härrör från litteraturen, det som härrör från författarens erfarenhet på banden och det som är ett val i programmet, att bekräftas genom användning.
 H2|1.1 Mål
@@ -68,6 +68,7 @@ LI|Stationerna placeras i mitten av lokatorrutan: med 4 tecken uppgår felet til
 LI|foEs är en nedre gräns och sekantlagen överskattar den foEs som krävs på VHF; värdet bör läsas som en relativ jämförelse mellan moln.
 LI|De geografiska rutorna för Afrika och Sydamerika är approximativa; gränsfall kan korrigeras med hjälp av operatörernas uppgifter.
 LI|Planerad vidareutveckling: jämförelse av två loggar från olika stationer i alla multihoppsanalyser, allt finare igenkänning av spots, systematisk kontroll av reglerna över hela säsonger.
+P|I 0.7.0 bad författaren att sporadiskt E och tropo skulle förenas: moln utanför sin position, nådda av en virtuell station genom en dukt. Programmet hämtar dukterna från LIVETROPOVHF och korsar dem med molnen; litteraturen är delad mellan tropo + Es och dubbelhopp, därför går dubbelhoppet före och blandmoden söks bara när det inte finns något första hopp. Kopplingsvärdena anges som val som ska justeras mot observationer.
 H1|7. Tack
 P|För utvecklingen av sporadiskt E på 50 MHz, och särskilt multihoppskedjorna, tackar författaren Johan IW2DNI och Fabio IZ7NLJ, som har ställt sina loggar och avkodningar till förfogande för programmets interna kontroller (uppgifterna publiceras inte).
 H1|8. Slutsatser

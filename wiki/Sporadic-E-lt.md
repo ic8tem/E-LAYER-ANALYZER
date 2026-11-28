@@ -87,3 +87,7 @@ Pakortelėje **Kelių šuolių pirmtakai** programa ieško kelių šuolių grand
 - **TEP prognozė** (mėlyna, nuo 0.6.5 versijos): indeksas 0-100 zonų už magnetinio pusiaujo kryptimi = metų laikas × SFI × Kp (tik eTEP) × vietos laikas × GIRO jonozondų foF2; SFI sveria, bet nenulina, nes per Saulės minimumą TEP tampa retas, bet neišnyksta.
 
 ![Koridorius](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOZĖ (nuo 0.7.0)
+
+Poskirtukas **PROGNOZĖ** atpažįsta besiformuojančius Es debesis (paskutinių 30 minučių spotai ir GIRO jonozondai) ir tikrina iš jūsų stoties, 50 ir 144 MHz atskirai: tinkamą pirmąjį šuolį, tada dvigubą Es šuolį, tada – tik jei nėra pirmojo šuolio – tropo + Es su virtualia stotimi A′, pasiekiama kanalu (LIVETROPOVHF tropo modulis, Open-Meteo profiliai, ITU-R P.834 kritinis kampas). REAL-TIME 144 MHz spotai tarp 2400 ir 3400 km gali tapti **TR+ES**, su perkeltu debesiu.

@@ -87,3 +87,7 @@ No subaba **Precursores de multi-salto** o programa procura as cadeias do multi-
 - **Previsão do TEP** (azul, a partir da versão 0.6.5): índice 0-100 para as zonas para lá do equador magnético = estação do ano × SFI × Kp (só eTEP) × hora local × foF2 das ionossondas GIRO; o SFI pesa mas não anula, porque no mínimo solar o TEP se torna raro mas não desaparece.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PREVISÃO (a partir da 0.7.0)
+
+O subaba **PREVISÃO** reconhece as nuvens Es em formação (spots dos últimos 30 minutos e ionossondas GIRO) e verifica a partir da sua estação, com 50 e 144 MHz separados: primeiro salto útil, depois salto duplo Es, depois — só se não houver primeiro salto — tropo + Es, com uma estação virtual A′ alcançada em duto (módulo tropo do LIVETROPOVHF, perfis Open-Meteo, ângulo crítico da UIT-R P.834). Em REAL-TIME os spots de 144 MHz entre 2400 e 3400 km podem passar a **TR+ES**, com a nuvem relocalizada.

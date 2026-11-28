@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZERi tehniline aruanne
-SUB|Valikud, mis viisid programmi loomiseni - koostanud Costantino IC8TEM - versioon 0.6.7, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD.
+SUB|Valikud, mis viisid programmi loomiseni - koostanud Costantino IC8TEM - versioon 0.7.0, november 2026. Nurksulgudes numbrid viitavad sakile ALLIKAD.
 H1|1. Eessõna
 P|E-LAYER ANALYZER sündis VHF-operaatori selgest vajadusest: omada ühes tööriistas kõike, mis on vajalik ionosfääri E-kihti kaasavate leviviiside tõlgendamiseks. Seni uuriti sporaadilist E-d, F.A.I.-d, meteoorhajumist ja raadioaurorat erinevate programmidega, mis olid sageli loodud ühe operatsioonisüsteemi jaoks, mõnikord enam hooldamata, ning millest igaühel oli oma geomeetriline mudel ja omad kokkulepped. Käesolev aruanne esitab tehtud valikute põhjused, eristades seda, mis tuleneb kirjandusest, seda, mis tuleneb autori kogemusest eetris, ning seda, mis on programmi valik, mida tuleb kasutamisega kinnitada.
 H2|1.1 Eesmärgid
@@ -68,6 +68,7 @@ LI|Jaamad paigutatakse lokaatori ruudu keskele: 4 märgi korral ulatub viga umbe
 LI|foEs on minimaalne lävi ja sekansi seadus hindab VHF-is vajalikku foEs-i üle; väärtust tuleb lugeda pilvede suhtelise võrdlusena.
 LI|Aafrika ja Lõuna-Ameerika geograafilised ristkülikud on ligikaudsed; piirjuhtumeid saab parandada operaatorite juhiste järgi.
 LI|Kavandatud edasiarendused: kahe eri jaama logi võrdlus kõigis mitmehüppelise levi analüüsides, üha täpsem spotide tuvastamine, reeglite süstemaatiline kontroll tervetel hooaegadel.
+P|Versioonis 0.7.0 palus autor ühendada sporaadilise E ja tropo: pilved väljaspool oma kohta, kuhu jõutakse virtuaalsest jaamast kanali kaudu. Programm võtab kanalid LIVETROPOVHF-ist ja ristab need pilvedega; kirjandus jaguneb tropo + Es ja topelthüppe vahel, seega on topelthüppel eelis ja segarežiimi otsitakse ainult siis, kui esimest hüpet pole. Sidestuse väärtused on esitatud valikutena, mida tuleb vaatluste järgi häälestada.
 H1|7. Tänusõnad
 P|50 MHz sporaadilise E ja eriti mitmehüppeliste ahelate arendamise eest tänab autor Johan IW2DNI-d ja Fabio IZ7NLJ-d, kes andsid programmi sisekontrollideks kasutada oma logid ja dekodeeringud (andmeid ei avaldata).
 H1|8. Kokkuvõte

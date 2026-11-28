@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER teknik raporu
-SUB|Programın geliştirilmesine yol açan seçimler - hazırlayan: Costantino IC8TEM - sürüm 0.6.7, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar.
+SUB|Programın geliştirilmesine yol açan seçimler - hazırlayan: Costantino IC8TEM - sürüm 0.7.0, Kasım 2026. Köşeli parantez içindeki numaralar KAYNAKLAR sekmesine gönderme yapar.
 H1|1. Giriş
 P|E-LAYER ANALYZER, VHF operatörünün belirgin bir ihtiyacından doğmuştur: iyonosferin E katmanını içeren yayılım modlarını yorumlamak için gereken her şeye tek bir araçta sahip olmak. Bugüne dek sporadik E, F.A.I., meteor scatter ve radyo aurorası, çoğu yalnızca tek bir işletim sistemi için yazılmış, kimi zaman artık bakımı yapılmayan ve her biri kendi geometrik modeline ve kendi uzlaşımlarına sahip farklı programlarla incelenmekteydi. Bu rapor, yapılan seçimlerin gerekçelerini ortaya koyar; literatürden gelenleri, yazarın bant deneyiminden gelenleri ve kullanımla doğrulanması gereken program seçimlerini birbirinden ayırır.
 H2|1.1 Amaçlar
@@ -68,6 +68,7 @@ LI|İstasyonlar lokatör karesinin merkezine yerleştirilir: 4 karakterle hata y
 LI|foEs bir alt eşiktir ve sekant yasası VHF'de gereken foEs'i olduğundan yüksek tahmin eder; değer, bulutlar arasında göreli bir karşılaştırma olarak okunmalıdır.
 LI|Afrika ve Güney Amerika'nın coğrafi kutuları yaklaşıktır; sınır vakaları operatörlerin bildirimleriyle düzeltilebilir.
 LI|Öngörülen gelişmeler: tüm çok atlama analizlerinde farklı istasyonlara ait iki logun karşılaştırılması, spot tanımanın giderek daha da inceltilmesi, kuralların bütün sezonlar üzerinde sistematik olarak doğrulanması.
+P|0.7.0'da yazar sporadik E ile tropoyu birleştirmeyi istedi: yerinin dışındaki bulutlar, bir sanal istasyondan kanal yoluyla ulaşılan. Program kanalları LIVETROPOVHF'den alır ve bulutlarla çaprazlar; literatür tropo + Es ile çift atlama arasında bölünmüştür, bu yüzden çift atlamanın önceliği vardır ve karma mod yalnızca ilk atlama yokken aranır. Bağlanma değerleri gözlemlere göre ayarlanacak seçimler olarak belirtilmiştir.
 H1|7. Teşekkürler
 P|50 MHz'de sporadik E'nin ve özellikle çok atlamalı zincirlerin geliştirilmesi için yazar, programın iç doğrulamaları için loglarını ve çözümlemelerini sağlayan Johan IW2DNI ve Fabio IZ7NLJ'ye teşekkür eder (veriler yayımlanmaz).
 H1|8. Sonuçlar

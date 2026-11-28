@@ -1,5 +1,5 @@
 TITLE|Brukerhåndbok for E-LAYER ANALYZER
-SUB|Utførlig brukerhåndbok - ved Costantino IC8TEM - versjon 0.6.7, november 2026. Tallene i hakeparentes viser til fanen KILDER; formlene og beregningsvalgene finnes i fanen SAMMENDRAG AV BEREGNINGSVALGENE.
+SUB|Utførlig brukerhåndbok - ved Costantino IC8TEM - versjon 0.7.0, november 2026. Tallene i hakeparentes viser til fanen KILDER; formlene og beregningsvalgene finnes i fanen SAMMENDRAG AV BEREGNINGSVALGENE.
 H1|1. Før du begynner
 H2|1.1 Hva programmet gjør
 P|E-LAYER ANALYZER samler i ett program verktøyene for å studere de VHF-utbredelsesmåtene som går via ionosfærens E-lag: sporadisk E, også multihopp og interkontinental, F.A.I. (feltlinjeorienterte irregulariteter), meteor scatter, med det integrerte programmet YA-MS, og radionordlys. Programmet arbeider med spot fra DX-klynger i sanntid og med ADIF-logger, og viser hvert resultat på et kart som opptar to tredjedeler av vinduet, med data og beregninger i den høyre tredjedelen.
@@ -149,6 +149,12 @@ LI|Tidslinje: ⏮ ◀ Start/Stopp ▶ ⏭ og glidebryteren; ved åpning starter 
 LI|Celletabell: Celle (sørvestlige hjørne og lokatoren for sentrum), foEs≥, NmE≥ (minste elektrontetthet), Forbindelser og Bånd. Klikk på en celle (tabell eller kart): forbindelsene og kallesignalene i den framheves.
 LI|Graf: høyeste minste foEs (gul linje) og antall celler (søyler) for hvert steg, med linjen for steget som vises. Under den oversikten med den høyeste verdien i kilden.
 P|Verdien er en nedre grense: skyen kan være tettere enn forbindelsene viser, og en tom celle betyr bare at det ikke finnes noen forbindelser.
+H1|5d. VARSEL (underfane til SPORADIC-E)
+P|Underfanen VARSEL gjenkjenner Es-skyer som dannes, og forteller hva de kan gi stasjonen din: brukbart første hopp, Es-dobbelthopp eller, bare hvis det ikke finnes noe første hopp, tropo + Es.
+LI|Kontroller: Bånd (50 eller 144 MHz, alltid adskilt), Es-høyde km, Oppdater nå; Vertikale profiler fra Open-Meteo slår på de varslede duktene; TR+ES også i REAL-TIME bringer blandingsmodellen til REAL-TIME-kartet.
+LI|Øverst varselet med den første hypotesen; under tabellen over hypotesene (Hypotese, Sky, foEs, Hopp km, MUF, Ankomst, dB, %) og tabellen over skyene de siste 30 minuttene med tendens (▲ dannes, ● stabil, ▼ avtagende).
+LI|Kart: skyenes ruter i foEs-farge; grønt det første hoppet, fiolett dobbelthoppet, lyseblått stiplet duktstrekningen med den virtuelle stasjonen A′; gul ankomst over land, grå ring på havet. Klikk på en strekning eller en sky for detaljene.
+P|Detaljene viser MUF, elevasjon, duktens kritiske vinkel, koblingstap og strekningsdempning i dB. I REAL-TIME vises TR+ES-spottene med den flyttede skyen og merket TR+ES.
 H1|6. F.A.I.
 H2|6.1 De to visningene
 P|Fanen F.A.I. studerer scatter fra feltlinjeorienterte irregulariteter (hovedkilder [1], [2]). Visningen Scatter trail (par A-B) beregner, for to stasjoner, det geometriske stedet for mulige scatter-punkter, farget etter avviket fra refleksjonsbetingelsen, foreslår det mest sannsynlige scatter-punktet og tegner øverst til høyre boksen med QTF og elevasjon for begge stasjonene (rød = A, grønn = B). Visningen Isorefleksjon (punkt) tegner, for et valgt refleksjonspunkt, isorefleksjonslinjene på samme måte som AuroReflex og SE-PROP fra K9SE: fargede belter i de mørke temaene, tykke linjer i de lyse.

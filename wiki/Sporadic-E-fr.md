@@ -87,3 +87,7 @@ Dans le sous-onglet **Précurseurs multi-bond**, le programme cherche les chaîn
 - **Prévision du TEP** (bleu, à partir de la version 0.6.5) : indice 0-100 vers les zones au-delà de l'équateur magnétique = saison × SFI × Kp (eTEP seulement) × heure locale × foF2 des ionosondes GIRO ; le SFI pèse mais n'annule pas, car au minimum solaire le TEP devient rare mais ne disparaît pas.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PRÉVISION (depuis la 0.7.0)
+
+Le sous-onglet **PRÉVISION** reconnaît les nuages Es en formation (spots des 30 dernières minutes et ionosondes GIRO) et vérifie depuis votre station, avec 50 et 144 MHz séparés : premier bond utile, puis double bond Es, puis — seulement s'il n'y a pas de premier bond — tropo + Es, avec une station virtuelle A′ atteinte en conduit (module tropo de LIVETROPOVHF, profils Open-Meteo, angle critique UIT-R P.834). En REAL-TIME, les spots 144 MHz entre 2400 et 3400 km peuvent devenir **TR+ES**, avec le nuage déplacé.

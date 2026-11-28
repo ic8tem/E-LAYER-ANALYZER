@@ -87,3 +87,7 @@ Apakšcilnē **Vairāklēcienu priekšvēstneši** programma meklē vairāklēci
 - **TEP prognoze** (zila, no versijas 0.6.5): indekss 0-100 zonu virzienā aiz magnētiskā ekvatora = gadalaiks × SFI × Kp (tikai eTEP) × vietējais laiks × GIRO jonozondu foF2; SFI sver, bet nenulle, jo Saules minimumā TEP kļūst rets, bet nepazūd.
 
 ![Koridors](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOZE (no 0.7.0)
+
+Apakšcilne **PROGNOZE** atpazīst Es mākoņus, kas veidojas (pēdējo 30 minūšu spoti un GIRO ionozondes), un pārbauda no jūsu stacijas, 50 un 144 MHz atsevišķi: izmantojamu pirmo lēcienu, tad Es dubultlēcienu, tad – tikai ja pirmā lēciena nav – tropo + Es ar virtuālu staciju A′, kas sasniegta pa kanālu (LIVETROPOVHF tropo modulis, Open-Meteo profili, ITU-R P.834 kritiskais leņķis). REAL-TIME 144 MHz spoti starp 2400 un 3400 km var kļūt par **TR+ES**, ar pārvietoto mākoni.

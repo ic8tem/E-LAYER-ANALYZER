@@ -87,3 +87,7 @@ Im Unterreiter **Mehrfachsprung-Vorboten** sucht das Programm die Mehrfachsprung
 - **TEP-Vorhersage** (blau, ab Version 0.6.5): Index 0-100 zu den Zonen jenseits des magnetischen Äquators = Jahreszeit × SFI × Kp (nur eTEP) × Ortszeit × foF2 der GIRO-Ionosonden; der SFI wiegt, setzt aber nicht auf null, weil TEP im Sonnenminimum selten wird, aber nicht verschwindet.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOSE (ab 0.7.0)
+
+Die Unterkarte **PROGNOSE** erkennt Es-Wolken in Bildung (Spots der letzten 30 Minuten und GIRO-Ionosonden) und prüft von deiner Station aus, mit 50 und 144 MHz getrennt: nutzbarer erster Sprung, dann Es-Doppelsprung, dann – nur wenn es keinen ersten Sprung gibt – Tropo + Es mit einer virtuellen Station A′, die im Dukt erreicht wird (Tropo-Modul von LIVETROPOVHF, Open-Meteo-Profile, Grenzwinkel nach ITU-R P.834). In REAL-TIME können 144-MHz-Spots zwischen 2400 und 3400 km zu **TR+ES** werden, mit verlegter Wolke.

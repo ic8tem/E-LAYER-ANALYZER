@@ -5,8 +5,8 @@
 // rifrattivita' N di ITU-R P.453, rifrattivita' modificata M = N + 157 h(km), strato in cui M cala con la quota (condotto
 // risolto) o salto netto nascosto dal passo dei livelli (condotto potenziale da inversione, come in LIVETROPOVHF),
 // lunghezza d'onda massima intrappolata di Kerr (1951, eq. 17).
-// Angolo critico di intrappolamento (ITU-R P.834 §7.1 [94]): alfa = sqrt(2e-6 * deficit di M) radianti: un raggio che
-// arriva sul condotto con un'elevazione piu' alta non resta intrappolato; i modi intrappolati stanno sotto 1 grado ([95]).
+// Angolo critico di intrappolamento (ITU-R P.834 §7.1 [86]): alfa = sqrt(2e-6 * deficit di M) radianti: un raggio che
+// arriva sul condotto con un'elevazione piu' alta non resta intrappolato; i modi intrappolati stanno sotto 1 grado ([87]).
 // Indizio osservato: gli spot in 144 MHz dichiarati tropo (<TR>) non sono E-sporadico (restano fuori dall'Es puro) ma
 // confermano un condotto lungo la loro tratta.
 using System;

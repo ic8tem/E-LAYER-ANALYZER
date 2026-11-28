@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER user manual
-SUB|In-depth user manual - by Costantino IC8TEM - version 0.6.7, November 2026. Numbers in square brackets refer to the SOURCES tab; the formulas and calculation choices are in the SUMMARY OF THE CALCULATION CHOICES tab.
+SUB|In-depth user manual - by Costantino IC8TEM - version 0.7.0, November 2026. Numbers in square brackets refer to the SOURCES tab; the formulas and calculation choices are in the SUMMARY OF THE CALCULATION CHOICES tab.
 H1|1. Before you start
 H2|1.1 What the program does
 P|E-LAYER ANALYZER brings together in a single program the tools for studying the VHF propagation modes that pass through the E layer of the ionosphere: sporadic-E, including multi-hop and extra-continental, F.A.I. (field-aligned irregularities), meteor scatter, with the integrated YA-MS program, and radio aurora. It works on DX cluster spots in real time and on ADIF logs, and shows every result on a map that takes up two thirds of the window, with the data and calculations in the right-hand third.
@@ -149,6 +149,12 @@ LI|Time bar: ⏮ ◀ Start/Stop ▶ ⏭ and the slider; on opening it starts fro
 LI|Table of the cells: Cell (south-west corner and locator of the centre), foEs≥, NmE≥ (minimum electron density), Links and Bands. Click on a cell (table or map): its links and callsigns are highlighted.
 LI|Chart: highest minimum foEs (yellow line) and number of cells (bars) for each step, with the line of the step shown. Below, the summary with the highest value of the source.
 P|The value is a lower limit: the cloud may be denser than the links show, and an empty cell only means no link.
+H1|5d. FORECAST (sub-tab of SPORADIC-E)
+P|The FORECAST sub-tab recognises forming Es clouds and tells what they can give your station: useful first hop, double-hop Es or, only if there is no first hop, tropo + Es.
+LI|Controls: Band (50 or 144 MHz, always separate), Es height km, Update now; Vertical profiles from Open-Meteo turns on the forecast ducts; TR+ES also in REAL-TIME brings the mixed model to the REAL-TIME map.
+LI|At the top the alert with the first hypothesis; below, the table of hypotheses (Hypothesis, Cloud, foEs, Hop km, MUF, Arrival, dB, %) and the table of the clouds of the last 30 minutes with their trend (▲ forming, ● stable, ▼ decaying).
+LI|Map: cloud squares coloured by foEs; green the first hop, violet the double hop, dashed light blue the duct leg with the virtual station A′; yellow arrival over land, grey ring at sea. Click a path or a cloud for the details.
+P|The details give MUF, elevation, critical angle of the duct, coupling loss and path loss in dB. In REAL-TIME the TR+ES spots appear with the relocated cloud and the label TR+ES.
 H1|6. F.A.I.
 H2|6.1 The two views
 P|The F.A.I. tab studies scatter from field-aligned irregularities (main source [1], [2]). The Scatter trail (A-B pair) view calculates, for two stations, the locus of possible scatter points, coloured according to the deviation from the reflection condition, proposes the most probable scatter point and draws at the top right the box of QTFs and elevations of both stations (red = A, green = B). The Isoflection (point) view draws, for a chosen reflection point, the isoflection lines like AuroReflex and SE-PROP by K9SE: coloured bands in the dark schemes, thick lines in the light schemes.

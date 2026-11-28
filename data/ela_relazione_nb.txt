@@ -1,5 +1,5 @@
 TITLE|Teknisk rapport om E-LAYER ANALYZER
-SUB|Valgene som førte frem til programmet - ved Costantino IC8TEM - versjon 0.6.7, november 2026. Tallene i hakeparentes viser til fanen KILDER.
+SUB|Valgene som førte frem til programmet - ved Costantino IC8TEM - versjon 0.7.0, november 2026. Tallene i hakeparentes viser til fanen KILDER.
 H1|1. Innledning
 P|E-LAYER ANALYZER springer ut av et klart behov hos VHF-operatøren: å ha, i ett og samme verktøy, alt som trengs for å tolke de utbredelsesmåtene som involverer ionosfærens E-lag. Til nå har sporadisk E, F.A.I., meteor scatter og radionordlys blitt studert med ulike programmer, ofte laget for ett enkelt operativsystem, i noen tilfeller ikke lenger vedlikeholdt, hvert med sin egen geometriske modell og sine egne konvensjoner. Denne rapporten redegjør for begrunnelsene bak valgene som er gjort, og skiller mellom det som stammer fra litteraturen, det som stammer fra forfatterens erfaring på båndene, og det som er et valg i programmet, som må bekreftes gjennom bruk.
 H2|1.1 Mål
@@ -68,6 +68,7 @@ LI|Stasjonene plasseres i midten av lokatorruten: med 4 tegn blir feilen opptil 
 LI|foEs er en nedre grense, og sekantloven overvurderer den nødvendige foEs på VHF; verdien bør leses som en relativ sammenligning mellom skyer.
 LI|De geografiske boksene for Afrika og Sør-Amerika er tilnærmede; grensetilfeller kan korrigeres ved hjelp av operatørenes opplysninger.
 LI|Planlagt videre utvikling: sammenligning av to logger fra ulike stasjoner i alle multihopp-analyser, stadig finere gjenkjenning av spot, systematisk kontroll av reglene over hele sesonger.
+P|I 0.7.0 ba forfatteren om å forene sporadisk E og tropo: skyer utenfor posisjon, nådd av en virtuell stasjon gjennom en dukt. Programmet henter duktene fra LIVETROPOVHF og krysser dem med skyene; litteraturen er delt mellom tropo + Es og dobbelthopp, derfor går dobbelthoppet foran og blandingsmodusen søkes bare når det ikke finnes noe første hopp. Koblingsverdiene er oppgitt som valg som skal justeres mot observasjoner.
 H1|7. Takk
 P|For utviklingen av sporadisk E på 50 MHz, og særlig multihopp-kjedene, takker forfatteren Johan IW2DNI og Fabio IZ7NLJ, som har stilt loggene og dekodingene sine til rådighet for programmets interne kontroller (dataene offentliggjøres ikke).
 H1|8. Konklusjoner

@@ -1,5 +1,5 @@
 TITLE|Notendahandbók E-LAYER ANALYZER
-SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.6.7, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
+SUB|Ítarleg notendahandbók - umsjón: Costantino IC8TEM - útgáfa 0.7.0, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR; jöfnur og val útreikninga eru á flipanum YFIRLIT YFIR VAL ÚTREIKNINGA.
 H1|1. Áður en hafist er handa
 H2|1.1 Hvað forritið gerir
 P|E-LAYER ANALYZER sameinar í einu forriti verkfærin til að rannsaka þær útbreiðsluaðferðir á VHF sem fara um E-lag jónhvolfsins: sporadic-E, einnig fjölstökk og milli heimsálfa, F.A.I. (óreglur sem raðast eftir segulsviðinu), meteor scatter, með innbyggða forritinu YA-MS, og radíónorðurljós. Það vinnur með spot frá DX-klösum í rauntíma og með ADIF-dagbækur, og sýnir hverja niðurstöðu á korti sem tekur tvo þriðju gluggans, með gögnum og útreikningum í hægri þriðjungnum.
@@ -149,6 +149,12 @@ LI|Tímastika: ⏮ ◀ Ræsa/Stöðva ▶ ⏭ og sleðinn; við opnun er byrjað
 LI|Tafla hólfanna: Hólf (suðvesturhorn og locator miðjunnar), foEs≥, NmE≥ (lágmarks-rafeindaþéttleiki), Sambönd og Tíðnisvið. Smellur á hólf (í töflunni eða á kortinu) auðkennir sambönd hans og kallmerkin.
 LI|Graf: hæsta lágmarks-foEs (gul lína) og fjöldi hólfa (súlur) fyrir hvert skref, með línu skrefsins sem sýnt er. Fyrir neðan samantektin með hæsta gildi uppsprettunnar.
 P|Gildið er neðri mörk: skýið getur verið þéttara en samböndin sýna, og tómt hólf þýðir aðeins að engin sambönd séu.
+H1|5d. SPÁ (undirflipi SPORADIC-E)
+P|Undirflipinn SPÁ þekkir Es-ský í myndun og segir hvað þau geta gefið stöðinni þinni: nothæft fyrsta stökk, Es-tvístökk eða, aðeins ef ekkert fyrsta stökk er til, tropo + Es.
+LI|Stjórntæki: Band (50 eða 144 MHz, alltaf aðskilin), Es-hæð km, Uppfæra núna; Lóðrétt snið frá Open-Meteo kveikir á spáðum rásum; TR+ES líka í REAL-TIME færir blandaða líkanið á REAL-TIME-kortið.
+LI|Efst viðvörunin með fyrstu tilgátunni; fyrir neðan tafla tilgátna (Tilgáta, Ský, foEs, Stökk km, MUF, Komustaður, dB, %) og tafla skýja síðustu 30 mínútna með þróun (▲ í myndun, ● stöðugt, ▼ dvínandi).
+LI|Kort: reitir skýjanna í lit foEs; grænt fyrsta stökkið, fjólublátt tvístökkið, ljósblátt strikað rásarleiðin með sýndarstöðinni A′; gulur komustaður á landi, grár hringur á sjó. Smelltu á leið eða ský til að sjá nánar.
+P|Nánari upplýsingar sýna MUF, hæðarhorn, markhorn rásarinnar, tengitap og deyfingu í dB. Í REAL-TIME birtast TR+ES-spottin með færða skýinu og merkinu TR+ES.
 H1|6. F.A.I.
 H2|6.1 Sýnirnar tvær
 P|Flipinn F.A.I. rannsakar scatter frá óreglum sem raðast eftir segulsviðinu (aðalheimild [1], [2]). Sýnin Scatter trail (par A-B) reiknar, fyrir tvær stöðvar, feril mögulegra scatter point, litaðan eftir fráviki frá endurvarpsskilyrðinu, leggur til líklegasta scatter point og teiknar efst til hægri ramma með QTF og hæðarhornum beggja stöðva (rautt = A, grænt = B). Sýnin Jafnendurvarp (punktur) teiknar, fyrir valinn endurvarpspunkt, jafnendurvarpslínur eins og AuroReflex og SE-PROP eftir K9SE: litaðar ræmur í dökkum stefjum, þykkar línur í ljósum stefjum.

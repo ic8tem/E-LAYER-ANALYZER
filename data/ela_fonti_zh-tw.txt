@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER 的資料來源
-SUB|本程式使用的資料來源清單，依頁籤分列 - 作者 Costantino IC8TEM - 版本 0.6.7，2026 年 11 月
+SUB|本程式使用的資料來源清單，依頁籤分列 - 作者 Costantino IC8TEM - 版本 0.7.0，2026 年 11 月
 H1|主要資料來源
 SRC|1. G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico. Analisi del modo di propagazione ed esposizione di osservazioni in merito"，Capri，2011 年 5 月。錐形幾何、a1 + a2 = 180° 法則、仰角公式、季節與時段、日內瓦散射點。
 SRC|2. G. Cerrotta IC8FAX, "Field Aligned Irregularities"，網頁 https://qsl.net/ic8fax/page4.html。反射錐與補充等值線、已知散射點（日內瓦、布魯塞爾、布達佩斯、JN92、JN41/42）、仰角範例（IW1AZJ 在約 150 km 為 35°，IC8CQF 在約 800 km 為 6°）、季節為 5 月至 9 月中、16-22 UTC、JN70CN 通聯過的網格、引用 K9SE 的程式。
@@ -91,3 +91,9 @@ SRC|82. E. P. Tilton W1HDQ，B. A. Whiting 5B4WR，«TE Propagation - VHF Discov
 SRC|83. National Geospatial-Intelligence Agency，«Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems»，NGA.STND.0036_1.0.0_WGS84（2014；NIMA TR8350.2，https://earth-info.nga.mil）：WGS84 橢球的定義（長半軸和扁率），用於電台和層的位置。作者於 2026/11/23 核准的資料來源。
 SRC|84. C. F. F. Karney，«Algorithms for geodesics»，Journal of Geodesy 87 (2013) 43-55（https://doi.org/10.1007/s00190-012-0578-z）：橢球上測地線的距離、方位角和點的計算方法；GeographicLib 函式庫（MIT 授權）。作者於 2026/11/23 核准的資料來源。
 SRC|85. G. Köllner DL4MEA，«Die FAI-Bake DB0FAI»，DUBUS 2/90，第 23-30 頁（德文和英文；DUBUS 1982-1992 檔案，文章 9002-3，http://www.marsport.org.uk/dubus/archive/index.htm）：144 MHz。關於 DL5MCG 與 DL4MEA 的信標 DB0FAI 的原始文章（JN58IC，海拔 590 m，天線離地 12 m，144.855 MHz，1000 W ERP，指向 305° 的 16 單元 Tonna，自 1990 年 5 月中旬起發射）；散射高度 110 km、散射點位於 −3 dB 波束內時的接收區域；天線指向散射點，而非對方電台；依到散射點距離列出的天線仰角表；最佳時期為 5 月至 8 月。作者於 2026/11/23 核准的資料來源。
+H1|預報與 Es + 對流層混合模型（自 0.7.0 起）
+SRC|86. ITU-R，建議書 P.834，「Effects of tropospheric refraction on radiowave propagation」，§7.1（https://www.itu.int/rec/R-REC-P.834/en）：射線被波導截獲的臨界角，α = √(2·10⁻⁶·(dM/dh)·Δh)。比較：給出 [88] 要求、而 [41]、[89] 和 [90] 未量化的物理界限。作者於 2026/11/28 核准的來源。
+SRC|87. DTIC 報告 AD-A169332，「Propagation of signals in the frequency band between 30 MHz and 60 MHz」（https://apps.dtic.mil/sti/tr/pdf/ADA169332.pdf）：低 VHF；被波導截獲的模態仰角低於 1°，耦合取決於極低仰角處輻射的功率。比較：與 [86] 一致；討論的是 30-60 MHz 而非 144 MHz。作者於 2026/11/28 核准的來源。
+SRC|88. 「Very Long Distance Propagation in the 144 MHz Band」（https://www.vhfdx.de/vldp_ea8.pdf；副本 https://www.qsl.net/iw2nor/vldp_ea8.pdf）：144 MHz，EA8 - 歐洲開通；對對流層 + Es 提出異議但不排除，並以雙跳作為一致的解釋。比較：對混合模式最具批判性，與 [90] 相反；因此雙跳優先。作者於 2026/11/28 核准的來源。
+SRC|89. EA6VQ，dxmaps.com 上的 144 MHz Es 開通地圖（https://dxmaps.com/esmaps/2004/esmap060804.html ; https://dxmaps.com/esmaps/2004/esmap230604_2.html）：超過 2900 km 的 EA8-I2 解讀為對流層 + Es，2914 km 的 EA3DXU-RN6BN 解讀為兩片雲的雙跳。比較：同一作者在幾乎相同的距離上使用兩種假設；可作基準測試案例。作者於 2026/11/28 核准的來源。
+SRC|90. EI7GL，三篇部落格文章（https://ei7gl.blogspot.com）：德國 - 以色列 144 MHz 3000 km（2021 年 5 月，Es 加海上波導），維德角 - 歐洲（2019 年 7 月，穩定的海上波導加 Es），雙跳與弦跳（2009 年 7 月，兩處 MUF 超過 144 MHz，故罕見）。比較：與 [41] 和 [89] 相似，比 [88] 更接受混合模式。作者於 2026/11/28 核准的來源。

@@ -87,3 +87,7 @@ Efst til hægri á kortinu birtist samantekt N0NBH (E-skip fyrir valda heimsálf
 - **TEP-spá** (blátt, frá útgáfu 0.6.5): vísitala 0-100 til svæða handan segulmiðbaugs = árstími × SFI × Kp (aðeins eTEP) × staðartími × foF2 GIRO-jónósandanna; SFI vegur en núllar ekki, því við sólarlágmark verður TEP sjaldgæft en hverfur ekki.
 
 ![Gangur](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## SPÁ (frá 0.7.0)
+
+Undirflipinn **SPÁ** þekkir Es-ský í myndun (spott síðustu 30 mínútna og GIRO-jónósónur) og kannar frá stöðinni þinni, með 50 og 144 MHz aðskilin: nothæft fyrsta stökk, síðan Es-tvístökk, síðan – aðeins ef ekkert fyrsta stökk er til – tropo + Es, með sýndarstöð A′ sem næst um rás (tropo-eining LIVETROPOVHF, Open-Meteo-snið, markhorn ITU-R P.834). Í REAL-TIME geta 144 MHz-spott milli 2400 og 3400 km orðið **TR+ES**, með færða skýinu.

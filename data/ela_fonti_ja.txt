@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER の出典
-SUB|プログラムが使用する出典の一覧 (タブごと) - Costantino IC8TEM 著 - バージョン 0.6.7、2026 年 11 月
+SUB|プログラムが使用する出典の一覧 (タブごと) - Costantino IC8TEM 著 - バージョン 0.7.0、2026 年 11 月
 H1|主な出典
 SRC|1. G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico. Analisi del modo di propagazione ed esposizione di osservazioni in merito", Capri, 2011 年 5 月。円錐の幾何、a1 + a2 = 180° の規則、仰角の式、季節と時間帯、ジュネーヴの散乱点。
 SRC|2. G. Cerrotta IC8FAX, "Field Aligned Irregularities", ウェブページ https://qsl.net/ic8fax/page4.html. 反射円錐と補完的等高線、既知の散乱点 (ジュネーヴ、ブリュッセル、ブダペスト、JN92、JN41/42)、仰角の例 (IW1AZJ 約 150 km で 35°、IC8CQF 約 800 km で 6°)、季節は 5 月から 9 月中旬、16-22 UTC、JN70CN から交信したグリッド、K9SE のプログラムへの言及。
@@ -91,3 +91,9 @@ SRC|82. E. P. Tilton W1HDQ, B. A. Whiting 5B4WR, «TE Propagation - VHF Discover
 SRC|83. National Geospatial-Intelligence Agency, «Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems», NGA.STND.0036_1.0.0_WGS84 (2014; NIMA TR8350.2, https://earth-info.nga.mil): 局と層の位置に使う WGS84 楕円体 (長半径と扁平率) の定義。著者が 2026/11/23 に承認した出典。
 SRC|84. C. F. F. Karney, «Algorithms for geodesics», Journal of Geodesy 87 (2013) 43-55 (https://doi.org/10.1007/s00190-012-0578-z): 楕円体上の測地線の距離、方位角、点を求める方法。GeographicLib ライブラリ (MIT ライセンス)。著者が 2026/11/23 に承認した出典。
 SRC|85. G. Köllner DL4MEA、«Die FAI-Bake DB0FAI»、DUBUS 2/90、pp. 23-30 (ドイツ語と英語; DUBUS アーカイブ 1982-1992、記事 9002-3、http://www.marsport.org.uk/dubus/archive/index.htm): 144 MHz。DL5MCG と DL4MEA のビーコン DB0FAI の原著記事 (JN58IC、海抜 590 m、アンテナ地上高 12 m、144.855 MHz、1000 W ERP、305° に向けた 16 エレメント Tonna、1990 年 5 月中旬から運用)。散乱高度 110 km で散乱点が −3 dB ビーム内にある受信範囲。アンテナは相手局ではなく散乱点に向ける。散乱点までの距離に応じたアンテナ仰角の表。最適期は 5 月から 8 月。著者が 2026/11/23 に承認した出典。
+H1|予報とスポラディック E + 対流圏の混合モデル（0.7.0 から）
+SRC|86. ITU-R、勧告 P.834「Effects of tropospheric refraction on radiowave propagation」§7.1（https://www.itu.int/rec/R-REC-P.834/en）：電波がダクトに捕捉される臨界角、α = √(2·10⁻⁶·(dM/dh)·Δh)。比較：[88] が求め、[41]、[89]、[90] が数値化していない物理的限界を与えます。2026/11/28 に作者が承認した出典。
+SRC|87. DTIC 報告 AD-A169332「Propagation of signals in the frequency band between 30 MHz and 60 MHz」（https://apps.dtic.mil/sti/tr/pdf/ADA169332.pdf）：低 VHF；ダクトに捕捉されるモードの仰角は 1° 未満で、結合は非常に低い仰角で放射される電力に依存します。比較：[86] と一致；対象は 30-60 MHz で、144 MHz ではありません。2026/11/28 に作者が承認した出典。
+SRC|88. 「Very Long Distance Propagation in the 144 MHz Band」（https://www.vhfdx.de/vldp_ea8.pdf；写し https://www.qsl.net/iw2nor/vldp_ea8.pdf）：144 MHz、EA8 - 欧州のオープン；対流圏 + Es への異論（ただし排除はしない）と、一貫した解釈としてのダブルホップ。比較：[90] と対照的に混合モードに最も批判的；このためダブルホップを優先します。2026/11/28 に作者が承認した出典。
+SRC|89. EA6VQ、dxmaps.com の 144 MHz Es オープン地図（https://dxmaps.com/esmaps/2004/esmap060804.html ; https://dxmaps.com/esmaps/2004/esmap230604_2.html）：2900 km を超える EA8-I2 を対流圏 + Es、2914 km の EA3DXU-RN6BN を 2 つの雲によるダブルホップと解釈。比較：同じ作者がほぼ同じ距離で両方の仮説を使っています；ベンチマークの試験ケース。2026/11/28 に作者が承認した出典。
+SRC|90. EI7GL、ブログ記事 3 本（https://ei7gl.blogspot.com）：ドイツ - イスラエル 144 MHz 3000 km（2021 年 5 月、Es と海上ダクト）、カーボベルデ - 欧州（2019 年 7 月、安定した海上ダクトと Es）、ダブルホップとコーダルホップ（2009 年 7 月、2 地点で MUF が 144 MHz を超えたため稀）。比較：[41] や [89] に近く、[88] より混合モードに寛容です。2026/11/28 に作者が承認した出典。

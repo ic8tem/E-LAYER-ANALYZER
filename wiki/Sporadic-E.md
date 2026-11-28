@@ -87,3 +87,7 @@ In the **Multi-hop precursors** sub-tab the program looks for the multi-hop chai
 - **TEP forecast** (blue, from version 0.6.5): index 0-100 towards the zones beyond the magnetic equator = season × SFI × Kp (eTEP only) × local time × foF2 of the GIRO ionosondes; the SFI weighs but does not cancel, because at solar minimum TEP becomes rare but does not disappear.
 
 ![Corridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## FORECAST (from 0.7.0)
+
+The **FORECAST** sub-tab recognises forming Es clouds (spots of the last 30 minutes and GIRO ionosondes) and checks from your station, with 50 and 144 MHz kept separate: useful first hop, then double-hop Es, then — only if there is no first hop — tropo + Es, with a virtual station A′ reached through a duct (tropo module of LIVETROPOVHF, Open-Meteo profiles, ITU-R P.834 critical angle). In REAL-TIME, 144 MHz spots between 2400 and 3400 km can become **TR+ES**, with the relocated cloud.

@@ -1,5 +1,5 @@
 TITLE|Raport tehnic despre E-LAYER ANALYZER
-SUB|Alegerile care au condus la realizarea programului - realizat de Costantino IC8TEM - versiunea 0.6.7, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE.
+SUB|Alegerile care au condus la realizarea programului - realizat de Costantino IC8TEM - versiunea 0.7.0, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE.
 H1|1. Preambul
 P|E-LAYER ANALYZER s-a născut dintr-o nevoie precisă a operatorului VHF: aceea de a avea, într-un singur instrument, tot ce este necesar pentru a interpreta modurile de propagare care implică stratul E al ionosferei. Până acum E-sporadic, F.A.I., meteor scatter și aurora radio se studiau cu programe diferite, adesea create pentru un singur sistem de operare, uneori nemaiîntreținute, fiecare cu propriul model geometric și propriile convenții. Acest raport expune motivele alegerilor făcute, deosebind ceea ce provine din literatură, ceea ce provine din experiența în bandă a autorului și ceea ce este o alegere a programului, de confirmat prin utilizare.
 H2|1.1 Obiective
@@ -68,6 +68,7 @@ LI|Stațiile sunt plasate în centrul pătratului locatorului: cu 4 caractere er
 LI|foEs este un prag minim, iar legea secantei supraestimează foEs necesar în VHF; valoarea trebuie citită ca o comparație relativă între nori.
 LI|Dreptunghiurile geografice ale Africii și Americii de Sud sunt aproximative; cazurile de graniță pot fi corectate cu indicațiile operatorilor.
 LI|Dezvoltări prevăzute: comparația a două loguri ale unor stații diferite în toate analizele multi-salt, recunoașterea tot mai fină a spoturilor, verificarea sistematică a regulilor pe sezoane întregi.
+P|În 0.7.0 autorul a cerut unirea E sporadic cu tropo: nori în afara poziției, atinși de o stație virtuală printr-un duct. Programul ia ductele din LIVETROPOVHF și le încrucișează cu norii; literatura e împărțită între tropo + Es și salt dublu, de aceea saltul dublu are prioritate, iar modul mixt e căutat doar când nu există primul salt. Valorile de cuplare sunt declarate ca alegeri de reglat pe baza observațiilor.
 H1|7. Mulțumiri
 P|Pentru dezvoltarea E-sporadic pe 50 MHz, și în special a lanțurilor multi-salt, autorul le mulțumește lui Johan IW2DNI și lui Fabio IZ7NLJ, care au pus la dispoziție logurile și decodările lor pentru verificările interne ale programului (datele nu sunt publicate).
 H1|8. Concluzii

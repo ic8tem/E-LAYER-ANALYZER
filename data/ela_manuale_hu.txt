@@ -1,5 +1,5 @@
 TITLE|Az E-LAYER ANALYZER felhasználói kézikönyve
-SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.6.7-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
+SUB|Részletes felhasználói kézikönyv - készítette: Costantino IC8TEM - 0.7.0-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak; a képletek és a számítási választások A SZÁMÍTÁSI VÁLASZTÁSOK ÖSSZEFOGLALÓJA fülön találhatók.
 H1|1. Mielőtt elkezdené
 H2|1.1 Mit csinál a program
 P|Az E-LAYER ANALYZER egyetlen programban egyesíti az ionoszféra E-rétegén áthaladó VHF terjedési módok vizsgálatának eszközeit: sporadikus E, a többugrásos és a kontinensen kívüli terjedést is beleértve, F.A.I. (field-aligned irregularities, az erővonalak mentén rendeződött irregularitások), meteor scatter az integrált YA-MS programmal, valamint rádióaurora. Valós idejű DX cluster spotokkal és ADIF-naplókkal dolgozik, és minden eredményt az ablak kétharmadát elfoglaló térképen mutat, az adatokkal és számításokkal a jobb oldali harmadban.
@@ -149,6 +149,12 @@ LI|Idősáv: ⏮ ◀ Indítás/Leállítás ▶ ⏭ és a csúszka; megnyitásko
 LI|Cellatáblázat: Cella (délnyugati sarok és a középpont lokátora), foEs≥, NmE≥ (minimális elektronsűrűség), Összeköttetések és Sávok. Kattintás egy cellára (táblázat vagy térkép): kiemeli az összeköttetéseit és a hívójeleket.
 LI|Grafikon: a legmagasabb minimális foEs (sárga vonal) és a cellák száma (oszlopok) lépésenként, a megjelenített lépés vonalával. Alatta az összefoglaló a forrás legmagasabb értékével.
 P|Az érték alsó korlát: a felhő sűrűbb lehet, mint amit az összeköttetések mutatnak, és az üres cella csak annyit jelent, hogy nincs összeköttetés.
+H1|5d. ELŐREJELZÉS (a SPORADIC-E allapja)
+P|Az ELŐREJELZÉS allap felismeri a kialakuló Es-felhőket, és megmondja, mit adhatnak az állomásodnak: használható első ugrást, kettős Es-ugrást vagy, csak ha nincs első ugrás, tropo + Es-t.
+LI|Kezelőszervek: Sáv (50 vagy 144 MHz, mindig külön), Es-magasság km, Frissítés most; a Függőleges profilok az Open-Meteóról bekapcsolja az előrejelzett csatornákat; a TR+ES a REAL-TIME lapon is a vegyes modellt a REAL-TIME térképre viszi.
+LI|Felül a figyelmeztetés az első hipotézissel; alatta a hipotézisek táblázata (Hipotézis, Felhő, foEs, Ugrás km, MUF, Érkezés, dB, %) és az utolsó 30 perc felhőinek táblázata a tendenciával (▲ kialakulóban, ● stabil, ▼ gyengülő).
+LI|Térkép: a felhők négyzetei a foEs színével; zöld az első ugrás, lila a kettős ugrás, világoskék szaggatott a csatornás szakasz az A′ virtuális állomással; sárga érkezés szárazföld felett, szürke gyűrű a tengeren. A részletekhez kattints egy pályára vagy felhőre.
+P|A részletek megadják a MUF-ot, az elevációt, a csatorna kritikus szögét, a csatolási veszteséget és a csillapítást dB-ben. REAL-TIME módban a TR+ES spotok az áthelyezett felhővel és TR+ES felirattal jelennek meg.
 H1|6. F.A.I.
 H2|6.1 A két nézet
 P|Az F.A.I. fül az erővonalak mentén rendeződött irregularitásokon történő szórást vizsgálja (fő források [1], [2]). A Scatter trail (A-B pár) nézet két állomásra kiszámítja a lehetséges szórási pontok mértani helyét, a visszaverődési feltételtől való eltérés szerint színezve, javasolja a legvalószínűbb szórási pontot, és jobb felül kirajzolja mindkét állomás QTF- és elevációs mezőjét (piros = A, zöld = B). Az Izoflexió (pont) nézet egy kiválasztott visszaverődési pontra kirajzolja az izoflexiós vonalakat, mint az AuroReflex és K9SE SE-PROP programja: színes sávok a sötét sémákban, vastag vonalak a világos sémákban.

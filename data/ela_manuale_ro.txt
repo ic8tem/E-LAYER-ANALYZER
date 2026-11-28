@@ -1,5 +1,5 @@
 TITLE|Manualul de utilizare E-LAYER ANALYZER
-SUB|Manual de utilizare detaliat - realizat de Costantino IC8TEM - versiunea 0.6.7, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE; formulele și alegerile de calcul se află în fila SINTEZA ALEGERILOR DE CALCUL.
+SUB|Manual de utilizare detaliat - realizat de Costantino IC8TEM - versiunea 0.7.0, noiembrie 2026. Numerele dintre parantezele drepte trimit la fila SURSE; formulele și alegerile de calcul se află în fila SINTEZA ALEGERILOR DE CALCUL.
 H1|1. Înainte de a începe
 H2|1.1 Ce face programul
 P|E-LAYER ANALYZER reunește într-un singur program instrumentele pentru studiul modurilor de propagare VHF care trec prin stratul E al ionosferei: E-sporadic, inclusiv multi-salt și extracontinental, F.A.I. (neregularități aliniate cu câmpul magnetic), meteor scatter, cu programul YA-MS integrat, și aurora radio. Lucrează pe spoturile DX clusterelor în timp real și pe logurile ADIF și arată fiecare rezultat pe o hartă care ocupă două treimi din fereastră, cu datele și calculele în treimea din dreapta.
@@ -149,6 +149,12 @@ LI|Bara timpului: ⏮ ◀ Pornește/Oprește ▶ ⏭ și cursorul; la deschidere
 LI|Tabelul celulelor: Celulă (colțul de sud-vest și locatorul centrului), foEs≥, NmE≥ (densitatea electronică minimă), Legături și Benzi. Clic pe o celulă (tabel sau hartă): îi evidențiază legăturile și indicativele.
 LI|Graficul: cea mai mare foEs minimă (linia galbenă) și numărul de celule (bare) pentru fiecare pas, cu linia pasului afișat. Dedesubt, rezumatul cu valoarea cea mai mare a sursei.
 P|Valoarea este o limită inferioară: norul poate fi mai dens decât arată legăturile, iar o celulă goală înseamnă doar că nu există nicio legătură.
+H1|5d. PROGNOZĂ (subfilă a SPORADIC-E)
+P|Subfila PROGNOZĂ recunoaște norii Es în formare și spune ce pot da stației tale: primul salt util, salt dublu Es sau, numai dacă nu există primul salt, tropo + Es.
+LI|Comenzi: Bandă (50 sau 144 MHz, mereu separate), Altitudine Es km, Actualizează acum; Profiluri verticale de la Open-Meteo pornește ductele prognozate; TR+ES și în REAL-TIME aduce modelul mixt pe harta REAL-TIME.
+LI|Sus alerta cu prima ipoteză; dedesubt tabelul ipotezelor (Ipoteză, Nor, foEs, Salt km, MUF, Sosire, dB, %) și cel al norilor din ultimele 30 de minute cu tendința (▲ în formare, ● stabil, ▼ în scădere).
+LI|Hartă: pătratele norilor în culoarea foEs; verde primul salt, violet saltul dublu, albastru deschis punctat tronsonul în duct cu stația virtuală A′; sosire galbenă pe uscat, inel gri pe mare. Clic pe un traseu sau pe un nor pentru detalii.
+P|Detaliile indică MUF, elevația, unghiul critic al ductului, pierderea de cuplare și atenuarea în dB. În REAL-TIME spoturile TR+ES apar cu norul mutat și eticheta TR+ES.
 H1|6. F.A.I.
 H2|6.1 Cele două vederi
 P|Fila F.A.I. studiază scatter-ul pe neregularități aliniate cu câmpul magnetic (sursa principală [1], [2]). Vederea Scatter trail (perechea A-B) calculează, pentru două stații, locul scatter point-urilor posibile, colorat după abaterea de la condiția de reflexie, propune scatter point-ul cel mai probabil și desenează în dreapta sus caseta cu QTF-urile și elevațiile ambelor stații (roșu = A, verde = B). Vederea Izo-reflexie (punct) desenează, pentru un punct de reflexie ales, liniile de izo-reflexie ca AuroReflex și SE-PROP al lui K9SE: benzi colorate în schemele întunecate, linii groase în schemele luminoase.

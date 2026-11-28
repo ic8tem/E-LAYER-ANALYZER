@@ -1,5 +1,5 @@
 TITLE|Technisch verslag over E-LAYER ANALYZER
-SUB|De keuzes die tot de realisatie van het programma hebben geleid - door Costantino IC8TEM - versie 0.6.7, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
+SUB|De keuzes die tot de realisatie van het programma hebben geleid - door Costantino IC8TEM - versie 0.7.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN.
 H1|1. Inleiding
 P|E-LAYER ANALYZER is ontstaan uit een duidelijke behoefte van de VHF-operator: in één enkel instrument over alles te beschikken wat nodig is om de propagatiemodi te interpreteren waarbij de E-laag van de ionosfeer betrokken is. Tot nu toe werden sporadische E, F.A.I., meteorscatter en radio-aurora met verschillende programma's bestudeerd, vaak ontworpen voor één enkel besturingssysteem, soms niet langer onderhouden, elk met een eigen geometrisch model en eigen conventies. Dit verslag zet de redenen voor de gemaakte keuzes uiteen, waarbij onderscheid wordt gemaakt tussen wat uit de literatuur voortkomt, wat voortkomt uit de ervaring van de auteur op de band en wat een keuze van het programma is, die door het gebruik bevestigd moet worden.
 H2|1.1 Doelstellingen
@@ -68,6 +68,7 @@ LI|De stations worden in het midden van het locatorvak geplaatst: met 4 tekens l
 LI|De foEs is een ondergrens en de secanswet overschat de benodigde foEs op VHF; de waarde moet worden gelezen als relatieve vergelijking tussen wolken.
 LI|De geografische rechthoeken van Afrika en Zuid-Amerika zijn benaderend; grensgevallen kunnen worden gecorrigeerd met aanwijzingen van operators.
 LI|Geplande ontwikkelingen: de vergelijking van twee logs van verschillende stations in alle analyses van de meervoudige sprong, een steeds fijnere herkenning van de spots en de systematische controle van de regels over volledige seizoenen.
+P|In 0.7.0 vroeg de auteur om sporadische E en tropo te combineren: wolken buiten positie, bereikt door een virtueel station via een duct. Het programma neemt de ducts uit LIVETROPOVHF en kruist ze met de wolken; de literatuur is verdeeld tussen tropo + Es en dubbele sprong, daarom heeft de dubbele sprong voorrang en wordt de gemengde modus alleen gezocht als er geen eerste sprong is. De koppelwaarden zijn opgegeven als keuzes die op waarnemingen moeten worden afgestemd.
 H1|7. Dankwoord
 P|Voor de ontwikkeling van de sporadische E op 50 MHz, en in het bijzonder van de ketens met meervoudige sprong, bedankt de auteur Johan IW2DNI en Fabio IZ7NLJ, die hun logs en decoderingen ter beschikking hebben gesteld voor de interne controles van het programma (de gegevens worden niet gepubliceerd).
 H1|8. Conclusies

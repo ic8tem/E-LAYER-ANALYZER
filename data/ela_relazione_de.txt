@@ -1,5 +1,5 @@
 TITLE|Technischer Bericht über E-LAYER ANALYZER
-SUB|Die Entscheidungen, die zur Entwicklung des Programms geführt haben - von Costantino IC8TEM - Version 0.6.7, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN.
+SUB|Die Entscheidungen, die zur Entwicklung des Programms geführt haben - von Costantino IC8TEM - Version 0.7.0, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN.
 H1|1. Vorbemerkung
 P|E-LAYER ANALYZER entspringt einem klaren Bedürfnis des VHF-Funkamateurs: in einem einzigen Werkzeug über alles zu verfügen, was zur Deutung der Ausbreitungsarten nötig ist, an denen die E-Schicht der Ionosphäre beteiligt ist. Bislang wurden Sporadic-E, F.A.I., Meteorscatter und Radio-Aurora mit verschiedenen Programmen untersucht, die oft nur für ein Betriebssystem entstanden, bisweilen nicht mehr gepflegt wurden und jeweils ihr eigenes geometrisches Modell und ihre eigenen Konventionen hatten. Dieser Bericht legt die Gründe der getroffenen Entscheidungen dar und unterscheidet dabei, was aus der Fachliteratur stammt, was aus der Betriebserfahrung des Autors auf den Bändern hervorgeht und was eine Entscheidung des Programms ist, die sich in der Praxis noch bestätigen muss.
 H2|1.1 Ziele
@@ -68,6 +68,7 @@ LI|Die Stationen werden in die Mitte des Locator-Feldes gesetzt: Bei 4 Zeichen e
 LI|Die foEs ist eine Mindestschwelle, und das Sekantengesetz überschätzt die im VHF-Bereich erforderliche foEs; der Wert ist als relativer Vergleich zwischen Wolken zu lesen.
 LI|Die geografischen Rahmen für Afrika und Südamerika sind Näherungen; Grenzfälle lassen sich anhand der Hinweise der Funkamateure korrigieren.
 LI|Geplante Weiterentwicklungen: der Vergleich zweier Logs verschiedener Stationen in allen Mehrfachsprung-Analysen, eine immer feinere Erkennung der Spots, die systematische Prüfung der Regeln über ganze Saisons.
+P|In 0.7.0 bat der Autor darum, Sporadic-E und Tropo zu verbinden: Wolken außerhalb der Position, die von einer virtuellen Station im Dukt erreicht werden. Das Programm nimmt die Dukte aus LIVETROPOVHF und kreuzt sie mit den Wolken; die Literatur ist zwischen Tropo + Es und Doppelsprung geteilt, daher hat der Doppelsprung Vorrang und der Mischmodus wird nur gesucht, wenn es keinen ersten Sprung gibt. Die Kopplungswerte sind als Startwerte angegeben, die an Beobachtungen abzustimmen sind.
 H1|7. Danksagung
 P|Für die Entwicklung des Sporadic-E auf 50 MHz und besonders der Mehrfachsprung-Ketten dankt der Autor Johan IW2DNI und Fabio IZ7NLJ, die ihre Logs und Dekodierungen für die internen Prüfungen des Programms zur Verfügung gestellt haben (die Daten werden nicht veröffentlicht).
 H1|8. Schlussfolgerungen

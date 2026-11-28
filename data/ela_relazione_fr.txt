@@ -1,5 +1,5 @@
 TITLE|Rapport technique sur E-LAYER ANALYZER
-SUB|Les choix qui ont conduit à la réalisation du programme - par Costantino IC8TEM - version 0.6.7, novembre 2026. Les numéros entre crochets renvoient à l'onglet SOURCES.
+SUB|Les choix qui ont conduit à la réalisation du programme - par Costantino IC8TEM - version 0.7.0, novembre 2026. Les numéros entre crochets renvoient à l'onglet SOURCES.
 H1|1. Préambule
 P|E-LAYER ANALYZER naît d'un besoin précis de l'opérateur VHF : disposer, en un instrument unique, de tout ce qui est nécessaire pour interpréter les modes de propagation qui font intervenir la couche E de l'ionosphère. Jusqu'à présent, l'E sporadique, le F.A.I., le meteor scatter et l'aurore radio s'étudiaient avec des programmes différents, souvent conçus pour un seul système d'exploitation, parfois plus maintenus, chacun avec son propre modèle géométrique et ses propres conventions. Le présent rapport expose les raisons des choix effectués, en distinguant ce qui relève de la littérature, ce qui relève de l'expérience de l'auteur sur les bandes et ce qui constitue un choix du programme, à confirmer par l'usage.
 H2|1.1 Objectifs
@@ -68,6 +68,7 @@ LI|Les stations sont placées au centre du carré du locator : avec 4 caractère
 LI|La foEs est un seuil minimal et la loi de la sécante surestime la foEs nécessaire en VHF ; la valeur doit être lue comme une comparaison relative entre nuages.
 LI|Les cadres géographiques de l'Afrique et de l'Amérique du Sud sont approximatifs ; les cas limites peuvent être corrigés grâce aux indications des opérateurs.
 LI|Développements prévus : la comparaison de deux logs de stations différentes dans toutes les analyses du multi-bond, une reconnaissance des spots toujours plus fine, la vérification systématique des règles sur des saisons entières.
+P|Dans la 0.7.0, l'auteur a demandé d'associer le sporadique E et la tropo : des nuages hors position, atteints par une station virtuelle en conduit. Le programme prend les conduits de LIVETROPOVHF et les croise avec les nuages ; la littérature est partagée entre tropo + Es et double bond, d'où la priorité au double bond et la recherche du mode mixte seulement en l'absence de premier bond. Les valeurs de couplage sont déclarées comme des choix à ajuster sur les observations.
 H1|7. Remerciements
 P|Pour le développement de l'E sporadique en 50 MHz, et en particulier des chaînes multi-bond, l'auteur remercie Johan IW2DNI et Fabio IZ7NLJ, qui ont mis leurs logs et leurs décodages à disposition pour les vérifications internes du programme (les données ne sont pas publiées).
 H1|8. Conclusions

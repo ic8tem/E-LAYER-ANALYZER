@@ -1,5 +1,5 @@
 TITLE|Teknikal na ulat tungkol sa E-LAYER ANALYZER
-SUB|Ang mga pagpiling humantong sa pagbuo ng programa - inihanda ni Costantino IC8TEM - bersiyon 0.6.7, Nobyembre 2026. Ang mga numero sa loob ng square bracket ay tumutukoy sa tab na MGA SANGGUNIAN.
+SUB|Ang mga pagpiling humantong sa pagbuo ng programa - inihanda ni Costantino IC8TEM - bersiyon 0.7.0, Nobyembre 2026. Ang mga numero sa loob ng square bracket ay tumutukoy sa tab na MGA SANGGUNIAN.
 H1|1. Paunang salita
 P|Isinilang ang E-LAYER ANALYZER mula sa isang tiyak na pangangailangan ng VHF operator: ang magkaroon, sa iisang kasangkapan, ng lahat ng kailangan upang maipaliwanag ang mga mode ng propagasyon na may kinalaman sa E layer ng ionosphere. Hanggang ngayon, ang sporadic-E, ang F.A.I., ang meteor scatter at ang radio aurora ay pinag-aaralan gamit ang magkakaibang programa, na kadalasang ginawa para sa iisang operating system lamang, kung minsan ay hindi na pinapanatili, at bawat isa ay may sariling heometrikong modelo at sariling mga kumbensiyon. Inilalahad ng ulat na ito ang mga dahilan ng mga pagpiling ginawa, at pinag-iiba kung ano ang nagmula sa literatura, kung ano ang nagmula sa karanasan ng may-akda sa banda, at kung ano ang pagpili ng programa na kailangan pang kumpirmahin sa paggamit.
 H2|1.1 Mga layunin
@@ -68,6 +68,7 @@ LI|Inilalagay ang mga istasyon sa gitna ng grid square ng locator: sa 4 na chara
 LI|Ang foEs ay pinakamababang hangganan at sobra ang tantiya ng secant law sa foEs na kailangan sa VHF; dapat basahin ang halaga bilang relatibong paghahambing sa pagitan ng mga ulap.
 LI|Tinatayang lamang ang mga heograpikong hangganan ng Africa at South America; maaaring itama ang mga kaso sa hangganan batay sa mga puna ng mga operator.
 LI|Mga nakaplanong pag-unlad: ang paghahambing ng dalawang log ng magkaibang istasyon sa lahat ng pagsusuri ng multi-hop, lalong pinong pagkilala sa mga spot, at sistematikong pagsusuri ng mga patakaran sa buong mga season.
+P|Sa 0.7.0 hiniling ng may-akda na pagsamahin ang sporadic E at tropo: mga ulap na wala sa kanilang puwesto, naaabot ng virtual na istasyon sa duct. Kinukuha ng programa ang mga duct mula sa LIVETROPOVHF at pinagtatagpo sa mga ulap; hati ang literatura sa pagitan ng tropo + Es at dobleng hop, kaya nauuna ang dobleng hop at hinahanap lang ang halo-halong mode kapag walang unang hop. Ang mga halaga ng pagpasok ay idinedeklarang pili na aayusin batay sa mga obserbasyon.
 H1|7. Pasasalamat
 P|Para sa pagbuo ng sporadic-E sa 50 MHz, at lalo na ng mga multi-hop na kadena, nagpapasalamat ang may-akda kina Johan IW2DNI at Fabio IZ7NLJ, na nagbahagi ng kanilang mga log at decode para sa mga panloob na pagsusuri ng programa (hindi inilalathala ang datos).
 H1|8. Mga konklusyon

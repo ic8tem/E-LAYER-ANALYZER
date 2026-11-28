@@ -87,3 +87,7 @@ En la subpestaña **Precursores de multisalto**, el programa busca las cadenas d
 - **Previsión del TEP** (azul, desde la versión 0.6.5): índice 0-100 hacia las zonas más allá del ecuador magnético = estación del año × SFI × Kp (solo eTEP) × hora local × foF2 de las ionosondas GIRO; el SFI pesa pero no anula, porque en el mínimo solar el TEP se vuelve raro pero no desaparece.
 
 ![Corredor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PREVISIÓN (desde la 0.7.0)
+
+La subpestaña **PREVISIÓN** reconoce las nubes Es en formación (spots de los últimos 30 minutos e ionosondas GIRO) y comprueba desde su estación, con 50 y 144 MHz por separado: primer salto útil, luego doble salto Es, luego —solo si no hay primer salto— tropo + Es, con una estación virtual A′ alcanzada en conducto (módulo tropo de LIVETROPOVHF, perfiles de Open-Meteo, ángulo crítico de UIT-R P.834). En REAL-TIME los spots de 144 MHz entre 2400 y 3400 km pueden pasar a **TR+ES**, con la nube reubicada.

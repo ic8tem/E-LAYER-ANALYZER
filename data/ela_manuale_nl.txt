@@ -1,5 +1,5 @@
 TITLE|Handleiding van E-LAYER ANALYZER
-SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.6.7, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
+SUB|Uitgebreide handleiding - door Costantino IC8TEM - versie 0.7.0, november 2026. De getallen tussen vierkante haken verwijzen naar de tab BRONNEN; de formules en de rekenkeuzes staan in de tab SAMENVATTING VAN DE REKENKEUZES.
 H1|1. Voordat je begint
 H2|1.1 Wat het programma doet
 P|E-LAYER ANALYZER brengt in één programma de hulpmiddelen samen om de VHF-propagatiemodi te bestuderen die via de E-laag van de ionosfeer verlopen: sporadische E, ook met meervoudige sprong en intercontinentaal, F.A.I. (veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld), meteorscatter, met het ingebouwde programma YA-MS, en radio-aurora. Het werkt met de spots van de DX-clusters in realtime en met ADIF-logs, en toont elk resultaat op een kaart die twee derde van het venster beslaat, met de gegevens en berekeningen in het rechterderde.
@@ -149,6 +149,12 @@ LI|Tijdbalk: ⏮ ◀ Starten/Stoppen ▶ ⏭ en de schuifregelaar; bij het opene
 LI|Tabel van de cellen: Cel (zuidwestelijke hoek en locator van het midden), foEs≥, NmE≥ (minimale elektronendichtheid), Verbindingen en Banden. Klik op een cel (tabel of kaart): de verbindingen en roepnamen ervan worden gemarkeerd.
 LI|Grafiek: hoogste minimale foEs (gele lijn) en aantal cellen (staven) voor elke stap, met de lijn van de getoonde stap. Daaronder de samenvatting met de hoogste waarde van de bron.
 P|De waarde is een ondergrens: de wolk kan dichter zijn dan de verbindingen laten zien, en een lege cel betekent alleen dat er geen verbinding is.
+H1|5d. VOORSPELLING (subtabblad van SPORADIC-E)
+P|Het subtabblad VOORSPELLING herkent Es-wolken in vorming en zegt wat ze je station kunnen geven: bruikbare eerste sprong, dubbele Es-sprong of, alleen als er geen eerste sprong is, tropo + Es.
+LI|Bediening: Band (50 of 144 MHz, altijd gescheiden), Es-hoogte km, Nu bijwerken; Verticale profielen van Open-Meteo zet de voorspelde ducts aan; TR+ES ook in REAL-TIME brengt het gemengde model naar de REAL-TIME-kaart.
+LI|Bovenaan de waarschuwing met de eerste hypothese; daaronder de tabel van de hypothesen (Hypothese, Wolk, foEs, Sprong km, MUF, Aankomst, dB, %) en die van de wolken van de laatste 30 minuten met hun trend (▲ in vorming, ● stabiel, ▼ afnemend).
+LI|Kaart: wolkvakken in de kleur van de foEs; groen de eerste sprong, violet de dubbele sprong, lichtblauw gestippeld het ducttraject met het virtuele station A′; gele aankomst boven land, grijze ring op zee. Klik op een traject of wolk voor de details.
+P|De details geven MUF, elevatie, kritische hoek van de duct, koppelverlies en trajectverzwakking in dB. In REAL-TIME verschijnen de TR+ES-spots met de verplaatste wolk en het label TR+ES.
 H1|6. F.A.I.
 H2|6.1 De twee weergaven
 P|De tab F.A.I. bestudeert de scatter op veldgerichte onregelmatigheden, uitgelijnd met het magnetisch veld (hoofdbron [1], [2]). De weergave Scatter trail (paar A-B) berekent voor twee stations de verzameling mogelijke scatterpunten, gekleurd naar de afwijking van de reflectievoorwaarde, stelt het meest waarschijnlijke scatterpunt voor en tekent rechtsboven het kader met de QTF's en elevaties van beide stations (rood = A, groen = B). De weergave Iso-reflectie (punt) tekent voor een gekozen reflectiepunt de iso-reflectielijnen, zoals AuroReflex en SE-PROP van K9SE: gekleurde banden in de donkere schema's, dikke lijnen in de lichte schema's.

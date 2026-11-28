@@ -87,3 +87,7 @@ I underfanen **Multi-hop-forløbere** søger programmet efter kæder af multi-ho
 - **TEP-prognose** (blå, fra version 0.6.5): indeks 0-100 mod zonerne hinsides den magnetiske ækvator = årstid × SFI × Kp (kun eTEP) × lokal tid × foF2 fra GIRO-ionosonderne; SFI vejer, men nulstiller ikke, fordi TEP ved solminimum bliver sjælden, men ikke forsvinder.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOSE (fra 0.7.0)
+
+Underfanen **PROGNOSE** genkender Es-skyer under dannelse (spots fra de sidste 30 minutter og GIRO-ionosonder) og tjekker fra din station, med 50 og 144 MHz adskilt: brugbart første hop, så Es-dobbelthop, så – kun hvis der ikke er noget første hop – tropo + Es, med en virtuel station A′ nået gennem en dukt (tropomodul fra LIVETROPOVHF, Open-Meteo-profiler, kritisk vinkel efter ITU-R P.834). I REAL-TIME kan 144 MHz-spots mellem 2400 og 3400 km blive til **TR+ES**, med den flyttede sky.

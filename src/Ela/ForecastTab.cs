@@ -252,7 +252,7 @@ namespace ELA
             sb.AppendLine(Lang.F("Abbattimento stimato: {0:F0} dB (ITU-R P.534-6 per il salto Es{1}).", h.LossDb, h.Kind == HypKind.TropoEs ? ", " + Lang.T("più la tratta in condotto e l'accoppiamento") : ""));
             if (h.FMHz > 100) sb.AppendLine(Lang.T("In 144 MHz le aperture Es sono rare (IK3XTV): serve una nube iperdensa."));
             sb.AppendLine();
-            sb.AppendLine(Lang.T("Priorità: il doppio salto Es viene prima del tropo + Es (fonte [96]); il tropo + Es si cerca solo se il primo salto utile non c'è. Valori di accoppiamento e di attenuazione nel condotto: scelte di partenza del programma, da tarare."));
+            sb.AppendLine(Lang.T("Priorità: il doppio salto Es viene prima del tropo + Es (fonte [88]); il tropo + Es si cerca solo se il primo salto utile non c'è. Valori di accoppiamento e di attenuazione nel condotto: scelte di partenza del programma, da tarare."));
             txtDet.Text = sb.ToString();
         }
     }

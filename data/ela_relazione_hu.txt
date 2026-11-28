@@ -1,5 +1,5 @@
 TITLE|Műszaki jelentés az E-LAYER ANALYZER programról
-SUB|A döntések, amelyek a program létrejöttéhez vezettek - készítette: Costantino IC8TEM - 0.6.7-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak.
+SUB|A döntések, amelyek a program létrejöttéhez vezettek - készítette: Costantino IC8TEM - 0.7.0-as verzió, 2026. november. A szögletes zárójelben lévő számok a FORRÁSOK fülre utalnak.
 H1|1. Bevezetés
 P|Az E-LAYER ANALYZER a VHF-operátor egy pontos igényéből született: egyetlen eszközben rendelkezésre álljon mindaz, ami az ionoszféra E-rétegét érintő terjedési módok értelmezéséhez szükséges. Eddig a sporadikus E-t, az F.A.I.-t, a meteor scattert és a rádióaurorát különböző programokkal vizsgálták, amelyeket gyakran egyetlen operációs rendszerre írtak, néha már nem is tartanak karban, és mindegyiknek saját geometriai modellje és saját konvenciói vannak. Ez a jelentés a meghozott döntések indokait ismerteti, megkülönböztetve azt, ami a szakirodalomból származik, azt, ami a szerző forgalmi tapasztalatából ered, és azt, ami a program döntése, amelyet a használat során még meg kell erősíteni.
 H2|1.1 Célok
@@ -68,6 +68,7 @@ LI|Az állomásokat a lokátornégyzet közepére helyezi: 4 karakternél a hiba
 LI|A foEs minimális küszöbérték, és a szekánstörvény túlbecsüli a VHF-en szükséges foEs-t; az értéket a felhők közötti relatív összehasonlításként kell olvasni.
 LI|Afrika és Dél-Amerika földrajzi téglalapjai közelítőek; a határeseteket az operátorok jelzései alapján lehet javítani.
 LI|Tervezett fejlesztések: két különböző állomás naplójának összehasonlítása minden többugrásos elemzésben, a spotok egyre finomabb felismerése, a szabályok rendszeres ellenőrzése teljes szezonokon át.
+P|A 0.7.0 verzióban a szerző kérte a sporadikus E és a tropo összekapcsolását: helyükön kívüli felhők, amelyeket egy virtuális állomás csatornán át ér el. A program a csatornákat a LIVETROPOVHF-ből veszi, és összeveti a felhőkkel; a szakirodalom megosztott a tropo + Es és a kettős ugrás között, ezért a kettős ugrás élvez elsőbbséget, a vegyes módust pedig csak akkor keresi, ha nincs első ugrás. A csatolási értékek a megfigyelésekhez hangolandó választásként vannak megadva.
 H1|7. Köszönetnyilvánítás
 P|Az 50 MHz-es sporadikus E, különösen a többugrásos láncok fejlesztéséért a szerző köszönetet mond Johan IW2DNI-nek és Fabio IZ7NLJ-nek, akik naplóikat és dekódolásaikat a program belső ellenőrzéseihez rendelkezésre bocsátották (az adatokat nem teszik közzé).
 H1|8. Következtetések

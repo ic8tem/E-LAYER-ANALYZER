@@ -1043,3 +1043,73 @@ La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento au
 La firma dei pacchetti non è valida: l'aggiornamento non si fa.	La signature des paquets n'est pas valide : la mise à jour n'est pas faite.
 Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	Le paquet téléchargé ne correspond pas à la signature : la mise à jour n'est pas faite.
 Controllo della firma...	Vérification de la signature...
+# 0.7.0
+Scarico {0} profili verticali da Open-Meteo (GFS)...	Téléchargement de {0} profils verticaux depuis Open-Meteo (GFS)...
+Open-Meteo ha rifiutato per il limite di richieste: si riprova fra 10 minuti.	Open-Meteo a refusé à cause de la limite de requêtes : nouvel essai dans 10 minutes.
+Profili verticali in memoria: {0} (Open-Meteo, modello GFS; ultimo aggiornamento {1:HH:mm} UTC).	Profils verticaux en mémoire : {0} (Open-Meteo, modèle GFS ; dernière mise à jour {1:HH:mm} UTC).
+Open-Meteo non risponde: {0}	Open-Meteo ne répond pas : {0}
+in formazione: possibile nei prossimi 15-30 minuti	en formation : possible dans les 15-30 prochaines minutes
+in calo: la nube si sta chiudendo	en déclin : le nuage se referme
+stabile: possibile adesso	stable : possible maintenant
+spot tropo {0}-{1} ({2:F0} km)	spot tropo {0}-{1} ({2:F0} km)
+primo salto utile	premier bond utile
+doppio salto Es	double bond Es
+tropo + Es	tropo + Es
+Profili verticali da Open-Meteo (condotti previsti)	Profils verticaux depuis Open-Meteo (conduits prévus)
+TR+ES anche in REAL-TIME	TR+ES aussi en REAL-TIME
+Nube	Nuage
+Salto km	Bond km
+Arrivo	Arrivée
+Priorità: primo salto utile, poi doppio salto Es, poi tropo + Es	Priorité : premier bond utile, puis double bond Es, puis tropo + Es
+Quadrato del centro della nube	Carré du centre du nuage
+foEs della nube (MHz), dagli spot o dalla ionosonda	foEs du nuage (MHz), d'après les spots ou l'ionosonde
+Lunghezza dei salti Es (km)	Longueur des bonds Es (km)
+MUF del salto (MHz), legge della secante	MUF du bond (MHz), loi de la sécante
+Dove arriva il segnale (quadrato)	Où arrive le signal (carré)
+Abbattimento stimato della tratta (dB)	Affaiblissement estimé du trajet (dB)
+Punteggio dell'ipotesi	Score de l'hypothèse
+Tendenza	Tendance
+Profili verticali: Open-Meteo (open-meteo.com, CC BY 4.0), modello GFS di NOAA; calcolo dei condotti di LIVETROPOVHF (ITU-R P.453, Kerr, ITU-R P.834). Abbattimento del salto Es: ITU-R P.534-6.	Profils verticaux : Open-Meteo (open-meteo.com, CC BY 4.0), modèle GFS de la NOAA ; calcul des conduits de LIVETROPOVHF (UIT-R P.453, Kerr, UIT-R P.834). Affaiblissement du bond Es : UIT-R P.534-6.
+Ipotesi dalla mia stazione	Hypothèses depuis ma station
+Nubi Es degli ultimi 30 minuti	Nuages Es des 30 dernières minutes
+Dettagli dell'ipotesi	Détails de l'hypothèse
+Imposta il locator della stazione (IMPOSTAZIONI o barra in alto) per le ipotesi dalla tua stazione.	Réglez le locator de la station (RÉGLAGES ou barre du haut) pour obtenir les hypothèses depuis votre station.
+Nessuna nube Es negli ultimi {0:F0} minuti.	Aucun nuage Es dans les {0:F0} dernières minutes.
+{0}: nessuna ipotesi utile dalla tua stazione con le nubi attuali.	{0} : aucune hypothèse utile depuis votre station avec les nuages actuels.
+in formazione	en formation
+stabile	stable
+Nube Es {0} su {1} (foEs {2:F1} MHz)	Nuage Es {0} sur {1} (foEs {2:F1} MHz)
+primo salto utile in {0} verso {1}	premier bond utile sur {0} vers {1}
+possibile doppio salto in {0} verso {1}	double bond possible sur {0} vers {1}
+possibile tropo + Es in {0} verso {1}	tropo + Es possible sur {0} vers {1}
+Nubi: {0}, di cui {1} in formazione. Ipotesi in {2}: {3}.	Nuages : {0}, dont {1} en formation. Hypothèses sur {2} : {3}.
+Profili verticali in attesa: {0}.	Profils verticaux en attente : {0}.
+in calo	en déclin
+PREVISIONE Es - {0}: nubi in formazione e ipotesi dalla mia stazione	PRÉVISION Es - {0} : nuages en formation et hypothèses depuis ma station
+foEs della nube	foEs du nuage
+▲ nube in formazione, ▼ in calo	▲ nuage en formation, ▼ en déclin
+verde: primo salto utile; viola: doppio salto Es	vert : premier bond utile ; violet : double bond Es
+tratteggio azzurro: tratta in condotto (tropo + Es)	tirets bleu clair : trajet en conduit (tropo + Es)
+giallo: arrivo sulla terra; anello grigio: arrivo in mare	jaune : arrivée sur terre ; anneau gris : arrivée en mer
+Nessuna ipotesi. La linguetta cerca, dalla tua stazione e nell'ordine: primo salto utile, doppio salto Es, tropo + Es (solo se il primo salto non c'è).	Aucune hypothèse. Depuis votre station, l'onglet cherche dans l'ordre : premier bond utile, double bond Es, tropo + Es (seulement s'il n'y a pas de premier bond).
+Una nube è «in formazione» quando la foEs degli ultimi 10 minuti supera quella dei 20 minuti prima, o quando è nata negli ultimi 10 minuti con almeno due spot.	Un nuage est « en formation » quand la foEs des 10 dernières minutes dépasse celle des 20 minutes précédentes, ou quand il est apparu dans les 10 dernières minutes avec au moins deux spots.
+Nube {0}: foEs {1:F1} MHz, {2}, {3} spot	Nuage {0} : foEs {1:F1} MHz, {2}, {3} spots
+ionosonda {0} {1:F1} MHz	ionosonde {0} {1:F1} MHz
+Quando: {0}.	Quand : {0}.
+Tratta in condotto dalla stazione ad A′ {0}: {1:F0} km ({2}).	Trajet en conduit de la station à A′ {0} : {1:F0} km ({2}).
+Il primo salto diretto non c'è: la nube è fuori dalla geometria del salto dalla tua stazione, ma è a metà di un salto di {0:F0} km da A′.	Il n'y a pas de premier bond direct : le nuage est hors de la géométrie du bond depuis votre station, mais il est au milieu d'un bond de {0:F0} km depuis A′.
+Salto Es di {0:F0} km, azimut {1:F0}°, elevazione {2:F2}°, MUF {3:F1} MHz.	Bond Es de {0:F0} km, azimut {1:F0}°, élévation {2:F2}°, MUF {3:F1} MHz.
+Secondo salto di {0:F0} km sulla nube {1} (foEs {2:F1} MHz, MUF {3:F1} MHz), arrivo a {4}{5}.	Second bond de {0:F0} km sur le nuage {1} (foEs {2:F1} MHz, MUF {3:F1} MHz), arrivée à {4}{5}.
+in mare	en mer
+Arrivo del primo salto a {0}{1}.	Arrivée du premier bond à {0}{1}.
+Accoppiamento nel condotto: elevazione {0:F2}° contro angolo critico {1:F2}° (ITU-R P.834), perdita di accoppiamento {2:F1} dB; condotto {3}.	Couplage dans le conduit : élévation {0:F2}° contre angle critique {1:F2}° (UIT-R P.834), perte de couplage {2:F1} dB ; conduit {3}.
+che intrappola la banda	qui piège la bande
+«morbido» (Kerr)	« souple » (Kerr)
+Dopo l'arrivo il segnale può continuare in condotto per {0:F0} km fino a {1} ({2}).	Après l'arrivée, le signal peut continuer en conduit sur {0:F0} km jusqu'à {1} ({2}).
+Abbattimento stimato: {0:F0} dB (ITU-R P.534-6 per il salto Es{1}).	Affaiblissement estimé : {0:F0} dB (UIT-R P.534-6 pour le bond Es{1}).
+più la tratta in condotto e l'accoppiamento	plus le trajet en conduit et le couplage
+In 144 MHz le aperture Es sono rare (IK3XTV): serve una nube iperdensa.	Sur 144 MHz les ouvertures Es sont rares (IK3XTV) : il faut un nuage hyperdense.
+Priorità: il doppio salto Es viene prima del tropo + Es (fonte [88]); il tropo + Es si cerca solo se il primo salto utile non c'è. Valori di accoppiamento e di attenuazione nel condotto: scelte di partenza del programma, da tarare.	Priorité : le double bond Es passe avant le tropo + Es (source [88]) ; le tropo + Es n'est cherché que s'il n'y a pas de premier bond utile. Valeurs de couplage et d'atténuation dans le conduit : choix de départ du programme, à ajuster.
+144 MHz oltre il singolo salto: {0} spot TR+ES (nube ricollocata, condotto dall'altra estremità).	144 MHz au-delà du bond simple : {0} spots TR+ES (nuage déplacé, conduit depuis l'autre extrémité).
+TR+ES: salto Es (arancio) con la nube ricollocata e tratta in condotto (tratteggio azzurro)	TR+ES : bond Es (orange) avec le nuage déplacé et trajet en conduit (tirets bleu clair)
+PREVISIONE	PRÉVISION

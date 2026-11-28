@@ -87,3 +87,7 @@ Haritanın sağ üstünde N0NBH özeti görünür (seçilen kıta için E-skip, 
 - **TEP tahmini** (mavi, 0.6.5 sürümünden itibaren): manyetik ekvatorun ötesindeki bölgelere doğru 0-100 endeks = mevsim × SFI × Kp (yalnızca eTEP) × yerel saat × GIRO iyonosondlarının foF2'si; SFI ağırlık verir ama sıfırlamaz, çünkü güneş minimumunda TEP seyrekleşir ama kaybolmaz.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## TAHMİN (0.7.0'dan itibaren)
+
+**TAHMİN** alt sekmesi oluşan Es bulutlarını (son 30 dakikanın spotları ve GIRO iyonosondaları) tanır ve istasyonunuzdan, 50 ve 144 MHz ayrı tutularak, şunları kontrol eder: kullanılabilir ilk atlama, sonra çift Es atlaması, sonra — yalnızca ilk atlama yoksa — kanal yoluyla ulaşılan sanal istasyon A′ ile tropo + Es (LIVETROPOVHF tropo modülü, Open-Meteo profilleri, ITU-R P.834 kritik açısı). REAL-TIME'da 2400 ile 3400 km arasındaki 144 MHz spotları, yeniden konumlanan bulutla **TR+ES** olabilir.

@@ -87,3 +87,7 @@ Pătratele Maidenhead ale punctelor de reflexie sunt colorate după cea mai mare
 - **Prognoza TEP** (albastru, de la versiunea 0.6.5): indice 0-100 spre zonele dincolo de ecuatorul magnetic = anotimp × SFI × Kp (numai eTEP) × ora locală × foF2 a ionosondelor GIRO; SFI cântărește, dar nu anulează, pentru că la minimul solar TEP devine rar, dar nu dispare.
 
 ![Coridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOZĂ (din 0.7.0)
+
+Subfila **PROGNOZĂ** recunoaște norii Es în formare (spoturile din ultimele 30 de minute și ionosondele GIRO) și verifică de la stația ta, cu 50 și 144 MHz separate: primul salt util, apoi salt dublu Es, apoi – numai dacă nu există primul salt – tropo + Es, cu o stație virtuală A′ atinsă printr-un duct (modulul tropo din LIVETROPOVHF, profiluri Open-Meteo, unghi critic UIT-R P.834). În REAL-TIME, spoturile de 144 MHz între 2400 și 3400 km pot deveni **TR+ES**, cu norul mutat.

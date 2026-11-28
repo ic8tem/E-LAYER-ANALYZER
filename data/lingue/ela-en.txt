@@ -1043,3 +1043,73 @@ La release non contiene la firma dei pacchetti: per sicurezza l'aggiornamento au
 La firma dei pacchetti non è valida: l'aggiornamento non si fa.	The package signature is not valid: the update is not done.
 Il pacchetto scaricato non corrisponde alla firma: l'aggiornamento non si fa.	The downloaded package does not match the signature: the update is not done.
 Controllo della firma...	Checking the signature...
+# 0.7.0
+Scarico {0} profili verticali da Open-Meteo (GFS)...	Downloading {0} vertical profiles from Open-Meteo (GFS)...
+Open-Meteo ha rifiutato per il limite di richieste: si riprova fra 10 minuti.	Open-Meteo refused because of the request limit: retrying in 10 minutes.
+Profili verticali in memoria: {0} (Open-Meteo, modello GFS; ultimo aggiornamento {1:HH:mm} UTC).	Vertical profiles in memory: {0} (Open-Meteo, GFS model; last update {1:HH:mm} UTC).
+Open-Meteo non risponde: {0}	Open-Meteo is not responding: {0}
+in formazione: possibile nei prossimi 15-30 minuti	forming: possible in the next 15-30 minutes
+in calo: la nube si sta chiudendo	decaying: the cloud is closing
+stabile: possibile adesso	stable: possible now
+spot tropo {0}-{1} ({2:F0} km)	tropo spot {0}-{1} ({2:F0} km)
+primo salto utile	useful first hop
+doppio salto Es	double-hop Es
+tropo + Es	tropo + Es
+Profili verticali da Open-Meteo (condotti previsti)	Vertical profiles from Open-Meteo (forecast ducts)
+TR+ES anche in REAL-TIME	TR+ES also in REAL-TIME
+Nube	Cloud
+Salto km	Hop km
+Arrivo	Arrival
+Priorità: primo salto utile, poi doppio salto Es, poi tropo + Es	Priority: useful first hop, then double-hop Es, then tropo + Es
+Quadrato del centro della nube	Square of the cloud centre
+foEs della nube (MHz), dagli spot o dalla ionosonda	foEs of the cloud (MHz), from spots or from the ionosonde
+Lunghezza dei salti Es (km)	Length of the Es hops (km)
+MUF del salto (MHz), legge della secante	MUF of the hop (MHz), secant law
+Dove arriva il segnale (quadrato)	Where the signal arrives (square)
+Abbattimento stimato della tratta (dB)	Estimated path loss (dB)
+Punteggio dell'ipotesi	Score of the hypothesis
+Tendenza	Trend
+Profili verticali: Open-Meteo (open-meteo.com, CC BY 4.0), modello GFS di NOAA; calcolo dei condotti di LIVETROPOVHF (ITU-R P.453, Kerr, ITU-R P.834). Abbattimento del salto Es: ITU-R P.534-6.	Vertical profiles: Open-Meteo (open-meteo.com, CC BY 4.0), NOAA GFS model; duct calculation from LIVETROPOVHF (ITU-R P.453, Kerr, ITU-R P.834). Es hop loss: ITU-R P.534-6.
+Ipotesi dalla mia stazione	Hypotheses from my station
+Nubi Es degli ultimi 30 minuti	Es clouds of the last 30 minutes
+Dettagli dell'ipotesi	Details of the hypothesis
+Imposta il locator della stazione (IMPOSTAZIONI o barra in alto) per le ipotesi dalla tua stazione.	Set the station locator (SETTINGS or top bar) to get the hypotheses from your station.
+Nessuna nube Es negli ultimi {0:F0} minuti.	No Es cloud in the last {0:F0} minutes.
+{0}: nessuna ipotesi utile dalla tua stazione con le nubi attuali.	{0}: no useful hypothesis from your station with the current clouds.
+in formazione	forming
+stabile	stable
+Nube Es {0} su {1} (foEs {2:F1} MHz)	Es cloud {0} over {1} (foEs {2:F1} MHz)
+primo salto utile in {0} verso {1}	useful first hop on {0} towards {1}
+possibile doppio salto in {0} verso {1}	possible double hop on {0} towards {1}
+possibile tropo + Es in {0} verso {1}	possible tropo + Es on {0} towards {1}
+Nubi: {0}, di cui {1} in formazione. Ipotesi in {2}: {3}.	Clouds: {0}, of which {1} forming. Hypotheses on {2}: {3}.
+Profili verticali in attesa: {0}.	Vertical profiles waiting: {0}.
+in calo	decaying
+PREVISIONE Es - {0}: nubi in formazione e ipotesi dalla mia stazione	Es FORECAST - {0}: forming clouds and hypotheses from my station
+foEs della nube	foEs of the cloud
+▲ nube in formazione, ▼ in calo	▲ forming cloud, ▼ decaying
+verde: primo salto utile; viola: doppio salto Es	green: useful first hop; violet: double-hop Es
+tratteggio azzurro: tratta in condotto (tropo + Es)	dashed light blue: duct leg (tropo + Es)
+giallo: arrivo sulla terra; anello grigio: arrivo in mare	yellow: arrival over land; grey ring: arrival at sea
+Nessuna ipotesi. La linguetta cerca, dalla tua stazione e nell'ordine: primo salto utile, doppio salto Es, tropo + Es (solo se il primo salto non c'è).	No hypothesis. From your station the tab looks, in this order, for: useful first hop, double-hop Es, tropo + Es (only if there is no first hop).
+Una nube è «in formazione» quando la foEs degli ultimi 10 minuti supera quella dei 20 minuti prima, o quando è nata negli ultimi 10 minuti con almeno due spot.	A cloud is "forming" when the foEs of the last 10 minutes exceeds that of the previous 20 minutes, or when it appeared in the last 10 minutes with at least two spots.
+Nube {0}: foEs {1:F1} MHz, {2}, {3} spot	Cloud {0}: foEs {1:F1} MHz, {2}, {3} spots
+ionosonda {0} {1:F1} MHz	ionosonde {0} {1:F1} MHz
+Quando: {0}.	When: {0}.
+Tratta in condotto dalla stazione ad A′ {0}: {1:F0} km ({2}).	Duct leg from the station to A′ {0}: {1:F0} km ({2}).
+Il primo salto diretto non c'è: la nube è fuori dalla geometria del salto dalla tua stazione, ma è a metà di un salto di {0:F0} km da A′.	There is no direct first hop: the cloud is outside the hop geometry from your station, but it is at the middle of a {0:F0} km hop from A′.
+Salto Es di {0:F0} km, azimut {1:F0}°, elevazione {2:F2}°, MUF {3:F1} MHz.	Es hop of {0:F0} km, azimuth {1:F0}°, elevation {2:F2}°, MUF {3:F1} MHz.
+Secondo salto di {0:F0} km sulla nube {1} (foEs {2:F1} MHz, MUF {3:F1} MHz), arrivo a {4}{5}.	Second hop of {0:F0} km on cloud {1} (foEs {2:F1} MHz, MUF {3:F1} MHz), arrival at {4}{5}.
+in mare	at sea
+Arrivo del primo salto a {0}{1}.	Arrival of the first hop at {0}{1}.
+Accoppiamento nel condotto: elevazione {0:F2}° contro angolo critico {1:F2}° (ITU-R P.834), perdita di accoppiamento {2:F1} dB; condotto {3}.	Coupling into the duct: elevation {0:F2}° against critical angle {1:F2}° (ITU-R P.834), coupling loss {2:F1} dB; duct {3}.
+che intrappola la banda	that traps the band
+«morbido» (Kerr)	"soft" (Kerr)
+Dopo l'arrivo il segnale può continuare in condotto per {0:F0} km fino a {1} ({2}).	After the arrival the signal can continue in a duct for {0:F0} km up to {1} ({2}).
+Abbattimento stimato: {0:F0} dB (ITU-R P.534-6 per il salto Es{1}).	Estimated path loss: {0:F0} dB (ITU-R P.534-6 for the Es hop{1}).
+più la tratta in condotto e l'accoppiamento	plus the duct leg and the coupling
+In 144 MHz le aperture Es sono rare (IK3XTV): serve una nube iperdensa.	On 144 MHz Es openings are rare (IK3XTV): a hyper-dense cloud is needed.
+Priorità: il doppio salto Es viene prima del tropo + Es (fonte [88]); il tropo + Es si cerca solo se il primo salto utile non c'è. Valori di accoppiamento e di attenuazione nel condotto: scelte di partenza del programma, da tarare.	Priority: double-hop Es comes before tropo + Es (source [88]); tropo + Es is searched only if there is no useful first hop. Coupling and duct attenuation values: starting choices of the program, to be tuned.
+144 MHz oltre il singolo salto: {0} spot TR+ES (nube ricollocata, condotto dall'altra estremità).	144 MHz beyond the single hop: {0} TR+ES spots (relocated cloud, duct from the other end).
+TR+ES: salto Es (arancio) con la nube ricollocata e tratta in condotto (tratteggio azzurro)	TR+ES: Es hop (orange) with the relocated cloud and duct leg (dashed light blue)
+PREVISIONE	FORECAST

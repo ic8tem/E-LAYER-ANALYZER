@@ -1,5 +1,5 @@
 TITLE|Tækniskýrsla um E-LAYER ANALYZER
-SUB|Valið sem leiddi til smíði forritsins - umsjón: Costantino IC8TEM - útgáfa 0.6.7, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR.
+SUB|Valið sem leiddi til smíði forritsins - umsjón: Costantino IC8TEM - útgáfa 0.7.0, nóvember 2026. Tölur í hornklofum vísa á flipann HEIMILDIR.
 H1|1. Formáli
 P|E-LAYER ANALYZER sprettur af skýrri þörf VHF-radíóamatörsins: að hafa í einu verkfæri allt sem þarf til að túlka þær útbreiðsluaðferðir sem tengjast E-lagi jónhvolfsins. Fram til þessa hafa sporadic-E, F.A.I., meteor scatter og radíónorðurljós verið rannsökuð með ólíkum forritum, oft gerðum fyrir eitt stýrikerfi, stundum ekki lengur viðhaldið, hvert með sitt rúmfræðilíkan og sínar venjur. Í skýrslu þessari er gerð grein fyrir ástæðum þess vals sem gert var, og greint á milli þess sem á rætur í fræðunum, þess sem á rætur í reynslu höfundar á tíðnisviðunum og þess sem er val forritsins og staðfesta þarf með notkun.
 H2|1.1 Markmið
@@ -68,6 +68,7 @@ LI|Stöðvarnar eru settar í miðju locator-reitsins: með 4 stöfum nær skekk
 LI|foEs er lágmarksþröskuldur og sekantlögmálið ofmetur nauðsynlega foEs á VHF; gildið ber að lesa sem hlutfallslegan samanburð milli skýja.
 LI|Landfræðilegir rammar Afríku og Suður-Ameríku eru nálganir; jaðartilvik má leiðrétta eftir ábendingum radíóamatöra.
 LI|Fyrirhuguð þróun: samanburður tveggja dagbóka frá ólíkum stöðvum í öllum fjölstökksgreiningum, sífellt fínni greining spota og kerfisbundin prófun reglnanna á heilum tímabilum.
+P|Í 0.7.0 bað höfundur um að sameina sporadískt E og tropo: ský utan staðsetningar, sem sýndarstöð nær um rás. Forritið tekur rásirnar úr LIVETROPOVHF og ber þær saman við skýin; fræðin skiptast á milli tropo + Es og tvístökks, því hefur tvístökkið forgang og blandaði hátturinn er aðeins leitaður þegar ekkert fyrsta stökk er til. Tengigildin eru tilgreind sem val sem á að stilla eftir athugunum.
 H1|7. Þakkir
 P|Fyrir þróun sporadic-E á 50 MHz, og sérstaklega fjölstökkskeðjanna, þakkar höfundur Johan IW2DNI og Fabio IZ7NLJ, sem lögðu fram dagbækur sínar og afkóðanir til innri prófana forritsins (gögnin eru ekki birt).
 H1|8. Niðurlag

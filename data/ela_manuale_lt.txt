@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER naudotojo vadovas
-SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.6.7 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
+SUB|Išsamus naudotojo vadovas - parengė Costantino IC8TEM - 0.7.0 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI; formulės ir skaičiavimo sprendimai pateikti kortelėje SKAIČIAVIMO SPRENDIMŲ SANTRAUKA.
 H1|1. Prieš pradedant
 H2|1.1 Ką daro programa
 P|E-LAYER ANALYZER vienoje programoje sujungia priemones VHF sklidimo būdams, vykstantiems per jonosferos E sluoksnį, tirti: sporadinį E, taip pat kelių šuolių ir tarpžemyninį, F.A.I. (išilgai magnetinio lauko išsidėsčiusius netolygumus), meteor scatter su integruota programa YA-MS ir radijo pašvaistę. Ji dirba su DX klasterių spotais realiuoju laiku ir su ADIF žurnalais, o kiekvieną rezultatą rodo žemėlapyje, užimančiame du trečdalius lango; duomenys ir skaičiavimai pateikiami dešiniajame trečdalyje.
@@ -149,6 +149,12 @@ LI|Laiko juosta: ⏮ ◀ Paleisti/Sustabdyti ▶ ⏭ ir slankiklis; atvėrus pra
 LI|Langelių lentelė: Langelis (pietvakarių kampas ir centro lokatorius), foEs≥, NmE≥ (mažiausias elektronų tankis), Ryšiai ir Juostos. Spustelėjus langelį (lentelėje arba žemėlapyje) paryškinami jo ryšiai ir šaukiniai.
 LI|Grafikas: didžiausia mažiausia foEs (geltona linija) ir langelių skaičius (stulpeliai) kiekvienam žingsniui, su rodomo žingsnio linija. Po juo – santrauka su didžiausia šaltinio reikšme.
 P|Reikšmė yra apatinė riba: debesis gali būti tankesnis, nei rodo ryšiai, o tuščias langelis reiškia tik tai, kad ryšių nėra.
+H1|5d. PROGNOZĖ (SPORADIC-E poskirtukas)
+P|Poskirtukas PROGNOZĖ atpažįsta besiformuojančius Es debesis ir pasako, ką jie gali duoti jūsų stočiai: tinkamą pirmąjį šuolį, dvigubą Es šuolį arba, tik jei nėra pirmojo šuolio, tropo + Es.
+LI|Valdikliai: Juosta (50 arba 144 MHz, visada atskirai), Es aukštis km, Atnaujinti dabar; Vertikalūs profiliai iš Open-Meteo įjungia prognozuojamus kanalus; TR+ES ir REAL-TIME perkelia mišrų modelį į REAL-TIME žemėlapį.
+LI|Viršuje įspėjimas su pirmąja hipoteze; žemiau hipotezių lentelė (Hipotezė, Debesis, foEs, Šuolis km, MUF, Atvykimas, dB, %) ir paskutinių 30 minučių debesų lentelė su tendencija (▲ formuojasi, ● stabilus, ▼ silpnėja).
+LI|Žemėlapis: debesų kvadratai foEs spalva; žalia pirmasis šuolis, violetinė dvigubas šuolis, šviesiai mėlyna punktyrinė kanalo atkarpa su virtualia stotimi A′; geltonas atvykimas virš sausumos, pilkas žiedas jūroje. Spustelėkite trasą ar debesį, kad pamatytumėte išsamią informaciją.
+P|Išsamioje informacijoje pateikiami MUF, pakilimo kampas, kanalo kritinis kampas, įėjimo nuostoliai ir slopinimas dB. REAL-TIME TR+ES spotai rodomi su perkeltu debesiu ir užrašu TR+ES.
 H1|6. F.A.I.
 H2|6.1 Du vaizdai
 P|Kortelėje F.A.I. tiriama sklaida nuo išilgai magnetinio lauko išsidėsčiusių netolygumų (pagrindinis šaltinis [1], [2]). Vaizdas Scatter trail (pora A-B) dviem stotims apskaičiuoja galimų sklaidos taškų (scatter point) vietą, nuspalvintą pagal nuokrypį nuo atspindžio sąlygos, siūlo labiausiai tikėtiną sklaidos tašką ir viršuje dešinėje braižo abiejų stočių QTF ir elevacijų skydelį (raudona = A, žalia = B). Vaizdas Izoatspindys (taškas) pasirinktam atspindžio taškui braižo izoatspindžio linijas, kaip AuroReflex ir K9SE SE-PROP: spalvotos juostos tamsiose schemose, storos linijos šviesiose schemose.

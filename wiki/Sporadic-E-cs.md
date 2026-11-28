@@ -87,3 +87,7 @@ V podkartě **Předzvěsti vícenásobného skoku** program hledá řetězce ví
 - **Předpověď TEP** (modrá, od verze 0.6.5): index 0-100 směrem k zónám za magnetickým rovníkem = roční období × SFI × Kp (jen eTEP) × místní čas × foF2 ionosond GIRO; SFI váží, ale nenuluje, protože při slunečním minimu je TEP vzácný, ale nezmizí.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PŘEDPOVĚĎ (od 0.7.0)
+
+Podkarta **PŘEDPOVĚĎ** rozpoznává vznikající oblaky Es (spoty za posledních 30 minut a ionosondy GIRO) a z vaší stanice ověřuje, s 50 a 144 MHz odděleně: použitelný první skok, pak dvojitý skok Es, pak – jen když první skok není – tropo + Es s virtuální stanicí A′ dosaženou duktem (tropo modul z LIVETROPOVHF, profily Open-Meteo, kritický úhel ITU-R P.834). V REAL-TIME se spoty 144 MHz mezi 2400 a 3400 km mohou stát **TR+ES**, s přemístěným oblakem.

@@ -1,5 +1,5 @@
 TITLE|Användarhandbok för E-LAYER ANALYZER
-SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.6.7, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
+SUB|Utförlig användarhandbok - av Costantino IC8TEM - version 0.7.0, november 2026. Siffrorna inom hakparentes hänvisar till fliken KÄLLOR; formlerna och beräkningsvalen finns i fliken SAMMANFATTNING AV BERÄKNINGSVALEN.
 H1|1. Innan du börjar
 H2|1.1 Vad programmet gör
 P|E-LAYER ANALYZER samlar i ett enda program verktygen för att studera de VHF-utbredningssätt som går via jonosfärens E-skikt: sporadiskt E, även multihopp och interkontinentalt, F.A.I. (fältlinjeorienterade irreguljäriteter), meteor scatter, med det integrerade programmet YA-MS, och radioaurora. Programmet arbetar med spots från DX-kluster i realtid och med ADIF-loggar, och visar varje resultat på en karta som upptar två tredjedelar av fönstret, med data och beräkningar i den högra tredjedelen.
@@ -149,6 +149,12 @@ LI|Tidslinje: ⏮ ◀ Starta/Stoppa ▶ ⏭ och reglaget; vid öppning börjar v
 LI|Celltabell: Cell (sydvästra hörnet och lokatorn för mitten), foEs≥, NmE≥ (minsta elektrontäthet), Förbindelser och Band. Klicka på en cell (tabell eller karta): dess förbindelser och anropssignaler markeras.
 LI|Diagram: högsta minsta foEs (gul linje) och antal celler (staplar) för varje steg, med linjen för det visade steget. Under det översikten med källans högsta värde.
 P|Värdet är en nedre gräns: molnet kan vara tätare än förbindelserna visar, och en tom cell betyder bara att det inte finns några förbindelser.
+H1|5d. PROGNOS (underflik till SPORADIC-E)
+P|Underfliken PROGNOS känner igen Es-moln som bildas och visar vad de kan ge din station: användbart första hopp, Es-dubbelhopp eller, bara om det inte finns något första hopp, tropo + Es.
+LI|Reglage: Band (50 eller 144 MHz, alltid åtskilda), Es-höjd km, Uppdatera nu; Vertikala profiler från Open-Meteo slår på de prognostiserade dukterna; TR+ES även i REAL-TIME för blandmodellen till REAL-TIME-kartan.
+LI|Överst varningen med den första hypotesen; under den tabellen över hypoteserna (Hypotes, Moln, foEs, Hopp km, MUF, Ankomst, dB, %) och tabellen över molnen de senaste 30 minuterna med tendens (▲ bildas, ● stabilt, ▼ avtagande).
+LI|Karta: molnens rutor i foEs-färg; grönt det första hoppet, violett dubbelhoppet, ljusblått streckat duktsträckan med den virtuella stationen A′; gul ankomst över land, grå ring till havs. Klicka på en sträcka eller ett moln för detaljerna.
+P|Detaljerna visar MUF, elevation, duktens kritiska vinkel, kopplingsförlust och sträckdämpning i dB. I REAL-TIME visas TR+ES-spotsen med det flyttade molnet och etiketten TR+ES.
 H1|6. F.A.I.
 H2|6.1 De två vyerna
 P|Fliken F.A.I. studerar scatter från fältlinjeorienterade irreguljäriteter (huvudkällor [1], [2]). Vyn Scatter trail (paret A-B) beräknar, för två stationer, orten för möjliga scatterpunkter, färgad efter avvikelsen från reflexionsvillkoret, föreslår den mest sannolika scatterpunkten och ritar uppe till höger rutan med QTF och elevation för båda stationerna (röd = A, grön = B). Vyn Isoreflexion (punkt) ritar, för en vald reflexionspunkt, isoreflexionslinjerna i likhet med AuroReflex och K9SE:s SE-PROP: färgade band i de mörka schemana, tjocka linjer i de ljusa.

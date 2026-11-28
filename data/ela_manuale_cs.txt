@@ -1,5 +1,5 @@
 TITLE|Uživatelská příručka E-LAYER ANALYZER
-SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.6.7, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
+SUB|Podrobná uživatelská příručka - autor Costantino IC8TEM - verze 0.7.0, listopad 2026. Čísla v hranatých závorkách odkazují na kartu ZDROJE; vzorce a volby výpočtu jsou v kartě SHRNUTÍ VOLEB VÝPOČTU.
 H1|1. Než začnete
 H2|1.1 Co program dělá
 P|E-LAYER ANALYZER shromažďuje v jediném programu nástroje ke studiu druhů šíření na VKV, které procházejí vrstvou E ionosféry: sporadickou vrstvu E, i vícenásobným skokem a mimokontinentální, F.A.I. (nehomogenity orientované podél magnetického pole), meteor scatter se začleněným programem YA-MS a rádiovou auroru. Pracuje se spoty z DX clusterů v reálném čase a s deníky ADIF a každý výsledek zobrazuje na mapě, která zabírá dvě třetiny okna, s daty a výpočty v pravé třetině.
@@ -149,6 +149,12 @@ LI|Časová lišta: ⏮ ◀ Spustit/Zastavit ▶ ⏭ a posuvník; po otevření 
 LI|Tabulka buněk: Buňka (jihozápadní roh a lokátor středu), foEs≥, NmE≥ (minimální elektronová hustota), Spojení a Pásma. Kliknutí na buňku (v tabulce nebo na mapě): zvýrazní její spojení a značky.
 LI|Graf: nejvyšší minimální foEs (žlutá čára) a počet buněk (sloupce) pro každý krok, s čarou zobrazeného kroku. Pod ním souhrn s nejvyšší hodnotou zdroje.
 P|Hodnota je dolní mez: oblak může být hustší, než ukazují spojení, a prázdná buňka znamená jen to, že není žádné spojení.
+H1|5d. PŘEDPOVĚĎ (podkarta SPORADIC-E)
+P|Podkarta PŘEDPOVĚĎ rozpoznává vznikající oblaky Es a říká, co mohou dát vaší stanici: použitelný první skok, dvojitý skok Es, nebo, jen když první skok není, tropo + Es.
+LI|Ovládání: Pásmo (50 nebo 144 MHz, vždy odděleně), Výška Es km, Aktualizovat nyní; Vertikální profily z Open-Meteo zapne předpovídané dukty; TR+ES také v REAL-TIME přenese smíšený model na mapu REAL-TIME.
+LI|Nahoře upozornění s první hypotézou; pod ním tabulka hypotéz (Hypotéza, Oblak, foEs, Skok km, MUF, Dopad, dB, %) a tabulka oblaků za posledních 30 minut s trendem (▲ vzniká, ● stabilní, ▼ slábne).
+LI|Mapa: čtverce oblaků v barvě foEs; zeleně první skok, fialově dvojitý skok, světle modře čárkovaně úsek v duktu s virtuální stanicí A′; žlutý dopad na pevninu, šedý kroužek na moře. Klepněte na trasu nebo oblak pro podrobnosti.
+P|Podrobnosti uvádějí MUF, elevaci, kritický úhel duktu, ztrátu navázání a útlum v dB. V REAL-TIME se spoty TR+ES zobrazují s přemístěným oblakem a nápisem TR+ES.
 H1|6. F.A.I.
 H2|6.1 Dvě zobrazení
 P|Karta F.A.I. studuje rozptyl na nehomogenitách orientovaných podél magnetického pole (hlavní zdroj [1], [2]). Zobrazení Scatter trail (dvojice A-B) vypočítá pro dvě stanice místo možných bodů rozptylu, obarvené podle odchylky od podmínky odrazu, navrhne nejpravděpodobnější bod rozptylu a vpravo nahoře nakreslí rámeček QTF a elevací obou stanic (červená = A, zelená = B). Zobrazení Izoflexe (bod) kreslí pro zvolený bod odrazu čáry izoflexe jako AuroReflex a SE-PROP od K9SE: barevné pásy v tmavých schématech, silné čáry ve světlých schématech.

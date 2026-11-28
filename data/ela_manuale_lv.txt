@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER lietošanas rokasgrāmata
-SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.6.7, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
+SUB|Padziļināta lietošanas rokasgrāmata - sagatavoja Costantino IC8TEM - versija 0.7.0, 2026. gada novembris. Skaitļi kvadrātiekavās norāda uz cilni AVOTI; formulas un aprēķinu izvēles ir cilnē APRĒĶINU IZVĒĻU KOPSAVILKUMS.
 H1|1. Pirms sākt
 H2|1.1 Ko programma dara
 P|E-LAYER ANALYZER apvieno vienā programmā rīkus to VHF izplatīšanās veidu izpētei, kas norit caur jonosfēras E slāni: sporādisko E, arī vairāklēcienu un starpkontinentālo, F.A.I. (ar magnētisko lauku saskaņotās nehomogenitātes), meteor scatter ar iebūvēto programmu YA-MS un radio auroru. Tā strādā ar DX klasteru spotiem reāllaikā un ar ADIF žurnāliem un parāda katru rezultātu kartē, kas aizņem divas trešdaļas loga, bet dati un aprēķini ir labajā trešdaļā.
@@ -149,6 +149,12 @@ LI|Laika josla: ⏮ ◀ Sākt/Apturēt ▶ ⏭ un slīdnis; atverot sāk no soļ
 LI|Šūnu tabula: Šūna (dienvidrietumu stūris un centra lokators), foEs≥, NmE≥ (minimālais elektronu blīvums), Sakari un Joslas. Noklikšķinot uz šūnas (tabulā vai kartē), tiek izcelti tās sakari un izsaukuma signāli.
 LI|Grafiks: lielākā minimālā foEs (dzeltena līnija) un šūnu skaits (stabiņi) katram solim, ar rādītā soļa līniju. Zem tā kopsavilkums ar avota maksimumu.
 P|Vērtība ir apakšējā robeža: mākonis var būt blīvāks, nekā rāda sakari, un tukša šūna nozīmē tikai to, ka nav sakaru.
+H1|5d. PROGNOZE (SPORADIC-E apakšcilne)
+P|Apakšcilne PROGNOZE atpazīst Es mākoņus, kas veidojas, un pasaka, ko tie var dot jūsu stacijai: izmantojamu pirmo lēcienu, Es dubultlēcienu vai, tikai ja pirmā lēciena nav, tropo + Es.
+LI|Vadīklas: Josla (50 vai 144 MHz, vienmēr atsevišķi), Es augstums km, Atjaunināt tagad; Vertikālie profili no Open-Meteo ieslēdz prognozētos kanālus; TR+ES arī REAL-TIME pārnes jaukto modeli uz REAL-TIME karti.
+LI|Augšā brīdinājums ar pirmo hipotēzi; zemāk hipotēžu tabula (Hipotēze, Mākonis, foEs, Lēciens km, MUF, Ierašanās, dB, %) un pēdējo 30 minūšu mākoņu tabula ar tendenci (▲ veidojas, ● stabils, ▼ vājinās).
+LI|Karte: mākoņu kvadrāti foEs krāsā; zaļš pirmais lēciens, violets dubultlēciens, gaiši zila svītrlīnija kanāla posms ar virtuālo staciju A′; dzeltena ierašanās virs sauszemes, pelēks gredzens jūrā. Noklikšķiniet uz trases vai mākoņa, lai redzētu detaļas.
+P|Detaļās ir MUF, pacēluma leņķis, kanāla kritiskais leņķis, iesaistes zudumi un vājināšanās dB. REAL-TIME TR+ES spoti parādās ar pārvietoto mākoni un uzrakstu TR+ES.
 H1|6. F.A.I.
 H2|6.1 Divi skati
 P|Cilne F.A.I. pēta izkliedi no ar magnētisko lauku saskaņotām nehomogenitātēm (galvenie avoti [1], [2]). Skats Scatter trail (pāris A-B) divām stacijām aprēķina iespējamo scatter point ģeometrisko vietu, iekrāsotu pēc novirzes no atstarošanas nosacījuma, piedāvā varbūtīgāko scatter point un augšā pa labi zīmē lodziņu ar abu staciju QTF un elevācijām (sarkans = A, zaļš = B). Skats Izoatstarošana (punkts) izvēlētam atstarošanas punktam zīmē izoatstarošanas līnijas kā AuroReflex un K9SE SE-PROP: krāsainas joslas tumšajās shēmās, biezas līnijas gaišajās shēmās.

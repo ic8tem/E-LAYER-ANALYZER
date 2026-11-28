@@ -87,3 +87,7 @@ A **Többugrásos előjelek** allapban a program az 50 MHz-es többugrásos lán
 - **TEP-előrejelzés** (kék, a 0.6.5-ös verziótól): 0-100 közötti index a mágneses egyenlítőn túli zónák felé = évszak × SFI × Kp (csak eTEP) × helyi idő × a GIRO-ionoszondák foF2-je; az SFI súlyoz, de nem nulláz, mert napfoltminimumban a TEP ritka lesz, de nem tűnik el.
 
 ![Folyosó](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## ELŐREJELZÉS (a 0.7.0-tól)
+
+Az **ELŐREJELZÉS** allap felismeri a kialakuló Es-felhőket (az utolsó 30 perc spotjai és GIRO ionoszondák), és az állomásodról ellenőrzi, külön kezelve az 50 és a 144 MHz-et: használható első ugrás, majd kettős Es-ugrás, majd – csak ha nincs első ugrás – tropo + Es egy csatornán át elért A′ virtuális állomással (a LIVETROPOVHF tropo-modulja, Open-Meteo profilok, ITU-R P.834 kritikus szög). REAL-TIME módban a 2400 és 3400 km közötti 144 MHz-es spotok **TR+ES**-sé válhatnak, áthelyezett felhővel.

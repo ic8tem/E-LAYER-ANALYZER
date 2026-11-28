@@ -1,5 +1,5 @@
 TITLE|Bedienungsanleitung von E-LAYER ANALYZER
-SUB|Ausführliche Bedienungsanleitung - von Costantino IC8TEM - Version 0.6.7, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN; die Formeln und Berechnungsentscheidungen stehen im Reiter ZUSAMMENFASSUNG DER BERECHNUNGSENTSCHEIDUNGEN.
+SUB|Ausführliche Bedienungsanleitung - von Costantino IC8TEM - Version 0.7.0, November 2026. Die Zahlen in eckigen Klammern verweisen auf den Reiter QUELLEN; die Formeln und Berechnungsentscheidungen stehen im Reiter ZUSAMMENFASSUNG DER BERECHNUNGSENTSCHEIDUNGEN.
 H1|1. Bevor Sie beginnen
 H2|1.1 Was das Programm leistet
 P|E-LAYER ANALYZER vereint in einem einzigen Programm die Werkzeuge zur Untersuchung der VHF-Ausbreitungsarten, die über die E-Schicht der Ionosphäre laufen: Sporadic-E, auch als Mehrfachsprung und interkontinental, F.A.I. (am Magnetfeld ausgerichtete Irregularitäten), Meteorscatter mit dem integrierten Programm YA-MS sowie Radio-Aurora. Es arbeitet mit den Spots der DX-Cluster in Echtzeit und mit ADIF-Logs und zeigt jedes Ergebnis auf einer Karte, die zwei Drittel des Fensters einnimmt, mit den Daten und Berechnungen im rechten Drittel.
@@ -149,6 +149,12 @@ LI|Zeitleiste: ⏮ ◀ Starten/Stoppen ▶ ⏭ und der Schieberegler; beim Öffn
 LI|Tabelle der Zellen: Zelle (Südwestecke und Locator der Mitte), foEs≥, NmE≥ (minimale Elektronendichte), Verbindungen und Bänder. Klick auf eine Zelle (Tabelle oder Karte): Ihre Verbindungen und Rufzeichen werden hervorgehoben.
 LI|Diagramm: höchste minimale foEs (gelbe Linie) und Zahl der Zellen (Balken) für jeden Schritt, mit der Linie des angezeigten Schritts. Darunter die Zusammenfassung mit dem höchsten Wert der Quelle.
 P|Der Wert ist eine Untergrenze: Die Wolke kann dichter sein, als die Verbindungen zeigen, und eine leere Zelle bedeutet nur, dass es keine Verbindung gibt.
+H1|5d. PROGNOSE (Unterkarte von SPORADIC-E)
+P|Die Unterkarte PROGNOSE erkennt Es-Wolken in Bildung und sagt, was sie deiner Station bringen können: nutzbarer erster Sprung, Es-Doppelsprung oder, nur wenn es keinen ersten Sprung gibt, Tropo + Es.
+LI|Bedienelemente: Band (50 oder 144 MHz, immer getrennt), Es-Höhe km, Jetzt aktualisieren; Vertikalprofile von Open-Meteo schaltet die vorhergesagten Dukte ein; TR+ES auch in REAL-TIME bringt das Mischmodell auf die REAL-TIME-Karte.
+LI|Oben die Warnung mit der ersten Hypothese; darunter die Tabelle der Hypothesen (Hypothese, Wolke, foEs, Sprung km, MUF, Ankunft, dB, %) und die der Wolken der letzten 30 Minuten mit ihrer Tendenz (▲ in Bildung, ● stabil, ▼ abnehmend).
+LI|Karte: Wolkenquadrate in der Farbe der foEs; grün der erste Sprung, violett der Doppelsprung, hellblau gestrichelt die Duktstrecke mit der virtuellen Station A′; gelbe Ankunft über Land, grauer Ring auf See. Klick auf eine Strecke oder Wolke für die Details.
+P|Die Details nennen MUF, Erhebung, Grenzwinkel des Dukts, Kopplungsverlust und Streckendämpfung in dB. In REAL-TIME erscheinen die TR+ES-Spots mit der verlegten Wolke und der Beschriftung TR+ES.
 H1|6. F.A.I.
 H2|6.1 Die beiden Ansichten
 P|Der Reiter F.A.I. untersucht den Scatter an magnetfeldausgerichteten Irregularitäten (Hauptquelle [1], [2]). Die Ansicht Scatter trail (Paar A-B) berechnet für zwei Stationen den Ort der möglichen Streupunkte, eingefärbt nach der Abweichung von der Reflexionsbedingung, schlägt den wahrscheinlichsten Streupunkt vor und zeichnet oben rechts den Kasten mit QTF und Elevationen beider Stationen (rot = A, grün = B). Die Ansicht Iso-Reflexion (Punkt) zeichnet für einen gewählten Reflexionspunkt die Iso-Reflexionslinien wie AuroReflex und SE-PROP von K9SE: farbige Bänder in den dunklen Schemata, dicke Linien in den hellen Schemata.

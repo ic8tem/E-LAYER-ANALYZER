@@ -1,5 +1,5 @@
 TITLE|Informe técnico sobre E-LAYER ANALYZER
-SUB|Las decisiones que llevaron a la realización del programa - a cargo de Costantino IC8TEM - versión 0.6.7, noviembre de 2026. Los números entre corchetes remiten a la pestaña FUENTES.
+SUB|Las decisiones que llevaron a la realización del programa - a cargo de Costantino IC8TEM - versión 0.7.0, noviembre de 2026. Los números entre corchetes remiten a la pestaña FUENTES.
 H1|1. Introducción
 P|E-LAYER ANALYZER nace de una necesidad precisa del operador VHF: disponer, en una única herramienta, de todo lo necesario para interpretar los modos de propagación en los que interviene la capa E de la ionosfera. Hasta hoy, la esporádica E, el F.A.I., el meteor scatter y la aurora radio se estudiaban con programas distintos, a menudo concebidos para un solo sistema operativo, a veces ya sin mantenimiento, cada uno con su propio modelo geométrico y sus propias convenciones. Este informe expone las razones de las decisiones adoptadas, distinguiendo lo que procede de la literatura, lo que procede de la experiencia en banda del autor y lo que constituye una elección del programa, pendiente de confirmación con el uso.
 H2|1.1 Objetivos
@@ -68,6 +68,7 @@ LI|Las estaciones se sitúan en el centro de la cuadrícula del locator: con 4 c
 LI|La foEs es un umbral mínimo y la ley de la secante sobrestima la foEs necesaria en VHF; el dato debe leerse como comparación relativa entre nubes.
 LI|Los recuadros geográficos de África y Sudamérica son aproximados; los casos límite pueden corregirse con las indicaciones de los operadores.
 LI|Desarrollos previstos: la comparación de dos logs de estaciones distintas en todos los análisis del multisalto, un reconocimiento de los spots cada vez más fino y la verificación sistemática de las reglas sobre temporadas completas.
+P|En la 0.7.0 el autor pidió unir la esporádica E y la tropo: nubes fuera de posición, alcanzadas por una estación virtual en conducto. El programa toma los conductos de LIVETROPOVHF y los cruza con las nubes; la literatura está dividida entre tropo + Es y doble salto, por eso el doble salto tiene prioridad y el modo mixto solo se busca cuando no hay primer salto. Los valores de acoplamiento se declaran como elecciones por ajustar con las observaciones.
 H1|7. Agradecimientos
 P|Por el desarrollo del E esporádico en 50 MHz, y en particular de las cadenas de multisalto, el autor agradece a Johan IW2DNI y Fabio IZ7NLJ, que pusieron a disposición sus logs y sus decodificaciones para las verificaciones internas del programa (los datos no se publican).
 H1|8. Conclusiones

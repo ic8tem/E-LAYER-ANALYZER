@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER techninė ataskaita
-SUB|Sprendimai, lėmę programos sukūrimą - parengė Costantino IC8TEM - 0.6.7 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
+SUB|Sprendimai, lėmę programos sukūrimą - parengė Costantino IC8TEM - 0.7.0 versija, 2026 m. lapkritis. Skaičiai laužtiniuose skliaustuose nurodo kortelę ŠALTINIAI.
 H1|1. Įžanga
 P|E-LAYER ANALYZER atsirado iš konkretaus VHF operatoriaus poreikio – turėti vienoje priemonėje viską, ko reikia sklidimo būdams, susijusiems su jonosferos E sluoksniu, interpretuoti. Iki šiol sporadinis E, F.A.I., meteor scatter ir radijo pašvaistė buvo tiriami skirtingomis programomis, dažnai sukurtomis tik vienai operacinei sistemai, kartais nebeprižiūrimomis, kiekviena su savo geometriniu modeliu ir savo konvencijomis. Šioje ataskaitoje išdėstomos priimtų sprendimų priežastys, atskiriant tai, kas kyla iš literatūros, tai, kas kyla iš autoriaus patirties eteryje, ir tai, kas yra programos sprendimas, tikrintinas praktikoje.
 H2|1.1 Tikslai
@@ -68,6 +68,7 @@ LI|Stotys dedamos lokatoriaus kvadrato centre: esant 4 simboliams, paklaida siek
 LI|foEs yra minimali riba, o sekanso dėsnis VHF juostose pervertina reikalingą foEs; šį dydį reikia vertinti kaip santykinį debesų palyginimą.
 LI|Afrikos ir Pietų Amerikos geografiniai stačiakampiai yra apytiksliai; ribinius atvejus galima pataisyti pagal operatorių pastabas.
 LI|Numatoma plėtra: dviejų skirtingų stočių žurnalų palyginimas visose kelių šuolių analizėse, vis tikslesnis spotų atpažinimas, sistemingas taisyklių tikrinimas ištisuose sezonuose.
+P|0.7.0 versijoje autorius paprašė sujungti sporadinį E ir tropo: debesys ne savo vietoje, pasiekiami virtualios stoties kanalu. Programa ima kanalus iš LIVETROPOVHF ir sukryžmina juos su debesimis; literatūra pasidalijusi tarp tropo + Es ir dvigubo šuolio, todėl dvigubas šuolis turi pirmenybę, o mišraus režimo ieškoma tik tada, kai nėra pirmojo šuolio. Įėjimo vertės nurodytos kaip pasirinkimai, kuriuos reikia derinti pagal stebėjimus.
 H1|7. Padėkos
 P|Už 50 MHz sporadinio E, ypač kelių šuolių grandinių, plėtrą autorius dėkoja Johanui IW2DNI ir Fabio IZ7NLJ, kurie pateikė savo žurnalus ir dekodavimus vidinėms programos patikroms (duomenys neskelbiami).
 H1|8. Išvados

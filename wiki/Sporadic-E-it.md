@@ -87,3 +87,7 @@ Nella sottolinguetta **Precursori multi-salto** il programma cerca le catene del
 - **Previsione del TEP** (blu, dalla versione 0.6.5): indice 0-100 verso le zone oltre l'equatore magnetico = stagione × SFI × Kp (solo eTEP) × ora locale × foF2 delle ionosonde GIRO; l'SFI pesa ma non azzera, perché al minimo solare il TEP diventa raro ma non sparisce.
 
 ![Corridoio](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PREVISIONE (dalla 0.7.0)
+
+La sottolinguetta **PREVISIONE** riconosce le nubi Es in formazione (spot degli ultimi 30 minuti e ionosonde GIRO) e verifica dalla tua stazione, con 50 e 144 MHz separati: primo salto utile, poi doppio salto Es, poi — solo se il primo salto non c'è — tropo + Es, con una stazione virtuale A′ raggiunta in condotto (modulo tropo di LIVETROPOVHF, profili Open-Meteo, angolo critico ITU-R P.834). In REAL-TIME gli spot in 144 MHz fra 2400 e 3400 km possono diventare **TR+ES**, con la nube ricollocata.

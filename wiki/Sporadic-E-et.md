@@ -87,3 +87,7 @@ Alamsakis **Mitmehüppelise levi eelkäijad** otsib programm 50 MHz mitmehüppel
 - **TEP-i prognoos** (sinine, alates versioonist 0.6.5): indeks 0-100 magnetekvaatori taguste tsoonide suunas = aastaaeg × SFI × Kp (ainult eTEP) × kohalik aeg × GIRO ionosondide foF2; SFI kaalub, kuid ei nulli, sest päikese miinimumis muutub TEP haruldaseks, kuid ei kao.
 
 ![Koridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## PROGNOOS (alates 0.7.0)
+
+Alamvaheleht **PROGNOOS** tunneb ära tekkivad Es-pilved (viimase 30 minuti spotid ja GIRO ionosondid) ning kontrollib sinu jaamast, 50 ja 144 MHz eraldi: kasutatav esimene hüpe, siis Es-topelthüpe, siis – ainult kui esimest hüpet pole – tropo + Es virtuaalse jaamaga A′, mis saavutatakse kanali kaudu (LIVETROPOVHF-i tropomoodul, Open-Meteo profiilid, ITU-R P.834 kriitiline nurk). REAL-TIME vaates võivad 144 MHz spotid 2400 ja 3400 km vahel muutuda **TR+ES**-iks, ümberpaigutatud pilvega.

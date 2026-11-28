@@ -1,5 +1,5 @@
 TITLE|E-LAYER ANALYZER의 출처
-SUB|프로그램이 사용한 출처 목록, 탭별 - Costantino IC8TEM 작성 - 버전 0.6.7, 2026년 11월
+SUB|프로그램이 사용한 출처 목록, 탭별 - Costantino IC8TEM 작성 - 버전 0.7.0, 2026년 11월
 H1|주요 출처
 SRC|1. G. Cerrotta IC8FAX, C. Cerrotta IC8TEM, "IL F.A.I., quello strano fenomeno del dopo E-sporadico. Analisi del modo di propagazione ed esposizione di osservazioni in merito", Capri, 2011년 5월. 원뿔 기하, a1 + a2 = 180° 규칙, 앙각 공식, 계절과 시간대, 제네바 스캐터 포인트.
 SRC|2. G. Cerrotta IC8FAX, "Field Aligned Irregularities", 웹 페이지 https://qsl.net/ic8fax/page4.html. 반사 원뿔과 보각 등고선, 알려진 스캐터 포인트(제네바, 브뤼셀, 부다페스트, JN92, JN41/42), 앙각 예(IW1AZJ ~150 km에서 35°, IC8CQF ~800 km에서 6°), 계절 5월-9월 중순, 16-22 UTC, JN70CN에서 교신한 그리드, K9SE 프로그램 참조.
@@ -91,3 +91,9 @@ SRC|82. E. P. Tilton W1HDQ, B. A. Whiting 5B4WR, «TE Propagation - VHF Discover
 SRC|83. National Geospatial-Intelligence Agency, «Department of Defense World Geodetic System 1984 - Its Definition and Relationships with Local Geodetic Systems», NGA.STND.0036_1.0.0_WGS84 (2014; NIMA TR8350.2, https://earth-info.nga.mil): 국과 층의 위치에 쓰는 WGS84 타원체(장반경과 편평률)의 정의. 저자가 2026/11/23에 승인한 출처.
 SRC|84. C. F. F. Karney, «Algorithms for geodesics», Journal of Geodesy 87 (2013) 43-55 (https://doi.org/10.1007/s00190-012-0578-z): 타원체 위 측지선의 거리, 방위각, 점을 구하는 방법; GeographicLib 라이브러리 (MIT 라이선스). 저자가 2026/11/23에 승인한 출처.
 SRC|85. G. Köllner DL4MEA, «Die FAI-Bake DB0FAI», DUBUS 2/90, pp. 23-30 (독일어와 영어; DUBUS 아카이브 1982-1992, 기사 9002-3, http://www.marsport.org.uk/dubus/archive/index.htm): 144 MHz. DL5MCG와 DL4MEA의 비컨 DB0FAI에 관한 원 기사 (JN58IC, 해발 590 m, 안테나 지상고 12 m, 144.855 MHz, 1000 W ERP, 305°를 향한 16엘리먼트 Tonna, 1990년 5월 중순부터 운용); 산란 고도 110 km에서 산란점이 −3 dB 빔 안에 있는 수신 지역; 안테나는 상대국이 아니라 산란점을 향한다; 산란점까지의 거리에 따른 안테나 앙각 표; 최적기는 5월부터 8월. 저자가 2026/11/23에 승인한 출처.
+H1|예보와 스포래딕 E + 대류권 혼합 모델(0.7.0부터)
+SRC|86. ITU-R, 권고 P.834 "Effects of tropospheric refraction on radiowave propagation", §7.1(https://www.itu.int/rec/R-REC-P.834/en): 전파가 덕트에 갇히는 임계각, α = √(2·10⁻⁶·(dM/dh)·Δh). 비교: [88]이 요구하고 [41], [89], [90]이 수치로 제시하지 않은 물리적 한계를 줍니다. 2026/11/28 저자가 승인한 출처.
+SRC|87. DTIC 보고서 AD-A169332 "Propagation of signals in the frequency band between 30 MHz and 60 MHz"(https://apps.dtic.mil/sti/tr/pdf/ADA169332.pdf): 낮은 VHF; 덕트에 갇힌 모드의 앙각은 1° 미만이며 결합은 매우 낮은 앙각으로 방사되는 전력에 달려 있습니다. 비교: [86]과 일치; 144 MHz가 아니라 30-60 MHz를 다룹니다. 2026/11/28 저자가 승인한 출처.
+SRC|88. "Very Long Distance Propagation in the 144 MHz Band"(https://www.vhfdx.de/vldp_ea8.pdf; 사본 https://www.qsl.net/iw2nor/vldp_ea8.pdf): 144 MHz, EA8 - 유럽 개방; 대류권 + Es에 대한 반론(배제하지는 않음)과 일관된 해석으로서의 2홉. 비교: [90]과 달리 혼합 모드에 가장 비판적; 그래서 2홉이 우선합니다. 2026/11/28 저자가 승인한 출처.
+SRC|89. EA6VQ, dxmaps.com의 144 MHz Es 개방 지도(https://dxmaps.com/esmaps/2004/esmap060804.html ; https://dxmaps.com/esmaps/2004/esmap230604_2.html): 2900 km를 넘는 EA8-I2는 대류권 + Es로, 2914 km의 EA3DXU-RN6BN은 두 구름에 의한 2홉으로 해석. 비교: 같은 저자가 거의 같은 거리에서 두 가설을 모두 씁니다; 벤치마크용 시험 사례. 2026/11/28 저자가 승인한 출처.
+SRC|90. EI7GL, 블로그 글 3편(https://ei7gl.blogspot.com): 독일 - 이스라엘 144 MHz 3000 km(2021년 5월, Es와 해상 덕트), 카보베르데 - 유럽(2019년 7월, 안정된 해상 덕트와 Es), 2홉과 코달 홉(2009년 7월, 두 지점에서 MUF가 144 MHz를 넘어 드묾). 비교: [41], [89]와 비슷하며 [88]보다 혼합 모드에 열려 있습니다. 2026/11/28 저자가 승인한 출처.

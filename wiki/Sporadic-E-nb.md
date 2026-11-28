@@ -87,3 +87,7 @@ I underfanen **Multihopp-forløpere** søker programmet etter kjeder av multihop
 - **TEP-prognose** (blå, fra versjon 0.6.5): indeks 0-100 mot sonene på den andre siden av den magnetiske ekvator = årstid × SFI × Kp (bare eTEP) × lokal tid × foF2 fra GIRO-ionosondene; SFI veier, men nullstiller ikke, fordi TEP ved solminimum blir sjelden, men ikke forsvinner.
 
 ![Korridor](https://raw.githubusercontent.com/ic8tem/E-LAYER-ANALYZER/ci-screenshots/chiaro/1o_catena_corridoio.png)
+
+## VARSEL (fra 0.7.0)
+
+Underfanen **VARSEL** gjenkjenner Es-skyer som dannes (spotter de siste 30 minuttene og GIRO-ionosonder) og sjekker fra stasjonen din, med 50 og 144 MHz adskilt: brukbart første hopp, så Es-dobbelthopp, så – bare hvis det ikke finnes noe første hopp – tropo + Es, med en virtuell stasjon A′ nådd gjennom en dukt (tropomodul fra LIVETROPOVHF, Open-Meteo-profiler, kritisk vinkel etter ITU-R P.834). I REAL-TIME kan 144 MHz-spotter mellom 2400 og 3400 km bli **TR+ES**, med den flyttede skyen.
