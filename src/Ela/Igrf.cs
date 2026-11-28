@@ -256,11 +256,33 @@ namespace ELA
         }
 
         // Campo in coordinate geocentriche (lat, lon in gradi; r in km): componenti Nord, Est, Giu' (nT)
+        // Ottimizzazione del 28/11/2026, risultati identici: le costanti delle funzioni di Legendre (radici quadrate) si
+        // calcolano una volta sola, seno e coseno di m*lon una volta per ogni m (prima per ogni coppia n, m) e le tabelle di
+        // lavoro si riusano (una per thread) invece di crearne due nuove a ogni punto; ordine delle somme invariato.
+        static readonly double[,] k1T = new double[N + 1, N + 1], k2T = new double[N + 1, N + 1];   // prima di kNN (ordine di inizializzazione)
+        static readonly double[] kNN = BuildKnn();
+        static double[] BuildKnn()
+        {
+            double[] k = new double[N + 1];
+            for (int n = 2; n <= N; n++) k[n] = Math.Sqrt(1 - 1.0 / (2 * n));
+            for (int n = 2; n <= N; n++)
+                for (int m = 0; m < n; m++)
+                {
+                    double a = Math.Sqrt(n * n - m * m);
+                    k1T[n, m] = (2 * n - 1) / a;
+                    k2T[n, m] = (n - 1) >= m ? Math.Sqrt((n - 1) * (n - 1) - m * m) / a : 0;
+                }
+            return k;
+        }
+        [ThreadStatic] static double[,] tP, tdP;
+        [ThreadStatic] static double[] tCm, tSm;
+
         public static void Field(double lat, double lon, double r, out double bn, out double be, out double bd)
         {
             double th = (90 - lat) * Geo.D2R, ph = lon * Geo.D2R;
             double ct = Math.Cos(th), st = Math.Sin(th);
-            double[,] P = new double[N + 1, N + 1], dP = new double[N + 1, N + 1];
+            double[,] P = tP ?? (tP = new double[N + 1, N + 1]), dP = tdP ?? (tdP = new double[N + 1, N + 1]);
+            double[] CM = tCm ?? (tCm = new double[N + 1]), SM = tSm ?? (tSm = new double[N + 1]);
             P[0, 0] = 1; dP[0, 0] = 0;
             for (int n = 1; n <= N; n++)
                 for (int m = 0; m <= n; m++)
@@ -270,7 +292,7 @@ namespace ELA
                         if (n == 1) { P[1, 1] = st; dP[1, 1] = ct; }
                         else
                         {
-                            double k = Math.Sqrt(1 - 1.0 / (2 * n));
+                            double k = kNN[n];
                             P[n, n] = k * st * P[n - 1, n - 1];
                             dP[n, n] = k * (st * dP[n - 1, n - 1] + ct * P[n - 1, n - 1]);
                         }
@@ -280,15 +302,14 @@ namespace ELA
                         if (n == 1) { P[1, 0] = ct; dP[1, 0] = -st; }
                         else
                         {
-                            double a = Math.Sqrt(n * n - m * m);
-                            double k1 = (2 * n - 1) / a;
-                            double k2 = (n - 1) >= m ? Math.Sqrt((n - 1) * (n - 1) - m * m) / a : 0;
+                            double k1 = k1T[n, m], k2 = k2T[n, m];
                             double p2 = n - 2 >= m ? P[n - 2, m] : 0, d2 = n - 2 >= m ? dP[n - 2, m] : 0;
                             P[n, m] = k1 * ct * P[n - 1, m] - k2 * p2;
                             dP[n, m] = k1 * (ct * dP[n - 1, m] - st * P[n - 1, m]) - k2 * d2;
                         }
                     }
                 }
+            for (int m = 0; m <= N; m++) { CM[m] = Math.Cos(m * ph); SM[m] = Math.Sin(m * ph); }
             double[,] G = epG ?? g, H = epH ?? h;   // epoca storica del thread (At) o campo attuale
             double br = 0, bt = 0, bp = 0;
             double ratio = RE / r, ar = ratio * ratio;
@@ -297,7 +318,7 @@ namespace ELA
                 ar *= ratio;   // (RE/r)^(n+2)
                 for (int m = 0; m <= n; m++)
                 {
-                    double cm = Math.Cos(m * ph), sm = Math.Sin(m * ph);
+                    double cm = CM[m], sm = SM[m];
                     double gh = G[n, m] * cm + H[n, m] * sm;
                     br += (n + 1) * ar * gh * P[n, m];
                     bt += -ar * gh * dP[n, m];

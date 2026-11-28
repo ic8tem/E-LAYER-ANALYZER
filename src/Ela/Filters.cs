@@ -55,9 +55,11 @@ namespace ELA
             return new Regex(pat, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
 
-        public static void SetEsTags(string s) { EsTags = s ?? ""; rxNotEs = Build(EsTags, true); }
-        public static void SetFaiTags(string s) { FaiTags = s ?? ""; rxFai = Build(FaiTags, false); }
-        public static void SetAuTags(string s) { AuTags = s ?? ""; rxAu = Build(AuTags, false); }
+        // contatore delle regole del testo: cambia a ogni nuova scritta, e gli spot ricalcolano le loro ricerche (Spot.TF)
+        public static volatile int Gen;
+        public static void SetEsTags(string s) { EsTags = s ?? ""; rxNotEs = Build(EsTags, true); Gen++; }
+        public static void SetFaiTags(string s) { FaiTags = s ?? ""; rxFai = Build(FaiTags, false); Gen++; }
+        public static void SetAuTags(string s) { AuTags = s ?? ""; rxAu = Build(AuTags, false); Gen++; }
 
         public static bool NotEsTag(string comment) { Regex r = rxNotEs; return r != null && r.IsMatch(comment ?? ""); }
         public static bool AuTag(string comment) { Regex r = rxAu; return r != null && r.IsMatch(comment ?? ""); }

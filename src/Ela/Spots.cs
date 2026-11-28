@@ -23,6 +23,40 @@ namespace ELA
 
         public double FreqMHz { get { return FreqKHz / 1000.0; } }
 
+        // ---- memorizzazione dei calcoli dello spot (ottimizzazione del 28/11/2026) ----
+        // Le ricerche nel testo (commento e modo digitale), la distanza, la chiave e la banda si calcolano una volta e si
+        // riusano finche' non cambia il dato da cui dipendono (stesso testo, stesse coordinate, stesse regole dei filtri):
+        // i risultati sono identici a prima, cambia solo quante volte si calcolano.
+        // (ogni memoria e' un oggetto che non cambia, sostituito per intero: sicuro anche fra thread diversi)
+        sealed class TextMemo { public string C, D; public int Gen, Flags; }
+        sealed class DistMemo { public double LatS, LonS, LatD, LonD, Km; }
+        sealed class KeyMemo { public string Dx, Sp, Key; public double F; public DateTime U; }
+        sealed class BandMemo { public double F; public string Name; }
+        TextMemo tm; DistMemo dm; KeyMemo km; BandMemo bm;
+        const int TF_FT = 1, TF_MSMODE = 2, TF_EME = 4, TF_ESTAG = 8, TF_AUE = 16, TF_NOTES = 32, TF_AUTAG = 64, TF_FAITAG = 128;
+        bool TF(int bit)
+        {
+            string c = Comment, d = DigiMode;
+            int gen = Filters.Gen;
+            TextMemo m = tm;
+            if (m == null || !ReferenceEquals(c, m.C) || !ReferenceEquals(d, m.D) || gen != m.Gen)
+            {
+                string cc = c ?? "", dd = d ?? "";
+                int f = 0;
+                if (rxFt.IsMatch(dd + " " + cc)) f |= TF_FT;
+                if (rxMsMode.IsMatch(cc + " " + dd)) f |= TF_MSMODE;
+                if (rxEmeMode.IsMatch(dd + " " + cc)) f |= TF_EME;
+                if (rxEsTag.IsMatch(cc)) f |= TF_ESTAG;
+                if (rxAuE.IsMatch(cc)) f |= TF_AUE;
+                if (Filters.NotEsTag(c)) f |= TF_NOTES;
+                if (Filters.AuTag(c)) f |= TF_AUTAG;
+                if (Filters.FaiTag(c)) f |= TF_FAITAG;
+                m = new TextMemo { C = c, D = d, Gen = gen, Flags = f };
+                tm = m;
+            }
+            return (m.Flags & bit) != 0;
+        }
+
         // Regola dell'autore (IC8TEM): se nel testo dello spot compare <MS>, <AU> o <TR> lo spot non riguarda l'E-sporadico
         // (serve invece al meteor scatter, all'aurora o al tropo) e la linguetta SPORADIC-E lo scarta.
         static readonly System.Text.RegularExpressions.Regex rxNotEs = new System.Text.RegularExpressions.Regex(@"<\s*(MS|AURORA|AUR|AUE|AU|TR|TROPO|AS|ACS)\s*>",
@@ -38,7 +72,7 @@ namespace ELA
         {
             get
             {
-                if (Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? ""))) return true;
+                if (Prop == "MS" || TF(TF_MSMODE)) return true;
                 // FT8 e FT4 in 50 e 70 MHz non sono meteor scatter per la sola finestra del bandplan (regola dell'autore,
                 // 14/11/2026): in 70 MHz l'FT8 sta a 70,154 MHz, dentro la finestra MS 70100-70400 kHz
                 if (IsFt8Ft4 && (Band == "6m" || Band == "4m")) return false;
@@ -48,26 +82,26 @@ namespace ELA
         // FT8 o FT4 (modo dato da RBN, PSKReporter o WSJT-X, oppure scritto nel commento)
         static readonly System.Text.RegularExpressions.Regex rxFt = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(FT8|FT4)(?![A-Z0-9])",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsFt8Ft4 { get { return rxFt.IsMatch((DigiMode ?? "") + " " + (Comment ?? "")); } }
+        public bool IsFt8Ft4 { get { return TF(TF_FT); } }
         // Q65 e JT65 in 144 MHz sono EME (regola dell'autore, 14/11/2026), salvo <ES> nel testo
         static readonly System.Text.RegularExpressions.Regex rxEmeMode = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(Q65[A-E]?|JT65[A-C]?)(?![A-Z0-9])",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
         static readonly System.Text.RegularExpressions.Regex rxEsTag = new System.Text.RegularExpressions.Regex(@"<\s*ES\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsEme144 { get { return Band == "2m" && Prop != "ES" && !rxEsTag.IsMatch(Comment ?? "") && rxEmeMode.IsMatch((DigiMode ?? "") + " " + (Comment ?? "")); } }
+        public bool IsEme144 { get { return Band == "2m" && Prop != "ES" && !TF(TF_ESTAG) && TF(TF_EME); } }
         // Spot di aurora (regola dell'autore): <AU> o <AUR> (anche AUE, AURORA) nel testo, oppure modo dichiarato AU
         static readonly System.Text.RegularExpressions.Regex rxAu = new System.Text.RegularExpressions.Regex(@"<\s*(AURORA|AUR|AUE|AU)\s*>",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsAurora { get { return (Prop == "AU" || Filters.AuTag(Comment)) && !IsAuroraE; } }
+        public bool IsAurora { get { return (Prop == "AU" || TF(TF_AUTAG)) && !IsAuroraE; } }
         // aurora-E (Au-E): E sporadico di origine aurorale, senza Doppler, sul percorso diretto, dopo l'evento aurorale (G0ISW [33]);
         // riconosciuto da AUE, AU-E o AURORAL E nel testo, oppure dal modo dichiarato AUE
         static readonly System.Text.RegularExpressions.Regex rxAuE = new System.Text.RegularExpressions.Regex(@"(?<![A-Z0-9])(AUE|AU-E|AURORAL[- ]?E)(?![A-Z0-9])",
             System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled);
-        public bool IsAuroraE { get { return Prop == "AUE" || rxAuE.IsMatch(Comment ?? ""); } }
+        public bool IsAuroraE { get { return Prop == "AUE" || TF(TF_AUE); } }
         // MS sicuro: modo dichiarato MS, modo digitale MS o <MS> (la sola finestra di frequenza del bandplan e' un indizio)
-        public bool IsMeteorScatterSure { get { return Prop == "MS" || rxMsMode.IsMatch((Comment ?? "") + " " + (DigiMode ?? "")); } }
+        public bool IsMeteorScatterSure { get { return Prop == "MS" || TF(TF_MSMODE); } }
         // In 50 MHz il bandplan non e' un criterio esclusivo (regola dell'autore): la sola finestra MS non toglie lo spot all'E-sporadico
-        public bool TaggedNotEs { get { return Filters.NotEsTag(Comment) || (Band == "6m" && Filters.Es50WindowNotExclusive ? IsMeteorScatterSure : IsMeteorScatter); } }
+        public bool TaggedNotEs { get { return TF(TF_NOTES) || (Band == "6m" && Filters.Es50WindowNotExclusive ? IsMeteorScatterSure : IsMeteorScatter); } }
         // In 50 MHz entro EsModel.MinKm50 (450 km) un collegamento non e' E-sporadico (regola dell'autore);
         // in 28 MHz la distanza minima si scala da quella dei 50 MHz seguendo IK3XTV (EsModel.MinKm28)
         // in 70 MHz entro EsModel.MinKm70 (450 km, regola dell'autore del 14/11/2026); in 40 MHz la distanza minima si scala da
@@ -75,16 +109,42 @@ namespace ELA
         public bool TooShortForEs { get { return HasBoth && ((Band == "6m" && DistanceKm < EsModel.MinKm50) || (Band == "4m" && DistanceKm < EsModel.MinKm70) || (Band == "10m" && DistanceKm < EsModel.MinKm28) || (Band == "12m" && DistanceKm < EsModel.MinKm24) || (Band == "8m" && DistanceKm < EsModel.MinKm40)); } }
         public bool TooLongForEs { get { return HasBoth && Band == "8m" && DistanceKm > EsModel.MaxKm40; } }
         // utile per l'E-sporadico: modo dichiarato compatibile e nessuna etichetta <MS>/<AU>/<TR> nel testo
-        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !TooLongForEs && !IsEme144 && !Filters.FaiTag(Comment) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
+        public bool EsCandidate { get { return Prop != "TR" && Prop != "MS" && Prop != "AU" && Prop != "FAI" && Prop != "EME" && Prop != "TEP" && !TaggedNotEs && !TooShortForEs && !TooLongForEs && !IsEme144 && !TF(TF_FAITAG) && !IsAurora && !IsAuroraE && Prop != "AUE"; } }   // <FAI> o fai (maiuscolo, minuscolo o misto) = F.A.I., non Es
         // transequatoriale per la regola dell'autore (EsModel.IsTransEquatorial), salvo che lo spot dichiari ES
         // e per la regola generale di tutto il mondo (EsModel.IsTransEquatorialWorld, Kennewell e Wilkinson)
         // Es che aggancia il TEP (ombra del TEP): resta tra gli spot Es, si disegna in blu elettrico con la scritta TEP
         public bool IsEsTep { get { return Prop != "TEP" && HasBoth && EsModel.IsEsTepCached(LatS, LonS, LatD, LonD); } }
         public bool IsTep { get { return Prop == "TEP" || (Prop != "ES" && HasBoth && (EsModel.IsTransEquatorial(LatS, LonS, LatD, LonD) || EsModel.IsTransEquatorialWorld(LatS, LonS, LatD, LonD))); } }
         public bool HasBoth { get { return !double.IsNaN(LatS) && !double.IsNaN(LatD); } }
-        public double DistanceKm { get { return HasBoth ? Geo.DistanceKm(LatS, LonS, LatD, LonD) : double.NaN; } }
-        public string Band { get { return Bands.Name(FreqKHz); } }
-        public string Key { get { return DxCall + "|" + Spotter + "|" + Math.Round(FreqKHz) + "|" + Utc.ToString("yyyyMMddHHmm"); } }
+        public double DistanceKm
+        {
+            get
+            {
+                if (!HasBoth) return double.NaN;
+                double a = LatS, b = LonS, c = LatD, d = LonD;
+                DistMemo m = dm;
+                if (m == null || a != m.LatS || b != m.LonS || c != m.LatD || d != m.LonD) { m = new DistMemo { LatS = a, LonS = b, LatD = c, LonD = d, Km = Geo.DistanceKm(a, b, c, d) }; dm = m; }
+                return m.Km;
+            }
+        }
+        public string Band
+        {
+            get { double f = FreqKHz; BandMemo m = bm; if (m == null || f != m.F) { m = new BandMemo { F = f, Name = Bands.Name(f) }; bm = m; } return m.Name; }
+        }
+        public string Key
+        {
+            get
+            {
+                string dx = DxCall, sp = Spotter; double f = FreqKHz; DateTime u = Utc;
+                KeyMemo m = km;
+                if (m == null || !ReferenceEquals(dx, m.Dx) || !ReferenceEquals(sp, m.Sp) || f != m.F || u != m.U)
+                {
+                    m = new KeyMemo { Dx = dx, Sp = sp, F = f, U = u, Key = dx + "|" + sp + "|" + Math.Round(f) + "|" + u.ToString("yyyyMMddHHmm") };
+                    km = m;
+                }
+                return m.Key;
+            }
+        }
     }
 
     public static class Bands
@@ -221,9 +281,25 @@ namespace ELA
         }
 
         // aggiunge uno spot (chiamare dal thread dell'interfaccia); false se doppio
+        // testi ripetuti (nominativi, locator, modi) condivisi fra gli spot invece di tenerne una copia per spot
+        // (ottimizzazione della memoria del 28/11/2026; i valori non cambiano)
+        static readonly Dictionary<string, string> pool = new Dictionary<string, string>(StringComparer.Ordinal);
+        static string Pool(string v)
+        {
+            if (v == null) return null;
+            string r;
+            if (pool.TryGetValue(v, out r)) return r;
+            if (pool.Count > 200000) pool.Clear();
+            pool[v] = v;
+            return v;
+        }
+
         public static bool Add(Spot s)
         {
-            if (s == null || !keys.Add(s.Key)) return false;
+            if (s == null) return false;
+            s.DxCall = Pool(s.DxCall); s.Spotter = Pool(s.Spotter); s.LocDx = Pool(s.LocDx); s.LocSpotter = Pool(s.LocSpotter);
+            s.Prop = Pool(s.Prop); s.DigiMode = Pool(s.DigiMode);
+            if (!keys.Add(s.Key)) return false;
             All.Add(s);
             if (All.Count > 50000)
             {
@@ -237,18 +313,55 @@ namespace ELA
             return true;
         }
 
+        // Scrittura su disco a blocchi (ottimizzazione del 28/11/2026): le righe si accumulano e si scrivono ogni 5 secondi
+        // (o ogni 500 spot) fuori dal thread dell'interfaccia, invece di aprire e chiudere il file a ogni spot. Il contenuto
+        // dei file e' lo stesso; prima di leggere o archiviare i file si scrive tutto quello che e' in attesa (Flush).
+        static readonly object pendLock = new object(), writeLock = new object();
+        static Dictionary<string, StringBuilder> pend = new Dictionary<string, StringBuilder>();
+        static int pendCount;
+        static System.Threading.Timer flushTimer;
+
         static void Append(Spot s)
         {
             try
             {
                 string f = Path.Combine(Dir, s.Utc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + ".csv");
-                bool head = !File.Exists(f);
-                StringBuilder sb = new StringBuilder();
-                if (head) sb.AppendLine(CsvHeader);
-                sb.AppendLine(CsvLine(s));
-                File.AppendAllText(f, sb.ToString());
+                string line = CsvLine(s);
+                bool now;
+                lock (pendLock)
+                {
+                    StringBuilder sb;
+                    if (!pend.TryGetValue(f, out sb)) { sb = new StringBuilder(); pend[f] = sb; }
+                    sb.AppendLine(line);
+                    now = ++pendCount >= 500;
+                    if (flushTimer == null) flushTimer = new System.Threading.Timer(_ => Flush(), null, 5000, 5000);
+                }
+                if (now) System.Threading.ThreadPool.QueueUserWorkItem(_ => Flush());
             }
             catch { }
+        }
+
+        // scrive su disco le righe in attesa (chiamabile da qualunque thread)
+        public static void Flush()
+        {
+            lock (writeLock)
+            {
+                Dictionary<string, StringBuilder> todo;
+                lock (pendLock)
+                {
+                    if (pendCount == 0) return;
+                    todo = pend; pend = new Dictionary<string, StringBuilder>(); pendCount = 0;
+                }
+                foreach (KeyValuePair<string, StringBuilder> kv in todo)
+                {
+                    try
+                    {
+                        bool head = !File.Exists(kv.Key);
+                        File.AppendAllText(kv.Key, (head ? CsvHeader + Environment.NewLine : "") + kv.Value.ToString());
+                    }
+                    catch { }
+                }
+            }
         }
 
         // formato dei file di data/spot (anche per salvare e ricaricare gli spot di una sessione, linguetta NUBI Es NEL TEMPO)
@@ -314,6 +427,7 @@ namespace ELA
         // righe di un file di spot, anche compresso (.gz)
         public static IEnumerable<string> ReadLines(string path)
         {
+            Flush();   // righe ancora in attesa di scrittura
             if (!path.EndsWith(".gz", StringComparison.OrdinalIgnoreCase)) { foreach (string l in File.ReadLines(path)) yield return l; yield break; }
             using (FileStream fs = File.OpenRead(path))
             using (System.IO.Compression.GZipStream z = new System.IO.Compression.GZipStream(fs, System.IO.Compression.CompressionMode.Decompress))
@@ -328,6 +442,7 @@ namespace ELA
         // svuota il database degli spot: memoria e file CSV di data/spot (alla chiusura del programma, regola dell'autore)
         public static void ClearAll()
         {
+            Flush();
             if (Archive && Dir != null && Directory.Exists(Dir))
                 foreach (string f in Directory.GetFiles(Dir, "*.csv")) { try { ArchiveDay(f); } catch { } }
             All.Clear(); keys.Clear();
