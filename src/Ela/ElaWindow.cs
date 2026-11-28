@@ -22,7 +22,14 @@ namespace ELA
     public partial class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.7.0";
+        // versione letta dal programma compilato (-p:Version dal file VERSION), cosi' non resta indietro rispetto alla Release:
+        // fino alla 0.7.0 era scritta a mano ed era rimasta "0.6.7" (aggiornamento proposto di continuo e dati ripresi dalla v0.6.7)
+        public static readonly string Version = ReadVersion();
+        static string ReadVersion()
+        {
+            var v = typeof(ElaWindow).Assembly.GetName().Version;
+            return v != null && (v.Major | v.Minor | v.Build) > 0 ? v.ToString(3) : "0.7.0";
+        }
 
         readonly PillTabs tabs = new PillTabs(true);
         TextBlock lblNtp, lblUpd, lblChain;
