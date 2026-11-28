@@ -19,7 +19,7 @@ using YAMS;
 
 namespace ELA
 {
-    public class ElaWindow : Window
+    public partial class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
         public const string Version = "0.6.7";
@@ -536,6 +536,7 @@ namespace ELA
                 if (!string.IsNullOrEmpty(Program.ScreenshotLoc)) { txtLoc.Text = Program.ScreenshotLoc; txtCall.Text = "IC8TEM"; ApplyStation(); }
                 for (int k = 0; k < 60 && (MapView.Coast == null || MapView.Coast.Count == 0); k++) await Task.Delay(1000);
                 for (int k = 0; k < 30 && CallDb.Loading; k++) await Task.Delay(1000);
+                if (Program.Perf) { await Task.Delay(3000); await RunPerf(dir); Close(); return; }   // solo la misura delle prestazioni
                 if (Program.AuroraA != null)
                 {
                     // bozzetto del calcolo aurora per una coppia di locator (--aurora A B)

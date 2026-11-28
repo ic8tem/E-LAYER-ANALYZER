@@ -276,6 +276,23 @@ namespace ELA
         List<EsPath> ultra = new List<EsPath>();
 
         bool autoSet;
+        // impronta dei risultati per la misura delle prestazioni (ElaWindow.Perf.cs): tratte, nubi e allerte
+        public string PerfSignature()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            Func<double, string> f = v => v.ToString("R", CultureInfo.InvariantCulture);
+            sb.AppendLine("TRATTE " + paths.Count + " TEP " + tep + " 144 " + short144 + "/" + held144);
+            foreach (EsPath p in paths.OrderBy(x => x.Spot.Key, StringComparer.Ordinal))
+            {
+                sb.Append(p.Spot.Key).Append(' ').Append(p.Hops).Append(' ').Append(f(p.DistKm)).Append(' ').Append(f(p.HopKm)).Append(' ').Append(f(p.FoEsMin)).Append(' ').Append(f(p.ElevDeg));
+                foreach (EsHop h in p.Points) sb.Append(' ').Append(f(h.Lat)).Append(',').Append(f(h.Lon));
+                sb.AppendLine();
+            }
+            sb.AppendLine("ALLERTE " + alerts.Count);
+            foreach (PrecursorAlert a in alerts.OrderBy(x => x.Key, StringComparer.Ordinal)) sb.AppendLine(a.Key + " " + a.Level + " " + f(a.DistKm));
+            return sb.ToString();
+        }
+
         public void Refresh()
         {
             dirty = false;

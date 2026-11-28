@@ -8,11 +8,13 @@ namespace ELA
     internal static class Program
     {
         public static string ScreenshotDir, ScreenshotLoc, ThemeArg, AuroraA, AuroraB;
-        public static int ShotW, ShotH;   // --dimensione LxA: finestra di prova (fotografie della modalita' compatta)
+        public static int ShotW, ShotH;
+        public static bool Perf;          // --prestazioni: con --screenshot, solo la misura delle prestazioni (prestazioni.txt)   // --dimensione LxA: finestra di prova (fotografie della modalita' compatta)
 
         [STAThread]
         public static void Main(string[] args)
         {
+            if (Array.IndexOf(args, "--prestazioni") >= 0) Perf = true;
             for (int i = 0; i < args.Length - 1; i++)
             {
                 if (args[i] == "--screenshot") { ScreenshotDir = args[i + 1]; YAMS.Program.ScreenshotDir = args[i + 1]; }
