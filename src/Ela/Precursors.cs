@@ -61,6 +61,44 @@ namespace ELA
 
         class Active { public double Lat, Lon, FoEs; public Spot Spot; }
 
+        // Indice geografico delle nubi attive (ottimizzazione del 28/11/2026): per ogni punto della tratta si guardano solo
+        // le nubi nelle celle di 1 grado che possono stare entro il raggio, con un margine rigoroso (formula dell'emisenoverso:
+        // sin^2(d/2R) >= sin^2(dlat/2) e >= cos(lat1) cos(lat2) sin^2(dlon/2)), nello stesso ordine di prima e con la stessa
+        // distanza: i risultati sono identici, cambia solo quante nubi si confrontano.
+        sealed class GeoIdx
+        {
+            readonly Dictionary<int, List<int>> cells = new Dictionary<int, List<int>>();
+            static int Key(int y, int x) { return (y + 90) * 360 + (((x + 180) % 360) + 360) % 360; }
+            public GeoIdx(int n, Func<int, double> lat, Func<int, double> lon)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    int k = Key(Math.Max(-90, Math.Min(89, (int)Math.Floor(lat(i)))), (int)Math.Floor(lon(i)));
+                    List<int> l;
+                    if (!cells.TryGetValue(k, out l)) { l = new List<int>(); cells[k] = l; }
+                    l.Add(i);
+                }
+            }
+            public void Query(double lat, double lon, double km, List<int> res)
+            {
+                res.Clear();
+                double dLat = km / (Math.PI * Geo.R / 180) + 0.5;                       // gradi, con mezzo grado di margine
+                double hi = Math.Min(90, Math.Max(Math.Abs(lat - dLat), Math.Abs(lat + dLat)));
+                double den = Math.Cos(lat * Geo.D2R) * Math.Cos(hi * Geo.D2R), sh = Math.Sin(km / (2 * Geo.R));
+                double dLon = den <= 1e-9 || sh * sh >= den * 0.999 ? 180 : 2 * Math.Asin(sh / Math.Sqrt(den)) * Geo.R2D + 0.5;
+                int y0 = Math.Max(-90, (int)Math.Floor(lat - dLat)), y1 = Math.Min(89, (int)Math.Floor(lat + dLat));
+                int x0, x1;
+                if (dLon >= 180) { x0 = -180; x1 = 179; } else { x0 = (int)Math.Floor(lon - dLon); x1 = (int)Math.Floor(lon + dLon); if (x1 - x0 >= 359) { x0 = -180; x1 = 179; } }
+                for (int y = y0; y <= y1; y++)
+                    for (int x = x0; x <= x1; x++)
+                    {
+                        List<int> l;
+                        if (cells.TryGetValue(Key(y, x), out l)) res.AddRange(l);
+                    }
+                res.Sort();
+            }
+        }
+
         public static List<PrecursorAlert> Last = new List<PrecursorAlert>();
         public static List<StrongCloud> LastStrong = new List<StrongCloud>();
 
@@ -95,6 +133,9 @@ namespace ELA
                 LastStrong = st0; Last = only; return only;
             }
 
+            GeoIdx idx = new GeoIdx(act.Count, i => act[i].Lat, i => act[i].Lon);
+            GeoIdx sidx = new GeoIdx(stations.Count, i => stations[i][0], i => stations[i][1]);
+            List<int> buf = new List<int>();
             foreach (var r in Regions)
             {
                 double D = Geo.DistanceKmFast(Station.Lat, Station.Lon, r.Lat, r.Lon);
@@ -109,12 +150,12 @@ namespace ELA
                     // salti uguali
                     int n = (int)Math.Ceiling(D / MaxHopKm);
                     if (band.Item2 > 100 && n != 2) continue;                    // 144 MHz: solo il doppio salto
-                    best = Better(best, Evaluate(r.Name, band.Item1, band.Item2, r.Lat, r.Lon, D, az, 0, Hkm, act, stations));
+                    best = Better(best, Evaluate(r.Name, band.Item1, band.Item2, r.Lat, r.Lon, D, az, 0, Hkm, act, stations, idx, sidx, buf));
                     // primo salto corto: si verifica sempre (500-1200 km), con il resto della tratta a salti uguali
                     PrecursorAlert shortBest = null;
                     if (band.Item2 < 100)
                         for (double S = ShortMinKm; S <= ShortMaxKm + 1; S += 100)
-                            shortBest = Better(shortBest, Evaluate(r.Name, band.Item1, band.Item2, r.Lat, r.Lon, D, az, S, Hkm, act, stations));
+                            shortBest = Better(shortBest, Evaluate(r.Name, band.Item1, band.Item2, r.Lat, r.Lon, D, az, S, Hkm, act, stations, idx, sidx, buf));
                     bool shortFound = shortBest != null && shortBest.Points.Count > 0 && shortBest.Points[0].Covered;
                     PrecursorAlert pick = Better(best, shortBest);
                     if (pick == null || pick.Level == 0) continue;
@@ -152,7 +193,7 @@ namespace ELA
         }
 
         static PrecursorAlert Evaluate(string region, string band, double f, double tLat, double tLon, double D, double az, double shortKm,
-                                       double Hkm, List<Active> act, List<double[]> stations)
+                                       double Hkm, List<Active> act, List<double[]> stations, GeoIdx idx, GeoIdx sidx, List<int> buf)
         {
             PrecursorAlert a = new PrecursorAlert { Region = region, Band = band, FreqMHz = f, TargetLat = tLat, TargetLon = tLon, DistKm = D, Az = az, ShortHyp = shortKm > 0, ShortKm = shortKm };
             List<double[]> hops = new List<double[]>();     // {centro lungo la tratta (km), lunghezza del salto}
@@ -174,13 +215,16 @@ namespace ELA
                 double la, lo;
                 Geo.IntermediateFast(Station.Lat, Station.Lon, tLat, tLon, h[0] / D, out la, out lo);
                 PrecursorPoint p = new PrecursorPoint { Lat = la, Lon = lo, HopKm = h[1], FoEsNeed = f / Geo.SecantFactor(h[1], Hkm), Short = shortKm > 0 && a.Points.Count == 0 };
-                foreach (Active c in act)
+                idx.Query(la, lo, MatchKm, buf);
+                foreach (int ci in buf)
                 {
+                    Active c = act[ci];
                     double d = Geo.DistanceKmFast(la, lo, c.Lat, c.Lon);
                     if (d > MatchKm || c.FoEs < p.FoEsNeed) continue;
                     if (!p.Covered || c.FoEs > p.CloudFoEs) { p.Covered = true; p.CloudFoEs = c.FoEs; p.CloudKm = d; p.CloudSpot = c.Spot; }
                 }
-                foreach (double[] s in stations) if (Geo.DistanceKmFast(la, lo, s[0], s[1]) <= ObservedKm) { p.Observed = true; break; }
+                sidx.Query(la, lo, ObservedKm, buf);
+                foreach (int si in buf) { double[] s = stations[si]; if (Geo.DistanceKmFast(la, lo, s[0], s[1]) <= ObservedKm) { p.Observed = true; break; } }
                 a.Points.Add(p);
             }
             int cov = a.Covered, miss = a.Points.Count - cov;

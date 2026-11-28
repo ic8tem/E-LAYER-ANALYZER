@@ -78,6 +78,18 @@ namespace ELA
             r.AppendLine("PRECURSORI " + al.Count);
             foreach (PrecursorAlert p in al.OrderBy(x => x.Key, StringComparer.Ordinal)) r.AppendLine(p.Key + " " + p.Level + " " + F(p.DistKm) + " " + F(p.Az) + " " + p.Covered);
 
+            // 3b) parti di C misurate da sole
+            {
+                List<StrongCloud> stc;
+                sw.Restart(); for (int k = 0; k < 3; k++) Chains.Compute(es.H, Precursors.WindowMin, out stc); sw.Stop();
+                double tCh = sw.Elapsed.TotalMilliseconds / 3;
+                sw.Restart(); for (int k = 0; k < 3; k++) Prodromes.Compute(es.H); sw.Stop();
+                double tPr = sw.Elapsed.TotalMilliseconds / 3;
+                sw.Restart(); for (int k = 0; k < 3; k++) TepForecast.Compute(); sw.Stop();
+                double tTe = sw.Elapsed.TotalMilliseconds / 3;
+                t.AppendLine(string.Format(ic, "   di cui catene {0:F0} ms, prodromi {1:F0} ms, previsione TEP {2:F0} ms", tCh, tPr, tTe));
+            }
+
             // 4) classificazione degli spot (proprieta' lette nei filtri)
             sw.Restart(); int n1 = 0;
             for (int k = 0; k < 5; k++) foreach (Spot s in syn) { if (s.EsCandidate) n1++; if (s.IsTep) n1++; if (s.DistanceKm > 1000) n1++; if (s.Key.Length > 0) n1++; }
