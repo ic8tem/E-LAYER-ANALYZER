@@ -35,7 +35,7 @@ namespace ELA
         readonly NumericUpDown numAlt;
         readonly TextBlock lblClock, status;
         readonly ComboBox cmbLang;
-        EsTab es; BenchTab bench; BenchMultiTab bench50; IonoTab iono; NubiTab nubi; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log; SettingsTab settings;
+        EsTab es; BenchTab bench; BenchMultiTab bench50; IonoTab iono; NubiTab nubi; ForecastTab prev; ScatterTab fai, au; AuroraBenchTab auBench; DataTab dc; LogTab log; SettingsTab settings;
         readonly ComboBox cmbTheme;
         YAMS.MainWindow ms;
         bool replaced;
@@ -140,6 +140,7 @@ namespace ELA
             bench50 = new BenchMultiTab();
             iono = new IonoTab();
             nubi = new NubiTab();
+            prev = new ForecastTab();
             fai = new ScatterTab(false);
             YAMS.MainWindow.LanguageRequested = code => Dispatcher.UIThread.Post(() => SwitchLanguage(code));
             YAMS.MainWindow.ThemeRequested = th => Dispatcher.UIThread.Post(() => SwitchTheme(th));
@@ -147,14 +148,15 @@ namespace ELA
             au = new ScatterTab(true);
             dc = new DataTab();
             log = new LogTab();
-            // SPORADIC-E: cinque sottolinguette (REAL-TIME, BENCHMARK Es, BENCHMARK 50 MHz, IONOSONDE, NUBI Es NEL TEMPO);
+            // SPORADIC-E: sei sottolinguette (REAL-TIME, BENCHMARK Es, BENCHMARK 50 MHz, IONOSONDE, NUBI Es NEL TEMPO, PREVISIONE);
             // le ultime due in coda, cosi' i numeri salvati delle prime tre non cambiano
             esTabs.Add(Lang.T("REAL-TIME"), es.Root);
             esTabs.Add(Lang.T("BENCHMARK Es"), bench.Root);
             esTabs.Add(Lang.T("BENCHMARK 50 MHz"), bench50.Root);
             esTabs.Add(Lang.T("IONOSONDE"), iono.Root);
             esTabs.Add(Lang.T("NUBI Es NEL TEMPO"), nubi.Root);
-            esTabs.SelectionChanged += i => { if (i == 0) es.Refresh(); else if (i == 3) iono.Activate(); else if (i == 4) nubi.OnShow(); };
+            esTabs.Add(Lang.T("PREVISIONE"), prev.Root);   // dalla 0.7.0: nube in formazione, primo salto, doppio salto, tropo + Es
+            esTabs.SelectionChanged += i => { if (i == 0) es.Refresh(); else if (i == 3) iono.Activate(); else if (i == 4) nubi.OnShow(); else if (i == 5) { iono.Activate(); prev.OnShow(); } };
             DockPanel esPage = new DockPanel { Background = Pal.B(Pal.Back) };
             Ui.Dock(esPage, esTabs.Bar, Dock.Top);
             esPage.Children.Add(esTabs.Host);
@@ -187,7 +189,7 @@ namespace ELA
                 "E-LAYER ANALYZER - abaco dei salti.docx", Lang.T("Quanti salti servono in 50 MHz da 500 a 12000 km, e da quali fonti")));
             tabs.SelectionChanged += i =>
             {
-                if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); else if (esTabs.Selected == 3) iono.Activate(); else if (esTabs.Selected == 4) nubi.OnShow(); }
+                if (i == 0) { if (esTabs.Selected == 0) es.Refresh(); else if (esTabs.Selected == 3) iono.Activate(); else if (esTabs.Selected == 4) nubi.OnShow(); else if (esTabs.Selected == 5) { iono.Activate(); prev.OnShow(); } }
                 else if (i == 1) fai.Recalc();
                 else if (i == 3) { if (auTabs.Selected == 0) au.Recalc(); }
                 else if (i == 5) log.Refresh();
@@ -439,6 +441,7 @@ namespace ELA
                 Giro.Init(dataDir);   // archivio delle ionosonde GIRO (ultime 48 ore); i dati nuovi arrivano all'apertura di IONOSONDE
                 iono.Refresh();
                 if (tabs.Selected == 0 && esTabs.Selected == 3) iono.Activate();   // IONOSONDE riaperta all'avvio
+                if (tabs.Selected == 0 && esTabs.Selected == 5) { iono.Activate(); prev.OnShow(); }   // PREVISIONE riaperta all'avvio
                 CallDb.StartLoad(dataDir);
                 SpaceWeather.LoadCached(dataDir);
                 LogStore.Init(dataDir);

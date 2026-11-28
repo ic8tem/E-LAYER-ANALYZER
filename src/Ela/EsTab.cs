@@ -41,7 +41,7 @@ namespace ELA
         List<EsPath> shown = new List<EsPath>();
         double clickLat = double.NaN, clickLon = double.NaN;
         bool dirty = true;
-        int short144, held144, tep, heldAtl;
+        int short144, held144, tep, heldAtl, trEs;
         List<EsModel.EsTropo> esTropo = new List<EsModel.EsTropo>();   // spot in 144 MHz sotto i 900 km e in attesa di conferma (regola IC8TEM)
 
         class Cloud { public string Sq; public double Lat, Lon, FoEs, Az, Dist, Muf, MaxMHz, MufMax; public int N; public bool Open144; public List<string> Calls = new List<string>(); }
@@ -308,6 +308,21 @@ namespace ELA
                 if (p != null && p.Hops == 1) six.Add(p);
             }
             paths = EsModel.Apply144Rule(paths, six, out short144, out held144);
+            // modello misto generale E-sporadico + tropo (dalla 0.7.0): 144 MHz fra 2400 e 3400 km, nube nota a meta' del salto Es
+            // da un'estremita' e condotto (spot <TR> o profilo Open-Meteo) dall'altra; il doppio salto con due nubi note ha la precedenza
+            trEs = 0;
+            if (EsForecast.UseTrEs)
+            {
+                List<EsCloud> cl = EsForecast.Clouds(H, DateTime.UtcNow, SpotStore.Recent(EsForecast.WindowMin, x => x.HasBoth), true);
+                List<Spot> trs = TropoDuct.TropoSpots(60);
+                List<EsPath> keep = new List<EsPath>();
+                foreach (EsPath p in paths)
+                {
+                    EsModel.EsTropo et = p.Spot.Band == "2m" && p.DistKm > EsForecast.TrEsMinKm ? EsForecast.ClassifyTrEs(p.Spot, H, cl, trs) : null;
+                    if (et != null) { esTropo.Add(et); trEs++; } else keep.Add(p);
+                }
+                paths = keep;
+            }
             // notizia statistica: QSO in 50 MHz oltre gli 11000 km (EI7GL [56]: 11460 km HZ1SK-K4MOG, almeno sei salti)
             ultra = paths.FindAll(p => p.Spot.Band == "6m" && p.DistKm > UltraKm);
             sel = null;
@@ -475,7 +490,8 @@ namespace ELA
                 + (shown.Count < paths.Count ? " " + Lang.F("In tabella i {0} visibili sulla mappa.", shown.Count) : "")
                 + (tep > 0 ? " " + Lang.F("{0} spot transequatoriali (TEP) esclusi.", tep) : "")
                 + (short144 + held144 > 0 ? " " + Lang.F("144 MHz: {0} spot sotto i 900 km scartati, {1} in attesa di conferma (regola IC8TEM).", short144, held144) : "")
-                + (esTropo.Count + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count, heldAtl) : "")
+                + (esTropo.Count - trEs + heldAtl > 0 ? " " + Lang.F("144 MHz verso Canarie, Madeira e Azzorre: {0} spot Es + tropo confermati, {1} in attesa di un secondo spot sulla stessa nube.", esTropo.Count - trEs, heldAtl) : "")
+                + (trEs > 0 ? " " + Lang.F("144 MHz oltre il singolo salto: {0} spot TR+ES (nube ricollocata, condotto dall'altra estremità).", trEs) : "")
                 + (alerts.Count > 0 ? " " + Lang.F("Multi-salto: {0} allerte e {1} precursori (sottolinguetta Precursori multi-salto).", alerts.Count(a => a.Level == 2 && !(a is TepAlert)), alerts.Count(a => a.Level == 1 && !(a is TepAlert))) : "")
                 + (alerts.Any(a => a is TepAlert) ? " " + Lang.F("TEP: {0}.", string.Join(", ", alerts.OfType<TepAlert>().Select(t => t.Region + " " + t.Index.ToString("F0", CultureInfo.CurrentCulture)))) : "")
                 + (Precursors.LastStrong.Count > 0 ? " " + Lang.F("Nubi forti per il salto corto in 50 MHz: {0}.", Precursors.LastStrong.Count) : "")
@@ -555,13 +571,15 @@ namespace ELA
                 Spot s = et.Spot;
                 bool mainS = !EsModel.InAtlanticIslands(s.LatS, s.LonS);
                 double mLa = mainS ? s.LatS : s.LatD, mLo = mainS ? s.LonS : s.LonD;
+                if (et.General) { mLa = et.EsLat; mLo = et.EsLon; }
                 map.Lines.Add(MapView.GreatCircle(mLa, mLo, et.LandLat, et.LandLon, Pal.A(220, Pal.Orange), 1.6));
                 map.Lines.Add(MapView.GreatCircle(et.LandLat, et.LandLon, et.IsleLat, et.IsleLon, Pal.A(220, Pal.Azure), 1.6, true));
-                map.Markers.Add(new MapMarker { Lat = et.CloudLat, Lon = et.CloudLon, Radius = 5, Fill = Pal.Orange, Square = true, Label = Geo.LatLonToLoc(et.CloudLat, et.CloudLon, 4) });
+                map.Markers.Add(new MapMarker { Lat = et.CloudLat, Lon = et.CloudLon, Radius = 5, Fill = Pal.Orange, Square = true, Label = (et.General ? "TR+ES " : "") + Geo.LatLonToLoc(et.CloudLat, et.CloudLon, 4) });
                 map.Markers.Add(new MapMarker { Lat = s.LatS, Lon = s.LonS, Radius = 2.5, Fill = Pal.Orange, Label = s.Spotter });
                 map.Markers.Add(new MapMarker { Lat = s.LatD, Lon = s.LonD, Radius = 2.5, Fill = Pal.Orange, Label = s.DxCall });
             }
-            if (esTropo.Count > 0) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("144 MHz Es + tropo verso Canarie, Madeira, Azzorre (tratteggio: tropo)"), Pal.Azure));
+            if (esTropo.Exists(x => !x.General)) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("144 MHz Es + tropo verso Canarie, Madeira, Azzorre (tratteggio: tropo)"), Pal.Azure));
+            if (esTropo.Exists(x => x.General)) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("TR+ES: salto Es (arancio) con la nube ricollocata e tratta in condotto (tratteggio azzurro)"), Pal.Azure));
             DrawAlerts();
             if (paths.Exists(x => x.Spot.IsEsTep)) map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("blu elettrico, scritta TEP: Es che può agganciare il TEP (non si può sapere dallo spot)"), ElectricBlue));
             map.Legend.Add(new KeyValuePair<string, Color>(Lang.T("10 m / 6 m / 4 m / 2 m: verde, azzurro, viola, arancio"), Pal.Azure));

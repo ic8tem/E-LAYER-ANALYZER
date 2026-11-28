@@ -234,7 +234,12 @@ namespace ELA
         // Regola dell'autore (IC8TEM) per i 144 MHz verso Canarie, Madeira e Azzorre: oltre il singolo salto la tratta e' un
         // E-sporadico seguito da un condotto troposferico sull'Atlantico (come per le aperture VK-ZL in 144 MHz [41]).
         // Lo spot vale solo se due o piu' spot indicano la stessa nube Es; non si applica ai 50 e 70 MHz.
-        public class EsTropo { public Spot Spot; public double CloudLat, CloudLon, LandLat, LandLon, IsleLat, IsleLon, EsKm, TropoKm; }
+        public class EsTropo
+        {
+            public Spot Spot; public double CloudLat, CloudLon, LandLat, LandLon, IsleLat, IsleLon, EsKm, TropoKm;
+            // modello misto generale (dalla 0.7.0, EsForecast.ClassifyTrEs): estremita' del salto Es, abbattimento, fonte del condotto
+            public double EsLat = double.NaN, EsLon = double.NaN, LossDb = double.NaN; public bool General; public string DuctSource = "";
+        }
 
         public static bool IsAtlanticTropoCandidate(Spot s)
         {
