@@ -211,18 +211,9 @@ namespace ELA
 
         protected override void OnPointerExited(PointerEventArgs e) { base.OnPointerExited(e); hover = new Point(-1, -1); InvalidateVisual(); }
 
-        // scritte della mappa: la stessa scritta (testo, corpo, colore, peso) si prepara una volta e si riusa a ogni disegno
-        // (ottimizzazione del 28/11/2026; prima si creava di nuovo a ogni ridisegno, anche ogni 0,6 s con le celle lampeggianti)
-        static readonly Dictionary<string, FormattedText> ftCache = new Dictionary<string, FormattedText>();
         static FormattedText Ft(string s, double size, Color c, FontWeight w = FontWeight.Normal)
         {
-            string k = (s ?? "") + "\u0001" + size.ToString("R", CultureInfo.InvariantCulture) + "\u0001" + c.ToUInt32() + "\u0001" + (int)w + "\u0001" + UiScale.Font.ToString("R", CultureInfo.InvariantCulture) + "\u0001" + CultureInfo.CurrentCulture.Name;
-            FormattedText t;
-            if (ftCache.TryGetValue(k, out t)) return t;
-            t = new FormattedText(s ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily.Default, FontStyle.Normal, w), size * UiScale.Font, new SolidColorBrush(c));
-            if (ftCache.Count > 4000) ftCache.Clear();
-            ftCache[k] = t;
-            return t;
+            return new FormattedText(s ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(FontFamily.Default, FontStyle.Normal, w), size * UiScale.Font, new SolidColorBrush(c));
         }
 
         // coste e confini proiettati: si ricalcolano solo quando cambiano vista, centro, raggio o dimensioni
@@ -484,22 +475,6 @@ namespace ELA
             return 5000;
         }
 
-        string gridKey; StreamGeometry gridThin, gridThick;
-
-        // aggiunge a una geometria le figure di una linea in coordinate (lon, lat), spezzata come in GeoPolyline
-        void GeoFigures(StreamGeometryContext gc, IList<Point> lonLat)
-        {
-            bool open = false; Point prev = new Point();
-            foreach (Point ll in lonLat)
-            {
-                Point q = ToScreen(ll.Y, ll.X);
-                if (!open || Jump(q, prev)) { if (open) gc.EndFigure(false); gc.BeginFigure(q, false); open = true; }
-                else gc.LineTo(q);
-                prev = q;
-            }
-            if (open) gc.EndFigure(false);
-        }
-
         void GeoPolyline(DrawingContext ctx, IPen pen, IList<Point> lonLat)
         {
             StreamGeometry g = new StreamGeometry();
@@ -533,62 +508,43 @@ namespace ELA
                     bool squares = RangeKm <= 3000;
                     double span = Math.Min(180, RangeKm / 111.0 * 1.6 + 2);
                     IPen sp = Pal.P(GridC, 0.6), gp = Pal.P(GridC, 1.2);
-                    // linee del reticolo proiettate una volta per vista (centro, raggio, dimensioni), come le coste
-                    // (ottimizzazione del 28/11/2026): stesse linee, disegnate da due geometrie in memoria
-                    string gkey = string.Join("|", AzLat, AzLon, RangeKm, W, H);
-                    if (gridKey != gkey || gridThin == null)
-                    {
-                        gridThin = new StreamGeometry(); gridThick = new StreamGeometry();
-                        using (StreamGeometryContext tc = gridThin.Open())
-                        using (StreamGeometryContext kc = gridThick.Open())
-                        {
-                            if (squares)
-                            {
-                                double la0 = Math.Max(-89, Math.Floor(AzLat - span)), la1 = Math.Min(89, Math.Ceiling(AzLat + span));
-                                double lspan = Math.Min(180, span / Math.Max(0.15, Math.Cos(Math.Min(80, Math.Abs(AzLat) + span) * Geo.D2R)));
-                                double lo0 = Math.Floor((AzLon - lspan) / 2) * 2, lo1 = AzLon + lspan;
-                                for (double lo = lo0; lo <= lo1; lo += 2)
-                                {
-                                    if (((int)Math.Round(Geo.Norm180(lo)) % 20 + 20) % 20 == 0) continue;
-                                    List<Point> m = new List<Point>(); for (double la = la0; la <= la1; la += 0.5) m.Add(new Point(lo, la));
-                                    GeoFigures(tc, m);
-                                }
-                                for (double la = la0; la <= la1; la += 1)
-                                {
-                                    if (((int)la % 10 + 10) % 10 == 0) continue;
-                                    List<Point> m = new List<Point>(); for (double lo = lo0; lo <= lo1; lo += 1) m.Add(new Point(lo, la));
-                                    GeoFigures(tc, m);
-                                }
-                            }
-                            for (int lo = -180; lo < 180; lo += 20)
-                            {
-                                List<Point> m = new List<Point>(); for (double la = -90; la <= 90; la += 1) m.Add(new Point(lo, la));
-                                GeoFigures(kc, m);
-                            }
-                            for (int la = -80; la <= 80; la += 10)
-                            {
-                                List<Point> m = new List<Point>(); for (double lo = -180; lo <= 180; lo += 1) m.Add(new Point(lo, la));
-                                GeoFigures(kc, m);
-                            }
-                        }
-                        gridKey = gkey;
-                    }
-                    ctx.DrawGeometry(null, sp, gridThin);
-                    if (squares && RangeKm <= 1600)
+                    if (squares)
                     {
                         double la0 = Math.Max(-89, Math.Floor(AzLat - span)), la1 = Math.Min(89, Math.Ceiling(AzLat + span));
                         double lspan = Math.Min(180, span / Math.Max(0.15, Math.Cos(Math.Min(80, Math.Abs(AzLat) + span) * Geo.D2R)));
                         double lo0 = Math.Floor((AzLon - lspan) / 2) * 2, lo1 = AzLon + lspan;
-                        for (double la = la0; la < la1; la += 1)
-                            for (double lo = lo0; lo < lo1; lo += 2)
-                            {
-                                Point c = ToScreen(la + 0.5, lo + 1);
-                                if (c.X < 0 || c.X > W || c.Y < 0 || c.Y > H) continue;
-                                FormattedText t = Ft(Geo.LatLonToLoc(la + 0.5, lo + 1, 4).Substring(2, 2), 8.5, Themes.MapSquare);
-                                ctx.DrawText(t, new Point(c.X - t.Width / 2, c.Y - t.Height / 2));
-                            }
+                        for (double lo = lo0; lo <= lo1; lo += 2)
+                        {
+                            if (((int)Math.Round(Geo.Norm180(lo)) % 20 + 20) % 20 == 0) continue;
+                            List<Point> m = new List<Point>(); for (double la = la0; la <= la1; la += 0.5) m.Add(new Point(lo, la));
+                            GeoPolyline(ctx, sp, m);
+                        }
+                        for (double la = la0; la <= la1; la += 1)
+                        {
+                            if (((int)la % 10 + 10) % 10 == 0) continue;
+                            List<Point> m = new List<Point>(); for (double lo = lo0; lo <= lo1; lo += 1) m.Add(new Point(lo, la));
+                            GeoPolyline(ctx, sp, m);
+                        }
+                        if (RangeKm <= 1600)
+                            for (double la = la0; la < la1; la += 1)
+                                for (double lo = lo0; lo < lo1; lo += 2)
+                                {
+                                    Point c = ToScreen(la + 0.5, lo + 1);
+                                    if (c.X < 0 || c.X > W || c.Y < 0 || c.Y > H) continue;
+                                    FormattedText t = Ft(Geo.LatLonToLoc(la + 0.5, lo + 1, 4).Substring(2, 2), 8.5, Themes.MapSquare);
+                                    ctx.DrawText(t, new Point(c.X - t.Width / 2, c.Y - t.Height / 2));
+                                }
                     }
-                    ctx.DrawGeometry(null, gp, gridThick);
+                    for (int lo = -180; lo < 180; lo += 20)
+                    {
+                        List<Point> m = new List<Point>(); for (double la = -90; la <= 90; la += 1) m.Add(new Point(lo, la));
+                        GeoPolyline(ctx, gp, m);
+                    }
+                    for (int la = -80; la <= 80; la += 10)
+                    {
+                        List<Point> m = new List<Point>(); for (double lo = -180; lo <= 180; lo += 1) m.Add(new Point(lo, la));
+                        GeoPolyline(ctx, gp, m);
+                    }
                     double fs = Math.Max(11, Math.Min(70, 2200.0 / RangeKm * 18)) / UiScale.Font;
                     for (int fx = 0; fx < 18; fx++)
                         for (int fy = 0; fy < 18; fy++)

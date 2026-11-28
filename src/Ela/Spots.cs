@@ -281,25 +281,9 @@ namespace ELA
         }
 
         // aggiunge uno spot (chiamare dal thread dell'interfaccia); false se doppio
-        // testi ripetuti (nominativi, locator, modi) condivisi fra gli spot invece di tenerne una copia per spot
-        // (ottimizzazione della memoria del 28/11/2026; i valori non cambiano)
-        static readonly Dictionary<string, string> pool = new Dictionary<string, string>(StringComparer.Ordinal);
-        static string Pool(string v)
-        {
-            if (v == null) return null;
-            string r;
-            if (pool.TryGetValue(v, out r)) return r;
-            if (pool.Count > 200000) pool.Clear();
-            pool[v] = v;
-            return v;
-        }
-
         public static bool Add(Spot s)
         {
-            if (s == null) return false;
-            s.DxCall = Pool(s.DxCall); s.Spotter = Pool(s.Spotter); s.LocDx = Pool(s.LocDx); s.LocSpotter = Pool(s.LocSpotter);
-            s.Prop = Pool(s.Prop); s.DigiMode = Pool(s.DigiMode);
-            if (!keys.Add(s.Key)) return false;
+            if (s == null || !keys.Add(s.Key)) return false;
             All.Add(s);
             if (All.Count > 50000)
             {
