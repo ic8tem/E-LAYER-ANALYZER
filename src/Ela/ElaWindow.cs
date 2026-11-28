@@ -22,7 +22,7 @@ namespace ELA
     public partial class ElaWindow : Window
     {
         public const string AppName = "E-LAYER ANALYZER";
-        public const string Version = "0.6.7";
+        public const string Version = "0.7.0";
 
         readonly PillTabs tabs = new PillTabs(true);
         TextBlock lblNtp, lblUpd, lblChain;
@@ -580,7 +580,7 @@ namespace ELA
                 File.WriteAllText(b50demo2, BenchMultiTab.DemoAdif("IK0XYZ", "JN61FW", 1));
                 await bench50.LoadFile(1, b50demo2);   // seconda stazione (casella "Stazione 2" accesa)
                 string[] names = { "1_sporadic_e", "2_fai", "3_meteor_scatter", "4_aurora", "5_data_collection", "6_log_adif", "6b_impostazioni", "7_fonti", "8_documento_tecnico", "9_manuale", "10_relazione", "11_abaco" };
-                string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "1m_ionosonde", "1l_nubi_es_nel_tempo" };
+                string[] esNames = { "1_sporadic_e", "1b_benchmark_es", "1g_benchmark_50", "1m_ionosonde", "1l_nubi_es_nel_tempo", "1q_previsione" };
                 await nubi.LoadFile(bdemo);   // NUBI Es NEL TEMPO: il log di prova del BENCHMARK Es
                 for (int i = 0; i < tabs.Count; i++)
                 {
